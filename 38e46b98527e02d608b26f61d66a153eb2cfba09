@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0097e91a_7c21412c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-06T19:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "043ccaab_1e7e06ff",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "357a40c9_0d475c19",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2022-09-06T18:15:24Z",
       "side": 1,
       "message": "please add a TODO and file a bug about enabling this in the future",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 36
+      },
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3921ba38_a1d7f431",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-06T19:17:06Z",
+      "side": 1,
+      "message": "Done. https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1536",
+      "parentUuid": "5ff0aee1_352bfa91",
       "range": {
         "startLine": 39,
         "startChar": 0,
