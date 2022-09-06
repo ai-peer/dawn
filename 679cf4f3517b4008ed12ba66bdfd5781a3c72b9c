@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d83138e6_d5372c58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-06T13:06:26Z",
+      "side": 1,
+      "message": "Out of curiosity, why change these to 0? I believe _any_ value is valid?",
+      "revId": "679cf4f3517b4008ed12ba66bdfd5781a3c72b9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "377fc158_6e9c3acd",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-06T13:06:26Z",
+      "side": 1,
+      "message": "If you do `bool(var)` in the WGSL spec, that evaluates to true for inf and nan. If we change this, does that effect the results of a bool cast?",
+      "revId": "679cf4f3517b4008ed12ba66bdfd5781a3c72b9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
