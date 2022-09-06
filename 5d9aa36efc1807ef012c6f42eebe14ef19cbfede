@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1098b149_8513b087",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2733,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-06T13:46:14Z",
+      "side": 1,
+      "message": "Ack, that\u0027s a larger change as have to fixup the control flow as these `return` in a bunch of places. Leaving for a later cleanup.",
+      "parentUuid": "6e08755b_65f39dde",
+      "revId": "5d9aa36efc1807ef012c6f42eebe14ef19cbfede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "605ab3b1_7a1eed6b",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-09-02T16:23:51Z",
       "side": 1,
       "message": "FYI: these can be folded together with `EXPECT_EQ(3u, sem-\u003eMembers()[0]-\u003eLocation());`\nThe the optional is empty, the equality fails, and gtest gives a nice `xxx was nullopt` error message.",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 189,
+        "endChar": 57
+      },
+      "revId": "5d9aa36efc1807ef012c6f42eebe14ef19cbfede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a8f92b_a3c50b07",
+        "filename": "src/tint/resolver/struct_pipeline_stage_use_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-06T13:46:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "605ab3b1_7a1eed6b",
       "range": {
         "startLine": 188,
         "startChar": 0,
