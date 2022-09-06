@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "043ccaab_1e7e06ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T18:15:24Z",
+      "side": 1,
+      "message": "syntax nit: \"Bug: dawn:286\"",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 9
+      },
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "357a40c9_0d475c19",
@@ -14,6 +37,46 @@
       "writtenOn": "2022-09-06T17:36:49Z",
       "side": 1,
       "message": "Trying to get bits for Android support landed in as small of atomic chunks as I can manage. This bit feels pretty safe.",
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c516d260_991c57ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T18:15:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ff0aee1_352bfa91",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T18:15:24Z",
+      "side": 1,
+      "message": "please add a TODO and file a bug about enabling this in the future",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 36
+      },
       "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
