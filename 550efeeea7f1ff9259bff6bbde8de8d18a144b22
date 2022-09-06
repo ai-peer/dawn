@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "550efeeea7f1ff9259bff6bbde8de8d18a144b22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3de46d0_6e6246e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T16:42:07Z",
+      "side": 1,
+      "message": "LGTM after making the expectation more precise",
+      "revId": "550efeeea7f1ff9259bff6bbde8de8d18a144b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97915157_e3b816dd",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T16:42:07Z",
+      "side": 1,
+      "message": "`[ linux dawn-backend-validation ]` ?",
+      "revId": "550efeeea7f1ff9259bff6bbde8de8d18a144b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
