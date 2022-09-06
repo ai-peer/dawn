@@ -50,6 +50,24 @@
       "message": "`[ linux dawn-backend-validation ]` ?",
       "revId": "550efeeea7f1ff9259bff6bbde8de8d18a144b22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9808344_499d960d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T20:31:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97915157_e3b816dd",
+      "revId": "550efeeea7f1ff9259bff6bbde8de8d18a144b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
