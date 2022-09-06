@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fde851c_7aff0b78",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:09:24Z",
+      "side": 1,
+      "message": "Talked with enga@ offline. Yeah I will move this Vk backend",
+      "parentUuid": "21701902_2fc5e439",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1eedd25_92822f20",
@@ -100,6 +118,24 @@
       "writtenOn": "2022-09-02T20:26:55Z",
       "side": 1,
       "message": "Unfortunately this seems need to have a copy",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2cf8d2_f649c895",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:09:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1eedd25_92822f20",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -227,6 +263,30 @@
       "side": 1,
       "message": "Thanks for the guidance. Is it possible to also get rid of the for each macro for the LimitsForCompilationRequest::Create with VisitAll nicely?",
       "parentUuid": "3e980d71_78b60fa9",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4de2e58_ee91b7b4",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:09:24Z",
+      "side": 1,
+      "message": "Talked with enga@ offline. Will keep the create method with current macro",
+      "parentUuid": "0c46a3c6_8b4d5660",
       "range": {
         "startLine": 63,
         "startChar": 0,
