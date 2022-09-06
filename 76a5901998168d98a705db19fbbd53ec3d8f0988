@@ -33,6 +33,24 @@
       "message": "whoops - need license",
       "revId": "76a5901998168d98a705db19fbbd53ec3d8f0988",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac3850e1_f5ddc981",
+        "filename": "go_presubmit_support.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T17:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ec3909e_9b3f4fb6",
+      "revId": "76a5901998168d98a705db19fbbd53ec3d8f0988",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
