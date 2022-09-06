@@ -194,6 +194,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "450fdfa8_30e2d9cf",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T20:58:33Z",
+      "side": 1,
+      "message": "Only minimal knowledge for gn/build config files, Questions about the GN setup here:\n\n`reflection.h` is now only added as sources for \"libtint_core_all_src\"\nDawn uses `libtint`, \nI thought `reflection.h` needs be included when tint header is included. \nSo I tried adding `sources +\u003d [ \"${tint_root_dir}/reflection.h\" ]` for \"tint_common_config\"/\" tint_public_config\". And encountered the ninja log:\n\n```\nERROR at //third_party/dawn/src/tint/BUILD.gn:94:3: Undefined identifier.\n  sources +\u003d [ \"${tint_root_dir}/reflection.h\" ]\n  ^------\nSee //BUILD.gn:843:7: which caused the file to be included.\n      \"//third_party/dawn/src/tint:tint_unittests\",\n      ^-------------------------------------------\nFAILED: build.ninja.stamp\n../../buildtools/win/gn.exe --root\u003d../.. -q --regeneration gen .\nninja: error: rebuilding \u0027build.ninja\u0027: subcommand failed\n```\n\nTried something like sources -\u003d [ \"reflection.h\" ] for tint_unittests target but nothing change. Can you provide a bit more guide here?",
+      "parentUuid": "7c1c2f57_b6c4b47a",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a8d99a_f17cdceb",
         "filename": "src/dawn/native/metal/StreamImplMTL.mm",
         "patchSetId": 32
