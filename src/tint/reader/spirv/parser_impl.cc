@@ -1759,7 +1759,7 @@ bool ParserImpl::ConvertPipelineDecorations(const Type* store_type,
                     return Fail() << "malformed Location decoration on ID requires one "
                                      "literal operand";
                 }
-                SetLocation(attributes, create<ast::LocationAttribute>(Source{}, deco[1]));
+                SetLocation(attributes, builder_.Location(Source{}, AInt(deco[1])));
                 if (store_type->IsIntegerScalarOrVector()) {
                     // Default to flat interpolation for integral user-defined IO types.
                     type = ast::InterpolationType::kFlat;

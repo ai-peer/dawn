@@ -177,7 +177,7 @@ std::vector<EntryPoint> Inspector::GetEntryPoints() {
         for (auto* param : sem->Parameters()) {
             AddEntryPointInOutVariables(program_->Symbols().NameFor(param->Declaration()->symbol),
                                         param->Type(), param->Declaration()->attributes,
-                                        entry_point.input_variables);
+                                        param->Location(), entry_point.input_variables);
 
             entry_point.input_position_used |= ContainsBuiltin(
                 ast::BuiltinValue::kPosition, param->Type(), param->Declaration()->attributes);
@@ -193,7 +193,7 @@ std::vector<EntryPoint> Inspector::GetEntryPoints() {
 
         if (!sem->ReturnType()->Is<sem::Void>()) {
             AddEntryPointInOutVariables("<retval>", sem->ReturnType(), func->return_type_attributes,
-                                        entry_point.output_variables);
+                                        sem->ReturnLocation(), entry_point.output_variables);
 
             entry_point.output_sample_mask_used = ContainsBuiltin(
                 ast::BuiltinValue::kSampleMask, sem->ReturnType(), func->return_type_attributes);
@@ -609,6 +609,7 @@ const ast::Function* Inspector::FindEntryPointByName(const std::string& name) {
 void Inspector::AddEntryPointInOutVariables(std::string name,
                                             const sem::Type* type,
                                             utils::VectorRef<const ast::Attribute*> attributes,
+                                            std::optional<uint32_t> location,
                                             std::vector<StageVariable>& variables) const {
     // Skip builtins.
     if (ast::HasAttribute<ast::BuiltinAttribute>(attributes)) {
@@ -622,7 +623,7 @@ void Inspector::AddEntryPointInOutVariables(std::string name,
         for (auto* member : struct_ty->Members()) {
             AddEntryPointInOutVariables(
                 name + "." + program_->Symbols().NameFor(member->Declaration()->symbol),
-                member->Type(), member->Declaration()->attributes, variables);
+                member->Type(), member->Declaration()->attributes, member->Location(), variables);
         }
         return;
     }
@@ -634,10 +635,9 @@ void Inspector::AddEntryPointInOutVariables(std::string name,
     std::tie(stage_variable.component_type, stage_variable.composition_type) =
         CalculateComponentAndComposition(type);
 
-    auto* location = ast::GetAttribute<ast::LocationAttribute>(attributes);
-    TINT_ASSERT(Inspector, location != nullptr);
+    TINT_ASSERT(Inspector, location.has_value());
     stage_variable.has_location_attribute = true;
-    stage_variable.location_attribute = location->value;
+    stage_variable.location_attribute = location.value();
 
     std::tie(stage_variable.interpolation_type, stage_variable.interpolation_sampling) =
         CalculateInterpolationData(type, attributes);

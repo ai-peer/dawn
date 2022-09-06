@@ -718,7 +718,17 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
 
     std::optional<uint32_t> location;
     if (auto* l = ast::GetAttribute<ast::LocationAttribute>(param->attributes)) {
-        location = l->value;
+        auto* materialize = Materialize(Expression(l->value));
+        if (!materialize) {
+            return nullptr;
+        }
+        auto* c = materialize->ConstantValue();
+        if (!c) {
+            // TODO(crbug.com/tint/1633): Add error message about invalid materialization when
+            // location can be an expression.
+            return nullptr;
+        }
+        location = c->As<uint32_t>();
     }
 
     auto* sem = builder_->create<sem::Parameter>(
