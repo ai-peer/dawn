@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "385f95c2_97febe4f",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Done, add a `TripleStatesTogglesSet` struct.",
+      "parentUuid": "7a68b762_079fc0c2",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fefee9d_a52f571a",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -82,6 +100,24 @@
       "writtenOn": "2022-09-05T20:50:34Z",
       "side": 1,
       "message": "nit: maybe could be on that UserToggles struct.",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdfda728_3b330c1b",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fefee9d_a52f571a",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "854241ee_f08baee2",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "I will have a look about the flags, I am not familiar with it now.",
+      "parentUuid": "af43aa67_9be55f42",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0d23d01_23c010b5",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -122,6 +176,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aea58404_5b0e5076",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "I add a `AdapterBase::ValidateFeatureSupportedWithToggles` for common feature validation and a virtual `adapter::ValidateFeatureSupportedWithTogglesImpl` for backend-specific feature validation.\n(I would like all feature validation logic be placed together around `AdapterBase::CreateDeviceInternal` and can be easily tracked, so I prefer not to have a piece of feature validation in `d3d12::Device::Create`...)",
+      "parentUuid": "d0d23d01_23c010b5",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61ba6418_59c18c39",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 9
@@ -133,6 +205,24 @@
       "writtenOn": "2022-09-05T20:50:34Z",
       "side": 1,
       "message": "u-u-nit: IMHO this comment reads like a changelog but doesn\u0027t help future readers. It seems like features here should all have been validated already because WeBGPU should validate everything. So the comment is more confusing than it should be.\n\nAlso it\u0027s weird that the WebGPU API is APIHasFeature while Dawn internally uses IsFeatureEnabled. WDYT of renaming IsFeatureEnabled to HasFeature in a follow-up, and make APIHasFeature just proxy to HasFeature?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77592228_89dbbccf",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Done, however `APIHasFeature` works with `wgpu::FeatureName` while `HasFeature` works with `dawn::native::Feature`, and `FeaturesSet::IsEnabled` has overloads for both, so just call `FeaturesSet::IsEnabled` in both methods.",
+      "parentUuid": "61ba6418_59c18c39",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +250,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf38cac_ecb04dc2",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b17ac0a_59cda7c7",
+      "range": {
+        "startLine": 67,
+        "startChar": 29,
+        "endLine": 67,
+        "endChar": 34
+      },
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "751cd94d_0085e497",
@@ -177,6 +291,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a300f27b_c56c5496",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Yes, I am going to remove it from Blink soon after this CL merged. I mark it as \"deprecated\" just because I can\u0027t completely remove it from Dawn now...",
+      "parentUuid": "751cd94d_0085e497",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "23b14872_4e448eef",
@@ -190,6 +322,24 @@
       "writtenOn": "2022-09-05T20:50:34Z",
       "side": 1,
       "message": "Is it the only extension for F16 on GL? That\u0027d be unfortunate :(",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1549abb_e76773ea",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "There is a weaker extension `NV_gpu_shader5` supported by some Nvidia devices, but lack some functionality. I am not sure if Intel GPU support any F16 OpenGL extension.",
+      "parentUuid": "23b14872_4e448eef",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -213,6 +363,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a8f9cca_6351e688",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Yes, but I plan to first require all features (which make things easier), and then release the requirement by implementing transforms to support more devices as follow up.",
+      "parentUuid": "c6ef899a_aa5ca6bf",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e60f5a0_7f9e4f2e",
         "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
         "patchSetId": 9
@@ -224,6 +392,24 @@
       "writtenOn": "2022-09-05T20:50:34Z",
       "side": 1,
       "message": "u-u-nit: Indent 4 to match the start of const char* above?",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9216dfe3_6272e88c",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-06T12:53:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e60f5a0_7f9e4f2e",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
