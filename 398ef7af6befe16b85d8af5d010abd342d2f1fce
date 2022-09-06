@@ -51,6 +51,24 @@
       "parentUuid": "e7e54c3a_07b040f3",
       "revId": "398ef7af6befe16b85d8af5d010abd342d2f1fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "346340d5_ff2e51d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-06T23:44:23Z",
+      "side": 1,
+      "message": "This change was incorporated into https://dawn-review.googlesource.com/c/dawn/+/101440\n\nSorry for missing it the first time!",
+      "parentUuid": "53862bd7_ec0b91c3",
+      "revId": "398ef7af6befe16b85d8af5d010abd342d2f1fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
