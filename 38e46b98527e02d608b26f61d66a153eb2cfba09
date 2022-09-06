@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "357a40c9_0d475c19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-06T17:36:49Z",
+      "side": 1,
+      "message": "Trying to get bits for Android support landed in as small of atomic chunks as I can manage. This bit feels pretty safe.",
+      "revId": "38e46b98527e02d608b26f61d66a153eb2cfba09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
