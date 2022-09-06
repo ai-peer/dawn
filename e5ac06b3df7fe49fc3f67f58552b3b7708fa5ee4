@@ -174,6 +174,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e980d71_78b60fa9",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T16:36:20Z",
+      "side": 1,
+      "message": "we don\u0027t need all these FOREACH helper macros\n\nInstead, create LimitsForCompilationRequest with the `DAWN_VISITABLE_MEMBERS` macro,\n\nand then implement `Write` with `req.VisitAll([\u0026](const auto\u0026... members) { StreamIn(s, members...); });`",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4feb9107_506f09d9",
         "filename": "src/dawn/native/stream/Stream.h",
         "patchSetId": 32
