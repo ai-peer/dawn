@@ -176,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6525fa8_6ef5d8b1",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T16:01:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "87bc3823_bdf97a49",
+      "range": {
+        "startLine": 370,
+        "startChar": 46,
+        "endLine": 370,
+        "endChar": 68
+      },
+      "revId": "9a10921ae9842a7fadcb985e6bd61458379b724d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47a87209_10a7d03e",
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "These cannot be forwarded because they are often passed untyped to the macros that invoke these functions e.g. as {0, 0} instead of wgpu::Origin3D{0, 0}. The compiler cannot deduce which of the template specializations to forward to because of this.",
       "parentUuid": "47a87209_10a7d03e",
+      "range": {
+        "startLine": 371,
+        "startChar": 46,
+        "endLine": 372,
+        "endChar": 68
+      },
+      "revId": "9a10921ae9842a7fadcb985e6bd61458379b724d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d9510ea_d28b46eb",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-06T16:01:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "31e29a77_3226a1ed",
       "range": {
         "startLine": 371,
         "startChar": 46,
