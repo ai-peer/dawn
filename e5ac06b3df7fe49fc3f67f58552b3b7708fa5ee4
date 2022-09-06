@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21701902_2fc5e439",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:00:43Z",
+      "side": 1,
+      "message": "enga@ does this only apply to vulkan spirv in the future?",
+      "parentUuid": "f4883275_83168656",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1eedd25_92822f20",
         "filename": "src/dawn/native/ShaderModule.h",
         "patchSetId": 32
@@ -197,6 +215,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c46a3c6_8b4d5660",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:00:43Z",
+      "side": 1,
+      "message": "Thanks for the guidance. Is it possible to also get rid of the for each macro for the LimitsForCompilationRequest::Create with VisitAll nicely?",
+      "parentUuid": "3e980d71_78b60fa9",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 37
+      },
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4feb9107_506f09d9",
         "filename": "src/dawn/native/stream/Stream.h",
         "patchSetId": 32
@@ -208,6 +250,24 @@
       "writtenOn": "2022-09-05T20:22:29Z",
       "side": 1,
       "message": "Any reason this isn\u0027t using Serializable.h? Also Steam.h is the implementation of the serializer so it\u0027s weird to define a limit struct for shader compilation in it. Maybe put this in Limits.h?",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc22dda_80300b87",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:00:43Z",
+      "side": 1,
+      "message": "The intention is only serialize in limits that we need for compilation request.",
+      "parentUuid": "4feb9107_506f09d9",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

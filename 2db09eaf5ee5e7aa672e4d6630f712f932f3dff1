@@ -177,6 +177,30 @@
       },
       "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabed879_9bb5ace2",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-06T18:00:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c99c4968_99714bb5",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
