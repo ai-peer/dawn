@@ -153,6 +153,30 @@
       },
       "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99c4968_99714bb5",
+        "filename": "src/tint/inspector/inspector.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-06T16:10:57Z",
+      "side": 1,
+      "message": "\u003e inspector/entry_point.h is part of the public API of Tint isn\u0027t it Ben?\n\nYes, it is.\n\n\u003e What about adding a way to look up entrypoints by string instead of a specialized method just for workgroup_size?\n\n+1. That would be preferable to me than adding random bespoke queries.",
+      "parentUuid": "9d351597_3e284ec3",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 0
+      },
+      "revId": "2db09eaf5ee5e7aa672e4d6630f712f932f3dff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
