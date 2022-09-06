@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bad9cfc9_7814ad43",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T15:40:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "385f95c2_97febe4f",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fefee9d_a52f571a",
@@ -159,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1330b9bc_cb6e0955",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T15:40:02Z",
+      "side": 1,
+      "message": "What I meant was adding a \"bool experimental\" to FeatureInfo so that we don\u0027t need to remember to add the feature in the list in ValidateFeatureSupportedWithToggles to make it experimental. Could be a follow-up if you want, or a TODO, or skipped ;)",
+      "parentUuid": "854241ee_f08baee2",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0d23d01_23c010b5",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -188,6 +224,24 @@
       "side": 1,
       "message": "I add a `AdapterBase::ValidateFeatureSupportedWithToggles` for common feature validation and a virtual `adapter::ValidateFeatureSupportedWithTogglesImpl` for backend-specific feature validation.\n(I would like all feature validation logic be placed together around `AdapterBase::CreateDeviceInternal` and can be easily tracked, so I prefer not to have a piece of feature validation in `d3d12::Device::Create`...)",
       "parentUuid": "d0d23d01_23c010b5",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829ac548_7a61d1bb",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T15:40:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aea58404_5b0e5076",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +277,24 @@
       "side": 1,
       "message": "Done, however `APIHasFeature` works with `wgpu::FeatureName` while `HasFeature` works with `dawn::native::Feature`, and `FeaturesSet::IsEnabled` has overloads for both, so just call `FeaturesSet::IsEnabled` in both methods.",
       "parentUuid": "61ba6418_59c18c39",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a3dc5d_0f3acdf7",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T15:40:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "77592228_89dbbccf",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -375,6 +447,24 @@
       "side": 1,
       "message": "Yes, but I plan to first require all features (which make things easier), and then release the requirement by implementing transforms to support more devices as follow up.",
       "parentUuid": "c6ef899a_aa5ca6bf",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ece4d5_07bc6ffd",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-06T15:40:02Z",
+      "side": 1,
+      "message": "Ack, maybe add a TODO?",
+      "parentUuid": "7a8f9cca_6351e688",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
