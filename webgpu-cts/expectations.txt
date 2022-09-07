@@ -59,7 +59,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-08-23 08:48:27PM
+# Last rolled: 2022-09-07 08:32:11PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -384,7 +384,6 @@ crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:abstra
 crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:f32:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,unary,f32_arithmetic:negation:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:inputSource="const";* [ Skip ]
-
 
 ################################################################################
 # shader execution failures
