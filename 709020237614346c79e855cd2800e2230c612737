@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75e7839b_d9298829",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-07T07:09:46Z",
+      "side": 1,
+      "message": "Done, add a enum class `FeatureInfo::FeatureState` containing `Stable` and `Experimental`.",
+      "parentUuid": "9664a726_db2a50c4",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0d23d01_23c010b5",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 9
@@ -483,6 +501,24 @@
       "side": 1,
       "message": "Ack, maybe add a TODO?",
       "parentUuid": "7a8f9cca_6351e688",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c85bef87_565d3d45",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-07T07:09:46Z",
+      "side": 1,
+      "message": "Done, add a TODO.",
+      "parentUuid": "f0ece4d5_07bc6ffd",
       "revId": "709020237614346c79e855cd2800e2230c612737",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
