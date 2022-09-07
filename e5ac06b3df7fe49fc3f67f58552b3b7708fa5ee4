@@ -264,6 +264,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f176f3_4aa83462",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T03:23:07Z",
+      "side": 1,
+      "message": "sounds fine to me to look into addressing this in a follow-up",
+      "parentUuid": "1409e9ad_4c91b723",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a8d99a_f17cdceb",
