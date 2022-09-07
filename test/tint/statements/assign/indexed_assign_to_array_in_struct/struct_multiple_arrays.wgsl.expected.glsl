@@ -9,7 +9,7 @@ struct OuterS {
   InnerS a2[8];
 };
 
-layout(binding = 4) uniform Uniforms_ubo {
+layout(binding = 4, std140) uniform Uniforms_ubo {
   uint i;
 } uniforms;
 
