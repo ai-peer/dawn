@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a986052_4c26c9cc",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-07T18:24:30Z",
+      "side": 1,
+      "message": "Chrome, and I think tint, build  no-exceptions, so this wouldn\u0027t throw.",
+      "parentUuid": "c3dc01f2_801cd473",
+      "range": {
+        "startLine": 1177,
+        "startChar": 16,
+        "endLine": 1177,
+        "endChar": 60
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7de6bde6_28570c23",
         "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
         "patchSetId": 3
@@ -100,6 +124,30 @@
       "writtenOn": "2022-09-07T18:19:08Z",
       "side": 1,
       "message": "Please avoid `TINT_ASSERT`. Use `TINT_ICE`, passing the `ctx.dst-\u003eDiagnostics()`, or in this case, I\u0027d just suggest removing. If exceptions are enabled, then it\u0027ll throw. I believe the fuzzers have exceptions enabled.",
+      "range": {
+        "startLine": 708,
+        "startChar": 12,
+        "endLine": 708,
+        "endChar": 64
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d763842c_68dcff92",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-07T18:24:30Z",
+      "side": 1,
+      "message": "We build no-exceptions I believe (at least Chrome does). So, I don\u0027t think depending on exceptions is going to work. Will change to an ICE.",
+      "parentUuid": "0125880c_8a442e71",
       "range": {
         "startLine": 708,
         "startChar": 12,
