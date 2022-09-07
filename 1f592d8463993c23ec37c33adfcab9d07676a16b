@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8bd11d_53e4e5e6",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-07T19:05:20Z",
+      "side": 1,
+      "message": "Converted to TINT_ICE",
+      "parentUuid": "6a986052_4c26c9cc",
+      "range": {
+        "startLine": 1177,
+        "startChar": 16,
+        "endLine": 1177,
+        "endChar": 60
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7de6bde6_28570c23",
@@ -88,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1aa7b96_412b4fcb",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-07T19:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7de6bde6_28570c23",
+      "range": {
+        "startLine": 360,
+        "startChar": 68,
+        "endLine": 360,
+        "endChar": 70
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "097950ae_2837701f",
@@ -101,6 +149,30 @@
       "writtenOn": "2022-09-07T18:19:08Z",
       "side": 1,
       "message": "Why was this moved to a member? _looks_ similar / same as before?",
+      "range": {
+        "startLine": 717,
+        "startChar": 9,
+        "endLine": 717,
+        "endChar": 31
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0dc19c1_d088d7aa",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-07T19:05:20Z",
+      "side": 1,
+      "message": "My first attempt was to get the Sem from the ctx, but that failed. Moving back to anonymous namespace.",
+      "parentUuid": "097950ae_2837701f",
       "range": {
         "startLine": 717,
         "startChar": 9,
@@ -148,6 +220,30 @@
       "side": 1,
       "message": "We build no-exceptions I believe (at least Chrome does). So, I don\u0027t think depending on exceptions is going to work. Will change to an ICE.",
       "parentUuid": "0125880c_8a442e71",
+      "range": {
+        "startLine": 708,
+        "startChar": 12,
+        "endLine": 708,
+        "endChar": 64
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10261be6_1d2b3393",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-07T19:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d763842c_68dcff92",
       "range": {
         "startLine": 708,
         "startChar": 12,
