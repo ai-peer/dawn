@@ -31,6 +31,8 @@ layout(binding = 6) uniform LeftOver_ubo {
   mat4 u_ViewProjection;
   float u_bumpStrength;
   uint padding;
+  uint pad;
+  uint pad_1;
   vec3 u_cameraPosition;
   float u_parallaxScale;
   float textureInfoName;
@@ -50,6 +52,8 @@ layout(binding = 5) uniform Light0_ubo {
   uint padding_2;
   vec4 shadowsInfo;
   vec2 depthValues;
+  uint pad_2;
+  uint pad_3;
 } light0;
 
 vec4 glFragColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);

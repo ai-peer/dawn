@@ -10,7 +10,10 @@ layout(binding = 0) uniform S_std140_ubo {
   vec2 matrix_0;
   vec2 matrix_1;
   vec2 matrix_2;
+  uint pad;
+  uint pad_1;
   vec3 vector;
+  uint pad_2;
 } data;
 
 mat3x2 load_data_matrix() {

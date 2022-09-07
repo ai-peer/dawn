@@ -10,7 +10,9 @@ layout(location = 1) out vec2 quad_pos_2;
 layout(binding = 0) uniform RenderParams_ubo {
   mat4 modelViewProjectionMatrix;
   vec3 right;
+  uint pad;
   vec3 up;
+  uint pad_1;
 } render_params;
 
 struct VertexInput {
@@ -146,10 +148,14 @@ struct Particle {
   float lifetime;
   vec4 color;
   vec3 velocity;
+  uint pad_3;
 };
 
 layout(binding = 0) uniform SimulationParams_ubo {
   float deltaTime;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
   vec4 seed;
 } sim_params;
 
@@ -204,8 +210,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:60: 'textureQueryLevels' : no matching overloaded function found
-ERROR: 0:60: '' : compilation terminated
+ERROR: 0:64: 'textureQueryLevels' : no matching overloaded function found
+ERROR: 0:64: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 

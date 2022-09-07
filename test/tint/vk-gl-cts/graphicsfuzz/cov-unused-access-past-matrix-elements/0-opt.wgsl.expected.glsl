@@ -6,10 +6,16 @@ precision mediump float;
 layout(location = 0) out vec4 x_GLF_color_1_1;
 struct strided_arr {
   float el;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 };
 
 struct strided_arr_1 {
   int el;
+  uint pad_3;
+  uint pad_4;
+  uint pad_5;
 };
 
 layout(binding = 1) uniform buf1_ubo {
@@ -23,7 +29,7 @@ layout(binding = 0) uniform buf0_ubo {
 vec4 x_GLF_color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
 void main_1() {
   mat4x3 m43 = mat4x3(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
-  strided_arr sums[3] = strided_arr[3](strided_arr(0.0f), strided_arr(0.0f), strided_arr(0.0f));
+  strided_arr sums[3] = strided_arr[3](strided_arr(0.0f, 0u, 0u, 0u), strided_arr(0.0f, 0u, 0u, 0u), strided_arr(0.0f, 0u, 0u, 0u));
   int i = 0;
   int a = 0;
   int x_67_phi = 0;
@@ -37,9 +43,9 @@ void main_1() {
   float x_58 = x_6.x_GLF_uniform_float_values[0].el;
   float x_60 = x_6.x_GLF_uniform_float_values[0].el;
   float x_62 = x_6.x_GLF_uniform_float_values[0].el;
-  strided_arr tint_symbol_1 = strided_arr(x_58);
-  strided_arr tint_symbol_2 = strided_arr(x_60);
-  strided_arr tint_symbol_3 = strided_arr(x_62);
+  strided_arr tint_symbol_1 = strided_arr(x_58, 0u, 0u, 0u);
+  strided_arr tint_symbol_2 = strided_arr(x_60, 0u, 0u, 0u);
+  strided_arr tint_symbol_3 = strided_arr(x_62, 0u, 0u, 0u);
   strided_arr tint_symbol_4[3] = strided_arr[3](tint_symbol_1, tint_symbol_2, tint_symbol_3);
   sums = tint_symbol_4;
   int x_65 = x_8.x_GLF_uniform_int_values[0].el;
@@ -107,9 +113,9 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:69: '[' :  matrix index out of range '4'
-ERROR: 0:69: '=' :  cannot convert from ' temp mediump 3-component vector of float' to ' temp mediump float'
-ERROR: 0:69: '' : compilation terminated
+ERROR: 0:75: '[' :  matrix index out of range '4'
+ERROR: 0:75: '=' :  cannot convert from ' temp mediump 3-component vector of float' to ' temp mediump float'
+ERROR: 0:75: '' : compilation terminated
 ERROR: 3 compilation errors.  No code generated.
 
 

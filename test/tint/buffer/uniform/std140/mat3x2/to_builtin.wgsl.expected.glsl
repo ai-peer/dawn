@@ -8,10 +8,14 @@ struct S {
 
 struct S_std140 {
   int before;
+  uint pad;
   vec2 m_0;
   vec2 m_1;
   vec2 m_2;
+  uint pad_1;
+  uint pad_2;
   int after;
+  uint pad_3;
 };
 
 layout(binding = 0) uniform u_block_ubo {

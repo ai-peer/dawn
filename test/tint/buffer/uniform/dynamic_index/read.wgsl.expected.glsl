@@ -27,6 +27,8 @@ struct Inner_std140 {
   vec2 j_0;
   vec2 j_1;
   vec2 j_2;
+  uint pad;
+  uint pad_1;
   ivec4 k[4];
 };
 

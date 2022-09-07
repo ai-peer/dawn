@@ -6,6 +6,7 @@ void unused_entry_point() {
 }
 layout(binding = 0) uniform S_ubo {
   uvec3 v;
+  uint pad;
 } U;
 
 void f() {

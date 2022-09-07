@@ -3,6 +3,9 @@
 layout(binding = 0) uniform UBO_ubo {
   ivec4 data[4];
   int dynamic_idx;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } ubo;
 
 layout(binding = 2, std430) buffer Result_ssbo {

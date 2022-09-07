@@ -15,6 +15,8 @@ layout(binding = 0) uniform Uniforms_ubo {
   mat4 proj;
   uint numPointLights;
   uint color_source;
+  uint pad;
+  uint pad_1;
   vec4 color;
 } uniforms;
 
