@@ -39,6 +39,30 @@
       },
       "revId": "eb89140b9044a8bc695b2675facb53d91d4cdc36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8184eb09_f33d6a6d",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-07T17:25:36Z",
+      "side": 1,
+      "message": "I wanted to, but it didn\u0027t seem right adding support for bool to Number.h, where we don\u0027t have any other reference to bool. I\u0027ll do it, and we\u0027ll see how it goes.",
+      "parentUuid": "95109159_966d8b7e",
+      "range": {
+        "startLine": 761,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 49
+      },
+      "revId": "eb89140b9044a8bc695b2675facb53d91d4cdc36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
