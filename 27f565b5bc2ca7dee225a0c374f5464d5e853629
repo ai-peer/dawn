@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622728f7_66ac641a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-07T20:05:51Z",
+      "side": 1,
+      "message": "PTAL! Wouldn\u0027t be surprised if this is missing some edge case handling that I\u0027m not aware of or needs cleanup, but this is change used to get first triangle on Android.",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
