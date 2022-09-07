@@ -133,6 +133,8 @@ wrapPromiseWithHeartbeat(GPUShaderModule.prototype, 'compilationInfo');
 
 globalTestConfig.testHeartbeatCallback = sendHeartbeat;
 
+let firstTest = true;
+
 async function runCtsTest(query, use_worker) {
   const workerEnabled = use_worker;
   const worker = workerEnabled ? new TestWorker(false) : undefined;
@@ -140,6 +142,19 @@ async function runCtsTest(query, use_worker) {
   const loader = new DefaultTestFileLoader();
   const filterQuery = parseQuery(query);
   const testcases = await loader.loadCases(filterQuery);
+
+  if (firstTest) {
+    // Ensure we're able to get a device before continuing with the first test.
+    // Getting an adapter for the first test can be slow. This pushes the initialization
+    // time to the so it's considered in the TEST_STARTED timeout instead of the
+    // TEST_STATUS/TEST_HEARTBEAT timeout.
+    const device = await (await navigator.gpu?.requestAdapter())?.requestDevice();
+    if (device) {
+      // Destroy the device to free up resources.
+      device.destroy();
+    }
+    firstTest = false;
+  }
 
   const expectations = [];
 
