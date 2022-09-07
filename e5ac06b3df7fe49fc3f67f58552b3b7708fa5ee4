@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b89faf_36257718",
+        "filename": "src/dawn/native/ObjectContentHasher.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T01:11:25Z",
+      "side": 1,
+      "message": "Add a small `ObjectContentHasherTests.cpp` to `dawn_unittests`",
+      "parentUuid": "43be3385_72d98854",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4883275_83168656",
@@ -157,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "904e6bae_0b69db0b",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T01:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6f1693a_cf839f03",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb08df38_a6afa7cd",
@@ -210,6 +246,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1409e9ad_4c91b723",
+        "filename": "src/dawn/native/StreamImplTint.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T01:11:25Z",
+      "side": 1,
+      "message": "I added a TODO here so that we can fix the include and build.gn in a new CL.",
+      "parentUuid": "450fdfa8_30e2d9cf",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a8d99a_f17cdceb",
@@ -227,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11042524_6709f26a",
+        "filename": "src/dawn/native/metal/StreamImplMTL.mm",
+        "patchSetId": 32
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T01:11:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02a8d99a_f17cdceb",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4627cdc5_f53ecc5b",
@@ -240,6 +312,24 @@
       "writtenOn": "2022-09-05T20:22:29Z",
       "side": 1,
       "message": "TBH at this point we could inline this function in its callers. It\u0027s just forwarding its arguments to CreateFunction.",
+      "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d30dec5_02d68b0f",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 32
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T01:11:25Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "4627cdc5_f53ecc5b",
       "revId": "e5ac06b3df7fe49fc3f67f58552b3b7708fa5ee4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
