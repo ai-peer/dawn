@@ -33,6 +33,24 @@
       "message": "Everything below here should probably be Slow instead of Failure.\nAt least, that\u0027s originally was done by\n```\ncrbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,ImageBitmap:* [ Slow ]\ncrbug.com/dawn/1398 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Slow ] \n```\n\nif we\u0027re going to split it up, it would be good to have it in its own block with a note that we can convert it back to the globs once the conflict detection gets adjusted. We should also be sure that this exhaustively entails every case inside those globs or CLs are going to get blocked on timeouts. Can probably just glob the test list to be sure.\n\nor, for now, we could just bring back the conflict?",
       "revId": "8338273afd5f7766ecf3a6860d835825cc9343f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ff5ea0_ee18f909",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T19:25:25Z",
+      "side": 1,
+      "message": "Can we fix the conflict, then do another roll?",
+      "parentUuid": "6c3ff5ab_b8a64291",
+      "revId": "8338273afd5f7766ecf3a6860d835825cc9343f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
