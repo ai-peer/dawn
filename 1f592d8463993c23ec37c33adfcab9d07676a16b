@@ -16,6 +16,98 @@
       "message": "PTAL.",
       "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3dc01f2_801cd473",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1177,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T18:19:08Z",
+      "side": 1,
+      "message": "nit: no real need for this. You\u0027ll get an exception if the value doesn\u0027t exist.",
+      "range": {
+        "startLine": 1177,
+        "startChar": 16,
+        "endLine": 1177,
+        "endChar": 60
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7de6bde6_28570c23",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T18:19:08Z",
+      "side": 1,
+      "message": "nit: `std::nullopt`",
+      "range": {
+        "startLine": 360,
+        "startChar": 68,
+        "endLine": 360,
+        "endChar": 70
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097950ae_2837701f",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 717,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T18:19:08Z",
+      "side": 1,
+      "message": "Why was this moved to a member? _looks_ similar / same as before?",
+      "range": {
+        "startLine": 717,
+        "startChar": 9,
+        "endLine": 717,
+        "endChar": 31
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0125880c_8a442e71",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T18:19:08Z",
+      "side": 1,
+      "message": "Please avoid `TINT_ASSERT`. Use `TINT_ICE`, passing the `ctx.dst-\u003eDiagnostics()`, or in this case, I\u0027d just suggest removing. If exceptions are enabled, then it\u0027ll throw. I believe the fuzzers have exceptions enabled.",
+      "range": {
+        "startLine": 708,
+        "startChar": 12,
+        "endLine": 708,
+        "endChar": 64
+      },
+      "revId": "1f592d8463993c23ec37c33adfcab9d07676a16b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
