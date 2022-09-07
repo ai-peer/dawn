@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e4f996_f8ce9027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-07T00:54:18Z",
+      "side": 1,
+      "message": "PTAL. The surfacing of internal errors from Tint isn\u0027t in the spec just yet be we know that we want it to be.",
+      "revId": "8864014f4aa973c9a903e971f7b7fb4cdcc46b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
