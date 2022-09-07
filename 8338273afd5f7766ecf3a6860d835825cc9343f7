@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b007d4_69081cbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T18:31:22Z",
+      "side": 1,
+      "message": "Note: There\u0027s a couple of removed collisions in here. Please take a look.",
+      "revId": "8338273afd5f7766ecf3a6860d835825cc9343f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
