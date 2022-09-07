@@ -59,7 +59,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-08-23 08:48:27PM
+# Last rolled: 2022-09-08 08:21:10PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -72,26 +72,12 @@ crbug.com/dawn/1487 [ intel-gen-9 win10 ] webgpu:api,operation,resource_init,tex
 
 ################################################################################
 # webgpu:web_platform,copyToTexture,ImageBitmap flakes on Windows Intel with rgba32float and rg32float formats
-#
-# Conflicts:
-#   - Kept:
-#       crbug.com/1344876 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:* [ Skip ]
-#   - Removed:
-#       crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ Failure ]
-#       crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ Failure ]
-#       crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ Failure ]
-#       crbug.com/1343969 [ intel-gen-9 webgpu-adapter-swiftshader win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ Failure ]
+# and general test slowness because of https://github.com/gpuweb/cts/issues/1162 (crbug.com/dawn/1398)
 #
 # KEEP
 ################################################################################
-crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:alpha="premultiply";orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=false;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="flipY";srcDoFlipYDuringCopy=true;dstColorFormat="rgba32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=false;dstColorFormat="rg32float";* [ RetryOnFailure ]
-crbug.com/1343969 [ intel-gen-9 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:orientation="none";srcDoFlipYDuringCopy=true;dstColorFormat="rg32float";* [ RetryOnFailure ]
+crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:* [ RetryOnFailure Slow ]
+crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ RetryOnFailure Slow ]
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -176,8 +162,6 @@ crbug.com/dawn/1319 [ intel win ] webgpu:api,operation,command_buffer,copyTextur
 # General test slowness because of https://github.com/gpuweb/cts/issues/1162
 # KEEP
 ################################################################################
-crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,ImageBitmap:* [ Slow ]
-crbug.com/dawn/1398 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Slow ]
 crbug.com/dawn/1398 [ ubuntu webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Slow ]
 crbug.com/dawn/1398 [ mac webgpu-adapter-default ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Slow ]
 crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Slow ]
@@ -267,6 +251,12 @@ crbug.com/dawn/0000 webgpu:api,validation,buffer,create:createBuffer_invalid_and
 # KEEP
 ################################################################################
 crbug.com/tint/1524 webgpu:shader,execution,expression,call,builtin,atan2:f32:* [ Skip ]
+
+################################################################################
+# Vulkan Validation Layer error does to LoadOp::Clear on ReadOnly DepthStencil
+# KEEP
+################################################################################
+crbug.com/dawn/1512 [ dawn-backend-validation linux ] webgpu:api,validation,render_pass,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
 
 ################################################################################
 # slow shader execution 'const' tests
@@ -384,7 +374,6 @@ crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:abstra
 crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:f32:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,unary,f32_arithmetic:negation:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:inputSource="const";* [ Skip ]
-
 
 ################################################################################
 # shader execution failures
