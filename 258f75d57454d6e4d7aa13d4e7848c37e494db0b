@@ -377,6 +377,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff6794ca_b7c2b080",
+        "filename": "src/dawn/native/d3d12/FenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-07T19:46:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19170060_23ca405c",
+      "revId": "258f75d57454d6e4d7aa13d4e7848c37e494db0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3eaa251f_e4095425",
