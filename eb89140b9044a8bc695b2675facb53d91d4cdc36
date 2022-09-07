@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a347bff9_30d38a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T14:39:44Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "eb89140b9044a8bc695b2675facb53d91d4cdc36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95109159_966d8b7e",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-07T14:39:44Z",
+      "side": 1,
+      "message": "Why not just make `tint::FriendlyName` handle bool?",
+      "range": {
+        "startLine": 761,
+        "startChar": 15,
+        "endLine": 761,
+        "endChar": 49
+      },
+      "revId": "eb89140b9044a8bc695b2675facb53d91d4cdc36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
