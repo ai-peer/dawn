@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbaa90d2_b49f07fa",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 847,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T18:05:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87705680_3face184",
+      "range": {
+        "startLine": 847,
+        "startChar": 14,
+        "endLine": 847,
+        "endChar": 28
+      },
+      "revId": "7c46f6bdbf321e7c30786a3b5654e66c64391d6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "030bece1_9796f2ac",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-09-07T03:23:07Z",
       "side": 1,
       "message": "probably these should get defined in \nout/Debug/gen/third_party/dawn/src/dawn/native/webgpu_StreamImpl_autogen.cpp\n\nyou can do that by modifying third_party/dawn/generator/templates/dawn/native/api_StreamImpl.cpp\n\none day we should probably make that generator smart enough to generate everything it can instead of manually putting things there. Don\u0027t have to do that now though",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "7c46f6bdbf321e7c30786a3b5654e66c64391d6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf26dae_386512f8",
+        "filename": "src/dawn/native/stream/Stream.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-07T18:05:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "030bece1_9796f2ac",
       "range": {
         "startLine": 63,
         "startChar": 0,
