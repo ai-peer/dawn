@@ -229,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c0741d_c46f99ef",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-07T11:34:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "75e7839b_d9298829",
+      "revId": "709020237614346c79e855cd2800e2230c612737",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0d23d01_23c010b5",
