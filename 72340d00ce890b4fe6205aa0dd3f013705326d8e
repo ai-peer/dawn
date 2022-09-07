@@ -2107,6 +2107,29 @@
       "message": "🟨 warning: no results found for \u0027webgpu:api,validation,createBindGroupLayout:maximum_binding_limit:*\u0027",
       "revId": "72340d00ce890b4fe6205aa0dd3f013705326d8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38590c56_f599804f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T15:20:05Z",
+      "side": 0,
+      "message": "ah, I think all the webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* additions are due to these getting removed\n\nLoko is back today so hopefully we can make some progress on making Slow/RetryOnFailure overlaps happy",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 126
+      },
+      "revId": "72340d00ce890b4fe6205aa0dd3f013705326d8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
