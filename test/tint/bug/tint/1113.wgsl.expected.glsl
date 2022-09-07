@@ -6,7 +6,9 @@ layout(binding = 0) uniform Uniforms_ubo {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_ssbo {
@@ -108,7 +110,9 @@ layout(binding = 0) uniform Uniforms_ubo {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_ssbo {
@@ -180,7 +184,9 @@ layout(binding = 0) uniform Uniforms_ubo {
   uint pad1;
   uint pad2;
   vec3 bbMin;
+  uint pad;
   vec3 bbMax;
+  uint pad_1;
 } uniforms;
 
 layout(binding = 10, std430) buffer U32s_ssbo {
