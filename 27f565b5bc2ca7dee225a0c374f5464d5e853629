@@ -16,6 +16,138 @@
       "message": "PTAL! Wouldn\u0027t be surprised if this is missing some edge case handling that I\u0027m not aware of or needs cleanup, but this is change used to get first triangle on Android.",
       "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8487f3d_cd150152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b54b80_7d16c24c",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 43
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "243d1e2b_1048688a",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 55
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e822879_25334aa5",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "this struct also provides us with `formatFeatures`\n\nI thought maybe this should be checked against descriptor-\u003ecTextureDescriptor-\u003eusage to check, for example, that if the format can\u0027t support rendering, we don\u0027t import it as usage RenderAttachment.\n\nHowever, with SupportsImportMemory, we already have vkGetPhysicalDeviceImageFormatProperties2 to check that the format/usage pair is supported.\n\nSo, I think it\u0027s probably fine, but leaving this note here in case it sparks anything.",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 99,
+        "endChar": 50
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c0c0c63_3a622ede",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 53
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c81044f_c1b12f38",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T20:54:40Z",
+      "side": 1,
+      "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 46
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
