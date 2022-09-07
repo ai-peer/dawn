@@ -4,6 +4,7 @@ precision mediump float;
 layout(binding = 0) uniform S_ubo {
   mat3 matrix;
   vec3 vector;
+  uint pad;
 } data;
 
 void tint_symbol() {
