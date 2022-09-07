@@ -16,6 +16,24 @@
       "message": "I think this would be enough? (Don\u0027t need Iterable like the writer)\nGiven that we have implementations for vector, fixed size array, etc. and pointer input is not allowed.",
       "revId": "15ad40ae7f165be26f05983c8e4db7033661417f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c0cd2d8_22ed9e1d",
+        "filename": "generator/templates/dawn/native/api_StreamImpl.cpp",
+        "patchSetId": 39
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-07T18:53:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e1086765_60bfcf66",
+      "revId": "15ad40ae7f165be26f05983c8e4db7033661417f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
