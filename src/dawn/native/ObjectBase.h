@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_OBJECTBASE_H_
 #define SRC_DAWN_NATIVE_OBJECTBASE_H_
 
+#include <mutex>
 #include <string>
 
 #include "dawn/common/LinkedList.h"
@@ -85,7 +86,11 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     // and they should ensure that their overriding versions call this underlying version
     // somewhere.
     void DeleteThis() override;
-    void TrackInDevice();
+
+    // Tracking interfaces that default to tracking objects on the device, but may be overridden
+    // to track objects in other places, i.e. TextureViews tracked by Textures.
+    virtual void Track();
+    virtual std::mutex* GetTrackingMutex();
 
     // Sub-classes may override this function multiple times. Whenever overriding this function,
     // however, users should be sure to call their parent's version in the new override to make
@@ -97,6 +102,12 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     virtual void SetLabelImpl();
 
     std::string mLabel;
+};
+
+// Generic object list struct with a mutex for tracking.
+struct ApiObjectList {
+    std::mutex mutex;
+    LinkedList<ApiObjectBase> objects;
 };
 
 }  // namespace dawn::native

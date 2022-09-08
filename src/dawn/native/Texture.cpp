@@ -552,7 +552,7 @@ TextureBase::TextureBase(DeviceBase* device,
     if (internalUsageDesc != nullptr) {
         mInternalUsage |= internalUsageDesc->internalUsage;
     }
-    TrackInDevice();
+    Track();
 }
 
 TextureBase::~TextureBase() = default;
@@ -561,7 +561,7 @@ static constexpr Format kUnusedFormat;
 
 TextureBase::TextureBase(DeviceBase* device, TextureState state)
     : ApiObjectBase(device, kLabelNotImplemented), mFormat(kUnusedFormat), mState(state) {
-    TrackInDevice();
+    Track();
 }
 
 TextureBase::TextureBase(DeviceBase* device,
@@ -578,6 +578,16 @@ TextureBase::TextureBase(DeviceBase* device,
 
 void TextureBase::DestroyImpl() {
     mState = TextureState::Destroyed;
+
+    // Destroy all of the views associated with the texture as well.
+    LinkedList<ApiObjectBase> views;
+    {
+        const std::lock_guard<std::mutex> lock(mTextureViews.mutex);
+        mTextureViews.objects.MoveInto(&views);
+    }
+    while (!views.empty()) {
+        views.head()->value()->Destroy();
+    }
 }
 
 // static
@@ -766,6 +776,15 @@ ResultOrError<Ref<TextureViewBase>> TextureBase::CreateView(
     return GetDevice()->CreateTextureView(this, descriptor);
 }
 
+void TextureBase::TrackView(TextureViewBase* view) {
+    const std::lock_guard<std::mutex> lock(mTextureViews.mutex);
+    view->InsertBefore(mTextureViews.objects.head());
+}
+
+std::mutex* TextureBase::GetViewListMutex() {
+    return &mTextureViews.mutex;
+}
+
 TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descriptor) {
     DeviceBase* device = GetDevice();
 
@@ -831,14 +850,14 @@ TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescript
       mRange({ConvertViewAspect(mFormat, descriptor->aspect),
               {descriptor->baseArrayLayer, descriptor->arrayLayerCount},
               {descriptor->baseMipLevel, descriptor->mipLevelCount}}) {
-    TrackInDevice();
+    Track();
 }
 
 TextureViewBase::TextureViewBase(TextureBase* texture)
     : ApiObjectBase(texture->GetDevice(), kLabelNotImplemented),
       mTexture(texture),
       mFormat(kUnusedFormat) {
-    TrackInDevice();
+    Track();
 }
 
 TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -905,6 +924,16 @@ uint32_t TextureViewBase::GetLayerCount() const {
 const SubresourceRange& TextureViewBase::GetSubresourceRange() const {
     ASSERT(!IsError());
     return mRange;
+}
+
+void TextureViewBase::Track() {
+    ASSERT(!IsError());
+    mTexture->TrackView(this);
+}
+
+std::mutex* TextureViewBase::GetTrackingMutex() {
+    ASSERT(!IsError());
+    return mTexture->GetViewListMutex();
 }
 
 }  // namespace dawn::native
