@@ -100,7 +100,7 @@ RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device,
                         descriptor->depthReadOnly,
                         descriptor->stencilReadOnly),
       mBundleEncodingContext(device, this) {
-    TrackInDevice();
+    TrackForDestruction();
 }
 
 RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag)
