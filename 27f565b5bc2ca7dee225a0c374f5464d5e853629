@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec7814e_e7aa9d26",
+        "filename": "include/dawn/native/VulkanBackend.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2e510a7_cde834e1",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "216f2eba_5cd03656",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c8a836_e49adeac",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "216f2eba_5cd03656",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d34db0e4_985ec745",
@@ -99,6 +135,24 @@
       "writtenOn": "2022-09-08T14:51:32Z",
       "side": 1,
       "message": "Maybe we should have tests like https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp and also validation by asking the AHB parameters and checking they match the texture descriptor.",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11bf38a7_34def666",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "I\u0027ll work on this.",
+      "parentUuid": "d34db0e4_985ec745",
       "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +180,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad9f5f39_663e5b7b",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51b54b80_7d16c24c",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 43
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "243d1e2b_1048688a",
@@ -139,6 +217,30 @@
       "writtenOn": "2022-09-07T20:54:40Z",
       "side": 1,
       "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 55
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb409f42_fd8e163f",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "243d1e2b_1048688a",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -195,6 +297,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca8dd26f_5ebdc1c6",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c0c0c63_3a622ede",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 53
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c81044f_c1b12f38",
@@ -208,6 +334,30 @@
       "writtenOn": "2022-09-07T20:54:40Z",
       "side": 1,
       "message": "nit: you could use PnextChainBuilder",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 46
+      },
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c200de45_4c144b9a",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T17:47:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c81044f_c1b12f38",
       "range": {
         "startLine": 135,
         "startChar": 0,
