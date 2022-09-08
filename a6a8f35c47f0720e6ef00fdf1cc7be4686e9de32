@@ -33,6 +33,23 @@
       "message": "Still LGTM, thanks for the iterations!",
       "revId": "a6a8f35c47f0720e6ef00fdf1cc7be4686e9de32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04825279_92831116",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-08T00:08:40Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting the CL",
+      "revId": "a6a8f35c47f0720e6ef00fdf1cc7be4686e9de32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
