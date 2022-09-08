@@ -76,7 +76,7 @@ RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
     if (maxDrawCountInfo) {
         mMaxDrawCount = maxDrawCountInfo->maxDrawCount;
     }
-    TrackInDevice();
+    Track();
 }
 
 // static

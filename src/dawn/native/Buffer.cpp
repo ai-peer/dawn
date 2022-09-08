@@ -68,7 +68,7 @@ class ErrorBuffer final : public BufferBase {
             }
             // Since error buffers in this case may allocate memory, we need to track them
             // for destruction on the device.
-            TrackInDevice();
+            Track();
         }
     }
 
@@ -152,7 +152,7 @@ BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
         mUsage |= kInternalStorageBuffer;
     }
 
-    TrackInDevice();
+    Track();
 }
 
 BufferBase::BufferBase(DeviceBase* device,
@@ -171,7 +171,7 @@ BufferBase::BufferBase(DeviceBase* device,
 
 BufferBase::BufferBase(DeviceBase* device, BufferState state)
     : ApiObjectBase(device, kLabelNotImplemented), mState(state) {
-    TrackInDevice();
+    Track();
 }
 
 BufferBase::~BufferBase() {

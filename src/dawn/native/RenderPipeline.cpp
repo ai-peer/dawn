@@ -619,14 +619,14 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
     }
 
     SetContentHash(ComputeContentHash());
-    TrackInDevice();
+    Track();
 
     // Initialize the cache key to include the cache type and device information.
     StreamIn(&mCacheKey, CacheKey::Type::RenderPipeline, device->GetCacheKey());
 }
 
 RenderPipelineBase::RenderPipelineBase(DeviceBase* device) : PipelineBase(device) {
-    TrackInDevice();
+    Track();
 }
 
 RenderPipelineBase::RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)

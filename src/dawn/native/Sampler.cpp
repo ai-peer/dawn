@@ -86,11 +86,11 @@ SamplerBase::SamplerBase(DeviceBase* device,
 
 SamplerBase::SamplerBase(DeviceBase* device, const SamplerDescriptor* descriptor)
     : SamplerBase(device, descriptor, kUntrackedByDevice) {
-    TrackInDevice();
+    Track();
 }
 
 SamplerBase::SamplerBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {
-    TrackInDevice();
+    Track();
 }
 
 SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag)

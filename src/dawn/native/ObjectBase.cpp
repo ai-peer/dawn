@@ -71,15 +71,26 @@ void ApiObjectBase::DeleteThis() {
     RefCounted::DeleteThis();
 }
 
-void ApiObjectBase::TrackInDevice() {
+void ApiObjectBase::Track() {
+    mWasTracked = true;
+    TrackImpl();
+}
+
+void ApiObjectBase::TrackImpl() {
     ASSERT(GetDevice() != nullptr);
     GetDevice()->TrackObject(this);
 }
 
+std::mutex* ApiObjectBase::GetTrackingMutex() {
+    return GetDevice()->GetObjectListMutex(GetType());
+}
+
 void ApiObjectBase::Destroy() {
-    const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
-    if (RemoveFromList()) {
-        DestroyImpl();
+    if (mWasTracked) {
+        const std::lock_guard<std::mutex> lock(*GetTrackingMutex());
+        if (RemoveFromList()) {
+            DestroyImpl();
+        }
     }
 }
 

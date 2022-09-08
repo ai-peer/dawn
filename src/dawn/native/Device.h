@@ -552,12 +552,6 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     State mState = State::BeingCreated;
 
-    // Encompasses the mutex and the actual list that contains all live objects "owned" by the
-    // device.
-    struct ApiObjectList {
-        std::mutex mutex;
-        LinkedList<ApiObjectBase> objects;
-    };
     PerObjectType<ApiObjectList> mObjectLists;
 
     FormatTable mFormatTable;

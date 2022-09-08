@@ -39,7 +39,7 @@ RenderBundleBase::RenderBundleBase(RenderBundleEncoder* encoder,
       mStencilReadOnly(stencilReadOnly),
       mDrawCount(encoder->GetDrawCount()),
       mResourceUsage(std::move(resourceUsage)) {
-    TrackInDevice();
+    Track();
 }
 
 void RenderBundleBase::DestroyImpl() {

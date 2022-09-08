@@ -30,12 +30,12 @@ CommandBufferBase::CommandBufferBase(CommandEncoder* encoder,
     : ApiObjectBase(encoder->GetDevice(), descriptor->label),
       mCommands(encoder->AcquireCommands()),
       mResourceUsages(encoder->AcquireResourceUsages()) {
-    TrackInDevice();
+    Track();
 }
 
 CommandBufferBase::CommandBufferBase(DeviceBase* device)
     : ApiObjectBase(device, kLabelNotImplemented) {
-    TrackInDevice();
+    Track();
 }
 
 CommandBufferBase::CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag)
