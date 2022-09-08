@@ -37,6 +37,30 @@ DeviceBase* ObjectBase::GetDevice() const {
     return mDevice.Get();
 }
 
+void ApiObjectList::Track(ApiObjectBase* object) {
+    std::lock_guard<std::mutex> lock(mMutex);
+    mObjects.Prepend(object);
+    if (mMarkedDestroyed) {
+        object->Destroy();
+    }
+}
+
+bool ApiObjectList::Untrack(ApiObjectBase* object) {
+    if (mMarkedDestroyed) {
+        return object->RemoveFromList();
+    }
+    std::lock_guard<std::mutex> lock(mMutex);
+    return object->RemoveFromList();
+}
+
+void ApiObjectList::Destroy() {
+    std::lock_guard<std::mutex> lock(mMutex);
+    mMarkedDestroyed = true;
+    while (!mObjects.empty()) {
+        mObjects.head()->value()->Destroy();
+    }
+}
+
 ApiObjectBase::ApiObjectBase(DeviceBase* device, const char* label) : ObjectBase(device) {
     if (label) {
         mLabel = label;
@@ -71,14 +95,24 @@ void ApiObjectBase::DeleteThis() {
     RefCounted::DeleteThis();
 }
 
-void ApiObjectBase::TrackInDevice() {
+void ApiObjectBase::TrackForDestruction() {
+    ApiObjectList* list = GetObjectTrackingList();
+    ASSERT(list != nullptr);
+    list->Track(this);
+}
+
+ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
     ASSERT(GetDevice() != nullptr);
-    GetDevice()->TrackObject(this);
+    return GetDevice()->GetObjectTrackingList(GetType());
 }
 
 void ApiObjectBase::Destroy() {
-    const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
-    if (RemoveFromList()) {
+    if (!IsInList()) {
+        return;
+    }
+    ApiObjectList* list = GetObjectTrackingList();
+    ASSERT(list != nullptr);
+    if (list->Untrack(this)) {
         DestroyImpl();
     }
 }
