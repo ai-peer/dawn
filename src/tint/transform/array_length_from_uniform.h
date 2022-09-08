@@ -113,6 +113,9 @@ class ArrayLengthFromUniform final : public Castable<ArrayLengthFromUniform, Tra
     /// @param inputs optional extra transform-specific input data
     /// @param outputs optional extra transform-specific output data
     void Run(CloneContext& ctx, const DataMap& inputs, DataMap& outputs) const override;
+
+  private:
+    struct State;
 };
 
 }  // namespace tint::transform
