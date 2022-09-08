@@ -16,6 +16,46 @@
       "message": "Addressed most of the feedback.",
       "revId": "ab53b10458747fec1dd1f6f0c60c530add393355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce7a8b07_4a8fee7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-08T17:53:14Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "ab53b10458747fec1dd1f6f0c60c530add393355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91be7462_b1489f6e",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-08T17:53:14Z",
+      "side": 1,
+      "message": "nit: this",
+      "range": {
+        "startLine": 60,
+        "startChar": 50,
+        "endLine": 60,
+        "endChar": 55
+      },
+      "revId": "ab53b10458747fec1dd1f6f0c60c530add393355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
