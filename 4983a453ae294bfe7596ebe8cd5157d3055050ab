@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb77cc47_c3c9c25a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-08T20:56:08Z",
+      "side": 1,
+      "message": "LGTM it\u0027ll be great to do the null backend too so we can say it\u0027s complete",
+      "revId": "4983a453ae294bfe7596ebe8cd5157d3055050ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e844fb9_d43e88ba",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-08T20:56:08Z",
+      "side": 1,
+      "message": "do we need to get rid of the other overrides or is it OK to leave them around?",
+      "range": {
+        "startLine": 210,
+        "startChar": 16,
+        "endLine": 211,
+        "endChar": 52
+      },
+      "revId": "4983a453ae294bfe7596ebe8cd5157d3055050ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
