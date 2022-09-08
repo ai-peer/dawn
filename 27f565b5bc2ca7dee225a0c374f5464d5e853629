@@ -157,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7300e082_8a85ea0f",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-08T23:11:18Z",
+      "side": 1,
+      "message": "Filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1538",
+      "parentUuid": "11bf38a7_34def666",
+      "revId": "27f565b5bc2ca7dee225a0c374f5464d5e853629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51b54b80_7d16c24c",
