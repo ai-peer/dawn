@@ -59,7 +59,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-08-23 08:48:27PM
+# Last rolled: 2022-09-08 08:25:11PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -76,8 +76,8 @@ crbug.com/dawn/1487 [ intel-gen-9 win10 ] webgpu:api,operation,resource_init,tex
 #
 # KEEP
 ################################################################################
-crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:* [ Slow RetryOnFailure ]
-crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Slow RetryOnFailure ]
+crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:* [ RetryOnFailure Slow ]
+crbug.com/dawn/1398 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ RetryOnFailure Slow ]
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -256,7 +256,7 @@ crbug.com/tint/1524 webgpu:shader,execution,expression,call,builtin,atan2:f32:* 
 # Vulkan Validation Layer error does to LoadOp::Clear on ReadOnly DepthStencil
 # KEEP
 ################################################################################
-crbug.com/dawn/1512 [ linux dawn-backend-validation ] webgpu:api,validation,render_pass,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
+crbug.com/dawn/1512 [ dawn-backend-validation linux ] webgpu:api,validation,render_pass,attachment_compatibility:render_pass_or_bundle_and_pipeline,depth_stencil_read_only_write_state:* [ Failure ]
 
 ################################################################################
 # slow shader execution 'const' tests
@@ -374,7 +374,6 @@ crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:abstra
 crbug.com/tint/1613 webgpu:shader,execution,expression,call,builtin,trunc:f32:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,unary,f32_arithmetic:negation:inputSource="const";* [ Skip ]
 crbug.com/tint/1613 webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:inputSource="const";* [ Skip ]
-
 
 ################################################################################
 # shader execution failures
