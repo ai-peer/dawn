@@ -3290,6 +3290,18 @@ TEST_F(ResolverConstEvalTest, UnaryNegateLowestAbstract) {
     EXPECT_EQ(sem->ConstantValue()->As<AInt>(), 9223372036854775808_a);
 }
 
+INSTANTIATE_TEST_SUITE_P(Not,
+                         ResolverConstEvalUnaryOpTest,
+                         testing::Combine(testing::Values(ast::UnaryOp::kNot),
+                                          testing::ValuesIn({
+                                              C(true, false),
+                                              C(false, true),
+                                              C(Vec(true, true), Vec(false, false)),
+                                              C(Vec(true, false), Vec(false, true)),
+                                              C(Vec(false, true), Vec(true, false)),
+                                              C(Vec(false, false), Vec(true, true)),
+                                          })));
+
 }  // namespace unary_op
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
