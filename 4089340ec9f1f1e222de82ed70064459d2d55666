@@ -16,6 +16,69 @@
       "message": "PTAL.",
       "revId": "4089340ec9f1f1e222de82ed70064459d2d55666",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de77d343_5c4e1a7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T12:54:46Z",
+      "side": 1,
+      "message": "Might have missed the non-const field issue on earlier changes too.",
+      "revId": "4089340ec9f1f1e222de82ed70064459d2d55666",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef6bad6_b611b82c",
+        "filename": "src/tint/ast/struct_member_offset_attribute.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T12:54:46Z",
+      "side": 1,
+      "message": "This pointer is mutable. Should be: `const ast::Expression* const expr;`, or my preferred form: `ast::Expression const* const expr;`.",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 32
+      },
+      "revId": "4089340ec9f1f1e222de82ed70064459d2d55666",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ade4b6a_ee27ca7f",
+        "filename": "src/tint/ast/struct_member_size_attribute.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T12:54:46Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 32
+      },
+      "revId": "4089340ec9f1f1e222de82ed70064459d2d55666",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
