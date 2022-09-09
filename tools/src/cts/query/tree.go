@@ -266,6 +266,20 @@ func (t *Tree[Data]) Add(q Query, d Data) error {
 	return nil
 }
 
+// GetOrCreate returns existing, or adds a new data to the tree.
+func (t *Tree[Data]) GetOrCreate(q Query, create func() Data) *Data {
+	node := &t.TreeNode
+	q.Walk(func(q Query, t Target, n string) error {
+		node = node.getOrCreateChild(TreeNodeChildKey{n, t})
+		return nil
+	})
+	if node.Data == nil {
+		data := create()
+		node.Data = &data
+	}
+	return node.Data
+}
+
 // Reduce reduces the tree using the Merger function f.
 // If the Merger function returns a non-nil Data value, then this will be used
 // to replace the non-leaf node with a new leaf node holding the returned Data.
