@@ -1672,11 +1672,18 @@ uint32_t Builder::GenerateConstantIfNeeded(const sem::Constant* constant) {
         },
         [&](const sem::Vector* v) { return composite(v->Width()); },
         [&](const sem::Matrix* m) { return composite(m->columns()); },
-        [&](const sem::Array* a) { return composite(a->Count()); },
+        [&](const sem::Array* a) {
+            auto count = a->ConstantCount();
+            if (!count) {
+                error_ = sem::Array::kErrExpectedConstantCount;
+                return static_cast<uint32_t>(0);
+            }
+            return composite(count);
+        },
         [&](const sem::Struct* s) { return composite(s->Members().size()); },
         [&](Default) {
             error_ = "unhandled constant type: " + builder_.FriendlyName(ty);
-            return false;
+            return 0;
         });
 }
 
@@ -3848,17 +3855,23 @@ bool Builder::GenerateTextureType(const sem::Texture* texture, const Operand& re
     return true;
 }
 
-bool Builder::GenerateArrayType(const sem::Array* ary, const Operand& result) {
-    auto elem_type = GenerateTypeIfNeeded(ary->ElemType());
+bool Builder::GenerateArrayType(const sem::Array* arr, const Operand& result) {
+    auto elem_type = GenerateTypeIfNeeded(arr->ElemType());
     if (elem_type == 0) {
         return false;
     }
 
     auto result_id = std::get<uint32_t>(result);
-    if (ary->IsRuntimeSized()) {
+    if (arr->IsRuntimeSized()) {
         push_type(spv::Op::OpTypeRuntimeArray, {result, Operand(elem_type)});
     } else {
-        auto len_id = GenerateConstantIfNeeded(ScalarConstant::U32(ary->Count()));
+        auto count = arr->ConstantCount();
+        if (!count) {
+            error_ = sem::Array::kErrExpectedConstantCount;
+            return static_cast<uint32_t>(0);
+        }
+
+        auto len_id = GenerateConstantIfNeeded(ScalarConstant::U32(count));
         if (len_id == 0) {
             return false;
         }
@@ -3867,7 +3880,7 @@ bool Builder::GenerateArrayType(const sem::Array* ary, const Operand& result) {
     }
 
     push_annot(spv::Op::OpDecorate,
-               {Operand(result_id), U32Operand(SpvDecorationArrayStride), Operand(ary->Stride())});
+               {Operand(result_id), U32Operand(SpvDecorationArrayStride), Operand(arr->Stride())});
     return true;
 }
 

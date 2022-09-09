@@ -356,8 +356,7 @@ struct Std140::State {
     }
 
     /// @returns a new, forked std140 AST type for the corresponding non-forked semantic type. If
-    /// the
-    ///          semantic type is not split for std140-layout, then nullptr is returned.
+    ///          the semantic type is not split for std140-layout, then nullptr is returned.
     const ast::Type* Std140Type(const sem::Type* ty) const {
         return Switch(
             ty,  //
@@ -373,8 +372,13 @@ struct Std140::State {
                     if (!arr->IsStrideImplicit()) {
                         attrs.Push(ctx.dst->create<ast::StrideAttribute>(arr->Stride()));
                     }
-                    return b.create<ast::Array>(std140, b.Expr(u32(arr->Count())),
-                                                std::move(attrs));
+                    auto count = arr->ConstantCount();
+                    if (!count) {
+                        ctx.dst->Diagnostics().add_error(diag::System::Transform,
+                                                         sem::Array::kErrExpectedConstantCount);
+                        return b.create<ast::Array>(std140, b.Expr(1_u), std::move(attrs));
+                    }
+                    return b.create<ast::Array>(std140, b.Expr(u32(count)), std::move(attrs));
                 }
                 return nullptr;
             });
@@ -512,7 +516,13 @@ struct Std140::State {
             ty,  //
             [&](const sem::Struct* str) { return sym.NameFor(str->Name()); },
             [&](const sem::Array* arr) {
-                return "arr_" + std::to_string(arr->Count()) + "_" + ConvertSuffix(arr->ElemType());
+                auto count = arr->ConstantCount();
+                if (!count) {
+                    ctx.dst->Diagnostics().add_error(diag::System::Transform,
+                                                     sem::Array::kErrExpectedConstantCount);
+                    return "arr" + ConvertSuffix(arr->ElemType());
+                }
+                return "arr_" + std::to_string(count) + "_" + ConvertSuffix(arr->ElemType());
             },
             [&](Default) {
                 TINT_ICE(Transform, b.Diagnostics())
@@ -589,10 +599,16 @@ struct Std140::State {
                     auto* i = b.Var("i", b.ty.u32());
                     auto* dst_el = b.IndexAccessor(var, i);
                     auto* src_el = Convert(arr->ElemType(), b.IndexAccessor(param, i));
+                    auto count = arr->ConstantCount();
+                    if (!count) {
+                        ctx.dst->Diagnostics().add_error(diag::System::Transform,
+                                                         sem::Array::kErrExpectedConstantCount);
+                        return;
+                    }
                     stmts.Push(b.Decl(var));
-                    stmts.Push(b.For(b.Decl(i),                         //
-                                     b.LessThan(i, u32(arr->Count())),  //
-                                     b.Assign(i, b.Add(i, 1_a)),        //
+                    stmts.Push(b.For(b.Decl(i),                   //
+                                     b.LessThan(i, u32(count)),   //
+                                     b.Assign(i, b.Add(i, 1_a)),  //
                                      b.Block(b.Assign(dst_el, src_el))));
                     stmts.Push(b.Return(var));
                 },

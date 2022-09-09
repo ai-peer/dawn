@@ -471,8 +471,14 @@ struct DecomposeMemoryAccess::State {
                     auto* arr = b.Var(b.Symbols().New("arr"), CreateASTTypeFor(ctx, arr_ty));
                     auto* i = b.Var(b.Symbols().New("i"), b.Expr(0_u));
                     auto* for_init = b.Decl(i);
+                    auto arr_cnt = arr_ty->ConstantCount();
+                    if (!arr_cnt) {
+                        ctx.dst->Diagnostics().add_error(diag::System::Transform,
+                                                         sem::Array::kErrExpectedConstantCount);
+                        return Symbol{};
+                    }
                     auto* for_cond = b.create<ast::BinaryExpression>(
-                        ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count())));
+                        ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_cnt)));
                     auto* for_cont = b.Assign(i, b.Add(i, 1_u));
                     auto* arr_el = b.IndexAccessor(arr, i);
                     auto* el_offset = b.Add(b.Expr("offset"), b.Mul(i, u32(arr_ty->Stride())));
@@ -546,9 +552,10 @@ struct DecomposeMemoryAccess::State {
                         utils::Empty);
                     b.AST().AddFunction(func);
                 } else {
-                    auto body = Switch<utils::Vector<const ast::Statement*, 8>>(
+                    using Stmts = utils::Vector<const ast::Statement*, 8>;
+                    auto body = Switch(
                         el_ty,  //
-                        [&](const sem::Array* arr_ty) {
+                        [&](const sem::Array* arr_ty) -> Stmts {
                             // fn store_func(buffer : buf_ty, offset : u32, value : el_ty) {
                             //   var array = value; // No dynamic indexing on constant arrays
                             //   for (var i = 0u; i < array_count; i = i + 1) {
@@ -562,8 +569,14 @@ struct DecomposeMemoryAccess::State {
                                 StoreFunc(buf_ty, arr_ty->ElemType()->UnwrapRef(), var_user);
                             auto* i = b.Var(b.Symbols().New("i"), b.Expr(0_u));
                             auto* for_init = b.Decl(i);
+                            auto arr_cnt = arr_ty->ConstantCount();
+                            if (!arr_cnt) {
+                                ctx.dst->Diagnostics().add_error(
+                                    diag::System::Transform, sem::Array::kErrExpectedConstantCount);
+                                return utils::Empty;
+                            }
                             auto* for_cond = b.create<ast::BinaryExpression>(
-                                ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count())));
+                                ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_cnt)));
                             auto* for_cont = b.Assign(i, b.Add(i, 1_u));
                             auto* arr_el = b.IndexAccessor(array, i);
                             auto* el_offset =
@@ -575,10 +588,10 @@ struct DecomposeMemoryAccess::State {
 
                             return utils::Vector{b.Decl(array), for_loop};
                         },
-                        [&](const sem::Matrix* mat_ty) {
+                        [&](const sem::Matrix* mat_ty) -> Stmts {
                             auto* vec_ty = mat_ty->ColumnType();
                             Symbol store = StoreFunc(buf_ty, vec_ty, var_user);
-                            utils::Vector<const ast::Statement*, 4> stmts;
+                            Stmts stmts;
                             for (uint32_t i = 0; i < mat_ty->columns(); i++) {
                                 auto* offset = b.Add("offset", u32(i * mat_ty->ColumnStride()));
                                 auto* element = b.IndexAccessor("value", u32(i));
@@ -587,8 +600,8 @@ struct DecomposeMemoryAccess::State {
                             }
                             return stmts;
                         },
-                        [&](const sem::Struct* str) {
-                            utils::Vector<const ast::Statement*, 8> stmts;
+                        [&](const sem::Struct* str) -> Stmts {
+                            Stmts stmts;
                             for (auto* member : str->Members()) {
                                 auto* offset = b.Add("offset", u32(member->Offset()));
                                 auto* element = b.MemberAccessor(
