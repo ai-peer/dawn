@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1138dc75_ea4f4aaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:16:05Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12eb43f_fb37c68f",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:16:05Z",
+      "side": 1,
+      "message": "unit: Track feels very vague as to what it does. Not sure what a better name might be \"TrackForDestruction\"?",
+      "range": {
+        "startLine": 74,
+        "startChar": 20,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22f48de_7130928d",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:16:05Z",
+      "side": 1,
+      "message": "why do we need this bool?\n\nIIUC, RemoveFromList still works if it was never added. It\u0027ll return false so we won\u0027t call DestroyImpl.\n\nSo, the bool saves us from grabbing this mutex; but how often do we need to destroy objects that were never tracked?",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c2d722_7e668a54",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:16:05Z",
+      "side": 1,
+      "message": "Instead of having both TrackImpl and GetTrackingMutex, I think it would be sufficient to have a single GetObjectTrackingList which returns the ApiObjectList.\n\nThen, we don\u0027t need both TrackView and DeviceBase::TrackObject which effectively do the same thing. since we already return the objects\u0027 list which has access to both the mutex and list head for InsertBefore.\n\nAs a follow-up or perhaps a refactor ahead of this CL, I think it could be a good idea to wrap the mutex inside ApiObjectList so we don\u0027t need to manually lock it which feels error-prone.\n\nWe need it for:\n - InsertBefore\n - if (RemoveFromList())\n \nshould be doable to provide both of these as methods on ApiObjectList (but call it something like Track/Untrack or Add/Remove).",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 43
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
