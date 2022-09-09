@@ -378,6 +378,31 @@ func TestReplaceDuplicates(t *testing.T) {
 				result.Result{Query: Q(`b`), Status: result.Pass},
 			},
 		},
+		{ //////////////////////////////////////////////////////////////////////
+			location: utils.ThisLine(),
+			results: result.List{
+				result.Result{Query: Q(`a`), Status: result.Failure, Duration: 1, MayExonerate: true},
+				result.Result{Query: Q(`a`), Status: result.Failure, Duration: 3, MayExonerate: true},
+				result.Result{Query: Q(`b`), Status: result.Failure, Duration: 1, MayExonerate: false},
+				result.Result{Query: Q(`b`), Status: result.Failure, Duration: 3, MayExonerate: false},
+				result.Result{Query: Q(`c`), Status: result.Pass, Duration: 1, MayExonerate: false},
+				result.Result{Query: Q(`c`), Status: result.Pass, Duration: 3, MayExonerate: false},
+				result.Result{Query: Q(`d`), Status: result.Failure, Duration: 1, MayExonerate: true},
+				result.Result{Query: Q(`d`), Status: result.Pass, Duration: 3, MayExonerate: false},
+				result.Result{Query: Q(`e`), Status: result.Failure, Duration: 1, MayExonerate: false},
+				result.Result{Query: Q(`e`), Status: result.Pass, Duration: 3, MayExonerate: true},
+			},
+			fn: func(result.Statuses) result.Status {
+				return result.Abort
+			},
+			expect: result.List{
+				result.Result{Query: Q(`a`), Status: result.Failure, Duration: 2, MayExonerate: true},
+				result.Result{Query: Q(`b`), Status: result.Failure, Duration: 2, MayExonerate: false},
+				result.Result{Query: Q(`c`), Status: result.Pass, Duration: 2, MayExonerate: false},
+				result.Result{Query: Q(`d`), Status: result.Pass, Duration: 3, MayExonerate: false},
+				result.Result{Query: Q(`e`), Status: result.Failure, Duration: 1, MayExonerate: false},
+			},
+		},
 	} {
 		got := test.results.ReplaceDuplicates(test.fn)
 		if diff := cmp.Diff(got, test.expect); diff != "" {
