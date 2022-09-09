@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "fa8b3cc759cf5dbc36c58fe53599cd4c612d5c8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "890e74c7_90fc08a8",
+        "filename": "tools/src/cmd/test-runner/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T12:49:59Z",
+      "side": 1,
+      "message": "Shouldn\u0027t `[\\/\\/|;]` be `(?:\\/\\/|;)`? That or `[\\/;]*`.\n\nAlso: This regex is evaluated per-line so should probably start with a `^`, and end with `$`, so I\u0027d recommend changing the whole thing to:\n\n```\nregexp.MustCompile(`^ *(?:\\/\\/|;) *flags:(.*)$`)\n```",
+      "range": {
+        "startLine": 770,
+        "startChar": 36,
+        "endLine": 770,
+        "endChar": 37
+      },
+      "revId": "fa8b3cc759cf5dbc36c58fe53599cd4c612d5c8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
