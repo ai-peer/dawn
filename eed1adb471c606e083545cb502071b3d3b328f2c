@@ -16,6 +16,23 @@
       "message": "Ben: PTAL. Thanks!\n\nNote that the transform currently adds an internal attribute (\"PaddingAttribute\") to know which constuctor params are padding and need new arguments. This could also be handled by maintaining a datastructure in the transform, such as an unordered_set of params. Happy to do that if you prefer.\n\nAlso missing is a ShouldRun() call.",
       "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa28c14c_013d6614",
+        "filename": "src/tint/writer/glsl/generator_impl_storage_buffer_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-09T17:15:51Z",
+      "side": 1,
+      "message": "Note that these tests could probably be removed, since the functionality is no longer handled in the writer, and no longer differs between ES and Desktop (and there are transform tests which cover it).",
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
