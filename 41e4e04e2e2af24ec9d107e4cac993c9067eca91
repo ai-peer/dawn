@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "807e91d5_c1c857fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T15:06:51Z",
+      "side": 1,
+      "message": "Potentially controversial idea!\n\nwe still get timeout flake for \u003c1% of tests right now and I haven\u0027t had success in reproducing it. Or, iteration times are slow because I need to run many, many tests on the bots until it happens. So the goal of this CL is to reduce the impact of that timeout so the roller doesn\u0027t add expectations for it.\n\nOn the harness side, the plan is to add in may_exonerate if one of these timeout exceptions happen and we don\u0027t see any other error logs or crash dumps. That will make the harness retry it.",
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
