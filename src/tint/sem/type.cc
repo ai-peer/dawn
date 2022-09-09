@@ -246,7 +246,7 @@ const Type* Type::ElementOf(const Type* ty, uint32_t* count /* = nullptr */) {
         },
         [&](const Array* a) {
             if (count) {
-                *count = a->Count();
+                *count = a->Count().value_or(0u);
             }
             return a->ElemType();
         },

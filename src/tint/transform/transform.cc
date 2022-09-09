@@ -113,7 +113,8 @@ const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const sem::Type*
         if (a->IsRuntimeSized()) {
             return ctx.dst->ty.array(el, nullptr, std::move(attrs));
         } else {
-            return ctx.dst->ty.array(el, u32(a->Count()), std::move(attrs));
+            auto count = a->CountOrICE(ctx.dst->Diagnostics());
+            return ctx.dst->ty.array(el, u32(count), std::move(attrs));
         }
     }
     if (auto* s = ty->As<sem::Struct>()) {

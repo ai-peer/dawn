@@ -373,8 +373,8 @@ struct Std140::State {
                     if (!arr->IsStrideImplicit()) {
                         attrs.Push(ctx.dst->create<ast::StrideAttribute>(arr->Stride()));
                     }
-                    return b.create<ast::Array>(std140, b.Expr(u32(arr->Count())),
-                                                std::move(attrs));
+                    const auto count = arr->CountOrICE(b.Diagnostics());
+                    return b.create<ast::Array>(std140, b.Expr(u32(count)), std::move(attrs));
                 }
                 return nullptr;
             });
@@ -512,7 +512,8 @@ struct Std140::State {
             ty,  //
             [&](const sem::Struct* str) { return sym.NameFor(str->Name()); },
             [&](const sem::Array* arr) {
-                return "arr_" + std::to_string(arr->Count()) + "_" + ConvertSuffix(arr->ElemType());
+                const auto count = arr->CountOrICE(b.Diagnostics());
+                return "arr_" + std::to_string(count) + "_" + ConvertSuffix(arr->ElemType());
             },
             [&](Default) {
                 TINT_ICE(Transform, b.Diagnostics())
@@ -589,10 +590,11 @@ struct Std140::State {
                     auto* i = b.Var("i", b.ty.u32());
                     auto* dst_el = b.IndexAccessor(var, i);
                     auto* src_el = Convert(arr->ElemType(), b.IndexAccessor(param, i));
+                    const auto count = arr->CountOrICE(b.Diagnostics());
                     stmts.Push(b.Decl(var));
-                    stmts.Push(b.For(b.Decl(i),                         //
-                                     b.LessThan(i, u32(arr->Count())),  //
-                                     b.Assign(i, b.Add(i, 1_a)),        //
+                    stmts.Push(b.For(b.Decl(i),                   //
+                                     b.LessThan(i, u32(count)),   //
+                                     b.Assign(i, b.Add(i, 1_a)),  //
                                      b.Block(b.Assign(dst_el, src_el))));
                     stmts.Push(b.Return(var));
                 },

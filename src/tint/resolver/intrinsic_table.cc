@@ -513,7 +513,7 @@ bool match_array(const sem::Type* ty, const sem::Type*& T) {
     }
 
     if (auto* a = ty->As<sem::Array>()) {
-        if (a->Count() == 0) {
+        if (a->Count() == 0u) {
             T = a->ElemType();
             return true;
         }

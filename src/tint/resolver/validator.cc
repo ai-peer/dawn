@@ -1898,20 +1898,22 @@ bool Validator::ArrayConstructor(const ast::CallExpression* ctor,
     if (array_type->IsRuntimeSized()) {
         AddError("cannot construct a runtime-sized array", ctor->source);
         return false;
-    } else if (!elem_ty->IsConstructible()) {
+    }
+    if (!elem_ty->IsConstructible()) {
         AddError("array constructor has non-constructible element type", ctor->source);
         return false;
-    } else if (!values.IsEmpty() && (values.Length() != array_type->Count())) {
-        std::string fm = values.Length() < array_type->Count() ? "few" : "many";
-        AddError("array constructor has too " + fm + " elements: expected " +
-                     std::to_string(array_type->Count()) + ", found " +
-                     std::to_string(values.Length()),
+    }
+
+    const auto count = array_type->Count();
+    if (!count.has_value()) {
+        AddError("cannot construct an array that has a count derived from an override",
                  ctor->source);
         return false;
-    } else if (values.Length() > array_type->Count()) {
-        AddError("array constructor has too many elements: expected " +
-                     std::to_string(array_type->Count()) + ", found " +
-                     std::to_string(values.Length()),
+    }
+    if (!values.IsEmpty() && (values.Length() != count.value())) {
+        std::string fm = values.Length() < count.value() ? "few" : "many";
+        AddError("array constructor has too " + fm + " elements: expected " +
+                     std::to_string(count.value()) + ", found " + std::to_string(values.Length()),
                  ctor->source);
         return false;
     }

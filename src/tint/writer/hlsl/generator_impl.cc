@@ -3203,7 +3203,8 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             out << "{";
             TINT_DEFER(out << "}");
 
-            for (size_t i = 0; i < a->Count(); i++) {
+            const auto count = a->CountOrICE(diagnostics_);
+            for (size_t i = 0; i < count; i++) {
                 if (i > 0) {
                     out << ", ";
                 }
@@ -3742,11 +3743,11 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             while (auto* arr = base_type->As<sem::Array>()) {
                 if (arr->IsRuntimeSized()) {
                     TINT_ICE(Writer, diagnostics_)
-                        << "Runtime arrays may only exist in storage buffers, which should have "
+                        << "runtime arrays may only exist in storage buffers, which should have "
                            "been transformed into a ByteAddressBuffer";
                     return false;
                 }
-                sizes.push_back(arr->Count());
+                sizes.push_back(arr->CountOrICE(diagnostics_));
                 base_type = arr->ElemType();
             }
             if (!EmitType(out, base_type, storage_class, access, "")) {

@@ -478,6 +478,21 @@ TEST_F(ResolverTest, ArraySize_SignedConst) {
     EXPECT_EQ(ary->Count(), 10u);
 }
 
+TEST_F(ResolverTest, ArraySize_Override) {
+    // override size = 0;
+    // var<private> a : array<f32, size>;
+    Override("size", Expr(10_i));
+    auto* a = GlobalVar("a", ty.array(ty.f32(), Expr("size")), ast::StorageClass::kPrivate);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    ASSERT_NE(TypeOf(a), nullptr);
+    auto* ref = TypeOf(a)->As<sem::Reference>();
+    ASSERT_NE(ref, nullptr);
+    auto* ary = ref->StoreType()->As<sem::Array>();
+    ASSERT_EQ(ary->Count(), std::nullopt);
+}
+
 TEST_F(ResolverTest, Expr_Bitcast) {
     GlobalVar("name", ty.f32(), ast::StorageClass::kPrivate);
 

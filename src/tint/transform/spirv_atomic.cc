@@ -190,9 +190,13 @@ struct SpirvAtomic::State {
             [&](const sem::U32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
             [&](const sem::Struct* str) { return b.ty.type_name(Fork(str->Declaration()).name); },
             [&](const sem::Array* arr) {
-                return arr->IsRuntimeSized()
-                           ? b.ty.array(AtomicTypeFor(arr->ElemType()))
-                           : b.ty.array(AtomicTypeFor(arr->ElemType()), u32(arr->Count()));
+                if (arr->IsRuntimeSized()) {
+                    return b.ty.array(AtomicTypeFor(arr->ElemType()));
+                }
+                // TODO(crbug.com/tint/1660): This transform runs before SubstituteOverride, so we
+                // *may* have to handle override-length arrays here. Needs tests.
+                auto count = arr->CountOrICE(b.Diagnostics());
+                return b.ty.array(AtomicTypeFor(arr->ElemType()), u32(count));
             },
             [&](const sem::Pointer* ptr) {
                 return b.ty.pointer(AtomicTypeFor(ptr->StoreType()), ptr->StorageClass(),

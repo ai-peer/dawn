@@ -1688,7 +1688,8 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
                 return true;
             }
 
-            for (size_t i = 0; i < a->Count(); i++) {
+            const auto count = a->CountOrICE(diagnostics_);
+            for (size_t i = 0; i < count; i++) {
                 if (i > 0) {
                     out << ", ";
                 }
@@ -2479,7 +2480,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             if (!EmitType(out, arr->ElemType(), "")) {
                 return false;
             }
-            out << ", " << (arr->IsRuntimeSized() ? 1u : arr->Count()) << ">";
+            out << ", " << std::max(1u, arr->CountOrICE(diagnostics_)) << ">";
             return true;
         },
         [&](const sem::Bool*) {
@@ -3131,7 +3132,7 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const sem::
                     << "arrays with explicit strides should not exist past the SPIR-V reader";
                 return SizeAndAlign{};
             }
-            auto num_els = std::max<uint32_t>(arr->Count(), 1);
+            auto num_els = std::max<uint32_t>(arr->CountOrICE(diagnostics_), 1);
             return SizeAndAlign{arr->Stride() * num_els, arr->Align()};
         },
 

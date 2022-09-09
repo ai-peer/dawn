@@ -325,7 +325,9 @@ TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ExplicitStride) {
               "12:34 error: array size (0x100000000) must not exceed 0xffffffff bytes");
 }
 
-TEST_F(ResolverTypeValidationTest, ArraySize_Overridable) {
+// TODO(crbug.com/tint/1660): This test should fail validation as an array with an
+// override-expression count can only be used as the storage type of a workgroup var.
+TEST_F(ResolverTypeValidationTest, ArraySize_Private_Overridable) {
     // override size = 10i;
     // var<private> a : array<f32, size>;
     Override("size", Expr(10_i));
@@ -333,6 +335,22 @@ TEST_F(ResolverTypeValidationTest, ArraySize_Overridable) {
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               "12:34 error: array size must evaluate to a constant integer expression");
+}
+
+// TODO(crbug.com/tint/1660): Add more tests for arrays with override-expression counts
+// Examples:
+// • Constructing an array with an override-expression count
+// • Declaring other vars, lets, parameters of an array type with an override-expression count.
+// • Assigning a workgroup array with an override-expression count to a type-inferred private /
+//   function var.
+
+TEST_F(ResolverTypeValidationTest, ArraySize_Workgroup_Overridable) {
+    // override size = 10i;
+    // var<workgroup> a : array<f32, size>;
+    Override("size", Expr(10_i));
+    GlobalVar("a", ty.array(ty.f32(), Expr(Source{{12, 34}}, "size")),
+              ast::StorageClass::kWorkgroup);
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverTypeValidationTest, ArraySize_ModuleVar) {
