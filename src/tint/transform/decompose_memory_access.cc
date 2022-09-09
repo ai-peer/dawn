@@ -471,8 +471,16 @@ struct DecomposeMemoryAccess::State {
                     auto* arr = b.Var(b.Symbols().New("arr"), CreateASTTypeFor(ctx, arr_ty));
                     auto* i = b.Var(b.Symbols().New("i"), b.Expr(0_u));
                     auto* for_init = b.Decl(i);
+
+                    if (!arr_ty->HasCount()) {
+                        TINT_ICE(Transform, b.Diagnostics())
+                            << "Array count was not substituted before executing "
+                               "DecomposeMemoryAccess";
+                        return name;
+                    }
+
                     auto* for_cond = b.create<ast::BinaryExpression>(
-                        ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count())));
+                        ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count2())));
                     auto* for_cont = b.Assign(i, b.Add(i, 1_u));
                     auto* arr_el = b.IndexAccessor(arr, i);
                     auto* el_offset = b.Add(b.Expr("offset"), b.Mul(i, u32(arr_ty->Stride())));
@@ -562,8 +570,16 @@ struct DecomposeMemoryAccess::State {
                                 StoreFunc(buf_ty, arr_ty->ElemType()->UnwrapRef(), var_user);
                             auto* i = b.Var(b.Symbols().New("i"), b.Expr(0_u));
                             auto* for_init = b.Decl(i);
+
+                            if (!arr_ty->HasCount()) {
+                                TINT_ICE(Transform, b.Diagnostics())
+                                    << "Array count was not substituted before executing "
+                                       "DecomposeMemoryAccess";
+                                return utils::Vector<const ast::Statement*, 2>{};
+                            }
+
                             auto* for_cond = b.create<ast::BinaryExpression>(
-                                ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count())));
+                                ast::BinaryOp::kLessThan, b.Expr(i), b.Expr(u32(arr_ty->Count2())));
                             auto* for_cont = b.Assign(i, b.Add(i, 1_u));
                             auto* arr_el = b.IndexAccessor(array, i);
                             auto* el_offset =

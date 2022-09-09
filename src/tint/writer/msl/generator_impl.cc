@@ -1688,7 +1688,12 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
                 return true;
             }
 
-            for (size_t i = 0; i < a->Count(); i++) {
+            if (!a->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return false;
+            }
+            for (size_t i = 0; i < a->Count2(); i++) {
                 if (i > 0) {
                     out << ", ";
                 }
@@ -2479,7 +2484,12 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             if (!EmitType(out, arr->ElemType(), "")) {
                 return false;
             }
-            out << ", " << (arr->IsRuntimeSized() ? 1u : arr->Count()) << ">";
+            if (!arr->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return false;
+            }
+            out << ", " << (arr->IsRuntimeSized() ? 1u : arr->Count2()) << ">";
             return true;
         },
         [&](const sem::Bool*) {
@@ -3131,7 +3141,12 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const sem::
                     << "arrays with explicit strides should not exist past the SPIR-V reader";
                 return SizeAndAlign{};
             }
-            auto num_els = std::max<uint32_t>(arr->Count(), 1);
+            if (!arr->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return SizeAndAlign{};
+            }
+            auto num_els = std::max<uint32_t>(arr->Count2(), 1);
             return SizeAndAlign{arr->Stride() * num_els, arr->Align()};
         },
 

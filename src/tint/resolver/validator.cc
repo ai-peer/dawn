@@ -1898,19 +1898,30 @@ bool Validator::ArrayConstructor(const ast::CallExpression* ctor,
     if (array_type->IsRuntimeSized()) {
         AddError("cannot construct a runtime-sized array", ctor->source);
         return false;
-    } else if (!elem_ty->IsConstructible()) {
+    }
+    if (!elem_ty->IsConstructible()) {
         AddError("array constructor has non-constructible element type", ctor->source);
         return false;
-    } else if (!values.IsEmpty() && (values.Length() != array_type->Count())) {
-        std::string fm = values.Length() < array_type->Count() ? "few" : "many";
+    }
+
+    // If the array count has no values, then it must be an override. That override will get
+    // replaced by the constant value but a transform before the backends execute at which point the
+    // validator will have a value and the below checks will execute.
+    if (!array_type->HasCount()) {
+        return true;
+    }
+
+    if (!values.IsEmpty() && (values.Length() != array_type->Count2())) {
+        std::string fm = values.Length() < array_type->Count2() ? "few" : "many";
         AddError("array constructor has too " + fm + " elements: expected " +
-                     std::to_string(array_type->Count()) + ", found " +
+                     std::to_string(array_type->Count2()) + ", found " +
                      std::to_string(values.Length()),
                  ctor->source);
         return false;
-    } else if (values.Length() > array_type->Count()) {
+    }
+    if (values.Length() > array_type->Count2()) {
         AddError("array constructor has too many elements: expected " +
-                     std::to_string(array_type->Count()) + ", found " +
+                     std::to_string(array_type->Count2()) + ", found " +
                      std::to_string(values.Length()),
                  ctor->source);
         return false;

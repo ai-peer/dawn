@@ -30,7 +30,8 @@ TEST_F(ArrayTest, CreateSizedArray) {
     auto* g = create<Array>(create<U32>(), 2u, 4u, 8u, 33u, 17u);
 
     EXPECT_EQ(a->ElemType(), create<U32>());
-    EXPECT_EQ(a->Count(), 2u);
+    ASSERT_TRUE(a->HasCount());
+    EXPECT_EQ(a->Count2(), 2u);
     EXPECT_EQ(a->Align(), 4u);
     EXPECT_EQ(a->Size(), 8u);
     EXPECT_EQ(a->Stride(), 32u);
@@ -55,7 +56,8 @@ TEST_F(ArrayTest, CreateRuntimeArray) {
     auto* f = create<Array>(create<U32>(), 0u, 4u, 8u, 33u, 17u);
 
     EXPECT_EQ(a->ElemType(), create<U32>());
-    EXPECT_EQ(a->Count(), 0u);
+    ASSERT_TRUE(a->HasCount());
+    EXPECT_EQ(a->Count2(), 0u);
     EXPECT_EQ(a->Align(), 4u);
     EXPECT_EQ(a->Size(), 8u);
     EXPECT_EQ(a->Stride(), 32u);

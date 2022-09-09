@@ -1516,7 +1516,7 @@ const sem::Type* Resolver::ConcreteType(const sem::Type* ty,
                 target_el_ty = target_arr_ty->ElemType();
             }
             if (auto* el_ty = ConcreteType(a->ElemType(), target_el_ty, source)) {
-                return Array(source, el_ty, a->Count(), /* explicit_stride */ 0);
+                return Array(source, el_ty, a->CountRaw(), /* explicit_stride */ 0);
             }
             return nullptr;
         });
@@ -1906,7 +1906,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             [&](const ast::Array* a) -> sem::Call* {
                 Mark(a);
                 // array element type must be inferred if it was not specified.
-                auto el_count = static_cast<uint32_t>(args.Length());
+                auto el_count = std::optional<uint32_t>(static_cast<uint32_t>(args.Length()));
                 const sem::Type* el_ty = nullptr;
                 if (a->type) {
                     el_ty = Type(a->type);
@@ -2618,7 +2618,7 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
         return nullptr;
     }
 
-    uint32_t el_count = 0;  // sem::Array uses a size of 0 for a runtime-sized array.
+    std::optional<uint32_t> el_count = 0;  // sem::Array uses a size of 0 for a runtime-sized array.
 
     // Evaluate the constant array size expression.
     if (auto* count_expr = arr->count) {
@@ -2646,9 +2646,19 @@ sem::Array* Resolver::Array(const ast::Array* arr) {
     return out;
 }
 
-utils::Result<uint32_t> Resolver::ArrayCount(const ast::Expression* count_expr) {
+utils::Result<std::optional<uint32_t>> Resolver::ArrayCount(const ast::Expression* count_expr) {
+    auto* expr = Expression(count_expr);
+
+    // If the array size is an optional then it will get substituted by a later transform at which
+    // point the below checks will execute.
+    if (auto* var = expr->SourceVariable()) {
+        if (var->Declaration()->Is<ast::Override>()) {
+            return {};
+        }
+    }
+
     // Evaluate the constant array size expression.
-    const auto* count_sem = Materialize(Expression(count_expr));
+    const auto* count_sem = Materialize(expr);
     if (!count_sem) {
         return utils::Failure;
     }
@@ -2672,8 +2682,7 @@ utils::Result<uint32_t> Resolver::ArrayCount(const ast::Expression* count_expr) 
                  count_expr->source);
         return utils::Failure;
     }
-
-    return static_cast<uint32_t>(count);
+    return {static_cast<uint32_t>(count)};
 }
 
 bool Resolver::ArrayAttributes(utils::VectorRef<const ast::Attribute*> attributes,
@@ -2702,19 +2711,22 @@ bool Resolver::ArrayAttributes(utils::VectorRef<const ast::Attribute*> attribute
 
 sem::Array* Resolver::Array(const Source& source,
                             const sem::Type* el_ty,
-                            uint32_t el_count,
+                            std::optional<uint32_t> el_count,
                             uint32_t explicit_stride) {
     uint32_t el_align = el_ty->Align();
     uint32_t el_size = el_ty->Size();
     uint64_t implicit_stride = el_size ? utils::RoundUp<uint64_t>(el_align, el_size) : 0;
     uint64_t stride = explicit_stride ? explicit_stride : implicit_stride;
+    uint64_t size = 0;
 
-    auto size = std::max<uint64_t>(el_count, 1u) * stride;
-    if (size > std::numeric_limits<uint32_t>::max()) {
-        std::stringstream msg;
-        msg << "array size (0x" << std::hex << size << ") must not exceed 0xffffffff bytes";
-        AddError(msg.str(), source);
-        return nullptr;
+    if (el_count.has_value()) {
+        size = std::max<uint64_t>(el_count, 1u) * stride;
+        if (size > std::numeric_limits<uint32_t>::max()) {
+            std::stringstream msg;
+            msg << "array size (0x" << std::hex << size << ") must not exceed 0xffffffff bytes";
+            AddError(msg.str(), source);
+            return nullptr;
+        }
     }
     auto* out = builder_->create<sem::Array>(el_ty, el_count, el_align, static_cast<uint32_t>(size),
                                              static_cast<uint32_t>(stride),

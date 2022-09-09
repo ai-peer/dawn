@@ -2245,7 +2245,12 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
 
             ScopedParen sp(out);
 
-            for (size_t i = 0; i < a->Count(); i++) {
+            if (!a->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return false;
+            }
+            for (size_t i = 0; i < a->Count2(); i++) {
                 if (i > 0) {
                     out << ", ";
                 }
@@ -2366,7 +2371,12 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const sem::Type* type) {
             return false;
         }
         ScopedParen sp(out);
-        for (uint32_t i = 0; i < array->Count(); i++) {
+        if (!array->HasCount()) {
+            TINT_ICE(Writer, diagnostics_)
+                << "Array count should have been substituted before generation";
+            return false;
+        }
+        for (uint32_t i = 0; i < array->Count2(); i++) {
             if (i != 0) {
                 out << ", ";
             }
@@ -2702,7 +2712,12 @@ bool GeneratorImpl::EmitType(std::ostream& out,
         const sem::Type* base_type = ary;
         std::vector<uint32_t> sizes;
         while (auto* arr = base_type->As<sem::Array>()) {
-            sizes.push_back(arr->Count());
+            if (!arr->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return false;
+            }
+            sizes.push_back(arr->Count2());
             base_type = arr->ElemType();
         }
         if (!EmitType(out, base_type, storage_class, access, "")) {

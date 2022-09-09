@@ -214,7 +214,8 @@ uint32_t Type::ConversionRank(const Type* from, const Type* to) {
         },
         [&](const Array* from_arr) {
             if (auto* to_arr = to->As<Array>()) {
-                if (from_arr->Count() == to_arr->Count()) {
+                if (from_arr->HasCount() && to_arr->HasCount() &&
+                    from_arr->Count2() == to_arr->Count2()) {
                     return ConversionRank(from_arr->ElemType(), to_arr->ElemType());
                 }
             }
@@ -246,7 +247,11 @@ const Type* Type::ElementOf(const Type* ty, uint32_t* count /* = nullptr */) {
         },
         [&](const Array* a) {
             if (count) {
-                *count = a->Count();
+                if (a->HasCount()) {
+                    *count = a->Count2();
+                } else {
+                    *count = 0;
+                }
             }
             return a->ElemType();
         },

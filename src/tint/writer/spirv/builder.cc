@@ -1672,7 +1672,14 @@ uint32_t Builder::GenerateConstantIfNeeded(const sem::Constant* constant) {
         },
         [&](const sem::Vector* v) { return composite(v->Width()); },
         [&](const sem::Matrix* m) { return composite(m->columns()); },
-        [&](const sem::Array* a) { return composite(a->Count()); },
+        [&](const sem::Array* a) {
+            if (!a->HasCount()) {
+                TINT_ICE(Writer, builder_.Diagnostics())
+                    << "Array count should have been substituted before generation";
+                return 0;
+            }
+            return composite(a->Count2());
+        },
         [&](const sem::Struct* s) { return composite(s->Members().size()); },
         [&](Default) {
             error_ = "unhandled constant type: " + builder_.FriendlyName(ty);
@@ -3858,7 +3865,12 @@ bool Builder::GenerateArrayType(const sem::Array* ary, const Operand& result) {
     if (ary->IsRuntimeSized()) {
         push_type(spv::Op::OpTypeRuntimeArray, {result, Operand(elem_type)});
     } else {
-        auto len_id = GenerateConstantIfNeeded(ScalarConstant::U32(ary->Count()));
+        if (!ary->HasCount()) {
+            TINT_ICE(Writer, diagnostics_)
+                << "Array count should have been substituted before generation";
+            return false;
+        }
+        auto len_id = GenerateConstantIfNeeded(ScalarConstant::U32(ary->Count2()));
         if (len_id == 0) {
             return false;
         }

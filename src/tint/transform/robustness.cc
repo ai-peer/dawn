@@ -77,7 +77,13 @@ struct Robustness::State {
             size.u32 = vec->Width();
 
         } else if (auto* arr = ret_unwrapped->As<sem::Array>()) {
-            size.u32 = arr->Count();
+            if (!arr->HasCount()) {
+                TINT_ICE(Transform, b.Diagnostics())
+                    << "Array override should have been substituted prior to calling Robustness "
+                       "transform";
+                return nullptr;
+            }
+            size.u32 = arr->Count2();
         } else if (auto* mat = ret_unwrapped->As<sem::Matrix>()) {
             // The row accessor would have been an embedded index accessor and already
             // handled, so we just need to do columns here.

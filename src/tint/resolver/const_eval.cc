@@ -378,8 +378,11 @@ const Constant* ZeroValue(ProgramBuilder& builder, const sem::Type* type) {
             return builder.create<Splat>(type, zero_el, m->columns());
         },
         [&](const sem::Array* a) -> const Constant* {
+            if (!a->HasCount()) {
+                return nullptr;
+            }
             if (auto* zero_el = ZeroValue(builder, a->ElemType())) {
-                return builder.create<Splat>(type, zero_el, a->Count());
+                return builder.create<Splat>(type, zero_el, a->Count2());
             }
             return nullptr;
         },
@@ -435,7 +438,10 @@ bool Equal(const sem::Constant* a, const sem::Constant* b) {
             return true;
         },
         [&](const sem::Array* arr) {
-            for (size_t i = 0; i < arr->Count(); i++) {
+            if (!arr->HasCount()) {
+                return false;
+            }
+            for (size_t i = 0; i < arr->Count2(); i++) {
                 if (!Equal(a->Index(i), b->Index(i))) {
                     return false;
                 }

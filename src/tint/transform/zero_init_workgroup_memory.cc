@@ -307,7 +307,13 @@ struct ZeroInitWorkgroupMemory::State {
                 //      `num_values * arr->Count()`
                 // The index for this array is:
                 //      `(idx % modulo) / division`
-                auto modulo = num_values * arr->Count();
+
+                if (!arr->HasCount()) {
+                    TINT_ICE(Transform, b.Diagnostics())
+                        << "Array count should have been substituted before transformation";
+                    return Expression{};
+                }
+                auto modulo = num_values * arr->Count2();
                 auto division = num_values;
                 auto a = get_expr(modulo);
                 auto array_indices = a.array_indices;

@@ -118,7 +118,9 @@ class MaterializeTest : public resolver::ResolverTestWithParam<CASE> {
                 }
             },
             [&](const sem::Array* a) {
-                for (uint32_t i = 0; i < a->Count(); i++) {
+                ASSERT_TRUE(a->HasCount());
+
+                for (uint32_t i = 0; i < a->Count2(); i++) {
                     auto* el = value->Index(i);
                     ASSERT_NE(el, nullptr);
                     EXPECT_TYPE(el->Type(), a->ElemType());

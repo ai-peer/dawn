@@ -16,6 +16,7 @@
 #define SRC_TINT_SEM_ARRAY_H_
 
 #include <stdint.h>
+#include <optional>
 #include <string>
 
 #include "src/tint/sem/node.h"
@@ -29,16 +30,17 @@ class Array final : public Castable<Array, Type> {
     /// Constructor
     /// @param element the array element type
     /// @param count the number of elements in the array. 0 represents a
-    /// runtime-sized array.
+    /// runtime-sized array. An empty optional means the size is a pipeline override.
     /// @param align the byte alignment of the array
-    /// @param size the byte size of the array
+    /// @param size the byte size of the array. The size will be 0 if the array element count is
+    ///        pipepline overrideable.
     /// @param stride the number of bytes from the start of one element of the
     /// array to the start of the next element
     /// @param implicit_stride the number of bytes from the start of one element
     /// of the array to the start of the next element, if there was no `@stride`
     /// attribute applied.
     Array(Type const* element,
-          uint32_t count,
+          std::optional<uint32_t> count,
           uint32_t align,
           uint32_t size,
           uint32_t stride,
@@ -54,9 +56,13 @@ class Array final : public Castable<Array, Type> {
     /// @return the array element type
     Type const* ElemType() const { return element_; }
 
+    /// @returns true if the array count has a value.
+    bool HasCount() const { return count_.has_value(); }
+    /// @returns the optional holdin the number of elements in the array.
+    std::optional<uint32_t> CountRaw() const { return count_; }
     /// @returns the number of elements in the array. 0 represents a runtime-sized
     /// array.
-    uint32_t Count() const { return count_; }
+    uint32_t Count2() const { return count_.value(); }
 
     /// @returns the byte alignment of the array
     /// @note this may differ from the alignment of a structure member of this
@@ -95,7 +101,7 @@ class Array final : public Castable<Array, Type> {
 
   private:
     Type const* const element_;
-    const uint32_t count_;
+    const std::optional<uint32_t> count_;
     const uint32_t align_;
     const uint32_t size_;
     const uint32_t stride_;

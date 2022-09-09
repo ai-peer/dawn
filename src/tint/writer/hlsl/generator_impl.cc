@@ -3203,7 +3203,12 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             out << "{";
             TINT_DEFER(out << "}");
 
-            for (size_t i = 0; i < a->Count(); i++) {
+            if (!a->HasCount()) {
+                TINT_ICE(Writer, diagnostics_)
+                    << "Array count should have been substituted before generation";
+                return false;
+            }
+            for (size_t i = 0; i < a->Count2(); i++) {
                 if (i > 0) {
                     out << ", ";
                 }
@@ -3746,7 +3751,12 @@ bool GeneratorImpl::EmitType(std::ostream& out,
                            "been transformed into a ByteAddressBuffer";
                     return false;
                 }
-                sizes.push_back(arr->Count());
+                if (!arr->HasCount()) {
+                    TINT_ICE(Writer, diagnostics_)
+                        << "Array count should have been substituted before generation";
+                    return false;
+                }
+                sizes.push_back(arr->Count2());
                 base_type = arr->ElemType();
             }
             if (!EmitType(out, base_type, storage_class, access, "")) {
