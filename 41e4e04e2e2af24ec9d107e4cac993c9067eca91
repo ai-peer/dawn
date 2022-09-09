@@ -147,6 +147,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c2f487d_3b1406ac",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:37:02Z",
+      "side": 1,
+      "message": "maybe we should have a separate timeout status indeed - but overall, I don\u0027t want to close us off from using may_exonerate for other Status values.\n\nI want \"may_exonerate\" to mean \"there is reasonably low confidence in this as an actionable result\" which would work for any Status, so it\u0027s more like a (Status, confidence) pair\n\nso it could be that a Timeout happened for a known reason we\u0027d like to ignore. Or, it could be that a Failure/Crash was reported that is some known flake.\n\nI haven\u0027t figured out how to parse the crash dumps yet, but if we could, it would be nice. Every once in a while on Linux, we get crashes like in this comment:\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1286646#c6\nwhich seems like the driver just crashes and no one has been able to figure out why yet. Would be awesome if eventually we can be resilient to stuff like that.\n\n\n\n\u003e This is a slightly odd place to handle these. I think the most logical place to handle this would be the callback function.\n\nthe reason I did not do this is because the duration would accumulate even for exonerated results [1]. it would likely inflate the mean duration which I don\u0027t think we want.",
+      "parentUuid": "8b2703d3_4b941a22",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c248d354_a49c77fd",
         "filename": "tools/src/cts/result/result.go",
         "patchSetId": 1
@@ -163,6 +187,29 @@
         "startChar": 2,
         "endLine": 196,
         "endChar": 14
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1880737c_47ea3e63",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T18:37:02Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 223,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 25
       },
       "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
