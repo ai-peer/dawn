@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "937a61bf_a321eac6",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T14:49:35Z",
+      "side": 1,
+      "message": "question: why don\u0027t these get merged? since it fails both with webgpu-adapter-default and webgpu-adapter-swiftshader ?",
+      "range": {
+        "startLine": 662,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 130
+      },
+      "revId": "b7e02a11dd50552629433f4ebec5f4e3aca72af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
