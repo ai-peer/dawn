@@ -16,6 +16,156 @@
       "message": "Potentially controversial idea!\n\nwe still get timeout flake for \u003c1% of tests right now and I haven\u0027t had success in reproducing it. Or, iteration times are slow because I need to run many, many tests on the bots until it happens. So the goal of this CL is to reduce the impact of that timeout so the roller doesn\u0027t add expectations for it.\n\nOn the harness side, the plan is to add in may_exonerate if one of these timeout exceptions happen and we don\u0027t see any other error logs or crash dumps. That will make the harness retry it.",
       "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5607dc0c_38d2404f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "I\u0027m quite happy with the goals here. Just some questions about where the handling of this is done.",
+      "parentUuid": "807e91d5_c1c857fc",
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b56a63a_283f6bd2",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "`gofmt`. I\u0027d strongly recommend using the Go extension with VSCode for modifying or browsing go code. It has all sorts of goodies to make go development easy.",
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de385192_989989ef",
+        "filename": "tools/src/cmd/cts/update/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "This second argument is a bit weird. Given that the implementation just concatenates the lists then merges the flattened list, how about we change the `Merge` function to:\n\n```\n// Merge merges and sorts the result lists.\n// Duplicates are removed using the Deduplicate() function.\nfunc Merge(lists ...List) List {\n\tn :\u003d 0\n\tfor _, l :\u003d range lists {\n\t\tn +\u003d len(l)\n\t}\n\tmerged :\u003d make(List, 0, n)\n\tfor _, l :\u003d range lists {\n\t\tmerged \u003d append(merged, l)\n\t}\n\tout :\u003d merged.ReplaceDuplicates(Deduplicate)\n\tout.Sort()\n\treturn out\n}\n```\n\nThen this becomes `result.Merge(results)` which isn\u0027t quite so head-scratching.",
+      "range": {
+        "startLine": 70,
+        "startChar": 31,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee52cf75_ef2cf4d2",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "Maybe add a comment here. Without the context of this CL, it\u0027s not easy to know what this means.",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89815dc8_7d64baaa",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "nit: personal preference `/* MayExonerate */ false`",
+      "range": {
+        "startLine": 128,
+        "startChar": 46,
+        "endLine": 128,
+        "endChar": 51
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b2703d3_4b941a22",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "This is a slightly odd place to handle these. I think the most logical place to handle this would be the callback function.\n\nI\u0027m slightly torn - part of me feels like the `MayExonerate` could be another `Status` value. If we did this, then the logic could be sensibly handled in the callback `result.Deduplicate()` function. The other part of me isn\u0027t sure that `MayExonerate` is a result, but metadata. Based on your comment, it sounds like the origin of `MayExonerate` is actually a timeout. Would it make sense for the harness to just report that it timed out, and have that as a status?",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c248d354_a49c77fd",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-09T18:06:18Z",
+      "side": 1,
+      "message": "nit: snake case `keptIndices`",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
