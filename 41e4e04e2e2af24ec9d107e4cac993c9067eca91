@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa270c2_84b51ec3",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T20:43:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b56a63a_283f6bd2",
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de385192_989989ef",
@@ -66,6 +84,30 @@
       "writtenOn": "2022-09-09T18:06:18Z",
       "side": 1,
       "message": "This second argument is a bit weird. Given that the implementation just concatenates the lists then merges the flattened list, how about we change the `Merge` function to:\n\n```\n// Merge merges and sorts the result lists.\n// Duplicates are removed using the Deduplicate() function.\nfunc Merge(lists ...List) List {\n\tn :\u003d 0\n\tfor _, l :\u003d range lists {\n\t\tn +\u003d len(l)\n\t}\n\tmerged :\u003d make(List, 0, n)\n\tfor _, l :\u003d range lists {\n\t\tmerged \u003d append(merged, l)\n\t}\n\tout :\u003d merged.ReplaceDuplicates(Deduplicate)\n\tout.Sort()\n\treturn out\n}\n```\n\nThen this becomes `result.Merge(results)` which isn\u0027t quite so head-scratching.",
+      "range": {
+        "startLine": 70,
+        "startChar": 31,
+        "endLine": 70,
+        "endChar": 46
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450edf95_a185e3ba",
+        "filename": "tools/src/cmd/cts/update/update.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T20:43:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "de385192_989989ef",
       "range": {
         "startLine": 70,
         "startChar": 31,
@@ -99,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c6aa9a_d2611b81",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T20:43:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ee52cf75_ef2cf4d2",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 18
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89815dc8_7d64baaa",
@@ -112,6 +178,30 @@
       "writtenOn": "2022-09-09T18:06:18Z",
       "side": 1,
       "message": "nit: personal preference `/* MayExonerate */ false`",
+      "range": {
+        "startLine": 128,
+        "startChar": 46,
+        "endLine": 128,
+        "endChar": 51
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2c84c27_f4a144a8",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T20:43:36Z",
+      "side": 1,
+      "message": "It kept putting the comment before the comma `duration /* MayExonerate */, false`\nso I put it on the other side of the false.",
+      "parentUuid": "89815dc8_7d64baaa",
       "range": {
         "startLine": 128,
         "startChar": 46,
@@ -182,6 +272,30 @@
       "writtenOn": "2022-09-09T18:06:18Z",
       "side": 1,
       "message": "nit: snake case `keptIndices`",
+      "range": {
+        "startLine": 196,
+        "startChar": 2,
+        "endLine": 196,
+        "endChar": 14
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d10137e6_f4cf1eba",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-09T20:43:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c248d354_a49c77fd",
       "range": {
         "startLine": 196,
         "startChar": 2,
