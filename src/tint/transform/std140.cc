@@ -356,8 +356,7 @@ struct Std140::State {
     }
 
     /// @returns a new, forked std140 AST type for the corresponding non-forked semantic type. If
-    /// the
-    ///          semantic type is not split for std140-layout, then nullptr is returned.
+    ///          the semantic type is not split for std140-layout, then nullptr is returned.
     const ast::Type* Std140Type(const sem::Type* ty) const {
         return Switch(
             ty,  //
@@ -373,7 +372,17 @@ struct Std140::State {
                     if (!arr->IsStrideImplicit()) {
                         attrs.Push(ctx.dst->create<ast::StrideAttribute>(arr->Stride()));
                     }
-                    return b.create<ast::Array>(std140, b.Expr(u32(arr->Count())),
+                    auto count = arr->ConstantCount();
+                    if (!count) {
+                        // Non-constant counts should not be possible:
+                        // * Override-expression counts can only be applied to workgroup arrays, and
+                        //   this method only handles types transitively used as uniform buffers.
+                        // * Runtime-sized arrays cannot be used in uniform buffers.
+                        TINT_ICE(Transform, ctx.dst->Diagnostics())
+                            << "unexpected non-constant array count";
+                        count = 1;
+                    }
+                    return b.create<ast::Array>(std140, b.Expr(u32(count.value())),
                                                 std::move(attrs));
                 }
                 return nullptr;
@@ -512,7 +521,18 @@ struct Std140::State {
             ty,  //
             [&](const sem::Struct* str) { return sym.NameFor(str->Name()); },
             [&](const sem::Array* arr) {
-                return "arr_" + std::to_string(arr->Count()) + "_" + ConvertSuffix(arr->ElemType());
+                auto count = arr->ConstantCount();
+                if (!count) {
+                    // Non-constant counts should not be possible:
+                    // * Override-expression counts can only be applied to workgroup arrays, and
+                    //   this method only handles types transitively used as uniform buffers.
+                    // * Runtime-sized arrays cannot be used in uniform buffers.
+                    TINT_ICE(Transform, ctx.dst->Diagnostics())
+                        << "unexpected non-constant array count";
+                    count = 1;
+                }
+                return "arr_" + std::to_string(count.value()) + "_" +
+                       ConvertSuffix(arr->ElemType());
             },
             [&](Default) {
                 TINT_ICE(Transform, b.Diagnostics())
@@ -589,10 +609,20 @@ struct Std140::State {
                     auto* i = b.Var("i", b.ty.u32());
                     auto* dst_el = b.IndexAccessor(var, i);
                     auto* src_el = Convert(arr->ElemType(), b.IndexAccessor(param, i));
+                    auto count = arr->ConstantCount();
+                    if (!count) {
+                        // Non-constant counts should not be possible:
+                        // * Override-expression counts can only be applied to workgroup arrays, and
+                        //   this method only handles types transitively used as uniform buffers.
+                        // * Runtime-sized arrays cannot be used in uniform buffers.
+                        TINT_ICE(Transform, ctx.dst->Diagnostics())
+                            << "unexpected non-constant array count";
+                        count = 1;
+                    }
                     stmts.Push(b.Decl(var));
-                    stmts.Push(b.For(b.Decl(i),                         //
-                                     b.LessThan(i, u32(arr->Count())),  //
-                                     b.Assign(i, b.Add(i, 1_a)),        //
+                    stmts.Push(b.For(b.Decl(i),                          //
+                                     b.LessThan(i, u32(count.value())),  //
+                                     b.Assign(i, b.Add(i, 1_a)),         //
                                      b.Block(b.Assign(dst_el, src_el))));
                     stmts.Push(b.Return(var));
                 },

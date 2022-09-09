@@ -75,9 +75,16 @@ struct Robustness::State {
         size.is_signed = false;  // size is always unsigned
         if (auto* vec = ret_unwrapped->As<sem::Vector>()) {
             size.u32 = vec->Width();
-
         } else if (auto* arr = ret_unwrapped->As<sem::Array>()) {
-            size.u32 = arr->Count();
+            if (arr->IsRuntimeSized()) {
+                size.u32 = 0;
+            } else if (auto count = arr->ConstantCount()) {
+                size.u32 = count.value();
+            } else {
+                ctx.dst->Diagnostics().add_error(diag::System::Transform,
+                                                 sem::Array::kErrExpectedConstantCount);
+                size.u32 = 1;
+            }
         } else if (auto* mat = ret_unwrapped->As<sem::Matrix>()) {
             // The row accessor would have been an embedded index accessor and already
             // handled, so we just need to do columns here.
