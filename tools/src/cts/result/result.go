@@ -31,10 +31,11 @@ import (
 
 // Result holds the result of a CTS test
 type Result struct {
-	Query    query.Query
-	Tags     Tags
-	Status   Status
-	Duration time.Duration
+	Query        query.Query
+	Tags         Tags
+	Status       Status
+	Duration     time.Duration
+	MayExonerate bool
 }
 
 // Format writes the Result to the fmt.State
@@ -124,7 +125,7 @@ func Parse(in string) (Result, error) {
 		if err != nil {
 			return Result{}, fmt.Errorf("unable to parse result '%v': %w", in, err)
 		}
-		return Result{query, nil, status, duration}, nil
+		return Result{query, nil, status, duration, false}, nil
 	} else {
 		tags := StringToTags(b)
 		status := Status(c)
@@ -132,7 +133,7 @@ func Parse(in string) (Result, error) {
 		if err != nil {
 			return Result{}, fmt.Errorf("unable to parse result '%v': %w", in, err)
 		}
-		return Result{query, tags, status, duration}, nil
+		return Result{query, tags, status, duration, false}, nil
 	}
 }
 
@@ -165,10 +166,11 @@ func (l List) TransformTags(f func(Tags) Tags) List {
 			cache[key] = tags
 		}
 		out = append(out, Result{
-			Query:    r.Query,
-			Tags:     tags,
-			Status:   r.Status,
-			Duration: r.Duration,
+			Query:        r.Query,
+			Tags:         tags,
+			Status:       r.Status,
+			Duration:     r.Duration,
+			MayExonerate: r.MayExonerate,
 		})
 	}
 	return out
@@ -188,6 +190,23 @@ func (l List) ReplaceDuplicates(f func(Statuses) Status) List {
 	for i, r := range l {
 		k := key{r.Query, TagsToString(r.Tags)}
 		keyToIndices[k] = append(keyToIndices[k], i)
+	}
+	// Filter out exonerated results
+	for key, indices := range keyToIndices {
+		kept_indices := []int{}
+		for _, i := range indices {
+			// Copy all indices which are not exonerated into kept_indices.
+			if !l[i].MayExonerate {
+				kept_indices = append(kept_indices, i)
+			}
+		}
+
+		// Change indices to only the kept ones. If kept_indices is empty,
+		// then all results were marked with may_exonerate, and we keep all
+		// of them.
+		if len(kept_indices) > 0 {
+			keyToIndices[key] = kept_indices
+		}
 	}
 	// Resolve duplicates
 	type StatusAndDuration struct {
@@ -221,10 +240,11 @@ func (l List) ReplaceDuplicates(f func(Statuses) Status) List {
 		k := key{r.Query, TagsToString(r.Tags)}
 		if sd, ok := merged[k]; ok {
 			out = append(out, Result{
-				Query:    r.Query,
-				Tags:     r.Tags,
-				Status:   sd.Status,
-				Duration: sd.Duration,
+				Query:        r.Query,
+				Tags:         r.Tags,
+				Status:       sd.Status,
+				Duration:     sd.Duration,
+				MayExonerate: l[keyToIndices[k][0]].MayExonerate,
 			})
 			delete(merged, k) // Remove from map to prevent duplicates
 		}

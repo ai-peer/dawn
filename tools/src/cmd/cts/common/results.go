@@ -219,6 +219,7 @@ func GetResults(
 		tags := result.NewTags()
 
 		duration := rpb.GetDuration().AsDuration()
+		may_exonerate := false
 
 		for _, sp := range rpb.Tags {
 			if sp.Key == "typ_tag" {
@@ -227,6 +228,12 @@ func GetResults(
 			if sp.Key == "javascript_duration" {
 				var err error
 				if duration, err = time.ParseDuration(sp.Value); err != nil {
+					return err
+				}
+			}
+			if sp.Key == "may_exonerate" {
+				var err error
+				if may_exonerate, err = strconv.ParseBool(sp.Value); err != nil {
 					return err
 				}
 			}
@@ -241,6 +248,7 @@ func GetResults(
 			Status:   status,
 			Tags:     tags,
 			Duration: duration,
+			MayExonerate: may_exonerate,
 		})
 
 		return nil
