@@ -743,6 +743,72 @@ TEST_P(TextureFormatTest, RG11B10Ufloat) {
     // This format is not renderable.
 }
 
+class RG11B10UfloatRenderableTest : public TextureFormatTest {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        if (SupportsFeatures({wgpu::FeatureName::RG11B10UfloatRenderable})) {
+            mIsFormatSupported = true;
+            return {wgpu::FeatureName::RG11B10UfloatRenderable};
+        } else {
+            mIsFormatSupported = false;
+            return {};
+        }
+    }
+
+    void SetUp() override {
+        TextureFormatTest::SetUp();
+        DAWN_TEST_UNSUPPORTED_IF(!mIsFormatSupported);
+    }
+
+  private:
+    bool mIsFormatSupported = false;
+};
+
+// Test the RG11B10Ufloat format with "rg11b10ufloat-renderable" feature enabled
+TEST_P(RG11B10UfloatRenderableTest, RG11B10UfloatRenderable) {
+    constexpr uint32_t kFloat11Zero = 0;
+    constexpr uint32_t kFloat11Infinity = 0x7C0;
+    constexpr uint32_t kFloat11Nan = 0x7C1;
+    constexpr uint32_t kFloat11One = 0x3C0;
+
+    constexpr uint32_t kFloat10Zero = 0;
+    constexpr uint32_t kFloat10Infinity = 0x3E0;
+    constexpr uint32_t kFloat10Nan = 0x3E1;
+    constexpr uint32_t kFloat10One = 0x1E0;
+
+    auto MakeRG11B10 = [](uint32_t r, uint32_t g, uint32_t b) {
+        ASSERT((r & 0x7FF) == r);
+        ASSERT((g & 0x7FF) == g);
+        ASSERT((b & 0x3FF) == b);
+        return r | g << 11 | b << 22;
+    };
+
+    // Test each of (0, 1, INFINITY, NaN) for each component but never two with the same value at a
+    // time.
+    std::vector<uint32_t> textureData = {
+        MakeRG11B10(kFloat11Zero, kFloat11Infinity, kFloat10Nan),
+        MakeRG11B10(kFloat11Infinity, kFloat11Nan, kFloat10One),
+        MakeRG11B10(kFloat11Nan, kFloat11One, kFloat10Zero),
+        MakeRG11B10(kFloat11One, kFloat11Zero, kFloat10Infinity),
+    };
+
+    // This is one of the only 3-channel formats, so we don't have specific testing for them. Alpha
+    // should always be sampled as 1
+    // clang-format off
+    std::vector<float> uncompressedData = {
+        0.0f,     INFINITY, NAN,      1.0f,
+        INFINITY, NAN,      1.0f,     1.0f,
+        NAN,      1.0f,     0.0f,     1.0f,
+        1.0f,     0.0f,     INFINITY, 1.0f
+    };
+    // clang-format on
+
+    // This format is renderable if "rg11b10ufloat-renderable" feature is enabled
+    DoFormatRenderingTest(
+        {wgpu::TextureFormat::RG11B10Ufloat, 4, wgpu::TextureComponentType::Float, 4},
+        uncompressedData, textureData);
+}
+
 // Test the RGB9E5Ufloat format
 TEST_P(TextureFormatTest, RGB9E5Ufloat) {
     // RGB9E5 is different from other floating point formats because the mantissa doesn't index in
@@ -791,6 +857,13 @@ TEST_P(TextureFormatTest, RGB9E5Ufloat) {
 }
 
 DAWN_INSTANTIATE_TEST(TextureFormatTest,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+DAWN_INSTANTIATE_TEST(RG11B10UfloatRenderableTest,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
