@@ -436,6 +436,22 @@ class TextureFormatTest : public DawnTest {
         DoFormatRenderingTest(formatInfo, uncompressedData, textureData,
                               new ExpectFloat16(textureData));
     }
+
+    // For "rg11b10ufloat-renderable" feature test
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        if (SupportsFeatures({wgpu::FeatureName::RG11B10UfloatRenderable})) {
+            mIsRG11B10UfloatRenderableSupported = true;
+            return {wgpu::FeatureName::RG11B10UfloatRenderable};
+        } else {
+            mIsRG11B10UfloatRenderableSupported = false;
+            return {};
+        }
+    }
+
+    bool IsRG11B10UfloatRenderableSupported() { return mIsRG11B10UfloatRenderableSupported; }
+
+  private:
+    bool mIsRG11B10UfloatRenderableSupported = false;
 };
 
 // Test the R8Unorm format
@@ -740,7 +756,13 @@ TEST_P(TextureFormatTest, RG11B10Ufloat) {
     DoFloatFormatSamplingTest(
         {wgpu::TextureFormat::RG11B10Ufloat, 4, wgpu::TextureComponentType::Float, 4}, textureData,
         uncompressedData);
-    // This format is not renderable.
+
+    // This format is renderable if "rg11b10ufloat-renderable" feature is enabled
+    if (IsRG11B10UfloatRenderableSupported()) {
+        DoFormatRenderingTest(
+            {wgpu::TextureFormat::RG11B10Ufloat, 4, wgpu::TextureComponentType::Float, 4},
+            uncompressedData, textureData);
+    }
 }
 
 // Test the RGB9E5Ufloat format

@@ -56,6 +56,15 @@ bool Adapter::IsDepthStencilFormatSupported(VkFormat format) {
     return properties.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT;
 }
 
+bool Adapter::IsRG11B10UfloatRenderableFormatSupported() {
+    VkFormatProperties properties;
+    mVulkanInstance->GetFunctions().GetPhysicalDeviceFormatProperties(
+        mPhysicalDevice, VK_FORMAT_B10G11R11_UFLOAT_PACK32, &properties);
+
+    return (properties.optimalTilingFeatures & VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT) &&
+           (properties.optimalTilingFeatures & VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT);
+}
+
 MaybeError Adapter::InitializeImpl() {
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
@@ -179,6 +188,10 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     if (mDeviceInfo.HasExt(DeviceExt::DepthClipEnable) &&
         mDeviceInfo.depthClipEnableFeatures.depthClipEnable == VK_TRUE) {
         mSupportedFeatures.EnableFeature(Feature::DepthClipControl);
+    }
+
+    if (IsRG11B10UfloatRenderableFormatSupported()) {
+        mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
     }
 
 #if defined(DAWN_USE_SYNC_FDS)
