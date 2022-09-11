@@ -54,6 +54,8 @@ class Adapter : public AdapterBase {
         wgpu::FeatureName feature,
         const TripleStateTogglesSet& userProvidedToggles) override;
 
+    bool IsRG11B10UfloatRenderableFormatSupported();
+
     VkPhysicalDevice mPhysicalDevice;
     Ref<VulkanInstance> mVulkanInstance;
     VulkanDeviceInfo mDeviceInfo = {};
