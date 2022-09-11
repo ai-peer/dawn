@@ -740,7 +740,13 @@ TEST_P(TextureFormatTest, RG11B10Ufloat) {
     DoFloatFormatSamplingTest(
         {wgpu::TextureFormat::RG11B10Ufloat, 4, wgpu::TextureComponentType::Float, 4}, textureData,
         uncompressedData);
-    // This format is not renderable.
+
+    // This format is renderable if "rg11b10ufloat-renderable" feature is enabled
+    if (SupportsFeatures({wgpu::FeatureName::RG11B10UfloatRenderable})) {
+        DoFormatRenderingTest(
+            {wgpu::TextureFormat::RG11B10Ufloat, 4, wgpu::TextureComponentType::Float, 4},
+            uncompressedData, textureData);
+    }
 }
 
 // Test the RGB9E5Ufloat format
