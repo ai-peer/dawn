@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7434f1ba_a86020ab",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-12T16:58:48Z",
+      "side": 1,
+      "message": "Loko says this is needed because for error TextureViews, because mTexture \u003d\u003d nullptr. Makes sense to me then. But, maybe we can still avoid the extra boolean if we have GetTrackingMutex return nullptr in that case, with a comment about why\n\nit\u0027s also a slight optimization since error textures shouldn\u0027t need to grab the mutex. the error case is not super important to me though.",
+      "parentUuid": "d22f48de_7130928d",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5c2d722_7e668a54",
         "filename": "src/dawn/native/ObjectBase.h",
         "patchSetId": 2
