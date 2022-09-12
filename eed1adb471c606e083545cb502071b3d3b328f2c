@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2eadea03_eb53b733",
+        "filename": "src/tint/transform/pad_structs.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:09:34Z",
+      "side": 1,
+      "message": "Yes please. There\u0027s no reason for the output of this transform emit attributes that are just an internal implementation detail of the transform. Please use `utils::Hashset`, as I\u0027m trying to migrate the codebase over to these instead of the STL, as we\u0027re drowning in small heap allocations.",
+      "parentUuid": "37ea6ada_3f3ac14d",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "650f1136_813eaa16",
         "filename": "src/tint/transform/pad_structs.cc",
         "patchSetId": 3
@@ -236,6 +260,24 @@
       "writtenOn": "2022-09-09T17:15:51Z",
       "side": 1,
       "message": "Note that these tests could probably be removed, since the functionality is no longer handled in the writer, and no longer differs between ES and Desktop (and there are transform tests which cover it).",
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d98d72_74a9eef1",
+        "filename": "src/tint/writer/glsl/generator_impl_storage_buffer_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:09:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fa28c14c_013d6614",
       "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
