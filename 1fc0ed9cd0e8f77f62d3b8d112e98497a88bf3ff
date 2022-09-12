@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a85b8000_b72d23b8",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-12T19:34:25Z",
+      "side": 1,
+      "message": "could we have tests of multisampling? There\u0027s MultisampledRenderingTests.cpp and MultisampledSamplingTests.cpp",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 74,
+        "endChar": 56
+      },
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb2769cf_82582390",
         "filename": "src/dawn/native/Features.h",
         "patchSetId": 1
