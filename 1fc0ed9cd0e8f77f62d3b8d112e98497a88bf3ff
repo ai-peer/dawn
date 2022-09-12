@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708faaf6_2fd6813e",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1388,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-12T17:56:41Z",
+      "side": 1,
+      "message": "Right now the casing of the format is different in the TextureFormat [1] and FeatureName enums. Could they be made to match?",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de69e165_188f825f",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-12T17:56:41Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb2769cf_82582390",
+        "filename": "src/dawn/native/Features.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-12T17:56:41Z",
+      "side": 1,
+      "message": "The feature is not enabled in any backend. Did you mean to add checks for support in the backend code?",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3bcc5b_3f8eff79",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-12T17:56:41Z",
+      "side": 1,
+      "message": "The feature is never enabled in the test so this code never runs. See for example src/dawn/tests/end2end/DepthStencilSamplingTests.cpp on how to enable a feature for testing.",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "107bade6_f4bfbf59",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-12T17:56:41Z",
+      "side": 1,
+      "message": "Is there a test that creating a renderable rg11b10ufloat texture is an error without the extension?",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
