@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3baa6ee1_63c8cba0",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3742,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:06:04Z",
+      "side": 1,
+      "message": "nit: would be nice to check that the 2nd element can be `true`",
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfda3385_fbadc517",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:06:04Z",
+      "side": 1,
+      "message": "Curious to know why you needed to make this change?",
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57f1331_0fe40897",
+        "filename": "test/tint/bug/tint/1541.wgsl.expected.msl",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:06:04Z",
+      "side": 1,
+      "message": "This is no longer exercising the original bug. Please move one of the `true` values to a let in `true \u0026 true`",
+      "range": {
+        "startLine": 5,
+        "startChar": 18,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
