@@ -259,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa058536_374b5bf4",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:11:13Z",
+      "side": 1,
+      "message": "Okidoki. Makes sense.",
+      "parentUuid": "1c2f487d_3b1406ac",
+      "range": {
+        "startLine": 194,
+        "startChar": 4,
+        "endLine": 194,
+        "endChar": 33
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c248d354_a49c77fd",
@@ -319,6 +343,30 @@
       "writtenOn": "2022-09-09T18:37:02Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 223,
+        "startChar": 1,
+        "endLine": 223,
+        "endChar": 25
+      },
+      "revId": "41e4e04e2e2af24ec9d107e4cac993c9067eca91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "142823cf_c6684e0d",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:11:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1880737c_47ea3e63",
       "range": {
         "startLine": 223,
         "startChar": 1,

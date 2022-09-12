@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee657fb_c37ebe23",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:11:13Z",
+      "side": 1,
+      "message": "nit: `mayExonerate`",
+      "range": {
+        "startLine": 222,
+        "startChar": 2,
+        "endLine": 222,
+        "endChar": 15
+      },
+      "revId": "59e9ee3894df81d0e88af2b7a99357b398d452b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
