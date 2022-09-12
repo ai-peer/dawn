@@ -109,6 +109,30 @@
       },
       "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a6dc175_857e8032",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-12T17:15:07Z",
+      "side": 1,
+      "message": "Loko said:\n\n\u003e Trying to optimize the ApiObjectList is a bit funky as well and my idea is to change LinkedList a bit overall... I think that LinkedNodes should have a pointer to the LinkedList they are a part of. If we do that, then LinkedList can have a RemoveNode or something that would assert the node is in the same list, then remove the node. (And in a ThreadSafeLinkedList which extends LinkedList, we could override RemoveNode to get the lock before removing it also). This would also work for Append and MoveInto which we (can) use in/instead of DeviceBase.TrackObject()/DeviceBase.DestroyObjects() respectively since we could move the LinkedNodes from a ThreadSafeLinkedList into a normal LinkedList to avoid needing to get the locks again in the while loop there. Not sure if that is super clear, but lemme know what you think.\n\nJust to be clear, you don\u0027t have to address this now unless you want to - it can be done later in a follow-up since the lists we\u0027re using now already have questionable thread safety.\n\nI think the ideas makes sense but it would be nice to not need a back pointer to the list since that would bloat every object. We need to get the list so we can get the list\u0027s mutex. This is easy for InsertBefore(list.head()) or list.MoveInto(\u0026otherList); since we\u0027re basically already getting the list. The tricky one is LinkNode::RemoveFromList(); Perhaps we can do something like:\n\n```\ntemplate\u003ctypename T\u003e\nclass ThreadSafeLinkNode : private LinkNode\u003cT\u003e {\n public:\n  bool RemoveFromList(ThreadSafeLinkedList\u003cT\u003e* list) {\n    const std::lock_guard\u003cstd::mutex\u003e lock(list-\u003eGetMutex());\n    LinkNode\u003cT\u003e::RemoveFromList();\n  }\n};\n\ntemplate\u003ctypename T\u003e\nclass ThreadSafeLinkedList {\n public:\n  bool RemoveNode(ThreadSafeLinkNode\u003cT\u003e* node) {\n    return node-\u003eRemoveFromList(this);\n  }\n};\n```\n\nthis way, we pass the list as an arg instead of storing it in the nodes",
+      "parentUuid": "f5c2d722_7e668a54",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 43
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
