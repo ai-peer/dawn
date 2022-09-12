@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee3960c_f57c64c5",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3114,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:46:45Z",
+      "side": 1,
+      "message": "Nit: I usually prefer to have an enum for this pattern (`enum class Action { kStop, kContinue };`), as meaning of `return true;` in the callback is entirely unobvious.",
+      "range": {
+        "startLine": 3114,
+        "startChar": 54,
+        "endLine": 3114,
+        "endChar": 79
+      },
+      "revId": "4bdcf98f4a1941570f759562bcfc064740eeea28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
