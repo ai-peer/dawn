@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998102fa_a85188a1",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4746,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:41:30Z",
+      "side": 1,
+      "message": "create",
+      "range": {
+        "startLine": 4746,
+        "startChar": 54,
+        "endLine": 4746,
+        "endChar": 59
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610ba1c5_fe9c9607",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:41:30Z",
+      "side": 1,
+      "message": "Consider using `std::optional`. It\u0027s more explicit than magic numbers. IIUC, this could also absorb the `locally_defined` flag.",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 57
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ea22a60_d087f345",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:41:30Z",
+      "side": 1,
+      "message": "These are either both `MAX_UINT` and `0` respectively, or block positions? If so, I\u0027d recommend putting in a `Use` struct and replacing this with `std::optional\u003cUse\u003e`.",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d101eab4_bbc3636f",
+        "filename": "src/tint/reader/spirv/function_var_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:41:30Z",
+      "side": 1,
+      "message": "Nicely done!",
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a338f084_a83d7bee",
+        "filename": "src/tint/reader/spirv/function_var_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-12T22:41:30Z",
+      "side": 1,
+      "message": "Remove?",
+      "range": {
+        "startLine": 1737,
+        "startChar": 2,
+        "endLine": 1737,
+        "endChar": 30
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
