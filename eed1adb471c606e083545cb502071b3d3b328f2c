@@ -319,6 +319,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ba18e9_599c0b46",
+        "filename": "src/tint/transform/pad_structs_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T17:56:25Z",
+      "side": 1,
+      "message": "It doesn\u0027t really matter if the internal structures write padding bytes, so long as the final assignments to buffers go element-wise.",
+      "parentUuid": "32b5a57b_60195651",
+      "range": {
+        "startLine": 562,
+        "startChar": 6,
+        "endLine": 562,
+        "endChar": 25
+      },
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa28c14c_013d6614",
