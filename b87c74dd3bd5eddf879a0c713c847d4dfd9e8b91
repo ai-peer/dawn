@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de829bc6_615f3c7a",
+        "filename": "src/tint/sem/array.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T21:36:17Z",
+      "side": 1,
+      "message": "After much head-scratching and internal \u0026 [external discussion](https://github.com/gpuweb/gpuweb/issues/3441), this should probably become:\n\n`std::variant\u003cuint32_t, const sem::GlobalVariable*\u003e`\n\nSo the array type can be checked for equality against another with the same override variable.",
+      "range": {
+        "startLine": 64,
+        "startChar": 10,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "b87c74dd3bd5eddf879a0c713c847d4dfd9e8b91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
