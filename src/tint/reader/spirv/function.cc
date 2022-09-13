@@ -415,7 +415,7 @@ std::string GetGlslStd450FuncName(uint32_t ext_opcode) {
         case GLSLstd450Acosh:
         case GLSLstd450Atanh:
 
-        case GLSLstd450MatrixInverse:
+            // case GLSLstd450MatrixInverse:
 
         case GLSLstd450Modf:
         case GLSLstd450ModfStruct:
@@ -4042,6 +4042,76 @@ TypedExpression FunctionEmitter::EmitGlslStd450ExtInst(const spvtools::opt::Inst
             }
             default:
                 break;
+        }
+    } else {
+        switch (ext_opcode) {
+            case GLSLstd450MatrixInverse: {
+                auto m = MakeOperand(inst, 2);
+                auto* mat = m.type->As<Matrix>();
+                TINT_ASSERT(Reader, mat);
+                TINT_ASSERT(Reader, mat->columns == mat->rows);
+                auto& b = builder_;
+
+                auto idx = [&](size_t row, size_t col) {
+                    return b.IndexAccessor(b.IndexAccessor(m.expr, u32(row)), u32(col));
+                };
+
+                // Compute and save determinant in a let variable
+                auto* det = b.Div(1.0_f, b.Call(Source{}, "determinant", m.expr));
+                auto s = b.Symbols().New("s");
+                AddStatement(b.Decl(b.Let(s, det)));
+
+                switch (mat->columns) {
+                    case 2: {
+                        auto* ns = b.Negation(s);
+                        auto* r =
+                            b.mat2x2<f32>(b.vec2<f32>(b.Mul(s, idx(0, 0)), b.Mul(ns, idx(0, 1))),
+                                          b.vec2<f32>(b.Mul(ns, idx(1, 0)), b.Mul(ns, idx(0, 0))));
+                        return {m.type, r};
+                    }
+
+                    case 3: {
+                        // a, b, c,
+                        // d, e, f,
+                        // g, h, i
+                        auto r = b.mat3x3<f32>(  //
+                            b.vec3<f32>(
+                                // s * (e * i - f * h)
+                                b.Mul(s, b.Sub(b.Mul(idx(1, 1), idx(2, 2)),
+                                               b.Mul(idx(1, 2), idx(2, 1)))),
+                                // s * (c * h - b * i)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 2), idx(2, 1)),
+                                               b.Mul(idx(0, 1), idx(2, 2)))),
+                                // s * (b * f - c * e)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 1), idx(1, 2)),
+                                               b.Mul(idx(0, 2), idx(1, 1))))),
+
+                            b.vec3<f32>(
+                                // s * (f * g - d * i)
+                                b.Mul(s, b.Sub(b.Mul(idx(1, 2), idx(2, 1)),
+                                               b.Mul(idx(1, 0), idx(2, 2)))),
+                                // s * (a * i - c * g)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 0), idx(2, 2)),
+                                               b.Mul(idx(0, 2), idx(2, 0)))),
+                                // s * (c * d - a * f)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 2), idx(1, 0)),
+                                               b.Mul(idx(0, 0), idx(1, 2))))),
+                            b.vec3<f32>(
+                                // s * (d * h - e * g)
+                                b.Mul(s, b.Sub(b.Mul(idx(1, 0), idx(2, 1)),
+                                               b.Mul(idx(1, 1), idx(2, 1)))),
+                                // s * (b * g - a * h)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 1), idx(2, 0)),
+                                               b.Mul(idx(0, 0), idx(2, 1)))),
+                                // s * (a * e - b * d)
+                                b.Mul(s, b.Sub(b.Mul(idx(0, 0), idx(1, 1)),
+                                               b.Mul(idx(0, 1), idx(1, 0))))));
+                        return {m.type, r};
+                    }
+                }
+                // Fail() << "unhandled Matrix inverse";
+                // return {};
+            }
         }
     }
 
