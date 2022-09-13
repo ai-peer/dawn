@@ -16,6 +16,23 @@
       "message": "nvm, don\u0027t review this",
       "revId": "bad08674cada2b57338168a6138ea38163a30a2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d620429b_bd6c9d45",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:29:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "bad08674cada2b57338168a6138ea38163a30a2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
