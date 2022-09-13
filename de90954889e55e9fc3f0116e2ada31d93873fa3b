@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e608a7fe_4a2bb38a",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3742,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-13T16:22:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3baa6ee1_63c8cba0",
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfda3385_fbadc517",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17ef4c4d_c4de6d2d",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-13T16:22:05Z",
+      "side": 1,
+      "message": "Happened when I added calls to Vec() that took in l-values, like:\n\n`Vec(B::All, B::LeftMost, B::RightMost)`\n\nIn this case, `T` becomes a const reference to something (e.g. `const AInt\u0026`), and creating a `VectorRef\u003cconst AInt\u0026\u003e` doesn\u0027t work because of functions like `begin()` that returns a `T*` (can\u0027t return point to reference).\n\nI had two ways to fix this: use `std::remove_reference\u003cT\u003e` on the `VectorRef` template arg, or what I did here: make `Vec()` take `T` by value, not forwarding ref. Since this is only used with primitive types, and I don\u0027t forward anyway, I went with the latter.",
+      "parentUuid": "bfda3385_fbadc517",
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c57f1331_0fe40897",
         "filename": "test/tint/bug/tint/1541.wgsl.expected.msl",
         "patchSetId": 2
@@ -48,6 +84,30 @@
       "writtenOn": "2022-09-12T22:06:04Z",
       "side": 1,
       "message": "This is no longer exercising the original bug. Please move one of the `true` values to a let in `true \u0026 true`",
+      "range": {
+        "startLine": 5,
+        "startChar": 18,
+        "endLine": 5,
+        "endChar": 22
+      },
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a588dd92_2b6c7743",
+        "filename": "test/tint/bug/tint/1541.wgsl.expected.msl",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-13T16:22:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c57f1331_0fe40897",
       "range": {
         "startLine": 5,
         "startChar": 18,
