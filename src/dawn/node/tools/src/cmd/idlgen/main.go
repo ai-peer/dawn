@@ -111,6 +111,7 @@ func run() error {
 		"AttributesOf":               attributesOf,
 		"ConstantsOf":                constantsOf,
 		"EnumEntryName":              enumEntryName,
+		"JavaEnumEntryName":          javaEnumEntryName,
 		"Eval":                       g.eval,
 		"HasAnnotation":              hasAnnotation,
 		"Include":                    g.include,
@@ -134,6 +135,7 @@ func run() error {
 		"Lookup":                     g.lookup,
 		"MethodsOf":                  methodsOf,
 		"SetlikeOf":                  setlikeOf,
+		"TypedefOf":                  func(ty ast.Type) *ast.Typedef { return typedefOf(ty, idl) },
 		"Title":                      strings.Title,
 	}
 	t, err := g.t.
@@ -402,9 +404,12 @@ type generator struct {
 // eval executes the sub-template with the given name and arguments, returning
 // the generated output
 // args can be a single argument:
-//   arg[0]
+//
+//	arg[0]
+//
 // or a list of name-value pairs:
-//   (args[0]: name, args[1]: value), (args[2]: name, args[3]: value)...
+//
+//	(args[0]: name, args[1]: value), (args[2]: name, args[3]: value)...
 func (g *generator) eval(template string, args ...interface{}) (string, error) {
 	target := g.t.Lookup(template)
 	if target == nil {
@@ -510,6 +515,15 @@ func isUndefinedType(ty ast.Type) bool {
 // enumEntryName formats the enum entry name 's' for use in a C++ enum.
 func enumEntryName(s string) string {
 	return "k" + strings.ReplaceAll(pascalCase(strings.Trim(s, `"`)), "-", "")
+}
+
+// javaEnumEntryName formats the enum entry name 's' for use in a Java enum.
+func javaEnumEntryName(s string) string {
+	str := strings.ReplaceAll(pascalCase(strings.Trim(s, `"`)), "-", "")
+	if len(str) > 0 && str[0] >= '0' && str[0] <= '9' {
+		return "_" + str
+	}
+	return str
 }
 
 func findAnnotation(list []*ast.Annotation, name string) *ast.Annotation {
@@ -628,6 +642,16 @@ func setlikeOf(obj interface{}) *ast.Pattern {
 	for _, pattern := range iface.Patterns {
 		if pattern.Type == ast.Setlike {
 			return pattern
+		}
+	}
+	return nil
+}
+
+// typedefOf returns ast.Typedef that resolves to the given type.
+func typedefOf(ty ast.Type, file *ast.File) *ast.Typedef {
+	for _, decl := range file.Declarations {
+		if td, ok := decl.(*ast.Typedef); ok && td.Type == ty {
+			return td
 		}
 	}
 	return nil
