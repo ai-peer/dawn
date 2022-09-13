@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7082dad8_e0d898f0",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:06:13Z",
+      "side": 1,
+      "message": "I think this should have worked if you did `memcmp(lhs, rhs, sizeof(double)) \u003d\u003d 0`.\n`memcmp` returns 0 when they are exactly equal",
+      "range": {
+        "startLine": 849,
+        "startChar": 40,
+        "endLine": 849,
+        "endChar": 92
+      },
+      "revId": "1f73ba091d07f1b8bcd4b511cfee78200469aa98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf90a20b_2cbe2d73",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:06:13Z",
+      "side": 1,
+      "message": "\"predictor\" seems an odd name. I might just say \"EqualForCache\"",
+      "range": {
+        "startLine": 87,
+        "startChar": 5,
+        "endLine": 87,
+        "endChar": 35
+      },
+      "revId": "1f73ba091d07f1b8bcd4b511cfee78200469aa98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd8effd9_1efe3804",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:06:13Z",
+      "side": 1,
+      "message": "I think this one, we should *not* expect a cache hit. I don\u0027t think we need to go so far to consider different types of NaNs equal. We really only care about the same byte-for-byte request",
+      "range": {
+        "startLine": 195,
+        "startChar": 4,
+        "endLine": 203,
+        "endChar": 77
+      },
+      "revId": "1f73ba091d07f1b8bcd4b511cfee78200469aa98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
