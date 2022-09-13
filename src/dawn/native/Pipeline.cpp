@@ -67,6 +67,9 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
         DAWN_INVALID_IF(metadata.overrides.count(constants[i].key) == 0,
                         "Pipeline overridable constant \"%s\" not found in %s.", constants[i].key,
                         module);
+        DAWN_INVALID_IF(std::isnan(constants[i].value) || std::isinf(constants[i].value),
+                        "Pipeline overridable constant \"%s\" with value (%f) is invalid",
+                        constants[i].key, constants[i].value);
 
         if (stageInitializedConstantIdentifiers.count(constants[i].key) == 0) {
             if (metadata.uninitializedOverrides.count(constants[i].key) > 0) {
