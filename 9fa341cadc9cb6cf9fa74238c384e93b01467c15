@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c9f942_26d19c4a",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T17:47:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7f1510_155e7b06",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44c89f47_fcca56d2",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-13T17:26:28Z",
       "side": 1,
       "message": "existing nit: \"expectation\" ?",
+      "range": {
+        "startLine": 325,
+        "startChar": 3,
+        "endLine": 325,
+        "endChar": 8
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e55cd5b_54b42b4f",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T17:47:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44c89f47_fcca56d2",
       "range": {
         "startLine": 325,
         "startChar": 3,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab886a1_8db7701e",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T17:47:13Z",
+      "side": 1,
+      "message": "Yeah, I was going to clean this up as a follow-up, but I agree it should have probably been part of this change. Done.",
+      "parentUuid": "ae5e9e15_916178a6",
+      "range": {
+        "startLine": 344,
+        "startChar": 22,
+        "endLine": 344,
+        "endChar": 47
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cceb2d97_56ca5cd2",
@@ -100,6 +172,24 @@
       "writtenOn": "2022-09-13T17:26:28Z",
       "side": 1,
       "message": "these webgpu:shader,execution,expression,call,builtin,* failures are what you\u0027re trying to fix with the additional heartbeats? is the plan to wait on that?",
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c36a56_ec988920",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T17:47:13Z",
+      "side": 1,
+      "message": "The bulk of this is just regeneration from the most recent CTS roll. The changes adjust the way things are clustered, and I\u0027m pulling results from a single PS instead of the glob of multiple passes, so stuff is changing.\n\nI do however need the heartbeat changes to handle the removal of `\ncrbug.com/dawn/0000 [ win ] webgpu:shader,execution,expression,binary,f32_logical:* [ Slow ]`. So this will all likely change, yet again, once I do another roll and rebase.",
+      "parentUuid": "cceb2d97_56ca5cd2",
       "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
