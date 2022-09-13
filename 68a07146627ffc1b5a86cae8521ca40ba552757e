@@ -54,6 +54,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7700be07_5be628e8",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T22:57:56Z",
+      "side": 1,
+      "message": "I think it\u0027s because it\u0027s re-entrant.\n\nApiObjectList::Destroy loops through the objects and calls Destroy on each one, which calls object-\u003eGetObjectTrackingList()-\u003eUntrack(this);\n\nshould probably have some comments describing this, and then also probably a good idea to make mMarkedDestroyed an enum with three states. Alive, Destroying, Destroyed.",
+      "parentUuid": "82b58669_eaa36658",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e54562_dbbb1538",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T22:57:56Z",
+      "side": 1,
+      "message": "uunit: maybe we should use !IsAlive()",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 112,
+        "endChar": 5
+      },
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "747cdafc_5ce83122",
         "filename": "src/dawn/native/ObjectBase.h",
         "patchSetId": 4
@@ -65,6 +106,24 @@
       "writtenOn": "2022-09-13T21:48:38Z",
       "side": 1,
       "message": "nit: The name change got me confused, we\u0027re tracking the object for future destruction. Maybe add that to the comment?",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9745d4e0_7767fdf6",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T22:57:56Z",
+      "side": 1,
+      "message": "maybe we should just not have this method at all and always call `GetObjectTrackingList()-\u003eTrack(this)` to avoid confusion. idk?",
+      "parentUuid": "747cdafc_5ce83122",
       "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
