@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6c732a_b605186f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:48:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b893b69_e6ece9ed",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:48:38Z",
+      "side": 1,
+      "message": "Given the comment, shouldn\u0027t this be\n\n```\nif (!destroyed) {\n  mutex\n  prepend\n} else {\n  destroy\n}\n```\n\n?",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82b58669_eaa36658",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:48:38Z",
+      "side": 1,
+      "message": "When does this happen? Could it be an ASSERT?",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "747cdafc_5ce83122",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:48:38Z",
+      "side": 1,
+      "message": "nit: The name change got me confused, we\u0027re tracking the object for future destruction. Maybe add that to the comment?",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
