@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebbda10_9ed45e7e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:15:22Z",
+      "side": 1,
+      "message": "nit: We usually tag the commits with bug numbers like so:\n\nBug: dawn:\u003cnumber\u003e",
+      "revId": "5c838abdd114a962876541d7b424bbe81cb18c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03c867f_482bd1d0",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:15:22Z",
+      "side": 1,
+      "message": "This should probably be at [1] instead to control that only internal targets get the flags added.",
+      "revId": "5c838abdd114a962876541d7b424bbe81cb18c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "690809f2_f04ef6b0",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:15:22Z",
+      "side": 1,
+      "message": "Since we are in an MSVC block, do can\u0027t we skip the generator expression and just add /utf-8?",
+      "revId": "5c838abdd114a962876541d7b424bbe81cb18c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4464d8_9485ec5b",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-13T21:15:22Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5c838abdd114a962876541d7b424bbe81cb18c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
