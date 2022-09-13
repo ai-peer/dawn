@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e680aa0b_87928203",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T16:53:43Z",
+      "side": 1,
+      "message": "Ack, thanks!",
+      "parentUuid": "17ef4c4d_c4de6d2d",
+      "revId": "de90954889e55e9fc3f0116e2ada31d93873fa3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c57f1331_0fe40897",
