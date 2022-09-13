@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e83c7ccc_62397dbf",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-13T23:36:53Z",
+      "side": 1,
+      "message": "Just saw your comments at https://dawn-review.googlesource.com/c/dawn/+/102201/comments/fd8effd9_1efe3804\nWe don\u0027t care about this cache hit. I will remove this.",
+      "revId": "a557d3519b24e7dd53adedc847e296d77740006f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
