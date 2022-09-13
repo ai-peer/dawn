@@ -13,9 +13,10 @@
 # limitations under the License.
 
 # Paths to generated files
-set(INTEROP_GEN_DIR    "${DAWN_NODE_GEN_DIR}/src/dawn/node/interop")
-set(INTEROP_WEBGPU_H   "${INTEROP_GEN_DIR}/WebGPU.h")
-set(INTEROP_WEBGPU_CPP "${INTEROP_GEN_DIR}/WebGPU.cpp")
+set(INTEROP_GEN_DIR     "${DAWN_NODE_GEN_DIR}/src/dawn/node/interop")
+set(INTEROP_WEBGPU_H    "${INTEROP_GEN_DIR}/WebGPU.h")
+set(INTEROP_WEBGPU_CPP  "${INTEROP_GEN_DIR}/WebGPU.cpp")
+set(INTEROP_WEBGPU_JAVA "${INTEROP_GEN_DIR}/java/WebGPU.java")
 
 idlgen(
     TEMPLATE
@@ -41,11 +42,22 @@ idlgen(
         "${INTEROP_WEBGPU_CPP}"
 )
 
+idlgen(
+    TEMPLATE
+        "${CMAKE_CURRENT_SOURCE_DIR}/WebGPU.java.tmpl"
+    IDLS
+        "${CMAKE_CURRENT_SOURCE_DIR}/Browser.idl"
+        "${WEBGPU_IDL_PATH}"
+    OUTPUT
+        "${INTEROP_WEBGPU_JAVA}"
+)
+
 add_library(dawn_node_interop STATIC
     "Core.cpp"
     "Core.h"
     "${INTEROP_WEBGPU_H}"
     "${INTEROP_WEBGPU_CPP}"
+    "${INTEROP_WEBGPU_JAVA}"
 )
 common_compile_options(dawn_node_interop)
 
