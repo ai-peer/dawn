@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "82607d4e9c524464334d85415ca46c393d44374c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4353d165_6d42b1e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T19:49:29Z",
+      "side": 1,
+      "message": "whoops, I need to check the CLA",
+      "revId": "82607d4e9c524464334d85415ca46c393d44374c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
