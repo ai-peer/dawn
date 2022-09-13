@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b38ec9_4e3b738e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:26:28Z",
+      "side": 1,
+      "message": "LGTM I thought a while about the tree reduction again. Seems like maybe we can have an entirely separate simplify pass instead of trying to do the reduction as we go. Then, maybe we can have similar expectation matching rules as `typ`. But anyway, seems hard to do right now and we should get some validation in for the roller.",
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7f1510_155e7b06",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:26:28Z",
+      "side": 1,
+      "message": "this was the old name of the file. maybe say \"WebGPU expectations.txt\" file",
+      "range": {
+        "startLine": 42,
+        "startChar": 21,
+        "endLine": 42,
+        "endChar": 38
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c89f47_fcca56d2",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:26:28Z",
+      "side": 1,
+      "message": "existing nit: \"expectation\" ?",
+      "range": {
+        "startLine": 325,
+        "startChar": 3,
+        "endLine": 325,
+        "endChar": 8
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5e9e15_916178a6",
+        "filename": "tools/src/cts/expectations/update.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:26:28Z",
+      "side": 1,
+      "message": "I would expected this function to change either to share the same tagsColllide logic, or change to just `glob` since you\u0027re only supposed to run Update on an already Validated list of expectations",
+      "range": {
+        "startLine": 344,
+        "startChar": 22,
+        "endLine": 344,
+        "endChar": 47
+      },
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cceb2d97_56ca5cd2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 635,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T17:26:28Z",
+      "side": 1,
+      "message": "these webgpu:shader,execution,expression,call,builtin,* failures are what you\u0027re trying to fix with the additional heartbeats? is the plan to wait on that?",
+      "revId": "9fa341cadc9cb6cf9fa74238c384e93b01467c15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
