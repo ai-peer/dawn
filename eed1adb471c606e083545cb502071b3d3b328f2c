@@ -295,6 +295,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b5a57b_60195651",
+        "filename": "src/tint/transform/pad_structs_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-13T17:42:41Z",
+      "side": 1,
+      "message": "One thing I forgot to mention: if we truly are going to have avoid ever touching the padding bytes, all of this (and all aggregate assignments) will have to be rewritten to use helper functions anyway.",
+      "parentUuid": "8e324ec4_b79ee024",
+      "range": {
+        "startLine": 562,
+        "startChar": 6,
+        "endLine": 562,
+        "endChar": 25
+      },
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa28c14c_013d6614",
