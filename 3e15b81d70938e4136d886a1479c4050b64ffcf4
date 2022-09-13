@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "103d7505_ef2c7263",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-13T02:47:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c12eb43f_fb37c68f",
+      "range": {
+        "startLine": 74,
+        "startChar": 20,
+        "endLine": 74,
+        "endChar": 25
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d22f48de_7130928d",
@@ -88,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f0630ea_35cb91c1",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-13T02:47:04Z",
+      "side": 1,
+      "message": "Using the `IsInList` can allow us to remove the bool for now. I think that thread-safety-wise, though, this might not be air-tight this way... (i.e. Racing `device.destroy()` with a `device.create*` on separate threads?) But leaving that for post-V1.",
+      "parentUuid": "7434f1ba_a86020ab",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 19
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5c2d722_7e668a54",
@@ -125,6 +173,30 @@
       "side": 1,
       "message": "Loko said:\n\n\u003e Trying to optimize the ApiObjectList is a bit funky as well and my idea is to change LinkedList a bit overall... I think that LinkedNodes should have a pointer to the LinkedList they are a part of. If we do that, then LinkedList can have a RemoveNode or something that would assert the node is in the same list, then remove the node. (And in a ThreadSafeLinkedList which extends LinkedList, we could override RemoveNode to get the lock before removing it also). This would also work for Append and MoveInto which we (can) use in/instead of DeviceBase.TrackObject()/DeviceBase.DestroyObjects() respectively since we could move the LinkedNodes from a ThreadSafeLinkedList into a normal LinkedList to avoid needing to get the locks again in the while loop there. Not sure if that is super clear, but lemme know what you think.\n\nJust to be clear, you don\u0027t have to address this now unless you want to - it can be done later in a follow-up since the lists we\u0027re using now already have questionable thread safety.\n\nI think the ideas makes sense but it would be nice to not need a back pointer to the list since that would bloat every object. We need to get the list so we can get the list\u0027s mutex. This is easy for InsertBefore(list.head()) or list.MoveInto(\u0026otherList); since we\u0027re basically already getting the list. The tricky one is LinkNode::RemoveFromList(); Perhaps we can do something like:\n\n```\ntemplate\u003ctypename T\u003e\nclass ThreadSafeLinkNode : private LinkNode\u003cT\u003e {\n public:\n  bool RemoveFromList(ThreadSafeLinkedList\u003cT\u003e* list) {\n    const std::lock_guard\u003cstd::mutex\u003e lock(list-\u003eGetMutex());\n    LinkNode\u003cT\u003e::RemoveFromList();\n  }\n};\n\ntemplate\u003ctypename T\u003e\nclass ThreadSafeLinkedList {\n public:\n  bool RemoveNode(ThreadSafeLinkNode\u003cT\u003e* node) {\n    return node-\u003eRemoveFromList(this);\n  }\n};\n```\n\nthis way, we pass the list as an arg instead of storing it in the nodes",
       "parentUuid": "f5c2d722_7e668a54",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 43
+      },
+      "revId": "3e15b81d70938e4136d886a1479c4050b64ffcf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c082f6c_bf7f9c09",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-13T02:47:04Z",
+      "side": 1,
+      "message": "Did the small refactor in this CL since it\u0027s not too big of a change. Addressed the issues a little differently now so take a look and lmk what you think.",
+      "parentUuid": "3a6dc175_857e8032",
       "range": {
         "startLine": 93,
         "startChar": 0,
