@@ -1,0 +1,374 @@
+{{/*
+ Copyright 2021 The Dawn Authors
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+*/}}
+
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with src/dawn/node/tools/cmd/idlgen/main.go to generate
+the WebGPU.h header file.
+
+See:
+* https://github.com/ben-clayton/webidlparser/blob/main/ast/ast.go for the AST
+  types used by this template
+* src/dawn/node/tools/cmd/idlgen/main.go for additional structures and functions
+  used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+package com.google.dawn;
+
+
+{{- $ast := . -}}
+
+{{  range $ := .Declarations}}
+{{-        if IsDictionary $}}{{template "Dictionary" $}}
+{{-   else if IsNamespace  $}}{{template "Namespace" $}}
+{{-   else if IsInterface  $}}{{template "Interface" $}}
+{{-   else if IsEnum       $}}{{template "Enum" $}}
+{{-   else if IsTypedef    $}}{{template "Typedef" $}}
+{{-   end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Type generates the Java type for the given ast.Type
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Type" -}}
+{{-        if IsUndefinedType $}}void
+{{-   else if IsTypeName      $}}
+{{-          if eq $.Name "boolean"             }}boolean
+{{-     else if eq $.Name "short"               }}Int
+{{-     else if eq $.Name "unsigned short"      }}Int
+{{-     else if eq $.Name "long"                }}Long
+{{-     else if eq $.Name "unsigned long"       }}Long
+{{-     else if eq $.Name "long long"           }}Long
+{{-     else if eq $.Name "unsigned long long"  }}Long
+{{-     else if eq $.Name "object"              }}Object
+{{-     else if eq $.Name "DOMString"           }}String
+{{-     else if eq $.Name "USVString"           }}String
+{{-     else if eq $.Name "ArrayBuffer"         }}ArrayBuffer
+{{-     else if IsInterface (Lookup $.Name)     }}{{$.Name}}
+{{-     else                                    }}{{$.Name}}
+{{-     end                                     }}
+{{-   else if IsParametrizedType $}}{{$.Name}}<{{template "TypeList" $.Elems}}>
+{{-   else if IsNullableType     $}}{{template "Type" $.Type}}
+{{-   else if IsUnionType        $}}{{template "UnionTypeName" $}}
+{{-   else if IsSequenceType     $}}List<{{template "Type" $.Elem}}>
+{{-   else if IsRecordType       $}}Map<{{template "Type" $.Key}}, {{template "Type" $.Elem}}>
+{{-   else                        }} /* Unhandled Type {{printf "%T" $}} */
+{{-   end -}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- UnionType generates the Java type for the given ast.UnionType
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "UnionType" -}}
+public class {{template "UnionTypeName" $.Name}} {
+}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- UnionType generates the Java type for the given ast.UnionType
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "UnionTypeName" -}}
+{{-   $td := TypedefOf $}}
+{{-   if $td}}
+{{-     $td.Name}}
+{{-   else -}}
+/*union-type-without-typedef*/ Object
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- AttributeType generates the Java type for the given ast.Member
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "AttributeType" -}}
+{{-   if      $.Required }}{{template "AttributeClampHelper" $}}
+{{-   else if $.Init     }}{{template "AttributeClampHelper" $}}
+{{-   else               }}{{template "AttributeClampHelper" $}}
+{{-   end}}
+{{- end }}
+
+
+{{- /*
+    A helper for AttributeType that wraps integer types if necessary for WebIDL attributes.
+    Note that [Clamp] and [EnforceRange] are supposed to be an annotation on the type and not
+    the attribute, but webidlparser doesn't parse this correctly.
+*/ -}}
+{{- define "AttributeClampHelper" -}}
+{{-   if HasAnnotation $ "Clamp" }}
+ClampedInteger<{{template "Type" $.Type}}>
+{{-   else -}}
+{{template "Type" $.Type}}
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Literal generates a Java literal value using the following arguments:
+--   Value - the ast.Literal
+--   Type  - the ast.Type of the literal
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Literal" -}}
+{{-   if      IsDefaultDictionaryLiteral $.Value}}new {{template "Type" $.Type}}()
+{{-   else if IsTypeName                 $.Type }}
+{{-     $ty := Lookup $.Type.Name}}
+{{-     if      IsTypedef      $ty     }}{{Eval "Literal" "Value" $.Value "Type" $ty.Type}}
+{{-     else if IsEnum         $ty     }}{{$.Type.Name}}.{{JavaEnumEntryName $.Value.Value}}
+{{-     else if IsBasicLiteral $.Value }}{{$.Value.Value}}
+{{-     else                           }}/* Unhandled Type {{printf "ty: %T $.Type.Name: %T $.Value: %T" $ty $.Type.Name $.Value}} */
+{{-     end                            }}
+{{-   else if IsSequenceType $.Type  }}new {{template "Type" $.Type}}() {{- /* TODO: Assumes the initialiser is empty */}}
+{{-   else if IsBasicLiteral $.Value }}{{$.Value.Value}}
+{{-   else }} /* Unhandled Type {{printf "%T %T" $.Type $.Value}} */
+{{-   end}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- TypeList generates a Java comma separated list of types from the given
+-- []ast.Type
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TypeList" -}}
+{{-   range $i, $ty := $}}
+{{-     if $i }}, {{end}}
+{{-     template "Type" $ty}}
+{{-   end}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- VariantTypeList generates a Java comma separated list of types from the given
+-- []ast.Type, skipping any 'undefined' types
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "VariantTypeList" -}}
+{{-   range $i, $ty := $}}
+{{-     if $i }}, {{end}}
+{{-     if IsUndefinedType $ty -}}
+          UndefinedType
+{{-     else}}
+{{-       template "Type" $ty}}
+{{-     end}}
+{{-   end}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Dictionary emits the Java header declaration that defines the interop type for
+-- the given ast.Dictionary
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Dictionary"}}
+// dictionary {{$.Name}}
+public class {{$.Name}} {{- if $.Inherits }} extends {{$.Inherits}}{{end}} {
+{{   range $m := $.Members}}
+{{-    if      IsConstructor $m}}  {{$.Name}}();
+{{     else if IsMember      $m}}  {{template "DictionaryMember" $m}}
+{{     end}}
+{{-  end -}}
+}
+{{end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Namespace emits the Java header declaration that defines the interop type for
+-- the given ast.Namespace
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Namespace"}}
+// namespace {{$.Name}}
+public class {{$.Name}} {
+{{-  range $c := ConstantsOf $}}
+{{-    template "Constant" $c}}
+{{-  end}}
+}
+{{end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Interface emits the Java header declaration that defines the interop type for
+-- the given ast.Interface
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Interface"}}
+// interface {{$.Name}}
+public interface {{$.Name}} {{- if $.Inherits }} extends {{$.Inherits}}{{end}} {
+{{-  if $s := SetlikeOf $}}
+{{-    template "InterfaceSetlike" $s}}
+{{-  end}}
+{{-  range $m := MethodsOf $}}
+{{-    template "InterfaceMethod" $m}}
+{{-  end}}
+{{-  range $a := AttributesOf $}}
+{{-    template "InterfaceAttribute" $a}}
+{{-  end}}
+{{-  range $c := ConstantsOf  $}}
+{{-    template "Constant" $c}}
+{{-  end}}
+}
+{{end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Typedef emits the Java header declaration that defines the interop type for
+-- the given ast.Typedef
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Typedef"}}
+public class {{$.Name}} extends {{template "Type" $.Type}} {}
+{{end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Enum emits the Java header declaration that defines the interop type for
+-- the given ast.Enum
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Enum"}}
+public enum {{$.Name}} {
+{{-  range $ := $.Values}}
+  {{JavaEnumEntryName $.Value}},
+{{-  end}}
+}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- DictionaryMember emits the Java declaration for a single dictionary ast.Member
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "DictionaryMember"}}
+{{-   if $.Attribute}}public {{template "AttributeType" $}} {{$.Name}}
+{{-     if $.Init}} = {{Eval "Literal" "Value" $.Init "Type" $.Type}}{{end}};
+{{-   else          }}public {{template "Type" $.Type}} {{$.Name}}({{template "Parameters" $.Parameters}});
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- InterfaceSetlike emits the Java methods for a setlike interface
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "InterfaceSetlike"}}
+  public boolean has({{template "Type" $.Elem}} value);
+  public List<{{template "Type" $.Elem}}> keys();
+{{- /* TODO(crbug.com/dawn/1143):
+       entries, forEach, size, values
+       read-write: add, clear, or delete
+*/}}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- InterfaceMethod emits the Java declaration for a single interface ast.Member
+-- method
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "InterfaceMethod"}}
+{{-   range $o := $.Overloads}}
+  public {{template "Type" $o.Type}} {{$.Name}}({{template "Parameters" $o.Parameters}});
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- InterfaceAttribute emits the Java declaration for a single interface
+-- ast.Member attribute
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "InterfaceAttribute"}}
+  public {{template "Type" $.Type}} get{{Title $.Name}}();
+{{-   if not $.Readonly}}
+  public void set{{Title $.Name}}({{template "Type" $.Type}} value);
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Constant emits the Java declaration for a single ast.Member constant
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Constant"}}
+  public static {{template "Type" $.Type}} {{$.Name}} = {{Eval "Literal" "Value" $.Init "Type" $.Type}};
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Parameters emits the Java comma separated list of parameter declarations for
+-- the given []ast.Parameter
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Parameters"}}
+{{-   range $i, $param := $ }}
+{{-     if $i }}, {{end}}
+{{-     template "Parameter" $param}}
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- ParametersWithLeadingComma emits the Java comma separated list of parameter
+-- declarations for the given []ast.Parameter, starting with a leading comma
+-- for the first parameter
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "ParametersWithLeadingComma"}}
+{{-   range $i, $param := $ }}, {{/*  */}}
+{{-     template "Parameter" $param}}
+{{-   end }}
+{{- end }}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Parameter emits the Java parameter type and name for the given ast.Parameter
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Parameter" -}}
+{{-   if      $.Init    }}{{template "Type" $.Type}} {{$.Name}}
+{{-   else if $.Optional}}{{template "Type" $.Type}} {{$.Name}}
+{{-   else              }}{{template "Type" $.Type}} {{$.Name}}
+{{-   end               }}
+{{- end}}
