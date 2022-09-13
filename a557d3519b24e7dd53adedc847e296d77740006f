@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d103225b_f8a4c40f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:49:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a557d3519b24e7dd53adedc847e296d77740006f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e83c7ccc_62397dbf",
@@ -14,6 +31,52 @@
       "writtenOn": "2022-09-13T23:36:53Z",
       "side": 1,
       "message": "Just saw your comments at https://dawn-review.googlesource.com/c/dawn/+/102201/comments/fd8effd9_1efe3804\nWe don\u0027t care about this cache hit. I will remove this.",
+      "revId": "a557d3519b24e7dd53adedc847e296d77740006f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62be0bf8_a3e972c4",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:49:40Z",
+      "side": 1,
+      "message": "-NaN",
+      "range": {
+        "startLine": 231,
+        "startChar": 19,
+        "endLine": 231,
+        "endChar": 22
+      },
+      "revId": "a557d3519b24e7dd53adedc847e296d77740006f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4018ac4_992a1c79",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:49:40Z",
+      "side": 1,
+      "message": "seems like it\u0027s testing implementation details of what these expressions evaluate to. Maybe not needed?",
+      "range": {
+        "startLine": 247,
+        "startChar": 3,
+        "endLine": 256,
+        "endChar": 5
+      },
       "revId": "a557d3519b24e7dd53adedc847e296d77740006f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
