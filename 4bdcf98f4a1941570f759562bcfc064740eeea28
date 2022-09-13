@@ -22,6 +22,30 @@
       },
       "revId": "4bdcf98f4a1941570f759562bcfc064740eeea28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "091a8b53_80c07b82",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3114,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-13T16:21:51Z",
+      "side": 1,
+      "message": "Done as a new CL: https://dawn-review.googlesource.com/c/dawn/+/102121",
+      "parentUuid": "dee3960c_f57c64c5",
+      "range": {
+        "startLine": 3114,
+        "startChar": 54,
+        "endLine": 3114,
+        "endChar": 79
+      },
+      "revId": "4bdcf98f4a1941570f759562bcfc064740eeea28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
