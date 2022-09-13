@@ -124,6 +124,24 @@
       "message": "Is there a test that creating a renderable rg11b10ufloat texture is an error without the extension?",
       "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daa61914_3456aea4",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-13T06:50:06Z",
+      "side": 1,
+      "message": "I think there is\n\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/a1f245cc0eaf6df53f383c33da8ce1f69adc8134:src/dawn/tests/unittests/validation/TextureValidationTests.cpp;l\u003d25;drc\u003d256e026f6406bbf9cf03c518e66eedebff457921;bpv\u003d1;bpt\u003d0\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/a1f245cc0eaf6df53f383c33da8ce1f69adc8134:src/dawn/tests/unittests/validation/TextureValidationTests.cpp;l\u003d611;drc\u003d256e026f6406bbf9cf03c518e66eedebff457921;bpv\u003d1;bpt\u003d0",
+      "parentUuid": "107bade6_f4bfbf59",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
