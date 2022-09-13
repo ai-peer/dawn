@@ -80,6 +80,12 @@ enum class InterpolationSampling {
 
 // Use map to make sure constant keys are sorted for creating shader cache keys
 using PipelineConstantEntries = std::map<std::string, double>;
+using PipelineConstantEntry = PipelineConstantEntries::value_type;
+
+// This binary predictor is used to compare if two pipeline constant entries are equal instead of
+// default equality operator to avoid NaN comparison issues.
+bool PipelineConstantEntryPredictor(const PipelineConstantEntry& lhs,
+                                    const PipelineConstantEntry& rhs);
 
 // A map from name to EntryPointMetadata.
 using EntryPointMetadataTable =

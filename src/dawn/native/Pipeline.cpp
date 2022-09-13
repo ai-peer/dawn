@@ -250,7 +250,7 @@ bool PipelineBase::EqualForCache(const PipelineBase* a, const PipelineBase* b) {
 
         // If the constants.size are the same, we still need to compare the key and value.
         if (!std::equal(a->mStages[stage].constants.begin(), a->mStages[stage].constants.end(),
-                        b->mStages[stage].constants.begin())) {
+                        b->mStages[stage].constants.begin(), PipelineConstantEntryPredictor)) {
             return false;
         }
     }

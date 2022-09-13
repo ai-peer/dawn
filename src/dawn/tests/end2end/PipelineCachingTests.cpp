@@ -14,6 +14,7 @@
 
 #include <memory>
 #include <string_view>
+#include <vector>
 
 #include "dawn/tests/DawnTest.h"
 #include "dawn/tests/mocks/platform/CachingInterfaceMock.h"
@@ -28,6 +29,13 @@ using ::testing::NiceMock;
 
 static constexpr std::string_view kComputeShaderDefault = R"(
         @compute @workgroup_size(1) fn main() {}
+    )";
+
+static constexpr std::string_view kComputeShaderOverrides = R"(
+        override a: f32;
+        @compute @workgroup_size(1) fn main() {
+            _ = a;
+        }
     )";
 
 static constexpr std::string_view kComputeShaderMultipleEntryPoints = R"(
@@ -160,6 +168,39 @@ TEST_P(SinglePipelineCachingTests, ComputePipelineFrontedCache) {
     EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0),
                        samePipeline = device.CreateComputePipeline(&desc));
     EXPECT_EQ(pipeline.Get() == samePipeline.Get(), !UsesWire());
+}
+
+// Tests that pipeline creation on the same device uses frontend cache properly with NaN constants.
+TEST_P(SinglePipelineCachingTests, ComputePipelineFrontedCacheConstantsNaN) {
+    wgpu::ComputePipelineDescriptor desc;
+    std::vector<wgpu::ConstantEntry> constants{{nullptr, "a", std::nan("")}};
+    desc.compute.module = utils::CreateShaderModule(device, kComputeShaderOverrides.data());
+    desc.compute.entryPoint = "main";
+    desc.compute.constants = constants.data();
+    desc.compute.constantCount = constants.size();
+
+    // First creation should create a cache entry.
+    wgpu::ComputePipeline pipeline;
+    EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(counts.shaderModule + counts.pipeline),
+                       pipeline = device.CreateComputePipeline(&desc));
+
+    // Second creation on the same device should just return from frontend cache and should not
+    // call out to the blob cache.
+    EXPECT_CALL(mMockCache, LoadData).Times(0);
+    wgpu::ComputePipeline samePipeline;
+    EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0),
+                       samePipeline = device.CreateComputePipeline(&desc));
+    EXPECT_EQ(pipeline.Get() == samePipeline.Get(), !UsesWire());
+
+    // Creation with a different NaN value should still hit the cache.
+    EXPECT_CALL(mMockCache, LoadData).Times(0);
+    wgpu::ComputePipeline samePipelineDifferentNaN;
+    std::vector<wgpu::ConstantEntry> differentConstants{{nullptr, "a", std::nan("2")}};
+    desc.compute.constants = differentConstants.data();
+    desc.compute.constantCount = differentConstants.size();
+    EXPECT_CACHE_STATS(mMockCache, Hit(0), Add(0),
+                       samePipelineDifferentNaN = device.CreateComputePipeline(&desc));
+    EXPECT_EQ(pipeline.Get() == samePipelineDifferentNaN.Get(), !UsesWire());
 }
 
 // Tests that pipeline creation hits the cache when it is enabled.

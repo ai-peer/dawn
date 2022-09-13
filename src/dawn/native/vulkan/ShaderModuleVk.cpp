@@ -66,7 +66,8 @@ bool TransformedShaderModuleCacheKey::operator==(
         constants.size() != other.constants.size()) {
         return false;
     }
-    if (!std::equal(constants.begin(), constants.end(), other.constants.begin())) {
+    if (!std::equal(constants.begin(), constants.end(), other.constants.begin(),
+                    PipelineConstantEntryPredictor)) {
         return false;
     }
     return true;

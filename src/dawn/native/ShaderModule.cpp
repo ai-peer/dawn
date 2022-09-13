@@ -844,6 +844,23 @@ MaybeError ReflectShaderUsingTint(const DeviceBase* device,
 }
 }  // anonymous namespace
 
+bool PipelineConstantEntryPredictor(const PipelineConstantEntry& lhs,
+                                    const PipelineConstantEntry& rhs) {
+    // return lhs.first == rhs.first && std::memcmp(&lhs.second, &rhs.second, sizeof(double));
+
+    if (lhs.first != rhs.first) {
+        return false;
+    }
+
+    // Declare NaN values being equivalent in terms of shader/pipeline cache.
+    if (std::isnan(lhs.second) && std::isnan(rhs.second)) {
+        return true;
+    }
+
+    // Default comparison of inf/-inf should still work.
+    return lhs.second == rhs.second;
+}
+
 ResultOrError<Extent3D> ValidateComputeStageWorkgroupSize(
     const tint::Program& program,
     const char* entryPointName,
