@@ -22,6 +22,30 @@
       },
       "revId": "b7e02a11dd50552629433f4ebec5f4e3aca72af5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3217fb54_165f126c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-13T00:07:52Z",
+      "side": 1,
+      "message": "It\u0027s a good question.\n\nTypically, the algorithm doesn\u0027t fold queries any higher than the original query, but this is in the `# New failures. Please triage:` chunk, so this should be rebuilt from scratch each run (and so can fold as high as it needs to).\n\nI spent some time looking into this. There are two issues at play here:\n\n(1) The logic to rebuild the new failures chunk was producing a list of roots with overlaps, which meant the rebuild of expectations was not as \"tight\" as it should have been. I\u0027ll try to get a fix for this up for review shortly. With this, some of the duplicates go away. Yay.\n\n(2) The results collected for these variants are not identical, so the algorithm to minimize variants errs on not folding them together. For example `webgpu:web_platform,canvas,configure:usage:*` has the following results filtered to `monterey`:\n\n```\n# webgpu-adapter-default\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"offscreen\" angle-opengl,dawn-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-default Failure 13ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"offscreen\" angle-opengl,dawn-no-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-default Failure 30.5ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"onscreen\" angle-opengl,dawn-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-default Failure 22.9ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"onscreen\" angle-opengl,dawn-no-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-default Failure 18.4ms\n\n# webgpu-adapter-swiftshader\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"offscreen\" amd,amd-0x6821,angle-opengl,dawn-no-backend-validation,desktop,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 45.701ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"offscreen\" angle-opengl,dawn-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 38.3ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"offscreen\" angle-opengl,dawn-no-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 26.4ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"onscreen\" amd,amd-0x6821,angle-opengl,dawn-no-backend-validation,desktop,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 27.301ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"onscreen\" angle-opengl,dawn-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 64.101ms\nwebgpu:web_platform,canvas,configure:usage:canvasType\u003d\"onscreen\" angle-opengl,dawn-no-backend-validation,desktop,intel,intel-0x3e9b,intel-gen-9,intel-hd-630-family,mac,mac-x86_64,monterey,no-asan,oop-c,passthrough,release,renderer-skia-gl,webgpu-adapter-swiftshader Failure 37.301ms\n```\n\nNote that `webgpu-adapter-swiftshader` has `amd,amd-0x6821` results, but these are not found with `webgpu-adapter-default`. It\u0027s not immediately clear to me why, as we aren\u0027t `Skip`ing these.",
+      "parentUuid": "937a61bf_a321eac6",
+      "range": {
+        "startLine": 662,
+        "startChar": 0,
+        "endLine": 663,
+        "endChar": 130
+      },
+      "revId": "b7e02a11dd50552629433f4ebec5f4e3aca72af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
