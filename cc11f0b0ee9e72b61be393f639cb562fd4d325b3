@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4036a5_6ffa8345",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T20:45:09Z",
+      "side": 1,
+      "message": "thanks! (I\u0027m just going to land this now since no type checks with js yay)",
+      "revId": "cc11f0b0ee9e72b61be393f639cb562fd4d325b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
