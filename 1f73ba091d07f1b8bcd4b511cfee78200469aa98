@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf401d2_55cc9f7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-13T23:08:10Z",
+      "side": 1,
+      "message": "I just saw your comment on the bug. Yes, I think we don\u0027t actually need to care about NaN and we can validate it out in dawn native before we hit the cache",
+      "revId": "1f73ba091d07f1b8bcd4b511cfee78200469aa98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7082dad8_e0d898f0",
