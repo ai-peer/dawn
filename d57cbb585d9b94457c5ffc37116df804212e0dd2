@@ -16,6 +16,24 @@
       "message": "This is fun to see.",
       "revId": "d57cbb585d9b94457c5ffc37116df804212e0dd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3908e221_ec51ffbb",
+        "filename": "test/tint/bug/tint/990.wgsl.expected.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-13T15:49:03Z",
+      "side": 1,
+      "message": "It is 😊",
+      "parentUuid": "8dc754f1_4c7c1405",
+      "revId": "d57cbb585d9b94457c5ffc37116df804212e0dd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
