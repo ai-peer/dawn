@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59d2230d_6fe34f7d",
+        "filename": "src/tint/transform/pad_structs.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-13T17:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eadea03_eb53b733",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "650f1136_813eaa16",
@@ -143,6 +167,30 @@
       "side": 1,
       "message": "I actually found a better way to fix this. The issue is that structs nested in structs used as uniform blocks were not being padded out to std140 size (rounded up to 16 bytes). So the code would attempt to add padding in the top-level struct. This is actually fine, but the validator doesn\u0027t like it because it thinks the padding is violating uniform rules.\n\nAnyway the fix was to correctly add the rounded-up padding inside the nested struct.",
       "parentUuid": "650f1136_813eaa16",
+      "range": {
+        "startLine": 111,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 54
+      },
+      "revId": "eed1adb471c606e083545cb502071b3d3b328f2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90a97d2_e767821f",
+        "filename": "src/tint/transform/pad_structs.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-13T17:40:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e99a8658_70191533",
       "range": {
         "startLine": 111,
         "startChar": 12,
