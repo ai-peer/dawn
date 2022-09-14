@@ -16,6 +16,24 @@
       "message": "I needed to add Format and Parse for MayExonerate so we can read/write it from the cache.\n\nbut now, crbug.com/dawn/1401 is being a pain.\nin https://dawn-review.googlesource.com/c/dawn/+/102080/5 the roller made some changes which failed CQ and then on doing `cts roll update`, it made no new changes to fix the problem. (ignore later patchsets, I was doing other stuff). Why did this happen?\n\nBecause we strip release-x64 and there\u0027s no analogous release-x86, we have no way to identify failures only on the x86 bot. So the x86 bot saw all timeouts, but the roller exonerated all of them and used a pass because the x64 bot passed :(\n\nso looks like I need to fix this x86/x64 ambiguity first..",
       "revId": "0abbeb5a22718d50f7af0349ca8c4d59f058a2b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcd1c8fa_4e6398ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-14T14:24:00Z",
+      "side": 1,
+      "message": "landing this now since the x86/x64 stuff is fixed\n\nsuccessfully produced this roll with this CL\nhttps://dawn-review.googlesource.com/c/dawn/+/102150",
+      "parentUuid": "f47661de_fd77975d",
+      "revId": "0abbeb5a22718d50f7af0349ca8c4d59f058a2b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
