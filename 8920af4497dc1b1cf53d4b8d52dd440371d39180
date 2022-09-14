@@ -16,6 +16,24 @@
       "message": "LGTM, thanks for the update!",
       "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4544dce_64bec47f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003326
+      },
+      "writtenOn": "2022-09-14T19:12:54Z",
+      "side": 1,
+      "message": "What about the one for tint repo?",
+      "parentUuid": "e4371443_b7ecab56",
+      "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
