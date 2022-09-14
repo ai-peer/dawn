@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7da96e_80fab507",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T15:56:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "650d69fc_62dd4c3e",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T15:56:41Z",
+      "side": 1,
+      "message": "Should this be using https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Limits.cpp;drc\u003d145337f309abad41995dbd6740976c72b9d2968f;l\u003d54 instead of the hardcoded constant? (or it\u0027s friend for components)",
+      "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eb2482a_7197d08e",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T15:56:41Z",
+      "side": 1,
+      "message": "u-nit: maybe mention \"Another component is implicitly used for the point size.\" to help devs understand why the limit is not kMaxInterStageShaderComponents",
+      "range": {
+        "startLine": 137,
+        "startChar": 29,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
