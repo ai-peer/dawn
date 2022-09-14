@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "155cc437_f10bcc08",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-14T01:05:38Z",
+      "side": 1,
+      "message": "what if we make ApiObjectList a friend of ApiObjectBase and call DestroyImpl directly?",
+      "parentUuid": "907b77a1_b2503606",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82b58669_eaa36658",
         "filename": "src/dawn/native/ObjectBase.cpp",
         "patchSetId": 4
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Yep, Austin is correct that it\u0027s because it is re-entrant. Added a comment detailing both use cases.\n\nI don\u0027t think there is any benefit of making an enum though since atm `Destroying` and `Destroyed` need to act the same. We can\u0027t make this an ASSERT even if we are `Destroyed` because of the case where we create `TextureView` from a destroyed `Texture`.",
       "parentUuid": "7700be07_5be628e8",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6274d4e2_d789a2de",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-14T01:05:38Z",
+      "side": 1,
+      "message": "what if we make ApiObjectList a friend of ApiObjectBase and call DestroyImpl directly? then we don\u0027t have the re-entrancy. Would like to avoid re-entrancy as much as possible since it makes it much more difficult to trace through\n\nalso, tbh the TextureView case getting immediately destroyed after getting created from a destroyed Texture seems kinda wonky. I don\u0027t see a clean way to handle it otherwise though.",
+      "parentUuid": "361a412a_8e520ca6",
       "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
