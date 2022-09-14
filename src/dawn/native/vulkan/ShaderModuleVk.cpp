@@ -88,9 +88,12 @@ class ShaderModule::ConcurrentTransformedShaderModuleCache {
     ~ConcurrentTransformedShaderModuleCache();
 
     std::optional<ModuleAndSpirv> Find(const TransformedShaderModuleCacheKey& key);
-    ModuleAndSpirv AddOrGet(const TransformedShaderModuleCacheKey& key,
-                            VkShaderModule module,
-                            Spirv&& spirv);
+    // Add or get the VkShaderModule and Spirv associated with `key`.
+    // Returns a pair of ModuleAndSpirv and a bool which is true if we created and added
+    // the data in the cache, and false otherwise.
+    std::pair<ModuleAndSpirv, bool> AddOrGet(const TransformedShaderModuleCacheKey& key,
+                                             VkShaderModule module,
+                                             Spirv&& spirv);
 
   private:
     using Entry = std::pair<VkShaderModule, Spirv>;
@@ -129,25 +132,32 @@ ShaderModule::ConcurrentTransformedShaderModuleCache::Find(
     return {};
 }
 
-ShaderModule::ModuleAndSpirv ShaderModule::ConcurrentTransformedShaderModuleCache::AddOrGet(
+std::pair<ShaderModule::ModuleAndSpirv, bool>
+ShaderModule::ConcurrentTransformedShaderModuleCache::AddOrGet(
     const TransformedShaderModuleCacheKey& key,
     VkShaderModule module,
     Spirv&& spirv) {
     ASSERT(module != VK_NULL_HANDLE);
     std::lock_guard<std::mutex> lock(mMutex);
+    bool added = false;
     auto iter = mTransformedShaderModuleCache.find(key);
     if (iter == mTransformedShaderModuleCache.end()) {
-        mTransformedShaderModuleCache.emplace(key, std::make_pair(module, std::move(spirv)));
+        std::tie(iter, added) =
+            mTransformedShaderModuleCache.emplace(key, std::make_pair(module, std::move(spirv)));
+        ASSERT(added);
     } else {
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(module);
+        // No need to use FencedDeleter since this shader module was just created and does
+        // not need to wait for queue operations to complete.
+        // Also, use of fenced deleter here is not thread safe.
+        mDevice->fn.DestroyShaderModule(mDevice->GetVkDevice(), module, nullptr);
     }
-    // Now the key should exist in the map, so find it again and return it.
-    iter = mTransformedShaderModuleCache.find(key);
-    return ModuleAndSpirv{
-        iter->second.first,
-        iter->second.second.Code(),
-        iter->second.second.WordCount(),
-    };
+    return std::make_pair(
+        ModuleAndSpirv{
+            iter->second.first,
+            iter->second.second.Code(),
+            iter->second.second.WordCount(),
+        },
+        added);
 }
 
 // static
@@ -367,15 +377,21 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     }
 
     ModuleAndSpirv moduleAndSpirv;
+    bool added = false;
     if (newHandle != VK_NULL_HANDLE) {
         if (BlobCache* cache = device->GetBlobCache()) {
             cache->EnsureStored(spirv);
         }
-        moduleAndSpirv =
+        std::tie(moduleAndSpirv, added) =
             mTransformedShaderModuleCache->AddOrGet(cacheKey, newHandle, spirv.Acquire());
     }
 
-    SetDebugName(ToBackend(GetDevice()), moduleAndSpirv.module, "Dawn_ShaderModule", GetLabel());
+    if (added) {
+        // Only set the label if we added to the cache since multiple threads may be performing
+        // AddOrGet.
+        SetDebugName(ToBackend(GetDevice()), moduleAndSpirv.module, "Dawn_ShaderModule",
+                     GetLabel());
+    }
 
     return std::move(moduleAndSpirv);
 #else
