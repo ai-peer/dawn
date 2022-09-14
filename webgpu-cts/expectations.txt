@@ -56,10 +56,12 @@
 # tags: [ dawn-backend-validation dawn-no-backend-validation ]
 # WebGPU Adapter
 # tags: [ webgpu-adapter-default webgpu-adapter-swiftshader ]
+# Target CPU Bits
+# tags: [ target-cpu-32 target-cpu-64 ]
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-09-08 04:06:20PM
+# Last rolled: 2022-09-14 12:43:00AM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -675,3 +677,4 @@ crbug.com/dawn/0000 [ intel-gen-9 monterey webgpu-adapter-default ] webgpu:web_p
 crbug.com/dawn/0000 [ intel-gen-9 monterey webgpu-adapter-swiftshader ] webgpu:web_platform,canvas,getCurrentTexture:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 win10 ] worker_webgpu:api,validation,buffer,mapping:getMappedRange,offsetAndSizeAlignment,mappedAtCreation: [ Failure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation nvidia-0x2184 win10 ] worker_webgpu:api,validation,buffer,mapping:mapAsync,offsetAndSizeAlignment: [ Failure ]
+crbug.com/dawn/0000 webgpu:shader,execution,expression,call,builtin,quantizeToF16:* [ Failure ]
