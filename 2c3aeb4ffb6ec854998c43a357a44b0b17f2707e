@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adf5ab56_f3458a33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T15:57:49Z",
+      "side": 1,
+      "message": "Still LGTM, nice find!",
+      "revId": "2c3aeb4ffb6ec854998c43a357a44b0b17f2707e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00fa2354_8bce18ad",
@@ -31,6 +48,30 @@
       "writtenOn": "2022-09-14T15:48:45Z",
       "side": 1,
       "message": "this is why the labels were crashing",
+      "range": {
+        "startLine": 389,
+        "startChar": 4,
+        "endLine": 394,
+        "endChar": 5
+      },
+      "revId": "2c3aeb4ffb6ec854998c43a357a44b0b17f2707e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63ee3b8b_5b28182e",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T15:57:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "00fa2354_8bce18ad",
       "range": {
         "startLine": 389,
         "startChar": 4,
