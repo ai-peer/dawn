@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1674c3a_0b2da5c2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003326
+      },
+      "writtenOn": "2022-09-14T07:02:53Z",
+      "side": 1,
+      "message": "How can I submit a patchset to this? I used git cl upload. I use git cl upload. It creates a new one by mistake. https://dawn-review.googlesource.com/c/dawn/+/102320\n\nI try to use git push origin refs/changes/00/102220/2.\nIt reports the message below.\n ! [remote rejected]     refs/changes/00/102220/2 -\u003e refs/changes/00/102220/2 (prohibited by Gerrit: not permitted: create)",
+      "parentUuid": "cebbda10_9ed45e7e",
+      "revId": "5c838abdd114a962876541d7b424bbe81cb18c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e03c867f_482bd1d0",
         "filename": "CMakeLists.txt",
         "patchSetId": 1
