@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f1ffea4_fccff078",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T17:29:30Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Either keeping as is with a comment or the friend idea would work.",
+      "parentUuid": "155cc437_f10bcc08",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82b58669_eaa36658",
         "filename": "src/dawn/native/ObjectBase.cpp",
         "patchSetId": 4
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "what if we make ApiObjectList a friend of ApiObjectBase and call DestroyImpl directly? then we don\u0027t have the re-entrancy. Would like to avoid re-entrancy as much as possible since it makes it much more difficult to trace through\n\nalso, tbh the TextureView case getting immediately destroyed after getting created from a destroyed Texture seems kinda wonky. I don\u0027t see a clean way to handle it otherwise though.",
       "parentUuid": "361a412a_8e520ca6",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c5e1cc2_9d44f113",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T17:29:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6274d4e2_d789a2de",
       "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
