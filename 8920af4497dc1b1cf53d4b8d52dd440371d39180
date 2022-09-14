@@ -52,6 +52,24 @@
       "parentUuid": "b4544dce_64bec47f",
       "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758e88b9_00d786d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T19:56:39Z",
+      "side": 1,
+      "message": "Posting links in various places isn\u0027t very convenient, please follow the process in https://dawn.googlesource.com/dawn/+/refs/heads/main/CONTRIBUTING.md#pushing-changes-to-code-review to add OWNERS for review on code reviews.",
+      "parentUuid": "184f01cb_04c67f17",
+      "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
