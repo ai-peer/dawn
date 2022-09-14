@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1b2332_eb4af58f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-14T17:20:37Z",
+      "side": 1,
+      "message": "Running linux-dawn-rel multiple times to confirm",
+      "revId": "4386e59bc02ca790584bf34bf8edbda0c3cce57a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
