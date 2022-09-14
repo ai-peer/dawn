@@ -510,8 +510,6 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
     const DeviceBase* device,
     tint::inspector::Inspector* inspector,
     const tint::inspector::EntryPoint& entryPoint) {
-    constexpr uint32_t kMaxInterStageShaderLocation = kMaxInterStageShaderVariables - 1;
-
     std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
 
     // Returns the invalid argument, and if it is true additionally store the formatted
@@ -588,9 +586,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             metadata->usedVertexInputs.set(location);
         }
 
-        // [[position]] must be declared in a vertex shader but is not exposed as an
-        // output variable by Tint so we directly add its components to the total.
-        uint32_t totalInterStageShaderComponents = 4;
+        uint32_t totalInterStageShaderComponents = 0;
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::InterStageVariableInfo variable;
             DAWN_TRY_ASSIGN(variable.baseType,
@@ -605,10 +601,10 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             totalInterStageShaderComponents += variable.componentCount;
 
             uint32_t location = outputVar.location_decoration;
-            if (DelayedInvalidIf(location > kMaxInterStageShaderLocation,
+            if (DelayedInvalidIf(location >= kMaxInterStageShaderVariables,
                                  "Vertex output variable \"%s\" has a location (%u) that "
-                                 "exceeds the maximum (%u).",
-                                 outputVar.name, location, kMaxInterStageShaderLocation)) {
+                                 "is greater than or equal to (%u).",
+                                 outputVar.name, location, kMaxInterStageShaderVariables)) {
                 continue;
             }
 
@@ -616,6 +612,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             metadata->interStageVariables[location] = variable;
         }
 
+        metadata->totalInterStageShaderComponents = totalInterStageShaderComponents;
         DelayedInvalidIf(totalInterStageShaderComponents > kMaxInterStageShaderComponents,
                          "Total vertex output components count (%u) exceeds the maximum (%u).",
                          totalInterStageShaderComponents, kMaxInterStageShaderComponents);
@@ -637,10 +634,10 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             totalInterStageShaderComponents += variable.componentCount;
 
             uint32_t location = inputVar.location_decoration;
-            if (DelayedInvalidIf(location > kMaxInterStageShaderLocation,
+            if (DelayedInvalidIf(location >= kMaxInterStageShaderVariables,
                                  "Fragment input variable \"%s\" has a location (%u) that "
-                                 "exceeds the maximum (%u).",
-                                 inputVar.name, location, kMaxInterStageShaderLocation)) {
+                                 "is greater than or equal to (%u).",
+                                 inputVar.name, location, kMaxInterStageShaderVariables)) {
                 continue;
             }
 
@@ -658,10 +655,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         if (entryPoint.sample_index_used) {
             totalInterStageShaderComponents += 1;
         }
-        if (entryPoint.input_position_used) {
-            totalInterStageShaderComponents += 4;
-        }
 
+        metadata->totalInterStageShaderComponents = totalInterStageShaderComponents;
         DelayedInvalidIf(totalInterStageShaderComponents > kMaxInterStageShaderComponents,
                          "Total fragment input components count (%u) exceeds the maximum (%u).",
                          totalInterStageShaderComponents, kMaxInterStageShaderComponents);
