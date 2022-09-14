@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "907b77a1_b2503606",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-14T00:12:11Z",
+      "side": 1,
+      "message": "Destroy needs the object in the list to run. That\u0027s why we always prepend first.",
+      "parentUuid": "9b893b69_e6ece9ed",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82b58669_eaa36658",
@@ -70,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "361a412a_8e520ca6",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-14T00:12:11Z",
+      "side": 1,
+      "message": "Yep, Austin is correct that it\u0027s because it is re-entrant. Added a comment detailing both use cases.\n\nI don\u0027t think there is any benefit of making an enum though since atm `Destroying` and `Destroyed` need to act the same. We can\u0027t make this an ASSERT even if we are `Destroyed` because of the case where we create `TextureView` from a destroyed `Texture`.",
+      "parentUuid": "7700be07_5be628e8",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8e54562_dbbb1538",
@@ -83,6 +119,30 @@
       "writtenOn": "2022-09-13T22:57:56Z",
       "side": 1,
       "message": "uunit: maybe we should use !IsAlive()",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 112,
+        "endChar": 5
+      },
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fda33c3_9b52caad",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-14T00:12:11Z",
+      "side": 1,
+      "message": "I had this initially but changed it because I was worried that we may change the definition of `Alive` in the future. But anyways changed back to that since it\u0027s probably fine.",
+      "parentUuid": "b8e54562_dbbb1538",
       "range": {
         "startLine": 110,
         "startChar": 3,
@@ -124,6 +184,24 @@
       "side": 1,
       "message": "maybe we should just not have this method at all and always call `GetObjectTrackingList()-\u003eTrack(this)` to avoid confusion. idk?",
       "parentUuid": "747cdafc_5ce83122",
+      "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9848d319_55818f0d",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-14T00:12:11Z",
+      "side": 1,
+      "message": "Added comment and got rid of it as well.",
+      "parentUuid": "9745d4e0_7767fdf6",
       "revId": "68a07146627ffc1b5a86cae8521ca40ba552757e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
