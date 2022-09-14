@@ -139,7 +139,10 @@ ShaderModule::ModuleAndSpirv ShaderModule::ConcurrentTransformedShaderModuleCach
     if (iter == mTransformedShaderModuleCache.end()) {
         mTransformedShaderModuleCache.emplace(key, std::make_pair(module, std::move(spirv)));
     } else {
-        mDevice->GetFencedDeleter()->DeleteWhenUnused(module);
+        // No need to use FencedDeleter since this shader module was just created and does
+        // not need to wait for queue operations to complete.
+        // Also, use of fenced deleter here is not thread safe.
+        mDevice->fn.DestroyShaderModule(mDevice->GetVkDevice(), module, nullptr);
     }
     // Now the key should exist in the map, so find it again and return it.
     iter = mTransformedShaderModuleCache.find(key);
