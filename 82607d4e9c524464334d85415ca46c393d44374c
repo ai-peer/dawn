@@ -50,6 +50,23 @@
       "message": "ok - checked that wangqing-hf@loongson.cn has signed the google CLA",
       "revId": "82607d4e9c524464334d85415ca46c393d44374c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90eeddd0_8c1d1b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T12:38:37Z",
+      "side": 1,
+      "message": "LGTM too and I checked that the CLA was signed, but it\u0027s not clear why the CQ doesn\u0027t want to run for this CL.",
+      "revId": "82607d4e9c524464334d85415ca46c393d44374c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
