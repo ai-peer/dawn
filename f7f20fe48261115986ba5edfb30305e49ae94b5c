@@ -16,6 +16,23 @@
       "message": "LGTM; failure is a flaky OOM",
       "revId": "f7f20fe48261115986ba5edfb30305e49ae94b5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f587a1_3f01d3df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-14T12:39:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f7f20fe48261115986ba5edfb30305e49ae94b5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
