@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6866f9ff_13ffcc6b",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-15T02:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "650d69fc_62dd4c3e",
+      "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3eb2482a_7197d08e",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-09-14T15:56:41Z",
       "side": 1,
       "message": "u-nit: maybe mention \"Another component is implicitly used for the point size.\" to help devs understand why the limit is not kMaxInterStageShaderComponents",
+      "range": {
+        "startLine": 137,
+        "startChar": 29,
+        "endLine": 137,
+        "endChar": 30
+      },
+      "revId": "cd1d078046ccae346e636064f4b400e2c7326941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e1cd4f6_d504399c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-15T02:36:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eb2482a_7197d08e",
       "range": {
         "startLine": 137,
         "startChar": 29,
