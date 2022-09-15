@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a389b64_52bd262f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-15T21:30:39Z",
+      "side": 1,
+      "message": "PTAL! Brandon, this will unblock you re-landing the maxBindingsPerBindGroup limit.\n\nSeems like previously we were just getting lucky with the padding.",
+      "revId": "a23d70c2741b9b2efc22238c1b920a6292473a86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
