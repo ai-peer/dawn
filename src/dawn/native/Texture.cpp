@@ -27,6 +27,8 @@
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 
+#define PAGE_SIZE 4 * 1024
+#define TILE_SIZE 4 * 1024
 namespace dawn::native {
 namespace {
 
@@ -520,6 +522,140 @@ bool IsValidSampleCount(uint32_t sampleCount) {
     }
 }
 
+uint64_t AlignUp(uint64_t number, uint32_t alignment) {
+    uint64_t alignedNumber = number & ~static_cast<uint64_t>(alignment - 1);
+    if (alignedNumber < number) {
+        alignedNumber += alignment;
+    }
+    return alignedNumber;
+}
+
+uint32_t GetQPitch(uint32_t baseHeight, uint32_t mipLevelCount) {
+    uint32_t level1Height = 0;
+    uint32_t level2ToTailHeight = 0;
+    if (mipLevelCount >= 2) {
+        level1Height = std::max(baseHeight >> 1, 1u);
+
+        for (uint32_t level = 2; level < mipLevelCount; ++level) {
+            level2ToTailHeight += std::max(baseHeight >> level, 1u);
+        }
+    }
+    uint32_t qPitch = baseHeight + std::max(level1Height, level2ToTailHeight);
+
+    return AlignUp(qPitch, 4);
+}
+
+uint64_t GetGmmIncorrectCcsSize(uint64_t rowPitch,
+                                uint32_t height,
+                                uint64_t arrayLayers,
+                                uint32_t mipLevelCount) {
+    uint64_t qPitch = GetQPitch(height, mipLevelCount);
+    uint64_t gmmAssumedMainSize = AlignUp(qPitch * rowPitch, 16 * 1024) * arrayLayers;
+    return AlignUp(gmmAssumedMainSize >> 8, PAGE_SIZE);
+    // return AlignUp(gmmAssumedMainSize, PAGE_SIZE);
+}
+
+long GetCorrectCcsSize(uint64_t rowPitch,
+                       uint32_t height,
+                       uint64_t arrayLayers,
+                       uint32_t mipLevelCount) {
+    const uint32_t tileHeight = 32;                       // rows of pixels in a tile
+    const uint32_t tileRowSize = TILE_SIZE / tileHeight;  // bytes
+
+    uint32_t qPitch = GetQPitch(height, mipLevelCount);
+
+    uint64_t totalHeight = qPitch * arrayLayers;
+
+    uint32_t mainTileCols = AlignUp(rowPitch, tileRowSize) / tileRowSize;
+    uint32_t mainTileRows = AlignUp(totalHeight, tileHeight) / tileHeight;
+
+    uint64_t mainTileCount = mainTileCols * mainTileRows;
+    uint64_t mainSize = mainTileCount * TILE_SIZE;
+
+    return AlignUp(mainSize >> 8, PAGE_SIZE);
+    // return AlignUp(mainSize, PAGE_SIZE);
+}
+
+bool IsCorrupted(const TextureDescriptor* desc, uint32_t bytesPerBlock) {
+    Extent3D size = desc->size;
+    uint64_t sliceAndSamples = size.depthOrArrayLayers * desc->sampleCount;
+
+    if (sliceAndSamples <= 1) {
+        return false;
+    }
+
+    uint64_t rowPitch = size.width * bytesPerBlock;
+
+    long correctCcsSize =
+        GetCorrectCcsSize(rowPitch, size.height, sliceAndSamples, desc->mipLevelCount);
+    long gmmCcsSize =
+        GetGmmIncorrectCcsSize(rowPitch, size.height, sliceAndSamples, desc->mipLevelCount);
+
+    // return correctCcsSize != gmmCcsSize;
+    return correctCcsSize > gmmCcsSize;
+}
+
+float ComputeExtraLayers(const TextureDescriptor* desc, uint32_t bytesPerBlock) {
+    Extent3D size = desc->size;
+    uint64_t sliceAndSamples = size.depthOrArrayLayers * desc->sampleCount;
+
+    if (sliceAndSamples <= 1) {
+        return false;
+    }
+
+    uint64_t rowPitch = size.width * bytesPerBlock;
+
+    const uint32_t tileHeight = 32;                       // rows of pixels in a tile
+    const uint32_t tileRowSize = TILE_SIZE / tileHeight;  // bytes
+
+    uint32_t qPitch = GetQPitch(size.height, desc->mipLevelCount);
+
+    uint64_t totalHeight = qPitch * sliceAndSamples;
+
+    uint32_t mainTileCols = AlignUp(rowPitch, tileRowSize) / tileRowSize;
+    uint32_t mainTileRows = AlignUp(totalHeight, tileHeight) / tileHeight;
+
+    uint64_t mainTileCount = mainTileCols * mainTileRows;
+    uint64_t mainSize = mainTileCount * TILE_SIZE;
+
+    uint64_t gmmAssumedMainSize = AlignUp(qPitch * rowPitch, 16 * 1024) * sliceAndSamples;
+
+    ASSERT(mainSize > gmmAssumedMainSize);
+    // if (mainSize > gmmAssumedMainSize) {
+    float arraySize = size.depthOrArrayLayers;
+    float gmmAssumedMainSizePerLayer = gmmAssumedMainSize / arraySize;
+    float extraLayers = (mainSize - gmmAssumedMainSize) / gmmAssumedMainSizePerLayer;
+    return extraLayers;
+    // }
+    // return 0;
+}
+
+bool IsUnsafe(const TextureDescriptor* desc, uint32_t bytesPerBlock, uint32_t alignment) {
+    Extent3D size = desc->size;
+    uint64_t sliceAndSamples = size.depthOrArrayLayers * desc->sampleCount;
+
+    if (sliceAndSamples <= 1) {
+        return false;
+    }
+
+    uint64_t rowPitch = size.width * bytesPerBlock;
+
+    long correctCcsSize =
+        GetCorrectCcsSize(rowPitch, size.height, sliceAndSamples, desc->mipLevelCount);
+    long gmmCcsSize =
+        GetGmmIncorrectCcsSize(rowPitch, size.height, sliceAndSamples, desc->mipLevelCount);
+
+    const long clearColorSize = PAGE_SIZE;
+
+    long correctAuxSize = correctCcsSize + clearColorSize;
+    correctAuxSize = AlignUp(correctAuxSize, alignment);
+
+    long actualAuxSize = gmmCcsSize + clearColorSize;
+    actualAuxSize = AlignUp(actualAuxSize, alignment);
+
+    return actualAuxSize != correctAuxSize;
+}
+
 // TextureBase
 
 TextureBase::TextureBase(DeviceBase* device,
@@ -537,6 +673,19 @@ TextureBase::TextureBase(DeviceBase* device,
       mFormatEnumForReflection(descriptor->format) {
     uint32_t subresourceCount = mMipLevelCount * GetArrayLayers() * GetAspectCount(mFormat.aspects);
     mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
+
+    if (mFormat.IsColor()) {
+        uint32_t bytesPerBlock = mFormat.GetAspectInfo(wgpu::TextureAspect::All).block.byteSize;
+        if (IsCorrupted(descriptor, bytesPerBlock)) {
+            printf("\n\n\n This texture may corrupt. Texture dimension is {%d, %d, %d}\n\n",
+                   mSize.width, mSize.height, mSize.depthOrArrayLayers);
+            float extraLayers = ComputeExtraLayers(descriptor, bytesPerBlock);
+            printf("\n This texture need extra layer number: %f \n", extraLayers);
+            if (IsUnsafe(descriptor, bytesPerBlock, PAGE_SIZE * 16)) {
+                printf("***** This texture may be unsafe! ****** \n\n");
+            }
+        }
+    }
 
     for (uint32_t i = 0; i < descriptor->viewFormatCount; ++i) {
         if (descriptor->viewFormats[i] == descriptor->format) {

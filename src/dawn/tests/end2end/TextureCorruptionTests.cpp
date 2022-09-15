@@ -28,6 +28,7 @@ constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
 
 namespace {
 enum class WriteType {
+    ClearTexture,
     WriteTexture,    // Write the tested texture via writeTexture API
     B2TCopy,         // Write the tested texture via B2T copy
     RenderConstant,  // Write the tested texture via rendering the whole rectangle with solid color
@@ -40,6 +41,9 @@ enum class WriteType {
 
 std::ostream& operator<<(std::ostream& o, WriteType writeType) {
     switch (writeType) {
+        case WriteType::ClearTexture:
+            o << "ClearTexture";
+            break;
         case WriteType::WriteTexture:
             o << "WriteTexture";
             break;
@@ -62,8 +66,13 @@ std::ostream& operator<<(std::ostream& o, WriteType writeType) {
 using TextureFormat = wgpu::TextureFormat;
 using TextureWidth = uint32_t;
 using TextureHeight = uint32_t;
+using TextureLayer = uint32_t;
 
-DAWN_TEST_PARAM_STRUCT(TextureCorruptionTestsParams, TextureWidth, TextureHeight, WriteType);
+DAWN_TEST_PARAM_STRUCT(TextureCorruptionTestsParams,
+                       TextureWidth,
+                       TextureHeight,
+                       TextureLayer,
+                       WriteType);
 
 }  // namespace
 
@@ -109,7 +118,7 @@ class TextureCorruptionTests : public DawnTestWithParams<TextureCorruptionTestsP
                     // lead to precision loss or rendering a solid color is easier to implement and
                     // compare.
                     data[i * elementNumPerRow + j] = 0xFFFFFFFF;
-                } else {
+                } else if (type != WriteType::ClearTexture) {
                     data[i * elementNumPerRow + j] = srcValue;
                     srcValue++;
                 }
@@ -251,7 +260,8 @@ TEST_P(TextureCorruptionTests, Tests) {
     DAWN_SUPPRESS_TEST_IF(IsWARP());
     uint32_t width = GetParam().mTextureWidth;
     uint32_t height = GetParam().mTextureHeight;
-    uint32_t depthOrArrayLayerCount = 2;
+    // uint32_t depthOrArrayLayerCount = 2;
+    uint32_t depthOrArrayLayerCount = GetParam().mTextureLayer;
     wgpu::Extent3D textureSize = {width, height, depthOrArrayLayerCount};
 
     // Pre-allocate textures. The incorrect write type may corrupt neighboring textures or layers.
@@ -273,7 +283,18 @@ TEST_P(TextureCorruptionTests, Tests) {
 
 DAWN_INSTANTIATE_TEST_P(TextureCorruptionTests,
                         {D3D12Backend()},
-                        {100u, 200u, 300u, 400u, 500u, 600u, 700u, 800u, 900u, 1000u, 1200u},
-                        {100u, 200u},
-                        {WriteType::WriteTexture, WriteType::B2TCopy, WriteType::RenderConstant,
-                         WriteType::RenderFromTextureSample, WriteType::RenderFromTextureLoad});
+                        // {100u, 200u, 300u, 400u, 500u, 600u, 700u, 800u, 900u, 1000u, 1200u},
+                        // {100u, 150u, 200u, 250u, 300u, 400u, 500u, 600u, 700u, 750u, 800u, 900u,
+                        // 1000u, 1200u},
+                        {/*128u, 256u, 384u, 512u, 640u, 768u, 896u, 1024u, 1152u, 1280u, */ 1408u,
+                         1536u, 1664u, 1792u, 1920u, 2048u, 4096u, 8192u},
+                        // {100u, 200u},
+                        // {100u, 150u, 200u, 250u, 300u, 400u, 500u, 600u, 700u, 800u},
+                        {4u,  8u,  12u, 16u, 20u, 24u, 28u, 32u, 36u, 40u,
+                         44u, 48u, 52u, 56u, 60u, 64u, 68u, 72u, 76u, 80u},
+                        // {2u, 3u, 4u, 5u, 6u, 7u, 8u, 9u, 10u}, // {2u},
+                        {2u, 3u, 4u, 6u, 12u},  // {6u, 12u, 24u, 48u}, // {2u, 3u, 4u},
+                        {WriteType::ClearTexture,
+                         WriteType::WriteTexture /*, WriteType::B2TCopy,
+WriteType::RenderConstant, WriteType::RenderFromTextureSample, WriteType::RenderFromTextureLoad
+*/});
