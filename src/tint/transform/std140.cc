@@ -206,8 +206,8 @@ struct Std140::State {
     };
 
     /// @returns true if the given matrix needs decomposing to column vectors for std140 layout.
-    /// TODO(crbug.com/tint/1502): This may need adjusting for `f16` matrices.
-    static bool MatrixNeedsDecomposing(const sem::Matrix* mat) { return mat->ColumnStride() == 8; }
+    /// Std140 layout require matrix stride to be 16, otherwise decomposing is needed.
+    static bool MatrixNeedsDecomposing(const sem::Matrix* mat) { return mat->ColumnStride() != 16; }
 
     /// ForkStructs walks the structures in dependency order, forking structures that are used as
     /// uniform buffers which (transitively) use matrices that need std140 decomposition to column
@@ -246,9 +246,8 @@ struct Std140::State {
                                     // The matrix was @size() annotated with a larger size than the
                                     // natural size for the matrix. This extra padding needs to be
                                     // applied to the last column vector.
-                                    attributes.Push(b.MemberSize(
-                                        AInt(member->Size() -
-                                             mat->ColumnType()->Size() * (num_columns - 1))));
+                                    attributes.Push(b.MemberSize(AInt(
+                                        member->Size() - mat->ColumnStride() * (num_columns - 1))));
                                 }
 
                                 // Build the member
