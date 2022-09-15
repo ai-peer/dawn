@@ -26,6 +26,8 @@
 
 static constexpr uint32_t kExtraMemoryToMitigateTextureCorruption = 24576u;
 
+#define PAGE_SIZE 4 * 1024
+#define TILE_SIZE 4 * 1024
 namespace dawn::native::d3d12 {
 namespace {
 MemorySegment GetMemorySegment(Device* device, D3D12_HEAP_TYPE heapType) {
@@ -177,6 +179,70 @@ bool IsClearValueOptimizable(DeviceBase* device, const D3D12_RESOURCE_DESC& reso
                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
 }
 
+uint32_t GetColumnPitch(uint32_t baseHeight, uint32_t mipLevelCount) {
+    uint32_t level1Height = 0;
+    uint32_t level2ToTailHeight = 0;
+    if (mipLevelCount >= 2) {
+        level1Height = std::max(baseHeight >> 1, 1u);
+
+        for (uint32_t level = 2; level < mipLevelCount; ++level) {
+            level2ToTailHeight += std::max(baseHeight >> level, 1u);
+        }
+    }
+    uint32_t columnPitch = baseHeight + std::max(level1Height, level2ToTailHeight);
+
+    return Align(columnPitch, 4);
+}
+
+uint32_t ComputeExtraArraySizeForIntelGen12(uint32_t width,
+                                            uint32_t height,
+                                            uint32_t arrayLayerCount,
+                                            uint32_t mipLevelCount,
+                                            uint32_t sampleCount,
+                                            uint32_t bytesPerBlock) {
+    // For details about texture memory layout on Intel Gen12 GPU, read
+    // https://01.org/sites/default/files/documentation/intel-gfx-prm-osrc-tgl-vol05-memory_data_formats.pdf.
+    uint64_t layerxSamples = arrayLayerCount * sampleCount;
+
+    if (layerxSamples <= 1) {
+        return 0;
+    }
+
+    // Texture should be aligned on both width (128 bytes) and height (32 rows) on Intel Gen12 GPU
+    const uint32_t tileHeight = 32;
+    const uint32_t tileWidth = TILE_SIZE / tileHeight;
+
+    uint32_t columnPitch = GetColumnPitch(height, mipLevelCount);
+
+    uint64_t totalWidth = width * bytesPerBlock;
+    uint64_t totalHeight = columnPitch * layerxSamples;
+
+    uint32_t mainTileCols = Align(totalWidth, tileWidth) / tileWidth;
+    uint32_t mainTileRows = Align(totalHeight, tileHeight) / tileHeight;
+    uint64_t mainTileCount = mainTileCols * mainTileRows;
+
+    // There is a bug in Intel old drivers to compute the main memory size of the texture. The
+    // incorrect algorithm doesn't respect alignment requirement from tile-based texture memory
+    // layout. It is simply linear-aligned (16K) for each sample and layer.
+    uint64_t expectedMainSize = mainTileCount * TILE_SIZE;
+    uint64_t actualMainSize = Align(columnPitch * totalWidth, 16 * 1024) * layerxSamples;
+
+    // The auxiliary memory size for the texture is calculated from the main memory size of the
+    // texture. If the wrong main memory size calculation lead to less-than-expected auxiliary
+    // memory, texture corruption is very likely to happen for any texture access like texture copy,
+    // rendering, sampling, etc. So we need to allocate a few more extra layers to offset the
+    // less-than-expected auxiliary memory. However, it is fine if the wrong main memory size
+    // calculation doesn't lead to incorrect auxiliary memory size.
+    uint64_t expectedAuxSize = Align(expectedMainSize >> 8, PAGE_SIZE);
+    uint64_t actualAuxSize = Align(actualMainSize >> 8, PAGE_SIZE);
+    if (Align(actualAuxSize < expectedAuxSize)) {
+        uint64_t actualMainSizePerLayer = actualMainSize / arrayLayerCount;
+        return (expectedMainSize - actualMainSize + actualMainSizePerLayer - TILE_SIZE) /
+               actualMainSizePerLayer;
+    }
+    return 0;
+}
+
 }  // namespace
 
 ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -199,7 +265,8 @@ ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(dev
 ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& resourceDescriptor,
-    D3D12_RESOURCE_STATES initialUsage) {
+    D3D12_RESOURCE_STATES initialUsage,
+    uint32_t bytesPerBlock) {
     // In order to suppress a warning in the D3D12 debug layer, we need to specify an
     // optimized clear value. As there are no negative consequences when picking a mismatched
     // clear value, we use zero as the optimized clear value. This also enables fast clears on
@@ -211,6 +278,18 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
         optimizedClearValue = &zero;
     }
 
+    // If we are allocating memory for a 2D array texture on D3D12 backend, we need to allocate
+    // extra layers on some Intel Gen12 devices, see crbug.com/dawn/949 for details.
+    D3D12_RESOURCE_DESC revisedDescriptor = resourceDescriptor;
+    if (mDevice->IsToggleEnabled(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture) &&
+        resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D &&
+        resourceDescriptor.DepthOrArraySize > 1) {
+        revisedDescriptor.DepthOrArraySize += ComputeExtraArraySizeForIntelGen12(
+            resourceDescriptor.Width, resourceDescriptor.Height,
+            resourceDescriptor.DepthOrArraySize, resourceDescriptor.MipLevels,
+            resourceDescriptor.SampleDesc.Count, bytesPerBlock);
+    }
+
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
     // For very small resources, it is inefficent to suballocate given the min. heap
@@ -218,7 +297,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
     if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
         ResourceHeapAllocation subAllocation;
-        DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, resourceDescriptor,
+        DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, revisedDescriptor,
                                                             optimizedClearValue, initialUsage));
         if (subAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
             return std::move(subAllocation);
@@ -227,7 +306,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // If sub-allocation fails, fall-back to direct allocation (committed resource).
     ResourceHeapAllocation directAllocation;
-    DAWN_TRY_ASSIGN(directAllocation, CreateCommittedResource(heapType, resourceDescriptor,
+    DAWN_TRY_ASSIGN(directAllocation, CreateCommittedResource(heapType, revisedDescriptor,
                                                               optimizedClearValue, initialUsage));
     if (directAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
         return std::move(directAllocation);
