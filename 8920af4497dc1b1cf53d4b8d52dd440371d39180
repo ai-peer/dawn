@@ -70,6 +70,24 @@
       "parentUuid": "184f01cb_04c67f17",
       "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91145503_bcf05038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003326
+      },
+      "writtenOn": "2022-09-15T01:45:40Z",
+      "side": 1,
+      "message": "Thank you. I see. I thought that the reviewer is added automatically before. I\u0027ll add one.",
+      "parentUuid": "758e88b9_00d786d4",
+      "revId": "8920af4497dc1b1cf53d4b8d52dd440371d39180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
