@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "26f75b2e90996c4e7d37dc21e20258bdfc8f0614",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "188ebda3_750cd940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2022-09-15T19:27:22Z",
+      "side": 1,
+      "message": "Right, the trybots don\u0027t work properly with branches. Will submit with No-Try.",
+      "revId": "26f75b2e90996c4e7d37dc21e20258bdfc8f0614",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
