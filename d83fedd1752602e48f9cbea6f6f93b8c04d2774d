@@ -73,6 +73,24 @@
       "message": "Thank you for the fix.\nPlease can we have some `f16` unit tests to exercise this subtlety?",
       "revId": "d83fedd1752602e48f9cbea6f6f93b8c04d2774d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36bd7397_e454ed69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-15T11:20:46Z",
+      "side": 1,
+      "message": "Ok, maybe I can submit this fix with the CL enabling f16 in uniform and storage buffer (still working on writing and validating tests)",
+      "parentUuid": "b3dc6d41_8af13524",
+      "revId": "d83fedd1752602e48f9cbea6f6f93b8c04d2774d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
