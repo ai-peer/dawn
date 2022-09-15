@@ -16,6 +16,23 @@
       "message": "I tested Skia against this dawn CL and I can confirm that it fixes the Tint error I was seeing in skbug.com/13738. Thank you for the fix!",
       "revId": "03298c4fa48b524f344f36d6f83620c2d9d56366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d48be69b_1bf2e2a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-15T16:58:19Z",
+      "side": 1,
+      "message": "Still LGTM. Thank you for the changes!",
+      "revId": "03298c4fa48b524f344f36d6f83620c2d9d56366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
