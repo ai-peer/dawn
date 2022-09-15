@@ -183,6 +183,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea82cf28_5f630f57",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-15T08:02:32Z",
+      "side": 1,
+      "message": "Thanks, I have updated the test code. I\u0027m thinking how to reduce the duplicated code I copied from `TextureFormatTest::RG11B10Ufloat` to `RG11B10UfloatRenderableTest::RG11B10UfloatRenderable`... Move the duplicated code into `TextureFormatTest` as a method and let `TextureFormatTest::RG11B10Ufloat` and `RG11B10UfloatRenderableTest::RG11B10UfloatRenderable` call it?",
+      "parentUuid": "7e3bcc5b_3f8eff79",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "107bade6_f4bfbf59",
         "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 1
