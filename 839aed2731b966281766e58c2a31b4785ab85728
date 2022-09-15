@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba15fbff_fb4b8200",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4138,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-15T09:04:18Z",
+      "side": 1,
+      "message": "nit: Could be less verbose by hoisting the `s *` out to the matrix (for each matrix size). While the GPU performance would likely be identical, it produces less code for Tint to process.",
+      "range": {
+        "startLine": 4138,
+        "startChar": 12,
+        "endLine": 4138,
+        "endChar": 38
+      },
+      "revId": "839aed2731b966281766e58c2a31b4785ab85728",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3939e1fa_a3160a6c",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4274,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-15T09:04:18Z",
+      "side": 1,
+      "message": "nit: Maybe something like `\"invalid matrix size for \"`",
+      "range": {
+        "startLine": 4274,
+        "startChar": 15,
+        "endLine": 4274,
+        "endChar": 31
+      },
+      "revId": "839aed2731b966281766e58c2a31b4785ab85728",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
