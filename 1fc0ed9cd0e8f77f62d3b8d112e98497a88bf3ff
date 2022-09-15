@@ -148,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49000f7f_3bcf8886",
+        "filename": "src/dawn/native/Features.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-15T07:45:43Z",
+      "side": 1,
+      "message": "Ah, it seems I just have misunderstood. I thought supported features flags are somehow automatically enabled but it isn\u0027t true. Instead, we need to explicitly enable them in the code base, isn\u0027t it? Like\n\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/44754c529f163da268be56c10747ef300fbcc0bb:src/dawn/native/vulkan/AdapterVk.cpp;l\u003d134-182;drc\u003d7ca82ac4d0ed20a8371de408e4e7ec83e59cf431;bpv\u003d1;bpt\u003d0\n\nI\u0027m investigating in which platforms `rg11b10ufloat-renderable` feature should be enabled. I haven\u0027t deeply looked into yet but from this Kai\u0027s comment\n\nhttps://github.com/gpuweb/gpuweb/issues/2648#issuecomment-1062097530\n\nit should be enabled in Metal and D3D12. And also it should be enabled in Vulkan except on ceratin Adreno 500 and Adreno 600 series GPUs? How can we detect whether it\u0027s supported in Vulkan?",
+      "parentUuid": "cb2769cf_82582390",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e3bcc5b_3f8eff79",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 1
