@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae1970cd_d3e7c13e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-15T17:38:30Z",
+      "side": 1,
+      "message": "PTAL!\nlooks like CTS needs update; I\u0027ll suppress the failing tests once all the results come back",
+      "revId": "f75e68a6b48854c4d36ab6879c13540fb6eaf6cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
