@@ -166,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1d3e163_157d6766",
+        "filename": "src/dawn/native/Features.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-15T13:32:13Z",
+      "side": 1,
+      "message": "Yeah it should be enabled unconditionally on D3D12 and Metal it seems. On Vulkan we can check support similarly to https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;drc\u003d7ca82ac4d0ed20a8371de408e4e7ec83e59cf431;l\u003d620 and https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/AdapterVk.cpp;drc\u003d5abffc9bbab0296c39d03cc4b894388a0b7f3258;l\u003d54 with VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT and VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT.",
+      "parentUuid": "49000f7f_3bcf8886",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e3bcc5b_3f8eff79",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 1
@@ -195,6 +213,24 @@
       "side": 1,
       "message": "Thanks, I have updated the test code. I\u0027m thinking how to reduce the duplicated code I copied from `TextureFormatTest::RG11B10Ufloat` to `RG11B10UfloatRenderableTest::RG11B10UfloatRenderable`... Move the duplicated code into `TextureFormatTest` as a method and let `TextureFormatTest::RG11B10Ufloat` and `RG11B10UfloatRenderableTest::RG11B10UfloatRenderable` call it?",
       "parentUuid": "7e3bcc5b_3f8eff79",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11b8383e_dd43a631",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-15T13:32:13Z",
+      "side": 1,
+      "message": "What about always trying to enable the extension in TextureFormatTest and in the RG11B10UFloat test only run the rendering part if the extension is availble? It would be very similar to the code you had previously with respect to sharing test code.",
+      "parentUuid": "ea82cf28_5f630f57",
       "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
