@@ -26,6 +26,8 @@
 
 static constexpr uint32_t kExtraMemoryToMitigateTextureCorruption = 24576u;
 
+#define PAGE_SIZE 4 * 1024
+#define TILE_SIZE 4 * 1024
 namespace dawn::native::d3d12 {
 namespace {
 MemorySegment GetMemorySegment(Device* device, D3D12_HEAP_TYPE heapType) {
@@ -177,6 +179,58 @@ bool IsClearValueOptimizable(DeviceBase* device, const D3D12_RESOURCE_DESC& reso
                                         D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL)) != 0;
 }
 
+uint32_t GetColumnPitch(uint32_t baseHeight, uint32_t mipLevelCount) {
+    uint32_t level1Height = 0;
+    uint32_t level2ToTailHeight = 0;
+    if (mipLevelCount >= 2) {
+        level1Height = std::max(baseHeight >> 1, 1u);
+
+        for (uint32_t level = 2; level < mipLevelCount; ++level) {
+            level2ToTailHeight += std::max(baseHeight >> level, 1u);
+        }
+    }
+    uint32_t columnPitch = baseHeight + std::max(level1Height, level2ToTailHeight);
+
+    return Align(columnPitch, 4);
+}
+
+uint32_t ComputeExtraArraySize(uint32_t width,
+                               uint32_t height,
+                               uint32_t arrayLayerCount,
+                               uint32_t mipLevelCount,
+                               uint32_t sampleCount,
+                               uint32_t bytesPerBlock) {
+    uint64_t sliceAndSamples = arrayLayerCount * sampleCount;
+
+    if (sliceAndSamples <= 1) {
+        return 0;
+    }
+
+    uint64_t rowPitch = width * bytesPerBlock;
+
+    const uint32_t tileHeight = 32;                       // rows of pixels in a tile
+    const uint32_t tileRowSize = TILE_SIZE / tileHeight;  // bytes of pixels in a tile
+
+    uint32_t columnPitch = GetColumnPitch(height, mipLevelCount);
+
+    uint64_t totalHeight = columnPitch * sliceAndSamples;
+
+    uint32_t mainTileCols = Align(rowPitch, tileRowSize) / tileRowSize;
+    uint32_t mainTileRows = Align(totalHeight, tileHeight) / tileHeight;
+
+    uint64_t mainTileCount = mainTileCols * mainTileRows;
+    uint64_t mainSize = mainTileCount * TILE_SIZE;
+
+    uint64_t assumedMainSize = Align(columnPitch * rowPitch, 16 * 1024) * sliceAndSamples;
+
+    if (Align(mainSize >> 8, PAGE_SIZE) > Align(assumedMainSize >> 8, PAGE_SIZE)) {
+        uint64_t assumedMainSizePerLayer = assumedMainSize / arrayLayerCount;
+        return (mainSize - assumedMainSize + assumedMainSizePerLayer - TILE_SIZE) /
+               assumedMainSizePerLayer;
+    }
+    return 0;
+}
+
 }  // namespace
 
 ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(device) {
@@ -199,7 +253,8 @@ ResourceAllocatorManager::ResourceAllocatorManager(Device* device) : mDevice(dev
 ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     D3D12_HEAP_TYPE heapType,
     const D3D12_RESOURCE_DESC& resourceDescriptor,
-    D3D12_RESOURCE_STATES initialUsage) {
+    D3D12_RESOURCE_STATES initialUsage,
+    uint32_t bytesPerBlock) {
     // In order to suppress a warning in the D3D12 debug layer, we need to specify an
     // optimized clear value. As there are no negative consequences when picking a mismatched
     // clear value, we use zero as the optimized clear value. This also enables fast clears on
@@ -211,6 +266,18 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
         optimizedClearValue = &zero;
     }
 
+    // If we are allocating memory for a 2D array texture on D3D12 backend, we need to allocate
+    // extra layers on some devices, see crbug.com/dawn/949 for details.
+    D3D12_RESOURCE_DESC revisedDescriptor = resourceDescriptor;
+    if (mDevice->IsToggleEnabled(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture) &&
+        resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D &&
+        resourceDescriptor.DepthOrArraySize > 1) {
+        revisedDescriptor.DepthOrArraySize +=
+            ComputeExtraArraySize(resourceDescriptor.Width, resourceDescriptor.Height,
+                                  resourceDescriptor.DepthOrArraySize, resourceDescriptor.MipLevels,
+                                  resourceDescriptor.SampleDesc.Count, bytesPerBlock);
+    }
+
     // TODO(crbug.com/dawn/849): Conditionally disable sub-allocation.
     // For very large resources, there is no benefit to suballocate.
     // For very small resources, it is inefficent to suballocate given the min. heap
@@ -218,7 +285,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
     // Attempt to satisfy the request using sub-allocation (placed resource in a heap).
     if (!mDevice->IsToggleEnabled(Toggle::DisableResourceSuballocation)) {
         ResourceHeapAllocation subAllocation;
-        DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, resourceDescriptor,
+        DAWN_TRY_ASSIGN(subAllocation, CreatePlacedResource(heapType, revisedDescriptor,
                                                             optimizedClearValue, initialUsage));
         if (subAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
             return std::move(subAllocation);
@@ -227,7 +294,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
 
     // If sub-allocation fails, fall-back to direct allocation (committed resource).
     ResourceHeapAllocation directAllocation;
-    DAWN_TRY_ASSIGN(directAllocation, CreateCommittedResource(heapType, resourceDescriptor,
+    DAWN_TRY_ASSIGN(directAllocation, CreateCommittedResource(heapType, revisedDescriptor,
                                                               optimizedClearValue, initialUsage));
     if (directAllocation.GetInfo().mMethod != AllocationMethod::kInvalid) {
         return std::move(directAllocation);
