@@ -33,6 +33,24 @@
       "message": "Currently these test cases are pass, since \"shader-f16\" has not been exposed to Chrome yet, but to land the CL that exposing \"shader-f16\" (https://chromium-review.googlesource.com/c/chromium/src/+/3885086) require skipping these D3D12 cases.\nShall I add a \"# KEEP\" here?",
       "revId": "d0097c6b9ba1ae8d88283cda46263288af7de778",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7ae8ba_3cf6f5fd",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-15T10:05:39Z",
+      "side": 1,
+      "message": "Disabling all the literal tests on windows for this issue seems less than ideal.\nHow much work would it be to fix the exposing of `shader-f16` on windows + `!use_dxc`?",
+      "parentUuid": "9c17a6bd_613d4e0f",
+      "revId": "d0097c6b9ba1ae8d88283cda46263288af7de778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
