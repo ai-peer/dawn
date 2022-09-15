@@ -51,6 +51,24 @@
       "parentUuid": "9c17a6bd_613d4e0f",
       "revId": "d0097c6b9ba1ae8d88283cda46263288af7de778",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082df05d_f04b984c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-15T12:28:20Z",
+      "side": 1,
+      "message": "Working on it. Shall we land the constant evaluation part of this CL?",
+      "parentUuid": "5b7ae8ba_3cf6f5fd",
+      "revId": "d0097c6b9ba1ae8d88283cda46263288af7de778",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
