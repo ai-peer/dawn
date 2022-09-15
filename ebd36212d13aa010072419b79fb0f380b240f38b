@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c254c17f_55529a65",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "add `UNREACHABLE();`",
+      "parentUuid": "1873cc0a_385eb2cc",
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ff1ef5c_98c4a005",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-08-25T12:44:26Z",
       "side": 1,
       "message": "nit: there\u0027s usually no space between TODO and the (. But also is there a reason why we don\u0027t have a Toggle for this workaround?",
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "304aafcf_fe14f9db",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Toggle added.",
+      "parentUuid": "0ff1ef5c_98c4a005",
       "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af6709e_aab9af64",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 1530,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08917704_ec5c2077",
+      "range": {
+        "startLine": 1530,
+        "startChar": 49,
+        "endLine": 1530,
+        "endChar": 82
+      },
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "321e5003_1dbd5810",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fe1bb5_e2186211",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Sure. Defined it here because I want to initialize \u0027mCounterSamplingPoint\u0027 with a default value, and check it with CounterSamplingPoint in other places:\nToBackend(GetDevice())-\u003eGetCounterSamplingPoint() \u003d\u003d CounterSamplingPoint::StageBoundary\n\nI forgot I had added \u0027IsCounterSamplingAtCommandSupported\u0027 and \u0027IsCounterSamplingAtStageSupported\u0027 on device, this can be private.",
+      "parentUuid": "321e5003_1dbd5810",
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4fd6bd4b_2b5ef15f",
@@ -105,6 +183,30 @@
       "writtenOn": "2022-08-25T12:44:26Z",
       "side": 1,
       "message": "nit: no need to initialize this variable since it is done at [1]",
+      "range": {
+        "startLine": 160,
+        "startChar": 46,
+        "endLine": 160,
+        "endChar": 75
+      },
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c62863_ed787935",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fd6bd4b_2b5ef15f",
       "range": {
         "startLine": 160,
         "startChar": 46,
@@ -149,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c049092_ed50e7f4",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "We only can check whether the device supports sampling at command boundary or stage boundary and use MTL***PassDescriptor.sampleBufferAttachments from macOS 11.0+. They are new Metal APIs. \nOn macOS \u003c 11.0, there is only [encoder sampleCountersInBuffer:atSampleIndex:withBarrier] available which used between commands, we only can check whether timestamp is supported by whether the device has timestamp counter set, and cannot distinguish whether it is command command or stage boundary. If there is timestamp counter set on device, [encoder sampleCountersInBuffer] can be used, otherwise it will not work. I can add comments for this.\n\nConsider renaming IsFooSupported to UseCounterSamplingAtFoo, here I will use two boolean mCounterSamplingAtCommandBoundary and mCounterSamplingAtStageBoundary to store the sampling boundary on the device.",
+      "parentUuid": "19c933f5_9cf197c9",
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e86baf8b_43cc6c51",
@@ -162,6 +282,30 @@
       "writtenOn": "2022-08-25T12:44:26Z",
       "side": 1,
       "message": "nit: this must always be true as it is an error to create a render pipeline without a vertex stage. So we could remove this argument",
+      "range": {
+        "startLine": 554,
+        "startChar": 46,
+        "endLine": 554,
+        "endChar": 67
+      },
+      "revId": "ebd36212d13aa010072419b79fb0f380b240f38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ebc831_84b0ea15",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e86baf8b_43cc6c51",
       "range": {
         "startLine": 554,
         "startChar": 46,

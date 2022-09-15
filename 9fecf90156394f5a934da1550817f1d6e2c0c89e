@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff3c252c_268a3f08",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "The kMaxSampleBufferAttachments is just used internally to make sure the helper functions doesn\u0027t get called multiple times by developers, and not used by end users who only could use at most two sampleBufferAttachments. So we don\u0027t need to expose this limitation. Put it and TODO in the template where it\u0027s required, and we can pass MTLDevice to constructor for checking the maximum when Metal address the bug.",
+      "parentUuid": "d7527eb6_0d0785ff",
+      "range": {
+        "startLine": 72,
+        "startChar": 4,
+        "endLine": 73,
+        "endChar": 45
+      },
+      "revId": "9fecf90156394f5a934da1550817f1d6e2c0c89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7484cea2_2514a6c4",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-07-28T20:41:23Z",
       "side": 1,
       "message": "it would be best to split this test into multiple tests so we can suppress them individually. Same for the test after it",
+      "range": {
+        "startLine": 834,
+        "startChar": 93,
+        "endLine": 835,
+        "endChar": 19
+      },
+      "revId": "9fecf90156394f5a934da1550817f1d6e2c0c89e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a73947_6921e773",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 835,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-15T16:46:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7484cea2_2514a6c4",
       "range": {
         "startLine": 834,
         "startChar": 93,
