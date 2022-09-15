@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8de924b_ca5c7bf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-15T05:01:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8283bad1fce16aeadcfa046b2bc98b3dd3dec193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087847c0_dcd74b70",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-15T05:01:21Z",
+      "side": 1,
+      "message": "unit: no parentheses on \"topology is (%s)\"",
+      "revId": "8283bad1fce16aeadcfa046b2bc98b3dd3dec193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
