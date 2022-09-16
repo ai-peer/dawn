@@ -120,6 +120,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bfc3b6_a3e36941",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:24:52Z",
+      "side": 1,
+      "message": "Windows build complaining about this variable not being used.",
+      "range": {
+        "startLine": 860,
+        "startChar": 22,
+        "endLine": 860,
+        "endChar": 25
+      },
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65724e89_947dd99c",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 957,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:24:52Z",
+      "side": 1,
+      "message": "str is not used",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3acee384_39d89f93",
