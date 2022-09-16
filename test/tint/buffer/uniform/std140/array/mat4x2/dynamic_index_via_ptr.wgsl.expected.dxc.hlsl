@@ -9,15 +9,19 @@ int i() {
 }
 
 float4x2 tint_symbol_1(uint4 buffer[8], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  uint4 ubo_load = buffer[scalar_offset / 4];
-  const uint scalar_offset_1 = ((offset + 8u)) / 4;
-  uint4 ubo_load_1 = buffer[scalar_offset_1 / 4];
-  const uint scalar_offset_2 = ((offset + 16u)) / 4;
-  uint4 ubo_load_2 = buffer[scalar_offset_2 / 4];
-  const uint scalar_offset_3 = ((offset + 24u)) / 4;
-  uint4 ubo_load_3 = buffer[scalar_offset_3 / 4];
-  return float4x2(asfloat(((scalar_offset & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy)), asfloat(((scalar_offset_3 & 2) ? ubo_load_3.zw : ubo_load_3.xy)));
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_2 = buffer[scalar_offset_index_2 / 4];
+  const uint scalar_offset_bytes_3 = ((offset + 24u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_3 / 4];
+  return float4x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_index_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy)), asfloat(((scalar_offset_index_3 & 2) ? ubo_load_3.zw : ubo_load_3.xy)));
 }
 
 typedef float4x2 tint_symbol_ret[4];
@@ -37,8 +41,9 @@ void f() {
   const int p_a_i_i_save = i();
   const float4x2 l_a[4] = tint_symbol(a, 0u);
   const float4x2 l_a_i = tint_symbol_1(a, (32u * uint(p_a_i_save)));
-  const uint scalar_offset_4 = (((32u * uint(p_a_i_save)) + (8u * uint(p_a_i_i_save)))) / 4;
-  uint4 ubo_load_4 = a[scalar_offset_4 / 4];
-  const float2 l_a_i_i = asfloat(((scalar_offset_4 & 2) ? ubo_load_4.zw : ubo_load_4.xy));
+  const uint scalar_offset_bytes_4 = (((32u * uint(p_a_i_save)) + (8u * uint(p_a_i_i_save))));
+  const uint scalar_offset_index_4 = scalar_offset_bytes_4 / 4;
+  uint4 ubo_load_4 = a[scalar_offset_index_4 / 4];
+  const float2 l_a_i_i = asfloat(((scalar_offset_index_4 & 2) ? ubo_load_4.zw : ubo_load_4.xy));
   return;
 }

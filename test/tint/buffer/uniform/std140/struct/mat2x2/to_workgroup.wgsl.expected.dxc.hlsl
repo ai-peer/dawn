@@ -14,17 +14,21 @@ struct tint_symbol_1 {
 };
 
 float2x2 tint_symbol_5(uint4 buffer[8], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  uint4 ubo_load = buffer[scalar_offset / 4];
-  const uint scalar_offset_1 = ((offset + 8u)) / 4;
-  uint4 ubo_load_1 = buffer[scalar_offset_1 / 4];
-  return float2x2(asfloat(((scalar_offset & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)));
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  return float2x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)));
 }
 
 S tint_symbol_3(uint4 buffer[8], uint offset) {
-  const uint scalar_offset_2 = ((offset + 0u)) / 4;
-  const uint scalar_offset_3 = ((offset + 24u)) / 4;
-  const S tint_symbol_8 = {asint(buffer[scalar_offset_2 / 4][scalar_offset_2 % 4]), tint_symbol_5(buffer, (offset + 8u)), asint(buffer[scalar_offset_3 / 4][scalar_offset_3 % 4])};
+  const uint scalar_offset_bytes_2 = ((offset + 0u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  const uint scalar_offset_bytes_3 = ((offset + 24u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  const S tint_symbol_8 = {asint(buffer[scalar_offset_index_2 / 4][scalar_offset_index_2 % 4]), tint_symbol_5(buffer, (offset + 8u)), asint(buffer[scalar_offset_index_3 / 4][scalar_offset_index_3 % 4])};
   return tint_symbol_8;
 }
 
