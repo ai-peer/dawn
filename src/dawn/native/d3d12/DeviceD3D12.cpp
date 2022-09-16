@@ -235,6 +235,20 @@ ComPtr<IDXGIFactory4> Device::GetFactory() const {
 }
 
 MaybeError Device::ApplyUseDxcToggle() {
+    if (ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCBinaryAvailable()) {
+        auto version = ToBackend(GetAdapter())->GetBackend()->GetDXCompilerVersion();
+        if (version.IsError()) {
+            version.AcquireError();
+            printf(">>>>>>>>>>>>> Error when getting DXC version.\n");
+        } else {
+            auto v = version.AcquireSuccess();
+            std::ostringstream msg;
+            msg << "=========== DXC version: " << std::to_string(v >> 32) << "."
+                << std::to_string(v & ((uint64_t(1) << 32) - 1));
+            printf("%s\n", msg.str().c_str());
+        }
+    }
+
     // Require DXC version 1.4 or higher to enable using DXC, as DXC 1.2 have some known issues when
     // compiling Tint generated HLSL program. Please refer to crbug.com/tint/1719.
     if (!ToBackend(GetAdapter())->GetBackend()->IsDXCAvailable(1, 4)) {
