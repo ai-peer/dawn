@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c0d2a0_f4baff05",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4746,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T18:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998102fa_a85188a1",
+      "range": {
+        "startLine": 4746,
+        "startChar": 54,
+        "endLine": 4746,
+        "endChar": 59
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "610ba1c5_fe9c9607",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "09b1c87f_f8048462",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T18:01:41Z",
+      "side": 1,
+      "message": "Thanks for the suggestion.  I\u0027d like to consdier it after landing.",
+      "parentUuid": "610ba1c5_fe9c9607",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 57
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ea22a60_d087f345",
         "filename": "src/tint/reader/spirv/function.h",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2022-09-12T22:41:30Z",
       "side": 1,
       "message": "These are either both `MAX_UINT` and `0` respectively, or block positions? If so, I\u0027d recommend putting in a `Use` struct and replacing this with `std::optional\u003cUse\u003e`.",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 286,
+        "endChar": 30
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae4fe545_4fb4ee06",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T18:01:41Z",
+      "side": 1,
+      "message": "I\u0027d like to consider that after landing this.\nIt\u0027s a more disruptive change and this fix is already subtle enough about what\u0027s going on.",
+      "parentUuid": "7ea22a60_d087f345",
       "range": {
         "startLine": 275,
         "startChar": 0,
@@ -100,6 +172,30 @@
       "writtenOn": "2022-09-12T22:41:30Z",
       "side": 1,
       "message": "Remove?",
+      "range": {
+        "startLine": 1737,
+        "startChar": 2,
+        "endLine": 1737,
+        "endChar": 30
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7d3cb1_355b59d2",
+        "filename": "src/tint/reader/spirv/function_var_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1737,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T18:01:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a338f084_a83d7bee",
       "range": {
         "startLine": 1737,
         "startChar": 2,
