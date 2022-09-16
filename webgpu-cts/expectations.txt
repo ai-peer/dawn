@@ -61,7 +61,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-09-14 12:43:00AM
+# Last rolled: 2022-09-16 02:55:17PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -216,14 +216,14 @@ crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:vertex:isAsy
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ linux ] webgpu:web_platform,external_texture,* [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt2020.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt709.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
-crbug.com/dawn/0000 [ mac intel ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt2020.vp9.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt709.vp9.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
+crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
 
 ################################################################################
 # webgpu:api,operation,buffers failures
