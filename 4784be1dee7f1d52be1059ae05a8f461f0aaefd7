@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63f20246_c1622ff4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T18:12:43Z",
+      "side": 1,
+      "message": "I like it! Just a few comments to address.",
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d25ed024_ef4ff51f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T18:12:43Z",
+      "side": 1,
+      "message": "I get what you\u0027re doing here - I struggled with this as well. But personally, I don\u0027t like having two different type names for the return value of a member function - the one declared in the header (`Result`) vs the one in the cpp (`SemConstantResult`). I would prefer we just use `ConstEval::Result` in the cpp instead of `SemConstantResult` (similar to how it was before), and use `ConstantResult` as you\u0027ve done here for the internal one.\n\nAlternatively, we can rename `ConstEval::Result` to `ConstEval::SemConstantResult`, then they would have the same name in both header and cpp.",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 62
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5ce1d7_bcd311fb",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T18:12:43Z",
+      "side": 1,
+      "message": "I\u0027m guessing we don\u0027t need this anymore?",
+      "range": {
+        "startLine": 275,
+        "startChar": 7,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d3afa1b_86e8221e",
+        "filename": "src/tint/utils/result_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T18:12:43Z",
+      "side": 1,
+      "message": "Why inheritance here?",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
