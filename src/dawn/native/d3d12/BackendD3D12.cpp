@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d12/BackendD3D12.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "dawn/native/D3D12Backend.h"
@@ -142,19 +143,32 @@ ComPtr<IDxcValidator> Backend::GetDxcValidator() const {
     return mDxcValidator;
 }
 
+// Check both Dxc compiler and Dxc validator version, and return the version of older one.
 ResultOrError<uint64_t> Backend::GetDXCompilerVersion() {
+    DAWN_TRY(EnsureDxcCompiler());
     DAWN_TRY(EnsureDxcValidator());
 
-    ComPtr<IDxcVersionInfo> versionInfo;
-    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&versionInfo),
+    ComPtr<IDxcVersionInfo> compilerVersionInfo;
+    DAWN_TRY(CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo),
+                          "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo"));
+    ComPtr<IDxcVersionInfo> validatorVersionInfo;
+    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&validatorVersionInfo),
                           "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
 
     uint32_t compilerMajor, compilerMinor;
-    DAWN_TRY(CheckHRESULT(versionInfo->GetVersion(&compilerMajor, &compilerMinor),
+    DAWN_TRY(CheckHRESULT(compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
+                          "IDxcVersionInfo::GetVersion"));
+    uint32_t validatorMajor, validatorMinor;
+    DAWN_TRY(CheckHRESULT(validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
                           "IDxcVersionInfo::GetVersion"));
 
-    // Pack both into a single version number.
-    return MakeDXCVersion(compilerMajor, compilerMinor);
+    printf("DXC Compiler version %d.%d\n", compilerMajor, compilerMinor);
+    printf("DXC Validator version %d.%d\n", validatorMajor, validatorMinor);
+
+    // Pack major and minor version number into a single version number, and return the smaller one.
+    return static_cast<uint64_t>(
+        std::min<uint64_t>(MakeDXCVersion(compilerMajor, compilerMinor),
+                           MakeDXCVersion(validatorMajor, validatorMinor)));
 }
 
 // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
@@ -168,6 +182,8 @@ bool Backend::IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinor
             if (version >= MakeDXCVersion(minimumMajorVersion, minimumMinorVersion)) {
                 return true;
             }
+        } else {
+            versionOrError.AcquireError();
         }
     }
     return false;
