@@ -16,6 +16,23 @@
       "message": "Still waiting on CQ",
       "revId": "59c3439fc49e3de8b0e8015f5e3a09564c59eda0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db7087b_226bc37c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:57:33Z",
+      "side": 1,
+      "message": "Yay it can be removed. I\u0027m slightly dumbfounded that `FoldTrivialSingleUseLets` wasn\u0027t actually used by the SPIR-V reader!",
+      "revId": "59c3439fc49e3de8b0e8015f5e3a09564c59eda0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
