@@ -1,3 +1,5 @@
+SKIP: FAILED
+
 struct MyStruct {
   float f1;
 };
@@ -39,3 +41,5 @@ void f() {
   const float3 l16 = v16;
   return;
 }
+DXC validation failure:
+

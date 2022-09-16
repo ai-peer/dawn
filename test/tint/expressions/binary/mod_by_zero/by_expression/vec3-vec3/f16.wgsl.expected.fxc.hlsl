@@ -8,7 +8,7 @@ void f() {
   return;
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001C6CF8C3C20(3,10-18): error X3000: syntax error: unexpected token 'float16_t'
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001C6CF8C3C20(4,10-18): error X3000: syntax error: unexpected token 'float16_t'
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001C6CF8C3C20(5,16-24): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D5B1D6300(3,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D5B1D6300(4,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D5B1D6300(5,16-24): error X3000: syntax error: unexpected token 'float16_t'
 

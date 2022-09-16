@@ -33,3 +33,9 @@ void compute_main() {
   refract_8984af();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001A0F8CD6FE0(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001A0F8CD6FE0(3,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001A0F8CD6FE0(4,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001A0F8CD6FE0(4,13-17): error X3000: unrecognized identifier 'arg_2'
+

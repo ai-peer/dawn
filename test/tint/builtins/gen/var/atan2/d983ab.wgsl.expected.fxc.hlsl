@@ -32,3 +32,8 @@ void compute_main() {
   atan2_d983ab();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001FCCE910820(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001FCCE910820(3,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001FCCE910820(4,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

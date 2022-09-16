@@ -8,6 +8,6 @@ void f() {
   return;
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x00000154BF386B50(3,3-11): error X3000: unrecognized identifier 'float16_t'
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x00000154BF386B50(3,13): error X3000: unrecognized identifier 'a'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000177808A2C60(3,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000177808A2C60(3,13): error X3000: unrecognized identifier 'a'
 

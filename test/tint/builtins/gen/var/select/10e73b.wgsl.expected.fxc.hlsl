@@ -33,3 +33,7 @@ void compute_main() {
   select_10e73b();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000182F5AE0540(2,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000182F5AE0540(2,13-17): error X3000: unrecognized identifier 'arg_0'
+

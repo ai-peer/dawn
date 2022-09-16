@@ -1,7 +1,7 @@
 SKIP: FAILED
 
 void saturate_dcde71() {
-  vector<float16_t, 4> res = saturate((float16_t(0.0h)).xxxx);
+  vector<float16_t, 4> res = (float16_t(0.0h)).xxxx;
 }
 
 struct tint_symbol {
@@ -30,3 +30,6 @@ void compute_main() {
   saturate_dcde71();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001B512E07C50(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

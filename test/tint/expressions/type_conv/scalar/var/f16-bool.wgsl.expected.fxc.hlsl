@@ -11,5 +11,5 @@ void f() {
   const bool v = bool(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x00000162B2F85E70(6,8-16): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001B8D62D2620(6,8-16): error X3000: unrecognized identifier 'float16_t'
 

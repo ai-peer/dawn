@@ -11,5 +11,5 @@ void f() {
   const uint2 v = uint2(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x000001AF42F8A1A0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000020F66482FB0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
 

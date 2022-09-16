@@ -30,3 +30,6 @@ void compute_main() {
   refract_0594ba();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000222A2996190(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

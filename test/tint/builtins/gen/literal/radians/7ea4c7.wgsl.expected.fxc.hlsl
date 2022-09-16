@@ -34,3 +34,6 @@ void compute_main() {
   radians_7ea4c7();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000231D1A67220(1,8-16): error X3000: syntax error: unexpected token 'float16_t'
+

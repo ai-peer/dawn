@@ -1,7 +1,7 @@
 SKIP: FAILED
 
 void step_baa320() {
-  vector<float16_t, 4> res = step((float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx);
+  vector<float16_t, 4> res = (float16_t(1.0h)).xxxx;
 }
 
 struct tint_symbol {
@@ -30,3 +30,6 @@ void compute_main() {
   step_baa320();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000027598D6C820(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

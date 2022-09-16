@@ -11,5 +11,5 @@ void f() {
   const bool3 v = bool3(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x00000220C8376A10(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000002502A962DC0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
 

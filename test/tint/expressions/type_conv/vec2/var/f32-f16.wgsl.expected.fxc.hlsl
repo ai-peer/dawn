@@ -11,5 +11,5 @@ void f() {
   const vector<float16_t, 2> v = vector<float16_t, 2>(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x00000177C49E23E0(9,16-24): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001B30F6E3D50(9,16-24): error X3000: syntax error: unexpected token 'float16_t'
 

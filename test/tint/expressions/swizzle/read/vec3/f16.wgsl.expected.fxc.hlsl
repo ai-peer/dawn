@@ -135,5 +135,5 @@ void f() {
   vector<float16_t, 4> zzzz = P.v.zzzz;
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001DD905D7700(7,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001C1B2562400(7,10-18): error X3000: syntax error: unexpected token 'float16_t'
 

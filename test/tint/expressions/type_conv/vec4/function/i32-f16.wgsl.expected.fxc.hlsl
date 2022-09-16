@@ -17,5 +17,5 @@ void f() {
   vector<float16_t, 4> v = vector<float16_t, 4>(tint_symbol);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x00000272AD4875E0(15,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000246EDFB0720(15,10-18): error X3000: syntax error: unexpected token 'float16_t'
 

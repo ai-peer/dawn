@@ -1,7 +1,7 @@
 SKIP: FAILED
 
 void atan_a5f421() {
-  vector<float16_t, 3> res = atan((float16_t(0.0h)).xxx);
+  vector<float16_t, 3> res = (float16_t(0.0h)).xxx;
 }
 
 struct tint_symbol {
@@ -30,3 +30,6 @@ void compute_main() {
   atan_a5f421();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001145E886E80(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

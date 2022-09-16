@@ -31,3 +31,8 @@ void compute_main() {
   determinant_d7c86f();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D98CEBA70(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D98CEBA70(3,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000025D98CEBA70(3,13-15): error X3000: unrecognized identifier 'res'
+

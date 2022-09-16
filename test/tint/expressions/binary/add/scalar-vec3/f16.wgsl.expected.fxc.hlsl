@@ -8,5 +8,5 @@ void f() {
   return;
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001CF2FA94E40(3,9-17): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000020894C6E2F0(3,9-17): error X3000: unrecognized identifier 'float16_t'
 

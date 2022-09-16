@@ -1,19 +1,23 @@
-SKIP: FAILED
+#version 310 es
+#extension GL_AMD_gpu_shader_half_float : require
+precision mediump float;
 
-expressions/binary/mul/vec3-mat3x3/f16.wgsl:3:14 error: using f16 types in 'uniform' address space is not implemented yet
-    matrix : mat3x3<f16>,
-             ^^^^^^^^^^^
+layout(binding = 0, std140) uniform S_std140_ubo {
+  f16vec3 matrix_0;
+  f16vec3 matrix_1;
+  f16vec3 matrix_2;
+  f16vec3 vector;
+} data;
 
-expressions/binary/mul/vec3-mat3x3/f16.wgsl:2:1 note: see layout of struct:
-/*            align(8) size(32) */ struct S {
-/* offset( 0) align(8) size(24) */   matrix : mat3x3<f16>;
-/* offset(24) align(8) size( 6) */   vector : vec3<f16>;
-/* offset(30) align(1) size( 2) */   // -- implicit struct size padding --;
-/*                              */ };
-struct S {
-^^^^^^
+f16mat3 load_data_matrix() {
+  return f16mat3(data.matrix_0, data.matrix_1, data.matrix_2);
+}
 
-expressions/binary/mul/vec3-mat3x3/f16.wgsl:6:36 note: see declaration of variable
-@group(0) @binding(0) var<uniform> data: S;
-                                   ^^^^
+void tint_symbol() {
+  f16vec3 x = (data.vector * load_data_matrix());
+}
 
+void main() {
+  tint_symbol();
+  return;
+}

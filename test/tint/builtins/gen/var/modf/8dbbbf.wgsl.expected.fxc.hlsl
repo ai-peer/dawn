@@ -41,3 +41,6 @@ void compute_main() {
   modf_8dbbbf();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001ECE4925AF0(2,3-11): error X3000: unrecognized identifier 'float16_t'
+

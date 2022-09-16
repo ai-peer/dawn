@@ -17,5 +17,5 @@ void f() {
   float2x4 v = float2x4(tint_symbol);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x00000197CB8872F0(6,8-16): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000233DBD61200(6,8-16): error X3000: unrecognized identifier 'float16_t'
 

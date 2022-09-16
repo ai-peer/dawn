@@ -1,7 +1,7 @@
 SKIP: FAILED
 
 void saturate_e8df56() {
-  float16_t res = saturate(float16_t(0.0h));
+  float16_t res = float16_t(0.0h);
 }
 
 struct tint_symbol {
@@ -30,3 +30,7 @@ void compute_main() {
   saturate_e8df56();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000272802F8B90(2,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000272802F8B90(2,13-15): error X3000: unrecognized identifier 'res'
+

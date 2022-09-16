@@ -11,5 +11,5 @@ void f() {
   const uint v = uint(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x000001FB41A62990(6,8-16): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000245A6F92E80(6,8-16): error X3000: unrecognized identifier 'float16_t'
 

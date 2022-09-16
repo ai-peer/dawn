@@ -11,5 +11,5 @@ void f() {
   float4x3 v = float4x3(u);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\type_conv\Shader@0x0000015A33866E20(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000296357F65F0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
 

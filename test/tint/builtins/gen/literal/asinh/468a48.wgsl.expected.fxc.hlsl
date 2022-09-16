@@ -1,11 +1,7 @@
 SKIP: FAILED
 
-float16_t tint_sinh(float16_t x) {
-  return log((x + sqrt(((x * x) + float16_t(1.0h)))));
-}
-
 void asinh_468a48() {
-  float16_t res = tint_sinh(float16_t(0.0h));
+  float16_t res = float16_t(0.0h);
 }
 
 struct tint_symbol {
@@ -34,3 +30,7 @@ void compute_main() {
   asinh_468a48();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000172C7544000(2,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x00000172C7544000(2,13-15): error X3000: unrecognized identifier 'res'
+

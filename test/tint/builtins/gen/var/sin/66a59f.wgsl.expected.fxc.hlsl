@@ -31,3 +31,7 @@ void compute_main() {
   sin_66a59f();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000022DF2D26D80(2,3-11): error X3000: unrecognized identifier 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000022DF2D26D80(2,13-17): error X3000: unrecognized identifier 'arg_0'
+

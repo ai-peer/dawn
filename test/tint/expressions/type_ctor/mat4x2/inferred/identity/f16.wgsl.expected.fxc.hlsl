@@ -12,5 +12,5 @@ matrix<float16_t, 4, 2> f() {
   return m_1;
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001AC29EA1B60(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x0000027746BC1AB0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
 

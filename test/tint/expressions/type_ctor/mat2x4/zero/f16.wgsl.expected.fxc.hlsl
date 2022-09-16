@@ -7,5 +7,5 @@ void unused_entry_point() {
 
 static matrix<float16_t, 2, 4> m = matrix<float16_t, 2, 4>((float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx);
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x0000028156C54E00(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001F8CBE22AB0(6,15-23): error X3000: syntax error: unexpected token 'float16_t'
 

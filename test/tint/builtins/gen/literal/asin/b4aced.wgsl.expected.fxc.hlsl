@@ -1,7 +1,7 @@
 SKIP: FAILED
 
 void asin_b4aced() {
-  vector<float16_t, 2> res = asin((float16_t(0.0h)).xx);
+  vector<float16_t, 2> res = (float16_t(0.0h)).xx;
 }
 
 struct tint_symbol {
@@ -30,3 +30,6 @@ void compute_main() {
   asin_b4aced();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001A06E816160(2,10-18): error X3000: syntax error: unexpected token 'float16_t'
+

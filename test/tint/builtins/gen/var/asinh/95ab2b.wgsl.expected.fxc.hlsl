@@ -35,3 +35,6 @@ void compute_main() {
   asinh_95ab2b();
   return;
 }
+FXC validation failure:
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000001F0F6D24DA0(1,8-16): error X3000: syntax error: unexpected token 'float16_t'
+

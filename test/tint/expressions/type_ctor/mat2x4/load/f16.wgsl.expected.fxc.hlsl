@@ -10,6 +10,6 @@ void f() {
   const matrix<float16_t, 2, 4> m_1 = matrix<float16_t, 2, 4>(m);
 }
 FXC validation failure:
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001DD62E069C0(7,10-18): error X3000: syntax error: unexpected token 'float16_t'
-D:\Projects\RampUp\dawn\test\tint\expressions\Shader@0x000001DD62E069C0(8,16-24): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000002CCFBEA23D0(7,10-18): error X3000: syntax error: unexpected token 'float16_t'
+D:\Projects\RampUp\dawn\test\tint\Shader@0x000002CCFBEA23D0(8,16-24): error X3000: syntax error: unexpected token 'float16_t'
 
