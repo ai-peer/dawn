@@ -210,8 +210,8 @@ SanitizedResult Sanitize(const Program* in,
 
     // Attempt to convert `loop`s into for-loops. This is to try and massage the
     // output into something that will not cause FXC to choke or misbehave.
-    manager.Add<transform::FoldTrivialSingleUseLets>();
-    manager.Add<transform::LoopToForLoop>();
+    //manager.Add<transform::FoldTrivialSingleUseLets>();
+    //manager.Add<transform::LoopToForLoop>();
 
     if (!options.disable_workgroup_init) {
         // ZeroInitWorkgroupMemory must come before CanonicalizeEntryPointIO as
