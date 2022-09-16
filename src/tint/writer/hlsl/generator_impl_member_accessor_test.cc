@@ -34,6 +34,9 @@ inline const ast::Type* ty_u32(const ProgramBuilder::TypesBuilder& ty) {
 inline const ast::Type* ty_f32(const ProgramBuilder::TypesBuilder& ty) {
     return ty.f32();
 }
+inline const ast::Type* ty_f16(const ProgramBuilder::TypesBuilder& ty) {
+    return ty.f16();
+}
 template <typename T>
 inline const ast::Type* ty_vec2(const ProgramBuilder::TypesBuilder& ty) {
     return ty.vec2<T>();
@@ -156,6 +159,8 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad, Test) {
 
     auto p = GetParam();
 
+    Enable(ast::Extension::kF16);
+
     SetupStorageBuffer(utils::Vector{
         Member("a", ty.i32()),
         Member("b", p.member_type(ty)),
@@ -174,46 +179,75 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad, Test) {
 INSTANTIATE_TEST_SUITE_P(
     HlslGeneratorImplTest_MemberAccessor,
     HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad,
-    testing::Values(
-        TypeCase{ty_u32, "data.Load(4u)"},
-        TypeCase{ty_f32, "asfloat(data.Load(4u))"},
-        TypeCase{ty_i32, "asint(data.Load(4u))"},
-        TypeCase{ty_vec2<u32>, "data.Load2(8u)"},
-        TypeCase{ty_vec2<f32>, "asfloat(data.Load2(8u))"},
-        TypeCase{ty_vec2<i32>, "asint(data.Load2(8u))"},
-        TypeCase{ty_vec3<u32>, "data.Load3(16u)"},
-        TypeCase{ty_vec3<f32>, "asfloat(data.Load3(16u))"},
-        TypeCase{ty_vec3<i32>, "asint(data.Load3(16u))"},
-        TypeCase{ty_vec4<u32>, "data.Load4(16u)"},
-        TypeCase{ty_vec4<f32>, "asfloat(data.Load4(16u))"},
-        TypeCase{ty_vec4<i32>, "asint(data.Load4(16u))"},
-        TypeCase{
-            ty_mat2x2<f32>,
-            R"(return float2x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))));)"},
-        TypeCase{
-            ty_mat2x3<f32>,
-            R"(return float2x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))));)"},
-        TypeCase{
-            ty_mat2x4<f32>,
-            R"(return float2x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))));)"},
-        TypeCase{
-            ty_mat3x2<f32>,
-            R"(return float3x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))));)"},
-        TypeCase{
-            ty_mat3x3<f32>,
-            R"(return float3x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))));)"},
-        TypeCase{
-            ty_mat3x4<f32>,
-            R"(return float3x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))));)"},
-        TypeCase{
-            ty_mat4x2<f32>,
-            R"(return float4x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))), asfloat(buffer.Load2((offset + 24u))));)"},
-        TypeCase{
-            ty_mat4x3<f32>,
-            R"(return float4x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))), asfloat(buffer.Load3((offset + 48u))));)"},
-        TypeCase{
-            ty_mat4x4<f32>,
-            R"(return float4x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))), asfloat(buffer.Load4((offset + 48u))));)"}));
+    testing::Values(TypeCase{ty_u32, "data.Load(4u)"},
+                    TypeCase{ty_f32, "asfloat(data.Load(4u))"},
+                    TypeCase{ty_i32, "asint(data.Load(4u))"},
+                    TypeCase{ty_f16, "data.Load<float16_t>(4u)"},
+                    TypeCase{ty_vec2<u32>, "data.Load2(8u)"},
+                    TypeCase{ty_vec2<f32>, "asfloat(data.Load2(8u))"},
+                    TypeCase{ty_vec2<i32>, "asint(data.Load2(8u))"},
+                    TypeCase{ty_vec2<f16>, "data.Load<vector<float16_t, 2> >(4u)"},
+                    TypeCase{ty_vec3<u32>, "data.Load3(16u)"},
+                    TypeCase{ty_vec3<f32>, "asfloat(data.Load3(16u))"},
+                    TypeCase{ty_vec3<i32>, "asint(data.Load3(16u))"},
+                    TypeCase{ty_vec3<f16>, "data.Load<vector<float16_t, 3> >(8u)"},
+                    TypeCase{ty_vec4<u32>, "data.Load4(16u)"},
+                    TypeCase{ty_vec4<f32>, "asfloat(data.Load4(16u))"},
+                    TypeCase{ty_vec4<i32>, "asint(data.Load4(16u))"},
+                    TypeCase{ty_vec4<f16>, "data.Load<vector<float16_t, 4> >(8u)"},
+                    TypeCase{
+                        ty_mat2x2<f32>,
+                        R"(return float2x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))));)"},
+                    TypeCase{
+                        ty_mat2x3<f32>,
+                        R"(return float2x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat2x4<f32>,
+                        R"(return float2x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat3x2<f32>,
+                        R"(return float3x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat3x3<f32>,
+                        R"(return float3x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))));)"},
+                    TypeCase{
+                        ty_mat3x4<f32>,
+                        R"(return float3x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))));)"},
+                    TypeCase{
+                        ty_mat4x2<f32>,
+                        R"(return float4x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))), asfloat(buffer.Load2((offset + 24u))));)"},
+                    TypeCase{
+                        ty_mat4x3<f32>,
+                        R"(return float4x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))), asfloat(buffer.Load3((offset + 48u))));)"},
+                    TypeCase{
+                        ty_mat4x4<f32>,
+                        R"(return float4x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))), asfloat(buffer.Load4((offset + 48u))));)"},
+                    TypeCase{
+                        ty_mat2x2<f16>,
+                        R"(return matrix<float16_t, 2, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)));)"},
+                    TypeCase{
+                        ty_mat2x3<f16>,
+                        R"(return matrix<float16_t, 2, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat2x4<f16>,
+                        R"(return matrix<float16_t, 2, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat3x2<f16>,
+                        R"(return matrix<float16_t, 3, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)), buffer.Load<vector<float16_t, 2> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat3x3<f16>,
+                        R"(return matrix<float16_t, 3, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)), buffer.Load<vector<float16_t, 3> >((offset + 16u)));)"},
+                    TypeCase{
+                        ty_mat3x4<f16>,
+                        R"(return matrix<float16_t, 3, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)), buffer.Load<vector<float16_t, 4> >((offset + 16u)));)"},
+                    TypeCase{
+                        ty_mat4x2<f16>,
+                        R"(return matrix<float16_t, 4, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)), buffer.Load<vector<float16_t, 2> >((offset + 8u)), buffer.Load<vector<float16_t, 2> >((offset + 12u)));)"},
+                    TypeCase{
+                        ty_mat4x3<f16>, R"(return matrix<float16_t, 4, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)), buffer.Load<vector<float16_t, 3> >((offset + 16u)), buffer.Load<vector<float16_t, 3> >((offset + 24u)));)"},
+                    TypeCase{
+                        ty_mat4x4<f16>,
+                        R"(return matrix<float16_t, 4, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)), buffer.Load<vector<float16_t, 4> >((offset + 16u)), buffer.Load<vector<float16_t, 4> >((offset + 24u)));)"}));
 
 using HlslGeneratorImplTest_MemberAccessor_StorageBufferStore =
     HlslGeneratorImplTest_MemberAccessorWithParam<TypeCase>;
@@ -226,6 +260,8 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferStore, Test) {
     // data.b = <type>();
 
     auto p = GetParam();
+
+    Enable(ast::Extension::kF16);
 
     SetupStorageBuffer(utils::Vector{
         Member("a", ty.i32()),
@@ -243,64 +279,114 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferStore, Test) {
     EXPECT_THAT(gen.result(), HasSubstr(p.expected));
 }
 
-INSTANTIATE_TEST_SUITE_P(HlslGeneratorImplTest_MemberAccessor,
-                         HlslGeneratorImplTest_MemberAccessor_StorageBufferStore,
-                         testing::Values(TypeCase{ty_u32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_f32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_i32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_vec2<u32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec2<f32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec2<i32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec3<u32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec3<f32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec3<i32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<u32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<f32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<i32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_mat2x2<f32>, R"({
+INSTANTIATE_TEST_SUITE_P(
+    HlslGeneratorImplTest_MemberAccessor,
+    HlslGeneratorImplTest_MemberAccessor_StorageBufferStore,
+    testing::Values(TypeCase{ty_u32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_f32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_i32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_f16, "data.Store<float16_t>(4u, value)"},
+                    TypeCase{ty_vec2<u32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<f32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<i32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<f16>, "data.Store<vector<float16_t, 2> >(4u, value)"},
+                    TypeCase{ty_vec3<u32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<f32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<i32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<f16>, "data.Store<vector<float16_t, 3> >(8u, value)"},
+                    TypeCase{ty_vec4<u32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<f32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<i32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<f16>, "data.Store<vector<float16_t, 4> >(8u, value)"},
+                    TypeCase{ty_mat2x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat2x3<f32>, R"({
+                    TypeCase{ty_mat2x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat2x4<f32>, R"({
+                    TypeCase{ty_mat2x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat3x2<f32>, R"({
+                    TypeCase{ty_mat3x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
   buffer.Store2((offset + 16u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat3x3<f32>, R"({
+                    TypeCase{ty_mat3x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
   buffer.Store3((offset + 32u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat3x4<f32>, R"({
+                    TypeCase{ty_mat3x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
   buffer.Store4((offset + 32u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat4x2<f32>, R"({
+                    TypeCase{ty_mat4x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
   buffer.Store2((offset + 16u), asuint(value[2u]));
   buffer.Store2((offset + 24u), asuint(value[3u]));
 })"},
-                                         TypeCase{ty_mat4x3<f32>, R"({
+                    TypeCase{ty_mat4x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
   buffer.Store3((offset + 32u), asuint(value[2u]));
   buffer.Store3((offset + 48u), asuint(value[3u]));
 })"},
-                                         TypeCase{ty_mat4x4<f32>, R"({
+                    TypeCase{ty_mat4x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
   buffer.Store4((offset + 32u), asuint(value[2u]));
   buffer.Store4((offset + 48u), asuint(value[3u]));
+})"},
+                    TypeCase{ty_mat2x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+})"},
+                    TypeCase{ty_mat2x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+})"},
+                    TypeCase{ty_mat2x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+})"},
+                    TypeCase{ty_mat3x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 8u), value[2u]);
+})"},
+                    TypeCase{ty_mat3x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 16u), value[2u]);
+})"},
+                    TypeCase{ty_mat3x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 16u), value[2u]);
+})"},
+                    TypeCase{ty_mat4x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 8u), value[2u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 12u), value[3u]);
+})"},
+                    TypeCase{ty_mat4x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 16u), value[2u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 24u), value[3u]);
+})"},
+                    TypeCase{ty_mat4x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 16u), value[2u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 24u), value[3u]);
 })"}));
 
 TEST_F(HlslGeneratorImplTest_MemberAccessor, StorageBuffer_Store_Matrix_Empty) {
