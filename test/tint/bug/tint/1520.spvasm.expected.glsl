@@ -91,7 +91,8 @@ void main_1() {
   bool x_100_phi = false;
   bool x_111_phi = false;
   bool x_115_phi = false;
-  outputColor_S0 = vcolor_S0;
+  vec4 x_72 = vcolor_S0;
+  outputColor_S0 = x_72;
   float x_77 = x_4.unknownInput_S1_c0;
   x_8_unknown = x_77;
   x_9_ok = true;
@@ -139,7 +140,8 @@ void main_1() {
     x_114 = test_int_S1_c0_b();
     x_115_phi = x_114;
   }
-  if (x_115_phi) {
+  bool x_115 = x_115_phi;
+  if (x_115) {
     vec4 x_122 = x_4.ucolorGreen_S1_c0;
     x_116 = x_122;
   } else {

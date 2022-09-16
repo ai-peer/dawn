@@ -258,7 +258,8 @@ int performPartition_i1_i1_(inout int l, inout int h) {
       int x_983 = i_1;
       i_1 = 0;
       i_1 = x_983;
-      param_1 = j_1;
+      int x_72 = j_1;
+      param_1 = x_72;
       int x_984 = param_3;
       param_3 = 0;
       param_3 = x_984;
@@ -558,7 +559,8 @@ void quicksort_() {
     int x_1049 = top;
     top = 0;
     top = x_1049;
-    param_4 = l_1;
+    int x_118 = l_1;
+    param_4 = x_118;
     int x_1050 = stack[x_110_save];
     stack[x_110_save] = 0;
     stack[x_110_save] = x_1050;

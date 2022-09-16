@@ -80,7 +80,8 @@ void main_1() {
   bool x_100_phi = false;
   bool x_111_phi = false;
   bool x_115_phi = false;
-  outputColor_S0 = vcolor_S0;
+  const float4 x_72 = vcolor_S0;
+  outputColor_S0 = x_72;
   const float x_77 = asfloat(x_4[1].x);
   x_8_unknown = x_77;
   x_9_ok = true;
@@ -128,7 +129,8 @@ void main_1() {
     x_114 = test_int_S1_c0_b();
     x_115_phi = x_114;
   }
-  if (x_115_phi) {
+  const bool x_115 = x_115_phi;
+  if (x_115) {
     const float4 x_122 = asfloat(x_4[3]);
     x_116 = x_122;
   } else {
