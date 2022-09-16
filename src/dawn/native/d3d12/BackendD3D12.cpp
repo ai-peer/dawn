@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d12/BackendD3D12.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "dawn/native/D3D12Backend.h"
@@ -142,19 +143,77 @@ ComPtr<IDxcValidator> Backend::GetDxcValidator() const {
     return mDxcValidator;
 }
 
+// Check both Dxc compiler and Dxc validator version, and return the version of older one.
 ResultOrError<uint64_t> Backend::GetDXCompilerVersion() {
+    DAWN_TRY(EnsureDxcCompiler());
     DAWN_TRY(EnsureDxcValidator());
 
-    ComPtr<IDxcVersionInfo> versionInfo;
-    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&versionInfo),
-                          "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+    ComPtr<IDxcVersionInfo> compilerVersionInfo;
 
+    DAWN_TRY(CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo),
+                          "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo"));
     uint32_t compilerMajor, compilerMinor;
-    DAWN_TRY(CheckHRESULT(versionInfo->GetVersion(&compilerMajor, &compilerMinor),
+    DAWN_TRY(CheckHRESULT(compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
                           "IDxcVersionInfo::GetVersion"));
 
-    // Pack both into a single version number.
-    return MakeDXCVersion(compilerMajor, compilerMinor);
+    ComPtr<IDxcVersionInfo2> compilerVersionInfo2;
+
+    auto getCompilerVersionInfo2 =
+        CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo2),
+                     "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo2");
+    if (getCompilerVersionInfo2.AcquireError() == nullptr) {
+        uint32_t compilerNumCommits;
+        char* compilerCommitHash;
+
+        auto compilerCommitResult = CheckHRESULT(
+            compilerVersionInfo2->GetCommitInfo(&compilerNumCommits, &compilerCommitHash),
+            "IDxcVersionInfo2::GetCommitInfo");
+
+        if (compilerCommitResult.AcquireError() == nullptr) {
+            printf("DXC Compiler version %d.%d, #commits %d, hash %s\n", compilerMajor,
+                   compilerMinor, compilerNumCommits, compilerCommitHash);
+        } else {
+            printf("DXC Compiler version %d.%d\n", compilerMajor, compilerMinor);
+        }
+    } else {
+        printf("DXC Compiler version %d.%d\n", compilerMajor, compilerMinor);
+    }
+
+    ComPtr<IDxcVersionInfo> validatorVersionInfo;
+
+    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&validatorVersionInfo),
+                          "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+    uint32_t validatorMajor, validatorMinor;
+    DAWN_TRY(CheckHRESULT(validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
+                          "IDxcVersionInfo::GetVersion"));
+
+    ComPtr<IDxcVersionInfo2> validatorVersionInfo2;
+
+    auto getValidatorVersionInfo2 =
+        CheckHRESULT(mDxcValidator.As(&validatorVersionInfo2),
+                     "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo2");
+    if (getValidatorVersionInfo2.AcquireError() == nullptr) {
+        uint32_t validatorNumCommits;
+        char* validatorCommitHash;
+
+        auto validatorCommitResult = CheckHRESULT(
+            validatorVersionInfo2->GetCommitInfo(&validatorNumCommits, &validatorCommitHash),
+            "IDxcVersionInfo2::GetCommitInfo");
+
+        if (validatorCommitResult.AcquireError() == nullptr) {
+            printf("DXC Validator version %d.%d, #commits %d, hash %s\n", validatorMajor,
+                   validatorMinor, validatorNumCommits, validatorCommitHash);
+        } else {
+            printf("DXC Validator version %d.%d\n", validatorMajor, validatorMinor);
+        }
+    } else {
+        printf("DXC Validator version %d.%d\n", validatorMajor, validatorMinor);
+    }
+
+    // Pack major and minor version number into a single version number, and return the smaller one.
+    uint64_t version = std::min<uint64_t>(MakeDXCVersion(compilerMajor, compilerMinor),
+                                          MakeDXCVersion(validatorMajor, validatorMinor));
+    return version;
 }
 
 // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
@@ -168,6 +227,8 @@ bool Backend::IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinor
             if (version >= MakeDXCVersion(minimumMajorVersion, minimumMinorVersion)) {
                 return true;
             }
+        } else {
+            printf("Error msg: %s\n", versionOrError.AcquireError().get()->GetMessage().c_str());
         }
     }
     return false;
