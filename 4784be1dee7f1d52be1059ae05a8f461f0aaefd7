@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f1e3de3_0a21c1de",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:01:05Z",
+      "side": 1,
+      "message": "I understand your point, but there\u0027s also something to be said about idiomatic C++, and being able to search for function implementations by matching signatures (modulo namespacing shenanigans). I think what I\u0027m suggesting doesn\u0027t hurt clarity. `ConstEval::Result` vs `ConstantResult` is not that confusing once you know what they mean, in the same was as `sem::Constant` vs `Constant` stops being confusing after a short while.\n\nCan we replace the `SemConstantResult` with `ConstEval::Result` in this CL for now, and let\u0027s see how it goes?",
+      "parentUuid": "0ee0b774_7189a217",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 62
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc5ce1d7_bcd311fb",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 3
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02f98716_f010407d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:01:05Z",
+      "side": 1,
+      "message": "Hasn\u0027t it? The statement before is now a return statement.",
+      "parentUuid": "3dca685d_983c3366",
+      "range": {
+        "startLine": 275,
+        "startChar": 7,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d3afa1b_86e8221e",
         "filename": "src/tint/utils/result_test.cc",
         "patchSetId": 3
@@ -149,6 +197,30 @@
       "side": 1,
       "message": "It mimics the usage in `const_eval.cc`. We have an implicit cast of derived pointer (`const Constant*`) to base pointer (`const sem::Constant*`).",
       "parentUuid": "1d3afa1b_86e8221e",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50f9b03a_78b5e4bc",
+        "filename": "src/tint/utils/result_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:01:05Z",
+      "side": 1,
+      "message": "Right, but the code you wrote also supports conversion between unrelated Result types, right?",
+      "parentUuid": "d57000e9_b7e1d499",
       "range": {
         "startLine": 56,
         "startChar": 13,
