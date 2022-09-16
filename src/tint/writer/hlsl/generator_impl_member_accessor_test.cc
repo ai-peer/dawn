@@ -34,6 +34,9 @@ inline const ast::Type* ty_u32(const ProgramBuilder::TypesBuilder& ty) {
 inline const ast::Type* ty_f32(const ProgramBuilder::TypesBuilder& ty) {
     return ty.f32();
 }
+inline const ast::Type* ty_f16(const ProgramBuilder::TypesBuilder& ty) {
+    return ty.f16();
+}
 template <typename T>
 inline const ast::Type* ty_vec2(const ProgramBuilder::TypesBuilder& ty) {
     return ty.vec2<T>();
@@ -92,6 +95,14 @@ class HlslGeneratorImplTest_MemberAccessorBase : public BASE {
 
         b.GlobalVar("data", b.ty.Of(s), ast::AddressSpace::kStorage, ast::Access::kReadWrite,
                     b.Group(1_a), b.Binding(0_a));
+    }
+
+    void SetupUniformBuffer(utils::VectorRef<const ast::StructMember*> members) {
+        ProgramBuilder& b = *this;
+        auto* s = b.Structure("Data", members);
+
+        b.GlobalVar("data", b.ty.Of(s), ast::AddressSpace::kUniform, ast::Access::kUndefined,
+                    b.Group(1_a), b.Binding(1_a));
     }
 
     void SetupFunction(utils::VectorRef<const ast::Statement*> statements) {
@@ -156,6 +167,8 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad, Test) {
 
     auto p = GetParam();
 
+    Enable(ast::Extension::kF16);
+
     SetupStorageBuffer(utils::Vector{
         Member("a", ty.i32()),
         Member("b", p.member_type(ty)),
@@ -174,46 +187,398 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad, Test) {
 INSTANTIATE_TEST_SUITE_P(
     HlslGeneratorImplTest_MemberAccessor,
     HlslGeneratorImplTest_MemberAccessor_StorageBufferLoad,
-    testing::Values(
-        TypeCase{ty_u32, "data.Load(4u)"},
-        TypeCase{ty_f32, "asfloat(data.Load(4u))"},
-        TypeCase{ty_i32, "asint(data.Load(4u))"},
-        TypeCase{ty_vec2<u32>, "data.Load2(8u)"},
-        TypeCase{ty_vec2<f32>, "asfloat(data.Load2(8u))"},
-        TypeCase{ty_vec2<i32>, "asint(data.Load2(8u))"},
-        TypeCase{ty_vec3<u32>, "data.Load3(16u)"},
-        TypeCase{ty_vec3<f32>, "asfloat(data.Load3(16u))"},
-        TypeCase{ty_vec3<i32>, "asint(data.Load3(16u))"},
-        TypeCase{ty_vec4<u32>, "data.Load4(16u)"},
-        TypeCase{ty_vec4<f32>, "asfloat(data.Load4(16u))"},
-        TypeCase{ty_vec4<i32>, "asint(data.Load4(16u))"},
-        TypeCase{
-            ty_mat2x2<f32>,
-            R"(return float2x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))));)"},
-        TypeCase{
-            ty_mat2x3<f32>,
-            R"(return float2x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))));)"},
-        TypeCase{
-            ty_mat2x4<f32>,
-            R"(return float2x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))));)"},
-        TypeCase{
-            ty_mat3x2<f32>,
-            R"(return float3x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))));)"},
-        TypeCase{
-            ty_mat3x3<f32>,
-            R"(return float3x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))));)"},
-        TypeCase{
-            ty_mat3x4<f32>,
-            R"(return float3x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))));)"},
-        TypeCase{
-            ty_mat4x2<f32>,
-            R"(return float4x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))), asfloat(buffer.Load2((offset + 24u))));)"},
-        TypeCase{
-            ty_mat4x3<f32>,
-            R"(return float4x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))), asfloat(buffer.Load3((offset + 48u))));)"},
-        TypeCase{
-            ty_mat4x4<f32>,
-            R"(return float4x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))), asfloat(buffer.Load4((offset + 48u))));)"}));
+    testing::Values(TypeCase{ty_u32, "data.Load(4u)"},
+                    TypeCase{ty_f32, "asfloat(data.Load(4u))"},
+                    TypeCase{ty_i32, "asint(data.Load(4u))"},
+                    TypeCase{ty_f16, "data.Load<float16_t>(4u)"},
+                    TypeCase{ty_vec2<u32>, "data.Load2(8u)"},
+                    TypeCase{ty_vec2<f32>, "asfloat(data.Load2(8u))"},
+                    TypeCase{ty_vec2<i32>, "asint(data.Load2(8u))"},
+                    TypeCase{ty_vec2<f16>, "data.Load<vector<float16_t, 2> >(4u)"},
+                    TypeCase{ty_vec3<u32>, "data.Load3(16u)"},
+                    TypeCase{ty_vec3<f32>, "asfloat(data.Load3(16u))"},
+                    TypeCase{ty_vec3<i32>, "asint(data.Load3(16u))"},
+                    TypeCase{ty_vec3<f16>, "data.Load<vector<float16_t, 3> >(8u)"},
+                    TypeCase{ty_vec4<u32>, "data.Load4(16u)"},
+                    TypeCase{ty_vec4<f32>, "asfloat(data.Load4(16u))"},
+                    TypeCase{ty_vec4<i32>, "asint(data.Load4(16u))"},
+                    TypeCase{ty_vec4<f16>, "data.Load<vector<float16_t, 4> >(8u)"},
+                    TypeCase{
+                        ty_mat2x2<f32>,
+                        R"(return float2x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))));)"},
+                    TypeCase{
+                        ty_mat2x3<f32>,
+                        R"(return float2x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat2x4<f32>,
+                        R"(return float2x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat3x2<f32>,
+                        R"(return float3x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))));)"},
+                    TypeCase{
+                        ty_mat3x3<f32>,
+                        R"(return float3x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))));)"},
+                    TypeCase{
+                        ty_mat3x4<f32>,
+                        R"(return float3x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))));)"},
+                    TypeCase{
+                        ty_mat4x2<f32>,
+                        R"(return float4x2(asfloat(buffer.Load2((offset + 0u))), asfloat(buffer.Load2((offset + 8u))), asfloat(buffer.Load2((offset + 16u))), asfloat(buffer.Load2((offset + 24u))));)"},
+                    TypeCase{
+                        ty_mat4x3<f32>,
+                        R"(return float4x3(asfloat(buffer.Load3((offset + 0u))), asfloat(buffer.Load3((offset + 16u))), asfloat(buffer.Load3((offset + 32u))), asfloat(buffer.Load3((offset + 48u))));)"},
+                    TypeCase{
+                        ty_mat4x4<f32>,
+                        R"(return float4x4(asfloat(buffer.Load4((offset + 0u))), asfloat(buffer.Load4((offset + 16u))), asfloat(buffer.Load4((offset + 32u))), asfloat(buffer.Load4((offset + 48u))));)"},
+                    TypeCase{
+                        ty_mat2x2<f16>,
+                        R"(return matrix<float16_t, 2, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)));)"},
+                    TypeCase{
+                        ty_mat2x3<f16>,
+                        R"(return matrix<float16_t, 2, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat2x4<f16>,
+                        R"(return matrix<float16_t, 2, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat3x2<f16>,
+                        R"(return matrix<float16_t, 3, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)), buffer.Load<vector<float16_t, 2> >((offset + 8u)));)"},
+                    TypeCase{
+                        ty_mat3x3<f16>,
+                        R"(return matrix<float16_t, 3, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)), buffer.Load<vector<float16_t, 3> >((offset + 16u)));)"},
+                    TypeCase{
+                        ty_mat3x4<f16>,
+                        R"(return matrix<float16_t, 3, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)), buffer.Load<vector<float16_t, 4> >((offset + 16u)));)"},
+                    TypeCase{
+                        ty_mat4x2<f16>,
+                        R"(return matrix<float16_t, 4, 2>(buffer.Load<vector<float16_t, 2> >((offset + 0u)), buffer.Load<vector<float16_t, 2> >((offset + 4u)), buffer.Load<vector<float16_t, 2> >((offset + 8u)), buffer.Load<vector<float16_t, 2> >((offset + 12u)));)"},
+                    TypeCase{
+                        ty_mat4x3<f16>, R"(return matrix<float16_t, 4, 3>(buffer.Load<vector<float16_t, 3> >((offset + 0u)), buffer.Load<vector<float16_t, 3> >((offset + 8u)), buffer.Load<vector<float16_t, 3> >((offset + 16u)), buffer.Load<vector<float16_t, 3> >((offset + 24u)));)"},
+                    TypeCase{
+                        ty_mat4x4<f16>,
+                        R"(return matrix<float16_t, 4, 4>(buffer.Load<vector<float16_t, 4> >((offset + 0u)), buffer.Load<vector<float16_t, 4> >((offset + 8u)), buffer.Load<vector<float16_t, 4> >((offset + 16u)), buffer.Load<vector<float16_t, 4> >((offset + 24u)));)"}));
+
+using HlslGeneratorImplTest_MemberAccessor_UniformBufferLoad =
+    HlslGeneratorImplTest_MemberAccessorWithParam<TypeCase>;
+TEST_P(HlslGeneratorImplTest_MemberAccessor_UniformBufferLoad, Test) {
+    // struct Data {
+    //   a : i32;
+    //   b : <type>;
+    // };
+    // var<uniform> data : Data;
+    // data.b;
+
+    auto p = GetParam();
+
+    Enable(ast::Extension::kF16);
+
+    SetupUniformBuffer(utils::Vector{
+        Member("a", ty.i32()),
+        Member("b", p.member_type(ty)),
+    });
+
+    SetupFunction(utils::Vector{
+        Decl(Var("x", MemberAccessor("data", "b"))),
+    });
+
+    GeneratorImpl& gen = SanitizeAndBuild();
+
+    ASSERT_TRUE(gen.Generate()) << gen.error();
+    EXPECT_THAT(gen.result(), HasSubstr(p.expected));
+}
+
+INSTANTIATE_TEST_SUITE_P(
+    HlslGeneratorImplTest_MemberAccessor,
+    HlslGeneratorImplTest_MemberAccessor_UniformBufferLoad,
+    testing::Values(TypeCase{ty_u32, "uint x = data[0].y;"},
+                    TypeCase{ty_f32, "float x = asfloat(data[0].y);"},
+                    TypeCase{ty_i32, "int x = asint(data[0].y);"},
+                    TypeCase{ty_f16, "float16_t x = float16_t(f16tof32(((data[0].y) & 0xFFFF)));"},
+                    TypeCase{ty_vec2<u32>, "uint2 x = data[0].zw;"},
+                    TypeCase{ty_vec2<f32>, "float2 x = asfloat(data[0].zw);"},
+                    TypeCase{ty_vec2<i32>, "int2 x = asint(data[0].zw);"},
+                    TypeCase{ty_vec2<f16>, R"(uint ubo_load = data[0].y;
+  vector<float16_t, 2> x = vector<float16_t, 2>(float16_t(f16tof32(ubo_load & 0xFFFF)), float16_t(f16tof32(ubo_load >> 16)));)"},
+                    TypeCase{ty_vec3<u32>, "uint3 x = data[1].xyz;"},
+                    TypeCase{ty_vec3<f32>, "float3 x = asfloat(data[1].xyz);"},
+                    TypeCase{ty_vec3<i32>, "int3 x = asint(data[1].xyz);"},
+                    TypeCase{ty_vec3<f16>, R"(uint2 ubo_load = data[0].zw;
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  float16_t ubo_load_y = f16tof32(ubo_load[0] >> 16);
+  vector<float16_t, 3> x = vector<float16_t, 3>(ubo_load_xz[0], ubo_load_y, ubo_load_xz[1]);)"},
+                    TypeCase{ty_vec4<u32>, "uint4 x = data[1];"},
+                    TypeCase{ty_vec4<f32>, "float4 x = asfloat(data[1]);"},
+                    TypeCase{ty_vec4<i32>, "int4 x = asint(data[1]);"},
+                    TypeCase{ty_vec4<f16>,
+                             R"(uint2 ubo_load = data[0].zw;
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  vector<float16_t, 2> ubo_load_yw = vector<float16_t, 2>(f16tof32(ubo_load >> 16));
+  vector<float16_t, 4> x = vector<float16_t, 4>(ubo_load_xz[0], ubo_load_yw[0], ubo_load_xz[1], ubo_load_yw[1]);)"},
+
+                    TypeCase{ty_mat2x2<f32>,
+                             R"(float2x2 tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  return float2x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)));
+})"},
+                    TypeCase{ty_mat2x3<f32>, R"(float2x3 tint_symbol(uint4 buffer[3], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  return float2x3(asfloat(buffer[scalar_offset_index / 4].xyz), asfloat(buffer[scalar_offset_index_1 / 4].xyz));
+})"},
+                    TypeCase{ty_mat2x4<f32>, R"(float2x4 tint_symbol(uint4 buffer[3], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  return float2x4(asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]));
+})"},
+                    TypeCase{ty_mat3x2<f32>,
+                             R"(float3x2 tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_2 = buffer[scalar_offset_index_2 / 4];
+  return float3x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_index_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy)));
+})"},
+                    TypeCase{ty_mat3x3<f32>, R"(float3x3 tint_symbol(uint4 buffer[4], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  return float3x3(asfloat(buffer[scalar_offset_index / 4].xyz), asfloat(buffer[scalar_offset_index_1 / 4].xyz), asfloat(buffer[scalar_offset_index_2 / 4].xyz));
+})"},
+                    TypeCase{ty_mat3x4<f32>, R"(float3x4 tint_symbol(uint4 buffer[4], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  return float3x4(asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]), asfloat(buffer[scalar_offset_index_2 / 4]));
+})"},
+                    TypeCase{ty_mat4x2<f32>, R"(float4x2 tint_symbol(uint4 buffer[3], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_2 = buffer[scalar_offset_index_2 / 4];
+  const uint scalar_offset_bytes_3 = ((offset + 24u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_3 / 4];
+  return float4x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_index_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy)), asfloat(((scalar_offset_index_3 & 2) ? ubo_load_3.zw : ubo_load_3.xy)));
+})"},
+                    TypeCase{ty_mat4x3<f32>,
+                             R"(float4x3 tint_symbol(uint4 buffer[5], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  const uint scalar_offset_bytes_3 = ((offset + 48u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  return float4x3(asfloat(buffer[scalar_offset_index / 4].xyz), asfloat(buffer[scalar_offset_index_1 / 4].xyz), asfloat(buffer[scalar_offset_index_2 / 4].xyz), asfloat(buffer[scalar_offset_index_3 / 4].xyz));
+})"},
+                    TypeCase{ty_mat4x4<f32>,
+                             R"(float4x4 tint_symbol(uint4 buffer[5], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  const uint scalar_offset_bytes_3 = ((offset + 48u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  return float4x4(asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]), asfloat(buffer[scalar_offset_index_2 / 4]), asfloat(buffer[scalar_offset_index_3 / 4]));
+})"},
+                    TypeCase{ty_mat2x2<f16>,
+                             R"(matrix<float16_t, 2, 2> tint_symbol(uint4 buffer[1], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint ubo_load = buffer[scalar_offset_index / 4][scalar_offset_index % 4];
+  const uint scalar_offset_bytes_1 = ((offset + 4u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint ubo_load_1 = buffer[scalar_offset_index_1 / 4][scalar_offset_index_1 % 4];
+  return matrix<float16_t, 2, 2>(vector<float16_t, 2>(float16_t(f16tof32(ubo_load & 0xFFFF)), float16_t(f16tof32(ubo_load >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_1 & 0xFFFF)), float16_t(f16tof32(ubo_load_1 >> 16))));
+})"},
+                    TypeCase{ty_mat2x3<f16>,
+                             R"(matrix<float16_t, 2, 3> tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  float16_t ubo_load_y = f16tof32(ubo_load[0] >> 16);
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  float16_t ubo_load_2_y = f16tof32(ubo_load_2[0] >> 16);
+  return matrix<float16_t, 2, 3>(vector<float16_t, 3>(ubo_load_xz[0], ubo_load_y, ubo_load_xz[1]), vector<float16_t, 3>(ubo_load_2_xz[0], ubo_load_2_y, ubo_load_2_xz[1]));
+})"},
+                    TypeCase{ty_mat2x4<f16>,
+                             R"(matrix<float16_t, 2, 4> tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  vector<float16_t, 2> ubo_load_yw = vector<float16_t, 2>(f16tof32(ubo_load >> 16));
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_2_yw = vector<float16_t, 2>(f16tof32(ubo_load_2 >> 16));
+  return matrix<float16_t, 2, 4>(vector<float16_t, 4>(ubo_load_xz[0], ubo_load_yw[0], ubo_load_xz[1], ubo_load_yw[1]), vector<float16_t, 4>(ubo_load_2_xz[0], ubo_load_2_yw[0], ubo_load_2_xz[1], ubo_load_2_yw[1]));
+})"},
+                    TypeCase{ty_mat3x2<f16>,
+                             R"(matrix<float16_t, 3, 2> tint_symbol(uint4 buffer[1], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint ubo_load = buffer[scalar_offset_index / 4][scalar_offset_index % 4];
+  const uint scalar_offset_bytes_1 = ((offset + 4u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint ubo_load_1 = buffer[scalar_offset_index_1 / 4][scalar_offset_index_1 % 4];
+  const uint scalar_offset_bytes_2 = ((offset + 8u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint ubo_load_2 = buffer[scalar_offset_index_2 / 4][scalar_offset_index_2 % 4];
+  return matrix<float16_t, 3, 2>(vector<float16_t, 2>(float16_t(f16tof32(ubo_load & 0xFFFF)), float16_t(f16tof32(ubo_load >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_1 & 0xFFFF)), float16_t(f16tof32(ubo_load_1 >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_2 & 0xFFFF)), float16_t(f16tof32(ubo_load_2 >> 16))));
+})"},
+                    TypeCase{ty_mat3x3<f16>,
+                             R"(matrix<float16_t, 3, 3> tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  float16_t ubo_load_y = f16tof32(ubo_load[0] >> 16);
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  float16_t ubo_load_2_y = f16tof32(ubo_load_2[0] >> 16);
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_5 = buffer[scalar_offset_index_2 / 4];
+  uint2 ubo_load_4 = ((scalar_offset_index_2 & 2) ? ubo_load_5.zw : ubo_load_5.xy);
+  vector<float16_t, 2> ubo_load_4_xz = vector<float16_t, 2>(f16tof32(ubo_load_4 & 0xFFFF));
+  float16_t ubo_load_4_y = f16tof32(ubo_load_4[0] >> 16);
+  return matrix<float16_t, 3, 3>(vector<float16_t, 3>(ubo_load_xz[0], ubo_load_y, ubo_load_xz[1]), vector<float16_t, 3>(ubo_load_2_xz[0], ubo_load_2_y, ubo_load_2_xz[1]), vector<float16_t, 3>(ubo_load_4_xz[0], ubo_load_4_y, ubo_load_4_xz[1]));
+})"},
+                    TypeCase{ty_mat3x4<f16>,
+                             R"(matrix<float16_t, 3, 4> tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  vector<float16_t, 2> ubo_load_yw = vector<float16_t, 2>(f16tof32(ubo_load >> 16));
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_2_yw = vector<float16_t, 2>(f16tof32(ubo_load_2 >> 16));
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_5 = buffer[scalar_offset_index_2 / 4];
+  uint2 ubo_load_4 = ((scalar_offset_index_2 & 2) ? ubo_load_5.zw : ubo_load_5.xy);
+  vector<float16_t, 2> ubo_load_4_xz = vector<float16_t, 2>(f16tof32(ubo_load_4 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_4_yw = vector<float16_t, 2>(f16tof32(ubo_load_4 >> 16));
+  return matrix<float16_t, 3, 4>(vector<float16_t, 4>(ubo_load_xz[0], ubo_load_yw[0], ubo_load_xz[1], ubo_load_yw[1]), vector<float16_t, 4>(ubo_load_2_xz[0], ubo_load_2_yw[0], ubo_load_2_xz[1], ubo_load_2_yw[1]), vector<float16_t, 4>(ubo_load_4_xz[0], ubo_load_4_yw[0], ubo_load_4_xz[1], ubo_load_4_yw[1]));
+})"},
+                    TypeCase{ty_mat4x2<f16>,
+                             R"(matrix<float16_t, 4, 2> tint_symbol(uint4 buffer[2], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint ubo_load = buffer[scalar_offset_index / 4][scalar_offset_index % 4];
+  const uint scalar_offset_bytes_1 = ((offset + 4u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint ubo_load_1 = buffer[scalar_offset_index_1 / 4][scalar_offset_index_1 % 4];
+  const uint scalar_offset_bytes_2 = ((offset + 8u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint ubo_load_2 = buffer[scalar_offset_index_2 / 4][scalar_offset_index_2 % 4];
+  const uint scalar_offset_bytes_3 = ((offset + 12u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint ubo_load_3 = buffer[scalar_offset_index_3 / 4][scalar_offset_index_3 % 4];
+  return matrix<float16_t, 4, 2>(vector<float16_t, 2>(float16_t(f16tof32(ubo_load & 0xFFFF)), float16_t(f16tof32(ubo_load >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_1 & 0xFFFF)), float16_t(f16tof32(ubo_load_1 >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_2 & 0xFFFF)), float16_t(f16tof32(ubo_load_2 >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_3 & 0xFFFF)), float16_t(f16tof32(ubo_load_3 >> 16))));
+})"},
+                    TypeCase{ty_mat4x3<f16>,
+                             R"(matrix<float16_t, 4, 3> tint_symbol(uint4 buffer[3], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  float16_t ubo_load_y = f16tof32(ubo_load[0] >> 16);
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  float16_t ubo_load_2_y = f16tof32(ubo_load_2[0] >> 16);
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_5 = buffer[scalar_offset_index_2 / 4];
+  uint2 ubo_load_4 = ((scalar_offset_index_2 & 2) ? ubo_load_5.zw : ubo_load_5.xy);
+  vector<float16_t, 2> ubo_load_4_xz = vector<float16_t, 2>(f16tof32(ubo_load_4 & 0xFFFF));
+  float16_t ubo_load_4_y = f16tof32(ubo_load_4[0] >> 16);
+  const uint scalar_offset_bytes_3 = ((offset + 24u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint4 ubo_load_7 = buffer[scalar_offset_index_3 / 4];
+  uint2 ubo_load_6 = ((scalar_offset_index_3 & 2) ? ubo_load_7.zw : ubo_load_7.xy);
+  vector<float16_t, 2> ubo_load_6_xz = vector<float16_t, 2>(f16tof32(ubo_load_6 & 0xFFFF));
+  float16_t ubo_load_6_y = f16tof32(ubo_load_6[0] >> 16);
+  return matrix<float16_t, 4, 3>(vector<float16_t, 3>(ubo_load_xz[0], ubo_load_y, ubo_load_xz[1]), vector<float16_t, 3>(ubo_load_2_xz[0], ubo_load_2_y, ubo_load_2_xz[1]), vector<float16_t, 3>(ubo_load_4_xz[0], ubo_load_4_y, ubo_load_4_xz[1]), vector<float16_t, 3>(ubo_load_6_xz[0], ubo_load_6_y, ubo_load_6_xz[1]));
+})"},
+                    TypeCase{ty_mat4x4<f16>,
+                             R"(matrix<float16_t, 4, 4> tint_symbol(uint4 buffer[3], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index / 4];
+  uint2 ubo_load = ((scalar_offset_index & 2) ? ubo_load_1.zw : ubo_load_1.xy);
+  vector<float16_t, 2> ubo_load_xz = vector<float16_t, 2>(f16tof32(ubo_load & 0xFFFF));
+  vector<float16_t, 2> ubo_load_yw = vector<float16_t, 2>(f16tof32(ubo_load >> 16));
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_3 = buffer[scalar_offset_index_1 / 4];
+  uint2 ubo_load_2 = ((scalar_offset_index_1 & 2) ? ubo_load_3.zw : ubo_load_3.xy);
+  vector<float16_t, 2> ubo_load_2_xz = vector<float16_t, 2>(f16tof32(ubo_load_2 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_2_yw = vector<float16_t, 2>(f16tof32(ubo_load_2 >> 16));
+  const uint scalar_offset_bytes_2 = ((offset + 16u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_5 = buffer[scalar_offset_index_2 / 4];
+  uint2 ubo_load_4 = ((scalar_offset_index_2 & 2) ? ubo_load_5.zw : ubo_load_5.xy);
+  vector<float16_t, 2> ubo_load_4_xz = vector<float16_t, 2>(f16tof32(ubo_load_4 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_4_yw = vector<float16_t, 2>(f16tof32(ubo_load_4 >> 16));
+  const uint scalar_offset_bytes_3 = ((offset + 24u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint4 ubo_load_7 = buffer[scalar_offset_index_3 / 4];
+  uint2 ubo_load_6 = ((scalar_offset_index_3 & 2) ? ubo_load_7.zw : ubo_load_7.xy);
+  vector<float16_t, 2> ubo_load_6_xz = vector<float16_t, 2>(f16tof32(ubo_load_6 & 0xFFFF));
+  vector<float16_t, 2> ubo_load_6_yw = vector<float16_t, 2>(f16tof32(ubo_load_6 >> 16));
+  return matrix<float16_t, 4, 4>(vector<float16_t, 4>(ubo_load_xz[0], ubo_load_yw[0], ubo_load_xz[1], ubo_load_yw[1]), vector<float16_t, 4>(ubo_load_2_xz[0], ubo_load_2_yw[0], ubo_load_2_xz[1], ubo_load_2_yw[1]), vector<float16_t, 4>(ubo_load_4_xz[0], ubo_load_4_yw[0], ubo_load_4_xz[1], ubo_load_4_yw[1]), vector<float16_t, 4>(ubo_load_6_xz[0], ubo_load_6_yw[0], ubo_load_6_xz[1], ubo_load_6_yw[1]));
+})"}));
 
 using HlslGeneratorImplTest_MemberAccessor_StorageBufferStore =
     HlslGeneratorImplTest_MemberAccessorWithParam<TypeCase>;
@@ -226,6 +591,8 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferStore, Test) {
     // data.b = <type>();
 
     auto p = GetParam();
+
+    Enable(ast::Extension::kF16);
 
     SetupStorageBuffer(utils::Vector{
         Member("a", ty.i32()),
@@ -243,64 +610,114 @@ TEST_P(HlslGeneratorImplTest_MemberAccessor_StorageBufferStore, Test) {
     EXPECT_THAT(gen.result(), HasSubstr(p.expected));
 }
 
-INSTANTIATE_TEST_SUITE_P(HlslGeneratorImplTest_MemberAccessor,
-                         HlslGeneratorImplTest_MemberAccessor_StorageBufferStore,
-                         testing::Values(TypeCase{ty_u32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_f32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_i32, "data.Store(4u, asuint(value))"},
-                                         TypeCase{ty_vec2<u32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec2<f32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec2<i32>, "data.Store2(8u, asuint(value))"},
-                                         TypeCase{ty_vec3<u32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec3<f32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec3<i32>, "data.Store3(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<u32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<f32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_vec4<i32>, "data.Store4(16u, asuint(value))"},
-                                         TypeCase{ty_mat2x2<f32>, R"({
+INSTANTIATE_TEST_SUITE_P(
+    HlslGeneratorImplTest_MemberAccessor,
+    HlslGeneratorImplTest_MemberAccessor_StorageBufferStore,
+    testing::Values(TypeCase{ty_u32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_f32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_i32, "data.Store(4u, asuint(value))"},
+                    TypeCase{ty_f16, "data.Store<float16_t>(4u, value)"},
+                    TypeCase{ty_vec2<u32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<f32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<i32>, "data.Store2(8u, asuint(value))"},
+                    TypeCase{ty_vec2<f16>, "data.Store<vector<float16_t, 2> >(4u, value)"},
+                    TypeCase{ty_vec3<u32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<f32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<i32>, "data.Store3(16u, asuint(value))"},
+                    TypeCase{ty_vec3<f16>, "data.Store<vector<float16_t, 3> >(8u, value)"},
+                    TypeCase{ty_vec4<u32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<f32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<i32>, "data.Store4(16u, asuint(value))"},
+                    TypeCase{ty_vec4<f16>, "data.Store<vector<float16_t, 4> >(8u, value)"},
+                    TypeCase{ty_mat2x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat2x3<f32>, R"({
+                    TypeCase{ty_mat2x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat2x4<f32>, R"({
+                    TypeCase{ty_mat2x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
 })"},
-                                         TypeCase{ty_mat3x2<f32>, R"({
+                    TypeCase{ty_mat3x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
   buffer.Store2((offset + 16u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat3x3<f32>, R"({
+                    TypeCase{ty_mat3x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
   buffer.Store3((offset + 32u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat3x4<f32>, R"({
+                    TypeCase{ty_mat3x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
   buffer.Store4((offset + 32u), asuint(value[2u]));
 })"},
-                                         TypeCase{ty_mat4x2<f32>, R"({
+                    TypeCase{ty_mat4x2<f32>, R"({
   buffer.Store2((offset + 0u), asuint(value[0u]));
   buffer.Store2((offset + 8u), asuint(value[1u]));
   buffer.Store2((offset + 16u), asuint(value[2u]));
   buffer.Store2((offset + 24u), asuint(value[3u]));
 })"},
-                                         TypeCase{ty_mat4x3<f32>, R"({
+                    TypeCase{ty_mat4x3<f32>, R"({
   buffer.Store3((offset + 0u), asuint(value[0u]));
   buffer.Store3((offset + 16u), asuint(value[1u]));
   buffer.Store3((offset + 32u), asuint(value[2u]));
   buffer.Store3((offset + 48u), asuint(value[3u]));
 })"},
-                                         TypeCase{ty_mat4x4<f32>, R"({
+                    TypeCase{ty_mat4x4<f32>, R"({
   buffer.Store4((offset + 0u), asuint(value[0u]));
   buffer.Store4((offset + 16u), asuint(value[1u]));
   buffer.Store4((offset + 32u), asuint(value[2u]));
   buffer.Store4((offset + 48u), asuint(value[3u]));
+})"},
+                    TypeCase{ty_mat2x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+})"},
+                    TypeCase{ty_mat2x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+})"},
+                    TypeCase{ty_mat2x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+})"},
+                    TypeCase{ty_mat3x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 8u), value[2u]);
+})"},
+                    TypeCase{ty_mat3x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 16u), value[2u]);
+})"},
+                    TypeCase{ty_mat3x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 16u), value[2u]);
+})"},
+                    TypeCase{ty_mat4x2<f16>, R"({
+  buffer.Store<vector<float16_t, 2> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 4u), value[1u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 8u), value[2u]);
+  buffer.Store<vector<float16_t, 2> >((offset + 12u), value[3u]);
+})"},
+                    TypeCase{ty_mat4x3<f16>, R"({
+  buffer.Store<vector<float16_t, 3> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 16u), value[2u]);
+  buffer.Store<vector<float16_t, 3> >((offset + 24u), value[3u]);
+})"},
+                    TypeCase{ty_mat4x4<f16>, R"({
+  buffer.Store<vector<float16_t, 4> >((offset + 0u), value[0u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 8u), value[1u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 16u), value[2u]);
+  buffer.Store<vector<float16_t, 4> >((offset + 24u), value[3u]);
 })"}));
 
 TEST_F(HlslGeneratorImplTest_MemberAccessor, StorageBuffer_Store_Matrix_Empty) {
