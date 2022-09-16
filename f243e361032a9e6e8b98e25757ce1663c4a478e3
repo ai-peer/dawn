@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd007326_c7cff0a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T16:44:08Z",
+      "side": 1,
+      "message": "Partial review.\nPTAL at transform ordering issue.",
+      "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a442d383_59095483",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T16:44:08Z",
+      "side": 1,
+      "message": "sem nodes only track storage class usage on Struct types.\n\nSo won\u0027t this miss cases like\n    \nvar\u003cuniform\u003e a: array\u003cmat2x2\u003cf32\u003e,8\u003e;\n?\n\nOr is there a dependency on a previous transform having already wrapped the store type in a struct, for use in the Vulkan backend.\n\nIf so, then it needs a comment here.\n\n\n....\n\nIt looks like the SPIR-V backend invokes the Std140 transform much earlier than the AddBlockAttribute transform.  So I think it will miss that case?",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 63
+      },
+      "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
