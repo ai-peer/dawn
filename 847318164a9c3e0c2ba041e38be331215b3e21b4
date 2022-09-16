@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd9a9529_b169f7c0",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T19:17:25Z",
+      "side": 1,
+      "message": "The use of this field is actually unified, and doesn\u0027t special case global values at all",
+      "parentUuid": "09b1c87f_f8048462",
+      "range": {
+        "startLine": 264,
+        "startChar": 8,
+        "endLine": 264,
+        "endChar": 57
+      },
+      "revId": "847318164a9c3e0c2ba041e38be331215b3e21b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ea22a60_d087f345",
         "filename": "src/tint/reader/spirv/function.h",
         "patchSetId": 5
