@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7fef08_8a0cf3e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T19:36:46Z",
+      "side": 1,
+      "message": "This implements your suggestions from the parent code review",
+      "revId": "4bbc4d6ae5941e29fde9dc7a938bda846377c8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
