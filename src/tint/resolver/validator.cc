@@ -399,10 +399,13 @@ bool Validator::AddressSpaceLayout(const sem::Type* store_ty,
     // TODO(tint:1473, tint:1502): Remove this error after f16 is supported in "uniform" and
     // "storage" address space but keep for "push_constant" address space.
     if (Is<sem::F16>(sem::Type::DeepestElementOf(store_ty))) {
-        AddError("using f16 types in '" + utils::ToString(address_space) +
-                     "' address space is not implemented yet",
-                 source);
-        return false;
+        if ((address_space != ast::AddressSpace::kUniform) &&
+            (address_space != ast::AddressSpace::kStorage)) {
+            AddError("using f16 types in '" + utils::ToString(address_space) +
+                         "' address space is not implemented yet",
+                     source);
+            return false;
+        }
     }
 
     if (auto* str = store_ty->As<sem::Struct>()) {
