@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e4b4c64_7f6b588e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T21:23:35Z",
+      "side": 1,
+      "message": "\u003e I think what I\u0027m suggesting doesn\u0027t hurt clarity\n\nIt\u0027s what we had, and I spent over an hour pulling my hair out trying to untangle base vs derived. It was really horrible.",
+      "parentUuid": "9f1e3de3_0a21c1de",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 62
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc5ce1d7_bcd311fb",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 3
@@ -162,6 +186,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99c72d2e_12a6ab49",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T21:23:35Z",
+      "side": 1,
+      "message": "Yes, but the condition was not `constexpr`. The warning is raised when there are `if constexpr` branches that are not reachable for that particular instantiation. None of the constexpr stuff has changed.",
+      "parentUuid": "02f98716_f010407d",
+      "range": {
+        "startLine": 275,
+        "startChar": 7,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d3afa1b_86e8221e",
         "filename": "src/tint/utils/result_test.cc",
         "patchSetId": 3
@@ -221,6 +269,30 @@
       "side": 1,
       "message": "Right, but the code you wrote also supports conversion between unrelated Result types, right?",
       "parentUuid": "d57000e9_b7e1d499",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9e99f6_c519fc4b",
+        "filename": "src/tint/utils/result_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T21:23:35Z",
+      "side": 1,
+      "message": "It supports conversion, so long as the target success and failure types are copy constructable from the source success and failure types. This is a valid test of this?",
+      "parentUuid": "50f9b03a_78b5e4bc",
       "range": {
         "startLine": 56,
         "startChar": 13,
