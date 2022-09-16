@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ee0b774_7189a217",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:51:33Z",
+      "side": 1,
+      "message": "`ConstEval::Result` doesn\u0027t help clarify the two distinct types being used in the `const_eval.cc` file.\n\n`ConstEval::Result` is an appropriate name for the **public API**, as that\u0027s what all the public methods of `ConstEval` return.\n\nI iterated a lot on this. I find this much clearer to keep track of what\u0027s what in the one implementation file. The discrepancy between the header and `.cc` is far less important to me than being able to clearly follow the logic of the single implementation.",
+      "parentUuid": "d25ed024_ef4ff51f",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 62
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc5ce1d7_bcd311fb",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 3
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dca685d_983c3366",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:51:33Z",
+      "side": 1,
+      "message": "I don\u0027t think the static code reachability has changed here?",
+      "parentUuid": "fc5ce1d7_bcd311fb",
+      "range": {
+        "startLine": 275,
+        "startChar": 7,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d3afa1b_86e8221e",
         "filename": "src/tint/utils/result_test.cc",
         "patchSetId": 3
@@ -77,6 +125,30 @@
       "writtenOn": "2022-09-16T18:12:43Z",
       "side": 1,
       "message": "Why inheritance here?",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57000e9_b7e1d499",
+        "filename": "src/tint/utils/result_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:51:33Z",
+      "side": 1,
+      "message": "It mimics the usage in `const_eval.cc`. We have an implicit cast of derived pointer (`const Constant*`) to base pointer (`const sem::Constant*`).",
+      "parentUuid": "1d3afa1b_86e8221e",
       "range": {
         "startLine": 56,
         "startChar": 13,
