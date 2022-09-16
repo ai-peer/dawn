@@ -16,6 +16,125 @@
       "message": "still reading...",
       "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cdcf11c_00164d47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "Really nice job.  Truly detailed work.",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4842bdb7_29259689",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "Right. Scan by looking at storage class usage cached by the resolver.",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b867c327_3d84b4ff",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "Look top-down from declared variables.\n\nnit: These could use one-line comments as to strategy/tactics",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b406a570_d956daac",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "nit: This needs a method comment.",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0c11de_d4765932",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "nice",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "affaf827_63f54b20",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "nice",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3acee384_39d89f93",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1019,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T17:22:59Z",
+      "side": 1,
+      "message": "Right. This is for loading the whole uniform variable case.\nnice.",
+      "revId": "d67966c14b0adafdcfcf87fb550c3af26b56ab6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
