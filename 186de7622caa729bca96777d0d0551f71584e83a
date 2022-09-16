@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f050f5a_e78cb673",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-16T10:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdbce557_a736b02d",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 7
+      },
+      "revId": "186de7622caa729bca96777d0d0551f71584e83a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce5dbf84_0e7f4650",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee63ba2_82680d36",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-16T10:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce5dbf84_0e7f4650",
+      "range": {
+        "startLine": 121,
+        "startChar": 47,
+        "endLine": 121,
+        "endChar": 54
+      },
+      "revId": "186de7622caa729bca96777d0d0551f71584e83a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb48d590_abc7c2f0",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-09-16T07:56:26Z",
       "side": 1,
       "message": "nit: these two functions are only differentiated by the number of booleans they take. Maybe we could add Render / Compute in the name like so: EncodeComputeTimestampWrites",
+      "range": {
+        "startLine": 580,
+        "startChar": 9,
+        "endLine": 580,
+        "endChar": 30
+      },
+      "revId": "186de7622caa729bca96777d0d0551f71584e83a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a06bcd2_807bea6f",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-09-16T10:05:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb48d590_abc7c2f0",
       "range": {
         "startLine": 580,
         "startChar": 9,
