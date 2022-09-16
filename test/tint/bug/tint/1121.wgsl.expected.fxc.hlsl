@@ -15,11 +15,15 @@ struct tint_symbol_1 {
 };
 
 float4x4 tint_symbol_6(uint4 buffer[11], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  const uint scalar_offset_1 = ((offset + 16u)) / 4;
-  const uint scalar_offset_2 = ((offset + 32u)) / 4;
-  const uint scalar_offset_3 = ((offset + 48u)) / 4;
-  return float4x4(asfloat(buffer[scalar_offset / 4]), asfloat(buffer[scalar_offset_1 / 4]), asfloat(buffer[scalar_offset_2 / 4]), asfloat(buffer[scalar_offset_3 / 4]));
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  const uint scalar_offset_bytes_3 = ((offset + 48u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  return float4x4(asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]), asfloat(buffer[scalar_offset_index_2 / 4]), asfloat(buffer[scalar_offset_index_3 / 4]));
 }
 
 uint tint_atomicAdd(RWByteAddressBuffer buffer, uint offset, uint value) {

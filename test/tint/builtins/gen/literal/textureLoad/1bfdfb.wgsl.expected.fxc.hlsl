@@ -46,36 +46,52 @@ float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, u
 }
 
 float3x4 tint_symbol_3(uint4 buffer[11], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  const uint scalar_offset_1 = ((offset + 16u)) / 4;
-  const uint scalar_offset_2 = ((offset + 32u)) / 4;
-  return float3x4(asfloat(buffer[scalar_offset / 4]), asfloat(buffer[scalar_offset_1 / 4]), asfloat(buffer[scalar_offset_2 / 4]));
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  return float3x4(asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]), asfloat(buffer[scalar_offset_index_2 / 4]));
 }
 
 GammaTransferParams tint_symbol_5(uint4 buffer[11], uint offset) {
-  const uint scalar_offset_3 = ((offset + 0u)) / 4;
-  const uint scalar_offset_4 = ((offset + 4u)) / 4;
-  const uint scalar_offset_5 = ((offset + 8u)) / 4;
-  const uint scalar_offset_6 = ((offset + 12u)) / 4;
-  const uint scalar_offset_7 = ((offset + 16u)) / 4;
-  const uint scalar_offset_8 = ((offset + 20u)) / 4;
-  const uint scalar_offset_9 = ((offset + 24u)) / 4;
-  const uint scalar_offset_10 = ((offset + 28u)) / 4;
-  const GammaTransferParams tint_symbol_9 = {asfloat(buffer[scalar_offset_3 / 4][scalar_offset_3 % 4]), asfloat(buffer[scalar_offset_4 / 4][scalar_offset_4 % 4]), asfloat(buffer[scalar_offset_5 / 4][scalar_offset_5 % 4]), asfloat(buffer[scalar_offset_6 / 4][scalar_offset_6 % 4]), asfloat(buffer[scalar_offset_7 / 4][scalar_offset_7 % 4]), asfloat(buffer[scalar_offset_8 / 4][scalar_offset_8 % 4]), asfloat(buffer[scalar_offset_9 / 4][scalar_offset_9 % 4]), buffer[scalar_offset_10 / 4][scalar_offset_10 % 4]};
+  const uint scalar_offset_bytes_3 = ((offset + 0u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  const uint scalar_offset_bytes_4 = ((offset + 4u));
+  const uint scalar_offset_index_4 = scalar_offset_bytes_4 / 4;
+  const uint scalar_offset_bytes_5 = ((offset + 8u));
+  const uint scalar_offset_index_5 = scalar_offset_bytes_5 / 4;
+  const uint scalar_offset_bytes_6 = ((offset + 12u));
+  const uint scalar_offset_index_6 = scalar_offset_bytes_6 / 4;
+  const uint scalar_offset_bytes_7 = ((offset + 16u));
+  const uint scalar_offset_index_7 = scalar_offset_bytes_7 / 4;
+  const uint scalar_offset_bytes_8 = ((offset + 20u));
+  const uint scalar_offset_index_8 = scalar_offset_bytes_8 / 4;
+  const uint scalar_offset_bytes_9 = ((offset + 24u));
+  const uint scalar_offset_index_9 = scalar_offset_bytes_9 / 4;
+  const uint scalar_offset_bytes_10 = ((offset + 28u));
+  const uint scalar_offset_index_10 = scalar_offset_bytes_10 / 4;
+  const GammaTransferParams tint_symbol_9 = {asfloat(buffer[scalar_offset_index_3 / 4][scalar_offset_index_3 % 4]), asfloat(buffer[scalar_offset_index_4 / 4][scalar_offset_index_4 % 4]), asfloat(buffer[scalar_offset_index_5 / 4][scalar_offset_index_5 % 4]), asfloat(buffer[scalar_offset_index_6 / 4][scalar_offset_index_6 % 4]), asfloat(buffer[scalar_offset_index_7 / 4][scalar_offset_index_7 % 4]), asfloat(buffer[scalar_offset_index_8 / 4][scalar_offset_index_8 % 4]), asfloat(buffer[scalar_offset_index_9 / 4][scalar_offset_index_9 % 4]), buffer[scalar_offset_index_10 / 4][scalar_offset_index_10 % 4]};
   return tint_symbol_9;
 }
 
 float3x3 tint_symbol_7(uint4 buffer[11], uint offset) {
-  const uint scalar_offset_11 = ((offset + 0u)) / 4;
-  const uint scalar_offset_12 = ((offset + 16u)) / 4;
-  const uint scalar_offset_13 = ((offset + 32u)) / 4;
-  return float3x3(asfloat(buffer[scalar_offset_11 / 4].xyz), asfloat(buffer[scalar_offset_12 / 4].xyz), asfloat(buffer[scalar_offset_13 / 4].xyz));
+  const uint scalar_offset_bytes_11 = ((offset + 0u));
+  const uint scalar_offset_index_11 = scalar_offset_bytes_11 / 4;
+  const uint scalar_offset_bytes_12 = ((offset + 16u));
+  const uint scalar_offset_index_12 = scalar_offset_bytes_12 / 4;
+  const uint scalar_offset_bytes_13 = ((offset + 32u));
+  const uint scalar_offset_index_13 = scalar_offset_bytes_13 / 4;
+  return float3x3(asfloat(buffer[scalar_offset_index_11 / 4].xyz), asfloat(buffer[scalar_offset_index_12 / 4].xyz), asfloat(buffer[scalar_offset_index_13 / 4].xyz));
 }
 
 ExternalTextureParams tint_symbol_1(uint4 buffer[11], uint offset) {
-  const uint scalar_offset_14 = ((offset + 0u)) / 4;
-  const uint scalar_offset_15 = ((offset + 4u)) / 4;
-  const ExternalTextureParams tint_symbol_10 = {buffer[scalar_offset_14 / 4][scalar_offset_14 % 4], buffer[scalar_offset_15 / 4][scalar_offset_15 % 4], tint_symbol_3(buffer, (offset + 16u)), tint_symbol_5(buffer, (offset + 64u)), tint_symbol_5(buffer, (offset + 96u)), tint_symbol_7(buffer, (offset + 128u))};
+  const uint scalar_offset_bytes_14 = ((offset + 0u));
+  const uint scalar_offset_index_14 = scalar_offset_bytes_14 / 4;
+  const uint scalar_offset_bytes_15 = ((offset + 4u));
+  const uint scalar_offset_index_15 = scalar_offset_bytes_15 / 4;
+  const ExternalTextureParams tint_symbol_10 = {buffer[scalar_offset_index_14 / 4][scalar_offset_index_14 % 4], buffer[scalar_offset_index_15 / 4][scalar_offset_index_15 % 4], tint_symbol_3(buffer, (offset + 16u)), tint_symbol_5(buffer, (offset + 64u)), tint_symbol_5(buffer, (offset + 96u)), tint_symbol_7(buffer, (offset + 128u))};
   return tint_symbol_10;
 }
 

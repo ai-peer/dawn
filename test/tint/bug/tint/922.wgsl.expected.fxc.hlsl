@@ -210,26 +210,35 @@ Mat4x3_ x_Mat4x3_1(Mat4x4_ m20) {
 }
 
 Mat4x3_ tint_symbol_3(uint4 buffer[96], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  const uint scalar_offset_1 = ((offset + 16u)) / 4;
-  const uint scalar_offset_2 = ((offset + 32u)) / 4;
-  const Mat4x3_ tint_symbol_9 = {asfloat(buffer[scalar_offset / 4]), asfloat(buffer[scalar_offset_1 / 4]), asfloat(buffer[scalar_offset_2 / 4])};
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  const uint scalar_offset_bytes_1 = ((offset + 16u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  const uint scalar_offset_bytes_2 = ((offset + 32u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  const Mat4x3_ tint_symbol_9 = {asfloat(buffer[scalar_offset_index / 4]), asfloat(buffer[scalar_offset_index_1 / 4]), asfloat(buffer[scalar_offset_index_2 / 4])};
   return tint_symbol_9;
 }
 
 Mat4x4_ tint_symbol_5(uint4 buffer[4], uint offset) {
-  const uint scalar_offset_3 = ((offset + 0u)) / 4;
-  const uint scalar_offset_4 = ((offset + 16u)) / 4;
-  const uint scalar_offset_5 = ((offset + 32u)) / 4;
-  const uint scalar_offset_6 = ((offset + 48u)) / 4;
-  const Mat4x4_ tint_symbol_10 = {asfloat(buffer[scalar_offset_3 / 4]), asfloat(buffer[scalar_offset_4 / 4]), asfloat(buffer[scalar_offset_5 / 4]), asfloat(buffer[scalar_offset_6 / 4])};
+  const uint scalar_offset_bytes_3 = ((offset + 0u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  const uint scalar_offset_bytes_4 = ((offset + 16u));
+  const uint scalar_offset_index_4 = scalar_offset_bytes_4 / 4;
+  const uint scalar_offset_bytes_5 = ((offset + 32u));
+  const uint scalar_offset_index_5 = scalar_offset_bytes_5 / 4;
+  const uint scalar_offset_bytes_6 = ((offset + 48u));
+  const uint scalar_offset_index_6 = scalar_offset_bytes_6 / 4;
+  const Mat4x4_ tint_symbol_10 = {asfloat(buffer[scalar_offset_index_3 / 4]), asfloat(buffer[scalar_offset_index_4 / 4]), asfloat(buffer[scalar_offset_index_5 / 4]), asfloat(buffer[scalar_offset_index_6 / 4])};
   return tint_symbol_10;
 }
 
 Mat4x2_ tint_symbol_8(uint4 buffer[3], uint offset) {
-  const uint scalar_offset_7 = ((offset + 0u)) / 4;
-  const uint scalar_offset_8 = ((offset + 16u)) / 4;
-  const Mat4x2_ tint_symbol_11 = {asfloat(buffer[scalar_offset_7 / 4]), asfloat(buffer[scalar_offset_8 / 4])};
+  const uint scalar_offset_bytes_7 = ((offset + 0u));
+  const uint scalar_offset_index_7 = scalar_offset_bytes_7 / 4;
+  const uint scalar_offset_bytes_8 = ((offset + 16u));
+  const uint scalar_offset_index_8 = scalar_offset_bytes_8 / 4;
+  const Mat4x2_ tint_symbol_11 = {asfloat(buffer[scalar_offset_index_7 / 4]), asfloat(buffer[scalar_offset_index_8 / 4])};
   return tint_symbol_11;
 }
 

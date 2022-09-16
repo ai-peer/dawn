@@ -41,8 +41,9 @@ tint_symbol_5_ret tint_symbol_5(uint4 buffer[4], uint offset) {
   int4 arr_1[4] = (int4[4])0;
   {
     for(uint i_1 = 0u; (i_1 < 4u); i_1 = (i_1 + 1u)) {
-      const uint scalar_offset = ((offset + (i_1 * 16u))) / 4;
-      arr_1[i_1] = asint(buffer[scalar_offset / 4]);
+      const uint scalar_offset_bytes = ((offset + (i_1 * 16u)));
+      const uint scalar_offset_index = scalar_offset_bytes / 4;
+      arr_1[i_1] = asint(buffer[scalar_offset_index / 4]);
     }
   }
   return arr_1;
