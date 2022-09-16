@@ -63,6 +63,30 @@
       },
       "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e27dbdd_5a0d8998",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T16:55:13Z",
+      "side": 1,
+      "message": "Oh, lines 147-153 scan down from the global variables, and the decompose lambda peers into the types, and doesn\u0027t need to have the usage tracking in the type.\n\n\nIt seems you could delete the scan from lines 136-146.\nBut the resolver has already cached the usage.\n\nNever mind.",
+      "parentUuid": "73d7b3b1_c1273a67",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 63
+      },
+      "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
