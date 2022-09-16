@@ -16,6 +16,46 @@
       "message": "This implements your suggestions from the parent code review",
       "revId": "4bbc4d6ae5941e29fde9dc7a938bda846377c8ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c1594c2_72f84d6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:42:06Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "4bbc4d6ae5941e29fde9dc7a938bda846377c8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb467f83_c9b88848",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T20:42:06Z",
+      "side": 1,
+      "message": "`///`\n\n\n`/dawn/src/src/tint/reader/spirv/function.h:266: error: Compound tint::reader::spirv::DefInfo::Local is not documented. (warning treated as error, aborting now)`",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 265,
+        "endChar": 6
+      },
+      "revId": "4bbc4d6ae5941e29fde9dc7a938bda846377c8ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
