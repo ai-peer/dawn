@@ -39,6 +39,30 @@
       },
       "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d7b3b1_c1273a67",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-16T16:50:07Z",
+      "side": 1,
+      "message": "Experimentally I tried this patch, and it does work.  So I\u0027m not understanding something....",
+      "parentUuid": "a442d383_59095483",
+      "range": {
+        "startLine": 138,
+        "startChar": 16,
+        "endLine": 138,
+        "endChar": 63
+      },
+      "revId": "f243e361032a9e6e8b98e25757ce1663c4a478e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
