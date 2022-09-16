@@ -866,14 +866,14 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     std::vector<const char*> forceEnabledToggles = mParam.forceEnabledWorkarounds;
     std::vector<const char*> forceDisabledToggles = mParam.forceDisabledWorkarounds;
 
+    // Disabled disallowing unsafe APIs so we can test them.
+    forceDisabledToggles.push_back("disallow_unsafe_apis");
+
     std::vector<wgpu::FeatureName> requiredFeatures = GetRequiredFeatures();
 
     wgpu::SupportedLimits supportedLimits;
     mBackendAdapter.GetLimits(reinterpret_cast<WGPUSupportedLimits*>(&supportedLimits));
     wgpu::RequiredLimits requiredLimits = GetRequiredLimits(supportedLimits);
-
-    // Disabled disallowing unsafe APIs so we can test them.
-    forceDisabledToggles.push_back("disallow_unsafe_apis");
 
     for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
         const dawn::native::ToggleInfo* info =

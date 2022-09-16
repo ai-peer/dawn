@@ -16,11 +16,13 @@ int i() {
 }
 
 float2x2 tint_symbol_8(uint4 buffer[16], uint offset) {
-  const uint scalar_offset = ((offset + 0u)) / 4;
-  uint4 ubo_load = buffer[scalar_offset / 4];
-  const uint scalar_offset_1 = ((offset + 8u)) / 4;
-  uint4 ubo_load_1 = buffer[scalar_offset_1 / 4];
-  return float2x2(asfloat(((scalar_offset & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)));
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint4 ubo_load = buffer[scalar_offset_index / 4];
+  const uint scalar_offset_bytes_1 = ((offset + 8u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint4 ubo_load_1 = buffer[scalar_offset_index_1 / 4];
+  return float2x2(asfloat(((scalar_offset_index & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)));
 }
 
 Inner tint_symbol_7(uint4 buffer[16], uint offset) {
@@ -65,14 +67,16 @@ void f() {
   const Inner l_a_i_a[4] = tint_symbol_6(a, (64u * uint(p_a_i_save)));
   const Inner l_a_i_a_i = tint_symbol_7(a, ((64u * uint(p_a_i_save)) + (16u * uint(p_a_i_a_i_save))));
   const float2x2 l_a_i_a_i_m = tint_symbol_8(a, ((64u * uint(p_a_i_save)) + (16u * uint(p_a_i_a_i_save))));
-  const uint scalar_offset_2 = ((((64u * uint(p_a_i_save)) + (16u * uint(p_a_i_a_i_save))) + (8u * uint(p_a_i_a_i_m_i_save)))) / 4;
-  uint4 ubo_load_2 = a[scalar_offset_2 / 4];
-  const float2 l_a_i_a_i_m_i = asfloat(((scalar_offset_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy));
+  const uint scalar_offset_bytes_2 = ((((64u * uint(p_a_i_save)) + (16u * uint(p_a_i_a_i_save))) + (8u * uint(p_a_i_a_i_m_i_save))));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint4 ubo_load_2 = a[scalar_offset_index_2 / 4];
+  const float2 l_a_i_a_i_m_i = asfloat(((scalar_offset_index_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy));
   const int tint_symbol = p_a_i_save;
   const int tint_symbol_1 = p_a_i_a_i_save;
   const int tint_symbol_2 = p_a_i_a_i_m_i_save;
   const int tint_symbol_3 = i();
-  const uint scalar_offset_3 = (((((64u * uint(tint_symbol)) + (16u * uint(tint_symbol_1))) + (8u * uint(tint_symbol_2))) + (4u * uint(tint_symbol_3)))) / 4;
-  const float l_a_i_a_i_m_i_i = asfloat(a[scalar_offset_3 / 4][scalar_offset_3 % 4]);
+  const uint scalar_offset_bytes_3 = (((((64u * uint(tint_symbol)) + (16u * uint(tint_symbol_1))) + (8u * uint(tint_symbol_2))) + (4u * uint(tint_symbol_3))));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  const float l_a_i_a_i_m_i_i = asfloat(a[scalar_offset_index_3 / 4][scalar_offset_index_3 % 4]);
   return;
 }
