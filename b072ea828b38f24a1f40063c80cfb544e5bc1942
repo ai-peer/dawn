@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "124bf639_ceddf3b1",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-16T21:57:00Z",
+      "side": 1,
+      "message": "Would it not be simpler to move the `2` to the other side of the comparison?\n\n`(current_index + 2 \u003e\u003d wgsl_code.size()) ? \u0027\\0\u0027 : wgsl_code[current_index + 2];`",
+      "range": {
+        "startLine": 467,
+        "startChar": 31,
+        "endLine": 469,
+        "endChar": 66
+      },
+      "revId": "b072ea828b38f24a1f40063c80cfb544e5bc1942",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
