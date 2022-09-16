@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b42e9e48_0d528da9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:35:39Z",
+      "side": 1,
+      "message": "You\u0027ve made me realize that the real problem here is the name `Constant` for the internal type vs `sem::Constant`. If the internal one was named something else, or put into a namespace, then this would be much simpler.\n\nFor example:\n\n`sem::Constant` (same as before)\n`impl::Constant` (we rename the current anonymous namespace `Constant` to this)\n\nNow our API can return `ConstEval::Result`, which is a `Result\u003cconst sem::Constant*\u003e`, and internally, we define:\n\n`using ImplConstantResult \u003d Result\u003cconst impl::Constant*\u003e`\n\nNow the difference between `ConstEval::Result` vs `ImplConstantResult` is clear.",
+      "parentUuid": "1e4b4c64_7f6b588e",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 62
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc5ce1d7_bcd311fb",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 3
@@ -198,6 +222,30 @@
       "side": 1,
       "message": "Yes, but the condition was not `constexpr`. The warning is raised when there are `if constexpr` branches that are not reachable for that particular instantiation. None of the constexpr stuff has changed.",
       "parentUuid": "02f98716_f010407d",
+      "range": {
+        "startLine": 275,
+        "startChar": 7,
+        "endLine": 275,
+        "endChar": 51
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "136e7661_509f829e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:35:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "99c72d2e_12a6ab49",
       "range": {
         "startLine": 275,
         "startChar": 7,
@@ -293,6 +341,30 @@
       "side": 1,
       "message": "It supports conversion, so long as the target success and failure types are copy constructable from the source success and failure types. This is a valid test of this?",
       "parentUuid": "50f9b03a_78b5e4bc",
+      "range": {
+        "startLine": 56,
+        "startChar": 13,
+        "endLine": 56,
+        "endChar": 19
+      },
+      "revId": "4784be1dee7f1d52be1059ae05a8f461f0aaefd7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b866b5ec_d31a1070",
+        "filename": "src/tint/utils/result_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-16T21:35:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b9e99f6_c519fc4b",
       "range": {
         "startLine": 56,
         "startChar": 13,
