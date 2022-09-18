@@ -22,6 +22,30 @@
       },
       "revId": "b072ea828b38f24a1f40063c80cfb544e5bc1942",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddabf425_9d163fc1",
+        "filename": "src/tint/fuzzers/tint_regex_fuzzer/wgsl_mutator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2022-09-18T09:27:07Z",
+      "side": 1,
+      "message": "Thanks - good simplification - done.",
+      "parentUuid": "124bf639_ceddf3b1",
+      "range": {
+        "startLine": 467,
+        "startChar": 31,
+        "endLine": 469,
+        "endChar": 66
+      },
+      "revId": "b072ea828b38f24a1f40063c80cfb544e5bc1942",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
