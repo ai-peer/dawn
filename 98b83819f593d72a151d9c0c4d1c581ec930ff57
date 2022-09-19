@@ -104,6 +104,24 @@
       "parentUuid": "a1ea02b8_b6e4734a",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1efc16_a3eb90b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-19T07:45:22Z",
+      "side": 1,
+      "message": "It is [here](https://registry.khronos.org/vulkan/specs/1.3/html/vkspec.html#vkQueueSubmit:~:text\u003dvkQueueSubmit%20performs%20a%20memory%20domain%20operation%20from%20host%20to%20device%2C%20and%20a%20visibility%20operation%20with%20source%20scope%20of%20the%20device%20domain%20and%20destination%20scope%20of%20all%20agents%20and%20references%20on%20the%20device.) (and also see [this](https://registry.khronos.org/vulkan/specs/1.3/html/vkspec.html#vkQueueSubmit:~:text\u003dIf%20the%20memory%20object%20was,access%20types%20for%20more%20information.)).\n\n\u003e vkQueueSubmit performs a memory domain operation from host to device, and a visibility operation with source scope of the device domain and destination scope of all agents and references on the device.\n\nMy reading of this is that memory modified by the CPU will automatically become \"readable\" by the GPU (through PCIe / access to unified RAM, etc). The on the GPU this memory will be made \"visible\" to all things by flushing the caches as needed. So we shouldn\u0027t need any additional operations to make memory writes by the CPU be properly synchronized with `TRANSFER_READ`.",
+      "parentUuid": "a1ea02b8_b6e4734a",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
