@@ -140,6 +140,24 @@
       "parentUuid": "3b1efc16_a3eb90b7",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df4dcee4_c06e63a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-19T08:03:23Z",
+      "side": 1,
+      "message": "No, it was just my suspicion. The barrier issues are always hard to catch and verify.",
+      "parentUuid": "52df872c_fe31f0cb",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
