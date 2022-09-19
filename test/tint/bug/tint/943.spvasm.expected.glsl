@@ -3,8 +3,7 @@ note: 'workgroupBarrier' must only be called from uniform control flow
 note: reading from module-scope private variable 'dimInner_1' may result in a non-uniform value
 #version 310 es
 
-int dimAOuter_1 = 0;
-layout(binding = 3, std140) uniform Uniforms_ubo {
+struct Uniforms {
   float NAN;
   uint pad;
   uint pad_1;
@@ -18,6 +17,11 @@ layout(binding = 3, std140) uniform Uniforms_ubo {
   ivec2 outShapeStrides;
   uint pad_6;
   uint pad_7;
+};
+
+int dimAOuter_1 = 0;
+layout(binding = 3, std140) uniform x_48_block_ubo {
+  Uniforms inner;
 } x_48;
 
 int dimInner_1 = 0;
@@ -59,8 +63,8 @@ float mm_readA_i1_i1_(inout int row, inout int col) {
   ivec2 param_10 = ivec2(0, 0);
   ivec2 param_11 = ivec2(0, 0);
   float x_430 = 0.0f;
-  int x_417 = x_48.aShape.y;
-  int x_419 = x_48.aShape.z;
+  int x_417 = x_48.inner.aShape.y;
+  int x_419 = x_48.inner.aShape.z;
   batchASize = (x_417 * x_419);
   int x_421 = row;
   int x_422 = col;
@@ -89,8 +93,8 @@ float mm_readB_i1_i1_(inout int row_1, inout int col_1) {
   ivec2 param_12 = ivec2(0, 0);
   ivec2 param_13 = ivec2(0, 0);
   float x_468 = 0.0f;
-  int x_455 = x_48.bShape.y;
-  int x_457 = x_48.bShape.z;
+  int x_455 = x_48.inner.bShape.y;
+  int x_457 = x_48.inner.bShape.z;
   batchBSize = (x_455 * x_457);
   int x_459 = row_1;
   int x_460 = col_1;
@@ -116,8 +120,8 @@ float mm_readB_i1_i1_(inout int row_1, inout int col_1) {
 
 int getOutputFlatIndex_vi3_(inout ivec3 coords) {
   ivec3 x_99 = coords;
-  int x_105 = x_48.outShapeStrides.x;
-  int x_107 = x_48.outShapeStrides.y;
+  int x_105 = x_48.inner.outShapeStrides.x;
+  int x_107 = x_48.inner.outShapeStrides.y;
   return int(dot(vec3(x_99), vec3(ivec3(x_105, x_107, 1))));
 }
 
@@ -464,11 +468,11 @@ void main_1() {
   int param_18 = 0;
   int param_19 = 0;
   int param_20 = 0;
-  int x_67 = x_48.aShape.y;
+  int x_67 = x_48.inner.aShape.y;
   dimAOuter_1 = x_67;
-  int x_71 = x_48.aShape.z;
+  int x_71 = x_48.inner.aShape.z;
   dimInner_1 = x_71;
-  int x_75 = x_48.bShape.z;
+  int x_75 = x_48.inner.bShape.z;
   dimBOuter_1 = x_75;
   uint x_505 = tint_symbol_1.z;
   batch = int(x_505);
