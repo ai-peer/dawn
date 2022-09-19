@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86ff506a_343d73bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-09-19T18:30:30Z",
+      "side": 1,
+      "message": "Thanks for clarifying.",
+      "parentUuid": "c98bcb8b_b579008e",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "ad2888fac1807540e5d87432d3417d5c76ef0002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bde8db3_51273f53",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I don\u0027t know what all the fuzzers are doing. If they can insert `override` variables in place of `const` or other module-scoped vars, or if they can remove the initializer for an `override` then this must come after.\n\nI thought about reusing `transforms_` but also thought it might be clearer if this was a completely separate pass, making it more obvious that it always runs?",
       "parentUuid": "2bde8db3_51273f53",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 9
+      },
+      "revId": "ad2888fac1807540e5d87432d3417d5c76ef0002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405266c6_d8e07253",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-09-19T18:30:30Z",
+      "side": 1,
+      "message": "I agree that having it as a seperate step because we don\u0027t know what the fuzzers are going to do to the shader sounds reasonable.",
+      "parentUuid": "5ed7c930_a4376a8b",
       "range": {
         "startLine": 227,
         "startChar": 0,
