@@ -16,6 +16,23 @@
       "message": "In this cts [case](https://gpuweb.github.io/cts/standalone/?runnow\u003d0\u0026worker\u003d0\u0026debug\u003d0\u0026q\u003dwebgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension\u003d%222d%22;readMethod\u003d%22CopyToBuffer%22;format\u003d%22r8unorm%22;*), we write the desired data to a buffer mapped at creation, and copy the buffer to a texture to be initialized. Per my understanding, there should be a host-write to transfer-read barrier before the copy. But I am not seeing it according to the dumped vulkan api [log](https://bugs.chromium.org/p/chromium/issues/attachmentText?aid\u003d569706).\n\nPlease help confirm my understanding!",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cd8720_c9270ecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-19T06:37:11Z",
+      "side": 1,
+      "message": "Thank Jiawei for pointing me out that if the buffer uses the staging buffer, it doesn\u0027t have to be MapWrite. So this might not be the right fix. But Dawn is still missing the barrier for the staging buffer.",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
