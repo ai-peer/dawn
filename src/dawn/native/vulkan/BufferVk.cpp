@@ -139,6 +139,10 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device, const BufferDescriptor
 }
 
 MaybeError Buffer::Initialize(bool mappedAtCreation) {
+    if (mappedAtCreation) {
+        mUsage |= wgpu::BufferUsage::MapWrite;
+    }
+
     // vkCmdFillBuffer requires the size to be a multiple of 4.
     constexpr size_t kAlignment = 4u;
 
@@ -300,6 +304,9 @@ bool Buffer::IsCPUWritableAtCreation() const {
 }
 
 MaybeError Buffer::MapAtCreationImpl() {
+    Device* device = ToBackend(GetDevice());
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
     return {};
 }
 

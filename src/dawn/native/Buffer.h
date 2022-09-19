@@ -101,6 +101,8 @@ class BufferBase : public ApiObjectBase {
 
     uint64_t mAllocatedSize = 0;
 
+    wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
+
   private:
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
@@ -120,7 +122,6 @@ class BufferBase : public ApiObjectBase {
     void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
 
     uint64_t mSize = 0;
-    wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
     BufferState mState;
     bool mIsDataInitialized = false;
 
