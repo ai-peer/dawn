@@ -235,6 +235,7 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearOnIntegerFormats) {
 
 // This test verifies that input double values are being rendered correctly when clearing.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsToLargeValues) {
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 5));
     constexpr double kUint32MaxDouble = 4294967295.0;
     constexpr uint32_t kUint32Max = static_cast<uint32_t>(kUint32MaxDouble);
     // RGBA32Uint for UINT32_MAX
