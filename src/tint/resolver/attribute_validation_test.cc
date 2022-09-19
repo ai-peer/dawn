@@ -659,6 +659,24 @@ TEST_F(StructMemberAttributeTest, InvariantAttributeWithoutPosition) {
               "position builtin");
 }
 
+TEST_F(StructMemberAttributeTest, Align_Attribute_NonConst) {
+    GlobalVar("val", ty.f32(), ast::StorageClass::kPrivate, ast::Access::kUndefined, Expr(1.23_f));
+
+    Structure("mystruct", utils::Vector{Member(
+                              "a", ty.f32(), utils::Vector{MemberAlign(Source{{12, 34}}, "val")})});
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), R"(error: var 'val' cannot be referenced at module-scope
+note: var 'val' declared here)");
+}
+
+TEST_F(StructMemberAttributeTest, Align_Attribute_Override) {
+    Override("val", ty.f32(), Expr(1.23_f));
+
+    Structure("mystruct", utils::Vector{Member(
+                              "a", ty.f32(), utils::Vector{MemberAlign(Source{{12, 34}}, "val")})});
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
 }  // namespace StructAndStructMemberTests
 
 using ArrayAttributeTest = TestWithParams;
