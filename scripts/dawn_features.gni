@@ -32,7 +32,10 @@ if (build_with_chromium) {
 dawn_is_winuwp = is_win && target_os == "winuwp"
 
 declare_args() {
-  dawn_use_angle = true
+  # TODO(kbr): Enable ANGLE for WebGPU/Compat on Android. Currently,
+  # the added dependencies on libGLESv2.so and libEGL.so break the
+  # non-component build of Dawn on Android.
+  dawn_use_angle = !is_android
 
   # Enables SwiftShader as the fallback adapter. Requires dawn_swiftshader_dir
   # to be set to take effect.
