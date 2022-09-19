@@ -4,26 +4,34 @@ struct vertexUniformBuffer1 {
   mat2 transform1;
 };
 
+struct vertexUniformBuffer1_std140 {
+  vec2 transform1_0;
+  vec2 transform1_1;
+};
+
 struct vertexUniformBuffer2 {
   mat2 transform2;
 };
 
-layout(binding = 0, std140) uniform vertexUniformBuffer1_std140_ubo {
-  vec2 transform1_0;
-  vec2 transform1_1;
-} x_20;
-
-layout(binding = 0, std140) uniform vertexUniformBuffer2_std140_ubo {
+struct vertexUniformBuffer2_std140 {
   vec2 transform2_0;
   vec2 transform2_1;
+};
+
+layout(binding = 0, std140) uniform x_20_block_ubo {
+  vertexUniformBuffer1_std140 inner;
+} x_20;
+
+layout(binding = 0, std140) uniform x_26_block_ubo {
+  vertexUniformBuffer2_std140 inner;
 } x_26;
 
 mat2 load_x_20_transform1() {
-  return mat2(x_20.transform1_0, x_20.transform1_1);
+  return mat2(x_20.inner.transform1_0, x_20.inner.transform1_1);
 }
 
 mat2 load_x_26_transform2() {
-  return mat2(x_26.transform2_0, x_26.transform2_1);
+  return mat2(x_26.inner.transform2_0, x_26.inner.transform2_1);
 }
 
 vec4 tint_symbol(uint tint_symbol_1) {

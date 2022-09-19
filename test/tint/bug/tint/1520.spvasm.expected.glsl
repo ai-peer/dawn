@@ -3,7 +3,7 @@ precision mediump float;
 
 layout(location = 0) in vec4 vcolor_S0_param_1;
 layout(location = 0) out vec4 sk_FragColor_1_1;
-layout(binding = 0, std140) uniform UniformBuffer_ubo {
+struct UniformBuffer {
   uint pad;
   uint pad_1;
   uint pad_2;
@@ -15,6 +15,10 @@ layout(binding = 0, std140) uniform UniformBuffer_ubo {
   vec4 ucolorRed_S1_c0;
   vec4 ucolorGreen_S1_c0;
   mat3 umatrix_S1;
+};
+
+layout(binding = 0, std140) uniform x_4_block_ubo {
+  UniformBuffer inner;
 } x_4;
 
 vec4 sk_FragColor = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -30,7 +34,7 @@ bool test_int_S1_c0_b() {
   bool x_41_phi = false;
   bool x_55_phi = false;
   bool x_66_phi = false;
-  float x_26 = x_4.unknownInput_S1_c0;
+  float x_26 = x_4.inner.unknownInput_S1_c0;
   int x_27 = int(x_26);
   unknown = x_27;
   ok = true;
@@ -92,7 +96,7 @@ void main_1() {
   bool x_111_phi = false;
   bool x_115_phi = false;
   outputColor_S0 = vcolor_S0;
-  float x_77 = x_4.unknownInput_S1_c0;
+  float x_77 = x_4.inner.unknownInput_S1_c0;
   x_8_unknown = x_77;
   x_9_ok = true;
   x_87_phi = false;
@@ -140,10 +144,10 @@ void main_1() {
     x_115_phi = x_114;
   }
   if (x_115_phi) {
-    vec4 x_122 = x_4.ucolorGreen_S1_c0;
+    vec4 x_122 = x_4.inner.ucolorGreen_S1_c0;
     x_116 = x_122;
   } else {
-    vec4 x_124 = x_4.ucolorRed_S1_c0;
+    vec4 x_124 = x_4.inner.ucolorRed_S1_c0;
     x_116 = x_124;
   }
   vec4 x_125 = x_116;

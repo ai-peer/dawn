@@ -6,12 +6,16 @@ struct QuicksortObject {
   int numbers[10];
 };
 
-QuicksortObject obj = QuicksortObject(int[10](0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
-vec4 tint_symbol = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-layout(binding = 0, std140) uniform buf0_ubo {
+struct buf0 {
   vec2 resolution;
   uint pad;
   uint pad_1;
+};
+
+QuicksortObject obj = QuicksortObject(int[10](0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
+vec4 tint_symbol = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+layout(binding = 0, std140) uniform x_188_block_ubo {
+  buf0 inner;
 } x_188;
 
 vec4 x_GLF_color = vec4(0.0f, 0.0f, 0.0f, 0.0f);
@@ -867,7 +871,7 @@ void main_1() {
   vec2 x_762 = uv;
   uv = vec2(0.0f);
   uv = x_762;
-  vec2 x_191 = x_188.resolution;
+  vec2 x_191 = x_188.inner.resolution;
   QuicksortObject x_763 = obj;
   int tint_symbol_49[10] = int[10](0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   QuicksortObject tint_symbol_50 = QuicksortObject(tint_symbol_49);

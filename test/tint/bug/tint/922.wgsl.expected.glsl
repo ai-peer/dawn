@@ -25,23 +25,35 @@ struct Mat4x2_ {
   vec4 my;
 };
 
+struct ub_SceneParams {
+  Mat4x4_ u_Projection;
+};
+
+struct ub_MaterialParams {
+  Mat4x2_ u_TexMtx[1];
+  vec4 u_Misc0_;
+};
+
+struct ub_PacketParams {
+  Mat4x3_ u_PosMtx[32];
+};
+
 struct VertexOutput {
   vec4 v_Color;
   vec2 v_TexCoord;
   vec4 member;
 };
 
-layout(binding = 0, std140) uniform ub_SceneParams_ubo {
-  Mat4x4_ u_Projection;
+layout(binding = 0, std140) uniform global_block_ubo {
+  ub_SceneParams inner;
 } global;
 
-layout(binding = 1, std140) uniform ub_MaterialParams_ubo {
-  Mat4x2_ u_TexMtx[1];
-  vec4 u_Misc0_;
+layout(binding = 1, std140) uniform global1_block_ubo {
+  ub_MaterialParams inner;
 } global1;
 
-layout(binding = 2, std140) uniform ub_PacketParams_ubo {
-  Mat4x3_ u_PosMtx[32];
+layout(binding = 2, std140) uniform global2_block_ubo {
+  ub_PacketParams inner;
 } global2;
 
 vec3 a_Position1 = vec3(0.0f, 0.0f, 0.0f);
@@ -94,13 +106,13 @@ Mat4x4_ x_Mat4x4_1(Mat4x3_ m16) {
 void main1() {
   Mat4x3_ t_PosMtx = Mat4x3_(vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
   vec2 t_TexSpaceCoord = vec2(0.0f, 0.0f);
-  Mat4x3_ x_e18 = global2.u_PosMtx[int(a_PosMtxIdx1)];
+  Mat4x3_ x_e18 = global2.inner.u_PosMtx[int(a_PosMtxIdx1)];
   t_PosMtx = x_e18;
   Mat4x4_ x_e24 = x_Mat4x4_1(t_PosMtx);
   vec3 x_e25 = a_Position1;
   Mat4x4_ x_e30 = x_Mat4x4_1(t_PosMtx);
   vec4 x_e34 = Mul(x_e30, vec4(a_Position1, 1.0f));
-  Mat4x4_ x_e35 = global.u_Projection;
+  Mat4x4_ x_e35 = global.inner.u_Projection;
   Mat4x4_ x_e38 = x_Mat4x4_1(t_PosMtx);
   vec3 x_e39 = a_Position1;
   Mat4x4_ x_e44 = x_Mat4x4_1(t_PosMtx);
@@ -108,11 +120,11 @@ void main1() {
   vec4 x_e49 = Mul(x_e35, x_e48);
   tint_symbol = x_e49;
   v_Color = a_Color1;
-  vec4 x_e52 = global1.u_Misc0_;
+  vec4 x_e52 = global1.inner.u_Misc0_;
   if ((x_e52.x == 2.0f)) {
     {
       vec3 x_e59 = a_Normal1;
-      Mat4x2_ x_e64 = global1.u_TexMtx[0];
+      Mat4x2_ x_e64 = global1.inner.u_TexMtx[0];
       vec2 x_e68 = Mul2(x_e64, vec4(a_Normal1, 1.0f));
       v_TexCoord = x_e68.xy;
       return;
@@ -120,7 +132,7 @@ void main1() {
   } else {
     {
       vec2 x_e73 = a_UV1;
-      Mat4x2_ x_e79 = global1.u_TexMtx[0];
+      Mat4x2_ x_e79 = global1.inner.u_TexMtx[0];
       vec2 x_e84 = Mul2(x_e79, vec4(a_UV1, 1.0f, 1.0f));
       v_TexCoord = x_e84.xy;
       return;
