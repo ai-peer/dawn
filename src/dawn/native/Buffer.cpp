@@ -125,8 +125,8 @@ MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descrip
 
 BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label),
-      mSize(descriptor->size),
       mUsage(descriptor->usage),
+      mSize(descriptor->size),
       mState(BufferState::Unmapped) {
     // Add readonly storage usage if the buffer has a storage usage. The validation rules in
     // ValidateSyncScopeResourceUsage will make sure we don't use both at the same time.
@@ -159,8 +159,8 @@ BufferBase::BufferBase(DeviceBase* device,
                        const BufferDescriptor* descriptor,
                        ObjectBase::ErrorTag tag)
     : ApiObjectBase(device, tag),
-      mSize(descriptor->size),
       mUsage(descriptor->usage),
+      mSize(descriptor->size),
       mState(BufferState::Unmapped) {
     if (descriptor->mappedAtCreation) {
         mState = BufferState::MappedAtCreation;
