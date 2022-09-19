@@ -235,6 +235,7 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearOnIntegerFormats) {
 
 // This test verifies that input double values are being rendered correctly when clearing.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsToLargeValues) {
+<<<<<<< HEAD   (2fa818 [M105] Expand Mac Metal Intel suppression)
     // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
     // to large values on D3D12.
     DAWN_SUPPRESS_TEST_IF(IsD3D12());
@@ -245,6 +246,9 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsToLargeValues) {
     // TODO(crbug.com/dawn/1463): Re-enable, might be the same as above just on
     // 12.4 instead of 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 4));
+=======
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 5) && IsBackendValidationEnabled());
+>>>>>>> CHANGE (989478 [M105] Suppress Mac 12.5 failures)
 
     constexpr double kUint32MaxDouble = 4294967295.0;
     constexpr uint32_t kUint32Max = static_cast<uint32_t>(kUint32MaxDouble);
@@ -389,6 +393,7 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Sint16) {
 // Test clearing a color attachment on Uint32 formats (R32Uint, RG32Uint, RGBA32Uint) when the clear
 // values are out of bound.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Uint32) {
+<<<<<<< HEAD   (2fa818 [M105] Expand Mac Metal Intel suppression)
     // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
     // to large values on D3D12.
     DAWN_SUPPRESS_TEST_IF(IsD3D12());
@@ -399,6 +404,9 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Uint32) {
     // TODO(crbug.com/dawn/1463): Re-enable, might be the same as above just on
     // 12.4 instead of 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 4));
+=======
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 5) && IsBackendValidationEnabled());
+>>>>>>> CHANGE (989478 [M105] Suppress Mac 12.5 failures)
 
     constexpr uint64_t kUint32Max = std::numeric_limits<uint32_t>::max();
 
@@ -424,6 +432,7 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Uint32) {
 // Test clearing a color attachment on Sint32 formats (R32Sint, RG32Sint, RGBA32Sint) when the clear
 // values are out of bound.
 TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Sint32) {
+<<<<<<< HEAD   (2fa818 [M105] Expand Mac Metal Intel suppression)
     // TODO(http://crbug.com/dawn/537): Implemement a workaround to enable clearing integer formats
     // to large values on D3D12.
     DAWN_SUPPRESS_TEST_IF(IsD3D12());
@@ -434,6 +443,9 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearIntegerFormatsOutOfBound_Sint32) {
     // TODO(crbug.com/dawn/1463): Re-enable, might be the same as above just on
     // 12.4 instead of 11.5.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 4));
+=======
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && IsMacOS(12, 5) && IsBackendValidationEnabled());
+>>>>>>> CHANGE (989478 [M105] Suppress Mac 12.5 failures)
 
     constexpr int64_t kSint32Max = std::numeric_limits<int32_t>::max();
     constexpr int64_t kSint32Min = std::numeric_limits<int32_t>::min();
