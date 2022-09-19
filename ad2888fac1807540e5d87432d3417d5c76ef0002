@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a50a596_c33af50d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-09-19T18:12:43Z",
+      "side": 1,
+      "message": "Is it intentional that the various validity checks are letting these invalid fuzzer shaders through?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "ad2888fac1807540e5d87432d3417d5c76ef0002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bde8db3_51273f53",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-09-19T18:12:43Z",
+      "side": 1,
+      "message": "Is the information needed for setting up this transform predicated on the transforms potentionally set up by the fuzzers already having run?\nIf so can you put a comment in the code about that.\n\nAnother way, instead of having this be seperate from the other transform run above, could there just be a check if there is a transform_manager already declared, and tack this transform onto the end, or create one?",
+      "range": {
+        "startLine": 227,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 9
+      },
+      "revId": "ad2888fac1807540e5d87432d3417d5c76ef0002",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
