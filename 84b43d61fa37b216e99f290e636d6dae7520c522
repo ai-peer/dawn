@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20d065d_8b412908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-19T20:12:54Z",
+      "side": 1,
+      "message": "Post-landing LGTM.",
+      "revId": "84b43d61fa37b216e99f290e636d6dae7520c522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf168c0_12da8659",
+        "filename": "test/tint/buffer/uniform/std140/array/mat2x2/to_fn.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-19T20:12:54Z",
+      "side": 1,
+      "message": "Presumably, this test exposes the bug you mentioned? (Arrays of mat2 not being decomposed?)",
+      "revId": "84b43d61fa37b216e99f290e636d6dae7520c522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
