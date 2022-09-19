@@ -24,9 +24,9 @@ namespace tint::transform {
 
 /// AddBlockAttribute is a transform that adds an
 /// `@internal(block)` attribute to any structure that is used as the
-/// store type of a buffer. If that structure is nested inside another structure
-/// or an array, then it is wrapped inside another structure which gets the
-/// `@internal(block)` attribute instead.
+/// store type of a buffer. If that structure does not have a runtime-sized
+/// array, it is wrapped inside a structure which gets the `@internal(block)`
+/// attribute instead.
 class AddBlockAttribute final : public Castable<AddBlockAttribute, Transform> {
   public:
     /// BlockAttribute is an InternalAttribute that is used to decorate a
