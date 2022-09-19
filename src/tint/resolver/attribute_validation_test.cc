@@ -659,6 +659,15 @@ TEST_F(StructMemberAttributeTest, InvariantAttributeWithoutPosition) {
               "position builtin");
 }
 
+TEST_F(StructMemberAttributeTest, Align_Attribute_NonConst) {
+    GlobalVar("val", ty.f32(), ast::StorageClass::kPrivate, ast::Access::kUndefined, Expr(1.23_f));
+
+    Structure("mystruct", utils::Vector{Member(
+                              "a", ty.f32(), utils::Vector{MemberAlign(Source{{12, 34}}, "val")})});
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "1:4: align must be a constant expression");
+}
+
 }  // namespace StructAndStructMemberTests
 
 using ArrayAttributeTest = TestWithParams;
