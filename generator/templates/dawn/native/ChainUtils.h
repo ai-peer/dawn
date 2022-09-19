@@ -28,7 +28,9 @@
 namespace {{native_namespace}} {
     {% for value in types["s type"].values %}
         {% if value.valid %}
-            void FindInChain(const ChainedStruct* chain, const {{as_cppEnum(value.name)}}** out);
+            {% set const_qualifier = "const " if types[value.name.get()].chained == "in" else "" %}
+            {% set chained_struct_type = "ChainedStruct" if types[value.name.get()].chained == "in" else "ChainedStructOut" %}
+            void FindInChain({{const_qualifier}}{{chained_struct_type}}* chain, {{const_qualifier}}{{as_cppEnum(value.name)}}** out);
         {% endif %}
     {% endfor %}
 
@@ -41,11 +43,25 @@ namespace {{native_namespace}} {
     {% set namespace = metadata.namespace %}
     MaybeError ValidateSTypes(const ChainedStruct* chain,
                               std::vector<std::vector<{{namespace}}::SType>> oneOfConstraints);
+    MaybeError ValidateSTypes(const ChainedStructOut* chain,
+                              std::vector<std::vector<{{namespace}}::SType>> oneOfConstraints);
+    MaybeError ValidateSTypes(std::nullptr_t,
+                              std::vector<std::vector<{{namespace}}::SType>> oneOfConstraints);
 
     template <typename T>
     MaybeError ValidateSingleSTypeInner(const ChainedStruct* chain, T sType) {
         DAWN_INVALID_IF(chain->sType != sType,
             "Unsupported sType (%s). Expected (%s)", chain->sType, sType);
+        return {};
+    }
+    template <typename T>
+    MaybeError ValidateSingleSTypeInner(const ChainedStructOut* chain, T sType) {
+        DAWN_INVALID_IF(chain->sType != sType,
+            "Unsupported sType (%s). Expected (%s)", chain->sType, sType);
+        return {};
+    }
+    template <typename T>
+    MaybeError ValidateSingleSTypeInner(std::nullptr_t, T sType) {
         return {};
     }
 
@@ -55,6 +71,17 @@ namespace {{native_namespace}} {
             return {};
         }
         return ValidateSingleSTypeInner(chain, sTypes...);
+    }
+    template <typename T, typename... Args>
+    MaybeError ValidateSingleSTypeInner(const ChainedStructOut* chain, T sType, Args... sTypes) {
+        if (chain->sType == sType) {
+            return {};
+        }
+        return ValidateSingleSTypeInner(chain, sTypes...);
+    }
+    template <typename T, typename... Args>
+    MaybeError ValidateSingleSTypeInner(std::nullptr_t, T sType, Args... sTypes) {
+        return {};
     }
 
     // Verifies that |chain| contains a single ChainedStruct of type |sType| or no ChainedStructs
@@ -68,6 +95,19 @@ namespace {{native_namespace}} {
             "Chain can only contain a single chained struct.");
         return ValidateSingleSTypeInner(chain, sType);
     }
+    template <typename T>
+    MaybeError ValidateSingleSType(const ChainedStructOut* chain, T sType) {
+        if (chain == nullptr) {
+            return {};
+        }
+        DAWN_INVALID_IF(chain->nextInChain != nullptr,
+            "Chain can only contain a single chained struct.");
+        return ValidateSingleSTypeInner(chain, sType);
+    }
+    template <typename T>
+    MaybeError ValidateSingleSType(std::nullptr_t, T sType) {
+        return {};
+    }
 
     // Verifies that |chain| contains a single ChainedStruct with a type enumerated in the
     // parameter pack or no ChainedStructs at all.
@@ -79,6 +119,19 @@ namespace {{native_namespace}} {
         DAWN_INVALID_IF(chain->nextInChain != nullptr,
             "Chain can only contain a single chained struct.");
         return ValidateSingleSTypeInner(chain, sType, sTypes...);
+    }
+    template <typename T, typename... Args>
+    MaybeError ValidateSingleSType(const ChainedStructOut* chain, T sType, Args... sTypes) {
+        if (chain == nullptr) {
+            return {};
+        }
+        DAWN_INVALID_IF(chain->nextInChain != nullptr,
+            "Chain can only contain a single chained struct.");
+        return ValidateSingleSTypeInner(chain, sType, sTypes...);
+    }
+    template <typename T, typename... Args>
+    MaybeError ValidateSingleSType(std::nullptr_t, T sType, Args... sTypes) {
+        return {};
     }
 
 }  // namespace {{native_namespace}}
