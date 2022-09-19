@@ -158,6 +158,24 @@
       "parentUuid": "52df872c_fe31f0cb",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26fbe0ef_1af6d87f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-19T08:28:10Z",
+      "side": 1,
+      "message": "This [post](https://stackoverflow.com/questions/48667439/should-i-syncronize-an-access-to-a-memory-with-host-visible-bit-host-coherent) well clarifies my misunderstanding. Dawn has no problem.\n\n```\nFor GPU reading operations from CPU-written data, a call to vkQueueSubmit acts as a host memory dependency on any CPU writes to GPU-accessible memory, so long as those writes were made prior to the function call.\n```",
+      "parentUuid": "df4dcee4_c06e63a3",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
