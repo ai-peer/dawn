@@ -50,6 +50,24 @@
       "message": "Probably we also need to add a host-write to transfer-read barrier for the source staging buffer [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;l\u003d792;drc\u003d872e5881a4646e5b257d28ac44dfb4c2f9b54c73;bpv\u003d0;bpt\u003d1), am I right?",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20e3d3a_3ad760a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-19T07:13:37Z",
+      "side": 1,
+      "message": "Sorry for the noise. My understanding might be wrong according to the [comment](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;drc\u003d872e5881a4646e5b257d28ac44dfb4c2f9b54c73;l\u003d786), although I haven\u0027t found the corresponding statement in the vkspec.",
+      "parentUuid": "45026736_11f0bfd6",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
