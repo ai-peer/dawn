@@ -122,6 +122,24 @@
       "parentUuid": "a1ea02b8_b6e4734a",
       "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52df872c_fe31f0cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-19T07:56:07Z",
+      "side": 1,
+      "message": "Do the VVLs complain about anything? Does this CL fix the issue you\u0027ve been seeing? Looking at the Mesa anv driver, I see that dstAccess of TRANSFER_READ invalidates the texture cache, but I don\u0027t see where this happens for queue submits, but maybe I\u0027m missing something.",
+      "parentUuid": "3b1efc16_a3eb90b7",
+      "revId": "98b83819f593d72a151d9c0c4d1c581ec930ff57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
