@@ -91,6 +91,24 @@
       "parentUuid": "b3dc6d41_8af13524",
       "revId": "d83fedd1752602e48f9cbea6f6f93b8c04d2774d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d29f93e_e428f072",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-19T13:37:16Z",
+      "side": 1,
+      "message": "We prefer to land the tests with the code change. That way if we ever need to go back and see why something changed everything is grouped together.",
+      "parentUuid": "36bd7397_e454ed69",
+      "revId": "d83fedd1752602e48f9cbea6f6f93b8c04d2774d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
