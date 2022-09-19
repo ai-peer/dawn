@@ -16,6 +16,24 @@
       "message": "How similar are these to ComputeLayoutMemoryBufferTests? Can they be merged somehow?",
       "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb670b78_9dfd33e0",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-19T14:46:19Z",
+      "side": 1,
+      "message": "Yes this test is inspired by ComputeLayoutMemoryBufferTests.\n\nCurrently ComputeLayoutMemoryBufferTests limites its input type to a struct (containing a member of testing type) and only one member are tested. In this CL\u0027s test, as implemented currently, input and output buffer are of scalar, vector, matrix or array types, not struct (these cases did catch some issue before); and I plan to test more complex cases in the future, like combining multiple member of different types (especially both f16 and other 32bit types, and all sort of nested array, struct) in a single struct.\n\nIn principle these tests can merge into ComputeLayoutMemoryBufferTests file, but currently the implementation of ComputeLayoutMemoryBufferTests suits perfectly for its testing pattern, and I am not sure if I can reuse its code elegantly.",
+      "parentUuid": "3516b8c6_a2074ad6",
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
