@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3516b8c6_a2074ad6",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-19T13:59:30Z",
+      "side": 1,
+      "message": "How similar are these to ComputeLayoutMemoryBufferTests? Can they be merged somehow?",
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
