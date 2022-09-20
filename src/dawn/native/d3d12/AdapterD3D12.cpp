@@ -57,7 +57,7 @@ ComPtr<ID3D12Device> Adapter::GetDevice() const {
     return mD3d12Device;
 }
 
-const gpu_info::D3DDriverVersion& Adapter::GetDriverVersion() const {
+const DriverVersion& Adapter::GetDriverVersion() const {
     return mDriverVersion;
 }
 
@@ -94,14 +94,19 @@ MaybeError Adapter::InitializeImpl() {
     if (mHardwareAdapter->CheckInterfaceSupport(__uuidof(IDXGIDevice), &umdVersion) !=
         DXGI_ERROR_UNSUPPORTED) {
         uint64_t encodedVersion = umdVersion.QuadPart;
+        mDriverVersion.major = (encodedVersion >> 48) & 0xFFFF;
+        mDriverVersion.minor = (encodedVersion >> 32) & 0xFFFF;
+        mDriverVersion.maintenance = (encodedVersion >> 16) & 0xFFFF;
+        mDriverVersion.build = encodedVersion & 0xFFFF;
 
-        std::ostringstream o;
-        o << "D3D12 driver version ";
-        for (size_t i = 0; i < mDriverVersion.size(); ++i) {
-            mDriverVersion[i] = (encodedVersion >> (48 - 16 * i)) & 0xFFFF;
-            o << mDriverVersion[i] << ".";
-        }
-        mDriverDescription = o.str();
+        mDriverDescription.append("D3D12 driver version ")
+            .append(std::to_string(mDriverVersion.major))
+            .append(".")
+            .append(std::to_string(mDriverVersion.minor))
+            .append(".")
+            .append(std::to_string(mDriverVersion.maintenance))
+            .append(".")
+            .append(std::to_string(mDriverVersion.build));
     }
 
     return {};
