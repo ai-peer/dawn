@@ -242,7 +242,7 @@ struct Element : Constant {
                 // Conversion success
                 return builder.create<Element<TO>>(target_ty, conv.Get());
                 // --- Below this point are the failure cases ---
-            } else if constexpr (std::is_same_v<T, AInt> || std::is_same_v<T, AFloat>) {
+            } else if constexpr (IsAbstract<T>) {
                 // [abstract-numeric -> x] - materialization failure
                 std::stringstream ss;
                 ss << "value " << value << " cannot be represented as ";
@@ -564,7 +564,7 @@ ConstEval::ConstEval(ProgramBuilder& b) : builder(b) {}
 template <typename NumberT>
 utils::Result<NumberT> ConstEval::Add(NumberT a, NumberT b) {
     NumberT result;
-    if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+    if constexpr (IsAbstract<NumberT>) {
         // Check for over/underflow for abstract values
         if (auto r = CheckedAdd(a, b)) {
             result = r->value;
@@ -592,7 +592,7 @@ template <typename NumberT>
 utils::Result<NumberT> ConstEval::Mul(NumberT a, NumberT b) {
     using T = UnwrapNumber<NumberT>;
     NumberT result;
-    if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+    if constexpr (IsAbstract<NumberT>) {
         // Check for over/underflow for abstract values
         if (auto r = CheckedMul(a, b)) {
             result = r->value;
@@ -1028,7 +1028,7 @@ ConstEval::ConstantResult ConstEval::OpMinus(const sem::Type* ty,
         auto create = [&](auto i, auto j) -> const Constant* {
             using NumberT = decltype(i);
             NumberT result;
-            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            if constexpr (IsAbstract<NumberT>) {
                 // Check for over/underflow for abstract values
                 if (auto r = CheckedSub(i, j)) {
                     result = r->value;
@@ -1254,7 +1254,7 @@ ConstEval::ConstantResult ConstEval::OpDivide(const sem::Type* ty,
         auto create = [&](auto i, auto j) -> const Constant* {
             using NumberT = decltype(i);
             NumberT result;
-            if constexpr (std::is_same_v<NumberT, AInt> || std::is_same_v<NumberT, AFloat>) {
+            if constexpr (IsAbstract<NumberT>) {
                 // Check for over/underflow for abstract values
                 if (auto r = CheckedDiv(i, j)) {
                     result = r->value;
@@ -1451,6 +1451,74 @@ ConstEval::ConstantResult ConstEval::OpXor(const sem::Type* ty,
     auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
         auto create = [&](auto i, auto j) -> const Constant* {
             return CreateElement(builder, sem::Type::DeepestElementOf(ty), decltype(i){i ^ j});
+        };
+        return Dispatch_ia_iu32(create, c0, c1);
+    };
+
+    auto r = TransformElements(builder, ty, transform, args[0], args[1]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
+ConstEval::ConstantResult ConstEval::OpShiftLeft(const sem::Type* ty,
+                                                 utils::VectorRef<const sem::Constant*> args,
+                                                 const Source& source) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto e1, auto e2) -> const Constant* {
+            using NumberT = decltype(e1);
+            using T = UnwrapNumber<NumberT>;
+            constexpr size_t bit_width = BitWidth<NumberT>;
+
+            if constexpr (IsAbstract<NumberT>) {
+                // NOTE: Concrete shift left requires an unsigned rhs, so this check only applies
+                // for abstracts.
+                if (e2 < 0) {
+                    AddError("cannot shift left by a negative value", source);
+                    return nullptr;
+                }
+
+                // Make sure the value is still representable as an abstract after shift.
+                if (e1 != 0) {  // 0 can be shifted by any value
+                    if (e2 >= T{bit_width}) {
+                        AddError(OverflowErrorMessage(e1, "<<", e2), source);
+                        return nullptr;
+                    }
+                    auto r = CheckedMul(e1, NumberT{1 << e2});
+                    if (!r) {
+                        AddError(OverflowErrorMessage(e1, "<<", e2), source);
+                        return nullptr;
+                    }
+                }
+
+                // The e2 + 1 most significant bits of e1 must have the same bit value, otherwise
+                // overflow would occur.
+                // NOTE: Overflow is not an error for concrete values.
+                using UT = std::make_unsigned_t<T>;
+                UT e1u = static_cast<UT>(e1);
+                UT e2u = static_cast<UT>(e2);
+                size_t must_match_msb =
+                    std::min(bit_width, e2u + 1);  // TODO(amaiorano): Clamp okay?
+                UT mask = ~UT{0} << (bit_width - must_match_msb);
+                if ((e1u & mask) != 0 && (e1u & mask) != mask) {
+                    AddError("shift left operation results in sign change", source);
+                    return nullptr;
+                }
+            } else {
+                if (static_cast<size_t>(e2) >= BitWidth<NumberT>) {
+                    // At shader/pipeline-creation time, it is an error to shift by the bit width of
+                    // the lhs or greater.
+                    // NOTE: At runtime, we shift by e2 % (bit width of e1).
+                    AddError(
+                        "shift left value must be less than the bit width of the lhs, which is " +
+                            std::to_string(BitWidth<NumberT>),
+                        source);
+                    return nullptr;
+                }
+            }
+
+            return CreateElement(builder, sem::Type::DeepestElementOf(ty), NumberT{e1 << e2});
         };
         return Dispatch_ia_iu32(create, c0, c1);
     };

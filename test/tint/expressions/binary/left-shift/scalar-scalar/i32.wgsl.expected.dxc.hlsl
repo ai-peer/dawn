@@ -1,5 +1,5 @@
 [numthreads(1, 1, 1)]
 void f() {
-  const int r = (1 << 2u);
+  const int r = 4;
   return;
 }
