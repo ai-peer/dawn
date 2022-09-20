@@ -972,6 +972,10 @@ void DawnTestBase::SetUp() {
 }
 
 void DawnTestBase::TearDown() {
+    if (device != nullptr) {
+        device.Tick();
+    }
+
     ResolveDeferredExpectationsNow();
 
     if (!UsesWire() && device) {
