@@ -388,9 +388,14 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         }
 
 #if DAWN_PLATFORM_IS(WINDOWS)
+        // Deselect Intel Vulkan adapter on Intel Windows driver < 30.0.101.2111 due to flaky
+        // issues.
+        const gpu_info::DriverVersion version = {30, 0, 101, 2111};
         if (selected && !mRunSuppressedTests &&
             properties.backendType == wgpu::BackendType::Vulkan &&
-            gpu_info::IsIntel(properties.vendorID)) {
+            gpu_info::IsIntel(properties.vendorID) &&
+            gpu_info::CompareWindowsDriverVersion(properties.vendorID, adapter.GetDriverVersion(),
+                                                  version) == -1) {
             dawn::WarningLog()
                 << "Deselecting Windows Intel Vulkan adapter. See https://crbug.com/1338622.";
             selected &= false;

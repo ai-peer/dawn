@@ -31,6 +31,10 @@ struct AdapterProperties;
 struct DeviceDescriptor;
 }  // namespace wgpu
 
+namespace gpu_info {
+using DriverVersion = std::array<uint16_t, 4>;
+}  // namespace gpu_info
+
 namespace dawn::native {
 
 class InstanceBase;
@@ -91,6 +95,8 @@ class DAWN_NATIVE_EXPORT Adapter {
     // dawn.json
     void GetProperties(wgpu::AdapterProperties* properties) const;
     void GetProperties(WGPUAdapterProperties* properties) const;
+
+    const gpu_info::DriverVersion& GetDriverVersion() const;
 
     std::vector<const char*> GetSupportedExtensions() const;
     std::vector<const char*> GetSupportedFeatures() const;
