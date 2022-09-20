@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb6a7db_99f0a706",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-09-20T17:08:02Z",
+      "side": 1,
+      "message": "Thanks Corentin for putting this together. Removing the problematic mechanism lgtm.\n\nCan we put this out for review at this point? It looks like it passed the CQ tryjobs.\n\nAustin, would you be able to review this?\n\nBrandon - FYI. This is a blocker for the Android build integration.",
+      "revId": "5a600a25330567b7b0dd340b09f6e85b77bba022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
