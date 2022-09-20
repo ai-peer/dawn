@@ -34,6 +34,116 @@
       "parentUuid": "3516b8c6_a2074ad6",
       "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b06f3211_33c99b6d",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-20T09:39:19Z",
+      "side": 1,
+      "message": "Looking at this file and `ComputeLayoutMemoryBufferTests.cpp`, I also think it might be good to put the additional tests in that file and try to consolidate common code \u0026 patterns.\nYou appear to be re-implementing a bunch of things here, differently. For example:\n\n• `BufferType` is equivalent to `StorageClass`\n• `MemoryLayout` has many parallels to the `DataMatcher` (`FullDataMatcher` / `StridedDataMatcher`)\n• `ScalarType` vs string literals.\n• Skipping cases that violate uniform buffer layout is done differently.\n\nI\u0027ll be implementing the preservation of padding bytes soon (https://github.com/gpuweb/gpuweb/pull/2987), and so these tests will likely need to check that these bytes are preserved. It would be easier if we had a common framework for this instead of having to implement this twice in two different ways.\n\nI don\u0027t mind if you want to change some of the `ComputeLayoutMemoryBufferTests` patterns to your new code (in particular, I see why `ScalarType` is preferable to strings), but it would be good to try and consolidate this code.",
+      "parentUuid": "cb670b78_9dfd33e0",
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c3e66f_80c1bdd8",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-20T09:39:19Z",
+      "side": 1,
+      "message": "I believe in Dawn, enum entries are usually capitalized.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "464d6676_2466af34",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-20T09:39:19Z",
+      "side": 1,
+      "message": "`Segment` ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 11,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c40d2bbf_7789d056",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-20T09:39:19Z",
+      "side": 1,
+      "message": "`Add` or `Append` ?",
+      "range": {
+        "startLine": 92,
+        "startChar": 18,
+        "endLine": 92,
+        "endChar": 24
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac2dce7_3c5d71d9",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-20T09:39:19Z",
+      "side": 1,
+      "message": "`WGSL requires array elements to be aligned to 16 bytes in a uniform buffer`\n\nThe way `ComputeLayoutMemoryBufferTests` handled this was to tag these cases with `StorageBufferOnly`, which I find more explicit and clearer for these kind of tests. The approach taken by `ComputeLayoutMemoryBufferTests` also means that only the valid cases are enumerated by gtest.",
+      "range": {
+        "startLine": 398,
+        "startChar": 7,
+        "endLine": 398,
+        "endChar": 64
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
