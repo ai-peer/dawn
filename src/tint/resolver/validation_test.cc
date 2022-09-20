@@ -1237,6 +1237,15 @@ TEST_F(ResolverValidationTest, StructMemberDuplicateNamePass) {
     EXPECT_TRUE(r()->Resolve());
 }
 
+TEST_F(ResolverValidationTest, NegativeStructMemberAlignAttribute) {
+    Structure("S", utils::Vector{
+                       Member("a", ty.f32(), utils::Vector{MemberAlign(Source{{12, 34}}, -2_i)}),
+                   });
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: align value must be a positive, power-of-two integer");
+}
+
 TEST_F(ResolverValidationTest, NonPOTStructMemberAlignAttribute) {
     Structure("S", utils::Vector{
                        Member("a", ty.f32(), utils::Vector{MemberAlign(Source{{12, 34}}, 3_u)}),

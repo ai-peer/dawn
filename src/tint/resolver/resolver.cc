@@ -1481,7 +1481,7 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
     return nullptr;
 }
 
-const sem::Type* Resolver::ConcreteType(const sem::Type* ty,
+const sem::Type* Resolver::ConcreteType(colvnst sem::Type* ty,
                                         const sem::Type* target_ty,
                                         const Source& source) {
     auto i32 = [&] { return builder_->create<sem::I32>(); };
@@ -1519,15 +1519,22 @@ const sem::Type* Resolver::ConcreteType(const sem::Type* ty,
                 return Array(source, el_ty, a->Count(), /* explicit_stride */ 0);
             }
             return nullptr;
-        });
+        },
+        [&](Default) {
+printf("DEFAULT\n");
+            return nullptr;
+        }
+    );
 }
 
 const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
                                              const sem::Type* target_type /* = nullptr */) {
+printf("A\n");
     if (!expr) {
         // Allow for Materialize(Expression(blah)), where failures pass through Materialize()
         return nullptr;
     }
+printf("b\n");
 
     auto* decl = expr->Declaration();
 
@@ -1535,11 +1542,13 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
     if (!concrete_ty) {
         return expr;  // Does not require materialization
     }
+printf("c\n");
 
     auto* src_ty = expr->Type();
     if (!validator_.Materialize(concrete_ty, src_ty, decl->source)) {
         return nullptr;
     }
+printf("d\n");
 
     auto expr_val = expr->ConstantValue();
     if (!expr_val) {
@@ -1548,12 +1557,14 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
             << ") called on expression with no constant value";
         return nullptr;
     }
+printf("e\n");
 
     auto materialized_val = const_eval_.Convert(concrete_ty, expr_val, decl->source);
     if (!materialized_val) {
         // ConvertValue() has already failed and raised an diagnostic error.
         return nullptr;
     }
+printf("f\n");
 
     if (!materialized_val.Get()) {
         TINT_ICE(Resolver, builder_->Diagnostics())
@@ -1561,9 +1572,11 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
             << builder_->FriendlyName(concrete_ty) << ") returned invalid value";
         return nullptr;
     }
+printf("t\n");
     auto* m = builder_->create<sem::Materialize>(expr, current_statement_, materialized_val.Get());
     m->Behaviors() = expr->Behaviors();
     builder_->Sem().Replace(decl, m);
+printf("MADE MAT\n");
     return m;
 }
 
@@ -2280,7 +2293,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
             // Note: The spec is currently vague around the rules here. See
             // https://github.com/gpuweb/gpuweb/issues/3081. Remove this comment when resolved.
             std::string desc = "var '" + builder_->Symbols().NameFor(symbol) + "' ";
-            AddError(desc + "cannot not be referenced at module-scope", expr->source);
+            AddError(desc + "cannot be referenced at module-scope", expr->source);
             AddNote(desc + "declared here", variable->Declaration()->source);
             return nullptr;
         }
@@ -2822,12 +2835,14 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                 align = 1;
                 has_offset_attr = true;
             } else if (auto* a = attr->As<ast::StructMemberAlignAttribute>()) {
+printf("MATERIAL ALIGN\n");
                 auto* materialized = Materialize(Expression(a->expr));
+printf("MATERIAL ALIGN DONE\n");
                 if (!materialized) {
                     return nullptr;
                 }
                 auto const_value = materialized->ConstantValue();
-                if (!const_value) {
+                if (const_value) {
                     AddError("'align' must be constant expression", a->expr->source);
                     return nullptr;
                 }
