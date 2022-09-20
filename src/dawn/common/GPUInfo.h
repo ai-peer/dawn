@@ -16,12 +16,14 @@
 #define SRC_DAWN_COMMON_GPUINFO_H_
 
 #include "dawn/common/GPUInfo_autogen.h"
+#include "dawn/native/wgpu_structs_autogen.h"
 
 #include <array>
 
 namespace gpu_info {
 
-using D3DDriverVersion = std::array<uint16_t, 4>;
+// using DriverVersion = std::array<uint16_t, 4>;
+using DriverVersion = dawn::native::DriverVersion;
 
 // Do comparison between two driver versions. Currently we only support the comparison between
 // Intel D3D driver versions.
@@ -29,8 +31,12 @@ using D3DDriverVersion = std::array<uint16_t, 4>;
 // - Return 1 if build number of version1 is bigger
 // - Return 0 if version1 and version2 represent same driver version
 int CompareD3DDriverVersion(PCIVendorID vendorId,
-                            const D3DDriverVersion& version1,
-                            const D3DDriverVersion& version2);
+                            const DriverVersion& version1,
+                            const DriverVersion& version2);
+
+int CompareVulkanDriverVersion(PCIVendorID vendorId,
+                               const DriverVersion& version1,
+                               const DriverVersion& version2);
 
 // Intel architectures
 bool IsSkylake(PCIDeviceID deviceId);

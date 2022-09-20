@@ -17,7 +17,6 @@
 
 #include "dawn/native/Adapter.h"
 
-#include "dawn/common/GPUInfo.h"
 #include "dawn/native/d3d12/D3D12Info.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
@@ -37,7 +36,7 @@ class Adapter : public AdapterBase {
     IDXGIAdapter3* GetHardwareAdapter() const;
     Backend* GetBackend() const;
     ComPtr<ID3D12Device> GetDevice() const;
-    const gpu_info::D3DDriverVersion& GetDriverVersion() const;
+    const DriverVersion& GetDriverVersion() const;
 
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
@@ -60,7 +59,6 @@ class Adapter : public AdapterBase {
 
     ComPtr<IDXGIAdapter3> mHardwareAdapter;
     ComPtr<ID3D12Device> mD3d12Device;
-    gpu_info::D3DDriverVersion mDriverVersion;
 
     Backend* mBackend;
     D3D12DeviceInfo mDeviceInfo = {};

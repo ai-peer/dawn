@@ -83,6 +83,9 @@ namespace {{native_namespace}} {
     {% endif %}
 {% endmacro %}
 
+{% call render_streaming_impl("driver version", true, true) %}
+{% endcall %}
+
 {% call render_streaming_impl("adapter properties", true, false) %}
 {% endcall %}
 

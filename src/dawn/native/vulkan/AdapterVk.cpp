@@ -25,6 +25,63 @@
 
 namespace dawn::native::vulkan {
 
+namespace {
+
+const DriverVersion& GetDriverVersion(uint32_t versionRaw, uint32_t vendorID) {
+    DriverVersion driverVersion;
+    switch (vendorID) {
+        case gpu_info::kVendorID_Nvidia:
+            driverVersion.major = (versionRaw >> 22) & 0x3FF;
+            driverVersion.minor = (versionRaw >> 14) & 0x0FF;
+            driverVersion.maintenance = (versionRaw >> 6) & 0x0FF;
+            driverVersion.build = versionRaw & 0x003F;
+            break;
+        case gpu_info::kVendorID_Intel:
+#if DAWN_PLATFORM_IS(WINDOWS)
+            // Windows Vulkan driver releases together with D3D driver, so they share the same
+            // version. But only CCC.DDDD is encoded in 32-bit driverVersion.
+            driverVersion.maintenance = versionRaw >> 14;
+            driverVersion.build = versionRaw & 0x3FFF;
+            break;
+#endif
+        default:
+            // Use Vulkan driver conversions for other vendors
+            driverVersion.major = versionRaw >> 22;
+            driverVersion.minor = (versionRaw >> 12) & 0x3FF;
+            driverVersion.maintenance = versionRaw & 0xFFF;
+            break;
+    }
+
+    return std::move(driverVersion);
+}
+
+std::string GetDriverVersionStr(const DriverVersion& driverVersion, uint32_t vendorID) {
+    switch (vendorID) {
+        case gpu_info::kVendorID_Nvidia:
+            return std::to_string(driverVersion.major)
+                .append(".")
+                .append(std::to_string(driverVersion.minor))
+                .append(".")
+                .append(std::to_string(driverVersion.maintenance))
+                .append(".")
+                .append(std::to_string(driverVersion.build));
+        case gpu_info::kVendorID_Intel:
+#if DAWN_PLATFORM_IS(WINDOWS)
+            return std::to_string(driverVersion.maintenance)
+                .append(".")
+                .append(std::to_string(driverVersion.build));
+#endif
+        default:
+            return std::to_string(driverVersion.major)
+                .append(".")
+                .append(std::to_string(driverVersion.minor))
+                .append(".")
+                .append(std::to_string(driverVersion.maintenance));
+    }
+}
+
+}  // anonymous namespace
+
 Adapter::Adapter(InstanceBase* instance,
                  VulkanInstance* vulkanInstance,
                  VkPhysicalDevice physicalDevice)
@@ -59,14 +116,22 @@ bool Adapter::IsDepthStencilFormatSupported(VkFormat format) {
 MaybeError Adapter::InitializeImpl() {
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
+    mDriverVersion =
+        GetDriverVersion(mDeviceInfo.properties.driverVersion, mDeviceInfo.properties.vendorID);
+    const std::string driverVersionStr =
+        GetDriverVersionStr(mDriverVersion, mDeviceInfo.properties.vendorID);
+
     if (mDeviceInfo.HasExt(DeviceExt::DriverProperties)) {
         mDriverDescription = mDeviceInfo.driverProperties.driverName;
         if (mDeviceInfo.driverProperties.driverInfo[0] != '\0') {
             mDriverDescription += std::string(": ") + mDeviceInfo.driverProperties.driverInfo;
         }
+        // There may be no driver version in driverInfo.
+        if (mDriverDescription.find(driverVersionStr) == std::string::npos) {
+            mDriverDescription += std::string(" ") + driverVersionStr;
+        }
     } else {
-        mDriverDescription =
-            "Vulkan driver version: " + std::to_string(mDeviceInfo.properties.driverVersion);
+        mDriverDescription = "Vulkan driver version: " + driverVersionStr;
     }
 
     mDeviceId = mDeviceInfo.properties.deviceID;

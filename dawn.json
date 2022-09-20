@@ -132,9 +132,19 @@
             {"name": "architecture", "type": "char", "annotation": "const*", "length": "strlen"},
             {"name": "device ID", "type": "uint32_t"},
             {"name": "name", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "driver version", "type": "driver version"},
             {"name": "driver description", "type": "char", "annotation": "const*", "length": "strlen"},
             {"name": "adapter type", "type": "adapter type"},
             {"name": "backend type", "type": "backend type"}
+        ]
+    },
+    "driver version": {
+        "category": "structure",
+        "members": [
+            {"name": "major", "type": "uint16_t"},
+            {"name": "minor", "type": "uint16_t"},
+            {"name": "maintenance", "type": "uint16_t"},
+            {"name": "build", "type": "uint16_t"}
         ]
     },
     "adapter type": {
