@@ -15,6 +15,7 @@
 #include "dawn/common/GPUInfo.h"
 
 #include <algorithm>
+#include <array>
 
 #include "dawn/common/Assert.h"
 
@@ -33,18 +34,20 @@ const std::array<uint32_t, 25> Skylake = {{0x1902, 0x1906, 0x190A, 0x190B, 0x190
 // last two fields.
 // See https://www.intel.com/content/www/us/en/support/articles/000005654/graphics.html for
 // more details.
-uint32_t GetIntelD3DDriverBuildNumber(const D3DDriverVersion& driverVersion) {
-    return driverVersion[2] * 10000 + driverVersion[3];
+uint32_t GetIntelWindowsDriverBuildNumber(const DriverVersion& driverVersion) {
+    size_t size = driverVersion.size();
+    ASSERT(size >= 2);
+    return driverVersion[size - 2] * 10000 + driverVersion[size - 1];
 }
 
 }  // anonymous namespace
 
-int CompareD3DDriverVersion(PCIVendorID vendorId,
-                            const D3DDriverVersion& version1,
-                            const D3DDriverVersion& version2) {
+int CompareWindowsDriverVersion(PCIVendorID vendorId,
+                                const DriverVersion& version1,
+                                const DriverVersion& version2) {
     if (IsIntel(vendorId)) {
-        uint32_t buildNumber1 = GetIntelD3DDriverBuildNumber(version1);
-        uint32_t buildNumber2 = GetIntelD3DDriverBuildNumber(version2);
+        uint32_t buildNumber1 = GetIntelWindowsDriverBuildNumber(version1);
+        uint32_t buildNumber2 = GetIntelWindowsDriverBuildNumber(version2);
         return buildNumber1 < buildNumber2 ? -1 : (buildNumber1 == buildNumber2 ? 0 : 1);
     }
 

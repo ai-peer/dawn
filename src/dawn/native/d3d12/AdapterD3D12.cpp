@@ -14,7 +14,7 @@
 
 #include "dawn/native/d3d12/AdapterD3D12.h"
 
-#include <sstream>
+#include <string>
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/WindowsUtils.h"
@@ -57,10 +57,6 @@ ComPtr<ID3D12Device> Adapter::GetDevice() const {
     return mD3d12Device;
 }
 
-const gpu_info::D3DDriverVersion& Adapter::GetDriverVersion() const {
-    return mDriverVersion;
-}
-
 MaybeError Adapter::InitializeImpl() {
     // D3D12 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
@@ -95,13 +91,11 @@ MaybeError Adapter::InitializeImpl() {
         DXGI_ERROR_UNSUPPORTED) {
         uint64_t encodedVersion = umdVersion.QuadPart;
 
-        std::ostringstream o;
-        o << "D3D12 driver version ";
+        mDriverVersion.resize(4);
         for (size_t i = 0; i < mDriverVersion.size(); ++i) {
             mDriverVersion[i] = (encodedVersion >> (48 - 16 * i)) & 0xFFFF;
-            o << mDriverVersion[i] << ".";
         }
-        mDriverDescription = o.str();
+        mDriverDescription = std::string("D3D12 driver version ") + mDriverVersion.toString();
     }
 
     return {};
