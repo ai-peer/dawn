@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ab0840_6ab9a3c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-20T23:46:25Z",
+      "side": 1,
+      "message": "Requires https://github.com/gpuweb/cts/pull/1854 to roll into Dawn to fixup the align CTS tests.",
+      "revId": "2015be0e9969d00c1ae63fe4e12ae3fe72c6d926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
