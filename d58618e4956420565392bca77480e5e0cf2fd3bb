@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "796e2423_8a3c435d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-20T15:54:50Z",
+      "side": 1,
+      "message": "Ben, PTAL. Note that this is a bit of a big hammer: pretty much all structs used as interface blocks will now be wrapped in a wrapper struct. It would be nice to isolate this to just those used in aggregate assignment, but I\u0027m not sure how easy that would be. Happy to investigate further.",
+      "revId": "d58618e4956420565392bca77480e5e0cf2fd3bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
