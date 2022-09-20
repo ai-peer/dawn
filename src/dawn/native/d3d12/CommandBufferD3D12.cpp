@@ -354,7 +354,7 @@ bool TransitionAndClearForSyncScope(CommandRecordingContext* commandContext,
         // subresource has not been initialized before the render pass.
         usages.textureUsages[i].Iterate(
             [&](const SubresourceRange& range, wgpu::TextureUsage usage) {
-                if (usage & ~wgpu::TextureUsage::RenderAttachment) {
+                if (usage & ~kAllRenderAttachmentUsages) {
                     texture->EnsureSubresourceContentInitialized(commandContext, range);
                 }
                 textureUsages |= usage;

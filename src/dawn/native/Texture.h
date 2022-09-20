@@ -41,6 +41,8 @@ bool IsValidSampleCount(uint32_t sampleCount);
 
 static constexpr wgpu::TextureUsage kReadOnlyTextureUsages =
     wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment;
+static constexpr wgpu::TextureUsage kAllRenderAttachmentUsages =
+    wgpu::TextureUsage::RenderAttachment | kReadOnlyRenderAttachment;
 
 class TextureBase : public ApiObjectBase {
   public:
