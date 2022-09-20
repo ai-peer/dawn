@@ -38,6 +38,17 @@ bool IsUsedAsNonBuffer(const std::unordered_set<tint::ast::StorageClass>& uses) 
     return false;
 }
 
+bool HasRuntimeSizedArray(const sem::Struct* str) {
+    if (str->Members().empty()) {
+        return false;
+    }
+    if (auto* arr = str->Members().back()->Type()->As<sem::Array>()) {
+        return arr->Count() == 0;
+    }
+
+    return false;
+}
+
 }  // namespace
 
 AddBlockAttribute::AddBlockAttribute() = default;
@@ -46,25 +57,6 @@ AddBlockAttribute::~AddBlockAttribute() = default;
 
 void AddBlockAttribute::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
     auto& sem = ctx.src->Sem();
-
-    // Collect the set of structs that are nested in other types.
-    utils::Hashset<const sem::Struct*, 8> nested_structs;
-    for (auto* ty : ctx.src->Types()) {
-        Switch(
-            ty,
-            [&](const sem::Array* arr) {
-                if (auto* nested_str = arr->ElemType()->As<sem::Struct>()) {
-                    nested_structs.Add(nested_str);
-                }
-            },
-            [&](const sem::Struct* str) {
-                for (auto* member : str->Members()) {
-                    if (auto* nested_str = member->Type()->As<sem::Struct>()) {
-                        nested_structs.Add(nested_str);
-                    }
-                }
-            });
-    }
 
     // A map from a type in the source program to a block-decorated wrapper that contains it in the
     // destination program.
@@ -82,7 +74,7 @@ void AddBlockAttribute::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
         auto* str = ty->As<sem::Struct>();
         bool needs_wrapping =
             !str ||                                       // Type is not a structure
-            nested_structs.Contains(str) ||               // Structure is nested by another type
+            !HasRuntimeSizedArray(str) ||                 // Structure has a runtime-sized array
             IsUsedAsNonBuffer(str->StorageClassUsage());  // Structure is used as a non-buffer usage
 
         if (needs_wrapping) {

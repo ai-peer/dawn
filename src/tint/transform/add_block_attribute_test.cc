@@ -215,16 +215,20 @@ fn main() {
 }
 )";
     auto* expect = R"(
-@internal(block)
 struct S {
   f : f32,
 }
 
-@group(0) @binding(0) var<uniform> u : S;
+@internal(block)
+struct u_block {
+  inner : S,
+}
+
+@group(0) @binding(0) var<uniform> u : u_block;
 
 @fragment
 fn main() {
-  let f = u.f;
+  let f = u.inner.f;
 }
 )";
 
@@ -280,16 +284,20 @@ fn main() {
     auto* expect = R"(
 enable chromium_experimental_push_constant;
 
-@internal(block)
 struct S {
   f : f32,
 }
 
-var<push_constant> u : S;
+@internal(block)
+struct u_block {
+  inner : S,
+}
+
+var<push_constant> u : u_block;
 
 @fragment
 fn main() {
-  let f = u.f;
+  let f = u.inner.f;
 }
 )";
 
@@ -321,16 +329,20 @@ struct Inner {
   f : f32,
 }
 
-@internal(block)
 struct Outer {
   i : Inner,
 }
 
-@group(0) @binding(0) var<uniform> u : Outer;
+@internal(block)
+struct u_block {
+  inner : Outer,
+}
+
+@group(0) @binding(0) var<uniform> u : u_block;
 
 @fragment
 fn main() {
-  let f = u.i.f;
+  let f = u.inner.i.f;
 }
 )";
 
@@ -366,12 +378,16 @@ struct Inner {
   f : f32,
 }
 
-@internal(block)
 struct Outer {
   i : Inner,
 }
 
-@group(0) @binding(0) var<uniform> u0 : Outer;
+@internal(block)
+struct u0_block {
+  inner : Outer,
+}
+
+@group(0) @binding(0) var<uniform> u0 : u0_block;
 
 @internal(block)
 struct u1_block {
@@ -382,7 +398,7 @@ struct u1_block {
 
 @fragment
 fn main() {
-  let f0 = u0.i.f;
+  let f0 = u0.inner.i.f;
   let f1 = u1.inner.f;
 }
 )";
@@ -474,12 +490,16 @@ struct Inner {
   f : f32,
 }
 
-@internal(block)
 struct S {
   i : Inner,
 }
 
-@group(0) @binding(0) var<uniform> u0 : S;
+@internal(block)
+struct u0_block {
+  inner : S,
+}
+
+@group(0) @binding(0) var<uniform> u0 : u0_block;
 
 @internal(block)
 struct u1_block {
@@ -492,7 +512,7 @@ struct u1_block {
 
 @fragment
 fn main() {
-  let f0 = u0.i.f;
+  let f0 = u0.inner.i.f;
   let f1 = u1.inner.f;
   let f2 = u2.inner.f;
 }
@@ -621,14 +641,18 @@ struct Inner {
 
 type MyInner = Inner;
 
-@internal(block)
 struct Outer {
   i : MyInner,
 }
 
 type MyOuter = Outer;
 
-@group(0) @binding(0) var<uniform> u0 : MyOuter;
+@internal(block)
+struct u0_block {
+  inner : Outer,
+}
+
+@group(0) @binding(0) var<uniform> u0 : u0_block;
 
 @internal(block)
 struct u1_block {
@@ -639,7 +663,7 @@ struct u1_block {
 
 @fragment
 fn main() {
-  let f0 = u0.i.f;
+  let f0 = u0.inner.i.f;
   let f1 = u1.inner.f;
 }
 )";
@@ -678,7 +702,7 @@ struct Inner {
     auto* expect = R"(
 @fragment
 fn main() {
-  let f0 = u0.i.f;
+  let f0 = u0.inner.i.f;
   let f1 = u1.inner.f;
 }
 
@@ -691,11 +715,15 @@ struct u1_block {
 
 type MyInner = Inner;
 
-@group(0) @binding(0) var<uniform> u0 : MyOuter;
+@internal(block)
+struct u0_block {
+  inner : Outer,
+}
+
+@group(0) @binding(0) var<uniform> u0 : u0_block;
 
 type MyOuter = Outer;
 
-@internal(block)
 struct Outer {
   i : MyInner,
 }
@@ -810,18 +838,22 @@ fn main() {
 }
 )";
     auto* expect = R"(
-@internal(block) @internal(block)
 struct S {
   f : f32,
 }
 
-@group(0) @binding(0) var<uniform> u : S;
+@internal(block)
+struct u_block {
+  inner : S,
+}
 
-@group(0) @binding(1) var<storage, read_write> s : S;
+@group(0) @binding(0) var<uniform> u : u_block;
+
+@group(0) @binding(1) var<storage, read_write> s : u_block;
 
 @fragment
 fn main() {
-  s = u;
+  s.inner = u.inner;
 }
 )";
 
