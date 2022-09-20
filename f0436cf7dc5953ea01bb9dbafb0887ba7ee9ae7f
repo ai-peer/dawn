@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfe0174_7c7b9f51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-20T05:33:57Z",
+      "side": 1,
+      "message": "Please take a look, thanks\nThe expectation file originally has a expectation for `webgpu:shader,execution,expression,call,builtin,dot:f32_vec3:inputSource\u003d\"uniform\"` on nvidia-0x2184, but limited to x86 cpu (target-cpu-32), however the previous try bot failed on this case on nvidia-0x2184 on x64 cpu.\nI am a little worrying that over-tagging the expectation items (based on the devices tested when generating the expectation file) may hurt its generalizability (too specified to cover a testing device with irrelated configuration difference).",
+      "revId": "f0436cf7dc5953ea01bb9dbafb0887ba7ee9ae7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
