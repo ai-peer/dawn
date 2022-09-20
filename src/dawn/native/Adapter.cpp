@@ -105,6 +105,7 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     properties->architecture = mArchitectureName.c_str();
     properties->deviceID = mDeviceId;
     properties->name = mName.c_str();
+    properties->driverVersion = mDriverVersion;
     properties->driverDescription = mDriverDescription.c_str();
     properties->adapterType = mAdapterType;
     properties->backendType = mBackend;

@@ -20,6 +20,7 @@
 #include <regex>
 #include <set>
 #include <sstream>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -388,9 +389,17 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         }
 
 #if DAWN_PLATFORM_IS(WINDOWS)
+        // Deselect Intel Vulkan adapter on Intel Windows driver < 30.0.101.2111 due to flaky
+        // issues.
+        const gpu_info::DriverVersion version = {30, 0, 101, 2111};
         if (selected && !mRunSuppressedTests &&
             properties.backendType == wgpu::BackendType::Vulkan &&
-            gpu_info::IsIntel(properties.vendorID)) {
+            gpu_info::IsIntel(properties.vendorID) &&
+            gpu_info::CompareWindowsDriverVersion(
+                properties.vendorID,
+                {properties.driverVersion.major, properties.driverVersion.minor,
+                 properties.driverVersion.maintenance, properties.driverVersion.build},
+                version) == -1) {
             dawn::WarningLog()
                 << "Deselecting Windows Intel Vulkan adapter. See https://crbug.com/1338622.";
             selected &= false;
