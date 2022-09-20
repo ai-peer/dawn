@@ -116,6 +116,10 @@ void Adapter::GetProperties(WGPUAdapterProperties* properties) const {
     mImpl->APIGetProperties(FromAPI(properties));
 }
 
+const gpu_info::DriverVersion& Adapter::GetDriverVersion() const {
+    return mImpl->GetDriverVersion();
+}
+
 WGPUAdapter Adapter::Get() const {
     return ToAPI(mImpl);
 }
