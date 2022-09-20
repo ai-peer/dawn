@@ -21,16 +21,20 @@
 
 namespace gpu_info {
 
-using D3DDriverVersion = std::array<uint16_t, 4>;
+// Four uint16 fields could cover almost all driver version schemas:
+// D3D12: AA.BB.CCC.DDDD
+// Vulkan: AAA.BBB.CCC.DDD on Nvidia, CCC.DDDD for Intel Windows, and AA.BB.CCC for others, See
+// https://vulkan.gpuinfo.org/
+using DriverVersion = std::array<uint16_t, 4>;
 
 // Do comparison between two driver versions. Currently we only support the comparison between
-// Intel D3D driver versions.
+// Intel Windows driver versions.
 // - Return -1 if build number of version1 is smaller
 // - Return 1 if build number of version1 is bigger
 // - Return 0 if version1 and version2 represent same driver version
-int CompareD3DDriverVersion(PCIVendorID vendorId,
-                            const D3DDriverVersion& version1,
-                            const D3DDriverVersion& version2);
+int CompareWindowsDriverVersion(PCIVendorID vendorId,
+                                const DriverVersion& version1,
+                                const DriverVersion& version2);
 
 // Intel architectures
 bool IsSkylake(PCIDeviceID deviceId);
