@@ -700,8 +700,11 @@ void Device::InitTogglesFromDriver() {
     // This workaround is only needed on Intel Gen12LP with driver prior to 30.0.101.1692.
     // See http://crbug.com/dawn/949 for more information.
     if (gpu_info::IsIntelGen12LP(vendorId, deviceId)) {
-        const gpu_info::D3DDriverVersion version = {30, 0, 101, 1692};
-        if (gpu_info::CompareD3DDriverVersion(vendorId, ToBackend(GetAdapter())->GetDriverVersion(),
+        const gpu_info::DriverVersion version = {30, 0, 101, 1692};
+        const DriverVersion driverVersion = ToBackend(GetAdapter())->GetDriverVersion();
+        if (gpu_info::CompareD3DDriverVersion(vendorId,
+                                              {driverVersion.major, driverVersion.minor,
+                                               driverVersion.maintenance, driverVersion.build},
                                               version) == -1) {
             SetToggle(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture, true);
         }

@@ -72,6 +72,7 @@ class AdapterBase : public RefCounted {
     uint32_t mDeviceId = 0xFFFFFFFF;
     std::string mName;
     wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
+    DriverVersion mDriverVersion;
     std::string mDriverDescription;
 
     // Features set that CAN be supported by devices of this adapter. Some features in this set may
