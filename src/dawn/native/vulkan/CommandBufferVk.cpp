@@ -181,7 +181,7 @@ void TransitionAndClearForSyncScope(Device* device,
         // subresource has not been initialized before the render pass.
         scope.textureUsages[i].Iterate(
             [&](const SubresourceRange& range, wgpu::TextureUsage usage) {
-                if (usage & ~wgpu::TextureUsage::RenderAttachment) {
+                if (usage & ~kAllRenderAttachmentUsages) {
                     texture->EnsureSubresourceContentInitialized(recordingContext, range);
                 }
             });
