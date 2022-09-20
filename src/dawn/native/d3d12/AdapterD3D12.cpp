@@ -57,10 +57,6 @@ ComPtr<ID3D12Device> Adapter::GetDevice() const {
     return mD3d12Device;
 }
 
-const gpu_info::D3DDriverVersion& Adapter::GetDriverVersion() const {
-    return mDriverVersion;
-}
-
 MaybeError Adapter::InitializeImpl() {
     // D3D12 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
