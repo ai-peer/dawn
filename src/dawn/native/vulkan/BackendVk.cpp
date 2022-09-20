@@ -19,6 +19,7 @@
 #include <utility>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/native/Instance.h"

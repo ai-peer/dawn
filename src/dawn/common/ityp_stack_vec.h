@@ -34,6 +34,10 @@ class stack_vec : private StackVector<Value, StaticCapacity> {
   public:
     stack_vec() : Base() {}
     explicit stack_vec(Index size) : Base() { this->container().resize(static_cast<I>(size)); }
+    explicit stack_vec(const std::vector<Value>& vec) : Base() {
+        this->container().resize(static_cast<I>(vec.size()));
+        this->container().assign(vec.begin(), vec.end());
+    }
 
     Value& operator[](Index i) {
         ASSERT(i < size());
