@@ -94,6 +94,30 @@
       },
       "revId": "2796a9babdefca7d4e1b3c80bccad1266ac6e2f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0683ce9c_838ff035",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-21T16:28:30Z",
+      "side": 1,
+      "message": "Actually I was mistaken - ExecutePendingCommandContext does call NextSerial inside CommandRecordingContext::ExecuteCommandList. But still this does seem to have something to do with the funny NextSerial business when a texture isn\u0027t used.",
+      "parentUuid": "2ea50ba9_f19c4ac2",
+      "range": {
+        "startLine": 255,
+        "startChar": 33,
+        "endLine": 255,
+        "endChar": 43
+      },
+      "revId": "2796a9babdefca7d4e1b3c80bccad1266ac6e2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
