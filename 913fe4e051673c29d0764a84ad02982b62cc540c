@@ -16,6 +16,23 @@
       "message": "Austin: could you review this change?\n\nBrandon, Corentin: FYI.",
       "revId": "913fe4e051673c29d0764a84ad02982b62cc540c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "578e39d5_a6452dae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-21T18:03:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "913fe4e051673c29d0764a84ad02982b62cc540c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
