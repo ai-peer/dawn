@@ -267,8 +267,6 @@ void ResourceAllocatorManager::DeallocateMemory(ResourceHeapAllocation& allocati
     // Invalidate the allocation immediately in case one accidentally
     // calls DeallocateMemory again using the same allocation.
     allocation.Invalidate();
-
-    ASSERT(allocation.GetD3D12Resource() == nullptr);
 }
 
 void ResourceAllocatorManager::FreeMemory(ResourceHeapAllocation& allocation) {

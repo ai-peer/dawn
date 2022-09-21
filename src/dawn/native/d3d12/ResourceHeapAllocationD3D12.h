@@ -34,8 +34,6 @@ class ResourceHeapAllocation : public ResourceMemoryAllocation {
     ResourceHeapAllocation(const ResourceHeapAllocation&) = default;
     ResourceHeapAllocation& operator=(const ResourceHeapAllocation&) = default;
 
-    void Invalidate() override;
-
     ID3D12Resource* GetD3D12Resource() const;
     D3D12_GPU_VIRTUAL_ADDRESS GetGPUPointer() const;
 

@@ -28,11 +28,6 @@ ResourceHeapAllocation::ResourceHeapAllocation(const AllocationInfo& info,
     ASSERT((info.mMethod == AllocationMethod::kExternal) == (heap == nullptr));
 }
 
-void ResourceHeapAllocation::Invalidate() {
-    ResourceMemoryAllocation::Invalidate();
-    mResource.Reset();
-}
-
 ID3D12Resource* ResourceHeapAllocation::GetD3D12Resource() const {
     return mResource.Get();
 }
