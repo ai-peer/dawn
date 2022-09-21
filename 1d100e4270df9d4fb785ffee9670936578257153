@@ -34,6 +34,24 @@
       "parentUuid": "c454a3a1_a2252264",
       "revId": "1d100e4270df9d4fb785ffee9670936578257153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63e3a75_c69f2c3c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T11:58:07Z",
+      "side": 0,
+      "message": "The text doesn\u0027t say explicitly that the VkSemaphore is destroyed on export, so we should assume that nothing happens and that the semaphore isn\u0027t destroyed. The VVLs also complain that we haven\u0027t destroyed the semaphore. Finally the relevant code in Mesa doesn\u0027t do the destroy either. https://github.com/Mesa3D/mesa/blob/cc980ee0ed28c211e43727d2db79bedc12dd0841/src/vulkan/runtime/vk_semaphore.c#L477\n\nSo I\u0027m fairly confident that the Vulkan semantic is that exporting doesn\u0027t destroy the semaphore. If there\u0027s a driver bug then we\u0027ll have to see what do to.",
+      "parentUuid": "0aa6469a_b0c92110",
+      "revId": "1d100e4270df9d4fb785ffee9670936578257153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
