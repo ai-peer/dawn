@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "038bf872_94ea53b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-21T06:58:20Z",
+      "side": 1,
+      "message": "This change is not 100% finished and I will do some minor changes soon. But the algorithm to calculate extra layers should be like this. PTAL if you are interested  for discussion.\n\nAlternatively, we can blindly add 6 (or 7?) layers for every 2d array textures.",
+      "revId": "e1183f84caa72a1caaa47ab8d599a7dcb445beb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
