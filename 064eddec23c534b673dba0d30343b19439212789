@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "947a0b8b_1fdd6f55",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T13:47:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41a9281b_85271e07",
+      "revId": "064eddec23c534b673dba0d30343b19439212789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90448911_46e0607a",
