@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "064eddec23c534b673dba0d30343b19439212789",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5bbd8ebf_1436cce0",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-21T10:32:32Z",
+      "side": 1,
+      "message": "Please can you add a `MemberAlign` reachability test in here? This could actually replace your test below.",
+      "revId": "064eddec23c534b673dba0d30343b19439212789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90448911_46e0607a",
+        "filename": "src/tint/resolver/storage_class_layout_validation_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-21T10:32:32Z",
+      "side": 1,
+      "message": "Curious to know why you changed all the `u` suffixes to `i` suffixes. `i`, `u` and unsuffixed should work, right?",
+      "range": {
+        "startLine": 204,
+        "startChar": 39,
+        "endLine": 204,
+        "endChar": 56
+      },
+      "revId": "064eddec23c534b673dba0d30343b19439212789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
