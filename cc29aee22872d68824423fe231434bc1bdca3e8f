@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93628325_c7433e4a",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2844,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-21T13:42:55Z",
+      "side": 1,
+      "message": "I thought in past discussions about ICE vs error, we had decided to use errors for backend validation, like when you\u0027re not running transforms.",
+      "parentUuid": "4be5e81a_47fdb970",
+      "revId": "cc29aee22872d68824423fe231434bc1bdca3e8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41f24f87_54ae2970",
         "filename": "src/tint/writer/hlsl/generator_impl.cc",
         "patchSetId": 8
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-21T13:13:17Z",
       "side": 1,
       "message": "Wasnt\u0027 sure how to name this `substitute_override` is what you provide on the command line `SubstituteOverride` is the class name. Using the former seemed better as if you\u0027re calling tint you just add the transform entry on the command line?",
+      "revId": "cc29aee22872d68824423fe231434bc1bdca3e8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbde5a14_90eb2840",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2846,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-21T13:42:55Z",
+      "side": 1,
+      "message": "Interesting. I haven\u0027t considered the tint executable as our primary use for diagnostics. It seems just as likely that someone would use the API to the executable? If we really care about this, I guess we could detect how it was run and adjust the messages accordingly.",
+      "parentUuid": "41f24f87_54ae2970",
       "revId": "cc29aee22872d68824423fe231434bc1bdca3e8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
