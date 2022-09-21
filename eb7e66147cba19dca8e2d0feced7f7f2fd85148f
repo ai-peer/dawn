@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b3f43c_8cec8685",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T11:22:17Z",
+      "side": 0,
+      "message": "Note: the test `OverridesWithOutOfLimitsDefault` covers the correct behaviour.",
+      "range": {
+        "startLine": 239,
+        "startChar": 0,
+        "endLine": 245,
+        "endChar": 0
+      },
+      "revId": "eb7e66147cba19dca8e2d0feced7f7f2fd85148f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
