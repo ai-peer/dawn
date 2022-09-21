@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb333811_bb354e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T13:14:39Z",
+      "side": 1,
+      "message": "Could this be turned into a test that it errors at pipeline creation time? This seems like a valid thing to have fail?",
+      "revId": "f66ecbb4e98b23ae6d98844e786193360b474c58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
