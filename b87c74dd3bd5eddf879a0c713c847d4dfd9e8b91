@@ -22,6 +22,30 @@
       },
       "revId": "b87c74dd3bd5eddf879a0c713c847d4dfd9e8b91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25c5270_03098dad",
+        "filename": "src/tint/sem/array.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-21T21:18:53Z",
+      "side": 1,
+      "message": "Actually ended up splitting these into a 3-type variant.",
+      "parentUuid": "de829bc6_615f3c7a",
+      "range": {
+        "startLine": 64,
+        "startChar": 10,
+        "endLine": 64,
+        "endChar": 33
+      },
+      "revId": "b87c74dd3bd5eddf879a0c713c847d4dfd9e8b91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
