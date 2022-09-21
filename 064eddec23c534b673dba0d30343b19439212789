@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41a9281b_85271e07",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T13:06:52Z",
+      "side": 1,
+      "message": "I skipped over this test as I didn\u0027t understand what it\u0027s doing. I guess I need to add a member with an align here and use V T or F somehow?",
+      "parentUuid": "5bbd8ebf_1436cce0",
+      "revId": "064eddec23c534b673dba0d30343b19439212789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90448911_46e0607a",
         "filename": "src/tint/resolver/storage_class_layout_validation_test.cc",
         "patchSetId": 6
@@ -82,6 +100,30 @@
       "writtenOn": "2022-09-21T10:32:32Z",
       "side": 1,
       "message": "Curious to know why you changed all the `u` suffixes to `i` suffixes. `i`, `u` and unsuffixed should work, right?",
+      "range": {
+        "startLine": 204,
+        "startChar": 39,
+        "endLine": 204,
+        "endChar": 56
+      },
+      "revId": "064eddec23c534b673dba0d30343b19439212789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fd333d_0356d9b1",
+        "filename": "src/tint/resolver/storage_class_layout_validation_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T13:06:52Z",
+      "side": 1,
+      "message": "Unsuffixed works, does u? The value must resolve to an `i32` value. (Must be a const-expression that resolves to an i32.).\n\nThere is no conversion from a `u32` to an `i32`, so these seem like they have to be either `a` or `i`.",
+      "parentUuid": "90448911_46e0607a",
       "range": {
         "startLine": 204,
         "startChar": 39,
