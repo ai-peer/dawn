@@ -33,6 +33,24 @@
       "message": "hm, do you think we need to expose this as a chained struct on APIGetProperties?\n\nor, would it instead be sufficient to have a non-API getter on AdapterBase which InstanceBase::RequestAdapterInternal uses to select the right adapter?",
       "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bff8b73a_26ed50f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-21T02:05:06Z",
+      "side": 1,
+      "message": "Oh that would be much easier to do. I once thought it not that \"formal\" and I also found there were some gaps that let us support ChainedStructOut in Dawn, so this might be a good chance to fix this mechanism.\n\nDo you prefer this simpler way?",
+      "parentUuid": "3ec9b9a7_2ecba247",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
