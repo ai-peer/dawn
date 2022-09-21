@@ -33,6 +33,24 @@
       "message": "Presumably, this test exposes the bug you mentioned? (Arrays of mat2 not being decomposed?)",
       "revId": "84b43d61fa37b216e99f290e636d6dae7520c522",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfca736_df44a487",
+        "filename": "test/tint/buffer/uniform/std140/array/mat2x2/to_fn.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T11:45:31Z",
+      "side": 1,
+      "message": "Correct. Fixed in the next change:\nhttps://dawn-review.googlesource.com/c/dawn/+/102640/5/test/tint/buffer/uniform/std140/array/mat4x2/to_fn.wgsl.expected.glsl",
+      "parentUuid": "7cf168c0_12da8659",
+      "revId": "84b43d61fa37b216e99f290e636d6dae7520c522",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
