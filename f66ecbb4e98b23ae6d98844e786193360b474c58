@@ -69,6 +69,23 @@
       "message": "LGTM",
       "revId": "f66ecbb4e98b23ae6d98844e786193360b474c58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d65177_69bc9e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-21T16:36:43Z",
+      "side": 1,
+      "message": "Thanks for the change. I need to update CTS as well",
+      "revId": "f66ecbb4e98b23ae6d98844e786193360b474c58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
