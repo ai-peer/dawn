@@ -22,6 +22,30 @@
       },
       "revId": "2796a9babdefca7d4e1b3c80bccad1266ac6e2f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381c42b3_42eccd54",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-21T15:50:09Z",
+      "side": 1,
+      "message": "Yeah, you\u0027re right - I assumed the allocations were ref-counted but since they are copied, the ComPtr should be copied too.\n\nSo now this is a real mystery!",
+      "parentUuid": "e905e96c_5b62699b",
+      "range": {
+        "startLine": 255,
+        "startChar": 33,
+        "endLine": 255,
+        "endChar": 43
+      },
+      "revId": "2796a9babdefca7d4e1b3c80bccad1266ac6e2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
