@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f05e257c_78f4d556",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-21T05:40:09Z",
+      "side": 1,
+      "message": "Should not use `DAWN_SUPPRESS_TEST_IF` for suppressing a part of a test? Instead just use `if`?",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
