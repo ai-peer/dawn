@@ -16,6 +16,24 @@
       "message": "I internally made the exported semaphore \u0027leaked\u0027 -- no vkDestroySemaphore of it. I had suffered quite a lot weird driver errors running the sample dozens of minutes.\nThe relating vkspec [text](https://registry.khronos.org/vulkan/specs/1.2-extensions/html/vkspec.html#synchronization-semaphores-importing) is not easy to understand. Just for your information to confirm.",
       "revId": "1d100e4270df9d4fb785ffee9670936578257153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa6469a_b0c92110",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-21T00:40:22Z",
+      "side": 0,
+      "message": "BTW, currently on ChromeOS we are using VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT, while on Linux we are using VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR. They are not exactly same. That might matter if you have observed something abnormal on Linux.",
+      "parentUuid": "c454a3a1_a2252264",
+      "revId": "1d100e4270df9d4fb785ffee9670936578257153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
