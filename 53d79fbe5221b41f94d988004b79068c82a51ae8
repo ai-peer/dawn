@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6564a6d_edb6bf9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T15:00:36Z",
+      "side": 1,
+      "message": "LGTM! Great work making the custom expectation! Some nits.",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8304bd_4b983832",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T15:00:36Z",
+      "side": 1,
+      "message": "u-nit: IMHO we could inline this directly inside InitializeSupportedFeaturesImpl or make a helper that\u0027s:\n\n`bool DriverSupportsOptimalTilingFeatures(format, features)`\n \nAlso u-nit: you could use IsSubset from Math.h: IsSubset(ATTACHMENT | BLEND, properties.optimalTilingFeatures);",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "194a501a_ef1fd712",
@@ -14,6 +48,29 @@
       "writtenOn": "2022-09-21T05:49:07Z",
       "side": 1,
       "message": "Note for reviewers:\n\nUfloat11 and Ufloat10 formats.\n\nhttps://www.khronos.org/opengl/wiki/Small_Float_Formats",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba2ac88_653646f4",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T15:00:36Z",
+      "side": 1,
+      "message": "nit: in general for bitwise operations we\u0027d use ~ instead of !. I think here we might be doing (expected \u0026 false) \u003d\u003d 0 for example, which would always be true.\n\n(Rust uses ! for bitwise inversion so that\u0027s a bit confusing yeah)",
+      "range": {
+        "startLine": 165,
+        "startChar": 27,
+        "endLine": 165,
+        "endChar": 28
+      },
       "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +105,42 @@
       "writtenOn": "2022-09-21T05:57:53Z",
       "side": 1,
       "message": "As I wrote in https://crbug.com/swiftshader/147 Rendering NaN or INFINITY to RG11B10Ufloat doesn\u0027t work correctly.\n\nRendering INFINITY seems to produce all 1 bits (\u003d NaN) and rendering NaN seems to produce all 0 bits (\u003d Zero).\n\nhttps://ci.chromium.org/ui/p/dawn/builders/try/linux-clang-dbg-x64/b8802697323729157249/overview\n\nI skip this RG11B10Ufloat + Rendering test on swiftshader so far.",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a5858fc_926c4397",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T15:00:36Z",
+      "side": 1,
+      "message": "Ack! Great find linking this to the same Swiftshader bug.",
+      "parentUuid": "63c0eb19_8e49f204",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "784f3bfa_f3d4bb28",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-21T15:00:36Z",
+      "side": 1,
+      "message": "I think using DAWN_SUPPRESS_TEST_IF would cause GTEST for show the test as SKIPPED in GTest, but that\u0027s probably ok. An alternative would be an if + dawn::WarningLog()? Austin WDYT?\n\nIn the Float16 tests we skip both rendering and sampling on Swiftshader, I think that\u0027s a decent option as well. So many options :)",
+      "parentUuid": "f05e257c_78f4d556",
       "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
