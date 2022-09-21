@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e905e96c_5b62699b",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-21T01:06:51Z",
+      "side": 1,
+      "message": "shouldn\u0027t enqueuing here have copied the ResourceHeapAllocation into `mAllocationsToDelete` which should retain the reference to the resource until its serial has passed?",
+      "range": {
+        "startLine": 255,
+        "startChar": 33,
+        "endLine": 255,
+        "endChar": 43
+      },
+      "revId": "2796a9babdefca7d4e1b3c80bccad1266ac6e2f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
