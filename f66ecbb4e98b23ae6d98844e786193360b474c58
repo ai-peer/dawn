@@ -34,6 +34,24 @@
       "parentUuid": "fb333811_bb354e36",
       "revId": "f66ecbb4e98b23ae6d98844e786193360b474c58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846e2199_5ac86dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T13:32:43Z",
+      "side": 1,
+      "message": "Ah, gerrit doesn\u0027t make that obvious when the comment is resolved. SGTM.",
+      "parentUuid": "e1b94e38_132788ed",
+      "revId": "f66ecbb4e98b23ae6d98844e786193360b474c58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
