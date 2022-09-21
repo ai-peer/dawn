@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbaf945b_5376db8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-21T23:44:58Z",
+      "side": 1,
+      "message": "looks like this may have made the Dawn-\u003eChromium roll fail. Will revert.",
+      "revId": "8b7a83b85ef1224525d9c0ad8d248597ce3462e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
