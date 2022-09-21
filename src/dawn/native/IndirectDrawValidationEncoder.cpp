@@ -239,6 +239,9 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
                                                 CommandEncoder* commandEncoder,
                                                 RenderPassResourceUsageTracker* usageTracker,
                                                 IndirectDrawMetadata* indirectDrawMetadata) {
+    // Since encoding validation commands may create new objects, verify that the device is alive.
+    DAWN_TRY(device->ValidateIsAlive());
+
     struct Batch {
         const IndirectDrawMetadata::IndirectValidationBatch* metadata;
         uint64_t numIndexBufferElements;
