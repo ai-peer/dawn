@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f2064f_fb95d3ad",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-21T14:38:24Z",
+      "side": 1,
+      "message": "I believe this also has to happen for concrete as well. The spec was updated a few days ago I believe.",
+      "revId": "e56d2edf60e5e0947f45839e4528250d91cf49b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
