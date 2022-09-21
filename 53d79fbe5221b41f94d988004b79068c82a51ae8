@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "194a501a_ef1fd712",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-21T05:49:07Z",
+      "side": 1,
+      "message": "Note for reviewers:\n\nUfloat11 and Ufloat10 formats.\n\nhttps://www.khronos.org/opengl/wiki/Small_Float_Formats",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f05e257c_78f4d556",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 7
