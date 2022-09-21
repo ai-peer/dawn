@@ -1231,7 +1231,9 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
     Alias(Sym(), T);
     Structure(Sym(),  //
               utils::Vector{
-                  Member(Sym(), T, utils::Vector{MemberAlign(V)})  //
+                  Member(Sym(), T, utils::Vector{  //
+                      MemberAlign(V), MemberSize(V) //
+                  })
               });
     GlobalVar(Sym(), T, V);
     GlobalConst(Sym(), T, V);
