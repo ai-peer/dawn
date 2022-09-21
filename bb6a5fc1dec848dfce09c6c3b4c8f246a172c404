@@ -50,6 +50,23 @@
       "message": "Thanks! And sorry for the rebase!",
       "revId": "bb6a5fc1dec848dfce09c6c3b4c8f246a172c404",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d72d805_a5ed9aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-21T14:44:26Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "bb6a5fc1dec848dfce09c6c3b4c8f246a172c404",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
