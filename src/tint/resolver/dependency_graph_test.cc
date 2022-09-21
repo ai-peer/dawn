@@ -1318,6 +1318,23 @@ TEST_F(ResolverDependencyGraphTraversalTest, chromium_1273451) {
     Build();
 }
 
+TEST_F(ResolverDependencyGraphTraversalTest, AlignConst) {
+    auto val = GlobalConst("val", ty.i32(), Expr(1_i));
+
+    Structure("S", utils::Vector{
+                       Member("a", ty.f32(), utils::Vector{MemberAlign(val)}),
+                   });
+
+    Func("f", utils::Vector{Param("a", ty.type_name("S"))}, ty.type_name("S"),
+         utils::Vector{
+             Return(Construct(ty.type_name("S"))),
+         });
+    auto graph = Build();
+
+    ASSERT_GT(graph.ordered_globals.Length(), 1u);
+    EXPECT_EQ(val, graph.ordered_globals[0]);
+}
+
 }  // namespace ast_traversal
 
 }  // namespace

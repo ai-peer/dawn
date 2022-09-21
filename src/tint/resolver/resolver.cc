@@ -2280,7 +2280,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
             // Note: The spec is currently vague around the rules here. See
             // https://github.com/gpuweb/gpuweb/issues/3081. Remove this comment when resolved.
             std::string desc = "var '" + builder_->Symbols().NameFor(symbol) + "' ";
-            AddError(desc + "cannot not be referenced at module-scope", expr->source);
+            AddError(desc + "cannot be referenced at module-scope", expr->source);
             AddNote(desc + "declared here", variable->Declaration()->source);
             return nullptr;
         }
@@ -2826,15 +2826,20 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                 if (!materialized) {
                     return nullptr;
                 }
+                if (!materialized->Type()->Is<sem::I32>()) {
+                    AddError("'align' must be an i32 value", a->source);
+                    return nullptr;
+                }
+
                 auto const_value = materialized->ConstantValue();
                 if (!const_value) {
-                    AddError("'align' must be constant expression", a->expr->source);
+                    AddError("'align' must be constant expression", a->source);
                     return nullptr;
                 }
                 auto value = const_value->As<AInt>();
 
                 if (value <= 0 || !utils::IsPowerOfTwo(value)) {
-                    AddError("align value must be a positive, power-of-two integer", a->source);
+                    AddError("'align' value must be a positive, power-of-two integer", a->source);
                     return nullptr;
                 }
                 align = const_value->As<u32>();
