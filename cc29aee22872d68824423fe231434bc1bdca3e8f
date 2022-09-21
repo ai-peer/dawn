@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97c5a82_6685b91f",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2844,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T16:43:26Z",
+      "side": 1,
+      "message": "No, it wouldn\u0027t, but in part that was the reason for the change - the fuzzers like to try emitting code that depends on some user-transform, and then explodes with the security people having to triage. I don\u0027t really know what\u0027s preferable here.",
+      "parentUuid": "f6c9e1ae_2636e208",
+      "revId": "cc29aee22872d68824423fe231434bc1bdca3e8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41f24f87_54ae2970",
