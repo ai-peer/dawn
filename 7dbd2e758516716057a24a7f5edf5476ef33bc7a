@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3699744e_ef06dd74",
+        "filename": "src/dawn/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1719,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-21T18:40:36Z",
+      "side": 1,
+      "message": "ah, need to not do this case if validation is skipped since it intentionally does something invalid",
+      "range": {
+        "startLine": 1716,
+        "startChar": 6,
+        "endLine": 1719,
+        "endChar": 91
+      },
+      "revId": "7dbd2e758516716057a24a7f5edf5476ef33bc7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
