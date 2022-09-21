@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19c48c65_fddde742",
+        "filename": "src/tint/transform/add_block_attribute.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T11:58:07Z",
+      "side": 0,
+      "message": "The transform description in `src/tint/transform/add_block_attribute.h` is now out of date. Please update.",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 0
+      },
+      "revId": "6270ea76755a048e552017c5f3279763164606fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

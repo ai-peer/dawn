@@ -16,6 +16,46 @@
       "message": "Ben, PTAL. Note that this is a bit of a big hammer: pretty much all structs used as interface blocks will now be wrapped in a wrapper struct. It would be nice to isolate this to just those used in aggregate assignment, but I\u0027m not sure how easy that would be. Happy to investigate further.",
       "revId": "d58618e4956420565392bca77480e5e0cf2fd3bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d031205_3c78cf00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T11:58:07Z",
+      "side": 1,
+      "message": "I\u0027m a little on the fence about (nearly) always splitting out the structure, especially for SPIR-V, where this isn\u0027t needed. But, it does reduce complexity in the transform, and the output looks fairly reasonable - so LGTM.",
+      "revId": "d58618e4956420565392bca77480e5e0cf2fd3bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb041162_fb06bc04",
+        "filename": "src/tint/transform/add_block_attribute.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-21T11:58:07Z",
+      "side": 1,
+      "message": "`IsRuntimeSized()`",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 32
+      },
+      "revId": "d58618e4956420565392bca77480e5e0cf2fd3bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
