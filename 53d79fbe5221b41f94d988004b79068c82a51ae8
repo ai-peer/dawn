@@ -33,6 +33,23 @@
       "message": "Should not use `DAWN_SUPPRESS_TEST_IF` for suppressing a part of a test? Instead just use `if`?",
       "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63c0eb19_8e49f204",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-21T05:57:53Z",
+      "side": 1,
+      "message": "As I wrote in https://crbug.com/swiftshader/147 Rendering NaN or INFINITY to RG11B10Ufloat doesn\u0027t work correctly.\n\nRendering INFINITY seems to produce all 1 bits (\u003d NaN) and rendering NaN seems to produce all 0 bits (\u003d Zero).\n\nhttps://ci.chromium.org/ui/p/dawn/builders/try/linux-clang-dbg-x64/b8802697323729157249/overview\n\nI skip this RG11B10Ufloat + Rendering test on swiftshader so far.",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
