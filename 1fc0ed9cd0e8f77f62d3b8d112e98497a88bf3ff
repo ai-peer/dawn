@@ -184,6 +184,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc1e712f_8bac7825",
+        "filename": "src/dawn/native/Features.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-21T04:54:42Z",
+      "side": 1,
+      "message": "Thanks, updated.",
+      "parentUuid": "d1d3e163_157d6766",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e3bcc5b_3f8eff79",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 1
@@ -231,6 +249,24 @@
       "side": 1,
       "message": "What about always trying to enable the extension in TextureFormatTest and in the RG11B10UFloat test only run the rendering part if the extension is availble? It would be very similar to the code you had previously with respect to sharing test code.",
       "parentUuid": "ea82cf28_5f630f57",
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dec69766_c7b0d224",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-21T04:54:42Z",
+      "side": 1,
+      "message": "Updated, thanks.",
+      "parentUuid": "11b8383e_dd43a631",
       "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
