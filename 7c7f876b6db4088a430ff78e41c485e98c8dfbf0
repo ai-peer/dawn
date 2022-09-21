@@ -51,6 +51,23 @@
       "parentUuid": "3ec9b9a7_2ecba247",
       "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a619cd97_d5563370",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-21T02:43:41Z",
+      "side": 1,
+      "message": "Oh after more thoughts I find in Chromium instance_-\u003eDiscoverAdapters() or DiscoverDefaultAdapters() is only called once at the initialization of WebGPUDecoderImpl:\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;l\u003d1061\n\n\u003e  would it instead be sufficient to have a non-API getter on AdapterBase which InstanceBase::RequestAdapterInternal uses to select the right adapter?\nGiven the fact that we want to support users using both \"high-performance\" and \"low-power\" adapters on same Intel GPU, when calling DiscoverAdapters() we\u0027d like to return all the available adapters instead of \"selecting the right adapter\".\n\n\nI just see we are querying AdapterProperties when selecing adapters in Chromium:\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;l\u003d1340\n\nSo in current way we can still query the power preference of adapters in Chromium without changing too much code.",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
