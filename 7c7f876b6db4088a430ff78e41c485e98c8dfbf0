@@ -203,6 +203,24 @@
       "parentUuid": "0f3d817a_629d64f3",
       "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "672aa6f2_d9e289b4",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-22T06:02:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99c98d2a_925889fc",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
