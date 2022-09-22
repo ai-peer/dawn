@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0802e26d_81e1a269",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-22T19:56:54Z",
+      "side": 1,
+      "message": "Sorry, I don\u0027t quite follow. I _think_ you\u0027re asking how the `N+1` case fails:\n\nIn this situation, this conditional block doesn\u0027t make its way to the return, as the expression is not a global variable, so we continue down to the check below:\n\n```\n    auto* count_val \u003d count_sem-\u003eConstantValue();\n    if (!count_val) {\n        AddError(\"array size must evaluate to a constant integer expression or override variable\",\n                 count_expr-\u003esource);\n        return utils::Failure;\n    }\n```\n\nDoes that answer your question?",
+      "parentUuid": "d7252918_73b311aa",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41288659_41a661d0",
         "filename": "src/tint/resolver/resolver_test.cc",
         "patchSetId": 5
@@ -31,6 +49,24 @@
       "writtenOn": "2022-09-22T19:23:31Z",
       "side": 1,
       "message": "Maybe add a third test for `var\u003cworkgroup\u003e a : array\u003cf32, size + 4\u003e` ?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296029e2_c77f5db8",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-22T19:56:54Z",
+      "side": 1,
+      "message": "Done. See `type_validation_test.cc`.",
+      "parentUuid": "41288659_41a661d0",
       "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "312b0333_b02166e5",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-22T19:56:54Z",
+      "side": 1,
+      "message": "https://www.w3.org/TR/WGSL/#array-types\n\n\u003e Note: The only valid use of an array type sized by an overridable constant is as a memory view in the workgroup address space. This includes the store type of a workgroup variable.",
+      "parentUuid": "f7fd27b2_fa6b0895",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2d33237_35115444",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "513e2900_1367afdd",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-22T19:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2d33237_35115444",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f882349_fe3b84fd",
@@ -82,6 +154,24 @@
       "writtenOn": "2022-09-22T19:23:31Z",
       "side": 1,
       "message": "nit: here and in the summary it says `length` but the function is `count` and we call it ArrayCount. Should these two be count for consistency?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e96884_806fc926",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-09-22T19:56:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f882349_fe3b84fd",
       "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
