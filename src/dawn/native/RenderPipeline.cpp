@@ -382,10 +382,10 @@ MaybeError ValidateInterStageMatching(DeviceBase* device,
     const EntryPointMetadata& fragmentMetadata =
         fragmentState.module->GetEntryPoint(fragmentState.entryPoint);
 
-    // TODO(dawn:563): Can this message give more details?
-    DAWN_INVALID_IF(
-        vertexMetadata.usedInterStageVariables != fragmentMetadata.usedInterStageVariables,
-        "One or more fragment inputs and vertex outputs are not one-to-one matching");
+    // // TODO(dawn:563): Can this message give more details?
+    // DAWN_INVALID_IF(
+    //     vertexMetadata.usedInterStageVariables != fragmentMetadata.usedInterStageVariables,
+    //     "One or more fragment inputs and vertex outputs are not one-to-one matching");
 
     for (size_t i : IterateBitSet(vertexMetadata.usedInterStageVariables)) {
         const auto& vertexOutputInfo = vertexMetadata.interStageVariables[i];
