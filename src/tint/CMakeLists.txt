@@ -412,6 +412,8 @@ set(TINT_LIB_SRCS
   transform/first_index_offset.h
   transform/for_loop_to_loop.cc
   transform/for_loop_to_loop.h
+  transform/inline.cc
+  transform/inline.h
   transform/localize_struct_array_assignment.cc
   transform/localize_struct_array_assignment.h
   transform/manager.cc
@@ -1114,6 +1116,7 @@ if(TINT_BUILD_TESTS)
       transform/expand_compound_assignment_test.cc
       transform/first_index_offset_test.cc
       transform/for_loop_to_loop_test.cc
+      transform/inline_test.cc
       transform/expand_compound_assignment.cc
       transform/localize_struct_array_assignment_test.cc
       transform/module_scope_var_to_entry_point_param_test.cc
