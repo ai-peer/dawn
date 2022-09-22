@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e1218a_589ca627",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-22T20:20:03Z",
+      "side": 1,
+      "message": "Nice",
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e71188c_b89ff690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-22T20:20:03Z",
+      "side": 1,
+      "message": "Nice",
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffe955b_08dc0c02",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3748,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-22T20:20:03Z",
+      "side": 1,
+      "message": "Would be nice to have some different bit patterns in the vector lanes.",
+      "range": {
+        "startLine": 3748,
+        "startChar": 16,
+        "endLine": 3748,
+        "endChar": 22
+      },
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1213d8a_e6bb9ce7",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-22T20:20:03Z",
+      "side": 1,
+      "message": "Some other tests with a couple of other bit patterns?",
+      "range": {
+        "startLine": 3892,
+        "startChar": 47,
+        "endLine": 3892,
+        "endChar": 61
+      },
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
