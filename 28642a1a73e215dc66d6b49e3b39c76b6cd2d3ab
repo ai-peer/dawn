@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9876a42d_8920517d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-09-22T21:19:52Z",
+      "side": 1,
+      "message": "I\u0027m certain I\u0027m glad I haven\u0027t had to know much about external textures.\n\nThis is impressive.",
+      "revId": "28642a1a73e215dc66d6b49e3b39c76b6cd2d3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
