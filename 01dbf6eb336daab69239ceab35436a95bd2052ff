@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec95f72_0b6b2cb6",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T04:30:36Z",
+      "side": 1,
+      "message": "how does this happen? I thought when the device is lost, we destroy everything.\nCommandEncoder::DestroyImpl() -\u003e EncodingContext::Destroy() -\u003e sets EncodingContext::mDestroyed to true.\n\nRenderPassEncoder::APIEnd does mEncodingContext-\u003eTryEncode which should check if the encoder was destroyed or not and exit early if it was\n\nperhaps the fuzzer is finding that the device is lost / `EncodeIndirectDrawValidationCommands` fails somewhere in the middle of its execution?",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 40
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
