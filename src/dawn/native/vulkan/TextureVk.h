@@ -65,6 +65,7 @@ class Texture final : public TextureBase {
                                            VkImage nativeImage);
 
     VkImage GetHandle() const;
+    Aspect GetAllAspectsForVk() const;
 
     // Transitions the texture to be used as `usage`, recording any necessary barrier in
     // `commands`.
@@ -184,7 +185,6 @@ class Texture final : public TextureBase {
 
     Aspect ComputeCombinedAspectIfNeeded() const;
     bool AspectRequiresCombining() const;
-    Aspect GetAspects() const;
 };
 
 class TextureView final : public TextureViewBase {
