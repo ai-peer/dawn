@@ -870,6 +870,58 @@ TEST_P(ShaderTests, ConflictingBindingsDueToTransformOrder) {
     device.CreateRenderPipeline(&desc);
 }
 
+// Test that when fragment input is a subset of the vertex output, the render pipeline should be
+// valid.
+TEST_P(ShaderTests, FragmentInputIsSubsetOfVertexOutput) {
+    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+struct ShaderIO {
+    @location(1) var1: f32,
+    @location(2) @interpolate(flat) var2: u32,
+    @builtin(position) pos: vec4<f32>,
+}
+
+@vertex fn main(@builtin(vertex_index) VertexIndex : u32)
+     -> ShaderIO {
+  var pos = array<vec2<f32>, 3>(
+      vec2<f32>(-1.0, 3.0),
+      vec2<f32>(-1.0, -3.0),
+      vec2<f32>(3.0, 0.0));
+
+  var shaderIO: ShaderIO;
+  shaderIO.var1 = 9.9;
+  shaderIO.var2 = 9u;
+  shaderIO.pos = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+
+  return shaderIO;
+})");
+
+    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+@fragment fn main()
+    -> @location(0) vec4<f32> {
+    return vec4<f32>(1.0, 1.0, 1.0, 1.0);
+})");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = vsModule;
+    descriptor.cFragment.module = fsModule;
+    descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+    descriptor.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.Draw(3);
+    pass.End();
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(255, 255, 255, 255), renderPass.color, 0, 0);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
