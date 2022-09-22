@@ -22,6 +22,30 @@
       },
       "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d7176ba_5e3eaf11",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-22T06:42:01Z",
+      "side": 1,
+      "message": "No, so device lost does not destroy stuff eagerly. Idr why we decided this but I do remember this was deliberate.\n\nYes, the second point is the cause of the issue and the other changes fix that. I am adding this because this makes it clear that the function is dependent on the device being functional. Right now I think it doesn\u0027t matter if we hit the error early or later because encoding happens at the very end of this function. But in case in the future something changes, I wanted to make sure that it\u0027s clear this function should essentially be no-op if the device is bad to prevent other leaks.",
+      "parentUuid": "6ec95f72_0b6b2cb6",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 40
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
