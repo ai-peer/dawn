@@ -238,6 +238,24 @@
       "parentUuid": "035ee4b5_04220329",
       "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e28c44de_92c11ff8",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T04:04:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ce8c4a25_7ba1bc33",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
