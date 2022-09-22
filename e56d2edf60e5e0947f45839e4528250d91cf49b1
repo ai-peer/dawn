@@ -16,6 +16,24 @@
       "message": "I believe this also has to happen for concrete as well. The spec was updated a few days ago I believe.",
       "revId": "e56d2edf60e5e0947f45839e4528250d91cf49b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83847d41_d0b95394",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-22T00:06:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97f2064f_fb95d3ad",
+      "revId": "e56d2edf60e5e0947f45839e4528250d91cf49b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
