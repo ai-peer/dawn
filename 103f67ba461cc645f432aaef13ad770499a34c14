@@ -16,6 +16,92 @@
       "message": "PTAL!",
       "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b88335f2_cc398925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T17:06:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1beb8a2_69da3565",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T17:06:18Z",
+      "side": 1,
+      "message": "could be a free function that takes `DeviceBase*` and `const Format\u0026`\n\nuunit: I also think the IfNeeded is unnecessary",
+      "range": {
+        "startLine": 1322,
+        "startChar": 16,
+        "endLine": 1322,
+        "endChar": 45
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c0ea1f1_34204b89",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T17:06:18Z",
+      "side": 1,
+      "message": "probably the \"ForSubresourceStorage\" was helpful - otherwise, it\u0027s hard to tell whether you should call GetAspects() or GetFormat().aspects",
+      "range": {
+        "startLine": 1351,
+        "startChar": 16,
+        "endLine": 1351,
+        "endChar": 26
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "874b6010_0eb10eff",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T17:06:18Z",
+      "side": 1,
+      "message": "unit: \"if (UseCombinedAspects())\" reads better",
+      "range": {
+        "startLine": 186,
+        "startChar": 9,
+        "endLine": 186,
+        "endChar": 32
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
