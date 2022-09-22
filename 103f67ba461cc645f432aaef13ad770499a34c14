@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9a502a3_bcb670bf",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-22T19:59:12Z",
+      "side": 1,
+      "message": "nit. We should either actually file a bug and put it here or just drop the TODO for now and leave as a comment.",
+      "range": {
+        "startLine": 730,
+        "startChar": 12,
+        "endLine": 730,
+        "endChar": 20
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d1beb8a2_69da3565",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 2
