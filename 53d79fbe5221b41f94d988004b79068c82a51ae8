@@ -94,6 +94,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7621882_814455eb",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-22T03:15:38Z",
+      "side": 1,
+      "message": "Ah! I knew ~ is used for Not operation in C++ but I was confused because I recently wrote Rust. Updated, thanks.",
+      "parentUuid": "fba2ac88_653646f4",
+      "range": {
+        "startLine": 165,
+        "startChar": 27,
+        "endLine": 165,
+        "endChar": 28
+      },
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f05e257c_78f4d556",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 7
@@ -176,6 +200,24 @@
       "side": 1,
       "message": "any of the presented options is fine with me. here\u0027s another one :) if you want, you could also split this into two tests: RG11B10UfloatSample and RG11B10UfloatRender. That way we could only skip the latter.",
       "parentUuid": "784f3bfa_f3d4bb28",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8c4a25_7ba1bc33",
+        "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-22T03:15:38Z",
+      "side": 1,
+      "message": "I used `dawn::WarningLog()` approach because I think it\u0027s the least confusing. Thanks, all.",
+      "parentUuid": "035ee4b5_04220329",
       "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
