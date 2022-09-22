@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3daa89e_17829a7c",
+        "filename": "src/dawn/native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T15:13:48Z",
+      "side": 1,
+      "message": "basically IIUC, by moving backing into mPendingCommands, we\u0027re making sure we don\u0027t forget about renderCommands when it falls out of scope.\n\nWhat\u0027s curious though is that `renderCommands` falling out of scope is allowed to leak. Perhaps we can plug that hole instead of doing state-restoration here? DAWN_TRY_WITH_CLEANUP admittedly would be nicer if it could mostly be replaced with plain DAWN_TRY and scoped variables instead that can handle an early return (i.e. ScopedFD/ScopedHandle that closes itself when it goes out of scope).\n\n~CommandAllocator calls CommandAllocator::Reset which only frees the blocks. Could we instead move the blocks into CommandIterator and then call `FreeCommands` ?\n\nAlternatively, if this is not good separation of concerns (the allocator doesn\u0027t want to care about the type of data it stores), we could rename CommandAllocator-\u003eCommandBlockAllocator, and then make a new CommandAllocator which is a super simple wrapper around CommandBlockAllocator which performs the command-freeing on destruction.",
+      "range": {
+        "startLine": 135,
+        "startChar": 32,
+        "endLine": 135,
+        "endChar": 78
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6ec95f72_0b6b2cb6",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 1
@@ -38,6 +61,30 @@
       "side": 1,
       "message": "No, so device lost does not destroy stuff eagerly. Idr why we decided this but I do remember this was deliberate.\n\nYes, the second point is the cause of the issue and the other changes fix that. I am adding this because this makes it clear that the function is dependent on the device being functional. Right now I think it doesn\u0027t matter if we hit the error early or later because encoding happens at the very end of this function. But in case in the future something changes, I wanted to make sure that it\u0027s clear this function should essentially be no-op if the device is bad to prevent other leaks.",
       "parentUuid": "6ec95f72_0b6b2cb6",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 40
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88488cb4_0f0746f5",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T15:13:48Z",
+      "side": 1,
+      "message": "I don\u0027t remember either - cwallez@ do you remember if there was a reason we did not do destroy() while handling device lost?\n\nmy reading of the spec of device.destroy() and device lost are that from the application\u0027s point-of-view, they should do effectively the same thing. device.destroy() performs \"lose the device\". Both make all the objects \"unusable\"\n\nI started running tests on https://dawn-review.googlesource.com/c/dawn/+/103460 to see if we have tests about this behavior that would fail. Seems like:\n - device.destroy() unmaps buffers, but \"lose the device\" does not. This might make sense for JS since the mapping is owned by the renderer process, not the GPU process, but not sure if it makes sense for native. IDK how we can be returning mapped pointers from an actually-lost device.",
+      "parentUuid": "2d7176ba_5e3eaf11",
       "range": {
         "startLine": 242,
         "startChar": 4,
