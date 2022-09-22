@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ff7c736_13dc3631",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-22T03:45:32Z",
+      "side": 1,
+      "message": "I inlined it and use `IsSubset`, thanks.",
+      "parentUuid": "5c8304bd_4b983832",
+      "revId": "53d79fbe5221b41f94d988004b79068c82a51ae8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "194a501a_ef1fd712",
         "filename": "src/dawn/tests/end2end/TextureFormatTests.cpp",
         "patchSetId": 7
