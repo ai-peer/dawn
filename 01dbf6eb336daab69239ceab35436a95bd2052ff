@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "783e6276_820cde18",
+        "filename": "src/dawn/native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T21:06:11Z",
+      "side": 1,
+      "message": "we discussed that restoration of `mPendingCommands` here, or some other way to delete it properly - might not be needed needed if device lost causes device.destroy() to happen.\nThat\u0027s only partially true however, there could still be a device lost or OOM that surfaces within `EncodeIndirectDrawValidationCommands`. i.e. it could be lost either by an explicit device.Destroy() or device.ForceLoss() - but we still need something to make it not leak.\n\nSo keeping this sounds fine to me.",
+      "parentUuid": "b3daa89e_17829a7c",
+      "range": {
+        "startLine": 135,
+        "startChar": 32,
+        "endLine": 135,
+        "endChar": 78
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ec95f72_0b6b2cb6",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I don\u0027t remember either - cwallez@ do you remember if there was a reason we did not do destroy() while handling device lost?\n\nmy reading of the spec of device.destroy() and device lost are that from the application\u0027s point-of-view, they should do effectively the same thing. device.destroy() performs \"lose the device\". Both make all the objects \"unusable\"\n\nI started running tests on https://dawn-review.googlesource.com/c/dawn/+/103460 to see if we have tests about this behavior that would fail. Seems like:\n - device.destroy() unmaps buffers, but \"lose the device\" does not. This might make sense for JS since the mapping is owned by the renderer process, not the GPU process, but not sure if it makes sense for native. IDK how we can be returning mapped pointers from an actually-lost device.",
       "parentUuid": "2d7176ba_5e3eaf11",
+      "range": {
+        "startLine": 242,
+        "startChar": 4,
+        "endLine": 243,
+        "endChar": 40
+      },
+      "revId": "01dbf6eb336daab69239ceab35436a95bd2052ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8abb710_e387678b",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T21:06:11Z",
+      "side": 1,
+      "message": "as discussed, let\u0027s add a TODO here to evaluate whether we really need this - or if device lost should cause device.destroy() to occur - in which case we would catch that the device was lost earlier in `mEncodingContext-\u003eTryEncode`",
+      "parentUuid": "88488cb4_0f0746f5",
       "range": {
         "startLine": 242,
         "startChar": 4,
