@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daafeccb_76051d20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-22T23:34:18Z",
+      "side": 1,
+      "message": "Yeah, but there are other places in the code where we call ExecutePendingCommandContext() and also call NextSerial() e.g. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/QueueD3D12.cpp;l\u003d60\n\nIt\u0027s hard to verify that all such usage is correct if the NextSerial() call becomes conditional on pending commands.",
+      "parentUuid": "facf433b_4a88933a",
+      "revId": "83716f47f223c93016a80ae747654ff2fcc69204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c57908fb_608506ad",
         "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
