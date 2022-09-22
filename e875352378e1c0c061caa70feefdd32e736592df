@@ -39,6 +39,30 @@
       },
       "revId": "e875352378e1c0c061caa70feefdd32e736592df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02fd25aa_e487d333",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-22T04:14:17Z",
+      "side": 1,
+      "message": "Updated, thanks.",
+      "parentUuid": "e6791e1f_51cdfa89",
+      "range": {
+        "startLine": 188,
+        "startChar": 17,
+        "endLine": 188,
+        "endChar": 39
+      },
+      "revId": "e875352378e1c0c061caa70feefdd32e736592df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
