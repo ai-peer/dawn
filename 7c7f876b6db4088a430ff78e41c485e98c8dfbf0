@@ -110,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a8ae52_fd218738",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2932,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-22T03:00:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aedef5c8_4f11af8e",
+      "range": {
+        "startLine": 2932,
+        "startChar": 46,
+        "endLine": 2932,
+        "endChar": 56
+      },
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef7c1bec_d5839f36",
@@ -123,6 +147,24 @@
       "writtenOn": "2022-09-21T17:04:03Z",
       "side": 1,
       "message": "Why do we need the overloads for nullptr_t?",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3d817a_629d64f3",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-09-22T03:00:45Z",
+      "side": 1,
+      "message": "Oh if we don\u0027t have ValidateSTypes(std::nullptr_t, ...) I will meet the below compilation error:\n\nerror: call to \u0027ValidateSTypes\u0027 is ambiguous\n            dawn::native::ValidateSTypes(nullptr, {\n            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\ngen/src\\dawn/native/ChainUtils_autogen.h(49,16): note: candidate function\n    MaybeError ValidateSTypes(const ChainedStruct* chain,\n               ^\ngen/src\\dawn/native/ChainUtils_autogen.h(51,16): note: candidate function\n    MaybeError ValidateSTypes(const ChainedStructOut* chain,",
+      "parentUuid": "ef7c1bec_d5839f36",
       "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
