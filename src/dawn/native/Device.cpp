@@ -524,6 +524,9 @@ void DeviceBase::HandleError(InternalErrorType type,
 
         // Still forward device loss errors to the error scopes so they all reject.
         mErrorScopeStack->HandleError(ToWGPUErrorType(type), message);
+
+        // Destroy the device.
+        Destroy();
     } else {
         // Pass the error to the error scope stack and call the uncaptured error callback
         // if it isn't handled. DeviceLost is not handled here because it should be
