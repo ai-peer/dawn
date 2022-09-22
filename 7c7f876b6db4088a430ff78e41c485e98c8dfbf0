@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf9bd7e9_a5e98625",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T04:11:35Z",
+      "side": 1,
+      "message": "hm okay, thank you for the reasoning",
+      "parentUuid": "a619cd97_d5563370",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aedef5c8_4f11af8e",
@@ -165,6 +183,24 @@
       "side": 1,
       "message": "Oh if we don\u0027t have ValidateSTypes(std::nullptr_t, ...) I will meet the below compilation error:\n\nerror: call to \u0027ValidateSTypes\u0027 is ambiguous\n            dawn::native::ValidateSTypes(nullptr, {\n            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~\ngen/src\\dawn/native/ChainUtils_autogen.h(49,16): note: candidate function\n    MaybeError ValidateSTypes(const ChainedStruct* chain,\n               ^\ngen/src\\dawn/native/ChainUtils_autogen.h(51,16): note: candidate function\n    MaybeError ValidateSTypes(const ChainedStructOut* chain,",
       "parentUuid": "ef7c1bec_d5839f36",
+      "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c98d2a_925889fc",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T04:11:35Z",
+      "side": 1,
+      "message": "Instead of adding the nullptr overrides - I think it would be preferable to cast nullptr in the test code, to either ChainedStruct* or ChainedStructOut*. I believe it is only the tests that explicitly pass nullptr like this",
+      "parentUuid": "0f3d817a_629d64f3",
       "revId": "7c7f876b6db4088a430ff78e41c485e98c8dfbf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
