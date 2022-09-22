@@ -52,6 +52,24 @@
       "parentUuid": "0aa6469a_b0c92110",
       "revId": "1d100e4270df9d4fb785ffee9670936578257153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc5c5dbe_2aa30cec",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-22T01:39:20Z",
+      "side": 0,
+      "message": "I\u0027ve just verified this CL on my device. It worked well. I can\u0027t recall exactly what led me to the misunderstanding on this. Sorry for that, and thanks for fixing it.",
+      "parentUuid": "a63e3a75_c69f2c3c",
+      "revId": "1d100e4270df9d4fb785ffee9670936578257153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
