@@ -16,6 +16,64 @@
       "message": "PTAL\n\nI realized that we missed one call to NextSerial in QueueD3D12 which was noted during review, but somehow missed along the way before landing. While looking at the code that calls ExecutePendingCommandContext, it seemed hard to verify that the change in behavior by the previous CL was safe since we wouldn\u0027t call NextSerial() in some cases (e.g. no pending commands). So I reverted back to the original code and made SynchronizeImportedTextureAfterUse use GetPendingCommandSerial instead of GetLastSubmittedSerial.",
       "revId": "83716f47f223c93016a80ae747654ff2fcc69204",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3270c40_92527fdb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T23:26:44Z",
+      "side": 1,
+      "message": "does this fix any of the other issues you saw?",
+      "revId": "83716f47f223c93016a80ae747654ff2fcc69204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facf433b_4a88933a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T23:26:44Z",
+      "side": 1,
+      "message": "doesn\u0027t [1] also mean that we also don\u0027t call NextSerial if there are no pending commands?\n\nas in, I think they are the same but perhaps I\u0027m missing something",
+      "parentUuid": "835b307e_92206807",
+      "revId": "83716f47f223c93016a80ae747654ff2fcc69204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57908fb_608506ad",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-22T23:26:44Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 36
+      },
+      "revId": "83716f47f223c93016a80ae747654ff2fcc69204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
