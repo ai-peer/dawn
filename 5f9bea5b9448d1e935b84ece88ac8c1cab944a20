@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac348919_24fe8458",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-22T09:09:13Z",
+      "side": 1,
+      "message": "LGTM too. If we\u0027re ok deferring to the CTS for MSAA testing, then we could land this. Thanks Takahiro!",
+      "revId": "5f9bea5b9448d1e935b84ece88ac8c1cab944a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
