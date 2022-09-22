@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8466bbc6_b3e54f7c",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-22T20:31:47Z",
+      "side": 1,
+      "message": "Note: This is not what the spec currently says, but I believe the spec to be wrong.\nFiled [#3471](https://github.com/gpuweb/gpuweb/issues/3471).",
+      "range": {
+        "startLine": 523,
+        "startChar": 26,
+        "endLine": 523,
+        "endChar": 36
+      },
+      "revId": "dad30ad009095b49af1897ab0ea53238dcfff015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
