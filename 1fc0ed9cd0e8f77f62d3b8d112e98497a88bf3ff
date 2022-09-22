@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f2bee56_c9382b9e",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-09-22T09:37:35Z",
+      "side": 1,
+      "message": "\u003e But in all cases, IMHO we could defer the testing of sampling and rendering to a multisampled texture to the CTS.\n\nYeah, I think it\u0027s good to test in the CTS. I have read through the end2end multisampling tests but they seem to test with only `RGBA8Unorm` texture format and don\u0027t seem to be test all available texture formats. CTS may be better to test all formats?",
+      "parentUuid": "ec12fcc8_530d8b8f",
+      "range": {
+        "startLine": 74,
+        "startChar": 44,
+        "endLine": 74,
+        "endChar": 56
+      },
+      "revId": "1fc0ed9cd0e8f77f62d3b8d112e98497a88bf3ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb2769cf_82582390",
         "filename": "src/dawn/native/Features.h",
         "patchSetId": 1
