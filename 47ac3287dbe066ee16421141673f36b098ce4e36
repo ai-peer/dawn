@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f278b50_600349a5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-22T19:59:26Z",
+      "side": 1,
+      "message": "Yup. I was thinking the `N+1` case was valid but that isn\u0027t right, so this makes sense. Thanks.",
+      "parentUuid": "0802e26d_81e1a269",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41288659_41a661d0",
