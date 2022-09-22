@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c5a8dad_3311183e",
+        "filename": "src/tint/sem/array.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-09-22T14:24:31Z",
+      "side": 1,
+      "message": "This seems weird that it returns a value when it doesn\u0027t actually have a value without an error. I understand it\u0027s exploiting the fact that a WGSL array can not be zero size, but it just seems .... off.",
+      "revId": "cc15cf674f7594303168e5144c6ff7e91d929a3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
