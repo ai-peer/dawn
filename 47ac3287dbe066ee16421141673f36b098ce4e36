@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7252918_73b311aa",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-22T19:23:31Z",
+      "side": 1,
+      "message": "What happens if this is an expression involving the override? Does the `Materialize` fail? Or does this fail?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41288659_41a661d0",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-22T19:23:31Z",
+      "side": 1,
+      "message": "Maybe add a third test for `var\u003cworkgroup\u003e a : array\u003cf32, size + 4\u003e` ?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7fd27b2_fa6b0895",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-22T19:23:31Z",
+      "side": 1,
+      "message": "Where does the restriction that a override sized array must be workgroup address space?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d33237_35115444",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-22T19:23:31Z",
+      "side": 1,
+      "message": "I find this double negative hard to understand. Would this be better to split into something like:\n\n```\nif (IsArrayWithOverrideCount(member-\u003eType()) {\n  RaiseOverrideError();\n  return false;\n}\n```\n\nbe simpler to understand?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f882349_fe3b84fd",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-22T19:23:31Z",
+      "side": 1,
+      "message": "nit: here and in the summary it says `length` but the function is `count` and we call it ArrayCount. Should these two be count for consistency?",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
