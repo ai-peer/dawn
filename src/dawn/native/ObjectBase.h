@@ -19,6 +19,7 @@
 #include <string>
 
 #include "dawn/common/LinkedList.h"
+#include "dawn/common/NonCopyable.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/native/Forward.h"
 
@@ -62,7 +63,24 @@ class ApiObjectList {
     // Destroys and removes all the objects tracked in the list.
     void Destroy();
 
+    class Iterator : public NonMovable {
+      public:
+        explicit Iterator(ApiObjectList* list);
+        ~Iterator();
+
+        LinkedListIterator<ApiObjectBase> begin();
+        LinkedListIterator<ApiObjectBase> end();
+
+      private:
+        ApiObjectList* mList;
+    };
+
+    // Return an iterator to iterate all objects in the list.
+    Iterator Iterate();
+
   private:
+    friend class Iterator;
+
     // Boolean used to mark the list so that on subsequent calls to Untrack, we don't need to
     // reaquire the lock, and Track on new objects immediately destroys them.
     bool mMarkedDestroyed = false;
