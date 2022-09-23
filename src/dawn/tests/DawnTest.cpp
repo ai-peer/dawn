@@ -1392,13 +1392,17 @@ void DawnTestBase::FlushWire() {
     }
 }
 
-void DawnTestBase::WaitForAllOperations() {
+void DawnTestBase::WaitForAllOperations(wgpu::Device targetDevice) {
+    if (targetDevice == nullptr) {
+        targetDevice = this->device;
+    }
+
     bool done = false;
-    device.GetQueue().OnSubmittedWorkDone(
+    targetDevice.GetQueue().OnSubmittedWorkDone(
         0u, [](WGPUQueueWorkDoneStatus, void* userdata) { *static_cast<bool*>(userdata) = true; },
         &done);
     while (!done) {
-        WaitABit();
+        WaitABit(targetDevice);
     }
 }
 
