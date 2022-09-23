@@ -136,6 +136,8 @@ option_if_not_defined(DAWN_ENABLE_SWIFTSHADER "Enables building Swiftshader as p
 
 option_if_not_defined(DAWN_ENABLE_PIC "Build with Position-Independent-Code enabled" OFF)
 
+option_if_not_defined(DAWN_USE_MOLD_LINKER "Use mold linker" OFF)
+
 if (DAWN_ENABLE_OPENGLES OR DAWN_ENABLE_DESKTOP_GL)
   set(TINT_DEFAULT_GLSL ON)
 else()
@@ -340,6 +342,10 @@ endfunction()
 if (${DAWN_ENABLE_TSAN})
   add_compile_options(-stdlib=libc++)
   add_link_options(-stdlib=libc++)
+endif()
+
+if(DAWN_USE_MOLD_LINKER)
+  add_link_options("-fuse-ld=mold")
 endif()
 
 ################################################################################
