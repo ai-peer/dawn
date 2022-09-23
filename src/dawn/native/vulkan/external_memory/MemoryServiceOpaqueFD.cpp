@@ -73,7 +73,6 @@ bool Service::SupportsImportMemory(VkFormat format,
         return false;
     }
 
-    // TODO(http://crbug.com/dawn/206): Investigate dedicated only images
     VkFlags memoryFlags = externalFormatProperties.externalMemoryProperties.externalMemoryFeatures;
     return (memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR) != 0;
 }
@@ -95,8 +94,32 @@ ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
     const ExternalImageDescriptorOpaqueFD* opaqueFDDescriptor =
         static_cast<const ExternalImageDescriptorOpaqueFD*>(descriptor);
 
-    MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
-                                 opaqueFDDescriptor->memoryTypeIndex};
+    MemoryImportParams params;
+    params.allocationSize = opaqueFDDescriptor->allocationSize;
+    params.memoryTypeIndex = opaqueFDDescriptor->memoryTypeIndex;
+
+    if (mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation)) {
+        VkMemoryDedicatedRequirements dedicatedRequirements;
+        dedicatedRequirements.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+        dedicatedRequirements.pNext = nullptr;
+
+        VkMemoryRequirements2 baseRequirements;
+        baseRequirements.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+        baseRequirements.pNext = &dedicatedRequirements;
+
+        VkImageMemoryRequirementsInfo2 imageInfo;
+        imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
+        imageInfo.pNext = nullptr;
+        imageInfo.image = image;
+
+        mDevice->fn.GetImageMemoryRequirements2(mDevice->GetVkDevice(), &imageInfo,
+                                                &baseRequirements);
+
+        if (dedicatedRequirements.prefersDedicatedAllocation) {
+            params.dedicatedAllocation = true;
+        }
+    }
+
     return params;
 }
 
@@ -115,17 +138,28 @@ ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
                     "Requested allocation size (%u) is smaller than the image requires (%u).",
                     importParams.allocationSize, requirements.size);
 
-    VkImportMemoryFdInfoKHR importMemoryFdInfo;
-    importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
-    importMemoryFdInfo.pNext = nullptr;
-    importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-    importMemoryFdInfo.fd = handle;
-
     VkMemoryAllocateInfo allocateInfo;
     allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-    allocateInfo.pNext = &importMemoryFdInfo;
     allocateInfo.allocationSize = importParams.allocationSize;
     allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
+    PNextChainBuilder allocateInfoChain(&allocateInfo);
+
+    VkImportMemoryFdInfoKHR importMemoryFdInfo;
+    importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+    importMemoryFdInfo.fd = handle;
+    allocateInfoChain.Add(&importMemoryFdInfo, VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
+
+    // Tag the memory as dedicated for this texture. This is sometimes necessary for imported
+    // texture. We could query whether it is really needed but since the memory is only for that one
+    // texture we might as well always use a dedicated allocation for it when the feature is
+    // available.
+    VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
+    if (importParams.dedicatedAllocation) {
+        dedicatedAllocateInfo.image = image;
+        dedicatedAllocateInfo.buffer = VkBuffer{};
+        allocateInfoChain.Add(&dedicatedAllocateInfo,
+                              VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO);
+    }
 
     VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
     DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
