@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b797cc_7aabafb0",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3748,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-23T14:11:12Z",
+      "side": 1,
+      "message": "I agree in general, but for these unit tests, I\u0027m mostly going for coverage testing, with some basic correctness testing, relying on CTS for the latter.",
+      "parentUuid": "cffe955b_08dc0c02",
+      "range": {
+        "startLine": 3748,
+        "startChar": 16,
+        "endLine": 3748,
+        "endChar": 22
+      },
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1213d8a_e6bb9ce7",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-09-22T20:20:03Z",
       "side": 1,
       "message": "Some other tests with a couple of other bit patterns?",
+      "range": {
+        "startLine": 3892,
+        "startChar": 47,
+        "endLine": 3892,
+        "endChar": 61
+      },
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa35cac_7f94c4f7",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3892,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-23T14:11:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1213d8a_e6bb9ce7",
       "range": {
         "startLine": 3892,
         "startChar": 47,
