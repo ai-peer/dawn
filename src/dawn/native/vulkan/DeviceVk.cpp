@@ -303,6 +303,9 @@ MaybeError Device::SubmitPendingCommands() {
     // Transition eagerly all used external textures for export.
     for (auto* texture : mRecordingContext.externalTexturesForEagerTransition) {
         texture->TransitionEagerlyForExport(&mRecordingContext);
+        std::vector<VkSemaphore> waitRequirements = texture->AcquireWaitRequirements();
+        mRecordingContext.waitSemaphores.insert(mRecordingContext.waitSemaphores.end(),
+                                                waitRequirements.begin(), waitRequirements.end());
     }
 
     DAWN_TRY(
@@ -883,8 +886,9 @@ bool Device::SignalAndExportExternalTexture(
         ExternalSemaphoreHandle semaphoreHandle;
         VkImageLayout releasedOldLayout;
         VkImageLayout releasedNewLayout;
-        DAWN_TRY(texture->ExportExternalTexture(desiredLayout, &semaphoreHandle, &releasedOldLayout,
-                                                &releasedNewLayout));
+        DAWN_TRY_CONTEXT(texture->ExportExternalTexture(desiredLayout, &semaphoreHandle,
+                                                        &releasedOldLayout, &releasedNewLayout),
+                         "exporting external texture %s.", texture);
 
         semaphoreHandles->push_back(semaphoreHandle);
         info->releasedOldLayout = releasedOldLayout;
@@ -1025,6 +1029,16 @@ MaybeError Device::WaitForIdleForDestruction() {
         mFencesInFlight.pop();
     }
     return {};
+}
+
+MaybeError Device::BeforeAPIDestroy() {
+    for (LinkNode<ApiObjectBase>* node : GetObjectTrackingList(ObjectType::Texture)->Iterate()) {
+        auto* texture = static_cast<Texture*>(node->value());
+        if (texture->IsExternalTexturePendingAcquire()) {
+            GetPendingRecordingContext()->externalTexturesForEagerTransition.insert(texture);
+        }
+    }
+    return SubmitPendingCommands();
 }
 
 void Device::DestroyImpl() {
