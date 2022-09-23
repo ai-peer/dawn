@@ -800,6 +800,20 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
+MaybeError Device::BeforeAPIDestroy() {
+    CommandRecordingContext* commandContext;
+    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+    for (LinkNode<ApiObjectBase>* node : GetObjectTrackingList(ObjectType::Texture)->Iterate()) {
+        auto* texture = static_cast<Texture*>(node->value());
+        if (texture->IsExternalTexturePendingAcquire()) {
+            commandContext->AddToSharedTextureList(texture);
+        }
+    }
+    DAWN_TRY(ExecutePendingCommandContext());
+    DAWN_TRY(NextSerial());
+    return {};
+}
+
 void Device::DestroyImpl() {
     ASSERT(GetState() == State::Disconnected);
 
