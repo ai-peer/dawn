@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ff354f_62641137",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-23T08:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a502a3_bcb670bf",
+      "range": {
+        "startLine": 730,
+        "startChar": 12,
+        "endLine": 730,
+        "endChar": 20
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1beb8a2_69da3565",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-09-22T17:06:18Z",
       "side": 1,
       "message": "could be a free function that takes `DeviceBase*` and `const Format\u0026`\n\nuunit: I also think the IfNeeded is unnecessary",
+      "range": {
+        "startLine": 1322,
+        "startChar": 16,
+        "endLine": 1322,
+        "endChar": 45
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f38e4eff_8efa25c0",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-23T08:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1beb8a2_69da3565",
       "range": {
         "startLine": 1322,
         "startChar": 16,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "239283f2_75c5aeeb",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-23T08:56:23Z",
+      "side": 1,
+      "message": "I went with GetAllVulkanAspects, this is used in the next CL for things other than subresource storage. I\u0027m not super happy with the name though, so suggestions welcome and I can make a rename as follow-up if needed.",
+      "parentUuid": "5c0ea1f1_34204b89",
+      "range": {
+        "startLine": 1351,
+        "startChar": 16,
+        "endLine": 1351,
+        "endChar": 26
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "874b6010_0eb10eff",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-09-22T17:06:18Z",
       "side": 1,
       "message": "unit: \"if (UseCombinedAspects())\" reads better",
+      "range": {
+        "startLine": 186,
+        "startChar": 9,
+        "endLine": 186,
+        "endChar": 32
+      },
+      "revId": "103f67ba461cc645f432aaef13ad770499a34c14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb2e80d1_26474848",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-23T08:56:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "874b6010_0eb10eff",
       "range": {
         "startLine": 186,
         "startChar": 9,
