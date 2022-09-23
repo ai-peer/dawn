@@ -77,6 +77,7 @@ MaybeError AdapterBase::Initialize() {
     mLimits.v1.maxDynamicStorageBuffersPerPipelineLayout =
         std::min(mLimits.v1.maxDynamicStorageBuffersPerPipelineLayout,
                  kMaxDynamicStorageBuffersPerPipelineLayout);
+    mLimits.v1.maxBufferSize = std::min(mLimits.v1.maxBufferSize, kAssumedMaxBufferSize);
 
     return {};
 }

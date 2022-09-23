@@ -17,6 +17,7 @@
 #include <array>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 
 // clang-format off
@@ -27,6 +28,10 @@
 
 #define LIMITS_STORAGE_BUFFER_BINDING_SIZE(X)                                             \
     X(Maximum, maxStorageBufferBindingSize, 134217728, 1073741824, 2147483647, 4294967295)
+
+// Tiers are 256Mb, 1Gb, 2Gb.
+#define LIMITS_MAX_BUFFER_SIZE(X)                                             \
+    X(Maximum, maxBufferSize, 0x10000000, 0x40000000, 0x80000000)
 
 // TODO(crbug.com/dawn/685):
 // These limits don't have tiers yet. Define two tiers with the same values since the macros
@@ -58,17 +63,20 @@
     X(Maximum,                    maxComputeWorkgroupSizeX,   256,   256) \
     X(Maximum,                    maxComputeWorkgroupSizeY,   256,   256) \
     X(Maximum,                    maxComputeWorkgroupSizeZ,    64,    64) \
-    X(Maximum,            maxComputeWorkgroupsPerDimension, 65535, 65535)
+    X(Maximum,            maxComputeWorkgroupsPerDimension, 65535, 65535) \
+    X(Maximum,            maxBufferSize, 268435456, 268435456)
 // clang-format on
 
 #define LIMITS_EACH_GROUP(X)              \
     X(LIMITS_WORKGROUP_STORAGE_SIZE)      \
     X(LIMITS_STORAGE_BUFFER_BINDING_SIZE) \
+    X(LIMITS_MAX_BUFFER_SIZE)             \
     X(LIMITS_OTHER)
 
 #define LIMITS(X)                         \
     LIMITS_WORKGROUP_STORAGE_SIZE(X)      \
     LIMITS_STORAGE_BUFFER_BINDING_SIZE(X) \
+    LIMITS_MAX_BUFFER_SIZE(X)             \
     LIMITS_OTHER(X)
 
 namespace dawn::native {
