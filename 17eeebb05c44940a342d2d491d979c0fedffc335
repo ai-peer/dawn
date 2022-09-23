@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77588a9_1cf95339",
+        "filename": "src/tint/resolver/const_eval_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3748,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-23T14:19:14Z",
+      "side": 1,
+      "message": "Couldn\u0027t you just invert the bits on the second lane, or something?\nJust anything that would catch a alway-zero\u0027th-lane bug. They happen.",
+      "parentUuid": "46b797cc_7aabafb0",
+      "range": {
+        "startLine": 3748,
+        "startChar": 16,
+        "endLine": 3748,
+        "endChar": 22
+      },
+      "revId": "17eeebb05c44940a342d2d491d979c0fedffc335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1213d8a_e6bb9ce7",
