@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "813b3528_a288d5ac",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-23T16:32:40Z",
+      "side": 1,
+      "message": "Thanks for your comments. I am having a try to merge the test to use one unified code path.\n\nI still make explicit distinguish between data bytes and padding bytes, considering data bytes as program accessible part and padding bytes untouchable, and such distinction not only effects result comparison but also memory filling.\nCurrently the CL use `StridedDataMatcher` to skip the comparison of padding bytes, because (on Mac-rel, as I tested on try-bot) padding bytes of destination buffer are changed currently. After we ensure to not touching padding bytes, we can somehow compare the whole output buffer to expectation data (both data bytes and padding bytes).",
+      "parentUuid": "b06f3211_33c99b6d",
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26c3e66f_80c1bdd8",
         "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
         "patchSetId": 4
@@ -67,6 +85,30 @@
       "writtenOn": "2022-09-20T09:39:19Z",
       "side": 1,
       "message": "I believe in Dawn, enum entries are usually capitalized.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 16
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce75e2b8_af7ed6ed",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-23T16:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c3e66f_80c1bdd8",
       "range": {
         "startLine": 44,
         "startChar": 0,
@@ -100,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8fa994_1b6eecfb",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-23T16:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "464d6676_2466af34",
+      "range": {
+        "startLine": 47,
+        "startChar": 11,
+        "endLine": 47,
+        "endChar": 18
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c40d2bbf_7789d056",
@@ -123,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91781724_5382c737",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-23T16:32:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c40d2bbf_7789d056",
+      "range": {
+        "startLine": 92,
+        "startChar": 18,
+        "endLine": 92,
+        "endChar": 24
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ac2dce7_3c5d71d9",
@@ -136,6 +226,30 @@
       "writtenOn": "2022-09-20T09:39:19Z",
       "side": 1,
       "message": "`WGSL requires array elements to be aligned to 16 bytes in a uniform buffer`\n\nThe way `ComputeLayoutMemoryBufferTests` handled this was to tag these cases with `StorageBufferOnly`, which I find more explicit and clearer for these kind of tests. The approach taken by `ComputeLayoutMemoryBufferTests` also means that only the valid cases are enumerated by gtest.",
+      "range": {
+        "startLine": 398,
+        "startChar": 7,
+        "endLine": 398,
+        "endChar": 64
+      },
+      "revId": "10f681701ade900577b63479782bfd2de2a3f67a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af27bba_20a5c876",
+        "filename": "src/dawn/tests/end2end/ComputeBufferReadWriteTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-23T16:32:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6ac2dce7_3c5d71d9",
       "range": {
         "startLine": 398,
         "startChar": 7,
