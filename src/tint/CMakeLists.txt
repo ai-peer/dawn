@@ -434,6 +434,8 @@ set(TINT_LIB_SRCS
   transform/remove_phonies.h
   transform/remove_unreachable_statements.cc
   transform/remove_unreachable_statements.h
+  transform/remove_unused_interstage_variables.cc
+  transform/remove_unused_interstage_variables.h
   transform/renamer.cc
   transform/renamer.h
   transform/robustness.cc
@@ -1125,6 +1127,7 @@ if(TINT_BUILD_TESTS)
       transform/remove_continue_in_switch_test.cc
       transform/remove_phonies_test.cc
       transform/remove_unreachable_statements_test.cc
+      transform/remove_unused_interstage_variables_test.cc
       transform/renamer_test.cc
       transform/robustness_test.cc
       transform/simplify_pointers_test.cc
