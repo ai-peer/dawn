@@ -463,7 +463,12 @@ void DeviceBase::Destroy() {
     mState = State::Destroyed;
 }
 
+MaybeError DeviceBase::BeforeAPIDestroy() {
+    return {};
+}
+
 void DeviceBase::APIDestroy() {
+    ConsumedError(BeforeAPIDestroy());
     Destroy();
 }
 

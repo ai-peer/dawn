@@ -78,6 +78,7 @@ class Texture final : public TextureBase {
                                 VkPipelineStageFlags* srcStages,
                                 VkPipelineStageFlags* dstStages);
 
+    bool IsExternalTexturePendingAcquire() const;
     // Eagerly transition the texture for export.
     void TransitionEagerlyForExport(CommandRecordingContext* recordingContext);
 
@@ -162,8 +163,6 @@ class Texture final : public TextureBase {
 
     VkImageLayout mPendingAcquireOldLayout;
     VkImageLayout mPendingAcquireNewLayout;
-
-    VkImageLayout mDesiredExportLayout = VK_IMAGE_LAYOUT_UNDEFINED;
 
     ExternalSemaphoreHandle mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
 

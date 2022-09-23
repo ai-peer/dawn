@@ -654,6 +654,19 @@ Texture::Texture(Device* device, const TextureDescriptor* descriptor, TextureSta
 Texture::~Texture() {}
 
 void Texture::DestroyImpl() {
+    // External texture destroyed before it was ever used.
+    // Synchronize it now so its signal fence can later be exported.
+    // Otherwise, it won't be possible to export a signal fence value after the texture is
+    // destroyed.
+    if (IsExternalTexturePendingAcquire()) {
+        Device* device = ToBackend(GetDevice());
+        CommandRecordingContext* commandContext;
+        if (!device->ConsumedError(device->GetPendingCommandContext(), &commandContext)) {
+            commandContext->AddToSharedTextureList(this);
+            device->ConsumedError(commandContext->ExecuteCommandList(device));
+        }
+    }
+
     TextureBase::DestroyImpl();
 
     Device* device = ToBackend(GetDevice());
@@ -683,23 +696,18 @@ void Texture::DestroyImpl() {
     mD3D11on12Resource = nullptr;
 }
 
+bool Texture::IsExternalTexturePendingAcquire() const {
+    return mResourceAllocation.GetInfo().mMethod == AllocationMethod::kExternal &&
+           !mSignalFenceValue.has_value();
+}
+
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
     ASSERT(mD3D11on12Resource == nullptr);
+    // Destroy the texture so it can't be used again. This will also ensure that
+    // the fence has been signaled and is ready for export.
+    Destroy();
 
-    // Synchronize if texture access wasn't synchronized already due to ExecuteCommandLists.
-    if (!mSignalFenceValue.has_value()) {
-        // Needed to ensure that command allocator doesn't get destroyed before pending commands
-        // are submitted due to calling NextSerial(). No-op if there are no pending commands.
-        DAWN_TRY(ToBackend(GetDevice())->ExecutePendingCommandContext());
-        // If there were pending commands that used this texture mSignalFenceValue will be set,
-        // but if it's still not set, generate a signal fence after waiting on wait fences.
-        if (!mSignalFenceValue.has_value()) {
-            DAWN_TRY(SynchronizeImportedTextureBeforeUse());
-            DAWN_TRY(SynchronizeImportedTextureAfterUse());
-        }
-        DAWN_TRY(ToBackend(GetDevice())->NextSerial());
-        ASSERT(mSignalFenceValue.has_value());
-    }
+    DAWN_INVALID_IF(!mSignalFenceValue.has_value(), "%s missing signal fence value.", this);
 
     ExecutionSerial ret = mSignalFenceValue.value();
     ASSERT(ret <= GetDevice()->GetLastSubmittedCommandSerial());

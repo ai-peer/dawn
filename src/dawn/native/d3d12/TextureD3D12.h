@@ -56,6 +56,8 @@ class Texture final : public TextureBase {
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D12Resource> d3d12Texture);
 
+    bool IsExternalTexturePendingAcquire() const;
+
     // For external textures, returns the Device internal fence's value associated with the last
     // ExecuteCommandLists that used this texture. If nullopt is returned, the texture wasn't used
     // or keyed mutex is used instead of fences for synchronization.
