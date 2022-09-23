@@ -1017,6 +1017,198 @@ TEST_P(D3D12SharedHandleUsageTests, CallWriteBufferBeforeDestroyingExternalImage
     EXPECT_BUFFER_U32_EQ(kExpected, buffer, 0);
 }
 
+// Test it is valid to export a texture after it is destroyed, then import it and see the contents
+// just prior to destroy.
+TEST_P(D3D12SharedHandleUsageTests, EndAccessAfterTextureDestroy) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Wrap a D3D11 as a wgpu::Texture.
+    wgpu::Texture texture;
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage;
+    WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
+                     &externalImage);
+
+    // Clear it to green.
+    ASSERT_NE(texture.Get(), nullptr);
+    ClearImage(texture.Get(), wgpu::Color{0.0f, 1.0f, 0.0f, 1.0f}, device);
+
+    // Destroy the texture and then end access.
+    texture.Destroy();
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    externalImage->EndAccess(texture.Get(), &signalFence);
+
+    // Begin access on the texture again, waiting on the signal fence.
+    dawn::native::d3d12::ExternalImageDXGIBeginAccessDescriptor externalAccessDesc;
+    externalAccessDesc.isInitialized = true;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
+    externalAccessDesc.waitFences.push_back(signalFence);
+
+    texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc));
+
+    // Check that the texture contents are green.
+    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(0, 0xFF, 0, 0xFF), texture.Get(), 0, 0);
+}
+
+// Test it is valid to end access after the device is destroyed, then import it and see the
+// contents just prior to destroy.
+TEST_P(D3D12SharedHandleUsageTests, EndAccessAfterDeviceDestroy) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Make two devices.
+    wgpu::Device device1 = CreateDevice();
+    wgpu::Device device2 = CreateDevice();
+
+    // Create a d3d11 texture
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    HRESULT hr = mD3d11Device->CreateTexture2D(&baseD3dDescriptor, nullptr, &d3d11Texture);
+    ASSERT_EQ(hr, S_OK);
+
+    // Create an external image on device1.
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage =
+        CreateExternalImage(device1.Get(), d3d11Texture.Get(), &baseDawnDescriptor);
+    ASSERT_NE(externalImage, nullptr);
+
+    // Wrap it as a wgpu::Texture.
+    dawn::native::d3d12::ExternalImageDXGIBeginAccessDescriptor externalAccessDesc;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
+    wgpu::Texture texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc));
+
+    // Clear it to green.
+    ASSERT_NE(texture.Get(), nullptr);
+    ClearImage(texture.Get(), wgpu::Color{0.0f, 1.0f, 0.0f, 1.0f}, device1);
+
+    // Destroy the device and then end access.
+    device1.Destroy();
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    externalImage->EndAccess(texture.Get(), &signalFence);
+
+    // Recreate the external image with another device.
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage2 =
+        CreateExternalImage(device2.Get(), d3d11Texture.Get(), &baseDawnDescriptor);
+
+    // Begin access on the texture again, waiting on the signal fence.
+    externalAccessDesc = {};
+    externalAccessDesc.isInitialized = true;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
+    externalAccessDesc.waitFences.push_back(signalFence);
+
+    texture = wgpu::Texture::Acquire(externalImage2->BeginAccess(&externalAccessDesc));
+
+    // Check that the texture contents are green.
+    EXPECT_TEXTURE_EQ(device2, utils::RGBA8(0, 0xFF, 0, 0xFF), texture.Get(), {0, 0});
+}
+
+// Test it is invalid to end access on a texture after the device is lost.
+TEST_P(D3D12SharedHandleUsageTests, EndAccessAfterDeviceLost) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Wrap a D3D11 as a wgpu::Texture.
+    wgpu::Texture texture;
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage;
+    WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
+                     &externalImage);
+
+    // Clear it to green.
+    ASSERT_NE(texture.Get(), nullptr);
+    ClearImage(texture.Get(), wgpu::Color{0.0f, 1.0f, 0.0f, 1.0f}, device);
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    ASSERT_DEVICE_ERROR(externalImage->EndAccess(texture.Get(), &signalFence));
+}
+
+// Test it is invalid to end access on a destroyed texture after the device is lost.
+TEST_P(D3D12SharedHandleUsageTests, EndAccessDestroyedAfterDeviceLost) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Wrap a D3D11 as a wgpu::Texture.
+    wgpu::Texture texture;
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage;
+    WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
+                     &externalImage);
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    // Destroy the texture.
+    texture.Destroy();
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    ASSERT_DEVICE_ERROR(externalImage->EndAccess(texture.Get(), &signalFence));
+}
+
+// Test it is invalid to end access on an unused texture after the device is lost.
+TEST_P(D3D12SharedHandleUsageTests, EndAccessUnusedAfterDeviceLost) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Wrap a D3D11 as a wgpu::Texture.
+    wgpu::Texture texture;
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage;
+    WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
+                     &externalImage);
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    ASSERT_DEVICE_ERROR(externalImage->EndAccess(texture.Get(), &signalFence));
+}
+
+// Test that an intermediate BeginAccess+EndAccess preserves the textures contents and results
+// may be read with proper synchronization.
+TEST_P(D3D12SharedHandleUsageTests, BeginAccessEndAccessUnused) {
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+    // Make another device to read back the contents.
+    wgpu::Device device2 = CreateDevice();
+
+    // Wrap a D3D11 as a wgpu::Texture.
+    wgpu::Texture texture;
+    ComPtr<ID3D11Texture2D> d3d11Texture;
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage;
+    WrapSharedHandle(&baseDawnDescriptor, &baseD3dDescriptor, &texture, &d3d11Texture,
+                     &externalImage);
+
+    // Clear it to green.
+    ASSERT_NE(texture.Get(), nullptr);
+    ClearImage(texture.Get(), wgpu::Color{0.0f, 1.0f, 0.0f, 1.0f}, device);
+
+    dawn::native::d3d12::ExternalImageDXGIFenceDescriptor signalFence;
+    externalImage->EndAccess(texture.Get(), &signalFence);
+
+    // Begin and end access without doing anything.
+    dawn::native::d3d12::ExternalImageDXGIBeginAccessDescriptor externalAccessDesc = {};
+    externalAccessDesc.isInitialized = true;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
+    externalAccessDesc.waitFences.push_back(signalFence);
+
+    texture = wgpu::Texture::Acquire(externalImage->BeginAccess(&externalAccessDesc));
+    signalFence = {};
+    externalImage->EndAccess(texture.Get(), &signalFence);
+
+    // Create the external image on another device.
+    std::unique_ptr<dawn::native::d3d12::ExternalImageDXGI> externalImage2 =
+        CreateExternalImage(device2.Get(), d3d11Texture.Get(), &baseDawnDescriptor);
+
+    // Begin access on the texture, waiting on the signal fence.
+    externalAccessDesc = {};
+    externalAccessDesc.isInitialized = true;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
+    externalAccessDesc.waitFences.push_back(signalFence);
+    texture = wgpu::Texture::Acquire(externalImage2->BeginAccess(&externalAccessDesc));
+
+    // Check that the texture contents are green.
+    EXPECT_TEXTURE_EQ(device2, utils::RGBA8(0, 0xFF, 0, 0xFF), texture.Get(), {0, 0});
+}
+
 DAWN_INSTANTIATE_TEST_P(D3D12SharedHandleValidation,
                         {D3D12Backend()},
                         {SyncMode::kKeyedMutex, SyncMode::kFence});

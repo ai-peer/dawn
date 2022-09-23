@@ -61,7 +61,6 @@ bool ExternalImageDXGIImpl::IsValid() const {
 void ExternalImageDXGIImpl::Destroy() {
     if (IsInList()) {
         RemoveFromList();
-        mBackendDevice = nullptr;
         mD3D12Resource = nullptr;
         mD3D11on12ResourceCache = nullptr;
     }
@@ -131,12 +130,13 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     Texture* backendTexture = ToBackend(FromAPI(texture));
     ASSERT(backendTexture != nullptr);
 
+    ExecutionSerial fenceValue;
+    if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {
+        dawn::ErrorLog() << "D3D12 end access failed";
+        return;
+    }
+
     if (mUseFenceSynchronization) {
-        ExecutionSerial fenceValue;
-        if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {
-            dawn::ErrorLog() << "D3D12 fence end access failed";
-            return;
-        }
         signalFence->fenceHandle = mBackendDevice->GetFenceHandle();
         signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
     }

@@ -82,10 +82,6 @@ WGPUTexture ExternalImageDXGI::BeginAccess(
 
 void ExternalImageDXGI::EndAccess(WGPUTexture texture,
                                   ExternalImageDXGIFenceDescriptor* signalFence) {
-    if (!IsValid()) {
-        dawn::ErrorLog() << "Cannot use external image after device destruction";
-        return;
-    }
     mImpl->EndAccess(texture, signalFence);
 }
 
