@@ -241,7 +241,7 @@ TEST_P(VulkanImageWrappingValidationTests, NormalTextureSignalSemaphoreExport) {
     ASSERT_EQ(exportInfo.semaphores.size(), 0u);
 }
 
-// Test an error occurs if we try to export the signal semaphore from a destroyed texture
+// Test it is valid to export the signal semaphore from a destroyed texture
 TEST_P(VulkanImageWrappingValidationTests, DestroyedTextureSignalSemaphoreExport) {
     wgpu::Texture texture =
         WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {}, true, true);
@@ -249,9 +249,9 @@ TEST_P(VulkanImageWrappingValidationTests, DestroyedTextureSignalSemaphoreExport
     texture.Destroy();
 
     ExternalImageExportInfoVkForTesting exportInfo;
-    ASSERT_DEVICE_ERROR(bool success = mBackend->ExportImage(texture, &exportInfo));
-    ASSERT_FALSE(success);
-    ASSERT_EQ(exportInfo.semaphores.size(), 0u);
+    bool success = mBackend->ExportImage(texture, &exportInfo);
+    ASSERT_TRUE(success);
+    ASSERT_NE(exportInfo.semaphores.size(), 0u);
 }
 
 // Fixture to test using external memory textures through different usages.
@@ -876,6 +876,146 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
         utils::RGBA8(13, 117, 24, 90), renderPass.color, 1, 1);
 
     IgnoreSignalSemaphore(texture);
+}
+
+// Test it is valid to export a texture after it is destroyed, then import it and see the contents
+// just prior to destroy.
+TEST_P(VulkanImageWrappingUsageTests, ExportAfterTextureDestroy) {
+    // Import the image on |secondDevice|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Clear |wrappedTexture| on |secondDevice|
+    ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
+
+    // Destroy the texture.
+    wrappedTexture.Destroy();
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, &exportInfo));
+
+    // Import the image to |device|, making sure we wait on signalFd
+    wgpu::Texture nextWrappedTexture = WrapVulkanImage(
+        device, &defaultDescriptor, defaultTexture.get(), std::move(exportInfo.semaphores),
+        exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
+
+    // Verify |device| sees the changes from |secondDevice|
+    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
+
+    IgnoreSignalSemaphore(nextWrappedTexture);
+}
+
+// Test it is valid to export a texture after the device is destroyed, then import it and see the
+// contents just prior to destroy.
+TEST_P(VulkanImageWrappingUsageTests, ExportAfterDeviceDestroy) {
+    // Import the image on |secondDevice|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Clear |wrappedTexture| on |secondDevice|
+    ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
+
+    // Destroy the device.
+    secondDevice.Destroy();
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, &exportInfo));
+
+    // Import the image to |device|, making sure we wait on signalFd
+    wgpu::Texture nextWrappedTexture = WrapVulkanImage(
+        device, &defaultDescriptor, defaultTexture.get(), std::move(exportInfo.semaphores),
+        exportInfo.releasedOldLayout, exportInfo.releasedNewLayout);
+
+    // Verify |device| sees the changes from |secondDevice|
+    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), nextWrappedTexture, 0, 0);
+
+    IgnoreSignalSemaphore(nextWrappedTexture);
+}
+
+// Test it is invalid to export a texture after the device is lost.
+TEST_P(VulkanImageWrappingUsageTests, ExportAfterDeviceLost) {
+    // Import the image on |device|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Clear |wrappedTexture| on |device|
+    ClearImage(device, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_DEVICE_ERROR(EXPECT_FALSE(mBackend->ExportImage(wrappedTexture, &exportInfo)));
+}
+
+// Test it is invalid to export a destroyed texture after the device is lost.
+TEST_P(VulkanImageWrappingUsageTests, ExportDestroyedAfterDeviceLost) {
+    // Import the image on |device|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    // Destroy the texture.
+    wrappedTexture.Destroy();
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_DEVICE_ERROR(EXPECT_FALSE(mBackend->ExportImage(wrappedTexture, &exportInfo)));
+}
+
+// Test it is invalid to export an unused texture after the device is lost.
+TEST_P(VulkanImageWrappingUsageTests, ExportUnusedAfterDeviceLost) {
+    // Import the image on |device|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Lose the device.
+    LoseDeviceForTesting(device);
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_DEVICE_ERROR(EXPECT_FALSE(mBackend->ExportImage(wrappedTexture, &exportInfo)));
+}
+
+// Test that an intermediate import+export preserves the textures contents and results
+// may be read with proper synchronization.
+TEST_P(VulkanImageWrappingUsageTests, ImportExportUnused) {
+    // Import the image on |secondDevice|
+    wgpu::Texture wrappedTexture =
+        WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(), {},
+                        VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL);
+
+    // Clear |wrappedTexture| on |secondDevice|
+    ClearImage(secondDevice, wrappedTexture, {1 / 255.0f, 2 / 255.0f, 3 / 255.0f, 4 / 255.0f});
+
+    // Export the texture.
+    ExternalImageExportInfoVkForTesting exportInfo;
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, &exportInfo));
+
+    // Import, then export again without doing anything.
+    wrappedTexture = WrapVulkanImage(secondDevice, &defaultDescriptor, defaultTexture.get(),
+                                     std::move(exportInfo.semaphores), exportInfo.releasedOldLayout,
+                                     exportInfo.releasedNewLayout);
+    exportInfo = {};
+    ASSERT_TRUE(mBackend->ExportImage(wrappedTexture, &exportInfo));
+
+    // Import the image to |device|, making sure we wait on signalFd
+    wrappedTexture = WrapVulkanImage(device, &defaultDescriptor, defaultTexture.get(),
+                                     std::move(exportInfo.semaphores), exportInfo.releasedOldLayout,
+                                     exportInfo.releasedNewLayout);
+
+    // Verify |device| sees the changes from |secondDevice|
+    EXPECT_PIXEL_RGBA8_EQ(utils::RGBA8(1, 2, 3, 4), wrappedTexture, 0, 0);
 }
 
 DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingValidationTests,

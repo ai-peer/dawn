@@ -64,7 +64,6 @@ bool ExternalImageDXGIImpl::IsValid() const {
 void ExternalImageDXGIImpl::Destroy() {
     if (IsInList()) {
         RemoveFromList();
-        mBackendDevice = nullptr;
         mD3D12Resource = nullptr;
         mD3D11on12ResourceCache = nullptr;
     }
@@ -114,7 +113,7 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
         }
     } else {
         d3d11on12Resource = mD3D11on12ResourceCache->GetOrCreateD3D11on12Resource(
-            mBackendDevice, mD3D12Resource.Get());
+            mBackendDevice.Get(), mD3D12Resource.Get());
         if (d3d11on12Resource == nullptr) {
             dawn::ErrorLog() << "Unable to create 11on12 resource for external image";
             return nullptr;
@@ -134,12 +133,13 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     Texture* backendTexture = ToBackend(FromAPI(texture));
     ASSERT(backendTexture != nullptr);
 
+    ExecutionSerial fenceValue;
+    if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {
+        dawn::ErrorLog() << "D3D12 fence end access failed";
+        return;
+    }
+
     if (mFenceHandle) {
-        ExecutionSerial fenceValue;
-        if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {
-            dawn::ErrorLog() << "D3D12 fence end access failed";
-            return;
-        }
         signalFence->fenceHandle = mFenceHandle;
         signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
     }
