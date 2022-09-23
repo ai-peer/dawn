@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "a7244d6c84d3a49ca627ee9d8027591f5a06c929",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b7358e6_831e644e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-23T14:35:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a7244d6c84d3a49ca627ee9d8027591f5a06c929",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19b4f0b_22d7099e",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-23T14:35:22Z",
+      "side": 1,
+      "message": "maybe... DisjointVulkanAspects?\nit may fit nicely when we do disjoint multiplanar at some point",
+      "range": {
+        "startLine": 69,
+        "startChar": 11,
+        "endLine": 69,
+        "endChar": 30
+      },
+      "revId": "a7244d6c84d3a49ca627ee9d8027591f5a06c929",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
