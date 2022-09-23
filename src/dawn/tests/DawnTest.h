@@ -543,7 +543,7 @@ class DawnTestBase {
 
     void WaitABit(wgpu::Device = nullptr);
     void FlushWire();
-    void WaitForAllOperations();
+    void WaitForAllOperations(wgpu::Device = nullptr);
 
     bool SupportsFeatures(const std::vector<wgpu::FeatureName>& features);
 
