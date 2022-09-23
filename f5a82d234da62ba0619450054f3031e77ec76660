@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "f5a82d234da62ba0619450054f3031e77ec76660",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c711a69_c9fbd1e6",
+        "filename": "src/dawn/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-23T19:50:08Z",
+      "side": 1,
+      "message": "unit. I think a more descriptive test name would be useful here since the bug link is also detailed in the comment. Maybe something like `UnusedAspectWithReadOnly`?",
+      "range": {
+        "startLine": 262,
+        "startChar": 37,
+        "endLine": 262,
+        "endChar": 55
+      },
+      "revId": "f5a82d234da62ba0619450054f3031e77ec76660",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
