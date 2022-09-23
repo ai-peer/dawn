@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b147022_917b541b",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-23T18:24:04Z",
+      "side": 1,
+      "message": "For D3D12_NVIDIA_Quadro_RTX_4000, the generated HLSL:\n\n-------vertex-------------\n\ncbuffer cbuffer_tint_symbol_3 : register(b0, space5) {\n  uint4 tint_symbol_3[1];\n};\n\nstruct tint_symbol_4 {\n  float tint_symbol_5;\n  uint tint_symbol_6;\n  float4 tint_symbol_7;\n};\nstruct tint_symbol_12 {\n  uint tint_symbol_9 : SV_VertexID;\n};\nstruct tint_symbol_13 {\n  float tint_symbol_5 : TEXCOORD1;\n  nointerpolation uint tint_symbol_6 : TEXCOORD2;\n  float4 tint_symbol_7 : SV_Position;\n};\n\ntint_symbol_4 tint_symbol_8_inner(uint tint_symbol_9) {\n  float2 tint_symbol_7[3] \u003d {float2(-1.0f, 3.0f), float2(-1.0f, -3.0f), float2(3.0f, 0.0f)};\n  tint_symbol_4 tint_symbol_10 \u003d (tint_symbol_4)0;\n  tint_symbol_10.tint_symbol_5 \u003d 9.899999619f;\n  tint_symbol_10.tint_symbol_6 \u003d 9u;\n  tint_symbol_10.tint_symbol_7 \u003d float4(tint_symbol_7[min((tint_symbol_9 + tint_symbol_3[0].x), 2u)], 0.0f, 1.0f);\n  return tint_symbol_10;\n}\n\ntint_symbol_13 tint_symbol_8(tint_symbol_12 tint_symbol_11) {\n  const tint_symbol_4 inner_result \u003d tint_symbol_8_inner(tint_symbol_11.tint_symbol_9);\n  tint_symbol_13 wrapper_result \u003d (tint_symbol_13)0;\n  wrapper_result.tint_symbol_5 \u003d inner_result.tint_symbol_5;\n  wrapper_result.tint_symbol_6 \u003d inner_result.tint_symbol_6;\n  wrapper_result.tint_symbol_7 \u003d inner_result.tint_symbol_7;\n  return wrapper_result;\n}\n\n-----fragment-------------\n\nstruct tint_symbol_1 {\n  float4 value : SV_Target0;\n};\n\nfloat4 tint_symbol_inner() {\n  return (1.0f).xxxx;\n}\n\ntint_symbol_1 tint_symbol() {\n  const float4 inner_result \u003d tint_symbol_inner();\n  tint_symbol_1 wrapper_result \u003d (tint_symbol_1)0;\n  wrapper_result.value \u003d inner_result;\n  return wrapper_result;\n}\n\n\n\nThe unused vertex outputs are untrimmed but it seems to run fine on D3D backends. Maybe we don\u0027t need the tint transform to get rid of them",
+      "revId": "3c099879676de833f8069c69d70bbb0748a0b477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
