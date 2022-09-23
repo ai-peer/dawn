@@ -49,7 +49,8 @@ MaybeError AdapterBase::Initialize() {
         "backend=%s type=%s)",
         mName, mDriverDescription, mVendorId, mDeviceId, mBackend, mAdapterType);
 
-    // Enforce internal Dawn constants.
+    // Enforce internal Dawn constants for some limits to ensure they don't go over fixed-size
+    // arrays in Dawn's internal code.
     mLimits.v1.maxVertexBufferArrayStride =
         std::min(mLimits.v1.maxVertexBufferArrayStride, kMaxVertexBufferArrayStride);
     mLimits.v1.maxColorAttachments =
@@ -59,6 +60,8 @@ MaybeError AdapterBase::Initialize() {
         std::min(mLimits.v1.maxVertexAttributes, uint32_t(kMaxVertexAttributes));
     mLimits.v1.maxVertexBuffers =
         std::min(mLimits.v1.maxVertexBuffers, uint32_t(kMaxVertexBuffers));
+    // maxBufferSize isn't used to size any arrays in Dawn, so we don't do the enforce.
+    mLimits.v1.maxBufferSize = mLimits.v1.maxBufferSize;
     mLimits.v1.maxInterStageShaderComponents =
         std::min(mLimits.v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
     mLimits.v1.maxSampledTexturesPerShaderStage =
