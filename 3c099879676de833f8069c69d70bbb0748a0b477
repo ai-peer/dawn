@@ -61,6 +61,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e1b1171_15b7ed0a",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 875,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-23T20:31:37Z",
+      "side": 1,
+      "message": "Reasoning is that the spec used to have a \"prefix mechanism\" because of D3D. where if I remember correctly, the fragment stage had to use a prefix of the vertex stage.\n\n\nthe empty set is always a prefix of any vertex location outputs - so that could be why this is passing.",
+      "parentUuid": "1a8c11ec_47a109b7",
+      "revId": "3c099879676de833f8069c69d70bbb0748a0b477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95510cfe_25ace54e",
         "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
         "patchSetId": 3
