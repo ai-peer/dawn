@@ -89,6 +89,14 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         }
     }
 
+    bool SupportsTestParams(const TestParams& params) const override {
+        // Even though this backend doesn't decide on creation whether the image should use
+        // dedicated allocation, it still supports all options of NeedsDedicatedAllocation so we
+        // test them.
+        return !params.useDedicatedAllocation ||
+               mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);
+    }
+
     std::unique_ptr<ExternalTexture> CreateTexture(uint32_t width,
                                                    uint32_t height,
                                                    wgpu::TextureFormat format,
@@ -195,4 +203,5 @@ std::unique_ptr<VulkanImageWrappingTestBackend> VulkanImageWrappingTestBackend::
     backend->CreateGbmDevice();
     return backend;
 }
+
 }  // namespace dawn::native::vulkan
