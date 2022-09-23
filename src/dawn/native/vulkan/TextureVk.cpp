@@ -828,6 +828,10 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
     return {};
 }
 
+bool Texture::IsExternalTexturePendingAcquire() const {
+    return mExternalState == ExternalState::PendingAcquire;
+}
+
 void Texture::TransitionEagerlyForExport(CommandRecordingContext* recordingContext) {
     mExternalState = ExternalState::EagerlyTransitioned;
 
@@ -850,10 +854,6 @@ void Texture::TransitionEagerlyForExport(CommandRecordingContext* recordingConte
     // importing queue.
     barrier.dstAccessMask = 0;
 
-    if (mDesiredExportLayout != VK_IMAGE_LAYOUT_UNDEFINED) {
-        barrier.newLayout = mDesiredExportLayout;
-    }
-
     Device* device = ToBackend(GetDevice());
     barrier.srcQueueFamilyIndex = device->GetGraphicsQueueFamily();
     barrier.dstQueueFamilyIndex = mExportQueueFamilyIndex;
@@ -871,48 +871,44 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
                                           ExternalSemaphoreHandle* handle,
                                           VkImageLayout* releasedOldLayout,
                                           VkImageLayout* releasedNewLayout) {
-    DAWN_INVALID_IF(mExternalState == ExternalState::Released,
-                    "Can't export a signal semaphore from signaled texture %s.", this);
+    DAWN_INVALID_IF(mExternalState == ExternalState::InternalOnly,
+                    "External state was InternalOnly.");
 
-    DAWN_INVALID_IF(mExternalAllocation == VK_NULL_HANDLE,
-                    "Can't export a signal semaphore from destroyed or non-external texture %s.",
-                    this);
+    DAWN_INVALID_IF(mExternalState == ExternalState::Released, "External state was Released.");
 
-    // Release the texture
+    DAWN_INVALID_IF(desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED,
+                    "desiredLayout (%d) was not VK_IMAGE_LAYOUT_UNDEFINED", desiredLayout);
+
+    // Mark the texture released
     mExternalState = ExternalState::Released;
 
+    // Get the texture layout.
     ASSERT(GetNumMipLevels() == 1 && GetArrayLayers() == 1);
     wgpu::TextureUsage usage = mSubresourceLastUsages.Get(GetDisjointVulkanAspects(), 0, 0);
-
     VkImageLayout layout = VulkanImageLayout(this, usage);
 
-    // Write out the layouts and signal semaphore
+    // Destroy the texture so it can't be used again. This will also ensure that
+    // the texture has been transitioned and ready for export.
+    Destroy();
+    DAWN_INVALID_IF(mExternalSemaphoreHandle == kNullExternalSemaphoreHandle,
+                    "External semaphore handle was missing.");
+
+    // Write out the layouts. There is no layout transition.
     *releasedOldLayout = layout;
-    *releasedNewLayout = (desiredLayout == VK_IMAGE_LAYOUT_UNDEFINED ? layout : desiredLayout);
+    *releasedNewLayout = layout;
 
-    mDesiredExportLayout = desiredLayout;
-
-    // We have to manually trigger a transition if the texture hasn't been actually used, or the
-    // desired layout is not VK_IMAGE_LAYOUT_UNDEFINED.
-    // TODO(dawn:1509): Avoid the empty submit.
-    if (mExternalSemaphoreHandle == kNullExternalSemaphoreHandle ||
-        desiredLayout != VK_IMAGE_LAYOUT_UNDEFINED) {
-        Device* device = ToBackend(GetDevice());
-        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-        recordingContext->externalTexturesForEagerTransition.insert(this);
-        DAWN_TRY(device->SubmitPendingCommands());
-    }
-    ASSERT(mExternalSemaphoreHandle != kNullExternalSemaphoreHandle);
-
+    // Acquire the external semaphore handle and write it out.
     *handle = mExternalSemaphoreHandle;
     mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
-
-    // Destroy the texture so it can't be used again
-    Destroy();
     return {};
 }
 
-Texture::~Texture() {}
+Texture::~Texture() {
+    if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
+        external_semaphore::Service::CloseHandle(mExternalSemaphoreHandle);
+    }
+    mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
+}
 
 void Texture::SetLabelHelper(const char* prefix) {
     SetDebugName(ToBackend(GetDevice()), mHandle, prefix, GetLabel());
@@ -923,6 +919,15 @@ void Texture::SetLabelImpl() {
 }
 
 void Texture::DestroyImpl() {
+    // External texture destroyed before it was ever used. Transition it now so it can later be
+    // exported.
+    if (IsExternalTexturePendingAcquire()) {
+        Device* device = ToBackend(GetDevice());
+        CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+        recordingContext->externalTexturesForEagerTransition.insert(this);
+        device->ConsumedError(device->SubmitPendingCommands());
+    }
+
     if (GetTextureState() == TextureState::OwnedInternal) {
         Device* device = ToBackend(GetDevice());
 
@@ -940,11 +945,6 @@ void Texture::DestroyImpl() {
 
         mHandle = VK_NULL_HANDLE;
         mExternalAllocation = VK_NULL_HANDLE;
-
-        if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
-            device->GetExternalSemaphoreService()->CloseHandle(mExternalSemaphoreHandle);
-        }
-        mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
     }
     // For Vulkan, we currently run the base destruction code after the internal changes because
     // of the dependency on the texture state which the base code overwrites too early.
@@ -1333,8 +1333,7 @@ void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* recor
 
 void Texture::UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle) {
     if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
-        Device* device = ToBackend(GetDevice());
-        device->GetExternalSemaphoreService()->CloseHandle(mExternalSemaphoreHandle);
+        external_semaphore::Service::CloseHandle(mExternalSemaphoreHandle);
     }
     mExternalSemaphoreHandle = handle;
 }
