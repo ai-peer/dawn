@@ -134,6 +134,7 @@ static constexpr std::array<DeviceExtInfo, kDeviceExtCount> sDeviceExtInfos{{
     //
     {DeviceExt::BindMemory2, "VK_KHR_bind_memory2", VulkanVersion_1_1},
     {DeviceExt::Maintenance1, "VK_KHR_maintenance1", VulkanVersion_1_1},
+    {DeviceExt::Maintenance3, "VK_KHR_maintenance3", VulkanVersion_1_1},
     {DeviceExt::StorageBufferStorageClass, "VK_KHR_storage_buffer_storage_class",
      VulkanVersion_1_1},
     {DeviceExt::GetPhysicalDeviceProperties2, "VK_KHR_get_physical_device_properties2",
@@ -210,6 +211,7 @@ DeviceExtSet EnsureDependencies(const DeviceExtSet& advertisedExts,
             case DeviceExt::BindMemory2:
             case DeviceExt::GetMemoryRequirements2:
             case DeviceExt::Maintenance1:
+            case DeviceExt::Maintenance3:
             case DeviceExt::ImageFormatList:
             case DeviceExt::StorageBufferStorageClass:
                 hasDependencies = true;

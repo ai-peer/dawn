@@ -76,6 +76,7 @@ enum class DeviceExt {
     // Promoted to 1.1
     BindMemory2,
     Maintenance1,
+    Maintenance3,
     StorageBufferStorageClass,
     GetPhysicalDeviceProperties2,
     GetMemoryRequirements2,

@@ -10,8 +10,9 @@ Vulkan is supported as best effort on other platforms (e.g. Windows and macOS).
 
 **Required features**: `depthBiasClamp`, `fragmentStoresAndAtomics`, `fullDrawIndexUint32`, `imageCubeArray`, `independentBlend`, `sampleRateShading`, and either `textureCompressionBC` or both of `textureCompressionETC` and `textureCompressionASTC_LDR`.
 
-**Required limites**: they are too detailed to describe here, but in general should be wildly supported.
+**Required limits**: they are too detailed to describe here, but in general should be wildly supported.
 See the [WebGPU limits](https://gpuweb.github.io/gpuweb/#limits) that mostly correspond to Vulkan limits.
+(`VK_KHR_maintenance3` for maxBufferSize)
 
 **Operating system support**:
 

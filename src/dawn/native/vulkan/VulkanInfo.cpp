@@ -223,7 +223,12 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
 
     VkPhysicalDeviceProperties2 properties2 = {};
     properties2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2;
-    features2.pNext = nullptr;
+    // properties2.pNext = nullptr;
+
+    VkPhysicalDeviceMaintenance3Properties propertiesMaintenance3 = {};
+    propertiesMaintenance3.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES;
+    properties2.pNext = &propertiesMaintenance3;
+
     PNextChainBuilder propertiesChain(&properties2);
 
     if (info.extensions[DeviceExt::ShaderFloat16Int8]) {
