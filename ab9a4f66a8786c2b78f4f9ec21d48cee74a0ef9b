@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd2e128_b3bc8799",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-23T05:20:37Z",
+      "side": 1,
+      "message": "A tiny but important patch for the issue. PTAL. \n\nThe previous driver version 101.1960 I got from Intel driver team is incorrect. It does contain the driver fix for array texture corruption issue but it is not the first version with the driver fix.\n\nRecently I downloaded multiple Intel Graphics drivers for my local Windows machine and I can switch among them. I found that version 101.1692 can fix the issue already, which is a little bit (about one month) earlier than 101.1960. So I escalated to driver team in order to get the very first version. Intel driver folks talked with PMs, etc. It turned out that 101.1692 is indeed the first version released with the fix.",
+      "revId": "ab9a4f66a8786c2b78f4f9ec21d48cee74a0ef9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
