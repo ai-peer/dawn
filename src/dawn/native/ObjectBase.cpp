@@ -62,6 +62,26 @@ void ApiObjectList::Destroy() {
     }
 }
 
+ApiObjectList::Iterator ApiObjectList::Iterate() {
+    return Iterator(this);
+}
+
+ApiObjectList::Iterator::Iterator(ApiObjectList* list) : mList(list) {
+    mList->mMutex.lock();
+}
+
+ApiObjectList::Iterator::~Iterator() {
+    mList->mMutex.unlock();
+}
+
+LinkedListIterator<ApiObjectBase> ApiObjectList::Iterator::begin() {
+    return ::begin(mList->mObjects);
+}
+
+LinkedListIterator<ApiObjectBase> ApiObjectList::Iterator::end() {
+    return ::end(mList->mObjects);
+}
+
 ApiObjectBase::ApiObjectBase(DeviceBase* device, const char* label) : ObjectBase(device) {
     if (label) {
         mLabel = label;
