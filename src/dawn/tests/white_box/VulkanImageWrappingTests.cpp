@@ -27,9 +27,20 @@ namespace dawn::native::vulkan {
 using ExternalTexture = VulkanImageWrappingTestBackend::ExternalTexture;
 using ExternalSemaphore = VulkanImageWrappingTestBackend::ExternalSemaphore;
 
+void VulkanImageWrappingTestBackend::SetParam(const VulkanImageWrappingTestBackend::TestParams& params) {
+    mParams = params;
+}
+
+const VulkanImageWrappingTestBackend::TestParams& VulkanImageWrappingTestBackend::GetParam() const {
+    return mParams;
+}
+
 namespace {
 
-class VulkanImageWrappingTestBase : public DawnTest {
+using UseDedicatedAllocation = bool;
+DAWN_TEST_PARAM_STRUCT(ImageWrappingParams, UseDedicatedAllocation);
+
+class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParams>  {
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
         return {wgpu::FeatureName::DawnInternalUsages};
@@ -37,10 +48,15 @@ class VulkanImageWrappingTestBase : public DawnTest {
 
   public:
     void SetUp() override {
-        DawnTest::SetUp();
+        DawnTestWithParams::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         mBackend = VulkanImageWrappingTestBackend::Create(device);
+
+        VulkanImageWrappingTestBackend::TestParams params;
+        params.useDedicatedAllocation = GetParam().mUseDedicatedAllocation;
+        DAWN_TEST_UNSUPPORTED_IF(!mBackend->SupportsTestParams(params));
+        mBackend->SetParam(params);
 
         defaultDescriptor.dimension = wgpu::TextureDimension::e2D;
         defaultDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
@@ -56,13 +72,13 @@ class VulkanImageWrappingTestBase : public DawnTest {
 
     void TearDown() override {
         if (UsesWire()) {
-            DawnTest::TearDown();
+            DawnTestWithParams::TearDown();
             return;
         }
 
         defaultTexture = nullptr;
         mBackend = nullptr;
-        DawnTest::TearDown();
+        DawnTestWithParams::TearDown();
     }
 
     wgpu::Texture WrapVulkanImage(wgpu::Device dawnDevice,
@@ -868,7 +884,11 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
     IgnoreSignalSemaphore(texture);
 }
 
-DAWN_INSTANTIATE_TEST(VulkanImageWrappingValidationTests, VulkanBackend());
-DAWN_INSTANTIATE_TEST(VulkanImageWrappingUsageTests, VulkanBackend());
+// TODO add Yes, No, Detect to VkImageImport, test Yes, DetectYes, DetectNo, No to dedicated allocation testing.
+// TODO add suppression on Nvidia DetectYes because Nvidia is bugged :(
+// TODO adapt the other backends for the changes (supportsParams NOOOOOOO)
+// TODO then get it in Chromium, setting YES in externalVkImageBacking. See that it works? Lol
+DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingValidationTests, {VulkanBackend()}, {true, false});
+DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingUsageTests, {VulkanBackend()}, {true, false});
 
 }  // namespace dawn::native::vulkan

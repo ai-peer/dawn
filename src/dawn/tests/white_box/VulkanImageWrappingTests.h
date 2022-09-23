@@ -22,6 +22,7 @@
 // time to wrap it with vulkan_platform.h
 #include "dawn/common/vulkan_platform.h"
 
+#include "dawn/tests/DawnTest.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/native/VulkanBackend.h"
 #include "dawn/webgpu_cpp.h"
@@ -45,6 +46,13 @@ class VulkanImageWrappingTestBackend {
         virtual ~ExternalSemaphore() = default;
     };
 
+    struct TestParams {
+        bool useDedicatedAllocation = false;
+    };
+    void SetParam(const TestParams& params);
+    const TestParams& GetParam() const;
+    virtual bool SupportsTestParams(const TestParams& params) const = 0;
+
     virtual std::unique_ptr<ExternalTexture> CreateTexture(uint32_t width,
                                                            uint32_t height,
                                                            wgpu::TextureFormat format,
@@ -57,6 +65,9 @@ class VulkanImageWrappingTestBackend {
     virtual bool ExportImage(const wgpu::Texture& texture,
                              VkImageLayout layout,
                              ExternalImageExportInfoVkForTesting* exportInfo) = 0;
+
+  private:
+    TestParams mParams;
 };
 
 struct ExternalImageDescriptorVkForTesting : public ExternalImageDescriptorVk {
