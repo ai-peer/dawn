@@ -506,6 +506,13 @@ class DeviceBase : public RefCountedWithExternalCount {
     ExecutionSerial mLastSubmittedSerial = ExecutionSerial(0);
     ExecutionSerial mFutureSerial = ExecutionSerial(0);
 
+    // BeforeAPIDestroy is used to run any backend-specific cleanup before the rest of an
+    // unexceptional device.Destroy(). It is not run for device lost errors.
+    // Some backends use this to ensure that any unused imported textures are ready for export.
+    // After destruction, the device facilities required for export will no longer exist, and
+    // exporting will likely generate an error.
+    virtual MaybeError BeforeAPIDestroy();
+
     // DestroyImpl is used to clean up and release resources used by device, does not wait for
     // GPU or check errors.
     virtual void DestroyImpl() = 0;
