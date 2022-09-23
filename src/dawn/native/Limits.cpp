@@ -17,6 +17,7 @@
 #include <array>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 
 // clang-format off
@@ -58,7 +59,8 @@
     X(Maximum,                    maxComputeWorkgroupSizeX,   256,   256) \
     X(Maximum,                    maxComputeWorkgroupSizeY,   256,   256) \
     X(Maximum,                    maxComputeWorkgroupSizeZ,    64,    64) \
-    X(Maximum,            maxComputeWorkgroupsPerDimension, 65535, 65535)
+    X(Maximum,            maxComputeWorkgroupsPerDimension, 65535, 65535) \
+    X(Maximum,            maxBufferSize, 268435456, 268435456)
 // clang-format on
 
 #define LIMITS_EACH_GROUP(X)              \
