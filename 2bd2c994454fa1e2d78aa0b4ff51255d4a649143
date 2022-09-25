@@ -360,6 +360,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22f7ddd9_7dd94457",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-25T11:35:50Z",
+      "side": 1,
+      "message": "@Corentin @Austin\nI am not quite clear about the ideas you mentioned in crbug.com/dawn/1413. As Corentin now is back from his trip. Hopefully you may have time to help me understand them piece by piece with regards to this CL. I\u0027ve removed the DummySubmit() and added HasPendingCommands() for Vulkan backend firstly since your last review. Could you indicate me what\u0027re still missing in your view?",
+      "parentUuid": "9427e4af_ff91ce53",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
