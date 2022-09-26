@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "c7da42f22338615786a99b9682ac9870c53c8ff9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e3d7c6_c59c0baa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-26T17:38:19Z",
+      "side": 1,
+      "message": "This will need a CTS roll as the CTS has u32 as invalid at the moment.",
+      "revId": "c7da42f22338615786a99b9682ac9870c53c8ff9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
