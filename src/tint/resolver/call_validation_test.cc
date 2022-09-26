@@ -132,11 +132,11 @@ TEST_F(ResolverCallValidationTest, PointerArgument_ConstIdentExpr) {
     EXPECT_EQ(r()->error(), "12:34 error: cannot take the address of expression");
 }
 
-TEST_F(ResolverCallValidationTest, PointerArgument_NotIdentExprVar) {
+TEST_F(ResolverCallValidationTest, PointerArgument_AddressOfFunctionMember) {
     // struct S { m: i32; };
     // fn foo(p: ptr<function, i32>) {}
     // fn main() {
-    //   var v: S;
+    //   var v : S;
     //   foo(&v.m);
     // }
     auto* S = Structure("S", utils::Vector{
@@ -150,13 +150,10 @@ TEST_F(ResolverCallValidationTest, PointerArgument_NotIdentExprVar) {
              CallStmt(Call("foo", AddressOf(Source{{12, 34}}, MemberAccessor("v", "m")))),
          });
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: expected an address-of expression of a variable "
-              "identifier expression or a function parameter");
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverCallValidationTest, PointerArgument_AddressOfMemberAccessor) {
+TEST_F(ResolverCallValidationTest, PointerArgument_AddressOfLetMember) {
     // struct S { m: i32; };
     // fn foo(p: ptr<function, i32>) {}
     // fn main() {
@@ -221,12 +218,12 @@ TEST_F(ResolverCallValidationTest, PointerArgument_FunctionParamWithMain) {
          },
          ty.void_(),
          utils::Vector{
-             CallStmt(Call("foo", Expr("p"))),
+             CallStmt(Call("foo", "p")),
          });
     Func("main", utils::Empty, ty.void_(),
          utils::Vector{
              Decl(Var("v", ty.i32(), Expr(1_i))),
-             CallStmt(Call("foo", AddressOf(Expr("v")))),
+             CallStmt(Call("foo", AddressOf("v"))),
          },
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
@@ -241,59 +238,48 @@ TEST_F(ResolverCallValidationTest, LetPointer) {
     // fn main() {
     //   var v: i32;
     //   let p: ptr<function, i32> = &v;
-    //   var c: i32 = x(p);
+    //   x(p);
     // }
     Func("x",
          utils::Vector{
              Param("p", ty.pointer<i32>(ast::StorageClass::kFunction)),
          },
          ty.void_(), utils::Empty);
-    auto* v = Var("v", ty.i32());
-    auto* p = Let("p", ty.pointer(ty.i32(), ast::StorageClass::kFunction), AddressOf(v));
-    auto* c = Var("c", ty.i32(), Call("x", Expr(Source{{12, 34}}, p)));
     Func("main", utils::Empty, ty.void_(),
          utils::Vector{
-             Decl(v),
-             Decl(p),
-             Decl(c),
+             Decl(Var("v", ty.i32())),
+             Decl(Let("p", ty.pointer(ty.i32(), ast::StorageClass::kFunction), AddressOf("v"))),
+             CallStmt(Call("x", "p")),
          },
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: expected an address-of expression of a variable "
-              "identifier expression or a function parameter");
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverCallValidationTest, LetPointerPrivate) {
-    // let p: ptr<private, i32> = &v;
-    // fn foo(p : ptr<private, i32>) -> i32 {}
-    // var v: i32;
+    // fn foo(p : ptr<private, i32>) {}
+    // var v : i32;
     // @fragment
     // fn main() {
-    //   var c: i32 = foo(p);
+    //   let p : ptr<private, i32> = &v;
+    //   foo(p);
     // }
     Func("foo",
          utils::Vector{
              Param("p", ty.pointer<i32>(ast::StorageClass::kPrivate)),
          },
          ty.void_(), utils::Empty);
-    auto* v = GlobalVar("v", ty.i32(), ast::StorageClass::kPrivate);
-    auto* p = Let("p", ty.pointer(ty.i32(), ast::StorageClass::kPrivate), AddressOf(v));
-    auto* c = Var("c", ty.i32(), Call("foo", Expr(Source{{12, 34}}, p)));
+    GlobalVar("v", ty.i32(), ast::StorageClass::kPrivate);
     Func("main", utils::Empty, ty.void_(),
          utils::Vector{
-             Decl(p),
-             Decl(c),
+             Decl(Let("p", ty.pointer(ty.i32(), ast::StorageClass::kPrivate), AddressOf("v"))),
+             CallStmt(Call("foo", Expr(Source{{12, 34}}, "p"))),
          },
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              "12:34 error: expected an address-of expression of a variable "
-              "identifier expression or a function parameter");
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverCallValidationTest, CallVariable) {
