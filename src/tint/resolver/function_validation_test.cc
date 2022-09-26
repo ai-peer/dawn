@@ -1070,10 +1070,10 @@ INSTANTIATE_TEST_SUITE_P(ResolverTest,
                          testing::Values(TestParams{ast::AddressSpace::kNone, false},
                                          TestParams{ast::AddressSpace::kIn, false},
                                          TestParams{ast::AddressSpace::kOut, false},
-                                         TestParams{ast::AddressSpace::kUniform, false},
-                                         TestParams{ast::AddressSpace::kWorkgroup, false},
+                                         TestParams{ast::AddressSpace::kUniform, true},
+                                         TestParams{ast::AddressSpace::kWorkgroup, true},
                                          TestParams{ast::AddressSpace::kHandle, false},
-                                         TestParams{ast::AddressSpace::kStorage, false},
+                                         TestParams{ast::AddressSpace::kStorage, true},
                                          TestParams{ast::AddressSpace::kPrivate, true},
                                          TestParams{ast::AddressSpace::kFunction, true}));
 

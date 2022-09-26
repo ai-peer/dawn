@@ -851,15 +851,23 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
     }
 
     if (auto* ref = var->Type()->As<sem::Pointer>()) {
-        auto address_space = ref->AddressSpace();
-        if (!(address_space == ast::AddressSpace::kFunction ||
-              address_space == ast::AddressSpace::kPrivate) &&
-            IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreAddressSpace)) {
-            std::stringstream ss;
-            ss << "function parameter of pointer type cannot be in '" << address_space
-               << "' address space";
-            AddError(ss.str(), decl->source);
-            return false;
+        auto sc = ref->AddressSpace();
+        switch (sc) {
+            case ast::AddressSpace::kFunction:
+            case ast::AddressSpace::kPrivate:
+            case ast::AddressSpace::kStorage:
+            case ast::AddressSpace::kUniform:
+            case ast::AddressSpace::kWorkgroup:
+                break;
+            default:
+                if (IsValidationEnabled(decl->attributes,
+                                        ast::DisabledValidation::kIgnoreAddressSpace)) {
+                    std::stringstream ss;
+                    ss << "function parameter of pointer type cannot be in '" << sc
+                       << "' address space";
+                    AddError(ss.str(), decl->source);
+                    return false;
+                }
         }
     }
 
@@ -1707,33 +1715,33 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
             return false;
         }
 
-        if (param_type->Is<sem::Pointer>()) {
-            // https://gpuweb.github.io/gpuweb/wgsl/#function-restriction
-            // Each argument of pointer type to a user-defined function must have the same memory
-            // view as its root identifier.
-            // We can validate this by just comparing the store type of the argument with that of
-            // its root identifier, as these will match iff the memory view is the same.
-            auto* arg_store_type = arg_type->As<sem::Pointer>()->StoreType();
-            auto* root = call->Arguments()[i]->RootIdentifier();
-            auto* root_ptr_ty = root->Type()->As<sem::Pointer>();
-            auto* root_ref_ty = root->Type()->As<sem::Reference>();
-            TINT_ASSERT(Resolver, root_ptr_ty || root_ref_ty);
-            const sem::Type* root_store_type;
-            if (root_ptr_ty) {
-                root_store_type = root_ptr_ty->StoreType();
-            } else {
-                root_store_type = root_ref_ty->StoreType();
-            }
-            if (root_store_type != arg_store_type &&
-                IsValidationEnabled(param->Declaration()->attributes,
-                                    ast::DisabledValidation::kIgnoreInvalidPointerArgument)) {
-                AddError(
-                    "arguments of pointer type must not point to a subset of the originating "
-                    "variable",
-                    arg_expr->source);
-                return false;
-            }
-        }
+        // if (param_type->Is<sem::Pointer>()) {
+        //     // https://gpuweb.github.io/gpuweb/wgsl/#function-restriction
+        //     // Each argument of pointer type to a user-defined function must have the same memory
+        //     // view as its root identifier.
+        //     // We can validate this by just comparing the store type of the argument with that of
+        //     // its root identifier, as these will match iff the memory view is the same.
+        //     auto* arg_store_type = arg_type->As<sem::Pointer>()->StoreType();
+        //     auto* root = call->Arguments()[i]->RootIdentifier();
+        //     auto* root_ptr_ty = root->Type()->As<sem::Pointer>();
+        //     auto* root_ref_ty = root->Type()->As<sem::Reference>();
+        //     TINT_ASSERT(Resolver, root_ptr_ty || root_ref_ty);
+        //     const sem::Type* root_store_type;
+        //     if (root_ptr_ty) {
+        //         root_store_type = root_ptr_ty->StoreType();
+        //     } else {
+        //         root_store_type = root_ref_ty->StoreType();
+        //     }
+        //     if (root_store_type != arg_store_type &&
+        //         IsValidationEnabled(param->Declaration()->attributes,
+        //                             ast::DisabledValidation::kIgnoreInvalidPointerArgument)) {
+        //         AddError(
+        //             "arguments of pointer type must not point to a subset of the originating "
+        //             "variable",
+        //             arg_expr->source);
+        //         return false;
+        //     }
+        // }
     }
 
     if (call->Type()->Is<sem::Void>()) {

@@ -20,7 +20,7 @@
                OpName %S "S"
                OpMemberName %S 0 "data"
                OpName %s "s"
-               OpName %x "x"
+               OpName %x_F "x_F"
                OpName %p "p"
                OpName %f "f"
                OpDecorate %ubo_block Block
@@ -61,7 +61,11 @@
          %30 = OpTypeFunction %void
 %_ptr_StorageBuffer_int = OpTypePointer StorageBuffer %int
       %int_3 = OpConstant %int 3
+<<<<<<< HEAD
           %x = OpFunction %void None %17
+=======
+        %x_F = OpFunction %void None %15
+>>>>>>> 557256957 (WIP: DirectVariableAccess)
           %p = OpFunctionParameter %_ptr_Private_S
          %21 = OpLabel
          %25 = OpAccessChain %_ptr_Uniform_int %ubo %uint_0 %uint_0
@@ -70,6 +74,7 @@
                OpStore %28 %int_1
                OpReturn
                OpFunctionEnd
+<<<<<<< HEAD
           %f = OpFunction %void None %30
          %32 = OpLabel
          %33 = OpFunctionCall %void %x %s
@@ -77,5 +82,14 @@
          %38 = OpAccessChain %_ptr_Private_int %s %uint_0 %int_3
          %39 = OpLoad %int %38
                OpStore %36 %39
+=======
+          %f = OpFunction %void None %28
+         %30 = OpLabel
+         %31 = OpFunctionCall %void %x_F %s
+         %34 = OpAccessChain %_ptr_StorageBuffer_int %result %uint_0
+         %36 = OpAccessChain %_ptr_Private_int %s %uint_0 %int_3
+         %37 = OpLoad %int %36
+               OpStore %34 %37
+>>>>>>> 557256957 (WIP: DirectVariableAccess)
                OpReturn
                OpFunctionEnd

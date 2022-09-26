@@ -26,7 +26,7 @@
                OpMemberName %Uniforms 1 "sizeA"
                OpMemberName %Uniforms 2 "sizeB"
                OpName %x_46 "x_46"
-               OpName %binaryOperation_f1_f1_ "binaryOperation_f1_f1_"
+               OpName %binaryOperation_f1_f1__F_F "binaryOperation_f1_f1__F_F"
                OpName %a "a"
                OpName %b "b"
                OpName %tint_return_flag "tint_return_flag"
@@ -106,8 +106,13 @@
    %float_n4 = OpConstant %float -4
    %float_n3 = OpConstant %float -3
 %_ptr_StorageBuffer_float = OpTypePointer StorageBuffer %float
+<<<<<<< HEAD
         %104 = OpTypeFunction %void %v3uint
 %binaryOperation_f1_f1_ = OpFunction %float None %24
+=======
+         %93 = OpTypeFunction %void %v3uint
+%binaryOperation_f1_f1__F_F = OpFunction %float None %23
+>>>>>>> 557256957 (WIP: DirectVariableAccess)
           %a = OpFunctionParameter %_ptr_Function_float
           %b = OpFunctionParameter %_ptr_Function_float
          %29 = OpLabel
@@ -178,9 +183,15 @@
          %96 = OpLoad %int %index
                OpStore %param %float_n4
                OpStore %param_1 %float_n3
+<<<<<<< HEAD
          %99 = OpFunctionCall %float %binaryOperation_f1_f1_ %param %param_1
         %103 = OpAccessChain %_ptr_StorageBuffer_float %resultMatrix %uint_0 %96
                OpStore %103 %99
+=======
+         %88 = OpFunctionCall %float %binaryOperation_f1_f1__F_F %param %param_1
+         %92 = OpAccessChain %_ptr_StorageBuffer_float %resultMatrix %uint_0 %85
+               OpStore %92 %88
+>>>>>>> 557256957 (WIP: DirectVariableAccess)
                OpReturn
                OpFunctionEnd
  %main_inner = OpFunction %void None %104
