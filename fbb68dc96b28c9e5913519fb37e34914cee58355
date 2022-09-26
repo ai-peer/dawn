@@ -16,6 +16,222 @@
       "message": "Please take a look, thanks",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b815b71_d2f4b994",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "LGTM overall thanks for merging.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8da35e0_826ab0ad",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "nit: UNREACHABLE(); We could also use it in ScalarTypeName instead of returning \"\u003cunknown scalar type\u003e\"",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "289cb2ee_afffcf5a",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "It seems that everything until AddFixedU32 could be private as it is an implementation detail.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb0c5e2_70ce0516",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "nit: four? Or just say that the data builder supports the following operations: ...",
+      "range": {
+        "startLine": 92,
+        "startChar": 17,
+        "endLine": 92,
+        "endChar": 22
+      },
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f141e641_90d3550d",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "nit: specific is often a redundant word and can be removed, ditto below.",
+      "range": {
+        "startLine": 93,
+        "startChar": 23,
+        "endLine": 93,
+        "endChar": 31
+      },
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05968191_7fa06aea",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "This function is only ever called with empty vectors. Make it return the vector instead maybe?",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4629fabd_792d4517",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "nit: a switch would make it more clear all operations are handled.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "266e21ca_8787b599",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "which size? Same for [0, size)",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f26a73_2b8ce092",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "Isn\u0027t the tag value of 0 redundant with `hasSizeAttribute`?",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed11ef3_8af20e4b",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "We could unify the strided vs. not paths by using strideDataBytes \u003d size and stridePaddingBytes \u003d 0 by default. Then everything is as if isStrided is always true but it works for non-strided types too.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b28856_70df6caa",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "Why isn\u0027t this just done in FullDataMatcher when the field is strided? There could only be a single MatchData function at that point.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c770f473_8047f3b4",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-26T12:33:28Z",
+      "side": 1,
+      "message": "TBH at that point it\u0027s more clear to build the bindgroup manually instead of using the binding initialization helpers (they are never meant to be used directly, only with curly brackets in the call to utils::MakeBindGroup)",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
