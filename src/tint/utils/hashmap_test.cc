@@ -98,8 +98,15 @@ TEST(Hashmap, Iterator) {
     map.Add(4, "four");
     map.Add(3, "three");
     map.Add(2, "two");
-    EXPECT_THAT(map, testing::UnorderedElementsAre(KV{1, "one"}, KV{2, "two"}, KV{3, "three"},
-                                                   KV{4, "four"}));
+    {
+        std::string one = "one";
+        std::string two = "two";
+        std::string three = "three";
+        std::string four = "four";
+        EXPECT_THAT(
+            map,  //
+            testing::UnorderedElementsAre(KV{1, one}, KV{2, two}, KV{3, three}, KV{4, four}));
+    }
 }
 
 TEST(Hashmap, AddMany) {
