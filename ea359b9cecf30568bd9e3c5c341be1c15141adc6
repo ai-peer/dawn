@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5392d901_b905f05f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-26T19:40:24Z",
+      "side": 1,
+      "message": "PTAL. Putting some more tests in place before doing the zero init changes.",
+      "revId": "ea359b9cecf30568bd9e3c5c341be1c15141adc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
