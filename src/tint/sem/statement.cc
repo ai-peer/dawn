@@ -19,6 +19,7 @@
 #include "src/tint/ast/statement.h"
 #include "src/tint/sem/block_statement.h"
 #include "src/tint/sem/statement.h"
+#include "src/tint/sem/variable.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::sem::Statement);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::CompoundStatement);
@@ -42,5 +43,9 @@ CompoundStatement::CompoundStatement(const ast::Statement* declaration,
     : Base(declaration, parent, function) {}
 
 CompoundStatement::~CompoundStatement() = default;
+
+void CompoundStatement::AddDecl(const sem::LocalVariable* var) {
+    decls_.Add(var->Declaration()->symbol, OrderedLocalVariable{decls_.Count(), var});
+}
 
 }  // namespace tint::sem

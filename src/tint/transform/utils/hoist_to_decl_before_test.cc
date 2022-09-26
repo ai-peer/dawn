@@ -45,7 +45,6 @@ TEST_F(HoistToDeclBeforeTest, VarInit) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -77,7 +76,6 @@ TEST_F(HoistToDeclBeforeTest, ForLoopInit) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -112,7 +110,6 @@ TEST_F(HoistToDeclBeforeTest, ForLoopCond) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -151,7 +148,6 @@ TEST_F(HoistToDeclBeforeTest, ForLoopCont) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -195,7 +191,6 @@ TEST_F(HoistToDeclBeforeTest, WhileCond) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -240,7 +235,6 @@ TEST_F(HoistToDeclBeforeTest, ElseIf) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -279,7 +273,6 @@ TEST_F(HoistToDeclBeforeTest, Array1D) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -314,7 +307,6 @@ TEST_F(HoistToDeclBeforeTest, Array2D) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Add(sem_expr, expr, true);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -349,7 +341,6 @@ TEST_F(HoistToDeclBeforeTest, Prepare_ForLoopCond) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Prepare(sem_expr);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -387,7 +378,6 @@ TEST_F(HoistToDeclBeforeTest, Prepare_ForLoopCont) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Prepare(sem_expr);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -434,7 +424,6 @@ TEST_F(HoistToDeclBeforeTest, Prepare_ElseIf) {
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
     hoistToDeclBefore.Prepare(sem_expr);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -473,7 +462,6 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_Block) {
     auto* before_stmt = ctx.src->Sem().Get(var);
     auto* new_stmt = ctx.dst->CallStmt(ctx.dst->Call("foo"));
     hoistToDeclBefore.InsertBefore(before_stmt, new_stmt);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -512,7 +500,6 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_ForLoopInit) {
     auto* before_stmt = ctx.src->Sem().Get(var);
     auto* new_stmt = ctx.dst->CallStmt(ctx.dst->Call("foo"));
     hoistToDeclBefore.InsertBefore(before_stmt, new_stmt);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -554,7 +541,6 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_ForLoopCont) {
     auto* before_stmt = ctx.src->Sem().Get(cont->As<ast::Statement>());
     auto* new_stmt = ctx.dst->CallStmt(ctx.dst->Call("foo"));
     hoistToDeclBefore.InsertBefore(before_stmt, new_stmt);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -609,7 +595,6 @@ TEST_F(HoistToDeclBeforeTest, InsertBefore_ElseIf) {
     auto* before_stmt = ctx.src->Sem().Get(elseif);
     auto* new_stmt = ctx.dst->CallStmt(ctx.dst->Call("foo"));
     hoistToDeclBefore.InsertBefore(before_stmt, new_stmt);
-    hoistToDeclBefore.Apply();
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
