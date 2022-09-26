@@ -49,12 +49,12 @@ vec2 load_a_inner_p0_p1(uint p0, uint p1) {
 void f() {
   mat2 p_a[4] = conv_arr4_mat2x2_f32(a.inner);
   int tint_symbol = i();
-  mat2 p_a_i = conv_mat2x2_f32(a.inner[tint_symbol]);
+  mat2 p_a_i = conv_mat2x2_f32(a.inner[uint(tint_symbol)]);
   int tint_symbol_1 = i();
-  vec2 p_a_i_i = load_a_inner_p0_p1(uint(tint_symbol), uint(tint_symbol_1));
+  vec2 p_a_i_i = load_a_inner_p0_p1(uint(uint(tint_symbol)), uint(uint(tint_symbol_1)));
   mat2 l_a[4] = conv_arr4_mat2x2_f32(a.inner);
-  mat2 l_a_i = conv_mat2x2_f32(a.inner[tint_symbol]);
-  vec2 l_a_i_i = load_a_inner_p0_p1(uint(tint_symbol), uint(tint_symbol_1));
+  mat2 l_a_i = conv_mat2x2_f32(a.inner[uint(tint_symbol)]);
+  vec2 l_a_i_i = load_a_inner_p0_p1(uint(uint(tint_symbol)), uint(uint(tint_symbol_1)));
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

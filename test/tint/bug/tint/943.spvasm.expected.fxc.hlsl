@@ -259,7 +259,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_3 = (x_235 + x_236);
         param_4 = ((x_238 * 64) + x_240);
         const float x_244 = mm_readA_i1_i1_(param_3, param_4);
-        mm_Asub[x_233][x_234] = x_244;
+        mm_Asub[uint(x_233)][uint(x_234)] = x_244;
         {
           const int x_247 = innerCol_1;
           innerCol_1 = (x_247 + 1);
@@ -299,7 +299,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_5 = ((x_280 * 64) + x_282);
         param_6 = (x_284 + x_285);
         const float x_289 = mm_readB_i1_i1_(param_5, param_6);
-        mm_Bsub[x_278][x_279] = x_289;
+        mm_Bsub[uint(x_278)][uint(x_279)] = x_289;
         {
           const int x_291 = innerCol_2;
           innerCol_2 = (x_291 + 1);
@@ -329,7 +329,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         const int x_315 = k;
         const int x_316 = tileCol;
         const int x_317 = inner;
-        const float x_320 = mm_Bsub[x_315][(x_316 + x_317)];
+        const float x_320 = mm_Bsub[uint(x_315)][uint((x_316 + x_317))];
         BCached[x_314] = x_320;
         {
           const int x_322 = inner;
@@ -346,7 +346,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         const int x_333 = tileRow;
         const int x_334 = innerRow_3;
         const int x_336 = k;
-        const float x_338 = mm_Asub[(x_333 + x_334)][x_336];
+        const float x_338 = mm_Asub[uint((x_333 + x_334))][uint(x_336)];
         ACached = x_338;
         innerCol_3 = 0;
         [loop] while (true) {

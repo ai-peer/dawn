@@ -116,7 +116,7 @@ void main1() {
   Mat4x3_ t_PosMtx = Mat4x3_(vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
   vec2 t_TexSpaceCoord = vec2(0.0f, 0.0f);
   float x_e15 = a_PosMtxIdx1;
-  Mat4x3_ x_e18 = global2.u_PosMtx[int(x_e15)];
+  Mat4x3_ x_e18 = global2.u_PosMtx[uint(int(x_e15))];
   t_PosMtx = x_e18;
   Mat4x3_ x_e23 = t_PosMtx;
   Mat4x4_ x_e24 = x_Mat4x4_1(x_e23);

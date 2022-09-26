@@ -21,7 +21,7 @@ void f_inner(uint local_invocation_index) {
     }
   }
   GroupMemoryBarrierWithGroupSync();
-  s.data[asint(ubo[0].x)] = 1;
+  s.data[uint(asint(ubo[0].x))] = 1;
   result.Store(0u, asuint(s.data[3]));
 }
 

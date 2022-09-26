@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 78
+; Bound: 84
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
@@ -103,37 +103,43 @@
        %main = OpFunction %void None %14
          %50 = OpLabel
          %51 = OpFunctionCall %int %idx1
-         %52 = OpFunctionCall %int %idx2
-         %53 = OpFunctionCall %int %idx3
-         %56 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %51 %uint_0 %52 %53
-         %57 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %51 %uint_0 %52 %53
-         %58 = OpLoad %int %57
-         %59 = OpISub %int %58 %int_1
-               OpStore %56 %59
-               OpBranch %60
-         %60 = OpLabel
-               OpLoopMerge %61 %62 None
+         %52 = OpBitcast %uint %51
+         %53 = OpFunctionCall %int %idx2
+         %54 = OpBitcast %uint %53
+         %55 = OpFunctionCall %int %idx3
+         %56 = OpBitcast %uint %55
+         %59 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %52 %uint_0 %54 %56
+         %60 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %52 %uint_0 %54 %56
+         %61 = OpLoad %int %60
+         %62 = OpISub %int %61 %int_1
+               OpStore %59 %62
                OpBranch %63
          %63 = OpLabel
-         %65 = OpLoad %uint %v
-         %67 = OpULessThan %bool %65 %uint_10
-         %64 = OpLogicalNot %bool %67
-               OpSelectionMerge %69 None
-               OpBranchConditional %64 %70 %69
-         %70 = OpLabel
-               OpBranch %61
-         %69 = OpLabel
-               OpBranch %62
-         %62 = OpLabel
-         %71 = OpFunctionCall %int %idx4
-         %72 = OpFunctionCall %int %idx5
-         %73 = OpFunctionCall %int %idx6
-         %74 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %71 %uint_0 %72 %73
-         %75 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %71 %uint_0 %72 %73
-         %76 = OpLoad %int %75
-         %77 = OpISub %int %76 %int_1
-               OpStore %74 %77
-               OpBranch %60
-         %61 = OpLabel
+               OpLoopMerge %64 %65 None
+               OpBranch %66
+         %66 = OpLabel
+         %68 = OpLoad %uint %v
+         %70 = OpULessThan %bool %68 %uint_10
+         %67 = OpLogicalNot %bool %70
+               OpSelectionMerge %72 None
+               OpBranchConditional %67 %73 %72
+         %73 = OpLabel
+               OpBranch %64
+         %72 = OpLabel
+               OpBranch %65
+         %65 = OpLabel
+         %74 = OpFunctionCall %int %idx4
+         %75 = OpBitcast %uint %74
+         %76 = OpFunctionCall %int %idx5
+         %77 = OpBitcast %uint %76
+         %78 = OpFunctionCall %int %idx6
+         %79 = OpBitcast %uint %78
+         %80 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %75 %uint_0 %77 %79
+         %81 = OpAccessChain %_ptr_StorageBuffer_int %buffer %uint_0 %75 %uint_0 %77 %79
+         %82 = OpLoad %int %81
+         %83 = OpISub %int %82 %int_1
+               OpStore %80 %83
+               OpBranch %63
+         %64 = OpLabel
                OpReturn
                OpFunctionEnd

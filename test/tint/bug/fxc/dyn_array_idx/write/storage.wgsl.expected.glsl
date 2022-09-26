@@ -16,7 +16,7 @@ layout(binding = 1, std430) buffer SSBO_ssbo {
 } ssbo;
 
 void f() {
-  ssbo.data[ubo.dynamic_idx] = 1;
+  ssbo.data[uint(ubo.dynamic_idx)] = 1;
   result.tint_symbol = ssbo.data[3];
 }
 

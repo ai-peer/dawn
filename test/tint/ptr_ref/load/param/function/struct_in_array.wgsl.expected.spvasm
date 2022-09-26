@@ -1,0 +1,47 @@
+SKIP: FAILED
+
+; SPIR-V
+; Version: 1.3
+; Generator: Google Tint Compiler; 0
+; Bound: 24
+; Schema: 0
+               OpCapability Shader
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint GLCompute %main "main"
+               OpExecutionMode %main LocalSize 1 1 1
+               OpName %str "str"
+               OpMemberName %str 0 "i"
+               OpName %func "func"
+               OpName %pointer "pointer"
+               OpName %main "main"
+               OpName %F "F"
+               OpMemberDecorate %str 0 Offset 0
+               OpDecorate %_arr_str_uint_4 ArrayStride 4
+        %int = OpTypeInt 32 1
+        %str = OpTypeStruct %int
+%_ptr_Function_str = OpTypePointer Function %str
+          %1 = OpTypeFunction %str %_ptr_Function_str
+       %void = OpTypeVoid
+         %10 = OpTypeFunction %void
+       %uint = OpTypeInt 32 0
+     %uint_4 = OpConstant %uint 4
+%_arr_str_uint_4 = OpTypeArray %str %uint_4
+%_ptr_Function__arr_str_uint_4 = OpTypePointer Function %_arr_str_uint_4
+         %19 = OpConstantNull %_arr_str_uint_4
+      %int_2 = OpConstant %int 2
+       %func = OpFunction %str None %1
+    %pointer = OpFunctionParameter %_ptr_Function_str
+          %7 = OpLabel
+          %9 = OpLoad %str %pointer
+               OpReturnValue %9
+               OpFunctionEnd
+       %main = OpFunction %void None %10
+         %13 = OpLabel
+          %F = OpVariable %_ptr_Function__arr_str_uint_4 Function %19
+         %23 = OpAccessChain %_ptr_Function_str %F %int_2
+         %20 = OpFunctionCall %str %func %23
+               OpReturn
+               OpFunctionEnd
+1:1: Pointer operand 23[%23] must be a memory object declaration
+  %20 = OpFunctionCall %str %func %23
+

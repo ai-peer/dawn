@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 386
+; Bound: 387
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
@@ -235,10 +235,10 @@
 %_ptr_Uniform_v4float = OpTypePointer Uniform %v4float
     %float_2 = OpConstant %float 2
        %bool = OpTypeBool
-        %341 = OpConstantNull %int
+        %342 = OpConstantNull %int
 %_ptr_Uniform_Mat4x2_ = OpTypePointer Uniform %Mat4x2_
 %VertexOutput = OpTypeStruct %v4float %v2float %v4float
-        %361 = OpTypeFunction %VertexOutput %v3float %v2float %v4float %v3float %float
+        %362 = OpTypeFunction %VertexOutput %v3float %v2float %v4float %v3float %float
 %Mat4x3GetCol0_ = OpFunction %v3float None %54
           %m = OpFunctionParameter %Mat4x3_
          %57 = OpLabel
@@ -517,105 +517,106 @@
    %t_PosMtx = OpVariable %_ptr_Function_Mat4x3_ Function %60
 %t_TexSpaceCoord = OpVariable %_ptr_Function_v2float Function %19
         %297 = OpLoad %float %a_PosMtxIdx1
-        %298 = OpConvertFToS %int %297
-        %301 = OpAccessChain %_ptr_Uniform_Mat4x3_ %global2 %uint_0 %298
-        %302 = OpLoad %Mat4x3_ %301
-               OpStore %t_PosMtx %302
-        %303 = OpLoad %Mat4x3_ %t_PosMtx
-        %304 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %303
-        %305 = OpLoad %v3float %a_Position1
-        %306 = OpLoad %Mat4x3_ %t_PosMtx
-        %307 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %306
-        %308 = OpLoad %v3float %a_Position1
-        %310 = OpCompositeExtract %float %308 0
-        %311 = OpCompositeExtract %float %308 1
-        %312 = OpCompositeExtract %float %308 2
-        %313 = OpCompositeConstruct %v4float %310 %311 %312 %float_1
-        %309 = OpFunctionCall %v4float %Mul %307 %313
-        %315 = OpAccessChain %_ptr_Uniform_Mat4x4_ %global %uint_0
-        %316 = OpLoad %Mat4x4_ %315
-        %317 = OpLoad %Mat4x3_ %t_PosMtx
-        %318 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %317
-        %319 = OpLoad %v3float %a_Position1
-        %320 = OpLoad %Mat4x3_ %t_PosMtx
-        %321 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %320
-        %322 = OpLoad %v3float %a_Position1
-        %324 = OpCompositeExtract %float %322 0
-        %325 = OpCompositeExtract %float %322 1
-        %326 = OpCompositeExtract %float %322 2
-        %327 = OpCompositeConstruct %v4float %324 %325 %326 %float_1
-        %323 = OpFunctionCall %v4float %Mul %321 %327
-        %328 = OpFunctionCall %v4float %Mul %316 %323
-               OpStore %gl_Position %328
-        %329 = OpLoad %v4float %a_Color1
-               OpStore %v_Color %329
-        %331 = OpAccessChain %_ptr_Uniform_v4float %global1 %uint_1
-        %332 = OpLoad %v4float %331
-        %333 = OpCompositeExtract %float %332 0
-        %335 = OpFOrdEqual %bool %333 %float_2
-               OpSelectionMerge %337 None
-               OpBranchConditional %335 %338 %339
-        %338 = OpLabel
-        %340 = OpLoad %v3float %a_Normal1
-        %343 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %341
-        %344 = OpLoad %Mat4x2_ %343
-        %345 = OpLoad %v3float %a_Normal1
-        %347 = OpCompositeExtract %float %345 0
-        %348 = OpCompositeExtract %float %345 1
-        %349 = OpCompositeExtract %float %345 2
-        %350 = OpCompositeConstruct %v4float %347 %348 %349 %float_1
-        %346 = OpFunctionCall %v2float %Mul2 %344 %350
-        %351 = OpVectorShuffle %v2float %346 %346 0 1
-               OpStore %v_TexCoord %351
-               OpReturn
+        %299 = OpConvertFToS %int %297
+        %298 = OpBitcast %uint %299
+        %302 = OpAccessChain %_ptr_Uniform_Mat4x3_ %global2 %uint_0 %298
+        %303 = OpLoad %Mat4x3_ %302
+               OpStore %t_PosMtx %303
+        %304 = OpLoad %Mat4x3_ %t_PosMtx
+        %305 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %304
+        %306 = OpLoad %v3float %a_Position1
+        %307 = OpLoad %Mat4x3_ %t_PosMtx
+        %308 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %307
+        %309 = OpLoad %v3float %a_Position1
+        %311 = OpCompositeExtract %float %309 0
+        %312 = OpCompositeExtract %float %309 1
+        %313 = OpCompositeExtract %float %309 2
+        %314 = OpCompositeConstruct %v4float %311 %312 %313 %float_1
+        %310 = OpFunctionCall %v4float %Mul %308 %314
+        %316 = OpAccessChain %_ptr_Uniform_Mat4x4_ %global %uint_0
+        %317 = OpLoad %Mat4x4_ %316
+        %318 = OpLoad %Mat4x3_ %t_PosMtx
+        %319 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %318
+        %320 = OpLoad %v3float %a_Position1
+        %321 = OpLoad %Mat4x3_ %t_PosMtx
+        %322 = OpFunctionCall %Mat4x4_ %x_Mat4x4_1 %321
+        %323 = OpLoad %v3float %a_Position1
+        %325 = OpCompositeExtract %float %323 0
+        %326 = OpCompositeExtract %float %323 1
+        %327 = OpCompositeExtract %float %323 2
+        %328 = OpCompositeConstruct %v4float %325 %326 %327 %float_1
+        %324 = OpFunctionCall %v4float %Mul %322 %328
+        %329 = OpFunctionCall %v4float %Mul %317 %324
+               OpStore %gl_Position %329
+        %330 = OpLoad %v4float %a_Color1
+               OpStore %v_Color %330
+        %332 = OpAccessChain %_ptr_Uniform_v4float %global1 %uint_1
+        %333 = OpLoad %v4float %332
+        %334 = OpCompositeExtract %float %333 0
+        %336 = OpFOrdEqual %bool %334 %float_2
+               OpSelectionMerge %338 None
+               OpBranchConditional %336 %339 %340
         %339 = OpLabel
-        %352 = OpLoad %v2float %a_UV1
-        %353 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %341
-        %354 = OpLoad %Mat4x2_ %353
-        %355 = OpLoad %v2float %a_UV1
-        %357 = OpCompositeExtract %float %355 0
-        %358 = OpCompositeExtract %float %355 1
-        %359 = OpCompositeConstruct %v4float %357 %358 %float_1 %float_1
-        %356 = OpFunctionCall %v2float %Mul2 %354 %359
-        %360 = OpVectorShuffle %v2float %356 %356 0 1
-               OpStore %v_TexCoord %360
+        %341 = OpLoad %v3float %a_Normal1
+        %344 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %342
+        %345 = OpLoad %Mat4x2_ %344
+        %346 = OpLoad %v3float %a_Normal1
+        %348 = OpCompositeExtract %float %346 0
+        %349 = OpCompositeExtract %float %346 1
+        %350 = OpCompositeExtract %float %346 2
+        %351 = OpCompositeConstruct %v4float %348 %349 %350 %float_1
+        %347 = OpFunctionCall %v2float %Mul2 %345 %351
+        %352 = OpVectorShuffle %v2float %347 %347 0 1
+               OpStore %v_TexCoord %352
                OpReturn
-        %337 = OpLabel
+        %340 = OpLabel
+        %353 = OpLoad %v2float %a_UV1
+        %354 = OpAccessChain %_ptr_Uniform_Mat4x2_ %global1 %uint_0 %342
+        %355 = OpLoad %Mat4x2_ %354
+        %356 = OpLoad %v2float %a_UV1
+        %358 = OpCompositeExtract %float %356 0
+        %359 = OpCompositeExtract %float %356 1
+        %360 = OpCompositeConstruct %v4float %358 %359 %float_1 %float_1
+        %357 = OpFunctionCall %v2float %Mul2 %355 %360
+        %361 = OpVectorShuffle %v2float %357 %357 0 1
+               OpStore %v_TexCoord %361
+               OpReturn
+        %338 = OpLabel
                OpReturn
                OpFunctionEnd
- %main_inner = OpFunction %VertexOutput None %361
+ %main_inner = OpFunction %VertexOutput None %362
  %a_Position = OpFunctionParameter %v3float
        %a_UV = OpFunctionParameter %v2float
     %a_Color = OpFunctionParameter %v4float
    %a_Normal = OpFunctionParameter %v3float
 %a_PosMtxIdx = OpFunctionParameter %float
-        %369 = OpLabel
+        %370 = OpLabel
                OpStore %a_Position1 %a_Position
                OpStore %a_UV1 %a_UV
                OpStore %a_Color1 %a_Color
                OpStore %a_Normal1 %a_Normal
                OpStore %a_PosMtxIdx1 %a_PosMtxIdx
-        %370 = OpFunctionCall %void %main1
-        %371 = OpLoad %v4float %v_Color
-        %372 = OpLoad %v2float %v_TexCoord
-        %373 = OpLoad %v4float %gl_Position
-        %374 = OpCompositeConstruct %VertexOutput %371 %372 %373
-               OpReturnValue %374
+        %371 = OpFunctionCall %void %main1
+        %372 = OpLoad %v4float %v_Color
+        %373 = OpLoad %v2float %v_TexCoord
+        %374 = OpLoad %v4float %gl_Position
+        %375 = OpCompositeConstruct %VertexOutput %372 %373 %374
+               OpReturnValue %375
                OpFunctionEnd
        %main = OpFunction %void None %290
-        %376 = OpLabel
-        %378 = OpLoad %v3float %a_Position_1
-        %379 = OpLoad %v2float %a_UV_1
-        %380 = OpLoad %v4float %a_Color_1
-        %381 = OpLoad %v3float %a_Normal_1
-        %382 = OpLoad %float %a_PosMtxIdx_1
-        %377 = OpFunctionCall %VertexOutput %main_inner %378 %379 %380 %381 %382
-        %383 = OpCompositeExtract %v4float %377 0
-               OpStore %v_Color_1 %383
-        %384 = OpCompositeExtract %v2float %377 1
-               OpStore %v_TexCoord_1 %384
-        %385 = OpCompositeExtract %v4float %377 2
-               OpStore %member_1 %385
+        %377 = OpLabel
+        %379 = OpLoad %v3float %a_Position_1
+        %380 = OpLoad %v2float %a_UV_1
+        %381 = OpLoad %v4float %a_Color_1
+        %382 = OpLoad %v3float %a_Normal_1
+        %383 = OpLoad %float %a_PosMtxIdx_1
+        %378 = OpFunctionCall %VertexOutput %main_inner %379 %380 %381 %382 %383
+        %384 = OpCompositeExtract %v4float %378 0
+               OpStore %v_Color_1 %384
+        %385 = OpCompositeExtract %v2float %378 1
+               OpStore %v_TexCoord_1 %385
+        %386 = OpCompositeExtract %v4float %378 2
+               OpStore %member_1 %386
                OpStore %vertex_point_size %float_1
                OpReturn
                OpFunctionEnd

@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 193
+; Bound: 215
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
@@ -275,32 +275,45 @@
           %f = OpFunction %void None %158
         %161 = OpLabel
         %162 = OpFunctionCall %int %i
-        %163 = OpFunctionCall %int %i
-        %164 = OpFunctionCall %int %i
-        %167 = OpAccessChain %_ptr_Uniform__arr_Outer_std140_uint_4 %a %uint_0
-        %168 = OpLoad %_arr_Outer_std140_uint_4 %167
-        %165 = OpFunctionCall %_arr_Outer_uint_4 %conv_arr4_Outer %168
-        %171 = OpAccessChain %_ptr_Uniform_Outer_std140 %a %uint_0 %162
-        %172 = OpLoad %Outer_std140 %171
-        %169 = OpFunctionCall %Outer %conv_Outer %172
-        %175 = OpAccessChain %_ptr_Uniform__arr_Inner_std140_uint_4 %a %uint_0 %162 %uint_0
-        %176 = OpLoad %_arr_Inner_std140_uint_4 %175
-        %173 = OpFunctionCall %_arr_Inner_uint_4 %conv_arr4_Inner %176
-        %178 = OpAccessChain %_ptr_Uniform_Inner_std140 %a %uint_0 %162 %uint_0 %163
-        %179 = OpLoad %Inner_std140 %178
-        %177 = OpFunctionCall %Inner %conv_Inner %179
-        %181 = OpBitcast %uint %162
-        %182 = OpBitcast %uint %163
-        %180 = OpFunctionCall %mat2v2float %load_a_inner_p0_a_p1_m %181 %182
+        %163 = OpBitcast %uint %162
+        %164 = OpBitcast %uint %162
+        %165 = OpFunctionCall %int %i
+        %166 = OpBitcast %uint %162
+        %167 = OpBitcast %uint %165
+        %168 = OpBitcast %uint %162
+        %169 = OpBitcast %uint %165
+        %170 = OpFunctionCall %int %i
+        %171 = OpBitcast %uint %162
+        %172 = OpBitcast %uint %165
+        %173 = OpBitcast %uint %170
+        %176 = OpAccessChain %_ptr_Uniform__arr_Outer_std140_uint_4 %a %uint_0
+        %177 = OpLoad %_arr_Outer_std140_uint_4 %176
+        %174 = OpFunctionCall %_arr_Outer_uint_4 %conv_arr4_Outer %177
+        %179 = OpBitcast %uint %162
+        %181 = OpAccessChain %_ptr_Uniform_Outer_std140 %a %uint_0 %179
+        %182 = OpLoad %Outer_std140 %181
+        %178 = OpFunctionCall %Outer %conv_Outer %182
         %184 = OpBitcast %uint %162
-        %185 = OpBitcast %uint %163
-        %186 = OpBitcast %uint %164
-        %183 = OpFunctionCall %v2float %load_a_inner_p0_a_p1_m_p2 %184 %185 %186
-        %187 = OpFunctionCall %int %i
+        %186 = OpAccessChain %_ptr_Uniform__arr_Inner_std140_uint_4 %a %uint_0 %184 %uint_0
+        %187 = OpLoad %_arr_Inner_std140_uint_4 %186
+        %183 = OpFunctionCall %_arr_Inner_uint_4 %conv_arr4_Inner %187
         %189 = OpBitcast %uint %162
-        %190 = OpBitcast %uint %163
-        %191 = OpBitcast %uint %164
-        %192 = OpBitcast %uint %187
-        %188 = OpFunctionCall %float %load_a_inner_p0_a_p1_m_p2_p3 %189 %190 %191 %192
+        %190 = OpBitcast %uint %165
+        %191 = OpAccessChain %_ptr_Uniform_Inner_std140 %a %uint_0 %189 %uint_0 %190
+        %192 = OpLoad %Inner_std140 %191
+        %188 = OpFunctionCall %Inner %conv_Inner %192
+        %195 = OpBitcast %uint %162
+        %197 = OpBitcast %uint %165
+        %193 = OpFunctionCall %mat2v2float %load_a_inner_p0_a_p1_m %195 %197
+        %200 = OpBitcast %uint %162
+        %202 = OpBitcast %uint %165
+        %204 = OpBitcast %uint %170
+        %198 = OpFunctionCall %v2float %load_a_inner_p0_a_p1_m_p2 %200 %202 %204
+        %205 = OpBitcast %uint %162
+        %206 = OpBitcast %uint %165
+        %207 = OpBitcast %uint %170
+        %208 = OpFunctionCall %int %i
+        %209 = OpBitcast %uint %208
+        %210 = OpFunctionCall %float %load_a_inner_p0_a_p1_m_p2_p3 %205 %206 %207 %209
                OpReturn
                OpFunctionEnd

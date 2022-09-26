@@ -75,7 +75,7 @@ float mm_readA_i1_i1_(inout int row, inout int col) {
     int x_441 = row;
     int x_442 = dimInner_1;
     int x_445 = col;
-    float x_448 = x_165.A[(((x_438 * x_439) + (x_441 * x_442)) + x_445)];
+    float x_448 = x_165.A[uint((((x_438 * x_439) + (x_441 * x_442)) + x_445))];
     x_430 = x_448;
   } else {
     x_430 = 0.0f;
@@ -105,7 +105,7 @@ float mm_readB_i1_i1_(inout int row_1, inout int col_1) {
     int x_478 = row_1;
     int x_479 = dimBOuter_1;
     int x_482 = col_1;
-    float x_485 = x_185.B[(((x_475 * x_476) + (x_478 * x_479)) + x_482)];
+    float x_485 = x_185.B[uint((((x_475 * x_476) + (x_478 * x_479)) + x_482))];
     x_468 = x_485;
   } else {
     x_468 = 0.0f;
@@ -124,7 +124,7 @@ int getOutputFlatIndex_vi3_(inout ivec3 coords) {
 void setOutput_i1_f1_(inout int flatIndex, inout float value) {
   int x_95 = flatIndex;
   float x_96 = value;
-  x_54.result[x_95] = x_96;
+  x_54.result[uint(x_95)] = x_96;
   return;
 }
 
@@ -282,7 +282,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_3 = (x_235 + x_236);
         param_4 = ((x_238 * 64) + x_240);
         float x_244 = mm_readA_i1_i1_(param_3, param_4);
-        mm_Asub[x_233][x_234] = x_244;
+        mm_Asub[uint(x_233)][uint(x_234)] = x_244;
         {
           int x_247 = innerCol_1;
           innerCol_1 = (x_247 + 1);
@@ -322,7 +322,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_5 = ((x_280 * 64) + x_282);
         param_6 = (x_284 + x_285);
         float x_289 = mm_readB_i1_i1_(param_5, param_6);
-        mm_Bsub[x_278][x_279] = x_289;
+        mm_Bsub[uint(x_278)][uint(x_279)] = x_289;
         {
           int x_291 = innerCol_2;
           innerCol_2 = (x_291 + 1);
@@ -352,7 +352,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         int x_315 = k;
         int x_316 = tileCol;
         int x_317 = inner;
-        float x_320 = mm_Bsub[x_315][(x_316 + x_317)];
+        float x_320 = mm_Bsub[uint(x_315)][uint((x_316 + x_317))];
         BCached[x_314] = x_320;
         {
           int x_322 = inner;
@@ -369,7 +369,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         int x_333 = tileRow;
         int x_334 = innerRow_3;
         int x_336 = k;
-        float x_338 = mm_Asub[(x_333 + x_334)][x_336];
+        float x_338 = mm_Asub[uint((x_333 + x_334))][uint(x_336)];
         ACached = x_338;
         innerCol_3 = 0;
         while (true) {

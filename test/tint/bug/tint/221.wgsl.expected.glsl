@@ -11,17 +11,18 @@ void tint_symbol() {
     if ((i >= b.count)) {
       break;
     }
-    uint p_save = i;
+    uint tint_symbol_1 = i;
+    uint p_save = tint_symbol_1;
     if (((i % 2u) == 0u)) {
       {
-        b.data[p_save] = (b.data[p_save] * 2u);
+        b.data[tint_symbol_1] = (b.data[tint_symbol_1] * 2u);
         i = (i + 1u);
       }
       continue;
     }
-    b.data[p_save] = 0u;
+    b.data[tint_symbol_1] = 0u;
     {
-      b.data[p_save] = (b.data[p_save] * 2u);
+      b.data[tint_symbol_1] = (b.data[tint_symbol_1] * 2u);
       i = (i + 1u);
     }
   }
