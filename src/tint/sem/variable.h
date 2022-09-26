@@ -22,6 +22,7 @@
 #include "tint/override_id.h"
 
 #include "src/tint/ast/access.h"
+#include "src/tint/ast/parameter.h"
 #include "src/tint/ast/storage_class.h"
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/sem/expression.h"
@@ -212,7 +213,12 @@ class Parameter final : public Castable<Parameter, Variable> {
     /// Destructor
     ~Parameter() override;
 
-    /// @return the index of the parmeter in the function
+    /// @returns the AST declaration node
+    const ast::Parameter* Declaration() const {
+        return static_cast<const ast::Parameter*>(Variable::Declaration());
+    }
+
+    /// @return the index of the parameter in the function
     uint32_t Index() const { return index_; }
 
     /// @returns the semantic usage for the parameter
