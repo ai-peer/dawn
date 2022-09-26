@@ -140,7 +140,7 @@ class Function final : public Castable<Function, CallTarget> {
 
     /// @returns the list of direct calls to functions / builtins made by this
     /// function
-    std::vector<const Call*> DirectCallStatements() const { return direct_calls_; }
+    std::vector<const Call*> DirectCalls() const { return direct_calls_; }
 
     /// Adds a record of the direct function / builtin calls made by this
     /// function
@@ -159,7 +159,7 @@ class Function final : public Castable<Function, CallTarget> {
         return nullptr;
     }
 
-    /// @returns the list of callsites of this function
+    /// @returns the list of callsites to this function
     std::vector<const Call*> CallSites() const { return callsites_; }
 
     /// Adds a record of a callsite to this function
