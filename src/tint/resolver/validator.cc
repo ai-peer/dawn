@@ -874,13 +874,22 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
 
     if (auto* ref = var->Type()->As<sem::Pointer>()) {
         auto sc = ref->StorageClass();
-        if (!(sc == ast::StorageClass::kFunction || sc == ast::StorageClass::kPrivate ||
-              sc == ast::StorageClass::kWorkgroup) &&
-            IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreStorageClass)) {
-            std::stringstream ss;
-            ss << "function parameter of pointer type cannot be in '" << sc << "' storage class";
-            AddError(ss.str(), decl->source);
-            return false;
+        switch (sc) {
+            case ast::StorageClass::kFunction:
+            case ast::StorageClass::kPrivate:
+            case ast::StorageClass::kStorage:
+            case ast::StorageClass::kUniform:
+            case ast::StorageClass::kWorkgroup:
+                break;
+            default:
+                if (IsValidationEnabled(decl->attributes,
+                                        ast::DisabledValidation::kIgnoreStorageClass)) {
+                    std::stringstream ss;
+                    ss << "function parameter of pointer type cannot be in '" << sc
+                       << "' storage class";
+                    AddError(ss.str(), decl->source);
+                    return false;
+                }
         }
     }
 
@@ -1791,40 +1800,40 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
             return false;
         }
 
-        if (param_type->Is<sem::Pointer>()) {
-            auto is_valid = false;
-            if (auto* ident_expr = arg_expr->As<ast::IdentifierExpression>()) {
-                auto* var = sem_.ResolvedSymbol<sem::Variable>(ident_expr);
-                if (!var) {
-                    TINT_ICE(Resolver, diagnostics_) << "failed to resolve identifier";
-                    return false;
-                }
-                if (var->Is<sem::Parameter>()) {
-                    is_valid = true;
-                }
-            } else if (auto* unary = arg_expr->As<ast::UnaryOpExpression>()) {
-                if (unary->op == ast::UnaryOp::kAddressOf) {
-                    if (auto* ident_unary = unary->expr->As<ast::IdentifierExpression>()) {
-                        auto* var = sem_.ResolvedSymbol<sem::Variable>(ident_unary);
-                        if (!var) {
-                            TINT_ICE(Resolver, diagnostics_) << "failed to resolve identifier";
-                            return false;
-                        }
-                        is_valid = true;
-                    }
-                }
-            }
-
-            if (!is_valid &&
-                IsValidationEnabled(param->Declaration()->attributes,
-                                    ast::DisabledValidation::kIgnoreInvalidPointerArgument)) {
-                AddError(
-                    "expected an address-of expression of a variable identifier "
-                    "expression or a function parameter",
-                    arg_expr->source);
-                return false;
-            }
-        }
+        // if (param_type->Is<sem::Pointer>()) {
+        //     auto is_valid = false;
+        //     if (auto* ident_expr = arg_expr->As<ast::IdentifierExpression>()) {
+        //         auto* var = sem_.ResolvedSymbol<sem::Variable>(ident_expr);
+        //         if (!var) {
+        //             TINT_ICE(Resolver, diagnostics_) << "failed to resolve identifier";
+        //             return false;
+        //         }
+        //         if (var->Is<sem::Parameter>()) {
+        //             is_valid = true;
+        //         }
+        //     } else if (auto* unary = arg_expr->As<ast::UnaryOpExpression>()) {
+        //         if (unary->op == ast::UnaryOp::kAddressOf) {
+        //             if (auto* ident_unary = unary->expr->As<ast::IdentifierExpression>()) {
+        //                 auto* var = sem_.ResolvedSymbol<sem::Variable>(ident_unary);
+        //                 if (!var) {
+        //                     TINT_ICE(Resolver, diagnostics_) << "failed to resolve identifier";
+        //                     return false;
+        //                 }
+        //                 is_valid = true;
+        //             }
+        //         }
+        //     }
+        //
+        //     if (!is_valid &&
+        //         IsValidationEnabled(param->Declaration()->attributes,
+        //                             ast::DisabledValidation::kIgnoreInvalidPointerArgument)) {
+        //         AddError(
+        //             "expected an address-of expression of a variable identifier "
+        //             "expression or a function parameter",
+        //             arg_expr->source);
+        //         return false;
+        //     }
+        // }
     }
 
     if (call->Type()->Is<sem::Void>()) {

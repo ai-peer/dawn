@@ -284,6 +284,30 @@ class Hashmap {
     /// @returns true if the map contains no entries.
     bool IsEmpty() const { return set_.IsEmpty(); }
 
+    /// @returns the keys of the map as a vector.
+    /// @note the order of the returned vector is non-deterministic between compilers.
+    template <size_t N2 = N>
+    utils::Vector<K, N2> Keys() const {
+        utils::Vector<K, N2> out;
+        out.Reserve(Count());
+        for (auto it : *this) {
+            out.Push(it.key);
+        }
+        return out;
+    }
+
+    /// @returns the values of the map as a vector
+    /// @note the order of the returned vector is non-deterministic between compilers.
+    template <size_t N2 = N>
+    utils::Vector<K, N2> Values() const {
+        utils::Vector<K, N2> out;
+        out.Reserve(Count());
+        for (auto it : *this) {
+            out.Push(it.key);
+        }
+        return out;
+    }
+
     /// @returns a mutable iterator to the start of the map
     Iterator begin() { return Iterator{set_.begin()}; }
 
