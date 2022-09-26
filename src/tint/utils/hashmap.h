@@ -84,37 +84,53 @@ class Hashmap {
 
   public:
     /// A Key and Value const-reference pair.
-    struct KeyValue {
+    template <bool IS_CONST>
+    class TKeyValue {
+        template <typename TY>
+        using C = std::conditional_t<IS_CONST, const TY, TY>;
+
+      public:
         /// key of a map entry
         const K& key;
         /// value of a map entry
-        const V& value;
+        C<V>& value;
 
         /// Equality operator
         /// @param other the other KeyValue
         /// @returns true if the key and value of this KeyValue are equal to other's.
-        bool operator==(const KeyValue& other) const {
+        template <bool OTHER_CONST>
+        bool operator==(const TKeyValue<OTHER_CONST>& other) const {
             return key == other.key && value == other.value;
         }
     };
 
+    /// An immutable Key reference and mutable Value reference pair.
+    using ConstKeyValue = TKeyValue</* is const*/ true>;
+
+    /// A mutable Key reference and mutable Value reference pair.
+    using KeyValue = TKeyValue</* is const*/ false>;
+
     /// STL-style alias to KeyValue.
     /// Used by gmock for the `ElementsAre` checks.
-    using value_type = KeyValue;
+    using value_type = ConstKeyValue;
 
-    /// Iterator for the map.
-    /// Iterators are invalidated if the map is modified.
-    class Iterator {
+    /// Templated iterator for the map.
+    /// @note Iterators are invalidated if the map entries are changed, or map keys are modified.
+    template <bool IS_CONST>
+    class TIterator {
+        template <typename TY>
+        using C = std::conditional_t<IS_CONST, const TY, TY>;
+
       public:
         /// @returns the key of the entry pointed to by this iterator
         const K& Key() const { return it->key; }
 
         /// @returns the value of the entry pointed to by this iterator
-        const V& Value() const { return it->value; }
+        C<V>& Value() const { return it->value; }
 
         /// Increments the iterator
         /// @returns this iterator
-        Iterator& operator++() {
+        TIterator& operator++() {
             ++it;
             return *this;
         }
@@ -122,27 +138,35 @@ class Hashmap {
         /// Equality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is equal to other
-        bool operator==(const Iterator& other) const { return it == other.it; }
+        bool operator==(const TIterator& other) const { return it == other.it; }
 
         /// Inequality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is not equal to other
-        bool operator!=(const Iterator& other) const { return it != other.it; }
+        bool operator!=(const TIterator& other) const { return it != other.it; }
 
         /// @returns a pair of key and value for the entry pointed to by this iterator
-        KeyValue operator*() const { return {Key(), Value()}; }
+        TKeyValue<IS_CONST> operator*() const { return {Key(), Value()}; }
 
       private:
         /// Friend class
         friend class Hashmap;
 
         /// Underlying iterator type
-        using SetIterator = typename Set::Iterator;
+        using SetIterator = typename Set::template TIterator<IS_CONST>;
 
-        explicit Iterator(SetIterator i) : it(i) {}
+        explicit TIterator(SetIterator i) : it(i) {}
 
         SetIterator it;
     };
+
+    /// Immutable iterator for the map.
+    /// @note Iterators are invalidated if the map entries are changed, or map keys are modified.
+    using ConstIterator = TIterator</*is const*/ true>;
+
+    /// Mutable iterator for the map.
+    /// @note Iterators are invalidated if the map entries are changed, or map keys are modified.
+    using Iterator = TIterator</*is const*/ false>;
 
     /// Removes all entries from the map.
     void Clear() { set_.Clear(); }
@@ -169,7 +193,7 @@ class Hashmap {
     /// Searches for an entry with the given key value.
     /// @param key the entry's key value to search for.
     /// @returns the value of the entry with the given key, or no value if the entry was not found.
-    std::optional<V> Get(const K& key) {
+    std::optional<V> Get(const K& key) const {
         if (auto* entry = set_.Find(key)) {
             return entry->value;
         }
@@ -260,14 +284,58 @@ class Hashmap {
     /// @returns true if the map contains no entries.
     bool IsEmpty() const { return set_.IsEmpty(); }
 
-    /// @returns an iterator to the start of the map
-    Iterator begin() const { return Iterator{set_.begin()}; }
+    /// @returns a mutable iterator to the start of the map
+    Iterator begin() { return Iterator{set_.begin()}; }
 
-    /// @returns an iterator to the end of the map
-    Iterator end() const { return Iterator{set_.end()}; }
+    /// @returns a mutable iterator to the end of the map
+    Iterator end() { return Iterator{set_.end()}; }
+
+    /// @returns an immutable iterator to the start of the map
+    ConstIterator begin() const { return ConstIterator{set_.begin()}; }
+
+    /// @returns an immutable iterator to the end of the map
+    ConstIterator end() const { return ConstIterator{set_.end()}; }
+
+    /// Equality operator
+    /// @param other the other Hashmap to compare this Hashmap to
+    /// @returns true if this Hashmap has the same key and value pairs as @p other
+    bool operator==(const Hashmap& other) const {
+        // Note: Don't be tempted to use Hashset::operator==() here - that would only consider key!
+        if (Count() != other.Count()) {
+            return false;
+        }
+        for (auto it : *this) {
+            auto* other_val = other.Find(it.key);
+            if (!other_val || it.value != *other_val) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// Inequality operator
+    /// @param other the other Hashmap to compare this Hashmap to
+    /// @returns false if this Hashmap has the same key and value pairs as @p other
+    bool operator!=(const Hashmap& other) const { return !(*this == other.set_); }
 
   private:
     Set set_;
+};
+
+/// Hasher specialization for Hashmap
+template <typename K, typename V, size_t N, typename HASH, typename EQUAL>
+struct Hasher<Hashmap<K, V, N, HASH, EQUAL>> {
+    /// @param map the Hashmap to hash
+    /// @returns a hash of the map
+    size_t operator()(const Hashmap<K, V, N, HASH, EQUAL>& map) const {
+        auto hash = Hash(map.Count());
+        for (auto it : map) {
+            // Use an XOR to ensure that the non-deterministic ordering of the map still produces
+            // the same hash value for the same entries.
+            hash ^= Hash(it.key) * 31 + Hash(it.value);
+        }
+        return hash;
+    }
 };
 
 }  // namespace tint::utils
