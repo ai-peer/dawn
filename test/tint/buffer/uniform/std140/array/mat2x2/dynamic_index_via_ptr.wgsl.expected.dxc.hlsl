@@ -29,11 +29,14 @@ tint_symbol_ret tint_symbol(uint4 buffer[4], uint offset) {
 
 [numthreads(1, 1, 1)]
 void f() {
-  const int p_a_i_save = i();
-  const int p_a_i_i_save = i();
+  const int ptr_index_save = i();
+  const int p_a_i_save = ptr_index_save;
+  const int ptr_index_save_1 = i();
+  const int p_a_i_i_save = ptr_index_save;
+  const int p_a_i_i_save_1 = ptr_index_save_1;
   const float2x2 l_a[4] = tint_symbol(a, 0u);
-  const float2x2 l_a_i = tint_symbol_1(a, (16u * uint(p_a_i_save)));
-  const uint scalar_offset_2 = (((16u * uint(p_a_i_save)) + (8u * uint(p_a_i_i_save)))) / 4;
+  const float2x2 l_a_i = tint_symbol_1(a, (16u * uint(ptr_index_save)));
+  const uint scalar_offset_2 = (((16u * uint(ptr_index_save)) + (8u * uint(ptr_index_save_1)))) / 4;
   uint4 ubo_load_2 = a[scalar_offset_2 / 4];
   const float2 l_a_i_i = asfloat(((scalar_offset_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy));
   return;

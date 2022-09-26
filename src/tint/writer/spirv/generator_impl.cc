@@ -21,6 +21,7 @@
 #include "src/tint/transform/add_empty_entry_point.h"
 #include "src/tint/transform/builtin_polyfill.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
+#include "src/tint/transform/direct_variable_access.h"
 #include "src/tint/transform/disable_uniformity_analysis.h"
 #include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/for_loop_to_loop.h"
@@ -75,6 +76,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     if (!disable_workgroup_init_in_sanitizer) {
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
+    manager.Add<transform::DirectVariableAccess>();
     manager.Add<transform::RemoveUnreachableStatements>();
     manager.Add<transform::ExpandCompoundAssignment>();
     manager.Add<transform::PromoteSideEffectsToDecl>();

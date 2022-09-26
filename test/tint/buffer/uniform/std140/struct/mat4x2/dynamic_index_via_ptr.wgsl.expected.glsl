@@ -115,20 +115,23 @@ float load_a_inner_p0_a_p1_m_p2_p3(uint p0, uint p1, uint p2, uint p3) {
 
 void f() {
   Outer p_a[4] = conv_arr4_Outer(a.inner);
-  int tint_symbol = i();
-  Outer p_a_i = conv_Outer(a.inner[tint_symbol]);
-  Inner p_a_i_a[4] = conv_arr4_Inner(a.inner[tint_symbol].a);
-  int tint_symbol_1 = i();
-  Inner p_a_i_a_i = conv_Inner(a.inner[tint_symbol].a[tint_symbol_1]);
-  mat4x2 p_a_i_a_i_m = load_a_inner_p0_a_p1_m(uint(tint_symbol), uint(tint_symbol_1));
-  int tint_symbol_2 = i();
-  vec2 p_a_i_a_i_m_i = load_a_inner_p0_a_p1_m_p2(uint(tint_symbol), uint(tint_symbol_1), uint(tint_symbol_2));
+  int ptr_index_save = i();
+  Outer p_a_i = conv_Outer(a.inner[ptr_index_save]);
+  Inner p_a_i_a[4] = conv_arr4_Inner(a.inner[ptr_index_save].a);
+  int ptr_index_save_1 = i();
+  Inner p_a_i_a_i = conv_Inner(a.inner[ptr_index_save].a[ptr_index_save_1]);
+  mat4x2 p_a_i_a_i_m = load_a_inner_p0_a_p1_m(uint(ptr_index_save), uint(ptr_index_save_1));
+  int ptr_index_save_2 = i();
+  vec2 p_a_i_a_i_m_i = load_a_inner_p0_a_p1_m_p2(uint(ptr_index_save), uint(ptr_index_save_1), uint(ptr_index_save_2));
   Outer l_a[4] = conv_arr4_Outer(a.inner);
-  Outer l_a_i = conv_Outer(a.inner[tint_symbol]);
-  Inner l_a_i_a[4] = conv_arr4_Inner(a.inner[tint_symbol].a);
-  Inner l_a_i_a_i = conv_Inner(a.inner[tint_symbol].a[tint_symbol_1]);
-  mat4x2 l_a_i_a_i_m = load_a_inner_p0_a_p1_m(uint(tint_symbol), uint(tint_symbol_1));
-  vec2 l_a_i_a_i_m_i = load_a_inner_p0_a_p1_m_p2(uint(tint_symbol), uint(tint_symbol_1), uint(tint_symbol_2));
+  Outer l_a_i = conv_Outer(a.inner[ptr_index_save]);
+  Inner l_a_i_a[4] = conv_arr4_Inner(a.inner[ptr_index_save].a);
+  Inner l_a_i_a_i = conv_Inner(a.inner[ptr_index_save].a[ptr_index_save_1]);
+  mat4x2 l_a_i_a_i_m = load_a_inner_p0_a_p1_m(uint(ptr_index_save), uint(ptr_index_save_1));
+  vec2 l_a_i_a_i_m_i = load_a_inner_p0_a_p1_m_p2(uint(ptr_index_save), uint(ptr_index_save_1), uint(ptr_index_save_2));
+  int tint_symbol = ptr_index_save;
+  int tint_symbol_1 = ptr_index_save_1;
+  int tint_symbol_2 = ptr_index_save_2;
   int tint_symbol_3 = i();
   float l_a_i_a_i_m_i_i = load_a_inner_p0_a_p1_m_p2_p3(uint(tint_symbol), uint(tint_symbol_1), uint(tint_symbol_2), uint(tint_symbol_3));
 }
