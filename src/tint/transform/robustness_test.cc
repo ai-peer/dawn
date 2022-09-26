@@ -1334,5 +1334,29 @@ Was the SubstituteOverride transform run?)";
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(RobustnessTest, WorkgroupOverrideCountValid) {
+    auto* src = R"(
+override N = 123;
+var<workgroup> w : array<f32, N>;
+
+fn f() {
+  var b : f32 = w[0];
+}
+)";
+
+    auto* expect = R"(
+override N = 123;
+var<workgroup> w : array<f32, N>;
+
+fn f() {
+  var b : f32 = w[0];
+}
+)";
+
+    auto got = Run<Robustness>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 }  // namespace
 }  // namespace tint::transform
