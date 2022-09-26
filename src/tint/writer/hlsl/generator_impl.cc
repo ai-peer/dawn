@@ -53,6 +53,7 @@
 #include "src/tint/transform/calculate_array_length.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/decompose_memory_access.h"
+#include "src/tint/transform/direct_variable_access.h"
 #include "src/tint/transform/disable_uniformity_analysis.h"
 #include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/localize_struct_array_assignment.h"
@@ -194,6 +195,8 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::MultiplanarExternalTexture>();
 
     manager.Add<transform::Unshadow>();
+
+    manager.Add<transform::DirectVariableAccess>();
 
     // LocalizeStructArrayAssignment must come after:
     // * SimplifyPointers, because it assumes assignment to arrays in structs are

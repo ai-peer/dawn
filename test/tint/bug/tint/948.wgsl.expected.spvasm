@@ -55,7 +55,7 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
                OpName %stageUnits_1 "stageUnits_1"
                OpName %vPosition "vPosition"
                OpName %vUV "vUV"
-               OpName %getFrameData_f1_ "getFrameData_f1_"
+               OpName %getFrameData_f1__F "getFrameData_f1__F"
                OpName %frameID "frameID"
                OpName %fX "fX"
                OpName %main_1 "main_1"
@@ -212,7 +212,7 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
 %_ptr_Uniform_v3float = OpTypePointer Uniform %v3float
    %main_out = OpTypeStruct %v4float
         %355 = OpTypeFunction %main_out %v2float %v2float %v2float %v2float %v3float %v2float
-%getFrameData_f1_ = OpFunction %mat4v4float None %49
+%getFrameData_f1__F = OpFunction %mat4v4float None %49
     %frameID = OpFunctionParameter %_ptr_Function_float
          %53 = OpLabel
          %fX = OpVariable %_ptr_Function_float Function %37
@@ -424,7 +424,7 @@ bug/tint/948.wgsl:137:27 note: reading from module-scope private variable 'mt' m
         %246 = OpLoad %float %frameID_1
         %247 = OpFAdd %float %246 %float_0_5
                OpStore %param %247
-        %248 = OpFunctionCall %mat4v4float %getFrameData_f1_ %param
+        %248 = OpFunctionCall %mat4v4float %getFrameData_f1__F %param
                OpStore %frameData %248
         %250 = OpAccessChain %_ptr_Function_v4float %frameData %114
         %251 = OpLoad %v4float %250
