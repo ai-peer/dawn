@@ -418,7 +418,8 @@ void tint_symbol() {
   int a = 2;
   int b = 4;
   int c = 3;
-  int x = data.a[((a + b) - c)];
+  int tint_symbol_1 = ((a + b) - c);
+  int x = data.a[uint(tint_symbol_1)];
 }
 
 void main() {

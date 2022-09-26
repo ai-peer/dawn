@@ -13,7 +13,7 @@ uint ConvertToFp16FloatValue(float fp32) {
   return 1u;
 }
 
-struct tint_symbol_2 {
+struct tint_symbol_4 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -33,8 +33,8 @@ void main_inner(uint3 GlobalInvocationID) {
   uint4 dstColorBits = uint4(dstColor);
   {
     [loop] for(uint i = 0u; (i < uniforms[0].w); i = (i + 1u)) {
-      const uint tint_symbol_3 = ConvertToFp16FloatValue(srcColor[i]);
-      set_uint4(srcColorBits, i, tint_symbol_3);
+      const uint tint_symbol_5 = ConvertToFp16FloatValue(srcColor[i]);
+      set_uint4(srcColorBits, i, tint_symbol_5);
       bool tint_tmp_1 = success;
       if (tint_tmp_1) {
         tint_tmp_1 = (srcColorBits[i] == dstColorBits[i]);
@@ -44,14 +44,16 @@ void main_inner(uint3 GlobalInvocationID) {
   }
   uint outputIndex = ((GlobalInvocationID.y * uint(size.x)) + GlobalInvocationID.x);
   if (success) {
-    output.Store((4u * outputIndex), asuint(1u));
+    const uint tint_symbol_1 = outputIndex;
+    output.Store((4u * tint_symbol_1), asuint(1u));
   } else {
-    output.Store((4u * outputIndex), asuint(0u));
+    const uint tint_symbol_2 = outputIndex;
+    output.Store((4u * tint_symbol_2), asuint(0u));
   }
 }
 
 [numthreads(1, 1, 1)]
-void main(tint_symbol_2 tint_symbol_1) {
-  main_inner(tint_symbol_1.GlobalInvocationID);
+void main(tint_symbol_4 tint_symbol_3) {
+  main_inner(tint_symbol_3.GlobalInvocationID);
   return;
 }

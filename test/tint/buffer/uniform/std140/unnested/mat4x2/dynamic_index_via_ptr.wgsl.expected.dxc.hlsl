@@ -8,7 +8,7 @@ int i() {
   return counter;
 }
 
-float4x2 tint_symbol(uint4 buffer[2], uint offset) {
+float4x2 tint_symbol_1(uint4 buffer[2], uint offset) {
   const uint scalar_offset = ((offset + 0u)) / 4;
   uint4 ubo_load = buffer[scalar_offset / 4];
   const uint scalar_offset_1 = ((offset + 8u)) / 4;
@@ -22,9 +22,10 @@ float4x2 tint_symbol(uint4 buffer[2], uint offset) {
 
 [numthreads(1, 1, 1)]
 void f() {
-  const int p_m_i_save = i();
-  const float4x2 l_m = tint_symbol(m, 0u);
-  const uint scalar_offset_4 = ((8u * uint(p_m_i_save))) / 4;
+  const int tint_symbol = i();
+  const uint p_m_i_save = uint(tint_symbol);
+  const float4x2 l_m = tint_symbol_1(m, 0u);
+  const uint scalar_offset_4 = ((8u * uint(tint_symbol))) / 4;
   uint4 ubo_load_4 = m[scalar_offset_4 / 4];
   const float2 l_m_i = asfloat(((scalar_offset_4 & 2) ? ubo_load_4.zw : ubo_load_4.xy));
   return;

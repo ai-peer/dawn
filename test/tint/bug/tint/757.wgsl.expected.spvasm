@@ -108,10 +108,10 @@
          %62 = OpLabel
                OpBranch %54
          %61 = OpLabel
-         %64 = OpLoad %uint %flatIndex
-         %65 = OpLoad %uint %i
-         %66 = OpIAdd %uint %64 %65
-         %68 = OpAccessChain %_ptr_StorageBuffer_float %result %uint_0 %66
+         %63 = OpLoad %uint %flatIndex
+         %64 = OpLoad %uint %i
+         %65 = OpIAdd %uint %63 %64
+         %68 = OpAccessChain %_ptr_StorageBuffer_float %result %uint_0 %65
          %70 = OpAccessChain %_ptr_Function_float %texel %uint_0
          %71 = OpLoad %float %70
                OpStore %68 %71

@@ -59,20 +59,26 @@ tint_symbol_4_ret tint_symbol_4(uint4 buffer[64], uint offset) {
 
 [numthreads(1, 1, 1)]
 void f() {
-  const int p_a_i_save = i();
-  const int p_a_i_a_i_save = i();
-  const int p_a_i_a_i_m_i_save = i();
+  const int tint_symbol = i();
+  const uint p_a_i_save = uint(tint_symbol);
+  const uint p_a_i_a_save = uint(tint_symbol);
+  const int tint_symbol_1 = i();
+  const uint p_a_i_a_i_save = uint(tint_symbol);
+  const uint p_a_i_a_i_save_1 = uint(tint_symbol_1);
+  const uint p_a_i_a_i_m_save = uint(tint_symbol);
+  const uint p_a_i_a_i_m_save_1 = uint(tint_symbol_1);
+  const int tint_symbol_2 = i();
+  const uint p_a_i_a_i_m_i_save = uint(tint_symbol);
+  const uint p_a_i_a_i_m_i_save_1 = uint(tint_symbol_1);
+  const uint p_a_i_a_i_m_i_save_2 = uint(tint_symbol_2);
   const Outer l_a[4] = tint_symbol_4(a, 0u);
-  const Outer l_a_i = tint_symbol_5(a, (256u * uint(p_a_i_save)));
-  const Inner l_a_i_a[4] = tint_symbol_6(a, (256u * uint(p_a_i_save)));
-  const Inner l_a_i_a_i = tint_symbol_7(a, ((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))));
-  const float3x2 l_a_i_a_i_m = tint_symbol_8(a, ((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))));
-  const uint scalar_offset_3 = ((((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))) + (8u * uint(p_a_i_a_i_m_i_save)))) / 4;
+  const Outer l_a_i = tint_symbol_5(a, (256u * uint(tint_symbol)));
+  const Inner l_a_i_a[4] = tint_symbol_6(a, (256u * uint(tint_symbol)));
+  const Inner l_a_i_a_i = tint_symbol_7(a, ((256u * uint(tint_symbol)) + (64u * uint(tint_symbol_1))));
+  const float3x2 l_a_i_a_i_m = tint_symbol_8(a, ((256u * uint(tint_symbol)) + (64u * uint(tint_symbol_1))));
+  const uint scalar_offset_3 = ((((256u * uint(tint_symbol)) + (64u * uint(tint_symbol_1))) + (8u * uint(tint_symbol_2)))) / 4;
   uint4 ubo_load_3 = a[scalar_offset_3 / 4];
   const float2 l_a_i_a_i_m_i = asfloat(((scalar_offset_3 & 2) ? ubo_load_3.zw : ubo_load_3.xy));
-  const int tint_symbol = p_a_i_save;
-  const int tint_symbol_1 = p_a_i_a_i_save;
-  const int tint_symbol_2 = p_a_i_a_i_m_i_save;
   const int tint_symbol_3 = i();
   const uint scalar_offset_4 = (((((256u * uint(tint_symbol)) + (64u * uint(tint_symbol_1))) + (8u * uint(tint_symbol_2))) + (4u * uint(tint_symbol_3)))) / 4;
   const float l_a_i_a_i_m_i_i = asfloat(a[scalar_offset_4 / 4][scalar_offset_4 % 4]);

@@ -116,7 +116,8 @@ void main1() {
   Mat4x3_ t_PosMtx = Mat4x3_(vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
   vec2 t_TexSpaceCoord = vec2(0.0f, 0.0f);
   float x_e15 = a_PosMtxIdx1;
-  Mat4x3_ x_e18 = global2.u_PosMtx[int(x_e15)];
+  int tint_symbol_2 = int(x_e15);
+  Mat4x3_ x_e18 = global2.u_PosMtx[uint(tint_symbol_2)];
   t_PosMtx = x_e18;
   Mat4x3_ x_e23 = t_PosMtx;
   Mat4x4_ x_e24 = x_Mat4x4_1(x_e23);
@@ -169,8 +170,8 @@ VertexOutput tint_symbol_1(vec3 a_Position, vec2 a_UV, vec4 a_Color, vec3 a_Norm
   vec4 x_e11 = v_Color;
   vec2 x_e13 = v_TexCoord;
   vec4 x_e15 = tint_symbol;
-  VertexOutput tint_symbol_2 = VertexOutput(x_e11, x_e13, x_e15);
-  return tint_symbol_2;
+  VertexOutput tint_symbol_3 = VertexOutput(x_e11, x_e13, x_e15);
+  return tint_symbol_3;
 }
 
 void main() {

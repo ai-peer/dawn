@@ -52,7 +52,8 @@ float mm_readA_i1_i1_(inout int row, inout int col) {
     const int x_441 = row;
     const int x_442 = dimInner_1;
     const int x_445 = col;
-    const float x_448 = asfloat(x_165.Load((4u * uint((((x_438 * x_439) + (x_441 * x_442)) + x_445)))));
+    const int tint_symbol = (((x_438 * x_439) + (x_441 * x_442)) + x_445);
+    const float x_448 = asfloat(x_165.Load((4u * uint(tint_symbol))));
     x_430 = x_448;
   } else {
     x_430 = 0.0f;
@@ -82,7 +83,8 @@ float mm_readB_i1_i1_(inout int row_1, inout int col_1) {
     const int x_478 = row_1;
     const int x_479 = dimBOuter_1;
     const int x_482 = col_1;
-    const float x_485 = asfloat(x_185.Load((4u * uint((((x_475 * x_476) + (x_478 * x_479)) + x_482)))));
+    const int tint_symbol_1 = (((x_475 * x_476) + (x_478 * x_479)) + x_482);
+    const float x_485 = asfloat(x_185.Load((4u * uint(tint_symbol_1))));
     x_468 = x_485;
   } else {
     x_468 = 0.0f;
@@ -259,7 +261,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_3 = (x_235 + x_236);
         param_4 = ((x_238 * 64) + x_240);
         const float x_244 = mm_readA_i1_i1_(param_3, param_4);
-        mm_Asub[x_233][x_234] = x_244;
+        mm_Asub[uint(x_233)][uint(x_234)] = x_244;
         {
           const int x_247 = innerCol_1;
           innerCol_1 = (x_247 + 1);
@@ -299,7 +301,7 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         param_5 = ((x_280 * 64) + x_282);
         param_6 = (x_284 + x_285);
         const float x_289 = mm_readB_i1_i1_(param_5, param_6);
-        mm_Bsub[x_278][x_279] = x_289;
+        mm_Bsub[uint(x_278)][uint(x_279)] = x_289;
         {
           const int x_291 = innerCol_2;
           innerCol_2 = (x_291 + 1);
@@ -329,7 +331,8 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         const int x_315 = k;
         const int x_316 = tileCol;
         const int x_317 = inner;
-        const float x_320 = mm_Bsub[x_315][(x_316 + x_317)];
+        const int tint_symbol_2 = (x_316 + x_317);
+        const float x_320 = mm_Bsub[uint(x_315)][uint(tint_symbol_2)];
         BCached[x_314] = x_320;
         {
           const int x_322 = inner;
@@ -346,7 +349,8 @@ void mm_matMul_i1_i1_i1_(inout int dimAOuter, inout int dimInner, inout int dimB
         const int x_333 = tileRow;
         const int x_334 = innerRow_3;
         const int x_336 = k;
-        const float x_338 = mm_Asub[(x_333 + x_334)][x_336];
+        const int tint_symbol_3 = (x_333 + x_334);
+        const float x_338 = mm_Asub[uint(tint_symbol_3)][uint(x_336)];
         ACached = x_338;
         innerCol_3 = 0;
         [loop] while (true) {
@@ -459,7 +463,7 @@ void main_1() {
   return;
 }
 
-struct tint_symbol_1 {
+struct tint_symbol_5 {
   uint3 gl_LocalInvocationID_param : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
   uint3 gl_GlobalInvocationID_param : SV_DispatchThreadID;
@@ -485,7 +489,7 @@ void main_inner(uint3 gl_LocalInvocationID_param, uint3 gl_GlobalInvocationID_pa
 }
 
 [numthreads(1, 64, 1)]
-void main(tint_symbol_1 tint_symbol) {
-  main_inner(tint_symbol.gl_LocalInvocationID_param, tint_symbol.gl_GlobalInvocationID_param, tint_symbol.local_invocation_index);
+void main(tint_symbol_5 tint_symbol_4) {
+  main_inner(tint_symbol_4.gl_LocalInvocationID_param, tint_symbol_4.gl_GlobalInvocationID_param, tint_symbol_4.local_invocation_index);
   return;
 }

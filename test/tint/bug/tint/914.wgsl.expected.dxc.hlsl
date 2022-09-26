@@ -11,7 +11,8 @@ float mm_readA(uint row, uint col) {
     tint_tmp = (col < uniforms[0].y);
   }
   if ((tint_tmp)) {
-    const float result = asfloat(firstMatrix.Load((4u * ((row * uniforms[0].y) + col))));
+    const uint tint_symbol = ((row * uniforms[0].y) + col);
+    const float result = asfloat(firstMatrix.Load((4u * tint_symbol)));
     return result;
   }
   return 0.0f;
@@ -23,7 +24,8 @@ float mm_readB(uint row, uint col) {
     tint_tmp_1 = (col < uniforms[0].z);
   }
   if ((tint_tmp_1)) {
-    const float result = asfloat(secondMatrix.Load((4u * ((row * uniforms[0].z) + col))));
+    const uint tint_symbol_1 = ((row * uniforms[0].z) + col);
+    const float result = asfloat(secondMatrix.Load((4u * tint_symbol_1)));
     return result;
   }
   return 0.0f;
@@ -43,7 +45,7 @@ void mm_write(uint row, uint col, float value) {
 groupshared float mm_Asub[64][64];
 groupshared float mm_Bsub[64][64];
 
-struct tint_symbol_1 {
+struct tint_symbol_8 {
   uint3 local_id : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
   uint3 global_id : SV_DispatchThreadID;
@@ -84,8 +86,8 @@ void main_inner(uint3 local_id, uint3 global_id, uint local_invocation_index) {
             [loop] for(uint innerCol = 0u; (innerCol < ColPerThreadA); innerCol = (innerCol + 1u)) {
               const uint inputRow = (tileRow + innerRow);
               const uint inputCol = (tileColA + innerCol);
-              const float tint_symbol_2 = mm_readA((globalRow + innerRow), ((t * 64u) + inputCol));
-              mm_Asub[inputRow][inputCol] = tint_symbol_2;
+              const float tint_symbol_9 = mm_readA((globalRow + innerRow), ((t * 64u) + inputCol));
+              mm_Asub[inputRow][inputCol] = tint_symbol_9;
             }
           }
         }
@@ -96,8 +98,9 @@ void main_inner(uint3 local_id, uint3 global_id, uint local_invocation_index) {
             [loop] for(uint innerCol = 0u; (innerCol < 4u); innerCol = (innerCol + 1u)) {
               const uint inputRow = (tileRowB + innerRow);
               const uint inputCol = (tileCol + innerCol);
-              const float tint_symbol_3 = mm_readB(((t * 64u) + inputRow), (globalCol + innerCol));
-              mm_Bsub[innerCol][inputCol] = tint_symbol_3;
+              const uint tint_symbol_2 = innerCol;
+              const float tint_symbol_10 = mm_readB(((t * 64u) + inputRow), (globalCol + innerCol));
+              mm_Bsub[tint_symbol_2][inputCol] = tint_symbol_10;
             }
           }
         }
@@ -107,12 +110,16 @@ void main_inner(uint3 local_id, uint3 global_id, uint local_invocation_index) {
         [loop] for(uint k = 0u; (k < 64u); k = (k + 1u)) {
           {
             [loop] for(uint inner = 0u; (inner < 4u); inner = (inner + 1u)) {
-              BCached[inner] = mm_Bsub[k][(tileCol + inner)];
+              const uint tint_symbol_3 = k;
+              const uint tint_symbol_4 = (tileCol + inner);
+              BCached[inner] = mm_Bsub[tint_symbol_3][tint_symbol_4];
             }
           }
           {
             [loop] for(uint innerRow = 0u; (innerRow < 4u); innerRow = (innerRow + 1u)) {
-              ACached = mm_Asub[(tileRow + innerRow)][k];
+              const uint tint_symbol_5 = (tileRow + innerRow);
+              const uint tint_symbol_6 = k;
+              ACached = mm_Asub[tint_symbol_5][tint_symbol_6];
               {
                 [loop] for(uint innerCol = 0u; (innerCol < 4u); innerCol = (innerCol + 1u)) {
                   const uint index = ((innerRow * 4u) + innerCol);
@@ -139,7 +146,7 @@ void main_inner(uint3 local_id, uint3 global_id, uint local_invocation_index) {
 }
 
 [numthreads(16, 16, 1)]
-void main(tint_symbol_1 tint_symbol) {
-  main_inner(tint_symbol.local_id, tint_symbol.global_id, tint_symbol.local_invocation_index);
+void main(tint_symbol_8 tint_symbol_7) {
+  main_inner(tint_symbol_7.local_id, tint_symbol_7.global_id, tint_symbol_7.local_invocation_index);
   return;
 }

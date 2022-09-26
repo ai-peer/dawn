@@ -352,17 +352,17 @@
         %222 = OpIAdd %uint %191 %221
         %223 = OpISub %uint %222 %71
                OpStore %i %223
-        %225 = OpLoad %v3float %acc
-        %228 = OpAccessChain %_ptr_Uniform_uint %params %uint_0
-        %229 = OpLoad %uint %228
-        %227 = OpConvertUToF %float %229
-        %230 = OpFDiv %float %float_1 %227
-        %231 = OpLoad %uint %r_0
-        %232 = OpLoad %uint %i
-        %233 = OpAccessChain %_ptr_Workgroup_v3float %tile %231 %232
+        %225 = OpLoad %uint %r_0
+        %226 = OpLoad %uint %i
+        %227 = OpLoad %v3float %acc
+        %230 = OpAccessChain %_ptr_Uniform_uint %params %uint_0
+        %231 = OpLoad %uint %230
+        %229 = OpConvertUToF %float %231
+        %232 = OpFDiv %float %float_1 %229
+        %233 = OpAccessChain %_ptr_Workgroup_v3float %tile %225 %226
         %234 = OpLoad %v3float %233
-        %235 = OpVectorTimesScalar %v3float %234 %230
-        %236 = OpFAdd %v3float %225 %235
+        %235 = OpVectorTimesScalar %v3float %234 %232
+        %236 = OpFAdd %v3float %227 %235
                OpStore %acc %236
                OpBranch %212
         %212 = OpLabel

@@ -9,7 +9,7 @@ struct S {
 RWByteAddressBuffer result : register(u1, space0);
 groupshared S s;
 
-struct tint_symbol_2 {
+struct tint_symbol_3 {
   uint local_invocation_index : SV_GroupIndex;
 };
 
@@ -21,11 +21,12 @@ void f_inner(uint local_invocation_index) {
     }
   }
   GroupMemoryBarrierWithGroupSync();
-  result.Store(0u, asuint(s.data[asint(ubo[0].x)]));
+  const int tint_symbol_1 = asint(ubo[0].x);
+  result.Store(0u, asuint(s.data[uint(tint_symbol_1)]));
 }
 
 [numthreads(1, 1, 1)]
-void f(tint_symbol_2 tint_symbol_1) {
-  f_inner(tint_symbol_1.local_invocation_index);
+void f(tint_symbol_3 tint_symbol_2) {
+  f_inner(tint_symbol_2.local_invocation_index);
   return;
 }

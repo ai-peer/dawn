@@ -7,17 +7,18 @@ void main() {
     if ((i >= b.Load(0u))) {
       break;
     }
-    const uint p_save = i;
+    const uint tint_symbol = i;
+    const uint p_save = tint_symbol;
     if (((i % 2u) == 0u)) {
       {
-        b.Store((4u + (4u * p_save)), asuint((b.Load((4u + (4u * p_save))) * 2u)));
+        b.Store((4u + (4u * tint_symbol)), asuint((b.Load((4u + (4u * tint_symbol))) * 2u)));
         i = (i + 1u);
       }
       continue;
     }
-    b.Store((4u + (4u * p_save)), asuint(0u));
+    b.Store((4u + (4u * tint_symbol)), asuint(0u));
     {
-      b.Store((4u + (4u * p_save)), asuint((b.Load((4u + (4u * p_save))) * 2u)));
+      b.Store((4u + (4u * tint_symbol)), asuint((b.Load((4u + (4u * tint_symbol))) * 2u)));
       i = (i + 1u);
     }
   }

@@ -326,17 +326,17 @@
  %position_0 = OpVariable %_ptr_Function_v3float Function %52
         %161 = OpIMul %uint %uint_3 %vertexIndex
         %162 = OpIAdd %uint %161 %143
-        %164 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %162
-        %165 = OpLoad %float %164
-        %166 = OpIMul %uint %uint_3 %vertexIndex
-        %167 = OpIAdd %uint %166 %uint_1
-        %168 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %167
+        %163 = OpIMul %uint %uint_3 %vertexIndex
+        %164 = OpIAdd %uint %163 %uint_1
+        %165 = OpIMul %uint %uint_3 %vertexIndex
+        %166 = OpIAdd %uint %165 %uint_2
+        %168 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %162
         %169 = OpLoad %float %168
-        %170 = OpIMul %uint %uint_3 %vertexIndex
-        %171 = OpIAdd %uint %170 %uint_2
-        %172 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %171
+        %170 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %164
+        %171 = OpLoad %float %170
+        %172 = OpAccessChain %_ptr_StorageBuffer_float %positions %uint_0 %166
         %173 = OpLoad %float %172
-        %174 = OpCompositeConstruct %v3float %165 %169 %173
+        %174 = OpCompositeConstruct %v3float %169 %171 %173
                OpStore %position_0 %174
         %176 = OpLoad %v3float %position_0
                OpReturnValue %176
@@ -439,10 +439,10 @@
         %261 = OpLoad %v3float %p0
         %258 = OpFunctionCall %uint %toIndex1D %260 %261
                OpStore %lIndex %258
-        %265 = OpLoad %uint %i1
-        %266 = OpAccessChain %_ptr_StorageBuffer_int %LUT %uint_0 %265
-        %263 = OpAtomicIAdd %int %266 %uint_1 %uint_0 %int_1
-               OpStore %triangleOffset %263
+        %263 = OpLoad %uint %i1
+        %266 = OpAccessChain %_ptr_StorageBuffer_int %LUT %uint_0 %263
+        %264 = OpAtomicIAdd %int %266 %uint_1 %uint_0 %int_1
+               OpStore %triangleOffset %264
                OpReturn
                OpFunctionEnd
  %main_count = OpFunction %void None %30

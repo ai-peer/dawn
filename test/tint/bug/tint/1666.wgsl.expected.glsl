@@ -22,7 +22,7 @@ layout(binding = 0, std430) buffer rarr_block_ssbo {
 
 void runtime_size_array() {
   int idx = -1;
-  float x = rarr.inner[idx];
+  float x = rarr.inner[uint(idx)];
 }
 
 void f() {

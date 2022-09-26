@@ -6,7 +6,8 @@ RWByteAddressBuffer result : register(u2, space0);
 
 [numthreads(1, 1, 1)]
 void f() {
-  const uint scalar_offset = ((16u * uint(asint(ubo[4].x)))) / 4;
+  const int tint_symbol_1 = asint(ubo[4].x);
+  const uint scalar_offset = ((16u * uint(tint_symbol_1))) / 4;
   result.Store(0u, asuint(asint(ubo[scalar_offset / 4][scalar_offset % 4])));
   return;
 }

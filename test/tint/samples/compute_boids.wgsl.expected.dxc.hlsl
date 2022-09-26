@@ -1,9 +1,9 @@
-struct tint_symbol_1 {
+struct tint_symbol_7 {
   float2 a_particlePos : TEXCOORD0;
   float2 a_particleVel : TEXCOORD1;
   float2 a_pos : TEXCOORD2;
 };
-struct tint_symbol_2 {
+struct tint_symbol_8 {
   float4 value : SV_Position;
 };
 
@@ -13,14 +13,14 @@ float4 vert_main_inner(float2 a_particlePos, float2 a_particleVel, float2 a_pos)
   return float4((pos + a_particlePos), 0.0f, 1.0f);
 }
 
-tint_symbol_2 vert_main(tint_symbol_1 tint_symbol) {
-  const float4 inner_result = vert_main_inner(tint_symbol.a_particlePos, tint_symbol.a_particleVel, tint_symbol.a_pos);
-  tint_symbol_2 wrapper_result = (tint_symbol_2)0;
+tint_symbol_8 vert_main(tint_symbol_7 tint_symbol_6) {
+  const float4 inner_result = vert_main_inner(tint_symbol_6.a_particlePos, tint_symbol_6.a_particleVel, tint_symbol_6.a_pos);
+  tint_symbol_8 wrapper_result = (tint_symbol_8)0;
   wrapper_result.value = inner_result;
   return wrapper_result;
 }
 
-struct tint_symbol_3 {
+struct tint_symbol_9 {
   float4 value : SV_Target0;
 };
 
@@ -28,9 +28,9 @@ float4 frag_main_inner() {
   return (1.0f).xxxx;
 }
 
-tint_symbol_3 frag_main() {
+tint_symbol_9 frag_main() {
   const float4 inner_result_1 = frag_main_inner();
-  tint_symbol_3 wrapper_result_1 = (tint_symbol_3)0;
+  tint_symbol_9 wrapper_result_1 = (tint_symbol_9)0;
   wrapper_result_1.value = inner_result_1;
   return wrapper_result_1;
 }
@@ -41,7 +41,7 @@ cbuffer cbuffer_params : register(b0, space0) {
 RWByteAddressBuffer particlesA : register(u1, space0);
 RWByteAddressBuffer particlesB : register(u2, space0);
 
-struct tint_symbol_5 {
+struct tint_symbol_11 {
   uint3 gl_GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -50,8 +50,10 @@ void comp_main_inner(uint3 gl_GlobalInvocationID) {
   if ((index >= 5u)) {
     return;
   }
-  float2 vPos = asfloat(particlesA.Load2((16u * index)));
-  float2 vVel = asfloat(particlesA.Load2(((16u * index) + 8u)));
+  const uint tint_symbol = index;
+  float2 vPos = asfloat(particlesA.Load2((16u * tint_symbol)));
+  const uint tint_symbol_1 = index;
+  float2 vVel = asfloat(particlesA.Load2(((16u * tint_symbol_1) + 8u)));
   float2 cMass = (0.0f).xx;
   float2 cVel = (0.0f).xx;
   float2 colVel = (0.0f).xx;
@@ -64,8 +66,10 @@ void comp_main_inner(uint3 gl_GlobalInvocationID) {
       if ((i == index)) {
         continue;
       }
-      pos = asfloat(particlesA.Load2((16u * i))).xy;
-      vel = asfloat(particlesA.Load2(((16u * i) + 8u))).xy;
+      const uint tint_symbol_2 = i;
+      pos = asfloat(particlesA.Load2((16u * tint_symbol_2))).xy;
+      const uint tint_symbol_3 = i;
+      vel = asfloat(particlesA.Load2(((16u * tint_symbol_3) + 8u))).xy;
       if ((distance(pos, vPos) < asfloat(params[0].y))) {
         cMass = (cMass + pos);
         cMassCount = (cMassCount + 1);
@@ -100,12 +104,14 @@ void comp_main_inner(uint3 gl_GlobalInvocationID) {
   if ((vPos.y > 1.0f)) {
     vPos.y = -1.0f;
   }
-  particlesB.Store2((16u * index), asuint(vPos));
-  particlesB.Store2(((16u * index) + 8u), asuint(vVel));
+  const uint tint_symbol_4 = index;
+  particlesB.Store2((16u * tint_symbol_4), asuint(vPos));
+  const uint tint_symbol_5 = index;
+  particlesB.Store2(((16u * tint_symbol_5) + 8u), asuint(vVel));
 }
 
 [numthreads(1, 1, 1)]
-void comp_main(tint_symbol_5 tint_symbol_4) {
-  comp_main_inner(tint_symbol_4.gl_GlobalInvocationID);
+void comp_main(tint_symbol_11 tint_symbol_10) {
+  comp_main_inner(tint_symbol_10.gl_GlobalInvocationID);
   return;
 }

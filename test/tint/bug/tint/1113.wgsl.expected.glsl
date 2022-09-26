@@ -60,7 +60,10 @@ uint toIndex1D(uint gridSize, vec3 voxelPos) {
 }
 
 vec3 loadPosition(uint vertexIndex) {
-  vec3 position = vec3(positions.values[((3u * vertexIndex) + 0u)], positions.values[((3u * vertexIndex) + 1u)], positions.values[((3u * vertexIndex) + 2u)]);
+  uint tint_symbol = ((3u * vertexIndex) + 0u);
+  uint tint_symbol_1 = ((3u * vertexIndex) + 1u);
+  uint tint_symbol_2 = ((3u * vertexIndex) + 2u);
+  vec3 position = vec3(positions.values[tint_symbol], positions.values[tint_symbol_1], positions.values[tint_symbol_2]);
   return position;
 }
 
@@ -79,16 +82,20 @@ void main_count(uvec3 GlobalInvocationID) {
     return;
   }
   doIgnore();
-  uint i0 = indices.values[((3u * triangleIndex) + 0u)];
-  uint i1 = indices.values[((3u * triangleIndex) + 1u)];
-  uint i2 = indices.values[((3u * triangleIndex) + 2u)];
+  uint tint_symbol_3 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.values[tint_symbol_3];
+  uint tint_symbol_4 = ((3u * triangleIndex) + 1u);
+  uint i1 = indices.values[tint_symbol_4];
+  uint tint_symbol_5 = ((3u * triangleIndex) + 2u);
+  uint i2 = indices.values[tint_symbol_5];
   vec3 p0 = loadPosition(i0);
   vec3 p1 = loadPosition(i1);
   vec3 p2 = loadPosition(i2);
   vec3 center = (((p0 + p1) + p2) / 3.0f);
   vec3 voxelPos = toVoxelPos(center);
   uint voxelIndex = toIndex1D(uniforms.gridSize, voxelPos);
-  uint acefg = atomicAdd(counters.values[voxelIndex], 1u);
+  uint tint_symbol_6 = voxelIndex;
+  uint acefg = atomicAdd(counters.values[tint_symbol_6], 1u);
   if ((triangleIndex == 0u)) {
     dbg.value0 = uniforms.gridSize;
     dbg.value_f32_0 = center.x;
@@ -162,13 +169,15 @@ void main_create_lut(uvec3 GlobalInvocationID) {
   if ((voxelIndex >= maxVoxels)) {
     return;
   }
-  uint numTriangles = atomicOr(counters.values[voxelIndex], 0u);
+  uint tint_symbol = voxelIndex;
+  uint numTriangles = atomicOr(counters.values[tint_symbol], 0u);
   int offset = -1;
   if ((numTriangles > 0u)) {
-    uint tint_symbol = atomicAdd(dbg.offsetCounter, numTriangles);
-    offset = int(tint_symbol);
+    uint tint_symbol_2 = atomicAdd(dbg.offsetCounter, numTriangles);
+    offset = int(tint_symbol_2);
   }
-  atomicExchange(LUT.values[voxelIndex], offset);
+  uint tint_symbol_1 = voxelIndex;
+  atomicExchange(LUT.values[tint_symbol_1], offset);
 }
 
 layout(local_size_x = 128, local_size_y = 1, local_size_z = 1) in;
@@ -238,7 +247,10 @@ uint toIndex1D(uint gridSize, vec3 voxelPos) {
 }
 
 vec3 loadPosition(uint vertexIndex) {
-  vec3 position = vec3(positions.values[((3u * vertexIndex) + 0u)], positions.values[((3u * vertexIndex) + 1u)], positions.values[((3u * vertexIndex) + 2u)]);
+  uint tint_symbol = ((3u * vertexIndex) + 0u);
+  uint tint_symbol_1 = ((3u * vertexIndex) + 1u);
+  uint tint_symbol_2 = ((3u * vertexIndex) + 2u);
+  vec3 position = vec3(positions.values[tint_symbol], positions.values[tint_symbol_1], positions.values[tint_symbol_2]);
   return position;
 }
 
@@ -257,16 +269,20 @@ void main_sort_triangles(uvec3 GlobalInvocationID) {
   if ((triangleIndex >= uniforms.numTriangles)) {
     return;
   }
-  uint i0 = indices.values[((3u * triangleIndex) + 0u)];
-  uint i1 = indices.values[((3u * triangleIndex) + 1u)];
-  uint i2 = indices.values[((3u * triangleIndex) + 2u)];
+  uint tint_symbol_3 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.values[tint_symbol_3];
+  uint tint_symbol_4 = ((3u * triangleIndex) + 1u);
+  uint i1 = indices.values[tint_symbol_4];
+  uint tint_symbol_5 = ((3u * triangleIndex) + 2u);
+  uint i2 = indices.values[tint_symbol_5];
   vec3 p0 = loadPosition(i0);
   vec3 p1 = loadPosition(i1);
   vec3 p2 = loadPosition(i2);
   vec3 center = (((p0 + p1) + p2) / 3.0f);
   vec3 voxelPos = toVoxelPos(center);
   uint voxelIndex = toIndex1D(uniforms.gridSize, voxelPos);
-  int triangleOffset = atomicAdd(LUT.values[voxelIndex], 1);
+  uint tint_symbol_6 = voxelIndex;
+  int triangleOffset = atomicAdd(LUT.values[tint_symbol_6], 1);
 }
 
 layout(local_size_x = 128, local_size_y = 1, local_size_z = 1) in;

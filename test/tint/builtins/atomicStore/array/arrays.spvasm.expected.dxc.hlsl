@@ -12,8 +12,11 @@ void compute_main_inner(uint local_invocation_index) {
     const uint x_31 = idx;
     const uint x_33 = idx;
     const uint x_35 = idx;
+    const uint tint_symbol = (x_31 / 2u);
+    const uint tint_symbol_1 = (x_33 % 2u);
+    const uint tint_symbol_2 = (x_35 % 1u);
     uint atomic_result = 0u;
-    InterlockedExchange(wg[(x_31 / 2u)][(x_33 % 2u)][(x_35 % 1u)], 0u, atomic_result);
+    InterlockedExchange(wg[tint_symbol][tint_symbol_1][tint_symbol_2], 0u, atomic_result);
     {
       const uint x_42 = idx;
       idx = (x_42 + 1u);
@@ -31,7 +34,7 @@ void compute_main_1() {
   return;
 }
 
-struct tint_symbol_1 {
+struct tint_symbol_4 {
   uint local_invocation_index_1_param : SV_GroupIndex;
 };
 
@@ -51,7 +54,7 @@ void compute_main_inner_1(uint local_invocation_index_1_param) {
 }
 
 [numthreads(1, 1, 1)]
-void compute_main(tint_symbol_1 tint_symbol) {
-  compute_main_inner_1(tint_symbol.local_invocation_index_1_param);
+void compute_main(tint_symbol_4 tint_symbol_3) {
+  compute_main_inner_1(tint_symbol_3.local_invocation_index_1_param);
   return;
 }

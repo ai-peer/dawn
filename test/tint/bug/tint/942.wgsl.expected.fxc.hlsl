@@ -10,7 +10,7 @@ cbuffer cbuffer_flip : register(b3, space1) {
 };
 groupshared float3 tile[4][256];
 
-struct tint_symbol_1 {
+struct tint_symbol_5 {
   uint3 LocalInvocationID : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
   uint3 WorkGroupID : SV_GroupID;
@@ -38,7 +38,9 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
           if ((flip[0].x != 0u)) {
             loadIndex = loadIndex.yx;
           }
-          tile[r][((4u * LocalInvocationID.x) + c)] = inputTex.SampleLevel(samp, ((float2(loadIndex) + (0.25f).xx) / float2(dims)), 0.0f).rgb;
+          const uint tint_symbol = r;
+          const uint tint_symbol_1 = ((4u * LocalInvocationID.x) + c);
+          tile[tint_symbol][tint_symbol_1] = inputTex.SampleLevel(samp, ((float2(loadIndex) + (0.25f).xx) / float2(dims)), 0.0f).rgb;
         }
       }
     }
@@ -66,7 +68,9 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
             {
               [loop] for(uint f = 0u; (f < params[0].x); f = (f + 1u)) {
                 uint i = ((center + f) - filterOffset);
-                acc = (acc + ((1.0f / float(params[0].x)) * tile[r][i]));
+                const uint tint_symbol_2 = r;
+                const uint tint_symbol_3 = i;
+                acc = (acc + ((1.0f / float(params[0].x)) * tile[tint_symbol_2][tint_symbol_3]));
               }
             }
             outputTex[writeIndex] = float4(acc, 1.0f);
@@ -78,7 +82,7 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
 }
 
 [numthreads(64, 1, 1)]
-void main(tint_symbol_1 tint_symbol) {
-  main_inner(tint_symbol.WorkGroupID, tint_symbol.LocalInvocationID, tint_symbol.local_invocation_index);
+void main(tint_symbol_5 tint_symbol_4) {
+  main_inner(tint_symbol_4.WorkGroupID, tint_symbol_4.LocalInvocationID, tint_symbol_4.local_invocation_index);
   return;
 }

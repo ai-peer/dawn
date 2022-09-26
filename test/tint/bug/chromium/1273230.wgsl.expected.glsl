@@ -60,7 +60,10 @@ uint toIndex1D(uint gridSize, vec3 voxelPos) {
 }
 
 vec3 loadPosition(uint vertexIndex) {
-  vec3 position = vec3(positions.values[((3u * vertexIndex) + 0u)], positions.values[((3u * vertexIndex) + 1u)], positions.values[((3u * vertexIndex) + 2u)]);
+  uint tint_symbol = ((3u * vertexIndex) + 0u);
+  uint tint_symbol_1 = ((3u * vertexIndex) + 1u);
+  uint tint_symbol_2 = ((3u * vertexIndex) + 2u);
+  vec3 position = vec3(positions.values[tint_symbol], positions.values[tint_symbol_1], positions.values[tint_symbol_2]);
   return position;
 }
 
@@ -79,16 +82,20 @@ void main_count(uvec3 GlobalInvocationID) {
     return;
   }
   doIgnore();
-  uint i0 = indices.values[((3u * triangleIndex) + 0u)];
-  uint i1 = indices.values[((3u * i0) + 1u)];
-  uint i2 = indices.values[((3u * i0) + 2u)];
+  uint tint_symbol_3 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.values[tint_symbol_3];
+  uint tint_symbol_4 = ((3u * i0) + 1u);
+  uint i1 = indices.values[tint_symbol_4];
+  uint tint_symbol_5 = ((3u * i0) + 2u);
+  uint i2 = indices.values[tint_symbol_5];
   vec3 p0 = loadPosition(i0);
   vec3 p1 = loadPosition(i0);
   vec3 p2 = loadPosition(i2);
   vec3 center = (((p0 + p2) + p1) / 3.0f);
   vec3 voxelPos = toVoxelPos(p1);
   uint lIndex = toIndex1D(uniforms.gridSize, p0);
-  int triangleOffset = atomicAdd(LUT.values[i1], 1);
+  uint tint_symbol_6 = i1;
+  int triangleOffset = atomicAdd(LUT.values[tint_symbol_6], 1);
 }
 
 layout(local_size_x = 128, local_size_y = 1, local_size_z = 1) in;

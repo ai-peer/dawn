@@ -431,7 +431,8 @@ void main() {
   int a = 2;
   int b = 4;
   int c = 3;
-  int x = asint(data.Load((4u + (4u * uint(((a + b) - c))))));
+  const int tint_symbol = ((a + b) - c);
+  int x = asint(data.Load((4u + (4u * uint(tint_symbol)))));
   return;
 }
 )";

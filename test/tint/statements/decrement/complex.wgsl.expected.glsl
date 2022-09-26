@@ -44,13 +44,14 @@ int idx6() {
 }
 
 void tint_symbol_1() {
-  int tint_symbol_6 = idx1();
-  int tint_symbol_7 = idx2();
-  int tint_symbol_2_save = tint_symbol_6;
-  int tint_symbol_2_save_1 = tint_symbol_7;
-  int tint_symbol_3 = idx3();
+  int tint_symbol_2 = idx1();
+  int tint_symbol_3 = idx2();
+  int tint_symbol_4 = idx3();
   {
-    tint_symbol.inner[tint_symbol_2_save].a[tint_symbol_2_save_1][tint_symbol_3] = (tint_symbol.inner[tint_symbol_2_save].a[tint_symbol_2_save_1][tint_symbol_3] - 1);
+    uint tint_symbol_8_save = uint(tint_symbol_2);
+    uint tint_symbol_8_save_1 = uint(tint_symbol_3);
+    uint tint_symbol_9 = uint(tint_symbol_4);
+    tint_symbol.inner[tint_symbol_8_save].a[tint_symbol_8_save_1][tint_symbol_9] = (tint_symbol.inner[tint_symbol_8_save].a[tint_symbol_8_save_1][tint_symbol_9] - 1);
     while (true) {
       if (!((v < 10u))) {
         break;
@@ -58,12 +59,13 @@ void tint_symbol_1() {
       {
       }
       {
-        int tint_symbol_8 = idx4();
-        int tint_symbol_9 = idx5();
-        int tint_symbol_4_save = tint_symbol_8;
-        int tint_symbol_4_save_1 = tint_symbol_9;
-        int tint_symbol_5 = idx6();
-        tint_symbol.inner[tint_symbol_4_save].a[tint_symbol_4_save_1][tint_symbol_5] = (tint_symbol.inner[tint_symbol_4_save].a[tint_symbol_4_save_1][tint_symbol_5] - 1);
+        int tint_symbol_5 = idx4();
+        int tint_symbol_6 = idx5();
+        int tint_symbol_7 = idx6();
+        uint tint_symbol_10_save = uint(tint_symbol_5);
+        uint tint_symbol_10_save_1 = uint(tint_symbol_6);
+        uint tint_symbol_11 = uint(tint_symbol_7);
+        tint_symbol.inner[tint_symbol_10_save].a[tint_symbol_10_save_1][tint_symbol_11] = (tint_symbol.inner[tint_symbol_10_save].a[tint_symbol_10_save_1][tint_symbol_11] - 1);
       }
     }
   }

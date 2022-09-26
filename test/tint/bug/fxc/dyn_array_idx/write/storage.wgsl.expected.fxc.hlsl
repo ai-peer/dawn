@@ -8,7 +8,8 @@ RWByteAddressBuffer ssbo : register(u1, space0);
 
 [numthreads(1, 1, 1)]
 void f() {
-  ssbo.Store((4u * uint(asint(ubo[0].x))), asuint(1));
+  const int tint_symbol_1 = asint(ubo[0].x);
+  ssbo.Store((4u * uint(tint_symbol_1)), asuint(1));
   result.Store(0u, asuint(asint(ssbo.Load(12u))));
   return;
 }

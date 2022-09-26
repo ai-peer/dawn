@@ -13,7 +13,10 @@ void compute_main_inner(uint local_invocation_index) {
     uint x_31 = idx;
     uint x_33 = idx;
     uint x_35 = idx;
-    atomicExchange(wg[(x_31 / 2u)][(x_33 % 2u)][(x_35 % 1u)], 0u);
+    uint tint_symbol = (x_31 / 2u);
+    uint tint_symbol_1 = (x_33 % 2u);
+    uint tint_symbol_2 = (x_35 % 1u);
+    atomicExchange(wg[tint_symbol][tint_symbol_1][tint_symbol_2], 0u);
     {
       uint x_42 = idx;
       idx = (x_42 + 1u);

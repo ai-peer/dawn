@@ -1,0 +1,45 @@
+SKIP: FAILED
+
+; SPIR-V
+; Version: 1.3
+; Generator: Google Tint Compiler; 0
+; Bound: 22
+; Schema: 0
+               OpCapability Shader
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint GLCompute %main "main"
+               OpExecutionMode %main LocalSize 1 1 1
+               OpName %str "str"
+               OpMemberName %str 0 "i"
+               OpName %P "P"
+               OpName %func "func"
+               OpName %pointer "pointer"
+               OpName %main "main"
+               OpMemberDecorate %str 0 Offset 0
+        %int = OpTypeInt 32 1
+        %str = OpTypeStruct %int
+%_ptr_Private_str = OpTypePointer Private %str
+          %5 = OpConstantNull %str
+          %P = OpVariable %_ptr_Private_str Private %5
+       %void = OpTypeVoid
+%_ptr_Private_int = OpTypePointer Private %int
+          %6 = OpTypeFunction %void %_ptr_Private_int
+     %int_42 = OpConstant %int 42
+         %14 = OpTypeFunction %void
+       %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
+       %func = OpFunction %void None %6
+    %pointer = OpFunctionParameter %_ptr_Private_int
+         %11 = OpLabel
+               OpStore %pointer %int_42
+               OpReturn
+               OpFunctionEnd
+       %main = OpFunction %void None %14
+         %16 = OpLabel
+         %21 = OpAccessChain %_ptr_Private_int %P %uint_0
+         %17 = OpFunctionCall %void %func %21
+               OpReturn
+               OpFunctionEnd
+1:1: Pointer operand 21[%21] must be a memory object declaration
+  %17 = OpFunctionCall %void %func %21
+

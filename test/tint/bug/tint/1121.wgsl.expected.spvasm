@@ -216,9 +216,9 @@
                OpReturn
          %44 = OpLabel
          %46 = OpLoad %uint %index
-         %49 = OpAccessChain %_ptr_StorageBuffer_float %lightsBuffer %uint_0 %46 %uint_0 %uint_1
-         %50 = OpLoad %uint %index
-         %51 = OpAccessChain %_ptr_StorageBuffer_float %lightsBuffer %uint_0 %50 %uint_0 %uint_1
+         %47 = OpLoad %uint %index
+         %50 = OpAccessChain %_ptr_StorageBuffer_float %lightsBuffer %uint_0 %46 %uint_0 %uint_1
+         %51 = OpAccessChain %_ptr_StorageBuffer_float %lightsBuffer %uint_0 %47 %uint_0 %uint_1
          %52 = OpLoad %float %51
          %54 = OpFSub %float %52 %float_0_100000001
          %57 = OpLoad %uint %index
@@ -231,7 +231,7 @@
          %65 = OpFSub %float %56 %64
          %66 = OpFMul %float %float_0_00100000005 %65
          %67 = OpFAdd %float %54 %66
-               OpStore %49 %67
+               OpStore %50 %67
          %68 = OpLoad %uint %index
          %69 = OpAccessChain %_ptr_StorageBuffer_float %lightsBuffer %uint_0 %68 %uint_0 %uint_1
          %70 = OpLoad %float %69
@@ -571,10 +571,10 @@
         %388 = OpLabel
                OpBranch %181
         %387 = OpLabel
-        %391 = OpLoad %uint %tileId
-        %393 = OpAccessChain %_ptr_StorageBuffer_uint %tileLightId %uint_0 %391 %uint_0
-        %389 = OpAtomicIAdd %uint %393 %uint_1 %uint_0 %uint_1
-               OpStore %offset %389
+        %389 = OpLoad %uint %tileId
+        %393 = OpAccessChain %_ptr_StorageBuffer_uint %tileLightId %uint_0 %389 %uint_0
+        %390 = OpAtomicIAdd %uint %393 %uint_1 %uint_0 %uint_1
+               OpStore %offset %390
         %395 = OpLoad %uint %offset
         %396 = OpAccessChain %_ptr_Uniform_uint %config %uint_4
         %397 = OpLoad %uint %396

@@ -44,7 +44,7 @@ void main_1() {
   param = -4.0f;
   param_1 = -3.0f;
   float x_68 = binaryOperation_f1_f1_(param, param_1);
-  resultMatrix.numbers[x_63] = x_68;
+  resultMatrix.numbers[uint(x_63)] = x_68;
   return;
 }
 

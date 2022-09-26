@@ -221,8 +221,8 @@
          %97 = OpLabel
                OpReturn
          %96 = OpLabel
-         %99 = OpLoad %uint %index
-        %101 = OpAccessChain %_ptr_StorageBuffer_v2float %particlesA %uint_0 %99 %uint_0
+         %98 = OpLoad %uint %index
+        %101 = OpAccessChain %_ptr_StorageBuffer_v2float %particlesA %uint_0 %98 %uint_0
         %102 = OpLoad %v2float %101
                OpStore %vPos %102
         %104 = OpLoad %uint %index

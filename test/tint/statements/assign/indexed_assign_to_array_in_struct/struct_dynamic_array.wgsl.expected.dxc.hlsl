@@ -7,13 +7,14 @@ cbuffer cbuffer_uniforms : register(b4, space1) {
 };
 RWByteAddressBuffer s1 : register(u0, space0);
 
-void tint_symbol_1(RWByteAddressBuffer buffer, uint offset, InnerS value) {
+void tint_symbol_2(RWByteAddressBuffer buffer, uint offset, InnerS value) {
   buffer.Store((offset + 0u), asuint(value.v));
 }
 
 [numthreads(1, 1, 1)]
 void main() {
   InnerS v = (InnerS)0;
-  tint_symbol_1(s1, (4u * uniforms[0].x), v);
+  const uint tint_symbol = uniforms[0].x;
+  tint_symbol_2(s1, (4u * tint_symbol), v);
   return;
 }

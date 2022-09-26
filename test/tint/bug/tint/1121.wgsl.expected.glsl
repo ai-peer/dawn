@@ -43,17 +43,23 @@ void tint_symbol_2(uvec3 GlobalInvocationID) {
   if ((index >= config.numLights)) {
     return;
   }
-  lightsBuffer.lights[index].position.y = ((lightsBuffer.lights[index].position.y - 0.100000001f) + (0.001f * (float(index) - (64.0f * floor((float(index) / 64.0f))))));
-  if ((lightsBuffer.lights[index].position.y < uniforms.tint_symbol.y)) {
-    lightsBuffer.lights[index].position.y = uniforms.tint_symbol_1.y;
+  uint tint_symbol_3 = index;
+  uint tint_symbol_4 = index;
+  lightsBuffer.lights[tint_symbol_3].position.y = ((lightsBuffer.lights[tint_symbol_4].position.y - 0.100000001f) + (0.001f * (float(index) - (64.0f * floor((float(index) / 64.0f))))));
+  uint tint_symbol_5 = index;
+  if ((lightsBuffer.lights[tint_symbol_5].position.y < uniforms.tint_symbol.y)) {
+    uint tint_symbol_6 = index;
+    lightsBuffer.lights[tint_symbol_6].position.y = uniforms.tint_symbol_1.y;
   }
   mat4 M = uniforms.projectionMatrix;
   float viewNear = (-(M[3][2]) / (-1.0f + M[2][2]));
   float viewFar = (-(M[3][2]) / (1.0f + M[2][2]));
-  vec4 lightPos = lightsBuffer.lights[index].position;
+  uint tint_symbol_7 = index;
+  vec4 lightPos = lightsBuffer.lights[tint_symbol_7].position;
   lightPos = (uniforms.viewMatrix * lightPos);
   lightPos = (lightPos / lightPos.w);
-  float lightRadius = lightsBuffer.lights[index].radius;
+  uint tint_symbol_8 = index;
+  float lightRadius = lightsBuffer.lights[tint_symbol_8].radius;
   vec4 boxMin = (lightPos - vec4(vec3(lightRadius), 0.0f));
   vec4 boxMax = (lightPos + vec4(vec3(lightRadius), 0.0f));
   vec4 frustumPlanes[6] = vec4[6](vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f), vec4(0.0f, 0.0f, 0.0f, 0.0f));
@@ -107,11 +113,14 @@ void tint_symbol_2(uvec3 GlobalInvocationID) {
             if ((tint_tmp)) {
               continue;
             }
-            uint offset = atomicAdd(tileLightId.data[tileId].count, 1u);
+            uint tint_symbol_9 = tileId;
+            uint offset = atomicAdd(tileLightId.data[tint_symbol_9].count, 1u);
             if ((offset >= config.numTileLightSlot)) {
               continue;
             }
-            tileLightId.data[tileId].lightId[offset] = GlobalInvocationID.x;
+            uint tint_symbol_10 = tileId;
+            uint tint_symbol_11 = offset;
+            tileLightId.data[tint_symbol_10].lightId[tint_symbol_11] = GlobalInvocationID.x;
           }
         }
       }

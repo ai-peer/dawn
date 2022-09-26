@@ -14,13 +14,14 @@ int tint_atomicLoad(RWByteAddressBuffer buffer, uint offset) {
 
 
 int runTest() {
-  return tint_atomicLoad(s, (4u * (0u + uint(constants[0].x))));
+  const uint tint_symbol = (0u + uint(constants[0].x));
+  return tint_atomicLoad(s, (4u * tint_symbol));
 }
 
 [numthreads(1, 1, 1)]
 void main() {
-  const int tint_symbol = runTest();
-  const uint tint_symbol_1 = uint(tint_symbol);
-  result.Store(0u, asuint(tint_symbol_1));
+  const int tint_symbol_1 = runTest();
+  const uint tint_symbol_2 = uint(tint_symbol_1);
+  result.Store(0u, asuint(tint_symbol_2));
   return;
 }

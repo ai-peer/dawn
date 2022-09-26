@@ -10,11 +10,11 @@ cbuffer cbuffer_uniforms : register(b0, space3) {
   uint4 uniforms[11];
 };
 
-struct tint_symbol_1 {
+struct tint_symbol_10 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
-float4x4 tint_symbol_6(uint4 buffer[11], uint offset) {
+float4x4 tint_symbol_15(uint4 buffer[11], uint offset) {
   const uint scalar_offset = ((offset + 0u)) / 4;
   const uint scalar_offset_1 = ((offset + 16u)) / 4;
   const uint scalar_offset_2 = ((offset + 32u)) / 4;
@@ -34,17 +34,23 @@ void main_inner(uint3 GlobalInvocationID) {
   if ((index >= config[0].x)) {
     return;
   }
-  lightsBuffer.Store(((32u * index) + 4u), asuint(((asfloat(lightsBuffer.Load(((32u * index) + 4u))) - 0.100000001f) + (0.001f * (float(index) - (64.0f * floor((float(index) / 64.0f))))))));
-  if ((asfloat(lightsBuffer.Load(((32u * index) + 4u))) < asfloat(uniforms[0].y))) {
-    lightsBuffer.Store(((32u * index) + 4u), asuint(asfloat(uniforms[1].y)));
+  const uint tint_symbol = index;
+  const uint tint_symbol_1 = index;
+  lightsBuffer.Store(((32u * tint_symbol) + 4u), asuint(((asfloat(lightsBuffer.Load(((32u * tint_symbol_1) + 4u))) - 0.100000001f) + (0.001f * (float(index) - (64.0f * floor((float(index) / 64.0f))))))));
+  const uint tint_symbol_2 = index;
+  if ((asfloat(lightsBuffer.Load(((32u * tint_symbol_2) + 4u))) < asfloat(uniforms[0].y))) {
+    const uint tint_symbol_3 = index;
+    lightsBuffer.Store(((32u * tint_symbol_3) + 4u), asuint(asfloat(uniforms[1].y)));
   }
-  float4x4 M = tint_symbol_6(uniforms, 96u);
+  float4x4 M = tint_symbol_15(uniforms, 96u);
   float viewNear = (-(M[3][2]) / (-1.0f + M[2][2]));
   float viewFar = (-(M[3][2]) / (1.0f + M[2][2]));
-  float4 lightPos = asfloat(lightsBuffer.Load4((32u * index)));
-  lightPos = mul(lightPos, tint_symbol_6(uniforms, 32u));
+  const uint tint_symbol_4 = index;
+  float4 lightPos = asfloat(lightsBuffer.Load4((32u * tint_symbol_4)));
+  lightPos = mul(lightPos, tint_symbol_15(uniforms, 32u));
   lightPos = (lightPos / lightPos.w);
-  float lightRadius = asfloat(lightsBuffer.Load(((32u * index) + 28u)));
+  const uint tint_symbol_5 = index;
+  float lightRadius = asfloat(lightsBuffer.Load(((32u * tint_symbol_5) + 28u)));
   float4 boxMin = (lightPos - float4(float3((lightRadius).xxx), 0.0f));
   float4 boxMax = (lightPos + float4(float3((lightRadius).xxx), 0.0f));
   float4 frustumPlanes[6] = (float4[6])0;
@@ -98,11 +104,14 @@ void main_inner(uint3 GlobalInvocationID) {
             if ((tint_tmp)) {
               continue;
             }
-            uint offset = tint_atomicAdd(tileLightId, (260u * tileId), 1u);
+            const uint tint_symbol_6 = tileId;
+            uint offset = tint_atomicAdd(tileLightId, (260u * tint_symbol_6), 1u);
             if ((offset >= config[1].x)) {
               continue;
             }
-            tileLightId.Store((((260u * tileId) + 4u) + (4u * offset)), asuint(GlobalInvocationID.x));
+            const uint tint_symbol_7 = tileId;
+            const uint tint_symbol_8 = offset;
+            tileLightId.Store((((260u * tint_symbol_7) + 4u) + (4u * tint_symbol_8)), asuint(GlobalInvocationID.x));
           }
         }
       }
@@ -111,7 +120,7 @@ void main_inner(uint3 GlobalInvocationID) {
 }
 
 [numthreads(64, 1, 1)]
-void main(tint_symbol_1 tint_symbol) {
-  main_inner(tint_symbol.GlobalInvocationID);
+void main(tint_symbol_10 tint_symbol_9) {
+  main_inner(tint_symbol_9.GlobalInvocationID);
   return;
 }

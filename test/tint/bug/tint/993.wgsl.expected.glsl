@@ -16,13 +16,14 @@ layout(binding = 0, std430) buffer TestData_ssbo {
 } s;
 
 int runTest() {
-  return atomicOr(s.data[(0u + uint(constants.zero))], 0);
+  uint tint_symbol_1 = (0u + uint(constants.zero));
+  return atomicOr(s.data[tint_symbol_1], 0);
 }
 
 void tint_symbol() {
-  int tint_symbol_1 = runTest();
-  uint tint_symbol_2 = uint(tint_symbol_1);
-  result.value = tint_symbol_2;
+  int tint_symbol_2 = runTest();
+  uint tint_symbol_3 = uint(tint_symbol_2);
+  result.value = tint_symbol_3;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

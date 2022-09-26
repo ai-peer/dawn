@@ -38,7 +38,7 @@ float unaryOperation_f1_(inout float a) {
 void setOutput_i1_f1_(inout int flatIndex, inout float value) {
   int x_27 = flatIndex;
   float x_28 = value;
-  x_16.result[x_27] = x_28;
+  x_16.result[uint(x_27)] = x_28;
   return;
 }
 

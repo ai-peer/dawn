@@ -37,8 +37,8 @@
      %result = OpVariable %_ptr_StorageBuffer_Result StorageBuffer
        %void = OpTypeVoid
          %13 = OpTypeFunction %void %v3uint
-     %uint_0 = OpConstant %uint 0
    %uint_128 = OpConstant %uint 128
+     %uint_0 = OpConstant %uint 0
 %_ptr_StorageBuffer_float = OpTypePointer StorageBuffer %float
     %v4float = OpTypeVector %float 4
         %int = OpTypeInt 32 1
@@ -48,11 +48,11 @@
  %main_inner = OpFunction %void None %13
 %GlobalInvocationId = OpFunctionParameter %v3uint
          %17 = OpLabel
-         %19 = OpCompositeExtract %uint %GlobalInvocationId 1
-         %21 = OpIMul %uint %19 %uint_128
-         %22 = OpCompositeExtract %uint %GlobalInvocationId 0
-         %23 = OpIAdd %uint %21 %22
-         %25 = OpAccessChain %_ptr_StorageBuffer_float %result %uint_0 %23
+         %18 = OpCompositeExtract %uint %GlobalInvocationId 1
+         %20 = OpIMul %uint %18 %uint_128
+         %21 = OpCompositeExtract %uint %GlobalInvocationId 0
+         %22 = OpIAdd %uint %20 %21
+         %25 = OpAccessChain %_ptr_StorageBuffer_float %result %uint_0 %22
          %29 = OpLoad %7 %tex
          %33 = OpCompositeExtract %uint %GlobalInvocationId 0
          %32 = OpBitcast %int %33

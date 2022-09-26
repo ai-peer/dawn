@@ -1,7 +1,7 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 108
+; Bound: 114
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
@@ -163,15 +163,19 @@
           %f = OpFunction %void None %91
          %94 = OpLabel
          %95 = OpFunctionCall %int %i
-         %96 = OpFunctionCall %int %i
-         %99 = OpAccessChain %_ptr_Uniform__arr_mat4x2_f32_uint_4 %a %uint_0
-        %100 = OpLoad %_arr_mat4x2_f32_uint_4 %99
-         %97 = OpFunctionCall %_arr_mat4v2float_uint_4 %conv_arr4_mat4x2_f32 %100
-        %103 = OpAccessChain %_ptr_Uniform_mat4x2_f32 %a %uint_0 %95
-        %104 = OpLoad %mat4x2_f32 %103
-        %101 = OpFunctionCall %mat4v2float %conv_mat4x2_f32 %104
-        %106 = OpBitcast %uint %95
-        %107 = OpBitcast %uint %96
-        %105 = OpFunctionCall %v2float %load_a_inner_p0_p1 %106 %107
+         %96 = OpBitcast %uint %95
+         %97 = OpFunctionCall %int %i
+         %98 = OpBitcast %uint %95
+         %99 = OpBitcast %uint %97
+        %102 = OpAccessChain %_ptr_Uniform__arr_mat4x2_f32_uint_4 %a %uint_0
+        %103 = OpLoad %_arr_mat4x2_f32_uint_4 %102
+        %100 = OpFunctionCall %_arr_mat4v2float_uint_4 %conv_arr4_mat4x2_f32 %103
+        %105 = OpBitcast %uint %95
+        %107 = OpAccessChain %_ptr_Uniform_mat4x2_f32 %a %uint_0 %105
+        %108 = OpLoad %mat4x2_f32 %107
+        %104 = OpFunctionCall %mat4v2float %conv_mat4x2_f32 %108
+        %111 = OpBitcast %uint %95
+        %113 = OpBitcast %uint %97
+        %109 = OpFunctionCall %v2float %load_a_inner_p0_p1 %111 %113
                OpReturn
                OpFunctionEnd

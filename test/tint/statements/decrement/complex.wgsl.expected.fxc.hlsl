@@ -37,13 +37,14 @@ int idx6() {
 }
 
 void main() {
-  const int tint_symbol_4 = idx1();
-  const int tint_symbol_5 = idx2();
-  const int tint_symbol_save = tint_symbol_4;
-  const int tint_symbol_save_1 = tint_symbol_5;
-  const int tint_symbol_1 = idx3();
+  const int tint_symbol = idx1();
+  const int tint_symbol_1 = idx2();
+  const int tint_symbol_2 = idx3();
   {
-    buffer.Store((((64u * uint(tint_symbol_save)) + (16u * uint(tint_symbol_save_1))) + (4u * uint(tint_symbol_1))), asuint((asint(buffer.Load((((64u * uint(tint_symbol_save)) + (16u * uint(tint_symbol_save_1))) + (4u * uint(tint_symbol_1))))) - 1)));
+    const uint tint_symbol_6_save = uint(tint_symbol);
+    const uint tint_symbol_6_save_1 = uint(tint_symbol_1);
+    const uint tint_symbol_7 = uint(tint_symbol_2);
+    buffer.Store((((64u * tint_symbol_6_save) + (16u * tint_symbol_6_save_1)) + (4u * tint_symbol_7)), asuint((asint(buffer.Load((((64u * tint_symbol_6_save) + (16u * tint_symbol_6_save_1)) + (4u * tint_symbol_7)))) - 1)));
     [loop] while (true) {
       if (!((v < 10u))) {
         break;
@@ -51,12 +52,13 @@ void main() {
       {
       }
       {
-        const int tint_symbol_6 = idx4();
-        const int tint_symbol_7 = idx5();
-        const int tint_symbol_2_save = tint_symbol_6;
-        const int tint_symbol_2_save_1 = tint_symbol_7;
-        const int tint_symbol_3 = idx6();
-        buffer.Store((((64u * uint(tint_symbol_2_save)) + (16u * uint(tint_symbol_2_save_1))) + (4u * uint(tint_symbol_3))), asuint((asint(buffer.Load((((64u * uint(tint_symbol_2_save)) + (16u * uint(tint_symbol_2_save_1))) + (4u * uint(tint_symbol_3))))) - 1)));
+        const int tint_symbol_3 = idx4();
+        const int tint_symbol_4 = idx5();
+        const int tint_symbol_5 = idx6();
+        const uint tint_symbol_8_save = uint(tint_symbol_3);
+        const uint tint_symbol_8_save_1 = uint(tint_symbol_4);
+        const uint tint_symbol_9 = uint(tint_symbol_5);
+        buffer.Store((((64u * tint_symbol_8_save) + (16u * tint_symbol_8_save_1)) + (4u * tint_symbol_9)), asuint((asint(buffer.Load((((64u * tint_symbol_8_save) + (16u * tint_symbol_8_save_1)) + (4u * tint_symbol_9)))) - 1)));
       }
     }
   }

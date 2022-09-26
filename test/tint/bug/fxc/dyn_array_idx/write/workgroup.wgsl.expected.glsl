@@ -24,7 +24,8 @@ void f(uint local_invocation_index) {
     }
   }
   barrier();
-  s.data[ubo.dynamic_idx] = 1;
+  int tint_symbol_1 = ubo.dynamic_idx;
+  s.data[uint(tint_symbol_1)] = 1;
   result.tint_symbol = s.data[3];
 }
 

@@ -39,7 +39,10 @@ uint3 toIndex4D(uint gridSize, uint index) {
 }
 
 float3 loadPosition(uint vertexIndex) {
-  float3 position = float3(asfloat(positions.Load((4u * ((3u * vertexIndex) + 0u)))), asfloat(positions.Load((4u * ((3u * vertexIndex) + 1u)))), asfloat(positions.Load((4u * ((3u * vertexIndex) + 2u)))));
+  const uint tint_symbol = ((3u * vertexIndex) + 0u);
+  const uint tint_symbol_1 = ((3u * vertexIndex) + 1u);
+  const uint tint_symbol_2 = ((3u * vertexIndex) + 2u);
+  float3 position = float3(asfloat(positions.Load((4u * tint_symbol))), asfloat(positions.Load((4u * tint_symbol_1))), asfloat(positions.Load((4u * tint_symbol_2))));
   return position;
 }
 
@@ -66,7 +69,7 @@ void doIgnore() {
   int g55 = tint_atomicLoad_1(LUT, 0u);
 }
 
-struct tint_symbol_1 {
+struct tint_symbol_8 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -83,20 +86,24 @@ void main_count_inner(uint3 GlobalInvocationID) {
     return;
   }
   doIgnore();
-  uint i0 = indices.Load((4u * ((3u * triangleIndex) + 0u)));
-  uint i1 = indices.Load((4u * ((3u * i0) + 1u)));
-  uint i2 = indices.Load((4u * ((3u * i0) + 2u)));
+  const uint tint_symbol_3 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.Load((4u * tint_symbol_3));
+  const uint tint_symbol_4 = ((3u * i0) + 1u);
+  uint i1 = indices.Load((4u * tint_symbol_4));
+  const uint tint_symbol_5 = ((3u * i0) + 2u);
+  uint i2 = indices.Load((4u * tint_symbol_5));
   float3 p0 = loadPosition(i0);
   float3 p1 = loadPosition(i0);
   float3 p2 = loadPosition(i2);
   float3 center = (((p0 + p2) + p1) / 3.0f);
   float3 voxelPos = toVoxelPos(p1);
   uint lIndex = toIndex1D(uniforms[0].y, p0);
-  int triangleOffset = tint_atomicAdd(LUT, (4u * i1), 1);
+  const uint tint_symbol_6 = i1;
+  int triangleOffset = tint_atomicAdd(LUT, (4u * tint_symbol_6), 1);
 }
 
 [numthreads(128, 1, 1)]
-void main_count(tint_symbol_1 tint_symbol) {
-  main_count_inner(tint_symbol.GlobalInvocationID);
+void main_count(tint_symbol_8 tint_symbol_7) {
+  main_count_inner(tint_symbol_7.GlobalInvocationID);
   return;
 }

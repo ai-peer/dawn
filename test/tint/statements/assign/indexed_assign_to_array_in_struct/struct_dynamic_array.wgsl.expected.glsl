@@ -17,7 +17,8 @@ layout(binding = 0, std430) buffer OuterS_ssbo {
 
 void tint_symbol() {
   InnerS v = InnerS(0);
-  s1.a1[uniforms.i] = v;
+  uint tint_symbol_1 = uniforms.i;
+  s1.a1[tint_symbol_1] = v;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

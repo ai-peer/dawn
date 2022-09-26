@@ -36,7 +36,10 @@ uint3 toIndex3D(uint gridSize, uint index) {
 }
 
 float3 loadPosition(uint vertexIndex) {
-  float3 position = float3(asfloat(positions.Load((4u * ((3u * vertexIndex) + 0u)))), asfloat(positions.Load((4u * ((3u * vertexIndex) + 1u)))), asfloat(positions.Load((4u * ((3u * vertexIndex) + 2u)))));
+  const uint tint_symbol = ((3u * vertexIndex) + 0u);
+  const uint tint_symbol_1 = ((3u * vertexIndex) + 1u);
+  const uint tint_symbol_2 = ((3u * vertexIndex) + 2u);
+  float3 position = float3(asfloat(positions.Load((4u * tint_symbol))), asfloat(positions.Load((4u * tint_symbol_1))), asfloat(positions.Load((4u * tint_symbol_2))));
   return position;
 }
 
@@ -63,7 +66,7 @@ void doIgnore() {
   int g55 = tint_atomicLoad_1(LUT, 0u);
 }
 
-struct tint_symbol_1 {
+struct tint_symbol_14 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -80,16 +83,20 @@ void main_count_inner(uint3 GlobalInvocationID) {
     return;
   }
   doIgnore();
-  uint i0 = indices.Load((4u * ((3u * triangleIndex) + 0u)));
-  uint i1 = indices.Load((4u * ((3u * triangleIndex) + 1u)));
-  uint i2 = indices.Load((4u * ((3u * triangleIndex) + 2u)));
+  const uint tint_symbol_3 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.Load((4u * tint_symbol_3));
+  const uint tint_symbol_4 = ((3u * triangleIndex) + 1u);
+  uint i1 = indices.Load((4u * tint_symbol_4));
+  const uint tint_symbol_5 = ((3u * triangleIndex) + 2u);
+  uint i2 = indices.Load((4u * tint_symbol_5));
   float3 p0 = loadPosition(i0);
   float3 p1 = loadPosition(i1);
   float3 p2 = loadPosition(i2);
   float3 center = (((p0 + p1) + p2) / 3.0f);
   float3 voxelPos = toVoxelPos(center);
   uint voxelIndex = toIndex1D(uniforms[0].y, voxelPos);
-  uint acefg = tint_atomicAdd(counters, (4u * voxelIndex), 1u);
+  const uint tint_symbol_6 = voxelIndex;
+  uint acefg = tint_atomicAdd(counters, (4u * tint_symbol_6), 1u);
   if ((triangleIndex == 0u)) {
     dbg.Store(16u, asuint(uniforms[0].y));
     dbg.Store(32u, asuint(center.x));
@@ -99,12 +106,12 @@ void main_count_inner(uint3 GlobalInvocationID) {
 }
 
 [numthreads(128, 1, 1)]
-void main_count(tint_symbol_1 tint_symbol) {
-  main_count_inner(tint_symbol.GlobalInvocationID);
+void main_count(tint_symbol_14 tint_symbol_13) {
+  main_count_inner(tint_symbol_13.GlobalInvocationID);
   return;
 }
 
-struct tint_symbol_3 {
+struct tint_symbol_16 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -128,22 +135,24 @@ void main_create_lut_inner(uint3 GlobalInvocationID) {
   if ((voxelIndex >= maxVoxels)) {
     return;
   }
-  uint numTriangles = tint_atomicLoad(counters, (4u * voxelIndex));
+  const uint tint_symbol_7 = voxelIndex;
+  uint numTriangles = tint_atomicLoad(counters, (4u * tint_symbol_7));
   int offset = -1;
   if ((numTriangles > 0u)) {
-    const uint tint_symbol_6 = tint_atomicAdd_1(dbg, 0u, numTriangles);
-    offset = int(tint_symbol_6);
+    const uint tint_symbol_19 = tint_atomicAdd_1(dbg, 0u, numTriangles);
+    offset = int(tint_symbol_19);
   }
-  tint_atomicStore(LUT, (4u * voxelIndex), offset);
+  const uint tint_symbol_8 = voxelIndex;
+  tint_atomicStore(LUT, (4u * tint_symbol_8), offset);
 }
 
 [numthreads(128, 1, 1)]
-void main_create_lut(tint_symbol_3 tint_symbol_2) {
-  main_create_lut_inner(tint_symbol_2.GlobalInvocationID);
+void main_create_lut(tint_symbol_16 tint_symbol_15) {
+  main_create_lut_inner(tint_symbol_15.GlobalInvocationID);
   return;
 }
 
-struct tint_symbol_5 {
+struct tint_symbol_18 {
   uint3 GlobalInvocationID : SV_DispatchThreadID;
 };
 
@@ -160,20 +169,24 @@ void main_sort_triangles_inner(uint3 GlobalInvocationID) {
   if ((triangleIndex >= uniforms[0].x)) {
     return;
   }
-  uint i0 = indices.Load((4u * ((3u * triangleIndex) + 0u)));
-  uint i1 = indices.Load((4u * ((3u * triangleIndex) + 1u)));
-  uint i2 = indices.Load((4u * ((3u * triangleIndex) + 2u)));
+  const uint tint_symbol_9 = ((3u * triangleIndex) + 0u);
+  uint i0 = indices.Load((4u * tint_symbol_9));
+  const uint tint_symbol_10 = ((3u * triangleIndex) + 1u);
+  uint i1 = indices.Load((4u * tint_symbol_10));
+  const uint tint_symbol_11 = ((3u * triangleIndex) + 2u);
+  uint i2 = indices.Load((4u * tint_symbol_11));
   float3 p0 = loadPosition(i0);
   float3 p1 = loadPosition(i1);
   float3 p2 = loadPosition(i2);
   float3 center = (((p0 + p1) + p2) / 3.0f);
   float3 voxelPos = toVoxelPos(center);
   uint voxelIndex = toIndex1D(uniforms[0].y, voxelPos);
-  int triangleOffset = tint_atomicAdd_2(LUT, (4u * voxelIndex), 1);
+  const uint tint_symbol_12 = voxelIndex;
+  int triangleOffset = tint_atomicAdd_2(LUT, (4u * tint_symbol_12), 1);
 }
 
 [numthreads(128, 1, 1)]
-void main_sort_triangles(tint_symbol_5 tint_symbol_4) {
-  main_sort_triangles_inner(tint_symbol_4.GlobalInvocationID);
+void main_sort_triangles(tint_symbol_18 tint_symbol_17) {
+  main_sort_triangles_inner(tint_symbol_17.GlobalInvocationID);
   return;
 }

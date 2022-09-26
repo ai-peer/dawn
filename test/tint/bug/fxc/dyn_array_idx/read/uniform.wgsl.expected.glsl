@@ -13,7 +13,8 @@ layout(binding = 2, std430) buffer Result_ssbo {
 } result;
 
 void f() {
-  result.tint_symbol = ubo.data[ubo.dynamic_idx].x;
+  int tint_symbol_1 = ubo.dynamic_idx;
+  result.tint_symbol = ubo.data[uint(tint_symbol_1)].x;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

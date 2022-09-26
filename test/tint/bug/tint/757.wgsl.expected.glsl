@@ -15,7 +15,8 @@ void tint_symbol(uvec3 GlobalInvocationID) {
   vec4 texel = texelFetch(myTexture_1, ivec3(ivec2(GlobalInvocationID.xy), 0), 0);
   {
     for(uint i = 0u; (i < 1u); i = (i + 1u)) {
-      result.values[(flatIndex + i)] = texel.r;
+      uint tint_symbol_1 = (flatIndex + i);
+      result.values[tint_symbol_1] = texel.r;
     }
   }
 }
