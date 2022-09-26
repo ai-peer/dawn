@@ -20,9 +20,10 @@ float3x2 tint_symbol(uint4 buffer[2], uint offset) {
 
 [numthreads(1, 1, 1)]
 void f() {
-  const int p_m_i_save = i();
+  const int ptr_index_save = i();
+  const int p_m_i_save = ptr_index_save;
   const float3x2 l_m = tint_symbol(m, 0u);
-  const uint scalar_offset_3 = ((8u * uint(p_m_i_save))) / 4;
+  const uint scalar_offset_3 = ((8u * uint(ptr_index_save))) / 4;
   uint4 ubo_load_3 = m[scalar_offset_3 / 4];
   const float2 l_m_i = asfloat(((scalar_offset_3 & 2) ? ubo_load_3.zw : ubo_load_3.xy));
   return;

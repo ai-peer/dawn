@@ -22,9 +22,10 @@ float4x2 tint_symbol(uint4 buffer[2], uint offset) {
 
 [numthreads(1, 1, 1)]
 void f() {
-  const int p_m_i_save = i();
+  const int ptr_index_save = i();
+  const int p_m_i_save = ptr_index_save;
   const float4x2 l_m = tint_symbol(m, 0u);
-  const uint scalar_offset_4 = ((8u * uint(p_m_i_save))) / 4;
+  const uint scalar_offset_4 = ((8u * uint(ptr_index_save))) / 4;
   uint4 ubo_load_4 = m[scalar_offset_4 / 4];
   const float2 l_m_i = asfloat(((scalar_offset_4 & 2) ? ubo_load_4.zw : ubo_load_4.xy));
   return;
