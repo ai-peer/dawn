@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/transform/robustness.h"
+#include "src/tint/transform/substitute_override.h"
 
 #include "src/tint/transform/test_helper.h"
 
