@@ -54,6 +54,7 @@
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/decompose_memory_access.h"
 #include "src/tint/transform/demote_to_helper.h"
+#include "src/tint/transform/direct_variable_access.h"
 #include "src/tint/transform/disable_uniformity_analysis.h"
 #include "src/tint/transform/expand_compound_assignment.h"
 #include "src/tint/transform/localize_struct_array_assignment.h"
@@ -196,6 +197,8 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
 
     manager.Add<transform::Unshadow>();
 
+    manager.Add<transform::DirectVariableAccess>();
+
     // LocalizeStructArrayAssignment must come after:
     // * SimplifyPointers, because it assumes assignment to arrays in structs are
     // done directly, not indirectly.
@@ -291,6 +294,7 @@ bool GeneratorImpl::Generate() {
                                   utils::Vector{
                                       ast::Extension::kChromiumDisableUniformityAnalysis,
                                       ast::Extension::kChromiumExperimentalDp4A,
+                                      ast::Extension::kChromiumExperimentalFullPtrParameters,
                                       ast::Extension::kChromiumExperimentalPushConstant,
                                       ast::Extension::kF16,
                                   })) {
