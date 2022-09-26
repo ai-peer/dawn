@@ -967,10 +967,10 @@ INSTANTIATE_TEST_SUITE_P(ResolverTest,
                          testing::Values(TestParams{ast::StorageClass::kNone, false},
                                          TestParams{ast::StorageClass::kIn, false},
                                          TestParams{ast::StorageClass::kOut, false},
-                                         TestParams{ast::StorageClass::kUniform, false},
+                                         TestParams{ast::StorageClass::kUniform, true},
                                          TestParams{ast::StorageClass::kWorkgroup, true},
                                          TestParams{ast::StorageClass::kHandle, false},
-                                         TestParams{ast::StorageClass::kStorage, false},
+                                         TestParams{ast::StorageClass::kStorage, true},
                                          TestParams{ast::StorageClass::kPrivate, true},
                                          TestParams{ast::StorageClass::kFunction, true}));
 
