@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9bc65ce_3c8fc137",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-26T16:13:02Z",
+      "side": 1,
+      "message": "Is the array access of an array with a size overridden working as expected?",
+      "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e66be277_070537e0",
+        "filename": "src/tint/transform/robustness_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-26T16:13:02Z",
+      "side": 1,
+      "message": "This shader seems valid but me, but it still emits the error msg:\n```\nerror: array size is an override-expression, when expected a constant-expression.\nWas the SubstituteOverride transform run?\n```",
+      "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
