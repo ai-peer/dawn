@@ -68,6 +68,12 @@ class Symbol {
     /// @returns true if the symbols are the same
     bool operator==(const Symbol& o) const;
 
+    /// Comparison operator
+    /// @param o the other symbol
+    /// @returns true if the symbols are the different
+    bool operator!=(const Symbol& o) const;
+
+
     /// Less-than operator
     /// @param o the other symbol
     /// @returns true if this symbol is ordered before symbol `o`
