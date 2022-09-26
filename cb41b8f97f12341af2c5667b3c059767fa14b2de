@@ -16,6 +16,24 @@
       "message": "Note: I realized this was condition redundant with the new check (all structs not containing runtime-sized arrays), so I removed it also.",
       "revId": "cb41b8f97f12341af2c5667b3c059767fa14b2de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aacb9229_c6f270df",
+        "filename": "src/tint/transform/add_block_attribute.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-26T17:02:42Z",
+      "side": 0,
+      "message": "s/this was condition/this condition was/",
+      "parentUuid": "f5d6722c_2be926ff",
+      "revId": "cb41b8f97f12341af2c5667b3c059767fa14b2de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
