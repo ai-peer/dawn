@@ -872,17 +872,15 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
         }
     }
 
-    if (auto* ref = var->Type()->As<sem::Pointer>()) {
-        auto sc = ref->StorageClass();
-        if (!(sc == ast::StorageClass::kFunction || sc == ast::StorageClass::kPrivate ||
-              sc == ast::StorageClass::kWorkgroup) &&
-            IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreStorageClass)) {
-            std::stringstream ss;
-            ss << "function parameter of pointer type cannot be in '" << sc << "' storage class";
-            AddError(ss.str(), decl->source);
-            return false;
-        }
-    }
+    // if (auto* ref = var->Type()->As<sem::Pointer>()) {
+    //     auto sc = ref->StorageClass();
+    //     if (!(sc == ast::StorageClass::kFunction || sc == ast::StorageClass::kPrivate ||
+    //           sc == ast::StorageClass::kWorkgroup) &&
+    //         IsValidationEnabled(decl->attributes, ast::DisabledValidation::kIgnoreStorageClass))
+    //         { std::stringstream ss; ss << "function parameter of pointer type cannot be in '" <<
+    //         sc << "' storage class"; AddError(ss.str(), decl->source); return false;
+    //     }
+    // }
 
     if (IsPlain(var->Type())) {
         if (!var->Type()->IsConstructible()) {
