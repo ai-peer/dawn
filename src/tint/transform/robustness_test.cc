@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "src/tint/transform/robustness.h"
+#include "src/tint/transform/substitute_override.h"
 
 #include "src/tint/transform/test_helper.h"
 
@@ -1332,6 +1333,51 @@ Was the SubstituteOverride transform run?)";
     auto got = Run<Robustness>(src);
 
     EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(RobustnessTest, WorkgroupOverrideCountValid) {
+    auto* src = R"(
+override N = 123;
+var<workgroup> w : array<f32, N>;
+
+fn f() {
+  var b : f32 = w[0];
+}
+)";
+
+    auto* expect = R"(
+const N = 123;
+
+var<workgroup> w : array<f32, N>;
+
+fn f() {
+  var b : f32 = w[0];
+}
+)";
+
+    SubstituteOverride::Config cfg;
+    // cfg.map.insert({OverrideId{0}, 4});
+
+    DataMap data;
+    data.Add<SubstituteOverride::Config>(cfg);
+
+    auto got = Run<SubstituteOverride>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+
+    auto* expect2 = R"(
+const N = 123;
+
+var<workgroup> w : array<f32, N>;
+
+fn f() {
+  var b : f32 = w[0];
+}
+)";
+
+    auto got2 = Run<Robustness>(expect);
+
+    EXPECT_EQ(expect2, str(got2));
 }
 
 }  // namespace
