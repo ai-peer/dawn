@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05c4b01a_62b423c0",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-26T18:13:56Z",
+      "side": 1,
+      "message": "So the issue turns out to be on Vulkan backend, ShaderModule::Initialize is run on createShaderModule, and it runs a transform only with robustness first, which emits the error: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/ShaderModuleVk.cpp;l\u003d182?q\u003dshadermodulevk\u0026ss\u003dchromium\nThe SubstituteOverride and other transform is run at pipeline creation time.\nI think it is purposely to run robustness ahead of time at shader creation time, what do you think about fixing this issue?",
+      "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e66be277_070537e0",
         "filename": "src/tint/transform/robustness_test.cc",
         "patchSetId": 3
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "`Was the SubstituteOverride transform run?` \u003c- this transform depends on the `SubstituteOverride` transform to have been run first.",
       "parentUuid": "e66be277_070537e0",
+      "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa649fa_73a9c6fa",
+        "filename": "src/tint/transform/robustness_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-26T18:13:56Z",
+      "side": 1,
+      "message": "Oh my mistake here. If I run SubstituteOverride first and then Robustness, it emits no error.",
+      "parentUuid": "920858b9_56dfceec",
       "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
