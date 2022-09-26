@@ -75,14 +75,18 @@ class Hashset {
   public:
     /// Iterator for entries in the set.
     /// Iterators are invalidated if the set is modified.
-    class Iterator {
+    template <bool IS_CONST>
+    class TIterator {
+        template <typename TY>
+        using C = std::conditional_t<IS_CONST, const TY, TY>;
+
       public:
         /// @returns the value pointed to by this iterator
-        const T* operator->() const { return &current->value.value(); }
+        C<T>* operator->() const { return &current->value.value(); }
 
         /// Increments the iterator
         /// @returns this iterator
-        Iterator& operator++() {
+        TIterator& operator++() {
             if (current == end) {
                 return *this;
             }
@@ -94,12 +98,12 @@ class Hashset {
         /// Equality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is equal to other
-        bool operator==(const Iterator& other) const { return current == other.current; }
+        bool operator==(const TIterator& other) const { return current == other.current; }
 
         /// Inequality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is not equal to other
-        bool operator!=(const Iterator& other) const { return current != other.current; }
+        bool operator!=(const TIterator& other) const { return current != other.current; }
 
         /// @returns a reference to the value at the iterator
         const T& operator*() const { return current->value.value(); }
@@ -108,7 +112,7 @@ class Hashset {
         /// Friend class
         friend class Hashset;
 
-        Iterator(const Slot* c, const Slot* e) : current(c), end(e) { SkipToNextValue(); }
+        TIterator(C<Slot>* c, C<Slot>* e) : current(c), end(e) { SkipToNextValue(); }
 
         /// Moves the iterator forward, stopping at the next slot that is not empty.
         void SkipToNextValue() {
@@ -117,9 +121,17 @@ class Hashset {
             }
         }
 
-        const Slot* current;  /// The slot the iterator is pointing to
-        const Slot* end;      /// One past the last slot in the set
+        C<Slot>* current;  /// The slot the iterator is pointing to
+        C<Slot>* end;      /// One past the last slot in the set
     };
+
+    /// Immutable iterator for the map.
+    /// @note Iterators are invalidated if the map entries are changed, or map keys are modified.
+    using ConstIterator = TIterator</*is const*/ true>;
+
+    /// Mutable iterator for the map.
+    /// @note Iterators are invalidated if the map entries are changed, or map keys are modified.
+    using Iterator = TIterator</*is const*/ false>;
 
     /// Type of `T`.
     using value_type = T;
@@ -305,11 +317,17 @@ class Hashset {
     /// @returns a monotonic counter which is incremented whenever the set is mutated.
     size_t Generation() const { return generation_; }
 
-    /// @returns an iterator to the start of the set.
-    Iterator begin() const { return Iterator{slots_.begin(), slots_.end()}; }
+    /// @returns an immutable iterator to the start of the set.
+    ConstIterator begin() const { return ConstIterator{slots_.begin(), slots_.end()}; }
 
-    /// @returns an iterator to the end of the set.
-    Iterator end() const { return Iterator{slots_.end(), slots_.end()}; }
+    /// @returns an immutable iterator to the end of the set.
+    ConstIterator end() const { return ConstIterator{slots_.end(), slots_.end()}; }
+
+    /// @returns a mutable to the start of the set.
+    Iterator begin() { return Iterator{slots_.begin(), slots_.end()}; }
+
+    /// @returns a mutable to the end of the set.
+    Iterator end() { return Iterator{slots_.end(), slots_.end()}; }
 
     /// A debug function for checking that the set is in good health.
     /// Asserts if the set is corrupted.
@@ -326,6 +344,26 @@ class Hashset {
         }
         TINT_ASSERT(Utils, num_alive == count_);
     }
+
+    /// Equality operator
+    /// @param other the other Hashset to compare this Hashset to
+    /// @returns true if this Hashset is equal to other
+    bool operator==(const Hashset& other) const {
+        if (Count() != other.Count()) {
+            return false;
+        }
+        for (auto& value : *this) {
+            if (!other.Contains(value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /// Inequality operator
+    /// @param other the other Hashset to compare this Hashset to
+    /// @returns true if this Hashset is not equal to other
+    bool operator!=(const Hashset& other) const { return !(*this == other); }
 
   private:
     /// The behaviour of Put() when an entry already exists with the given key.
@@ -514,6 +552,22 @@ class Hashset {
 
     /// Counter that's incremented with each modification to the set.
     size_t generation_ = 0;
+};
+
+/// Hasher specialization for Hashset
+template <typename T, size_t N, typename HASH, typename EQUAL>
+struct Hasher<Hashset<T, N, HASH, EQUAL>> {
+    /// @param set the Hashset to hash
+    /// @returns a hash of the set
+    size_t operator()(const Hashset<T, N, HASH, EQUAL>& set) const {
+        auto hash = Hash(set.Count());
+        for (auto it : set) {
+            // Use an XOR to ensure that the non-deterministic ordering of the set still produces
+            // the same hash value for the same entries.
+            hash ^= HASH{}(it);
+        }
+        return hash;
+    }
 };
 
 }  // namespace tint::utils
