@@ -330,8 +330,7 @@ TEST_P(WorkgroupSizeValidationTest, ValidationAfterOverride) {
 
 // Test workgroup size validation after being overrided with invalid values (storage size limits
 // validation).
-// TODO(tint:1660): re-enable after override can be used as array size.
-TEST_P(WorkgroupSizeValidationTest, DISABLED_ValidationAfterOverrideStorageSize) {
+TEST_P(WorkgroupSizeValidationTest, ValidationAfterOverrideStorageSize) {
     wgpu::Limits supportedLimits = GetSupportedLimits().limits;
 
     constexpr uint32_t kVec4Size = 16;
