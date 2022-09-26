@@ -60,7 +60,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpName %glFragColor "glFragColor"
                OpName %bumpSamplerSampler "bumpSamplerSampler"
                OpName %bumpSamplerTexture "bumpSamplerTexture"
-               OpName %cotangent_frame_vf3_vf3_vf2_vf2_ "cotangent_frame_vf3_vf3_vf2_vf2_"
+               OpName %cotangent_frame_vf3_vf3_vf2_vf2__F_F_F_F "cotangent_frame_vf3_vf3_vf2_vf2__F_F_F_F"
                OpName %normal_1 "normal_1"
                OpName %p "p"
                OpName %uv "uv"
@@ -74,17 +74,17 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpName %tangent "tangent"
                OpName %bitangent "bitangent"
                OpName %invmax "invmax"
-               OpName %transposeMat3_mf33_ "transposeMat3_mf33_"
+               OpName %transposeMat3_mf33__F "transposeMat3_mf33__F"
                OpName %inMatrix "inMatrix"
                OpName %i0 "i0"
                OpName %i1 "i1"
                OpName %i2 "i2"
                OpName %outMatrix "outMatrix"
-               OpName %perturbNormalBase_mf33_vf3_f1_ "perturbNormalBase_mf33_vf3_f1_"
+               OpName %perturbNormalBase_mf33_vf3_f1__F_F_F "perturbNormalBase_mf33_vf3_f1__F_F_F"
                OpName %cotangentFrame "cotangentFrame"
                OpName %normal "normal"
                OpName %scale "scale"
-               OpName %perturbNormal_mf33_vf3_f1_ "perturbNormal_mf33_vf3_f1_"
+               OpName %perturbNormal_mf33_vf3_f1__F_F_F "perturbNormal_mf33_vf3_f1__F_F_F"
                OpName %cotangentFrame_1 "cotangentFrame_1"
                OpName %textureSample "textureSample"
                OpName %scale_1 "scale_1"
@@ -94,7 +94,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpName %lightingInfo "lightingInfo"
                OpMemberName %lightingInfo 0 "diffuse"
                OpMemberName %lightingInfo 1 "specular"
-               OpName %computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_ "computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_"
+               OpName %computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1__F_F_F_F_F_F_F "computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1__F_F_F_F_F_F_F"
                OpName %viewDirectionW "viewDirectionW"
                OpName %vNormal "vNormal"
                OpName %lightData "lightData"
@@ -314,7 +314,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
      %uint_3 = OpConstant %uint 3
    %main_out = OpTypeStruct %v4float
         %649 = OpTypeFunction %main_out %v2float %v4float %bool %v2float %v4float
-%cotangent_frame_vf3_vf3_vf2_vf2_ = OpFunction %mat3v3float None %52
+%cotangent_frame_vf3_vf3_vf2_vf2__F_F_F_F = OpFunction %mat3v3float None %52
    %normal_1 = OpFunctionParameter %_ptr_Function_v3float
           %p = OpFunctionParameter %_ptr_Function_v3float
          %uv = OpFunctionParameter %_ptr_Function_v2float
@@ -410,7 +410,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
         %151 = OpCompositeConstruct %mat3v3float %142 %146 %150
                OpReturnValue %151
                OpFunctionEnd
-%transposeMat3_mf33_ = OpFunction %mat3v3float None %152
+%transposeMat3_mf33__F = OpFunction %mat3v3float None %152
    %inMatrix = OpFunctionParameter %_ptr_Function_mat3v3float
         %156 = OpLabel
          %i0 = OpVariable %_ptr_Function_v3float Function %22
@@ -464,7 +464,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
         %210 = OpLoad %mat3v3float %outMatrix
                OpReturnValue %210
                OpFunctionEnd
-%perturbNormalBase_mf33_vf3_f1_ = OpFunction %v3float None %211
+%perturbNormalBase_mf33_vf3_f1__F_F_F = OpFunction %v3float None %211
 %cotangentFrame = OpFunctionParameter %_ptr_Function_mat3v3float
      %normal = OpFunctionParameter %_ptr_Function_v3float
       %scale = OpFunctionParameter %_ptr_Function_float
@@ -475,7 +475,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
         %221 = OpExtInst %v3float %88 Normalize %222
                OpReturnValue %221
                OpFunctionEnd
-%perturbNormal_mf33_vf3_f1_ = OpFunction %v3float None %211
+%perturbNormal_mf33_vf3_f1__F_F_F = OpFunction %v3float None %211
 %cotangentFrame_1 = OpFunctionParameter %_ptr_Function_mat3v3float
 %textureSample = OpFunctionParameter %_ptr_Function_v3float
     %scale_1 = OpFunctionParameter %_ptr_Function_float
@@ -491,10 +491,10 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpStore %param_1 %239
         %241 = OpLoad %float %scale_1
                OpStore %param_2 %241
-        %242 = OpFunctionCall %v3float %perturbNormalBase_mf33_vf3_f1_ %param %param_1 %param_2
+        %242 = OpFunctionCall %v3float %perturbNormalBase_mf33_vf3_f1__F_F_F %param %param_1 %param_2
                OpReturnValue %242
                OpFunctionEnd
-%computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_ = OpFunction %lightingInfo None %246
+%computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1__F_F_F_F_F_F_F = OpFunction %lightingInfo None %246
 %viewDirectionW = OpFunctionParameter %_ptr_Function_v3float
     %vNormal = OpFunctionParameter %_ptr_Function_v3float
   %lightData = OpFunctionParameter %_ptr_Function_v4float
@@ -673,11 +673,11 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
         %423 = OpAccessChain %_ptr_Uniform_v2float %x_269 %uint_8
         %424 = OpLoad %v2float %423
                OpStore %param_6 %424
-        %425 = OpFunctionCall %mat3v3float %cotangent_frame_vf3_vf3_vf2_vf2_ %param_3 %param_4 %param_5 %param_6
+        %425 = OpFunctionCall %mat3v3float %cotangent_frame_vf3_vf3_vf2_vf2__F_F_F_F %param_3 %param_4 %param_5 %param_6
                OpStore %TBN %425
         %430 = OpLoad %mat3v3float %TBN
                OpStore %param_7 %430
-        %431 = OpFunctionCall %mat3v3float %transposeMat3_mf33_ %param_7
+        %431 = OpFunctionCall %mat3v3float %transposeMat3_mf33__F %param_7
                OpStore %invTBN %431
         %433 = OpLoad %mat3v3float %invTBN
         %434 = OpLoad %v3float %output5
@@ -837,7 +837,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpStore %param_9 %553
         %554 = OpFDiv %float %float_1 %548
                OpStore %param_10 %554
-        %555 = OpFunctionCall %v3float %perturbNormal_mf33_vf3_f1_ %param_8 %param_9 %param_10
+        %555 = OpFunctionCall %v3float %perturbNormal_mf33_vf3_f1__F_F_F %param_8 %param_9 %param_10
         %559 = OpLoad %v4float %output4
         %560 = OpCompositeExtract %float %555 0
         %561 = OpCompositeExtract %float %555 1
@@ -909,7 +909,7 @@ bug/tint/949.wgsl:308:27 note: reading from module-scope private variable 'v_out
                OpStore %param_16 %613
         %614 = OpLoad %float %glossiness_1
                OpStore %param_17 %614
-        %615 = OpFunctionCall %lightingInfo %computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_ %param_11 %param_12 %param_13 %param_14 %param_15 %param_16 %param_17
+        %615 = OpFunctionCall %lightingInfo %computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1__F_F_F_F_F_F_F %param_11 %param_12 %param_13 %param_14 %param_15 %param_16 %param_17
                OpStore %info %615
                OpStore %shadow %float_1
         %623 = OpAccessChain %_ptr_Function_v3float %info %uint_0

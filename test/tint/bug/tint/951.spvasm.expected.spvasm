@@ -24,9 +24,9 @@
                OpMemberName %Uniforms 4 "size"
                OpName %x_24 "x_24"
                OpName %getAAtOutCoords_ "getAAtOutCoords_"
-               OpName %unaryOperation_f1_ "unaryOperation_f1_"
+               OpName %unaryOperation_f1__F "unaryOperation_f1__F"
                OpName %a "a"
-               OpName %setOutput_i1_f1_ "setOutput_i1_f1_"
+               OpName %setOutput_i1_f1__F_F "setOutput_i1_f1__F_F"
                OpName %flatIndex "flatIndex"
                OpName %value "value"
                OpName %main_1 "main_1"
@@ -102,7 +102,7 @@
          %29 = OpLoad %float %28
                OpReturnValue %29
                OpFunctionEnd
-%unaryOperation_f1_ = OpFunction %float None %30
+%unaryOperation_f1__F = OpFunction %float None %30
           %a = OpFunctionParameter %_ptr_Function_float
          %34 = OpLabel
          %36 = OpLoad %float %a
@@ -116,7 +116,7 @@
          %45 = OpExtInst %float %46 Log %44
                OpReturnValue %45
                OpFunctionEnd
-%setOutput_i1_f1_ = OpFunction %void None %47
+%setOutput_i1_f1__F_F = OpFunction %void None %47
   %flatIndex = OpFunctionParameter %_ptr_Function_int
       %value = OpFunctionParameter %_ptr_Function_float
          %53 = OpLabel
@@ -148,11 +148,11 @@
                OpStore %a_1 %79
          %80 = OpLoad %float %a_1
                OpStore %param %80
-         %81 = OpFunctionCall %float %unaryOperation_f1_ %param
+         %81 = OpFunctionCall %float %unaryOperation_f1__F %param
          %83 = OpLoad %int %index
                OpStore %param_1 %83
                OpStore %param_2 %81
-         %84 = OpFunctionCall %void %setOutput_i1_f1_ %param_1 %param_2
+         %84 = OpFunctionCall %void %setOutput_i1_f1__F_F %param_1 %param_2
                OpBranch %77
          %77 = OpLabel
                OpReturn
