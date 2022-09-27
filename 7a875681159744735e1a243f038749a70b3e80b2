@@ -22,6 +22,30 @@
       },
       "revId": "7a875681159744735e1a243f038749a70b3e80b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35e534e6_1392a4e0",
+        "filename": "test/tint/bug/tint/1538.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-27T17:30:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c323bbc_f199ca52",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "7a875681159744735e1a243f038749a70b3e80b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
