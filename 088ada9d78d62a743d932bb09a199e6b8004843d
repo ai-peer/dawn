@@ -152,6 +152,30 @@
       },
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce0a9d39_bf441fc0",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-27T21:35:34Z",
+      "side": 1,
+      "message": "I thought about doing this in SynchronizeTextureAfterUse with the same concern about PIX seeing multiple frames. I\u0027m ok with that if you are.\n\nOTOH if we don\u0027t need the synchronization with D3D11, we can keep the Present call in DestroyImpl and simply call NextSerial (option 2 in the my comment on the bug).",
+      "parentUuid": "53603b53_f6f8ffa6",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
