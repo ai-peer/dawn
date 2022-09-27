@@ -16,6 +16,29 @@
       "message": "PTAL, this should cover the initial set of suppressions needed to get the end2end tests passing for the full spectrum of Pixel devices.\n\nTurning off support for ETC2 and ASTC compressed texture formats is more wide-ranging than it strictly needs to be, and knocks out a fair number of tests that are passing. I\u0027ve yet to be able to identify a pattern behind which tests were succeeding and which were failing, however, in order to do a more targeted suppression. That\u0027ll probably be the next thing I look at.",
       "revId": "67d278375a05825e974a90b89ce84235d76057d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf998e5b_37c08b1e",
+        "filename": "src/dawn/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-27T21:06:00Z",
+      "side": 1,
+      "message": "LGTM - in the bug, you said you would set disable_depth_read for Android - if we did that, this DAWN_TEST_UNSUPPORTED_IF would take care of skipping instead of adding `IsAndroid() \u0026\u0026 IsQualcomm()`. This is relevant here and several other tests.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 69
+      },
+      "revId": "67d278375a05825e974a90b89ce84235d76057d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
