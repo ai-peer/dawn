@@ -381,8 +381,15 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
+float[2] tint_f32_2() {
+  float val[2];
+  for (int i = 0; i < 2; i++) {
+    val[i] = 0.0f;
+  }
+  return val;
+}
 void f() {
-  float l[2] = float[2](0.0f, 0.0f);
+  float l[2] = tint_f32_2();
 }
 
 )");
@@ -402,8 +409,23 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
+float[2] tint_f32_2() {
+  float val[2];
+  for (int i = 0; i < 2; i++) {
+    val[i] = 0.0f;
+  }
+  return val;
+}
+float[3][2] tint_f32_3() {
+  float val[3][2];
+  for (int i = 0; i < 3; i++) {
+    val[i] = tint_f32_2();
+  }
+  return val;
+}
+
 void f() {
-  float l[3][2] = float[3][2](float[2](0.0f, 0.0f), float[2](0.0f, 0.0f), float[2](0.0f, 0.0f));
+  float l[3][2] = tint_f32_3_2();
 }
 
 )");
@@ -428,9 +450,15 @@ struct S {
   int a;
   float b;
 };
-
+S[2] tint_S_2() {
+  S[2] val;
+  for (int i = 0; i < 2; i++) {
+    val[i] = S(0, 0.0f);
+  }
+  return val;
+}
 void f() {
-  S l[2] = S[2](S(0, 0.0f), S(0, 0.0f));
+  S l[2] = tint_S_2();
 }
 
 )");

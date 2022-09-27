@@ -508,6 +508,7 @@ class GeneratorImpl : public TextGenerator {
 
     TextBuffer helpers_;  // Helper functions emitted at the top of the output
     std::function<bool()> emit_continuing_;
+    std::unordered_map<std::string, std::string> zero_array_helpers_;
     std::unordered_map<const sem::Builtin*, std::string> builtins_;
     std::unordered_map<const sem::Vector*, std::string> dynamic_vector_write_;
     std::unordered_map<const sem::Vector*, std::string> int_dot_funcs_;

@@ -28,6 +28,7 @@
 #include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/debug.h"
+#include "src/tint/sem/type.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
 #include "src/tint/sem/block_statement.h"
@@ -2235,18 +2236,68 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             return true;
         },
         [&](const sem::Array* a) {
-            if (!EmitType(out, a, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
-                return false;
-            }
-
-            ScopedParen sp(out);
-
             auto count = a->ConstantCount();
             if (!count) {
                 diagnostics_.add_error(diag::System::Writer, sem::Array::kErrExpectedConstantCount);
                 return false;
             }
+            if (constant->AllZero()) {
+              // Generate the helper function if it hasn't been created already
 
+              // TODO(dsinclair): The FriendlyName here needs to deal with non scalar types but
+              // getting a better name. The `count` also needs to loop through all possible sub
+              // arrays and append the number.
+              auto deepest = sem::Type::DeepestElementOf(a);
+              auto fn_name = UniqueIdentifier(std::string("tint_") +
+                  deepest->FriendlyName(builder_.Symbols()) + "_" + std::to_string(count.value()));
+
+              auto fn = utils::GetOrCreate(zero_array_helpers_, fn_name, [&]() -> std::string {
+                  TextBuffer b;
+                  TINT_DEFER(helpers_.Append(b));
+                  {
+                      auto decl = line(&b);
+                      if (!EmitType(decl, a, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
+                          return "";
+                      }
+                      decl << " " << fn_name << "() {";
+                  }
+                  {
+                      auto decl = line(&b);
+                      decl << "  ";
+                      if (!EmitTypeAndName(decl,a, ast::StorageClass::kNone, ast::Access::kUndefined, "val")) {
+                        return "";
+                      }
+                      decl << ";";
+                  }
+                  line(&b) << "  for (int i = 0; i < " << count.value() << "; i++) {";
+
+                  {
+                    auto decl = line(&b);
+                      decl << "    val[i] = ";
+
+                      // All values are 0 so just emit the first one.
+                      if (!EmitConstant(decl, constant->Index(0))) {
+                        return "";
+                      }
+                      decl << ";";
+                  }
+                  line(&b) << "  }";
+                  line(&b) << "  return val;";
+                  line(&b) << "}";
+
+                  return fn_name;
+              });
+
+              out << fn_name << "()";
+
+              return true;
+            }
+
+            if (!EmitType(out, a, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
+                return false;
+            }
+
+            ScopedParen sp(out);
             for (size_t i = 0; i < count; i++) {
                 if (i > 0) {
                     out << ", ";
