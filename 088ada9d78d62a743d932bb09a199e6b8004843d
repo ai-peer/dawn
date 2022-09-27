@@ -176,6 +176,30 @@
       },
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06e04f5_2edd74fa",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-27T23:59:52Z",
+      "side": 1,
+      "message": "Moved the Present to SynchronizeImportedTextureAfterUse - we can look into this more later if needed.",
+      "parentUuid": "ce0a9d39_bf441fc0",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
