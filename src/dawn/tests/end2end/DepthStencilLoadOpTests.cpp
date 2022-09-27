@@ -70,6 +70,9 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
         // Also depends on glTextureView which is not supported on ES.
         DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
 
+        // TODO(dawn:1549) All DepthStencilLoadOp tests fail on Qualcomm-based Android devices.
+        DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
+
         wgpu::TextureDescriptor descriptor;
         descriptor.size = {kRTSize, kRTSize};
         descriptor.format = GetParam().mFormat;

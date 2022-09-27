@@ -625,6 +625,9 @@ TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
     // This test fails on ANGLE (both SwiftShader and D3D11).
     DAWN_SUPPRESS_TEST_IF(IsANGLE());
 
+    // TODO(dawn:1549) Fails on Qualcomm-based Android devices.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
+
     wgpu::TextureFormat format = GetParam().mTextureFormat;
 
     DoSamplingExtraStencilComponentsRenderTest(TestAspectAndSamplerType::StencilAsUint, format,
@@ -636,6 +639,9 @@ TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
 
 // Test sampling both depth and stencil with a render/compute pipeline works.
 TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
+    // TODO(dawn:1549) Fails on Qualcomm-based Android devices.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
+
     wgpu::TextureFormat format = GetParam().mTextureFormat;
 
     wgpu::SamplerDescriptor samplerDesc;
@@ -799,6 +805,9 @@ class StencilSamplingTest : public DepthStencilSamplingTest {};
 TEST_P(StencilSamplingTest, SampleStencilOnly) {
     // This test fails on SwANGLE (although it passes on other ANGLE backends).
     DAWN_TEST_UNSUPPORTED_IF(IsANGLE());
+
+    // TODO(dawn:1549) Fails on Qualcomm-based Android devices.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
 
     wgpu::TextureFormat format = GetParam().mTextureFormat;
 
