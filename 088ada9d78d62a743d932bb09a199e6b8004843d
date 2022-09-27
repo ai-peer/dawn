@@ -33,6 +33,29 @@
       "message": "Note: I\u0027ve tested this manually with the Chromium D3D fence prototype - https://chromium-review.googlesource.com/c/chromium/src/+/3908772",
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c700481_3a16202e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-27T21:09:29Z",
+      "side": 1,
+      "message": "in what situations do we need to reset?\n\nIIUC, since we Present before EndAccess, the signal value from EndAccess should get signaled after we have issued the call to Present.",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
