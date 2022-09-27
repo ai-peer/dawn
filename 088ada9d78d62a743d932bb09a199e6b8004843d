@@ -56,6 +56,30 @@
       },
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b33083b4_9ca9930a",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-27T21:15:15Z",
+      "side": 1,
+      "message": "mSignalFenceValue stores the serial for the last ExecuteCommandLists that used the texture, so if we don\u0027t clear it, it will be behind any work issued by Present. IOW we always need to reset mSignalFenceValue if Present is called.",
+      "parentUuid": "9c700481_3a16202e",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
