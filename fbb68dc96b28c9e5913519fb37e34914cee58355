@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af986aac_a0c69686",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8da35e0_826ab0ad",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "289cb2ee_afffcf5a",
@@ -92,6 +110,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "703eb7c4_75890e51",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "289cb2ee_afffcf5a",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dd7ec4d_7154c6fa",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfb0c5e2_70ce0516",
+      "range": {
+        "startLine": 92,
+        "startChar": 17,
+        "endLine": 92,
+        "endChar": 22
+      },
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f141e641_90d3550d",
@@ -105,6 +165,30 @@
       "writtenOn": "2022-09-26T12:33:28Z",
       "side": 1,
       "message": "nit: specific is often a redundant word and can be removed, ditto below.",
+      "range": {
+        "startLine": 93,
+        "startChar": 23,
+        "endLine": 93,
+        "endChar": 31
+      },
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "669ce0a0_96163570",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f141e641_90d3550d",
       "range": {
         "startLine": 93,
         "startChar": 23,
@@ -134,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4f89144_410e448f",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Making it called on a existing buffer would give the flexibility (for future use), for example, allowing to have two memory builder for each member of `struct S { vec4\u003cf32\u003e a, mat3x2\u003cf16\u003e b}` and build the input buffer by applying them one by one on the vector, while reuse the second builder to build the expectation buffer for output `out \u003d s.b`.",
+      "parentUuid": "05968191_7fa06aea",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4629fabd_792d4517",
         "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
         "patchSetId": 5
@@ -145,6 +247,24 @@
       "writtenOn": "2022-09-26T12:33:28Z",
       "side": 1,
       "message": "nit: a switch would make it more clear all operations are handled.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4820559a_4bf2c062",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4629fabd_792d4517",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +282,24 @@
       "writtenOn": "2022-09-26T12:33:28Z",
       "side": 1,
       "message": "which size? Same for [0, size)",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dbe6948_e523cf74",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "266e21ca_8787b599",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +323,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f5f39e5_f964226a",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Refactor the `Field` into a class and make both private.",
+      "parentUuid": "07f26a73_2b8ce092",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ed11ef3_8af20e4b",
         "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
         "patchSetId": 5
@@ -196,6 +352,24 @@
       "writtenOn": "2022-09-26T12:33:28Z",
       "side": 1,
       "message": "We could unify the strided vs. not paths by using strideDataBytes \u003d size and stridePaddingBytes \u003d 0 by default. Then everything is as if isStrided is always true but it works for non-strided types too.",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b8a838_8372e0a2",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done, use a unified `Match` method for both situation.",
+      "parentUuid": "0ed11ef3_8af20e4b",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +391,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d88666_39b7e615",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5b28856_70df6caa",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c770f473_8047f3b4",
@@ -230,6 +422,24 @@
       "writtenOn": "2022-09-26T12:33:28Z",
       "side": 1,
       "message": "TBH at that point it\u0027s more clear to build the bindgroup manually instead of using the binding initialization helpers (they are never meant to be used directly, only with curly brackets in the call to utils::MakeBindGroup)",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3a962e_ed6be25e",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T08:08:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c770f473_8047f3b4",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
