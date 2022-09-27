@@ -184,8 +184,8 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_f16)
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
-#extension GL_AMD_gpu_shader_half_float : require
 
+#extension GL_AMD_gpu_shader_half_float : require
 void f() {
   float16_t l = 1.0hf;
 }
@@ -271,8 +271,8 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
-#extension GL_AMD_gpu_shader_half_float : require
 
+#extension GL_AMD_gpu_shader_half_float : require
 void f() {
   f16vec3 l = f16vec3(1.0hf, 2.0hf, 3.0hf);
 }
@@ -337,8 +337,8 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
-#extension GL_AMD_gpu_shader_half_float : require
 
+#extension GL_AMD_gpu_shader_half_float : require
 void f() {
   f16mat2x3 l = f16mat2x3(f16vec3(1.0hf, 2.0hf, 3.0hf), f16vec3(4.0hf, 5.0hf, 6.0hf));
 }
@@ -381,8 +381,17 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
+
+float[2] tint_zero_f32_2() {
+  float val[2];
+  for (int i = 0; i < 2; i++) {
+    val[i] = 0.0f;
+  }
+  return val;
+}
+
 void f() {
-  float l[2] = float[2](0.0f, 0.0f);
+  float l[2] = tint_zero_f32_2();
 }
 
 )");
@@ -402,8 +411,25 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_
 
     EXPECT_EQ(gen.result(), R"(#version 310 es
 
+
+float[2] tint_zero_f32_2() {
+  float val[2];
+  for (int i = 0; i < 2; i++) {
+    val[i] = 0.0f;
+  }
+  return val;
+}
+
+float[3][2] tint_zero_f32_3_2() {
+  float val[3][2];
+  for (int i = 0; i < 3; i++) {
+    val[i] = tint_zero_f32_2();
+  }
+  return val;
+}
+
 void f() {
-  float l[3][2] = float[3][2](float[2](0.0f, 0.0f), float[2](0.0f, 0.0f), float[2](0.0f, 0.0f));
+  float l[3][2] = tint_zero_f32_3_2();
 }
 
 )");
@@ -429,8 +455,17 @@ struct S {
   float b;
 };
 
+
+S[2] tint_zero_S_2() {
+  S val[2];
+  for (int i = 0; i < 2; i++) {
+    val[i] = S(0, 0.0f);
+  }
+  return val;
+}
+
 void f() {
-  S l[2] = S[2](S(0, 0.0f), S(0, 0.0f));
+  S l[2] = tint_zero_S_2();
 }
 
 )");

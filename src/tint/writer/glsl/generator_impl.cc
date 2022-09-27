@@ -43,6 +43,7 @@
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/storage_texture.h"
 #include "src/tint/sem/struct.h"
+#include "src/tint/sem/type.h"
 #include "src/tint/sem/type_constructor.h"
 #include "src/tint/sem/type_conversion.h"
 #include "src/tint/sem/variable.h"
@@ -266,21 +267,15 @@ bool GeneratorImpl::Generate() {
         }
     }
 
-    auto helpers_insertion_point = current_buffer_->lines.size();
+    auto* mod = builder_.Sem().Module();
+
+    auto ext_insertion_point = current_buffer_->lines.size();
 
     line();
 
-    auto* mod = builder_.Sem().Module();
+    // Emit all structs at the top of the file, this way helpers can use the structs.
     for (auto* decl : mod->DependencyOrderedDeclarations()) {
-        if (decl->IsAnyOf<ast::Alias, ast::StaticAssert>()) {
-            continue;  // These are not emitted.
-        }
-
-        if (auto* global = decl->As<ast::Variable>()) {
-            if (!EmitGlobalVariable(global)) {
-                return false;
-            }
-        } else if (auto* str = decl->As<ast::Struct>()) {
+        if (auto* str = decl->As<ast::Struct>()) {
             auto* sem = builder_.Sem().Get(str);
             bool has_rt_arr = false;
             if (auto* arr = sem->Members().back()->Type()->As<sem::Array>()) {
@@ -293,6 +288,23 @@ bool GeneratorImpl::Generate() {
                     return false;
                 }
             }
+        }
+    }
+
+    auto helpers_insertion_point = current_buffer_->lines.size();
+
+    for (auto* decl : mod->DependencyOrderedDeclarations()) {
+        if (decl->IsAnyOf<ast::Alias, ast::StaticAssert>()) {
+            continue;  // These are not emitted.
+        }
+
+        if (auto* global = decl->As<ast::Variable>()) {
+            if (!EmitGlobalVariable(global)) {
+                return false;
+            }
+        } else if (auto* str = decl->As<ast::Struct>()) {
+            // Structs are emitted prior to helpers.
+            continue;
         } else if (auto* func = decl->As<ast::Function>()) {
             if (func->IsEntryPoint()) {
                 if (!EmitEntryPointFunction(func)) {
@@ -328,7 +340,7 @@ bool GeneratorImpl::Generate() {
     auto indent = current_buffer_->current_indent;
 
     if (!extensions.lines.empty()) {
-        current_buffer_->Insert(extensions, helpers_insertion_point, indent);
+        current_buffer_->Insert(extensions, ext_insertion_point, indent);
         helpers_insertion_point += extensions.lines.size();
     }
 
@@ -2235,18 +2247,97 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             return true;
         },
         [&](const sem::Array* a) {
-            if (!EmitType(out, a, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
-                return false;
-            }
-
-            ScopedParen sp(out);
-
             auto count = a->ConstantCount();
             if (!count) {
                 diagnostics_.add_error(diag::System::Writer, sem::Array::kErrExpectedConstantCount);
                 return false;
             }
+            if (constant->AllZero()) {
+                // Generate the helper function if it hasn't been created already
+                std::stringstream val_stream;
+                const sem::Type* el = a;
+                std::string type_name = "";
+                while (el->Is<sem::Array>()) {
+                    auto c = el->As<sem::Array>()->ConstantCount();
+                    if (!c.has_value()) {
+                        diagnostics_.add_error(
+                            diag::System::Writer,
+                            "Found non-const array value when attempting to emit zero arrays");
+                        return false;
+                    }
 
+                    val_stream << "_" << std::to_string(c.value());
+
+                    el = sem::Type::ElementOf(el);
+
+                    type_name = Switch(
+                        el,
+                        [&](const sem::Vector* v) { return "vec" + std::to_string(v->Width()); },
+                        [&](const sem::Matrix* m) {
+                            return "mat" + std::to_string(m->columns()) + "x" +
+                                   std::to_string(m->rows());
+                        },
+                        [&](const sem::Struct* s) { return s->FriendlyName(builder_.Symbols()); },
+                        [&](const sem::Array*) { return ""; },
+                        [&](Default) { return el->FriendlyName(builder_.Symbols()); });
+                }
+
+                auto name = std::string("tint_zero_") + type_name + val_stream.str();
+                if (zero_array_method_names_.find(name) == zero_array_method_names_.end()) {
+                    zero_array_method_names_[name] = UniqueIdentifier(name);
+                }
+                auto fn_name = zero_array_method_names_[name];
+
+                auto fn = utils::GetOrCreate(zero_array_helpers_, fn_name, [&]() -> std::string {
+                    TextBuffer b;
+                    TINT_DEFER(helpers_.Append(b));
+                    {
+                        auto decl = line(&b);
+                        if (!EmitType(decl, a, ast::StorageClass::kNone, ast::Access::kUndefined,
+                                      "")) {
+                            return "";
+                        }
+                        decl << " " << fn_name << "() {";
+                    }
+                    {
+                        auto decl = line(&b);
+                        decl << "  ";
+                        if (!EmitTypeAndName(decl, a, ast::StorageClass::kNone,
+                                             ast::Access::kUndefined, "val")) {
+                            return "";
+                        }
+                        decl << ";";
+                    }
+                    line(&b) << "  for (int i = 0; i < " << count.value() << "; i++) {";
+
+                    {
+                        auto decl = line(&b);
+                        decl << "    val[i] = ";
+
+                        // All values are 0 so just emit the first one.
+                        if (!EmitConstant(decl, constant->Index(0))) {
+                            return "";
+                        }
+                        decl << ";";
+                    }
+                    line(&b) << "  }";
+                    line(&b) << "  return val;";
+                    line(&b) << "}";
+                    line(&b);
+
+                    return fn_name;
+                });
+
+                out << fn_name << "()";
+
+                return true;
+            }
+
+            if (!EmitType(out, a, ast::StorageClass::kNone, ast::Access::kUndefined, "")) {
+                return false;
+            }
+
+            ScopedParen sp(out);
             for (size_t i = 0; i < count; i++) {
                 if (i > 0) {
                     out << ", ";
