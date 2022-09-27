@@ -669,22 +669,29 @@ void Texture::DestroyImpl() {
         if (d3dSharingContract != nullptr) {
             d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
         }
+        mSwapChainTexture = false;
     }
 
     device->DeallocateMemory(mResourceAllocation);
 
-    // Now that we've deallocated the memory, the texture is no longer a swap chain texture.
-    // We can set mSwapChainTexture to false to avoid passing a nullptr to
-    // ID3D12SharingContract::Present.
-    mSwapChainTexture = false;
-
-    // Now that the texture has been destroyed. It should release the refptr of the d3d11on12
-    // resource and the fence.
+    // Now that the texture has been destroyed. It should release the d3d11on12 resource refptr.
     mD3D11on12Resource = nullptr;
 }
 
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
     ASSERT(mD3D11on12Resource == nullptr);
+
+    Device* device = ToBackend(GetDevice());
+
+    if (mSwapChainTexture) {
+        ID3D12SharingContract* d3dSharingContract = device->GetSharingContract();
+        if (d3dSharingContract != nullptr) {
+            d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
+            // Reset fence so that we generate a new one.
+            mSignalFenceValue.reset();
+        }
+        mSwapChainTexture = false;
+    }
 
     // Synchronize if texture access wasn't synchronized already due to ExecuteCommandLists.
     if (!mSignalFenceValue.has_value()) {
