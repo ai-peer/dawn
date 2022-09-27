@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38264534_2d86f811",
+        "filename": "src/dawn/tests/end2end/ShaderValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-27T16:16:04Z",
+      "side": 1,
+      "message": "Looks like we still want to move this to pipeline creation time. As on D3D and Metal this is run at pipeline creation time. We want to have same behavior cross platform. WDYT Ben?",
+      "parentUuid": "05c4b01a_62b423c0",
+      "revId": "0b286f6278b4f3f91c37eaf11ecff3b2e09d53df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e66be277_070537e0",
         "filename": "src/tint/transform/robustness_test.cc",
         "patchSetId": 3
