@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f51fcdc_a365f716",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-09-27T18:26:19Z",
+      "side": 1,
+      "message": "Q: do we still need the `ScopedTintICEHandler scopedICEHandler(GetDevice());` here?",
+      "revId": "78378917c2a65ff664ee117680a4f54207ea3e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
