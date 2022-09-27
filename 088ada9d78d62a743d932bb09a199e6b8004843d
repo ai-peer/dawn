@@ -104,6 +104,30 @@
       },
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9523a1f_5de99820",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-27T21:27:25Z",
+      "side": 1,
+      "message": "I suspect PIX/SDKLayer has to do something to copy the swap chain texture which would be a read operation and perhaps it should be synchronized with D3D11?",
+      "parentUuid": "61726b3f_9a578b08",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
