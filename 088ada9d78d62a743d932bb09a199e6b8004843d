@@ -80,6 +80,30 @@
       },
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61726b3f_9a578b08",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-27T21:23:12Z",
+      "side": 1,
+      "message": "I see, so effectively we always need to do an extra ExecutePendingCommandContext for swapchain textures.\n\nIn order to keep the resource alive, it would be sufficient to call ReferenceUntilUnused after Present, but in the bug, you said you also want a new signal value so D3D11 can properly synchronize.\n\nIs the Present operation something that needs synchronization? from my understanding, it\u0027s a notification to PIX so debug traces have frame boundaries. Perhaps D3D11 synchronization is not important here.",
+      "parentUuid": "b33083b4_9ca9930a",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 38
+      },
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
