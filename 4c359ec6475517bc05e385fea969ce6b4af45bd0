@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "4c359ec6475517bc05e385fea969ce6b4af45bd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31e2f2cf_18032385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-27T19:30:41Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1680 to either remove this and do the full re-write or spec the compat issue.",
+      "revId": "4c359ec6475517bc05e385fea969ce6b4af45bd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
