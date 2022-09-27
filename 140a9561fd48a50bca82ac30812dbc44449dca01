@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f1bc682_d707d0af",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f3ad1a6_ce611446",
+      "range": {
+        "startLine": 98,
+        "startChar": 68,
+        "endLine": 98,
+        "endChar": 81
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c3bbc3e_2f160275",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3110eba_d8b88217",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c3bbc3e_2f160275",
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b74e0ba_ccfa56e1",
@@ -54,6 +96,30 @@
       "writtenOn": "2022-09-27T09:51:05Z",
       "side": 1,
       "message": "optional-nit: these are the defaults so you can skip them if you want",
+      "range": {
+        "startLine": 404,
+        "startChar": 30,
+        "endLine": 406,
+        "endChar": 38
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc6e9bf_acba60fd",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Removing these two line results in validation error. \n\nIt seems like that there is no default value for `BindGroupEntry.size` in webgpu_cpp.h:1213, and dawn.json:223. Going to fix it in another CL.",
+      "parentUuid": "4b74e0ba_ccfa56e1",
       "range": {
         "startLine": 404,
         "startChar": 30,
@@ -87,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48669efb_d13b7e36",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11406dae_0fb66503",
+      "range": {
+        "startLine": 624,
+        "startChar": 54,
+        "endLine": 624,
+        "endChar": 58
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25714e5f_f27d1681",
@@ -100,6 +190,30 @@
       "writtenOn": "2022-09-27T09:51:05Z",
       "side": 1,
       "message": "u-nit: VerifyData, CheckData? \"match\"\u0027s semantic seems slightly off.",
+      "range": {
+        "startLine": 668,
+        "startChar": 10,
+        "endLine": 668,
+        "endChar": 19
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ba2c9b_e5081ac8",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25714e5f_f27d1681",
       "range": {
         "startLine": 668,
         "startChar": 10,

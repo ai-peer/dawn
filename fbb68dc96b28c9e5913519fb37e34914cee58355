@@ -252,6 +252,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6271068b_eaa32275",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aa060a7_2a76efb4",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4629fabd_792d4517",
@@ -406,6 +424,24 @@
       "side": 1,
       "message": "I think we can still unify the code paths here if we set `strideDataBytes \u003d size` and `stridePaddingBytes \u003d 0` in the constructor, such that the `if (mIsStrided)` and `else { builder.AddData(size)}` would disappear. Same think in `MatchData`.\n\nBasically all fields are strided, it\u0027s just that some have a stride that is the full type size and has no padding.",
       "parentUuid": "b6b8a838_8372e0a2",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad23067_4313f774",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-09-27T15:23:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0dd9ac3e_e94d39bd",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
