@@ -39,6 +39,30 @@
       },
       "revId": "67d278375a05825e974a90b89ce84235d76057d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e5b19a1_7670f0fd",
+        "filename": "src/dawn/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-27T23:22:26Z",
+      "side": 1,
+      "message": "First off, thanks for pointing out the overlap here. I\u0027ll make sure we\u0027re not doubling up on our suppressions.\n\nAlso, this comment pointed out to me that this CL is missing some of the files that I update (DeviceVK and AdapterVK specifically). No idea why those didn\u0027t get pushed along with the rest, but I\u0027ll make sure to correct that on the next push.",
+      "parentUuid": "cf998e5b_37c08b1e",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 69
+      },
+      "revId": "67d278375a05825e974a90b89ce84235d76057d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
