@@ -668,6 +668,8 @@ void Texture::DestroyImpl() {
         ID3D12SharingContract* d3dSharingContract = device->GetSharingContract();
         if (d3dSharingContract != nullptr) {
             d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
+            // Advance serial to account for GPU work issued by Present().
+            device->ConsumedError(device->NextSerial());
         }
     }
 
@@ -678,8 +680,7 @@ void Texture::DestroyImpl() {
     // ID3D12SharingContract::Present.
     mSwapChainTexture = false;
 
-    // Now that the texture has been destroyed. It should release the refptr of the d3d11on12
-    // resource and the fence.
+    // Now that the texture has been destroyed, it should release the d3d11on12 resource refptr.
     mD3D11on12Resource = nullptr;
 }
 
