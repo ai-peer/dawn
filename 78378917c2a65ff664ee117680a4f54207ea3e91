@@ -16,6 +16,24 @@
       "message": "Q: do we still need the `ScopedTintICEHandler scopedICEHandler(GetDevice());` here?",
       "revId": "78378917c2a65ff664ee117680a4f54207ea3e91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc033aa_86c3dde2",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-27T18:30:24Z",
+      "side": 1,
+      "message": "It calls ReflectShaderUsingTint which uses the inspector.\n\nBen, can this produce ICE errors?\nIf it can\u0027t, we don\u0027t need it.\nIf it can, we should move ScopedTintICEHandler into ReflectShaderUsingTint",
+      "parentUuid": "1f51fcdc_a365f716",
+      "revId": "78378917c2a65ff664ee117680a4f54207ea3e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
