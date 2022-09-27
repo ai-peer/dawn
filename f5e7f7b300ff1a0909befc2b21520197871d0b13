@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b726b3f3_ec6736e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-27T23:17:54Z",
+      "side": 1,
+      "message": "still need to modify CreateBuffer validation to disallow buffers larger than the limit - or emit a deprecation warning (See other comment)",
+      "parentUuid": "f4fa950e_fa972236",
+      "revId": "f5e7f7b300ff1a0909befc2b21520197871d0b13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "209cafb4_bef28f26",
