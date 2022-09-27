@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2aa060a7_2a76efb4",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "If you\u0027re concerned about future uses (and slight code churn), we could have a second function then that uses ApplyOperationsToBuffer internally but returns the vector instead of taking it as input.",
+      "parentUuid": "e4f89144_410e448f",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4629fabd_792d4517",
         "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
         "patchSetId": 5
@@ -370,6 +388,24 @@
       "side": 1,
       "message": "Done, use a unified `Match` method for both situation.",
       "parentUuid": "0ed11ef3_8af20e4b",
+      "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dd9ac3e_e94d39bd",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "I think we can still unify the code paths here if we set `strideDataBytes \u003d size` and `stridePaddingBytes \u003d 0` in the constructor, such that the `if (mIsStrided)` and `else { builder.AddData(size)}` would disappear. Same think in `MatchData`.\n\nBasically all fields are strided, it\u0027s just that some have a stride that is the full type size and has no padding.",
+      "parentUuid": "b6b8a838_8372e0a2",
       "revId": "fbb68dc96b28c9e5913519fb37e34914cee58355",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

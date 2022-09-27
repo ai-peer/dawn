@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f3ad1a6_ce611446",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "u-nit: so that they are (or s/design/designed/)",
+      "range": {
+        "startLine": 98,
+        "startChar": 68,
+        "endLine": 98,
+        "endChar": 81
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c3bbc3e_2f160275",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "u-nit: these cases could be split in two, IMHO it\u0027s more clear to have two simple loops instead of one whose execution depends on which case statement we\u0027re in.",
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b74e0ba_ccfa56e1",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "optional-nit: these are the defaults so you can skip them if you want",
+      "range": {
+        "startLine": 404,
+        "startChar": 30,
+        "endLine": 406,
+        "endChar": 38
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11406dae_0fb66503",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "nit: We usually use GetFoo(), HasFoo() or IsFoo() for getters in Dawn.",
+      "range": {
+        "startLine": 624,
+        "startChar": 54,
+        "endLine": 624,
+        "endChar": 58
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25714e5f_f27d1681",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-27T09:51:05Z",
+      "side": 1,
+      "message": "u-nit: VerifyData, CheckData? \"match\"\u0027s semantic seems slightly off.",
+      "range": {
+        "startLine": 668,
+        "startChar": 10,
+        "endLine": 668,
+        "endChar": 19
+      },
+      "revId": "140a9561fd48a50bca82ac30812dbc44449dca01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
