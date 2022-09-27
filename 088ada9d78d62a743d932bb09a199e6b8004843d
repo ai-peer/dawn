@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "149e290a_7a9f914b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-09-27T19:07:48Z",
+      "side": 1,
+      "message": "Note: I\u0027ve tested this manually with the Chromium D3D fence prototype - https://chromium-review.googlesource.com/c/chromium/src/+/3908772",
+      "revId": "088ada9d78d62a743d932bb09a199e6b8004843d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
