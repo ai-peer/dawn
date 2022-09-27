@@ -658,46 +658,35 @@ void Texture::DestroyImpl() {
 
     Device* device = ToBackend(GetDevice());
 
-    // In PIX's D3D12-only mode, there is no way to determine frame boundaries
-    // for WebGPU since Dawn does not manage DXGI swap chains. Without assistance,
-    // PIX will wait forever for a present that never happens.
-    // If we know we're dealing with a swapbuffer texture, inform PIX we've
-    // "presented" the texture so it can determine frame boundaries and use its
-    // contents for the UI.
-    if (mSwapChainTexture) {
-        ID3D12SharingContract* d3dSharingContract = device->GetSharingContract();
-        if (d3dSharingContract != nullptr) {
-            d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
-        }
-    }
+    // TODO(sunnyps): Remove this after keyed mutex support is removed.
+    NotifyPresentForPIX();
 
     device->DeallocateMemory(mResourceAllocation);
 
-    // Now that we've deallocated the memory, the texture is no longer a swap chain texture.
-    // We can set mSwapChainTexture to false to avoid passing a nullptr to
-    // ID3D12SharingContract::Present.
-    mSwapChainTexture = false;
-
-    // Now that the texture has been destroyed. It should release the refptr of the d3d11on12
-    // resource and the fence.
+    // Now that the texture has been destroyed, it should release the d3d11on12 resource refptr.
     mD3D11on12Resource = nullptr;
 }
 
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
     ASSERT(mD3D11on12Resource == nullptr);
 
+    // Call NotifyPresentForPIX() first so that it resets the signal fence if needed.
+    NotifyPresentForPIX();
+
+    Device* device = ToBackend(GetDevice());
+
     // Synchronize if texture access wasn't synchronized already due to ExecuteCommandLists.
     if (!mSignalFenceValue.has_value()) {
         // Needed to ensure that command allocator doesn't get destroyed before pending commands
         // are submitted due to calling NextSerial(). No-op if there are no pending commands.
-        DAWN_TRY(ToBackend(GetDevice())->ExecutePendingCommandContext());
+        DAWN_TRY(device->ExecutePendingCommandContext());
         // If there were pending commands that used this texture mSignalFenceValue will be set,
         // but if it's still not set, generate a signal fence after waiting on wait fences.
         if (!mSignalFenceValue.has_value()) {
             DAWN_TRY(SynchronizeImportedTextureBeforeUse());
             DAWN_TRY(SynchronizeImportedTextureAfterUse());
         }
-        DAWN_TRY(ToBackend(GetDevice())->NextSerial());
+        DAWN_TRY(device->NextSerial());
         ASSERT(mSignalFenceValue.has_value());
     }
 
@@ -706,6 +695,25 @@ ResultOrError<ExecutionSerial> Texture::EndAccess() {
     // Explicitly call reset() since std::move() on optional doesn't make it std::nullopt.
     mSignalFenceValue.reset();
     return ret;
+}
+
+void Texture::NotifyPresentForPIX() {
+    // In PIX's D3D12-only mode, there is no way to determine frame boundaries
+    // for WebGPU since Dawn does not manage DXGI swap chains. Without assistance,
+    // PIX will wait forever for a present that never happens.
+    // If we know we're dealing with a swapbuffer texture, inform PIX we've
+    // "presented" the texture so it can determine frame boundaries and use its
+    // contents for the UI.
+    if (mSwapChainTexture) {
+        ID3D12SharingContract* d3dSharingContract = ToBackend(GetDevice())->GetSharingContract();
+        if (d3dSharingContract != nullptr) {
+            d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
+            // Reset signal fence to account for GPU work issued by Present().
+            mSignalFenceValue.reset();
+        }
+    }
+    // Set mSwapChainTexture to false to avoid calling ID3D12SharingContract::Present again.
+    mSwapChainTexture = false;
 }
 
 DXGI_FORMAT Texture::GetD3D12Format() const {

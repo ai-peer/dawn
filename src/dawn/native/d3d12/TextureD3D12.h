@@ -142,6 +142,8 @@ class Texture final : public TextureBase {
                                     ExecutionSerial pendingCommandSerial) const;
     void HandleTransitionSpecialCases(CommandRecordingContext* commandContext);
 
+    void NotifyPresentForPIX();
+
     D3D12_RESOURCE_FLAGS mD3D12ResourceFlags;
     ResourceHeapAllocation mResourceAllocation;
 
