@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6ed2d8_4a58b3ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-27T21:01:38Z",
+      "side": 1,
+      "message": "This is making FXC unhappy because the test array is \u003e 65536 elements which isn\u0027t allowed. Maybe a better solution here is to cap the array size in WGSL, and then fail this with validation. I\u0027m assuming GLSL could write out 65k 0\u0027s pretty quickly so I think that would resolve this as well ......",
+      "revId": "97f329274a4acb95900a517a1bdc8e412439dde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
