@@ -101,6 +101,7 @@ bool RequiresOESSampleVariables(tint::ast::BuiltinValue builtin) {
 namespace tint::writer::glsl {
 namespace {
 
+constexpr size_t kMaxArrayZeroElements = 4096;
 const char kTempNamePrefix[] = "tint_tmp";
 
 bool last_is_break_or_fallthrough(const ast::BlockStatement* stmts) {
@@ -2246,6 +2247,12 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
                 diagnostics_.add_error(diag::System::Writer, sem::Array::kErrExpectedConstantCount);
                 return false;
             }
+            if (count > kMaxArrayZeroElements) {
+                diagnostics_.add_error(diag::System::Writer,
+                                       "Too many elements for zero'd array. Maxium is " +
+                                           std::to_string(kMaxArrayZeroElements));
+                return false;
+            }
 
             for (size_t i = 0; i < count; i++) {
                 if (i > 0) {
@@ -2372,6 +2379,12 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const sem::Type* type) {
         auto count = arr->ConstantCount();
         if (!count) {
             diagnostics_.add_error(diag::System::Writer, sem::Array::kErrExpectedConstantCount);
+            return false;
+        }
+        if (count > kMaxArrayZeroElements) {
+            diagnostics_.add_error(diag::System::Writer,
+                                   "Too many elements for zero'd array. Maxium is " +
+                                       std::to_string(kMaxArrayZeroElements));
             return false;
         }
 
