@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd418da_2e9c06dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-27T20:53:01Z",
+      "side": 1,
+      "message": "PTAL, this should cover the initial set of suppressions needed to get the end2end tests passing for the full spectrum of Pixel devices.\n\nTurning off support for ETC2 and ASTC compressed texture formats is more wide-ranging than it strictly needs to be, and knocks out a fair number of tests that are passing. I\u0027ve yet to be able to identify a pattern behind which tests were succeeding and which were failing, however, in order to do a more targeted suppression. That\u0027ll probably be the next thing I look at.",
+      "revId": "67d278375a05825e974a90b89ce84235d76057d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
