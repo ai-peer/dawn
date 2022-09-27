@@ -56,6 +56,30 @@
       },
       "revId": "4c359ec6475517bc05e385fea969ce6b4af45bd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95ab888_00b8f225",
+        "filename": "test/tint/bug/chromium/1367602-1.wgsl.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-27T20:02:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea95ae68_83a8ebba",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 12
+      },
+      "revId": "4c359ec6475517bc05e385fea969ce6b4af45bd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
