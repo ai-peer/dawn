@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aec93d4_505c5e32",
+        "filename": "docs/support.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-28T12:45:42Z",
+      "side": 0,
+      "message": "Oooh that was a frenchism 😊",
+      "range": {
+        "startLine": 13,
+        "startChar": 11,
+        "endLine": 13,
+        "endChar": 18
+      },
+      "revId": "4bffb56cca42874bf8917ec05c4536bf6ddc31eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
