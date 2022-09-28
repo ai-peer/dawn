@@ -62,6 +62,29 @@
       },
       "revId": "97f329274a4acb95900a517a1bdc8e412439dde7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a179173_dd877b01",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2386,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2022-09-28T15:03:40Z",
+      "side": 1,
+      "message": "same as above",
+      "range": {
+        "startLine": 2386,
+        "startChar": 58,
+        "endLine": 2386,
+        "endChar": 79
+      },
+      "revId": "97f329274a4acb95900a517a1bdc8e412439dde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
