@@ -16,6 +16,75 @@
       "message": "Ping @cwallez@chromium.org\n\nNeed your inputs to move this forward!",
       "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e99da7_cbca35f6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-28T15:58:45Z",
+      "side": 1,
+      "message": "perhaps HasPendingCommands should check `mLastSubmittedSerial \u003e mCompletedSerial` ?\nthen, both here, and at [1] we can use HasPendingCommands() as the condition.",
+      "range": {
+        "startLine": 1251,
+        "startChar": 8,
+        "endLine": 1251,
+        "endChar": 69
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e30a14c_5e4aa702",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-28T15:58:45Z",
+      "side": 1,
+      "message": "[1]\n\nThis could use a comment about what we\u0027re doing and why\n\nAlso, I think a better way to do this would be to make the function take in `CallbackTask`. we\u0027ll change OnSubmittedWorkDone and MapRequestTask to extend CallbackTask instead of TaskInFlight.\n\nThen, this function will be more simply:\n\n```\nif (!HasPendingCommands()) {\n  // No pending work. Enqueue the task immediately.\n  GetDevice()-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask(std::move(task));\n} else {\n  mTasksInFlight.Enqueue(std::move(task), serial);\n}\n```\n\nQueueBase::Tick would do:\n```\n  // Tasks\u0027 serials have passed. Move them to the callback task manager. They\n  // are ready to be called.\n  for (auto\u0026 task : mTasksInFlight.IterateUpTo(finishedSerial)) {\n    GetDevice()-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask(std::move(task));\n  }\n```\n\nThat way Queue only handles enqueuing the tasks at the right time, and actual calling of the tasks happens in one place (in Device)",
+      "range": {
+        "startLine": 224,
+        "startChar": 8,
+        "endLine": 225,
+        "endChar": 42
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "542a4c75_2a8d8fca",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-28T15:58:45Z",
+      "side": 1,
+      "message": "I believe this should call mTask-\u003eHandleDeviceLoss()",
+      "range": {
+        "startLine": 234,
+        "startChar": 47,
+        "endLine": 234,
+        "endChar": 56
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

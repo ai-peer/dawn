@@ -384,6 +384,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd50eb63_f27bdf41",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-28T15:58:45Z",
+      "side": 1,
+      "message": "I think this is a good incremental step forward to remove mFutureSerial. Do you think we could split it out from the Vulkan backend changes?",
+      "parentUuid": "22f7ddd9_7dd94457",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
