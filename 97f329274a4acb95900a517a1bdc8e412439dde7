@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c0c580_1e51cf2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-09-28T17:41:42Z",
+      "side": 1,
+      "message": "Thanks for the fix. 4K does seem a little small. Maybe we should make it 64K (or 65K?), to match FXC\u0027s limit?",
+      "revId": "97f329274a4acb95900a517a1bdc8e412439dde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "194dcef0_cbaa2739",
