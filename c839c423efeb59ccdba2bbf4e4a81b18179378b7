@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e819d63_e92c922b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-28T07:47:43Z",
+      "side": 1,
+      "message": "Ping @cwallez@chromium.org\n\nNeed your inputs to move this forward!",
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
