@@ -34,6 +34,24 @@
       "parentUuid": "1f51fcdc_a365f716",
       "revId": "78378917c2a65ff664ee117680a4f54207ea3e91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41733c27_752b70f6",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-28T09:12:55Z",
+      "side": 1,
+      "message": "It\u0027s safer to assume that any Tint API could raise an ICE.\nPost V1, I\u0027d like to wrap the entire Tint public API in a `Tint` instance, where we set up this stuff once. It would also reduce a bunch of repeat initialisations inside the library.",
+      "parentUuid": "ccc033aa_86c3dde2",
+      "revId": "78378917c2a65ff664ee117680a4f54207ea3e91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
