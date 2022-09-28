@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9e239d_2c9b8a03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-28T17:46:32Z",
+      "side": 1,
+      "message": "Moved this back to WIP. If we add the 65k limit into the WGSL spec this CL will get dropped and we\u0027ll add validation. If we don\u0027t add the WGSL limit, then yea, possibly 65k and the same restriction in HLSL?",
+      "revId": "97f329274a4acb95900a517a1bdc8e412439dde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "194dcef0_cbaa2739",
