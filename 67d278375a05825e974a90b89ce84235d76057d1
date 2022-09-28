@@ -80,6 +80,30 @@
       },
       "revId": "67d278375a05825e974a90b89ce84235d76057d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f35f7965_a8d85f53",
+        "filename": "src/dawn/tests/end2end/ViewportTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-28T15:39:58Z",
+      "side": 1,
+      "message": "So the toggle that I am currently flipping is \"disable_depth_stencil_read\" (See DeviceVk.cpp) because every tests which uses that is failing across the board. Turns out some of the tests gated on \"disable_depth_read\" are passing on this architecture (specifically all the DepthBiasTests) and I don\u0027t want to add overly broad suppressions if I can avoid it.",
+      "parentUuid": "1e5b19a1_7670f0fd",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 177,
+        "endChar": 69
+      },
+      "revId": "67d278375a05825e974a90b89ce84235d76057d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
