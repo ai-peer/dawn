@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fd3186_cb6b0a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-29T00:45:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80740f5_7a88bf85",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1277,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-29T00:45:22Z",
+      "side": 1,
+      "message": "uu-nit: we\u0027ve been trying to keep this in the same order as the spec, so this would go in between maxvertexbuffres and maxvertexattributes",
+      "range": {
+        "startLine": 1277,
+        "startChar": 0,
+        "endLine": 1277,
+        "endChar": 98
+      },
+      "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ef41c41_2cfd35a3",
+        "filename": "src/dawn/native/Limits.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-29T00:45:22Z",
+      "side": 1,
+      "message": "ditto, on order",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 62
+      },
+      "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
