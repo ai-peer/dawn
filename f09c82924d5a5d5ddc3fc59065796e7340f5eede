@@ -39,6 +39,30 @@
       },
       "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "811c079d_c75bff9e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2670,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-29T17:37:36Z",
+      "side": 1,
+      "message": "Followup. This is consistent with the other errors we emit here (like size \u003d\u003d 0, etc). So, will commit this as size, and then update all of them to count in one go.",
+      "parentUuid": "4e2a9f75_4026c783",
+      "range": {
+        "startLine": 2670,
+        "startChar": 24,
+        "endLine": 2670,
+        "endChar": 28
+      },
+      "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
