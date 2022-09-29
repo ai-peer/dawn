@@ -80,6 +80,30 @@
       },
       "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "418dbacc_d22ddc4b",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-29T17:45:31Z",
+      "side": 1,
+      "message": "I don\u0027t think so. There\u0027s vector * matrix, matrix * vector, vector * scalar, scalar * vector. Would be good to test at least one different LHS and RHS type.",
+      "parentUuid": "4b194f7c_b49c4ebc",
+      "range": {
+        "startLine": 543,
+        "startChar": 55,
+        "endLine": 543,
+        "endChar": 63
+      },
+      "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
