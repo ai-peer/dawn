@@ -16,6 +16,23 @@
       "message": "PTAL. This seems to make the MSL complier happy (at least Kokoro is happy with the new test). The extra cast should, in theory, just be dropped by the downstream MSL compiler as it doesn\u0027t do anything except in the case of a packed value.",
       "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c46023b_00687cc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-29T14:11:25Z",
+      "side": 1,
+      "message": "ping",
+      "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
