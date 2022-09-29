@@ -89,6 +89,11 @@
 #include "src/tint/utils/vector.h"
 
 namespace tint::resolver {
+namespace {
+
+constexpr int64_t kMaxArrayElementCount = 65536;
+
+}  // namespace
 
 Resolver::Resolver(ProgramBuilder* builder)
     : builder_(builder),
@@ -2661,6 +2666,12 @@ utils::Result<sem::ArrayCount> Resolver::ArrayCount(const ast::Expression* count
                  count_expr->source);
         return utils::Failure;
     }
+    if (count >= kMaxArrayElementCount) {
+        AddError("array size (" + std::to_string(count) + ") must be less than " +
+                     std::to_string(kMaxArrayElementCount),
+                 count_expr->source);
+        return utils::Failure;
+    }
 
     return sem::ArrayCount{sem::ConstantArrayCount{static_cast<uint32_t>(count)}};
 }
@@ -2704,7 +2715,8 @@ sem::Array* Resolver::Array(const Source& el_source,
         size = const_count->value * stride;
         if (size > std::numeric_limits<uint32_t>::max()) {
             std::stringstream msg;
-            msg << "array size (0x" << std::hex << size << ") must not exceed 0xffffffff bytes";
+            msg << "array byte size (0x" << std::hex << size
+                << ") must not exceed 0xffffffff bytes";
             AddError(msg.str(), count_source);
             return nullptr;
         }
