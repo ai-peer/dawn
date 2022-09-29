@@ -33,6 +33,29 @@
       "message": "ping",
       "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506e7479_0f970468",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-29T17:20:04Z",
+      "side": 1,
+      "message": "`rhs_type`?",
+      "range": {
+        "startLine": 543,
+        "startChar": 55,
+        "endLine": 543,
+        "endChar": 63
+      },
+      "revId": "149aed0cf487062a05830f5039befe9d24d931eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
