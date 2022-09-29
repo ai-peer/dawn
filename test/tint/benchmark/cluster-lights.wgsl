@@ -30,7 +30,7 @@ struct ClusterLights {
 struct ClusterLightGroup {
   offset : atomic<u32>,
   lights : array<ClusterLights, 27648>,
-  indices : array<u32, 1769472>,
+  indices : array<u32, 65535>,
 }
 
 @group(0) @binding(2) var<storage, read_write> clusterLights : ClusterLightGroup;
@@ -108,7 +108,7 @@ fn computeMain(@builtin(global_invocation_id) global_id : vec3<u32>) {
   }
   let lightCount = clusterLightCount;
   var offset = atomicAdd(&(clusterLights.offset), lightCount);
-  if ((offset >= 1769472u)) {
+  if ((offset >= 63336u)) {
     return;
   }
   for(var i = 0u; (i < clusterLightCount); i = (i + 1u)) {

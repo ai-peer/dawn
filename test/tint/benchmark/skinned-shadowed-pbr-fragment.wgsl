@@ -30,7 +30,7 @@ struct ClusterLights {
 struct ClusterLightGroup {
   offset : u32,
   lights : array<ClusterLights, 27648>,
-  indices : array<u32, 1769472>,
+  indices : array<u32, 65535>,
 }
 
 @binding(1) @group(0) var<storage, read> clusterLights : ClusterLightGroup;
