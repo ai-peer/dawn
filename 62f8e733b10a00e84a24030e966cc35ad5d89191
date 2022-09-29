@@ -16,6 +16,24 @@
       "message": "Found your test, and we\u0027ve got the wrong thing here, heh. The `scalar * vec` and `matrix * vec` would be the only ones it kicks in as it has to be a scalar vector on the rhs. Will regenerate the results.",
       "revId": "62f8e733b10a00e84a24030e966cc35ad5d89191",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0985acce_0ae23057",
+        "filename": "test/tint/expressions/binary/mul/scalar-vec3/i32.wgsl.expected.msl",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-09-29T18:19:11Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ad39e7c7_a64a5b49",
+      "revId": "62f8e733b10a00e84a24030e966cc35ad5d89191",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
