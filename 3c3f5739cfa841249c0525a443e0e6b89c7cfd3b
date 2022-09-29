@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f55e5c66_a18b0eb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-29T18:48:16Z",
+      "side": 1,
+      "message": "LGTM with one nit",
+      "revId": "3c3f5739cfa841249c0525a443e0e6b89c7cfd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934bb1cd_021d52e0",
+        "filename": "src/dawn/tests/end2end/IndexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-29T18:48:16Z",
+      "side": 1,
+      "message": "Is there an ANGLE bug for this already? If so, we should use it\u0027s URL here and below.",
+      "revId": "3c3f5739cfa841249c0525a443e0e6b89c7cfd3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
