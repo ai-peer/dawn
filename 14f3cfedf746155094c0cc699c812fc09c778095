@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd39fd79_1386c9ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-29T12:01:25Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b80740f5_7a88bf85",
@@ -37,6 +54,23 @@
         "endLine": 1277,
         "endChar": 98
       },
+      "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d21d1fe_652c9d29",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-29T12:01:25Z",
+      "side": 1,
+      "message": "Why do we take the min here? The max buffer size isn\u0027t used to size any arrays or anything, so if the driver says UINT64_MAX we could be honoring that. These limits mins here are to ensure that limits don\u0027t go over fixed-size arrays in Dawn\u0027s internal code. (we could clarify the comment above this block)",
       "revId": "14f3cfedf746155094c0cc699c812fc09c778095",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
