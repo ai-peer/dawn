@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cd7e9b5_d412d5bb",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T06:02:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7fff9d0_3fa84b47",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 26
+      },
+      "revId": "e1183f84caa72a1caaa47ab8d599a7dcb445beb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5f3da1c_91a4a7d6",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-09-22T05:01:17Z",
       "side": 1,
       "message": "what about depth/stencil or multiplanar textures?\n\nalso, we should be careful about cases where the format is stencil8 but internally we back it with depth32float-stencil8. The size is much bigger there.\nUnless, depth is not a problem.",
+      "range": {
+        "startLine": 611,
+        "startChar": 4,
+        "endLine": 614,
+        "endChar": 5
+      },
+      "revId": "e1183f84caa72a1caaa47ab8d599a7dcb445beb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55328a11_d7622054",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T06:02:50Z",
+      "side": 1,
+      "message": "According to information from Intel driver team, this problem only exists on color formats. As I mentioned, I will re-org this end2end test file and add tests for formats (different bit width, and different types like color, depth/stencil, etc.) in a follow-up patch.",
+      "parentUuid": "d5f3da1c_91a4a7d6",
       "range": {
         "startLine": 611,
         "startChar": 4,
