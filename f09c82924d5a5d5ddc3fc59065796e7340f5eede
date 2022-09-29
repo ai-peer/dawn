@@ -63,6 +63,30 @@
       },
       "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae772821_acd325a6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2670,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-29T17:43:33Z",
+      "side": 1,
+      "message": "Agreed. Sorry, I meant to add `nit` and mark as resolved.",
+      "parentUuid": "811c079d_c75bff9e",
+      "range": {
+        "startLine": 2670,
+        "startChar": 24,
+        "endLine": 2670,
+        "endChar": 28
+      },
+      "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
