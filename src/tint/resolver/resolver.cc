@@ -89,6 +89,11 @@
 #include "src/tint/utils/vector.h"
 
 namespace tint::resolver {
+namespace {
+
+constexpr int64_t kMaxArrayElementCount = 65536;
+
+}  // namespace
 
 Resolver::Resolver(ProgramBuilder* builder)
     : builder_(builder),
@@ -2704,7 +2709,8 @@ sem::Array* Resolver::Array(const Source& el_source,
         size = const_count->value * stride;
         if (size > std::numeric_limits<uint32_t>::max()) {
             std::stringstream msg;
-            msg << "array size (0x" << std::hex << size << ") must not exceed 0xffffffff bytes";
+            msg << "array byte size (0x" << std::hex << size
+                << ") must not exceed 0xffffffff bytes";
             AddError(msg.str(), count_source);
             return nullptr;
         }
@@ -3230,14 +3236,23 @@ bool Resolver::ApplyStorageClassUsageToType(ast::StorageClass sc,
     }
 
     if (auto* arr = ty->As<sem::Array>()) {
-        if (arr->IsRuntimeSized() && sc != ast::StorageClass::kStorage) {
-            AddError(
-                "runtime-sized arrays can only be used in the <storage> storage "
-                "class",
-                usage);
-            return false;
-        }
+        if (sc != ast::StorageClass::kStorage) {
+            if (arr->IsRuntimeSized()) {
+                AddError(
+                    "runtime-sized arrays can only be used in the <storage> storage "
+                    "class",
+                    usage);
+                return false;
+            }
 
+            auto count = arr->ConstantCount();
+            if (count.has_value() && count.value() >= kMaxArrayElementCount) {
+                AddError("array size (" + std::to_string(count.value()) + ") must be less than " +
+                             std::to_string(kMaxArrayElementCount),
+                         usage);
+                return false;
+            }
+        }
         return ApplyStorageClassUsageToType(sc, const_cast<sem::Type*>(arr->ElemType()), usage);
     }
 
