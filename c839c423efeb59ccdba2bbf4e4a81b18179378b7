@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8d62aba_63546b35",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-29T06:20:26Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "73e99da7_cbca35f6",
+      "range": {
+        "startLine": 1251,
+        "startChar": 8,
+        "endLine": 1251,
+        "endChar": 69
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e30a14c_5e4aa702",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 20
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b0c9649_bc6ebbd2",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-29T06:20:26Z",
+      "side": 1,
+      "message": "I like the idea, and will try that way.",
+      "parentUuid": "6e30a14c_5e4aa702",
+      "range": {
+        "startLine": 224,
+        "startChar": 8,
+        "endLine": 225,
+        "endChar": 42
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "542a4c75_2a8d8fca",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 20
@@ -77,6 +125,30 @@
       "writtenOn": "2022-09-28T15:58:45Z",
       "side": 1,
       "message": "I believe this should call mTask-\u003eHandleDeviceLoss()",
+      "range": {
+        "startLine": 234,
+        "startChar": 47,
+        "endLine": 234,
+        "endChar": 56
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3cf1560_f3d790ea",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-29T06:20:26Z",
+      "side": 1,
+      "message": "Good catch.",
+      "parentUuid": "542a4c75_2a8d8fca",
       "range": {
         "startLine": 234,
         "startChar": 47,

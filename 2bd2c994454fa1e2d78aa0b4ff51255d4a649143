@@ -408,6 +408,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9841b35a_429ec83b",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 811,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-29T06:20:26Z",
+      "side": 1,
+      "message": "Current CL is incomplete and only handles Vulkan backend. I just want to quickly make sure the basic idea is what you and @cwallez@chromium.org want, as discussed in the [issue](https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1413). If I\u0027m in the right direction now, I will continue working on other backends, gradually figuring out other refactoring like moving CommandRecordingContext to frontend, etc.",
+      "parentUuid": "cd50eb63_f27bdf41",
+      "range": {
+        "startLine": 811,
+        "startChar": 75,
+        "endLine": 811,
+        "endChar": 79
+      },
+      "revId": "2bd2c994454fa1e2d78aa0b4ff51255d4a649143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d1f24ba_b0ec7120",
         "filename": "src/dawn/native/vulkan/NativeSwapChainImplVk.cpp",
         "patchSetId": 10
