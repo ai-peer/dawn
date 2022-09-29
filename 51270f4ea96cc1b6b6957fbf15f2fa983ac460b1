@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd6cc7da_82651739",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-09-29T22:39:31Z",
+      "side": 1,
+      "message": "PTAL! Verified that each of the removed suppressions run correctly on a Pixel 4.",
+      "revId": "51270f4ea96cc1b6b6957fbf15f2fa983ac460b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
