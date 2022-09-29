@@ -16,6 +16,29 @@
       "message": "PTAL. Thoughts?",
       "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2a9f75_4026c783",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2670,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-29T17:35:01Z",
+      "side": 1,
+      "message": "should probably be `element count` as that\u0027s clearer, and what\u0027s written in the spec.",
+      "range": {
+        "startLine": 2670,
+        "startChar": 24,
+        "endLine": 2670,
+        "endChar": 28
+      },
+      "revId": "f09c82924d5a5d5ddc3fc59065796e7340f5eede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
