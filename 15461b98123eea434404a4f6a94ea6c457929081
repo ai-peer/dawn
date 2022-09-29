@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c00ef6f9_4ddc3b9e",
+        "filename": "src/tint/reader/spirv/parser_impl_module_var_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1797,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-09-29T20:37:01Z",
+      "side": 1,
+      "message": "This looks weird with only the 1 quote, but this test was only looking for the first character \"1\" in the full string. This is what the actual output is:\n\n```\n Actual: \"line:26: Invalid storage class for pointer operand \u00271[%gl_InstanceIndex]\u0027\\n  %18 \u003d OpFunctionCall %uint %14 %gl_InstanceIndex\\n\"\n ```",
+      "range": {
+        "startLine": 1797,
+        "startChar": 81,
+        "endLine": 1797,
+        "endChar": 82
+      },
+      "revId": "15461b98123eea434404a4f6a94ea6c457929081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
