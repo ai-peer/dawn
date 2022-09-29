@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86bbd4fb_0b7a3791",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b07a645b_de2825d6",
+      "range": {
+        "startLine": 116,
+        "startChar": 17,
+        "endLine": 116,
+        "endChar": 30
+      },
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41fff853_ad748352",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-09-29T13:51:44Z",
       "side": 1,
       "message": "So just to be sure, this returns the number of rows of block per column of the allocation?",
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95920d09_ca46895a",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "Ack.\n\nThis function returns the number of rows of block for one layer with all mipmaps. I added a comment now.",
+      "parentUuid": "41fff853_ad748352",
       "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69360858_bc75404e",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df437921_2195f97b",
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d22fad3d_c422be0c",
@@ -109,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "127df9fc_4828a267",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "I think it doesn\u0027t need to handle compressed formats according to my understanding about the driver code/bug. But I will add more tests in a follow-up patch. So it is possible the calculation here need to be changed a little bit for new tests.",
+      "parentUuid": "d22fad3d_c422be0c",
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a619ff91_09d95908",
@@ -122,6 +200,30 @@
       "writtenOn": "2022-09-29T13:51:44Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 247,
+        "startChar": 26,
+        "endLine": 247,
+        "endChar": 31
+      },
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b2515f_59a81afe",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "same",
+      "parentUuid": "a619ff91_09d95908",
       "range": {
         "startLine": 247,
         "startChar": 26,
@@ -155,6 +257,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39377ab7_0c75c235",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ee7247e_17e5f3d0",
+      "range": {
+        "startLine": 261,
+        "startChar": 62,
+        "endLine": 261,
+        "endChar": 71
+      },
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e590b56_0bd4573c",
@@ -168,6 +294,24 @@
       "writtenOn": "2022-09-29T13:51:44Z",
       "side": 1,
       "message": "nit: Why use a float? It seems that integer division would at the worst case give us an underestimate, so the returned final extra size would be large enough?",
+      "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e63803_1aa95de4",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-09-29T22:48:13Z",
+      "side": 1,
+      "message": "an underestimate value from integer division is incorrect, we may need 1 more layer sometimes. Now I am still using integer division with a makeup: adding ( actualMainSizePerLayer - 1).",
+      "parentUuid": "4e590b56_0bd4573c",
       "revId": "418480440daa0a61dcfa9f88c47a7d99b6e316b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
