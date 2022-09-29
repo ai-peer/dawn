@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51cc9a0_0ab3b6b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-29T23:43:37Z",
+      "side": 1,
+      "message": "LGTM for basic code changes. I am still reading through some of the spec to double check/understand some of the Vulkan specific stuff.",
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec41cb0d_ef277722",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-29T23:43:37Z",
+      "side": 1,
+      "message": "nit. Can\u0027t these be collapsed into a `NeedsDedicatedAllocation`? Or is there a need to specifically test cases where we may have an override or something?",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e5961d0_e47d37f4",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-09-29T23:43:37Z",
+      "side": 1,
+      "message": "nit. Would be helpful to add a /**/ comment to indicate which var is being set with each of these true/false pairs.",
+      "range": {
+        "startLine": 897,
+        "startChar": 24,
+        "endLine": 897,
+        "endChar": 37
+      },
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
