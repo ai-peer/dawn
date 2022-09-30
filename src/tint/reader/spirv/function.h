@@ -325,17 +325,23 @@ struct DefInfo {
     /// example, pointers. crbug.com/tint/98
     bool requires_hoisted_var_def = false;
 
-    /// The storage class to use for this value, if it is of pointer type.
-    /// This is required to carry a storage class override from a storage
-    /// buffer expressed in the old style (with Uniform storage class)
-    /// that needs to be remapped to StorageBuffer storage class.
-    /// This is kInvalid for non-pointers.
-    ast::StorageClass storage_class = ast::StorageClass::kInvalid;
+    /// Information about a pointer value.
+    struct Pointer {
+        /// The storage class to use for this value, if it is of pointer type.
+        /// This is required to carry a storage class override from a storage
+        /// buffer expressed in the old style (with Uniform storage class)
+        /// that needs to be remapped to StorageBuffer storage class.
+        /// This is kInvalid for non-pointers.
+        ast::StorageClass storage_class = ast::StorageClass::kInvalid;
 
-    /// The expression to use when sinking pointers into their use.
-    /// When encountering a use of this instruction, we will emit this expression
-    /// instead.
-    TypedExpression sink_pointer_source_expr = {};
+        /// The expression to use when sinking pointers into their use.
+        /// When encountering a use of this instruction, we will emit this expression
+        /// instead.
+        TypedExpression sink_pointer_source_expr = {};
+    };
+
+    /// Collected information about a pointer value.
+    Pointer pointer;
 
     /// The reason, if any, that this value should be ignored.
     /// Normally no values are ignored.  This field can be updated while
@@ -360,8 +366,8 @@ inline std::ostream& operator<<(std::ostream& o, const DefInfo& di) {
     }
     o << " requires_named_let_def: " << (di.requires_named_let_def ? "true" : "false")
       << " requires_hoisted_var_def: " << (di.requires_hoisted_var_def ? "true" : "false");
-    if (di.storage_class != ast::StorageClass::kNone) {
-        o << " sc:" << int(di.storage_class);
+    if (di.pointer.storage_class != ast::StorageClass::kInvalid) {
+        o << " sc:" << int(di.pointer.storage_class);
     }
     switch (di.skip) {
         case SkipReason::kDontSkip:

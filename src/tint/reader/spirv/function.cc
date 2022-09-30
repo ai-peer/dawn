@@ -2534,7 +2534,7 @@ TypedExpression FunctionEmitter::MakeExpression(uint32_t id) {
             return {};
         case SkipReason::kSinkPointerIntoUse: {
             // Replace the pointer with its source reference expression.
-            auto source_expr = GetDefInfo(id)->sink_pointer_source_expr;
+            auto source_expr = GetDefInfo(id)->pointer.sink_pointer_source_expr;
             TINT_ASSERT(Reader, source_expr.type->Is<Reference>());
             return source_expr;
         }
@@ -3712,8 +3712,8 @@ bool FunctionEmitter::EmitStatement(const spvtools::opt::Instruction& inst) {
             const auto skip = GetSkipReason(value_id);
             if (skip != SkipReason::kDontSkip) {
                 GetDefInfo(inst.result_id())->skip = skip;
-                GetDefInfo(inst.result_id())->sink_pointer_source_expr =
-                    GetDefInfo(value_id)->sink_pointer_source_expr;
+                GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr =
+                    GetDefInfo(value_id)->pointer.sink_pointer_source_expr;
                 return true;
             }
             auto expr = AddressOfIfNeeded(MakeExpression(value_id), &inst);
@@ -4340,8 +4340,8 @@ TypedExpression FunctionEmitter::MakeAccessChain(const spvtools::opt::Instructio
     if (base_skip != SkipReason::kDontSkip) {
         // This can occur for AccessChain with no indices.
         GetDefInfo(inst.result_id())->skip = base_skip;
-        GetDefInfo(inst.result_id())->sink_pointer_source_expr =
-            GetDefInfo(base_id)->sink_pointer_source_expr;
+        GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr =
+            GetDefInfo(base_id)->pointer.sink_pointer_source_expr;
         return {};
     }
 
@@ -4530,7 +4530,7 @@ TypedExpression FunctionEmitter::MakeAccessChain(const spvtools::opt::Instructio
     if (sink_pointer) {
         // Capture the reference so that we can sink it into the point of use.
         GetDefInfo(inst.result_id())->skip = SkipReason::kSinkPointerIntoUse;
-        GetDefInfo(inst.result_id())->sink_pointer_source_expr = current_expr;
+        GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr = current_expr;
     }
 
     return current_expr;
@@ -4809,7 +4809,7 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
                 if (type->AsPointer()) {
                     if (auto* ast_type = parser_impl_.ConvertType(inst.type_id())) {
                         if (auto* ptr = ast_type->As<Pointer>()) {
-                            info->storage_class = ptr->storage_class;
+                            info->pointer.storage_class = ptr->storage_class;
                         }
                     }
                     switch (inst.opcode()) {
@@ -4823,7 +4823,7 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
                         case SpvOpCopyObject:
                             // Inherit from the first operand. We need this so we can pick up
                             // a remapped storage buffer.
-                            info->storage_class =
+                            info->pointer.storage_class =
                                 GetStorageClassForPointerValue(inst.GetSingleWordInOperand(0));
                             break;
                         default:
@@ -4849,7 +4849,7 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
 ast::StorageClass FunctionEmitter::GetStorageClassForPointerValue(uint32_t id) {
     auto where = def_info_.find(id);
     if (where != def_info_.end()) {
-        auto candidate = where->second.get()->storage_class;
+        auto candidate = where->second.get()->pointer.storage_class;
         if (candidate != ast::StorageClass::kInvalid) {
             return candidate;
         }
@@ -5053,7 +5053,7 @@ void FunctionEmitter::FindValuesNeedingNamedOrHoistedDefinition() {
             // Avoid moving combinatorial values across constructs.  This is a
             // simple heuristic to avoid changing the cost of an operation
             // by moving it into or out of a loop, for example.
-            if ((def_info->storage_class == ast::StorageClass::kInvalid) &&
+            if ((def_info->pointer.storage_class == ast::StorageClass::kInvalid) &&
                 local_def.used_in_another_construct) {
                 should_hoist_to_let = true;
             }
