@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "src/tint/utils/compiler_macros.h"
+#include "src/tint/utils/hashmap.h"
 
 #if TINT_BUILD_SPV_READER
 TINT_BEGIN_DISABLE_WARNING(NEWLINE_EOF);
@@ -656,6 +657,13 @@ class ParserImpl : Reader {
     /// error
     const Pointer* GetTypeForHandleVar(const spvtools::opt::Instruction& var);
 
+    /// @returns the AST variable for the SPIR-V ID of a module-scope variable,
+    /// or null if there isn't one.
+    const ast::Var* GetModuleVariable(uint32_t id) {
+        auto* entry = module_variable_.Find(id);
+        return entry ? *entry : nullptr;
+    }
+
     /// Returns the channel component type corresponding to the given image
     /// format.
     /// @param format image texel format
@@ -870,6 +878,9 @@ class ParserImpl : Reader {
     std::unordered_map<const spvtools::opt::Instruction*, Usage> handle_usage_;
     // The inferred pointer type for the given handle variable.
     std::unordered_map<const spvtools::opt::Instruction*, const Pointer*> handle_type_;
+
+    /// Maps the SPIR-V ID of a module-scope variable to its AST variable.
+    utils::Hashmap<uint32_t, ast::Var*, 16> module_variable_;
 
     // Set of symbols of declared type that have been added, used to avoid
     // adding duplicates.
