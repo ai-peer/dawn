@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "f8e7390681482ff2380ced919f98afaaa9323c92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67c694c_b713bb95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-09-30T12:15:29Z",
+      "side": 1,
+      "message": "I\u0027m really sorry, but I\u0027m not sure that this is a direction I\u0027d like to take with transform tests.\n\nHeavy parameterization of these tests certainly can reduce the amount of duplicated code, but at the significant cost of readability.\nThe templating in this CL makes it much harder to look at the before and after and assess what the transform actually did, which I consider to be the most critical aspect of these tests. The `matrix.NotStd140Compatible()` logic also adds complexity into the tests, which obfuscates whether the test is actually behaving correctly.\n\nI\u0027d recommend adding any additional, unparameterized `f32` tests to this file, then renaming it to `std140_f32_test.cc`, and making a copy for `std140_f16_test.cc`.\n\nHappy to chat about this if you disagree with this decision.",
+      "revId": "f8e7390681482ff2380ced919f98afaaa9323c92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
