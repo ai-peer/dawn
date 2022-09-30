@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2fa898_6da5e91b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-30T15:58:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "465bc5b2f138814d9109527d346d703be3e70ff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b95c531f_4fd682a9",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "I don\u0027t have a strong opinion about where this should go. Since in that CL you have two places where the logic would need to be, putting it in externalTexturesForEagerTransition helps factoring code.\n\nI believe GENERAL is better here because a transition from UNDEFINED to GENERAL shouldn\u0027t be doing any decompression (this the data is garbage anyway), but the next user of the texture gets a free transition from GENERAL to whatever they want to do (or staying in general). That said with putting the code where you suggested, it would be difficult to use GENERAL so we can do COPY_SRC and add a TODO for later.\n\nDo you want me to update this CL, or would you rather do it as part of yours?",
       "parentUuid": "b95c531f_4fd682a9",
+      "revId": "465bc5b2f138814d9109527d346d703be3e70ff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f3539a9_2c39aa5e",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-30T15:58:09Z",
+      "side": 1,
+      "message": "nah that CL still needs work. using GENERAL sounds fine then - and I\u0027ll change it to CopySrc if I can\u0027t get it to work in that other CL.",
+      "parentUuid": "a377df75_864afe39",
       "revId": "465bc5b2f138814d9109527d346d703be3e70ff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
