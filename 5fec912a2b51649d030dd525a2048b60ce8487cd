@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "47a4d15e_b75fd43d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-30T12:09:01Z",
+      "side": 1,
+      "message": "2 more:\n```\n../../third_party/dawn/src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp:97:50: error: use of undeclared identifier \u0027DeviceExt\u0027\n               mDeviceVk-\u003eGetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);\n                                                 ^\n../../third_party/dawn/src/dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.cpp:97:16: error: use of undeclared identifier \u0027mDeviceVk\u0027\n               mDeviceVk-\u003eGetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);\n\n```",
+      "parentUuid": "fb8a7da0_69b96470",
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec41cb0d_ef277722",
         "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 8
