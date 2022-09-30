@@ -424,14 +424,14 @@ class ParserImpl : Reader {
     /// Creates an AST 'var' node for a SPIR-V ID, including any attached decorations, unless it's
     /// an ignorable builtin variable.
     /// @param id the SPIR-V result ID
-    /// @param sc the storage class, which cannot be ast::StorageClass::kNone
+    /// @param address_space the address space, which cannot be ast::AddressSpace::kNone
     /// @param storage_type the storage type of the variable
     /// @param constructor the variable constructor
     /// @param decorations the variable decorations
     /// @returns a new Variable node, or null in the ignorable variable case and
     /// in the error case
     ast::Var* MakeVar(uint32_t id,
-                      ast::StorageClass sc,
+                      ast::AddressSpace address_space,
                       const Type* storage_type,
                       const ast::Expression* constructor,
                       AttributeList decorations);

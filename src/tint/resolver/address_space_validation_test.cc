@@ -25,146 +25,146 @@ namespace {
 
 using ::testing::HasSubstr;
 
-using ResolverStorageClassValidationTest = ResolverTest;
+using ResolverAddressSpaceValidationTest = ResolverTest;
 
-TEST_F(ResolverStorageClassValidationTest, GlobalVariableNoStorageClass_Fail) {
+TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableNoAddressSpace_Fail) {
     // var g : f32;
     GlobalVar(Source{{12, 34}}, "g", ty.f32());
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: module-scope 'var' declaration must have a storage class");
+              "12:34 error: module-scope 'var' declaration must have a address space");
 }
 
-TEST_F(ResolverStorageClassValidationTest, GlobalVariableFunctionStorageClass_Fail) {
+TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableFunctionAddressSpace_Fail) {
     // var<function> g : f32;
-    GlobalVar(Source{{12, 34}}, "g", ty.f32(), ast::StorageClass::kFunction);
+    GlobalVar(Source{{12, 34}}, "g", ty.f32(), ast::AddressSpace::kFunction);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: module-scope 'var' must not use storage class 'function'");
+              "12:34 error: module-scope 'var' must not use address space 'function'");
 }
 
-TEST_F(ResolverStorageClassValidationTest, Private_RuntimeArray) {
-    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::StorageClass::kPrivate);
+TEST_F(ResolverAddressSpaceValidationTest, Private_RuntimeArray) {
+    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> storage class
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
 12:34 note: while instantiating 'var' v)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, Private_RuntimeArrayInStruct) {
+TEST_F(ResolverAddressSpaceValidationTest, Private_RuntimeArrayInStruct) {
     auto* s = Structure("S", utils::Vector{Member("m", ty.array(ty.i32()))});
-    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::StorageClass::kPrivate);
+    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> storage class
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
 note: while analysing structure member S.m
 12:34 note: while instantiating 'var' v)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, Workgroup_RuntimeArray) {
-    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::StorageClass::kWorkgroup);
+TEST_F(ResolverAddressSpaceValidationTest, Workgroup_RuntimeArray) {
+    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::AddressSpace::kWorkgroup);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> storage class
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
 12:34 note: while instantiating 'var' v)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, Workgroup_RuntimeArrayInStruct) {
+TEST_F(ResolverAddressSpaceValidationTest, Workgroup_RuntimeArrayInStruct) {
     auto* s = Structure("S", utils::Vector{Member("m", ty.array(ty.i32()))});
-    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::StorageClass::kWorkgroup);
+    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::AddressSpace::kWorkgroup);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> storage class
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
 note: while analysing structure member S.m
 12:34 note: while instantiating 'var' v)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferBool) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferBool) {
     // var<storage> g : bool;
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::StorageClass::kStorage, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kStorage, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in storage class 'storage' as it is non-host-shareable
+        R"(56:78 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferBoolAlias) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferBoolAlias) {
     // type a = bool;
     // var<storage, read> g : a;
     auto* a = Alias("a", ty.bool_());
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::StorageClass::kStorage, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::AddressSpace::kStorage, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in storage class 'storage' as it is non-host-shareable
+        R"(56:78 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
 // F16 types in storage and uniform buffer is not implemented yet.
 // TODO(tint:1473, tint:1502): make these testcases valid after f16 is supported.
-TEST_F(ResolverStorageClassValidationTest, StorageBufferF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferF16_TemporallyBan) {
     // var<storage> g : f16;
     Enable(ast::Extension::kF16);
 
-    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::StorageClass::kStorage, Binding(0_a), Group(0_a));
+    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::AddressSpace::kStorage, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'storage' storage class is not "
+              "56:78 error: using f16 types in 'storage' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferF16Alias_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferF16Alias_TemporallyBan) {
     // type a = f16;
     // var<storage, read> g : a;
     Enable(ast::Extension::kF16);
 
     auto* a = Alias("a", ty.f16());
-    GlobalVar("g", ty.type_name(Source{{56, 78}}, a->name), ast::StorageClass::kStorage,
+    GlobalVar("g", ty.type_name(Source{{56, 78}}, a->name), ast::AddressSpace::kStorage,
               Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'storage' storage class is not "
+              "56:78 error: using f16 types in 'storage' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferVectorF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferVectorF16_TemporallyBan) {
     // var<storage> g : vec4<f16>;
     Enable(ast::Extension::kF16);
-    GlobalVar("g", ty.vec(Source{{56, 78}}, ty.Of<f16>(), 4u), ast::StorageClass::kStorage,
+    GlobalVar("g", ty.vec(Source{{56, 78}}, ty.Of<f16>(), 4u), ast::AddressSpace::kStorage,
               Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'storage' storage class is not "
+              "56:78 error: using f16 types in 'storage' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferArrayF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferArrayF16_TemporallyBan) {
     // struct S { a : f16 };
     // var<storage, read> g : array<S, 3u>;
     Enable(ast::Extension::kF16);
 
     auto* s = Structure("S", utils::Vector{Member("a", ty.f16(Source{{56, 78}}))});
     auto* a = ty.array(ty.Of(s), 3_u);
-    GlobalVar("g", a, ast::StorageClass::kStorage, ast::Access::kRead, Binding(0_a), Group(0_a));
+    GlobalVar("g", a, ast::AddressSpace::kStorage, ast::Access::kRead, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
@@ -172,13 +172,13 @@ TEST_F(ResolverStorageClassValidationTest, StorageBufferArrayF16_TemporallyBan) 
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferStructF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferStructF16_TemporallyBan) {
     // struct S { x : f16 };
     // var<storage, read> g : S;
     Enable(ast::Extension::kF16);
 
     auto* s = Structure("S", utils::Vector{Member("x", ty.f16(Source{{12, 34}}))});
-    GlobalVar("g", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kRead, Binding(0_a),
+    GlobalVar("g", ty.Of(s), ast::AddressSpace::kStorage, ast::Access::kRead, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
@@ -187,7 +187,7 @@ TEST_F(ResolverStorageClassValidationTest, StorageBufferStructF16_TemporallyBan)
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferNoErrorStructF16Aliases_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferNoErrorStructF16Aliases_TemporallyBan) {
     // struct S { x : f16 };
     // type a1 = S;
     // var<storage, read> g : a1;
@@ -196,7 +196,7 @@ TEST_F(ResolverStorageClassValidationTest, StorageBufferNoErrorStructF16Aliases_
     auto* s = Structure("S", utils::Vector{Member("x", ty.f16(Source{{12, 34}}))});
     auto* a1 = Alias("a1", ty.Of(s));
     auto* a2 = Alias("a2", ty.Of(a1));
-    GlobalVar("g", ty.Of(a2), ast::StorageClass::kStorage, ast::Access::kRead, Binding(0_a),
+    GlobalVar("g", ty.Of(a2), ast::AddressSpace::kStorage, ast::Access::kRead, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
@@ -205,75 +205,75 @@ TEST_F(ResolverStorageClassValidationTest, StorageBufferNoErrorStructF16Aliases_
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferPointer) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferPointer) {
     // var<storage> g : ptr<private, f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::StorageClass::kPrivate),
-              ast::StorageClass::kStorage, Binding(0_a), Group(0_a));
+    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+              ast::AddressSpace::kStorage, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in storage class 'storage' as it is non-host-shareable
+        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'storage' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferIntScalar) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferIntScalar) {
     // var<storage> g : i32;
-    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::StorageClass::kStorage, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::AddressSpace::kStorage, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferVectorF32) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferVectorF32) {
     // var<storage> g : vec4<f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.vec4<f32>(), ast::StorageClass::kStorage, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.vec4<f32>(), ast::AddressSpace::kStorage, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferArrayF32) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferArrayF32) {
     // var<storage, read> g : array<S, 3u>;
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32())});
     auto* a = ty.array(ty.Of(s), 3_u);
-    GlobalVar(Source{{56, 78}}, "g", a, ast::StorageClass::kStorage, ast::Access::kRead,
+    GlobalVar(Source{{56, 78}}, "g", a, ast::AddressSpace::kStorage, ast::Access::kRead,
               Binding(0_a), Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, NotStorage_AccessMode) {
+TEST_F(ResolverAddressSpaceValidationTest, NotStorage_AccessMode) {
     // var<private, read> g : a;
-    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::StorageClass::kPrivate, ast::Access::kRead);
+    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::AddressSpace::kPrivate, ast::Access::kRead);
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: only variables in <storage> storage class may declare an access mode)");
+        R"(56:78 error: only variables in <storage> address space may declare an access mode)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, Storage_ReadAccessMode) {
+TEST_F(ResolverAddressSpaceValidationTest, Storage_ReadAccessMode) {
     // @group(0) @binding(0) var<storage, read> a : i32;
-    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::StorageClass::kStorage, ast::Access::kRead,
+    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::AddressSpace::kStorage, ast::Access::kRead,
               Group(0_a), Binding(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, Storage_ReadWriteAccessMode) {
+TEST_F(ResolverAddressSpaceValidationTest, Storage_ReadWriteAccessMode) {
     // @group(0) @binding(0) var<storage, read_write> a : i32;
-    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::StorageClass::kStorage, ast::Access::kReadWrite,
+    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::AddressSpace::kStorage, ast::Access::kReadWrite,
               Group(0_a), Binding(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, Storage_WriteAccessMode) {
+TEST_F(ResolverAddressSpaceValidationTest, Storage_WriteAccessMode) {
     // @group(0) @binding(0) var<storage, read_write> a : i32;
-    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::StorageClass::kStorage, ast::Access::kWrite,
+    GlobalVar(Source{{56, 78}}, "a", ty.i32(), ast::AddressSpace::kStorage, ast::Access::kWrite,
               Group(0_a), Binding(0_a));
 
     ASSERT_FALSE(r()->Resolve());
@@ -282,108 +282,108 @@ TEST_F(ResolverStorageClassValidationTest, Storage_WriteAccessMode) {
               R"(56:78 error: access mode 'write' is not valid for the 'storage' address space)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferStructI32) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferStructI32) {
     // struct S { x : i32 };
     // var<storage, read> g : S;
     auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "x", ty.i32())});
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(s), ast::StorageClass::kStorage, ast::Access::kRead,
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(s), ast::AddressSpace::kStorage, ast::Access::kRead,
               Binding(0_a), Group(0_a));
 
     ASSERT_TRUE(r()->Resolve());
 }
 
-TEST_F(ResolverStorageClassValidationTest, StorageBufferNoErrorStructI32Aliases) {
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferNoErrorStructI32Aliases) {
     // struct S { x : i32 };
     // type a1 = S;
     // var<storage, read> g : a1;
     auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "x", ty.i32())});
     auto* a1 = Alias("a1", ty.Of(s));
     auto* a2 = Alias("a2", ty.Of(a1));
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a2), ast::StorageClass::kStorage, ast::Access::kRead,
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(a2), ast::AddressSpace::kStorage, ast::Access::kRead,
               Binding(0_a), Group(0_a));
 
     ASSERT_TRUE(r()->Resolve());
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBuffer_Struct_Runtime) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBuffer_Struct_Runtime) {
     // struct S { m:  array<f32>; };
     // @group(0) @binding(0) var<uniform, > svar : S;
 
     auto* s = Structure(Source{{12, 34}}, "S", utils::Vector{Member("m", ty.array<i32>())});
 
-    GlobalVar(Source{{56, 78}}, "svar", ty.Of(s), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "svar", ty.Of(s), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(56:78 error: runtime-sized arrays can only be used in the <storage> storage class
+              R"(56:78 error: runtime-sized arrays can only be used in the <storage> address space
 note: while analysing structure member S.m
 56:78 note: while instantiating 'var' svar)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferBool) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferBool) {
     // var<uniform> g : bool;
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in storage class 'uniform' as it is non-host-shareable
+        R"(56:78 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferBoolAlias) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferBoolAlias) {
     // type a = bool;
     // var<uniform> g : a;
     auto* a = Alias("a", ty.bool_());
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in storage class 'uniform' as it is non-host-shareable
+        R"(56:78 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
 // F16 types in storage and uniform buffer is not implemented yet.
 // TODO(tint:1473, tint:1502): make these testcases valid after f16 is supported.
-TEST_F(ResolverStorageClassValidationTest, UniformBufferF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferF16_TemporallyBan) {
     // var<uniform> g : f16;
     Enable(ast::Extension::kF16);
 
-    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'uniform' storage class is not "
+              "56:78 error: using f16 types in 'uniform' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferF16Alias_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferF16Alias_TemporallyBan) {
     // type a = f16;
     // var<uniform> g : a;
     Enable(ast::Extension::kF16);
 
     auto* a = Alias("a", ty.f16());
-    GlobalVar("g", ty.type_name(Source{{56, 78}}, a->name), ast::StorageClass::kUniform,
+    GlobalVar("g", ty.type_name(Source{{56, 78}}, a->name), ast::AddressSpace::kUniform,
               Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'uniform' storage class is not "
+              "56:78 error: using f16 types in 'uniform' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferVectorF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferVectorF16_TemporallyBan) {
     // var<uniform> g : vec4<f16>;
     Enable(ast::Extension::kF16);
-    GlobalVar("g", ty.vec(Source{{56, 78}}, ty.Of<f16>(), 4u), ast::StorageClass::kUniform,
+    GlobalVar("g", ty.vec(Source{{56, 78}}, ty.Of<f16>(), 4u), ast::AddressSpace::kUniform,
               Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
@@ -392,7 +392,7 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferVectorF16_TemporallyBan)
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferArrayF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferArrayF16_TemporallyBan) {
     // struct S {
     //   @size(16) f : f16;
     // }
@@ -402,7 +402,7 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferArrayF16_TemporallyBan) 
     auto* s = Structure(
         "S", utils::Vector{Member("a", ty.f16(Source{{56, 78}}), utils::Vector{MemberSize(16_a)})});
     auto* a = ty.array(ty.Of(s), 3_u);
-    GlobalVar("g", a, ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar("g", a, ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
@@ -410,13 +410,13 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferArrayF16_TemporallyBan) 
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferStructF16_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferStructF16_TemporallyBan) {
     // struct S { x : f16 };
     // var<uniform> g :  S;
     Enable(ast::Extension::kF16);
 
     auto* s = Structure("S", utils::Vector{Member("x", ty.f16(Source{{12, 34}}))});
-    GlobalVar("g", ty.Of(s), ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar("g", ty.Of(s), ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
@@ -424,7 +424,7 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferStructF16_TemporallyBan)
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferStructF16Aliases_TemporallyBan) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferStructF16Aliases_TemporallyBan) {
     // struct S { x : f16 };
     // type a1 = S;
     // var<uniform> g : a1;
@@ -432,7 +432,7 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferStructF16Aliases_Tempora
 
     auto* s = Structure("S", utils::Vector{Member("x", ty.f16(Source{{12, 34}}))});
     auto* a1 = Alias("a1", ty.Of(s));
-    GlobalVar("g", ty.Of(a1), ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar("g", ty.Of(a1), ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
@@ -440,151 +440,151 @@ TEST_F(ResolverStorageClassValidationTest, UniformBufferStructF16Aliases_Tempora
                                         "class is not implemented yet"));
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferPointer) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferPointer) {
     // var<uniform> g : ptr<private, f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::StorageClass::kPrivate),
-              ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+              ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in storage class 'uniform' as it is non-host-shareable
+        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'uniform' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferIntScalar) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferIntScalar) {
     // var<uniform> g : i32;
-    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.i32(), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferVectorF32) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferVectorF32) {
     // var<uniform> g : vec4<f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.vec4<f32>(), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.vec4<f32>(), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferArrayF32) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferArrayF32) {
     // struct S {
     //   @size(16) f : f32;
     // }
     // var<uniform> g : array<S, 3u>;
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32(), utils::Vector{MemberSize(16_a)})});
     auto* a = ty.array(ty.Of(s), 3_u);
-    GlobalVar(Source{{56, 78}}, "g", a, ast::StorageClass::kUniform, Binding(0_a), Group(0_a));
+    GlobalVar(Source{{56, 78}}, "g", a, ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferStructI32) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferStructI32) {
     // struct S { x : i32 };
     // var<uniform> g :  S;
     auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "x", ty.i32())});
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(s), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(s), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, UniformBufferStructI32Aliases) {
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferStructI32Aliases) {
     // struct S { x : i32 };
     // type a1 = S;
     // var<uniform> g : a1;
     auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "x", ty.i32())});
     auto* a1 = Alias("a1", ty.Of(s));
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a1), ast::StorageClass::kUniform, Binding(0_a),
+    GlobalVar(Source{{56, 78}}, "g", ty.Of(a1), ast::AddressSpace::kUniform, Binding(0_a),
               Group(0_a));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantBool) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantBool) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : bool;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::StorageClass::kPushConstant);
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kPushConstant);
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in storage class 'push_constant' as it is non-host-shareable
+        R"(56:78 error: Type 'bool' cannot be used in address space 'push_constant' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantF16) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantF16) {
     // enable chromium_experimental_push_constant;
     // enable f16;
     // var<push_constant> g : f16;
     Enable(ast::Extension::kF16);
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::StorageClass::kPushConstant);
+    GlobalVar("g", ty.f16(Source{{56, 78}}), ast::AddressSpace::kPushConstant);
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "56:78 error: using f16 types in 'push_constant' storage class is not "
+              "56:78 error: using f16 types in 'push_constant' address space is not "
               "implemented yet");
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantPointer) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantPointer) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : ptr<private, f32>;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::StorageClass::kPrivate),
-              ast::StorageClass::kPushConstant);
+    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+              ast::AddressSpace::kPushConstant);
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in storage class 'push_constant' as it is non-host-shareable
+        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'push_constant' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantIntScalar) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantIntScalar) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : i32;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar("g", ty.i32(), ast::StorageClass::kPushConstant);
+    GlobalVar("g", ty.i32(), ast::AddressSpace::kPushConstant);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantVectorF32) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantVectorF32) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : vec4<f32>;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar("g", ty.vec4<f32>(), ast::StorageClass::kPushConstant);
+    GlobalVar("g", ty.vec4<f32>(), ast::AddressSpace::kPushConstant);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantArrayF32) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantArrayF32) {
     // enable chromium_experimental_push_constant;
     // struct S { a : f32}
     // var<push_constant> g : array<S, 3u>;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32())});
     auto* a = ty.array(ty.Of(s), 3_u);
-    GlobalVar("g", a, ast::StorageClass::kPushConstant);
+    GlobalVar("g", a, ast::AddressSpace::kPushConstant);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
 
-TEST_F(ResolverStorageClassValidationTest, PushConstantWithInitializer) {
+TEST_F(ResolverAddressSpaceValidationTest, PushConstantWithInitializer) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> a : u32 = 0u;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar(Source{{1u, 2u}}, "a", ty.u32(), ast::StorageClass::kPushConstant,
+    GlobalVar(Source{{1u, 2u}}, "a", ty.u32(), ast::AddressSpace::kPushConstant,
               Expr(Source{{3u, 4u}}, u32(0)));
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(1:2 error: var of storage class 'push_constant' cannot have an initializer. var initializers are only supported for the storage classes 'private' and 'function')");
+        R"(1:2 error: var of address space 'push_constant' cannot have an initializer. var initializers are only supported for the address spacees 'private' and 'function')");
 }
 
 }  // namespace

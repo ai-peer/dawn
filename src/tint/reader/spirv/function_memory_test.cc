@@ -818,7 +818,7 @@ fn main() {
     EXPECT_EQ(got, expected) << got;
 }
 
-TEST_F(SpvParserMemoryTest, EmitStatement_AccessChain_InferFunctionStorageClass) {
+TEST_F(SpvParserMemoryTest, EmitStatement_AccessChain_InferFunctionAddressSpace) {
     // An access chain can have no indices. When the base is a Function variable,
     // the reference type has no explicit storage class in the AST representation.
     // But the pointer type for the let declaration must have an explicit

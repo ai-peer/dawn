@@ -35,7 +35,7 @@ TEST_F(ResolverIsStorableTest, Struct_AllMembersStorable) {
 TEST_F(ResolverIsStorableTest, Struct_SomeMembersNonStorable) {
     Structure("S", {
                        Member("a", ty.i32()),
-                       Member("b", ty.pointer<i32>(ast::StorageClass::kPrivate)),
+                       Member("b", ty.pointer<i32>(ast:: ::kPrivate)),
                    });
 
     EXPECT_FALSE(r()->Resolve());
@@ -61,7 +61,7 @@ TEST_F(ResolverIsStorableTest, Struct_NestedNonStorable) {
     auto* non_storable =
         Structure("nonstorable", {
                                      Member("a", ty.i32()),
-                                     Member("b", ty.pointer<i32>(ast::StorageClass::kPrivate)),
+                                     Member("b", ty.pointer<i32>(ast:: ::kPrivate)),
                                  });
     Structure("S", {
                        Member("a", ty.i32()),

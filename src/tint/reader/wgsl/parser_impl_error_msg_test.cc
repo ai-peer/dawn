@@ -1105,7 +1105,7 @@ var i : ptr<private u32>;
 )");
 }
 
-TEST_F(ParserImplErrorTest, GlobalDeclVarPtrMissingStorageClass) {
+TEST_F(ParserImplErrorTest, GlobalDeclVarPtrMissingAddressSpace) {
     EXPECT("var i : ptr<meow, u32>;",
            R"(test.wgsl:1:13 error: invalid storage class for ptr declaration
 var i : ptr<meow, u32>;
