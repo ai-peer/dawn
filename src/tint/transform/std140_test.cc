@@ -32,7 +32,7 @@ TEST_F(Std140Test, ShouldRunEmptyModule) {
     EXPECT_FALSE(ShouldRun<Std140>(src));
 }
 
-TEST_F(Std140Test, ShouldRunStructMat2x2Unused) {
+TEST_F(Std140Test, ShouldRunStructMat2x2F32Unused) {
     auto* src = R"(
 struct Unused {
   m : mat2x2<f32>,
@@ -42,88 +42,207 @@ struct Unused {
     EXPECT_FALSE(ShouldRun<Std140>(src));
 }
 
-struct ShouldRunCase {
+TEST_F(Std140Test, ShouldRunStructMat2x2F16Unused) {
+    auto* src = R"(
+enable f16;
+
+struct Unused {
+  m : mat2x2<f32>,
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<Std140>(src));
+}
+
+enum class MatrixType { f32, f16 };
+
+struct MatrixCase {
     uint32_t columns;
     uint32_t rows;
-    bool should_run;
+    MatrixType type;
 
-    std::string Mat() const { return "mat" + std::to_string(columns) + "x" + std::to_string(rows); }
+    size_t ElementSize() const { return type == MatrixType::f16 ? 2 : 4; }
+
+    size_t ColumnVectorAlign() const { return (rows == 3 ? 4 : rows) * ElementSize(); }
+
+    bool NotStd140Compatible() const { return ColumnVectorAlign() != 16; }
+
+    // Return if this matrix type can be used as element type of an uniform buffer, i.e. the
+    // array stride is multiple of 16.
+    bool CanBeUsedAsUniformArrayElememts() const {
+        const size_t arrayStride = columns * ColumnVectorAlign();
+        return (arrayStride % 16 == 0);
+    }
+
+    std::string Shape() const { return std::to_string(columns) + "x" + std::to_string(rows); }
+
+    std::string ElementType() const { return type == MatrixType::f16 ? "f16" : "f32"; }
+
+    std::string Mat() const { return "mat" + Shape() + "<" + ElementType() + ">"; }
+
+    std::string ColumnVector() const {
+        return "vec" + std::to_string(rows) + "<" + (type == MatrixType::f32 ? "f32" : "f16") + ">";
+    }
+
+    std::string ColumnVectorSwizzle() const {
+        switch (rows) {
+            case 2:
+                return "yx";
+            case 3:
+                return "yzx";
+            case 4:
+                return "wzxy";
+        }
+        return "";
+    }
+
+    // For each column, replaces "${col_id_for_tmpl}" by column index in `tmpl` to get a string, and
+    // join all these strings with `seperator`. If `tmplForLastColumn` is not empty, use it instead
+    // of `tmpl` for the last column.
+    std::string JoinTemplatedStringForEachMatrixColumn(std::string tmpl,
+                                                       std::string seperator,
+                                                       std::string tmplForLastColumn = "") const {
+        std::string result;
+        if (tmplForLastColumn.size() == 0) {
+            tmplForLastColumn = tmpl;
+        }
+        for (size_t c = 0; c < columns - 1; c++) {
+            if (c > 0) {
+                result += seperator;
+            }
+            std::string stringForCurrentColumn =
+                utils::ReplaceAll(tmpl, "${col_id_for_tmpl}", std::to_string(c));
+            result += stringForCurrentColumn;
+        }
+        result += seperator;
+        std::string stringForLastColumn =
+            utils::ReplaceAll(tmplForLastColumn, "${col_id_for_tmpl}", std::to_string(columns - 1));
+        result += stringForLastColumn;
+        return result;
+    }
+
+    std::string ExpendedColumnVectors(uint32_t leadingSpace, std::string name) const {
+        std::string space(leadingSpace, ' ');
+        return JoinTemplatedStringForEachMatrixColumn(
+            space + name + "${col_id_for_tmpl} : " + ColumnVector() + ",", "\n");
+    }
+
+    std::string ExpendedColumnVectorsInline(std::string name, std::string seperator) const {
+        return JoinTemplatedStringForEachMatrixColumn(name + "${col_id_for_tmpl}", seperator);
+    }
+
+    std::string ExpendedColumnVectorsWithLastSize(uint32_t leadingSpace,
+                                                  std::string name,
+                                                  uint32_t lastSize) const {
+        std::string space(leadingSpace, ' ');
+        return JoinTemplatedStringForEachMatrixColumn(
+            space + name + "${col_id_for_tmpl} : " + ColumnVector() + ",", "\n",
+            space + "@size(" + std::to_string(lastSize) + ")\n" + space + name +
+                "${col_id_for_tmpl} : " + ColumnVector() + ",");
+    }
+
+    // Replace user-given fields and predefined fields in a given string `str`.
+    // First, for each pair of string in `replacementPairs`, replace all occurrences of the first
+    // string of pair with second string. Then, replace several predefined fields with the matrix
+    // information. E.g. for a matrix mat4x3<f32>, would replace "${mat}" with "mat4x3<f32>",
+    // replace "${shape}" with "4x3", "${elem_type}" with "f32", "${col_vector_type}" with
+    // "vec3<f32>", and "${swizzle}" with "yzx".
+    std::string ReplaceFieldsInString(
+        std::string str,
+        std::initializer_list<std::pair<std::string, std::string>> replacementPairs = {}) const {
+        for (auto& replace : replacementPairs) {
+            str = utils::ReplaceAll(str, replace.first, replace.second);
+        }
+        str = utils::ReplaceAll(str, "${mat}", Mat());
+        str = utils::ReplaceAll(str, "${shape}", Shape());
+        str = utils::ReplaceAll(str, "${elem_type}", ElementType());
+        str = utils::ReplaceAll(str, "${col_vector_type}", ColumnVector());
+        str = utils::ReplaceAll(str, "${swizzle}", ColumnVectorSwizzle());
+        return str;
+    }
 };
 
-inline std::ostream& operator<<(std::ostream& os, const ShouldRunCase& c) {
+inline std::ostream& operator<<(std::ostream& os, const MatrixCase& c) {
     return os << c.Mat();
 }
 
-using Std140TestShouldRun = TransformTestWithParam<ShouldRunCase>;
+using Std140TestShouldRun = TransformTestWithParam<MatrixCase>;
 
 TEST_P(Std140TestShouldRun, StructStorage) {
     std::string src = R"(
+enable f16;
+
 struct S {
-  m : ${mat}<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<storage> s : S;
 )";
 
-    src = utils::ReplaceAll(src, "${mat}", GetParam().Mat());
+    src = GetParam().ReplaceFieldsInString(src);
 
     EXPECT_FALSE(ShouldRun<Std140>(src));
 }
 
 TEST_P(Std140TestShouldRun, StructUniform) {
     std::string src = R"(
+enable f16;
+
 struct S {
-  m : ${mat}<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 )";
 
-    src = utils::ReplaceAll(src, "${mat}", GetParam().Mat());
+    src = GetParam().ReplaceFieldsInString(src);
 
-    EXPECT_EQ(ShouldRun<Std140>(src), GetParam().should_run);
+    EXPECT_EQ(ShouldRun<Std140>(src), GetParam().NotStd140Compatible());
 }
 
 TEST_P(Std140TestShouldRun, ArrayStorage) {
     std::string src = R"(
-@group(0) @binding(0) var<storage> s : array<${mat}<f32>, 2>;
+enable f16;
+
+@group(0) @binding(0) var<storage> s : array<${mat}, 2>;
 )";
 
-    src = utils::ReplaceAll(src, "${mat}", GetParam().Mat());
+    src = GetParam().ReplaceFieldsInString(src);
 
     EXPECT_FALSE(ShouldRun<Std140>(src));
 }
 
 TEST_P(Std140TestShouldRun, ArrayUniform) {
-    if (GetParam().columns == 3u && GetParam().rows == 2u) {
-        // This permutation is invalid. Skip the test:
-        // error: uniform storage requires that array elements be aligned to 16 bytes, but array
-        // element alignment is currently 24. Consider wrapping the element type in a struct and
-        // using the @size attribute.
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
         return;
     }
 
     std::string src = R"(
-@group(0) @binding(0) var<uniform> s : array<${mat}<f32>, 2>;
+enable f16;
+
+@group(0) @binding(0) var<uniform> s : array<${mat}, 2>;
 )";
 
-    src = utils::ReplaceAll(src, "${mat}", GetParam().Mat());
+    src = GetParam().ReplaceFieldsInString(src);
 
-    EXPECT_EQ(ShouldRun<Std140>(src), GetParam().should_run);
+    EXPECT_EQ(ShouldRun<Std140>(src), matrix.NotStd140Compatible());
 }
 
 INSTANTIATE_TEST_SUITE_P(Std140TestShouldRun,
                          Std140TestShouldRun,
-                         ::testing::ValuesIn(std::vector<ShouldRunCase>{
-                             {2, 2, true},
-                             {2, 3, false},
-                             {2, 4, false},
-                             {3, 2, true},
-                             {3, 3, false},
-                             {3, 4, false},
-                             {4, 2, true},
-                             {4, 3, false},
-                             {4, 4, false},
+                         ::testing::ValuesIn(std::vector<MatrixCase>{
+                             {2, 2, MatrixType::f32},
+                             {2, 3, MatrixType::f32},
+                             {2, 4, MatrixType::f32},
+                             {3, 2, MatrixType::f32},
+                             {3, 3, MatrixType::f32},
+                             {3, 4, MatrixType::f32},
+                             {4, 2, MatrixType::f32},
+                             {4, 3, MatrixType::f32},
+                             {4, 4, MatrixType::f32},
                          }));
 
 TEST_F(Std140Test, EmptyModule) {
@@ -136,271 +255,123 @@ TEST_F(Std140Test, EmptyModule) {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, SingleStructMat4x4Uniform) {
-    auto* src = R"(
-struct S {
-  m : mat4x4<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-)";
-
-    auto* expect = src;  // Nothing violates std140 layout
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, SingleStructMat2x2Uniform) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, CustomAlignMat3x2) {
-    auto* src = R"(
-struct S {
-  before : i32,
-  @align(128) m : mat3x2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-)";
-
-    auto* expect = R"(
-struct S {
-  before : i32,
-  @align(128)
-  m : mat3x2<f32>,
-  after : i32,
-}
-
-struct S_std140 {
-  before : i32,
-  @align(128i)
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  m_2 : vec2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, CustomSizeMat3x2) {
-    auto* src = R"(
-struct S {
-  before : i32,
-  @size(128) m : mat3x2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-)";
-
-    auto* expect = R"(
-struct S {
-  before : i32,
-  @size(128)
-  m : mat3x2<f32>,
-  after : i32,
-}
-
-struct S_std140 {
-  before : i32,
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(112)
-  m_2 : vec2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, CustomAlignAndSizeMat3x2) {
-    auto* src = R"(
-struct S {
-  before : i32,
-  @align(128) @size(128) m : mat3x2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-)";
-
-    auto* expect = R"(
-struct S {
-  before : i32,
-  @align(128) @size(128)
-  m : mat3x2<f32>,
-  after : i32,
-}
-
-struct S_std140 {
-  before : i32,
-  @align(128i)
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(112)
-  m_2 : vec2<f32>,
-  after : i32,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
 TEST_F(Std140Test, StructMatricesUniform) {
     auto* src = R"(
-struct S2x2 {
+enable f16;
+
+struct S2x2F32 {
   m : mat2x2<f32>,
 }
-struct S3x2 {
+struct S3x2F32 {
   m : mat3x2<f32>,
 }
-struct S4x2 {
+struct S4x2F32 {
   m : mat4x2<f32>,
 }
-struct S2x3 {
+struct S2x3F32 {
   m : mat2x3<f32>,
 }
-struct S3x3 {
+struct S3x3F32 {
   m : mat3x3<f32>,
 }
-struct S4x3 {
+struct S4x3F32 {
   m : mat4x3<f32>,
 }
-struct S2x4 {
+struct S2x4F32 {
   m : mat2x4<f32>,
 }
-struct S3x4 {
+struct S3x4F32 {
   m : mat3x4<f32>,
 }
-struct S4x4 {
+struct S4x4F32 {
   m : mat4x4<f32>,
 }
 
-@group(2) @binding(2) var<uniform> s2x2 : S2x2;
-@group(3) @binding(2) var<uniform> s3x2 : S3x2;
-@group(4) @binding(2) var<uniform> s4x2 : S4x2;
-@group(2) @binding(3) var<uniform> s2x3 : S2x3;
-@group(3) @binding(3) var<uniform> s3x3 : S3x3;
-@group(4) @binding(3) var<uniform> s4x3 : S4x3;
-@group(2) @binding(4) var<uniform> s2x4 : S2x4;
-@group(3) @binding(4) var<uniform> s3x4 : S3x4;
-@group(4) @binding(4) var<uniform> s4x4 : S4x4;
+@group(2) @binding(2) var<uniform> s2x2f32 : S2x2F32;
+@group(3) @binding(2) var<uniform> s3x2f32 : S3x2F32;
+@group(4) @binding(2) var<uniform> s4x2f32 : S4x2F32;
+@group(2) @binding(3) var<uniform> s2x3f32 : S2x3F32;
+@group(3) @binding(3) var<uniform> s3x3f32 : S3x3F32;
+@group(4) @binding(3) var<uniform> s4x3f32 : S4x3F32;
+@group(2) @binding(4) var<uniform> s2x4f32 : S2x4F32;
+@group(3) @binding(4) var<uniform> s3x4f32 : S3x4F32;
+@group(4) @binding(4) var<uniform> s4x4f32 : S4x4F32;
 )";
 
     auto* expect = R"(
-struct S2x2 {
+enable f16;
+
+struct S2x2F32 {
   m : mat2x2<f32>,
 }
 
-struct S2x2_std140 {
+struct S2x2F32_std140 {
   m_0 : vec2<f32>,
   m_1 : vec2<f32>,
 }
 
-struct S3x2 {
+struct S3x2F32 {
   m : mat3x2<f32>,
 }
 
-struct S3x2_std140 {
+struct S3x2F32_std140 {
   m_0 : vec2<f32>,
   m_1 : vec2<f32>,
   m_2 : vec2<f32>,
 }
 
-struct S4x2 {
+struct S4x2F32 {
   m : mat4x2<f32>,
 }
 
-struct S4x2_std140 {
+struct S4x2F32_std140 {
   m_0 : vec2<f32>,
   m_1 : vec2<f32>,
   m_2 : vec2<f32>,
   m_3 : vec2<f32>,
 }
 
-struct S2x3 {
+struct S2x3F32 {
   m : mat2x3<f32>,
 }
 
-struct S3x3 {
+struct S3x3F32 {
   m : mat3x3<f32>,
 }
 
-struct S4x3 {
+struct S4x3F32 {
   m : mat4x3<f32>,
 }
 
-struct S2x4 {
+struct S2x4F32 {
   m : mat2x4<f32>,
 }
 
-struct S3x4 {
+struct S3x4F32 {
   m : mat3x4<f32>,
 }
 
-struct S4x4 {
+struct S4x4F32 {
   m : mat4x4<f32>,
 }
 
-@group(2) @binding(2) var<uniform> s2x2 : S2x2_std140;
+@group(2) @binding(2) var<uniform> s2x2f32 : S2x2F32_std140;
 
-@group(3) @binding(2) var<uniform> s3x2 : S3x2_std140;
+@group(3) @binding(2) var<uniform> s3x2f32 : S3x2F32_std140;
 
-@group(4) @binding(2) var<uniform> s4x2 : S4x2_std140;
+@group(4) @binding(2) var<uniform> s4x2f32 : S4x2F32_std140;
 
-@group(2) @binding(3) var<uniform> s2x3 : S2x3;
+@group(2) @binding(3) var<uniform> s2x3f32 : S2x3F32;
 
-@group(3) @binding(3) var<uniform> s3x3 : S3x3;
+@group(3) @binding(3) var<uniform> s3x3f32 : S3x3F32;
 
-@group(4) @binding(3) var<uniform> s4x3 : S4x3;
+@group(4) @binding(3) var<uniform> s4x3f32 : S4x3F32;
 
-@group(2) @binding(4) var<uniform> s2x4 : S2x4;
+@group(2) @binding(4) var<uniform> s2x4f32 : S2x4F32;
 
-@group(3) @binding(4) var<uniform> s3x4 : S3x4;
+@group(3) @binding(4) var<uniform> s3x4f32 : S3x4F32;
 
-@group(4) @binding(4) var<uniform> s4x4 : S4x4;
+@group(4) @binding(4) var<uniform> s4x4f32 : S4x4F32;
 )";
 
     auto got = Run<Std140>(src);
@@ -408,40 +379,1174 @@ struct S4x4 {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_NameCollision) {
-    auto* src = R"(
+using Std140Test_Matrix = TransformTestWithParam<MatrixCase>;
+
+TEST_P(Std140Test_Matrix, SingleStructMatUniform) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  m_1 : i32,
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
-  m_1 : i32,
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_1 : i32,
-  m__0 : vec2<f32>,
-  m__1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 )";
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")}});
+
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadStruct) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, CustomAlign) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  before : i32,
+  @align(128)
+  m : ${mat},
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  before : i32,
+  @align(128)
+  m : ${mat},
+  after : i32,
+}
+
+struct S_std140 {
+  before : i32,
+  @align(128i)
+${col_vectors}
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, CustomSizeMat) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  before : i32,
+  @size(128)
+  m : ${mat},
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        uint32_t lastSize =
+            128 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+
+        expect = R"(
+enable f16;
+
+struct S {
+  before : i32,
+  @size(128)
+  m : ${mat},
+  after : i32,
+}
+
+struct S_std140 {
+  before : i32,
+${col_vectors}
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, CustomAlignAndSize) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  before : i32,
+  @align(128) @size(128)
+  m : ${mat},
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        uint32_t lastSize =
+            128 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+
+        expect = R"(
+enable f16;
+
+struct S {
+  before : i32,
+  @align(128) @size(128)
+  m : ${mat},
+  after : i32,
+}
+
+struct S_std140 {
+  before : i32,
+  @align(128i)
+${col_vectors}
+  after : i32,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadMatrix) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> m : ${mat};
+
+fn f() {
+  let l = m;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> m : mat${shape}_${elem_type};
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let l = conv_mat${shape}_${elem_type}(m);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadColumn_ConstIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let l = a[${cloumn_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn f() {
+  let l = a.col${cloumn_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${cloumn_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${cloumn_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadColumn_VariableIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let I = 1;
+  let l = a[I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn load_a_p0(p0 : u32) -> ${col_vector_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_a_p0(u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a.col0;
+        //   }
+        //   case 1u: {
+        //     return a.col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a.col${col_id_for_tmpl};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadColumnSwizzle_ConstIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let l = a[${cloumn_index}].${swizzle};
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn f() {
+  let l = a.col${cloumn_index}.${swizzle};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${cloumn_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${cloumn_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadColumnSwizzle_VariableIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let I = 1;
+  let l = a[I].${swizzle};
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn load_a_p0_${swizzle}(p0 : u32) -> ${col_vector_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_a_p0_${swizzle}(u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a.col0.${swizzle};
+        //   }
+        //   case 1u: {
+        //     return a.col1.${swizzle};
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a.col${col_id_for_tmpl}.${swizzle};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadScalar_ConstColumnIndex_ConstRowIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let l = a[${col_index}][${row_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn f() {
+  let l = a.col${col_index}[${row_index}u];
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        for (uint32_t row = 0; row < matrix.rows; row++) {
+            std::string src = utils::ReplaceAll(tmplSrc, "${col_index}", std::to_string(col));
+            src = utils::ReplaceAll(src, "${row_index}", std::to_string(row));
+            std::string expect = utils::ReplaceAll(tmplExpect, "${col_index}", std::to_string(col));
+            expect = utils::ReplaceAll(expect, "${row_index}", std::to_string(row));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadScalar_VariableColumnIndex_ConstRowIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let I = 0;
+  let l = a[I][${row_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn load_a_p0_${row_index}(p0 : u32) -> ${elem_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${elem_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 0;
+  let l = load_a_p0_${row_index}(u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a.col0[${row_index}u];
+        //   }
+        //   case 1u: {
+        //     return a.col1[${row_index}u];
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a.col${col_id_for_tmpl}[${row_index}u];
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t row = 0; row < matrix.rows; row++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${row_index}", std::to_string(row));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${row_index}", std::to_string(row));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadScalar_ConstColumnIndex_VariableRowIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let I = 0;
+  let l = a[${col_index}][I];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn f() {
+  let I = 0;
+  let l = a.col${col_index}[I];
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${col_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${col_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, MatUniform_LoadScalar_VariableColumnIndex_VariableRowIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : ${mat};
+
+fn f() {
+  let I = 0;
+  let l = a[I][I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : mat${shape}_${elem_type};
+
+fn load_a_p0_p1(p0 : u32, p1 : u32) -> ${elem_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${elem_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 0;
+  let l = load_a_p0_p1(u32(I), u32(I));
+}
+)";
+
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a.col0[p1];
+        //   }
+        //   case 1u: {
+        //     return a.col1[p1];
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a.col${col_id_for_tmpl}[p1];
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadArray) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let l = a;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
+}
+
+fn f() {
+  let l = conv_arr3_mat${shape}_${elem_type}(a);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadMatrix_ConstArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let l = a[${array_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let l = conv_mat${shape}_${elem_type}(a[${array_index}u]);
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t i = 0; i < 3; i++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(i));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(i));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadMatrix_VariableArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let I = 1;
+  let l = a[I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let I = 1;
+  let l = conv_mat${shape}_${elem_type}(a[I]);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadColumn_ConstArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let l = a[${array_index}][${cloumn_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn f() {
+  let l = a[${array_index}u].col${cloumn_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        for (uint32_t col = 0; col < matrix.columns; col++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+            src = utils::ReplaceAll(src, "${cloumn_index}", std::to_string(col));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+            expect = utils::ReplaceAll(expect, "${cloumn_index}", std::to_string(col));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadColumn_VariableArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let I = 1;
+  let l = a[I][${cloumn_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn f() {
+  let I = 1;
+  let l = a[I].col${cloumn_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${cloumn_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${cloumn_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadColumn_ConstArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let I = 1;
+  let l = a[${array_index}][I];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn load_a_${array_index}_p0(p0 : u32) -> ${col_vector_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_a_${array_index}_p0(u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[${array_index}u].col0;
+        //   }
+        //   case 1u: {
+        //     return a[${array_index}u].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[${array_index}u].col${col_id_for_tmpl};
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, ArrayMatUniform_LoadColumn_VariableArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<${mat}, 3>;
+
+fn f() {
+  let I = 1;
+  let l = a[I][I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<mat${shape}_${elem_type}, 3u>;
+
+fn load_a_p0_p1(p0 : u32, p1 : u32) -> ${col_vector_type} {
+  switch(p1) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_a_p0_p1(u32(I), u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[p0].col0;
+        //   }
+        //   case 1u: {
+        //     return a[p0].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].col${col_id_for_tmpl};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, StructMatUniform_NameCollision) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  m_1 : i32,
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  m_1 : i32,
+  m : ${mat},
+}
+
+struct S_std140 {
+  m_1 : i32,
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m__")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadStruct) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
@@ -450,37 +1555,52 @@ fn f() {
   let l = s;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
 fn conv_S(val : S_std140) -> S {
-  return S(mat2x2<f32>(val.m_0, val.m_1));
+  return S(${mat}(${col_vectors_inline}));
 }
 
 fn f() {
   let l = conv_S(s);
 }
 )";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadMatrix) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadMatrix) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
@@ -489,108 +1609,106 @@ fn f() {
   let l = s.m;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
-fn load_s_m() -> mat2x2<f32> {
+fn load_s_m() -> ${mat} {
   let s = &(s);
-  return mat2x2<f32>((*(s)).m_0, (*(s)).m_1);
+  return ${mat}(${col_vectors_inline});
 }
 
 fn f() {
   let l = load_s_m();
 }
 )";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadColumn0) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadColumn_ConstIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 
 fn f() {
-  let l = s.m[0];
+  let l = s.m[${col_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
 fn f() {
-  let l = s.m_0;
+  let l = s.m_${col_index};
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${col_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${col_index}", std::to_string(col));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadColumn1) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadColumn_VariableIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.m[1];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.m_1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadColumnI) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
@@ -600,29 +1718,28 @@ fn f() {
   let l = s.m[I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
-fn load_s_m_p0(p0 : u32) -> vec2<f32> {
+fn load_s_m_p0(p0 : u32) -> ${col_vector_type} {
   switch(p0) {
-    case 0u: {
-      return s.m_0;
-    }
-    case 1u: {
-      return s.m_1;
-    }
+${col_table}
     default: {
-      return vec2<f32>();
+      return ${col_vector_type}();
     }
   }
 }
@@ -633,331 +1750,230 @@ fn f() {
 }
 )";
 
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.m_0;
+        //   }
+        //   case 1u: {
+        //     return s.m_1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.m_${col_id_for_tmpl};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vector_type}", matrix.ColumnVector()},
+                     {"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar00) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadScalar_ConstColumnIndex_ConstRowIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 
 fn f() {
-  let l = s.m[0][0];
+  let l = s.m[${col_index}][${row_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
 fn f() {
-  let l = s.m_0[0u];
+  let l = s.m_${col_index}[${row_index}u];
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        for (uint32_t row = 0; row < matrix.rows; row++) {
+            std::string src = utils::ReplaceAll(tmplSrc, "${col_index}", std::to_string(col));
+            src = utils::ReplaceAll(src, "${row_index}", std::to_string(row));
+            std::string expect = utils::ReplaceAll(tmplExpect, "${col_index}", std::to_string(col));
+            expect = utils::ReplaceAll(expect, "${row_index}", std::to_string(row));
 
-    EXPECT_EQ(expect, str(got));
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar10) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadScalar_VariableColumnIndex_ConstRowIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.m[1][0];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.m_1[0u];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalarI0) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 
 fn f() {
   let I = 0;
-  let l = s.m[I][0];
+  let l = s.m[I][${row_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
-fn load_s_m_p0_0(p0 : u32) -> f32 {
+fn load_s_m_p0_${row_index}(p0 : u32) -> ${elem_type} {
   switch(p0) {
-    case 0u: {
-      return s.m_0[0u];
-    }
-    case 1u: {
-      return s.m_1[0u];
-    }
+${col_table}
     default: {
-      return f32();
+      return ${elem_type}();
     }
   }
 }
 
 fn f() {
   let I = 0;
-  let l = load_s_m_p0_0(u32(I));
+  let l = load_s_m_p0_${row_index}(u32(I));
 }
 )";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar01) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.m[0][1];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.m_0[1u];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar11) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.m[1][1];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.m_1[1u];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalarI1) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let I = 0;
-  let l = s.m[I][1];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn load_s_m_p0_1(p0 : u32) -> f32 {
-  switch(p0) {
-    case 0u: {
-      return s.m_0[1u];
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.m_0[${row_index}u];
+        //   }
+        //   case 1u: {
+        //     return s.m_1[${row_index}u];
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.m_${col_id_for_tmpl}[${row_index}u];
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
     }
-    case 1u: {
-      return s.m_1[1u];
+
+    for (uint32_t row = 0; row < matrix.rows; row++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${row_index}", std::to_string(row));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${row_index}", std::to_string(row));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
     }
-    default: {
-      return f32();
-    }
-  }
 }
 
-fn f() {
-  let I = 0;
-  let l = load_s_m_p0_1(u32(I));
-}
-)";
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadScalar_ConstColumnIndex_VariableRowIndex) {
+    auto matrix = GetParam();
 
-    auto got = Run<Std140>(src);
+    std::string tmplSrc = R"(
+enable f16;
 
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar0I) {
-    auto* src = R"(
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
 
 fn f() {
   let I = 0;
-  let l = s.m[0][I];
+  let l = s.m[${col_index}][I];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
 fn f() {
   let I = 0;
-  let l = s.m_0[I];
+  let l = s.m_${col_index}[I];
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${col_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${col_index}", std::to_string(col));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalar1I) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructMatUniform_LoadScalar_VariableColumnIndex_VariableRowIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let I = 0;
-  let l = s.m[1][I];
-}
-)";
-
-    auto* expect = R"(
-struct S {
-  m : mat2x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let I = 0;
-  let l = s.m_1[I];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructMat2x2Uniform_LoadScalarII) {
-    auto* src = R"(
-struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> s : S;
@@ -967,29 +1983,28 @@ fn f() {
   let l = s.m[I][I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
-  m : mat2x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> s : S_std140;
 
-fn load_s_m_p0_p1(p0 : u32, p1 : u32) -> f32 {
+fn load_s_m_p0_p1(p0 : u32, p1 : u32) -> ${elem_type} {
   switch(p0) {
-    case 0u: {
-      return s.m_0[p1];
-    }
-    case 1u: {
-      return s.m_1[p1];
-    }
+${col_table}
     default: {
-      return f32();
+      return ${elem_type}();
     }
   }
 }
@@ -1000,15 +2015,621 @@ fn f() {
 }
 )";
 
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.m_0[p1];
+        //   }
+        //   case 1u: {
+        //     return s.m_1[p1];
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.m_${col_id_for_tmpl}[p1];
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadArray) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadStruct) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let l = s;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
+}
+
+fn conv_S(val : S_std140) -> S {
+  return S(conv_arr3_mat${shape}_${elem_type}(val.a));
+}
+
+fn f() {
+  let l = conv_S(s);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadArray) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let l = s.a;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
+}
+
+fn f() {
+  let l = conv_arr3_mat${shape}_${elem_type}(s.a);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadMatrix_ConstArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let l = s.a[${array_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let l = conv_mat${shape}_${elem_type}(s.a[${array_index}u]);
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t i = 0; i < 3; i++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(i));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(i));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadMatrix_VariableArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let I = 1;
+  let l = s.a[I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let I = 1;
+  let l = conv_mat${shape}_${elem_type}(s.a[I]);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadColumn_ConstArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let l = s.a[${array_index}][${cloumn_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn f() {
+  let l = s.a[${array_index}u].col${cloumn_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        for (uint32_t col = 0; col < matrix.columns; col++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+            src = utils::ReplaceAll(src, "${cloumn_index}", std::to_string(col));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+            expect = utils::ReplaceAll(expect, "${cloumn_index}", std::to_string(col));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadColumn_VariableArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let I = 1;
+  let l = s.a[I][${cloumn_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn f() {
+  let I = 1;
+  let l = s.a[I].col${cloumn_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${cloumn_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${cloumn_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadColumn_ConstArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let I = 1;
+  let l = s.a[${array_index}][I];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn load_s_a_${array_index}_p0(p0 : u32) -> ${col_vector_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_s_a_${array_index}_p0(u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.a[${array_index}u].col0;
+        //   }
+        //   case 1u: {
+        //     return s.a[${array_index}u].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.a[${array_index}u].col${col_id_for_tmpl};
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, StructArrayMatUniform_LoadColumn_VariableArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  let I = 1;
+  let l = s.a[I][I];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+struct S {
+  a : array<${mat}, 3>,
+}
+
+struct S_std140 {
+  a : array<mat${shape}_${elem_type}, 3u>,
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn load_s_a_p0_p1(p0 : u32, p1 : u32) -> ${col_vector_type} {
+  switch(p1) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn f() {
+  let I = 1;
+  let l = load_s_a_p0_p1(u32(I), u32(I));
+}
+)";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.a[p0].col0;
+        //   }
+        //   case 1u: {
+        //     return s.a[p0].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.a[p0].col${col_id_for_tmpl};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadArray) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
@@ -1017,24 +2638,26 @@ fn f() {
   let l = a;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
 fn conv_S(val : S_std140) -> S {
-  return S(mat3x2<f32>(val.m_0, val.m_1, val.m_2));
+  return S(${mat}(${col_vectors_inline}));
 }
 
 fn conv_arr3_S(val : array<S_std140, 3u>) -> array<S, 3u> {
@@ -1049,100 +2672,93 @@ fn f() {
   let l = conv_arr3_S(a);
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadStruct0) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadStruct_ConstIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
-  let l = a[0];
+  let l = a[${array_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
 fn conv_S(val : S_std140) -> S {
-  return S(mat3x2<f32>(val.m_0, val.m_1, val.m_2));
+  return S(${mat}(${col_vectors_inline}));
 }
 
 fn f() {
-  let l = conv_S(a[0u]);
+  let l = conv_S(a[${array_index}u]);
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t i = 0; i < 3; i++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(i));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(i));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadStruct1) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadStruct_VariableIndex) {
+    auto matrix = GetParam();
 
-@group(0) @binding(0) var<uniform> a : array<S, 3>;
+    std::string src = R"(
+enable f16;
 
-fn f() {
-  let l = a[1];
-}
-)";
-
-    auto* expect = R"(
 struct S {
   @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
-
-fn conv_S(val : S_std140) -> S {
-  return S(mat3x2<f32>(val.m_0, val.m_1, val.m_2));
-}
-
-fn f() {
-  let l = conv_S(a[1u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadStructI) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
@@ -1152,24 +2768,26 @@ fn f() {
   let l = a[I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
 fn conv_S(val : S_std140) -> S {
-  return S(mat3x2<f32>(val.m_0, val.m_1, val.m_2));
+  return S(${mat}(${col_vectors_inline}));
 }
 
 fn f() {
@@ -1177,102 +2795,94 @@ fn f() {
   let l = conv_S(a[I]);
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix0) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadMatrix_ConstArrayIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
-  let l = a[0].m;
+  let l = a[${array_index}].m;
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
-fn load_a_0_m() -> mat3x2<f32> {
-  let s = &(a[0u]);
-  return mat3x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2);
+fn load_a_${array_index}_m() -> ${mat} {
+  let s = &(a[${array_index}u]);
+  return ${mat}(${col_vectors_inline});
 }
 
 fn f() {
-  let l = load_a_0_m();
+  let l = load_a_${array_index}_m();
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t i = 0; i < 3; i++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(i));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(i));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix1) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadMatrix_VariableArrayIndex) {
+    auto matrix = GetParam();
 
-@group(0) @binding(0) var<uniform> a : array<S, 3>;
+    std::string src = R"(
+enable f16;
 
-fn f() {
-  let l = a[1].m;
-}
-)";
-
-    auto* expect = R"(
 struct S {
   @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
-
-fn load_a_1_m() -> mat3x2<f32> {
-  let s = &(a[1u]);
-  return mat3x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2);
-}
-
-fn f() {
-  let l = load_a_1_m();
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrixI) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
@@ -1282,25 +2892,27 @@ fn f() {
   let l = a[I].m;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
-fn load_a_p0_m(p0 : u32) -> mat3x2<f32> {
+fn load_a_p0_m(p0 : u32) -> ${mat} {
   let s = &(a[p0]);
-  return mat3x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2);
+  return ${mat}(${col_vectors_inline});
 }
 
 fn f() {
@@ -1308,208 +2920,238 @@ fn f() {
   let l = load_a_p0_m(u32(I));
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix0Column0) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadColumn_ConstArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
-  let l = a[0].m[0];
+  let l = a[${array_index}].m[${cloumn_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
 fn f() {
-  let l = a[0u].m_0;
+  let l = a[${array_index}u].m_${cloumn_index};
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        for (uint32_t col = 0; col < matrix.columns; col++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+            src = utils::ReplaceAll(src, "${cloumn_index}", std::to_string(col));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+            expect = utils::ReplaceAll(expect, "${cloumn_index}", std::to_string(col));
 
-    EXPECT_EQ(expect, str(got));
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix1Column0) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadColumn_VariableArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
 
-@group(0) @binding(0) var<uniform> a : array<S, 3>;
+    std::string tmplSrc = R"(
+enable f16;
 
-fn f() {
-  let l = a[1].m[0];
-}
-)";
-
-    auto* expect = R"(
 struct S {
   @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
-
-fn f() {
-  let l = a[1u].m_0;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrixIColumn0) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
   let I = 1;
-  let l = a[I].m[0];
+  let l = a[I].m[${cloumn_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
 fn f() {
   let I = 1;
-  let l = a[I].m_0;
+  let l = a[I].m_${cloumn_index};
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${cloumn_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${cloumn_index}", std::to_string(col));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix0Column1) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadColumn_ConstArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    std::string tmplSrc = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
-  let l = a[0].m[1];
+  let I = 1;
+  let l = a[${array_index}].m[I];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
-fn f() {
-  let l = a[0u].m_1;
+fn load_a_${array_index}_m_p0(p0 : u32) -> ${col_vector_type} {
+  switch(p0) {
+${col_table}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
 }
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrix1Column1) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<S, 3>;
 
 fn f() {
-  let l = a[1].m[1];
+  let I = 1;
+  let l = load_a_${array_index}_m_p0(u32(I));
 }
 )";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[${array_index}u].m_0;
+        //   }
+        //   case 1u: {
+        //     return a[${array_index}u].m_1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[${array_index}u].m_${col_id_for_tmpl};
+    })",
+            "\n");
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto* expect = R"(
+    for (uint32_t arrayIndex = 0; arrayIndex < 3; arrayIndex++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${array_index}", std::to_string(arrayIndex));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${array_index}", std::to_string(arrayIndex));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_LoadColumn_VariableArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
-
-fn f() {
-  let l = a[1u].m_1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_LoadMatrixIColumnI) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> a : array<S, 3>;
@@ -1519,35 +3161,29 @@ fn f() {
   let l = a[I].m[I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> a : array<S_std140, 3u>;
 
-fn load_a_p0_m_p1(p0 : u32, p1 : u32) -> vec2<f32> {
+fn load_a_p0_m_p1(p0 : u32, p1 : u32) -> ${col_vector_type} {
   switch(p1) {
-    case 0u: {
-      return a[p0].m_0;
-    }
-    case 1u: {
-      return a[p0].m_1;
-    }
-    case 2u: {
-      return a[p0].m_2;
-    }
+${col_table}
     default: {
-      return vec2<f32>();
+      return ${col_vector_type}();
     }
   }
 }
@@ -1557,1340 +3193,1031 @@ fn f() {
   let l = load_a_p0_m_p1(u32(I), u32(I));
 }
 )";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[p0].m_0;
+        //   }
+        //   case 1u: {
+        //     return a[p0].m_1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].m_${col_id_for_tmpl};
+    })",
+            "\n");
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, Mat4x2Uniform_LoadMatrix) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> m : mat4x2<f32>;
+TEST_P(Std140Test_Matrix, ArrayArrayMatUniform_LoadArrays) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
-  let l = m;
+  let l = a;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> m : mat4x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
 
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
+}
+
+fn conv_arr4_arr3_mat${shape}_${elem_type}(val : array<array<mat${shape}_${elem_type}, 3u>, 4u>) -> array<array<${mat}, 3u>, 4u> {
+  var arr : array<array<${mat}, 3u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    arr[i] = conv_arr3_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
 }
 
 fn f() {
-  let l = conv_mat4x2_f32(m);
+  let l = conv_arr4_arr3_mat${shape}_${elem_type}(a);
 }
 )";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, Mat2x2Uniform_LoadColumn0) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat2x2<f32>;
+TEST_P(Std140Test_Matrix, ArrayArrayMatUniform_LoadArray_ConstOuterArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
-  let l = a[0];
+  let l = a[${outer_array_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> a : mat2x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
+  }
+  return arr;
+}
 
 fn f() {
-  let l = a.col0;
+  let l = conv_arr3_mat${shape}_${elem_type}(a[${outer_array_index}u]);
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t i = 0; i < 3; i++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(i));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(i));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, Mat4x2Uniform_LoadColumn1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat4x2<f32>;
+TEST_P(Std140Test_Matrix, ArrayArrayMatUniform_LoadArray_VariableOuterArrayIndex) {
+    auto matrix = GetParam();
 
-fn f() {
-  let l = a[1];
-}
-)";
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
 
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
+    std::string src = R"(
+enable f16;
 
-@group(0) @binding(0) var<uniform> a : mat4x2_f32;
-
-fn f() {
-  let l = a.col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, Mat2x2Uniform_LoadColumnI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat2x2<f32>;
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
   let I = 1;
-
   let l = a[I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> a : mat2x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
 
-fn load_a_p0(p0 : u32) -> vec2<f32> {
-  switch(p0) {
-    case 0u: {
-      return a.col0;
-    }
-    case 1u: {
-      return a.col1;
-    }
-    default: {
-      return vec2<f32>();
-    }
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn conv_arr3_mat${shape}_${elem_type}(val : array<mat${shape}_${elem_type}, 3u>) -> array<${mat}, 3u> {
+  var arr : array<${mat}, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    arr[i] = conv_mat${shape}_${elem_type}(val[i]);
   }
+  return arr;
 }
 
 fn f() {
   let I = 1;
-  let l = load_a_p0(u32(I));
+  let l = conv_arr3_mat${shape}_${elem_type}(a[I]);
 }
 )";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, Mat2x2Uniform_LoadColumn1Swizzle) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat2x2<f32>;
+TEST_P(Std140Test_Matrix,
+       ArrayArrayMatUniform_LoadMatrix_ConstOuterArrayIndex_ConstInnerArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
-  let l = a[1].yx;
+  let l = a[${outer_array_index}][${inner_array_index}];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> a : mat2x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
 
 fn f() {
-  let l = a.col1.yx;
+  let l = conv_mat${shape}_${elem_type}(a[${outer_array_index}u][${inner_array_index}u]);
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        for (uint32_t inner = 0; inner < 3; inner++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+            src = utils::ReplaceAll(src, "${inner_array_index}", std::to_string(inner));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
+            expect = utils::ReplaceAll(expect, "${inner_array_index}", std::to_string(inner));
 
-    EXPECT_EQ(expect, str(got));
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
 }
 
-TEST_F(Std140Test, Mat4x2Uniform_LoadColumnISwizzle) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat4x2<f32>;
+TEST_P(Std140Test_Matrix,
+       ArrayArrayMatUniform_LoadMatrix_ConstOuterArrayIndex_VariableInnerArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
   let I = 1;
-
-  let l = a[I].yx;
+  let l = a[${outer_array_index}][I];
 }
 )";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> a : mat4x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
 
-fn load_a_p0_yx(p0 : u32) -> vec2<f32> {
-  switch(p0) {
-    case 0u: {
-      return a.col0.yx;
-    }
-    case 1u: {
-      return a.col1.yx;
-    }
-    case 2u: {
-      return a.col2.yx;
-    }
-    case 3u: {
-      return a.col3.yx;
-    }
-    default: {
-      return vec2<f32>();
-    }
-  }
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
 }
 
 fn f() {
   let I = 1;
-  let l = load_a_p0_yx(u32(I));
+  let l = conv_mat${shape}_${elem_type}(a[${outer_array_index}u][I]);
 }
 )";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
 
-    auto got = Run<Std140>(src);
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
 
-    EXPECT_EQ(expect, str(got));
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
 }
 
-TEST_F(Std140Test, Mat2x2Uniform_LoadColumn1Element1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat2x2<f32>;
+TEST_P(Std140Test_Matrix,
+       ArrayArrayMatUniform_LoadMatrix_VariableOuterArrayIndex_ConstInnerArrayIndex) {
+    auto matrix = GetParam();
 
-fn f() {
-  let l = a[1][1];
-}
-)";
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
 
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
+    std::string tmplSrc = R"(
+enable f16;
 
-@group(0) @binding(0) var<uniform> a : mat2x2_f32;
-
-fn f() {
-  let l = a.col1[1u];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, Mat4x2Uniform_LoadColumnIElementI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : mat4x2<f32>;
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
 
 fn f() {
   let I = 1;
+  let l = a[I][${inner_array_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
 
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let I = 1;
+  let l = conv_mat${shape}_${elem_type}(a[I][${inner_array_index}u]);
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t inner = 0; inner < 3; inner++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${inner_array_index}", std::to_string(inner));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${inner_array_index}", std::to_string(inner));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(Std140Test_Matrix,
+       ArrayArrayMatUniform_LoadMatrix_VariableOuterArrayIndex_VariableInnerArrayIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
   let l = a[I][I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> a : mat4x2_f32;
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
 
-fn load_a_p0_p1(p0 : u32, p1 : u32) -> f32 {
+fn conv_mat${shape}_${elem_type}(val : mat${shape}_${elem_type}) -> ${mat} {
+  return ${mat}(${col_vectors_inline});
+}
+
+fn f() {
+  let I = 1;
+  let l = conv_mat${shape}_${elem_type}(a[I][I]);
+}
+)";
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix,
+       ArrayArrayMatUniform_LoadColumn_ConstOuterArrayIndex_ConstInnerArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let l = a[${outer_array_index}][${inner_array_index}][${column_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn f() {
+  let l = a[${outer_array_index}u][${inner_array_index}u].col${column_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.col", ", ")}});
+    } else {
+        tmplExpect = tmplSrc;
+    }
+
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        for (uint32_t inner = 0; inner < 3; inner++) {
+            for (uint32_t col = 0; col < matrix.columns; col++) {
+                std::string src =
+                    utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+                src = utils::ReplaceAll(src, "${inner_array_index}", std::to_string(inner));
+                src = utils::ReplaceAll(src, "${column_index}", std::to_string(col));
+                std::string expect =
+                    utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
+                expect = utils::ReplaceAll(expect, "${inner_array_index}", std::to_string(inner));
+                expect = utils::ReplaceAll(expect, "${column_index}", std::to_string(col));
+
+                auto got = Run<Std140>(src);
+
+                EXPECT_EQ(expect, str(got));
+            }
+        }
+    }
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_ConstOuterArrayIndex_ConstInnerArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let l = a[${outer_array_index}][${inner_array_index}][I];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn load_a_${outer_array_index}_${inner_array_index}_p0(p0 : u32) -> ${col_vector_type} {
   switch(p0) {
-    case 0u: {
-      return a.col0[p1];
-    }
-    case 1u: {
-      return a.col1[p1];
-    }
-    case 2u: {
-      return a.col2[p1];
-    }
-    case 3u: {
-      return a.col3[p1];
-    }
+${col_table}
     default: {
-      return f32();
+      return ${col_vector_type}();
     }
   }
 }
 
 fn f() {
   let I = 1;
-  let l = load_a_p0_p1(u32(I), u32(I));
+  let l = load_a_${outer_array_index}_${inner_array_index}_p0(u32(I));
 }
 )";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat2x2Uniform_LoadArray) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat2x2<f32>, 3>;
-
-fn f() {
-  let l = a;
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat2x2_f32, 3u>;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let l = conv_arr3_mat2x2_f32(a);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat4x2Uniform_LoadMatrix0) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat4x2<f32>, 3>;
-
-fn f() {
-  let l = a[0];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat4x2_f32, 3u>;
-
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
-}
-
-fn f() {
-  let l = conv_mat4x2_f32(a[0u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat2x2Uniform_LoadMatrix1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat2x2<f32>, 3>;
-
-fn f() {
-  let l = a[1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat2x2_f32, 3u>;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn f() {
-  let l = conv_mat2x2_f32(a[1u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat4x2Uniform_LoadMatrixI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat4x2<f32>, 3>;
-
-fn f() {
-  let I = 1;
-  let l = a[I];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat4x2_f32, 3u>;
-
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
-}
-
-fn f() {
-  let I = 1;
-  let l = conv_mat4x2_f32(a[I]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat2x2Uniform_LoadMatrix1Column0) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat2x2<f32>, 3>;
-
-fn f() {
-  let l = a[1][0];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat2x2_f32, 3u>;
-
-fn f() {
-  let l = a[1u].col0;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat4x2Uniform_LoadMatrix0Column1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat4x2<f32>, 3>;
-
-fn f() {
-  let l = a[0][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat4x2_f32, 3u>;
-
-fn f() {
-  let l = a[0u].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat2x2Uniform_LoadMatrixIColumn1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat2x2<f32>, 3>;
-
-fn f() {
-  let I = 1;
-  let l = a[I][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat2x2_f32, 3u>;
-
-fn f() {
-  let I = 1;
-  let l = a[I].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayMat4x2Uniform_LoadMatrix1ColumnI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<mat4x2<f32>, 3>;
-
-fn f() {
-  let I = 1;
-  let l = a[1][I];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<mat4x2_f32, 3u>;
-
-fn load_a_1_p0(p0 : u32) -> vec2<f32> {
-  switch(p0) {
-    case 0u: {
-      return a[1u].col0;
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[${outer_array_index}u][${inner_array_index}u].col0;
+        //   }
+        //   case 1u: {
+        //     return a[${outer_array_index}u][${inner_array_index}u].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[${outer_array_index}u][${inner_array_index}u].col${col_id_for_tmpl};
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
     }
-    case 1u: {
-      return a[1u].col1;
+
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        for (uint32_t inner = 0; inner < 3; inner++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+            src = utils::ReplaceAll(src, "${inner_array_index}", std::to_string(inner));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
+            expect = utils::ReplaceAll(expect, "${inner_array_index}", std::to_string(inner));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
     }
-    case 2u: {
-      return a[1u].col2;
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_ConstOuterArrayIndex_VariableInnerArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
     }
-    case 3u: {
-      return a[1u].col3;
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let l = a[${outer_array_index}][I][${column_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn f() {
+  let I = 1;
+  let l = a[${outer_array_index}u][I].col${column_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
     }
+
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        for (uint32_t col = 0; col < matrix.columns; col++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+            src = utils::ReplaceAll(src, "${column_index}", std::to_string(col));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
+            expect = utils::ReplaceAll(expect, "${column_index}", std::to_string(col));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_ConstOuterArrayIndex_VariableInnerArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let J = 2;
+  let l = a[${outer_array_index}][I][J];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn load_a_${outer_array_index}_p0_p1(p0 : u32, p1 : u32) -> ${col_vector_type} {
+  switch(p1) {
+${col_table}
     default: {
-      return vec2<f32>();
+      return ${col_vector_type}();
     }
   }
 }
 
 fn f() {
   let I = 1;
-  let l = load_a_1_p0(u32(I));
+  let J = 2;
+  let l = load_a_${outer_array_index}_p0_p1(u32(I), u32(J));
 }
 )";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadArrays) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>, 4>;
-
-fn f() {
-  let l = a;
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn conv_arr4_arr3_mat2x2_f32(val : array<array<mat2x2_f32, 3u>, 4u>) -> array<array<mat2x2<f32>, 3u>, 4u> {
-  var arr : array<array<mat2x2<f32>, 3u>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    arr[i] = conv_arr3_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let l = conv_arr4_arr3_mat2x2_f32(a);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat4x2Uniform_LoadArray0) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2<f32>, 3>, 4>;
-
-fn f() {
-  let l = a[0];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2_f32, 3u>, 4u>;
-
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
-}
-
-fn conv_arr3_mat4x2_f32(val : array<mat4x2_f32, 3u>) -> array<mat4x2<f32>, 3u> {
-  var arr : array<mat4x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat4x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let l = conv_arr3_mat4x2_f32(a[0u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadArray1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>,4>;
-
-fn f() {
-  let l = a[1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let l = conv_arr3_mat2x2_f32(a[1u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadArrayI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>,4>;
-
-fn f() {
-  let I = 1;
-  let l = a[I];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let I = 1;
-  let l = conv_arr3_mat2x2_f32(a[I]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadMatrix12Column0) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>, 4>;
-
-fn f() {
-  let l = a[1][2][0];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn f() {
-  let l = a[1u][2u].col0;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat4x2Uniform_LoadMatrix2IColumn1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2<f32>, 3>, 4>;
-
-fn f() {
-  let I = 1;
-  let l = a[2][I][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2_f32, 3u>, 4u>;
-
-fn f() {
-  let I = 1;
-  let l = a[2u][I].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadMatrixI2Column1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>, 4>;
-
-fn f() {
-  let I = 1;
-  let l = a[I][2][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn f() {
-  let I = 1;
-  let l = a[I][2u].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat2x2Uniform_LoadMatrixIIColumn1) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2<f32>, 3>, 4>;
-
-fn f() {
-  let I = 1;
-  let l = a[I][I][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat2x2_f32, 3u>, 4u>;
-
-fn f() {
-  let I = 1;
-  let l = a[I][I].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayArrayMat4x2Uniform_LoadMatrix12ColumnI) {
-    auto* src = R"(
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2<f32>, 3>, 4>;
-
-fn f() {
-  let I = 1;
-  let l = a[1][2][I];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> a : array<array<mat4x2_f32, 3u>, 4u>;
-
-fn load_a_1_2_p0(p0 : u32) -> vec2<f32> {
-  switch(p0) {
-    case 0u: {
-      return a[1u][2u].col0;
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[${outer_array_index}u][p0].col0;
+        //   }
+        //   case 1u: {
+        //     return a[${outer_array_index}u][p0].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[${outer_array_index}u][p0].col${col_id_for_tmpl};
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
     }
-    case 1u: {
-      return a[1u][2u].col1;
+
+    for (uint32_t outer = 0; outer < 4; outer++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${outer_array_index}", std::to_string(outer));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${outer_array_index}", std::to_string(outer));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
     }
-    case 2u: {
-      return a[1u][2u].col2;
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_VariableOuterArrayIndex_ConstInnerArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
     }
-    case 3u: {
-      return a[1u][2u].col3;
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let l = a[I][${inner_array_index}][${column_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn f() {
+  let I = 1;
+  let l = a[I][${inner_array_index}u].col${column_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
     }
+
+    for (uint32_t inner = 0; inner < 3; inner++) {
+        for (uint32_t col = 0; col < matrix.columns; col++) {
+            std::string src =
+                utils::ReplaceAll(tmplSrc, "${inner_array_index}", std::to_string(inner));
+            src = utils::ReplaceAll(src, "${column_index}", std::to_string(col));
+            std::string expect =
+                utils::ReplaceAll(tmplExpect, "${inner_array_index}", std::to_string(inner));
+            expect = utils::ReplaceAll(expect, "${column_index}", std::to_string(col));
+
+            auto got = Run<Std140>(src);
+
+            EXPECT_EQ(expect, str(got));
+        }
+    }
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_VariableOuterArrayIndex_ConstInnerArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let J = 2;
+  let l = a[I][${inner_array_index}][J];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn load_a_p0_${inner_array_index}_p1(p0 : u32, p1 : u32) -> ${col_vector_type} {
+  switch(p1) {
+${col_table}
     default: {
-      return vec2<f32>();
+      return ${col_vector_type}();
     }
   }
 }
 
 fn f() {
   let I = 1;
-  let l = load_a_1_2_p0(u32(I));
+  let J = 2;
+  let l = load_a_p0_${inner_array_index}_p1(u32(I), u32(J));
 }
 )";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat2x2Uniform_LoadStruct) {
-    auto* src = R"(
-struct S {
-  a : array<mat2x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s;
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat2x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat2x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn conv_S(val : S_std140) -> S {
-  return S(conv_arr3_mat2x2_f32(val.a));
-}
-
-fn f() {
-  let l = conv_S(s);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat2x2Uniform_LoadArray) {
-    auto* src = R"(
-struct S {
-  a : array<mat2x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.a;
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat2x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat2x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn conv_arr3_mat2x2_f32(val : array<mat2x2_f32, 3u>) -> array<mat2x2<f32>, 3u> {
-  var arr : array<mat2x2<f32>, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    arr[i] = conv_mat2x2_f32(val[i]);
-  }
-  return arr;
-}
-
-fn f() {
-  let l = conv_arr3_mat2x2_f32(s.a);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat4x2Uniform_LoadMatrix0) {
-    auto* src = R"(
-struct S {
-  a : array<mat4x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.a[0];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat4x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat4x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
-}
-
-fn f() {
-  let l = conv_mat4x2_f32(s.a[0u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat2x2Uniform_LoadMatrix1) {
-    auto* src = R"(
-struct S {
-  a : array<mat2x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.a[1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat2x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat2x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn conv_mat2x2_f32(val : mat2x2_f32) -> mat2x2<f32> {
-  return mat2x2<f32>(val.col0, val.col1);
-}
-
-fn f() {
-  let l = conv_mat2x2_f32(s.a[1u]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat4x2Uniform_LoadMatrixI) {
-    auto* src = R"(
-struct S {
-  a : array<mat4x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let I = 1;
-  let l = s.a[I];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat4x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat4x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn conv_mat4x2_f32(val : mat4x2_f32) -> mat4x2<f32> {
-  return mat4x2<f32>(val.col0, val.col1, val.col2, val.col3);
-}
-
-fn f() {
-  let I = 1;
-  let l = conv_mat4x2_f32(s.a[I]);
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat2x2Uniform_LoadMatrix1Column0) {
-    auto* src = R"(
-struct S {
-  a : array<mat2x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.a[1][0];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat2x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat2x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.a[1u].col0;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat4x2Uniform_LoadMatrix0Column1) {
-    auto* src = R"(
-struct S {
-  a : array<mat4x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let l = s.a[0][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat4x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat4x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let l = s.a[0u].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat2x2Uniform_LoadMatrixIColumn1) {
-    auto* src = R"(
-struct S {
-  a : array<mat2x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let I = 1;
-  let l = s.a[I][1];
-}
-)";
-
-    auto* expect = R"(
-struct mat2x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat2x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat2x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn f() {
-  let I = 1;
-  let l = s.a[I].col1;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, StructArrayMat4x2Uniform_LoadMatrix1ColumnI) {
-    auto* src = R"(
-struct S {
-  a : array<mat4x2<f32>, 3>,
-};
-
-@group(0) @binding(0) var<uniform> s : S;
-
-fn f() {
-  let I = 1;
-  let l = s.a[1][I];
-}
-)";
-
-    auto* expect = R"(
-struct mat4x2_f32 {
-  col0 : vec2<f32>,
-  col1 : vec2<f32>,
-  col2 : vec2<f32>,
-  col3 : vec2<f32>,
-}
-
-struct S {
-  a : array<mat4x2<f32>, 3>,
-}
-
-struct S_std140 {
-  a : array<mat4x2_f32, 3u>,
-}
-
-@group(0) @binding(0) var<uniform> s : S_std140;
-
-fn load_s_a_1_p0(p0 : u32) -> vec2<f32> {
-  switch(p0) {
-    case 0u: {
-      return s.a[1u].col0;
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[p0][${inner_array_index}u].col0;
+        //   }
+        //   case 1u: {
+        //     return a[p0][${inner_array_index}u].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0][${inner_array_index}u].col${col_id_for_tmpl};
+    })",
+            "\n");
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                         {"${col_table}", colTable}});
+    } else {
+        tmplExpect = tmplSrc;
     }
-    case 1u: {
-      return s.a[1u].col1;
+
+    for (uint32_t inner = 0; inner < 3; inner++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${inner_array_index}", std::to_string(inner));
+        std::string expect =
+            utils::ReplaceAll(tmplExpect, "${inner_array_index}", std::to_string(inner));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
     }
-    case 2u: {
-      return s.a[1u].col2;
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_VariableOuterArrayIndex_VariableInnerArrayIndex_ConstColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
     }
-    case 3u: {
-      return s.a[1u].col3;
+
+    std::string tmplSrc = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 1;
+  let J = 2;
+  let l = a[I][J][${column_index}];
+}
+)";
+    tmplSrc = matrix.ReplaceFieldsInString(tmplSrc);
+
+    std::string tmplExpect;
+    if (matrix.NotStd140Compatible()) {
+        tmplExpect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn f() {
+  let I = 1;
+  let J = 2;
+  let l = a[I][J].col${column_index};
+}
+)";
+        tmplExpect = matrix.ReplaceFieldsInString(
+            tmplExpect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")}});
+    } else {
+        tmplExpect = tmplSrc;
     }
+
+    for (uint32_t col = 0; col < matrix.columns; col++) {
+        std::string src = utils::ReplaceAll(tmplSrc, "${column_index}", std::to_string(col));
+        std::string expect = utils::ReplaceAll(tmplExpect, "${column_index}", std::to_string(col));
+
+        auto got = Run<Std140>(src);
+
+        EXPECT_EQ(expect, str(got));
+    }
+}
+
+TEST_P(
+    Std140Test_Matrix,
+    ArrayArrayMatUniform_LoadColumn_VariableOuterArrayIndex_VariableInnerArrayIndex_VariableColumnIndex) {
+    auto matrix = GetParam();
+
+    if (!matrix.CanBeUsedAsUniformArrayElememts()) {
+        // This permutation is invalid, skip the test.
+        return;
+    }
+
+    std::string src = R"(
+enable f16;
+
+@group(0) @binding(0) var<uniform> a : array<array<${mat}, 3>, 4>;
+
+fn f() {
+  let I = 0;
+  let J = 1;
+  let K = 2;
+  let l = a[I][J][K];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct mat${shape}_${elem_type} {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> a : array<array<mat${shape}_${elem_type}, 3u>, 4u>;
+
+fn load_a_p0_p1_p2(p0 : u32, p1 : u32, p2 : u32) -> ${col_vector_type} {
+  switch(p2) {
+${col_table}
     default: {
-      return vec2<f32>();
+      return ${col_vector_type}();
     }
   }
 }
 
 fn f() {
-  let I = 1;
-  let l = load_s_a_1_p0(u32(I));
+  let I = 0;
+  let J = 1;
+  let K = 2;
+  let l = load_a_p0_p1_p2(u32(I), u32(J), u32(K));
 }
 )";
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return a[p0][p1].col0;
+        //   }
+        //   case 1u: {
+        //     return a[p0][p1].col1;
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0][p1].col${col_id_for_tmpl};
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "col")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructArrayStructMat4x2Uniform_Loads) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructArrayStructMatUniform_Loads) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct Inner {
-  m : mat4x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct Outer {
@@ -2901,27 +4228,41 @@ struct Outer {
 
 fn f() {
   let I = 1;
-
-  let l_a             : array<Outer, 4>  = a;
-  let l_a_1           : Outer            = a[1];
-  let l_a_2_a         : array<Inner, 4>  = a[2].a;
-  let l_a_3_a_1       : Inner            = a[3].a[1];
-  let l_a_0_a_2_m     : mat4x2<f32>      = a[0].a[2].m;
-  let l_a_1_a_3_m_0   : vec2<f32>        = a[1].a[3].m[0];
-  let l_a_2_a_0_m_1_0 : f32              = a[2].a[0].m[1][0];
+  let J = 2;
+  let K = 0;
+  let l_a : array<Outer, 4> = a;
+  let l_a_1 : Outer = a[1];
+  let l_a_I : Outer = a[I];
+  let l_a_2_a : array<Inner, 4> = a[2].a;
+  let l_a_I_a : array<Inner, 4> = a[I].a;
+  let l_a_3_a_1 : Inner = a[3].a[1];
+  let l_a_3_a_I : Inner = a[3].a[I];
+  let l_a_I_a_1 : Inner = a[I].a[1];
+  let l_a_I_a_J : Inner = a[I].a[J];
+  let l_a_0_a_2_m : ${mat} = a[0].a[2].m;
+  let l_a_0_a_I_m : ${mat} = a[0].a[I].m;
+  let l_a_I_a_2_m : ${mat} = a[I].a[2].m;
+  let l_a_I_a_J_m : ${mat} = a[I].a[J].m;
+  let l_a_1_a_3_m_0 : ${col_vector_type} = a[1].a[3].m[0];
+  let l_a_I_a_J_m_K : ${col_vector_type} = a[I].a[J].m[K];
+  let l_a_2_a_0_m_1_0 : ${elem_type} = a[2].a[0].m[1][0];
+  let l_a_I_a_J_m_K_I : ${elem_type} = a[I].a[J].m[K][I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct Inner {
-  m : mat4x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct Inner_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  m_2 : vec2<f32>,
-  m_3 : vec2<f32>,
+${col_vectors}
 }
 
 struct Outer {
@@ -2935,7 +4276,7 @@ struct Outer_std140 {
 @group(0) @binding(0) var<uniform> a : array<Outer_std140, 4u>;
 
 fn conv_Inner(val : Inner_std140) -> Inner {
-  return Inner(mat4x2<f32>(val.m_0, val.m_1, val.m_2, val.m_3));
+  return Inner(${mat}(${col_vectors_inline_conv_Inner}));
 }
 
 fn conv_arr4_Inner(val : array<Inner_std140, 4u>) -> array<Inner, 4u> {
@@ -2958,34 +4299,106 @@ fn conv_arr4_Outer(val : array<Outer_std140, 4u>) -> array<Outer, 4u> {
   return arr;
 }
 
-fn load_a_0_a_2_m() -> mat4x2<f32> {
+fn load_a_0_a_2_m() -> ${mat} {
   let s = &(a[0u].a[2u]);
-  return mat4x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2, (*(s)).m_3);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_0_a_p0_m(p0 : u32) -> ${mat} {
+  let s = &(a[0u].a[p0]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_2_m(p0 : u32) -> ${mat} {
+  let s = &(a[p0].a[2u]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_p1_m(p0 : u32, p1 : u32) -> ${mat} {
+  let s = &(a[p0].a[p1]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_p1_m_p2(p0 : u32, p1 : u32, p2 : u32) -> ${col_vector_type} {
+  switch(p2) {
+${col_table_load_column}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn load_a_p0_a_p1_m_p2_p3(p0 : u32, p1 : u32, p2 : u32, p3 : u32) -> ${elem_type} {
+  switch(p2) {
+${col_table_load_element}
+    default: {
+      return ${elem_type}();
+    }
+  }
 }
 
 fn f() {
   let I = 1;
+  let J = 2;
+  let K = 0;
   let l_a : array<Outer, 4> = conv_arr4_Outer(a);
   let l_a_1 : Outer = conv_Outer(a[1u]);
+  let l_a_I : Outer = conv_Outer(a[I]);
   let l_a_2_a : array<Inner, 4> = conv_arr4_Inner(a[2u].a);
+  let l_a_I_a : array<Inner, 4> = conv_arr4_Inner(a[I].a);
   let l_a_3_a_1 : Inner = conv_Inner(a[3u].a[1u]);
-  let l_a_0_a_2_m : mat4x2<f32> = load_a_0_a_2_m();
-  let l_a_1_a_3_m_0 : vec2<f32> = a[1u].a[3u].m_0;
-  let l_a_2_a_0_m_1_0 : f32 = a[2u].a[0u].m_1[0u];
+  let l_a_3_a_I : Inner = conv_Inner(a[3u].a[I]);
+  let l_a_I_a_1 : Inner = conv_Inner(a[I].a[1u]);
+  let l_a_I_a_J : Inner = conv_Inner(a[I].a[J]);
+  let l_a_0_a_2_m : ${mat} = load_a_0_a_2_m();
+  let l_a_0_a_I_m : ${mat} = load_a_0_a_p0_m(u32(I));
+  let l_a_I_a_2_m : ${mat} = load_a_p0_a_2_m(u32(I));
+  let l_a_I_a_J_m : ${mat} = load_a_p0_a_p1_m(u32(I), u32(J));
+  let l_a_1_a_3_m_0 : ${col_vector_type} = a[1u].a[3u].m_0;
+  let l_a_I_a_J_m_K : ${col_vector_type} = load_a_p0_a_p1_m_p2(u32(I), u32(J), u32(K));
+  let l_a_2_a_0_m_1_0 : ${elem_type} = a[2u].a[0u].m_1[0u];
+  let l_a_I_a_J_m_K_I : ${elem_type} = load_a_p0_a_p1_m_p2_p3(u32(I), u32(J), u32(K), u32(I));
 }
 )";
+        std::string colTableLoadColumn = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].a[p1].m_${col_id_for_tmpl};
+    })",
+            "\n");
+        std::string colTableLoadElement = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].a[p1].m_${col_id_for_tmpl}[p3];
+    })",
+            "\n");
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline_conv_Inner}",
+              matrix.ExpendedColumnVectorsInline("val.m_", ", ")},
+             {"${col_vectors_inline_load_matrix}",
+              matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")},
+             {"${col_table_load_column}", colTableLoadColumn},
+             {"${col_table_load_element}", colTableLoadElement}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructArrayStructMat4x2Uniform_LoadsViaPtrs) {
-    // Note: Std140Test requires the PromoteSideEffectsToDecl transform to have been run first, so
-    // side-effects in the let-chain will not be a problem.
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructArrayStructMatUniform_LoadsViaPtrs) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct Inner {
-  m : mat4x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct Outer {
@@ -2996,35 +4409,56 @@ struct Outer {
 
 fn f() {
   let I = 1;
-
-  let p_a = &a;
-  let p_a_3 = &((*p_a)[3]);
-  let p_a_3_a = &((*p_a_3).a);
-  let p_a_3_a_2 = &((*p_a_3_a)[2]);
-  let p_a_3_a_2_m = &((*p_a_3_a_2).m);
-  let p_a_3_a_2_m_1 = &((*p_a_3_a_2_m)[1]);
-
-
-  let l_a             : array<Outer, 4> = *p_a;
-  let l_a_3           : Outer           = *p_a_3;
-  let l_a_3_a         : array<Inner, 4> = *p_a_3_a;
-  let l_a_3_a_2       : Inner           = *p_a_3_a_2;
-  let l_a_3_a_2_m     : mat4x2<f32>     = *p_a_3_a_2_m;
-  let l_a_3_a_2_m_1   : vec2<f32>       = *p_a_3_a_2_m_1;
-  let l_a_2_a_0_m_1_0 : f32             = (*p_a_3_a_2_m_1)[0];
+  let J = 2;
+  let K = 0;
+  let p_a = &(a);
+  let p_a_3 = &((*(p_a))[3]);
+  let p_a_I = &((*(p_a))[I]);
+  let p_a_3_a = &((*(p_a_3)).a);
+  let p_a_I_a = &((*(p_a_I)).a);
+  let p_a_3_a_2 = &((*(p_a_3_a))[2]);
+  let p_a_3_a_I = &((*(p_a_3_a))[I]);
+  let p_a_I_a_2 = &((*(p_a_I_a))[2]);
+  let p_a_I_a_J = &((*(p_a_I_a))[J]);
+  let p_a_3_a_2_m = &((*(p_a_3_a_2)).m);
+  let p_a_3_a_I_m = &((*(p_a_3_a_I)).m);
+  let p_a_I_a_2_m = &((*(p_a_I_a_2)).m);
+  let p_a_I_a_J_m = &((*(p_a_I_a_J)).m);
+  let p_a_3_a_2_m_1 = &((*(p_a_3_a_2_m))[1]);
+  let p_a_I_a_J_m_K = &((*(p_a_I_a_J_m))[K]);
+  let l_a : array<Outer, 4> = *(p_a);
+  let l_a_3 : Outer = *(p_a_3);
+  let l_a_I : Outer = *(p_a_I);
+  let l_a_3_a : array<Inner, 4> = *(p_a_3_a);
+  let l_a_I_a : array<Inner, 4> = *(p_a_I_a);
+  let l_a_3_a_2 : Inner = *(p_a_3_a_2);
+  let l_a_3_a_I : Inner = *(p_a_3_a_I);
+  let l_a_I_a_2 : Inner = *(p_a_I_a_2);
+  let l_a_I_a_J : Inner = *(p_a_I_a_J);
+  let l_a_3_a_2_m : ${mat} = *(p_a_3_a_2_m);
+  let l_a_3_a_I_m : ${mat} = *(p_a_3_a_I_m);
+  let l_a_I_a_2_m : ${mat} = *(p_a_I_a_2_m);
+  let l_a_I_a_J_m : ${mat} = *(p_a_I_a_J_m);
+  let l_a_3_a_2_m_1 : ${col_vector_type} = *(p_a_3_a_2_m_1);
+  let l_a_I_a_J_m_K : ${col_vector_type} = *(p_a_I_a_J_m_K);
+  let l_a_2_a_0_m_1_0 : ${elem_type} = (*(p_a_3_a_2_m_1))[0];
+  let l_a_I_a_J_m_K_I : ${elem_type} = (*(p_a_I_a_J_m_K))[I];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect = R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct Inner {
-  m : mat4x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct Inner_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  m_2 : vec2<f32>,
-  m_3 : vec2<f32>,
+${col_vectors}
 }
 
 struct Outer {
@@ -3038,7 +4472,7 @@ struct Outer_std140 {
 @group(0) @binding(0) var<uniform> a : array<Outer_std140, 4u>;
 
 fn conv_Inner(val : Inner_std140) -> Inner {
-  return Inner(mat4x2<f32>(val.m_0, val.m_1, val.m_2, val.m_3));
+  return Inner(${mat}(${col_vectors_inline_conv_Inner}));
 }
 
 fn conv_arr4_Inner(val : array<Inner_std140, 4u>) -> array<Inner, 4u> {
@@ -3061,60 +4495,145 @@ fn conv_arr4_Outer(val : array<Outer_std140, 4u>) -> array<Outer, 4u> {
   return arr;
 }
 
-fn load_a_3_a_2_m() -> mat4x2<f32> {
+fn load_a_3_a_2_m() -> ${mat} {
   let s = &(a[3u].a[2u]);
-  return mat4x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2, (*(s)).m_3);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_3_a_p0_m(p0 : u32) -> ${mat} {
+  let s = &(a[3u].a[p0]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_2_m(p0 : u32) -> ${mat} {
+  let s = &(a[p0].a[2u]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_p1_m(p0 : u32, p1 : u32) -> ${mat} {
+  let s = &(a[p0].a[p1]);
+  return ${mat}(${col_vectors_inline_load_matrix});
+}
+
+fn load_a_p0_a_p1_m_p2(p0 : u32, p1 : u32, p2 : u32) -> ${col_vector_type} {
+  switch(p2) {
+${col_table_load_column}
+    default: {
+      return ${col_vector_type}();
+    }
+  }
+}
+
+fn load_a_p0_a_p1_m_p2_p3(p0 : u32, p1 : u32, p2 : u32, p3 : u32) -> ${elem_type} {
+  switch(p2) {
+${col_table_load_element}
+    default: {
+      return ${elem_type}();
+    }
+  }
 }
 
 fn f() {
   let I = 1;
+  let J = 2;
+  let K = 0;
   let p_a = conv_arr4_Outer(a);
   let p_a_3 = conv_Outer(a[3u]);
+  let p_a_I = conv_Outer(a[I]);
   let p_a_3_a = conv_arr4_Inner(a[3u].a);
+  let p_a_I_a = conv_arr4_Inner(a[I].a);
   let p_a_3_a_2 = conv_Inner(a[3u].a[2u]);
+  let p_a_3_a_I = conv_Inner(a[3u].a[I]);
+  let p_a_I_a_2 = conv_Inner(a[I].a[2u]);
+  let p_a_I_a_J = conv_Inner(a[I].a[J]);
   let p_a_3_a_2_m = load_a_3_a_2_m();
+  let p_a_3_a_I_m = load_a_3_a_p0_m(u32(I));
+  let p_a_I_a_2_m = load_a_p0_a_2_m(u32(I));
+  let p_a_I_a_J_m = load_a_p0_a_p1_m(u32(I), u32(J));
   let p_a_3_a_2_m_1 = a[3u].a[2u].m_1;
+  let p_a_I_a_J_m_K = load_a_p0_a_p1_m_p2(u32(I), u32(J), u32(K));
   let l_a : array<Outer, 4> = conv_arr4_Outer(a);
   let l_a_3 : Outer = conv_Outer(a[3u]);
+  let l_a_I : Outer = conv_Outer(a[I]);
   let l_a_3_a : array<Inner, 4> = conv_arr4_Inner(a[3u].a);
+  let l_a_I_a : array<Inner, 4> = conv_arr4_Inner(a[I].a);
   let l_a_3_a_2 : Inner = conv_Inner(a[3u].a[2u]);
-  let l_a_3_a_2_m : mat4x2<f32> = load_a_3_a_2_m();
-  let l_a_3_a_2_m_1 : vec2<f32> = a[3u].a[2u].m_1;
-  let l_a_2_a_0_m_1_0 : f32 = a[3u].a[2u].m_1[0u];
+  let l_a_3_a_I : Inner = conv_Inner(a[3u].a[I]);
+  let l_a_I_a_2 : Inner = conv_Inner(a[I].a[2u]);
+  let l_a_I_a_J : Inner = conv_Inner(a[I].a[J]);
+  let l_a_3_a_2_m : ${mat} = load_a_3_a_2_m();
+  let l_a_3_a_I_m : ${mat} = load_a_3_a_p0_m(u32(I));
+  let l_a_I_a_2_m : ${mat} = load_a_p0_a_2_m(u32(I));
+  let l_a_I_a_J_m : ${mat} = load_a_p0_a_p1_m(u32(I), u32(J));
+  let l_a_3_a_2_m_1 : ${col_vector_type} = a[3u].a[2u].m_1;
+  let l_a_I_a_J_m_K : ${col_vector_type} = load_a_p0_a_p1_m_p2(u32(I), u32(J), u32(K));
+  let l_a_2_a_0_m_1_0 : ${elem_type} = a[3u].a[2u].m_1[0u];
+  let l_a_I_a_J_m_K_I : ${elem_type} = load_a_p0_a_p1_m_p2_p3(u32(I), u32(J), u32(K), u32(I));
 }
 )";
+        std::string colTableLoadColumn = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].a[p1].m_${col_id_for_tmpl};
+    })",
+            "\n");
+        std::string colTableLoadElement = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return a[p0].a[p1].m_${col_id_for_tmpl}[p3];
+    })",
+            "\n");
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline_conv_Inner}",
+              matrix.ExpendedColumnVectorsInline("val.m_", ", ")},
+             {"${col_vectors_inline_load_matrix}",
+              matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")},
+             {"${col_table_load_column}", colTableLoadColumn},
+             {"${col_table_load_element}", colTableLoadElement}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopyArray_UniformToStorage) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyArray_UniformToStorage) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
 @group(0) @binding(0) var<uniform> u : array<S, 4>;
+
 @group(0) @binding(1) var<storage, read_write> s : array<S, 4>;
 
 fn f() {
-    s = u;
+  s = u;
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect =
-        R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
@@ -3122,7 +4641,7 @@ struct S_std140 {
 @group(0) @binding(1) var<storage, read_write> s : array<S, 4>;
 
 fn conv_S(val : S_std140) -> S {
-  return S(mat3x2<f32>(val.m_0, val.m_1, val.m_2));
+  return S(${mat}(${col_vectors_inline}));
 }
 
 fn conv_arr4_S(val : array<S_std140, 4u>) -> array<S, 4u> {
@@ -3137,41 +4656,57 @@ fn f() {
   s = conv_arr4_S(u);
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopyStruct_UniformToWorkgroup) {
-    auto* src = R"(
-struct S {
-  v : vec4<i32>,
-  @size(64) m : mat3x2<f32>,
-}
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyStruct_UniformToWorkgroup) {
+    auto matrix = GetParam();
 
-@group(0) @binding(0) var<uniform> u : array<S, 4>;
-var<workgroup> w : array<S, 4>;
+    std::string src = R"(
+enable f16;
 
-fn f() {
-    w[0] = u[1];
-}
-)";
-
-    auto* expect =
-        R"(
 struct S {
   v : vec4<i32>,
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> u : array<S, 4>;
+
+var<workgroup> w : array<S, 4>;
+
+fn f() {
+  w[0] = u[1];
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  v : vec4<i32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct S_std140 {
   v : vec4<i32>,
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
 @group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
@@ -3179,97 +4714,130 @@ struct S_std140 {
 var<workgroup> w : array<S, 4>;
 
 fn conv_S(val : S_std140) -> S {
-  return S(val.v, mat3x2<f32>(val.m_0, val.m_1, val.m_2));
+  return S(val.v, ${mat}(${col_vectors_inline}));
 }
 
 fn f() {
   w[0] = conv_S(u[1u]);
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("val.m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopyMatrix_UniformToPrivate) {
-    auto* src = R"(
-struct S {
-  v : vec4<i32>,
-  @size(64) m : mat3x2<f32>,
-}
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyMatrix_UniformToPrivate) {
+    auto matrix = GetParam();
 
-@group(0) @binding(0) var<uniform> u : array<S, 4>;
-var<private> p : array<S, 4>;
+    std::string src = R"(
+enable f16;
 
-fn f() {
-    p[2].m = u[1].m;
-}
-)";
-
-    auto* expect = R"(
 struct S {
   v : vec4<i32>,
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> u : array<S, 3>;
+
+var<private> p : array<S, 4>;
+
+fn f() {
+  p[2].m = u[1].m;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  v : vec4<i32>,
+  @size(64)
+  m : ${mat},
 }
 
 struct S_std140 {
   v : vec4<i32>,
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
+@group(0) @binding(0) var<uniform> u : array<S_std140, 3u>;
 
 var<private> p : array<S, 4>;
 
-fn load_u_1_m() -> mat3x2<f32> {
+fn load_u_1_m() -> ${mat} {
   let s = &(u[1u]);
-  return mat3x2<f32>((*(s)).m_0, (*(s)).m_1, (*(s)).m_2);
+  return ${mat}(${col_vectors_inline});
 }
 
 fn f() {
   p[2].m = load_u_1_m();
 }
 )";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopyColumn_UniformToStorage) {
-    auto* src = R"(
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyColumn_UniformToStorage) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
-  @size(64) m : mat3x2<f32>,
+  @size(64)
+  m : ${mat},
 }
 
-@group(0) @binding(0) var<uniform> u : array<S, 4>;
+@group(0) @binding(0) var<uniform> u : array<S, 3>;
+
 @group(0) @binding(1) var<storage, read_write> s : array<S, 4>;
 
 fn f() {
-    s[3].m[1] = u[2].m[0];
+  s[3].m[1] = u[2].m[0];
 }
 )";
+    src = matrix.ReplaceFieldsInString(src);
 
-    auto* expect =
-        R"(
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
+@group(0) @binding(0) var<uniform> u : array<S_std140, 3u>;
 
 @group(0) @binding(1) var<storage, read_write> s : array<S, 4>;
 
@@ -3277,153 +4845,225 @@ fn f() {
   s[3].m[1] = u[2u].m_0;
 }
 )";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopySwizzle_UniformToWorkgroup) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> u : array<S, 4>;
-var<workgroup> w : array<S, 4>;
-
-fn f() {
-    w[3].m[1] = u[2].m[0].yx.xy;
-}
-)";
-
-    auto* expect =
-        R"(
-struct S {
-  @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
-
-var<workgroup> w : array<S, 4>;
-
-fn f() {
-  w[3].m[1] = u[2u].m_0.yx.xy;
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, ArrayStructMat3x2Uniform_CopyScalar_UniformToPrivate) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> u : array<S, 4>;
-var<private> w : array<S, 4>;
-
-fn f() {
-    w[3].m[1].x = u[2].m[0].y;
-}
-)";
-
-    auto* expect =
-        R"(
-struct S {
-  @size(64)
-  m : mat3x2<f32>,
-}
-
-struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
-
-var<private> w : array<S, 4>;
-
-fn f() {
-  w[3].m[1].x = u[2u].m_0[1u];
-}
-)";
-
-    auto got = Run<Std140>(src);
-
-    EXPECT_EQ(expect, str(got));
-}
-
-TEST_F(Std140Test, MatrixUsageInForLoop) {
-    auto* src = R"(
-struct S {
-  @size(64) m : mat3x2<f32>,
-}
-
-@group(0) @binding(0) var<uniform> u : S;
-
-fn f() {
-    for (var i = u32(u.m[0][0]); i < u32(u.m[i][1]); i += u32(u.m[1][i])) {
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        expect = src;
     }
-}
-)";
 
-    auto* expect =
-        R"(
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyColumnSwizzle_UniformToWorkgroup) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
 struct S {
   @size(64)
-  m : mat3x2<f32>,
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> u : array<S, 4>;
+
+var<workgroup> w : array<S, 4>;
+
+fn f() {
+  w[3].m[1] = u[2].m[0].${swizzle}.${swizzle};
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  @size(64)
+  m : ${mat},
 }
 
 struct S_std140 {
-  m_0 : vec2<f32>,
-  m_1 : vec2<f32>,
-  @size(48)
-  m_2 : vec2<f32>,
+${col_vectors}
 }
 
-@group(0) @binding(0) var<uniform> u : S_std140;
+@group(0) @binding(0) var<uniform> u : array<S_std140, 4u>;
 
-fn load_u_m_p0_1(p0 : u32) -> f32 {
+var<workgroup> w : array<S, 4>;
+
+fn f() {
+  w[3].m[1] = u[2u].m_0.${swizzle}.${swizzle};
+}
+)";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, ArrayStructMatUniform_CopyScalar_UniformToPrivate) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  v : vec4<i32>,
+  @size(64)
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> u : array<S, 3>;
+
+var<private> p : array<S, 4>;
+
+fn f() {
+  p[3].m[1].x = u[2].m[0].y;
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  v : vec4<i32>,
+  @size(64)
+  m : ${mat},
+}
+
+struct S_std140 {
+  v : vec4<i32>,
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> u : array<S_std140, 3u>;
+
+var<private> p : array<S, 4>;
+
+fn f() {
+  p[3].m[1].x = u[2u].m_0[1u];
+}
+)";
+        uint32_t lastSize =
+            64 - static_cast<uint32_t>(matrix.ColumnVectorAlign() * (matrix.columns - 1));
+        expect = matrix.ReplaceFieldsInString(
+            expect,
+            {{"${col_vectors}", matrix.ExpendedColumnVectorsWithLastSize(2, "m_", lastSize)},
+             {"${col_vectors_inline}", matrix.ExpendedColumnVectorsInline("(*(s)).m_", ", ")}});
+    } else {
+        expect = src;
+    }
+
+    auto got = Run<Std140>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_P(Std140Test_Matrix, MatrixUsageInForLoop) {
+    auto matrix = GetParam();
+
+    std::string src = R"(
+enable f16;
+
+struct S {
+  m : ${mat},
+}
+
+@group(0) @binding(0) var<uniform> s : S;
+
+fn f() {
+  for(var i = u32(s.m[0][0]); (i < u32(s.m[i][1])); i += u32(s.m[1][i])) {
+  }
+}
+)";
+    src = matrix.ReplaceFieldsInString(src);
+
+    std::string expect;
+    if (matrix.NotStd140Compatible()) {
+        expect = R"(
+enable f16;
+
+struct S {
+  m : ${mat},
+}
+
+struct S_std140 {
+${col_vectors}
+}
+
+@group(0) @binding(0) var<uniform> s : S_std140;
+
+fn load_s_m_p0_1(p0 : u32) -> ${elem_type} {
   switch(p0) {
-    case 0u: {
-      return u.m_0[1u];
-    }
-    case 1u: {
-      return u.m_1[1u];
-    }
-    case 2u: {
-      return u.m_2[1u];
-    }
+${col_table}
     default: {
-      return f32();
+      return ${elem_type}();
     }
   }
 }
 
 fn f() {
-  for(var i = u32(u.m_0[0u]); (i < u32(load_u_m_p0_1(u32(i)))); i += u32(u.m_1[i])) {
+  for(var i = u32(s.m_0[0u]); (i < u32(load_s_m_p0_1(u32(i)))); i += u32(s.m_1[i])) {
   }
 }
 )";
+
+        // colTable is the switch cases for all column index.
+        // Example for a matrix having 2 columns:
+        //   case 0u: {
+        //     return s.m_0[1u];
+        //   }
+        //   case 1u: {
+        //     return s.m_1[1u];
+        //   }
+        std::string colTable = matrix.JoinTemplatedStringForEachMatrixColumn(  //
+            R"(    case ${col_id_for_tmpl}u: {
+      return s.m_${col_id_for_tmpl}[1u];
+    })",
+            "\n");
+        expect = matrix.ReplaceFieldsInString(
+            expect, {{"${col_vectors}", matrix.ExpendedColumnVectors(2, "m_")},
+                     {"${col_table}", colTable}});
+    } else {
+        expect = src;
+    }
 
     auto got = Run<Std140>(src);
 
     EXPECT_EQ(expect, str(got));
 }
+
+INSTANTIATE_TEST_SUITE_P(,
+                         Std140Test_Matrix,
+                         ::testing::ValuesIn(std::vector<MatrixCase>{
+                             {2, 2, MatrixType::f32},
+                             {2, 3, MatrixType::f32},
+                             {2, 4, MatrixType::f32},
+                             {3, 2, MatrixType::f32},
+                             {3, 3, MatrixType::f32},
+                             {3, 4, MatrixType::f32},
+                             {4, 2, MatrixType::f32},
+                             {4, 3, MatrixType::f32},
+                             {4, 4, MatrixType::f32},
+                         }));
 
 }  // namespace
 }  // namespace tint::transform
