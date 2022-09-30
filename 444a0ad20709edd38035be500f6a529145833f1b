@@ -16,6 +16,23 @@
       "message": "PTAL! Not advertising the feature feels like the appropriate response while we investigate the bug. After all, it\u0027s valid to ship WebGPU on a device that doesn\u0027t have timestamps.\n\nThat said, I\u0027m still investigating, and if this issue rings any bells I\u0027d appreciate hearing theories as to why it may be happening.",
       "revId": "444a0ad20709edd38035be500f6a529145833f1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c1ba0ab_3860bbb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-09-30T23:22:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "444a0ad20709edd38035be500f6a529145833f1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
