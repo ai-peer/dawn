@@ -136,6 +136,76 @@ auto Dispatch_bool(F&& f, CONSTANTS&&... cs) {
     return f(cs->template As<bool>()...);
 }
 
+/*
+/// Curry is inspired by https://stackoverflow.com/a/26768388
+namespace detail {
+/// Base template, F is a function that cannot be called without args, currying is needed.
+template <typename F, typename = std::void_t<>>
+struct CallableWithZeroArgs : std::false_type {};
+
+/// F is a function that can be called with no args, no currying is needed.
+template <typename F>
+struct CallableWithZeroArgs<F, std::void_t<decltype(std::declval<F>()())>> : std::true_type {};
+}  // namespace detail
+
+/// Curry of function `f` will return a new function that can be called with f's first argument, and
+/// will return a new function that can accept the rest of f's arguments.
+/// Example:
+/// int f(int a, int b, int c) { return a + b + c; }
+/// ...
+/// int r = Curry(f)(1)(2)(3); // r == 6
+template <typename F>
+auto Curry(F&& f) {
+    // If f() is not a valid function call, we need to curry at least one argument.
+    if constexpr (!detail::CallableWithZeroArgs<decltype(f)>::value) {
+        return [=](auto&& x) {
+            return Curry([=](auto&&... xs) -> decltype(f(x, xs...)) { return f(x, xs...); });
+        };
+    } else {
+        // 'f()' is a valid call, so we can just call it.
+        return f();
+    }
+}
+
+namespace detail {
+template <typename F, typename C0, typename... CREST>
+auto Dispatch_any_recurse(F&& f, C0&& c0, CREST&&... cs) {
+    if constexpr (sizeof...(cs) == 0) {
+        return Switch(
+            c0->Type(),  //
+            [&](const sem::AbstractInt*) { return f(c0->As<AInt>()); },
+            [&](const sem::AbstractFloat*) { return f(c0->As<AFloat>()); },
+            [&](const sem::F32*) { return f(c0->As<f32>()); },
+            [&](const sem::I32*) { return f(c0->As<i32>()); },
+            [&](const sem::U32*) { return f(c0->As<u32>()); },
+            [&](const sem::F16*) { return f(c0->As<f16>()); },
+            [&](const sem::Bool*) { return f(c0->As<bool>()); });
+
+    } else {
+        return Switch(
+            c0->Type(),  //
+            [&](const sem::AbstractInt*) { return Dispatch_any_recurse(f(c0->As<AInt>()), cs...); },
+            [&](const sem::AbstractFloat*) {
+                return Dispatch_any_recurse(f(c0->As<AFloat>()), cs...);
+            },
+            [&](const sem::F32*) { return Dispatch_any_recurse(f(c0->As<f32>()), cs...); },
+            [&](const sem::I32*) { return Dispatch_any_recurse(f(c0->As<i32>()), cs...); },
+            [&](const sem::U32*) { return Dispatch_any_recurse(f(c0->As<u32>()), cs...); },
+            [&](const sem::F16*) { return Dispatch_any_recurse(f(c0->As<f16>()), cs...); },
+            [&](const sem::Bool*) { return Dispatch_any_recurse(f(c0->As<bool>()), cs...); });
+    }
+}
+}  // namespace detail
+
+/// Helper that calls `f` passing in the value of all `cs`.
+/// Unlike other Dispatch functions that assumes all `cs` are of the same type, this function
+/// accepts constants of different type, generating calls to `f` with all combinations of constant
+/// type. As there are 7 types, this will generate 7^N calls with N = number of constants.
+template <typename F, typename... CONSTANTS>
+auto Dispatch_any(F&& f, CONSTANTS&&... cs) {
+    return detail::Dispatch_any_recurse(Curry(f), cs...);
+}
+*/
 /// ZeroTypeDispatch is a helper for calling the function `f`, passing a single zero-value argument
 /// of the C++ type that corresponds to the sem::Type `type`. For example, calling
 /// `ZeroTypeDispatch()` with a type of `sem::I32*` will call the function f with a single argument
@@ -503,25 +573,30 @@ const ImplConstant* CreateComposite(ProgramBuilder& builder,
     }
 }
 
-/// TransformElements constructs a new constant of type `composite_ty` by applying the
-/// transformation function 'f' on each of the most deeply nested elements of 'cs'. Assumes that all
-/// input constants `cs` are of the same type.
+namespace detail {
+/// Implementation of TransformElements
 template <typename F, typename... CONSTANTS>
 ImplResult TransformElements(ProgramBuilder& builder,
                              const sem::Type* composite_ty,
                              F&& f,
+                             size_t index,
                              CONSTANTS&&... cs) {
     uint32_t n = 0;
     auto* ty = First(cs...)->Type();
     auto* el_ty = sem::Type::ElementOf(ty, &n);
     if (el_ty == ty) {
-        return f(cs...);
+        constexpr bool kHasIndexParam = traits::IsType<size_t, traits::LastParameterType<F>>;
+        if constexpr (kHasIndexParam) {
+            return f(cs..., index);
+        } else {
+            return f(cs...);
+        }
     }
     utils::Vector<const sem::Constant*, 8> els;
     els.Reserve(n);
     for (uint32_t i = 0; i < n; i++) {
-        if (auto el = TransformElements(builder, sem::Type::ElementOf(composite_ty),
-                                        std::forward<F>(f), cs->Index(i)...)) {
+        if (auto el = detail::TransformElements(builder, sem::Type::ElementOf(composite_ty),
+                                                std::forward<F>(f), i, cs->Index(i)...)) {
             els.Push(el.Get());
 
         } else {
@@ -530,10 +605,23 @@ ImplResult TransformElements(ProgramBuilder& builder,
     }
     return CreateComposite(builder, composite_ty, std::move(els));
 }
+}  // namespace detail
+
+/// TransformElements constructs a new constant of type `composite_ty` by applying the
+/// transformation function `f` on each of the most deeply nested elements of 'cs'. Assumes that all
+/// input constants `cs` are of the same arity (all scalars or all vectors of the same size).
+/// If `f`'s last argument is a `size_t`, then the index of the composite values will be passed in.
+template <typename F, typename... CONSTANTS>
+ImplResult TransformElements(ProgramBuilder& builder,
+                             const sem::Type* composite_ty,
+                             F&& f,
+                             CONSTANTS&&... cs) {
+    return detail::TransformElements(builder, composite_ty, f, 0, cs...);
+}
 
 /// TransformBinaryElements constructs a new constant of type `composite_ty` by applying the
 /// transformation function 'f' on each of the most deeply nested elements of both `c0` and `c1`.
-/// Unlike TransformElements, this function handles the constants being of different types, e.g.
+/// Unlike TransformElements, this function handles the constants being of different arity, e.g.
 /// vector-scalar, scalar-vector.
 template <typename F>
 ImplResult TransformBinaryElements(ProgramBuilder& builder,
@@ -1514,6 +1602,35 @@ ConstEval::Result ConstEval::clamp(const sem::Type* ty,
         return Dispatch_fia_fiu32_f16(create, c0, c1, c2);
     };
     return TransformElements(builder, ty, transform, args[0], args[1], args[2]);
+}
+
+ConstEval::Result ConstEval::select_bool(const sem::Type* ty,
+                                         utils::VectorRef<const sem::Constant*> args,
+                                         const Source&) {
+    auto cond = args[2]->As<bool>();
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto f, auto t) -> ImplResult {
+            return CreateElement(builder, sem::Type::DeepestElementOf(ty), cond ? t : f);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
+
+    return TransformElements(builder, ty, transform, args[0], args[1]);
+}
+
+ConstEval::Result ConstEval::select_boolvec(const sem::Type* ty,
+                                            utils::VectorRef<const sem::Constant*> args,
+                                            const Source&) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1, size_t index) {
+        auto create = [&](auto f, auto t) -> ImplResult {
+            // Get corresponding bool value at the current vector value index
+            auto cond = args[2]->Index(index)->As<bool>();
+            return CreateElement(builder, sem::Type::DeepestElementOf(ty), cond ? t : f);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
+
+    return TransformElements(builder, ty, transform, args[0], args[1]);
 }
 
 ConstEval::Result ConstEval::Convert(const sem::Type* target_ty,
