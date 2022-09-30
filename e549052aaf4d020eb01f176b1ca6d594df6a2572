@@ -16,6 +16,46 @@
       "message": "Thanks for your review, Austin and Corentin! Please take another look.",
       "revId": "e549052aaf4d020eb01f176b1ca6d594df6a2572",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ae4add_af6f194d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-30T09:30:25Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "e549052aaf4d020eb01f176b1ca6d594df6a2572",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b666f8_d828ea86",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-30T09:30:25Z",
+      "side": 1,
+      "message": "This comment raises more questions than it answers ^^",
+      "range": {
+        "startLine": 223,
+        "startChar": 93,
+        "endLine": 224,
+        "endChar": 13
+      },
+      "revId": "e549052aaf4d020eb01f176b1ca6d594df6a2572",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
