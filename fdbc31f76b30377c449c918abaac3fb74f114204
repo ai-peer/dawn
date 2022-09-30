@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49c579d7_b3f53030",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-09-30T09:26:51Z",
+      "side": 1,
+      "message": "Great find! It\u0027s funny that connorwadefitzgerald posted this issue as he is a maintainer of wgpu, seems we\u0027re running into the same problems 😊",
+      "revId": "fdbc31f76b30377c449c918abaac3fb74f114204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
