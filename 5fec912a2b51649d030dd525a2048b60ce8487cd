@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb8a7da0_69b96470",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-09-30T12:03:58Z",
+      "side": 1,
+      "message": "Sure.\nRan into the error below:\n```\n../../third_party/dawn/src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp:258:62: error: use of undeclared identifier \u0027opaqueFDDescriptor\u0027; did you mean \u0027dmaBufDescriptor\u0027?\n    params.dedicatedAllocation \u003d RequiresDedicatedAllocation(opaqueFDDescriptor, image);\n                                                             ^~~~~~~~~~~~~~~~~~\n                                                             dmaBufDescriptor\n../../third_party/dawn/src/dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.cpp:233:42: note: \u0027dmaBufDescriptor\u0027 declared here\n    const ExternalImageDescriptorDmaBuf* dmaBufDescriptor \u003d\n```",
+      "parentUuid": "b41b8d0b_1d310dba",
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec41cb0d_ef277722",
         "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
         "patchSetId": 8
