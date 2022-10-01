@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05cf17c6_5df30c98",
+        "filename": "src/tint/reader/spirv/parser_impl_handle_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-01T13:41:05Z",
+      "side": 0,
+      "message": "Filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1685 to track this instead of a DISABLED test.",
+      "revId": "e75785b44cefe0ccb829d8831e65bd841780d64d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
