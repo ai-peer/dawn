@@ -37,11 +37,11 @@ vars = {
 deps = {
   # Dependencies required to use GN/Clang in standalone
   'build': {
-    'url': '{chromium_git}/chromium/src/build@f14f6d206b9a0c81a0fefba487bcba0d90ddb5fe',
+    'url': '{chromium_git}/chromium/src/build@0a1188f24a6ac2ad8f94fbf7c1f840d536a15f15',
     'condition': 'dawn_standalone',
   },
   'buildtools': {
-    'url': '{chromium_git}/chromium/src/buildtools@fe57e98eeb2172d7517f6dec1072ca641a019893',
+    'url': '{chromium_git}/chromium/src/buildtools@9174abb6ac087b46f22248dc713b6c0328b8f774',
     'condition': 'dawn_standalone',
   },
   'buildtools/clang_format/script': {
@@ -74,17 +74,17 @@ deps = {
   },
 
   'buildtools/third_party/libc++/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@eb79671bfbedd77b747d01dee8c0479ff1693f88',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxx.git@2e919977e0030ce61bd19c40cefe31b995f1e2d4',
     'condition': 'dawn_standalone',
   },
 
   'buildtools/third_party/libc++abi/trunk': {
-    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@b954e3e65634a9e2f7b595598a30c455f5f2eb26',
+    'url': '{chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git@20a144a49a2819e20b90d145554299e995d67c06',
     'condition': 'dawn_standalone',
   },
 
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@3d8d88e8bb600789ba3e798f38ff314521aac524',
+    'url': '{chromium_git}/chromium/src/tools/clang@a5e0d72349d028a4023927d6d166a8478355fac3',
     'condition': 'dawn_standalone',
   },
   'tools/clang/dsymutil': {
