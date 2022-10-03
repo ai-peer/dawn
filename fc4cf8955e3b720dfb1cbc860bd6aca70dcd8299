@@ -16,6 +16,24 @@
       "message": "LGTM. I\u0027m not sure if we\u0027ve hit the scientific notation path or not.",
       "revId": "fc4cf8955e3b720dfb1cbc860bd6aca70dcd8299",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce514d1e_b6467dc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2022-10-03T14:39:36Z",
+      "side": 1,
+      "message": "FWIW, I\u0027ve been toying with this same problem in Skia, and I found I got great results by checking `precision(7)` and then falling back to `precision(9)` if the round-tripping didn\u0027t pass. This lets values like `0.1` get written back properly (rather than `0.1000001` or something).\n\nI have yet to see a case where `precision(9)` didn\u0027t pass, but I didn\u0027t do the full exhaustive test myself.",
+      "parentUuid": "d68caace_d043da21",
+      "revId": "fc4cf8955e3b720dfb1cbc860bd6aca70dcd8299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
