@@ -43,7 +43,7 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
     ExternalImageDXGIImpl(Device* backendDevice,
                           Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                           const TextureDescriptor* textureDescriptor,
-                          bool useFenceSynchronization);
+                          HANDLE fenceHandle);
     ~ExternalImageDXGIImpl();
 
     ExternalImageDXGIImpl(const ExternalImageDXGIImpl&) = delete;
@@ -60,7 +60,7 @@ class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
   private:
     Device* mBackendDevice = nullptr;
     Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
-    const bool mUseFenceSynchronization;
+    HANDLE mFenceHandle;
 
     std::unique_ptr<D3D11on12ResourceCache> mD3D11on12ResourceCache;
 
