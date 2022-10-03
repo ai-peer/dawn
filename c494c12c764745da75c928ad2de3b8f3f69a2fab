@@ -22,6 +22,30 @@
       },
       "revId": "c494c12c764745da75c928ad2de3b8f3f69a2fab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7960a1c_51a5bc9d",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-03T23:48:10Z",
+      "side": 1,
+      "message": "yea, see https://dawn-review.googlesource.com/c/dawn/+/103661 (WIP) for context.\nSplitting this out to avoid a giant CL",
+      "parentUuid": "3bbaef6e_b0c6c535",
+      "range": {
+        "startLine": 197,
+        "startChar": 56,
+        "endLine": 199,
+        "endChar": 26
+      },
+      "revId": "c494c12c764745da75c928ad2de3b8f3f69a2fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
