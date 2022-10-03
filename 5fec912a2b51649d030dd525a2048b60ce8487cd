@@ -218,6 +218,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33df465_9a9ea9a9",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-03T13:47:21Z",
+      "side": 1,
+      "message": "NeedsDedicatedAllocation::Detect would regroup both cases where DetectDedicatedAllocation is true, and would prevent testing the detection of dedicated vs. not dedicated cases. Tentatively keeping as is.",
+      "parentUuid": "ec41cb0d_ef277722",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 39
+      },
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e5961d0_e47d37f4",
@@ -231,6 +255,30 @@
       "writtenOn": "2022-09-29T23:43:37Z",
       "side": 1,
       "message": "nit. Would be helpful to add a /**/ comment to indicate which var is being set with each of these true/false pairs.",
+      "range": {
+        "startLine": 897,
+        "startChar": 24,
+        "endLine": 897,
+        "endChar": 37
+      },
+      "revId": "5fec912a2b51649d030dd525a2048b60ce8487cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bdc4aa6_519bf7f3",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 897,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-03T13:47:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e5961d0_e47d37f4",
       "range": {
         "startLine": 897,
         "startChar": 24,
