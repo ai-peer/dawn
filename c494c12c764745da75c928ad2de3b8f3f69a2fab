@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e5f30e4_0301d853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-03T23:51:58Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "c494c12c764745da75c928ad2de3b8f3f69a2fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e409806d_39e8be54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-03T23:51:58Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "c494c12c764745da75c928ad2de3b8f3f69a2fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bbaef6e_b0c6c535",
@@ -38,6 +72,30 @@
       "side": 1,
       "message": "yea, see https://dawn-review.googlesource.com/c/dawn/+/103661 (WIP) for context.\nSplitting this out to avoid a giant CL",
       "parentUuid": "3bbaef6e_b0c6c535",
+      "range": {
+        "startLine": 197,
+        "startChar": 56,
+        "endLine": 199,
+        "endChar": 26
+      },
+      "revId": "c494c12c764745da75c928ad2de3b8f3f69a2fab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f734df_503acca3",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-03T23:51:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7960a1c_51a5bc9d",
       "range": {
         "startLine": 197,
         "startChar": 56,
