@@ -589,8 +589,15 @@ std::unique_ptr<ExternalImageDXGIImpl> Device::CreateExternalImageDXGIImpl(
         }
     }
 
-    auto impl = std::make_unique<ExternalImageDXGIImpl>(
-        this, std::move(d3d12Resource), textureDescriptor, descriptor->useFenceSynchronization);
+    HANDLE fenceHandle = nullptr;
+    if (descriptor->useFenceSynchronization) {
+        if (!::DuplicateHandle(::GetCurrentProcess(), mFenceHandle, ::GetCurrentProcess(),
+                               &fenceHandle, 0, FALSE, DUPLICATE_SAME_ACCESS)) {
+            return nullptr;
+        }
+    }
+    auto impl = std::make_unique<ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
+                                                        textureDescriptor, fenceHandle);
     mExternalImageList.Append(impl.get());
     return impl;
 }
@@ -810,6 +817,9 @@ void Device::DestroyImpl() {
 
     if (mFenceEvent != nullptr) {
         ::CloseHandle(mFenceEvent);
+    }
+    if (mFenceHandle != nullptr) {
+        ::CloseHandle(mFenceHandle);
     }
 
     // Release recycled resource heaps.

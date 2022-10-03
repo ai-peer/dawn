@@ -28,10 +28,10 @@ namespace dawn::native::d3d12 {
 ExternalImageDXGIImpl::ExternalImageDXGIImpl(Device* backendDevice,
                                              Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                                              const TextureDescriptor* textureDescriptor,
-                                             bool useFenceSynchronization)
+                                             HANDLE fenceHandle)
     : mBackendDevice(backendDevice),
       mD3D12Resource(std::move(d3d12Resource)),
-      mUseFenceSynchronization(useFenceSynchronization),
+      mFenceHandle(fenceHandle),
       mD3D11on12ResourceCache(std::make_unique<D3D11on12ResourceCache>()),
       mUsage(textureDescriptor->usage),
       mDimension(textureDescriptor->dimension),
@@ -52,6 +52,9 @@ ExternalImageDXGIImpl::ExternalImageDXGIImpl(Device* backendDevice,
 
 ExternalImageDXGIImpl::~ExternalImageDXGIImpl() {
     Destroy();
+    if (mFenceHandle != nullptr) {
+        ::CloseHandle(mFenceHandle);
+    }
 }
 
 bool ExternalImageDXGIImpl::IsValid() const {
@@ -94,7 +97,7 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 
     std::vector<Ref<Fence>> waitFences;
     Ref<D3D11on12ResourceCacheEntry> d3d11on12Resource;
-    if (mUseFenceSynchronization) {
+    if (mFenceHandle) {
         for (const ExternalImageDXGIFenceDescriptor& fenceDescriptor : descriptor->waitFences) {
             ASSERT(fenceDescriptor.fenceHandle != nullptr);
             // TODO(sunnyps): Use a fence cache instead of re-importing fences on each BeginAccess.
@@ -131,13 +134,13 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
     Texture* backendTexture = ToBackend(FromAPI(texture));
     ASSERT(backendTexture != nullptr);
 
-    if (mUseFenceSynchronization) {
+    if (mFenceHandle) {
         ExecutionSerial fenceValue;
         if (mBackendDevice->ConsumedError(backendTexture->EndAccess(), &fenceValue)) {
             dawn::ErrorLog() << "D3D12 fence end access failed";
             return;
         }
-        signalFence->fenceHandle = mBackendDevice->GetFenceHandle();
+        signalFence->fenceHandle = mFenceHandle;
         signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
     }
 }
