@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2380e35d_c77e1232",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-03T13:37:34Z",
+      "side": 1,
+      "message": "Please also update this.",
+      "range": {
+        "startLine": 46,
+        "startChar": 48,
+        "endLine": 46,
+        "endChar": 55
+      },
+      "revId": "88ca3f9d900b71566e3c024f76a57f31748d7980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "678c3609_28bfc0af",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-03T13:37:34Z",
+      "side": 1,
+      "message": "Please also update this.",
+      "range": {
+        "startLine": 59,
+        "startChar": 48,
+        "endLine": 59,
+        "endChar": 55
+      },
+      "revId": "88ca3f9d900b71566e3c024f76a57f31748d7980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58661b72_52f983b7",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-03T13:37:34Z",
+      "side": 1,
+      "message": "Please also update this.",
+      "range": {
+        "startLine": 72,
+        "startChar": 45,
+        "endLine": 72,
+        "endChar": 52
+      },
+      "revId": "88ca3f9d900b71566e3c024f76a57f31748d7980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b83129_b69c97a3",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-03T13:37:34Z",
+      "side": 1,
+      "message": "Please also update this.",
+      "range": {
+        "startLine": 201,
+        "startChar": 9,
+        "endLine": 201,
+        "endChar": 16
+      },
+      "revId": "88ca3f9d900b71566e3c024f76a57f31748d7980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30138691_9a7ddfe6",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-03T13:37:34Z",
+      "side": 1,
+      "message": "Please also update this.",
+      "range": {
+        "startLine": 207,
+        "startChar": 29,
+        "endLine": 207,
+        "endChar": 36
+      },
+      "revId": "88ca3f9d900b71566e3c024f76a57f31748d7980",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
