@@ -193,6 +193,12 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 
 Device::~Device() {
     Destroy();
+
+    // Close the handle here instead of in DestroyImpl. The is returned from ExternalImageDXGI, so
+    // it needs to live as long as the Device ref does, even if it is internally destroyed.
+    if (mFenceHandle != nullptr) {
+        ::CloseHandle(mFenceHandle);
+    }
 }
 
 ID3D12Device* Device::GetD3D12Device() const {
