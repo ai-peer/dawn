@@ -233,7 +233,6 @@ class DawnTestBase {
     bool IsQualcomm() const;
     bool IsSwiftshader() const;
     bool IsANGLE() const;
-    bool IsANGLESwiftShader() const;
     bool IsWARP() const;
 
     bool IsIntelGen12() const;

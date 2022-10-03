@@ -700,11 +700,6 @@ bool DawnTestBase::IsANGLE() const {
     return !mParam.adapterProperties.adapterName.find("ANGLE");
 }
 
-bool DawnTestBase::IsANGLESwiftShader() const {
-    return !mParam.adapterProperties.adapterName.find("ANGLE") &&
-           (mParam.adapterProperties.adapterName.find("SwiftShader") != std::string::npos);
-}
-
 bool DawnTestBase::IsWARP() const {
     return gpu_info::IsMicrosoftWARP(mParam.adapterProperties.vendorID,
                                      mParam.adapterProperties.deviceID);
