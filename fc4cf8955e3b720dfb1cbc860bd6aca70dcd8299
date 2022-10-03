@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d68caace_d043da21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-03T14:25:24Z",
+      "side": 1,
+      "message": "LGTM. I\u0027m not sure if we\u0027ve hit the scientific notation path or not.",
+      "revId": "fc4cf8955e3b720dfb1cbc860bd6aca70dcd8299",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
