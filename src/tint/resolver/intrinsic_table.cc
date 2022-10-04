@@ -195,8 +195,14 @@ class MatchState {
                TemplateState& t,
                const Matchers& m,
                const OverloadInfo* o,
-               MatcherIndex const* matcher_indices)
-        : builder(b), templates(t), matchers(m), overload(o), matcher_indices_(matcher_indices) {}
+               MatcherIndex const* matcher_indices,
+               sem::EvaluationStage s)
+        : builder(b),
+          templates(t),
+          matchers(m),
+          overload(o),
+          matcher_indices_(matcher_indices),
+          stage(s) {}
 
     /// The program builder
     ProgramBuilder& builder;
@@ -206,6 +212,8 @@ class MatchState {
     Matchers const& matchers;
     /// The current overload being evaluated
     OverloadInfo const* overload;
+
+    sem::EvaluationStage stage;
 
     /// Type uses the next TypeMatcher from the matcher indices to match the type
     /// `ty`. If the type matches, the canonical expected type is returned. If the
@@ -970,6 +978,7 @@ class Impl : public IntrinsicTable {
 
     Builtin Lookup(sem::BuiltinType builtin_type,
                    utils::VectorRef<const sem::Type*> args,
+                   sem::EvaluationStage stage,
                    const Source& source) override;
 
     UnaryOperator Lookup(ast::UnaryOp op, const sem::Type* arg, const Source& source) override;
@@ -1028,6 +1037,7 @@ class Impl : public IntrinsicTable {
     IntrinsicPrototype MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                       const char* intrinsic_name,
                                       utils::VectorRef<const sem::Type*> args,
+                                      sem::EvaluationStage stage,
                                       TemplateState templates,
                                       OnNoMatch on_no_match) const;
 
@@ -1040,6 +1050,7 @@ class Impl : public IntrinsicTable {
     /// @returns the evaluated Candidate information.
     Candidate ScoreOverload(const OverloadInfo* overload,
                             utils::VectorRef<const sem::Type*> args,
+                            sem::EvaluationStage stage,
                             TemplateState templates) const;
 
     /// Performs overload resolution given the list of candidates, by ranking the conversions of
@@ -1063,7 +1074,8 @@ class Impl : public IntrinsicTable {
     /// @param matcher_indices pointer to a list of matcher indices
     MatchState Match(TemplateState& templates,
                      const OverloadInfo* overload,
-                     MatcherIndex const* matcher_indices) const;
+                     MatcherIndex const* matcher_indices,
+                     sem::EvaluationStage stage) const;
 
     // Prints the overload for emitting diagnostics
     void PrintOverload(std::ostream& ss,
@@ -1129,6 +1141,7 @@ Impl::Impl(ProgramBuilder& b) : builder(b) {}
 
 Impl::Builtin Impl::Lookup(sem::BuiltinType builtin_type,
                            utils::VectorRef<const sem::Type*> args,
+                           sem::EvaluationStage stage,
                            const Source& source) {
     const char* intrinsic_name = sem::str(builtin_type);
 
@@ -1147,7 +1160,7 @@ Impl::Builtin Impl::Lookup(sem::BuiltinType builtin_type,
 
     // Resolve the intrinsic overload
     auto match = MatchIntrinsic(kBuiltins[static_cast<size_t>(builtin_type)], intrinsic_name, args,
-                                TemplateState{}, on_no_match);
+                                stage, TemplateState{}, on_no_match);
     if (!match.overload) {
         return {};
     }
@@ -1212,7 +1225,7 @@ IntrinsicTable::UnaryOperator Impl::Lookup(ast::UnaryOp op,
     };
 
     // Resolve the intrinsic overload
-    auto match = MatchIntrinsic(kUnaryOperators[intrinsic_index], intrinsic_name, args,
+    auto match = MatchIntrinsic(kUnaryOperators[intrinsic_index], intrinsic_name, args, sem::EvaluationStage::kRuntime /*TODO!!!*/,
                                 TemplateState{}, on_no_match);
     if (!match.overload) {
         return {};
@@ -1289,7 +1302,7 @@ IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
     };
 
     // Resolve the intrinsic overload
-    auto match = MatchIntrinsic(kBinaryOperators[intrinsic_index], intrinsic_name, args,
+    auto match = MatchIntrinsic(kBinaryOperators[intrinsic_index], intrinsic_name, args, sem::EvaluationStage::kRuntime /*TODO!!!!*/,
                                 TemplateState{}, on_no_match);
     if (!match.overload) {
         return {};
@@ -1344,7 +1357,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
     }
 
     // Resolve the intrinsic overload
-    auto match = MatchIntrinsic(kConstructorsAndConverters[static_cast<size_t>(type)], name, args,
+    auto match = MatchIntrinsic(kConstructorsAndConverters[static_cast<size_t>(type)], name, args, sem::EvaluationStage::kRuntime /* TODO!!!*/,
                                 templates, on_no_match);
     if (!match.overload) {
         return {};
@@ -1383,6 +1396,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
 IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
                                         const char* intrinsic_name,
                                         utils::VectorRef<const sem::Type*> args,
+                                        sem::EvaluationStage stage,
                                         TemplateState templates,
                                         OnNoMatch on_no_match) const {
     size_t num_matched = 0;
@@ -1391,7 +1405,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     candidates.Reserve(intrinsic.num_overloads);
     for (size_t overload_idx = 0; overload_idx < static_cast<size_t>(intrinsic.num_overloads);
          overload_idx++) {
-        auto candidate = ScoreOverload(&intrinsic.overloads[overload_idx], args, templates);
+        auto candidate = ScoreOverload(&intrinsic.overloads[overload_idx], args, stage, templates);
         if (candidate.score == 0) {
             match_idx = overload_idx;
             num_matched++;
@@ -1423,7 +1437,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
     const sem::Type* return_type = nullptr;
     if (auto* indices = match.overload->return_matcher_indices) {
         Any any;
-        return_type = Match(match.templates, match.overload, indices).Type(&any);
+        return_type = Match(match.templates, match.overload, indices, stage).Type(&any);
         if (!return_type) {
             TINT_ICE(Resolver, builder.Diagnostics()) << "MatchState.Match() returned null";
             return {};
@@ -1437,6 +1451,7 @@ IntrinsicPrototype Impl::MatchIntrinsic(const IntrinsicInfo& intrinsic,
 
 Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
                                     utils::VectorRef<const sem::Type*> args,
+                                    sem::EvaluationStage stage,
                                     TemplateState templates) const {
     // Penalty weights for overload mismatching.
     // This scoring is used to order the suggested overloads in diagnostic on overload mismatch, and
@@ -1469,7 +1484,7 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
     for (size_t p = 0; p < num_params; p++) {
         auto& parameter = overload->parameters[p];
         auto* indices = parameter.matcher_indices;
-        if (!Match(templates, overload, indices).Type(args[p]->UnwrapRef())) {
+        if (!Match(templates, overload, indices, stage).Type(args[p]->UnwrapRef())) {
             score += kMismatchedParamTypePenalty;
         }
     }
@@ -1485,7 +1500,8 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
             auto* matcher_index = &overload->template_types[ot].matcher_index;
             if (*matcher_index != kNoMatcher) {
                 if (auto* template_type = templates.Type(ot)) {
-                    if (auto* ty = Match(templates, overload, matcher_index).Type(template_type)) {
+                    if (auto* ty =
+                            Match(templates, overload, matcher_index, stage).Type(template_type)) {
                         // Template type matched one of the types in the template type's matcher.
                         // Replace the template type with this type.
                         templates.SetType(ot, ty);
@@ -1507,7 +1523,7 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
             if (*matcher_index != kNoMatcher) {
                 auto template_num = templates.Num(on);
                 if (!template_num.IsValid() ||
-                    !Match(templates, overload, matcher_index).Num(template_num).IsValid()) {
+                    !Match(templates, overload, matcher_index, stage).Num(template_num).IsValid()) {
                     score += kMismatchedTemplateNumberPenalty;
                 }
             }
@@ -1521,7 +1537,7 @@ Impl::Candidate Impl::ScoreOverload(const OverloadInfo* overload,
         for (size_t p = 0; p < num_params; p++) {
             auto& parameter = overload->parameters[p];
             auto* indices = parameter.matcher_indices;
-            auto* ty = Match(templates, overload, indices).Type(args[p]->UnwrapRef());
+            auto* ty = Match(templates, overload, indices, stage).Type(args[p]->UnwrapRef());
             parameters.Emplace(ty, parameter.usage);
         }
     }
@@ -1596,14 +1612,18 @@ Impl::Candidate Impl::ResolveCandidate(Impl::Candidates&& candidates,
 
 MatchState Impl::Match(TemplateState& templates,
                        const OverloadInfo* overload,
-                       MatcherIndex const* matcher_indices) const {
-    return MatchState(builder, templates, matchers, overload, matcher_indices);
+                       MatcherIndex const* matcher_indices,
+                       sem::EvaluationStage stage) const {
+    return MatchState(builder, templates, matchers, overload, matcher_indices, stage);
 }
 
 void Impl::PrintOverload(std::ostream& ss,
                          const OverloadInfo* overload,
                          const char* intrinsic_name) const {
     TemplateState templates;
+
+
+    auto stage = sem::EvaluationStage::kRuntime; // TODO!!!
 
     ss << intrinsic_name << "(";
     for (size_t p = 0; p < overload->num_parameters; p++) {
@@ -1615,13 +1635,13 @@ void Impl::PrintOverload(std::ostream& ss,
             ss << sem::str(parameter.usage) << ": ";
         }
         auto* indices = parameter.matcher_indices;
-        ss << Match(templates, overload, indices).TypeName();
+        ss << Match(templates, overload, indices, stage).TypeName();
     }
     ss << ")";
     if (overload->return_matcher_indices) {
         ss << " -> ";
         auto* indices = overload->return_matcher_indices;
-        ss << Match(templates, overload, indices).TypeName();
+        ss << Match(templates, overload, indices, stage).TypeName();
     }
 
     bool first = true;
@@ -1635,7 +1655,7 @@ void Impl::PrintOverload(std::ostream& ss,
             separator();
             ss << template_type.name;
             auto* index = &template_type.matcher_index;
-            ss << " is " << Match(templates, overload, index).TypeName();
+            ss << " is " << Match(templates, overload, index, stage).TypeName();
         }
     }
     for (size_t i = 0; i < overload->num_template_numbers; i++) {
@@ -1644,7 +1664,7 @@ void Impl::PrintOverload(std::ostream& ss,
             separator();
             ss << template_number.name;
             auto* index = &template_number.matcher_index;
-            ss << " is " << Match(templates, overload, index).NumName();
+            ss << " is " << Match(templates, overload, index, stage).NumName();
         }
     }
 }

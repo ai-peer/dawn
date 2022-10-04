@@ -1567,10 +1567,10 @@ class AbstractOrScalar : public TypeMatcher {
 };
 
 const sem::Type* AbstractOrScalar::Match(MatchState& state, const sem::Type* ty) const {
-  if (match_ia(ty)) {
+  if (state.stage == sem::EvaluationStage::kConstant && match_ia(ty)) {
     return build_ia(state);
   }
-  if (match_fa(ty)) {
+  if (state.stage == sem::EvaluationStage::kConstant && match_fa(ty)) {
     return build_fa(state);
   }
   if (match_i32(ty)) {
