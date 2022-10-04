@@ -16,6 +16,29 @@
       "message": "PTAL!\n\nI believe Jie is away; CCing as FYI",
       "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee281cb3_db602e94",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-10-04T01:54:53Z",
+      "side": 1,
+      "message": "Hmm... maybe this is for legacy reasons, but if this must be `VK_IMAGE_LAYOUT_UNDEFINED` at this point, why even allow it to be passed in?",
+      "range": {
+        "startLine": 885,
+        "startChar": 4,
+        "endLine": 886,
+        "endChar": 91
+      },
+      "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
