@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac43075a_3a2882e8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-04T03:29:17Z",
+      "side": 1,
+      "message": "well - nevermind - since we need the layouts for Vulkan, we may as well have the semaphore too. It\u0027s more complex to do one without the other.",
+      "parentUuid": "62460bd7_5c5bbb44",
+      "range": {
+        "startLine": 9,
+        "startChar": 21,
+        "endLine": 9,
+        "endChar": 38
+      },
+      "revId": "c7b8ca4edb5f0dc124cdc040def0c7d8af515d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31ad0f54_68165a3f",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-09-30T15:35:21Z",
       "side": 1,
       "message": "[1]",
+      "revId": "c7b8ca4edb5f0dc124cdc040def0c7d8af515d71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c776985e_955cdd7e",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-04T03:29:17Z",
+      "side": 1,
+      "message": "I think we can use VK_IMAGE_LAYOUT_GENERAL here if we make mSubresourceLastUsages store VkImageLayout instead of wgpu::TextureUsage. that\u0027s a change for another day though",
+      "parentUuid": "31ad0f54_68165a3f",
       "revId": "c7b8ca4edb5f0dc124cdc040def0c7d8af515d71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
