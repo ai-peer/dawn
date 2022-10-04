@@ -80,6 +80,30 @@
       },
       "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa89dbc4_50872564",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-04T16:28:15Z",
+      "side": 1,
+      "message": "Nevermind - I did the search wrong.\nIt\u0027s used [here](https://source.chromium.org/search?q\u003dExportVulkanImage%20f:gpu%2F\u0026sq\u003d) as an argument. I originally looked for a descriptor/struct field. So removing would break compilation.\n\nI added a version without this argument so we can switch Chromium over, and I\u0027ll remove this after that all lands.",
+      "parentUuid": "bb6311e0_76363061",
+      "range": {
+        "startLine": 885,
+        "startChar": 4,
+        "endLine": 886,
+        "endChar": 91
+      },
+      "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
