@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b33c76_3a98b9e2",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2009,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T17:13:16Z",
+      "side": 1,
+      "message": "Suggest moving this outside of the block, and renaming `stage` to `arg_stage`.",
+      "range": {
+        "startLine": 2005,
+        "startChar": 0,
+        "endLine": 2009,
+        "endChar": 9
+      },
+      "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2b64a7e_210b07e6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T17:13:16Z",
+      "side": 1,
+      "message": "Then this just becomes `auto stage \u003d sem::EarliestStage(arg_stage, builtin.sem-\u003eStage());`\n\nAlternatively, maybe it makes sense for IntrinsicTable to return the Builtin with a  stage clamped to the argument stage? I guess we do similar stuff for the other uses of `IntrinsicTable`, which could also be cleaned up.",
+      "range": {
+        "startLine": 2025,
+        "startChar": 0,
+        "endLine": 2035,
+        "endChar": 5
+      },
+      "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
