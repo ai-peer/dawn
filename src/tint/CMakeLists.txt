@@ -419,6 +419,8 @@ list(APPEND TINT_LIB_SRCS
   transform/canonicalize_entry_point_io.h
   transform/combine_samplers.cc
   transform/combine_samplers.h
+  transform/compact_interstage_variables.cc
+  transform/compact_interstage_variables.h
   transform/decompose_memory_access.cc
   transform/decompose_memory_access.h
   transform/decompose_strided_array.cc
@@ -1180,6 +1182,7 @@ if(TINT_BUILD_TESTS)
       transform/clamp_frag_depth_test.cc
       transform/canonicalize_entry_point_io_test.cc
       transform/combine_samplers_test.cc
+      transform/compact_interstage_variables_test.cc
       transform/decompose_memory_access_test.cc
       transform/decompose_strided_array_test.cc
       transform/decompose_strided_matrix_test.cc
