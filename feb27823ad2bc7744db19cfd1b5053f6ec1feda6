@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e13f67d_69ecb04f",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T18:48:45Z",
+      "side": 1,
+      "message": "The earliest",
+      "range": {
+        "startLine": 216,
+        "startChar": 8,
+        "endLine": 216,
+        "endChar": 11
+      },
+      "revId": "feb27823ad2bc7744db19cfd1b5053f6ec1feda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c406e124_59c8508b",
+        "filename": "src/tint/resolver/intrinsic_table.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T18:48:45Z",
+      "side": 1,
+      "message": "I think this could do with a more precise description. I\u0027d probably call this `earliest_eval_stage`. Maybe something like:\n\n```\n/// @param earliest_eval_stage the the earliest evaluation stage that a call to\n///        the builtin can be made. This can alter the overloads considered.\n///        For example, if the earliest evaluation stage is \n///        `sem::EvaluationStage::kRuntime`, then only concrete argument types \n///        will be considered, as all abstract-numerics will have been materialized\n///        after shader creation time (sem::EvaluationStage::kConstant).\n```",
+      "range": {
+        "startLine": 87,
+        "startChar": 21,
+        "endLine": 87,
+        "endChar": 61
+      },
+      "revId": "feb27823ad2bc7744db19cfd1b5053f6ec1feda6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
