@@ -45,6 +45,30 @@
       },
       "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48efcb20_65a5bfef",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T17:53:33Z",
+      "side": 1,
+      "message": "Is it okay to assume the argument stage won\u0027t change given that `args` may get modified by the call to `MaterializeArguments` above?",
+      "parentUuid": "b2b64a7e_210b07e6",
+      "range": {
+        "startLine": 2025,
+        "startChar": 0,
+        "endLine": 2035,
+        "endChar": 5
+      },
+      "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
