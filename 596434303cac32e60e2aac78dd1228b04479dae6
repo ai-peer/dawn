@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "026e1f83_e82ee8c5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T17:27:08Z",
+      "side": 1,
+      "message": "The index of the most deeply nested element inside the most deeply nested aggregate type.\n\nWill we ever need the index chain?",
+      "range": {
+        "startLine": 543,
+        "startChar": 47,
+        "endLine": 543,
+        "endChar": 56
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cdcb5f3_b6de8fe3",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-04T17:27:08Z",
+      "side": 1,
+      "message": "Somewhat surprised that doxygen doesn\u0027t need this documented. Please add one, explaining why it\u0027s different from `std::is_same`.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 71
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
