@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58add6e8_8705ffb7",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:15:12Z",
+      "side": 1,
+      "message": "I\u0027ll modify it to do the deeply nested element index, as you thought it was.",
+      "parentUuid": "ad77573d_f2ddb04c",
+      "range": {
+        "startLine": 543,
+        "startChar": 47,
+        "endLine": 543,
+        "endChar": 56
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cdcb5f3_b6de8fe3",
         "filename": "src/tint/traits.h",
         "patchSetId": 8
