@@ -35,6 +35,11 @@ class Program;
 
 namespace tint::writer::hlsl {
 
+// // under tint:sem:: ?
+// struct InterStageVariableInfo {
+
+// };
+
 /// Configuration options used for generating HLSL.
 struct Options {
     /// Constructor
@@ -56,6 +61,8 @@ struct Options {
     /// Options used to specify a mapping of binding points to indices into a UBO
     /// from which to load buffer sizes.
     ArrayLengthFromUniformOptions array_length_from_uniform = {};
+
+    std::array<sem::InterStageVariableInfo, 16> interstage_variables;
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(root_constant_binding_point,
