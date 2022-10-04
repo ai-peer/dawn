@@ -21,7 +21,7 @@ namespace {
 
 TEST(Bitset, Length) {
     Bitset<8> bits;
-    EXPECT_EQ(bits.Length(), 0u);
+    EXPECT_EQ(bits.Length(), 8u);
     bits.Resize(100u);
     EXPECT_EQ(bits.Length(), 100u);
 }
