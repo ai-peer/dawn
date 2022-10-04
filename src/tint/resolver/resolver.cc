@@ -1997,7 +1997,13 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     IntrinsicTable::Builtin builtin;
     {
         auto arg_tys = utils::Transform(args, [](auto* arg) { return arg->Type(); });
-        builtin = intrinsic_table_->Lookup(builtin_type, arg_tys, expr->source);
+
+        auto stage = sem::EvaluationStage::kConstant;
+        for (auto* arg : args) {
+            stage = sem::EarliestStage(stage, arg->Stage());
+        }
+
+        builtin = intrinsic_table_->Lookup(builtin_type, arg_tys, stage, expr->source);
         if (!builtin.sem) {
             return nullptr;
         }
