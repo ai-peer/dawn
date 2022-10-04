@@ -100,7 +100,8 @@ declare_args() {
 
 # UWP only supports CoreWindow for windowing
 dawn_supports_glfw_for_windowing =
-    (is_win && !dawn_is_winuwp) || (is_linux && !is_chromeos) || is_mac
+    (is_win && !dawn_is_winuwp) || (is_linux && !is_chromeos) || is_mac ||
+    is_android
 
 # Much of the GL backend code is shared, so define a convenience var.
 dawn_enable_opengl = dawn_enable_opengles || dawn_enable_desktop_gl
