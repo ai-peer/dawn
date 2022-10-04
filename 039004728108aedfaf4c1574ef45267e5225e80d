@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8d170ba_b5c2b157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-10-04T01:55:58Z",
+      "side": 1,
+      "message": "Seems fine to me, but I am not confident enough about this change to +2... Will wait for Corentin to double check.",
+      "revId": "039004728108aedfaf4c1574ef45267e5225e80d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
