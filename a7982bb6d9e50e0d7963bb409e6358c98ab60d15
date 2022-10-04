@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cabc73f_33704cff",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 963,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-04T18:38:11Z",
+      "side": 1,
+      "message": "Done. I wasn\u0027t sure how useful that was here as it\u0027s the next function up.",
+      "parentUuid": "4470a1b1_808ab1bf",
+      "range": {
+        "startLine": 963,
+        "startChar": 58,
+        "endLine": 963,
+        "endChar": 62
+      },
+      "revId": "a7982bb6d9e50e0d7963bb409e6358c98ab60d15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cdf8082_636b48d1",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-10-04T18:12:35Z",
       "side": 1,
       "message": "`/* allow_inferred */ false`",
+      "revId": "a7982bb6d9e50e0d7963bb409e6358c98ab60d15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0787fdd2_84dce0f3",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 970,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-04T18:38:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cdf8082_636b48d1",
       "revId": "a7982bb6d9e50e0d7963bb409e6358c98ab60d15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
