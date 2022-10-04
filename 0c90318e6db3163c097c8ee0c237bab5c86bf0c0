@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ee7d01_98fc796c",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2009,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b33c76_3a98b9e2",
+      "range": {
+        "startLine": 2005,
+        "startChar": 0,
+        "endLine": 2009,
+        "endChar": 9
+      },
+      "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2b64a7e_210b07e6",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Materialization doesn\u0027t affect evaluation stage, so that should be fine.",
       "parentUuid": "48efcb20_65a5bfef",
+      "range": {
+        "startLine": 2025,
+        "startChar": 0,
+        "endLine": 2035,
+        "endChar": 5
+      },
+      "revId": "0c90318e6db3163c097c8ee0c237bab5c86bf0c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19b7f40a_2d50e768",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2035,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:22:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc92b95_3c444bd7",
       "range": {
         "startLine": 2025,
         "startChar": 0,
