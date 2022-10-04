@@ -39,7 +39,7 @@ class Bitset {
 
   public:
     /// Constructor
-    Bitset() = default;
+    Bitset();
 
     /// Destructor
     ~Bitset() = default;
@@ -92,10 +92,33 @@ class Bitset {
         return Bit{word, mask};
     }
 
+    /// Const index operator
+    /// @param index the index of the bit to access
+    /// @return bool value of the indexed bit
+    bool operator[](size_t index) const {
+        const auto& word = vec_[index / kWordBits];
+        auto mask = static_cast<Word>(1) << (index % kWordBits);
+        return word & mask;
+    }
+
+    bool IsEmpty() const {
+        for (auto word : vec_) {
+            if (word) {
+                return false;
+            }
+        }
+        return true;
+    }
+
   private:
     Vector<size_t, NumWords(N)> vec_;
     size_t len_ = 0;
 };
+
+template <size_t N>
+Bitset<N>::Bitset() {
+    Resize(NumWords(N));
+}
 
 }  // namespace tint::utils
 
