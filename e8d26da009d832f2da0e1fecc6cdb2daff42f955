@@ -39,6 +39,30 @@
       },
       "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6311e0_76363061",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-04T03:13:21Z",
+      "side": 1,
+      "message": "I was worried I might break compilation on existing code - but you\u0027re right; it looks like nothing is using this and it can more simply be removed entirely.",
+      "parentUuid": "ee281cb3_db602e94",
+      "range": {
+        "startLine": 885,
+        "startChar": 4,
+        "endLine": 886,
+        "endChar": 91
+      },
+      "revId": "e8d26da009d832f2da0e1fecc6cdb2daff42f955",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
