@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a2fe6c_f7b714c1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:22:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58add6e8_8705ffb7",
+      "range": {
+        "startLine": 543,
+        "startChar": 47,
+        "endLine": 543,
+        "endChar": 56
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cdcb5f3_b6de8fe3",
@@ -85,6 +109,30 @@
       "writtenOn": "2022-10-04T17:27:08Z",
       "side": 1,
       "message": "Somewhat surprised that doxygen doesn\u0027t need this documented. Please add one, explaining why it\u0027s different from `std::is_same`.",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 71
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8495b44_edaf36a1",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:22:52Z",
+      "side": 1,
+      "message": "Doxygen would have failed. I temporarily disabled that target locally. Fixed.",
+      "parentUuid": "2cdcb5f3_b6de8fe3",
       "range": {
         "startLine": 91,
         "startChar": 0,
