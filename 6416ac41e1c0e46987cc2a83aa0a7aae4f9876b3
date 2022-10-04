@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "726be152_063353da",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "Maybe mention that this is meant to be used as for (auto o : list.Iterate()) and that it locks the list during the iteration?\n\nAlso could we have tiny tests?",
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6ec2e1_24db2a97",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 812,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a small comment explaining that we manually add the textures to the pending command context so that they are exported. The link between the two sections might not be immediately obvious.",
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12a52143_bca19c74",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 16
@@ -14,6 +48,30 @@
       "writtenOn": "2022-10-04T07:24:00Z",
       "side": 1,
       "message": "What if there\u0027s no pending command context? Can we instead do what the old implementation did i.e. if ExecutePendingCommandContext() doesn\u0027t set the signal fence, try simply doing SynchronizeBefore/After and call NextSerial?\n\nAlso, we\u0027re adding the texture to the command context\u0027s shared texture list even though it might not be used by any pending commands - not a big deal, but feels like it violates some layering semantics.",
+      "range": {
+        "startLine": 688,
+        "startChar": 4,
+        "endLine": 689,
+        "endChar": 49
+      },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9daca251_96837af3",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "There is always a pending comment context (it is create on Device creation, and recreated on each submit).\n\nYeah the pending command context, should probably a RecordingContext because it doesn\u0027t necessarily need to hold commands. I thought we have an issue to create some sort of CommandRecordingContextBase because the idea keeps coming up, but I can\u0027t find it.",
+      "parentUuid": "12a52143_bca19c74",
       "range": {
         "startLine": 688,
         "startChar": 4,
@@ -43,6 +101,97 @@
         "endLine": 697,
         "endChar": 53
       },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "949815fc_b71113f0",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these two pieces of validation be ASSERTS instead? My understanding is that we should always have a fence signal value if we get to here, either because we used the texture, or because Destroy was called (calling DestroyImpl, calling AcquireAndReleaseExternalTexture)",
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ecf815_e7387b54",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "nit: Maybe we could use GetUsage() | CopyDst | CopySrc to try to get VK_IMAGE_LAYOUT_GENERAL?",
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6111e8_48274194",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "nit: Why did the error messages change? IMHO the previous ones where a bit more understandable to developers compared to giving them the name of Dawn-internal enums.",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 888,
+        "endChar": 0
+      },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5ac47b_c47b0305",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 903,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "ditto: this could likely be an ASSERT?",
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbab5c11_12294f96",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-04T14:51:09Z",
+      "side": 1,
+      "message": "This is a bit unfortunate because user code will have to check that the device is not lost each time they want to export the texture. Since we\u0027re giving a D3D12 fence value (which is not an object implicitly destroyed by the loss), it seems like it could be fine to have the export work? Am I missing something? Ditto for Vulkan with semaphore FD.",
       "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
