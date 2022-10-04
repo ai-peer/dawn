@@ -24,6 +24,23 @@
 
 namespace tint::sem {
 
+// temp
+enum class InterStageComponentType {
+    Sint,
+    Uint,
+    Float,
+};
+
+struct InterStageVariableInfo {
+    uint32_t location;
+    // sem::Type type;
+
+    InterStageComponentType type;
+    uint32_t componentCount;
+
+    // std::string typeStr;
+};
+
 /// BindingPoint holds a group and binding index.
 struct BindingPoint {
     /// The `@group` part of the binding point
