@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad77573d_f2ddb04c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-04T18:14:29Z",
+      "side": 1,
+      "message": "Currently, this isn\u0027t what you described. I don\u0027t add the input `index` to \u0027i`. I could do that, of course. Won\u0027t make a difference right now since I only need this for vectors. If I were to use it for matrices right now, we\u0027d get indices 0..n for column size n for each column.",
+      "parentUuid": "026e1f83_e82ee8c5",
+      "range": {
+        "startLine": 543,
+        "startChar": 47,
+        "endLine": 543,
+        "endChar": 56
+      },
+      "revId": "596434303cac32e60e2aac78dd1228b04479dae6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2cdcb5f3_b6de8fe3",
         "filename": "src/tint/traits.h",
         "patchSetId": 8
