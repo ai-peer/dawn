@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a52143_bca19c74",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 689,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-04T07:24:00Z",
+      "side": 1,
+      "message": "What if there\u0027s no pending command context? Can we instead do what the old implementation did i.e. if ExecutePendingCommandContext() doesn\u0027t set the signal fence, try simply doing SynchronizeBefore/After and call NextSerial?\n\nAlso, we\u0027re adding the texture to the command context\u0027s shared texture list even though it might not be used by any pending commands - not a big deal, but feels like it violates some layering semantics.",
+      "range": {
+        "startLine": 688,
+        "startChar": 4,
+        "endLine": 689,
+        "endChar": 49
+      },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c519b1_e73cb269",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-04T07:24:00Z",
+      "side": 1,
+      "message": "We should update the comments in D3D12Backend.h to state that EndAccess() also destroys the texture. IIRC many of the D3D12SharedHandleUsageTests call EndAccess() followed by Destroy() - should we update those too?",
+      "range": {
+        "startLine": 697,
+        "startChar": 4,
+        "endLine": 697,
+        "endChar": 53
+      },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fdcd117_baffe5cd",
+        "filename": "src/dawn/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2022-10-04T07:24:00Z",
+      "side": 1,
+      "message": "nit: D3D11 texture",
+      "range": {
+        "startLine": 1108,
+        "startChar": 14,
+        "endLine": 1108,
+        "endChar": 19
+      },
+      "revId": "6416ac41e1c0e46987cc2a83aa0a7aae4f9876b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
