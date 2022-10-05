@@ -67,6 +67,7 @@
 #include "src/tint/transform/unwind_discard_functions.h"
 #include "src/tint/transform/vectorize_scalar_matrix_constructors.h"
 #include "src/tint/transform/zero_init_workgroup_memory.h"
+#include "src/tint/utils/bitset.h"
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/map.h"
 #include "src/tint/utils/scoped_assignment.h"
@@ -3942,20 +3943,38 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
     line(b) << "struct " << StructName(str) << " {";
     {
         ScopedIndent si(b);
+        auto& pipeline_stage_uses = str->PipelineStageUses();
+        // HLSL compiliers are responsible for register allocation among the 32 registers.
+        // We need to guarantee the allocation is stable to make it consistent for vertex outputs
+        // and fragment inputs. We do so by emit interstage placeholders for any unused location
+        // smaller than the max location used.
+        bool emit_interstage_placeholders =
+            pipeline_stage_uses.count(sem::PipelineStageUsage::kVertexOutput) ||
+            pipeline_stage_uses.count(sem::PipelineStageUsage::kFragmentInput);
+        // There can be at most 32 specific register numbers for DXBC/DXIL level.
+        utils::Bitset<32> attribute_locations;
+        attribute_locations.Resize(32);
+        uint32_t highest_attribute_location_plus_one = 0u;
+        TextBuffer builtIns;
         for (auto* mem : str->Members()) {
             auto mem_name = builder_.Symbols().NameFor(mem->Name());
             auto* ty = mem->Type();
-            auto out = line(b);
             std::string pre, post;
+            bool isBuiltIn = false;
             if (auto* decl = mem->Declaration()) {
                 for (auto* attr : decl->attributes) {
                     if (attr->Is<ast::LocationAttribute>()) {
-                        auto& pipeline_stage_uses = str->PipelineStageUses();
                         if (pipeline_stage_uses.size() != 1) {
                             TINT_ICE(Writer, diagnostics_) << "invalid entry point IO struct uses";
                         }
 
                         auto loc = mem->Location().value();
+                        // Since we always run transform::CanonicalizeEntryPointIO for hlsl
+                        // We can assume all entry point interstage variables are included in one
+                        // struct at this point
+                        attribute_locations[loc] = true;
+                        highest_attribute_location_plus_one =
+                            std::max(highest_attribute_location_plus_one, loc + 1);
                         if (pipeline_stage_uses.count(sem::PipelineStageUsage::kVertexInput)) {
                             post += " : TEXCOORD" + std::to_string(loc);
                         } else if (pipeline_stage_uses.count(
@@ -3971,6 +3990,7 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
                             TINT_ICE(Writer, diagnostics_) << "invalid use of location attribute";
                         }
                     } else if (auto* builtin = attr->As<ast::BuiltinAttribute>()) {
+                        isBuiltIn = true;
                         auto name = builtin_to_attribute(builtin->builtin);
                         if (name.empty()) {
                             diagnostics_.add_error(diag::System::Writer, "unsupported builtin");
@@ -4002,6 +4022,9 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
                 }
             }
 
+            // If member is a builtin, append at the end of the struct to make sure the HLSL
+            // compiler assign consistent register numbers to them.
+            auto out = isBuiltIn ? line(&builtIns) : line(b);
             out << pre;
             if (!EmitTypeAndName(out, ty, ast::AddressSpace::kNone, ast::Access::kReadWrite,
                                  mem_name)) {
@@ -4009,6 +4032,18 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
             }
             out << post << ";";
         }
+
+        if (emit_interstage_placeholders) {
+            for (uint32_t i = 0; i < highest_attribute_location_plus_one; i++) {
+                if (attribute_locations[i] == false) {
+                    // sparse attribute location is detected, emit a placeholder for this location
+                    auto out = line(b);
+                    out << "float4 tint_interstage_placeholder_" << i << " : TEXCOORD" << i << ";";
+                }
+            }
+        }
+
+        b->Append(builtIns);
     }
 
     line(b) << "};";
