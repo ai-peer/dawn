@@ -2534,7 +2534,7 @@ TypedExpression FunctionEmitter::MakeExpression(uint32_t id) {
             return {};
         case SkipReason::kSinkPointerIntoUse: {
             // Replace the pointer with its source reference expression.
-            auto source_expr = GetDefInfo(id)->pointer.sink_pointer_source_expr;
+            auto source_expr = GetDefInfo(id)->sink_pointer_source_expr;
             TINT_ASSERT(Reader, source_expr.type->Is<Reference>());
             return source_expr;
         }
@@ -2557,6 +2557,8 @@ TypedExpression FunctionEmitter::MakeExpression(uint32_t id) {
     }
     auto type_it = identifier_types_.find(id);
     if (type_it != identifier_types_.end()) {
+        // We have a local named definition: function parameter, let, or var
+        // declaration.
         auto name = namer_.Name(id);
         auto* type = type_it->second;
         return TypedExpression{
@@ -2585,10 +2587,13 @@ TypedExpression FunctionEmitter::MakeExpression(uint32_t id) {
     switch (inst->opcode()) {
         case SpvOpVariable: {
             // This occurs for module-scope variables.
-            auto name = namer_.Name(inst->result_id());
-            return TypedExpression{
-                parser_impl_.ConvertType(inst->type_id(), PtrAs::Ref),
-                create<ast::IdentifierExpression>(Source{}, builder_.Symbols().Register(name))};
+            auto name = namer_.Name(id);
+            // Construct the reference type, mapping storage class correctly.
+            const auto* type =
+                RemapPointerProperties(parser_impl_.ConvertType(inst->type_id(), PtrAs::Ref), id);
+            // TODO(1041): Fix access mode
+            return TypedExpression{type, create<ast::IdentifierExpression>(
+                                             Source{}, builder_.Symbols().Register(name))};
         }
         case SpvOpUndef:
             // Substitute a null value for undef.
@@ -3356,11 +3361,13 @@ bool FunctionEmitter::EmitStatementsInBasicBlock(const BlockInfo& block_info,
     for (auto id : sorted_by_index(block_info.hoisted_ids)) {
         const auto* def_inst = def_use_mgr_->GetDef(id);
         TINT_ASSERT(Reader, def_inst);
-        auto* storage_type = RemapStorageClass(parser_impl_.ConvertType(def_inst->type_id()), id);
+        // Compute the store type.  Pointers are not storable, so there is
+        // no need to remap pointer properties.
+        auto* store_type = parser_impl_.ConvertType(def_inst->type_id());
         AddStatement(create<ast::VariableDeclStatement>(
-            Source{}, parser_impl_.MakeVar(id, ast::StorageClass::kNone, storage_type, nullptr,
+            Source{}, parser_impl_.MakeVar(id, ast::StorageClass::kNone, store_type, nullptr,
                                            AttributeList{})));
-        auto* type = ty_.Reference(storage_type, ast::StorageClass::kNone);
+        auto* type = ty_.Reference(store_type, ast::StorageClass::kNone);
         identifier_types_.emplace(id, type);
     }
 
@@ -3449,6 +3456,7 @@ bool FunctionEmitter::EmitConstDefinition(const spvtools::opt::Instruction& inst
     }
 
     expr = AddressOfIfNeeded(expr, &inst);
+    expr.type = RemapPointerProperties(expr.type, inst.result_id());
     auto* let = parser_impl_.MakeLet(inst.result_id(), expr.type, expr.expr);
     if (!let) {
         return false;
@@ -3712,15 +3720,14 @@ bool FunctionEmitter::EmitStatement(const spvtools::opt::Instruction& inst) {
             const auto skip = GetSkipReason(value_id);
             if (skip != SkipReason::kDontSkip) {
                 GetDefInfo(inst.result_id())->skip = skip;
-                GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr =
-                    GetDefInfo(value_id)->pointer.sink_pointer_source_expr;
+                GetDefInfo(inst.result_id())->sink_pointer_source_expr =
+                    GetDefInfo(value_id)->sink_pointer_source_expr;
                 return true;
             }
             auto expr = AddressOfIfNeeded(MakeExpression(value_id), &inst);
             if (!expr) {
                 return false;
             }
-            expr.type = RemapStorageClass(expr.type, result_id);
             return EmitConstDefOrWriteToHoistedVar(inst, expr);
         }
 
@@ -4340,8 +4347,8 @@ TypedExpression FunctionEmitter::MakeAccessChain(const spvtools::opt::Instructio
     if (base_skip != SkipReason::kDontSkip) {
         // This can occur for AccessChain with no indices.
         GetDefInfo(inst.result_id())->skip = base_skip;
-        GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr =
-            GetDefInfo(base_id)->pointer.sink_pointer_source_expr;
+        GetDefInfo(inst.result_id())->sink_pointer_source_expr =
+            GetDefInfo(base_id)->sink_pointer_source_expr;
         return {};
     }
 
@@ -4530,9 +4537,10 @@ TypedExpression FunctionEmitter::MakeAccessChain(const spvtools::opt::Instructio
     if (sink_pointer) {
         // Capture the reference so that we can sink it into the point of use.
         GetDefInfo(inst.result_id())->skip = SkipReason::kSinkPointerIntoUse;
-        GetDefInfo(inst.result_id())->pointer.sink_pointer_source_expr = current_expr;
+        GetDefInfo(inst.result_id())->sink_pointer_source_expr = current_expr;
     }
 
+    current_expr.type = RemapPointerProperties(current_expr.type, inst.result_id());
     return current_expr;
 }
 
@@ -4799,32 +4807,27 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
             ++index;
             auto& info = def_info_[result_id];
 
-            // Determine storage class for pointer values. Do this in order because
-            // we might rely on the storage class for a previously-visited definition.
-            // Logical pointers can't be transmitted through OpPhi, so remaining
-            // pointer definitions are SSA values, and their definitions must be
-            // visited before their uses.
             const auto* type = type_mgr_->GetType(inst.type_id());
             if (type) {
+                // Determine storage class and access mode for pointer values. Do this in
+                // order because we might rely on the storage class for a previously-visited
+                // definition.
+                // Logical pointers can't be transmitted through OpPhi, so remaining
+                // pointer definitions are SSA values, and their definitions must be
+                // visited before their uses.
                 if (type->AsPointer()) {
-                    if (auto* ast_type = parser_impl_.ConvertType(inst.type_id())) {
-                        if (auto* ptr = ast_type->As<Pointer>()) {
-                            info->pointer.storage_class = ptr->storage_class;
-                        }
-                    }
                     switch (inst.opcode()) {
                         case SpvOpUndef:
                             return Fail() << "undef pointer is not valid: " << inst.PrettyPrint();
                         case SpvOpVariable:
-                            // Keep the default decision based on the result type.
+                            info->pointer = GetPointerInfo(result_id);
                             break;
                         case SpvOpAccessChain:
                         case SpvOpInBoundsAccessChain:
                         case SpvOpCopyObject:
                             // Inherit from the first operand. We need this so we can pick up
                             // a remapped storage buffer.
-                            info->pointer.storage_class =
-                                GetStorageClassForPointerValue(inst.GetSingleWordInOperand(0));
+                            info->pointer = GetPointerInfo(inst.GetSingleWordInOperand(0));
                             break;
                         default:
                             return Fail() << "pointer defined in function from unknown opcode: "
@@ -4846,32 +4849,41 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
     return true;
 }
 
-ast::StorageClass FunctionEmitter::GetStorageClassForPointerValue(uint32_t id) {
+DefInfo::Pointer FunctionEmitter::GetPointerInfo(uint32_t id) {
+    // Compute the result from first principles, for a variable.
+    auto get_from_variable = [&](const spvtools::opt::Instruction* inst) -> DefInfo::Pointer {
+        TINT_ASSERT(Reader, inst && inst->opcode() == SpvOpVariable);
+        if (const auto* module_var = parser_impl_.GetModuleVariable(id)) {
+            return DefInfo::Pointer{module_var->declared_storage_class,
+                                    module_var->declared_access};
+        }
+        // Local variables are always Function storage class, with default
+        // access mode.
+        return DefInfo::Pointer{ast::StorageClass::kFunction, ast::Access::kUndefined};
+    };
+
     auto where = def_info_.find(id);
     if (where != def_info_.end()) {
-        auto candidate = where->second.get()->pointer.storage_class;
-        if (candidate != ast::StorageClass::kInvalid) {
-            return candidate;
+        const auto& info = where->second;
+        if (info->inst.opcode() == SpvOpVariable) {
+            return get_from_variable(&(info->inst));
         }
+        // Use the cached value.
+        return info->pointer;
     }
-    const auto type_id = def_use_mgr_->GetDef(id)->type_id();
-    if (type_id) {
-        auto* ast_type = parser_impl_.ConvertType(type_id);
-        if (auto* ptr = As<Pointer>(ast_type)) {
-            return ptr->storage_class;
-        }
-    }
-    return ast::StorageClass::kInvalid;
+    return get_from_variable(def_use_mgr_->GetDef(id));
 }
 
-const Type* FunctionEmitter::RemapStorageClass(const Type* type, uint32_t result_id) {
+const Type* FunctionEmitter::RemapPointerProperties(const Type* type, uint32_t result_id) {
     if (auto* ast_ptr_type = As<Pointer>(type)) {
-        // Remap an old-style storage buffer pointer to a new-style storage
-        // buffer pointer.
-        const auto sc = GetStorageClassForPointerValue(result_id);
-        if (ast_ptr_type->storage_class != sc) {
-            return ty_.Pointer(ast_ptr_type->type, sc);
-        }
+        const auto pi = GetPointerInfo(result_id);
+        // TODO(1041): also do access mode
+        return ty_.Pointer(ast_ptr_type->type, pi.storage_class);
+    }
+    if (auto* ast_ptr_type = As<Reference>(type)) {
+        const auto pi = GetPointerInfo(result_id);
+        // TODO(1041): also do access mode
+        return ty_.Reference(ast_ptr_type->type, pi.storage_class);
     }
     return type;
 }

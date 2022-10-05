@@ -325,7 +325,7 @@ struct DefInfo {
     /// example, pointers. crbug.com/tint/98
     bool requires_hoisted_var_def = false;
 
-    /// Information about a pointer value.
+    /// Information about a pointer value, used to construct its WGSL type.
     struct Pointer {
         /// The storage class to use for this value, if it is of pointer type.
         /// This is required to carry a storage class override from a storage
@@ -334,11 +334,14 @@ struct DefInfo {
         /// This is kInvalid for non-pointers.
         ast::StorageClass storage_class = ast::StorageClass::kInvalid;
 
-        /// The expression to use when sinking pointers into their use.
-        /// When encountering a use of this instruction, we will emit this expression
-        /// instead.
-        TypedExpression sink_pointer_source_expr = {};
+        /// The declared access mode.
+        ast::Access access = ast::kUndefined;
     };
+
+    /// The expression to use when sinking pointers into their use.
+    /// When encountering a use of this instruction, we will emit this expression
+    /// instead.
+    TypedExpression sink_pointer_source_expr = {};
 
     /// Collected information about a pointer value.
     Pointer pointer;
@@ -618,19 +621,20 @@ class FunctionEmitter {
     /// @returns false on failure
     bool RegisterLocallyDefinedValues();
 
-    /// Returns the Tint storage class for the given SPIR-V ID that is a
-    /// pointer value.
+    /// Returns the pointer information needed for the given SPIR-V ID.
+    /// Assumes the given ID yields a value of pointer type.  This uses
+    /// the `def_info_` cache for any kind of ID except an OpVariable.
     /// @param id a SPIR-V ID for a pointer value
-    /// @returns the storage class
-    ast::StorageClass GetStorageClassForPointerValue(uint32_t id);
+    /// @returns the associated Pointer info
+    DefInfo::Pointer GetPointerInfo(uint32_t id);
 
-    /// Remaps the storage class for the type of a locally-defined value,
-    /// if necessary. If it's not a pointer type, or if its storage class
-    /// already matches, then the result is a copy of the `type` argument.
+    /// Remaps the storage class and access mode for the type of a
+    /// locally-defined value, if necessary. If it's not a pointer or reference
+    /// type, then the result is a copy of the `type` argument.
     /// @param type the AST type
     /// @param result_id the SPIR-V ID for the locally defined value
     /// @returns an possibly updated type
-    const Type* RemapStorageClass(const Type* type, uint32_t result_id);
+    const Type* RemapPointerProperties(const Type* type, uint32_t result_id);
 
     /// Marks locally defined values when they should get a 'let'
     /// definition in WGSL, or a 'var' definition at an outer scope.
