@@ -16,6 +16,23 @@
       "message": "PTAL! Fixes all of the failing compressed texture tests on Pixel 4, which allows me to enable ETC2 and ASTC on those devices again.",
       "revId": "517c9ca9a27bcc122029f8dd210e3da7fba79bb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cd9bcd_b7677f2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-05T13:01:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "517c9ca9a27bcc122029f8dd210e3da7fba79bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
