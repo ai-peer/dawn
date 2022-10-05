@@ -195,23 +195,23 @@ tint_symbol_2 frag_main(tint_symbol_1 tint_symbol) {
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_DifferentStages) {
     // struct Interface {
     //   @builtin(position) pos : vec4<f32>;
+    //   @location(0) col0 : f32;
     //   @location(1) col1 : f32;
-    //   @location(2) col2 : f32;
     // };
     // fn vert_main() -> Interface {
     //   return Interface(vec4<f32>(), 0.4, 0.6);
     // }
     // fn frag_main(inputs : Interface) {
-    //   const r = inputs.col1;
-    //   const g = inputs.col2;
+    //   const r = inputs.col0;
+    //   const g = inputs.col1;
     //   const p = inputs.pos;
     // }
     auto* interface_struct = Structure(
         "Interface",
         utils::Vector{
             Member("pos", ty.vec4<f32>(), utils::Vector{Builtin(ast::BuiltinValue::kPosition)}),
+            Member("col0", ty.f32(), utils::Vector{Location(0_a)}),
             Member("col1", ty.f32(), utils::Vector{Location(1_a)}),
-            Member("col2", ty.f32(), utils::Vector{Location(2_a)}),
         });
 
     Func("vert_main", utils::Empty, ty.Of(interface_struct),
@@ -223,8 +223,8 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_Di
 
     Func("frag_main", utils::Vector{Param("inputs", ty.Of(interface_struct))}, ty.void_(),
          utils::Vector{
-             Decl(Let("r", ty.f32(), MemberAccessor("inputs", "col1"))),
-             Decl(Let("g", ty.f32(), MemberAccessor("inputs", "col2"))),
+             Decl(Let("r", ty.f32(), MemberAccessor("inputs", "col0"))),
+             Decl(Let("g", ty.f32(), MemberAccessor("inputs", "col1"))),
              Decl(Let("p", ty.vec4<f32>(), MemberAccessor("inputs", "pos"))),
          },
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
@@ -234,12 +234,12 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_Di
     ASSERT_TRUE(gen.Generate()) << gen.error();
     EXPECT_EQ(gen.result(), R"(struct Interface {
   float4 pos;
+  float col0;
   float col1;
-  float col2;
 };
 struct tint_symbol {
+  float col0 : TEXCOORD0;
   float col1 : TEXCOORD1;
-  float col2 : TEXCOORD2;
   float4 pos : SV_Position;
 };
 
@@ -252,25 +252,25 @@ tint_symbol vert_main() {
   const Interface inner_result = vert_main_inner();
   tint_symbol wrapper_result = (tint_symbol)0;
   wrapper_result.pos = inner_result.pos;
+  wrapper_result.col0 = inner_result.col0;
   wrapper_result.col1 = inner_result.col1;
-  wrapper_result.col2 = inner_result.col2;
   return wrapper_result;
 }
 
 struct tint_symbol_2 {
+  float col0 : TEXCOORD0;
   float col1 : TEXCOORD1;
-  float col2 : TEXCOORD2;
   float4 pos : SV_Position;
 };
 
 void frag_main_inner(Interface inputs) {
-  const float r = inputs.col1;
-  const float g = inputs.col2;
+  const float r = inputs.col0;
+  const float g = inputs.col1;
   const float4 p = inputs.pos;
 }
 
 void frag_main(tint_symbol_2 tint_symbol_1) {
-  const Interface tint_symbol_4 = {tint_symbol_1.pos, tint_symbol_1.col1, tint_symbol_1.col2};
+  const Interface tint_symbol_4 = {tint_symbol_1.pos, tint_symbol_1.col0, tint_symbol_1.col1};
   frag_main_inner(tint_symbol_4);
   return;
 }
