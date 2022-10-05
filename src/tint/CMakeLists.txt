@@ -1238,6 +1238,7 @@ if(TINT_BUILD_TESTS)
       writer/hlsl/generator_impl_identifier_test.cc
       writer/hlsl/generator_impl_if_test.cc
       writer/hlsl/generator_impl_import_test.cc
+      writer/hlsl/generator_impl_interstage_var_test.cc
       writer/hlsl/generator_impl_loop_test.cc
       writer/hlsl/generator_impl_member_accessor_test.cc
       writer/hlsl/generator_impl_module_constant_test.cc
