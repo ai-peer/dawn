@@ -229,7 +229,7 @@ fn main(input : FragmentIn) -> @location(0) vec4<f32> {
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 }
 
-// Tests that shaders I/O structs that us compatible locations but are not sorted by hand can link.
+// Tests that shaders I/O structs that use compatible locations but are not sorted by hand can link.
 TEST_P(ShaderTests, WGSLUnsortedStructIO) {
     std::string vertexShader = R"(
 struct VertexIn {
@@ -315,6 +315,80 @@ fn fragmentMain(input : VertexOut) -> @location(0) vec4<f32> {
     rpDesc.cAttributes[0].format = wgpu::VertexFormat::Float32x3;
     rpDesc.cAttributes[1].shaderLocation = 1;
     rpDesc.cAttributes[1].format = wgpu::VertexFormat::Float32x4;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+}
+
+// Tests that spare input output locations should work properly.
+TEST_P(ShaderTests, WGSLInterstageVariablesSparse) {
+    std::string shader = R"(
+struct ShaderIO {
+    @builtin(position) position : vec4<f32>,
+    @location(1) attribute1 : vec4<f32>,
+    @location(3) attribute3 : vec4<f32>,
+}
+
+@vertex
+fn vertexMain() -> ShaderIO {
+    var output : ShaderIO;
+    output.position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+    output.attribute1 = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+    output.attribute3 = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+    return output;
+}
+
+@fragment
+fn fragmentMain(input : ShaderIO) -> @location(0) vec4<f32> {
+    return input.attribute1;
+})";
+    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+
+    utils::ComboRenderPipelineDescriptor rpDesc;
+    rpDesc.vertex.module = shaderModule;
+    rpDesc.vertex.entryPoint = "vertexMain";
+    rpDesc.cFragment.module = shaderModule;
+    rpDesc.cFragment.entryPoint = "fragmentMain";
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+}
+
+// Tests that interstage built-in inputs and outputs usage mismatch don't mess up with input-output
+// locations.
+TEST_P(ShaderTests, WGSLInterstageVariablesBuiltinsMismatched) {
+    std::string shader = R"(
+struct VertexOut {
+    @builtin(position) position : vec4<f32>,
+    @location(1) attribute1 : f32,
+    @location(3) attribute3 : vec4<f32>,
+}
+
+struct FragmentIn {
+    @location(3) attribute3 : vec4<f32>,
+    @builtin(front_facing) front_facing : bool,
+    @location(1) attribute1 : f32,
+    @builtin(position) position : vec4<f32>,
+}
+
+@vertex
+fn vertexMain() -> VertexOut {
+    var output : VertexOut;
+    output.position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+    output.attribute1 = 1.0;
+    output.attribute3 = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+    return output;
+}
+
+@fragment
+fn fragmentMain(input : FragmentIn) -> @location(0) vec4<f32> {
+    _ = input.front_facing;
+    _ = input.position.x;
+    return input.attribute3;
+})";
+    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+
+    utils::ComboRenderPipelineDescriptor rpDesc;
+    rpDesc.vertex.module = shaderModule;
+    rpDesc.vertex.entryPoint = "vertexMain";
+    rpDesc.cFragment.module = shaderModule;
+    rpDesc.cFragment.entryPoint = "fragmentMain";
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
 }
 
