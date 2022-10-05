@@ -16,6 +16,24 @@
       "message": "Just to check, this is the abstract path so, ut is `uint64_t`. What happens if `e2u` is `std::numeric_limits\u003cuint64_t\u003e::max()` ? We then +1 here and possibly wrap?\n\nDoes this need to be the next size category up, or be a checked cast? Or is this validated out earlier to clamp `e2u` to be inside the valid range?",
       "revId": "dbee487fc3201a2b57a3044147de804a06d18262",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f7693db_83b72be9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1463,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-05T15:41:10Z",
+      "side": 1,
+      "message": "e2u cannot be max, it\u0027s strictly less than bit_width (i.e. 32 or 64).",
+      "parentUuid": "d387c09c_d9cf95e8",
+      "revId": "dbee487fc3201a2b57a3044147de804a06d18262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
