@@ -66,6 +66,7 @@ class Device final : public DeviceBase {
     external_semaphore::Service* GetExternalSemaphoreService() const;
 
     CommandRecordingContext* GetPendingRecordingContext();
+    MaybeError SplitRecordingContext(CommandRecordingContext* recordingContext);
     MaybeError SubmitPendingCommands();
 
     void EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator);
@@ -206,6 +207,7 @@ class Device final : public DeviceBase {
     std::vector<std::string> mDebugMessages;
 
     MaybeError PrepareRecordingContext();
+    MaybeError RestartRecordingContext(CommandRecordingContext* recordingContext);
     void RecycleCompletedCommands();
 
     struct CommandPoolAndBuffer {
