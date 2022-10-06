@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b31739f6_99a3940f",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T20:41:22Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fc11848_cd24b9f7",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 1
@@ -48,6 +65,75 @@
       "writtenOn": "2022-10-06T19:12:05Z",
       "side": 1,
       "message": "This ASSERT represents my biggest concern about this approach. When recording we\u0027re using the context that was passed in, but then we split using the current recording context. They\u0027re the same thing, but it feels very awkward looking at it from this point in the code.\n\nUnfortunately all of the command buffer init stuff only operates on the current recording context, so this is unavoidable without a much larger refactoring.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603401be_22aa9105",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T20:41:22Z",
+      "side": 1,
+      "message": "Seems fine until such time as we do a refactor.\n\nWould it make sense for this assert to be inside SplitPendingRecordingContext? (I know it would pass an arg used only for an ASSERT, but that should be optimizable)",
+      "parentUuid": "9fc11848_cd24b9f7",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a04246f_353fa091",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T20:41:22Z",
+      "side": 1,
+      "message": "Is there something TO DO here? Seems like it\u0027s describing what\u0027s already implemented.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55956bb9_dba59da7",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T20:41:22Z",
+      "side": 1,
+      "message": "Unsure if this is the best set type here, someone else might know if we should be using an absl set or something? In chromium we might use flat_set but we don\u0027t have that.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d02ebf38_31b1ada7",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T20:41:22Z",
+      "side": 1,
+      "message": "nit: Maybe PrepareRecordingContext should wrap another function like ReprepareRecordingContext instead of the bool arg?",
       "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
