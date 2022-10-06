@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "610a8b5a_17b5044b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T23:37:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15575e7c_ad32ec29",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T23:37:45Z",
+      "side": 1,
+      "message": "nit: prefix like `mRenderPassDepthStencilAttachments`",
+      "range": {
+        "startLine": 58,
+        "startChar": 27,
+        "endLine": 58,
+        "endChar": 60
+      },
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
