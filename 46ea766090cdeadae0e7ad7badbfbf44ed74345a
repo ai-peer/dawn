@@ -39,6 +39,29 @@
       },
       "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641099bd_a8432858",
+        "filename": "test/tint/expressions/literals/nan.spvasm.expected.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:50:06Z",
+      "side": 1,
+      "message": "symptom of the bug",
+      "range": {
+        "startLine": 4,
+        "startChar": 37,
+        "endLine": 4,
+        "endChar": 42
+      },
+      "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
