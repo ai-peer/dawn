@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f1d876_833b3477",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-06T19:21:51Z",
+      "side": 1,
+      "message": "(it will default with the zero-initialized common type value, if no `Default` is provided.)",
+      "parentUuid": "f38dee04_6b4fe76a",
+      "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f56c6f25_2b54f53a",
