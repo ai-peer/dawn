@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d924343f_bfe6f578",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:49:45Z",
+      "side": 1,
+      "message": "Nicer.  But has a bug in emission of the exponent.",
+      "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d74979b_886575ad",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:49:45Z",
+      "side": 1,
+      "message": "Have to switch back to decimal emission.\nThe output now gets things like  +80 when it should be +128",
+      "range": {
+        "startLine": 147,
+        "startChar": 43,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
