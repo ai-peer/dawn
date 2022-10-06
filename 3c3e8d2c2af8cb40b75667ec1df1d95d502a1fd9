@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4954f03d_44f3cff5",
+        "filename": "test/tint/bug/tint/1697.wgsl.expected.dxc.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-06T18:33:30Z",
+      "side": 1,
+      "message": "Can you change the test case so the value gets used somewhere and shows up in these files?",
+      "revId": "3c3e8d2c2af8cb40b75667ec1df1d95d502a1fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
