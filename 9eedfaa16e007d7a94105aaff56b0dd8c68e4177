@@ -41,6 +41,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1390e8d1_ed6e1ad4",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-06T19:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aea9b47_2a01313e",
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cb7b0ae_18f9ab88",
@@ -64,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38376efc_6e98adf5",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-06T19:53:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cb7b0ae_18f9ab88",
+      "range": {
+        "startLine": 246,
+        "startChar": 39,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b371e70d_3c846f0a",
@@ -77,6 +119,30 @@
       "writtenOn": "2022-10-06T18:44:36Z",
       "side": 1,
       "message": "nice",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04b5e86d_6ebab8b6",
+        "filename": "test/tint/bug/chromium/1350147.wgsl.expected.wgsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-06T19:53:06Z",
+      "side": 1,
+      "message": "Unfortunately some numbers still do this sort of thing with doubles, and it appears to vary with compiler, which is unfortunate. They\u0027re certainly less frequent though.",
+      "parentUuid": "b371e70d_3c846f0a",
       "range": {
         "startLine": 7,
         "startChar": 18,
