@@ -16,6 +16,24 @@
       "message": "Can you change the test case so the value gets used somewhere and shows up in these files?",
       "revId": "3c3e8d2c2af8cb40b75667ec1df1d95d502a1fd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e12c2416_221ffd85",
+        "filename": "test/tint/bug/tint/1697.wgsl.expected.dxc.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-06T19:54:02Z",
+      "side": 1,
+      "message": "Done, but the number itself is really not interesting. The test really exists to make sure that validation doesn\u0027t moan about the `override`s getting replaced with `const`s.",
+      "parentUuid": "4954f03d_44f3cff5",
+      "revId": "3c3e8d2c2af8cb40b75667ec1df1d95d502a1fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
