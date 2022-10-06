@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f38dee04_6b4fe76a",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-06T19:19:58Z",
+      "side": 1,
+      "message": "Nope, `Switch` does that for you.",
+      "parentUuid": "897bf203_3d66436c",
+      "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f56c6f25_2b54f53a",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-06T19:17:23Z",
       "side": 1,
       "message": "nit: if is an abstract",
+      "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998dca79_d3df26e7",
+        "filename": "src/tint/sem/type.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-06T19:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f56c6f25_2b54f53a",
       "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
