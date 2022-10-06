@@ -41,6 +41,9 @@ struct CommandRecordingContext {
     // For Device state tracking only.
     VkCommandPool commandPool = VK_NULL_HANDLE;
     bool used = false;
+
+    std::vector<VkCommandBuffer> commandBufferList;
+    std::vector<VkCommandPool> commandPoolList;
 };
 
 }  // namespace dawn::native::vulkan

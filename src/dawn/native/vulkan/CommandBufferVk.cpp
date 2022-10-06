@@ -24,6 +24,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/EnumMaskIterator.h"
 #include "dawn/native/RenderBundle.h"
+#include "dawn/native/vulkan/AdapterVk.h"
 #include "dawn/native/vulkan/BindGroupVk.h"
 #include "dawn/native/vulkan/BufferVk.h"
 #include "dawn/native/vulkan/CommandRecordingContext.h"
@@ -887,6 +888,23 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
                                             const ComputePassResourceUsage& resourceUsages) {
     Device* device = ToBackend(GetDevice());
 
+    // dawn:1564: Clearing a depth/stencil buffer in a render pass and then sampling it in a
+    // compute pass in the same command buffer causes a crash on Qualcomm GPUs. To work around that
+    // bug, split the command buffer any time we can detect that situation.
+    if (ToBackend(device->GetAdapter())->IsAndroidQualcomm() &&
+        !renderPassDepthStencilAttachments.empty()) {
+        for (auto texture : resourceUsages.referencedTextures) {
+            if (texture->GetFormat().HasDepthOrStencil() &&
+                renderPassDepthStencilAttachments.find(texture) !=
+                    renderPassDepthStencilAttachments.end()) {
+                // Identified a potential crash case, split the command buffer.
+                DAWN_TRY(device->SplitRecordingContext(recordingContext));
+                renderPassDepthStencilAttachments.clear();
+                break;
+            }
+        }
+    }
+
     // Write timestamp at the beginning of compute pass if it's set
     if (computePassCmd->beginTimestamp.querySet.Get() != nullptr) {
         RecordWriteTimestampCmd(recordingContext, device,
@@ -1037,6 +1055,14 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
     DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
+
+    if (ToBackend(device->GetAdapter())->IsAndroidQualcomm() &&
+        renderPassCmd->attachmentState->HasDepthStencilAttachment()) {
+        // dawn:1564: Need to track depth/stencil textures used as render pass attachments to
+        // work around a Qualcomm bug.
+        renderPassDepthStencilAttachments.insert(
+            renderPassCmd->depthStencilAttachment.view->GetTexture());
+    }
 
     // Write timestamp at the beginning of render pass if it's set.
     if (renderPassCmd->beginTimestamp.querySet.Get() != nullptr) {
