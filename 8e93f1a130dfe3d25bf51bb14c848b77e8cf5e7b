@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdc29030_aaf0dfa3",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T22:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b31739f6_99a3940f",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fc11848_cd24b9f7",
@@ -123,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb3d4e3_9abd6da5",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T22:18:45Z",
+      "side": 1,
+      "message": "I refactored this in patchset 2, but then liked the way Austin\u0027s suggestion structured it better so I\u0027ve gone with something much closer to that now.",
+      "parentUuid": "603401be_22aa9105",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a04246f_353fa091",
@@ -136,6 +172,24 @@
       "writtenOn": "2022-10-06T20:41:22Z",
       "side": 1,
       "message": "Is there something TO DO here? Seems like it\u0027s describing what\u0027s already implemented.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829a5985_04646e70",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T22:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a04246f_353fa091",
       "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -175,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9d915ad_cfc397e5",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T22:18:45Z",
+      "side": 1,
+      "message": "In this case I was just mimicking PassResourceUsage.h, which also uses a std::set.",
+      "parentUuid": "55956bb9_dba59da7",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d02ebf38_31b1ada7",
@@ -188,6 +260,24 @@
       "writtenOn": "2022-10-06T20:41:22Z",
       "side": 1,
       "message": "nit: Maybe PrepareRecordingContext should wrap another function like ReprepareRecordingContext instead of the bool arg?",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e4885c_32729b73",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T22:18:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d02ebf38_31b1ada7",
       "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
