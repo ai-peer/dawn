@@ -60,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae598f7e_1cb49674",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T17:33:30Z",
+      "side": 1,
+      "message": "Related, if there\u0027s an empty BGL at the end of an explicit pipeline layout, we should add a test that getBGL at that index works.\n\nAlso do we have a test that in that case, a setBindGroup is required for that trailing empty BGL index?",
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e267f98_f310e33e",
         "filename": "src/dawn/native/Pipeline.cpp",
         "patchSetId": 1
@@ -71,6 +88,30 @@
       "writtenOn": "2022-10-06T16:44:49Z",
       "side": 1,
       "message": "nit: `... \"in %s\", mLayout.Get)`\n\n\nif we want a nice name for implicit pipeline layouts, maybe you could generate it in PipelineLayout::CreateDefault as `\"implicit pipeline layout for [Pipeline %s]\", pipelineDesc-\u003elabel`",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 44
+      },
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c7ce02_0dfdae8b",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-06T17:33:30Z",
+      "side": 1,
+      "message": "This error is for a method on the pipeline. That might mean it already outputs the pipeline name with the error? I\u0027m not sure.",
+      "parentUuid": "5e267f98_f310e33e",
       "range": {
         "startLine": 203,
         "startChar": 27,
