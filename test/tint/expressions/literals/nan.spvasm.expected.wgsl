@@ -1,7 +1,7 @@
 var<private> out_var_SV_TARGET : vec4<f32>;
 
 fn main_1() {
-  out_var_SV_TARGET = vec4<f32>(0x1.9p+128f, 0x1.9p+128f, 0x1.9p+128f, 0x1.9p+128f);
+  out_var_SV_TARGET = vec4<f32>(0x1.9p+80f, 0x1.9p+80f, 0x1.9p+80f, 0x1.9p+80f);
   return;
 }
 
