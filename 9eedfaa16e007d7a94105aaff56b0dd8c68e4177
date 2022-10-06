@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b18143_c3ab4683",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T18:44:36Z",
+      "side": 1,
+      "message": "I\u0027m just archaic.\nhttps://en.wiktionary.org/wiki/tidyness",
+      "range": {
+        "startLine": 116,
+        "startChar": 54,
+        "endLine": 116,
+        "endChar": 55
+      },
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aea9b47_2a01313e",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T18:44:36Z",
+      "side": 1,
+      "message": "nit:  This looks like a copy-paste with a few constants changed and some uint32_t -\u003e uint64_t.\nHm. There is also FloatToString and DoubleToString.  It\u0027s a lot isn\u0027t it.\n\nShould this use a common routine with templated parameters?",
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb7b0ae_18f9ab88",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T18:44:36Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure this should be 1024.\n\nNo test case covering this?\n\n(Even if the WGSL cases won\u0027t cover this, let\u0027s not leave this gotcha in.)",
+      "range": {
+        "startLine": 246,
+        "startChar": 39,
+        "endLine": 246,
+        "endChar": 44
+      },
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b371e70d_3c846f0a",
+        "filename": "test/tint/bug/chromium/1350147.wgsl.expected.wgsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T18:44:36Z",
+      "side": 1,
+      "message": "nice",
+      "range": {
+        "startLine": 7,
+        "startChar": 18,
+        "endLine": 7,
+        "endChar": 26
+      },
+      "revId": "9eedfaa16e007d7a94105aaff56b0dd8c68e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
