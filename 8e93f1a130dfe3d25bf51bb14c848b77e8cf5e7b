@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd729737_0fc027a9",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T21:37:12Z",
+      "side": 1,
+      "message": "I think the refactor wouldn\u0027t be so large, and it would be more clear than adding the `splitting` bool to PrepareRecordingContext.\n\nI think we would need to pull out the middle of `PrepareRecordingContext` such that it returns a VkCommandBuffer,VkCommandPool pair, instead of storing them as members.\n\nso PrepareRecordingContext could look like:\n```\nASSERT(!used);\nDAWN_TRY_ASSIGN(\n   [mRecordingContext.commandBuffer, mRecordingContext.commandPool],\n   BeginNewVkCommandBuffer());\ncommandPoolList.push_back(...);\ncommandBufferList.push_back(...);\nreturn {};\n```\n\nSplitPendingRecordingContext could look like:\n```\nASSERT(used);\n\nfn.EndCommandBuffer(mRecordingContext.commandBuffer);\n\nDAWN_TRY_ASSIGN(\n   [mRecordingContext.commandBuffer, mRecordingContext.commandPool],\n   BeginNewVkCommandBuffer());\ncommandPoolList.push_back(...);\ncommandBufferList.push_back(...);\nreturn {};\n```",
+      "parentUuid": "603401be_22aa9105",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a04246f_353fa091",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
         "patchSetId": 1
