@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917a11fa_be8dd002",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T19:12:05Z",
+      "side": 1,
+      "message": "PTAL, and thanks for the help talking through a potential solution!",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc11848_cd24b9f7",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-06T19:12:05Z",
+      "side": 1,
+      "message": "This ASSERT represents my biggest concern about this approach. When recording we\u0027re using the context that was passed in, but then we split using the current recording context. They\u0027re the same thing, but it feels very awkward looking at it from this point in the code.\n\nUnfortunately all of the command buffer init stuff only operates on the current recording context, so this is unavoidable without a much larger refactoring.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
