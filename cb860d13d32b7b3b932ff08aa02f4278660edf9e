@@ -120,6 +120,30 @@
       },
       "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb32a02c_1fe4f911",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T17:44:28Z",
+      "side": 1,
+      "message": "ah, yes - it has \"Validating GetBindGroupLayout (%u) on %s\"",
+      "parentUuid": "33c7ce02_0dfdae8b",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 44
+      },
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
