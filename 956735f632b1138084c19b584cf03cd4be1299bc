@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "897bf203_3d66436c",
+        "filename": "src/tint/sem/type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T19:17:23Z",
+      "side": 1,
+      "message": "Does this need a `[\u0026](Default) { return false; }` case to handle bool and pointer?",
+      "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f56c6f25_2b54f53a",
+        "filename": "src/tint/sem/type.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T19:17:23Z",
+      "side": 1,
+      "message": "nit: if is an abstract",
+      "revId": "956735f632b1138084c19b584cf03cd4be1299bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
