@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c124d0db_94dfade1",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T21:48:48Z",
+      "side": 1,
+      "message": "edit: sorry that didn\u0027t quite make sense.\n\nwe could have something like:\n```\nRecordingContext::Split(Device* device) {\n\n  device-\u003efn.EndCommandBuffer(...);\n  DAWN_TRY_ASSIGN([commandBuffer, commandPool],\n                  device-\u003eBeginNewVkCommandBuffer());\n  commandPoolList.push_back(commandBuffer);\n  commandBufferList.push_back(commandPool);\n}\n```",
+      "parentUuid": "dd729737_0fc027a9",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a04246f_353fa091",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
         "patchSetId": 1
@@ -135,6 +153,24 @@
       "writtenOn": "2022-10-06T20:41:22Z",
       "side": 1,
       "message": "Unsure if this is the best set type here, someone else might know if we should be using an absl set or something? In chromium we might use flat_set but we don\u0027t have that.",
+      "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55b64f57_6aa700c6",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-06T21:48:48Z",
+      "side": 1,
+      "message": "we don\u0027t have absl sets yet though we\u0027d like to add it. I think std::set is probably OK? The size is likely to be small so I think set may be slightly faster than unordered_set in the small case.",
+      "parentUuid": "55956bb9_dba59da7",
       "revId": "8e93f1a130dfe3d25bf51bb14c848b77e8cf5e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
