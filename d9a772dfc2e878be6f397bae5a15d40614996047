@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bc0838_d3571e82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad88216a_211bd01d",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e10a99c_0b426e16",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14982b5_2443a175",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4428,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e10a99c_0b426e16",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94fe33eb_ee7bd479",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-10-06T18:42:27Z",
       "side": 1,
       "message": "nit: crbug.com/tint/1041",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f624e95_01e626c5",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4871,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94fe33eb_ee7bd479",
       "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95e1de6e_37442564",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4888,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "It\u0027s subtle.\nIt tried writing it in a more straightforward way but then ran into problems because of shenanigans with builtins not necessarily represented by ast::Vars in the standard way.",
+      "parentUuid": "aac392a9_d14a0e75",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe66c26c_e77c457f",
         "filename": "src/tint/reader/spirv/function.cc",
         "patchSetId": 4
@@ -82,6 +154,24 @@
       "writtenOn": "2022-10-06T18:42:27Z",
       "side": 1,
       "message": "nit todo format",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cd9fd9_c53e31c3",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4901,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe66c26c_e77c457f",
       "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fdd9a1b_970a5646",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4906,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b08dc95_8c2cfcf3",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd13bc67_eac98b83",
@@ -116,6 +224,24 @@
       "writtenOn": "2022-10-06T18:42:27Z",
       "side": 1,
       "message": "Do we plan on supporting this, or can we move the DISABLEd test into a bug for if we want to dot in the future? Or do we have to do this in the very near future?",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af33019a_784e22eb",
+        "filename": "src/tint/reader/spirv/function_memory_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-06T22:51:00Z",
+      "side": 1,
+      "message": "It doesn\u0027t have to be done in the near future.\nThe fuzzer could hit this if it was clever enough.  Bug 98 is sufficient to track.",
+      "parentUuid": "bd13bc67_eac98b83",
       "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
