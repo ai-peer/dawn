@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad88216a_211bd01d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "Is `Bug: tint:1041` also associated given the removed TODO?",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e10a99c_0b426e16",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4428,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "nit: TODO(crbug.com/tint/1041)",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94fe33eb_ee7bd479",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4871,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "nit: crbug.com/tint/1041",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac392a9_d14a0e75",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4888,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "Why does this always re-compute instead of returning the cached value?",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe66c26c_e77c457f",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4901,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "nit todo format",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b08dc95_8c2cfcf3",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 4906,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd13bc67_eac98b83",
+        "filename": "src/tint/reader/spirv/function_memory_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1060,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-06T18:42:27Z",
+      "side": 1,
+      "message": "Do we plan on supporting this, or can we move the DISABLEd test into a bug for if we want to dot in the future? Or do we have to do this in the very near future?",
+      "revId": "d9a772dfc2e878be6f397bae5a15d40614996047",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
