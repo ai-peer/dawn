@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf52f8ab_3ecb3119",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T13:06:53Z",
+      "side": 1,
+      "message": "PTAL again",
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1411eed4_0dcfbcca",
@@ -71,6 +88,48 @@
       "writtenOn": "2022-10-06T17:33:30Z",
       "side": 1,
       "message": "Related, if there\u0027s an empty BGL at the end of an explicit pipeline layout, we should add a test that getBGL at that index works.\n\nAlso do we have a test that in that case, a setBindGroup is required for that trailing empty BGL index?",
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9781682b_3706b7eb",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T13:06:53Z",
+      "side": 1,
+      "message": "Added the two tests you suggested (kinda).",
+      "parentUuid": "ae598f7e_1cb49674",
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82062f16_bd4135ec",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T13:06:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1411eed4_0dcfbcca",
+      "range": {
+        "startLine": 202,
+        "startChar": 75,
+        "endLine": 202,
+        "endChar": 93
+      },
       "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -136,6 +195,30 @@
       "side": 1,
       "message": "ah, yes - it has \"Validating GetBindGroupLayout (%u) on %s\"",
       "parentUuid": "33c7ce02_0dfdae8b",
+      "range": {
+        "startLine": 203,
+        "startChar": 27,
+        "endLine": 203,
+        "endChar": 44
+      },
+      "revId": "cb860d13d32b7b3b932ff08aa02f4278660edf9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc678f59_00a28537",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T13:06:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bb32a02c_1fe4f911",
       "range": {
         "startLine": 203,
         "startChar": 27,
