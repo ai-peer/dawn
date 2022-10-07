@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59877610_c02d44d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T08:25:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98efaa9e_de80e4b3",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T08:25:10Z",
+      "side": 1,
+      "message": "nit: Can we have a Toggle for this instead of directly detecting Qualcomm here? It would allow enabling / disabling the workaround easily in the future. Ditto for the other branches.",
+      "range": {
+        "startLine": 894,
+        "startChar": 9,
+        "endLine": 894,
+        "endChar": 60
+      },
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15575e7c_ad32ec29",
@@ -37,6 +77,40 @@
         "endLine": 58,
         "endChar": 60
       },
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26102bad_f7e8cb9f",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T08:25:10Z",
+      "side": 1,
+      "message": "nit: Maybe comment about what this is used for and what the order of things is.",
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e97ada_755e0725",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-07T08:25:10Z",
+      "side": 1,
+      "message": "nit: We shouldn\u0027t need a 1-1 relationship between command pools and command buffers. All the command buffers for the recording context could be sharing a single pool. It would only require changing the tracking of CommandPoolAndBuffer to CommandPoolAndBufferS that tracks multiple buffers for a single command pool.",
       "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
