@@ -101,5 +101,69 @@ TEST_F(ResolverPtrRefTest, DefaultPtrAddressSpace) {
     EXPECT_EQ(TypeOf(storage_ptr)->As<sem::Pointer>()->Access(), ast::Access::kRead);
 }
 
+TEST_F(ResolverPtrRefTest, AddressOf_FullPointer_Struct) {
+    // struct S { a : i32, b : i32 };
+    // var s : S;
+    // &s
+
+    auto* s = Structure("S", utils::Vector{Member("a", ty.i32()), Member("b", ty.i32())});
+    auto* v = Var("s", ty.Of(s));
+    auto* expr = AddressOf(v);
+
+    WrapInFunction(v, expr);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    ASSERT_TRUE(TypeOf(expr)->Is<sem::Pointer>());
+    ASSERT_FALSE(TypeOf(expr)->As<sem::Pointer>()->IsPartial());
+}
+
+TEST_F(ResolverPtrRefTest, AddressOf_PartialPointer_Struct) {
+    // struct S { a : i32, b : i32 };
+    // var s : S;
+    // &s.a
+
+    auto* s = Structure("S", utils::Vector{Member("a", ty.i32()), Member("b", ty.i32())});
+    auto* v = Var("s", ty.Of(s));
+    auto* expr = AddressOf(MemberAccessor("s", "a"));
+
+    WrapInFunction(v, expr);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    ASSERT_TRUE(TypeOf(expr)->Is<sem::Pointer>());
+    ASSERT_TRUE(TypeOf(expr)->As<sem::Pointer>()->IsPartial());
+}
+
+TEST_F(ResolverPtrRefTest, AddressOf_FullPointer_Array) {
+    // var a : array<i32, 10>
+    // &a
+
+    auto* v = Var("a", ty.array<i32, 10>());
+    auto* expr = AddressOf(v);
+
+    WrapInFunction(v, expr);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    ASSERT_TRUE(TypeOf(expr)->Is<sem::Pointer>());
+    ASSERT_FALSE(TypeOf(expr)->As<sem::Pointer>()->IsPartial());
+}
+
+TEST_F(ResolverPtrRefTest, AddressOf_PartialPointer_Array) {
+    // var a : array<i32, 10>
+    // &a[3]
+
+    auto* v = Var("a", ty.array<i32, 10>());
+    auto* expr = AddressOf(IndexAccessor("a", 3_i));
+
+    WrapInFunction(v, expr);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    ASSERT_TRUE(TypeOf(expr)->Is<sem::Pointer>());
+    ASSERT_TRUE(TypeOf(expr)->As<sem::Pointer>()->IsPartial());
+}
+
 }  // namespace
 }  // namespace tint::resolver
