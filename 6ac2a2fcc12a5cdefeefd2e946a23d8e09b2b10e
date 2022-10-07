@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccea6e1d_585cbec2",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 894,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-07T17:24:36Z",
+      "side": 1,
+      "message": "Done, with the absurdly long toggle name \"VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass\"",
+      "parentUuid": "98efaa9e_de80e4b3",
+      "range": {
+        "startLine": 894,
+        "startChar": 9,
+        "endLine": 894,
+        "endChar": 60
+      },
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15575e7c_ad32ec29",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-10-06T23:37:45Z",
       "side": 1,
       "message": "nit: prefix like `mRenderPassDepthStencilAttachments`",
+      "range": {
+        "startLine": 58,
+        "startChar": 27,
+        "endLine": 58,
+        "endChar": 60
+      },
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05bc327_6df5bbb7",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-07T17:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15575e7c_ad32ec29",
       "range": {
         "startLine": 58,
         "startChar": 27,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf4e807_e3d11058",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-07T17:24:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26102bad_f7e8cb9f",
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62e97ada_755e0725",
@@ -111,6 +177,24 @@
       "writtenOn": "2022-10-07T08:25:10Z",
       "side": 1,
       "message": "nit: We shouldn\u0027t need a 1-1 relationship between command pools and command buffers. All the command buffers for the recording context could be sharing a single pool. It would only require changing the tracking of CommandPoolAndBuffer to CommandPoolAndBufferS that tracks multiple buffers for a single command pool.",
+      "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "885040b8_97087ba3",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-07T17:24:36Z",
+      "side": 1,
+      "message": "This won\u0027t be too bad, but it\u0027s enough shuffling that I\u0027d like to do it as an immediate follow up just to keep the focus of this CL more tightly scoped.",
+      "parentUuid": "62e97ada_755e0725",
       "revId": "6ac2a2fcc12a5cdefeefd2e946a23d8e09b2b10e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
