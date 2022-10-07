@@ -2502,9 +2502,10 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                     AddError("cannot take the address of a vector component", unary->expr->source);
                     return nullptr;
                 }
+                bool is_full_pointer = !(array || member);
 
                 ty = builder_->create<sem::Pointer>(ref->StoreType(), ref->AddressSpace(),
-                                                    ref->Access());
+                                                    ref->Access(), is_full_pointer);
 
                 source_var = expr->SourceVariable();
             } else {

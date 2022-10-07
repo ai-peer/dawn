@@ -22,8 +22,14 @@ TINT_INSTANTIATE_TYPEINFO(tint::sem::Pointer);
 
 namespace tint::sem {
 
-Pointer::Pointer(const Type* subtype, ast::AddressSpace address_space, ast::Access access)
-    : subtype_(subtype), address_space_(address_space), access_(access) {
+Pointer::Pointer(const Type* subtype,
+                 ast::AddressSpace address_space,
+                 ast::Access access,
+                 bool is_full_pointer)
+    : subtype_(subtype),
+      address_space_(address_space),
+      access_(access),
+      is_full_pointer_(is_full_pointer) {
     TINT_ASSERT(Semantic, !subtype->Is<Reference>());
     TINT_ASSERT(Semantic, access != ast::Access::kUndefined);
 }

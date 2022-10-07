@@ -30,7 +30,11 @@ class Pointer final : public Castable<Pointer, Type> {
     /// @param subtype the pointee type
     /// @param address_space the address space of the pointer
     /// @param access the resolved access control of the reference
-    Pointer(const Type* subtype, ast::AddressSpace address_space, ast::Access access);
+    /// @param is_full_pointer true if full pointer, false if partial pointer
+    Pointer(const Type* subtype,
+            ast::AddressSpace address_space,
+            ast::Access access,
+            bool is_full_pointer = true);
 
     /// Move constructor
     Pointer(Pointer&&);
@@ -52,6 +56,11 @@ class Pointer final : public Castable<Pointer, Type> {
     /// @returns the access control of the reference
     ast::Access Access() const { return access_; }
 
+    /// @returns true if pointer is a full pointer: one that does not point to a strict subset of
+    /// the originating variable it points to. Returns false if pointer is a partial pointer.
+    /// See https://gpuweb.github.io/gpuweb/wgsl/#func-var-value-analysis
+    bool IsFullPointer() const { return is_full_pointer_; }
+
     /// @param symbols the program's symbol table
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -61,6 +70,7 @@ class Pointer final : public Castable<Pointer, Type> {
     Type const* const subtype_;
     ast::AddressSpace const address_space_;
     ast::Access const access_;
+    bool is_full_pointer_;
 };
 
 }  // namespace tint::sem

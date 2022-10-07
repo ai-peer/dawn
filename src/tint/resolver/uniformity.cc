@@ -1130,7 +1130,9 @@ class UniformityGraph {
     /// @param cf the input control flow node
     /// @param expr the expression to process
     /// @returns a pair of (control flow node, variable node)
-    std::pair<Node*, Node*> ProcessLValueExpression(Node* cf, const ast::Expression* expr) {
+    std::pair<Node*, Node*> ProcessLValueExpression(Node* cf,
+                                                    const ast::Expression* expr,
+                                                    bool is_partial_reference = false) {
         return Switch(
             expr,
 
@@ -1144,9 +1146,10 @@ class UniformityGraph {
                     auto* value = CreateNode(name + "_lvalue");
                     auto* old_value = current_function_->variables.Set(local, value);
 
-                    // Aggregate values link back to their previous value, as they can never become
-                    // uniform again.
-                    if (!local->Type()->UnwrapRef()->is_scalar() && old_value) {
+                    // If i is a partial reference to the variable, we link back to the variable's
+                    // previous value. If it previous value was non-uniform, a partial assignment
+                    // will not make it uniform.
+                    if (is_partial_reference && old_value) {
                         value->AddEdge(old_value);
                     }
 
@@ -1160,14 +1163,15 @@ class UniformityGraph {
             },
 
             [&](const ast::IndexAccessorExpression* i) {
-                auto [cf1, l1] = ProcessLValueExpression(cf, i->object);
+                auto [cf1, l1] =
+                    ProcessLValueExpression(cf, i->object, /*is_partial_reference*/ true);
                 auto [cf2, v2] = ProcessExpression(cf1, i->index);
                 l1->AddEdge(v2);
                 return std::pair<Node*, Node*>(cf2, l1);
             },
 
             [&](const ast::MemberAccessorExpression* m) {
-                return ProcessLValueExpression(cf, m->structure);
+                return ProcessLValueExpression(cf, m->structure, /*is_partial_reference*/ true);
             },
 
             [&](const ast::UnaryOpExpression* u) {
@@ -1179,15 +1183,17 @@ class UniformityGraph {
                     auto* deref = CreateNode(name + "_deref");
                     auto* old_value = current_function_->variables.Set(source_var, deref);
 
-                    // Aggregate values link back to their previous value, as they can never become
-                    // uniform again.
-                    if (!source_var->Type()->UnwrapRef()->UnwrapPtr()->is_scalar() && old_value) {
+                    // If the pointer is a partial pointer, link back to the variable's previous
+                    // value. If the previous value was non-uniform, a partial assignment will not
+                    // make it uniform.
+                    if (old_value &&
+                        !sem_.Get(u->expr)->Type()->As<sem::Pointer>()->IsFullPointer()) {
                         deref->AddEdge(old_value);
                     }
 
                     return std::pair<Node*, Node*>(cf, deref);
                 }
-                return ProcessLValueExpression(cf, u->expr);
+                return ProcessLValueExpression(cf, u->expr, is_partial_reference);
             },
 
             [&](Default) {
