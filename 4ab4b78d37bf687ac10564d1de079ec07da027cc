@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19c8db5d_c3889696",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-07T21:18:55Z",
+      "side": 1,
+      "message": "LGTM.\nNice.  I had to read up on the kTintMaterialize builtin. But this LGTM",
+      "revId": "4ab4b78d37bf687ac10564d1de079ec07da027cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
