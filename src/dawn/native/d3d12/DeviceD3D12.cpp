@@ -401,12 +401,10 @@ void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
 
 void Device::ForceEventualFlushOfCommands() {
     DeviceBase::ForceEventualFlushOfCommands();
-    if (mPendingCommands.IsOpen()) {
-        mPendingCommands.SetNeedsSubmit(true);
-    }
+    mPendingCommands.SetNeedsSubmit(mPendingCommands.IsOpen());
 }
 
-bool Device::HasPendingCommands() {
+bool Device::HasPendingCommands() const {
     return DeviceBase::HasPendingCommands() || mPendingCommands.NeedsSubmit();
 }
 

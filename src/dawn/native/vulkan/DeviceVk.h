@@ -116,7 +116,7 @@ class Device final : public DeviceBase {
     const char* GetDebugPrefix() { return mDebugPrefix.c_str(); }
 
     void ForceEventualFlushOfCommands() override;
-    bool HasPendingCommands() override;
+    bool HasPendingCommands() const override;
 
   private:
     Device(Adapter* adapter,
