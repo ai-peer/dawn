@@ -49,7 +49,7 @@ class Device final : public DeviceBase {
     id<MTLDevice> GetMTLDevice();
     id<MTLCommandQueue> GetMTLQueue();
 
-    CommandRecordingContext* GetPendingCommandContext();
+    CommandRecordingContext* GetPendingCommandContext(bool needsSubmit);
     MaybeError SubmitPendingCommandBuffer();
 
     Ref<Texture> CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
