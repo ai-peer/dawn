@@ -92,7 +92,7 @@ class Device final : public DeviceBase {
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
     void ForceEventualFlushOfCommands() override;
-    bool HasPendingCommands() override;
+    bool HasPendingCommands() const override;
 
     MaybeError ExecutePendingCommandContext();
 

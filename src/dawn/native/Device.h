@@ -398,7 +398,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     void AssumeCommandsCompleteForTesting();
 
     virtual void ForceEventualFlushOfCommands();
-    virtual bool HasPendingCommands();
+    virtual bool HasPendingCommands() const;
+    ExecutionSerial GetSubmittedWorkDoneSerial() const;
 
   protected:
     // Constructor used only for mocking and testing.

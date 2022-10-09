@@ -439,6 +439,9 @@ void DeviceBase::Destroy() {
         // Call TickImpl once last time to clean up resources
         // Ignore errors so that we can continue with destruction
         IgnoreErrors(TickImpl());
+
+        // Trigger all in-flight TrackTask callbacks from Queue.
+        FlushCallbackTaskQueue();
     }
 
     // At this point GPU operations are always finished, so we are in the disconnected state.
@@ -1896,12 +1899,24 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
 
 void DeviceBase::ForceEventualFlushOfCommands() {}
 
-bool DeviceBase::HasPendingCommands() {
+bool DeviceBase::HasPendingCommands() const {
     return mLastSubmittedSerial > mCompletedSerial;
 }
 
 void DeviceBase::AssumeCommandsCompleteForTesting() {
     AssumeCommandsComplete();
+}
+
+ExecutionSerial DeviceBase::GetSubmittedWorkDoneSerial() const {
+    // No serial will be surely fired if both front and backend have no work to do.
+    if (!HasPendingCommands()) {
+        return ExecutionSerial(0);
+    }
+
+    // If frontend has pending commands, the last submit will be surely fired. Otherwise
+    // the pending commands in backend will be submitted and fired eventually.
+    return DeviceBase::HasPendingCommands() ? GetLastSubmittedCommandSerial()
+                                            : GetPendingCommandSerial();
 }
 
 }  // namespace dawn::native

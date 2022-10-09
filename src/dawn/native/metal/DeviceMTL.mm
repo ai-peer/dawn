@@ -19,6 +19,7 @@
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Commands.h"
+#include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/metal/BindGroupLayoutMTL.h"
 #include "dawn/native/metal/BindGroupMTL.h"
@@ -343,7 +344,9 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 }
 
 MaybeError Device::TickImpl() {
-    DAWN_TRY(SubmitPendingCommandBuffer());
+    if (mCommandContext.NeedsSubmit()) {
+        DAWN_TRY(SubmitPendingCommandBuffer());
+    }
 
     // Just run timestamp period calculation when timestamp feature is enabled.
     if (HasFeature(Feature::TimestampQuery)) {
@@ -364,13 +367,23 @@ id<MTLCommandQueue> Device::GetMTLQueue() {
     return mCommandQueue.Get();
 }
 
-CommandRecordingContext* Device::GetPendingCommandContext() {
+CommandRecordingContext* Device::GetPendingCommandContext(bool needsSubmit) {
+    mCommandContext.SetNeedsSubmit(needsSubmit);
     mCommandContext.MarkUsed();
     return &mCommandContext;
 }
 
+void Device::ForceEventualFlushOfCommands() {
+    DeviceBase::ForceEventualFlushOfCommands();
+    mCommandContext.SetNeedsSubmit(mCommandContext.WasUsed());
+}
+
+bool Device::HasPendingCommands() const {
+    return DeviceBase::HasPendingCommands() || mCommandContext.NeedsSubmit();
+}
+
 MaybeError Device::SubmitPendingCommandBuffer() {
-    if (!mCommandContext.WasUsed()) {
+    if (!mCommandContext.NeedsSubmit()) {
         return {};
     }
 
@@ -431,16 +444,18 @@ MaybeError Device::CopyFromStagingToBuffer(StagingBufferBase* source,
     // this function.
     ASSERT(size != 0);
 
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
     ToBackend(destination)
-        ->EnsureDataInitializedAsDestination(GetPendingCommandContext(), destinationOffset, size);
+        ->EnsureDataInitializedAsDestination(GetPendingCommandContext(needsSubmit),
+                                             destinationOffset, size);
 
     id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
     id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
-    [GetPendingCommandContext()->EnsureBlit() copyFromBuffer:uploadBuffer
-                                                sourceOffset:sourceOffset
-                                                    toBuffer:buffer
-                                           destinationOffset:destinationOffset
-                                                        size:size];
+    [GetPendingCommandContext(needsSubmit)->EnsureBlit() copyFromBuffer:uploadBuffer
+                                                           sourceOffset:sourceOffset
+                                                               toBuffer:buffer
+                                                      destinationOffset:destinationOffset
+                                                                   size:size];
     return {};
 }
 
@@ -452,12 +467,14 @@ MaybeError Device::CopyFromStagingToTexture(const StagingBufferBase* source,
                                             TextureCopy* dst,
                                             const Extent3D& copySizePixels) {
     Texture* texture = ToBackend(dst->texture.Get());
-    EnsureDestinationTextureInitialized(GetPendingCommandContext(), texture, *dst, copySizePixels);
+    bool needsSubmit = GetDynamicUploader()->ShouldFlush();
+    EnsureDestinationTextureInitialized(GetPendingCommandContext(needsSubmit), texture, *dst,
+                                        copySizePixels);
 
-    RecordCopyBufferToTexture(GetPendingCommandContext(), ToBackend(source)->GetBufferHandle(),
-                              source->GetSize(), dataLayout.offset, dataLayout.bytesPerRow,
-                              dataLayout.rowsPerImage, texture, dst->mipLevel, dst->origin,
-                              dst->aspect, copySizePixels);
+    RecordCopyBufferToTexture(GetPendingCommandContext(needsSubmit),
+                              ToBackend(source)->GetBufferHandle(), source->GetSize(),
+                              dataLayout.offset, dataLayout.bytesPerRow, dataLayout.rowsPerImage,
+                              texture, dst->mipLevel, dst->origin, dst->aspect, copySizePixels);
     return {};
 }
 
