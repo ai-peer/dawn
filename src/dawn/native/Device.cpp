@@ -439,6 +439,9 @@ void DeviceBase::Destroy() {
         // Call TickImpl once last time to clean up resources
         // Ignore errors so that we can continue with destruction
         IgnoreErrors(TickImpl());
+
+        // Trigger all in-flight TrackTask callbacks from Queue.
+        FlushCallbackTaskQueue();
     }
 
     // At this point GPU operations are always finished, so we are in the disconnected state.
@@ -1896,12 +1899,16 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
 
 void DeviceBase::ForceEventualFlushOfCommands() {}
 
-bool DeviceBase::HasPendingCommands() {
-    return mLastSubmittedSerial > mCompletedSerial;
+bool DeviceBase::HasPendingCommands() const {
+    return mLastSubmittedSerial > mCompletedSerial || HasPendingCommandsImpl();
 }
 
 void DeviceBase::AssumeCommandsCompleteForTesting() {
     AssumeCommandsComplete();
+}
+
+ExecutionSerial DeviceBase::GetSubmittedWorkDoneSerial() const {
+    return HasPendingCommandsImpl() ? GetPendingCommandSerial() : GetLastSubmittedCommandSerial();
 }
 
 }  // namespace dawn::native

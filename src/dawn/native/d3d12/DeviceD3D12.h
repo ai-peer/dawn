@@ -92,7 +92,6 @@ class Device final : public DeviceBase {
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
 
     void ForceEventualFlushOfCommands() override;
-    bool HasPendingCommands() override;
 
     MaybeError ExecutePendingCommandContext();
 
@@ -211,6 +210,7 @@ class Device final : public DeviceBase {
 
     void DestroyImpl() override;
     MaybeError WaitForIdleForDestruction() override;
+    bool HasPendingCommandsImpl() const override;
 
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;

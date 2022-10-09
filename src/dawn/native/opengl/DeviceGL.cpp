@@ -446,6 +446,10 @@ MaybeError Device::WaitForIdleForDestruction() {
     return {};
 }
 
+bool Device::HasPendingCommandsImpl() const {
+    return false;
+}
+
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
     return 1;
 }

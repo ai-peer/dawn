@@ -230,7 +230,7 @@ void QueueBase::TrackTask(std::unique_ptr<CallbackTask> task, ExecutionSerial se
     if (!GetDevice()->HasPendingCommands()) {
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     } else {
-        mTasksInFlight.Enqueue(std::move(task), serial);
+        mTasksInFlight.Enqueue(std::move(task), GetDevice()->GetSubmittedWorkDoneSerial());
     }
 }
 

@@ -398,7 +398,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     void AssumeCommandsCompleteForTesting();
 
     virtual void ForceEventualFlushOfCommands();
-    virtual bool HasPendingCommands();
+    bool HasPendingCommands() const;
+    ExecutionSerial GetSubmittedWorkDoneSerial() const;
 
   protected:
     // Constructor used only for mocking and testing.
@@ -506,6 +507,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     // device loss, this function doesn't need to be called since the driver already closed all
     // resources.
     virtual MaybeError WaitForIdleForDestruction() = 0;
+
+    virtual bool HasPendingCommandsImpl() const = 0;
 
     wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
     void* mUncapturedErrorUserdata = nullptr;

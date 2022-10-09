@@ -295,8 +295,8 @@ void Device::ForceEventualFlushOfCommands() {
     mRecordingContext.needsSubmit |= mRecordingContext.used;
 }
 
-bool Device::HasPendingCommands() {
-    return DeviceBase::HasPendingCommands() || mRecordingContext.needsSubmit;
+bool Device::HasPendingCommandsImpl() const {
+    return mRecordingContext.needsSubmit;
 }
 
 MaybeError Device::SubmitPendingCommands() {

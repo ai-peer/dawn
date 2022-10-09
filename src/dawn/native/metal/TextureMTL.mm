@@ -723,7 +723,7 @@ MaybeError Texture::InitializeAsInternalTexture(const TextureDescriptor* descrip
     }
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-        DAWN_TRY(ClearTexture(device->GetPendingCommandContext(), GetAllSubresources(),
+        DAWN_TRY(ClearTexture(device->GetPendingCommandContext(false), GetAllSubresources(),
                               TextureBase::ClearValue::NonZero));
     }
 

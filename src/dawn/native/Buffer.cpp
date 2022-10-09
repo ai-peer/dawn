@@ -49,7 +49,9 @@ struct MapRequestTask : CallbackTask {
     void HandleDeviceLoss() override {
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
     }
-    void HandleShutDown() override { HandleDeviceLoss(); }
+    void HandleShutDown() override {
+        buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+    }
     ~MapRequestTask() override = default;
 
   private:
