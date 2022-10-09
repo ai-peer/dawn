@@ -132,6 +132,7 @@ TEST_P(DeviceLifetimeTests, DroppedBeforeBuffer) {
 
 // Test that the device can be dropped while a buffer created from it is being mapped.
 TEST_P(DeviceLifetimeTests, DroppedWhileMappingBuffer) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() || IsNull());
     wgpu::BufferDescriptor desc = {};
     desc.size = 4;
     desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;

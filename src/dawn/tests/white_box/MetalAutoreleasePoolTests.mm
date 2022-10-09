@@ -37,7 +37,7 @@ TEST_P(MetalAutoreleasePoolTests, CommandBufferOutlivesAutorelease) {
     @autoreleasepool {
         // Get the recording context which will allocate a MTLCommandBuffer.
         // It will get autoreleased at the end of this block.
-        mMtlDevice->GetPendingCommandContext();
+        mMtlDevice->GetPendingCommandContext(true);
     }
 
     // Submitting the command buffer should succeed.
@@ -51,11 +51,11 @@ TEST_P(MetalAutoreleasePoolTests, EncoderOutlivesAutorelease) {
         // Get the recording context which will allocate a MTLCommandBuffer.
         // Begin a blit encoder.
         // Both will get autoreleased at the end of this block.
-        mMtlDevice->GetPendingCommandContext()->EnsureBlit();
+        mMtlDevice->GetPendingCommandContext(true)->EnsureBlit();
     }
 
     // Submitting the command buffer should succeed.
-    mMtlDevice->GetPendingCommandContext()->EndBlit();
+    mMtlDevice->GetPendingCommandContext(true)->EndBlit();
     ASSERT_TRUE(mMtlDevice->SubmitPendingCommandBuffer().IsSuccess());
 }
 
