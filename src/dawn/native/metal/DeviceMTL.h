@@ -49,7 +49,7 @@ class Device final : public DeviceBase {
     id<MTLDevice> GetMTLDevice();
     id<MTLCommandQueue> GetMTLQueue();
 
-    CommandRecordingContext* GetPendingCommandContext();
+    CommandRecordingContext* GetPendingCommandContext(bool needsSubmit);
     MaybeError SubmitPendingCommandBuffer();
 
     Ref<Texture> CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
@@ -78,6 +78,9 @@ class Device final : public DeviceBase {
     // Get a MTLBuffer that can be used as a dummy in a no-op blit encoder based on filling this
     // single-byte buffer
     id<MTLBuffer> GetDummyBlitMtlBuffer();
+
+    void ForceEventualFlushOfCommands() override;
+    bool HasPendingCommands() override;
 
   private:
     Device(AdapterBase* adapter,
