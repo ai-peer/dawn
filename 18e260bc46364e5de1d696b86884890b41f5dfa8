@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8317d82_88aa9623",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Interesting, there is no ConstVectorRef? Done",
+      "parentUuid": "f6314263_85e426b3",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d3f6359_698b4093",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-10-10T12:40:44Z",
       "side": 1,
       "message": "you should probably return here.",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 13
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a373f4a0_8e050952",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3f6359_698b4093",
       "range": {
         "startLine": 93,
         "startChar": 12,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d4ba6e_c185a058",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Whoops. Done.",
+      "parentUuid": "a4ad7e3f_c2da8334",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 13
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23016a70_7dab8399",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-10-10T12:40:44Z",
       "side": 1,
       "message": "Because C++ sucks, you have to be very careful here - argument evaluation order is undefined, and is swapped between MSVC vs gcc/clang. When you\u0027re doing clones as arguments, symbol id mappings can then become non-deterministic, and you\u0027ll get hard-to-trace differences in tint output.\nFor this reason, we ask that `Clones()` are split into separate statements.",
+      "range": {
+        "startLine": 161,
+        "startChar": 54,
+        "endLine": 162,
+        "endChar": 75
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4f7464a_641c2f8d",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Done.",
+      "parentUuid": "23016a70_7dab8399",
       "range": {
         "startLine": 161,
         "startChar": 54,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0565bc05_93f8bb30",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b02755d_52c42230",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 7
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7225e886_9a8cc928",
@@ -163,6 +283,30 @@
       "writtenOn": "2022-10-10T12:40:44Z",
       "side": 1,
       "message": "Kokoro:\n\n```\nsrc/tint/transform/clamp_frag_depth.h:77:  (cpplint) #endif line should be \"#endif  // SRC_TINT_TRANSFORM_CLAMP_FRAG_DEPTH_H_\"  [build/header_guard] [5]\n```",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 77,
+        "endChar": 47
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bf4bc18_72d377f3",
+        "filename": "src/tint/transform/clamp_frag_depth.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7225e886_9a8cc928",
       "range": {
         "startLine": 77,
         "startChar": 11,

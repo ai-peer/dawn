@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06baac93_a93833c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T13:39:32Z",
+      "side": 1,
+      "message": "PTAL again. As per offline discussion I ended up copy-pasting the code you suggested, after understanding what it does.",
+      "revId": "85d99931ad3626a3a13e150131378143d054d218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
