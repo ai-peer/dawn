@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d8b628_bf4bb574",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T11:42:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157ee928_355234b6",
+        "filename": "tools/src/cmd/remote-compile/socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T11:42:41Z",
+      "side": 1,
+      "message": "recv man pages say:\n\n\u003e        When a stream socket peer has performed an orderly shutdown, the\n       return value will be 0 (the traditional \"end-of-file\" return).\n\nSo this should probably be \u003e\u003d 0",
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e794e81_9f853c07",
+        "filename": "tools/src/cmd/remote-compile/socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-10T11:42:41Z",
+      "side": 1,
+      "message": "ditto, an FD of 0 is technically valid.",
+      "range": {
+        "startLine": 223,
+        "startChar": 55,
+        "endLine": 223,
+        "endChar": 56
+      },
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
