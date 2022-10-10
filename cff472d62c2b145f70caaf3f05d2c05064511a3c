@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480a5595_4b975015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-10T09:20:44Z",
+      "side": 1,
+      "message": "The related changes in WebGPU CTS are here:\nhttps://github.com/gpuweb/cts/pull/1906\n\nPTAL, thanks!",
+      "revId": "cff472d62c2b145f70caaf3f05d2c05064511a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
