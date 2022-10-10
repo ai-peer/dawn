@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7c3a12d_94ad2f64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-10T14:39:52Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\n(It seems that one Kokoro build job failed due to a infrastructure issue)",
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
