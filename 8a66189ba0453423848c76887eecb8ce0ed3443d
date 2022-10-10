@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11835024_17c146da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T11:45:40Z",
+      "side": 1,
+      "message": "Thanks for the thorougher review!",
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "157ee928_355234b6",
@@ -35,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa62411b_b5c258a3",
+        "filename": "tools/src/cmd/remote-compile/socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T11:45:40Z",
+      "side": 1,
+      "message": "That breaks the documented contract on `Read()`. I\u0027ve updated the comment below instead.",
+      "parentUuid": "157ee928_355234b6",
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e794e81_9f853c07",
@@ -48,6 +83,30 @@
       "writtenOn": "2022-10-10T11:42:41Z",
       "side": 1,
       "message": "ditto, an FD of 0 is technically valid.",
+      "range": {
+        "startLine": 223,
+        "startChar": 55,
+        "endLine": 223,
+        "endChar": 56
+      },
+      "revId": "8a66189ba0453423848c76887eecb8ce0ed3443d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4096fd_afcc8bc5",
+        "filename": "tools/src/cmd/remote-compile/socket.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T11:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e794e81_9f853c07",
       "range": {
         "startLine": 223,
         "startChar": 55,
