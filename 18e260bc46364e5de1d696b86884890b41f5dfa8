@@ -16,6 +16,161 @@
       "message": "PTAL!",
       "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "387352b7_bab3bbd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "Fantastic first PS for a new transform. Bravo!",
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6314263_85e426b3",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "nit: You could push the attribute looping into the inner-most function:\n\n```\nbool ContainsFragDepth(utils::VectorRef\u003cconst ast::Attribute*\u003e attributes) {\n    for (auto* attribute : attributes) {\n        if (auto* builtin_attribute \u003d attribute-\u003eAs\u003cast::BuiltinAttribute\u003e()) {\n            if (builtin_attribute-\u003ebuiltin \u003d\u003d ast::BuiltinValue::kFragDepth) {\n                return true;\n            }\n        }\n    }\n    return false;\n}\n\nbool ReturnsFragDepthAsValue(const ast::Function* fn) {\n    return ContainsFragDepth(fn-\u003ereturn_type_attributes);\n}\n\nbool ReturnsFragDepthInStruct(const sem::Info\u0026 sem, const ast::Function* fn) {\n    if (auto* struct_ty \u003d sem.Get(fn)-\u003eReturnType()-\u003eAs\u003csem::Struct\u003e()) {\n        for (auto* member : struct_ty-\u003eMembers()) {\n            if (ContainsFragDepth(member-\u003eDeclaration()-\u003eattributes)) {\n                return true;\n            }\n        }\n    }\n    return false;\n}\n```\n\nThis will be helpful when you fix the missing the call to `base_fn_sym` from the struct helpers.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 1
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3f6359_698b4093",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "you should probably return here.",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 13
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4ad7e3f_c2da8334",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "You\u0027re missing the call to `base_fn_sym` here.",
+      "range": {
+        "startLine": 158,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 13
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23016a70_7dab8399",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "Because C++ sucks, you have to be very careful here - argument evaluation order is undefined, and is swapped between MSVC vs gcc/clang. When you\u0027re doing clones as arguments, symbol id mappings can then become non-deterministic, and you\u0027ll get hard-to-trace differences in tint output.\nFor this reason, we ask that `Clones()` are split into separate statements.",
+      "range": {
+        "startLine": 161,
+        "startChar": 54,
+        "endLine": 162,
+        "endChar": 75
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b02755d_52c42230",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "nit: Instead of doing a pre-pass here, you could do the following:\n\n    \n```\n    // If true, the currently cloned function returns frag depth directly as a scalar\n    bool returns_frag_depth_as_value \u003d false;\n\n    // If valid, the currently cloned function returns frag depth in a struct\n    // The symbol is the name of the helper function to apply the depth clamping.\n    Symbol returns_frag_depth_as_struct_helper;\n\n    // Map of io struct to helper function to return the structure with the depth clamping applied.\n    utils::Hashmap\u003cconst ast::Struct*, Symbol, 4u\u003e io_structs_clamp_helpers;\n\n    // Register a callback that will be called for each visted AST function.\n    // This call wraps the cloning of the function\u0027s statements, and will assign to\n    // `returns_frag_depth_as_value` or `returns_frag_depth_as_struct_helper` if the function\u0027s\n    // return value requires depth clamping.\n    ctx.ReplaceAll([\u0026](const ast::Function* fn) {\n        if (fn-\u003ePipelineStage() !\u003d ast::PipelineStage::kFragment) {\n            return ctx.CloneWithoutTransform(fn);\n        }\n\n        if (ReturnsFragDepthAsValue(fn)) {\n            TINT_SCOPED_ASSIGNMENT(returns_frag_depth_as_value, true);\n            return ctx.CloneWithoutTransform(fn);\n        }\n\n        if (ReturnsFragDepthInStruct(sem, fn)) {\n            // At most once per I/O struct, add the conversion function:\n            //\n            //   fn clamp_frag_depth_S(s : S) -\u003e S {\n            //       return S(s.first, s.second, clamp_frag_depth(s.frag_depth), s.last);\n            //   }\n            auto* struct_ty \u003d sem.Get(fn)-\u003eReturnType()-\u003eAs\u003csem::Struct\u003e()-\u003eDeclaration();\n            auto helper \u003d io_structs_clamp_helpers.GetOrCreate(struct_ty, [\u0026] {\n                auto* return_ty \u003d fn-\u003ereturn_type;\n                auto fn_sym \u003d b.Symbols().New(\"clamp_frag_depth_\" +\n                                              sym.NameFor(return_ty-\u003eAs\u003cast::TypeName\u003e()-\u003ename));\n\n                utils::Vector\u003cconst ast::Expression*, 8u\u003e constructor_args;\n                for (auto* member : struct_ty-\u003emembers) {\n                    const ast::Expression* arg \u003d b.MemberAccessor(\"s\", ctx.Clone(member-\u003esymbol));\n                    if (ContainsFragDepth(member-\u003eattributes)) {\n                        arg \u003d b.Call(base_fn_sym, arg);\n                    }\n                    constructor_args.Push(arg);\n                }\n                utils::Vector params{b.Param(\"s\", ctx.Clone(return_ty))};\n                utils::Vector body{\n                    b.Return(b.Construct(ctx.Clone(return_ty), std::move(constructor_args))),\n                };\n                b.Func(fn_sym, params, ctx.Clone(return_ty), body);\n                return fn_sym;\n            });\n\n            TINT_SCOPED_ASSIGNMENT(returns_frag_depth_as_struct_helper, helper);\n            return ctx.CloneWithoutTransform(fn);\n        }\n\n        return ctx.CloneWithoutTransform(fn);\n    });\n\n    // Replace the return statements `return expr` with `return clamp_frag_depth(expr)`.\n    ctx.ReplaceAll([\u0026](const ast::ReturnStatement* stmt) -\u003e const ast::ReturnStatement* {\n        if (returns_frag_depth_as_value) {\n            return b.Return(stmt-\u003esource, b.Call(base_fn_sym, ctx.Clone(stmt-\u003evalue)));\n        }\n        if (returns_frag_depth_as_struct_helper.IsValid()) {\n            return b.Return(stmt-\u003esource,\n                            b.Call(returns_frag_depth_as_struct_helper, ctx.Clone(stmt-\u003evalue)));\n        }\n        return nullptr;\n    });\n\n```\n\nThere are a few benefits to this:\n* You drop the need to do pre-pass of the functions.\n* The helper functions are emitted just above the first function that needs it.\n* You drop the need for two `Hashset`s, and can just use the stack for the same info.\n\nNote: my code above contains fixes for my other comments.",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 7
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7225e886_9a8cc928",
+        "filename": "src/tint/transform/clamp_frag_depth.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T12:40:44Z",
+      "side": 1,
+      "message": "Kokoro:\n\n```\nsrc/tint/transform/clamp_frag_depth.h:77:  (cpplint) #endif line should be \"#endif  // SRC_TINT_TRANSFORM_CLAMP_FRAG_DEPTH_H_\"  [build/header_guard] [5]\n```",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 77,
+        "endChar": 47
+      },
+      "revId": "18e260bc46364e5de1d696b86884890b41f5dfa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
