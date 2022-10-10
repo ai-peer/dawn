@@ -465,11 +465,12 @@ class Vector {
     /// @returns true if this vector is the same length as `other`, and all elements are equal.
     bool operator==(const Vector& other) const {
         const size_t len = Length();
-        if (len == other.Length()) {
-            for (size_t i = 0; i < len; i++) {
-                if ((*this)[i] != other[i]) {
-                    return false;
-                }
+        if (len != other.Length()) {
+            return false;
+        }
+        for (size_t i = 0; i < len; i++) {
+            if ((*this)[i] != other[i]) {
+                return false;
             }
         }
         return true;
