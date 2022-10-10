@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96cde7b3_c2d8af17",
+        "filename": "src/tint/writer/float_to_string.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:22:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d74979b_886575ad",
+      "range": {
+        "startLine": 147,
+        "startChar": 43,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "641099bd_a8432858",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-06T22:50:06Z",
       "side": 1,
       "message": "symptom of the bug",
+      "range": {
+        "startLine": 4,
+        "startChar": 37,
+        "endLine": 4,
+        "endChar": 42
+      },
+      "revId": "46ea766090cdeadae0e7ad7badbfbf44ed74345a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "011e8113_24fd2b14",
+        "filename": "test/tint/expressions/literals/nan.spvasm.expected.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:22:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641099bd_a8432858",
       "range": {
         "startLine": 4,
         "startChar": 37,
