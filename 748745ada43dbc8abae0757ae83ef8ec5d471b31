@@ -16,6 +16,161 @@
       "message": "Please take a look, thanks.\n(It seems that one Kokoro build job failed due to a infrastructure issue)",
       "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ff612d_1978f3fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "Lots of really good tests, great stuff!",
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3afeee13_23d98773",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "This needs to be added to the `CMakeLists.txt` too",
+      "range": {
+        "startLine": 1217,
+        "startChar": 6,
+        "endLine": 1217,
+        "endChar": 44
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "161f70b5_eb711fdd",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "nit: `snake_case`. Here and elsewhere",
+      "range": {
+        "startLine": 250,
+        "startChar": 17,
+        "endLine": 250,
+        "endChar": 25
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0eea79c_7f9eb443",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "Should we include the `col` in the error message, so we can identify which iteration(s) failed?\n\n`EXPECT_EQ(expect, str(got)) \u003c\u003c \"col: \" \u003c\u003c col;`",
+      "range": {
+        "startLine": 497,
+        "startChar": 8,
+        "endLine": 497,
+        "endChar": 17
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a3665f_2d65b559",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "nit: `snake_case`. Here and elsewhere",
+      "range": {
+        "startLine": 549,
+        "startChar": 20,
+        "endLine": 549,
+        "endChar": 28
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34df7683_6cae5c61",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4639,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "`snake_case`",
+      "range": {
+        "startLine": 4639,
+        "startChar": 4,
+        "endLine": 4639,
+        "endChar": 11
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19a9f837_0357795c",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-10T15:20:44Z",
+      "side": 1,
+      "message": "It was preferable when these indices were different, as it shows that the correct literal value was used. With both `1`, we wouldn\u0027t catch a bug where the indices were around the wrong way.\nHere any everywhere else you changed this.",
+      "range": {
+        "startLine": 2407,
+        "startChar": 14,
+        "endLine": 2407,
+        "endChar": 16
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
