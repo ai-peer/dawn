@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a37b03_8645e0a0",
+        "filename": "src/tint/ast/access.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T16:28:47Z",
+      "side": 1,
+      "message": "nit: access mode",
+      "revId": "d49403a40bd56f359b715bb3930100cc8ece0ac8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
