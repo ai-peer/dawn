@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76242927_77b816e7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-11T19:42:36Z",
+      "side": 1,
+      "message": "This needs a test.",
+      "revId": "665e6c5f5084f3104a432cc6e7ab241ba0bb26d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
