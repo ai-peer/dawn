@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a89cd78_d3dd4c7e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1420,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-11T18:13:54Z",
+      "side": 1,
+      "message": "When processing, say, `v[i]` here, we will process the three `sorted` expressions in reverse order: `v`, `i`, then `v[i]`. We don\u0027t know when processing `v` that it\u0027s part of an index accessor expression, and that it is a partial reference. When we process `v[i]`, though, we will set the sem::Reference::is_partial to true. But I don\u0027t know how to get back that sem::Reference from `v` alone later in the UA.",
+      "revId": "0a257bc20b538369a9a672a2c629c4fefb9892c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad35adb_80ddb66e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2228,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-11T18:13:54Z",
+      "side": 1,
+      "message": "At this point, we don\u0027t know whether the identifier expression is the object of an index/member accessor expression.",
+      "revId": "0a257bc20b538369a9a672a2c629c4fefb9892c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
