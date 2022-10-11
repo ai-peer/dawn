@@ -65,7 +65,7 @@ int main(int argc, const char** argv) {
 
     while (true) {
         auto result = mutator->Mutate();
-        if (result.GetStatus() == tint::fuzzers::spvtools_fuzzer::Mutator::Status::kInvalid) {
+        if (result.GetStatus() == tint::fuzzers::spvtools_fuzzer::Mutator::Status::kUndefined) {
             std::cerr << mutator->GetErrors() << std::endl;
             return 0;
         }
