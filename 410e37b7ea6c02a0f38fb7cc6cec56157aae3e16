@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce8a8a5_54f1e2bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-11T19:03:54Z",
+      "side": 1,
+      "message": "This just fixes the tests. I\u0027ll do the flattening and compare of the expected values as you suggested next.",
+      "revId": "410e37b7ea6c02a0f38fb7cc6cec56157aae3e16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
