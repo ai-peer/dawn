@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59c67b38_8d29205e",
+        "filename": "src/tint/ast/interpolate_attribute.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T16:26:19Z",
+      "side": 1,
+      "message": "This change of `none` to `invalid` makes code later much more confusing. We have to realize that an invalid interpolation is actually valid now.",
+      "revId": "a4684d65fb69a73437c0c7be1deb3bf6f5697645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06c90cc_a3d92aef",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T16:26:19Z",
+      "side": 1,
+      "message": "Why does invalid become none instead of Unknown?",
+      "revId": "a4684d65fb69a73437c0c7be1deb3bf6f5697645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
