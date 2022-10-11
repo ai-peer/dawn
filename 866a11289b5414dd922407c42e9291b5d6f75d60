@@ -84,6 +84,41 @@
       "message": "This isn\u0027t the right fix. It looks like I changed the test file by accident. The WGSL source should be 65536 which does not work in HLSL, so the expectation is correct, the test is wrong.",
       "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b1de96a_6fad4556",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T16:40:28Z",
+      "side": 1,
+      "message": "Ack, I will fix the WGSL source (tomorrow)",
+      "parentUuid": "502cdacf_558c98c5",
+      "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e874b95_576397d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T16:40:28Z",
+      "side": 1,
+      "message": "Thanks for reviewing, and according to Dan this test case should be fixed in the opposite way, so removing Ben\u0027s +2. Will upload a new CL tomorrow.",
+      "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
