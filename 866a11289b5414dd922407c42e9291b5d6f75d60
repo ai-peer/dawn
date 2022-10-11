@@ -16,6 +16,23 @@
       "message": "For Kokoro",
       "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a11a3b_9b489444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T08:21:20Z",
+      "side": 1,
+      "message": "Please take a look, thanks\nRelated CL: https://dawn-review.googlesource.com/c/dawn/+/104240",
+      "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
