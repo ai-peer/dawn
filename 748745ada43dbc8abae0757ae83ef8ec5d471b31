@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "184f8649_09e3e05e",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3afeee13_23d98773",
+      "range": {
+        "startLine": 1217,
+        "startChar": 6,
+        "endLine": 1217,
+        "endChar": 44
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "161f70b5_eb711fdd",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-10-10T15:20:44Z",
       "side": 1,
       "message": "nit: `snake_case`. Here and elsewhere",
+      "range": {
+        "startLine": 250,
+        "startChar": 17,
+        "endLine": 250,
+        "endChar": 25
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dd0d21d_9b70a7d5",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "161f70b5_eb711fdd",
       "range": {
         "startLine": 250,
         "startChar": 17,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc1e28a1_a7889d3d",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0eea79c_7f9eb443",
+      "range": {
+        "startLine": 497,
+        "startChar": 8,
+        "endLine": 497,
+        "endChar": 17
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4a3665f_2d65b559",
@@ -117,6 +189,30 @@
       "writtenOn": "2022-10-10T15:20:44Z",
       "side": 1,
       "message": "nit: `snake_case`. Here and elsewhere",
+      "range": {
+        "startLine": 549,
+        "startChar": 20,
+        "endLine": 549,
+        "endChar": 28
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cbd15e4_e44c5c3c",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4a3665f_2d65b559",
       "range": {
         "startLine": 549,
         "startChar": 20,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d73554b_6297beed",
+        "filename": "src/tint/transform/std140_exhaustive_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4639,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34df7683_6cae5c61",
+      "range": {
+        "startLine": 4639,
+        "startChar": 4,
+        "endLine": 4639,
+        "endChar": 11
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19a9f837_0357795c",
@@ -163,6 +283,30 @@
       "writtenOn": "2022-10-10T15:20:44Z",
       "side": 1,
       "message": "It was preferable when these indices were different, as it shows that the correct literal value was used. With both `1`, we wouldn\u0027t catch a bug where the indices were around the wrong way.\nHere any everywhere else you changed this.",
+      "range": {
+        "startLine": 2407,
+        "startChar": 14,
+        "endLine": 2407,
+        "endChar": 16
+      },
+      "revId": "748745ada43dbc8abae0757ae83ef8ec5d471b31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67def45_7eb3c19a",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-11T07:24:57Z",
+      "side": 1,
+      "message": "Done, in std140_test.cc set all constant column index to 1, row index 0, inner array index 2, and outer array index 3. In std140_exhaustive_test.cc we loop on all valid literal values, so it may be fine to have only one set of literal value in std140_test.cc.",
+      "parentUuid": "19a9f837_0357795c",
       "range": {
         "startLine": 2407,
         "startChar": 14,
