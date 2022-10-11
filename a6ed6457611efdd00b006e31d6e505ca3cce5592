@@ -16,6 +16,24 @@
       "message": "Why no period in this case?",
       "revId": "a6ed6457611efdd00b006e31d6e505ca3cce5592",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6649c4b_d2e20c00",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-11T19:31:15Z",
+      "side": 1,
+      "message": "The common pattern is that diagnostics do not usually end with `.`\nHowever, if there\u0027s a suggestion, we\u0027re kind of forced to use one to delimit the sentences.",
+      "parentUuid": "1e80b0c4_17f76446",
+      "revId": "a6ed6457611efdd00b006e31d6e505ca3cce5592",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
