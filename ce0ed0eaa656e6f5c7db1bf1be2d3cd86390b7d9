@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee87281e_30936a38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T15:40:51Z",
+      "side": 1,
+      "message": "LGTM w/ nit.",
+      "revId": "ce0ed0eaa656e6f5c7db1bf1be2d3cd86390b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceb21b59_a078492a",
+        "filename": "src/tint/reader/spirv/function_glsl_std_450_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T15:40:51Z",
+      "side": 1,
+      "message": "nit: cast result to unsigned",
+      "revId": "ce0ed0eaa656e6f5c7db1bf1be2d3cd86390b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5fb78ba_5b2594ac",
+        "filename": "src/tint/reader/spirv/function_glsl_std_450_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 990,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-11T15:40:51Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ce0ed0eaa656e6f5c7db1bf1be2d3cd86390b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
