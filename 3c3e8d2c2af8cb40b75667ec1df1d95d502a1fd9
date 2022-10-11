@@ -34,6 +34,24 @@
       "parentUuid": "4954f03d_44f3cff5",
       "revId": "3c3e8d2c2af8cb40b75667ec1df1d95d502a1fd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df7cb11_2f0562b6",
+        "filename": "test/tint/bug/tint/1697.wgsl.expected.dxc.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-11T19:49:49Z",
+      "side": 1,
+      "message": "Understood it\u0027s just, very weird to see successful results where everything is stripped out, heh.",
+      "parentUuid": "e12c2416_221ffd85",
+      "revId": "3c3e8d2c2af8cb40b75667ec1df1d95d502a1fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
