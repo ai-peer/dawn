@@ -95,8 +95,9 @@ TEST_P(InferTypeTest_FromConstructorExpression, All) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
     auto* got = TypeOf(a_ident);
-    auto* expected = create<sem::Reference>(params.create_rhs_sem_type(*this),
-                                            ast::AddressSpace::kFunction, ast::Access::kReadWrite);
+    auto* expected =
+        create<sem::Reference>(params.create_rhs_sem_type(*this), ast::AddressSpace::kFunction,
+                               ast::Access::kReadWrite, /*is_partial*/ false);
     ASSERT_EQ(got, expected) << "got:      " << FriendlyName(got) << "\n"
                              << "expected: " << FriendlyName(expected) << "\n";
 }
@@ -149,8 +150,9 @@ TEST_P(InferTypeTest_FromArithmeticExpression, All) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
     auto* got = TypeOf(a_ident);
-    auto* expected = create<sem::Reference>(params.create_rhs_sem_type(*this),
-                                            ast::AddressSpace::kFunction, ast::Access::kReadWrite);
+    auto* expected =
+        create<sem::Reference>(params.create_rhs_sem_type(*this), ast::AddressSpace::kFunction,
+                               ast::Access::kReadWrite, /*is_partial*/ false);
     ASSERT_EQ(got, expected) << "got:      " << FriendlyName(got) << "\n"
                              << "expected: " << FriendlyName(expected) << "\n";
 }
@@ -197,8 +199,9 @@ TEST_P(InferTypeTest_FromCallExpression, All) {
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
     auto* got = TypeOf(a_ident);
-    auto* expected = create<sem::Reference>(params.create_rhs_sem_type(*this),
-                                            ast::AddressSpace::kFunction, ast::Access::kReadWrite);
+    auto* expected =
+        create<sem::Reference>(params.create_rhs_sem_type(*this), ast::AddressSpace::kFunction,
+                               ast::Access::kReadWrite, /*is_partial*/ false);
     ASSERT_EQ(got, expected) << "got:      " << FriendlyName(got) << "\n"
                              << "expected: " << FriendlyName(expected) << "\n";
 }

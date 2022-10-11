@@ -21,8 +21,11 @@ TINT_INSTANTIATE_TYPEINFO(tint::sem::Reference);
 
 namespace tint::sem {
 
-Reference::Reference(const Type* subtype, ast::AddressSpace address_space, ast::Access access)
-    : subtype_(subtype), address_space_(address_space), access_(access) {
+Reference::Reference(const Type* subtype,
+                     ast::AddressSpace address_space,
+                     ast::Access access,
+                     bool is_partial)
+    : subtype_(subtype), address_space_(address_space), access_(access), is_partial_(is_partial) {
     TINT_ASSERT(Semantic, !subtype->Is<Reference>());
     TINT_ASSERT(Semantic, access != ast::Access::kUndefined);
 }

@@ -30,7 +30,10 @@ class Reference final : public Castable<Reference, Type> {
     /// @param subtype the pointee type
     /// @param address_space the address space of the reference
     /// @param access the resolved access control of the reference
-    Reference(const Type* subtype, ast::AddressSpace address_space, ast::Access access);
+    Reference(const Type* subtype,
+              ast::AddressSpace address_space,
+              ast::Access access,
+              bool is_partial /*= false*/);
 
     /// Move constructor
     Reference(Reference&&);
@@ -52,6 +55,8 @@ class Reference final : public Castable<Reference, Type> {
     /// @returns the resolved access control of the reference.
     ast::Access Access() const { return access_; }
 
+    bool IsPartial() const { return is_partial_; }
+
     /// @param symbols the program's symbol table
     /// @returns the name for this type that closely resembles how it would be
     /// declared in WGSL.
@@ -61,6 +66,7 @@ class Reference final : public Castable<Reference, Type> {
     Type const* const subtype_;
     ast::AddressSpace const address_space_;
     ast::Access const access_;
+    bool is_partial_;
 };
 
 }  // namespace tint::sem

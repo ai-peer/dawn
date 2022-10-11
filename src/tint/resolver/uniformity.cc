@@ -1146,6 +1146,12 @@ class UniformityGraph {
                     auto* value = CreateNode(name + "_lvalue");
                     auto* old_value = current_function_->variables.Set(local, value);
 
+                    auto* ty = sem->Type();
+                    auto* decl_sem = sem_.Get(sem->Declaration());
+                    auto* ty2 = decl_sem->Type();
+                    (void)ty;
+                    (void)ty2;
+
                     // If i is part of an expression that is a partial reference to the variable it
                     // refers to, we link back to the variable's previous value. If the previous
                     // value was non-uniform, a partial assignment will not make it uniform.

@@ -597,7 +597,12 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
         return nullptr;
     }
 
-    auto* var_ty = builder_->create<sem::Reference>(storage_ty, address_space, access);
+    bool is_partial = false;
+    if (auto* ref = rhs ? rhs->Type()->As<sem::Reference>() : nullptr) {
+        is_partial = ref->IsPartial();
+    }
+
+    auto* var_ty = builder_->create<sem::Reference>(storage_ty, address_space, access, is_partial);
 
     if (!ApplyAddressSpaceUsageToType(address_space, var_ty, var->source)) {
         AddNote("while instantiating 'var' " + builder_->Symbols().NameFor(var->symbol),
@@ -1630,7 +1635,8 @@ sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* exp
 
     // If we're extracting from a reference, we return a reference.
     if (auto* ref = obj_raw_ty->As<sem::Reference>()) {
-        ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access());
+        ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access(),
+                                              /*is_partial*/ true);
     }
 
     auto stage = sem::EarliestStage(obj->Stage(), idx->Stage());
@@ -2328,7 +2334,8 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
 
             // If we're extracting from a reference, we return a reference.
             if (auto* ref = structure->As<sem::Reference>()) {
-                ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access());
+                ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access(),
+                                                      /*is_partial*/ true);
             }
 
             auto val = const_eval_.MemberAccess(object, member);
@@ -2397,7 +2404,8 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
                 ty = vec->type();
                 // If we're extracting from a reference, we return a reference.
                 if (auto* ref = structure->As<sem::Reference>()) {
-                    ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access());
+                    ty = builder_->create<sem::Reference>(ty, ref->AddressSpace(), ref->Access(),
+                                                          /*is_partial*/ true);
                 }
             } else {
                 // The vector will have a number of components equal to the length of
@@ -2517,7 +2525,7 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
         case ast::UnaryOp::kIndirection:
             if (auto* ptr = expr_ty->As<sem::Pointer>()) {
                 ty = builder_->create<sem::Reference>(ptr->StoreType(), ptr->AddressSpace(),
-                                                      ptr->Access());
+                                                      ptr->Access(), ptr->IsPartial());
                 source_var = expr->SourceVariable();
             } else {
                 AddError("cannot dereference expression of type '" + sem_.TypeNameOf(expr_ty) + "'",

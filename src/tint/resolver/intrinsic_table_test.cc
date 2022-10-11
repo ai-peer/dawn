@@ -445,7 +445,7 @@ TEST_F(IntrinsicTableTest, ImplicitLoadOnReference) {
     auto result = table->Lookup(
         BuiltinType::kCos,
         utils::Vector{
-            create<sem::Reference>(f32, ast::AddressSpace::kFunction, ast::Access::kReadWrite),
+            create<sem::Reference>(f32, ast::AddressSpace::kFunction, ast::Access::kReadWrite, /*is_partial*/ false),
         },
         sem::EvaluationStage::kConstant, Source{});
     ASSERT_NE(result.sem, nullptr) << Diagnostics().str();
@@ -545,7 +545,7 @@ TEST_F(IntrinsicTableTest, MatchDifferentArgsElementType_ConstantEval) {
 TEST_F(IntrinsicTableTest, MatchDifferentArgsElementType_RuntimeEval) {
     auto* af = create<sem::AbstractFloat>();
     auto* bool_ref = create<sem::Reference>(create<sem::Bool>(), ast::AddressSpace::kFunction,
-                                            ast::Access::kReadWrite);
+                                            ast::Access::kReadWrite, /*is_partial*/ false);
     auto result = table->Lookup(BuiltinType::kSelect, utils::Vector{af, af, bool_ref},
                                 sem::EvaluationStage::kRuntime, Source{});
     ASSERT_NE(result.sem, nullptr) << Diagnostics().str();
