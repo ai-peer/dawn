@@ -114,7 +114,7 @@ SpirvOptMutator::Result SpirvOptMutator::Mutate() {
         optimizer.RegisterPassesFromFlags(passes);
         if (!optimizer.Run(binary.data(), binary.size(), &optimized_binary_)) {
             is_valid_ = false;
-            return {Status::kInvalid, true};
+            return {Status::kUndefined, true};
         }
     } while (optimized_binary_.empty() && ++num_stuck < kMaxNumStuck);
 
