@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e734a6c8_fc92b254",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 1,
+      "message": "I\u0027ve removed the FutureSerial for all backends with as few refactor as necessary.\nPTAL @cwallez@chromium.org @enga@chromium.org",
+      "parentUuid": "6d7543fb_2ad15b8a",
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e99da7_cbca35f6",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 20
@@ -84,6 +102,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eae6c91d_eb887910",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b8d62aba_63546b35",
+      "range": {
+        "startLine": 1251,
+        "startChar": 8,
+        "endLine": 1251,
+        "endChar": 69
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f890c47c_dd712ff4",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 20
@@ -95,6 +137,24 @@
       "writtenOn": "2022-09-29T15:26:29Z",
       "side": 1,
       "message": "Is there a different thing we could do to make the D3D12 tests pass? Assuming commands are completed are an implementation detail of the device and it\u0027s really unfortunate to expose it publicly. If we really need to do it, then I suggest having a AssumeCommandsCompleteForTesting() that calls AssumeCommandsCompleted() (so that it is clear to never use it anywhere but tests, even if it is public)",
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2ec827_4fe530b1",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 1,
+      "message": "Make sense. AssumeCommandsCompleteForTesting() would be a better way. I like that. Thanks!",
+      "parentUuid": "f890c47c_dd712ff4",
       "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -148,6 +208,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59ec8ae3_3d71b8bf",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8b0c9649_bc6ebbd2",
+      "range": {
+        "startLine": 224,
+        "startChar": 8,
+        "endLine": 225,
+        "endChar": 42
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "542a4c75_2a8d8fca",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 20
@@ -183,6 +267,30 @@
       "side": 1,
       "message": "Good catch.",
       "parentUuid": "542a4c75_2a8d8fca",
+      "range": {
+        "startLine": 234,
+        "startChar": 47,
+        "endLine": 234,
+        "endChar": 56
+      },
+      "revId": "c839c423efeb59ccdba2bbf4e4a81b18179378b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "388fb92c_e58ff6b9",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3cf1560_f3d790ea",
       "range": {
         "startLine": 234,
         "startChar": 47,

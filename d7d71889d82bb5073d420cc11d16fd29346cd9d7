@@ -46,6 +46,30 @@
       },
       "revId": "d7d71889d82bb5073d420cc11d16fd29346cd9d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82935b5_a6555a24",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-11T07:32:33Z",
+      "side": 0,
+      "message": "I\u0027ve done that for the D3D12 and Metal backends, PTAL.",
+      "parentUuid": "18cb5785_b08f2f60",
+      "range": {
+        "startLine": 289,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 63
+      },
+      "revId": "d7d71889d82bb5073d420cc11d16fd29346cd9d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
