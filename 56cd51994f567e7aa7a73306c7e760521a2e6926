@@ -16,6 +16,40 @@
       "message": "Can I have a re-review? Thanks!",
       "revId": "56cd51994f567e7aa7a73306c7e760521a2e6926",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4516ac_71ecac44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-11T08:12:43Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "56cd51994f567e7aa7a73306c7e760521a2e6926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2de7f2_c4f278c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-11T08:12:43Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "56cd51994f567e7aa7a73306c7e760521a2e6926",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
