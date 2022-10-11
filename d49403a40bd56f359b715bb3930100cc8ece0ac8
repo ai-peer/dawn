@@ -16,6 +16,24 @@
       "message": "nit: access mode",
       "revId": "d49403a40bd56f359b715bb3930100cc8ece0ac8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "100202c5_7a176b97",
+        "filename": "src/tint/ast/access.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-11T19:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75a37b03_8645e0a0",
+      "revId": "d49403a40bd56f359b715bb3930100cc8ece0ac8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
