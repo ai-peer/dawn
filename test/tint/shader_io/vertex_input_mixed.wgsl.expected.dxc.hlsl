@@ -11,8 +11,8 @@ struct tint_symbol_1 {
   uint loc1 : TEXCOORD1;
   float loc2 : TEXCOORD2;
   float4 loc3 : TEXCOORD3;
-  uint vertex_index : SV_VertexID;
   uint instance_index : SV_InstanceID;
+  uint vertex_index : SV_VertexID;
 };
 struct tint_symbol_2 {
   float4 value : SV_Position;

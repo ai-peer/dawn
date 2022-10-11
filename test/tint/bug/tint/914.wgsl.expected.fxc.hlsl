@@ -44,9 +44,9 @@ groupshared float mm_Asub[64][64];
 groupshared float mm_Bsub[64][64];
 
 struct tint_symbol_1 {
+  uint3 global_id : SV_DispatchThreadID;
   uint3 local_id : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
-  uint3 global_id : SV_DispatchThreadID;
 };
 
 void main_inner(uint3 local_id, uint3 global_id, uint local_invocation_index) {

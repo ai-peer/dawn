@@ -3,8 +3,8 @@ struct Output {
   float4 color;
 };
 struct tint_symbol_1 {
-  uint VertexIndex : SV_VertexID;
   uint InstanceIndex : SV_InstanceID;
+  uint VertexIndex : SV_VertexID;
 };
 struct tint_symbol_2 {
   float4 color : TEXCOORD0;

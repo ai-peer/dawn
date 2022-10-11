@@ -10,9 +10,9 @@ struct ComputeInputs {
   uint3 num_workgroups;
 };
 struct tint_symbol_1 {
+  uint3 global_invocation_id : SV_DispatchThreadID;
   uint3 local_invocation_id : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
-  uint3 global_invocation_id : SV_DispatchThreadID;
   uint3 workgroup_id : SV_GroupID;
 };
 

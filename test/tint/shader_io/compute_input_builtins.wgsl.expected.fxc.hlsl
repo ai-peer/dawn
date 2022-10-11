@@ -3,9 +3,9 @@ cbuffer cbuffer_tint_symbol_3 : register(b0, space0) {
 };
 
 struct tint_symbol_1 {
+  uint3 global_invocation_id : SV_DispatchThreadID;
   uint3 local_invocation_id : SV_GroupThreadID;
   uint local_invocation_index : SV_GroupIndex;
-  uint3 global_invocation_id : SV_DispatchThreadID;
   uint3 workgroup_id : SV_GroupID;
 };
 

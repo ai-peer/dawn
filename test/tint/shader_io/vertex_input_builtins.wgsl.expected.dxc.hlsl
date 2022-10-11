@@ -1,6 +1,6 @@
 struct tint_symbol_1 {
-  uint vertex_index : SV_VertexID;
   uint instance_index : SV_InstanceID;
+  uint vertex_index : SV_VertexID;
 };
 struct tint_symbol_2 {
   float4 value : SV_Position;

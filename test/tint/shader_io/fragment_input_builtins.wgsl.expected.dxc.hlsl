@@ -1,6 +1,6 @@
 struct tint_symbol_1 {
-  float4 position : SV_Position;
   bool front_facing : SV_IsFrontFace;
+  float4 position : SV_Position;
   uint sample_index : SV_SampleIndex;
   uint sample_mask : SV_Coverage;
 };

@@ -11,8 +11,8 @@ struct tint_symbol_1 {
   nointerpolation uint loc1 : TEXCOORD1;
   float loc2 : TEXCOORD2;
   float4 loc3 : TEXCOORD3;
-  float4 position : SV_Position;
   bool front_facing : SV_IsFrontFace;
+  float4 position : SV_Position;
   uint sample_index : SV_SampleIndex;
   uint sample_mask : SV_Coverage;
 };

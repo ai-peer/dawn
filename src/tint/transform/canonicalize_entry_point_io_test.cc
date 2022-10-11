@@ -2517,10 +2517,10 @@ struct tint_symbol_2 {
   c : i32,
   @location(3) @interpolate(flat)
   d : u32,
-  @builtin(position)
-  pos : vec4<f32>,
   @builtin(front_facing)
   ff : bool,
+  @builtin(position)
+  pos : vec4<f32>,
 }
 
 fn frag_main_inner(ff : bool, c : i32, inputs : FragmentInputExtra, b : u32) {
@@ -2607,10 +2607,10 @@ struct tint_symbol_2 {
   c : i32,
   @location(3) @interpolate(flat)
   d : u32,
-  @builtin(position)
-  pos : vec4<f32>,
   @builtin(front_facing)
   ff : bool,
+  @builtin(position)
+  pos : vec4<f32>,
 }
 
 fn frag_main_inner(ff : bool, c : i32, inputs : FragmentInputExtra, b : u32) {
@@ -3195,10 +3195,10 @@ fn vert_main() -> @builtin(position) vec4<f32> {
 
     auto* expect = R"(
 struct tint_symbol {
-  @builtin(position)
-  value : vec4<f32>,
   @builtin(point_size)
   vertex_point_size : f32,
+  @builtin(position)
+  value : vec4<f32>,
 }
 
 fn vert_main_inner() -> vec4<f32> {
@@ -3323,10 +3323,10 @@ struct VertOut {
 }
 
 struct tint_symbol {
-  @builtin(position)
-  pos : vec4<f32>,
   @builtin(point_size)
   vertex_point_size : f32,
+  @builtin(position)
+  pos : vec4<f32>,
 }
 
 fn vert_main_inner() -> VertOut {
@@ -3365,10 +3365,10 @@ struct VertOut {
 
     auto* expect = R"(
 struct tint_symbol {
-  @builtin(position)
-  pos : vec4<f32>,
   @builtin(point_size)
   vertex_point_size : f32,
+  @builtin(position)
+  pos : vec4<f32>,
 }
 
 fn vert_main_inner() -> VertOut {
@@ -3599,10 +3599,10 @@ struct tint_symbol_1 {
 struct tint_symbol_2 {
   @location(0)
   vertex_point_size : vec4<f32>,
-  @builtin(position)
-  vertex_point_size_1 : vec4<f32>,
   @builtin(point_size)
   vertex_point_size_2 : f32,
+  @builtin(position)
+  vertex_point_size_1 : vec4<f32>,
 }
 
 fn vert_main_inner(collide : VertIn1, collide_1 : VertIn2) -> VertOut {
@@ -3662,10 +3662,10 @@ struct tint_symbol_1 {
 struct tint_symbol_2 {
   @location(0)
   vertex_point_size : vec4<f32>,
-  @builtin(position)
-  vertex_point_size_1 : vec4<f32>,
   @builtin(point_size)
   vertex_point_size_2 : f32,
+  @builtin(position)
+  vertex_point_size_1 : vec4<f32>,
 }
 
 fn vert_main_inner(collide : VertIn1, collide_1 : VertIn2) -> VertOut {
@@ -3751,10 +3751,10 @@ struct tint_symbol_1 {
 struct tint_symbol_2 {
   @location(0)
   vertex_point_size : vec4<f32>,
-  @builtin(position)
-  vertex_point_size_1 : vec4<f32>,
   @builtin(point_size)
   vertex_point_size_2 : f32,
+  @builtin(position)
+  vertex_point_size_1 : vec4<f32>,
 }
 
 fn vert_main_inner(collide : VertIn1, collide_1 : VertIn2) -> VertOut {
@@ -3814,10 +3814,10 @@ struct tint_symbol_1 {
 struct tint_symbol_2 {
   @location(0)
   vertex_point_size : vec4<f32>,
-  @builtin(position)
-  vertex_point_size_1 : vec4<f32>,
   @builtin(point_size)
   vertex_point_size_2 : f32,
+  @builtin(position)
+  vertex_point_size_1 : vec4<f32>,
 }
 
 fn vert_main_inner(collide : VertIn1, collide_1 : VertIn2) -> VertOut {
