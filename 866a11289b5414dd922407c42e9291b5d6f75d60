@@ -67,6 +67,23 @@
       "message": "Thank you!",
       "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502cdacf_558c98c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-11T14:20:12Z",
+      "side": 1,
+      "message": "This isn\u0027t the right fix. It looks like I changed the test file by accident. The WGSL source should be 65536 which does not work in HLSL, so the expectation is correct, the test is wrong.",
+      "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
