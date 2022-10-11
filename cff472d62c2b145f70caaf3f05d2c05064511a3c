@@ -50,6 +50,24 @@
       "message": "Is it the tests that need to be updated to take into account the new validation?",
       "revId": "cff472d62c2b145f70caaf3f05d2c05064511a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9363ba2c_814eca43",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-11T03:07:29Z",
+      "side": 1,
+      "message": "Yes and I\u0027ve fixed these tests with https://github.com/gpuweb/cts/pull/1906 merged.",
+      "parentUuid": "deabd751_f7869ff2",
+      "revId": "cff472d62c2b145f70caaf3f05d2c05064511a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
