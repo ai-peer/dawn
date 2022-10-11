@@ -72,7 +72,7 @@ class Mutator {
 
     /// Causes the mutator to apply a mutation. This method can be called
     /// multiple times as long as the previous call didn't return
-    /// `Status::kInvalid`.
+    /// `Status::kUndefined`.
     ///
     /// @return the status of the mutation (e.g. success, error etc) and whether
     ///     the binary was changed during mutation.
@@ -80,7 +80,7 @@ class Mutator {
 
     /// Returns the mutated binary. The returned binary is guaranteed to be valid
     /// iff the previous call to the `Mutate` method returned didn't return
-    /// `Status::kInvalid`.
+    /// `Status::kUndefined`.
     ///
     /// @return the mutated SPIR-V binary. It might be identical to the original
     ///     binary if `Result::IsChanged` returns `false`.

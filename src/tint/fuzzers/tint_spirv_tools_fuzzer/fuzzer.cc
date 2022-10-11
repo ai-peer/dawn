@@ -158,7 +158,7 @@ extern "C" size_t LLVMFuzzerCustomMutator(uint8_t* data,
 
     auto result = mutator->Mutate();
 
-    if (result.GetStatus() == Mutator::Status::kInvalid) {
+    if (result.GetStatus() == Mutator::Status::kUndefined) {
         // The binary is invalid - log the error and remove the mutator from the
         // cache.
         util::LogMutatorError(*mutator, context->params.error_dir);

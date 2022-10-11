@@ -110,7 +110,7 @@ Mutator::Result SpirvReduceMutator::Mutate() {
             if (!ApplyReduction(opportunity)) {
                 // The module became invalid as a result of the applied reduction.
                 is_valid_ = false;
-                return {Mutator::Status::kInvalid,
+                return {Mutator::Status::kUndefined,
                         total_applied_reductions_ != old_applied_reductions};
             }
         }

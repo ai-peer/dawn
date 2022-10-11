@@ -67,7 +67,7 @@ Mutator::Result SpirvFuzzMutator::Mutate() {
         case spvtools::fuzz::Fuzzer::Status::kFuzzerStuck:
             return {Mutator::Status::kStuck, result.is_changed};
         case spvtools::fuzz::Fuzzer::Status::kFuzzerPassLedToInvalidModule:
-            return {Mutator::Status::kInvalid, result.is_changed};
+            return {Mutator::Status::kUndefined, result.is_changed};
     }
 }
 
