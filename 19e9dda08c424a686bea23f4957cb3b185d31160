@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02eced66_9ece6c7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-12T07:46:36Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\n\nThis patch add testcases for both function, private, and storage address\nspace array variable, with and without explicit initializer, and array\ncount less and equal to 65536.\n\nNote that since the validator checks array count now, all test cases with array count 65536 will result in validator error and thus be skipped in all backends.",
+      "revId": "19e9dda08c424a686bea23f4957cb3b185d31160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
