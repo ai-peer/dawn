@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70e39712_ef5e08bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-12T19:10:48Z",
+      "side": 1,
+      "message": "Thanks for the heads up.",
+      "revId": "65aecc80014591a4306cb8e0842a559f0dd93f87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adfbed4_9dd67a60",
@@ -14,6 +31,30 @@
       "writtenOn": "2022-10-12T12:33:19Z",
       "side": 1,
       "message": "David - this was a late change to fix the x86 bots. PTAL.",
+      "range": {
+        "startLine": 165,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 21
+      },
+      "revId": "65aecc80014591a4306cb8e0842a559f0dd93f87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "089dabe4_adae72bd",
+        "filename": "src/tint/writer/float_to_string_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-12T19:10:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0adfbed4_9dd67a60",
       "range": {
         "startLine": 165,
         "startChar": 0,
