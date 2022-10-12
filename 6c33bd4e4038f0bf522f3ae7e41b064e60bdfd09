@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b5b3935_a8cf4aec",
+        "filename": "src/tint/sem/pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-12T10:13:14Z",
+      "side": 1,
+      "message": "This field is not considered in type deduplication, so you effectively have a non-deterministic field on *all* pointers that match the subtype, address space and access.\n\nThis does not belong here. This is a property of the expression, not the type.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "6c33bd4e4038f0bf522f3ae7e41b064e60bdfd09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6ae7c9d_7e092e0c",
         "filename": "src/tint/sem/pointer.h",
         "patchSetId": 2
