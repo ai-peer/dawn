@@ -119,6 +119,24 @@
       "message": "Thanks for reviewing, and according to Dan this test case should be fixed in the opposite way, so removing Ben\u0027s +2. Will upload a new CL tomorrow.",
       "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a581cc_0ea1404b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-12T11:32:05Z",
+      "side": 1,
+      "message": "Argh, I\u0027m late to see this.\n\nThe end-to-end testing framework doesn\u0027t currently support testing for validation failures like this.\n\nIf we check in `SKIP` tests, then they are just skipped. We aren\u0027t checking that the shaders fail to compile, we just skip them, as we currently expect all cases in the `test/tint/...` directory to pass. If we land these files and the validation gets broken, we certainly won\u0027t notice until someone just happens to run with `--generate-expected` (even then, there\u0027s a chance this will be missed). So, these tests are probably worse than no tests - they provide a false sense of security.\n\nIf we want to support this, we need to add a new feature to the test runner so that it can recognise a new `FAIL` token in the expectation header, checks the output is a failure, and that the emitted error matches the rest of the expectation file. \n\nTo date, we\u0027ve not needed this feature, and have instead relied on tint unit tests to check for the validation cases. If someone wants to actually add this support to the test runner, be my guest - otherwise I\u0027m not sure that this case is compelling enough to change the status-quo here, and I\u0027d lean towards just deleting these tests.\n\nSorry to mess you around.",
+      "parentUuid": "1b1de96a_6fad4556",
+      "revId": "866a11289b5414dd922407c42e9291b5d6f75d60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
