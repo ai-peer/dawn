@@ -47,6 +47,20 @@ namespace tint::resolver {
 
 namespace {
 
+/// Unwraps `u->expr`'s chain of indirect (*) and address-of (&) expressions, returning the first
+/// expression that is neither of these.
+/// E.g. If `u` is `*(&(*(&p)))`, returns `p`.
+const ast::Expression* UnwrapIndirectAndAddressOfChain(const ast::UnaryOpExpression* u) {
+    auto is_indirect_or_address_of = [](const ast::UnaryOpExpression* u2) {
+        return u2->op == ast::UnaryOp::kIndirection || u2->op == ast::UnaryOp::kAddressOf;
+    };
+    auto* e = u->expr;
+    while (e->Is(is_indirect_or_address_of)) {
+        e = e->As<ast::UnaryOpExpression>()->expr;
+    }
+    return e;
+}
+
 /// CallSiteTag describes the uniformity requirements on the call sites of a function.
 enum CallSiteTag {
     CallSiteRequiredToBeUniform,
@@ -202,6 +216,10 @@ struct FunctionInfo {
     /// The set of a local read-write vars that are in scope at any given point in the process.
     /// Includes pointer parameters.
     std::unordered_set<const sem::Variable*> local_var_decls;
+
+    /// The set of partial pointer variables - pointers that point to a subobject (into an array or
+    /// struct).
+    std::unordered_set<const sem::Variable*> partial_ptrs;
 
     /// LoopSwitchInfo tracks information about the value of variables for a control flow construct.
     struct LoopSwitchInfo {
@@ -943,14 +961,27 @@ class UniformityGraph {
 
             [&](const ast::VariableDeclStatement* decl) {
                 Node* node;
+                auto* sem_var = sem_.Get(decl->variable);
                 if (decl->variable->constructor) {
                     auto [cf1, v] = ProcessExpression(cf, decl->variable->constructor);
                     cf = cf1;
                     node = v;
+
+                    // Store if lhs is a partial pointer
+                    if (sem_var->Type()->Is<sem::Pointer>()) {
+                        auto* init = sem_.Get(decl->variable->constructor);
+                        if (auto* unary_init = init->Declaration()->As<ast::UnaryOpExpression>()) {
+                            auto* e = UnwrapIndirectAndAddressOfChain(unary_init);
+                            if (e->IsAnyOf<ast::IndexAccessorExpression,
+                                           ast::MemberAccessorExpression>()) {
+                                current_function_->partial_ptrs.insert(sem_var);
+                            }
+                        }
+                    }
                 } else {
                     node = cf;
                 }
-                current_function_->variables.Set(sem_.Get(decl->variable), node);
+                current_function_->variables.Set(sem_var, node);
 
                 if (decl->variable->Is<ast::Var>()) {
                     current_function_->local_var_decls.insert(
@@ -1130,7 +1161,9 @@ class UniformityGraph {
     /// @param cf the input control flow node
     /// @param expr the expression to process
     /// @returns a pair of (control flow node, variable node)
-    std::pair<Node*, Node*> ProcessLValueExpression(Node* cf, const ast::Expression* expr) {
+    std::pair<Node*, Node*> ProcessLValueExpression(Node* cf,
+                                                    const ast::Expression* expr,
+                                                    bool is_partial_reference = false) {
         return Switch(
             expr,
 
@@ -1144,9 +1177,10 @@ class UniformityGraph {
                     auto* value = CreateNode(name + "_lvalue");
                     auto* old_value = current_function_->variables.Set(local, value);
 
-                    // Aggregate values link back to their previous value, as they can never become
-                    // uniform again.
-                    if (!local->Type()->UnwrapRef()->is_scalar() && old_value) {
+                    // If i is part of an expression that is a partial reference to the variable it
+                    // refers to, we link back to the variable's previous value. If the previous
+                    // value was non-uniform, a partial assignment will not make it uniform.
+                    if (is_partial_reference && old_value) {
                         value->AddEdge(old_value);
                     }
 
@@ -1160,14 +1194,15 @@ class UniformityGraph {
             },
 
             [&](const ast::IndexAccessorExpression* i) {
-                auto [cf1, l1] = ProcessLValueExpression(cf, i->object);
+                auto [cf1, l1] =
+                    ProcessLValueExpression(cf, i->object, /*is_partial_reference*/ true);
                 auto [cf2, v2] = ProcessExpression(cf1, i->index);
                 l1->AddEdge(v2);
                 return std::pair<Node*, Node*>(cf2, l1);
             },
 
             [&](const ast::MemberAccessorExpression* m) {
-                return ProcessLValueExpression(cf, m->structure);
+                return ProcessLValueExpression(cf, m->structure, /*is_partial_reference*/ true);
             },
 
             [&](const ast::UnaryOpExpression* u) {
@@ -1179,15 +1214,37 @@ class UniformityGraph {
                     auto* deref = CreateNode(name + "_deref");
                     auto* old_value = current_function_->variables.Set(source_var, deref);
 
-                    // Aggregate values link back to their previous value, as they can never become
-                    // uniform again.
-                    if (!source_var->Type()->UnwrapRef()->UnwrapPtr()->is_scalar() && old_value) {
-                        deref->AddEdge(old_value);
+                    if (old_value) {
+                        // If dereferencing a partial pointer, we link back to the variable's
+                        // previous value. If the previous value was non-uniform, a partial
+                        // assignment will not make it uniform.
+
+                        // To determine if we're dereferencing a partial pointer, unwrap *& chains;
+                        // if the final expression is an identifier, see if it's a partial pointer.
+                        // If it's not an identifier, then it must be an index/acessor expression,
+                        // and thus a partial pointer.
+                        auto* e = UnwrapIndirectAndAddressOfChain(u);
+                        bool is_partial = false;
+                        if (auto* i = e->As<ast::IdentifierExpression>()) {
+                            if (auto* var_user = sem_.Get<sem::VariableUser>(i)) {
+                                if (current_function_->partial_ptrs.count(var_user->Variable())) {
+                                    is_partial = true;
+                                }
+                            }
+                        } else {
+                            TINT_ASSERT(Resolver, (e->IsAnyOf<ast::IndexAccessorExpression,
+                                                              ast::MemberAccessorExpression>()));
+                            is_partial = true;
+                        }
+
+                        if (is_partial) {
+                            deref->AddEdge(old_value);
+                        }
                     }
 
                     return std::pair<Node*, Node*>(cf, deref);
                 }
-                return ProcessLValueExpression(cf, u->expr);
+                return ProcessLValueExpression(cf, u->expr, is_partial_reference);
             },
 
             [&](Default) {
