@@ -199,14 +199,6 @@ crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:compute:isAs
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ linux ] webgpu:web_platform,external_texture,* [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt2020.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.bt709.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.bt601.vp9.webm" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.theora.ogv" [ Failure ]
-crbug.com/dawn/0000 [ intel mac ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType="VideoElement";videoName="red-green.webmvp8.webm" [ Failure ]
 
 ################################################################################
 # webgpu:api,operation,buffers failures
@@ -764,12 +756,6 @@ crbug.com/1357206 [ nvidia-0x2184 win10 ] worker_webgpu:api,validation,buffer,ma
 crbug.com/1357206 [ nvidia-0x2184 win10 ] worker_webgpu:api,validation,buffer,mapping:mapAsync,offsetAndSizeAlignment: [ Failure ]
 
 ################################################################################
-# Flaky crashes in PartitionAlloc for async pipeline creation
-# KEEP
-################################################################################
-crbug.com/dawn/1539 [ ubuntu ] webgpu:api,validation,render_pipeline,fragment_state:pipeline_output_targets:isAsync=true;* [ Failure ]
-
-################################################################################
 # storage buffer binding size failures
 ################################################################################
 crbug.com/dawn/1542 webgpu:api,validation,createBindGroup:buffer,resource_binding_size:type="read-only-storage" [ Failure ]
@@ -778,15 +764,6 @@ crbug.com/dawn/1542 webgpu:api,validation,createBindGroup:minBindingSize: [ Fail
 crbug.com/dawn/1542 webgpu:api,validation,encoding,cmds,setBindGroup:buffer_dynamic_offsets:type="read-only-storage";* [ Failure ]
 crbug.com/dawn/1542 webgpu:api,validation,encoding,cmds,setBindGroup:buffer_dynamic_offsets:type="storage";* [ Failure ]
 crbug.com/dawn/1542 webgpu:api,validation,encoding,cmds,setBindGroup:dynamic_offsets_match_expectations_in_pass_encoder:* [ Failure ]
-
-################################################################################
-# untriaged failures
-# KEEP
-################################################################################
-crbug.com/dawn/0000 [ win ] webgpu:api,operation,render_pass,resolve:* [ Failure ]
-crbug.com/dawn/0000 [ win ] webgpu:api,operation,render_pipeline,pipeline_output_targets:color,component_count,blend:format="rg8unorm" [ Failure ]
-crbug.com/dawn/0000 [ mac ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:* [ Failure ]
-crbug.com/dawn/0000 [ mac ] worker_webgpu:api,operation,render_pass,storeOp:render_pass_store_op,depth_stencil_attachment_only:depthStencilFormat="stencil8";* [ Failure ]
 
 # New flakes. Please triage:
 crbug.com/dawn/0000 [ dawn-backend-validation target-cpu-32 ] webgpu:api,validation,texture,destroy:submit_a_destroyed_texture_as_attachment:depthStencilTextureAspect="all";colorTextureState="destroyedBeforeEncode";depthStencilTextureState="destroyedBeforeEncode" [ RetryOnFailure ]
