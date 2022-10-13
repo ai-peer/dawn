@@ -1,0 +1,327 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9de319_730f6855",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: operation to all",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5daca898_83002a5e",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "Why the `apparently` does this rely on the load rule?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce988cd_abc6466c",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "Are these tabs? Maybe convert to spaces?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6544faa_7a017616",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "Missing period after output?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5990264_fd1bc667",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: memory",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7778a8_bfda6015",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: many",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bd52be8_9bb36c5a",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: remove `it`?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd4d9d15_1865ab2c",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: tabs",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0a4e32_2717ea91",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: s/they/the",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aae2eb4_1c093834",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: variable at",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded36cad_09b5658d",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: image",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c30a9d08_25f7e267",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure I parse this sentence. Are you saying the SPIR-V type is more flexible. The WGSL type is determined by usage. Or something else?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20a5226_b6ba1444",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: in the module",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fca0408_91fbcb3f",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "This is the new way, isn\u0027t there an old way of saying Uniform as well or is that only SSBOs?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d189ef62_bfe95134",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: space before access",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b024b4d_43fcb78f",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: hence",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca12a38_06a2d3b9",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: variable",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a428b719_f934c1a0",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: need to handle",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2ff35ca_35e676d8",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T14:37:17Z",
+      "side": 1,
+      "message": "nit: variable",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
