@@ -628,6 +628,10 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
         }
     }
 
+    if (HasStage(SingleShaderStage::Fragment)) {
+        mUsesFragDepth = GetStage(SingleShaderStage::Fragment).metadata->usesFragDepth;
+    }
+
     SetContentHash(ComputeContentHash());
     GetObjectTrackingList()->Track(this);
 
@@ -814,20 +818,22 @@ bool RenderPipelineBase::IsAlphaToCoverageEnabled() const {
 
 const AttachmentState* RenderPipelineBase::GetAttachmentState() const {
     ASSERT(!IsError());
-
     return mAttachmentState.Get();
 }
 
 bool RenderPipelineBase::WritesDepth() const {
     ASSERT(!IsError());
-
     return mWritesDepth;
 }
 
 bool RenderPipelineBase::WritesStencil() const {
     ASSERT(!IsError());
-
     return mWritesStencil;
+}
+
+bool RenderPipelineBase::UsesFragDepth() const {
+    ASSERT(!IsError());
+    return mUsesFragDepth;
 }
 
 size_t RenderPipelineBase::ComputeContentHash() {
