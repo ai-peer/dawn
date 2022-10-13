@@ -1,0 +1,227 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09bf4dba_6f698eb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "Much, much nicer. Thank you!",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69b6ef5_cfaf7038",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "Much, much nicer. Thank you!",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56f92f5c_1d09e491",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "nit: Double casts here. For performance, I\u0027d recommend just using `As` in an if, with a nested if for the op.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 50
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c59eab7f_9d7de7ad",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "nit: drop an if here, with:\n`if (auto* e \u003d UnwrapIndirectAndAddressOfChain(init-\u003eDeclaration()))`",
+      "range": {
+        "startLine": 973,
+        "startChar": 28,
+        "endLine": 973,
+        "endChar": 96
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa37f7ca_d0f907a7",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "This sentence is confusing. Maybe:\n\n```\n// If `i` is an identifier that resolves to a pointer-let, and that pointer is a partial reference to the source variable, ...\n```",
+      "range": {
+        "startLine": 1180,
+        "startChar": 23,
+        "endLine": 1181,
+        "endChar": 32
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1830987f_0588c6e5",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "übernit: could scope the `old_value` decl in here.",
+      "range": {
+        "startLine": 1217,
+        "startChar": 24,
+        "endLine": 1217,
+        "endChar": 33
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed6e3b91_ad480330",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "nit: could be put in a method to try and reduce the bloat of `ProcessLValueExpression` (I know it\u0027s already multiple pages, but still).\n\nAt least as a method you have a nice place to put all this good documentation.",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1238,
+        "endChar": 25
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753e9b69_b9ff14c1",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 5632,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "Please can we have a couple of cases for matrices too?",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2635a5f0_db5f5df0",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6036,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "bit of a jump here in complexity between this case and the one before it.\n\nHow about a case before this that just does `(*p).a \u003d rw`?",
+      "range": {
+        "startLine": 6036,
+        "startChar": 0,
+        "endLine": 6036,
+        "endChar": 20
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dfba7bd_5d2db505",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "You missing an assignment with `rw` here?",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c326ea_67c5d663",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6547,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T13:28:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
