@@ -2306,9 +2306,6 @@ TEST_P(CopyTests_T2T, Texture3DTo2DArrayFull) {
 // Test that copying between 3D texture and 2D array textures works. It includes partial copy
 // for src and/or dst texture, non-zero offset (copy origin), non-zero mip level.
 TEST_P(CopyTests_T2T, Texture3DAnd2DArraySubRegion) {
-    // TODO(crbug.com/dawn/1216): Remove this suppression.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
-
     // TODO(crbug.com/dawn/1426): Remove this suppression.
     DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows() && IsIntel());
 
@@ -2368,8 +2365,6 @@ TEST_P(CopyTests_T2T, Texture3DAnd2DArraySubRegion) {
 
 // Test that copying whole 2D array to a 3D texture in one texture-to-texture-copy works.
 TEST_P(CopyTests_T2T, Texture2DArrayTo3DFull) {
-    // TODO(crbug.com/dawn/1216): Remove this suppression.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -2410,8 +2405,6 @@ TEST_P(CopyTests_T2T, Texture3DTo2DArraySubRegion) {
 // Test that copying subregion of a 2D array to a 3D texture to in one texture-to-texture-copy
 // works.
 TEST_P(CopyTests_T2T, Texture2DArrayTo3DSubRegion) {
-    // TODO(crbug.com/dawn/1216): Remove this suppression.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
