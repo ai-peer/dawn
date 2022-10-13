@@ -929,9 +929,7 @@ TEST_P(ShaderTests, ShaderOverridingRobustnessBuiltins) {
     bufDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
     wgpu::Buffer buf = device.CreateBuffer(&bufDesc);
 
-    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {
-        {0, buf}
-    });
+    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buf}});
 
     // Run the compute pipeline.
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
