@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f2b5d01_8e324c01",
+        "filename": "src/tint/sem/pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-13T12:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b5b3935_a8cf4aec",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "6c33bd4e4038f0bf522f3ae7e41b064e60bdfd09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6ae7c9d_7e092e0c",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-11T18:08:15Z",
       "side": 1,
       "message": "I tried adding the same field to `sem::Reference`, but it didn\u0027t quite work out. The problem is that when processing, say, `v[i] \u003d ...`, the semantic info for v` is a `VariableUser`, and where we process this in the Resolver, it\u0027s not easy to store that this identifier expression is actually a partial reference (i.e. is the object of an index accessor expression). You can see my WIP CL for this here: https://dawn-review.googlesource.com/c/dawn/+/105460",
+      "range": {
+        "startLine": 59,
+        "startChar": 1,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "6c33bd4e4038f0bf522f3ae7e41b064e60bdfd09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01efa287_e0208698",
+        "filename": "src/tint/sem/pointer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-13T12:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6ae7c9d_7e092e0c",
       "range": {
         "startLine": 59,
         "startChar": 1,
