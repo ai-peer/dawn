@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed211545_6acf02b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-13T06:30:40Z",
+      "side": 1,
+      "message": "Please take a look, thanks\nThe latest patch removes the cases with exceed array count.",
+      "revId": "7cf1692a055d63c3c859509d9adc20370c633163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
