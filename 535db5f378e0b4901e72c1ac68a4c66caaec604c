@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f249a4_710f8d4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T13:58:11Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "535db5f378e0b4901e72c1ac68a4c66caaec604c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2b1026_93b0dc4a",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-13T13:58:11Z",
+      "side": 1,
+      "message": "nit: Can we reword this?\n\n`@returns true if |expr| is evaluated in or before |latest_stage|. false otherwise`\n\nOr something similar? It\u0027s hard to parse what `success` means.",
+      "revId": "535db5f378e0b4901e72c1ac68a4c66caaec604c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
