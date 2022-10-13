@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f9b9fc_68aacfc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T17:23:52Z",
+      "side": 1,
+      "message": "Looks good!",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a77d700_f9c6cc88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T17:23:52Z",
+      "side": 1,
+      "message": "Looks good!",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9de319_730f6855",
@@ -201,6 +235,29 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "I\u0027m not sure I parse this sentence. Are you saying the SPIR-V type is more flexible. The WGSL type is determined by usage. Or something else?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053ac78a_243b8ec8",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T17:23:52Z",
+      "side": 1,
+      "message": "Someone was asking the matrix chat about this - they were curious to know how you can do this mapping, given that the shader could use the sampler type as both `sampler` and `sampler_comparison`. AFAICT, we emit `sampler_comparison` if there are any depthy-things being done, but do not detect mixed usage (this will be rejected by the WGSL validator). Might be worth a comment, if this is correct.",
+      "range": {
+        "startLine": 454,
+        "startChar": 46,
+        "endLine": 456,
+        "endChar": 42
+      },
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
