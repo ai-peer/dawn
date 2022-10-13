@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12fced2_9aa3ae66",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3043,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T21:24:32Z",
+      "side": 1,
+      "message": "This is checking that the next token _is_ a binary operator. Maybe:",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeeeec19_c63cc712",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3045,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T21:24:32Z",
+      "side": 1,
+      "message": "Why is this called `lhs_op` as it\u0027s the full binary expression, not the left hand side?",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88cf63e1_56eb1fab",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3046,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T21:24:32Z",
+      "side": 1,
+      "message": "This is subtle and can use a comment (given you had to explain it to me).\n\n```\n// Note, expression is greedy an will consume all the operators of the same type\n// so, `a \u0026 a \u0026 a` would all be consumed above. If you see any binary operator\n// after this then it _must_ be a different one, and hence an error.\n```",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
