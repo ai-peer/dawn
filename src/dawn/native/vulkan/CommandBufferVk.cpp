@@ -1108,6 +1108,22 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
     DescriptorSetTracker descriptorSets = {};
     RenderPipeline* lastPipeline = nullptr;
 
+    struct ClampFragDepthArgs {
+        float min;
+        float max;
+    };
+    ClampFragDepthArgs clampFragDepthArgs = {0.0f, 1.0f};
+    bool clampFragDepthArgsDirty = true;
+    auto ApplyClampFragDepthArgs = [&]() {
+        if (!clampFragDepthArgsDirty || lastPipeline == nullptr) {
+            return;
+        }
+        device->fn.CmdPushConstants(commands, ToBackend(lastPipeline->GetLayout())->GetHandle(),
+                                    VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(clampFragDepthArgs),
+                                    &clampFragDepthArgs);
+        clampFragDepthArgsDirty = false;
+    };
+
     auto EncodeRenderBundleCommand = [&](CommandIterator* iter, Command type) {
         switch (type) {
             case Command::Draw: {
@@ -1231,6 +1247,9 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 lastPipeline = pipeline;
 
                 descriptorSets.OnSetPipeline(pipeline);
+
+                // Apply the deferred min/maxDepth push constants update if needed.
+                ApplyClampFragDepthArgs();
                 break;
             }
 
@@ -1302,6 +1321,12 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 }
 
                 device->fn.CmdSetViewport(commands, 0, 1, &viewport);
+
+                // Try apploying the push constants that contain min/maxDepth immediately. This can
+                // be deferred if no pipeline is currently bound.
+                clampFragDepthArgs = {viewport.minDepth, viewport.maxDepth};
+                clampFragDepthArgsDirty = true;
+                ApplyClampFragDepthArgs();
                 break;
             }
 

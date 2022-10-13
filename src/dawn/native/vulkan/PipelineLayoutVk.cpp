@@ -46,14 +46,19 @@ MaybeError PipelineLayout::Initialize() {
         numSetLayouts++;
     }
 
+    VkPushConstantRange depthClampArgsRange;
+    depthClampArgsRange.stageFlags = VK_SHADER_STAGE_FRAGMENT_BIT;
+    depthClampArgsRange.offset = 0;
+    depthClampArgsRange.size = 8;  // Yes lol
+
     VkPipelineLayoutCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
     createInfo.pNext = nullptr;
     createInfo.flags = 0;
     createInfo.setLayoutCount = numSetLayouts;
     createInfo.pSetLayouts = AsVkArray(setLayouts.data());
-    createInfo.pushConstantRangeCount = 0;
-    createInfo.pPushConstantRanges = nullptr;
+    createInfo.pushConstantRangeCount = 1;
+    createInfo.pPushConstantRanges = &depthClampArgsRange;
 
     // Record cache key information now since the createInfo is not stored.
     StreamIn(&mCacheKey, stream::Iterable(cachedObjects.data(), numSetLayouts), createInfo);
