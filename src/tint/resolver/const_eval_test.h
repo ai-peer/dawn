@@ -136,6 +136,7 @@ using builder::IsValue;
 using builder::Mat;
 using builder::Val;
 using builder::Value;
+using builder::ValueBase;
 using builder::Vec;
 
 using Types = std::variant<  //
@@ -188,21 +189,18 @@ using Types = std::variant<  //
     //
     >;
 
+/// Returns the current Value<T> in the `types` variant as a `ValueBase` pointer to use the
+/// polymorphic API. This trades longer compile times using std::variant for longer runtime via
+/// virtual function calls.
+template <typename ValueVariant>
+inline const ValueBase* ToValueBase(const ValueVariant& types) {
+    return std::visit(
+        [](auto&& t) -> const ValueBase* { return static_cast<const ValueBase*>(&t); }, types);
+}
+
+/// Prints Types to ostream
 inline std::ostream& operator<<(std::ostream& o, const Types& types) {
-    std::visit(
-        [&](auto&& v) {
-            using ValueType = std::decay_t<decltype(v)>;
-            o << ValueType::DataType::Name() << "(";
-            for (auto& a : v.args.values) {
-                o << std::get<typename ValueType::ElementType>(a);
-                if (&a != &v.args.values.Back()) {
-                    o << ", ";
-                }
-            }
-            o << ")";
-        },
-        types);
-    return o;
+    return ToValueBase(types)->Print(o);
 }
 
 // Calls `f` on deepest elements of both `a` and `b`. If function returns Action::kStop, it stops
