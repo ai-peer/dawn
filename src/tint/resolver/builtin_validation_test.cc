@@ -260,8 +260,7 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, Immediate) {
     // a vector constructor.
     bool is_vector = arg_to_replace->Is<ast::CallExpression>();
 
-    // Make the expression to be replaced, reachable. This keeps the resolver
-    // happy.
+    // Make the expression to be replaced, reachable. This keeps the resolver happy.
     WrapInFunction(arg_to_replace);
 
     arg_to_replace = expr(Source{{12, 34}}, *this);
@@ -310,13 +309,16 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalConst) {
     auto args = overload.args(this);
     auto*& arg_to_replace = (param.position == Position::kFirst) ? args.Front() : args.Back();
 
-    // Make the expression to be replaced, reachable. This keeps the resolver
-    // happy.
+    // BuildTextureVariable() uses a Literal for scalars, and a CallExpression for
+    // a vector constructor.
+    bool is_vector = arg_to_replace->Is<ast::CallExpression>();
+
+    // Make the expression to be replaced, reachable. This keeps the resolver happy.
     WrapInFunction(arg_to_replace);
 
     arg_to_replace = Expr(Source{{12, 34}}, "G");
 
-    // Call the builtin with the constexpr argument replaced
+    // Call the builtin with the constant-expression argument replaced
     Func("func", utils::Empty, ty.void_(),
          utils::Vector{
              CallStmt(Call(overload.function, args)),
@@ -325,10 +327,23 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalConst) {
              Stage(ast::PipelineStage::kFragment),
          });
 
-    EXPECT_FALSE(r()->Resolve());
-    std::stringstream err;
-    err << "12:34 error: the " << param.name << " argument must be a const-expression";
-    EXPECT_EQ(r()->error(), err.str());
+    if (expr.invalid_index == Constexpr::kValid) {
+        EXPECT_TRUE(r()->Resolve()) << r()->error();
+    } else {
+        EXPECT_FALSE(r()->Resolve());
+        std::stringstream err;
+        if (is_vector) {
+            err << "12:34 error: each component of the " << param.name
+                << " argument must be at least " << param.min << " and at most " << param.max
+                << ". " << param.name << " component " << expr.invalid_index << " is "
+                << std::to_string(expr.values[static_cast<size_t>(expr.invalid_index)]);
+        } else {
+            err << "12:34 error: the " << param.name << " argument must be at least " << param.min
+                << " and at most " << param.max << ". " << param.name << " is "
+                << std::to_string(expr.values[static_cast<size_t>(expr.invalid_index)]);
+        }
+        EXPECT_EQ(r()->error(), err.str());
+    }
 }
 INSTANTIATE_TEST_SUITE_P(
     Offset2D,
