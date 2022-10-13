@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d59e5cb5_e25a6bd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T17:24:32Z",
+      "side": 1,
+      "message": "Thanks. Land as soon as bots are happy.",
+      "revId": "f95b0d37647c94f6d5960f831955be8ca24e463e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac39b7d6_f00e606f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-13T17:24:32Z",
+      "side": 1,
+      "message": "Thanks. Land as soon as bots are happy.",
+      "revId": "f95b0d37647c94f6d5960f831955be8ca24e463e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
