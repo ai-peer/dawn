@@ -187,6 +187,10 @@ const PerStage<ProgrammableStage>& PipelineBase::GetAllStages() const {
     return mStages;
 }
 
+bool PipelineBase::HasStage(SingleShaderStage stage) const {
+    return mStageMask & StageBit(stage);
+}
+
 wgpu::ShaderStage PipelineBase::GetStageMask() const {
     return mStageMask;
 }
