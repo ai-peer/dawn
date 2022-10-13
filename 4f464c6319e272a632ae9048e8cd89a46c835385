@@ -50,6 +50,91 @@
       "message": "This is subtle and can use a comment (given you had to explain it to me).\n\n```\n// Note, expression is greedy an will consume all the operators of the same type\n// so, `a \u0026 a \u0026 a` would all be consumed above. If you see any binary operator\n// after this then it _must_ be a different one, and hence an error.\n```",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701cbece_e42ee1e1",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T22:34:23Z",
+      "side": 1,
+      "message": "This is wrong, + and - don\u0027t associate with Multipicative.",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859c0b91_c28df15f",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T22:34:23Z",
+      "side": 1,
+      "message": "I believe this is also wrong, relational should only be kLogical",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a92539a_34eaf9fc",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T22:34:23Z",
+      "side": 1,
+      "message": "I think this should only be kOpLAnd",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e08b02_bfe2be91",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T22:34:23Z",
+      "side": 1,
+      "message": "Only kOpLOr",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09bd522_dfbbbf31",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-13T22:34:23Z",
+      "side": 1,
+      "message": "See https://github.com/gpuweb/gpuweb/issues/1146#issuecomment-714721825",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
