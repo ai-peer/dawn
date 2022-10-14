@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91c2ba6e_74c51b49",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-14T17:58:47Z",
+      "side": 1,
+      "message": "I\u0027m going by the diagram in #1146, but maybe I\u0027m reading it wrong. @dneto@google.com could you clarify how the precedence, associtivity and parenthesis all work?",
+      "parentUuid": "bbf01b97_536123df",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "859c0b91_c28df15f",
         "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
         "patchSetId": 1
@@ -223,6 +241,24 @@
       "side": 1,
       "message": "Yup, that shows precedence, which I believe isn\u0027t the same as whether you require parentheses or not.",
       "parentUuid": "f09bd522_dfbbbf31",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3b32ab_839277fb",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-14T17:58:47Z",
+      "side": 1,
+      "message": "My understanding was that it was both. I thought it was things in differnet groupings required parens, but I may be mis-reading the diagram.",
+      "parentUuid": "9b6a5095_4201199c",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
