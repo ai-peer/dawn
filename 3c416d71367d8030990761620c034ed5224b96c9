@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f92af8e_9126a6ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "LGTM overall but I think we need to handle the visibleWidth/Height in ExternalTexture itself.",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "305a3adf_9ccd3dac",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the visible width / height be part of the external texture itself? I think that\u0027s a current thing that\u0027s missing and should be added. Otherwise when the WebGPU application samples the external texture, it may see a texture that\u0027s larger than the video due to 8x8 decode blocks for example.",
+      "range": {
+        "startLine": 1438,
+        "startChar": 0,
+        "endLine": 1440,
+        "endChar": 0
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa72d87d_ec8cee51",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "Instead of duplicating the header / footer, WDYT of having a single shader module with two entrypoints? The only thing that happens before sampling is the clamping of texcoords. So it could be\n\n```\n@fragment copyTexture() {\n  discardIfOutsideOfCopy();\n  \n  var color \u003d textureSampleLevel(...., 0);\n  return transform(color);\n}\n```",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eee054d_6540402d",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "When the visibleHeight/width is moved to external texture creation, this would be updated to ask the ExternalTexture for its width.\n\nAlso IMHO for a single DAWN_INVALID_IF we can move the code in its called.",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65825c33_7f6b7cfb",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "This is a bit weird, can\u0027t we check that the destination sample count is 1 directly like at [1]? (and this check is redundant since it is done at [1])",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7526c7_5e1b47d1",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "The valid formats are all color formats, so can\u0027t the only aspect used by all? (and we should validate that in common restrictions?)",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593f9473_3595fc73",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "nit: duplicate chack? The same check is just above.",
+      "range": {
+        "startLine": 670,
+        "startChar": 0,
+        "endLine": 671,
+        "endChar": 81
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b1761a7_1b35cb2c",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a310e74_b34ae1db",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "Unfortunately I think we also need to validate that the textures that compose the external texture can be used in submits. Maybe we could make ValidateCanUseInSubmitNow recursively call the function on the textures that compose the external texture?",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d70540_5819af9e",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T13:38:32Z",
+      "side": 1,
+      "message": "optional nit: These constants seem to be in a lot of places. Maybe we can have a common place somewhere in src/dawn/tests/ for them? Not sure.",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
