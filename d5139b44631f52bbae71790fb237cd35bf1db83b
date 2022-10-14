@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4994128a_4d67990c",
+        "filename": "src/dawn/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-14T00:19:59Z",
+      "side": 0,
+      "message": "These tests still fail with D3D12 GPU debug layer (full validation) although we don\u0027t run tests with full backend validation on the bots, so I suggest we still keep skipping them.",
+      "range": {
+        "startLine": 291,
+        "startChar": 4,
+        "endLine": 291,
+        "endChar": 73
+      },
+      "revId": "d5139b44631f52bbae71790fb237cd35bf1db83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
