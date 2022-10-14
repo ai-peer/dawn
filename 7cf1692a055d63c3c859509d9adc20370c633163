@@ -85,6 +85,24 @@
       "parentUuid": "7a606351_4ae40c3e",
       "revId": "7cf1692a055d63c3c859509d9adc20370c633163",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa40e73_26adde87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-14T02:48:15Z",
+      "side": 1,
+      "message": "Apologies, I didn\u0027t see Ben\u0027s comment. LGTM, thanks a lot for cleaning this up.",
+      "parentUuid": "627c93bb_fab95760",
+      "revId": "7cf1692a055d63c3c859509d9adc20370c633163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
