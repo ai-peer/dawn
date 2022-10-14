@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aeae51b_69cb4ae7",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56f92f5c_1d09e491",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 50
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c59eab7f_9d7de7ad",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99156af3_c3a9811f",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "`UnwrapIndirectAndAddressOfChain` expects a `UnaryOpExpression`, which is why I have the extra if. I\u0027d rather keep it like this than have `UnwrapIndirectAndAddressOfChain` accept an `ast::Expression` and check if it\u0027s an `UnaryOpExpression` in there.",
+      "parentUuid": "c59eab7f_9d7de7ad",
+      "range": {
+        "startLine": 973,
+        "startChar": 28,
+        "endLine": 973,
+        "endChar": 96
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa37f7ca_d0f907a7",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-10-13T13:28:14Z",
       "side": 1,
       "message": "This sentence is confusing. Maybe:\n\n```\n// If `i` is an identifier that resolves to a pointer-let, and that pointer is a partial reference to the source variable, ...\n```",
+      "range": {
+        "startLine": 1180,
+        "startChar": 23,
+        "endLine": 1181,
+        "endChar": 32
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2055aba_c267089c",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "This code doesn\u0027t deal with the pointer-let case, but rather with expressions that result in a partial reference, like the last assignment here:\n\n```\n  var v : vec4\u003ci32\u003e;\n  v[1] \u003d rw;\n  v[2] \u003d 42;\n```\n\nI clarified the comment, though, as it was kind of weird.",
+      "parentUuid": "fa37f7ca_d0f907a7",
       "range": {
         "startLine": 1180,
         "startChar": 23,
@@ -150,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9526613_68ca8d9a",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed6e3b91_ad480330",
+      "range": {
+        "startLine": 1226,
+        "startChar": 0,
+        "endLine": 1238,
+        "endChar": 25
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "753e9b69_b9ff14c1",
@@ -163,6 +259,24 @@
       "writtenOn": "2022-10-13T13:28:14Z",
       "side": 1,
       "message": "Please can we have a couple of cases for matrices too?",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4a3e3a_2e394625",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 5632,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "There were no matrix tests. Added 15.",
+      "parentUuid": "753e9b69_b9ff14c1",
       "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +304,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4973b9e1_39eeef33",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6036,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "So `StructMember_Struct*` tests are about the whole struct being written to. Above are the `StructMember_Member*` tests, which are about only a single member being written to. Added missing pointer tests as per your comment here, and found a bug! \n\nFixed the bug and added another bunch of tests that test full pointers to structs, arrays, and matrices. My previous tests were only testing partial pointers (e.g. `let p \u003d \u0026s.a`), but not testing a full pointer (`let p \u003d \u0026s`) to compound types, then indexing via the pointer to set the field.",
+      "parentUuid": "2635a5f0_db5f5df0",
+      "range": {
+        "startLine": 6036,
+        "startChar": 0,
+        "endLine": 6036,
+        "endChar": 20
+      },
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dfba7bd_5d2db505",
@@ -207,6 +345,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b67f2635_011b74f0",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6530,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dfba7bd_5d2db505",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9c326ea_67c5d663",
@@ -220,6 +376,24 @@
       "writtenOn": "2022-10-13T13:28:14Z",
       "side": 1,
       "message": "ditto",
+      "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ab57a5_24f9b78d",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 6547,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9c326ea_67c5d663",
       "revId": "276aedc387a3d3ae3ca0012eb529a902c5a28c7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
