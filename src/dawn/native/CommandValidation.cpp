@@ -68,8 +68,12 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
 
 MaybeError ValidateTimestampQuery(const DeviceBase* device,
                                   const QuerySetBase* querySet,
-                                  uint32_t queryIndex) {
+                                  uint32_t queryIndex,
+                                  Feature requiredFeature) {
     DAWN_TRY(device->ValidateObject(querySet));
+
+    DAWN_INVALID_IF(!device->HasFeature(requiredFeature),
+                    "Timestamp query called without the feature being enabled.");
 
     DAWN_INVALID_IF(querySet->GetQueryType() != wgpu::QueryType::Timestamp,
                     "The type of %s is not %s.", querySet, wgpu::QueryType::Timestamp);
