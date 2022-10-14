@@ -50,6 +50,24 @@
       "message": "nit: Maybe link to the issue or explain why in this comment.",
       "revId": "5e7810fbc35852555e7b542c5aa3bb9c54b25437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ba8e0d_d880bb8f",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-14T09:39:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a6c3e2c_f04a7e68",
+      "revId": "5e7810fbc35852555e7b542c5aa3bb9c54b25437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
