@@ -1430,6 +1430,16 @@
             {"name": "aspect", "type": "texture aspect", "default": "all"}
         ]
     },
+    "image copy external texture": {
+        "category": "structure",
+        "extensible": "in",
+        "members": [
+            {"name": "external texture", "type": "external texture"},
+            {"name": "visible width", "type": "uint32_t"},
+            {"name": "visible height", "type": "uint32_t"},
+            {"name": "origin", "type": "origin 3D"}
+        ]
+    },
     "index format": {
         "category": "enum",
         "values": [
@@ -1706,6 +1716,17 @@
                 "tags": ["dawn"],
                 "args": [
                     {"name": "source", "type": "image copy texture", "annotation": "const*"},
+                    {"name": "destination", "type": "image copy texture", "annotation": "const*"},
+                    {"name": "copy size", "type": "extent 3D", "annotation": "const*"},
+                    {"name": "options", "type": "copy texture for browser options", "annotation": "const*"}
+                ]
+            },
+            {
+                "name": "copy external texture for browser",
+                "extensible": "in",
+                "tags": ["dawn"],
+                "args": [
+                    {"name": "source", "type": "image copy external texture", "annotation": "const*"},
                     {"name": "destination", "type": "image copy texture", "annotation": "const*"},
                     {"name": "copy size", "type": "extent 3D", "annotation": "const*"},
                     {"name": "options", "type": "copy texture for browser options", "annotation": "const*"}
