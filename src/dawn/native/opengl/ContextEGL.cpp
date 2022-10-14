@@ -54,7 +54,7 @@ ResultOrError<std::unique_ptr<ContextEGL>> ContextEGL::Create(const EGLFunctions
     DAWN_TRY(CheckEGL(egl, egl.ChooseConfig(display, config_attribs, &config, 1, &num_config),
                       "eglChooseConfig"));
 
-    DAWN_INVALID_IF(num_config == 0, "eglChooseConfig returned zero configs");
+    DAWN_TRY(num_config == 0, "eglChooseConfig returned zero configs");
 
     DAWN_TRY(CheckEGL(egl, egl.BindAPI(api), "eglBindAPI"));
 
