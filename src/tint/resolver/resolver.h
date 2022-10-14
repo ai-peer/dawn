@@ -442,6 +442,7 @@ class Resolver {
     sem::Statement* current_statement_ = nullptr;
     sem::CompoundStatement* current_compound_statement_ = nullptr;
     sem::BlockStatement* current_block_ = nullptr;
+    uint32_t current_scoping_depth_ = 0;
 };
 
 }  // namespace tint::resolver
