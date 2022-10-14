@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7491c6b7_2e339f6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65af2ff5_1c05c9e9",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "could we have a test that if you bind and use a pipeline that does frag depth clamping, then bind a different pipeline with diff bind groups that does frag depth clamping, without changing the viewport, the clamping happens as expected?\n\nthe overall thing I\u0027d like to check is that if two pipelines are push-constant-compatible but not descriptor-set-layout compatible, the push constant values do not need to be set again",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a489d841_2accafa2",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "to clarify, we do this regardless of whether or not the pipeline actually writes the frag depth. That\u0027s because it should be fine to set the push constants even if the transform isn\u0027t used (the space is always reserved) - and the hypothesis is that setting these push constants isn\u0027t significant enough of an overhead to care about right now?\n\nbecause we could add something like: `if (!lastPipeline-\u003eUsesFragDepth()) return;`",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc9193d5_5ab60676",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "typo: \"applying\"",
+      "range": {
+        "startLine": 1326,
+        "startChar": 23,
+        "endLine": 1326,
+        "endChar": 32
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aae52f77_01cc88f2",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "you could check that the viewport args actually changed; to confirm, is the assumption that a well-behaved application will not set the same args over and over again?\n\nseems like a fine assumption to me",
+      "range": {
+        "startLine": 1329,
+        "startChar": 42,
+        "endLine": 1329,
+        "endChar": 46
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603452e9_d50ecf88",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T17:51:54Z",
+      "side": 1,
+      "message": "optional u-nit: perhaps we should pass HasUnclippedDepth() into here\n\nand do `req.clampFragDepth \u003d usesFragDepth \u0026\u0026 !unclippedDepth` inside `GetHandleAndSpirv`.\n\nSince `programmableStage` is accessible inside GetHandleAndSpirv, `programmableStage.metadata-\u003eusesFragDepth` and `clampFragDepth` provide partially overlapping pieces of information",
+      "range": {
+        "startLine": 377,
+        "startChar": 77,
+        "endLine": 378,
+        "endChar": 70
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
