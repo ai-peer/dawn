@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf7cb12_82c21aba",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T14:27:02Z",
+      "side": 1,
+      "message": "This keeps on throwing me. Should these be called `Values` ?",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 9
+      },
+      "revId": "8121e55b5726316908177644cf328818d27e3681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c564d3_184d1fdd",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T14:27:02Z",
+      "side": 1,
+      "message": "I can\u0027t help that we\u0027re making baby steps to putting the generic values behind a single non-templated `Values` structure that holds all the variant-ness internally, along with the `CreatePtrs` for the type info, and with equality helpers, etc.\n\nI suspect that would massively clean up all usage.",
+      "revId": "8121e55b5726316908177644cf328818d27e3681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1767e5_b7844d4b",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T14:27:02Z",
+      "side": 1,
+      "message": "This doesn\u0027t actually need to be a member, right? It\u0027s always populated with `CreatePtrsFor\u003cT\u003e()`. So, it could be a method.",
+      "range": {
+        "startLine": 841,
+        "startChar": 4,
+        "endLine": 841,
+        "endChar": 21
+      },
+      "revId": "8121e55b5726316908177644cf328818d27e3681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5efd9f30_f9047c59",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T14:27:02Z",
+      "side": 1,
+      "message": "Not dependent on the `T` type, could be on the base class, removing more `std::visit`s",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 20
+      },
+      "revId": "8121e55b5726316908177644cf328818d27e3681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
