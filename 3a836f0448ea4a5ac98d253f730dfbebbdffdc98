@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb82582d_14951ba4",
+        "filename": "src/tint/resolver/resolver_behavior_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T13:13:33Z",
+      "side": 1,
+      "message": "I\u0027m trying to move away from the `WrapInFunction` helper. One-size certainly does not fit all.",
+      "parentUuid": "518fabdf_0e9df38c",
+      "revId": "3a836f0448ea4a5ac98d253f730dfbebbdffdc98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b101200e_f0e1886a",
@@ -54,6 +72,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "bced3947_837dc0cc",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1945,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T13:13:33Z",
+      "side": 1,
+      "message": "Sure. Happy to promote if/when this is needed. Currently, we only do this sort of thing here.",
+      "parentUuid": "b101200e_f0e1886a",
+      "revId": "3a836f0448ea4a5ac98d253f730dfbebbdffdc98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1b411529_b540133a",
         "filename": "src/tint/resolver/validator.cc",
         "patchSetId": 2
@@ -65,6 +101,24 @@
       "writtenOn": "2022-10-14T12:58:27Z",
       "side": 1,
       "message": "note: I would have done it differently by looking if the entrypoint contains the Discard behavior and only then walk the call graph to find the discard statement.",
+      "revId": "3a836f0448ea4a5ac98d253f730dfbebbdffdc98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4deafe9_5d250809",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1998,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-14T13:13:33Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s a good optimization. Might follow up with that, thanks!",
+      "parentUuid": "1b411529_b540133a",
       "revId": "3a836f0448ea4a5ac98d253f730dfbebbdffdc98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
