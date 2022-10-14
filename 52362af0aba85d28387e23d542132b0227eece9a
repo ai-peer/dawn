@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf844fa_b6c9ee49",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2326,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-14T16:32:13Z",
+      "side": 1,
+      "message": "It would be nice to show that it works for 256 levels.\n\nOh, there\u0027s an end-to-end test. Fine.",
+      "revId": "52362af0aba85d28387e23d542132b0227eece9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
