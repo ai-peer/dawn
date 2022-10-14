@@ -67,6 +67,24 @@
       "message": "We want test cases that exceed so we can see that an error is correctly produced. We\u0027ve got a limit in WGSL that we want to test here. The re-arranging is good, but can you please add in the invalid count cases as well?",
       "revId": "7cf1692a055d63c3c859509d9adc20370c633163",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "627c93bb_fab95760",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-14T02:43:33Z",
+      "side": 1,
+      "message": "According to Ben\u0027s comment (which I agree) https://dawn-review.googlesource.com/c/dawn/+/105282/comments/502cdacf_558c98c5, currently invalid E2E testcases (having \"SKIP\" expectation) would be directly skipped on all backend without running Tint at all. \nTo ensure the validator catch this, I thought the unit tests implemented in https://dawn-review.googlesource.com/c/dawn/+/104240 could work.",
+      "parentUuid": "7a606351_4ae40c3e",
+      "revId": "7cf1692a055d63c3c859509d9adc20370c633163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
