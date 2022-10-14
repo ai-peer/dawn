@@ -16,6 +16,24 @@
       "message": "I didn\u0027t notice at the time, but this lost of the line:column information. I\u0027m working on a similar test for @size but I can\u0027t figure out how to actually get line:column to appear.",
       "revId": "c84d06e8603ce9c4b5c8d86e42e9ec0acf3bd689",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23d3621_03ac9fd4",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T08:50:58Z",
+      "side": 1,
+      "message": "Good spot.\nThe diagnostic now points to the expression that triggers the stage violation, so the source needs to be on the expression. Fixed with: https://dawn-review.googlesource.com/c/dawn/+/105940",
+      "parentUuid": "c79d61a2_ec2d879f",
+      "revId": "c84d06e8603ce9c4b5c8d86e42e9ec0acf3bd689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
