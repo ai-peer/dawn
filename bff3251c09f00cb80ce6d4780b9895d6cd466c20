@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "555e29dc_0cb0bbaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-10-14T18:28:59Z",
+      "side": 1,
+      "message": "PTAL! Knocks one more Android bug off the list. 😊",
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
