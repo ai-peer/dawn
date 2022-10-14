@@ -2331,5 +2331,41 @@ TEST_F(ResolverTest, Literal_F16WithExtension) {
     EXPECT_TRUE(r()->Resolve());
 }
 
+TEST_F(ResolverTest, ScopeDepth_NestedBlocks) {
+    const ast::Statement* stmt = Return();
+    for (size_t i = 0; i < 300; i++) {
+        stmt = Block(Source{{i, 1}}, stmt);
+    }
+    WrapInFunction(stmt);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "173:1 error: statement nesting depth / chaining length exceeds limit of 127");
+}
+
+TEST_F(ResolverTest, ScopeDepth_NestedIf) {
+    const ast::Statement* stmt = Return();
+    for (size_t i = 0; i < 300; i++) {
+        stmt = If(Source{{i, 1}}, false, Block(Source{{i, 2}}, stmt));
+    }
+    WrapInFunction(stmt);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "236:1 error: statement nesting depth / chaining length exceeds limit of 127");
+}
+
+TEST_F(ResolverTest, ScopeDepth_IfElseChain) {
+    const ast::Statement* stmt = nullptr;
+    for (size_t i = 0; i < 300; i++) {
+        stmt = If(Source{{i, 1}}, false, Block(Source{{i, 2}}), Else(stmt));
+    }
+    WrapInFunction(stmt);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "174:2 error: statement nesting depth / chaining length exceeds limit of 127");
+}
+
 }  // namespace
 }  // namespace tint::resolver
