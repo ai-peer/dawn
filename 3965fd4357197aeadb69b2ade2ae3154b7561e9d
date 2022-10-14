@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19352b5a_f4448521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T13:24:48Z",
+      "side": 1,
+      "message": "This will change/improve the fxc.hlsl error messages for all the unsupported f16 cases (see https://bugs.chromium.org/p/tint/issues/detail?id\u003d1682)",
+      "revId": "3965fd4357197aeadb69b2ade2ae3154b7561e9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
