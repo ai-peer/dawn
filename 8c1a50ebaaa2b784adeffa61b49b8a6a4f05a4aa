@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01418ca_3df7314f",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T18:19:42Z",
+      "side": 1,
+      "message": "maybe we can make this ityp::stack_vec with a static capacity of 4, and a dynamic capacity which gets set depending on what type of driver it is.\n\nThen, functions like GetDriverVersionStr can just iterate through version.size() instead of switching on the vendor / OS.\n\nYou could also consider making DriverVersion a simple class, and giving it a ToString() method.\nAnd, we can create it with static method `DriverVersion::Parse/Decode(vendorId, versionRaw)`\n\nWe can have DriverVersion::FromString as well for MacOS where we report the OS version\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/BackendMTL.mm;l\u003d282?q\u003df:dawn%20f:metal%20description\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0226a5b7_5d25fba9",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T18:19:42Z",
+      "side": 1,
+      "message": "this should return the driver version instead of mutating one of the arguments",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 70
+      },
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d0ea73_8685ba47",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T18:19:42Z",
+      "side": 1,
+      "message": "probably should use std::stringstream and \u003c\u003c operators instead of .append",
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5a58f8f_9701bb9b",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-14T18:19:42Z",
+      "side": 1,
+      "message": "Instead, should we just blocklist this adapter in AdapterVk::Initialize ?\nif it\u0027s so flaky that we don\u0027t run tests, we probably don\u0027t want developers using Dawn to ever use this adapter.",
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
