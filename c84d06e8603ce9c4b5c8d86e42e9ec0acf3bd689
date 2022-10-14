@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79d61a2_ec2d879f",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-14T02:18:51Z",
+      "side": 1,
+      "message": "I didn\u0027t notice at the time, but this lost of the line:column information. I\u0027m working on a similar test for @size but I can\u0027t figure out how to actually get line:column to appear.",
+      "revId": "c84d06e8603ce9c4b5c8d86e42e9ec0acf3bd689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
