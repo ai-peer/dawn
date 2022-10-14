@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdc3cafe_df948cd7",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3043,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T11:28:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f12fced2_9aa3ae66",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeeeec19_c63cc712",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-13T21:24:32Z",
       "side": 1,
       "message": "Why is this called `lhs_op` as it\u0027s the full binary expression, not the left hand side?",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1530c55_0e65e8f0",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3045,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T11:28:17Z",
+      "side": 1,
+      "message": "If `expr` is a binary op, and we have another binary op that follows, then `expr` _is_ the LHS.",
+      "parentUuid": "aeeeec19_c63cc712",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d59ca6b_f30693bc",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3046,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T11:28:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88cf63e1_56eb1fab",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "701cbece_e42ee1e1",
@@ -65,6 +119,24 @@
       "writtenOn": "2022-10-13T22:34:23Z",
       "side": 1,
       "message": "This is wrong, + and - don\u0027t associate with Multipicative.",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbf01b97_536123df",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T11:28:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the test is wrong, our implementation is wrong, or whether you\u0027re misinterpreting this table.\n\nThis table specifies all the binary operators that can follow the RHS of this binary-op, without requiring parentheses. This line is stating that you can replace `?` in `A + B ? C` with any of the logical, relational, additive or multiplicative operators without requiring parentheses.\n\nTesting with the parent change, this compiles without issue:\n\n```\nfn f(a : i32, b : i32, c: i32) -\u003e i32 {\n  return a + b * c;\n}\n```\n\nIf this is intended behaviour (which I believe it is), this is correct.\n\nAdded more comments.",
+      "parentUuid": "701cbece_e42ee1e1",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -133,6 +205,24 @@
       "writtenOn": "2022-10-13T22:34:23Z",
       "side": 1,
       "message": "See https://github.com/gpuweb/gpuweb/issues/1146#issuecomment-714721825",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6a5095_4201199c",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-14T11:28:17Z",
+      "side": 1,
+      "message": "Yup, that shows precedence, which I believe isn\u0027t the same as whether you require parentheses or not.",
+      "parentUuid": "f09bd522_dfbbbf31",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
