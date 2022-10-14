@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7575ea21_e342af72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-14T17:48:08Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t Expr(), so my Source was attached to the MemberSize, not the \"val\" attribute.",
+      "revId": "d9768bac24fcbfdf65d62ebfe8590b9fd884cd14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
