@@ -650,6 +650,17 @@ bool IsReadOnlyDepthStencilAttachment(
     return true;
 }
 
+// Tracks the temporary resolve attachments used when the AlwaysResolveIntoZeroLevelAndLayer toggle
+// is active so that the results can be copied from the temporary resolve attachment into the
+// intended target after the render pass is complete.
+struct TemporaryResolveAttachment {
+    TemporaryResolveAttachment(Ref<TextureViewBase> src, Ref<TextureViewBase> dst)
+        : copySrc(std::move(src)), copyDst(std::move(dst)) {}
+
+    Ref<TextureViewBase> copySrc;
+    Ref<TextureViewBase> copyDst;
+};
+
 }  // namespace
 
 bool HasDeprecatedColor(const RenderPassColorAttachment& attachment) {
@@ -845,6 +856,9 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     bool depthReadOnly = false;
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
+
+    std::vector<TemporaryResolveAttachment> temporaryResolveAttachments;
+
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
@@ -868,6 +882,55 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 TextureViewBase* view = descriptor->colorAttachments[i].view;
                 TextureViewBase* resolveTarget = descriptor->colorAttachments[i].resolveTarget;
 
+                if (resolveTarget != nullptr) {
+                    // Even if we swap out the resolveTarget in the next conditional, we still want
+                    // to mark the original subresource as being used as a render attachment so that
+                    // usage validation continues to work as intended.
+                    usageTracker.TextureViewUsedAs(resolveTarget,
+                                                   wgpu::TextureUsage::RenderAttachment);
+
+                    // dawn:56, dawn:1569
+                    // Handle Toggle AlwaysResolveIntoZeroLevelAndLayer. This swaps out the given
+                    // resolve attachment for a temporary one that has no layers or mip levels. The
+                    // results are copied from the temporary attachment into the given attachment
+                    // when the render pass ends. (Handled at the bottom of this function)
+                    if (device->IsToggleEnabled(Toggle::AlwaysResolveIntoZeroLevelAndLayer) &&
+                        (resolveTarget->GetBaseMipLevel() != 0 ||
+                         resolveTarget->GetBaseArrayLayer() != 0)) {
+                        // Create a temporary texture to resolve into
+                        TextureDescriptor descriptor = {};
+                        descriptor.usage =
+                            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
+                        descriptor.format = resolveTarget->GetFormat().format;
+                        descriptor.size =
+                            resolveTarget->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
+                                resolveTarget->GetBaseMipLevel());
+                        descriptor.dimension = wgpu::TextureDimension::e2D;
+                        descriptor.mipLevelCount = 1;
+
+                        Ref<TextureBase> temporaryResolveTexture;
+                        DAWN_TRY_ASSIGN(temporaryResolveTexture,
+                                        device->CreateTexture(&descriptor));
+
+                        TextureViewDescriptor viewDescriptor = {};
+                        Ref<TextureViewBase> temporaryResolveView;
+                        DAWN_TRY_ASSIGN(temporaryResolveView,
+                                        device->CreateTextureView(temporaryResolveTexture.Get(),
+                                                                  &viewDescriptor));
+
+                        // Save the temporary and given render targets together for copying after
+                        // the render pass ends.
+                        temporaryResolveAttachments.emplace_back(temporaryResolveView,
+                                                                 resolveTarget);
+
+                        // Replace the given resolve attachment with the temporary one.
+                        resolveTarget = temporaryResolveView.Get();
+
+                        usageTracker.TextureViewUsedAs(resolveTarget,
+                                                       wgpu::TextureUsage::RenderAttachment);
+                    }
+                }
+
                 cmd->colorAttachments[index].view = view;
                 cmd->colorAttachments[index].resolveTarget = resolveTarget;
                 cmd->colorAttachments[index].loadOp = descriptor->colorAttachments[i].loadOp;
@@ -881,11 +944,6 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     ClampClearColorValueToLegalRange(color, view->GetFormat());
 
                 usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
-
-                if (resolveTarget != nullptr) {
-                    usageTracker.TextureViewUsedAs(resolveTarget,
-                                                   wgpu::TextureUsage::RenderAttachment);
-                }
             }
 
             if (cmd->attachmentState->HasDepthStencilAttachment()) {
@@ -996,9 +1054,42 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
         "encoding %s.BeginRenderPass(%s).", this, descriptor);
 
     if (success) {
+        std::function<void()> copyTemporaryResolveAttachments = nullptr;
+        if (temporaryResolveAttachments.size()) {
+            copyTemporaryResolveAttachments = [this, temporaryResolveAttachments = std::move(
+                                                         temporaryResolveAttachments)]() -> void {
+                // Called once the render pass has been ended.
+
+                // dawn:56, dawn:1569
+                // Handle any copies needed for the AlwaysResolveIntoZeroLevelAndLayer workaround
+                // immediately after the render pass ends and before any additional commands are
+                // recorded.
+                for (auto& copyTarget : temporaryResolveAttachments) {
+                    ImageCopyTexture srcImageCopyTexture = {};
+                    srcImageCopyTexture.texture = copyTarget.copySrc->GetTexture();
+                    srcImageCopyTexture.aspect = wgpu::TextureAspect::All;
+                    srcImageCopyTexture.mipLevel = 0;
+                    srcImageCopyTexture.origin = {0, 0, 0};
+
+                    ImageCopyTexture dstImageCopyTexture = {};
+                    dstImageCopyTexture.texture = copyTarget.copyDst->GetTexture();
+                    dstImageCopyTexture.aspect = wgpu::TextureAspect::All;
+                    dstImageCopyTexture.mipLevel = copyTarget.copyDst->GetBaseMipLevel();
+                    dstImageCopyTexture.origin = {0, 0, copyTarget.copyDst->GetBaseArrayLayer()};
+
+                    Extent3D extent3D = copyTarget.copySrc->GetTexture()->GetSize();
+
+                    this->APICopyTextureToTextureInternal(&srcImageCopyTexture,
+                                                          &dstImageCopyTexture, &extent3D);
+                }
+            };
+        }
+
         Ref<RenderPassEncoder> passEncoder = RenderPassEncoder::Create(
             device, descriptor, this, &mEncodingContext, std::move(usageTracker),
-            std::move(attachmentState), width, height, depthReadOnly, stencilReadOnly);
+            std::move(attachmentState), width, height, depthReadOnly, stencilReadOnly,
+            copyTemporaryResolveAttachments);
+
         mEncodingContext.EnterPass(passEncoder.Get());
 
         if (ShouldApplyClearBigIntegerColorValueWithDraw(device, descriptor)) {
