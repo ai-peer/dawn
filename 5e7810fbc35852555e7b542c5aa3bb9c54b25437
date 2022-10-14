@@ -16,6 +16,40 @@
       "message": "Please take a look, thanks",
       "revId": "5e7810fbc35852555e7b542c5aa3bb9c54b25437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dace887_60f741dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T09:33:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5e7810fbc35852555e7b542c5aa3bb9c54b25437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6c3e2c_f04a7e68",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-14T09:33:57Z",
+      "side": 1,
+      "message": "nit: Maybe link to the issue or explain why in this comment.",
+      "revId": "5e7810fbc35852555e7b542c5aa3bb9c54b25437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
