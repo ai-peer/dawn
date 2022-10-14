@@ -235,7 +235,8 @@ ComPtr<IDXGIFactory4> Device::GetFactory() const {
 }
 
 MaybeError Device::ApplyUseDxcToggle() {
-    if (!ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
+    // Require DXC version 1.4 or higher to enable using DXC
+    if (!ToBackend(GetAdapter())->GetBackend()->IsDXCAvailable(1, 4)) {
         ForceSetToggle(Toggle::UseDXC, false);
     }
 
