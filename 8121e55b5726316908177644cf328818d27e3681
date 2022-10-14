@@ -175,6 +175,30 @@
       },
       "revId": "8121e55b5726316908177644cf328818d27e3681",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f388dea3_d9cf61da",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 843,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-14T17:15:45Z",
+      "side": 1,
+      "message": "Added vfunc to base to get this (easier for now than dealing with multiple ctors, etc.), and removed three std::visits! Thanks.",
+      "parentUuid": "02ffd579_1499259f",
+      "range": {
+        "startLine": 842,
+        "startChar": 0,
+        "endLine": 843,
+        "endChar": 20
+      },
+      "revId": "8121e55b5726316908177644cf328818d27e3681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
