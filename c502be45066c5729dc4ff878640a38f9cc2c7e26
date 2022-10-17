@@ -1,6 +1,63 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27e2fb3_347fe29d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T17:29:27Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "c502be45066c5729dc4ff878640a38f9cc2c7e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adb6e57d_709d30e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T17:29:27Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "c502be45066c5729dc4ff878640a38f9cc2c7e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08cf6acc_3b99b6a2",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1174,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T17:29:27Z",
+      "side": 1,
+      "message": "nit: you can drop this and just feed `e` into `sem_.Get\u003csem::VariableUser\u003e(e)`",
+      "range": {
+        "startLine": 1174,
+        "startChar": 8,
+        "endLine": 1174,
+        "endChar": 59
+      },
+      "revId": "c502be45066c5729dc4ff878640a38f9cc2c7e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bab45a6_c5813d53",
