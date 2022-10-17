@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e2aabcbc_d0c07a4f",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-17T08:26:44Z",
+      "side": 1,
+      "message": "Ok, but maybe we could remove the visible width/height from this CL. (and add a GetWidth/Height that returns the width/height of the first view in ExternalTexture with a big fat TODO).",
+      "parentUuid": "bf5dc2a1_21d19b7a",
+      "range": {
+        "startLine": 1438,
+        "startChar": 0,
+        "endLine": 1440,
+        "endChar": 0
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa72d87d_ec8cee51",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "That\u0027s the option I considered. The only concern is about the different binding type (texture2d vs texture_external). If we go in this direction, I think both dummy texture2D and dummy externalTexture are needed to setBindGroup correctly.",
       "parentUuid": "fa72d87d_ec8cee51",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "292be76b_92485c5b",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-17T08:26:44Z",
+      "side": 1,
+      "message": "If it\u0027s two separate entrypoints, as long as bindings aren\u0027t statically used they don\u0027t need to be set in the bindgroup (and in fact GetBindGroupLayout will reflect a BGL without the bindings).",
+      "parentUuid": "df533a0f_9f926120",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
