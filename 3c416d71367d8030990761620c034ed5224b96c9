@@ -201,6 +201,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e5ab50_1c9dc85f",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eee054d_6540402d",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65825c33_7f6b7cfb",
@@ -218,6 +236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f068f98_3b3fb010",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65825c33_7f6b7cfb",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b7526c7_5e1b47d1",
@@ -231,6 +267,24 @@
       "writtenOn": "2022-10-14T13:38:32Z",
       "side": 1,
       "message": "The valid formats are all color formats, so can\u0027t the only aspect used by all? (and we should validate that in common restrictions?)",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19fae174_87f73a67",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b7526c7_5e1b47d1",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -258,6 +312,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23dc465_cec5ac73",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "593f9473_3595fc73",
+      "range": {
+        "startLine": 670,
+        "startChar": 0,
+        "endLine": 671,
+        "endChar": 81
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b1761a7_1b35cb2c",
@@ -271,6 +349,24 @@
       "writtenOn": "2022-10-14T13:38:32Z",
       "side": 1,
       "message": "[1]",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6263c7eb_63382e88",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b1761a7_1b35cb2c",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -310,6 +406,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10138195_38be83f8",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Done in the base CL \"Add visibleRect xxx\"",
+      "parentUuid": "ff280b33_664866a4",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30d70540_5819af9e",
@@ -323,6 +437,24 @@
       "writtenOn": "2022-10-14T13:38:32Z",
       "side": 1,
       "message": "optional nit: These constants seem to be in a lot of places. Maybe we can have a common place somewhere in src/dawn/tests/ for them? Not sure.",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "649a83dd_08d2e19c",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:53:22Z",
+      "side": 1,
+      "message": "Put them into WGPUHelper, WDYT?",
+      "parentUuid": "30d70540_5819af9e",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
