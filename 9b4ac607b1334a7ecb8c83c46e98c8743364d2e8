@@ -39,6 +39,30 @@
       },
       "revId": "9b4ac607b1334a7ecb8c83c46e98c8743364d2e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba80e69_967fdc73",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-17T02:47:19Z",
+      "side": 1,
+      "message": "I am not sure if we shall merge this two version constant, because being the same \"1.4\" in these two places seems to be a coincident. Dp4a and ShaderF16 features require DXC 1.4 or later because they need some new HLSL features that added in DXC 1.4 (e.g. templated load and store), while enabling \"use_dxc\" toggle (i.e. allow using DXC at all) requires DXC 1.4 or later because DXC 1.2 has some issue that is not necessarily related to Dp4a or ShaderF16 (e.g. function can not return array type).",
+      "parentUuid": "7db07d89_f12ac1e0",
+      "range": {
+        "startLine": 143,
+        "startChar": 37,
+        "endLine": 143,
+        "endChar": 41
+      },
+      "revId": "9b4ac607b1334a7ecb8c83c46e98c8743364d2e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
