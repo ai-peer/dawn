@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c55e5e04_e39afcf1",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:51:39Z",
+      "side": 1,
+      "message": "I make a CL stack for reviewing 😊",
+      "parentUuid": "e2aabcbc_d0c07a4f",
+      "range": {
+        "startLine": 1438,
+        "startChar": 0,
+        "endLine": 1440,
+        "endChar": 0
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa72d87d_ec8cee51",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -138,6 +162,24 @@
       "side": 1,
       "message": "If it\u0027s two separate entrypoints, as long as bindings aren\u0027t statically used they don\u0027t need to be set in the bindgroup (and in fact GetBindGroupLayout will reflect a BGL without the bindings).",
       "parentUuid": "df533a0f_9f926120",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a4cf70_7f3a4ead",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T08:51:39Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll have a try.",
+      "parentUuid": "292be76b_92485c5b",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
