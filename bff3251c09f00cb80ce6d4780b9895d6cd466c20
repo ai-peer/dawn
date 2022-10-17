@@ -16,6 +16,161 @@
       "message": "PTAL! Knocks one more Android bug off the list. 😊",
       "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3699b26f_72f1b9ad",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "old debug code",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 28
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c1892af_51751016",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "nit: small comment what this is for",
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb5fa25_8515153d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "nit: we can bind like `[this, temporaryResolveAttachments \u003d std::move(temporaryResolveAttachments)]` to move-capture the vector instead of copying it\n\nalso, we should pass an empty std::function when `temporaryResolveAttachments` is empty so that the check at [1] can skip calling it",
+      "range": {
+        "startLine": 1059,
+        "startChar": 19,
+        "endLine": 1059,
+        "endChar": 46
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a93593f_a861fc47",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "old debug code",
+      "range": {
+        "startLine": 1282,
+        "startChar": 0,
+        "endLine": 1282,
+        "endChar": 66
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f5dd6f_5fc96f1c",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 74,
+        "startChar": 19,
+        "endLine": 74,
+        "endChar": 30
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a7f6b2_b5b5e439",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 99,
+        "startChar": 61,
+        "endLine": 99,
+        "endChar": 72
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50accf9_485b2a82",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-17T16:01:59Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 5
+      },
+      "revId": "bff3251c09f00cb80ce6d4780b9895d6cd466c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
