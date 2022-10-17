@@ -213,8 +213,8 @@ TEST_F(ResolverControlBlockValidationTest, SwitchConditionTypeMustMatchSelectorT
     // }
     auto* var = Var("a", ty.i32(), Expr(2_i));
 
-    auto* block = Block(Decl(var), Switch("a",                                               //
-                                          Case(Source{{12, 34}}, utils::Vector{Expr(1_u)}),  //
+    auto* block = Block(Decl(var), Switch("a",                                //
+                                          Case(Expr(Source{{12, 34}}, 1_u)),  //
                                           DefaultCase()));
     WrapInFunction(block);
 
@@ -234,7 +234,7 @@ TEST_F(ResolverControlBlockValidationTest, SwitchConditionTypeMustMatchSelectorT
 
     auto* block = Block(Decl(var),                                                 //
                         Switch("a",                                                //
-                               Case(Source{{12, 34}}, utils::Vector{Expr(-1_i)}),  //
+                               Case(utils::Vector{Expr(Source{{12, 34}}, -1_i)}),  //
                                DefaultCase()));
     WrapInFunction(block);
 
@@ -332,6 +332,23 @@ TEST_F(ResolverControlBlockValidationTest, SwitchCase_Pass) {
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
+TEST_F(ResolverControlBlockValidationTest, SwitchCase_Expression_Pass) {
+    // var a : i32 = 2;
+    // switch (a) {
+    //   default: {}
+    //   case 5 + 6: {}
+    // }
+    auto* var = Var("a", ty.i32(), Expr(2_i));
+
+    auto* block = Block(Decl(var),                             //
+                        Switch("a",                            //
+                               DefaultCase(Source{{12, 34}}),  //
+                               Case(Add(5_i, 6_i))));
+    WrapInFunction(block);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
 TEST_F(ResolverControlBlockValidationTest, SwitchCaseAlias_Pass) {
     // type MyInt = u32;
     // var v: MyInt;
@@ -347,6 +364,44 @@ TEST_F(ResolverControlBlockValidationTest, SwitchCaseAlias_Pass) {
     WrapInFunction(block);
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverControlBlockValidationTest, NonUniqueCaseSelector_Expression_Fail) {
+    // var a : i32 = 2;
+    // switch (a) {
+    //   case 10: {}
+    //   case 5+5: {}
+    //   default: {}
+    // }
+    auto* var = Var("a", ty.i32(), Expr(2_i));
+
+    auto* block = Block(Decl(var),   //
+                        Switch("a",  //
+                               Case(Expr(Source{{12, 34}}, 10_i)),
+                               Case(Add(Source{{56, 78}}, 5_i, 5_i)), DefaultCase()));
+    WrapInFunction(block);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              "56:78 error: duplicate switch case '10'\n"
+              "12:34 note: previous case declared here");
+}
+
+TEST_F(ResolverControlBlockValidationTest, Switch_OverrideCondition_Fail) {
+    // override a : i32 = 2;
+    // switch (a) {
+    //   default: {}
+    // }
+    auto* var = Var("a", ty.i32(), Expr(2_i));
+    Override("b", ty.i32(), Expr(2_i));
+
+    auto* block = Block(Decl(var),   //
+                        Switch("a",  //
+                               Case(Expr(Source{{12, 34}}, "b")), DefaultCase()));
+    WrapInFunction(block);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: case selector must be a constant expression");
 }
 
 }  // namespace

@@ -26,10 +26,43 @@ TEST_F(ParserImplTest, SwitchBody_Case) {
     ASSERT_NE(e.value, nullptr);
     ASSERT_TRUE(e->Is<ast::CaseStatement>());
     EXPECT_FALSE(e->IsDefault());
+
     auto* stmt = e->As<ast::CaseStatement>();
     ASSERT_EQ(stmt->selectors.Length(), 1u);
-    EXPECT_EQ(stmt->selectors[0]->value, 1);
-    EXPECT_EQ(stmt->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
+    ASSERT_TRUE(stmt->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = stmt->selectors[0]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
+    ASSERT_EQ(e->body->statements.Length(), 1u);
+    EXPECT_TRUE(e->body->statements[0]->Is<ast::AssignmentStatement>());
+}
+
+// Test for expression switch cases crbug.com/tint/1633
+TEST_F(ParserImplTest, DISABLED_SwitchBody_Case_Expression) {
+    auto p = parser("case 1 + 2 { a = 4; }");
+    auto e = p->switch_body();
+    EXPECT_FALSE(p->has_error()) << p->error();
+    EXPECT_TRUE(e.matched);
+    EXPECT_FALSE(e.errored);
+    ASSERT_NE(e.value, nullptr);
+    ASSERT_TRUE(e->Is<ast::CaseStatement>());
+    EXPECT_FALSE(e->IsDefault());
+
+    auto* stmt = e->As<ast::CaseStatement>();
+    ASSERT_EQ(stmt->selectors.Length(), 1u);
+    ASSERT_TRUE(stmt->selectors[0]->Is<ast::BinaryExpression>());
+    auto* expr = stmt->selectors[0]->As<ast::BinaryExpression>();
+
+    EXPECT_EQ(ast::BinaryOp::kAdd, expr->op);
+    auto* v = expr->lhs->As<ast::IntLiteralExpression>();
+    ASSERT_NE(nullptr, v);
+    EXPECT_EQ(v->value, 1u);
+
+    v = expr->rhs->As<ast::IntLiteralExpression>();
+    ASSERT_NE(nullptr, v);
+    EXPECT_EQ(v->value, 2u);
+
     ASSERT_EQ(e->body->statements.Length(), 1u);
     EXPECT_TRUE(e->body->statements[0]->Is<ast::AssignmentStatement>());
 }
@@ -43,10 +76,14 @@ TEST_F(ParserImplTest, SwitchBody_Case_WithColon) {
     ASSERT_NE(e.value, nullptr);
     ASSERT_TRUE(e->Is<ast::CaseStatement>());
     EXPECT_FALSE(e->IsDefault());
+
     auto* stmt = e->As<ast::CaseStatement>();
     ASSERT_EQ(stmt->selectors.Length(), 1u);
-    EXPECT_EQ(stmt->selectors[0]->value, 1);
-    EXPECT_EQ(stmt->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
+    ASSERT_TRUE(stmt->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = stmt->selectors[0]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
     ASSERT_EQ(e->body->statements.Length(), 1u);
     EXPECT_TRUE(e->body->statements[0]->Is<ast::AssignmentStatement>());
 }
@@ -62,9 +99,16 @@ TEST_F(ParserImplTest, SwitchBody_Case_TrailingComma) {
     EXPECT_FALSE(e->IsDefault());
     auto* stmt = e->As<ast::CaseStatement>();
     ASSERT_EQ(stmt->selectors.Length(), 2u);
-    EXPECT_EQ(stmt->selectors[0]->value, 1);
-    EXPECT_EQ(stmt->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
-    EXPECT_EQ(stmt->selectors[1]->value, 2);
+    ASSERT_TRUE(stmt->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = stmt->selectors[0]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
+
+    ASSERT_TRUE(stmt->selectors[1]->Is<ast::IntLiteralExpression>());
+    expr = stmt->selectors[1]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 2);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, SwitchBody_Case_TrailingComma_WithColon) {
@@ -76,11 +120,19 @@ TEST_F(ParserImplTest, SwitchBody_Case_TrailingComma_WithColon) {
     ASSERT_NE(e.value, nullptr);
     ASSERT_TRUE(e->Is<ast::CaseStatement>());
     EXPECT_FALSE(e->IsDefault());
+
     auto* stmt = e->As<ast::CaseStatement>();
     ASSERT_EQ(stmt->selectors.Length(), 2u);
-    EXPECT_EQ(stmt->selectors[0]->value, 1);
-    EXPECT_EQ(stmt->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
-    EXPECT_EQ(stmt->selectors[1]->value, 2);
+    ASSERT_TRUE(stmt->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = stmt->selectors[0]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
+
+    ASSERT_TRUE(stmt->selectors[1]->Is<ast::IntLiteralExpression>());
+    expr = stmt->selectors[1]->As<ast::IntLiteralExpression>();
+    EXPECT_EQ(expr->value, 2);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, SwitchBody_Case_InvalidConstLiteral) {
@@ -164,10 +216,16 @@ TEST_F(ParserImplTest, SwitchBody_Case_MultipleSelectors) {
     EXPECT_FALSE(e->IsDefault());
     ASSERT_EQ(e->body->statements.Length(), 0u);
     ASSERT_EQ(e->selectors.Length(), 2u);
-    ASSERT_EQ(e->selectors[0]->value, 1);
-    EXPECT_EQ(e->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
-    ASSERT_EQ(e->selectors[1]->value, 2);
-    EXPECT_EQ(e->selectors[1]->suffix, ast::IntLiteralExpression::Suffix::kNone);
+    ASSERT_TRUE(e->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = e->selectors[0]->As<ast::IntLiteralExpression>();
+    ASSERT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
+
+    ASSERT_TRUE(e->selectors[1]->Is<ast::IntLiteralExpression>());
+    expr = e->selectors[1]->As<ast::IntLiteralExpression>();
+    ASSERT_EQ(expr->value, 2);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, SwitchBody_Case_MultipleSelectors_WithColon) {
@@ -181,10 +239,16 @@ TEST_F(ParserImplTest, SwitchBody_Case_MultipleSelectors_WithColon) {
     EXPECT_FALSE(e->IsDefault());
     ASSERT_EQ(e->body->statements.Length(), 0u);
     ASSERT_EQ(e->selectors.Length(), 2u);
-    ASSERT_EQ(e->selectors[0]->value, 1);
-    EXPECT_EQ(e->selectors[0]->suffix, ast::IntLiteralExpression::Suffix::kNone);
-    ASSERT_EQ(e->selectors[1]->value, 2);
-    EXPECT_EQ(e->selectors[1]->suffix, ast::IntLiteralExpression::Suffix::kNone);
+    ASSERT_TRUE(e->selectors[0]->Is<ast::IntLiteralExpression>());
+
+    auto* expr = e->selectors[0]->As<ast::IntLiteralExpression>();
+    ASSERT_EQ(expr->value, 1);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
+
+    ASSERT_TRUE(e->selectors[1]->Is<ast::IntLiteralExpression>());
+    expr = e->selectors[1]->As<ast::IntLiteralExpression>();
+    ASSERT_EQ(expr->value, 2);
+    EXPECT_EQ(expr->suffix, ast::IntLiteralExpression::Suffix::kNone);
 }
 
 TEST_F(ParserImplTest, SwitchBody_Case_MultipleSelectorsMissingComma) {
