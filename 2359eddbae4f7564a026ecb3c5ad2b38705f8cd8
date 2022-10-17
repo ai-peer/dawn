@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "2359eddbae4f7564a026ecb3c5ad2b38705f8cd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41111b90_d3ef03e5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T13:51:06Z",
+      "side": 1,
+      "message": "stray `;`",
+      "range": {
+        "startLine": 694,
+        "startChar": 12,
+        "endLine": 694,
+        "endChar": 13
+      },
+      "revId": "2359eddbae4f7564a026ecb3c5ad2b38705f8cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
