@@ -166,10 +166,6 @@ ResultOrError<RenderPipelineBase*> GetOrCreateApplyClearValueWithDrawPipeline(
     return GetCachedPipeline(store, key);
 }
 
-Color GetClearColorValue(const RenderPassColorAttachment& attachment) {
-    return HasDeprecatedColor(attachment) ? attachment.clearColor : attachment.clearValue;
-}
-
 ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
     DeviceBase* device,
     const RenderPassDescriptor* renderPassDescriptor,
@@ -180,7 +176,7 @@ ResultOrError<Ref<BufferBase>> CreateUniformBufferWithClearValues(
         const Format& format = renderPassDescriptor->colorAttachments[i].view->GetFormat();
         wgpu::TextureComponentType baseType = format.GetAspectInfo(Aspect::Color).baseType;
 
-        Color initialClearValue = GetClearColorValue(renderPassDescriptor->colorAttachments[i]);
+        Color initialClearValue = renderPassDescriptor->colorAttachments[i].clearValue;
         Color clearValue = ClampClearColorValueToLegalRange(initialClearValue, format);
         switch (baseType) {
             case wgpu::TextureComponentType::Uint: {
@@ -253,7 +249,7 @@ bool ShouldApplyClearBigIntegerColorValueWithDraw(
     }
 
     // TODO(dawn:537): only check the color channels that are available in the current color format.
-    Color clearValue = GetClearColorValue(colorAttachmentInfo);
+    Color clearValue = colorAttachmentInfo.clearValue;
     switch (format.GetAspectInfo(Aspect::Color).baseType) {
         case wgpu::TextureComponentType::Uint: {
             constexpr double kMaxUintRepresentableInFloat = 1 << std::numeric_limits<float>::digits;
