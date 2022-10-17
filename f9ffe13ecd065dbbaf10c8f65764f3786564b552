@@ -16,6 +16,108 @@
       "message": "Going to LGTM this, we can followup to verify that the tests/impl match spec requirements. The tests match spec so good to land.",
       "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a759b60_9448db30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "LGTM.\nThanks for the better conmments.",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0f78ef_be0b5b1f",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3027,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "Yes, this is right. It\u0027s too bad \u0027relational_expression\u0027 got folded away in the recursive descent form of the grammar.   This is a good way to capture it in code.",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5857f8_6f3d587a",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "Right, the only thing excluded is shift, because the shift rule is \u0027unary shift-op unary\u0027",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "689f5543_563e5e48",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "Right.",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "404a2bea_c5477a25",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "right.",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31df172f_6486b02a",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "Right, exclude other relationals. The relational_expression rule is not recursive (without going through parens)",
+      "revId": "f9ffe13ecd065dbbaf10c8f65764f3786564b552",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

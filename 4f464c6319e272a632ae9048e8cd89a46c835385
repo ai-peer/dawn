@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7267aa6a_07d1a494",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "It\u0027s ability to follow textually, doesn\u0027t say that the expression to the left has to remain grouped to the left.",
+      "parentUuid": "91c2ba6e_74c51b49",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "859c0b91_c28df15f",
@@ -193,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51fc535_84ac4f68",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "see below.",
+      "parentUuid": "3a92539a_34eaf9fc",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03e08b02_bfe2be91",
@@ -206,6 +242,24 @@
       "writtenOn": "2022-10-13T22:34:23Z",
       "side": 1,
       "message": "Only kOpLOr",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce2ae1f4_51130d18",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "I think the code is right.\n\n    let b \u003d b || a+2 \u003c 3*5; // this is ok\n    let b \u003d b || a \u003c 3*5; // this is ok\n    let b \u003d b || 1\u003c\u003c2 \u003c 50; // this is ok",
+      "parentUuid": "03e08b02_bfe2be91",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -259,6 +313,24 @@
       "side": 1,
       "message": "My understanding was that it was both. I thought it was things in differnet groupings required parens, but I may be mis-reading the diagram.",
       "parentUuid": "9b6a5095_4201199c",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32fd666d_a9f085a3",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-17T21:13:17Z",
+      "side": 1,
+      "message": "This table is about ability to follow textually, regardless of semantic grouping.\n\nSo, for example,  + can follow * but does not mean \"associate to the left\"",
+      "parentUuid": "3c3b32ab_839277fb",
       "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
