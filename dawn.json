@@ -1359,10 +1359,12 @@
         "category": "structure",
         "extensible": "in",
         "tags": ["dawn"],
+        "_TODO": "crbug.com/1316671: Mark 'visible rect' as must have after chromium side changes landed",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "plane 0", "type": "texture view"},
             {"name": "plane 1", "type": "texture view", "optional": true},
+            {"name": "visible rect", "type": "extent 3D", "annotation": "const*", "optional": true},
             {"name": "do yuv to rgb conversion only", "type": "bool", "default": "false"},
             {"name": "yuv to rgb conversion matrix", "type": "float", "annotation": "const*",
                 "length": 12, "optional": true},

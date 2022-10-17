@@ -581,4 +581,109 @@ TEST_F(ExternalTextureTest, UseErrorExternalTextureInBindGroup) {
     }
 }
 
+// Test create external texture with too large visible rect results in error.
+TEST_F(ExternalTextureTest, CreateExternalTextureWithErrorVisibleRect) {
+    // Control case should succeed.
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture.CreateView();
+        wgpu::Extent3D visibleRect = {texture.GetWidth(), texture.GetHeight(),
+                                      texture.GetDepthOrArrayLayers()};
+        externalDesc.visibleRect = &visibleRect;
+        device.CreateExternalTexture(&externalDesc);
+    }
+
+    // VisibleRect is OOB on width
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        wgpu::Extent3D visibleRectOOBOnWidth = {texture.GetWidth() + 1, texture.GetHeight(),
+                                                texture.GetDepthOrArrayLayers()};
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.visibleRect = &visibleRectOOBOnWidth;
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
+
+    // VisibleRect is OOB on height
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        wgpu::Extent3D visibleRectOOBOnHeight = {texture.GetWidth(), texture.GetHeight() + 1,
+                                                 texture.GetDepthOrArrayLayers()};
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.visibleRect = &visibleRectOOBOnHeight;
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
+
+    // VisibleRect is OOB on depthOrArrayLayers
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        wgpu::Extent3D visibleRectOOBOnDepthOrArrayLayers = {texture.GetWidth(),
+                                                             texture.GetHeight(), 2};
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.visibleRect = &visibleRectOOBOnDepthOrArrayLayers;
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
+}
+
+// Test submit external texture with plane is not submittable results in error.
+TEST_F(ExternalTextureTest, SubmitExternalTextureWithDestroyedPlane) {
+    wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+    wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+    wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+    externalDesc.plane0 = texture.CreateView();
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    // Create a bind group that contains the external texture.
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+
+    // Create another texture to use as a color attachment.
+    wgpu::TextureDescriptor renderTextureDescriptor = CreateTextureDescriptor();
+    wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
+    wgpu::TextureView renderView = renderTexture.CreateView();
+
+    utils::ComboRenderPassDescriptor renderPass({renderView}, nullptr);
+
+    // Control case should succeed.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        {
+            pass.SetBindGroup(0, bindGroup);
+            pass.End();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+
+        queue.Submit(1, &commands);
+    }
+
+    // Destroying the plane0 backed texture should result in an error.
+    {
+        texture.Destroy();
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        {
+            pass.SetBindGroup(0, bindGroup);
+            pass.End();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+}
+
 }  // namespace

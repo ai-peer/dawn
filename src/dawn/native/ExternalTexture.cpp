@@ -99,6 +99,19 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
         }
     }
 
+    // TODO(crbug.com/1316671): visibleRect is must have after chromium side changes landed.
+    if (descriptor->visibleRect) {
+        Extent3D maxVisibleRectSize = descriptor->plane0->GetTexture()->GetSize();
+        DAWN_INVALID_IF(descriptor->visibleRect->width > maxVisibleRectSize.width ||
+                            descriptor->visibleRect->height > maxVisibleRectSize.height ||
+                            descriptor->visibleRect->depthOrArrayLayers > 1,
+                        "VisibleRect(%u, %u, %u) is exceed the max visible rect size, defined by "
+                        "Plane0 size (%u, %u, %u).",
+                        descriptor->visibleRect->width, descriptor->visibleRect->height,
+                        descriptor->visibleRect->depthOrArrayLayers, maxVisibleRectSize.width,
+                        maxVisibleRectSize.height, maxVisibleRectSize.depthOrArrayLayers);
+    }
+
     return {};
 }
 
@@ -133,6 +146,10 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
                                            const ExternalTextureDescriptor* descriptor) {
     // Store any passed in TextureViews associated with individual planes.
     mTextureViews[0] = descriptor->plane0;
+
+    if (descriptor->visibleRect) {
+        mVisibleRect = *descriptor->visibleRect;
+    }
 
     if (descriptor->plane1) {
         mTextureViews[1] = descriptor->plane1;
@@ -200,6 +217,13 @@ MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
     DAWN_INVALID_IF(mState == ExternalTextureState::Destroyed,
                     "Destroyed external texture %s is used in a submit.", this);
+
+    for (uint32_t i = 0; i < kMaxPlanesPerFormat; ++i) {
+        if (mTextureViews[i] != nullptr) {
+            DAWN_TRY_CONTEXT(mTextureViews[i]->GetTexture()->ValidateCanUseInSubmitNow(),
+                             "Validate plane can be used in a submit.");
+        }
+    }
     return {};
 }
 
@@ -225,6 +249,11 @@ BufferBase* ExternalTextureBase::GetParamsBuffer() const {
 
 ObjectType ExternalTextureBase::GetType() const {
     return ObjectType::ExternalTexture;
+}
+
+const Extent3D& ExternalTextureBase::GetVisibleRect() const {
+    ASSERT(!IsError());
+    return mVisibleRect;
 }
 
 }  // namespace dawn::native

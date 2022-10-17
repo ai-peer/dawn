@@ -49,6 +49,7 @@ class ExternalTextureBase : public ApiObjectBase {
     BufferBase* GetParamsBuffer() const;
     const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& GetTextureViews() const;
     ObjectType GetType() const override;
+    const Extent3D& GetVisibleRect() const;
 
     MaybeError ValidateCanUseInSubmitNow() const;
     static ExternalTextureBase* MakeError(DeviceBase* device);
@@ -72,6 +73,7 @@ class ExternalTextureBase : public ApiObjectBase {
     Ref<TextureBase> mPlaceholderTexture;
     Ref<BufferBase> mParamsBuffer;
     std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> mTextureViews;
+    Extent3D mVisibleRect = {0, 0, 0};
 
     ExternalTextureState mState;
 };
