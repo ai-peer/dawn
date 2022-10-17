@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c514415a_d9c8d3e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-10-17T17:24:13Z",
+      "side": 1,
+      "message": "LGTM modulo comments.",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65af2ff5_1c05c9e9",
@@ -111,6 +128,30 @@
       "writtenOn": "2022-10-14T17:51:54Z",
       "side": 1,
       "message": "optional u-nit: perhaps we should pass HasUnclippedDepth() into here\n\nand do `req.clampFragDepth \u003d usesFragDepth \u0026\u0026 !unclippedDepth` inside `GetHandleAndSpirv`.\n\nSince `programmableStage` is accessible inside GetHandleAndSpirv, `programmableStage.metadata-\u003eusesFragDepth` and `clampFragDepth` provide partially overlapping pieces of information",
+      "range": {
+        "startLine": 377,
+        "startChar": 77,
+        "endLine": 378,
+        "endChar": 70
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1db9d23c_fd56d4d3",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-10-17T17:24:13Z",
+      "side": 1,
+      "message": "Along that logic, maybe we could have a helper, something like `AddShaderStage(VkShaderStageFlagBits stage, ProgrammableState\u0026 stage, bool clampFragDepth)` and use that for both the vertex and the fragment stages.\n\n(We can either pass the layout also, or just get it inside the helper).\n\nOtherwise the code duplication could make it easy to forget to change in one place versus the other, i.e. if we change how the cache key works or something.",
+      "parentUuid": "603452e9_d50ecf88",
       "range": {
         "startLine": 377,
         "startChar": 77,
