@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bab45a6_c5813d53",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-17T17:27:57Z",
+      "side": 1,
+      "message": "Not obvious because of the factoring out into `IsDerefOfPartialPointer`, but I also added this extra check to address the bug I had of this analysis not doing the right thing when a _full_ pointer is used to a partial value (e.g. dereferencing a full pointer to write to a struct member).",
+      "range": {
+        "startLine": 1251,
+        "startChar": 28,
+        "endLine": 1251,
+        "endChar": 51
+      },
+      "revId": "c502be45066c5729dc4ff878640a38f9cc2c7e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
