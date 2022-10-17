@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0763fa65_04d73c33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T08:00:46Z",
+      "side": 1,
+      "message": "As discovered by agrieve\u0027s in his email about binary size!",
+      "revId": "cec04a294cc4572f9ea25c763cd3c22defddaa48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdcf1752_44d63ea7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-17T08:00:46Z",
+      "side": 1,
+      "message": "As discovered by agrieve\u0027s in his email about binary size!",
+      "revId": "cec04a294cc4572f9ea25c763cd3c22defddaa48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
