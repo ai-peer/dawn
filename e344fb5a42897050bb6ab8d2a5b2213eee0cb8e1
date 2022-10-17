@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db81285b_7f8d7b9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "Done. I will split the CL once all your concerns are addressed.",
+      "parentUuid": "fb8bd604_fe67beb0",
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad95f89f_84ecb997",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 25
@@ -49,6 +67,30 @@
       "writtenOn": "2022-10-12T18:59:17Z",
       "side": 1,
       "message": "there\u0027s a slight behavior change here. This used to trace the serial that the task actually finished in. Now it traces the serial it was created with (the pending serial).\n\nI think knowing when the task actually finished is probably more helpful.\nTo restore this behavior, we can instead move the traces into FlushCallbackTaskQueue. Then, we don\u0027t need to even store mPlatform or mSerial.\nEach task can implement a method like `const char* GetStaticNameForTrace();` which will return a constant static string, so we don\u0027t need to store it anywhere.",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "febe9e0f_fa0c8d70",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "It seems FlushCallbackTaskQueue are called at a few different lines, where I not sure the \u0027finishedSerial\u0027 can all be known correctly. I changed to set \u0027finishedSerial\u0027 from [Queue]( https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Queue.cpp;drc\u003d76eeb828c8fff6e83c099b6202d2585fa18fddfa;l\u003d242).",
+      "parentUuid": "ad95f89f_84ecb997",
       "range": {
         "startLine": 45,
         "startChar": 8,
@@ -84,6 +126,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb040a41_6a968c38",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1911,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "No. this really should be HasPendingCommandsImpl covering case 2 and 4 in [1].",
+      "parentUuid": "cb95c415_6d58798b",
+      "range": {
+        "startLine": 1911,
+        "startChar": 11,
+        "endLine": 1911,
+        "endChar": 33
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fe17b5a_855de030",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 25
@@ -95,6 +161,30 @@
       "writtenOn": "2022-10-12T18:59:17Z",
       "side": 1,
       "message": "I don\u0027t see the serials modified in ForceEventualFlushOfCommands ?",
+      "range": {
+        "startLine": 405,
+        "startChar": 6,
+        "endLine": 406,
+        "endChar": 12
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ea5490_f0ebbede",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "ForceEventualFlushOfCommands impacts the serial to be computed as explained in [1].",
+      "parentUuid": "2fe17b5a_855de030",
       "range": {
         "startLine": 405,
         "startChar": 6,
@@ -130,6 +220,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8468a5b9_4a141ad3",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "Yes, it\u0027s ForceEventualFlushOfCommands. Sorry for the vague wording.",
+      "parentUuid": "06fb8c86_7bb2c6af",
+      "range": {
+        "startLine": 228,
+        "startChar": 27,
+        "endLine": 228,
+        "endChar": 42
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b48bc3f_e2b3dceb",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 25
@@ -141,6 +255,30 @@
       "writtenOn": "2022-10-12T18:59:17Z",
       "side": 1,
       "message": "if we\u0027re in this branch, then there are pending commands - in which case, is this always going to be the pending command serial?\nDo we need `GetSubmittedWorkDoneSerial` at all?",
+      "range": {
+        "startLine": 233,
+        "startChar": 60,
+        "endLine": 233,
+        "endChar": 89
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c19c59f_5d58df24",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "This is kind of subtle. I should have added the comments below about this.\n\n[1]\n\n```\n   // Internally the serial is computed according to whether frontend and backend have pending\n    // commands. There are 4 cases of combination:\n    //   1) Frontend(No), Backend(No)\n    //   2) Frontend(No), Backend(Yes)\n    //   3) Frontend(Yes), Backend(No)\n    //   4) Frontend(Yes), Backend(Yes)\n    // For case 1, we don\u0027t need the serial to track the task as we can ack it right now.\n    // For case 2 and 4, there will be at least an eventual submission, so we can use\n    // \u0027GetPendingCommandSerial\u0027 as the serial.\n    // For case 3, we can\u0027t use \u0027GetPendingCommandSerial\u0027 as it won\u0027t be submitted surely. Instead\n    // we use \u0027GetLastSubmittedCommandSerial\u0027, which must be fired eventually.\n```",
+      "parentUuid": "7b48bc3f_e2b3dceb",
       "range": {
         "startLine": 233,
         "startChar": 60,
@@ -176,6 +314,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85bca719_a36f6ced",
+        "filename": "src/dawn/native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e59b5b9_336a8cf4",
+      "range": {
+        "startLine": 181,
+        "startChar": 30,
+        "endLine": 181,
+        "endChar": 44
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af8356ab_853eea35",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 25
@@ -187,6 +349,30 @@
       "writtenOn": "2022-10-12T18:59:17Z",
       "side": 1,
       "message": "do we need this?\n\nhttps://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/16900/test-results?q\u003dID%3Aworker_webgpu%3Aapi%2Coperation%2ConSubmittedWorkDone%3Amany%2Cserial\n(very slow to load)\n\ntakes less than 800ms in the latest runs",
+      "range": {
+        "startLine": 173,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 104
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a023fba_a3b97326",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 25
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-17T14:40:23Z",
+      "side": 1,
+      "message": "We don\u0027t need this now. It was introduced by some previous PS.",
+      "parentUuid": "af8356ab_853eea35",
       "range": {
         "startLine": 173,
         "startChar": 0,
