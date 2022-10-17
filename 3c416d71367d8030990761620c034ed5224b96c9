@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf5dc2a1_21d19b7a",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T00:59:44Z",
+      "side": 1,
+      "message": "Agree, that makes more sense. And I\u0027d like to use a seperate CL to address this and make that ExternalTexture related CL the base of this one.",
+      "parentUuid": "305a3adf_9ccd3dac",
+      "range": {
+        "startLine": 1438,
+        "startChar": 0,
+        "endLine": 1440,
+        "endChar": 0
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa72d87d_ec8cee51",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 5
@@ -54,6 +78,24 @@
       "writtenOn": "2022-10-14T13:38:32Z",
       "side": 1,
       "message": "Instead of duplicating the header / footer, WDYT of having a single shader module with two entrypoints? The only thing that happens before sampling is the clamping of texcoords. So it could be\n\n```\n@fragment copyTexture() {\n  discardIfOutsideOfCopy();\n  \n  var color \u003d textureSampleLevel(...., 0);\n  return transform(color);\n}\n```",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df533a0f_9f926120",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T00:59:44Z",
+      "side": 1,
+      "message": "That\u0027s the option I considered. The only concern is about the different binding type (texture2d vs texture_external). If we go in this direction, I think both dummy texture2D and dummy externalTexture are needed to setBindGroup correctly.",
+      "parentUuid": "fa72d87d_ec8cee51",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +204,24 @@
       "writtenOn": "2022-10-14T13:38:32Z",
       "side": 1,
       "message": "Unfortunately I think we also need to validate that the textures that compose the external texture can be used in submits. Maybe we could make ValidateCanUseInSubmitNow recursively call the function on the textures that compose the external texture?",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff280b33_664866a4",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-17T00:59:44Z",
+      "side": 1,
+      "message": "Thanks for reminding. I think \"make ValidateCanUseInSubmitNow recursively\" is a good choice.",
+      "parentUuid": "4a310e74_b34ae1db",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
