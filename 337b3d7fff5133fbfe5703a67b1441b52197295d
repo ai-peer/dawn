@@ -33,6 +33,24 @@
       "message": "LGTM provided that the spec means to check for device loss on unmap.\n\nLooking at this, I realized that I had started implementing the logic but ran into some issue: https://dawn-review.googlesource.com/c/dawn/+/100702 and https://dawn-review.googlesource.com/c/dawn/+/100704 because I thought unmap was not checking for the device to be alive. But turns out is does? So this CL is probably ok?\n\nKai, can you confirm we should check for the device being lost here? (it is a cause where loss would be visible and different from non-lost).\n\nWe can land this CL before the CTS fixes if we want, by adding suppressions to webgpu-cts/expectations.txt for the cases that are failing.",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a998db2_ebc1a4ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-10-18T16:33:03Z",
+      "side": 1,
+      "message": "\u003e I thought unmap was not checking for the device to be alive. But turns out is does?\n\nI think the spec states that unmap() should check the device is alive?\n\nhttps://github.com/gpuweb/gpuweb/pull/3404\nhttps://gpuweb.github.io/gpuweb/#dom-gpubuffer-unmap\n\n\u003e Device timeline steps:\n\u003e 1. If this.[[device]] is invalid, return.",
+      "parentUuid": "81576f37_363d7912",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
