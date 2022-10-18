@@ -1,0 +1,8 @@
+#include <metal_stdlib>
+
+using namespace metal;
+fragment void gn() {
+  dfdx(-127.0f);
+  return;
+}
+
