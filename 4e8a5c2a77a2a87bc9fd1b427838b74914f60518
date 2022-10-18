@@ -16,6 +16,103 @@
       "message": "PTAL, thanks!",
       "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c76334d6_3fc23313",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T10:58:53Z",
+      "side": 1,
+      "message": "LGTM overall, but I think visibleWidth/Height should be value members.",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "839a297a_f082f3bf",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T10:58:53Z",
+      "side": 1,
+      "message": "What do you think of having `visible width` and `visible height` both defaulting to 0. Then start using them in Chromium? In the future we\u0027ll want these arguments to be part of the descriptor as values for sure, and turning pointer arguments into non-pointer arguments is pretty annoying.\n\nWhat you can do is 1) add the arguments without extra validation (or validate only if non-zero) 2) set the correct values in Chromium 3) make validation required in Dawn.",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d118dd3e_b5e0e636",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T10:58:53Z",
+      "side": 1,
+      "message": "nit: it should also be non-zero (otherwise technically the external texture contains no texels)",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8203aca5_a1859d3d",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T10:58:53Z",
+      "side": 1,
+      "message": "nit: It really is an extent2D for external textures.",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e13986_c4939b16",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T10:58:53Z",
+      "side": 1,
+      "message": "nit: Test that submitting an external texture with a plane that is not submittable results in error.",
+      "range": {
+        "startLine": 639,
+        "startChar": 3,
+        "endLine": 639,
+        "endChar": 79
+      },
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
