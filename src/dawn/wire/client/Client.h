@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "dawn/common/LinkedList.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/ChunkedCommandSerializer.h"
@@ -35,21 +36,74 @@ namespace dawn::wire::client {
 class Device;
 class MemoryTransferService;
 
+template <typename T>
+class ObjectAndSerializer : private ChunkedCommandSerializer, public T {
+  public:
+    template <typename... Args>
+    explicit ObjectAndSerializer(CommandSerializer* serializer,
+                                 const ObjectBaseParams& params,
+                                 Args&&... args)
+        : ChunkedCommandSerializer(serializer),
+          T(ObjectBaseParams{params.client, serializer ? this : params.serializer, params.handle},
+            std::forward<Args>(args)...),
+          mSerializerImpl(serializer) {}
+
+    ~ObjectAndSerializer() override {
+        if (mSerializerImpl) {
+            delete mSerializerImpl;
+        }
+    }
+
+    void OrderingBarrierAndFinish() {
+        if (mSerializerImpl) {
+            mSerializerImpl->Flush();
+
+            delete mSerializerImpl;
+            mSerializerImpl = nullptr;
+
+            static_cast<T*>(this)->SetSerializer(
+                static_cast<T*>(this)->GetClient()->GetSerializer());
+        }
+    }
+
+    void DisconnectSerializer() {
+        ChunkedCommandSerializer::Disconnect();
+        if (mSerializerImpl) {
+            delete mSerializerImpl;
+            mSerializerImpl = nullptr;
+        }
+    }
+
+  private:
+    CommandSerializer* mSerializerImpl;
+};
+
 class Client : public ClientBase {
   public:
-    Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService);
+    Client(CommandSerializer* serializer,
+           ClientSerializerFactory* serializerFactory,
+           MemoryTransferService* memoryTransferService);
     ~Client() override;
 
     // Make<T>(arg1, arg2, arg3) creates a new T, calling a constructor of the form:
     //
     //   T::T(ObjectBaseParams, arg1, arg2, arg3)
     template <typename T, typename... Args>
-    T* Make(Args&&... args) {
+    T* Make(ChunkedCommandSerializer* serializer, Args&&... args) {
         constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
 
         const std::lock_guard<std::mutex> lock(mObjectMutexes[type]);
-        ObjectBaseParams params = {this, mObjectStores[type].ReserveHandle()};
-        T* object = new T(params, std::forward<Args>(args)...);
+        ObjectBaseParams params = {this, serializer, mObjectStores[type].ReserveHandle()};
+        T* object;
+
+        if constexpr (UsesDedicatedSerialization<T>) {
+            CommandSerializer* impl =
+                mSerializerFactory ? mSerializerFactory->Create(ClientSerializerType::Encoder)
+                                   : nullptr;
+            object = new ObjectAndSerializer<T>(impl, params, std::forward<Args>(args)...);
+        } else {
+            object = new T(params, std::forward<Args>(args)...);
+        }
 
         mObjects[type].Append(object);
         mObjectStores[type].Insert(std::unique_ptr<T>(object));
@@ -98,6 +152,8 @@ class Client : public ClientBase {
         mSerializer.SerializeCommand(cmd, *this, extraSize, SerializeExtraSize);
     }
 
+    ChunkedCommandSerializer* GetSerializer() { return &mSerializer; }
+
     void Disconnect();
     bool IsDisconnected() const;
 
@@ -107,6 +163,7 @@ class Client : public ClientBase {
 #include "dawn/wire/client/ClientPrototypes_autogen.inc"
 
     ChunkedCommandSerializer mSerializer;
+    ClientSerializerFactory* mSerializerFactory;
     WireDeserializeAllocator mWireCommandAllocator;
     PerObjectType<std::mutex> mObjectMutexes;
     PerObjectType<ObjectStore> mObjectStores;

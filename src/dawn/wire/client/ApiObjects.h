@@ -28,4 +28,17 @@
 
 #include "dawn/wire/client/ApiObjects_autogen.h"
 
+namespace dawn::wire::client {
+
+template <typename T>
+constexpr inline bool UsesDedicatedSerialization = false;
+
+template <>
+constexpr inline bool UsesDedicatedSerialization<CommandEncoder> = true;
+
+template <>
+constexpr inline bool UsesDedicatedSerialization<RenderBundleEncoder> = true;
+
+}  // namespace dawn::wire::client
+
 #endif  // SRC_DAWN_WIRE_CLIENT_APIOBJECTS_H_

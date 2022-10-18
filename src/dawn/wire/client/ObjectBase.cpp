@@ -19,7 +19,10 @@
 namespace dawn::wire::client {
 
 ObjectBase::ObjectBase(const ObjectBaseParams& params)
-    : mClient(params.client), mHandle(params.handle), mRefcount(1) {}
+    : mClient(params.client),
+      mSerializer(params.serializer),
+      mHandle(params.handle),
+      mRefcount(1) {}
 
 ObjectBase::~ObjectBase() {
     RemoveFromList();
