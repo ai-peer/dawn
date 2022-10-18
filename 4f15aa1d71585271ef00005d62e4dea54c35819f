@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "4f15aa1d71585271ef00005d62e4dea54c35819f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f86e61_37984dc4",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2349,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-18T22:45:08Z",
+      "side": 1,
+      "message": "this comment doesn\u0027t seem to match the logic.\nAt this point, the semantic types should have materialized, so really, there shouldn\u0027t need to be any special handling of abstracts here (i.e. the current impl looks good, just the comment is confusing).",
+      "range": {
+        "startLine": 2348,
+        "startChar": 91,
+        "endLine": 2349,
+        "endChar": 51
+      },
+      "revId": "4f15aa1d71585271ef00005d62e4dea54c35819f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
