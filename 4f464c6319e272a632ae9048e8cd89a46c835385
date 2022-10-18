@@ -194,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41fb9c9c_c5b8f654",
+        "filename": "src/tint/reader/wgsl/parser_impl_expression_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-18T22:50:57Z",
+      "side": 1,
+      "message": "Assuming resolved based on David\u0027s comments.",
+      "parentUuid": "859c0b91_c28df15f",
+      "revId": "4f464c6319e272a632ae9048e8cd89a46c835385",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a92539a_34eaf9fc",
