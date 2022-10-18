@@ -16,6 +16,40 @@
       "message": "PTAL. It addressed comments like covering mips for the workaround code mentioned by Austin at https://dawn-review.googlesource.com/c/dawn/+/103120/3..10/src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp#b192, and other parameters.",
       "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e0e35c5_5b24c031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T11:29:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa450891_7707605c",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T11:29:47Z",
+      "side": 1,
+      "message": "Maybe \u003e\u003d 8, or switch over power of twos? This is to make the code future proof for when we add additional formats.",
+      "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
