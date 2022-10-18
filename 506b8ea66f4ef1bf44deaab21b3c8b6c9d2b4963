@@ -22,6 +22,30 @@
       },
       "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24f8df6a_284af3f1",
+        "filename": "test/tint/bug/chromium/1372963.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-18T16:04:28Z",
+      "side": 1,
+      "message": "Yeah, the only modification I made was to add @fragment, otherwise we generate a GLSL shader that fails validation because dFdx is only supported in fragment shaders.",
+      "parentUuid": "2b59fe89_d8e36b4f",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
