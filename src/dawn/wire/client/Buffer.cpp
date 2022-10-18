@@ -74,7 +74,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     // Create the buffer and send the creation command.
     // This must happen after any potential device->CreateErrorBuffer()
     // as server expects allocating ids to be monotonically increasing
-    Buffer* buffer = wireClient->Make<Buffer>(device, descriptor);
+    Buffer* buffer = wireClient->Make<Buffer>(device->GetSerializer(), device, descriptor);
     buffer->mDestructWriteHandleOnUnmap = false;
 
     if (descriptor->mappedAtCreation) {
@@ -122,7 +122,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
 // static
 WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descriptor) {
     Client* client = device->GetClient();
-    Buffer* buffer = client->Make<Buffer>(device, descriptor);
+    Buffer* buffer = client->Make<Buffer>(device->GetSerializer(), device, descriptor);
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);

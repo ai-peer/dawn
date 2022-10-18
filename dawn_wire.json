@@ -96,6 +96,19 @@
             { "name": "request serial", "type": "uint64_t" },
             { "name": "device object handle", "type": "ObjectHandle", "handle_type": "device"},
             { "name": "descriptor", "type": "device descriptor", "annotation": "const*" }
+        ],
+        "execution serial passed": [
+            { "name": "serializer id", "type": "uint64_t" },
+            { "name": "execution serial", "type": "uint64_t" }
+        ],
+        "register command serializer": [
+            { "name": "encoder type", "type": "ObjectType" },
+            { "name": "encoder id", "type": "ObjectId" },
+            { "name": "serializer id", "type": "uint64_t" }
+        ],
+        "drain command serializer": [
+            { "name": "serializer id", "type": "uint64_t" },
+            { "name": "execution serial", "type": "uint64_t" }
         ]
     },
     "return commands": {

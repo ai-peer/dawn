@@ -190,4 +190,16 @@ void Server::ClearDeviceCallbacks(WGPUDevice device) {
     mProcs.deviceSetDeviceLostCallback(device, nullptr, nullptr);
 }
 
+bool Server::DoRegisterCommandSerializer(ObjectType, ObjectId, uint64_t serializerId) {
+    return true;
+}
+
+bool Server::DoDrainCommandSerializer(uint64_t serializerId, uint64_t executionSerial) {
+    return true;
+}
+
+bool Server::DoExecutionSerialPassed(uint64_t serializerId, uint64_t executionSerial) {
+    return true;
+}
+
 }  // namespace dawn::wire::server

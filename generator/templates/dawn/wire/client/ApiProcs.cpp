@@ -58,7 +58,8 @@ namespace dawn::wire::client {
 
                     //* For object creation, store the object ID the client will use for the result.
                     {% if method.return_type.category == "object" %}
-                        auto* returnObject = self->GetClient()->Make<{{method.return_type.name.CamelCase()}}>();
+                        auto* returnObject = self->GetClient()->Make<{{method.return_type.name.CamelCase()}}>(
+                            self->GetSerializer());
                         cmd.result = returnObject->GetWireHandle();
                     {% endif %}
 
@@ -68,8 +69,16 @@ namespace dawn::wire::client {
                         cmd.{{as_varName(arg.name)}} = {{as_varName(arg.name)}};
                     {% endfor %}
 
-                    //* Allocate space to send the command and copy the value args over.
-                    self->GetClient()->SerializeCommand(cmd);
+                    {% if method.name.CamelCase() == "Finish" and "Encoder" in Type %}
+                        uint64_t serial = static_cast<ObjectAndSerializer<{{Type}}>*>(self)->IncrementExecutionSerial();
+                        self->GetClient()->SerializeCommand(DrainCommandSerializerCmd {
+                            static_cast<ObjectAndSerializer<{{Type}}>*>(self)->SerializerId(),
+                            serial,
+                        });
+                        self->GetClient()->SerializeCommand(cmd);
+                    {% else %}
+                        self->GetSerializer()->SerializeCommand(cmd);
+                    {% endif %}
 
                     {% if method.return_type.category == "object" %}
                         return ToAPI(returnObject);

@@ -35,21 +35,69 @@ namespace dawn::wire::client {
 class Device;
 class MemoryTransferService;
 
+template <typename T>
+class ObjectAndSerializer : private ChunkedCommandSerializer, public T {
+  public:
+    template <typename... Args>
+    explicit ObjectAndSerializer(
+        CommandSerializer* serializer,
+        uint64_t id,
+        const ObjectBaseParams& params,
+        Args&&... args)
+      : ChunkedCommandSerializer(serializer),
+        T(ObjectBaseParams{params.client, this, params.handle},
+          std::forward<Args>(args)...),
+        mId(id) {}
+
+    ~ObjectAndSerializer() override {
+        delete mSerializer;
+    }
+
+    uint64_t SerializerId() const {
+        return mId;
+    }
+
+    uint64_t IncrementExecutionSerial() {
+        uint64_t serial = mNextSerial++;
+        SerializeCommand(ExecutionSerialPassedCmd { mId, serial });
+        return serial;
+    }
+
+  private:
+    uint64_t mId;
+    uint64_t mNextSerial = 1;
+};
+
 class Client : public ClientBase {
   public:
-    Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService);
+    Client(CommandSerializer* serializer, ClientSerializerFactory serializerFactory, MemoryTransferService* memoryTransferService);
     ~Client() override;
 
     // Make<T>(arg1, arg2, arg3) creates a new T, calling a constructor of the form:
     //
     //   T::T(ObjectBaseParams, arg1, arg2, arg3)
     template <typename T, typename... Args>
-    T* Make(Args&&... args) {
+    T* Make(ChunkedCommandSerializer* serializer, Args&&... args) {
         constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
 
         const std::lock_guard<std::mutex> lock(mObjectMutexes[type]);
-        ObjectBaseParams params = {this, mObjectStores[type].ReserveHandle()};
-        T* object = new T(params, std::forward<Args>(args)...);
+        ObjectBaseParams params = {this, serializer, mObjectStores[type].ReserveHandle()};
+        T* object;
+
+        if constexpr (IsRootEncoder<T>) {
+            if (mSerializerFactory) {
+                uint64_t id = mNextSerializerId.fetch_add(1, std::memory_order_relaxed);
+                object = new ObjectAndSerializer<T>(
+                    mSerializerFactory(ClientSerializerType::Encoder, id),
+                    id,
+                    params, std::forward<Args>(args)...);
+                SerializeCommand(RegisterCommandSerializerCmd { type, object->GetWireId(), id });
+            } else {
+                object = new T(params, std::forward<Args>(args)...);
+            }
+        } else {
+            object = new T(params, std::forward<Args>(args)...);
+        }
 
         mObjects[type].Append(object);
         mObjectStores[type].Insert(std::unique_ptr<T>(object));
@@ -96,6 +144,10 @@ class Client : public ClientBase {
         mSerializer.SerializeCommand(cmd, *this, extraSize, SerializeExtraSize);
     }
 
+    ChunkedCommandSerializer* GetSerializer() {
+        return &mSerializer;
+    }
+
     void Disconnect();
     bool IsDisconnected() const;
 
@@ -105,6 +157,8 @@ class Client : public ClientBase {
 #include "dawn/wire/client/ClientPrototypes_autogen.inc"
 
     ChunkedCommandSerializer mSerializer;
+    ClientSerializerFactory mSerializerFactory;
+    std::atomic<uint64_t> mNextSerializerId = 2;
     WireDeserializeAllocator mWireCommandAllocator;
     PerObjectType<std::mutex> mObjectMutexes;
     PerObjectType<ObjectStore> mObjectStores;

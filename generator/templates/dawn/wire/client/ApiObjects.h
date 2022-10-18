@@ -28,7 +28,7 @@ namespace dawn::wire::client {
         {% if type.name.CamelCase() in client_special_objects %}
             class {{Type}};
         {% else %}
-            struct {{type.name.CamelCase()}} final : ObjectBase {
+            struct {{type.name.CamelCase()}} : ObjectBase {
                 using ObjectBase::ObjectBase;
             };
         {% endif %}

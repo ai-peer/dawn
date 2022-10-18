@@ -22,12 +22,17 @@
 #include "dawn/common/LinkedList.h"
 #include "dawn/wire/ObjectHandle.h"
 
+namespace dawn::wire {
+class ChunkedCommandSerializer;
+}
+
 namespace dawn::wire::client {
 
 class Client;
 
 struct ObjectBaseParams {
     Client* client;
+    ChunkedCommandSerializer* serializer;
     ObjectHandle handle;
 };
 
@@ -53,8 +58,13 @@ class ObjectBase : public LinkNode<ObjectBase> {
     // object.
     [[nodiscard]] bool Release();
 
+    ChunkedCommandSerializer* GetSerializer() {
+        return mSerializer;
+    }
+
   private:
     Client* const mClient;
+    ChunkedCommandSerializer* const mSerializer = nullptr;
     const ObjectHandle mHandle;
     std::atomic<uint32_t> mRefcount;
 };
