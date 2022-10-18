@@ -28,4 +28,17 @@
 
 #include "dawn/wire/client/ApiObjects_autogen.h"
 
+namespace dawn::wire::client {
+
+template <typename T>
+constexpr inline bool IsRootEncoder = false;
+
+template <>
+constexpr inline bool IsRootEncoder<CommandEncoder> = false;
+
+template <>
+constexpr inline bool IsRootEncoder<RenderBundleEncoder> = false;
+
+}
+
 #endif  // SRC_DAWN_WIRE_CLIENT_APIOBJECTS_H_

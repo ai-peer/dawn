@@ -22,7 +22,7 @@ namespace dawn::wire::client {
 // static
 WGPUQuerySet QuerySet::Create(Device* device, const WGPUQuerySetDescriptor* descriptor) {
     Client* wireClient = device->GetClient();
-    QuerySet* querySet = wireClient->Make<QuerySet>(descriptor);
+    QuerySet* querySet = wireClient->Make<QuerySet>(device->GetSerializer(), descriptor);
 
     // Send the Device::CreateQuerySet command without modifications.
     DeviceCreateQuerySetCmd cmd;

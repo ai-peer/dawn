@@ -111,6 +111,7 @@ class ChunkedCommandSerializer {
 
     void SerializeChunkedCommand(const char* allocatedBuffer, size_t remainingSize);
 
+  protected:
     CommandSerializer* mSerializer;
     size_t mMaxAllocationSize;
 };
