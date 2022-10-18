@@ -166,6 +166,7 @@ bool Client::IsDisconnected() const {
 }
 
 void Client::Free(ObjectBase* obj, ObjectType type) {
+    const std::lock_guard<std::mutex> lock(mObjectMutexes[type]);
     mObjectStores[type].Free(obj);
 }
 
