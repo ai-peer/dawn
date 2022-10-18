@@ -35,11 +35,21 @@ class NoopCommandSerializer final : public CommandSerializer {
 }  // anonymous namespace
 
 ChunkedCommandSerializer::ChunkedCommandSerializer(CommandSerializer* serializer)
-    : mSerializer(serializer), mMaxAllocationSize(serializer->GetMaximumAllocationSize()) {}
+    : mSerializer(serializer),
+      mMaxAllocationSize(serializer ? serializer->GetMaximumAllocationSize() : 0) {
+    mMutex.needsLock = false;
+}
+
+ChunkedCommandSerializer::ChunkedCommandSerializer(CommandSerializer* serializer,
+                                                   std::true_type needsLock)
+    : mSerializer(serializer),
+      mMaxAllocationSize(serializer ? serializer->GetMaximumAllocationSize() : 0) {
+    mMutex.needsLock = true;
+}
 
 void ChunkedCommandSerializer::SerializeChunkedCommand(const char* allocatedBuffer,
                                                        size_t remainingSize) {
-    const std::lock_guard<std::mutex> lock(mMutex);
+    const std::lock_guard<OptionalMutex> lock(mMutex);
     while (remainingSize > 0) {
         size_t chunkSize = std::min(remainingSize, mMaxAllocationSize);
         void* dst = mSerializer->GetCmdSpace(chunkSize);
@@ -56,7 +66,7 @@ void ChunkedCommandSerializer::SerializeChunkedCommand(const char* allocatedBuff
 }
 
 void ChunkedCommandSerializer::Disconnect() {
-    const std::lock_guard<std::mutex> lock(mMutex);
+    const std::lock_guard<OptionalMutex> lock(mMutex);
     mSerializer = NoopCommandSerializer::GetInstance();
 }
 

@@ -58,9 +58,20 @@ struct ReservedInstance {
     uint32_t generation;
 };
 
+enum class DAWN_WIRE_EXPORT ClientSerializerType {
+    Main,
+    Encoder,
+};
+
+class DAWN_WIRE_EXPORT ClientSerializerFactory {
+  public:
+    virtual CommandSerializer* Create(ClientSerializerType type) = 0;
+};
+
 struct DAWN_WIRE_EXPORT WireClientDescriptor {
-    CommandSerializer* serializer;
+    CommandSerializer* serializer = nullptr;
     client::MemoryTransferService* memoryTransferService = nullptr;
+    ClientSerializerFactory* serializerFactory = nullptr;
 };
 
 class DAWN_WIRE_EXPORT WireClient : public CommandHandler {

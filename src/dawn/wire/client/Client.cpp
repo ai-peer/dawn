@@ -19,8 +19,13 @@
 
 namespace dawn::wire::client {
 
-Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-    : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+Client::Client(CommandSerializer* serializer,
+               ClientSerializerFactory* serializerFactory,
+               MemoryTransferService* memoryTransferService)
+    : ClientBase(),
+      mSerializer(serializer, std::true_type{}),
+      mSerializerFactory(serializerFactory),
+      mMemoryTransferService(memoryTransferService) {
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -64,7 +69,7 @@ void Client::DestroyAllObjects() {
 }
 
 ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescriptor* descriptor) {
-    Texture* texture = Make<Texture>(descriptor);
+    Texture* texture = Make<Texture>(GetSerializer(), descriptor);
 
     ReservedTexture result;
     result.texture = ToAPI(texture);
@@ -76,7 +81,7 @@ ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescr
 }
 
 ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
-    SwapChain* swapChain = Make<SwapChain>();
+    SwapChain* swapChain = Make<SwapChain>(GetSerializer());
 
     ReservedSwapChain result;
     result.swapchain = ToAPI(swapChain);
@@ -88,7 +93,7 @@ ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device) {
 }
 
 ReservedDevice Client::ReserveDevice() {
-    Device* device = Make<Device>();
+    Device* device = Make<Device>(GetSerializer());
 
     ReservedDevice result;
     result.device = ToAPI(device);
@@ -98,7 +103,7 @@ ReservedDevice Client::ReserveDevice() {
 }
 
 ReservedInstance Client::ReserveInstance() {
-    Instance* instance = Make<Instance>();
+    Instance* instance = Make<Instance>(GetSerializer());
 
     ReservedInstance result;
     result.instance = ToAPI(instance);
@@ -141,6 +146,13 @@ void Client::Disconnect() {
             static_cast<Device*>(device->value())
                 ->HandleDeviceLost(WGPUDeviceLostReason_Undefined, "GPU connection lost");
         }
+    }
+    for (LinkNode<ObjectBase>* object : mObjects[ObjectType::CommandEncoder]) {
+        static_cast<ObjectAndSerializer<CommandEncoder>*>(object->value())->DisconnectSerializer();
+    }
+    for (LinkNode<ObjectBase>* object : mObjects[ObjectType::RenderBundleEncoder]) {
+        static_cast<ObjectAndSerializer<RenderBundleEncoder>*>(object->value())
+            ->DisconnectSerializer();
     }
     for (auto& objectList : mObjects) {
         for (LinkNode<ObjectBase>* object = objectList.head(); object != objectList.end();

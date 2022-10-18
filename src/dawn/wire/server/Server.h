@@ -23,7 +23,7 @@
 
 namespace dawn::wire {
 class CustomCommandHandler;
-}
+}  // namespace dawn::wire
 
 namespace dawn::wire::server {
 

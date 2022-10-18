@@ -41,7 +41,7 @@ void Instance::RequestAdapter(const WGPURequestAdapterOptions* options,
         return;
     }
 
-    Adapter* adapter = client->Make<Adapter>();
+    Adapter* adapter = client->Make<Adapter>(client->GetSerializer());
     uint64_t serial = mRequestAdapterRequests.Add({callback, adapter->GetWireId(), userdata});
 
     InstanceRequestAdapterCmd cmd;

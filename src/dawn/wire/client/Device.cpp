@@ -230,7 +230,7 @@ WGPUQueue Device::GetQueue() {
     if (mQueue == nullptr) {
         // Get the primary queue for this device.
         Client* client = GetClient();
-        mQueue = client->Make<Queue>();
+        mQueue = client->Make<Queue>(client->GetSerializer());
 
         DeviceGetQueueCmd cmd;
         cmd.self = ToAPI(this);
@@ -252,7 +252,7 @@ void Device::CreateComputePipelineAsync(WGPUComputePipelineDescriptor const* des
                         "GPU device disconnected", userdata);
     }
 
-    ComputePipeline* pipeline = client->Make<ComputePipeline>();
+    ComputePipeline* pipeline = client->Make<ComputePipeline>(client->GetSerializer());
 
     CreatePipelineAsyncRequest request = {};
     request.createComputePipelineAsyncCallback = callback;
@@ -302,7 +302,7 @@ void Device::CreateRenderPipelineAsync(WGPURenderPipelineDescriptor const* descr
                         "GPU device disconnected", userdata);
     }
 
-    RenderPipeline* pipeline = client->Make<RenderPipeline>();
+    RenderPipeline* pipeline = client->Make<RenderPipeline>(client->GetSerializer());
 
     CreatePipelineAsyncRequest request = {};
     request.createRenderPipelineAsyncCallback = callback;

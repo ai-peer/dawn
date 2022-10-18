@@ -31,6 +31,7 @@ namespace dawn::wire {
 class ChunkedCommandSerializer {
   public:
     explicit ChunkedCommandSerializer(CommandSerializer* serializer);
+    ChunkedCommandSerializer(CommandSerializer* serializer, std::true_type needsLock);
 
     template <typename Cmd>
     void SerializeCommand(const Cmd& cmd) {
@@ -81,7 +82,7 @@ class ChunkedCommandSerializer {
         size_t requiredSize = commandSize + extraSize;
 
         if (requiredSize <= mMaxAllocationSize) {
-            const std::lock_guard<std::mutex> lock(mMutex);
+            const std::lock_guard<OptionalMutex> lock(mMutex);
             char* allocatedBuffer = static_cast<char*>(mSerializer->GetCmdSpace(requiredSize));
             if (DAWN_UNLIKELY(allocatedBuffer == nullptr)) {
                 mSerializer->DidWriteCmds(0);
@@ -115,9 +116,25 @@ class ChunkedCommandSerializer {
 
     void SerializeChunkedCommand(const char* allocatedBuffer, size_t remainingSize);
 
+  protected:
+    struct OptionalMutex {
+        void lock() {
+            if (needsLock) {
+                mutex.lock();
+            }
+        }
+        void unlock() {
+            if (needsLock) {
+                mutex.unlock();
+            }
+        }
+
+        bool needsLock;
+        std::mutex mutex;
+    };
     CommandSerializer* mSerializer;
     size_t mMaxAllocationSize;
-    std::mutex mMutex;
+    OptionalMutex mMutex;
 };
 
 }  // namespace dawn::wire

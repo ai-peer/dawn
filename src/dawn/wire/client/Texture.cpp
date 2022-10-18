@@ -22,7 +22,7 @@ namespace dawn::wire::client {
 // static
 WGPUTexture Texture::Create(Device* device, const WGPUTextureDescriptor* descriptor) {
     Client* wireClient = device->GetClient();
-    Texture* texture = wireClient->Make<Texture>(descriptor);
+    Texture* texture = wireClient->Make<Texture>(device->GetSerializer(), descriptor);
 
     // Send the Device::CreateTexture command without modifications.
     DeviceCreateTextureCmd cmd;
@@ -38,7 +38,7 @@ WGPUTexture Texture::Create(Device* device, const WGPUTextureDescriptor* descrip
 // static
 WGPUTexture Texture::CreateError(Device* device, const WGPUTextureDescriptor* descriptor) {
     Client* wireClient = device->GetClient();
-    Texture* texture = wireClient->Make<Texture>(descriptor);
+    Texture* texture = wireClient->Make<Texture>(device->GetSerializer(), descriptor);
 
     // Send the Device::CreateErrorTexture command without modifications.
     DeviceCreateErrorTextureCmd cmd;

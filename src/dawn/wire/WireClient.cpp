@@ -18,7 +18,9 @@
 namespace dawn::wire {
 
 WireClient::WireClient(const WireClientDescriptor& descriptor)
-    : mImpl(new client::Client(descriptor.serializer, descriptor.memoryTransferService)) {}
+    : mImpl(new client::Client(descriptor.serializer,
+                               descriptor.serializerFactory,
+                               descriptor.memoryTransferService)) {}
 
 WireClient::~WireClient() {
     mImpl.reset();
