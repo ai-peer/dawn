@@ -94,6 +94,30 @@
       },
       "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc546266_fde8934a",
+        "filename": "test/tint/bug/chromium/1372963.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-18T18:02:38Z",
+      "side": 1,
+      "message": "I simplified the test, and it made me realize that I should add test cases for negative 0, which I also did.",
+      "parentUuid": "c811fe30_30afac10",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
