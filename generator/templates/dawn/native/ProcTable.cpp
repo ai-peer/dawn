@@ -20,6 +20,7 @@
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
 #include "{{native_dir}}/{{prefix}}_platform.h"
 #include "{{native_dir}}/{{Prefix}}Native.h"
+#include "dawn/platform/tracing/TraceEvent.h"
 
 #include <algorithm>
 #include <vector>
@@ -43,7 +44,21 @@ namespace {{native_namespace}} {
                 {%- endfor -%}
             ) {
                 //* Perform conversion between C types and frontend types
-                auto self = FromAPI(cSelf);
+                auto* self = FromAPI(cSelf);
+                TRACE_EVENT0(
+                {% if type.name.get() == "adapter" %}
+                    self->GetInstance()->GetPlatform()
+                {% elif type.name.get() == "device" %}
+                    self->GetPlatform()
+                {% elif type.name.get() == "instance" %}
+                    self->GetPlatform()
+                {% elif type.name.get() == "surface" %}
+                    self->GetInstance()->GetPlatform()
+                {% else %}
+                    self->GetDevice()->GetPlatform()
+                {% endif %}
+                , General, "{{suffix}}"
+                );
 
                 {% for arg in method.arguments %}
                     {% set varName = as_varName(arg.name) %}
