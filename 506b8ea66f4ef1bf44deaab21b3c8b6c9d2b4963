@@ -70,6 +70,30 @@
       },
       "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c811fe30_30afac10",
+        "filename": "test/tint/bug/chromium/1372963.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-18T17:34:03Z",
+      "side": 1,
+      "message": "Okay, will do. Normally we try to keep these matching the original, but most of this is noise.",
+      "parentUuid": "b22dac37_0a1fefc8",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
