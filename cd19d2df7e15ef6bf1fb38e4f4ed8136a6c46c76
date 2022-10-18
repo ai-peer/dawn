@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d128897_9fa9e4cc",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T11:04:13Z",
+      "side": 1,
+      "message": "This should be allowed because discard is now \"demote to helper\", can you file a Tint issue and add a TODO here? Same thing for the external texture.",
+      "revId": "cd19d2df7e15ef6bf1fb38e4f4ed8136a6c46c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1ded586_69f743d1",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-18T11:04:13Z",
+      "side": 1,
+      "message": "nit: const char*? And we can remove the string include above.",
+      "revId": "cd19d2df7e15ef6bf1fb38e4f4ed8136a6c46c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
