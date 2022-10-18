@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd9d3549_99ad142f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-10-18T07:17:29Z",
+      "side": 1,
+      "message": "Some CTS tests seem to fail (because I think they follow the older WebGPU specification that GPUBuffer.unmap() validates buffer state?). Must we first update CTS tests?",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
