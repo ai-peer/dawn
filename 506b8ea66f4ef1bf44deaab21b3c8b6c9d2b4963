@@ -118,6 +118,30 @@
       },
       "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26dd1ea9_69011617",
+        "filename": "test/tint/bug/chromium/1372963.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-18T18:03:59Z",
+      "side": 1,
+      "message": "Interesting, I almost always minimize the clusterfuzz test as so much of it is just noise from the fuzzer.",
+      "parentUuid": "dc546266_fde8934a",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 36
+      },
+      "revId": "506b8ea66f4ef1bf44deaab21b3c8b6c9d2b4963",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
