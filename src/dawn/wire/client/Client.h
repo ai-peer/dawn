@@ -16,6 +16,7 @@
 #define SRC_DAWN_WIRE_CLIENT_CLIENT_H_
 
 #include <memory>
+#include <mutex>
 #include <utility>
 
 #include "dawn/common/LinkedList.h"
@@ -46,6 +47,7 @@ class Client : public ClientBase {
     T* Make(Args&&... args) {
         constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
 
+        const std::lock_guard<std::mutex> lock(mObjectMutexes[type]);
         ObjectBaseParams params = {this, mObjectStores[type].ReserveHandle()};
         T* object = new T(params, std::forward<Args>(args)...);
 
@@ -62,7 +64,9 @@ class Client : public ClientBase {
 
     template <typename T>
     T* Get(ObjectId id) {
-        return static_cast<T*>(mObjectStores[ObjectTypeToTypeEnum<T>].Get(id));
+        constexpr ObjectType type = ObjectTypeToTypeEnum<T>;
+        const std::lock_guard<std::mutex> lock(mObjectMutexes[type]);
+        return static_cast<T*>(mObjectStores[type].Get(id));
     }
 
     // ChunkedCommandHandler implementation
@@ -102,6 +106,7 @@ class Client : public ClientBase {
 
     ChunkedCommandSerializer mSerializer;
     WireDeserializeAllocator mWireCommandAllocator;
+    PerObjectType<std::mutex> mObjectMutexes;
     PerObjectType<ObjectStore> mObjectStores;
     MemoryTransferService* mMemoryTransferService = nullptr;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;

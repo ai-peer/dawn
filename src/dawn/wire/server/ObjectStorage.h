@@ -127,7 +127,7 @@ class KnownObjectsBase {
     // Returns nullptr if the ID is already allocated, or too far ahead, or if ID is 0 (ID 0 is
     // reserved for nullptr). Invalidates all the Data*
     Data* Allocate(uint32_t id, AllocationState state = AllocationState::Allocated) {
-        if (id == 0 || id > mKnown.size()) {
+        if (id == 0) {
             return nullptr;
         }
 
@@ -135,8 +135,19 @@ class KnownObjectsBase {
         data.state = state;
         data.handle = nullptr;
 
-        if (id >= mKnown.size()) {
+        if (id == mKnown.size()) {
             mKnown.push_back(std::move(data));
+            return &mKnown.back();
+        } else if (id > mKnown.size()) {
+            // Clients racing to allocate an object may bump the ids out of order.
+            if constexpr (std::is_trivially_copyable<Data>::value) {
+                mKnown.resize(id + 1, Data{});
+            } else {
+                for (uint32_t i = mKnown.size(); i <= id; ++i) {
+                    mKnown.push_back(Data{});
+                }
+            }
+            mKnown.back() = std::move(data);
             return &mKnown.back();
         }
 
