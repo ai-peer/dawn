@@ -50,6 +50,24 @@
       "message": "Maybe \u003e\u003d 8, or switch over power of twos? This is to make the code future proof for when we add additional formats.",
       "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60425757_86e376f3",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-10-18T23:18:37Z",
+      "side": 1,
+      "message": "Done. \n\nThis code snippet doesn\u0027t need to be future-proof because it is not expected on new devices which have already had the fix and workaround is unwanted. So I didn\u0027t use \u0027switch\u0027 before. But it indeed is clearer.",
+      "parentUuid": "aa450891_7707605c",
+      "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
