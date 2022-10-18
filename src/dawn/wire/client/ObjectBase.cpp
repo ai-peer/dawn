@@ -42,13 +42,17 @@ Client* ObjectBase::GetClient() const {
 }
 
 void ObjectBase::Reference() {
-    mRefcount++;
+    mRefcount.fetch_add(1, std::memory_order_relaxed);
 }
 
 bool ObjectBase::Release() {
-    ASSERT(mRefcount != 0);
-    mRefcount--;
-    return mRefcount == 0;
+    uint32_t prev = mRefcount.fetch_sub(1, std::memory_order_release);
+    ASSERT(prev != 0);
+    if (prev == 1) {
+        std::atomic_thread_fence(std::memory_order_acquire);
+        return true;
+    }
+    return false;
 }
 
 }  // namespace dawn::wire::client

@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_OBJECTBASE_H_
 #define SRC_DAWN_WIRE_CLIENT_OBJECTBASE_H_
 
+#include <atomic>
+
 #include "dawn/webgpu.h"
 
 #include "dawn/common/LinkedList.h"
@@ -54,7 +56,7 @@ class ObjectBase : public LinkNode<ObjectBase> {
   private:
     Client* const mClient;
     const ObjectHandle mHandle;
-    uint32_t mRefcount;
+    std::atomic<uint32_t> mRefcount;
 };
 
 }  // namespace dawn::wire::client
