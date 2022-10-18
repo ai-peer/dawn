@@ -398,15 +398,37 @@ MaybeError Device::SubmitPendingCommandBuffer() {
         }
     }];
 
+    // Metal timestamps are reported in kernel time, in seconds. The platform time, also in
+    // seconds may have a different base "zero" time, so compute the offset to convert Metal
+    // timestamps to platform time.
+    double platformTimeOffset =
+        GetPlatform()->MonotonicallyIncreasingTime() - [[NSProcessInfo processInfo] systemUptime];
+
     // Update the completed serial once the completed handler is fired. Make a local copy of
     // mLastSubmittedSerial so it is captured by value.
     ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
     // this ObjC block runs on a different thread
-    [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
+    [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer> cb) {
+        uint64_t pendingSerialU64 = static_cast<uint64_t>(pendingSerial);
         TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
+        if (@available(macOS 10.15, *)) {
+            TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP1(
+                GetPlatform(), General, "schedule MTLCommandBuffer", pendingSerialU64,
+                platformTimeOffset + cb.kernelStartTime, "serial", pendingSerialU64);
+            TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(
+                GetPlatform(), General, "schedule MTLCommandBuffer", pendingSerialU64,
+                platformTimeOffset + cb.kernelEndTime);
+
+            TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP1(
+                GetPlatform(), GPUWork, "execute MTLCommandBuffer", pendingSerialU64,
+                platformTimeOffset + cb.GPUStartTime, "serial", pendingSerialU64);
+            TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(
+                GetPlatform(), GPUWork, "execute MTLCommandBuffer", pendingSerialU64,
+                platformTimeOffset + cb.GPUEndTime);
+        }
     }];
 
     TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",

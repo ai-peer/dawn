@@ -55,4 +55,20 @@ TraceEventHandle AddTraceEvent(Platform* platform,
     return static_cast<TraceEventHandle>(0);
 }
 
+TraceEventHandle AddTraceEventWithTimestamp(Platform* platform,
+                                            char phase,
+                                            const unsigned char* categoryGroupEnabled,
+                                            const char* name,
+                                            uint64_t id,
+                                            double timestamp,
+                                            int numArgs,
+                                            const char** argNames,
+                                            const unsigned char* argTypes,
+                                            const uint64_t* argValues,
+                                            unsigned char flags) {
+    ASSERT(platform != nullptr);
+    return platform->AddTraceEvent(phase, categoryGroupEnabled, name, id, timestamp, numArgs,
+                                   argNames, argTypes, argValues, flags);
+}
+
 }  // namespace dawn::platform::tracing

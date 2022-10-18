@@ -61,10 +61,42 @@ void DumpTraceEventsToJSONFile(
                 << "\"cat\": \"" << category << "\", "
                 << "\"ph\": \"" << traceEvent.phase << "\", "
                 << "\"id\": " << traceEvent.id << ", "
-                << "\"tid\": " << traceEvent.threadId << ", "
+                << "\"tid\": \"" << traceEvent.threadId << "\", "
                 << "\"ts\": " << microseconds << ", "
-                << "\"pid\": \"Dawn\""
-                << " }";
+                << "\"pid\": \"Dawn\"";
+        if (!traceEvent.args.empty()) {
+            outFile << ", \"args\": {";
+            for (const auto& arg : traceEvent.args) {
+                outFile << "\"" << arg.name << "\":";
+                const auto* u =
+                    reinterpret_cast<const dawn_platform::TraceEvent::TraceValueUnion*>(arg.value);
+                switch (arg.type) {
+                    case TRACE_VALUE_TYPE_BOOL:
+                        outFile << u->m_bool;
+                        break;
+                    case TRACE_VALUE_TYPE_UINT:
+                        outFile << arg.value;
+                        break;
+                    case TRACE_VALUE_TYPE_INT:
+                        outFile << static_cast<long long>(arg.value);
+                        break;
+                    case TRACE_VALUE_TYPE_DOUBLE:
+                        outFile << u->m_double;
+                        break;
+                    case TRACE_VALUE_TYPE_POINTER:
+                        outFile << u->m_pointer;
+                        break;
+                    case TRACE_VALUE_TYPE_COPY_STRING:
+                    case TRACE_VALUE_TYPE_STRING:
+                        outFile << "\"" << u->m_string << "\"";
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+            }
+            outFile << "}";
+        }
+        outFile << " }";
     }
     outFile.close();
 }

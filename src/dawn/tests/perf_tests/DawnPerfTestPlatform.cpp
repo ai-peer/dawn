@@ -43,6 +43,37 @@ static_assert(static_cast<uint32_t>(dawn::platform::TraceCategory::GPUWork) == 3
 
 }  // anonymous namespace
 
+DawnPerfTestPlatform::TraceEvent::TraceEvent(char phaseIn,
+                                             dawn_platform::TraceCategory categoryIn,
+                                             const char* nameIn,
+                                             uint64_t idIn,
+                                             double timestampIn,
+                                             int numArgs,
+                                             const char** argNames,
+                                             const unsigned char* argTypes,
+                                             const uint64_t* argValues,
+                                             unsigned char flags)
+    : phase(phaseIn), category(categoryIn), name(nameIn), id(idIn), timestamp(timestampIn) {
+    for (int i = 0; i < numArgs; ++i) {
+        const bool copy = (flags & TRACE_EVENT_FLAG_COPY) != 0;
+        const char* name = argNames[i];
+        if (copy) {
+            strings.push_back(std::make_unique<std::string>(name));
+            name = strings.back()->c_str();
+        }
+        if ((copy && argTypes[i] == TRACE_VALUE_TYPE_STRING) ||
+            argTypes[i] == TRACE_VALUE_TYPE_COPY_STRING) {
+            auto u =
+                *reinterpret_cast<const dawn_platform::TraceEvent::TraceValueUnion*>(argValues[i]);
+            strings.push_back(std::make_unique<std::string>(u.m_string));
+            u.m_string = strings.back()->c_str();
+            args.push_back({name, argTypes[i], u.m_uint});
+        } else {
+            args.push_back({name, argTypes[i], argValues[i]});
+        }
+    }
+}
+
 DawnPerfTestPlatform::DawnPerfTestPlatform()
     : dawn::platform::Platform(), mTimer(utils::CreateTimer()) {}
 
@@ -109,7 +140,8 @@ uint64_t DawnPerfTestPlatform::AddTraceEvent(char phase,
         reinterpret_cast<const TraceCategoryInfo*>(categoryGroupEnabled);
 
     std::vector<TraceEvent>* buffer = GetLocalTraceEventBuffer();
-    buffer->emplace_back(phase, info->category, name, id, timestamp);
+    buffer->emplace_back(phase, info->category, name, id, timestamp, numArgs, argNames, argTypes,
+                         argValues, flags);
 
     size_t hash = 0;
     HashCombine(&hash, buffer->size());
@@ -136,7 +168,8 @@ std::vector<DawnPerfTestPlatform::TraceEvent> DawnPerfTestPlatform::AcquireTrace
             stream << it->first;
             std::string threadId = stream.str();
 
-            std::transform(it->second->begin(), it->second->end(),
+            std::transform(std::make_move_iterator(it->second->begin()),
+                           std::make_move_iterator(it->second->end()),
                            std::back_inserter(traceEventBuffer), [&threadId](TraceEvent ev) {
                                ev.threadId = threadId;
                                return ev;

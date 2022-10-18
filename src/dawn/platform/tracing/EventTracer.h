@@ -43,6 +43,19 @@ DAWN_PLATFORM_EXPORT TraceEventHandle AddTraceEvent(Platform* platform,
                                                     const uint64_t* argValues,
                                                     unsigned char flags);
 
+DAWN_PLATFORM_EXPORT TraceEventHandle
+AddTraceEventWithTimestamp(Platform* platform,
+                           char phase,
+                           const unsigned char* categoryGroupEnabled,
+                           const char* name,
+                           uint64_t id,
+                           double timestamp,
+                           int numArgs,
+                           const char** argNames,
+                           const unsigned char* argTypes,
+                           const uint64_t* argValues,
+                           unsigned char flags);
+
 }  // namespace tracing
 }  // namespace dawn::platform
 

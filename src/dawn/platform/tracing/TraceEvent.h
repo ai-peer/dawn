@@ -407,101 +407,41 @@
 // Records a single NESTABLE_ASYNC_BEGIN event called "name" immediately, with
 // 0, 1 or 2 associated arguments. If the category is not enabled, then this
 // does nothing.
-#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN0(platform, category_group, name, id)          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0)
-#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN1(platform, category_group, name, id, arg1_name, arg1_val) \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN,             \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,           \
-                                     arg1_name, arg1_val)
-#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN2(platform, category_group, name, id, arg1_name, arg1_val, \
-                                          arg2_name, arg2_val)                                     \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN,             \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,           \
-                                     arg1_name, arg1_val, arg2_name, arg2_val)
-// Records a single NESTABLE_ASYNC_END event called "name" immediately, with 0
-// or 2 associated arguments. If the category is not enabled, then this does
-// nothing.
-#define TRACE_EVENT_NESTABLE_ASYNC_END0(platform, category_group, name, id)          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0)
-// Records a single NESTABLE_ASYNC_END event called "name" immediately, with 1
-// associated argument. If the category is not enabled, then this does nothing.
-#define TRACE_EVENT_NESTABLE_ASYNC_END1(platform, category_group, name, id, arg1_name, arg1_val) \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END,             \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,         \
-                                     arg1_name, arg1_val)
-#define TRACE_EVENT_NESTABLE_ASYNC_END2(platform, category_group, name, id, arg1_name, arg1_val, \
-                                        arg2_name, arg2_val)                                     \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END,             \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,         \
-                                     arg1_name, arg1_val, arg2_name, arg2_val)
-
-// Records a single NESTABLE_ASYNC_INSTANT event called "name" immediately,
-// with none, one or two associated argument. If the category is not enabled,
-// then this does nothing.
-#define TRACE_EVENT_NESTABLE_ASYNC_INSTANT0(platform, category_group, name, id)          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT, \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0)
-
-#define TRACE_EVENT_NESTABLE_ASYNC_INSTANT1(platform, category_group, name, id, arg1_name, \
-                                            arg1_val)                                      \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT,   \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,   \
-                                     arg1_name, arg1_val)
-
-#define TRACE_EVENT_NESTABLE_ASYNC_INSTANT2(platform, category_group, name, id, arg1_name, \
-                                            arg1_val, arg2_name, arg2_val)                 \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT,   \
-                                     category_group, name, id, TRACE_EVENT_FLAG_NONE, 0,   \
-                                     arg1_name, arg1_val, arg2_name, arg2_val)
-
-#define TRACE_EVENT_COPY_NESTABLE_ASYNC_BEGIN_WITH_TTS2(platform, category_group, name, id,       \
-                                                        arg1_name, arg1_val, arg2_name, arg2_val) \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN,            \
-                                     category_group, name, id,                                    \
-                                     TRACE_EVENT_FLAG_ASYNC_TTS | TRACE_EVENT_FLAG_COPY, 0,       \
-                                     arg1_name, arg1_val, arg2_name, arg2_val)
-#define TRACE_EVENT_COPY_NESTABLE_ASYNC_END_WITH_TTS2(platform, category_group, name, id,       \
-                                                      arg1_name, arg1_val, arg2_name, arg2_val) \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END,            \
-                                     category_group, name, id,                                  \
-                                     TRACE_EVENT_FLAG_ASYNC_TTS | TRACE_EVENT_FLAG_COPY, 0,     \
-                                     arg1_name, arg1_val, arg2_name, arg2_val)
-
-// Similar to TRACE_EVENT_NESTABLE_ASYNC_{BEGIN,END}x but with a custom
-// |timestamp| provided.
-#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP0(platform, category_group, name, id, \
-                                                         timestamp)                          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                      \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, category_group, name, id,          \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_NONE, 0)
-#define TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(platform, category_group, name, id, \
-                                                       timestamp)                          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                    \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, category_group, name, id,          \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_NONE, 0)
-#define TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP1(platform, category_group, name, id, \
-                                                       timestamp, arg1_name, arg1_val)     \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                    \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, category_group, name, id,          \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_NONE, 0, arg1_name, \
-        arg1_val)
-#define TRACE_EVENT_NESTABLE_ASYNC_INSTANT_WITH_TIMESTAMP0(platform, category_group, name, id, \
-                                                           timestamp)                          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                        \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT, category_group, name, id,          \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_NONE, 0)
+#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP0(platform, category_group, name, id,   \
+                                                         timestamp)                            \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(                                            \
+        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, category_group, name, id, timestamp, \
+        TRACE_EVENT_FLAG_NONE, 0)
+#define TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(platform, category_group, name, id,         \
+                                                       timestamp)                                  \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, \
+                                                   category_group, name, id, timestamp,            \
+                                                   TRACE_EVENT_FLAG_NONE, 0)
+#define TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP1(platform, category_group, name, id,   \
+                                                         timestamp, arg1_name, arg1_val)       \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(                                            \
+        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, category_group, name, id, timestamp, \
+        TRACE_EVENT_FLAG_NONE, 0, arg1_name, arg1_val)
+#define TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP1(platform, category_group, name, id,         \
+                                                       timestamp, arg1_name, arg1_val)             \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, \
+                                                   category_group, name, id, timestamp,            \
+                                                   TRACE_EVENT_FLAG_NONE, 0, arg1_name, arg1_val)
+#define TRACE_EVENT_NESTABLE_ASYNC_INSTANT_WITH_TIMESTAMP0(platform, category_group, name, id,   \
+                                                           timestamp)                            \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(                                              \
+        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_INSTANT, category_group, name, id, timestamp, \
+        TRACE_EVENT_FLAG_NONE, 0)
 #define TRACE_EVENT_COPY_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP0(platform, category_group, name, id, \
                                                               timestamp)                          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                           \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, category_group, name, id,               \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_COPY, 0)
-#define TRACE_EVENT_COPY_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(platform, category_group, name, id, \
-                                                            timestamp)                          \
-    INTERNAL_TRACE_EVENT_ADD_WITH_ID_TID_AND_TIMESTAMP(                                         \
-        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, category_group, name, id,               \
-        TRACE_EVENT_API_CURRENT_THREAD_ID, timestamp, TRACE_EVENT_FLAG_COPY, 0)
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(                                               \
+        platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_BEGIN, category_group, name, id, timestamp,    \
+        TRACE_EVENT_FLAG_COPY, 0)
+#define TRACE_EVENT_COPY_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(platform, category_group, name, id,    \
+                                                            timestamp)                             \
+    INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(platform, TRACE_EVENT_PHASE_NESTABLE_ASYNC_END, \
+                                                   category_group, name, id, timestamp,            \
+                                                   TRACE_EVENT_FLAG_COPY, 0)
 
 // Records a single FLOW_BEGIN event called "name" immediately, with 0, 1 or 2
 // associated arguments. If the category is not enabled, then this
@@ -660,6 +600,21 @@
 //                    unsigned char flags)
 #define TRACE_EVENT_API_ADD_TRACE_EVENT dawn::platform::tracing::AddTraceEvent
 
+// Add a trace event with a timestamp to the platform tracing system.
+// void TRACE_EVENT_API_ADD_TRACE_EVENT_WITH_TIMESTAMP(
+//                    char phase,
+//                    const unsigned char* category_enabled,
+//                    const char* name,
+//                    unsigned long long id,
+//                    double timestamp,
+//                    int num_args,
+//                    const char** arg_names,
+//                    const unsigned char* arg_types,
+//                    const unsigned long long* arg_values,
+//                    unsigned char flags)
+#define TRACE_EVENT_API_ADD_TRACE_EVENT_WITH_TIMESTAMP \
+    dawn_platform::tracing::AddTraceEventWithTimestamp
+
 ////////////////////////////////////////////////////////////////////////////////
 
 // Implementation detail: trace event macros create temporary variables
@@ -717,6 +672,19 @@
                 platformObj, phase, INTERNALTRACEEVENTUID(catstatic), name,                  \
                 traceEventTraceID.data(), traceEventFlags, __VA_ARGS__);                     \
         }                                                                                    \
+    } while (0)
+
+#define INTERNAL_TRACE_EVENT_ADD_WITH_ID_AND_TIMESTAMP(platform, phase, category, name, id,        \
+                                                       timestamp, flags, ...)                      \
+    do {                                                                                           \
+        INTERNAL_TRACE_EVENT_GET_CATEGORY_INFO(platform, ::dawn_platform::TraceCategory::category) \
+        if (*INTERNALTRACEEVENTUID(catstatic)) {                                                   \
+            unsigned char traceEventFlags = flags | TRACE_EVENT_FLAG_HAS_ID;                       \
+            dawn_platform::TraceEvent::TraceID traceEventTraceID(id, &traceEventFlags);            \
+            dawn_platform::TraceEvent::addTraceEventWithTimestamp(                                 \
+                platform, phase, INTERNALTRACEEVENTUID(catstatic), name, traceEventTraceID.data(), \
+                timestamp, traceEventFlags, __VA_ARGS__);                                          \
+        }                                                                                          \
     } while (0)
 
 // Notes regarding the following definitions:
@@ -913,6 +881,65 @@ static inline dawn::platform::tracing::TraceEventHandle addTraceEvent(
     setTraceValue(arg2Val, &argTypes[1], &argValues[1]);
     return TRACE_EVENT_API_ADD_TRACE_EVENT(platform, phase, categoryEnabled, name, id, numArgs,
                                            argNames, argTypes, argValues, flags);
+}
+
+static inline dawn_platform::tracing::TraceEventHandle addTraceEventWithTimestamp(
+    dawn_platform::Platform* platform,
+    char phase,
+    const unsigned char* categoryEnabled,
+    const char* name,
+    unsigned long long id,
+    double timestamp,
+    unsigned char flags,
+    int /*unused, helps avoid empty __VA_ARGS__*/) {
+    return TRACE_EVENT_API_ADD_TRACE_EVENT_WITH_TIMESTAMP(
+        platform, phase, categoryEnabled, name, id, timestamp, zeroNumArgs, 0, 0, 0, flags);
+}
+
+template <class ARG1_TYPE>
+static inline dawn_platform::tracing::TraceEventHandle addTraceEventWithTimestamp(
+    dawn_platform::Platform* platform,
+    char phase,
+    const unsigned char* categoryEnabled,
+    const char* name,
+    unsigned long long id,
+    double timestamp,
+    unsigned char flags,
+    int /*unused, helps avoid empty __VA_ARGS__*/,
+    const char* arg1Name,
+    const ARG1_TYPE& arg1Val) {
+    const int numArgs = 1;
+    unsigned char argTypes[1];
+    uint64_t argValues[1];
+    setTraceValue(arg1Val, &argTypes[0], &argValues[0]);
+    return TRACE_EVENT_API_ADD_TRACE_EVENT_WITH_TIMESTAMP(platform, phase, categoryEnabled, name,
+                                                          id, timestamp, numArgs, &arg1Name,
+                                                          argTypes, argValues, flags);
+}
+
+template <class ARG1_TYPE, class ARG2_TYPE>
+static inline dawn_platform::tracing::TraceEventHandle addTraceEventWithTimestamp(
+    dawn_platform::Platform* platform,
+    char phase,
+    const unsigned char* categoryEnabled,
+    const char* name,
+    unsigned long long id,
+    double timestamp,
+    unsigned char flags,
+    int /*unused, helps avoid empty __VA_ARGS__*/,
+    const char* arg1Name,
+    const ARG1_TYPE& arg1Val,
+    const char* arg2Name,
+    const ARG2_TYPE& arg2Val) {
+    const int numArgs = 2;
+    const char* argNames[2] = {arg1Name, arg2Name};
+    unsigned char argTypes[2];
+    uint64_t argValues[2];
+    setTraceValue(arg1Val, &argTypes[0], &argValues[0]);
+    setTraceValue(arg2Val, &argTypes[1], &argValues[1]);
+    return TRACE_EVENT_API_ADD_TRACE_EVENT_WITH_TIMESTAMP(platform, phase, categoryEnabled, name,
+                                                          id, timestamp, numArgs, argNames,
+                                                          argTypes, argValues, flags);
 }
 
 // Used by TRACE_EVENTx macro. Do not use directly.
