@@ -101,6 +101,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6fab8f2_72fd5c2d",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-19T13:17:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "febe9e0f_fa0c8d70",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 40
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb95c415_6d58798b",
@@ -291,6 +315,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1083c76_ef9ce012",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-19T13:17:55Z",
+      "side": 1,
+      "message": "hm I see, but for case (3) since in this function, we are calling ForceEventualFlushOfCommands(), isn\u0027t it the case that `HasPendingCommandsImpl() \u003d\u003d HasPendingCommands()` here? And then also `GetSubmittedWorkDoneSerial() \u003d\u003d GetPendingCommandSerial()`?",
+      "parentUuid": "0c19c59f_5d58df24",
+      "range": {
+        "startLine": 233,
+        "startChar": 60,
+        "endLine": 233,
+        "endChar": 89
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e59b5b9_336a8cf4",
         "filename": "src/dawn/native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 25
@@ -326,6 +374,30 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "5e59b5b9_336a8cf4",
+      "range": {
+        "startLine": 181,
+        "startChar": 30,
+        "endLine": 181,
+        "endChar": 44
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "701afbd9_a76bc593",
+        "filename": "src/dawn/native/d3d12/CommandRecordingContext.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-19T13:17:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85bca719_a36f6ced",
       "range": {
         "startLine": 181,
         "startChar": 30,
