@@ -958,6 +958,7 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
         [&](const ast::AssignmentStatement* a) { return EmitAssign(a); },
         [&](const ast::BlockStatement* b) { return EmitBlock(b); },
         [&](const ast::BreakStatement* b) { return EmitBreak(b); },
+        [&](const ast::BreakIfStatement* b) { return EmitBreakIf(b); },
         [&](const ast::CallStatement* c) {
             auto out = line();
             if (!EmitCall(out, c->expr)) {
@@ -980,8 +981,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
         [&](const ast::SwitchStatement* s) { return EmitSwitch(s); },
         [&](const ast::VariableDeclStatement* v) { return EmitVariable(line(), v->variable); },
         [&](Default) {
-            diagnostics_.add_error(diag::System::Writer,
-                                   "unknown statement type: " + std::string(stmt->TypeInfo().name));
+            diagnostics_.add_error(
+                diag::System::Writer,
+                "WGSL Generator: unknown statement type: " + std::string(stmt->TypeInfo().name));
             return false;
         });
 }
@@ -1020,6 +1022,17 @@ bool GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
 
 bool GeneratorImpl::EmitBreak(const ast::BreakStatement*) {
     line() << "break;";
+    return true;
+}
+
+bool GeneratorImpl::EmitBreakIf(const ast::BreakIfStatement* b) {
+    auto out = line();
+
+    out << "break if ";
+    if (!EmitExpression(out, b->condition)) {
+        return false;
+    }
+    out << ";";
     return true;
 }
 
