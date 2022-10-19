@@ -250,6 +250,41 @@ TEST_F(ParserImplTest, Expression_InvalidRelational) {
     EXPECT_EQ(p->error(), "1:6: unable to parse right side of <= expression");
 }
 
+TEST_F(ParserImplTest, Expression_SubtractionNoSpace) {
+    auto p = parser("(2-1)");
+    auto e = p->expression();
+    EXPECT_TRUE(e.matched);
+    EXPECT_FALSE(e.errored);
+    EXPECT_FALSE(p->has_error()) << p->error();
+    ASSERT_NE(e.value, nullptr);
+
+    ASSERT_TRUE(e->Is<ast::BinaryExpression>());
+    auto* b = e->As<ast::BinaryExpression>();
+    EXPECT_TRUE(b->IsSubtract());
+
+    ASSERT_TRUE(b->lhs->Is<ast::IntLiteralExpression>());
+    ASSERT_TRUE(b->rhs->Is<ast::IntLiteralExpression>());
+
+    EXPECT_EQ(b->lhs->As<ast::IntLiteralExpression>()->value, 2);
+    EXPECT_EQ(b->rhs->As<ast::IntLiteralExpression>()->value, 1);
+}
+
+TEST_F(ParserImplTest, Expression_NegatedNumber) {
+    auto p = parser("-1");
+    auto e = p->expression();
+    EXPECT_TRUE(e.matched);
+    EXPECT_FALSE(e.errored);
+    EXPECT_FALSE(p->has_error()) << p->error();
+    ASSERT_NE(e.value, nullptr);
+
+    ASSERT_TRUE(e->Is<ast::UnaryOpExpression>());
+    auto* b = e->As<ast::UnaryOpExpression>();
+    EXPECT_EQ(b->op, ast::UnaryOp::kNegation);
+
+    ASSERT_TRUE(b->expr->Is<ast::IntLiteralExpression>());
+    EXPECT_EQ(b->expr->As<ast::IntLiteralExpression>()->value, 1);
+}
+
 namespace mixing_binary_ops {
 
 struct BinaryOperatorInfo {
