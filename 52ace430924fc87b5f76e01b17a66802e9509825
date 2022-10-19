@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "477d7f0c_c4cd3255",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-19T18:52:42Z",
+      "side": 1,
+      "message": "Exactly, and also if we set the constant at least once, then they are kept for all pipelines in the render pass (until we do dawn:1576) whereas if we check every time, we might check dirty, lastPipeline !\u003d nullptr, and UsesFragDepth repeatedly.\n\nThere\u0027s definitely improvements to do when we do dawn:1576 though. (a bit mask of things that are dirty to apply, stuff like that.)",
+      "parentUuid": "a489d841_2accafa2",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc9193d5_5ab60676",
@@ -92,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d9b94b5_b40f5e8a",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-19T18:52:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc9193d5_5ab60676",
+      "range": {
+        "startLine": 1326,
+        "startChar": 23,
+        "endLine": 1326,
+        "endChar": 32
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aae52f77_01cc88f2",
@@ -105,6 +147,30 @@
       "writtenOn": "2022-10-14T17:51:54Z",
       "side": 1,
       "message": "you could check that the viewport args actually changed; to confirm, is the assumption that a well-behaved application will not set the same args over and over again?\n\nseems like a fine assumption to me",
+      "range": {
+        "startLine": 1329,
+        "startChar": 42,
+        "endLine": 1329,
+        "endChar": 46
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0101708a_3f72940d",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-19T18:52:42Z",
+      "side": 1,
+      "message": "TBH I didn\u0027t think about it, but yeah let\u0027s assume that until proven wrong by some important benchmark :P",
+      "parentUuid": "aae52f77_01cc88f2",
       "range": {
         "startLine": 1329,
         "startChar": 42,
