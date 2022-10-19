@@ -68,6 +68,24 @@
       "parentUuid": "aa450891_7707605c",
       "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7edb6b3_4f221a35",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-10-19T07:03:51Z",
+      "side": 1,
+      "message": "Forgot to add 8bit and 16bit formats to exercise the code. Now they are added too. The new added 8bit and 16bit formats triggered texture corruption in end2end tests and can be worked around by this change.",
+      "parentUuid": "60425757_86e376f3",
+      "revId": "74b28cd5207fea4bb6f122618b3c31861fd5578d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
