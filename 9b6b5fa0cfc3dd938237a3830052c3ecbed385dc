@@ -1,0 +1,262 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3580d6_73426b5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "Looks great! Just a whole lotta nit.",
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd732af1_8dc905ac",
+        "filename": "src/tint/ast/case_selector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "`Constructor`",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d414c2_a3707d64",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "remove?",
+      "range": {
+        "startLine": 1172,
+        "startChar": 25,
+        "endLine": 1172,
+        "endChar": 26
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "405b9dc7_cadc4ad6",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "Would be nicer if this used the `EXPR\u0026\u0026` pattern seen elsewhere. Just avoids a bunch of `Expr()` noise in usage.",
+      "range": {
+        "startLine": 2894,
+        "startChar": 42,
+        "endLine": 2894,
+        "endChar": 64
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12865df9_4bc73796",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "nit: Might be nicer to split this into `CaseSelector(const Source\u0026 source, const ast::Expression* expr)` and `DefaultCaseSelector(const Source\u0026 source)`.\nJust makes things a little more explicit.",
+      "range": {
+        "startLine": 2894,
+        "startChar": 70,
+        "endLine": 2894,
+        "endChar": 79
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb0cdca_30a97c0d",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2901,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "Ditto for this overload.",
+      "range": {
+        "startLine": 2901,
+        "startChar": 42,
+        "endLine": 2901,
+        "endChar": 69
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f52ee75_f0c96301",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "übernit: Would be nice to point at the previous `default` with a `AddNote`.",
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4615dd01_ab05fc92",
+        "filename": "src/tint/sem/switch_statement.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "No need for these to be mutable. Suggest:\n\n```\nconst ast::CaseSelector* const decl_;\nconst Constant* const val_;\n```\n\n (no need for initializer, if you\u0027re forced to give them a value)",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 34
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0c8cb3_5b6fae07",
+        "filename": "src/tint/transform/test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "übernit:\n\nTwo tests on `program.IsValid()` here, which could be folded together, tightly associating the two statements.\n\n```\n    bool ShouldRun(Program\u0026\u0026 program, const DataMap\u0026 data \u003d {}) {\n        if (!program.IsValid()) {\n            FAIL(\"ShouldRun() called with invalid program\") \u003c\u003c program.Diagnostics().str();\n            return false;\n        }\n```\n\nAlso provides a bit more info in the error if/when this fires.",
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7eceae_2c61fd86",
+        "filename": "src/tint/writer/msl/generator_impl_switch_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "nit: could use the ProgramBuilder helpers here (and above)",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 43
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc54f607_07164301",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3463,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "it looks like this could be removed?",
+      "range": {
+        "startLine": 3459,
+        "startChar": 0,
+        "endLine": 3463,
+        "endChar": 9
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480823a5_086feaaa",
+        "filename": "src/tint/writer/wgsl/generator_impl_switch_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-19T09:23:56Z",
+      "side": 1,
+      "message": "nit: use `ProgramBuilder` helpers?",
+      "range": {
+        "startLine": 62,
+        "startChar": 16,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
