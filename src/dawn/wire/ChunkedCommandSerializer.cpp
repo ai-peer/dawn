@@ -16,11 +16,30 @@
 
 namespace dawn::wire {
 
+namespace {
+
+class NoopCommandSerializer final : public CommandSerializer {
+  public:
+    static NoopCommandSerializer* GetInstance() {
+        static NoopCommandSerializer gNoopCommandSerializer;
+        return &gNoopCommandSerializer;
+    }
+
+    ~NoopCommandSerializer() override = default;
+
+    size_t GetMaximumAllocationSize() const final { return 0; }
+    void* GetCmdSpace(size_t size) final { return nullptr; }
+    bool Flush() final { return false; }
+};
+
+}  // anonymous namespace
+
 ChunkedCommandSerializer::ChunkedCommandSerializer(CommandSerializer* serializer)
     : mSerializer(serializer), mMaxAllocationSize(serializer->GetMaximumAllocationSize()) {}
 
 void ChunkedCommandSerializer::SerializeChunkedCommand(const char* allocatedBuffer,
                                                        size_t remainingSize) {
+    const std::lock_guard<std::mutex> lock(mMutex);
     while (remainingSize > 0) {
         size_t chunkSize = std::min(remainingSize, mMaxAllocationSize);
         void* dst = mSerializer->GetCmdSpace(chunkSize);
@@ -34,6 +53,11 @@ void ChunkedCommandSerializer::SerializeChunkedCommand(const char* allocatedBuff
         allocatedBuffer += chunkSize;
         remainingSize -= chunkSize;
     }
+}
+
+void ChunkedCommandSerializer::Disconnect() {
+    const std::lock_guard<std::mutex> lock(mMutex);
+    mSerializer = NoopCommandSerializer::GetInstance();
 }
 
 }  // namespace dawn::wire
