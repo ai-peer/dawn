@@ -339,6 +339,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ebe8978_d5c9d2e8",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-19T13:59:55Z",
+      "side": 1,
+      "message": "`ForceEventualFlushOfCommands()` doesn\u0027t necessarily make `HasPendingCommandsImpl()` return true, as the recording context in the backend might be unused. So it\u0027s possible in the frontend `GetLastSubmittedCommandSerial() \u003e GetCompletedCommandSerial()`, while the backend is having no pending commands.\n\nBelow case can be such an example.\n```\n    wgpu::CommandEncoder encoder \u003d device.CreateCommandEncoder(nullptr);\n    wgpu::CommandBuffer commandBuffer \u003d encoder.Finish();\n    queue.Submit(1, \u0026commandBuffer);\n\n    queue.OnSubmittedWorkDone(...)\n```",
+      "parentUuid": "c1083c76_ef9ce012",
+      "range": {
+        "startLine": 233,
+        "startChar": 60,
+        "endLine": 233,
+        "endChar": 89
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e59b5b9_336a8cf4",
         "filename": "src/dawn/native/d3d12/CommandRecordingContext.cpp",
         "patchSetId": 25
