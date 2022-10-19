@@ -226,6 +226,30 @@
       },
       "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e714a0f_562c7393",
+        "filename": "src/dawn/native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-19T19:03:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1db9d23c_fd56d4d3",
+      "range": {
+        "startLine": 377,
+        "startChar": 77,
+        "endLine": 378,
+        "endChar": 70
+      },
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
