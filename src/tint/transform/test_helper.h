@@ -116,6 +116,10 @@ class TransformTestBase : public BASE {
     template <typename TRANSFORM>
     bool ShouldRun(Program&& program, const DataMap& data = {}) {
         EXPECT_TRUE(program.IsValid()) << program.Diagnostics().str();
+        if (!program.IsValid()) {
+            return false;
+        }
+
         const Transform& t = TRANSFORM();
         return t.ShouldRun(&program, data);
     }
