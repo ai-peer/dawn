@@ -19,24 +19,6 @@
 
 namespace dawn::wire::client {
 
-namespace {
-
-class NoopCommandSerializer final : public CommandSerializer {
-  public:
-    static NoopCommandSerializer* GetInstance() {
-        static NoopCommandSerializer gNoopCommandSerializer;
-        return &gNoopCommandSerializer;
-    }
-
-    ~NoopCommandSerializer() override = default;
-
-    size_t GetMaximumAllocationSize() const final { return 0; }
-    void* GetCmdSpace(size_t size) final { return nullptr; }
-    bool Flush() final { return false; }
-};
-
-}  // anonymous namespace
-
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
     : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
     if (mMemoryTransferService == nullptr) {
@@ -143,7 +125,7 @@ void Client::ReclaimInstanceReservation(const ReservedInstance& reservation) {
 
 void Client::Disconnect() {
     mDisconnected = true;
-    mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
+    mSerializer.Disconnect();
 
     auto& deviceList = mObjects[ObjectType::Device];
     {
