@@ -51,6 +51,24 @@
       "parentUuid": "81576f37_363d7912",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8475ef7_f606f255",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-10-19T04:35:16Z",
+      "side": 1,
+      "message": "I sent a PR to CTS https://github.com/gpuweb/cts/pull/1929",
+      "parentUuid": "cd9d3549_99ad142f",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
