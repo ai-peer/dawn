@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9178055b_bb63544d",
+        "filename": "src/tint/ast/case_selector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd732af1_8dc905ac",
+      "range": {
+        "startLine": 28,
+        "startChar": 8,
+        "endLine": 28,
+        "endChar": 18
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d414c2_a3707d64",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-19T09:23:56Z",
       "side": 1,
       "message": "remove?",
+      "range": {
+        "startLine": 1172,
+        "startChar": 25,
+        "endLine": 1172,
+        "endChar": 26
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef73522_c3492493",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1172,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d414c2_a3707d64",
       "range": {
         "startLine": 1172,
         "startChar": 25,
@@ -110,6 +158,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c05c5b_43f698b6",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "405b9dc7_cadc4ad6",
+      "range": {
+        "startLine": 2894,
+        "startChar": 42,
+        "endLine": 2894,
+        "endChar": 64
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e4e7900_d1ff5f67",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2894,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12865df9_4bc73796",
+      "range": {
+        "startLine": 2894,
+        "startChar": 70,
+        "endLine": 2894,
+        "endChar": 79
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cb0cdca_30a97c0d",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-10-19T09:23:56Z",
       "side": 1,
       "message": "Ditto for this overload.",
+      "range": {
+        "startLine": 2901,
+        "startChar": 42,
+        "endLine": 2901,
+        "endChar": 69
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd62a57_f42db697",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 2901,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb0cdca_30a97c0d",
       "range": {
         "startLine": 2901,
         "startChar": 42,
@@ -150,6 +270,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "327affd5_e819b800",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2338,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f52ee75_f0c96301",
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4615dd01_ab05fc92",
@@ -163,6 +301,30 @@
       "writtenOn": "2022-10-19T09:23:56Z",
       "side": 1,
       "message": "No need for these to be mutable. Suggest:\n\n```\nconst ast::CaseSelector* const decl_;\nconst Constant* const val_;\n```\n\n (no need for initializer, if you\u0027re forced to give them a value)",
+      "range": {
+        "startLine": 119,
+        "startChar": 4,
+        "endLine": 119,
+        "endChar": 34
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b824b6e6_e057c50e",
+        "filename": "src/tint/sem/switch_statement.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4615dd01_ab05fc92",
       "range": {
         "startLine": 119,
         "startChar": 4,
@@ -190,6 +352,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eee45a8_e23e79ec",
+        "filename": "src/tint/transform/test_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done. Has to bee ADD_FAILURE as FAIL has a `return;` in there which doesn\u0027t work as the function isn\u0027t `void`.",
+      "parentUuid": "1f0c8cb3_5b6fae07",
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d7eceae_2c61fd86",
@@ -203,6 +383,30 @@
       "writtenOn": "2022-10-19T09:23:56Z",
       "side": 1,
       "message": "nit: could use the ProgramBuilder helpers here (and above)",
+      "range": {
+        "startLine": 56,
+        "startChar": 16,
+        "endLine": 56,
+        "endChar": 43
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54da302f_4dd43464",
+        "filename": "src/tint/writer/msl/generator_impl_switch_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d7eceae_2c61fd86",
       "range": {
         "startLine": 56,
         "startChar": 16,
@@ -236,6 +440,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63cd0efb_5efe7afe",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3463,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Sort of, moved below the next block. Still have to early exit as we don\u0027t want to create the default block.",
+      "parentUuid": "dc54f607_07164301",
+      "range": {
+        "startLine": 3459,
+        "startChar": 0,
+        "endLine": 3463,
+        "endChar": 9
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "480823a5_086feaaa",
@@ -249,6 +477,30 @@
       "writtenOn": "2022-10-19T09:23:56Z",
       "side": 1,
       "message": "nit: use `ProgramBuilder` helpers?",
+      "range": {
+        "startLine": 62,
+        "startChar": 16,
+        "endLine": 62,
+        "endChar": 42
+      },
+      "revId": "9b6b5fa0cfc3dd938237a3830052c3ecbed385dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d38fa3_4426ff1f",
+        "filename": "src/tint/writer/wgsl/generator_impl_switch_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "480823a5_086feaaa",
       "range": {
         "startLine": 62,
         "startChar": 16,

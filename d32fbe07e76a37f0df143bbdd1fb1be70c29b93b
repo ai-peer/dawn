@@ -16,6 +16,24 @@
       "message": "undo?",
       "revId": "d32fbe07e76a37f0df143bbdd1fb1be70c29b93b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15f87e7_41f9f632",
+        "filename": "src/tint/writer/glsl/generator_impl_switch_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-19T14:29:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e8a6f037_906a2863",
+      "revId": "d32fbe07e76a37f0df143bbdd1fb1be70c29b93b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
