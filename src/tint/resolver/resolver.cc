@@ -57,6 +57,7 @@
 #include "src/tint/sem/abstract_int.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
+#include "src/tint/sem/break_if_statement.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/depth_multisampled_texture.h"
 #include "src/tint/sem/depth_texture.h"
@@ -1213,6 +1214,7 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
         // Non-Compound statements
         [&](const ast::AssignmentStatement* a) { return AssignmentStatement(a); },
         [&](const ast::BreakStatement* b) { return BreakStatement(b); },
+        [&](const ast::BreakIfStatement* b) { return BreakIfStatement(b); },
         [&](const ast::CallStatement* c) { return CallStatement(c); },
         [&](const ast::CompoundAssignmentStatement* c) { return CompoundAssignmentStatement(c); },
         [&](const ast::ContinueStatement* c) { return ContinueStatement(c); },
@@ -1229,7 +1231,8 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
             return nullptr;
         },
         [&](Default) {
-            AddError("unknown statement type: " + std::string(stmt->TypeInfo().name), stmt->source);
+            AddError("Resolver: unknown statement type: " + std::string(stmt->TypeInfo().name),
+                     stmt->source);
             return nullptr;
         });
 }
@@ -3218,6 +3221,22 @@ sem::Statement* Resolver::BreakStatement(const ast::BreakStatement* stmt) {
         sem->Behaviors() = sem::Behavior::kBreak;
 
         return validator_.BreakStatement(sem, current_statement_);
+    });
+}
+
+sem::Statement* Resolver::BreakIfStatement(const ast::BreakIfStatement* stmt) {
+    auto* sem = builder_->create<sem::BreakIfStatement>(stmt, current_compound_statement_,
+                                                        current_function_);
+    return StatementScope(stmt, sem, [&] {
+        auto* cond = Expression(stmt->condition);
+        if (!cond) {
+            return false;
+        }
+        sem->SetCondition(cond);
+        sem->Behaviors() = cond->Behaviors();
+        sem->Behaviors().Add(sem::Behavior::kBreak);
+
+        return validator_.BreakIfStatement(sem, current_statement_);
     });
 }
 

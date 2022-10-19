@@ -660,6 +660,16 @@ bool GeneratorImpl::EmitBreak(const ast::BreakStatement*) {
     return true;
 }
 
+bool GeneratorImpl::EmitBreakIf(const ast::BreakIfStatement* b) {
+    auto out = line();
+    out << "if (";
+    if (!EmitExpression(out, b->condition)) {
+        return false;
+    }
+    out << ") { break; }";
+    return true;
+}
+
 bool GeneratorImpl::EmitCall(std::ostream& out, const ast::CallExpression* expr) {
     auto* call = program_->Sem().Get<sem::Call>(expr);
     auto* target = call->Target();
@@ -2433,6 +2443,9 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
         [&](const ast::BreakStatement* b) {  //
             return EmitBreak(b);
         },
+        [&](const ast::BreakIfStatement* b) {  //
+            return EmitBreakIf(b);
+        },
         [&](const ast::CallStatement* c) {  //
             auto out = line();
             if (!EmitCall(out, c->expr)) {  //
@@ -2479,7 +2492,7 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
                 },
                 [&](Default) {  //
                     TINT_ICE(Writer, diagnostics_)
-                        << "unknown statement type: " << stmt->TypeInfo().name;
+                        << "MSL Generator: unknown statement type: " << stmt->TypeInfo().name;
                     return false;
                 });
         },
@@ -2487,8 +2500,8 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
             return true;  // Not emitted
         },
         [&](Default) {
-            diagnostics_.add_error(diag::System::Writer,
-                                   "unknown statement type: " + std::string(stmt->TypeInfo().name));
+            diagnostics_.add_error(diag::System::Writer, "MSL Generator: unknown statement type: " +
+                                                             std::string(stmt->TypeInfo().name));
             return false;
         });
 }
