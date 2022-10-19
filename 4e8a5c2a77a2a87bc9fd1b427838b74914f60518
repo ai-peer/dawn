@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebbc2350_fab9882d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:18:38Z",
+      "side": 1,
+      "message": "Address this comments slightly different. As [1] mentiond mVisibleRect should be \"Extent2D\". The updated patch set introduced Extent2D type and set the default to {0, 1}. And related validation works only when visibleRect.width \u003e 0",
+      "parentUuid": "839a297a_f082f3bf",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d118dd3e_b5e0e636",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d77172e_d8198672",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d118dd3e_b5e0e636",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca9087f0_5af2997f",
@@ -82,6 +118,24 @@
       "writtenOn": "2022-10-18T11:00:31Z",
       "side": 1,
       "message": "Oh, also can we have a TODO(dawn:1082) to actually use the visible rect in the external texture shader code?",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "702267c1_6616986f",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:18:38Z",
+      "side": 1,
+      "message": "Resolved by adding comments in the declare place.",
+      "parentUuid": "ca9087f0_5af2997f",
       "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caff2173_b7b9e803",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:18:38Z",
+      "side": 1,
+      "message": "[1].",
+      "parentUuid": "8203aca5_a1859d3d",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 12
+      },
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0e13986_c4939b16",
@@ -122,6 +200,30 @@
       "writtenOn": "2022-10-18T10:58:53Z",
       "side": 1,
       "message": "nit: Test that submitting an external texture with a plane that is not submittable results in error.",
+      "range": {
+        "startLine": 639,
+        "startChar": 3,
+        "endLine": 639,
+        "endChar": 79
+      },
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7fe45ee_5c93623d",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0e13986_c4939b16",
       "range": {
         "startLine": 639,
         "startChar": 3,
