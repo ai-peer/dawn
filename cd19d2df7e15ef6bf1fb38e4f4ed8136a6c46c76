@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72c80285_df93f5e4",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:20:34Z",
+      "side": 1,
+      "message": "Thanks for the info. Filed an tint issue crbug.com/tint/1723",
+      "parentUuid": "7d128897_9fa9e4cc",
+      "revId": "cd19d2df7e15ef6bf1fb38e4f4ed8136a6c46c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1ded586_69f743d1",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-18T11:04:13Z",
       "side": 1,
       "message": "nit: const char*? And we can remove the string include above.",
+      "revId": "cd19d2df7e15ef6bf1fb38e4f4ed8136a6c46c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d2daa29_7df72324",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:20:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1ded586_69f743d1",
       "revId": "cd19d2df7e15ef6bf1fb38e4f4ed8136a6c46c76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

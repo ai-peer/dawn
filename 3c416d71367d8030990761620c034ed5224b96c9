@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7e78818_0737e129",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1440,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:20:34Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "c55e5e04_e39afcf1",
+      "range": {
+        "startLine": 1438,
+        "startChar": 0,
+        "endLine": 1440,
+        "endChar": 0
+      },
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa72d87d_ec8cee51",
@@ -198,6 +222,24 @@
       "side": 1,
       "message": "Upload a new Patch set for a single shader module. PTAL, thanks!",
       "parentUuid": "13a4cf70_7f3a4ead",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09ea015c_b359193f",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:20:34Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "6e978897_6cebf943",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -473,6 +515,24 @@
       "side": 1,
       "message": "Put them into WGPUHelper, WDYT?",
       "parentUuid": "30d70540_5819af9e",
+      "revId": "3c416d71367d8030990761620c034ed5224b96c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ad7276_292503f0",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-19T02:20:34Z",
+      "side": 1,
+      "message": "Marked as resolved.",
+      "parentUuid": "649a83dd_08d2e19c",
       "revId": "3c416d71367d8030990761620c034ed5224b96c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
