@@ -4829,7 +4829,7 @@ bool FunctionEmitter::RegisterLocallyDefinedValues() {
                 while (auto* ptr = unwrapped->AsPointer()) {
                     unwrapped = ptr->pointee_type();
                 }
-                if (unwrapped->AsSampler() || unwrapped->AsImage() || unwrapped->AsSampledImage()) {
+                if (/*unwrapped->AsSampler() || unwrapped->AsImage() ||*/ unwrapped->AsSampledImage()) {
                     // Defer code generation until the instruction that actually acts on
                     // the image.
                     info->skip = SkipReason::kOpaqueObject;
@@ -5330,12 +5330,16 @@ const spvtools::opt::Instruction* FunctionEmitter::GetImage(
 }
 
 const Texture* FunctionEmitter::GetImageType(const spvtools::opt::Instruction& image) {
-    const Pointer* ptr_type = parser_impl_.GetTypeForHandleVar(image);
+    const Type* non_pointer_type = nullptr;
+    const Pointer* ptr_type = parser_impl_.GetTypeForHandleVar(image, &non_pointer_type);
     if (!parser_impl_.success()) {
         Fail();
         return {};
     }
     if (!ptr_type) {
+        if (non_pointer_type) {
+            return non_pointer_type->As<Texture>();
+        }
         Fail() << "invalid texture type for " << image.PrettyPrint();
         return {};
     }
@@ -5394,11 +5398,12 @@ bool FunctionEmitter::EmitImageAccess(const spvtools::opt::Instruction& inst) {
     }
 
     // Find the texture type.
-    const Pointer* texture_ptr_type = parser_impl_.GetTypeForHandleVar(*image);
-    if (!texture_ptr_type) {
+    const Type* non_pointer_type = nullptr;
+    const Pointer* texture_ptr_type = parser_impl_.GetTypeForHandleVar(*image, &non_pointer_type);
+    if (!texture_ptr_type && !non_pointer_type) {
         return Fail();
     }
-    const Texture* texture_type = texture_ptr_type->type->UnwrapAll()->As<Texture>();
+    const Texture* texture_type = texture_ptr_type ? texture_ptr_type->type->UnwrapAll()->As<Texture>() : non_pointer_type->As<Texture>();
 
     if (!texture_type) {
         return Fail();
@@ -5657,7 +5662,8 @@ bool FunctionEmitter::EmitImageAccess(const spvtools::opt::Instruction& inst) {
         // If necessary, convert the result to the signedness of the instruction
         // result type. Compare the SPIR-V image's sampled component type with the
         // component of the result type of the SPIR-V instruction.
-        auto* spirv_image_type = parser_impl_.GetSpirvTypeForHandleMemoryObjectDeclaration(*image);
+        bool is_non_pointer_type = false;
+        auto* spirv_image_type = parser_impl_.GetSpirvTypeForHandleMemoryObjectDeclaration(*image, &is_non_pointer_type);
         if (!spirv_image_type || (spirv_image_type->opcode() != SpvOpTypeImage)) {
             return Fail() << "invalid image type for image memory object declaration "
                           << image->PrettyPrint();

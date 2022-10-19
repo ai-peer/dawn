@@ -369,10 +369,12 @@ const Type* ParserImpl::ConvertType(uint32_t type_id, PtrAs ptr_as) {
             // type.  No further work is required here.
             return nullptr;
         case spvtools::opt::analysis::Type::kSampler:
-        case spvtools::opt::analysis::Type::kSampledImage:
+            return ConvertType(spirv_type->AsSampler());
         case spvtools::opt::analysis::Type::kImage:
             // Fake it for sampler and texture types.  These are handled in an
             // entirely different way.
+            return ConvertType(spirv_type->AsImage());
+        case spvtools::opt::analysis::Type::kSampledImage:
             return ty_.Void();
         default:
             break;
@@ -930,6 +932,16 @@ bool ParserImpl::RegisterEntryPoints() {
     return success_;
 }
 
+const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Sampler* s) {
+    return ty_.Sampler(ast::SamplerKind::kSampler);
+}
+
+const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Image* i) {
+    // TODO: hard-coding texture_2d<f32> for the skia dawn use case. This is wrong in the general
+    // case.
+    return ty_.SampledTexture(ast::TextureDimension::k2d, ty_.F32());
+}
+
 const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Integer* int_ty) {
     if (int_ty->width() == 32) {
         return int_ty->IsSigned() ? static_cast<const Type*>(ty_.I32())
@@ -1466,9 +1478,13 @@ bool ParserImpl::EmitModuleScopeVariables() {
         const Type* ast_type = nullptr;
         if (spirv_storage_class == SpvStorageClassUniformConstant) {
             // These are opaque handles: samplers or textures
-            ast_type = GetTypeForHandleVar(var);
+            const Type* non_pointer_ast_type = nullptr;
+            ast_type = GetTypeForHandleVar(var, &non_pointer_ast_type);
             if (!ast_type) {
-                return false;
+                if (!non_pointer_ast_type) {
+                    return false;
+                }
+                ast_type = non_pointer_ast_type;
             }
         } else {
             ast_type = ConvertType(type_id);
@@ -2284,7 +2300,7 @@ const spvtools::opt::Instruction* ParserImpl::GetMemoryObjectDeclarationForHandl
 }
 
 const spvtools::opt::Instruction* ParserImpl::GetSpirvTypeForHandleMemoryObjectDeclaration(
-    const spvtools::opt::Instruction& var) {
+    const spvtools::opt::Instruction& var, bool* not_a_pointer) {
     if (!success()) {
         return nullptr;
     }
@@ -2300,11 +2316,15 @@ const spvtools::opt::Instruction* ParserImpl::GetSpirvTypeForHandleMemoryObjectD
 
     // Get the SPIR-V handle type.
     const auto* ptr_type = def_use_mgr_->GetDef(var.type_id());
-    if (!ptr_type || (ptr_type->opcode() != SpvOpTypePointer)) {
+    if (!ptr_type ||
+        (ptr_type->opcode() != SpvOpTypePointer &&
+         ptr_type->opcode() != SpvOpTypeSampler &&
+         ptr_type->opcode() != SpvOpTypeImage)) {
         Fail() << "Invalid type for variable or function parameter " << var.PrettyPrint();
         return nullptr;
     }
-    const auto* raw_handle_type = def_use_mgr_->GetDef(ptr_type->GetSingleWordInOperand(1));
+    *not_a_pointer = ptr_type->opcode() != SpvOpTypePointer;
+    const auto* raw_handle_type = ptr_type->opcode() == SpvOpTypePointer ? def_use_mgr_->GetDef(ptr_type->GetSingleWordInOperand(1)) : ptr_type;
     if (!raw_handle_type) {
         Fail() << "Invalid pointer type for variable or function parameter " << var.PrettyPrint();
         return nullptr;
@@ -2332,14 +2352,15 @@ const spvtools::opt::Instruction* ParserImpl::GetSpirvTypeForHandleMemoryObjectD
     return raw_handle_type;
 }
 
-const Pointer* ParserImpl::GetTypeForHandleVar(const spvtools::opt::Instruction& var) {
+const Pointer* ParserImpl::GetTypeForHandleVar(const spvtools::opt::Instruction& var, const Type** raw_non_pointer_ast_type) {
     auto where = handle_type_.find(&var);
     if (where != handle_type_.end()) {
         return where->second;
     }
 
+    bool not_a_pointer = false;
     const spvtools::opt::Instruction* raw_handle_type =
-        GetSpirvTypeForHandleMemoryObjectDeclaration(var);
+        GetSpirvTypeForHandleMemoryObjectDeclaration(var, &not_a_pointer);
     if (!raw_handle_type) {
         return nullptr;
     }
@@ -2491,6 +2512,10 @@ const Pointer* ParserImpl::GetTypeForHandleVar(const spvtools::opt::Instruction&
         return nullptr;
     }
 
+    if (not_a_pointer) {
+        *raw_non_pointer_ast_type = ast_store_type;
+        return nullptr;
+    }
     // Form the pointer type.
     auto* result = ty_.Pointer(ast_store_type, ast::AddressSpace::kHandle);
     // Remember it for later.

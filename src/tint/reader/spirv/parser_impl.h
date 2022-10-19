@@ -647,7 +647,7 @@ class ParserImpl : Reader {
     /// @param var the OpVariable instruction or OpFunctionParameter
     /// @returns the Tint AST type for the sampler or texture, or null on error
     const spvtools::opt::Instruction* GetSpirvTypeForHandleMemoryObjectDeclaration(
-        const spvtools::opt::Instruction& var);
+        const spvtools::opt::Instruction& var, bool*);
 
     /// Returns the AST type for the pointer-to-sampler or pointer-to-texture type
     /// for the given variable in UniformConstant address space.  Returns null and
@@ -655,7 +655,7 @@ class ParserImpl : Reader {
     /// @param var the OpVariable instruction
     /// @returns the Tint AST type for the poiner-to-{sampler|texture} or null on
     /// error
-    const Pointer* GetTypeForHandleVar(const spvtools::opt::Instruction& var);
+    const Pointer* GetTypeForHandleVar(const spvtools::opt::Instruction& var, const Type**);
 
     /// Returns the AST variable for the SPIR-V ID of a module-scope variable,
     /// or null if there isn't one.
@@ -719,6 +719,8 @@ class ParserImpl : Reader {
     const std::vector<uint32_t>& spv_binary() { return spv_binary_; }
 
   private:
+    const Type* ConvertType(const spvtools::opt::analysis::Sampler* s);
+    const Type* ConvertType(const spvtools::opt::analysis::Image* i);
     /// Converts a specific SPIR-V type to a Tint type. Integer case
     const Type* ConvertType(const spvtools::opt::analysis::Integer* int_ty);
     /// Converts a specific SPIR-V type to a Tint type. Float case
