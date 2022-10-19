@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449614f3_53da1919",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-19T05:10:24Z",
+      "side": 1,
+      "message": "Hi Corentin and Ausin,\n\nI think the failures on the bots are not related to this CL.\nPTAL, thanks!",
+      "revId": "2cd45c3a787a055b219f946ccfadea42fb957c87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
