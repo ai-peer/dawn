@@ -18,6 +18,7 @@
 #include <algorithm>
 #include <cstring>
 #include <memory>
+#include <mutex>
 #include <utility>
 
 #include "dawn/common/Alloc.h"
@@ -68,6 +69,8 @@ class ChunkedCommandSerializer {
             extraSize, std::forward<ExtraSizeSerializeFn>(SerializeExtraSize));
     }
 
+    void Disconnect();
+
   private:
     template <typename Cmd, typename SerializeCmdFn, typename ExtraSizeSerializeFn>
     void SerializeCommandImpl(const Cmd& cmd,
@@ -78,6 +81,7 @@ class ChunkedCommandSerializer {
         size_t requiredSize = commandSize + extraSize;
 
         if (requiredSize <= mMaxAllocationSize) {
+            const std::lock_guard<std::mutex> lock(mMutex);
             char* allocatedBuffer = static_cast<char*>(mSerializer->GetCmdSpace(requiredSize));
             if (DAWN_UNLIKELY(allocatedBuffer == nullptr)) {
                 mSerializer->DidWriteCmds(0);
@@ -113,6 +117,7 @@ class ChunkedCommandSerializer {
 
     CommandSerializer* mSerializer;
     size_t mMaxAllocationSize;
+    std::mutex mMutex;
 };
 
 }  // namespace dawn::wire
