@@ -1169,7 +1169,7 @@ class ProgramBuilder {
     }
 
     /// @param source the source information
-    /// @param value the boolean value
+    /// @param value the *boolean value
     /// @return a Scalar constructor for the given value
     template <typename BOOL>
     std::enable_if_t<std::is_same_v<BOOL, bool>, const ast::BoolLiteralExpression*> Expr(
@@ -2847,7 +2847,7 @@ class ProgramBuilder {
     /// @param body the case body
     /// @returns the case statement pointer
     const ast::CaseStatement* Case(const Source& source,
-                                   utils::VectorRef<const ast::Expression*> selectors,
+                                   utils::VectorRef<const ast::CaseSelector*> selectors,
                                    const ast::BlockStatement* body = nullptr) {
         return create<ast::CaseStatement>(source, std::move(selectors), body ? body : Block());
     }
@@ -2856,7 +2856,7 @@ class ProgramBuilder {
     /// @param selectors list of selectors
     /// @param body the case body
     /// @returns the case statement pointer
-    const ast::CaseStatement* Case(utils::VectorRef<const ast::Expression*> selectors,
+    const ast::CaseStatement* Case(utils::VectorRef<const ast::CaseSelector*> selectors,
                                    const ast::BlockStatement* body = nullptr) {
         return create<ast::CaseStatement>(std::move(selectors), body ? body : Block());
     }
@@ -2865,7 +2865,7 @@ class ProgramBuilder {
     /// @param selector a single case selector
     /// @param body the case body
     /// @returns the case statement pointer
-    const ast::CaseStatement* Case(const ast::Expression* selector,
+    const ast::CaseStatement* Case(const ast::CaseSelector* selector,
                                    const ast::BlockStatement* body = nullptr) {
         return Case(utils::Vector{selector}, body);
     }
@@ -2876,14 +2876,30 @@ class ProgramBuilder {
     /// @returns the case statement pointer
     const ast::CaseStatement* DefaultCase(const Source& source,
                                           const ast::BlockStatement* body = nullptr) {
-        return Case(source, utils::Empty, body);
+        return Case(source, utils::Vector{CaseSelector(source)}, body);
     }
 
     /// Convenience function that creates a 'default' ast::CaseStatement
     /// @param body the case body
     /// @returns the case statement pointer
     const ast::CaseStatement* DefaultCase(const ast::BlockStatement* body = nullptr) {
-        return Case(utils::Empty, body);
+        return Case(utils::Vector{CaseSelector()}, body);
+    }
+
+    /// Convenience function that creates a case selector
+    /// @param source the source information
+    /// @param expr the selector expression
+    /// @returns the selector pointer
+    const ast::CaseSelector* CaseSelector(const Source& source,
+                                          const ast::Expression* expr = nullptr) {
+        return create<ast::CaseSelector>(source, expr);
+    }
+
+    /// Convenience function that creates a case selector
+    /// @param expr the selector expression
+    /// @returns the selector pointer
+    const ast::CaseSelector* CaseSelector(const ast::Expression* expr = nullptr) {
+        return create<ast::CaseSelector>(expr);
     }
 
     /// Creates an ast::FallthroughStatement
