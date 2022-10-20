@@ -369,8 +369,10 @@ const Type* ParserImpl::ConvertType(uint32_t type_id, PtrAs ptr_as) {
             // type.  No further work is required here.
             return nullptr;
         case spvtools::opt::analysis::Type::kSampler:
-        case spvtools::opt::analysis::Type::kSampledImage:
+            return ConvertType(spirv_type->AsSampler());
         case spvtools::opt::analysis::Type::kImage:
+            return ConvertType(spirv_type->AsImage());
+        case spvtools::opt::analysis::Type::kSampledImage:
             // Fake it for sampler and texture types.  These are handled in an
             // entirely different way.
             return ty_.Void();
@@ -930,6 +932,17 @@ bool ParserImpl::RegisterEntryPoints() {
     return success_;
 }
 
+const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Sampler* s) {
+        return ty_.Sampler(ast::SamplerKind::kSampler);
+}
+
+const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Image* i) {
+        // TODO: hard-coding texture_2d<f32> for the skia dawn use case. This is wrong in the
+        // general
+        // case.
+        return ty_.SampledTexture(ast::TextureDimension::k2d, ty_.F32());
+}
+
 const Type* ParserImpl::ConvertType(const spvtools::opt::analysis::Integer* int_ty) {
     if (int_ty->width() == 32) {
         return int_ty->IsSigned() ? static_cast<const Type*>(ty_.I32())
@@ -1206,6 +1219,10 @@ const Type* ParserImpl::ConvertType(uint32_t type_id,
         Fail() << "SPIR-V pointer type with ID " << type_id << " has invalid pointee type "
                << pointee_type_id;
         return nullptr;
+    }
+
+    if (ast_elem_ty->As<Sampler>() || ast_elem_ty->As<Texture>()) {
+        return ast_elem_ty;
     }
 
     auto ast_address_space = enum_converter_.ToAddressSpace(storage_class);
