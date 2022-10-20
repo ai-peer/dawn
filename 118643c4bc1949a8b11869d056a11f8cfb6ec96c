@@ -156,6 +156,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed43a80c_f540c2d9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:32:34Z",
+      "side": 1,
+      "message": "We explicitly don\u0027t ICE in the backends, if memory serves. We could here, but this just keeps them all consistent.",
+      "parentUuid": "31558aeb_2b4547e9",
+      "range": {
+        "startLine": 1234,
+        "startChar": 22,
+        "endLine": 1234,
+        "endChar": 32
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80efdcb3_bf097200",
         "filename": "src/tint/resolver/validation_test.cc",
         "patchSetId": 4
