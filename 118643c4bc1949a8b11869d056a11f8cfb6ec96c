@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe32614d_d5ec8ee3",
+        "filename": "src/tint/reader/wgsl/parser_impl_loop_stmt_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "Should we add tests for multiple \"break if\"s in continuing, as well as not last statement in the continuing?",
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cbdcc78_004314ad",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "Readability nit: add `//` so that clang-format moves the statement to the next line (as below)",
+      "range": {
+        "startLine": 267,
+        "startChar": 48,
+        "endLine": 267,
+        "endChar": 50
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48db8ab8_364500f5",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "We don\u0027t usually add the class/module to error messages. This is an internal detail that we don\u0027t expose to users when emitting diagnostics.",
+      "range": {
+        "startLine": 1234,
+        "startChar": 22,
+        "endLine": 1234,
+        "endChar": 32
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80efdcb3_bf097200",
+        "filename": "src/tint/resolver/validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "Can we add one more test with 2 break ifs? Should be the same output as this test.",
+      "range": {
+        "startLine": 888,
+        "startChar": 31,
+        "endLine": 888,
+        "endChar": 68
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "700eaa1c_495f96e0",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "nit: I think we usually put braces on their own line?",
+      "range": {
+        "startLine": 721,
+        "startChar": 14,
+        "endLine": 721,
+        "endChar": 24
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2daec060_6ac8fab3",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2670,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T19:37:25Z",
+      "side": 1,
+      "message": "Again, I don\u0027t think we should do this. We ask to use the GLSL backend, so I don\u0027t think we need to display this. Same for other backend generators.",
+      "range": {
+        "startLine": 2670,
+        "startChar": 17,
+        "endLine": 2670,
+        "endChar": 33
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
