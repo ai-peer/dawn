@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dbf7899_deacb143",
+        "filename": "src/tint/reader/wgsl/parser_impl_loop_stmt_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "Not last test exists in the validation tests. Multiple break-ifs should be covered by the not last check.",
+      "parentUuid": "fe32614d_d5ec8ee3",
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cbdcc78_004314ad",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-20T19:37:25Z",
       "side": 1,
       "message": "Readability nit: add `//` so that clang-format moves the statement to the next line (as below)",
+      "range": {
+        "startLine": 267,
+        "startChar": 48,
+        "endLine": 267,
+        "endChar": 50
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e7e24a1_4a0e12be",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "I removed the `//` on the two cases that did it as more cases didn\u0027t add the `//` then did.",
+      "parentUuid": "3cbdcc78_004314ad",
       "range": {
         "startLine": 267,
         "startChar": 48,
@@ -66,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6468a597_a297642a",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "Usually, yes. But, in this case it\u0027s more an error for ourselves that we missed something. We have about 5 different places where we emit this exact message so adding the label makes it easier to track down.",
+      "parentUuid": "48db8ab8_364500f5",
+      "range": {
+        "startLine": 1234,
+        "startChar": 22,
+        "endLine": 1234,
+        "endChar": 32
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80efdcb3_bf097200",
         "filename": "src/tint/resolver/validation_test.cc",
         "patchSetId": 4
@@ -77,6 +143,30 @@
       "writtenOn": "2022-10-20T19:37:25Z",
       "side": 1,
       "message": "Can we add one more test with 2 break ifs? Should be the same output as this test.",
+      "range": {
+        "startLine": 888,
+        "startChar": 31,
+        "endLine": 888,
+        "endChar": 68
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "699d1cf3_3542f226",
+        "filename": "src/tint/resolver/validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80efdcb3_bf097200",
       "range": {
         "startLine": 888,
         "startChar": 31,
@@ -110,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b28d06_2d0e023e",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "Ack, this was a deliberate choice as it makes the output a bit closer to what we\u0027re parsing.",
+      "parentUuid": "700eaa1c_495f96e0",
+      "range": {
+        "startLine": 721,
+        "startChar": 14,
+        "endLine": 721,
+        "endChar": 24
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2daec060_6ac8fab3",
@@ -123,6 +237,30 @@
       "writtenOn": "2022-10-20T19:37:25Z",
       "side": 1,
       "message": "Again, I don\u0027t think we should do this. We ask to use the GLSL backend, so I don\u0027t think we need to display this. Same for other backend generators.",
+      "range": {
+        "startLine": 2670,
+        "startChar": 17,
+        "endLine": 2670,
+        "endChar": 33
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e55c84_1294d7a4",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2670,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-20T20:19:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2daec060_6ac8fab3",
       "range": {
         "startLine": 2670,
         "startChar": 17,
