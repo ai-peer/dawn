@@ -1918,6 +1918,9 @@ MaybeError DeviceBase::CopyFromStagingToBuffer(StagingBufferBase* source,
                                                uint64_t size) {
     DAWN_TRY(
         CopyFromStagingToBufferImpl(source, sourceOffset, destination, destinationOffset, size));
+    if (GetDynamicUploader()->ShouldFlush()) {
+        ForceEventualFlushOfCommands();
+    }
     return {};
 }
 MaybeError DeviceBase::CopyFromStagingToTexture(const StagingBufferBase* source,
@@ -1925,6 +1928,9 @@ MaybeError DeviceBase::CopyFromStagingToTexture(const StagingBufferBase* source,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
     DAWN_TRY(CopyFromStagingToTextureImpl(source, src, dst, copySizePixels));
+    if (GetDynamicUploader()->ShouldFlush()) {
+        ForceEventualFlushOfCommands();
+    }
     return {};
 }
 

@@ -827,7 +827,8 @@ MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
     // calling this function.
     ASSERT(size != 0);
 
-    CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext =
+        GetPendingRecordingContext(DeviceBase::SubmitMode::Passive);
 
     ToBackend(destination)
         ->EnsureDataInitializedAsDestination(recordingContext, destinationOffset, size);
@@ -859,7 +860,8 @@ MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
     // operation for HOST_COHERENT memory. The Vulkan spec for vkQueueSubmit describes that it
     // does an implicit availability, visibility and domain operation.
 
-    CommandRecordingContext* recordingContext = GetPendingRecordingContext();
+    CommandRecordingContext* recordingContext =
+        GetPendingRecordingContext(DeviceBase::SubmitMode::Passive);
 
     VkBufferImageCopy region = ComputeBufferImageCopyRegion(src, *dst, copySizePixels);
     VkImageSubresourceLayers subresource = region.imageSubresource;

@@ -448,15 +448,17 @@ MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
     ASSERT(size != 0);
 
     ToBackend(destination)
-        ->EnsureDataInitializedAsDestination(GetPendingCommandContext(), destinationOffset, size);
+        ->EnsureDataInitializedAsDestination(
+            GetPendingCommandContext(DeviceBase::SubmitMode::Passive), destinationOffset, size);
 
     id<MTLBuffer> uploadBuffer = ToBackend(source)->GetBufferHandle();
     id<MTLBuffer> buffer = ToBackend(destination)->GetMTLBuffer();
-    [GetPendingCommandContext()->EnsureBlit() copyFromBuffer:uploadBuffer
-                                                sourceOffset:sourceOffset
-                                                    toBuffer:buffer
-                                           destinationOffset:destinationOffset
-                                                        size:size];
+    [GetPendingCommandContext(DeviceBase::SubmitMode::Passive)->EnsureBlit()
+           copyFromBuffer:uploadBuffer
+             sourceOffset:sourceOffset
+                 toBuffer:buffer
+        destinationOffset:destinationOffset
+                     size:size];
     return {};
 }
 
@@ -468,12 +470,13 @@ MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
     Texture* texture = ToBackend(dst->texture.Get());
-    EnsureDestinationTextureInitialized(GetPendingCommandContext(), texture, *dst, copySizePixels);
+    EnsureDestinationTextureInitialized(GetPendingCommandContext(DeviceBase::SubmitMode::Passive),
+                                        texture, *dst, copySizePixels);
 
-    RecordCopyBufferToTexture(GetPendingCommandContext(), ToBackend(source)->GetBufferHandle(),
-                              source->GetSize(), dataLayout.offset, dataLayout.bytesPerRow,
-                              dataLayout.rowsPerImage, texture, dst->mipLevel, dst->origin,
-                              dst->aspect, copySizePixels);
+    RecordCopyBufferToTexture(GetPendingCommandContext(DeviceBase::SubmitMode::Passive),
+                              ToBackend(source)->GetBufferHandle(), source->GetSize(),
+                              dataLayout.offset, dataLayout.bytesPerRow, dataLayout.rowsPerImage,
+                              texture, dst->mipLevel, dst->origin, dst->aspect, copySizePixels);
     return {};
 }
 

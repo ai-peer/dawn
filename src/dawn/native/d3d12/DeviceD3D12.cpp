@@ -499,7 +499,7 @@ MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
     CommandRecordingContext* commandRecordingContext;
-    DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext());
+    DAWN_TRY_ASSIGN(commandRecordingContext, GetPendingCommandContext(Device::SubmitMode::Passive));
 
     Buffer* dstBuffer = ToBackend(destination);
 
@@ -535,7 +535,7 @@ MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
                                                 TextureCopy* dst,
                                                 const Extent3D& copySizePixels) {
     CommandRecordingContext* commandContext;
-    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+    DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext(Device::SubmitMode::Passive));
     Texture* texture = ToBackend(dst->texture.Get());
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(*dst, copySizePixels);
