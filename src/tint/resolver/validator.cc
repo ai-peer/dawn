@@ -51,6 +51,7 @@
 #include "src/tint/sem/abstract_numeric.h"
 #include "src/tint/sem/array.h"
 #include "src/tint/sem/atomic.h"
+#include "src/tint/sem/break_if_statement.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/depth_multisampled_texture.h"
 #include "src/tint/sem/depth_texture.h"
@@ -1630,6 +1631,35 @@ bool Validator::WhileStatement(const sem::WhileStatement* stmt) const {
         }
     }
     return true;
+}
+
+bool Validator::BreakIfStatement(const sem::BreakIfStatement* stmt,
+                                 sem::Statement* current_statement) const {
+    auto* cond_ty = stmt->Condition()->Type()->UnwrapRef();
+    if (!cond_ty->Is<sem::Bool>()) {
+        AddError("break-if statement condition must be bool, got " + sem_.TypeNameOf(cond_ty),
+                 stmt->Condition()->Declaration()->source);
+        return false;
+    }
+
+    for (const auto* s = current_statement; s != nullptr; s = s->Parent()) {
+        if (s->Is<sem::LoopStatement>()) {
+            break;
+        }
+        if (s->Is<sem::LoopContinuingBlockStatement>()) {
+            if (s->Declaration()->As<ast::BlockStatement>()->statements.Back() !=
+                stmt->Declaration()) {
+                AddError("break-if must be last statement in a continuing block",
+                         stmt->Declaration()->source);
+                AddNote("see continuing block here", s->Declaration()->source);
+                return false;
+            }
+            return true;
+        }
+    }
+
+    AddError("break-if must in a continuing block", stmt->Declaration()->source);
+    return false;
 }
 
 bool Validator::IfStatement(const sem::IfStatement* stmt) const {
