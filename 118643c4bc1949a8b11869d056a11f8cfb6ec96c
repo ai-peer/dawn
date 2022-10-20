@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6186e07_c2289875",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T20:34:34Z",
+      "side": 1,
+      "message": "We do indeed ICE in the backends. Again, if the goal is to know about these, having them ICE is the right way. The fuzzers will fail on them, which is a good thing.",
+      "parentUuid": "ed43a80c_f540c2d9",
+      "range": {
+        "startLine": 1234,
+        "startChar": 22,
+        "endLine": 1234,
+        "endChar": 32
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80efdcb3_bf097200",
         "filename": "src/tint/resolver/validation_test.cc",
         "patchSetId": 4
