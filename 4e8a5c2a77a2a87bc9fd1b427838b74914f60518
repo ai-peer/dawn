@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f0d437_64e061aa",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-10-20T00:25:53Z",
+      "side": 1,
+      "message": "Sure!",
+      "parentUuid": "50e6ebeb_89c861ac",
+      "revId": "4e8a5c2a77a2a87bc9fd1b427838b74914f60518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d118dd3e_b5e0e636",
