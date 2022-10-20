@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31558aeb_2b4547e9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-20T20:22:33Z",
+      "side": 1,
+      "message": "I would argue that if it\u0027s an error for ourselves, then this should be an TINT_ICE, not a user-facing error. Same for the backends. In fact, ICEs would make the fuzzers report it, so a good argument for doing so?",
+      "parentUuid": "6468a597_a297642a",
+      "range": {
+        "startLine": 1234,
+        "startChar": 22,
+        "endLine": 1234,
+        "endChar": 32
+      },
+      "revId": "118643c4bc1949a8b11869d056a11f8cfb6ec96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80efdcb3_bf097200",
         "filename": "src/tint/resolver/validation_test.cc",
         "patchSetId": 4
