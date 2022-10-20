@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "0c4157f694eaa468c4181d757a8b4ea60037c7f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ce603b_0b98dd4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-20T12:15:33Z",
+      "side": 1,
+      "message": "Removing reviewer until we can determine how to solve the (-2147483648i) issue..",
+      "revId": "0c4157f694eaa468c4181d757a8b4ea60037c7f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
