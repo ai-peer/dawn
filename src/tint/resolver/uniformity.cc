@@ -537,6 +537,32 @@ class UniformityGraph {
                 return cf;
             },
 
+            [&](const ast::BreakIfStatement* b) {
+                // Find the loop or switch statement that we are in.
+                auto* parent = sem_.Get(b)->FindFirstParent<sem::LoopStatement>();
+                TINT_ASSERT(Resolver, current_function_->loop_switch_infos.count(parent));
+                auto& info = current_function_->loop_switch_infos.at(parent);
+
+                // Propagate variable values to the loop/switch exit nodes.
+                for (auto* var : current_function_->local_var_decls) {
+                    // Skip variables that were declared inside this loop/switch.
+                    if (auto* lv = var->As<sem::LocalVariable>();
+                        lv &&
+                        lv->Statement()->FindFirstParent([&](auto* s) { return s == parent; })) {
+                        continue;
+                    }
+
+                    // Add an edge from the variable exit node to its value at this point.
+                    auto* exit_node = utils::GetOrCreate(info.var_exit_nodes, var, [&]() {
+                        auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
+                        return CreateNode(name + "_value_" + info.type + "_exit");
+                    });
+                    exit_node->AddEdge(current_function_->variables.Get(var));
+                }
+
+                return cf;
+            },
+
             [&](const ast::CallStatement* c) {
                 auto [cf1, _] = ProcessCall(cf, c->expr);
                 return cf1;
