@@ -755,12 +755,32 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
         }
     };
 
+    for (const auto& pass : GetResourceUsages().renderPasses) {
+        for (TextureBase* texture : pass.textures) {
+            ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext);
+        }
+        for (ExternalTextureBase* externalTexture : pass.externalTextures) {
+            for (auto& view : externalTexture->GetTextureViews()) {
+                ToBackend(view->GetTexture())->SynchronizeTextureBeforeUse(commandContext);
+            }
+        }
+    }
+    for (const auto& pass : GetResourceUsages().computePasses) {
+        for (TextureBase* texture : pass.referencedTextures) {
+            ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext);
+        }
+    }
+
     Command type;
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::BeginComputePass: {
                 BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
 
+                for (TextureBase* texture :
+                     GetResourceUsages().computePasses[nextComputePassNumber].referencedTextures) {
+                    ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext);
+                }
                 for (const SyncScopeResourceUsage& scope :
                      GetResourceUsages().computePasses[nextComputePassNumber].dispatchUsages) {
                     LazyClearSyncScope(scope, commandContext);
@@ -776,6 +796,17 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
             case Command::BeginRenderPass: {
                 BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
+                for (TextureBase* texture :
+                     this->GetResourceUsages().renderPasses[nextRenderPassNumber].textures) {
+                    ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext);
+                }
+                for (ExternalTextureBase* externalTexture : this->GetResourceUsages()
+                                                                .renderPasses[nextRenderPassNumber]
+                                                                .externalTextures) {
+                    for (auto& view : externalTexture->GetTextureViews()) {
+                        ToBackend(view->GetTexture())->SynchronizeTextureBeforeUse(commandContext);
+                    }
+                }
                 LazyClearSyncScope(GetResourceUsages().renderPasses[nextRenderPassNumber],
                                    commandContext);
                 commandContext->EndBlit();
@@ -831,6 +862,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 buffer->EnsureDataInitialized(commandContext);
                 EnsureDestinationTextureInitialized(commandContext, texture, dst, copySize);
 
+                texture->SynchronizeTextureBeforeUse(commandContext);
                 RecordCopyBufferToTexture(commandContext, buffer->GetMTLBuffer(), buffer->GetSize(),
                                           src.offset, src.bytesPerRow, src.rowsPerImage, texture,
                                           dst.mipLevel, dst.origin, dst.aspect, copySize);
@@ -852,6 +884,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
 
                 buffer->EnsureDataInitializedAsDestination(commandContext, copy);
 
+                texture->SynchronizeTextureBeforeUse(commandContext);
                 texture->EnsureSubresourceContentInitialized(
                     commandContext, GetSubresourcesAffectedByCopy(src, copySize));
 
@@ -941,6 +974,8 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 Texture* srcTexture = ToBackend(copy->source.texture.Get());
                 Texture* dstTexture = ToBackend(copy->destination.texture.Get());
 
+                srcTexture->SynchronizeTextureBeforeUse(commandContext);
+                dstTexture->SynchronizeTextureBeforeUse(commandContext);
                 srcTexture->EnsureSubresourceContentInitialized(
                     commandContext, GetSubresourcesAffectedByCopy(copy->source, copy->copySize));
                 EnsureDestinationTextureInitialized(commandContext, dstTexture, copy->destination,
