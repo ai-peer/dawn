@@ -5,7 +5,7 @@ float tint_atanh(float x) {
 }
 
 void atanh_7997d8() {
-  float res = tint_atanh(0.5f);
+  float res = tint_atanh(1.0f);
 }
 
 vec4 vertex_main() {
@@ -29,7 +29,7 @@ float tint_atanh(float x) {
 }
 
 void atanh_7997d8() {
-  float res = tint_atanh(0.5f);
+  float res = tint_atanh(1.0f);
 }
 
 void fragment_main() {
@@ -47,7 +47,7 @@ float tint_atanh(float x) {
 }
 
 void atanh_7997d8() {
-  float res = tint_atanh(0.5f);
+  float res = tint_atanh(1.0f);
 }
 
 void compute_main() {

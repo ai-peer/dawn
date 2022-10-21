@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 // fn textureStore(texture: texture_storage_2d_array<rg32float, write>, coords: vec2<i32>, array_index: i32, value: vec4<f32>)
 fn textureStore_c863be() {
   var arg_1 = vec2<i32>();
-  var arg_2 = 1i;
+  var arg_2 = 1;
   var arg_3 = vec4<f32>();
   textureStore(arg_0, arg_1, arg_2, arg_3);
 }

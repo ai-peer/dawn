@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 // fn textureSampleLevel(texture: texture_cube_array<f32>, sampler: sampler, coords: vec3<f32>, array_index: i32, level: f32) -> vec4<f32>
 fn textureSampleLevel_0bdd9a() {
   var arg_2 = vec3<f32>();
-  var arg_3 = 1i;
+  var arg_3 = 1;
   var arg_4 = 1.f;
   var res: vec4<f32> = textureSampleLevel(arg_0, arg_1, arg_2, arg_3, arg_4);
 }

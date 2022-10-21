@@ -2,7 +2,7 @@
 
 uniform highp usampler2DArray arg_0_1;
 void textureLoad_7c90e5() {
-  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 1);
+  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 0);
 }
 
 vec4 vertex_main() {
@@ -23,7 +23,7 @@ precision mediump float;
 
 uniform highp usampler2DArray arg_0_1;
 void textureLoad_7c90e5() {
-  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 1);
+  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 0);
 }
 
 void fragment_main() {
@@ -38,7 +38,7 @@ void main() {
 
 uniform highp usampler2DArray arg_0_1;
 void textureLoad_7c90e5() {
-  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 1);
+  uvec4 res = texelFetch(arg_0_1, ivec3(0, 0, 1), 0);
 }
 
 void compute_main() {

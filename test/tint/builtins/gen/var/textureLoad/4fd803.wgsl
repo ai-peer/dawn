@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 // fn textureLoad(texture: texture_3d<i32>, coords: vec3<i32>, level: i32) -> vec4<i32>
 fn textureLoad_4fd803() {
   var arg_1 = vec3<i32>();
-  var arg_2 = 1i;
+  var arg_2 = 0;
   var res: vec4<i32> = textureLoad(arg_0, arg_1, arg_2);
 }
 

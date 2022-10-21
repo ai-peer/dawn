@@ -1,5 +1,5 @@
 fn countLeadingZeros_6d4656() {
-  var res : i32 = countLeadingZeros(1i);
+  var res : i32 = countLeadingZeros(1);
 }
 
 @vertex
