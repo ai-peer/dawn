@@ -1,5 +1,3 @@
-SKIP: FAILED
-
 vector<float16_t, 4> tint_atanh(vector<float16_t, 4> x) {
   return (log(((float16_t(1.0h) + x) / (float16_t(1.0h) - x))) * float16_t(0.5h));
 }
