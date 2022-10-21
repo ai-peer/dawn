@@ -199,8 +199,9 @@ WGPUBuffer Device::CreateBuffer(const WGPUBufferDescriptor* descriptor) {
     return Buffer::Create(this, descriptor);
 }
 
-WGPUBuffer Device::CreateErrorBuffer() {
+WGPUBuffer Device::CreateErrorBuffer(bool mappedAtCreation) {
     WGPUBufferDescriptor fakeDescriptor = {};
+    fakeDescriptor.mappedAtCreation = mappedAtCreation;
     return Buffer::CreateError(this, &fakeDescriptor);
 }
 

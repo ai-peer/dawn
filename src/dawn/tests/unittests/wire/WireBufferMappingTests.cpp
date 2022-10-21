@@ -695,7 +695,8 @@ TEST_F(WireBufferMappingTests, MaxSizeMappableBufferOOMDirectly) {
 
         wgpuDeviceCreateBuffer(device, &descriptor);
         EXPECT_CALL(api, DeviceInjectError(apiDevice, WGPUErrorType_OutOfMemory, _));
-        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice)).WillOnce(Return(apiBuffer));
+        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice, descriptor.mappedAtCreation))
+            .WillOnce(Return(apiBuffer));
         FlushClient();
     }
 
@@ -707,7 +708,8 @@ TEST_F(WireBufferMappingTests, MaxSizeMappableBufferOOMDirectly) {
 
         wgpuDeviceCreateBuffer(device, &descriptor);
         EXPECT_CALL(api, DeviceInjectError(apiDevice, WGPUErrorType_OutOfMemory, _));
-        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice)).WillOnce(Return(apiBuffer));
+        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice, descriptor.mappedAtCreation))
+            .WillOnce(Return(apiBuffer));
         FlushClient();
     }
 
@@ -719,7 +721,8 @@ TEST_F(WireBufferMappingTests, MaxSizeMappableBufferOOMDirectly) {
 
         wgpuDeviceCreateBuffer(device, &descriptor);
         EXPECT_CALL(api, DeviceInjectError(apiDevice, WGPUErrorType_OutOfMemory, _));
-        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice)).WillOnce(Return(apiBuffer));
+        EXPECT_CALL(api, DeviceCreateErrorBuffer(apiDevice, descriptor.mappedAtCreation))
+            .WillOnce(Return(apiBuffer));
         FlushClient();
     }
 }

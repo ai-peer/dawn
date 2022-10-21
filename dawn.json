@@ -995,6 +995,9 @@
             {
                 "name": "create error buffer",
                 "returns": "buffer",
+                "args": [
+                    {"name": "mapped at creation", "type": "bool"}
+                ],
                 "tags": ["dawn"]
             },
             {
