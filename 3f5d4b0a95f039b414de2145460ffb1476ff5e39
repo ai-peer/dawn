@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d467de_b63476f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-21T21:14:09Z",
+      "side": 1,
+      "message": "Unlike the next change, this is backwards compatible with existing shaders.",
+      "revId": "3f5d4b0a95f039b414de2145460ffb1476ff5e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
