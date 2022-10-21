@@ -15,6 +15,7 @@
 #include "dawn/native/metal/CommandRecordingContext.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/native/metal/TextureMTL.h"
 
 namespace dawn::native::metal {
 

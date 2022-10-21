@@ -38,6 +38,19 @@ struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptio
     AdapterDiscoveryOptions();
 };
 
+struct ExternalImageMTLSharedEventDescriptor;
+
+#ifdef __OBJC__
+struct DAWN_NATIVE_EXPORT ExternalImageMTLSharedEventDescriptor {
+    // Shared event handle. This never passes ownership to the callee (when used as an input
+    // parameter) or to the caller (when used as a return value or output parameter).
+    id<MTLSharedEvent> sharedEvent = nil;
+
+    // The value that was previously signaled on this event and should be waited on.
+    uint64_t signaledValue = 0;
+};
+#endif  // __OBJC__
+
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorIOSurface : ExternalImageDescriptor {
   public:
     ExternalImageDescriptorIOSurface();
@@ -46,10 +59,16 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorIOSurface : ExternalImageDescri
 
     // This has been deprecated.
     uint32_t plane;
+
+    // A list of events to wait on before accessing the texture.
+    std::vector<ExternalImageMTLSharedEventDescriptor> waitEvents;
 };
 
 DAWN_NATIVE_EXPORT WGPUTexture WrapIOSurface(WGPUDevice device,
                                              const ExternalImageDescriptorIOSurface* descriptor);
+
+DAWN_NATIVE_EXPORT void IOSurfaceEndAccess(WGPUTexture texture,
+                                           ExternalImageMTLSharedEventDescriptor* signalEvent);
 
 // When making Metal interop with other APIs, we need to be careful that QueueSubmit doesn't
 // mean that the operations will be visible to other APIs/Metal devices right away. macOS

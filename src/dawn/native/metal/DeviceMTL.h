@@ -33,6 +33,8 @@
 namespace dawn::native::metal {
 
 struct KalmanInfo;
+struct MTLSharedEventAndSignalValue;
+struct ExternalImageMTLSharedEventDescriptor;
 
 class Device final : public DeviceBase {
   public:
@@ -52,8 +54,12 @@ class Device final : public DeviceBase {
     CommandRecordingContext* GetPendingCommandContext();
     MaybeError SubmitPendingCommandBuffer();
 
-    Ref<Texture> CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
-                                                IOSurfaceRef ioSurface);
+    void ExportLastSignaledEvent(ExternalImageMTLSharedEventDescriptor* desc);
+
+    Ref<Texture> CreateTextureWrappingIOSurface(
+        const ExternalImageDescriptor* descriptor,
+        IOSurfaceRef ioSurface,
+        std::vector<MTLSharedEventAndSignalValue> waitEvents);
     void WaitForCommandsToBeScheduled();
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(size_t size) override;
@@ -130,6 +136,7 @@ class Device final : public DeviceBase {
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
     NSPRef<id<MTLDevice>> mMtlDevice;
+    NSPRef<id> mMtlSharedEvent = nil;  // MTLSharedEvent not available until macOS 10.14+.
     NSPRef<id<MTLCommandQueue>> mCommandQueue;
 
     CommandRecordingContext mCommandContext;
