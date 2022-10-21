@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ea3365_1544d576",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-21T13:45:36Z",
+      "side": 1,
+      "message": "Is this instead crbug.com/dawn/1528 where it should be valid to call unmap even if the buffer is not mapped?",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 64
+      },
+      "revId": "510c298880ba32376df230bf70197f1e65022a9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8aa17134_dc38746e",
