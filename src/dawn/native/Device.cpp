@@ -1208,8 +1208,9 @@ TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
 
 // For Dawn Wire
 
-BufferBase* DeviceBase::APICreateErrorBuffer() {
+BufferBase* DeviceBase::APICreateErrorBuffer(bool mappedAtCreation) {
     BufferDescriptor desc = {};
+    desc.mappedAtCreation = mappedAtCreation;
     return BufferBase::MakeError(this, &desc);
 }
 

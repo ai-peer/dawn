@@ -869,7 +869,12 @@ TEST_P(BufferTests, BufferMappedAtCreationOOM) {
         // UINT64_MAX may be special cased. Test a smaller, but really large buffer also fails
         descriptor.size = 1ull << 50;
         // TODO(dawn:1525): remove warning expectation after the deprecation period.
-        ASSERT_DEVICE_ERROR(EXPECT_DEPRECATION_WARNING(device.CreateBuffer(&descriptor)));
+        wgpu::Buffer errorBuffer;
+        ASSERT_DEVICE_ERROR(
+            EXPECT_DEPRECATION_WARNING(errorBuffer = device.CreateBuffer(&descriptor)));
+
+        // We should also call Unmap() on an error buffer without any errors.
+        errorBuffer.Unmap();
     }
 }
 
