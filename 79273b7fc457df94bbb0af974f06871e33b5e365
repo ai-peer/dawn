@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1d7e49_880219ec",
+        "filename": "test/tint/bug/tint/1713.wgsl.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-21T20:30:27Z",
+      "side": 1,
+      "message": "I\u0027m aware that the expected files are empty, but there\u0027s no nice way to show the results of abstract values that cannot be represented as concrete values. Right now, I just want to show that this compiles (it didn\u0027t before this CL).",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 6,
+        "endChar": 1
+      },
+      "revId": "79273b7fc457df94bbb0af974f06871e33b5e365",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
