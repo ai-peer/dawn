@@ -33,6 +33,46 @@
       "message": "enga@, would you mind to take a look at this CL ?",
       "revId": "28648edc52c213365ceb7bddbc27174c834d21a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5c07a2_7b0aef8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-21T13:16:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "28648edc52c213365ceb7bddbc27174c834d21a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748216f9_bb3f802d",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-10-21T13:16:02Z",
+      "side": 1,
+      "message": "nit: you could include the plane index in the message, as well as `this` so it prints as \"[ExternalTexture label]\"",
+      "range": {
+        "startLine": 225,
+        "startChar": 39,
+        "endLine": 225,
+        "endChar": 44
+      },
+      "revId": "28648edc52c213365ceb7bddbc27174c834d21a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
