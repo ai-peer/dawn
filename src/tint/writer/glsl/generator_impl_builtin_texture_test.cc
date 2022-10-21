@@ -219,9 +219,9 @@ ExpectedResult expected_texture_overload(ast::builtin::test::ValidTextureOverloa
         case ValidTextureOverload::kSampleCompareDepthCubeArrayF32:
             return R"(texture(tint_symbol_sampler, vec4(1.0f, 2.0f, 3.0f, float(4)), 5.0f);)";
         case ValidTextureOverload::kSampleCompareLevelDepth2dF32:
-            return R"(yyytexture(tint_symbol_sampler, vec2(1.0f, 2.0f), 3.0f);)";
+            return R"(texture(tint_symbol_sampler, vec2(1.0f, 2.0f), 3.0f);)";
         case ValidTextureOverload::kSampleCompareLevelDepth2dOffsetF32:
-            return R"(yyytextureOffset(tint_symbol_sampler, vec2(1.0f, 2.0f), 3.0f, ivec2(4, 5));)";
+            return R"(textureOffset(tint_symbol_sampler, vec2(1.0f, 2.0f), 3.0f, ivec2(4, 5));)";
         case ValidTextureOverload::kSampleCompareLevelDepth2dArrayF32:
             return R"(texture(tint_symbol_sampler, vec4(1.0f, 2.0f, float(4)), 3.0f);)";
         case ValidTextureOverload::kSampleCompareLevelDepth2dArrayOffsetF32:
