@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45f19fef_dee1ada8",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-21T16:32:24Z",
+      "side": 0,
+      "message": "Why was this test removed? We could enable both extensions (in general queries being available inside passes means they are available outside too?)",
+      "revId": "ec7ba9f1f853ffa1c79c1e3302803c49b0e34568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

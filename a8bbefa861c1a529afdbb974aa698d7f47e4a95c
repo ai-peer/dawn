@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c462629b_bb73c069",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-21T16:32:24Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efe10bd6_007ff9cf",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-21T16:32:24Z",
+      "side": 1,
+      "message": "We should be able to use (\"Timestamp queries used without %s enabled.\", requiredFeature) to show the feature name!",
+      "range": {
+        "startLine": 76,
+        "startChar": 21,
+        "endLine": 76,
+        "endChar": 78
+      },
+      "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7de769_a9e6e94e",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-21T16:32:24Z",
+      "side": 1,
+      "message": "Ditto for the removed test coverage, we likely can keep it.",
+      "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
