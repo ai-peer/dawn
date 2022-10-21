@@ -6,7 +6,7 @@ layout(rg32i) uniform highp writeonly iimage3D arg_0;
 void textureStore_d82b0a() {
   uvec3 arg_1 = uvec3(0u);
   ivec4 arg_2 = ivec4(0);
-  imageStore(arg_0, ivec3(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 vec4 vertex_main() {
@@ -36,7 +36,7 @@ layout(rg32i) uniform highp writeonly iimage3D arg_0;
 void textureStore_d82b0a() {
   uvec3 arg_1 = uvec3(0u);
   ivec4 arg_2 = ivec4(0);
-  imageStore(arg_0, ivec3(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 void fragment_main() {
@@ -60,7 +60,7 @@ layout(rg32i) uniform highp writeonly iimage3D arg_0;
 void textureStore_d82b0a() {
   uvec3 arg_1 = uvec3(0u);
   ivec4 arg_2 = ivec4(0);
-  imageStore(arg_0, ivec3(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 void compute_main() {

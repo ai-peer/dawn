@@ -6,7 +6,7 @@ uniform highp usampler1D arg_0_1;
 void textureLoad_bc3201() {
   uint arg_1 = 1u;
   uint arg_2 = 1u;
-  uvec4 res = texelFetch(arg_0_1, int(arg_1), int(arg_2));
+  uvec4 res = texelFetch(arg_0_1, arg_1, arg_2);
 }
 
 vec4 vertex_main() {
@@ -36,7 +36,7 @@ uniform highp usampler1D arg_0_1;
 void textureLoad_bc3201() {
   uint arg_1 = 1u;
   uint arg_2 = 1u;
-  uvec4 res = texelFetch(arg_0_1, int(arg_1), int(arg_2));
+  uvec4 res = texelFetch(arg_0_1, arg_1, arg_2);
 }
 
 void fragment_main() {
@@ -60,7 +60,7 @@ uniform highp usampler1D arg_0_1;
 void textureLoad_bc3201() {
   uint arg_1 = 1u;
   uint arg_2 = 1u;
-  uvec4 res = texelFetch(arg_0_1, int(arg_1), int(arg_2));
+  uvec4 res = texelFetch(arg_0_1, arg_1, arg_2);
 }
 
 void compute_main() {

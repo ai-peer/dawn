@@ -6,7 +6,7 @@ layout(rg32f) uniform highp writeonly image2D arg_0;
 void textureStore_726472() {
   uvec2 arg_1 = uvec2(0u);
   vec4 arg_2 = vec4(0.0f);
-  imageStore(arg_0, ivec2(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 vec4 vertex_main() {
@@ -36,7 +36,7 @@ layout(rg32f) uniform highp writeonly image2D arg_0;
 void textureStore_726472() {
   uvec2 arg_1 = uvec2(0u);
   vec4 arg_2 = vec4(0.0f);
-  imageStore(arg_0, ivec2(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 void fragment_main() {
@@ -60,7 +60,7 @@ layout(rg32f) uniform highp writeonly image2D arg_0;
 void textureStore_726472() {
   uvec2 arg_1 = uvec2(0u);
   vec4 arg_2 = vec4(0.0f);
-  imageStore(arg_0, ivec2(arg_1), arg_2);
+  imageStore(arg_0, arg_1, arg_2);
 }
 
 void compute_main() {

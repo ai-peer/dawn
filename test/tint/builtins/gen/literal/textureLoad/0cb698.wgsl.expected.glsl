@@ -4,7 +4,7 @@ SKIP: FAILED
 
 uniform highp isampler1D arg_0_1;
 void textureLoad_0cb698() {
-  ivec4 res = texelFetch(arg_0_1, int(1u), int(1u));
+  ivec4 res = texelFetch(arg_0_1, 1u, 1u);
 }
 
 vec4 vertex_main() {
@@ -32,7 +32,7 @@ precision mediump float;
 
 uniform highp isampler1D arg_0_1;
 void textureLoad_0cb698() {
-  ivec4 res = texelFetch(arg_0_1, int(1u), int(1u));
+  ivec4 res = texelFetch(arg_0_1, 1u, 1u);
 }
 
 void fragment_main() {
@@ -54,7 +54,7 @@ ERROR: 2 compilation errors.  No code generated.
 
 uniform highp isampler1D arg_0_1;
 void textureLoad_0cb698() {
-  ivec4 res = texelFetch(arg_0_1, int(1u), int(1u));
+  ivec4 res = texelFetch(arg_0_1, 1u, 1u);
 }
 
 void compute_main() {

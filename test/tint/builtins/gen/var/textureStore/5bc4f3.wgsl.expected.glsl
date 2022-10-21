@@ -7,7 +7,7 @@ void textureStore_5bc4f3() {
   uvec2 arg_1 = uvec2(0u);
   uint arg_2 = 1u;
   uvec4 arg_3 = uvec4(0u);
-  imageStore(arg_0, ivec3(uvec3(arg_1, arg_2)), arg_3);
+  imageStore(arg_0, uvec3(arg_1, arg_2), arg_3);
 }
 
 vec4 vertex_main() {
@@ -38,7 +38,7 @@ void textureStore_5bc4f3() {
   uvec2 arg_1 = uvec2(0u);
   uint arg_2 = 1u;
   uvec4 arg_3 = uvec4(0u);
-  imageStore(arg_0, ivec3(uvec3(arg_1, arg_2)), arg_3);
+  imageStore(arg_0, uvec3(arg_1, arg_2), arg_3);
 }
 
 void fragment_main() {
@@ -63,7 +63,7 @@ void textureStore_5bc4f3() {
   uvec2 arg_1 = uvec2(0u);
   uint arg_2 = 1u;
   uvec4 arg_3 = uvec4(0u);
-  imageStore(arg_0, ivec3(uvec3(arg_1, arg_2)), arg_3);
+  imageStore(arg_0, uvec3(arg_1, arg_2), arg_3);
 }
 
 void compute_main() {
