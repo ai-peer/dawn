@@ -81,6 +81,8 @@ class DAWN_WIRE_EXPORT WireClient : public CommandHandler {
     void ReclaimDeviceReservation(const ReservedDevice& reservation);
     void ReclaimInstanceReservation(const ReservedInstance& reservation);
 
+    void CustomEmbedderCommand(const void* data, size_t size);
+
     // Disconnects the client.
     // Commands allocated after this point will not be sent.
     void Disconnect();

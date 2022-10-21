@@ -25,4 +25,7 @@ void CommandSerializer::OnSerializeError() {}
 CommandHandler::CommandHandler() = default;
 CommandHandler::~CommandHandler() = default;
 
+CustomCommandHandler::CustomCommandHandler() = default;
+CustomCommandHandler::~CustomCommandHandler() = default;
+
 }  // namespace dawn::wire

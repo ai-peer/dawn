@@ -20,18 +20,18 @@
 
 namespace dawn::wire::server {
 
-bool Server::DoInstanceRequestAdapter(ObjectId instanceId,
-                                      uint64_t requestSerial,
-                                      ObjectHandle adapterHandle,
-                                      const WGPURequestAdapterOptions* options) {
+CommandHandleResult Server::DoInstanceRequestAdapter(ObjectId instanceId,
+                                                     uint64_t requestSerial,
+                                                     ObjectHandle adapterHandle,
+                                                     const WGPURequestAdapterOptions* options) {
     auto* instance = InstanceObjects().Get(instanceId);
     if (instance == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto* resultData = AdapterObjects().Allocate(adapterHandle.id, AllocationState::Reserved);
     if (resultData == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     resultData->generation = adapterHandle.generation;
@@ -44,7 +44,7 @@ bool Server::DoInstanceRequestAdapter(ObjectId instanceId,
     mProcs.instanceRequestAdapter(instance->handle, options,
                                   ForwardToServer<&Server::OnRequestAdapterCallback>,
                                   userdata.release());
-    return true;
+    return CommandHandleResult::Success;
 }
 
 void Server::OnRequestAdapterCallback(RequestAdapterUserdata* data,

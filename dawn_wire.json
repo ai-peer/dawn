@@ -96,6 +96,10 @@
             { "name": "request serial", "type": "uint64_t" },
             { "name": "device object handle", "type": "ObjectHandle", "handle_type": "device"},
             { "name": "descriptor", "type": "device descriptor", "annotation": "const*" }
+        ],
+        "custom embedder command internal": [
+            {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "size", "wire_is_data_only": true},
+            {"name": "size", "type": "uint64_t"}
         ]
     },
     "return commands": {
@@ -243,7 +247,8 @@
             "BufferUnmap"
         ],
         "server_handwritten_commands": [
-            "QueueSignal"
+            "QueueSignal",
+            "CustomEmbedderCommandInternal"
         ],
         "server_reverse_lookup_objects": [
         ]

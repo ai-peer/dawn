@@ -21,6 +21,10 @@
 #include "dawn/wire/ChunkedCommandSerializer.h"
 #include "dawn/wire/server/ServerBase_autogen.h"
 
+namespace dawn::wire {
+class CustomCommandHandler;
+}
+
 namespace dawn::wire::server {
 
 class Server;
@@ -147,7 +151,8 @@ class Server : public ServerBase {
   public:
     Server(const DawnProcTable& procs,
            CommandSerializer* serializer,
-           MemoryTransferService* memoryTransferService);
+           MemoryTransferService* memoryTransferService,
+           CustomCommandHandler* customCommandHandler);
     ~Server() override;
 
     // ChunkedCommandHandler implementation
@@ -230,6 +235,7 @@ class Server : public ServerBase {
     DawnProcTable mProcs;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
     MemoryTransferService* mMemoryTransferService = nullptr;
+    CustomCommandHandler* mCustomCommandHandler = nullptr;
 
     std::shared_ptr<bool> mIsAlive;
 };

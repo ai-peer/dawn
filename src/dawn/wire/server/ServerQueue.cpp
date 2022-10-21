@@ -28,12 +28,12 @@ void Server::OnQueueWorkDone(QueueWorkDoneUserdata* data, WGPUQueueWorkDoneStatu
     SerializeCommand(cmd);
 }
 
-bool Server::DoQueueOnSubmittedWorkDone(ObjectId queueId,
-                                        uint64_t signalValue,
-                                        uint64_t requestSerial) {
+CommandHandleResult Server::DoQueueOnSubmittedWorkDone(ObjectId queueId,
+                                                       uint64_t signalValue,
+                                                       uint64_t requestSerial) {
     auto* queue = QueueObjects().Get(queueId);
     if (queue == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto userdata = MakeUserdata<QueueWorkDoneUserdata>();
@@ -42,51 +42,51 @@ bool Server::DoQueueOnSubmittedWorkDone(ObjectId queueId,
 
     mProcs.queueOnSubmittedWorkDone(queue->handle, signalValue,
                                     ForwardToServer<&Server::OnQueueWorkDone>, userdata.release());
-    return true;
+    return CommandHandleResult::Success;
 }
 
-bool Server::DoQueueWriteBuffer(ObjectId queueId,
-                                ObjectId bufferId,
-                                uint64_t bufferOffset,
-                                const uint8_t* data,
-                                uint64_t size) {
+CommandHandleResult Server::DoQueueWriteBuffer(ObjectId queueId,
+                                               ObjectId bufferId,
+                                               uint64_t bufferOffset,
+                                               const uint8_t* data,
+                                               uint64_t size) {
     // The null object isn't valid as `self` or `buffer` so we can combine the check with the
     // check that the ID is valid.
     auto* queue = QueueObjects().Get(queueId);
     auto* buffer = BufferObjects().Get(bufferId);
     if (queue == nullptr || buffer == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     if (size > std::numeric_limits<size_t>::max()) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     mProcs.queueWriteBuffer(queue->handle, buffer->handle, bufferOffset, data,
                             static_cast<size_t>(size));
-    return true;
+    return CommandHandleResult::Success;
 }
 
-bool Server::DoQueueWriteTexture(ObjectId queueId,
-                                 const WGPUImageCopyTexture* destination,
-                                 const uint8_t* data,
-                                 uint64_t dataSize,
-                                 const WGPUTextureDataLayout* dataLayout,
-                                 const WGPUExtent3D* writeSize) {
+CommandHandleResult Server::DoQueueWriteTexture(ObjectId queueId,
+                                                const WGPUImageCopyTexture* destination,
+                                                const uint8_t* data,
+                                                uint64_t dataSize,
+                                                const WGPUTextureDataLayout* dataLayout,
+                                                const WGPUExtent3D* writeSize) {
     // The null object isn't valid as `self` so we can combine the check with the
     // check that the ID is valid.
     auto* queue = QueueObjects().Get(queueId);
     if (queue == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     if (dataSize > std::numeric_limits<size_t>::max()) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     mProcs.queueWriteTexture(queue->handle, destination, data, static_cast<size_t>(dataSize),
                              dataLayout, writeSize);
-    return true;
+    return CommandHandleResult::Success;
 }
 
 }  // namespace dawn::wire::server

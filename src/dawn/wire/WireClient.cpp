@@ -61,6 +61,10 @@ void WireClient::ReclaimInstanceReservation(const ReservedInstance& reservation)
     mImpl->ReclaimInstanceReservation(reservation);
 }
 
+void WireClient::CustomEmbedderCommand(const void* data, size_t size) {
+    mImpl->CustomEmbedderCommand(data, size);
+}
+
 void WireClient::Disconnect() {
     mImpl->Disconnect();
 }
