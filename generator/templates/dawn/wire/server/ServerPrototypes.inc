@@ -15,9 +15,9 @@
 // Command handlers & doers
 {% for command in cmd_records["command"] %}
     {% set Suffix = command.name.CamelCase() %}
-    bool Handle{{Suffix}}(DeserializeBuffer* deserializeBuffer);
+    CommandHandleResult Handle{{Suffix}}(DeserializeBuffer* deserializeBuffer);
 
-    bool Do{{Suffix}}(
+    CommandHandleResult Do{{Suffix}}(
         {%- for member in command.members -%}
             {%- if member.is_return_value -%}
                 {%- if member.handle_type -%}

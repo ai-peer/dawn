@@ -84,6 +84,8 @@ class Client : public ClientBase {
     void ReclaimDeviceReservation(const ReservedDevice& reservation);
     void ReclaimInstanceReservation(const ReservedInstance& reservation);
 
+    void CustomEmbedderCommand(const void* data, size_t size);
+
     template <typename Cmd>
     void SerializeCommand(const Cmd& cmd) {
         mSerializer.SerializeCommand(cmd, *this);

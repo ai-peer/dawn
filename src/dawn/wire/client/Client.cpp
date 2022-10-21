@@ -123,6 +123,13 @@ void Client::ReclaimInstanceReservation(const ReservedInstance& reservation) {
     Free(FromAPI(reservation.instance));
 }
 
+void Client::CustomEmbedderCommand(const void* data, size_t size) {
+    CustomEmbedderCommandInternalCmd cmd;
+    cmd.data = static_cast<const uint8_t*>(data);
+    cmd.size = size;
+    SerializeCommand(cmd);
+}
+
 void Client::Disconnect() {
     mDisconnected = true;
     mSerializer.Disconnect();

@@ -25,7 +25,7 @@ namespace dawn::wire::server {
         {% set Suffix = command.name.CamelCase() %}
         {% if Suffix not in client_side_commands %}
             {% if is_method and Suffix not in server_handwritten_commands %}
-                bool Server::Do{{Suffix}}(
+                CommandHandleResult Server::Do{{Suffix}}(
                     {%- for member in command.members -%}
                         {%- if member.is_return_value -%}
                             {%- if member.handle_type -%}
@@ -58,16 +58,16 @@ namespace dawn::wire::server {
                         //* object creation functions.
                         ASSERT(*{{as_varName(ret[0].name)}} != nullptr);
                     {% endif %}
-                    return true;
+                    return CommandHandleResult::Success;
                 }
             {% endif %}
         {% endif %}
     {% endfor %}
 
-    bool Server::DoDestroyObject(ObjectType objectType, ObjectId objectId) {
+    CommandHandleResult Server::DoDestroyObject(ObjectType objectType, ObjectId objectId) {
         //* ID 0 are reserved for nullptr and cannot be destroyed.
         if (objectId == 0) {
-            return false;
+            return CommandHandleResult::Error;
         }
 
         switch(objectType) {
@@ -75,7 +75,7 @@ namespace dawn::wire::server {
                 case ObjectType::{{type.name.CamelCase()}}: {
                     auto* data = {{type.name.CamelCase()}}Objects().Get(objectId);
                     if (data == nullptr) {
-                        return false;
+                        return CommandHandleResult::Error;
                     }
                     if (data->state == AllocationState::Allocated) {
                         ASSERT(data->handle != nullptr);
@@ -94,11 +94,11 @@ namespace dawn::wire::server {
                         mProcs.{{as_varName(type.name, Name("release"))}}(data->handle);
                     }
                     {{type.name.CamelCase()}}Objects().Free(objectId);
-                    return true;
+                    return CommandHandleResult::Success;
                 }
             {% endfor %}
             default:
-                return false;
+                return CommandHandleResult::Error;
         }
     }
 

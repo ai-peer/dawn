@@ -22,10 +22,12 @@ CallbackUserdata::CallbackUserdata(Server* server, const std::shared_ptr<bool>& 
 
 Server::Server(const DawnProcTable& procs,
                CommandSerializer* serializer,
-               MemoryTransferService* memoryTransferService)
+               MemoryTransferService* memoryTransferService,
+               CustomCommandHandler* customCommandHandler)
     : mSerializer(serializer),
       mProcs(procs),
       mMemoryTransferService(memoryTransferService),
+      mCustomCommandHandler(customCommandHandler),
       mIsAlive(std::make_shared<bool>(true)) {
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fallback to inline memory.
@@ -135,6 +137,13 @@ bool Server::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generat
     mProcs.instanceReference(instance);
 
     return true;
+}
+
+CommandHandleResult Server::DoCustomEmbedderCommandInternal(const uint8_t* data, uint64_t size) {
+    if (size > std::numeric_limits<size_t>::max() || !mCustomCommandHandler) {
+        return CommandHandleResult::Error;
+    }
+    return mCustomCommandHandler->HandleCommand(reinterpret_cast<const char*>(data), size);
 }
 
 WGPUDevice Server::GetDevice(uint32_t id, uint32_t generation) {

@@ -51,22 +51,22 @@ bool Server::PreHandleBufferDestroy(const BufferDestroyCmd& cmd) {
     return true;
 }
 
-bool Server::DoBufferMapAsync(ObjectId bufferId,
-                              uint64_t requestSerial,
-                              WGPUMapModeFlags mode,
-                              uint64_t offset64,
-                              uint64_t size64) {
+CommandHandleResult Server::DoBufferMapAsync(ObjectId bufferId,
+                                             uint64_t requestSerial,
+                                             WGPUMapModeFlags mode,
+                                             uint64_t offset64,
+                                             uint64_t size64) {
     // These requests are just forwarded to the buffer, with userdata containing what the
     // client will require in the return command.
 
     // The null object isn't valid as `self`
     if (bufferId == 0) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto* buffer = BufferObjects().Get(bufferId);
     if (buffer == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     std::unique_ptr<MapUserdata> userdata = MakeUserdata<MapUserdata>();
@@ -82,7 +82,7 @@ bool Server::DoBufferMapAsync(ObjectId bufferId,
     // in server. All other invalid actual size can be caught by dawn native side validation.
     if (offset64 > std::numeric_limits<size_t>::max() || size64 >= WGPU_WHOLE_MAP_SIZE) {
         OnBufferMapAsyncCallback(userdata.get(), WGPUBufferMapAsyncStatus_Error);
-        return true;
+        return CommandHandleResult::Success;
     }
 
     size_t offset = static_cast<size_t>(offset64);
@@ -94,25 +94,25 @@ bool Server::DoBufferMapAsync(ObjectId bufferId,
     mProcs.bufferMapAsync(buffer->handle, mode, offset, size,
                           ForwardToServer<&Server::OnBufferMapAsyncCallback>, userdata.release());
 
-    return true;
+    return CommandHandleResult::Success;
 }
 
-bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
-                                  const WGPUBufferDescriptor* descriptor,
-                                  ObjectHandle bufferResult,
-                                  uint64_t readHandleCreateInfoLength,
-                                  const uint8_t* readHandleCreateInfo,
-                                  uint64_t writeHandleCreateInfoLength,
-                                  const uint8_t* writeHandleCreateInfo) {
+CommandHandleResult Server::DoDeviceCreateBuffer(ObjectId deviceId,
+                                                 const WGPUBufferDescriptor* descriptor,
+                                                 ObjectHandle bufferResult,
+                                                 uint64_t readHandleCreateInfoLength,
+                                                 const uint8_t* readHandleCreateInfo,
+                                                 uint64_t writeHandleCreateInfoLength,
+                                                 const uint8_t* writeHandleCreateInfo) {
     auto* device = DeviceObjects().Get(deviceId);
     if (device == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     // Create and register the buffer object.
     auto* resultData = BufferObjects().Allocate(bufferResult.id);
     if (resultData == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
     resultData->generation = bufferResult.generation;
     resultData->handle = mProcs.deviceCreateBuffer(device->handle, descriptor);
@@ -130,7 +130,7 @@ bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
         writeHandleCreateInfoLength > std::numeric_limits<size_t>::max() ||
         readHandleCreateInfoLength >
             std::numeric_limits<size_t>::max() - writeHandleCreateInfoLength) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     if (isWriteMode) {
@@ -139,7 +139,7 @@ bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
         if (!mMemoryTransferService->DeserializeWriteHandle(
                 writeHandleCreateInfo, static_cast<size_t>(writeHandleCreateInfoLength),
                 &writeHandle)) {
-            return false;
+            return CommandHandleResult::Error;
         }
         ASSERT(writeHandle != nullptr);
         resultData->writeHandle.reset(writeHandle);
@@ -152,7 +152,7 @@ bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
                 // This is a valid case and isn't fatal. Remember the buffer is an error so as
                 // to skip subsequent mapping operations.
                 resultData->mapWriteState = BufferMapWriteState::MapError;
-                return true;
+                return CommandHandleResult::Success;
             }
             ASSERT(mapping != nullptr);
             writeHandle->SetTarget(mapping);
@@ -167,56 +167,58 @@ bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
         if (!mMemoryTransferService->DeserializeReadHandle(
                 readHandleCreateInfo, static_cast<size_t>(readHandleCreateInfoLength),
                 &readHandle)) {
-            return false;
+            return CommandHandleResult::Error;
         }
         ASSERT(readHandle != nullptr);
 
         resultData->readHandle.reset(readHandle);
     }
 
-    return true;
+    return CommandHandleResult::Success;
 }
 
-bool Server::DoBufferUpdateMappedData(ObjectId bufferId,
-                                      uint64_t writeDataUpdateInfoLength,
-                                      const uint8_t* writeDataUpdateInfo,
-                                      uint64_t offset,
-                                      uint64_t size) {
+CommandHandleResult Server::DoBufferUpdateMappedData(ObjectId bufferId,
+                                                     uint64_t writeDataUpdateInfoLength,
+                                                     const uint8_t* writeDataUpdateInfo,
+                                                     uint64_t offset,
+                                                     uint64_t size) {
     // The null object isn't valid as `self`
     if (bufferId == 0) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     if (writeDataUpdateInfoLength > std::numeric_limits<size_t>::max() ||
         offset > std::numeric_limits<size_t>::max() || size > std::numeric_limits<size_t>::max()) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto* buffer = BufferObjects().Get(bufferId);
     if (buffer == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
     switch (buffer->mapWriteState) {
         case BufferMapWriteState::Unmapped:
-            return false;
+            return CommandHandleResult::Error;
         case BufferMapWriteState::MapError:
             // The buffer is mapped but there was an error allocating mapped data.
             // Do not perform the memcpy.
-            return true;
+            return CommandHandleResult::Success;
         case BufferMapWriteState::Mapped:
             break;
     }
     if (!buffer->writeHandle) {
         // This check is performed after the check for the MapError state. It is permissible
         // to Unmap and attempt to update mapped data of an error buffer.
-        return false;
+        return CommandHandleResult::Error;
     }
 
     // Deserialize the flush info and flush updated data from the handle into the target
     // of the handle. The target is set via WriteHandle::SetTarget.
     return buffer->writeHandle->DeserializeDataUpdate(
-        writeDataUpdateInfo, static_cast<size_t>(writeDataUpdateInfoLength),
-        static_cast<size_t>(offset), static_cast<size_t>(size));
+               writeDataUpdateInfo, static_cast<size_t>(writeDataUpdateInfoLength),
+               static_cast<size_t>(offset), static_cast<size_t>(size))
+               ? CommandHandleResult::Success
+               : CommandHandleResult::Error;
 }
 
 void Server::OnBufferMapAsyncCallback(MapUserdata* data, WGPUBufferMapAsyncStatus status) {

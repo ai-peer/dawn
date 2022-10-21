@@ -54,6 +54,19 @@ class DAWN_WIRE_EXPORT CommandHandler {
     virtual const volatile char* HandleCommands(const volatile char* commands, size_t size) = 0;
 };
 
+enum class CommandHandleResult {
+    Success,
+    Deferred,
+    Error,
+};
+
+class DAWN_WIRE_EXPORT CustomCommandHandler {
+  public:
+    CustomCommandHandler();
+    virtual ~CustomCommandHandler();
+    virtual CommandHandleResult HandleCommand(const char* command, size_t size) = 0;
+};
+
 }  // namespace dawn::wire
 
 // TODO(dawn:824): Remove once the deprecation period is passed.

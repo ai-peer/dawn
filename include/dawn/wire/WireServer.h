@@ -23,6 +23,8 @@ struct DawnProcTable;
 
 namespace dawn::wire {
 
+class CustomCommandHandler;
+
 namespace server {
 class Server;
 class MemoryTransferService;
@@ -32,6 +34,7 @@ struct DAWN_WIRE_EXPORT WireServerDescriptor {
     const DawnProcTable* procs;
     CommandSerializer* serializer;
     server::MemoryTransferService* memoryTransferService = nullptr;
+    CustomCommandHandler* customCommandHandler = nullptr;
 };
 
 class DAWN_WIRE_EXPORT WireServer : public CommandHandler {

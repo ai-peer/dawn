@@ -18,10 +18,11 @@
 
 namespace dawn::wire::server {
 
-bool Server::DoShaderModuleGetCompilationInfo(ObjectId shaderModuleId, uint64_t requestSerial) {
+CommandHandleResult Server::DoShaderModuleGetCompilationInfo(ObjectId shaderModuleId,
+                                                             uint64_t requestSerial) {
     auto* shaderModule = ShaderModuleObjects().Get(shaderModuleId);
     if (shaderModule == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto userdata = MakeUserdata<ShaderModuleGetCompilationInfoUserdata>();
@@ -31,7 +32,7 @@ bool Server::DoShaderModuleGetCompilationInfo(ObjectId shaderModuleId, uint64_t 
     mProcs.shaderModuleGetCompilationInfo(
         shaderModule->handle, ForwardToServer<&Server::OnShaderModuleGetCompilationInfo>,
         userdata.release());
-    return true;
+    return CommandHandleResult::Success;
 }
 
 void Server::OnShaderModuleGetCompilationInfo(ShaderModuleGetCompilationInfoUserdata* data,

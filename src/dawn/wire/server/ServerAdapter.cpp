@@ -19,18 +19,18 @@
 
 namespace dawn::wire::server {
 
-bool Server::DoAdapterRequestDevice(ObjectId adapterId,
-                                    uint64_t requestSerial,
-                                    ObjectHandle deviceHandle,
-                                    const WGPUDeviceDescriptor* descriptor) {
+CommandHandleResult Server::DoAdapterRequestDevice(ObjectId adapterId,
+                                                   uint64_t requestSerial,
+                                                   ObjectHandle deviceHandle,
+                                                   const WGPUDeviceDescriptor* descriptor) {
     auto* adapter = AdapterObjects().Get(adapterId);
     if (adapter == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     auto* resultData = DeviceObjects().Allocate(deviceHandle.id, AllocationState::Reserved);
     if (resultData == nullptr) {
-        return false;
+        return CommandHandleResult::Error;
     }
 
     resultData->generation = deviceHandle.generation;
@@ -43,7 +43,7 @@ bool Server::DoAdapterRequestDevice(ObjectId adapterId,
     mProcs.adapterRequestDevice(adapter->handle, descriptor,
                                 ForwardToServer<&Server::OnRequestDeviceCallback>,
                                 userdata.release());
-    return true;
+    return CommandHandleResult::Success;
 }
 
 void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
