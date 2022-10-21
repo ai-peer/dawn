@@ -84,7 +84,6 @@ class Type : public Castable<Type> {
     bool IsUnsignedIntegerVector() const;
     /// @returns true if this type is an unsigned scalar or vector
     bool IsUnsignedScalarOrVector() const;
-
 #ifdef NDEBUG
     /// @returns "<no-type-info>", for debug purposes only
     std::string String() const { return "<no-type-info>"; }
@@ -539,6 +538,11 @@ class TypeManager {
     const spirv::F32* F32();
     /// @return a I32 type. Repeated calls will return the same pointer.
     const spirv::I32* I32();
+    /// @param ty the input type.
+    /// @returns the equivalent unsigned integer scalar or vector if @p ty is a scalar or vector,
+    /// otherwise nullptr.
+    const Type* AsUnsigned(const Type* ty);
+
     /// @param ty the store type
     /// @param address_space the pointer address space
     /// @param access the declared access mode
