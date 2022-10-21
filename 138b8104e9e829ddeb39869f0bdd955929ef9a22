@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3471bc_2b9dd015",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-21T20:15:26Z",
+      "side": 1,
+      "message": "Dan, this is only for gdb. I will write something similar for lldb soon.",
+      "revId": "138b8104e9e829ddeb39869f0bdd955929ef9a22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
