@@ -5709,7 +5709,7 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
                 Source{}, builder_.Symbols().Register("textureDimensions"));
             ExpressionList dims_args{GetImageExpression(inst)};
             if (opcode == SpvOpImageQuerySizeLod) {
-                dims_args.Push(ToI32(MakeOperand(inst, 1)).expr);
+                dims_args.Push(MakeOperand(inst, 1).expr);
             }
             const ast::Expression* dims_call =
                 create<ast::CallExpression>(Source{}, dims_ident, dims_args);
@@ -5724,18 +5724,25 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
             if (ast::IsTextureArray(dims)) {
                 auto* layers_ident = create<ast::IdentifierExpression>(
                     Source{}, builder_.Symbols().Register("textureNumLayers"));
-                exprs.Push(create<ast::CallExpression>(Source{}, layers_ident,
-                                                       utils::Vector{GetImageExpression(inst)}));
+                auto num_layers = create<ast::CallExpression>(
+                    Source{}, layers_ident, utils::Vector{GetImageExpression(inst)});
+                exprs.Push(num_layers);
             }
             auto* result_type = parser_impl_.ConvertType(inst.type_id());
+            auto* unsigned_type = ty_.AsUnsigned(result_type);
             TypedExpression expr = {
-                result_type,
-                builder_.Construct(Source{}, result_type->Build(builder_), std::move(exprs))};
+                unsigned_type,
+                (exprs.Length() > 1)
+                    ? builder_.Construct(Source{}, unsigned_type->Build(builder_), std::move(exprs))
+                    : exprs[0],
+            };
+
+            expr = ToSignedIfUnsigned(expr);
+
             return EmitConstDefOrWriteToHoistedVar(inst, expr);
         }
         case SpvOpImageQueryLod:
-            return Fail() << "WGSL does not support querying the level of detail of "
-                             "an image: "
+            return Fail() << "WGSL does not support querying the level of detail of an image: "
                           << inst.PrettyPrint();
         case SpvOpImageQueryLevels:
         case SpvOpImageQuerySamples: {
@@ -5746,9 +5753,10 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
             const ast::Expression* ast_expr = create<ast::CallExpression>(
                 Source{}, levels_ident, utils::Vector{GetImageExpression(inst)});
             auto* result_type = parser_impl_.ConvertType(inst.type_id());
-            // The SPIR-V result type must be integer scalar. The WGSL bulitin
-            // returns i32. If they aren't the same then convert the result.
-            if (!result_type->Is<I32>()) {
+            // The SPIR-V result type must be integer scalar.
+            // The WGSL bulitin returns u32.
+            // If they aren't the same then convert the result.
+            if (!result_type->Is<U32>()) {
                 ast_expr = builder_.Construct(Source{}, result_type->Build(builder_),
                                               utils::Vector{ast_expr});
             }
@@ -6073,6 +6081,13 @@ TypedExpression FunctionEmitter::ToI32(TypedExpression value) {
         return value;
     }
     return {ty_.I32(), builder_.Construct(Source{}, builder_.ty.i32(), utils::Vector{value.expr})};
+}
+
+TypedExpression FunctionEmitter::ToU32(TypedExpression value) {
+    if (!value || value.type->Is<U32>()) {
+        return value;
+    }
+    return {ty_.U32(), builder_.Construct(Source{}, builder_.ty.u32(), utils::Vector{value.expr})};
 }
 
 TypedExpression FunctionEmitter::ToSignedIfUnsigned(TypedExpression value) {

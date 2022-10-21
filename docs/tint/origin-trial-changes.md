@@ -1,5 +1,11 @@
 # Tint changes during Origin Trial
 
+## Changes for M109
+
+### Breaking changes
+
+* `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
+
 ## Changes for M108
 
 ### New features
