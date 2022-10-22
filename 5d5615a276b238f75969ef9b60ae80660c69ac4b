@@ -71,6 +71,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "393c702b_bd2b88f5",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002272
+      },
+      "writtenOn": "2022-10-22T07:38:09Z",
+      "side": 1,
+      "message": "Should this be \"but unlike SPIR-V\" ?",
+      "range": {
+        "startLine": 167,
+        "startChar": 58,
+        "endLine": 168,
+        "endChar": 4
+      },
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ce988cd_abc6466c",
         "filename": "docs/tint/spirv-reader-overview.md",
         "patchSetId": 4
