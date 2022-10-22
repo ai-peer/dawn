@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d541cb3d_af8a1078",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-22T04:27:36Z",
+      "side": 1,
+      "message": "Oh thanks to point out this. I found we don\u0027t need this CL after reading the SPEC again.",
+      "parentUuid": "95ea3365_1544d576",
+      "range": {
+        "startLine": 13,
+        "startChar": 7,
+        "endLine": 13,
+        "endChar": 64
+      },
+      "revId": "510c298880ba32376df230bf70197f1e65022a9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8aa17134_dc38746e",
