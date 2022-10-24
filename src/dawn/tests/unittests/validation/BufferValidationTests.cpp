@@ -821,6 +821,7 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer) {
                                 4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
         ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
+        ASSERT_NE(buffer.GetConstMappedRange(0, 0), nullptr);
         ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
     }
 }
@@ -837,8 +838,10 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer_OOM) {
     ASSERT_DEVICE_ERROR(buffer = BufferMappedAtCreation(
                             kStupidLarge, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-    // GetMappedRange after mappedAtCreation OOM case returns nullptr.
-    ASSERT_EQ(buffer.GetConstMappedRange(), nullptr);
+    // GetMappedRange after mappedAtCreation OOM case returns a non-nullptr as it is always valid to
+    // get mapped ranges of a GPUBuffer that is mappedAtCreation, even if it is invalid.
+    ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
+    ASSERT_NE(buffer.GetConstMappedRange(0, 0), nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
 }
 
