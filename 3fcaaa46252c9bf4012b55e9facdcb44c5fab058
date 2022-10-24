@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5815bc24_a4174956",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2460,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T15:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02724358_87bc0990",
+      "range": {
+        "startLine": 2460,
+        "startChar": 9,
+        "endLine": 2460,
+        "endChar": 14
+      },
+      "revId": "3fcaaa46252c9bf4012b55e9facdcb44c5fab058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f9d2ede_5c2caf10",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-21T14:58:04Z",
       "side": 1,
       "message": "This should almost certainly be an ICE, which takes the system as the first argument.",
+      "range": {
+        "startLine": 1234,
+        "startChar": 12,
+        "endLine": 1234,
+        "endChar": 20
+      },
+      "revId": "3fcaaa46252c9bf4012b55e9facdcb44c5fab058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03fbfacf_df28f026",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T15:14:34Z",
+      "side": 1,
+      "message": "Change was removed from PR.",
+      "parentUuid": "3f9d2ede_5c2caf10",
       "range": {
         "startLine": 1234,
         "startChar": 12,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42fc7fdb_80e8175b",
+        "filename": "src/tint/resolver/validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T15:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "619f491c_49f1aac4",
+      "range": {
+        "startLine": 1111,
+        "startChar": 44,
+        "endLine": 1111,
+        "endChar": 52
+      },
+      "revId": "3fcaaa46252c9bf4012b55e9facdcb44c5fab058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4661f24f_167901fa",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-10-21T14:58:04Z",
       "side": 1,
       "message": "We could override the `Declaration()` method on `sem::LoopContinuingBlockStatement` to return the statement `static_cast`\u0027d to `const ast::BlockStatement*`. We do this for a bunch \nThis is safer and faster than requiring all users to just know the inheritance mapping here.",
+      "range": {
+        "startLine": 1655,
+        "startChar": 19,
+        "endLine": 1655,
+        "endChar": 32
+      },
+      "revId": "3fcaaa46252c9bf4012b55e9facdcb44c5fab058",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1ec931_db6168e6",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T15:14:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4661f24f_167901fa",
       "range": {
         "startLine": 1655,
         "startChar": 19,
