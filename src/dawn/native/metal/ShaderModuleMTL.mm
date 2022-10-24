@@ -188,6 +188,15 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
+            // The renamer transform must come first.
+            // See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+            if (r.disableSymbolRenaming) {
+                // We still need to rename MSL reserved keywords
+                transformInputs.Add<tint::transform::Renamer::Config>(
+                    tint::transform::Renamer::Target::kMslKeywords);
+            }
+
             // We only remap bindings for the target entry point, so we need to strip all other
             // entry points to avoid generating invalid bindings for them.
             transformManager.Add<tint::transform::SingleEntryPoint>();
@@ -220,14 +229,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
                                                              BindingRemapper::AccessControls{},
                                                              /* mayCollide */ true);
-
-            transformManager.Add<tint::transform::Renamer>();
-
-            if (r.disableSymbolRenaming) {
-                // We still need to rename MSL reserved keywords
-                transformInputs.Add<tint::transform::Renamer::Config>(
-                    tint::transform::Renamer::Target::kMslKeywords);
-            }
 
             tint::Program program;
             tint::transform::DataMap transformOutputs;

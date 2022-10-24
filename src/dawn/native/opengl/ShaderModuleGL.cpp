@@ -197,6 +197,10 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
+            // The renamer transform must come first.
+            // See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+
             if (!r.externalTextureBindings.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
