@@ -50,6 +50,24 @@
       "message": "nit: I know you\u0027re following the atan2 example, but since then, I\u0027ve added `ConcatIntoIf\u003c\u003e` which is nicer to use.",
       "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91780f16_26d4fa04",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T18:25:35Z",
+      "side": 1,
+      "message": "I\u0027m going to leave this for now and will do a followup to convert both of them.",
+      "parentUuid": "977ddb69_91e4cd37",
+      "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
