@@ -197,6 +197,13 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
+            transformManager.Add<tint::transform::SingleEntryPoint>();
+            transformInputs.Add<tint::transform::SingleEntryPoint::Config>(r.entryPointName);
+
+            // The renamer transform must come after the SingleEntryPoint transform, but before all
+            // others. See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+
             if (!r.externalTextureBindings.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
@@ -204,8 +211,6 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             }
 
             if (r.substituteOverrideConfig) {
-                transformManager.Add<tint::transform::SingleEntryPoint>();
-                transformInputs.Add<tint::transform::SingleEntryPoint::Config>(r.entryPointName);
                 // This needs to run after SingleEntryPoint transform which removes unused overrides
                 // for current entry point.
                 transformManager.Add<tint::transform::SubstituteOverride>();

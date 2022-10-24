@@ -288,17 +288,23 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         spirv, GetDevice(), std::move(req), Spirv::FromBlob,
         [](SpirvCompilationRequest r) -> ResultOrError<Spirv> {
             tint::transform::Manager transformManager;
+            tint::transform::DataMap transformInputs;
+
+            // Many Vulkan drivers can't handle multi-entrypoint shader modules.
+            transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
+            transformInputs.Add<tint::transform::SingleEntryPoint::Config>(
+                std::string(r.entryPointName));
+
+            // The renamer transform must come after the SingleEntryPoint transform, but before all
+            // others. See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+
             if (r.isRobustnessEnabled) {
                 transformManager.append(std::make_unique<tint::transform::Robustness>());
             }
-            // Many Vulkan drivers can't handle multi-entrypoint shader modules.
-            transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
             // Run the binding remapper after SingleEntryPoint to avoid collisions with
             // unused entryPoints.
             transformManager.append(std::make_unique<tint::transform::BindingRemapper>());
-            tint::transform::DataMap transformInputs;
-            transformInputs.Add<tint::transform::SingleEntryPoint::Config>(
-                std::string(r.entryPointName));
             transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
                                                              BindingRemapper::AccessControls{},
                                                              /* mayCollide */ false);
@@ -315,11 +321,27 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                     std::move(r.substituteOverrideConfig).value());
             }
             tint::Program program;
+            tint::transform::DataMap transformOutputs;
             {
                 TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "RunTransforms");
-                DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
-                                                       transformInputs, nullptr, nullptr));
+                DAWN_TRY_ASSIGN(program,
+                                RunTransforms(&transformManager, r.inputProgram, transformInputs,
+                                              &transformOutputs, nullptr));
             }
+
+            // if (auto* data = transformOutputs.Get<tint::transform::Renamer::Data>()) {
+            //     auto it = data->remappings.find(r.entryPointName.data());
+            //     if (it != data->remappings.end()) {
+            //         *remappedEntryPointName = it->second;
+            //     } else {
+            //         DAWN_INVALID_IF(!r.disableSymbolRenaming,
+            //                         "Could not find remapped name for entry point.");
+            //
+            //         *remappedEntryPointName = r.entryPointName;
+            //     }
+            // } else {
+            //     return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
+            // }
 
             if (r.stage == SingleShaderStage::Compute) {
                 // Validate workgroup size after program runs transforms.

@@ -193,6 +193,15 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             transformManager.Add<tint::transform::SingleEntryPoint>();
             transformInputs.Add<tint::transform::SingleEntryPoint::Config>(r.entryPointName);
 
+            // The renamer transform must come after the SingleEntryPoint transform, but before all
+            // others. See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+            if (r.disableSymbolRenaming) {
+                // We still need to rename MSL reserved keywords
+                transformInputs.Add<tint::transform::Renamer::Config>(
+                    tint::transform::Renamer::Target::kMslKeywords);
+            }
+
             if (!r.externalTextureBindings.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
@@ -220,14 +229,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
                                                              BindingRemapper::AccessControls{},
                                                              /* mayCollide */ true);
-
-            transformManager.Add<tint::transform::Renamer>();
-
-            if (r.disableSymbolRenaming) {
-                // We still need to rename MSL reserved keywords
-                transformInputs.Add<tint::transform::Renamer::Config>(
-                    tint::transform::Renamer::Target::kMslKeywords);
-            }
 
             tint::Program program;
             tint::transform::DataMap transformOutputs;
