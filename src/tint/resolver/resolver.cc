@@ -173,7 +173,9 @@ bool Resolver::ResolveInternal() {
 
     if (!enabled_extensions_.Contains(ast::Extension::kChromiumDisableUniformityAnalysis)) {
         if (!AnalyzeUniformity(builder_, dependencies_)) {
-            return false;
+            if (UniformityFailuresAsError) {
+                return false;
+            }
         }
     }
 
