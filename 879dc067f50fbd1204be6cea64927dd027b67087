@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410fe9bb_da7c89d2",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-24T19:05:36Z",
+      "side": 1,
+      "message": "This formats better if you put `//` on this line, and move `cases` below (as you did above), so:\n\n```\nConcatIntoIf\u003c!finite_only\u003e( //\n   cases, std::vector\u003cCase\u003e{\n```",
+      "range": {
+        "startLine": 234,
+        "startChar": 31,
+        "endLine": 234,
+        "endChar": 36
+      },
+      "revId": "879dc067f50fbd1204be6cea64927dd027b67087",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
