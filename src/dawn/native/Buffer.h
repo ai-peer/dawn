@@ -71,7 +71,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
 
-    void* GetMappedRange(size_t offset, size_t size, bool writable = true);
+    virtual void* GetMappedRange(size_t offset, size_t size, bool writable = true);
     void Unmap();
 
     // Dawn API
@@ -99,6 +99,8 @@ class BufferBase : public ApiObjectBase {
 
     MaybeError MapAtCreationInternal();
 
+    bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
+
     uint64_t mAllocatedSize = 0;
 
   private:
@@ -116,7 +118,6 @@ class BufferBase : public ApiObjectBase {
                                 size_t size,
                                 WGPUBufferMapAsyncStatus* status) const;
     MaybeError ValidateUnmap() const;
-    bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
     void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
 
     uint64_t mSize = 0;

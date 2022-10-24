@@ -83,6 +83,29 @@ class ErrorBuffer final : public BufferBase {
 
     void* GetMappedPointerImpl() override { return mFakeMappedData.get(); }
 
+    void* GetMappedRange(size_t offset, size_t size, bool writable) override {
+        if (!CanGetMappedRange(writable, offset, size)) {
+            return nullptr;
+        }
+
+        uint8_t* start = static_cast<uint8_t*>(GetMappedPointerImpl());
+        // It is always valid to get mapped ranges of a GPUBuffer that is mappedAtCreation, even if
+        // it is invalid.
+        if (start != nullptr) {
+            return start + offset;
+        } else {
+            if (size == 0) {
+                return reinterpret_cast<uint8_t*>(intptr_t(0xCAFED00D));
+            }
+
+            mFakeMappedData = std::unique_ptr<uint8_t[]>(AllocNoThrow<uint8_t>(size));
+            if (mFakeMappedData == nullptr) {
+                return reinterpret_cast<uint8_t*>(intptr_t(0xCAFED00D));
+            }
+            return mFakeMappedData.get();
+        }
+    }
+
     void UnmapImpl() override { mFakeMappedData.reset(); }
 
     std::unique_ptr<uint8_t[]> mFakeMappedData;

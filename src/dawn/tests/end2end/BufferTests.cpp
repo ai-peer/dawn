@@ -783,6 +783,26 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRangeZeroSized) {
     buffer.Unmap();
 }
 
+// Test the result of GetMappedRange when mapped at creation for an error buffer.
+TEST_P(BufferMappedAtCreationTests, GetSmallMappedRangeOnErrorBuffer) {
+    // TODO(chromium:1377204): Enable this test after the bug in dawn_wire is fixed.
+    DAWN_SUPPRESS_TEST_IF(UsesWire());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopySrc;
+    descriptor.mappedAtCreation = true;
+
+    descriptor.size = std::numeric_limits<uint64_t>::max();
+
+    wgpu::Buffer buffer;
+    ASSERT_DEVICE_ERROR(buffer = device.CreateBuffer(&descriptor));
+
+    EXPECT_EQ(nullptr, buffer.GetMappedRange());
+    EXPECT_NE(nullptr, buffer.GetMappedRange(0, 4));
+    EXPECT_EQ(nullptr, buffer.GetConstMappedRange());
+    EXPECT_NE(nullptr, buffer.GetConstMappedRange(0, 4));
+}
+
 DAWN_INSTANTIATE_TEST(BufferMappedAtCreationTests,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
