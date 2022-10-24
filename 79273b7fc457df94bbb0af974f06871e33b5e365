@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "22b53155_ba9b8ea8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-24T16:44:11Z",
+      "side": 1,
+      "message": "I assume we have validation for this and this is just defense in depth?",
+      "revId": "79273b7fc457df94bbb0af974f06871e33b5e365",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee1d7e49_880219ec",
         "filename": "test/tint/bug/tint/1713.wgsl.expected.glsl",
         "patchSetId": 1
