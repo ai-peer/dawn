@@ -1270,7 +1270,9 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
              Return(V),                                 //
              Break(),                                   //
              Discard(),                                 //
-         });                                            //
+         },
+         utils::Empty,                 // attributes
+         utils::Vector{Location(V)});  //
     // Exercise type traversal
     GlobalVar(Sym(), ty.atomic(T));
     GlobalVar(Sym(), ty.bool_());
