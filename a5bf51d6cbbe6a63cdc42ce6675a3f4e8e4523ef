@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "a5bf51d6cbbe6a63cdc42ce6675a3f4e8e4523ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0af704_a1b5f452",
+        "filename": "src/tint/resolver/validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-24T15:38:05Z",
+      "side": 1,
+      "message": "Parser says `break if`, here we say `break-if`.",
+      "range": {
+        "startLine": 1129,
+        "startChar": 45,
+        "endLine": 1129,
+        "endChar": 53
+      },
+      "revId": "a5bf51d6cbbe6a63cdc42ce6675a3f4e8e4523ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
