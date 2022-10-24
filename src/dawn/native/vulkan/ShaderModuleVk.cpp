@@ -288,6 +288,11 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         spirv, GetDevice(), std::move(req), Spirv::FromBlob,
         [](SpirvCompilationRequest r) -> ResultOrError<Spirv> {
             tint::transform::Manager transformManager;
+
+            // The renamer transform must come first.
+            // See: crbug.com/tint/1725
+            transformManager.Add<tint::transform::Renamer>();
+
             if (r.isRobustnessEnabled) {
                 transformManager.append(std::make_unique<tint::transform::Robustness>());
             }
