@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e54dfeb_67e2b355",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "There are three classes of commands:\n\n 1 - Submitted and in flight.\n 2 - Stored for submission (\"pending\") but not submitted yet.\n 3 - All of the above.\n\nHere `HasPendingCommands` means 3), whereas other places \"pending\" means 2). This makes code really confusing to read. We should find a name to describe 3) \"scheduled\"? Not sure.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a69c7f_e83ffdbe",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "also nit: `return !HasPendingCommands();`",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dabc95f_dc54c352",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "This can just be `return CopyFromStagingToBufferImpl(source, sourceOffset, destination, destinationOffset, size)` but then what\u0027s the use of separating the Impl function. Is it for the next CL?",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b16f17_b2954b32",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "nit: This is an implementation detail that the user of the function doesn\u0027t really need to know about. So it could be moved in the implementation and the comment here just say something \"The serial by which time all currently submitted or pending operations will be completed.\"",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ede07fa7_47807e08",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "nit: this is unused.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fc0ec13_5f2f1626",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d8e29e3_ad720f68",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "Maybe add a comment explaining what to use this for and why the serial is separate.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eada91ac_fc6821c2",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "nit: We could have a sentinel value that we assert isn\u0027t still set in [1]\n\nAlso it seems it is only used for the trace events, so I wonder if the trace event could be handled from the outside instead so we don\u0027t have to store the serial (the code calling the callbacks would fire the trace event instead of the CallbackTask inside itself.)",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fb03200_414e8978",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "nit: unused in this CL and we don\u0027t need to have SetNeedsSubmit in this CL.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e051284_a256fafc",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "ditto as D3D12?",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f95bc575_33be1e28",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "nit: Technically we could have pending commands inside the GL driver that are waiting for a glFlush but we can\u0027t know for sure so we might as well pretend there are no commands. Maybe worth commenting that.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ddea64a_5504c68e",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-24T16:55:04Z",
+      "side": 1,
+      "message": "ditto, same as D3D12",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
