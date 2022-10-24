@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad45cd16_97af74a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-24T18:13:44Z",
+      "side": 1,
+      "message": "Looks great. One nit that\u0027s really up to you.",
+      "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "977ddb69_91e4cd37",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-24T18:13:44Z",
+      "side": 1,
+      "message": "nit: I know you\u0027re following the atan2 example, but since then, I\u0027ve added `ConcatIntoIf\u003c\u003e` which is nicer to use.",
+      "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
