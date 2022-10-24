@@ -821,6 +821,7 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer) {
                                 4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
         ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
+        ASSERT_NE(buffer.GetConstMappedRange(0, 0), nullptr);
         ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
     }
 }
@@ -831,14 +832,19 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer_OOM) {
     // doesn't see the previous catchall try-catch.
     DAWN_SKIP_TEST_IF(DAWN_PLATFORM_IS(MACOS) && DAWN_PLATFORM_IS(ARM64));
 
+    // TODO(chromium:1377204): Re-enable the test after the bug in dawn_wire is fixed.
+    DAWN_SKIP_TEST_IF(UsesWire());
+
     uint64_t kStupidLarge = uint64_t(1) << uint64_t(63);
 
     wgpu::Buffer buffer;
     ASSERT_DEVICE_ERROR(buffer = BufferMappedAtCreation(
                             kStupidLarge, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-    // GetMappedRange after mappedAtCreation OOM case returns nullptr.
-    ASSERT_EQ(buffer.GetConstMappedRange(), nullptr);
+    // GetMappedRange after mappedAtCreation OOM case returns a non-nullptr as it is always valid to
+    // get mapped ranges of a GPUBuffer that is mappedAtCreation, even if it is invalid.
+    ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
+    ASSERT_NE(buffer.GetConstMappedRange(0, 0), nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
 }
 

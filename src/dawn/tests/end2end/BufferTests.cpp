@@ -783,6 +783,35 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRangeZeroSized) {
     buffer.Unmap();
 }
 
+// Test the result of GetMappedRange when mapped at creation for an error buffer.
+TEST_P(BufferMappedAtCreationTests, GetSmallMappedRangeOnErrorBuffer) {
+    // TODO(http://crbug.com/dawn/749): Missing support.
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGL());
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
+    DAWN_TEST_UNSUPPORTED_IF(IsAsan());
+
+    // TODO(chromium:1377204): Enable this test after the bug in dawn_wire is fixed.
+    DAWN_SUPPRESS_TEST_IF(UsesWire());
+
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::CopySrc;
+    descriptor.mappedAtCreation = true;
+
+    // buffer size must be a multiple of 4 or a validation error will occur in GetMappedRange().
+    // Choose a size that is smaller than uint64_t::max to avoid an error in
+    // /base/allocator/partition_allocator/partition_root.h.
+    descriptor.size = std::numeric_limits<uint64_t>::max() / 4 * 4 - 1024u;
+
+    wgpu::Buffer buffer;
+    // TODO(dawn:1525): remove warning expectation after the deprecation period.
+    ASSERT_DEVICE_ERROR(EXPECT_DEPRECATION_WARNING(buffer = device.CreateBuffer(&descriptor)));
+
+    EXPECT_NE(nullptr, buffer.GetMappedRange());
+    EXPECT_NE(nullptr, buffer.GetMappedRange(0, 4));
+    EXPECT_NE(nullptr, buffer.GetConstMappedRange());
+    EXPECT_NE(nullptr, buffer.GetConstMappedRange(0, 4));
+}
+
 DAWN_INSTANTIATE_TEST(BufferMappedAtCreationTests,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
