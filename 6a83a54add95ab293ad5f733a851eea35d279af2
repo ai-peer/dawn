@@ -68,6 +68,24 @@
       "parentUuid": "977ddb69_91e4cd37",
       "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21e1cada_536dd03c",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-24T18:26:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "91780f16_26d4fa04",
+      "revId": "6a83a54add95ab293ad5f733a851eea35d279af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
