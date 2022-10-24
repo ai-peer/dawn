@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "baac9e1a_e93ad559",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1516,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-24T17:30:58Z",
+      "side": 1,
+      "message": "This is just a defense. This shouldn\u0027t happen based on how the builtin is defined in intrinsics.def.",
+      "parentUuid": "22b53155_ba9b8ea8",
+      "revId": "79273b7fc457df94bbb0af974f06871e33b5e365",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee1d7e49_880219ec",
