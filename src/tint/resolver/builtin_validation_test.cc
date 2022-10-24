@@ -14,6 +14,7 @@
 
 #include "src/tint/ast/builtin_texture_helper_test.h"
 #include "src/tint/resolver/resolver_test_helper.h"
+#include "src/tint/sem/type_initializer.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 
@@ -97,47 +98,65 @@ TEST_F(ResolverBuiltinValidationTest, InvalidPipelineStageIndirect) {
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsFunction) {
-    Func(Source{{12, 34}}, "mix", utils::Empty, ty.i32(), {});
+    auto* mix = Func(Source{{12, 34}}, "mix", utils::Empty, ty.i32(),
+                     utils::Vector{
+                         Return(1_i),
+                     });
+    auto* use = Call("mix");
+    WrapInFunction(use);
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a function)");
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+    auto* sem = Sem().Get<sem::Call>(use);
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Target(), Sem().Get(mix));
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalConst) {
-    GlobalConst(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i));
+    auto* mix = GlobalConst(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i));
+    auto* use = Expr("mix");
+    WrapInFunction(use);
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a 'const')");
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+    auto* sem = Sem().Get<sem::VariableUser>(use);
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Variable(), Sem().Get(mix));
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsGlobalVar) {
-    GlobalVar(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i), ast::AddressSpace::kPrivate);
+    auto* mix =
+        GlobalVar(Source{{12, 34}}, "mix", ty.i32(), Expr(1_i), ast::AddressSpace::kPrivate);
+    auto* use = Expr("mix");
+    WrapInFunction(use);
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(
-        r()->error(),
-        R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a module-scope 'var')");
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+    auto* sem = Sem().Get<sem::VariableUser>(use);
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Variable(), Sem().Get(mix));
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAlias) {
-    Alias(Source{{12, 34}}, "mix", ty.i32());
+    auto* mix = Alias(Source{{12, 34}}, "mix", ty.i32());
+    auto* use = Construct(ty.type_name("mix"));
+    WrapInFunction(use);
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as an alias)");
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+    auto* sem = Sem().Get<sem::Call>(use);
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Type(), Sem().Get(mix));
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsStruct) {
-    Structure(Source{{12, 34}}, "mix",
-              utils::Vector{
-                  Member("m", ty.i32()),
-              });
+    auto* mix = Structure(Source{{12, 34}}, "mix",
+                          utils::Vector{
+                              Member("m", ty.i32()),
+                          });
+    auto* use = Construct(ty.type_name("mix"));
+    WrapInFunction(use);
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(12:34 error: 'mix' is a builtin and cannot be redeclared as a struct)");
+    ASSERT_TRUE(r()->Resolve()) << r()->error();
+    auto* sem = Sem().Get<sem::Call>(use);
+    ASSERT_NE(sem, nullptr);
+    EXPECT_EQ(sem->Type(), Sem().Get(mix));
 }
 
 namespace texture_constexpr_args {
