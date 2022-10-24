@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90de1ae5_5469b2e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-24T14:22:58Z",
+      "side": 1,
+      "message": "This change failed Kokoro presubmits, and has broken the roll into Chromium.\nPlease hold off landing when Kokoro gives a `-1`. The second log link (`Logs at:`) should be externally available to investigate build breakages.",
+      "revId": "f392c38b67ca8456d448076b70dca87db02bb990",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
