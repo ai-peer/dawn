@@ -17,12 +17,19 @@
 /// If set to 1 then the transform::Manager will dump the WGSL of the program
 /// before and after each transform. Helpful for debugging bad output.
 #define TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM 0
+/// If set to 1 makes Program::printer output WGSL always, this is useful when
+/// using the define above as part of code that isn't a Tint test target.
+#define TINT_FORCE_PROGRAM_PRINTER_TO_PRINT_WGSL 0
 
 #if TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
 #define TINT_IF_PRINT_PROGRAM(x) x
 #else  // TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
 #define TINT_IF_PRINT_PROGRAM(x)
 #endif  // TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
+
+#if TINT_FORCE_PROGRAM_PRINTER_TO_PRINT_WGSL
+#include "src/tint/writer/wgsl/generator.h"
+#endif  // TINT_FORCE_PROGRAM_PRINTER_TO_PRINT_WGSL
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Manager);
 
@@ -33,6 +40,16 @@ Manager::~Manager() = default;
 
 Output Manager::Run(const Program* program, const DataMap& data) const {
     const Program* in = program;
+
+#if TINT_FORCE_PROGRAM_PRINTER_TO_PRINT_WGSL
+    tint::Program::printer = [](const tint::Program* program) {
+        auto result = tint::writer::wgsl::Generate(program, {});
+        if (!result.error.empty()) {
+            return "error: " + result.error;
+        }
+        return result.wgsl;
+    };
+#endif  // TINT_FORCE_PROGRAM_PRINTER_TO_PRINT_WGSL
 
 #if TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM
     auto print_program = [&](const char* msg, const Transform* transform) {
