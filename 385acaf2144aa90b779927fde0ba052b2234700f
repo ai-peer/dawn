@@ -39,6 +39,30 @@
       },
       "revId": "385acaf2144aa90b779927fde0ba052b2234700f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9766901e_a07238c5",
+        "filename": "test/tint/bug/chromium/1372963.wgsl.expected.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T20:18:03Z",
+      "side": 1,
+      "message": "Dropping the `()`\u0027s causes things like `-(a + b)` to emit as `-a + b` which isn\u0027t what we wanted.",
+      "parentUuid": "b15153d8_d4ae25cb",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "385acaf2144aa90b779927fde0ba052b2234700f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
