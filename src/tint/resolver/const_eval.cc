@@ -1539,6 +1539,27 @@ ConstEval::Result ConstEval::atan(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0]);
 }
 
+ConstEval::Result ConstEval::atanh(const sem::Type* ty,
+                                   utils::VectorRef<const sem::Constant*> args,
+                                   const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) -> ImplResult {
+            if (f32(i.value) <= -1.0f || f32(i.value) >= 1.0f) {
+                AddError("atanh must be called with a value in the range (-1, 1)", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), decltype(i)(std::atanh(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+
+    auto r = TransformElements(builder, ty, transform, args[0]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
 ConstEval::Result ConstEval::atan2(const sem::Type* ty,
                                    utils::VectorRef<const sem::Constant*> args,
                                    const Source&) {
