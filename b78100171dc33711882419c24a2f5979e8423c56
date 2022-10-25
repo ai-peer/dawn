@@ -64,6 +64,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3a13fc_582cac6c",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:58:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "03406ab4_85b29089",
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cfc3a75_d77cf922",
@@ -77,6 +95,30 @@
       "writtenOn": "2022-10-25T13:52:15Z",
       "side": 1,
       "message": "Okay, but since the tests are all exactly the same, it would be nicer if this were a parameterized test.",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 1
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83148d43_05e9225d",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:58:49Z",
+      "side": 1,
+      "message": "Given they\u0027re short and easy to read, I\u0027d prefer to avoid parameterization. I find parameterizing tests makes it a lot harder to understand what\u0027s happening.",
+      "parentUuid": "8cfc3a75_d77cf922",
       "range": {
         "startLine": 290,
         "startChar": 0,
