@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3df229f_f131e5a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:17:01Z",
+      "side": 1,
+      "message": "lgtm w/ suggestion",
+      "revId": "8f3eb1d4ed85506b995b6f262e4aed93e654c7ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed60941f_46ae8d44",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:17:01Z",
+      "side": 1,
+      "message": "I wonder, if we filed a bug for having this add a note about _which_ member was the problem, would that be doable post-v1?",
+      "revId": "8f3eb1d4ed85506b995b6f262e4aed93e654c7ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1687807b_2862a55d",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2226,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:17:01Z",
+      "side": 1,
+      "message": "Oh, maybe you can already AddNote here as you have member?",
+      "revId": "8f3eb1d4ed85506b995b6f262e4aed93e654c7ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
