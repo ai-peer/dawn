@@ -1527,6 +1527,39 @@ ConstEval::Result ConstEval::OpShiftLeft(const sem::Type* ty,
     return r;
 }
 
+ConstEval::Result ConstEval::asin(const sem::Type* ty,
+                                  utils::VectorRef<const sem::Constant*> args,
+                                  const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) -> ImplResult {
+            if (f32(i.value) < -1.0f || f32(i.value) > 1.0f) {
+                AddError("asin must be called with a value in the range [-1, 1]", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), decltype(i)(std::asin(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
+ConstEval::Result ConstEval::asinh(const sem::Type* ty,
+                                   utils::VectorRef<const sem::Constant*> args,
+                                   const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) {
+            return CreateElement(builder, c0->Type(), decltype(i)(std::asinh(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+
+    auto r = TransformElements(builder, ty, transform, args[0]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
 ConstEval::Result ConstEval::atan(const sem::Type* ty,
                                   utils::VectorRef<const sem::Constant*> args,
                                   const Source&) {
