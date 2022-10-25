@@ -386,6 +386,24 @@ libtint_source_set("libtint_core_all_src") {
     "inspector/resource_binding.h",
     "inspector/scalar.cc",
     "inspector/scalar.h",
+    "ir/block_flow_node.cc",
+    "ir/block_flow_node.h",
+    "ir/builder.cc",
+    "ir/builder.h",
+    "ir/builder_impl.cc",
+    "ir/builder_impl.h",
+    "ir/flow_node.cc",
+    "ir/flow_node.h",
+    "ir/function.cc",
+    "ir/function.h",
+    "ir/if_flow_node.cc",
+    "ir/if_flow_node.h",
+    "ir/loop_flow_node.cc",
+    "ir/loop_flow_node.h",
+    "ir/module.cc",
+    "ir/module.h",
+    "ir/switch_flow_node.cc",
+    "ir/switch_flow_node.h",
     "number.cc",
     "number.h",
     "program.cc",
@@ -1199,6 +1217,13 @@ if (tint_build_unittests) {
     ]
   }
 
+  tint_unittests_source_set("tint_unittests_ir_src") {
+    sources = [
+      "ir/builder_impl_test.cc",
+      "ir/test_helper.h",
+    ]
+  }
+
   tint_unittests_source_set("tint_unittests_text_src") {
     sources = [ "text/unicode_test.cc" ]
   }
@@ -1665,6 +1690,7 @@ if (tint_build_unittests) {
       ":tint_unittests_core_src",
       ":tint_unittests_diagnostic_src",
       ":tint_unittests_inspector_src",
+      ":tint_unittests_ir_src",
       ":tint_unittests_resolver_src",
       ":tint_unittests_sem_src",
       ":tint_unittests_text_src",
