@@ -16,6 +16,23 @@
       "message": "PTAL the reland CL, thanks!",
       "revId": "51aab0a9b6f8f6d34b232300556b90a26fae357a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e586f34a_4f48d4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-25T11:31:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "51aab0a9b6f8f6d34b232300556b90a26fae357a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
