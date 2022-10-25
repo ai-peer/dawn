@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21f18b0a_11970022",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-25T12:20:12Z",
+      "side": 1,
+      "message": "I have concerns about making GetMappedRange virtual just so we can fake the mapped ranges on OOM for mappedAtCreation. Kai what\u0027s the behavior in the spec if the mappedAtCreation backing OOMs? Shouldn\u0027t we allow the page to get a nullptr / OperationError etc?",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
