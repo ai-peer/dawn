@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cba6ac53_06a0d80b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T13:52:15Z",
+      "side": 1,
+      "message": "This works, though I\u0027d usually cast the 1.0 to the type of `i`, like:\n\n```\nusing NumberT \u003d decltype(i);\nif (i.value \u003c\u003d NumberT(-1.0) || i.value \u003e\u003d NumberT(1.0)) {\n```\n\nThe only reason I like this more is that there\u0027s no casting performed for double (abstract-float) and f16.",
+      "range": {
+        "startLine": 1547,
+        "startChar": 12,
+        "endLine": 1547,
+        "endChar": 62
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1545f4a_9f58783f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1560,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T13:52:15Z",
+      "side": 1,
+      "message": "Since you made transform return ImplResult, you can simply replace all this with:\n\n```\n    return TransformElements(builder, ty, transform, args[0]);\n```",
+      "range": {
+        "startLine": 1556,
+        "startChar": 0,
+        "endLine": 1560,
+        "endChar": 13
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03406ab4_85b29089",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T13:52:15Z",
+      "side": 1,
+      "message": "Can we add tests for -1.0 and 1.0 as well?",
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cfc3a75_d77cf922",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T13:52:15Z",
+      "side": 1,
+      "message": "Okay, but since the tests are all exactly the same, it would be nicer if this were a parameterized test.",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 1
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
