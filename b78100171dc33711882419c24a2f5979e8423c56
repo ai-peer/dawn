@@ -223,6 +223,30 @@
       },
       "revId": "b78100171dc33711882419c24a2f5979e8423c56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ded9db0_9f96dfa8",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T14:17:52Z",
+      "side": 1,
+      "message": "I don\u0027t really understand why this is harder to understand - the failure will output the parameter that was used, which in this case would be the scalar value. The advantage of parameterized tests is that it makes it clear when reading the code that we\u0027re testing one thing for multiple inputs. The large duplication of tests we have in Tint make it actually harder to parse and update as there\u0027s just so much more code than necessary.",
+      "parentUuid": "726a8c3d_39f2d84b",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 1
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
