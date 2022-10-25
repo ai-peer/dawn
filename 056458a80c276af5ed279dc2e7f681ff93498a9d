@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae87836_7c9fb031",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T21:25:14Z",
+      "side": 1,
+      "message": "Nicely done!",
+      "revId": "056458a80c276af5ed279dc2e7f681ff93498a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c856c017_d094527c",
+        "filename": "src/tint/resolver/intrinsic_table.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T21:25:14Z",
+      "side": 1,
+      "message": "nit: `then only overloads with concrete`",
+      "range": {
+        "startLine": 107,
+        "startChar": 49,
+        "endLine": 107,
+        "endChar": 59
+      },
+      "revId": "056458a80c276af5ed279dc2e7f681ff93498a9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc5cc1c3_977c1d0e",
