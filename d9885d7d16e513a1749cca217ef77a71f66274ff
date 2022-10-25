@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8faf0e4d_f5fa5548",
+        "filename": "src/tint/resolver/uniformity.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T12:12:42Z",
+      "side": 1,
+      "message": "nit: Please prefix global constants with `k`: `kUniformityFailuresAsError`",
+      "range": {
+        "startLine": 29,
+        "startChar": 15,
+        "endLine": 29,
+        "endChar": 40
+      },
+      "revId": "d9885d7d16e513a1749cca217ef77a71f66274ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d2f5c8_0e59d48f",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T12:12:42Z",
+      "side": 1,
+      "message": "nit: Maybe split this common code into a `void RunTest(Program\u0026\u0026 program, bool should_pass) {` overload?",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 0
+      },
+      "revId": "d9885d7d16e513a1749cca217ef77a71f66274ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
