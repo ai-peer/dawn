@@ -6,6 +6,10 @@
 
 * `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
 
+### New features
+
+* You can now call texture builtins with a mix of signed and unsigned integer arguments. [tint:1733](crbug.com/tint/1733)
+
 ## Changes for M108
 
 ### New features
