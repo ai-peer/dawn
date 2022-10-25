@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c82f2244_a700c274",
+        "filename": "src/tint/writer/glsl/generator_impl_builtin_texture_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 0,
+      "message": "??? (are these tests running?)",
+      "revId": "324c35000e1b10953cf4d1301f450c27da1f2898",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4c0c368_110fa926",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 1,
+      "message": "Is this just for simplicity that you wrap here instead of updating the `x` and `y` variables below?",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d40edf0_9f868363",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5735,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 1,
+      "message": "What is this change for?",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17decfb_9e27e3a1",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 1,
+      "message": "s/TypeConstructor/TypeInitializer",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55c80390_529666a4",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1011e1_677fe225",
+        "filename": "src/tint/reader/spirv/parser_type.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-25T13:11:26Z",
+      "side": 1,
+      "message": "Should this ICE for `struct`, `array`, etc. Otherwise, doesn\u0027t it return `nullptr`?",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
