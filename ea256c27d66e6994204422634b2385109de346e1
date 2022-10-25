@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3213e736_9164538f",
+        "filename": "src/tint/transform/vertex_pulling.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T17:07:42Z",
+      "side": 1,
+      "message": "Let\u0027s keep the documentation focused to what this transform needs. Saying that the transform requires a single entry point, and that you can use the `SingleEntryPoint` transform to ensure this is fine.\nThe interactions with the `Renamer` is detail that I don\u0027t think belongs here, is likely to bit-rot quickly, and is information that is likely to confuse a reader more than help.",
+      "range": {
+        "startLine": 139,
+        "startChar": 0,
+        "endLine": 143,
+        "endChar": 24
+      },
+      "revId": "ea256c27d66e6994204422634b2385109de346e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
