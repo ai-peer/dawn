@@ -86,6 +86,24 @@
       "parentUuid": "1687807b_2862a55d",
       "revId": "8f3eb1d4ed85506b995b6f262e4aed93e654c7ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "094b61b6_d17ebade",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2226,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-25T17:50:51Z",
+      "side": 1,
+      "message": "Good point (was thinking it would have shown up on the struct but that makes no sense). Ignore, bad suggestion, no cookie.",
+      "parentUuid": "b20be96e_ac50ae2f",
+      "revId": "8f3eb1d4ed85506b995b6f262e4aed93e654c7ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
