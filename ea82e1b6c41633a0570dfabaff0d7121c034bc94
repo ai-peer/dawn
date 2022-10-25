@@ -39,6 +39,47 @@
       },
       "revId": "ea82e1b6c41633a0570dfabaff0d7121c034bc94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97da20e3_68470bf9",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-25T15:47:16Z",
+      "side": 1,
+      "message": "Not really, or we\u0027re just going to tint::Program::printer \u003d .... to more and more targets.\n\nWhat about just defining a prototype in [1]? It\u0027s ugly but would work for debugging.",
+      "parentUuid": "9300159a_5d629311",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 50
+      },
+      "revId": "ea82e1b6c41633a0570dfabaff0d7121c034bc94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129eed33_7b718ce2",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-25T15:47:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ea82e1b6c41633a0570dfabaff0d7121c034bc94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
