@@ -64,6 +64,7 @@ using BindingMap = std::unordered_map<tint::sem::BindingPoint, tint::sem::Bindin
     X(tint::transform::MultiplanarExternalTexture::BindingsMap, externalTextureBindings)    \
     X(BindingMap, glBindings)                                                               \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
+    X(bool, disableSymbolRenaming)                                                          \
     X(LimitsForCompilationRequest, limits)                                                  \
     X(opengl::OpenGLVersion::Standard, glVersionStandard)                                   \
     X(uint32_t, glVersionMajor)                                                             \
@@ -185,6 +186,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
     req.externalTextureBindings = BuildExternalTextureTransformBindings(layout);
     req.glBindings = std::move(glBindings);
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
+    req.disableSymbolRenaming = GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming);
     req.limits = LimitsForCompilationRequest::Create(limits.v1);
     req.glVersionStandard = version.GetStandard();
     req.glVersionMajor = version.GetMajor();
@@ -197,6 +199,16 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
+            // Run before the renamer so that the entry point name matches `entryPointName` still.
+            transformManager.append(std::make_unique<tint::transform::SingleEntryPoint>());
+            transformInputs.Add<tint::transform::SingleEntryPoint::Config>(
+                std::string(r.entryPointName));
+
+            // Needs to run before all other transforms so that they can use builtin names safely.
+            if (!r.disableSymbolRenaming) {
+                transformManager.Add<tint::transform::Renamer>();
+            }
+
             if (!r.externalTextureBindings.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
@@ -204,8 +216,6 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             }
 
             if (r.substituteOverrideConfig) {
-                transformManager.Add<tint::transform::SingleEntryPoint>();
-                transformInputs.Add<tint::transform::SingleEntryPoint::Config>(r.entryPointName);
                 // This needs to run after SingleEntryPoint transform which removes unused overrides
                 // for current entry point.
                 transformManager.Add<tint::transform::SubstituteOverride>();
@@ -217,11 +227,25 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
             DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, r.inputProgram,
                                                    transformInputs, nullptr, nullptr));
 
+            // Get the entry point name after the renamer pass.
+            std::string remappedEntryPoint;
+            if (r.disableSymbolRenaming) {
+                remappedEntryPoint = r.entryPointName;
+            } else {
+                auto* data = transformOutputs.Get<tint::transform::Renamer::Data>();
+                ASSERT(data != nullptr);
+
+                auto it = data->remappings.find(r.entryPointName.data());
+                ASSERT(it != data->remappings.end());
+                remappedEntryPoint = it->second;
+            }
+            ASSERT(remappedEntryPoint != "");
+
             if (r.stage == SingleShaderStage::Compute) {
                 // Validate workgroup size after program runs transforms.
                 Extent3D _;
                 DAWN_TRY_ASSIGN(_, ValidateComputeStageWorkgroupSize(
-                                       program, r.entryPointName.c_str(), r.limits));
+                                       program, remappedEntryPoint.c_str(), r.limits));
             }
 
             tint::writer::glsl::Options tintOptions;
