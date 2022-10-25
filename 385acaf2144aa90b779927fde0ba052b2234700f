@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c71b391_4c1270e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-25T17:10:32Z",
+      "side": 1,
+      "message": "Looks like you also need to fix some fuzzer tests:\n\n```\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/wrap_unary_operator_test.cc:266: Failure\nExpected equality of these values:\n  expected_shader\n    Which is: \"fn main() {\\n  var a : vec4\u003cf32\u003e \u003d -(vec4\u003cf32\u003e(-1.0, -1.0, -1.0, -1.0));\\n}\\n\"\n  result.wgsl\n    Which is: \"fn main() {\\n  var a : vec4\u003cf32\u003e \u003d -(vec4\u003cf32\u003e(-(1.0), -(1.0), -(1.0), -(1.0)));\\n}\\n\"\nWith diff:\n@@ -1,3 +1,3 @@\n fn main() {\n-  var a : vec4\u003cf32\u003e \u003d -(vec4\u003cf32\u003e(-1.0, -1.0, -1.0, -1.0));\n+  var a : vec4\u003cf32\u003e \u003d -(vec4\u003cf32\u003e(-(1.0), -(1.0), -(1.0), -(1.0)));\n }\\n\n\n[  FAILED  ] WrapUnaryOperatorTest.Applicable6 (1 ms)\n[ RUN      ] WrapUnaryOperatorTest.Applicable7\n[       OK ] WrapUnaryOperatorTest.Applicable7 (1 ms)\n[ RUN      ] WrapUnaryOperatorTest.Applicable8\n/dawn/src/src/tint/fuzzers/tint_ast_fuzzer/mutations/wrap_unary_operator_test.cc:351: Failure\nExpected equality of these values:\n  expected_shader\n    Which is: \"fn main() {\\n  var a : vec4\u003ci32\u003e \u003d ~(vec4\u003ci32\u003e(1, 0, -1, 0));\\n}\\n\"\n  result.wgsl\n    Which is: \"fn main() {\\n  var a : vec4\u003ci32\u003e \u003d ~(vec4\u003ci32\u003e(1, 0, -(1), 0));\\n}\\n\"\nWith diff:\n@@ -1,3 +1,3 @@\n fn main() {\n-  var a : vec4\u003ci32\u003e \u003d ~(vec4\u003ci32\u003e(1, 0, -1, 0));\n+  var a : vec4\u003ci32\u003e \u003d ~(vec4\u003ci32\u003e(1, 0, -(1), 0));\n }\\n\n\n```",
+      "revId": "385acaf2144aa90b779927fde0ba052b2234700f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
