@@ -295,6 +295,30 @@
       },
       "revId": "b78100171dc33711882419c24a2f5979e8423c56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "512b9085_835a2c32",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-25T17:45:10Z",
+      "side": 1,
+      "message": "Discussed offline, and already agreed to keep as-is instead of wasting time fighting difficult to comprehend compiler errors. I figured out the problem, in the end, though, and may turn this into parameterized tests later.",
+      "parentUuid": "fb683e68_a837584d",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 320,
+        "endChar": 1
+      },
+      "revId": "b78100171dc33711882419c24a2f5979e8423c56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
