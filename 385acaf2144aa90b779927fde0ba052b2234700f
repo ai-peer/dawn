@@ -63,6 +63,30 @@
       },
       "revId": "385acaf2144aa90b779927fde0ba052b2234700f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ff8a1dc_72d1aa55",
+        "filename": "test/tint/bug/chromium/1372963.wgsl.expected.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:48:21Z",
+      "side": 1,
+      "message": "I\u0027m not suggesting always dropping the parentheses for a `-`, but dropping them if the unary\u0027s inner expression is a literal.",
+      "parentUuid": "9766901e_a07238c5",
+      "range": {
+        "startLine": 2,
+        "startChar": 15,
+        "endLine": 2,
+        "endChar": 19
+      },
+      "revId": "385acaf2144aa90b779927fde0ba052b2234700f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
