@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aceae3f_40df3c45",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:01:24Z",
+      "side": 1,
+      "message": "yes, I didn\u0027t want to go chasing bugs caused by introducing unsigned integers into the mix.",
+      "parentUuid": "f4c0c368_110fa926",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d40edf0_9f868363",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-25T13:11:26Z",
       "side": 1,
       "message": "What is this change for?",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f5f393_b5b7940e",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 5735,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:01:24Z",
+      "side": 1,
+      "message": "Added comment.",
+      "parentUuid": "5d40edf0_9f868363",
       "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5a5ef2d_5b0b9135",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b17decfb_9e27e3a1",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55c80390_529666a4",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aadc4770_1f108862",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 966,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:01:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55c80390_529666a4",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe1011e1_677fe225",
@@ -82,6 +154,24 @@
       "writtenOn": "2022-10-25T13:11:26Z",
       "side": 1,
       "message": "Should this ICE for `struct`, `array`, etc. Otherwise, doesn\u0027t it return `nullptr`?",
+      "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c46a77_804ca95f",
+        "filename": "src/tint/reader/spirv/parser_type.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-10-25T20:01:24Z",
+      "side": 1,
+      "message": "It does return `nullptr`, which matches the function\u0027s documented behaviour.",
+      "parentUuid": "fe1011e1_677fe225",
       "revId": "99339673aabdf83965a013d120d3464ebf8ef573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
