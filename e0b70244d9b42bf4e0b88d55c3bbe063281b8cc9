@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9b0f39_4661a29f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T15:58:34Z",
+      "side": 1,
+      "message": "LGTM, we didn\u0027t do this in the initial merge because Kokoro logs weren\u0027t publicly accessible but they are now!",
+      "revId": "e0b70244d9b42bf4e0b88d55c3bbe063281b8cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
