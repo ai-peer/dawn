@@ -16,6 +16,24 @@
       "message": "CQ is suggesting this is breaking some backends, so this may need some reworking.",
       "revId": "45f6f21d3f3015e2e35b5d0f96133d8b61bee15d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5847ac_5a005c43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T18:49:02Z",
+      "side": 1,
+      "message": "Yeah I tried to fix the GL backend without testing it locally. Otherwise the Intel Linux failure are timeouts. I don\u0027t know what to do about them yet.",
+      "parentUuid": "941b5105_dec42536",
+      "revId": "45f6f21d3f3015e2e35b5d0f96133d8b61bee15d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
