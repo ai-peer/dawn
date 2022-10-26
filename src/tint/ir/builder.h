@@ -18,6 +18,7 @@
 #include <string>
 
 #include "src/tint/ir/module.h"
+#include "src/tint/utils/result.h"
 
 // Forward Declarations
 namespace tint {
@@ -26,36 +27,18 @@ class Program;
 
 namespace tint::ir {
 
-/// The result produced when generating IR.
-struct Result {
-    /// Constructor
-    Result();
-    /// Copy constructor
-    Result(const Result&);
-    /// Destructor
-    ~Result();
-
-    /// True if generation was successful.
-    bool success = false;
-
-    /// The errors generated during generation, if any.
-    std::string error;
-
-    /// The generated ir.
-    Module ir;
-};
-
 /// Builds an ir::Module from a given Program
 class Builder {
   public:
     /// Builds an ir::Module from the given Program
     /// @param program the Program to use.
-    /// @returns the |Result| of generating the IR.
+    /// @returns the `utiils::Result` of generating the IR. The result will contain the `ir::Module`
+    /// on success, otherwise the `std::string` error.
     ///
     /// @note this assumes the program |IsValid|, and has had const-eval done so
     /// any abstract values have been calculated and converted into the relevant
     /// concrete types.
-    static Result Build(const Program* program);
+    static utils::Result<Module, std::string> Build(const Program* program);
 
   private:
     /// Constructor

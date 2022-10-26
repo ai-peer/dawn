@@ -33,6 +33,8 @@
 namespace tint::ir {
 namespace {
 
+using ResultType = utils::Result<Module>;
+
 class FlowStackScope {
   public:
     FlowStackScope(BuilderImpl* impl, FlowNode* node) : impl_(impl) {
@@ -112,7 +114,7 @@ FlowNode* BuilderImpl::FindEnclosingControl(ControlFlags flags) {
     return nullptr;
 }
 
-bool BuilderImpl::Build() {
+ResultType BuilderImpl::Build() {
     auto* sem = program_->Sem().Module();
 
     for (auto* decl : sem->DependencyOrderedDeclarations()) {
@@ -144,11 +146,11 @@ bool BuilderImpl::Build() {
                 return false;
             });
         if (!ok) {
-            return false;
+            return utils::Failure;
         }
     }
 
-    return true;
+    return ResultType{std::move(ir_)};
 }
 
 bool BuilderImpl::EmitFunction(const ast::Function* ast_func) {

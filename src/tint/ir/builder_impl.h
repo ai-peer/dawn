@@ -26,6 +26,7 @@
 #include "src/tint/ir/if_flow_node.h"
 #include "src/tint/ir/loop_flow_node.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/utils/result.h"
 
 // Forward Declarations
 namespace tint {
@@ -56,7 +57,7 @@ class BuilderImpl {
 
     /// Builds an ir::Module from the given Program
     /// @returns true on success, false otherwise
-    bool Build();
+    utils::Result<Module> Build();
 
     /// @returns the error
     std::string error() const { return diagnostics_.str(); }
