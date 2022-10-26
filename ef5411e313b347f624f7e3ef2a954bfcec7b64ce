@@ -50,6 +50,24 @@
       "message": "Hi Kai, could you take a look at this CL?",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "437d19ba_04e5c3b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-26T00:51:15Z",
+      "side": 1,
+      "message": "I am also not sure if I understand the SPEC correctly.\n\nIn SPEC (https://gpuweb.github.io/gpuweb/#dom-gpubuffer-getmappedrange), \"it is always valid to get mapped ranges of a GPUBuffer that is mappedAtCreation, even if it is invalid,\", so calling getMappedRange() on an error GPUBuffer with mappedAtCreation \u003d\u003d true should be valid as long as we can successfully create the ArrayBuffer with required size (mentioned in Step 4).\n\nThe behaviors of getMappedRange() on ErrorBuffer are different as ErrorBuffer has neither size nor mapped size, so we will meet 4 situations when calling getMappedRange() on an ErrorBuffer.\n\n1. size \u003d\u003d 0\n   Dawn should return a fake pointer (like 0xCAFED00D in current Dawn), and in \nBlink the allocation of ArrayBuffer should fail.\n   \n2. size \u003d\u003d WGPU_WHOLE_MAP_SIZE\n   Dawn should return a fake pointer or nullptr as ErrorBuffer has no size?\n\n3. size is a very large number that will cause OOM\n   Dawn should return a nullptr as Dawn is not able to allocate so much memory.\n\n4. size is a relatively small number that won\u0027t cause OOM\n   Dawn should allocate a piece of CPU memory and return the pointer that points to that piece of memory.",
+      "parentUuid": "21f18b0a_11970022",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
