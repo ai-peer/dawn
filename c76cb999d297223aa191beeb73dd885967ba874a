@@ -16,6 +16,23 @@
       "message": "PTAL again!",
       "revId": "c76cb999d297223aa191beeb73dd885967ba874a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050482e6_ca5977dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-26T16:08:33Z",
+      "side": 1,
+      "message": "+2, but let\u0027s wait for Kokoro to +1 😊",
+      "revId": "c76cb999d297223aa191beeb73dd885967ba874a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
