@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3028e523_a3b5477a",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T17:34:24Z",
+      "side": 1,
+      "message": "Added a couple tests but I needed to fix Metal\u0027s behavior too (wasn\u0027t too big a change) PTAL again.",
+      "parentUuid": "65af2ff5_1c05c9e9",
+      "revId": "52ace430924fc87b5f76e01b17a66802e9509825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a489d841_2accafa2",
