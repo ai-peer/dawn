@@ -1,0 +1,25 @@
+cbuffer cbuffer_u : register(b0, space0) {
+  uint4 u[1];
+};
+
+matrix<float16_t, 4, 2> tint_symbol(uint4 buffer[1], uint offset) {
+  const uint scalar_offset_bytes = ((offset + 0u));
+  const uint scalar_offset_index = scalar_offset_bytes / 4;
+  uint ubo_load = buffer[scalar_offset_index / 4][scalar_offset_index % 4];
+  const uint scalar_offset_bytes_1 = ((offset + 4u));
+  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
+  uint ubo_load_1 = buffer[scalar_offset_index_1 / 4][scalar_offset_index_1 % 4];
+  const uint scalar_offset_bytes_2 = ((offset + 8u));
+  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
+  uint ubo_load_2 = buffer[scalar_offset_index_2 / 4][scalar_offset_index_2 % 4];
+  const uint scalar_offset_bytes_3 = ((offset + 12u));
+  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
+  uint ubo_load_3 = buffer[scalar_offset_index_3 / 4][scalar_offset_index_3 % 4];
+  return matrix<float16_t, 4, 2>(vector<float16_t, 2>(float16_t(f16tof32(ubo_load & 0xFFFF)), float16_t(f16tof32(ubo_load >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_1 & 0xFFFF)), float16_t(f16tof32(ubo_load_1 >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_2 & 0xFFFF)), float16_t(f16tof32(ubo_load_2 >> 16))), vector<float16_t, 2>(float16_t(f16tof32(ubo_load_3 & 0xFFFF)), float16_t(f16tof32(ubo_load_3 >> 16))));
+}
+
+[numthreads(1, 1, 1)]
+void main() {
+  const matrix<float16_t, 4, 2> x = tint_symbol(u, 0u);
+  return;
+}
