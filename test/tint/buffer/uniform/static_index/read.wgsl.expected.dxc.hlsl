@@ -1,63 +1,47 @@
-struct Inner {
-  int x;
-};
+SKIP: FAILED
 
-cbuffer cbuffer_s : register(b0, space0) {
-  uint4 s[13];
-};
+uniform/static_index/read.wgsl:30:37 error: uniform storage requires that array elements be aligned to 16 bytes, but array element alignment is currently 8. Consider using the @size attribute on the last struct member.
+    @align(16) array_struct_inner : array<Inner, 4>,
+                                    ^^^^^^^^^^^^^^^
 
-float2x3 tint_symbol_7(uint4 buffer[13], uint offset) {
-  const uint scalar_offset_bytes = ((offset + 0u));
-  const uint scalar_offset_index = scalar_offset_bytes / 4;
-  const uint scalar_offset_bytes_1 = ((offset + 16u));
-  const uint scalar_offset_index_1 = scalar_offset_bytes_1 / 4;
-  return float2x3(asfloat(buffer[scalar_offset_index / 4].xyz), asfloat(buffer[scalar_offset_index_1 / 4].xyz));
-}
+uniform/static_index/read.wgsl:6:1 note: see layout of struct:
+/*             align(16) size(592) */ struct S {
+/* offset(  0) align( 4) size(  4) */   scalar_f32 : f32;
+/* offset(  4) align( 4) size(  4) */   scalar_i32 : i32;
+/* offset(  8) align( 4) size(  4) */   scalar_u32 : u32;
+/* offset( 12) align( 1) size(  4) */   // -- implicit field alignment padding --;
+/* offset( 16) align( 8) size(  8) */   vec2_f32 : vec2<f32>;
+/* offset( 24) align( 8) size(  8) */   vec2_i32 : vec2<i32>;
+/* offset( 32) align( 8) size(  8) */   vec2_u32 : vec2<u32>;
+/* offset( 40) align( 1) size(  8) */   // -- implicit field alignment padding --;
+/* offset( 48) align(16) size( 12) */   vec3_f32 : vec3<f32>;
+/* offset( 60) align( 1) size(  4) */   // -- implicit field alignment padding --;
+/* offset( 64) align(16) size( 12) */   vec3_i32 : vec3<i32>;
+/* offset( 76) align( 1) size(  4) */   // -- implicit field alignment padding --;
+/* offset( 80) align(16) size( 12) */   vec3_u32 : vec3<u32>;
+/* offset( 92) align( 1) size(  4) */   // -- implicit field alignment padding --;
+/* offset( 96) align(16) size( 16) */   vec4_f32 : vec4<f32>;
+/* offset(112) align(16) size( 16) */   vec4_i32 : vec4<i32>;
+/* offset(128) align(16) size( 16) */   vec4_u32 : vec4<u32>;
+/* offset(144) align( 8) size( 16) */   mat2x2_f32 : mat2x2<f32>;
+/* offset(160) align(16) size( 32) */   mat2x3_f32 : mat2x3<f32>;
+/* offset(192) align(16) size( 32) */   mat2x4_f32 : mat2x4<f32>;
+/* offset(224) align( 8) size( 24) */   mat3x2_f32 : mat3x2<f32>;
+/* offset(248) align( 1) size(  8) */   // -- implicit field alignment padding --;
+/* offset(256) align(16) size( 48) */   mat3x3_f32 : mat3x3<f32>;
+/* offset(304) align(16) size( 48) */   mat3x4_f32 : mat3x4<f32>;
+/* offset(352) align( 8) size( 32) */   mat4x2_f32 : mat4x2<f32>;
+/* offset(384) align(16) size( 64) */   mat4x3_f32 : mat4x3<f32>;
+/* offset(448) align(16) size( 64) */   mat4x4_f32 : mat4x4<f32>;
+/* offset(512) align(16) size( 32) */   arr2_vec3_f32 : array<vec3<f32>, 2>;
+/* offset(544) align(16) size(  8) */   struct_inner : Inner;
+/* offset(552) align( 1) size(  8) */   // -- implicit field alignment padding --;
+/* offset(560) align(16) size( 32) */   array_struct_inner : array<Inner, 4>;
+/*                                 */ };
+struct S {
+^^^^^^
 
-float3x2 tint_symbol_8(uint4 buffer[13], uint offset) {
-  const uint scalar_offset_bytes_2 = ((offset + 0u));
-  const uint scalar_offset_index_2 = scalar_offset_bytes_2 / 4;
-  uint4 ubo_load = buffer[scalar_offset_index_2 / 4];
-  const uint scalar_offset_bytes_3 = ((offset + 8u));
-  const uint scalar_offset_index_3 = scalar_offset_bytes_3 / 4;
-  uint4 ubo_load_1 = buffer[scalar_offset_index_3 / 4];
-  const uint scalar_offset_bytes_4 = ((offset + 16u));
-  const uint scalar_offset_index_4 = scalar_offset_bytes_4 / 4;
-  uint4 ubo_load_2 = buffer[scalar_offset_index_4 / 4];
-  return float3x2(asfloat(((scalar_offset_index_2 & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_index_3 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_index_4 & 2) ? ubo_load_2.zw : ubo_load_2.xy)));
-}
+uniform/static_index/read.wgsl:33:36 note: see declaration of variable
+@binding(0) @group(0) var<uniform> ub : S;
+                                   ^^
 
-Inner tint_symbol_10(uint4 buffer[13], uint offset) {
-  const uint scalar_offset_bytes_5 = ((offset + 0u));
-  const uint scalar_offset_index_5 = scalar_offset_bytes_5 / 4;
-  const Inner tint_symbol_12 = {asint(buffer[scalar_offset_index_5 / 4][scalar_offset_index_5 % 4])};
-  return tint_symbol_12;
-}
-
-typedef Inner tint_symbol_11_ret[4];
-tint_symbol_11_ret tint_symbol_11(uint4 buffer[13], uint offset) {
-  Inner arr[4] = (Inner[4])0;
-  {
-    for(uint i_1 = 0u; (i_1 < 4u); i_1 = (i_1 + 1u)) {
-      arr[i_1] = tint_symbol_10(buffer, (offset + (i_1 * 16u)));
-    }
-  }
-  return arr;
-}
-
-[numthreads(1, 1, 1)]
-void main() {
-  const int3 a = asint(s[0].xyz);
-  const int b = asint(s[0].w);
-  const uint3 c = s[1].xyz;
-  const uint d = s[1].w;
-  const float3 e = asfloat(s[2].xyz);
-  const float f = asfloat(s[2].w);
-  const int2 g = asint(s[3].xy);
-  const int2 h = asint(s[3].zw);
-  const float2x3 i = tint_symbol_7(s, 64u);
-  const float3x2 j = tint_symbol_8(s, 96u);
-  const Inner k = tint_symbol_10(s, 128u);
-  const Inner l[4] = tint_symbol_11(s, 144u);
-  return;
-}
