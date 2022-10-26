@@ -3238,13 +3238,13 @@ bool Builder::GenerateAtomicBuiltin(const sem::Call* call,
                 return false;
             }
 
-            // values_equal := original_value == value
+            // values_equal := original_value == comparator
             auto values_equal = result_op();
             if (!push_function_inst(spv::Op::OpIEqual, {
                                                            Operand(bool_type),
                                                            values_equal,
                                                            original_value,
-                                                           value,
+                                                           Operand(comparator),
                                                        })) {
                 return false;
             }
