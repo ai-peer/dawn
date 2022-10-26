@@ -39,6 +39,30 @@
       },
       "revId": "00dfb0d8a208f49b79c311d5be23f354d5746b7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "082fb1c8_bf1fec86",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:29:31Z",
+      "side": 1,
+      "message": "Because I wanted to return an actual error string on failure. So, if the builder fails you can get the string in the result. In the BuilderImpl, I didn\u0027t want to have to call error() in every place it could fail (maybe there will be only once place in which case this is moot, but this seemed like a simpler design to iterate on).\n\nThe Builder gives a nice place to convert the diagnostic into an error string. So, I hid the difference in the Builder method.",
+      "parentUuid": "2f04e4ca_13794b8d",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 54
+      },
+      "revId": "00dfb0d8a208f49b79c311d5be23f354d5746b7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
