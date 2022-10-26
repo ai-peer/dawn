@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "00dfb0d8a208f49b79c311d5be23f354d5746b7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f04e4ca_13794b8d",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-26T20:08:37Z",
+      "side": 1,
+      "message": "Why\u0027s this one different from `BuilderImpl::Result`?",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 54
+      },
+      "revId": "00dfb0d8a208f49b79c311d5be23f354d5746b7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
