@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3b23374_4297c446",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T12:02:14Z",
+      "side": 1,
+      "message": "Ok, so there are \"Scheduled\" \"Pending\" and \"Executing\" commands, Scheduled being Pending or Executing. So DeviceBase::HasScheduledCommands would call backend::Device::HasPendingCommands (since the frontend knows if there\u0027s any executing commands). WDYT of using the terminology like this?\n\nAustin, what do you think of that terminology? We could write it down in a comment and eventually make sure the rest of dawn::native uses it consistently.",
+      "parentUuid": "b96e967d_c85a8865",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84a69c7f_e83ffdbe",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 32
@@ -224,6 +242,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "3d8e29e3_ad720f68",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9918d0f_e82a301b",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T12:02:14Z",
+      "side": 1,
+      "message": "I\u0027m still not sure we explain why the class is separate and has its own serial.",
+      "parentUuid": "7dc9d33a_6ff768dc",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
