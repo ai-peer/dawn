@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b96e967d_c85a8865",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "\"scheduled\" sounds good. `HasScheduledCommands` would mean all scheduled commands to be submitted or executed.",
+      "parentUuid": "6e54dfeb_67e2b355",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84a69c7f_e83ffdbe",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 32
@@ -31,6 +49,24 @@
       "writtenOn": "2022-10-24T16:55:04Z",
       "side": 1,
       "message": "also nit: `return !HasPendingCommands();`",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "717d7e3a_cc692282",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84a69c7f_e83ffdbe",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f699426_18a05546",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1920,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Yes, split out!",
+      "parentUuid": "9dabc95f_dc54c352",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3b16f17_b2954b32",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20573bd2_f4b5c83f",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3b16f17_b2954b32",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ede07fa7_47807e08",
@@ -82,6 +154,24 @@
       "writtenOn": "2022-10-24T16:55:04Z",
       "side": 1,
       "message": "nit: this is unused.",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3714095_7f7c2225",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ede07fa7_47807e08",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dc9d33a_6ff768dc",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d8e29e3_ad720f68",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eada91ac_fc6821c2",
         "filename": "src/dawn/native/Queue.h",
         "patchSetId": 32
@@ -133,6 +241,24 @@
       "writtenOn": "2022-10-24T16:55:04Z",
       "side": 1,
       "message": "nit: We could have a sentinel value that we assert isn\u0027t still set in [1]\n\nAlso it seems it is only used for the trace events, so I wonder if the trace event could be handled from the outside instead so we don\u0027t have to store the serial (the code calling the callbacks would fire the trace event instead of the CallbackTask inside itself.)",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab690e64_ea2952c2",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Added max serial as the sentinel value.\n\nNot sure how to get rid of the `mSerial` here. No matter where and when you fire the trace event, the actual finished serial value can only be known at `QueueBase::Tick` currently.",
+      "parentUuid": "eada91ac_fc6821c2",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8d2938cc_1db80b7f",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "okay, split them all out of this CL.",
+      "parentUuid": "7fb03200_414e8978",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e051284_a256fafc",
         "filename": "src/dawn/native/metal/CommandRecordingContext.h",
         "patchSetId": 32
@@ -167,6 +311,24 @@
       "writtenOn": "2022-10-24T16:55:04Z",
       "side": 1,
       "message": "ditto as D3D12?",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0634f45a_94633413",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e051284_a256fafc",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -188,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ea0b9f_711db94e",
+        "filename": "src/dawn/native/opengl/DeviceGL.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f95bc575_33be1e28",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ddea64a_5504c68e",
@@ -201,6 +381,24 @@
       "writtenOn": "2022-10-24T16:55:04Z",
       "side": 1,
       "message": "ditto, same as D3D12",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc12c509_866f8bff",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddea64a_5504c68e",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -198,6 +198,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1aa38179_29136adb",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1911,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-26T05:19:23Z",
+      "side": 1,
+      "message": "Would `HasScheduledCommandsImpl` sound better?",
+      "parentUuid": "ab8285d1_ce77fbcb",
+      "range": {
+        "startLine": 1911,
+        "startChar": 11,
+        "endLine": 1911,
+        "endChar": 33
+      },
+      "revId": "e344fb5a42897050bb6ab8d2a5b2213eee0cb8e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fe17b5a_855de030",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 25
