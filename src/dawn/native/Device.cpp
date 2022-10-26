@@ -1894,6 +1894,8 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     return 4u;
 }
 
+void DeviceBase::ForceEventualFlushOfCommands() {}
+
 bool DeviceBase::HasScheduledCommands() const {
     return mLastSubmittedSerial > mCompletedSerial || HasScheduledCommandsImpl();
 }
@@ -1916,6 +1918,30 @@ void DeviceBase::AssumeCommandsCompleteForTesting() {
 // use 'GetLastSubmittedCommandSerial', which must be fired eventually.
 ExecutionSerial DeviceBase::GetSubmittedWorkDoneSerial() const {
     return HasScheduledCommandsImpl() ? GetPendingCommandSerial() : GetLastSubmittedCommandSerial();
+}
+
+MaybeError DeviceBase::CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               uint64_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint64_t destinationOffset,
+                                               uint64_t size) {
+    DAWN_TRY(
+        CopyFromStagingToBufferImpl(source, sourceOffset, destination, destinationOffset, size));
+    if (GetDynamicUploader()->ShouldFlush()) {
+        ForceEventualFlushOfCommands();
+    }
+    return {};
+}
+
+MaybeError DeviceBase::CopyFromStagingToTexture(const StagingBufferBase* source,
+                                                const TextureDataLayout& src,
+                                                TextureCopy* dst,
+                                                const Extent3D& copySizePixels) {
+    DAWN_TRY(CopyFromStagingToTextureImpl(source, src, dst, copySizePixels));
+    if (GetDynamicUploader()->ShouldFlush()) {
+        ForceEventualFlushOfCommands();
+    }
+    return {};
 }
 
 }  // namespace dawn::native
