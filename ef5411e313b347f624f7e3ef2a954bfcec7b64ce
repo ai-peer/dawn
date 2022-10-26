@@ -68,6 +68,24 @@
       "parentUuid": "21f18b0a_11970022",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2864bb11_838a4869",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-26T11:39:52Z",
+      "side": 1,
+      "message": "First the behavior of dawn::native doesn\u0027t matter much for fixing the WebGPU behavior because all of the processing for that step happens synchronously in Blink, so there\u0027s only Blink code and dawn::wire::client code. The dawn::wire::client can\u0027t know if the buffer creation errored so it should try to keep things working as if the buffer was valid. However I don\u0027t think it is reasonable for the spec to ask that getBufferMappedRange(4) on a giant buffer should work, as we strongly want to allocate all the memory during the buffer creation (or the mapAsync call). So in 4) it should be valid to return nullptr (the spec doesn\u0027t exactly allow it, but IMHO should be changed).",
+      "parentUuid": "437d19ba_04e5c3b9",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
