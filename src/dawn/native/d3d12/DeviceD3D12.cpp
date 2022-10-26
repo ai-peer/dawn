@@ -674,8 +674,13 @@ void Device::InitTogglesFromDriver() {
     // Currently this workaround is only needed on Intel Gen9, Gen9.5 and Gen11 GPUs.
     // See http://crbug.com/1161355 for more information.
     if (gpu_info::IsIntelGen9(vendorId, deviceId) || gpu_info::IsIntelGen11(vendorId, deviceId)) {
-        SetToggle(Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
-                  true);
+        const gpu_info::D3DDriverVersion version = {30, 0, 101, 2114};
+        if (gpu_info::CompareD3DDriverVersion(vendorId, ToBackend(GetAdapter())->GetDriverVersion(),
+                                              version) < 0) {
+            SetToggle(
+                Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
+                true);
+        }
     }
 
     // Currently this workaround is only needed on Intel Gen9, Gen9.5 and Gen12 GPUs.
