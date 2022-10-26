@@ -16,6 +16,24 @@
       "message": "Not sure why MSVC is unhappy though.",
       "revId": "2f13e15dd751d25204b48470639a1010108f2268",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8593b8_2116aeb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T13:42:12Z",
+      "side": 1,
+      "message": "This also happens with clang as I\u0027m getting:\n\n```\ndawn/src/dawn/native/vulkan/external_memory/MemoryService.cpp: In member function ‘bool dawn::native::vulkan::external_memory::Service::RequiresDedicatedAllocation(const dawn::native::vulkan::ExternalImageDescriptorVk*, dawn::native::vulkan::VkImage)’:\ndawn/src/dawn/native/vulkan/external_memory/MemoryService.cpp:55:1: warning: control reaches end of non-void function [-Wreturn-type]\n   55 | }\n      | ^\n```\n\non both Linux and OSX.",
+      "parentUuid": "3c831329_02b8dd60",
+      "revId": "2f13e15dd751d25204b48470639a1010108f2268",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
