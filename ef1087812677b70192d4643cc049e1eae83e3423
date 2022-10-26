@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4e457d9b_66e74d72",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-26T08:18:14Z",
+      "side": 1,
+      "message": "FYI: `Fixed:` will automatically close the bug once this lands.",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 3
+      },
+      "revId": "ef1087812677b70192d4643cc049e1eae83e3423",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2190993a_ce3fcc94",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -14,6 +37,23 @@
       "writtenOn": "2022-10-26T07:16:40Z",
       "side": 1,
       "message": "Please take a look, thanks",
+      "revId": "ef1087812677b70192d4643cc049e1eae83e3423",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbdab614_16532a36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-26T08:18:14Z",
+      "side": 1,
+      "message": "Thank you for taking this on!",
       "revId": "ef1087812677b70192d4643cc049e1eae83e3423",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
