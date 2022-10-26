@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "386824d3_efa3d1f8",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "nit: s/member-\u003eDeclaration()/ast_decl/ ?",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d0d8908_20caa72d",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "What happens if there are other decorations on the member already? Like, if I did `@size(42)` that seems like it would get removed here?",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0cf6969_a34ecee7",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "Would it be clearer to say `Swizzle` here as it\u0027s the actual child class?",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cb4198e_42c57734",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "Can I negate a packed vector? `-foo.bar` ? Or does that get picked up by one of the other entries",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca9a0f97_eccdf0a4",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "Does this not need to check the vector size is 3?",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d021d2d_f5701f50",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T20:24:33Z",
+      "side": 1,
+      "message": "Maybe 2 more test, one with multiple vec3\u0027s that get packed to show it does multiple of them, and one with a vec2 and a vec4 to show they don\u0027t get changed?",
+      "revId": "0e540878b7dffe7e8715af9804d117ac423cf6c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
