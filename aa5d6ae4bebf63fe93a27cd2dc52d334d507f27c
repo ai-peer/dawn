@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56d6226f_99b4bad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-26T17:55:14Z",
+      "side": 1,
+      "message": "PTAL. In the interest of landing this in smaller pieces, putting this up for review. The IR isn\u0027t hooked into anything, and I removed the GN build, so it shouldn\u0027t effect Chrome at this point. If we determine this is the wrong direction we can rip this back out again.",
+      "revId": "aa5d6ae4bebf63fe93a27cd2dc52d334d507f27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
