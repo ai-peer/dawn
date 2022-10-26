@@ -19,19 +19,21 @@
 
 namespace tint::ir {
 
+using ResultType = utils::Result<Module, std::string>;
+
 // static
-Result Builder::Build(const Program* program) {
-    Result result;
+ResultType Builder::Build(const Program* program) {
     if (!program->IsValid()) {
-        result.error = "input program is not valid";
-        return result;
+        return ResultType{std::string("input program is not valid")};
     }
 
     BuilderImpl b(program);
-    result.success = b.Build();
-    result.error = b.error();
-    result.ir = b.ir();
-    return result;
+    auto r = b.Build();
+    if (!r) {
+        return b.error();
+    }
+
+    return ResultType{r.Move()};
 }
 
 }  // namespace tint::ir
