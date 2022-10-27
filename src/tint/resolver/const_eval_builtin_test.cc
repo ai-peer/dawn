@@ -146,6 +146,32 @@ INSTANTIATE_TEST_SUITE_P(  //
                          C({1.0_a, 0_a}, kPiOver2<AFloat>),
                      })));
 
+static std::vector<Case> AllCases() {
+    return {
+        C({Vec(true, true)}, Val(true)),
+        C({Vec(true, false)}, Val(false)),
+        C({Vec(false, true)}, Val(false)),
+        C({Vec(false, false)}, Val(false)),
+
+        C({Vec(true, true, true)}, Val(true)),
+        C({Vec(false, true, true)}, Val(false)),
+        C({Vec(true, false, true)}, Val(false)),
+        C({Vec(true, true, false)}, Val(false)),
+        C({Vec(false, false, false)}, Val(false)),
+
+        C({Vec(true, true, true, true)}, Val(true)),
+        C({Vec(false, true, true, true)}, Val(false)),
+        C({Vec(true, false, true, true)}, Val(false)),
+        C({Vec(true, true, false, true)}, Val(false)),
+        C({Vec(true, true, true, false)}, Val(false)),
+        C({Vec(false, false, false, false)}, Val(false)),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    All,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kAll), testing::ValuesIn(AllCases())));
+
 template <typename T, bool finite_only>
 std::vector<Case> Atan2Cases() {
     std::vector<Case> cases = {
