@@ -415,10 +415,10 @@ fn all<N: num>(vec<N, bool>) -> bool
 fn any(bool) -> bool
 fn any<N: num>(vec<N, bool>) -> bool
 fn arrayLength<T, A: access>(ptr<storage, array<T>, A>) -> u32
-fn asin<T: f32_f16>(T) -> T
-fn asin<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
-fn asinh<T: f32_f16>(T) -> T
-fn asinh<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
+@const fn asin<T: fa_f32_f16>(T) -> T
+@const fn asin<N: num, T: fa_f32_f16>(vec<N, T>) -> vec<N, T>
+@const fn asinh<T: fa_f32_f16>(T) -> T
+@const fn asinh<N: num, T: fa_f32_f16>(vec<N, T>) -> vec<N, T>
 @const fn atan<T: fa_f32_f16>(T) -> T
 @const fn atan<N: num, T: fa_f32_f16>(vec<N, T>) -> vec<N, T>
 @const fn atan2<T: fa_f32_f16>(T, T) -> T
@@ -522,13 +522,13 @@ fn reverseBits<T: iu32>(T) -> T
 fn reverseBits<N: num, T: iu32>(vec<N, T>) -> vec<N, T>
 fn round<T: f32_f16>(T) -> T
 fn round<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
-fn saturate<T: f32_f16>(T) -> T
-fn saturate<T: f32_f16, N: num>(vec<N, T>) -> vec<N, T>
+@const fn saturate<T: fa_f32_f16>(@test_value(2) T) -> T
+@const fn saturate<T: fa_f32_f16, N: num>(@test_value(2) vec<N, T>) -> vec<N, T>
 @const("select_bool") fn select<T: scalar>(T, T, bool) -> T
 @const("select_bool") fn select<T: scalar, N: num>(vec<N, T>, vec<N, T>, bool) -> vec<N, T>
 @const("select_boolvec") fn select<N: num, T: scalar>(vec<N, T>, vec<N, T>, vec<N, bool>) -> vec<N, T>
-fn sign<T: f32_f16>(T) -> T
-fn sign<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
+@const fn sign<T: fa_f32_f16>(T) -> T
+@const fn sign<N: num, T: fa_f32_f16>(vec<N, T>) -> vec<N, T>
 fn sin<T: f32_f16>(T) -> T
 fn sin<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
 fn sinh<T: f32_f16>(T) -> T
@@ -537,8 +537,8 @@ fn smoothstep<T: f32_f16>(T, T, T) -> T
 fn smoothstep<N: num, T: f32_f16>(vec<N, T>, vec<N, T>, vec<N, T>) -> vec<N, T>
 fn sqrt<T: f32_f16>(T) -> T
 fn sqrt<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>
-fn step<T: f32_f16>(T, T) -> T
-fn step<N: num, T: f32_f16>(vec<N, T>, vec<N, T>) -> vec<N, T>
+@const fn step<T: fa_f32_f16>(T, T) -> T
+@const fn step<N: num, T: fa_f32_f16>(vec<N, T>, vec<N, T>) -> vec<N, T>
 @stage("compute") fn storageBarrier()
 fn tan<T: f32_f16>(T) -> T
 fn tan<N: num, T: f32_f16>(vec<N, T>) -> vec<N, T>

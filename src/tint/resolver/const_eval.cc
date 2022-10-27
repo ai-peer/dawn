@@ -1526,6 +1526,40 @@ ConstEval::Result ConstEval::OpShiftLeft(const sem::Type* ty,
     return r;
 }
 
+ConstEval::Result ConstEval::asin(const sem::Type* ty,
+                                  utils::VectorRef<const sem::Constant*> args,
+                                  const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) -> ImplResult {
+            using NumberT = decltype(i);
+            if (i.value < NumberT(-1.0) || i.value > NumberT(1.0)) {
+                AddError("asin must be called with a value in the range [-1, 1]", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), decltype(i)(std::asin(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
+ConstEval::Result ConstEval::asinh(const sem::Type* ty,
+                                   utils::VectorRef<const sem::Constant*> args,
+                                   const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) {
+            return CreateElement(builder, c0->Type(), decltype(i)(std::asinh(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+
+    auto r = TransformElements(builder, ty, transform, args[0]);
+    if (builder.Diagnostics().contains_errors()) {
+        return utils::Failure;
+    }
+    return r;
+}
+
 ConstEval::Result ConstEval::atan(const sem::Type* ty,
                                   utils::VectorRef<const sem::Constant*> args,
                                   const Source&) {
@@ -1582,6 +1616,20 @@ ConstEval::Result ConstEval::clamp(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0], args[1], args[2]);
 }
 
+ConstEval::Result ConstEval::saturate(const sem::Type* ty,
+                                      utils::VectorRef<const sem::Constant*> args,
+                                      const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto e) {
+            using NumberT = decltype(e);
+            return CreateElement(builder, c0->Type(),
+                                 NumberT(std::min(std::max(e, NumberT(0.0)), NumberT(1.0))));
+        };
+        return Dispatch_fia_fiu32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
 ConstEval::Result ConstEval::select_bool(const sem::Type* ty,
                                          utils::VectorRef<const sem::Constant*> args,
                                          const Source&) {
@@ -1608,6 +1656,42 @@ ConstEval::Result ConstEval::select_boolvec(const sem::Type* ty,
         return Dispatch_fia_fiu32_f16_bool(create, c0, c1);
     };
 
+    return TransformElements(builder, ty, transform, args[0], args[1]);
+}
+
+ConstEval::Result ConstEval::sign(const sem::Type* ty,
+                                  utils::VectorRef<const sem::Constant*> args,
+                                  const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto e) -> ImplResult {
+            using NumberT = decltype(e);
+            NumberT result;
+            NumberT zero(0.0);
+            if (e.value < zero) {
+                result = NumberT(-1.0);
+            } else if (e.value > zero) {
+                result = NumberT(1.0);
+            } else {
+                result = zero;
+            }
+            return CreateElement(builder, c0->Type(), result);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
+ConstEval::Result ConstEval::step(const sem::Type* ty,
+                                  utils::VectorRef<const sem::Constant*> args,
+                                  const Source&) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto edge, auto x) -> ImplResult {
+            using NumberT = decltype(edge);
+            NumberT result = x.value < edge.value ? NumberT(0.0) : NumberT(1.0);
+            return CreateElement(builder, c0->Type(), result);
+        };
+        return Dispatch_fia_fiu32_f16(create, c0, c1);
+    };
     return TransformElements(builder, ty, transform, args[0], args[1]);
 }
 
