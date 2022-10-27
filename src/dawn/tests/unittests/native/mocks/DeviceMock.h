@@ -39,11 +39,11 @@ class DeviceMock : public DeviceBase {
                 (size_t),
                 (override));
     MOCK_METHOD(MaybeError,
-                CopyFromStagingToBuffer,
+                CopyFromStagingToBufferImpl,
                 (StagingBufferBase*, uint64_t, BufferBase*, uint64_t, uint64_t),
                 (override));
     MOCK_METHOD(MaybeError,
-                CopyFromStagingToTexture,
+                CopyFromStagingToTextureImpl,
                 (const StagingBufferBase*, const TextureDataLayout&, TextureCopy*, const Extent3D&),
                 (override));
 
