@@ -33,6 +33,24 @@
       "message": "The tests pass, but maybe this should be DeepestElementOf ty?",
       "revId": "41a8e2e4975b58ee46b3b634436ad645a0c2e563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ae82d6_41bf9868",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1532,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T21:56:02Z",
+      "side": 1,
+      "message": "`ty` is the return type of the intrinsic being called, and `all()` always returns a `bool`, so I think this is correct.",
+      "parentUuid": "421df608_97254744",
+      "revId": "41a8e2e4975b58ee46b3b634436ad645a0c2e563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
