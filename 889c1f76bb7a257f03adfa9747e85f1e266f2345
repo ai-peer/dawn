@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa8b616_997476fc",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98428005_03743ab1",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 12
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39c349de_b2ae5ef3",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-27T11:03:16Z",
       "side": 1,
       "message": "nit: This looks like a candidate for a helper method to split this monolithic `Switch` statement up a bit and improve readability.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfced845_3ccf3d11",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "I meant this little section of code, but what you\u0027ve done is also good.",
+      "parentUuid": "39c349de_b2ae5ef3",
       "range": {
         "startLine": 97,
         "startChar": 0,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a3bc2f_fca5b00c",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "I suggested a boolean, as you only ever compare zero or not zero.",
+      "parentUuid": "ef1abf0f_bd4f4602",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 36
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "060e0fdc_f1af7b72",
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d97643d3_375a0400",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "060e0fdc_f1af7b72",
+      "range": {
+        "startLine": 190,
+        "startChar": 53,
+        "endLine": 190,
+        "endChar": 54
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64195d2_46f763c6",
@@ -140,6 +236,30 @@
       "writtenOn": "2022-10-27T11:03:16Z",
       "side": 1,
       "message": "nit: `std::move`",
+      "range": {
+        "startLine": 201,
+        "startChar": 39,
+        "endLine": 201,
+        "endChar": 44
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec10b11e_8f72a2fa",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64195d2_46f763c6",
       "range": {
         "startLine": 201,
         "startChar": 39,
