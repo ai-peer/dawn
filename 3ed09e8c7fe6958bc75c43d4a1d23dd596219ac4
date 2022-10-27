@@ -1,0 +1,383 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84928a7e_704ec479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "Great start!",
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c55379f_22f11a34",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "I read this as meaning it modifies the original AST. How about:\n\n`Transforming from AST to IR and back to AST is a lossy operation`.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564233c7_e5b7f5de",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "I think your example here is showing two distinct things:\n1. Shadowed variables are renamed\n2. Non-control flow blocks `{ ... }` are flattened.\n\nMight be good to separate these out in the example. If you just want to demonstrate 1. here, I suggest making this `if true {`",
+      "range": {
+        "startLine": 80,
+        "startChar": 2,
+        "endLine": 80,
+        "endChar": 3
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc5bbc0_61a57c77",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "Not sure what value this sentence gives.",
+      "range": {
+        "startLine": 108,
+        "startChar": 8,
+        "endLine": 108,
+        "endChar": 57
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3dcc5d_942d3922",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "And statement list?",
+      "range": {
+        "startLine": 132,
+        "startChar": 59,
+        "endLine": 133,
+        "endChar": 5
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3521f98e_a849a8b0",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "Seems accident prone.\nWhy not have another `Control Flow` type for this that doesn\u0027t have statements?",
+      "range": {
+        "startLine": 145,
+        "startChar": 55,
+        "endLine": 146,
+        "endChar": 24
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6acced1_481d1664",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "So, we\u0027re not attempting to preserve structured control flow? I thought that might be something we\u0027d want.",
+      "range": {
+        "startLine": 155,
+        "startChar": 0,
+        "endLine": 157,
+        "endChar": 40
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c030cb5f_a5652f3d",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "ee",
+      "range": {
+        "startLine": 286,
+        "startChar": 19,
+        "endLine": 286,
+        "endChar": 20
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d817ca4_208a3694",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "I think this should be metadata. My mental model is that you can rip out all the metadata, and you\u0027ll get something that will operate identically, but might look different.",
+      "range": {
+        "startLine": 297,
+        "startChar": 27,
+        "endLine": 297,
+        "endChar": 62
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e06daf7_2b5b46bf",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "Sounds like the `ProgramBuilder::Wrap()` approach you really didn\u0027t like (crbug.com/tint/460)!",
+      "range": {
+        "startLine": 311,
+        "startChar": 47,
+        "endLine": 313,
+        "endChar": 43
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "340c75cb_ece25997",
+        "filename": "docs/tint/ir.md",
+        "patchSetId": 11
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "+1. Loads should be SSA expressions, stores statements.",
+      "range": {
+        "startLine": 316,
+        "startChar": 35,
+        "endLine": 317,
+        "endChar": 69
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4351ad0_a4cdd383",
+        "filename": "src/tint/ir/block_flow_node.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "Not massively keen on the `FlowNode` suffix. Suggestions:\n\n`Block`, `BasicBlock`, `LinearBlock`.",
+      "range": {
+        "startLine": 25,
+        "startChar": 6,
+        "endLine": 25,
+        "endChar": 19
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf80c9b_0e2db543",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "`using Result \u003d utils::Result\u003cModule, std::string\u003e` ?",
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e2ddee_ff16c8d7",
+        "filename": "src/tint/ir/builder_impl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "I think we should split this class into two.\n\n* the `CreateXXX` methods are analogous to `ProgramBuilder` - it contains the allocators, and has a public API that aids in building the nodes.\n* the `EmitXXX` methods are analogous to a reader - it takes a `tint::Program` (AST/SEM) and produces an IR.",
+      "range": {
+        "startLine": 49,
+        "startChar": 6,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f396883_e2a808ba",
+        "filename": "src/tint/ir/builder_impl.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "If we intend for flags to be bitwise combined, then take a look at `utils::Bitset`",
+      "range": {
+        "startLine": 153,
+        "startChar": 35,
+        "endLine": 153,
+        "endChar": 47
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40db17b5_14d96356",
+        "filename": "src/tint/ir/function_flow_node.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "As mentioned in the doc, I think this should be a different class - one that can\u0027t actually hold any expressions / statements.",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 43,
+        "endChar": 17
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2941d1bb_e0f2d3cd",
+        "filename": "src/tint/ir/if_flow_node.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:41:30Z",
+      "side": 1,
+      "message": "statement",
+      "range": {
+        "startLine": 28,
+        "startChar": 35,
+        "endLine": 28,
+        "endChar": 43
+      },
+      "revId": "3ed09e8c7fe6958bc75c43d4a1d23dd596219ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
