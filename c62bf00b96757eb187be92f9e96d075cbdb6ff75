@@ -16,6 +16,29 @@
       "message": "PTAL. I ran `go fmt` which appears to have formatted a whole bunch of stuff ...",
       "revId": "c62bf00b96757eb187be92f9e96d075cbdb6ff75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e845f8_2ccc02c7",
+        "filename": "tools/src/tint/intrinsic/gen/gen.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T16:22:49Z",
+      "side": 1,
+      "message": "triple slash here was wrong, and has now formatted weirdly.",
+      "range": {
+        "startLine": 15,
+        "startChar": 3,
+        "endLine": 15,
+        "endChar": 4
+      },
+      "revId": "c62bf00b96757eb187be92f9e96d075cbdb6ff75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
