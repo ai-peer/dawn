@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f991e44_ee415897",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-27T12:45:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efe10bd6_007ff9cf",
+      "range": {
+        "startLine": 76,
+        "startChar": 21,
+        "endLine": 76,
+        "endChar": 78
+      },
+      "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e7de769_a9e6e94e",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-10-21T16:32:24Z",
       "side": 1,
       "message": "Ditto for the removed test coverage, we likely can keep it.",
+      "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfdb4e4_50d80552",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-27T12:45:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e7de769_a9e6e94e",
       "revId": "a8bbefa861c1a529afdbb974aa698d7f47e4a95c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

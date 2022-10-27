@@ -16,6 +16,24 @@
       "message": "Why was this test removed? We could enable both extensions (in general queries being available inside passes means they are available outside too?)",
       "revId": "ec7ba9f1f853ffa1c79c1e3302803c49b0e34568",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee397a4_0fd2a320",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-27T12:45:03Z",
+      "side": 0,
+      "message": "Removed this becuase I want keep these tests with only one feature enabled.\n\n\u003e in general queries being available inside passes means they are available outside too?\n\nIndeed it is. Both of them are supported or not supported at same time on D3D12 and Vulkan, they are same APIs. On Metal, they are different APIs, but timestamp query outside passes could be simulated by the timestamp query inside passes.",
+      "parentUuid": "45f19fef_dee1ada8",
+      "revId": "ec7ba9f1f853ffa1c79c1e3302803c49b0e34568",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
