@@ -86,6 +86,24 @@
       "parentUuid": "437d19ba_04e5c3b9",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b41267_7e49bbbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-27T00:16:31Z",
+      "side": 1,
+      "message": "\u003e  However I don\u0027t think it is reasonable for the spec to ask that getBufferMappedRange(4) on a giant buffer should work, as we strongly want to allocate all the memory during the buffer creation (or the mapAsync call). So in 4) it should be valid to return nullptr (the spec doesn\u0027t exactly allow it, but IMHO should be changed).\n\nThe SPEC says \"it is always valid to get mapped ranges of a GPUBuffer that is mappedAtCreation, even if it is invalid\", which implies calling a small range of getMappedRange() on an OOM buffer is allowed. \n\nThere is a WebGPU CTS test that shows \"calling it on a small range of the buffer successfully returns an ArrayBuffer\" (https://github.com/gpuweb/cts/blob/main/src/webgpu/api/operation/buffers/map_oom.spec.ts#L116), which fails on Chromium right now.\n\nIf we agree on your suggestion here, we should first fix that test and the statements in SPEC.",
+      "parentUuid": "2864bb11_838a4869",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
