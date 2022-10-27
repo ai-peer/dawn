@@ -16,6 +16,24 @@
       "message": "Tried the utils::Vector and it seemed to work for me. Can we move the files from src/tint to scripts/tint as they aren\u0027t really tint source themselves but helper scripts?",
       "revId": "9a58983ac805ea5318d248ee8ab5277b62e19fc0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dafec72d_54d09dca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-27T19:00:46Z",
+      "side": 1,
+      "message": "I\u0027ll look into moving them in a future CL. I want all 3 files (these two plus the natvis) to live together, but I need to make sure moving the natvis doesn\u0027t cause problems for VS.",
+      "parentUuid": "ff8024d1_e5038c7d",
+      "revId": "9a58983ac805ea5318d248ee8ab5277b62e19fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
