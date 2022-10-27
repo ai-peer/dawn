@@ -324,8 +324,7 @@ template <typename T, bool finite_only>
 std::vector<Case> AsinCases() {
     std::vector<Case> cases = {
         // If i is +/-0, +/-0 is returned
-        C({T(0.0)}, T(0.0)),
-        C({-T(0.0)}, -T(0.0)),
+        C({T(0.0)}, T(0.0)).PosOrNeg(),
 
         C({T(1.0)}, kPiOver2<T>).FloatComp(),
         C({-T(1.0)}, -kPiOver2<T>).FloatComp(),
@@ -389,8 +388,8 @@ template <typename T, bool finite_only>
 std::vector<Case> AsinhCases() {
     std::vector<Case> cases = {
         // If i is +/-0, +/-0 is returned
-        C({T(0.0)}, T(0.0)),
-        C({-T(0.0)}, -T(0.0)),
+        C({T(0.0)}, T(0.0)).PosOrNeg().FloatComp(),
+        C({-T(0.0)}, -T(0.0)).PosOrNeg().FloatComp(),
 
         C({T(0.9)}, T(0.80886693565278)).FloatComp(),
         C({-T(2.0)}, -T(1.4436354751788)).FloatComp(),
@@ -461,6 +460,31 @@ INSTANTIATE_TEST_SUITE_P(  //
                                               ClampCases<f16>()))));
 
 template <typename T>
+std::vector<Case> SaturateCases() {
+    return {
+        C({T(0)}, T(0)),
+        C({T(1)}, T(1)),
+        C({T::Lowest()}, T(0)),
+        C({T::Highest()}, T(1)),
+
+        // Vector tests
+        C({Vec(T(0), T(0))},                       //
+          Vec(T(0), T(0))),                        //
+        C({Vec(T(1), T(1))},                       //
+          Vec(T(1), T(1))),                        //
+        C({Vec(T::Lowest(), T(0), T::Highest())},  //
+          Vec(T(0), T(0), T(1))),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Saturate,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kSaturate),
+                     testing::ValuesIn(Concat(SaturateCases<AFloat>(),  //
+                                              SaturateCases<f32>(),
+                                              SaturateCases<f16>()))));
+
+template <typename T>
 std::vector<Case> SelectCases() {
     return {
         C({Val(T{1}), Val(T{2}), Val(false)}, Val(T{1})),
@@ -510,17 +534,8 @@ template <typename T>
 std::vector<Case> StepCases() {
     return {
         C({T(0), T(0)}, T(1.0)),
-        C({T(0), T(0.5)}, T(1.0)),
-        C({T(0.5), T(0)}, T(0.0)),
-        C({T(1), T(0.5)}, T(0.0)),
-        C({T(0.5), T(1)}, T(1.0)),
-        C({T(1.5), T(1)}, T(0.0)),
-        C({T(1), T(1.5)}, T(1.0)),
-        C({T(-1), T(1)}, T(1.0)),
         C({T(-1), T(1)}, T(1.0)),
         C({T(1), T(-1)}, T(0.0)),
-        C({T(-1), T(-1.5)}, T(0.0)),
-        C({T(-1.5), T(-1)}, T(1.0)),
         C({T::Highest(), T::Lowest()}, T(0.0)),
         C({T::Lowest(), T::Highest()}, T(1.0)),
 

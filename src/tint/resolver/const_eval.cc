@@ -1616,6 +1616,20 @@ ConstEval::Result ConstEval::clamp(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0], args[1], args[2]);
 }
 
+ConstEval::Result ConstEval::saturate(const sem::Type* ty,
+                                      utils::VectorRef<const sem::Constant*> args,
+                                      const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto e) {
+            using NumberT = decltype(e);
+            return CreateElement(builder, c0->Type(),
+                                 NumberT(std::min(std::max(e, NumberT(0.0)), NumberT(1.0))));
+        };
+        return Dispatch_fia_fiu32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
 ConstEval::Result ConstEval::select_bool(const sem::Type* ty,
                                          utils::VectorRef<const sem::Constant*> args,
                                          const Source&) {
@@ -1651,7 +1665,7 @@ ConstEval::Result ConstEval::step(const sem::Type* ty,
     auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
         auto create = [&](auto edge, auto x) -> ImplResult {
             using NumberT = decltype(edge);
-            NumberT result = x.value < edge.value ? NumberT(0.0) : NumberT(1.0);
+            NumberT result = edge.value <= x.value ? NumberT(1.0) : NumberT(0.0);
             return CreateElement(builder, c0->Type(), result);
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
