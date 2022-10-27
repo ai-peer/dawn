@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77911f6b_0162a5c1",
+        "filename": "test/tint/builtins/gen/literal/saturate/270da5.wgsl.expected.msl",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-27T12:41:24Z",
+      "side": 0,
+      "message": "Since we can now choose the value to use for generating tests, I wonder if we should put something outside the range [0,1]? This would then show us a more interesting result in the expected files.",
+      "range": {
+        "startLine": 5,
+        "startChar": 14,
+        "endLine": 5,
+        "endChar": 29
+      },
+      "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
