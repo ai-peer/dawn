@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e552e86_5bfea667",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 719,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Sounds good. It\u0027s much clearer now.",
+      "parentUuid": "c3b23374_4297c446",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84a69c7f_e83ffdbe",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 32
@@ -211,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd96bc6_416a3f04",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4fc0ec13_5f2f1626",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d8e29e3_ad720f68",
@@ -266,6 +302,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6fea169f_2a288631",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Had another try. Is it better now? I\u0027d appreciate your suggestion!",
+      "parentUuid": "c9918d0f_e82a301b",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eada91ac_fc6821c2",
         "filename": "src/dawn/native/Queue.h",
         "patchSetId": 32
@@ -295,6 +349,24 @@
       "side": 1,
       "message": "Added max serial as the sentinel value.\n\nNot sure how to get rid of the `mSerial` here. No matter where and when you fire the trace event, the actual finished serial value can only be known at `QueueBase::Tick` currently.",
       "parentUuid": "eada91ac_fc6821c2",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eef7a38_0c1d15aa",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 32
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab690e64_ea2952c2",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -330,6 +402,24 @@
       "side": 1,
       "message": "okay, split them all out of this CL.",
       "parentUuid": "7fb03200_414e8978",
+      "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a264dd_7357a8b0",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d2938cc_1db80b7f",
       "revId": "3cb48a1e3b315afdea3460b1927f490fd6576ed7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

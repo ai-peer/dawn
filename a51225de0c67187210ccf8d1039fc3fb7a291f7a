@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4357df5_f85252fa",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Good naming. I like this name.",
+      "parentUuid": "a4117d48_fb5321e2",
+      "range": {
+        "startLine": 403,
+        "startChar": 20,
+        "endLine": 403,
+        "endChar": 46
+      },
+      "revId": "a51225de0c67187210ccf8d1039fc3fb7a291f7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1630d749_eae8aeb1",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-10-26T12:02:14Z",
       "side": 1,
       "message": "nit: HasPendingCommands?",
+      "range": {
+        "startLine": 513,
+        "startChar": 17,
+        "endLine": 513,
+        "endChar": 41
+      },
+      "revId": "a51225de0c67187210ccf8d1039fc3fb7a291f7a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f4ced6b_3ae32e6d",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-10-27T05:13:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1630d749_eae8aeb1",
       "range": {
         "startLine": 513,
         "startChar": 17,
