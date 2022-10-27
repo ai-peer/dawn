@@ -22,6 +22,30 @@
       },
       "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db2ed00_b087f42f",
+        "filename": "test/tint/builtins/gen/literal/saturate/270da5.wgsl.expected.msl",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T13:48:12Z",
+      "side": 0,
+      "message": "Made it 2, tried to make vec -2 but the parser doesn\u0027t handle that yet. We can change later if we want when the parser is fixed.",
+      "parentUuid": "77911f6b_0162a5c1",
+      "range": {
+        "startLine": 5,
+        "startChar": 14,
+        "endLine": 5,
+        "endChar": 29
+      },
+      "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

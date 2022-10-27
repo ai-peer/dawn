@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aff3cf2a_336fcb4f",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T13:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a99eebdd_e45043aa",
+      "revId": "fffc5051999c445a0ad2dd9e701e0086647c35a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "901a8350_b8772d12",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-10-27T12:41:24Z",
       "side": 1,
       "message": "Make this input 1 as well please",
+      "range": {
+        "startLine": 471,
+        "startChar": 14,
+        "endLine": 471,
+        "endChar": 24
+      },
+      "revId": "fffc5051999c445a0ad2dd9e701e0086647c35a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ec2d0d_99fc61a6",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T13:48:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "901a8350_b8772d12",
       "range": {
         "startLine": 471,
         "startChar": 14,
