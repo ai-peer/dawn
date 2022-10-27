@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de18419d_c5428fe6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "Looks great. I think you\u0027re missing handling of while loops",
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98428005_03743ab1",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "nit: `explicit` not needed",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 12
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39c349de_b2ae5ef3",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "nit: This looks like a candidate for a helper method to split this monolithic `Switch` statement up a bit and improve readability.",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8331d324_730080b1",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "[`while` statement?](https://www.w3.org/TR/WGSL/#while-statement)",
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef1abf0f_bd4f4602",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "nit: `TINT_SCOPED_ASSIGNMENT(is_in_loop, true);` is a little less error prone.",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 36
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "060e0fdc_f1af7b72",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "übernit: could be reduced to `3`.",
+      "range": {
+        "startLine": 190,
+        "startChar": 53,
+        "endLine": 190,
+        "endChar": 54
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a64195d2_46f763c6",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "nit: `std::move`",
+      "range": {
+        "startLine": 201,
+        "startChar": 39,
+        "endLine": 201,
+        "endChar": 44
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e44dc910_f1adf316",
+        "filename": "src/tint/transform/merge_return_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T11:03:16Z",
+      "side": 1,
+      "message": "I believe this needs to be `break if i \u003d\u003d 7;`",
+      "range": {
+        "startLine": 696,
+        "startChar": 14,
+        "endLine": 698,
+        "endChar": 15
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
