@@ -34,6 +34,24 @@
       "parentUuid": "282253d0_0a587567",
       "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b79d1a3_ebb6697f",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T13:36:51Z",
+      "side": 1,
+      "message": "Done. And flipped the comparitor around as mentioned in chat.",
+      "parentUuid": "04830b82_f0498e61",
+      "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
