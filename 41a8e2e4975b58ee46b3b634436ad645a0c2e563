@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "41a8e2e4975b58ee46b3b634436ad645a0c2e563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "421df608_97254744",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1532,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T21:15:52Z",
+      "side": 1,
+      "message": "The tests pass, but maybe this should be DeepestElementOf ty?",
+      "revId": "41a8e2e4975b58ee46b3b634436ad645a0c2e563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
