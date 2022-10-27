@@ -33,6 +33,24 @@
       "message": "I believe failures are because vertex only pipelines may not have a fragment stage so this derefs an invalid pointer",
       "revId": "eb2461f9df0aab26eab44ed17c49e2f12a7e15f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5a71c0_46d6d769",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 631,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-27T15:05:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "06bb2e5f_4b7e4e37",
+      "revId": "eb2461f9df0aab26eab44ed17c49e2f12a7e15f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
