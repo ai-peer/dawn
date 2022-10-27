@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f78ecabc_a6fc3ed2",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-27T22:06:08Z",
+      "side": 1,
+      "message": "`0` is an `int`, `-0` is the same as `0`.\n\nYou want `-T(0)`.\n\nWould be nice if the spec explicitly stated what the expected result of negative zero is.",
+      "range": {
+        "startLine": 540,
+        "startChar": 8,
+        "endLine": 540,
+        "endChar": 25
+      },
+      "revId": "bb52c629a8a7e4f9870b99f993c27f175873984e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
