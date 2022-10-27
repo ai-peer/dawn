@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14aa54d9_dbd77550",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98428005_03743ab1",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 12
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39c349de_b2ae5ef3",
@@ -114,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c84f8096_95c84a66",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "Pulled this whole case out into a `ProcessBlock` helper.\n\nAlso pulled out the logic for checking if a function needs to be transformed so that we can share it with `ShouldRun`. This helped a little with some of the performance regressions that perfmon picked up in the next patch.",
+      "parentUuid": "39c349de_b2ae5ef3",
+      "range": {
+        "startLine": 97,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8331d324_730080b1",
         "filename": "src/tint/transform/merge_return.cc",
         "patchSetId": 9
@@ -125,6 +173,24 @@
       "writtenOn": "2022-10-27T11:03:16Z",
       "side": 1,
       "message": "[`while` statement?](https://www.w3.org/TR/WGSL/#while-statement)",
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1e182c_f0a7fbf9",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "Done, although `while` loops are converted to `loop/continuing` in the SPIR-V backend (before this transform is run).",
+      "parentUuid": "8331d324_730080b1",
       "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -178,6 +244,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4df4447_e7eaa8ec",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "We need to track the nesting depth though, otherwise we won\u0027t know when we\u0027re exiting the outermost loop construct versus exiting a nested loop.",
+      "parentUuid": "ef1abf0f_bd4f4602",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 36
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "060e0fdc_f1af7b72",
         "filename": "src/tint/transform/merge_return.cc",
         "patchSetId": 9
@@ -210,6 +300,30 @@
         "id": 1001737
       },
       "writtenOn": "2022-10-27T14:12:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "060e0fdc_f1af7b72",
+      "range": {
+        "startLine": 190,
+        "startChar": 53,
+        "endLine": 190,
+        "endChar": 54
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e88c63_2d8e6570",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "060e0fdc_f1af7b72",
@@ -270,6 +384,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9af30915_91f235ff",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64195d2_46f763c6",
+      "range": {
+        "startLine": 201,
+        "startChar": 39,
+        "endLine": 201,
+        "endChar": 44
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e44dc910_f1adf316",
@@ -283,6 +421,30 @@
       "writtenOn": "2022-10-27T11:03:16Z",
       "side": 1,
       "message": "I believe this needs to be `break if i \u003d\u003d 7;`",
+      "range": {
+        "startLine": 696,
+        "startChar": 14,
+        "endLine": 698,
+        "endChar": 15
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f801456_fbad37f1",
+        "filename": "src/tint/transform/merge_return_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T15:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e44dc910_f1adf316",
       "range": {
         "startLine": 696,
         "startChar": 14,
