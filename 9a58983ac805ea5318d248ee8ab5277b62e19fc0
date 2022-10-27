@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8024d1_e5038c7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T17:45:29Z",
+      "side": 1,
+      "message": "Tried the utils::Vector and it seemed to work for me. Can we move the files from src/tint to scripts/tint as they aren\u0027t really tint source themselves but helper scripts?",
+      "revId": "9a58983ac805ea5318d248ee8ab5277b62e19fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
