@@ -33,6 +33,23 @@
       "message": "Reviewer should be an OWNER. Adding zmo@",
       "revId": "eb46c63b6034c2394b90b2c06bbb1019cf678057",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f697b70_bf11e0f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003386
+      },
+      "writtenOn": "2022-10-27T15:20:39Z",
+      "side": 1,
+      "message": "@dneto, zmo@ doesn\u0027t appear to be an OWNER for this file but you do. Would you mind giving a rubber stamp now that zmo@ has taken a look and approved it?",
+      "revId": "eb46c63b6034c2394b90b2c06bbb1019cf678057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
