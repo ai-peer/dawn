@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5438894_2e6b6c28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T20:04:47Z",
+      "side": 1,
+      "message": "PTAL. I think this does all the shuffling we discussed.",
+      "revId": "572a8f40c8cdd61a67caaca9e1255fbaa63ec07a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
