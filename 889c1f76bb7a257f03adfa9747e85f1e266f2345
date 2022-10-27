@@ -338,6 +338,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1fd7f93_c7947ca2",
+        "filename": "src/tint/transform/merge_return.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-27T16:57:07Z",
+      "side": 1,
+      "message": "\u003e `TINT_SCOPED_ASSIGNMENT` restores the old value on scope exit, not `false`\n\nI was blind but now I see. Changed to a boolean. Thanks!",
+      "parentUuid": "5f584c3a_bf13506d",
+      "range": {
+        "startLine": 176,
+        "startChar": 16,
+        "endLine": 176,
+        "endChar": 36
+      },
+      "revId": "889c1f76bb7a257f03adfa9747e85f1e266f2345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "060e0fdc_f1af7b72",
