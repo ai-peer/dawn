@@ -16,6 +16,24 @@
       "message": "Can we add a case for edge is 0, and x is 0.99999 or something to show that it results in 0.0?\n\nBasically, for any \u0027edge\u0027 in the tests, we should show that we get 0.0 when \u003c edge, and 1.0 \u003e\u003d edge. So for edge -1 below, test for x \u003d -1 and -1.00001.\n\nPerhaps define an epsilon and subtract it from each x value for the 0.0 result case:\n\n```\nC({T(0), T(0)}, T(1.0)),\nC({T(0), T(0 - epsilon)}, T(0.0)),\n...\n```",
       "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04830b82_f0498e61",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-27T13:11:11Z",
+      "side": 1,
+      "message": "I thought these tests were basically for coverage and the comprehensive testing is left to the CTS?\n\nIs the concern here that the comparison does a `\u003c\u003d`? I\u0027ll change that to a `\u003e` and then we don\u0027t have to deal with float comparison.",
+      "parentUuid": "282253d0_0a587567",
+      "revId": "d0868c285751cca0b88a8a6039e08d19069c1d3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
