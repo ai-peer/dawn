@@ -16,6 +16,24 @@
       "message": "Please can we make this more clear? For each edge value, show three \u0027x\u0027 cases: same as edge, 0.5 below, and 0.5 above. For example:\n```\n        C({T(0), T(0)}, T(1.0)),\n        C({T(0), T(0.5)}, T(1.0)),\n        C({T(0), T(-0.5)}, T(0.0)),\n\n        C({T(1), T(1)}, T(1.0)),\n        C({T(1), T(1.5)}, T(1.0)),\n        C({T(1), T(0.5)}, T(0.0)),\n\n        C({T(1.5), T(1.5)}, T(1.0)),\n        C({T(1.5), T(2.0)}, T(1.0)),\n        C({T(1.5), T(1.0)}, T(0.0)),\n```\nAnd add for edge -1 and -1.5.",
       "revId": "fdc0d2eb548173674a295599d74d341ad2e2a66f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ba10b8e_c1933bf4",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-27T14:03:01Z",
+      "side": 1,
+      "message": "I\u0027m sorry, wrong CL. That\u0027s what you get for reviewing two similar ones at the same time.",
+      "parentUuid": "15b6d964_9b8bf0cf",
+      "revId": "fdc0d2eb548173674a295599d74d341ad2e2a66f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
