@@ -1,10 +1,10 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 199
+; Bound: 192
 ; Schema: 0
                OpCapability Shader
-         %81 = OpExtInstImport "GLSL.std.450"
+         %74 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
                OpEntryPoint Fragment %main "main" %fClipDistance3_param_1 %fClipDistance4_param_1 %glFragColor_1_1
                OpExecutionMode %main OriginUpperLeft
@@ -13,9 +13,13 @@
                OpName %glFragColor_1_1 "glFragColor_1_1"
                OpName %fClipDistance3 "fClipDistance3"
                OpName %fClipDistance4 "fClipDistance4"
+               OpName %x_29_block "x_29_block"
+               OpMemberName %x_29_block 0 "inner"
                OpName %Scene "Scene"
                OpMemberName %Scene 0 "vEyePosition"
                OpName %x_29 "x_29"
+               OpName %x_49_block "x_49_block"
+               OpMemberName %x_49_block 0 "inner"
                OpName %Material "Material"
                OpMemberName %Material 0 "vDiffuseColor"
                OpMemberName %Material 1 "vAmbientColor"
@@ -23,13 +27,14 @@
                OpMemberName %Material 3 "vEmissiveColor"
                OpMemberName %Material 4 "placeholder2"
                OpName %x_49 "x_49"
+               OpName %x_137_block "x_137_block"
+               OpMemberName %x_137_block 0 "inner"
                OpName %Mesh "Mesh"
                OpMemberName %Mesh 0 "visibility"
                OpName %x_137 "x_137"
                OpName %glFragColor "glFragColor"
                OpName %tint_discard "tint_discard"
                OpName %main_1 "main_1"
-               OpName %tint_return_flag "tint_return_flag"
                OpName %viewDirectionW "viewDirectionW"
                OpName %baseColor "baseColor"
                OpName %diffuseColor "diffuseColor"
@@ -56,12 +61,14 @@
                OpDecorate %fClipDistance3_param_1 Location 2
                OpDecorate %fClipDistance4_param_1 Location 3
                OpDecorate %glFragColor_1_1 Location 0
-               OpDecorate %Scene Block
+               OpDecorate %x_29_block Block
+               OpMemberDecorate %x_29_block 0 Offset 0
                OpMemberDecorate %Scene 0 Offset 0
                OpDecorate %x_29 NonWritable
                OpDecorate %x_29 DescriptorSet 0
                OpDecorate %x_29 Binding 0
-               OpDecorate %Material Block
+               OpDecorate %x_49_block Block
+               OpMemberDecorate %x_49_block 0 Offset 0
                OpMemberDecorate %Material 0 Offset 0
                OpMemberDecorate %Material 1 Offset 16
                OpMemberDecorate %Material 2 Offset 28
@@ -70,7 +77,8 @@
                OpDecorate %x_49 NonWritable
                OpDecorate %x_49 DescriptorSet 0
                OpDecorate %x_49 Binding 1
-               OpDecorate %Mesh Block
+               OpDecorate %x_137_block Block
+               OpMemberDecorate %x_137_block 0 Offset 0
                OpMemberDecorate %Mesh 0 Offset 0
                OpDecorate %x_137 NonWritable
                OpDecorate %x_137 DescriptorSet 0
@@ -89,237 +97,221 @@
 %fClipDistance3 = OpVariable %_ptr_Private_float Private %11
 %fClipDistance4 = OpVariable %_ptr_Private_float Private %11
       %Scene = OpTypeStruct %v4float
-%_ptr_Uniform_Scene = OpTypePointer Uniform %Scene
-       %x_29 = OpVariable %_ptr_Uniform_Scene Uniform
+ %x_29_block = OpTypeStruct %Scene
+%_ptr_Uniform_x_29_block = OpTypePointer Uniform %x_29_block
+       %x_29 = OpVariable %_ptr_Uniform_x_29_block Uniform
     %v3float = OpTypeVector %float 3
    %Material = OpTypeStruct %v4float %v3float %float %v3float %float
-%_ptr_Uniform_Material = OpTypePointer Uniform %Material
-       %x_49 = OpVariable %_ptr_Uniform_Material Uniform
+ %x_49_block = OpTypeStruct %Material
+%_ptr_Uniform_x_49_block = OpTypePointer Uniform %x_49_block
+       %x_49 = OpVariable %_ptr_Uniform_x_49_block Uniform
        %Mesh = OpTypeStruct %float
-%_ptr_Uniform_Mesh = OpTypePointer Uniform %Mesh
-      %x_137 = OpVariable %_ptr_Uniform_Mesh Uniform
+%x_137_block = OpTypeStruct %Mesh
+%_ptr_Uniform_x_137_block = OpTypePointer Uniform %x_137_block
+      %x_137 = OpVariable %_ptr_Uniform_x_137_block Uniform
 %_ptr_Private_v4float = OpTypePointer Private %v4float
 %glFragColor = OpVariable %_ptr_Private_v4float Private %8
        %bool = OpTypeBool
-         %26 = OpConstantNull %bool
+         %29 = OpConstantNull %bool
 %_ptr_Private_bool = OpTypePointer Private %bool
-%tint_discard = OpVariable %_ptr_Private_bool Private %26
+%tint_discard = OpVariable %_ptr_Private_bool Private %29
        %void = OpTypeVoid
-         %29 = OpTypeFunction %void
-%_ptr_Function_bool = OpTypePointer Function %bool
+         %32 = OpTypeFunction %void
 %_ptr_Function_v3float = OpTypePointer Function %v3float
-         %37 = OpConstantNull %v3float
+         %38 = OpConstantNull %v3float
 %_ptr_Function_v4float = OpTypePointer Function %v4float
 %_ptr_Function_float = OpTypePointer Function %float
     %v2float = OpTypeVector %float 2
 %_ptr_Function_v2float = OpTypePointer Function %v2float
-         %47 = OpConstantNull %v2float
+         %48 = OpConstantNull %v2float
        %true = OpConstantTrue %bool
        %uint = OpTypeInt 32 0
      %uint_0 = OpConstant %uint 0
 %_ptr_Uniform_v4float = OpTypePointer Uniform %v4float
     %float_1 = OpConstant %float 1
-         %88 = OpConstantComposite %v4float %float_1 %float_1 %float_1 %float_1
+         %81 = OpConstantComposite %v4float %float_1 %float_1 %float_1 %float_1
      %uint_3 = OpConstant %uint 3
 %_ptr_Uniform_float = OpTypePointer Uniform %float
-        %115 = OpConstantComposite %v3float %float_1 %float_1 %float_1
-        %116 = OpConstantComposite %v4float %11 %11 %11 %float_1
+        %108 = OpConstantComposite %v3float %float_1 %float_1 %float_1
+        %109 = OpConstantComposite %v4float %11 %11 %11 %float_1
 %_ptr_Uniform_v3float = OpTypePointer Uniform %v3float
      %uint_1 = OpConstant %uint 1
    %main_out = OpTypeStruct %v4float
-        %179 = OpTypeFunction %main_out %float %float
-        %190 = OpConstantNull %main_out
-     %main_1 = OpFunction %void None %29
-         %32 = OpLabel
-%tint_return_flag = OpVariable %_ptr_Function_bool Function %26
-%viewDirectionW = OpVariable %_ptr_Function_v3float Function %37
+        %172 = OpTypeFunction %main_out %float %float
+        %183 = OpConstantNull %main_out
+     %main_1 = OpFunction %void None %32
+         %35 = OpLabel
+%viewDirectionW = OpVariable %_ptr_Function_v3float Function %38
   %baseColor = OpVariable %_ptr_Function_v4float Function %8
-%diffuseColor = OpVariable %_ptr_Function_v3float Function %37
+%diffuseColor = OpVariable %_ptr_Function_v3float Function %38
       %alpha = OpVariable %_ptr_Function_float Function %11
-    %normalW = OpVariable %_ptr_Function_v3float Function %37
-   %uvOffset = OpVariable %_ptr_Function_v2float Function %47
-%baseAmbientColor = OpVariable %_ptr_Function_v3float Function %37
+    %normalW = OpVariable %_ptr_Function_v3float Function %38
+   %uvOffset = OpVariable %_ptr_Function_v2float Function %48
+%baseAmbientColor = OpVariable %_ptr_Function_v3float Function %38
  %glossiness = OpVariable %_ptr_Function_float Function %11
-%diffuseBase = OpVariable %_ptr_Function_v3float Function %37
+%diffuseBase = OpVariable %_ptr_Function_v3float Function %38
      %shadow = OpVariable %_ptr_Function_float Function %11
 %refractionColor = OpVariable %_ptr_Function_v4float Function %8
 %reflectionColor = OpVariable %_ptr_Function_v4float Function %8
-%emissiveColor = OpVariable %_ptr_Function_v3float Function %37
-%finalDiffuse = OpVariable %_ptr_Function_v3float Function %37
-%finalSpecular = OpVariable %_ptr_Function_v3float Function %37
+%emissiveColor = OpVariable %_ptr_Function_v3float Function %38
+%finalDiffuse = OpVariable %_ptr_Function_v3float Function %38
+%finalSpecular = OpVariable %_ptr_Function_v3float Function %38
       %color = OpVariable %_ptr_Function_v4float Function %8
-         %58 = OpLoad %float %fClipDistance3
-         %59 = OpFOrdGreaterThan %bool %58 %11
-               OpSelectionMerge %60 None
-               OpBranchConditional %59 %61 %60
+         %59 = OpLoad %float %fClipDistance3
+         %60 = OpFOrdGreaterThan %bool %59 %11
+               OpSelectionMerge %61 None
+               OpBranchConditional %60 %62 %61
+         %62 = OpLabel
+               OpStore %tint_discard %true
+               OpReturn
          %61 = OpLabel
+         %64 = OpLoad %float %fClipDistance4
+         %65 = OpFOrdGreaterThan %bool %64 %11
+               OpSelectionMerge %66 None
+               OpBranchConditional %65 %67 %66
+         %67 = OpLabel
                OpStore %tint_discard %true
-               OpStore %tint_return_flag %true
-               OpBranch %60
-         %60 = OpLabel
-         %64 = OpLoad %bool %tint_return_flag
-         %63 = OpLogicalNot %bool %64
-               OpSelectionMerge %65 None
-               OpBranchConditional %63 %66 %65
+               OpReturn
          %66 = OpLabel
-         %67 = OpLoad %float %fClipDistance4
-         %68 = OpFOrdGreaterThan %bool %67 %11
-               OpSelectionMerge %69 None
-               OpBranchConditional %68 %70 %69
-         %70 = OpLabel
-               OpStore %tint_discard %true
-               OpStore %tint_return_flag %true
-               OpBranch %69
-         %69 = OpLabel
-         %72 = OpLoad %bool %tint_return_flag
-         %71 = OpLogicalNot %bool %72
-               OpSelectionMerge %73 None
-               OpBranchConditional %71 %74 %73
-         %74 = OpLabel
-         %78 = OpAccessChain %_ptr_Uniform_v4float %x_29 %uint_0
-         %79 = OpLoad %v4float %78
-         %82 = OpCompositeExtract %float %79 0
-         %83 = OpCompositeExtract %float %79 1
-         %84 = OpCompositeExtract %float %79 2
-         %85 = OpCompositeConstruct %v3float %82 %83 %84
-         %86 = OpFSub %v3float %85 %37
-         %80 = OpExtInst %v3float %81 Normalize %86
-               OpStore %viewDirectionW %80
-               OpStore %baseColor %88
-         %89 = OpAccessChain %_ptr_Uniform_v4float %x_49 %uint_0
-         %90 = OpLoad %v4float %89
-         %91 = OpCompositeExtract %float %90 0
-         %92 = OpCompositeExtract %float %90 1
-         %93 = OpCompositeExtract %float %90 2
-         %94 = OpCompositeConstruct %v3float %91 %92 %93
-               OpStore %diffuseColor %94
-         %97 = OpAccessChain %_ptr_Uniform_float %x_49 %uint_0 %uint_3
-         %98 = OpLoad %float %97
-               OpStore %alpha %98
-               OpStore %uvOffset %47
-         %99 = OpLoad %v4float %baseColor
-        %100 = OpCompositeExtract %float %99 0
-        %101 = OpCompositeExtract %float %99 1
-        %102 = OpCompositeExtract %float %99 2
-        %103 = OpCompositeConstruct %v3float %100 %101 %102
-        %104 = OpCompositeExtract %float %8 0
-        %105 = OpCompositeExtract %float %8 1
-        %106 = OpCompositeExtract %float %8 2
-        %107 = OpCompositeConstruct %v3float %104 %105 %106
-        %108 = OpFMul %v3float %103 %107
-        %109 = OpLoad %v4float %baseColor
-        %110 = OpCompositeExtract %float %108 0
-        %111 = OpCompositeExtract %float %108 1
-        %112 = OpCompositeExtract %float %108 2
-        %113 = OpCompositeExtract %float %109 3
-        %114 = OpCompositeConstruct %v4float %110 %111 %112 %113
-               OpStore %baseColor %114
-               OpStore %baseAmbientColor %115
+         %71 = OpAccessChain %_ptr_Uniform_v4float %x_29 %uint_0 %uint_0
+         %72 = OpLoad %v4float %71
+         %75 = OpCompositeExtract %float %72 0
+         %76 = OpCompositeExtract %float %72 1
+         %77 = OpCompositeExtract %float %72 2
+         %78 = OpCompositeConstruct %v3float %75 %76 %77
+         %79 = OpFSub %v3float %78 %38
+         %73 = OpExtInst %v3float %74 Normalize %79
+               OpStore %viewDirectionW %73
+               OpStore %baseColor %81
+         %82 = OpAccessChain %_ptr_Uniform_v4float %x_49 %uint_0 %uint_0
+         %83 = OpLoad %v4float %82
+         %84 = OpCompositeExtract %float %83 0
+         %85 = OpCompositeExtract %float %83 1
+         %86 = OpCompositeExtract %float %83 2
+         %87 = OpCompositeConstruct %v3float %84 %85 %86
+               OpStore %diffuseColor %87
+         %90 = OpAccessChain %_ptr_Uniform_float %x_49 %uint_0 %uint_0 %uint_3
+         %91 = OpLoad %float %90
+               OpStore %alpha %91
+               OpStore %uvOffset %48
+         %92 = OpLoad %v4float %baseColor
+         %93 = OpCompositeExtract %float %92 0
+         %94 = OpCompositeExtract %float %92 1
+         %95 = OpCompositeExtract %float %92 2
+         %96 = OpCompositeConstruct %v3float %93 %94 %95
+         %97 = OpCompositeExtract %float %8 0
+         %98 = OpCompositeExtract %float %8 1
+         %99 = OpCompositeExtract %float %8 2
+        %100 = OpCompositeConstruct %v3float %97 %98 %99
+        %101 = OpFMul %v3float %96 %100
+        %102 = OpLoad %v4float %baseColor
+        %103 = OpCompositeExtract %float %101 0
+        %104 = OpCompositeExtract %float %101 1
+        %105 = OpCompositeExtract %float %101 2
+        %106 = OpCompositeExtract %float %102 3
+        %107 = OpCompositeConstruct %v4float %103 %104 %105 %106
+               OpStore %baseColor %107
+               OpStore %baseAmbientColor %108
                OpStore %glossiness %11
-               OpStore %diffuseBase %37
+               OpStore %diffuseBase %38
                OpStore %shadow %float_1
-               OpStore %refractionColor %116
-               OpStore %reflectionColor %116
-        %118 = OpAccessChain %_ptr_Uniform_v3float %x_49 %uint_3
-        %119 = OpLoad %v3float %118
-               OpStore %emissiveColor %119
-        %120 = OpLoad %v3float %diffuseBase
-        %121 = OpLoad %v3float %diffuseColor
-        %122 = OpLoad %v3float %emissiveColor
-        %124 = OpAccessChain %_ptr_Uniform_v3float %x_49 %uint_1
-        %125 = OpLoad %v3float %124
-        %126 = OpLoad %v4float %baseColor
-        %128 = OpFMul %v3float %120 %121
-        %129 = OpFAdd %v3float %128 %122
-        %130 = OpFAdd %v3float %129 %125
-        %127 = OpExtInst %v3float %81 NClamp %130 %37 %115
-        %131 = OpCompositeExtract %float %126 0
-        %132 = OpCompositeExtract %float %126 1
-        %133 = OpCompositeExtract %float %126 2
-        %134 = OpCompositeConstruct %v3float %131 %132 %133
-        %135 = OpFMul %v3float %127 %134
-               OpStore %finalDiffuse %135
-               OpStore %finalSpecular %37
-        %136 = OpLoad %v3float %finalDiffuse
-        %137 = OpLoad %v3float %baseAmbientColor
-        %138 = OpLoad %v3float %finalSpecular
-        %139 = OpLoad %v4float %reflectionColor
-        %140 = OpLoad %v4float %refractionColor
-        %141 = OpFMul %v3float %136 %137
-        %142 = OpFAdd %v3float %141 %138
-        %143 = OpCompositeExtract %float %139 0
-        %144 = OpCompositeExtract %float %139 1
-        %145 = OpCompositeExtract %float %139 2
-        %146 = OpCompositeConstruct %v3float %143 %144 %145
-        %147 = OpFAdd %v3float %142 %146
-        %148 = OpCompositeExtract %float %140 0
-        %149 = OpCompositeExtract %float %140 1
-        %150 = OpCompositeExtract %float %140 2
-        %151 = OpCompositeConstruct %v3float %148 %149 %150
-        %152 = OpFAdd %v3float %147 %151
-        %153 = OpLoad %float %alpha
-        %154 = OpCompositeExtract %float %152 0
-        %155 = OpCompositeExtract %float %152 1
-        %156 = OpCompositeExtract %float %152 2
-        %157 = OpCompositeConstruct %v4float %154 %155 %156 %153
-               OpStore %color %157
-        %158 = OpLoad %v4float %color
-        %160 = OpCompositeExtract %float %158 0
-        %161 = OpCompositeExtract %float %158 1
-        %162 = OpCompositeExtract %float %158 2
-        %163 = OpCompositeConstruct %v3float %160 %161 %162
-        %159 = OpExtInst %v3float %81 NMax %163 %37
-        %164 = OpLoad %v4float %color
-        %165 = OpCompositeExtract %float %159 0
-        %166 = OpCompositeExtract %float %159 1
-        %167 = OpCompositeExtract %float %159 2
-        %168 = OpCompositeExtract %float %164 3
-        %169 = OpCompositeConstruct %v4float %165 %166 %167 %168
-               OpStore %color %169
-        %170 = OpAccessChain %_ptr_Uniform_float %x_137 %uint_0
-        %171 = OpLoad %float %170
-        %172 = OpAccessChain %_ptr_Function_float %color %uint_3
-        %173 = OpLoad %float %172
-        %174 = OpAccessChain %_ptr_Function_float %color %uint_3
-        %175 = OpFMul %float %173 %171
-               OpStore %174 %175
-        %176 = OpLoad %v4float %color
-               OpStore %glFragColor %176
-               OpStore %tint_return_flag %true
-               OpBranch %73
-         %73 = OpLabel
-               OpBranch %65
-         %65 = OpLabel
+               OpStore %refractionColor %109
+               OpStore %reflectionColor %109
+        %111 = OpAccessChain %_ptr_Uniform_v3float %x_49 %uint_0 %uint_3
+        %112 = OpLoad %v3float %111
+               OpStore %emissiveColor %112
+        %113 = OpLoad %v3float %diffuseBase
+        %114 = OpLoad %v3float %diffuseColor
+        %115 = OpLoad %v3float %emissiveColor
+        %117 = OpAccessChain %_ptr_Uniform_v3float %x_49 %uint_0 %uint_1
+        %118 = OpLoad %v3float %117
+        %119 = OpLoad %v4float %baseColor
+        %121 = OpFMul %v3float %113 %114
+        %122 = OpFAdd %v3float %121 %115
+        %123 = OpFAdd %v3float %122 %118
+        %120 = OpExtInst %v3float %74 NClamp %123 %38 %108
+        %124 = OpCompositeExtract %float %119 0
+        %125 = OpCompositeExtract %float %119 1
+        %126 = OpCompositeExtract %float %119 2
+        %127 = OpCompositeConstruct %v3float %124 %125 %126
+        %128 = OpFMul %v3float %120 %127
+               OpStore %finalDiffuse %128
+               OpStore %finalSpecular %38
+        %129 = OpLoad %v3float %finalDiffuse
+        %130 = OpLoad %v3float %baseAmbientColor
+        %131 = OpLoad %v3float %finalSpecular
+        %132 = OpLoad %v4float %reflectionColor
+        %133 = OpLoad %v4float %refractionColor
+        %134 = OpFMul %v3float %129 %130
+        %135 = OpFAdd %v3float %134 %131
+        %136 = OpCompositeExtract %float %132 0
+        %137 = OpCompositeExtract %float %132 1
+        %138 = OpCompositeExtract %float %132 2
+        %139 = OpCompositeConstruct %v3float %136 %137 %138
+        %140 = OpFAdd %v3float %135 %139
+        %141 = OpCompositeExtract %float %133 0
+        %142 = OpCompositeExtract %float %133 1
+        %143 = OpCompositeExtract %float %133 2
+        %144 = OpCompositeConstruct %v3float %141 %142 %143
+        %145 = OpFAdd %v3float %140 %144
+        %146 = OpLoad %float %alpha
+        %147 = OpCompositeExtract %float %145 0
+        %148 = OpCompositeExtract %float %145 1
+        %149 = OpCompositeExtract %float %145 2
+        %150 = OpCompositeConstruct %v4float %147 %148 %149 %146
+               OpStore %color %150
+        %151 = OpLoad %v4float %color
+        %153 = OpCompositeExtract %float %151 0
+        %154 = OpCompositeExtract %float %151 1
+        %155 = OpCompositeExtract %float %151 2
+        %156 = OpCompositeConstruct %v3float %153 %154 %155
+        %152 = OpExtInst %v3float %74 NMax %156 %38
+        %157 = OpLoad %v4float %color
+        %158 = OpCompositeExtract %float %152 0
+        %159 = OpCompositeExtract %float %152 1
+        %160 = OpCompositeExtract %float %152 2
+        %161 = OpCompositeExtract %float %157 3
+        %162 = OpCompositeConstruct %v4float %158 %159 %160 %161
+               OpStore %color %162
+        %163 = OpAccessChain %_ptr_Uniform_float %x_137 %uint_0 %uint_0
+        %164 = OpLoad %float %163
+        %165 = OpAccessChain %_ptr_Function_float %color %uint_3
+        %166 = OpLoad %float %165
+        %167 = OpAccessChain %_ptr_Function_float %color %uint_3
+        %168 = OpFMul %float %166 %164
+               OpStore %167 %168
+        %169 = OpLoad %v4float %color
+               OpStore %glFragColor %169
                OpReturn
                OpFunctionEnd
-%tint_discard_func = OpFunction %void None %29
-        %178 = OpLabel
+%tint_discard_func = OpFunction %void None %32
+        %171 = OpLabel
                OpKill
                OpFunctionEnd
- %main_inner = OpFunction %main_out None %179
+ %main_inner = OpFunction %main_out None %172
 %fClipDistance3_param = OpFunctionParameter %float
 %fClipDistance4_param = OpFunctionParameter %float
-        %184 = OpLabel
+        %177 = OpLabel
                OpStore %fClipDistance3 %fClipDistance3_param
                OpStore %fClipDistance4 %fClipDistance4_param
-        %185 = OpFunctionCall %void %main_1
-        %186 = OpLoad %bool %tint_discard
-               OpSelectionMerge %187 None
-               OpBranchConditional %186 %188 %187
-        %188 = OpLabel
-        %189 = OpFunctionCall %void %tint_discard_func
-               OpReturnValue %190
-        %187 = OpLabel
-        %191 = OpLoad %v4float %glFragColor
-        %192 = OpCompositeConstruct %main_out %191
-               OpReturnValue %192
+        %178 = OpFunctionCall %void %main_1
+        %179 = OpLoad %bool %tint_discard
+               OpSelectionMerge %180 None
+               OpBranchConditional %179 %181 %180
+        %181 = OpLabel
+        %182 = OpFunctionCall %void %tint_discard_func
+               OpReturnValue %183
+        %180 = OpLabel
+        %184 = OpLoad %v4float %glFragColor
+        %185 = OpCompositeConstruct %main_out %184
+               OpReturnValue %185
                OpFunctionEnd
-       %main = OpFunction %void None %29
-        %194 = OpLabel
-        %196 = OpLoad %float %fClipDistance3_param_1
-        %197 = OpLoad %float %fClipDistance4_param_1
-        %195 = OpFunctionCall %main_out %main_inner %196 %197
-        %198 = OpCompositeExtract %v4float %195 0
-               OpStore %glFragColor_1_1 %198
+       %main = OpFunction %void None %32
+        %187 = OpLabel
+        %189 = OpLoad %float %fClipDistance3_param_1
+        %190 = OpLoad %float %fClipDistance4_param_1
+        %188 = OpFunctionCall %main_out %main_inner %189 %190
+        %191 = OpCompositeExtract %v4float %188 0
+               OpStore %glFragColor_1_1 %191
                OpReturn
                OpFunctionEnd
