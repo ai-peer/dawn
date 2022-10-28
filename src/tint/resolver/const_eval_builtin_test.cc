@@ -148,6 +148,9 @@ INSTANTIATE_TEST_SUITE_P(  //
 
 static std::vector<Case> AllCases() {
     return {
+        C({Val(true)}, Val(true)),
+        C({Val(false)}, Val(false)),
+
         C({Vec(true, true)}, Val(true)),
         C({Vec(true, false)}, Val(false)),
         C({Vec(false, true)}, Val(false)),
@@ -171,6 +174,32 @@ INSTANTIATE_TEST_SUITE_P(  //
     All,
     ResolverConstEvalBuiltinTest,
     testing::Combine(testing::Values(sem::BuiltinType::kAll), testing::ValuesIn(AllCases())));
+
+static std::vector<Case> AnyCases() {
+    return {
+        C({Vec(true, true)}, Val(true)),
+        C({Vec(true, false)}, Val(true)),
+        C({Vec(false, true)}, Val(true)),
+        C({Vec(false, false)}, Val(false)),
+
+        C({Vec(true, true, true)}, Val(true)),
+        C({Vec(false, true, true)}, Val(true)),
+        C({Vec(true, false, true)}, Val(true)),
+        C({Vec(true, true, false)}, Val(true)),
+        C({Vec(false, false, false)}, Val(false)),
+
+        C({Vec(true, true, true, true)}, Val(true)),
+        C({Vec(false, true, true, true)}, Val(true)),
+        C({Vec(true, false, true, true)}, Val(true)),
+        C({Vec(true, true, false, true)}, Val(true)),
+        C({Vec(true, true, true, false)}, Val(true)),
+        C({Vec(false, false, false, false)}, Val(false)),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Any,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kAny), testing::ValuesIn(AnyCases())));
 
 template <typename T, bool finite_only>
 std::vector<Case> Atan2Cases() {
