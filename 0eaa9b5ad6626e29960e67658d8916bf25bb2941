@@ -16,6 +16,24 @@
       "message": "I don\u0027t think this is in the spec is it? A vec initializer always goes to a concrete type. The only abstract call out is an explicit one for passing an Abstract T into vec3\u003cu32\u003e and having it produce u32. So, I think the abstract always decays to i32 or f32 first and you always get i32 or f32 out.",
       "revId": "0eaa9b5ad6626e29960e67658d8916bf25bb2941",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae311044_af22d29a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-28T11:18:48Z",
+      "side": 1,
+      "message": "My understanding is that you can create abstract vectors using the implicit arg constructors, like `vec3(1,2,3)`. If that\u0027s true, then initializing an implicit arg vec from a vec of abstracts should also remain abstract.",
+      "parentUuid": "e6230313_50bc9edb",
+      "revId": "0eaa9b5ad6626e29960e67658d8916bf25bb2941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
