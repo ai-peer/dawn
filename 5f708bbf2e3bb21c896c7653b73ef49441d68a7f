@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a70ca5_45fc4261",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1669,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-28T12:56:57Z",
+      "side": 1,
+      "message": "nit: when dealing with template code, it\u0027s a good idea to use braced-initialization because it\u0027s an error if the init truncates the value (otherwise, it implicitly truncates). Normally, I would write this all as:\n\n```\n            auto zero \u003d Number{0.0};\n            if (e.value \u003c zero) {\n                result \u003d NumberT{-1.0};\n            } else if (e.value \u003e zero) {\n                result \u003d NumberT{1.0};\n            } else {\n                result \u003d zero;\n            }\n```\n\nI know that for 0.0 and 1.0 there is no danger of truncation, but I think it\u0027s a good practice in general.",
+      "range": {
+        "startLine": 1669,
+        "startChar": 20,
+        "endLine": 1669,
+        "endChar": 29
+      },
+      "revId": "5f708bbf2e3bb21c896c7653b73ef49441d68a7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
