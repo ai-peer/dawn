@@ -26,12 +26,9 @@ class ShuffleTransform : public tint::transform::Transform {
     /// @param seed the random seed to use for the shuffling
     explicit ShuffleTransform(size_t seed);
 
-  protected:
-    void Run(CloneContext& ctx,
-             const tint::transform::DataMap&,
-             tint::transform::DataMap&) const override;
-
   private:
+    Action Apply(CloneContext& ctx, const DataMap&, DataMap&) override;
+
     size_t seed_;
 };
 

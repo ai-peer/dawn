@@ -22,9 +22,9 @@ namespace tint::fuzzers {
 
 ShuffleTransform::ShuffleTransform(size_t seed) : seed_(seed) {}
 
-void ShuffleTransform::Run(CloneContext& ctx,
-                           const tint::transform::DataMap&,
-                           tint::transform::DataMap&) const {
+transform::Action ShuffleTransform::Apply(CloneContext& ctx,
+                                          const transform::DataMap&,
+                                          transform::DataMap&) const {
     auto decls = ctx.src->AST().GlobalDeclarations();
     auto rng = std::mt19937_64{seed_};
     std::shuffle(std::begin(decls), std::end(decls), rng);
