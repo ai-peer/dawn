@@ -47,6 +47,18 @@ namespace tint::transform {
 
 namespace {
 
+bool ShouldRun(const Program* program) {
+    for (auto* decl : program->AST().GlobalDeclarations()) {
+        if (auto* var = program->Sem().Get<sem::Variable>(decl)) {
+            if (var->AddressSpace() == ast::AddressSpace::kStorage ||
+                var->AddressSpace() == ast::AddressSpace::kUniform) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 /// Offset is a simple ast::Expression builder interface, used to build byte
 /// offsets for storage and uniform buffer accesses.
 struct Offset : Castable<Offset> {
@@ -291,7 +303,7 @@ struct Store {
 
 }  // namespace
 
-/// State holds the current transform state
+/// PIMPL state for the transform
 struct DecomposeMemoryAccess::State {
     /// The clone context
     CloneContext& ctx;
@@ -477,7 +489,7 @@ struct DecomposeMemoryAccess::State {
                         // * Override-expression counts can only be applied to workgroup arrays, and
                         //   this method only handles storage and uniform.
                         // * Runtime-sized arrays are not loadable.
-                        TINT_ICE(Transform, ctx.dst->Diagnostics())
+                        TINT_ICE(Transform, b.Diagnostics())
                             << "unexpected non-constant array count";
                         arr_cnt = 1;
                     }
@@ -578,7 +590,7 @@ struct DecomposeMemoryAccess::State {
                                 // * Override-expression counts can only be applied to workgroup
                                 //   arrays, and this method only handles storage and uniform.
                                 // * Runtime-sized arrays are not storable.
-                                TINT_ICE(Transform, ctx.dst->Diagnostics())
+                                TINT_ICE(Transform, b.Diagnostics())
                                     << "unexpected non-constant array count";
                                 arr_cnt = 1;
                             }
@@ -808,20 +820,17 @@ bool DecomposeMemoryAccess::Intrinsic::IsAtomic() const {
 DecomposeMemoryAccess::DecomposeMemoryAccess() = default;
 DecomposeMemoryAccess::~DecomposeMemoryAccess() = default;
 
-bool DecomposeMemoryAccess::ShouldRun(const Program* program, const DataMap&) const {
-    for (auto* decl : program->AST().GlobalDeclarations()) {
-        if (auto* var = program->Sem().Get<sem::Variable>(decl)) {
-            if (var->AddressSpace() == ast::AddressSpace::kStorage ||
-                var->AddressSpace() == ast::AddressSpace::kUniform) {
-                return true;
-            }
-        }
-    }
-    return false;
-}
+Transform::ApplyResult DecomposeMemoryAccess::Apply(const Program* src,
+                                                    const DataMap&,
+                                                    DataMap&) const {
+    ProgramBuilder b;
+    CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
-    auto& sem = ctx.src->Sem();
+    if (!ShouldRun(src)) {
+        return SkipTransform;
+    }
+
+    auto& sem = src->Sem();
 
     State state(ctx);
 
@@ -833,7 +842,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
     // Inner-most expression nodes are guaranteed to be visited first because AST
     // nodes are fully immutable and require their children to be constructed
     // first so their pointer can be passed to the parent's initializer.
-    for (auto* node : ctx.src->ASTNodes().Objects()) {
+    for (auto* node : src->ASTNodes().Objects()) {
         if (auto* ident = node->As<ast::IdentifierExpression>()) {
             // X
             if (auto* var = sem.Get<sem::VariableUser>(ident)) {
@@ -1001,6 +1010,7 @@ void DecomposeMemoryAccess::Run(CloneContext& ctx, const DataMap&, DataMap&) con
     }
 
     ctx.Clone();
+    return Program(std::move(b));
 }
 
 }  // namespace tint::transform
