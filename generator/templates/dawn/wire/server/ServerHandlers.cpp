@@ -120,8 +120,10 @@ namespace dawn::wire::server {
             switch (status) {
                 case CommandHandleResult::Success:
                     break;
-                case CommandHandleResult::Deferred:
+                case CommandHandleResult::Defer:
                     return start;
+                case CommandHandleResult::Pause:
+                    return deserializeBuffer.Buffer();
                 case CommandHandleResult::Error:
                     return nullptr;
             }
