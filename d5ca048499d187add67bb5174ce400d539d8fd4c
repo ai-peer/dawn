@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "810d0db3_5c4afa1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-28T18:00:07Z",
+      "side": 1,
+      "message": "Implementation looks good - but why have only the `expected.msl` expectations been changed?",
+      "revId": "d5ca048499d187add67bb5174ce400d539d8fd4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
