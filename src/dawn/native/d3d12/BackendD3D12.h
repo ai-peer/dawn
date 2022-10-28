@@ -16,6 +16,8 @@
 #define SRC_DAWN_NATIVE_D3D12_BACKENDD3D12_H_
 
 #include <memory>
+#include <string>
+#include <variant>
 #include <vector>
 
 #include "dawn/native/BackendConnection.h"
@@ -25,6 +27,21 @@
 namespace dawn::native::d3d12 {
 
 class PlatformFunctions;
+
+// DxcVersionInfo holds both DXC compiler (dxcompiler.dll) version and DXC validator (dxil.dll)
+// version, which are not necessarily identical. Both are in uint64_t type, as the result of
+// MakeDXCVersion.
+struct DxcVersionInfo {
+    uint64_t DxcCompilerVersion;
+    uint64_t DxcValidatorVersion;
+};
+
+// If DXC version information is not avaliable due to no DXC binary or error occurs when acquiring
+// version, DxcVersionUnavaliable indicates the version information being unavailable and holds the
+// detailed error information.
+struct DxcVersionUnavaliable {
+    std::string ErrorMessage;
+};
 
 class Backend : public BackendConnection {
   public:
@@ -40,11 +57,22 @@ class Backend : public BackendConnection {
     ComPtr<IDxcLibrary> GetDxcLibrary() const;
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
     ComPtr<IDxcValidator> GetDxcValidator() const;
-    ResultOrError<uint64_t> GetDXCompilerVersion();
 
-    // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
-    // be no older than given minimium version.
-    bool IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinorVersion);
+    // Return the DXC version information cached in mDxcVersionInformation, call the
+    // EnsureDxcVersionInformationCache if the cache is of DxcVersionNotAcquired. If the cache is of
+    // DxcVersionUnavaliable, return a dawn internal error with the cached error message.
+    ResultOrError<DxcVersionInfo> GetDxcVersion();
+
+    // Return true if and only if DXC binary is avaliable, and the DXC compiler and validator
+    // version are validated to be no older than a specific minimium version, currently 1.6.
+    bool IsDXCAvailable();
+
+    // Return true if and only if IsDXCAvailable() return true, and the DXC compiler and validator
+    // version are validated to be no older than the minimium version given in parameter.
+    bool IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersion,
+                                         uint64_t minimumCompilerMinorVersion,
+                                         uint64_t minimumValidatorMajorVersion,
+                                         uint64_t minimumValidatorMinorVersion);
 
     const PlatformFunctions* GetFunctions() const;
 
@@ -53,6 +81,8 @@ class Backend : public BackendConnection {
         const AdapterDiscoveryOptionsBase* optionsBase) override;
 
   private:
+    void EnsureDxcVersionInformationCache();
+
     // Keep mFunctions as the first member so that in the destructor it is freed last. Otherwise
     // the D3D12 DLLs are unloaded before we are done using them.
     std::unique_ptr<PlatformFunctions> mFunctions;
@@ -60,6 +90,17 @@ class Backend : public BackendConnection {
     ComPtr<IDxcLibrary> mDxcLibrary;
     ComPtr<IDxcCompiler> mDxcCompiler;
     ComPtr<IDxcValidator> mDxcValidator;
+
+    using DxcVersionNotAcquired = std::monostate;
+    // Cache of DXC version information. There are three possible states:
+    //   1. The DXC version information have not been checked yet, represented by
+    //      DxcVersionNotAcquired;
+    //   2. The DXC binary is not available or error occurs when checking the version information,
+    //      and therefore no DXC version information available, represented by DxcVersionUnavaliable
+    //      in which a error message is held;
+    //   3. The DXC version information is acquired successfully, stored in DxcVersionInfo.
+    // This cache is updated by EnsureDxcVersionInformationCache.
+    std::variant<DxcVersionNotAcquired, DxcVersionUnavaliable, DxcVersionInfo> mDxcVersionInfo;
 };
 
 }  // namespace dawn::native::d3d12
