@@ -26,6 +26,14 @@ namespace dawn::native::d3d12 {
 
 class PlatformFunctions;
 
+// DxcVersionInfo holds both DXC compiler (dxcompiler.dll) version and DXC validator (dxil.dll)
+// version, which are some necessarily identical. Both are in uint64_t type, as the result of
+// MakeDXCVersion.
+struct DxcVersionInfo {
+    uint64_t DxcCompilerVersion;
+    uint64_t DxcValidatorVersion;
+};
+
 class Backend : public BackendConnection {
   public:
     explicit Backend(InstanceBase* instance);
@@ -40,11 +48,18 @@ class Backend : public BackendConnection {
     ComPtr<IDxcLibrary> GetDxcLibrary() const;
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
     ComPtr<IDxcValidator> GetDxcValidator() const;
-    ResultOrError<uint64_t> GetDXCompilerVersion();
+    ResultOrError<DxcVersionInfo> GetDxcVersion();
 
-    // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
-    // be no older than given minimium version.
-    bool IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinorVersion);
+    // Return true if and only if DXC binary is avaliable, and the DXC compiler and validator
+    // version are validated to be no older than a specific minimium version, currently 1.6.
+    bool IsDXCAvailable();
+
+    // Return true if and only if IsDXCAvailable() return true, and the DXC compiler and validator
+    // version are validated to be no older than the minimium version given in parameter.
+    bool IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersion,
+                                         uint64_t minimumCompilerMinorVersion,
+                                         uint64_t minimumValidatorMajorVersion,
+                                         uint64_t minimumValidatorMinorVersion);
 
     const PlatformFunctions* GetFunctions() const;
 
