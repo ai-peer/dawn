@@ -66,7 +66,7 @@ class HoistToDeclBefore {
     bool Apply();
 
   private:
-    class State;
+    struct State;
     std::unique_ptr<State> state_;
 };
 
