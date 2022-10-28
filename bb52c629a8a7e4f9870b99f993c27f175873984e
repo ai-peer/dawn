@@ -22,6 +22,30 @@
       },
       "revId": "bb52c629a8a7e4f9870b99f993c27f175873984e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2926eea_af89d10e",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-28T00:08:16Z",
+      "side": 1,
+      "message": "Done. -0 is still 0, since it isn\u0027t \u003c or \u003e 0 the answer is 0 I believe.",
+      "parentUuid": "f78ecabc_a6fc3ed2",
+      "range": {
+        "startLine": 540,
+        "startChar": 8,
+        "endLine": 540,
+        "endChar": 25
+      },
+      "revId": "bb52c629a8a7e4f9870b99f993c27f175873984e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
