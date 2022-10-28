@@ -16,6 +16,24 @@
       "message": "Missing the two test cases for scalar bool input (true -\u003e true, false -\u003e false)",
       "revId": "10560433ee9dc4026a217ff336c3ce1f398047d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb6616d_deee826b",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-28T12:56:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ed7e2fe_0742757c",
+      "revId": "10560433ee9dc4026a217ff336c3ce1f398047d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
