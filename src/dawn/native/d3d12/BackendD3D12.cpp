@@ -16,6 +16,7 @@
 
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
@@ -142,30 +143,97 @@ ComPtr<IDxcValidator> Backend::GetDxcValidator() const {
     return mDxcValidator;
 }
 
-ResultOrError<uint64_t> Backend::GetDXCompilerVersion() {
-    DAWN_TRY(EnsureDxcValidator());
+// Check both Dxc compiler and Dxc validator version.
+std::optional<DxcVersionInfo> Backend::GetDxcVersion() {
+    auto tryAcquireDxcVersionInfo = [this]() -> ResultOrError<std::optional<DxcVersionInfo>> {
+        // DXC version information is not available if DXC binaries are not available.
+        if (!mFunctions->IsDXCBinaryAvailable()) {
+            return std::optional<DxcVersionInfo>();
+        }
 
-    ComPtr<IDxcVersionInfo> versionInfo;
-    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&versionInfo),
-                          "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+        DAWN_TRY(EnsureDxcValidator());
+        DAWN_TRY(EnsureDxcCompiler());
 
-    uint32_t compilerMajor, compilerMinor;
-    DAWN_TRY(CheckHRESULT(versionInfo->GetVersion(&compilerMajor, &compilerMinor),
-                          "IDxcVersionInfo::GetVersion"));
+        ComPtr<IDxcVersionInfo> compilerVersionInfo;
 
-    // Pack both into a single version number.
-    return MakeDXCVersion(compilerMajor, compilerMinor);
+        DAWN_TRY(CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo),
+                              "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo"));
+        uint32_t compilerMajor, compilerMinor;
+        DAWN_TRY(CheckHRESULT(compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
+                              "IDxcVersionInfo::GetVersion"));
+
+        ComPtr<IDxcVersionInfo> validatorVersionInfo;
+
+        DAWN_TRY(CheckHRESULT(mDxcValidator.As(&validatorVersionInfo),
+                              "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+        uint32_t validatorMajor, validatorMinor;
+        DAWN_TRY(CheckHRESULT(validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
+                              "IDxcVersionInfo::GetVersion"));
+
+        // Pack major and minor version number into a single version number.
+        uint64_t compilerVersion = MakeDXCVersion(compilerMajor, compilerMinor);
+        uint64_t validatorVersion = MakeDXCVersion(validatorMajor, validatorMinor);
+        return std::optional<DxcVersionInfo>(DxcVersionInfo{compilerVersion, validatorVersion});
+    };
+
+    // Try acquiring DXC version information if have not tried yet.
+    if (std::holds_alternative<std::monostate>(mDxcVersionInfo)) {
+        auto dxcVersionInfoOrError = tryAcquireDxcVersionInfo();
+
+        if (dxcVersionInfoOrError.IsSuccess()) {
+            // Cache the DXC version information, which can be unavailable (std::nullopt).
+            mDxcVersionInfo = dxcVersionInfoOrError.AcquireSuccess();
+        } else {
+            // Error occures when acquiring DXC version information, set the cache to unavailable
+            // (std::nullopt).
+            dawn::ErrorLog() << dxcVersionInfoOrError.AcquireError()->GetFormattedMessage();
+            mDxcVersionInfo = std::nullopt;
+        }
+    }
+
+    return std::get<std::optional<DxcVersionInfo>>(mDxcVersionInfo);
 }
 
 // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
-// be no older than given minimum version.
-bool Backend::IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinorVersion) {
-    if (mFunctions->IsDXCBinaryAvailable()) {
-        auto versionOrError = GetDXCompilerVersion();
-        if (versionOrError.IsSuccess()) {
-            // Validate the DXC version
-            auto version = versionOrError.AcquireSuccess();
-            if (version >= MakeDXCVersion(minimumMajorVersion, minimumMinorVersion)) {
+// be no older than a pre-defined minimum version.
+bool Backend::IsDXCAvailable() {
+    // The required minimum version for DXC compiler and validator.
+    // Notes about requirement consideration:
+    //   * DXC version 1.4 has some known issues when compiling Tint generated HLSL program, please
+    //     refer to crbug.com/tint/1719
+    //   * Windows SDK 20348 provides DXC compiler and validator version 1.6
+    // Here the minimum version requirement for DXC compiler and validator are both set to 1.6.
+    constexpr uint64_t minimumCompilerMajorVersion = 1;
+    constexpr uint64_t minimumCompilerMinorVersion = 6;
+    constexpr uint64_t minimumValidatorMajorVersion = 1;
+    constexpr uint64_t minimumValidatorMinorVersion = 6;
+
+    auto dxcVersionInfo = GetDxcVersion();
+    if (dxcVersionInfo.has_value()) {
+        if (dxcVersionInfo.value().DxcCompilerVersion >=
+                MakeDXCVersion(minimumCompilerMajorVersion, minimumCompilerMinorVersion) &&
+            dxcVersionInfo.value().DxcValidatorVersion >=
+                MakeDXCVersion(minimumValidatorMajorVersion, minimumValidatorMinorVersion)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Return true if and only if IsDXCAvailable() return true, and the DXC compiler and validator
+// version are validated to be no older than the minimium version given in parameter.
+bool Backend::IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersion,
+                                              uint64_t minimumCompilerMinorVersion,
+                                              uint64_t minimumValidatorMajorVersion,
+                                              uint64_t minimumValidatorMinorVersion) {
+    if (IsDXCAvailable()) {
+        auto dxcVersionInfo = GetDxcVersion();
+        if (dxcVersionInfo.has_value()) {
+            if (dxcVersionInfo.value().DxcCompilerVersion >=
+                    MakeDXCVersion(minimumCompilerMajorVersion, minimumCompilerMinorVersion) &&
+                dxcVersionInfo.value().DxcValidatorVersion >=
+                    MakeDXCVersion(minimumValidatorMajorVersion, minimumValidatorMinorVersion)) {
                 return true;
             }
         }
