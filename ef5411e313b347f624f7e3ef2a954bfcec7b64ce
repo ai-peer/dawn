@@ -140,6 +140,24 @@
       "parentUuid": "258fb2bf_dbef80bb",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78daab38_c85a7405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-28T16:52:42Z",
+      "side": 1,
+      "message": "The spec changed a while back and I think the tests are outdated. Please see:\nhttps://github.com/gpuweb/gpuweb/pull/3351\n\nThe reason for \"it is always valid to get mapped ranges of a GPUBuffer that is mappedAtCreation, even if it is invalid\" is we can\u0027t have server-side validation block the client-side `getMappedRange` operation. It\u0027s not intended (anymore) that implementations have to hide OOM in `mappedAtCreation`. `createBuffer` will throw an exception if the mapping for `mappedAtCreation` fails, so there\u0027s no `GPUBuffer` object to call `getMappedRange` *on*:\nhttps://gpuweb.github.io/gpuweb/#abstract-opdef-initialize-an-active-buffer-mapping\n\nIn the C API, it\u0027s not possible to throw an exception, so it probably makes sense to return an error buffer and generate a Dawn validation error.",
+      "parentUuid": "e27f120e_bfaedbd2",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
