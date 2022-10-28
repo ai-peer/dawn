@@ -122,6 +122,24 @@
       "parentUuid": "e6b41267_7e49bbbc",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e27f120e_bfaedbd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-10-28T13:14:01Z",
+      "side": 1,
+      "message": "We could remove that assert TBH.\n\nPut also please see with Kai, or even the wider group about what to do in this OOM case. Having to fake getMappedRange working would be very onerous as you\u0027ve found.",
+      "parentUuid": "258fb2bf_dbef80bb",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
