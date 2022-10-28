@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc35347_819265cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-28T03:39:36Z",
+      "side": 1,
+      "message": "PTAL. (This works on OSX, hopefully the bots don\u0027t explode)",
+      "revId": "78392a2c01f2b0a0eda170a462b8142259bd2e44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
