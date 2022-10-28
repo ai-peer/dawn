@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de75eea5_7af41e1f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2634,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-28T11:49:43Z",
+      "side": 1,
+      "message": "I don\u0027t follow this - the `N+1` case should be valid. Array size is an \"override expression\", which includes this sort of thing.\n\nThis was a conscious choice as things like `wgsize * 2` are often used to size workgroup arrays in compute shaders.\n\nOpened crbug.com/tint/1737",
+      "parentUuid": "3f278b50_600349a5",
+      "revId": "47ac3287dbe066ee16421141673f36b098ce4e36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41288659_41a661d0",
