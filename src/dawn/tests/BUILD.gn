@@ -115,6 +115,55 @@ if (build_with_chromium) {
 }
 
 ###############################################################################
+# Copy target for DXC
+###############################################################################
+
+# When building with chromium under Windows, we need to copy the DXC from
+# Windows SDK into build folder, in order to ensure a DXC of verison 1.6 is
+# avaliable when running end-to-end tests in Chromium. Note that currently no
+# DXC provided for arm64 in Windows SDK 20348.
+_copy_dxc_for_testing_in_chromium = false
+
+if (build_with_chromium && is_win) {
+  import("//build/config/win/visual_studio_version.gni")
+
+  _dxc_exist_in_windows_kit =
+      # Ensure that version 10.0.20348.0 Windows 10 SDK installed, which is
+      # required for building Chromium
+      exec_script("scripts/path_exists.py",
+                  [ "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/" ],
+                  "value") &&
+      # Ensure that DXC files is existed in the SDK
+      exec_script("scripts/path_exists.py",
+                  [ "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxc.exe" ],
+                  "value") &&
+      exec_script(
+          "scripts/path_exists.py",
+          [ "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxcompiler.dll" ],
+          "value") &&
+      exec_script("scripts/path_exists.py",
+                  [ "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxil.dll" ],
+                  "value")
+
+  # If DXC exists in Windows SDK 20348, copy it into out directory for running
+  # Dawn end-to-end test in Chromium.
+  if (_dxc_exist_in_windows_kit) {
+    _copy_dxc_for_testing_in_chromium = true
+
+    # Declare a copy target to copy DXC binary from Windows SDK
+    copy("copy_dxc_binary") {
+      sources = [
+        "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxc.exe",
+        "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxcompiler.dll",
+        "$windows_sdk_path/bin/10.0.20348.0/$target_cpu/dxil.dll",
+      ]
+
+      outputs = [ "$root_out_dir/{{source_file_part}}" ]
+    }
+  }
+}
+
+###############################################################################
 # Dawn test template
 ###############################################################################
 template("dawn_test") {
@@ -633,6 +682,12 @@ dawn_test("dawn_end2end_tests") {
   # needed to run in swarming correctly.
   if (build_with_chromium) {
     deps += [ ":end2end_tests_main" ]
+
+    # Running Dawn end2end tests within Chromium in Windows require DXC, copy
+    # DXC binary from Windows SDK if possible.
+    if (_copy_dxc_for_testing_in_chromium) {
+      data_deps += [ ":copy_dxc_binary" ]
+    }
   } else {
     sources += [ "End2EndTestsMain.cpp" ]
   }
