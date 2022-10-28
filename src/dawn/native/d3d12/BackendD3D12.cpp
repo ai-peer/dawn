@@ -16,6 +16,7 @@
 
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
@@ -142,32 +143,124 @@ ComPtr<IDxcValidator> Backend::GetDxcValidator() const {
     return mDxcValidator;
 }
 
-ResultOrError<uint64_t> Backend::GetDXCompilerVersion() {
-    DAWN_TRY(EnsureDxcValidator());
+void Backend::EnsureDxcVersionInformationCache() {
+    // Return if DXC version information are already acquired and cached.
+    if (!std::holds_alternative<DxcVersionNotAcquired>(mDxcVersionInfo)) {
+        return;
+    }
 
-    ComPtr<IDxcVersionInfo> versionInfo;
-    DAWN_TRY(CheckHRESULT(mDxcValidator.As(&versionInfo),
-                          "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+    // DXC version information is not available if DXC binaries are not available.
+    if (!mFunctions->IsDXCBinaryAvailable()) {
+        mDxcVersionInfo = DxcVersionUnavaliable{
+            "DXC binary is not available while trying to acquiring DXC version"};
+        return;
+    }
 
-    uint32_t compilerMajor, compilerMinor;
-    DAWN_TRY(CheckHRESULT(versionInfo->GetVersion(&compilerMajor, &compilerMinor),
-                          "IDxcVersionInfo::GetVersion"));
+    auto tryAcquireDxcVersionInfo = [this]() -> ResultOrError<DxcVersionInfo> {
+        DAWN_TRY(EnsureDxcValidator());
+        DAWN_TRY(EnsureDxcCompiler());
 
-    // Pack both into a single version number.
-    return MakeDXCVersion(compilerMajor, compilerMinor);
+        ComPtr<IDxcVersionInfo> compilerVersionInfo;
+
+        DAWN_TRY(CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo),
+                              "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo"));
+        uint32_t compilerMajor, compilerMinor;
+        DAWN_TRY(CheckHRESULT(compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
+                              "IDxcVersionInfo::GetVersion"));
+
+        ComPtr<IDxcVersionInfo> validatorVersionInfo;
+
+        DAWN_TRY(CheckHRESULT(mDxcValidator.As(&validatorVersionInfo),
+                              "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
+        uint32_t validatorMajor, validatorMinor;
+        DAWN_TRY(CheckHRESULT(validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
+                              "IDxcVersionInfo::GetVersion"));
+
+        // Pack major and minor version number into a single version number.
+        uint64_t compilerVersion = MakeDXCVersion(compilerMajor, compilerMinor);
+        uint64_t validatorVersion = MakeDXCVersion(validatorMajor, validatorMinor);
+        return DxcVersionInfo{compilerVersion, validatorVersion};
+    };
+
+    auto dxcVersionInfoOrError = tryAcquireDxcVersionInfo();
+
+    if (dxcVersionInfoOrError.IsSuccess()) {
+        // Cache the DXC version information.
+        mDxcVersionInfo = dxcVersionInfoOrError.AcquireSuccess();
+    } else {
+        // Error occurs when acquiring DXC version information, set the cache to unavailable and
+        // record the error message.
+        std::string errorMessage = dxcVersionInfoOrError.AcquireError()->GetFormattedMessage();
+        dawn::ErrorLog() << errorMessage;
+        mDxcVersionInfo = DxcVersionUnavaliable{errorMessage};
+    }
+}
+
+// Check both Dxc compiler and Dxc validator version.
+ResultOrError<DxcVersionInfo> Backend::GetDxcVersion() {
+    EnsureDxcVersionInformationCache();
+
+    DAWN_ASSERT(!std::holds_alternative<DxcVersionNotAcquired>(mDxcVersionInfo));
+    if (std::holds_alternative<DxcVersionUnavaliable>(mDxcVersionInfo)) {
+        return DAWN_INTERNAL_ERROR(std::get<DxcVersionUnavaliable>(mDxcVersionInfo).ErrorMessage);
+    } else {
+        DAWN_ASSERT(std::holds_alternative<DxcVersionInfo>(mDxcVersionInfo));
+        return DxcVersionInfo(std::get<DxcVersionInfo>(mDxcVersionInfo));
+    }
 }
 
 // Return true if and only if DXC binary is avaliable, and the DXC version is validated to
-// be no older than given minimum version.
-bool Backend::IsDXCAvailable(uint64_t minimumMajorVersion, uint64_t minimumMinorVersion) {
+// be no older than a pre-defined minimum version.
+bool Backend::IsDXCAvailable() {
+    // The required minimum version for DXC compiler and validator.
+    // Notes about requirement consideration:
+    //   * DXC version 1.4 has some known issues when compiling Tint generated HLSL program, please
+    //     refer to crbug.com/tint/1719
+    //   * Windows SDK 20348 provides DXC compiler and validator version 1.6
+    // Here the minimum version requirement for DXC compiler and validator are both set to 1.6.
+    constexpr uint64_t minimumCompilerMajorVersion = 1;
+    constexpr uint64_t minimumCompilerMinorVersion = 6;
+    constexpr uint64_t minimumValidatorMajorVersion = 1;
+    constexpr uint64_t minimumValidatorMinorVersion = 6;
+
+    // Check that Dxc binaries are available.
     if (mFunctions->IsDXCBinaryAvailable()) {
-        auto versionOrError = GetDXCompilerVersion();
-        if (versionOrError.IsSuccess()) {
-            // Validate the DXC version
-            auto version = versionOrError.AcquireSuccess();
-            if (version >= MakeDXCVersion(minimumMajorVersion, minimumMinorVersion)) {
+        EnsureDxcVersionInformationCache();
+        // Check that DXC version information is acquired successfully.
+        if (std::holds_alternative<DxcVersionInfo>(mDxcVersionInfo)) {
+            const DxcVersionInfo& dxcVersionInfo = std::get<DxcVersionInfo>(mDxcVersionInfo);
+            // Check that DXC compiler and validator version are not lower than minimum.
+            if (dxcVersionInfo.DxcCompilerVersion >=
+                    MakeDXCVersion(minimumCompilerMajorVersion, minimumCompilerMinorVersion) &&
+                dxcVersionInfo.DxcValidatorVersion >=
+                    MakeDXCVersion(minimumValidatorMajorVersion, minimumValidatorMinorVersion)) {
                 return true;
             }
+        }
+    }
+
+    return false;
+}
+
+// Return true if and only if IsDXCAvailable() return true, and the DXC compiler and validator
+// version are validated to be no older than the minimium version given in parameter.
+bool Backend::IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersion,
+                                              uint64_t minimumCompilerMinorVersion,
+                                              uint64_t minimumValidatorMajorVersion,
+                                              uint64_t minimumValidatorMinorVersion) {
+    // Check that IsDXCAvailable return true, i.e. DXC binaries are avaliable, and the DXC version
+    // is validated to be no older than a pre-defined minimum version.
+    if (IsDXCAvailable()) {
+        // The DXC version information cache should be validated to be valid by IsDXCAvailable.
+        DAWN_ASSERT(std::holds_alternative<DxcVersionInfo>(mDxcVersionInfo));
+
+        const DxcVersionInfo& dxcVersionInfo = std::get<DxcVersionInfo>(mDxcVersionInfo);
+        // Check that DXC compiler and validator version are not lower than given requirements.
+        if (dxcVersionInfo.DxcCompilerVersion >=
+                MakeDXCVersion(minimumCompilerMajorVersion, minimumCompilerMinorVersion) &&
+            dxcVersionInfo.DxcValidatorVersion >=
+                MakeDXCVersion(minimumValidatorMajorVersion, minimumValidatorMinorVersion)) {
+            return true;
         }
     }
     return false;
