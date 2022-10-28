@@ -56,7 +56,8 @@ class DAWN_WIRE_EXPORT CommandHandler {
 
 enum class CommandHandleResult {
     Success,
-    Deferred,
+    Defer,
+    Pause,
     Error,
 };
 
