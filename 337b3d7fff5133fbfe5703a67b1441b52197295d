@@ -69,6 +69,24 @@
       "parentUuid": "cd9d3549_99ad142f",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf706795_22d358ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-10-28T18:21:53Z",
+      "side": 1,
+      "message": "The PR has been merged. How can I know whether the change to CTS has been propagated to Chromium/Dawn testing server?",
+      "parentUuid": "b8475ef7_f606f255",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
