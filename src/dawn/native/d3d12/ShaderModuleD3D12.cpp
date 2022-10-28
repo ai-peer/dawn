@@ -479,11 +479,14 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
     req.bytecode.compileFlags = compileFlags;
 
     if (device->IsToggleEnabled(Toggle::UseDXC)) {
+        DxcVersionInfo dxcVersionInfo;
+        DAWN_TRY_ASSIGN(dxcVersionInfo,
+                        ToBackend(device->GetAdapter())->GetBackend()->GetDxcVersion());
+
         req.bytecode.compiler = Compiler::DXC;
         req.bytecode.dxcLibrary = device->GetDxcLibrary().Get();
         req.bytecode.dxcCompiler = device->GetDxcCompiler().Get();
-        DAWN_TRY_ASSIGN(req.bytecode.compilerVersion,
-                        ToBackend(device->GetAdapter())->GetBackend()->GetDXCompilerVersion());
+        req.bytecode.compilerVersion = dxcVersionInfo.DxcCompilerVersion;
         req.bytecode.dxcShaderProfile = device->GetDeviceInfo().shaderProfiles[stage];
     } else {
         req.bytecode.compiler = Compiler::FXC;
