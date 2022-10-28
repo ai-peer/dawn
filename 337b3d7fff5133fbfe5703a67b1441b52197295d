@@ -87,6 +87,24 @@
       "parentUuid": "b8475ef7_f606f255",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2efe07b_ce138d7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-10-28T19:01:33Z",
+      "side": 1,
+      "message": "The rolls are done semi-manually, so it won\u0027t be picked up for some time. You can check the currently-rolled revision here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/DEPS;l\u003d161\n\nIn the meantime, as long as the tests pass locally for you, it\u0027s OK to add a suppression for the broken tests. It should get automatically removed by our roll tool when someone does a manual roll.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/webgpu-cts/expectations.txt",
+      "parentUuid": "bf706795_22d358ef",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
