@@ -139,6 +139,14 @@ class Type : public Castable<Type, Node> {
     bool is_abstract_integer_scalar_or_vector() const;
     /// @returns true if this type is an abstract float scalar or vector
     bool is_abstract_float_scalar_or_vector() const;
+    /// @returns true if this type is a concrete integer vector
+    bool is_concrete_integer_vector() const;
+    /// @returns true if this type is a concrete float vector
+    bool is_concrete_float_vector() const;
+    /// @returns true if this type is a concrete integer scalar or vector
+    bool is_concrete_integer_scalar_or_vector() const;
+    /// @returns true if this type is a concrete float scalar or vector
+    bool is_concrete_float_scalar_or_vector() const;
     /// @returns true if this type is a boolean vector
     bool is_bool_vector() const;
     /// @returns true if this type is boolean scalar or vector

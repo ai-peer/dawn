@@ -1,5 +1,9 @@
+uint tint_clamp(uint e, uint low, uint high) {
+  return min(max(e, low), high);
+}
+
 void clamp_a2de25() {
-  uint res = 1u;
+  uint res = tint_clamp(1u, 1u, 1u);
 }
 
 struct tint_symbol {

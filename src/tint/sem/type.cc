@@ -149,6 +149,22 @@ bool Type::is_abstract_float_scalar_or_vector() const {
     return Is<sem::AbstractFloat>() || is_abstract_float_vector();
 }
 
+bool Type::is_concrete_integer_vector() const {
+    return Is([](const Vector* v) { return v->type()->IsAnyOf<sem::I32, sem::U32>(); });
+}
+
+bool Type::is_concrete_float_vector() const {
+    return Is([](const Vector* v) { return v->type()->IsAnyOf<sem::F32, sem::F16>(); });
+}
+
+bool Type::is_concrete_integer_scalar_or_vector() const {
+    return IsAnyOf<sem::I32, sem::U32>() || is_concrete_integer_vector();
+}
+
+bool Type::is_concrete_float_scalar_or_vector() const {
+    return IsAnyOf<sem::F32, sem::F16>() || is_concrete_float_vector();
+}
+
 bool Type::is_bool_vector() const {
     return Is([](const Vector* v) { return v->type()->Is<Bool>(); });
 }

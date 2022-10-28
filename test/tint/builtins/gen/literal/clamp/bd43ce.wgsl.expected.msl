@@ -1,8 +1,12 @@
 #include <metal_stdlib>
 
 using namespace metal;
+uint4 tint_clamp(uint4 e, uint4 low, uint4 high) {
+  return min(max(e, low), high);
+}
+
 void clamp_bd43ce() {
-  uint4 res = uint4(1u);
+  uint4 res = tint_clamp(uint4(1u), uint4(1u), uint4(1u));
 }
 
 struct tint_symbol {

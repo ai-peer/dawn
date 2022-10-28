@@ -1,5 +1,9 @@
+int tint_clamp(int e, int low, int high) {
+  return min(max(e, low), high);
+}
+
 void clamp_b07c65() {
-  int res = 1;
+  int res = tint_clamp(1, 1, 1);
 }
 
 struct tint_symbol {
