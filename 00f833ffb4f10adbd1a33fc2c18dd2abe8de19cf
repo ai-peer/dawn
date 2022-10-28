@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c77e7c_05001891",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1108,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-28T03:24:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7d57e81_4a3994d7",
+      "range": {
+        "startLine": 1106,
+        "startChar": 0,
+        "endLine": 1108,
+        "endChar": 66
+      },
+      "revId": "00f833ffb4f10adbd1a33fc2c18dd2abe8de19cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "47b7afd1_e91e1f1f",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-10-27T15:08:13Z",
       "side": 1,
       "message": "no longer need this comment?",
+      "range": {
+        "startLine": 1155,
+        "startChar": 0,
+        "endLine": 1157,
+        "endChar": 66
+      },
+      "revId": "00f833ffb4f10adbd1a33fc2c18dd2abe8de19cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f20b88b2_81011a04",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1157,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-10-28T03:24:21Z",
+      "side": 1,
+      "message": "I missed this TODO, it can be removed.",
+      "parentUuid": "47b7afd1_e91e1f1f",
       "range": {
         "startLine": 1155,
         "startChar": 0,
