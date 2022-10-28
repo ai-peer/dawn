@@ -103,16 +103,15 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
     // landed.
     if (descriptor->visibleRect.width > 0) {
         DAWN_INVALID_IF(descriptor->visibleRect.width == 0 || descriptor->visibleRect.height == 0,
-                        "VisibleRect(%u, %u) have 0 on width or height.",
-                        descriptor->visibleRect.width, descriptor->visibleRect.height);
+                        "VisibleRect %s have 0 on width or height.", &descriptor->visibleRect);
 
-        Extent3D maxVisibleRectSize = descriptor->plane0->GetTexture()->GetSize();
-        DAWN_INVALID_IF(descriptor->visibleRect.width > maxVisibleRectSize.width ||
-                            descriptor->visibleRect.height > maxVisibleRectSize.height,
-                        "VisibleRect(%u, %u) is exceed the max visible rect size, defined by "
-                        "Plane0 size (%u, %u).",
-                        descriptor->visibleRect.width, descriptor->visibleRect.height,
-                        maxVisibleRectSize.width, maxVisibleRectSize.height);
+        const Extent3D textureSize = descriptor->plane0->GetTexture()->GetSize();
+        DAWN_INVALID_IF(
+            descriptor->visibleRect.x + descriptor->visibleRect.width > textureSize.width ||
+                descriptor->visibleRect.y + descriptor->visibleRect.height > textureSize.height,
+            "VisibleRect %s is exceed the texture size, defined by "
+            "Plane0 size (%u, %u).",
+            &descriptor->visibleRect, textureSize.width, textureSize.height);
     }
 
     return {};
@@ -252,9 +251,19 @@ ObjectType ExternalTextureBase::GetType() const {
     return ObjectType::ExternalTexture;
 }
 
-const Extent2D& ExternalTextureBase::GetVisibleRect() const {
+const Rect& ExternalTextureBase::GetVisibleRect() const {
     ASSERT(!IsError());
     return mVisibleRect;
+}
+
+const Extent2D ExternalTextureBase::GetVisibleSize() const {
+    ASSERT(!IsError());
+    return {mVisibleRect.width, mVisibleRect.height};
+}
+
+const Origin2D ExternalTextureBase::GetVisibleOrigin() const {
+    ASSERT(!IsError());
+    return {mVisibleRect.x, mVisibleRect.y};
 }
 
 }  // namespace dawn::native
