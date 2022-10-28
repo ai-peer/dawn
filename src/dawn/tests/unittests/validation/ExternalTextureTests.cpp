@@ -590,8 +590,30 @@ TEST_F(ExternalTextureTest, CreateExternalTextureWithErrorVisibleRect) {
 
         wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
         externalDesc.plane0 = texture.CreateView();
-        externalDesc.visibleRect = {texture.GetWidth(), texture.GetHeight()};
+        externalDesc.visibleRect = {0, 0, texture.GetWidth(), texture.GetHeight()};
         device.CreateExternalTexture(&externalDesc);
+    }
+
+    // VisibleRect is OOB on x
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.visibleRect = {1, 0, texture.GetWidth(), texture.GetHeight()};
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
+
+    // VisibleRect is OOB on y
+    {
+        wgpu::TextureDescriptor textureDescriptor = CreateTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.visibleRect = {0, 1, texture.GetWidth(), texture.GetHeight()};
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
     }
 
     // VisibleRect is OOB on width
@@ -601,7 +623,7 @@ TEST_F(ExternalTextureTest, CreateExternalTextureWithErrorVisibleRect) {
 
         wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
         externalDesc.plane0 = texture.CreateView();
-        externalDesc.visibleRect = {texture.GetWidth() + 1, texture.GetHeight()};
+        externalDesc.visibleRect = {0, 0, texture.GetWidth() + 1, texture.GetHeight()};
         ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
     }
 
@@ -612,7 +634,7 @@ TEST_F(ExternalTextureTest, CreateExternalTextureWithErrorVisibleRect) {
 
         wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
         externalDesc.plane0 = texture.CreateView();
-        externalDesc.visibleRect = {texture.GetWidth(), texture.GetHeight() + 1};
+        externalDesc.visibleRect = {0, 0, texture.GetWidth(), texture.GetHeight() + 1};
         ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
     }
 }

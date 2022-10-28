@@ -114,7 +114,7 @@ class CopyExternalTextureForBrowserTests : public Parent {
         externalDesc.plane0 = externalTexturePlane0.CreateView();
         externalDesc.plane1 = externalTexturePlane1.CreateView();
 
-        externalDesc.visibleRect = {kWidth, kHeight};
+        externalDesc.visibleRect = {0, 0, kWidth, kHeight};
 
         // Import the external texture
         return this->device.CreateExternalTexture(&externalDesc);
