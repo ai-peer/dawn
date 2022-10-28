@@ -31,11 +31,9 @@ using namespace tint::number_suffixes;  // NOLINT
 
 namespace tint::transform {
 
-ExpandCompoundAssignment::ExpandCompoundAssignment() = default;
+namespace {
 
-ExpandCompoundAssignment::~ExpandCompoundAssignment() = default;
-
-bool ExpandCompoundAssignment::ShouldRun(const Program* program, const DataMap&) const {
+bool ShouldRun(const Program* program) {
     for (auto* node : program->ASTNodes().Objects()) {
         if (node->IsAnyOf<ast::CompoundAssignmentStatement, ast::IncrementDecrementStatement>()) {
             return true;
@@ -43,8 +41,6 @@ bool ExpandCompoundAssignment::ShouldRun(const Program* program, const DataMap&)
     }
     return false;
 }
-
-namespace {
 
 /// Internal class used to collect statement expansions during the transform.
 class State {
@@ -159,17 +155,27 @@ class State {
     }
 
     /// Finalize the transformation and clone the module.
-    void Finalize() {
-        hoist_to_decl_before.Apply();
-        ctx.Clone();
-    }
+    void Finalize() { hoist_to_decl_before.Apply(); }
 };
 
 }  // namespace
 
-void ExpandCompoundAssignment::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
+ExpandCompoundAssignment::ExpandCompoundAssignment() = default;
+
+ExpandCompoundAssignment::~ExpandCompoundAssignment() = default;
+
+Transform::ApplyResult ExpandCompoundAssignment::Apply(const Program* src,
+                                                       const DataMap&,
+                                                       DataMap&) const {
+    ProgramBuilder b;
+    CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
+
+    if (!ShouldRun(src)) {
+        return SkipTransform;
+    }
+
     State state(ctx);
-    for (auto* node : ctx.src->ASTNodes().Objects()) {
+    for (auto* node : src->ASTNodes().Objects()) {
         if (auto* assign = node->As<ast::CompoundAssignmentStatement>()) {
             state.Expand(assign, assign->lhs, ctx.Clone(assign->rhs), assign->op);
         } else if (auto* inc_dec = node->As<ast::IncrementDecrementStatement>()) {
@@ -179,6 +185,9 @@ void ExpandCompoundAssignment::Run(CloneContext& ctx, const DataMap&, DataMap&) 
         }
     }
     state.Finalize();
+
+    ctx.Clone();
+    return Program(std::move(b));
 }
 
 }  // namespace tint::transform

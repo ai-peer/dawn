@@ -38,6 +38,15 @@ using WorkgroupParameterMemberList = utils::Vector<const ast::StructMember*, 8>;
 // The name of the struct member for arrays that are wrapped in structures.
 const char* kWrappedArrayMemberName = "arr";
 
+bool ShouldRun(const Program* program) {
+    for (auto* decl : program->AST().GlobalDeclarations()) {
+        if (decl->Is<ast::Variable>()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 // Returns `true` if `type` is or contains a matrix type.
 bool ContainsMatrix(const sem::Type* type) {
     type = type->UnwrapRef();
@@ -501,19 +510,21 @@ ModuleScopeVarToEntryPointParam::ModuleScopeVarToEntryPointParam() = default;
 
 ModuleScopeVarToEntryPointParam::~ModuleScopeVarToEntryPointParam() = default;
 
-bool ModuleScopeVarToEntryPointParam::ShouldRun(const Program* program, const DataMap&) const {
-    for (auto* decl : program->AST().GlobalDeclarations()) {
-        if (decl->Is<ast::Variable>()) {
-            return true;
-        }
-    }
-    return false;
-}
+Transform::ApplyResult ModuleScopeVarToEntryPointParam::Apply(const Program* src,
+                                                              const DataMap&,
+                                                              DataMap&) const {
+    ProgramBuilder b;
+    CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-void ModuleScopeVarToEntryPointParam::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
+    if (!ShouldRun(src)) {
+        return SkipTransform;
+    }
+
     State state{ctx};
     state.Process();
+
     ctx.Clone();
+    return Program(std::move(b));
 }
 
 }  // namespace tint::transform

@@ -35,6 +35,16 @@ TINT_INSTANTIATE_TYPEINFO(tint::transform::UnwindDiscardFunctions);
 namespace tint::transform {
 namespace {
 
+bool ShouldRun(const Program* program) {
+    auto& sem = program->Sem();
+    for (auto* f : program->AST().Functions()) {
+        if (sem.Get(f)->Behaviors().Contains(sem::Behavior::kDiscard)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 class State {
   private:
     CloneContext& ctx;
@@ -336,8 +346,6 @@ class State {
 
             return nullptr;
         });
-
-        ctx.Clone();
     }
 };
 
@@ -346,19 +354,21 @@ class State {
 UnwindDiscardFunctions::UnwindDiscardFunctions() = default;
 UnwindDiscardFunctions::~UnwindDiscardFunctions() = default;
 
-void UnwindDiscardFunctions::Run(CloneContext& ctx, const DataMap&, DataMap&) const {
+Transform::ApplyResult UnwindDiscardFunctions::Apply(const Program* src,
+                                                     const DataMap&,
+                                                     DataMap&) const {
+    ProgramBuilder b;
+    CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
+
+    if (!ShouldRun(ctx.src)) {
+        return SkipTransform;
+    }
+
     State state(ctx);
     state.Run();
-}
 
-bool UnwindDiscardFunctions::ShouldRun(const Program* program, const DataMap& /*data*/) const {
-    auto& sem = program->Sem();
-    for (auto* f : program->AST().Functions()) {
-        if (sem.Get(f)->Behaviors().Contains(sem::Behavior::kDiscard)) {
-            return true;
-        }
-    }
-    return false;
+    ctx.Clone();
+    return Program(std::move(b));
 }
 
 }  // namespace tint::transform
