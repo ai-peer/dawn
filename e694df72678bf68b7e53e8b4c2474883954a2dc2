@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45557f95_05d6b56f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-10-28T09:34:29Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\n\nCurrently this CL is expected to fail the dawn-win-rel bot, because Dawn are using DXC from Windows SDK default path now, and that DXC is the old v1.4 one (Bug tint:1719). Tried locally on Windows with DXC v1.6 or v1.7, Tint and Dawn tests are passed. Currently I am still not sure how to find the higher version DXC on trybot, but this CL is kind of ready for review, so I raise it. \n\nThis CL does not include new Tint E2E tests, they are quite a lot and added in another CL https://dawn-review.googlesource.com/c/dawn/+/107543.",
+      "revId": "e694df72678bf68b7e53e8b4c2474883954a2dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
