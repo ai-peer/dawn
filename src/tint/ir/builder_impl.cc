@@ -24,6 +24,7 @@
 #include "src/tint/ast/return_statement.h"
 #include "src/tint/ast/statement.h"
 #include "src/tint/ast/static_assert.h"
+#include "src/tint/ast/switch_statement.h"
 #include "src/tint/ir/function.h"
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
@@ -209,7 +210,7 @@ bool BuilderImpl::EmitStatement(const ast::Statement* stmt) {
         //        [&](const ast::ForLoopStatement* l) { },
         //        [&](const ast::WhileStatement* l) { },
         [&](const ast::ReturnStatement* r) { return EmitReturn(r); },
-        //        [&](const ast::SwitchStatement* s) { },
+        [&](const ast::SwitchStatement* s) { return EmitSwitch(s); },
         //        [&](const ast::VariableDeclStatement* v) { },
         [&](const ast::StaticAssert*) {
             return true;  // Not emitted
@@ -257,7 +258,7 @@ bool BuilderImpl::EmitIf(const ast::IfStatement* stmt) {
     // If both branches went somewhere, then they both returned, continued or broke. So,
     // there is no need for the if merge-block and there is nothing to branch to the merge
     // block anyway.
-    if (IsBranched(if_node->true_target) && IsBranched(if_node->false_target)) {
+    if (!IsConnected(if_node->merge_target)) {
         return true;
     }
 
@@ -310,6 +311,35 @@ bool BuilderImpl::EmitLoop(const ast::LoopStatement* stmt) {
     if (!IsConnected(loop_node->merge_target)) {
         current_flow_block_ = nullptr;
     }
+    return true;
+}
+
+bool BuilderImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
+    auto* switch_node = builder_.CreateSwitch(stmt);
+
+    // TODO(dsinclair): Emit the condition expression into the current block
+
+    BranchTo(switch_node);
+
+    ast_to_flow_[stmt] = switch_node;
+
+    {
+        FlowStackScope scope(this, switch_node);
+
+        for (const auto* c : stmt->body) {
+            current_flow_block_ = builder_.CreateCase(switch_node, c->selectors);
+            if (!EmitStatement(c->body)) {
+                return false;
+            }
+            BranchToIfNeeded(switch_node->merge_target);
+        }
+    }
+    current_flow_block_ = nullptr;
+
+    if (IsConnected(switch_node->merge_target)) {
+        current_flow_block_ = switch_node->merge_target;
+    }
+
     return true;
 }
 
