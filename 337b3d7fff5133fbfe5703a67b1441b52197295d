@@ -105,6 +105,24 @@
       "parentUuid": "bf706795_22d358ef",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b60ee6bd_dd1954b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-10-29T07:57:36Z",
+      "side": 1,
+      "message": "Thanks. The answer reminded me of that I asked the same question before. Sorry I have bad memory!\n\nI don\u0027t think we are in a rush to merge this CL so I want to wait for some days until the change to CTS will be reflected. I want to think of the suppression if the change won\u0027t be reflected in a few days.",
+      "parentUuid": "d2efe07b_ce138d7b",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
