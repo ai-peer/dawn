@@ -14,11 +14,18 @@
 
 #include "src/tint/ir/loop.h"
 
+#include "src/tint/ast/for_loop_statement.h"
+#include "src/tint/ast/loop_statement.h"
+#include "src/tint/ast/while_statement.h"
+
 TINT_INSTANTIATE_TYPEINFO(tint::ir::Loop);
 
 namespace tint::ir {
 
-Loop::Loop(const ast::LoopStatement* stmt) : Base(), source(stmt) {}
+Loop::Loop(const ast::Statement* stmt) : Base(), source(stmt) {
+    TINT_ASSERT(IR, stmt->Is<ast::LoopStatement>() || stmt->Is<ast::WhileStatement>() ||
+                        stmt->Is<ast::ForLoopStatement>());
+}
 
 Loop::~Loop() = default;
 

@@ -295,10 +295,10 @@ TEST_F(IRBuilderImplTest, Loop_WithContinue) {
     ASSERT_NE(ir_if, nullptr);
     ASSERT_TRUE(ir_if->Is<ir::If>());
 
-    auto* if_flow = ir_if->As<ir::If>();
-    ASSERT_NE(if_flow->true_target, nullptr);
-    ASSERT_NE(if_flow->false_target, nullptr);
-    ASSERT_NE(if_flow->merge_target, nullptr);
+    auto* flow_if = ir_if->As<ir::If>();
+    ASSERT_NE(flow_if->true_target, nullptr);
+    ASSERT_NE(flow_if->false_target, nullptr);
+    ASSERT_NE(flow_if->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -307,17 +307,17 @@ TEST_F(IRBuilderImplTest, Loop_WithContinue) {
     EXPECT_EQ(2u, loop_flow->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow->continuing_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, loop_flow);
-    EXPECT_EQ(loop_flow->start_target->branch_target, if_flow);
-    EXPECT_EQ(if_flow->true_target->branch_target, loop_flow->merge_target);
-    EXPECT_EQ(if_flow->false_target->branch_target, if_flow->merge_target);
+    EXPECT_EQ(loop_flow->start_target->branch_target, flow_if);
+    EXPECT_EQ(flow_if->true_target->branch_target, loop_flow->merge_target);
+    EXPECT_EQ(flow_if->false_target->branch_target, flow_if->merge_target);
     EXPECT_EQ(loop_flow->continuing_target->branch_target, loop_flow->start_target);
     EXPECT_EQ(loop_flow->merge_target->branch_target, func->end_target);
 }
@@ -354,10 +354,10 @@ TEST_F(IRBuilderImplTest, Loop_WithContinuing_BreakIf) {
     ASSERT_NE(ir_break_if, nullptr);
     ASSERT_TRUE(ir_break_if->Is<ir::If>());
 
-    auto* break_if_flow = ir_break_if->As<ir::If>();
-    ASSERT_NE(break_if_flow->true_target, nullptr);
-    ASSERT_NE(break_if_flow->false_target, nullptr);
-    ASSERT_NE(break_if_flow->merge_target, nullptr);
+    auto* break_flow_if = ir_break_if->As<ir::If>();
+    ASSERT_NE(break_flow_if->true_target, nullptr);
+    ASSERT_NE(break_flow_if->false_target, nullptr);
+    ASSERT_NE(break_flow_if->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -366,19 +366,19 @@ TEST_F(IRBuilderImplTest, Loop_WithContinuing_BreakIf) {
     EXPECT_EQ(2u, loop_flow->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow->continuing_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, break_if_flow->inbound_branches.Length());
-    EXPECT_EQ(1u, break_if_flow->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, break_if_flow->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, break_if_flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, break_flow_if->inbound_branches.Length());
+    EXPECT_EQ(1u, break_flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, break_flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, break_flow_if->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, loop_flow);
     EXPECT_EQ(loop_flow->start_target->branch_target, loop_flow->continuing_target);
-    EXPECT_EQ(loop_flow->continuing_target->branch_target, break_if_flow);
-    EXPECT_EQ(break_if_flow->true_target->branch_target, loop_flow->merge_target);
-    EXPECT_EQ(break_if_flow->false_target->branch_target, break_if_flow->merge_target);
-    EXPECT_EQ(break_if_flow->merge_target->branch_target, loop_flow->start_target);
+    EXPECT_EQ(loop_flow->continuing_target->branch_target, break_flow_if);
+    EXPECT_EQ(break_flow_if->true_target->branch_target, loop_flow->merge_target);
+    EXPECT_EQ(break_flow_if->false_target->branch_target, break_flow_if->merge_target);
+    EXPECT_EQ(break_flow_if->merge_target->branch_target, loop_flow->start_target);
     EXPECT_EQ(loop_flow->merge_target->branch_target, func->end_target);
 }
 
@@ -414,10 +414,10 @@ TEST_F(IRBuilderImplTest, Loop_WithReturn) {
     ASSERT_NE(ir_if, nullptr);
     ASSERT_TRUE(ir_if->Is<ir::If>());
 
-    auto* if_flow = ir_if->As<ir::If>();
-    ASSERT_NE(if_flow->true_target, nullptr);
-    ASSERT_NE(if_flow->false_target, nullptr);
-    ASSERT_NE(if_flow->merge_target, nullptr);
+    auto* flow_if = ir_if->As<ir::If>();
+    ASSERT_NE(flow_if->true_target, nullptr);
+    ASSERT_NE(flow_if->false_target, nullptr);
+    ASSERT_NE(flow_if->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -426,16 +426,16 @@ TEST_F(IRBuilderImplTest, Loop_WithReturn) {
     EXPECT_EQ(2u, loop_flow->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow->continuing_target->inbound_branches.Length());
     EXPECT_EQ(0u, loop_flow->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
-    EXPECT_EQ(loop_flow->start_target->branch_target, if_flow);
-    EXPECT_EQ(if_flow->true_target->branch_target, func->end_target);
-    EXPECT_EQ(if_flow->false_target->branch_target, if_flow->merge_target);
+    EXPECT_EQ(loop_flow->start_target->branch_target, flow_if);
+    EXPECT_EQ(flow_if->true_target->branch_target, func->end_target);
+    EXPECT_EQ(flow_if->false_target->branch_target, flow_if->merge_target);
     EXPECT_EQ(loop_flow->continuing_target->branch_target, loop_flow->start_target);
 
     EXPECT_EQ(func->start_target->branch_target, ir_loop);
@@ -543,10 +543,10 @@ TEST_F(IRBuilderImplTest, Loop_WithOnlyReturn_ContinuingBreakIf) {
     ASSERT_NE(ir_break_if, nullptr);
     EXPECT_TRUE(ir_break_if->Is<ir::If>());
 
-    auto* break_if_flow = ir_break_if->As<ir::If>();
-    ASSERT_NE(break_if_flow->true_target, nullptr);
-    ASSERT_NE(break_if_flow->false_target, nullptr);
-    ASSERT_NE(break_if_flow->merge_target, nullptr);
+    auto* break_flow_if = ir_break_if->As<ir::If>();
+    ASSERT_NE(break_flow_if->true_target, nullptr);
+    ASSERT_NE(break_flow_if->false_target, nullptr);
+    ASSERT_NE(break_flow_if->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -560,7 +560,7 @@ TEST_F(IRBuilderImplTest, Loop_WithOnlyReturn_ContinuingBreakIf) {
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(loop_flow->start_target->branch_target, func->end_target);
-    EXPECT_EQ(loop_flow->continuing_target->branch_target, break_if_flow);
+    EXPECT_EQ(loop_flow->continuing_target->branch_target, break_flow_if);
 
     EXPECT_EQ(func->start_target->branch_target, ir_loop);
 }
@@ -597,10 +597,10 @@ TEST_F(IRBuilderImplTest, Loop_WithIf_BothBranchesBreak) {
     ASSERT_NE(ir_if, nullptr);
     ASSERT_TRUE(ir_if->Is<ir::If>());
 
-    auto* if_flow = ir_if->As<ir::If>();
-    ASSERT_NE(if_flow->true_target, nullptr);
-    ASSERT_NE(if_flow->false_target, nullptr);
-    ASSERT_NE(if_flow->merge_target, nullptr);
+    auto* flow_if = ir_if->As<ir::If>();
+    ASSERT_NE(flow_if->true_target, nullptr);
+    ASSERT_NE(flow_if->false_target, nullptr);
+    ASSERT_NE(flow_if->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -609,10 +609,10 @@ TEST_F(IRBuilderImplTest, Loop_WithIf_BothBranchesBreak) {
     EXPECT_EQ(2u, loop_flow->start_target->inbound_branches.Length());
     EXPECT_EQ(0u, loop_flow->continuing_target->inbound_branches.Length());
     EXPECT_EQ(2u, loop_flow->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow->false_target->inbound_branches.Length());
-    EXPECT_EQ(0u, if_flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(0u, flow_if->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
@@ -620,9 +620,9 @@ TEST_F(IRBuilderImplTest, Loop_WithIf_BothBranchesBreak) {
     // dropped.
 
     EXPECT_EQ(func->start_target->branch_target, loop_flow);
-    EXPECT_EQ(loop_flow->start_target->branch_target, if_flow);
-    EXPECT_EQ(if_flow->true_target->branch_target, loop_flow->merge_target);
-    EXPECT_EQ(if_flow->false_target->branch_target, loop_flow->merge_target);
+    EXPECT_EQ(loop_flow->start_target->branch_target, flow_if);
+    EXPECT_EQ(flow_if->true_target->branch_target, loop_flow->merge_target);
+    EXPECT_EQ(flow_if->false_target->branch_target, loop_flow->merge_target);
     EXPECT_EQ(loop_flow->continuing_target->branch_target, loop_flow->start_target);
     EXPECT_EQ(loop_flow->merge_target->branch_target, func->end_target);
 }
@@ -728,34 +728,34 @@ TEST_F(IRBuilderImplTest, Loop_Nested) {
     auto* ir_if_a = b.FlowNodeForAstNode(ast_if_a);
     ASSERT_NE(ir_if_a, nullptr);
     EXPECT_TRUE(ir_if_a->Is<ir::If>());
-    auto* if_flow_a = ir_if_a->As<ir::If>();
-    ASSERT_NE(if_flow_a->true_target, nullptr);
-    ASSERT_NE(if_flow_a->false_target, nullptr);
-    ASSERT_NE(if_flow_a->merge_target, nullptr);
+    auto* flow_if_a = ir_if_a->As<ir::If>();
+    ASSERT_NE(flow_if_a->true_target, nullptr);
+    ASSERT_NE(flow_if_a->false_target, nullptr);
+    ASSERT_NE(flow_if_a->merge_target, nullptr);
 
     auto* ir_if_b = b.FlowNodeForAstNode(ast_if_b);
     ASSERT_NE(ir_if_b, nullptr);
     EXPECT_TRUE(ir_if_b->Is<ir::If>());
-    auto* if_flow_b = ir_if_b->As<ir::If>();
-    ASSERT_NE(if_flow_b->true_target, nullptr);
-    ASSERT_NE(if_flow_b->false_target, nullptr);
-    ASSERT_NE(if_flow_b->merge_target, nullptr);
+    auto* flow_if_b = ir_if_b->As<ir::If>();
+    ASSERT_NE(flow_if_b->true_target, nullptr);
+    ASSERT_NE(flow_if_b->false_target, nullptr);
+    ASSERT_NE(flow_if_b->merge_target, nullptr);
 
     auto* ir_if_c = b.FlowNodeForAstNode(ast_if_c);
     ASSERT_NE(ir_if_c, nullptr);
     EXPECT_TRUE(ir_if_c->Is<ir::If>());
-    auto* if_flow_c = ir_if_c->As<ir::If>();
-    ASSERT_NE(if_flow_c->true_target, nullptr);
-    ASSERT_NE(if_flow_c->false_target, nullptr);
-    ASSERT_NE(if_flow_c->merge_target, nullptr);
+    auto* flow_if_c = ir_if_c->As<ir::If>();
+    ASSERT_NE(flow_if_c->true_target, nullptr);
+    ASSERT_NE(flow_if_c->false_target, nullptr);
+    ASSERT_NE(flow_if_c->merge_target, nullptr);
 
     auto* ir_if_d = b.FlowNodeForAstNode(ast_if_d);
     ASSERT_NE(ir_if_d, nullptr);
     EXPECT_TRUE(ir_if_d->Is<ir::If>());
-    auto* if_flow_d = ir_if_d->As<ir::If>();
-    ASSERT_NE(if_flow_d->true_target, nullptr);
-    ASSERT_NE(if_flow_d->false_target, nullptr);
-    ASSERT_NE(if_flow_d->merge_target, nullptr);
+    auto* flow_if_d = ir_if_d->As<ir::If>();
+    ASSERT_NE(flow_if_d->true_target, nullptr);
+    ASSERT_NE(flow_if_d->false_target, nullptr);
+    ASSERT_NE(flow_if_d->merge_target, nullptr);
 
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
@@ -776,50 +776,170 @@ TEST_F(IRBuilderImplTest, Loop_Nested) {
     EXPECT_EQ(2u, loop_flow_d->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow_d->continuing_target->inbound_branches.Length());
     EXPECT_EQ(1u, loop_flow_d->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_a->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_a->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_a->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_a->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_b->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_b->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_b->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_b->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_c->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_c->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_c->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_c->merge_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_d->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_d->true_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_d->false_target->inbound_branches.Length());
-    EXPECT_EQ(1u, if_flow_d->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_a->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_a->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_a->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_a->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_b->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_b->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_b->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_b->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_c->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_c->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_c->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_c->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_d->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_d->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_d->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if_d->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, loop_flow_a);
     EXPECT_EQ(loop_flow_a->start_target->branch_target, loop_flow_b);
-    EXPECT_EQ(loop_flow_b->start_target->branch_target, if_flow_a);
-    EXPECT_EQ(if_flow_a->true_target->branch_target, loop_flow_b->merge_target);
-    EXPECT_EQ(if_flow_a->false_target->branch_target, if_flow_a->merge_target);
-    EXPECT_EQ(if_flow_a->merge_target->branch_target, if_flow_b);
-    EXPECT_EQ(if_flow_b->true_target->branch_target, loop_flow_b->continuing_target);
-    EXPECT_EQ(if_flow_b->false_target->branch_target, if_flow_b->merge_target);
-    EXPECT_EQ(if_flow_b->merge_target->branch_target, loop_flow_b->continuing_target);
+    EXPECT_EQ(loop_flow_b->start_target->branch_target, flow_if_a);
+    EXPECT_EQ(flow_if_a->true_target->branch_target, loop_flow_b->merge_target);
+    EXPECT_EQ(flow_if_a->false_target->branch_target, flow_if_a->merge_target);
+    EXPECT_EQ(flow_if_a->merge_target->branch_target, flow_if_b);
+    EXPECT_EQ(flow_if_b->true_target->branch_target, loop_flow_b->continuing_target);
+    EXPECT_EQ(flow_if_b->false_target->branch_target, flow_if_b->merge_target);
+    EXPECT_EQ(flow_if_b->merge_target->branch_target, loop_flow_b->continuing_target);
     EXPECT_EQ(loop_flow_b->continuing_target->branch_target, loop_flow_c);
     EXPECT_EQ(loop_flow_c->start_target->branch_target, loop_flow_c->merge_target);
     EXPECT_EQ(loop_flow_c->continuing_target->branch_target, loop_flow_c->start_target);
     EXPECT_EQ(loop_flow_c->merge_target->branch_target, loop_flow_d);
     EXPECT_EQ(loop_flow_d->start_target->branch_target, loop_flow_d->continuing_target);
-    EXPECT_EQ(loop_flow_d->continuing_target->branch_target, if_flow_c);
-    EXPECT_EQ(if_flow_c->true_target->branch_target, loop_flow_d->merge_target);
-    EXPECT_EQ(if_flow_c->false_target->branch_target, if_flow_c->merge_target);
-    EXPECT_EQ(if_flow_c->merge_target->branch_target, loop_flow_d->start_target);
+    EXPECT_EQ(loop_flow_d->continuing_target->branch_target, flow_if_c);
+    EXPECT_EQ(flow_if_c->true_target->branch_target, loop_flow_d->merge_target);
+    EXPECT_EQ(flow_if_c->false_target->branch_target, flow_if_c->merge_target);
+    EXPECT_EQ(flow_if_c->merge_target->branch_target, loop_flow_d->start_target);
     EXPECT_EQ(loop_flow_d->merge_target->branch_target, loop_flow_b->start_target);
-    EXPECT_EQ(loop_flow_b->merge_target->branch_target, if_flow_d);
-    EXPECT_EQ(if_flow_d->true_target->branch_target, loop_flow_a->merge_target);
-    EXPECT_EQ(if_flow_d->false_target->branch_target, if_flow_d->merge_target);
-    EXPECT_EQ(if_flow_d->merge_target->branch_target, loop_flow_a->continuing_target);
+    EXPECT_EQ(loop_flow_b->merge_target->branch_target, flow_if_d);
+    EXPECT_EQ(flow_if_d->true_target->branch_target, loop_flow_a->merge_target);
+    EXPECT_EQ(flow_if_d->false_target->branch_target, flow_if_d->merge_target);
+    EXPECT_EQ(flow_if_d->merge_target->branch_target, loop_flow_a->continuing_target);
     EXPECT_EQ(loop_flow_a->continuing_target->branch_target, loop_flow_a->start_target);
     EXPECT_EQ(loop_flow_a->merge_target->branch_target, func->end_target);
+}
+
+TEST_F(IRBuilderImplTest, While) {
+    // {
+    //   while false {
+    //   }
+    // }
+    //
+    // func -> while -> loop_start -> if true
+    //                             -> if false
+    //
+    //   [if true] -> if merge
+    //   [if false] -> while merge
+    //   [if merge] -> loop continuing
+    //   [loop continuing] -> loop start
+    //   [while merge] -> func end
+    //
+    auto* ast_while = While(false, Block());
+    WrapInFunction(ast_while);
+    auto& b = Build();
+
+    auto r = b.Build();
+    ASSERT_TRUE(r) << b.error();
+    auto m = r.Move();
+
+    auto* ir_while = b.FlowNodeForAstNode(ast_while);
+    ASSERT_NE(ir_while, nullptr);
+    ASSERT_TRUE(ir_while->Is<ir::Loop>());
+
+    auto* flow = ir_while->As<ir::Loop>();
+    ASSERT_NE(flow->start_target, nullptr);
+    ASSERT_NE(flow->continuing_target, nullptr);
+    ASSERT_NE(flow->merge_target, nullptr);
+
+    ASSERT_NE(flow->start_target->branch_target, nullptr);
+    ASSERT_TRUE(flow->start_target->branch_target->Is<ir::If>());
+    auto* flow_if = flow->start_target->branch_target->As<ir::If>();
+    ASSERT_NE(flow_if->true_target, nullptr);
+    ASSERT_NE(flow_if->false_target, nullptr);
+    ASSERT_NE(flow_if->merge_target, nullptr);
+
+    ASSERT_EQ(1u, m.functions.Length());
+    auto* func = m.functions[0];
+
+    EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->inbound_branches.Length());
+    EXPECT_EQ(2u, flow->start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->continuing_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->merge_target->inbound_branches.Length());
+
+    EXPECT_EQ(func->start_target->branch_target, flow);
+    EXPECT_EQ(flow->start_target->branch_target, flow_if);
+    EXPECT_EQ(flow_if->true_target->branch_target, flow_if->merge_target);
+    EXPECT_EQ(flow_if->false_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow_if->merge_target->branch_target, flow->continuing_target);
+    EXPECT_EQ(flow->continuing_target->branch_target, flow->start_target);
+    EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+}
+
+TEST_F(IRBuilderImplTest, While_Return) {
+    // {
+    //   while true {
+    //     return;
+    //   }
+    // }
+    //
+    // func -> while -> if true
+    //                  if false
+    //
+    //   [if true] -> if merge
+    //   [if false] -> while merge
+    //   [if merge] -> func end
+    //   [while merge] -> func end
+    //
+    auto* ast_while = While(true, Block(Return()));
+    WrapInFunction(ast_while);
+    auto& b = Build();
+
+    auto r = b.Build();
+    ASSERT_TRUE(r) << b.error();
+    auto m = r.Move();
+
+    auto* ir_while = b.FlowNodeForAstNode(ast_while);
+    ASSERT_NE(ir_while, nullptr);
+    ASSERT_TRUE(ir_while->Is<ir::Loop>());
+
+    auto* flow = ir_while->As<ir::Loop>();
+    ASSERT_NE(flow->start_target, nullptr);
+    ASSERT_NE(flow->continuing_target, nullptr);
+    ASSERT_NE(flow->merge_target, nullptr);
+
+    ASSERT_NE(flow->start_target->branch_target, nullptr);
+    ASSERT_TRUE(flow->start_target->branch_target->Is<ir::If>());
+    auto* flow_if = flow->start_target->branch_target->As<ir::If>();
+    ASSERT_NE(flow_if->true_target, nullptr);
+    ASSERT_NE(flow_if->false_target, nullptr);
+    ASSERT_NE(flow_if->merge_target, nullptr);
+
+    ASSERT_EQ(1u, m.functions.Length());
+    auto* func = m.functions[0];
+
+    EXPECT_EQ(2u, func->end_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->inbound_branches.Length());
+    EXPECT_EQ(2u, flow->start_target->inbound_branches.Length());
+    EXPECT_EQ(0u, flow->continuing_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->merge_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->true_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->false_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow_if->merge_target->inbound_branches.Length());
+
+    EXPECT_EQ(func->start_target->branch_target, flow);
+    EXPECT_EQ(flow->start_target->branch_target, flow_if);
+    EXPECT_EQ(flow_if->true_target->branch_target, flow_if->merge_target);
+    EXPECT_EQ(flow_if->false_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow_if->merge_target->branch_target, func->end_target);
+    EXPECT_EQ(flow->continuing_target->branch_target, flow->start_target);
+    EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
 }
 
 TEST_F(IRBuilderImplTest, Switch) {
