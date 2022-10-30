@@ -253,9 +253,13 @@ void Server::OnBufferMapAsyncCallback(MapUserdata* data, WGPUBufferMapAsyncStatu
             // modified (i.e. we don't want getMappedRange(0, wholeBufferSize) if only a
             // subset of the buffer is actually mapped) in case the implementation does some
             // range tracking.
-            bufferData->writeHandle->SetTarget(static_cast<uint8_t*>(mProcs.bufferGetMappedRange(
-                                                   data->bufferObj, data->offset, data->size)) -
-                                               data->offset);
+            // TODO(crbug.com/1379634): Double check how 'writeHandle' got null.
+            if (bufferData->writeHandle) {
+                bufferData->writeHandle->SetTarget(
+                    static_cast<uint8_t*>(
+                        mProcs.bufferGetMappedRange(data->bufferObj, data->offset, data->size)) -
+                    data->offset);
+            }
         }
     }
 
