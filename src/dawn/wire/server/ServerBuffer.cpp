@@ -222,7 +222,8 @@ bool Server::DoBufferUpdateMappedData(ObjectId bufferId,
 void Server::OnBufferMapAsyncCallback(MapUserdata* data, WGPUBufferMapAsyncStatus status) {
     // Skip sending the callback if the buffer has already been destroyed.
     auto* bufferData = BufferObjects().Get(data->buffer.id);
-    if (bufferData == nullptr || bufferData->generation != data->buffer.generation) {
+    if (bufferData == nullptr || bufferData->generation != data->buffer.generation ||
+        bufferData->handle != data->bufferObj) {
         return;
     }
 
