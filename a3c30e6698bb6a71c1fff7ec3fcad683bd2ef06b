@@ -16,6 +16,46 @@
       "message": "PTAL. The rules aren\u0027t hooked up to anything, I\u0027m just trying to get them in place before trying to enable.\n\nThis is only tested on Linux at this point. Running `ninja -C out/gn src/tint:tint_gen_deps` should generate all the tint src/ files into `out/gn/gen/src/tint`",
       "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb8912b3_ae1754c4",
+        "filename": "generator/tint_gen_template.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T19:00:31Z",
+      "side": 1,
+      "message": "Maybe state that this is intended to be used by GN, and that `\u003cdawn\u003e/tools/run gen` is the preferred way to run the `gen` tool.",
+      "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f532b5b9_84c6d3a1",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T19:00:31Z",
+      "side": 1,
+      "message": "Do we need to repeat this for every generator command? Will it ever be different?",
+      "range": {
+        "startLine": 854,
+        "startChar": 2,
+        "endLine": 854,
+        "endChar": 26
+      },
+      "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
