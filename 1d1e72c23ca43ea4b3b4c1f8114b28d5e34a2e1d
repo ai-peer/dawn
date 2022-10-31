@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a18351_638be3be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-10-31T14:44:08Z",
+      "side": 1,
+      "message": "LGTM.\n\nIt\u0027s not clear to me why we need to distinguish between the two different override cases though (`NamedOverrideArrayCount` vs `UnnamedOverrideArrayCount`)? It looks like nothing post-resolve cares about the difference. Can\u0027t we just have a `OverrideArrayCount` that stores a `sem::Expression`?\n\nI\u0027m probably missing something as I haven\u0027t yet caught up on how all this stuff is being handled.",
+      "revId": "1d1e72c23ca43ea4b3b4c1f8114b28d5e34a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
