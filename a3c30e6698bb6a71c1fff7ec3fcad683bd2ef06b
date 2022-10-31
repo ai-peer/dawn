@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f3edbd_4ab86aac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-31T18:55:01Z",
+      "side": 1,
+      "message": "PTAL. The rules aren\u0027t hooked up to anything, I\u0027m just trying to get them in place before trying to enable.\n\nThis is only tested on Linux at this point. Running `ninja -C out/gn src/tint:tint_gen_deps` should generate all the tint src/ files into `out/gn/gen/src/tint`",
+      "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
