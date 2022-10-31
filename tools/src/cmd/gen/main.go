@@ -72,6 +72,10 @@ optional flags:`)
 }
 
 func run() error {
+	var outDir string
+	flag.StringVar(&outDir, "o", "", "custom output directory")
+	flag.Parse()
+
 	projectRoot := fileutils.ProjectRoot()
 
 	// Find clang-format
@@ -108,7 +112,13 @@ func run() error {
 		// preserving the copyright year in the header.
 		// relpath is a path relative to the template
 		writeFile := func(relpath, body string) error {
-			abspath := filepath.Join(filepath.Dir(tmplPath), relpath)
+			path := tmplPath
+			if len(outDir) > 0 {
+				// Always append a / to the path to force thie filepath.Dir to recognize it as a directory.
+				path = outDir + "/"
+			}
+
+			abspath := filepath.Join(filepath.Dir(path), relpath)
 
 			copyrightYear := time.Now().Year()
 
