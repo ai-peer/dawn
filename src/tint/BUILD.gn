@@ -13,8 +13,9 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
-
 import("../../tint_overrides_with_defaults.gni")
+
+import("${tint_root_dir}/generator/tint_generator.gni")
 
 if (tint_build_unittests) {
   import("//testing/test.gni")
@@ -846,6 +847,79 @@ libtint_source_set("libtint_glsl_writer_src") {
   ]
 
   public_deps = [ ":libtint_core_src" ]
+}
+
+tint_intrinsic_generator("tint_intrinsics_inl") {
+  input = "resolver/intrinsic_table.inl"
+  root_dir = tint_root_dir
+}
+
+tint_intrinsic_src_generator("tint_init_conv_intrinsic") {
+  input = "resolver/init_conv_intrinsic"
+  root_dir = tint_root_dir
+}
+
+tint_intrinsic_src_generator("tint_sem_builtin_type") {
+  input = "sem/builtin_type"
+  root_dir = tint_root_dir
+}
+
+tint_intrinsic_src_generator("tint_sem_parameter_usage") {
+  input = "sem/parameter_usage"
+  root_dir = tint_root_dir
+}
+
+tint_intrinsic_src_generator("tint_ast_extension") {
+  input = "ast/extension"
+  root_dir = tint_root_dir
+  bench = true
+  test = true
+}
+
+tint_intrinsic_src_generator("tint_ast_access") {
+  input = "ast/access"
+  root_dir = tint_root_dir
+}
+
+tint_intrinsic_src_generator("tint_ast_builtin_value") {
+  input = "ast/builtin_value"
+  root_dir = tint_root_dir
+  bench = true
+  test = true
+}
+
+tint_intrinsic_src_generator("tint_ast_texel_format") {
+  input = "ast/texel_format"
+  root_dir = tint_root_dir
+  bench = true
+  test = true
+}
+
+tint_intrinsic_src_generator("tint_ast_address_space") {
+  input = "ast/address_space"
+  root_dir = tint_root_dir
+  bench = true
+  test = true
+}
+
+tint_intrinsic_src_generator("tint_ast_interpolate_attribute") {
+  input = "ast/interpolate_attribute"
+  root_dir = tint_root_dir
+}
+
+libtint_source_set("tint_gen_deps") {
+  deps = [
+    ":tint_ast_access",
+    ":tint_ast_address_space",
+    ":tint_ast_builtin_value",
+    ":tint_ast_extension",
+    ":tint_ast_interpolate_attribute",
+    ":tint_ast_texel_format",
+    ":tint_init_conv_intrinsic",
+    ":tint_intrinsics_inl",
+    ":tint_sem_builtin_type",
+    ":tint_sem_parameter_usage",
+  ]
 }
 
 source_set("libtint") {

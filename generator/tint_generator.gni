@@ -1,0 +1,103 @@
+# Copyright 2022 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Template to help invoke code generator for tint template files.
+#
+# Variables:
+#   input: The prefix for the template to generate, does not include the .tmpl extension
+#
+#   root_dir: The root project directory
+#
+template("tint_intrinsic_generator") {
+  # Chooses either the default gen_dir or the custom one required by the
+  # invoker. This allows moving the definition of code generators in different
+  # BUILD.gn files without changing the location of generated file. Without
+  # this generated headers could cause issues when old headers aren't removed.
+  _gen_dir = root_gen_dir
+  if (defined(invoker.custom_gen_dir)) {
+    _gen_dir = invoker.custom_gen_dir
+  }
+
+  _sources = [
+    "${invoker.input}.tmpl",
+    "${invoker.root_dir}/src/tint/intrinsics.def",
+  ]
+
+  _outputs = [ "${target_gen_dir}/${invoker.input}" ]
+
+  _script = "${invoker.root_dir}/generator/tint_gen_template.py"
+  _args = [
+    "--output",
+    rebase_path(_gen_dir),
+    "--template",
+    "src/tint/" + invoker.input + ".tmpl",
+  ]
+
+  action("${target_name}") {
+    script = _script
+    outputs = _outputs
+    sources = _sources
+    args = _args
+  }
+}
+
+# Template to help invoke code generator for tint template files for source files. By default this
+# will generate a `h` and `cc` build rule for the provided `input`
+#
+# Variables:
+#   input: The prefix for the template, minus the file extension and .tmpl
+#
+#   root_dir: The root project directory
+#
+#   bench: set true to generate a bench template
+#
+#   test: set true to generate a test template
+#
+template("tint_intrinsic_src_generator") {
+  tint_intrinsic_generator("${target_name}_h") {
+    input = "${invoker.input}.h"
+    root_dir = invoker.root_dir
+  }
+  tint_intrinsic_generator("${target_name}_cc") {
+    input = "${invoker.input}.cc"
+    root_dir = invoker.root_dir
+  }
+
+  if (defined(invoker.bench) && invoker.bench) {
+    tint_intrinsic_generator("${target_name}_bench") {
+      input = "${invoker.input}_bench.cc"
+      root_dir = invoker.root_dir
+    }
+  }
+  if (defined(invoker.test) && invoker.test) {
+    tint_intrinsic_generator("${target_name}_test") {
+      input = "${invoker.input}_test.cc"
+      root_dir = invoker.root_dir
+    }
+  }
+
+  source_set(target_name) {
+    deps = [
+      ":${target_name}_cc",
+      ":${target_name}_h",
+    ]
+
+    if (defined(invoker.bench) && invoker.bench) {
+      deps += [ ":${target_name}_bench" ]
+    }
+    if (defined(invoker.test) && invoker.test) {
+      deps += [ ":${target_name}_test" ]
+    }
+  }
+}
