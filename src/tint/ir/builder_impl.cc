@@ -254,22 +254,21 @@ bool BuilderImpl::EmitIf(const ast::IfStatement* stmt) {
         if (!EmitStatement(stmt->body)) {
             return false;
         }
+        // If the true branch did not execute control flow, then go to the merge target
+        if (current_flow_block_ && !IsBranched(current_flow_block_)) {
+            builder_.Branch(current_flow_block_, if_node->merge_target);
+        }
 
         current_flow_block_ = if_node->false_target;
         if (stmt->else_statement && !EmitStatement(stmt->else_statement)) {
             return false;
         }
+        // If the false branch did not execute control flow, then go to the merge target
+        if (current_flow_block_ && !IsBranched(current_flow_block_)) {
+            builder_.Branch(current_flow_block_, if_node->merge_target);
+        }
     }
     current_flow_block_ = nullptr;
-
-    // If the true branch did not execute control flow, then go to the merge target
-    if (!IsBranched(if_node->true_target)) {
-        builder_.Branch(if_node->true_target, if_node->merge_target);
-    }
-    // If the false branch did not execute control flow, then go to the merge target
-    if (!IsBranched(if_node->false_target)) {
-        builder_.Branch(if_node->false_target, if_node->merge_target);
-    }
 
     // If both branches went somewhere, then they both returned, continued or broke. So,
     // there is no need for the if merge-block and there is nothing to branch to the merge
