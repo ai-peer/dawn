@@ -34,6 +34,24 @@
       "parentUuid": "5e543225_55c03177",
       "revId": "0be095dec6910c8ca2f60f06a1fddd5a01ac6afb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ff57af9_1a28dcfe",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-31T18:29:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "49c3c67d_ebc1f8ca",
+      "revId": "0be095dec6910c8ca2f60f06a1fddd5a01ac6afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
