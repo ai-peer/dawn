@@ -80,6 +80,30 @@
       },
       "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af2d73f_96a22828",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-10-31T19:24:43Z",
+      "side": 1,
+      "message": "\u0027tint_generator.gni\u0027 would need to import where ever tint_root_dir is coming from, which I think is \u0027../../tint_overrides_with_defaults.gni\u0027 and then it should be able to use the variable there without needing to be passed in.\n\nI am not 100% sure importing a .gni is allowed in a .gni.\n\nIf the tint_intrinsic_generator template isn\u0027t used outside of here, it could be defined in this file instead of a .gni, if importing the def\u0027n of tint_root_dir doesn\u0027t work.",
+      "parentUuid": "7ff371a2_72338d7f",
+      "range": {
+        "startLine": 854,
+        "startChar": 2,
+        "endLine": 854,
+        "endChar": 26
+      },
+      "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
