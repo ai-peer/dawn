@@ -26,7 +26,7 @@
 #if TINT_BUILD_GLSL_WRITER
 #include "StandAlone/ResourceLimits.h"
 #include "glslang/Public/ShaderLang.h"
-#endif
+#endif  // TINT_BUILD_GLSL_WRITER
 
 #if TINT_BUILD_SPV_READER
 #include "spirv-tools/libspirv.hpp"
@@ -38,6 +38,11 @@
 #include "src/tint/utils/transform.h"
 #include "src/tint/val/val.h"
 #include "tint/tint.h"
+
+#if TINT_BUILD_IR
+#include "src/tint/ir/debug.h"
+#include "src/tint/ir/module.h"
+#endif  // TINT_BUILD_IR
 
 namespace {
 
@@ -92,6 +97,10 @@ struct Options {
     std::string xcrun_path;
     std::unordered_map<std::string, double> overrides;
     std::optional<tint::sem::BindingPoint> hlsl_root_constant_binding_point;
+
+#if defined(TINT_BUILD_IR)
+    bool dump_ir_graph = false;
+#endif  // TINT_BUILD_IR
 };
 
 const char kUsage[] = R"(Usage: tint [options] <input-file>
@@ -131,6 +140,9 @@ ${transforms}
   --xcrun                   -- Path to xcrun executable, used to validate MSL output.
                                When specified, automatically enables MSL validation
   --overrides               -- Override values as IDENTIFIER=VALUE, comma-separated.
+#if defined(TINT_BUILD_IR)
+  --dump-ir-graph           -- Writes the IR graph to 'tint.dot' as a dot graph
+#endif  // TINT_BUILD_IR
 )";
 
 Format parse_format(const std::string& fmt) {
@@ -433,6 +445,10 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
                 return false;
             }
             opts->dxc_path = args[i];
+#if defined(TINT_BUILD_IR)
+        } else if (arg == "--dump-ir-graph") {
+            opts->dump_ir_graph = true;
+#endif  // TINT_BUILD_IR
         } else if (arg == "--xcrun") {
             ++i;
             if (i >= args.size()) {
@@ -1197,6 +1213,19 @@ int main(int argc, const char** argv) {
     if (options.parse_only) {
         return 1;
     }
+
+#if defined(TINT_BUILD_IR)
+    if (options.dump_ir_graph) {
+        auto result = tint::ir::Module::FromProgram(program.get());
+        if (!result) {
+            std::cerr << "Failed to build IR from program: " << result.Failure() << std::endl;
+        } else {
+            auto mod = result.Move();
+            auto graph = tint::ir::Debug::AsDotGraph(&mod);
+            WriteFile("tint.dot", "w", graph);
+        }
+    }
+#endif  // TINT_BUILD_IR
 
     tint::inspector::Inspector inspector(program.get());
 
