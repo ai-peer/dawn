@@ -16,6 +16,24 @@
       "message": "This is a lot of code here. Should probably be moved to a helper function to improve readability.",
       "revId": "664de0a4f42f7c53a892fdcf340e0bb726939a53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980e73c9_bfb7c1f2",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T14:59:41Z",
+      "side": 1,
+      "message": "True, but this whole function is monolithic.\nI\u0027d quite like to try cleaning up this whole file, including writing a proper argument parser. Definitely",
+      "parentUuid": "3942521e_7f39eeaf",
+      "revId": "664de0a4f42f7c53a892fdcf340e0bb726939a53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
