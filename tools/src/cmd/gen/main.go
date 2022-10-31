@@ -73,7 +73,10 @@ optional flags:`)
 
 func run() error {
 	var outDir string
+	includeSrc, skipTests := true, false
 	flag.StringVar(&outDir, "o", "", "custom output directory")
+	flag.BoolVar(&includeSrc, "s", true, "include src folder when generating")
+	flag.BoolVar(&skipTests, "t", false, "skip the test folder when generating")
 	flag.Parse()
 
 	projectRoot := fileutils.ProjectRoot()
@@ -84,12 +87,20 @@ func run() error {
 		return fmt.Errorf("cannot find clang-format in <dawn>/buildtools nor PATH")
 	}
 
+	glob_paths := ""
+	if includeSrc {
+		glob_paths += `"src/tint/**.tmpl"`
+	}
+	if !skipTests {
+		if includeSrc {
+			glob_paths += ", "
+		}
+		glob_paths += `"test/tint/**.tmpl"`
+	}
+
 	// Recursively find all the template files in the <tint>/src directory
 	files, err := glob.Scan(projectRoot, glob.MustParseConfig(`{
-		"paths": [{"include": [
-			"src/tint/**.tmpl",
-			"test/tint/**.tmpl"
-		]}]
+		"paths": [{"include": [`+glob_paths+`]}]
 	}`))
 	if err != nil {
 		return err
