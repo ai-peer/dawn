@@ -1790,6 +1790,54 @@ ConstEval::Result ConstEval::firstTrailingBit(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0]);
 }
 
+ConstEval::Result ConstEval::insertBits(const sem::Type* ty,
+                                        utils::VectorRef<const sem::Constant*> args,
+                                        const Source&) {
+    auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+        auto create = [&](auto in_e, auto in_newbits) {
+            using NumberT = decltype(in_e);
+            using T = UnwrapNumber<NumberT>;
+            using UT = std::make_unsigned_t<T>;
+            using NumberUT = Number<UT>;
+
+            // Read args that are always scalar
+            NumberUT in_offset = args[2]->As<NumberUT>();
+            NumberUT in_count = args[3]->As<NumberUT>();
+
+            // Cast all to unsigned
+            UT e = static_cast<UT>(in_e);
+            UT newbits = static_cast<UT>(in_newbits);
+            UT offset = static_cast<UT>(in_offset);
+            UT count = static_cast<UT>(in_count);
+
+            constexpr UT w = sizeof(UT) * 8;
+            UT o = std::min(offset, w);
+            UT c = std::min(count, w - o);
+
+            NumberT result;
+            if (c == UT{0}) {
+                // The result is e if c is 0
+                result = NumberT{e};
+            } else if (c == w) {
+                // The result is newbits if c is w
+                result = NumberT{newbits};
+            } else {
+                // Otherwise, bits o..o + c - 1 of the result are copied from bits 0..c - 1 of
+                // newbits. Other bits of the result are copied from e.
+                UT mask = ((UT{1} << c) - UT{1}) << UT{o};
+                auto r = e;                // Start with 'e' as result
+                r = r & ~mask;             // Zero the bits in 'e' we're overwriting
+                r = r | (newbits & mask);  // Now overwrite with bits from 'newbits'
+                result = NumberT{r};
+            }
+
+            return CreateElement(builder, c0->Type(), result);
+        };
+        return Dispatch_iu32(create, c0, c1);
+    };
+    return TransformElements(builder, ty, transform, args[0], args[1]);
+}
+
 ConstEval::Result ConstEval::saturate(const sem::Type* ty,
                                       utils::VectorRef<const sem::Constant*> args,
                                       const Source&) {
