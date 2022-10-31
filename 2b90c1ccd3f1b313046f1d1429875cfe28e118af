@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa17cf6_e8ddd905",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1783,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T15:46:43Z",
+      "side": 1,
+      "message": "just make `count` `pos`?",
+      "range": {
+        "startLine": 1783,
+        "startChar": 16,
+        "endLine": 1783,
+        "endChar": 31
+      },
+      "revId": "2b90c1ccd3f1b313046f1d1429875cfe28e118af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
