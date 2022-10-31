@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3942521e_7f39eeaf",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1073,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-31T13:04:44Z",
+      "side": 1,
+      "message": "This is a lot of code here. Should probably be moved to a helper function to improve readability.",
+      "revId": "664de0a4f42f7c53a892fdcf340e0bb726939a53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
