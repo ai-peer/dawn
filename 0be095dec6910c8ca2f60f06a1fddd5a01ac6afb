@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e543225_55c03177",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-31T17:58:58Z",
+      "side": 1,
+      "message": "Should we fail here instead of just returning?",
+      "revId": "0be095dec6910c8ca2f60f06a1fddd5a01ac6afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
