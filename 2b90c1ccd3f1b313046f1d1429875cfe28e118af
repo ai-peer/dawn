@@ -22,6 +22,30 @@
       },
       "revId": "2b90c1ccd3f1b313046f1d1429875cfe28e118af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "142af8b1_7959073e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1783,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-10-31T17:44:33Z",
+      "side": 1,
+      "message": "Was going for symmetry with the code in firstLeadingBit above that does:\n\n```\n                    UT count \u003d CountLeadingBits(eu, sign_bit);\n                    UT pos \u003d kNumBits - count - 1;\n                    result \u003d NumberT(pos);\n```\n\nI\u0027ll just change it anyway.",
+      "parentUuid": "8fa17cf6_e8ddd905",
+      "range": {
+        "startLine": 1783,
+        "startChar": 16,
+        "endLine": 1783,
+        "endChar": 31
+      },
+      "revId": "2b90c1ccd3f1b313046f1d1429875cfe28e118af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
