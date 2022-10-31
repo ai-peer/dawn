@@ -176,6 +176,24 @@
       "parentUuid": "78daab38_c85a7405",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6912d1e0_2eaf9387",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-31T01:56:20Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nThe problem is that now the OOM happens at the server side instead of the client side, so we cannot allocate mFakeMappedData for the error buffer when creating it.\n\nNow there is a call of getMappedRange() on that error buffer with a small range, and the client passes the validation, but on the server side mFakeMappedData is pointing to a nullptr.\n\nIn this case I think we have to allocate mFakeMappedData at the call of getMappedRange(). What do you think?",
+      "parentUuid": "70bbe2ec_be7c6282",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
