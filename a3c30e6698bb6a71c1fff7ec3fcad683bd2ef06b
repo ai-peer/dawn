@@ -56,6 +56,30 @@
       },
       "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ff371a2_72338d7f",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-10-31T19:14:41Z",
+      "side": 1,
+      "message": "I  ... don\u0027t know? I couldn\u0027t figure out how to get `tint_root_dir` inside the generator without passing it in. I\u0027d like to remove this but don\u0027t currently know how. @rharrison@chromium.org may know how to do it?",
+      "parentUuid": "f532b5b9_84c6d3a1",
+      "range": {
+        "startLine": 854,
+        "startChar": 2,
+        "endLine": 854,
+        "endChar": 26
+      },
+      "revId": "a3c30e6698bb6a71c1fff7ec3fcad683bd2ef06b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
