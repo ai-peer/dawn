@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3914e29_ed85145b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T12:39:32Z",
+      "side": 1,
+      "message": "Dan points out that the CMakeLists.txt file has been clang-format-corrupted. Will fix.",
+      "revId": "de9c595c100542ddf7adcdc6b9bc12ba8a75b4f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
