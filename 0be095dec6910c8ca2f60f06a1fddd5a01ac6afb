@@ -16,6 +16,24 @@
       "message": "Should we fail here instead of just returning?",
       "revId": "0be095dec6910c8ca2f60f06a1fddd5a01ac6afb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c3c67d_ebc1f8ca",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T18:27:34Z",
+      "side": 1,
+      "message": "No, the fuzzer is free to give garbage input.\nThe fuzzer wants to fail when we find unhandled / incorrect / broken logic.",
+      "parentUuid": "5e543225_55c03177",
+      "revId": "0be095dec6910c8ca2f60f06a1fddd5a01ac6afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
