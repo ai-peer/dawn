@@ -16,6 +16,24 @@
       "message": "LGTM.\n\nIt\u0027s not clear to me why we need to distinguish between the two different override cases though (`NamedOverrideArrayCount` vs `UnnamedOverrideArrayCount`)? It looks like nothing post-resolve cares about the difference. Can\u0027t we just have a `OverrideArrayCount` that stores a `sem::Expression`?\n\nI\u0027m probably missing something as I haven\u0027t yet caught up on how all this stuff is being handled.",
       "revId": "1d1e72c23ca43ea4b3b4c1f8114b28d5e34a2e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8e5c5a_7096b11a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-10-31T17:24:06Z",
+      "side": 1,
+      "message": "It\u0027s about equality.\nYou want `NamedOverrideArrayCount` to have equality with another, if the names are the same. This happens because the structure holds the *variable*. If we tried to fold `NamedOverrideArrayCount` and `UnnamedOverrideArrayCount`, then the common field would be a `sem::Expression`, but they wouldn\u0027t have equality even in the named case, as you\u0027d have two different `sem::VariableUser`s.",
+      "parentUuid": "70a18351_638be3be",
+      "revId": "1d1e72c23ca43ea4b3b4c1f8114b28d5e34a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
