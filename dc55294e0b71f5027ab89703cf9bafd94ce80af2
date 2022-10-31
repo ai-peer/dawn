@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade355cb_213d1163",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Thanks for the close reading.\nI think I\u0027ve addressed everything.",
+      "revId": "dc55294e0b71f5027ab89703cf9bafd94ce80af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

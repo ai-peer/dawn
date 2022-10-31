@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e94f3a0_4a12376f",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f9de319_730f6855",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5daca898_83002a5e",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "Why the `apparently` does this rely on the load rule?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc9f039_a73153f5",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Will remove it.\nYes, in WGSL the Load Rule is applied, but no actual load occurs in SPIR-V.",
+      "parentUuid": "5daca898_83002a5e",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8da95826_3fa28264",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Yes, good catch.  :-)",
+      "parentUuid": "393c702b_bd2b88f5",
+      "range": {
+        "startLine": 167,
+        "startChar": 58,
+        "endLine": 168,
+        "endChar": 4
+      },
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ce988cd_abc6466c",
@@ -105,6 +165,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "Are these tabs? Maybe convert to spaces?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "921556cc_40150dae",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ce988cd_abc6466c",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea44b6b_17b3759e",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6544faa_7a017616",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5990264_fd1bc667",
@@ -139,6 +235,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: memory",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "256258b2_091a3a95",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5990264_fd1bc667",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +274,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c276686_3f148390",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c7778a8_bfda6015",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bd52be8_9bb36c5a",
@@ -173,6 +305,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: remove `it`?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c7708f_021ddf3a",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bd52be8_9bb36c5a",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +344,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb01a62d_8e68dd42",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd4d9d15_1865ab2c",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a0a4e32_2717ea91",
@@ -207,6 +375,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: s/they/the",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6144f174_12c50eac",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a0a4e32_2717ea91",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +414,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f95314f_d7f8fe4f",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aae2eb4_1c093834",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ded36cad_09b5658d",
@@ -245,6 +449,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db0190c_fa7554df",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ded36cad_09b5658d",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c30a9d08_25f7e267",
@@ -258,6 +480,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "I\u0027m not sure I parse this sentence. Are you saying the SPIR-V type is more flexible. The WGSL type is determined by usage. Or something else?",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae77c9d7_828bab99",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Rewritten.",
+      "parentUuid": "c30a9d08_25f7e267",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -285,6 +525,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e411503_231c46b6",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "053ac78a_243b8ec8",
+      "range": {
+        "startLine": 454,
+        "startChar": 46,
+        "endLine": 456,
+        "endChar": 42
+      },
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f20a5226_b6ba1444",
@@ -298,6 +562,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: in the module",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "311cae8a_891e293e",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f20a5226_b6ba1444",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -321,6 +603,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "846cdc0c_aaaa8553",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "This is the only way it has ever been.",
+      "parentUuid": "5fca0408_91fbcb3f",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d189ef62_bfe95134",
         "filename": "docs/tint/spirv-reader-overview.md",
         "patchSetId": 4
@@ -332,6 +632,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: space before access",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91749d92_9087ac11",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d189ef62_bfe95134",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -353,6 +671,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c85822_ad2382a1",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b024b4d_43fcb78f",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ca12a38_06a2d3b9",
@@ -366,6 +702,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: variable",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aab21ab_073aeff7",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ca12a38_06a2d3b9",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -387,6 +741,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f2e1b9_81fa221e",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a428b719_f934c1a0",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2ff35ca_35e676d8",
@@ -400,6 +772,24 @@
       "writtenOn": "2022-10-13T14:37:17Z",
       "side": 1,
       "message": "nit: variable",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c73eb70_a8dad587",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-10-31T20:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2ff35ca_35e676d8",
       "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
