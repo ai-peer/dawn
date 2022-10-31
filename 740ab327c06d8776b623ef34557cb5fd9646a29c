@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe52c86_253d299d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-31T02:09:43Z",
+      "side": 1,
+      "message": "PTAL. (Found this looking at the dot graph output of benchmark/particles.wgsl)",
+      "revId": "740ab327c06d8776b623ef34557cb5fd9646a29c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
