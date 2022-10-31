@@ -158,6 +158,24 @@
       "parentUuid": "e27f120e_bfaedbd2",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70bbe2ec_be7c6282",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-10-31T01:44:03Z",
+      "side": 1,
+      "message": "Hi Kai, thanks for your explanation.\n\nSo when creating a buffer with mappedAtCreation \u003d\u003d true, invalid usage and a very large size that will OOM on the client side:\n1. With dawn_wire we should throw a RangeError and generate an error buffer at client side.\n2. Without dawn_wire we should generate a validation error and return an error buffer.\n\nAnd the tests in Dawn should also follow below rules (have different expectations with and without dawn_wire).",
+      "parentUuid": "78daab38_c85a7405",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
