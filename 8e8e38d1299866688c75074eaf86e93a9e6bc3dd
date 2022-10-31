@@ -16,6 +16,24 @@
       "message": "```\nsrc/tint/cmd/main.cc:1084:32: error: declaration shadows a local variable [-Werror,-Wshadow-uncaptured-local]\n                 for (uint32_t i \u003d 0;; i++) {\n                               ^\nsrc/tint/cmd/main.cc:1074:39: note: previous declaration is here\n            tint::transform::DataMap\u0026 i) {\n```",
       "revId": "8e8e38d1299866688c75074eaf86e93a9e6bc3dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91d629b3_a0d07d93",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-10-31T21:01:58Z",
+      "side": 1,
+      "message": "I wonder why that error does showup on bot?",
+      "parentUuid": "2326bd1c_a445b3b0",
+      "revId": "8e8e38d1299866688c75074eaf86e93a9e6bc3dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
