@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e7b00f8a_267265a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:29:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a14a7a13_3e48be5a",
+      "range": {
+        "startLine": 9,
+        "startChar": 60,
+        "endLine": 9,
+        "endChar": 61
+      },
+      "revId": "739f35f286d26fd688933de9570a276c472e18a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d22f7bdc_71524fa6",
         "filename": "src/tint/ir/builder_impl.cc",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-01T13:16:23Z",
       "side": 1,
       "message": "Recursive nature of this could be costly, which we might need to handle later.",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 23
+      },
+      "revId": "739f35f286d26fd688933de9570a276c472e18a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eaf09b0_956ae662",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:29:11Z",
+      "side": 1,
+      "message": "Yup, we may need to cache this, but I don\u0027t want to deal with cache invalidation until I have too. currently the trees are small (looking at our benchmarks/) and so I\u0027m not too concerned yet about the cost here.",
+      "parentUuid": "d22f7bdc_71524fa6",
       "range": {
         "startLine": 64,
         "startChar": 12,
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-01T13:16:23Z",
       "side": 1,
       "message": "This is weird / confusing. Should `Build()` just do both?",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 463,
+        "endChar": 23
+      },
+      "revId": "739f35f286d26fd688933de9570a276c472e18a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbd2b3e_5af8b149",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:29:11Z",
+      "side": 1,
+      "message": "Yup, it\u0027s ... not good. I\u0027m still playing with it to try to make it better, I _think_ it can all fold into `Build` but have to try first.",
+      "parentUuid": "37a332fa_0d0c8e61",
       "range": {
         "startLine": 461,
         "startChar": 0,
