@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7302e71e_90843b66",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:27:58Z",
+      "side": 1,
+      "message": "Seems like an odd choice?",
+      "range": {
+        "startLine": 140,
+        "startChar": 26,
+        "endLine": 144,
+        "endChar": 28
+      },
+      "revId": "c18e903f26b4777c3a044506e9fbcd95487c9e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14f72b27_252a2d9f",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:27:58Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 11
+      },
+      "revId": "c18e903f26b4777c3a044506e9fbcd95487c9e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
