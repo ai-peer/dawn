@@ -619,6 +619,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1e1552_7c67ae54",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T02:16:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "846cdc0c_aaaa8553",
+      "revId": "5d5615a276b238f75969ef9b60ae80660c69ac4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d189ef62_bfe95134",
