@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b564e5c_d8164058",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T16:09:58Z",
+      "side": 1,
+      "message": "Manually applying `Kokoro +1` as the label appears to have gone missing, despite being +1 for the same PS.",
+      "revId": "b6047bb1ab53a84fa59eef4e4240b6072388c42b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
