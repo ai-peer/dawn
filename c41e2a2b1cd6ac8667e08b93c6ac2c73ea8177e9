@@ -22,6 +22,30 @@
       },
       "revId": "c41e2a2b1cd6ac8667e08b93c6ac2c73ea8177e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b681420_98fe068b",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:27:03Z",
+      "side": 1,
+      "message": "Ack, we require the `ast::CaseSelector` link above at the moment, but we can pull that out. My plan is to do IR -\u003e AST in pieces as needed but will use the IR -\u003e AST as a forcing function to make sure everything required exists in the IR.",
+      "parentUuid": "722755c3_4189b893",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "c41e2a2b1cd6ac8667e08b93c6ac2c73ea8177e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
