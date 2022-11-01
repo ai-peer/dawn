@@ -939,7 +939,7 @@ struct IntrinsicInfo {
     OverloadInfo const* const overloads;
 };
 
-#include "intrinsic_table.inl"
+#include "src/tint/resolver/intrinsic_table.inl"
 
 /// IntrinsicPrototype describes a fully matched intrinsic.
 struct IntrinsicPrototype {
