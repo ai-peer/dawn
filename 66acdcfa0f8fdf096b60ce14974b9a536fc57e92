@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5913b218_675fb6a2",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-01T11:42:03Z",
+      "side": 1,
+      "message": "We could have this function append the files to a list (`TINT_LIB_SRCS` in this case) - then we\u0027d make is less likely to accidentally have these go out of sync.",
+      "range": {
+        "startLine": 557,
+        "startChar": 2,
+        "endLine": 557,
+        "endChar": 19
+      },
+      "revId": "66acdcfa0f8fdf096b60ce14974b9a536fc57e92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
