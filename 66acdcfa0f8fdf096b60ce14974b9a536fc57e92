@@ -22,6 +22,30 @@
       },
       "revId": "66acdcfa0f8fdf096b60ce14974b9a536fc57e92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b5bb906_2c59e84b",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T15:05:15Z",
+      "side": 1,
+      "message": "Done. Only the .inl file is left as it doesn\u0027t go through the src generator.",
+      "parentUuid": "5913b218_675fb6a2",
+      "range": {
+        "startLine": 557,
+        "startChar": 2,
+        "endLine": 557,
+        "endChar": 19
+      },
+      "revId": "66acdcfa0f8fdf096b60ce14974b9a536fc57e92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
