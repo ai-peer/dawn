@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "722755c3_4189b893",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:20:16Z",
+      "side": 1,
+      "message": "as mentioned before - I think the association with the original AST or SEM should be pure metadata. Stuff should continue to function without this, but it could be used as a hint for regeneration.\n\nIf we need this to link back to AST / SEM, then there\u0027s no sensible way to construct an `ir::Switch` from scratch.",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 38
+      },
+      "revId": "c41e2a2b1cd6ac8667e08b93c6ac2c73ea8177e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
