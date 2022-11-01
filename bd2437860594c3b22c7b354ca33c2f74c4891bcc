@@ -16,6 +16,29 @@
       "message": "Please take a look, thanks",
       "revId": "bd2437860594c3b22c7b354ca33c2f74c4891bcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d013b08_083d432c",
+        "filename": "src/tint/transform/add_block_attribute_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:10:20Z",
+      "side": 1,
+      "message": "nit: `u` is used elsewhere for `var\u003cuniform\u003e`. `s` is used for storage.",
+      "range": {
+        "startLine": 210,
+        "startChar": 25,
+        "endLine": 210,
+        "endChar": 26
+      },
+      "revId": "bd2437860594c3b22c7b354ca33c2f74c4891bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
