@@ -50,6 +50,57 @@
       "message": "Ok I wrote up additional thoughts in the bug.\nI\u0027ll +1 this CL since I think it is at least part of the change we need to make, but it would be best to understand the failure mode and try to make some tests so we\u0027re certain.\n\nWe *could* revert the CL that introduced this problem, but I\u0027m hesitant since it\u0027s possible we end up reverting and relanding multiple times when there may be multiple fuzzer issues like this one. I\u0027d rather let it sit for some time to let the fuzzers continue to find problems instead of reverting - so long as we can make the fixes quickly enough.",
       "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "292f4f5f_adcf0122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-01T14:02:54Z",
+      "side": 1,
+      "message": "I\u0027ve managed to reproduce the issue. It turned out that this is not the right fix. First thing to clarify, this fuzzer test case only calls dawn_wire server APIs without any client API involved. It\u0027s not a normal MapAsync callback. It\u0027s called simply because of the Server destructor.\n\n```\nServer::~Server() {\n    // Un-set the error and lost callbacks since we cannot forward them\n    // after the server has been destroyed.\n    for (WGPUDevice device : DeviceObjects().GetAllHandles()) {\n        ClearDeviceCallbacks(device);\n    }\n    DestroyAllObjects(mProcs);\n}\n```\n\nPreviously the MapAsync callback was from `DestroyAllObjects(mProcs)`, so the buffer was destroyed before the callback. As a result, it returned at [1] before running into the null writeHandle. The stack:\n```\n   #4 0x56401c89f0a2 in dawn::wire::server::Server::OnBufferMapAsyncCallback(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus) third_party/dawn/src/dawn/wire/server/ServerBuffer.cpp:242:13\n    #5 0x56401c8a0254 in dawn::wire::server::ForwardToServerHelper\u003c\u0026dawn::wire::server::Server::OnBufferMapAsyncCallback(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus)\u003e::ExtractedTypes\u003cvoid (dawn::wire::server::Server::*)(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus)\u003e::Callback(WGPUBufferMapAsyncStatus, void*) third_party/dawn/src/dawn/wire/server/Server.h:78:13\n    #6 0x56401b622a3b in dawn::native::BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus) third_party/dawn/src/dawn/native/Buffer.cpp:434:9\n    #7 0x56401b6227cd in dawn::native::BufferBase::DestroyImpl() third_party/dawn/src/dawn/native/Buffer.cpp\n    #8 0x56401b82a22c in dawn::native::null::Buffer::DestroyImpl() third_party/dawn/src/dawn/native/null/DeviceNull.cpp:349:17\n    #9 0x56401b746003 in dawn::native::ApiObjectList::Destroy() third_party/dawn/src/dawn/native/ObjectBase.cpp:61:24\n    #10 0x56401b6b35c2 in DestroyObjects third_party/dawn/src/dawn/native/Device.cpp:364:28\n    #11 0x56401b6b35c2 in dawn::native::DeviceBase::Destroy() third_party/dawn/src/dawn/native/Device.cpp:438:9\n    #12 0x56401b6b2c2b in dawn::native::DeviceBase::WillDropLastExternalRef() third_party/dawn/src/dawn/native/Device.cpp:309:5\n    #13 0x56401b785e7b in dawn::native::RefCountedWithExternalCount::APIRelease() third_party/dawn/src/dawn/native/RefCountedWithExternalCount.cpp:26:9\n    #14 0x56401c81b242 in dawn::wire::server::ServerBase::DestroyAllObjects(DawnProcTable const\u0026) gen/third_party/dawn/src/dawn/wire/server/ServerBase_autogen.h:162:21\n    #15 0x56401c817ee0 in dawn::wire::server::Server::~Server() third_party/dawn/src/dawn/wire/server/Server.cpp:43:5\n```\n\nNow, with the my future serial CL landed, the callback is from `ClearDeviceCallbacks(device);`.\n```\n    #4 0x5578ba0abcd2 in dawn::wire::server::Server::OnBufferMapAsyncCallback(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus) third_party/dawn/src/dawn/wire/server/ServerBuffer.cpp:245:5\n    #5 0x5578ba0aceb4 in dawn::wire::server::ForwardToServerHelper\u003c\u0026dawn::wire::server::Server::OnBufferMapAsyncCallback(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus)\u003e::ExtractedTypes\u003cvoid (dawn::wire::server::Server::*)(dawn::wire::server::MapUserdata*, WGPUBufferMapAsyncStatus)\u003e::Callback(WGPUBufferMapAsyncStatus, void*) third_party/dawn/src/dawn/wire/server/Server.h:78:13\n    #6 0x5578b8e1b4dd in OnMapRequestCompleted third_party/dawn/src/dawn/native/Buffer.cpp:565:5\n    #7 0x5578b8e1b4dd in dawn::native::(anonymous namespace)::MapRequestTask::Finish() third_party/dawn/src/dawn/native/Buffer.cpp:45:17\n    #8 0x5578b8ea4978 in dawn::native::DeviceBase::FlushCallbackTaskQueue() third_party/dawn/src/dawn/native/Device.cpp:1785:27\n    #9 0x5578b8ea5f31 in dawn::native::DeviceBase::APISetUncapturedErrorCallback(void (*)(WGPUErrorType, char const*, void*), void*) third_party/dawn/src/dawn/native/Device.cpp:569:5\n    #10 0x5578ba0249a7 in ClearDeviceCallbacks third_party/dawn/src/dawn/wire/server/Server.cpp:188:5\n    #11 0x5578ba0249a7 in dawn::wire::server::Server::~Server() third_party/dawn/src/dawn/wire/server/Server.cpp:41:9\n    #12 0x5578ba028607 in dawn::wire::server::Server::~Server() third_party/dawn/src/dawn/wire/server/Server.cpp:37:19\n\n```\n\nHere the buffer hasn\u0027t been mapped successfully yet or destroyed. But `FlushCallbackTaskQueue` always finishes callbacks with success. So the test runs into the null writeHandle. Probably the right fix should be that `FlushCallbackTaskQueue` finishes callback with error instead if it\u0027s called from [`APISetUncapturedErrorCallback`](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;drc\u003d5722f2878dc3210f653ea42867fd16c72cc04377;l\u003d569).",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7016a6_c7548a0f",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-01T14:02:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c101fb_35a24d29",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-01T14:02:54Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
