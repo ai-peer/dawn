@@ -194,6 +194,24 @@
       "parentUuid": "70bbe2ec_be7c6282",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f44ea9b_b150d035",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T02:07:06Z",
+      "side": 1,
+      "message": "Catching up on this thread. From what I gather:\n 1. we don\u0027t want to unnecessarily add virtual method calls to support error cases\n 2. OOM is not intended to be hidden in mappedAtCreation\n 3. but there\u0027s still a problem that the service could OOM without the client knowing - so mappedAtCreation OOMs and getMappedRange succeeds\n 4. ideally, it we want native/wire to have as close as possible behavior\n\nThis CL intends to make (4) match the behavior in the spec.\n\n(4) *should* already be the case right now though? [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Buffer.cpp;l\u003d64;bpv\u003d1;bpt\u003d1?q\u003df:dawn%20Errorbuffer) error buffers allocate fake mapped data, specifically for mappedAtCreation buffers.\nTesting locally, I can\u0027t pass the tests despite that existing code.\nLooks like it\u0027s because the allocation size is SO large that AllocNoThrow\u003c\u003e(size) returns nullptr.\n\nI feel like for the WebGPU C API, we can differ slightly from the JS API and say that this might return nullptr. We shouldn\u0027t regularly actually get such large allocations.",
+      "parentUuid": "6912d1e0_2eaf9387",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
