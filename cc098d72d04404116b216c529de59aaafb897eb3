@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48e2c4af_3fe6f636",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T19:02:09Z",
+      "side": 1,
+      "message": "Updated with expectations, and polyfill for broken drivers. PTAL",
+      "revId": "cc098d72d04404116b216c529de59aaafb897eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
