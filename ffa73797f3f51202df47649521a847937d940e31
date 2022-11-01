@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "173563c5_2fc500be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-01T21:16:03Z",
+      "side": 1,
+      "message": "Will fail CQ until this lands in CTS, and we roll it into Dawn: https://github.com/gpuweb/cts/issues/1957",
+      "revId": "ffa73797f3f51202df47649521a847937d940e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
