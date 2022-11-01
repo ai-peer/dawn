@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b0af786_c23ca14d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-01T21:15:38Z",
+      "side": 1,
+      "message": "This is read for review. It\u0027s failing CQ until CTS is rolled into Dawn with my change: https://github.com/gpuweb/cts/issues/1954",
+      "revId": "16f51c0f8ef70c405902d6ffb0300c47bda96e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
