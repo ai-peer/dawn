@@ -16,6 +16,52 @@
       "message": "PTAL.",
       "revId": "5d66d3190760731917c515c1eb0ab54f45148384",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04af32d1_fde49eba",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:23:40Z",
+      "side": 1,
+      "message": "General comment: I think the IR should probably be consuming semantic nodes where possible. There\u0027s more information in the sem, and it\u0027s cheaper to go sem -\u003e ast than the other way around.\nWe probably want to flesh out the missing SEM nodes - this will also help existing code.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "5d66d3190760731917c515c1eb0ab54f45148384",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16124d8e_760e423b",
+        "filename": "src/tint/ir/loop.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T13:23:40Z",
+      "side": 1,
+      "message": "`IsAnyOf` is faster than an or-chain of `Is`",
+      "range": {
+        "startLine": 26,
+        "startChar": 26,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "5d66d3190760731917c515c1eb0ab54f45148384",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
