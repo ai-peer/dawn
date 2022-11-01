@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61f2bbf3_7d741213",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-01T11:18:03Z",
+      "side": 1,
+      "message": "LGTM too. We\u0027ll probably revisit parts of this when we do a CommandRecordingContextBase but that\u0027s post-V1.",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3fe4b8d_154c6991",
@@ -48,6 +65,23 @@
       "writtenOn": "2022-11-01T01:38:56Z",
       "side": 1,
       "message": "could we have a comment explaining why we use total allocated size instead of pending-upload size?",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e489415d_d82d30f9",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-01T11:18:03Z",
+      "side": 1,
+      "message": "nit: any reason why is this calling the frontend instead of the backend? The frontend calling the backend would make sure we never forgot to do the frontend handling.",
       "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
