@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2eb7da0_3fd331ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T01:38:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3fe4b8d_154c6991",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T01:38:56Z",
+      "side": 1,
+      "message": "could we have a comment explaining why we use total allocated size instead of pending-upload size?",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
