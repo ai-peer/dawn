@@ -34,6 +34,24 @@
       "parentUuid": "2326bd1c_a445b3b0",
       "revId": "8e8e38d1299866688c75074eaf86e93a9e6bc3dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403d4e49_bff3482f",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-01T14:12:51Z",
+      "side": 1,
+      "message": "Fixed, by you, with: https://dawn-review.googlesource.com/c/dawn/+/108040",
+      "parentUuid": "91d629b3_a0d07d93",
+      "revId": "8e8e38d1299866688c75074eaf86e93a9e6bc3dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
