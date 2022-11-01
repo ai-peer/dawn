@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d184b33_c52876f9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1880,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-01T20:37:34Z",
+      "side": 1,
+      "message": "I think this should be a compile time error for const eval. Currently this implements the spec, so that\u0027s fine.",
+      "range": {
+        "startLine": 1878,
+        "startChar": 12,
+        "endLine": 1880,
+        "endChar": 18
+      },
+      "revId": "4b82811d842745eaf147f08a871dc09591b811b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
