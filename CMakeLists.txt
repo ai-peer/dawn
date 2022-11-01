@@ -154,7 +154,7 @@ option_if_not_defined(TINT_BUILD_MSL_WRITER "Build the MSL output writer" ${DAWN
 option_if_not_defined(TINT_BUILD_SPV_WRITER "Build the SPIR-V output writer" ${DAWN_ENABLE_VULKAN})
 option_if_not_defined(TINT_BUILD_WGSL_WRITER "Build the WGSL output writer" ON)
 
-option_if_not_defined(TINT_BUILD_RUN_GENERATOR "Run the intrinsic generator" OFF)
+option_if_not_defined(TINT_BUILD_RUN_GENERATOR "Run the intrinsic generator" ON)
 option_if_not_defined(TINT_BUILD_IR "Build the IR" ON)
 
 option_if_not_defined(TINT_BUILD_FUZZERS "Build fuzzers" OFF)
