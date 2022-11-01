@@ -1854,6 +1854,86 @@ OpFunctionEnd
     Validate(b);
 }
 
+TEST_F(BuiltinBuilderTest, Call_QuantizeToF16_Scalar) {
+    GlobalVar("v", Expr(2_f), ast::AddressSpace::kPrivate);
+
+    Func("a_func", utils::Empty, ty.void_(),
+         utils::Vector{
+             Decl(Let("l", Call("quantizeToF16", "v"))),
+         },
+         utils::Vector{
+             Stage(ast::PipelineStage::kFragment),
+         });
+
+    spirv::Builder& b = Build();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+    auto got = DumpBuilder(b);
+    auto* expect = R"(OpCapability Shader
+OpMemoryModel Logical GLSL450
+OpEntryPoint Fragment %7 "a_func"
+OpExecutionMode %7 OriginUpperLeft
+OpName %3 "v"
+OpName %7 "a_func"
+%1 = OpTypeFloat 32
+%2 = OpConstant %1 2
+%4 = OpTypePointer Private %1
+%3 = OpVariable %4 Private %2
+%6 = OpTypeVoid
+%5 = OpTypeFunction %6
+%7 = OpFunction %6 None %5
+%8 = OpLabel
+%10 = OpLoad %1 %3
+%9 = OpQuantizeToF16 %1 %10
+OpReturn
+OpFunctionEnd
+)";
+    EXPECT_EQ(expect, got);
+
+    Validate(b);
+}
+
+TEST_F(BuiltinBuilderTest, Call_QuantizeToF16_Vector) {
+    GlobalVar("v", vec3<f32>(2_f), ast::AddressSpace::kPrivate);
+
+    Func("a_func", utils::Empty, ty.void_(),
+         utils::Vector{
+             Decl(Let("l", Call("quantizeToF16", "v"))),
+         },
+         utils::Vector{
+             Stage(ast::PipelineStage::kFragment),
+         });
+
+    spirv::Builder& b = Build();
+
+    ASSERT_TRUE(b.Build()) << b.error();
+    auto got = DumpBuilder(b);
+    auto* expect = R"(OpCapability Shader
+OpMemoryModel Logical GLSL450
+OpEntryPoint Fragment %9 "a_func"
+OpExecutionMode %9 OriginUpperLeft
+OpName %5 "v"
+OpName %9 "a_func"
+%2 = OpTypeFloat 32
+%1 = OpTypeVector %2 3
+%3 = OpConstant %2 2
+%4 = OpConstantComposite %1 %3 %3 %3
+%6 = OpTypePointer Private %1
+%5 = OpVariable %6 Private %4
+%8 = OpTypeVoid
+%7 = OpTypeFunction %8
+%9 = OpFunction %8 None %7
+%10 = OpLabel
+%12 = OpLoad %1 %5
+%11 = OpQuantizeToF16 %1 %12
+OpReturn
+OpFunctionEnd
+)";
+    EXPECT_EQ(expect, got);
+
+    Validate(b);
+}
+
 }  // namespace float_builtin_tests
 
 // Tests for Numeric builtins with all integer parameter
