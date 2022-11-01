@@ -33,6 +33,23 @@
       "message": "sorry for the slow reply - responding on the bug at this moment",
       "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be8ee702_b6daee9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T02:56:50Z",
+      "side": 1,
+      "message": "Ok I wrote up additional thoughts in the bug.\nI\u0027ll +1 this CL since I think it is at least part of the change we need to make, but it would be best to understand the failure mode and try to make some tests so we\u0027re certain.\n\nWe *could* revert the CL that introduced this problem, but I\u0027m hesitant since it\u0027s possible we end up reverting and relanding multiple times when there may be multiple fuzzer issues like this one. I\u0027d rather let it sit for some time to let the fuzzers continue to find problems instead of reverting - so long as we can make the fixes quickly enough.",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
