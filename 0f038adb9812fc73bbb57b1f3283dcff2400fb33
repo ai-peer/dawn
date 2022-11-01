@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "485c0d70_12c3565e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T16:40:10Z",
+      "side": 1,
+      "message": "great find! sounds like the right approach to me that when we finish callbacks without actually knowing their status, we pass the correct enum.",
+      "parentUuid": "292f4f5f_adcf0122",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7016a6_c7548a0f",
