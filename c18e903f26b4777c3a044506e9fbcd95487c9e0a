@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cabf0b31_bd35bf3b",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:36:55Z",
+      "side": 1,
+      "message": "Temporary. I want to be able to generate the graphs now, but as you can see I haven\u0027t implemented everything. This lets me run the IR generation and get partial results.\n\nWill make it, and the one below, an ICE when all the statements are handled.",
+      "parentUuid": "7302e71e_90843b66",
+      "range": {
+        "startLine": 140,
+        "startChar": 26,
+        "endLine": 144,
+        "endChar": 28
+      },
+      "revId": "c18e903f26b4777c3a044506e9fbcd95487c9e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14f72b27_252a2d9f",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-01T13:27:58Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 11
+      },
+      "revId": "c18e903f26b4777c3a044506e9fbcd95487c9e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce14ce7_9078e24d",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:36:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "14f72b27_252a2d9f",
       "range": {
         "startLine": 225,
         "startChar": 0,
