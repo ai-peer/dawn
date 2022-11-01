@@ -212,6 +212,24 @@
       "parentUuid": "6912d1e0_2eaf9387",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e911c51c_6148ac20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-01T22:36:09Z",
+      "side": 1,
+      "message": "Shouldn\u0027t mFakeMappedData only be used if not using dawn_wire? With dawn_wire, the fake mapped data needs to be immediately available on the client side. Seems to me the service shouldn\u0027t need fake mapped data at all.\n\nTangentially:\n\n\u003e In the C API, it\u0027s not possible to throw an exception, so it probably makes sense to return an error buffer and generate a Dawn validation error.\n\nOn second thought, this thing I said might not make sense. The options I see are:\n\n- It returns nullptr as a C alternative to `RangeError`, and maybe injects an error so we can provide an error message.\n- It returns an invalid buffer that is NOT mapped and cannot have GetMappedRange called on it.\n\nSince we want to be able to implement the C API on top of the JS API, the nullptr probably makes more sense.",
+      "parentUuid": "7f44ea9b_b150d035",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
