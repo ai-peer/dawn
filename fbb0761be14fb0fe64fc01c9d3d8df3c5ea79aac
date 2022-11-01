@@ -35,6 +35,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddbd5c66_000237de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T16:32:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fbb0761be14fb0fe64fc01c9d3d8df3c5ea79aac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e15e808a_34b05ad2",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-01T16:32:26Z",
+      "side": 1,
+      "message": "isn\u0027t a rect an Origin2D plus an Extent2D ? maybe we don\u0027t need this additional type and could instead have two members visibleRectSize and visibleRectOrigin",
+      "range": {
+        "startLine": 1348,
+        "startChar": 4,
+        "endLine": 1358,
+        "endChar": 6
+      },
+      "revId": "fbb0761be14fb0fe64fc01c9d3d8df3c5ea79aac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d87c3787_f730045b",
