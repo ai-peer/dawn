@@ -420,55 +420,61 @@ TEST_F(ResolverVariableValidationTest, MatrixVarNoType) {
 TEST_F(ResolverVariableValidationTest, ConstInitWithVar) {
     auto* v = Var("v", Expr(1_i));
     auto* c = Const("c", Expr(Source{{12, 34}}, v));
-    WrapInFunction(v, c);
+    WrapInFunction(v, Decl(Source{{56, 78}}, c));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression)");
+        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression
+56:78 note: consider changing 'const' to 'let')");
 }
 
 TEST_F(ResolverVariableValidationTest, ConstInitWithOverride) {
     auto* o = Override("v", Expr(1_i));
     auto* c = Const("c", Expr(Source{{12, 34}}, o));
-    WrapInFunction(c);
+    WrapInFunction(Decl(Source{{56, 78}}, c));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(12:34 error: const initializer requires a const-expression, but expression is an override-expression)");
+        R"(12:34 error: const initializer requires a const-expression, but expression is an override-expression
+56:78 note: consider changing 'const' to 'let')");
 }
 
 TEST_F(ResolverVariableValidationTest, ConstInitWithLet) {
     auto* l = Let("v", Expr(1_i));
     auto* c = Const("c", Expr(Source{{12, 34}}, l));
-    WrapInFunction(l, c);
+    WrapInFunction(l, Decl(Source{{56, 78}}, c));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression)");
+        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression
+56:78 note: consider changing 'const' to 'let')");
 }
 
 TEST_F(ResolverVariableValidationTest, ConstInitWithRuntimeExpr) {
     // const c = clamp(2, dpdx(0.5), 3);
-    WrapInFunction(Const("c", Call("clamp", 2_a, Call(Source{{12, 34}}, "dpdx", 0.5_a), 3_a)));
+    auto* c = Const("c", Call("clamp", 2_a, Call(Source{{12, 34}}, "dpdx", 0.5_a), 3_a));
+    WrapInFunction(Decl(Source{{56, 78}}, c));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression)");
+        R"(12:34 error: const initializer requires a const-expression, but expression is a runtime-expression
+56:78 note: consider changing 'const' to 'let')");
 }
 
 TEST_F(ResolverVariableValidationTest, ConstInitWithOverrideExpr) {
     auto* o = Override("v", Expr(1_i));
     auto* c = Const("c", Add(10_a, Expr(Source{{12, 34}}, o)));
-    WrapInFunction(c);
+    WrapInFunction(Decl(Source{{56, 78}}, c));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(12:34 error: const initializer requires a const-expression, but expression is an override-expression)");
+        R"(12:34 error: const initializer requires a const-expression, but expression is an override-expression
+56:78 note: consider changing 'const' to 'let')");
 }
 
 }  // namespace
