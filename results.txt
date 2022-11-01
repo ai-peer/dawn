@@ -1,0 +1,6 @@
+[
+  {
+    "Testcase": "webgpu:shader,execution,expression,call,builtin,clamp:f32:inputSource=\"const\";vectorize=3",
+    "Status": "pass"
+  }
+]
