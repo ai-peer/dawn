@@ -84,7 +84,7 @@ func run() error {
 	// Find clang-format
 	clangFormatPath := findClangFormat(projectRoot)
 	if clangFormatPath == "" {
-		return fmt.Errorf("cannot find clang-format in <dawn>/buildtools nor PATH")
+		return fmt.Errorf("cannot find clang-format in %v/buildtools nor PATH", projectRoot)
 	}
 
 	files := flag.Args()
