@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0137d8a_bd63ea3b",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:34:48Z",
+      "side": 1,
+      "message": "Will followup, thanks.",
+      "parentUuid": "04af32d1_fde49eba",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "5d66d3190760731917c515c1eb0ab54f45148384",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16124d8e_760e423b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-01T13:23:40Z",
       "side": 1,
       "message": "`IsAnyOf` is faster than an or-chain of `Is`",
+      "range": {
+        "startLine": 26,
+        "startChar": 26,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "5d66d3190760731917c515c1eb0ab54f45148384",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e337abc_bc1faf4a",
+        "filename": "src/tint/ir/loop.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-01T13:34:48Z",
+      "side": 1,
+      "message": "Done. Thanks, forgot that existed.",
+      "parentUuid": "16124d8e_760e423b",
       "range": {
         "startLine": 26,
         "startChar": 26,
