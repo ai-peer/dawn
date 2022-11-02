@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9344057_22ed46e5",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:00:19Z",
+      "side": 1,
+      "message": "As discussed - compiler says no.",
+      "parentUuid": "6bd8031f_772f69bd",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff8c813c_d72cd4ee",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-02T14:03:34Z",
       "side": 1,
       "message": "nit: can be removed. `Value{}` is an r-value.",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 54
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1af4ab61_b0e13c00",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff8c813c_d72cd4ee",
       "range": {
         "startLine": 112,
         "startChar": 45,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab0a148_02cbacc1",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37be5970_c2fc0b17",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 120,
+        "endChar": 18
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9e70215_539d1020",
@@ -93,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6846d9d_b41ec66f",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9e70215_539d1020",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 18
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f98ff28c_214856b5",
@@ -106,6 +202,30 @@
       "writtenOn": "2022-11-02T14:03:34Z",
       "side": 1,
       "message": "Same comment as above, can probably be removed by bringing in the `base::Put` symbol, as you did for `PutMode`.",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed9e73b_012e9325",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:00:19Z",
+      "side": 1,
+      "message": "As discussed - compiler says no.",
+      "parentUuid": "f98ff28c_214856b5",
       "range": {
         "startLine": 44,
         "startChar": 15,
