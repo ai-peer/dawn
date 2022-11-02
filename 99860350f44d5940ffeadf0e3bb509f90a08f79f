@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d7568a2_ac35ada6",
+        "filename": "src/tint/clone_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T13:17:09Z",
+      "side": 1,
+      "message": "nit: Google style is to use `\u003d` to capture by value instead in this case, I think (https://google.github.io/styleguide/cppguide.html#Lambda_expressions).",
+      "range": {
+        "startLine": 403,
+        "startChar": 36,
+        "endLine": 403,
+        "endChar": 42
+      },
+      "revId": "99860350f44d5940ffeadf0e3bb509f90a08f79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
