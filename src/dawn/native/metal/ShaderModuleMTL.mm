@@ -109,6 +109,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     std::ostringstream errorStream;
     errorStream << "Tint MSL failure:" << std::endl;
 
+auto start = std::chrono::steady_clock::now();
+
     // Remap BindingNumber to BindingIndex in WGSL shader
     using BindingRemapper = tint::transform::BindingRemapper;
     using BindingPoint = tint::transform::BindingPoint;
@@ -299,6 +301,9 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
         device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
     }
 
+auto end = std::chrono::steady_clock::now();
+std::chrono::duration<double> elapsed = end - start;
+std::cout << "GEN: " << elapsed.count() << "s" << std::endl;
     return mslCompilation;
 }
 
