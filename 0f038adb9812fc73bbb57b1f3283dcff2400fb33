@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e8182a_e38ab08e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-02T19:07:56Z",
+      "side": 1,
+      "message": "\u003e and create a new buffer with same id and generation\n\nHow is this possible? The server should be checking that the generation is strictly increasing here so the testcase can\u0027t recreate the same id/generation no?\n\nAaaand looking at the code it seems that we broke this assumption (and I\u0027m pretty sure it was one of my CLs ^^). It\u0027s probably best to add the check that the generation is monotonically increasing.",
+      "parentUuid": "ef4fbe22_68653377",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7016a6_c7548a0f",
