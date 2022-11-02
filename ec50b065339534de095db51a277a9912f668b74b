@@ -37,6 +37,74 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9f1bdf2_6afa19d6",
+        "filename": "src/tint/transform/add_empty_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Is there any need to create these before calling `ShouldRun` or can this move down before the `b.func` call?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac845f2_53e6ae8f",
+        "filename": "src/tint/transform/array_length_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Why pull all this up to State instead of pushing the one state method down to the transform?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a25f48a_7430ab61",
+        "filename": "src/tint/transform/binding_remapper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit; Move below the early exits?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e9b5eb_f908f98e",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cae8fa3e_0161977f",
         "filename": "src/tint/transform/builtin_polyfill.cc",
         "patchSetId": 9
@@ -66,6 +134,414 @@
       "side": 1,
       "message": "Good spot. Removed.",
       "parentUuid": "cae8fa3e_0161977f",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2afae1_f1269ebb",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04e41fa4_f277f39f",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5903911_1ffe73c4",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Why return a cloned program on failure and not SkipTransform?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca367f7e_207ee717",
+        "filename": "src/tint/transform/combine_samplers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "dito why move on error?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b18be6_08f52a46",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit: move below eary exit?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3162fc4a_dba614b6",
+        "filename": "src/tint/transform/decompose_strided_array.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ce4ee8e_f402b692",
+        "filename": "src/tint/transform/disable_uniformity_analysis.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87ddf5f8_c94a81a3",
+        "filename": "src/tint/transform/expand_compound_assignment.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d882b7c_dd42d355",
+        "filename": "src/tint/transform/first_index_offset.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb960f72_7c08267c",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "A lot of the other transforms stick with ShouldRun, is this one different for a reason?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cdb0af0_7ce80339",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a312ea5f_852756e3",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "`b.Not(ctx.Clone(cond))` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ed8fa3f_8a9de125",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Can this be `b.Block(b.Break())` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181f0ff0_763e2a3e",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "`b.Loop(body, continuing)`",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "909463d2_997008d6",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b46d9c22_b8221b48",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ebf385_41e9ded5",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto why move?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa77063_bff2c584",
+        "filename": "src/tint/transform/num_workgroups_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa23a84e_1fa50a8e",
+        "filename": "src/tint/transform/num_workgroups_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad8f1ac_95a776dd",
+        "filename": "src/tint/transform/promote_initializers_to_let.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "I\u0027m guessing this is failure, why move and not Skip?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c681724_ca3367d9",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Move the ctx.Clone down to before the return, most other transforms seem to do that now and have it just before the move",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fab2745_53767487",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto early out",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d6600cb_31757e44",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "return Skip?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec842aec_0e8c61f6",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "ditto skip?",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -113,6 +589,244 @@
         "endLine": 56,
         "endChar": 20
       },
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a4b1e4_4d9d1bd2",
+        "filename": "src/tint/transform/unwind_discard_functions.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Should this have an UNREACHABLE?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53aa95f_5cfd9f7a",
+        "filename": "src/tint/transform/unwind_discard_functions.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40e5eafe_a3f00189",
+        "filename": "src/tint/transform/var_for_dynamic_index.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "Is this an error case? Should it be Skip?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cd1ca8_bded9e4c",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e22ab5_a8000b8a",
+        "filename": "src/tint/transform/vectorize_scalar_matrix_initializers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "519cdc49_b8861d0a",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\" skip",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "825d51a3_78f92a3a",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "`b.Block(std::move(stmts))` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1c5949d_51a52dc3",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "`b.Func(` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe221324_223d7fd3",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit: ShouldRun to match others?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a5cf38_dbba020a",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63a5a816_0e138e30",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit: `b.Not(ctx.Clone(cond))`",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "989ad626_59143f81",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit `b.Block(b.Break())`",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10299ff1_aed004df",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "nit: `b.Loop`",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3ad274_459cde94",
+        "filename": "src/tint/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T17:43:42Z",
+      "side": 1,
+      "message": "\"",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
