@@ -1582,10 +1582,19 @@ fn f() {
 
     auto* expect = R"(
 fn tint_insert_bits(v : i32, n : i32, offset : u32, count : u32) -> i32 {
-  let s = min(offset, 32u);
-  let e = min(32u, (s + count));
-  let mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
-  return (((n << s) & i32(mask)) | (v & i32(~(mask))));
+  var result = v;
+  if ((offset < 32u)) {
+    let mask_low = ((1u << offset) - 1u);
+    var mask_high : u32;
+    if (((offset + count) >= 32u)) {
+      mask_high = (0u - 1u);
+    } else {
+      mask_high = ((1u << (offset + count)) - 1u);
+    }
+    let mask = (mask_low ^ mask_high);
+    result = (((n << offset) & i32(mask)) | (v & i32(~(mask))));
+  }
+  return result;
 }
 
 fn f() {
@@ -1609,10 +1618,19 @@ fn f() {
 
     auto* expect = R"(
 fn tint_insert_bits(v : u32, n : u32, offset : u32, count : u32) -> u32 {
-  let s = min(offset, 32u);
-  let e = min(32u, (s + count));
-  let mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
-  return (((n << s) & mask) | (v & ~(mask)));
+  var result = v;
+  if ((offset < 32u)) {
+    let mask_low = ((1u << offset) - 1u);
+    var mask_high : u32;
+    if (((offset + count) >= 32u)) {
+      mask_high = (0u - 1u);
+    } else {
+      mask_high = ((1u << (offset + count)) - 1u);
+    }
+    let mask = (mask_low ^ mask_high);
+    result = (((n << offset) & mask) | (v & ~(mask)));
+  }
+  return result;
 }
 
 fn f() {
@@ -1636,10 +1654,19 @@ fn f() {
 
     auto* expect = R"(
 fn tint_insert_bits(v : vec3<i32>, n : vec3<i32>, offset : u32, count : u32) -> vec3<i32> {
-  let s = min(offset, 32u);
-  let e = min(32u, (s + count));
-  let mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
-  return (((n << vec3<u32>(s)) & vec3<i32>(i32(mask))) | (v & vec3<i32>(i32(~(mask)))));
+  var result = v;
+  if ((offset < 32u)) {
+    let mask_low = ((1u << offset) - 1u);
+    var mask_high : u32;
+    if (((offset + count) >= 32u)) {
+      mask_high = (0u - 1u);
+    } else {
+      mask_high = ((1u << (offset + count)) - 1u);
+    }
+    let mask = (mask_low ^ mask_high);
+    result = (((n << vec3<u32>(offset)) & vec3<i32>(i32(mask))) | (v & vec3<i32>(i32(~(mask)))));
+  }
+  return result;
 }
 
 fn f() {
@@ -1663,10 +1690,19 @@ fn f() {
 
     auto* expect = R"(
 fn tint_insert_bits(v : vec3<u32>, n : vec3<u32>, offset : u32, count : u32) -> vec3<u32> {
-  let s = min(offset, 32u);
-  let e = min(32u, (s + count));
-  let mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
-  return (((n << vec3<u32>(s)) & vec3<u32>(mask)) | (v & vec3<u32>(~(mask))));
+  var result = v;
+  if ((offset < 32u)) {
+    let mask_low = ((1u << offset) - 1u);
+    var mask_high : u32;
+    if (((offset + count) >= 32u)) {
+      mask_high = (0u - 1u);
+    } else {
+      mask_high = ((1u << (offset + count)) - 1u);
+    }
+    let mask = (mask_low ^ mask_high);
+    result = (((n << vec3<u32>(offset)) & vec3<u32>(mask)) | (v & vec3<u32>(~(mask))));
+  }
+  return result;
 }
 
 fn f() {

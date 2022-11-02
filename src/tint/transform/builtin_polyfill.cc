@@ -462,6 +462,8 @@ struct BuiltinPolyfill::State {
         auto name = b.Symbols().New("tint_insert_bits");
         uint32_t width = WidthOf(ty);
 
+        // Currently in WGSL parameters of insertBits must be i32, u32, vecN<i32> or vecN<u32>
+        TINT_ASSERT(Transform, (sem::Type::DeepestElementOf(ty)->IsAnyOf<sem::I32, sem::U32>()));
         constexpr uint32_t W = 32u;  // 32-bit
 
         auto V = [&](auto value) -> const ast::Expression* {
@@ -481,21 +483,83 @@ struct BuiltinPolyfill::State {
             return b.vec(b.ty.u32(), width, value);
         };
 
-        utils::Vector<const ast::Statement*, 8> body = {
-            b.Decl(b.Let("s", b.Call("min", "offset", u32(W)))),
-            b.Decl(b.Let("e", b.Call("min", u32(W), b.Add("s", "count")))),
-        };
+        // We have polyfill function:
+        //      let s = min(offset, 32u);
+        //      let e = min(32u, (s + count));
+        //      let mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
+        //      return (((n << s) & mask) | (v & ~(mask)));
+        // Which equals to:
+        //      if (offset >= 32) {
+        //          return v;
+        //      }
+        //      let mask_low = ((1u << offset) - 1u);
+        //      let mask_high = ((1u << min(32u, offset + count)) - 1u);
+        //      let mask = (mask_low ^ mask_high);
+        //      return (((n << offset) & mask) | (v & ~(mask)));
+        // Note that we use `min(32u, (min(offset, 32u) + count))) == min(32u, offset + count)`
+        // above. It is trival when offset < 32u and min(offset, 32u) == offset.
+        // Note that when doing left-shifting to u32 or i32 in HLSL, only the lowest 5 bits of the
+        // right hand operand is considered, which means `(1u << 32u) == (1u << 0u)`, and this is
+        // not we expected. So we have to handle the left-shifting-by-32 cases specially.
+        // Ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/ishl--sm5---asm-
+        // Considering the left shifting behavior and uniformity, we can have:
+        //      var result = v;
+        //      if (offset < 32) {
+        //          let mask_low  = (1u << offset) - 1u;
+        //          var mask_high : u32;
+        //          if ((offset + count) >= 32) {
+        //              mask_high = 0u - 1u;
+        //          } else {
+        //              mask_high = (1u << (offset + count)) - 1u;
+        //          }
+        //          let mask = (mask_low ^ mask_high);
+        //          result = (((n << offset) & mask) | (v & ~(mask)));
+        //      }
+        //      return result;
+
+        utils::Vector<const ast::Statement*, 8> body;
 
         switch (polyfill.insert_bits) {
             case Level::kFull:
-                // let mask = ((1 << s) - 1) ^ ((1 << e) - 1)
-                body.Push(b.Decl(b.Let(
-                    "mask", b.Xor(b.Sub(b.Shl(1_u, "s"), 1_u), b.Sub(b.Shl(1_u, "e"), 1_u)))));
-                // return ((n << s) & mask) | (v & ~mask)
-                body.Push(b.Return(b.Or(b.And(b.Shl("n", U("s")), V("mask")),
-                                        b.And("v", V(b.Complement("mask"))))));
+                // var result = v;
+                body.Push(b.Decl(b.Var("result", b.Expr("v"))));
+
+                // if (offset < 32u) {
+                //   ...
+                // }
+                body.Push(
+                    b.If(b.LessThan("offset", 32_u),
+                         b.Block(utils::Vector<const ast::Statement*, 8>{
+                             // let mask_low  = (1u << offset) - 1u;
+                             b.Decl(b.Let("mask_low", b.Sub(b.Shl(1_u, "offset"), 1_u))),
+                             // var mask_high : u32;
+                             b.Decl(b.Var("mask_high", b.ty.u32())),
+                             // if ((offset + count) >= 32) {
+                             //     mask_high = 0u - 1u;
+                             // } else {
+                             //     mask_high = (1u << (offset + count)) - 1u;
+                             // }
+                             b.If(b.GreaterThanEqual(b.Add("offset", "count"), 32_u),
+                                  b.Block(utils::Vector<const ast::Statement*, 8>{
+                                      b.Assign("mask_high", b.Sub(0_u, 1_u)),
+                                  }),
+                                  b.Else(b.Block(utils::Vector<const ast::Statement*, 8>{
+                                      b.Assign("mask_high",
+                                               b.Sub(b.Shl(1_u, b.Add("offset", "count")), 1_u)),
+                                  }))),
+                             // let mask = (mask_low ^ mask_high);
+                             b.Decl(b.Let("mask", b.Xor("mask_low", "mask_high"))),
+                             // result = (((n << offset) & mask) | (v & ~(mask)));
+                             b.Assign("result", b.Or(b.And(b.Shl("n", U("offset")), V("mask")),
+                                                     b.And("v", V(b.Complement("mask"))))),
+                         })));
+
+                // return result
+                body.Push(b.Return("result"));
                 break;
             case Level::kClampParameters:
+                body.Push(b.Decl(b.Let("s", b.Call("min", "offset", u32(W)))));
+                body.Push(b.Decl(b.Let("e", b.Call("min", u32(W), b.Add("s", "count")))));
                 body.Push(b.Return(b.Call("insertBits", "v", "n", "s", b.Sub("e", "s"))));
                 break;
             default:
