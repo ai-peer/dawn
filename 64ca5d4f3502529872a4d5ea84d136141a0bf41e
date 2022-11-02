@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6943c4_c4d47e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T13:17:14Z",
+      "side": 1,
+      "message": "CTS roll has landed. You should be able to rebase this for CTS failures.",
+      "revId": "64ca5d4f3502529872a4d5ea84d136141a0bf41e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
