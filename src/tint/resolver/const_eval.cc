@@ -1897,6 +1897,33 @@ ConstEval::Result ConstEval::insertBits(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0], args[1]);
 }
 
+ConstEval::Result ConstEval::reverseBits(const sem::Type* ty,
+                                         utils::VectorRef<const sem::Constant*> args,
+                                         const Source&) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto in_e) -> ImplResult {
+            using NumberT = decltype(in_e);
+            using T = UnwrapNumber<NumberT>;
+            using UT = std::make_unsigned_t<T>;
+            constexpr UT kNumBits = sizeof(UT) * 8;
+
+            UT e = static_cast<UT>(in_e);
+            UT r = UT{0};
+            for (size_t s = 0; s < kNumBits; ++s) {
+                // Write source 's' bit to destination 'd' bit if 1
+                if (e & (UT{1} << s)) {
+                    size_t d = kNumBits - s - 1;
+                    r = r | (UT{1} << d);
+                }
+            }
+
+            return CreateElement(builder, c0->Type(), NumberT{r});
+        };
+        return Dispatch_iu32(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
 ConstEval::Result ConstEval::saturate(const sem::Type* ty,
                                       utils::VectorRef<const sem::Constant*> args,
                                       const Source&) {
