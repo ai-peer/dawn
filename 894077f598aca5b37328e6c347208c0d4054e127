@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe4c946_fb9e0d58",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T17:30:45Z",
+      "side": 0,
+      "message": "Put back.",
+      "parentUuid": "98fba149_3e0bb3c0",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "894077f598aca5b37328e6c347208c0d4054e127",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6aa1a42_801cd38d",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-02T15:18:19Z",
       "side": 0,
       "message": "Why were these removed?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 1
+      },
+      "revId": "894077f598aca5b37328e6c347208c0d4054e127",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72bc518d_b5042f30",
+        "filename": "src/tint/transform/remove_phonies_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T17:30:45Z",
+      "side": 0,
+      "message": "I experimented with not exposing the did-i-run-or-not. This was supposed to be reverted, but clearly I missed this. Put back. Thanks.",
+      "parentUuid": "c6aa1a42_801cd38d",
       "range": {
         "startLine": 28,
         "startChar": 0,

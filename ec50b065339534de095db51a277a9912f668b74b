@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f0a84b_96199885",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T17:30:45Z",
+      "side": 1,
+      "message": "Good spot. Removed.",
+      "parentUuid": "cae8fa3e_0161977f",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c10e09d4_b006de68",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-11-02T15:18:19Z",
       "side": 1,
       "message": "I\u0027m a little confused by this. So we now unconditionally clone the program, even if the transform is skipped? Doesn\u0027t this kill a bunch of performance benefit?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519dc0fa_1d22ad1c",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T17:30:45Z",
+      "side": 1,
+      "message": "The public API contract for `Run()` has not changed - you always get back a new `Program` (and always did). We\u0027ve just moved the have-to-clone-at-least-once from `transform::Manager` to here.",
+      "parentUuid": "c10e09d4_b006de68",
       "range": {
         "startLine": 54,
         "startChar": 0,
