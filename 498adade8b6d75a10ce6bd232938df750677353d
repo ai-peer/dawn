@@ -16,6 +16,23 @@
       "message": "Thanks for reviewing. Address comments. Waiting for Kokoro results...",
       "revId": "498adade8b6d75a10ce6bd232938df750677353d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "506d33e9_ae011d65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-11-02T05:08:38Z",
+      "side": 1,
+      "message": "Kokoro +1 now! PTAL again, thanks!",
+      "revId": "498adade8b6d75a10ce6bd232938df750677353d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
