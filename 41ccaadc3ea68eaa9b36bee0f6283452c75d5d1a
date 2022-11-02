@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a746c1e_c675dc7b",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-02T07:17:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3fe4b8d_154c6991",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e489415d_d82d30f9",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-11-01T11:18:03Z",
       "side": 1,
       "message": "nit: any reason why is this calling the frontend instead of the backend? The frontend calling the backend would make sure we never forgot to do the frontend handling.",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5655a4_76fb57c8",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-02T07:17:02Z",
+      "side": 1,
+      "message": "The frontend ForceEventualFlushOfCommands can be removed. It does nothing currently. Let\u0027s see if we will need it in the future.",
+      "parentUuid": "e489415d_d82d30f9",
       "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
