@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db0e9e14_e5373495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-11-02T22:36:33Z",
+      "side": 1,
+      "message": "This has been wired up on the Chromium side in https://chromium-review.googlesource.com/3995503 , and it works! The flickering of the test case in the linked bug is resolved when using ANGLE\u0027s Metal backend.\n\nCan we send this out for official review?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
