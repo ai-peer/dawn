@@ -16,6 +16,23 @@
       "message": "A small change... sorry.",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f90b8a9_28deeec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T15:13:08Z",
+      "side": 1,
+      "message": "Did a quick review, lgtm. Leaving it to Dan to +2.",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
