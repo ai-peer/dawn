@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894c5950_846135c3",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T16:45:21Z",
+      "side": 0,
+      "message": "How about:\n\n```\nlet s \u003d offset;\nlet e \u003d s + count;\nlet mask_s \u003d select(1u \u003c\u003c s, 0u, s \u003c 32) - 1u;\nlet mask_e \u003d select(1u \u003c\u003c e, 0u, e \u003c 32) - 1u;\nlet mask \u003d mask_s ^ mask_e;\n```",
+      "range": {
+        "startLine": 1587,
+        "startChar": 2,
+        "endLine": 1587,
+        "endChar": 51
+      },
+      "revId": "6ab5d3c1519e3b8d76598a20a5fdc3bb84d35fd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
