@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd8031f_772f69bd",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T14:03:34Z",
+      "side": 1,
+      "message": "If you want to get rid of these, I think you can bring in the `Put` function symbol from the base class:\n\n```\nprivate:\n  using Base::Put;\n```",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 29
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff8c813c_d72cd4ee",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T14:03:34Z",
+      "side": 1,
+      "message": "nit: can be removed. `Value{}` is an r-value.",
+      "range": {
+        "startLine": 112,
+        "startChar": 45,
+        "endLine": 112,
+        "endChar": 54
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37be5970_c2fc0b17",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T14:03:34Z",
+      "side": 1,
+      "message": "nit: not necessary",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 120,
+        "endChar": 18
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e70215_539d1020",
+        "filename": "src/tint/utils/hashmap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T14:03:34Z",
+      "side": 1,
+      "message": "nit: not necessary",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 18
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f98ff28c_214856b5",
+        "filename": "src/tint/utils/hashset.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-02T14:03:34Z",
+      "side": 1,
+      "message": "Same comment as above, can probably be removed by bringing in the `base::Put` symbol, as you did for `PutMode`.",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "f1488c6434cf2d172045b3005bf0cf7cbf09be02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
