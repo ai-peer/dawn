@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cacf9c78_512b9d3b",
+        "filename": "src/tint/transform/add_empty_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9f1bdf2_6afa19d6",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aac845f2_53e6ae8f",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "Why pull all this up to State instead of pushing the one state method down to the transform?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca2418b_f5a2fcdf",
+        "filename": "src/tint/transform/array_length_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Transforms have a pattern of keeping the implementation out of the header.\nAs transforms have no state, this is easy with this pattern.",
+      "parentUuid": "aac845f2_53e6ae8f",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee987865_74af4324",
+        "filename": "src/tint/transform/binding_remapper.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Can\u0027t as `b` is used below.",
+      "parentUuid": "9a25f48a_7430ab61",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65e9b5eb_f908f98e",
@@ -99,6 +153,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0202ba1_2886efe6",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65e9b5eb_f908f98e",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "254d4636_294aa63f",
+        "filename": "src/tint/transform/calculate_array_length.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb2afae1_f1269ebb",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04e41fa4_f277f39f",
@@ -172,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0696d5f7_7a4dcfe3",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "`b` is used just below.",
+      "parentUuid": "04e41fa4_f277f39f",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5903911_1ffe73c4",
@@ -185,6 +293,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "Why return a cloned program on failure and not SkipTransform?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbdd0aa_8600a51f",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Because we want the diagnostic error to be returned.",
+      "parentUuid": "d5903911_1ffe73c4",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -208,6 +334,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4e43301_bb20237c",
+        "filename": "src/tint/transform/combine_samplers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Same reason. `Program` carries the diagnostics.",
+      "parentUuid": "ca367f7e_207ee717",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b18be6_08f52a46",
         "filename": "src/tint/transform/decompose_memory_access.cc",
         "patchSetId": 9
@@ -219,6 +363,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "nit: move below eary exit?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26eb640a_9fae7897",
+        "filename": "src/tint/transform/decompose_memory_access.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78b18be6_08f52a46",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -240,6 +402,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0472e3ea_b2d6ab13",
+        "filename": "src/tint/transform/decompose_strided_array.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3162fc4a_dba614b6",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ce4ee8e_f402b692",
@@ -253,6 +433,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "ditto",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71643c40_a371c187",
+        "filename": "src/tint/transform/disable_uniformity_analysis.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ce4ee8e_f402b692",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -274,6 +472,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f81e495_6a29ae4a",
+        "filename": "src/tint/transform/expand_compound_assignment.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87ddf5f8_c94a81a3",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d882b7c_dd42d355",
@@ -287,6 +503,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2c1fe4b_792992c6",
+        "filename": "src/tint/transform/first_index_offset.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d882b7c_dd42d355",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -308,6 +542,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e5fb9e5_d08be9df",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb960f72_7c08267c",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cdb0af0_7ce80339",
@@ -321,6 +573,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c3df128_95af060b",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cdb0af0_7ce80339",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -342,6 +612,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aae987c_0f07c384",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a312ea5f_852756e3",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ed8fa3f_8a9de125",
@@ -355,6 +643,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "Can this be `b.Block(b.Break())` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9a73de_b283451b",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ed8fa3f_8a9de125",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -376,6 +682,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6715ee2_ba5dc357",
+        "filename": "src/tint/transform/for_loop_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "181f0ff0_763e2a3e",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "909463d2_997008d6",
@@ -389,6 +713,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b2cdb1e_338b1002",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "909463d2_997008d6",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -410,6 +752,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec93f249_90a8fce1",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b46d9c22_b8221b48",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6ebf385_41e9ded5",
@@ -423,6 +783,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "ditto why move?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6553a188_8a93547b",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "e6ebf385_41e9ded5",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -444,6 +822,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f09ebd_a6b985f2",
+        "filename": "src/tint/transform/num_workgroups_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "`b` required below.",
+      "parentUuid": "7aa77063_bff2c584",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa23a84e_1fa50a8e",
@@ -457,6 +853,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bcd3422_c8a6ab1c",
+        "filename": "src/tint/transform/num_workgroups_from_uniform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "fa23a84e_1fa50a8e",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -478,6 +892,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6829ecb1_1333a3f9",
+        "filename": "src/tint/transform/promote_initializers_to_let.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "6ad8f1ac_95a776dd",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c681724_ca3367d9",
@@ -491,6 +923,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "Move the ctx.Clone down to before the return, most other transforms seem to do that now and have it just before the move",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467b3659_dd7a54aa",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "No can do. `std::move` hazard. Added comment.",
+      "parentUuid": "7c681724_ca3367d9",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -512,6 +962,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64d2f46_44d29f39",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "2fab2745_53767487",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d6600cb_31757e44",
@@ -529,6 +997,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c088786e_65ea3895",
+        "filename": "src/tint/transform/single_entry_point.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "5d6600cb_31757e44",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec842aec_0e8c61f6",
@@ -542,6 +1028,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "ditto skip?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f734cf6_bbe10b45",
+        "filename": "src/tint/transform/substitute_override.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "ec842aec_0e8c61f6",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -610,6 +1114,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55528276_7febef62",
+        "filename": "src/tint/transform/unwind_discard_functions.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Maybe, but let\u0027s keep this change \"small\"",
+      "parentUuid": "c0a4b1e4_4d9d1bd2",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c53aa95f_5cfd9f7a",
@@ -644,6 +1166,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82623f49_431d9ee3",
+        "filename": "src/tint/transform/var_for_dynamic_index.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "40e5eafe_a3f00189",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8cd1ca8_bded9e4c",
@@ -657,6 +1197,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e86011_98c1c563",
+        "filename": "src/tint/transform/vectorize_matrix_conversions.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8cd1ca8_bded9e4c",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -678,6 +1236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5617dc64_3c896ec6",
+        "filename": "src/tint/transform/vectorize_scalar_matrix_initializers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85e22ab5_a8000b8a",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "519cdc49_b8861d0a",
@@ -691,6 +1267,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\" skip",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c234633_96696547",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "519cdc49_b8861d0a",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -712,6 +1306,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "182525a9_f00c9bb4",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "825d51a3_78f92a3a",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1c5949d_51a52dc3",
@@ -725,6 +1337,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "`b.Func(` ?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d5e7ae5_2bfb39ff",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Can\u0027t use the helper here because it wants the body as a vector. One to fix in another change.",
+      "parentUuid": "e1c5949d_51a52dc3",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -746,6 +1376,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0399e60e_90fecd0b",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe221324_223d7fd3",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26a5cf38_dbba020a",
@@ -759,6 +1407,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e95fdd_4e0b0014",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26a5cf38_dbba020a",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -780,6 +1446,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89cc570c_ef6d906e",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63a5a816_0e138e30",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "989ad626_59143f81",
@@ -793,6 +1477,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "nit `b.Block(b.Break())`",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e96e5712_924dd872",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "989ad626_59143f81",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -814,6 +1516,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "220770de_2490e650",
+        "filename": "src/tint/transform/while_to_loop.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10299ff1_aed004df",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c3ad274_459cde94",
@@ -827,6 +1547,24 @@
       "writtenOn": "2022-11-02T17:43:42Z",
       "side": 1,
       "message": "\"",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b830f8_2a88561b",
+        "filename": "src/tint/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-02T18:03:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c3ad274_459cde94",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
