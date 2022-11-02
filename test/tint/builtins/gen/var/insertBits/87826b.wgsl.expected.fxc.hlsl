@@ -1,8 +1,8 @@
 uint3 tint_insert_bits(uint3 v, uint3 n, uint offset, uint count) {
   const uint s = min(offset, 32u);
   const uint e = min(32u, (s + count));
-  const uint mask = (((1u << s) - 1u) ^ ((1u << e) - 1u));
-  return (((n << uint3((s).xxx)) & uint3((mask).xxx)) | (v & uint3((~(mask)).xxx)));
+  const uint mask = (((((s < 32u) ? 1u : 0u) << s) - 1u) ^ ((((e < 32u) ? 1u : 0u) << e) - 1u));
+  return (((((s < 32u) ? n : (0u).xxx) << uint3((s).xxx)) & uint3((mask).xxx)) | (v & uint3((~(mask)).xxx)));
 }
 
 void insertBits_87826b() {
