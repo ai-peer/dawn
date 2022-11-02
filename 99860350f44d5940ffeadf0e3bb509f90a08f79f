@@ -22,6 +22,30 @@
       },
       "revId": "99860350f44d5940ffeadf0e3bb509f90a08f79f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f92c9b2_706a7362",
+        "filename": "src/tint/clone_context.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T13:20:34Z",
+      "side": 1,
+      "message": "Ack. I prefer to be explicit here - ensuring we do not capture too much is important for performance (IIRC you can capture up to 3x `sizeof(void*)` before you start heap-allocating).",
+      "parentUuid": "7d7568a2_ac35ada6",
+      "range": {
+        "startLine": 403,
+        "startChar": 36,
+        "endLine": 403,
+        "endChar": 42
+      },
+      "revId": "99860350f44d5940ffeadf0e3bb509f90a08f79f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
