@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef4fbe22_68653377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-02T05:06:54Z",
+      "side": 1,
+      "message": "I\u0027ve dug a little deeper, as I was still not clear about why the `writeHandle` is null. It turned out the test case is quite nasty. It frees the buffer with ongoing MapAsyncCall, and create a new buffer with same id and generation. So the previous callback falls into the new buffer. In the old buffer creation, the usage is map write, however it\u0027s none in the new buffer creation. This is why the `writeHandle` is null.\n\n```\n Server::DoDeviceCreateBuffer(...)\n Server::DoBufferMapAsync(...)\n server::KnownObjectsBase\u003cWGPUBufferImpl*\u003e::Free()\n Server::DoDeviceCreateBuffer(...) // same id and generation as the previous one, but the map usage differs.\n Server::~Server()\n Server::OnBufferMapAsyncCallback(...)\n```\n\nSo I think it\u0027s correct for `FlushCallbackTaskQueue` to finish callbacks with success. Before the CL, it took at least a Queue::Tick. In this test case no Tick is even called. So previously the callback of success just didn\u0027t have a chance to run.\n\nIdeally to fix this, we should cancel the on-the-fly async callback when the server frees the buffer. In reality, this case should be very rare. Maybe it\u0027s enough to mitigate it by simply adding the check of same buffer object handles.",
+      "parentUuid": "485c0d70_12c3565e",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7016a6_c7548a0f",
@@ -100,6 +118,24 @@
       "writtenOn": "2022-11-01T14:02:54Z",
       "side": 1,
       "message": "[1]",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7fe980_53978e7e",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-02T05:06:54Z",
+      "side": 1,
+      "message": "A small correction of my previous comment here. Before the my future serial CL, we didn\u0027t run into the error was due to [2] rather other [1].\n```\nvoid BufferBase::DestroyImpl() {\n    if (mState \u003d\u003d BufferState::Mapped) {\n        UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);\n    } else if (mState \u003d\u003d BufferState::MappedAtCreation) {\n        if (mStagingBuffer !\u003d nullptr) {\n            mStagingBuffer.reset();\n        } else if (mSize !\u003d 0) {\n            UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);\n        }\n    }\n    mState \u003d BufferState::Destroyed;\n}\n```\nIt was `WGPUBufferMapAsyncStatus_DestroyedBeforeCallback`. But now it\u0027s `WGPUBufferMapAsyncStatus_Success`.",
+      "parentUuid": "6a7016a6_c7548a0f",
       "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
