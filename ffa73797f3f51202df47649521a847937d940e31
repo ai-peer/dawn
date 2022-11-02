@@ -16,6 +16,29 @@
       "message": "Will fail CQ until this lands in CTS, and we roll it into Dawn: https://github.com/gpuweb/cts/issues/1957",
       "revId": "ffa73797f3f51202df47649521a847937d940e31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da12d205_fc4d3cdc",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T13:18:30Z",
+      "side": 1,
+      "message": "nit: this pattern is very regular - it\u0027s hard to actually see if this is working correctly for the cases where you used `e`.",
+      "range": {
+        "startLine": 826,
+        "startChar": 15,
+        "endLine": 826,
+        "endChar": 49
+      },
+      "revId": "ffa73797f3f51202df47649521a847937d940e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
