@@ -84,7 +84,7 @@ func run() error {
 	// Find clang-format
 	clangFormatPath := findClangFormat(projectRoot)
 	if clangFormatPath == "" {
-		return fmt.Errorf("cannot find clang-format in <dawn>/buildtools nor PATH")
+		fmt.Errorf("cannot find clang-format in <dawn>/buildtools nor PATH")
 	}
 
 	files := flag.Args()
@@ -182,11 +182,13 @@ func run() error {
 			_, tmplFileName := filepath.Split(tmplPath)
 			outFileName := strings.TrimSuffix(tmplFileName, ".tmpl")
 
-			switch filepath.Ext(outFileName) {
-			case ".cc", ".h", ".inl":
-				body, err = clangFormat(body, clangFormatPath)
-				if err != nil {
-					return err
+			if clangFormatPath != "" {
+				switch filepath.Ext(outFileName) {
+				case ".cc", ".h", ".inl":
+					body, err = clangFormat(body, clangFormatPath)
+					if err != nil {
+						return err
+					}
 				}
 			}
 
