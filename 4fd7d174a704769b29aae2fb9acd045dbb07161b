@@ -16,6 +16,24 @@
       "message": "The issue here is that `\u003c\u003c` and `\u003e\u003e` needs to modulo the RHS with the bit-width of the LHS.\n\nI was hoping to fix this by adding a polyfill option for the shift-left and shift-right binary operators, then transitively using this by the other builtins.",
       "revId": "4fd7d174a704769b29aae2fb9acd045dbb07161b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46631e4_ee074826",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-02T13:59:33Z",
+      "side": 1,
+      "message": "I see, but in this specific case it seems that we do need a \"left-shifting 32 bits\" if we use current algorithm, while WGSL bit-shifting also modulo the RHS in runtime or report error if RHS is const or override expression (https://www.w3.org/TR/WGSL/#bit-expr:~:text\u003dIf%20e2%20is%20greater%20than%20or%20equal%20to%20the%20bit%20width%20of%20e1%2C%20then%3A).\n\nSo maybe we should still avoid RHS being 32?",
+      "parentUuid": "331d3fd1_247d0586",
+      "revId": "4fd7d174a704769b29aae2fb9acd045dbb07161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
