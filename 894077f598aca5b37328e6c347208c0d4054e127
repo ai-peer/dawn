@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fba149_3e0bb3c0",
+        "filename": "src/tint/transform/manager.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T15:18:19Z",
+      "side": 0,
+      "message": "Nit: Looks like we\u0027ve lost the potentially useful info about which transforms were skipped?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "894077f598aca5b37328e6c347208c0d4054e127",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6aa1a42_801cd38d",
+        "filename": "src/tint/transform/remove_phonies_test.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T15:18:19Z",
+      "side": 0,
+      "message": "Why were these removed?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 1
+      },
+      "revId": "894077f598aca5b37328e6c347208c0d4054e127",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

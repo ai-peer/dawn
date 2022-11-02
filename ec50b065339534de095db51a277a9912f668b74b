@@ -33,6 +33,46 @@
       "message": "Did a quick review, lgtm. Leaving it to Dan to +2.",
       "revId": "ec50b065339534de095db51a277a9912f668b74b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae8fa3e_0161977f",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T15:18:19Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this `Clone()` be omitted now?",
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c10e09d4_b006de68",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T15:18:19Z",
+      "side": 1,
+      "message": "I\u0027m a little confused by this. So we now unconditionally clone the program, even if the transform is skipped? Doesn\u0027t this kill a bunch of performance benefit?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "ec50b065339534de095db51a277a9912f668b74b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
