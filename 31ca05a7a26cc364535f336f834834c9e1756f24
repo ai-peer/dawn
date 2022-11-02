@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f620e29_a3a3ebf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T17:37:28Z",
+      "side": 1,
+      "message": "LGTM, not sure if Dan wanted to take a look too though.",
+      "revId": "31ca05a7a26cc364535f336f834834c9e1756f24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "070c1f9f_07311bd1",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-02T17:37:28Z",
+      "side": 1,
+      "message": "Nit: `[[maybe_unused]]` ?",
+      "revId": "31ca05a7a26cc364535f336f834834c9e1756f24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
