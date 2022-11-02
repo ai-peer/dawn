@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a5d8ba_5ef898c5",
+        "filename": "src/tint/transform/std140_test.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 0,
+      "message": "Ah, copied from here.",
+      "revId": "6ab5d3c1519e3b8d76598a20a5fdc3bb84d35fd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

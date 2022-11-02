@@ -1,0 +1,187 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c404da75_3900f86f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "This is really impressive work.\n\nI would like someone else to review, so I\u0027m giving this +1",
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3bc3f26_1d4a4009",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "nit:  I might be worth explaining why:\n\nInf and NaN are indicated by a biased exponent of all 1 bits.\nSince the sign bit is the most significant bit of the byte, then the second-most significant bit of the byte is the most significant bit of the biased exponent.\nSetting that to 0 avoids both Inf and NaN.",
+      "range": {
+        "startLine": 155,
+        "startChar": 32,
+        "endLine": 155,
+        "endChar": 90
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92660cd4_514f7f3c",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "nit:  It seems we want to use values so that  0xbfu | 0x40u \u003d 0xff.\n\nIt would be *slightly* better to make definitions:\n\nconstexpr auto padding_byte_mask \u003d 0x40u;\nconstexpr auto data_byte_mask \u003d 0xff ^ padding_byte_mask;\n\nBut that\u0027s a bigger change what you need for this CL.",
+      "range": {
+        "startLine": 158,
+        "startChar": 66,
+        "endLine": 158,
+        "endChar": 72
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d3ffd10_6c4bcca0",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "So it looks like this fixes a pre-existing bug.\nI think this is the right fix, because the subtracted term accounts for the space occupied by all the previous fields.\nI\u0027d like Ben to review and confirm.",
+      "range": {
+        "startLine": 470,
+        "startChar": 64,
+        "endLine": 470,
+        "endChar": 69
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "970e7788_36fcddc7",
+        "filename": "src/tint/transform/std140.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "Oh, that\u0027s interesting and a good catch.\nIn the f16 case *all* M values have to be handled with the transform, not just M\u003d2.",
+      "range": {
+        "startLine": 23,
+        "startChar": 69,
+        "endLine": 23,
+        "endChar": 81
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e34ffd7e_00e28317",
+        "filename": "src/tint/transform/std140_f16_test.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9566520b_027808e5",
+        "filename": "src/tint/transform/std140_f32_test.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d9da075_9c162680",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "This is a nice improvement: We need to know the unit is in bytes.",
+      "range": {
+        "startLine": 1194,
+        "startChar": 13,
+        "endLine": 1194,
+        "endChar": 33
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c1f012_121fcd4d",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-02T19:49:17Z",
+      "side": 1,
+      "message": "I\u0027m very happy someone worked through all these details!",
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
