@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c5bfe4_ed11616c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1358,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-11-02T02:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e15e808a_34b05ad2",
+      "range": {
+        "startLine": 1348,
+        "startChar": 4,
+        "endLine": 1358,
+        "endChar": 6
+      },
+      "revId": "fbb0761be14fb0fe64fc01c9d3d8df3c5ea79aac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d87c3787_f730045b",
@@ -88,6 +112,24 @@
       "writtenOn": "2022-11-01T10:30:27Z",
       "side": 1,
       "message": "nit: this could overflow, can we have a check that width \u003c textureSize.width first, then that y \u003c textureSize.width - width?",
+      "revId": "fbb0761be14fb0fe64fc01c9d3d8df3c5ea79aac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d0b4537_da72a311",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-11-02T02:31:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d87c3787_f730045b",
       "revId": "fbb0761be14fb0fe64fc01c9d3d8df3c5ea79aac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
