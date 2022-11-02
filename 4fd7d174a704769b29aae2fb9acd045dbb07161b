@@ -34,6 +34,24 @@
       "parentUuid": "331d3fd1_247d0586",
       "revId": "4fd7d174a704769b29aae2fb9acd045dbb07161b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "705acc7c_4b111148",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-02T15:03:00Z",
+      "side": 1,
+      "message": "\u003e while WGSL bit-shifting also modulo the RHS in runtime or report error if RHS is const or override expression\n\nThe polyfill transform does not handle constant expressions. That\u0027s done in `src/tint/resolver/const_eval.cc`, which comes earlier in the pipeline.",
+      "parentUuid": "b46631e4_ee074826",
+      "revId": "4fd7d174a704769b29aae2fb9acd045dbb07161b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
