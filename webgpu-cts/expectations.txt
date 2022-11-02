@@ -61,7 +61,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-11-01 10:03:20PM
+# Last rolled: 2022-11-02 03:33:09PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
