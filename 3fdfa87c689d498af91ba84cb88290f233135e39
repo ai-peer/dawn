@@ -33,6 +33,24 @@
       "message": "I\u0027m not entirely sure whether the command is relative to `WORKING_DIRECTORY`. No harm in making this path absolute.",
       "revId": "3fdfa87c689d498af91ba84cb88290f233135e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade0be59_a2e273fc",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-02T13:37:55Z",
+      "side": 1,
+      "message": "Done. My understanding is that everything in here is relative to `WORKING_DIRECTORY` but changed to be on the safe side as my understanding of cmake has often been wrong.",
+      "parentUuid": "babdbdec_ce0817e9",
+      "revId": "3fdfa87c689d498af91ba84cb88290f233135e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
