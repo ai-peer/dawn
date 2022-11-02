@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55c39c95_6123ba94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2022-11-02T23:43:36Z",
+      "side": 1,
+      "message": "Seems the latest Patch set needs another review or it cannot be submitted. Please take another look, thanks!",
+      "revId": "43becca0ea01c9072d566a702a2772391852bc9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
