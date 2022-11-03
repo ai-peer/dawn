@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e4f0a1_db7cc9af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T19:40:56Z",
+      "side": 1,
+      "message": "PTAL. The `asin`, `acos`, and `atanh` expectations require CTS change to land and a roll before they can be removed.",
+      "revId": "fa6fa0d0b519a7ce7c72a55f34b256df616653ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
