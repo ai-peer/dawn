@@ -16,6 +16,29 @@
       "message": "PTAL.\n\nDoing `out/Debug/tint_unittests --gtest_filter\u003d\"*ExtensionParseTest*\"` still executes the extension_test tests. I don\u0027t typically build the benchmark files, but I\u0027m guessing they should work ...",
       "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e03a43a5_7dd064ea",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T19:13:11Z",
+      "side": 1,
+      "message": "maybe make this a parameter to the function?",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
