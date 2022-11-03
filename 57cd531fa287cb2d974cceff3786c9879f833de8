@@ -16,6 +16,52 @@
       "message": "PTAL.",
       "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "770392a4_d7798b73",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:33:27Z",
+      "side": 1,
+      "message": "It\u0027s kind of silly how we keep moving along and selecting the next 1-arg builtin that\u0027s not yet const-eval\u0027ified. Is this test supposed to be testing that builtins that are not yet implemented for const eval fail at module scope? Doesn\u0027t seem like we need this test in that case.",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3b3cbe8_c8266b68",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:33:27Z",
+      "side": 1,
+      "message": "Please add scalar cases for these above.",
+      "range": {
+        "startLine": 876,
+        "startChar": 22,
+        "endLine": 878,
+        "endChar": 41
+      },
+      "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
