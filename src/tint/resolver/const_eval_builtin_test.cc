@@ -15,6 +15,7 @@
 #include "src/tint/resolver/const_eval_test.h"
 
 using namespace tint::number_suffixes;  // NOLINT
+using ::testing::HasSubstr;
 
 namespace tint::resolver {
 namespace {
@@ -647,6 +648,96 @@ INSTANTIATE_TEST_SUITE_P(  //
                      testing::ValuesIn(Concat(CountOneBitsCases<i32>(),  //
                                               CountOneBitsCases<u32>()))));
 
+template <typename T, bool finite_only>
+std::vector<Case> CrossCases() {
+    constexpr auto vec_x = [](T v) { return Vec(T(v), T(0), T(0)); };
+    constexpr auto vec_y = [](T v) { return Vec(T(0), T(v), T(0)); };
+    constexpr auto vec_z = [](T v) { return Vec(T(0), T(0), T(v)); };
+
+    const auto zero = Vec(T(0), T(0), T(0));
+    const auto unit_x = vec_x(T(1));
+    const auto unit_y = vec_y(T(1));
+    const auto unit_z = vec_z(T(1));
+    const auto neg_unit_x = vec_x(-T(1));
+    const auto neg_unit_y = vec_y(-T(1));
+    const auto neg_unit_z = vec_z(-T(1));
+    const auto inf_x = vec_x(T::Inf());
+    const auto inf_y = vec_y(T::Inf());
+    const auto inf_z = vec_z(T::Inf());
+    const auto neg_inf_x = vec_x(-T::Inf());
+    const auto neg_inf_y = vec_y(-T::Inf());
+    const auto neg_inf_z = vec_z(-T::Inf());
+    const auto highest_x = vec_x(T::Highest());
+    const auto highest_y = vec_y(T::Highest());
+    const auto highest_z = vec_z(T::Highest());
+    const auto smallest_x = vec_x(T::Smallest());
+    const auto smallest_y = vec_y(T::Smallest());
+    const auto smallest_z = vec_z(T::Smallest());
+
+    std::vector<Case> r = {
+        C({zero, zero}, zero),
+
+        C({unit_x, unit_x}, zero),
+        C({unit_y, unit_y}, zero),
+        C({unit_z, unit_z}, zero),
+
+        C({smallest_x, smallest_x}, zero),
+        C({smallest_y, smallest_y}, zero),
+        C({smallest_z, smallest_z}, zero),
+
+        C({highest_x, highest_x}, zero),
+        C({highest_y, highest_y}, zero),
+        C({highest_z, highest_z}, zero),
+
+        C({smallest_x, highest_x}, zero),
+        C({smallest_y, highest_y}, zero),
+        C({smallest_z, highest_z}, zero),
+
+        C({unit_x, neg_unit_x}, zero).PosOrNeg(),
+        C({unit_y, neg_unit_y}, zero).PosOrNeg(),
+        C({unit_z, neg_unit_z}, zero).PosOrNeg(),
+
+        C({unit_x, unit_y}, unit_z),
+        C({unit_y, unit_x}, neg_unit_z),
+
+        C({unit_z, unit_x}, unit_y),
+        C({unit_x, unit_z}, neg_unit_y),
+
+        C({unit_y, unit_z}, unit_x),
+        C({unit_z, unit_y}, neg_unit_x),
+
+        C({vec_x(T(1)), vec_y(T(2))}, vec_z(T(2))),
+        C({vec_y(T(1)), vec_x(T(2))}, vec_z(-T(2))),
+        C({vec_x(T(2)), vec_y(T(3))}, vec_z(T(6))),
+        C({vec_y(T(2)), vec_x(T(3))}, vec_z(-T(6))),
+
+        C({Vec(T(1), T(2), T(3)), Vec(T(1), T(5), T(7))}, Vec(T(-1), T(-4), T(3))),
+        C({Vec(T(33), T(44), T(55)), Vec(T(13), T(42), T(39))}, Vec(T(-594), T(-572), T(814))),
+        C({Vec(T(3.5), T(4), T(5.5)), Vec(T(1), T(4.5), T(3.5))},
+          Vec(T(-10.75), T(-6.75), T(11.75))),
+    };
+
+    // See ResolverConstEvalBuiltinTest_Overflow for negative tests
+    ConcatIntoIf<!finite_only>(  //
+        r, std::vector<Case>{
+               C({highest_x, highest_y}, inf_z),
+               C({highest_y, highest_x}, neg_inf_z),
+               C({highest_z, highest_x}, inf_y),
+               C({highest_x, highest_z}, neg_inf_y),
+               C({highest_y, highest_z}, inf_x),
+               C({highest_z, highest_y}, neg_inf_x),
+           });
+
+    return r;
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Cross,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kCross),
+                     testing::ValuesIn(Concat(CrossCases<AFloat, true>(),  //
+                                              CrossCases<f32, false>(),    //
+                                              CrossCases<f16, false>()))));
+
 template <typename T>
 std::vector<Case> FirstLeadingBitCases() {
     using B = BitValues<T>;
@@ -1118,6 +1209,51 @@ INSTANTIATE_TEST_SUITE_P(  //
     ResolverConstEvalBuiltinTest,
     testing::Combine(testing::Values(sem::BuiltinType::kQuantizeToF16),
                      testing::ValuesIn(QuantizeToF16Cases())));
+
+// Test any builtin for overflow
+struct OverflowCase {
+    sem::BuiltinType builtin;
+    utils::Vector<Types, 8> args;
+};
+
+using ResolverConstEvalBuiltinTest_Overflow = ResolverTestWithParam<OverflowCase>;
+
+TEST_P(ResolverConstEvalBuiltinTest_Overflow, Test) {
+    Enable(ast::Extension::kF16);
+    auto& c = GetParam();
+
+    utils::Vector<const ast::Expression*, 8> args;
+    for (auto& a : c.args) {
+        std::visit([&](auto&& v) { args.Push(v.Expr(*this)); }, a);
+    }
+
+    auto* expr = Call(Source{{1, 1}}, sem::str(c.builtin), std::move(args));
+
+    GlobalConst("C", expr);
+    ASSERT_FALSE(r()->Resolve());
+    EXPECT_THAT(r()->error(), HasSubstr("1:1 error: '"));
+    auto* arg0 = ToValueBase(c.args[0]);
+    EXPECT_THAT(r()->error(), HasSubstr("' cannot be represented as '" + arg0->TypeName() + "'"));
+}
+
+INSTANTIATE_TEST_SUITE_P(  //
+    Test,
+    ResolverConstEvalBuiltinTest_Overflow,
+    testing::ValuesIn(std::vector{
+        // Cross
+        OverflowCase{sem::BuiltinType::kCross,  // highest_x, highest_y
+                     {Vec(AFloat::Highest(), 0.0_a, 0.0_a), Vec(0.0_a, AFloat::Highest(), 0.0_a)}},
+        OverflowCase{sem::BuiltinType::kCross,  // highest_y, highest_x
+                     {Vec(0.0_a, AFloat::Highest(), 0.0_a), Vec(AFloat::Highest(), 0.0_a, 0.0_a)}},
+        OverflowCase{sem::BuiltinType::kCross,  // highest_z, highest_x
+                     {Vec(0.0_a, 0.0_a, AFloat::Highest()), Vec(AFloat::Highest(), 0.0_a, 0.0_a)}},
+        OverflowCase{sem::BuiltinType::kCross,  // highest_x, highest_z
+                     {Vec(AFloat::Highest(), 0.0_a, 0.0_a), Vec(0.0_a, 0.0_a, AFloat::Highest())}},
+        OverflowCase{sem::BuiltinType::kCross,  // highest_y, highest_z
+                     {Vec(0.0_a, AFloat::Highest(), 0.0_a), Vec(0.0_a, 0.0_a, AFloat::Highest())}},
+        OverflowCase{sem::BuiltinType::kCross,  // highest_z, highest_y
+                     {Vec(0.0_a, 0.0_a, AFloat::Highest()), Vec(0.0_a, AFloat::Highest(), 0.0_a)}},
+    }));
 
 }  // namespace
 }  // namespace tint::resolver

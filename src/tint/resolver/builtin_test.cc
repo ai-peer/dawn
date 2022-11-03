@@ -750,7 +750,7 @@ TEST_F(ResolverBuiltinFloatTest, Cross_Error_NoArgs) {
     EXPECT_EQ(r()->error(), R"(error: no matching call to cross()
 
 1 candidate function:
-  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is f32 or f16
+  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is abstract-float, f32 or f16
 )");
 }
 
@@ -763,7 +763,7 @@ TEST_F(ResolverBuiltinFloatTest, Cross_Error_Scalar) {
     EXPECT_EQ(r()->error(), R"(error: no matching call to cross(f32, f32)
 
 1 candidate function:
-  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is f32 or f16
+  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is abstract-float, f32 or f16
 )");
 }
 
@@ -777,7 +777,7 @@ TEST_F(ResolverBuiltinFloatTest, Cross_Error_Vec3Int) {
               R"(error: no matching call to cross(vec3<i32>, vec3<i32>)
 
 1 candidate function:
-  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is f32 or f16
+  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is abstract-float, f32 or f16
 )");
 }
 
@@ -792,7 +792,7 @@ TEST_F(ResolverBuiltinFloatTest, Cross_Error_Vec4) {
               R"(error: no matching call to cross(vec4<f32>, vec4<f32>)
 
 1 candidate function:
-  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is f32 or f16
+  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is abstract-float, f32 or f16
 )");
 }
 
@@ -808,7 +808,7 @@ TEST_F(ResolverBuiltinFloatTest, Cross_Error_TooManyParams) {
               R"(error: no matching call to cross(vec3<f32>, vec3<f32>, vec3<f32>)
 
 1 candidate function:
-  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is f32 or f16
+  cross(vec3<T>, vec3<T>) -> vec3<T>  where: T is abstract-float, f32 or f16
 )");
 }
 

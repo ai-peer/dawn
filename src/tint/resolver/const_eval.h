@@ -476,14 +476,23 @@ class ConstEval {
                               utils::VectorRef<const sem::Constant*> args,
                               const Source& source);
 
+    /// cross builtin
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    Result cross(const sem::Type* ty,
+                 utils::VectorRef<const sem::Constant*> args,
+                 const Source& source);
+
     /// extractBits builtin
     /// @param ty the expression type
     /// @param args the input arguments
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
     Result extractBits(const sem::Type* ty,
-        utils::VectorRef<const sem::Constant*> args,
-        const Source& source);
+                       utils::VectorRef<const sem::Constant*> args,
+                       const Source& source);
 
     /// firstLeadingBit builtin
     /// @param ty the expression type
@@ -580,6 +589,13 @@ class ConstEval {
     template <typename NumberT>
     utils::Result<NumberT> Add(NumberT a, NumberT b);
 
+    /// Subtracts two Number<T>s
+    /// @param a the lhs number
+    /// @param b the rhs number
+    /// @returns the result number on success, or logs an error and returns Failure
+    template <typename NumberT>
+    utils::Result<NumberT> Sub(NumberT a, NumberT b);
+
     /// Multiplies two Number<T>s
     /// @param a the lhs number
     /// @param b the rhs number
@@ -637,6 +653,12 @@ class ConstEval {
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
     auto AddFunc(const sem::Type* elem_ty);
+
+    /// Returns a callable that calls Sub, and creates a Constant with its result of type `elem_ty`
+    /// if successful, or returns Failure otherwise.
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto SubFunc(const sem::Type* elem_ty);
 
     /// Returns a callable that calls Mul, and creates a Constant with its result of type `elem_ty`
     /// if successful, or returns Failure otherwise.

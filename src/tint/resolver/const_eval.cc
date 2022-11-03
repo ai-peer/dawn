@@ -670,6 +670,33 @@ utils::Result<NumberT> ConstEval::Add(NumberT a, NumberT b) {
 }
 
 template <typename NumberT>
+utils::Result<NumberT> ConstEval::Sub(NumberT a, NumberT b) {
+    NumberT result;
+    if constexpr (IsAbstract<NumberT>) {
+        // Check for over/underflow for abstract values
+        if (auto r = CheckedSub(a, b)) {
+            result = r->value;
+        } else {
+            AddError(OverflowErrorMessage(a, "-", b), *current_source);
+            return utils::Failure;
+        }
+    } else {
+        using T = UnwrapNumber<NumberT>;
+        auto sub_values = [](T lhs, T rhs) {
+            if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
+                // Ensure no UB for signed overflow
+                using UT = std::make_unsigned_t<T>;
+                return static_cast<T>(static_cast<UT>(lhs) - static_cast<UT>(rhs));
+            } else {
+                return lhs - rhs;
+            }
+        };
+        result = sub_values(a.value, b.value);
+    }
+    return result;
+}
+
+template <typename NumberT>
 utils::Result<NumberT> ConstEval::Mul(NumberT a, NumberT b) {
     using T = UnwrapNumber<NumberT>;
     NumberT result;
@@ -786,6 +813,15 @@ utils::Result<NumberT> ConstEval::Dot4(NumberT a1,
 auto ConstEval::AddFunc(const sem::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Add(a1, a2)) {
+            return CreateElement(builder, elem_ty, r.Get());
+        }
+        return utils::Failure;
+    };
+}
+
+auto ConstEval::SubFunc(const sem::Type* elem_ty) {
+    return [=](auto a1, auto a2) -> ImplResult {
+        if (auto r = Sub(a1, a2)) {
             return CreateElement(builder, elem_ty, r.Get());
         }
         return utils::Failure;
@@ -1090,34 +1126,41 @@ ConstEval::Result ConstEval::OpPlus(const sem::Type* ty,
 ConstEval::Result ConstEval::OpMinus(const sem::Type* ty,
                                      utils::VectorRef<const sem::Constant*> args,
                                      const Source& source) {
+    // auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
+    //     auto create = [&](auto i, auto j) -> ImplResult {
+    //         using NumberT = decltype(i);
+    //         NumberT result;
+    //         if constexpr (IsAbstract<NumberT>) {
+    //             // Check for over/underflow for abstract values
+    //             if (auto r = CheckedSub(i, j)) {
+    //                 result = r->value;
+    //             } else {
+    //                 AddError(OverflowErrorMessage(i, "-", j), source);
+    //                 return utils::Failure;
+    //             }
+    //         } else {
+    //             using T = UnwrapNumber<NumberT>;
+    //             auto subtract_values = [](T lhs, T rhs) {
+    //                 if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
+    //                     // Ensure no UB for signed underflow
+    //                     using UT = std::make_unsigned_t<T>;
+    //                     return static_cast<T>(static_cast<UT>(lhs) - static_cast<UT>(rhs));
+    //                 } else {
+    //                     return lhs - rhs;
+    //                 }
+    //             };
+    //             result = subtract_values(i.value, j.value);
+    //         }
+    //         return CreateElement(builder, c0->Type(), result);
+    //     };
+    //     return Dispatch_fia_fiu32_f16(create, c0, c1);
+    // };
+
+    // return TransformBinaryElements(builder, ty, transform, args[0], args[1]);
+
+    TINT_SCOPED_ASSIGNMENT(current_source, &source);
     auto transform = [&](const sem::Constant* c0, const sem::Constant* c1) {
-        auto create = [&](auto i, auto j) -> ImplResult {
-            using NumberT = decltype(i);
-            NumberT result;
-            if constexpr (IsAbstract<NumberT>) {
-                // Check for over/underflow for abstract values
-                if (auto r = CheckedSub(i, j)) {
-                    result = r->value;
-                } else {
-                    AddError(OverflowErrorMessage(i, "-", j), source);
-                    return utils::Failure;
-                }
-            } else {
-                using T = UnwrapNumber<NumberT>;
-                auto subtract_values = [](T lhs, T rhs) {
-                    if constexpr (std::is_integral_v<T> && std::is_signed_v<T>) {
-                        // Ensure no UB for signed underflow
-                        using UT = std::make_unsigned_t<T>;
-                        return static_cast<T>(static_cast<UT>(lhs) - static_cast<UT>(rhs));
-                    } else {
-                        return lhs - rhs;
-                    }
-                };
-                result = subtract_values(i.value, j.value);
-            }
-            return CreateElement(builder, c0->Type(), result);
-        };
-        return Dispatch_fia_fiu32_f16(create, c0, c1);
+        return Dispatch_fia_fiu32_f16(SubFunc(c0->Type()), c0, c1);
     };
 
     return TransformBinaryElements(builder, ty, transform, args[0], args[1]);
@@ -1724,6 +1767,63 @@ ConstEval::Result ConstEval::countTrailingZeros(const sem::Type* ty,
         return Dispatch_iu32(create, c0);
     };
     return TransformElements(builder, ty, transform, args[0]);
+}
+
+ConstEval::Result ConstEval::cross(const sem::Type* ty,
+                                   utils::VectorRef<const sem::Constant*> args,
+                                   const Source& source) {
+    TINT_SCOPED_ASSIGNMENT(current_source, &source);
+    auto* v1 = args[0];
+    auto* v2 = args[1];
+    auto* v1_ty = v1->Type()->As<sem::Vector>();
+    auto* elem_ty = v1_ty->type();
+
+    auto ab_minus_cd = [this](auto a, auto b, auto c, auto d) -> utils::Result<decltype(a)> {
+        auto r1 = Mul(a, b);
+        if (!r1) {
+            return utils::Failure;
+        }
+        auto r2 = Mul(c, d);
+        if (!r2) {
+            return utils::Failure;
+        }
+        auto r = Sub(r1.Get(), r2.Get());
+        if (!r) {
+            return utils::Failure;
+        }
+        return r;
+    };
+
+    auto ab_minus_cd_func = [&](const sem::Type* elem_ty) {
+        return [=](auto a, auto b, auto c, auto d) -> ImplResult {
+            if (auto r = ab_minus_cd(a, b, c, d)) {
+                return CreateElement(builder, elem_ty, r.Get());
+            }
+            return utils::Failure;
+        };
+    };
+
+    auto x = Dispatch_fa_f32_f16(ab_minus_cd_func(elem_ty), v1->Index(1), v2->Index(2),
+                                 v2->Index(1), v1->Index(2));
+    if (!x) {
+        return utils::Failure;
+    }
+
+    auto y = Dispatch_fa_f32_f16(ab_minus_cd_func(elem_ty), v1->Index(2), v2->Index(0),
+                                 v2->Index(2), v1->Index(0));
+    if (!y) {
+        return utils::Failure;
+    }
+
+    auto z = Dispatch_fa_f32_f16(ab_minus_cd_func(elem_ty), v1->Index(0), v2->Index(1),
+                                 v2->Index(0), v1->Index(1));
+    if (!z) {
+        return utils::Failure;
+    }
+
+    auto result = utils::Vector<const sem::Constant*, 3>{x.Get(), y.Get(), z.Get()};
+    utils::VectorRef<const sem::Constant*> elements = result;
+    return CreateComposite(builder, ty, elements);
 }
 
 ConstEval::Result ConstEval::extractBits(const sem::Type* ty,
