@@ -195,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a688548d_742309c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-03T06:30:22Z",
+      "side": 1,
+      "message": "I was thinking more like this, so we don\u0027t need to add another map.\n\n```\n// bufferResult instead of bufferResult.id. We pass in both id and generation.\nauto* resultData \u003d BufferObjects().Allocate(bufferResult);\nif (resultData \u003d\u003d nullptr) {\n    return false;\n}\n// no longer need this assignment, since we\u0027ll do it inside Allocate\n// resultData-\u003egeneration \u003d bufferResult.generation;\n```\n\nthen in src/dawn/wire/server/ObjectStorage.h change Allocate.\n\n    Data* Allocate(ObjectHandle handle, AllocationState state \u003d AllocationState::Allocated) {\n        if (handle.id \u003d\u003d 0 || handle.id \u003e mKnown.size()) {\n            return nullptr;\n        }\n\n        Data data;\n        data.state \u003d state;\n        data.handle \u003d nullptr;\n\n        if (handle.id \u003e\u003d mKnown.size()) {\n            mKnown.push_back(std::move(data));\n            return \u0026mKnown.back();\n        }\n\n        if (mKnown[handle.id].state !\u003d AllocationState::Free) {\n            return nullptr;\n        }\n        \n        // this is the generation check. if the new generation is not greater than\n        // the existing one, it is invalid.\n        if (handle.generation \u003c\u003d mKnown[handle.id].generation) {\n            return nullptr;\n        }\n        // update the generation in the slot \n        data.generation \u003d handle.generation;\n\n        mKnown[handle.id] \u003d std::move(data);\n        return \u0026mKnown[handle.id];\n    }",
+      "parentUuid": "d81d5a04_33983ed3",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7016a6_c7548a0f",
