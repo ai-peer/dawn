@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "85bd6dc7_698a27df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-03T05:52:30Z",
+      "side": 1,
+      "message": "in normal situations, the client serializes commands into the buffer, and then the server deserializes them and handles them.\n\nHowever, the client is untrusted and could send bad commands.\nThe fuzzer works by sending totally random data in the buffer, and the server interprets it and handles it.\n\nFor your case, it\u0027s probably happening that the buffer of commands contains two create buffers with identical (id, generation).\n\nDoDeviceCreateBuffer when it calls BufferObjects().Allocate should probably pass in both the id and generation. If mKnown[id] already exists, we should track, and check that the generation is strictly greater - as Corentin suggested above. `mKnown` is a vector of structs which all extend [ObjectDataBase](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/server/ObjectStorage.h;l\u003d42;drc\u003d4bd0fcc64f04a8e1c321bf3d9adcb19594b662b7;bpv\u003d0;bpt\u003d1) containing the generation.\n\nNote that IDs *can* get reused - and we\u0027ll use the same struct, but the C object handle will be different. The generation should always increment so we know that an ID has been reused but for a differnt C object.",
+      "parentUuid": "8021911c_f42e7ece",
+      "revId": "0f038adb9812fc73bbb57b1f3283dcff2400fb33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7016a6_c7548a0f",
