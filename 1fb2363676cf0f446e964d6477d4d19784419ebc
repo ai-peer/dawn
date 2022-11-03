@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c6c374_8c1db890",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:06:14Z",
+      "side": 1,
+      "message": "Overall it\u0027s weird that dawn::wire::server would allow reuse of an ID with the same generation number. I thought I remembered we had a check that version numbers are strictly increasing but can\u0027t find it anymore. Should we add such a check back? It would fix this issue and other issues like it in the future.",
+      "revId": "1fb2363676cf0f446e964d6477d4d19784419ebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d5e628c_dc1b9ea3",
