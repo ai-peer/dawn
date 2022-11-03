@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b168dc4_ddfe3f27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T08:50:45Z",
+      "side": 1,
+      "message": "`error: function cannot return array type \u0027tint_symbol_6_ret\u0027 (aka \u0027float3x3 [3]\u0027)\\ntint_symbol_6_ret tint_symbol_6(RWByteAddressBuffer buffer, uint offset)`\n\nThis is exciting. This looks like a hidden issue we\u0027ve had for some time, but your new tests have only just uncovered it. Do we know if this occurs on FXC or just DXC? Either way, we _might_ be able to fix it by bringing back the [WrapArraysInStructs](https://dawn-review.googlesource.com/c/dawn/+/94540) transform.\n\nStrange that we haven\u0027t seen this issue before.",
+      "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
