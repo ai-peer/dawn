@@ -230,6 +230,24 @@
       "parentUuid": "7f44ea9b_b150d035",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0a485f_c40f84ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:57:45Z",
+      "side": 1,
+      "message": "What I don\u0027t understand is that the spec specifically seems to mention that the OOM should be done when creating the buffer, such that future getMappedRange return null no? [here](https://gpuweb.github.io/gpuweb/#dom-gpubuffer-getmappedrange:~:text\u003dNote%3A%20A%20RangeError%20may%20not%20be%20thrown%20here%2C%20because%20the%20data%20has%20already%20been%20allocated%20during%20mapAsync()%20or%20createBuffer().)\n\n\u003e Note: A RangeError may not be thrown here, because the data has already been allocated during mapAsync() or createBuffer().\n\nSo shouldn\u0027t we return nullptr from dawn_wire in case of a getMappedRange on an OOM buffer then catch it in Blink and throw an OperationError?",
+      "parentUuid": "e911c51c_6148ac20",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
