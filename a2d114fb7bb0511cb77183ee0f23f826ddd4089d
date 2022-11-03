@@ -63,6 +63,30 @@
       },
       "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f38310e_06ce2b8b",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T19:39:38Z",
+      "side": 1,
+      "message": "Ignore me - there\u0027s three lists being updated here. This is fine.",
+      "parentUuid": "90ecc832_8b6cfa93",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
