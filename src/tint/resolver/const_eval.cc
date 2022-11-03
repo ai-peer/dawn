@@ -1589,6 +1589,23 @@ ConstEval::Result ConstEval::abs(const sem::Type* ty,
     return TransformElements(builder, ty, transform, args[0]);
 }
 
+ConstEval::Result ConstEval::acos(const sem::Type* ty,
+                                  utils::VectorRef<const sem::Constant*> args,
+                                  const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto i) -> ImplResult {
+            using NumberT = decltype(i);
+            if (i < NumberT(-1.0) || i > NumberT(1.0)) {
+                AddError("acos must be called with a value in the range [-1, 1]", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), NumberT(std::acos(i.value)));
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
 ConstEval::Result ConstEval::all(const sem::Type* ty,
                                  utils::VectorRef<const sem::Constant*> args,
                                  const Source&) {
@@ -1607,11 +1624,11 @@ ConstEval::Result ConstEval::asin(const sem::Type* ty,
     auto transform = [&](const sem::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            if (i.value < NumberT(-1.0) || i.value > NumberT(1.0)) {
+            if (i < NumberT(-1.0) || i > NumberT(1.0)) {
                 AddError("asin must be called with a value in the range [-1, 1]", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, c0->Type(), decltype(i)(std::asin(i.value)));
+            return CreateElement(builder, c0->Type(), NumberT(std::asin(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -1653,11 +1670,11 @@ ConstEval::Result ConstEval::atanh(const sem::Type* ty,
     auto transform = [&](const sem::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            if (i.value <= NumberT(-1.0) || i.value >= NumberT(1.0)) {
+            if (i <= NumberT(-1.0) || i >= NumberT(1.0)) {
                 AddError("atanh must be called with a value in the range (-1, 1)", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, c0->Type(), decltype(i)(std::atanh(i.value)));
+            return CreateElement(builder, c0->Type(), NumberT(std::atanh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
