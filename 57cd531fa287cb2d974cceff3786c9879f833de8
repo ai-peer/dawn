@@ -110,6 +110,30 @@
       },
       "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70111dbd_2c998984",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T13:29:41Z",
+      "side": 1,
+      "message": "Sorry, I didn\u0027t parse this properly. All good.",
+      "parentUuid": "1232fa8c_566520c9",
+      "range": {
+        "startLine": 876,
+        "startChar": 22,
+        "endLine": 878,
+        "endChar": 41
+      },
+      "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
