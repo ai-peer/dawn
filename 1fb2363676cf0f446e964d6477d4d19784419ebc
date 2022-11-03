@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec7ff9f2_2bbb206d",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-03T06:57:14Z",
+      "side": 1,
+      "message": "`BufferObjects().Allocate` is widely used. It\u0027d a little more complex to modify it.\n\nAnother simpler fix could be the checking here. Does this make sense?\n\n```\nif (resultData-\u003egeneration !\u003d 0 \u0026\u0026 resultData-\u003egeneration \u003e\u003d bufferResult.generation) {\n    return false;\n}\n```",
+      "revId": "1fb2363676cf0f446e964d6477d4d19784419ebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e6fb0c29_dc6e3975",
         "filename": "src/dawn/wire/server/ServerBuffer.cpp",
         "patchSetId": 2
