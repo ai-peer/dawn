@@ -16,6 +16,52 @@
       "message": "PTAL. I did not update the expecations for `acos` because the CTS tests use values which are out of range and fail. We\u0027ll need to fix CTS.",
       "revId": "62aef7440c57fc70f2736fdf72eb3ed7e4739a68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c591eeaf_5c166cc1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1598,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:23:05Z",
+      "side": 1,
+      "message": "If you\u0027re comparing against `NumberT`, you don\u0027t need to access the inner `value` -- this results in the inner value being implicitly cast to a NumberT.",
+      "range": {
+        "startLine": 1598,
+        "startChar": 17,
+        "endLine": 1598,
+        "endChar": 23
+      },
+      "revId": "62aef7440c57fc70f2736fdf72eb3ed7e4739a68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a286220_4ffa42a0",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1602,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:23:05Z",
+      "side": 1,
+      "message": "`NumberT`",
+      "range": {
+        "startLine": 1602,
+        "startChar": 54,
+        "endLine": 1602,
+        "endChar": 65
+      },
+      "revId": "62aef7440c57fc70f2736fdf72eb3ed7e4739a68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
