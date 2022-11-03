@@ -16,6 +16,24 @@
       "message": "This comment seems a bit weird since the code is actually doing an `\u0026` operation.",
       "revId": "c09994790a8ca595dec4e225733534fdb845da06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "377760eb_33983196",
+        "filename": "src/tint/transform/builtin_polyfill.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T19:14:27Z",
+      "side": 1,
+      "message": "Ack, but this is the term the spec uses, so I\u0027ll consider the use of `\u0026` as an implementation detail.",
+      "parentUuid": "aa583a82_5c19ee01",
+      "revId": "c09994790a8ca595dec4e225733534fdb845da06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
