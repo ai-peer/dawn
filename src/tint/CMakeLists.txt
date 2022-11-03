@@ -1363,6 +1363,7 @@ if(TINT_BUILD_BENCHMARKS)
 
   set(TINT_BENCHMARK_SRC
     "castable_bench.cc"
+    "ast/builtin_value_bench.cc"
     "ast/extension_bench.cc"
     "ast/address_space_bench.cc"
     "ast/texel_format_bench.cc"
