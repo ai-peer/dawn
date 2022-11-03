@@ -16,6 +16,75 @@
       "message": "PTAL.",
       "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d09354d0_b68af255",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:18:14Z",
+      "side": 1,
+      "message": "Use `IsSignedIntegral\u003cNumberT\u003e`",
+      "range": {
+        "startLine": 1580,
+        "startChar": 27,
+        "endLine": 1580,
+        "endChar": 83
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a54e055_455441b1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:18:14Z",
+      "side": 1,
+      "message": "Uou can use `e \u003d\u003d NumberT::Smallest()`",
+      "range": {
+        "startLine": 1581,
+        "startChar": 27,
+        "endLine": 1581,
+        "endChar": 67
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1caee147_6f0fd5c7",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:18:14Z",
+      "side": 1,
+      "message": "This is why I added the `Negate` helper (see const_eval_test.h). This lets you write your tests in one function without getting warnings/errors from the compiler.",
+      "range": {
+        "startLine": 162,
+        "startChar": 34,
+        "endLine": 162,
+        "endChar": 86
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
