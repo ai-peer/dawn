@@ -137,6 +137,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0bade7_eddf83dd",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T13:41:19Z",
+      "side": 1,
+      "message": "It\u0027s odd that it worked - on all compilers too. Changing the previous condition to `IsSignedIntegral\u003cNumberT\u003e` resulted in the compiler complaining that \u0027e \u003d\u003d std::numeric_limits\u003cNumberT\u003e::min()` is not a constant expression... which is what it should have done before. Very weird.",
+      "parentUuid": "398c713b_9946cc61",
+      "range": {
+        "startLine": 1580,
+        "startChar": 27,
+        "endLine": 1580,
+        "endChar": 83
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a54e055_455441b1",
