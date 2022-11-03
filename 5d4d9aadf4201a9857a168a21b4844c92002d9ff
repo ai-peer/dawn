@@ -16,6 +16,165 @@
       "message": "This has been wired up on the Chromium side in https://chromium-review.googlesource.com/3995503 , and it works! The flickering of the test case in the linked bug is resolved when using ANGLE\u0027s Metal backend.\n\nCan we send this out for official review?",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "009f7b4e_5307fc95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bed68a6_ce75fb80",
+        "filename": "include/dawn/native/MetalBackend.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "nit: why is the forward declaration needed?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77705c5_aaf71631",
+        "filename": "include/dawn/native/MetalBackend.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "nit: we have https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/native/DawnNative.h;drc\u003d7edef20bdde3da4ce6bbb4ce355c3683d7be9eaa;l\u003d205 Do you think in the future we\u0027d be moving more and more of its usages in the backend \"end access\" functions?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705f386f_6fb266f5",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77c43d4_05e899f3",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae1d32f_f64e7293",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "nit: This is unnecessary since [1] requires the concrete type.",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc0421b_23d89c60",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e4f4a2_2a2c3159",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "u-nit: EndIOSurfaceAccess (so it\u0027s a verb?)",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1051227_37db63de",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:51:04Z",
+      "side": 1,
+      "message": "Looking at leftover stry includes it seems you tried putting the list of MTLSharedEventAndSignalValue on the recording context to batch waits during submission like we do in other backends. What made you choose a different direction? (not asking for a change, but trying to understand).",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
