@@ -16,6 +16,41 @@
       "message": "`error: function cannot return array type \u0027tint_symbol_6_ret\u0027 (aka \u0027float3x3 [3]\u0027)\\ntint_symbol_6_ret tint_symbol_6(RWByteAddressBuffer buffer, uint offset)`\n\nThis is exciting. This looks like a hidden issue we\u0027ve had for some time, but your new tests have only just uncovered it. Do we know if this occurs on FXC or just DXC? Either way, we _might_ be able to fix it by bringing back the [WrapArraysInStructs](https://dawn-review.googlesource.com/c/dawn/+/94540) transform.\n\nStrange that we haven\u0027t seen this issue before.",
       "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "120d6a6d_49f0b8f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-03T09:03:49Z",
+      "side": 1,
+      "message": "Please take a look, thanks",
+      "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ee58375_3ebe5cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-03T09:03:49Z",
+      "side": 1,
+      "message": "I believe this is an old-version DXC issue, which is the same of https://bugs.chromium.org/p/tint/issues/detail?id\u003d1719. FXC works for this kind of code. As investigated in https://bugs.chromium.org/p/tint/issues/detail?id\u003d1719#c3, this issue is fixed by DXC compiler v1.5.",
+      "parentUuid": "8b168dc4_ddfe3f27",
+      "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
