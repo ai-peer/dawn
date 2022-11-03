@@ -85,6 +85,29 @@
       },
       "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22913f74_0603d78d",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T12:19:30Z",
+      "side": 1,
+      "message": "Please also make these non-vector cases above. Easier to understand if the scalar case fails that it has to do with the value, and not the vectorizing.",
+      "range": {
+        "startLine": 183,
+        "startChar": 22,
+        "endLine": 183,
+        "endChar": 35
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
