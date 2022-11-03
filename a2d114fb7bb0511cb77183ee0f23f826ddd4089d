@@ -39,6 +39,30 @@
       },
       "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90ecc832_8b6cfa93",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T19:37:28Z",
+      "side": 1,
+      "message": "What do you mean, pass the three lists into the function? It, I think, would still have to do this `set` in order to put the lists back into the parent scope? (I\u0027m not really sure how CMake works ...)",
+      "parentUuid": "e03a43a5_7dd064ea",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 21
+      },
+      "revId": "a2d114fb7bb0511cb77183ee0f23f826ddd4089d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
