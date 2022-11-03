@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa583a82_5c19ee01",
+        "filename": "src/tint/transform/builtin_polyfill.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T17:25:02Z",
+      "side": 1,
+      "message": "This comment seems a bit weird since the code is actually doing an `\u0026` operation.",
+      "revId": "c09994790a8ca595dec4e225733534fdb845da06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
