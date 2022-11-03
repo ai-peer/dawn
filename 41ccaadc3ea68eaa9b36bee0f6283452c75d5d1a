@@ -120,6 +120,24 @@
       "parentUuid": "e489415d_d82d30f9",
       "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15d6465_aec0c54a",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-03T05:55:29Z",
+      "side": 1,
+      "message": "great, SGTM",
+      "parentUuid": "fe5655a4_76fb57c8",
+      "revId": "41ccaadc3ea68eaa9b36bee0f6283452c75d5d1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
