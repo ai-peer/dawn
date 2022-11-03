@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50ffec4f_516644c3",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T13:21:03Z",
+      "side": 1,
+      "message": "`dpdx` is a good one that won\u0027t ever become const.",
+      "range": {
+        "startLine": 64,
+        "startChar": 55,
+        "endLine": 64,
+        "endChar": 60
+      },
+      "revId": "ddc7414aa3c8c74db347392aaa61156c3672efa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

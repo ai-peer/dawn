@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c667c21_fdb7a8e2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-03T13:21:03Z",
+      "side": 1,
+      "message": "The only difference between what you\u0027ve written and using `IsSignedIntegral\u003cNumberT\u003e` is that `IsSignedIntegral` unwraps the template type with `UnwrapNumber` - which would be required if `NumberT` were a `Number\u003cT\u003e`.\n\nGiven that it causes errors, it sounds like this condition is always `false` (`std::is_integral_v\u003cNumber\u003cT\u003e\u003e` is always `false`).",
+      "parentUuid": "a1ec7629_e7b7f3da",
+      "range": {
+        "startLine": 1580,
+        "startChar": 27,
+        "endLine": 1580,
+        "endChar": 83
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a54e055_455441b1",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
