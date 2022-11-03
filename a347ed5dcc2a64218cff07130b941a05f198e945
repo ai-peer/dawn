@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6468f965_572193c3",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T13:34:22Z",
+      "side": 1,
+      "message": "I messed around with this, and the fact that it compiles at all is weird, given that `e \u003d\u003d std::numeric_limits\u003cNumberT\u003e::min()` is not a constant expression.\n\nThis works:\n\n```\n            NumberT result;\n            if constexpr (IsUnsignedIntegral\u003cNumberT\u003e) {\n                result \u003d e;\n            } else if constexpr (IsSignedIntegral\u003cNumberT\u003e) {\n                if (e \u003d\u003d NumberT::Lowest()) {\n                    result \u003d e;\n                } else {\n                    result \u003d NumberT{std::abs(e)};\n                }\n            } else {\n                result \u003d NumberT{std::abs(e)};\n            }\n```",
+      "parentUuid": "2c667c21_fdb7a8e2",
+      "range": {
+        "startLine": 1580,
+        "startChar": 27,
+        "endLine": 1580,
+        "endChar": 83
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a54e055_455441b1",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "Lowest I think, Smallest appears to be 0 for integral types.",
       "parentUuid": "2a54e055_455441b1",
+      "range": {
+        "startLine": 1581,
+        "startChar": 27,
+        "endLine": 1581,
+        "endChar": 67
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4e7b8be_17022633",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T13:34:22Z",
+      "side": 1,
+      "message": "Yeah, I suggested Smallest because you used min(), but I think you\u0027re right:\n\n```\n    /// Lowest finite representable value of this type.\n    static constexpr type kLowestValue \u003d std::numeric_limits\u003ctype\u003e::lowest();\n\n    /// Smallest positive normal value of this type.\n    static constexpr type kSmallestValue \u003d\n        std::is_integral_v\u003ctype\u003e ? 0 : std::numeric_limits\u003ctype\u003e::min();\n```",
+      "parentUuid": "8ef23ecc_c20dc60b",
       "range": {
         "startLine": 1581,
         "startChar": 27,
