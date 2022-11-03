@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc49c3b6_125bffa4",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T23:28:22Z",
+      "side": 1,
+      "message": "Done, and applied to other functions I wrote.",
+      "parentUuid": "94686329_1678c064",
+      "revId": "6491722e942046e5047c71f26390820aa6fdf4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24387771_d3023c9a",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-03T14:33:00Z",
       "side": 1,
       "message": "Can you set the middle bit in one of these to make sure it copies over?",
+      "revId": "6491722e942046e5047c71f26390820aa6fdf4f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7562b5_a2316767",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-03T23:28:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24387771_d3023c9a",
       "revId": "6491722e942046e5047c71f26390820aa6fdf4f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
