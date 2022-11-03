@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d5e628c_dc1b9ea3",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-03T06:22:46Z",
+      "side": 1,
+      "message": "[1]\n```\nif (id_to_last_generation_map_[bufferResult.id] \u003e\u003d bufferRessult.generation) {\n    return fase;\n}\n```",
+      "revId": "1fb2363676cf0f446e964d6477d4d19784419ebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fb0c29_dc6e3975",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2022-11-03T06:22:46Z",
+      "side": 1,
+      "message": "[2]\n```\nid_to_last_generation_map_[bufferResult.id] \u003d bufferRessult.generation;\n```",
+      "revId": "1fb2363676cf0f446e964d6477d4d19784419ebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
