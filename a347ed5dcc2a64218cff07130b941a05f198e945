@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1ec7629_e7b7f3da",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1580,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T12:50:49Z",
+      "side": 1,
+      "message": "Nack. Changing this caused compile errors around constexpr and then errors around `abs` being ambiguous.",
+      "parentUuid": "d09354d0_b68af255",
+      "range": {
+        "startLine": 1580,
+        "startChar": 27,
+        "endLine": 1580,
+        "endChar": 83
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a54e055_455441b1",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-03T12:18:14Z",
       "side": 1,
       "message": "Uou can use `e \u003d\u003d NumberT::Smallest()`",
+      "range": {
+        "startLine": 1581,
+        "startChar": 27,
+        "endLine": 1581,
+        "endChar": 67
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef23ecc_c20dc60b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T12:50:49Z",
+      "side": 1,
+      "message": "Lowest I think, Smallest appears to be 0 for integral types.",
+      "parentUuid": "2a54e055_455441b1",
       "range": {
         "startLine": 1581,
         "startChar": 27,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0700f98_01226494",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T12:50:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1caee147_6f0fd5c7",
+      "range": {
+        "startLine": 162,
+        "startChar": 34,
+        "endLine": 162,
+        "endChar": 86
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22913f74_0603d78d",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-03T12:19:30Z",
       "side": 1,
       "message": "Please also make these non-vector cases above. Easier to understand if the scalar case fails that it has to do with the value, and not the vectorizing.",
+      "range": {
+        "startLine": 183,
+        "startChar": 22,
+        "endLine": 183,
+        "endChar": 35
+      },
+      "revId": "a347ed5dcc2a64218cff07130b941a05f198e945",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78292904_4a5429ea",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T12:50:49Z",
+      "side": 1,
+      "message": "Done. Altough I just look at the first one error ignoring if it\u0027s vec or not.",
+      "parentUuid": "22913f74_0603d78d",
       "range": {
         "startLine": 183,
         "startChar": 22,
