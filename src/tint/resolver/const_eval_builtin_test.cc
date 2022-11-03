@@ -146,6 +146,56 @@ INSTANTIATE_TEST_SUITE_P(  //
                          C({1.0_a, 0_a}, kPiOver2<AFloat>),
                      })));
 
+template <typename T>
+std::vector<Case> AbsCases() {
+    std::vector<Case> cases = {
+        C({T(0)}, T(0)),
+        C({T(2.0)}, T(2.0)),
+        C({T::Highest()}, T::Highest()),
+
+        // Vector tests
+        C({Vec(T(2.0), T::Highest())}, Vec(T(2.0), T::Highest())),
+    };
+
+    return cases;
+}
+// MSVC had compile errors if the `-T` cases below were included with the u32 template
+template <typename T, bool finite_only>
+std::vector<Case> AbsSignedCases() {
+    std::vector<Case> cases = AbsCases<T>();
+
+    ConcatIntoIf<std::is_integral_v<T> && std::is_signed_v<T>>(
+        cases, std::vector<Case>{
+                   C({-T(0)}, T(0)),
+                   C({-T(2.0)}, T(2.0)),
+                   // If e is signed and is the largest negative, the result is e
+                   C({T::Lowest()}, T::Lowest()),
+
+                   // 1 more then min i32
+                   C({-T(2147483647)}, T(2147483647)),
+
+                   C({Vec(T(0), -T(0))}, Vec(T(0), T(0))),
+                   C({Vec(-T(2.0), T(2.0), T::Highest())}, Vec(T(2.0), T(2.0), T::Highest())),
+               });
+
+    ConcatIntoIf<!finite_only>(
+        cases, std::vector<Case>{
+                   C({Vec(-T::Inf(), T::Inf(), T::NaN())}, Vec(T::Inf(), T::Inf(), T::NaN())),
+               });
+
+    return cases;
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Abs,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kAbs),
+                     testing::ValuesIn(Concat(AbsSignedCases<AInt, false>(),  //
+                                              AbsSignedCases<i32, false>(),
+                                              AbsCases<u32>(),
+                                              AbsSignedCases<AFloat, true>(),
+                                              AbsSignedCases<f32, false>(),
+                                              AbsSignedCases<f16, false>()))));
+
 static std::vector<Case> AnyCases() {
     return {
         C({Val(true)}, Val(true)),
