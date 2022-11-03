@@ -1,5 +1,13 @@
+int4 tint_extract_bits(int4 v, uint offset, uint count) {
+  const uint s = min(offset, 32u);
+  const uint e = min(32u, (s + count));
+  const uint shl = (32u - e);
+  const uint shr = (shl + s);
+  return ((v << uint4((shl).xxxx)) >> uint4((shr).xxxx));
+}
+
 void extractBits_fb850f() {
-  int4 res = (0).xxxx;
+  int4 res = tint_extract_bits((1).xxxx, 1u, 1u);
 }
 
 struct tint_symbol {

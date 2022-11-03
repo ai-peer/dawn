@@ -1,7 +1,13 @@
 #version 310 es
 
+uvec2 tint_extract_bits(uvec2 v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_f28f69() {
-  uvec2 res = uvec2(0u);
+  uvec2 res = tint_extract_bits(uvec2(1u), 1u, 1u);
 }
 
 vec4 vertex_main() {
@@ -20,8 +26,14 @@ void main() {
 #version 310 es
 precision mediump float;
 
+uvec2 tint_extract_bits(uvec2 v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_f28f69() {
-  uvec2 res = uvec2(0u);
+  uvec2 res = tint_extract_bits(uvec2(1u), 1u, 1u);
 }
 
 void fragment_main() {
@@ -34,8 +46,14 @@ void main() {
 }
 #version 310 es
 
+uvec2 tint_extract_bits(uvec2 v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_f28f69() {
-  uvec2 res = uvec2(0u);
+  uvec2 res = tint_extract_bits(uvec2(1u), 1u, 1u);
 }
 
 void compute_main() {

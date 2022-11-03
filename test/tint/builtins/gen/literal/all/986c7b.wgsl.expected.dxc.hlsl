@@ -1,5 +1,5 @@
 void all_986c7b() {
-  bool res = true;
+  bool res = all((true).xxxx);
 }
 
 struct tint_symbol {

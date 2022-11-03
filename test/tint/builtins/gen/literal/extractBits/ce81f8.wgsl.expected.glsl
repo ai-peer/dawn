@@ -1,7 +1,13 @@
 #version 310 es
 
+uint tint_extract_bits(uint v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_ce81f8() {
-  uint res = 0u;
+  uint res = tint_extract_bits(1u, 1u, 1u);
 }
 
 vec4 vertex_main() {
@@ -20,8 +26,14 @@ void main() {
 #version 310 es
 precision mediump float;
 
+uint tint_extract_bits(uint v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_ce81f8() {
-  uint res = 0u;
+  uint res = tint_extract_bits(1u, 1u, 1u);
 }
 
 void fragment_main() {
@@ -34,8 +46,14 @@ void main() {
 }
 #version 310 es
 
+uint tint_extract_bits(uint v, uint offset, uint count) {
+  uint s = min(offset, 32u);
+  uint e = min(32u, (s + count));
+  return bitfieldExtract(v, int(s), int((e - s)));
+}
+
 void extractBits_ce81f8() {
-  uint res = 0u;
+  uint res = tint_extract_bits(1u, 1u, 1u);
 }
 
 void compute_main() {

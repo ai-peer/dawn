@@ -2,7 +2,7 @@
 
 using namespace metal;
 void all_986c7b() {
-  bool res = true;
+  bool res = all(bool4(true));
 }
 
 struct tint_symbol {

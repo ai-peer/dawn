@@ -1,5 +1,5 @@
 void all_bd2dba() {
-  bool res = true;
+  bool res = all((true).xxx);
 }
 
 struct tint_symbol {
