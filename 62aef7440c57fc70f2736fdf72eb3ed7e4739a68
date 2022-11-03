@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db77ce0_f39fd286",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T12:12:51Z",
+      "side": 1,
+      "message": "PTAL. I did not update the expecations for `acos` because the CTS tests use values which are out of range and fail. We\u0027ll need to fix CTS.",
+      "revId": "62aef7440c57fc70f2736fdf72eb3ed7e4739a68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
