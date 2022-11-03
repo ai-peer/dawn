@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f10f377_332f213e",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T13:19:35Z",
+      "side": 1,
+      "message": "I believe it\u0027s testing that we error correctly which I think is useful at the moment given the number of const-eval still to implement.",
+      "parentUuid": "770392a4_d7798b73",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 13
+      },
+      "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3b3cbe8_c8266b68",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-03T12:33:27Z",
       "side": 1,
       "message": "Please add scalar cases for these above.",
+      "range": {
+        "startLine": 876,
+        "startChar": 22,
+        "endLine": 878,
+        "endChar": 41
+      },
+      "revId": "57cd531fa287cb2d974cceff3786c9879f833de8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1232fa8c_566520c9",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-03T13:19:35Z",
+      "side": 1,
+      "message": "These are scalar cases?",
+      "parentUuid": "a3b3cbe8_c8266b68",
       "range": {
         "startLine": 876,
         "startChar": 22,
