@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "4d48f20b2a43922cba8d9fdba1f9d907f3b03c80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e45e4449_82c37ba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:09:43Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4d48f20b2a43922cba8d9fdba1f9d907f3b03c80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8efb7cdf_7d60bf63",
+        "filename": "src/dawn/tests/white_box/D3D12GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-03T11:09:43Z",
+      "side": 1,
+      "message": "optional-nit: Maybe we could split the test to have one TEST_P per encoder type.",
+      "revId": "4d48f20b2a43922cba8d9fdba1f9d907f3b03c80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
