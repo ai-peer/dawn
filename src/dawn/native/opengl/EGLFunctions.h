@@ -17,6 +17,46 @@
 
 #include <EGL/egl.h>
 
+// Potentially redefinition of typedefs that should be identical to those in egl.h when available.
+// This set of redefinitions are necessary though because they may not be available depending on
+// the EGL library.
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLBINDAPIPROC)(EGLenum api);
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLCHOOSECONFIGPROC)(EGLDisplay dpy,
+                                                        const EGLint* attrib_list,
+                                                        EGLConfig* configs,
+                                                        EGLint config_size,
+                                                        EGLint* num_config);
+typedef EGLContext(EGLAPIENTRYP PFNEGLCREATECONTEXTPROC)(EGLDisplay dpy,
+                                                         EGLConfig config,
+                                                         EGLContext share_context,
+                                                         const EGLint* attrib_list);
+typedef EGLSurface(EGLAPIENTRYP PFNEGLCREATEPLATFORMWINDOWSURFACEPROC)(
+    EGLDisplay dpy,
+    EGLConfig config,
+    void* native_window,
+    const EGLAttrib* attrib_list);
+typedef EGLSurface(EGLAPIENTRYP PFNEGLCREATEPBUFFERSURFACEPROC)(EGLDisplay dpy,
+                                                                EGLConfig config,
+                                                                const EGLint* attrib_list);
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLDESTROYCONTEXTPROC)(EGLDisplay dpy, EGLContext ctx);
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLGETCONFIGSPROC)(EGLDisplay dpy,
+                                                      EGLConfig* configs,
+                                                      EGLint config_size,
+                                                      EGLint* num_config);
+typedef EGLContext(EGLAPIENTRYP PFNEGLGETCURRENTCONTEXTPROC)(void);
+typedef EGLDisplay(EGLAPIENTRYP PFNEGLGETCURRENTDISPLAYPROC)(void);
+typedef EGLSurface(EGLAPIENTRYP PFNEGLGETCURRENTSURFACEPROC)(EGLint readdraw);
+typedef EGLDisplay(EGLAPIENTRYP PFNEGLGETDISPLAYPROC)(EGLNativeDisplayType display_id);
+typedef EGLint(EGLAPIENTRYP PFNEGLGETERRORPROC)(void);
+typedef __eglMustCastToProperFunctionPointerType(EGLAPIENTRYP PFNEGLGETPROCADDRESSPROC)(
+    const char* procname);
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLINITIALIZEPROC)(EGLDisplay dpy, EGLint* major, EGLint* minor);
+typedef EGLBoolean(EGLAPIENTRYP PFNEGLMAKECURRENTPROC)(EGLDisplay dpy,
+                                                       EGLSurface draw,
+                                                       EGLSurface read,
+                                                       EGLContext ctx);
+typedef const char*(EGLAPIENTRYP PFNEGLQUERYSTRINGPROC)(EGLDisplay dpy, EGLint name);
+
 namespace dawn::native::opengl {
 
 struct EGLFunctions {
