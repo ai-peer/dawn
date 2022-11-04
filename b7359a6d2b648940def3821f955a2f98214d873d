@@ -33,6 +33,24 @@
       "message": "Drive-by: HEEEEEERE",
       "revId": "b7359a6d2b648940def3821f955a2f98214d873d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "359deaaa_7f91f6e7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3243,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-04T16:04:34Z",
+      "side": 1,
+      "message": "Hah, I\u0027d fixed that last night .... and forgot to `git cl upload`. Oops.",
+      "parentUuid": "4e77e040_64af022e",
+      "revId": "b7359a6d2b648940def3821f955a2f98214d873d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
