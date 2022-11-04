@@ -20,7 +20,6 @@
 #include <optional>
 #include <string>
 #include <type_traits>
-#include <unordered_map>
 #include <utility>
 
 #include "src/tint/program_builder.h"
@@ -463,18 +462,18 @@ const ImplConstant* ZeroValue(ProgramBuilder& builder, const sem::Type* type) {
             return nullptr;
         },
         [&](const sem::Struct* s) -> const ImplConstant* {
-            std::unordered_map<const sem::Type*, const ImplConstant*> zero_by_type;
+            utils::Hashmap<const sem::Type*, const ImplConstant*, 8> zero_by_type;
             utils::Vector<const sem::Constant*, 4> zeros;
             zeros.Reserve(s->Members().size());
             for (auto* member : s->Members()) {
-                auto* zero = utils::GetOrCreate(zero_by_type, member->Type(),
-                                                [&] { return ZeroValue(builder, member->Type()); });
+                auto* zero = zero_by_type.GetOrCreate(
+                    member->Type(), [&] { return ZeroValue(builder, member->Type()); });
                 if (!zero) {
                     return nullptr;
                 }
                 zeros.Push(zero);
             }
-            if (zero_by_type.size() == 1) {
+            if (zero_by_type.Count() == 1) {
                 // All members were of the same type, so the zero value is the same for all members.
                 return builder.create<Splat>(type, zeros[0], s->Members().size());
             }
@@ -1627,7 +1626,8 @@ ConstEval::Result ConstEval::acos(const sem::Type* ty,
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
             if (i < NumberT(-1.0) || i > NumberT(1.0)) {
-                AddError("acos must be called with a value in the range [-1 .. 1] (inclusive)", source);
+                AddError("acos must be called with a value in the range [-1 .. 1] (inclusive)",
+                         source);
                 return utils::Failure;
             }
             return CreateElement(builder, c0->Type(), NumberT(std::acos(i.value)));
@@ -1656,7 +1656,8 @@ ConstEval::Result ConstEval::asin(const sem::Type* ty,
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
             if (i < NumberT(-1.0) || i > NumberT(1.0)) {
-                AddError("asin must be called with a value in the range [-1 .. 1] (inclusive)", source);
+                AddError("asin must be called with a value in the range [-1 .. 1] (inclusive)",
+                         source);
                 return utils::Failure;
             }
             return CreateElement(builder, c0->Type(), NumberT(std::asin(i.value)));
@@ -1702,7 +1703,8 @@ ConstEval::Result ConstEval::atanh(const sem::Type* ty,
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
             if (i <= NumberT(-1.0) || i >= NumberT(1.0)) {
-                AddError("atanh must be called with a value in the range (-1 .. 1) (exclusive)", source);
+                AddError("atanh must be called with a value in the range (-1 .. 1) (exclusive)",
+                         source);
                 return utils::Failure;
             }
             return CreateElement(builder, c0->Type(), NumberT(std::atanh(i.value)));
