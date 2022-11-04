@@ -3240,6 +3240,7 @@ sem::Statement* Resolver::CallStatement(const ast::CallStatement* stmt) {
             sem->Behaviors() = expr->Behaviors();
             return true;
         }
+        std::cout << "HERE" << std::endl;
         return false;
     });
 }
