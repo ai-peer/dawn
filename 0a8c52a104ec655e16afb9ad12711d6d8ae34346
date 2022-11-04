@@ -16,6 +16,57 @@
       "message": "Still LGTN",
       "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a210fbd_da07f1ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-04T17:30:31Z",
+      "side": 1,
+      "message": "LGTM\n(My understanding: using the MTLSharedEvent to sync texture operations across devices, and device vs CPU usage, by calling SynchronizeTextureBeforeUse on CommandBuffer texture usages (beginCompute/RenderPass, Copy*) Device(CopyFromStagingToTextureImpl). Blocks by Metal encodeWaitForEvent waiting on signaledValue.)",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1a7290c_7f5098a1",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-04T17:30:31Z",
+      "side": 1,
+      "message": "Q: what is the intention to use std::move in the for loop here?",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c061639_648b596d",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-04T17:30:31Z",
+      "side": 1,
+      "message": "u-nit: typo: Uninitialize",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
