@@ -16,6 +16,63 @@
       "message": "Looks like I need to re-gen expecatations. Didn\u0027t see any added so thought they were good. I\u0027m not sure why a couple of the kokoro bots failed unittests at this point and not others (or locally).",
       "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f30420_005bf148",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-04T20:53:44Z",
+      "side": 1,
+      "message": "Excellent work, Dan!",
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d338d24_0dddea44",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-04T20:53:44Z",
+      "side": 1,
+      "message": "nit: Not technically necessary because `Clamp` currently never fails, but maybe we should add the scoping of the `source` input:\n```\nTINT_SCOPED_ASSIGNMENT(current_source, \u0026source);\n```\n\nOr maybe we leave it out, and can add it if we ever make Clamp fail (which we won\u0027t).",
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e5c878_fe334fd1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1987,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-04T20:53:44Z",
+      "side": 1,
+      "message": "nit: Since we\u0027re casting to integral, we don\u0027t technically need this. But I guess it looks like the spec, so keep it?",
+      "range": {
+        "startLine": 1987,
+        "startChar": 19,
+        "endLine": 1987,
+        "endChar": 29
+      },
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
