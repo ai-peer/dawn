@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3c0ae5a_e01eb16b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-04T21:43:59Z",
+      "side": 1,
+      "message": "If we need the source, I would expect the functions to take it as a parameter.",
+      "parentUuid": "5d338d24_0dddea44",
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0e5c878_fe334fd1",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 2
