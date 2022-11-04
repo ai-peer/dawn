@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44b94418_ab4cc95d",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-04T15:13:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s that weird. It represents a success / failure. We want something that represents a success or failure - seems like a good fit to me.\nI also used it as it has a much friendlier API than variant.",
+      "parentUuid": "f432633b_083df803",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 35
+      },
+      "revId": "ac5d57ff55ee7106a00c0da3de8eeabc810ce195",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "217aa051_f9bf3faf",
         "filename": "src/tint/resolver/const_eval_builtin_test.cc",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-04T14:59:21Z",
       "side": 1,
       "message": "Hoist this up to `error_msg` variable?",
+      "range": {
+        "startLine": 424,
+        "startChar": 23,
+        "endLine": 424,
+        "endChar": 92
+      },
+      "revId": "ac5d57ff55ee7106a00c0da3de8eeabc810ce195",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad7e499_ef7a56db",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-04T15:13:50Z",
+      "side": 1,
+      "message": "I considered it, but I would also like to fix the error source location so that it points to the offending value. When we do that, we want separate strings again.",
+      "parentUuid": "217aa051_f9bf3faf",
       "range": {
         "startLine": 424,
         "startChar": 23,
