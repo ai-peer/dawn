@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b469a27d_e00487fd",
+        "filename": "include/dawn/native/MetalBackend.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "removed. I used to only define the struct if __OBJC__",
+      "parentUuid": "9bed68a6_ce75fb80",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c77705c5_aaf71631",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-11-03T11:51:04Z",
       "side": 1,
       "message": "nit: we have https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/native/DawnNative.h;drc\u003d7edef20bdde3da4ce6bbb4ce355c3683d7be9eaa;l\u003d205 Do you think in the future we\u0027d be moving more and more of its usages in the backend \"end access\" functions?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c33807de_62f28c65",
+        "filename": "include/dawn/native/MetalBackend.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "yea, I think that one should eventually be a test only API. you shouldn\u0027t need to care whether a texture is initialized unless you\u0027re sharing it",
+      "parentUuid": "c77705c5_aaf71631",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ea0602_db2c4a87",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "705f386f_6fb266f5",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d77c43d4_05e899f3",
@@ -99,6 +153,24 @@
       "writtenOn": "2022-11-03T11:51:04Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2007e724_ca7a07fc",
+        "filename": "src/dawn/native/metal/CommandRecordingContext.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d77c43d4_05e899f3",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f462ba3_fd20f71b",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae1d32f_f64e7293",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cc0421b_23d89c60",
@@ -133,6 +223,24 @@
       "writtenOn": "2022-11-03T11:51:04Z",
       "side": 1,
       "message": "[1]",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc3c796_857b6b21",
+        "filename": "src/dawn/native/metal/DeviceMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6cc0421b_23d89c60",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +270,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ced3f3f_6117ccb1",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "wanted to make this match ExternalImageDXGI::EndAccess and eventually probably have a platform agnostic EndAccess with backend specific extension structs. so this is the iosurface variant of EndAccess.\n\nbut I don\u0027t feel strongly and none of that exists yet",
+      "parentUuid": "88e4f4a2_2a2c3159",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1051227_37db63de",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 6
@@ -173,6 +305,24 @@
       "writtenOn": "2022-11-03T11:51:04Z",
       "side": 1,
       "message": "Looking at leftover stry includes it seems you tried putting the list of MTLSharedEventAndSignalValue on the recording context to batch waits during submission like we do in other backends. What made you choose a different direction? (not asking for a change, but trying to understand).",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17f5412_30e94117",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:38:49Z",
+      "side": 1,
+      "message": "in the other back ends, the waits occur separate from the command buffer. like on VkSubmitInfo or d3d12 queue wait. In metal, the waits are encoded on the command buffer, not outside of it so I realized I could do it inline while encoding which probably gives better GPU usage anyway.\n(Vulkan we could probably use stage masks one day...)",
+      "parentUuid": "e1051227_37db63de",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
