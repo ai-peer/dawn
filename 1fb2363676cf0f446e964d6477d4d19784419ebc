@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bb8e922_3196b344",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T01:41:11Z",
+      "side": 1,
+      "message": "hm I could take a look at doing the Allocate change since I\u0027m a bit more familiar with the wire code? I\u0027m not sure what another quick fix would be since the reuse of an object is pretty significant",
+      "parentUuid": "c5827a07_6130d24d",
+      "revId": "1fb2363676cf0f446e964d6477d4d19784419ebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d5e628c_dc1b9ea3",
         "filename": "src/dawn/wire/server/ServerBuffer.cpp",
         "patchSetId": 2
