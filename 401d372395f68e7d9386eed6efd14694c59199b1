@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f819c07f_77bbc9c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-04T21:59:22Z",
+      "side": 1,
+      "message": "Heh.  Need to make this work with both versions of spirv-tools, becuase vulkan-deps still has the old spirv-tools",
+      "revId": "401d372395f68e7d9386eed6efd14694c59199b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
