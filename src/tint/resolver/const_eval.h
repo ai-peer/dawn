@@ -509,8 +509,8 @@ class ConstEval {
     /// @param source the source location of the conversion
     /// @return the result value, or null if the value cannot be calculated
     Result extractBits(const sem::Type* ty,
-        utils::VectorRef<const sem::Constant*> args,
-        const Source& source);
+                       utils::VectorRef<const sem::Constant*> args,
+                       const Source& source);
 
     /// firstLeadingBit builtin
     /// @param ty the expression type
