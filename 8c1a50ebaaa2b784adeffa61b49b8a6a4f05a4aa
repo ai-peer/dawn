@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfedf971_639e357c",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-04T12:03:55Z",
+      "side": 1,
+      "message": "The parse of driver versions are different for each backend, it\u0027s hard to uniform them in a static method, so keep them in its own backend.",
+      "parentUuid": "c01418ca_3df7314f",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 46
+      },
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0226a5b7_5d25fba9",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-10-14T18:19:42Z",
       "side": 1,
       "message": "this should return the driver version instead of mutating one of the arguments",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 70
+      },
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e5c734_bcd502f6",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-04T12:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0226a5b7_5d25fba9",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ee4bc2_0817f30e",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-04T12:03:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d0ea73_8685ba47",
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5a58f8f_9701bb9b",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-10-14T18:19:42Z",
       "side": 1,
       "message": "Instead, should we just blocklist this adapter in AdapterVk::Initialize ?\nif it\u0027s so flaky that we don\u0027t run tests, we probably don\u0027t want developers using Dawn to ever use this adapter.",
+      "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5bdce85_95c67381",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-04T12:03:55Z",
+      "side": 1,
+      "message": "Sure. It make sense to blocklist the adapter on the problem driver version, developers should upgrade the driver version if they want Vulkan adapter on Windows.",
+      "parentUuid": "c5a58f8f_9701bb9b",
       "revId": "8c1a50ebaaa2b784adeffa61b49b8a6a4f05a4aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
