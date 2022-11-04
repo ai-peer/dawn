@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "b7359a6d2b648940def3821f955a2f98214d873d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e77e040_64af022e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-04T12:35:27Z",
+      "side": 1,
+      "message": "Drive-by: HEEEEEERE",
+      "revId": "b7359a6d2b648940def3821f955a2f98214d873d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
