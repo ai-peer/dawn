@@ -266,6 +266,24 @@
       "parentUuid": "2c0a485f_c40f84ab",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed78675_71b9ca30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-04T09:30:08Z",
+      "side": 1,
+      "message": "\u003e In the JS spec, if there\u0027s a mapping OOM in createBuffer, then createBuffer throws a RangeError, so you don\u0027t get a GPUBuffer object in the first place that you can call getMappedRange on.\n\nThat works for the content timeline, but what about the device timeline? If there\u0027s an OOM in the device timeline, the content timeline won\u0027t know early enough to raise an exception synchronously.\n\n\u003e In the JS spec, if there\u0027s a mapping OOM in createBuffer, then createBuffer throws a RangeError, so you don\u0027t get a GPUBuffer object in the first place that you can call getMappedRange on.\n\nThe C API returning a nullptr buffer is a bit problematic because the wire client side doesn\u0027t know that the buffer ended up being a nullptr on the server side.\n\nThat\u0027s why returning an error buffer that gives nullptr on getMappedRange makes more sense to me: you can still use the buffer in all regular operations (e.g. SetVertexBuffer) without having to check for null.",
+      "parentUuid": "367f95da_0f61c57c",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
