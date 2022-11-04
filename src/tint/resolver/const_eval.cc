@@ -15,6 +15,7 @@
 #include "src/tint/resolver/const_eval.h"
 
 #include <algorithm>
+#include <iomanip>
 #include <limits>
 #include <optional>
 #include <string>
@@ -187,14 +188,24 @@ inline bool IsPositiveZero(T value) {
 template <typename NumberT>
 std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
     std::stringstream ss;
+    ss << std::setprecision(20);
     ss << "'" << lhs.value << " " << op << " " << rhs.value << "' cannot be represented as '"
        << FriendlyName<NumberT>() << "'";
     return ss.str();
 }
 
+template <typename VALUE_TY>
+std::string OverflowErrorMessage(VALUE_TY value, std::string_view target_ty) {
+    std::stringstream ss;
+    ss << std::setprecision(20);
+    ss << "value " << value << " cannot be represented as "
+       << "'" << target_ty << "'";
+    return ss.str();
+}
+
 /// @returns the number of consecutive leading bits in `@p e` set to `@p bit_value_to_count`.
 template <typename T>
-auto CountLeadingBits(T e, T bit_value_to_count) -> std::make_unsigned_t<T> {
+std::make_unsigned_t<T> CountLeadingBits(T e, T bit_value_to_count) {
     using UT = std::make_unsigned_t<T>;
     constexpr UT kNumBits = sizeof(UT) * 8;
     constexpr UT kLeftMost = UT{1} << (kNumBits - 1);
@@ -211,7 +222,7 @@ auto CountLeadingBits(T e, T bit_value_to_count) -> std::make_unsigned_t<T> {
 
 /// @returns the number of consecutive trailing bits set to `@p bit_value_to_count` in `@p e`
 template <typename T>
-auto CountTrailingBits(T e, T bit_value_to_count) -> std::make_unsigned_t<T> {
+std::make_unsigned_t<T> CountTrailingBits(T e, T bit_value_to_count) {
     using UT = std::make_unsigned_t<T>;
     constexpr UT kNumBits = sizeof(UT) * 8;
     constexpr UT kRightMost = UT{1};
@@ -292,10 +303,9 @@ struct Element : ImplConstant {
                 // --- Below this point are the failure cases ---
             } else if constexpr (IsAbstract<FROM>) {
                 // [abstract-numeric -> x] - materialization failure
-                std::stringstream ss;
-                ss << "value " << value << " cannot be represented as ";
-                ss << "'" << builder.FriendlyName(target_ty) << "'";
-                builder.Diagnostics().add_error(tint::diag::System::Resolver, ss.str(), source);
+                builder.Diagnostics().add_error(
+                    tint::diag::System::Resolver,
+                    OverflowErrorMessage(value, builder.FriendlyName(target_ty)), source);
                 return utils::Failure;
             } else if constexpr (IsFloatingPoint<TO>) {
                 // [x -> floating-point] - number not exactly representable
@@ -1677,7 +1687,7 @@ ConstEval::Result ConstEval::atanh(const sem::Type* ty,
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
             if (i <= NumberT(-1.0) || i >= NumberT(1.0)) {
-                AddError("atanh must be called with a value in the range (-1, 1)", source);
+                AddError("atanh must be called with a value in the range [-1, 1]", source);
                 return utils::Failure;
             }
             return CreateElement(builder, c0->Type(), NumberT(std::atanh(i.value)));
@@ -2050,19 +2060,13 @@ ConstEval::Result ConstEval::step(const sem::Type* ty,
 
 ConstEval::Result ConstEval::quantizeToF16(const sem::Type* ty,
                                            utils::VectorRef<const sem::Constant*> args,
-                                           const Source&) {
-    auto transform = [&](const sem::Constant* c) {
-        auto conv = CheckedConvert<f32>(f16(c->As<f32>()));
+                                           const Source& source) {
+    auto transform = [&](const sem::Constant* c) -> ImplResult {
+        auto value = c->As<f32>();
+        auto conv = CheckedConvert<f32>(f16(value));
         if (!conv) {
-            // https://www.w3.org/TR/WGSL/#quantizeToF16-builtin
-            // If e is outside the finite range of binary16, then the result is any value of type
-            // f32
-            switch (conv.Failure()) {
-                case ConversionFailure::kExceedsNegativeLimit:
-                    return CreateElement(builder, c->Type(), f16(f16::kLowestValue));
-                case ConversionFailure::kExceedsPositiveLimit:
-                    return CreateElement(builder, c->Type(), f16(f16::kHighestValue));
-            }
+            AddError(OverflowErrorMessage(value, "f16"), source);
+            return utils::Failure;
         }
         return CreateElement(builder, c->Type(), conv.Get());
     };
