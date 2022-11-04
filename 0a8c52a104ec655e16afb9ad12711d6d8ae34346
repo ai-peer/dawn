@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6f2529e_23464fd6",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-04T17:34:25Z",
+      "side": 1,
+      "message": "I see. Maybe just add a comment is enough. Saying this std::move is to consueme/erase/clear the mWaitEvents",
+      "parentUuid": "c8cd0ef9_45028731",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c061639_648b596d",
