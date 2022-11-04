@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de17469a_2d84a9b0",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T20:02:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6f2529e_23464fd6",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c061639_648b596d",
@@ -119,6 +137,24 @@
       "writtenOn": "2022-11-04T17:30:31Z",
       "side": 1,
       "message": "u-nit: typo: Uninitialize",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b30d465d_8b037e88",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T20:02:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c061639_648b596d",
       "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
