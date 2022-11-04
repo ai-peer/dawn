@@ -126,6 +126,24 @@ class HashmapBase {
     /// A slot can either be empty or filled with a value. If the slot is empty, #hash and #distance
     /// will be zero.
     struct Slot {
+        /// Constructor
+        Slot() = default;
+
+        /// Constructor
+        Slot(Entry&& e, size_t h, size_t d) : entry(std::move(e)), hash(h), distance(d) {}
+
+        /// Move constructor
+        Slot(Slot&&) = default;
+
+        /// Copy constructor
+        Slot(const Slot&) = default;
+
+        /// Copy assignment operator
+        Slot& operator=(const Slot&) = default;
+
+        /// Move assignment operator
+        Slot& operator=(Slot&&) = default;
+
         bool Equals(size_t key_hash, const Key& key) const {
             return key_hash == hash && EQUAL()(key, KeyOf(*entry));
         }
@@ -419,7 +437,10 @@ class HashmapBase {
                 // Steal from the rich!
                 // Move the current slot to a temporary (evicted), and put the value into the slot.
                 Slot evicted{make_entry(), hash.code, distance};
-                std::swap(evicted, slot);
+                // std::swap(evicted, slot);
+                Slot tmp = std::move(slot);
+                slot = std::move(evicted);
+                evicted = std::move(tmp);
 
                 // Find a new home for the evicted slot.
                 evicted.distance++;  // We've already swapped at index.
@@ -524,7 +545,7 @@ class HashmapBase {
     /// Shuffles slots for an insertion that has been placed one slot before `start`.
     /// @param start the index of the first slot to start shuffling.
     /// @param evicted the slot content that was evicted for the insertion.
-    void InsertShuffle(size_t start, Slot evicted) {
+    void InsertShuffle(size_t start, Slot&& evicted) {
         Scan(start, [&](size_t, size_t index) {
             auto& slot = slots_[index];
 

@@ -1359,7 +1359,7 @@ if(TINT_BUILD_TESTS)
     # for this build combination.
     string(TOUPPER "${CMAKE_BUILD_TYPE}" build_type)
     if ((NOT ${build_type} STREQUAL "RELEASE") AND (NOT ${build_type} STREQUAL "RELWITHDEBINFO"))
-      target_link_options(tint_unittests PRIVATE "/STACK 2097152") # 2MB, default is 1MB
+      target_link_options(tint_unittests PRIVATE "/STACK 4194304") # 4MB, default is 1MB
     endif()
   else()
     target_compile_options(tint_unittests PRIVATE
