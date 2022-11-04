@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00fb2f57_284f84bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T17:32:14Z",
+      "side": 1,
+      "message": "yup, that\u0027s exactly right",
+      "parentUuid": "0a210fbd_da07f1ae",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1a7290c_7f5098a1",
@@ -48,6 +66,24 @@
       "writtenOn": "2022-11-04T17:30:31Z",
       "side": 1,
       "message": "Q: what is the intention to use std::move in the for loop here?",
+      "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8cd0ef9_45028731",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T17:32:14Z",
+      "side": 1,
+      "message": "it \"consumes\" them on the texture, so that after this, this-\u003emWaitEvents is empty.\n\nWould it be more clear to do it separately?\n\n```\nauto waitEvents \u003d std::move(mWaitEvents);\nfor (auto waitEvent : waitEvents) {\n```",
+      "parentUuid": "d1a7290c_7f5098a1",
       "revId": "0a8c52a104ec655e16afb9ad12711d6d8ae34346",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
