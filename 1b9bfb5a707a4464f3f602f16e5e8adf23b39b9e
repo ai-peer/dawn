@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b5d19c_b512aea6",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2022-11-04T03:45:56Z",
+      "side": 1,
+      "message": "This change reintroduces the crash with the demo from b/252731382 . The null check seems to be necessary.",
+      "revId": "1b9bfb5a707a4464f3f602f16e5e8adf23b39b9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
