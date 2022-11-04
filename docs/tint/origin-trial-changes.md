@@ -5,6 +5,7 @@
 ### Breaking changes
 
 * `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
+* You may no longer use pointer parameters in `workgroup` address space. [tint:1721](crbug.com/tint/1721)
 
 ### New features
 
