@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcd1db1_9c70fffe",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1165,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-04T19:44:17Z",
+      "side": 1,
+      "message": "Oops, forgot to delete.",
+      "revId": "a237560d6420f92a5f3193c6713d01915848fa1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
