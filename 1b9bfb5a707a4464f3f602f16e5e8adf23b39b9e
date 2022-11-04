@@ -16,6 +16,24 @@
       "message": "This change reintroduces the crash with the demo from b/252731382 . The null check seems to be necessary.",
       "revId": "1b9bfb5a707a4464f3f602f16e5e8adf23b39b9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4740505c_2e543118",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-04T04:23:57Z",
+      "side": 1,
+      "message": "fixed! thanks for the catch - I patched and updated the wrong version before",
+      "parentUuid": "46b5d19c_b512aea6",
+      "revId": "1b9bfb5a707a4464f3f602f16e5e8adf23b39b9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
