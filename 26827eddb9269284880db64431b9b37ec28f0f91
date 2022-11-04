@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e4ef1d8_e1d48bf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-04T12:11:39Z",
+      "side": 1,
+      "message": "There is a block issue: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1589.\n\nIt does not affect the trybots since its driver is too old, Vulkan adapter is disabled, but on the driver version \u003e 30.0.100.2111, the Vulkan backend will crash at device creation. We\u0027d better to land this CL after the fixes are rolled into Dawn.",
+      "revId": "26827eddb9269284880db64431b9b37ec28f0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
