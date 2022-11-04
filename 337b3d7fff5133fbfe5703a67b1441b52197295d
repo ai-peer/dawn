@@ -123,6 +123,24 @@
       "parentUuid": "d2efe07b_ce138d7b",
       "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "789a48f2_729e9f41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-04T00:06:33Z",
+      "side": 1,
+      "message": "The cts has been updated. And the CQ DRY tests passed. I will merge this CL, thanks.",
+      "parentUuid": "b60ee6bd_dd1954b2",
+      "revId": "337b3d7fff5133fbfe5703a67b1441b52197295d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
