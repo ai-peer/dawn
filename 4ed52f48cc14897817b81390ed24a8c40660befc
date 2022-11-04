@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db0e4350_15189295",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-04T18:02:22Z",
+      "side": 1,
+      "message": "Dan pointed out to me that the `[]` \u003c-\u003e `()` was intentional - this was inclusive vs exclusive limits. I\u0027ve make the diagnostic more explicit as this was lost on me.",
+      "range": {
+        "startLine": 425,
+        "startChar": 75,
+        "endLine": 425,
+        "endChar": 96
+      },
+      "revId": "4ed52f48cc14897817b81390ed24a8c40660befc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
