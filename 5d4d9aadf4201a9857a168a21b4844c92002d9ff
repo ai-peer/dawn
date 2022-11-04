@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6730ec95_c21f6b9f",
+        "filename": "include/dawn/native/MetalBackend.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-04T09:20:04Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "c33807de_62f28c65",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "705f386f_6fb266f5",
@@ -292,6 +310,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec333a2_a2ad4669",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-04T09:20:04Z",
+      "side": 1,
+      "message": "Nah no strong feelings.",
+      "parentUuid": "7ced3f3f_6117ccb1",
+      "range": {
+        "startLine": 62,
+        "startChar": 9,
+        "endLine": 62,
+        "endChar": 27
+      },
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1051227_37db63de",
@@ -323,6 +365,24 @@
       "side": 1,
       "message": "in the other back ends, the waits occur separate from the command buffer. like on VkSubmitInfo or d3d12 queue wait. In metal, the waits are encoded on the command buffer, not outside of it so I realized I could do it inline while encoding which probably gives better GPU usage anyway.\n(Vulkan we could probably use stage masks one day...)",
       "parentUuid": "e1051227_37db63de",
+      "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0ba7423_a2cd14f8",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 779,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-04T09:20:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c17f5412_30e94117",
       "revId": "5d4d9aadf4201a9857a168a21b4844c92002d9ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
