@@ -5,6 +5,7 @@
 ### Breaking changes
 
 * `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
+* Reserved words are now an error instead of a deprecation. [tint:1463](crbug.com/tint/1463)
 
 ### New features
 
