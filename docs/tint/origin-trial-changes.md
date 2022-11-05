@@ -5,6 +5,7 @@
 ### Breaking changes
 
 * `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
+* Module-scope `let` is now na error. Use module-scope `const` instead. [tint:1580](crbug.com/tint/1584)
 
 ### New features
 
