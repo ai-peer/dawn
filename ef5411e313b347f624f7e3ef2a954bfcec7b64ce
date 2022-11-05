@@ -284,6 +284,24 @@
       "parentUuid": "367f95da_0f61c57c",
       "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceacc5d8_d1b77ece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-05T01:55:00Z",
+      "side": 1,
+      "message": "If there\u0027s a device timeline OOM on a buffer that\u0027s mappedAtCreation then getMappedRange is supposed to still work. The data won\u0027t go anywhere, but createBuffer is supposed to have already allocated memory that can be returned by getMappedRange, and freed on unmap/destroy.\n\n\u003e The C API returning a nullptr buffer is a bit problematic because the wire client side doesn\u0027t know that the buffer ended up being a nullptr on the server side.\n\nMaybe I\u0027m thinking about this too abstractly because I\u0027m not that familiar with the implementation, but here\u0027s what I\u0027m thinking. This scenario can only happen if the server side attempts to make a CPU allocation in createBuffer and fails. But the CPU allocation is for the caller to use, so why would the server need one? If it\u0027s IPC or in-process, the client can allocate it and send the handle to the server.\n\nThe other reason I think it should return nullptr is so when there is a RangeError from createBuffer, Emscripten doesn\u0027t have to conjure up a fake GPUBuffer object handle and somehow pretend it can be used up until it\u0027s used on a queue. This isn\u0027t a huge deal though because we could always have different OOM behavior on Emscripten if we need to.",
+      "parentUuid": "8ed78675_71b9ca30",
+      "revId": "ef5411e313b347f624f7e3ef2a954bfcec7b64ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
