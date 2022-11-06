@@ -3826,7 +3826,7 @@ Expect<std::string> ParserImpl::expect_ident(std::string_view use) {
         next();
 
         if (is_reserved(t)) {
-            deprecated(t.source(), "'" + t.to_str() + "' is a reserved keyword");
+            return add_error(t.source(), "'" + t.to_str() + "' is a reserved keyword");
         }
 
         return {t.to_str(), t.source()};
