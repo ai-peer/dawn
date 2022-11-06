@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d1dba1_ad2741e5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1732,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-06T01:53:16Z",
+      "side": 1,
+      "message": "Ack, going to leave this for now as that\u0027s pretty subtle. I didn\u0027t even realize `current_source` was a thing in const-eval. If we need it we can pass it.",
+      "parentUuid": "f3c0ae5a_e01eb16b",
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0e5c878_fe334fd1",
@@ -83,6 +101,30 @@
       "writtenOn": "2022-11-04T20:53:44Z",
       "side": 1,
       "message": "nit: Since we\u0027re casting to integral, we don\u0027t technically need this. But I guess it looks like the spec, so keep it?",
+      "range": {
+        "startLine": 1987,
+        "startChar": 19,
+        "endLine": 1987,
+        "endChar": 29
+      },
+      "revId": "3faa1ab4f9ad19e4b30baf98278fcec3e1d1beaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db52ddf0_2eebf93e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1987,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-06T01:53:16Z",
+      "side": 1,
+      "message": "Yea, I like having things look like the spec as I find it a lot easier to compare and say, yup, same thing, without have to think about conversion from float to int, etc.",
+      "parentUuid": "c0e5c878_fe334fd1",
       "range": {
         "startLine": 1987,
         "startChar": 19,
