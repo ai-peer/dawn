@@ -93,6 +93,15 @@ static Case C(std::initializer_list<ScalarTypes> sargs, ScalarTypes sresult) {
     return Case{std::move(args), std::move(result)};
 }
 
+/// Convenience overload that creates a case with scalar args and type results
+static Case C(std::initializer_list<ScalarTypes> sargs, Types result) {
+    utils::Vector<Types, 8> args;
+    for (auto& sa : sargs) {
+        std::visit([&](auto&& v) { return args.Push(Val(v)); }, sa);
+    }
+    return Case{std::move(args), std::move(result)};
+}
+
 /// Creates a Case with Values for args and expected error
 static Case E(std::initializer_list<Types> args, const char* err) {
     return Case{utils::Vector<Types, 8>{args}, err};
@@ -1334,6 +1343,73 @@ INSTANTIATE_TEST_SUITE_P(  //
                      testing::ValuesIn(Concat(StepCases<AFloat>(),  //
                                               StepCases<f32>(),
                                               StepCases<f16>()))));
+
+std::vector<Case> Unpack4x8snormCases() {
+    return {
+        C({u32(0x0000'0000)}, Vec(f32(0), f32(0), f32(0), f32(0))),
+        C({u32(0x8100'0000)}, Vec(f32(0), f32(0), f32(0), f32(-1))),
+        C({u32(0x7f00'0000)}, Vec(f32(0), f32(0), f32(0), f32(1))),
+        C({u32(0x0081'0000)}, Vec(f32(0), f32(0), f32(-1), f32(0))),
+        C({u32(0x0000'7f00)}, Vec(f32(0), f32(1), f32(0), f32(0))),
+        C({u32(0x0000'0081)}, Vec(f32(-1), f32(0), f32(0), f32(0))),
+        C({u32(0x817f'817f)}, Vec(f32(1), f32(-1), f32(1), f32(-1))),
+        C({u32(0x816d'937f)}, Vec(f32(1), f32(-0.8582677165354), f32(0.8582677165354), f32(-1))),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Unpack4x8snorm,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kUnpack4X8Snorm),
+                     testing::ValuesIn(Unpack4x8snormCases())));
+
+std::vector<Case> Unpack4x8unormCases() {
+    return {
+        C({Val(u32(0x0000'0000))}, Vec(f32(0), f32(0), f32(0), f32(0))),
+        C({Val(u32(0xff00'0000))}, Vec(f32(0), f32(0), f32(0), f32(1))),
+        C({Val(u32(0x00ff'0000))}, Vec(f32(0), f32(0), f32(1), f32(0))),
+        C({Val(u32(0x0000'ff00))}, Vec(f32(0), f32(1), f32(0), f32(0))),
+        C({Val(u32(0x0000'00ff))}, Vec(f32(1), f32(0), f32(0), f32(0))),
+        C({Val(u32(0x00ff'00ff))}, Vec(f32(1), f32(0), f32(1), f32(0))),
+        C({Val(u32(0x0066'00ff))}, Vec(f32(1), f32(0), f32(0.4), f32(0))),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Unpack4x8unorm,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kUnpack4X8Unorm),
+                     testing::ValuesIn(Unpack4x8unormCases())));
+
+std::vector<Case> Unpack2x16snormCases() {
+    return {
+        C({Val(u32(0x0000'0000))}, Vec(f32(0), f32(0))),
+        C({Val(u32(0x8001'0000))}, Vec(f32(0), f32(-1))),
+        C({Val(u32(0x7fff'0000))}, Vec(f32(0), f32(1))),
+        C({Val(u32(0x0000'8001))}, Vec(f32(-1), f32(0))),
+        C({Val(u32(0x0000'7fff))}, Vec(f32(1), f32(0))),
+        C({Val(u32(0x8001'7fff))}, Vec(f32(1), f32(-1))),
+        C({Val(u32(0x8001'7fff))}, Vec(f32(1), f32(-1))),
+        C({Val(u32(0x4000'999a))}, Vec(f32(-0.80001220740379), f32(0.500015259254737))).FloatComp(),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Unpack2x16snorm,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kUnpack2X16Snorm),
+                     testing::ValuesIn(Unpack2x16snormCases())));
+
+std::vector<Case> Unpack2x16unormCases() {
+    return {
+        C({Val(u32(0xffff'0000))}, Vec(f32(0), f32(1))),
+        C({Val(u32(0x0000'ffff))}, Vec(f32(1), f32(0))),
+        C({Val(u32(0x0000'6666))}, Vec(f32(0.4), f32(0))),
+        C({Val(u32(0x0000'ffff))}, Vec(f32(1), f32(0))),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Unpack2x16unorm,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kUnpack2X16Unorm),
+                     testing::ValuesIn(Unpack2x16unormCases())));
 
 std::vector<Case> QuantizeToF16Cases() {
     (void)E({Vec(0_f, 0_f)}, "");  // Currently unused, but will be soon.
