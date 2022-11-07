@@ -68,6 +68,30 @@
       },
       "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff76562_e18ba72f",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T20:06:32Z",
+      "side": 1,
+      "message": "If I remove this, I can\u0027t use the `C()` in the `unpack4x8snorm` cases so the suggestion is to duplicate the test?\n\nOr is there something I\u0027m missing to make this work below? I couldn\u0027t figure out how to make this work below without doing this.",
+      "parentUuid": "a17c9478_e02523f9",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
