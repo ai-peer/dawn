@@ -819,6 +819,9 @@ TEST_P(BufferTests, CreateBufferOOM) {
     descriptor.size = 1ull << 50;
     // TODO(dawn:1525): remove warning expectation after the deprecation period.
     ASSERT_DEVICE_ERROR(EXPECT_DEPRECATION_WARNING(device.CreateBuffer(&descriptor)));
+
+    descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::Uniform;
+    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
 }
 
 // Test that a very large buffer mappedAtCreation fails gracefully.
