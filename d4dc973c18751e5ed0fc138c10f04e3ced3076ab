@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da4c2ce_2d7f78b5",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T21:12:19Z",
+      "side": 1,
+      "message": "nit: maybe a comment here. Something like:\n\n`If the rhs \u003d\u003d 0 || (lhs \u003d\u003d min_val \u0026\u0026 rhs \u003d\u003d -1)`\n\njust to make it easier to parse what this is creating?",
+      "revId": "d4dc973c18751e5ed0fc138c10f04e3ced3076ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da95eb6c_de90e72e",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T21:12:19Z",
+      "side": 1,
+      "message": "Why bitwise operators instead of logical?",
+      "revId": "d4dc973c18751e5ed0fc138c10f04e3ced3076ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
