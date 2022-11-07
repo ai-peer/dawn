@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0598b8_9fb127df",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2030,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T10:14:03Z",
+      "side": 1,
+      "message": "ubsan is moaning about the `f32` -\u003e `i8` conversion. Your cast is changing types (fp -\u003e integer) as well as signedness. I think `utils::Bitcast\u003cuint32_t\u003e(static_cast\u003cint32_t\u003e(std::floor(0.5f + (127.0f * clamped))))` will fix this.",
+      "range": {
+        "startLine": 2027,
+        "startChar": 4,
+        "endLine": 2030,
+        "endChar": 6
+      },
+      "revId": "04df1d803b10e25fd2e2870cd6bc86983de1da1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
