@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93c5bf0_7490eec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T22:54:23Z",
+      "side": 1,
+      "message": "Reverted expectations.txt changes until we fix CTS timouts. PTAL.",
+      "revId": "baaeeb0827ea008d91f15cec708cf99f48b8135c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
