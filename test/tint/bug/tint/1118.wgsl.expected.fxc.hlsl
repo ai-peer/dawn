@@ -10,7 +10,6 @@ cbuffer cbuffer_x_137 : register(b2, space0) {
   uint4 x_137[1];
 };
 static float4 glFragColor = float4(0.0f, 0.0f, 0.0f, 0.0f);
-static bool tint_discard = false;
 
 void main_1() {
   float3 viewDirectionW = float3(0.0f, 0.0f, 0.0f);
@@ -31,13 +30,11 @@ void main_1() {
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   const float x_9 = fClipDistance3;
   if ((x_9 > 0.0f)) {
-    tint_discard = true;
-    return;
+    discard;
   }
   const float x_17 = fClipDistance4;
   if ((x_17 > 0.0f)) {
-    tint_discard = true;
-    return;
+    discard;
   }
   const float4 x_34 = asfloat(x_29[0]);
   const float3 x_38 = (0.0f).xxx;
@@ -105,25 +102,12 @@ main_out main_inner(float fClipDistance3_param, float fClipDistance4_param) {
   fClipDistance3 = fClipDistance3_param;
   fClipDistance4 = fClipDistance4_param;
   main_1();
-  if (tint_discard) {
-    const main_out tint_symbol_8 = (main_out)0;
-    return tint_symbol_8;
-  }
-  const main_out tint_symbol_9 = {glFragColor};
-  return tint_symbol_9;
-}
-
-void tint_discard_func() {
-  discard;
+  const main_out tint_symbol_8 = {glFragColor};
+  return tint_symbol_8;
 }
 
 tint_symbol_2 main(tint_symbol_1 tint_symbol) {
   const main_out inner_result = main_inner(tint_symbol.fClipDistance3_param, tint_symbol.fClipDistance4_param);
-  if (tint_discard) {
-    tint_discard_func();
-    const tint_symbol_2 tint_symbol_10 = (tint_symbol_2)0;
-    return tint_symbol_10;
-  }
   tint_symbol_2 wrapper_result = (tint_symbol_2)0;
   wrapper_result.glFragColor_1 = inner_result.glFragColor_1;
   return wrapper_result;
