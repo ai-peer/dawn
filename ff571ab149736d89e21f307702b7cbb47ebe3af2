@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c27073f_f1d030bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T22:05:44Z",
+      "side": 1,
+      "message": "There\u0027s a bunch of stuff that can be simplified in the writers with this gone!",
+      "revId": "ff571ab149736d89e21f307702b7cbb47ebe3af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
