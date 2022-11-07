@@ -272,7 +272,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     InternalPipelineStore* GetInternalPipelineStore();
 
     // For Dawn Wire
-    BufferBase* APICreateErrorBuffer();
+    BufferBase* APICreateErrorBuffer(const BufferDescriptor* desc);
     ExternalTextureBase* APICreateErrorExternalTexture();
     TextureBase* APICreateErrorTexture(const TextureDescriptor* desc);
 
@@ -533,6 +533,8 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureDataLayout& src,
                                                     TextureCopy* dst,
                                                     const Extent3D& copySizePixels) = 0;
+
+    MaybeError DoValidateBufferDescriptor(const BufferDescriptor* descriptor);
 
     wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
     void* mUncapturedErrorUserdata = nullptr;
