@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40445e82_17feb8d5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T20:02:24Z",
+      "side": 1,
+      "message": "nit: maybe we should be explicit with a `uint16_t` here as above for symmetry?",
+      "range": {
+        "startLine": 2196,
+        "startChar": 41,
+        "endLine": 2196,
+        "endChar": 43
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16c28a95_d16f3b09",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2227,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T20:02:24Z",
+      "side": 1,
+      "message": "nit: Same as above, `uint8_t`?",
+      "range": {
+        "startLine": 2227,
+        "startChar": 41,
+        "endLine": 2227,
+        "endChar": 43
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17c9478_e02523f9",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T20:02:24Z",
+      "side": 1,
+      "message": "Although convenient, I worry that we\u0027ll end up with overload resolution conflicts eventually. I think either all scalar, or explicit `Types` is fine. Indeed, you only used this overload in `Unpack4x8snormCases` below. So I recommend removing this.",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
