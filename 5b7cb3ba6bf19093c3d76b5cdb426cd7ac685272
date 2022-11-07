@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ff269c_0a44da63",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T22:03:16Z",
+      "side": 1,
+      "message": "My memory is a little hazy here - but can\u0027t you look at the entry point\u0027s behaviour analysis to see if it contains a discard? If so, that would mean you wouldn\u0027t need to traverse the transitively called functions?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 9
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2acf3bfd_3b018ae9",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T22:03:16Z",
+      "side": 1,
+      "message": "What about:\n\n```\n@vertex\nfn f() {\n  {\n    return;\n  }\n}\n```\n\n\nAgain, I think behavior analysis can tell you whether this is necessary (look for `kNext`)",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0320268_f3062931",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T22:03:16Z",
+      "side": 1,
+      "message": "We have the usual issue of expressions in loops here.\n\nconsider:\n\n```\nfor (var i \u003d 0; i \u003c 10; i \u003d atomicAdd(\u0026p, 1)) {}\n```\n\nTests please.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 58
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
