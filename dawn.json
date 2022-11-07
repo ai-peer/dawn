@@ -994,7 +994,10 @@
             {
                 "name": "create error buffer",
                 "returns": "buffer",
-                "tags": ["dawn"]
+                "tags": ["dawn"],
+                "args": [
+                    {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
+                ]
             },
             {
                 "name": "create command encoder",

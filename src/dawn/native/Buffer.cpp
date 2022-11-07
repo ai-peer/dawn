@@ -96,7 +96,7 @@ class ErrorBuffer final : public BufferBase {
 
 }  // anonymous namespace
 
-MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descriptor) {
+MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
     DAWN_TRY(ValidateBufferUsage(descriptor->usage));
 
@@ -123,6 +123,14 @@ MaybeError ValidateBufferDescriptor(DeviceBase*, const BufferDescriptor* descrip
     DAWN_INVALID_IF(descriptor->mappedAtCreation && descriptor->size % 4 != 0,
                     "Buffer is mapped at creation but its size (%u) is not a multiple of 4.",
                     descriptor->size);
+
+    // TODO(dawn:1525): Change to validation error after the deprecation period.
+    if (descriptor->size > device->GetLimits().v1.maxBufferSize) {
+        std::string warning =
+            absl::StrFormat("Buffer size (%u) exceeds the max buffer size limit (%u).",
+                            descriptor->size, device->GetLimits().v1.maxBufferSize);
+        device->EmitDeprecationWarning(warning.c_str());
+    }
 
     return {};
 }
