@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "558930cd_bf0f0530",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-07T22:08:28Z",
+      "side": 1,
+      "message": "No, because discard is no longer part of the behavior analysis. The next CL removes it.\n\nI did consider keeping discard in the behavior analysis specifically to help with this (and maybe other?) transforms that might want this information, but I thought that might be confusing.",
+      "parentUuid": "16ff269c_0a44da63",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 9
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2acf3bfd_3b018ae9",
         "filename": "src/tint/transform/demote_to_helper.cc",
         "patchSetId": 4
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85783c72_558f17c9",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-07T22:08:28Z",
+      "side": 1,
+      "message": "As above, behavior analysis does not assist here.",
+      "parentUuid": "2acf3bfd_3b018ae9",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0320268_f3062931",
         "filename": "src/tint/transform/demote_to_helper.cc",
         "patchSetId": 4
@@ -60,6 +108,30 @@
       "writtenOn": "2022-11-07T22:03:16Z",
       "side": 1,
       "message": "We have the usual issue of expressions in loops here.\n\nconsider:\n\n```\nfor (var i \u003d 0; i \u003c 10; i \u003d atomicAdd(\u0026p, 1)) {}\n```\n\nTests please.",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 58
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fb8066_3d59e4e4",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-07T22:08:28Z",
+      "side": 1,
+      "message": "Yeah, my solution for this is \"require/assume that `PromoteSideEffectsToDecl` has been run prior to this\".\n\nI guess I can still add the tests though, showing that it works when that transform is indeed run first.",
+      "parentUuid": "d0320268_f3062931",
       "range": {
         "startLine": 159,
         "startChar": 0,
