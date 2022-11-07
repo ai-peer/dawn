@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a33f498a_1c35c09a",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-07T22:10:12Z",
+      "side": 1,
+      "message": "Oh wait, I just actually read the shader you posted. Yes, I guess behavior analysis would indeed help here, thanks.",
+      "parentUuid": "85783c72_558f17c9",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0320268_f3062931",
         "filename": "src/tint/transform/demote_to_helper.cc",
         "patchSetId": 4
