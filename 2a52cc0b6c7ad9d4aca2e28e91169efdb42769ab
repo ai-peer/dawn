@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89690d1_61492204",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2196,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T21:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40445e82_17feb8d5",
+      "range": {
+        "startLine": 2196,
+        "startChar": 41,
+        "endLine": 2196,
+        "endChar": 43
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16c28a95_d16f3b09",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-07T20:02:24Z",
       "side": 1,
       "message": "nit: Same as above, `uint8_t`?",
+      "range": {
+        "startLine": 2227,
+        "startChar": 41,
+        "endLine": 2227,
+        "endChar": 43
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107742f3_00669f58",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2227,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T21:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c28a95_d16f3b09",
       "range": {
         "startLine": 2227,
         "startChar": 41,
@@ -108,6 +156,30 @@
       "side": 1,
       "message": "Turns out, I was holding something wrong and you\u0027re right. Will fix.",
       "parentUuid": "1ff76562_e18ba72f",
+      "range": {
+        "startLine": 96,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 0
+      },
+      "revId": "2a52cc0b6c7ad9d4aca2e28e91169efdb42769ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ac705e_bc669366",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T21:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a217b061_3c78ffa2",
       "range": {
         "startLine": 96,
         "startChar": 0,
