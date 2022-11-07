@@ -1193,9 +1193,23 @@ TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
 
 // For Dawn Wire
 
-BufferBase* DeviceBase::APICreateErrorBuffer() {
-    BufferDescriptor desc = {};
-    return BufferBase::MakeError(this, &desc);
+BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc) {
+    if (desc->mappedAtCreation) {
+        // When mappedAtCreation == true, an OOM error will be generated at client side, which is
+        // prior to any other validation errors on the server side.
+        return BufferBase::MakeError(this, desc);
+    }
+
+    auto result = CreateBuffer(desc);
+    if (result.IsError()) {
+        ASSERT(ConsumedError(result.AcquireError(), "calling %s.CreateBuffer(%s).", this, desc));
+    } else {
+        // Since the descriptor passes the backend validation, we should report the OOM error that
+        // has already happend at the client side.
+        ConsumedError(DAWN_OUT_OF_MEMORY_ERROR("Failed to create buffer mapping"));
+    }
+
+    return BufferBase::MakeError(this, desc);
 }
 
 ExternalTextureBase* DeviceBase::APICreateErrorExternalTexture() {
