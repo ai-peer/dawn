@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b103fce_69714810",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T14:36:58Z",
+      "side": 1,
+      "message": "While easier, I think losing the extra info for what we have right now would be a shame.",
+      "parentUuid": "0159c05d_9fcd70d5",
+      "range": {
+        "startLine": 690,
+        "startChar": 21,
+        "endLine": 690,
+        "endChar": 52
+      },
+      "revId": "f641eccc6caba6676f3ccdec2c348f8c408a8685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "451b4563_cde17d36",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
