@@ -16,6 +16,24 @@
       "message": "Reviewing as child CL is up for review.",
       "revId": "9a6198eb353f36f0b0b8eda81255d79f903f3fa2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f594da5_ef943c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T22:03:58Z",
+      "side": 1,
+      "message": "Oh wait - there\u0027s no reviewers assigned to the child change. Ignore me!",
+      "parentUuid": "8f462912_f05c11d2",
+      "revId": "9a6198eb353f36f0b0b8eda81255d79f903f3fa2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
