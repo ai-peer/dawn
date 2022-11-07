@@ -7,6 +7,7 @@
 * `textureDimensions()`, `textureNumLayers()` and `textureNumLevels()` now return unsigned integers / vectors. [tint:1526](crbug.com/tint/1526)
 * The `@stage` attribute has been removed. The short forms should be used
   instead (`@vertex`, `@fragment`, or `@compute`). [tint:1503](crbug.com/tint/1503)
+* Reserved words are now an error instead of a deprecation. [tint:1463](crbug.com/tint/1463)
 
 ### New features
 
