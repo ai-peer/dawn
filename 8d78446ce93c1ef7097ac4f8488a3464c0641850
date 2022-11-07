@@ -16,6 +16,46 @@
       "message": "Please take a look, thanks",
       "revId": "8d78446ce93c1ef7097ac4f8488a3464c0641850",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fa1ea7e_43185bfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T16:41:11Z",
+      "side": 1,
+      "message": "Thank you, and sorry for all the back and forth on this!",
+      "revId": "8d78446ce93c1ef7097ac4f8488a3464c0641850",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769482d8_864858e1",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T16:41:11Z",
+      "side": 1,
+      "message": "Please use a `TINT_ICE`, so you can put the error into `b.Diagnostics()`",
+      "range": {
+        "startLine": 466,
+        "startChar": 8,
+        "endLine": 466,
+        "endChar": 19
+      },
+      "revId": "8d78446ce93c1ef7097ac4f8488a3464c0641850",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
