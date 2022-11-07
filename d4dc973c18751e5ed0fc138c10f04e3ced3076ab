@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d849791e_1cb5a68b",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-07T21:17:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8da4c2ce_2d7f78b5",
+      "revId": "d4dc973c18751e5ed0fc138c10f04e3ced3076ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da95eb6c_de90e72e",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-07T21:12:19Z",
       "side": 1,
       "message": "Why bitwise operators instead of logical?",
+      "revId": "d4dc973c18751e5ed0fc138c10f04e3ced3076ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83705a9e_bfa5a40d",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1972,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-07T21:17:37Z",
+      "side": 1,
+      "message": "Because they\u0027re probably faster - you don\u0027t need to break them into conditionals.",
+      "parentUuid": "da95eb6c_de90e72e",
       "revId": "d4dc973c18751e5ed0fc138c10f04e3ced3076ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
