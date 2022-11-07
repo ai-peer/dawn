@@ -135,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5566ee78_e2ac9563",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T16:58:07Z",
+      "side": 1,
+      "message": "Yeah, I think this is correct. Good spot.\nMight be good to pull this out to a separate change and test highlighting the fix.",
+      "parentUuid": "7d3ffd10_6c4bcca0",
+      "range": {
+        "startLine": 470,
+        "startChar": 64,
+        "endLine": 470,
+        "endChar": 69
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "970e7788_36fcddc7",
