@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0159c05d_9fcd70d5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T14:07:17Z",
+      "side": 1,
+      "message": "Another option would be not to mention the operator at all, and just say that an overflow occured. That would be much simpler at this point, and we can expand this later to make it more specific?",
+      "parentUuid": "ccc7ea14_78fc151c",
+      "range": {
+        "startLine": 690,
+        "startChar": 21,
+        "endLine": 690,
+        "endChar": 52
+      },
+      "revId": "f641eccc6caba6676f3ccdec2c348f8c408a8685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "451b4563_cde17d36",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-07T13:21:18Z",
       "side": 1,
       "message": "Why do we need this? Can\u0027t you inline the vector as an argument?",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1876,
+        "endChar": 61
+      },
+      "revId": "f641eccc6caba6676f3ccdec2c348f8c408a8685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c54cb2df_90e8c9b8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T14:07:17Z",
+      "side": 1,
+      "message": "Yeah, sorry, this happened when I tried inlining the call with `utils::Vector{x.Get(), y.Get(), z.Get()}` as an arg, which failed because it would require covariance, but `sem::Constant` is not a `Castable`. Will clean up.",
+      "parentUuid": "451b4563_cde17d36",
       "range": {
         "startLine": 1875,
         "startChar": 0,
