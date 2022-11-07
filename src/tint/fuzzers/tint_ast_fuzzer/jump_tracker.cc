@@ -29,7 +29,7 @@
 namespace tint::fuzzers::ast_fuzzer {
 
 JumpTracker::JumpTracker(const Program& program) {
-    // Consider every AST node, looking for break, return and discard statements.
+    // Consider every AST node, looking for break and return statements.
     for (auto* node : program.ASTNodes().Objects()) {
         auto* stmt = node->As<ast::Statement>();
         if (stmt == nullptr) {
@@ -63,9 +63,9 @@ JumpTracker::JumpTracker(const Program& program) {
                 }
                 candidate_statements.insert(current);
             }
-        } else if (stmt->As<ast::ReturnStatement>() || stmt->As<ast::DiscardStatement>()) {
-            // Walk up the AST from the return or discard statement, recording that every node
-            // encountered along the way contains a return/discard.
+        } else if (stmt->As<ast::ReturnStatement>()) {
+            // Walk up the AST from the return statement, recording that every node encountered
+            // along the way contains a return.
             auto& target_set = stmt->As<ast::ReturnStatement>() ? contains_return_
                                                                 : contains_intraprocedural_discard_;
             const ast::Statement* current = stmt;
