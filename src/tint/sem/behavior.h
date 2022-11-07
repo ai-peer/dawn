@@ -26,7 +26,6 @@ enum class Behavior {
     kDiscard,
     kBreak,
     kContinue,
-    kFallthrough,
     kNext,
 };
 
