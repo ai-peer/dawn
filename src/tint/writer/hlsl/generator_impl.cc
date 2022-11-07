@@ -65,7 +65,6 @@
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/unshadow.h"
-#include "src/tint/transform/unwind_discard_functions.h"
 #include "src/tint/transform/vectorize_scalar_matrix_initializers.h"
 #include "src/tint/transform/zero_init_workgroup_memory.h"
 #include "src/tint/utils/defer.h"
@@ -213,7 +212,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::NumWorkgroupsFromUniform>();
     manager.Add<transform::ExpandCompoundAssignment>();
     manager.Add<transform::PromoteSideEffectsToDecl>();
-    manager.Add<transform::UnwindDiscardFunctions>();
     manager.Add<transform::VectorizeScalarMatrixInitializers>();
     manager.Add<transform::SimplifyPointers>();
     manager.Add<transform::RemovePhonies>();
