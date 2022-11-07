@@ -1,5 +1,52 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6705d59_972d991e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T14:32:19Z",
+      "side": 1,
+      "message": "übernit: `constexpr uint32_t`",
+      "range": {
+        "startLine": 2060,
+        "startChar": 4,
+        "endLine": 2060,
+        "endChar": 12
+      },
+      "revId": "11e7aa9274cf67c0345bf8b3fb772413501ce654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bda266_ff8b770c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-07T14:32:19Z",
+      "side": 1,
+      "message": "übernit: 0\u0027s here are redundant, but I appreciate you might find this clearer.",
+      "range": {
+        "startLine": 2060,
+        "startChar": 22,
+        "endLine": 2060,
+        "endChar": 29
+      },
+      "revId": "11e7aa9274cf67c0345bf8b3fb772413501ce654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
