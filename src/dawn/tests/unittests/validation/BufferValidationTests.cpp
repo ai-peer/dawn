@@ -833,13 +833,19 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer_OOM) {
 
     uint64_t kStupidLarge = uint64_t(1) << uint64_t(63);
 
-    wgpu::Buffer buffer;
-    ASSERT_DEVICE_ERROR(buffer = BufferMappedAtCreation(
-                            kStupidLarge, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
+    if (UsesWire()) {
+        BufferMappedAtCreation(kStupidLarge,
+                               wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead);
+    } else {
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR(
+            buffer = BufferMappedAtCreation(
+                kStupidLarge, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-    // GetMappedRange after mappedAtCreation OOM case returns nullptr.
-    ASSERT_EQ(buffer.GetConstMappedRange(), nullptr);
-    ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
+        // GetMappedRange after mappedAtCreation OOM case returns nullptr.
+        ASSERT_EQ(buffer.GetConstMappedRange(), nullptr);
+        ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
+    }
 }
 
 // Test validation of the GetMappedRange parameters
