@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378f9c07_3a39293b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T22:09:04Z",
+      "side": 1,
+      "message": "PTAL. I kidna took the big hammer to this and the tests tha failed talking about fallthrough. We may want to file a bug to handle empty default fallthrough in the spirv-reader?",
+      "revId": "343721877d6ac59826b25d4c1d0c1bce0cd3098b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
