@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e87bb233_b85d7971",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T18:55:46Z",
+      "side": 1,
+      "message": "As discussed offline, I\u0027ll do this as a follow-up, as I\u0027ll tackle it as a larger change: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1751",
+      "parentUuid": "2b103fce_69714810",
+      "range": {
+        "startLine": 690,
+        "startChar": 21,
+        "endLine": 690,
+        "endChar": 52
+      },
+      "revId": "f641eccc6caba6676f3ccdec2c348f8c408a8685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "451b4563_cde17d36",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "Yeah, sorry, this happened when I tried inlining the call with `utils::Vector{x.Get(), y.Get(), z.Get()}` as an arg, which failed because it would require covariance, but `sem::Constant` is not a `Castable`. Will clean up.",
       "parentUuid": "451b4563_cde17d36",
+      "range": {
+        "startLine": 1875,
+        "startChar": 0,
+        "endLine": 1876,
+        "endChar": 61
+      },
+      "revId": "f641eccc6caba6676f3ccdec2c348f8c408a8685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "127005da_823cf511",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1876,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-07T18:55:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c54cb2df_90e8c9b8",
       "range": {
         "startLine": 1875,
         "startChar": 0,
