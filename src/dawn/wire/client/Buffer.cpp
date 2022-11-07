@@ -33,7 +33,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
         descriptor->mappedAtCreation;
     if (mappable && descriptor->size >= std::numeric_limits<size_t>::max()) {
         device->InjectError(WGPUErrorType_OutOfMemory, "Buffer is too large for map usage");
-        return device->CreateErrorBuffer();
+        return device->CreateErrorBuffer(descriptor);
     }
 
     std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
@@ -53,7 +53,6 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
             readHandle.reset(
                 wireClient->GetMemoryTransferService()->CreateReadHandle(descriptor->size));
             if (readHandle == nullptr) {
-                device->InjectError(WGPUErrorType_OutOfMemory, "Failed to create buffer mapping");
                 return CreateError(device, descriptor);
             }
             cmd.readHandleCreateInfoLength = readHandle->SerializeCreateSize();
@@ -64,7 +63,6 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
             writeHandle.reset(
                 wireClient->GetMemoryTransferService()->CreateWriteHandle(descriptor->size));
             if (writeHandle == nullptr) {
-                device->InjectError(WGPUErrorType_OutOfMemory, "Failed to create buffer mapping");
                 return CreateError(device, descriptor);
             }
             cmd.writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
@@ -126,6 +124,8 @@ WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descr
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);
+    cmd.selfId = device->GetWireId();
+    cmd.descriptor = descriptor;
     cmd.result = buffer->GetWireHandle();
     client->SerializeCommand(cmd);
 
