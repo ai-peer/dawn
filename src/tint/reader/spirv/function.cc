@@ -25,7 +25,6 @@
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/discard_statement.h"
-#include "src/tint/ast/fallthrough_statement.h"
 #include "src/tint/ast/if_statement.h"
 #include "src/tint/ast/loop_statement.h"
 #include "src/tint/ast/return_statement.h"
@@ -2064,8 +2063,7 @@ bool FunctionEmitter::ClassifyCFGEdges() {
     // For each branch encountered, classify each edge (S,T) as:
     //    - a back-edge
     //    - a structured exit (specific ways of branching to enclosing construct)
-    //    - a normal (forward) edge, either natural control flow or a case
-    //    fallthrough
+    //    - a normal (forward) edge
     //
     // If more than one block is targeted by a normal edge, then S must be a
     // structured header.
@@ -2099,11 +2097,9 @@ bool FunctionEmitter::ClassifyCFGEdges() {
         // There should only be one backedge per backedge block.
         uint32_t num_backedges = 0;
 
-        // Track destinations for normal forward edges, either kForward
-        // or kCaseFallThrough. These count toward the need
-        // to have a merge instruction.  We also track kIfBreak edges
-        // because when used with normal forward edges, we'll need
-        // to generate a flow guard variable.
+        // Track destinations for normal forward edges. These count toward the need to have a merge
+        // instruction.  We also track kIfBreak edges because when used with normal forward edges,
+        // we'll need to generate a flow guard variable.
         utils::Vector<uint32_t, 4> normal_forward_edges;
         utils::Vector<uint32_t, 4> if_break_edges;
 
@@ -2205,31 +2201,16 @@ bool FunctionEmitter::ClassifyCFGEdges() {
                     }
                 }
 
-                // A forward edge into a case construct that comes from something
-                // other than the OpSwitch is actually a fallthrough.
-                if (edge_kind == EdgeKind::kForward) {
-                    const auto* switch_construct =
-                        (dest_info->case_head_for ? dest_info->case_head_for
-                                                  : dest_info->default_head_for);
-                    if (switch_construct != nullptr) {
-                        if (src != switch_construct->begin_id) {
-                            edge_kind = EdgeKind::kCaseFallThrough;
-                        }
-                    }
-                }
-
                 // The edge-kind has been finalized.
 
-                if ((edge_kind == EdgeKind::kForward) ||
-                    (edge_kind == EdgeKind::kCaseFallThrough)) {
+                if (edge_kind == EdgeKind::kForward) {
                     normal_forward_edges.Push(dest);
                 }
                 if (edge_kind == EdgeKind::kIfBreak) {
                     if_break_edges.Push(dest);
                 }
 
-                if ((edge_kind == EdgeKind::kForward) ||
-                    (edge_kind == EdgeKind::kCaseFallThrough)) {
+                if (edge_kind == EdgeKind::kForward) {
                     // Check for an invalid forward exit out of this construct.
                     if (dest_info->pos > src_construct.end_pos) {
                         // In most cases we're bypassing the merge block for the source
@@ -2279,6 +2260,19 @@ bool FunctionEmitter::ClassifyCFGEdges() {
                                << (dest_construct.kind == Construct::kContinue ? "continue target "
                                                                                : "header ")
                                << dest_construct.begin_id << " (dominance rule violated)";
+                    }
+                }
+
+                // A forward edge into a case construct that comes from something
+                // other than the OpSwitch is actually a fallthrough.
+                if (edge_kind == EdgeKind::kForward) {
+                    const auto* switch_construct =
+                        (dest_info->case_head_for ? dest_info->case_head_for
+                                                  : dest_info->default_head_for);
+                    if (switch_construct != nullptr) {
+                        if (src != switch_construct->begin_id) {
+                            return Fail() << "Fallthrough not permitted in WGSL";
+                        }
                     }
                 }
             }  // end forward edge
@@ -2339,7 +2333,6 @@ bool FunctionEmitter::FindIfSelectionInternalHeaders() {
         //  - kLoopBreak ; record this for later special processing
         //  - kLoopContinue ; record this for later special processing
         //  - kIfBreak; normal case, may require a guard variable.
-        //  - kFallThrough; invalid exit from the selection
         //  - kForward; normal case
 
         if_header_info->true_kind = if_header_info->succ_edge[true_head];
@@ -3149,10 +3142,6 @@ bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info) {
                 return true;
             }
 
-            const EdgeKind true_kind = block_info.succ_edge.find(true_dest)->second;
-            const EdgeKind false_kind = block_info.succ_edge.find(false_dest)->second;
-            auto* const true_info = GetBlockInfo(true_dest);
-            auto* const false_info = GetBlockInfo(false_dest);
             auto* cond = MakeExpression(terminator.GetSingleWordInOperand(0)).expr;
             if (!cond) {
                 return false;
@@ -3161,19 +3150,7 @@ bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info) {
             // We have two distinct destinations. But we only get here if this
             // is a normal terminator; in particular the source block is *not* the
             // start of an if-selection or a switch-selection.  So at most one branch
-            // is a kForward, kCaseFallThrough, or kIfBreak.
-
-            // The fallthrough case is special because WGSL requires the fallthrough
-            // statement to be last in the case clause.
-            if (true_kind == EdgeKind::kCaseFallThrough) {
-                return EmitConditionalCaseFallThrough(block_info, cond, false_kind, *false_info,
-                                                      true);
-            } else if (false_kind == EdgeKind::kCaseFallThrough) {
-                return EmitConditionalCaseFallThrough(block_info, cond, true_kind, *true_info,
-                                                      false);
-            }
-
-            // At this point, at most one edge is kForward or kIfBreak.
+            // is a kForward, or kIfBreak.
 
             // Emit an 'if' statement to express the *other* branch as a conditional
             // break or continue.  Either or both of these could be nullptr.
@@ -3182,6 +3159,8 @@ bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info) {
             // requiring a flow guard, then get that flow guard name too.  It will
             // come from at most one of these two branches.
             std::string flow_guard;
+            auto* const true_info = GetBlockInfo(true_dest);
+            auto* const false_info = GetBlockInfo(false_dest);
             auto* true_branch = MakeBranchDetailed(block_info, *true_info, false, &flow_guard);
             auto* false_branch = MakeBranchDetailed(block_info, *false_info, false, &flow_guard);
 
@@ -3272,8 +3251,6 @@ const ast::Statement* FunctionEmitter::MakeBranchDetailed(const BlockInfo& src_i
             // merge block is implicit.
             break;
         }
-        case EdgeKind::kCaseFallThrough:
-            return create<ast::FallthroughStatement>(Source{});
         case EdgeKind::kForward:
             // Unconditional forward branch is implicit.
             break;
@@ -3301,45 +3278,6 @@ const ast::Statement* FunctionEmitter::MakeSimpleIf(const ast::Expression* condi
     auto* if_stmt = create<ast::IfStatement>(Source{}, condition, if_block, else_block);
 
     return if_stmt;
-}
-
-bool FunctionEmitter::EmitConditionalCaseFallThrough(const BlockInfo& src_info,
-                                                     const ast::Expression* cond,
-                                                     EdgeKind other_edge_kind,
-                                                     const BlockInfo& other_dest,
-                                                     bool fall_through_is_true_branch) {
-    // In WGSL, the fallthrough statement must come last in the case clause.
-    // So we'll emit an if statement for the other branch, and then emit
-    // the fallthrough.
-
-    // We have two distinct destinations. But we only get here if this
-    // is a normal terminator; in particular the source block is *not* the
-    // start of an if-selection.  So at most one branch is a kForward or
-    // kCaseFallThrough.
-    if (other_edge_kind == EdgeKind::kForward) {
-        return Fail() << "internal error: normal terminator OpBranchConditional has "
-                         "both forward and fallthrough edges";
-    }
-    if (other_edge_kind == EdgeKind::kIfBreak) {
-        return Fail() << "internal error: normal terminator OpBranchConditional has "
-                         "both IfBreak and fallthrough edges.  Violates nesting rule";
-    }
-    if (other_edge_kind == EdgeKind::kBack) {
-        return Fail() << "internal error: normal terminator OpBranchConditional has "
-                         "both backedge and fallthrough edges.  Violates nesting rule";
-    }
-    auto* other_branch = MakeForcedBranch(src_info, other_dest);
-    if (other_branch == nullptr) {
-        return Fail() << "internal error: expected a branch for edge-kind " << int(other_edge_kind);
-    }
-    if (fall_through_is_true_branch) {
-        AddStatement(MakeSimpleIf(cond, nullptr, other_branch));
-    } else {
-        AddStatement(MakeSimpleIf(cond, other_branch, nullptr));
-    }
-    AddStatement(create<ast::FallthroughStatement>(Source{}));
-
-    return success();
 }
 
 bool FunctionEmitter::EmitStatementsInBasicBlock(const BlockInfo& block_info,
