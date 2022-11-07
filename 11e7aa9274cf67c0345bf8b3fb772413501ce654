@@ -45,6 +45,54 @@
       },
       "revId": "11e7aa9274cf67c0345bf8b3fb772413501ce654",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3a7a24_aa9f70b9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T14:34:36Z",
+      "side": 1,
+      "message": "Going to skip this one, matching up the size makes this easier to me to follow.",
+      "parentUuid": "73bda266_ff8b770c",
+      "range": {
+        "startLine": 2060,
+        "startChar": 22,
+        "endLine": 2060,
+        "endChar": 29
+      },
+      "revId": "11e7aa9274cf67c0345bf8b3fb772413501ce654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d9e467_3297a5ab",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 2060,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-07T14:34:36Z",
+      "side": 1,
+      "message": "Will do in a followup.",
+      "parentUuid": "a6705d59_972d991e",
+      "range": {
+        "startLine": 2060,
+        "startChar": 4,
+        "endLine": 2060,
+        "endChar": 12
+      },
+      "revId": "11e7aa9274cf67c0345bf8b3fb772413501ce654",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
