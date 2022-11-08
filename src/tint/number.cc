@@ -22,6 +22,23 @@
 #include "src/tint/debug.h"
 
 namespace tint {
+namespace {
+
+constexpr uint16_t kF16Nan = 0x7e00u;
+constexpr uint16_t kF16PosInf = 0x7c00u;
+constexpr uint16_t kF16NegInf = 0xfc00u;
+
+constexpr uint16_t kF16SignMask = 0x8000u;
+constexpr uint16_t kF16ExpMask = 0x7c00u;
+constexpr uint16_t kF16MantissaMask = 0x03ffu;
+
+constexpr uint32_t kF16MantissaBisNumber = 10;
+constexpr uint32_t kF16ExpBias = 15;
+
+constexpr uint32_t kF32MantissaBisNumber = 23;
+constexpr uint32_t kF32ExpBias = 127;
+
+}  // namespace
 
 std::ostream& operator<<(std::ostream& out, ConversionFailure failure) {
     switch (failure) {
@@ -205,10 +222,6 @@ f16::type f16::Quantize(f16::type value) {
 }
 
 uint16_t f16::BitsRepresentation() const {
-    constexpr uint16_t f16_nan = 0x7e00u;
-    constexpr uint16_t f16_pos_inf = 0x7c00u;
-    constexpr uint16_t f16_neg_inf = 0xfc00u;
-
     // Assert we use binary32 (i.e. float) as underlying type, which has 4 bytes.
     static_assert(std::is_same<f16::type, float>());
 
@@ -216,11 +229,11 @@ uint16_t f16::BitsRepresentation() const {
     // Inf, or exactly representable by normal or subnormal f16.
 
     if (std::isnan(value)) {
-        return f16_nan;
+        return kF16Nan;
     }
 
     if (std::isinf(value)) {
-        return value > 0 ? f16_pos_inf : f16_neg_inf;
+        return value > 0 ? kF16PosInf : kF16NegInf;
     }
 
     // Now quantized_value must be a finite f16 exactly-representable value.
@@ -241,22 +254,14 @@ uint16_t f16::BitsRepresentation() const {
     constexpr uint32_t f32_sign_mask = 0x80000000u;
     constexpr uint32_t f32_exp_mask = 0x7f800000u;
     constexpr uint32_t f32_mantissa_mask = 0x007fffffu;
-    constexpr uint32_t f32_mantissa_bis_number = 23;
-    constexpr uint32_t f32_exp_bias = 127;
-
-    constexpr uint16_t f16_sign_mask = 0x8000u;
-    constexpr uint16_t f16_exp_mask = 0x7c00u;
-    constexpr uint16_t f16_mantissa_mask = 0x03ffu;
-    constexpr uint32_t f16_mantissa_bis_number = 10;
-    constexpr uint32_t f16_exp_bias = 15;
 
     uint32_t f32_bit_pattern;
     memcpy(&f32_bit_pattern, &value, 4);
-    uint32_t f32_biased_exponent = (f32_bit_pattern & f32_exp_mask) >> f32_mantissa_bis_number;
+    uint32_t f32_biased_exponent = (f32_bit_pattern & f32_exp_mask) >> kF32MantissaBisNumber;
     uint32_t f32_mantissa = f32_bit_pattern & f32_mantissa_mask;
 
     uint16_t f16_sign_part = static_cast<uint16_t>((f32_bit_pattern & f32_sign_mask) >> 16);
-    TINT_ASSERT(Semantic, (f16_sign_part & ~f16_sign_mask) == 0);
+    TINT_ASSERT(Semantic, (f16_sign_part & ~kF16SignMask) == 0);
 
     if ((f32_bit_pattern & ~f32_sign_mask) == 0) {
         // +/- zero
@@ -266,14 +271,14 @@ uint16_t f16::BitsRepresentation() const {
     if ((min_f32_biased_exp_for_f16_normal_number <= f32_biased_exponent) &&
         (f32_biased_exponent <= max_f32_biased_exp_for_f16_normal_number)) {
         // Normal f16
-        uint32_t f16_biased_exponent = f32_biased_exponent - f32_exp_bias + f16_exp_bias;
+        uint32_t f16_biased_exponent = f32_biased_exponent - kF32ExpBias + kF16ExpBias;
         uint16_t f16_exp_part =
-            static_cast<uint16_t>(f16_biased_exponent << f16_mantissa_bis_number);
+            static_cast<uint16_t>(f16_biased_exponent << kF16MantissaBisNumber);
         uint16_t f16_mantissa_part = static_cast<uint16_t>(
-            f32_mantissa >> (f32_mantissa_bis_number - f16_mantissa_bis_number));
+            f32_mantissa >> (kF32MantissaBisNumber - kF16MantissaBisNumber));
 
-        TINT_ASSERT(Semantic, (f16_exp_part & ~f16_exp_mask) == 0);
-        TINT_ASSERT(Semantic, (f16_mantissa_part & ~f16_mantissa_mask) == 0);
+        TINT_ASSERT(Semantic, (f16_exp_part & ~kF16ExpMask) == 0);
+        TINT_ASSERT(Semantic, (f16_mantissa_part & ~kF16MantissaMask) == 0);
 
         return f16_sign_part | f16_exp_part | f16_mantissa_part;
     }
@@ -292,10 +297,10 @@ uint16_t f16::BitsRepresentation() const {
         // leading 1 added.
         uint16_t f16_mantissa_part =
             static_cast<uint16_t>((f32_mantissa | (f32_mantissa_mask + 1)) >>
-                                  (f32_mantissa_bis_number + 1 - f16_valid_mantissa_bits));
+                                  (kF32MantissaBisNumber + 1 - f16_valid_mantissa_bits));
 
         TINT_ASSERT(Semantic, (1 <= f16_valid_mantissa_bits) &&
-                                  (f16_valid_mantissa_bits <= f16_mantissa_bis_number));
+                                  (f16_valid_mantissa_bits <= kF16MantissaBisNumber));
         TINT_ASSERT(Semantic, (f16_mantissa_part & ~((1u << f16_valid_mantissa_bits) - 1)) == 0);
         TINT_ASSERT(Semantic, (f16_mantissa_part != 0));
 
@@ -305,7 +310,44 @@ uint16_t f16::BitsRepresentation() const {
     // Neither zero, subnormal f16 or normal f16, shall never hit.
     tint::diag::List diag;
     TINT_UNREACHABLE(Semantic, diag);
-    return f16_nan;
+    return kF16Nan;
+}
+
+// static
+Number<detail::NumberKindF16> f16::FromBits(uint16_t bits) {
+  if (bits == kF16Nan) {
+    return f16(std::numeric_limits<float>::quiet_NaN());
+  }
+  if (bits == kF16PosInf) {
+    return f16(std::numeric_limits<float>::infinity());
+  }
+  if (bits == kF16NegInf) {
+    return f16(-std::numeric_limits<float>::infinity());
+  }
+
+  auto f16_sign = bits & kF16SignMask;
+  if ((bits & ~kF16SignMask) == 0) {
+      // +/- zero
+      return f16(f16_sign > 0 ? -0.f : 0.f);
+  }
+
+  auto f16_biased_exp = bits & kF16ExpMask;
+  auto f16_mantissa = bits & kF16MantissaMask;
+
+  uint32_t val = 0;
+  // Subnormal number
+  if (f16_biased_exp == 0) {
+      val = (uint32_t(f16_sign) << 16) | f16_mantissa;
+  } else {
+    auto f32_biased_exp = (f16_biased_exp >> kF16MantissaBisNumber) - kF16ExpBias + kF32ExpBias;
+    auto f32_mantissa = uint32_t(f16_mantissa) << (kF32MantissaBisNumber - kF16MantissaBisNumber);
+    val = (uint32_t(f16_sign) << 16) | (uint32_t(f32_biased_exp) << kF32MantissaBisNumber) |
+      f32_mantissa;
+  }
+
+  float f = 0;
+  memcpy(&f, &val, sizeof(float));
+  return f16(f);
 }
 
 }  // namespace tint

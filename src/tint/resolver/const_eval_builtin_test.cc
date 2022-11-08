@@ -1248,7 +1248,7 @@ INSTANTIATE_TEST_SUITE_P(  //
 
 std::vector<Case> Pack4x8unormCases() {
     return {
-        C({Vec(f32(0), f32(0), f32(0), f32(0))}, Val(u32(0x0000'0000))),
+        C({Vec(f32(), f32(0), f32(0), f32(0))}, Val(u32(0x0000'0000))),
         C({Vec(f32(0), f32(0), f32(0), f32(1))}, Val(u32(0xff00'0000))),
         C({Vec(f32(0), f32(0), f32(1), f32(0))}, Val(u32(0x00ff'0000))),
         C({Vec(f32(0), f32(1), f32(0), f32(0))}, Val(u32(0x0000'ff00))),
@@ -1262,6 +1262,24 @@ INSTANTIATE_TEST_SUITE_P(  //
     ResolverConstEvalBuiltinTest,
     testing::Combine(testing::Values(sem::BuiltinType::kPack4X8Unorm),
                      testing::ValuesIn(Pack4x8unormCases())));
+
+std::vector<Case> Pack2x16floatCases() {
+    return {
+        C({Vec(f32(f16::Lowest()), f32(f16::Highest()))}, Val(u32(0x7bff'fbff))),
+        C({Vec(f32(1), f32(-1))}, Val(u32(0xbc00'3c00))),
+        C({Vec(f32(0), f32(0))}, Val(u32(0x0000'0000))),
+        C({Vec(f32(10), f32(-10.5))}, Val(u32(0xc940'4900))),
+
+        E({Vec(f32(0), f32::Highest())}, "12:34 error: Value outside range of f16"),
+        E({Vec(f32::Lowest(), f32(0))}, "12:34 error: Value outside range of f16"),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Pack2x16float,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kPack2X16Float),
+                     testing::ValuesIn(Pack2x16floatCases())));
+
 
 std::vector<Case> Pack2x16snormCases() {
     return {
@@ -1505,6 +1523,20 @@ INSTANTIATE_TEST_SUITE_P(  //
     ResolverConstEvalBuiltinTest,
     testing::Combine(testing::Values(sem::BuiltinType::kUnpack4X8Unorm),
                      testing::ValuesIn(Unpack4x8unormCases())));
+
+std::vector<Case> Unpack2x16floatCases() {
+    return {
+        C({Val(u32(0x7bff'fbff))}, Vec(f32(f16::Lowest()), f32(f16::Highest()))),
+        C({Val(u32(0xbc00'3c00))}, Vec(f32(1), f32(-1))),
+        C({Val(u32(0x0000'0000))}, Vec(f32(0), f32(0))),
+        C({Val(u32(0xc940'4900))}, Vec(f32(10), f32(-10.5))),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Unpack2x16float,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kUnpack2X16Float),
+                     testing::ValuesIn(Unpack2x16floatCases())));
 
 std::vector<Case> Unpack2x16snormCases() {
     return {
