@@ -16,6 +16,24 @@
       "message": "could we static_assert that HandleType is uint64_t ?\n\nthis path would be taken if it were uint32_t which would not be the same as a reinterpret cast since it would expand from 32 to 64 bits",
       "revId": "be60ace9f00348e7c3d1ddf45cbd4b4b616c1dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e1eb174_155aedaa",
+        "filename": "src/dawn/native/vulkan/UtilsVulkan.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-08T20:10:26Z",
+      "side": 1,
+      "message": "You\u0027re right. I changed the constexpr condition to `std::is_same_v` so that it only compiles for when HandleType is uint64_t.",
+      "parentUuid": "b1adf3c7_4d88ea2c",
+      "revId": "be60ace9f00348e7c3d1ddf45cbd4b4b616c1dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
