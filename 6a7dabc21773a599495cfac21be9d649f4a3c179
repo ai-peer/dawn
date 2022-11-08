@@ -159,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f7fb98f_8bcbbb17",
+        "filename": "src/tint/transform/std140.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-08T02:28:16Z",
+      "side": 1,
+      "message": "A problem is that this fixing is using `Align` instead of `Size` of the  matrix vectors to calculate the position of the last column vector in Std140 transform, but the `Align` and `Size` are only different with `vec3\u003cT\u003e`, while for `f32` Std140 transform only works on `matCx2\u003cf32\u003e`, make it unsuitable to expose and test this bug. However Std140 should works on all shape of `f16` matrices, so with `matCx3\u003cf16\u003e` matrix cases in uniform buffer in this patch, this bug would be exposed and the fixing would have been tested.\n\nA previous try on fixing this bug is https://dawn-review.googlesource.com/c/dawn/+/102109 (also has some explanation in the CL description), however I could not figure out how to test the fix alone.",
+      "parentUuid": "5566ee78_e2ac9563",
+      "range": {
+        "startLine": 470,
+        "startChar": 64,
+        "endLine": 470,
+        "endChar": 69
+      },
+      "revId": "6a7dabc21773a599495cfac21be9d649f4a3c179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "970e7788_36fcddc7",
