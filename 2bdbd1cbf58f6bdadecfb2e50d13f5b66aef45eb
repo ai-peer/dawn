@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f01bf41_a0dfb8cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-08T07:39:02Z",
+      "side": 1,
+      "message": "It seems that Kokoro on Linux is broken, log:\n```\ndoxygen-1.8.18 is not available. Available versions:\n  doxygen-1.9.5\n```\n\nhttps://source.cloud.google.com/results/invocations/22e559e0-b36b-42d1-8d72-c895719a8e8e/targets/dawn%2Flinux%2Fcmake-clang-debug-asan%2Fpresubmit/log",
+      "revId": "2bdbd1cbf58f6bdadecfb2e50d13f5b66aef45eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
