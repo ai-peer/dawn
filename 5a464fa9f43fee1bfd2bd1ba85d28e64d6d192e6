@@ -69,6 +69,23 @@
       "parentUuid": "0ee58375_3ebe5cd6",
       "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce02bad8_87b106f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-08T11:30:08Z",
+      "side": 1,
+      "message": "Good to land, once you get DXC upgraded.",
+      "revId": "5a464fa9f43fee1bfd2bd1ba85d28e64d6d192e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
