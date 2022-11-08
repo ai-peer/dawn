@@ -143,6 +143,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40e7a8e1_127b9c48",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-08T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a33f498a_1c35c09a",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 96,
+        "endChar": 5
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0320268_f3062931",
@@ -204,6 +228,30 @@
       "side": 1,
       "message": "The number of dependencies between transforms is becoming a major concern.\nIsn\u0027t it fairly trivial to not require the `PromoteSideEffectsToDecl ` transform if you were to use `HoistToDeclBefore::InsertBefore` ?\n\nAt the very least, please can we have the dependent transforms listed in the header?",
       "parentUuid": "e8fb8066_3d59e4e4",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 58
+      },
+      "revId": "5b7cb3ba6bf19093c3d76b5cdb426cd7ac685272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac70e6d9_76fb16c4",
+        "filename": "src/tint/transform/demote_to_helper.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-08T20:49:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65055d1c_5206da5d",
       "range": {
         "startLine": 159,
         "startChar": 0,
