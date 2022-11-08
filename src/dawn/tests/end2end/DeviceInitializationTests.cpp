@@ -16,6 +16,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/GPUInfo.h"
 #include "dawn/dawn_proc.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/SystemUtils.h"
@@ -95,6 +96,13 @@ TEST_F(DeviceInitializationTest, DeviceOutlivesInstance) {
             wgpu::AdapterProperties properties;
             adapter.GetProperties(&properties);
 
+            // TODO(dawn:1589): Vulkan device creation is aborted on Intel GPUs because of Vulkan
+            // loader bug, waiting for upstream fix to be rolled in Dawn.
+            if (gpu_info::IsIntel(properties.vendorID) &&
+                properties.backendType == wgpu::BackendType::Vulkan) {
+                continue;
+            }
+
             if (properties.deviceID == desiredProperties.deviceID &&
                 properties.vendorID == desiredProperties.vendorID &&
                 properties.adapterType == desiredProperties.adapterType &&
@@ -144,6 +152,13 @@ TEST_F(DeviceInitializationTest, AdapterOutlivesInstance) {
         for (dawn::native::Adapter& nativeAdapter : instance->GetAdapters()) {
             wgpu::AdapterProperties properties;
             nativeAdapter.GetProperties(&properties);
+
+            // TODO(dawn:1589): Vulkan device creation is aborted on Intel GPUs because of Vulkan
+            // loader bug, waiting for upstream fix to be rolled in Dawn.
+            if (gpu_info::IsIntel(properties.vendorID) &&
+                properties.backendType == wgpu::BackendType::Vulkan) {
+                continue;
+            }
 
             if (properties.deviceID == desiredProperties.deviceID &&
                 properties.vendorID == desiredProperties.vendorID &&
