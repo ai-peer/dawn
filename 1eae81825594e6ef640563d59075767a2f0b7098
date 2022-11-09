@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6ab7ef_311430c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2022-11-09T19:08:05Z",
+      "side": 1,
+      "message": "PTAL, dawn-win10-x86-deps-rel was the wrong config, dawn-try-win10-x86-rel is the 32-bit config I meant to test against.",
+      "revId": "1eae81825594e6ef640563d59075767a2f0b7098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
