@@ -1,0 +1,130 @@
+commands {
+  instanceRequestAdapter {
+    instanceId: 0
+    requestSerial: 0
+    options {
+      compatibleSurface: 0
+      powerPreference: PowerPreferenceLowPower
+      forceFallbackAdapter: true
+    }
+  }
+}
+
+commands {
+  instanceRequestAdapter {
+    instanceId: 0
+    requestSerial: 0
+    options {
+      compatibleSurface: 0
+      powerPreference: PowerPreferenceLowPower
+      forceFallbackAdapter: true
+    }
+  }
+}
+
+commands {
+  adapterRequestDevice {
+    adapterId: 0
+    requestSerial: 8
+    desc {
+      requiredFeaturesCount: 0
+      requiredLimits {
+        limits {
+          maxTextureDimension1D: 0
+          maxTextureDimension2D: 0
+          maxTextureDimension3D: 0
+          maxTextureArrayLayers: 0
+          maxBindGroups: 0
+          maxBindingsPerBindGroup: 0
+          maxDynamicUniformBuffersPerPipelineLayout: 0
+          maxDynamicStorageBuffersPerPipelineLayout: 0
+          maxSampledTexturesPerShaderStage: 0
+          maxSamplersPerShaderStage: 0
+          maxStorageBuffersPerShaderStage: 0
+          maxStorageTexturesPerShaderStage: 0
+          maxUniformBuffersPerShaderStage: 0
+          maxUniformBufferBindingSize: 0
+          maxStorageBufferBindingSize: 0
+          minUniformBufferOffsetAlignment: 256
+          minStorageBufferOffsetAlignment: 256
+          maxVertexBuffers: 5
+          maxBufferSize: 0
+          maxVertexAttributes: 0
+          maxVertexBufferArrayStride: 0
+          maxInterStageShaderComponents: 0
+          maxInterStageShaderVariables: 0
+          maxColorAttachments: 0
+          maxComputeWorkgroupStorageSize: 0
+          maxComputeInvocationsPerWorkgroup: 0
+          maxComputeWorkgroupSizeX: 0
+          maxComputeWorkgroupSizeY: 5
+          maxComputeWorkgroupSizeZ: 2
+          maxComputeWorkgroupsPerDimension: 0
+        }
+      }
+      defaultQueue {
+      }
+    }
+  }
+}
+
+commands {
+  adapterRequestDevice {
+    adapterId: 1
+    requestSerial: 8
+    desc {
+      requiredFeaturesCount: 0
+      requiredLimits {
+        limits {
+          maxTextureDimension1D: 0
+          maxTextureDimension2D: 0
+          maxTextureDimension3D: 0
+          maxTextureArrayLayers: 0
+          maxBindGroups: 0
+          maxBindingsPerBindGroup: 0
+          maxDynamicUniformBuffersPerPipelineLayout: 0
+          maxDynamicStorageBuffersPerPipelineLayout: 0
+          maxSampledTexturesPerShaderStage: 0
+          maxSamplersPerShaderStage: 0
+          maxStorageBuffersPerShaderStage: 0
+          maxStorageTexturesPerShaderStage: 0
+          maxUniformBuffersPerShaderStage: 0
+          maxUniformBufferBindingSize: 0
+          maxStorageBufferBindingSize: 0
+          minUniformBufferOffsetAlignment: 256
+          minStorageBufferOffsetAlignment: 256
+          maxVertexBuffers: 5
+          maxBufferSize: 0
+          maxVertexAttributes: 0
+          maxVertexBufferArrayStride: 0
+          maxInterStageShaderComponents: 0
+          maxInterStageShaderVariables: 0
+          maxColorAttachments: 0
+          maxComputeWorkgroupStorageSize: 0
+          maxComputeInvocationsPerWorkgroup: 0
+          maxComputeWorkgroupSizeX: 0
+          maxComputeWorkgroupSizeY: 5
+          maxComputeWorkgroupSizeZ: 2
+          maxComputeWorkgroupsPerDimension: 0
+        }
+      }
+      defaultQueue {
+      }
+    }
+  }
+}
+
+
+commands {
+    deviceCreateBuffer {
+        deviceId: 0
+        desc {
+            size: 10
+            mappedAtCreation: false
+            usage: BufferUsageMapRead
+            usage: BufferUsageCopyDst
+        }
+        readHandleCreateInfoLength: 0
+        writeHandleCreateInfoLength: 0
+    }
+}
