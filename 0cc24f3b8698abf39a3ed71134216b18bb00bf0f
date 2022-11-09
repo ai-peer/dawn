@@ -47,6 +47,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0929e54e_cd105949",
+        "filename": "src/tint/resolver/call_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-09T15:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2259ddf6_78b62a90",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 47
+      },
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b625d52e_e764e6d5",
@@ -78,6 +102,24 @@
       "side": 1,
       "message": "`capture` is a bit of an overloaded term, especially when it comes to functions / lambdas.\n\nHow about:\n\n`function pointer arguments must point to a root identifier (must not point to a subset of the originating variable)`",
       "parentUuid": "b625d52e_e764e6d5",
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1706ce3_77b8ff82",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-09T15:50:44Z",
+      "side": 1,
+      "message": "Better?",
+      "parentUuid": "360bfed5_4adc56e7",
       "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
