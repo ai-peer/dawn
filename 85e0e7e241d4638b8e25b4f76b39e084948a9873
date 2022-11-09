@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "85e0e7e241d4638b8e25b4f76b39e084948a9873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "624b43f4_438be095",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T20:19:24Z",
+      "side": 1,
+      "message": "I suggest moving this out to a parent change.",
+      "revId": "85e0e7e241d4638b8e25b4f76b39e084948a9873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
