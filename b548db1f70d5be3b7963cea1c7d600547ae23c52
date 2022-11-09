@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb995a21_722a2afc",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T12:14:12Z",
+      "side": 1,
+      "message": "With the use of `HoistToDeclBefore`, is this this still true?\nIf so, please can we add a comment on the transform so this is documented?",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 91
+      },
+      "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
