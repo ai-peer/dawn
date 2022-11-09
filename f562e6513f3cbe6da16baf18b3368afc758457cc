@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0126279_fb2e736f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T18:45:38Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "f562e6513f3cbe6da16baf18b3368afc758457cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fba91610_f31236ff",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 2689,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T18:45:38Z",
+      "side": 1,
+      "message": "This was a copy before, and now it\u0027s a pointer, yea? Is that intentional?",
+      "revId": "f562e6513f3cbe6da16baf18b3368afc758457cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c2d8a9_d7fcb2cb",
+        "filename": "src/tint/utils/hashmap_base.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T18:45:38Z",
+      "side": 1,
+      "message": "remove?",
+      "revId": "f562e6513f3cbe6da16baf18b3368afc758457cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
