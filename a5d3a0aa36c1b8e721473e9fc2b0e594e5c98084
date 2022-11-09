@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de77d095_edf5d738",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 557,
+      "author": {
+        "id": 1003401
+      },
+      "writtenOn": "2022-11-09T17:04:03Z",
+      "side": 1,
+      "message": "No `;*`?",
+      "range": {
+        "startLine": 557,
+        "startChar": 115,
+        "endLine": 557,
+        "endChar": 117
+      },
+      "revId": "a5d3a0aa36c1b8e721473e9fc2b0e594e5c98084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
