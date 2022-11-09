@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb7b4aa5_4851b734",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3276,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-09T19:32:01Z",
+      "side": 0,
+      "message": "nit: would prefer to keep the enum and ICE here",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee5b348_75f84a69",
+        "filename": "src/tint/reader/spirv/function.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-09T19:32:01Z",
+      "side": 0,
+      "message": "Please keep a comment here saying that we are explicitly *not* handling the fallthrough case because of a WGSL limitation.\n\nThis set of enums matches cases enumerated in https://registry.khronos.org/SPIR-V/specs/unified1/SPIRV.html#_rules_for_structured_control_flow_constructs \n\nIt would be weird and appear to be buggy if we missed a case that was described there.\n\nIn fact my nit-level preference is to keep the enum, deduce it, and then immediately bail when we detect it being used.",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86c8a68f_1e9879d2",
+        "filename": "src/tint/reader/spirv/function_cfg_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 5939,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-09T19:32:01Z",
+      "side": 0,
+      "message": "sigh: so much hard-won knowledge.  but fine to delete.\nIf/when the feature is revived we can go back through git history to recover this.",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50622390_96e3c729",
+        "filename": "src/tint/reader/spirv/function_var_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-09T19:32:01Z",
+      "side": 0,
+      "message": "I stared at this a long time to see if the switch was essential to the bug report.\nBut phi nodes and dominance vs. lexcial scoping has thorough coverage in other spots. \n\nE.g. see the recent overhaul / generalization in https://dawn-review.googlesource.com/c/dawn/+/101220",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
