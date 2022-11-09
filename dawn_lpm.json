@@ -1,0 +1,237 @@
+{
+    "_comment": [
+        "Copyright 2019 The Dawn Authors",
+        "",
+        "Licensed under the Apache License, Version 2.0 (the \"License\");",
+        "you may not use this file except in compliance with the License.",
+        "You may obtain a copy of the License at",
+        "",
+        "    http://www.apache.org/licenses/LICENSE-2.0",
+        "",
+        "Unless required by applicable law or agreed to in writing, software",
+        "distributed under the License is distributed on an \"AS IS\" BASIS,",
+        "WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
+        "See the License for the specific language governing permissions and",
+        "limitations under the License."
+    ],
+
+    "_doc": "See docs/dawn/codegen.md",
+
+    "blocklisted_cmds_cpp": [
+        "device create render pipeline",
+        "device create render pipeline async",
+        "device create shader module",
+        "device create render pipeline",
+        "device create render pipeline async",
+        "device create shader module",
+        "surface descriptor from windows core window",
+        "surface descriptor from windows swap chain panel",
+        "surface descriptor from canvas h t m l selector",
+        "bind group layout set label",
+        "bind group set label",
+        "buffer set label",
+        "command buffer set label",
+        "command encoder set label",
+        "compute pass encoder set label",
+        "compute pipeline set label",
+        "device set label",
+        "external texture set label",
+        "pipeline layout set label",
+        "query set set label",
+        "queue set label",
+        "render bundle encoder set label",
+        "render pass encoder set label",
+        "render pipeline set label",
+        "sampler set label",
+        "shader module set label",
+        "texture set label",
+        "texture view set label",
+        "destroy object"
+    ],
+
+    "custom_cmds_proto": [
+        "device create render pipeline",
+        "device create render pipeline async",
+        "device create shader module",
+        "destroy object"
+    ],
+
+    "blocklisted_cmds_proto": [
+        "surface descriptor from windows core window",
+        "surface descriptor from windows swap chain panel",
+        "surface descriptor from canvas h t m l selector",
+        "bind group layout set label",
+        "bind group set label",
+        "buffer set label",
+        "command buffer set label",
+        "command encoder set label",
+        "compute pass encoder set label",
+        "compute pipeline set label",
+        "device set label",
+        "external texture set label",
+        "pipeline layout set label",
+        "query set set label",
+        "queue set label",
+        "render bundle encoder set label",
+        "render pass encoder set label",
+        "render pipeline set label",
+        "sampler set label",
+        "shader module set label",
+        "texture set label",
+        "texture view set label"
+    ],
+
+    "proto_type_conversions": {
+        "uint64_t": "uint64",
+        "bool": "bool",
+        "uint32_t": "uint32",
+        "double": "double",
+        "float": "float",
+        "int32_t": "int32",
+        "int64_t": "int64",
+        "uint16_t": "uint32"
+    },
+
+    "extra_info": {
+        "adapter request device": {
+            "returns": "device",
+            "types": {
+                "adapter id": "adapter"
+            }
+        },
+        "buffer descriptor": {
+            "clamps": ["size"]
+        },
+        "buffer map async": {
+            "types": {
+                "buffer id": "buffer"
+            }
+        },
+        "buffer update mapped data": {
+            "types": {
+                "buffer id": "buffer"
+            }
+        },
+        "command encoder begin compute pass": {
+            "returns": "compute pass encoder"
+        },
+        "command encoder begin render pass": {
+            "returns": "render pass encoder"
+        },
+        "command encoder finish": {
+            "returns": "command buffer"
+        },
+        "compute pipeline get bind group layout": {
+            "returns": "bind group layout"
+        },
+        "device create bind group": {
+            "returns": "bind group"
+        },
+        "device create bind group layout": {
+            "returns": "bind group layout"
+        },
+        "device create buffer": {
+            "returns": "buffer",
+            "types": {
+                "device id": "device"
+            }
+        },
+        "device create command encoder": {
+            "returns": "command encoder"
+        },
+        "device create compute pipeline": {
+            "returns": "compute pipeline"
+        },
+        "device create compute pipeline async": {
+            "returns": "compute pipeline",
+            "types": {
+                "device id": "device"
+            }
+        },
+        "device create error buffer": {
+            "returns": "buffer"
+        },
+        "device create error external texture": {
+            "returns": "external texture"
+        },
+        "device create error texture": {
+            "returns": "texture"
+        },
+        "device create external texture": {
+            "returns": "external texture"
+        },
+        "device create pipeline layout": {
+            "returns": "pipeline layout"
+        },
+        "device create query set": {
+            "returns": "query set"
+        },
+        "device create render bundle encoder": {
+            "returns": "render bundle encoder"
+        },
+        "device create sampler": {
+            "returns": "sampler"
+        },
+        "device create swap chain": {
+            "returns": "swap chain"
+        },
+        "device create texture": {
+            "returns": "texture"
+        },
+        "device get adapter": {
+            "returns": "adapter"
+        },
+        "device get queue": {
+            "returns": "queue"
+        },
+        "device pop error scope": {
+            "types": {
+                "device id": "device"
+            }
+        },
+        "instance create surface": {
+            "returns": "surface"
+        },
+        "instance request adapter": {
+            "returns": "adapter",
+            "overrides": {
+                "instance id": "INSTANCE_OBJECT_ID"
+            }
+        },
+        "render bundle encoder finish": {
+            "returns": "render bundle"
+        },
+        "render pipeline get bind group layout": {
+            "returns": "bind group layout"
+        },
+        "swap chain get current texture view": {
+            "returns": "texture view"
+        },
+        "texture create view": {
+            "returns": "texture view"
+        },
+        "queue on submitted work done": {
+            "types": {
+                "queue id": "queue"
+            }
+        },
+        "queue write buffer": {
+            "types": {
+                "queue id": "queue",
+                "buffer id": "buffer"
+            },
+            "clamps": ["size"]
+        },
+        "queue write texture": {
+            "types": {
+                "queue id": "queue",
+                "texture id": "texture"
+            }
+        },
+        "shader module get compilation info": {
+            "types": {
+                "shader module id": "shader module"
+            }
+        }
+    }
+}
