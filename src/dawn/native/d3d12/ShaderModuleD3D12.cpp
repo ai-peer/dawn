@@ -90,6 +90,7 @@ enum class Compiler { FXC, DXC };
     X(tint::transform::BindingRemapper::BindingPoints, remappedBindingPoints)               \
     X(tint::transform::BindingRemapper::AccessControls, remappedAccessControls)             \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
+    X(std::bitset<kMaxInterStageShaderVariables>, interstageLocations)                      \
     X(LimitsForCompilationRequest, limits)                                                  \
     X(bool, disableSymbolRenaming)                                                          \
     X(bool, isRobustnessEnabled)                                                            \
@@ -392,6 +393,15 @@ ResultOrError<std::string> TranslateToHLSL(
     // them as well. This would allow us to only upload root constants that are actually
     // read by the shader.
     options.array_length_from_uniform = r.arrayLengthFromUniform;
+
+    // options.interstage_locations = ;
+    if (r.stage == SingleShaderStage::Vertex) {
+        // temp for test ShaderTests.FragmentInputIsSubsetOfVertexOutput
+        options.interstage_locations.Resize(16);
+        options.interstage_locations[3] = true;
+        options.interstage_locations[7] = true;
+    }
+
     TRACE_EVENT0(tracePlatform.UnsafeGetValue(), General, "tint::writer::hlsl::Generate");
     auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
     DAWN_INVALID_IF(!result.success, "An error occured while generating HLSL: %s", result.error);
@@ -571,6 +581,11 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
     }
 
+    // std::optional<tint::transform::TruncateInterstageVariables::Config> truncateInterstageVariablesConfig;
+    // if (entryPoint.usedInterStageVariables.any()) {
+    //     truncateInterstageVariablesConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
+    // }
+
     req.hlsl.inputProgram = GetTintProgram();
     req.hlsl.entryPointName = programmableStage.entryPoint.c_str();
     req.hlsl.stage = stage;
@@ -584,6 +599,10 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
     req.hlsl.newBindingsMap = BuildExternalTextureTransformBindings(layout);
     req.hlsl.arrayLengthFromUniform = std::move(arrayLengthFromUniform);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
+    // req.hlsl.truncateInterstageVariablesConfig = std::move(truncateInterstageVariablesConfig);
+    // req.hlsl.interstageLocations = entryPoint.usedInterStageVariables;
+    
+    // used inter stage variables from fragment shader
 
     const CombinedLimits& limits = device->GetLimits();
     req.hlsl.limits = LimitsForCompilationRequest::Create(limits.v1);
@@ -596,7 +615,6 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
         std::ostringstream dumpedMsg;
         dumpedMsg << "/* Dumped generated HLSL */" << std::endl
                   << compiledShader->hlslSource << std::endl;
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
 
         if (device->IsToggleEnabled(Toggle::UseDXC)) {
             dumpedMsg << "/* Dumped disassembled DXIL */" << std::endl;
