@@ -16,6 +16,24 @@
       "message": "Can we test for largest float here, and smallest float in the error cases below?",
       "revId": "4290f81cf29282e041a6f2310bd4681fcd6b045e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac5b5e93_3d39a108",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T20:39:17Z",
+      "side": 1,
+      "message": "Added T::Smallest test. Testing T::Highest each of the `AFloat`, `F32` and `F16` values are different ...",
+      "parentUuid": "2888e863_95a213e5",
+      "revId": "4290f81cf29282e041a6f2310bd4681fcd6b045e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
