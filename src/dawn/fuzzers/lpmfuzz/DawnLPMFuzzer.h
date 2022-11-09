@@ -19,6 +19,7 @@
 #include <functional>
 
 #include "dawn/fuzzers/lpmfuzz/dawn_lpm.pb.h"
+#include "dawn/webgpu_cpp.h"
 
 namespace dawn::native {
 
