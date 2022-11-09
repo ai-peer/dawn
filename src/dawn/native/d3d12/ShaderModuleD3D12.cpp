@@ -596,7 +596,6 @@ ResultOrError<CompiledShader> ShaderModule::Compile(const ProgrammableStage& pro
         std::ostringstream dumpedMsg;
         dumpedMsg << "/* Dumped generated HLSL */" << std::endl
                   << compiledShader->hlslSource << std::endl;
-        device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
 
         if (device->IsToggleEnabled(Toggle::UseDXC)) {
             dumpedMsg << "/* Dumped disassembled DXIL */" << std::endl;
