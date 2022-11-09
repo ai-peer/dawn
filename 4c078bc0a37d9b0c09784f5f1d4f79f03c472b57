@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65486726_0c1533b7",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T14:48:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0dd9096_72fe8424",
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6a3b0da_655576a1",
@@ -65,6 +83,30 @@
       "writtenOn": "2022-11-09T13:23:19Z",
       "side": 1,
       "message": "NaN doesn\u0027t have a single bit representation. It\u0027s any bit combination where all the exponent bits are `1`, and **not all** the mantissa bits are `1` (if they were, then it would be ±INF). So I\u0027d suggest moving this condition below the tests for INF, and checking the exponent mask for all ones.",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 5
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d3cca8_e7c05210",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T14:48:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a3b0da_655576a1",
       "range": {
         "startLine": 352,
         "startChar": 0,
@@ -135,6 +177,30 @@
       "writtenOn": "2022-11-09T13:23:19Z",
       "side": 1,
       "message": "humm, not convinced about using this fuzzy comparator - you want to check for exact values, no?",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 23
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d88bb0a8_957dfe13",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T14:48:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdc07baa_3fd452a1",
       "range": {
         "startLine": 284,
         "startChar": 8,
