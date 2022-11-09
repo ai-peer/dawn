@@ -22,6 +22,7 @@
 
 #include "src/tint/traits.h"
 #include "src/tint/utils/bitcast.h"
+#include "src/tint/utils/compiler_macros.h"
 #include "src/tint/utils/crc32.h"
 #include "src/tint/utils/defer.h"
 
@@ -573,10 +574,10 @@ constexpr int IndexOfDefaultCase() {
 /// then the case handler is called.
 /// @returns true if a case handler was found, otherwise false.
 template <typename T, typename RETURN_TYPE, typename... CASES>
-inline bool NonDefaultCases(T* object,
-                            const TypeInfo* type,
-                            RETURN_TYPE* result,
-                            std::tuple<CASES...>&& cases) {
+TINT_FORCE_INLINE bool NonDefaultCases(T* object,
+                                       const TypeInfo* type,
+                                       RETURN_TYPE* result,
+                                       std::tuple<CASES...>&& cases) {
     using Cases = std::tuple<CASES...>;
 
     (void)result;  // Not always used, avoid warning.
@@ -630,7 +631,7 @@ inline bool NonDefaultCases(T* object,
 /// The implementation of Switch() for all cases.
 /// @see NonDefaultCases
 template <typename T, typename RETURN_TYPE, typename... CASES>
-inline void SwitchCases(T* object, RETURN_TYPE* result, std::tuple<CASES...>&& cases) {
+TINT_FORCE_INLINE void SwitchCases(T* object, RETURN_TYPE* result, std::tuple<CASES...>&& cases) {
     using Cases = std::tuple<CASES...>;
 
     static constexpr int kDefaultIndex = detail::IndexOfDefaultCase<Cases>();
