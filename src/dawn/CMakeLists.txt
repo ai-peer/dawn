@@ -155,3 +155,12 @@ DawnJSONGenerator(
 add_custom_target(emscripten_bits_gen
     DEPENDS ${EMSCRIPTEN_BITS_GEN_SOURCES}
 )
+
+DawnLPMJSONGenerator(
+    TARGET "dawn_lpmfuzz"
+    PRINT_NAME "Dawn LPM files"
+    RESULT_VARIABLE "DAWN_LPM_GEN_SOURCES"
+)
+add_custom_target(dawn_lpmfuzz
+    DEPENDS ${DAWN_LPMFUZZ_SOURCES}
+)
