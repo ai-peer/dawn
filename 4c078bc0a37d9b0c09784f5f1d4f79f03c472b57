@@ -16,6 +16,178 @@
       "message": "PTAL.",
       "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b4f611_ac4bd71f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "I\u0027d like Zhaoming Jiang to look through the changes to `number.cc` - he\u0027s a bit of a pro at this `f16` \u003c-\u003e `f32` stuff. 😊",
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0dd9096_72fe8424",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "There\u0027s enough going on in this file to justify a separate CL.",
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a3b0da_655576a1",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "NaN doesn\u0027t have a single bit representation. It\u0027s any bit combination where all the exponent bits are `1`, and **not all** the mantissa bits are `1` (if they were, then it would be ±INF). So I\u0027d suggest moving this condition below the tests for INF, and checking the exponent mask for all ones.",
+      "range": {
+        "startLine": 352,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 5
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76d5ac41_b065680c",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "I\u0027m 80% sure that `-0.f` is interpreted by the compiler as `0.f`. You have to jump through hoops to actually get a negative zero float (e.g. `std::copysignf`).\n\nTests please.",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 42
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc07baa_3fd452a1",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "humm, not convinced about using this fuzzy comparator - you want to check for exact values, no?",
+      "range": {
+        "startLine": 284,
+        "startChar": 8,
+        "endLine": 284,
+        "endChar": 23
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6b41a3_8775f1f1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "Use `OverflowErrorMessage()`.",
+      "range": {
+        "startLine": 2085,
+        "startChar": 12,
+        "endLine": 2085,
+        "endChar": 20
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2846215_e6e9ec60",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "Diagnostics are not capitialized.",
+      "range": {
+        "startLine": 2085,
+        "startChar": 22,
+        "endLine": 2085,
+        "endChar": 23
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "135522b6_4df603d1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T13:23:19Z",
+      "side": 1,
+      "message": "`OverflowErrorMessage()`",
+      "range": {
+        "startLine": 2296,
+        "startChar": 12,
+        "endLine": 2296,
+        "endChar": 20
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
