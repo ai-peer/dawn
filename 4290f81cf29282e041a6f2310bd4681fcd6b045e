@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2888e863_95a213e5",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-09T20:24:51Z",
+      "side": 1,
+      "message": "Can we test for largest float here, and smallest float in the error cases below?",
+      "revId": "4290f81cf29282e041a6f2310bd4681fcd6b045e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
