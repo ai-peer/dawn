@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cbf6024_391e27cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T15:12:22Z",
+      "side": 1,
+      "message": "PTAL. This is split off the `from_bits` CL with the feedback from the other review integrated.",
+      "revId": "89c23f4c2de369ae822e62d9f81d3ec21edf9f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
