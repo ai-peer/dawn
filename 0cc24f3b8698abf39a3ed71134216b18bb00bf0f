@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b625d52e_e764e6d5",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-09T00:27:13Z",
+      "side": 1,
+      "message": "Feel free to suggest a better error message if this isn\u0027t clear.",
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
