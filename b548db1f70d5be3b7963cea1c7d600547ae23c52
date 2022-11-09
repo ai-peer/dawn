@@ -46,6 +46,30 @@
       },
       "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7b9bc7_1b756a13",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T18:24:48Z",
+      "side": 1,
+      "message": "Okay, I\u0027m fine with the dependencies being required. Please just throw a `@note` on the transform\u0027s docs.",
+      "parentUuid": "63d49485_5fb387fb",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 91
+      },
+      "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
