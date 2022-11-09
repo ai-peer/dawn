@@ -33,6 +33,24 @@
       "message": "I suggest moving this out to a parent change.",
       "revId": "85e0e7e241d4638b8e25b4f76b39e084948a9873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc37f83_86d8b06c",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T20:28:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "624b43f4_438be095",
+      "revId": "85e0e7e241d4638b8e25b4f76b39e084948a9873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
