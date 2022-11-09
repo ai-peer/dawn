@@ -183,6 +183,7 @@ class RecordMember:
         self.handle_type = None
         self.default_value = default_value
         self.skip_serialize = skip_serialize
+        self.extra_info = {}
 
     def set_handle_type(self, handle_type):
         assert self.type.dict_name == "ObjectHandle"
@@ -208,6 +209,7 @@ class Record:
         self.name = Name(name)
         self.members = []
         self.may_have_dawn_object = False
+        self.extra_info = {}
 
     def update_metadata(self):
         def may_have_dawn_object(member):
@@ -291,6 +293,7 @@ class Command(Record):
         self.members = members or []
         self.derived_object = None
         self.derived_method = None
+        self.extra_info = {}
 
 
 def linked_record_members(json_data, types):
@@ -371,6 +374,29 @@ def link_function(function, types):
     function.arguments = linked_record_members(function.json_data['args'],
                                                types)
 
+
+def lpm_link_extra_types(command, extra_info):
+    name = command.name.get()
+    for member in command.members:
+        if member.name.get() in extra_info[name]["types"]:
+            member.extra_info["type"] = Name(
+                extra_info[name]["types"][member.name.get()])
+
+
+def lpm_link_extra_clamps(record, extra_info):
+    name = record.name.get()
+    for member in record.members:
+        member_name = member.name.get()
+        if member_name in extra_info[name]["clamps"]:
+            member.extra_info["clamp"] = True
+
+
+def lpm_link_extra_overrides(command, extra_info):
+    name = command.name.get()
+    for member in command.members:
+        if member.name.get() in extra_info[name]["overrides"]:
+            member.extra_info["override"] = extra_info[name]["overrides"][
+                member.name.get()]
 
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
@@ -565,6 +591,146 @@ def compute_wire_params(api_params, wire_json):
     wire_params.update(wire_json.get('special items', {}))
 
     return wire_params
+
+
+############################################################
+# DAWN LPM FUZZ STUFF
+############################################################
+
+
+def compute_lpm_params(api_params, wire_params, lpm_json):
+    lpm_params = wire_params.copy()
+
+    proto_commands = []
+    proto_all_commands = []
+    cpp_commands = []
+
+    # Remove blacklisted commands from protobuf generation params
+    blacklisted_cmds_proto = lpm_json.get('blacklisted_cmds_proto')
+    custom_cmds_proto = lpm_json.get('custom_cmds_proto')
+    for command in lpm_params['cmd_records']['command']:
+        if command.name.get() in blacklisted_cmds_proto:
+            continue
+        if command.name.get() in custom_cmds_proto:
+            proto_all_commands.append(command)
+            continue
+        proto_commands.append(command)
+        proto_all_commands.append(command)
+
+    # Remove blacklisted commands from cpp generation params
+    blacklisted_cmds_cpp = lpm_json.get('blacklisted_cmds_cpp')
+    for command in lpm_params['cmd_records']['command']:
+        if command.name.get() in blacklisted_cmds_cpp:
+            continue
+        cpp_commands.append(command)
+
+    # Add extra metadata to commands
+    extra_info = lpm_json.get("extra_info")
+    for command in cpp_commands:
+        name = command.name.get()
+        if name in extra_info:
+            if "returns" in extra_info[name]:
+                command.extra_info["returns"] = Name(
+                    extra_info[name]["returns"])
+            if "types" in extra_info[name]:
+                lpm_link_extra_types(command, extra_info)
+            if "clamps" in extra_info[name]:
+                lpm_link_extra_clamps(command, extra_info)
+            if "overrides" in extra_info[name]:
+                lpm_link_extra_overrides(command, extra_info)
+
+    # Add extra metadata to structures
+    for structure in wire_params['by_category']['structure']:
+        name = structure.name.get()
+        if name in extra_info:
+            if "clamps" in extra_info[name]:
+                lpm_link_extra_clamps(structure, extra_info)
+
+    # Remove variable sized length values from commands,
+    # these are set to the length of the protobuf array.
+    for command in wire_params['cmd_records']['command']:
+        lengths = []
+        for member in command.members:
+            lengths.append(member.length)
+
+        for member in command.members:
+            if member in lengths:
+                command.members.remove(member)
+
+    # Remove variable sized length values from structures,
+    # these are set to the length of the protobuf array.
+    for structure in wire_params['by_category']['structure']:
+        lengths = []
+        for member in structure.members:
+            lengths.append(member.length)
+
+        for member in structure.members:
+            if member in lengths:
+                structure.members.remove(member)
+
+    lpm_params['cmd_records'] = {
+        'command': lpm_params['cmd_records']['command'],
+        'proto_command': proto_commands,
+        'proto_all_command': proto_all_commands,
+        'cpp_command': cpp_commands,
+        'return command': [],
+        'overloads': lpm_json.get("overloads")
+    }
+
+    return lpm_params
+
+
+def as_varLocalLPM(variable, *members):
+    return variable + '_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+def as_varLocalArrayLPM(variable, *members):
+    return variable + 'N_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+def as_varSizeLPM(variable, member):
+    return variable + 'N_' + member.name.concatcase() + '_size'
+
+
+def as_varIdLPM(variable, member):
+    return variable + '_' + member.name.concatcase() + '_id'
+
+
+def as_protobufTypeLPM(mem):
+    if 'type' not in mem.json_data:
+        return 'failure'
+
+    typ = mem.json_data['type']
+    types = {
+        "uint64_t": "uint64",
+        "bool": "bool",
+        "uint32_t": "uint32",
+        "double": "double",
+        "float": "float",
+        "int32_t": "int32",
+        "int64_t": "int64",
+        "uint16_t": "uint32"
+    }
+
+    if typ in types:
+        return types[typ]
+
+    return mem.type.name.CamelCase()
+
+
+def as_protobufNameLPM(*names):
+    if (names[0].concatcase() == "descriptor"):
+        return "desc"
+    return as_varName(*names)
+
+
+def as_protobufMemberNameLPM(*names):
+    if (names[0].concatcase() == "descriptor"):
+        return "desc"
+    return names[0].concatcase().lower() + ''.join(
+        [name.concatcase().lower() for name in names[1:]])
 
 
 #############################################################
@@ -777,7 +943,7 @@ class MultiGeneratorFromDawnJSON(Generator):
     def add_commandline_arguments(self, parser):
         allowed_targets = [
             'dawn_headers', 'cpp_headers', 'cpp', 'proc', 'mock_api', 'wire',
-            'native_utils'
+            'native_utils', 'dawn_lpmfuzz_cpp', 'dawn_lpmfuzz_proto'
         ]
 
         parser.add_argument('--dawn-json',
@@ -788,6 +954,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                             default=None,
                             type=str,
                             help='The DAWN WIRE JSON definition to use.')
+        parser.add_argument("--lpm-json",
+                            default=None,
+                            type=str,
+                            help='The DAWN LPM FUZZER definitions to use.')
         parser.add_argument(
             '--targets',
             required=True,
@@ -795,6 +965,7 @@ class MultiGeneratorFromDawnJSON(Generator):
             help=
             'Comma-separated subset of targets to output. Available targets: '
             + ', '.join(allowed_targets))
+
     def get_file_renders(self, args):
         with open(args.dawn_json) as f:
             loaded_json = json.loads(f.read())
@@ -806,6 +977,10 @@ class MultiGeneratorFromDawnJSON(Generator):
             with open(args.wire_json) as f:
                 wire_json = json.loads(f.read())
 
+        lpm_json = None
+        if args.lpm_json:
+            with open(args.lpm_json) as f:
+                lpm_json = json.loads(f.read())
         renders = []
 
         params_dawn = parse_json(loaded_json,
@@ -1024,6 +1199,66 @@ class MultiGeneratorFromDawnJSON(Generator):
                     'dawn/wire/server/ServerPrototypes.inc',
                     'src/dawn/wire/server/ServerPrototypes_autogen.inc',
                     wire_params))
+
+        if 'dawn_lpmfuzz_proto' in targets:
+            params_dawn_wire = parse_json(loaded_json,
+                                          enabled_tags=['dawn', 'deprecated'],
+                                          disabled_tags=['native'])
+            additional_params = compute_wire_params(params_dawn_wire,
+                                                    wire_json)
+
+            fuzzer_params = compute_lpm_params(params_dawn_wire,
+                                               additional_params, lpm_json)
+
+            lpm_params = [
+                RENDER_PARAMS_BASE, params_dawn_wire, {
+                    'as_protobufTypeLPM': lambda typ: as_protobufTypeLPM(typ),
+                    'as_protobufNameLPM': lambda names: as_protobufNameLPM(
+                        names),
+                }, additional_params, fuzzer_params
+            ]
+
+            renders.append(
+                FileRender('dawn/fuzzers/lpmfuzz/dawn_lpm.proto',
+                           'src/dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.proto',
+                           lpm_params))
+
+        if 'dawn_lpmfuzz_cpp' in targets:
+            params_dawn_wire = parse_json(loaded_json,
+                                          enabled_tags=['dawn', 'deprecated'],
+                                          disabled_tags=['native'])
+            additional_params = compute_wire_params(params_dawn_wire,
+                                                    wire_json)
+
+            fuzzer_params = compute_lpm_params(params_dawn_wire,
+                                               additional_params, lpm_json)
+
+            lpm_params = [
+                RENDER_PARAMS_BASE, params_dawn_wire, {
+                    'as_protobufMemberNameLPM':
+                    lambda names: as_protobufMemberNameLPM(names),
+                    'as_varIdLPM':
+                    lambda var, name: as_varIdLPM(var, name),
+                    'as_varLocalLPM':
+                    as_varLocalLPM,
+                    'as_varLocalArrayLPM':
+                    as_varLocalArrayLPM,
+                    'as_varSizeLPM':
+                    as_varSizeLPM
+                }, additional_params, fuzzer_params
+            ]
+
+            renders.append(
+                FileRender(
+                    'dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp',
+                    'src/dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.cpp',
+                    lpm_params))
+
+            renders.append(
+                FileRender(
+                    'dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h',
+                    'src/dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h',
+                    lpm_params))
 
         return renders
 
