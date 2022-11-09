@@ -1,11 +1,9 @@
-SKIP: FAILED
-
 vector<float16_t, 2> tint_acosh(vector<float16_t, 2> x) {
   return log((x + sqrt(((x * x) - float16_t(1.0h)))));
 }
 
 void acosh_5f49d8() {
-  vector<float16_t, 2> arg_0 = (float16_t(0.0h)).xx;
+  vector<float16_t, 2> arg_0 = (float16_t(2.0h)).xx;
   vector<float16_t, 2> res = tint_acosh(arg_0);
 }
 
