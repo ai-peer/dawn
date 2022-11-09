@@ -100,6 +100,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "257b592f_ec809b61",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T14:24:37Z",
+      "side": 1,
+      "message": "There are tests for +-0 already:\n\n```\n        {+0.0f, 0.0f, 0x0000u},\n        {-0.0f, -0.0f, 0x8000u},\n```\n\nwhich maybe the compiler is changing those to 0 as well and we need to change those tests to compare bit patterns or something.",
+      "parentUuid": "76d5ac41_b065680c",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 42
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fdc07baa_3fd452a1",
         "filename": "src/tint/number_test.cc",
         "patchSetId": 3
