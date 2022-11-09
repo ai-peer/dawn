@@ -164,6 +164,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d248c43_6e53e31b",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T17:47:58Z",
+      "side": 1,
+      "message": "Discussed internally and we think this is fine as is.",
+      "parentUuid": "257b592f_ec809b61",
+      "range": {
+        "startLine": 365,
+        "startChar": 38,
+        "endLine": 365,
+        "endChar": 42
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdc07baa_3fd452a1",
