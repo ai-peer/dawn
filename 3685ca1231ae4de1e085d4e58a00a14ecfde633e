@@ -16,6 +16,24 @@
       "message": "@Ben, When rolling Vulkan deps, some changes are needed in Tint. PTAL, thanks!",
       "revId": "3685ca1231ae4de1e085d4e58a00a14ecfde633e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4889ba98_9ef44aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T11:43:14Z",
+      "side": 1,
+      "message": "Thank you. Unfortunately, it looks like the CMake build is grumpy about headers:\n\n```\n\nCMake Error in src/dawn/native/CMakeLists.txt:\n  Target \"Vulkan-Headers\" contains relative path in its\n  INTERFACE_INCLUDE_DIRECTORIES:\n\n    \"\"/dawn/src/third_party/vulkan-deps/vulkan-headers/src/include\"\"\n```\n\nI\u0027ve CC\u0027d rharrison@ as he\u0027s WebGPU gardener this week.",
+      "parentUuid": "be04fd00_81d6d72d",
+      "revId": "3685ca1231ae4de1e085d4e58a00a14ecfde633e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
