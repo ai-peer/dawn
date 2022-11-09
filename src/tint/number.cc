@@ -349,9 +349,6 @@ Number<detail::NumberKindF16> f16::FromBits(uint16_t bits) {
     // Assert we use binary32 (i.e. float) as underlying type, which has 4 bytes.
     static_assert(std::is_same<f16::type, float>());
 
-    if (bits == kF16Nan) {
-        return f16(std::numeric_limits<f16::type>::quiet_NaN());
-    }
     if (bits == kF16PosInf) {
         return f16(std::numeric_limits<f16::type>::infinity());
     }
@@ -367,6 +364,12 @@ Number<detail::NumberKindF16> f16::FromBits(uint16_t bits) {
 
     auto f16_mantissa = uint32_t(bits & kF16MantissaMask);
     auto f16_biased_exponent = uint32_t(bits & kF16ExponentMask);
+
+    // F16 NaN has all expoennt bits set and at least one mantissa bit set
+    if (((f16_biased_exponent & kF16ExponentMask) == kF16ExponentMask) && f16_mantissa != 0) {
+        return f16(std::numeric_limits<f16::type>::quiet_NaN());
+    }
+
     // Shift the exponent over to be a regular number.
     f16_biased_exponent >>= kF16MantissaBits;
 

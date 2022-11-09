@@ -278,10 +278,9 @@ TEST_P(NumberF16Test, FromBits) {
     SCOPED_TRACE(ss.str());
 
     if (std::isnan(input_value)) {
-        // For nan, pass through and make sure we get the same value back out again
-        EXPECT_EQ(f16::FromBits(representation).BitsRepresentation(), representation);
+        EXPECT_TRUE(std::isnan(f16::FromBits(representation)));
     } else {
-        EXPECT_FLOAT_EQ(f16::FromBits(representation), f16(input_value));
+        EXPECT_EQ(f16::FromBits(representation), f16(input_value));
     }
 }
 
