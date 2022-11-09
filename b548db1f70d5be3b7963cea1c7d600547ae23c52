@@ -22,6 +22,30 @@
       },
       "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d49485_5fb387fb",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-09T17:13:28Z",
+      "side": 1,
+      "message": "Thinking about this some more, yes, both of these are still dependencies.\n\nThe LHS of an assignment can contain complex expressions that we would also need to hoist, e.g. `v[idx()] \u003d blah`. Compound assignments and inc/dec aren\u0027t currently handled either. There\u0027s a bunch of different cases to handle to make this work for compound assignment in particular, and we\u0027d largely be re-doing the work of that transform here.\n\nI\u0027m leaning back towards keeping (and documenting) these transform dependencies, but if you\u0027d still rather I try and eliminate them completely I can give it a shot.",
+      "parentUuid": "bb995a21_722a2afc",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 91
+      },
+      "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
