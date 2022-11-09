@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25fa4ee_e65b97ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T12:28:00Z",
+      "side": 1,
+      "message": "Note: Not sure if this works. I always put these on separate lines. Will be interesting to see if it does.",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 27
+      },
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2259ddf6_78b62a90",
+        "filename": "src/tint/resolver/call_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T12:28:00Z",
+      "side": 1,
+      "message": "übernit: you could inline into the vector and pass strings to the `Expr()` instead of passing the `ast::Variable`s.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 47
+      },
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b625d52e_e764e6d5",
@@ -14,6 +60,24 @@
       "writtenOn": "2022-11-09T00:27:13Z",
       "side": 1,
       "message": "Feel free to suggest a better error message if this isn\u0027t clear.",
+      "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "360bfed5_4adc56e7",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1821,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T12:28:00Z",
+      "side": 1,
+      "message": "`capture` is a bit of an overloaded term, especially when it comes to functions / lambdas.\n\nHow about:\n\n`function pointer arguments must point to a root identifier (must not point to a subset of the originating variable)`",
+      "parentUuid": "b625d52e_e764e6d5",
       "revId": "0cc24f3b8698abf39a3ed71134216b18bb00bf0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
