@@ -1,0 +1,1735 @@
+// Copyright 2019 The Chromium Authors
+// This proto description is adapted from the one used in clang-proto-fuzzer.
+
+syntax = "proto2";
+package fuzzing;
+
+enum ObjectType {
+    Adapter = 0;
+    BindGroup = 1;
+    BindGroupLayout = 2;
+    Buffer = 3;
+    CommandBuffer = 4;
+    CommandEncoder = 5;
+    ComputePassEncoder = 6;
+    ComputePipeline = 7;
+    Device = 8;
+    ExternalTexture = 9;
+    Instance = 10;
+    PipelineLayout = 11;
+    QuerySet = 12;
+    Queue = 13;
+    RenderBundle = 14;
+    RenderBundleEncoder = 15;
+    RenderPassEncoder = 16;
+    RenderPipeline = 17;
+    Sampler = 18;
+    ShaderModule = 19;
+    Surface = 20;
+    SwapChain = 21;
+    Texture = 22;
+    TextureView = 23;
+};
+
+enum AdapterType {
+    AdapterTypeDiscreteGPU = 0;
+    AdapterTypeIntegratedGPU = 1;
+    AdapterTypeCPU = 2;
+    AdapterTypeUnknown = 3;
+};
+
+enum AddressMode {
+    AddressModeRepeat = 0;
+    AddressModeMirrorRepeat = 1;
+    AddressModeClampToEdge = 2;
+};
+
+enum AlphaMode {
+    AlphaModePremultiplied = 0;
+    AlphaModeUnpremultiplied = 1;
+    AlphaModeOpaque = 2;
+};
+
+enum BackendType {
+    BackendTypeNull = 0;
+    BackendTypeWebGPU = 1;
+    BackendTypeD3D11 = 2;
+    BackendTypeD3D12 = 3;
+    BackendTypeMetal = 4;
+    BackendTypeVulkan = 5;
+    BackendTypeOpenGL = 6;
+    BackendTypeOpenGLES = 7;
+};
+
+enum BlendFactor {
+    BlendFactorZero = 0;
+    BlendFactorOne = 1;
+    BlendFactorSrc = 2;
+    BlendFactorOneMinusSrc = 3;
+    BlendFactorSrcAlpha = 4;
+    BlendFactorOneMinusSrcAlpha = 5;
+    BlendFactorDst = 6;
+    BlendFactorOneMinusDst = 7;
+    BlendFactorDstAlpha = 8;
+    BlendFactorOneMinusDstAlpha = 9;
+    BlendFactorSrcAlphaSaturated = 10;
+    BlendFactorConstant = 11;
+    BlendFactorOneMinusConstant = 12;
+};
+
+enum BlendOperation {
+    BlendOperationAdd = 0;
+    BlendOperationSubtract = 1;
+    BlendOperationReverseSubtract = 2;
+    BlendOperationMin = 3;
+    BlendOperationMax = 4;
+};
+
+enum BufferBindingType {
+    BufferBindingTypeUndefined = 0;
+    BufferBindingTypeUniform = 1;
+    BufferBindingTypeStorage = 2;
+    BufferBindingTypeReadOnlyStorage = 3;
+};
+
+enum BufferMapAsyncStatus {
+    BufferMapAsyncStatusSuccess = 0;
+    BufferMapAsyncStatusError = 1;
+    BufferMapAsyncStatusUnknown = 2;
+    BufferMapAsyncStatusDeviceLost = 3;
+    BufferMapAsyncStatusDestroyedBeforeCallback = 4;
+    BufferMapAsyncStatusUnmappedBeforeCallback = 5;
+};
+
+enum CompareFunction {
+    CompareFunctionUndefined = 0;
+    CompareFunctionNever = 1;
+    CompareFunctionLess = 2;
+    CompareFunctionLessEqual = 3;
+    CompareFunctionGreater = 4;
+    CompareFunctionGreaterEqual = 5;
+    CompareFunctionEqual = 6;
+    CompareFunctionNotEqual = 7;
+    CompareFunctionAlways = 8;
+};
+
+enum CompilationInfoRequestStatus {
+    CompilationInfoRequestStatusSuccess = 0;
+    CompilationInfoRequestStatusError = 1;
+    CompilationInfoRequestStatusDeviceLost = 2;
+    CompilationInfoRequestStatusUnknown = 3;
+};
+
+enum CompilationMessageType {
+    CompilationMessageTypeError = 0;
+    CompilationMessageTypeWarning = 1;
+    CompilationMessageTypeInfo = 2;
+};
+
+enum ComputePassTimestampLocation {
+    ComputePassTimestampLocationBeginning = 0;
+    ComputePassTimestampLocationEnd = 1;
+};
+
+enum CreatePipelineAsyncStatus {
+    CreatePipelineAsyncStatusSuccess = 0;
+    CreatePipelineAsyncStatusError = 1;
+    CreatePipelineAsyncStatusDeviceLost = 2;
+    CreatePipelineAsyncStatusDeviceDestroyed = 3;
+    CreatePipelineAsyncStatusUnknown = 4;
+};
+
+enum CullMode {
+    CullModeNone = 0;
+    CullModeFront = 1;
+    CullModeBack = 2;
+};
+
+enum DeviceLostReason {
+    DeviceLostReasonUndefined = 0;
+    DeviceLostReasonDestroyed = 1;
+};
+
+enum ErrorFilter {
+    ErrorFilterValidation = 0;
+    ErrorFilterOutOfMemory = 1;
+    ErrorFilterInternal = 2;
+};
+
+enum ErrorType {
+    ErrorTypeNoError = 0;
+    ErrorTypeValidation = 1;
+    ErrorTypeOutOfMemory = 2;
+    ErrorTypeInternal = 3;
+    ErrorTypeUnknown = 4;
+    ErrorTypeDeviceLost = 5;
+};
+
+enum FeatureName {
+    FeatureNameUndefined = 0;
+    FeatureNameDepthClipControl = 1;
+    FeatureNameDepth32FloatStencil8 = 2;
+    FeatureNameTimestampQuery = 3;
+    FeatureNamePipelineStatisticsQuery = 4;
+    FeatureNameTextureCompressionBC = 5;
+    FeatureNameTextureCompressionETC2 = 6;
+    FeatureNameTextureCompressionASTC = 7;
+    FeatureNameIndirectFirstInstance = 8;
+    FeatureNameShaderF16 = 9;
+    FeatureNameRG11B10UfloatRenderable = 10;
+    FeatureNameDawnShaderFloat16 = 1001;
+    FeatureNameDawnInternalUsages = 1002;
+    FeatureNameDawnMultiPlanarFormats = 1003;
+    FeatureNameChromiumExperimentalDp4a = 1005;
+};
+
+enum FilterMode {
+    FilterModeNearest = 0;
+    FilterModeLinear = 1;
+};
+
+enum FrontFace {
+    FrontFaceCCW = 0;
+    FrontFaceCW = 1;
+};
+
+enum IndexFormat {
+    IndexFormatUndefined = 0;
+    IndexFormatUint16 = 1;
+    IndexFormatUint32 = 2;
+};
+
+enum LoadOp {
+    LoadOpUndefined = 0;
+    LoadOpClear = 1;
+    LoadOpLoad = 2;
+};
+
+enum LoggingType {
+    LoggingTypeVerbose = 0;
+    LoggingTypeInfo = 1;
+    LoggingTypeWarning = 2;
+    LoggingTypeError = 3;
+};
+
+enum PipelineStatisticName {
+    PipelineStatisticNameVertexShaderInvocations = 0;
+    PipelineStatisticNameClipperInvocations = 1;
+    PipelineStatisticNameClipperPrimitivesOut = 2;
+    PipelineStatisticNameFragmentShaderInvocations = 3;
+    PipelineStatisticNameComputeShaderInvocations = 4;
+};
+
+enum PowerPreference {
+    PowerPreferenceUndefined = 0;
+    PowerPreferenceLowPower = 1;
+    PowerPreferenceHighPerformance = 2;
+};
+
+enum PresentMode {
+    PresentModeImmediate = 0;
+    PresentModeMailbox = 1;
+    PresentModeFifo = 2;
+};
+
+enum PrimitiveTopology {
+    PrimitiveTopologyPointList = 0;
+    PrimitiveTopologyLineList = 1;
+    PrimitiveTopologyLineStrip = 2;
+    PrimitiveTopologyTriangleList = 3;
+    PrimitiveTopologyTriangleStrip = 4;
+};
+
+enum QueryType {
+    QueryTypeOcclusion = 0;
+    QueryTypePipelineStatistics = 1;
+    QueryTypeTimestamp = 2;
+};
+
+enum QueueWorkDoneStatus {
+    QueueWorkDoneStatusSuccess = 0;
+    QueueWorkDoneStatusError = 1;
+    QueueWorkDoneStatusUnknown = 2;
+    QueueWorkDoneStatusDeviceLost = 3;
+};
+
+enum RenderPassTimestampLocation {
+    RenderPassTimestampLocationBeginning = 0;
+    RenderPassTimestampLocationEnd = 1;
+};
+
+enum RequestAdapterStatus {
+    RequestAdapterStatusSuccess = 0;
+    RequestAdapterStatusUnavailable = 1;
+    RequestAdapterStatusError = 2;
+    RequestAdapterStatusUnknown = 3;
+};
+
+enum RequestDeviceStatus {
+    RequestDeviceStatusSuccess = 0;
+    RequestDeviceStatusError = 1;
+    RequestDeviceStatusUnknown = 2;
+};
+
+enum SType {
+    STypeInvalid = 0;
+    STypeSurfaceDescriptorFromCanvasHTMLSelector = 4;
+    STypeShaderModuleSPIRVDescriptor = 5;
+    STypeShaderModuleWGSLDescriptor = 6;
+    STypePrimitiveDepthClipControl = 7;
+    STypeSurfaceDescriptorFromWindowsCoreWindow = 11;
+    STypeExternalTextureBindingEntry = 12;
+    STypeExternalTextureBindingLayout = 13;
+    STypeSurfaceDescriptorFromWindowsSwapChainPanel = 14;
+    STypeRenderPassDescriptorMaxDrawCount = 15;
+    STypeDawnTextureInternalUsageDescriptor = 1000;
+    STypeDawnEncoderInternalUsageDescriptor = 1003;
+};
+
+enum SamplerBindingType {
+    SamplerBindingTypeUndefined = 0;
+    SamplerBindingTypeFiltering = 1;
+    SamplerBindingTypeNonFiltering = 2;
+    SamplerBindingTypeComparison = 3;
+};
+
+enum StencilOperation {
+    StencilOperationKeep = 0;
+    StencilOperationZero = 1;
+    StencilOperationReplace = 2;
+    StencilOperationInvert = 3;
+    StencilOperationIncrementClamp = 4;
+    StencilOperationDecrementClamp = 5;
+    StencilOperationIncrementWrap = 6;
+    StencilOperationDecrementWrap = 7;
+};
+
+enum StorageTextureAccess {
+    StorageTextureAccessUndefined = 0;
+    StorageTextureAccessWriteOnly = 1;
+};
+
+enum StoreOp {
+    StoreOpUndefined = 0;
+    StoreOpStore = 1;
+    StoreOpDiscard = 2;
+};
+
+enum TextureAspect {
+    TextureAspectAll = 0;
+    TextureAspectStencilOnly = 1;
+    TextureAspectDepthOnly = 2;
+    TextureAspectPlane0Only = 3;
+    TextureAspectPlane1Only = 4;
+};
+
+enum TextureComponentType {
+    TextureComponentTypeFloat = 0;
+    TextureComponentTypeSint = 1;
+    TextureComponentTypeUint = 2;
+    TextureComponentTypeDepthComparison = 3;
+};
+
+enum TextureDimension {
+    TextureDimensione1D = 0;
+    TextureDimensione2D = 1;
+    TextureDimensione3D = 2;
+};
+
+enum TextureFormat {
+    TextureFormatUndefined = 0;
+    TextureFormatR8Unorm = 1;
+    TextureFormatR8Snorm = 2;
+    TextureFormatR8Uint = 3;
+    TextureFormatR8Sint = 4;
+    TextureFormatR16Uint = 5;
+    TextureFormatR16Sint = 6;
+    TextureFormatR16Float = 7;
+    TextureFormatRG8Unorm = 8;
+    TextureFormatRG8Snorm = 9;
+    TextureFormatRG8Uint = 10;
+    TextureFormatRG8Sint = 11;
+    TextureFormatR32Float = 12;
+    TextureFormatR32Uint = 13;
+    TextureFormatR32Sint = 14;
+    TextureFormatRG16Uint = 15;
+    TextureFormatRG16Sint = 16;
+    TextureFormatRG16Float = 17;
+    TextureFormatRGBA8Unorm = 18;
+    TextureFormatRGBA8UnormSrgb = 19;
+    TextureFormatRGBA8Snorm = 20;
+    TextureFormatRGBA8Uint = 21;
+    TextureFormatRGBA8Sint = 22;
+    TextureFormatBGRA8Unorm = 23;
+    TextureFormatBGRA8UnormSrgb = 24;
+    TextureFormatRGB10A2Unorm = 25;
+    TextureFormatRG11B10Ufloat = 26;
+    TextureFormatRGB9E5Ufloat = 27;
+    TextureFormatRG32Float = 28;
+    TextureFormatRG32Uint = 29;
+    TextureFormatRG32Sint = 30;
+    TextureFormatRGBA16Uint = 31;
+    TextureFormatRGBA16Sint = 32;
+    TextureFormatRGBA16Float = 33;
+    TextureFormatRGBA32Float = 34;
+    TextureFormatRGBA32Uint = 35;
+    TextureFormatRGBA32Sint = 36;
+    TextureFormatStencil8 = 37;
+    TextureFormatDepth16Unorm = 38;
+    TextureFormatDepth24Plus = 39;
+    TextureFormatDepth24PlusStencil8 = 40;
+    TextureFormatDepth32Float = 41;
+    TextureFormatDepth32FloatStencil8 = 42;
+    TextureFormatBC1RGBAUnorm = 43;
+    TextureFormatBC1RGBAUnormSrgb = 44;
+    TextureFormatBC2RGBAUnorm = 45;
+    TextureFormatBC2RGBAUnormSrgb = 46;
+    TextureFormatBC3RGBAUnorm = 47;
+    TextureFormatBC3RGBAUnormSrgb = 48;
+    TextureFormatBC4RUnorm = 49;
+    TextureFormatBC4RSnorm = 50;
+    TextureFormatBC5RGUnorm = 51;
+    TextureFormatBC5RGSnorm = 52;
+    TextureFormatBC6HRGBUfloat = 53;
+    TextureFormatBC6HRGBFloat = 54;
+    TextureFormatBC7RGBAUnorm = 55;
+    TextureFormatBC7RGBAUnormSrgb = 56;
+    TextureFormatETC2RGB8Unorm = 57;
+    TextureFormatETC2RGB8UnormSrgb = 58;
+    TextureFormatETC2RGB8A1Unorm = 59;
+    TextureFormatETC2RGB8A1UnormSrgb = 60;
+    TextureFormatETC2RGBA8Unorm = 61;
+    TextureFormatETC2RGBA8UnormSrgb = 62;
+    TextureFormatEACR11Unorm = 63;
+    TextureFormatEACR11Snorm = 64;
+    TextureFormatEACRG11Unorm = 65;
+    TextureFormatEACRG11Snorm = 66;
+    TextureFormatASTC4x4Unorm = 67;
+    TextureFormatASTC4x4UnormSrgb = 68;
+    TextureFormatASTC5x4Unorm = 69;
+    TextureFormatASTC5x4UnormSrgb = 70;
+    TextureFormatASTC5x5Unorm = 71;
+    TextureFormatASTC5x5UnormSrgb = 72;
+    TextureFormatASTC6x5Unorm = 73;
+    TextureFormatASTC6x5UnormSrgb = 74;
+    TextureFormatASTC6x6Unorm = 75;
+    TextureFormatASTC6x6UnormSrgb = 76;
+    TextureFormatASTC8x5Unorm = 77;
+    TextureFormatASTC8x5UnormSrgb = 78;
+    TextureFormatASTC8x6Unorm = 79;
+    TextureFormatASTC8x6UnormSrgb = 80;
+    TextureFormatASTC8x8Unorm = 81;
+    TextureFormatASTC8x8UnormSrgb = 82;
+    TextureFormatASTC10x5Unorm = 83;
+    TextureFormatASTC10x5UnormSrgb = 84;
+    TextureFormatASTC10x6Unorm = 85;
+    TextureFormatASTC10x6UnormSrgb = 86;
+    TextureFormatASTC10x8Unorm = 87;
+    TextureFormatASTC10x8UnormSrgb = 88;
+    TextureFormatASTC10x10Unorm = 89;
+    TextureFormatASTC10x10UnormSrgb = 90;
+    TextureFormatASTC12x10Unorm = 91;
+    TextureFormatASTC12x10UnormSrgb = 92;
+    TextureFormatASTC12x12Unorm = 93;
+    TextureFormatASTC12x12UnormSrgb = 94;
+    TextureFormatR8BG8Biplanar420Unorm = 95;
+};
+
+enum TextureSampleType {
+    TextureSampleTypeUndefined = 0;
+    TextureSampleTypeFloat = 1;
+    TextureSampleTypeUnfilterableFloat = 2;
+    TextureSampleTypeDepth = 3;
+    TextureSampleTypeSint = 4;
+    TextureSampleTypeUint = 5;
+};
+
+enum TextureViewDimension {
+    TextureViewDimensionUndefined = 0;
+    TextureViewDimensione1D = 1;
+    TextureViewDimensione2D = 2;
+    TextureViewDimensione2DArray = 3;
+    TextureViewDimensionCube = 4;
+    TextureViewDimensionCubeArray = 5;
+    TextureViewDimensione3D = 6;
+};
+
+enum VertexFormat {
+    VertexFormatUndefined = 0;
+    VertexFormatUint8x2 = 1;
+    VertexFormatUint8x4 = 2;
+    VertexFormatSint8x2 = 3;
+    VertexFormatSint8x4 = 4;
+    VertexFormatUnorm8x2 = 5;
+    VertexFormatUnorm8x4 = 6;
+    VertexFormatSnorm8x2 = 7;
+    VertexFormatSnorm8x4 = 8;
+    VertexFormatUint16x2 = 9;
+    VertexFormatUint16x4 = 10;
+    VertexFormatSint16x2 = 11;
+    VertexFormatSint16x4 = 12;
+    VertexFormatUnorm16x2 = 13;
+    VertexFormatUnorm16x4 = 14;
+    VertexFormatSnorm16x2 = 15;
+    VertexFormatSnorm16x4 = 16;
+    VertexFormatFloat16x2 = 17;
+    VertexFormatFloat16x4 = 18;
+    VertexFormatFloat32 = 19;
+    VertexFormatFloat32x2 = 20;
+    VertexFormatFloat32x3 = 21;
+    VertexFormatFloat32x4 = 22;
+    VertexFormatUint32 = 23;
+    VertexFormatUint32x2 = 24;
+    VertexFormatUint32x3 = 25;
+    VertexFormatUint32x4 = 26;
+    VertexFormatSint32 = 27;
+    VertexFormatSint32x2 = 28;
+    VertexFormatSint32x3 = 29;
+    VertexFormatSint32x4 = 30;
+};
+
+enum VertexStepMode {
+    VertexStepModeVertex = 0;
+    VertexStepModeInstance = 1;
+    VertexStepModeVertexBufferNotUsed = 2;
+};
+
+enum BufferUsage {  // bitmask
+    BufferUsageNone = 0;
+    BufferUsageMapRead = 1;
+    BufferUsageMapWrite = 2;
+    BufferUsageCopySrc = 4;
+    BufferUsageCopyDst = 8;
+    BufferUsageIndex = 16;
+    BufferUsageVertex = 32;
+    BufferUsageUniform = 64;
+    BufferUsageStorage = 128;
+    BufferUsageIndirect = 256;
+    BufferUsageQueryResolve = 512;
+};
+
+enum ColorWriteMask {  // bitmask
+    ColorWriteMaskNone = 0;
+    ColorWriteMaskRed = 1;
+    ColorWriteMaskGreen = 2;
+    ColorWriteMaskBlue = 4;
+    ColorWriteMaskAlpha = 8;
+    ColorWriteMaskAll = 15;
+};
+
+enum MapMode {  // bitmask
+    MapModeNone = 0;
+    MapModeRead = 1;
+    MapModeWrite = 2;
+};
+
+enum ShaderStage {  // bitmask
+    ShaderStageNone = 0;
+    ShaderStageVertex = 1;
+    ShaderStageFragment = 2;
+    ShaderStageCompute = 4;
+};
+
+enum TextureUsage {  // bitmask
+    TextureUsageNone = 0;
+    TextureUsageCopySrc = 1;
+    TextureUsageCopyDst = 2;
+    TextureUsageTextureBinding = 4;
+    TextureUsageStorageBinding = 8;
+    TextureUsageRenderAttachment = 16;
+    TextureUsagePresent = 32;
+};
+
+message AdapterProperties {  // structure
+    required uint32 vendorID = 1;
+    required string vendorName = 2;
+    required string architecture = 3;
+    required uint32 deviceID = 4;
+    required string name = 5;
+    required string driverDescription = 6;
+    required AdapterType adapterType = 7;
+    required BackendType backendType = 8;
+}
+
+message BindGroupEntry {  // structure
+    required uint32 binding = 1;
+    required uint32 buffer = 2;  // value
+    required uint64 offset = 3;
+    required uint64 size = 4;
+    required uint32 sampler = 5;      // value
+    required uint32 textureView = 6;  // value
+}
+
+message BlendComponent {  // structure
+    required BlendOperation operation = 1;
+    required BlendFactor srcFactor = 2;
+    required BlendFactor dstFactor = 3;
+}
+
+message BufferBindingLayout {  // structure
+    required BufferBindingType type = 1;
+    required bool hasDynamicOffset = 2;
+    required uint64 minBindingSize = 3;
+}
+
+message BufferDescriptor {  // structure
+    repeated BufferUsage usage = 1;
+    required uint64 size = 2;
+    required bool mappedAtCreation = 3;
+}
+
+message Color {  // structure
+    required double r = 1;
+    required double g = 2;
+    required double b = 3;
+    required double a = 4;
+}
+
+message CommandBufferDescriptor {  // structure
+}
+
+message CommandEncoderDescriptor {  // structure
+}
+
+message CompilationMessage {  // structure
+    required string message = 1;
+    required CompilationMessageType type = 2;
+    required uint64 lineNum = 3;
+    required uint64 linePos = 4;
+    required uint64 offset = 5;
+    required uint64 length = 6;
+}
+
+message ComputePassTimestampWrite {  // structure
+    required uint32 querySet = 1;    // value
+    required uint32 queryIndex = 2;
+    required ComputePassTimestampLocation location = 3;
+}
+
+message ConstantEntry {  // structure
+    required string key = 1;
+    required double value = 2;
+}
+
+message CopyTextureForBrowserOptions {  // structure
+    required bool flipY = 1;
+    required bool needsColorSpaceConversion = 2;
+    required AlphaMode srcAlphaMode = 3;
+    repeated float srcTransferFunctionParameters = 4;
+    repeated float conversionMatrix = 5;
+    repeated float dstTransferFunctionParameters = 6;
+    required AlphaMode dstAlphaMode = 7;
+    required bool internalUsage = 8;
+}
+
+message DawnAdapterPropertiesPowerPreference {  // structure
+    required PowerPreference powerPreference = 1;
+}
+
+message DawnEncoderInternalUsageDescriptor {  // structure
+    required bool useInternalUsages = 1;
+}
+
+message DawnTextureInternalUsageDescriptor {  // structure
+    repeated TextureUsage internalUsage = 1;
+}
+
+message Extent3D {  // structure
+    required uint32 width = 1;
+    required uint32 height = 2;
+    required uint32 depthOrArrayLayers = 3;
+}
+
+message ExternalTextureBindingEntry {     // structure
+    required uint32 externalTexture = 1;  // value
+}
+
+message ExternalTextureBindingLayout {  // structure
+}
+
+message ExternalTextureDescriptor {  // structure
+    required uint32 plane0 = 1;      // value
+    required uint32 plane1 = 2;      // value
+    required bool doYuvToRgbConversionOnly = 3;
+    repeated float yuvToRgbConversionMatrix = 4;
+    repeated float srcTransferFunctionParameters = 5;
+    repeated float dstTransferFunctionParameters = 6;
+    repeated float gamutConversionMatrix = 7;
+}
+
+message InstanceDescriptor {  // structure
+}
+
+message Limits {  // structure
+    required uint32 maxTextureDimension1D = 1;
+    required uint32 maxTextureDimension2D = 2;
+    required uint32 maxTextureDimension3D = 3;
+    required uint32 maxTextureArrayLayers = 4;
+    required uint32 maxBindGroups = 5;
+    required uint32 maxBindingsPerBindGroup = 6;
+    required uint32 maxDynamicUniformBuffersPerPipelineLayout = 7;
+    required uint32 maxDynamicStorageBuffersPerPipelineLayout = 8;
+    required uint32 maxSampledTexturesPerShaderStage = 9;
+    required uint32 maxSamplersPerShaderStage = 10;
+    required uint32 maxStorageBuffersPerShaderStage = 11;
+    required uint32 maxStorageTexturesPerShaderStage = 12;
+    required uint32 maxUniformBuffersPerShaderStage = 13;
+    required uint64 maxUniformBufferBindingSize = 14;
+    required uint64 maxStorageBufferBindingSize = 15;
+    required uint32 minUniformBufferOffsetAlignment = 16;
+    required uint32 minStorageBufferOffsetAlignment = 17;
+    required uint32 maxVertexBuffers = 18;
+    required uint64 maxBufferSize = 19;
+    required uint32 maxVertexAttributes = 20;
+    required uint32 maxVertexBufferArrayStride = 21;
+    required uint32 maxInterStageShaderComponents = 22;
+    required uint32 maxInterStageShaderVariables = 23;
+    required uint32 maxColorAttachments = 24;
+    required uint32 maxComputeWorkgroupStorageSize = 25;
+    required uint32 maxComputeInvocationsPerWorkgroup = 26;
+    required uint32 maxComputeWorkgroupSizeX = 27;
+    required uint32 maxComputeWorkgroupSizeY = 28;
+    required uint32 maxComputeWorkgroupSizeZ = 29;
+    required uint32 maxComputeWorkgroupsPerDimension = 30;
+}
+
+message MultisampleState {  // structure
+    required uint32 count = 1;
+    required uint32 mask = 2;
+    required bool alphaToCoverageEnabled = 3;
+}
+
+message Origin3D {  // structure
+    required uint32 x = 1;
+    required uint32 y = 2;
+    required uint32 z = 3;
+}
+
+message PipelineLayoutDescriptor {         // structure
+    repeated uint32 bindGroupLayouts = 1;  // const*
+}
+
+message PrimitiveDepthClipControl {  // structure
+    required bool unclippedDepth = 1;
+}
+
+message PrimitiveState {  // structure
+    required PrimitiveTopology topology = 1;
+    required IndexFormat stripIndexFormat = 2;
+    required FrontFace frontFace = 3;
+    required CullMode cullMode = 4;
+}
+
+message QuerySetDescriptor {  // structure
+    required QueryType type = 1;
+    required uint32 count = 2;
+    repeated PipelineStatisticName pipelineStatistics = 3;
+}
+
+message QueueDescriptor {  // structure
+}
+
+message RenderBundleDescriptor {  // structure
+}
+
+message RenderBundleEncoderDescriptor {  // structure
+    repeated TextureFormat colorFormats = 1;
+    required TextureFormat depthStencilFormat = 2;
+    required uint32 sampleCount = 3;
+    required bool depthReadOnly = 4;
+    required bool stencilReadOnly = 5;
+}
+
+message RenderPassDepthStencilAttachment {  // structure
+    required uint32 view = 1;               // value
+    required LoadOp depthLoadOp = 2;
+    required StoreOp depthStoreOp = 3;
+    required float clearDepth = 4;
+    required float depthClearValue = 5;
+    required bool depthReadOnly = 6;
+    required LoadOp stencilLoadOp = 7;
+    required StoreOp stencilStoreOp = 8;
+    required uint32 clearStencil = 9;
+    required uint32 stencilClearValue = 10;
+    required bool stencilReadOnly = 11;
+}
+
+message RenderPassDescriptorMaxDrawCount {  // structure
+    required uint64 maxDrawCount = 1;
+}
+
+message RenderPassTimestampWrite {  // structure
+    required uint32 querySet = 1;   // value
+    required uint32 queryIndex = 2;
+    required RenderPassTimestampLocation location = 3;
+}
+
+message RequestAdapterOptions {             // structure
+    required uint32 compatibleSurface = 1;  // value
+    required PowerPreference powerPreference = 2;
+    required bool forceFallbackAdapter = 3;
+}
+
+message SamplerBindingLayout {  // structure
+    required SamplerBindingType type = 1;
+}
+
+message SamplerDescriptor {  // structure
+    required AddressMode addressModeU = 1;
+    required AddressMode addressModeV = 2;
+    required AddressMode addressModeW = 3;
+    required FilterMode magFilter = 4;
+    required FilterMode minFilter = 5;
+    required FilterMode mipmapFilter = 6;
+    required float lodMinClamp = 7;
+    required float lodMaxClamp = 8;
+    required CompareFunction compare = 9;
+    required uint32 maxAnisotropy = 10;  // uint16_t
+}
+
+message ShaderModuleDescriptor {  // structure
+}
+
+message ShaderModuleSPIRVDescriptor {  // structure
+    required uint32 codeSize = 1;
+    repeated uint32 code = 2;
+}
+
+message ShaderModuleWGSLDescriptor {  // structure
+    required string source = 1;
+}
+
+message StencilFaceState {  // structure
+    required CompareFunction compare = 1;
+    required StencilOperation failOp = 2;
+    required StencilOperation depthFailOp = 3;
+    required StencilOperation passOp = 4;
+}
+
+message StorageTextureBindingLayout {  // structure
+    required StorageTextureAccess access = 1;
+    required TextureFormat format = 2;
+    required TextureViewDimension viewDimension = 3;
+}
+
+message SurfaceDescriptor {  // structure
+}
+
+message SurfaceDescriptorFromCanvasHTMLSelector {  // structure
+    required string selector = 1;
+}
+
+message SurfaceDescriptorFromWindowsCoreWindow {  // structure
+    required bytes coreWindow = 1;
+}
+
+message SurfaceDescriptorFromWindowsSwapChainPanel {  // structure
+    required bytes swapChainPanel = 1;
+}
+
+message SwapChainDescriptor {  // structure
+    repeated TextureUsage usage = 1;
+    required TextureFormat format = 2;
+    required uint32 width = 3;
+    required uint32 height = 4;
+    required PresentMode presentMode = 5;
+    required uint64 implementation = 6;
+}
+
+message TextureBindingLayout {  // structure
+    required TextureSampleType sampleType = 1;
+    required TextureViewDimension viewDimension = 2;
+    required bool multisampled = 3;
+}
+
+message TextureDataLayout {  // structure
+    required uint64 offset = 1;
+    required uint32 bytesPerRow = 2;
+    required uint32 rowsPerImage = 3;
+}
+
+message TextureViewDescriptor {  // structure
+    required TextureFormat format = 1;
+    required TextureViewDimension dimension = 2;
+    required uint32 baseMipLevel = 3;
+    required uint32 mipLevelCount = 4;
+    required uint32 baseArrayLayer = 5;
+    required uint32 arrayLayerCount = 6;
+    required TextureAspect aspect = 7;
+}
+
+message VertexAttribute {  // structure
+    required VertexFormat format = 1;
+    required uint64 offset = 2;
+    required uint32 shaderLocation = 3;
+}
+
+message BindGroupDescriptor {    // structure
+    required uint32 layout = 1;  // value
+    repeated BindGroupEntry entries = 2;
+}
+
+message BindGroupLayoutEntry {  // structure
+    required uint32 binding = 1;
+    repeated ShaderStage visibility = 2;
+
+    oneof layout {
+        BufferBindingLayout buffer = 3;
+        SamplerBindingLayout sampler = 4;
+        TextureBindingLayout texture = 5;
+        StorageTextureBindingLayout storageTexture = 6;
+    }
+}
+
+message BlendState {  // structure
+    required BlendComponent color = 1;
+    required BlendComponent alpha = 2;
+}
+
+message CompilationInfo {  // structure
+    required uint32 messageCount = 1;
+    repeated CompilationMessage messages = 2;
+}
+
+message ComputePassDescriptor {  // structure
+    repeated ComputePassTimestampWrite timestampWrites = 1;
+}
+
+message DepthStencilState {  // structure
+    required TextureFormat format = 1;
+    required bool depthWriteEnabled = 2;
+    required CompareFunction depthCompare = 3;
+    required StencilFaceState stencilFront = 4;
+    required StencilFaceState stencilBack = 5;
+    required uint32 stencilReadMask = 6;
+    required uint32 stencilWriteMask = 7;
+    required int32 depthBias = 8;
+    required float depthBiasSlopeScale = 9;
+    required float depthBiasClamp = 10;
+}
+
+message ImageCopyBuffer {  // structure
+    required TextureDataLayout layout = 1;
+    required uint32 buffer = 2;  // value
+}
+
+message ImageCopyTexture {        // structure
+    required uint32 texture = 1;  // value
+    required uint32 mipLevel = 2;
+    required Origin3D origin = 3;
+    required TextureAspect aspect = 4;
+}
+
+message ProgrammableStageDescriptor {  // structure
+    required uint32 module = 1;        // value
+    required string entryPoint = 2;
+    repeated ConstantEntry constants = 3;
+}
+
+message RenderPassColorAttachment {     // structure
+    required uint32 view = 1;           // value
+    required uint32 resolveTarget = 2;  // value
+    required LoadOp loadOp = 3;
+    required StoreOp storeOp = 4;
+    required Color clearColor = 5;
+    required Color clearValue = 6;
+}
+
+message RequiredLimits {  // structure
+    required Limits limits = 1;
+}
+
+message SupportedLimits {  // structure
+    required Limits limits = 1;
+}
+
+message TextureDescriptor {  // structure
+    repeated TextureUsage usage = 1;
+    required TextureDimension dimension = 2;
+    required Extent3D size = 3;
+    required TextureFormat format = 4;
+    required uint32 mipLevelCount = 5;
+    required uint32 sampleCount = 6;
+    repeated TextureFormat viewFormats = 7;
+}
+
+message VertexBufferLayout {  // structure
+    required uint64 arrayStride = 1;
+    required VertexStepMode stepMode = 2;
+    repeated VertexAttribute attributes = 3;
+}
+
+message BindGroupLayoutDescriptor {  // structure
+    repeated BindGroupLayoutEntry entries = 1;
+}
+
+message ColorTargetState {  // structure
+    required TextureFormat format = 1;
+    required BlendState blend = 2;  // [fallthrough] const*
+    repeated ColorWriteMask writeMask = 3;
+}
+
+message ComputePipelineDescriptor {  // structure
+    required uint32 layout = 1;      // value
+    required ProgrammableStageDescriptor compute = 2;
+}
+
+message DeviceDescriptor {  // structure
+    repeated FeatureName requiredFeatures = 1;
+    required RequiredLimits requiredLimits = 2;  // [fallthrough] const*
+    required QueueDescriptor defaultQueue = 3;
+}
+
+message RenderPassDescriptor {  // structure
+    repeated RenderPassColorAttachment colorAttachments = 1;
+    required RenderPassDepthStencilAttachment depthStencilAttachment = 2;  // [fallthrough] const*
+    required uint32 occlusionQuerySet = 3;                                 // value
+    repeated RenderPassTimestampWrite timestampWrites = 4;
+}
+
+message VertexState {            // structure
+    required uint32 module = 1;  // value
+    required string entryPoint = 2;
+    repeated ConstantEntry constants = 3;
+    repeated VertexBufferLayout buffers = 4;
+}
+
+message FragmentState {          // structure
+    required uint32 module = 1;  // value
+    required string entryPoint = 2;
+    repeated ConstantEntry constants = 3;
+    repeated ColorTargetState targets = 4;
+}
+
+message RenderPipelineDescriptor {  // structure
+    required uint32 layout = 1;     // value
+    required VertexState vertex = 2;
+    required PrimitiveState primitive = 3;
+    required DepthStencilState depthStencil = 4;  // [fallthrough] const*
+    required MultisampleState multisample = 5;
+    required FragmentState fragment = 6;  // [fallthrough] const*
+}
+
+message AdapterRequestDevice {
+    required uint32 adapterId = 1;  // value
+    required uint64 requestSerial = 2;
+    required DeviceDescriptor desc = 3;  // [fallthrough] const*
+}
+message BindGroupLayoutSetLabel {
+    required uint32 self = 1;  // value
+}
+message BindGroupSetLabel {
+    required uint32 self = 1;  // value
+}
+message BufferDestroy {
+    required uint32 self = 1;  // value
+}
+message BufferMapAsync {
+    required uint32 bufferId = 1;  // value
+    required uint64 requestSerial = 2;
+    repeated MapMode mode = 3;
+    required uint64 offset = 4;
+    required uint64 size = 5;
+}
+message BufferSetLabel {
+    required uint32 self = 1;  // value
+}
+message BufferUnmap {
+    required uint32 self = 1;  // value
+}
+message BufferUpdateMappedData {
+    required uint32 bufferId = 1;  // value
+    required uint64 writeDataUpdateInfoLength = 2;
+    // WriteDataUpdateInfo.skip_serialize
+    required uint64 offset = 3;
+    required uint64 size = 4;
+}
+message CommandBufferSetLabel {
+    required uint32 self = 1;  // value
+}
+message CommandEncoderBeginComputePass {
+    required uint32 self = 1;                 // value
+    required ComputePassDescriptor desc = 2;  // [fallthrough] const*
+}
+message CommandEncoderBeginRenderPass {
+    required uint32 self = 1;                // value
+    required RenderPassDescriptor desc = 2;  // [fallthrough] const*
+}
+message CommandEncoderClearBuffer {
+    required uint32 self = 1;    // value
+    required uint32 buffer = 2;  // value
+    required uint64 offset = 3;
+    required uint64 size = 4;
+}
+message CommandEncoderCopyBufferToBuffer {
+    required uint32 self = 1;    // value
+    required uint32 source = 2;  // value
+    required uint64 sourceOffset = 3;
+    required uint32 destination = 4;  // value
+    required uint64 destinationOffset = 5;
+    required uint64 size = 6;
+}
+message CommandEncoderCopyBufferToTexture {
+    required uint32 self = 1;                   // value
+    required ImageCopyBuffer source = 2;        // [fallthrough] const*
+    required ImageCopyTexture destination = 3;  // [fallthrough] const*
+    required Extent3D copySize = 4;             // [fallthrough] const*
+}
+message CommandEncoderCopyTextureToBuffer {
+    required uint32 self = 1;                  // value
+    required ImageCopyTexture source = 2;      // [fallthrough] const*
+    required ImageCopyBuffer destination = 3;  // [fallthrough] const*
+    required Extent3D copySize = 4;            // [fallthrough] const*
+}
+message CommandEncoderCopyTextureToTexture {
+    required uint32 self = 1;                   // value
+    required ImageCopyTexture source = 2;       // [fallthrough] const*
+    required ImageCopyTexture destination = 3;  // [fallthrough] const*
+    required Extent3D copySize = 4;             // [fallthrough] const*
+}
+message CommandEncoderCopyTextureToTextureInternal {
+    required uint32 self = 1;                   // value
+    required ImageCopyTexture source = 2;       // [fallthrough] const*
+    required ImageCopyTexture destination = 3;  // [fallthrough] const*
+    required Extent3D copySize = 4;             // [fallthrough] const*
+}
+message CommandEncoderFinish {
+    required uint32 self = 1;                   // value
+    required CommandBufferDescriptor desc = 2;  // [fallthrough] const*
+}
+message CommandEncoderInjectValidationError {
+    required uint32 self = 1;  // value
+    required string message = 2;
+}
+message CommandEncoderInsertDebugMarker {
+    required uint32 self = 1;  // value
+    required string markerLabel = 2;
+}
+message CommandEncoderPopDebugGroup {
+    required uint32 self = 1;  // value
+}
+message CommandEncoderPushDebugGroup {
+    required uint32 self = 1;  // value
+    required string groupLabel = 2;
+}
+message CommandEncoderResolveQuerySet {
+    required uint32 self = 1;      // value
+    required uint32 querySet = 2;  // value
+    required uint32 firstQuery = 3;
+    required uint32 queryCount = 4;
+    required uint32 destination = 5;  // value
+    required uint64 destinationOffset = 6;
+}
+message CommandEncoderSetLabel {
+    required uint32 self = 1;  // value
+}
+message CommandEncoderWriteBuffer {
+    required uint32 self = 1;    // value
+    required uint32 buffer = 2;  // value
+    required uint64 bufferOffset = 3;
+    required bytes data = 4;  // VOID *
+    required uint64 size = 5;
+}
+message CommandEncoderWriteTimestamp {
+    required uint32 self = 1;      // value
+    required uint32 querySet = 2;  // value
+    required uint32 queryIndex = 3;
+}
+message ComputePassEncoderDispatch {
+    required uint32 self = 1;  // value
+    required uint32 workgroupCountX = 2;
+    required uint32 workgroupCountY = 3;
+    required uint32 workgroupCountZ = 4;
+}
+message ComputePassEncoderDispatchIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message ComputePassEncoderDispatchWorkgroups {
+    required uint32 self = 1;  // value
+    required uint32 workgroupCountX = 2;
+    required uint32 workgroupCountY = 3;
+    required uint32 workgroupCountZ = 4;
+}
+message ComputePassEncoderDispatchWorkgroupsIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message ComputePassEncoderEnd {
+    required uint32 self = 1;  // value
+}
+message ComputePassEncoderEndPass {
+    required uint32 self = 1;  // value
+}
+message ComputePassEncoderInsertDebugMarker {
+    required uint32 self = 1;  // value
+    required string markerLabel = 2;
+}
+message ComputePassEncoderPopDebugGroup {
+    required uint32 self = 1;  // value
+}
+message ComputePassEncoderPushDebugGroup {
+    required uint32 self = 1;  // value
+    required string groupLabel = 2;
+}
+message ComputePassEncoderSetBindGroup {
+    required uint32 self = 1;  // value
+    required uint32 groupIndex = 2;
+    required uint32 group = 3;  // value
+    repeated uint32 dynamicOffsets = 4;
+}
+message ComputePassEncoderSetLabel {
+    required uint32 self = 1;  // value
+}
+message ComputePassEncoderSetPipeline {
+    required uint32 self = 1;      // value
+    required uint32 pipeline = 2;  // value
+}
+message ComputePassEncoderWriteTimestamp {
+    required uint32 self = 1;      // value
+    required uint32 querySet = 2;  // value
+    required uint32 queryIndex = 3;
+}
+message ComputePipelineGetBindGroupLayout {
+    required uint32 self = 1;  // value
+    required uint32 groupIndex = 2;
+}
+message ComputePipelineSetLabel {
+    required uint32 self = 1;  // value
+}
+message DestroyObject {
+    required ObjectType objectType = 1;
+    required uint32 objectId = 2;  // value
+}
+message DeviceCreateBindGroup {
+    required uint32 self = 1;               // value
+    required BindGroupDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateBindGroupLayout {
+    required uint32 self = 1;                     // value
+    required BindGroupLayoutDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateBuffer {
+    required uint32 deviceId = 1;        // value
+    required BufferDescriptor desc = 2;  // [fallthrough] const*
+    required uint64 readHandleCreateInfoLength = 3;
+    // ReadHandleCreateInfo.skip_serialize
+    required uint64 writeHandleCreateInfoLength = 4;
+    // WriteHandleCreateInfo.skip_serialize
+}
+message DeviceCreateCommandEncoder {
+    required uint32 self = 1;                    // value
+    required CommandEncoderDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateComputePipeline {
+    required uint32 self = 1;                     // value
+    required ComputePipelineDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateComputePipelineAsync {
+    required uint32 deviceId = 1;  // value
+    required uint64 requestSerial = 2;
+    required ComputePipelineDescriptor desc = 3;  // [fallthrough] const*
+}
+message DeviceCreateErrorBuffer {
+    required uint32 self = 1;  // value
+}
+message DeviceCreateErrorExternalTexture {
+    required uint32 self = 1;  // value
+}
+message DeviceCreateErrorTexture {
+    required uint32 self = 1;             // value
+    required TextureDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateExternalTexture {
+    required uint32 self = 1;                                          // value
+    required ExternalTextureDescriptor externalTextureDescriptor = 2;  // [fallthrough] const*
+}
+message DeviceCreatePipelineLayout {
+    required uint32 self = 1;                    // value
+    required PipelineLayoutDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateQuerySet {
+    required uint32 self = 1;              // value
+    required QuerySetDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateRenderBundleEncoder {
+    required uint32 self = 1;                         // value
+    required RenderBundleEncoderDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateRenderPipeline {
+    required uint32 self = 1;                    // value
+    required RenderPipelineDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateRenderPipelineAsync {
+    required uint32 deviceId = 1;  // value
+    required uint64 requestSerial = 2;
+    required RenderPipelineDescriptor desc = 3;  // [fallthrough] const*
+}
+message DeviceCreateSampler {
+    required uint32 self = 1;             // value
+    required SamplerDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateShaderModule {
+    required uint32 self = 1;                  // value
+    required ShaderModuleDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceCreateSwapChain {
+    required uint32 self = 1;               // value
+    required uint32 surface = 2;            // value
+    required SwapChainDescriptor desc = 3;  // [fallthrough] const*
+}
+message DeviceCreateTexture {
+    required uint32 self = 1;             // value
+    required TextureDescriptor desc = 2;  // [fallthrough] const*
+}
+message DeviceDestroy {
+    required uint32 self = 1;  // value
+}
+message DeviceForceLoss {
+    required uint32 self = 1;  // value
+    required DeviceLostReason type = 2;
+    required string message = 3;
+}
+message DeviceGetAdapter {
+    required uint32 self = 1;  // value
+}
+message DeviceGetQueue {
+    required uint32 self = 1;  // value
+}
+message DeviceInjectError {
+    required uint32 self = 1;  // value
+    required ErrorType type = 2;
+    required string message = 3;
+}
+message DevicePopErrorScope {
+    required uint32 deviceId = 1;  // value
+    required uint64 requestSerial = 2;
+}
+message DevicePushErrorScope {
+    required uint32 self = 1;  // value
+    required ErrorFilter filter = 2;
+}
+message DeviceSetLabel {
+    required uint32 self = 1;  // value
+}
+message DeviceTick {
+    required uint32 self = 1;  // value
+}
+message ExternalTextureDestroy {
+    required uint32 self = 1;  // value
+}
+message ExternalTextureSetLabel {
+    required uint32 self = 1;  // value
+}
+message InstanceCreateSurface {
+    required uint32 self = 1;             // value
+    required SurfaceDescriptor desc = 2;  // [fallthrough] const*
+}
+message InstanceRequestAdapter {
+    required uint64 requestSerial = 1;
+    required RequestAdapterOptions options = 2;  // [fallthrough] const*
+}
+message PipelineLayoutSetLabel {
+    required uint32 self = 1;  // value
+}
+message QuerySetDestroy {
+    required uint32 self = 1;  // value
+}
+message QuerySetSetLabel {
+    required uint32 self = 1;  // value
+}
+message QueueCopyTextureForBrowser {
+    required uint32 self = 1;                           // value
+    required ImageCopyTexture source = 2;               // [fallthrough] const*
+    required ImageCopyTexture destination = 3;          // [fallthrough] const*
+    required Extent3D copySize = 4;                     // [fallthrough] const*
+    required CopyTextureForBrowserOptions options = 5;  // [fallthrough] const*
+}
+message QueueOnSubmittedWorkDone {
+    required uint32 queueId = 1;  // value
+    required uint64 signalValue = 2;
+    required uint64 requestSerial = 3;
+}
+message QueueSetLabel {
+    required uint32 self = 1;  // value
+}
+message QueueSubmit {
+    required uint32 self = 1;      // value
+    repeated uint32 commands = 2;  // const*
+}
+message QueueWriteBuffer {
+    required uint32 queueId = 1;   // value
+    required uint32 bufferId = 2;  // value
+    required uint64 bufferOffset = 3;
+    required bytes data = 4;  // VOID *
+    required uint64 size = 5;
+}
+message QueueWriteTexture {
+    required uint32 queueId = 1;                // value
+    required ImageCopyTexture destination = 2;  // [fallthrough] const*
+    required bytes data = 3;                    // VOID *
+    required uint64 dataSize = 4;
+    required TextureDataLayout dataLayout = 5;  // [fallthrough] const*
+    required Extent3D writeSize = 6;            // [fallthrough] const*
+}
+message RenderBundleEncoderDraw {
+    required uint32 self = 1;  // value
+    required uint32 vertexCount = 2;
+    required uint32 instanceCount = 3;
+    required uint32 firstVertex = 4;
+    required uint32 firstInstance = 5;
+}
+message RenderBundleEncoderDrawIndexed {
+    required uint32 self = 1;  // value
+    required uint32 indexCount = 2;
+    required uint32 instanceCount = 3;
+    required uint32 firstIndex = 4;
+    required int32 baseVertex = 5;
+    required uint32 firstInstance = 6;
+}
+message RenderBundleEncoderDrawIndexedIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message RenderBundleEncoderDrawIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message RenderBundleEncoderFinish {
+    required uint32 self = 1;                  // value
+    required RenderBundleDescriptor desc = 2;  // [fallthrough] const*
+}
+message RenderBundleEncoderInsertDebugMarker {
+    required uint32 self = 1;  // value
+    required string markerLabel = 2;
+}
+message RenderBundleEncoderPopDebugGroup {
+    required uint32 self = 1;  // value
+}
+message RenderBundleEncoderPushDebugGroup {
+    required uint32 self = 1;  // value
+    required string groupLabel = 2;
+}
+message RenderBundleEncoderSetBindGroup {
+    required uint32 self = 1;  // value
+    required uint32 groupIndex = 2;
+    required uint32 group = 3;  // value
+    repeated uint32 dynamicOffsets = 4;
+}
+message RenderBundleEncoderSetIndexBuffer {
+    required uint32 self = 1;    // value
+    required uint32 buffer = 2;  // value
+    required IndexFormat format = 3;
+    required uint64 offset = 4;
+    required uint64 size = 5;
+}
+message RenderBundleEncoderSetLabel {
+    required uint32 self = 1;  // value
+}
+message RenderBundleEncoderSetPipeline {
+    required uint32 self = 1;      // value
+    required uint32 pipeline = 2;  // value
+}
+message RenderBundleEncoderSetVertexBuffer {
+    required uint32 self = 1;  // value
+    required uint32 slot = 2;
+    required uint32 buffer = 3;  // value
+    required uint64 offset = 4;
+    required uint64 size = 5;
+}
+message RenderPassEncoderBeginOcclusionQuery {
+    required uint32 self = 1;  // value
+    required uint32 queryIndex = 2;
+}
+message RenderPassEncoderDraw {
+    required uint32 self = 1;  // value
+    required uint32 vertexCount = 2;
+    required uint32 instanceCount = 3;
+    required uint32 firstVertex = 4;
+    required uint32 firstInstance = 5;
+}
+message RenderPassEncoderDrawIndexed {
+    required uint32 self = 1;  // value
+    required uint32 indexCount = 2;
+    required uint32 instanceCount = 3;
+    required uint32 firstIndex = 4;
+    required int32 baseVertex = 5;
+    required uint32 firstInstance = 6;
+}
+message RenderPassEncoderDrawIndexedIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message RenderPassEncoderDrawIndirect {
+    required uint32 self = 1;            // value
+    required uint32 indirectBuffer = 2;  // value
+    required uint64 indirectOffset = 3;
+}
+message RenderPassEncoderEnd {
+    required uint32 self = 1;  // value
+}
+message RenderPassEncoderEndOcclusionQuery {
+    required uint32 self = 1;  // value
+}
+message RenderPassEncoderEndPass {
+    required uint32 self = 1;  // value
+}
+message RenderPassEncoderExecuteBundles {
+    required uint32 self = 1;     // value
+    repeated uint32 bundles = 2;  // const*
+}
+message RenderPassEncoderInsertDebugMarker {
+    required uint32 self = 1;  // value
+    required string markerLabel = 2;
+}
+message RenderPassEncoderPopDebugGroup {
+    required uint32 self = 1;  // value
+}
+message RenderPassEncoderPushDebugGroup {
+    required uint32 self = 1;  // value
+    required string groupLabel = 2;
+}
+message RenderPassEncoderSetBindGroup {
+    required uint32 self = 1;  // value
+    required uint32 groupIndex = 2;
+    required uint32 group = 3;  // value
+    repeated uint32 dynamicOffsets = 4;
+}
+message RenderPassEncoderSetBlendConstant {
+    required uint32 self = 1;  // value
+    required Color color = 2;  // [fallthrough] const*
+}
+message RenderPassEncoderSetIndexBuffer {
+    required uint32 self = 1;    // value
+    required uint32 buffer = 2;  // value
+    required IndexFormat format = 3;
+    required uint64 offset = 4;
+    required uint64 size = 5;
+}
+message RenderPassEncoderSetLabel {
+    required uint32 self = 1;  // value
+}
+message RenderPassEncoderSetPipeline {
+    required uint32 self = 1;      // value
+    required uint32 pipeline = 2;  // value
+}
+message RenderPassEncoderSetScissorRect {
+    required uint32 self = 1;  // value
+    required uint32 x = 2;
+    required uint32 y = 3;
+    required uint32 width = 4;
+    required uint32 height = 5;
+}
+message RenderPassEncoderSetStencilReference {
+    required uint32 self = 1;  // value
+    required uint32 reference = 2;
+}
+message RenderPassEncoderSetVertexBuffer {
+    required uint32 self = 1;  // value
+    required uint32 slot = 2;
+    required uint32 buffer = 3;  // value
+    required uint64 offset = 4;
+    required uint64 size = 5;
+}
+message RenderPassEncoderSetViewport {
+    required uint32 self = 1;  // value
+    required float x = 2;
+    required float y = 3;
+    required float width = 4;
+    required float height = 5;
+    required float minDepth = 6;
+    required float maxDepth = 7;
+}
+message RenderPassEncoderWriteTimestamp {
+    required uint32 self = 1;      // value
+    required uint32 querySet = 2;  // value
+    required uint32 queryIndex = 3;
+}
+message RenderPipelineGetBindGroupLayout {
+    required uint32 self = 1;  // value
+    required uint32 groupIndex = 2;
+}
+message RenderPipelineSetLabel {
+    required uint32 self = 1;  // value
+}
+message SamplerSetLabel {
+    required uint32 self = 1;  // value
+}
+message ShaderModuleGetCompilationInfo {
+    required uint32 shaderModuleId = 1;  // value
+    required uint64 requestSerial = 2;
+}
+message ShaderModuleSetLabel {
+    required uint32 self = 1;  // value
+}
+message SwapChainConfigure {
+    required uint32 self = 1;  // value
+    required TextureFormat format = 2;
+    repeated TextureUsage allowedUsage = 3;
+    required uint32 width = 4;
+    required uint32 height = 5;
+}
+message SwapChainGetCurrentTextureView {
+    required uint32 self = 1;  // value
+}
+message SwapChainPresent {
+    required uint32 self = 1;  // value
+}
+message TextureCreateView {
+    required uint32 self = 1;                 // value
+    required TextureViewDescriptor desc = 2;  // [fallthrough] const*
+}
+message TextureDestroy {
+    required uint32 self = 1;  // value
+}
+message TextureSetLabel {
+    required uint32 self = 1;  // value
+}
+message TextureViewSetLabel {
+    required uint32 self = 1;  // value
+}
+
+message Command {
+    oneof command {
+        AdapterRequestDevice adapterRequestDevice = 1;
+        BindGroupLayoutSetLabel bindGroupLayoutSetLabel = 2;
+        BindGroupSetLabel bindGroupSetLabel = 3;
+        BufferDestroy bufferDestroy = 4;
+        BufferMapAsync bufferMapAsync = 5;
+        BufferSetLabel bufferSetLabel = 6;
+        BufferUnmap bufferUnmap = 7;
+        BufferUpdateMappedData bufferUpdateMappedData = 8;
+        CommandBufferSetLabel commandBufferSetLabel = 9;
+        CommandEncoderBeginComputePass commandEncoderBeginComputePass = 10;
+        CommandEncoderBeginRenderPass commandEncoderBeginRenderPass = 11;
+        CommandEncoderClearBuffer commandEncoderClearBuffer = 12;
+        CommandEncoderCopyBufferToBuffer commandEncoderCopyBufferToBuffer = 13;
+        CommandEncoderCopyBufferToTexture commandEncoderCopyBufferToTexture = 14;
+        CommandEncoderCopyTextureToBuffer commandEncoderCopyTextureToBuffer = 15;
+        CommandEncoderCopyTextureToTexture commandEncoderCopyTextureToTexture = 16;
+        CommandEncoderCopyTextureToTextureInternal commandEncoderCopyTextureToTextureInternal = 17;
+        CommandEncoderFinish commandEncoderFinish = 18;
+        CommandEncoderInjectValidationError commandEncoderInjectValidationError = 19;
+        CommandEncoderInsertDebugMarker commandEncoderInsertDebugMarker = 20;
+        CommandEncoderPopDebugGroup commandEncoderPopDebugGroup = 21;
+        CommandEncoderPushDebugGroup commandEncoderPushDebugGroup = 22;
+        CommandEncoderResolveQuerySet commandEncoderResolveQuerySet = 23;
+        CommandEncoderSetLabel commandEncoderSetLabel = 24;
+        CommandEncoderWriteBuffer commandEncoderWriteBuffer = 25;
+        CommandEncoderWriteTimestamp commandEncoderWriteTimestamp = 26;
+        ComputePassEncoderDispatch computePassEncoderDispatch = 27;
+        ComputePassEncoderDispatchIndirect computePassEncoderDispatchIndirect = 28;
+        ComputePassEncoderDispatchWorkgroups computePassEncoderDispatchWorkgroups = 29;
+        ComputePassEncoderDispatchWorkgroupsIndirect computePassEncoderDispatchWorkgroupsIndirect =
+            30;
+        ComputePassEncoderEnd computePassEncoderEnd = 31;
+        ComputePassEncoderEndPass computePassEncoderEndPass = 32;
+        ComputePassEncoderInsertDebugMarker computePassEncoderInsertDebugMarker = 33;
+        ComputePassEncoderPopDebugGroup computePassEncoderPopDebugGroup = 34;
+        ComputePassEncoderPushDebugGroup computePassEncoderPushDebugGroup = 35;
+        ComputePassEncoderSetBindGroup computePassEncoderSetBindGroup = 36;
+        ComputePassEncoderSetLabel computePassEncoderSetLabel = 37;
+        ComputePassEncoderSetPipeline computePassEncoderSetPipeline = 38;
+        ComputePassEncoderWriteTimestamp computePassEncoderWriteTimestamp = 39;
+        ComputePipelineGetBindGroupLayout computePipelineGetBindGroupLayout = 40;
+        ComputePipelineSetLabel computePipelineSetLabel = 41;
+        DestroyObject destroyObject = 42;
+        DeviceCreateBindGroup deviceCreateBindGroup = 43;
+        DeviceCreateBindGroupLayout deviceCreateBindGroupLayout = 44;
+        DeviceCreateBuffer deviceCreateBuffer = 45;
+        DeviceCreateCommandEncoder deviceCreateCommandEncoder = 46;
+        DeviceCreateComputePipeline deviceCreateComputePipeline = 47;
+        DeviceCreateComputePipelineAsync deviceCreateComputePipelineAsync = 48;
+        DeviceCreateErrorBuffer deviceCreateErrorBuffer = 49;
+        DeviceCreateErrorExternalTexture deviceCreateErrorExternalTexture = 50;
+        DeviceCreateErrorTexture deviceCreateErrorTexture = 51;
+        DeviceCreateExternalTexture deviceCreateExternalTexture = 52;
+        DeviceCreatePipelineLayout deviceCreatePipelineLayout = 53;
+        DeviceCreateQuerySet deviceCreateQuerySet = 54;
+        DeviceCreateRenderBundleEncoder deviceCreateRenderBundleEncoder = 55;
+        DeviceCreateRenderPipeline deviceCreateRenderPipeline = 56;
+        DeviceCreateRenderPipelineAsync deviceCreateRenderPipelineAsync = 57;
+        DeviceCreateSampler deviceCreateSampler = 58;
+        DeviceCreateShaderModule deviceCreateShaderModule = 59;
+        DeviceCreateSwapChain deviceCreateSwapChain = 60;
+        DeviceCreateTexture deviceCreateTexture = 61;
+        DeviceDestroy deviceDestroy = 62;
+        DeviceForceLoss deviceForceLoss = 63;
+        DeviceGetAdapter deviceGetAdapter = 64;
+        DeviceGetQueue deviceGetQueue = 65;
+        DeviceInjectError deviceInjectError = 66;
+        DevicePopErrorScope devicePopErrorScope = 67;
+        DevicePushErrorScope devicePushErrorScope = 68;
+        DeviceSetLabel deviceSetLabel = 69;
+        DeviceTick deviceTick = 70;
+        ExternalTextureDestroy externalTextureDestroy = 71;
+        ExternalTextureSetLabel externalTextureSetLabel = 72;
+        InstanceCreateSurface instanceCreateSurface = 73;
+        InstanceRequestAdapter instanceRequestAdapter = 74;
+        PipelineLayoutSetLabel pipelineLayoutSetLabel = 75;
+        QuerySetDestroy querySetDestroy = 76;
+        QuerySetSetLabel querySetSetLabel = 77;
+        QueueCopyTextureForBrowser queueCopyTextureForBrowser = 78;
+        QueueOnSubmittedWorkDone queueOnSubmittedWorkDone = 79;
+        QueueSetLabel queueSetLabel = 80;
+        QueueSubmit queueSubmit = 81;
+        QueueWriteBuffer queueWriteBuffer = 82;
+        QueueWriteTexture queueWriteTexture = 83;
+        RenderBundleEncoderDraw renderBundleEncoderDraw = 84;
+        RenderBundleEncoderDrawIndexed renderBundleEncoderDrawIndexed = 85;
+        RenderBundleEncoderDrawIndexedIndirect renderBundleEncoderDrawIndexedIndirect = 86;
+        RenderBundleEncoderDrawIndirect renderBundleEncoderDrawIndirect = 87;
+        RenderBundleEncoderFinish renderBundleEncoderFinish = 88;
+        RenderBundleEncoderInsertDebugMarker renderBundleEncoderInsertDebugMarker = 89;
+        RenderBundleEncoderPopDebugGroup renderBundleEncoderPopDebugGroup = 90;
+        RenderBundleEncoderPushDebugGroup renderBundleEncoderPushDebugGroup = 91;
+        RenderBundleEncoderSetBindGroup renderBundleEncoderSetBindGroup = 92;
+        RenderBundleEncoderSetIndexBuffer renderBundleEncoderSetIndexBuffer = 93;
+        RenderBundleEncoderSetLabel renderBundleEncoderSetLabel = 94;
+        RenderBundleEncoderSetPipeline renderBundleEncoderSetPipeline = 95;
+        RenderBundleEncoderSetVertexBuffer renderBundleEncoderSetVertexBuffer = 96;
+        RenderPassEncoderBeginOcclusionQuery renderPassEncoderBeginOcclusionQuery = 97;
+        RenderPassEncoderDraw renderPassEncoderDraw = 98;
+        RenderPassEncoderDrawIndexed renderPassEncoderDrawIndexed = 99;
+        RenderPassEncoderDrawIndexedIndirect renderPassEncoderDrawIndexedIndirect = 100;
+        RenderPassEncoderDrawIndirect renderPassEncoderDrawIndirect = 101;
+        RenderPassEncoderEnd renderPassEncoderEnd = 102;
+        RenderPassEncoderEndOcclusionQuery renderPassEncoderEndOcclusionQuery = 103;
+        RenderPassEncoderEndPass renderPassEncoderEndPass = 104;
+        RenderPassEncoderExecuteBundles renderPassEncoderExecuteBundles = 105;
+        RenderPassEncoderInsertDebugMarker renderPassEncoderInsertDebugMarker = 106;
+        RenderPassEncoderPopDebugGroup renderPassEncoderPopDebugGroup = 107;
+        RenderPassEncoderPushDebugGroup renderPassEncoderPushDebugGroup = 108;
+        RenderPassEncoderSetBindGroup renderPassEncoderSetBindGroup = 109;
+        RenderPassEncoderSetBlendConstant renderPassEncoderSetBlendConstant = 110;
+        RenderPassEncoderSetIndexBuffer renderPassEncoderSetIndexBuffer = 111;
+        RenderPassEncoderSetLabel renderPassEncoderSetLabel = 112;
+        RenderPassEncoderSetPipeline renderPassEncoderSetPipeline = 113;
+        RenderPassEncoderSetScissorRect renderPassEncoderSetScissorRect = 114;
+        RenderPassEncoderSetStencilReference renderPassEncoderSetStencilReference = 115;
+        RenderPassEncoderSetVertexBuffer renderPassEncoderSetVertexBuffer = 116;
+        RenderPassEncoderSetViewport renderPassEncoderSetViewport = 117;
+        RenderPassEncoderWriteTimestamp renderPassEncoderWriteTimestamp = 118;
+        RenderPipelineGetBindGroupLayout renderPipelineGetBindGroupLayout = 119;
+        RenderPipelineSetLabel renderPipelineSetLabel = 120;
+        SamplerSetLabel samplerSetLabel = 121;
+        ShaderModuleGetCompilationInfo shaderModuleGetCompilationInfo = 122;
+        ShaderModuleSetLabel shaderModuleSetLabel = 123;
+        SwapChainConfigure swapChainConfigure = 124;
+        SwapChainGetCurrentTextureView swapChainGetCurrentTextureView = 125;
+        SwapChainPresent swapChainPresent = 126;
+        TextureCreateView textureCreateView = 127;
+        TextureDestroy textureDestroy = 128;
+        TextureSetLabel textureSetLabel = 129;
+        TextureViewSetLabel textureViewSetLabel = 130;
+    }
+}
+
+message Program {
+    repeated Command commands = 1;
+}
