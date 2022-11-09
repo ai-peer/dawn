@@ -70,6 +70,30 @@
       },
       "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37c10153_a56a6f84",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-09T18:32:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df7b9bc7_1b756a13",
+      "range": {
+        "startLine": 221,
+        "startChar": 22,
+        "endLine": 221,
+        "endChar": 91
+      },
+      "revId": "b548db1f70d5be3b7963cea1c7d600547ae23c52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
