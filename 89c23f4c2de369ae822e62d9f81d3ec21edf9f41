@@ -39,6 +39,30 @@
       },
       "revId": "89c23f4c2de369ae822e62d9f81d3ec21edf9f41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edec08df_d295671a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 2298,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-11-09T18:24:41Z",
+      "side": 1,
+      "message": "I don\u0027t think it should ever trigger, but I got burned by leaving off an add error in the past, so wanted to make sure we add the error regardless of if it\u0027s reachable.",
+      "parentUuid": "56e53a14_551a3a06",
+      "range": {
+        "startLine": 2297,
+        "startChar": 0,
+        "endLine": 2298,
+        "endChar": 34
+      },
+      "revId": "89c23f4c2de369ae822e62d9f81d3ec21edf9f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
