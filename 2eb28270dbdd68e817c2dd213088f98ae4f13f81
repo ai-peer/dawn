@@ -33,6 +33,24 @@
       "message": "Can we file a bug to attach these two disables too?",
       "revId": "2eb28270dbdd68e817c2dd213088f98ae4f13f81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a124b220_d84830bf",
+        "filename": "src/tint/transform/module_scope_var_to_entry_point_param_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-09T19:10:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "520a6fcc_a69e224b",
+      "revId": "2eb28270dbdd68e817c2dd213088f98ae4f13f81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
