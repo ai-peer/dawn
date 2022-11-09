@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30751c68_f79ec036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003412
+      },
+      "writtenOn": "2022-11-09T23:49:17Z",
+      "side": 1,
+      "message": "This is awesome! I can\u0027t wait for coverage stats. \n\nMy one big request is to include whatever script(s) you used for the generation, even if their output requires manual fixups. Developing the generator(s) was a significant part of this accomplishment, and it would require a lot more effort for someone to update the generated files if they had to recreate a generator without your existing scripts as a starting point. Please also include usage info for the script, an example of what you had to fix up, and a brief description of how one can determine which portions of the generated output need fix ups. \n\nDid I say this is awesome?! Thank you!",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040b5542_11a1b29e",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003412
+      },
+      "writtenOn": "2022-11-09T23:49:17Z",
+      "side": 1,
+      "message": "Does it make sense to include the Dawn lpmfuzzer to this build group?",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707f0772_b5dbe223",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003412
+      },
+      "writtenOn": "2022-11-09T23:49:17Z",
+      "side": 1,
+      "message": "Nit: Maybe add a comment giving a nod that this class comes from  DawnWireServerFuzzer.cpp.\n\nOr better yet, elevate the class into its own header b/c I also created another copy of this class for another CL, so it seems there\u0027s benefit in general exposure.",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
