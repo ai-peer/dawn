@@ -257,6 +257,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fdd3b0f_1997e1c5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2085,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T15:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f6b41a3_8775f1f1",
+      "range": {
+        "startLine": 2085,
+        "startChar": 12,
+        "endLine": 2085,
+        "endChar": 20
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "135522b6_4df603d1",
@@ -270,6 +294,30 @@
       "writtenOn": "2022-11-09T13:23:19Z",
       "side": 1,
       "message": "`OverflowErrorMessage()`",
+      "range": {
+        "startLine": 2296,
+        "startChar": 12,
+        "endLine": 2296,
+        "endChar": 20
+      },
+      "revId": "4c078bc0a37d9b0c09784f5f1d4f79f03c472b57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e01e84e_0607f064",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2296,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-09T15:11:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "135522b6_4df603d1",
       "range": {
         "startLine": 2296,
         "startChar": 12,
