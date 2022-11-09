@@ -64,6 +64,7 @@
 #include "src/tint/transform/remove_continue_in_switch.h"
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/simplify_pointers.h"
+#include "src/tint/transform/truncate_interstage_variables.h"
 #include "src/tint/transform/unshadow.h"
 #include "src/tint/transform/unwind_discard_functions.h"
 #include "src/tint/transform/vectorize_scalar_matrix_initializers.h"
@@ -184,6 +185,14 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     array_length_from_uniform_cfg.bindpoint_to_size_index =
         array_length_from_uniform.bindpoint_to_size_index;
 
+    // Build the config for internal TruncateInterstageVariables transform.
+    transform::TruncateInterstageVariables::Config truncate_interstage_variables_cfg;
+    if (!options.interstage_locations.IsEmpty()) {
+        // truncate_interstage_variables_cfg.interstage_locations = options.interstage_locations;
+        truncate_interstage_variables_cfg.interstage_locations =
+            std::move(options.interstage_locations);
+    }
+
     if (options.generate_external_texture_bindings) {
         auto new_bindings_map = GenerateExternalTextureBindings(in);
         data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
@@ -207,6 +216,9 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
     manager.Add<transform::CanonicalizeEntryPointIO>();
+    manager.Add<transform::TruncateInterstageVariables>();
+    data.Add<transform::TruncateInterstageVariables::Config>(
+        std::move(truncate_interstage_variables_cfg));
     // NumWorkgroupsFromUniform must come after CanonicalizeEntryPointIO, as it
     // assumes that num_workgroups builtins only appear as struct members and are
     // only accessed directly via member accessors.
