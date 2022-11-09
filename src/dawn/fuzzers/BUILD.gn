@@ -110,6 +110,43 @@ dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
   additional_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
 }
 
+if (!is_android && !is_fuchsia && !is_chromeos_ash) {
+  import("//testing/libfuzzer/fuzzer_test.gni")
+  import("//third_party/protobuf/proto_library.gni")
+
+  proto_library("dawn_lpm_proto") {
+    sources = [ "lpmfuzz/dawn_lpm.proto" ]
+
+    use_protobuf_full = true
+    deps = [ "//third_party/protobuf:protobuf_full" ]
+  }
+
+  dawn_fuzzer_test("dawn_lpm_fuzzer_and_vulkan_backend") {
+    sources = [
+      "lpmfuzz/DawnLPMFuzzer.cpp",
+      "lpmfuzz/DawnLPMFuzzer.h",
+      "lpmfuzz/DawnLPMFuzzerAndVulkanBackend.cpp",
+      "lpmfuzz/DawnLPMSerializer_gen.cpp",
+      "lpmfuzz/DawnLPMSerializer_gen.h",
+      "lpmfuzz/FuzzCommandSerializer.h",
+      "lpmfuzz/FuzzObjectIdProvider.h",
+      "lpmfuzz/FuzzObjectStore.cpp",
+      "lpmfuzz/FuzzObjectStore.h",
+    ]
+
+    deps = [
+      "${dawn_root}/src/dawn:cpp",
+      "${dawn_root}/src/dawn:proc",
+      "${dawn_root}/src/dawn/common",
+      "${dawn_root}/src/dawn/native:static",
+      "${dawn_root}/src/dawn/utils",
+      "${dawn_root}/src/dawn/wire:static",
+      "//third_party/dawn/src/dawn/fuzzers:dawn_lpm_proto",
+      "//third_party/libprotobuf-mutator",
+    ]
+  }
+}
+
 # A group target to build all the fuzzers
 group("fuzzers") {
   testonly = true

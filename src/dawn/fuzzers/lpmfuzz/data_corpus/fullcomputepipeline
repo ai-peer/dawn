@@ -1,0 +1,262 @@
+commands {
+  instanceRequestAdapter {
+    instanceId: 0
+    requestSerial: 0
+    options {
+      compatibleSurface: 0
+      powerPreference: PowerPreferenceLowPower
+      forceFallbackAdapter: true
+    }
+  }
+}
+
+commands {
+  instanceRequestAdapter {
+    instanceId: 0
+    requestSerial: 0
+    options {
+      compatibleSurface: 0
+      powerPreference: PowerPreferenceLowPower
+      forceFallbackAdapter: true
+    }
+  }
+}
+
+commands {
+  adapterRequestDevice {
+    adapterId: 0
+    requestSerial: 8
+    desc {
+      requiredFeaturesCount: 0
+      requiredLimits {
+        limits {
+          maxTextureDimension1D: 0
+          maxTextureDimension2D: 0
+          maxTextureDimension3D: 0
+          maxTextureArrayLayers: 0
+          maxBindGroups: 0
+          maxBindingsPerBindGroup: 0
+          maxDynamicUniformBuffersPerPipelineLayout: 0
+          maxDynamicStorageBuffersPerPipelineLayout: 0
+          maxSampledTexturesPerShaderStage: 0
+          maxSamplersPerShaderStage: 0
+          maxStorageBuffersPerShaderStage: 0
+          maxStorageTexturesPerShaderStage: 0
+          maxUniformBuffersPerShaderStage: 0
+          maxUniformBufferBindingSize: 0
+          maxStorageBufferBindingSize: 0
+          minUniformBufferOffsetAlignment: 256
+          minStorageBufferOffsetAlignment: 256
+          maxVertexBuffers: 5
+          maxBufferSize: 0
+          maxVertexAttributes: 0
+          maxVertexBufferArrayStride: 0
+          maxInterStageShaderComponents: 0
+          maxInterStageShaderVariables: 0
+          maxColorAttachments: 0
+          maxComputeWorkgroupStorageSize: 100
+          maxComputeInvocationsPerWorkgroup: 100
+          maxComputeWorkgroupSizeX: 10
+          maxComputeWorkgroupSizeY: 10
+          maxComputeWorkgroupSizeZ: 10
+          maxComputeWorkgroupsPerDimension: 10
+        }
+      }
+      defaultQueue {
+      }
+    }
+  }
+}
+
+commands {
+  adapterRequestDevice {
+    adapterId: 1
+    requestSerial: 8
+    desc {
+      requiredFeaturesCount: 0
+      requiredLimits {
+        limits {
+          maxTextureDimension1D: 0
+          maxTextureDimension2D: 0
+          maxTextureDimension3D: 0
+          maxTextureArrayLayers: 0
+          maxBindGroups: 0
+          maxBindingsPerBindGroup: 0
+          maxDynamicUniformBuffersPerPipelineLayout: 0
+          maxDynamicStorageBuffersPerPipelineLayout: 0
+          maxSampledTexturesPerShaderStage: 0
+          maxSamplersPerShaderStage: 0
+          maxStorageBuffersPerShaderStage: 0
+          maxStorageTexturesPerShaderStage: 0
+          maxUniformBuffersPerShaderStage: 0
+          maxUniformBufferBindingSize: 0
+          maxStorageBufferBindingSize: 0
+          minUniformBufferOffsetAlignment: 256
+          minStorageBufferOffsetAlignment: 256
+          maxVertexBuffers: 5
+          maxBufferSize: 0
+          maxVertexAttributes: 0
+          maxVertexBufferArrayStride: 0
+          maxInterStageShaderComponents: 0
+          maxInterStageShaderVariables: 0
+          maxColorAttachments: 0
+          maxComputeWorkgroupStorageSize: 0
+          maxComputeInvocationsPerWorkgroup: 0
+          maxComputeWorkgroupSizeX: 0
+          maxComputeWorkgroupSizeY: 5
+          maxComputeWorkgroupSizeZ: 2
+          maxComputeWorkgroupsPerDimension: 0
+        }
+      }
+      defaultQueue {
+      }
+    }
+  }
+}
+
+commands {
+  deviceCreateBindGroupLayout {
+    self: 0
+    desc {
+      entries {
+        binding: 0
+        visibility: ShaderStageCompute
+        buffer {
+          type: BufferBindingTypeStorage
+          hasDynamicOffset: false
+          minBindingSize: 0
+        }
+      }
+    }
+  }
+}
+
+
+commands {
+    deviceCreateBuffer {
+        deviceId: 0
+        desc {
+            size: 200
+            mappedAtCreation: false
+            usage: BufferUsageStorage
+        }
+        readHandleCreateInfoLength: 0
+        writeHandleCreateInfoLength: 0
+    }
+}
+
+commands {
+  deviceCreateShaderModule {
+    self: 0
+    desc {
+    }
+  }
+}
+
+commands {
+  deviceCreatePipelineLayout {
+    self: 0
+    desc {
+      bindGroupLayouts: 0
+    }
+  }
+}
+
+commands {
+  deviceCreateComputePipeline {
+    self: 0
+    desc {
+      layout: 0
+      compute {
+        module: 0
+        entryPoint: ""
+      }
+    }
+  }
+}
+
+commands {
+  deviceCreateCommandEncoder {
+    self: 0
+    desc {
+    }
+  }
+}
+
+commands {
+  commandEncoderBeginComputePass {
+    self: 0
+    desc {
+
+    }
+  }
+}
+
+commands {
+  computePassEncoderSetPipeline {
+    self: 0
+    pipeline: 0
+  }
+}
+
+commands {
+  deviceCreateBindGroup {
+    self: 0
+    desc {
+      layout: 0
+      entries {
+        binding: 0
+        buffer: 0
+        offset: 0
+        size: 100
+        sampler: 0
+        textureView: 0
+      }
+    }
+  }
+}
+
+commands {
+  computePassEncoderSetBindGroup {
+    self: 0
+    groupIndex: 0
+    group: 0
+  }
+}
+
+commands {
+  computePassEncoderDispatchWorkgroups {
+    self: 0
+    workgroupCountX: 2
+    workgroupCountY: 2
+    workgroupCountZ: 0
+  }
+}
+
+commands {
+  computePassEncoderEnd {
+
+  }
+}
+
+commands {
+  commandEncoderFinish {
+    self: 0
+    desc {
+
+    }
+  }
+}
+
+commands {
+  deviceGetQueue {
+    self: 0
+  }
+}
+
+commands {
+  queueSubmit {
+    self: 0
+    commands: 0
+  }
+}
