@@ -34,16 +34,14 @@ namespace tint::reader::spirv {
 //
 // The edge kinds are used in many ways.
 //
-// For example, consider the edges leaving a basic block and going to distinct
-// targets. If the total number of kForward + kIfBreak + kCaseFallThrough edges
-// is more than 1, then the block must be a structured header, i.e. it needs
-// a merge instruction to declare the control flow divergence and associated
-// reconvergence point.  Those those edge kinds count toward divergence
-// because SPIR-v is designed to easily map back to structured control flow
-// in GLSL (and C).  In GLSL and C, those forward-flow edges don't have a
-// special statement to express them.  The other forward edges: kSwitchBreak,
-// kLoopBreak, and kLoopContinue directly map to 'break', 'break', and
-// 'continue', respectively.
+// For example, consider the edges leaving a basic block and going to distinct targets. If the
+// total number of kForward + kIfBreak edges is more than 1, then the block must be a structured
+// header, i.e. it needs a merge instruction to declare the control flow divergence and associated
+// reconvergence point.  Those those edge kinds count toward divergence because SPIR-v is designed
+// to easily map back to structured control flow in GLSL (and C).  In GLSL and C, those
+// forward-flow edges don't have a special statement to express them.  The other forward edges:
+// kSwitchBreak, kLoopBreak, and kLoopContinue directly map to 'break', 'break', and 'continue',
+// respectively.
 enum class EdgeKind {
     // A back-edge: An edge from a node to one of its ancestors in a depth-first
     // search from the entry block.
@@ -64,7 +62,8 @@ enum class EdgeKind {
     // This can only occur for an "if" selection, i.e. where the selection
     // header ends in OpBranchConditional.
     kIfBreak,
-    // An edge from one switch case to the next sibling switch case.
+    // An edge from one switch case to the next sibling switch case. Note, this is not valid in WGSL
+    // at the moment and will trigger an ICE if encountered. It is here for completeness.
     kCaseFallThrough,
     // None of the above.
     kForward
@@ -708,8 +707,7 @@ class FunctionEmitter {
 
     /// Emits code for terminators, but that aren't part of entering or
     /// resolving structured control flow. That is, if the basic block
-    /// terminator calls for it, emit the fallthrough, break, continue, return,
-    /// or kill commands.
+    /// terminator calls for it, emit the break, continue, return, or kill commands.
     /// @param block_info the block with the terminator to emit (if any)
     /// @returns false if emission failed
     bool EmitNormalTerminator(const BlockInfo& block_info);
@@ -766,24 +764,6 @@ class FunctionEmitter {
     const ast::Statement* MakeSimpleIf(const ast::Expression* condition,
                                        const ast::Statement* then_stmt,
                                        const ast::Statement* else_stmt) const;
-
-    /// Emits the statements for an normal-terminator OpBranchConditional
-    /// where one branch is a case fall through (the true branch if and only
-    /// if `fall_through_is_true_branch` is true), and the other branch is
-    /// goes to a different destination, named by `other_dest`.
-    /// @param src_info the basic block from which we're branching
-    /// @param cond the branching condition
-    /// @param other_edge_kind the edge kind from the source block to the other
-    /// destination
-    /// @param other_dest the other branching destination
-    /// @param fall_through_is_true_branch true when the fall-through is the true
-    /// branch
-    /// @returns the false if emission fails
-    bool EmitConditionalCaseFallThrough(const BlockInfo& src_info,
-                                        const ast::Expression* cond,
-                                        EdgeKind other_edge_kind,
-                                        const BlockInfo& other_dest,
-                                        bool fall_through_is_true_branch);
 
     /// Emits a normal instruction: not a terminator, label, or variable
     /// declaration.
