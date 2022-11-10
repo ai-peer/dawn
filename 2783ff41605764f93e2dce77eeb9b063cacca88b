@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920dc0d2_b5a9ff8a",
+        "filename": "test/tint/builtins/gen/var/acosh/f56574.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-10T00:45:22Z",
+      "side": 1,
+      "message": "This appears to have been polyfill\u0027d instead of const-eval\u0027d? (Specifically it fails on hlsl FXC due to float16_t usage, but it should have all folded away?)",
+      "revId": "2783ff41605764f93e2dce77eeb9b063cacca88b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
