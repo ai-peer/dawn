@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "daddcb47_4c2eec05",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-10T01:17:20Z",
+      "side": 0,
+      "message": "Just to be clear, you\u0027d like to restore all the code in here that sets kCaseFallthrough and then the only change would be to `Fail()` at this point?",
+      "parentUuid": "bb7b4aa5_4851b734",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ee5b348_75f84a69",
         "filename": "src/tint/reader/spirv/function.h",
         "patchSetId": 1
