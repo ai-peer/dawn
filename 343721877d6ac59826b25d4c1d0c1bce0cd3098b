@@ -50,6 +50,24 @@
       "message": "Why move this down here.  It seems better to error out sooner rather than later.",
       "revId": "343721877d6ac59826b25d4c1d0c1bce0cd3098b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8538c2eb_edbb7696",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-10T17:52:05Z",
+      "side": 1,
+      "message": "To be clear, move this back to where it was above.",
+      "parentUuid": "3cc2fe3b_ef481ed0",
+      "revId": "343721877d6ac59826b25d4c1d0c1bce0cd3098b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

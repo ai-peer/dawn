@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "256a8fb4_43fb2797",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-10T17:52:05Z",
+      "side": 0,
+      "message": "I prefer this logic stay here but issue the error here, and add a comment saying\n\"If WGSL supported fallthrough, we would set edge_kind to EdgeKind::kCaseFallThrough\"",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb7b4aa5_4851b734",
         "filename": "src/tint/reader/spirv/function.cc",
         "patchSetId": 1
@@ -32,6 +49,24 @@
       "side": 0,
       "message": "Just to be clear, you\u0027d like to restore all the code in here that sets kCaseFallthrough and then the only change would be to `Fail()` at this point?",
       "parentUuid": "bb7b4aa5_4851b734",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5aa602_383b53f3",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3276,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-10T17:52:05Z",
+      "side": 0,
+      "message": "Keep this case (since I want the enum valieto exist), but ICE here, since it should never be set.",
+      "parentUuid": "daddcb47_4c2eec05",
       "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
