@@ -16,6 +16,57 @@
       "message": "Hi Corentin, Austin and Kai,\n\nI\u0027ve rebased this CL. PTAL, thanks!",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad3e5dc_3e152751",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-10T05:49:52Z",
+      "side": 1,
+      "message": "I don\u0027t think InjectError is really any different from generating an error in DeviceBase::APICreateErrorBuffer. Both are WebGPU errors (reported asynchronously, can be caught by error scopes). So I\u0027m not sure why we need to InjectError if mappedAtCreation is true, but generate an error inside DeviceBase::APICreateErrorBuffer if it\u0027s false.\n\nThe thing that\u0027s different about mappedAtCreation, from a JS application perspective, is whether the createBuffer call can throw an exception (https://dawn-review.googlesource.com/c/dawn/+/106840/comments/21f18b0a_11970022). If it throws an exception, we shouldn\u0027t _also_ InjectError a WebGPU error.",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f0d266_74b01585",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-10T05:49:52Z",
+      "side": 1,
+      "message": "nit: I believe this is a real OOM condition, so better to say something like \"Failed to allocate memory for buffer mapping\".",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91f3f0f_4bc618e3",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-10T05:49:52Z",
+      "side": 1,
+      "message": "nit: \"Failed to allocate memory for buffer mapping\"",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
