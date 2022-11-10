@@ -34,6 +34,24 @@
       "parentUuid": "be04fd00_81d6d72d",
       "revId": "3685ca1231ae4de1e085d4e58a00a14ecfde633e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b5d991_8c6f9f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-10T07:57:33Z",
+      "side": 1,
+      "message": "Waiting for upstream fix: https://github.com/KhronosGroup/Vulkan-Headers/pull/320",
+      "parentUuid": "4889ba98_9ef44aca",
+      "revId": "3685ca1231ae4de1e085d4e58a00a14ecfde633e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
