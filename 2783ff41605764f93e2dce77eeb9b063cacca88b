@@ -16,6 +16,24 @@
       "message": "This appears to have been polyfill\u0027d instead of const-eval\u0027d? (Specifically it fails on hlsl FXC due to float16_t usage, but it should have all folded away?)",
       "revId": "2783ff41605764f93e2dce77eeb9b063cacca88b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08dda869_22b43c54",
+        "filename": "test/tint/builtins/gen/var/acosh/f56574.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-10T01:10:10Z",
+      "side": 1,
+      "message": "Skips got dropped when I re-gen\u0027d.",
+      "parentUuid": "920dc0d2_b5a9ff8a",
+      "revId": "2783ff41605764f93e2dce77eeb9b063cacca88b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
