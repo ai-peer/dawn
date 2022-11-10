@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62e49e6c_a0859644",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-10T06:25:39Z",
+      "side": 1,
+      "message": "to confirm: is the part that can throw an exception the CreateByteDataBlock part of \"initialize an active buffer mapping\"\n\nreading that, it seems like what we should be doing is asking the embedder to create the buffer allocation shmem, and then pass that into the wire to get wrapped as a WGPUBuffer. that way it can fail before we get to creating a WGPUBuffer. right now the shmem gets allocated inside deviceCreateBuffer which is too late. we\u0027d have to return nullptr which is not ideal.\n\n[3] I suppose for now we can return nullptr and rework this in the future?",
+      "parentUuid": "bad3e5dc_3e152751",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f91f3f0f_4bc618e3",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 6
