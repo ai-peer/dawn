@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64f956dc_da1ce76d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-10T03:24:41Z",
+      "side": 1,
+      "message": "LGTM, thanks",
+      "revId": "00d0fd5e840d70d95b254631ef78045fa4220990",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe3c9b8_5ed3ada2",
+        "filename": "src/tint/number.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-10T03:24:41Z",
+      "side": 1,
+      "message": "As a note, this could also be described as \"the next more significant bit of the most significant mantissa bit\", which is defined as `1 \u003c\u003c kF16MantissaBits` equals to `0x0400`",
+      "revId": "00d0fd5e840d70d95b254631ef78045fa4220990",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
