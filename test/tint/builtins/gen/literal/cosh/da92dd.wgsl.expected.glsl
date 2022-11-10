@@ -1,7 +1,7 @@
 #version 310 es
 
 void cosh_da92dd() {
-  float res = cosh(1.0f);
+  float res = 1.543080568f;
 }
 
 vec4 vertex_main() {
@@ -21,7 +21,7 @@ void main() {
 precision mediump float;
 
 void cosh_da92dd() {
-  float res = cosh(1.0f);
+  float res = 1.543080568f;
 }
 
 void fragment_main() {
@@ -35,7 +35,7 @@ void main() {
 #version 310 es
 
 void cosh_da92dd() {
-  float res = cosh(1.0f);
+  float res = 1.543080568f;
 }
 
 void compute_main() {

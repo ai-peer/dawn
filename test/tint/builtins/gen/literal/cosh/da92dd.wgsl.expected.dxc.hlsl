@@ -1,5 +1,5 @@
 void cosh_da92dd() {
-  float res = cosh(1.0f);
+  float res = 1.543080568f;
 }
 
 struct tint_symbol {
