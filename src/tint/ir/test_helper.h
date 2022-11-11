@@ -47,6 +47,13 @@ class TestHelperBase : public BASE, public ProgramBuilder {
         return *gen_;
     }
 
+    /// Create a builder with a nullptr program
+    /// @returns the builder
+    BuilderImpl& EmptyBuilder() {
+        gen_ = std::make_unique<BuilderImpl>(nullptr);
+        return *gen_;
+    }
+
     /// The program built with a call to Build()
     std::unique_ptr<Program> program;
 

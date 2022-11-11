@@ -16,6 +16,9 @@
 
 #include <utility>
 
+#include "src/tint/ast/bool_literal_expression.h"
+#include "src/tint/ast/float_literal_expression.h"
+#include "src/tint/ast/int_literal_expression.h"
 #include "src/tint/ir/builder_impl.h"
 #include "src/tint/program.h"
 
@@ -91,6 +94,35 @@ void Builder::Branch(Block* from, FlowNode* to) {
     TINT_ASSERT(IR, to);
     from->branch_target = to;
     to->inbound_branches.Push(from);
+}
+
+Op Builder::CreateLoad(const ast::BoolLiteralExpression* expr) {
+    Op o(Op::Kind::kLoadConstant);
+    o.args = Constant{Constant::Kind::kBool, expr->value};
+    o.result = Register::Allocate();
+    return o;
+}
+
+Op Builder::CreateLoad(const ast::FloatLiteralExpression* expr) {
+    Constant::Kind kind = expr->suffix == ast::FloatLiteralExpression::Suffix::kF
+                              ? Constant::Kind::kF32
+                              : Constant::Kind::kF16;
+
+    Op o(Op::Kind::kLoadConstant);
+    o.args = Constant{kind, expr->value};
+    o.result = Register::Allocate();
+    return o;
+}
+
+Op Builder::CreateLoad(const ast::IntLiteralExpression* expr) {
+    Constant::Kind kind = expr->suffix == ast::IntLiteralExpression::Suffix::kI
+                              ? Constant::Kind::kI32
+                              : Constant::Kind::kU32;
+
+    Op o(Op::Kind::kLoadConstant);
+    o.args = Constant{kind, expr->value};
+    o.result = Register::Allocate();
+    return o;
 }
 
 }  // namespace tint::ir
