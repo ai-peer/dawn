@@ -140,6 +140,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66edc76c_176758b9",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-11T00:40:09Z",
+      "side": 1,
+      "message": "If we can return a nullptr WGPUBuffer here (and send nothing to the wire server) then I think that would be fine, though I don\u0027t think Corentin was convinced in that other thread. In theory we want some kind of native API answer for fallible allocation in mappedAtCreation but",
+      "parentUuid": "62e49e6c_a0859644",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f91f3f0f_4bc618e3",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 6
