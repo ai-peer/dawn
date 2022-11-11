@@ -23,6 +23,7 @@
 #include "src/tint/ir/builder.h"
 #include "src/tint/ir/flow_node.h"
 #include "src/tint/ir/module.h"
+#include "src/tint/ir/register.h"
 #include "src/tint/utils/result.h"
 
 // Forward Declarations
@@ -137,6 +138,41 @@ class BuilderImpl {
     /// Emits a fallthrough statement
     /// @returns true if successful, false otherwise
     bool EmitFallthrough();
+
+    /// Emits an expression
+    /// @param expr the expression to emit
+    /// @returns the register storing the result if successful, utils::Failure otherwise
+    utils::Result<Register> EmitExpression(const ast::Expression* expr);
+
+    /// Emits a variable
+    /// @param var the variable to emit
+    /// @returns true if successful, false otherwise
+    bool EmitVariable(const ast::Variable* var);
+
+    /// Emits a constant
+    /// @param c the constant
+    /// @returns true if successful, false otherwise
+    bool EmitConst(const ast::Const* c);
+
+    /// Emits a literal
+    /// @param lit the literal to emit
+    /// @return returns true if successful, false otherwise
+    bool EmitLiteral(const ast::LiteralExpression* lit);
+
+    /// Emits a type
+    /// @param ty the type to emit
+    /// @return returns true if successful, false otherwise
+    bool EmitType(const ast::Type* ty);
+
+    /// Emits a list of attributes
+    /// @param attrs the attributes to emit
+    /// @returns true if successful, false otherwise
+    bool EmitAttributes(utils::VectorRef<const ast::Attribute*> attrs);
+
+    /// Emits an attribute
+    /// @param attr the attribute to emit
+    /// @returns true if successful, false otherwise
+    bool EmitAttribute(const ast::Attribute* attr);
 
     /// Retrieve the IR Flow node for a given AST node.
     /// @param n the node to lookup
