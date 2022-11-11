@@ -158,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "59326ebd_c354495f",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T06:53:09Z",
+      "side": 1,
+      "message": "IIUC, Corentin\u0027s reservations are about the service side returning nullptr without the client side knowing. that\u0027s not the case here - the client is returning nullptr, and in that situation (all the ones were we currently InjectError), we wouldn\u0027t need to send any messages to the server (so no duplicate errors)\n\nas I said above, I think this would be better done by having a separate method to make the mapped buffer, and then wrap that as a buffer - but that can be reworked in the future.\nreturning nullptr in the client should be enough to get us spec compliant",
+      "parentUuid": "66edc76c_176758b9",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f91f3f0f_4bc618e3",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 6
