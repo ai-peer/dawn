@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac8899a_ea17ff9a",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_gen.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "why not 0? that\u0027s what we use usually for the \"nullptr\" object",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 27
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5871c7_02bd8de5",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_gen.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "all these defines are the same - why not use a single one, and also - could it be constexpr instead of a #define ?",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be508fab_1234de04",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "seems unused - remove it for now? I don\u0027t think this fuzzer looks like it supports error injection (but you could add that if you\u0027d like!)",
+      "range": {
+        "startLine": 83,
+        "startChar": 28,
+        "endLine": 83,
+        "endChar": 50
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bdc5c1c_6b3944f8",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "are these used in this header? maybe it\u0027s only needed in the c++ file",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55d79d62_5d01da4e",
+        "filename": "src/dawn/fuzzers/lpmfuzz/FuzzObjectIdProvider.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "unit: it would be slightly more concise if we had a helper \"GetIdImpl\" which was templated across any pointer type - and these all just did `return GetIdImpl(object, out);`",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f3574f_50e7e215",
+        "filename": "src/dawn/fuzzers/lpmfuzz/FuzzObjectStore.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "any way we could factor this class with the actual client one?",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a776e9_b68fbe59",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "format of this header doesn\u0027t seem to match the rest of the project. also, 2022 and Dawn (likewise in other files throughout this CL)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eff7454_4a6b0dde",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "what does \"fallthrough\" mean here? it\u0027s not a switch statement -  does it mean this is a nested message type?",
+      "range": {
+        "startLine": 1010,
+        "startChar": 46,
+        "endLine": 1010,
+        "endChar": 57
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

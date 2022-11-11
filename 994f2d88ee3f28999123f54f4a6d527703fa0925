@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "12364dc0_60532d2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-11T20:46:49Z",
+      "side": 1,
+      "message": "+1 on this - I think it would be valuable if it were possible to expand our existing generators to generate as much as possible - otherwise the corpus, protos, and enums could quickly get out of date whenever the modify dawn.json",
+      "parentUuid": "30751c68_f79ec036",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "040b5542_11a1b29e",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 2
