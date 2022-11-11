@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa58ecce_05ce6157",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-11T07:10:55Z",
+      "side": 1,
+      "message": "According to SPEC, we should first check if there is OOM on the content timeline when mappedAtCreation \u003d\u003d true, then validate BufferDescriptor on the device timeline, so",
+      "parentUuid": "85662f31_80de1a79",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3bd138ac_43b662d9",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-11-10T06:07:33Z",
       "side": 1,
       "message": "instead of adding this method, could we move the deprecation warning into ValidateBufferDescriptor?",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9925c6ab_3517667c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-11T07:10:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8305826_4e59740e",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +206,24 @@
       "side": 1,
       "message": "IIUC, Corentin\u0027s reservations are about the service side returning nullptr without the client side knowing. that\u0027s not the case here - the client is returning nullptr, and in that situation (all the ones were we currently InjectError), we wouldn\u0027t need to send any messages to the server (so no duplicate errors)\n\nas I said above, I think this would be better done by having a separate method to make the mapped buffer, and then wrap that as a buffer - but that can be reworked in the future.\nreturning nullptr in the client should be enough to get us spec compliant",
       "parentUuid": "66edc76c_176758b9",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "261dd878_bebc2756",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-11T07:10:55Z",
+      "side": 1,
+      "message": "Hi Austin, do you mean we should\n1. return nullptr directly at wire client when OOM happens and mappedAtCreation \u003d\u003d true\n2. put a structure with information about OOM at client to ChainedStruct at BufferDescriptor when OOM happens and mappedAtCreation \u003d\u003d false",
+      "parentUuid": "59326ebd_c354495f",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
