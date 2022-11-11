@@ -101,6 +101,7 @@ struct Options {
     std::optional<tint::sem::BindingPoint> hlsl_root_constant_binding_point;
 
 #if TINT_BUILD_IR
+    bool build_ir = false;
     bool dump_ir_graph = false;
 #endif  // TINT_BUILD_IR
 };
@@ -446,6 +447,8 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
             }
             opts->dxc_path = args[i];
 #if TINT_BUILD_IR
+        } else if (arg == "--build-ir") {
+            opts->build_ir = true;
         } else if (arg == "--dump-ir-graph") {
             opts->dump_ir_graph = true;
 #endif  // TINT_BUILD_IR
@@ -1150,6 +1153,7 @@ int main(int argc, const char** argv) {
         std::string usage = tint::utils::ReplaceAll(kUsage, "${transforms}", transform_names());
 #if TINT_BUILD_IR
         usage +=
+            "  --build-ir                -- Constructs the IR\n"
             "  --dump-ir-graph           -- Writes the IR graph to 'tint.dot' as a dot graph\n";
 #endif  // TINT_BUILD_IR
 
@@ -1272,11 +1276,11 @@ int main(int argc, const char** argv) {
     }
 
 #if TINT_BUILD_IR
-    if (options.dump_ir_graph) {
+    if (options.build_ir || options.dump_ir_graph) {
         auto result = tint::ir::Module::FromProgram(program.get());
         if (!result) {
             std::cerr << "Failed to build IR from program: " << result.Failure() << std::endl;
-        } else {
+        } else if (options.dump_ir_graph) {
             auto mod = result.Move();
             auto graph = tint::ir::Debug::AsDotGraph(&mod);
             WriteFile("tint.dot", "w", graph);
