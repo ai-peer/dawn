@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d5efbb0_2b49bbe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-11T22:30:49Z",
+      "side": 1,
+      "message": "Looks great, just a question about WGSL validation.",
+      "revId": "fcbd3bfb8da21a9d4693cb2095df022562934e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d97ba9e_aac14a6f",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-11T22:30:49Z",
+      "side": 1,
+      "message": "This is the WGSL output validation mentioned this morning. Perhaps we should avoid skipping this, as we can\u0027t know whether Tint itself will have changed meaningfully or not?",
+      "revId": "fcbd3bfb8da21a9d4693cb2095df022562934e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
