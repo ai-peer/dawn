@@ -294,6 +294,7 @@ TEST_F(BufferValidationTest, MapAsync_AlreadyMapped) {
     {
         wgpu::Buffer buffer = CreateMapReadBuffer(4);
         buffer.MapAsync(wgpu::MapMode::Read, 0, 4, nullptr, nullptr);
+        WaitForAllOperations(device);
         AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
     }
     {
@@ -303,11 +304,34 @@ TEST_F(BufferValidationTest, MapAsync_AlreadyMapped) {
     {
         wgpu::Buffer buffer = CreateMapWriteBuffer(4);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 4, nullptr, nullptr);
+        WaitForAllOperations(device);
         AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
     }
     {
         wgpu::Buffer buffer = BufferMappedAtCreation(4, wgpu::BufferUsage::MapWrite);
         AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+    }
+}
+
+// Test map async with a buffer that's pending map
+TEST_F(BufferValidationTest, MapAsync_PendingMap) {
+    {
+        wgpu::Buffer buffer = CreateMapReadBuffer(4);
+        // The first map async call should succeed while the second one should fail
+        buffer.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);
+        AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
+        EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Success, nullptr))
+            .Times(1);
+        WaitForAllOperations(device);
+    }
+    {
+        wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+        // The first map async call should succeed while the second one should fail
+        buffer.MapAsync(wgpu::MapMode::Write, 0, 4, ToMockBufferMapAsyncCallback, nullptr);
+        AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+        EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Success, nullptr))
+            .Times(1);
+        WaitForAllOperations(device);
     }
 }
 
