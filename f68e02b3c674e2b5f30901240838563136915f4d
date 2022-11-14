@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9073ffe_d0d079a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T15:27:12Z",
+      "side": 1,
+      "message": "LGTM. Should we re-write sig -\u003e fract in the WGSL writer or just wait for the deprecation period to end?",
+      "revId": "f68e02b3c674e2b5f30901240838563136915f4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
