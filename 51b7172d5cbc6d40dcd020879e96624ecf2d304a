@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "740b7fd3_2d394400",
+        "filename": "test/tint/bug/chromium/1383755.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T19:07:50Z",
+      "side": 1,
+      "message": "Would it be worthwhile minmizing / making this readable? I\u0027m not sure how useful it is to commit the exact WGSL from the fuzzer vs a readable reduced test case.",
+      "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
