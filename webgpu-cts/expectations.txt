@@ -528,6 +528,13 @@ crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pa
 crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pack4x8unorm:pack:inputSource="const" [ Failure ]
 
 ################################################################################
+# Const-eval functions that fail on inf/nan inputs
+# KEEP
+################################################################################
+crbug.com/tint/1581 webgpu:shader,execution,expression,binary,f32_arithmetic:division:inputSource="const";*
+crbug.com/tint/1581 webgpu:shader,execution,expression,call,builtin,cross:f32:inputSource="const"
+
+################################################################################
 # untriaged failures
 # KEEP
 ################################################################################
