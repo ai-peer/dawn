@@ -28,6 +28,9 @@ class Program;
 }  // namespace tint
 namespace tint::ast {
 class CaseSelector;
+class BoolLiteralExpression;
+class IntLiteralExpression;
+class FloatLiteralExpression;
 }  // namespace tint::ast
 
 namespace tint::ir {
@@ -75,6 +78,21 @@ class Builder {
     /// @param selectors the case selectors for the case statement
     /// @returns the start block for the case flow node
     Block* CreateCase(Switch* s, const utils::VectorRef<const ast::CaseSelector*> selectors);
+
+    /// Creates a load instruction
+    /// @param expr the bool literal expression to load
+    /// @returns the allocated register to store the load
+    Op CreateLoad(const ast::BoolLiteralExpression* expr);
+
+    /// Creates a load instruction
+    /// @param expr the float literal expression to load
+    /// @returns the allocated register to store the load
+    Op CreateLoad(const ast::FloatLiteralExpression* expr);
+
+    /// Creates a load instruction
+    /// @param expr the int literal expression to load
+    /// @returns the allocated register to store the load
+    Op CreateLoad(const ast::IntLiteralExpression* expr);
 
     /// Branches the given block to the given flow node.
     /// @param from the block to branch from

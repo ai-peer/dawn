@@ -16,6 +16,7 @@
 
 #include "src/tint/ast/case_selector.h"
 #include "src/tint/ast/int_literal_expression.h"
+#include "src/tint/ir/block.h"
 
 namespace tint::ir {
 namespace {
@@ -76,19 +77,17 @@ TEST_F(IRBuilderImplTest, IfStatement) {
     ASSERT_TRUE(r) << b.error();
     auto m = r.Move();
 
+    ASSERT_EQ(1u, m.functions.Length());
+    auto* func = m.functions[0];
+
     auto* ir_if = b.FlowNodeForAstNode(ast_if);
     ASSERT_NE(ir_if, nullptr);
     EXPECT_TRUE(ir_if->Is<ir::If>());
-
-    // TODO(dsinclair): check condition
 
     auto* flow = ir_if->As<ir::If>();
     ASSERT_NE(flow->true_target, nullptr);
     ASSERT_NE(flow->false_target, nullptr);
     ASSERT_NE(flow->merge_target, nullptr);
-
-    ASSERT_EQ(1u, m.functions.Length());
-    auto* func = m.functions[0];
 
     EXPECT_EQ(1u, flow->inbound_branches.Length());
     EXPECT_EQ(1u, flow->true_target->inbound_branches.Length());
@@ -101,6 +100,19 @@ TEST_F(IRBuilderImplTest, IfStatement) {
     EXPECT_EQ(flow->true_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->false_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+
+    // Check condition
+    ASSERT_NE(0, flow->condition.id);
+    ASSERT_EQ(1u, func->start_target->ops.Length());
+
+    auto& op = func->start_target->ops.Back();
+    EXPECT_EQ(op.result.id, flow->condition.id);
+    ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& constant = op.GetConstant();
+    ASSERT_TRUE(constant.IsBool());
+    EXPECT_TRUE(constant.AsBool());
 }
 
 TEST_F(IRBuilderImplTest, IfStatement_TrueReturns) {
@@ -437,6 +449,21 @@ TEST_F(IRBuilderImplTest, Loop_WithContinuing_BreakIf) {
     EXPECT_EQ(break_if_flow->false_target->branch_target, break_if_flow->merge_target);
     EXPECT_EQ(break_if_flow->merge_target->branch_target, loop_flow->start_target);
     EXPECT_EQ(loop_flow->merge_target->branch_target, func->end_target);
+
+    // Check condition
+    ASSERT_NE(0, break_if_flow->condition.id);
+    ASSERT_TRUE(break_if_flow->inbound_branches[0]->Is<ir::Block>());
+    auto* blk = break_if_flow->inbound_branches[0]->As<ir::Block>();
+    ASSERT_EQ(1u, blk->ops.Length());
+
+    auto& op = blk->ops.Back();
+    EXPECT_EQ(op.result.id, break_if_flow->condition.id);
+    ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& constant = op.GetConstant();
+    ASSERT_TRUE(constant.IsBool());
+    EXPECT_TRUE(constant.AsBool());
 }
 
 TEST_F(IRBuilderImplTest, Loop_WithReturn) {
@@ -937,6 +964,19 @@ TEST_F(IRBuilderImplTest, While) {
     EXPECT_EQ(if_flow->merge_target->branch_target, flow->continuing_target);
     EXPECT_EQ(flow->continuing_target->branch_target, flow->start_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+
+    // Check condition
+    ASSERT_NE(0, if_flow->condition.id);
+    ASSERT_EQ(1u, flow->start_target->ops.Length());
+
+    auto& op = flow->start_target->ops.Back();
+    EXPECT_EQ(op.result.id, if_flow->condition.id);
+    ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& constant = op.GetConstant();
+    ASSERT_TRUE(constant.IsBool());
+    EXPECT_FALSE(constant.AsBool());
 }
 
 TEST_F(IRBuilderImplTest, While_Return) {
@@ -1056,6 +1096,20 @@ TEST_F(IRBuilderImplTest, DISABLED_For) {
     EXPECT_EQ(if_flow->merge_target->branch_target, flow->continuing_target);
     EXPECT_EQ(flow->continuing_target->branch_target, flow->start_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+
+    // Check condition
+    ASSERT_NE(0, if_flow->condition.id);
+    ASSERT_EQ(1u, flow->start_target->ops.Length());
+
+    auto& op = flow->start_target->ops.Back();
+    EXPECT_EQ(op.result.id, if_flow->condition.id);
+    ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    // TODO(dsinclair): This is wrong, fix when boolean ops are implemented
+    auto& constant = op.GetConstant();
+    ASSERT_TRUE(constant.IsBool());
+    EXPECT_FALSE(constant.AsBool());
 }
 
 TEST_F(IRBuilderImplTest, For_NoInitCondOrContinuing) {
@@ -1151,6 +1205,19 @@ TEST_F(IRBuilderImplTest, Switch) {
     EXPECT_EQ(flow->cases[1].start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->cases[2].start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+
+    // Check condition
+    ASSERT_NE(0, flow->condition.id);
+    ASSERT_EQ(1u, func->start_target->ops.Length());
+
+    auto& op = func->start_target->ops.Back();
+    EXPECT_EQ(op.result.id, flow->condition.id);
+    ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& constant = op.GetConstant();
+    ASSERT_TRUE(constant.IsI32());
+    EXPECT_EQ(1, constant.AsI32());
 }
 
 TEST_F(IRBuilderImplTest, Switch_OnlyDefault) {
@@ -1370,6 +1437,132 @@ TEST_F(IRBuilderImplTest, Switch_Fallthrough) {
     EXPECT_EQ(flow->cases[1].start_target->branch_target, flow->cases[2].start_target);
     EXPECT_EQ(flow->cases[2].start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_F32) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(1.5_f);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsF32());
+    EXPECT_EQ(1.5f, c.AsF32());
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_F16) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(1.5_h);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsF16());
+    EXPECT_EQ(1.5f, c.AsF32());
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_Bool_True) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(true);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsBool());
+    EXPECT_TRUE(c.AsBool());
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_Bool_False) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(false);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsBool());
+    EXPECT_FALSE(c.AsBool());
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_I32) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(100_i);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsI32());
+    EXPECT_EQ(100, c.AsI32());
+}
+
+TEST_F(IRBuilderImplTest, EmitLiteral_U32) {
+    auto& b = EmptyBuilder();
+    auto* expr = Expr(-100_u);
+
+    auto* current = b.builder.CreateBlock();
+    b.current_flow_block = current;
+
+    auto reg = b.EmitLiteral(expr);
+    ASSERT_TRUE(reg);
+    ASSERT_NE(0, reg.Get().id);
+
+    auto& op = current->ops.Back();
+    EXPECT_EQ(reg.Get().id, op.result.id);
+    EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
+    ASSERT_TRUE(op.HasConstant());
+
+    auto& c = op.GetConstant();
+    EXPECT_TRUE(c.IsU32());
+    EXPECT_EQ(-100, c.AsU32());
 }
 
 }  // namespace
