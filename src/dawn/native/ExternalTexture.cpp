@@ -209,6 +209,25 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     const float* dstFn = descriptor->dstTransferFunctionParameters;
     std::copy(dstFn, dstFn + 7, params.gammaEncodingParams.begin());
 
+    if (descriptor->flipY) {
+        params.flipY = 1;
+    }
+
+    switch (descriptor->rotation) {
+        case wgpu::ExternalTextureRotation::Rotate90Degrees:
+            params.rotationMatrix = {0.0, 1.0, -1.0, 0.0};
+            break;
+        case wgpu::ExternalTextureRotation::Rotate180Degrees:
+            params.rotationMatrix = {-1.0, 0.0, 0.0, -1.0};
+            break;
+        case wgpu::ExternalTextureRotation::Rotate270Degrees:
+            params.rotationMatrix = {0.0, -1.0, 1.0, 0.0};
+            break;
+        default:
+            params.rotationMatrix = {1.0, 0.0, 0.0, 1.0};
+            break;
+    }
+
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));
 

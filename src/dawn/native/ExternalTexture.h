@@ -35,6 +35,9 @@ struct ExternalTextureParams {
     std::array<float, 8> gammaDecodingParams = {};
     std::array<float, 8> gammaEncodingParams = {};
     std::array<float, 12> gamutConversionMatrix = {};
+    uint32_t flipY;
+    uint32_t morePadding;
+    std::array<float, 4> rotationMatrix = {};
 };
 
 MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
