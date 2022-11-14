@@ -1,3 +1,7 @@
+builtins/gen/literal/textureSampleLevel/979816.wgsl:28:24 warning: use of deprecated builtin
+  var res: vec4<f32> = textureSampleLevel(arg_0, arg_1, vec2<f32>(1.f));
+                       ^^^^^^^^^^^^^^^^^^
+
 struct GammaTransferParams {
   float G;
   float A;
@@ -19,11 +23,12 @@ struct ExternalTextureParams {
   float2x2 rotationMatrix;
 };
 
-Texture2D<float4> ext_tex_plane_1 : register(t1, space1);
-cbuffer cbuffer_ext_tex_params : register(b2, space1) {
+Texture2D<float4> ext_tex_plane_1 : register(t2, space1);
+cbuffer cbuffer_ext_tex_params : register(b3, space1) {
   uint4 ext_tex_params[13];
 };
 Texture2D<float4> arg_0 : register(t0, space1);
+SamplerState arg_1 : register(s1, space1);
 
 float3 gammaCorrection(float3 v, GammaTransferParams params) {
   const bool3 cond = (abs(v) < float3((params.D).xxx));
@@ -32,12 +37,12 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
   return (cond ? t : f);
 }
 
-float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, uint2 coord, ExternalTextureParams params) {
+float4 textureSampleExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, SamplerState smp, float2 coord, ExternalTextureParams params) {
   float3 color = float3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = plane0.Load(uint3(coord, uint(0))).rgb;
+    color = plane0.SampleLevel(smp, coord, 0.0f).rgb;
   } else {
-    color = mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(uint3(coord, uint(0))).r, plane1.Load(uint3(coord, uint(0))).rg, 1.0f));
+    color = mul(params.yuvToRgbConversionMatrix, float4(plane0.SampleLevel(smp, coord, 0.0f).r, plane1.SampleLevel(smp, coord, 0.0f).rg, 1.0f));
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -90,9 +95,8 @@ ExternalTextureParams tint_symbol_1(uint4 buffer[13], uint offset) {
   return tint_symbol_12;
 }
 
-void textureLoad_1bfdfb() {
-  uint2 arg_1 = (1u).xx;
-  float4 res = textureLoadExternal(arg_0, ext_tex_plane_1, arg_1, tint_symbol_1(ext_tex_params, 0u));
+void textureSampleLevel_979816() {
+  float4 res = textureSampleExternal(arg_0, ext_tex_plane_1, arg_1, (1.0f).xx, tint_symbol_1(ext_tex_params, 0u));
 }
 
 struct tint_symbol {
@@ -100,7 +104,7 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner() {
-  textureLoad_1bfdfb();
+  textureSampleLevel_979816();
   return (0.0f).xxxx;
 }
 
@@ -112,12 +116,12 @@ tint_symbol vertex_main() {
 }
 
 void fragment_main() {
-  textureLoad_1bfdfb();
+  textureSampleLevel_979816();
   return;
 }
 
 [numthreads(1, 1, 1)]
 void compute_main() {
-  textureLoad_1bfdfb();
+  textureSampleLevel_979816();
   return;
 }
