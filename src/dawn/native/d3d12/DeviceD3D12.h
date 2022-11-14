@@ -23,6 +23,7 @@
 #include "dawn/native/d3d12/CommandRecordingContext.h"
 #include "dawn/native/d3d12/D3D12Info.h"
 #include "dawn/native/d3d12/Forward.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
 
 namespace dawn::native::d3d12 {
@@ -218,6 +219,7 @@ class Device final : public DeviceBase {
     void AppendDebugLayerMessages(ErrorData* error) override;
 
     MaybeError ApplyUseDxcToggle();
+    void ApplyTogglesAboutIntelExtension();
 
     MaybeError CreateZeroBuffer();
 
