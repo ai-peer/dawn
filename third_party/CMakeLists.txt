@@ -106,3 +106,8 @@ if (NOT TARGET gmock AND ${TINT_BUILD_TESTS})
     set(gtest_force_shared_crt ON CACHE BOOL "Controls whether a shared run-time library should be used even when Google Test is built as static library" FORCE)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest EXCLUDE_FROM_ALL)
 endif()
+
+# Header-only library for igdext.h
+add_library(intel_extension INTERFACE)
+target_sources(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/IntelExtension/igdext.h")
+target_include_directories(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/IntelExtension")

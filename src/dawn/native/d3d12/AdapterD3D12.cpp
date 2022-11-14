@@ -22,13 +22,16 @@
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 
 namespace dawn::native::d3d12 {
 
-Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
-    : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12),
+Adapter::Adapter(Backend* backend,
+                 ComPtr<IDXGIAdapter3> hardwareAdapter,
+                 wgpu::PowerPreference powerPreference)
+    : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12, powerPreference),
       mHardwareAdapter(hardwareAdapter),
       mBackend(backend) {}
 
@@ -451,6 +454,19 @@ MaybeError Adapter::ResetInternalDeviceForTestingImpl() {
     DAWN_TRY(Initialize());
 
     return {};
+}
+
+IntelExtension* Adapter::GetOrLoadIntelExtension() {
+    if (!gpu_info::IsIntel(mVendorId)) {
+        return nullptr;
+    }
+
+    // Lazily load Intel extension library
+    if (!mIntelExtension.has_value()) {
+        mIntelExtension = IntelExtension::Create(*this);
+    }
+
+    return mIntelExtension->get();
 }
 
 }  // namespace dawn::native::d3d12

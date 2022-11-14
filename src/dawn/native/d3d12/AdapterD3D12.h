@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_ADAPTERD3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_ADAPTERD3D12_H_
 
+#include <memory>
+
 #include "dawn/native/Adapter.h"
 
 #include "dawn/common/GPUInfo.h"
@@ -24,10 +26,13 @@
 namespace dawn::native::d3d12 {
 
 class Backend;
+class IntelExtension;
 
 class Adapter : public AdapterBase {
   public:
-    Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter);
+    Adapter(Backend* backend,
+            ComPtr<IDXGIAdapter3> hardwareAdapter,
+            wgpu::PowerPreference powerPreference);
     ~Adapter() override;
 
     // AdapterBase Implementation
@@ -38,6 +43,8 @@ class Adapter : public AdapterBase {
     Backend* GetBackend() const;
     ComPtr<ID3D12Device> GetDevice() const;
     const gpu_info::D3DDriverVersion& GetDriverVersion() const;
+
+    IntelExtension* GetOrLoadIntelExtension();
 
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
@@ -64,6 +71,8 @@ class Adapter : public AdapterBase {
 
     Backend* mBackend;
     D3D12DeviceInfo mDeviceInfo = {};
+
+    std::optional<std::unique_ptr<IntelExtension>> mIntelExtension;
 };
 
 }  // namespace dawn::native::d3d12
