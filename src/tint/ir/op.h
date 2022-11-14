@@ -19,6 +19,7 @@
 
 #include "src/tint/ir/constant.h"
 #include "src/tint/ir/register.h"
+#include "src/tint/utils/vector.h"
 
 namespace tint::ir {
 
@@ -27,49 +28,66 @@ class Op {
   public:
     /// The kind of operation
     enum class Kind {
-        kLoadConstant = 1,
+        kNone = 0,
+
+        kLoadConstant,
         kLoad,
         kStore,
 
+        kAnd,
+        kOr,
+        kXor,
+        kLogicalAnd,
+        kLogicalOr,
+        kEqual,
+        kNotEqual,
+        kLessThan,
+        kLessThanEqual,
+        kGreaterThan,
+        kGreaterThanEqual,
+        kShiftLeft,
+        kShiftRight,
+
         kAdd,
-        kSub,
-        kMul,
-        kDiv,
-        kRem,
-        kNegate,
+        kSubtract,
+        kMultiply,
+        kDivide,
+        kModulo,
 
         kCall,
     };
 
     /// An operation data element
     struct Data {
-        /// The register to read the lhs from
-        Register lhs;
-        /// The register to read the rhs from
-        Register rhs;
+        /// Data constant or data register
+        std::variant<Register, Constant> value;
+
+        /// @returns true if the op holds a constant value
+        bool HasConstant() const { return std::holds_alternative<Constant>(value); }
+        /// @returns true if the op holds a register value
+        bool HasRegister() const { return std::holds_alternative<Register>(value); }
+
+        /// @returns the constant value
+        const Constant& GetConstant() const { return std::get<Constant>(value); }
+        /// @returns the register value
+        const Register& GetRegister() const { return std::get<Register>(value); }
     };
 
     /// Constructor
     /// @param k the kind of operation
     explicit Op(Kind k);
 
-    /// Returns true if the op holds a constant value
-    bool HasConstant() const;
-    /// Returns true if the op holds a data value
-    bool HasData() const;
-
-    /// @returns the constant value
-    const Constant& GetConstant() const;
-    /// @returns the data value
-    const Data& GetData() const;
+    /// @returns true if Op has a result
+    bool HasResult() const { return result.id > 0; }
 
     /// The kind of operation
     Kind kind;
+
     /// The register to store the result into
     Register result;
 
     /// The arguments to this operator. Either two registers or a constant value.
-    std::variant<Data, Constant> args;
+    utils::Vector<Data, 2> args;
 };
 
 }  // namespace tint::ir

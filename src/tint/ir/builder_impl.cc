@@ -15,6 +15,7 @@
 #include "src/tint/ir/builder_impl.h"
 
 #include "src/tint/ast/alias.h"
+#include "src/tint/ast/binary_expression.h"
 #include "src/tint/ast/block_statement.h"
 #include "src/tint/ast/bool_literal_expression.h"
 #include "src/tint/ast/break_if_statement.h"
@@ -121,7 +122,7 @@ ResultType BuilderImpl::Build() {
     for (auto* decl : sem->DependencyOrderedDeclarations()) {
         bool ok = tint::Switch(
             decl,  //
-            // [&](const ast::Struct* str) { return false; },
+            // [&](const ast::Struct* str) { },
             [&](const ast::Alias*) {
                 // Folded away and doesn't appear in the IR.
                 return true;
@@ -130,7 +131,7 @@ ResultType BuilderImpl::Build() {
             [&](const ast::Variable* var) { return EmitVariable(var); },
             [&](const ast::Function* func) { return EmitFunction(func); },
 
-            // [&](const ast::Enable*) { return false; },
+            // [&](const ast::Enable*) { },
             [&](const ast::StaticAssert*) {
                 // Evaluated by the resolver, drop from the IR.
                 return true;
@@ -542,20 +543,22 @@ bool BuilderImpl::EmitFallthrough() {
 utils::Result<Register> BuilderImpl::EmitExpression(const ast::Expression* expr) {
     return tint::Switch(
         expr,
-        //        [&](const ast::IndexAccessorExpression* a) {  return EmitIndexAccessor(a); },
-        //        [&](const ast::BinaryExpression* b) {  return EmitBinary(b); },
-        //        [&](const ast::BitcastExpression* b) {  return EmitBitcast(b); },
-        //        [&](const ast::CallExpression* c) {  return EmitCall(c); },
-        //        [&](const ast::IdentifierExpression* i) {  return EmitIdentifier(i); },
+        // [&](const ast::IndexAccessorExpression* a) {  return EmitIndexAccessor(a); },
+        [&](const ast::BinaryExpression* b) { return EmitBinary(b); },
+        // [&](const ast::BitcastExpression* b) {  return EmitBitcast(b); },
+        // [&](const ast::CallExpression* c) {  return EmitCall(c); },
+        // [&](const ast::IdentifierExpression* i) {  return EmitIdentifier(i); },
         [&](const ast::LiteralExpression* l) { return EmitLiteral(l); },
-        //        [&](const ast::MemberAccessorExpression* m) { return EmitMemberAccessor(m); },
-        //        [&](const ast::PhonyExpression*) { return true; },
-        //        [&](const ast::UnaryOpExpression* u) { return EmitUnaryOp(u); },
+        // [&](const ast::MemberAccessorExpression* m) { return EmitMemberAccessor(m); },
+        // [&](const ast::PhonyExpression*) { return true; },
+        // [&](const ast::UnaryOpExpression* u) { return EmitUnaryOp(u); },
         [&](Default) {
             diagnostics_.add_warning(
                 tint::diag::System::IR,
                 "unknown expression type: " + std::string(expr->TypeInfo().name), expr->source);
-            return utils::Failure;
+            // return utils::Failure;
+            // TODO(dsinclair): This should be an error, remove when expressions are implemented
+            return Register::Allocate();
         });
 }
 
@@ -564,18 +567,99 @@ bool BuilderImpl::EmitVariable(const ast::Variable* var) {
         var,              //
         // [&](const ast::Var* var) {},
         // [&](const ast::Let*) {},
-        // [&](const ast::Override*) { return false; },
+        // [&](const ast::Override*) { },
         [&](const ast::Const* c) { return EmitConst(c); },
         [&](Default) {
             diagnostics_.add_warning(tint::diag::System::IR,
                                      "unknown variable: " + std::string(var->TypeInfo().name),
                                      var->source);
-            return false;
+            return true;
         });
 }
 
 bool BuilderImpl::EmitConst(const ast::Const*) {
     return true;
+}
+
+utils::Result<Register> BuilderImpl::EmitBinary(const ast::BinaryExpression* expr) {
+    auto lhs = EmitExpression(expr->lhs);
+    if (!lhs) {
+        return utils::Failure;
+    }
+    auto rhs = EmitExpression(expr->rhs);
+    if (!rhs) {
+        return utils::Failure;
+    }
+
+    Op::Kind kind = Op::Kind::kNone;
+    switch (expr->op) {
+        case ast::BinaryOp::kAnd:
+            kind = Op::Kind::kAnd;
+            break;
+        case ast::BinaryOp::kOr:
+            kind = Op::Kind::kOr;
+            break;
+        case ast::BinaryOp::kXor:
+            kind = Op::Kind::kXor;
+            break;
+        case ast::BinaryOp::kLogicalAnd:
+            kind = Op::Kind::kLogicalAnd;
+            break;
+        case ast::BinaryOp::kLogicalOr:
+            kind = Op::Kind::kLogicalOr;
+            break;
+        case ast::BinaryOp::kEqual:
+            kind = Op::Kind::kEqual;
+            break;
+        case ast::BinaryOp::kNotEqual:
+            kind = Op::Kind::kNotEqual;
+            break;
+        case ast::BinaryOp::kLessThan:
+            kind = Op::Kind::kLessThan;
+            break;
+        case ast::BinaryOp::kGreaterThan:
+            kind = Op::Kind::kGreaterThan;
+            break;
+        case ast::BinaryOp::kLessThanEqual:
+            kind = Op::Kind::kLessThanEqual;
+            break;
+        case ast::BinaryOp::kGreaterThanEqual:
+            kind = Op::Kind::kGreaterThanEqual;
+            break;
+        case ast::BinaryOp::kShiftLeft:
+            kind = Op::Kind::kShiftLeft;
+            break;
+        case ast::BinaryOp::kShiftRight:
+            kind = Op::Kind::kShiftRight;
+            break;
+        case ast::BinaryOp::kAdd:
+            kind = Op::Kind::kAdd;
+            break;
+        case ast::BinaryOp::kSubtract:
+            kind = Op::Kind::kSubtract;
+            break;
+        case ast::BinaryOp::kMultiply:
+            kind = Op::Kind::kMultiply;
+            break;
+        case ast::BinaryOp::kDivide:
+            kind = Op::Kind::kDivide;
+            break;
+        case ast::BinaryOp::kModulo:
+            kind = Op::Kind::kModulo;
+            break;
+        case ast::BinaryOp::kNone:
+            TINT_ICE(IR, diagnostics_) << "missing binary operand type";
+            return utils::Failure;
+    }
+
+    Op op(kind);
+    op.result = Register::Allocate();
+    op.args.Push({lhs.Get()});
+    op.args.Push({rhs.Get()});
+
+    auto result = op.result;
+    current_flow_block->ops.Push(op);
+    return result;
 }
 
 utils::Result<Register> BuilderImpl::EmitLiteral(const ast::LiteralExpression* lit) {
@@ -640,7 +724,7 @@ bool BuilderImpl::EmitType(const ast::Type* ty) {
             diagnostics_.add_warning(tint::diag::System::IR,
                                      "unknown type: " + std::string(ty->TypeInfo().name),
                                      ty->source);
-            return false;
+            return true;
         });
 }
 
@@ -673,7 +757,7 @@ bool BuilderImpl::EmitAttribute(const ast::Attribute* attr) {
                                 tint::diag::System::IR,
                                 "unknown attribute: " + std::string(attr->TypeInfo().name),
                                 attr->source);
-                            return false;
+                            return true;
                         });
 }
 

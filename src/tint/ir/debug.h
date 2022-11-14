@@ -28,6 +28,11 @@ class Debug {
     /// @param mod the module to emit
     /// @returns the dot graph for the given module
     static std::string AsDotGraph(const Module* mod);
+
+    /// Returns the module as text
+    /// @param mod the module to emit
+    /// @returns the string for the given module
+    static std::string AsString(const Module* mod);
 };
 
 }  // namespace tint::ir
