@@ -26,8 +26,10 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-    : mInstance(instance), mBackend(backend) {
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         wgpu::BackendType backend,
+                         wgpu::PowerPreference powerPreference)
+    : mPowerPreference(powerPreference), mInstance(instance), mBackend(backend) {
     mSupportedFeatures.EnableFeature(Feature::DawnNative);
     mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
 }
@@ -97,7 +99,7 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     DawnAdapterPropertiesPowerPreference* powerPreferenceDesc = nullptr;
     FindInChain(properties->nextInChain, &powerPreferenceDesc);
     if (powerPreferenceDesc != nullptr) {
-        powerPreferenceDesc->powerPreference = wgpu::PowerPreference::Undefined;
+        powerPreferenceDesc->powerPreference = mPowerPreference;
     }
 
     properties->vendorID = mVendorId;
@@ -262,6 +264,10 @@ void AdapterBase::ResetInternalDeviceForTesting() {
 MaybeError AdapterBase::ResetInternalDeviceForTestingImpl() {
     return DAWN_INTERNAL_ERROR(
         "ResetInternalDeviceForTesting should only be used with the D3D12 backend.");
+}
+
+wgpu::PowerPreference AdapterBase::GetPowerPreference() const {
+    return mPowerPreference;
 }
 
 }  // namespace dawn::native
