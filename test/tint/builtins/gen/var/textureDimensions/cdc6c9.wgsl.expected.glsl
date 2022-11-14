@@ -11,13 +11,16 @@ struct GammaTransferParams {
   uint padding;
 };
 
-layout(binding = 2, std140) uniform ExternalTextureParams_ubo {
+layout(binding = 2, std140) uniform ExternalTextureParams_std140_ubo {
   uint numPlanes;
   uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
+  uint flipY;
+  vec2 rotationMatrix_0;
+  vec2 rotationMatrix_1;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
@@ -52,13 +55,16 @@ struct GammaTransferParams {
   uint padding;
 };
 
-layout(binding = 2, std140) uniform ExternalTextureParams_ubo {
+layout(binding = 2, std140) uniform ExternalTextureParams_std140_ubo {
   uint numPlanes;
   uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
+  uint flipY;
+  vec2 rotationMatrix_0;
+  vec2 rotationMatrix_1;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
@@ -87,13 +93,16 @@ struct GammaTransferParams {
   uint padding;
 };
 
-layout(binding = 2, std140) uniform ExternalTextureParams_ubo {
+layout(binding = 2, std140) uniform ExternalTextureParams_std140_ubo {
   uint numPlanes;
   uint doYuvToRgbConversionOnly;
   mat3x4 yuvToRgbConversionMatrix;
   GammaTransferParams gammaDecodeParams;
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
+  uint flipY;
+  vec2 rotationMatrix_0;
+  vec2 rotationMatrix_1;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
