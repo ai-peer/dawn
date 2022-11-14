@@ -16,6 +16,40 @@
       "message": "PTAL. I had to leave the fail check at the end in order to get better error messages (3 tests fail with \"fallthrough not permitted\" which doesn\u0027t really make sense for the test case if it isn\u0027t done at the end).\n\n```\n[  FAILED  ] SpvParserCFGTest.ClassifyCFGEdges_SwitchBreak_FromNestedLoop_IsError\n[  FAILED  ] SpvParserCFGTest.ClassifyCFGEdges_SwitchBreak_FromNestedSwitch_IsError\n[  FAILED  ] SpvParserCFGTest.ClassifyCFGEdges_DomViolation_BeforeSwitchToSelectionInterior\n```",
       "revId": "8cbe4be89e233d6a41f5383fb3ec45e2e463bf4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41248513_3402a374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-14T23:21:16Z",
+      "side": 1,
+      "message": "Thanks! This is better.",
+      "revId": "8cbe4be89e233d6a41f5383fb3ec45e2e463bf4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8bae47c_836921a8",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-14T23:21:16Z",
+      "side": 1,
+      "message": "nit: This could have been combined into a single if clause.",
+      "revId": "8cbe4be89e233d6a41f5383fb3ec45e2e463bf4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
