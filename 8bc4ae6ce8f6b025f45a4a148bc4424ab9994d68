@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8b7752f_c48a5d84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-14T08:14:17Z",
+      "side": 1,
+      "message": "@enga@chromium.org The block issue https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1589 has been resolved. This CL is ready for review now, PTAL again, thanks!",
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
