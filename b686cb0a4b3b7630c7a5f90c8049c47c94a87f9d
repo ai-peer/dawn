@@ -16,6 +16,23 @@
       "message": "The change lgtm, but we may want to try generating the intrinsic.inl file on Windows and then seeing what this patch does. If it will fail the build for any windows commit that wouldn\u0027t be good.",
       "revId": "b686cb0a4b3b7630c7a5f90c8049c47c94a87f9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08d75ddb_79ac4c7c",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T18:20:50Z",
+      "side": 1,
+      "message": "Actually, you may want to condition this on `input_api.is_committing`.\n\n```\nif input_api.is_committing:\n  results.append(output_api.PresubmitError(\u0027%s\u0027 % (e, )))\nelse:\n  results.append(output_api.PresubmitPromptWarning(\u0027%s\u0027 % (e, )))\n```\n\nThat way the warning can be ignored if this is just an upload.",
+      "revId": "b686cb0a4b3b7630c7a5f90c8049c47c94a87f9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
