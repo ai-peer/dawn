@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb296741_92b7290f",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2216,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T18:30:38Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "256a8fb4_43fb2797",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb7b4aa5_4851b734",
@@ -67,6 +85,24 @@
       "side": 0,
       "message": "Keep this case (since I want the enum valieto exist), but ICE here, since it should never be set.",
       "parentUuid": "daddcb47_4c2eec05",
+      "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa94a9a5_b9c1e304",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T18:30:38Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "dd5aa602_383b53f3",
       "revId": "ec4b650adb133672f48ed7d76c12459933cb229c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

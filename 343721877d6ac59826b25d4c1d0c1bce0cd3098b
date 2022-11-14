@@ -68,6 +68,24 @@
       "parentUuid": "3cc2fe3b_ef481ed0",
       "revId": "343721877d6ac59826b25d4c1d0c1bce0cd3098b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed8fa2ca_cbfb632e",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T18:30:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8538c2eb_edbb7696",
+      "revId": "343721877d6ac59826b25d4c1d0c1bce0cd3098b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
