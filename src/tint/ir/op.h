@@ -27,16 +27,31 @@ class Op {
   public:
     /// The kind of operation
     enum class Kind {
-        kLoadConstant = 1,
+        kNone = 0,
+
+        kLoadConstant,
         kLoad,
         kStore,
 
+        kAnd,
+        kOr,
+        kXor,
+        kLogicalAnd,
+        kLogicalOr,
+        kEqual,
+        kNotEqual,
+        kLessThan,
+        kLessThanEqual,
+        kGreaterThan,
+        kGreaterThanEqual,
+        kShiftLeft,
+        kShiftRight,
+
         kAdd,
-        kSub,
-        kMul,
-        kDiv,
-        kRem,
-        kNegate,
+        kSubtract,
+        kMultiply,
+        kDivide,
+        kModulo,
 
         kCall,
     };
