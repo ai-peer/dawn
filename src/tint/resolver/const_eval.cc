@@ -655,8 +655,7 @@ ConstEval::ConstEval(ProgramBuilder& b) : builder(b) {}
 template <typename NumberT>
 utils::Result<NumberT> ConstEval::Add(NumberT a, NumberT b) {
     NumberT result;
-    if constexpr (IsAbstract<NumberT>) {
-        // Check for over/underflow for abstract values
+    if constexpr (IsAbstract<NumberT> || IsFloatingPoint<NumberT>) {
         if (auto r = CheckedAdd(a, b)) {
             result = r->value;
         } else {
@@ -682,8 +681,7 @@ utils::Result<NumberT> ConstEval::Add(NumberT a, NumberT b) {
 template <typename NumberT>
 utils::Result<NumberT> ConstEval::Sub(NumberT a, NumberT b) {
     NumberT result;
-    if constexpr (IsAbstract<NumberT>) {
-        // Check for over/underflow for abstract values
+    if constexpr (IsAbstract<NumberT> || IsFloatingPoint<NumberT>) {
         if (auto r = CheckedSub(a, b)) {
             result = r->value;
         } else {
@@ -710,7 +708,7 @@ template <typename NumberT>
 utils::Result<NumberT> ConstEval::Mul(NumberT a, NumberT b) {
     using T = UnwrapNumber<NumberT>;
     NumberT result;
-    if constexpr (IsAbstract<NumberT>) {
+    if constexpr (IsAbstract<NumberT> || IsFloatingPoint<NumberT>) {
         // Check for over/underflow for abstract values
         if (auto r = CheckedMul(a, b)) {
             result = r->value;
@@ -1370,7 +1368,7 @@ ConstEval::Result ConstEval::OpDivide(const sem::Type* ty,
         auto create = [&](auto i, auto j) -> ImplResult {
             using NumberT = decltype(i);
             NumberT result;
-            if constexpr (IsAbstract<NumberT>) {
+            if constexpr (IsAbstract<NumberT> || IsFloatingPoint<NumberT>) {
                 // Check for over/underflow for abstract values
                 if (auto r = CheckedDiv(i, j)) {
                     result = r->value;
