@@ -179,6 +179,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -234,6 +236,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -288,6 +292,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -364,6 +370,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -382,12 +390,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -446,6 +458,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -488,6 +502,7 @@ fn main(@builtin(position) coord : vec4<f32>) -> @location(0) vec4<f32> {
     data.Add<MultiplanarExternalTexture::NewBindingPoints>(
         MultiplanarExternalTexture::BindingsMap{{{0, 1}, {{0, 2}, {0, 3}}}});
     auto got = Run<MultiplanarExternalTexture>(src, data);
+
     EXPECT_EQ(expect, str(got));
 }
 
@@ -522,6 +537,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -536,12 +553,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -605,6 +626,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -697,6 +720,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(1) var ext_tex_plane_1 : texture_2d<f32>;
@@ -788,6 +813,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -879,6 +906,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -897,12 +926,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -976,6 +1009,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1067,6 +1102,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1081,12 +1118,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1167,6 +1208,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1271,6 +1314,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(4) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1307,12 +1352,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1380,6 +1429,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1394,12 +1445,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1471,6 +1526,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1490,12 +1547,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1562,6 +1623,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1576,12 +1639,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1655,6 +1722,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1673,12 +1742,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1757,6 +1830,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(3) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1780,12 +1855,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1860,6 +1939,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1874,12 +1955,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -1959,6 +2044,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -1973,12 +2060,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -2046,6 +2137,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 fn f(ext_tex : texture_2d<f32>, ext_tex_plane_1 : texture_2d<f32>, ext_tex_params : ExternalTextureParams) -> vec2<u32> {
@@ -2097,6 +2190,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -2113,12 +2208,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
@@ -2191,6 +2290,8 @@ struct ExternalTextureParams {
   gammaDecodeParams : GammaTransferParams,
   gammaEncodeParams : GammaTransferParams,
   gamutConversionMatrix : mat3x3<f32>,
+  flipY : u32,
+  rotationMatrix : mat2x2<f32>,
 }
 
 @group(0) @binding(2) var ext_tex_plane_1 : texture_2d<f32>;
@@ -2210,12 +2311,16 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
+  var modifiedCoords = (((coord - 0.5f) * params.rotationMatrix) + 0.5f);
+  if ((params.flipY == 1)) {
+    modifiedCoords.y = (((modifiedCoords.y - 0.5f) * -1.0f) + 0.5f);
+  }
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
-  let plane0_clamped = clamp(coord, plane0_half_texel, (1 - plane0_half_texel));
+  let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
   let plane1_dims = vec2<f32>(textureDimensions(plane1, 0));
   let plane1_half_texel = (vec2<f32>(0.5) / plane1_dims);
-  let plane1_clamped = clamp(coord, plane1_half_texel, (1 - plane1_half_texel));
+  let plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1 - plane1_half_texel));
   var color : vec3<f32>;
   if ((params.numPlanes == 1)) {
     color = textureSampleLevel(plane0, smp, plane0_clamped, 0).rgb;
