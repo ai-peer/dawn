@@ -1183,7 +1183,7 @@ const Type* ParserImpl::ConvertType(uint32_t type_id,
                         break;
                     case spv::BuiltIn::ClipDistance:  // not supported in WGSL
                     case spv::BuiltIn::CullDistance:  // not supported in WGSL
-                        create_ast_member = false;  // Not part of the WGSL structure.
+                        create_ast_member = false;    // Not part of the WGSL structure.
                         break;
                     default:
                         Fail() << "unrecognized builtin " << decoration[1];
