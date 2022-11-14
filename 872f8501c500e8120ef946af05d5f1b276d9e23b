@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a58580_681ecb1a",
+        "filename": "src/tint/reader/spirv/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2381,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T16:01:05Z",
+      "side": 1,
+      "message": "format?",
+      "revId": "872f8501c500e8120ef946af05d5f1b276d9e23b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
