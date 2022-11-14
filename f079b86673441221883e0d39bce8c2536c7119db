@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c98ad0a_f85159cc",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 5284,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-14T16:04:18Z",
+      "side": 1,
+      "message": "Is it guaranteed that GetDef returns a pointer and not nullptr?",
+      "revId": "f079b86673441221883e0d39bce8c2536c7119db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
