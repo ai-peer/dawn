@@ -33,7 +33,9 @@ class DeviceBase;
 
 class AdapterBase : public RefCounted {
   public:
-    AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
+    AdapterBase(InstanceBase* instance,
+                wgpu::BackendType backend,
+                wgpu::PowerPreference powerPreference = wgpu::PowerPreference::Undefined);
     ~AdapterBase() override;
 
     MaybeError Initialize();
@@ -65,6 +67,8 @@ class AdapterBase : public RefCounted {
 
     virtual bool SupportsExternalImages() const = 0;
 
+    wgpu::PowerPreference GetPowerPreference() const;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;
@@ -73,6 +77,7 @@ class AdapterBase : public RefCounted {
     std::string mName;
     wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
     std::string mDriverDescription;
+    wgpu::PowerPreference mPowerPreference;
 
     // Features set that CAN be supported by devices of this adapter. Some features in this set may
     // be guarded by toggles, and creating a device with these features required may result in a

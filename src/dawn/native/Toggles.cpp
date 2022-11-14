@@ -325,6 +325,13 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "resources. This toggle is enabled by default on D3D12 backends using Intel Gen9.5 and Gen11 "
       "GPUs due to a driver issue on Intel D3D12 driver.",
       "https://crbug.com/1237175"}},
+    {Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy,
+     {"d3d12_use_intel_max_performance_throttle_policy",
+      "Create D3D12 command queue with 'Max Performance' Throttle Policy through Intel Throttle "
+      "Policy extension so that all the commands will be executed with 'Maximum Performance' "
+      "performance throttle policy on an adapter requested with 'HighPerformance' power preference "
+      "on the Intel GPUs that support Intel Throttle Policy extension.",
+      "https://crbug.com/dawn/1516"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
