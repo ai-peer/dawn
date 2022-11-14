@@ -81,6 +81,7 @@ enum class Toggle {
     ApplyClearBigIntegerColorValueWithDraw,
     MetalUseDummyBlitEncoderForWriteTimestamp,
     VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass,
+    D3D12UseIntelMaxPerformanceThrottlePolicy,
 
     EnumCount,
     InvalidEnum = EnumCount,

@@ -72,19 +72,28 @@ ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
-    InitTogglesFromDriver();
-
-    mD3d12Device = ToBackend(GetAdapter())->GetDevice();
+    Adapter* adapter = ToBackend(GetAdapter());
+    mD3d12Device = adapter->GetDevice();
 
     ASSERT(mD3d12Device != nullptr);
+
+    InitTogglesFromDriver();
 
     // Create device-global objects
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
     queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-    DAWN_TRY(
-        CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
-                     "D3D12 create command queue"));
+    if (IsToggleEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy)) {
+        IntelExtension* intelExtension = adapter->GetOrLoadIntelExtension();
+        ASSERT(intelExtension != nullptr);
+        DAWN_TRY(CheckHRESULT(intelExtension->CreateCommandQueueWithMaxPerformanceThrottlePolicy(
+                                  &queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                              "D3D12 create command queue"));
+    } else {
+        DAWN_TRY(
+            CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                         "D3D12 create command queue"));
+    }
 
     if ((HasFeature(Feature::TimestampQuery) || HasFeature(Feature::TimestampQueryInsidePasses)) &&
         !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {
@@ -727,6 +736,8 @@ void Device::InitTogglesFromDriver() {
             SetToggle(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture, true);
         }
     }
+
+    ApplyTogglesAboutIntelExtension();
 }
 
 MaybeError Device::WaitForIdleForDestruction() {
@@ -933,6 +944,23 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
         return D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT;
     }
     return DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil();
+}
+
+void Device::ApplyTogglesAboutIntelExtension() {
+    Adapter* adapter = ToBackend(GetAdapter());
+
+    // Check if we can safely enable Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy.
+    bool shouldUseIntelMaxPerformanceThrottlePolicy =
+        IsToggleEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy) &&
+        gpu_info::IsIntel(adapter->GetVendorId()) &&
+        adapter->GetPowerPreference() == wgpu::PowerPreference::HighPerformance &&
+        adapter->GetOrLoadIntelExtension() != nullptr;
+
+    // We must ensure Toggle::D3D12SetIntelMaxPerformanceThrottlePolicy always be disabled when
+    // we shouldn't use Throttle Policy extension.
+    if (!shouldUseIntelMaxPerformanceThrottlePolicy) {
+        ForceSetToggle(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy, false);
+    }
 }
 
 }  // namespace dawn::native::d3d12
