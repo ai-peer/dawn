@@ -33,6 +33,24 @@
       "message": "This is the WGSL output validation mentioned this morning. Perhaps we should avoid skipping this, as we can\u0027t know whether Tint itself will have changed meaningfully or not?",
       "revId": "fcbd3bfb8da21a9d4693cb2095df022562934e57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86347bad_d83cbc05",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-14T11:58:07Z",
+      "side": 1,
+      "message": "Agreed. Done (in the test-runner)",
+      "parentUuid": "8d97ba9e_aac14a6f",
+      "revId": "fcbd3bfb8da21a9d4693cb2095df022562934e57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
