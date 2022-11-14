@@ -67,11 +67,14 @@ ResultOrError<ComPtr<IDXGIFactory4>> CreateFactory(const PlatformFunctions* func
     return std::move(factory);
 }
 
-ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(Backend* backend,
-                                                              ComPtr<IDXGIAdapter> dxgiAdapter) {
+ResultOrError<Ref<Adapter>> CreateAdapterFromIDXGIAdapter(
+    Backend* backend,
+    ComPtr<IDXGIAdapter> dxgiAdapter,
+    wgpu::PowerPreference powerPreference = wgpu::PowerPreference::Undefined) {
     ComPtr<IDXGIAdapter3> dxgiAdapter3;
     DAWN_TRY(CheckHRESULT(dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
-    Ref<Adapter> adapter = AcquireRef(new Adapter(backend, std::move(dxgiAdapter3)));
+    Ref<Adapter> adapter =
+        AcquireRef(new Adapter(backend, std::move(dxgiAdapter3), powerPreference));
     DAWN_TRY(adapter->Initialize());
 
     return {std::move(adapter)};
@@ -196,9 +199,23 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     std::vector<Ref<AdapterBase>> adapters;
     if (options->dxgiAdapter != nullptr) {
         // |dxgiAdapter| was provided. Discover just that adapter.
-        Ref<AdapterBase> adapter;
+        Ref<Adapter> adapter;
         DAWN_TRY_ASSIGN(adapter, CreateAdapterFromIDXGIAdapter(this, options->dxgiAdapter));
         adapters.push_back(std::move(adapter));
+
+        // Try to create the adapter with HighPerformance power preference. On Intel platforms that
+        // support Intel Throttle Policy extension the adapter will create a queue with
+        // MAX_PERFORMANCE throttle policy. On other platforms the adapter is same as the original
+        // one.
+        DXGI_ADAPTER_DESC adapterDesc;
+        options->dxgiAdapter->GetDesc(&adapterDesc);
+        if (gpu_info::IsIntel(adapterDesc.VendorId)) {
+            Ref<Adapter> highPerformanceAdapter;
+            DAWN_TRY_ASSIGN(highPerformanceAdapter,
+                            CreateAdapterFromIDXGIAdapter(this, options->dxgiAdapter,
+                                                          wgpu::PowerPreference::HighPerformance));
+        }
+
         return std::move(adapters);
     }
 
@@ -210,7 +227,24 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         }
 
         ASSERT(dxgiAdapter != nullptr);
-        ResultOrError<Ref<AdapterBase>> adapter = CreateAdapterFromIDXGIAdapter(this, dxgiAdapter);
+
+        // Try to create the adapter with HighPerformance power preference first so that we can
+        // always test the adapter with Intel Throttle Policy Extension in dawn_end2end_tests when
+        // it is available.
+        DXGI_ADAPTER_DESC adapterDesc;
+        dxgiAdapter->GetDesc(&adapterDesc);
+        if (gpu_info::IsIntel(adapterDesc.VendorId)) {
+            ResultOrError<Ref<Adapter>> resultOrError = CreateAdapterFromIDXGIAdapter(
+                this, dxgiAdapter, wgpu::PowerPreference::HighPerformance);
+            if (resultOrError.IsError()) {
+                GetInstance()->ConsumedError(resultOrError.AcquireError());
+                continue;
+            }
+            Ref<Adapter> highPerformanceAdapter = resultOrError.AcquireSuccess();
+            adapters.push_back(std::move(highPerformanceAdapter));
+        }
+
+        ResultOrError<Ref<Adapter>> adapter = CreateAdapterFromIDXGIAdapter(this, dxgiAdapter);
         if (adapter.IsError()) {
             GetInstance()->ConsumedError(adapter.AcquireError());
             continue;

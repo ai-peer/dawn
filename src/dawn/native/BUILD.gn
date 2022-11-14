@@ -387,6 +387,14 @@ source_set("sources") {
 
   if (dawn_enable_d3d12) {
     libs += [ "dxguid.lib" ]
+    if (is_win && !dawn_is_winuwp) {
+      libs += [
+        "cfgmgr32.lib",
+        "SetupAPI.lib",
+        "shlwapi.lib",
+      ]
+    }
+    deps += [ "${dawn_root}/third_party/IntelExtension:intel_extension" ]
     sources += [
       "d3d12/AdapterD3D12.cpp",
       "d3d12/AdapterD3D12.h",
@@ -430,6 +438,8 @@ source_set("sources") {
       "d3d12/HeapD3D12.cpp",
       "d3d12/HeapD3D12.h",
       "d3d12/IntegerTypes.h",
+      "d3d12/IntelExtensionD3D12.cpp",
+      "d3d12/IntelExtensionD3D12.h",
       "d3d12/NativeSwapChainImplD3D12.cpp",
       "d3d12/NativeSwapChainImplD3D12.h",
       "d3d12/PageableD3D12.cpp",
