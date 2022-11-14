@@ -16,6 +16,24 @@
       "message": "Is it guaranteed that GetDef returns a pointer and not nullptr?",
       "revId": "f079b86673441221883e0d39bce8c2536c7119db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e7ac2c_f6dd66c6",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 5284,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-14T19:36:27Z",
+      "side": 1,
+      "message": "It doesn\u0027t. The code assumes the SPIR-V module has been validated, and the argument must map to a valid instruction pointer.\nBut I\u0027ve gone ahead and coded it more defensively.",
+      "parentUuid": "8c98ad0a_f85159cc",
+      "revId": "f079b86673441221883e0d39bce8c2536c7119db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
