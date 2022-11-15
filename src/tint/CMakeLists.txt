@@ -656,6 +656,7 @@ if(${TINT_BUILD_IR})
     ir/builder_impl.h
     ir/case.cc
     ir/case.h
+    ir/constant.h
     ir/debug.cc
     ir/debug.h
     ir/flow_node.cc
@@ -668,6 +669,10 @@ if(${TINT_BUILD_IR})
     ir/loop.h
     ir/module.cc
     ir/module.h
+    ir/op.cc
+    ir/op.h
+    ir/register.cc
+    ir/register.h
     ir/switch.cc
     ir/switch.h
     ir/terminator.cc
