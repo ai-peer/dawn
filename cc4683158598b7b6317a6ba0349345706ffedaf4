@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50854a2_6a15c0ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-15T21:58:52Z",
+      "side": 1,
+      "message": "PTAL. Skeletoning this out, will fill in as I work out the best way to walk the graph.",
+      "revId": "cc4683158598b7b6317a6ba0349345706ffedaf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
