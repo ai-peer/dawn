@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "cfd76d60312e848a272697d2566cdeb6d010fcf1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248aab63_e3fbe8d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-15T15:48:09Z",
+      "side": 1,
+      "message": "One formatting request, but otherwise LGTM.",
+      "revId": "cfd76d60312e848a272697d2566cdeb6d010fcf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876fc98c_0bcc5dca",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1327,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-15T15:48:09Z",
+      "side": 1,
+      "message": "Please, can you add `//` after each case to ensure they format to one per line?",
+      "range": {
+        "startLine": 1324,
+        "startChar": 11,
+        "endLine": 1327,
+        "endChar": 55
+      },
+      "revId": "cfd76d60312e848a272697d2566cdeb6d010fcf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
