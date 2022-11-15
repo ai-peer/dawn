@@ -18,20 +18,4 @@ namespace tint::ir {
 
 Op::Op(Kind k) : kind(k) {}
 
-bool Op::HasConstant() const {
-    return std::holds_alternative<Constant>(args);
-}
-
-bool Op::HasData() const {
-    return std::holds_alternative<Op::Data>(args);
-}
-
-const Constant& Op::GetConstant() const {
-    return std::get<Constant>(args);
-}
-
-const Op::Data& Op::GetData() const {
-    return std::get<Op::Data>(args);
-}
-
 }  // namespace tint::ir

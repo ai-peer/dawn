@@ -23,8 +23,10 @@ namespace tint::ir {
 /// sentinal value.
 struct Register {
     /// Allocates a new register.
+    /// @returns the allocated register
     static Register Allocate();
 
+    /// The register id
     uint64_t id = 0;
 };
 
