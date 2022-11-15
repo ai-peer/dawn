@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "019d9e66_0488835f",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-15T22:19:46Z",
+      "side": 1,
+      "message": "Note that I switched to using this form rather than `EXPECT_EQ(CheckedAdd(lhs, rhs), expect)` to work around an incorrect analysis from gcc-10 about the optional being maybe uninitialized (see example of the failure here: https://fusion2.corp.google.com/invocations/46364e85-90b3-42fb-bdbd-7e838db80478/targets/dawn%2Flinux%2Fcmake-gcc-release%2Fpresubmit;config\u003ddefault/log).\n\nNote that gcc-12 does not emit this warning. I tried many ways to convince gcc-10 not to warn, and this is the simplest one -- relying on `std::optional::operator\u003d\u003d`.",
+      "range": {
+        "startLine": 445,
+        "startChar": 12,
+        "endLine": 445,
+        "endChar": 55
+      },
+      "revId": "40afcc60296db129cce21eccd61e063bed2cb3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
