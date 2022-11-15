@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24c4060d_c92efc40",
+        "filename": "src/tint/number.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T14:19:10Z",
+      "side": 1,
+      "message": "Please split this out to a separate change, and add tests for `f32` / `f16`",
+      "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc4d57b_bfac34ae",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T14:19:10Z",
+      "side": 1,
+      "message": "What about abstract-int? Here and below.",
+      "range": {
+        "startLine": 257,
+        "startChar": 17,
+        "endLine": 257,
+        "endChar": 32
+      },
+      "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
