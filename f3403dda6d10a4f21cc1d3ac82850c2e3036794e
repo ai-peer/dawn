@@ -63,6 +63,30 @@
       },
       "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ce52c6_ba828552",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-15T14:22:35Z",
+      "side": 1,
+      "message": "Oh, sorry, you meant that they aren\u0027t being tested...",
+      "parentUuid": "0ab8dcfb_4d539e93",
+      "range": {
+        "startLine": 257,
+        "startChar": 17,
+        "endLine": 257,
+        "endChar": 32
+      },
+      "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
