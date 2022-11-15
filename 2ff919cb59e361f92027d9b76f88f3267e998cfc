@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd729a9e_1158165e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-15T04:28:17Z",
+      "side": 1,
+      "message": "This is a new tint transformation aiming to workaround the HLSL limitations on interstage variables. I try to come up with some tint unit test cases, and had some dawn end2end tests to make sure the render result is correct on D3D backends (Inside the WIP patch in relation chain). But I could miss many coverages as this is my first tint transform patch.\n\nI now made an assumption that this transform must be run after the CanonicalizeEntryPoint transform. And it looks like SingleEntryPoint transform is added on all dawn backend for shader module compilation (but not internally on Tint generator). If we can assume SingleEntryPoint is always run then there should be less risk. Now it could handle multiple entry points (with two test cases coverage)\n\nThanks!",
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

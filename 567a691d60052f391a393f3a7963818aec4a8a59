@@ -33,6 +33,24 @@
       "message": "The TINT_PRINT_PROGRAM_FOR_EACH_TRANSFORM results looks like in its good shape. But I\u0027m getting many `\"internal compiler error: AST node \u0027tint::ast::TypeName\u0027 was encountered twice in the same AST of a Program\"` errors. Is it I mess up with the dst and src context in some way?\n\n\n```\n---------------------------------------------------------\n-- Input to tint::transform::CompactInterstageVariables:\n---------------------------------------------------------\nstruct ShaderIO {\n  @builtin(position)\n  pos : vec4\u003cf32\u003e,\n  @location(1)\n  f_1 : f32,\n  @location(3)\n  f_3 : f32,\n}\n\n@vertex\nfn f() -\u003e ShaderIO {\n  var io : ShaderIO;\n  io.pos \u003d vec4\u003cf32\u003e(1.0, 1.0, 1.0, 1.0);\n  io.f_1 \u003d 1.0;\n  io.f_3 \u003d (io.f_1 + 3.0);\n  return io;\n}\n\n---------------------------------------------------------\n\n---------------------------------------------------------\n-- Invalid output of tint::transform::CompactInterstageVariables:\n---------------------------------------------------------\nstruct TruncatedShaderIO {\n  @location(3)\n  f_3 : f32,\n  @builtin(position)\n  pos : vec4\u003cf32\u003e,\n}\n\nfn truncate_shader_output(io : TruncatedShaderIO) -\u003e TruncatedShaderIO {\n  var result : TruncatedShaderIO;\n  result.pos \u003d io.pos;\n  result.f_3 \u003d io.f_3;\n  return result;\n}\n\nstruct ShaderIO {\n  pos : vec4\u003cf32\u003e,\n  f_1 : f32,\n  f_3 : f32,\n}\n\n@vertex\nfn f() -\u003e TruncatedShaderIO {\n  var io : ShaderIO;\n  io.pos \u003d vec4\u003cf32\u003e(1.0, 1.0, 1.0, 1.0);\n  io.f_1 \u003d 1.0;\n  io.f_3 \u003d (io.f_1 + 3.0);\n  return truncate_shader_output(io);\n}\n\n---------------------------------------------------------\n\n..\\..\\third_party\\dawn\\src\\tint\\transform\\compact_interstage_variables_test.cc(152): error: Expected equality of these values:\n  expect\n    Which is: \"\"\n  str(got)\n    Which is: \"..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::TypeName\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC963A8\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::TypeName\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC963A8\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::VariableDeclStatement\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC96478\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::Var\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC963F0\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::TypeName\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC963A8\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::AssignmentStatement\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC96708\\n\\n..\\\\..\\\\third_party\\\\dawn\\\\src\\\\tint\\\\resolver\\\\resolver.cc:3301 internal compiler error: AST node \u0027tint::ast::MemberAccessorExpression\u0027 was encountered twice in the same AST of a Program\\nAt: \\nPointer: 000001931FC966B8\\n\"\n```",
       "revId": "567a691d60052f391a393f3a7963818aec4a8a59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "449f7c12_29afc477",
+        "filename": "src/tint/transform/compact_interstage_variables.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-15T04:28:17Z",
+      "side": 1,
+      "message": "Done. Thanks for Antonio and James answering in the chat channel.",
+      "parentUuid": "1adc3efb_9e0b2665",
+      "revId": "567a691d60052f391a393f3a7963818aec4a8a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
