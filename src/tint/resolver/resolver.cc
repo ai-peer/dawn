@@ -1560,23 +1560,19 @@ void Resolver::RegisterLoadIfNeeded(const sem::Expression* expr) {
         // There is currently no situation where the Load Rule can be invoked outside of a function.
         return;
     }
-    auto& info = alias_analysis_infos_[current_function_];
+    auto& info = alias_analysis_infos_.GetOrZero(current_function_);
     Switch(
         expr->RootIdentifier(),
-        [&](const sem::GlobalVariable* global) {
-            info.module_scope_reads.insert({global, expr});
-        },
-        [&](const sem::Parameter* param) { info.parameter_reads.insert(param); });
+        [&](const sem::GlobalVariable* global) { info.module_scope_reads.Add(global, expr); },
+        [&](const sem::Parameter* param) { info.parameter_reads.Add(param); });
 }
 
 void Resolver::RegisterStore(const sem::Expression* expr) {
-    auto& info = alias_analysis_infos_[current_function_];
+    auto& info = alias_analysis_infos_.GetOrZero(current_function_);
     Switch(
         expr->RootIdentifier(),
-        [&](const sem::GlobalVariable* global) {
-            info.module_scope_writes.insert({global, expr});
-        },
-        [&](const sem::Parameter* param) { info.parameter_writes.insert(param); });
+        [&](const sem::GlobalVariable* global) { info.module_scope_writes.Add(global, expr); },
+        [&](const sem::Parameter* param) { info.parameter_writes.Add(param); });
 }
 
 bool Resolver::AliasAnalysis(const sem::Call* call) {
@@ -1616,12 +1612,12 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
     };
 
     auto& args = call->Arguments();
-    auto& target_info = alias_analysis_infos_[target];
-    auto& caller_info = alias_analysis_infos_[current_function_];
+    auto& target_info = alias_analysis_infos_.GetOrZero(target);
+    auto& caller_info = alias_analysis_infos_.GetOrZero(current_function_);
 
     // Track the set of root identifiers that are read and written by arguments passed in this call.
-    std::unordered_map<const sem::Variable*, const sem::Expression*> arg_reads;
-    std::unordered_map<const sem::Variable*, const sem::Expression*> arg_writes;
+    utils::Hashmap<const sem::Variable*, const sem::Expression*, 8> arg_reads;
+    utils::Hashmap<const sem::Variable*, const sem::Expression*, 8> arg_writes;
     for (size_t i = 0; i < args.Length(); i++) {
         auto* arg = args[i];
         if (!arg->Type()->Is<sem::Pointer>()) {
@@ -1629,60 +1625,57 @@ bool Resolver::AliasAnalysis(const sem::Call* call) {
         }
 
         auto* root = arg->RootIdentifier();
-        if (target_info.parameter_writes.count(target->Parameters()[i])) {
+        if (target_info.parameter_writes.Contains(target->Parameters()[i])) {
             // Arguments that are written to can alias with any other argument or module-scope
             // variable access.
-            if (arg_writes.count(root)) {
-                return make_error(arg, {arg_writes.at(root), Alias::Argument, "write"});
+            if (auto arg_write = arg_writes.Get(root)) {
+                return make_error(arg, {*arg_write, Alias::Argument, "write"});
             }
-            if (arg_reads.count(root)) {
-                return make_error(arg, {arg_reads.at(root), Alias::Argument, "read"});
+            if (auto arg_read = arg_reads.Get(root)) {
+                return make_error(arg, {*arg_read, Alias::Argument, "read"});
             }
-            if (target_info.module_scope_reads.count(root)) {
-                return make_error(
-                    arg, {target_info.module_scope_reads.at(root), Alias::ModuleScope, "read"});
+            if (auto mod_read = target_info.module_scope_reads.Get(root)) {
+                return make_error(arg, {*mod_read, Alias::ModuleScope, "read"});
             }
-            if (target_info.module_scope_writes.count(root)) {
-                return make_error(
-                    arg, {target_info.module_scope_writes.at(root), Alias::ModuleScope, "write"});
+            if (auto mod_write = target_info.module_scope_writes.Get(root)) {
+                return make_error(arg, {*mod_write, Alias::ModuleScope, "write"});
             }
-            arg_writes.insert({root, arg});
+            arg_writes.Add(root, arg);
 
             // Propagate the write access to the caller.
             Switch(
                 root,
                 [&](const sem::GlobalVariable* global) {
-                    caller_info.module_scope_writes.insert({global, arg});
+                    caller_info.module_scope_writes.Add(global, arg);
                 },
-                [&](const sem::Parameter* param) { caller_info.parameter_writes.insert(param); });
-        } else if (target_info.parameter_reads.count(target->Parameters()[i])) {
+                [&](const sem::Parameter* param) { caller_info.parameter_writes.Add(param); });
+        } else if (target_info.parameter_reads.Contains(target->Parameters()[i])) {
             // Arguments that are read from can alias with arguments or module-scope variables that
             // are written to.
-            if (arg_writes.count(root)) {
-                return make_error(arg, {arg_writes.at(root), Alias::Argument, "write"});
+            if (auto arg_write = arg_writes.Get(root)) {
+                return make_error(arg, {*arg_write, Alias::Argument, "write"});
             }
-            if (target_info.module_scope_writes.count(root)) {
-                return make_error(
-                    arg, {target_info.module_scope_writes.at(root), Alias::ModuleScope, "write"});
+            if (auto mod_write = target_info.module_scope_writes.Get(root)) {
+                return make_error(arg, {*mod_write, Alias::ModuleScope, "write"});
             }
-            arg_reads.insert({root, arg});
+            arg_reads.Add(root, arg);
 
             // Propagate the read access to the caller.
             Switch(
                 root,
                 [&](const sem::GlobalVariable* global) {
-                    caller_info.module_scope_reads.insert({global, arg});
+                    caller_info.module_scope_reads.Add(global, arg);
                 },
-                [&](const sem::Parameter* param) { caller_info.parameter_reads.insert(param); });
+                [&](const sem::Parameter* param) { caller_info.parameter_reads.Add(param); });
         }
     }
 
     // Propagate module-scope variable uses to the caller.
-    for (auto read : target_info.module_scope_reads) {
-        caller_info.module_scope_reads.insert({read.first, read.second});
+    for (auto& read : target_info.module_scope_reads) {
+        caller_info.module_scope_reads.Add(read.key, read.value);
     }
-    for (auto write : target_info.module_scope_writes) {
-        caller_info.module_scope_writes.insert({write.first, write.second});
+    for (auto& write : target_info.module_scope_writes) {
+        caller_info.module_scope_writes.Add(write.key, write.value);
     }
 
     return true;
