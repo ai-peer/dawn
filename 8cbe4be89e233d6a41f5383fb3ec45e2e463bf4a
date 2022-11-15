@@ -50,6 +50,24 @@
       "message": "nit: This could have been combined into a single if clause.",
       "revId": "8cbe4be89e233d6a41f5383fb3ec45e2e463bf4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e7cd69_79d0d797",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3263,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-15T00:17:06Z",
+      "side": 1,
+      "message": "True, I was trying to keep it obvious that these should be separate cases though in the case we get fallback restored.",
+      "parentUuid": "b8bae47c_836921a8",
+      "revId": "8cbe4be89e233d6a41f5383fb3ec45e2e463bf4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
