@@ -22,6 +22,30 @@
       },
       "revId": "40afcc60296db129cce21eccd61e063bed2cb3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f43bcd7b_a750c1a4",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T22:38:32Z",
+      "side": 1,
+      "message": "argh. that\u0027s the reason I bumped kokoro to gcc-10. I thought it had been fixed by 10. :-(",
+      "parentUuid": "019d9e66_0488835f",
+      "range": {
+        "startLine": 445,
+        "startChar": 12,
+        "endLine": 445,
+        "endChar": 55
+      },
+      "revId": "40afcc60296db129cce21eccd61e063bed2cb3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
