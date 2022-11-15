@@ -654,6 +654,8 @@ if(${TINT_BUILD_IR})
     ir/builder.h
     ir/builder_impl.cc
     ir/builder_impl.h
+    ir/case.cc
+    ir/case.h
     ir/debug.cc
     ir/debug.h
     ir/flow_node.cc

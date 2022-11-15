@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_IR_BUILDER_H_
 #define SRC_TINT_IR_BUILDER_H_
 
+#include "src/tint/ir/case.h"
 #include "src/tint/ir/function.h"
 #include "src/tint/ir/if.h"
 #include "src/tint/ir/loop.h"
@@ -74,7 +75,7 @@ class Builder {
     /// @param s the switch to create the case into
     /// @param selectors the case selectors for the case statement
     /// @returns the start block for the case flow node
-    Block* CreateCase(Switch* s, const utils::VectorRef<const ast::CaseSelector*> selectors);
+    Case* CreateCase(Switch* s, const utils::VectorRef<const ast::CaseSelector*> selectors);
 
     /// Branches the given block to the given flow node.
     /// @param from the block to branch from

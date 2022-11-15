@@ -1128,28 +1128,31 @@ TEST_F(IRBuilderImplTest, Switch) {
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
 
-    ASSERT_EQ(1u, flow->cases[0].selectors.Length());
-    ASSERT_TRUE(flow->cases[0].selectors[0]->expr->Is<ast::IntLiteralExpression>());
-    EXPECT_EQ(0_i, flow->cases[0].selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
+    ASSERT_EQ(1u, flow->cases[0]->selectors.Length());
+    ASSERT_TRUE(flow->cases[0]->selectors[0]->expr->Is<ast::IntLiteralExpression>());
+    EXPECT_EQ(0_i, flow->cases[0]->selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
 
-    ASSERT_EQ(1u, flow->cases[1].selectors.Length());
-    ASSERT_TRUE(flow->cases[1].selectors[0]->expr->Is<ast::IntLiteralExpression>());
-    EXPECT_EQ(1_i, flow->cases[1].selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
+    ASSERT_EQ(1u, flow->cases[1]->selectors.Length());
+    ASSERT_TRUE(flow->cases[1]->selectors[0]->expr->Is<ast::IntLiteralExpression>());
+    EXPECT_EQ(1_i, flow->cases[1]->selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
 
-    ASSERT_EQ(1u, flow->cases[2].selectors.Length());
-    EXPECT_TRUE(flow->cases[2].selectors[0]->IsDefault());
+    ASSERT_EQ(1u, flow->cases[2]->selectors.Length());
+    EXPECT_TRUE(flow->cases[2]->selectors[0]->IsDefault());
 
     EXPECT_EQ(1u, flow->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[0].start_target->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[1].start_target->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[2].start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[2]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[2]->start_target->inbound_branches.Length());
     EXPECT_EQ(3u, flow->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, ir_switch);
-    EXPECT_EQ(flow->cases[0].start_target->branch_target, flow->merge_target);
-    EXPECT_EQ(flow->cases[1].start_target->branch_target, flow->merge_target);
-    EXPECT_EQ(flow->cases[2].start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[0]->start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[1]->start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[2]->start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
 }
 
@@ -1176,16 +1179,17 @@ TEST_F(IRBuilderImplTest, Switch_OnlyDefault) {
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
 
-    ASSERT_EQ(1u, flow->cases[0].selectors.Length());
-    EXPECT_TRUE(flow->cases[0].selectors[0]->IsDefault());
+    ASSERT_EQ(1u, flow->cases[0]->selectors.Length());
+    EXPECT_TRUE(flow->cases[0]->selectors[0]->IsDefault());
 
     EXPECT_EQ(1u, flow->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[0].start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->start_target->inbound_branches.Length());
     EXPECT_EQ(1u, flow->merge_target->inbound_branches.Length());
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, ir_switch);
-    EXPECT_EQ(flow->cases[0].start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[0]->start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
 }
 
@@ -1228,23 +1232,25 @@ TEST_F(IRBuilderImplTest, Switch_WithBreak) {
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
 
-    ASSERT_EQ(1u, flow->cases[0].selectors.Length());
-    ASSERT_TRUE(flow->cases[0].selectors[0]->expr->Is<ast::IntLiteralExpression>());
-    EXPECT_EQ(0_i, flow->cases[0].selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
+    ASSERT_EQ(1u, flow->cases[0]->selectors.Length());
+    ASSERT_TRUE(flow->cases[0]->selectors[0]->expr->Is<ast::IntLiteralExpression>());
+    EXPECT_EQ(0_i, flow->cases[0]->selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
 
-    ASSERT_EQ(1u, flow->cases[1].selectors.Length());
-    EXPECT_TRUE(flow->cases[1].selectors[0]->IsDefault());
+    ASSERT_EQ(1u, flow->cases[1]->selectors.Length());
+    EXPECT_TRUE(flow->cases[1]->selectors[0]->IsDefault());
 
     EXPECT_EQ(1u, flow->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[0].start_target->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[1].start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->start_target->inbound_branches.Length());
     EXPECT_EQ(2u, flow->merge_target->inbound_branches.Length());
     // This is 1 because the if is dead-code eliminated and the return doesn't happen.
     EXPECT_EQ(1u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, ir_switch);
-    EXPECT_EQ(flow->cases[0].start_target->branch_target, flow->merge_target);
-    EXPECT_EQ(flow->cases[1].start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[0]->start_target->branch_target, flow->merge_target);
+    EXPECT_EQ(flow->cases[1]->start_target->branch_target, flow->merge_target);
     EXPECT_EQ(flow->merge_target->branch_target, func->end_target);
 }
 
@@ -1294,22 +1300,24 @@ TEST_F(IRBuilderImplTest, Switch_AllReturn) {
     ASSERT_EQ(1u, m.functions.Length());
     auto* func = m.functions[0];
 
-    ASSERT_EQ(1u, flow->cases[0].selectors.Length());
-    ASSERT_TRUE(flow->cases[0].selectors[0]->expr->Is<ast::IntLiteralExpression>());
-    EXPECT_EQ(0_i, flow->cases[0].selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
+    ASSERT_EQ(1u, flow->cases[0]->selectors.Length());
+    ASSERT_TRUE(flow->cases[0]->selectors[0]->expr->Is<ast::IntLiteralExpression>());
+    EXPECT_EQ(0_i, flow->cases[0]->selectors[0]->expr->As<ast::IntLiteralExpression>()->value);
 
-    ASSERT_EQ(1u, flow->cases[1].selectors.Length());
-    EXPECT_TRUE(flow->cases[1].selectors[0]->IsDefault());
+    ASSERT_EQ(1u, flow->cases[1]->selectors.Length());
+    EXPECT_TRUE(flow->cases[1]->selectors[0]->IsDefault());
 
     EXPECT_EQ(1u, flow->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[0].start_target->inbound_branches.Length());
-    EXPECT_EQ(1u, flow->cases[1].start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[0]->start_target->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->inbound_branches.Length());
+    EXPECT_EQ(1u, flow->cases[1]->start_target->inbound_branches.Length());
     EXPECT_EQ(0u, flow->merge_target->inbound_branches.Length());
     EXPECT_EQ(2u, func->end_target->inbound_branches.Length());
 
     EXPECT_EQ(func->start_target->branch_target, ir_switch);
-    EXPECT_EQ(flow->cases[0].start_target->branch_target, func->end_target);
-    EXPECT_EQ(flow->cases[1].start_target->branch_target, func->end_target);
+    EXPECT_EQ(flow->cases[0]->start_target->branch_target, func->end_target);
+    EXPECT_EQ(flow->cases[1]->start_target->branch_target, func->end_target);
     EXPECT_EQ(flow->merge_target->branch_target, nullptr);
 }
 

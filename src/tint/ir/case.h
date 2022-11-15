@@ -12,39 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_IR_SWITCH_H_
-#define SRC_TINT_IR_SWITCH_H_
+#ifndef SRC_TINT_IR_CASE_H_
+#define SRC_TINT_IR_CASE_H_
 
 #include "src/tint/ir/block.h"
-#include "src/tint/ir/case.h"
 #include "src/tint/ir/flow_node.h"
 
 // Forward declarations
 namespace tint::ast {
 class CaseSelector;
-class SwitchStatement;
 }  // namespace tint::ast
 
 namespace tint::ir {
 
-/// Flow node representing a switch statement
-class Switch : public Castable<Switch, FlowNode> {
+/// Flow node representing a case statement
+class Case : public Castable<Case, FlowNode> {
   public:
     /// Constructor
-    /// @param stmt the originating ast switch statement
-    explicit Switch(const ast::SwitchStatement* stmt);
-    ~Switch() override;
+    /// @param s the originating ast case selectors
+    explicit Case(const utils::VectorRef<const ast::CaseSelector*> s);
+    ~Case() override;
 
-    /// The originating switch statment in the AST
-    const ast::SwitchStatement* source;
+    /// The case selector for this node
+    const utils::VectorRef<const ast::CaseSelector*> selectors;
 
-    /// The switch merge target
-    Block* merge_target;
-
-    /// The switch case statements
-    utils::Vector<Case*, 4> cases;
+    /// The start block for the case block.
+    Block* start_target;
 };
 
 }  // namespace tint::ir
 
-#endif  // SRC_TINT_IR_SWITCH_H_
+#endif  // SRC_TINT_IR_CASE_H_

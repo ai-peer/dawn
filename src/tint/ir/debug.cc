@@ -77,22 +77,27 @@ std::string Debug::AsDotGraph(const Module* mod) {
 
                 size_t i = 0;
                 for (const auto& c : s->cases) {
-                    out << name_for(c.start_target)
-                        << R"( [label="case )" + std::to_string(i++) + R"("])" << std::endl;
+                    out << name_for(c) << R"( [label="case )" + std::to_string(i++) + R"("])"
+                        << std::endl;
                 }
                 out << name_for(s) << " -> {";
-                for (const auto& c : s->cases) {
-                    if (&c != &(s->cases[0])) {
+                for (const auto* c : s->cases) {
+                    if (c != s->cases[0]) {
                         out << ", ";
                     }
-                    out << name_for(c.start_target);
+                    out << name_for(c);
                 }
                 out << "}" << std::endl;
 
-                for (const auto& c : s->cases) {
-                    Graph(c.start_target);
+                for (const auto* c : s->cases) {
+                    Graph(c);
                 }
                 Graph(s->merge_target);
+            },
+            [&](const ir::Case* c) {
+                out << name_for(c) << " -> " << name_for(c->start_target) << std::endl;
+                out << name_for(c->start_target) << R"( [label="case start"])" << std::endl;
+                Graph(c->start_target);
             },
             [&](const ir::If* i) {
                 out << name_for(i) << R"( [label="if"])" << std::endl;

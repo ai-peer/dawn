@@ -77,13 +77,16 @@ Switch* Builder::CreateSwitch(const ast::SwitchStatement* stmt) {
     return ir_switch;
 }
 
-Block* Builder::CreateCase(Switch* s, const utils::VectorRef<const ast::CaseSelector*> selectors) {
-    s->cases.Push(Switch::Case{selectors, CreateBlock()});
+Case* Builder::CreateCase(Switch* s, const utils::VectorRef<const ast::CaseSelector*> selectors) {
+    auto* ir_case = ir.flow_nodes.Create<Case>(selectors);
+    ir_case->start_target = CreateBlock();
+    s->cases.Push(ir_case);
 
-    Block* b = s->cases.Back().start_target;
-    // Switch branches into the case block
-    b->inbound_branches.Push(s);
-    return b;
+    // Switch branches into the case
+    ir_case->inbound_branches.Push(s);
+    // Case branches straight to start target
+    ir_case->start_target->inbound_branches.Push(ir_case);
+    return ir_case;
 }
 
 void Builder::Branch(Block* from, FlowNode* to) {

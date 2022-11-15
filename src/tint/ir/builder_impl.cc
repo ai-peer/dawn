@@ -414,7 +414,9 @@ bool BuilderImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
         FlowStackScope scope(this, switch_node);
 
         for (const auto* c : stmt->body) {
-            current_flow_block_ = builder_.CreateCase(switch_node, c->selectors);
+            auto* ir_case = builder_.CreateCase(switch_node, c->selectors);
+            current_flow_block_ = ir_case->start_target;
+
             if (!EmitStatement(c->body)) {
                 return false;
             }
