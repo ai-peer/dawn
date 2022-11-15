@@ -16,6 +16,24 @@
       "message": "Would it be worthwhile minmizing / making this readable? I\u0027m not sure how useful it is to commit the exact WGSL from the fuzzer vs a readable reduced test case.",
       "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae6437ab_6c0d8685",
+        "filename": "test/tint/bug/chromium/1383755.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T09:25:51Z",
+      "side": 1,
+      "message": "for the `test/tint/bug` cases, I tend to try sticking moderately close to the original shader code. If there\u0027s a particular thing that needs minimised testing, I\u0027ll also add that as another test outside of that directory.\nGiven that this is a noisy, meaningless shader, that just so happens to trigger a fault, there seems to be little gain in reducing further.",
+      "parentUuid": "740b7fd3_2d394400",
+      "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
