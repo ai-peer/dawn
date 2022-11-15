@@ -52,6 +52,24 @@
       "parentUuid": "ae6437ab_6c0d8685",
       "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa25f27b_8af70bac",
+        "filename": "test/tint/bug/chromium/1383755.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-15T12:58:47Z",
+      "side": 1,
+      "message": "Ah, I didn\u0027t know that. LGTM.",
+      "parentUuid": "30cf705d_0a7011f2",
+      "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
