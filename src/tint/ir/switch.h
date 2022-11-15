@@ -43,6 +43,9 @@ class Switch : public Castable<Switch, FlowNode> {
 
     /// The switch case statements
     utils::Vector<Case*, 4> cases;
+
+    /// The register holding the condition result
+    Register condition;
 };
 
 }  // namespace tint::ir
