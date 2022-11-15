@@ -16,6 +16,23 @@
       "message": "There\u0027s a dependent change which switches to utils::Hash{map,set}, but is not currently working. If there\u0027s a straightforward fix for that, I\u0027m happy to pull that change into this CL.",
       "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7854f026_799a1081",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-15T19:55:44Z",
+      "side": 1,
+      "message": "I\u0027m not totally happy with the need to call this everywhere that the load-rule is invoked. Ideally there\u0027d be a less manual way of doing this. I initially tried to piggy-back on Materialize, but that didn\u0027t quite work. Suggestions welcome.",
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
