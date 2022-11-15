@@ -34,6 +34,24 @@
       "parentUuid": "740b7fd3_2d394400",
       "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30cf705d_0a7011f2",
+        "filename": "test/tint/bug/chromium/1383755.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T09:33:38Z",
+      "side": 1,
+      "message": "Note that this is a cherry-pick to a release branch. This has already landed in `main`",
+      "parentUuid": "ae6437ab_6c0d8685",
+      "revId": "51b7172d5cbc6d40dcd020879e96624ecf2d304a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
