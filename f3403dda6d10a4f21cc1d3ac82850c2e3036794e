@@ -39,6 +39,30 @@
       },
       "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ab8dcfb_4d539e93",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-15T14:21:00Z",
+      "side": 1,
+      "message": "Abstract ints don\u0027t result in inf/nan",
+      "parentUuid": "edc4d57b_bfac34ae",
+      "range": {
+        "startLine": 257,
+        "startChar": 17,
+        "endLine": 257,
+        "endChar": 32
+      },
+      "revId": "f3403dda6d10a4f21cc1d3ac82850c2e3036794e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
