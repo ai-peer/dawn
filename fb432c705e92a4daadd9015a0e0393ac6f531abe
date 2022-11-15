@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a448ef_4afc61e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-15T01:01:37Z",
+      "side": 1,
+      "message": "\u003e im wondering if it would be possible for us to simply the implementation such that we always raise the validation error if there is one, and then afterward check the OOM error\n\nI think this is valid to do in the device timeline. The content-timeline OOM would result in an exception, so in a sense it happens before even triggering device-timeline validation.",
+      "parentUuid": "fdffb753_ceaea276",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3bd138ac_43b662d9",
@@ -260,6 +278,24 @@
       "side": 1,
       "message": "Hi Austin, do you mean we should\n1. return nullptr directly at wire client when OOM happens and mappedAtCreation \u003d\u003d true\n2. put a structure with information about OOM at client to ChainedStruct at BufferDescriptor when OOM happens and mappedAtCreation \u003d\u003d false",
       "parentUuid": "59326ebd_c354495f",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e823a723_8233edcd",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-15T01:01:37Z",
+      "side": 1,
+      "message": "Seems part of my last reply got lost, sorry.\n\n\u003e to confirm: is the part that can throw an exception the CreateByteDataBlock part of \"initialize an active buffer mapping\"\n\nYes.\n\n\u003e In theory we want some kind of native API answer for fallible allocation in mappedAtCreation but\n\n... we don\u0027t need to figure that out immediately.\n\n\u003e as I said above, I think this would be better done by having a separate method to make the mapped buffer, and then wrap that as a buffer - but that can be reworked in the future.\n\u003e returning nullptr in the client should be enough to get us spec compliant\n\nAgreed.\n\n@jiawei.shao@intel.com I think that makes the most sense to me.",
+      "parentUuid": "261dd878_bebc2756",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
