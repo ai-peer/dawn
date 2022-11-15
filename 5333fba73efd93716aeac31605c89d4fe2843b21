@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a38ae306_8a9fa786",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-15T13:08:29Z",
+      "side": 1,
+      "message": "I did a quick search to see if these APIs were publicaly documented anywhere, but couldn\u0027t find anything.\nAside from the `third_party` header, is there any public documentation on these APIs?",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
