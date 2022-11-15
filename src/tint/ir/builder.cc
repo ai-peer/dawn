@@ -101,7 +101,7 @@ void Builder::Branch(Block* from, FlowNode* to) {
 
 Op Builder::CreateLoad(const ast::BoolLiteralExpression* expr) {
     Op o(Op::Kind::kLoadConstant);
-    o.args = Constant{Constant::Kind::kBool, expr->value};
+    o.args.Push({Constant{Constant::Kind::kBool, expr->value}});
     o.result = Register::Allocate();
     return o;
 }
@@ -112,7 +112,7 @@ Op Builder::CreateLoad(const ast::FloatLiteralExpression* expr) {
                               : Constant::Kind::kF16;
 
     Op o(Op::Kind::kLoadConstant);
-    o.args = Constant{kind, expr->value};
+    o.args.Push({Constant{kind, expr->value}});
     o.result = Register::Allocate();
     return o;
 }
@@ -123,7 +123,7 @@ Op Builder::CreateLoad(const ast::IntLiteralExpression* expr) {
                               : Constant::Kind::kU32;
 
     Op o(Op::Kind::kLoadConstant);
-    o.args = Constant{kind, expr->value};
+    o.args.Push({Constant{kind, expr->value}});
     o.result = Register::Allocate();
     return o;
 }

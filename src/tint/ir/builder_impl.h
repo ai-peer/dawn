@@ -33,6 +33,7 @@ class Program;
 namespace tint::ast {
 class BoolLiteralExpression;
 class BlockStatement;
+class BinaryExpression;
 class BreakIfStatement;
 class BreakStatement;
 class Const;
@@ -155,9 +156,14 @@ class BuilderImpl {
     /// @returns true if successful, false otherwise
     bool EmitConst(const ast::Const* c);
 
+    /// Emits a binary expression
+    /// @param expr the binary expression
+    /// @returns the register storing the result if successful, utils::Failure otherwise
+    utils::Result<Register> EmitBinary(const ast::BinaryExpression* expr);
+
     /// Emits a literal
     /// @param lit the literal to emit
-    /// @return returns true if successful, false otherwise
+    /// @returns the register storing the result if successful, utils::Failure otherwise
     utils::Result<Register> EmitLiteral(const ast::LiteralExpression* lit);
 
     /// Emits a type

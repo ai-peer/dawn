@@ -161,4 +161,190 @@ std::string Debug::AsDotGraph(const Module* mod) {
     return out.str();
 }
 
+// static
+std::string Debug::AsString(const Module* mod) {
+    size_t node_count = 0;
+
+    std::unordered_set<const FlowNode*> visited;
+    std::unordered_map<const FlowNode*, std::string> node_to_name;
+    std::stringstream out;
+
+    auto name_for = [&](const FlowNode* node) -> std::string {
+        if (node_to_name.count(node) > 0) {
+            return node_to_name[node];
+        }
+
+        std::string name = "%bb_" + std::to_string(node_count);
+        node_count += 1;
+
+        node_to_name[node] = name;
+        return name;
+    };
+
+    std::function<void(const Register&)> EmitReg = [&](const Register& reg) {
+        out << "%r" << reg.id;
+    };
+
+    std::function<void(const Op::Data&)> EmitData = [&](const Op::Data& data) {
+        if (data.HasConstant()) {
+            auto& c = data.GetConstant();
+            if (c.IsBool()) {
+                out << c.AsBool();
+            } else if (c.IsF16() || c.IsF32()) {
+                out << c.AsF32();
+            } else if (c.IsI32()) {
+                out << c.AsI32();
+            } else {
+                out << c.AsU32();
+            }
+        } else {
+            EmitReg(data.GetRegister());
+        }
+    };
+
+    std::function<void(const utils::VectorRef<Op>)> EmitOps = [&](const utils::VectorRef<Op> ops) {
+        for (auto& op : ops) {
+            if (op.HasResult()) {
+                EmitReg(op.result);
+                out << " = ";
+            }
+
+            if (op.kind == Op::Kind::kLoadConstant) {
+                EmitData(op.args[0]);
+                out << std::endl;
+                continue;
+            } else if (op.kind == Op::Kind::kLoad) {
+                out << "LOAD\n";
+                continue;
+            } else if (op.kind == Op::Kind::kStore) {
+                out << "STORE\n";
+                continue;
+            } else if (op.kind == Op::Kind::kCall) {
+                out << "CALL\n";
+                continue;
+            }
+
+            TINT_ASSERT(IR, op.args.Length() == 2);
+            std::string name;
+            switch (op.kind) {
+                case Op::Kind::kAnd:
+                    name = "&";
+                    break;
+                case Op::Kind::kOr:
+                    name = "|";
+                    break;
+                case Op::Kind::kXor:
+                    name = "^";
+                    break;
+                case Op::Kind::kLogicalAnd:
+                    name = "&&";
+                    break;
+                case Op::Kind::kLogicalOr:
+                    name = "||";
+                    break;
+                case Op::Kind::kEqual:
+                    name = "==";
+                    break;
+                case Op::Kind::kNotEqual:
+                    name = "!=";
+                    break;
+                case Op::Kind::kLessThan:
+                    name = "<";
+                    break;
+                case Op::Kind::kLessThanEqual:
+                    name = "<=";
+                    break;
+                case Op::Kind::kGreaterThan:
+                    name = ">";
+                    break;
+                case Op::Kind::kGreaterThanEqual:
+                    name = ">=";
+                    break;
+                case Op::Kind::kShiftLeft:
+                    name = "<<";
+                    break;
+                case Op::Kind::kShiftRight:
+                    name = ">>";
+                    break;
+                case Op::Kind::kAdd:
+                    name = "+";
+                    break;
+                case Op::Kind::kSubtract:
+                    name = "-";
+                    break;
+                case Op::Kind::kMultiply:
+                    name = "*";
+                    break;
+                case Op::Kind::kDivide:
+                    name = "/";
+                    break;
+                case Op::Kind::kModulo:
+                    name = "%";
+                    break;
+                case Op::Kind::kNone:
+                default: {
+                    out << "implement" << std::endl;
+                    continue;
+                }
+            }
+            EmitData(op.args[0]);
+            out << " " << name << " ";
+            EmitData(op.args[1]);
+            out << std::endl;
+        }
+    };
+
+    std::function<void(const FlowNode*)> Emit = [&](const FlowNode* node) {
+        if (visited.count(node) > 0) {
+            return;
+        }
+        visited.insert(node);
+
+        tint::Switch(
+            node,
+            [&](const ir::Function* f) {
+                out << "Function: " << mod->program->Symbols().NameFor(f->source->symbol) << " T("
+                    << name_for(f->end_target) << ")" << std::endl;
+            },
+            [&](const ir::Block* b) {
+                out << name_for(b) << " = Block()" << std::endl;
+                EmitOps(b->ops);
+                out << "Jump " << name_for(b->branch_target) << std::endl;
+            },
+            [&](const ir::Switch* s) {
+                out << name_for(s) << " = Switch(";
+                EmitReg(s->condition);
+                out << ") M(" << name_for(s->merge_target) << ")" << std::endl;
+
+                for (const auto& c : s->cases) {
+                    Emit(c);
+                }
+            },
+            [&](const ir::Case* c) {
+                // TODO(dsinclair): Emit case selectors when known in IR
+                out << name_for(c->start_target) << " = Case()" << std::endl;
+                Emit(c->start_target);
+            },
+            [&](const ir::If* i) {
+                out << name_for(i) << " = If(";
+                EmitReg(i->condition);
+                out << ") T(" << name_for(i->true_target) << ") F(" << name_for(i->false_target)
+                    << ") M(" << name_for(i->merge_target) << ")" << std::endl;
+            },
+            [&](const ir::Loop* l) {
+                out << name_for(l) << " = Loop() C(" << name_for(l->continuing_target) << ") M("
+                    << l->merge_target << ")" << std::endl;
+            },
+            [&](const ir::Terminator* t) { out << name_for(t) << " = Terminator()" << std::endl; });
+    };
+
+    // TODO(dsinclair): Build a list of blocks and Emit them from the list instead of recursing
+    // the graph.
+
+    for (const auto* func : mod->functions) {
+        Emit(func);
+    }
+    return out.str();
+}
+
 }  // namespace tint::ir

@@ -22,12 +22,19 @@
 
 namespace tint::ir {
 
+/// A constant value in the IR
 struct Constant {
+    /// The kind of constant
     enum class Kind {
+        /// Boolean constant
         kBool,
+        /// F16 constant
         kF16,
+        /// F32 constant
         kF32,
+        /// I32 constant
         kI32,
+        /// U32 constant
         kU32,
     };
 
@@ -51,7 +58,9 @@ struct Constant {
     /// @returns the uint32 value
     uint32_t AsU32() const { return static_cast<uint32_t>(std::get<int64_t>(value)); }
 
+    /// The kind of the constant
     Kind kind;
+    /// The constant value
     std::variant<bool, double, int64_t> value;
 };
 

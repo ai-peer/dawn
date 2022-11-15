@@ -108,9 +108,10 @@ TEST_F(IRBuilderImplTest, IfStatement) {
     auto& op = func->start_target->ops.Back();
     EXPECT_EQ(op.result.id, flow->condition.id);
     ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& constant = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& constant = op.args[0].GetConstant();
     ASSERT_TRUE(constant.IsBool());
     EXPECT_TRUE(constant.AsBool());
 }
@@ -459,9 +460,10 @@ TEST_F(IRBuilderImplTest, Loop_WithContinuing_BreakIf) {
     auto& op = blk->ops.Back();
     EXPECT_EQ(op.result.id, break_if_flow->condition.id);
     ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& constant = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& constant = op.args[0].GetConstant();
     ASSERT_TRUE(constant.IsBool());
     EXPECT_TRUE(constant.AsBool());
 }
@@ -972,9 +974,10 @@ TEST_F(IRBuilderImplTest, While) {
     auto& op = flow->start_target->ops.Back();
     EXPECT_EQ(op.result.id, if_flow->condition.id);
     ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& constant = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& constant = op.args[0].GetConstant();
     ASSERT_TRUE(constant.IsBool());
     EXPECT_FALSE(constant.AsBool());
 }
@@ -1104,10 +1107,11 @@ TEST_F(IRBuilderImplTest, DISABLED_For) {
     auto& op = flow->start_target->ops.Back();
     EXPECT_EQ(op.result.id, if_flow->condition.id);
     ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
     // TODO(dsinclair): This is wrong, fix when boolean ops are implemented
-    auto& constant = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& constant = op.args[0].GetConstant();
     ASSERT_TRUE(constant.IsBool());
     EXPECT_FALSE(constant.AsBool());
 }
@@ -1216,9 +1220,10 @@ TEST_F(IRBuilderImplTest, Switch) {
     auto& op = func->start_target->ops.Back();
     EXPECT_EQ(op.result.id, flow->condition.id);
     ASSERT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& constant = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& constant = op.args[0].GetConstant();
     ASSERT_TRUE(constant.IsI32());
     EXPECT_EQ(1, constant.AsI32());
 }
@@ -1402,9 +1407,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_F32) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsF32());
     EXPECT_EQ(1.5f, c.AsF32());
 }
@@ -1423,9 +1429,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_F16) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsF16());
     EXPECT_EQ(1.5f, c.AsF32());
 }
@@ -1444,9 +1451,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_Bool_True) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsBool());
     EXPECT_TRUE(c.AsBool());
 }
@@ -1465,9 +1473,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_Bool_False) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsBool());
     EXPECT_FALSE(c.AsBool());
 }
@@ -1486,9 +1495,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_I32) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsI32());
     EXPECT_EQ(100, c.AsI32());
 }
@@ -1507,9 +1517,10 @@ TEST_F(IRBuilderImplTest, EmitLiteral_U32) {
     auto& op = current->ops.Back();
     EXPECT_EQ(reg.Get().id, op.result.id);
     EXPECT_EQ(op.kind, Op::Kind::kLoadConstant);
-    ASSERT_TRUE(op.HasConstant());
+    ASSERT_EQ(1u, op.args.Length());
 
-    auto& c = op.GetConstant();
+    ASSERT_TRUE(op.args[0].HasConstant());
+    auto& c = op.args[0].GetConstant();
     EXPECT_TRUE(c.IsU32());
     EXPECT_EQ(-100, c.AsU32());
 }
