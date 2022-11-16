@@ -1,0 +1,395 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af5c33ce_1eef1ee6",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Is this right? If the `interstage_locations` is empty, wouldn\u0027t you expect all the interstage variables to be stripped?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5800c27a_fb185643",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "`CanonicalizeEntryPointIO`",
+      "range": {
+        "startLine": 83,
+        "startChar": 77,
+        "endLine": 84,
+        "endChar": 29
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc2b798_a9d7f2ae",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "übernit: I\u0027ve seen bugs where this explicit form has introduced bugs where the `\u003d\u003d` was accidentally written as `\u003d`. Some people like to put the literal on the LHS to prevent that sort of accident. In tint, we\u0027d just use `if (!data-\u003einterstage_locations[location])`.",
+      "range": {
+        "startLine": 99,
+        "startChar": 57,
+        "endLine": 99,
+        "endChar": 65
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e893a805_8dda3c69",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "You\u0027ve gone to the effort of obtaining the member\u0027s `@location`, and checking against `interstage_locations`. I\u0027d consider populating a `utils::Hashset\u003cconst sem::StructMember*, N\u003e omit;` set, which holds the members that should be omitted. You can use that as a replacement for `isAnyTruncating`, and avoid a bunch of duplicate work below.",
+      "range": {
+        "startLine": 101,
+        "startChar": 20,
+        "endLine": 101,
+        "endChar": 35
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7b86ee_d31de68b",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "use `ctx.Clone(member-\u003esymbol)` for symbols.",
+      "range": {
+        "startLine": 131,
+        "startChar": 50,
+        "endLine": 131,
+        "endChar": 61
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4f7dcdf_94a310b3",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "I think you could just clone the original member: `ctx.Clone(member-\u003eDeclaration())`.",
+      "range": {
+        "startLine": 132,
+        "startChar": 52,
+        "endLine": 133,
+        "endChar": 90
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "163b359c_4720def1",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Instead of:\n\n```\nfn truncate_shader_output(io : ShaderIO) -\u003e tint_symbol {\n  var result : tint_symbol;\n  result.pos \u003d io.pos;\n  result.f_3 \u003d io.f_3;\n  result.f_5 \u003d io.f_5;\n  return result;\n}\n```\n\nYou could use a structure initializer:\n\n```\nfn truncate_shader_output(io : ShaderIO) -\u003e tint_symbol {\n  return tint_symbol(io.pos, io.f_3, io.f_5);\n}\n```\n\nThe latter might be more performant, as you don\u0027t have to zero-initalize `result` before doing member-wise copying.\n\nDo do this you\u0027d use `b.Construct(new_struct_sym, std::move(initializer_exprs));`",
+      "range": {
+        "startLine": 134,
+        "startChar": 24,
+        "endLine": 136,
+        "endChar": 89
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7966ea9d_45757a4c",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "`std::move(truncated_members)`",
+      "range": {
+        "startLine": 163,
+        "startChar": 44,
+        "endLine": 163,
+        "endChar": 61
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "168cdef7_7b95949a",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "I\u0027d declare a new struct type either in the function scope, or in an anonymous namespace at the top of the file:\n\n```\nstruct TruncatedStructAndConverter {\n   /// The symbol of the truncated structure\n   Symbol truncated_struct;\n   /// The symbol of the helper function that takes the original structure as a single argument and returns the truncated structure type.\n   Symbol truncate_fn;\n};\n```\n\nJust nicer to have named symbols for this than relying on pairs.",
+      "range": {
+        "startLine": 170,
+        "startChar": 23,
+        "endLine": 170,
+        "endChar": 54
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ac8bef_93a7cb52",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me why we do this. Why?",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab509629_108329ea",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Based on your changes to `utils::Bitset`, it sounds like you actually want `std::bitset` here, which is static in length.",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 26
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db045ca_3fc62336",
+        "filename": "src/tint/transform/truncate_interstage_variables_test.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right?",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 5
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d54cee_6dfda4cf",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Requires tests.",
+      "range": {
+        "startLine": 104,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 16
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38acbf59_73b24299",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Requires doxygen:\n\n```\n/// @returns true iff the all bits are unset (0)\n```",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 26
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d8871f8_56fc1c38",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "`IsEmpty` is a confusing name for something that\u0027s a container. I\u0027d imagine this would mean the size is 0.\n\nSuggest `AllBitsZero`.",
+      "range": {
+        "startLine": 104,
+        "startChar": 9,
+        "endLine": 104,
+        "endChar": 16
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f21bb9a_13b335b1",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "Top bits of partial words are 0, so you could just check the words of `vec_` are 0.",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 9
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b500f036_ba93f7b4",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T11:59:33Z",
+      "side": 1,
+      "message": "This is a change of contract to this class, which will affect all uses of this utility. The template value `N` does not mean that the `Bitset` is presized to `N` bits, bit\u0027s about a static capacity before you heap allocate. Please add another constructor that take the initial length, if that\u0027s what you want.",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 1
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
