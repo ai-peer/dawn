@@ -1,7 +1,7 @@
 #version 310 es
 
 void smoothstep_40864c() {
-  vec4 res = smoothstep(vec4(1.0f), vec4(1.0f), vec4(1.0f));
+  vec4 res = vec4(0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */);
 }
 
 vec4 vertex_main() {
@@ -21,7 +21,7 @@ void main() {
 precision mediump float;
 
 void smoothstep_40864c() {
-  vec4 res = smoothstep(vec4(1.0f), vec4(1.0f), vec4(1.0f));
+  vec4 res = vec4(0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */);
 }
 
 void fragment_main() {
@@ -35,7 +35,7 @@ void main() {
 #version 310 es
 
 void smoothstep_40864c() {
-  vec4 res = smoothstep(vec4(1.0f), vec4(1.0f), vec4(1.0f));
+  vec4 res = vec4(0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */, 0.0f /* nan */);
 }
 
 void compute_main() {

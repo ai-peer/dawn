@@ -2,7 +2,7 @@
 #extension GL_AMD_gpu_shader_half_float : require
 
 void smoothstep_6e7a74() {
-  f16vec3 res = smoothstep(f16vec3(1.0hf), f16vec3(1.0hf), f16vec3(1.0hf));
+  f16vec3 res = f16vec3(0.0hf /* nan */, 0.0hf /* nan */, 0.0hf /* nan */);
 }
 
 vec4 vertex_main() {
@@ -23,7 +23,7 @@ void main() {
 precision mediump float;
 
 void smoothstep_6e7a74() {
-  f16vec3 res = smoothstep(f16vec3(1.0hf), f16vec3(1.0hf), f16vec3(1.0hf));
+  f16vec3 res = f16vec3(0.0hf /* nan */, 0.0hf /* nan */, 0.0hf /* nan */);
 }
 
 void fragment_main() {
@@ -38,7 +38,7 @@ void main() {
 #extension GL_AMD_gpu_shader_half_float : require
 
 void smoothstep_6e7a74() {
-  f16vec3 res = smoothstep(f16vec3(1.0hf), f16vec3(1.0hf), f16vec3(1.0hf));
+  f16vec3 res = f16vec3(0.0hf /* nan */, 0.0hf /* nan */, 0.0hf /* nan */);
 }
 
 void compute_main() {
