@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaa84f51_573e0134",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T05:50:16Z",
+      "side": 1,
+      "message": "also link to chromium:1376477",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 38
+      },
+      "revId": "94fd670edf3e2bc948c715fcaa0844d576c7a818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbbf3fc7_7f12691a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T05:50:16Z",
+      "side": 1,
+      "message": "Brendon, we can probably land this if you\u0027d like; one review should be sufficient",
+      "revId": "94fd670edf3e2bc948c715fcaa0844d576c7a818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
