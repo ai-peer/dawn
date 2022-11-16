@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dcb6dca_56a54bf7",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2282,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93ec2d2e_2caa9cf5",
+      "range": {
+        "startLine": 2282,
+        "startChar": 17,
+        "endLine": 2282,
+        "endChar": 21
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "349597ea_fadb8c10",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-16T20:22:43Z",
       "side": 1,
       "message": "`negative` (spelling)",
+      "range": {
+        "startLine": 2289,
+        "startChar": 54,
+        "endLine": 2289,
+        "endChar": 62
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b4a051_896863a1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2289,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:29:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "349597ea_fadb8c10",
       "range": {
         "startLine": 2289,
         "startChar": 54,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0288dfd0_984a9325",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:29:09Z",
+      "side": 1,
+      "message": "The integal will have the sign of the original value, so if the sign bit is set it will be negative. So, I made it positive so it would be the same in both paths.",
+      "parentUuid": "69c1a8f1_3004059b",
+      "range": {
+        "startLine": 2292,
+        "startChar": 35,
+        "endLine": 2292,
+        "endChar": 43
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d7a5bf5_f0b4c312",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -83,6 +155,30 @@
       "writtenOn": "2022-11-16T20:22:43Z",
       "side": 1,
       "message": "Maybe it would make more sense to remain in NumberT land and use `std::fmod(integral_val, 2) \u003d\u003d NumberT(0)`.",
+      "range": {
+        "startLine": 2294,
+        "startChar": 20,
+        "endLine": 2294,
+        "endChar": 46
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65cf92ef_c8ac58e4",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:29:09Z",
+      "side": 1,
+      "message": "integral_val isn\u0027t a NumberT, I\u0027m not sure if there is benefit to going back to a NumberT to just do the comparison?",
+      "parentUuid": "8d7a5bf5_f0b4c312",
       "range": {
         "startLine": 2294,
         "startChar": 20,
