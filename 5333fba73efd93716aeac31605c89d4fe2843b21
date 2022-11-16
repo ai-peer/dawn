@@ -80,6 +80,30 @@
       },
       "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "285abf12_df0e4398",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T21:25:52Z",
+      "side": 1,
+      "message": "We have some questions with this:\n• What are the guarantees around availability of this functionality?\n• Are there guarantees around API / ABI compatibility with future drivers?\n• Where do we file bugs?\n• How might our security teams assess the risk of these calls?\n\nGenerally, loading DLLs from the GPU process sounds like something we should not be doing. I think the security team might have strong opinions about this - even behind toggles - and so this may require a security review.",
+      "parentUuid": "8ebdf40c_8b8606d4",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
