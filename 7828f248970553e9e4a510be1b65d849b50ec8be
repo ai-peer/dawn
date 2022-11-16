@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e75384b4_7833dcce",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2456,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:51:28Z",
+      "side": 1,
+      "message": "Ack.\n\nNot sure if it\u0027s worth it or not, this at least is explicit about where we return the error conditions.",
+      "parentUuid": "d3ba3ec3_1a3cb0b6",
+      "range": {
+        "startLine": 2426,
+        "startChar": 11,
+        "endLine": 2456,
+        "endChar": 13
+      },
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13cd7012_11cfb70e",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-11-16T20:44:57Z",
       "side": 1,
       "message": "You can combine all the error cases into `SmoothstepCases`. Use the pattern I introduced here, for example: https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/resolver/const_eval_binary_op_test.cc#178\n\nFor disabling cases for f32 and f16, I would use `if constexpr` around the `ConcatInto` for the error cases.",
+      "range": {
+        "startLine": 1665,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 73
+      },
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ac8636_a3d6db33",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T20:51:28Z",
+      "side": 1,
+      "message": "Having them DISABLED makes them showup in the output as disabled, hiding behind constexpr if, it feels like it would be a lot easier to lose track of them.\n\nI\u0027ll switch to `OverflowErrorMesasge` though as that will be nicer.\n\nWe can look at combining these when the f32 and f16 tests can be enabled.",
+      "parentUuid": "13cd7012_11cfb70e",
       "range": {
         "startLine": 1665,
         "startChar": 0,
