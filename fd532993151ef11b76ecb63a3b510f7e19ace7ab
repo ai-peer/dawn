@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "fd532993151ef11b76ecb63a3b510f7e19ace7ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a8bcad_789aa51c",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:05:54Z",
+      "side": 1,
+      "message": "`-T(25)` instead so we\u0027re testing for all types",
+      "range": {
+        "startLine": 1663,
+        "startChar": 11,
+        "endLine": 1663,
+        "endChar": 16
+      },
+      "revId": "fd532993151ef11b76ecb63a3b510f7e19ace7ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
