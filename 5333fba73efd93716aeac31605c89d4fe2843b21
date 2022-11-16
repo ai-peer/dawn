@@ -39,6 +39,30 @@
       },
       "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ebdf40c_8b8606d4",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-16T02:36:44Z",
+      "side": 1,
+      "message": "Hi Ben,\n\nThere is an [open-sourced demo](https://github.com/GameTechDev/UAVOverlapSample) that introduces how to use the Intel Extension Framework . Intel Extension framework has also been integrated into [Unreal Engine](https://github.com/EpicGames/UnrealEngine/tree/release/Engine/Source/ThirdParty/Intel/ExtensionsFramework).\n\nBoth of these two projects are statically linking a close-sourced .lib file igdext64.lib to get the function entry points of Intel Extension framework, while we cannot add such close-sourced binary file in Chromium.\n\nAfter internal review we got permission to use this piece of code to dynamically load and get the interfaces of Intel Extension Framework in Chromium/Dawn, and now we think it ready for the external reviewer\u0027s review.",
+      "parentUuid": "a38ae306_8a9fa786",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
