@@ -56,6 +56,52 @@
       "message": "why is this one is an enum, but the other transformations are matrices?\n\nis it because the transform doesn\u0027t support non-90-degree rotations?",
       "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d48ff538_92e93643",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T10:44:29Z",
+      "side": 1,
+      "message": "nit: you can use `b.ty.mat2x2\u003cf32\u003e()` (or `b.ty.mat3x2\u003cf32\u003e()` if you take my suggestion).",
+      "range": {
+        "startLine": 268,
+        "startChar": 39,
+        "endLine": 268,
+        "endChar": 62
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c303b1d_122d52bd",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T10:44:29Z",
+      "side": 1,
+      "message": "Could we not have a single `mat3x2\u003cf32\u003e` for this, and multiply the `vec3(coord, 1)` by the matrix? It\u0027s one extra scalar, but avoids conditional control flow, which on some architectures may be more expensive, and I think the number of ALU instructions will be all-round lower.",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 65
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
