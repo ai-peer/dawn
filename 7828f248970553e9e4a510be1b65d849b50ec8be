@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61f4d065_d27405ab",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T20:59:59Z",
+      "side": 1,
+      "message": "I still think it\u0027s a bit unpleasant to error about some internal operation (especially when there isn\u0027t a single way to implement such an builtin), but it\u0027s a step in the right direction.",
+      "parentUuid": "1681ad3b_3ef62681",
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d3ba3ec3_1a3cb0b6",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 3
