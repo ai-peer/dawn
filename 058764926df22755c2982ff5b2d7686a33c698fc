@@ -18,6 +18,161 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2479df75_56976955",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "Looks great. Mostly nits.",
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3695a883_03803f18",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "nit: you can drop the `\u003c...\u003e`, `Vector` figures this out for you.",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 52
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfeef77f_0a95494b",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "There\u0027s room for diagnostic improvements here. I imagine that trying to trace this through complex functions could be trifficult. Happy for followups.",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 57
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9686f67_6ea5df40",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "übernit: rm",
+      "range": {
+        "startLine": 263,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 17
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1de4642_d9b0f041",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "Sort of example where in the future we could tighten the spec to allow reads before writes.",
+      "range": {
+        "startLine": 287,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 14
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f104efd_a01797a2",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "again, not needed.",
+      "range": {
+        "startLine": 402,
+        "startChar": 22,
+        "endLine": 402,
+        "endChar": 48
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c322145f_3895d14f",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "Please can we have a test that fails analysis for member accessors?",
+      "range": {
+        "startLine": 712,
+        "startChar": 34,
+        "endLine": 712,
+        "endChar": 57
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7854f026_799a1081",
@@ -31,6 +186,93 @@
       "writtenOn": "2022-11-15T19:55:44Z",
       "side": 1,
       "message": "I\u0027m not totally happy with the need to call this everywhere that the load-rule is invoked. Ideally there\u0027d be a less manual way of doing this. I initially tried to piggy-back on Materialize, but that didn\u0027t quite work. Suggestions welcome.",
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e18d09_1e865c77",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "I think this is probably okay. You\u0027ve done a bunch of the work for emitting Load sem nodes, which needed to do the same sort of thing.",
+      "parentUuid": "7854f026_799a1081",
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d8087b_a6906105",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1549,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "ohh, explodey. I thought we might be able to trigger this by initializing one module-scope var with another, but analysis catches this before we get here. Still seems a bit scary.",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1549,
+        "endChar": 15
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c44a548_f097f123",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "nit: each of these blocks end with a `return`. I\u0027d drop the `else`.",
+      "range": {
+        "startLine": 1625,
+        "startChar": 14,
+        "endLine": 1625,
+        "endChar": 18
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5def0ade_f6ed394e",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T14:01:50Z",
+      "side": 1,
+      "message": "Register with what? Bit more info please.",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 16
+      },
       "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
