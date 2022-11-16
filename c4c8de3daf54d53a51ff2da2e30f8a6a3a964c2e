@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "c4c8de3daf54d53a51ff2da2e30f8a6a3a964c2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a613aee9_04a57ea6",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1712,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T12:51:12Z",
+      "side": 1,
+      "message": "my bad, this test is broken. `src` should have been:\n\n```\nfn f() {\n  let r : i32 \u003d insertBits(1234i, 5678i, 5u, 6u);\n}\n```",
+      "range": {
+        "startLine": 1694,
+        "startChar": 0,
+        "endLine": 1712,
+        "endChar": 3
+      },
+      "revId": "c4c8de3daf54d53a51ff2da2e30f8a6a3a964c2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
