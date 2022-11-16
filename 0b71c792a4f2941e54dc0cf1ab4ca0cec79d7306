@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c88f7c6_4cf363d6",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T20:56:29Z",
+      "side": 1,
+      "message": "You are right. By giving it a second thought, for the completeness of the transform itself, it should remove all user io variables if interstage_locations is empty.\n\nThe special case should be handled in hlsl/generator_impl, it won\u0027t add the transform when the bitset is empty.",
+      "parentUuid": "21d7c034_35b6fd4b",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5800c27a_fb185643",
         "filename": "src/tint/transform/truncate_interstage_variables.cc",
         "patchSetId": 18
