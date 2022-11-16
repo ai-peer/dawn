@@ -27,9 +27,19 @@ copy("webgpu_cts_resources") {
   outputs = [ "$target_gen_dir/{{source_file_part}}" ]
 }
 
+action("gen_cache") {
+  script = "scripts/gen_cache.py"
+  inputs = [ "../third_party/gn/webgpu-cts" ]
+  args = [ rebase_path("$target_gen_dir/cache", root_build_dir) ]
+
+  # TODO: actual list of json files
+  outputs = [ "$target_gen_dir/cache/asdf.json" ]
+}
+
 group("webgpu-cts") {
   testonly = true
   data_deps = [
+    ":gen_cache",
     ":webgpu_cts_resources",
     "../third_party/gn/webgpu-cts",
   ]
