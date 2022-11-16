@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00655e9d_742b2a3f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T05:47:13Z",
+      "side": 1,
+      "message": "nit: \"tags\": [\"dawn\"]",
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a0fbce_bfb2c524",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T05:47:13Z",
+      "side": 1,
+      "message": "should we have another enum which is \"none\". It semantically could be confusing if you say, \"I want my rotation to be undefined\".\n\n\"undefined\" is usually our default value, and then it gets resolved to some other enum later. Like how powerPreference has undefined, low-power, and high-performance. Not just undefined and high-performance. See also \"texture view dimension\" where undefined means \"use the default\"",
+      "range": {
+        "startLine": 1369,
+        "startChar": 0,
+        "endLine": 1369,
+        "endChar": 46
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b0f6618_ff314d49",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T05:47:13Z",
+      "side": 1,
+      "message": "why is this one is an enum, but the other transformations are matrices?\n\nis it because the transform doesn\u0027t support non-90-degree rotations?",
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
