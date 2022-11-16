@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed77ab16_530d276e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T21:46:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "61f4d065_d27405ab",
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3ba3ec3_1a3cb0b6",
@@ -137,6 +155,30 @@
       "side": 1,
       "message": "Having them DISABLED makes them showup in the output as disabled, hiding behind constexpr if, it feels like it would be a lot easier to lose track of them.\n\nI\u0027ll switch to `OverflowErrorMesasge` though as that will be nicer.\n\nWe can look at combining these when the f32 and f16 tests can be enabled.",
       "parentUuid": "13cd7012_11cfb70e",
+      "range": {
+        "startLine": 1665,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 73
+      },
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8bf046_90085ccc",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-16T21:46:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ac8636_a3d6db33",
       "range": {
         "startLine": 1665,
         "startChar": 0,
