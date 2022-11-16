@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21d7c034_35b6fd4b",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 18
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T20:46:24Z",
+      "side": 1,
+      "message": "Right - that\u0027s fine, but consider a vertex shader that has 5 outputs:\n\nYou have 2 entries in `interstage_locations`, you get 2 outputs.\nYou have 1 entries in `interstage_locations`, you get 1 outputs.\nYou have no entries in `interstage_locations`, you get 5 outputs. (!)\n\nWe\u0027re applying special casing to an empty bitset, in a way that is unnecessarily inconsistent, at least for a transform called `TruncateInterstageVariables` with a bitset for the config.\n\nI think this special case would be better done outside of the transform. As for skipping the transform maybe you could wrap the bitfield with a `std::optional` or simply not adding the `Config` if you don\u0027t want it to run.",
+      "parentUuid": "665c5c3c_b8178ee4",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 5
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5800c27a_fb185643",
         "filename": "src/tint/transform/truncate_interstage_variables.cc",
         "patchSetId": 18
@@ -269,6 +293,30 @@
       "side": 1,
       "message": "Oh I thought IO attributes can only apply to interstage input/output. Is this statement true? If not we don\u0027t need to remove those.",
       "parentUuid": "47ac8bef_93a7cb52",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b7b6a1e_634856fc",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-16T20:46:24Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure it\u0027s fine to keep the attributes, and use the structure as a regular structure.",
+      "parentUuid": "ec0d9aa5_9a445365",
       "range": {
         "startLine": 31,
         "startChar": 4,
