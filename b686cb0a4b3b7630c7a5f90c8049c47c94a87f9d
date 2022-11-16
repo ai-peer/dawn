@@ -33,6 +33,24 @@
       "message": "Actually, you may want to condition this on `input_api.is_committing`.\n\n```\nif input_api.is_committing:\n  results.append(output_api.PresubmitError(\u0027%s\u0027 % (e, )))\nelse:\n  results.append(output_api.PresubmitPromptWarning(\u0027%s\u0027 % (e, )))\n```\n\nThat way the warning can be ignored if this is just an upload.",
       "revId": "b686cb0a4b3b7630c7a5f90c8049c47c94a87f9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69e8c0d8_9b857594",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-16T14:23:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08d75ddb_79ac4c7c",
+      "revId": "b686cb0a4b3b7630c7a5f90c8049c47c94a87f9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
