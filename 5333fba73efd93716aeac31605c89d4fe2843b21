@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0568260f_54dda37f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T16:45:19Z",
+      "side": 1,
+      "message": "what are the performance and power implications of using MaxPerformance instead of Dynamic (the default)?\n\nI thought it would be the case that if the workload is high enough, the GPU will automatically switch to a higher performance?",
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a38ae306_8a9fa786",
