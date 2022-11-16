@@ -60,6 +60,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e5932b29_2ca00226",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3695a883_03803f18",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 52
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cfeef77f_0a95494b",
         "filename": "src/tint/resolver/alias_analysis_test.cc",
         "patchSetId": 2
@@ -94,6 +118,30 @@
       "writtenOn": "2022-11-16T14:01:50Z",
       "side": 1,
       "message": "übernit: rm",
+      "range": {
+        "startLine": 263,
+        "startChar": 16,
+        "endLine": 263,
+        "endChar": 17
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c02e7e7_835e26d5",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "a9686f67_6ea5df40",
       "range": {
         "startLine": 263,
         "startChar": 16,
@@ -150,6 +198,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5feb32db_e85659bb",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f104efd_a01797a2",
+      "range": {
+        "startLine": 402,
+        "startChar": 22,
+        "endLine": 402,
+        "endChar": 48
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c322145f_3895d14f",
@@ -163,6 +235,30 @@
       "writtenOn": "2022-11-16T14:01:50Z",
       "side": 1,
       "message": "Please can we have a test that fails analysis for member accessors?",
+      "range": {
+        "startLine": 712,
+        "startChar": 34,
+        "endLine": 712,
+        "endChar": 57
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13791d0f_8802f21d",
+        "filename": "src/tint/resolver/alias_analysis_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c322145f_3895d14f",
       "range": {
         "startLine": 712,
         "startChar": 34,
@@ -208,6 +304,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ed74f22_522ef67e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "61e18d09_1e865c77",
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73d8087b_a6906105",
@@ -221,6 +335,30 @@
       "writtenOn": "2022-11-16T14:01:50Z",
       "side": 1,
       "message": "ohh, explodey. I thought we might be able to trigger this by initializing one module-scope var with another, but analysis catches this before we get here. Still seems a bit scary.",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1549,
+        "endChar": 15
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1660761_3a7f9eab",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1549,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Ack - would you prefer this to just return without the ICE? If WGSL ever changes in the future in a way that would allow the load-rule to happen outside of a function we might miss that this function is skipping over those loads, which might cause issues?\n\n:shrug:",
+      "parentUuid": "73d8087b_a6906105",
       "range": {
         "startLine": 1547,
         "startChar": 0,
@@ -254,6 +392,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e50e18b_f4a1efda",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1625,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c44a548_f097f123",
+      "range": {
+        "startLine": 1625,
+        "startChar": 14,
+        "endLine": 1625,
+        "endChar": 18
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5def0ade_f6ed394e",
@@ -267,6 +429,30 @@
       "writtenOn": "2022-11-16T14:01:50Z",
       "side": 1,
       "message": "Register with what? Bit more info please.",
+      "range": {
+        "startLine": 158,
+        "startChar": 8,
+        "endLine": 158,
+        "endChar": 16
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92245ce7_755d722b",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-16T17:12:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5def0ade_f6ed394e",
       "range": {
         "startLine": 158,
         "startChar": 8,
