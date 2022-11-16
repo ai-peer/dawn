@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04d40465_98fce938",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T16:40:14Z",
+      "side": 1,
+      "message": "I think Corentin is still OOO so adding bajones as reviewer",
+      "revId": "61f68533e51b9034c8283a5d5aea9da18bfe9576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
