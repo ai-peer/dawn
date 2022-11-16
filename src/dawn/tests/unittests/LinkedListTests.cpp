@@ -83,12 +83,15 @@ TEST(LinkedList, Empty) {
 }
 
 TEST(LinkedList, Append) {
+    // Create all the nodes up front so that they are destroyed after the list.
+    Node n1(1);
+    Node n2(2);
+    Node n3(3);
+
     LinkedList<Node> list;
     ExpectListContents(list, 0, nullptr);
 
-    Node n1(1);
     list.Append(&n1);
-
     EXPECT_EQ(&n1, list.head());
     EXPECT_EQ(&n1, list.tail());
     {
@@ -96,9 +99,7 @@ TEST(LinkedList, Append) {
         ExpectListContents(list, 1, expected);
     }
 
-    Node n2(2);
     list.Append(&n2);
-
     EXPECT_EQ(&n1, list.head());
     EXPECT_EQ(&n2, list.tail());
     {
@@ -106,9 +107,7 @@ TEST(LinkedList, Append) {
         ExpectListContents(list, 2, expected);
     }
 
-    Node n3(3);
     list.Append(&n3);
-
     EXPECT_EQ(&n1, list.head());
     EXPECT_EQ(&n3, list.tail());
     {
@@ -118,12 +117,15 @@ TEST(LinkedList, Append) {
 }
 
 TEST(LinkedList, Prepend) {
+    // Create all the nodes up front so that they are destroyed after the list.
+    Node n1(1);
+    Node n2(2);
+    Node n3(3);
+
     LinkedList<Node> list;
     ExpectListContents(list, 0, nullptr);
 
-    Node n1(1);
     list.Prepend(&n1);
-
     EXPECT_EQ(&n1, list.head());
     EXPECT_EQ(&n1, list.tail());
     {
@@ -131,9 +133,7 @@ TEST(LinkedList, Prepend) {
         ExpectListContents(list, 1, expected);
     }
 
-    Node n2(2);
     list.Prepend(&n2);
-
     EXPECT_EQ(&n2, list.head());
     EXPECT_EQ(&n1, list.tail());
     {
@@ -141,9 +141,7 @@ TEST(LinkedList, Prepend) {
         ExpectListContents(list, 2, expected);
     }
 
-    Node n3(3);
     list.Prepend(&n3);
-
     EXPECT_EQ(&n3, list.head());
     EXPECT_EQ(&n1, list.tail());
     {
@@ -153,14 +151,13 @@ TEST(LinkedList, Prepend) {
 }
 
 TEST(LinkedList, RemoveFromList) {
-    LinkedList<Node> list;
-
     Node n1(1);
     Node n2(2);
     Node n3(3);
     Node n4(4);
     Node n5(5);
 
+    LinkedList<Node> list;
     list.Append(&n1);
     list.Append(&n2);
     list.Append(&n3);
@@ -228,13 +225,12 @@ TEST(LinkedList, RemoveFromList) {
 }
 
 TEST(LinkedList, InsertBefore) {
-    LinkedList<Node> list;
-
     Node n1(1);
     Node n2(2);
     Node n3(3);
     Node n4(4);
 
+    LinkedList<Node> list;
     list.Append(&n1);
     list.Append(&n2);
 
@@ -265,13 +261,12 @@ TEST(LinkedList, InsertBefore) {
 }
 
 TEST(LinkedList, InsertAfter) {
-    LinkedList<Node> list;
-
     Node n1(1);
     Node n2(2);
     Node n3(3);
     Node n4(4);
 
+    LinkedList<Node> list;
     list.Append(&n1);
     list.Append(&n2);
 
@@ -312,54 +307,52 @@ TEST(LinkedList, EmptyListIsEmpty) {
 }
 
 TEST(LinkedList, NonEmptyListIsNotEmpty) {
-    LinkedList<Node> list;
-
     Node n(1);
-    list.Append(&n);
 
+    LinkedList<Node> list;
+    list.Append(&n);
     EXPECT_FALSE(list.empty());
 }
 
 TEST(LinkedList, EmptiedListIsEmptyAgain) {
-    LinkedList<Node> list;
-
     Node n(1);
+
+    LinkedList<Node> list;
     list.Append(&n);
     n.RemoveFromList();
-
     EXPECT_TRUE(list.empty());
 }
 
 TEST(LinkedList, NodesCanBeReused) {
-    LinkedList<Node> list1;
-    LinkedList<Node> list2;
-
     Node n(1);
-    list1.Append(&n);
-    n.RemoveFromList();
-    list2.Append(&n);
 
+    LinkedList<Node> list1;
+    list1.Append(&n);
+
+    n.RemoveFromList();
+
+    LinkedList<Node> list2;
+    list2.Append(&n);
     EXPECT_EQ(list2.head()->value(), &n);
 }
 
 TEST(LinkedList, RemovedNodeHasNullNextPrevious) {
-    LinkedList<Node> list;
-
     Node n(1);
-    list.Append(&n);
-    n.RemoveFromList();
 
+    LinkedList<Node> list;
+    list.Append(&n);
+
+    n.RemoveFromList();
     EXPECT_EQ(nullptr, n.next());
     EXPECT_EQ(nullptr, n.previous());
 }
 
 TEST(LinkedList, NodeMoveConstructor) {
-    LinkedList<MovableNode> list;
-
     MovableNode n1(1);
     MovableNode n2(2);
     MovableNode n3(3);
 
+    LinkedList<MovableNode> list;
     list.Append(&n1);
     list.Append(&n2);
     list.Append(&n3);
@@ -380,10 +373,9 @@ TEST(LinkedList, NodeMoveConstructor) {
 }
 
 TEST(LinkedList, IsInList) {
-    LinkedList<Node> list;
-
     Node n(1);
 
+    LinkedList<Node> list;
     EXPECT_FALSE(n.IsInList());
     list.Append(&n);
     EXPECT_TRUE(n.IsInList());
@@ -393,11 +385,11 @@ TEST(LinkedList, IsInList) {
 }
 
 TEST(LinkedList, MoveInto) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
-
     Node n1(1);
     Node n2(2);
+
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
     l1.Append(&n1);
     l2.Append(&n2);
 
@@ -408,11 +400,11 @@ TEST(LinkedList, MoveInto) {
 }
 
 TEST(LinkedList, MoveEmptyListInto) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
-
     Node n1(1);
     Node n2(2);
+
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
     l1.Append(&n1);
     l1.Append(&n2);
 
@@ -423,11 +415,11 @@ TEST(LinkedList, MoveEmptyListInto) {
 }
 
 TEST(LinkedList, MoveIntoEmpty) {
-    LinkedList<Node> l1;
-    LinkedList<Node> l2;
-
     Node n1(1);
     Node n2(2);
+
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
     l2.Append(&n1);
     l2.Append(&n2);
 
@@ -438,10 +430,10 @@ TEST(LinkedList, MoveIntoEmpty) {
 }
 
 TEST(LinkedList, RangeBasedModify) {
-    LinkedList<Node> list;
-
     Node n1(1);
     Node n2(2);
+
+    LinkedList<Node> list;
     list.Append(&n1);
     list.Append(&n2);
 
