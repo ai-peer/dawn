@@ -116,6 +116,8 @@ class LinkNode {
         }
     }
 
+    ~LinkNode() { RemoveFromList(); }
+
     // Insert |this| into the linked list, before |e|.
     void InsertBefore(LinkNode<T>* e) {
         this->next_ = e;
