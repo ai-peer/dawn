@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76dd3f26_1e97479d",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39cba58b_715abc50",
+      "range": {
+        "startLine": 124,
+        "startChar": 20,
+        "endLine": 124,
+        "endChar": 46
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4705e69b_897f7f4d",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-15T13:34:25Z",
       "side": 1,
       "message": "This is unnecessary. `New()` ensures that the identifier is unique. It\u0027ll add suffixes as necessary.",
+      "range": {
+        "startLine": 148,
+        "startChar": 56,
+        "endLine": 148,
+        "endChar": 91
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e454678_036124b6",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4705e69b_897f7f4d",
       "range": {
         "startLine": 148,
         "startChar": 56,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d89acaf_bba1e847",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f24b1288_f350ec6e",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 21
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ea68910_30bb7f38",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-15T13:34:25Z",
       "side": 1,
       "message": "This is really vague. Please can you explain what problem this transform solves, what transforms need to be run before this transform.",
+      "range": {
+        "startLine": 24,
+        "startChar": 61,
+        "endLine": 24,
+        "endChar": 84
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0167530d_8756fac4",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Whoops forget to add a detailed explaining comment here. Done.",
+      "parentUuid": "0ea68910_30bb7f38",
       "range": {
         "startLine": 24,
         "startChar": 61,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86e4d9e6_c4b92d44",
+        "filename": "src/tint/transform/truncate_interstage_variables_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Putting builtins at the end is part of the legacy of the earlier padding approach. Right now based on tests result, it doesn\u0027t seem necessary to put builtins at the end. (Also the ordering of the locations doesn\u0027t matter anymore). But putting builtins at the end should not be worse, if not safer, than preserving the original ordering.\n\nIf you think it\u0027s better to keep the input order, I will fix in the next patch. (The test expect string result will change a lot and mess up with patch diff view which may be bad for your review)",
+      "parentUuid": "977e1c63_c02e2adf",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 18
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad72ae37_dee52534",
         "filename": "src/tint/transform/truncate_interstage_variables_test.cc",
         "patchSetId": 16
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-15T13:34:25Z",
       "side": 1,
       "message": "Given that `TruncateInterstageVariables::Config::interstage_locations` applies to **all** vertex entry points, and these entry points share the same output structure, why do we need to generate the helper function twice?\n\nCouldn\u0027t we just use a `Hashmap\u003cconst sem::Struct*, N\u003e::GetOrCreate()` to build the helper for each uniquely return structure?",
+      "range": {
+        "startLine": 363,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 1
+      },
+      "revId": "2ff919cb59e361f92027d9b76f88f3267e998cfc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aafafe6e_477444a9",
+        "filename": "src/tint/transform/truncate_interstage_variables_test.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-16T00:50:10Z",
+      "side": 1,
+      "message": "Done.\nYou are right. I originally thought there could be multiple entry points, but given that there could only one `interstage_locations` assigned from one render pipeline, there could actually be only one truncated output struct.",
+      "parentUuid": "ad72ae37_dee52534",
       "range": {
         "startLine": 363,
         "startChar": 0,
