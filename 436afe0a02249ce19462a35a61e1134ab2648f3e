@@ -142,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff599065_633fed2a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2292,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:30:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0288dfd0_984a9325",
+      "range": {
+        "startLine": 2292,
+        "startChar": 35,
+        "endLine": 2292,
+        "endChar": 43
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d7a5bf5_f0b4c312",
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "integral_val isn\u0027t a NumberT, I\u0027m not sure if there is benefit to going back to a NumberT to just do the comparison?",
       "parentUuid": "8d7a5bf5_f0b4c312",
+      "range": {
+        "startLine": 2294,
+        "startChar": 20,
+        "endLine": 2294,
+        "endChar": 46
+      },
+      "revId": "436afe0a02249ce19462a35a61e1134ab2648f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7480949c_3994119c",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2294,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:30:52Z",
+      "side": 1,
+      "message": "Sorry, it\u0027s not the `NumberT` that\u0027s salient here. I meant \u0027floating point value\u0027. Basically:\n\n`std::fmod(integral_val, 2) \u003d\u003d T(0)`",
+      "parentUuid": "65cf92ef_c8ac58e4",
       "range": {
         "startLine": 2294,
         "startChar": 20,
