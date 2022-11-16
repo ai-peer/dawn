@@ -16,6 +16,69 @@
       "message": "PTAL.",
       "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1681ad3b_3ef62681",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:44:57Z",
+      "side": 1,
+      "message": "@bclayton@google.com are you happy with this way of addressing https://crbug.com/tint/1751 ?\n\nThis has the advantage of keeping the code simple, reporting exactly which sub-operation failed, while still letting the user know the main operation that failed.",
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ba3ec3_1a3cb0b6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2456,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:44:57Z",
+      "side": 1,
+      "message": "(Just an interesting aside)\n\nThis kind of code always makes me sad. There\u0027s a cool proposal for C++ that adds monadic functions to std::optional like `and_then` and `transform` that moves the result of one operation into the next, but if one ever returns `nullopt`, it just passes through them all. This makes the code easier to read/reason about without all the error checking in between. This is the paper: https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2021/p0798r6.html#proposed-solution\n\nMaybe we can consider this for our Result type.",
+      "range": {
+        "startLine": 2426,
+        "startChar": 11,
+        "endLine": 2456,
+        "endChar": 13
+      },
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13cd7012_11cfb70e",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1730,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T20:44:57Z",
+      "side": 1,
+      "message": "You can combine all the error cases into `SmoothstepCases`. Use the pattern I introduced here, for example: https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/resolver/const_eval_binary_op_test.cc#178\n\nFor disabling cases for f32 and f16, I would use `if constexpr` around the `ConcatInto` for the error cases.",
+      "range": {
+        "startLine": 1665,
+        "startChar": 0,
+        "endLine": 1730,
+        "endChar": 73
+      },
+      "revId": "7828f248970553e9e4a510be1b65d849b50ec8be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
