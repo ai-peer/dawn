@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2022 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -21,26 +21,26 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-// fn smoothstep(f32, f32, f32) -> f32
-fn smoothstep_6c4975() {
-  var arg_0 = 2.f;
-  var arg_1 = 1.f;
-  var arg_2 = 1.f;
-  var res: f32 = smoothstep(arg_0, arg_1, arg_2);
+// fn smoothstep(fa, fa, fa) -> fa
+fn smoothstep_a80fff() {
+  const arg_0 = 2.;
+  const arg_1 = 1.;
+  const arg_2 = 1.;
+  var res = smoothstep(arg_0, arg_1, arg_2);
 }
 
 @vertex
 fn vertex_main() -> @builtin(position) vec4<f32> {
-  smoothstep_6c4975();
+  smoothstep_a80fff();
   return vec4<f32>();
 }
 
 @fragment
 fn fragment_main() {
-  smoothstep_6c4975();
+  smoothstep_a80fff();
 }
 
 @compute @workgroup_size(1)
 fn compute_main() {
-  smoothstep_6c4975();
+  smoothstep_a80fff();
 }
