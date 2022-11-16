@@ -46,6 +46,30 @@
       },
       "revId": "40afcc60296db129cce21eccd61e063bed2cb3f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2912331b_67207e0c",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-16T13:14:16Z",
+      "side": 1,
+      "message": "Right, it\u0027s a real shame. Had me scratching my head for a while.",
+      "parentUuid": "f43bcd7b_a750c1a4",
+      "range": {
+        "startLine": 445,
+        "startChar": 12,
+        "endLine": 445,
+        "endChar": 55
+      },
+      "revId": "40afcc60296db129cce21eccd61e063bed2cb3f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
