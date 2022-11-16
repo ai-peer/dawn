@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "2292b0b8101b70807fba2812498261a8e79ed22a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de1a3c8_1e9f63ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T06:03:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2292b0b8101b70807fba2812498261a8e79ed22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0f78d7_caabab2f",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-16T06:03:38Z",
+      "side": 1,
+      "message": "nit: you already said \"by default\" earlier in this sentence",
+      "range": {
+        "startLine": 325,
+        "startChar": 83,
+        "endLine": 325,
+        "endChar": 94
+      },
+      "revId": "2292b0b8101b70807fba2812498261a8e79ed22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
