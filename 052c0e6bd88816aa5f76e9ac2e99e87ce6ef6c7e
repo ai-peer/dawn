@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eb73d64_57e14fe6",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T20:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a2afdad_531fa2f8",
+      "range": {
+        "startLine": 89,
+        "startChar": 19,
+        "endLine": 91,
+        "endChar": 31
+      },
+      "revId": "052c0e6bd88816aa5f76e9ac2e99e87ce6ef6c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a7f545e_1b57c3ee",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a58a62_7c6c2f1b",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T20:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7f545e_1b57c3ee",
+      "range": {
+        "startLine": 129,
+        "startChar": 16,
+        "endLine": 129,
+        "endChar": 53
+      },
+      "revId": "052c0e6bd88816aa5f76e9ac2e99e87ce6ef6c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b2c1f4a_7c629e22",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-11-17T19:31:50Z",
       "side": 1,
       "message": "You could avoid the sem lookup if `struct_ty` were the `sem::Struct` instead of the AST declaration.",
+      "range": {
+        "startLine": 131,
+        "startChar": 20,
+        "endLine": 131,
+        "endChar": 46
+      },
+      "revId": "052c0e6bd88816aa5f76e9ac2e99e87ce6ef6c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e90bf3a3_53682a79",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 23
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T20:06:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b2c1f4a_7c629e22",
       "range": {
         "startLine": 131,
         "startChar": 20,
