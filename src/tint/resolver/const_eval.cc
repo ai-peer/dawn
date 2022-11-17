@@ -1941,6 +1941,32 @@ ConstEval::Result ConstEval::cross(const sem::Type* ty,
                            utils::Vector<const sem::Constant*, 3>{x.Get(), y.Get(), z.Get()});
 }
 
+ConstEval::Result ConstEval::degrees(const sem::Type* ty,
+                                     utils::VectorRef<const sem::Constant*> args,
+                                     const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto e) -> ImplResult {
+            using NumberT = decltype(e);
+            using T = UnwrapNumber<NumberT>;
+
+            auto pi = T(M_PI);
+            auto scale = Div(NumberT(180), NumberT(pi));
+            if (!scale) {
+                AddNote("when calculating degrees", source);
+                return utils::Failure;
+            }
+            auto result = Mul(e, scale.Get());
+            if (!result) {
+                AddNote("when calculating degrees", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), result.Get());
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
 ConstEval::Result ConstEval::extractBits(const sem::Type* ty,
                                          utils::VectorRef<const sem::Constant*> args,
                                          const Source& source) {
@@ -2252,6 +2278,53 @@ ConstEval::Result ConstEval::pack4x8unorm(const sem::Type* ty,
     uint32_t mask = 0x0000'00ff;
     u32 ret = u32((e0 & mask) | ((e1 & mask) << 8) | ((e2 & mask) << 16) | ((e3 & mask) << 24));
     return CreateElement(builder, ty, ret);
+}
+
+ConstEval::Result ConstEval::quantizeToF16(const sem::Type* ty,
+                                           utils::VectorRef<const sem::Constant*> args,
+                                           const Source&) {
+    auto transform = [&](const sem::Constant* c) {
+        auto conv = CheckedConvert<f32>(f16(c->As<f32>()));
+        if (!conv) {
+            // https://www.w3.org/TR/WGSL/#quantizeToF16-builtin
+            // If e is outside the finite range of binary16, then the result is any value of type
+            // f32
+            switch (conv.Failure()) {
+                case ConversionFailure::kExceedsNegativeLimit:
+                    return CreateElement(builder, c->Type(), f16(f16::kLowestValue));
+                case ConversionFailure::kExceedsPositiveLimit:
+                    return CreateElement(builder, c->Type(), f16(f16::kHighestValue));
+            }
+        }
+        return CreateElement(builder, c->Type(), conv.Get());
+    };
+    return TransformElements(builder, ty, transform, args[0]);
+}
+
+ConstEval::Result ConstEval::radians(const sem::Type* ty,
+                                     utils::VectorRef<const sem::Constant*> args,
+                                     const Source& source) {
+    auto transform = [&](const sem::Constant* c0) {
+        auto create = [&](auto e) -> ImplResult {
+            using NumberT = decltype(e);
+            using T = UnwrapNumber<NumberT>;
+
+            auto pi = T(M_PI);
+            auto scale = Div(NumberT(pi), NumberT(180));
+            if (!scale) {
+                AddNote("when calculating radians", source);
+                return utils::Failure;
+            }
+            auto result = Mul(e, scale.Get());
+            if (!result) {
+                AddNote("when calculating radians", source);
+                return utils::Failure;
+            }
+            return CreateElement(builder, c0->Type(), result.Get());
+        };
+        return Dispatch_fa_f32_f16(create, c0);
+    };
+    return TransformElements(builder, ty, transform, args[0]);
 }
 
 ConstEval::Result ConstEval::reverseBits(const sem::Type* ty,
@@ -2611,27 +2684,6 @@ ConstEval::Result ConstEval::unpack4x8unorm(const sem::Type* ty,
         els.Push(CreateElement(builder, inner_ty, val));
     }
     return CreateComposite(builder, ty, std::move(els));
-}
-
-ConstEval::Result ConstEval::quantizeToF16(const sem::Type* ty,
-                                           utils::VectorRef<const sem::Constant*> args,
-                                           const Source&) {
-    auto transform = [&](const sem::Constant* c) {
-        auto conv = CheckedConvert<f32>(f16(c->As<f32>()));
-        if (!conv) {
-            // https://www.w3.org/TR/WGSL/#quantizeToF16-builtin
-            // If e is outside the finite range of binary16, then the result is any value of type
-            // f32
-            switch (conv.Failure()) {
-                case ConversionFailure::kExceedsNegativeLimit:
-                    return CreateElement(builder, c->Type(), f16(f16::kLowestValue));
-                case ConversionFailure::kExceedsPositiveLimit:
-                    return CreateElement(builder, c->Type(), f16(f16::kHighestValue));
-            }
-        }
-        return CreateElement(builder, c->Type(), conv.Get());
-    };
-    return TransformElements(builder, ty, transform, args[0]);
 }
 
 ConstEval::Result ConstEval::Convert(const sem::Type* target_ty,
