@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a72fe02_b4f898cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-17T19:50:00Z",
+      "side": 1,
+      "message": "Output can be seen here:\n\nhttps://dawn-review.googlesource.com/c/dawn/+/110521/3/third_party/gn/webgpu-cts/cache_list.txt",
+      "revId": "533fdb8324ebe7f320d475bff85bc06d3c7c0bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
