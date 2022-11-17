@@ -617,6 +617,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac9f3fb0_32757ea4",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-17T20:11:51Z",
+      "side": 1,
+      "message": "One of the things that `CanonicalizeEntryPointIO` does is to make so that IO attributes are only ever used for the entry point parameters and return type. The ICE in the writes was intended to catch any situations where that hadn\u0027t happened for some reason, which would likely be a transform bug.\n\nBut if we\u0027re confident that CanonicalizeEntryPointIO has done its job properly, then we could indeed remove that ICE and just ignore attributes when `pipeline_stage_uses.size() !\u003d 1` instead, if that helps with this transform.",
+      "parentUuid": "73d135c2_889a08e4",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab509629_108329ea",
         "filename": "src/tint/transform/truncate_interstage_variables.h",
         "patchSetId": 18
