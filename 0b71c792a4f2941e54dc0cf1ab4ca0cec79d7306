@@ -665,6 +665,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b944879b_63eec4ff",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-17T21:21:48Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to change `CanonicalizeEntryPointIO` either way. The proposed simplification is just to remove those ICEs from the backends, and just have them ignore any IO attributes instead. Then you don\u0027t need to worry about that stuff in this transform.\n\nIt\u0027s not a huge complexity saving though (just that one for-loop to remove, right?), so we could also just consider this as a potential follow-up (not blocking V1).",
+      "parentUuid": "e0bb2b09_3c2425c1",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab509629_108329ea",
         "filename": "src/tint/transform/truncate_interstage_variables.h",
         "patchSetId": 18
