@@ -261,7 +261,11 @@ struct Element : ImplConstant {
     static_assert(!std::is_same_v<UnwrapNumber<T>, T> || std::is_same_v<T, bool>,
                   "T must be a Number or bool");
 
-    Element(const sem::Type* t, T v) : type(t), value(v) {}
+    Element(const sem::Type* t, T v) : type(t), value(v) {
+        if constexpr (IsFloatingPoint<T>) {
+            TINT_ASSERT(Resolver, std::isfinite(v));
+        }
+    }
     ~Element() override = default;
     const sem::Type* Type() const override { return type; }
     std::variant<std::monostate, AInt, AFloat> Value() const override {
@@ -310,12 +314,10 @@ struct Element : ImplConstant {
             } else if constexpr (IsFloatingPoint<TO>) {
                 // [x -> floating-point] - number not exactly representable
                 // https://www.w3.org/TR/WGSL/#floating-point-conversion
-                switch (conv.Failure()) {
-                    case ConversionFailure::kExceedsNegativeLimit:
-                        return builder.create<Element<TO>>(target_ty, -TO::Inf());
-                    case ConversionFailure::kExceedsPositiveLimit:
-                        return builder.create<Element<TO>>(target_ty, TO::Inf());
-                }
+                builder.Diagnostics().add_error(
+                    tint::diag::System::Resolver,
+                    OverflowErrorMessage(value, builder.FriendlyName(target_ty)), source);
+                return utils::Failure;
             } else if constexpr (IsFloatingPoint<FROM>) {
                 // [floating-point -> integer] - number not exactly representable
                 // https://www.w3.org/TR/WGSL/#floating-point-conversion
@@ -438,6 +440,13 @@ struct Composite : ImplConstant {
 /// CreateElement constructs and returns an Element<T>.
 template <typename T>
 const ImplConstant* CreateElement(ProgramBuilder& builder, const sem::Type* t, T v) {
+    //if constexpr (IsFloatingPoint<T>) {
+    //    if (!std::isfinite(v)) {
+    //        builder.Diagnostics().add_error(diag::System::Resolver, msg, source);
+    //        
+    //        return utils::Failure;
+    //    }
+    //}
     return builder.create<Element<T>>(t, v);
 }
 
