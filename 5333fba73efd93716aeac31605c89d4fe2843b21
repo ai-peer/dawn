@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7107926a_14c040c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-17T01:17:25Z",
+      "side": 1,
+      "message": "\u003e I thought it would be the case that if the workload is high enough, the GPU will automatically switch to a higher performance?\n\nYes that\u0027s true. However when there is no heavy work on Intel GPU for some time, then the GPU frequency will decrease. For example, we observe that on Intel GPUs when we get data from GPU, do some CPU operation and submit new commands to GPU again, the GPU frequency will sometimes start at a very low frequency, which will hurt the performance. \n\nWith this extension we can provide a hint to Intel GPU that we want all the commands submitted on this queue to be executed with maximum performance (highest frequency) instead of the default behavior (the GPU frequency starts at a low value and is increased after some time).",
+      "parentUuid": "0568260f_54dda37f",
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a38ae306_8a9fa786",
         "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
         "patchSetId": 5
