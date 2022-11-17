@@ -539,6 +539,15 @@ class ConstEval {
                  utils::VectorRef<const sem::Constant*> args,
                  const Source& source);
 
+    /// degrees builtin
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    Result degrees(const sem::Type* ty,
+                   utils::VectorRef<const sem::Constant*> args,
+                   const Source& source);
+
     /// extractBits builtin
     /// @param ty the expression type
     /// @param args the input arguments
@@ -646,6 +655,24 @@ class ConstEval {
     Result pack4x8unorm(const sem::Type* ty,
                         utils::VectorRef<const sem::Constant*> args,
                         const Source& source);
+
+    /// quantizeToF16 builtin
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    Result quantizeToF16(const sem::Type* ty,
+                         utils::VectorRef<const sem::Constant*> args,
+                         const Source& source);
+
+    /// radians builtin
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location of the conversion
+    /// @return the result value, or null if the value cannot be calculated
+    Result radians(const sem::Type* ty,
+                   utils::VectorRef<const sem::Constant*> args,
+                   const Source& source);
 
     /// reverseBits builtin
     /// @param ty the expression type
@@ -817,15 +844,6 @@ class ConstEval {
     Result unpack4x8unorm(const sem::Type* ty,
                           utils::VectorRef<const sem::Constant*> args,
                           const Source& source);
-
-    /// quantizeToF16 builtin
-    /// @param ty the expression type
-    /// @param args the input arguments
-    /// @param source the source location of the conversion
-    /// @return the result value, or null if the value cannot be calculated
-    Result quantizeToF16(const sem::Type* ty,
-                         utils::VectorRef<const sem::Constant*> args,
-                         const Source& source);
 
   private:
     /// Adds the given error message to the diagnostics
