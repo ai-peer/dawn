@@ -16,6 +16,23 @@
       "message": "Not seeing a significant difference in total shard time with the cache so far :-/\n\nAnd, comparing this run https://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/17915/overview\n\nand the run in this CL, it looks like we have the same number of \"20 second global timeout\" flakes\n\n(also, I confirmed we\u0027re actually loading the .json files over the network. when I did it wrong in previous patchsets it failed fantastically)",
       "revId": "bdaf8fa80e6bf835d5888fbe687b687136f66c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7c11c2_12716f97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-17T23:04:28Z",
+      "side": 1,
+      "message": "CTS roll with generated cache list has landed:\nhttps://dawn-review.googlesource.com/c/dawn/+/110521",
+      "revId": "bdaf8fa80e6bf835d5888fbe687b687136f66c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
