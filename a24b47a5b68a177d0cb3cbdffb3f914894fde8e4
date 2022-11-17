@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1694a7_0de4afce",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-17T17:22:01Z",
+      "side": 1,
+      "message": "Is it possible to create a test that has a stride on a runtime-array where the type is valid? I know you can\u0027t make it in WGSL, but I think spirv-reader could produce it?\n\nLike, if `ptr_ty` was just `ty.u32` here?",
+      "revId": "a24b47a5b68a177d0cb3cbdffb3f914894fde8e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
