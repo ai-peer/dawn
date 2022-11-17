@@ -1,5 +1,7 @@
 // Copyright 2021 The Dawn Authors
 //
+// Copyright 2021 The Dawn Authors
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -15,10 +17,12 @@
 #ifndef SRC_DAWN_WIRE_BUFFERCONSUMER_IMPL_H_
 #define SRC_DAWN_WIRE_BUFFERCONSUMER_IMPL_H_
 
-#include "dawn/wire/BufferConsumer.h"
-
 #include <limits>
 #include <type_traits>
+
+#include "dawn/common/Constants.h"
+#include "dawn/common/Math.h"
+#include "dawn/wire/BufferConsumer.h"
 
 namespace dawn::wire {
 
@@ -36,13 +40,14 @@ WireResult BufferConsumer<BufferT>::Peek(T** data) {
 template <typename BufferT>
 template <typename T>
 WireResult BufferConsumer<BufferT>::Next(T** data) {
-    if (sizeof(T) > mSize) {
+    size_t size = AlignSizeof<T>(kWireBufferAlignment);
+    if (size > mSize) {
         return WireResult::FatalError;
     }
 
     *data = reinterpret_cast<T*>(mBuffer);
-    mBuffer += sizeof(T);
-    mSize -= sizeof(T);
+    mBuffer += size;
+    mSize -= size;
     return WireResult::Success;
 }
 
@@ -51,20 +56,21 @@ template <typename T, typename N>
 WireResult BufferConsumer<BufferT>::NextN(N count, T** data) {
     static_assert(std::is_unsigned<N>::value, "|count| argument of NextN must be unsigned.");
 
-    constexpr size_t kMaxCountWithoutOverflows = std::numeric_limits<size_t>::max() / sizeof(T);
-    if (count > kMaxCountWithoutOverflows) {
+    constexpr size_t kMaxCountWithoutOverflows =
+        (std::numeric_limits<size_t>::max() - kWireBufferAlignment) / sizeof(T);
+    if (count >= kMaxCountWithoutOverflows) {
         return WireResult::FatalError;
     }
 
     // Cannot overflow because |count| is not greater than |kMaxCountWithoutOverflows|.
-    size_t totalSize = sizeof(T) * count;
-    if (totalSize > mSize) {
+    size_t size = AlignSizeofN<T>(count, kWireBufferAlignment);
+    if (size > mSize) {
         return WireResult::FatalError;
     }
 
     *data = reinterpret_cast<T*>(mBuffer);
-    mBuffer += totalSize;
-    mSize -= totalSize;
+    mBuffer += size;
+    mSize -= size;
     return WireResult::Success;
 }
 

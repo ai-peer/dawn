@@ -62,6 +62,16 @@ T Align(T value, size_t alignment) {
 }
 
 template <typename T>
+size_t AlignSizeof(size_t alignment) {
+    return Align(sizeof(T), alignment);
+}
+
+template <typename T>
+size_t AlignSizeofN(size_t n, size_t alignment) {
+    return Align(sizeof(T) * n, alignment);
+}
+
+template <typename T>
 DAWN_FORCE_INLINE T* AlignPtr(T* ptr, size_t alignment) {
     ASSERT(IsPowerOfTwo(alignment));
     ASSERT(alignment != 0);

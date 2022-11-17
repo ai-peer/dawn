@@ -96,26 +96,25 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     cmd.result = buffer->GetWireHandle();
 
     wireClient->SerializeCommand(
-        cmd, cmd.readHandleCreateInfoLength + cmd.writeHandleCreateInfoLength,
-        [&](SerializeBuffer* serializeBuffer) {
-            if (readHandle != nullptr) {
-                char* readHandleBuffer;
-                WIRE_TRY(serializeBuffer->NextN(cmd.readHandleCreateInfoLength, &readHandleBuffer));
-                // Serialize the ReadHandle into the space after the command.
-                readHandle->SerializeCreate(readHandleBuffer);
-                buffer->mReadHandle = std::move(readHandle);
-            }
-            if (writeHandle != nullptr) {
-                char* writeHandleBuffer;
-                WIRE_TRY(
-                    serializeBuffer->NextN(cmd.writeHandleCreateInfoLength, &writeHandleBuffer));
-                // Serialize the WriteHandle into the space after the command.
-                writeHandle->SerializeCreate(writeHandleBuffer);
-                buffer->mWriteHandle = std::move(writeHandle);
-            }
-
-            return WireResult::Success;
-        });
+        cmd,
+        CommandExtension{cmd.readHandleCreateInfoLength,
+                         [&](char* readHandleBuffer) {
+                             if (readHandle != nullptr) {
+                                 // Serialize the ReadHandle into the space after the command.
+                                 readHandle->SerializeCreate(readHandleBuffer);
+                                 buffer->mReadHandle = std::move(readHandle);
+                             }
+                             return WireResult::Success;
+                         }},
+        CommandExtension{cmd.writeHandleCreateInfoLength,
+                         [&](char* writeHandleBuffer) {
+                             if (writeHandle != nullptr) {
+                                 // Serialize the WriteHandle into the space after the command.
+                                 writeHandle->SerializeCreate(writeHandleBuffer);
+                                 buffer->mWriteHandle = std::move(writeHandle);
+                             }
+                             return WireResult::Success;
+                         }});
     return ToAPI(buffer);
 }
 
@@ -310,16 +309,13 @@ void Buffer::Unmap() {
         cmd.size = mMapSize;
 
         client->SerializeCommand(
-            cmd, writeDataUpdateInfoLength, [&](SerializeBuffer* serializeBuffer) {
-                char* writeHandleBuffer;
-                WIRE_TRY(serializeBuffer->NextN(writeDataUpdateInfoLength, &writeHandleBuffer));
-
-                // Serialize flush metadata into the space after the command.
-                // This closes the handle for writing.
-                mWriteHandle->SerializeDataUpdate(writeHandleBuffer, cmd.offset, cmd.size);
-
-                return WireResult::Success;
-            });
+            cmd, CommandExtension{writeDataUpdateInfoLength, [&](char* writeHandleBuffer) {
+                                      // Serialize flush metadata into the space after the command.
+                                      // This closes the handle for writing.
+                                      mWriteHandle->SerializeDataUpdate(writeHandleBuffer,
+                                                                        cmd.offset, cmd.size);
+                                      return WireResult::Success;
+                                  }});
 
         // If mDestructWriteHandleOnUnmap is true, that means the write handle is merely
         // for mappedAtCreation usage. It is destroyed on unmap after flush to server
