@@ -593,6 +593,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "73d135c2_889a08e4",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-17T13:14:03Z",
+      "side": 1,
+      "message": "Humm okay - I guess there\u0027s some interaction with `CanonicalizeEntryPointIO` here that prevents this ICE from firing.\n@jrprice@google.com - do you know whether this ICE is really necessary? If not, perhaps we should change the backends to just ignore the attributes, and reduce the amount of complexity here.",
+      "parentUuid": "26b7b7d2_b7cb611c",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ab509629_108329ea",
         "filename": "src/tint/transform/truncate_interstage_variables.h",
         "patchSetId": 18
@@ -887,6 +911,30 @@
       "side": 1,
       "message": "Hmm I don\u0027t fully get it. Could you explain a bit more?",
       "parentUuid": "8f21bb9a_13b335b1",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 9
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5c3b71e_b0fdb3e2",
+        "filename": "src/tint/utils/bitset.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-17T13:14:03Z",
+      "side": 1,
+      "message": "Sorry, I completely misread what you had written. Ignore me 😊",
+      "parentUuid": "b96b891c_da895b02",
       "range": {
         "startLine": 105,
         "startChar": 0,
