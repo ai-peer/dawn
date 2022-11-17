@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c70697e_f632a0d8",
+        "filename": "src/tint/writer/hlsl/generator.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-17T13:14:11Z",
+      "side": 1,
+      "message": "`///` and below.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 7
+      },
+      "revId": "cf8e65f3862c45794ca68538c5311863a3568209",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
