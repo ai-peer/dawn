@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c98580a1_609f51cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T02:11:26Z",
+      "side": 1,
+      "message": "are there important motivating apps where we\u0027ve seen the GPU frequency doesn\u0027t ramp back up quickly enough over time? I\u0027m worried that\n  1. this will completely pin the GPU at a high frequency and hurt power usage. It\u0027s easy for developers to say \"I want max performance! and not consider the downside\". If someone is on a laptop that\u0027s not plugged in, that\u0027s not so great for battery\n  2. It\u0027s a lot of code and dependencies on internal APIs. So if Dynamic is sufficient in the real world, that would be preferable.",
+      "parentUuid": "7107926a_14c040c1",
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a38ae306_8a9fa786",
         "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
         "patchSetId": 5
