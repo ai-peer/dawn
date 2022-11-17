@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960fbbc1_a04f26a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T02:04:19Z",
+      "side": 1,
+      "message": "isn\u0027t it because all our other usages RemoveFromList in the destructor? \n\neven if they were heap allocated, it would not be OK if you deleted it without calling RemoveFromList, because then other node would have a dangling pointer to it.\n\nMaybe instead we should call RemoveFromList in the ~LinkNode ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "b559920219d7b980c394429c2e4f18e97279d263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
