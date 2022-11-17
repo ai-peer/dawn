@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7928fe_f3eeab78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T20:09:19Z",
+      "side": 1,
+      "message": "Together with the new tint transform it solve the D3D12 issue. PTAL",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
