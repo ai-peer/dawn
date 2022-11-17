@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ec6f57_2bca6023",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-17T13:30:10Z",
+      "side": 1,
+      "message": "The issue you\u0027re hitting is that you\u0027re taking references to elements in `alias_analysis_infos_` here, then modifying `alias_analysis_infos_` below.\n\nBased on the current implementation of `Hashmap`, this invalidates the reference.\n\nThis seems like a frequent tripping hazzard, so maybe I can reimplement `Hashmap` so that element references are preserved (much like `std::unordered_map`)",
+      "range": {
+        "startLine": 1603,
+        "startChar": 0,
+        "endLine": 1604,
+        "endChar": 75
+      },
+      "revId": "35c7b140a861ad3f76ee3b103f22f4bd6b52b053",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
