@@ -17,9 +17,21 @@
 
 #include <cstddef>
 
+#include "dawn/common/Constants.h"
+#include "dawn/common/Math.h"
 #include "dawn/wire/WireResult.h"
 
 namespace dawn::wire {
+
+// Wire specific alignment helpers.
+template <typename T>
+constexpr size_t WireAlignSizeof() {
+    return AlignSizeof<T, kWireBufferAlignment>();
+}
+template <typename T>
+size_t WireAlignSizeofN(size_t n) {
+    return AlignSizeofN<T>(n, kWireBufferAlignment);
+}
 
 // BufferConsumer is a utility class that allows reading bytes from a buffer
 // while simultaneously decrementing the amount of remaining space by exactly

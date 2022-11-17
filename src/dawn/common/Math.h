@@ -61,6 +61,19 @@ T Align(T value, size_t alignment) {
     return (value + (alignmentT - 1)) & ~(alignmentT - 1);
 }
 
+template <typename T, size_t Alignment>
+constexpr size_t AlignSizeof() {
+    static_assert(Alignment != 0 && (Alignment & (Alignment - 1)) == 0,
+                  "Alignment must be a valid power of 2.");
+    static_assert(sizeof(T) <= std::numeric_limits<size_t>::max() - (Alignment - 1));
+    return (sizeof(T) + (Alignment - 1)) & ~(Alignment - 1);
+}
+
+template <typename T>
+size_t AlignSizeofN(size_t n, size_t alignment) {
+    return Align(sizeof(T) * n, alignment);
+}
+
 template <typename T>
 DAWN_FORCE_INLINE T* AlignPtr(T* ptr, size_t alignment) {
     ASSERT(IsPowerOfTwo(alignment));
