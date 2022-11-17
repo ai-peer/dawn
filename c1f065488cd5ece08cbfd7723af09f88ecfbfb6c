@@ -22,6 +22,30 @@
       },
       "revId": "c1f065488cd5ece08cbfd7723af09f88ecfbfb6c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a907e751_a6452298",
+        "filename": "webgpu-cts/scripts/gen_cache.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T04:05:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ec566cd7_cbe5039a",
+      "range": {
+        "startLine": 49,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 48
+      },
+      "revId": "c1f065488cd5ece08cbfd7723af09f88ecfbfb6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

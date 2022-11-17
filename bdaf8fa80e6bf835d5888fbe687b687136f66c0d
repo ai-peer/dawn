@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee17691a_18a9a8be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T04:05:25Z",
+      "side": 1,
+      "message": "Not seeing a significant difference in total shard time with the cache so far :-/\n\nAnd, comparing this run https://ci.chromium.org/ui/p/chromium/builders/try/mac-dawn-rel/17915/overview\n\nand the run in this CL, it looks like we have the same number of \"20 second global timeout\" flakes\n\n(also, I confirmed we\u0027re actually loading the .json files over the network. when I did it wrong in previous patchsets it failed fantastically)",
+      "revId": "bdaf8fa80e6bf835d5888fbe687b687136f66c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
