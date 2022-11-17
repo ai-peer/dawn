@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc23d313_76e969de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-17T22:06:56Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57986328_d0f00d1b",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3969,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-17T22:06:56Z",
+      "side": 1,
+      "message": "This seems unrelated?",
+      "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
