@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba89fcda_f87abeed",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-17T12:45:38Z",
+      "side": 1,
+      "message": "You\u0027ve added tests in the inspector - but please can we have a couple of unit tests for the new resolver output? Doesn\u0027t have to be substantial - just enough to test array and variable `TransitivelyReferencedOverrides()`.",
+      "revId": "fb18d23e67e8f02ac31d790f04f642d057cf2eed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
