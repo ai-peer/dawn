@@ -22,6 +22,30 @@
       },
       "revId": "b559920219d7b980c394429c2e4f18e97279d263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "234a649d_ba93168f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-17T02:29:06Z",
+      "side": 1,
+      "message": "Huh... good point. Also a much simpler change lol... Will submit if the test runs fine.",
+      "parentUuid": "960fbbc1_a04f26a0",
+      "range": {
+        "startLine": 13,
+        "startChar": 21,
+        "endLine": 15,
+        "endChar": 12
+      },
+      "revId": "b559920219d7b980c394429c2e4f18e97279d263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
