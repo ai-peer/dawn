@@ -33,6 +33,24 @@
       "message": "This could go away. The loop should add itself to the `stop_nodes` and then make sure that the continue statements and continuing block go back to the loop header instead of the start target.\n\nThere are no other cases where you\u0027d hit the same node twice otherwise in this walk as each join point should be guarded by the stop_nodes.",
       "revId": "8c2f9afb7d7ed2511d1df51c715e290be6a3e1ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ece2ae_f596996c",
+        "filename": "src/tint/ir/debug.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-17T18:48:41Z",
+      "side": 1,
+      "message": "Going to skip this for now. The continuing block go back to the loop start block, not the loop block itself. Changing that makes the graph seem weird.",
+      "parentUuid": "c666e7e1_53d4406f",
+      "revId": "8c2f9afb7d7ed2511d1df51c715e290be6a3e1ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
