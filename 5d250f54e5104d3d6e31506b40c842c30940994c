@@ -16,6 +16,24 @@
       "message": "LGTM to fix the roll\n\nfrom the bug, it sounds like we can have a better workaround to clamp the reported max size to 2^31-1?",
       "revId": "5d250f54e5104d3d6e31506b40c842c30940994c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65dfd89_42408334",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-17T23:53:36Z",
+      "side": 1,
+      "message": "Yea that would probably work, but I\u0027m not sure if that would be too restrictive given that (for example) the Linux one actually reports a max size of approximately 2^32.",
+      "parentUuid": "5bbb7139_dc868967",
+      "revId": "5d250f54e5104d3d6e31506b40c842c30940994c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
