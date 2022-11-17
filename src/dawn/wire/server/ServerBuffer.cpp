@@ -259,16 +259,15 @@ void Server::OnBufferMapAsyncCallback(MapUserdata* data, WGPUBufferMapAsyncStatu
         }
     }
 
-    SerializeCommand(cmd, cmd.readDataUpdateInfoLength, [&](SerializeBuffer* serializeBuffer) {
-        if (isSuccess && isRead) {
-            char* readHandleBuffer;
-            WIRE_TRY(serializeBuffer->NextN(cmd.readDataUpdateInfoLength, &readHandleBuffer));
-            // The in-flight map request returned successfully.
-            bufferData->readHandle->SerializeDataUpdate(readData, data->offset, data->size,
-                                                        readHandleBuffer);
-        }
-        return WireResult::Success;
-    });
+    SerializeCommand(
+        cmd, CommandExtension{cmd.readDataUpdateInfoLength, [&](char* readHandleBuffer) {
+                                  if (isSuccess && isRead) {
+                                      // The in-flight map request returned successfully.
+                                      bufferData->readHandle->SerializeDataUpdate(
+                                          readData, data->offset, data->size, readHandleBuffer);
+                                  }
+                                  return WireResult::Success;
+                              }});
 }
 
 }  // namespace dawn::wire::server
