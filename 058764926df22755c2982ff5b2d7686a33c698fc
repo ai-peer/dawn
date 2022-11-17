@@ -371,6 +371,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d4695a22_746dff8e",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1549,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-17T13:17:46Z",
+      "side": 1,
+      "message": "I\u0027d suggest adding a comment with your concern about load-rule-outside-function and just `return`ing. I imagine the probability of this happening is less than some reshuffling of validation that can make this fire.",
+      "parentUuid": "d1660761_3a7f9eab",
+      "range": {
+        "startLine": 1547,
+        "startChar": 0,
+        "endLine": 1549,
+        "endChar": 15
+      },
+      "revId": "058764926df22755c2982ff5b2d7686a33c698fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c44a548_f097f123",
         "filename": "src/tint/resolver/resolver.cc",
         "patchSetId": 2
