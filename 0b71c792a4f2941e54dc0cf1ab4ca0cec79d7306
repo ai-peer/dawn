@@ -687,6 +687,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5197060_63df1ee7",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T21:25:26Z",
+      "side": 1,
+      "message": "\u003e just that one for-loop to remove, right?\n\nYes\n\nOk. Then I will leave this patch as is. Thanks!",
+      "parentUuid": "b944879b_63eec4ff",
+      "range": {
+        "startLine": 31,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 71
+      },
+      "revId": "0b71c792a4f2941e54dc0cf1ab4ca0cec79d7306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab509629_108329ea",
