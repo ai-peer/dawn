@@ -47,6 +47,86 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// Result of Add()
     using AddResult = typename Base::PutResult;
 
+    /// Reference is a reference to an element's value in the Hashmap.
+    /// Reference will automatically re-lookup the entry if the hashmap is mutated.
+    class Reference {
+      public:
+        /// @returns true if the reference is valid.
+        operator bool() const { return Get() != nullptr; }
+
+        /// @returns the pointer to the Value
+        operator Value*() const { return Get(); }
+
+        /// @returns the pointer to the Value
+        Value* operator->() const { return Get(); }
+
+        /// @returns the pointer to the Value
+        Value* Get() const {
+            auto generation = map_.Generation();
+            if (generation_ != generation) {
+                cached_ = map_.Lookup(key_);
+                generation_ = generation;
+            }
+            return cached_;
+        }
+
+      private:
+        friend Hashmap;
+
+        /// Constructor
+        Reference(Hashmap& map, const Key& key)
+            : map_(map), key_(key), cached_(nullptr), generation_(map.Generation() - 1) {}
+
+        /// Constructor
+        Reference(Hashmap& map, const Key& key, Value* value)
+            : map_(map), key_(key), cached_(value), generation_(map.Generation()) {}
+
+        Hashmap& map_;
+        const Key key_;
+        mutable Value* cached_ = nullptr;
+        mutable size_t generation_ = 0;
+    };
+
+    /// ConstReference is an immutable reference to an element's value in the Hashmap.
+    /// ConstReference will automatically re-lookup the entry if the hashmap is mutated.
+    class ConstReference {
+      public:
+        /// @returns true if the reference is valid.
+        operator bool() const { return Get() != nullptr; }
+
+        /// @returns the pointer to the Value
+        operator const Value*() const { return Get(); }
+
+        /// @returns the pointer to the Value
+        const Value* operator->() const { return Get(); }
+
+        /// @returns the pointer to the Value
+        const Value* Get() const {
+            auto generation = map_.Generation();
+            if (generation_ != generation) {
+                cached_ = map_.Lookup(key_);
+                generation_ = generation;
+            }
+            return cached_;
+        }
+
+      private:
+        friend Hashmap;
+
+        /// Constructor
+        ConstReference(const Hashmap& map, const Key& key)
+            : map_(map), key_(key), cached_(nullptr), generation_(map.Generation() - 1) {}
+
+        /// Constructor
+        ConstReference(const Hashmap& map, const Key& key, const Value* value)
+            : map_(map), key_(key), cached_(value), generation_(map.Generation()) {}
+
+        const Hashmap& map_;
+        const Key key_;
+        mutable const Value* cached_ = nullptr;
+        mutable size_t generation_ = 0;
+    };
+
     /// Adds a value to the map, if the map does not already contain an entry with the key @p key.
     /// @param key the entry key.
     /// @param value the value of the entry to add to the map.
@@ -108,25 +188,28 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// @param key the entry's key value to search for.
     /// @returns the value of the entry.
     template <typename K>
-    Value& GetOrZero(K&& key) {
+    Reference GetOrZero(K&& key) {
         auto res = Add(std::forward<K>(key), Value{});
-        return *res.value;
+        return Reference(*this, key, res.value);
     }
 
     /// @param key the key to search for.
-    /// @returns a pointer to the entry that is equal to the given value, or nullptr if the map does
-    ///          not contain the given value.
-    const Value* Find(const Key& key) const {
+    /// @returns a reference to the entry that is equal to the given value.
+    Reference Find(const Key& key) { return Reference(*this, key); }
+
+    /// @param key the key to search for.
+    /// @returns a reference to the entry that is equal to the given value.
+    ConstReference Find(const Key& key) const { return ConstReference(*this, key); }
+
+  private:
+    Value* Lookup(const Key& key) {
         if (auto [found, index] = this->IndexOf(key); found) {
             return &this->slots_[index].entry->value;
         }
         return nullptr;
     }
 
-    /// @param key the key to search for.
-    /// @returns a pointer to the entry that is equal to the given value, or nullptr if the map does
-    ///          not contain the given value.
-    Value* Find(const Key& key) {
+    const Value* Lookup(const Key& key) const {
         if (auto [found, index] = this->IndexOf(key); found) {
             return &this->slots_[index].entry->value;
         }
