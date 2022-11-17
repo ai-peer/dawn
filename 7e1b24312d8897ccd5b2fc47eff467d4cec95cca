@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c8cbc9c_89a9c363",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T21:56:38Z",
+      "side": 1,
+      "message": "bump on this - it\u0027s probably best if possible if we can port the whole render pass workaround mechanism to the frontend that way we don\u0027t have it implemented in two places. And also so we don\u0027t have a problem where the frontend implements workaround A, the backend implements workaround B but in such a way that we need workaround A again",
+      "parentUuid": "39042574_7b5377c7",
+      "revId": "7e1b24312d8897ccd5b2fc47eff467d4cec95cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2c4ddb0_8f25c239",
         "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
         "patchSetId": 3
