@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1290b73_70e6f3a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T21:06:05Z",
+      "side": 1,
+      "message": "one comment, LGTM otherwise",
+      "revId": "7cdf4052f29228203bb61739cc61032d4392db05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea266edb_de299cf6",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T21:06:05Z",
+      "side": 1,
+      "message": "why this change?\n\nif you don\u0027t pass preserve, all the rolls will be abandoned and existingRolls becomes nil\n\nif you do pass preserve, existingRolls stays not-nil, and then we still create a change instead of reusing?",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 24
+      },
+      "revId": "7cdf4052f29228203bb61739cc61032d4392db05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
