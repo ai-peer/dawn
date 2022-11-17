@@ -51,6 +51,24 @@
       "parentUuid": "57986328_d0f00d1b",
       "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a207af68_aca9a045",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3969,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-17T22:09:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "01d9360a_850a38ab",
+      "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
