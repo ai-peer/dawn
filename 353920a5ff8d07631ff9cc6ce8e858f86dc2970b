@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cead96de_e2c6c5ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T02:54:54Z",
+      "side": 1,
+      "message": "LGTM assuming tests are happy",
+      "revId": "353920a5ff8d07631ff9cc6ce8e858f86dc2970b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bbb9a45_48a4b030",
+        "filename": "src/dawn/common/LinkedList.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-17T02:54:54Z",
+      "side": 1,
+      "message": "nit: now I think this is redundant since root_ will be removed when the member is destructed and runs ~LinkNode\n\nlet\u0027s also move this comment to ~LinkNode so there\u0027s an explanation there about why we are removing",
+      "range": {
+        "startLine": 180,
+        "startChar": 18,
+        "endLine": 186,
+        "endChar": 0
+      },
+      "revId": "353920a5ff8d07631ff9cc6ce8e858f86dc2970b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
