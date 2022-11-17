@@ -39,6 +39,30 @@
       },
       "revId": "7cdf4052f29228203bb61739cc61032d4392db05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8acb1ae_0a9acb1e",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-17T21:12:54Z",
+      "side": 1,
+      "message": "Yes. The intention for `--preserve` was that it is a _leave-my-existing-change-alone_ flag. I just used it to test this, and instead of leaving my existing CTS roll alone, it pushed a new PS on the top of the existing roll, forcing me to wait another N hours to land.\n\nSeems like I broke this some time ago, and never noticed.",
+      "parentUuid": "ea266edb_de299cf6",
+      "range": {
+        "startLine": 300,
+        "startChar": 4,
+        "endLine": 300,
+        "endChar": 24
+      },
+      "revId": "7cdf4052f29228203bb61739cc61032d4392db05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
