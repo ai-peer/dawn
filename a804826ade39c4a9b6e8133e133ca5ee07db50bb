@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b801ec_5ea5d93d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-17T01:37:00Z",
+      "side": 1,
+      "message": "Thanks for your review!\n\nI\u0027ve rebased the CL, PTAL, thanks!",
+      "revId": "a804826ade39c4a9b6e8133e133ca5ee07db50bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
