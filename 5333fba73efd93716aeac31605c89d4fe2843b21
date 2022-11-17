@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "078b8f4f_f905e7f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-17T02:45:49Z",
+      "side": 1,
+      "message": "Hi Austin,\n\n\u003e this will completely pin the GPU at a high frequency and hurt power usage. It\u0027s easy for developers to say \"I want max performance! and not consider the downside\". If someone is on a laptop that\u0027s not plugged in, that\u0027s not so great for battery\n\nThe throttle policy is not global - it only works on the command queue created with MAX_PERFORMANCE. It won\u0027t affect other commands that are not submitted to this queue. We have tested the GPU frequency will drop in quite a small time (in milliseconds) when no commands are submitted to the queue with MAX_PERFORMANCE throttle policy.\n\nYes it will hurt power, but the performance gain is also quite significant, especially when we try to do work on CPU without using GPU, and then feed the commands to GPU. For example, when the Image Element is used as an input of TFJS, as the process of Image Element is all on CPU, we have noticed with Throttle Extension the performance will improve quite a lot (~2x).\n\nIn Chromium we can always choose the \"low-power\" Intel adapter when the system is using the battery.",
+      "parentUuid": "c98580a1_609f51cd",
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a38ae306_8a9fa786",
         "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
         "patchSetId": 5
@@ -132,6 +150,30 @@
       "side": 1,
       "message": "We have some questions with this:\n• What are the guarantees around availability of this functionality?\n• Are there guarantees around API / ABI compatibility with future drivers?\n• Where do we file bugs?\n• How might our security teams assess the risk of these calls?\n\nGenerally, loading DLLs from the GPU process sounds like something we should not be doing. I think the security team might have strong opinions about this - even behind toggles - and so this may require a security review.",
       "parentUuid": "8ebdf40c_8b8606d4",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bf37ce9_6bb4c9e3",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-17T02:45:49Z",
+      "side": 1,
+      "message": "Hi Ben,\n\nThanks for your questions. Our replies are inline.\n\n• What are the guarantees around availability of this functionality?\nA: We are supporting this feature as part of the Intel driver and we have validation tests that are tracked in Intel driver CI.\n\n• Are there guarantees around API / ABI compatibility with future drivers?\nA: This API is backwards compatible and we ensure previously developed extensions work on new hardware\n\n• Where do we file bugs?\nA: Our team will help file the bug internally.\n\n• How might our security teams assess the risk of these calls?\nA: This relies on the Chromium security team. As far as I know:\n- We treat igdext64.dll as part of driver.\n- igdext64.dll is released and installed in same installer of Intel D3D12 driver.\n- I have tested loading igdext64.dll won’t be blocked by current Chromium sandbox.\n\n\n• Generally, loading DLLs from the GPU process sounds like something we should not be doing.\nA: Actually in Dawn we are dynamically loading several DLLs on D3D12 backend:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/PlatformFunctions.cpp;l\u003d104\n\n• I think the security team might have strong opinions about this - even behind toggles - and so this may require a security review.\nA: It is necessary. Please help contact Chromium security team after your other concerns are addressed.",
+      "parentUuid": "285abf12_df0e4398",
       "range": {
         "startLine": 298,
         "startChar": 0,
