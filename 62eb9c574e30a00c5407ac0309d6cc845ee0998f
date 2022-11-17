@@ -33,6 +33,24 @@
       "message": "This seems unrelated?",
       "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01d9360a_850a38ab",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3969,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-17T22:09:05Z",
+      "side": 1,
+      "message": "It\u0027s related because MakeOperand would ultimately call `MakeConstantExpressionForScalarSpirvConstant` with the input constant arg, and this call would fail.",
+      "parentUuid": "57986328_d0f00d1b",
+      "revId": "62eb9c574e30a00c5407ac0309d6cc845ee0998f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
