@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf11ae7_276880c8",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aba62e5e_109010ef",
+      "range": {
+        "startLine": 51,
+        "startChar": 67,
+        "endLine": 51,
+        "endChar": 74
+      },
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a668890_e0294c00",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-17T13:14:03Z",
       "side": 1,
       "message": "unused, remove.",
+      "range": {
+        "startLine": 65,
+        "startChar": 4,
+        "endLine": 65,
+        "endChar": 35
+      },
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f94023b_7c1b02d5",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a668890_e0294c00",
       "range": {
         "startLine": 65,
         "startChar": 4,
@@ -64,6 +112,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3c5cbda_0eabb67f",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec60c492_b9f08db4",
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ba07206_c6a25cd8",
@@ -77,6 +143,24 @@
       "writtenOn": "2022-11-17T13:14:03Z",
       "side": 1,
       "message": "`///`",
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6fd315b_e7e076ef",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ba07206_c6a25cd8",
       "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b7ed6d_99ec4204",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c28fb17_cb053210",
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e150d02_2aa05d46",
@@ -111,6 +213,24 @@
       "writtenOn": "2022-11-17T13:14:03Z",
       "side": 1,
       "message": "rm. There must be no gaps between the last `///` line and the class for doxygen to associate the two.",
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f63916_8f7d128a",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e150d02_2aa05d46",
       "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +258,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d7b8108_fd06b447",
+        "filename": "src/tint/transform/truncate_interstage_variables.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35224de3_8c1bf395",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 11
+      },
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b89d9ef0_737ddd1b",
@@ -151,6 +295,30 @@
       "writtenOn": "2022-11-17T13:14:03Z",
       "side": 1,
       "message": "Please split into two tests. Duplication of `src` is fine. Verbosity is less of a concern over readability and test isolation.",
+      "range": {
+        "startLine": 180,
+        "startChar": 0,
+        "endLine": 182,
+        "endChar": 5
+      },
+      "revId": "89d2e18fc4a3e261dadc82f3a390abadd00167c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "761f21a9_b557af45",
+        "filename": "src/tint/transform/truncate_interstage_variables_test.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-17T19:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b89d9ef0_737ddd1b",
       "range": {
         "startLine": 180,
         "startChar": 0,
