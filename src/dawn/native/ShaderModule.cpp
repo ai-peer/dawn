@@ -154,14 +154,16 @@ SampleTypeBit TintSampledKindToSampleTypeBit(tint::inspector::ResourceBinding::S
     UNREACHABLE();
 }
 
+// Used to decide base type of fragment output variable
 ResultOrError<wgpu::TextureComponentType> TintComponentTypeToTextureComponentType(
     tint::inspector::ComponentType type) {
     switch (type) {
-        case tint::inspector::ComponentType::kFloat:
+        case tint::inspector::ComponentType::kF32:
+        case tint::inspector::ComponentType::kF16:
             return wgpu::TextureComponentType::Float;
-        case tint::inspector::ComponentType::kSInt:
+        case tint::inspector::ComponentType::kI32:
             return wgpu::TextureComponentType::Sint;
-        case tint::inspector::ComponentType::kUInt:
+        case tint::inspector::ComponentType::kU32:
             return wgpu::TextureComponentType::Uint;
         case tint::inspector::ComponentType::kUnknown:
             return DAWN_VALIDATION_ERROR("Attempted to convert 'Unknown' component type from Tint");
@@ -169,14 +171,16 @@ ResultOrError<wgpu::TextureComponentType> TintComponentTypeToTextureComponentTyp
     UNREACHABLE();
 }
 
+// Used to decide base type of vertex input variable
 ResultOrError<VertexFormatBaseType> TintComponentTypeToVertexFormatBaseType(
     tint::inspector::ComponentType type) {
     switch (type) {
-        case tint::inspector::ComponentType::kFloat:
+        case tint::inspector::ComponentType::kF32:
+        case tint::inspector::ComponentType::kF16:
             return VertexFormatBaseType::Float;
-        case tint::inspector::ComponentType::kSInt:
+        case tint::inspector::ComponentType::kI32:
             return VertexFormatBaseType::Sint;
-        case tint::inspector::ComponentType::kUInt:
+        case tint::inspector::ComponentType::kU32:
             return VertexFormatBaseType::Uint;
         case tint::inspector::ComponentType::kUnknown:
             return DAWN_VALIDATION_ERROR("Attempted to convert 'Unknown' component type from Tint");
@@ -213,12 +217,14 @@ ResultOrError<wgpu::StorageTextureAccess> TintResourceTypeToStorageTextureAccess
 ResultOrError<InterStageComponentType> TintComponentTypeToInterStageComponentType(
     tint::inspector::ComponentType type) {
     switch (type) {
-        case tint::inspector::ComponentType::kFloat:
-            return InterStageComponentType::Float;
-        case tint::inspector::ComponentType::kSInt:
-            return InterStageComponentType::Sint;
-        case tint::inspector::ComponentType::kUInt:
-            return InterStageComponentType::Uint;
+        case tint::inspector::ComponentType::kF32:
+            return InterStageComponentType::F32;
+        case tint::inspector::ComponentType::kI32:
+            return InterStageComponentType::I32;
+        case tint::inspector::ComponentType::kU32:
+            return InterStageComponentType::U32;
+        case tint::inspector::ComponentType::kF16:
+            return InterStageComponentType::F16;
         case tint::inspector::ComponentType::kUnknown:
             return DAWN_VALIDATION_ERROR("Attempted to convert 'Unknown' component type from Tint");
     }
@@ -1042,7 +1048,7 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
             continue;
         }
 
-        // Uint/sint can't be statically used with a sampler, so they any
+        // Uint/Sint can't be statically used with a sampler, so they any
         // texture bindings reflected must be float or depth textures. If
         // the shader uses a float/depth texture but the bind group layout
         // specifies a uint/sint texture binding,
