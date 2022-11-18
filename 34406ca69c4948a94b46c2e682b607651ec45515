@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a789e2c7_5d72e5d1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-18T11:46:18Z",
+      "side": 1,
+      "message": "Just connecting dots: `Bug: tint:1750`",
+      "revId": "34406ca69c4948a94b46c2e682b607651ec45515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
