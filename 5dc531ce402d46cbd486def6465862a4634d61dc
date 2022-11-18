@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b15ddefc_da79fd65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T20:20:00Z",
+      "side": 1,
+      "message": "This CL should probably be split into",
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b19174_6df88c22",
+        "filename": "tools/src/cmd/tint-bench/entry-points.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T20:20:00Z",
+      "side": 1,
+      "message": "Other tools like `fix-tests` and `test-runner` take a path to the executable directly, not as an arg. What\u0027s the reason for doing it this way?",
+      "range": {
+        "startLine": 4,
+        "startChar": 26,
+        "endLine": 4,
+        "endChar": 50
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c40db0_e145a598",
+        "filename": "tools/src/cmd/tint-bench/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T20:20:00Z",
+      "side": 1,
+      "message": "I don\u0027t know if it\u0027s easy to do, but a lot of unixy tools do the thing of passing in args to the called program after the `--`. Like:\n\n```\n./tools/run tint-bench ./out/active/tint --tmpl ./tools/src/cmd/tint-bench/entry-points.tmpl -- --format hlsl\n```\n\n(I also removed the `--tint` as per my comment above).",
+      "range": {
+        "startLine": 54,
+        "startChar": 28,
+        "endLine": 54,
+        "endChar": 93
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c13512_16b34fe8",
+        "filename": "tools/src/template/template.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T20:20:00Z",
+      "side": 1,
+      "message": "nit: this CL would be more clear if it were split into two: one for the extraction to `template.go`, and the other for the adding of `tint-bench`.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
