@@ -34,6 +34,24 @@
       "parentUuid": "5bbb7139_dc868967",
       "revId": "5d250f54e5104d3d6e31506b40c842c30940994c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ce7a0c_cdcab5a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-18T04:40:06Z",
+      "side": 1,
+      "message": "if larger sizes are non functional it\u0027s probably better to not expose it at all since a developer can\u0027t consistently rely on it. we can gate it on driver version and vendor probably",
+      "parentUuid": "a65dfd89_42408334",
+      "revId": "5d250f54e5104d3d6e31506b40c842c30940994c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
