@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d7196ae_761ed95c",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T21:41:41Z",
+      "side": 1,
+      "message": "ACK, let\u0027s go with this then.",
+      "parentUuid": "674b6254_d3092c6f",
+      "range": {
+        "startLine": 1183,
+        "startChar": 0,
+        "endLine": 1225,
+        "endChar": 6
+      },
+      "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0011c4ea_38d86366",
