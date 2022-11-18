@@ -110,6 +110,30 @@
       },
       "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e5cebc1_9f5a3ed3",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-18T09:52:17Z",
+      "side": 1,
+      "message": "Just bikeshedding here, but if you have a tri-state, it seems better to use a `variant` with three states. Maybe something like:\n\n```\nstruct DXCUnavailable {\n  // You could put details of why here.\n  // Note: IIRC, you will have to add a operator!\u003d() here too\n};\nusing DXCUnknownVersion \u003d std::monostate;\nstd::variant\u003cDXCUnknownVersion, DXCUnavailable, DxcVersionInfo\u003e mDxcVersionInfo;\n```\n\nThat way there\u0027s less magic, and you have a place to store error information.",
+      "parentUuid": "d563c87f_eb0ab78a",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
