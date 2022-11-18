@@ -24,6 +24,12 @@
 
 class RenderPipelineValidationTest : public ValidationTest {
   protected:
+    /*
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+
+    }
+    */
+
     void SetUp() override {
         ValidationTest::SetUp();
 
@@ -326,30 +332,62 @@ TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
 
 // Tests that the format of the color state descriptor must match the output of the fragment shader.
 TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
-    std::array<const char*, 3> kScalarTypes = {{"f32", "i32", "u32"}};
-    std::array<wgpu::TextureFormat, 3> kColorFormats = {{wgpu::TextureFormat::RGBA8Unorm,
-                                                         wgpu::TextureFormat::RGBA8Sint,
-                                                         wgpu::TextureFormat::RGBA8Uint}};
+    using ListScalarTypes = std::vector<const std::string>;
+    // ListScalarTypes kFloatScalarTypes = {"f32", "f16"};
+    ListScalarTypes kFloatScalarTypes = {"f32"};
+    ListScalarTypes kSintScalarTypes = {"i32"};
+    ListScalarTypes kUintScalarTypes = {"u32"};
 
-    for (size_t i = 0; i < kScalarTypes.size(); ++i) {
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = vsModule;
-        std::ostringstream stream;
-        stream << R"(
+    std::vector<ListScalarTypes> kScalarTypeLists = {
+        kFloatScalarTypes,
+        kSintScalarTypes,
+        kUintScalarTypes,
+    };
+
+    using ListColorFormats = std::vector<wgpu::TextureFormat>;
+    ListColorFormats kFloatColorFormats = {{wgpu::TextureFormat::RGBA8Unorm,
+                                            wgpu::TextureFormat::RGBA16Float,
+                                            wgpu::TextureFormat::RGBA32Float}};
+    ListColorFormats kSintColorFormats = {{wgpu::TextureFormat::RGBA8Sint,
+                                           wgpu::TextureFormat::RGBA16Sint,
+                                           wgpu::TextureFormat::RGBA32Sint}};
+    ListColorFormats kUintColorFormats = {{wgpu::TextureFormat::RGBA8Uint,
+                                           wgpu::TextureFormat::RGBA16Uint,
+                                           wgpu::TextureFormat::RGBA32Uint}};
+
+    std::vector<ListColorFormats> kColorFormatLists = {kFloatColorFormats, kSintColorFormats,
+                                                       kUintColorFormats};
+
+    for (size_t i = 0; i < kScalarTypeLists.size(); ++i) {
+        for (const std::string& scalarType : kScalarTypeLists[i]) {
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.vertex.module = vsModule;
+            std::ostringstream stream;
+            // Enable f16 extension if needed.
+            if (scalarType == "f16") {
+                stream << "enable f16;\n\n";
+            }
+            stream << R"(
             @fragment fn main() -> @location(0) vec4<)"
-               << kScalarTypes[i] << R"(> {
+                   << scalarType << R"(> {
                 var result : vec4<)"
-               << kScalarTypes[i] << R"(>;
+                   << scalarType << R"(>;
                 return result;
             })";
-        descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
 
-        for (size_t j = 0; j < kColorFormats.size(); ++j) {
-            descriptor.cTargets[0].format = kColorFormats[j];
-            if (i == j) {
-                device.CreateRenderPipeline(&descriptor);
-            } else {
-                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            // printf("Shader:\n%s\n", stream.str().c_str());
+
+            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+
+            for (size_t j = 0; j < kColorFormatLists.size(); ++j) {
+                for (wgpu::TextureFormat textureFormat : kColorFormatLists[j]) {
+                    descriptor.cTargets[0].format = textureFormat;
+                    if (i == j) {
+                        device.CreateRenderPipeline(&descriptor);
+                    } else {
+                        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+                    }
+                }
             }
         }
     }
