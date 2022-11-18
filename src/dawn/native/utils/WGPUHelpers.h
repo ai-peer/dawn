@@ -49,7 +49,7 @@ ResultOrError<Ref<PipelineLayoutBase>> MakeBasicPipelineLayout(
 //   utils::MakeBindGroupLayout(device, {
 //       {0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform},
 //       {1, wgpu::ShaderStage::Fragment, wgpu::SamplerBindingType::Filtering},
-//       {3, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float}
+//       {3, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::F32}
 //   });
 
 struct BindingLayoutEntryInitializationHelper : BindGroupLayoutEntry {

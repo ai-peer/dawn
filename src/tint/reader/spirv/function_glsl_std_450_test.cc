@@ -150,12 +150,12 @@ inline std::ostream& operator<<(std::ostream& out, GlslStd450Case c) {
 }
 
 // Nomenclature:
-// Float = scalar float
+// F32 = scalar float
 // Floating = scalar float or vector-of-float
 // Float3 = 3-element vector of float
 // Int = scalar signed int
 // Inting = scalar int or vector-of-int
-// Uint = scalar unsigned int
+// U32 = scalar unsigned int
 // Uinting = scalar unsigned or vector-of-unsigned
 
 using SpvParserTest_GlslStd450_Float_Floating =

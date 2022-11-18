@@ -237,7 +237,7 @@ INSTANTIATE_TEST_SUITE_P(
     testing::Values(/* Logical built-in */
                     BuiltinData{BuiltinType::kAll, CallParamType::kBool, "all"},
                     BuiltinData{BuiltinType::kAny, CallParamType::kBool, "any"},
-                    /* Float built-in */
+                    /* F32 built-in */
                     BuiltinData{BuiltinType::kAbs, CallParamType::kF32, "abs"},
                     BuiltinData{BuiltinType::kAbs, CallParamType::kF16, "abs"},
                     BuiltinData{BuiltinType::kAcos, CallParamType::kF32, "acos"},

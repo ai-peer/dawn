@@ -725,7 +725,7 @@ class ParserImpl : Reader {
   private:
     /// Converts a specific SPIR-V type to a Tint type. Integer case
     const Type* ConvertType(const spvtools::opt::analysis::Integer* int_ty);
-    /// Converts a specific SPIR-V type to a Tint type. Float case
+    /// Converts a specific SPIR-V type to a Tint type. F32 case
     const Type* ConvertType(const spvtools::opt::analysis::Float* float_ty);
     /// Converts a specific SPIR-V type to a Tint type. Vector case
     const Type* ConvertType(const spvtools::opt::analysis::Vector* vec_ty);

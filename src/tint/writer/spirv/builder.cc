@@ -2130,10 +2130,10 @@ uint32_t Builder::GenerateBinaryExpression(const ast::BinaryExpression* expr) {
             // there there is no other integer multiplication.
             op = spv::Op::OpIMul;
         } else if (lhs_type->is_float_scalar() && rhs_type->is_float_scalar()) {
-            // Float scalars multiply with OpFMul
+            // F32 scalars multiply with OpFMul
             op = spv::Op::OpFMul;
         } else if (lhs_type->is_float_vector() && rhs_type->is_float_vector()) {
-            // Float vectors must be validated to be the same size and then use OpFMul
+            // F32 vectors must be validated to be the same size and then use OpFMul
             op = spv::Op::OpFMul;
         } else if (lhs_type->is_float_scalar() && rhs_type->is_float_vector()) {
             // Scalar * Vector we need to flip lhs and rhs types
