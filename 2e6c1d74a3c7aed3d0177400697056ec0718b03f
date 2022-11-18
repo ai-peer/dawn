@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2842ff7e_a8184004",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T19:58:08Z",
+      "side": 1,
+      "message": "Since we\u0027re separating these tests per type, there\u0027s not much point in having the `T` template param, and casting values. May as well remove `T` and use the type suffixes (e.g. `C({0_a}, 0_a)`).\n\nOn a related note, I would prefer all three be merged into one function and `if constexpr` over the type of T be used to make it clear that the expected values for four of the inputs differ because of the type.",
+      "range": {
+        "startLine": 1183,
+        "startChar": 0,
+        "endLine": 1225,
+        "endChar": 6
+      },
+      "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0011c4ea_38d86366",
         "filename": "test/tint/builtins/repeated_use.wgsl.expected.glsl",
         "patchSetId": 4
