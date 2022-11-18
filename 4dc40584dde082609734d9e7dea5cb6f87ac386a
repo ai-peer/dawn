@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f1784d6_32ce6c6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-18T07:02:17Z",
+      "side": 1,
+      "message": "LGTM with some comments",
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb2e256_ba9cd90a",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-18T07:02:17Z",
+      "side": 1,
+      "message": "the error case needs to AcquireError \n\nwe can print it to dawn::ErrorLog()",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 9
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814a5e71_e94e5683",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-18T07:02:17Z",
+      "side": 1,
+      "message": "instead of doing all this every time IsDXCAvailableAndVersionAtLeast is called - perhaps we should just cache the version in a member variable? \nthen we don\u0027t need to deal with handling the error every time.\n\nthe version could be a std::variant\u003cstd::monostate, std::optional\u003cVersion\u003e\u003e\n\nif it\u0027s in the monostate, it means we haven\u0027t checked yet.\nthen, if the optional is empty, it means DXC is not available or \u003c 1.6, and otherwise, Version is populated",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
