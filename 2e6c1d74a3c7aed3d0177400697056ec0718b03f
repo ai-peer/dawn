@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "674b6254_d3092c6f",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1225,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-18T21:27:09Z",
+      "side": 1,
+      "message": "I went back and forth on using the `0_a` and decided to go with `T`. It\u0027s not needed, but it keeps the tests the same format as the other tests in the file. I think the consistency is worth it over the strangeness.\n\nMerging these together into a single test, I think, makes the test file harder to read. Instead of knowing these are specifically for f16, I have to parse through a bunch of if conditionals and decide whats in test and what isn\u0027t.",
+      "parentUuid": "2842ff7e_a8184004",
+      "range": {
+        "startLine": 1183,
+        "startChar": 0,
+        "endLine": 1225,
+        "endChar": 6
+      },
+      "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0011c4ea_38d86366",
         "filename": "test/tint/builtins/repeated_use.wgsl.expected.glsl",
         "patchSetId": 4
@@ -37,6 +61,24 @@
       "writtenOn": "2022-11-17T23:25:08Z",
       "side": 1,
       "message": "This could do with being fixed. Bit counting builtins have no `@const`, so you could try one of them.",
+      "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b655e4aa_369fb719",
+        "filename": "test/tint/builtins/repeated_use.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-18T21:27:09Z",
+      "side": 1,
+      "message": "I gather this test is for things where we polyfil to very that multiple polyfills works?",
+      "parentUuid": "0011c4ea_38d86366",
       "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
