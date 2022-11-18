@@ -70,37 +70,37 @@ void AppendResourceBindings(std::vector<ResourceBinding>* dest,
 
 std::tuple<ComponentType, CompositionType> CalculateComponentAndComposition(const sem::Type* type) {
     if (type->is_float_scalar()) {
-        return {ComponentType::kFloat, CompositionType::kScalar};
+        return {ComponentType::kF32, CompositionType::kScalar};
     } else if (type->is_float_vector()) {
         auto* vec = type->As<sem::Vector>();
         if (vec->Width() == 2) {
-            return {ComponentType::kFloat, CompositionType::kVec2};
+            return {ComponentType::kF32, CompositionType::kVec2};
         } else if (vec->Width() == 3) {
-            return {ComponentType::kFloat, CompositionType::kVec3};
+            return {ComponentType::kF32, CompositionType::kVec3};
         } else if (vec->Width() == 4) {
-            return {ComponentType::kFloat, CompositionType::kVec4};
+            return {ComponentType::kF32, CompositionType::kVec4};
         }
     } else if (type->is_unsigned_integer_scalar()) {
-        return {ComponentType::kUInt, CompositionType::kScalar};
+        return {ComponentType::kU32, CompositionType::kScalar};
     } else if (type->is_unsigned_integer_vector()) {
         auto* vec = type->As<sem::Vector>();
         if (vec->Width() == 2) {
-            return {ComponentType::kUInt, CompositionType::kVec2};
+            return {ComponentType::kU32, CompositionType::kVec2};
         } else if (vec->Width() == 3) {
-            return {ComponentType::kUInt, CompositionType::kVec3};
+            return {ComponentType::kU32, CompositionType::kVec3};
         } else if (vec->Width() == 4) {
-            return {ComponentType::kUInt, CompositionType::kVec4};
+            return {ComponentType::kU32, CompositionType::kVec4};
         }
     } else if (type->is_signed_integer_scalar()) {
-        return {ComponentType::kSInt, CompositionType::kScalar};
+        return {ComponentType::kI32, CompositionType::kScalar};
     } else if (type->is_signed_integer_vector()) {
         auto* vec = type->As<sem::Vector>();
         if (vec->Width() == 2) {
-            return {ComponentType::kSInt, CompositionType::kVec2};
+            return {ComponentType::kI32, CompositionType::kVec2};
         } else if (vec->Width() == 3) {
-            return {ComponentType::kSInt, CompositionType::kVec3};
+            return {ComponentType::kI32, CompositionType::kVec3};
         } else if (vec->Width() == 4) {
-            return {ComponentType::kSInt, CompositionType::kVec4};
+            return {ComponentType::kI32, CompositionType::kVec4};
         }
     }
     return {ComponentType::kUnknown, CompositionType::kUnknown};
