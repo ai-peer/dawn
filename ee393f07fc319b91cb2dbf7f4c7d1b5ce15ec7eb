@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b16fcfcd_6148a273",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-18T20:12:18Z",
+      "side": 1,
+      "message": "The \"valid\" test was passing in a non-representable overridable constant value before, which would come in as \"inf\" and end up in the output shader, probably as 0 (depending on the backend). We now fail on this, but since this was a test meant to pass on max f32, I fixed it here.",
+      "revId": "ee393f07fc319b91cb2dbf7f4c7d1b5ce15ec7eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
