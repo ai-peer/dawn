@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79b9c5b_5398e2a5",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-18T09:21:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bb2e256_ba9cd90a",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 9
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "814a5e71_e94e5683",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-18T07:02:17Z",
       "side": 1,
       "message": "instead of doing all this every time IsDXCAvailableAndVersionAtLeast is called - perhaps we should just cache the version in a member variable? \nthen we don\u0027t need to deal with handling the error every time.\n\nthe version could be a std::variant\u003cstd::monostate, std::optional\u003cVersion\u003e\u003e\n\nif it\u0027s in the monostate, it means we haven\u0027t checked yet.\nthen, if the optional is empty, it means DXC is not available or \u003c 1.6, and otherwise, Version is populated",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d563c87f_eb0ab78a",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-18T09:21:28Z",
+      "side": 1,
+      "message": "Done, use a `std::variant\u003cstd::monostate, std::optional\u003cDxcVersionInfo\u003e\u003e` with three possible states:\n    1. The DXC version information have not been checked yet, represented by std::monostate;\n    2. The DXC binary is not available or error occurs when checking the version information, and therefore no DXC version information available, represented by empty std::optional;\n    3. The DXC version information is acquired successfully, stored in std::optional.",
+      "parentUuid": "814a5e71_e94e5683",
       "range": {
         "startLine": 208,
         "startChar": 0,
