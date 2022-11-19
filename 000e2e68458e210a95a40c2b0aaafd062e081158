@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8618fa18_69c5ad8f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1367,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00655e9d_742b2a3f",
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05a0fbce_bfb2c524",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5459d24_2c045cd6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "I agree. Added a 0 degree rotation option.",
+      "parentUuid": "05a0fbce_bfb2c524",
+      "range": {
+        "startLine": 1369,
+        "startChar": 0,
+        "endLine": 1369,
+        "endChar": 46
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b0f6618_ff314d49",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-11-16T05:47:13Z",
       "side": 1,
       "message": "why is this one is an enum, but the other transformations are matrices?\n\nis it because the transform doesn\u0027t support non-90-degree rotations?",
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8da3b2_5ca73bd0",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "The transform doesn\u0027t need non-90 degree rotations. The rotation matrices used here are pretty straightforward and there are only 4, so it just seemed easiest to put them here.",
+      "parentUuid": "8b0f6618_ff314d49",
       "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -94,6 +154,54 @@
       "writtenOn": "2022-11-16T10:44:29Z",
       "side": 1,
       "message": "Could we not have a single `mat3x2\u003cf32\u003e` for this, and multiply the `vec3(coord, 1)` by the matrix? It\u0027s one extra scalar, but avoids conditional control flow, which on some architectures may be more expensive, and I think the number of ALU instructions will be all-round lower.",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 65
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68aedf8c_6a344a2d",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d48ff538_92e93643",
+      "range": {
+        "startLine": 268,
+        "startChar": 39,
+        "endLine": 268,
+        "endChar": 62
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2059c26a_a5010060",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "I just realized I could instead multiply the y-portion of the matrix by -1 to do the flipY operation - so we really just need a 2x2",
+      "parentUuid": "3c303b1d_122d52bd",
       "range": {
         "startLine": 267,
         "startChar": 0,

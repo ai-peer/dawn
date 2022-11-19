@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7de7a3_9314ea0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-19T00:06:19Z",
+      "side": 1,
+      "message": "I know I need to regenerate tint expectations...for some reason it was regenerating like everything so I left them un-updated for now. \n\nAlso, sorry to leave this open, but I\u0027ll be out next work for the U.S. holiday.",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
