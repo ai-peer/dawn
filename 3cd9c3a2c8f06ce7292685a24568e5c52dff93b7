@@ -16,6 +16,24 @@
       "message": "This may be why we can\u0027t trigger this issue. The overrides are already gone by the time any of our internal transforms are run.\n\nI can trigger this with a unit test for the `ModuleScopeVarToEntryPointParamTest` transform, though I do have to disable another validation error we hit if overrides are not removed beforehand. So clearly we are relying on overrides being removed for multiple reasons at the moment.",
       "revId": "3cd9c3a2c8f06ce7292685a24568e5c52dff93b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98b1b5d3_237b51db",
+        "filename": "test/tint/bug/tint/1764.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T17:41:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7379722c_7365fc77",
+      "revId": "3cd9c3a2c8f06ce7292685a24568e5c52dff93b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
