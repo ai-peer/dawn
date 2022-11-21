@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef6460d_9cfa860e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:30:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cc99d0ca63e70c23d1aa983544980722d6279ced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35be0860_4f2c8e8c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:30:19Z",
+      "side": 1,
+      "message": "for a follow-up: since Enabled will be the default, in the rarer case when it is disabled, it would be great to create a fake blob cache on Device Initialize - then this function will never return nullptr and we can simplify code to assume that.",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 19
+      },
+      "revId": "cc99d0ca63e70c23d1aa983544980722d6279ced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
