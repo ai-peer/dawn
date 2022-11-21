@@ -22,6 +22,30 @@
       },
       "revId": "92af2b56935e3ba774a9499c5065d11e5a053b43",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d87eb84_0fce42aa",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-21T23:10:37Z",
+      "side": 0,
+      "message": "Yup, because GetSpace is already templated to compute the sizeof for the type of outStruct.",
+      "parentUuid": "4b6db933_ff2c6e7c",
+      "range": {
+        "startLine": 603,
+        "startChar": 57,
+        "endLine": 603,
+        "endChar": 75
+      },
+      "revId": "92af2b56935e3ba774a9499c5065d11e5a053b43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
