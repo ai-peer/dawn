@@ -16,6 +16,24 @@
       "message": "nit: there was still an outstanding (if minor) comment.",
       "revId": "5008af273c5695ca73ef0634a90b5ef6e9ea9afb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f039a1e0_f21fb4ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T12:03:43Z",
+      "side": 1,
+      "message": "I know. But the change hadn\u0027t been updated in nearly a week, and the minor nit can be mostly addressed by updating the bug, which I\u0027ll do.",
+      "parentUuid": "541f26c5_a03b0bb6",
+      "revId": "5008af273c5695ca73ef0634a90b5ef6e9ea9afb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
