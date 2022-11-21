@@ -1,7 +1,7 @@
 #version 310 es
 
 void length_afde8b() {
-  float res = length(vec2(1.0f));
+  float res = 1.414213538f;
 }
 
 vec4 vertex_main() {
@@ -21,7 +21,7 @@ void main() {
 precision mediump float;
 
 void length_afde8b() {
-  float res = length(vec2(1.0f));
+  float res = 1.414213538f;
 }
 
 void fragment_main() {
@@ -35,7 +35,7 @@ void main() {
 #version 310 es
 
 void length_afde8b() {
-  float res = length(vec2(1.0f));
+  float res = 1.414213538f;
 }
 
 void compute_main() {
