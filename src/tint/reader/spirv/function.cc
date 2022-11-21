@@ -2859,6 +2859,7 @@ bool FunctionEmitter::EmitBasicBlock(const BlockInfo& block_info) {
     // construct to cause the divergent branching.  But otherwise, we will
     // emit a "normal" block terminator, which occurs at the end of this method.
     bool has_normal_terminator = true;
+    bool is_continuing = false;
 
     for (auto iter = entering_constructs.rbegin(); iter != entering_constructs.rend(); ++iter) {
         const Construct* construct = *iter;
@@ -2885,6 +2886,7 @@ bool FunctionEmitter::EmitBasicBlock(const BlockInfo& block_info) {
                         return false;
                     }
                 } else {
+                    is_continuing = true;
                     if (!EmitContinuingStart(construct)) {
                         return false;
                     }
@@ -2920,7 +2922,7 @@ bool FunctionEmitter::EmitBasicBlock(const BlockInfo& block_info) {
     }
 
     if (has_normal_terminator) {
-        if (!EmitNormalTerminator(block_info)) {
+        if (!EmitNormalTerminator(block_info, is_continuing)) {
             return false;
         }
     }
@@ -3198,7 +3200,7 @@ bool FunctionEmitter::EmitContinuingStart(const Construct* construct) {
     return success();
 }
 
-bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info) {
+bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info, bool is_continuing) {
     const auto& terminator = *(block_info.basic_block->terminator());
     switch (opcode(terminator)) {
         case spv::Op::OpReturn:
@@ -3268,19 +3270,40 @@ bool FunctionEmitter::EmitNormalTerminator(const BlockInfo& block_info) {
 
             // At this point, at most one edge is kForward or kIfBreak.
 
-            // Emit an 'if' statement to express the *other* branch as a conditional
-            // break or continue.  Either or both of these could be nullptr.
-            // (A nullptr is generated for kIfBreak, kForward, or kBack.)
-            // Also if one of the branches is an if-break out of an if-selection
-            // requiring a flow guard, then get that flow guard name too.  It will
-            // come from at most one of these two branches.
-            std::string flow_guard;
-            auto* true_branch = MakeBranchDetailed(block_info, *true_info, &flow_guard);
-            auto* false_branch = MakeBranchDetailed(block_info, *false_info, &flow_guard);
+            // If this is a continuing block and a `break` is to be emitted, then this needs to be
+            // converted to a `break-if`. This may involve inverting the condition if this was a
+            // `break-unless`.
+            if (is_continuing &&
+                (true_kind == EdgeKind::kLoopBreak || false_kind == EdgeKind::kLoopBreak)) {
+                if (true_kind == EdgeKind::kLoopBreak && false_kind == EdgeKind::kLoopBreak) {
+                    // Both branches break ... ?
+                    return Fail() << "Both branches of if inside continuing break.";
+                }
 
-            AddStatement(MakeSimpleIf(cond, true_branch, false_branch));
-            if (!flow_guard.empty()) {
-                PushGuard(flow_guard, statements_stack_.Back().GetEndId());
+                if (true_kind == EdgeKind::kLoopBreak) {
+                    AddStatement(create<ast::BreakIfStatement>(Source{}, cond));
+                } else {
+                    AddStatement(create<ast::BreakIfStatement>(
+                        Source{},
+                        create<ast::UnaryOpExpression>(Source{}, ast::UnaryOp::kNot, cond)));
+                }
+                return true;
+
+            } else {
+                // Emit an 'if' statement to express the *other* branch as a conditional
+                // break or continue.  Either or both of these could be nullptr.
+                // (A nullptr is generated for kIfBreak, kForward, or kBack.)
+                // Also if one of the branches is an if-break out of an if-selection
+                // requiring a flow guard, then get that flow guard name too.  It will
+                // come from at most one of these two branches.
+                std::string flow_guard;
+                auto* true_branch = MakeBranchDetailed(block_info, *true_info, &flow_guard);
+                auto* false_branch = MakeBranchDetailed(block_info, *false_info, &flow_guard);
+
+                AddStatement(MakeSimpleIf(cond, true_branch, false_branch));
+                if (!flow_guard.empty()) {
+                    PushGuard(flow_guard, statements_stack_.Back().GetEndId());
+                }
             }
             return true;
         }

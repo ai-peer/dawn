@@ -709,8 +709,9 @@ class FunctionEmitter {
     /// resolving structured control flow. That is, if the basic block
     /// terminator calls for it, emit the fallthrough break, continue, return, or kill commands.
     /// @param block_info the block with the terminator to emit (if any)
+    /// @param is_continuing true if this is a continuing block
     /// @returns false if emission failed
-    bool EmitNormalTerminator(const BlockInfo& block_info);
+    bool EmitNormalTerminator(const BlockInfo& block_info, bool is_continuing);
 
     /// Returns a new statement to represent the given branch representing a
     /// "normal" terminator, as in the sense of EmitNormalTerminator.  If no
