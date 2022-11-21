@@ -1,0 +1,274 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b38997_edd4e4e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "LGTM overall, some comments\n\nalso:\n\ncan we add ASSERTs in TerribleCommandBuffer GetCmdSpace that assert that the sizes requested are properly aligned? that way the fuzzer will catch bugs when things are not aligned correctly",
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1043c67a_fa7c51a0",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "should this also be 1u ?",
+      "range": {
+        "startLine": 634,
+        "startChar": 53,
+        "endLine": 634,
+        "endChar": 78
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933d9b15_6737fe31",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "this computation doesn\u0027t account for alignment like the other one does",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 659,
+        "endChar": 104
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38fc044b_9c2b3d7a",
+        "filename": "src/dawn/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "nit: prefer cstddef (c headers over the c++ ones)",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 19
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e550f4fb_a65104fe",
+        "filename": "src/dawn/common/Math.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "this is used a ton now in the generated code - could we make a constexpr version? we could inline it in WireCmd.cpp if that\u0027s easier so we don\u0027t have to deal with asserts about the alignment (since we always use kWireAlignment)\n\nor if you make the alignment also a template arg, like `Align\u003c/* Value */ sizeof(T), /* Alignment */8\u003e();`\nI think you could then make some helper struct like:\n\n`struct alignas(Alignment) helper {};` which should fail to compile if N is not a postive power of 2, and you can static assert that Value is not too big",
+      "range": {
+        "startLine": 65,
+        "startChar": 7,
+        "endLine": 65,
+        "endChar": 18
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8b6e738_5945363d",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "it\u0027s odd we don\u0027t divide by the aligned size of T. would be nicer if we made a constexpr version of Align and used that here instead",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6669a3_9098c383",
+        "filename": "src/dawn/wire/ChunkedCommandSerializer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "seems like this doesn\u0027t need the Impl suffix since there isn\u0027t an analogous `SerializeCommandExtension` function",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 40
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74054c7_d5b2fb2c",
+        "filename": "src/dawn/wire/ChunkedCommandSerializer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "before, doesn\u0027t it use WIRE_TRY which returns early on failure?",
+      "range": {
+        "startLine": 59,
+        "startChar": 7,
+        "endLine": 59,
+        "endChar": 13
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "560fb38c_69e38b69",
+        "filename": "src/dawn/wire/ChunkedCommandSerializer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "I believe this can be a c++ fold expression (maybe)\n\nsomething like: `Align(extensions.size, 8) + ... + commandSize`\n\nnot sure if it works for dereferencing a member inside a function call though",
+      "range": {
+        "startLine": 117,
+        "startChar": 44,
+        "endLine": 117,
+        "endChar": 83
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ac0e82_9f5dbcb5",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "prexisting: maybe we can zero out the size if readHandle is null since we would serialize nothing",
+      "range": {
+        "startLine": 107,
+        "startChar": 25,
+        "endLine": 107,
+        "endChar": 51
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197aaeac_b3ddc2a2",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "prexisting: maybe we can zero out the size if writeHandle is null since we would serialize nothing",
+      "range": {
+        "startLine": 115,
+        "startChar": 25,
+        "endLine": 115,
+        "endChar": 52
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35025eac_647a1115",
+        "filename": "src/dawn/wire/server/ServerBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:23:18Z",
+      "side": 1,
+      "message": "prexisting: maybe we can zero out the size if !(isSuccess \u0026\u0026 isRead) since we would serialize nothing",
+      "range": {
+        "startLine": 264,
+        "startChar": 43,
+        "endLine": 264,
+        "endChar": 67
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
