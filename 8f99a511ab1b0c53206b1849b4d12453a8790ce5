@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c27f09fd_99d1e492",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1474,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:56:48Z",
+      "side": 1,
+      "message": "Divide",
+      "range": {
+        "startLine": 1474,
+        "startChar": 11,
+        "endLine": 1474,
+        "endChar": 16
+      },
+      "revId": "8f99a511ab1b0c53206b1849b4d12453a8790ce5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
