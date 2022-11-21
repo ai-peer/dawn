@@ -33,6 +33,80 @@
       "message": "LGTM. Austin or Corentin to +2.",
       "revId": "2aa99344f050eb634d31362901914683eb1df338",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6843180a_2779e80d",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T11:07:27Z",
+      "side": 1,
+      "message": "Can\u0027t we ASSERT that the alternative is DxcVersionInfo since the only place this method is called is behind the UseDXC toggle that (I assume) is forcibly turned off if DXC is not available?",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "706a22e7_f579b8e3",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T11:07:27Z",
+      "side": 1,
+      "message": "Why is this done on the first call to IsDXCAvailable instead of on startup? It would simplify logic a bit and make it more thread safe (for the future), const, etc.",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca14e5ef_f45ff14a",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T11:07:27Z",
+      "side": 1,
+      "message": "typo: Unavailable (the I is not in the correct place)",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 28
+      },
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c678b558_4956b37a",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T11:07:27Z",
+      "side": 1,
+      "message": "nit: Maybe this could be in the dawn_test template directly as other tests may want to use DXC in the future (validation tests if they start running actual backends for example)",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
