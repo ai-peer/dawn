@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "5ddd05e57a4c32f793c1f6b113ee5e8cab02a504",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b41f0be_59eb6e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-21T21:38:08Z",
+      "side": 1,
+      "message": "This is very nice.",
+      "revId": "5ddd05e57a4c32f793c1f6b113ee5e8cab02a504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a38d0d_2e6be263",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3280,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-21T21:38:08Z",
+      "side": 1,
+      "message": "That\u0027s right.\nSPIR-V requires a loop to have a backedge, and this is the block that must have it.",
+      "revId": "5ddd05e57a4c32f793c1f6b113ee5e8cab02a504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
