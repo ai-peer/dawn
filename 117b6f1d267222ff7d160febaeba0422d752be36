@@ -223,6 +223,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b77c8005_647cbe68",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-21T22:12:04Z",
+      "side": 1,
+      "message": "We\u0027re goign to have to do the same code for `::dot` as it will be calling the dot methods. If we did `::dot` first, then `::length` will just become:\n\n```\nval res \u003d Dot(..);\nif (!res) {\n  return utils::Failure;\n}\nval s \u003d Sqrt(res.Get());\n...\n```\n\nWhich re-uses the existing methods and cuts down on duplication in the length method. There is then no need for the vec length methods as they all re-use dot.",
+      "parentUuid": "d8932c63_620647e2",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29fc62c1_5c88ac10",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 2
