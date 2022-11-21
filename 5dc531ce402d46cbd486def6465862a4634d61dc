@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66482067_d7c1d963",
+        "filename": "tools/src/cmd/tint-bench/entry-points.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-21T12:00:48Z",
+      "side": 1,
+      "message": "Laziness. Done.",
+      "parentUuid": "20b19174_6df88c22",
+      "range": {
+        "startLine": 4,
+        "startChar": 26,
+        "endLine": 4,
+        "endChar": 50
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60c40db0_e145a598",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c3970e_306d47ed",
+        "filename": "tools/src/cmd/tint-bench/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-21T12:00:48Z",
+      "side": 1,
+      "message": "can\u0027t do the `--` separation easily, but made this more alike other tools.",
+      "parentUuid": "60c40db0_e145a598",
+      "range": {
+        "startLine": 54,
+        "startChar": 28,
+        "endLine": 54,
+        "endChar": 93
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0c13512_16b34fe8",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-11-18T20:20:00Z",
       "side": 1,
       "message": "nit: this CL would be more clear if it were split into two: one for the extraction to `template.go`, and the other for the adding of `tint-bench`.",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 1
+      },
+      "revId": "5dc531ce402d46cbd486def6465862a4634d61dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a74a6b8_e831d8dc",
+        "filename": "tools/src/template/template.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-21T12:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0c13512_16b34fe8",
       "range": {
         "startLine": 1,
         "startChar": 0,
