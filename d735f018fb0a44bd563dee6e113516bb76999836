@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0258cd6e_045c0077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:43:50Z",
+      "side": 1,
+      "message": "It\u0027s basically impossible to review the generated files. Can the generators be checked in as well? Even better if they can use the existing dawn.json based generator infrastructure.",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a07e83_cc4e63bb",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:43:50Z",
+      "side": 1,
+      "message": "How are these generated? Can we check in the generator code?",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fac8899a_ea17ff9a",
@@ -117,6 +151,23 @@
       "writtenOn": "2022-11-11T20:46:49Z",
       "side": 1,
       "message": "any way we could factor this class with the actual client one?",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b00a7b_46860993",
+        "filename": "src/dawn/fuzzers/lpmfuzz/data_corpus/devicecreatebuffer",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:43:50Z",
+      "side": 1,
+      "message": "Do these risk to need to be updated when Dawn updates structures such as when adding limits? How is this checked automatically?",
       "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
