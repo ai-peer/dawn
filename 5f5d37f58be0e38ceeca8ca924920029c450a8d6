@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da41b04_4dd75314",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:55:34Z",
+      "side": 1,
+      "message": "Would be nice to have a specific bug for inf/nan tests that need fixing.",
+      "range": {
+        "startLine": 509,
+        "startChar": 0,
+        "endLine": 509,
+        "endChar": 19
+      },
+      "revId": "5f5d37f58be0e38ceeca8ca924920029c450a8d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
