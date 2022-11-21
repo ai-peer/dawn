@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5085b5_f3236a72",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:10:20Z",
+      "side": 1,
+      "message": "The recursive encoding method used in the Metal backend worked well to stack workarounds. Is there a way to do something similar to split the regular encoding concerns and the workaround in the frontend as well? Of course it will be more complicated due to the split between the begin and end.",
+      "revId": "5a3ddc31e62f8fcb726c64ebae64e803a045dbc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
