@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db0b4424_6d7e8a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "LGTM too overall",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a37cb58_c7270f16",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4477e3a5_0f0a0e21",
@@ -48,6 +82,132 @@
       "writtenOn": "2022-11-21T10:43:57Z",
       "side": 1,
       "message": "cpplint is unhappy with the c-style casts here. Perhaps just use a `f` suffix?",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "735469ee_948e3193",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "nit: This is no longer just a rotation matrix with the flip-Y. Maybe texcoordMatrix or transformMatrix?",
+      "range": {
+        "startLine": 227,
+        "startChar": 19,
+        "endLine": 227,
+        "endChar": 33
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66adc56a_46a72e2d",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "nit: Maybe RenderToSourceTexture? I originally interpreted the function name to mean that the source texture would be drawn somewhere.",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6a5f61_7e35cb58",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "you can use texutre.GetFormat() now!",
+      "range": {
+        "startLine": 77,
+        "startChar": 26,
+        "endLine": 77,
+        "endChar": 54
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2265149_a213b7c7",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "nit: the rest\n\nditto below",
+      "range": {
+        "startLine": 290,
+        "startChar": 61,
+        "endLine": 290,
+        "endChar": 67
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b6240f6_1f112f5e",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "The switch to Tint is complete, so is this still required to be suppressed?\n\nditto below",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50974d0d_82bef863",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:05:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we combine rotation and flipY tests because they interact with each other? It would ensure that we got the logic in the switch at [1] correct.",
       "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
