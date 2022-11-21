@@ -134,6 +134,30 @@
       },
       "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727b8f82_5deda735",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-21T09:12:43Z",
+      "side": 1,
+      "message": "Done, change to `std::variant\u003cDxcVersionNotAcquired, DxcVersionUnavaliable, DxcVersionInfo\u003e mDxcVersionInfo;`",
+      "parentUuid": "1e5cebc1_9f5a3ed3",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
