@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c81b79_9ed19e73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:17:05Z",
+      "side": 1,
+      "message": "LGTM with Austin\u0027s comments to make the error nicer potentially.",
+      "revId": "9b570646a12efa77078499e019804edb8ff4b576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2fc262_220b5a46",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:17:05Z",
+      "side": 1,
+      "message": "Maybe we could check that nullptr is returned? Ditto in other places.",
+      "revId": "9b570646a12efa77078499e019804edb8ff4b576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
