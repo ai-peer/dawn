@@ -158,6 +158,30 @@
       },
       "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f72d90b1_1e2a05c7",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:38:56Z",
+      "side": 1,
+      "message": "Perfect, thank you!",
+      "parentUuid": "727b8f82_5deda735",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 5
+      },
+      "revId": "4dc40584dde082609734d9e7dea5cb6f87ac386a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
