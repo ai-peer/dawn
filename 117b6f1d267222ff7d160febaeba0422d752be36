@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "243fba7c_8a215def",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T20:47:56Z",
+      "side": 1,
+      "message": "Looks like you might need to find another magic number to use for the end-to-end tests.",
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef33e4c_e8dcf6b6",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T20:47:56Z",
+      "side": 1,
+      "message": "Can\u0027t this be implemented with `sqrt(Dot())`?",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29fc62c1_5c88ac10",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 948,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T20:47:56Z",
+      "side": 1,
+      "message": "doxygen?",
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e25434c7_6c01e1ae",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1029,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T20:47:56Z",
+      "side": 1,
+      "message": "doxygen?",
+      "range": {
+        "startLine": 1027,
+        "startChar": 0,
+        "endLine": 1029,
+        "endChar": 72
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
