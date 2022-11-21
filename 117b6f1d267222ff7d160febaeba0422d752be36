@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec11574e_c31114f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-21T22:03:23Z",
+      "side": 1,
+      "message": "Using 0.0 as the test value for now. Created this bug: https://bugs.chromium.org/p/tint/issues/detail?id\u003d1767",
+      "parentUuid": "ffc7264d_d6dbeaba",
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ef33e4c_e8dcf6b6",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 2
@@ -144,6 +162,30 @@
       "writtenOn": "2022-11-21T21:57:58Z",
       "side": 1,
       "message": "I didn\u0027t realize we haven\u0027t implemented `::dot` yet. Should this be delayed and `::dot` landed first? We shouldn\u0027t need the VecLength methods as `::length` can just use the builtin `Dot` that `::dot` will have to use.",
+      "parentUuid": "07b726ce_0d06738c",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6af69f72_36f08bf0",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-21T22:03:23Z",
+      "side": 1,
+      "message": "In the end, I decided to keep as is, but rewrote VecLength in terms of Dot4. There\u0027s no need for a Sqrt function right now as the result will never be negative, so there\u0027s no failure to catch there (yet).",
       "parentUuid": "07b726ce_0d06738c",
       "range": {
         "startLine": 893,
