@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fcf82b17_be6e950d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-21T21:04:22Z",
+      "side": 1,
+      "message": "The Sqrt implementation could be pulled up to a function as we do for Clamp and then this could be done.",
+      "parentUuid": "2ef33e4c_e8dcf6b6",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29fc62c1_5c88ac10",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 2
