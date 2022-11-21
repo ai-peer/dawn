@@ -111,6 +111,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06b49c2a_46a72322",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:49:43Z",
+      "side": 1,
+      "message": "unit: list the 0 rotation case explicitly instead of using default:",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 16
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "66adc56a_46a72e2d",
         "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
         "patchSetId": 5
@@ -208,6 +231,52 @@
       "writtenOn": "2022-11-21T12:05:58Z",
       "side": 1,
       "message": "Shouldn\u0027t we combine rotation and flipY tests because they interact with each other? It would ensure that we got the logic in the switch at [1] correct.",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acad5a1c_46223e59",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:49:43Z",
+      "side": 1,
+      "message": "unit: could be a const reference to avoid a copy; same in the other tests",
+      "range": {
+        "startLine": 515,
+        "startChar": 9,
+        "endLine": 515,
+        "endChar": 28
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630e25e9_621b5559",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-21T14:49:43Z",
+      "side": 1,
+      "message": "could we also test the case where we don\u0027t set this member at all - i.e. the default?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 45
+      },
       "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
