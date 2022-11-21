@@ -133,6 +133,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d2da4f10_59b200d5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-21T21:57:58Z",
+      "side": 1,
+      "message": "I didn\u0027t realize we haven\u0027t implemented `::dot` yet. Should this be delayed and `::dot` landed first? We shouldn\u0027t need the VecLength methods as `::length` can just use the builtin `Dot` that `::dot` will have to use.",
+      "parentUuid": "07b726ce_0d06738c",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29fc62c1_5c88ac10",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 2
