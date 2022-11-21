@@ -182,6 +182,30 @@
       },
       "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d9f163_caf1cd0c",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "Thanks for the answers. IMHO it seems satisfactory especially given the level of support we get from Intel. Worst case we can easily disable this piece of code so the maintenance burden can be removed instantly if Chromium/Dawn needs it. However this is a third-party code inclusion that\u0027s not already in Chromium so we should go for a third-party review as per the regular process.",
+      "parentUuid": "7bf37ce9_6bb4c9e3",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

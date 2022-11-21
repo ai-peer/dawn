@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31213c29_174db7d6",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "I think things like setupAPI aren\u0027t available on UWP so we should probably make a NULL version of the Intel extension and use it when not targeting WIN32.",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a218ac3_92e7774e",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "Why an optional unique_ptr? Isn\u0027t nullptr enough to represent that the extension wasn\u0027t loaded?",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86bc963a_39295096",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment as to what this does?",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6515edda_45d89cac",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "The code in this file looks like it does what it is supposed to do but I have no idea about the Windows-isms. Maybe we should ask Rafael to review this part?",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa301994_f7a64604",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "nit: DAWN_PLATFORM_IS(64_BIT)",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 13
+      },
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2333c530_dd49a984",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "nit: I think we have a lint somewhere that doesn\u0027t like this style of declaring and using a struct as a single statement. But I could be wrong.",
+      "range": {
+        "startLine": 237,
+        "startChar": 6,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff61111_06b10900",
+        "filename": "third_party/IntelExtension/igdext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T13:37:40Z",
+      "side": 1,
+      "message": "What is the license of this file? Chromium can only use files that have been licensed as open-source I believe, but we should check with legal counsel. Google Chrome can have some non-open source things but that still needs legal review. Basically we need to go through the steps at https://chromium.googlesource.com/chromium/src/+/HEAD/docs/adding_to_third_party.md since this is a new third-party dependency. (IDK if the SPDX-License-Identifier is enough for that process. Maybe we need a LICENSE file)",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
