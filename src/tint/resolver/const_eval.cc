@@ -891,6 +891,44 @@ utils::Result<NumberT> ConstEval::Det2(const Source& source,
 }
 
 template <typename NumberT>
+utils::Result<NumberT> ConstEval::VecLength(const Source& source,
+                                            NumberT x,
+                                            NumberT y,
+                                            NumberT z,
+                                            NumberT w) {
+    auto d = Dot4(source, x, y, z, w, x, y, z, w);
+    if (!d) {
+        return utils::Failure;
+    }
+    return NumberT{std::sqrt(d.Get())};
+}
+
+auto ConstEval::Vec2LengthFunc(const Source& source, const sem::Type* elem_ty) {
+    return [=](auto x, auto y) -> ImplResult {
+        if (auto r = VecLength(source, x, y)) {
+            return CreateElement(builder, source, elem_ty, r.Get());
+        }
+        return utils::Failure;
+    };
+}
+auto ConstEval::Vec3LengthFunc(const Source& source, const sem::Type* elem_ty) {
+    return [=](auto x, auto y, auto z) -> ImplResult {
+        if (auto r = VecLength(source, x, y, z)) {
+            return CreateElement(builder, source, elem_ty, r.Get());
+        }
+        return utils::Failure;
+    };
+}
+auto ConstEval::Vec4LengthFunc(const Source& source, const sem::Type* elem_ty) {
+    return [=](auto x, auto y, auto z, auto w) -> ImplResult {
+        if (auto r = VecLength(source, x, y, z, w)) {
+            return CreateElement(builder, source, elem_ty, r.Get());
+        }
+        return utils::Failure;
+    };
+}
+
+template <typename NumberT>
 utils::Result<NumberT> ConstEval::Clamp(const Source&, NumberT e, NumberT low, NumberT high) {
     return NumberT{std::min(std::max(e, low), high)};
 }
@@ -2141,6 +2179,44 @@ ConstEval::Result ConstEval::insertBits(const sem::Type* ty,
         return Dispatch_iu32(create, c0, c1);
     };
     return TransformElements(builder, ty, transform, args[0], args[1]);
+}
+
+ConstEval::Result ConstEval::length(const sem::Type* ty,
+                                    utils::VectorRef<const sem::Constant*> args,
+                                    const Source& source) {
+    auto calculate = [&]() -> ImplResult {
+        auto* vec_ty = args[0]->Type()->As<sem::Vector>();
+
+        // Evaluates to the absolute value of e if T is scalar.
+        if (vec_ty == nullptr) {
+            auto create = [&](auto e) {
+                using NumberT = decltype(e);
+                return CreateElement(builder, source, ty, NumberT{std::abs(e)});
+            };
+            return Dispatch_fa_f32_f16(create, args[0]);
+        }
+
+        // Evaluates to sqrt(e[0]^2 + e[1]^2 + ...) if T is a vector type.
+        switch (vec_ty->Width()) {
+            case 2:
+                return Dispatch_fa_f32_f16(Vec2LengthFunc(source, ty), args[0]->Index(0),
+                                           args[0]->Index(1));
+            case 3:
+                return Dispatch_fa_f32_f16(Vec3LengthFunc(source, ty), args[0]->Index(0),
+                                           args[0]->Index(1), args[0]->Index(2));
+            case 4:
+                return Dispatch_fa_f32_f16(Vec4LengthFunc(source, ty), args[0]->Index(0),
+                                           args[0]->Index(1), args[0]->Index(2), args[0]->Index(3));
+        }
+
+        TINT_ICE(Resolver, builder.Diagnostics()) << "Expected scalar or vector";
+        return utils::Failure;
+    };
+    auto r = calculate();
+    if (!r) {
+        AddNote("when calculating length", source);
+    }
+    return r;
 }
 
 ConstEval::Result ConstEval::max(const sem::Type* ty,

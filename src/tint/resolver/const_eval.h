@@ -584,6 +584,15 @@ class ConstEval {
                       utils::VectorRef<const sem::Constant*> args,
                       const Source& source);
 
+    /// length builtin
+    /// @param ty the expression type
+    /// @param args the input arguments
+    /// @param source the source location
+    /// @return the result value, or null if the value cannot be calculated
+    Result length(const sem::Type* ty,
+                  utils::VectorRef<const sem::Constant*> args,
+                  const Source& source);
+
     /// max builtin
     /// @param ty the expression type
     /// @param args the input arguments
@@ -936,6 +945,19 @@ class ConstEval {
                                 NumberT b1,
                                 NumberT b2);
 
+    /// Returns the length of the vector [x, y, z, w]
+    /// @param source the source location
+    /// @param x the first vector component
+    /// @param y the second vector component
+    /// @param z the third vector component
+    /// @param w the fourth vector component
+    template <typename NumberT>
+    utils::Result<NumberT> VecLength(const Source& source,
+                                     NumberT x,
+                                     NumberT y,
+                                     NumberT z = NumberT{0},
+                                     NumberT w = NumberT{0});
+
     /// Clamps e between low and high
     /// @param source the source location
     /// @param e the number to clamp
@@ -1007,6 +1029,27 @@ class ConstEval {
     /// @param elem_ty the element type of the Constant to create on success
     /// @returns the callable function
     auto ClampFunc(const Source& source, const sem::Type* elem_ty);
+
+    /// Returns a callable that calls VecLength with two elements, and creates a Constant with its
+    /// result of type `elem_ty` if successful, or returns Failure otherwise.
+    /// @param source the source location
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Vec2LengthFunc(const Source& source, const sem::Type* elem_ty);
+
+    /// Returns a callable that calls VecLength with three elements, and creates a Constant with its
+    /// result of type `elem_ty` if successful, or returns Failure otherwise.
+    /// @param source the source location
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Vec3LengthFunc(const Source& source, const sem::Type* elem_ty);
+
+    /// Returns a callable that calls VecLength with four elements, and creates a Constant with its
+    /// result of type `elem_ty` if successful, or returns Failure otherwise.
+    /// @param source the source location
+    /// @param elem_ty the element type of the Constant to create on success
+    /// @returns the callable function
+    auto Vec4LengthFunc(const Source& source, const sem::Type* elem_ty);
 
     ProgramBuilder& builder;
 };
