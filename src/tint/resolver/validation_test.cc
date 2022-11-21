@@ -1027,10 +1027,10 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfTrueInContinuing) {
                                                   //   }
                                                   // }
     WrapInFunction(Loop(Block(), cont));
-    EXPECT_TRUE(r()->Resolve()) << r()->error();
+    EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfElseInContinuing) {
@@ -1041,10 +1041,10 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseInContinuing) {
                                              //   }
                                              // }
     WrapInFunction(Loop(Block(), cont));
-    EXPECT_TRUE(r()->Resolve()) << r()->error();
+    EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInContinuing) {
@@ -1054,12 +1054,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "12:34 note: break statement is not directly in if statement block");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfInIfInContinuing) {
@@ -1073,13 +1069,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfInIfInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: if statement containing break statement is not directly in "
-              "continuing block");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfTrueMultipleStmtsInContinuing) {
@@ -1092,12 +1083,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfTrueMultipleStmtsInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: if statement block contains multiple statements");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfElseMultipleStmtsInContinuing) {
@@ -1111,12 +1098,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseMultipleStmtsInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: if statement block contains multiple statements");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfElseIfInContinuing) {
@@ -1129,12 +1112,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseIfInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: else has condition");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfNonEmptyElseInContinuing) {
@@ -1148,12 +1127,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfNonEmptyElseInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: non-empty false block");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfElseNonEmptyTrueInContinuing) {
@@ -1167,12 +1142,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfElseNonEmptyTrueInContinuing) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: non-empty true block");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakInIfInContinuingNotLast) {
@@ -1185,13 +1156,8 @@ TEST_F(ResolverValidationTest, Stmt_BreakInIfInContinuingNotLast) {
     WrapInFunction(Loop(Block(), cont));
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 warning: use of deprecated language feature: `break` must not be used to exit "
-              "from a continuing block. Use `break-if` instead.\n"
-              "12:34 error: break statement in a continuing block must be the single "
-              "statement of an if statement's true or false block, and that if "
-              "statement must be the last statement of the continuing block\n"
-              "56:78 note: if statement containing break statement is not the last "
-              "statement of the continuing block");
+              "12:34 error: `break` must not be used to exit from a continuing block. "
+              "Use `break-if` instead.");
 }
 
 TEST_F(ResolverValidationTest, Stmt_BreakNotInLoopOrSwitch) {

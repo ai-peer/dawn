@@ -3417,8 +3417,6 @@ bool Builder::GenerateIfStatement(const ast::IfStatement* stmt) {
         //  continuing { ...
         //    if (cond) {} else {break;}
         //  }
-        //
-        // TODO(crbug.com/tint/1451): Remove this when the if break construct is made an error.
         auto is_just_a_break = [](const ast::BlockStatement* block) {
             return block && (block->statements.Length() == 1) &&
                    block->Last()->Is<ast::BreakStatement>();
