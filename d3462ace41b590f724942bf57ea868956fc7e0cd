@@ -33,6 +33,24 @@
       "message": "+2, but it looks like you need to remove or update some end-to-end graphicsfuzz tests",
       "revId": "d3462ace41b590f724942bf57ea868956fc7e0cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4283e7cd_45489f0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-21T21:02:02Z",
+      "side": 1,
+      "message": "Yup, working on it. Pulling the change out to its own CL as it appears I missed a case in the spirv-reader where we generate `if-break` or `if-else-break` statements. Will land that first and rebase this on top.",
+      "parentUuid": "e29a3cfd_f50221c3",
+      "revId": "d3462ace41b590f724942bf57ea868956fc7e0cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
