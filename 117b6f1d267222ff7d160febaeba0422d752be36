@@ -199,6 +199,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8932c63_620647e2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-21T22:06:44Z",
+      "side": 1,
+      "message": "@dsinclair@chromium.org I do have Dot2/3/4 implemented as helpers because they are used by `cross`, so I am able to use them. I can call these directly, and then take the square root of the result. I just found the top-level function easier to read with VecLength functions.",
+      "parentUuid": "6af69f72_36f08bf0",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29fc62c1_5c88ac10",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 2
