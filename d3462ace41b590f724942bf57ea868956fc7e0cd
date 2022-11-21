@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "d3462ace41b590f724942bf57ea868956fc7e0cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e29a3cfd_f50221c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T20:49:32Z",
+      "side": 1,
+      "message": "+2, but it looks like you need to remove or update some end-to-end graphicsfuzz tests",
+      "revId": "d3462ace41b590f724942bf57ea868956fc7e0cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
