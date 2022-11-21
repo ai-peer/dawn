@@ -16,6 +16,120 @@
       "message": "Together with the new tint transform it solve the D3D12 issue. PTAL",
       "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ff7c8f_7d8038d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa4e3ad_0fa57c76",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "u-nit: doesn\u0027t have a corresponding vertex output",
+      "range": {
+        "startLine": 391,
+        "startChar": 55,
+        "endLine": 391,
+        "endChar": 73
+      },
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d286ef27_aa9edc31",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "nit: can\u0027t we do something like used \u003d empty bitset, if fragment used \u003d fragment\u0027s used variables?\n\nThis would truncate all the varyings from vertex only pipelines but that seems ok? It would then gain us that we can pass a bitset directly instead of a pointer to a bitset.\n\nActually we should probably make a small investigation of what happens on various backends when there are vertex outputs with vertex-only pipelines. There is a non-zero risk that we\u0027ll need to validate that out.",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d44a873c_1cf83c59",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "typo: fragment",
+      "range": {
+        "startLine": 362,
+        "startChar": 25,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bb198f_953edbb3",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "nit: Maybe comment that these tests are not in RenderPipelineValidationTests because we want to test the compilation of the pipeline in the D3D12 backend.",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b9cc4e_5809814f",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-21T12:39:25Z",
+      "side": 1,
+      "message": "nit: we could maybe have a check in Dawn to see if the two shader interfaces happen to match exactly in which case we can set the bitset to all false and avoid the extra transform.",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
