@@ -210,6 +210,30 @@
       },
       "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6f2647_2a18e235",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:43:57Z",
+      "side": 1,
+      "message": "Looks good to me. Thank you.",
+      "parentUuid": "2059c26a_a5010060",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 268,
+        "endChar": 65
+      },
+      "revId": "000e2e68458e210a95a40c2b0aaafd062e081158",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

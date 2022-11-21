@@ -16,6 +16,40 @@
       "message": "I know I need to regenerate tint expectations...for some reason it was regenerating like everything so I left them un-updated for now. \n\nAlso, sorry to leave this open, but I\u0027ll be out next work for the U.S. holiday.",
       "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f73aa3d_d5d70fd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:43:57Z",
+      "side": 1,
+      "message": "LGTM - thank you for the changes, much nicer. Austin or Corentin for +2 (presubmits also need fixing).",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4477e3a5_0f0a0e21",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:43:57Z",
+      "side": 1,
+      "message": "cpplint is unhappy with the c-style casts here. Perhaps just use a `f` suffix?",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
