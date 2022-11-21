@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da266247_ac9eec52",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1445,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-21T08:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30470647_c66c8462",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d262876_a3dec99a",
@@ -300,6 +318,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d58c23fa_7c5c1aed",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-21T08:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0f0d266_74b01585",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f91f3f0f_4bc618e3",
@@ -313,6 +349,24 @@
       "writtenOn": "2022-11-10T05:49:52Z",
       "side": 1,
       "message": "nit: \"Failed to allocate memory for buffer mapping\"",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d699cd41_95c73ef0",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-21T08:39:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91f3f0f_4bc618e3",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
