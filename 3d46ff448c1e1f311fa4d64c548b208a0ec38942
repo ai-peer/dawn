@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d7dafa9_f8affda4",
+        "filename": "src/tint/resolver/const_eval_conversion_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-21T10:52:54Z",
+      "side": 1,
+      "message": "These values aren\u0027t actually being tested. Might as well make them 0 to avoid any confusion around what\u0027s being tested.",
+      "range": {
+        "startLine": 443,
+        "startChar": 63,
+        "endLine": 443,
+        "endChar": 78
+      },
+      "revId": "3d46ff448c1e1f311fa4d64c548b208a0ec38942",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
