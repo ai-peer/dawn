@@ -105,6 +105,24 @@
       "parentUuid": "0011c4ea_38d86366",
       "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8855f31_b3915e0b",
+        "filename": "test/tint/builtins/repeated_use.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-21T15:43:03Z",
+      "side": 1,
+      "message": "Instead of changing the builtin, move the value to a `let`.",
+      "parentUuid": "b655e4aa_369fb719",
+      "revId": "2e6c1d74a3c7aed3d0177400697056ec0718b03f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
