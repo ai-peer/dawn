@@ -64,6 +64,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6844b1_e7133d92",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dba181d5_a4c1fb87",
+      "range": {
+        "startLine": 181,
+        "startChar": 81,
+        "endLine": 181,
+        "endChar": 93
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb39039_cd620729",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d84821_be5510ba",
+      "range": {
+        "startLine": 181,
+        "startChar": 94,
+        "endLine": 181,
+        "endChar": 107
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7114b091_649e887f",
@@ -77,6 +125,30 @@
       "writtenOn": "2022-11-22T14:33:14Z",
       "side": 1,
       "message": "count may be uint64_t, and it could be narrowed to size_t which is 32-bit sometimes",
+      "range": {
+        "startLine": 665,
+        "startChar": 47,
+        "endLine": 665,
+        "endChar": 52
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e78addc9_2a0e7326",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7114b091_649e887f",
       "range": {
         "startLine": 665,
         "startChar": 47,
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f947595f_1d199044",
+        "filename": "src/dawn/tests/unittests/MathTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fa6f1b8_4450ff21",
+      "range": {
+        "startLine": 200,
+        "startChar": 28,
+        "endLine": 200,
+        "endChar": 34
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00f6c076_c1e8549f",
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1668ae8_ab82ab71",
+        "filename": "src/dawn/tests/unittests/MathTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00f6c076_c1e8549f",
+      "range": {
+        "startLine": 208,
+        "startChar": 28,
+        "endLine": 208,
+        "endChar": 34
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e377445_b096363a",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-22T14:33:14Z",
       "side": 1,
       "message": "count may be uint64_t, and it could be narrowed to size_t which is 32-bit sometimes",
+      "range": {
+        "startLine": 56,
+        "startChar": 36,
+        "endLine": 56,
+        "endChar": 41
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ef39384_430971ca",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T19:38:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e377445_b096363a",
       "range": {
         "startLine": 56,
         "startChar": 36,
