@@ -1629,9 +1629,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
             return true;
         }
         case sem::BuiltinType::kAtomicCompareExchangeWeak: {
-            // Emit the builtin return type unique to this overload. This does not
-            // exist in the AST, so it will not be generated in Generate().
-            if (!EmitStructTypeOnce(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
                 return false;
             }
 
@@ -3125,12 +3123,12 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const sem::Constant* constan
             return true;
         },
         [&](const sem::Struct* s) {
+            if (!EmitStructType(&helpers_, s)) {
+                return false;
+            }
+
             if (constant->AllZero()) {
-                out << "(";
-                if (!EmitType(out, s, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
-                    return false;
-                }
-                out << ")0";
+                out << "(" << StructName(s) << ")0";
                 return true;
             }
 
@@ -3869,6 +3867,11 @@ bool GeneratorImpl::EmitTypeAndName(std::ostream& out,
 }
 
 bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
+    auto it = emitted_structs_.emplace(str);
+    if (!it.second) {
+        return true;
+    }
+
     line(b) << "struct " << StructName(str) << " {";
     {
         ScopedIndent si(b);
@@ -3943,14 +3946,6 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
 
     line(b) << "};";
     return true;
-}
-
-bool GeneratorImpl::EmitStructTypeOnce(TextBuffer* buffer, const sem::Struct* str) {
-    auto it = emitted_structs_.emplace(str);
-    if (!it.second) {
-        return true;
-    }
-    return EmitStructType(buffer, str);
 }
 
 bool GeneratorImpl::EmitUnaryOp(std::ostream& out, const ast::UnaryOpExpression* expr) {
