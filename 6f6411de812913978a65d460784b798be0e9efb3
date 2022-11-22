@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed563ce3_e7107234",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T22:15:54Z",
+      "side": 1,
+      "message": "this is how Chromium-style is now, but the rest of Dawn doesn\u0027t do that. generally we have reference mean \"not mutable\" and pointer mean \"may be mutable\"\n\nthis has been debated around, but for now, could we keep it as a pointer for consistency?",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 0
+      },
+      "revId": "6f6411de812913978a65d460784b798be0e9efb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb828287_936a98cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T22:15:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6f6411de812913978a65d460784b798be0e9efb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
