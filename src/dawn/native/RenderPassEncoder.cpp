@@ -160,7 +160,7 @@ void RenderPassEncoder::APIEnd() {
 }
 
 void RenderPassEncoder::APIEndPass() {
-    GetDevice()->EmitDeprecationWarning("endPass() has been deprecated. Use end() instead.");
+    DAWN_EMIT_DEPRECATION_WARNING(GetDevice(), "endPass() has been deprecated. Use end() instead.");
     APIEnd();
 }
 
