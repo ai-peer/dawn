@@ -247,6 +247,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d71ab05_60eb43cf",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T02:25:20Z",
+      "side": 1,
+      "message": "I implemented `dot` and rebased this CL on top of it. I did the factoring out to a shared private `Dot` function in this CL, not the parent.",
+      "parentUuid": "b77c8005_647cbe68",
+      "range": {
+        "startLine": 893,
+        "startChar": 0,
+        "endLine": 953,
+        "endChar": 1
+      },
+      "revId": "117b6f1d267222ff7d160febaeba0422d752be36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29fc62c1_5c88ac10",
         "filename": "src/tint/resolver/const_eval.h",
         "patchSetId": 2
