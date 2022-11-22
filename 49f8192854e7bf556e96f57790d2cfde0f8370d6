@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f3e4edd_a370e66e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2230,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T18:44:21Z",
+      "side": 1,
+      "message": "Discussed with team, and this Note will be removed from the spec.",
+      "parentUuid": "c7a0cc0c_627f93c5",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bad2e643_c761507b",
@@ -73,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c05105f_eab1f966",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2232,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T18:44:21Z",
+      "side": 1,
+      "message": "`length` only applies to floats, so the use-case you\u0027re pointing out won\u0027t happen here. I think we should hold off on extracting Abs for this.",
+      "parentUuid": "bad2e643_c761507b",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9fc4c9d5_bb049809",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
@@ -84,6 +120,24 @@
       "writtenOn": "2022-11-22T13:45:52Z",
       "side": 1,
       "message": "Can you move this check up to the `Sqrt` above and change this to just call the `SqrtFunc`?",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea9556c_9db78801",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T18:44:21Z",
+      "side": 1,
+      "message": "Done. Good idea.",
+      "parentUuid": "9fc4c9d5_bb049809",
       "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
