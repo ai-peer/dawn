@@ -16,6 +16,52 @@
       "message": "Please take a look, thanks",
       "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "707ea277_eba23221",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T13:57:12Z",
+      "side": 1,
+      "message": "is there value in having this boolean instead of simply not storing DxcVersionInfo at all if the versions are not \u003e\u003d 1.6?\n\nThe call to IsDxcAvailable() can then simply be `return holds_alternative\u003cDxcVersionInfo\u003e()`",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f22bee_e409d873",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T13:57:12Z",
+      "side": 1,
+      "message": "may not need this state now since we always set it on Initialize. It can start in state DxcVersionUnavailable, and transition to DxcVersionInfo if DXC is present and high enough version. Otherwise, stay as DxcVersionUnavailable",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 49
+      },
+      "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
