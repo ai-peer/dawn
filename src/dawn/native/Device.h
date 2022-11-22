@@ -342,6 +342,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     size_t GetLazyClearCountForTesting();
     void IncrementLazyClearCountForTesting();
     size_t GetDeprecationWarningCountForTesting();
+    void EmitDeprecationWarning(const std::string& warning);
     void EmitDeprecationWarning(const char* warning);
     void EmitLog(const char* message);
     void EmitLog(WGPULoggingType loggingType, const char* message);

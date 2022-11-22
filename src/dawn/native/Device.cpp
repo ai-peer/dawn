@@ -1324,6 +1324,10 @@ size_t DeviceBase::GetDeprecationWarningCountForTesting() {
     return mDeprecationWarnings->count;
 }
 
+void DeviceBase::EmitDeprecationWarning(const std::string& warning) {
+    EmitDeprecationWarning(warning.c_str());
+}
+
 void DeviceBase::EmitDeprecationWarning(const char* warning) {
     mDeprecationWarnings->count++;
     if (mDeprecationWarnings->emitted.insert(warning).second) {
