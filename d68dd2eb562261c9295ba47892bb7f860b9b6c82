@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4609b8b_4d3ce702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T14:03:56Z",
+      "side": 1,
+      "message": "As discussed, I\u0027m not convinced by this class, and I\u0027d like to talk about how we structure values. +2\u0027ing so we can iterate.",
+      "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b204a42_a01d25a3",
