@@ -277,6 +277,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afde03a4_ea007dc4",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T03:19:20Z",
+      "side": 1,
+      "message": "Ah, I convinced myself that using `align(sizeof(T))` would be fine since it would just be a tighter bound, but didn\u0027t consider an extreme case like a char where the bound would be unreasonably tight. Good catch thanks!",
+      "parentUuid": "e638d91d_7e8b58d4",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c6669a3_9098c383",

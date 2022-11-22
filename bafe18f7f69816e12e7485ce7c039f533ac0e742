@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7a1ef441_f6f58247",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T03:19:20Z",
+      "side": 1,
+      "message": "Oh! Didn\u0027t realize there was a bug. Thanks!",
+      "parentUuid": "ccb9f7b2_0e940f17",
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8742c595_0fba8899",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "764887a3_08ce41e2",
+        "filename": "src/dawn/common/Math.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T03:19:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b70ddb0_57636b07",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5374931c_08df6c34",
@@ -71,6 +113,30 @@
       "writtenOn": "2022-11-22T01:28:28Z",
       "side": 1,
       "message": "I think this should be \u003e\nthe equal-to case should be OK since at worst, maxCount * sizeof(T) would then equal the max size_t - which does not overflow",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 57,
+        "endChar": 16
+      },
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d1cbced_b1e4f6e1",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T03:19:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5374931c_08df6c34",
       "range": {
         "startLine": 57,
         "startChar": 14,

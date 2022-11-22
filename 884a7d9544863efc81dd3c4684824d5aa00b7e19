@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b46e438_72db1e64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T03:19:20Z",
+      "side": 1,
+      "message": "I modified the structure a bit and moved the max logic into the same place instead of repeating it. Lmk if it seems ok!",
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
