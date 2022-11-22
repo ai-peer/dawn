@@ -16,6 +16,46 @@
       "message": "Still LGTM",
       "revId": "da303a119483c0ddad886827c23533487cadf22a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67217ed3_eacf733c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:14:39Z",
+      "side": 1,
+      "message": "LGTM after corentin\u0027s other comments as well",
+      "revId": "da303a119483c0ddad886827c23533487cadf22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c37ddb1_d0305674",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:14:39Z",
+      "side": 1,
+      "message": "in addition, we could test non-overlapping ranges like 0-\u003e8 and 8-\u003e16 to be sure that the second call isn\u0027t failing because the ranges overlap",
+      "range": {
+        "startLine": 327,
+        "startChar": 3,
+        "endLine": 335,
+        "endChar": 5
+      },
+      "revId": "da303a119483c0ddad886827c23533487cadf22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
