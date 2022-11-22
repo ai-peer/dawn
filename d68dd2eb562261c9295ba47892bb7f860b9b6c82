@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5fa34a5_894234c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T17:16:42Z",
+      "side": 1,
+      "message": "We discussed this offline, the idea will be to have a base Value class, this class will be a ConstantValue which inherits. The values should be used as pointers instead of structs. The values will store a vector of instructions where the value is used.\n\nI\u0027m going to land this as is and then will start the work to re-factor it to the value/constvalue",
+      "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b204a42_a01d25a3",
