@@ -22,6 +22,7 @@
 #include "absl/strings/str_format.h"
 #include "dawn/common/Result.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/webgpu_absl_format.h"
 
 namespace dawn::native {
@@ -79,6 +80,28 @@ using ResultOrError = Result<T, ErrorData>;
         return DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__)); \
     }                                                                                        \
     for (;;)                                                                                 \
+    break
+
+// DAWN_EMIT_DEPRECATION_WARNING is used at deprecating API calls (e.g. APIEndPass())
+// which will be removed altogether when deprecated.
+#define DAWN_EMIT_DEPRECATION_WARNING(device, ...)      \
+    std::string warning = absl::StrFormat(__VA_ARGS__); \
+    device->EmitDeprecationWarning(warning.c_str());    \
+    for (;;)                                            \
+    break
+
+// DAWN_INVALID_IF_DEPRECATED_PERIOD is used at deprecation paths.
+// When the disallow_deprecated_path toggle is on, it is equivalent to DAWN_INVALID_IF.
+// Otherwise it emits a deprecation warning and moves on.
+#define DAWN_INVALID_IF_DEPRECATED_PERIOD(device, EXPR, ...)       \
+    if (device->IsToggleEnabled(Toggle::DisallowDeprecatedPath)) { \
+        DAWN_INVALID_IF(EXPR, __VA_ARGS__);                        \
+    } else {                                                       \
+        if (DAWN_UNLIKELY(EXPR)) {                                 \
+            DAWN_EMIT_DEPRECATION_WARNING(device, __VA_ARGS__);    \
+        }                                                          \
+    }                                                              \
+    for (;;)                                                       \
     break
 
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
