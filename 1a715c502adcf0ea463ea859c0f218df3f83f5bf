@@ -16,6 +16,109 @@
       "message": "PTAL.",
       "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "231669e5_e23b766f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-22T20:53:08Z",
+      "side": 1,
+      "message": "LGTM with nits, almost entirely about comments.",
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea63ef6_ffe4c901",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3272,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-22T20:53:08Z",
+      "side": 1,
+      "message": "nit: The logic is correct but the name \u0027parent\u0027 is bad.\n\nWhat \u0027parent\u0027 is computing is the header block for the construct that *this* block is in.\nI\u0027d change \u0027parent\u0027 to \u0027header\u0027.",
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8569ec1f_8ad880ac",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3272,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-22T20:53:08Z",
+      "side": 1,
+      "message": "Instead of \"... parent construct has a continue\"\nI would probably say \" ... parent construct will cause a continuing construct to be emitted\".",
+      "range": {
+        "startLine": 3272,
+        "startChar": 80,
+        "endLine": 3272,
+        "endChar": 89
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b28bc627_55bf7c2c",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3278,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-22T20:53:08Z",
+      "side": 1,
+      "message": "FYI.  You should be able to assert   \n   parent-\u003econstruct \u0026\u0026 parent-\u003econstruct-\u003ekind \u003d\u003d Construct::Kind::kContinue \n   \n   \nBy construction, it\u0027s because parent-\u003econstruct \u003d\u003d block_info.construct\n\nSo it\u0027s slightly weird to re-check the condition.",
+      "range": {
+        "startLine": 3278,
+        "startChar": 20,
+        "endLine": 3278,
+        "endChar": 94
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4253b384_fbbca78d",
+        "filename": "src/tint/reader/spirv/function_cfg_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 9515,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-22T20:53:08Z",
+      "side": 1,
+      "message": "nit: This name is misleading because the output has \"break if\"",
+      "range": {
+        "startLine": 9515,
+        "startChar": 84,
+        "endLine": 9515,
+        "endChar": 93
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
