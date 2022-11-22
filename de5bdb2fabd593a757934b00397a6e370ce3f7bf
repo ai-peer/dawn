@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d53139a_ace41245",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-11-22T21:14:48Z",
+      "side": 1,
+      "message": "Will land after https://chromium-review.googlesource.com/c/chromium/src/+/4038415 lands.",
+      "revId": "de5bdb2fabd593a757934b00397a6e370ce3f7bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
