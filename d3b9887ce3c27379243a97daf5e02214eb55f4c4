@@ -22,6 +22,30 @@
       },
       "revId": "d3b9887ce3c27379243a97daf5e02214eb55f4c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe86410_c6b3be8a",
+        "filename": "src/tint/utils/hashmap_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:29:31Z",
+      "side": 1,
+      "message": "It\u0027s saying that calling `Find(K)`, then `Add(K, V)`, then using the returned reference of `Find(K)`, will give you the value `V`, even though it was added after `Find()` was called.",
+      "parentUuid": "ae9f0bf2_0ef33bec",
+      "range": {
+        "startLine": 118,
+        "startChar": 25,
+        "endLine": 118,
+        "endChar": 67
+      },
+      "revId": "d3b9887ce3c27379243a97daf5e02214eb55f4c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
