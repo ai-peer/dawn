@@ -60,6 +60,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf48ead3_bb13d3b2",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-22T00:05:05Z",
+      "side": 1,
+      "message": "nit: this comment isn\u0027t really needed anymore because the following line no longer attempts to CallMapCallback after the map (or map-at-creation) is completed",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 35
+      },
+      "revId": "98795966edb786776ad94542561ab12c4b560804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7dbab5e7_4cd56486",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 4
