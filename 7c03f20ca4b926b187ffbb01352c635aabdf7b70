@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1434ffa_902a4b0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T20:17:09Z",
+      "side": 1,
+      "message": "PTAL!\n\nfyi - may also fix crbug.com/dawn/1550 but I don\u0027t have an android device to easily test on",
+      "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
