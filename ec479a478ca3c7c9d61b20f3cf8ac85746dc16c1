@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a82dc4a_31a5a4cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-22T20:14:23Z",
+      "side": 1,
+      "message": "Not actually needed right now, as I dropped the approach I was going with.\nBut I think this is a good improvement, so putting up for review.",
+      "revId": "ec479a478ca3c7c9d61b20f3cf8ac85746dc16c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
