@@ -82,6 +82,7 @@ enum class Toggle {
     MetalUseMockBlitEncoderForWriteTimestamp,
     VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass,
     D3D12Allocate2DTexturewithCopyDstAsCommittedResource,
+    DisallowDeprecatedPath,
 
     EnumCount,
     InvalidEnum = EnumCount,
