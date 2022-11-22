@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1b40cba_0ef55798",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-22T09:22:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6843180a_2779e80d",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "706a22e7_f579b8e3",
@@ -65,6 +83,24 @@
       "writtenOn": "2022-11-21T11:07:27Z",
       "side": 1,
       "message": "Why is this done on the first call to IsDXCAvailable instead of on startup? It would simplify logic a bit and make it more thread safe (for the future), const, etc.",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85af91e2_9da4fe43",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-22T09:22:26Z",
+      "side": 1,
+      "message": "Done, move all DXC binary checking and version information acquiring into `Initialize`, do checking only once and store all result. Making `IsDXCAvailable`, `IsDXCAvailableAndVersionAtLeast` and `GetDxcVersion` const.",
+      "parentUuid": "706a22e7_f579b8e3",
       "revId": "2aa99344f050eb634d31362901914683eb1df338",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a42226_85472111",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-22T09:22:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca14e5ef_f45ff14a",
+      "range": {
+        "startLine": 42,
+        "startChar": 7,
+        "endLine": 42,
+        "endChar": 28
+      },
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c678b558_4956b37a",
@@ -105,6 +165,24 @@
       "writtenOn": "2022-11-21T11:07:27Z",
       "side": 1,
       "message": "nit: Maybe this could be in the dawn_test template directly as other tests may want to use DXC in the future (validation tests if they start running actual backends for example)",
+      "revId": "2aa99344f050eb634d31362901914683eb1df338",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42600037_3b551246",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-22T09:22:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c678b558_4956b37a",
       "revId": "2aa99344f050eb634d31362901914683eb1df338",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
