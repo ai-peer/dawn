@@ -119,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2d2cdc4d_f3cc519c",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-22T11:05:29Z",
+      "side": 1,
+      "message": "Yes this was to remove the pointer on the bitset as well as remove the need for the logic in ShaderModuleD3D12 to default the bitset to empty when the pointer is null. But either way is probably fine.",
+      "parentUuid": "862107a0_d1ad61ee",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d44a873c_1cf83c59",
         "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
         "patchSetId": 11
@@ -230,6 +248,24 @@
       "side": 1,
       "message": "Now the Tint TruncateInterstageVariables will skip when vertex output and fragment input are matched exactly. I think that is enough?\nI added a comment saying the transform will skip under this case.",
       "parentUuid": "67b9cc4e_5809814f",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "694f8242_c2aaa109",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-22T11:05:29Z",
+      "side": 1,
+      "message": "Ok sounds good.",
+      "parentUuid": "fc361d43_a8390df8",
       "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
