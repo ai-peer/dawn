@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb9f7b2_0e940f17",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T01:28:28Z",
+      "side": 1,
+      "message": "this can be crbug.com/dawn/1334",
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8742c595_0fba8899",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T01:28:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b70ddb0_57636b07",
+        "filename": "src/dawn/common/Math.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T01:28:28Z",
+      "side": 1,
+      "message": "even though the code is copied mostly, we should have some tests in MathTests.cpp for this\n\nalthough the tests would really be statically known at compile time, but tests nonetheless\n\ncan\u0027t easily tests the static_asserts, but that\u0027s ok",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 1
+      },
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5374931c_08df6c34",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T01:28:28Z",
+      "side": 1,
+      "message": "I think this should be \u003e\nthe equal-to case should be OK since at worst, maxCount * sizeof(T) would then equal the max size_t - which does not overflow",
+      "range": {
+        "startLine": 57,
+        "startChar": 14,
+        "endLine": 57,
+        "endChar": 16
+      },
+      "revId": "bafe18f7f69816e12e7485ce7c039f533ac0e742",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -255,6 +255,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e638d91d_7e8b58d4",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T01:28:28Z",
+      "side": 1,
+      "message": "actually I realized your original code here is more correct (but still slightly off)\n\nconsider `count \u003d 7` and `using T \u003d char`\nand `std::numeric_limits\u003csize_t\u003e::max() \u003d\u003d 64` (arbitrary small max)\n\nmy suggestion says kMaxCount \u003d 64 / align(sizeof(char)) \u003d\u003d 8\n\nwhich is totally wrong. The maxCount should be 57 since you may need to allocate up to 7 extra bytes to align to 8. \n\nso I think it should actually be `kMaxCount \u003d (size_t::max() - kAlignment + 1) / sizeof(T)`",
+      "parentUuid": "c333bcbf_58fb2440",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 80
+      },
+      "revId": "fc8a01f41216cc61498139bffe4287d65f02e003",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6c6669a3_9098c383",
         "filename": "src/dawn/wire/ChunkedCommandSerializer.h",
         "patchSetId": 5
