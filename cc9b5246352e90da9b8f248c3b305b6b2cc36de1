@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0744b620_be8cd314",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 3
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T14:38:30Z",
+      "side": 1,
+      "message": "Should we add `fa` here as the plan is to update the spec, or wait until the spec is updated?",
+      "revId": "cc9b5246352e90da9b8f248c3b305b6b2cc36de1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6e0466c_bbeba434",
         "filename": "src/tint/resolver/const_eval_builtin_test.cc",
         "patchSetId": 3
