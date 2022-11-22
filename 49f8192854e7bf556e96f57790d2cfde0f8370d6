@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bad2e643_c761507b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T13:45:52Z",
+      "side": 1,
+      "message": "The `::abs` code above should be pulled out into a helper and used. This will fail on the `std::numeric_limits\u003cint32_t\u003e::min` case as the abs doesn\u0027t fit. The `abs` on a `uint32_t` also causes a cast to `int32_t` so needs to be handled specially.",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc4c9d5_bb049809",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2627,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T13:45:52Z",
+      "side": 1,
+      "message": "Can you move this check up to the `Sqrt` above and change this to just call the `SqrtFunc`?",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
