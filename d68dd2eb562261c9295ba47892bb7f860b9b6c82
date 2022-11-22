@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca1c4223_4c109b7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T10:23:32Z",
+      "side": 1,
+      "message": "Not sure about this one, I\u0027m afraid.",
+      "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b204a42_a01d25a3",
+        "filename": "src/tint/ir/register.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T10:23:32Z",
+      "side": 1,
+      "message": "So these are all constant value registers?\n\nMy mental model here is influenced by LLVM. I imagined we\u0027d have:\n• `ir::Value` - immutable value. `ast::Let` will naturally map to this. Has a type.\n• `ir::Constant` - derives from `ir::Value`, holds a constant value.\n• `ir::Variable` - derives from `ir::Value`, is a pointer type, you can only load or store to it.\n\n\nIn this CL `ir::Register` appears to be All The Things!.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
