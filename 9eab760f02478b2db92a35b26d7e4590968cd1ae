@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8640b9b_f59a80ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T19:49:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62a01336_d50f7612",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T19:49:47Z",
+      "side": 1,
+      "message": "existing nit: \"is\"",
+      "range": {
+        "startLine": 83,
+        "startChar": 54,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
