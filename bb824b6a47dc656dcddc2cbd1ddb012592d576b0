@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19197e4d_d620847f",
+        "filename": "test/tint/builtins/modf/scalar/const.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-22T20:48:47Z",
+      "side": 1,
+      "message": "Added that as another set of test. Keeping this one, as it\u0027s actually testing the complex emission of a constant structure, which is the first time we\u0027ve had to do this.",
+      "parentUuid": "d7460844_6782f27b",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "bb824b6a47dc656dcddc2cbd1ddb012592d576b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5882bfe7_208be8a7",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-22T19:05:13Z",
       "side": 1,
       "message": "As discussed in chat, `in` isn\u0027t used here.",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 18
+      },
+      "revId": "bb824b6a47dc656dcddc2cbd1ddb012592d576b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "193c7cd1_5dff389a",
+        "filename": "test/tint/builtins/modf/scalar/runtime.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-22T20:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5882bfe7_208be8a7",
       "range": {
         "startLine": 3,
         "startChar": 4,
