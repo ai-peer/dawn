@@ -44,7 +44,7 @@ TEST_F(HoistToDeclBeforeTest, VarInit) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -75,7 +75,7 @@ TEST_F(HoistToDeclBeforeTest, ForLoopInit) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -109,7 +109,7 @@ TEST_F(HoistToDeclBeforeTest, ForLoopCond) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -147,7 +147,7 @@ TEST_F(HoistToDeclBeforeTest, ForLoopCont) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -190,7 +190,7 @@ TEST_F(HoistToDeclBeforeTest, WhileCond) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -234,7 +234,7 @@ TEST_F(HoistToDeclBeforeTest, ElseIf) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -272,7 +272,7 @@ TEST_F(HoistToDeclBeforeTest, Array1D) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
@@ -306,7 +306,7 @@ TEST_F(HoistToDeclBeforeTest, Array2D) {
 
     HoistToDeclBefore hoistToDeclBefore(ctx);
     auto* sem_expr = ctx.src->Sem().Get(expr);
-    hoistToDeclBefore.Add(sem_expr, expr, true);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
 
     ctx.Clone();
     Program cloned(std::move(cloned_b));
