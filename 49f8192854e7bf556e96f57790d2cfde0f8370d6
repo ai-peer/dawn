@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d592cff_533116c8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2230,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T14:04:42Z",
+      "side": 1,
+      "message": "I read that note too, but I don\u0027t think it\u0027s meant to be an error. It\u0027s just saying that mathematically, taking the length of a negative value isn\u0027t meaninful for scalars.\n\nThe spec says clearly \"Evaluates to the absolute value of e if T is scalar.\" so I\u0027m pretty sure we have to support negative values. I\u0027ll ask in Tint chat.",
+      "parentUuid": "ac59268d_11c0d3f5",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bad2e643_c761507b",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
