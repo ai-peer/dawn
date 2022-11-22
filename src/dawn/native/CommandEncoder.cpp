@@ -241,9 +241,10 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
     bool useClearColor = HasDeprecatedColor(colorAttachment);
     const dawn::native::Color& clearValue =
         useClearColor ? colorAttachment.clearColor : colorAttachment.clearValue;
+
     if (useClearColor) {
-        device->EmitDeprecationWarning(
-            "clearColor is deprecated, prefer using clearValue instead.");
+        DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+            device, "clearColor is deprecated, prefer using clearValue instead."));
     }
 
     if (colorAttachment.loadOp == wgpu::LoadOp::Clear) {
@@ -306,11 +307,11 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
         !IsSubset(Aspect::Depth, attachment->GetAspects())) {
         if (depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Load &&
             depthStencilAttachment->depthStoreOp == wgpu::StoreOp::Store) {
-            // TODO(dawn:1269): Remove this branch after the deprecation period.
-            device->EmitDeprecationWarning(
+            DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+                device,
                 "Setting depthLoadOp and depthStoreOp when "
                 "the attachment has no depth aspect or depthReadOnly is true is "
-                "deprecated.");
+                "deprecated."));
         } else {
             DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp != wgpu::LoadOp::Undefined,
                             "depthLoadOp (%s) must not be set if the attachment (%s) has "
@@ -341,11 +342,11 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
         !IsSubset(Aspect::Stencil, attachment->GetAspects())) {
         if (depthStencilAttachment->stencilLoadOp == wgpu::LoadOp::Load &&
             depthStencilAttachment->stencilStoreOp == wgpu::StoreOp::Store) {
-            // TODO(dawn:1269): Remove this branch after the deprecation period.
-            device->EmitDeprecationWarning(
+            DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+                device,
                 "Setting stencilLoadOp and stencilStoreOp when "
                 "the attachment has no stencil aspect or stencilReadOnly is true is "
-                "deprecated.");
+                "deprecated."));
         } else {
             DAWN_INVALID_IF(
                 depthStencilAttachment->stencilLoadOp != wgpu::LoadOp::Undefined,
@@ -376,8 +377,8 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
     }
 
     if (!std::isnan(depthStencilAttachment->clearDepth)) {
-        // TODO(dawn:1269): Remove this branch after the deprecation period.
-        device->EmitDeprecationWarning("clearDepth is deprecated, prefer depthClearValue instead.");
+        DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+            device, "clearDepth is deprecated, prefer depthClearValue instead."));
         DAWN_INVALID_IF(
             depthStencilAttachment->clearDepth < 0.0f || depthStencilAttachment->clearDepth > 1.0f,
             "clearDepth is not between 0.0 and 1.0");
@@ -390,11 +391,10 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
                         "depthClearValue is not between 0.0 and 1.0");
     }
 
-    // TODO(dawn:1269): Remove after the deprecation period.
     if (depthStencilAttachment->stencilClearValue == 0 &&
         depthStencilAttachment->clearStencil != 0) {
-        device->EmitDeprecationWarning(
-            "clearStencil is deprecated, prefer stencilClearValue instead.");
+        DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+            device, "clearStencil is deprecated, prefer stencilClearValue instead."));
     }
 
     // *sampleCount == 0 must only happen when there is no color attachment. In that case we

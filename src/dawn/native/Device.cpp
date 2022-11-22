@@ -1333,11 +1333,18 @@ size_t DeviceBase::GetDeprecationWarningCountForTesting() {
     return mDeprecationWarnings->count;
 }
 
-void DeviceBase::EmitDeprecationWarning(const char* warning) {
-    mDeprecationWarnings->count++;
-    if (mDeprecationWarnings->emitted.insert(warning).second) {
-        dawn::WarningLog() << warning;
+MaybeError DeviceBase::EmitDeprecationPathError(const std::string& message) {
+    if (IsToggleEnabled(Toggle::DisallowDeprecatedAPIs)) {
+        // Generate validation error when Toggle::DisallowDeprecatedAPIs is on.
+        return ErrorData::Create(InternalErrorType::Validation, message, __FILE__, __func__,
+                                 __LINE__);
     }
+    // Only emit warning when Toggle::DisallowDeprecatedAPIs is off.
+    mDeprecationWarnings->count++;
+    if (mDeprecationWarnings->emitted.insert(message).second) {
+        dawn::WarningLog() << message;
+    }
+    return {};
 }
 
 void DeviceBase::EmitLog(const char* message) {
