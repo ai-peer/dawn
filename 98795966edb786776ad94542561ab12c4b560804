@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7b4f7c90_f01d890e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-22T07:21:13Z",
+      "side": 1,
+      "message": "Thanks, updated.",
+      "parentUuid": "eeb6f7c4_e0ca24aa",
+      "range": {
+        "startLine": 7,
+        "startChar": 38,
+        "endLine": 7,
+        "endChar": 50
+      },
+      "revId": "98795966edb786776ad94542561ab12c4b560804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "28069a80_a888d1e6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "911e5c0d_70bb0bf0",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-22T07:21:13Z",
+      "side": 1,
+      "message": "Removed the comment, thanks.",
+      "parentUuid": "bf48ead3_bb13d3b2",
+      "range": {
+        "startLine": 430,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 35
+      },
+      "revId": "98795966edb786776ad94542561ab12c4b560804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dbab5e7_4cd56486",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-11-21T13:01:11Z",
       "side": 1,
       "message": "nit: maybe it would make sense to move this to CallMapCallback so that we ensure in a single function that the map callback is called only once.",
+      "range": {
+        "startLine": 437,
+        "startChar": 0,
+        "endLine": 438,
+        "endChar": 25
+      },
+      "revId": "98795966edb786776ad94542561ab12c4b560804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b64b4ec_91c69aef",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-22T07:21:13Z",
+      "side": 1,
+      "message": "I noticed that clear the callback in CallMapCallback so clearing it again here is duplicated. Updated, thanks.",
+      "parentUuid": "7dbab5e7_4cd56486",
       "range": {
         "startLine": 437,
         "startChar": 0,
