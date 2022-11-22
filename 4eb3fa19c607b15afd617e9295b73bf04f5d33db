@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "298458d1_940356c3",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-22T19:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa0a29f8_cacd900f",
+      "range": {
+        "startLine": 391,
+        "startChar": 91,
+        "endLine": 391,
+        "endChar": 97
+      },
+      "revId": "4eb3fa19c607b15afd617e9295b73bf04f5d33db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23a2e9da_5b22edea",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-22T02:24:18Z",
       "side": 1,
       "message": "maybe, have a version of this test where the fragment in has some of the vertex outputs, BUT they are unused by the fragment stage - to check there isn\u0027t a situation where oh, it looks like they match, but because the fragment stage doesn\u0027t use it, it\u0027s removed and they no longer match",
+      "range": {
+        "startLine": 452,
+        "startChar": 0,
+        "endLine": 452,
+        "endChar": 44
+      },
+      "revId": "4eb3fa19c607b15afd617e9295b73bf04f5d33db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de2a5d60_26ceaf31",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-22T19:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23a2e9da_5b22edea",
       "range": {
         "startLine": 452,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2234a498_cb11e907",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1207,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-22T19:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "979dfcd5_1782f289",
+      "range": {
+        "startLine": 1207,
+        "startChar": 0,
+        "endLine": 1207,
+        "endChar": 76
+      },
+      "revId": "4eb3fa19c607b15afd617e9295b73bf04f5d33db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e64f9c7_91fc4bc9",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-22T02:24:18Z",
       "side": 1,
       "message": "nit: comment above, describing the test",
+      "range": {
+        "startLine": 1269,
+        "startChar": 0,
+        "endLine": 1269,
+        "endChar": 70
+      },
+      "revId": "4eb3fa19c607b15afd617e9295b73bf04f5d33db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3cf826_f6155390",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1269,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-22T19:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e64f9c7_91fc4bc9",
       "range": {
         "startLine": 1269,
         "startChar": 0,

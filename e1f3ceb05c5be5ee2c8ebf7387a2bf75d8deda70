@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecd4a5e5_8c0f8287",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-22T19:19:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2cdc4d_f3cc519c",
+      "revId": "e1f3ceb05c5be5ee2c8ebf7387a2bf75d8deda70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d44a873c_1cf83c59",
