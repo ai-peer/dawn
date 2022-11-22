@@ -211,13 +211,6 @@ crbug.com/dawn/1357 webgpu:api,operation,shader_module,compilation_info:offset_a
 crbug.com/dawn/0000 webgpu:api,validation,buffer,create:createBuffer_invalid_and_oom: [ Failure ]
 
 ################################################################################
-# atan2 shader execution failures
-# Very slow, many failing. Skip for now.
-# KEEP
-################################################################################
-crbug.com/tint/1524 webgpu:shader,execution,expression,call,builtin,atan2:f32:* [ Skip ]
-
-################################################################################
 # shader execution failures
 ################################################################################
 crbug.com/dawn/0000 [ intel-gen-9 ubuntu ] webgpu:shader,execution,expression,call,builtin,countTrailingZeros:i32:inputSource="storage_r";vectorize="_undef_" [ Failure ]
