@@ -16,6 +16,144 @@
       "message": "I modified the structure a bit and moved the max logic into the same place instead of repeating it. Lmk if it seems ok!",
       "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d84821_be5510ba",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "so this could have been overflowing before; we can make it an ASSERT for now?\n\noverflow here during serialization is slightly less of a concern because it would mean a compromised renderer can trample on some of its own memory - which it can already do if compromised.\n\noverflow for server-\u003eclient serialization is a bug that the ASSERT could catch",
+      "range": {
+        "startLine": 181,
+        "startChar": 94,
+        "endLine": 181,
+        "endChar": 107
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba181d5_a4c1fb87",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "memberLength may be uint64_t, and it could be narrowed to size_t which is 32-bit sometimes. could probably just adjust the function to take count as uint64_t (but still return size_t). If you actually have \u003e\u003d 2^32 elements and size_t is 32-bit, it\u0027ll always return nullopt (ok) instead of overflowing and returning some value that\u0027s too small",
+      "range": {
+        "startLine": 181,
+        "startChar": 81,
+        "endLine": 181,
+        "endChar": 93
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7114b091_649e887f",
+        "filename": "generator/templates/dawn/wire/WireCmd.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "count may be uint64_t, and it could be narrowed to size_t which is 32-bit sometimes",
+      "range": {
+        "startLine": 665,
+        "startChar": 47,
+        "endLine": 665,
+        "endChar": 52
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fa6f1b8_4450ff21",
+        "filename": "src/dawn/tests/unittests/MathTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "\"align\"",
+      "range": {
+        "startLine": 200,
+        "startChar": 28,
+        "endLine": 200,
+        "endChar": 34
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00f6c076_c1e8549f",
+        "filename": "src/dawn/tests/unittests/MathTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "\"align\"",
+      "range": {
+        "startLine": 208,
+        "startChar": 28,
+        "endLine": 208,
+        "endChar": 34
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e377445_b096363a",
+        "filename": "src/dawn/wire/BufferConsumer_impl.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-22T14:33:14Z",
+      "side": 1,
+      "message": "count may be uint64_t, and it could be narrowed to size_t which is 32-bit sometimes",
+      "range": {
+        "startLine": 56,
+        "startChar": 36,
+        "endLine": 56,
+        "endChar": 41
+      },
+      "revId": "884a7d9544863efc81dd3c4684824d5aa00b7e19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
