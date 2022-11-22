@@ -74,6 +74,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aac217a6_043febfc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-22T08:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0a448ef_4afc61e7",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3bd138ac_43b662d9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -102,6 +120,24 @@
       "writtenOn": "2022-11-10T06:07:33Z",
       "side": 1,
       "message": "my worry is that here and the mappedAtCreation check, we\u0027re baking in buffer mapping details of the wire into CreateErrorBuffer. methods in Dawn native should make sense without dawn wire in the picture.\n\nI\u0027m wondering if in this function, instead we always check the validation error first (see [1]) and then check for other errors. other errors could be passed inside the descriptor or as a chained struct indicating the error reason. see also [2])",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee493ca9_8b5b2477",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1217,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-22T08:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "285382d9_f630d167",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +226,24 @@
       "writtenOn": "2022-11-10T06:07:33Z",
       "side": 1,
       "message": "[2] instead of inject error here, what if we put the error reason as a chained struct on the buffer descriptor?\nwe would handle the error in dawn::native where we can decide whether to surface the OOM or another error (like validation errors).\nthe other benefit of this is that we can use dawn::native\u0027s good error message formatting.",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c07b78b_ab6482d1",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-22T08:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d262876_a3dec99a",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -332,6 +386,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "e0f0d266_74b01585",
+      "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceeb62e0_0196f65f",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-22T08:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e823a723_8233edcd",
       "revId": "fb432c705e92a4daadd9015a0e0393ac6f531abe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

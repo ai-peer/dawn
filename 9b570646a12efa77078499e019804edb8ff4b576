@@ -33,6 +33,24 @@
       "message": "Maybe we could check that nullptr is returned? Ditto in other places.",
       "revId": "9b570646a12efa77078499e019804edb8ff4b576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd61d1d2_4e851866",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-22T08:54:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c2fc262_220b5a46",
+      "revId": "9b570646a12efa77078499e019804edb8ff4b576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
