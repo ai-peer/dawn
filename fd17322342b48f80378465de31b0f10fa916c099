@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f2499f6_11445108",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-22T11:08:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fd17322342b48f80378465de31b0f10fa916c099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697bde0d_74961c05",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 2988,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-22T11:08:16Z",
+      "side": 1,
+      "message": "nit: tags: [\"dawn\"]",
+      "revId": "fd17322342b48f80378465de31b0f10fa916c099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
