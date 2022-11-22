@@ -859,6 +859,10 @@ void Device::DestroyImpl() {
 
     ASSERT(mUsedComObjectRefs.Empty());
     ASSERT(!mPendingCommands.IsOpen());
+
+    // Now that we've cleared out pending work from the queue, we can safely release it and reclaim
+    // memory while we wait for the destructor to run.
+    mCommandQueue.Reset();
 }
 
 ShaderVisibleDescriptorAllocator* Device::GetViewShaderVisibleDescriptorAllocator() const {
