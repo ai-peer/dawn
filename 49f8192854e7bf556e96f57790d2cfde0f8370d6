@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7a0cc0c_627f93c5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2230,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T14:12:55Z",
+      "side": 1,
+      "message": "In other places of the spec where it says not mathematically meaningful we produce an error, I think we should be consistent and either update the spec to change the wording/remove the note, or make it an error.",
+      "parentUuid": "4d592cff_533116c8",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bad2e643_c761507b",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
