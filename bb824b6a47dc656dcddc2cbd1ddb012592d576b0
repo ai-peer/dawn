@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7460844_6782f27b",
+        "filename": "test/tint/builtins/modf/scalar/const.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T19:05:13Z",
+      "side": 1,
+      "message": "As discussed in chat, I think it would be nice if these `let`s were `const`s instead. To get code emitted to backends, we could pass them as args to a function, or assign the results to a let/var.",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 8
+      },
+      "revId": "bb824b6a47dc656dcddc2cbd1ddb012592d576b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5882bfe7_208be8a7",
+        "filename": "test/tint/builtins/modf/scalar/runtime.wgsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T19:05:13Z",
+      "side": 1,
+      "message": "As discussed in chat, `in` isn\u0027t used here.",
+      "range": {
+        "startLine": 3,
+        "startChar": 4,
+        "endLine": 3,
+        "endChar": 18
+      },
+      "revId": "bb824b6a47dc656dcddc2cbd1ddb012592d576b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
