@@ -1324,11 +1324,18 @@ size_t DeviceBase::GetDeprecationWarningCountForTesting() {
     return mDeprecationWarnings->count;
 }
 
-void DeviceBase::EmitDeprecationWarning(const char* warning) {
-    mDeprecationWarnings->count++;
-    if (mDeprecationWarnings->emitted.insert(warning).second) {
-        dawn::WarningLog() << warning;
+MaybeError DeviceBase::EmitDeprecationPathError(const std::string& message) {
+    if (IsToggleEnabled(Toggle::DisallowDeprecatedAPIs)) {
+        // Generate validation error when Toggle::DisallowDeprecatedAPIs is on.
+        return ErrorData::Create(InternalErrorType::Validation, message, __FILE__, __func__,
+                                 __LINE__);
     }
+    // Only emit warning when Toggle::DisallowDeprecatedAPIs is off.
+    mDeprecationWarnings->count++;
+    if (mDeprecationWarnings->emitted.insert(message).second) {
+        dawn::WarningLog() << message;
+    }
+    return {};
 }
 
 void DeviceBase::EmitLog(const char* message) {
@@ -1410,12 +1417,10 @@ ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* 
     if (IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(ValidateBufferDescriptor(this, descriptor), "validating %s", descriptor);
 
-        // TODO(dawn:1525): Change to validation error after the deprecation period.
         if (descriptor->size > mLimits.v1.maxBufferSize) {
-            std::string warning =
-                absl::StrFormat("Buffer size (%u) exceeds the max buffer size limit (%u).",
-                                descriptor->size, mLimits.v1.maxBufferSize);
-            EmitDeprecationWarning(warning.c_str());
+            DAWN_TRY(DAWN_MAKE_DEPRECATION_ERROR(
+                this, "Buffer size (%u) exceeds the max buffer size limit (%u).", descriptor->size,
+                mLimits.v1.maxBufferSize));
         }
     }
 
