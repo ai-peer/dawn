@@ -1,0 +1,16 @@
+#include <metal_stdlib>
+
+using namespace metal;
+
+struct modf_result {
+  float fract;
+  float whole;
+};
+kernel void tint_symbol() {
+  float const in = 1.230000019f;
+  modf_result const res = modf_result{.fract=0.230000019f, .whole=1.0f};
+  float const fract = res.fract;
+  float const whole = res.whole;
+  return;
+}
+
