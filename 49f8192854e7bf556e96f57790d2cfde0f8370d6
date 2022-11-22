@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac59268d_11c0d3f5",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2230,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T13:50:45Z",
+      "side": 1,
+      "message": "Just noticed a note in the spec, this isn\u0027t meaningful if `e \u003c -0`. So, I think this needs to check if that and return an error. Which means the only negative value to handle is `-0` so the `abs` shouldn\u0027t even be needed?",
+      "revId": "49f8192854e7bf556e96f57790d2cfde0f8370d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bad2e643_c761507b",
         "filename": "src/tint/resolver/const_eval.cc",
         "patchSetId": 4
