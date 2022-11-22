@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae9f0bf2_0ef33bec",
+        "filename": "src/tint/utils/hashmap_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-22T19:01:33Z",
+      "side": 1,
+      "message": "I don\u0027t understand what this comment means...",
+      "range": {
+        "startLine": 118,
+        "startChar": 25,
+        "endLine": 118,
+        "endChar": 67
+      },
+      "revId": "d3b9887ce3c27379243a97daf5e02214eb55f4c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
