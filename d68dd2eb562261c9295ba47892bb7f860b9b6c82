@@ -39,6 +39,30 @@
       },
       "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41377e98_c0f5b95e",
+        "filename": "src/tint/ir/register.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-22T13:16:04Z",
+      "side": 1,
+      "message": "Yup, it is all of these things. We could split it up, but I\u0027m waiting until I need to split it up based on the code being written. For Binary and Unary op, this is sufficient. It may need to get extended or broken apart when we get to load/store, I\u0027m not sure yet.",
+      "parentUuid": "4b204a42_a01d25a3",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 0
+      },
+      "revId": "d68dd2eb562261c9295ba47892bb7f860b9b6c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
