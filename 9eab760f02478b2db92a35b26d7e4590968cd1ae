@@ -35,6 +35,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79431755_701b71d4",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:26:09Z",
+      "side": 1,
+      "message": "nit: Slightly unusual name for column.",
+      "range": {
+        "startLine": 67,
+        "startChar": 13,
+        "endLine": 67,
+        "endChar": 20
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bb4703_9603f773",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:26:09Z",
+      "side": 1,
+      "message": "You might want to put a `static_assert(sizeof(char) \u003d\u003d 1);` here. I think we do this in Tint, but no harm in extra seatbelts.",
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb0e9cb5_efacdb5c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:26:09Z",
+      "side": 1,
+      "message": "I think to be well defined behaviour, you need to go via a `uintptr_t`. Maybe something like:\n\n```\noffset \u003d static_cast\u003cuint64_t\u003e(reinterpret_cast\u003cuintptr_t\u003e(lineStart - fileStart));\noffset +\u003d linePos - 1;\n```\n\n(untested).",
+      "range": {
+        "startLine": 81,
+        "startChar": 17,
+        "endLine": 81,
+        "endChar": 38
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62a01336_d50f7612",
@@ -53,6 +116,52 @@
         "startChar": 54,
         "endLine": 83,
         "endChar": 56
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71d22ff8_8ca10cd0",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:26:09Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 94,
+        "startChar": 29,
+        "endLine": 94,
+        "endChar": 50
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04c7138_7deef9aa",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-22T20:26:09Z",
+      "side": 1,
+      "message": "Do we know why this is still failing?",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 128
       },
       "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
