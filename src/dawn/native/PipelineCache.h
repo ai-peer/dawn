@@ -38,7 +38,7 @@ class PipelineCacheBase : public RefCounted {
     MaybeError FlushIfNeeded();
 
   protected:
-    PipelineCacheBase(BlobCache* cache, const CacheKey& key);
+    PipelineCacheBase(BlobCache& cache, const CacheKey& key);
 
     // Initializes and returns the cached blob given the cache and keys. Used by backend
     // implementations to get the cache and set the cache hit state. Should only be called once.
@@ -53,7 +53,7 @@ class PipelineCacheBase : public RefCounted {
     // The blob cache is owned by the Adapter and pipeline caches are owned/created by devices
     // or adapters. Since the device owns a reference to the Instance which owns the Adapter,
     // the blob cache is guaranteed to be valid throughout the lifetime of the object.
-    BlobCache* mCache;
+    BlobCache& mCache;
     CacheKey mKey;
     bool mInitialized = false;
     bool mCacheHit = false;

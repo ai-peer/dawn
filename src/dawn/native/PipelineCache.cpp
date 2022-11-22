@@ -16,12 +16,12 @@
 
 namespace dawn::native {
 
-PipelineCacheBase::PipelineCacheBase(BlobCache* cache, const CacheKey& key)
+PipelineCacheBase::PipelineCacheBase(BlobCache& cache, const CacheKey& key)
     : mCache(cache), mKey(key) {}
 
 Blob PipelineCacheBase::Initialize() {
     ASSERT(!mInitialized);
-    Blob blob = mCache != nullptr ? mCache->Load(mKey) : Blob();
+    Blob blob = mCache.Load(mKey);
     mCacheHit = !blob.Empty();
     mInitialized = true;
     return blob;
@@ -33,16 +33,13 @@ bool PipelineCacheBase::CacheHit() const {
 }
 
 MaybeError PipelineCacheBase::Flush() {
-    if (mCache == nullptr) {
-        return {};
-    }
     // Try to write the data out to the persistent cache.
     Blob blob;
     DAWN_TRY(SerializeToBlobImpl(&blob));
     if (blob.Size() > 0) {
         // Using a simple heuristic to decide whether to write out the blob right now. May need
         // smarter tracking when we are dealing with monolithic caches.
-        mCache->Store(mKey, blob);
+        mCache.Store(mKey, blob);
     }
     return {};
 }

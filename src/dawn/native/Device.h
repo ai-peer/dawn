@@ -293,7 +293,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError ValidateIsAlive() const;
 
-    BlobCache* GetBlobCache();
+    BlobCache& GetBlobCache();
     Blob LoadCachedBlob(const CacheKey& key);
     void StoreCachedBlob(const CacheKey& key, const Blob& blob);
 
