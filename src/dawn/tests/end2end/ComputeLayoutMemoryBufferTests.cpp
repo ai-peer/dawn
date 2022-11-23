@@ -563,6 +563,7 @@ fn main() {
 
     MemoryDataBuilder expectedDataBuilder;  // The expected data to be copied by the shader
     expectedDataBuilder.AddSubBuilder(field.GetDataBuilder());
+    expectedDataBuilder.AlignTo(field.GetAlign());
 
     // Expectation and input buffer have identical data bytes but different padding bytes.
     // Initializes the dst buffer with data bytes different from input and expectation, and padding
