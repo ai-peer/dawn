@@ -649,6 +649,7 @@ uint32_t GetWGSLRenderableColorTextureComponentCount(wgpu::TextureFormat texture
 const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat) {
     switch (textureFormat) {
         case wgpu::TextureFormat::RGBA8Unorm:
+        case wgpu::TextureFormat::BGRA8Unorm:
             return "rgba8unorm";
         case wgpu::TextureFormat::RGBA8Snorm:
             return "rgba8snorm";
