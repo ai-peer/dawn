@@ -16,6 +16,52 @@
       "message": "PTAL. Looks like some `dot` generated results got created when I ran `generate-expected`.",
       "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9c135d_c5c76823",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T14:45:07Z",
+      "side": 1,
+      "message": "`val.value` for Clang to compile.",
+      "range": {
+        "startLine": 2043,
+        "startChar": 31,
+        "endLine": 2043,
+        "endChar": 34
+      },
+      "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe6a5de_1b6b979e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T14:45:07Z",
+      "side": 1,
+      "message": "Why are we checking this? With my recent set of changes, non-finite values are detected and an error emitted. You can assume finite values as input here.",
+      "range": {
+        "startLine": 2043,
+        "startChar": 12,
+        "endLine": 2043,
+        "endChar": 38
+      },
+      "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
