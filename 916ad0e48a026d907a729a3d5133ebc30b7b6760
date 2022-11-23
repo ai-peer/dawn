@@ -62,6 +62,54 @@
       },
       "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a847829_0be704c1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T15:21:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a9c135d_c5c76823",
+      "range": {
+        "startLine": 2043,
+        "startChar": 31,
+        "endLine": 2043,
+        "endChar": 34
+      },
+      "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f369bdf_b578edbf",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2043,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T15:21:35Z",
+      "side": 1,
+      "message": "Nicer error message. This will say `e^val can not be represented` instead of `inf can not be represented`.",
+      "parentUuid": "5fe6a5de_1b6b979e",
+      "range": {
+        "startLine": 2043,
+        "startChar": 12,
+        "endLine": 2043,
+        "endChar": 38
+      },
+      "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
