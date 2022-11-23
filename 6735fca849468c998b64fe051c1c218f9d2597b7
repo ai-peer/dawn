@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c40dd74_4284211d",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T23:25:07Z",
+      "side": 1,
+      "message": "if everything uses the deprecation macro and goes through absl::StrFormat - can we remove this overload?",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
