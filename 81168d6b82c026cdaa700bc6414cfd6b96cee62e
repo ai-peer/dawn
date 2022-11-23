@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "263105c8_e8b12af7",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-23T04:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707ea277_eba23221",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 39
+      },
+      "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f22bee_e409d873",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfe03d2_083f37fe",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-23T04:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f22bee_e409d873",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 101,
+        "endChar": 49
+      },
+      "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1edc16a_60a54cbc",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-11-22T13:59:25Z",
       "side": 1,
       "message": "nit: just ASSERT is sufficient.",
+      "range": {
+        "startLine": 484,
+        "startChar": 8,
+        "endLine": 484,
+        "endChar": 19
+      },
+      "revId": "81168d6b82c026cdaa700bc6414cfd6b96cee62e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df30f9b_4f320f0d",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-11-23T04:52:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1edc16a_60a54cbc",
       "range": {
         "startLine": 484,
         "startChar": 8,
