@@ -16,6 +16,40 @@
       "message": "PTAL!\n\nfyi - may also fix crbug.com/dawn/1550 but I don\u0027t have an android device to easily test on",
       "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d8af448_0573b15e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T13:55:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b27a380b_598a60ea",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T13:55:38Z",
+      "side": 1,
+      "message": "I think the additional tolerance in this file could also allow lifting the Swiftshader suppressions. Can you check and remove them if possible?",
+      "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
