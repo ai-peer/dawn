@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "0e89f124eeb177564da90abb2d6793beec876b0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f524536_1a0c2296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T14:36:19Z",
+      "side": 1,
+      "message": "Btw, Kokoro crapped out for some reason.",
+      "revId": "0e89f124eeb177564da90abb2d6793beec876b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ad70af_fef4c571",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T14:36:19Z",
+      "side": 1,
+      "message": "With my `length` CL now landed, you can use the optional argument to `FloatComp` to pass in an epsilon for the float comparison. This would allow you to combine tests, for certain inputs.\n\nFor the case of testing the highest value, you can also make the expected value call `std::log`:\n\n`C({T::Highest()}, T(std::log(T::Highest())))`",
+      "range": {
+        "startLine": 1314,
+        "startChar": 1,
+        "endLine": 1345,
+        "endChar": 1
+      },
+      "revId": "0e89f124eeb177564da90abb2d6793beec876b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
