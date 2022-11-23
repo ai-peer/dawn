@@ -93,6 +93,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a8c69e_47a3c201",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-23T15:25:26Z",
+      "side": 1,
+      "message": "Bah, I\u0027m mis-remembering. `char` wasn\u0027t guaranteed to be 8 bits, but googling this a bit, it sounds like this might have been fixed. Ignore me.",
+      "parentUuid": "4368677b_737e819e",
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0e9cb5_efacdb5c",
@@ -130,6 +148,30 @@
       "side": 1,
       "message": "This should be well defined: lineStart - fileStart is an std::ptrdiff_t which is an integer type:\n\n\u003e std::ptrdiff_t is the signed integer type of the result of subtracting two pointers.",
       "parentUuid": "bb0e9cb5_efacdb5c",
+      "range": {
+        "startLine": 81,
+        "startChar": 17,
+        "endLine": 81,
+        "endChar": 38
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdaca72a_b0f87252",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-23T15:25:26Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "e86694c9_bb2d654c",
       "range": {
         "startLine": 81,
         "startChar": 17,
