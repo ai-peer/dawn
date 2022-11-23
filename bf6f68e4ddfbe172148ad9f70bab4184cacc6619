@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd89d7a0_10385af9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T16:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8b4b1c_70eb9432",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b80e80c6_997eefe9",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-23T16:33:56Z",
       "side": 1,
       "message": "ditto",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e900fb2_28071570",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T16:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b80e80c6_997eefe9",
       "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +102,24 @@
       "side": 1,
       "message": "I understand, though WGSL is always column vectors, so I thought this was clear.",
       "parentUuid": "e52983e0_da64271b",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a151cf_d934ea99",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T16:51:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d64e41a2_7048604e",
       "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
