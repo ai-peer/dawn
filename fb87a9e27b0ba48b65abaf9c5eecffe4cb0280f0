@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8164df_9df86b74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-11-23T21:38:02Z",
+      "side": 1,
+      "message": "@Jiawei, thank you for the add. I have some thoughts of my own.\n\nFirst, DirectX already has a way for applications to pick an adapter with a GPU preference by using IDXGIFactory6::EnumAdapterByGpuPreference. For implementing WebGPU\u0027s \"powerPreference\" attribute, we should utilize this DXGI API and pass the PREFERENCE_HIGH_PERFORMANCE enum value. If this extension is meant as a replacement for EnumAdapterByGpuPreference or as a way to pick on behalf of Chromium under the covers, then we should not be using it. Chromium should be in control over what adapter gets used for rendering.\n\n\nSecond, if this extension impacts power management, it’s very questionable for browser to override this behavior in a default context. In this CL, I see that the \"maximum performance\" adapter is always enumerated in DiscoverAdapters so I\u0027m not clear what your intent is. Tests should run in the same, default configuration that end users run. \n\nThere’s existing Windows infrastructure around different power profiles that users and IT departments can configure, different profiles for plugged in vs. battery power, going into power saving mode when battery is low, etc. We shouldn\u0027t circumvent this. Enabling this for default context means we\u0027re trading one bug, low FPS, for another bug, excessive battery consumption. The former problem is a more tractable to tackle with tools and analysis than the latter. \n\n\nThird, if this extension is meant as a way for the Intel adapter to be better at benchmarks, this seems like something better solved on the Intel side. Why can\u0027t the driver/hardware work great with WebGPU without having to be told to do so?",
+      "revId": "fb87a9e27b0ba48b65abaf9c5eecffe4cb0280f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
