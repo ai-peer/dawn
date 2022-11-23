@@ -16,6 +16,41 @@
       "message": "PTAL. I\u0027ll get CTS fixed tomorrow.\n\nIs this something that we would need to deprecate first? I\u0027m not sure about the API policy for changes like this, but I assume this could break existing stuff.",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b3e8446_a5f5a63d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T23:22:03Z",
+      "side": 1,
+      "message": "LGTM\n\nadding cwallez as the US is on holiday starting tomorrow",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1535f0_412f8ed7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T23:22:03Z",
+      "side": 1,
+      "message": "yes, I think we should probably add the deprecation warning - and that\u0027ll probably mean adding another member like minBufferSizeNoPadding.\n\nI think a lot of people like to use the default bind group layout so they would be surprised to see the required size change on them.\n\ntests for the deprecation warning should go in DeprecatedAPITests.cpp\n\nfyi you might have conflicts with https://dawn-review.googlesource.com/c/dawn/+/111321\n(cc Shrek)",
+      "parentUuid": "efc6b009_6c80af98",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
