@@ -16,6 +16,144 @@
       "message": "@enga@chromium.org The block issue https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1589 has been resolved. This CL is ready for review now, PTAL again, thanks!",
       "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395c976c_25efc664",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "these are all always `uint32_t, uint16_t, 4`\n\nit would be better to hardcode them all instead of using a template.\n\nThen, we can move the definition of DriverVersionVector to GPUInfo.cpp",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 63
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e236d62_f57670f3",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "instead of extending ityp::stack_vec, it may be better to:\n - hold the vector as a member variable instead. Generally, usage of DriverVersion shouldn\u0027t need push/pop/resize, etc. We only need assignment, and access to the components I think. We can add operator[] which forwards to the member operator[]\n - use StackVector from common/StackContainer.h instead. I know I recommended stack_vec originally, but I forgot we had the plain StackVector version.",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4484e40_d37282b5",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "could this be std::initializer_list ? IIUC it\u0027s to support `DriverVersion({1, 2, 3})`",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 78
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91bb5823_99830dff",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "nit: casing should be \"ToString\"",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 24
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5a2734_aa99f725",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "this could probably be:\n\n```\nmDriverVersion \u003d {part0, part1, part2, part3};\n```",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 9
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3446e7_76427de9",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:04:30Z",
+      "side": 1,
+      "message": "feels like this should be:\n\n```\ndriverVersion \u003d { (versionRaw \u003e\u003e 22) \u0026 0x3FF, ..., versionRaw \u0026 0x003F };\n```",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
