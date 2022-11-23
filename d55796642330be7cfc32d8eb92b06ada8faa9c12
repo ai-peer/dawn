@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c996d05_beae261b",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3049,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-23T20:03:35Z",
+      "side": 1,
+      "message": "I don\u0027t think we need to dispatch, nor call `CreateElement` here. Can\u0027t you just  rebuild the composites with the elements of the input matrix?",
+      "range": {
+        "startLine": 3048,
+        "startChar": 12,
+        "endLine": 3049,
+        "endChar": 64
+      },
+      "revId": "d55796642330be7cfc32d8eb92b06ada8faa9c12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
