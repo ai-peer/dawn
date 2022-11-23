@@ -16,6 +16,46 @@
       "message": "@Austin, PTAL.",
       "revId": "9d6d3f1c2b875074caa8d2b25774e885ac300d47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70353050_82eed780",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T03:40:09Z",
+      "side": 1,
+      "message": "overall LGTM, but I think what we need to check and be careful about is making sure that `mCommandQueue` can\u0027t be used anywhere after it is Reset.\n\nlike right now, queue.SetLabel(\"foo\") will dereference the null mCommandQueue\n\nNextSerial looks like it could be problematic, but looking through the code, I think we check for device lost before it in all the code paths.",
+      "revId": "9d6d3f1c2b875074caa8d2b25774e885ac300d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "696be636_6f4f72bd",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T03:40:09Z",
+      "side": 1,
+      "message": "not sure what you mean by \"while we wait for..\" ?\n\nthis call to DestroyImpl can happen if the user does device.destroy() and never releases the device - so the destructor would not run at all until potentially much later",
+      "range": {
+        "startLine": 864,
+        "startChar": 14,
+        "endLine": 864,
+        "endChar": 54
+      },
+      "revId": "9d6d3f1c2b875074caa8d2b25774e885ac300d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
