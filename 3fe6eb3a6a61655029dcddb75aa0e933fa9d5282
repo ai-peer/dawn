@@ -16,6 +16,24 @@
       "message": "Why did these tests get deleted?",
       "revId": "3fe6eb3a6a61655029dcddb75aa0e933fa9d5282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd4c547_87f6abf3",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-23T14:58:25Z",
+      "side": 0,
+      "message": "Because they make no sense. There\u0027s only one parameter. These were written before the builtin returned a structure.",
+      "parentUuid": "2563a3b0_7f2ddac1",
+      "revId": "3fe6eb3a6a61655029dcddb75aa0e933fa9d5282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
