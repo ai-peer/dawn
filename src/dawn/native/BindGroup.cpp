@@ -165,9 +165,13 @@ MaybeError ValidateTextureBinding(DeviceBase* device,
 
             ASSERT(!texture->IsMultisampledTexture());
 
-            DAWN_INVALID_IF(texture->GetFormat().format != bindingInfo.storageTexture.format,
-                            "Format (%s) of %s expected to be (%s).", texture->GetFormat().format,
-                            texture, bindingInfo.storageTexture.format);
+            bool formatMatch = texture->GetFormat().format == bindingInfo.storageTexture.format;
+            if (bindingInfo.storageTexture.format == wgpu::TextureFormat::RGBA8Unorm) {
+                formatMatch |= texture->GetFormat().format == wgpu::TextureFormat::BGRA8Unorm;
+            }
+            DAWN_INVALID_IF(!formatMatch, "Format (%s) of %s expected to be (%s).",
+                            texture->GetFormat().format, texture,
+                            bindingInfo.storageTexture.format);
 
             DAWN_INVALID_IF(
                 entry.textureView->GetDimension() != bindingInfo.storageTexture.viewDimension,
