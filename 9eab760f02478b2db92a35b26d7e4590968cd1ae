@@ -75,6 +75,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4368677b_737e819e",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T14:06:52Z",
+      "side": 1,
+      "message": "cppreference says:\n\n\u003e The following sizeof expressions always evaluate to 1:\n\u003e  - sizeof(char)\n\nSo it\u0027s probably fine to assume that?",
+      "parentUuid": "29bb4703_9603f773",
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0e9cb5_efacdb5c",
@@ -88,6 +106,30 @@
       "writtenOn": "2022-11-22T20:26:09Z",
       "side": 1,
       "message": "I think to be well defined behaviour, you need to go via a `uintptr_t`. Maybe something like:\n\n```\noffset \u003d static_cast\u003cuint64_t\u003e(reinterpret_cast\u003cuintptr_t\u003e(lineStart - fileStart));\noffset +\u003d linePos - 1;\n```\n\n(untested).",
+      "range": {
+        "startLine": 81,
+        "startChar": 17,
+        "endLine": 81,
+        "endChar": 38
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86694c9_bb2d654c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T14:06:52Z",
+      "side": 1,
+      "message": "This should be well defined: lineStart - fileStart is an std::ptrdiff_t which is an integer type:\n\n\u003e std::ptrdiff_t is the signed integer type of the result of subtracting two pointers.",
+      "parentUuid": "bb0e9cb5_efacdb5c",
       "range": {
         "startLine": 81,
         "startChar": 17,
@@ -121,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89472126_68e97729",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T14:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62a01336_d50f7612",
+      "range": {
+        "startLine": 83,
+        "startChar": 54,
+        "endLine": 83,
+        "endChar": 56
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71d22ff8_8ca10cd0",
@@ -134,6 +200,30 @@
       "writtenOn": "2022-11-22T20:26:09Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 94,
+        "startChar": 29,
+        "endLine": 94,
+        "endChar": 50
+      },
+      "revId": "9eab760f02478b2db92a35b26d7e4590968cd1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1604ac4_962e4c2c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T14:06:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "71d22ff8_8ca10cd0",
       "range": {
         "startLine": 94,
         "startChar": 29,
