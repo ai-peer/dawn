@@ -810,3 +810,41 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneComput
         encoder.Finish();
     }
 }
+
+class BGRA8UnormStorageTextureValidationTests : public StorageTextureValidationTests {
+  protected:
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        wgpu::DeviceDescriptor descriptor;
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::BGRA8UnormStorage};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Verify the storage texture format BGRA8Unorm in pipeline layout is compatible with the WGSL texel
+// format 'rgba8unorm'.
+TEST_F(BGRA8UnormStorageTextureValidationTests, CompatibleWithRGBA8UnormWGSLTexelFormat) {
+    constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::BGRA8Unorm;
+    wgpu::Texture storageTexture =
+        CreateTexture(wgpu::TextureUsage::StorageBinding, kTextureFormat);
+
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device,
+        {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kTextureFormat}});
+    wgpu::PipelineLayout pipelineLayout = utils::MakePipelineLayout(device, {bindGroupLayout});
+
+    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+            @group(0) @binding(0) var image0 : texture_storage_2d<rgba8unorm, write>;
+
+            @compute @workgroup_size(1) fn main(@builtin(local_invocation_id) LocalInvocationID : vec3<u32>) {
+                textureStore(image0, vec2<i32>(LocalInvocationID.xy), vec4<f32>(0.0, 0.0, 0.0, 0.0));
+            })");
+
+    wgpu::ComputePipelineDescriptor descriptor;
+    descriptor.layout = pipelineLayout;
+    descriptor.compute.module = csModule;
+    descriptor.compute.entryPoint = "main";
+
+    device.CreateComputePipeline(&descriptor);
+}

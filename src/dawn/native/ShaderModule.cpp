@@ -434,7 +434,14 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
                             "binding access (%s).",
                             layoutInfo.storageTexture.access, shaderInfo.storageTexture.access);
 
-            DAWN_INVALID_IF(layoutInfo.storageTexture.format != shaderInfo.storageTexture.format,
+            bool formatCompatible =
+                layoutInfo.storageTexture.format == shaderInfo.storageTexture.format;
+            if (device->HasFeature(Feature::BGRA8UnormStorage) &&
+                layoutInfo.storageTexture.format == wgpu::TextureFormat::BGRA8Unorm) {
+                formatCompatible |=
+                    shaderInfo.storageTexture.format == wgpu::TextureFormat::RGBA8Unorm;
+            }
+            DAWN_INVALID_IF(!formatCompatible,
                             "The layout's binding format (%s) doesn't match the shader's binding "
                             "format (%s).",
                             layoutInfo.storageTexture.format, shaderInfo.storageTexture.format);

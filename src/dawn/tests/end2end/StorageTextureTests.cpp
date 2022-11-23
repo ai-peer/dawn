@@ -148,6 +148,13 @@ class StorageTextureTests : public DawnTest {
                 break;
             }
 
+            case wgpu::TextureFormat::BGRA8Unorm: {
+                utils::RGBA8* valuePtr = static_cast<utils::RGBA8*>(pixelValuePtr);
+                *valuePtr =
+                    utils::RGBA8(pixelValue * 3, pixelValue * 2, pixelValue, pixelValue * 4);
+                break;
+            }
+
             case wgpu::TextureFormat::RGBA8Snorm:
             case wgpu::TextureFormat::RGBA8Sint: {
                 int8_t* valuePtr = static_cast<int8_t*>(pixelValuePtr);
@@ -862,6 +869,71 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
 }
 
 DAWN_INSTANTIATE_TEST(StorageTextureTests,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+class BGRA8UnormStorageTextureTests : public StorageTextureTests {
+  public:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        if (SupportsFeatures({wgpu::FeatureName::BGRA8UnormStorage})) {
+            mIsBGRA8UnormStorageSupported = true;
+            return {wgpu::FeatureName::BGRA8UnormStorage};
+        } else {
+            mIsBGRA8UnormStorageSupported = false;
+            return {};
+        }
+    }
+
+    bool IsBGRA8UnormStorageSupported() { return mIsBGRA8UnormStorageSupported; }
+
+  private:
+    bool mIsBGRA8UnormStorageSupported = false;
+};
+
+// Test that BGRA8Unorm is supported to be used as storage texture when the feature
+// 'bgra8unorm-storage' is supported.
+TEST_P(BGRA8UnormStorageTextureTests, WriteonlyStorageTexture) {
+    DAWN_TEST_UNSUPPORTED_IF(!IsBGRA8UnormStorageSupported());
+
+    constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::BGRA8Unorm;
+
+    // Prepare the write-only storage texture.
+    wgpu::Texture writeonlyStorageTexture =
+        CreateTexture(kFormat, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::CopySrc,
+                      {kWidth, kHeight});
+    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, bindGroupLayout, {{0, writeonlyStorageTexture.CreateView()}});
+
+    // Write the expected pixel values into the write-only storage texture.
+    constexpr wgpu::TextureFormat kWGSLFormat = wgpu::TextureFormat::RGBA8Unorm;
+    const std::string computeShader = CommonWriteOnlyTestCode("compute", kWGSLFormat);
+    wgpu::PipelineLayout pipelineLayout = utils::MakePipelineLayout(device, {bindGroupLayout});
+    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, computeShader.c_str());
+    wgpu::ComputePipelineDescriptor computeDescriptor;
+    computeDescriptor.layout = pipelineLayout;
+    computeDescriptor.compute.module = csModule;
+    computeDescriptor.compute.entryPoint = "main";
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&computeDescriptor);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder computePassEncoder = encoder.BeginComputePass();
+    computePassEncoder.SetBindGroup(0, bindGroup);
+    computePassEncoder.SetPipeline(pipeline);
+    computePassEncoder.DispatchWorkgroups(1);
+    computePassEncoder.End();
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+    queue.Submit(1, &commandBuffer);
+
+    // Verify the pixel data in the write-only storage texture is expected.
+    CheckOutputStorageTexture(writeonlyStorageTexture, kFormat, {kWidth, kHeight});
+}
+
+DAWN_INSTANTIATE_TEST(BGRA8UnormStorageTextureTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
