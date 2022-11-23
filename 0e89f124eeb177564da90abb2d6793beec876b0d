@@ -56,6 +56,30 @@
       },
       "revId": "0e89f124eeb177564da90abb2d6793beec876b0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08d2522e_84106edf",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T15:27:11Z",
+      "side": 1,
+      "message": "That\u0027s for the epsilon pointer, move the `4` result up to the general results.\n\nLeft the others here as it feels strange to test, what is essentially the result of `std::log` by calling `std::log`.",
+      "parentUuid": "e9ad70af_fef4c571",
+      "range": {
+        "startLine": 1314,
+        "startChar": 1,
+        "endLine": 1345,
+        "endChar": 1
+      },
+      "revId": "0e89f124eeb177564da90abb2d6793beec876b0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
