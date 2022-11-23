@@ -22,6 +22,30 @@
       },
       "revId": "31b7fca82c312035917f2168cb40d6d0966c1607",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04147590_0bf6880f",
+        "filename": "src/tint/sem/struct.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-23T15:15:56Z",
+      "side": 1,
+      "message": "It\u0027s an rank ordered list of concrete structure types for the given abstract type. Given that there\u0027s no other form of conversion allowed in WGSL, I\u0027m not sure the suggested renames helps remove any confusion.",
+      "parentUuid": "066358a8_0baa66b4",
+      "range": {
+        "startLine": 156,
+        "startChar": 9,
+        "endLine": 156,
+        "endChar": 25
+      },
+      "revId": "31b7fca82c312035917f2168cb40d6d0966c1607",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
