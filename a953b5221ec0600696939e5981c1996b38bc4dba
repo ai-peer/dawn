@@ -33,6 +33,29 @@
       "message": "PTAL, thanks!",
       "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d01347b_822f5b92",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T15:10:39Z",
+      "side": 1,
+      "message": "this is surprising - doesn\u0027t the feature only allow you to make a BGRA8Unorm texture with storage usage? I don\u0027t think it should allow binding textures with a component swizzle",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
