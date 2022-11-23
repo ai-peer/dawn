@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fff6432a_591dc165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T00:03:10Z",
+      "side": 1,
+      "message": "PTAL. The cts change is up for review, this will probably fail kokoro until cts rolls forward.",
+      "revId": "ac3520a2bf0b24d0556febddd795bb5621fe2511",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
