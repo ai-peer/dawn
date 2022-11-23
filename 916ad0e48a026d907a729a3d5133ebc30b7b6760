@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba3835f_847ef545",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T02:15:31Z",
+      "side": 1,
+      "message": "PTAL. Looks like some `dot` generated results got created when I ran `generate-expected`.",
+      "revId": "916ad0e48a026d907a729a3d5133ebc30b7b6760",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
