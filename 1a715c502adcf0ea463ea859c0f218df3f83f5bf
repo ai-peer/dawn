@@ -75,6 +75,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bac44d7_ffa8d434",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3272,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T00:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ea63ef6_ffe4c901",
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f41ebf4_1544617e",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3272,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T00:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8569ec1f_8ad880ac",
+      "range": {
+        "startLine": 3272,
+        "startChar": 80,
+        "endLine": 3272,
+        "endChar": 89
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b28bc627_55bf7c2c",
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b41ed8_b5c84a0e",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 3278,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T00:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b28bc627_55bf7c2c",
+      "range": {
+        "startLine": 3278,
+        "startChar": 20,
+        "endLine": 3278,
+        "endChar": 94
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4253b384_fbbca78d",
@@ -111,6 +177,30 @@
       "writtenOn": "2022-11-22T20:53:08Z",
       "side": 1,
       "message": "nit: This name is misleading because the output has \"break if\"",
+      "range": {
+        "startLine": 9515,
+        "startChar": 84,
+        "endLine": 9515,
+        "endChar": 93
+      },
+      "revId": "1a715c502adcf0ea463ea859c0f218df3f83f5bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f766444e_b9786ce4",
+        "filename": "src/tint/reader/spirv/function_cfg_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 9515,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T00:32:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4253b384_fbbca78d",
       "range": {
         "startLine": 9515,
         "startChar": 84,
