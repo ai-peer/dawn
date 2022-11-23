@@ -3227,47 +3227,41 @@ Maybe<const ast::Expression*> ParserImpl::core_lhs_expression() {
 }
 
 // lhs_expression
-//   : ( STAR | AND )* core_lhs_expression component_or_swizzle_specifier?
+//   : core_lhs_expression component_or_swizzle_specifier ?
+//   | AND lhs_expression
+//   | STAR lhs_expression
 Maybe<const ast::Expression*> ParserImpl::lhs_expression() {
-    std::vector<const Token*> prefixes;
-    while (peek_is(Token::Type::kStar) || peek_is(Token::Type::kAnd) ||
-           peek_is(Token::Type::kAndAnd)) {
-        auto& t = next();
-
-        // If an '&&' is provided split into '&' and '&'
-        if (t.Is(Token::Type::kAndAnd)) {
-            split_token(Token::Type::kAnd, Token::Type::kAnd);
-        }
-
-        prefixes.push_back(&t);
-    }
-
     auto core_expr = core_lhs_expression();
     if (core_expr.errored) {
         return Failure::kErrored;
-    } else if (!core_expr.matched) {
-        if (prefixes.empty()) {
-            return Failure::kNoMatch;
-        }
-
-        return add_error(peek(), "missing expression");
+    }
+    if (core_expr.matched) {
+      return component_or_swizzle_specifier(core_expr.value);
     }
 
-    const auto* expr = core_expr.value;
-    for (auto it = prefixes.rbegin(); it != prefixes.rend(); ++it) {
-        auto& t = **it;
-        ast::UnaryOp op = ast::UnaryOp::kAddressOf;
-        if (t.Is(Token::Type::kStar)) {
-            op = ast::UnaryOp::kIndirection;
-        }
-        expr = create<ast::UnaryOpExpression>(t.source(), op, expr);
-    }
-
-    auto e = component_or_swizzle_specifier(expr);
-    if (e.errored) {
+    if (match(Token::Type::kAnd)) {
+      auto* lhs = lhs_expression();
+      if (lhs.errored) {
         return Failure::kErrored;
+      }
+      if (!lhs.matched) {
+         return add_error(t, "invalid expression");
+      }
+      return create<ast::UnaryOpExpresion>(t.source(), ast::UnaryOp::kAddressOf, lhs);
     }
-    return e.value;
+
+    if (match(Token::Type::kStar)) {
+      auto* lhs = lhs_expression();
+      if (lhs.errored) {
+        return Failure::kErrored;
+      }
+      if (!lhs.matched) {
+         return add_error(t, "invalid expression");
+      }
+      return create<ast::UnaryOpExpresion>(t.source(), ast::UnaryOp::kIndirection, lhs);
+    }
+
+    return Failure::kNoMatch;
 }
 
 // variable_updating_statement
