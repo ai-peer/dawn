@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "024e54de_358be108",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 2574,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5a511c7_fa45f561",
+      "revId": "fd17322342b48f80378465de31b0f10fa916c099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "697bde0d_74961c05",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-11-22T11:08:16Z",
       "side": 1,
       "message": "nit: tags: [\"dawn\"]",
+      "revId": "fd17322342b48f80378465de31b0f10fa916c099",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c83e6623_78cd5819",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 2988,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T00:29:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "697bde0d_74961c05",
       "revId": "fd17322342b48f80378465de31b0f10fa916c099",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
