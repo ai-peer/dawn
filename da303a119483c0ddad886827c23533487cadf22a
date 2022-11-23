@@ -56,6 +56,30 @@
       },
       "revId": "da303a119483c0ddad886827c23533487cadf22a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "028c1dec_8ebdc48c",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-23T08:49:57Z",
+      "side": 1,
+      "message": "Sounds good to me. Added, thanks.",
+      "parentUuid": "8c37ddb1_d0305674",
+      "range": {
+        "startLine": 327,
+        "startChar": 3,
+        "endLine": 335,
+        "endChar": 5
+      },
+      "revId": "da303a119483c0ddad886827c23533487cadf22a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
