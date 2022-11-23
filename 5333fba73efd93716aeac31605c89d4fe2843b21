@@ -206,6 +206,30 @@
       },
       "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25dc6e79_70ec9a45",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "\u003e However this is a third-party code inclusion that\u0027s not already in Chromium so we should go for a third-party review as per the regular process.\n\nYes that\u0027s reasonable. Let us do some preparations first before starting the process.",
+      "parentUuid": "07d9f163_caf1cd0c",
+      "range": {
+        "startLine": 298,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 5
+      },
+      "revId": "5333fba73efd93716aeac31605c89d4fe2843b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

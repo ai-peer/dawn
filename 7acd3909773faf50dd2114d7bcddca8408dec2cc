@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37977a7_5c8ca8c7",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31213c29_174db7d6",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a218ac3_92e7774e",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "caed9c26_76bb6a56",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "I\u0027d like to only attempt to load the DLL once per adapter. If the first load fails then we will return nullptr directly and won\u0027t load the DLL again.",
+      "parentUuid": "5a218ac3_92e7774e",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86bc963a_39295096",
         "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
         "patchSetId": 6
@@ -48,6 +84,24 @@
       "writtenOn": "2022-11-21T13:37:40Z",
       "side": 1,
       "message": "nit: Maybe add a comment as to what this does?",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e62457db_2ca104fc",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86bc963a_39295096",
       "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd027ac5_f2ed7235",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "OK I will add Rafael as the reviewer of this CL.",
+      "parentUuid": "6515edda_45d89cac",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa301994_f7a64604",
         "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
         "patchSetId": 6
@@ -82,6 +154,30 @@
       "writtenOn": "2022-11-21T13:37:40Z",
       "side": 1,
       "message": "nit: DAWN_PLATFORM_IS(64_BIT)",
+      "range": {
+        "startLine": 187,
+        "startChar": 7,
+        "endLine": 187,
+        "endChar": 13
+      },
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eda2ef68_df5f204e",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa301994_f7a64604",
       "range": {
         "startLine": 187,
         "startChar": 7,
@@ -115,6 +211,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a686f5d_d9f406cc",
+        "filename": "src/dawn/native/d3d12/IntelExtensionD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2333c530_dd49a984",
+      "range": {
+        "startLine": 237,
+        "startChar": 6,
+        "endLine": 237,
+        "endChar": 31
+      },
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cff61111_06b10900",
@@ -128,6 +248,24 @@
       "writtenOn": "2022-11-21T13:37:40Z",
       "side": 1,
       "message": "What is the license of this file? Chromium can only use files that have been licensed as open-source I believe, but we should check with legal counsel. Google Chrome can have some non-open source things but that still needs legal review. Basically we need to go through the steps at https://chromium.googlesource.com/chromium/src/+/HEAD/docs/adding_to_third_party.md since this is a new third-party dependency. (IDK if the SPDX-License-Identifier is enough for that process. Maybe we need a LICENSE file)",
+      "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89decb0e_9555ec62",
+        "filename": "third_party/IntelExtension/igdext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-23T05:49:21Z",
+      "side": 1,
+      "message": "This file is open-sourced and the license of this file is MIT. I am communicating with our driver team to clarify the license of this file.",
+      "parentUuid": "cff61111_06b10900",
       "revId": "7acd3909773faf50dd2114d7bcddca8408dec2cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
