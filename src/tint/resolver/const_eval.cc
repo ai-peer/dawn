@@ -1152,6 +1152,8 @@ ConstEval::Result ConstEval::Index(const sem::Expression* obj_expr,
 ConstEval::Result ConstEval::MemberAccess(const sem::Expression* obj_expr,
                                           const sem::StructMember* member) {
     auto obj_val = obj_expr->ConstantValue();
+    printf("CONST EVAL MEMBER ACCESS. obj_val: %p, index: %i\n", obj_val,
+           static_cast<int>(member->Index()));
     if (!obj_val) {
         return nullptr;
     }

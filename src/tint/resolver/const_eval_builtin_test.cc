@@ -1278,7 +1278,8 @@ INSTANTIATE_TEST_SUITE_P(  //
     Modf,
     ResolverConstEvalBuiltinTest,
     testing::Combine(testing::Values(sem::BuiltinType::kModf),
-                     testing::ValuesIn(Concat(ModfCases<f32>(),  //
+                     testing::ValuesIn(Concat(ModfCases<AFloat>(),  //
+                                              ModfCases<f32>(),     //
                                               ModfCases<f16>()))));
 
 std::vector<Case> Pack4x8snormCases() {
