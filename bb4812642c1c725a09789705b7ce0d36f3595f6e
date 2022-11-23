@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7250fb2d_8a9e9281",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T15:38:52Z",
+      "side": 1,
+      "message": "We usually use `ty` for this, don\u0027t we?",
+      "range": {
+        "startLine": 832,
+        "startChar": 73,
+        "endLine": 832,
+        "endChar": 75
+      },
+      "revId": "bb4812642c1c725a09789705b7ce0d36f3595f6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
