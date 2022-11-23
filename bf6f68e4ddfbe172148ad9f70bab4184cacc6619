@@ -50,6 +50,24 @@
       "message": "The comments are a bit confusing. I was reading this as row vectors so:\n\n```\n| a b c |\n| d e f |\n| g h i |\n```\n\nbased on the grouping, but it\u0027s really:\n\n```\n| a d g |\n| b e h |\n| c f i |\n```\n\nMaybe write it out in matrix form instead of as vectors?",
       "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d64e41a2_7048604e",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T16:36:50Z",
+      "side": 1,
+      "message": "I understand, though WGSL is always column vectors, so I thought this was clear.",
+      "parentUuid": "e52983e0_da64271b",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
