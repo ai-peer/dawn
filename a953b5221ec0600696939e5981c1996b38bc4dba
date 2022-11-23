@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "488c0460_ba1aaca4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T14:17:03Z",
+      "side": 1,
+      "message": "What about VK_IMAGE_FORMAT_B8R8G8A8_UNORM? The WebGPU spec doesn\u0027t describe any of the additional logic in this commit message so ideally we introduce a bgra8unorm WGSL qualifier and use it instead of reusing bgra8unorm. What am I missing?",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
