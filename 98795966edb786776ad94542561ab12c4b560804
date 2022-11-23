@@ -269,6 +269,30 @@
       },
       "revId": "98795966edb786776ad94542561ab12c4b560804",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e36763_273cb8f8",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-23T13:57:22Z",
+      "side": 1,
+      "message": "Ok, then the two conditions can be merged in one as A \u0026\u0026 B but sgtm otherwise.",
+      "parentUuid": "b08fb359_d8cf7ab4",
+      "range": {
+        "startLine": 551,
+        "startChar": 0,
+        "endLine": 553,
+        "endChar": 0
+      },
+      "revId": "98795966edb786776ad94542561ab12c4b560804",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
