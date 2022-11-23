@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05eb819e_2a0e83e8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-23T18:14:00Z",
+      "side": 1,
+      "message": "`unexpected number of matrix rows`?",
+      "range": {
+        "startLine": 2206,
+        "startChar": 54,
+        "endLine": 2206,
+        "endChar": 69
+      },
+      "revId": "d6cfb987c3147568c7296f17cc7b8bb8375bd9fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
