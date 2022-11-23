@@ -140,6 +140,7 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
     mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
     mSupportedFeatures.EnableFeature(Feature::DepthClipControl);
+    mSupportedFeatures.EnableFeature(Feature::BGRA8UnormStorage);
 
     // Both Dp4a and ShaderF16 features require DXC version being 1.4 or higher
     if (GetBackend()->IsDXCAvailable(1, 4)) {
