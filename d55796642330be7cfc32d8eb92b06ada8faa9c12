@@ -22,6 +22,30 @@
       },
       "revId": "d55796642330be7cfc32d8eb92b06ada8faa9c12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46a4cb4c_178eb53e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3049,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T20:13:08Z",
+      "side": 1,
+      "message": "You\u0027re right. I was in the mindset of Transforms where we need to clone everything. Fixed.",
+      "parentUuid": "3c996d05_beae261b",
+      "range": {
+        "startLine": 3048,
+        "startChar": 12,
+        "endLine": 3049,
+        "endChar": 64
+      },
+      "revId": "d55796642330be7cfc32d8eb92b06ada8faa9c12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
