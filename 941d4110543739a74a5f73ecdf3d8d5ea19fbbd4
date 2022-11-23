@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24fb8aef_14de449f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd87a3a0_58fb1f2b",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "I\u0027m conflicted whether we should write the message as it is currently,\n\nOr have it look like the other normal validation errors.\n\n\"\"\"\nSample type %s for multisampled texture bindings was %s., texture.sampleType wgpu::TextureSampleType::Float.\n\"\"\"\n\nAnd then add a suffix for the deprecated period like:\nmessage \u003d message + \" This will be deprecated and invalid in a future version.\"\n\n\nThe upside is that the message looks just like our normal validation errors.\n\nThe downside is that we lose the parts of the messages that say \"use XYZ instead\".",
+      "range": {
+        "startLine": 118,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 55
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2c9fc8_47b26425",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "maybe we should just make EmitDeprectationWarning take const std::string\u0026 so we don\u0027t need the extra `warning` variable",
+      "range": {
+        "startLine": 89,
+        "startChar": 35,
+        "endLine": 89,
+        "endChar": 51
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8a9ed3_b13a4137",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "maybe \"DAWN_DEPRECATED_IF\" ?",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 41
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5bf6c0_aae0928e",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "probably do not need UNLIKELY. Otherwise current apps using the deprecated behavior could hit a performance problem",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 33
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d4c904_cd23c640",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "I think the name can be \"DisallowDeprecatedAPIs\" to match \"DisallowUnsafeAPIs\"",
+      "range": {
+        "startLine": 328,
+        "startChar": 13,
+        "endLine": 328,
+        "endChar": 35
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "756d9d19_608c5b3f",
+        "filename": "src/dawn/tests/unittests/validation/DeprecatedPathToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T20:53:16Z",
+      "side": 1,
+      "message": "I think these could go in third_party/dawn/src/dawn/tests/end2end/DeprecatedAPITests.cpp where we run it once normal, and once with disallow_deprecated_path forced on.\n\nIf it\u0027s on, we expect a validation error instead. WDYT?",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
