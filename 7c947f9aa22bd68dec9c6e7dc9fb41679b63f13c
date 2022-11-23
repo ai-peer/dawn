@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfc08f3c_f91d687e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-23T15:00:18Z",
+      "side": 1,
+      "message": "I landed the spec change too.\nhttps://github.com/gpuweb/gpuweb/pull/3629",
+      "revId": "7c947f9aa22bd68dec9c6e7dc9fb41679b63f13c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
