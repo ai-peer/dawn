@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066358a8_0baa66b4",
+        "filename": "src/tint/sem/struct.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T15:03:31Z",
+      "side": 1,
+      "message": "nit: this name isn\u0027t very clear. Maybe `SetConversionRankConcreteTypes` or `SetConversionTypes`?",
+      "range": {
+        "startLine": 156,
+        "startChar": 9,
+        "endLine": 156,
+        "endChar": 25
+      },
+      "revId": "31b7fca82c312035917f2168cb40d6d0966c1607",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

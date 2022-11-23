@@ -1,5 +1,52 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de895291_6a40e8aa",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T15:03:31Z",
+      "side": 1,
+      "message": "nit: would rename to `el_ty` for clarity",
+      "range": {
+        "startLine": 832,
+        "startChar": 73,
+        "endLine": 832,
+        "endChar": 75
+      },
+      "revId": "210eb8ca9f513ab491eefc36e5a71b0c9c66b39c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c7ba1e_6db759ea",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-23T15:03:31Z",
+      "side": 1,
+      "message": "nit: factor out to `build_abstract` lambda like the others for clarity",
+      "range": {
+        "startLine": 847,
+        "startChar": 29,
+        "endLine": 848,
+        "endChar": 74
+      },
+      "revId": "210eb8ca9f513ab491eefc36e5a71b0c9c66b39c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
