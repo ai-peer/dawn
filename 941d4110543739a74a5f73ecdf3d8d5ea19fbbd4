@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "beea453e_a7a2f5fc",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-23T21:40:42Z",
+      "side": 1,
+      "message": "I thought about having DAWN_DEPRECATED_IF(device, EXPR, deprecateMsg, ...) and concat the deprecateMsg.\nBut turns out it is only useful for this case. There are many other deprecations that are just deprecations (clearColor, endPass etc.) Doesn\u0027t seem it would be help but just mess up with those.",
+      "parentUuid": "bd87a3a0_58fb1f2b",
+      "range": {
+        "startLine": 118,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 55
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b2c9fc8_47b26425",
         "filename": "src/dawn/native/Error.h",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-23T20:53:16Z",
       "side": 1,
       "message": "maybe we should just make EmitDeprectationWarning take const std::string\u0026 so we don\u0027t need the extra `warning` variable",
+      "range": {
+        "startLine": 89,
+        "startChar": 35,
+        "endLine": 89,
+        "endChar": 51
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbda01f0_3e0a9e82",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-23T21:40:42Z",
+      "side": 1,
+      "message": "Done. Add an overload.",
+      "parentUuid": "4b2c9fc8_47b26425",
       "range": {
         "startLine": 89,
         "startChar": 35,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3a36930_fd4a212a",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-23T21:40:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df8a9ed3_b13a4137",
+      "range": {
+        "startLine": 96,
+        "startChar": 8,
+        "endLine": 96,
+        "endChar": 41
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff5bf6c0_aae0928e",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c739d1_ba86d558",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-23T21:40:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff5bf6c0_aae0928e",
+      "range": {
+        "startLine": 100,
+        "startChar": 8,
+        "endLine": 100,
+        "endChar": 33
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3d4c904_cd23c640",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-11-23T20:53:16Z",
       "side": 1,
       "message": "I think the name can be \"DisallowDeprecatedAPIs\" to match \"DisallowUnsafeAPIs\"",
+      "range": {
+        "startLine": 328,
+        "startChar": 13,
+        "endLine": 328,
+        "endChar": 35
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "425b6881_dfd2cf64",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-23T21:40:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3d4c904_cd23c640",
       "range": {
         "startLine": 328,
         "startChar": 13,
