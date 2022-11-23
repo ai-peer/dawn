@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc6b009_6c80af98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-23T22:16:07Z",
+      "side": 1,
+      "message": "PTAL. I\u0027ll get CTS fixed tomorrow.\n\nIs this something that we would need to deprecate first? I\u0027m not sure about the API policy for changes like this, but I assume this could break existing stuff.",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
