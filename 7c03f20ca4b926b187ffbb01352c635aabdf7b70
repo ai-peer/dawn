@@ -50,6 +50,24 @@
       "message": "I think the additional tolerance in this file could also allow lifting the Swiftshader suppressions. Can you check and remove them if possible?",
       "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1bf5f6_ff48a387",
+        "filename": "src/dawn/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-23T14:49:51Z",
+      "side": 1,
+      "message": "indeed - nice!",
+      "parentUuid": "b27a380b_598a60ea",
+      "revId": "7c03f20ca4b926b187ffbb01352c635aabdf7b70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
