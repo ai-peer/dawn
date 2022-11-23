@@ -810,3 +810,31 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneComput
         encoder.Finish();
     }
 }
+
+class BGRA8UnormStorageTextureValidationTests : public StorageTextureValidationTests {
+  protected:
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        wgpu::DeviceDescriptor descriptor;
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::BGRA8UnormStorage};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeaturesCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Verify the storage texture with BGRA8Unorm format is compatible to the BindGroupLayoutEntry with
+// RGBA8Unorm format.
+TEST_F(BGRA8UnormStorageTextureValidationTests, CompatibleToRGBA8UnormBindGroupLayoutEntry) {
+    constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::BGRA8Unorm;
+    wgpu::Texture storageTexture =
+        CreateTexture(wgpu::TextureUsage::StorageBinding, kTextureFormat);
+
+    constexpr wgpu::TextureFormat kBindGroupLayoutStorageTextureFormat =
+        wgpu::TextureFormat::RGBA8Unorm;
+    for (wgpu::StorageTextureAccess storageTextureType : kSupportedStorageTextureAccess) {
+        wgpu::BindGroupLayout bindGroupLayout =
+            utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, storageTextureType,
+                                                 kBindGroupLayoutStorageTextureFormat}});
+        utils::MakeBindGroup(device, bindGroupLayout, {{0, storageTexture.CreateView()}});
+    }
+}
