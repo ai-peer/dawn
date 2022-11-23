@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8b4b1c_70eb9432",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T16:33:56Z",
+      "side": 1,
+      "message": "This could just be `return Add(source, r.Get(), g_det3.Get())`",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80e80c6_997eefe9",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T16:33:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52983e0_da64271b",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 993,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-23T16:33:56Z",
+      "side": 1,
+      "message": "The comments are a bit confusing. I was reading this as row vectors so:\n\n```\n| a b c |\n| d e f |\n| g h i |\n```\n\nbased on the grouping, but it\u0027s really:\n\n```\n| a d g |\n| b e h |\n| c f i |\n```\n\nMaybe write it out in matrix form instead of as vectors?",
+      "revId": "bf6f68e4ddfbe172148ad9f70bab4184cacc6619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
