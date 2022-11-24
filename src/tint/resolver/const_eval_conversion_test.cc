@@ -19,19 +19,6 @@ using namespace tint::number_suffixes;  // NOLINT
 namespace tint::resolver {
 namespace {
 
-using Scalar = std::variant<  //
-    builder::Value<AInt>,
-    builder::Value<AFloat>,
-    builder::Value<u32>,
-    builder::Value<i32>,
-    builder::Value<f32>,
-    builder::Value<f16>,
-    builder::Value<bool>>;
-
-static std::ostream& operator<<(std::ostream& o, const Scalar& scalar) {
-    return ToValueBase(scalar)->Print(o);
-}
-
 enum class Kind {
     kScalar,
     kVector,
@@ -48,24 +35,24 @@ static std::ostream& operator<<(std::ostream& o, const Kind& k) {
 }
 
 struct Case {
-    Scalar input;
-    Scalar expected;
+    ValuePtr input;
+    ValuePtr expected;
     builder::CreatePtrs type;
     bool unrepresentable = false;
 };
 
 static std::ostream& operator<<(std::ostream& o, const Case& c) {
     if (c.unrepresentable) {
-        o << "[unrepresentable] input: " << c.input;
+        o << "[unrepresentable] input: " << *c.input;
     } else {
-        o << "input: " << c.input << ", expected: " << c.expected;
+        o << "input: " << *c.input << ", expected: " << *c.expected;
     }
     return o << ", type: " << c.type;
 }
 
 template <typename TO, typename FROM>
 Case Success(FROM input, TO expected) {
-    return {builder::Val(input), builder::Val(expected), builder::CreatePtrsFor<TO>()};
+    return {Val(input), Val(expected), builder::CreatePtrsFor<TO>()};
 }
 
 template <typename TO, typename FROM>
@@ -83,7 +70,7 @@ TEST_P(ResolverConstEvalConvTest, Test) {
     const auto& type = std::get<1>(GetParam()).type;
     const auto unrepresentable = std::get<1>(GetParam()).unrepresentable;
 
-    auto* input_val = ToValueBase(input)->Expr(*this);
+    auto* input_val = input->Expr(*this);
     auto* expr = Construct(type.ast(*this), input_val);
     if (kind == Kind::kVector) {
         expr = Construct(ty.vec(nullptr, 3), expr);
@@ -107,7 +94,7 @@ TEST_P(ResolverConstEvalConvTest, Test) {
         ASSERT_NE(sem->ConstantValue(), nullptr);
         EXPECT_TYPE(sem->ConstantValue()->Type(), target_sem_ty);
 
-        auto expected_values = ToValueBase(expected)->Args();
+        auto expected_values = expected->Args();
         if (kind == Kind::kVector) {
             expected_values.values.Push(expected_values.values[0]);
             expected_values.values.Push(expected_values.values[0]);
