@@ -19,27 +19,24 @@ using namespace tint::number_suffixes;  // NOLINT
 namespace tint::resolver {
 namespace {
 
-// Bring in std::ostream& operator<<(std::ostream& o, const Types& types)
-using resolver::operator<<;
-
 struct Case {
-    Types input;
-    Types expected;
+    ValuePtr input;
+    ValuePtr expected;
 };
 
 static std::ostream& operator<<(std::ostream& o, const Case& c) {
-    o << "input: " << c.input << ", expected: " << c.expected;
+    o << "input: ";
+    c.input->Print(o) << ", expected: ";
+    c.expected->Print(o);
     return o;
 }
-
-/// Creates a Case with Values of any type
-template <typename T, typename U>
-Case C(Value<T> input, Value<U> expected) {
+// Creates a Case with Values of any type
+Case C(ValuePtr input, ValuePtr expected) {
     return Case{std::move(input), std::move(expected)};
 }
 
 /// Convenience overload to creates a Case with just scalars
-template <typename T, typename U, typename = std::enable_if_t<!IsValue<T>>>
+template <typename T, typename U, typename = std::enable_if_t<!IsValuePtr<T>>>
 Case C(T input, U expected) {
     return Case{Val(input), Val(expected)};
 }
@@ -52,8 +49,8 @@ TEST_P(ResolverConstEvalUnaryOpTest, Test) {
     auto op = std::get<0>(GetParam());
     auto& c = std::get<1>(GetParam());
 
-    auto* expected = ToValueBase(c.expected);
-    auto* input = ToValueBase(c.input);
+    auto& expected = c.expected;
+    auto& input = c.input;
 
     auto* input_expr = input->Expr(*this);
     auto* expr = create<ast::UnaryOpExpression>(op, input_expr);
