@@ -803,6 +803,32 @@ INSTANTIATE_TEST_SUITE_P(  //
                                               CrossCases<f16>()))));
 
 template <typename T>
+std::vector<Case> DistanceCases() {
+    return std::vector<Case>{
+        C({T(0), T(0)}, T(0)),
+        // length(-5) -> 5
+        C({T(30), T(35)}, T(5)),
+
+        C({Vec(T(30), T(20)), Vec(T(25), T(15))}, Val(T(7.0710678119))).FloatComp(),
+
+        E({T::Lowest(), T::Highest()},
+          R"(12:34 error: )" + OverflowErrorMessage(T::Lowest(), "-", T::Highest()) + R"(
+12:34 note: when calculating distance)"),
+        E({Vec(T::Highest(), T::Highest()), Vec(T(1), T(1))},
+          R"(12:34 error: )" +
+              OverflowErrorMessage(T(T::Highest() - T(1)), "*", T(T::Highest() - T(1))) + R"(
+12:34 note: when calculating distance)"),
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    Distance,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kDistance),
+                     testing::ValuesIn(Concat(DistanceCases<AFloat>(),  //
+                                              DistanceCases<f32>(),     //
+                                              DistanceCases<f16>()))));
+
+template <typename T>
 std::vector<Case> DotCases() {
     auto r = std::vector<Case>{
         C({Vec(T(0), T(0)), Vec(T(0), T(0))}, Val(T(0))),
