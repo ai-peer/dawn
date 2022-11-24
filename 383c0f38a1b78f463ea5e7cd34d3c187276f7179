@@ -52,6 +52,24 @@
       "parentUuid": "201cd500_5091e70b",
       "revId": "383c0f38a1b78f463ea5e7cd34d3c187276f7179",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b979f34_7ad2a6e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-24T22:36:01Z",
+      "side": 1,
+      "message": "As discussed offline, I decided to create a type-erased `Value` class that stores `shared_ptr\u003cconst detail::ValueBase\u003e`. This lets us copy Value around while letting it behave polymorphically.",
+      "parentUuid": "7f2a5ffc_f123e966",
+      "revId": "383c0f38a1b78f463ea5e7cd34d3c187276f7179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

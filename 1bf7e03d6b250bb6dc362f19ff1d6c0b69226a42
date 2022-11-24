@@ -16,6 +16,24 @@
       "message": "LGTM. I\u0027m not a huge fan of the `ValuePtr` would prefer to either see the `shared_ptr\u003cthing\u003e` or a wrapper as mentioned in chat. But, this seems to be an improvement so +2.",
       "revId": "1bf7e03d6b250bb6dc362f19ff1d6c0b69226a42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7be2ea77_d93a5ca7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-24T22:36:01Z",
+      "side": 1,
+      "message": "Agreed. As discussed in chat, I decided to create a type-erased `Value` class that stores a `shared_ptr\u003cconst detail::ValueBase\u003e`. This lets us copy Value around while letting it behave polymorphically.\n\nAside: If you\u0027re interested, I first learned about this technique years ago from Sean Parent from one his conference talks (this is one video of it: https://youtu.be/W2tWOdzgXHA). It\u0027s the same technique employed by types like `std::function`, which acts like a value-type, but internally behaves differently depending on the type of function bound to it.",
+      "parentUuid": "2a56760b_1143cfb0",
+      "revId": "1bf7e03d6b250bb6dc362f19ff1d6c0b69226a42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
