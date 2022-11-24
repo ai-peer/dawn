@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83c4f2e_da73eab9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-24T00:45:51Z",
+      "side": 1,
+      "message": "[1]\nThe biggest problem is in Vulkan SPEC no SPIRV storage format is compatible with VK_IMAGE_FORMAT_B8R8G8A8_UNORM:\nhttps://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#spirvenv-image-formats\n\n(I have found another discussion about supporting storage usage on BGRA8Unorm:\nhttps://gitlab.freedesktop.org/mesa/mesa/-/issues/178, where Jason Ekstrand replied that \"another option for supporting this that I\u0027ve considered is to simply expose the VK_IMAGE_USAGE_STORAGE_BIT for it and only allow BGRA8 to be used if the shader variable has an Unknown format and is NonReadable\")\n\nI wonder if we introduce bgra8unorm WGSL qualifier (currently in here: https://gpuweb.github.io/gpuweb/wgsl/#texel-formats), how can we translate it into SPIRV?\n\nThat\u0027s a difficult question for me right now so I decide not to touch it in this CL.",
+      "parentUuid": "488c0460_ba1aaca4",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-11-23T15:10:39Z",
       "side": 1,
       "message": "this is surprising - doesn\u0027t the feature only allow you to make a BGRA8Unorm texture with storage usage? I don\u0027t think it should allow binding textures with a component swizzle",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0623917f_fee172a5",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-24T00:45:51Z",
+      "side": 1,
+      "message": "Based on [1], in WGSL we don\u0027t have bgra8unorm WGSL qualifier, so\n- pipeline.getBindGroupLayout() cannot return a bind group layout with BGRA8Unorm format\n- in BindGroupLayout we cannot specify BGRA8Unorm as storage texture format\n- when validating BindGroup we have to make RGBA8Unorm bind group layout entry compatible with BGRA8Unorm texture",
+      "parentUuid": "7d01347b_822f5b92",
       "range": {
         "startLine": 168,
         "startChar": 12,
