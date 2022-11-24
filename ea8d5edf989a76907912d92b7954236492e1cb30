@@ -68,6 +68,24 @@
       "message": "actually cc\u0027ing Shrek",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d17779a_da41a2e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-24T01:29:16Z",
+      "side": 1,
+      "message": "\u003e that\u0027ll probably mean adding another member like minBufferSizeNoPadding.\n\nThese structs are auto-generated from dawn.json, so adding the extra member means it\u0027ll show up in dawn/webgpu.h as well. Is that going to affect dawn-native users in weird ways, or is it OK?\n\n\u003e tests for the deprecation warning should go in DeprecatedAPITests.cpp\n\nWill do.\n\n\u003e fyi you might have conflicts with https://dawn-review.googlesource.com/c/dawn/+/111321\n\nAck, will rebase when that lands.",
+      "parentUuid": "0a1535f0_412f8ed7",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
