@@ -611,10 +611,5 @@ uint64_t ResourceAllocatorManager::GetResourcePadding(
     }
     return 0;
 }
-void ResourceAllocatorManager::DestroyPool() {
-    for (auto& alloc : mPooledHeapAllocators) {
-        alloc->DestroyPool();
-    }
-}
 
 }  // namespace dawn::native::d3d12

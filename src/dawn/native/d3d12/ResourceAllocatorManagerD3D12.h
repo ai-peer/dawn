@@ -71,8 +71,6 @@ class ResourceAllocatorManager {
 
     void Tick(ExecutionSerial lastCompletedSerial);
 
-    void DestroyPool();
-
   private:
     void FreeMemory(ResourceHeapAllocation& allocation);
 
