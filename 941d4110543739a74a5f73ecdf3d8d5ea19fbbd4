@@ -274,6 +274,30 @@
       },
       "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db0bf8d6_ea4a70a8",
+        "filename": "src/dawn/tests/unittests/validation/DeprecatedPathToggleTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-24T10:18:03Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "756d9d19_608c5b3f",
+      "range": {
+        "startLine": 23,
+        "startChar": 6,
+        "endLine": 23,
+        "endChar": 31
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d48a4659_2f18c1db",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-24T10:18:03Z",
+      "side": 1,
+      "message": "Why are these only emitting a deprecation warning and not erroring if the toggle is set to true? Shouldn\u0027t EMIT_DEPRECATION_WARNING(device, args...) be the same as DAWN_DEPRECATED_IF(device, true, args...)?\n\nAaah it is because DAWN_DEPRECATED_IF returns an error when this function returns void.\n\nIMHO we could make EmitDeprecationWarning return a MaybeError instead of adding these macros and then here do something like:\n\n```\nif (GetDevice()-\u003eConsumedError(GetDevice()-\u003eEmitDeprecationWarning(\"endPass() has been deprecated. Use end() instead.\"))) {\n  return;\n}\nEndPass();\n```\n\nRemoving the macros makes the code a bit more verbose but also clearer in what it does and that it can return (because it would be using DAWN_TRY instead of a bespoke macro)",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da35df28_abc49424",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-24T10:18:03Z",
+      "side": 1,
+      "message": "nit: I think both overloads could be replaced with a single one taking an std::string_view.",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c40dd74_4284211d",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 5
