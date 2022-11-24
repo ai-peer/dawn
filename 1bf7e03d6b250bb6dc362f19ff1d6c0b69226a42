@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a56760b_1143cfb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-24T21:28:35Z",
+      "side": 1,
+      "message": "LGTM. I\u0027m not a huge fan of the `ValuePtr` would prefer to either see the `shared_ptr\u003cthing\u003e` or a wrapper as mentioned in chat. But, this seems to be an improvement so +2.",
+      "revId": "1bf7e03d6b250bb6dc362f19ff1d6c0b69226a42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
