@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6015e52_d568ff0b",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-24T18:32:25Z",
+      "side": 1,
+      "message": "K, I\u0027d put it in this order to be consistent with the `length` method. It seems like these helpers swapped the order from the const eval methods they get called from.",
+      "parentUuid": "b266e0b1_5704eacc",
+      "range": {
+        "startLine": 1233,
+        "startChar": 64,
+        "endLine": 1233,
+        "endChar": 84
+      },
+      "revId": "25066b2bac3a096c3e416b65bae8f90f4f2d7aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6c9fc1b_c0773ab4",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-11-24T18:12:13Z",
       "side": 1,
       "message": "Please can you factor this out to an `error_msg` lambda, just like is done in multiple places in this file? The one that takes 3 args so this is replaced with `error_msg(T::Lowest(), \"-\", T::Highest())`.",
+      "range": {
+        "startLine": 815,
+        "startChar": 10,
+        "endLine": 816,
+        "endChar": 40
+      },
+      "revId": "25066b2bac3a096c3e416b65bae8f90f4f2d7aad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71f13bb2_c2fab694",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-24T18:32:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6c9fc1b_c0773ab4",
       "range": {
         "startLine": 815,
         "startChar": 10,
