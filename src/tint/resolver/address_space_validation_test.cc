@@ -27,7 +27,7 @@ using ::testing::HasSubstr;
 
 using ResolverAddressSpaceValidationTest = ResolverTest;
 
-TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableNoAddressSpace_Fail) {
+TEST_F(ResolverAddressSpaceValidationTest, GlobalVariable_NoAddressSpace_Fail) {
     // var g : f32;
     GlobalVar(Source{{12, 34}}, "g", ty.f32());
 
@@ -36,7 +36,15 @@ TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableNoAddressSpace_Fail) {
               "12:34 error: module-scope 'var' declaration must have a address space");
 }
 
-TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableFunctionAddressSpace_Fail) {
+TEST_F(ResolverAddressSpaceValidationTest, PointerAlias_NoAddressSpace_Fail) {
+    // type g = ptr<f32>;
+    Alias("g", ty.pointer(Source{{12, 34}}, ty.f32(), ast::AddressSpace::kUndefined));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: ptr missing address space");
+}
+
+TEST_F(ResolverAddressSpaceValidationTest, GlobalVariable_FunctionAddressSpace_Fail) {
     // var<function> g : f32;
     GlobalVar(Source{{12, 34}}, "g", ty.f32(), ast::AddressSpace::kFunction);
 
@@ -45,84 +53,97 @@ TEST_F(ResolverAddressSpaceValidationTest, GlobalVariableFunctionAddressSpace_Fa
               "12:34 error: module-scope 'var' must not use address space 'function'");
 }
 
-TEST_F(ResolverAddressSpaceValidationTest, Private_RuntimeArray) {
-    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::AddressSpace::kPrivate);
+TEST_F(ResolverAddressSpaceValidationTest, GlobalVariable_Private_RuntimeArray) {
+    GlobalVar(Source{{56, 78}}, "v", ty.array(Source{{12, 34}}, ty.i32()),
+              ast::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
-12:34 note: while instantiating 'var' v)");
+56:78 note: while instantiating 'var' v)");
+}
+
+TEST_F(ResolverAddressSpaceValidationTest, PointerAlias_Private_RuntimeArray) {
+    Alias("t", ty.pointer(Source{{56, 78}}, ty.array(Source{{12, 34}}, ty.i32()),
+                          ast::AddressSpace::kPrivate));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
+56:78 note: while instantiating ptr<private, array<i32>, read_write>)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, Private_RuntimeArrayInStruct) {
-    auto* s = Structure("S", utils::Vector{Member("m", ty.array(ty.i32()))});
-    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::AddressSpace::kPrivate);
+    auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "m", ty.array(ty.i32()))});
+    GlobalVar(Source{{56, 78}}, "v", ty.Of(s), ast::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
-note: while analyzing structure member S.m
-12:34 note: while instantiating 'var' v)");
+              R"(error: runtime-sized arrays can only be used in the <storage> address space
+12:34 note: while analyzing structure member S.m
+56:78 note: while instantiating 'var' v)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, Workgroup_RuntimeArray) {
-    GlobalVar(Source{{12, 34}}, "v", ty.array(ty.i32()), ast::AddressSpace::kWorkgroup);
+    GlobalVar(Source{{56, 78}}, "v", ty.array(Source{{12, 34}}, ty.i32()),
+              ast::AddressSpace::kWorkgroup);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
-12:34 note: while instantiating 'var' v)");
+56:78 note: while instantiating 'var' v)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, Workgroup_RuntimeArrayInStruct) {
-    auto* s = Structure("S", utils::Vector{Member("m", ty.array(ty.i32()))});
-    GlobalVar(Source{{12, 34}}, "v", ty.Of(s), ast::AddressSpace::kWorkgroup);
+    auto* s = Structure("S", utils::Vector{Member(Source{{12, 34}}, "m", ty.array(ty.i32()))});
+    GlobalVar(Source{{56, 78}}, "v", ty.Of(s), ast::AddressSpace::kWorkgroup);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
-note: while analyzing structure member S.m
-12:34 note: while instantiating 'var' v)");
+              R"(error: runtime-sized arrays can only be used in the <storage> address space
+12:34 note: while analyzing structure member S.m
+56:78 note: while instantiating 'var' v)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, StorageBufferBool) {
     // var<storage> g : bool;
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kStorage, Binding(0_a),
-              Group(0_a));
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(Source{{12, 34}}), ast::AddressSpace::kStorage,
+              Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
+        R"(12:34 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, StorageBufferBoolAlias) {
     // type a = bool;
     // var<storage, read> g : a;
-    auto* a = Alias("a", ty.bool_());
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::AddressSpace::kStorage, Binding(0_a),
-              Group(0_a));
-
-    ASSERT_FALSE(r()->Resolve());
-
-    EXPECT_EQ(
-        r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
-56:78 note: while instantiating 'var' g)");
-}
-
-TEST_F(ResolverAddressSpaceValidationTest, StorageBufferPointer) {
-    // var<storage> g : ptr<private, f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+    Alias("a", ty.bool_());
+    GlobalVar(Source{{56, 78}}, "g", ty.type_name(Source{{12, 34}}, "a"),
               ast::AddressSpace::kStorage, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'storage' as it is non-host-shareable
+        R"(12:34 error: Type 'bool' cannot be used in address space 'storage' as it is non-host-shareable
+56:78 note: while instantiating 'var' g)");
+}
+
+TEST_F(ResolverAddressSpaceValidationTest, StorageBufferPointer) {
+    // var<storage> g : ptr<private, f32>;
+    GlobalVar(Source{{56, 78}}, "g",
+              ty.pointer(Source{{12, 34}}, ty.f32(), ast::AddressSpace::kPrivate),
+              ast::AddressSpace::kStorage, Binding(0_a), Group(0_a));
+
+    ASSERT_FALSE(r()->Resolve());
+
+    EXPECT_EQ(
+        r()->error(),
+        R"(12:34 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'storage' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
@@ -284,58 +305,60 @@ TEST_F(ResolverAddressSpaceValidationTest, Storage_WriteAccessMode) {
 
 TEST_F(ResolverAddressSpaceValidationTest, UniformBuffer_Struct_Runtime) {
     // struct S { m:  array<f32>; };
-    // @group(0) @binding(0) var<uniform, > svar : S;
+    // @group(0) @binding(0) var<uniform> svar : S;
 
-    auto* s = Structure(Source{{12, 34}}, "S", utils::Vector{Member("m", ty.array<i32>())});
+    Structure(Source{{12, 34}}, "S",
+              utils::Vector{Member(Source{{56, 78}}, "m", ty.array(Source{{12, 34}}, ty.i32()))});
 
-    GlobalVar(Source{{56, 78}}, "svar", ty.Of(s), ast::AddressSpace::kUniform, Binding(0_a),
-              Group(0_a));
+    GlobalVar(Source{{90, 12}}, "svar", ty.type_name("S"), ast::AddressSpace::kUniform,
+              Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(56:78 error: runtime-sized arrays can only be used in the <storage> address space
-note: while analyzing structure member S.m
-56:78 note: while instantiating 'var' svar)");
+              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
+56:78 note: while analyzing structure member S.m
+90:12 note: while instantiating 'var' svar)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, UniformBufferBool) {
     // var<uniform> g : bool;
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kUniform, Binding(0_a),
-              Group(0_a));
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(Source{{12, 34}}), ast::AddressSpace::kUniform,
+              Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
+        R"(12:34 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
 TEST_F(ResolverAddressSpaceValidationTest, UniformBufferBoolAlias) {
     // type a = bool;
     // var<uniform> g : a;
-    auto* a = Alias("a", ty.bool_());
-    GlobalVar(Source{{56, 78}}, "g", ty.Of(a), ast::AddressSpace::kUniform, Binding(0_a),
-              Group(0_a));
-
-    ASSERT_FALSE(r()->Resolve());
-
-    EXPECT_EQ(
-        r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
-56:78 note: while instantiating 'var' g)");
-}
-
-TEST_F(ResolverAddressSpaceValidationTest, UniformBufferPointer) {
-    // var<uniform> g : ptr<private, f32>;
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+    Alias("a", ty.bool_());
+    GlobalVar(Source{{56, 78}}, "g", ty.type_name(Source{{12, 34}}, "a"),
               ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
 
     ASSERT_FALSE(r()->Resolve());
 
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'uniform' as it is non-host-shareable
+        R"(12:34 error: Type 'bool' cannot be used in address space 'uniform' as it is non-host-shareable
+56:78 note: while instantiating 'var' g)");
+}
+
+TEST_F(ResolverAddressSpaceValidationTest, UniformBufferPointer) {
+    // var<uniform> g : ptr<private, f32>;
+    GlobalVar(Source{{56, 78}}, "g",
+              ty.pointer(Source{{12, 34}}, ty.f32(), ast::AddressSpace::kPrivate),
+              ast::AddressSpace::kUniform, Binding(0_a), Group(0_a));
+
+    ASSERT_FALSE(r()->Resolve());
+
+    EXPECT_EQ(
+        r()->error(),
+        R"(12:34 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'uniform' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
@@ -453,12 +476,12 @@ TEST_F(ResolverAddressSpaceValidationTest, PushConstantBool) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : bool;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar(Source{{56, 78}}, "g", ty.bool_(), ast::AddressSpace::kPushConstant);
+    GlobalVar(Source{{56, 78}}, "g", ty.bool_(Source{{12, 34}}), ast::AddressSpace::kPushConstant);
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'bool' cannot be used in address space 'push_constant' as it is non-host-shareable
+        R"(12:34 error: Type 'bool' cannot be used in address space 'push_constant' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 
@@ -479,13 +502,14 @@ TEST_F(ResolverAddressSpaceValidationTest, PushConstantPointer) {
     // enable chromium_experimental_push_constant;
     // var<push_constant> g : ptr<private, f32>;
     Enable(ast::Extension::kChromiumExperimentalPushConstant);
-    GlobalVar(Source{{56, 78}}, "g", ty.pointer(ty.f32(), ast::AddressSpace::kPrivate),
+    GlobalVar(Source{{56, 78}}, "g",
+              ty.pointer(Source{{12, 34}}, ty.f32(), ast::AddressSpace::kPrivate),
               ast::AddressSpace::kPushConstant);
 
     ASSERT_FALSE(r()->Resolve());
     EXPECT_EQ(
         r()->error(),
-        R"(56:78 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'push_constant' as it is non-host-shareable
+        R"(12:34 error: Type 'ptr<private, f32, read_write>' cannot be used in address space 'push_constant' as it is non-host-shareable
 56:78 note: while instantiating 'var' g)");
 }
 

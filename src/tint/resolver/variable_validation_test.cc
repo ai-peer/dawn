@@ -321,16 +321,16 @@ TEST_F(ResolverVariableValidationTest, NonConstructibleType_Atomic) {
 
 TEST_F(ResolverVariableValidationTest, NonConstructibleType_RuntimeArray) {
     auto* s = Structure("S", utils::Vector{
-                                 Member(Source{{56, 78}}, "m", ty.array(ty.i32())),
+                                 Member(Source{{12, 34}}, "m", ty.array<i32>()),
                              });
-    auto* v = Var(Source{{12, 34}}, "v", ty.Of(s));
+    auto* v = Var(Source{{56, 78}}, "v", ty.Of(s));
     WrapInFunction(v);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(12:34 error: runtime-sized arrays can only be used in the <storage> address space
-56:78 note: while analyzing structure member S.m
-12:34 note: while instantiating 'var' v)");
+              R"(error: runtime-sized arrays can only be used in the <storage> address space
+12:34 note: while analyzing structure member S.m
+56:78 note: while instantiating 'var' v)");
 }
 
 TEST_F(ResolverVariableValidationTest, NonConstructibleType_Struct_WithAtomic) {

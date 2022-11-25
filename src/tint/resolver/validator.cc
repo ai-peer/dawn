@@ -269,6 +269,16 @@ bool Validator::Atomic(const ast::Atomic* a, const sem::Atomic* s) const {
     return true;
 }
 
+bool Validator::Pointer(const ast::Pointer* a, const sem::Pointer* s) const {
+    if (s->AddressSpace() == ast::AddressSpace::kUndefined) {
+        AddError("ptr missing address space", a->source);
+        return false;
+    }
+
+    return CheckTypeAccessAddressSpace(s->StoreType(), s->Access(), s->AddressSpace(), utils::Empty,
+                                       a->source);
+}
+
 bool Validator::StorageTexture(const ast::StorageTexture* t) const {
     switch (t->access) {
         case ast::Access::kWrite:
