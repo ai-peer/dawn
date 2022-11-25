@@ -954,6 +954,49 @@ INSTANTIATE_TEST_SUITE_P(  //
                                               DeterminantCases<f16>()))));
 
 template <typename T>
+std::vector<Case> FaceForwardCases() {
+    auto vec_0 = Vec(T(0), T(1), T(0));
+    auto vec_180 = Vec(T(0), -T(1), T(0));
+    auto vec_pos_90 = Vec(T(1), T(0), T(0));
+    auto vec_neg_90 = Vec(-T(1), T(0), T(0));
+    auto vec_pos_135 = Vec(T(0.707), -T(0.707), T(0));
+    auto vec_neg_135 = Vec(-T(0.707), -T(0.707), T(0));
+
+    auto pos_vec = Vec(T(1), T(2), T(3));
+    auto neg_vec = Vec(-T(1), -T(2), -T(3));
+
+    return {
+        // -e1 if dot is negative
+        C({pos_vec, vec_0, vec_0}, neg_vec),       //
+        C({pos_vec, vec_0, vec_pos_90}, neg_vec),  //
+        C({pos_vec, vec_0, vec_neg_90}, neg_vec),  //
+        // e1 if dot is non-negative
+        C({pos_vec, vec_0, vec_pos_135}, pos_vec),  //
+        C({pos_vec, vec_0, vec_neg_135}, pos_vec),  //
+        C({pos_vec, vec_0, vec_neg_135}, pos_vec),  //
+        C({pos_vec, vec_0, vec_180}, pos_vec),      //
+
+        // Same, but swap input and output vector
+        // -e1 if dot is negative
+        C({neg_vec, vec_0, vec_0}, pos_vec),       //
+        C({neg_vec, vec_0, vec_pos_90}, pos_vec),  //
+        C({neg_vec, vec_0, vec_neg_90}, pos_vec),  //
+        // e1 if dot is non-negative
+        C({neg_vec, vec_0, vec_pos_135}, neg_vec),  //
+        C({neg_vec, vec_0, vec_neg_135}, neg_vec),  //
+        C({neg_vec, vec_0, vec_neg_135}, neg_vec),  //
+        C({neg_vec, vec_0, vec_180}, neg_vec),      //
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    FaceForward,
+    ResolverConstEvalBuiltinTest,
+    testing::Combine(testing::Values(sem::BuiltinType::kFaceForward),
+                     testing::ValuesIn(Concat(FaceForwardCases<AFloat>(),  //
+                                              FaceForwardCases<f32>(),     //
+                                              FaceForwardCases<f16>()))));
+
+template <typename T>
 std::vector<Case> FirstLeadingBitCases() {
     using B = BitValues<T>;
     auto r = std::vector<Case>{
