@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f835dd26_a4d8834c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-25T10:30:27Z",
+      "side": 1,
+      "message": "Ah damn! Let\u0027s try a different way:\n\nSo I thought about using swizzling but that doesn\u0027t seem to work:\n\n\u003e The VkComponentMapping components member describes a remapping from components of the image to components of the vector returned by shader image instructions. This remapping must be the identity swizzle for storage image descriptors, input attachment descriptors, framebuffer attachments, and any VkImageView used with a combined image sampler that enables sampler Y′CBCR conversion.\n\nBut we could do texture format reinterpretation for storage bgra8unorm such that we give an RGBA8 view to the shader and things... should work? Maybe we\u0027ll need to do the swizzling in the shader but if the type of the texture is known to be bgra8unrom it\u0027s easy to inject the code to do the swizzling.\n\nIf you think this could work then I suggest splitting the CL in two: one part that adds the extension and the wgsl bgra8unorm keyword, and one part that does the Vulkan tweaks necessary to make this work.",
+      "parentUuid": "652cb9db_e5d37321",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
