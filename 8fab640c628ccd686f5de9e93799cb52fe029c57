@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7472733d_88aa8495",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-25T15:26:09Z",
+      "side": 1,
+      "message": "Implementation looks good, nits for the tests.",
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8c9323_a1768ce7",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-25T15:26:09Z",
+      "side": 1,
+      "message": "nit: given that you\u0027ve used `vec_0` for `[0,1]`, `vec_180` for `[0,-1]`, would it not be more logical to have `vec_90` for `[1,0]` and `vec_270` for `[-1,0]`?",
+      "range": {
+        "startLine": 960,
+        "startChar": 9,
+        "endLine": 960,
+        "endChar": 19
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85966396_a7e2c88b",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-25T15:26:09Z",
+      "side": 1,
+      "message": "Please consider using a different value for the 2nd argument.",
+      "range": {
+        "startLine": 982,
+        "startChar": 20,
+        "endLine": 982,
+        "endChar": 25
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
