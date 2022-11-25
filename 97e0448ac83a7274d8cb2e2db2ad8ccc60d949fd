@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "615eacb7_086ce7c0",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T02:01:58Z",
+      "side": 1,
+      "message": "Made private. Thanks.",
+      "parentUuid": "1a407d10_93652960",
+      "revId": "97e0448ac83a7274d8cb2e2db2ad8ccc60d949fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6ac9fa7_f9fae75b",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "178d896c_daba8a84",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T02:01:58Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s implicit in the Create\u003cT\u003e function, where T must be a valid tempalte type for DataType. I\u0027ve moved the `static_assert(IsDataTypeSpecializedFor\u003cT\u003e...` to the Create function.",
+      "parentUuid": "f6ac9fa7_f9fae75b",
+      "revId": "97e0448ac83a7274d8cb2e2db2ad8ccc60d949fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeeac519_c0eb5e65",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-11-25T01:05:12Z",
       "side": 1,
       "message": "Why does this make_unique there when it\u0027s going into a shared? Why not `std::make_shared`?",
+      "revId": "97e0448ac83a7274d8cb2e2db2ad8ccc60d949fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81436311_2de713ad",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T02:01:58Z",
+      "side": 1,
+      "message": "Not a good reason. Changed to shared_ptr.",
+      "parentUuid": "eeeac519_c0eb5e65",
       "revId": "97e0448ac83a7274d8cb2e2db2ad8ccc60d949fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
