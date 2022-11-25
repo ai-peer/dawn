@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "652cb9db_e5d37321",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-25T00:30:00Z",
+      "side": 1,
+      "message": "Oh I find another issue:\n\nAccording to Vulkan SPEC(https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkPhysicalDeviceFeatures.html), `shaderStorageImageWriteWithoutFormat` applies only to formats listed in the **storage without format list** (https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#formats-without-shader-storage-format), where there is no VK_FORMAT_B8G8R8A8_UNORM.\n\nSo if I understand the SPEC correctly, we still cannot use a VK_FORMAT_B8G8R8A8_UNORM storage image with an image format of Unknown, shaderStorageImageReadWithoutFormat and shaderStorageImageWriteWithoutFormat",
+      "parentUuid": "367a377d_c5cce6eb",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
