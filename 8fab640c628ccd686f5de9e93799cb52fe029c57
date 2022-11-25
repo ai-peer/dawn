@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fdf92ff_15f2cd61",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-25T16:48:13Z",
+      "side": 1,
+      "message": "Relative to `vec_0`, but that\u0027s only true because the second argument is always `vec_0`. I\u0027d like to see another value for the second argument.",
+      "parentUuid": "5491de3d_009ee5c7",
+      "range": {
+        "startLine": 960,
+        "startChar": 9,
+        "endLine": 960,
+        "endChar": 19
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "85966396_a7e2c88b",
         "filename": "src/tint/resolver/const_eval_builtin_test.cc",
         "patchSetId": 1
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "Not sure I understand. These tests make sure that for the same pair of vectors for e2 and e3, we get the negative version of e1. Do you want another set of tests?",
       "parentUuid": "85966396_a7e2c88b",
+      "range": {
+        "startLine": 982,
+        "startChar": 20,
+        "endLine": 982,
+        "endChar": 25
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfdaaca_79b3f224",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-25T16:48:13Z",
+      "side": 1,
+      "message": "All the cases use `vec_0` as the second argument. The tests could pass if `vec(0,1,0)` were hardcoded in the implementation. Please can we have a different value here so we can show the dot product actually does the right thing?",
+      "parentUuid": "f099a875_0f492893",
       "range": {
         "startLine": 982,
         "startChar": 20,
