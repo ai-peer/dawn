@@ -76,16 +76,6 @@ crbug.com/dawn/1487 [ intel-gen-9 win10 ] webgpu:api,operation,resource_init,tex
 ################################################################################
 
 ################################################################################
-# webgpu:web_platform,copyToTexture,ImageBitmap flakes on Windows Intel with rgba32float and rg32float formats
-# and general test slowness because of https://github.com/gpuweb/cts/issues/1162 (crbug.com/dawn/1398).
-# Very flaky failures on Windows Intel (crbug.com/1343969).
-# Flaky failures using SwiftShader (crbug.com/1344876).
-# KEEP
-################################################################################
-crbug.com/1343969 [ win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ RetryOnFailure ]
-crbug.com/1343969 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:* [ RetryOnFailure ]
-
-################################################################################
 # copyToTexture failures on Linux
 # Skipped instead of just Crash because of the number of failures
 # KEEP
@@ -132,12 +122,6 @@ crbug.com/dawn/1107 [ intel mac ] webgpu:api,operation,command_buffer,copyTextur
 crbug.com/dawn/1107 [ intel mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rg32float";dstFormat="rg32float";dimension="2d" [ Failure ]
 crbug.com/dawn/1107 [ intel mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba16float";dstFormat="rgba16float";dimension="2d" [ Failure ]
 crbug.com/dawn/1107 [ intel mac ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,non_compressed,non_array:srcFormat="rgba32float";dstFormat="rgba32float";dimension="2d" [ Failure ]
-
-################################################################################
-# General test slowness because of https://github.com/gpuweb/cts/issues/1162
-# KEEP
-################################################################################
-crbug.com/dawn/1398 [ webgpu-adapter-default win ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ RetryOnFailure ]
 
 ################################################################################
 # Large and slow tests
@@ -488,10 +472,7 @@ crbug.com/1357206 [ nvidia-0x2184 win10 ] worker_webgpu:api,validation,buffer,ma
 ################################################################################
 crbug.com/tint/1753 [ win10 ] webgpu:shader,execution,expression,binary,bitwise:bitwise_exclusive_or:type="i32";inputSource="const";* [ Failure ]
 crbug.com/tint/1753 [ win10 ] webgpu:shader,execution,expression,binary,bitwise:bitwise_exclusive_or:type="u32";inputSource="const";* [ Failure ]
-crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pack2x16snorm:pack:inputSource="const" [ Failure ]
-crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pack2x16unorm:pack:inputSource="const" [ Failure ]
 crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pack4x8snorm:pack:inputSource="const" [ Failure ]
-crbug.com/tint/1755 [ win10 ] webgpu:shader,execution,expression,call,builtin,pack4x8unorm:pack:inputSource="const" [ Failure ]
 
 ################################################################################
 # Const-eval functions that fail on inf/nan inputs
