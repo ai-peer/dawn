@@ -206,6 +206,30 @@
       },
       "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7185b8a4_28334ba3",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T19:28:40Z",
+      "side": 1,
+      "message": "I also added tests for error cases (overflowing the dot product).",
+      "parentUuid": "80ab9683_b61704cc",
+      "range": {
+        "startLine": 982,
+        "startChar": 20,
+        "endLine": 982,
+        "endChar": 25
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
