@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb1c2985_a2d0d6a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-11-25T10:54:46Z",
+      "side": 1,
+      "message": "Big step towards a simpler design, thank you.\nI spotted a few more things that I felt could be simplified: https://dawn-review.googlesource.com/c/dawn/+/111761/1",
+      "revId": "d4908670e1773c358d178b116e308e06262d9683",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
