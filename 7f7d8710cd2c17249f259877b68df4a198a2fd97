@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7bba63_79d81fbf",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2756,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-25T01:13:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e00d435_094e1356",
+      "range": {
+        "startLine": 2756,
+        "startChar": 24,
+        "endLine": 2756,
+        "endChar": 32
+      },
+      "revId": "7f7d8710cd2c17249f259877b68df4a198a2fd97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9a94511_e0d0bd78",
@@ -54,6 +78,24 @@
       "writtenOn": "2022-11-24T22:45:55Z",
       "side": 1,
       "message": "I think it would be nice to see some basic cases for the major axes that show we get a unit vector back, like:\n```\nVec(T(2),T(0),T(0)\nVec(T(0),T(2),T(0)\nVec(T(0),T(0),T(2)\n\nVec(-T(2),T(0),T(0)\nVec(T(0),-T(2),T(0)\nVec(T(0),T(0),-T(2)\n```",
+      "revId": "7f7d8710cd2c17249f259877b68df4a198a2fd97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85f89e89_b92cb19d",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1705,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-25T01:13:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9a94511_e0d0bd78",
       "revId": "7f7d8710cd2c17249f259877b68df4a198a2fd97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
