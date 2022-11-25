@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b3171c2_3d19f53a",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T18:26:52Z",
+      "side": 1,
+      "message": "Good point.",
+      "parentUuid": "1fdf92ff_15f2cd61",
+      "range": {
+        "startLine": 960,
+        "startChar": 9,
+        "endLine": 960,
+        "endChar": 19
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85966396_a7e2c88b",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "All the cases use `vec_0` as the second argument. The tests could pass if `vec(0,1,0)` were hardcoded in the implementation. Please can we have a different value here so we can show the dot product actually does the right thing?",
       "parentUuid": "f099a875_0f492893",
+      "range": {
+        "startLine": 982,
+        "startChar": 20,
+        "endLine": 982,
+        "endChar": 25
+      },
+      "revId": "8fab640c628ccd686f5de9e93799cb52fe029c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ab9683_b61704cc",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-25T18:26:52Z",
+      "side": 1,
+      "message": "Right, that makes sense. I rewrote all the tests to use a rotate function for the 2 vectors we dot.",
+      "parentUuid": "7cfdaaca_79b3f224",
       "range": {
         "startLine": 982,
         "startChar": 20,
