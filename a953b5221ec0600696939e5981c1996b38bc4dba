@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4215fd_ad06a7ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-25T11:38:53Z",
+      "side": 1,
+      "message": "Oh but how can we translate the WGSL image format \u0027bgra8unorm\u0027 into SPIRV as SPIRV doesn\u0027t support \u0027bgra8\u0027 as image format?\n\nNow we know declaring the image format as \u0027undefined\u0027 still doesn\u0027t work for BGRA8Unorm, so I don\u0027t think it meaningful to support a WGSL storage texture format that has no correspondence in SPIRV.\n\nI think that\u0027s the biggest problem for us. At least we should discuss this issue in the WG.",
+      "parentUuid": "f835dd26_a4d8834c",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
