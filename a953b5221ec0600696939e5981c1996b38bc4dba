@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "15343e0f_0cbdd144",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-25T11:42:47Z",
+      "side": 1,
+      "message": "You would translate bgra8unorm in WGSL to rgba8unorm in SPIR-V and bind it to a rgba8unorm view of an bgra8unorm storage texture. Wouldn\u0027t that work?",
+      "parentUuid": "4c4215fd_ad06a7ec",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
