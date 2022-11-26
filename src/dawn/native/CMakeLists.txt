@@ -342,6 +342,29 @@ if (DAWN_ENABLE_D3D12)
     target_link_libraries(dawn_native PRIVATE dxguid.lib)
 endif()
 
+if (DAWN_ENABLE_EMULATOR)
+    target_sources(dawn_native PRIVATE
+        "emulator/AdapterEmulator.cpp"
+        "emulator/AdapterEmulator.h"
+        "emulator/BackendEmulator.cpp"
+        "emulator/BackendEmulator.h"
+        "emulator/BindGroupEmulator.h"
+        "emulator/BufferEmulator.cpp"
+        "emulator/BufferEmulator.h"
+        "emulator/ComputePipelineEmulator.cpp"
+        "emulator/ComputePipelineEmulator.h"
+        "emulator/DeviceEmulator.cpp"
+        "emulator/DeviceEmulator.h"
+        "emulator/Forward.h"
+        "emulator/QueueEmulator.cpp"
+        "emulator/QueueEmulator.h"
+        "emulator/RenderPipelineEmulator.cpp"
+        "emulator/RenderPipelineEmulator.h"
+        "emulator/ShaderModuleEmulator.h"
+    )
+    target_link_libraries(dawn_native PRIVATE tint-interp)
+endif()
+
 if (DAWN_ENABLE_METAL)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/MetalBackend.h"

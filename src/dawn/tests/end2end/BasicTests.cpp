@@ -60,6 +60,7 @@ TEST_P(BasicTests, QueueWriteBufferError) {
 
 DAWN_INSTANTIATE_TEST(BasicTests,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),

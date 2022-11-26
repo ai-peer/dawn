@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import("../../../scripts/dawn_overrides_with_defaults.gni")
+import("../../../tint_overrides_with_defaults.gni")
 
 import("//build_overrides/build.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
@@ -480,6 +481,34 @@ source_set("sources") {
       "d3d12/UtilsD3D12.cpp",
       "d3d12/UtilsD3D12.h",
       "d3d12/d3d12_platform.h",
+    ]
+  }
+
+  if (dawn_enable_emulator) {
+    assert(!build_with_chromium, "dawn_enable_emulator cannot be used when building Chromium")
+    assert(tint_build_interpreter, "dawn_enable_emulator requires tint_build_interpreter=true")
+    sources += [
+      "emulator/AdapterEmulator.cpp",
+      "emulator/AdapterEmulator.h",
+      "emulator/BackendEmulator.cpp",
+      "emulator/BackendEmulator.h",
+      "emulator/BindGroupEmulator.h",
+      "emulator/BufferEmulator.cpp",
+      "emulator/BufferEmulator.h",
+      "emulator/ComputePipelineEmulator.cpp",
+      "emulator/ComputePipelineEmulator.h",
+      "emulator/DeviceEmulator.cpp",
+      "emulator/DeviceEmulator.h",
+      "emulator/Forward.h",
+      "emulator/QueueEmulator.cpp",
+      "emulator/QueueEmulator.h",
+      "emulator/RenderPipelineEmulator.cpp",
+      "emulator/RenderPipelineEmulator.h",
+      "emulator/ShaderModuleEmulator.h",
+    ]
+
+    deps += [
+      "${dawn_root}/src/tint/interp:libtint-interp",
     ]
   }
 

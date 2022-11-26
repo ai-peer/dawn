@@ -212,6 +212,9 @@ class DynamicBufferOffsetTests : public DawnTest {
 
 // Dynamic offsets are all zero and no effect to result.
 TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
+    // TODO(jrprice): Render pipelines are not supported in the emulator.
+    DAWN_SUPPRESS_TEST_IF(IsEmulator());
+
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
@@ -233,6 +236,9 @@ TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
 
 // Have non-zero dynamic offsets.
 TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
+    // TODO(jrprice): Render pipelines are not supported in the emulator.
+    DAWN_SUPPRESS_TEST_IF(IsEmulator());
+
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
@@ -296,6 +302,9 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsComputePipeline) {
 
 // Test inherit dynamic offsets on render pipeline
 TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
+    // TODO(jrprice): Render pipelines are not supported in the emulator.
+    DAWN_SUPPRESS_TEST_IF(IsEmulator());
+
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     wgpu::RenderPipeline testPipeline = CreateRenderPipeline(true);
@@ -354,6 +363,9 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsComputePipeline) {
 
 // Setting multiple dynamic offsets for the same bindgroup in one render pass.
 TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline) {
+    // TODO(jrprice): Render pipelines are not supported in the emulator.
+    DAWN_SUPPRESS_TEST_IF(IsEmulator());
+
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
 
@@ -574,6 +586,7 @@ TEST_P(ClampedOOBDynamicBufferOffsetTests, CheckOOBAccess) {
 
 DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
