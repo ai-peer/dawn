@@ -242,6 +242,8 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             const char* param = argv[i] + argLen;
             if (strcmp("d3d12", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::D3D12;
+            } else if (strcmp("emulator", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::Emulator;
             } else if (strcmp("metal", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::Metal;
             } else if (strcmp("null", param) == 0) {
@@ -253,9 +255,9 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             } else if (strcmp("vulkan", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::Vulkan;
             } else {
-                dawn::ErrorLog()
-                    << "Invalid backend \"" << param
-                    << "\". Valid backends are: d3d12, metal, null, opengl, opengles, vulkan.";
+                dawn::ErrorLog() << "Invalid backend \"" << param
+                                 << "\". Valid backends are: d3d12, emulator, metal, null, opengl, "
+                                    "opengles, vulkan.";
                 UNREACHABLE();
             }
             mHasBackendTypeFilter = true;
@@ -359,6 +361,11 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn::native::I
         if (mHasBackendTypeFilter) {
             // It doesn't match the backend type, if present.
             selected &= properties.backendType == mBackendTypeFilter;
+        } else {
+            // Only select the emulator if it was explicitly requested via the filter.
+            if (properties.backendType == wgpu::BackendType::Emulator) {
+                selected = false;
+            }
         }
         if (mHasVendorIdFilter) {
             // It doesn't match the vendor id, if present.
@@ -629,6 +636,10 @@ DawnTestBase::~DawnTestBase() {
 
 bool DawnTestBase::IsD3D12() const {
     return mParam.adapterProperties.backendType == wgpu::BackendType::D3D12;
+}
+
+bool DawnTestBase::IsEmulator() const {
+    return mParam.adapterProperties.backendType == wgpu::BackendType::Emulator;
 }
 
 bool DawnTestBase::IsMetal() const {

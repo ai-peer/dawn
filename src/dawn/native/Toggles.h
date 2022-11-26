@@ -61,6 +61,8 @@ enum class Toggle {
     EmitHLSLDebugSymbols,
     DisallowSpirv,
     DumpShaders,
+    Interactive,
+    EnableDRD,
     ForceWGSLStep,
     DisableWorkgroupInit,
     DisableSymbolRenaming,
