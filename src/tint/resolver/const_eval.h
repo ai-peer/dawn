@@ -80,8 +80,7 @@ class ConstEval {
     /// @param ty the target type - must be an array or initializer
     /// @param args the input arguments
     /// @return the constructed value, or null if the value cannot be calculated
-    Result ArrayOrStructInit(const type::Type* ty,
-                             utils::VectorRef<const sem::ValueExpression*> args);
+    Result ArrayOrStructInit(const type::Type* ty, utils::VectorRef<const constant::Value*> args);
 
     /// @param ty the target type
     /// @param value the value being converted
