@@ -2090,7 +2090,12 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         auto stage = args_stage;                 // The evaluation stage of the call
         const constant::Value* value = nullptr;  // The constant value for the call
         if (stage == sem::EvaluationStage::kConstant) {
-            if (auto r = const_eval_.ArrayOrStructInit(ty, args)) {
+            utils::Vector<const constant::Value*, 4> els;
+            els.Reserve(args.Length());
+            for (auto* arg : args) {
+                els.Push(arg->ConstantValue());
+            }
+            if (auto r = const_eval_.ArrayOrStructInit(ty, els)) {
                 value = r.Get();
             } else {
                 return nullptr;
