@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import("scripts/dawn_overrides_with_defaults.gni")
+import("tint_overrides_with_defaults.gni")
 
 group("all") {
   testonly = true
@@ -29,6 +30,11 @@ group("all") {
       "src/dawn/samples",
       "src/tint/cmd:tint",
     ]
+    if (tint_build_interpreter) {
+      deps += [
+        "src/tint/interp:tint-interp",
+      ]
+    }
   }
 }
 

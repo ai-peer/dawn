@@ -61,6 +61,9 @@ config("internal_config") {
   if (dawn_enable_d3d12) {
     defines += [ "DAWN_ENABLE_BACKEND_D3D12" ]
   }
+  if (dawn_enable_emulator) {
+    defines += [ "DAWN_ENABLE_BACKEND_EMULATOR" ]
+  }
   if (dawn_enable_metal) {
     defines += [ "DAWN_ENABLE_BACKEND_METAL" ]
   }
