@@ -386,6 +386,16 @@ uint64_t Buffer::GetSize() const {
     return mSize;
 }
 
+WGPUBufferMapState Buffer::GetMapState() const {
+    if (mMapState == MapState::MappedForRead || mMapState == MapState::MappedForWrite ||
+        mMapState == MapState::MappedAtCreation) {
+        return WGPUBufferMapState_Mapped;
+    } else if (mPendingMap) {
+        return WGPUBufferMapState_Pending;
+    }
+    return WGPUBufferMapState_Unmapped;
+}
+
 bool Buffer::IsMappedForReading() const {
     return mMapState == MapState::MappedForRead;
 }
