@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51f3f26_5ff49092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-26T20:34:51Z",
+      "side": 1,
+      "message": "I\u0027m thinking where I should add a unit test for this change. I wanted to refer to how similar getter methods are tested and ran `find ./src/dawn/tests/ -print0 | xargs -0 grep APIGet 2\u003e/dev/null` but such tests couldn\u0027t be found.\n\nWe don\u0027t test getter methods in dawn unittests but do test readonly properties in CTS or somewhere else?",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d0ad26_30470207",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-11-26T20:34:51Z",
+      "side": 1,
+      "message": "I\u0027m not sure how buffer map state should be handled in wire so it logs error for now. Please see https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1355994#c14\n\nI\u0027m thinking of implementing properly in this CL later or another follow up CL.",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
