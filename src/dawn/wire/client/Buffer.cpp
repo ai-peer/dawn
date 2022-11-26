@@ -17,6 +17,7 @@
 #include <limits>
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/wire/BufferConsumer_impl.h"
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/client/Client.h"
@@ -384,6 +385,11 @@ WGPUBufferUsage Buffer::GetUsage() const {
 
 uint64_t Buffer::GetSize() const {
     return mSize;
+}
+
+WGPUBufferMapState Buffer::GetMapState() const {
+    dawn::ErrorLog() << "buffer.GetMapState is unimplemented with dawn_wire.";
+    return WGPUBufferMapState_Unmapped;
 }
 
 bool Buffer::IsMappedForReading() const {
