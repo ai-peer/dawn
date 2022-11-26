@@ -218,6 +218,7 @@ class DawnTestBase {
     void TearDown();
 
     bool IsD3D12() const;
+    bool IsEmulator() const;
     bool IsMetal() const;
     bool IsNull() const;
     bool IsOpenGL() const;

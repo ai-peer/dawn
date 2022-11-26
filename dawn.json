@@ -210,7 +210,8 @@
             {"value": 4, "name": "metal"},
             {"value": 5, "name": "vulkan"},
             {"value": 6, "name": "openGL"},
-            {"value": 7, "name": "openGLES"}
+            {"value": 7, "name": "openGLES"},
+            {"value": 8, "name": "emulator"}
         ]
     },
     "bind group": {
