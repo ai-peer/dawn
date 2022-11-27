@@ -487,6 +487,15 @@ crbug.com/tint/1581 webgpu:shader,execution,expression,call,builtin,sinh:f32:inp
 crbug.com/tint/1581 webgpu:shader,execution,expression,call,builtin,unpack2x16float:unpack:inputSource="const" [ Failure ]
 
 ################################################################################
+# web_platform,copyToTexture,canvas:color_space_conversion:* fails with
+# swiftshader
+# KEEP
+################################################################################
+crbug.com/dawn/1599 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Failure ]
+
+################################################################################
+
+################################################################################
 # untriaged failures
 # KEEP
 ################################################################################
