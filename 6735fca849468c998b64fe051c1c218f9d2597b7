@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78a9217e_b37bb346",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T23:22:03Z",
+      "side": 1,
+      "message": "I think losing FILE func LINE is fine for these - it\u0027s super explanatory where it\u0027s coming from. And, it\u0027s not like errors that we want to backtrace the stack in Dawn. These happen first thing in the frontend.\n\nthe DAWN_UNLIKELY is a minor nit. it\u0027s fine if we hit that code; was just a nice to have to avoid it. (one could also argue that it\u0027s better to have the deprecated path deoptimized so the new path is better)",
+      "parentUuid": "013a164d_a3957cfd",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da35df28_abc49424",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
