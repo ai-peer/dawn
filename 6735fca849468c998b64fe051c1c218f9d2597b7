@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99b9281c_6cc5595a",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-28T22:46:12Z",
+      "side": 1,
+      "message": "[1].\nPlan: Additionally rename `EmitDeprecationWarning` to `EmitDeprecationPathError`\nFor macros, only remove `DAWN_EMIT_DEPRECATION_WARNING`. Still keep `DAWN_DEPRECATED_IF` (renamed to `DAWN_MAKE_DEPRECATION_ERROR` to keep EXPR outside) to make absl format vars stay shorter.\n\nQ: there\u0027s `DAWN_UNLIKELY` inside `ConsumedError`, will this impact code performance using deprecated path? (concerns at https://dawn-review.googlesource.com/c/dawn/+/111321/comment/ff5bf6c0_aae0928e/)",
+      "parentUuid": "d48a4659_2f18c1db",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da35df28_abc49424",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2022-11-23T23:25:07Z",
       "side": 1,
       "message": "if everything uses the deprecation macro and goes through absl::StrFormat - can we remove this overload?",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68e70cd2_c11afd59",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-28T22:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c40dd74_4284211d",
       "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
