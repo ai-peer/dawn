@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7110243c_2c8d4d3c",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "395c976c_25efc664",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 63
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e236d62_f57670f3",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-11-23T15:04:30Z",
       "side": 1,
       "message": "instead of extending ityp::stack_vec, it may be better to:\n - hold the vector as a member variable instead. Generally, usage of DriverVersion shouldn\u0027t need push/pop/resize, etc. We only need assignment, and access to the components I think. We can add operator[] which forwards to the member operator[]\n - use StackVector from common/StackContainer.h instead. I know I recommended stack_vec originally, but I forgot we had the plain StackVector version.",
+      "range": {
+        "startLine": 30,
+        "startChar": 28,
+        "endLine": 30,
+        "endChar": 34
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f009d095_2ea1f009",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Thanks for your sugguestion!",
+      "parentUuid": "4e236d62_f57670f3",
       "range": {
         "startLine": 30,
         "startChar": 28,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "628fa7d8_d36ae54c",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "a4484e40_d37282b5",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 78
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91bb5823_99830dff",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-11-23T15:04:30Z",
       "side": 1,
       "message": "nit: casing should be \"ToString\"",
+      "range": {
+        "startLine": 37,
+        "startChar": 16,
+        "endLine": 37,
+        "endChar": 24
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a59b44ed_1ecd4501",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91bb5823_99830dff",
       "range": {
         "startLine": 37,
         "startChar": 16,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "424e4c1e_f6292fdd",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c5a2734_aa99f725",
+      "range": {
+        "startLine": 94,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 9
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b3446e7_76427de9",
@@ -146,6 +266,30 @@
       "writtenOn": "2022-11-23T15:04:30Z",
       "side": 1,
       "message": "feels like this should be:\n\n```\ndriverVersion \u003d { (versionRaw \u003e\u003e 22) \u0026 0x3FF, ..., versionRaw \u0026 0x003F };\n```",
+      "range": {
+        "startLine": 33,
+        "startChar": 12,
+        "endLine": 37,
+        "endChar": 51
+      },
+      "revId": "8bc4ae6ce8f6b025f45a4a148bc4424ab9994d68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcc777e9_5f43f77a",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-11-28T15:37:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b3446e7_76427de9",
       "range": {
         "startLine": 33,
         "startChar": 12,
