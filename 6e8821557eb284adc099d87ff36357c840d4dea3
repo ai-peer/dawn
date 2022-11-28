@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99c7a9f4_848fbcf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-28T02:14:34Z",
+      "side": 1,
+      "message": "With this patch all the failures on Chromium Dawn FYI will disappear.\n\nPTAL, thanks!",
+      "revId": "6e8821557eb284adc099d87ff36357c840d4dea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
