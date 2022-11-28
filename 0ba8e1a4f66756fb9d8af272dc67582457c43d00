@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "563f6721_e24db873",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T14:56:22Z",
+      "side": 1,
+      "message": "1187",
+      "range": {
+        "startLine": 9,
+        "startChar": 10,
+        "endLine": 9,
+        "endChar": 14
+      },
+      "revId": "0ba8e1a4f66756fb9d8af272dc67582457c43d00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e780f89f_747d8cfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T14:56:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ba8e1a4f66756fb9d8af272dc67582457c43d00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30c99aa3_1c43400f",
+        "filename": "src/dawn/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T14:56:22Z",
+      "side": 1,
+      "message": "1187",
+      "range": {
+        "startLine": 622,
+        "startChar": 33,
+        "endLine": 622,
+        "endChar": 37
+      },
+      "revId": "0ba8e1a4f66756fb9d8af272dc67582457c43d00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
