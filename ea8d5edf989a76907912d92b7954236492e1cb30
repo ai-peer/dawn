@@ -157,6 +157,24 @@
       "parentUuid": "22626e75_c4fedb7d",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b0a5766_3d741bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-28T20:59:59Z",
+      "side": 1,
+      "message": "I\u0027m leaning towards the quicker hack since this is only temporary.\n\nThe other idea I had was to just switch directly to the new limit, but make /all/ cases where `bufferSize \u003c minBindingSize` a deprecation warning instead of a hard error (instead of just the cases that are in-between the old limit and the new limit).\n\nThat way we only need the one field, we wouldn\u0027t break any shipping stuff, and no extra hacks or structure gymnastics are needed. The only downside is that there would be some cases that used to be a hard error that would now be a deprecation warning, but that would just be temporary until the end of the deprecation period.\n\nWDYT?",
+      "parentUuid": "c2ef65d7_4b9da1dd",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
