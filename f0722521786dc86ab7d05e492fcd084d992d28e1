@@ -36,6 +36,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3fe3e25_c4f243bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-28T10:20:57Z",
+      "side": 1,
+      "message": "LGTM % tests and wire part.",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b3fd5b_f5a4cc81",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-28T10:20:57Z",
+      "side": 1,
+      "message": "nit: We could use a switch to make sure all cases are handled.",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49d0ad26_30470207",
@@ -49,6 +83,24 @@
       "writtenOn": "2022-11-26T20:34:51Z",
       "side": 1,
       "message": "I\u0027m not sure how buffer map state should be handled in wire so it logs error for now. Please see https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1355994#c14\n\nI\u0027m thinking of implementing properly in this CL later or another follow up CL.",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c81c3d8_bfc15a12",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-28T10:20:57Z",
+      "side": 1,
+      "message": "That could work though TBH we might as well wait for the wire part to be implemented first. Also we would use UNIMPLEMENTED here instead of a log.",
+      "parentUuid": "49d0ad26_30470207",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
