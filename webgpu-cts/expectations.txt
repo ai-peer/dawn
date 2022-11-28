@@ -133,6 +133,7 @@ webgpu:api,validation,error_scope:current_scope:errorFilter="validation";stackDe
 ################################################################################
 crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:fragment:isAsync=false;shaderModuleEntryPoint="main";stageEntryPoint="main%5Cu0000" [ Failure ]
 crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:fragment:isAsync=false;shaderModuleEntryPoint="main";stageEntryPoint="main%5Cu0000a" [ Failure ]
+crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:fragment:isAsync=false;shaderModuleEntryPoint="main";stageEntryPoint="main%5Cu0000a" [ Crash ]
 crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:fragment:isAsync=true;shaderModuleEntryPoint="main";stageEntryPoint="main%5Cu0000" [ Failure ]
 crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:fragment:isAsync=true;shaderModuleEntryPoint="main";stageEntryPoint="main%5Cu0000a" [ Failure ]
 
