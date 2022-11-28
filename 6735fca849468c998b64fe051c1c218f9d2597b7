@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "013a164d_a3957cfd",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-28T23:11:58Z",
+      "side": 1,
+      "message": "Also it seems if include if we include error path in the `EmitDeprecationWarning` function instead of using macro, we could loose __FILE__, __func__, __LINE__ from the compiler info",
+      "parentUuid": "99b9281c_6cc5595a",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da35df28_abc49424",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
