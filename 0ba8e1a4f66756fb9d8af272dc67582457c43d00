@@ -41,6 +41,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf71a0c5_8e4f713b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-11-28T21:55:48Z",
+      "side": 1,
+      "message": "Test LGTM, assuming the issue number is fixed as Austin pointed out.",
+      "revId": "0ba8e1a4f66756fb9d8af272dc67582457c43d00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30c99aa3_1c43400f",
