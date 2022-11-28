@@ -16,6 +16,24 @@
       "message": "It occurred to me that we\u0027re allocating a bunch of `Constant` values here, which are transitively used and then not freed until the `Program` is destructed.\nWe should file an issue to avoid these allocations post v1.",
       "revId": "8fe8ff8e3a7fbf8b02e7e175052c884ba3e6df97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bb635d_7801b5b8",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2957,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-28T20:54:50Z",
+      "side": 1,
+      "message": "Yes, I know. We only recently started writing builtins in terms of functions that take and return `Constant`s -- we normally only worked in the \"Number\" space, but this isn\u0027t as easy to do with functions that work on multiple elements of a component (vector, matrix). I\u0027ll create a bug and we find a better way to do this.",
+      "parentUuid": "01df782a_1991add4",
+      "revId": "8fe8ff8e3a7fbf8b02e7e175052c884ba3e6df97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
