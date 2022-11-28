@@ -193,6 +193,24 @@
       "parentUuid": "5b0a5766_3d741bde",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee1acc36_ac8a2a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T21:05:40Z",
+      "side": 1,
+      "message": "yea - letting in buffers that are too small would allow OOB reads. which we might already have if you can read the padding somehow, but we shouldn\u0027t make it worse.\n\nis there a way we can know that the old minBufferSize is wrong? like it\u0027s not a multiple of 16 bytes.\nah, but this doesn\u0027t work for the non-struct vec3 types :/",
+      "parentUuid": "5e481c8c_754fabcc",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
