@@ -139,6 +139,24 @@
       "parentUuid": "47999aa5_053b4183",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ef65d7_4b9da1dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T20:43:59Z",
+      "side": 1,
+      "message": "hm that is all internal-ish but it does make things difficult.\nthat\u0027s the creation of the default pipeline layout which internally synthesizes bind group layouts for you from the shader bindings. So we could have an internal way of creating these bind group layouts ourselves, but the way it\u0027s written takes the same code path as creating BGLs externally.\n\nI guess what we need to do then is give the public API a dawn-internal extension struct on WGPUBufferBindingLayout similar to how WGPUExternalTextureBindingEntry (\"external texture binding entry\" in dawn.json) is chained on WGPUBindGroupEntry.\n\nIt\u0027ll be visible to dawn-native users which is a bit of a wart but probably fine since it won\u0027t change the struct layout of WGPUBufferBindingLayout.\n\nOr.. you could add an overload/optional argument to GetOrCreateBindGroupLayout that passes in some extra binding info. It would sort of be a hack but not visible externally.\n\nWDYT? open to other ideas you might have",
+      "parentUuid": "22626e75_c4fedb7d",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
