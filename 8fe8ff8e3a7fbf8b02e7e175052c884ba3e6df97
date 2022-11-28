@@ -52,6 +52,24 @@
       "parentUuid": "37bb635d_7801b5b8",
       "revId": "8fe8ff8e3a7fbf8b02e7e175052c884ba3e6df97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01584870_71f52e4f",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2957,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-28T21:03:57Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/tint/issues/detail?id\u003d1773",
+      "parentUuid": "0b1ef322_15608d7d",
+      "revId": "8fe8ff8e3a7fbf8b02e7e175052c884ba3e6df97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
