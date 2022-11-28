@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "190f99aa_b3ea7a1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T15:44:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b31af4b2d3bf6287e707fb86da015c35dcc0eab8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc094592_f343b233",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T15:44:04Z",
+      "side": 1,
+      "message": "nit: ASSERT the size \u003c\u003d kMaxVersionFields",
+      "revId": "b31af4b2d3bf6287e707fb86da015c35dcc0eab8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
