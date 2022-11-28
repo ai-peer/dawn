@@ -61,7 +61,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2022-11-24 01:29:21AM
+# Last rolled: 2022-11-28 03:01:16PM
 
 ################################################################################
 # webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
@@ -491,9 +491,9 @@ crbug.com/tint/1581 webgpu:shader,execution,expression,call,builtin,unpack2x16fl
 # The other tests about canvas and image bitmap fail with swiftshader on Linux
 # KEEP
 ################################################################################
-crbug.com/dawn/1599 [ webgpu-adapter-swiftshader linux ] webgpu:web_platform,canvas,configure:* [ Failure ]
-crbug.com/dawn/1599 [ webgpu-adapter-swiftshader linux ] webgpu:web_platform,canvas,getCurrentTexture:* [ Failure ]
-crbug.com/dawn/1599 [ webgpu-adapter-swiftshader linux ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Failure ]
+crbug.com/dawn/1599 [ linux webgpu-adapter-swiftshader ] webgpu:web_platform,canvas,configure:* [ Failure ]
+crbug.com/dawn/1599 [ linux webgpu-adapter-swiftshader ] webgpu:web_platform,canvas,getCurrentTexture:* [ Failure ]
+crbug.com/dawn/1599 [ linux webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:* [ Failure ]
 crbug.com/dawn/1599 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Failure ]
 ################################################################################
 
