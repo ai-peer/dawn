@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea793a6_4a24f699",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-28T08:38:46Z",
+      "side": 1,
+      "message": "Yes that will work. But I feel a bit weird that something in WGSL cannot be directly translated into SPIRV.\n\nI\u0027ve filed https://github.com/gpuweb/gpuweb/pull/3640 to see if the people in the WG are also satisfied with this way.",
+      "parentUuid": "15343e0f_0cbdd144",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "24acb588_c2646802",
