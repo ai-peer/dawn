@@ -121,6 +121,24 @@
       "message": "No additional comments LGTM",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22626e75_c4fedb7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-28T20:21:09Z",
+      "side": 1,
+      "message": "AFAICT this extra field would need to be propagated outside of Dawn though.\n\nFor a default pipeline layout, we copy it out from the internal `ShaderBindingInfo` to the external `BindGroupLayoutEntry` struct here:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/PipelineLayout.cpp;l\u003d179\n\n... and then it gets copied back into the internal `BindingInfo` when the bind group is created:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BindGroupLayout.cpp;l\u003d327\n\nThat presumably means we can\u0027t solve this by just making an internal-only `BufferBindingLayoutWithExtras` struct as you suggest, unless I\u0027m misunderstanding?",
+      "parentUuid": "47999aa5_053b4183",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
