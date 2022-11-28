@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f55787f_0ca962a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T22:41:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ce1f7394bf3b8adf77ea6c72a0c006ff3f45ea58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfd5c27_aeb0fe21",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-28T22:41:54Z",
+      "side": 1,
+      "message": "instead, could we put a method Destroy() on `CommandPoolAndBuffer` and then call `commands.Destroy(fn, mVkDevice)`?\n\nthen we can also change a few other call sites to use it.\nDevice::DestroyImpl has this code copy-pasted twice",
+      "range": {
+        "startLine": 749,
+        "startChar": 4,
+        "endLine": 764,
+        "endChar": 6
+      },
+      "revId": "ce1f7394bf3b8adf77ea6c72a0c006ff3f45ea58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
