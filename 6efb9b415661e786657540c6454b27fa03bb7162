@@ -16,6 +16,41 @@
       "message": "Failing two command encoder error cases:\n```\n[ RUN      ] DeprecationTests.ReadOnlyDepthStencilStoreLoadOpsAttachment/Vulkan_SwiftShader_Device_Subzero_e_disallow_deprecated_apis\n../../src/dawn/tests/end2end/DeprecatedAPITests.cpp:77: Failure\nActual function call count doesn\u0027t match EXPECT_CALL(mDeviceErrorCallback, Call(testing::Ne(WGPUErrorType_NoError), testing::_, this-\u003edevice.Get()))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n../../src/dawn/tests/end2end/DeprecatedAPITests.cpp:88: Failure\nActual function call count doesn\u0027t match EXPECT_CALL(mDeviceErrorCallback, Call(testing::Ne(WGPUErrorType_NoError), testing::_, this-\u003edevice.Get()))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n```\n\nI have no idea what is the difference in error emiting in this case compared to others. Will look into tomorrow. Do you know what this reveals?",
       "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843bbf83_4e7fbff7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T03:48:04Z",
+      "side": 1,
+      "message": "These cases are because the error is happening on BeginRenderPass\n\nbeginRenderPass is called on the commandEncoder. errors there get stored in the commandEncoder, and you don\u0027t see them until you call commandEncoder.finish()\n- see CommandEncoder::Finish -\u003e EncodingContext::Finish -\u003e returns EncodingContext::mError\n\nsince it\u0027s just this test, I\u0027d recommend you patch up the test to handle this case one off\n\n\n\nthat said..... it seems like this behavior is actually completely wrong based on the current spec.\nErrors in commands like setBindGroup indeed are supposed to internally set the error and you don\u0027t see it till later.\n\nBut beginRenderPass (and beginComputePass) is different. It says:\n\u003e If any of the following requirements are unmet, generate a validation error, make pass invalid, and stop.\n\nwhich means we *should* be generating the device error immediately. Your current test is right; Dawn is wrong.\nYou could try adjusting Dawn\u0027s validation to do this correctly, but there could be unforeseen other failures that result. If this doesn\u0027t work out, we can fix the incorrect validation in another CL (may also need CTS fixes).",
+      "parentUuid": "1f011f62_147734a7",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a77385b2_d53498e1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T03:48:04Z",
+      "side": 1,
+      "message": "oh, that\u0027s not how I interpreted losing __FILE__, and friends.\n\ncould we do:\n```\ndefine DAWN_MAKE_DEPRECATION_ERROR(device, ...) \n  device-\u003eIsToggleEnabled(Toggle::DisallowDeprecatedAPIs)\n    ? MaybeError(DAWN_VALIDATION_ERROR(__VA_ARGS__))\n    : (device-\u003eEmitDeprecationWarning(absl::StrFormat(__VA_ARGS__)), MaybeError{})\n```\n?\n\nthe second half of the ternary is not super common but it\u0027s:\n(expr1, expr2)\n\nwhich means execute expr1, discard the result (void), and then use expr2\nhttps://godbolt.org/z/cvqEs5648",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
