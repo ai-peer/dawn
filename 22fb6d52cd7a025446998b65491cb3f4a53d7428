@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "676c4da0_1a5870f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T20:29:18Z",
+      "side": 1,
+      "message": "kokoro rebuild",
+      "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
