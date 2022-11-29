@@ -22,6 +22,30 @@
       },
       "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7052e6d3_08829a5d",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-11-29T02:37:53Z",
+      "side": 0,
+      "message": "@Austin, when I debugged this locally, the allocation ended up getting left behind in mResourceAllocationManager.mAllocationsToDelete. Deleting the allocation manager released the final reference due to ResourceHeapAllocation using a ComPtr internally.\n\nThe ResourceAllocationManager also has quite a bit of heap allocated on account of the std::vector in BuddyMemoryAllocator. We end up freeing that memory as well.",
+      "parentUuid": "dc15ef83_cfcb4508",
+      "range": {
+        "startLine": 850,
+        "startChar": 4,
+        "endLine": 856,
+        "endChar": 78
+      },
+      "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
