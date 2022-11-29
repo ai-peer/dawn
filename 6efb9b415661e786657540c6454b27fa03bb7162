@@ -51,6 +51,24 @@
       "message": "oh, that\u0027s not how I interpreted losing __FILE__, and friends.\n\ncould we do:\n```\ndefine DAWN_MAKE_DEPRECATION_ERROR(device, ...) \n  device-\u003eIsToggleEnabled(Toggle::DisallowDeprecatedAPIs)\n    ? MaybeError(DAWN_VALIDATION_ERROR(__VA_ARGS__))\n    : (device-\u003eEmitDeprecationWarning(absl::StrFormat(__VA_ARGS__)), MaybeError{})\n```\n?\n\nthe second half of the ternary is not super common but it\u0027s:\n(expr1, expr2)\n\nwhich means execute expr1, discard the result (void), and then use expr2\nhttps://godbolt.org/z/cvqEs5648",
       "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f23756_57b17741",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T03:51:52Z",
+      "side": 1,
+      "message": "callsites like:\n```\nif (GetDevice()-\u003eConsumedError(GetDevice()-\u003eEmitDeprecationPathError(\n            \"dispatch() has been deprecated. Use dispatchWorkgroups() instead.\"))) {\n        return;\n}\n```\n\ncould they be:\n```\nif (GetDevice()-\u003eConsumedError(DAWN_MAKE_DEPRECATION_ERROR(...))) {\n  return;\n}\n```\n?",
+      "parentUuid": "a77385b2_d53498e1",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
