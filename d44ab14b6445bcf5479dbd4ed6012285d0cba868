@@ -39,6 +39,30 @@
       },
       "revId": "d44ab14b6445bcf5479dbd4ed6012285d0cba868",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4768e534_b7876ca3",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-29T18:49:59Z",
+      "side": 1,
+      "message": "Possibly? Depends on where and what we want to mutate. It\u0027s easy enough to drop if we need to in the future.",
+      "parentUuid": "d7e7e5c0_a0177407",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 9
+      },
+      "revId": "d44ab14b6445bcf5479dbd4ed6012285d0cba868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
