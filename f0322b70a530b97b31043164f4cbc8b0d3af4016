@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e85abf_5c7ffed5",
+        "filename": "src/tint/sem/function.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-29T20:28:28Z",
+      "side": 1,
+      "message": "Apparently this is never used so can it just be removed?",
+      "revId": "f0322b70a530b97b31043164f4cbc8b0d3af4016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
