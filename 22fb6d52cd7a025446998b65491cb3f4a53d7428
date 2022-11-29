@@ -50,6 +50,41 @@
       "message": "it\u0027s probably OK to manually click Kokoro+1 if you\u0027d like since all of them passed except MSVC debug",
       "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50d8b37_1e90e078",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T20:37:10Z",
+      "side": 1,
+      "message": "Ack. Turns out there\u0027s a bug for `kokoro rebuild` won\u0027t work. b/143777100",
+      "parentUuid": "5ae573d1_07288a9b",
+      "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8a66b8_c18bff04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T20:37:10Z",
+      "side": 1,
+      "message": "Manually +1 for Kokoro. As only thing triggering the TOOL_ABORTED is the [10:55:13] Child job: dawn/windows/cmake-msvc2019-debug/presubmit finished with status: NOT_BUILT. \nKoroko rebuild triggering comment doesn\u0027t seem to work",
+      "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
