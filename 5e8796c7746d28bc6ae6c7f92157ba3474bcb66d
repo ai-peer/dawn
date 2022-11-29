@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28579306_880c5904",
+        "filename": "src/tint/ir/constant.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T18:35:33Z",
+      "side": 1,
+      "message": "You\u0027re going to need a bigger boat. Vectors, matrices, arrays and structures should be represented by a single `Value`. Again, it seems like this is _very_ similar to `sem::Constant`. Perhaps we should try hard to figure out how to share these (along with `sem::Type`).",
+      "range": {
+        "startLine": 107,
+        "startChar": 17,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "5e8796c7746d28bc6ae6c7f92157ba3474bcb66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
