@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab8eed94_09f287d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:29:40Z",
+      "side": 1,
+      "message": "Amazingly good diagnostics.\nThanks!",
+      "revId": "a33cb8be3d666502ddfd8bb84eea3eb25856e2c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d17118d_eafa894e",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:29:40Z",
+      "side": 1,
+      "message": "the only valid access modes are read and read_write\nBut that\u0027s already checked in CheckTypeAccessAddressSpace.\nGood.",
+      "revId": "a33cb8be3d666502ddfd8bb84eea3eb25856e2c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
