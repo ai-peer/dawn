@@ -33,6 +33,23 @@
       "message": "kokoro rebuild",
       "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ae573d1_07288a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T20:30:34Z",
+      "side": 1,
+      "message": "it\u0027s probably OK to manually click Kokoro+1 if you\u0027d like since all of them passed except MSVC debug",
+      "revId": "22fb6d52cd7a025446998b65491cb3f4a53d7428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
