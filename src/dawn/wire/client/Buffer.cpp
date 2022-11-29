@@ -138,7 +138,11 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
 // static
 WGPUBuffer Buffer::CreateError(Device* device, const WGPUBufferDescriptor* descriptor) {
     Client* client = device->GetClient();
-    Buffer* buffer = client->Make<Buffer>(device, descriptor);
+
+    // Always set the size of OOM buffer to 0 to prevent the buffer size being used unexpectedly.
+    WGPUBufferDescriptor fakeDescriptor = *descriptor;
+    fakeDescriptor.size = 0;
+    Buffer* buffer = client->Make<Buffer>(device, &fakeDescriptor);
 
     DeviceCreateErrorBufferCmd cmd;
     cmd.self = ToAPI(device);

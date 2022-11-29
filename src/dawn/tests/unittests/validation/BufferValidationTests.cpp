@@ -374,6 +374,23 @@ TEST_F(BufferValidationTest, MapAsync_Destroy) {
     }
 }
 
+// Test map async with a buffer that is OOM on x86.
+TEST_F(BufferValidationTest, MapAsync_OOMOnX86) {
+    constexpr uint32_t kMaxUint32 = std::numeric_limits<uint32_t>::max();
+
+    {
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR(EXPECT_DEPRECATION_WARNING(buffer = CreateMapReadBuffer(kMaxUint32)));
+        AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, kMaxUint32);
+    }
+
+    {
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR(EXPECT_DEPRECATION_WARNING(buffer = CreateMapWriteBuffer(kMaxUint32)));
+        AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, kMaxUint32);
+    }
+}
+
 // Test map async but unmapping before the result is ready.
 TEST_F(BufferValidationTest, MapAsync_UnmapBeforeResult) {
     {
