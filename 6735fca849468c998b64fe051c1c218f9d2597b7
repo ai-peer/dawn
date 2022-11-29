@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32a1703d_818c7abd",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1331,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T21:54:06Z",
+      "side": 1,
+      "message": "Seems that emitted.insert(message) needs a string_view to string convert immediately. so still use std::string",
+      "parentUuid": "da35df28_abc49424",
+      "revId": "6735fca849468c998b64fe051c1c218f9d2597b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c40dd74_4284211d",

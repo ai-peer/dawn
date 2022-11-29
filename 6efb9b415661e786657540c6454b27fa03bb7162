@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb5564db_62b772b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T21:54:06Z",
+      "side": 1,
+      "message": "Turns out there are some unittests need updating (RenderPassDescriptorValidationTests) so filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1602 and will do in another CL.\nDisabled these 2 tests in this CL.",
+      "parentUuid": "843bbf83_4e7fbff7",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a77385b2_d53498e1",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "callsites like:\n```\nif (GetDevice()-\u003eConsumedError(GetDevice()-\u003eEmitDeprecationPathError(\n            \"dispatch() has been deprecated. Use dispatchWorkgroups() instead.\"))) {\n        return;\n}\n```\n\ncould they be:\n```\nif (GetDevice()-\u003eConsumedError(DAWN_MAKE_DEPRECATION_ERROR(...))) {\n  return;\n}\n```\n?",
       "parentUuid": "a77385b2_d53498e1",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "439190d9_66087f75",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1336,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T21:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47f23756_57b17741",
       "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
