@@ -103,7 +103,7 @@ Resolver::Resolver(ProgramBuilder* builder)
       const_eval_(*builder),
       intrinsic_table_(IntrinsicTable::Create(*builder)),
       sem_(builder, dependencies_),
-      validator_(builder, sem_) {}
+      validator_(builder, sem_, enabled_extensions_) {}
 
 Resolver::~Resolver() = default;
 

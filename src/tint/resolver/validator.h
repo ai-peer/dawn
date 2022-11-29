@@ -77,8 +77,9 @@ class Validator {
 
     /// Constructor
     /// @param builder the program builder
-    /// @param helper the SEM helper to validate with
-    Validator(ProgramBuilder* builder, SemHelper& helper);
+    /// @param sem the SEM helper to validate with
+    /// @param enabled_extensions the enabled extensions
+    Validator(ProgramBuilder* builder, SemHelper& sem, const ast::Extensions& enabled_extensions);
     ~Validator();
 
     /// Adds the given error message to the diagnostics
@@ -498,6 +499,7 @@ class Validator {
     std::string VectorPretty(uint32_t size, const sem::Type* element_type) const;
 
     SymbolTable& symbols_;
+    const ast::Extensions& enabled_extensions_;
     diag::List& diagnostics_;
     SemHelper& sem_;
 };
