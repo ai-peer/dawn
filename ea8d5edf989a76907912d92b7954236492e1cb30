@@ -211,6 +211,24 @@
       "parentUuid": "5e481c8c_754fabcc",
       "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69131f26_4bc126aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-29T10:55:54Z",
+      "side": 1,
+      "message": "Maybe we bite the bullet and do it without deprecation warnings. People testing on canary will change the buffers to be slightly bigger but the fixed code will work on all versions of Chrome so that\u0027s ok? We did similar changes without deprecation warnings in the past when the new code would be guaranteed to not break in stable Chrome.",
+      "parentUuid": "ee1acc36_ac8a2a20",
+      "revId": "ea8d5edf989a76907912d92b7954236492e1cb30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
