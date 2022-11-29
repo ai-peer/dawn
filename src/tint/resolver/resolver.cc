@@ -314,12 +314,15 @@ sem::Type* Resolver::Type(const ast::Type* ty) {
                     AddNote("'" + name + "' declared here", func->Declaration()->source);
                     return nullptr;
                 },
-                [&](Default) {
+                [&](Default) -> sem::Type* {
                     if (auto* tn = ty->As<ast::TypeName>()) {
                         if (IsBuiltin(tn->name)) {
                             auto name = builder_->Symbols().NameFor(tn->name);
                             AddError("cannot use builtin '" + name + "' as type", ty->source);
                             return nullptr;
+                        }
+                        if (auto* t = BuiltinTypeAlias(tn->name)) {
+                            return t;
                         }
                     }
                     TINT_UNREACHABLE(Resolver, diagnostics_)
@@ -2318,6 +2321,51 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     return call;
 }
 
+sem::Type* Resolver::BuiltinTypeAlias(Symbol sym) const {
+    auto name = builder_->Symbols().NameFor(sym);
+    if (!utils::HasPrefix(name, "vec")) {
+        return nullptr;
+    }
+    auto& b = *builder_;
+    if (name == "vec2f") {
+        return b.create<sem::Vector>(b.create<sem::F32>(), 2u);
+    }
+    if (name == "vec3f") {
+        return b.create<sem::Vector>(b.create<sem::F32>(), 3u);
+    }
+    if (name == "vec4f") {
+        return b.create<sem::Vector>(b.create<sem::F32>(), 4u);
+    }
+    if (name == "vec2h") {
+        return b.create<sem::Vector>(b.create<sem::F16>(), 2u);
+    }
+    if (name == "vec3h") {
+        return b.create<sem::Vector>(b.create<sem::F16>(), 3u);
+    }
+    if (name == "vec4h") {
+        return b.create<sem::Vector>(b.create<sem::F16>(), 4u);
+    }
+    if (name == "vec2i") {
+        return b.create<sem::Vector>(b.create<sem::I32>(), 2u);
+    }
+    if (name == "vec3i") {
+        return b.create<sem::Vector>(b.create<sem::I32>(), 3u);
+    }
+    if (name == "vec4i") {
+        return b.create<sem::Vector>(b.create<sem::I32>(), 4u);
+    }
+    if (name == "vec2u") {
+        return b.create<sem::Vector>(b.create<sem::U32>(), 2u);
+    }
+    if (name == "vec3u") {
+        return b.create<sem::Vector>(b.create<sem::U32>(), 3u);
+    }
+    if (name == "vec4u") {
+        return b.create<sem::Vector>(b.create<sem::U32>(), 4u);
+    }
+    return nullptr;
+}
+
 void Resolver::CollectTextureSamplerPairs(const sem::Builtin* builtin,
                                           utils::VectorRef<const sem::Expression*> args) const {
     // Collect a texture/sampler pair for this builtin.
@@ -2540,7 +2588,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
         return nullptr;
     }
 
-    if (resolved->Is<sem::Type>()) {
+    if (resolved->Is<sem::Type>() || BuiltinTypeAlias(symbol)) {
         AddError("missing '(' for type initializer or cast", expr->source.End());
         return nullptr;
     }

@@ -481,9 +481,21 @@ class DependencyScanner {
         graph_.resolved_symbols.Add(from, resolved);
     }
 
-    /// @returns true if `name` is the name of a builtin function
+    /// @returns true if `name` is the name of a builtin function, or builtin type alias
     bool IsBuiltin(Symbol name) const {
-        return sem::ParseBuiltinType(symbols_.NameFor(name)) != sem::BuiltinType::kNone;
+        auto s = symbols_.NameFor(name);
+        if (sem::ParseBuiltinType(s) != sem::BuiltinType::kNone) {
+            return true;
+        }
+        if (utils::HasPrefix(s, "vec")) {
+            if (s == "vec2f" || s == "vec3f" || s == "vec4f" ||  //
+                s == "vec2h" || s == "vec3h" || s == "vec4h" ||  //
+                s == "vec2i" || s == "vec3i" || s == "vec4i" ||  //
+                s == "vec2u" || s == "vec3u" || s == "vec4u") {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// Appends an error to the diagnostics that the given symbol cannot be
