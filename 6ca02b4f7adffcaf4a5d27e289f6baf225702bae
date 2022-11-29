@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93745d14_4b2a70f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-29T08:24:30Z",
+      "side": 1,
+      "message": "I\u0027ve verified this CL can fix the failures on the Windows x86 bots.\n\nPTAL, thanks!",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
