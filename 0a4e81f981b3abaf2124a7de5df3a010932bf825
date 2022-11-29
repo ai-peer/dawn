@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6cae314_a744e83e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-29T10:54:01Z",
+      "side": 1,
+      "message": "LGTM! Nice improvement to the Vulkan backend\u0027s output for the driver description too!",
+      "revId": "0a4e81f981b3abaf2124a7de5df3a010932bf825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a450a25a_483c8629",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-29T10:54:01Z",
+      "side": 1,
+      "message": "u-nit: Could we hide implementation details in the .cpp?",
+      "revId": "0a4e81f981b3abaf2124a7de5df3a010932bf825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
