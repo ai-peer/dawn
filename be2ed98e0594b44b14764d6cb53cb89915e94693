@@ -46,6 +46,30 @@
       },
       "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f006b21b_15999bf2",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T02:51:05Z",
+      "side": 0,
+      "message": "Ah I see, thanks for explaining! because the zero buffer needs to first its reference cleared out of mAllocationsToDelete AND also have its heap reference dropped - i.e. heap has no more suballocations, then the heap can be freed.\n\nwe could do something like:\n    \n```\n+   // make sure the zero buffer can be deleted\n+   mResourceAllocatorManager-\u003eTick(std::numeric_limits\u003cExecutionSerial\u003e::max());\n\n    // Release recycled resource heaps.\n    if (mResourceAllocatorManager !\u003d nullptr) {\n        mResourceAllocatorManager-\u003eDestroyPool();\n    }\n\n    // We need to handle clearing up com object refs that were enqeued after TickImpl\n    mUsedComObjectRefs.ClearUpTo(std::numeric_limits\u003cExecutionSerial\u003e::max());\n\n+   // free tracking data structures\n+   // mResourceAllocatorManager.reset();\n```\n\nto make sure the destruction order of allocations and heaps happens exactly as they normally would for other resources - but that\u0027s probably a bit unnecessary.\n\nUnless! does D3D12 require you to release all placed resources before releasing the heap? That could be a problem if there are placed resources living in mUsedComObjectRefs and `mResourceAllocatorManager.reset(nullptr)` releases all the heaps.",
+      "parentUuid": "7052e6d3_08829a5d",
+      "range": {
+        "startLine": 850,
+        "startChar": 4,
+        "endLine": 856,
+        "endChar": 78
+      },
+      "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
