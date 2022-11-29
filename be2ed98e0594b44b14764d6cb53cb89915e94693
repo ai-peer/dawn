@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc15ef83_cfcb4508",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-29T02:14:23Z",
+      "side": 0,
+      "message": "my current understanding:\n\nmResourceAllocatorManager-\u003eDestroyPool()\n-\u003e ResourceAllocatorManager::DestroyPool\n-\u003e PooledResourceMemoryAllocator::DestroyPool for all heap types\n-\u003e d31d2::HeapAllocator::DeallocateResourceHeap(std::move(resourceHeap));\n-\u003e mDevice-\u003eReferenceUntilUnused(heap);\n-\u003e mUsedComObjectRefs.Enqueue(heap, GetPendingCommandSerial());\n\nso all the heaps are in mUsedComObjectRefs\nwhich then gets cleared with the max serial - clearing everything\n\nthis is *theoretically* supposed to free all the memory, but evidently you\u0027ve found it is not; do you know where it\u0027s going wrong? is there a ComPtr that\u0027s not getting moved correctly and thus leaking somewhere?",
+      "range": {
+        "startLine": 850,
+        "startChar": 4,
+        "endLine": 856,
+        "endChar": 78
+      },
+      "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
