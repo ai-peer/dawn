@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40694200_1193c511",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:21:06Z",
+      "side": 1,
+      "message": "Please update the comments.",
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0e9f981_a041246e",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:21:06Z",
+      "side": 1,
+      "message": "The comment is misleading.\nA valid [type + address space] is validated only once.\nInvalid ones are validated each time they are mentioned.\n\nIt made me look at the hashset header to see what Add returned. So readability suffered.",
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5cbbba8_a05990f4",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:21:06Z",
+      "side": 1,
+      "message": "Returns true on success?",
+      "range": {
+        "startLine": 495,
+        "startChar": 7,
+        "endLine": 495,
+        "endChar": 15
+      },
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99407c0_a88065ee",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-11-29T16:21:06Z",
+      "side": 1,
+      "message": "Missing @returns line.",
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
