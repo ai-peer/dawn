@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8792e616_669176a2",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T16:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5cbbba8_a05990f4",
+      "range": {
+        "startLine": 495,
+        "startChar": 7,
+        "endLine": 495,
+        "endChar": 15
+      },
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f99407c0_a88065ee",
@@ -89,6 +113,24 @@
       "writtenOn": "2022-11-29T16:21:06Z",
       "side": 1,
       "message": "Missing @returns line.",
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc5d7a9_91cab1c5",
+        "filename": "src/tint/resolver/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T16:28:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f99407c0_a88065ee",
       "revId": "0632efda11df34170b64d30d8ea58da71053837c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
