@@ -171,6 +171,212 @@ bool AllowFormatReinterpretationWithoutFlag(MTLPixelFormat origin,
             return reinterpretation == MTLPixelFormatBC7_RGBAUnorm;
 #endif
 
+        case MTLPixelFormatETC2_RGB8:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatETC2_RGB8_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatETC2_RGB8_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatETC2_RGB8;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatETC2_RGB8A1:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatETC2_RGB8A1_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatETC2_RGB8A1_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatETC2_RGB8A1;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatEAC_RGBA8:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatEAC_RGBA8_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatEAC_RGBA8_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatEAC_RGBA8;
+            } else {
+                UNREACHABLE();
+            }
+
+        case MTLPixelFormatASTC_4x4_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_4x4_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_4x4_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_4x4_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_5x4_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_5x4_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_5x4_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_5x4_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_5x5_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_5x5_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_5x5_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_5x5_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_6x5_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_6x5_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_6x5_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_6x5_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_6x6_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_6x6_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_6x6_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_6x6_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x5_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x5_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x5_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x5_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x6_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x6_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x6_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x6_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x8_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x8_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_8x8_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_8x8_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x5_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x5_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x5_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x5_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x6_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x6_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x6_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x6_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x8_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x8_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x8_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x8_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x10_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x10_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_10x10_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_10x10_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_12x10_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_12x10_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_12x10_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_12x10_LDR;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_12x12_LDR:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_12x12_sRGB;
+            } else {
+                UNREACHABLE();
+            }
+        case MTLPixelFormatASTC_12x12_sRGB:
+            if (@available(macOS 11.0, iOS 8.0, *)) {
+                return reinterpretation == MTLPixelFormatASTC_12x12_LDR;
+            } else {
+                UNREACHABLE();
+            }
+
         default:
             return false;
     }
