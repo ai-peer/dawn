@@ -632,19 +632,19 @@ utils::Result<const Value*> BuilderImpl::EmitLiteral(const ast::LiteralExpressio
     return tint::Switch(  //
         lit,
         [&](const ast::BoolLiteralExpression* l) {
-            return utils::Result{builder.MkValue(l->value)};
+            return utils::Result{builder.ConstantValue(l->value)};
         },
         [&](const ast::FloatLiteralExpression* l) {
             if (l->suffix == ast::FloatLiteralExpression::Suffix::kF) {
-                return utils::Result{builder.MkValue(f32(static_cast<float>(l->value)))};
+                return utils::Result{builder.ConstantValue(f32(static_cast<float>(l->value)))};
             }
-            return utils::Result{builder.MkValue(f16(static_cast<float>(l->value)))};
+            return utils::Result{builder.ConstantValue(f16(static_cast<float>(l->value)))};
         },
         [&](const ast::IntLiteralExpression* l) {
             if (l->suffix == ast::IntLiteralExpression::Suffix::kI) {
-                return utils::Result{builder.MkValue(i32(l->value))};
+                return utils::Result{builder.ConstantValue(i32(l->value))};
             }
-            return utils::Result{builder.MkValue(u32(l->value))};
+            return utils::Result{builder.ConstantValue(u32(l->value))};
         },
         [&](Default) {
             diagnostics_.add_warning(tint::diag::System::IR,
