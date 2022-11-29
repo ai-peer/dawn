@@ -22,6 +22,30 @@
       },
       "revId": "5e8796c7746d28bc6ae6c7f92157ba3474bcb66d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297a1726_9708c305",
+        "filename": "src/tint/ir/constant.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-29T18:48:45Z",
+      "side": 1,
+      "message": "sem::Type pulls in sem::Expression which we don\u0027t want so it has to be re-created. sem::Constant, maybe, but there are no concrete implementations of sem::Constant outside the resolver.",
+      "parentUuid": "28579306_880c5904",
+      "range": {
+        "startLine": 107,
+        "startChar": 17,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "5e8796c7746d28bc6ae6c7f92157ba3474bcb66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
