@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "982f8ccf_51b4fb9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T20:40:55Z",
+      "side": 1,
+      "message": "Manual kokoro +1 doesn\u0027t seem to unblock submit. Modify code and revert back to trigger a kokoro rerun.",
+      "revId": "82cf02e1bf883a8f9baf6d131df021f932f54500",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
