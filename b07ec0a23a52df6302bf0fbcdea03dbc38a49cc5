@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "241ad82d_993892d8",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T20:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce086a12_00a7c7c8",
+      "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58366111_f7725923",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e15131d6_99a70e62",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T20:29:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58366111_f7725923",
+      "range": {
+        "startLine": 304,
+        "startChar": 4,
+        "endLine": 304,
+        "endChar": 5
+      },
+      "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebe121f9_022f2b63",
@@ -88,6 +130,24 @@
       "writtenOn": "2022-11-29T10:45:50Z",
       "side": 1,
       "message": "nit: there are only four different expectations for the 8 test cases, what do you think of changing the texture data to be a bit more varied so that we can test the 8 cases with 8 different expectations?",
+      "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74821356_3d86812d",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T20:29:58Z",
+      "side": 1,
+      "message": "I changed the tests to draw a different color in each quadrant - and also increased the number of pixel checks to include the inner pixels. This seems adequate to me, but lmk if you think otherwise.",
+      "parentUuid": "ebe121f9_022f2b63",
       "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

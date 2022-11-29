@@ -410,6 +410,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9758c04_0ae0b12f",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T20:29:58Z",
+      "side": 1,
+      "message": "Done. New bug is mentioned in comments.",
+      "parentUuid": "50bfb85d_ab6e372e",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50974d0d_82bef863",
