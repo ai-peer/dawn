@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eb952c4_a478039c",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T21:15:04Z",
+      "side": 1,
+      "message": "I tend to use godoc style, where the comment starts with the method name.\n\n```\n// foo does blah\nvoid foo() {}\n```",
+      "parentUuid": "a44f4d72_98a0496d",
+      "revId": "2b457e6d5ab93585e1dde6496c00f816ed3b9ff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a9373e8_7f99fbd3",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-29T20:32:16Z",
       "side": 1,
       "message": "There are a lot of shoulds here? Is this:\n\n```\n`bool(const T\u0026 a, const T\u0026 b)` which returns true if `a` is sorted before `b`\n```\n\n?",
+      "revId": "2b457e6d5ab93585e1dde6496c00f816ed3b9ff1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28360a68_13744171",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T21:15:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a9373e8_7f99fbd3",
       "revId": "2b457e6d5ab93585e1dde6496c00f816ed3b9ff1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
