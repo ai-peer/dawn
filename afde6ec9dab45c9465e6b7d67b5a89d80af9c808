@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "afde6ec9dab45c9465e6b7d67b5a89d80af9c808",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8907101a_cc6618ef",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T11:48:17Z",
+      "side": 1,
+      "message": "nit: For symmetry with the other methods, I\u0027d call this `Value()`, and prefix the other uses of that symbol with `ir::`",
+      "range": {
+        "startLine": 90,
+        "startChar": 17,
+        "endLine": 90,
+        "endChar": 24
+      },
+      "revId": "afde6ec9dab45c9465e6b7d67b5a89d80af9c808",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
