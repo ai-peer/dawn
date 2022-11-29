@@ -76,11 +76,15 @@ bool Server::DoBufferMapAsync(ObjectId bufferId,
     userdata->mode = mode;
 
     // Make sure that the deserialized offset and size are no larger than
-    // std::numeric_limits<size_t>::max() so that they are CPU-addressable, and size is not
-    // WGPU_WHOLE_MAP_SIZE, which is by definition std::numeric_limits<size_t>::max(). Since
-    // client does the default size computation, we should always have a valid actual size here
-    // in server. All other invalid actual size can be caught by dawn native side validation.
-    if (offset64 > std::numeric_limits<size_t>::max() || size64 >= WGPU_WHOLE_MAP_SIZE) {
+    // std::numeric_limits<size_t>::max() so that they are CPU-addressable. Since client does the
+    // default size computation, we should always have a valid actual size here in server. All other
+    // invalid actual size can be caught by dawn native side validation.
+    // Note that we allow size64 be equal to WGPU_WHOLE_MAP_SIZE
+    // (std::numeric_limits<size_t>::max()) because on 32-bit systems WGPU_WHOLE_MAP_SIZE is equal
+    // to MAX_UINT, which is a correct value in the middle of the representable range of values the
+    // wire_client might be sending.
+    if (offset64 > std::numeric_limits<size_t>::max() ||
+        size64 > std::numeric_limits<size_t>::max()) {
         OnBufferMapAsyncCallback(userdata.get(), WGPUBufferMapAsyncStatus_Error);
         return true;
     }
