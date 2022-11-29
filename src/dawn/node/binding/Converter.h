@@ -69,6 +69,7 @@ using ImplOf = typename ImplOfTraits<T>::type;
 class Converter {
   public:
     explicit Converter(Napi::Env e) : env(e) {}
+    Converter(Napi::Env e, wgpu::Device extensionDevice) : env(e), device(extensionDevice) {}
     ~Converter();
 
     // Conversion function. Converts the interop type IN to the Dawn type OUT.
@@ -396,6 +397,9 @@ class Converter {
     }
 
     Napi::Env env;
+    wgpu::Device device = nullptr;
+
+    bool HasFeature(wgpu::FeatureName feature) { return device.HasFeature(feature); }
 
     // Allocate() allocates and constructs an array of 'n' elements, and returns a pointer to
     // the first element. The array is freed when the Converter is destructed.
