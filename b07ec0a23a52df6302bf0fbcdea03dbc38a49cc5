@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f978e8_0f7e31f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "@bclayton@google.com Tint test regeneration is generating a huge amount of files with very slight differences unrelated to my change. Seems odd - was wanting to ask how unusual this is before I add the files to this CL (there are hundreds at least).",
+      "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

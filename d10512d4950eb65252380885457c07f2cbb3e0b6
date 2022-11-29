@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "995894c1_d0f498d8",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a37cb58_c7270f16",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4477e3a5_0f0a0e21",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9fac9ad_cccf4ec6",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4477e3a5_0f0a0e21",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "735469ee_948e3193",
@@ -99,6 +135,30 @@
       "writtenOn": "2022-11-21T12:05:58Z",
       "side": 1,
       "message": "nit: This is no longer just a rotation matrix with the flip-Y. Maybe texcoordMatrix or transformMatrix?",
+      "range": {
+        "startLine": 227,
+        "startChar": 19,
+        "endLine": 227,
+        "endChar": 33
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a25f2d85_32a0b10b",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "735469ee_948e3193",
       "range": {
         "startLine": 227,
         "startChar": 19,
@@ -132,6 +192,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac24ce29_0f1aa1a1",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06b49c2a_46a72322",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 16
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66adc56a_46a72e2d",
@@ -155,6 +239,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a9e5f5_57332e70",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66adc56a_46a72e2d",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 13
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe6a5f61_7e35cb58",
@@ -168,6 +276,30 @@
       "writtenOn": "2022-11-21T12:05:58Z",
       "side": 1,
       "message": "you can use texutre.GetFormat() now!",
+      "range": {
+        "startLine": 77,
+        "startChar": 26,
+        "endLine": 77,
+        "endChar": 54
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c1f63ca_008c53d4",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe6a5f61_7e35cb58",
       "range": {
         "startLine": 77,
         "startChar": 26,
@@ -220,6 +352,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee785a3b_ddd44e2f",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Still failing. Still appears to be a shader compilation issue specific to external textures. I\u0027ll submit another issue.",
+      "parentUuid": "7b6240f6_1f112f5e",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "50974d0d_82bef863",
         "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
         "patchSetId": 5
@@ -231,6 +381,24 @@
       "writtenOn": "2022-11-21T12:05:58Z",
       "side": 1,
       "message": "Shouldn\u0027t we combine rotation and flipY tests because they interact with each other? It would ensure that we got the logic in the switch at [1] correct.",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81115f5_23f4807f",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Good call. I did find an issue. Fixed.",
+      "parentUuid": "50974d0d_82bef863",
       "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -258,6 +426,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd169c65_aa10e276",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acad5a1c_46223e59",
+      "range": {
+        "startLine": 515,
+        "startChar": 9,
+        "endLine": 515,
+        "endChar": 28
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "630e25e9_621b5559",
@@ -271,6 +463,30 @@
       "writtenOn": "2022-11-21T14:49:43Z",
       "side": 1,
       "message": "could we also test the case where we don\u0027t set this member at all - i.e. the default?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 45
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7918e783_dae72d35",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-11-29T01:04:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "630e25e9_621b5559",
       "range": {
         "startLine": 526,
         "startChar": 0,
