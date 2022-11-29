@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "316c0a81_661fdeb1",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T02:38:28Z",
+      "side": 1,
+      "message": "Done. Modify to use normal validation errors message",
+      "parentUuid": "beea453e_a7a2f5fc",
+      "range": {
+        "startLine": 118,
+        "startChar": 11,
+        "endLine": 120,
+        "endChar": 55
+      },
+      "revId": "941d4110543739a74a5f73ecdf3d8d5ea19fbbd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b2c9fc8_47b26425",

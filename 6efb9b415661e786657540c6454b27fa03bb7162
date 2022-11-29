@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f011f62_147734a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-11-29T02:38:28Z",
+      "side": 1,
+      "message": "Failing two command encoder error cases:\n```\n[ RUN      ] DeprecationTests.ReadOnlyDepthStencilStoreLoadOpsAttachment/Vulkan_SwiftShader_Device_Subzero_e_disallow_deprecated_apis\n../../src/dawn/tests/end2end/DeprecatedAPITests.cpp:77: Failure\nActual function call count doesn\u0027t match EXPECT_CALL(mDeviceErrorCallback, Call(testing::Ne(WGPUErrorType_NoError), testing::_, this-\u003edevice.Get()))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n../../src/dawn/tests/end2end/DeprecatedAPITests.cpp:88: Failure\nActual function call count doesn\u0027t match EXPECT_CALL(mDeviceErrorCallback, Call(testing::Ne(WGPUErrorType_NoError), testing::_, this-\u003edevice.Get()))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n```\n\nI have no idea what is the difference in error emiting in this case compared to others. Will look into tomorrow. Do you know what this reveals?",
+      "revId": "6efb9b415661e786657540c6454b27fa03bb7162",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
