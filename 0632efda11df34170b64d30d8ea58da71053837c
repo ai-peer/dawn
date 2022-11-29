@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38c449a5_55d75850",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T16:24:55Z",
+      "side": 1,
+      "message": "I don\u0027t think this comment is wrong. `AddressSpaceLayout` will early out if this has been called more than once, regardless of whether it is valid or not.",
+      "parentUuid": "f0e9f981_a041246e",
+      "revId": "0632efda11df34170b64d30d8ea58da71053837c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5cbbba8_a05990f4",
         "filename": "src/tint/resolver/validator.h",
         "patchSetId": 1
