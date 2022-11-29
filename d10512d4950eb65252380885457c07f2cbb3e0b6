@@ -333,6 +333,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74534cf7_d041e5a9",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-29T10:45:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d2265149_a213b7c7",
+      "range": {
+        "startLine": 290,
+        "startChar": 61,
+        "endLine": 290,
+        "endChar": 67
+      },
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b6240f6_1f112f5e",
@@ -364,6 +388,24 @@
       "side": 1,
       "message": "Still failing. Still appears to be a shader compilation issue specific to external textures. I\u0027ll submit another issue.",
       "parentUuid": "7b6240f6_1f112f5e",
+      "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50bfb85d_ab6e372e",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-29T10:45:50Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "ee785a3b_ddd44e2f",
       "revId": "d10512d4950eb65252380885457c07f2cbb3e0b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
