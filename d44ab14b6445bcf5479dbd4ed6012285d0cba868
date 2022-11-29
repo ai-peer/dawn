@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "d44ab14b6445bcf5479dbd4ed6012285d0cba868",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e7e5c0_a0177407",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-29T18:37:06Z",
+      "side": 1,
+      "message": "Do we want these to be `const` ? Part of the goal of the IR is mutability, no?",
+      "range": {
+        "startLine": 105,
+        "startChar": 4,
+        "endLine": 105,
+        "endChar": 9
+      },
+      "revId": "d44ab14b6445bcf5479dbd4ed6012285d0cba868",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
