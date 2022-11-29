@@ -70,6 +70,30 @@
       },
       "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00a5eb5d_7ba8c3fe",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 856,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-11-29T17:43:03Z",
+      "side": 0,
+      "message": "@Austin, if we want an orderly shutdown that matches normal shutdown, we should write the code you suggested in the destructor of the resource allocation manager and make `DestroyPool` be a private method. There\u0027s value in having objects know how to shut themselves down.\n\nI would still like for the Dawn Device to actually free the allocation manager so that all of the heap allocation memory it holds can also go away.",
+      "parentUuid": "f006b21b_15999bf2",
+      "range": {
+        "startLine": 850,
+        "startChar": 4,
+        "endLine": 856,
+        "endChar": 78
+      },
+      "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

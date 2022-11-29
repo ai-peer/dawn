@@ -39,6 +39,30 @@
       },
       "revId": "2351548c9071ffcde58cb8159edc93fa139c1263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "333d0d1c_4b44ebea",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2022-11-29T17:43:03Z",
+      "side": 1,
+      "message": "Will change to `reset()` in my next patchset.",
+      "parentUuid": "0cc16a7d_5cc29076",
+      "range": {
+        "startLine": 852,
+        "startChar": 4,
+        "endLine": 852,
+        "endChar": 45
+      },
+      "revId": "2351548c9071ffcde58cb8159edc93fa139c1263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
