@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ee5cc28_37a20f26",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-30T15:32:46Z",
+      "side": 1,
+      "message": "Tests in GN?",
+      "revId": "db2780aaac714b740b8255ce91be61b45add6618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
