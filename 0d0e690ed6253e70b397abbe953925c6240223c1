@@ -18,6 +18,239 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40000584_6ed9fc51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "Dawn part LGTM overall, but it could have been split into a separate CL to make it easier to land things piecemeal.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017546d4_007795b7",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "Do you mean that the debug layer doesn\u0027t recognize f16 so it makes it unknown? Let\u0027s ask Rafael afterwards if we can work around this, it would be nice to keep the input layout validation.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56cd83c_b9858618",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "u-nit: comment above the test what it tests?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7755003_348b4cd9",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "nit: this is already tested somewhere else. DAWN_TEST_UNSUPPORTED_IF(!device.HasFeature())?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6c3118_d9cbab0a",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "Why do we need to test this twice?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe524034_2b7b0994",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e4395d_0a3b2c17",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7df61eb_b84365b1",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51608d01_79052abb",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "typo: vertex",
+      "range": {
+        "startLine": 330,
+        "startChar": 43,
+        "endLine": 330,
+        "endChar": 50
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44dcc72_bfc4ccf5",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "all the same comments for this test.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f366db5_06c35ac9",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "nit: For this test it could be better to just draw a couple points with different colors.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61a5d59a_e4c3e04f",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "nit: we could have just an std::vector\u003cstd::vector\u003e and use a big initializer list.",
+      "range": {
+        "startLine": 354,
+        "startChar": 31,
+        "endLine": 354,
+        "endChar": 32
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed393413_789c8766",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:48:35Z",
+      "side": 1,
+      "message": "nit: Maybe enable it unconditionally? Magic constants like these risk getting out of date.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41d3e8bb_eb886af5",
