@@ -16,6 +16,63 @@
       "message": "Please take a look, thanks",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d3e8bb_eb886af5",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T11:36:50Z",
+      "side": 1,
+      "message": "Looks like most of the changes here aren\u0027t necessarily specific to f16. Please move non-f16 changes out to base change.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e9ff139_3f3e5e39",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T11:36:50Z",
+      "side": 1,
+      "message": "nit: we could simplify this by pushing `1_a` or `0_a`. If we did this, then we can take the for-loops out of the switch.",
+      "range": {
+        "startLine": 451,
+        "startChar": 20,
+        "endLine": 480,
+        "endChar": 0
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "280e6201_c33ffb8f",
+        "filename": "src/tint/transform/vertex_pulling_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T11:36:50Z",
+      "side": 1,
+      "message": "The delta on this file is very large, and I\u0027m struggling to see what\u0027s refactoring vs changes specific to f16. Would it be possible to pull the non-f16 changes out to a base change?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
