@@ -781,11 +781,14 @@ ComputePassEncoder* CommandEncoder::APIBeginComputePass(const ComputePassDescrip
 Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
     DeviceBase* device = GetDevice();
 
+    // If descriptor is invalid, make pass invalid and stop immediately
+    if (device->ConsumedError(ValidateComputePassDescriptor(device, descriptor))) {
+        return ComputePassEncoder::MakeError(device, this, &mEncodingContext);
+    }
+
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
-            DAWN_TRY(ValidateComputePassDescriptor(device, descriptor));
-
             BeginComputePassCmd* cmd =
                 allocator->Allocate<BeginComputePassCmd>(Command::BeginComputePass);
 
@@ -835,26 +838,38 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
 
 RenderPassEncoder* CommandEncoder::APIBeginRenderPass(const RenderPassDescriptor* descriptor) {
     return BeginRenderPass(descriptor).Detach();
+
+    // Ref<RenderPassEncoder> passEncoder;
+    // if (GetDevice()->ConsumedError(BeginRenderPass(descriptor), &passEncoder)) {
+    //     return RenderPassEncoder::MakeError(GetDevice(), this, &mEncodingContext).Detach();
+    // }
+    // ASSERT(!IsError());
+    // return passEncoder.Detach();
 }
 
 Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* descriptor) {
+    // ResultOrError<Ref<RenderPassEncoder>> CommandEncoder::BeginRenderPass(const
+    // RenderPassDescriptor* descriptor) {
     DeviceBase* device = GetDevice();
 
     RenderPassResourceUsageTracker usageTracker;
 
     uint32_t width = 0;
     uint32_t height = 0;
+    uint32_t sampleCount = 0;
     bool depthReadOnly = false;
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
+
+    // If descriptor is invalid, make pass invalid and stop immediately
+    if (device->ConsumedError(ValidateRenderPassDescriptor(device, descriptor, &width, &height,
+                                                           &sampleCount, mUsageValidationMode))) {
+        return RenderPassEncoder::MakeError(device, this, &mEncodingContext);
+    }
+
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
-            uint32_t sampleCount = 0;
-
-            DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount,
-                                                  mUsageValidationMode));
-
             ASSERT(width > 0 && height > 0 && sampleCount > 0);
 
             mEncodingContext.WillBeginRenderPass();
