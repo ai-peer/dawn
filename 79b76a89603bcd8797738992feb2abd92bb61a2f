@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "79b76a89603bcd8797738992feb2abd92bb61a2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e72eb080_defb27a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T13:20:49Z",
+      "side": 1,
+      "message": "Kokoro is failing as the tint end2end test expectations need updating.",
+      "revId": "79b76a89603bcd8797738992feb2abd92bb61a2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
