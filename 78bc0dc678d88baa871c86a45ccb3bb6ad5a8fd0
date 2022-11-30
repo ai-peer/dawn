@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505c0f4d_378aa028",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-30T14:37:15Z",
+      "side": 1,
+      "message": "It\u0027s a classic error I\u0027ve often dealt with, but because I usually develop on Windows, I usually fix it before pushing to Gerrit. The problem is that using `ConcatIntoIf\u003cIsSignedIntegral\u003cT\u003e\u003e` doesn\u0027t stop the compiler from compiling the code when T is unsigned integral, so any negative entries result in this error on MSVC. My usual workaround is to use my `Negate` function template, which casts to signed, negates, then casts back to unsigned. But this is only useful in situations where we want to negate unsigned values. In this case, the simplest solution is to use `if constexpr IsSignedIntegral\u003cT\u003e` and `ConcatInto` instead.",
+      "parentUuid": "1d2d50be_7d4b080c",
+      "revId": "78bc0dc678d88baa871c86a45ccb3bb6ad5a8fd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0270934b_ab855a88",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-11-30T00:26:33Z",
       "side": 1,
       "message": "So for everything this function handles, then? 😊 Suggest removing this bit",
+      "range": {
+        "startLine": 815,
+        "startChar": 15,
+        "endLine": 815,
+        "endChar": 44
+      },
+      "revId": "78bc0dc678d88baa871c86a45ccb3bb6ad5a8fd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24be3a9_40140afa",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-11-30T14:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0270934b_ab855a88",
       "range": {
         "startLine": 815,
         "startChar": 15,
