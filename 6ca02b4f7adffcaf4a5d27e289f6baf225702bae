@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "89a82881_09631862",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-30T03:09:31Z",
+      "side": 1,
+      "message": "hmm.. thanks for the explanation!\n\nto me, I think the problem is happening in (3). with the `|| size64 \u003e\u003d WGPU_WHOLE_MAP_SIZE` part of the check. the size is equal to WHOLE_MAP_SIZE so it\u0027s erroring early before going to dawn::native for validation.\nThe intent of this code is to catch problems where the client is a 64-bit platform and the server is a 32-bit platform. So the client is expressing some size that can\u0027t be interpreted by the server. It can\u0027t even be passed into dawn::native because the 64-bit size would narrow into a 32-bit size_t. The problem is, this doesn\u0027t work very well because that means on a 32-bit server, the \"magic\" value for WHOLE_MAP_SIZE is right in the middle of the representable range of values the client might be sending.\n\nWhat we probably should do instead is have a separate boolean in the MapAsync message that indicates whether the client wants to use \"WHOLE_MAP_SIZE\" or not since over the wire in this situation, the value is an overloaded concept.\n\nHowever, applications where the client is 64-bit and the server is 32-bit don\u0027t exist right now (that we know of) so I think the simplest thing we can right now is change `|| size64 \u003e\u003d WGPU_WHOLE_MAP_SIZE` into `|| size64 \u003e WGPU_WHOLE_MAP_SIZE`.\n\nThat will let through the \u003d\u003d case which would otherwise be valid if the buffer were not an error.\nIt\u0027ll go to dawn::native and hit the correct validation",
+      "parentUuid": "f3dd604d_5ef393ff",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
