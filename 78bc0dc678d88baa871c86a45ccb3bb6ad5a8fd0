@@ -16,6 +16,46 @@
       "message": "bclayton",
       "revId": "78bc0dc678d88baa871c86a45ccb3bb6ad5a8fd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2d50be_7d4b080c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T00:26:33Z",
+      "side": 1,
+      "message": "Nice. Kokoro error looks real:\n\n```\nT:\\tmp\\dawn-temp\\dawn-src\\src/tint/number.h(163): error C2220: the following warning is treated as an error\nT:\\tmp\\dawn-temp\\dawn-src\\src/tint/number.h(163): note: while compiling class template member function \u0027tint::Number\u003cuint32_t\u003e tint::Number\u003cuint32_t\u003e::operator -(void) const\u0027\nT:\\tmp\\dawn-temp\\dawn-src\\src\\tint\\resolver\\const_eval_binary_op_test.cc(520): note: see reference to function template instantiation \u0027tint::Number\u003cuint32_t\u003e tint::Number\u003cuint32_t\u003e::operator -(void) const\u0027 being compiled\nT:\\tmp\\dawn-temp\\dawn-src\\src/tint/number.h(611): note: see reference to class template instantiation \u0027tint::Number\u003cuint32_t\u003e\u0027 being compiled\nT:\\tmp\\dawn-temp\\dawn-src\\src/tint/number.h(163): warning C4146: unary minus operator applied to unsigned type, result still unsigned\n```",
+      "revId": "78bc0dc678d88baa871c86a45ccb3bb6ad5a8fd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0270934b_ab855a88",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T00:26:33Z",
+      "side": 1,
+      "message": "So for everything this function handles, then? 😊 Suggest removing this bit",
+      "range": {
+        "startLine": 815,
+        "startChar": 15,
+        "endLine": 815,
+        "endChar": 44
+      },
+      "revId": "78bc0dc678d88baa871c86a45ccb3bb6ad5a8fd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
