@@ -80,7 +80,7 @@ bool Struct::Equals(const sem::Type& other) const {
 
 const StructMember* Struct::FindMember(Symbol name) const {
     for (auto* member : members_) {
-        if (member->Declaration()->symbol == name) {
+        if (member->Name() == name) {
             return member;
         }
     }
