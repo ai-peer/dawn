@@ -16,6 +16,23 @@
       "message": "@Austin, thank you for the review. @Corentin, PTAL.",
       "revId": "ceffdc1dab0b5a70588e879c82197bd24dae8680",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca5a23d_be01d893",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:51:13Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ceffdc1dab0b5a70588e879c82197bd24dae8680",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
