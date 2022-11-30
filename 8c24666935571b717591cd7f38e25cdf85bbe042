@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21fcdf0b_da6e478b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-30T23:00:37Z",
+      "side": 1,
+      "message": "LGTM % spec change",
+      "revId": "8c24666935571b717591cd7f38e25cdf85bbe042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e7b3e5f_9528a06a",
