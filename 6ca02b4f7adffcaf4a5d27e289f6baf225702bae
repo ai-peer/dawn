@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3dd604d_5ef393ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-30T01:21:20Z",
+      "side": 1,
+      "message": "Here is why the test webgpu:api,operation,buffers,map_oom:mapAsync:oom\u003dtrue;size\u003d9007199254740984 fails on Win10_x86 bots:\n\n1. In the test the size exceeds kGuaranteedBufferOOMSize (std::numeric_limits\u003csize_t\u003e::max(), on x86 systems it is MAX_UINT), so it will be clamped to MAX_UINT.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_buffer.cc;l\u003d134\n\n2. On wire_client, when we create an error buffer, mSize won\u0027t be set to 0, it will be MAX_UINT:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/client/Buffer.cpp;l\u003d141\n\n3. On wire_server, size64 is MAX_UINT, which is equal to WGPU_WHOLE_MAP_SIZE (std::numeric_limits\u003csize_t\u003e::max(), on x86 systems it is MAX_UINT)\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/server/ServerBuffer.cpp;l\u003d83\n\n4. Then an WGPUBufferMapAsyncStatus_Error will be directly returned without any validations in dawn_native, so the test fails (the test checks if the validation error has been correctly generated).\n\nSo if we set mSize to 0 for OOM buffers at wire_client (like what we did before https://dawn-review.googlesource.com/c/dawn/+/109040), the step 3 will be avoided, then we will pass the test.\n\nIn fact theoretically an OOM buffer shouldn\u0027t have valid mSize, and we are using mSize in MapAsync() and GetMappedRange(), so I think we should ensure OOM buffer not have a valid mSize to avoid any potential issues about using an unexpected mSize for an OOM buffer on wire_client.",
+      "parentUuid": "71a37aad_a1aea435",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
