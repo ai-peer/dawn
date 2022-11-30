@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "7bb226dadf78caaba1224ef8b14c7869c97cafdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3501bbb6_1401fcbf",
+        "filename": "src/dawn/node/binding/GPUCommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-30T21:06:02Z",
+      "side": 1,
+      "message": "typo: \"timestamp\"",
+      "range": {
+        "startLine": 177,
+        "startChar": 35,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "7bb226dadf78caaba1224ef8b14c7869c97cafdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
