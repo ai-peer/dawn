@@ -16,6 +16,23 @@
       "message": "personal-nit: This is .... so weird to read, can we make this 2 lines and pull the assignment out of the if?",
       "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeaef8b1_120e2083",
+        "filename": "src/tint/resolver/type_alias.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-11-30T16:12:10Z",
+      "side": 1,
+      "message": "Nit: Copy-pasta comment",
+      "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
