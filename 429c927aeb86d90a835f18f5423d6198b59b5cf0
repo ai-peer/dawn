@@ -16,6 +16,24 @@
       "message": "Why did you remove these tests (+ those above and below)?\n\nI think they cover some cases that we previously missed validation for, which are not covered by other tests.",
       "revId": "429c927aeb86d90a835f18f5423d6198b59b5cf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7bc742e_f883cbb0",
+        "filename": "src/tint/resolver/call_validation_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-11-30T15:27:20Z",
+      "side": 0,
+      "message": "Looks like a rebase screwup. Will fix.",
+      "parentUuid": "03d6da12_3cb7bab4",
+      "revId": "429c927aeb86d90a835f18f5423d6198b59b5cf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
