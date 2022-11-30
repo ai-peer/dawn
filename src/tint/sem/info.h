@@ -23,7 +23,9 @@
 #include "src/tint/ast/node.h"
 #include "src/tint/debug.h"
 #include "src/tint/sem/node.h"
+#include "src/tint/sem/transitively_referenced.h"
 #include "src/tint/sem/type_mappings.h"
+#include "src/tint/utils/unique_vector.h"
 
 // Forward declarations
 namespace tint::sem {
@@ -117,11 +119,37 @@ class Info {
     /// @returns the semantic module.
     const sem::Module* Module() const { return module_; }
 
+    /// Records that this variable (transitively) references the given override variable.
+    /// @param from the item the variable is referenced from
+    /// @param var the module-scope override variable
+    void AddTransitivelyReferencedOverride(const TransitivelyReferenced* from,
+                                           const GlobalVariable* var) {
+        if (referenced_overrides_.count(from) == 0) {
+            referenced_overrides_.insert({from, utils::UniqueVector<const GlobalVariable*, 4>{}});
+        }
+        referenced_overrides_[from].Add(var);
+    }
+
+    /// @param from the key to look up
+    /// @returns all transitively referenced override variables
+    const utils::UniqueVector<const GlobalVariable*, 4>& TransitivelyReferencedOverrides(
+        const TransitivelyReferenced* from) const {
+        if (referenced_overrides_.count(from) == 0) {
+            return empty_vector_for_return_;
+        }
+        return referenced_overrides_.at(from);
+    }
+
   private:
     // AST node index to semantic node
     std::vector<const sem::Node*> nodes_;
+    // Lists transitively referenced overrides for the given item
+    std::unordered_map<const TransitivelyReferenced*, utils::UniqueVector<const GlobalVariable*, 4>>
+        referenced_overrides_;
     // The semantic module
     sem::Module* module_ = nullptr;
+
+    utils::UniqueVector<const GlobalVariable*, 4> empty_vector_for_return_;
 };
 
 }  // namespace tint::sem
