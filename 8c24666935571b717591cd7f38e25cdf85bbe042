@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7b3e5f_9528a06a",
+        "filename": "src/dawn/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-30T21:34:57Z",
+      "side": 1,
+      "message": "See https://github.com/gpuweb/gpuweb/issues/3648\n\nIn https://metalbyexample.com/new-in-metal-3/\nI see \"The maximum visibility result buffer length has been increased from 64KiB to 256KiB for all device families.\" I couldn\u0027t find documentation on the limits otherwise though -  so I don\u0027t understand where we got 64Kb from though. Not sure how I should be updating this comment aside from removing it",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "8c24666935571b717591cd7f38e25cdf85bbe042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
