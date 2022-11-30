@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d277d1_4a863e83",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-11-30T15:49:45Z",
+      "side": 1,
+      "message": "personal-nit: This is .... so weird to read, can we make this 2 lines and pull the assignment out of the if?",
+      "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
