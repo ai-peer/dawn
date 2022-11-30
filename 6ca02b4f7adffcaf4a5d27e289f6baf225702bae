@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da9d5b9_42f3aad1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T12:09:31Z",
+      "side": 1,
+      "message": "Thanks for the good explanation and discussion. These buffers changes are all so complicated because of all the invariants we\u0027re trying to do. Another one is that buffer.GetSize() should always return the size passed in the descriptor so that\u0027s one more constraint.\n\nWDYT of changing to `kGuaranteedBufferOOMSize \u003d std::numeric_limits\u003csize_t\u003e::max() - 1`?\n\nI don\u0027t know for sure that it would fix the issue but maybe it\u0027d work?",
+      "parentUuid": "306b7d5a_664f9f8c",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
