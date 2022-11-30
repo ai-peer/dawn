@@ -22,6 +22,30 @@
       },
       "revId": "8c24666935571b717591cd7f38e25cdf85bbe042",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54027c1a_5027ffb3",
+        "filename": "src/dawn/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-11-30T23:00:26Z",
+      "side": 1,
+      "message": "I\u0027m guessing we either got it from validation layers (probably on non-Apple hardware) or it was in a previous version of the metal feature set tables PDF. Or it could have been by extrapolating from \"Maximum visibility query offset\" which is 65528 (64KiB - 8B).",
+      "parentUuid": "5e7b3e5f_9528a06a",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "8c24666935571b717591cd7f38e25cdf85bbe042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
