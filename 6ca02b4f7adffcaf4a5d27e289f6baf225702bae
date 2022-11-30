@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "eddf0829_75490f07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-11-30T21:20:04Z",
+      "side": 1,
+      "message": "hm.. that code in blink is probably wrong too though since it will make the reflection information incorrect. And that\u0027s there too to avoid truncation of uint64_t from Javascript to 32-bit size_t.. The size of any mappable buffer we pass into Dawn is clamped to size_t. And, the reflection returns the size as reported by Dawn.\n\nMaybe we should change all the mapping sizes to be uint64_t to make things simpler. Could be a dawn-wire specific thing if we don\u0027t want to change webgpu.h",
+      "parentUuid": "3da9d5b9_42f3aad1",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
