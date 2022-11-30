@@ -1601,8 +1601,14 @@ bool Converter::Convert(wgpu::QueryType& out, const interop::GPUQueryType& in) {
             out = wgpu::QueryType::Occlusion;
             return true;
         case interop::GPUQueryType::kTimestamp:
-            out = wgpu::QueryType::Timestamp;
-            return true;
+            if (HasFeature(wgpu::FeatureName::TimestampQuery)) {
+                out = wgpu::QueryType::Timestamp;
+                return true;
+            } else {
+                Napi::TypeError::New(env, "invalid value for GPUQueryType")
+                    .ThrowAsJavaScriptException();
+                return false;
+            }
     }
     Napi::Error::New(env, "invalid value for GPUQueryType").ThrowAsJavaScriptException();
     return false;
