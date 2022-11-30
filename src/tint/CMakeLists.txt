@@ -373,6 +373,8 @@ list(APPEND TINT_LIB_SRCS
   sem/switch_statement.h
   sem/texture.cc
   sem/texture.h
+  sem/transitively_referenced.cc
+  sem/transitively_referenced.h
   sem/type_initializer.cc
   sem/type_initializer.h
   sem/type_conversion.cc
