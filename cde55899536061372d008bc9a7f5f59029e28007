@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb8f0cc5_450b124a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-30T07:55:10Z",
+      "side": 1,
+      "message": "Hi Austin, with this CL we cannot submit CL on Windows because of the below error message:\n\n** Presubmit ERRORS: 1 **\nCommand \u0027D:\\\\workspace\\\\dawn\\\\tools\\\\bin\\\\cts validate\u0027 returned non-zero exit status 1 in D:\\workspace\\dawn\n\u0027D:\\workspace\\dawn\\tools\\bin\\cts\u0027 is not recognized as an internal or external command,\noperable program or batch file.\n\nCould you take a look?",
+      "revId": "cde55899536061372d008bc9a7f5f59029e28007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
