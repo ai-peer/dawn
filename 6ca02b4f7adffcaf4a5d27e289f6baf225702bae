@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "306b7d5a_664f9f8c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-11-30T04:52:58Z",
+      "side": 1,
+      "message": "Oh I once thought I should change the code back to the previous version (https://dawn-review.googlesource.com/c/dawn/+/109040/16/src/dawn/wire/client/Device.cpp#b203), where the error buffer is always created with size \u003d\u003d 0 (in fact it is using an empty buffer descriptor, but we shouldn\u0027t do that because we need to validate other parameters on the server side).",
+      "parentUuid": "89a82881_09631862",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
