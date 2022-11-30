@@ -150,6 +150,24 @@
       "parentUuid": "ebe121f9_022f2b63",
       "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14f72bc3_2ef4acc3",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-11-30T11:50:17Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74821356_3d86812d",
+      "revId": "b07ec0a23a52df6302bf0fbcdea03dbc38a49cc5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
