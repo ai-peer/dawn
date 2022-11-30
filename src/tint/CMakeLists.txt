@@ -535,11 +535,11 @@ list(APPEND TINT_LIB_SRCS
   writer/writer.h
 )
 
-tint_generated(ast/access)
+tint_generated(ast/access BENCH TEST)
 tint_generated(ast/address_space BENCH TEST)
 tint_generated(ast/builtin_value BENCH TEST)
 tint_generated(ast/extension BENCH TEST)
-tint_generated(ast/interpolate_attribute)
+tint_generated(ast/interpolate_attribute BENCH TEST)
 tint_generated(ast/texel_format BENCH TEST)
 tint_generated(resolver/init_conv_intrinsic)
 tint_generated(sem/builtin_type)
