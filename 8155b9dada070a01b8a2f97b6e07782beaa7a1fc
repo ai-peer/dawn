@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c8d74bc_0297a0fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003436
+      },
+      "writtenOn": "2022-11-30T14:59:28Z",
+      "side": 1,
+      "message": "alexsio nau",
+      "revId": "8155b9dada070a01b8a2f97b6e07782beaa7a1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
