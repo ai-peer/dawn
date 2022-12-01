@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e281bab_27068638",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T18:45:29Z",
+      "side": 1,
+      "message": "Kokoro is experiencing network connectivity issues. See b/261044882",
+      "revId": "96649a1416578d1f8d6ad605d1b799eef81e6a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
