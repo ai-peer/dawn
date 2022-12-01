@@ -16,6 +16,24 @@
       "message": "Tests in GN?",
       "revId": "db2780aaac714b740b8255ce91be61b45add6618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71fec5f7_f78102af",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-01T10:00:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ee5cc28_37a20f26",
+      "revId": "db2780aaac714b740b8255ce91be61b45add6618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
