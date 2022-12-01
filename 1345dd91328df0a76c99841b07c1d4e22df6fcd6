@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48ff913b_465b2e61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:12:17Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This is a base CL for https://dawn-review.googlesource.com/c/dawn/+/111160.",
+      "revId": "1345dd91328df0a76c99841b07c1d4e22df6fcd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
