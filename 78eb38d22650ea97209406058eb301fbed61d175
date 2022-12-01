@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff79cb48_91fbcd4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T21:01:02Z",
+      "side": 1,
+      "message": "PTAL. This shifts the error message, but was the simpler solution. Alternatively, we could store a StructMember -\u003e Declaration mapping in sem::Info and look up the declaration at the two call sites. (Or, a StructMember could store its source and the type declarations source if we wanted to go that way).",
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
