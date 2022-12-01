@@ -102,9 +102,17 @@ class VertexOnlyRenderPipelineTest : public DawnTest {
         bool writeDepth = false,
         bool useFragment = true) {
         wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+            struct Output {
+                @builtin(position) position : vec4<f32>,
+                @location(3) lol : f32,
+            }
+
             @vertex
-            fn main(@location(0) pos : vec4<f32>) -> @builtin(position) vec4<f32> {
-                return pos;
+            fn main(@location(0) pos : vec4<f32>) -> Output {
+                var output : Output;
+                output.position = pos;
+                output.lol = 0.0;
+                return output;
             })");
 
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
