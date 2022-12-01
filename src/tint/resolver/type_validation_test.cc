@@ -399,10 +399,11 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_InStruct) {
     //   a : array<f32, size>
     // };
     Override("size", Expr(10_i));
-    Structure("S", utils::Vector{Member("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))});
+    Structure("S", utils::Vector{Member(Source({12, 20}), "a",
+                                        ty.array(Source{{12, 34}}, ty.f32(), "size"))});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: array with an 'override' element count can only be used as the store "
+              "12:20 error: array with an 'override' element count can only be used as the store "
               "type of a 'var<workgroup>'");
 }
 

@@ -445,7 +445,7 @@ bool Validator::AddressSpaceLayout(const sem::Type* store_ty,
             uint32_t required_align = required_alignment_of(m->Type());
 
             // Recurse into the member type.
-            if (!AddressSpaceLayout(m->Type(), address_space, m->Declaration()->type->source)) {
+            if (!AddressSpaceLayout(m->Type(), address_space, m->Source())) {
                 AddNote("see layout of struct:\n" + str->Layout(symbols_), str->Source());
                 note_usage();
                 return false;
@@ -2030,7 +2030,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
             }
 
             if (IsArrayWithOverrideCount(member->Type())) {
-                RaiseArrayWithOverrideCountError(member->Declaration()->type->source);
+                RaiseArrayWithOverrideCountError(member->Source());
                 return false;
             }
         } else if (!IsFixedFootprint(member->Type())) {
