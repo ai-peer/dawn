@@ -33,6 +33,24 @@
       "message": "unit: %u since it\u0027s unsigned?\n\nnot sure - maybe uint8 is different",
       "revId": "a6b7b86f61ac931c3e6e8d6508c06343b27330c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488b126f_d6e99a9b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T08:24:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "538f05dd_bd214b09",
+      "revId": "a6b7b86f61ac931c3e6e8d6508c06343b27330c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
