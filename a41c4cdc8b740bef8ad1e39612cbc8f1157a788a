@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37d5f451_dadda506",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-01T16:37:05Z",
+      "side": 1,
+      "message": "uuu-nit: perhaps these can be lowercase \"u32\" instead of \"U32\" to match how its written in shaders.",
+      "range": {
+        "startLine": 412,
+        "startChar": 7,
+        "endLine": 424,
+        "endChar": 5
+      },
+      "revId": "a41c4cdc8b740bef8ad1e39612cbc8f1157a788a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5762a137_316dde16",
         "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
         "patchSetId": 15
