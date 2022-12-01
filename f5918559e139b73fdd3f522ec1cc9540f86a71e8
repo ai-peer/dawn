@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1775d52c_7874e0cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:40:34Z",
+      "side": 1,
+      "message": "+2. Just some nits about wording, and some paranoia about precedence.",
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ef514d5_c9cf1375",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1968,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:40:34Z",
+      "side": 1,
+      "message": "I think a more succinct and less confusing way of phrasing this is that `most implementations sign extend`",
+      "range": {
+        "startLine": 1967,
+        "startChar": 77,
+        "endLine": 1968,
+        "endChar": 78
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6b2a788_db6b5350",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1971,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:40:34Z",
+      "side": 1,
+      "message": "`sign_ext` ?",
+      "range": {
+        "startLine": 1971,
+        "startChar": 19,
+        "endLine": 1971,
+        "endChar": 27
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a238b7d_2e39d1ab",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:40:34Z",
+      "side": 1,
+      "message": "I\u0027m sure you\u0027re right, but please use parentheses here. This is ambiguous to my brain parser.",
+      "range": {
+        "startLine": 1977,
+        "startChar": 38,
+        "endLine": 1977,
+        "endChar": 59
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bb6e5ea_a6ed23c1",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:40:34Z",
+      "side": 1,
+      "message": "love this.",
+      "range": {
+        "startLine": 1247,
+        "startChar": 0,
+        "endLine": 1300,
+        "endChar": 18
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
