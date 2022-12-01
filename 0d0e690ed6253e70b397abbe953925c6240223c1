@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "154dae1b_de644b03",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e56cd83c_b9858618",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7755003_348b4cd9",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-11-30T11:48:35Z",
       "side": 1,
       "message": "nit: this is already tested somewhere else. DAWN_TEST_UNSUPPORTED_IF(!device.HasFeature())?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b7c2028_862c9686",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7755003_348b4cd9",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5215eec5_4f381ac0",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Remove the second render target in `RenderPipelineIOF16_RenderTarget` and `RenderPipelineIOF16_InterstageVariable`, and rewrite the `RenderPipelineIOF16_VertexAttribute` to draw multiple points.",
+      "parentUuid": "eb6c3118_d9cbab0a",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe524034_2b7b0994",
         "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
         "patchSetId": 14
@@ -116,6 +170,24 @@
       "writtenOn": "2022-11-30T11:48:35Z",
       "side": 1,
       "message": "ditto",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ebf52d2_e84e812b",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe524034_2b7b0994",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +209,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fc919ad_998f6911",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68e4395d_0a3b2c17",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7df61eb_b84365b1",
@@ -150,6 +240,24 @@
       "writtenOn": "2022-11-30T11:48:35Z",
       "side": 1,
       "message": "ditto",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "841b85f7_c81914c6",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7df61eb_b84365b1",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +302,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "526a2e3f_d37a80df",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51608d01_79052abb",
+      "range": {
+        "startLine": 330,
+        "startChar": 43,
+        "endLine": 330,
+        "endChar": 50
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04cfe2a0_a8ee54ce",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c44dcc72_bfc4ccf5",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f366db5_06c35ac9",
@@ -207,6 +357,24 @@
       "writtenOn": "2022-11-30T11:48:35Z",
       "side": 1,
       "message": "nit: For this test it could be better to just draw a couple points with different colors.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0379c60e_1baf5c5d",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f366db5_06c35ac9",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -234,6 +402,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8b3562_81cd721b",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61a5d59a_e4c3e04f",
+      "range": {
+        "startLine": 354,
+        "startChar": 31,
+        "endLine": 354,
+        "endChar": 32
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed393413_789c8766",
@@ -251,6 +443,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4363ecc6_aa1f02ba",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 1521,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed393413_789c8766",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41d3e8bb_eb886af5",
@@ -264,6 +474,24 @@
       "writtenOn": "2022-11-30T11:36:50Z",
       "side": 1,
       "message": "Looks like most of the changes here aren\u0027t necessarily specific to f16. Please move non-f16 changes out to base change.",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "293cc4c3_942ec6ec",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done, moved to https://dawn-review.googlesource.com/c/dawn/+/112520",
+      "parentUuid": "41d3e8bb_eb886af5",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -291,6 +519,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d77bdbe9_f494d771",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e9ff139_3f3e5e39",
+      "range": {
+        "startLine": 451,
+        "startChar": 20,
+        "endLine": 480,
+        "endChar": 0
+      },
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "280e6201_c33ffb8f",
@@ -304,6 +556,24 @@
       "writtenOn": "2022-11-30T11:36:50Z",
       "side": 1,
       "message": "The delta on this file is very large, and I\u0027m struggling to see what\u0027s refactoring vs changes specific to f16. Would it be possible to pull the non-f16 changes out to a base change?",
+      "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e367362_0f5e0021",
+        "filename": "src/tint/transform/vertex_pulling_test.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-01T08:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "280e6201_c33ffb8f",
       "revId": "0d0e690ed6253e70b397abbe953925c6240223c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
