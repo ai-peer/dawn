@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb97dadd_db206f89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T17:40:35Z",
+      "side": 1,
+      "message": "Awesome work. Ship it.",
+      "revId": "004df41e1a23b475d75d47ffebd799b4f6b4ebe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85426bda_8cc1f4b1",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 27
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T17:40:35Z",
+      "side": 1,
+      "message": "Nit: s/function/private",
+      "revId": "004df41e1a23b475d75d47ffebd799b4f6b4ebe2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
