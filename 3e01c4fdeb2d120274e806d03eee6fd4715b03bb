@@ -34,6 +34,24 @@
       "parentUuid": "1a3be42c_2befce4f",
       "revId": "3e01c4fdeb2d120274e806d03eee6fd4715b03bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3af47ca_ab4c924c",
+        "filename": "src/tint/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T18:49:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1cc9934e_71e0a6b4",
+      "revId": "3e01c4fdeb2d120274e806d03eee6fd4715b03bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
