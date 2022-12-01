@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c61c3a6_38e61527",
+        "filename": "src/tint/resolver/resolver.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T20:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6bcba2c_c653a290",
+      "range": {
+        "startLine": 276,
+        "startChar": 4,
+        "endLine": 276,
+        "endChar": 41
+      },
+      "revId": "dfe5977b8bee1db4d2bc28ddc3fc142c71fc0fe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8143c66_bcf4bad8",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab9326a9_480acbdf",
+        "filename": "src/tint/sem/array_count.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T20:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8143c66_bcf4bad8",
+      "range": {
+        "startLine": 1,
+        "startChar": 16,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "dfe5977b8bee1db4d2bc28ddc3fc142c71fc0fe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70229278_99f7f985",
@@ -60,6 +108,30 @@
       "writtenOn": "2022-12-01T10:16:23Z",
       "side": 1,
       "message": "I think there might have been some confusion in our discussion around using the `TypeManager` here - I do not expect these to derive from `Type`. Instead, I was expecting the `TypeManager` to have APIs for deduplicating objects deriving from `ArrayCount`.\n\n`TypeManager` currently derives from `utils::UniqueAllocator`. We can change this to use composition, and add another `utils::UniqueAllocator` for the `ArrayCount`.",
+      "range": {
+        "startLine": 27,
+        "startChar": 47,
+        "endLine": 27,
+        "endChar": 51
+      },
+      "revId": "dfe5977b8bee1db4d2bc28ddc3fc142c71fc0fe6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec482f66_746ca8fe",
+        "filename": "src/tint/sem/array_count.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T20:20:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70229278_99f7f985",
       "range": {
         "startLine": 27,
         "startChar": 47,
