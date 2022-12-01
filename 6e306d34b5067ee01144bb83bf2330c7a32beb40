@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47953099_dfbaa066",
+        "filename": "src/dawn/node/binding/GPUSupportedLimits.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T12:03:45Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "6e306d34b5067ee01144bb83bf2330c7a32beb40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
