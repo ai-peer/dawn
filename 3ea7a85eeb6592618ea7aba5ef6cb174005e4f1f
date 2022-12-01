@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "3ea7a85eeb6592618ea7aba5ef6cb174005e4f1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1397dc_aa943dbb",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3282,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T18:55:55Z",
+      "side": 1,
+      "message": "nit: you can use `for (auto\u0026 op : utils::Reverse(ops)) {`",
+      "range": {
+        "startLine": 3282,
+        "startChar": 9,
+        "endLine": 3282,
+        "endChar": 61
+      },
+      "revId": "3ea7a85eeb6592618ea7aba5ef6cb174005e4f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
