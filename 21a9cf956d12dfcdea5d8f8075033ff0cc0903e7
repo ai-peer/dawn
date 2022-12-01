@@ -16,6 +16,24 @@
       "message": "ValidateComputePassDescriptor doesn\u0027t check\n\n\u003e that this.[[state]] must be \"open\".\n\nthat check is currently done in TryEncode but it should be moved before it so it gets propagated to the device as a device error (and not stored until finish).\n\nWDYT of the following:\n\n```\n  // Change CheckCurrentEncoder to return a MaybeError.\n\n  auto ValidateBeginComputePass \u003d [\u0026]() -\u003e MaybeError {\n      DAWN_TRY(CheckCurrentEncoder(this));\n      return ValidateComputePassDescriptor(device, descriptor);\n  };\n  \n  if (device-\u003eConsumedError(ValidateBeginComputePass())) {\\\n      return the error pass encoder;\n  }\n  \n  // The rest of the code but without TryEncode since we already validated things.\n```\n\nAlternatively, a TryEncodeGetError could be added that doesn\u0027t internally handle the error and returns the error (factoring one of the variants to use the other).",
       "revId": "21a9cf956d12dfcdea5d8f8075033ff0cc0903e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2585bd9_58bfbbca",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-01T15:24:42Z",
+      "side": 1,
+      "message": "I think this bit is covered by this [issue](https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1578) which Yunchao is assigned to. If you don\u0027t mind, we could leave that part of the validation fix to him?\n\nchanges thusfar LGTM though",
+      "parentUuid": "3aa444d1_675ad40d",
+      "revId": "21a9cf956d12dfcdea5d8f8075033ff0cc0903e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
