@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0167e392_449ef32c",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "I get why this is the case for `function`, but why for `private`?\n\nEDIT: Oh, it\u0027s not that `private` /needs/ to be passed as an argument, but it /can/ be, so we do.",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 691,
+        "endChar": 40
+      },
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8cf9560_9edf3cea",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Nit: \u0027a an\u0027",
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139e70c0_84d4180b",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 995,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Nit: \u0027is requires\u0027",
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa98290_d5eca8d8",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "I don\u0027t think this works if the thing that is causing the shadowing is itself a function parameter. I modified the `DirectVariableAccessShadowTest.Globals` test to do this and it broke because the module-scope var is still shadowed.\n\nIn the E2E case this all works though, because we run `transform::Unshadow` before this transform. I know you hate transform dependencies, but this is one of those cases where I wonder if we can make this (already quite complicated) transform simpler by having that dependency (which goes away when we have an IR...).",
+      "range": {
+        "startLine": 1137,
+        "startChar": 0,
+        "endLine": 1147,
+        "endChar": 15
+      },
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff841d56_38a79835",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Uncomment or remove.",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 4
+      },
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bfe987c_43e33e7a",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "I wonder if this transform should be stripping this enable? After it has been run, there shouldn\u0027t be anything left in the module that needs it, right? And if a later transform happens to generate something that /would/ need it, we\u0027d want to know because it\u0027d be a problem.\n\nBut maybe we can\u0027t do that because we don\u0027t always transform private and function?",
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363eb529_c3f2a90b",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "I don\u0027t see any hoisting here but maybe I don\u0027t understand what this test is supposed to be doing?",
+      "range": {
+        "startLine": 521,
+        "startChar": 0,
+        "endLine": 533,
+        "endChar": 0
+      },
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa916138_12ac5533",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 26
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Again no hoisting?",
+      "revId": "05c4c6bb70bf3c9d440b2628c5c7c09fb6f68d81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

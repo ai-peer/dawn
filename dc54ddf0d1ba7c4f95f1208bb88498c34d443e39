@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56991e94_2d29ae95",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "also `\u0027private\u0027` ?",
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff5c4fc_9062422b",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "u-nit: the column separators do not line up",
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c5c54cd_2c50830c",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Only need to do this if the parameter type is a pointer?",
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9897a076_65574d11",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "I don\u0027t think this will ever be a const because it would have been caught by the `idx-\u003eConstantValue()` check above. At least, I removed this and all your tests still passed, so it\u0027s either unnecessary or we\u0027re missing test coverage.",
+      "range": {
+        "startLine": 545,
+        "startChar": 67,
+        "endLine": 545,
+        "endChar": 77
+      },
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9832a844_78269221",
+        "filename": "src/tint/transform/direct_variable_access.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "Doesn\u0027t `CloneWithoutTransform` handle this? I tried it and removed all the `clone_real_expression_not_hoist` stuff and tests all passed, so again maybe missing test coverage for this if it is in fact necessary.",
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5499eaec_7f6a5064",
+        "filename": "src/tint/transform/direct_variable_access.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-01T16:12:11Z",
+      "side": 1,
+      "message": "... ?",
+      "revId": "dc54ddf0d1ba7c4f95f1208bb88498c34d443e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
