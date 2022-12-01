@@ -100,6 +100,9 @@ struct ZeroInitWorkgroupMemory::State {
         uint32_t num_iterations = 0;
         /// All array indices used by this expression
         ArrayIndices array_indices;
+
+        /// @returns true if the expr is not null (null usually indicates a failure)
+        operator bool() const { return expr != nullptr; }
     };
 
     /// Statement holds information about a statement that will zero workgroup
@@ -285,19 +288,21 @@ struct ZeroInitWorkgroupMemory::State {
     /// @param get_expr a function that builds the AST nodes for the expression.
     void BuildZeroingStatements(const sem::Type* ty, const BuildZeroingExpr& get_expr) {
         if (CanTriviallyZero(ty)) {
-            auto var = get_expr(1u);
-            auto* zero_init = b.Construct(CreateASTTypeFor(ctx, ty));
-            statements.emplace_back(
-                Statement{b.Assign(var.expr, zero_init), var.num_iterations, var.array_indices});
+            if (auto var = get_expr(1u)) {
+                auto* zero_init = b.Construct(CreateASTTypeFor(ctx, ty));
+                statements.emplace_back(Statement{b.Assign(var.expr, zero_init), var.num_iterations,
+                                                  var.array_indices});
+            }
             return;
         }
 
         if (auto* atomic = ty->As<sem::Atomic>()) {
             auto* zero_init = b.Construct(CreateASTTypeFor(ctx, atomic->Type()));
-            auto expr = get_expr(1u);
-            auto* store = b.Call("atomicStore", b.AddressOf(expr.expr), zero_init);
-            statements.emplace_back(
-                Statement{b.CallStmt(store), expr.num_iterations, expr.array_indices});
+            if (auto expr = get_expr(1u)) {
+                auto* store = b.Call("atomicStore", b.AddressOf(expr.expr), zero_init);
+                statements.emplace_back(
+                    Statement{b.CallStmt(store), expr.num_iterations, expr.array_indices});
+            }
             return;
         }
 
@@ -305,9 +310,11 @@ struct ZeroInitWorkgroupMemory::State {
             for (auto* member : str->Members()) {
                 auto name = ctx.Clone(member->Declaration()->symbol);
                 BuildZeroingStatements(member->Type(), [&](uint32_t num_values) {
-                    auto s = get_expr(num_values);
-                    return Expression{b.MemberAccessor(s.expr, name), s.num_iterations,
-                                      s.array_indices};
+                    if (auto s = get_expr(num_values)) {
+                        return Expression{b.MemberAccessor(s.expr, name), s.num_iterations,
+                                          s.array_indices};
+                    }
+                    return Expression{};
                 });
             }
             return;
@@ -329,12 +336,15 @@ struct ZeroInitWorkgroupMemory::State {
                 }
                 auto modulo = num_values * count.value();
                 auto division = num_values;
-                auto a = get_expr(modulo);
-                auto array_indices = a.array_indices;
-                array_indices.Add(ArrayIndex{modulo, division});
-                auto index = utils::GetOrCreate(array_index_names, ArrayIndex{modulo, division},
-                                                [&] { return b.Symbols().New("i"); });
-                return Expression{b.IndexAccessor(a.expr, index), a.num_iterations, array_indices};
+                if (auto a = get_expr(modulo)) {
+                    auto array_indices = a.array_indices;
+                    array_indices.Add(ArrayIndex{modulo, division});
+                    auto index = utils::GetOrCreate(array_index_names, ArrayIndex{modulo, division},
+                                                    [&] { return b.Symbols().New("i"); });
+                    return Expression{b.IndexAccessor(a.expr, index), a.num_iterations,
+                                      array_indices};
+                }
+                return Expression{};
             });
             return;
         }
