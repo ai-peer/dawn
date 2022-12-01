@@ -33,6 +33,24 @@
       "message": "The offset change looks good, but this line looks bad. We don\u0027t parse `@stride` so it seems like `@stride` should also be a comment instead of an attribute?",
       "revId": "dad62bf27dc261f2be52f031d601f369a2bbc0ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279e7d3a_ea60a90a",
+        "filename": "src/tint/transform/decompose_strided_matrix_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T16:28:39Z",
+      "side": 1,
+      "message": "This is subtle.\n\n`@offset` is printed as a comment, as the WGSL is still actually correct if you drop it - as the WGSL writer is also emitting the padding. We also have code paths from SPIR-V reader to WGSL writer, where the attribute is preserved.\n\nThe `@stride` attribute *needs* to be there, as it would otherwise be information that\u0027s just lost. Yes, it can\u0027t be parsed, but if you were to comment it out, you\u0027d still have a different program. The idea for these types of attributes is that you don\u0027t have a code path where we\u0027d print them in production builds. They\u0027re internal-only information.",
+      "parentUuid": "53db5df4_b588a259",
+      "revId": "dad62bf27dc261f2be52f031d601f369a2bbc0ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
