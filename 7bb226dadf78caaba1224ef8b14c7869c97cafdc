@@ -39,6 +39,30 @@
       },
       "revId": "7bb226dadf78caaba1224ef8b14c7869c97cafdc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35c56845_033e3ea2",
+        "filename": "src/dawn/node/binding/GPUCommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:08:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3501bbb6_1401fcbf",
+      "range": {
+        "startLine": 177,
+        "startChar": 35,
+        "endLine": 177,
+        "endChar": 43
+      },
+      "revId": "7bb226dadf78caaba1224ef8b14c7869c97cafdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
