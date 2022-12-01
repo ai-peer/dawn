@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08ae2da6_7c57149d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:43:28Z",
+      "side": 1,
+      "message": "I really like this over what we had. Great job!",
+      "revId": "51509ae6d99ebfe47d6bb783de6c91bc7ca7f396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3142321_e275eb39",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:43:28Z",
+      "side": 1,
+      "message": "Heh, not too sure what the point of these `static_assert`s are / were. The `traits::EnableIfIsType` should make these impossible to fire.",
+      "range": {
+        "startLine": 501,
+        "startChar": 8,
+        "endLine": 502,
+        "endChar": 64
+      },
+      "revId": "51509ae6d99ebfe47d6bb783de6c91bc7ca7f396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a392bdce_3d3a1d36",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-01T20:43:28Z",
+      "side": 1,
+      "message": "Would be nice to have some `ProgramBuilder` helpers for these.",
+      "range": {
+        "startLine": 256,
+        "startChar": 47,
+        "endLine": 256,
+        "endChar": 79
+      },
+      "revId": "51509ae6d99ebfe47d6bb783de6c91bc7ca7f396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
