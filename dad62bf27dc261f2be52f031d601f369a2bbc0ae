@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c79ff7_7df715fe",
+        "filename": "test/tint/bug/tint/1088.spvasm.expected.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T16:34:53Z",
+      "side": 0,
+      "message": "This seems incorrect, reading this back in we\u0027ve lost the padding so `test2` will be at offset `68` instead of `80`, no?",
+      "revId": "dad62bf27dc261f2be52f031d601f369a2bbc0ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
