@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b623565b_eecd09eb",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T21:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3142321_e275eb39",
+      "range": {
+        "startLine": 501,
+        "startChar": 8,
+        "endLine": 502,
+        "endChar": 64
+      },
+      "revId": "51509ae6d99ebfe47d6bb783de6c91bc7ca7f396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a392bdce_3d3a1d36",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-01T20:43:28Z",
       "side": 1,
       "message": "Would be nice to have some `ProgramBuilder` helpers for these.",
+      "range": {
+        "startLine": 256,
+        "startChar": 47,
+        "endLine": 256,
+        "endChar": 79
+      },
+      "revId": "51509ae6d99ebfe47d6bb783de6c91bc7ca7f396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f58a4b9e_c29e60f6",
+        "filename": "src/tint/resolver/intrinsic_table_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T21:41:19Z",
+      "side": 1,
+      "message": "We don\u0027t really have custom helpers on `ProgramBuilder` for sem nodes, only or ast nodes. Going to hold off on this one and we can decide if we want to create sem helpers in general.  (Or, maybe the helpers will make more sense when these don\u0027t live in sem anymore)",
+      "parentUuid": "a392bdce_3d3a1d36",
       "range": {
         "startLine": 256,
         "startChar": 47,
