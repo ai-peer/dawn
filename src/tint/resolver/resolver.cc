@@ -3164,7 +3164,6 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                         AddError("offsets must be in ascending order", o->source);
                         return false;
                     }
-                    align = 1;
                     has_offset_attr = true;
                     return true;
                 },
