@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a34dff_bc2358bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-01T00:36:05Z",
+      "side": 1,
+      "message": "PTAL\n\nRelated spec languge: https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass\n\nThe descriptor validation part, timestamp query part, occlusion query part etc. seems to be included in the `ValidateRenderPassDescriptor` and we\u0027ve put it out of TryEncode.\n\nOne thing I\u0027m not sure about:\n\"this.[[state]] must be \"open\".\" I don\u0027t know where this part of validation happens and whether it stops the following encoding already.",
+      "revId": "099e53b200f9d3cf1ff42193ca794bfa438cad9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
