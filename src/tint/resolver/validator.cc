@@ -194,7 +194,7 @@ bool Validator::IsFixedFootprint(const sem::Type* type) const {
         [&](const sem::Matrix*) { return true; },  //
         [&](const sem::Atomic*) { return true; },
         [&](const sem::Array* arr) {
-            return !arr->IsRuntimeSized() && IsFixedFootprint(arr->ElemType());
+            return !arr->Count()->Is<sem::RuntimeArrayCount>() && IsFixedFootprint(arr->ElemType());
         },
         [&](const sem::Struct* str) {
             for (auto* member : str->Members()) {
@@ -1766,12 +1766,13 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
         }
     }
 
-    if (array_type->IsRuntimeSized()) {
+    auto* c = array_type->Count();
+    if (c->Is<sem::RuntimeArrayCount>()) {
         AddError("cannot construct a runtime-sized array", ctor->source);
         return false;
     }
 
-    if (array_type->IsOverrideSized()) {
+    if (c->IsAnyOf<sem::NamedOverrideArrayCount, sem::UnnamedOverrideArrayCount>()) {
         AddError("cannot construct an array that has an override-expression count", ctor->source);
         return false;
     }
@@ -1781,13 +1782,13 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
         return false;
     }
 
-    if (!array_type->IsConstantSized()) {
+    if (!c->Is<sem::ConstantArrayCount>()) {
         TINT_ICE(Resolver, diagnostics_)
-            << "Invalid ArrayCount type found " << array_type->Count()->FriendlyName(symbols_);
+            << "Invalid ArrayCount type found " << c->FriendlyName(symbols_);
         return false;
     }
 
-    const auto count = array_type->Count()->As<sem::ConstantArrayCount>()->value;
+    const auto count = c->As<sem::ConstantArrayCount>()->value;
     if (!values.IsEmpty() && (values.Length() != count)) {
         std::string fm = values.Length() < count ? "few" : "many";
         AddError("array initializer has too " + fm + " elements: expected " +
@@ -2030,7 +2031,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
     utils::Hashset<uint32_t, 8> locations;
     for (auto* member : str->Members()) {
         if (auto* r = member->Type()->As<sem::Array>()) {
-            if (r->IsRuntimeSized()) {
+            if (r->Count()->Is<sem::RuntimeArrayCount>()) {
                 if (member != str->Members().back()) {
                     AddError("runtime arrays may only appear as the last member of a struct",
                              member->Declaration()->source);
@@ -2402,7 +2403,7 @@ bool Validator::IsValidationEnabled(utils::VectorRef<const ast::Attribute*> attr
 
 bool Validator::IsArrayWithOverrideCount(const sem::Type* ty) const {
     if (auto* arr = ty->UnwrapRef()->As<sem::Array>()) {
-        if (arr->IsOverrideSized()) {
+        if (arr->Count()->IsAnyOf<sem::NamedOverrideArrayCount, sem::UnnamedOverrideArrayCount>()) {
             return true;
         }
     }
