@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcab6950_189e05c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T12:47:48Z",
+      "side": 1,
+      "message": "Can\u0027t we change the Blink code to also pass the correct size to the GPUBuffer such that the reflection is correct? Either the buffer is valid and then that\u0027s ok, or the buffer is an OOM in which case all mapping operations will fail anyway so it doesn\u0027t matter that the GPUBuffer thinks the size is bigger than what\u0027s in the dawn::wire::client::Buffer.",
+      "parentUuid": "eddf0829_75490f07",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
