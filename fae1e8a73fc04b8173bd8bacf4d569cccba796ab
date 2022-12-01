@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23b9114f_d2cd4bef",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-01T16:11:08Z",
+      "side": 1,
+      "message": "assert SGTM but I don\u0027t see it in the latest ps.\n\nI guess an alternative would be to have multiple types of converters but that type safety IMO is not worth it for this right now",
+      "parentUuid": "d24b1982_2953ed37",
+      "range": {
+        "startLine": 402,
+        "startChar": 56,
+        "endLine": 402,
+        "endChar": 62
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c270f539_d08e309b",
         "filename": "src/dawn/node/binding/GPUCommandEncoder.cpp",
         "patchSetId": 2
