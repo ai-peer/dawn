@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "326d0084_80e242e1",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2229,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-01T10:00:10Z",
+      "side": 1,
+      "message": "This is the intended usage of this C++ feature - we scope something to the conditional. I recommend getting used to it, it\u0027ll be increasingly used in C++.",
+      "parentUuid": "f3d277d1_4a863e83",
+      "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eeaef8b1_120e2083",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-11-30T16:12:10Z",
       "side": 1,
       "message": "Nit: Copy-pasta comment",
+      "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6bc9bc0_f2daaadf",
+        "filename": "src/tint/resolver/type_alias.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-01T10:00:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eeaef8b1_120e2083",
       "revId": "cdef7b23d26c577bd1350f7d9c53b6ea7e8d1ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
