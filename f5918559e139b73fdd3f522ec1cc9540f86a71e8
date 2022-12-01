@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "486a05b0_db17a80e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1968,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-01T21:18:30Z",
+      "side": 1,
+      "message": "Agreed, and fixed. This was copied almost verbatim from [cppreference](https://en.cppreference.com/w/cpp/language/operator_arithmetic):\n\n```\nFor negative a, the value of a \u003e\u003e b is implementation-defined (in most implementations, this performs arithmetic right shift, so that the result remains negative).\n```",
+      "parentUuid": "0ef514d5_c9cf1375",
+      "range": {
+        "startLine": 1967,
+        "startChar": 77,
+        "endLine": 1968,
+        "endChar": 78
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6b2a788_db6b5350",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-01T20:40:34Z",
       "side": 1,
       "message": "`sign_ext` ?",
+      "range": {
+        "startLine": 1971,
+        "startChar": 19,
+        "endLine": 1971,
+        "endChar": 27
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "201fc3e1_1447e283",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1971,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-01T21:18:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6b2a788_db6b5350",
       "range": {
         "startLine": 1971,
         "startChar": 19,
@@ -89,6 +137,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cdcfe622_f419977e",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1977,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-01T21:18:30Z",
+      "side": 1,
+      "message": "Yes, better, thanks.",
+      "parentUuid": "2a238b7d_2e39d1ab",
+      "range": {
+        "startLine": 1977,
+        "startChar": 38,
+        "endLine": 1977,
+        "endChar": 59
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0bb6e5ea_a6ed23c1",
         "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
         "patchSetId": 3
@@ -100,6 +172,30 @@
       "writtenOn": "2022-12-01T20:40:34Z",
       "side": 1,
       "message": "love this.",
+      "range": {
+        "startLine": 1247,
+        "startChar": 0,
+        "endLine": 1300,
+        "endChar": 18
+      },
+      "revId": "f5918559e139b73fdd3f522ec1cc9540f86a71e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df49717f_9e2c02bb",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-01T21:18:30Z",
+      "side": 1,
+      "message": "Thanks 😊",
+      "parentUuid": "0bb6e5ea_a6ed23c1",
       "range": {
         "startLine": 1247,
         "startChar": 0,
