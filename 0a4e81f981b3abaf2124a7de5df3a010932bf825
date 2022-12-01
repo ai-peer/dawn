@@ -33,6 +33,24 @@
       "message": "u-nit: Could we hide implementation details in the .cpp?",
       "revId": "0a4e81f981b3abaf2124a7de5df3a010932bf825",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3191b72_97086bd0",
+        "filename": "src/dawn/common/GPUInfo.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2022-12-01T06:35:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a450a25a_483c8629",
+      "revId": "0a4e81f981b3abaf2124a7de5df3a010932bf825",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
