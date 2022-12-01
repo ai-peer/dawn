@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3be42c_2befce4f",
+        "filename": "src/tint/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-01T13:38:45Z",
+      "side": 1,
+      "message": "Instead of making this `operator bool` why not change the `BuildZeroingExpr` to return an `std::optional` instead?",
+      "revId": "3e01c4fdeb2d120274e806d03eee6fd4715b03bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
