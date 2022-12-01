@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9089f580_2803aaf6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3cba7b7_fb94e0c1",
+      "range": {
+        "startLine": 9,
+        "startChar": 11,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e5728a6c_13ea1f27",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bddf37b1_9cccd21e",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "913f9b27_356d38d3",
+      "range": {
+        "startLine": 72,
+        "startChar": 74,
+        "endLine": 72,
+        "endChar": 89
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1169bed8_05264a43",
@@ -94,6 +142,30 @@
       "writtenOn": "2022-11-30T21:03:31Z",
       "side": 1,
       "message": "check if device is non-null? or delete the constructor that doesn\u0027t take a device",
+      "range": {
+        "startLine": 402,
+        "startChar": 56,
+        "endLine": 402,
+        "endChar": 62
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24b1982_2953ed37",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:06:07Z",
+      "side": 1,
+      "message": "We might always get a device, because it can be unnecessary, but also for conversions that happen before we have a device. Added an assert() instead. WDYT?",
+      "parentUuid": "1169bed8_05264a43",
       "range": {
         "startLine": 402,
         "startChar": 56,
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdef02bd_a42a0c31",
+        "filename": "src/dawn/node/binding/GPUCommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c270f539_d08e309b",
+      "range": {
+        "startLine": 35,
+        "startChar": 14,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac774d27_8fc34bc9",
@@ -140,6 +236,30 @@
       "writtenOn": "2022-11-30T21:03:31Z",
       "side": 1,
       "message": "move",
+      "range": {
+        "startLine": 30,
+        "startChar": 14,
+        "endLine": 30,
+        "endChar": 20
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2deacd45_45e5577b",
+        "filename": "src/dawn/node/binding/GPUTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-01T16:06:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac774d27_8fc34bc9",
       "range": {
         "startLine": 30,
         "startChar": 14,
