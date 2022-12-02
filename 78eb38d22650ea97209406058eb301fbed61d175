@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3fa4b79_46e9b8c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T12:51:56Z",
+      "side": 1,
+      "message": "But, why?\nI thought we agreed it was okay to keep the pointer to the declaration, if we consider it extra metadata. A note saying this may return `nullptr` on the `Declaration()` method would suffice. We already have builtin-returned structures that have no AST declaration.",
+      "range": {
+        "startLine": 12,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 51
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ff79cb48_91fbcd4f",
@@ -14,6 +37,92 @@
       "writtenOn": "2022-12-01T21:01:02Z",
       "side": 1,
       "message": "PTAL. This shifts the error message, but was the simpler solution. Alternatively, we could store a StructMember -\u003e Declaration mapping in sem::Info and look up the declaration at the two call sites. (Or, a StructMember could store its source and the type declarations source if we wanted to go that way).",
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5fb240_ff6a11e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T12:51:56Z",
+      "side": 1,
+      "message": "Sorry, but I\u0027m not sure about this one.",
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d33f6b91_49d3af76",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T12:51:56Z",
+      "side": 1,
+      "message": "The most common pattern for these is `{12, 34}`, `{56, 78}`, etc. Divergence from this mostly happens for sources that include some iterator.",
+      "range": {
+        "startLine": 402,
+        "startChar": 48,
+        "endLine": 402,
+        "endChar": 54
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6fae13_d5788807",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T12:51:56Z",
+      "side": 1,
+      "message": "We try to only keep the sources that are actually used by the test. Otherwise it just looks like it means something in the test, when it doesn\u0027t.",
+      "range": {
+        "startLine": 403,
+        "startChar": 49,
+        "endLine": 403,
+        "endChar": 65
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b69776_8a6ef441",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T12:51:56Z",
+      "side": 1,
+      "message": "This was pointing at the type, and now it\u0027s pointing at the member. While minor, the array error was better placed when it was pointing at the array.",
+      "range": {
+        "startLine": 2033,
+        "startChar": 49,
+        "endLine": 2033,
+        "endChar": 65
+      },
       "revId": "78eb38d22650ea97209406058eb301fbed61d175",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
