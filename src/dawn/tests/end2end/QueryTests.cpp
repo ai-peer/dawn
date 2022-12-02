@@ -702,6 +702,18 @@ TEST_P(TimestampQueryTests, QuerySetCreation) {
 TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
     constexpr uint32_t kQueryCount = 2;
 
+    {
+        for (uint32_t i = 0; i < 33; i++) {
+            wgpu::QuerySet querySet = CreateQuerySetForTimestamp(100);
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            encoder.WriteTimestamp(querySet, 0);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            queue.Submit(1, &commands);
+            WaitForAllOperations();
+            querySet.Destroy();
+        }
+    }
+
     // Write timestamp with different query indexes
     {
         wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
