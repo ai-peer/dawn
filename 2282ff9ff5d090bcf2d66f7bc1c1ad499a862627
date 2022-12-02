@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b56ac14_0f86014b",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T21:46:27Z",
+      "side": 1,
+      "message": "I still don\u0027t see a mix of signs?",
+      "revId": "2282ff9ff5d090bcf2d66f7bc1c1ad499a862627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
