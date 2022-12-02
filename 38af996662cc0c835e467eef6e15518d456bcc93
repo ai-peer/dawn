@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4355ff78_fbe78881",
+        "filename": "src/tint/number.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 555,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-02T16:21:34Z",
+      "side": 1,
+      "message": "Does this work? It seems like reinterpreting negatives as unsigned, then doing the div and mul, then reinterpreting back as signed... isn\u0027t going to give the right value. Unfortunately, it seems like we\u0027re missing test coverage for a mix of negative and positive values for the LHS and RHS.\n\nI\u0027d also like to see the fuzzer case added as a test.\n\nThe UB error was `signed integer overflow: 5 * 1844674407370955264 cannot be represented in type \u0027long\u0027`\nIt looks like the fuzzer case uses `9223372036854775807%5`, which I believe should return `2`.",
+      "range": {
+        "startLine": 551,
+        "startChar": 8,
+        "endLine": 555,
+        "endChar": 80
+      },
+      "revId": "38af996662cc0c835e467eef6e15518d456bcc93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
