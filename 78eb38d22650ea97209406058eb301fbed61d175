@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0422b295_6a901292",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-02T18:09:59Z",
+      "side": 1,
+      "message": "If we want to keep this metadata, I don\u0027t think it should live in the Type itself as it makes the layering weird. The other option is to move this to sem::Info, which is what I\u0027m trying to do with sem::Struct::Declaration, but I didn\u0027t also want to store StructMember if it was avoidable.",
+      "parentUuid": "f3fa4b79_46e9b8c8",
+      "range": {
+        "startLine": 12,
+        "startChar": 14,
+        "endLine": 12,
+        "endChar": 51
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ff79cb48_91fbcd4f",
@@ -83,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8abd829_43aef03c",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-02T18:09:59Z",
+      "side": 1,
+      "message": "Yes, I was leaving these as different so it would show the difference in error message.",
+      "parentUuid": "d33f6b91_49d3af76",
+      "range": {
+        "startLine": 402,
+        "startChar": 48,
+        "endLine": 402,
+        "endChar": 54
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a6fae13_d5788807",
         "filename": "src/tint/resolver/type_validation_test.cc",
         "patchSetId": 1
@@ -106,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41bc8448_a9a496a1",
+        "filename": "src/tint/resolver/type_validation_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-02T18:09:59Z",
+      "side": 1,
+      "message": "Yup, was trying to show that the member source is the one used, not the type source.",
+      "parentUuid": "2a6fae13_d5788807",
+      "range": {
+        "startLine": 403,
+        "startChar": 49,
+        "endLine": 403,
+        "endChar": 65
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73b69776_8a6ef441",
         "filename": "src/tint/resolver/validator.cc",
         "patchSetId": 1
@@ -117,6 +189,30 @@
       "writtenOn": "2022-12-02T12:51:56Z",
       "side": 1,
       "message": "This was pointing at the type, and now it\u0027s pointing at the member. While minor, the array error was better placed when it was pointing at the array.",
+      "range": {
+        "startLine": 2033,
+        "startChar": 49,
+        "endLine": 2033,
+        "endChar": 65
+      },
+      "revId": "78eb38d22650ea97209406058eb301fbed61d175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1dffa32_8f02c930",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2033,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-02T18:09:59Z",
+      "side": 1,
+      "message": "I don\u0027t disagree. As I mentioned, there are other ways this could be solved if we think the pointing at struct members instead of types is just wrong. So, is this bad enough we\u0027d like to persue a different solution?",
+      "parentUuid": "73b69776_8a6ef441",
       "range": {
         "startLine": 2033,
         "startChar": 49,
