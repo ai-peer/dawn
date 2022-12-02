@@ -39,6 +39,30 @@
       },
       "revId": "1345dd91328df0a76c99841b07c1d4e22df6fcd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90b11445_4a97c6b5",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2022-12-02T18:02:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39336c2b_c9c4ec7b",
+      "range": {
+        "startLine": 138,
+        "startChar": 5,
+        "endLine": 138,
+        "endChar": 21
+      },
+      "revId": "1345dd91328df0a76c99841b07c1d4e22df6fcd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
