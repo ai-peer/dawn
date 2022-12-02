@@ -547,7 +547,15 @@ namespace detail {
 /// @returns the remainder of e1 / e2
 template <typename T>
 inline T Mod(T e1, T e2) {
-    return e1 - e2 * static_cast<T>(std::trunc(e1 / e2));
+    if constexpr (IsSignedIntegral<T>) {
+        // Perform subtract and multiply via unsigned to avoid UB signed overflow
+        using UT = std::make_unsigned_t<T>;
+        auto e1u = static_cast<UT>(e1);
+        auto e2u = static_cast<UT>(e2);
+        return static_cast<T>(e1u - e2u * static_cast<UT>(std::trunc(e1 / e2)));
+    } else {
+        return static_cast<T>(e1 - e2 * static_cast<T>(std::trunc(e1 / e2)));
+    }
 }
 }  // namespace detail
 
