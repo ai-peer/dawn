@@ -16,6 +16,23 @@
       "message": "Please take a look, thanks",
       "revId": "88b6c0f14ef7bab377fbe08b688c44cafc0b289e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7b5085_bb11a25c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-03T09:51:29Z",
+      "side": 1,
+      "message": "No additional comments, and we can see later for removing the debug layer suppression with Rafael",
+      "revId": "88b6c0f14ef7bab377fbe08b688c44cafc0b289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
