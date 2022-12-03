@@ -200,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1ab0f4_0e7e98e9",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-03T17:27:10Z",
+      "side": 1,
+      "message": "Whoops! Thanks.",
+      "parentUuid": "23b9114f_d2cd4bef",
+      "range": {
+        "startLine": 402,
+        "startChar": 56,
+        "endLine": 402,
+        "endChar": 62
+      },
+      "revId": "fae1e8a73fc04b8173bd8bacf4d569cccba796ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c270f539_d08e309b",
