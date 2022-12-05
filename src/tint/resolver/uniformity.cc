@@ -1048,7 +1048,10 @@ class UniformityGraph {
                         // is non-uniform.
                         bool uniform = true;
                         for (auto* member : str->Members()) {
-                            if (has_nonuniform_entry_point_attribute(member->Declaration())) {
+                            auto* m = member->As<sem::StructMember>();
+                            TINT_ASSERT(Resolver, m);
+
+                            if (has_nonuniform_entry_point_attribute(m->Declaration())) {
                                 uniform = false;
                             }
                         }

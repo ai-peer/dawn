@@ -167,12 +167,15 @@ struct ZeroInitWorkgroupMemory::State {
 
             if (auto* str = sem.Get(param)->Type()->As<sem::Struct>()) {
                 for (auto* member : str->Members()) {
+                    auto* m = member->As<sem::StructMember>();
+                    TINT_ASSERT(Transform, m);
+
                     if (auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(
-                            member->Declaration()->attributes)) {
+                            m->Declaration()->attributes)) {
                         if (builtin->builtin == ast::BuiltinValue::kLocalInvocationIndex) {
                             local_index = [=] {
                                 auto* param_expr = b.Expr(ctx.Clone(param->symbol));
-                                auto member_name = ctx.Clone(member->Declaration()->symbol);
+                                auto member_name = ctx.Clone(m->Declaration()->symbol);
                                 return b.MemberAccessor(param_expr, member_name);
                             };
                             break;
@@ -317,7 +320,10 @@ struct ZeroInitWorkgroupMemory::State {
 
         if (auto* str = ty->As<sem::Struct>()) {
             for (auto* member : str->Members()) {
-                auto name = ctx.Clone(member->Declaration()->symbol);
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Transform, m);
+
+                auto name = ctx.Clone(m->Declaration()->symbol);
                 auto get_member = [&](uint32_t num_values) {
                     auto s = get_expr(num_values);
                     if (!s) {
@@ -326,7 +332,7 @@ struct ZeroInitWorkgroupMemory::State {
                     return Expression{b.MemberAccessor(s.expr, name), s.num_iterations,
                                       s.array_indices};
                 };
-                if (!BuildZeroingStatements(member->Type(), get_member)) {
+                if (!BuildZeroingStatements(m->Type(), get_member)) {
                     return false;
                 }
             }

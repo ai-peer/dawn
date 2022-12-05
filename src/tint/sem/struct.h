@@ -33,14 +33,14 @@ namespace tint::ast {
 class StructMember;
 }  // namespace tint::ast
 namespace tint::sem {
-class StructMember;
+class StructMemberBase;
 class Type;
 }  // namespace tint::sem
 
 namespace tint::sem {
 
 /// A vector of StructMember pointers.
-using StructMemberList = std::vector<const StructMember*>;
+using StructMemberList = std::vector<const StructMemberBase*>;
 
 /// Metadata to capture how a structure is used in a shader module.
 enum class PipelineStageUsage {
@@ -52,11 +52,10 @@ enum class PipelineStageUsage {
     kComputeOutput,
 };
 
-/// Struct holds the semantic information for structures.
-class Struct final : public Castable<Struct, Type> {
+/// StructBase holds the semantic information for structures.
+class StructBase : public Castable<StructBase, Type> {
   public:
     /// Constructor
-    /// @param declaration the AST structure declaration
     /// @param source the source of the structure
     /// @param name the name of the structure
     /// @param members the structure members
@@ -64,16 +63,15 @@ class Struct final : public Castable<Struct, Type> {
     /// @param size the byte size of the structure
     /// @param size_no_padding size of the members without the end of structure
     /// alignment padding
-    Struct(const ast::Struct* declaration,
-           tint::Source source,
-           Symbol name,
-           StructMemberList members,
-           uint32_t align,
-           uint32_t size,
-           uint32_t size_no_padding);
+    StructBase(tint::Source source,
+               Symbol name,
+               StructMemberList members,
+               uint32_t align,
+               uint32_t size,
+               uint32_t size_no_padding);
 
     /// Destructor
-    ~Struct() override;
+    ~StructBase() override;
 
     /// @returns a hash of the type.
     size_t Hash() const override;
@@ -81,9 +79,6 @@ class Struct final : public Castable<Struct, Type> {
     /// @param other the other type to compare against
     /// @returns true if the this type is equal to the given type
     bool Equals(const Type& other) const override;
-
-    /// @returns the struct
-    const ast::Struct* Declaration() const { return declaration_; }
 
     /// @returns the source of the structure
     tint::Source Source() const { return source_; }
@@ -96,7 +91,7 @@ class Struct final : public Castable<Struct, Type> {
 
     /// @param name the member name to look for
     /// @returns the member with the given name, or nullptr if it was not found.
-    const StructMember* FindMember(Symbol name) const;
+    const StructMemberBase* FindMember(Symbol name) const;
 
     /// @returns the byte alignment of the structure
     /// @note this may differ from the alignment of a structure member of this
@@ -158,15 +153,16 @@ class Struct final : public Castable<Struct, Type> {
     std::string Layout(const tint::SymbolTable& symbols) const;
 
     /// @param concrete the conversion-rank ordered concrete versions of this abstract structure.
-    void SetConcreteTypes(utils::VectorRef<const Struct*> concrete) { concrete_types_ = concrete; }
+    void SetConcreteTypes(utils::VectorRef<const StructBase*> concrete) {
+        concrete_types_ = concrete;
+    }
 
     /// @returns the conversion-rank ordered concrete versions of this abstract structure, or an
     /// empty vector if this structure is not abstract.
     /// @note only structures returned by builtins may be abstract (e.g. modf, frexp)
-    const utils::Vector<const Struct*, 2>& ConcreteTypes() const { return concrete_types_; }
+    const utils::Vector<const StructBase*, 2>& ConcreteTypes() const { return concrete_types_; }
 
   private:
-    ast::Struct const* const declaration_;
     const tint::Source source_;
     const Symbol name_;
     const StructMemberList members_;
@@ -175,11 +171,108 @@ class Struct final : public Castable<Struct, Type> {
     const uint32_t size_no_padding_;
     std::unordered_set<ast::AddressSpace> address_space_usage_;
     std::unordered_set<PipelineStageUsage> pipeline_stage_uses_;
-    utils::Vector<const Struct*, 2> concrete_types_;
+    utils::Vector<const StructBase*, 2> concrete_types_;
+};
+
+/// Struct holds the semantic information for structures.
+class Struct final : public Castable<Struct, StructBase> {
+  public:
+    /// Constructor
+    /// @param declaration the AST structure declaration
+    /// @param source the source of the structure
+    /// @param name the name of the structure
+    /// @param members the structure members
+    /// @param align the byte alignment of the structure
+    /// @param size the byte size of the structure
+    /// @param size_no_padding size of the members without the end of structure
+    /// alignment padding
+    Struct(const ast::Struct* declaration,
+           tint::Source source,
+           Symbol name,
+           StructMemberList members,
+           uint32_t align,
+           uint32_t size,
+           uint32_t size_no_padding);
+
+    /// Destructor
+    ~Struct() override;
+
+    /// @returns the struct
+    const ast::Struct* Declaration() const { return declaration_; }
+
+  private:
+    ast::Struct const* const declaration_;
+};
+
+/// StructMemberBase holds the semantic information for structure members.
+class StructMemberBase : public Castable<StructMemberBase, Node> {
+  public:
+    /// Constructor
+    /// @param source the source of the struct member
+    /// @param name the name of the structure member
+    /// @param type the type of the member
+    /// @param index the index of the member in the structure
+    /// @param offset the byte offset from the base of the structure
+    /// @param align the byte alignment of the member
+    /// @param size the byte size of the member
+    /// @param location the location attribute, if present
+    StructMemberBase(tint::Source source,
+                     Symbol name,
+                     const sem::Type* type,
+                     uint32_t index,
+                     uint32_t offset,
+                     uint32_t align,
+                     uint32_t size,
+                     std::optional<uint32_t> location);
+
+    /// Destructor
+    ~StructMemberBase() override;
+
+    /// @returns the source the struct member
+    const tint::Source& Source() const { return source_; }
+
+    /// @returns the name of the structure member
+    Symbol Name() const { return name_; }
+
+    /// Sets the owning structure to `s`
+    /// @param s the new structure owner
+    void SetStruct(const sem::StructBase* s) { struct_ = s; }
+
+    /// @returns the structure that owns this member
+    const sem::StructBase* Struct() const { return struct_; }
+
+    /// @returns the type of the member
+    const sem::Type* Type() const { return type_; }
+
+    /// @returns the member index
+    uint32_t Index() const { return index_; }
+
+    /// @returns byte offset from base of structure
+    uint32_t Offset() const { return offset_; }
+
+    /// @returns the alignment of the member in bytes
+    uint32_t Align() const { return align_; }
+
+    /// @returns byte size
+    uint32_t Size() const { return size_; }
+
+    /// @returns the location, if set
+    std::optional<uint32_t> Location() const { return location_; }
+
+  private:
+    const tint::Source source_;
+    const Symbol name_;
+    const sem::StructBase* struct_;
+    const sem::Type* type_;
+    const uint32_t index_;
+    const uint32_t offset_;
+    const uint32_t align_;
+    const uint32_t size_;
+    const std::optional<uint32_t> location_;
 };
 
 /// StructMember holds the semantic information for structure members.
-class StructMember final : public Castable<StructMember, Node> {
+class StructMember final : public Castable<StructMember, StructMemberBase> {
   public:
     /// Constructor
     /// @param declaration the AST declaration node
@@ -207,48 +300,8 @@ class StructMember final : public Castable<StructMember, Node> {
     /// @returns the AST declaration node
     const ast::StructMember* Declaration() const { return declaration_; }
 
-    /// @returns the source the struct member
-    const tint::Source& Source() const { return source_; }
-
-    /// @returns the name of the structure member
-    Symbol Name() const { return name_; }
-
-    /// Sets the owning structure to `s`
-    /// @param s the new structure owner
-    void SetStruct(const sem::Struct* s) { struct_ = s; }
-
-    /// @returns the structure that owns this member
-    const sem::Struct* Struct() const { return struct_; }
-
-    /// @returns the type of the member
-    const sem::Type* Type() const { return type_; }
-
-    /// @returns the member index
-    uint32_t Index() const { return index_; }
-
-    /// @returns byte offset from base of structure
-    uint32_t Offset() const { return offset_; }
-
-    /// @returns the alignment of the member in bytes
-    uint32_t Align() const { return align_; }
-
-    /// @returns byte size
-    uint32_t Size() const { return size_; }
-
-    /// @returns the location, if set
-    std::optional<uint32_t> Location() const { return location_; }
-
   private:
     const ast::StructMember* const declaration_;
-    const tint::Source source_;
-    const Symbol name_;
-    const sem::Struct* struct_;
-    const sem::Type* type_;
-    const uint32_t index_;
-    const uint32_t offset_;
-    const uint32_t align_;
-    const uint32_t size_;
-    const std::optional<uint32_t> location_;
 };
 
 }  // namespace tint::sem

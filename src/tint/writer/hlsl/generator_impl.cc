@@ -327,7 +327,9 @@ bool GeneratorImpl::Generate() {
                 return EmitGlobalVariable(global);
             },
             [&](const ast::Struct* str) {
-                auto* ty = builder_.Sem().Get(str);
+                auto* ty = builder_.Sem().Get(str)->As<sem::Struct>();
+                TINT_ASSERT(Writer, ty);
+
                 auto address_space_uses = ty->AddressSpaceUsage();
                 if (address_space_uses.size() !=
                     (address_space_uses.count(ast::AddressSpace::kStorage) +
@@ -4146,7 +4148,10 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
             auto* ty = mem->Type();
             auto out = line(b);
             std::string pre, post;
-            if (auto* decl = mem->Declaration()) {
+            auto* sem_member = mem->As<sem::StructMember>();
+            TINT_ASSERT(Writer, sem_member);
+
+            if (auto* decl = sem_member->Declaration()) {
                 for (auto* attr : decl->attributes) {
                     if (attr->Is<ast::LocationAttribute>()) {
                         auto& pipeline_stage_uses = str->PipelineStageUses();

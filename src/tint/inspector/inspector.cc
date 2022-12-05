@@ -648,9 +648,11 @@ void Inspector::AddEntryPointInOutVariables(std::string name,
     if (auto* struct_ty = unwrapped_type->As<sem::Struct>()) {
         // Recurse into members.
         for (auto* member : struct_ty->Members()) {
-            AddEntryPointInOutVariables(name + "." + program_->Symbols().NameFor(member->Name()),
-                                        member->Type(), member->Declaration()->attributes,
-                                        member->Location(), variables);
+            auto* m = member->As<sem::StructMember>();
+            TINT_ASSERT(Inspector, m);
+            AddEntryPointInOutVariables(name + "." + program_->Symbols().NameFor(m->Name()),
+                                        m->Type(), m->Declaration()->attributes, m->Location(),
+                                        variables);
         }
         return;
     }
@@ -680,7 +682,10 @@ bool Inspector::ContainsBuiltin(ast::BuiltinValue builtin,
     if (auto* struct_ty = unwrapped_type->As<sem::Struct>()) {
         // Recurse into members.
         for (auto* member : struct_ty->Members()) {
-            if (ContainsBuiltin(builtin, member->Type(), member->Declaration()->attributes)) {
+            auto* m = member->As<sem::StructMember>();
+            TINT_ASSERT(Transform, m);
+
+            if (ContainsBuiltin(builtin, m->Type(), m->Declaration()->attributes)) {
                 return true;
             }
         }

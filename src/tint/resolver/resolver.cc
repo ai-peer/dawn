@@ -2631,7 +2631,8 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
             const sem::StructMember* member = nullptr;
             for (auto* m : str->Members()) {
                 if (m->Name() == symbol) {
-                    member = m;
+                    member = m->As<sem::StructMember>();
+                    TINT_ASSERT(Resolver, member);
                     break;
                 }
             }
@@ -2642,7 +2643,8 @@ sem::Expression* Resolver::MemberAccessor(const ast::MemberAccessorExpression* e
                     AddWarning(
                         "use of deprecated language feature: 'sig' has been renamed to 'fract'",
                         expr->member->source);
-                    member = str->Members()[0];
+                    member = str->Members()[0]->As<sem::StructMember>();
+                    TINT_ASSERT(Resolver, member);
                 }
             }
 
@@ -3314,7 +3316,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
             }
         }
 
-        const_cast<sem::StructMember*>(sem_members[i])->SetStruct(out);
+        const_cast<sem::StructMemberBase*>(sem_members[i])->SetStruct(out);
     }
 
     auto stage = current_function_ ? current_function_->Declaration()->PipelineStage()
@@ -3623,14 +3625,16 @@ bool Resolver::ApplyAddressSpaceUsageToType(ast::AddressSpace address_space,
         str->AddUsage(address_space);
 
         for (auto* member : str->Members()) {
-            auto decl = member->Declaration();
-            if (decl &&
-                !ApplyAddressSpaceUsageToType(address_space, const_cast<sem::Type*>(member->Type()),
-                                              decl->type->source)) {
+            auto* m = member->As<sem::StructMember>();
+            TINT_ASSERT(Resolver, m);
+
+            auto decl = m->Declaration();
+            if (decl && !ApplyAddressSpaceUsageToType(
+                            address_space, const_cast<sem::Type*>(m->Type()), decl->type->source)) {
                 std::stringstream err;
                 err << "while analyzing structure member " << sem_.TypeNameOf(str) << "."
-                    << builder_->Symbols().NameFor(member->Name());
-                AddNote(err.str(), member->Source());
+                    << builder_->Symbols().NameFor(m->Name());
+                AddNote(err.str(), m->Source());
                 return false;
             }
         }

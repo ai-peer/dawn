@@ -832,8 +832,8 @@ bool GeneratorImpl::EmitTypeInitializer(std::ostream& out,
 
         if (auto* struct_ty = type->As<sem::Struct>()) {
             // Emit field designators for structures to account for padding members.
-            auto* member = struct_ty->Members()[i]->Declaration();
-            auto name = program_->Symbols().NameFor(member->symbol);
+            auto* member = struct_ty->Members()[i];
+            auto name = program_->Symbols().NameFor(member->Name());
             out << "." << name << "=";
         }
 
@@ -2802,7 +2802,9 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
             add_byte_offset_comment(out, msl_offset);
         }
 
-        if (auto* decl = mem->Declaration()) {
+        auto* m = mem->As<sem::StructMember>();
+        TINT_ASSERT(Writer, m);
+        if (auto* decl = m->Declaration()) {
             if (ast::HasAttribute<transform::PackedVec3::Attribute>(decl->attributes)) {
                 out << "packed_";
             }
@@ -2815,7 +2817,7 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
 
         out << " " << mem_name;
         // Emit attributes
-        if (auto* decl = mem->Declaration()) {
+        if (auto* decl = m->Declaration()) {
             for (auto* attr : decl->attributes) {
                 bool ok = Switch(
                     attr,
