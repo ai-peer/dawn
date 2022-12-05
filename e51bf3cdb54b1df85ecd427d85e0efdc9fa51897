@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfe49a9_eba3c51b",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T12:50:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e55a77d2_4b4694c8",
+      "range": {
+        "startLine": 273,
+        "startChar": 7,
+        "endLine": 273,
+        "endChar": 80
+      },
+      "revId": "e51bf3cdb54b1df85ecd427d85e0efdc9fa51897",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f24685db_4d336644",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-05T10:08:06Z",
       "side": 1,
       "message": "You commented on the conversion of features that it\u0027s the caller\u0027s responsibility to error on `false` if needed, but we just ignore the failure here. Why is `Convert` special for these enums?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "e51bf3cdb54b1df85ecd427d85e0efdc9fa51897",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eada8004_d7bca5d7",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T12:50:24Z",
+      "side": 1,
+      "message": "This is because the interfaces use DOMString so that querying unknown values works.\n\nhttps://gpuweb.github.io/gpuweb/#gpu-supportedfeatures\n\nThough you are right that for this one, so I updated the logic and added a comment.",
+      "parentUuid": "f24685db_4d336644",
       "range": {
         "startLine": 139,
         "startChar": 8,
