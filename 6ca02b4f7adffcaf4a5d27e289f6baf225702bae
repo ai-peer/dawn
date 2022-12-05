@@ -144,6 +144,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "678deb30_1976c800",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-12-05T05:50:17Z",
+      "side": 1,
+      "message": "\u003e Can\u0027t we change the Blink code to also pass the correct size to the GPUBuffer such that the reflection is correct? \n\nAre you suggesting we skip the clamp on dawn_desc.size (in uint64_t) in blink (https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_buffer.cc;l\u003d133) and directly pass the size into dawnCreateBuffer()?\n\nThe dawn_desc.size is used to allocate readHandle or writeHandle, while currently the allocation size is in size_t:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/client/Buffer.cpp;l\u003d69\n\nAnd in dawn_native::Buffer mMapSize is in size_t: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Buffer.h;l\u003d133\n\nAnd mMapSize will be initialized with desc.size: \nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Buffer.cpp;l\u003d180\n\nShall we add static_cast on these desc.size when assigning it to the above size_t values?",
+      "parentUuid": "f420d99b_50f4f7ee",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
