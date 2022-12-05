@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a48dcc_c689064b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T10:48:40Z",
+      "side": 1,
+      "message": "THanks!",
+      "revId": "ef0b497375e127f890caf23fb6cdee567782b7e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd34313d_d232d682",
@@ -14,6 +31,24 @@
       "writtenOn": "2022-12-05T10:03:28Z",
       "side": 1,
       "message": "übernit: remove? Or is there some separation between these enums?",
+      "revId": "ef0b497375e127f890caf23fb6cdee567782b7e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b54fa0_6e149817",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T10:48:40Z",
+      "side": 1,
+      "message": "There is, enums above don\u0027t have a requiredFeature, the ones below have a requiredFeature.",
+      "parentUuid": "fd34313d_d232d682",
       "revId": "ef0b497375e127f890caf23fb6cdee567782b7e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
