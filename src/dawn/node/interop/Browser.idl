@@ -32,16 +32,17 @@ dictionary EventInit {
 };
 
 [LegacyNoInterfaceObject] interface Event {
-  readonly attribute boolean bubbles;
-  readonly attribute boolean cancelable;
-  attribute boolean returnValue;
+  readonly attribute DOMString type;
 };
 
 [LegacyNoInterfaceObject] interface WorkerNavigator{};
 
-[LegacyNoInterfaceObject] interface EventListener {
+[LegacyNoInterfaceObject] interface EventListenerInterface {
   undefined handleEvent(Event event);
 };
+callback EventListenerCallback = undefined (Event event);
+typedef(EventListenerInterface or EventListenerCallback) EventListener;
+typedef EventListenerCallback? EventHandler;
 
 [LegacyNoInterfaceObject] interface EventTarget {
   undefined addEventListener(DOMString type, EventListener? callback, optional (AddEventListenerOptions or boolean) options);
@@ -84,7 +85,5 @@ typedef(ArrayBufferView or ArrayBuffer) BufferSource;
   attribute unsigned long width;
   attribute unsigned long height;
 };
-
-[LegacyNoInterfaceObject] interface EventHandler{};
 
 enum PredefinedColorSpace { "srgb", "display-p3" };
