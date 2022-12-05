@@ -20,12 +20,14 @@
 
 #include "dawn/webgpu_cpp.h"
 #include "src/dawn/node/binding/AsyncRunner.h"
+#include "src/dawn/node/binding/EventTarget.h"
 #include "src/dawn/node/interop/Napi.h"
 #include "src/dawn/node/interop/WebGPU.h"
 
 namespace wgpu::binding {
+
 // GPUDevice is an implementation of interop::GPUDevice that wraps a wgpu::Device.
-class GPUDevice final : public interop::GPUDevice {
+class GPUDevice final : public interop::GPUDevice, EventTarget {
   public:
     GPUDevice(Napi::Env env, wgpu::Device device);
     ~GPUDevice();
@@ -87,17 +89,17 @@ class GPUDevice final : public interop::GPUDevice {
         Napi::Env env) override;
     std::string getLabel(Napi::Env) override;
     void setLabel(Napi::Env, std::string value) override;
-    interop::Interface<interop::EventHandler> getOnuncapturederror(Napi::Env) override;
-    void setOnuncapturederror(Napi::Env, interop::Interface<interop::EventHandler> value) override;
+    interop::EventHandler getOnuncapturederror(Napi::Env) override;
+    void setOnuncapturederror(Napi::Env, interop::EventHandler value) override;
     void addEventListener(
         Napi::Env,
         std::string type,
-        std::optional<interop::Interface<interop::EventListener>> callback,
+        std::optional<interop::EventListener> callback,
         std::optional<std::variant<interop::AddEventListenerOptions, bool>> options) override;
     void removeEventListener(
         Napi::Env,
         std::string type,
-        std::optional<interop::Interface<interop::EventListener>> callback,
+        std::optional<interop::EventListener> callback,
         std::optional<std::variant<interop::EventListenerOptions, bool>> options) override;
     bool dispatchEvent(Napi::Env, interop::Interface<interop::Event> event) override;
 
