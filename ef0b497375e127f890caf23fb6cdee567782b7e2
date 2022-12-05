@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd34313d_d232d682",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:03:28Z",
+      "side": 1,
+      "message": "übernit: remove? Or is there some separation between these enums?",
+      "revId": "ef0b497375e127f890caf23fb6cdee567782b7e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
