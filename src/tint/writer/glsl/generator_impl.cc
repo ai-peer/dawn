@@ -297,7 +297,10 @@ bool GeneratorImpl::Generate() {
             bool is_block =
                 ast::HasAttribute<transform::AddBlockAttribute::BlockAttribute>(str->attributes);
             if (!has_rt_arr && !is_block) {
-                if (!EmitStructType(current_buffer_, sem)) {
+                auto* sem_str = sem->As<sem::Struct>();
+                TINT_ASSERT(Writer, str);
+
+                if (!EmitStructType(current_buffer_, sem_str)) {
                     return false;
                 }
             }

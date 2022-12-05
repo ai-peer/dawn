@@ -101,7 +101,9 @@ Transform::ApplyResult TruncateInterstageVariables::Apply(const Program* src,
 
         for (auto* member : struct_ty->members) {
             if (ast::GetAttribute<ast::LocationAttribute>(member->attributes)) {
-                auto* m = sem.Get(member);
+                auto* m = sem.Get(member)->As<sem::StructMember>();
+                TINT_ASSERT(Transform, m);
+
                 uint32_t location = m->Location().value();
                 if (!data->interstage_locations.test(location)) {
                     omit_members.Add(m);
@@ -126,12 +128,17 @@ Transform::ApplyResult TruncateInterstageVariables::Apply(const Program* src,
                 utils::Vector<const ast::Expression*, 20> initializer_exprs;
 
                 for (auto* member : str->Members()) {
-                    if (omit_members.Contains(member)) {
+                    // TODO(crbug.com/tint/1779): Remove cast when Members returns a
+                    // sem::StructMember
+                    auto* m = member->As<sem::StructMember>();
+                    TINT_ASSERT(Transform, m);
+
+                    if (omit_members.Contains(m)) {
                         continue;
                     }
 
-                    truncated_members.Push(ctx.Clone(member->Declaration()));
-                    initializer_exprs.Push(b.MemberAccessor("io", ctx.Clone(member->Name())));
+                    truncated_members.Push(ctx.Clone(m->Declaration()));
+                    initializer_exprs.Push(b.MemberAccessor("io", ctx.Clone(m->Name())));
                 }
 
                 // Create the new shader io struct.

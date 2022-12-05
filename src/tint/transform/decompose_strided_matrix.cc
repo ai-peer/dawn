@@ -77,12 +77,15 @@ Transform::ApplyResult DecomposeStridedMatrix::Apply(const Program* src,
                 continue;
             }
             for (auto* member : str_ty->Members()) {
-                auto* matrix = member->Type()->As<sem::Matrix>();
+                // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Transform, m);
+
+                auto* matrix = m->Type()->As<sem::Matrix>();
                 if (!matrix) {
                     continue;
                 }
-                auto* attr =
-                    ast::GetAttribute<ast::StrideAttribute>(member->Declaration()->attributes);
+                auto* attr = ast::GetAttribute<ast::StrideAttribute>(m->Declaration()->attributes);
                 if (!attr) {
                     continue;
                 }
@@ -94,9 +97,9 @@ Transform::ApplyResult DecomposeStridedMatrix::Apply(const Program* src,
                 // stride. Replace this with an array of column vectors.
                 MatrixInfo info{stride, matrix};
                 auto* replacement =
-                    b.Member(member->Offset(), ctx.Clone(member->Name()), info.array(ctx.dst));
-                ctx.Replace(member->Declaration(), replacement);
-                decomposed.Add(member->Declaration(), info);
+                    b.Member(m->Offset(), ctx.Clone(m->Name()), info.array(ctx.dst));
+                ctx.Replace(m->Declaration(), replacement);
+                decomposed.Add(m->Declaration(), info);
             }
         }
     }

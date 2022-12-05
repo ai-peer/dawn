@@ -354,17 +354,19 @@ struct CanonicalizeEntryPointIO::State {
         // list to pass them through to the inner function.
         utils::Vector<const ast::Expression*, 8> inner_struct_values;
         for (auto* member : str->Members()) {
-            if (member->Type()->Is<sem::Struct>()) {
+            // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+            auto* m = member->As<sem::StructMember>();
+            TINT_ASSERT(Transform, m);
+
+            if (m->Type()->Is<sem::Struct>()) {
                 TINT_ICE(Transform, ctx.dst->Diagnostics()) << "nested IO struct";
                 continue;
             }
 
-            auto name = ctx.src->Symbols().NameFor(member->Name());
+            auto name = ctx.src->Symbols().NameFor(m->Name());
 
-            auto attributes =
-                CloneShaderIOAttributes(member->Declaration()->attributes, do_interpolate);
-            auto* input_expr =
-                AddInput(name, member->Type(), member->Location(), std::move(attributes));
+            auto attributes = CloneShaderIOAttributes(m->Declaration()->attributes, do_interpolate);
+            auto* input_expr = AddInput(name, m->Type(), m->Location(), std::move(attributes));
             inner_struct_values.Push(input_expr);
         }
 
@@ -383,17 +385,21 @@ struct CanonicalizeEntryPointIO::State {
         bool do_interpolate = func_ast->PipelineStage() != ast::PipelineStage::kFragment;
         if (auto* str = inner_ret_type->As<sem::Struct>()) {
             for (auto* member : str->Members()) {
-                if (member->Type()->Is<sem::Struct>()) {
+                // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Transform, m);
+
+                if (m->Type()->Is<sem::Struct>()) {
                     TINT_ICE(Transform, ctx.dst->Diagnostics()) << "nested IO struct";
                     continue;
                 }
 
-                auto name = ctx.src->Symbols().NameFor(member->Name());
+                auto name = ctx.src->Symbols().NameFor(m->Name());
                 auto attributes =
-                    CloneShaderIOAttributes(member->Declaration()->attributes, do_interpolate);
+                    CloneShaderIOAttributes(m->Declaration()->attributes, do_interpolate);
 
                 // Extract the original structure member.
-                AddOutput(name, member->Type(), member->Location(), std::move(attributes),
+                AddOutput(name, m->Type(), m->Location(), std::move(attributes),
                           ctx.dst->MemberAccessor(original_result, name));
             }
         } else if (!inner_ret_type->Is<sem::Void>()) {

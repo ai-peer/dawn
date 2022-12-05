@@ -181,7 +181,12 @@ struct SpirvAtomic::State {
                     // Fork the struct (the first time) and mark member(s) that need to be made
                     // atomic.
                     auto* member = access->Member();
-                    Fork(member->Struct()->Declaration()).atomic_members.emplace(member->Index());
+                    TINT_ASSERT(Transform, member);
+
+                    auto* str = member->Struct()->As<sem::Struct>();
+                    TINT_ASSERT(Transform, str);
+
+                    Fork(str->Declaration()).atomic_members.emplace(member->Index());
                     atomic_expressions.Add(access->Object());
                 },
                 [&](const sem::IndexAccessorExpression* index) {
@@ -234,7 +239,9 @@ struct SpirvAtomic::State {
                 (atomic_variables.count(e->RootIdentifier()) != 0)) {
                 // If it's a struct member, make sure it's one we marked as atomic
                 if (auto* ma = e->As<sem::StructMemberAccess>()) {
-                    auto it = forked_structs.find(ma->Member()->Struct()->Declaration());
+                    auto* str = ma->Member()->Struct()->As<sem::Struct>();
+                    TINT_ASSERT(Transform, str);
+                    auto it = forked_structs.find(str->Declaration());
                     if (it != forked_structs.end()) {
                         auto& forked = it->second;
                         return forked.atomic_members.count(ma->Member()->Index()) != 0;

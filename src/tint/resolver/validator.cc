@@ -412,7 +412,7 @@ bool Validator::AddressSpaceLayout(const sem::Type* store_ty,
         return required_align;
     };
 
-    auto member_name_of = [this](const sem::StructMember* sm) {
+    auto member_name_of = [this](const sem::StructMemberBase* sm) {
         return symbols_.NameFor(sm->Name());
     };
 
@@ -441,7 +441,10 @@ bool Validator::AddressSpaceLayout(const sem::Type* store_ty,
 
     if (auto* str = store_ty->As<sem::Struct>()) {
         for (size_t i = 0; i < str->Members().size(); ++i) {
-            auto* const m = str->Members()[i];
+            // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+            auto* const m = str->Members()[i]->As<sem::StructMember>();
+            TINT_ASSERT(Resolver, m);
+
             uint32_t required_align = required_alignment_of(m->Type());
 
             // Recurse into the member type.
@@ -1224,10 +1227,13 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
         if (auto* str = ty->As<sem::Struct>()) {
             for (auto* member : str->Members()) {
+                // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Resolver, m);
+
                 if (!validate_entry_point_attributes_inner(
-                        member->Declaration()->attributes, member->Type(), member->Source(),
-                        param_or_ret,
-                        /*is_struct_member*/ true, member->Location())) {
+                        m->Declaration()->attributes, m->Type(), m->Source(), param_or_ret,
+                        /*is_struct_member*/ true, m->Location())) {
                     AddNote("while analyzing entry point '" + symbols_.NameFor(decl->symbol) + "'",
                             decl->source);
                     return false;
@@ -2036,7 +2042,11 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
             }
 
             if (IsArrayWithOverrideCount(member->Type())) {
-                RaiseArrayWithOverrideCountError(member->Declaration()->type->source);
+                // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Resolver, m);
+
+                RaiseArrayWithOverrideCountError(m->Declaration()->type->source);
                 return false;
             }
         } else if (!IsFixedFootprint(member->Type())) {
@@ -2050,7 +2060,12 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
         auto has_position = false;
         const ast::InvariantAttribute* invariant_attribute = nullptr;
         const ast::InterpolateAttribute* interpolate_attribute = nullptr;
-        for (auto* attr : member->Declaration()->attributes) {
+
+        // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+        auto* m = member->As<sem::StructMember>();
+        TINT_ASSERT(Resolver, m);
+
+        for (auto* attr : m->Declaration()->attributes) {
             bool ok = Switch(
                 attr,  //
                 [&](const ast::InvariantAttribute* invariant) {
@@ -2059,15 +2074,15 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 },
                 [&](const ast::LocationAttribute* location) {
                     has_location = true;
-                    TINT_ASSERT(Resolver, member->Location().has_value());
-                    if (!LocationAttribute(location, member->Location().value(), member->Type(),
-                                           locations, stage, member->Source())) {
+                    TINT_ASSERT(Resolver, m->Location().has_value());
+                    if (!LocationAttribute(location, m->Location().value(), m->Type(), locations,
+                                           stage, m->Source())) {
                         return false;
                     }
                     return true;
                 },
                 [&](const ast::BuiltinAttribute* builtin) {
-                    if (!BuiltinAttribute(builtin, member->Type(), stage,
+                    if (!BuiltinAttribute(builtin, m->Type(), stage,
                                           /* is_input */ false)) {
                         return false;
                     }
@@ -2078,13 +2093,13 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 },
                 [&](const ast::InterpolateAttribute* interpolate) {
                     interpolate_attribute = interpolate;
-                    if (!InterpolateAttribute(interpolate, member->Type())) {
+                    if (!InterpolateAttribute(interpolate, m->Type())) {
                         return false;
                     }
                     return true;
                 },
                 [&](const ast::StructMemberSizeAttribute*) {
-                    if (!member->Type()->HasCreationFixedFootprint()) {
+                    if (!m->Type()->HasCreationFixedFootprint()) {
                         AddError(
                             "@size can only be applied to members where the member's type size "
                             "can be fully determined at shader creation time",
@@ -2102,7 +2117,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                                        ast::StructMemberOffsetAttribute,  //
                                        ast::StructMemberAlignAttribute>()) {
                         if (attr->Is<ast::StrideAttribute>() &&
-                            IsValidationDisabled(member->Declaration()->attributes,
+                            IsValidationDisabled(m->Declaration()->attributes,
                                                  ast::DisabledValidation::kIgnoreStrideAttribute)) {
                             return true;
                         }

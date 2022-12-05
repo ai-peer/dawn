@@ -3923,7 +3923,11 @@ bool Builder::GenerateStructType(const sem::Struct* struct_type, const Operand& 
     }
 
     for (uint32_t i = 0; i < struct_type->Members().size(); ++i) {
-        auto mem_id = GenerateStructMember(struct_id, i, struct_type->Members()[i]);
+        // TODO(crbug.com/tint/1779): Remove cast when Members returns a sem::StructMember
+        auto* m = struct_type->Members()[i]->As<sem::StructMember>();
+        TINT_ASSERT(Writer, m);
+
+        auto mem_id = GenerateStructMember(struct_id, i, m);
         if (mem_id == 0) {
             return false;
         }

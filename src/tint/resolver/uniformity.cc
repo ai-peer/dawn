@@ -1048,7 +1048,12 @@ class UniformityGraph {
                         // is non-uniform.
                         bool uniform = true;
                         for (auto* member : str->Members()) {
-                            if (has_nonuniform_entry_point_attribute(member->Declaration())) {
+                            // TODO(crbug.com/tint/1779): Remove cast when Members returns a
+                            // sem::StructMember
+                            auto* m = member->As<sem::StructMember>();
+                            TINT_ASSERT(Resolver, m);
+
+                            if (has_nonuniform_entry_point_attribute(m->Declaration())) {
                                 uniform = false;
                             }
                         }
