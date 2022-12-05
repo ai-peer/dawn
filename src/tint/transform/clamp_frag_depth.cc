@@ -55,7 +55,10 @@ bool ReturnsFragDepthAsValue(const ast::Function* fn) {
 bool ReturnsFragDepthInStruct(const sem::Info& sem, const ast::Function* fn) {
     if (auto* struct_ty = sem.Get(fn)->ReturnType()->As<sem::Struct>()) {
         for (auto* member : struct_ty->Members()) {
-            if (ContainsFragDepth(member->Declaration()->attributes)) {
+            auto* m = member->As<sem::StructMember>();
+            TINT_ASSERT(Transform, m);
+
+            if (ContainsFragDepth(m->Declaration()->attributes)) {
                 return true;
             }
         }

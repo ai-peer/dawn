@@ -98,8 +98,11 @@ Transform::ApplyResult NumWorkgroupsFromUniform::Apply(const Program* src,
             }
 
             for (auto* member : str->Members()) {
+                auto* m = member->As<sem::StructMember>();
+                TINT_ASSERT(Transform, m);
+
                 auto* builtin =
-                    ast::GetAttribute<ast::BuiltinAttribute>(member->Declaration()->attributes);
+                    ast::GetAttribute<ast::BuiltinAttribute>(m->Declaration()->attributes);
                 if (!builtin || builtin->builtin != ast::BuiltinValue::kNumWorkgroups) {
                     continue;
                 }
@@ -107,14 +110,14 @@ Transform::ApplyResult NumWorkgroupsFromUniform::Apply(const Program* src,
                 // Capture the symbols that would be used to access this member, which
                 // we will replace later. We currently have no way to get from the
                 // parameter directly to the member accessor expressions that use it.
-                to_replace.insert({param->Declaration()->symbol, member->Name()});
+                to_replace.insert({param->Declaration()->symbol, m->Name()});
 
                 // Remove the struct member.
                 // The CanonicalizeEntryPointIO transform will have generated this
                 // struct uniquely for this particular entry point, so we know that
                 // there will be no other uses of this struct in the module and that we
                 // can safely modify it here.
-                ctx.Remove(str->Declaration()->members, member->Declaration());
+                ctx.Remove(str->Declaration()->members, m->Declaration());
 
                 // If this is the only member, remove the struct and parameter too.
                 if (str->Members().size() == 1) {

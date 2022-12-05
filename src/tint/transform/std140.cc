@@ -228,7 +228,7 @@ struct Std140::State {
 
     // Map of structure member in src of a matrix type, to list of decomposed column
     // members in ctx.dst.
-    utils::Hashmap<const sem::StructMember*, utils::Vector<const ast::StructMember*, 4>, 8>
+    utils::Hashmap<const sem::StructMemberBase*, utils::Vector<const ast::StructMember*, 4>, 8>
         std140_mat_members;
 
     /// Describes a matrix that has been forked to a std140-structure holding the decomposed column
@@ -282,18 +282,21 @@ struct Std140::State {
                 bool fork_std140 = false;
                 utils::Vector<const ast::StructMember*, 8> members;
                 for (auto* member : str->Members()) {
-                    if (auto* mat = member->Type()->As<sem::Matrix>()) {
+                    auto* m = member->As<sem::StructMember>();
+                    TINT_ASSERT(Transform, m);
+
+                    if (auto* mat = m->Type()->As<sem::Matrix>()) {
                         // Is this member a matrix that needs decomposition for std140-layout?
                         if (MatrixNeedsDecomposing(mat)) {
                             // Structure member of matrix type needs decomposition.
                             fork_std140 = true;
                             // Replace the member with column vectors.
-                            const auto name_prefix = PrefixForUniqueNames(
-                                str->Declaration(), member->Name(), mat->columns());
+                            const auto name_prefix =
+                                PrefixForUniqueNames(str->Declaration(), m->Name(), mat->columns());
 
                             // Build a struct member for each column of the matrix
                             auto column_members = DecomposedMatrixStructMembers(
-                                mat, name_prefix, member->Align(), member->Size());
+                                mat, name_prefix, m->Align(), m->Size());
 
                             // Add the member to the forked structure
                             for (auto* column_member : column_members) {
@@ -301,16 +304,15 @@ struct Std140::State {
                             }
                             // Record that this matrix member was replaced with the N column
                             // members.
-                            std140_mat_members.Add(member, std::move(column_members));
+                            std140_mat_members.Add(m, std::move(column_members));
 
                             continue;  // Next member
                         }
-                    } else if (auto* std140_ty = Std140Type(member->Type())) {
+                    } else if (auto* std140_ty = Std140Type(m->Type())) {
                         // Member is of a type that requires forking for std140-layout
                         fork_std140 = true;
-                        auto attrs = ctx.Clone(member->Declaration()->attributes);
-                        members.Push(
-                            b.Member(sym.NameFor(member->Name()), std140_ty, std::move(attrs)));
+                        auto attrs = ctx.Clone(m->Declaration()->attributes);
+                        members.Push(b.Member(sym.NameFor(m->Name()), std140_ty, std::move(attrs)));
                         continue;  // Next member
                     }
 
@@ -318,7 +320,7 @@ struct Std140::State {
                     // Push the member in src to members without first cloning. We'll replace this
                     // with a cloned member once we know whether we need to fork the structure or
                     // not.
-                    members.Push(member->Declaration());
+                    members.Push(m->Declaration());
                 }
 
                 // Did any of the members require forking the structure?
@@ -696,19 +698,21 @@ struct Std140::State {
                     // call, or by reassembling a std140 matrix from column vector members.
                     utils::Vector<const ast::Expression*, 8> args;
                     for (auto* member : str->Members()) {
-                        if (auto col_members = std140_mat_members.Find(member)) {
+                        auto* m = member->As<sem::StructMember>();
+                        TINT_ASSERT(Transform, m);
+
+                        if (auto col_members = std140_mat_members.Find(m)) {
                             // std140 decomposed matrix. Reassemble.
-                            auto* mat_ty = CreateASTTypeFor(ctx, member->Type());
-                            auto mat_args =
-                                utils::Transform(*col_members, [&](const ast::StructMember* m) {
-                                    return b.MemberAccessor(param, m->symbol);
+                            auto* mat_ty = CreateASTTypeFor(ctx, m->Type());
+                            auto mat_args = utils::Transform(
+                                *col_members, [&](const ast::StructMember* ast_mem) {
+                                    return b.MemberAccessor(param, ast_mem->symbol);
                                 });
                             args.Push(b.Construct(mat_ty, std::move(mat_args)));
                         } else {
                             // Convert the member
-                            args.Push(
-                                Convert(member->Type(),
-                                        b.MemberAccessor(param, sym.NameFor(member->Name()))));
+                            args.Push(Convert(m->Type(),
+                                              b.MemberAccessor(param, sym.NameFor(m->Name()))));
                         }
                     }
                     stmts.Push(b.Return(b.Construct(CreateASTTypeFor(ctx, ty), std::move(args))));

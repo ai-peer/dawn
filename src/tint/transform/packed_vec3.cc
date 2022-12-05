@@ -51,13 +51,16 @@ struct PackedVec3::State {
             if (auto* str = sem.Get<sem::Struct>(decl)) {
                 if (str->IsHostShareable()) {
                     for (auto* member : str->Members()) {
-                        if (auto* vec = member->Type()->As<sem::Vector>()) {
+                        auto* m = member->As<sem::StructMember>();
+                        TINT_ASSERT(Transform, m);
+
+                        if (auto* vec = m->Type()->As<sem::Vector>()) {
                             if (vec->Width() == 3) {
-                                members.Add(member);
+                                members.Add(m);
 
                                 // Apply the PackedVec3::Attribute to the member
-                                auto* member_decl = member->Declaration();
-                                auto name = ctx.Clone(member->Name());
+                                auto* member_decl = m->Declaration();
+                                auto name = ctx.Clone(m->Name());
                                 auto* type = ctx.Clone(member_decl->type);
                                 utils::Vector<const ast::Attribute*, 4> attrs{
                                     b.ASTNodes().Create<Attribute>(b.ID(), b.AllocateNodeID()),
