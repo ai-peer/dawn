@@ -1486,6 +1486,65 @@ sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
 }
 
 sem::Expression* Resolver::Expression(const ast::Expression* root) {
+    // TODO(amaiorano): factor out to a function like ShortCircuitConstEvalBinary()
+    if (auto* binary = root->As<ast::BinaryExpression>(); binary && binary->IsLogical()) {
+        if (!Mark(binary)) {
+            return nullptr;
+        }
+        // Evaluate lhs and rhs first
+        auto* lhs_result = Expression(binary->lhs);
+        if (!lhs_result || failed_const_eval_) {
+            return nullptr;
+        }
+        auto* rhs_result = Expression(binary->rhs);
+        if (rhs_result) {
+            // Both sides have been processed successfully, so no need to worry about
+            // short-circuiting. Process the root node and return it.
+            auto* sem_expr = Binary(binary);
+            if (!sem_expr) {
+                return nullptr;
+            }
+            builder_->Sem().Add(binary, sem_expr);
+            return sem_expr;
+        } else {
+            // If rhs failed const evaluation, see if we can short-circuit it
+            if (lhs_result->ConstantValue() && failed_const_eval_) {
+                auto is_true = [&](const sem::Expression* e) {
+                    return e->ConstantValue()->As<bool>();
+                };
+
+                bool short_circuit_rhs = false;
+                if (binary->IsLogicalAnd() && !is_true(lhs_result)) {
+                    short_circuit_rhs = true;
+                } else if (binary->IsLogicalOr() && is_true(lhs_result)) {
+                    short_circuit_rhs = true;
+                }
+
+                if (short_circuit_rhs) {
+                    // Clear errors from failed rhs const evaluation
+                    diagnostics_.clear();
+                    // Clear fail flag
+                    failed_const_eval_ = false;
+
+                    // Create the sem node for the root binary node with the lhs constant result
+                    bool has_side_effects = lhs_result->HasSideEffects();
+                    const sem::Constant* value = lhs_result->ConstantValue();
+                    auto* sem = builder_->create<sem::Expression>(
+                        binary, value->Type(), sem::EvaluationStage::kConstant, current_statement_,
+                        value, has_side_effects);
+                    sem->Behaviors() = lhs_result->Behaviors();
+                    builder_->Sem().Add(binary, sem);
+
+                    // Return result of lhs
+                    return lhs_result;
+                }
+            }
+
+            // Not a const evaluated expression, or rhs cannot be short-circuited.
+            return nullptr;
+        }
+    }
+
     utils::Vector<const ast::Expression*, 64> sorted;
     constexpr size_t kMaxExpressionDepth = 512U;
     bool failed = false;
@@ -1782,6 +1841,7 @@ const sem::Expression* Resolver::Materialize(const sem::Expression* expr,
     auto materialized_val = const_eval_.Convert(concrete_ty, expr_val, decl->source);
     if (!materialized_val) {
         // ConvertValue() has already failed and raised an diagnostic error.
+        failed_const_eval_ = true;
         return nullptr;
     }
 
@@ -1821,6 +1881,7 @@ bool Resolver::ShouldMaterializeArgument(const sem::Type* parameter_ty) const {
 bool Resolver::Convert(const sem::Constant*& c, const sem::Type* target_ty, const Source& source) {
     auto r = const_eval_.Convert(target_ty, c, source);
     if (!r) {
+        failed_const_eval_ = true;
         return false;
     }
     c = r.Get();
@@ -1891,6 +1952,7 @@ sem::Expression* Resolver::IndexAccessor(const ast::IndexAccessorExpression* exp
     if (auto r = const_eval_.Index(obj, idx)) {
         val = r.Get();
     } else {
+        failed_const_eval_ = true;
         return nullptr;
     }
     bool has_side_effects = idx->HasSideEffects() || obj->HasSideEffects();
@@ -2304,6 +2366,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
                                                           const_args.Get(), expr->source)) {
             value = r.Get();
         } else {
+            failed_const_eval_ = true;
             return nullptr;
         }
     }
@@ -2790,6 +2853,7 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
             if (auto r = (const_eval_.*op.const_eval_fn)(op.result, const_args, expr->source)) {
                 value = r.Get();
             } else {
+                failed_const_eval_ = true;
                 return nullptr;
             }
         } else {
@@ -2876,6 +2940,7 @@ sem::Expression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
                             expr->Declaration()->source)) {
                         value = r.Get();
                     } else {
+                        failed_const_eval_ = true;
                         return nullptr;
                     }
                 } else {

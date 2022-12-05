@@ -234,6 +234,11 @@ class List {
     /// @returns a formatted string of all the diagnostics in this list.
     std::string str() const;
 
+    void clear() {
+        entries_.clear();
+        error_count_ = 0;
+    }
+
   private:
     std::vector<Diagnostic> entries_;
     size_t error_count_ = 0;

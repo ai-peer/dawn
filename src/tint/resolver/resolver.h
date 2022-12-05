@@ -474,6 +474,7 @@ class Resolver {
     uint32_t current_scoping_depth_ = 0;
     utils::UniqueVector<const sem::GlobalVariable*, 4>* resolved_overrides_ = nullptr;
     utils::Hashset<TypeAndAddressSpace, 8> valid_type_storage_layouts_;
+    bool failed_const_eval_ = false;
 };
 
 }  // namespace tint::resolver
