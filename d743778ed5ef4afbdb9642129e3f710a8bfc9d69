@@ -34,6 +34,24 @@
       "parentUuid": "d854cc38_1c347672",
       "revId": "d743778ed5ef4afbdb9642129e3f710a8bfc9d69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f95a68d9_d26778f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T08:34:44Z",
+      "side": 1,
+      "message": "Yeah that seems correct, we still need the map request ID for the case you mentioned. What the specification allows is to not keep a map of multiple callbacks on the client but we still need to handle the case you described. Nice find!",
+      "parentUuid": "c7d8f29d_d4550f0c",
+      "revId": "d743778ed5ef4afbdb9642129e3f710a8bfc9d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
