@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e55a77d2_4b4694c8",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:08:06Z",
+      "side": 1,
+      "message": "Why?",
+      "range": {
+        "startLine": 273,
+        "startChar": 7,
+        "endLine": 273,
+        "endChar": 80
+      },
+      "revId": "e51bf3cdb54b1df85ecd427d85e0efdc9fa51897",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f24685db_4d336644",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:08:06Z",
+      "side": 1,
+      "message": "You commented on the conversion of features that it\u0027s the caller\u0027s responsibility to error on `false` if needed, but we just ignore the failure here. Why is `Convert` special for these enums?",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 38
+      },
+      "revId": "e51bf3cdb54b1df85ecd427d85e0efdc9fa51897",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
