@@ -16,6 +16,24 @@
       "message": "I have removed map request id in this CL but I started to feel that I should haven\u0027t done it.\n\nFor example, if buffer.mapAsync() -\u003e buffer.unmap() -\u003e buffer.mapAsync() are called in this order\n\n1. buffer.mapAsync()\n2. buffer.unmap();\n3. Another buffer.mapAsync()\n4. mapAsync callback for the first buffer.mapAsync() from device\n5. mapAsync callback for the second buffer.mapAsync() from device\n\nMy understanding, at 4 the callback provided by application for the first buffer.mapAsync() should\u0027t be called and at 5 the callback provided by application for the second buffer.mapAsync() should be called.\n\nBut with the change in this CL, at 4 the callback provided by application for the \"second\" buffer.mapAsync() is called because callback from device is not distinguished and mMapCallback and mMapUserdata are overridden by the second buffer.mapAsync().\n\nAnd mMapCallback is cleared at 4, so at 5 the callback provided by application is not fired.\n\nBufferValidationTest.MapAsync_UnmapBeforeResultAndMapAgain validation unit test seems to unexpectedly pass because it just checks how many times the callback is called.\n\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/1e1834a4ce8b8f90fdf2fe50919dc992d7bfac8f:src/dawn/tests/unittests/validation/BufferValidationTests.cpp;l\u003d409-420;drc\u003dd743778ed5ef4afbdb9642129e3f710a8bfc9d69;bpv\u003d1;bpt\u003d0\n\nI will make a CL if what I described here sounds true.\n\n@cwallez@chromium.org @enga@chromium.org",
       "revId": "d743778ed5ef4afbdb9642129e3f710a8bfc9d69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7d8f29d_d4550f0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-05T06:50:37Z",
+      "side": 1,
+      "message": "\u003e because it just checks how many times the callback is called.\n\nMore precisely, it checks that the callback is fired only once with the second user data. It doesn\u0027t check that the callback is fired by the callback fron device for the second buffer.mapAsync(). (How can I write a test to check it?)",
+      "parentUuid": "d854cc38_1c347672",
+      "revId": "d743778ed5ef4afbdb9642129e3f710a8bfc9d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
