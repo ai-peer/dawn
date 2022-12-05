@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c966efc_1236ff48",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-05T14:45:51Z",
+      "side": 1,
+      "message": "That is what I wrote originally but it didn\u0027t compile. Just tried again and it still fails:\n```\n../../src/tint/transform/preserve_padding.cc:121:31: error: no viable constructor or deduction guide for deduction of template arguments of \u0027Vector\u0027\n                auto params \u003d utils::Vector{\n```\nI don\u0027t understand C++. What am I doing wrong?",
+      "parentUuid": "ce50fe18_7b83ae7b",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 62
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58f2308d_46d8ad05",
         "filename": "src/tint/transform/preserve_padding.cc",
         "patchSetId": 6
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-05T10:36:30Z",
       "side": 1,
       "message": "übernit: Consider `Switch()`. It\u0027s faster even for two `As`.",
+      "range": {
+        "startLine": 124,
+        "startChar": 28,
+        "endLine": 124,
+        "endChar": 30
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9eef5ad_e714f53e",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-05T14:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58f2308d_46d8ad05",
       "range": {
         "startLine": 124,
         "startChar": 28,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2929d147_fc5ab866",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-05T14:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49c8b144_6cc6b7ac",
+      "range": {
+        "startLine": 158,
+        "startChar": 28,
+        "endLine": 158,
+        "endChar": 30
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f783fdd4_4d759f47",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e37e9a0_a0415bc3",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-05T14:45:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f783fdd4_4d759f47",
+      "range": {
+        "startLine": 183,
+        "startChar": 13,
+        "endLine": 183,
+        "endChar": 24
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99c84126_5e3dd3c0",
@@ -123,6 +219,30 @@
       "writtenOn": "2022-12-05T10:36:30Z",
       "side": 1,
       "message": "So we\u0027re certain that the 4th component isn\u0027t written by all backends?",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222d3c59_6111847b",
+        "filename": "src/tint/transform/preserve_padding_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-05T14:45:51Z",
+      "side": 1,
+      "message": "It definitely /is/ written by the MSL backend, but I was going to address this in a follow-up change to try and make reviews easier (see the comment I made when uploading for review).\n\nI haven\u0027t tested against Vulkan yet, but was hoping to get CQ to do that on a bunch of platforms by landing this first, then rolling the CTS change and seeing what pops up in expectations.txt. If this does turn out to be an issue for Vulkan too, then the fix I was planning for MSL won\u0027t work, and we\u0027ll either need two different solutions or one super-gross solution.\n\nIf you\u0027d rather not land this until we\u0027ve figured out the vec3 stuff we can do that instead, but it\u0027ll take me longer to try and test on the one remote VK platform that I have.",
+      "parentUuid": "99c84126_5e3dd3c0",
       "range": {
         "startLine": 38,
         "startChar": 6,
