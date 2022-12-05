@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19328508_456c8856",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "One question about `vec3`, but otherwise looks great. Fantastic job!",
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce50fe18_7b83ae7b",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "übernit: You don\u0027t need to be explicit here. `auto params \u003d utils::Vector{` infers the `T` and `N`. Just a little less accident prone, in that adding new elements in the future means the `N` automatically adjusts, instead of silently switching to heap-allocations.",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 62
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f2308d_46d8ad05",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "übernit: Consider `Switch()`. It\u0027s faster even for two `As`.",
+      "range": {
+        "startLine": 124,
+        "startChar": 28,
+        "endLine": 124,
+        "endChar": 30
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49c8b144_6cc6b7ac",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "Ditto",
+      "range": {
+        "startLine": 158,
+        "startChar": 28,
+        "endLine": 158,
+        "endChar": 30
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f783fdd4_4d759f47",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "nit: While `A redundant enable directive is ok`, might be nicer to initialize this with a scan of the input program\u0027s enables?",
+      "range": {
+        "startLine": 183,
+        "startChar": 13,
+        "endLine": 183,
+        "endChar": 24
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c84126_5e3dd3c0",
+        "filename": "src/tint/transform/preserve_padding_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T10:36:30Z",
+      "side": 1,
+      "message": "So we\u0027re certain that the 4th component isn\u0027t written by all backends?",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
