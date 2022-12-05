@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfeaa09d_8b2c89a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-12-05T06:09:14Z",
+      "side": 1,
+      "message": "Now this CL is a bit controversial so I marked it as CQ-1.\nI will invite you to review it again when the CL is ready enough.",
+      "revId": "fada8dc0226e90fc1a4fc6a9935a6b1612fb78c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
