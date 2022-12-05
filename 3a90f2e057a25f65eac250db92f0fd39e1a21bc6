@@ -16,6 +16,63 @@
       "message": "PTAL. The *Base classes will drop the Base when them move from sem:: to type::.",
       "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d9e184_d1bcc3b8",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3628,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T21:30:08Z",
+      "side": 1,
+      "message": "This cast is unfortunate. We know that these members are `sem::StructMember`, so the dynamic casting here is waisted cycles. In this sort of situation I\u0027d recommend that we override the `Members()` method on `sem::Struct` to return a `utils::Vector\u003cconst sem::StructMember*\u003e`.\n\nThere\u0027s code in `utils::Vector` to allow covariance, where we can implicitly cast a `utils::Vector\u003cconst A*\u003e` to `utils::Vector\u003cconst B*\u003e` if `A` derives from `B`, but there\u0027s checks in `ReinterpretSlice` to ensure that the reverse is not allowed, which is what we\u0027d need here.\n\nIt might be worth considering a `utils::Vector::UnsafeCast\u003cT\u003e()` method, which allows a vector to be cast, and using that in a `Members()` override method.\n\nCertainly something we can do as a followup. Would be nice to have a TODO though.",
+      "range": {
+        "startLine": 3628,
+        "startChar": 12,
+        "endLine": 3628,
+        "endChar": 54
+      },
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b57dc7_b1dc920e",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T21:30:08Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920422e3_d7cab29f",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T21:30:08Z",
+      "side": 1,
+      "message": "Ditto. Here any every other similar change.",
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
