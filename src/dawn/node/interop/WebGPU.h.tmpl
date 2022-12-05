@@ -47,6 +47,7 @@ void Initialize(Napi::Env env);
 {{-   else if IsInterface  $}}{{template "Interface" $}}
 {{-   else if IsEnum       $}}{{template "Enum" $}}
 {{-   else if IsTypedef    $}}{{template "Typedef" $}}
+{{-   else if IsCallback   $}}{{template "Callback" $}}
 {{-   end}}
 {{- end}}
 
@@ -177,6 +178,17 @@ public:
 };
 
 std::ostream& operator<<(std::ostream& o, {{$.Name}});
+{{end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Callback emits the C++ header declaration that defines the interop type for
+-- the given ast.Callback
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Callback"}}
+using {{$.Name}} = Napi::Function;
 {{end}}
 
 
