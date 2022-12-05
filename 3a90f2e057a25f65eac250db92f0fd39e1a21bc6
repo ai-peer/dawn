@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e526b95e_1372b870",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3628,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-05T22:14:04Z",
+      "side": 1,
+      "message": "Followup, filed: https://crbug.com/tint/1779. The list is currently a std::vector, so this is a larger change to convert that to a utils::Vector and then do the work to get the return types we want.",
+      "parentUuid": "09d9e184_d1bcc3b8",
+      "range": {
+        "startLine": 3628,
+        "startChar": 12,
+        "endLine": 3628,
+        "endChar": 54
+      },
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5b57dc7_b1dc920e",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b0834aa_be4bfc32",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-05T22:14:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c5b57dc7_b1dc920e",
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "920422e3_d7cab29f",
@@ -71,6 +113,24 @@
       "writtenOn": "2022-12-05T21:30:08Z",
       "side": 1,
       "message": "Ditto. Here any every other similar change.",
+      "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fd36df7_dc8b0cd4",
+        "filename": "src/tint/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-05T22:14:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "920422e3_d7cab29f",
       "revId": "3a90f2e057a25f65eac250db92f0fd39e1a21bc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
