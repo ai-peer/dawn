@@ -334,7 +334,8 @@ void EncodeEmptyBlitEncoderForWriteTimestamp(Device* device,
     API_AVAILABLE(macos(11.0), ios(14.0)) {
     commandContext->EndBlit();
 
-    MTLBlitPassDescriptor* descriptor = [[MTLBlitPassDescriptor alloc] init];
+    NSRef<MTLBlitPassDescriptor> descriptorRef = [MTLBlitPassDescriptor blitPassDescriptor];
+    MTLBlitPassDescriptor* descriptor = descriptorRef.Get();
     if (cmd->querySet.Get() != nullptr) {
         descriptor.sampleBufferAttachments[0].sampleBuffer =
             ToBackend(cmd->querySet.Get())->GetCounterSampleBuffer();
