@@ -162,6 +162,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "849e5f6e_9fa9c6be",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-05T12:16:41Z",
+      "side": 1,
+      "message": "My suggestion is to change:\n\n```\nconstexpr uint64_t kGuaranteedBufferOOMSize \u003d std::numeric_limits\u003csize_t\u003e::max();\n```\n\nto\n\n```\nconstexpr uint64_t kGuaranteedBufferOOMSize \u003d std::numeric_limits\u003csize_t\u003e::max() - 1;\n```\n\nThis way we don\u0027t run into the narrowing issues that you raised. But Austin is correct that this would mean that the buffer sizes reported by Dawn would be incorrect, but error messages are non-normative and people creating such huge buffers are hitting corner cases. So either this or changing MapAsync in the wire to use uint64_t works IMHO.\n\nAdding static casts from uint64_t to size_t would likely result in UB when narrowing so I\u0027m a bit worried about this and would rather we choose a solution without unchecked static_casts (as in we should validate before casting)",
+      "parentUuid": "678deb30_1976c800",
+      "revId": "6ca02b4f7adffcaf4a5d27e289f6baf225702bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "93745d14_4b2a70f7",
