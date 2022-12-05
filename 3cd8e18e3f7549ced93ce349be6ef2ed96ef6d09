@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "779e762e_57f7ee28",
+        "filename": "src/tint/transform/preserve_padding.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T15:14:47Z",
+      "side": 1,
+      "message": "Argh. What a bloody horrible language.\n\nThe issue seems to be caused by `auto call_helper \u003d [\u0026](auto\u0026\u0026 body) {`, where the `auto\u0026\u0026` means the lambda boils down to a templated function. You then have a templated function calling a templated deduction guide, which apparently can\u0027t resolve in this case. If you change the signature to take a `std::function\u003cutils::Vector\u003cconst ast::Statement*, 8\u003e()\u003e` instead of `auto`, then it compiles. I also suspect throwing `template` around a bunch would work, but that\u0027s likely to be significantly less readable than what you already have.\n\nLeave as is.",
+      "parentUuid": "2c966efc_1236ff48",
+      "range": {
+        "startLine": 112,
+        "startChar": 16,
+        "endLine": 112,
+        "endChar": 62
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58f2308d_46d8ad05",
@@ -243,6 +267,30 @@
       "side": 1,
       "message": "It definitely /is/ written by the MSL backend, but I was going to address this in a follow-up change to try and make reviews easier (see the comment I made when uploading for review).\n\nI haven\u0027t tested against Vulkan yet, but was hoping to get CQ to do that on a bunch of platforms by landing this first, then rolling the CTS change and seeing what pops up in expectations.txt. If this does turn out to be an issue for Vulkan too, then the fix I was planning for MSL won\u0027t work, and we\u0027ll either need two different solutions or one super-gross solution.\n\nIf you\u0027d rather not land this until we\u0027ve figured out the vec3 stuff we can do that instead, but it\u0027ll take me longer to try and test on the one remote VK platform that I have.",
       "parentUuid": "99c84126_5e3dd3c0",
+      "range": {
+        "startLine": 38,
+        "startChar": 6,
+        "endLine": 38,
+        "endChar": 10
+      },
+      "revId": "3cd8e18e3f7549ced93ce349be6ef2ed96ef6d09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a015e56_0c32a2fa",
+        "filename": "src/tint/transform/preserve_padding_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-05T15:14:47Z",
+      "side": 1,
+      "message": "Ack. Sorry, I missed your earlier comment. Change comments are easily missed in review!",
+      "parentUuid": "222d3c59_6111847b",
       "range": {
         "startLine": 38,
         "startChar": 6,
