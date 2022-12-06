@@ -7,8 +7,7 @@ struct tint_symbol {
 };
 
 float4 main_inner() {
-  const Normals tint_symbol_1[1] = {{float3(0.0f, 0.0f, 1.0f)}};
-  return float4(tint_symbol_1[0].f, 1.0f);
+  return float4(0.0f, 0.0f, 1.0f, 1.0f);
 }
 
 tint_symbol main() {
