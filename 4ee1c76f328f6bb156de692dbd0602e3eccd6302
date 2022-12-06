@@ -33,6 +33,29 @@
       "message": "Still LGTM",
       "revId": "4ee1c76f328f6bb156de692dbd0602e3eccd6302",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e840cc3_ca9d83c3",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:57:51Z",
+      "side": 1,
+      "message": "nit: A `Switch()` would be more performant here.",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 5
+      },
+      "revId": "4ee1c76f328f6bb156de692dbd0602e3eccd6302",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
