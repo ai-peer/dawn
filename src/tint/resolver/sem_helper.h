@@ -60,17 +60,17 @@ class SemHelper {
 
     /// @returns the resolved type of the ast::Expression `expr`
     /// @param expr the expression
-    sem::Type* TypeOf(const ast::Expression* expr) const;
+    type::Type* TypeOf(const ast::Expression* expr) const;
 
     /// @returns the type name of the given semantic type, unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string TypeNameOf(const sem::Type* ty) const;
+    std::string TypeNameOf(const type::Type* ty) const;
 
     /// @returns the type name of the given semantic type, without unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string RawTypeNameOf(const sem::Type* ty) const;
+    std::string RawTypeNameOf(const type::Type* ty) const;
 
   private:
     ProgramBuilder* builder_;
