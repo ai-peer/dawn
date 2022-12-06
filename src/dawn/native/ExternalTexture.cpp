@@ -214,20 +214,31 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         flipY = -1;
     }
 
-    // We can perform the flip-Y operation by multiplying the y-component portion of the matrix by
-    // -1.
+    float scaleWidth = descriptor->visibleRect.width;
+    float scaleHeight = descriptor->visibleRect.height;
+    float xOffset = descriptor->visibleRect.x;
+    float yOffset = descriptor->visibleRect.y;
+
+    // This block creates a 3x2 matrix which when multiplied by UV coordinates in a shader performs
+    // rotation, flip-Y and cropping operations. These values are based on standard rotation
+    // matrices and multiplied by -1 if flip-Y functionality is needed. These values are also
+    // multiplied by a scale factor, which along with offset values implements crop functionality.
     switch (descriptor->rotation) {
         case wgpu::ExternalTextureRotation::Rotate0Degrees:
-            params.coordTransformMatrix = {1.0, 0.0, 0.0, 1.0f * flipY};
+            params.coordTransformMatrix = {1.0f * scaleWidth,          0.0,    xOffset, 0.0, 0.0,
+                                           1.0f * flipY * scaleHeight, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate90Degrees:
-            params.coordTransformMatrix = {0.0, 1.0f * flipY, -1.0, 0.0};
+            params.coordTransformMatrix = {
+                0.0, 1.0f * flipY * scaleHeight, xOffset, 0.0, -1.0f * scaleWidth, 0.0, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate180Degrees:
-            params.coordTransformMatrix = {-1.0, 0.0, 0.0, -1.0f * flipY};
+            params.coordTransformMatrix = {-1.0f * scaleWidth,          0.0,    xOffset, 0.0, 0.0,
+                                           -1.0f * flipY * scaleHeight, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate270Degrees:
-            params.coordTransformMatrix = {0.0, -1.0f * flipY, 1.0, 0.0};
+            params.coordTransformMatrix = {
+                0.0, -1.0f * flipY * scaleHeight, xOffset, 0.0, 1.0f * scaleWidth, 0.0, yOffset};
             break;
     }
 
