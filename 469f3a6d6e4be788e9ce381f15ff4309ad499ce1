@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5e3e4e_05f4e5d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "A few minor comments, but overall looks good. Looking at the diffs in the e2e tests, I still wonder whether we should add a transform to constant fold expressions to literals in the AST before we hit the backends.",
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f39e2164_24c4ff29",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "Maybe I\u0027m not seeing the difference, but could `expect` not be set to `src` here?",
+      "range": {
+        "startLine": 189,
+        "startChar": 10,
+        "endLine": 189,
+        "endChar": 16
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f0761f_2f66ba19",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "Was this meant to be changed?",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 283,
+        "endChar": 35
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe186c18_f418fe27",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "nit: maybe `get_b_runtime`?",
+      "range": {
+        "startLine": 372,
+        "startChar": 3,
+        "endLine": 372,
+        "endChar": 8
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd8711f4_26b95aee",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "So this is interesting. Your change actually optimizes the hoisting so that we don\u0027t needlessly hoist compound const types. That\u0027s a nice benefit!",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 98
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be7f3d7_bcc9d37c",
+        "filename": "src/tint/writer/glsl/generator_impl_sanitizer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "This test is called `PromoteStructInitializerToConstVar`, but it no longer does what it purports. Should we remove this test?",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 36
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8caaa57c_40177f39",
+        "filename": "src/tint/writer/hlsl/generator_impl_sanitizer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "Same comment as above.",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 40
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00165975_2202f831",
+        "filename": "test/tint/bug/tint/1641.wgsl.expected.msl",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-06T20:00:43Z",
+      "side": 1,
+      "message": "Reading the bug, and seeing Dan\u0027s fix, it looks like we\u0027re no longer testing what he fixed? https://bugs.chromium.org/p/tint/issues/detail?id\u003d1641#c7",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
