@@ -214,22 +214,34 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         flipY = -1;
     }
 
+    float scaleWidth = descriptor->visibleRect.width;
+    float scaleHeight = descriptor->visibleRect.height;
+    float xOffset = descriptor->visibleRect.x;
+    float yOffset = descriptor->visibleRect.y;
+
     // We can perform the flip-Y operation by multiplying the y-component portion of the matrix by
     // -1.
     switch (descriptor->rotation) {
         case wgpu::ExternalTextureRotation::Rotate0Degrees:
-            params.coordTransformMatrix = {1.0, 0.0, 0.0, 1.0f * flipY};
+            params.coordTransformMatrix = {1.0f * scaleWidth,          0.0,    xOffset, 0.0, 0.0,
+                                           1.0f * flipY * scaleHeight, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate90Degrees:
-            params.coordTransformMatrix = {0.0, 1.0f * flipY, -1.0, 0.0};
+            params.coordTransformMatrix = {
+                0.0, 1.0f * flipY * scaleHeight, xOffset, 0.0, -1.0f * scaleWidth, 0.0, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate180Degrees:
-            params.coordTransformMatrix = {-1.0, 0.0, 0.0, -1.0f * flipY};
+            params.coordTransformMatrix = {-1.0f * scaleWidth,          0.0,    xOffset, 0.0, 0.0,
+                                           -1.0f * flipY * scaleHeight, yOffset};
             break;
         case wgpu::ExternalTextureRotation::Rotate270Degrees:
-            params.coordTransformMatrix = {0.0, -1.0f * flipY, 1.0, 0.0};
+            params.coordTransformMatrix = {
+                0.0, -1.0f * flipY * scaleHeight, xOffset, 0.0, 1.0f * scaleWidth, 0.0, yOffset};
             break;
     }
+
+    // This sets the "crop" of the sampled texture. The members x and y specify the offset into the
+    // left and top of the image, and width and height specify how much of the image is sampled.
 
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));
