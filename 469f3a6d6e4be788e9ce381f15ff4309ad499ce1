@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f5dad40_977485d4",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f39e2164_24c4ff29",
+      "range": {
+        "startLine": 189,
+        "startChar": 10,
+        "endLine": 189,
+        "endChar": 16
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4f0761f_2f66ba19",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-06T20:00:43Z",
       "side": 1,
       "message": "Was this meant to be changed?",
+      "range": {
+        "startLine": 282,
+        "startChar": 2,
+        "endLine": 283,
+        "endChar": 35
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ab8026_55e54902",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f0761f_2f66ba19",
       "range": {
         "startLine": 282,
         "startChar": 2,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a44e67f_4870e11f",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe186c18_f418fe27",
+      "range": {
+        "startLine": 372,
+        "startChar": 3,
+        "endLine": 372,
+        "endChar": 8
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd8711f4_26b95aee",
@@ -100,6 +172,30 @@
       "writtenOn": "2022-12-06T20:00:43Z",
       "side": 1,
       "message": "So this is interesting. Your change actually optimizes the hoisting so that we don\u0027t needlessly hoist compound const types. That\u0027s a nice benefit!",
+      "range": {
+        "startLine": 988,
+        "startChar": 2,
+        "endLine": 988,
+        "endChar": 98
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f22f4a8_0703b1ae",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Yeah. HLSL and MSL both seem happy with this pattern.",
+      "parentUuid": "dd8711f4_26b95aee",
       "range": {
         "startLine": 988,
         "startChar": 2,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ab8915_ddf9d605",
+        "filename": "src/tint/writer/glsl/generator_impl_sanitizer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8be7f3d7_bcc9d37c",
+      "range": {
+        "startLine": 216,
+        "startChar": 2,
+        "endLine": 216,
+        "endChar": 36
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8caaa57c_40177f39",
@@ -156,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa9095df_242f2706",
+        "filename": "src/tint/writer/hlsl/generator_impl_sanitizer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8caaa57c_40177f39",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 40
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00165975_2202f831",
@@ -169,6 +313,30 @@
       "writtenOn": "2022-12-06T20:00:43Z",
       "side": 1,
       "message": "Reading the bug, and seeing Dan\u0027s fix, it looks like we\u0027re no longer testing what he fixed? https://bugs.chromium.org/p/tint/issues/detail?id\u003d1641#c7",
+      "range": {
+        "startLine": 13,
+        "startChar": 2,
+        "endLine": 13,
+        "endChar": 40
+      },
+      "revId": "469f3a6d6e4be788e9ce381f15ff4309ad499ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44898c49_2d9a80c2",
+        "filename": "test/tint/bug/tint/1641.wgsl.expected.msl",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-06T20:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00165975_2202f831",
       "range": {
         "startLine": 13,
         "startChar": 2,
