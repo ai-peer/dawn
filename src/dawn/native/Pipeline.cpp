@@ -68,8 +68,32 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
                         "Pipeline overridable constant \"%s\" not found in %s.", constants[i].key,
                         module);
         DAWN_INVALID_IF(!std::isfinite(constants[i].value),
-                        "Pipeline overridable constant \"%s\" with value (%f) is not finite",
-                        constants[i].key, constants[i].value);
+                        "Pipeline overridable constant \"%s\" with value (%f) is not finite in %s",
+                        constants[i].key, constants[i].value, module);
+
+        // Validate if constant value can be represented by the given scalar type in shader
+        switch (metadata.overrides.at(constants[i].key).type) {
+            case EntryPointMetadata::Override::Type::Float32:
+                DAWN_INVALID_IF(!is_double_value_representable<float>(constants[i].value),
+                                "Pipeline overridable constant \"%s\" with value (%f) is not "
+                                "representable in type (%s) in %s",
+                                constants[i].key, constants[i].value, "f32", module);
+                break;
+            case EntryPointMetadata::Override::Type::Int32:
+                DAWN_INVALID_IF(!is_double_value_representable<int32_t>(constants[i].value),
+                                "Pipeline overridable constant \"%s\" with value (%f) is not "
+                                "representable in type (%s) in %s",
+                                constants[i].key, constants[i].value, "i32", module);
+                break;
+            case EntryPointMetadata::Override::Type::Uint32:
+                DAWN_INVALID_IF(!is_double_value_representable<int32_t>(constants[i].value),
+                                "Pipeline overridable constant \"%s\" with value (%f) is not "
+                                "representable in type (%s) in %s",
+                                constants[i].key, constants[i].value, "u32", module);
+                break;
+            default:
+                break;
+        }
 
         if (stageInitializedConstantIdentifiers.count(constants[i].key) == 0) {
             if (metadata.uninitializedOverrides.count(constants[i].key) > 0) {
