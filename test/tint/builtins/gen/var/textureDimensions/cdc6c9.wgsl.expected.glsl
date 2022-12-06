@@ -19,6 +19,8 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat2 rotationMatrix;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 struct ExternalTextureParams_std140 {
@@ -30,6 +32,8 @@ struct ExternalTextureParams_std140 {
   mat3 gamutConversionMatrix;
   vec2 rotationMatrix_0;
   vec2 rotationMatrix_1;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
@@ -76,6 +80,8 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat2 rotationMatrix;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 struct ExternalTextureParams_std140 {
@@ -87,6 +93,8 @@ struct ExternalTextureParams_std140 {
   mat3 gamutConversionMatrix;
   vec2 rotationMatrix_0;
   vec2 rotationMatrix_1;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
@@ -127,6 +135,8 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   mat3 gamutConversionMatrix;
   mat2 rotationMatrix;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 struct ExternalTextureParams_std140 {
@@ -138,6 +148,8 @@ struct ExternalTextureParams_std140 {
   mat3 gamutConversionMatrix;
   vec2 rotationMatrix_0;
   vec2 rotationMatrix_1;
+  vec2 visibleRectOffset;
+  vec2 visibleRectSize;
 };
 
 layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {

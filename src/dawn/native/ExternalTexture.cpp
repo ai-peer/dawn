@@ -231,6 +231,13 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
             break;
     }
 
+    // This sets the "crop" of the sampled texture. The members x and y specify the offset into the
+    // left and top of the image, and width and height specify how much of the image is sampled.
+    params.visibleRect[0] = descriptor->visibleRect.x;
+    params.visibleRect[1] = descriptor->visibleRect.y;
+    params.visibleRect[2] = descriptor->visibleRect.width;
+    params.visibleRect[3] = descriptor->visibleRect.height;
+
     DAWN_TRY(device->GetQueue()->WriteBuffer(mParamsBuffer.Get(), 0, &params,
                                              sizeof(ExternalTextureParams)));
 

@@ -20,6 +20,8 @@ struct ExternalTextureParams {
   GammaTransferParams gammaEncodeParams;
   float3x3 gamutConversionMatrix;
   float2x2 rotationMatrix;
+  float2 visibleRectOffset;
+  float2 visibleRectSize;
 };
 
 void textureDimensions_cdc6c9(texture2d<float, access::sample> tint_symbol_1) {
