@@ -34,6 +34,24 @@
       "parentUuid": "ea713a6a_ebd41afd",
       "revId": "06f8d24972a856ffa58ce95f0dfe6d57d2c9006e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5276f4a_6f2f3a92",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:55:01Z",
+      "side": 1,
+      "message": "\u003e Is it the lifetime of the Vector, or just until the Vector is pushed to again?\n\nThe lifetime of the Vector. In which case maybe it isn\u0027t a bug. My brain clearly refuses to acknowledge pointers to the source program.",
+      "parentUuid": "b34de302_b61933a0",
+      "revId": "06f8d24972a856ffa58ce95f0dfe6d57d2c9006e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
