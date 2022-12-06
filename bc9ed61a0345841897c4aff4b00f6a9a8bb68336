@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df87b0c_86ffe6ba",
+        "filename": "tools/format",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-06T14:53:51Z",
+      "side": 1,
+      "message": "Is this needed? Or leftover?",
+      "revId": "bc9ed61a0345841897c4aff4b00f6a9a8bb68336",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
