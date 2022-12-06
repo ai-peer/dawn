@@ -5,8 +5,7 @@ struct Normals {
 };
 
 vec4 tint_symbol() {
-  Normals tint_symbol_1[1] = Normals[1](Normals(vec3(0.0f, 0.0f, 1.0f)));
-  return vec4(tint_symbol_1[0].f, 1.0f);
+  return vec4(0.0f, 0.0f, 1.0f, 1.0f);
 }
 
 void main() {

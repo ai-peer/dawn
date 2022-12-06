@@ -219,15 +219,8 @@ TEST_F(HlslSanitizerTest, PromoteStructInitializerToConstVar) {
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
     auto got = gen.result();
-    auto* expect = R"(struct S {
-  int a;
-  float3 b;
-  int c;
-};
-
-void main() {
-  const S tint_symbol = {1, float3(2.0f, 3.0f, 4.0f), 4};
-  float3 pos = tint_symbol.b;
+    auto* expect = R"(void main() {
+  float3 pos = float3(2.0f, 3.0f, 4.0f);
   return;
 }
 )";

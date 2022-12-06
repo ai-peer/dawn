@@ -213,8 +213,7 @@ struct S {
 };
 
 void tint_symbol() {
-  S tint_symbol_1 = S(1, vec3(2.0f, 3.0f, 4.0f), 4);
-  vec3 pos = tint_symbol_1.b;
+  vec3 pos = vec3(2.0f, 3.0f, 4.0f);
 }
 
 void main() {
