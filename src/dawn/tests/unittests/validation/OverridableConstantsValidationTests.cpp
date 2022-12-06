@@ -223,31 +223,66 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierUni
 TEST_F(ComputePipelineOverridableConstantsValidationTest, InvalidValue) {
     SetUpShadersWithDefaultValueConstants();
     {
-        // Error:: NaN
+        // Error: NaN
         std::vector<wgpu::ConstantEntry> constants{{nullptr, "c3", std::nan("")}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
-        // Error:: -NaN
+        // Error: -NaN
         std::vector<wgpu::ConstantEntry> constants{{nullptr, "c3", -std::nan("")}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
-        // Error:: Inf
+        // Error: Inf
         std::vector<wgpu::ConstantEntry> constants{
             {nullptr, "c3", std::numeric_limits<double>::infinity()}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
-        // Error:: -Inf
+        // Error: -Inf
         std::vector<wgpu::ConstantEntry> constants{
             {nullptr, "c3", -std::numeric_limits<double>::infinity()}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
-        // Valid:: Max
+        // Valid: Max
         std::vector<wgpu::ConstantEntry> constants{
             {nullptr, "c3", std::numeric_limits<float>::max()}};
         TestCreatePipeline(constants);
+    }
+}
+
+// Test that values that are not representable by WGSL type i32/u32/f16/f32
+TEST_F(ComputePipelineOverridableConstantsValidationTest, OutofRangeValue) {
+    SetUpShadersWithDefaultValueConstants();
+    {
+        // Error: 1.79769e+308 cannot be represented by f32
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "c3", std::numeric_limits<double>::max()}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    }
+    {
+        // Error: b out of range
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "c0", std::numeric_limits<int32_t>::max() + 1.0}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    }
+    {
+        // Error: i32 out of range
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "c5", std::numeric_limits<int32_t>::max() + 1.0}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    }
+    {
+        // Error: i32 out of range (negative)
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "c5", std::numeric_limits<int32_t>::lowest() - 1.0}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    }
+    {
+        // Error: u32 out of range
+        std::vector<wgpu::ConstantEntry> constants{
+            {nullptr, "c8", std::numeric_limits<uint32_t>::max() + 1.0}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }
