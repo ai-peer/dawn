@@ -16,6 +16,24 @@
       "message": "Note: this actually looked like a bug. You don\u0027t want to hold a reference to a temporary here.",
       "revId": "06f8d24972a856ffa58ce95f0dfe6d57d2c9006e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34de302_b61933a0",
+        "filename": "src/tint/ir/switch.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-06T14:51:54Z",
+      "side": 1,
+      "message": "What is the lifetime of a VectorRef? Is it the lifetime of the Vector, or just until the Vector is pushed to again?\n\nI think this currently works because the IR requires the Program to live longer then the IR and the AST isnt\u0027 mutated, so, I think, the lifetimes match up. (That said, this will go away and real case selectors will appear in the IR at some point in the future).",
+      "parentUuid": "ea713a6a_ebd41afd",
+      "revId": "06f8d24972a856ffa58ce95f0dfe6d57d2c9006e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
