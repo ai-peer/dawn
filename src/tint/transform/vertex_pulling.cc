@@ -148,7 +148,7 @@ bool IsTypeCompatible(AttributeWGSLType wgslType, VertexFormatType vertexFormatT
     }
 }
 
-AttributeWGSLType WGSLTypeOf(const sem::Type* ty) {
+AttributeWGSLType WGSLTypeOf(const type::Type* ty) {
     if (ty->Is<sem::I32>()) {
         return {BaseWGSLType::kI32, 1};
     }
@@ -264,7 +264,7 @@ struct VertexPulling::State {
         /// A builder that builds the expression that resolves to the (transformed) input location
         std::function<const ast::Expression*()> expr;
         /// The store type of the location variable
-        const sem::Type* type;
+        const type::Type* type;
     };
 
     /// The source program
