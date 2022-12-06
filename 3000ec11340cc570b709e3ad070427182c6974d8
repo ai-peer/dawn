@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "239ae21e_00a553a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Pushed changes to address my own comments. Hope you don\u0027t mind!",
+      "revId": "3000ec11340cc570b709e3ad070427182c6974d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

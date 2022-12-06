@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac135aa2_259cbfee",
+        "filename": "src/tint/sem/type_mappings.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "743473b8_ded7c7bf",
+      "range": {
+        "startLine": 73,
+        "startChar": 3,
+        "endLine": 74,
+        "endChar": 53
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab4509b9_9b8d6130",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-06T11:00:04Z",
       "side": 1,
       "message": "Why? If a transform is dealing with semantic types, can\u0027t it assume it\u0027ll have a `sem::StructMember`?",
+      "range": {
+        "startLine": 81,
+        "startChar": 34,
+        "endLine": 81,
+        "endChar": 50
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b564b6_e01a76b5",
+        "filename": "src/tint/transform/first_index_offset.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab4509b9_9b8d6130",
       "range": {
         "startLine": 81,
         "startChar": 34,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d117d31_469cddd8",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c31dcce_460a0051",
+      "range": {
+        "startLine": 186,
+        "startChar": 40,
+        "endLine": 186,
+        "endChar": 46
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "acd3a7f6_d57a43c3",
@@ -83,6 +155,30 @@
       "writtenOn": "2022-12-06T11:00:04Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 242,
+        "startChar": 19,
+        "endLine": 243,
+        "endChar": 48
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9f12eb6_8a3679a6",
+        "filename": "src/tint/transform/spirv_atomic.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "acd3a7f6_d57a43c3",
       "range": {
         "startLine": 242,
         "startChar": 19,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14577a04_8329f6fd",
+        "filename": "src/tint/transform/truncate_interstage_variables.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "248642e0_30dc0d6e",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f36fc21_a44ec0d1",
@@ -139,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "778bae5b_77ccf946",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f36fc21_a44ec0d1",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 301,
+        "endChar": 41
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35525a89_94a7886b",
@@ -152,6 +296,30 @@
       "writtenOn": "2022-12-06T11:00:04Z",
       "side": 1,
       "message": "Don\u0027t believe this is needed",
+      "range": {
+        "startLine": 330,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 40
+      },
+      "revId": "891a42c2f179f2a8405392e3feb4f322ef9c99b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a31a5d6_8fd65a0e",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-06T14:40:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35525a89_94a7886b",
       "range": {
         "startLine": 330,
         "startChar": 0,
