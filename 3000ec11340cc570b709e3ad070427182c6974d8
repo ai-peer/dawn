@@ -16,6 +16,23 @@
       "message": "Pushed changes to address my own comments. Hope you don\u0027t mind!",
       "revId": "3000ec11340cc570b709e3ad070427182c6974d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4ed3cb1_90241aa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-06T14:42:15Z",
+      "side": 1,
+      "message": "Adding James as both Ben and I are authors now.",
+      "revId": "3000ec11340cc570b709e3ad070427182c6974d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
