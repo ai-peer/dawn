@@ -150,20 +150,25 @@ ObjectType ComputePassEncoder::GetType() const {
 }
 
 void ComputePassEncoder::APIEnd() {
-    if (mEncodingContext->TryEncode(
-            this,
-            [&](CommandAllocator* allocator) -> MaybeError {
-                if (IsValidationEnabled()) {
-                    DAWN_TRY(ValidateProgrammableEncoderEnd());
+    mEncodingContext->TryEncode(
+        this,
+        [&](CommandAllocator* allocator) -> MaybeError {
+            if (IsValidationEnabled()) {
+                if (GetDevice()->ConsumedError(mEncodingContext->CheckEncoderAlreadyEnded(this))) {
+                    return {};
                 }
+                DAWN_TRY(ValidateProgrammableEncoderEnd());
+            }
 
-                allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
+            allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
 
-                return {};
-            },
-            "encoding %s.End().", this)) {
-        mEncodingContext->ExitComputePass(this, mUsageTracker.AcquireResourceUsage());
-    }
+            mEncodingContext->ExitComputePass(this, mUsageTracker.AcquireResourceUsage());
+            return {};
+        },
+        // If GetEncoderStatus() returns false, it means encoder is not created successfully due to
+        // some reason like the validation of encoder descriptor fails. In this situation, don't
+        // report error immediately in pass encoder. Command encoder's Finish() will report it.
+        GetEncoderStatus(), "encoding %s.End().", this);
 }
 
 void ComputePassEncoder::APIEndPass() {
@@ -223,8 +228,8 @@ void ComputePassEncoder::APIDispatchWorkgroups(uint32_t workgroupCountX,
 
             return {};
         },
-        "encoding %s.DispatchWorkgroups(%u, %u, %u).", this, workgroupCountX, workgroupCountY,
-        workgroupCountZ);
+        false, "encoding %s.DispatchWorkgroups(%u, %u, %u).", this, workgroupCountX,
+        workgroupCountY, workgroupCountZ);
 }
 
 ResultOrError<std::pair<Ref<BufferBase>, uint64_t>>
@@ -390,7 +395,8 @@ void ComputePassEncoder::APIDispatchWorkgroupsIndirect(BufferBase* indirectBuffe
             dispatch->indirectOffset = indirectOffset;
             return {};
         },
-        "encoding %s.DispatchWorkgroupsIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
+        false, "encoding %s.DispatchWorkgroupsIndirect(%s, %u).", this, indirectBuffer,
+        indirectOffset);
 }
 
 void ComputePassEncoder::APISetPipeline(ComputePipelineBase* pipeline) {
@@ -409,7 +415,7 @@ void ComputePassEncoder::APISetPipeline(ComputePipelineBase* pipeline) {
 
             return {};
         },
-        "encoding %s.SetPipeline(%s).", this, pipeline);
+        false, "encoding %s.SetPipeline(%s).", this, pipeline);
 }
 
 void ComputePassEncoder::APISetBindGroup(uint32_t groupIndexIn,
@@ -432,7 +438,7 @@ void ComputePassEncoder::APISetBindGroup(uint32_t groupIndexIn,
 
             return {};
         },
-        "encoding %s.SetBindGroup(%u, %s, %u, ...).", this, groupIndexIn, group,
+        false, "encoding %s.SetBindGroup(%u, %s, %u, ...).", this, groupIndexIn, group,
         dynamicOffsetCount);
 }
 
@@ -454,7 +460,7 @@ void ComputePassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t quer
 
             return {};
         },
-        "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
+        false, "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
 }
 
 void ComputePassEncoder::AddDispatchSyncScope(SyncScopeUsageTracker scope) {

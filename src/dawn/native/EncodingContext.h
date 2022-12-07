@@ -78,19 +78,25 @@ class EncodingContext {
         return false;
     }
 
-    inline bool CheckCurrentEncoder(const ApiObjectBase* encoder) {
+    inline MaybeError CheckEncoderAlreadyEnded(const ApiObjectBase* encoder) {
+        if (encoder != mCurrentEncoder) {
+            return DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", encoder);
+        }
+        return {};
+    }
+
+    inline bool CheckCurrentEncoder(const ApiObjectBase* encoder, bool generateErrorImmediately) {
         if (mDestroyed) {
             HandleError(DAWN_VALIDATION_ERROR("Recording in a destroyed %s.", mCurrentEncoder));
             return false;
         }
-        if (DAWN_UNLIKELY(encoder != mCurrentEncoder)) {
+        if (!generateErrorImmediately && DAWN_UNLIKELY(encoder != mCurrentEncoder)) {
             if (mCurrentEncoder != mTopLevelEncoder) {
                 // The top level encoder was used when a pass encoder was current.
                 HandleError(DAWN_VALIDATION_ERROR("Command cannot be recorded while %s is active.",
                                                   mCurrentEncoder));
             } else {
-                HandleError(
-                    DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", encoder));
+                HandleError(DAWN_VALIDATION_ERROR("Recording in an error %s.", encoder));
             }
             return false;
         }
@@ -99,7 +105,7 @@ class EncodingContext {
 
     template <typename EncodeFunction>
     inline bool TryEncode(const ApiObjectBase* encoder, EncodeFunction&& encodeFunction) {
-        if (!CheckCurrentEncoder(encoder)) {
+        if (!CheckCurrentEncoder(encoder, false)) {
             return false;
         }
         ASSERT(!mWasMovedToIterator);
@@ -109,9 +115,10 @@ class EncodingContext {
     template <typename EncodeFunction, typename... Args>
     inline bool TryEncode(const ApiObjectBase* encoder,
                           EncodeFunction&& encodeFunction,
+                          bool generateErrorImmediately,
                           const char* formatStr,
                           const Args&... args) {
-        if (!CheckCurrentEncoder(encoder)) {
+        if (!CheckCurrentEncoder(encoder, generateErrorImmediately)) {
             return false;
         }
         ASSERT(!mWasMovedToIterator);

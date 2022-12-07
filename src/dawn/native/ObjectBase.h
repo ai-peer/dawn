@@ -79,7 +79,7 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
 
     ApiObjectBase(DeviceBase* device, LabelNotImplementedTag tag);
     ApiObjectBase(DeviceBase* device, const char* label);
-    ApiObjectBase(DeviceBase* device, ErrorTag tag);
+    ApiObjectBase(DeviceBase* device, ErrorTag tag, bool success = true);
     ~ApiObjectBase() override;
 
     virtual ObjectType GetType() const = 0;
@@ -94,6 +94,12 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
 
     // Dawn API
     void APISetLabel(const char* label);
+
+    // The setter and getter is used to track whether a true encoder is created successfully.
+    // If a fake encoder is being created due to some reason like the validation of encoder's
+    // descriptor fail, then mark mSuccess as false. Otherwise, mark mSuccess as true.
+    virtual void SetEncoderStatus(bool success) { mSuccess = success; }
+    virtual bool GetEncoderStatus() const { return mSuccess; }
 
   protected:
     // Overriding of the RefCounted's DeleteThis function ensures that instances of objects
@@ -125,6 +131,7 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     virtual void SetLabelImpl();
 
     std::string mLabel;
+    bool mSuccess = true;
 };
 
 }  // namespace dawn::native
