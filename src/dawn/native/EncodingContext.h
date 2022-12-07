@@ -89,8 +89,7 @@ class EncodingContext {
                 HandleError(DAWN_VALIDATION_ERROR("Command cannot be recorded while %s is active.",
                                                   mCurrentEncoder));
             } else {
-                HandleError(
-                    DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", encoder));
+                HandleError(DAWN_VALIDATION_ERROR("Recording in an error %s.", encoder));
             }
             return false;
         }

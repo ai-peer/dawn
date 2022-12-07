@@ -136,6 +136,14 @@ void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t 
 }
 
 void RenderPassEncoder::APIEnd() {
+    if (mEnded && IsValidationEnabled()) {
+        GetDevice()->ConsumedError(
+            DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", this));
+        return;
+    }
+
+    mEnded = true;
+
     mEncodingContext->TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
