@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab4c08f_131340f2",
+        "filename": "src/tint/sem/info.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-12-07T21:44:28Z",
+      "side": 1,
+      "message": "Yea, I\u0027d done this to fix a crash. Missed I could just change the type mapping to CastableBase for ast::Node.",
+      "parentUuid": "42033b4b_6a2d4282",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 42
+      },
+      "revId": "27a8690cfc78b1042c7abcbb08b2880fa78ad6a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f798b695_9642db34",
@@ -37,6 +61,30 @@
       "writtenOn": "2022-12-07T21:32:01Z",
       "side": 1,
       "message": "Needs to become `CastableBase`, as an `ast::Node` could be a `sem::Node` or `types::Node`. The common base for these is `CastableBase`.",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 8
+      },
+      "revId": "27a8690cfc78b1042c7abcbb08b2880fa78ad6a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa45032_78d6942c",
+        "filename": "src/tint/sem/type_mappings.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2022-12-07T21:44:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f798b695_9642db34",
       "range": {
         "startLine": 70,
         "startChar": 4,
