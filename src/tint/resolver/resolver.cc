@@ -313,47 +313,40 @@ type::Type* Resolver::Type(const ast::Type* ty) {
             return nullptr;
         },
         [&](const ast::ExternalTexture*) { return builder_->create<sem::ExternalTexture>(); },
-        [&](Default) -> type::Type* {
-            if (auto* resolved = sem_.ResolvedSymbol<type::Type>(ty)) {
-                return resolved;
-            }
-            if (auto* node = sem_.ResolvedSymbol<sem::Node>(ty)) {
-                return Switch(
-                    node,  //
-                    [&](sem::Variable* var) -> type::Type* {
-                        auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
-                        AddError("cannot use variable '" + name + "' as type", ty->source);
-                        AddNote("'" + name + "' declared here", var->Declaration()->source);
-                        return nullptr;
-                    },
-                    [&](sem::Function* func) -> type::Type* {
-                        auto name = builder_->Symbols().NameFor(func->Declaration()->symbol);
-                        AddError("cannot use function '" + name + "' as type", ty->source);
-                        AddNote("'" + name + "' declared here", func->Declaration()->source);
-                        return nullptr;
-                    },
-                    [&](Default) -> type::Type* {
-                        TINT_UNREACHABLE(Resolver, diagnostics_)
-                            << "Unhandled resolved type '"
-                            << (node ? node->TypeInfo().name : "<null>")
-                            << "' resolved from ast::Type '" << ty->TypeInfo().name << "'";
-                        return nullptr;
-                    });
-            }
-            if (auto* tn = ty->As<ast::TypeName>()) {
-                if (IsBuiltin(tn->name)) {
-                    auto name = builder_->Symbols().NameFor(tn->name);
-                    AddError("cannot use builtin '" + name + "' as type", ty->source);
+        [&](Default) {
+            auto* resolved = sem_.ResolvedSymbol(ty);
+            return Switch(
+                resolved,  //
+                [&](type::Type* type) { return type; },
+                [&](sem::Variable* var) {
+                    auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
+                    AddError("cannot use variable '" + name + "' as type", ty->source);
+                    AddNote("'" + name + "' declared here", var->Declaration()->source);
                     return nullptr;
-                }
-                if (auto* t = BuiltinTypeAlias(tn->name)) {
-                    return t;
-                }
-            }
-            TINT_UNREACHABLE(Resolver, diagnostics_)
-                << "Unhandled resolved type '" << ty->FriendlyName(builder_->Symbols())
-                << "' resolved from ast::Type '" << ty->TypeInfo().name << "'";
-            return nullptr;
+                },
+                [&](sem::Function* func) {
+                    auto name = builder_->Symbols().NameFor(func->Declaration()->symbol);
+                    AddError("cannot use function '" + name + "' as type", ty->source);
+                    AddNote("'" + name + "' declared here", func->Declaration()->source);
+                    return nullptr;
+                },
+                [&](Default) -> type::Type* {
+                    if (auto* tn = ty->As<ast::TypeName>()) {
+                        if (IsBuiltin(tn->name)) {
+                            auto name = builder_->Symbols().NameFor(tn->name);
+                            AddError("cannot use builtin '" + name + "' as type", ty->source);
+                            return nullptr;
+                        }
+                        if (auto* t = BuiltinTypeAlias(tn->name)) {
+                            return t;
+                        }
+                    }
+                    TINT_UNREACHABLE(Resolver, diagnostics_)
+                        << "Unhandled resolved type '"
+                        << (resolved ? resolved->TypeInfo().name : "<null>")
+                        << "' resolved from ast::Type '" << ty->TypeInfo().name << "'";
+                    return nullptr;
+                });
         });
 
     if (s) {
@@ -894,13 +887,7 @@ bool Resolver::AllocateOverridableConstantIds() {
 
 void Resolver::SetShadows() {
     for (auto it : dependencies_.shadows) {
-        CastableBase* b = nullptr;
-        if (auto* ty = sem_.GetUnchecked<type::Node>(it.value)) {
-            b = ty;
-        }
-        if (auto* sem = sem_.GetUnchecked<sem::Node>(it.value)) {
-            b = sem;
-        }
+        CastableBase* b = sem_.Get(it.value);
         if (!b) {
             TINT_ICE(Resolver, builder_->Diagnostics())
                 << "AST node '" << it.value->TypeInfo().name << "' had no semantic info\n"

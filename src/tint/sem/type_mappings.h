@@ -67,7 +67,7 @@ struct TypeMappings {
     ForLoopStatement* operator()(ast::ForLoopStatement*);
     Function* operator()(ast::Function*);
     IfStatement* operator()(ast::IfStatement*);
-    Node* operator()(ast::Node*);
+    CastableBase* operator()(ast::Node*);
     GlobalVariable* operator()(ast::Override*);
     Statement* operator()(ast::Statement*);
     Struct* operator()(ast::Struct*);
