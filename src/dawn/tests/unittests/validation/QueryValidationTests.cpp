@@ -44,6 +44,14 @@ TEST_F(QuerySetValidationTest, CreationWithoutFeatures) {
 
     // Creating a query set for other types of queries fails without features enabled.
     ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
+                                       {wgpu::PipelineStatisticName::ClipperInvocations}));
+    ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
+                                       {wgpu::PipelineStatisticName::ClipperPrimitivesOut}));
+    ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
+                                       {wgpu::PipelineStatisticName::ComputeShaderInvocations}));
+    ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
+                                       {wgpu::PipelineStatisticName::FragmentShaderInvocations}));
+    ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
                                        {wgpu::PipelineStatisticName::VertexShaderInvocations}));
     ASSERT_DEVICE_ERROR(CreateQuerySet(device, wgpu::QueryType::PipelineStatistics, 1,
                                        {wgpu::PipelineStatisticName::ClipperPrimitivesOut}));
@@ -278,12 +286,6 @@ class TimestampQueryValidationTest : public QuerySetValidationTest {
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::TimestampQuery};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
-
-        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
-        descriptor.nextInChain = &deviceTogglesDesc;
-        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
-        deviceTogglesDesc.disabledToggles = disabledToggles;
-        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }
@@ -582,12 +584,6 @@ class TimestampQueryInsidePassesValidationTest : public QuerySetValidationTest {
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 2;
 
-        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
-        descriptor.nextInChain = &deviceTogglesDesc;
-        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
-        deviceTogglesDesc.disabledToggles = disabledToggles;
-        deviceTogglesDesc.disabledTogglesCount = 1;
-
         return dawnAdapter.CreateDevice(&descriptor);
     }
 };
@@ -722,18 +718,13 @@ TEST_F(TimestampQueryInsidePassesValidationTest, WriteTimestampOnRenderPassEncod
 class PipelineStatisticsQueryValidationTest : public QuerySetValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        // Create a device with pipeline statistic query feature required. Note that Pipeline
+        // statistic query is an unsafe API, while DisallowUnsafeApis instance toggle is disabled
+        // when ValidationTest creating testing instance, so we can test it.
         wgpu::DeviceDescriptor descriptor;
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::PipelineStatisticsQuery};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
-
-        // TODO(crbug.com/1177506): Pipeline statistic query is an unsafe API, disable disallowing
-        // unsafe APIs to test it.
-        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
-        descriptor.nextInChain = &deviceTogglesDesc;
-        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
-        deviceTogglesDesc.disabledToggles = disabledToggles;
-        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }
