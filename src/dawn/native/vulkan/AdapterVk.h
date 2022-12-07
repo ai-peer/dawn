@@ -29,7 +29,8 @@ class Adapter : public AdapterBase {
   public:
     Adapter(InstanceBase* instance,
             VulkanInstance* vulkanInstance,
-            VkPhysicalDevice physicalDevice);
+            VkPhysicalDevice physicalDevice,
+            const TogglesState& requiredAdapterToggle);
     ~Adapter() override;
 
     // AdapterBase Implementation
@@ -39,22 +40,22 @@ class Adapter : public AdapterBase {
     VkPhysicalDevice GetPhysicalDevice() const;
     VulkanInstance* GetVulkanInstance() const;
 
-    bool IsDepthStencilFormatSupported(VkFormat format);
+    bool IsDepthStencilFormatSupported(VkFormat format) const;
 
-    bool IsAndroidQualcomm();
+    bool IsAndroidQualcomm() const;
 
   private:
     MaybeError InitializeImpl() override;
     MaybeError InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
 
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
-        const DeviceDescriptor* descriptor,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    TogglesState MakeDeviceTogglesImpl(
+        const RequiredTogglesSet& requiredDeviceToggles) const override;
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesState& deviceToggles) override;
 
-    MaybeError ValidateFeatureSupportedWithTogglesImpl(
-        wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
+                                                       const TogglesState& deviceToggles) override;
 
     VkPhysicalDevice mPhysicalDevice;
     Ref<VulkanInstance> mVulkanInstance;
