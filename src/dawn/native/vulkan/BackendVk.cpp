@@ -456,9 +456,11 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
-std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(
+    const RequiredTogglesSet& requiredAdapterToggles) {
     AdapterDiscoveryOptions options;
-    auto result = DiscoverAdapters(&options);
+    TogglesState adapterToggles = MakeAdapterToggles(requiredAdapterToggles);
+    auto result = DiscoverAdapters(&options, adapterToggles);
     if (result.IsError()) {
         GetInstance()->ConsumedError(result.AcquireError());
         return {};
@@ -467,7 +469,8 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* optionsBase) {
+    const AdapterDiscoveryOptionsBase* optionsBase,
+    const TogglesState& adapterToggles) {
     ASSERT(optionsBase->backendType == WGPUBackendType_Vulkan);
 
     const AdapterDiscoveryOptions* options =
@@ -496,8 +499,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         const std::vector<VkPhysicalDevice>& physicalDevices =
             mVulkanInstances[icd]->GetPhysicalDevices();
         for (uint32_t i = 0; i < physicalDevices.size(); ++i) {
-            Ref<Adapter> adapter =
-                AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(), physicalDevices[i]));
+            Ref<Adapter> adapter = AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(),
+                                                          physicalDevices[i], adapterToggles));
             if (instance->ConsumedError(adapter->Initialize())) {
                 continue;
             }
@@ -505,6 +508,12 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         }
     }
     return adapters;
+}
+
+TogglesState Backend::MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const {
+    TogglesState adapterTogglesState = TogglesState::CreateFromRequiredAndInheritedToggles(
+        requiredAdapterToggle, GetInstance()->GetInstanceTogglesState());
+    return adapterTogglesState;
 }
 
 BackendConnection* Connect(InstanceBase* instance) {
