@@ -165,7 +165,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"use_dxc",
       "Use DXC instead of FXC for compiling HLSL when both dxcompiler.dll and dxil.dll is "
       "available.",
-      "https://crbug.com/dawn/402", ToggleStage::Device}},
+      "https://crbug.com/dawn/402", ToggleStage::Adapter}},
     {Toggle::DisableRobustness,
      {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480",
       ToggleStage::Device}},
@@ -176,7 +176,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"disallow_unsafe_apis",
       "Produces validation errors on API entry points or parameter combinations that aren't "
       "considered secure yet.",
-      "http://crbug.com/1138528", ToggleStage::Device}},
+      "http://crbug.com/1138528", ToggleStage::Instance}},
     {Toggle::FlushBeforeClientWaitSync,
      {"flush_before_client_wait_sync",
       "Call glFlush before glClientWaitSync to work around bugs in the latter",
@@ -421,6 +421,55 @@ TogglesSet::Iterator TogglesSet::Iterate() const {
     return IterateBitSet(bitset);
 }
 
+bool TogglesSet::operator==(const TogglesSet& rhs) const {
+    return bitset == rhs.bitset;
+}
+
+bool TogglesSet::operator!=(const TogglesSet& rhs) const {
+    return !(*this == rhs);
+}
+
+RequiredTogglesSet::RequiredTogglesSet(ToggleStage stage) : requiredStage(stage) {}
+
+bool RequiredTogglesSet::operator==(const RequiredTogglesSet& rhs) const {
+    return (togglesProvided == rhs.togglesProvided) && (togglesEnabled == rhs.togglesEnabled);
+}
+
+bool RequiredTogglesSet::operator!=(const RequiredTogglesSet& rhs) const {
+    return !(*this == rhs);
+}
+
+RequiredTogglesSet RequiredTogglesSet::CreateFromTogglesDescriptor(
+    const DawnTogglesDescriptor* togglesDesc,
+    ToggleStage requiredStage) {
+    RequiredTogglesSet userToggles(requiredStage);
+
+    if (togglesDesc != nullptr) {
+        TogglesInfo togglesInfo;
+        for (uint32_t i = 0; i < togglesDesc->enabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->enabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                const ToggleInfo* toggleInfo = togglesInfo.GetToggleInfo(toggle);
+                if (toggleInfo->stage == requiredStage) {
+                    userToggles.togglesProvided.Set(toggle, true);
+                    userToggles.togglesEnabled.Set(toggle, true);
+                }
+            }
+        }
+        for (uint32_t i = 0; i < togglesDesc->disabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->disabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                const ToggleInfo* toggleInfo = togglesInfo.GetToggleInfo(toggle);
+                if (toggleInfo->stage == requiredStage) {
+                    userToggles.togglesProvided.Set(toggle, true);
+                    userToggles.togglesEnabled.Set(toggle, false);
+                }
+            }
+        }
+    }
+    return userToggles;
+}
+
 TogglesState::TogglesState(ToggleStage stage) : mStage(stage) {}
 
 TogglesState TogglesState::CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
@@ -456,6 +505,55 @@ TogglesState TogglesState::CreateFromTogglesDescriptor(const DawnTogglesDescript
     return togglesState;
 }
 
+// TODO: Clean this
+/*
+TogglesState TogglesState::CreateFromRequiredTogglesSet(
+    const RequiredTogglesSet& requiredTogglesSet) {
+    TogglesState togglesState(requiredTogglesSet.requiredStage);
+
+    togglesState.mTogglesSet = requiredTogglesSet.togglesProvided;
+    togglesState.mEnabledToggles = requiredTogglesSet.togglesEnabled;
+
+    return togglesState;
+}
+*/
+
+TogglesState TogglesState::CreateFromInitializerForTesting(
+    ToggleStage togglesStateStage,
+    std::initializer_list<Toggle> enabledToggles,
+    std::initializer_list<Toggle> disabledToggles) {
+    TogglesState togglesState(togglesStateStage);
+    for (auto enabledToggle : enabledToggles) {
+        // Ensure that all toggles are of required stage or earlier.
+        ToggleStage toggleStage = TogglesInfo::GetToggleInfo(enabledToggle)->stage;
+        ASSERT(toggleStage <= togglesStateStage);
+        togglesState.mTogglesSet.Set(enabledToggle, true);
+        togglesState.mEnabledToggles.Set(enabledToggle, true);
+    }
+    for (auto disabledToggle : disabledToggles) {
+        // Ensure that all toggles are of required stage or earlier.
+        ToggleStage toggleStage = TogglesInfo::GetToggleInfo(disabledToggle)->stage;
+        ASSERT(toggleStage <= togglesStateStage);
+        togglesState.mTogglesSet.Set(disabledToggle, true);
+        togglesState.mEnabledToggles.Set(disabledToggle, false);
+    }
+    return togglesState;
+}
+
+TogglesState& TogglesState::InheritToggles(const TogglesState& inheritedToggles) {
+    ASSERT(inheritedToggles.GetStage() < mStage);
+
+    // Do inheritance. All toggles that are set or force-set in the inherited toggles states would
+    // be set or force-set in the result toggles state.
+    for (uint32_t i : inheritedToggles.mTogglesSet.Iterate()) {
+        const Toggle& toggle = static_cast<Toggle>(i);
+        Inherit(toggle, inheritedToggles.mEnabledToggles.Has(toggle),
+                inheritedToggles.mForcedToggles.Has(toggle));
+    }
+
+    return *this;
+}
+
 // Set a toggle to given state, if the toggle has not been already set. Do nothing otherwise.
 void TogglesState::Default(Toggle toggle, bool enabled) {
     ASSERT(toggle != Toggle::InvalidEnum);
@@ -465,6 +563,14 @@ void TogglesState::Default(Toggle toggle, bool enabled) {
     }
     mTogglesSet.Set(toggle, true);
     mEnabledToggles.Set(toggle, enabled);
+}
+
+void TogglesState::Inherit(Toggle toggle, bool enabled, bool forced) {
+    ASSERT(toggle != Toggle::InvalidEnum);
+    ASSERT(TogglesInfo::GetToggleInfo(toggle)->stage < mStage);
+    mTogglesSet.Set(toggle, true);
+    mEnabledToggles.Set(toggle, enabled);
+    mForcedToggles.Set(toggle, forced);
 }
 
 void TogglesState::ForceSet(Toggle toggle, bool enabled) {
