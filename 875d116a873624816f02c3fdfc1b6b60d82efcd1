@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a262bccd_a27b4f6a",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T01:49:09Z",
+      "side": 0,
+      "message": "was this simply unused before?",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 36
+      },
+      "revId": "875d116a873624816f02c3fdfc1b6b60d82efcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "330bdabe_e3e2772d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T01:49:09Z",
+      "side": 1,
+      "message": "LGTM with nits\n\nto confirm, this isn\u0027t actually reachable from Javascript because [EnforceRange] catches it?",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5de1cc_f2704233",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T01:49:09Z",
+      "side": 1,
+      "message": "nit: probably can be camel case IsDoubleValueRepresentable\n\nthe casing for the other ones in this file were meant to look like static_cast and alignof builtins.",
+      "range": {
+        "startLine": 55,
+        "startChar": 5,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2c9201a_494daadb",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T01:49:09Z",
+      "side": 1,
+      "message": "nit: probably better if we change all callsites of `ValidateProgrammableStage` to `DAWN_TRY_CONTEXT(ValidateProgrammableStage(...), \"validating programmable stage ...\")` and include the entryPoint/module in that context message.",
+      "range": {
+        "startLine": 81,
+        "startChar": 77,
+        "endLine": 81,
+        "endChar": 83
+      },
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf2e436_a353d30d",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T01:49:09Z",
+      "side": 1,
+      "message": "unit: cast to double first. ditto for the others",
+      "range": {
+        "startLine": 267,
+        "startChar": 28,
+        "endLine": 267,
+        "endChar": 64
+      },
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
