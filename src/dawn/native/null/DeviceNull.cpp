@@ -30,7 +30,11 @@ namespace dawn::native::null {
 
 // Implementation of pre-Device objects: the null adapter, null backend connection and Connect()
 
-Adapter::Adapter(InstanceBase* instance) : AdapterBase(instance, wgpu::BackendType::Null) {
+Adapter::Adapter(InstanceBase* instance)
+    : Adapter(instance, TogglesState(ToggleInfo::ToggleStage::Adapter)) {}
+
+Adapter::Adapter(InstanceBase* instance, const TogglesState& adapterToggles)
+    : AdapterBase(instance, wgpu::BackendType::Null, adapterToggles) {
     mVendorId = 0;
     mDeviceId = 0;
     mName = "Null backend";
@@ -45,22 +49,20 @@ bool Adapter::SupportsExternalImages() const {
     return false;
 }
 
-// Used for the tests that intend to use an adapter without all features enabled.
-void Adapter::SetSupportedFeatures(const std::vector<wgpu::FeatureName>& requiredFeatures) {
-    mSupportedFeatures = {};
-    for (wgpu::FeatureName f : requiredFeatures) {
-        mSupportedFeatures.EnableFeature(f);
-    }
-}
-
 MaybeError Adapter::InitializeImpl() {
     return {};
 }
 
-MaybeError Adapter::InitializeSupportedFeaturesImpl() {
-    // Enable all features by default for the convenience of tests.
-    mSupportedFeatures.featuresBitSet.set();
-    return {};
+FeaturesSet Adapter::GetSupportedFeaturesUnderTogglesImpl(
+    const AdapterTogglesState& toggles) const {
+    // Enable all features by default for the convenience of tests. Note that experimental features
+    // will not be enabled by EnableFeature if DisallowUnsafeApis toggle is not disable.
+    FeaturesSet features;
+    for (size_t i = 0; i < static_cast<size_t>(dawn::native::Feature::EnumCount); i++) {
+        dawn::native::Feature feature = static_cast<dawn::native::Feature>(i);
+        EnableFeature(features, feature);
+    }
+    return features;
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -68,16 +70,15 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(
-    const DeviceDescriptor* descriptor,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    return Device::Create(this, descriptor, userProvidedToggles);
+TogglesState Adapter::MakeDeviceTogglesImpl(const RequiredTogglesSet& requiredDeviceToggles) const {
+    TogglesState deviceToggles = TogglesState::CreateFromRequiredAndInheritedToggles(
+        requiredDeviceToggles, GetAdapterTogglesState());
+    return deviceToggles;
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(
-    wgpu::FeatureName feature,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    return {};
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesState& deviceToggles) {
+    return Device::Create(this, descriptor, deviceToggles);
 }
 
 class Backend : public BackendConnection {
@@ -85,11 +86,20 @@ class Backend : public BackendConnection {
     explicit Backend(InstanceBase* instance)
         : BackendConnection(instance, wgpu::BackendType::Null) {}
 
-    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override {
+    TogglesState MakeAdapterToggles(
+        const RequiredTogglesSet& requiredAdapterToggle) const override {
+        TogglesState adapterTogglesState = TogglesState::CreateFromRequiredAndInheritedToggles(
+            requiredAdapterToggle, GetInstance()->GetInstanceTogglesState());
+        return adapterTogglesState;
+    }
+
+    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        const RequiredTogglesSet& requiredAdapterToggles) override {
         // There is always a single Null adapter because it is purely CPU based and doesn't
         // depend on the system.
         std::vector<Ref<AdapterBase>> adapters;
-        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance()));
+        TogglesState adapterToggles = MakeAdapterToggles(requiredAdapterToggles);
+        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), adapterToggles));
         adapters.push_back(std::move(adapter));
         return adapters;
     }
@@ -116,8 +126,8 @@ struct CopyFromStagingToBufferOperation : PendingOperation {
 // static
 ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
                                           const DeviceDescriptor* descriptor,
-                                          const TripleStateTogglesSet& userProvidedToggles) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, userProvidedToggles));
+                                          const TogglesState& deviceToggles) {
+    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, deviceToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
