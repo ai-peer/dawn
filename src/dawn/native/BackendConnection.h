@@ -20,6 +20,7 @@
 
 #include "dawn/native/Adapter.h"
 #include "dawn/native/DawnNative.h"
+#include "dawn/native/Toggles.h"
 
 namespace dawn::native {
 
@@ -33,13 +34,18 @@ class BackendConnection {
     wgpu::BackendType GetType() const;
     InstanceBase* GetInstance() const;
 
-    // Returns all the adapters for the system that can be created by the backend, without extra
-    // options (such as debug adapters, custom driver libraries, etc.)
-    virtual std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() = 0;
+    // Returns all the adapters for the system that can be created by the backend with required
+    // toggles set, without extra options (such as debug adapters, custom driver libraries, etc.)
+    virtual std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        const RequiredTogglesSet& requiredAdapterToggles) = 0;
 
-    // Returns new adapters created with the backend-specific options.
+    // Returns new adapters created with the backend-specific options and/or special toggles.
     virtual ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* options);
+        const AdapterDiscoveryOptionsBase* options,
+        const TogglesState& adapterToggles);
+
+    virtual TogglesState MakeAdapterToggles(
+        const RequiredTogglesSet& requiredAdapterToggle) const = 0;
 
   private:
     InstanceBase* mInstance = nullptr;
