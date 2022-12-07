@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9385213_2ec1d41f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-07T11:52:36Z",
+      "side": 1,
+      "message": "LGTM up to the discussions in the group.",
+      "revId": "511587fedec8400046fe1eccdf49d37565ce0ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "929c480d_b09d527c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-07T11:52:36Z",
+      "side": 1,
+      "message": "This part will depend on the discussions in the group. I\u0027m 90% sure we\u0027ll need to add a new format specifier in WGSL.",
+      "revId": "511587fedec8400046fe1eccdf49d37565ce0ea9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
