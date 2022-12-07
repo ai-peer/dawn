@@ -55,8 +55,9 @@ uint32_t GetVendorIdFromVendors(const char* vendor) {
 
 Adapter::Adapter(InstanceBase* instance,
                  wgpu::BackendType backendType,
-                 const TogglesState& adapterToggle)
-    : AdapterBase(instance, backendType, adapterToggle) {}
+                 const TogglesState& adapterToggle,
+                 const RequiredTogglesSet& requiredToggles)
+    : AdapterBase(instance, backendType, adapterToggle, requiredToggles) {}
 
 MaybeError Adapter::InitializeGLFunctions(void* (*getProc)(const char*)) {
     // Use getProc to populate the dispatch table
@@ -130,7 +131,7 @@ void Adapter::InitializeSupportedFeaturesImpl() {
 
         if (supportsS3TC && (supportsTextureSRGB || supportsS3TCSRGB) && supportsRGTC &&
             supportsBPTC) {
-            mSupportedFeatures.EnableFeature(dawn::native::Feature::TextureCompressionBC);
+            EnableFeature(dawn::native::Feature::TextureCompressionBC);
         }
     }
 
@@ -140,12 +141,12 @@ void Adapter::InitializeSupportedFeaturesImpl() {
     // OpenGL ES:
     // https://www.khronos.org/registry/OpenGL-Refpages/es3/html/glDrawElementsIndirect.xhtml
     if (mFunctions.IsAtLeastGL(4, 2)) {
-        mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+        EnableFeature(Feature::IndirectFirstInstance);
     }
 
     // ShaderF16
     if (mFunctions.IsGLExtensionSupported("GL_AMD_gpu_shader_half_float")) {
-        mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+        EnableFeature(Feature::ShaderF16);
     }
 }
 
@@ -219,11 +220,5 @@ ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor*
     std::unique_ptr<Device::Context> context;
     DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api));
     return Device::Create(this, descriptor, mFunctions, std::move(context), deviceToggles);
-}
-
-MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
-    wgpu::FeatureName feature,
-    const TogglesState& deviceToggles) {
-    return {};
 }
 }  // namespace dawn::native::opengl

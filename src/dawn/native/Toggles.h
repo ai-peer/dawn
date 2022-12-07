@@ -104,13 +104,42 @@ enum class Toggle {
 // A wrapper of the bitset to store if a toggle is present or not. This wrapper provides the
 // convenience to convert the enums of enum class Toggle to the indices of a bitset.
 struct TogglesSet {
-    std::bitset<static_cast<size_t>(Toggle::EnumCount)> bitset;
+    using BitSet = std::bitset<static_cast<size_t>(Toggle::EnumCount)>;
     using Iterator = BitSetIterator<static_cast<size_t>(Toggle::EnumCount), uint32_t>;
+
+    BitSet bitset;
 
     void Set(Toggle toggle, bool enabled);
     bool Has(Toggle toggle) const;
     size_t Count() const;
     Iterator Iterate() const;
+
+    bool operator==(const TogglesSet& rhs) const;
+    bool operator!=(const TogglesSet& rhs) const;
+};
+
+// RequiredTogglesSet records the user-provided toggles of a given stage, where some toggles are
+// explicitly enabled or disabled while the other toggles arenot privided. This structure is used to
+// cache adapters created with different toggles set required within an instance.
+struct RequiredTogglesSet {
+    // Indicating what stage this RequiredTogglesSet object would be used. All set toggles in
+    // RequiredTogglesSet must be of this stage.
+    ToggleStage requiredStage;
+
+    // TogglesSet togglesIsProvided;
+    // TogglesSet providedTogglesEnabled;
+    TogglesSet togglesProvided;
+    TogglesSet togglesEnabled;
+
+    explicit RequiredTogglesSet(ToggleStage stage);
+
+    bool operator==(const RequiredTogglesSet& rhs) const;
+    bool operator!=(const RequiredTogglesSet& rhs) const;
+
+    // Create a RequiredTogglesSet from a DawnTogglesDescriptor, only considering toggles of
+    // required toggle stage.
+    static RequiredTogglesSet CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
+                                                          ToggleStage requiredStage);
 };
 
 namespace stream {
