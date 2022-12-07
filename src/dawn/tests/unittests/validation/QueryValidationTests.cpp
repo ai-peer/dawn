@@ -269,11 +269,11 @@ class TimestampQueryValidationTest : public QuerySetValidationTest {
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
 
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* forceDisabledToggles[1] = {"disallow_unsafe_apis"};
-        togglesDesc.forceDisabledToggles = forceDisabledToggles;
-        togglesDesc.forceDisabledTogglesCount = 1;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
+        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
+        deviceTogglesDesc.disabledToggles = disabledToggles;
+        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }
@@ -560,11 +560,11 @@ class TimestampQueryInsidePassesValidationTest : public QuerySetValidationTest {
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 2;
 
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* forceDisabledToggles[1] = {"disallow_unsafe_apis"};
-        togglesDesc.forceDisabledToggles = forceDisabledToggles;
-        togglesDesc.forceDisabledTogglesCount = 1;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
+        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
+        deviceTogglesDesc.disabledToggles = disabledToggles;
+        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }
@@ -707,11 +707,11 @@ class PipelineStatisticsQueryValidationTest : public QuerySetValidationTest {
 
         // TODO(crbug.com/1177506): Pipeline statistic query is an unsafe API, disable disallowing
         // unsafe APIs to test it.
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* forceDisabledToggles[1] = {"disallow_unsafe_apis"};
-        togglesDesc.forceDisabledToggles = forceDisabledToggles;
-        togglesDesc.forceDisabledTogglesCount = 1;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
+        const char* disabledToggles[1] = {"disallow_unsafe_apis"};
+        deviceTogglesDesc.disabledToggles = disabledToggles;
+        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }

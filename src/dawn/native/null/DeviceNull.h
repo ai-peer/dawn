@@ -173,7 +173,7 @@ class Device final : public DeviceBase {
 
 class Adapter : public AdapterBase {
   public:
-    explicit Adapter(InstanceBase* instance);
+    Adapter(InstanceBase* instance, const TogglesState& adapterToggles);
     ~Adapter() override;
 
     // AdapterBase Implementation
