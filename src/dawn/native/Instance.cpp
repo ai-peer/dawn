@@ -23,6 +23,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Surface.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 
@@ -138,7 +139,10 @@ void InstanceBase::WillDropLastExternalRef() {
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    // DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor,
+                                                       wgpu::SType::DawnTogglesDescriptor}}));
+
     const DawnInstanceDescriptor* dawnDesc = nullptr;
     FindInChain(descriptor->nextInChain, &dawnDesc);
     if (dawnDesc != nullptr) {
@@ -146,6 +150,12 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
             mRuntimeSearchPaths.push_back(dawnDesc->additionalRuntimeSearchPaths[i]);
         }
     }
+
+    const DawnTogglesDescriptor* toggleDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &toggleDesc);
+    if (toggleDesc != nullptr) {
+    }
+
     // Default paths to search are next to the shared library, next to the executable, and
     // no path (just libvulkan.so).
     if (auto p = GetModuleDirectory()) {
