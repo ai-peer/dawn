@@ -26,9 +26,13 @@ class Backend : public BackendConnection {
     explicit Backend(InstanceBase* instance);
     ~Backend() override;
 
-    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
+    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        const RequiredTogglesSet& requiredAdapterToggles) override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* optionsBase) override;
+        const AdapterDiscoveryOptionsBase* optionsBase,
+        const TogglesState& adapterToggles) override;
+
+    TogglesState MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const override;
 };
 
 }  // namespace dawn::native::metal
