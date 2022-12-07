@@ -33,6 +33,24 @@
       "message": "Nice! LGTM. Do we need a similar fix in the wire or is that ok?",
       "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7b9d9f_7236fade",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-07T19:40:07Z",
+      "side": 1,
+      "message": "\u003e Do we need a similar fix in the wire or is that ok?\n\nI think we need update in wire. I don\u0027t think MapAsync early rejection has been implemented in wire yet.",
+      "parentUuid": "fcf85456_aac097eb",
+      "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
