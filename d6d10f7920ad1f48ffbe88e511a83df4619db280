@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaeed411_4d61e6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-07T08:20:50Z",
+      "side": 1,
+      "message": "Please refer to https://dawn-review.googlesource.com/c/dawn/+/110448/comments/d854cc38_1c347672 for the problem this CL resolves.",
+      "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
