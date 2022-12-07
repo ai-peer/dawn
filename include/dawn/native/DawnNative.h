@@ -102,6 +102,10 @@ class DAWN_NATIVE_EXPORT Adapter {
     // to implement the swapchain and interop APIs in Chromium.
     bool SupportsExternalImages() const;
 
+    // Used to distinguish between adapters created with different toggles required.
+    bool IsCreatedWithRequiredToggles(
+        const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const;
+
     explicit operator bool() const;
 
     // Create a device on this adapter. On an error, nullptr is returned.
@@ -155,11 +159,12 @@ class DAWN_NATIVE_EXPORT Instance {
 
     // Gather all adapters in the system that can be accessed with no special options. These
     // adapters will later be returned by GetAdapters.
-    void DiscoverDefaultAdapters();
+    void DiscoverDefaultAdapters(const WGPUDawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     // Adds adapters that can be discovered with the options provided (like a getProcAddress).
     // The backend is chosen based on the type of the options used. Returns true on success.
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                          const WGPUDawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     // Returns all the adapters that the instance knows about.
     std::vector<Adapter> GetAdapters() const;
