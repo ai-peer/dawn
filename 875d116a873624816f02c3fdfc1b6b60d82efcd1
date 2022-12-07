@@ -22,6 +22,30 @@
       },
       "revId": "875d116a873624816f02c3fdfc1b6b60d82efcd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9250f1a6_70f7d2b7",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-07T19:41:29Z",
+      "side": 0,
+      "message": "This should be removed together with the backend-specific pipeline overridable implementations. But it was left behind.",
+      "parentUuid": "a262bccd_a27b4f6a",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 233,
+        "endChar": 36
+      },
+      "revId": "875d116a873624816f02c3fdfc1b6b60d82efcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
