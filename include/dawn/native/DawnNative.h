@@ -56,6 +56,15 @@ struct ToggleInfo {
     const char* name;
     const char* description;
     const char* url;
+
+    // Each toggle is assigned with a TogglesStage, indicating the validation and earliest usage
+    // time of the toggle. Each TogglesState is also of a immutable toggle stage, indicating where
+    // this TogglesState is used.
+    // TODO(dawn:1495): Currently all toggles are device toggles, i.e. of Device toggle stage, and
+    // only devices hold TogglesState, i.e. all TogglesState is of Device toggle stage. Add instance
+    // and adapter stages after instance and adapter toggles implemented.
+    enum class ToggleStage { Device };
+    ToggleStage stage;
 };
 
 // A struct to record the information of a feature. A feature is a GPU feature that is not
