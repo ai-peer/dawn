@@ -137,6 +137,12 @@ bool Adapter::SupportsExternalImages() const {
     return mImpl->SupportsExternalImages();
 }
 
+bool Adapter::IsCreatedWithRequiredToggles(
+    const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const {
+    return mImpl->IsCreatedWithRequiredToggles(RequiredTogglesSet::CreateFromTogglesDescriptor(
+        FromAPI(requiredAdapterToggles), ToggleStage::Adapter));
+}
+
 Adapter::operator bool() const {
     return mImpl != nullptr;
 }
@@ -175,10 +181,6 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
                             userdata);
 }
 
-void Adapter::ResetInternalDeviceForTesting() {
-    mImpl->ResetInternalDeviceForTesting();
-}
-
 // AdapterDiscoverOptionsBase
 
 AdapterDiscoveryOptionsBase::AdapterDiscoveryOptionsBase(WGPUBackendType type)
@@ -196,12 +198,13 @@ Instance::~Instance() {
     }
 }
 
-void Instance::DiscoverDefaultAdapters() {
-    mImpl->DiscoverDefaultAdapters();
+void Instance::DiscoverDefaultAdapters(const WGPUDawnTogglesDescriptor* requiredAdapterToggles) {
+    mImpl->DiscoverDefaultAdapters(FromAPI(requiredAdapterToggles));
 }
 
-bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) {
-    return mImpl->DiscoverAdapters(options);
+bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                                const WGPUDawnTogglesDescriptor* requiredAdapterToggles) {
+    return mImpl->DiscoverAdapters(options, FromAPI(requiredAdapterToggles));
 }
 
 std::vector<Adapter> Instance::GetAdapters() const {
@@ -246,6 +249,10 @@ void Instance::SetPlatform(dawn::platform::Platform* platform) {
 
 uint64_t Instance::GetDeviceCountForTesting() const {
     return mImpl->GetDeviceCountForTesting();
+}
+
+void Instance::ResetAdaptersForTesting() {
+    mImpl->ResetAdaptersForTesting();
 }
 
 WGPUInstance Instance::Get() const {
