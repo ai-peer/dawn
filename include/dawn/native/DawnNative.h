@@ -29,6 +29,7 @@ class Platform;
 namespace wgpu {
 struct AdapterProperties;
 struct DeviceDescriptor;
+struct DawnTogglesDescriptor;
 }  // namespace wgpu
 
 namespace dawn::native {
@@ -56,6 +57,21 @@ struct ToggleInfo {
     const char* name;
     const char* description;
     const char* url;
+
+    // Each toggle is assigned with a TogglesStage, indicating the inheritance, validation and
+    // earliest
+    // usage time of the toggle.
+    // For a toggle with TogglesStage:
+    // * Instance: The toggle must be set or force set in and only in creating the instance, and all
+    //     adapters and devices created by this instance will inherited the instance's toggle state.
+    //     Both instance, adapter and device may have behaviors depending on this toggle.
+    // * Adapter: The toggle must be set or force set in and only in creating the adapter, and all
+    //     devices created by this instance will inherited the instance's toggle state. Only adapter
+    //     and device may have behaviors depending on this toggle.
+    // * Device: The toggle must be set or force set in and only in creating the device, and only
+    //     device may have behaviors depending on this toggle.
+    enum class ToggleStage { Instance, Adapter, Device };
+    ToggleStage stage;
 };
 
 // A struct to record the information of a feature. A feature is a GPU feature that is not
@@ -101,6 +117,10 @@ class DAWN_NATIVE_EXPORT Adapter {
     // Check that the Adapter is able to support importing external images. This is necessary
     // to implement the swapchain and interop APIs in Chromium.
     bool SupportsExternalImages() const;
+
+    // Used to distinguish between adapters created with different toggles required.
+    bool IsCreatedWithRequiredToggles(
+        const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const;
 
     explicit operator bool() const;
 
@@ -155,11 +175,12 @@ class DAWN_NATIVE_EXPORT Instance {
 
     // Gather all adapters in the system that can be accessed with no special options. These
     // adapters will later be returned by GetAdapters.
-    void DiscoverDefaultAdapters();
+    void DiscoverDefaultAdapters(const WGPUDawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     // Adds adapters that can be discovered with the options provided (like a getProcAddress).
     // The backend is chosen based on the type of the options used. Returns true on success.
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                          const WGPUDawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     // Returns all the adapters that the instance knows about.
     std::vector<Adapter> GetAdapters() const;
