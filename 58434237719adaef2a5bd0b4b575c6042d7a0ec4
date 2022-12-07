@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "111efd17_6d2bd228",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-07T23:02:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63a08092_ef15c09d",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 48
+      },
+      "revId": "58434237719adaef2a5bd0b4b575c6042d7a0ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54f95ddf_59f6802b",
@@ -54,6 +78,30 @@
       "writtenOn": "2022-12-07T21:57:25Z",
       "side": 1,
       "message": "Changes here could be reverted. I don\u0027t think there\u0027s any value in making the `SEM` a template parameter.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 106,
+        "endChar": 0
+      },
+      "revId": "58434237719adaef2a5bd0b4b575c6042d7a0ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5177396_3b5a5c63",
+        "filename": "src/tint/sem/info.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-07T23:02:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54f95ddf_59f6802b",
       "range": {
         "startLine": 90,
         "startChar": 0,
