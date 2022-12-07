@@ -30,7 +30,7 @@ namespace dawn::native::null {
 
 // Implementation of pre-Device objects: the null adapter, null backend connection and Connect()
 
-Adapter::Adapter(InstanceBase* instance) : AdapterBase(instance, wgpu::BackendType::Null) {
+Adapter::Adapter(InstanceBase* instance, const TogglesState& adapterToggles) : AdapterBase(instance, wgpu::BackendType::Null, adapterToggles) {
     mVendorId = 0;
     mDeviceId = 0;
     mName = "Null backend";
@@ -85,11 +85,18 @@ class Backend : public BackendConnection {
     explicit Backend(InstanceBase* instance)
         : BackendConnection(instance, wgpu::BackendType::Null) {}
 
+    TogglesState MakeAdapterToggles(const TogglesState& requiredAdapterToggle) const override {
+        TogglesState adapterToggleStates =
+            GenerateInstanceInheritedAdapterToggles(requiredAdapterToggle);
+        return adapterToggleStates;
+    }
+
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override {
         // There is always a single Null adapter because it is purely CPU based and doesn't
         // depend on the system.
         std::vector<Ref<AdapterBase>> adapters;
-        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance()));
+        TogglesState defaultAdapterToggles = MakeAdapterToggles(TogglesState{});
+        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), defaultAdapterToggles));
         adapters.push_back(std::move(adapter));
         return adapters;
     }

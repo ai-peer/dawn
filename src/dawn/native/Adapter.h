@@ -34,7 +34,7 @@ class DeviceBase;
 
 class AdapterBase : public RefCounted {
   public:
-    AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
+    AdapterBase(InstanceBase* instance, wgpu::BackendType backend, const TogglesState& adapterToggles);
     ~AdapterBase() override;
 
     MaybeError Initialize();
@@ -110,6 +110,7 @@ class AdapterBase : public RefCounted {
     virtual MaybeError ResetInternalDeviceForTestingImpl();
     Ref<InstanceBase> mInstance;
     wgpu::BackendType mBackend;
+    TogglesState mAdapterTogglesState;
     CombinedLimits mLimits;
     bool mUseTieredLimits = false;
 };

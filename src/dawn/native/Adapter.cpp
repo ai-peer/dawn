@@ -26,8 +26,10 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-    : mInstance(instance), mBackend(backend) {
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         wgpu::BackendType backend,
+                         const TogglesState& adapterToggles)
+    : mInstance(instance), mBackend(backend), mAdapterTogglesState(adapterToggles) {
     mSupportedFeatures.EnableFeature(Feature::DawnNative);
     mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
 }
@@ -233,10 +235,10 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     // Check overriden toggles before creating device, as some device features may be guarded by
     // toggles, and requiring such features without using corresponding toggles should fails the
     // device creating.
-    const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &togglesDesc);
+    const DawnTogglesDescriptor* deviceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &deviceTogglesDesc);
     TripleStateTogglesSet userProvidedToggles =
-        TripleStateTogglesSet::CreateFromTogglesDeviceDescriptor(togglesDesc);
+        TripleStateTogglesSet::CreateFromTogglesDeviceDescriptor(deviceTogglesDesc);
 
     // Validate all required features are supported by the adapter and suitable under given toggles.
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {

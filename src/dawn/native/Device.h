@@ -569,8 +569,9 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     FormatTable mFormatTable;
 
-    TogglesSet mEnabledToggles;
-    TogglesSet mOverridenToggles;
+    // TogglesSet mEnabledToggles;
+    // TogglesSet mOverridenToggles;
+    TogglesState mDeviceToggleStates;
     size_t mLazyClearCountForTesting = 0;
     std::atomic_uint64_t mNextPipelineCompatibilityToken;
 

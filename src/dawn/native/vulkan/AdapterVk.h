@@ -29,7 +29,8 @@ class Adapter : public AdapterBase {
   public:
     Adapter(InstanceBase* instance,
             VulkanInstance* vulkanInstance,
-            VkPhysicalDevice physicalDevice);
+            VkPhysicalDevice physicalDevice,
+            const TogglesState& requiredAdapterToggle);
     ~Adapter() override;
 
     // AdapterBase Implementation

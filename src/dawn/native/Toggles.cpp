@@ -16,6 +16,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -362,19 +363,19 @@ std::vector<const char*> TogglesSet::GetContainedToggleNames() const {
 }
 
 TripleStateTogglesSet TripleStateTogglesSet::CreateFromTogglesDeviceDescriptor(
-    const DawnTogglesDeviceDescriptor* togglesDesc) {
+    const DawnTogglesDescriptor* togglesDesc) {
     TripleStateTogglesSet userToggles;
     if (togglesDesc != nullptr) {
         TogglesInfo togglesInfo;
-        for (uint32_t i = 0; i < togglesDesc->forceEnabledTogglesCount; ++i) {
-            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->forceEnabledToggles[i]);
+        for (uint32_t i = 0; i < togglesDesc->enabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->enabledToggles[i]);
             if (toggle != Toggle::InvalidEnum) {
                 userToggles.togglesIsProvided.Set(toggle, true);
                 userToggles.providedTogglesEnabled.Set(toggle, true);
             }
         }
-        for (uint32_t i = 0; i < togglesDesc->forceDisabledTogglesCount; ++i) {
-            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->forceDisabledToggles[i]);
+        for (uint32_t i = 0; i < togglesDesc->disabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->disabledToggles[i]);
             if (toggle != Toggle::InvalidEnum) {
                 userToggles.togglesIsProvided.Set(toggle, true);
                 userToggles.providedTogglesEnabled.Set(toggle, false);
@@ -427,6 +428,107 @@ std::vector<const char*> TripleStateTogglesSet::GetDisabledToggleNames() const {
         const Toggle& toggle = static_cast<Toggle>(i);
         // Disabled toggles are those provided but not enabled.
         if (!providedTogglesEnabled.Has(toggle)) {
+            const char* toggleName = ToggleEnumToName(toggle);
+            enabledTogglesName[index] = toggleName;
+            ++index;
+        }
+    }
+
+    return enabledTogglesName;
+}
+
+TogglesState TogglesState::CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc) {
+    TogglesState toggles;
+    if (togglesDesc != nullptr) {
+        TogglesInfo togglesInfo;
+        for (uint32_t i = 0; i < togglesDesc->enabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->enabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                toggles.togglesIsSet.Set(toggle, true);
+                toggles.togglesIsEnabled.Set(toggle, true);
+            }
+        }
+        for (uint32_t i = 0; i < togglesDesc->disabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->disabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                toggles.togglesIsSet.Set(toggle, true);
+                toggles.togglesIsEnabled.Set(toggle, false);
+            }
+        }
+    }
+    return toggles;
+}
+
+TogglesState TogglesState::CreateFromTripleStateTogglesSet(
+    const TripleStateTogglesSet& togglesSet) {
+    TogglesState toggles;
+    toggles.togglesIsSet = togglesSet.togglesIsProvided;
+    toggles.togglesIsEnabled = togglesSet.providedTogglesEnabled;
+    return toggles;
+}
+
+// Set a toggle to given state, if the toggle has not been already set. Do nothing otherwise.
+void TogglesState::SetIfNotAlready(Toggle toggle, bool enabled) {
+    ASSERT(toggle != Toggle::InvalidEnum);
+    if (togglesIsSet.Has(toggle)) {
+        return;
+    }
+    togglesIsSet.Set(toggle, true);
+    togglesIsEnabled.Set(toggle, enabled);
+}
+
+void TogglesState::ForceSet(Toggle toggle, bool enabled) {
+    ASSERT(toggle != Toggle::InvalidEnum);
+    // Make sure that each toggle is force-set at most once.
+    ASSERT(!togglesIsForced.Has(toggle));
+    if (togglesIsSet.Has(toggle) && togglesIsEnabled.Has(toggle) != enabled) {
+        dawn::WarningLog() << "Forcing toggle \"" << ToggleEnumToName(toggle) << "\" to " << enabled
+                           << " when it was " << !enabled;
+    }
+    togglesIsSet.Set(toggle, true);
+    togglesIsEnabled.Set(toggle, enabled);
+    togglesIsForced.Set(toggle, true);
+}
+
+bool TogglesState::IsSet(Toggle toggle) const {
+    return togglesIsSet.Has(toggle);
+}
+
+// Return true if the toggle is provided in enable list, and false otherwise.
+bool TogglesState::IsEnabled(Toggle toggle) const {
+    return togglesIsSet.Has(toggle) && togglesIsEnabled.Has(toggle);
+}
+
+// Return true if the toggle is provided in disable list, and false otherwise.
+bool TogglesState::IsDisabled(Toggle toggle) const {
+    return togglesIsSet.Has(toggle) && !togglesIsEnabled.Has(toggle);
+}
+
+std::vector<const char*> TogglesState::GetEnabledToggleNames() const {
+    std::vector<const char*> enabledTogglesName(togglesIsEnabled.toggleBitset.count());
+
+    uint32_t index = 0;
+    for (uint32_t i : IterateBitSet(togglesIsEnabled.toggleBitset)) {
+        const Toggle& toggle = static_cast<Toggle>(i);
+        // All enabled toggles must be provided.
+        ASSERT(togglesIsSet.Has(toggle));
+        const char* toggleName = ToggleEnumToName(toggle);
+        enabledTogglesName[index] = toggleName;
+        ++index;
+    }
+
+    return enabledTogglesName;
+}
+
+std::vector<const char*> TogglesState::GetDisabledToggleNames() const {
+    std::vector<const char*> enabledTogglesName(togglesIsSet.toggleBitset.count() -
+                                                togglesIsEnabled.toggleBitset.count());
+
+    uint32_t index = 0;
+    for (uint32_t i : IterateBitSet(togglesIsSet.toggleBitset)) {
+        const Toggle& toggle = static_cast<Toggle>(i);
+        // Disabled toggles are those provided but not enabled.
+        if (!togglesIsEnabled.Has(toggle)) {
             const char* toggleName = ToggleEnumToName(toggle);
             enabledTogglesName[index] = toggleName;
             ++index;

@@ -174,8 +174,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
                        const DeviceDescriptor* descriptor,
                        const TripleStateTogglesSet& userProvidedToggles)
     : mAdapter(adapter),
-      mEnabledToggles(userProvidedToggles.providedTogglesEnabled),
-      mOverridenToggles(userProvidedToggles.togglesIsProvided),
+      mDeviceToggleStates(TogglesState::CreateFromTripleStateTogglesSet(userProvidedToggles)),
       mNextPipelineCompatibilityToken(1) {
     mAdapter->GetInstance()->IncrementDeviceCountForTesting();
     ASSERT(descriptor != nullptr);
@@ -183,6 +182,8 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
 
+    // mDeviceToggleStates is already initialized by user-provided toggles, future Set (not
+    // ForceSet) will not change the toggle status that are alreasy set.
     SetDefaultToggles();
     ApplyFeatures(descriptor);
 
@@ -209,7 +210,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     // descriptor is added (and probably handled here), the cache key recording needs to be
     // updated.
     StreamIn(&mDeviceCacheKey, kDawnVersion, adapterProperties, mEnabledFeatures.featuresBitSet,
-             mEnabledToggles.toggleBitset, cacheDesc);
+             mDeviceToggleStates.togglesIsEnabled.toggleBitset, cacheDesc);
 }
 
 DeviceBase::DeviceBase() : mState(State::Alive) {
@@ -1747,25 +1748,20 @@ DynamicUploader* DeviceBase::GetDynamicUploader() const {
 // The Toggle device facility
 
 std::vector<const char*> DeviceBase::GetTogglesUsed() const {
-    return mEnabledToggles.GetContainedToggleNames();
+    return mDeviceToggleStates.GetEnabledToggleNames();
 }
 
 bool DeviceBase::IsToggleEnabled(Toggle toggle) const {
-    return mEnabledToggles.Has(toggle);
+    // return mEnabledToggles.Has(toggle);
+    return mDeviceToggleStates.IsEnabled(toggle);
 }
 
 void DeviceBase::SetToggle(Toggle toggle, bool isEnabled) {
-    if (!mOverridenToggles.Has(toggle)) {
-        mEnabledToggles.Set(toggle, isEnabled);
-    }
+    mDeviceToggleStates.SetIfNotAlready(toggle, isEnabled);
 }
 
 void DeviceBase::ForceSetToggle(Toggle toggle, bool isEnabled) {
-    if (mOverridenToggles.Has(toggle) && mEnabledToggles.Has(toggle) != isEnabled) {
-        dawn::WarningLog() << "Forcing toggle \"" << ToggleEnumToName(toggle) << "\" to "
-                           << isEnabled << " when it was overriden to be " << !isEnabled;
-    }
-    mEnabledToggles.Set(toggle, isEnabled);
+    mDeviceToggleStates.ForceSet(toggle, isEnabled);
 }
 
 void DeviceBase::SetDefaultToggles() {

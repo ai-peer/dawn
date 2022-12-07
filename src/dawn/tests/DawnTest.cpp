@@ -853,8 +853,8 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
         ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
     }
 
-    std::vector<const char*> forceEnabledToggles = mParam.forceEnabledWorkarounds;
-    std::vector<const char*> forceDisabledToggles = mParam.forceDisabledWorkarounds;
+    std::vector<const char*> enabledToggles = mParam.forceEnabledWorkarounds;
+    std::vector<const char*> disabledToggles = mParam.forceDisabledWorkarounds;
 
     std::vector<wgpu::FeatureName> requiredFeatures = GetRequiredFeatures();
 
@@ -863,20 +863,20 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     wgpu::RequiredLimits requiredLimits = GetRequiredLimits(supportedLimits);
 
     // Disabled disallowing unsafe APIs so we can test them.
-    forceDisabledToggles.push_back("disallow_unsafe_apis");
+    disabledToggles.push_back("disallow_unsafe_apis");
 
     for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
         const dawn::native::ToggleInfo* info =
             gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
         ASSERT(info != nullptr);
-        forceEnabledToggles.push_back(info->name);
+        enabledToggles.push_back(info->name);
     }
 
     for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
         const dawn::native::ToggleInfo* info =
             gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
         ASSERT(info != nullptr);
-        forceDisabledToggles.push_back(info->name);
+        disabledToggles.push_back(info->name);
     }
 
     wgpu::DeviceDescriptor deviceDescriptor = {};
@@ -884,15 +884,15 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
     deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
 
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
-    deviceDescriptor.nextInChain = &togglesDesc;
-    togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
-    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    wgpu::DawnTogglesDescriptor deviceTogglesDesc = {};
+    deviceDescriptor.nextInChain = &deviceTogglesDesc;
+    deviceTogglesDesc.enabledToggles = enabledToggles.data();
+    deviceTogglesDesc.enabledTogglesCount = enabledToggles.size();
+    deviceTogglesDesc.disabledToggles = disabledToggles.data();
+    deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
 
     wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
-    togglesDesc.nextInChain = &cacheDesc;
+    deviceTogglesDesc.nextInChain = &cacheDesc;
     cacheDesc.isolationKey = isolationKey.c_str();
 
     return mBackendAdapter.CreateDevice(&deviceDescriptor);
