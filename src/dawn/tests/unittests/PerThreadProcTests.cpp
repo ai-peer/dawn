@@ -20,6 +20,7 @@
 #include "dawn/dawn_thread_dispatch_proc.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/null/DeviceNull.h"
 #include "dawn/webgpu_cpp.h"
 

@@ -457,9 +457,11 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
-std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) {
     AdapterDiscoveryOptions options;
-    auto result = DiscoverAdapters(&options);
+
+    auto result = DiscoverAdapters(&options, adapterTogglesDescriptor);
     if (result.IsError()) {
         GetInstance()->ConsumedError(result.AcquireError());
         return {};
@@ -468,11 +470,17 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* optionsBase) {
+    const AdapterDiscoveryOptionsBase* optionsBase,
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) {
     ASSERT(optionsBase->backendType == WGPUBackendType_Vulkan);
 
     const AdapterDiscoveryOptions* options =
         static_cast<const AdapterDiscoveryOptions*>(optionsBase);
+
+    RequiredTogglesSet requiredToggles = RequiredTogglesSet::CreateFromTogglesDescriptor(
+        adapterTogglesDescriptor, ToggleStage::Adapter);
+    // Setup adapter toggles state
+    TogglesState adapterToggles = MakeAdapterToggles(adapterTogglesDescriptor);
 
     std::vector<Ref<AdapterBase>> adapters;
 
@@ -498,7 +506,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
             mVulkanInstances[icd]->GetPhysicalDevices();
         for (uint32_t i = 0; i < physicalDevices.size(); ++i) {
             Ref<Adapter> adapter =
-                AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(), physicalDevices[i]));
+                AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(), physicalDevices[i],
+                                       adapterToggles, requiredToggles));
             if (instance->ConsumedError(adapter->Initialize())) {
                 continue;
             }

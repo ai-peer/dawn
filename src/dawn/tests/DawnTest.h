@@ -577,6 +577,9 @@ class DawnTestBase {
     // the client first push the key into this queue, which is then consumed by the server.
     std::queue<std::string> mNextIsolationKeyQueue;
 
+    // Internal adapter creation function for default adapter creation with toggles in test params.
+    WGPUAdapter RequestAdapterImpl();
+
     // Internal device creation function for default device creation with some optional overrides.
     WGPUDevice CreateDeviceImpl(std::string isolationKey);
 
