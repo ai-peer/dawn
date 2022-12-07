@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42033b4b_6a2d4282",
+        "filename": "src/tint/sem/info.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-07T21:32:01Z",
+      "side": 1,
+      "message": "I don\u0027t understand why you need to split everything into two here.\n\nYou can change `nodes_` to be `std::vector\u003cconst CastableBase*\u003e`, and everything will work as-is. No need to fork the methods.",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 42
+      },
+      "revId": "27a8690cfc78b1042c7abcbb08b2880fa78ad6a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f798b695_9642db34",
+        "filename": "src/tint/sem/type_mappings.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-07T21:32:01Z",
+      "side": 1,
+      "message": "Needs to become `CastableBase`, as an `ast::Node` could be a `sem::Node` or `types::Node`. The common base for these is `CastableBase`.",
+      "range": {
+        "startLine": 70,
+        "startChar": 4,
+        "endLine": 70,
+        "endChar": 8
+      },
+      "revId": "27a8690cfc78b1042c7abcbb08b2880fa78ad6a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09f314f0_7f2eec4a",
+        "filename": "src/tint/type/array_count.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-07T21:32:01Z",
+      "side": 1,
+      "message": "nice - glad this all works as I hoped.",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 2
+      },
+      "revId": "27a8690cfc78b1042c7abcbb08b2880fa78ad6a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
