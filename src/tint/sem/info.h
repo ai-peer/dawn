@@ -30,6 +30,10 @@
 namespace tint::sem {
 class Module;
 }  // namespace tint::sem
+namespace tint::type {
+class Node;
+class Type;
+}  // namespace tint::type
 
 namespace tint::sem {
 
@@ -67,35 +71,84 @@ class Info {
         nodes_.resize(std::max(highest_node_id.value + 1, nodes_.size()));
     }
 
+    /// @param highest_node_id the last allocated (numerically highest) AST node identifier.
+    void ReserveType(ast::NodeID highest_node_id) {
+        types_.resize(std::max(highest_node_id.value + 1, types_.size()));
+    }
+
     /// Get looks up the semantic information for the AST node `ast_node`.
     /// @param ast_node the AST node
     /// @returns a pointer to the semantic node if found, otherwise nullptr
     template <typename SEM = InferFromAST,
               typename AST = CastableBase,
               typename RESULT = GetResultType<SEM, AST>>
-    const RESULT* Get(const AST* ast_node) const {
+    traits::EnableIf<!traits::IsTypeOrDerived<RESULT, type::Node>, const RESULT>* Get(
+        const AST* ast_node) const {
         if (ast_node && ast_node->node_id.value < nodes_.size()) {
             return As<RESULT>(nodes_[ast_node->node_id.value]);
         }
         return nullptr;
     }
 
+    /// Get looks up the type information for the AST node `ast_node`.
+    /// @param ast_node the AST node
+    /// @returns a pointer to the type node if found, otherwise nullptr
+    template <typename TYPE = InferFromAST,
+              typename AST = CastableBase,
+              typename RESULT = GetResultType<TYPE, AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<RESULT, type::Node>, const RESULT>* Get(
+        const AST* ast_node) const {
+        if (ast_node && ast_node->node_id.value < types_.size()) {
+            return As<RESULT>(types_[ast_node->node_id.value]);
+        }
+        return nullptr;
+    }
+
+    /// Add registers the `type` for the AST node `ast_node`.
+    /// @param ast_node the AST node
+    /// @param type the type
+    /// @returns void
+    template <typename AST, typename TYPE = SemanticNodeTypeFor<AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<TYPE, type::Node>, void> Add(const AST* ast_node,
+                                                                          const TYPE* type) {
+        ReserveType(ast_node->node_id);
+        // Check there's no semantic info already existing for the AST node
+        TINT_ASSERT(Semantic, types_[ast_node->node_id.value] == nullptr);
+        types_[ast_node->node_id.value] = type;
+    }
+
     /// Add registers the semantic node `sem_node` for the AST node `ast_node`.
     /// @param ast_node the AST node
     /// @param sem_node the semantic node
-    template <typename AST>
-    void Add(const AST* ast_node, const SemanticNodeTypeFor<AST>* sem_node) {
+    /// @returns void
+    template <typename AST, typename SEM = SemanticNodeTypeFor<AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<SEM, sem::Node>, void> Add(
+        const AST* ast_node,
+        const SemanticNodeTypeFor<AST>* sem_node) {
         Reserve(ast_node->node_id);
         // Check there's no semantic info already existing for the AST node
         TINT_ASSERT(Semantic, nodes_[ast_node->node_id.value] == nullptr);
         nodes_[ast_node->node_id.value] = sem_node;
     }
 
+    /// Replace replaces any existing `type` for the AST node `ast_node`.
+    /// @param ast_node the AST node
+    /// @param type the type
+    /// @returns void
+    template <typename AST, typename TYPE = SemanticNodeTypeFor<AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<TYPE, type::Node>, void> Replace(const AST* ast_node,
+                                                                              const TYPE* type) {
+        ReserveTypes(ast_node->node_id);
+        types_[ast_node->node_id.value] = type;
+    }
+
     /// Replace replaces any existing semantic node `sem_node` for the AST node `ast_node`.
     /// @param ast_node the AST node
     /// @param sem_node the new semantic node
-    template <typename AST>
-    void Replace(const AST* ast_node, const SemanticNodeTypeFor<AST>* sem_node) {
+    /// @returns void
+    template <typename AST, typename SEM = SemanticNodeTypeFor<AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<SEM, sem::Node>, void> Replace(const AST* ast_node,
+                                                                            const SEM* sem_node) {
         Reserve(ast_node->node_id);
         nodes_[ast_node->node_id.value] = sem_node;
     }
@@ -110,6 +163,7 @@ class Info {
     static Info Wrap(const Info& inner) {
         Info out;
         out.nodes_ = inner.nodes_;
+        out.types_ = inner.types_;
         out.module_ = inner.module_;
         return out;
     }
@@ -143,6 +197,8 @@ class Info {
   private:
     // AST node index to semantic node
     std::vector<const sem::Node*> nodes_;
+    // AST node index to type node
+    std::vector<const type::Node*> types_;
     // Lists transitively referenced overrides for the given item
     std::unordered_map<const CastableBase*, TransitivelyReferenced> referenced_overrides_;
     // The semantic module
