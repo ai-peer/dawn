@@ -161,6 +161,14 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
             mRuntimeSearchPaths.push_back(dawnDesc->additionalRuntimeSearchPaths[i]);
         }
     }
+
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+
+    mToggles =
+        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
+    mToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+
     // Default paths to search are next to the shared library, next to the executable, and
     // no path (just libvulkan.so).
     if (auto p = GetModuleDirectory()) {
@@ -201,13 +209,19 @@ void InstanceBase::APIRequestAdapter(const RequestAdapterOptions* options,
 ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     const RequestAdapterOptions* options) {
     ASSERT(options != nullptr);
+    DAWN_TRY(ValidateSingleSType(options->nextInChain, wgpu::SType::DawnTogglesDescriptor));
+
+    const DawnTogglesDescriptor* adapterTogglesDesc = nullptr;
+    FindInChain(options->nextInChain, &adapterTogglesDesc);
+
+    // Always try to return a Vulkan Swiftshader if forceFallbackAdapter is true
     if (options->forceFallbackAdapter) {
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
         if (GetEnabledBackends()[wgpu::BackendType::Vulkan]) {
             dawn_native::vulkan::AdapterDiscoveryOptions vulkanOptions;
             vulkanOptions.forceSwiftShader = true;
 
-            MaybeError result = DiscoverAdaptersInternal(&vulkanOptions);
+            MaybeError result = DiscoverAdaptersInternal(&vulkanOptions, adapterTogglesDesc);
             if (result.IsError()) {
                 dawn::WarningLog() << absl::StrFormat(
                     "Skipping Vulkan Swiftshader adapter because initialization failed: %s",
@@ -219,7 +233,7 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         return Ref<AdapterBase>(nullptr);
 #endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
     } else {
-        DiscoverDefaultAdapters();
+        DiscoverDefaultAdapters(adapterTogglesDesc);
     }
 
     wgpu::AdapterType preferredType;
@@ -239,6 +253,11 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     std::optional<size_t> unknownAdapterIndex;
 
     for (size_t i = 0; i < mAdapters.size(); ++i) {
+        // Only choose adapters with matching required adapter toggles
+        if (!mAdapters[i]->IsCreatedWithRequiredToggles(adapterTogglesDesc)) {
+            continue;
+        }
+
         AdapterProperties properties;
         mAdapters[i]->APIGetProperties(&properties);
 
@@ -284,13 +303,18 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     return Ref<AdapterBase>(nullptr);
 }
 
-void InstanceBase::DiscoverDefaultAdapters() {
-    for (wgpu::BackendType b : IterateBitSet(GetEnabledBackends())) {
-        EnsureBackendConnection(b);
+void InstanceBase::DiscoverDefaultAdapters(const DawnTogglesDescriptor* requiredAdapterToggles) {
+    RequiredTogglesSet requiredAdapterTogglesSet = RequiredTogglesSet::CreateFromTogglesDescriptor(
+        requiredAdapterToggles, ToggleStage::Adapter);
+
+    // Do nothing if default adapters have already been discovered for required adapter toggles.
+    if (mDefaultAdaprtersDiscoveredForToggles.find(requiredAdapterTogglesSet) !=
+        mDefaultAdaprtersDiscoveredForToggles.end()) {
+        return;
     }
 
-    if (mDiscoveredDefaultAdapters) {
-        return;
+    for (wgpu::BackendType b : IterateBitSet(GetEnabledBackends())) {
+        EnsureBackendConnection(b);
     }
 
     // Query and merge all default adapters for all backends
@@ -311,12 +335,13 @@ void InstanceBase::DiscoverDefaultAdapters() {
         }
     }
 
-    mDiscoveredDefaultAdapters = true;
+    mDefaultAdaprtersDiscoveredForToggles.insert(requiredAdapterTogglesSet);
 }
 
 // This is just a wrapper around the real logic that uses Error.h error handling.
-bool InstanceBase::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) {
-    MaybeError result = DiscoverAdaptersInternal(options);
+bool InstanceBase::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                                    const DawnTogglesDescriptor* requiredAdapterToggles) {
+    MaybeError result = DiscoverAdaptersInternal(options, requiredAdapterToggles);
 
     if (result.IsError()) {
         dawn::WarningLog() << absl::StrFormat(
@@ -406,7 +431,10 @@ void InstanceBase::EnsureBackendConnection(wgpu::BackendType backendType) {
     mBackendsConnected.set(backendType);
 }
 
-MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options) {
+// Discover adapters with given required adapter toggles.
+MaybeError InstanceBase::DiscoverAdaptersInternal(
+    const AdapterDiscoveryOptionsBase* options,
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) {
     wgpu::BackendType backendType = static_cast<wgpu::BackendType>(options->backendType);
     DAWN_TRY(ValidateBackendType(backendType));
 
@@ -513,6 +541,36 @@ void InstanceBase::IncrementDeviceCountForTesting() {
 
 void InstanceBase::DecrementDeviceCountForTesting() {
     mDeviceCountForTesting--;
+}
+
+void InstanceBase::ResetAdaptersForTesting() {
+    // Currently we only need to reset the D3D12 adapters for testing with backend validation.
+    // First pass: Reset all D3D12 adapter to release the backend D3d12Device.
+    bool hasD3D12Adapter = false;
+    bool latestResetResult = false;
+    for (auto adapter : mAdapters) {
+        if (adapter->GetBackendType() != wgpu::BackendType::D3D12) {
+            continue;
+        }
+        hasD3D12Adapter = true;
+        auto resetResult = adapter->ResetInternalDeviceForTesting();
+        if (resetResult.IsError()) {
+            ConsumeError(resetResult.AcquireError());
+            return;
+        } else {
+            latestResetResult = resetResult.AcquireSuccess();
+        }
+    }
+    // After reseting all D3D12 adapter, the internal device should be released and the latest
+    // return value should be true.
+    ASSERT(!hasD3D12Adapter || latestResetResult);
+    // Second pass: Re-initialize all D3D12 adapter.
+    for (auto adapter : mAdapters) {
+        if (adapter->GetBackendType() != wgpu::BackendType::D3D12) {
+            continue;
+        }
+        ConsumedError(adapter->Initialize());
+    }
 }
 
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {

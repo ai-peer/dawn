@@ -18,7 +18,7 @@
 #include <array>
 #include <memory>
 #include <string>
-#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "dawn/common/RefCounted.h"
@@ -44,6 +44,15 @@ using BackendsBitset = ityp::bitset<wgpu::BackendType, kEnumCount<wgpu::BackendT
 
 InstanceBase* APICreateInstance(const InstanceDescriptor* descriptor);
 
+// Hasher for RequiredTogglesSet
+struct RequiredTogglesSetHasher {
+    std::size_t operator()(RequiredTogglesSet const& requiredTogglesSet) const noexcept {
+        std::size_t h1 = std::hash<TogglesSet::BitSet>{}(requiredTogglesSet.togglesProvided.bitset);
+        std::size_t h2 = std::hash<TogglesSet::BitSet>{}(requiredTogglesSet.togglesEnabled.bitset);
+        return h1 ^ (h2 << 1);
+    }
+};
+
 // This is called InstanceBase for consistency across the frontend, even if the backends don't
 // specialize this class.
 class InstanceBase final : public RefCountedWithExternalCount {
@@ -54,8 +63,11 @@ class InstanceBase final : public RefCountedWithExternalCount {
                            WGPURequestAdapterCallback callback,
                            void* userdata);
 
-    void DiscoverDefaultAdapters();
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    // Discover default adapters on all backends for given adapter toggles. Do nothing if already
+    // discovered for given toggles.
+    void DiscoverDefaultAdapters(const DawnTogglesDescriptor* requiredAdapterToggles = nullptr);
+    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                          const DawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     const std::vector<Ref<AdapterBase>>& GetAdapters() const;
 
@@ -105,6 +117,9 @@ class InstanceBase final : public RefCountedWithExternalCount {
     uint64_t GetDeviceCountForTesting() const;
     void IncrementDeviceCountForTesting();
     void DecrementDeviceCountForTesting();
+    // Used to reset adapters discovered by the instance for testing. Specifically, reset all D3D12
+    // adapters to release the internal D3D12Device and re-initialize them.
+    void ResetAdaptersForTesting();
 
     const std::vector<std::string>& GetRuntimeSearchPaths() const;
 
@@ -128,7 +143,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Lazily creates connections to all backends that have been compiled.
     void EnsureBackendConnection(wgpu::BackendType backendType);
 
-    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options);
+    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options,
+                                        const DawnTogglesDescriptor* adapterTogglesDescriptor);
 
     ResultOrError<Ref<AdapterBase>> RequestAdapterInternal(const RequestAdapterOptions* options);
 
@@ -138,7 +154,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     BackendsBitset mBackendsConnected;
 
-    bool mDiscoveredDefaultAdapters = false;
+    std::unordered_set<RequiredTogglesSet, RequiredTogglesSetHasher>
+        mDefaultAdaprtersDiscoveredForToggles;
 
     bool mBeginCaptureOnStartup = false;
     bool mEnableAdapterBlocklist = false;

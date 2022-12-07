@@ -27,9 +27,11 @@ class Backend : public BackendConnection {
     Backend(InstanceBase* instance, wgpu::BackendType backendType);
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        // TODO
         const TogglesState& adapterToggles) override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
         const AdapterDiscoveryOptionsBase* option,
+        // TODO
         const TogglesState& adapterToggless) override;
 
   private:

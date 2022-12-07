@@ -457,7 +457,9 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
-std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(const TogglesState& adapterToggles) {
+std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(const TogglesState& adapterToggles
+                                                               // TODO
+) {
     AdapterDiscoveryOptions options;
     auto result = DiscoverAdapters(&options, adapterToggles);
     if (result.IsError()) {
@@ -469,7 +471,9 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(const TogglesStat
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     const AdapterDiscoveryOptionsBase* optionsBase,
-    const TogglesState& adapterToggles) {
+    const TogglesState& adapterToggles
+    // TODO
+) {
     ASSERT(optionsBase->backendType == WGPUBackendType_Vulkan);
 
     const AdapterDiscoveryOptions* options =
@@ -498,8 +502,9 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         const std::vector<VkPhysicalDevice>& physicalDevices =
             mVulkanInstances[icd]->GetPhysicalDevices();
         for (uint32_t i = 0; i < physicalDevices.size(); ++i) {
-            Ref<Adapter> adapter = AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(),
-                                                          physicalDevices[i], adapterToggles));
+            Ref<Adapter> adapter =
+                AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(), physicalDevices[i],
+                                       adapterToggles, requiredToggles));
             if (instance->ConsumedError(adapter->Initialize())) {
                 continue;
             }

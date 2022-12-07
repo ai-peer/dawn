@@ -32,10 +32,13 @@ namespace dawn::native::null {
 
 Adapter::Adapter(InstanceBase* instance)
     : Adapter(instance,
-              TogglesState(ToggleStage::Adapter).InheritFrom(instance->GetTogglesState())) {}
+              TogglesState(ToggleStage::Adapter).InheritToggles(instance->GetTogglesState()),
+              RequiredTogglesSet(ToggleStage::Adapter)) {}
 
-Adapter::Adapter(InstanceBase* instance, const TogglesState& adapterToggles)
-    : AdapterBase(instance, wgpu::BackendType::Null, adapterToggles) {
+Adapter::Adapter(InstanceBase* instance,
+                 const TogglesState& adapterToggles,
+                 const RequiredTogglesSet& requiredToggles)
+    : AdapterBase(instance, wgpu::BackendType::Null, adapterToggles, requiredToggles) {
     mVendorId = 0;
     mDeviceId = 0;
     mName = "Null backend";
@@ -50,21 +53,17 @@ bool Adapter::SupportsExternalImages() const {
     return false;
 }
 
-// Used for the tests that intend to use an adapter without all features enabled.
-void Adapter::SetSupportedFeatures(const std::vector<wgpu::FeatureName>& requiredFeatures) {
-    mSupportedFeatures = {};
-    for (wgpu::FeatureName f : requiredFeatures) {
-        mSupportedFeatures.EnableFeature(f);
-    }
-}
-
 MaybeError Adapter::InitializeImpl() {
     return {};
 }
 
 void Adapter::InitializeSupportedFeaturesImpl() {
-    // Enable all features by default for the convenience of tests.
-    mSupportedFeatures.featuresBitSet.set();
+    // Enable all features by default for the convenience of tests. Note that experimental features
+    // will not be enabled by EnableFeature if DisallowUnsafeApis toggle is not disable.
+    for (size_t i = 0; i < static_cast<size_t>(dawn::native::Feature::EnumCount); i++) {
+        dawn::native::Feature feature = static_cast<dawn::native::Feature>(i);
+        EnableFeature(feature);
+    }
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -79,23 +78,19 @@ ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor*
     return Device::Create(this, descriptor, deviceToggles);
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
-    wgpu::FeatureName feature,
-    const TogglesState& deviceToggles) {
-    return {};
-}
-
 class Backend : public BackendConnection {
   public:
     explicit Backend(InstanceBase* instance)
         : BackendConnection(instance, wgpu::BackendType::Null) {}
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        // TODO:
         const TogglesState& adapterToggles) override {
         // There is always a single Null adapter because it is purely CPU based and doesn't
         // depend on the system.
         std::vector<Ref<AdapterBase>> adapters;
-        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), adapterToggles));
+        Ref<Adapter> adapter =
+            AcquireRef(new Adapter(GetInstance(), adapterToggles, requiredToggles));
         adapters.push_back(std::move(adapter));
         return adapters;
     }
