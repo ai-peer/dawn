@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54c8302a_cad9b064",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2022-12-07T21:57:25Z",
+      "side": 0,
+      "message": "comment should probably be restored.",
+      "range": {
+        "startLine": 52,
+        "startChar": 48,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "7017ec264ca31610c68b3bfcbcff7c8d86da9f62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
