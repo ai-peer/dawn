@@ -91,9 +91,13 @@ class Backend : public BackendConnection {
 
     MaybeError Initialize();
 
-    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
+    std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        const RequiredTogglesSet& requiredAdapterToggles) override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* optionsBase) override;
+        const AdapterDiscoveryOptionsBase* optionsBase,
+        const TogglesState& adapterToggles) override;
+
+    TogglesState MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const override;
 
   private:
     ityp::array<ICD, Ref<VulkanInstance>, 2> mVulkanInstances = {};

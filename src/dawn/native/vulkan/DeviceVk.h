@@ -45,7 +45,7 @@ class Device final : public DeviceBase {
   public:
     static ResultOrError<Ref<Device>> Create(Adapter* adapter,
                                              const DeviceDescriptor* descriptor,
-                                             const TripleStateTogglesSet& userProvidedToggles);
+                                             const TogglesState& deviceToggles);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
@@ -119,9 +119,7 @@ class Device final : public DeviceBase {
     void ForceEventualFlushOfCommands() override;
 
   private:
-    Device(Adapter* adapter,
-           const DeviceDescriptor* descriptor,
-           const TripleStateTogglesSet& userProvidedToggles);
+    Device(Adapter* adapter, const DeviceDescriptor* descriptor, const TogglesState& deviceToggles);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -164,9 +162,6 @@ class Device final : public DeviceBase {
     void GatherQueueFromDevice();
 
     uint32_t FindComputeSubgroupSize() const;
-    void InitTogglesFromDriver();
-    void ApplyDepthStencilFormatToggles();
-    void ApplyUseZeroInitializeWorkgroupMemoryExtensionToggle();
 
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;
