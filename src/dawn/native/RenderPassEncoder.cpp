@@ -140,6 +140,9 @@ void RenderPassEncoder::APIEnd() {
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
+                if (GetDevice()->ConsumedError(mEncodingContext->CheckEncoderAlreadyEnded(this))) {
+                    return {};
+                }
                 DAWN_TRY(ValidateProgrammableEncoderEnd());
 
                 DAWN_INVALID_IF(
@@ -159,6 +162,10 @@ void RenderPassEncoder::APIEnd() {
                                                       std::move(mIndirectDrawMetadata)));
             return {};
         },
+        // If GetEncoderStatus() returns false, it means encoder is not created successfully due to
+        // some reason like the validation of encoder descriptor fails. In this situation, don't
+        // report error immediately in pass encoder. Command encoder's Finish() will report it.
+        GetEncoderStatus(),
         "encoding %s.End().", this);
 
     if (mEndCallback) {
@@ -184,7 +191,7 @@ void RenderPassEncoder::APISetStencilReference(uint32_t reference) {
 
             return {};
         },
-        "encoding %s.SetStencilReference(%u).", this, reference);
+        false, "encoding %s.SetStencilReference(%u).", this, reference);
 }
 
 void RenderPassEncoder::APISetBlendConstant(const Color* color) {
@@ -197,7 +204,7 @@ void RenderPassEncoder::APISetBlendConstant(const Color* color) {
 
             return {};
         },
-        "encoding %s.SetBlendConstant(%s).", this, color);
+        false, "encoding %s.SetBlendConstant(%s).", this, color);
 }
 
 void RenderPassEncoder::APISetViewport(float x,
@@ -247,8 +254,8 @@ void RenderPassEncoder::APISetViewport(float x,
 
             return {};
         },
-        "encoding %s.SetViewport(%f, %f, %f, %f, %f, %f).", this, x, y, width, height, minDepth,
-        maxDepth);
+        false, "encoding %s.SetViewport(%f, %f, %f, %f, %f, %f).", this, x, y, width, height,
+        minDepth, maxDepth);
 }
 
 void RenderPassEncoder::APISetScissorRect(uint32_t x, uint32_t y, uint32_t width, uint32_t height) {
@@ -273,7 +280,7 @@ void RenderPassEncoder::APISetScissorRect(uint32_t x, uint32_t y, uint32_t width
 
             return {};
         },
-        "encoding %s.SetScissorRect(%u, %u, %u, %u).", this, x, y, width, height);
+        false, "encoding %s.SetScissorRect(%u, %u, %u, %u).", this, x, y, width, height);
 }
 
 void RenderPassEncoder::APIExecuteBundles(uint32_t count, RenderBundleBase* const* renderBundles) {
@@ -340,7 +347,7 @@ void RenderPassEncoder::APIExecuteBundles(uint32_t count, RenderBundleBase* cons
 
             return {};
         },
-        "encoding %s.ExecuteBundles(%u, ...).", this, count);
+        false, "encoding %s.ExecuteBundles(%u, ...).", this, count);
 }
 
 void RenderPassEncoder::APIBeginOcclusionQuery(uint32_t queryIndex) {
@@ -380,7 +387,7 @@ void RenderPassEncoder::APIBeginOcclusionQuery(uint32_t queryIndex) {
 
             return {};
         },
-        "encoding %s.BeginOcclusionQuery(%u).", this, queryIndex);
+        false, "encoding %s.BeginOcclusionQuery(%u).", this, queryIndex);
 }
 
 void RenderPassEncoder::APIEndOcclusionQuery() {
@@ -402,7 +409,7 @@ void RenderPassEncoder::APIEndOcclusionQuery() {
 
             return {};
         },
-        "encoding %s.EndOcclusionQuery().", this);
+        false, "encoding %s.EndOcclusionQuery().", this);
 }
 
 void RenderPassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
@@ -427,7 +434,7 @@ void RenderPassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t query
 
             return {};
         },
-        "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
+        false, "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
 }
 
 }  // namespace dawn::native

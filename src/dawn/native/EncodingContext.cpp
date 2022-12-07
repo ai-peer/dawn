@@ -116,6 +116,10 @@ MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
                                            RenderPassResourceUsageTracker usageTracker,
                                            CommandEncoder* commandEncoder,
                                            IndirectDrawMetadata indirectDrawMetadata) {
+    if (!passEncoder->GetEncoderStatus()) {
+        return {};
+    }
+
     ASSERT(mCurrentEncoder != mTopLevelEncoder);
     ASSERT(mCurrentEncoder == passEncoder);
 
@@ -143,6 +147,10 @@ MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
 
 void EncodingContext::ExitComputePass(const ApiObjectBase* passEncoder,
                                       ComputePassResourceUsage usages) {
+    if (!passEncoder->GetEncoderStatus()) {
+        return;
+    }
+
     ASSERT(mCurrentEncoder != mTopLevelEncoder);
     ASSERT(mCurrentEncoder == passEncoder);
 
