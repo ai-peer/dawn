@@ -16,6 +16,23 @@
       "message": "Please refer to https://dawn-review.googlesource.com/c/dawn/+/110448/comments/d854cc38_1c347672 for the problem this CL resolves.",
       "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf85456_aac097eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-07T11:37:41Z",
+      "side": 1,
+      "message": "Nice! LGTM. Do we need a similar fix in the wire or is that ok?",
+      "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
