@@ -24,7 +24,7 @@
 
 namespace dawn::native {
 
-struct DawnTogglesDeviceDescriptor;
+struct DawnTogglesDescriptor;
 
 enum class Toggle {
     EmulateStoreAndMSAAResolve,
@@ -107,10 +107,31 @@ struct TripleStateTogglesSet {
     TogglesSet providedTogglesEnabled;
 
     static TripleStateTogglesSet CreateFromTogglesDeviceDescriptor(
-        const DawnTogglesDeviceDescriptor* togglesDesc);
+        const DawnTogglesDescriptor* togglesDesc);
     // Provide a single toggle with given state.
     void Set(Toggle toggle, bool enabled);
     bool IsProvided(Toggle toggle) const;
+    // Return true if the toggle is provided in enable list, and false otherwise.
+    bool IsEnabled(Toggle toggle) const;
+    // Return true if the toggle is provided in disable list, and false otherwise.
+    bool IsDisabled(Toggle toggle) const;
+    std::vector<const char*> GetEnabledToggleNames() const;
+    std::vector<const char*> GetDisabledToggleNames() const;
+};
+
+struct TogglesState {
+    TogglesSet togglesIsSet;
+    TogglesSet togglesIsEnabled;
+    TogglesSet togglesIsForced;
+
+    static TogglesState CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc);
+
+    static TogglesState CreateFromTripleStateTogglesSet(const TripleStateTogglesSet& togglesSet);
+
+    void SetIfNotAlready(Toggle toggle, bool enabled);
+    void ForceSet(Toggle toggle, bool enabled);
+
+    bool IsSet(Toggle toggle) const;
     // Return true if the toggle is provided in enable list, and false otherwise.
     bool IsEnabled(Toggle toggle) const;
     // Return true if the toggle is provided in disable list, and false otherwise.

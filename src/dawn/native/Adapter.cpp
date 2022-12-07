@@ -233,7 +233,7 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     // Check overriden toggles before creating device, as some device features may be guarded by
     // toggles, and requiring such features without using corresponding toggles should fails the
     // device creating.
-    const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
+    const DawnTogglesDescriptor* togglesDesc = nullptr;
     FindInChain(descriptor->nextInChain, &togglesDesc);
     TripleStateTogglesSet userProvidedToggles =
         TripleStateTogglesSet::CreateFromTogglesDeviceDescriptor(togglesDesc);
