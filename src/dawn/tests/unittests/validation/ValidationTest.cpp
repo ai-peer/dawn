@@ -86,9 +86,18 @@ ValidationTest::ValidationTest() {
     DawnProcTable procs = dawn::native::GetProcs();
     // Override procs to provide harness-specific behavior to always select the null adapter,
     // and to allow fixture-specific overriding of the test device with CreateTestDevice.
-    procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,
+    procs.instanceRequestAdapter = [](WGPUInstance instance,
+                                      const WGPURequestAdapterOptions* requestAdapterOptions,
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
+
+        // Currently creating adapter with RequestAdapterOptions is not supported in ValidationTest.
+        // Returned adapter is created on Null backend with DisallowUnsafeApis adapter toggle
+        // disabled (inherited from instance toggle) and all other toggles left default. Consider
+        // creating own instance and adapter in testsuit if other adapter options or toggles are
+        // needed.
+        ASSERT(requestAdapterOptions == nullptr);
+
         std::vector<dawn::native::Adapter> adapters = gCurrentTest->mDawnInstance->GetAdapters();
         // Validation tests run against the null backend, find the corresponding adapter
         for (auto& adapter : adapters) {
@@ -121,7 +130,22 @@ ValidationTest::ValidationTest() {
 }
 
 void ValidationTest::SetUp() {
-    mDawnInstance = std::make_unique<dawn::native::Instance>();
+    // TODO: Move instance toggles desc generation into a virtual function
+
+    // Create an instance with toggle DisallowUnsafeApis disabled, which would be inherited to
+    // adapter and device toggles and allow us to test unsafe apis (including experimental
+    // features). If doesn't want the unsafe apis, create an adapter with DisallowUnsafeApis toggle
+    // enabled, which would override the inheritation.
+    const char* disallowUnsafeApisToggle = "disallow_unsafe_apis";
+    WGPUDawnTogglesDescriptor instanceToggles = {};
+    instanceToggles.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+    instanceToggles.disabledTogglesCount = 1;
+    instanceToggles.disabledToggles = &disallowUnsafeApisToggle;
+
+    WGPUInstanceDescriptor instanceDesc = {};
+    instanceDesc.nextInChain = &instanceToggles.chain;
+
+    mDawnInstance = std::make_unique<dawn::native::Instance>(&instanceDesc);
     mDawnInstance->DiscoverDefaultAdapters();
     mInstance = mWireHelper->RegisterInstance(mDawnInstance->Get());
 
@@ -130,10 +154,10 @@ void ValidationTest::SetUp() {
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
 
-    // These options are unused since validation tests always select the null adapter
-    wgpu::RequestAdapterOptions options = {};
+    // RequestAdapter is overriden to ignore RequestAdapterOptions (asserting it nullptr) and
+    // always select the null adapter.
     mInstance.RequestAdapter(
-        &options,
+        nullptr,
         [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
             *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(cAdapter);
         },
@@ -263,28 +287,31 @@ dawn::native::Adapter& ValidationTest::GetBackendAdapter() {
 }
 
 WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
+    // TODO: Clean this.
+    /*
     // Disabled disallowing unsafe APIs so we can test them.
-    std::vector<const char*> forceEnabledToggles;
-    std::vector<const char*> forceDisabledToggles = {"disallow_unsafe_apis"};
+    std::vector<const char*> enabledToggles;
+    std::vector<const char*> disabledToggles = {"disallow_unsafe_apis"};
 
     for (const std::string& toggle : gToggleParser->GetEnabledToggles()) {
-        forceEnabledToggles.push_back(toggle.c_str());
+        enabledToggles.push_back(toggle.c_str());
     }
 
     for (const std::string& toggle : gToggleParser->GetDisabledToggles()) {
-        forceDisabledToggles.push_back(toggle.c_str());
+        disabledToggles.push_back(toggle.c_str());
     }
 
     wgpu::DeviceDescriptor deviceDescriptor;
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-    deviceDescriptor.nextInChain = &togglesDesc;
+    wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+    deviceDescriptor.nextInChain = &deviceTogglesDesc;
 
-    togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
-    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    deviceTogglesDesc.enabledToggles = enabledToggles.data();
+    deviceTogglesDesc.enabledTogglesCount = enabledToggles.size();
+    deviceTogglesDesc.disabledToggles = disabledToggles.data();
+    deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
+    */
 
-    return dawnAdapter.CreateDevice(&deviceDescriptor);
+    return dawnAdapter.CreateDevice();
 }
 
 // static
