@@ -160,6 +160,30 @@
       },
       "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96160a58_b92c13b6",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T07:14:10Z",
+      "side": 1,
+      "message": "yea just IMO the implicit promotion from int to double isn\u0027t super clear",
+      "parentUuid": "fd2c717e_1fbce90d",
+      "range": {
+        "startLine": 267,
+        "startChar": 28,
+        "endLine": 267,
+        "endChar": 64
+      },
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
