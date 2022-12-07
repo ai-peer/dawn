@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3ff062_373050e1",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-07T22:31:14Z",
+      "side": 1,
+      "message": "Done. (Just found the entryPoint and module are flipped at a second glance. fixed)",
+      "parentUuid": "5ee94973_ff1e3b55",
+      "range": {
+        "startLine": 37,
+        "startChar": 48,
+        "endLine": 37,
+        "endChar": 58
+      },
+      "revId": "4a0ffeca7b0d4c452903ff4e58844a0e7c4afef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fd3fd53_5b2c3dda",
@@ -37,6 +61,24 @@
       "writtenOn": "2022-12-07T21:59:54Z",
       "side": 1,
       "message": "do this in RenderPipeline.cpp too?",
+      "revId": "4a0ffeca7b0d4c452903ff4e58844a0e7c4afef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98602db_5d6a18ee",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-07T22:31:14Z",
+      "side": 1,
+      "message": "RenderPipeline.cpp already print in this format. (Remove \"module\" as well)",
+      "parentUuid": "1fd3fd53_5b2c3dda",
       "revId": "4a0ffeca7b0d4c452903ff4e58844a0e7c4afef2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
