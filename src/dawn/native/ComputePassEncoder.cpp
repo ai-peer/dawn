@@ -154,6 +154,7 @@ void ComputePassEncoder::APIEnd() {
             this,
             [&](CommandAllocator* allocator) -> MaybeError {
                 if (IsValidationEnabled()) {
+                    GetDevice()->ConsumedError(mEncodingContext->CheckEncoderAlreadyEnded(this));
                     DAWN_TRY(ValidateProgrammableEncoderEnd());
                 }
 
@@ -161,7 +162,7 @@ void ComputePassEncoder::APIEnd() {
 
                 return {};
             },
-            "encoding %s.End().", this)) {
+            true, "encoding %s.End().", this)) {
         mEncodingContext->ExitComputePass(this, mUsageTracker.AcquireResourceUsage());
     }
 }
@@ -223,8 +224,8 @@ void ComputePassEncoder::APIDispatchWorkgroups(uint32_t workgroupCountX,
 
             return {};
         },
-        "encoding %s.DispatchWorkgroups(%u, %u, %u).", this, workgroupCountX, workgroupCountY,
-        workgroupCountZ);
+        false, "encoding %s.DispatchWorkgroups(%u, %u, %u).", this, workgroupCountX,
+        workgroupCountY, workgroupCountZ);
 }
 
 ResultOrError<std::pair<Ref<BufferBase>, uint64_t>>
@@ -390,7 +391,8 @@ void ComputePassEncoder::APIDispatchWorkgroupsIndirect(BufferBase* indirectBuffe
             dispatch->indirectOffset = indirectOffset;
             return {};
         },
-        "encoding %s.DispatchWorkgroupsIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
+        false, "encoding %s.DispatchWorkgroupsIndirect(%s, %u).", this, indirectBuffer,
+        indirectOffset);
 }
 
 void ComputePassEncoder::APISetPipeline(ComputePipelineBase* pipeline) {
@@ -409,7 +411,7 @@ void ComputePassEncoder::APISetPipeline(ComputePipelineBase* pipeline) {
 
             return {};
         },
-        "encoding %s.SetPipeline(%s).", this, pipeline);
+        false, "encoding %s.SetPipeline(%s).", this, pipeline);
 }
 
 void ComputePassEncoder::APISetBindGroup(uint32_t groupIndexIn,
@@ -432,7 +434,7 @@ void ComputePassEncoder::APISetBindGroup(uint32_t groupIndexIn,
 
             return {};
         },
-        "encoding %s.SetBindGroup(%u, %s, %u, ...).", this, groupIndexIn, group,
+        false, "encoding %s.SetBindGroup(%u, %s, %u, ...).", this, groupIndexIn, group,
         dynamicOffsetCount);
 }
 
@@ -454,7 +456,7 @@ void ComputePassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t quer
 
             return {};
         },
-        "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
+        false, "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
 }
 
 void ComputePassEncoder::AddDispatchSyncScope(SyncScopeUsageTracker scope) {

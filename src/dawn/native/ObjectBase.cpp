@@ -68,7 +68,8 @@ ApiObjectBase::ApiObjectBase(DeviceBase* device, const char* label) : ObjectBase
     }
 }
 
-ApiObjectBase::ApiObjectBase(DeviceBase* device, ErrorTag tag) : ObjectBase(device, tag) {}
+ApiObjectBase::ApiObjectBase(DeviceBase* device, ErrorTag tag, bool status)
+    : ObjectBase(device, tag), mStatus(status) {}
 
 ApiObjectBase::ApiObjectBase(DeviceBase* device, LabelNotImplementedTag tag) : ObjectBase(device) {}
 

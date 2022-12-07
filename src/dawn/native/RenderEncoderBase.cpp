@@ -113,7 +113,7 @@ void RenderEncoderBase::APIDraw(uint32_t vertexCount,
 
             return {};
         },
-        "encoding %s.Draw(%u, %u, %u, %u).", this, vertexCount, instanceCount, firstVertex,
+        false, "encoding %s.Draw(%u, %u, %u, %u).", this, vertexCount, instanceCount, firstVertex,
         firstInstance);
 }
 
@@ -152,8 +152,8 @@ void RenderEncoderBase::APIDrawIndexed(uint32_t indexCount,
 
             return {};
         },
-        "encoding %s.DrawIndexed(%u, %u, %u, %i, %u).", this, indexCount, instanceCount, firstIndex,
-        baseVertex, firstInstance);
+        false, "encoding %s.DrawIndexed(%u, %u, %u, %i, %u).", this, indexCount, instanceCount,
+        firstIndex, baseVertex, firstInstance);
 }
 
 void RenderEncoderBase::APIDrawIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
@@ -204,7 +204,7 @@ void RenderEncoderBase::APIDrawIndirect(BufferBase* indirectBuffer, uint64_t ind
 
             return {};
         },
-        "encoding %s.DrawIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
+        false, "encoding %s.DrawIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
 }
 
 void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
@@ -258,7 +258,7 @@ void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
 
             return {};
         },
-        "encoding %s.DrawIndexedIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
+        false, "encoding %s.DrawIndexedIndirect(%s, %u).", this, indirectBuffer, indirectOffset);
 }
 
 void RenderEncoderBase::APISetPipeline(RenderPipelineBase* pipeline) {
@@ -291,7 +291,7 @@ void RenderEncoderBase::APISetPipeline(RenderPipelineBase* pipeline) {
 
             return {};
         },
-        "encoding %s.SetPipeline(%s).", this, pipeline);
+        false, "encoding %s.SetPipeline(%s).", this, pipeline);
 }
 
 void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
@@ -351,7 +351,7 @@ void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
 
             return {};
         },
-        "encoding %s.SetIndexBuffer(%s, %s, %u, %u).", this, buffer, format, offset, size);
+        false, "encoding %s.SetIndexBuffer(%s, %s, %u, %u).", this, buffer, format, offset, size);
 }
 
 void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
@@ -408,7 +408,7 @@ void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
 
             return {};
         },
-        "encoding %s.SetVertexBuffer(%u, %s, %u, %u).", this, slot, buffer, offset, size);
+        false, "encoding %s.SetVertexBuffer(%u, %s, %u, %u).", this, slot, buffer, offset, size);
 }
 
 void RenderEncoderBase::APISetBindGroup(uint32_t groupIndexIn,
@@ -431,6 +431,7 @@ void RenderEncoderBase::APISetBindGroup(uint32_t groupIndexIn,
 
             return {};
         },
+        false,
         // TODO(dawn:1190): For unknown reasons formatting this message fails if `group` is used
         // as a string value in the message. This despite the exact same code working as
         // intended in ComputePassEncoder::APISetBindGroup. Replacing with a static [BindGroup]

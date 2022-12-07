@@ -104,20 +104,24 @@ void EncodingContext::WillBeginRenderPass() {
     }
 }
 
-void EncodingContext::EnterPass(const ApiObjectBase* passEncoder) {
+void EncodingContext::EnterPass(ApiObjectBase* passEncoder) {
     // Assert we're at the top level.
     ASSERT(mCurrentEncoder == mTopLevelEncoder);
     ASSERT(passEncoder != nullptr);
 
     mCurrentEncoder = passEncoder;
+    passEncoder->SetEncoderStatus(true);
 }
 
 MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
                                            RenderPassResourceUsageTracker usageTracker,
                                            CommandEncoder* commandEncoder,
                                            IndirectDrawMetadata indirectDrawMetadata) {
-    ASSERT(mCurrentEncoder != mTopLevelEncoder);
-    ASSERT(mCurrentEncoder == passEncoder);
+    if (!passEncoder->GetEncoderStatus()) {
+        return {};
+    }
+    // ASSERT(mCurrentEncoder != mTopLevelEncoder);
+    // ASSERT(mCurrentEncoder == passEncoder);
 
     mCurrentEncoder = mTopLevelEncoder;
 
@@ -143,8 +147,11 @@ MaybeError EncodingContext::ExitRenderPass(const ApiObjectBase* passEncoder,
 
 void EncodingContext::ExitComputePass(const ApiObjectBase* passEncoder,
                                       ComputePassResourceUsage usages) {
-    ASSERT(mCurrentEncoder != mTopLevelEncoder);
-    ASSERT(mCurrentEncoder == passEncoder);
+    if (!passEncoder->GetEncoderStatus()) {
+        return;
+    }
+    // ASSERT(mCurrentEncoder != mTopLevelEncoder);
+    // ASSERT(mCurrentEncoder == passEncoder);
 
     mCurrentEncoder = mTopLevelEncoder;
     mComputePassUsages.push_back(std::move(usages));
