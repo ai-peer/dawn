@@ -2918,7 +2918,7 @@ bool GeneratorImpl::EmitUnaryOp(std::ostream& out, const ast::UnaryOpExpression*
     // Handle `-e` when `e` is signed, so that we ensure that if `e` is the
     // largest negative value, it returns `e`.
     auto* expr_type = TypeOf(expr->expr)->UnwrapRef();
-    if (expr->op == ast::UnaryOp::kNegation && expr_type->is_signed_scalar_or_vector()) {
+    if (expr->op == ast::UnaryOp::kNegation && expr_type->is_signed_integer_scalar_or_vector()) {
         auto fn = utils::GetOrCreate(unary_minus_funcs_, expr_type, [&]() -> std::string {
             // e.g.:
             // int tint_unary_minus(const int v) {

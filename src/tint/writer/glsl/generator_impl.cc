@@ -396,13 +396,16 @@ bool GeneratorImpl::EmitBitcast(std::ostream& out, const ast::BitcastExpression*
         return EmitExpression(out, expr->expr);
     }
 
-    if (src_type->is_float_scalar_or_vector() && dst_type->is_signed_scalar_or_vector()) {
+    if (src_type->is_float_scalar_or_vector() && dst_type->is_signed_integer_scalar_or_vector()) {
         out << "floatBitsToInt";
-    } else if (src_type->is_float_scalar_or_vector() && dst_type->is_unsigned_scalar_or_vector()) {
+    } else if (src_type->is_float_scalar_or_vector() &&
+               dst_type->is_unsigned_integer_scalar_or_vector()) {
         out << "floatBitsToUint";
-    } else if (src_type->is_signed_scalar_or_vector() && dst_type->is_float_scalar_or_vector()) {
+    } else if (src_type->is_signed_integer_scalar_or_vector() &&
+               dst_type->is_float_scalar_or_vector()) {
         out << "intBitsToFloat";
-    } else if (src_type->is_unsigned_scalar_or_vector() && dst_type->is_float_scalar_or_vector()) {
+    } else if (src_type->is_unsigned_integer_scalar_or_vector() &&
+               dst_type->is_float_scalar_or_vector()) {
         out << "uintBitsToFloat";
     } else {
         if (!EmitType(out, dst_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
