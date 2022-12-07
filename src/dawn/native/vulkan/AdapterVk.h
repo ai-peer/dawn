@@ -39,13 +39,13 @@ class Adapter : public AdapterBase {
     VkPhysicalDevice GetPhysicalDevice() const;
     VulkanInstance* GetVulkanInstance() const;
 
-    bool IsDepthStencilFormatSupported(VkFormat format);
+    bool IsDepthStencilFormatSupported(VkFormat format) const;
 
-    bool IsAndroidQualcomm();
+    bool IsAndroidQualcomm() const;
 
   private:
     MaybeError InitializeImpl() override;
-    MaybeError InitializeSupportedFeaturesImpl() override;
+    void InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
 
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(

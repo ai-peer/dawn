@@ -77,7 +77,7 @@ VulkanInstance* Adapter::GetVulkanInstance() const {
     return mVulkanInstance.Get();
 }
 
-bool Adapter::IsDepthStencilFormatSupported(VkFormat format) {
+bool Adapter::IsDepthStencilFormatSupported(VkFormat format) const {
     ASSERT(format == VK_FORMAT_D16_UNORM_S8_UINT || format == VK_FORMAT_D24_UNORM_S8_UINT ||
            format == VK_FORMAT_D32_SFLOAT_S8_UINT || format == VK_FORMAT_S8_UINT);
 
@@ -140,10 +140,7 @@ MaybeError Adapter::InitializeImpl() {
             break;
     }
 
-    return {};
-}
-
-MaybeError Adapter::InitializeSupportedFeaturesImpl() {
+    // Check for essential Vulkan extensions and features
     // Needed for viewport Y-flip.
     if (!mDeviceInfo.HasExt(DeviceExt::Maintenance1)) {
         return DAWN_INTERNAL_ERROR("Vulkan 1.1 or Vulkan 1.0 with KHR_Maintenance1 required.");
@@ -182,6 +179,10 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
         return DAWN_INTERNAL_ERROR("Vulkan sampleRateShading feature required.");
     }
 
+    return {};
+}
+
+void Adapter::InitializeSupportedFeaturesImpl() {
     // Initialize supported extensions
     if (mDeviceInfo.features.textureCompressionBC == VK_TRUE) {
         mSupportedFeatures.EnableFeature(Feature::TextureCompressionBC);
@@ -254,8 +255,6 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     // features.
     mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
 #endif
-
-    return {};
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -454,7 +453,7 @@ MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(
 }
 
 // Android devices with Qualcomm GPUs have a myriad of known issues. (dawn:1549)
-bool Adapter::IsAndroidQualcomm() {
+bool Adapter::IsAndroidQualcomm() const {
 #if DAWN_PLATFORM_IS(ANDROID)
     return gpu_info::IsQualcomm(GetVendorId());
 #else
