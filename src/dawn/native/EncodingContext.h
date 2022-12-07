@@ -78,6 +78,13 @@ class EncodingContext {
         return false;
     }
 
+    inline MaybeError CheckEncoderAlreadyEnded(const ApiObjectBase* encoder) {
+        if (encoder != mCurrentEncoder && mCurrentEncoder == mTopLevelEncoder) {
+            return DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", encoder);
+        }
+        return {};
+    }
+
     inline bool CheckCurrentEncoder(const ApiObjectBase* encoder) {
         if (mDestroyed) {
             HandleError(DAWN_VALIDATION_ERROR("Recording in a destroyed %s.", mCurrentEncoder));
@@ -89,8 +96,8 @@ class EncodingContext {
                 HandleError(DAWN_VALIDATION_ERROR("Command cannot be recorded while %s is active.",
                                                   mCurrentEncoder));
             } else {
-                HandleError(
-                    DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.", encoder));
+                HandleError(DAWN_VALIDATION_ERROR("Recording in an error or already ended %s.",
+                                                  mCurrentEncoder));
             }
             return false;
         }
@@ -109,9 +116,10 @@ class EncodingContext {
     template <typename EncodeFunction, typename... Args>
     inline bool TryEncode(const ApiObjectBase* encoder,
                           EncodeFunction&& encodeFunction,
+                          bool generateErrorImmediately,
                           const char* formatStr,
                           const Args&... args) {
-        if (!CheckCurrentEncoder(encoder)) {
+        if (!generateErrorImmediately && !CheckCurrentEncoder(encoder)) {
             return false;
         }
         ASSERT(!mWasMovedToIterator);
@@ -124,7 +132,7 @@ class EncodingContext {
     void WillBeginRenderPass();
 
     // Functions to set current encoder state
-    void EnterPass(const ApiObjectBase* passEncoder);
+    void EnterPass(ApiObjectBase* passEncoder);
     MaybeError ExitRenderPass(const ApiObjectBase* passEncoder,
                               RenderPassResourceUsageTracker usageTracker,
                               CommandEncoder* commandEncoder,

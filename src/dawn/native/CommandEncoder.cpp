@@ -831,7 +831,7 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
 
             return {};
         },
-        "encoding %s.BeginComputePass(%s).", this, descriptor);
+        false, "encoding %s.BeginComputePass(%s).", this, descriptor);
 
     if (success) {
         const ComputePassDescriptor defaultDescriptor = {};
@@ -1015,7 +1015,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
             return {};
         },
-        "encoding %s.BeginRenderPass(%s).", this, descriptor);
+        false, "encoding %s.BeginRenderPass(%s).", this, descriptor);
 
     if (success) {
         Ref<RenderPassEncoder> passEncoder =
@@ -1174,7 +1174,7 @@ void CommandEncoder::APICopyBufferToBuffer(BufferBase* source,
 
             return {};
         },
-        "encoding %s.CopyBufferToBuffer(%s, %u, %s, %u, %u).", this, source, sourceOffset,
+        false, "encoding %s.CopyBufferToBuffer(%s, %u, %s, %u, %u).", this, source, sourceOffset,
         destination, destinationOffset, size);
 }
 
@@ -1233,8 +1233,8 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
 
             return {};
         },
-        "encoding %s.CopyBufferToTexture(%s, %s, %s).", this, source->buffer, destination->texture,
-        copySize);
+        false, "encoding %s.CopyBufferToTexture(%s, %s, %s).", this, source->buffer,
+        destination->texture, copySize);
 }
 
 void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
@@ -1291,8 +1291,8 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
 
             return {};
         },
-        "encoding %s.CopyTextureToBuffer(%s, %s, %s).", this, source->texture, destination->buffer,
-        copySize);
+        false, "encoding %s.CopyTextureToBuffer(%s, %s, %s).", this, source->texture,
+        destination->buffer, copySize);
 }
 
 void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* source,
@@ -1364,7 +1364,7 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
 
             return {};
         },
-        "encoding %s.CopyTextureToTexture(%s, %s, %s).", this, source->texture,
+        false, "encoding %s.CopyTextureToTexture(%s, %s, %s).", this, source->texture,
         destination->texture, copySize);
 }
 
@@ -1416,7 +1416,7 @@ void CommandEncoder::APIClearBuffer(BufferBase* buffer, uint64_t offset, uint64_
 
             return {};
         },
-        "encoding %s.ClearBuffer(%s, %u, %u).", this, buffer, offset, size);
+        false, "encoding %s.ClearBuffer(%s, %u, %u).", this, buffer, offset, size);
 }
 
 void CommandEncoder::APIInjectValidationError(const char* message) {
@@ -1438,7 +1438,7 @@ void CommandEncoder::APIInsertDebugMarker(const char* groupLabel) {
 
             return {};
         },
-        "encoding %s.InsertDebugMarker(\"%s\").", this, groupLabel);
+        false, "encoding %s.InsertDebugMarker(\"%s\").", this, groupLabel);
 }
 
 void CommandEncoder::APIPopDebugGroup() {
@@ -1455,7 +1455,7 @@ void CommandEncoder::APIPopDebugGroup() {
 
             return {};
         },
-        "encoding %s.PopDebugGroup().", this);
+        false, "encoding %s.PopDebugGroup().", this);
 }
 
 void CommandEncoder::APIPushDebugGroup(const char* groupLabel) {
@@ -1474,7 +1474,7 @@ void CommandEncoder::APIPushDebugGroup(const char* groupLabel) {
 
             return {};
         },
-        "encoding %s.PushDebugGroup(\"%s\").", this, groupLabel);
+        false, "encoding %s.PushDebugGroup(\"%s\").", this, groupLabel);
 }
 
 void CommandEncoder::APIResolveQuerySet(QuerySetBase* querySet,
@@ -1515,8 +1515,8 @@ void CommandEncoder::APIResolveQuerySet(QuerySetBase* querySet,
 
             return {};
         },
-        "encoding %s.ResolveQuerySet(%s, %u, %u, %s, %u).", this, querySet, firstQuery, queryCount,
-        destination, destinationOffset);
+        false, "encoding %s.ResolveQuerySet(%s, %u, %u, %s, %u).", this, querySet, firstQuery,
+        queryCount, destination, destinationOffset);
 }
 
 void CommandEncoder::APIWriteBuffer(BufferBase* buffer,
@@ -1542,7 +1542,7 @@ void CommandEncoder::APIWriteBuffer(BufferBase* buffer,
 
             return {};
         },
-        "encoding %s.WriteBuffer(%s, %u, ..., %u).", this, buffer, bufferOffset, size);
+        false, "encoding %s.WriteBuffer(%s, %u, ..., %u).", this, buffer, bufferOffset, size);
 }
 
 void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
@@ -1562,7 +1562,7 @@ void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryInd
 
             return {};
         },
-        "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
+        false, "encoding %s.WriteTimestamp(%s, %u).", this, querySet, queryIndex);
 }
 
 CommandBufferBase* CommandEncoder::APIFinish(const CommandBufferDescriptor* descriptor) {

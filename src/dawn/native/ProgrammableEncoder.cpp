@@ -38,7 +38,7 @@ ProgrammableEncoder::ProgrammableEncoder(DeviceBase* device,
 ProgrammableEncoder::ProgrammableEncoder(DeviceBase* device,
                                          EncodingContext* encodingContext,
                                          ErrorTag errorTag)
-    : ApiObjectBase(device, errorTag),
+    : ApiObjectBase(device, errorTag, false),
       mEncodingContext(encodingContext),
       mValidationEnabled(device->IsValidationEnabled()) {}
 
@@ -66,7 +66,7 @@ void ProgrammableEncoder::APIInsertDebugMarker(const char* groupLabel) {
 
             return {};
         },
-        "encoding %s.InsertDebugMarker(\"%s\").", this, groupLabel);
+        false, "encoding %s.InsertDebugMarker(\"%s\").", this, groupLabel);
 }
 
 void ProgrammableEncoder::APIPopDebugGroup() {
@@ -83,7 +83,7 @@ void ProgrammableEncoder::APIPopDebugGroup() {
 
             return {};
         },
-        "encoding %s.PopDebugGroup().", this);
+        false, "encoding %s.PopDebugGroup().", this);
 }
 
 void ProgrammableEncoder::APIPushDebugGroup(const char* groupLabel) {
@@ -102,7 +102,7 @@ void ProgrammableEncoder::APIPushDebugGroup(const char* groupLabel) {
 
             return {};
         },
-        "encoding %s.PushDebugGroup(\"%s\").", this, groupLabel);
+        false, "encoding %s.PushDebugGroup(\"%s\").", this, groupLabel);
 }
 
 MaybeError ProgrammableEncoder::ValidateSetBindGroup(BindGroupIndex index,

@@ -112,10 +112,9 @@ TEST_F(CommandBufferValidationTest, RenderPassEndedTwice) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&placeholderRenderPass);
         pass.End();
-        pass.End();
         ASSERT_DEVICE_ERROR(
-            encoder.Finish(),
-            HasSubstr("Recording in an error or already ended [RenderPassEncoder]."));
+            pass.End(), HasSubstr("Recording in an error or already ended [RenderPassEncoder]."));
+        encoder.Finish();
     }
 }
 
@@ -134,10 +133,9 @@ TEST_F(CommandBufferValidationTest, ComputePassEndedTwice) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.End();
-        pass.End();
         ASSERT_DEVICE_ERROR(
-            encoder.Finish(),
-            HasSubstr("Recording in an error or already ended [ComputePassEncoder]."));
+            pass.End(), HasSubstr("Recording in an error or already ended [ComputePassEncoder]."));
+        encoder.Finish();
     }
 }
 
