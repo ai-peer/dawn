@@ -28,11 +28,11 @@ class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
         wgpu::DeviceDescriptor descriptor;
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
         const char* toggle = "disallow_unsafe_apis";
-        togglesDesc.forceEnabledToggles = &toggle;
-        togglesDesc.forceEnabledTogglesCount = 1;
+        deviceTogglesDesc.enabledToggles = &toggle;
+        deviceTogglesDesc.enabledTogglesCount = 1;
         return dawnAdapter.CreateDevice(&descriptor);
     }
 };
@@ -46,11 +46,11 @@ class UnsafeQueryAPIValidationTest : public ValidationTest {
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 2;
 
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
         const char* toggle = "disallow_unsafe_apis";
-        togglesDesc.forceEnabledToggles = &toggle;
-        togglesDesc.forceEnabledTogglesCount = 1;
+        deviceTogglesDesc.enabledToggles = &toggle;
+        deviceTogglesDesc.enabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }

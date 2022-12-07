@@ -34,7 +34,9 @@ class DeviceBase;
 
 class AdapterBase : public RefCounted {
   public:
-    AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
+    AdapterBase(InstanceBase* instance,
+                wgpu::BackendType backend,
+                const TogglesState& adapterToggles);
     ~AdapterBase() override;
 
     MaybeError Initialize();
@@ -65,6 +67,8 @@ class AdapterBase : public RefCounted {
 
     void SetUseTieredLimits(bool useTieredLimits);
 
+    const TogglesState& GetAdapterTogglesState() const;
+
     virtual bool SupportsExternalImages() const = 0;
 
   protected:
@@ -82,14 +86,16 @@ class AdapterBase : public RefCounted {
     // validation error if proper toggles are not enabled/disabled.
     FeaturesSet mSupportedFeatures;
     // Check if a feature os supported by this adapter AND suitable with given toggles.
-    MaybeError ValidateFeatureSupportedWithToggles(
-        wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles);
+    MaybeError ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
+                                                   const TogglesState& deviceToggles);
 
   private:
-    virtual ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
-        const DeviceDescriptor* descriptor,
-        const TripleStateTogglesSet& userProvidedToggles) = 0;
+    TogglesState MakeDeviceToggles(const RequiredTogglesSet& requiredDeviceToggles) const;
+    virtual TogglesState MakeDeviceTogglesImpl(
+        const RequiredTogglesSet& requiredDeviceToggles) const = 0;
+
+    virtual ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                            const TogglesState& deviceToggles) = 0;
 
     virtual MaybeError InitializeImpl() = 0;
 
@@ -103,13 +109,14 @@ class AdapterBase : public RefCounted {
 
     virtual MaybeError ValidateFeatureSupportedWithTogglesImpl(
         wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles) = 0;
+        const TogglesState& deviceToggles) = 0;
 
     ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* descriptor);
 
     virtual MaybeError ResetInternalDeviceForTestingImpl();
     Ref<InstanceBase> mInstance;
     wgpu::BackendType mBackend;
+    TogglesState mAdapterTogglesState;
     CombinedLimits mLimits;
     bool mUseTieredLimits = false;
 };

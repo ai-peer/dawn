@@ -34,13 +34,13 @@ class RenderPipelineValidationTest : public ValidationTest {
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
 
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        descriptor.nextInChain = &deviceTogglesDesc;
 
-        togglesDesc.forceEnabledToggles = nullptr;
-        togglesDesc.forceEnabledTogglesCount = 0;
-        togglesDesc.forceDisabledToggles = forceDisabledToggle;
-        togglesDesc.forceDisabledTogglesCount = 1;
+        deviceTogglesDesc.enabledToggles = nullptr;
+        deviceTogglesDesc.enabledTogglesCount = 0;
+        deviceTogglesDesc.disabledToggles = forceDisabledToggle;
+        deviceTogglesDesc.disabledTogglesCount = 1;
 
         return dawnAdapter.CreateDevice(&descriptor);
     }

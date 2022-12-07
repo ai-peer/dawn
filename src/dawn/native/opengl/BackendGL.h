@@ -28,7 +28,10 @@ class Backend : public BackendConnection {
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* options) override;
+        const AdapterDiscoveryOptionsBase* options,
+        const TogglesState& adapterToggle) override;
+
+    TogglesState MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const override;
 
   private:
     bool mCreatedAdapter = false;

@@ -20,6 +20,7 @@
 #include "dawn/dawn_thread_dispatch_proc.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/null/DeviceNull.h"
 #include "dawn/webgpu_cpp.h"
 
@@ -27,7 +28,7 @@ class PerThreadProcTests : public testing::Test {
   public:
     PerThreadProcTests()
         : mNativeInstance(dawn::native::InstanceBase::Create()),
-          mNativeAdapter(mNativeInstance.Get()) {}
+          mNativeAdapter(mNativeInstance.Get(), dawn::native::TogglesState{}) {}
     ~PerThreadProcTests() override = default;
 
   protected:

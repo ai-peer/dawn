@@ -77,7 +77,10 @@ class Backend : public BackendConnection {
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters() override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
-        const AdapterDiscoveryOptionsBase* optionsBase) override;
+        const AdapterDiscoveryOptionsBase* optionsBase,
+        const TogglesState& adapterToggles) override;
+
+    TogglesState MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const override;
 
   private:
     // Acquiring DXC version information and store the result in mDxcVersionInfo. This function

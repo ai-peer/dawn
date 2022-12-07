@@ -23,6 +23,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Surface.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 
@@ -138,7 +139,10 @@ void InstanceBase::WillDropLastExternalRef() {
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    // DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor,
+                                                       wgpu::SType::DawnTogglesDescriptor}}));
+
     const DawnInstanceDescriptor* dawnDesc = nullptr;
     FindInChain(descriptor->nextInChain, &dawnDesc);
     if (dawnDesc != nullptr) {
@@ -146,6 +150,13 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
             mRuntimeSearchPaths.push_back(dawnDesc->additionalRuntimeSearchPaths[i]);
         }
     }
+
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+    if (instanceTogglesDesc != nullptr) {
+        mInstanceTogglesStates = TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc);
+    }
+
     // Default paths to search are next to the shared library, next to the executable, and
     // no path (just libvulkan.so).
     if (auto p = GetModuleDirectory()) {
@@ -186,13 +197,20 @@ void InstanceBase::APIRequestAdapter(const RequestAdapterOptions* options,
 ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     const RequestAdapterOptions* options) {
     ASSERT(options != nullptr);
+
+    const DawnTogglesDescriptor* adapterTogglesDesc = nullptr;
+    FindInChain(options->nextInChain, &adapterTogglesDesc);
+    RequiredTogglesSet requiredAdapterToggles =
+        RequiredTogglesSet::CreateFromTogglesDescriptor(adapterTogglesDesc);
+
+    // Always try to return a Vulkan Swiftshader if forceFallbackAdapter is true
     if (options->forceFallbackAdapter) {
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
         if (GetEnabledBackends()[wgpu::BackendType::Vulkan]) {
             dawn_native::vulkan::AdapterDiscoveryOptions vulkanOptions;
             vulkanOptions.forceSwiftShader = true;
 
-            MaybeError result = DiscoverAdaptersInternal(&vulkanOptions);
+            MaybeError result = DiscoverAdaptersInternal(&vulkanOptions, requiredAdapterToggles);
             if (result.IsError()) {
                 dawn::WarningLog() << absl::StrFormat(
                     "Skipping Vulkan Swiftshader adapter because initialization failed: %s",
@@ -202,7 +220,7 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         }
 #else
         return Ref<AdapterBase>(nullptr);
-#endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
+#endif
     } else {
         DiscoverDefaultAdapters();
     }
@@ -270,12 +288,18 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
 }
 
 void InstanceBase::DiscoverDefaultAdapters() {
-    for (wgpu::BackendType b : IterateBitSet(GetEnabledBackends())) {
-        EnsureBackendConnection(b);
-    }
-
     if (mDiscoveredDefaultAdapters) {
         return;
+    }
+
+    DiscoverAdaptersForAllBackends(TogglesState{});
+
+    mDiscoveredDefaultAdapters = true;
+}
+
+void InstanceBase::DiscoverAdaptersForAllBackends(const TogglesState& requiredAdapterToggles) {
+    for (wgpu::BackendType b : IterateBitSet(GetEnabledBackends())) {
+        EnsureBackendConnection(b);
     }
 
     // Query and merge all default adapters for all backends
@@ -288,8 +312,6 @@ void InstanceBase::DiscoverDefaultAdapters() {
             mAdapters.push_back(std::move(adapter));
         }
     }
-
-    mDiscoveredDefaultAdapters = true;
 }
 
 // This is just a wrapper around the real logic that uses Error.h error handling.
@@ -304,6 +326,10 @@ bool InstanceBase::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) 
     }
 
     return true;
+}
+
+const TogglesState& InstanceBase::GetInstanceTogglesState() const {
+    return mInstanceTogglesStates;
 }
 
 const ToggleInfo* InstanceBase::GetToggleInfo(const char* toggleName) {
@@ -380,7 +406,15 @@ void InstanceBase::EnsureBackendConnection(wgpu::BackendType backendType) {
     mBackendsConnected.set(backendType);
 }
 
+// Discover adapters with no specific adapter toggles given.
 MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options) {
+    return DiscoverAdaptersInternal(options, RequiredTogglesSet{});
+}
+
+// Discover adapters with given required adapter toggles.
+MaybeError InstanceBase::DiscoverAdaptersInternal(
+    const AdapterDiscoveryOptionsBase* options,
+    const RequiredTogglesSet& requiredAdapterToggles) {
     wgpu::BackendType backendType = static_cast<wgpu::BackendType>(options->backendType);
     DAWN_TRY(ValidateBackendType(backendType));
 
@@ -397,8 +431,11 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         }
         foundBackend = true;
 
+        // Get backend-filtered adapter toggles inherited from instance toggles
+        TogglesState adapterToggles = backend->MakeAdapterToggles(requiredAdapterToggles);
+
         std::vector<Ref<AdapterBase>> newAdapters;
-        DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options));
+        DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options, adapterToggles));
 
         for (Ref<AdapterBase>& adapter : newAdapters) {
             ASSERT(adapter->GetBackendType() == backend->GetType());

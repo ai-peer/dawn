@@ -55,6 +55,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
                            void* userdata);
 
     void DiscoverDefaultAdapters();
+    void DiscoverAdaptersForAllBackends(const TogglesState& requiredAdapterToggles);
     bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
 
     const std::vector<Ref<AdapterBase>>& GetAdapters() const;
@@ -71,6 +72,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
         *result = resultOrError.AcquireSuccess();
         return false;
     }
+
+    const TogglesState& GetInstanceTogglesState() const;
 
     // Used to query the details of a toggle. Return nullptr if toggleName is not a valid name
     // of a toggle supported in Dawn.
@@ -122,6 +125,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     void EnsureBackendConnection(wgpu::BackendType backendType);
 
     MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options);
+    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options,
+                                        const RequiredTogglesSet& requiredAdapterToggles);
 
     ResultOrError<Ref<AdapterBase>> RequestAdapterInternal(const RequestAdapterOptions* options);
 
@@ -143,6 +148,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     std::vector<std::unique_ptr<BackendConnection>> mBackends;
     std::vector<Ref<AdapterBase>> mAdapters;
+
+    TogglesState mInstanceTogglesStates;
 
     FeaturesInfo mFeaturesInfo;
     TogglesInfo mTogglesInfo;

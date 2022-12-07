@@ -14,6 +14,9 @@
 
 #include "dawn/native/BackendConnection.h"
 
+#include "dawn/common/Log.h"
+#include "dawn/native/Instance.h"
+
 namespace dawn::native {
 
 BackendConnection::BackendConnection(InstanceBase* instance, wgpu::BackendType type)
@@ -28,7 +31,8 @@ InstanceBase* BackendConnection::GetInstance() const {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> BackendConnection::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* options) {
+    const AdapterDiscoveryOptionsBase* options,
+    const TogglesState& adapterToggles) {
     return DAWN_VALIDATION_ERROR("DiscoverAdapters not implemented for this backend.");
 }
 
