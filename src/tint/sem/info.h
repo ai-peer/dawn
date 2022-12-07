@@ -30,6 +30,10 @@
 namespace tint::sem {
 class Module;
 }  // namespace tint::sem
+namespace tint::type {
+class Node;
+class Type;
+}  // namespace tint::type
 
 namespace tint::sem {
 
@@ -83,7 +87,7 @@ class Info {
     /// Add registers the semantic node `sem_node` for the AST node `ast_node`.
     /// @param ast_node the AST node
     /// @param sem_node the semantic node
-    template <typename AST>
+    template <typename AST, typename SEM = SemanticNodeTypeFor<AST>>
     void Add(const AST* ast_node, const SemanticNodeTypeFor<AST>* sem_node) {
         Reserve(ast_node->node_id);
         // Check there's no semantic info already existing for the AST node
@@ -94,8 +98,8 @@ class Info {
     /// Replace replaces any existing semantic node `sem_node` for the AST node `ast_node`.
     /// @param ast_node the AST node
     /// @param sem_node the new semantic node
-    template <typename AST>
-    void Replace(const AST* ast_node, const SemanticNodeTypeFor<AST>* sem_node) {
+    template <typename AST, typename SEM = SemanticNodeTypeFor<AST>>
+    void Replace(const AST* ast_node, const SEM* sem_node) {
         Reserve(ast_node->node_id);
         nodes_[ast_node->node_id.value] = sem_node;
     }
@@ -142,7 +146,7 @@ class Info {
 
   private:
     // AST node index to semantic node
-    std::vector<const sem::Node*> nodes_;
+    std::vector<const CastableBase*> nodes_;
     // Lists transitively referenced overrides for the given item
     std::unordered_map<const CastableBase*, TransitivelyReferenced> referenced_overrides_;
     // The semantic module

@@ -39,8 +39,9 @@ class SemHelper {
     template <typename SEM = sem::Info::InferFromAST, typename AST_OR_TYPE = CastableBase>
     auto* Get(const AST_OR_TYPE* ast) const {
         using T = sem::Info::GetResultType<SEM, AST_OR_TYPE>;
-        auto* sem = builder_->Sem().Get(ast);
+        auto* sem = builder_->Sem().Get<SEM>(ast);
         if (!sem) {
+            sem = builder_->Sem().Get<SEM>(ast);
             TINT_ICE(Resolver, builder_->Diagnostics())
                 << "AST node '" << ast->TypeInfo().name << "' had no semantic info\n"
                 << "At: " << ast->source << "\n"
@@ -49,10 +50,10 @@ class SemHelper {
         return const_cast<T*>(As<T>(sem));
     }
 
-    /// @returns the resolved symbol (function, type or variable) for the given
-    /// ast::Identifier or ast::TypeName cast to the given semantic type.
+    /// @returns the resolved symbol (function, or variable) for the given ast::Identifier or
+    /// ast::TypeName cast to the given semantic type.
     /// @param node the node to retrieve
-    template <typename SEM = sem::Node>
+    template <typename SEM = CastableBase>
     SEM* ResolvedSymbol(const ast::Node* node) const {
         auto resolved = dependencies_.resolved_symbols.Find(node);
         return resolved ? const_cast<SEM*>(builder_->Sem().Get<SEM>(*resolved)) : nullptr;
@@ -60,17 +61,17 @@ class SemHelper {
 
     /// @returns the resolved type of the ast::Expression `expr`
     /// @param expr the expression
-    sem::Type* TypeOf(const ast::Expression* expr) const;
+    type::Type* TypeOf(const ast::Expression* expr) const;
 
     /// @returns the type name of the given semantic type, unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string TypeNameOf(const sem::Type* ty) const;
+    std::string TypeNameOf(const type::Type* ty) const;
 
     /// @returns the type name of the given semantic type, without unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string RawTypeNameOf(const sem::Type* ty) const;
+    std::string RawTypeNameOf(const type::Type* ty) const;
 
   private:
     ProgramBuilder* builder_;
