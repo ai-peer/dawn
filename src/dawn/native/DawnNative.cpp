@@ -38,10 +38,10 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
 
         if (deviceDescriptor != nullptr) {
             desc->nextInChain = &mTogglesDesc;
-            mTogglesDesc.forceEnabledToggles = deviceDescriptor->forceEnabledToggles.data();
-            mTogglesDesc.forceEnabledTogglesCount = deviceDescriptor->forceEnabledToggles.size();
-            mTogglesDesc.forceDisabledToggles = deviceDescriptor->forceDisabledToggles.data();
-            mTogglesDesc.forceDisabledTogglesCount = deviceDescriptor->forceDisabledToggles.size();
+            mTogglesDesc.enabledToggles = deviceDescriptor->forceEnabledToggles.data();
+            mTogglesDesc.enabledTogglesCount = deviceDescriptor->forceEnabledToggles.size();
+            mTogglesDesc.disabledToggles = deviceDescriptor->forceDisabledToggles.data();
+            mTogglesDesc.disabledTogglesCount = deviceDescriptor->forceDisabledToggles.size();
 
             desc->requiredLimits =
                 reinterpret_cast<const RequiredLimits*>(deviceDescriptor->requiredLimits);
@@ -55,7 +55,7 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
         }
     }
 
-    DawnTogglesDeviceDescriptor mTogglesDesc = {};
+    DawnTogglesDescriptor mTogglesDesc = {};
     std::vector<wgpu::FeatureName> mRequiredFeatures = {};
 };
 }  // namespace
@@ -137,6 +137,12 @@ bool Adapter::SupportsExternalImages() const {
     return mImpl->SupportsExternalImages();
 }
 
+bool Adapter::IsCreatedWithRequiredToggles(
+    const WGPUDawnTogglesDescriptor* requiredAdapterToggles) const {
+    return mImpl->IsCreatedWithRequiredToggles(RequiredTogglesSet::CreateFromTogglesDescriptor(
+        FromAPI(requiredAdapterToggles), ToggleInfo::ToggleStage::Adapter));
+}
+
 Adapter::operator bool() const {
     return mImpl != nullptr;
 }
@@ -196,12 +202,13 @@ Instance::~Instance() {
     }
 }
 
-void Instance::DiscoverDefaultAdapters() {
-    mImpl->DiscoverDefaultAdapters();
+void Instance::DiscoverDefaultAdapters(const WGPUDawnTogglesDescriptor* requiredAdapterToggles) {
+    mImpl->DiscoverDefaultAdapters(FromAPI(requiredAdapterToggles));
 }
 
-bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) {
-    return mImpl->DiscoverAdapters(options);
+bool Instance::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                                const WGPUDawnTogglesDescriptor* requiredAdapterToggles) {
+    return mImpl->DiscoverAdapters(options, FromAPI(requiredAdapterToggles));
 }
 
 std::vector<Adapter> Instance::GetAdapters() const {
