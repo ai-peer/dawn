@@ -27,10 +27,16 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-    : mInstance(instance), mBackend(backend) {
-    mSupportedFeatures.EnableFeature(Feature::DawnNative);
-    mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         wgpu::BackendType backend,
+                         const TogglesState& adapterToggles,
+                         const RequiredTogglesSet& requiredToggles)
+    : mInstance(instance),
+      mBackend(backend),
+      mTogglesState(adapterToggles),
+      mRequiredToggles(requiredToggles) {
+    ASSERT(adapterToggles.GetStage() == ToggleStage::Adapter);
+    ASSERT(requiredToggles.requiredStage == ToggleStage::Adapter);
 }
 
 AdapterBase::~AdapterBase() = default;
@@ -39,6 +45,9 @@ MaybeError AdapterBase::Initialize() {
     DAWN_TRY_CONTEXT(InitializeImpl(), "initializing adapter (backend=%s)", mBackend);
     InitializeVendorArchitectureImpl();
 
+    // Enable general and backend-specific features
+    EnableFeature(Feature::DawnNative);
+    EnableFeature(Feature::DawnInternalUsages);
     InitializeSupportedFeaturesImpl();
 
     DAWN_TRY_CONTEXT(
@@ -206,31 +215,45 @@ bool AdapterBase::GetLimits(SupportedLimits* limits) const {
     return true;
 }
 
-MaybeError AdapterBase::ValidateFeatureSupportedWithDeviceToggles(
-    wgpu::FeatureName feature,
-    const TogglesState& deviceTogglesState) {
-    DAWN_TRY(ValidateFeatureName(feature));
-    DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(feature),
-                    "Requested feature %s is not supported.", feature);
+const TogglesState& AdapterBase::GetAdapterTogglesState() const {
+    return mTogglesState;
+}
 
-    const FeatureInfo* featureInfo = GetInstance()->GetFeatureInfo(feature);
-    // Experimental features are guarded by toggle DisallowUnsafeAPIs.
-    if (featureInfo->featureState == FeatureInfo::FeatureState::Experimental) {
-        // DisallowUnsafeAPIs toggle is by default enabled if not explicitly disabled.
-        DAWN_INVALID_IF(deviceTogglesState.IsEnabled(Toggle::DisallowUnsafeAPIs),
-                        "Feature %s is guarded by toggle disallow_unsafe_apis.", featureInfo->name);
+bool AdapterBase::IsCreatedWithRequiredToggles(
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) const {
+    RequiredTogglesSet requiredAdapterToggles = RequiredTogglesSet::CreateFromTogglesDescriptor(
+        adapterTogglesDescriptor, ToggleStage::Adapter);
+    return requiredAdapterToggles == mRequiredToggles;
+}
+
+void AdapterBase::SetAdapterTogglesForTesting(const TogglesState& adapterToggles) {
+    ASSERT(adapterToggles.GetStage() == ToggleStage::Adapter);
+    mTogglesState = adapterToggles;
+}
+
+void AdapterBase::EnableFeature(Feature feature) {
+    bool isFeatureExperimental =
+        GetInstance()->GetFeatureInfo(FeatureEnumToAPIFeature(feature))->featureState ==
+        FeatureInfo::FeatureState::Experimental;
+    if (!isFeatureExperimental || !mTogglesState.IsEnabled(Toggle::DisallowUnsafeAPIs)) {
+        mSupportedFeatures.EnableFeature(feature);
     }
+}
 
-    // Do backend-specific validation.
-    return ValidateFeatureSupportedWithDeviceTogglesImpl(feature, deviceTogglesState);
+void AdapterBase::SetSupportedFeaturesForTesting(
+    const std::vector<wgpu::FeatureName>& requiredFeatures) {
+    mSupportedFeatures = {};
+    for (wgpu::FeatureName f : requiredFeatures) {
+        mSupportedFeatures.EnableFeature(f);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     const DeviceDescriptor* descriptor) {
     ASSERT(descriptor != nullptr);
 
-    // Create device toggles state from required toggles descriptor.
-    // TODO(dawn:1495): After implementing adapter toggles, also inherite adapter toggles state.
+    // Create device toggles state from required toggles descriptor and inherited adapter toggles
+    // state.
     const DawnTogglesDescriptor* deviceTogglesDesc = nullptr;
     FindInChain(descriptor->nextInChain, &deviceTogglesDesc);
 
@@ -261,24 +284,47 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
         deviceTogglesDesc = &convertedDeviceTogglesDesc;
     }
 
-    // Create device toggles state from user-given toggles descriptor, and set up forced and default
-    // toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, device toggles state should also inherit
-    // from adapter toggles state.
+    // Create device toggles state.
     TogglesState deviceToggles =
         TogglesState::CreateFromTogglesDescriptor(deviceTogglesDesc, ToggleStage::Device);
+    deviceToggles.InheritToggles(mTogglesState);
     // Default toggles for all backend
     deviceToggles.Default(Toggle::LazyClearResourceOnFirstUse, true);
-    deviceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+    // Toggle::DisallowUnsafeAPIs should have been inherited, either enabled or disabled.
+    DAWN_ASSERT(deviceToggles.IsSet(Toggle::DisallowUnsafeAPIs));
+
     // Backend-specific forced and default device toggles
     SetupBackendDeviceToggles(&deviceToggles);
 
+    // TODO(dawn:1495): Remove this workaround after removing the deprecated
+    // DawnTogglesDeviceDescriptor. Toggle DisallowUnsafeApis is now instance stage toggle and
+    // effects adapters' behavior, but some device behavior can still solely rely on device
+    // DisallowUnsafeApis toggle, e.g. creating stencil texture with multiple mip level on Mac
+    // requires DisallowUnsafeApis disabled (dawn:838). In order to make existing programs with
+    // these behaviors works, set the device DisallowUnsafeApis toggle by fake inheriting if
+    // required in DawnTogglesDeviceDescriptor, even though that may break the coherence between
+    // device toggles state and instance/adapter toggles state.
+    if (deprecatedTogglesDeviceDesc) {
+        RequiredTogglesSet workaroundInstanceToggles =
+            RequiredTogglesSet::CreateFromTogglesDescriptor(deviceTogglesDesc,
+                                                            ToggleStage::Instance);
+        if (workaroundInstanceToggles.togglesProvided.Has(Toggle::DisallowUnsafeAPIs)) {
+            dawn::WarningLog() << "DisallowUnsafeApis is now instance stage toggle and should be "
+                                  "required using DawnTogglesDescriptor when creating instance.";
+            deviceToggles.Inherit(
+                Toggle::DisallowUnsafeAPIs,
+                workaroundInstanceToggles.togglesEnabled.Has(Toggle::DisallowUnsafeAPIs), false);
+        }
+    }
+
     // Validate all required features are supported by the adapter and suitable under given toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, validate supported features using
-    // adapter toggles instead of device toggles.
+    // Currently the supported features set is determined under adapter toggles but not device
+    // toggles, and stored as AdapterBase::mSupportedFeatures.
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {
         wgpu::FeatureName feature = descriptor->requiredFeatures[i];
-        DAWN_TRY(ValidateFeatureSupportedWithDeviceToggles(feature, deviceToggles));
+        DAWN_TRY(ValidateFeatureName(feature));
+        DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(feature),
+                        "Requested feature %s is not supported.", feature);
     }
 
     if (descriptor->requiredLimits != nullptr) {
@@ -296,11 +342,11 @@ void AdapterBase::SetUseTieredLimits(bool useTieredLimits) {
     mUseTieredLimits = useTieredLimits;
 }
 
-void AdapterBase::ResetInternalDeviceForTesting() {
-    mInstance->ConsumedError(ResetInternalDeviceForTestingImpl());
+ResultOrError<bool> AdapterBase::ResetInternalDeviceForTesting() {
+    return ResetInternalDeviceForTestingImpl();
 }
 
-MaybeError AdapterBase::ResetInternalDeviceForTestingImpl() {
+ResultOrError<bool> AdapterBase::ResetInternalDeviceForTestingImpl() {
     return DAWN_INTERNAL_ERROR(
         "ResetInternalDeviceForTesting should only be used with the D3D12 backend.");
 }

@@ -28,8 +28,14 @@
 
 namespace dawn::native::d3d12 {
 
-Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
-    : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12),
+Adapter::Adapter(Backend* backend,
+                 ComPtr<IDXGIAdapter3> hardwareAdapter,
+                 const TogglesState& adapterToggles,
+                 const RequiredTogglesSet& requiredToggles)
+    : AdapterBase(backend->GetInstance(),
+                  wgpu::BackendType::D3D12,
+                  adapterToggles,
+                  requiredToggles),
       mHardwareAdapter(hardwareAdapter),
       mBackend(backend) {}
 
@@ -138,26 +144,27 @@ bool Adapter::AreTimestampQueriesSupported() const {
 }
 
 void Adapter::InitializeSupportedFeaturesImpl() {
-    mSupportedFeatures.EnableFeature(Feature::TextureCompressionBC);
-    mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
-    mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
-    mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
-    mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
-    mSupportedFeatures.EnableFeature(Feature::DepthClipControl);
+    EnableFeature(Feature::TextureCompressionBC);
+    EnableFeature(Feature::MultiPlanarFormats);
+    EnableFeature(Feature::Depth32FloatStencil8);
+    EnableFeature(Feature::IndirectFirstInstance);
+    EnableFeature(Feature::RG11B10UfloatRenderable);
+    EnableFeature(Feature::DepthClipControl);
 
     if (AreTimestampQueriesSupported()) {
-        mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
-        mSupportedFeatures.EnableFeature(Feature::TimestampQueryInsidePasses);
+        EnableFeature(Feature::TimestampQuery);
+        EnableFeature(Feature::TimestampQueryInsidePasses);
     }
-    mSupportedFeatures.EnableFeature(Feature::PipelineStatisticsQuery);
+    EnableFeature(Feature::PipelineStatisticsQuery);
 
     // Both Dp4a and ShaderF16 features require DXC version being 1.4 or higher
-    if (GetBackend()->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)) {
+    if (GetAdapterTogglesState().IsEnabled(Toggle::UseDXC) &&
+        GetBackend()->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)) {
         if (mDeviceInfo.supportsDP4a) {
-            mSupportedFeatures.EnableFeature(Feature::ChromiumExperimentalDp4a);
+            EnableFeature(Feature::ChromiumExperimentalDp4a);
         }
         if (mDeviceInfo.supportsShaderF16) {
-            mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+            EnableFeature(Feature::ShaderF16);
         }
     }
 
@@ -167,7 +174,7 @@ void Adapter::InitializeSupportedFeaturesImpl() {
         D3D12_FEATURE_FORMAT_SUPPORT, &bgra8unormFormatInfo, sizeof(bgra8unormFormatInfo));
     if (SUCCEEDED(hr) &&
         (bgra8unormFormatInfo.Support1 & D3D12_FORMAT_SUPPORT1_TYPED_UNORDERED_ACCESS_VIEW)) {
-        mSupportedFeatures.EnableFeature(Feature::BGRA8UnormStorage);
+        EnableFeature(Feature::BGRA8UnormStorage);
     }
 }
 
@@ -333,21 +340,6 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
-    wgpu::FeatureName feature,
-    const TogglesState& deviceTogglesState) {
-    // shader-f16 feature and chromium-experimental-dp4a feature require DXC 1.4 or higher for
-    // D3D12.
-    if (feature == wgpu::FeatureName::ShaderF16 ||
-        feature == wgpu::FeatureName::ChromiumExperimentalDp4a) {
-        DAWN_INVALID_IF(!(deviceTogglesState.IsEnabled(Toggle::UseDXC) &&
-                          mBackend->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)),
-                        "Feature %s requires DXC for D3D12.",
-                        GetInstance()->GetFeatureInfo(feature)->name);
-    }
-    return {};
-}
-
 MaybeError Adapter::InitializeDebugLayerFilters() {
     if (!GetInstance()->IsBackendValidationEnabled()) {
         return {};
@@ -475,13 +467,11 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
         Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
         GetDeviceInfo().programmableSamplePositionsTier == 0);
 
-    // Check DXC for use_dxc toggle, and default to use FXC
-    // TODO(dawn:1495): When implementing adapter toggles, promote UseDXC as adapter toggle, and do
-    // the validation when creating adapters.
+    // The UseDXC adapter toggle should have been validated and get inherited to device toggles
+    // state.
     if (!GetBackend()->IsDXCAvailable()) {
-        deviceToggles->ForceSet(Toggle::UseDXC, false);
+        DAWN_ASSERT(!deviceToggles->IsEnabled(Toggle::UseDXC));
     }
-    deviceToggles->Default(Toggle::UseDXC, false);
 
     // Disable optimizations when using FXC
     // See https://crbug.com/dawn/1203
@@ -565,15 +555,16 @@ ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor*
     return Device::Create(this, descriptor, deviceToggles);
 }
 
-// Resets the backend device and creates a new one. If any D3D12 objects belonging to the
-// current ID3D12Device have not been destroyed, a non-zero value will be returned upon Reset()
-// and the subequent call to CreateDevice will return a handle the existing device instead of
+// Resets the backend device in order to creates a new one. Return true if all references to current
+// ID3D12Device are destroyed, and return false if other references to current ID3D2device still
+// exist (in other adapters) and current ID3D12Device have not been released. This method should be
+// called on all D3D12 adapters of an instance in order to release the ID3D12Device, otherwise
+// the subequent call to CreateDevice will return a handle the existing device instead of
 // creating a new one.
-MaybeError Adapter::ResetInternalDeviceForTestingImpl() {
-    ASSERT(mD3d12Device.Reset() == 0);
-    DAWN_TRY(Initialize());
-
-    return {};
+ResultOrError<bool> Adapter::ResetInternalDeviceForTestingImpl() {
+    // A non-zero value returned upon Reset() indicates some D3D12 objects belonging to the
+    // current ID3D12Device have not been destroyed.
+    return mD3d12Device.Reset() == 0;
 }
 
 }  // namespace dawn::native::d3d12
