@@ -132,8 +132,8 @@ class ScopedBitCast {
   public:
     ScopedBitCast(GeneratorImpl* generator,
                   std::ostream& stream,
-                  const sem::Type* curr_type,
-                  const sem::Type* target_type)
+                  const type::Type* curr_type,
+                  const type::Type* target_type)
         : s(stream) {
         auto* target_vec_type = target_type->As<sem::Vector>();
 
@@ -347,7 +347,7 @@ bool GeneratorImpl::Generate() {
     return true;
 }
 
-bool GeneratorImpl::EmitTypeDecl(const sem::Type* ty) {
+bool GeneratorImpl::EmitTypeDecl(const type::Type* ty) {
     if (auto* str = ty->As<sem::Struct>()) {
         if (!EmitStructType(current_buffer_, str)) {
             return false;
@@ -491,7 +491,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
         return true;
     };
 
-    auto signed_type_of = [&](const sem::Type* ty) -> const sem::Type* {
+    auto signed_type_of = [&](const type::Type* ty) -> const type::Type* {
         if (ty->is_integer_scalar()) {
             return builder_.create<sem::I32>();
         } else if (auto* v = ty->As<sem::Vector>()) {
@@ -500,7 +500,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
         return {};
     };
 
-    auto unsigned_type_of = [&](const sem::Type* ty) -> const sem::Type* {
+    auto unsigned_type_of = [&](const type::Type* ty) -> const type::Type* {
         if (ty->is_integer_scalar()) {
             return builder_.create<sem::U32>();
         } else if (auto* v = ty->As<sem::Vector>()) {
@@ -1608,7 +1608,7 @@ bool GeneratorImpl::EmitContinue(const ast::ContinueStatement*) {
     return true;
 }
 
-bool GeneratorImpl::EmitZeroValue(std::ostream& out, const sem::Type* type) {
+bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
     return Switch(
         type,
         [&](const sem::Bool*) {
@@ -2513,7 +2513,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
 }
 
 bool GeneratorImpl::EmitType(std::ostream& out,
-                             const sem::Type* type,
+                             const type::Type* type,
                              const std::string& name,
                              bool* name_printed /* = nullptr */) {
     if (name_printed) {
@@ -2541,7 +2541,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
                 return false;
             }
             out << ", ";
-            if (arr->Count()->Is<sem::RuntimeArrayCount>()) {
+            if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                 out << "1";
             } else {
                 auto count = arr->ConstantCount();
@@ -2718,7 +2718,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
 }
 
 bool GeneratorImpl::EmitTypeAndName(std::ostream& out,
-                                    const sem::Type* type,
+                                    const type::Type* type,
                                     const std::string& name) {
     bool name_printed = false;
     if (!EmitType(out, type, name, &name_printed)) {
@@ -3078,7 +3078,7 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
     return true;
 }
 
-GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const sem::Type* ty) {
+GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const type::Type* ty) {
     return Switch(
         ty,
 
@@ -3169,7 +3169,7 @@ GeneratorImpl::SizeAndAlign GeneratorImpl::MslPackedTypeSizeAndAlign(const sem::
                     << "arrays with explicit strides should not exist past the SPIR-V reader";
                 return SizeAndAlign{};
             }
-            if (arr->Count()->Is<sem::RuntimeArrayCount>()) {
+            if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                 return SizeAndAlign{arr->Stride(), arr->Align()};
             }
             if (auto count = arr->ConstantCount()) {
