@@ -16,6 +16,23 @@
       "message": "Kokoro seems like a bad merge, unrelated to this change.",
       "revId": "c87a6457e20f98ce6fa4839bf5d2a262c3a5a291",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a9bbbbe_ac177a2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-07T13:51:01Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "c87a6457e20f98ce6fa4839bf5d2a262c3a5a291",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
