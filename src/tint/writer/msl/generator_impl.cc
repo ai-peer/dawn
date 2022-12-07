@@ -181,6 +181,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         polyfills.first_trailing_bit = true;
         polyfills.insert_bits = transform::BuiltinPolyfill::Level::kClampParameters;
         polyfills.int_div_mod = true;
+        polyfills.sign_int = true;
         polyfills.texture_sample_base_clamp_to_edge_2d_f32 = true;
         data.Add<transform::BuiltinPolyfill::Config>(polyfills);
         manager.Add<transform::BuiltinPolyfill>();
@@ -528,7 +529,8 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
 
     // Handle +/-/* of signed values
     if ((expr->IsAdd() || expr->IsSubtract() || expr->IsMultiply()) &&
-        lhs_type->is_signed_scalar_or_vector() && rhs_type->is_signed_scalar_or_vector()) {
+        lhs_type->is_signed_integer_scalar_or_vector() &&
+        rhs_type->is_signed_integer_scalar_or_vector()) {
         // If lhs or rhs is a vector, use that type (support implicit scalar to
         // vector promotion)
         auto* target_type = lhs_type->Is<sem::Vector>()
@@ -561,7 +563,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
     // TODO(crbug.com/tint/1077): This may not be necessary. The MSL spec
     // seems to imply that left shifting a signed value is treated the same as
     // left shifting an unsigned value, but we need to make sure.
-    if (expr->IsShiftLeft() && lhs_type->is_signed_scalar_or_vector()) {
+    if (expr->IsShiftLeft() && lhs_type->is_signed_integer_scalar_or_vector()) {
         // Shift left: discards top bits, so convert first operand to unsigned
         // first, then convert result back to signed
         ScopedBitCast outer_int_cast(this, out, lhs_type, signed_type_of(lhs_type));

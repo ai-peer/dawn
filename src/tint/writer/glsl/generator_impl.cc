@@ -826,7 +826,7 @@ bool GeneratorImpl::EmitBuiltinCall(std::ostream& out,
         return EmitEmulatedFMA(out, expr);
     }
     if (builtin->Type() == sem::BuiltinType::kAbs &&
-        TypeOf(expr->args[0])->UnwrapRef()->is_unsigned_scalar_or_vector()) {
+        TypeOf(expr->args[0])->UnwrapRef()->is_unsigned_integer_scalar_or_vector()) {
         // GLSL does not support abs() on unsigned arguments. However, it's a no-op.
         return EmitExpression(out, expr->args[0]);
     }
@@ -1404,7 +1404,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
 
     auto emit_expr_as_signed = [&](const ast::Expression* e) {
         auto* ty = TypeOf(e)->UnwrapRef();
-        if (!ty->is_unsigned_scalar_or_vector()) {
+        if (!ty->is_unsigned_integer_scalar_or_vector()) {
             return EmitExpression(out, e);
         }
         emit_signed_int_type(ty);
