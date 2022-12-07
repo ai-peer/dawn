@@ -73,6 +73,45 @@ void printBuffer(testing::AssertionResult& result, const T* buffer, const size_t
     result << std::endl;
 }
 
+// A helper class to create DawnTogglesDescriptor from test params
+struct ParamTogglesHelper {
+    std::vector<const char*> enabledToggles;
+    std::vector<const char*> disabledToggles;
+    wgpu::DawnTogglesDescriptor togglesDesc;
+
+    ParamTogglesHelper(const AdapterTestParam& mParam) {
+        for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
+            ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
+        }
+        for (const char* forceDisabledWorkaround : mParam.forceDisabledWorkarounds) {
+            ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
+        }
+
+        enabledToggles = mParam.forceEnabledWorkarounds;
+        disabledToggles = mParam.forceDisabledWorkarounds;
+
+        for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
+            const dawn::native::ToggleInfo* info =
+                gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
+            ASSERT(info != nullptr);
+            enabledToggles.push_back(info->name);
+        }
+
+        for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
+            const dawn::native::ToggleInfo* info =
+                gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
+            ASSERT(info != nullptr);
+            disabledToggles.push_back(info->name);
+        }
+
+        togglesDesc = {};
+        togglesDesc.enabledToggles = enabledToggles.data();
+        togglesDesc.enabledTogglesCount = enabledToggles.size();
+        togglesDesc.disabledToggles = disabledToggles.data();
+        togglesDesc.disabledTogglesCount = disabledToggles.size();
+    }
+};
+
 }  // anonymous namespace
 
 DawnTestBase::PrintToStringParamName::PrintToStringParamName(const char* test) : mTest(test) {}
@@ -303,7 +342,20 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
 }
 
 std::unique_ptr<dawn::native::Instance> DawnTestEnvironment::CreateInstanceAndDiscoverAdapters() {
-    auto instance = std::make_unique<dawn::native::Instance>();
+    // Create an instance with toggle DisallowUnsafeApis disabled, which would be inherited to
+    // adapter and device toggles and allow us to test unsafe apis (including experimental
+    // features). If doesn't want the unsafe apis, create an adapter with DisallowUnsafeApis toggle
+    // enabled, which would overwrite the inheritation.
+    const char* disallowUnsafeApisToggle = "disallow_unsafe_apis";
+    WGPUDawnTogglesDescriptor instanceToggles = {};
+    instanceToggles.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+    instanceToggles.disabledTogglesCount = 1;
+    instanceToggles.disabledToggles = &disallowUnsafeApisToggle;
+
+    WGPUInstanceDescriptor instanceDesc = {};
+    instanceDesc.nextInChain = &instanceToggles.chain;
+
+    auto instance = std::make_unique<dawn::native::Instance>(&instanceDesc);
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
     instance->SetBackendValidationLevel(mBackendValidationLevel);
 
@@ -557,39 +609,32 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
     gCurrentTest = this;
 
     DawnProcTable procs = dawn::native::GetProcs();
-    // Override procs to provide harness-specific behavior to always select the null adapter,
-    // and to allow fixture-specific overriding of the test device with CreateDeviceImpl.
-    procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,
+    // Override procs to provide harness-specific behavior to select adapter according to test
+    // params.
+    procs.instanceRequestAdapter = [](WGPUInstance instance,
+                                      const WGPURequestAdapterOptions* options,
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
 
-        // Find the adapter that exactly matches our adapter properties.
-        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
-        const auto& it = std::find_if(
-            adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
-                wgpu::AdapterProperties properties;
-                adapter.GetProperties(&properties);
+        // Ignore the RequestAdapterOptions given here and use the test param. options is asserted
+        // to be nullptr.
+        ASSERT(options == nullptr);
 
-                const auto& param = gCurrentTest->mParam;
-                return (param.adapterProperties.selected &&
-                        properties.deviceID == param.adapterProperties.deviceID &&
-                        properties.vendorID == param.adapterProperties.vendorID &&
-                        properties.adapterType == param.adapterProperties.adapterType &&
-                        properties.backendType == param.adapterProperties.backendType &&
-                        strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
-            });
-        ASSERT(it != adapters.end());
-        gCurrentTest->mBackendAdapter = *it;
-
-        WGPUAdapter cAdapter = it->Get();
+        // RequestAdapterImpl return adapter that match the properties and created with required
+        // toggles.
+        WGPUAdapter cAdapter = gCurrentTest->RequestAdapterImpl();
         ASSERT(cAdapter);
         dawn::native::GetProcs().adapterReference(cAdapter);
         callback(WGPURequestAdapterStatus_Success, cAdapter, nullptr, userdata);
     };
 
-    procs.adapterRequestDevice = [](WGPUAdapter adapter, const WGPUDeviceDescriptor*,
+    procs.adapterRequestDevice = [](WGPUAdapter adapter, const WGPUDeviceDescriptor* deviceDesc,
                                     WGPURequestDeviceCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
+
+        // Device descriptor is not use as CreateDeviceImpl create device with test param. Asserting
+        // it nullptr.
+        ASSERT(deviceDesc == nullptr);
 
         // Isolation keys may be enqueued by CreateDevice(std::string isolationKey).
         // CreateDevice calls requestAdapter, so consume them there and forward them
@@ -844,56 +889,62 @@ bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& featur
     return true;
 }
 
+WGPUAdapter DawnTestBase::RequestAdapterImpl() {
+    // Create the adapter for test
+
+    // Handle the adapter toggles required in test params.
+    ParamTogglesHelper adapterTogglesHelper(mParam);
+    const WGPUDawnTogglesDescriptor* adapterToggles =
+        reinterpret_cast<const WGPUDawnTogglesDescriptor*>(&adapterTogglesHelper.togglesDesc);
+
+    if (!adapterTogglesHelper.disabledToggles.empty() ||
+        !adapterTogglesHelper.enabledToggles.empty()) {
+        gTestEnv->GetInstance()->DiscoverDefaultAdapters(adapterToggles);
+    }
+
+    // Find the adapter that exactly matches our adapter properties.
+    const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
+    const auto& it =
+        std::find_if(adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
+            wgpu::AdapterProperties properties;
+            adapter.GetProperties(&properties);
+
+            const auto& param = gCurrentTest->mParam;
+            return (param.adapterProperties.selected &&
+                    adapter.IsCreatedWithRequiredToggles(adapterToggles) &&
+                    properties.deviceID == param.adapterProperties.deviceID &&
+                    properties.vendorID == param.adapterProperties.vendorID &&
+                    properties.adapterType == param.adapterProperties.adapterType &&
+                    properties.backendType == param.adapterProperties.backendType &&
+                    strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
+        });
+    ASSERT(it != adapters.end());
+    gCurrentTest->mBackendAdapter = *it;
+
+    return it->Get();
+}
+
 WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     // Create the device from the adapter
-    for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
-        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceEnabledWorkaround) != nullptr);
-    }
-    for (const char* forceDisabledWorkaround : mParam.forceDisabledWorkarounds) {
-        ASSERT(gTestEnv->GetInstance()->GetToggleInfo(forceDisabledWorkaround) != nullptr);
-    }
-
-    std::vector<const char*> forceEnabledToggles = mParam.forceEnabledWorkarounds;
-    std::vector<const char*> forceDisabledToggles = mParam.forceDisabledWorkarounds;
-
     std::vector<wgpu::FeatureName> requiredFeatures = GetRequiredFeatures();
 
     wgpu::SupportedLimits supportedLimits;
     mBackendAdapter.GetLimits(reinterpret_cast<WGPUSupportedLimits*>(&supportedLimits));
     wgpu::RequiredLimits requiredLimits = GetRequiredLimits(supportedLimits);
 
-    // Disabled disallowing unsafe APIs so we can test them.
-    forceDisabledToggles.push_back("disallow_unsafe_apis");
-
-    for (const std::string& toggle : gTestEnv->GetEnabledToggles()) {
-        const dawn::native::ToggleInfo* info =
-            gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
-        ASSERT(info != nullptr);
-        forceEnabledToggles.push_back(info->name);
-    }
-
-    for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
-        const dawn::native::ToggleInfo* info =
-            gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
-        ASSERT(info != nullptr);
-        forceDisabledToggles.push_back(info->name);
-    }
-
     wgpu::DeviceDescriptor deviceDescriptor = {};
     deviceDescriptor.requiredLimits = &requiredLimits;
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
     deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
 
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
-    deviceDescriptor.nextInChain = &togglesDesc;
-    togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
-    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
-
     wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
-    togglesDesc.nextInChain = &cacheDesc;
+    deviceDescriptor.nextInChain = &cacheDesc;
     cacheDesc.isolationKey = isolationKey.c_str();
+
+    // Note that DisallowUnsafeApis is disabled in instance toggles set and would be inherited to
+    // all adapters' toggles set.
+    ParamTogglesHelper deviceTogglesHelper(mParam);
+    cacheDesc.nextInChain = &deviceTogglesHelper.togglesDesc;
 
     return mBackendAdapter.CreateDevice(&deviceDescriptor);
 }
@@ -905,10 +956,10 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
     // to CreateDeviceImpl.
     mNextIsolationKeyQueue.push(std::move(isolationKey));
 
-    // This descriptor doesn't matter since device selection is overriden by CreateDeviceImpl.
-    wgpu::DeviceDescriptor deviceDesc = {};
+    // Device descriptor is not used since device selection is overriden by CreateDeviceImpl, and
+    // asserted to be nullptr.
     mAdapter.RequestDevice(
-        &deviceDesc,
+        nullptr,
         [](WGPURequestDeviceStatus, WGPUDevice cDevice, const char*, void* userdata) {
             *static_cast<wgpu::Device*>(userdata) = wgpu::Device::Acquire(cDevice);
         },
@@ -962,10 +1013,9 @@ void DawnTestBase::SetUp() {
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
 
-    // These options are unused since adapter selection is overriden to use the test params
-    wgpu::RequestAdapterOptions options = {};
+    // RequestAdapter is overriden to ignore RequestAdapterOptions (asserting it nullptr).
     mInstance.RequestAdapter(
-        &options,
+        nullptr,
         [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
             *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(cAdapter);
         },
