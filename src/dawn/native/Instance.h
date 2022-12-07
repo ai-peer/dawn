@@ -144,6 +144,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     std::vector<std::unique_ptr<BackendConnection>> mBackends;
     std::vector<Ref<AdapterBase>> mAdapters;
 
+    TogglesState mInstanceTogglesStates;
+
     FeaturesInfo mFeaturesInfo;
     TogglesInfo mTogglesInfo;
 
