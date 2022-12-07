@@ -29,7 +29,9 @@ class Adapter : public AdapterBase {
   public:
     Adapter(InstanceBase* instance,
             VulkanInstance* vulkanInstance,
-            VkPhysicalDevice physicalDevice);
+            VkPhysicalDevice physicalDevice,
+            const TogglesState& adapterToggles,
+            const RequiredTogglesSet& requiredToggles);
     ~Adapter() override;
 
     // AdapterBase Implementation
@@ -47,10 +49,6 @@ class Adapter : public AdapterBase {
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
-
-    MaybeError ValidateFeatureSupportedWithDeviceTogglesImpl(
-        wgpu::FeatureName feature,
-        const TogglesState& deviceToggles) override;
 
     void SetupBackendDeviceToggles(TogglesState* deviceToggles) const override;
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,

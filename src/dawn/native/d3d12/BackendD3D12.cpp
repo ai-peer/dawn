@@ -68,11 +68,15 @@ ResultOrError<ComPtr<IDXGIFactory4>> CreateFactory(const PlatformFunctions* func
     return std::move(factory);
 }
 
-ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(Backend* backend,
-                                                              ComPtr<IDXGIAdapter> dxgiAdapter) {
+ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(
+    Backend* backend,
+    ComPtr<IDXGIAdapter> dxgiAdapter,
+    const TogglesState& adapterToggles,
+    const RequiredTogglesSet& requiredToggles) {
     ComPtr<IDXGIAdapter3> dxgiAdapter3;
     DAWN_TRY(CheckHRESULT(dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
-    Ref<Adapter> adapter = AcquireRef(new Adapter(backend, std::move(dxgiAdapter3)));
+    Ref<Adapter> adapter =
+        AcquireRef(new Adapter(backend, std::move(dxgiAdapter3), adapterToggles, requiredToggles));
     DAWN_TRY(adapter->Initialize());
 
     return {std::move(adapter)};
@@ -271,9 +275,11 @@ const PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
 }
 
-std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters(
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) {
     AdapterDiscoveryOptions options;
-    auto result = DiscoverAdapters(&options);
+
+    auto result = DiscoverAdapters(&options, adapterTogglesDescriptor);
     if (result.IsError()) {
         GetInstance()->ConsumedError(result.AcquireError());
         return {};
@@ -282,16 +288,23 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* optionsBase) {
+    const AdapterDiscoveryOptionsBase* optionsBase,
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) {
     ASSERT(optionsBase->backendType == WGPUBackendType_D3D12);
     const AdapterDiscoveryOptions* options =
         static_cast<const AdapterDiscoveryOptions*>(optionsBase);
+
+    // TODO: Change it to backend-aware required set
+    RequiredTogglesSet requiredToggles = RequiredTogglesSet::CreateFromTogglesDescriptor(
+        adapterTogglesDescriptor, ToggleStage::Adapter);
+    TogglesState adapterToggles = MakeAdapterToggles(adapterTogglesDescriptor);
 
     std::vector<Ref<AdapterBase>> adapters;
     if (options->dxgiAdapter != nullptr) {
         // |dxgiAdapter| was provided. Discover just that adapter.
         Ref<AdapterBase> adapter;
-        DAWN_TRY_ASSIGN(adapter, CreateAdapterFromIDXGIAdapter(this, options->dxgiAdapter));
+        DAWN_TRY_ASSIGN(adapter, CreateAdapterFromIDXGIAdapter(this, options->dxgiAdapter,
+                                                               adapterToggles, requiredToggles));
         adapters.push_back(std::move(adapter));
         return std::move(adapters);
     }
@@ -304,7 +317,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         }
 
         ASSERT(dxgiAdapter != nullptr);
-        ResultOrError<Ref<AdapterBase>> adapter = CreateAdapterFromIDXGIAdapter(this, dxgiAdapter);
+        ResultOrError<Ref<AdapterBase>> adapter =
+            CreateAdapterFromIDXGIAdapter(this, dxgiAdapter, adapterToggles, requiredToggles);
         if (adapter.IsError()) {
             GetInstance()->ConsumedError(adapter.AcquireError());
             continue;
@@ -314,6 +328,14 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     }
 
     return adapters;
+}
+
+void Backend::SetupBackendAdapterToggles(TogglesState* adapterToggles) const {
+    // Check DXC for use_dxc toggle, and default to use FXC
+    if (!IsDXCAvailable()) {
+        adapterToggles->ForceSet(Toggle::UseDXC, false);
+    }
+    adapterToggles->Default(Toggle::UseDXC, false);
 }
 
 BackendConnection* Connect(InstanceBase* instance) {

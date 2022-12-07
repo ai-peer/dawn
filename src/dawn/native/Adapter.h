@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_ADAPTER_H_
 
 #include <string>
+#include <vector>
 
 #include "dawn/native/DawnNative.h"
 
@@ -34,7 +35,10 @@ class DeviceBase;
 
 class AdapterBase : public RefCounted {
   public:
-    AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
+    AdapterBase(InstanceBase* instance,
+                wgpu::BackendType backend,
+                const TogglesState& adapterToggles,
+                const RequiredTogglesSet& requiredToggles);
     ~AdapterBase() override;
 
     MaybeError Initialize();
@@ -55,7 +59,12 @@ class AdapterBase : public RefCounted {
     wgpu::BackendType GetBackendType() const;
     InstanceBase* GetInstance() const;
 
-    void ResetInternalDeviceForTesting();
+    // Reset backend device used by adapter. Since an instance may have multiple adapters of a same
+    // backend that refer to a single internal backend device, the return value of this method
+    // indicates if the internal backend device is completely release, i.e. no other adapters have
+    // reference to that internal device. After the internal device is release, influenced adapters
+    // should get re-initialized.
+    ResultOrError<bool> ResetInternalDeviceForTesting();
 
     FeaturesSet GetSupportedFeatures() const;
     bool SupportsAllRequiredFeatures(
@@ -64,6 +73,13 @@ class AdapterBase : public RefCounted {
     bool GetLimits(SupportedLimits* limits) const;
 
     void SetUseTieredLimits(bool useTieredLimits);
+
+    // Get the actual toggles state of the adapter.
+    const TogglesState& GetAdapterTogglesState() const;
+    // Check if the adapter is created with given required adapter toggles set, used to distinguish
+    // adapters of the same properities but different toggles set in an instance.
+    bool IsCreatedWithRequiredToggles(const DawnTogglesDescriptor* adapterTogglesDescriptor) const;
+    void SetAdapterTogglesForTesting(const TogglesState& adapterToggles);
 
     virtual bool SupportsExternalImages() const = 0;
 
@@ -77,15 +93,12 @@ class AdapterBase : public RefCounted {
     gpu_info::DriverVersion mDriverVersion;
     std::string mDriverDescription;
 
-    // Features set that CAN be supported by devices of this adapter. Some features in this set may
-    // be guarded by toggles, and creating a device with these features required may result in a
-    // validation error if proper toggles are not enabled/disabled.
-    FeaturesSet mSupportedFeatures;
-    // Check if a feature os supported by this adapter AND suitable with given toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, remove this and use adapter toggles
-    // instead of device toggles to validate supported features.
-    MaybeError ValidateFeatureSupportedWithDeviceToggles(wgpu::FeatureName feature,
-                                                         const TogglesState& deviceTogglesState);
+    // Add a supported feature into mSupportedFeatures. If the given feature is of
+    // FeatureState::Experimental, the feature will be added if and only if adapter has toggle
+    // DisallowUnsafeAPIs disabled.
+    void EnableFeature(Feature feature);
+    // Used for the tests that intend to use an adapter without all features enabled.
+    void SetSupportedFeaturesForTesting(const std::vector<wgpu::FeatureName>& requiredFeatures);
 
   private:
     // Backend-specific force-setting and defaulting device toggles
@@ -104,15 +117,19 @@ class AdapterBase : public RefCounted {
 
     virtual void InitializeVendorArchitectureImpl();
 
-    virtual MaybeError ValidateFeatureSupportedWithDeviceTogglesImpl(
-        wgpu::FeatureName feature,
-        const TogglesState& deviceTogglesState) = 0;
-
     ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* descriptor);
 
-    virtual MaybeError ResetInternalDeviceForTestingImpl();
+    virtual ResultOrError<bool> ResetInternalDeviceForTestingImpl();
     Ref<InstanceBase> mInstance;
     wgpu::BackendType mBackend;
+
+    // Adapter toggles state, also holds the required toggles when creating the adapter.
+    TogglesState mTogglesState;
+    RequiredTogglesSet mRequiredToggles;
+
+    // Features set that can be supported by devices of this adapter.
+    FeaturesSet mSupportedFeatures;
+
     CombinedLimits mLimits;
     bool mUseTieredLimits = false;
 };
