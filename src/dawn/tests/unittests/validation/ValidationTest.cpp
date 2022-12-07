@@ -91,7 +91,6 @@ ValidationTest::ValidationTest() {
     procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
-
         std::vector<dawn::native::Adapter> adapters = gCurrentTest->mDawnInstance->GetAdapters();
         // Validation tests run against the null backend, find the corresponding adapter
         for (auto& adapter : adapters) {

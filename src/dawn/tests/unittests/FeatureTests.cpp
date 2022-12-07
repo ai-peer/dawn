@@ -87,6 +87,12 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
             deviceDescriptor.requiredFeatures = &featureName;
             deviceDescriptor.requiredFeaturesCount = 1;
 
+            wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+                reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor));
+            const char* toggle = "disallow_unsafe_apis";
+            deviceTogglesDesc.disabledToggles = &toggle;
+            deviceTogglesDesc.disabledTogglesCount = 1;
+
             WGPUDevice deviceWithFeature = adapterWithoutFeature.CreateDevice(
                 reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor));
             ASSERT_EQ(nullptr, deviceWithFeature);

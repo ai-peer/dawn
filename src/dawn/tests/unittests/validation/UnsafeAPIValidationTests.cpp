@@ -24,8 +24,6 @@ namespace {
 using testing::HasSubstr;
 }  // anonymous namespace
 
-// UnsafeAPIValidationTest create the instance with toggle DisallowUnsafeApis explicitly enabled,
-// and assert that creating adapter and device will succeed.
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {

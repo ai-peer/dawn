@@ -625,25 +625,9 @@ DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
 
-        // Find the adapter that exactly matches our adapter properties.
-        const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
-        const auto& it = std::find_if(
-            adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
-                wgpu::AdapterProperties properties;
-                adapter.GetProperties(&properties);
-
-                const auto& param = gCurrentTest->mParam;
-                return (param.adapterProperties.selected &&
-                        properties.deviceID == param.adapterProperties.deviceID &&
-                        properties.vendorID == param.adapterProperties.vendorID &&
-                        properties.adapterType == param.adapterProperties.adapterType &&
-                        properties.backendType == param.adapterProperties.backendType &&
-                        strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
-            });
-        ASSERT(it != adapters.end());
-        gCurrentTest->mBackendAdapter = *it;
-
-        WGPUAdapter cAdapter = it->Get();
+        // RequestAdapterImpl return adapter that match the properties and created with required
+        // toggles.
+        WGPUAdapter cAdapter = gCurrentTest->RequestAdapterImpl();
         ASSERT(cAdapter);
         dawn::native::GetProcs().adapterReference(cAdapter);
         callback(WGPURequestAdapterStatus_Success, cAdapter, nullptr, userdata);
@@ -681,7 +665,7 @@ DawnTestBase::~DawnTestBase() {
     // D3D12's GPU-based validation will accumulate objects over time if the backend device is not
     // destroyed and recreated, so we reset it here.
     if (IsD3D12() && IsBackendValidationEnabled()) {
-        mBackendAdapter.ResetInternalDeviceForTesting();
+        gTestEnv->GetInstance()->ResetAdaptersForTesting();
     }
     mWireHelper.reset();
 
@@ -904,6 +888,40 @@ bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& featur
         }
     }
     return true;
+}
+
+// Create the adapter for test
+WGPUAdapter DawnTestBase::RequestAdapterImpl() {
+    // Handle the adapter toggles required in test params.
+    ParamTogglesHelper adapterTogglesHelper(mParam, dawn::native::ToggleStage::Adapter);
+    const WGPUDawnTogglesDescriptor* adapterToggles =
+        reinterpret_cast<const WGPUDawnTogglesDescriptor*>(&adapterTogglesHelper.togglesDesc);
+
+    if (!adapterTogglesHelper.disabledToggles.empty() ||
+        !adapterTogglesHelper.enabledToggles.empty()) {
+        gTestEnv->GetInstance()->DiscoverDefaultAdapters(adapterToggles);
+    }
+
+    // Find the adapter that exactly matches our adapter properties.
+    const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
+    const auto& it =
+        std::find_if(adapters.begin(), adapters.end(), [&](const dawn::native::Adapter& adapter) {
+            wgpu::AdapterProperties properties;
+            adapter.GetProperties(&properties);
+
+            const auto& param = gCurrentTest->mParam;
+            return (param.adapterProperties.selected &&
+                    adapter.IsCreatedWithRequiredToggles(adapterToggles) &&
+                    properties.deviceID == param.adapterProperties.deviceID &&
+                    properties.vendorID == param.adapterProperties.vendorID &&
+                    properties.adapterType == param.adapterProperties.adapterType &&
+                    properties.backendType == param.adapterProperties.backendType &&
+                    strcmp(properties.name, param.adapterProperties.adapterName.c_str()) == 0);
+        });
+    ASSERT(it != adapters.end());
+    gCurrentTest->mBackendAdapter = *it;
+
+    return it->Get();
 }
 
 WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {

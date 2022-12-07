@@ -165,7 +165,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"use_dxc",
       "Use DXC instead of FXC for compiling HLSL when both dxcompiler.dll and dxil.dll is "
       "available.",
-      "https://crbug.com/dawn/402", ToggleStage::Device}},
+      "https://crbug.com/dawn/402", ToggleStage::Adapter}},
     {Toggle::DisableRobustness,
      {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480",
       ToggleStage::Device}},
@@ -419,6 +419,55 @@ size_t TogglesSet::Count() const {
 
 TogglesSet::Iterator TogglesSet::Iterate() const {
     return IterateBitSet(bitset);
+}
+
+bool TogglesSet::operator==(const TogglesSet& rhs) const {
+    return bitset == rhs.bitset;
+}
+
+bool TogglesSet::operator!=(const TogglesSet& rhs) const {
+    return !(*this == rhs);
+}
+
+RequiredTogglesSet::RequiredTogglesSet(ToggleStage stage) : requiredStage(stage) {}
+
+bool RequiredTogglesSet::operator==(const RequiredTogglesSet& rhs) const {
+    return (togglesProvided == rhs.togglesProvided) && (togglesEnabled == rhs.togglesEnabled);
+}
+
+bool RequiredTogglesSet::operator!=(const RequiredTogglesSet& rhs) const {
+    return !(*this == rhs);
+}
+
+RequiredTogglesSet RequiredTogglesSet::CreateFromTogglesDescriptor(
+    const DawnTogglesDescriptor* togglesDesc,
+    ToggleStage requiredStage) {
+    RequiredTogglesSet userToggles(requiredStage);
+
+    if (togglesDesc != nullptr) {
+        TogglesInfo togglesInfo;
+        for (uint32_t i = 0; i < togglesDesc->enabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->enabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                const ToggleInfo* toggleInfo = togglesInfo.GetToggleInfo(toggle);
+                if (toggleInfo->stage == requiredStage) {
+                    userToggles.togglesProvided.Set(toggle, true);
+                    userToggles.togglesEnabled.Set(toggle, true);
+                }
+            }
+        }
+        for (uint32_t i = 0; i < togglesDesc->disabledTogglesCount; ++i) {
+            Toggle toggle = togglesInfo.ToggleNameToEnum(togglesDesc->disabledToggles[i]);
+            if (toggle != Toggle::InvalidEnum) {
+                const ToggleInfo* toggleInfo = togglesInfo.GetToggleInfo(toggle);
+                if (toggleInfo->stage == requiredStage) {
+                    userToggles.togglesProvided.Set(toggle, true);
+                    userToggles.togglesEnabled.Set(toggle, false);
+                }
+            }
+        }
+    }
+    return userToggles;
 }
 
 TogglesState::TogglesState(ToggleStage stage) : mStage(stage) {}

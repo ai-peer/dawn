@@ -92,9 +92,11 @@ class Backend : public BackendConnection {
     MaybeError Initialize();
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
+        // TODO
         const TogglesState& adapterToggles) override;
     ResultOrError<std::vector<Ref<AdapterBase>>> DiscoverAdapters(
         const AdapterDiscoveryOptionsBase* optionsBase,
+        // TODO
         const TogglesState& adapterToggles) override;
 
   private:
