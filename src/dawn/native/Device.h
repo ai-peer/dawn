@@ -64,7 +64,7 @@ class DeviceBase : public RefCountedWithExternalCount {
   public:
     DeviceBase(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
-               const TripleStateTogglesSet& userProvidedToggles);
+               const TogglesState& deviceToggles);
     ~DeviceBase() override;
 
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
@@ -418,8 +418,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Constructor used only for mocking and testing.
     DeviceBase();
 
-    void SetToggle(Toggle toggle, bool isEnabled);
-    void ForceSetToggle(Toggle toggle, bool isEnabled);
+    void ForceSetToggleForTesting(Toggle toggle, bool isEnabled);
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
@@ -488,8 +487,6 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                    void* userdata);
 
     void ApplyFeatures(const DeviceDescriptor* deviceDescriptor);
-
-    void SetDefaultToggles();
 
     void SetWGSLExtensionAllowList();
 
@@ -569,8 +566,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     FormatTable mFormatTable;
 
-    TogglesSet mEnabledToggles;
-    TogglesSet mOverridenToggles;
+    TogglesState mDeviceToggleStates;
+
     size_t mLazyClearCountForTesting = 0;
     std::atomic_uint64_t mNextPipelineCompatibilityToken;
 

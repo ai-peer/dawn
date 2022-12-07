@@ -18,7 +18,7 @@
 #include <array>
 #include <memory>
 #include <string>
-#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "dawn/common/RefCounted.h"
@@ -54,8 +54,11 @@ class InstanceBase final : public RefCountedWithExternalCount {
                            WGPURequestAdapterCallback callback,
                            void* userdata);
 
-    void DiscoverDefaultAdapters();
-    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options);
+    // Discover default adapters on all backends for given adapter toggles. Do nothing if already
+    // discovered for given toggles.
+    void DiscoverDefaultAdapters(const DawnTogglesDescriptor* requiredAdapterToggles = nullptr);
+    bool DiscoverAdapters(const AdapterDiscoveryOptionsBase* options,
+                          const DawnTogglesDescriptor* requiredAdapterToggles = nullptr);
 
     const std::vector<Ref<AdapterBase>>& GetAdapters() const;
 
@@ -71,6 +74,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
         *result = resultOrError.AcquireSuccess();
         return false;
     }
+
+    const TogglesState& GetInstanceTogglesState() const;
 
     // Used to query the details of a toggle. Return nullptr if toggleName is not a valid name
     // of a toggle supported in Dawn.
@@ -121,7 +126,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Lazily creates connections to all backends that have been compiled.
     void EnsureBackendConnection(wgpu::BackendType backendType);
 
-    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options);
+    MaybeError DiscoverAdaptersInternal(const AdapterDiscoveryOptionsBase* options,
+                                        const RequiredTogglesSet& requiredAdapterToggles);
 
     ResultOrError<Ref<AdapterBase>> RequestAdapterInternal(const RequestAdapterOptions* options);
 
@@ -131,7 +137,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     BackendsBitset mBackendsConnected;
 
-    bool mDiscoveredDefaultAdapters = false;
+    std::unordered_set<RequiredTogglesSet, RequiredTogglesSetHasher>
+        mDefaultAdaprtersDiscoveredForToggles;
 
     bool mBeginCaptureOnStartup = false;
     BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
@@ -143,6 +150,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     std::vector<std::unique_ptr<BackendConnection>> mBackends;
     std::vector<Ref<AdapterBase>> mAdapters;
+
+    TogglesState mInstanceTogglesState = TogglesState(ToggleInfo::ToggleStage::Instance);
 
     FeaturesInfo mFeaturesInfo;
     TogglesInfo mTogglesInfo;

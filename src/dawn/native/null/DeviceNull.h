@@ -91,7 +91,7 @@ class Device final : public DeviceBase {
   public:
     static ResultOrError<Ref<Device>> Create(Adapter* adapter,
                                              const DeviceDescriptor* descriptor,
-                                             const TripleStateTogglesSet& userProvidedToggles);
+                                             const TogglesState& deviceToggles);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);
@@ -174,26 +174,25 @@ class Device final : public DeviceBase {
 class Adapter : public AdapterBase {
   public:
     explicit Adapter(InstanceBase* instance);
+    Adapter(InstanceBase* instance, const TogglesState& adapterToggles);
     ~Adapter() override;
 
     // AdapterBase Implementation
     bool SupportsExternalImages() const override;
 
     // Used for the tests that intend to use an adapter without all features enabled.
-    void SetSupportedFeatures(const std::vector<wgpu::FeatureName>& requiredFeatures);
+    using AdapterBase::SetSupportedFeaturesForTesting;
 
   private:
     MaybeError InitializeImpl() override;
-    MaybeError InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
 
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
-        const DeviceDescriptor* descriptor,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    void InitializeSupportedFeaturesImpl() override;
 
-    MaybeError ValidateFeatureSupportedWithTogglesImpl(
-        wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    TogglesState MakeDeviceTogglesImpl(
+        const RequiredTogglesSet& requiredDeviceToggles) const override;
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesState& deviceToggles) override;
 };
 
 // Helper class so |BindGroup| can allocate memory for its binding data,
