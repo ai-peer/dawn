@@ -30,6 +30,10 @@
 namespace tint::sem {
 class Module;
 }  // namespace tint::sem
+namespace tint::type {
+class Node;
+class Type;
+}  // namespace tint::type
 
 namespace tint::sem {
 
@@ -73,7 +77,22 @@ class Info {
     template <typename SEM = InferFromAST,
               typename AST = CastableBase,
               typename RESULT = GetResultType<SEM, AST>>
-    const RESULT* Get(const AST* ast_node) const {
+    traits::EnableIf<!traits::IsTypeOrDerived<RESULT, type::Node>, const RESULT>* Get(
+        const AST* ast_node) const {
+        if (ast_node && ast_node->node_id.value < nodes_.size()) {
+            return As<RESULT>(nodes_[ast_node->node_id.value]);
+        }
+        return nullptr;
+    }
+
+    /// Get looks up the type information for the AST node `ast_node`.
+    /// @param ast_node the AST node
+    /// @returns a pointer to the type node if found, otherwise nullptr
+    template <typename TYPE = InferFromAST,
+              typename AST = CastableBase,
+              typename RESULT = GetResultType<TYPE, AST>>
+    traits::EnableIf<traits::IsTypeOrDerived<RESULT, type::Node>, const RESULT>* Get(
+        const AST* ast_node) const {
         if (ast_node && ast_node->node_id.value < nodes_.size()) {
             return As<RESULT>(nodes_[ast_node->node_id.value]);
         }
@@ -142,7 +161,7 @@ class Info {
 
   private:
     // AST node index to semantic node
-    std::vector<const sem::Node*> nodes_;
+    std::vector<const CastableBase*> nodes_;
     // Lists transitively referenced overrides for the given item
     std::unordered_map<const CastableBase*, TransitivelyReferenced> referenced_overrides_;
     // The semantic module
