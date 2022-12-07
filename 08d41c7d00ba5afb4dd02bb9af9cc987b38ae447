@@ -66,6 +66,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f45a8a79_5f7d8ac0",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-07T03:27:29Z",
+      "side": 1,
+      "message": "Conversion to boolean can\u0027t fail. In our spec, note the use of `!` instead of `?`:\n\u003e Return the WGSL bool value corresponding to the result of ! converting v to an IDL value of type boolean.\n\n`!` means it can\u0027t throw an exception. The IDL conversion defined here:\nhttps://webidl.spec.whatwg.org/#es-boolean\njust calls into an infallible ECMAScript cast, which is as if you did `Boolean(value)` in JS.\n\nIn that conversion, only +0, -0, and NaN convert to `false`, and all other values convert to `true`.",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bdc4e2c_d422c011",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-07T03:27:29Z",
+      "side": 1,
+      "message": "test `lowest` as well",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d830790_ab321cd9",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-07T03:27:29Z",
+      "side": 1,
+      "message": "Corresponding CTS tests are here https://github.com/orgs/gpuweb/projects/3/views/24?filterQuery\u003doverride+conversions . Maybe you can port these tests there plus some extra coverage? (if so, assign yourself)",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "acf2e436_a353d30d",
         "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
         "patchSetId": 2
@@ -77,6 +128,30 @@
       "writtenOn": "2022-12-07T01:49:09Z",
       "side": 1,
       "message": "unit: cast to double first. ditto for the others",
+      "range": {
+        "startLine": 267,
+        "startChar": 28,
+        "endLine": 267,
+        "endChar": 64
+      },
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd2c717e_1fbce90d",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-07T03:27:29Z",
+      "side": 1,
+      "message": "shouldn\u0027t it be safe because int + double \u003d double? Can still include it for clarity though.",
+      "parentUuid": "acf2e436_a353d30d",
       "range": {
         "startLine": 267,
         "startChar": 28,
