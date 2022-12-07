@@ -69,7 +69,8 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
 
     context->MakeCurrent();
 
-    auto result = DiscoverAdapters(&options);
+    TogglesState defaultAdapterToggles = MakeAdapterToggles(RequiredTogglesSet{});
+    auto result = DiscoverAdapters(&options, defaultAdapterToggles);
 
     if (result.IsError()) {
         GetInstance()->ConsumedError(result.AcquireError());
@@ -84,7 +85,8 @@ std::vector<Ref<AdapterBase>> Backend::DiscoverDefaultAdapters() {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* optionsBase) {
+    const AdapterDiscoveryOptionsBase* optionsBase,
+    const TogglesState& adapterToggle) {
     // TODO(cwallez@chromium.org): For now only create a single OpenGL adapter because don't
     // know how to handle MakeCurrent.
     DAWN_INVALID_IF(mCreatedAdapter, "The OpenGL backend can only create a single adapter.");
@@ -95,14 +97,20 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
 
     DAWN_INVALID_IF(options->getProc == nullptr, "AdapterDiscoveryOptions::getProc must be set");
 
-    Ref<Adapter> adapter = AcquireRef(
-        new Adapter(GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType)));
+    Ref<Adapter> adapter = AcquireRef(new Adapter(
+        GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType), adapterToggle));
     DAWN_TRY(adapter->InitializeGLFunctions(options->getProc));
     DAWN_TRY(adapter->Initialize());
 
     mCreatedAdapter = true;
     std::vector<Ref<AdapterBase>> adapters{std::move(adapter)};
     return std::move(adapters);
+}
+
+TogglesState Backend::MakeAdapterToggles(const RequiredTogglesSet& requiredAdapterToggle) const {
+    TogglesState adapterTogglesState = TogglesState::CreateFromRequiredAndInheritedToggles(
+        requiredAdapterToggle, GetInstance()->GetInstanceTogglesState());
+    return adapterTogglesState;
 }
 
 BackendConnection* Connect(InstanceBase* instance, wgpu::BackendType backendType) {

@@ -20,6 +20,7 @@
 
 #include "dawn/dawn_proc.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/null/DeviceNull.h"
 #include "dawn/utils/TerribleCommandBuffer.h"
 #include "dawn/wire/WireClient.h"
@@ -56,7 +57,7 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
     GetProcAddressTests()
         : testing::TestWithParam<DawnFlavor>(),
           mNativeInstance(dawn::native::InstanceBase::Create()),
-          mNativeAdapter(mNativeInstance.Get()) {}
+          mNativeAdapter(mNativeInstance.Get(), dawn::native::TogglesState{}) {}
 
     void SetUp() override {
         switch (GetParam()) {
