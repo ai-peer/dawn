@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee94973_ff1e3b55",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T21:59:54Z",
+      "side": 1,
+      "message": "no need for \"module:\" it will already be printed as [GPUShaderModule \"label\"]",
+      "range": {
+        "startLine": 37,
+        "startChar": 48,
+        "endLine": 37,
+        "endChar": 58
+      },
+      "revId": "4a0ffeca7b0d4c452903ff4e58844a0e7c4afef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd3fd53_5b2c3dda",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T21:59:54Z",
+      "side": 1,
+      "message": "do this in RenderPipeline.cpp too?",
+      "revId": "4a0ffeca7b0d4c452903ff4e58844a0e7c4afef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
