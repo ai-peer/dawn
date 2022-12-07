@@ -104,13 +104,50 @@ enum class Toggle {
 // A wrapper of the bitset to store if a toggle is present or not. This wrapper provides the
 // convenience to convert the enums of enum class Toggle to the indices of a bitset.
 struct TogglesSet {
-    std::bitset<static_cast<size_t>(Toggle::EnumCount)> bitset;
+    using BitSet = std::bitset<static_cast<size_t>(Toggle::EnumCount)>;
     using Iterator = BitSetIterator<static_cast<size_t>(Toggle::EnumCount), uint32_t>;
+
+    BitSet bitset;
 
     void Set(Toggle toggle, bool enabled);
     bool Has(Toggle toggle) const;
     size_t Count() const;
     Iterator Iterate() const;
+
+    bool operator==(const TogglesSet& rhs) const;
+    bool operator!=(const TogglesSet& rhs) const;
+};
+
+// RequiredTogglesSet records the user-provided toggles of a given stage, where some toggles are explicitly enabled or disabled while the other
+// toggles arenot privided. This structure is used to cache adapters created with different toggles set required within an instance.
+struct RequiredTogglesSet {
+    // Indicating what stage this RequiredTogglesSet object would be used. All set toggles in
+    // RequiredTogglesSet must be of this stage.
+    ToggleStage requiredStage;
+
+    // TogglesSet togglesIsProvided;
+    // TogglesSet providedTogglesEnabled;
+    TogglesSet togglesProvided;
+    TogglesSet togglesEnabled;
+
+    explicit RequiredTogglesSet(ToggleStage stage);
+
+    bool operator==(const RequiredTogglesSet& rhs) const;
+    bool operator!=(const RequiredTogglesSet& rhs) const;
+
+    // Create a RequiredTogglesSet from a DawnTogglesDescriptor, only considering toggles of
+    // required toggle stage.
+    static RequiredTogglesSet CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
+                                                          ToggleStage requiredStage);
+};
+
+// Hasher for RequiredTogglesSet
+struct RequiredTogglesSetHasher {
+    std::size_t operator()(RequiredTogglesSet const& requiredTogglesSet) const noexcept {
+        std::size_t h1 = std::hash<TogglesSet::BitSet>{}(requiredTogglesSet.togglesProvided.bitset);
+        std::size_t h2 = std::hash<TogglesSet::BitSet>{}(requiredTogglesSet.togglesEnabled.bitset);
+        return h1 ^ (h2 << 1);
+    }
 };
 
 namespace stream {
@@ -125,13 +162,28 @@ class TogglesState {
     // Create an empty toggles state of given stage
     explicit TogglesState(ToggleStage stage);
 
-    // Create a RequiredTogglesSet from a DawnTogglesDescriptor, only considering toggles of
+    // Create a TogglesState from a DawnTogglesDescriptor, only considering toggles of
     // required toggle stage.
     static TogglesState CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
                                                     ToggleStage requiredStage);
+    // Helper function to create a TogglesState from a RequiredTogglesSet, which records the required toggles of a certain stage in a DawnTogglesDescriptor.
+    static TogglesState CreateFromRequiredTogglesSet(const RequiredTogglesSet& requiredTogglesSet);
+
+    // Create a toggles state of given stage and given toggles enabled/disabled for testing. Note
+    // that this toggles state may break the inheritance and force set policy, and has an empty
+    // required toggles set rocord.
+    static TogglesState CreateFromInitializerForTesting(
+        ToggleStage togglesStateStage,
+        std::initializer_list<Toggle> enabledToggles,
+        std::initializer_list<Toggle> disabledToggles);
+
+    // Inherit from a given toggles state of earlier stage.
+    void InheritToggles(const TogglesState& inheritedToggles);
 
     // Set a toggle of the same stage of toggles state stage if and only if it is not already set.
     void Default(Toggle toggle, bool enabled);
+    // Inherit a toggle of a stage earlier than toggles state stage.
+    void Inherit(Toggle toggle, bool enabled, bool forced);
     // Force set a toggle of same stage of toggles state stage. A force-set toggle will get
     // inherited to all later stage as forced.
     void ForceSet(Toggle toggle, bool enabled);
@@ -151,7 +203,7 @@ class TogglesState {
   private:
     // Indicating which stage of toggles state is this object holding for, instance, adapter, or
     // device.
-    const ToggleStage mStage;
+    ToggleStage mStage;
     TogglesSet mTogglesSet;
     TogglesSet mEnabledToggles;
     TogglesSet mForcedToggles;
