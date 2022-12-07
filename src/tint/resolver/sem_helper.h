@@ -49,28 +49,39 @@ class SemHelper {
         return const_cast<T*>(As<T>(sem));
     }
 
-    /// @returns the resolved symbol (function, type or variable) for the given
-    /// ast::Identifier or ast::TypeName cast to the given semantic type.
+    /// @returns the resolved symbol (type) for the given ast::Identifier or ast::TypeName cast to
+    /// the given type.
+    /// @param node the node to retrieve
+    template <typename TYPE = type::Node>
+    traits::EnableIf<traits::IsTypeOrDerived<TYPE, type::Node>, TYPE>* ResolvedSymbol(
+        const ast::Node* node) const {
+        auto resolved = dependencies_.resolved_symbols.Find(node);
+        return resolved ? const_cast<TYPE*>(builder_->Sem().Get<TYPE>(*resolved)) : nullptr;
+    }
+
+    /// @returns the resolved symbol (function, or variable) for the given ast::Identifier or
+    /// ast::TypeName cast to the given semantic type.
     /// @param node the node to retrieve
     template <typename SEM = sem::Node>
-    SEM* ResolvedSymbol(const ast::Node* node) const {
+    traits::EnableIf<traits::IsTypeOrDerived<SEM, sem::Node>, SEM>* ResolvedSymbol(
+        const ast::Node* node) const {
         auto resolved = dependencies_.resolved_symbols.Find(node);
         return resolved ? const_cast<SEM*>(builder_->Sem().Get<SEM>(*resolved)) : nullptr;
     }
 
     /// @returns the resolved type of the ast::Expression `expr`
     /// @param expr the expression
-    sem::Type* TypeOf(const ast::Expression* expr) const;
+    type::Type* TypeOf(const ast::Expression* expr) const;
 
     /// @returns the type name of the given semantic type, unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string TypeNameOf(const sem::Type* ty) const;
+    std::string TypeNameOf(const type::Type* ty) const;
 
     /// @returns the type name of the given semantic type, without unwrapping
     /// references.
     /// @param ty the type to look up
-    std::string RawTypeNameOf(const sem::Type* ty) const;
+    std::string RawTypeNameOf(const type::Type* ty) const;
 
   private:
     ProgramBuilder* builder_;
