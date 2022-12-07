@@ -84,11 +84,14 @@ ValidationTest::ValidationTest() {
     gCurrentTest = this;
 
     DawnProcTable procs = dawn::native::GetProcs();
-    // Override procs to provide harness-specific behavior to always select the null adapter,
-    // and to allow fixture-specific overriding of the test device with CreateTestDevice.
+
+    // Override procs to provide harness-specific behavior to always select the null adapter, with
+    // DisallowUnsafeApis adapter toggle disabled (inherited from instance toggle).
+    // WGPURequestAdapterOptions is ignored here.
     procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,
                                       WGPURequestAdapterCallback callback, void* userdata) {
         ASSERT(gCurrentTest);
+
         std::vector<dawn::native::Adapter> adapters = gCurrentTest->mDawnInstance->GetAdapters();
         // Validation tests run against the null backend, find the corresponding adapter
         for (auto& adapter : adapters) {
@@ -121,7 +124,10 @@ ValidationTest::ValidationTest() {
 }
 
 void ValidationTest::SetUp() {
-    mDawnInstance = std::make_unique<dawn::native::Instance>();
+    // Call the overload method to create instance. By default the instance will have toggle
+    // DisallowUnsafeApis disabled, override this method to change the behavior.
+    mDawnInstance = CreateTestInstance();
+
     mDawnInstance->DiscoverDefaultAdapters();
     mInstance = mWireHelper->RegisterInstance(mDawnInstance->Get());
 
@@ -130,7 +136,8 @@ void ValidationTest::SetUp() {
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
 
-    // These options are unused since validation tests always select the null adapter
+    // RequestAdapter is overriden to ignore RequestAdapterOptions and always select the null
+    // adapter.
     wgpu::RequestAdapterOptions options = {};
     mInstance.RequestAdapter(
         &options,
@@ -258,31 +265,46 @@ wgpu::Device ValidationTest::RequestDeviceSync(const wgpu::DeviceDescriptor& dev
     return apiDevice;
 }
 
+std::unique_ptr<dawn::native::Instance> ValidationTest::CreateTestInstance() {
+    // Create an instance with toggle DisallowUnsafeApis disabled, which would be inherited to
+    // adapter and device toggles and allow us to test unsafe apis (including experimental
+    // features).
+    const char* disallowUnsafeApisToggle = "disallow_unsafe_apis";
+    WGPUDawnTogglesDescriptor instanceToggles = {};
+    instanceToggles.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+    instanceToggles.disabledTogglesCount = 1;
+    instanceToggles.disabledToggles = &disallowUnsafeApisToggle;
+
+    WGPUInstanceDescriptor instanceDesc = {};
+    instanceDesc.nextInChain = &instanceToggles.chain;
+
+    return std::make_unique<dawn::native::Instance>(&instanceDesc);
+}
+
 dawn::native::Adapter& ValidationTest::GetBackendAdapter() {
     return mBackendAdapter;
 }
 
 WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
-    // Disabled disallowing unsafe APIs so we can test them.
-    std::vector<const char*> forceEnabledToggles;
-    std::vector<const char*> forceDisabledToggles = {"disallow_unsafe_apis"};
+    std::vector<const char*> enabledToggles;
+    std::vector<const char*> disabledToggles = {};
 
     for (const std::string& toggle : gToggleParser->GetEnabledToggles()) {
-        forceEnabledToggles.push_back(toggle.c_str());
+        enabledToggles.push_back(toggle.c_str());
     }
 
     for (const std::string& toggle : gToggleParser->GetDisabledToggles()) {
-        forceDisabledToggles.push_back(toggle.c_str());
+        disabledToggles.push_back(toggle.c_str());
     }
 
     wgpu::DeviceDescriptor deviceDescriptor;
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-    deviceDescriptor.nextInChain = &togglesDesc;
+    wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+    deviceDescriptor.nextInChain = &deviceTogglesDesc;
 
-    togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
-    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    deviceTogglesDesc.enabledToggles = enabledToggles.data();
+    deviceTogglesDesc.enabledTogglesCount = enabledToggles.size();
+    deviceTogglesDesc.disabledToggles = disabledToggles.data();
+    deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
 
     return dawnAdapter.CreateDevice(&deviceDescriptor);
 }
