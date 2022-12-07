@@ -45,6 +45,8 @@ TEST_F(ToggleValidationTest, QueryToggleInfo) {
     }
 }
 
+// TODO: Add tests for instance and adapter toggles
+
 // Tests overriding toggles when creating a device works correctly.
 TEST_F(ToggleValidationTest, OverrideToggleUsage) {
     // Create device with a valid name of a toggle
