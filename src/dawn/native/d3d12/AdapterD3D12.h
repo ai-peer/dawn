@@ -26,7 +26,9 @@ class Backend;
 
 class Adapter : public AdapterBase {
   public:
-    Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter);
+    Adapter(Backend* backend,
+            ComPtr<IDXGIAdapter3> hardwareAdapter,
+            const TogglesState& adapterToggles);
     ~Adapter() override;
 
     // AdapterBase Implementation
@@ -38,20 +40,20 @@ class Adapter : public AdapterBase {
     ComPtr<ID3D12Device> GetDevice() const;
 
   private:
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
-        const DeviceDescriptor* descriptor,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    TogglesState MakeDeviceTogglesImpl(
+        const RequiredTogglesSet& requiredDeviceToggles) const override;
+
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesState& deviceToggles) override;
     MaybeError ResetInternalDeviceForTestingImpl() override;
 
     bool AreTimestampQueriesSupported() const;
 
     MaybeError InitializeImpl() override;
-    MaybeError InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
 
-    MaybeError ValidateFeatureSupportedWithTogglesImpl(
-        wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    FeaturesSet GetSupportedFeaturesUnderTogglesImpl(
+        const AdapterTogglesState& toggles) const override;
 
     MaybeError InitializeDebugLayerFilters();
     void CleanUpDebugLayerFilters();
