@@ -53,8 +53,10 @@ uint32_t GetVendorIdFromVendors(const char* vendor) {
 
 }  // anonymous namespace
 
-Adapter::Adapter(InstanceBase* instance, wgpu::BackendType backendType)
-    : AdapterBase(instance, backendType) {}
+Adapter::Adapter(InstanceBase* instance,
+                 wgpu::BackendType backendType,
+                 const TogglesState& adapterToggle)
+    : AdapterBase(instance, backendType, adapterToggle) {}
 
 MaybeError Adapter::InitializeGLFunctions(void* (*getProc)(const char*)) {
     // Use getProc to populate the dispatch table
@@ -90,7 +92,7 @@ MaybeError Adapter::InitializeImpl() {
     return {};
 }
 
-MaybeError Adapter::InitializeSupportedFeaturesImpl() {
+void Adapter::InitializeSupportedFeaturesImpl() {
     // TextureCompressionBC
     {
         // BC1, BC2 and BC3 are not supported in OpenGL or OpenGL ES core features.
@@ -128,7 +130,7 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
 
         if (supportsS3TC && (supportsTextureSRGB || supportsS3TCSRGB) && supportsRGTC &&
             supportsBPTC) {
-            mSupportedFeatures.EnableFeature(dawn::native::Feature::TextureCompressionBC);
+            EnableFeature(dawn::native::Feature::TextureCompressionBC);
         }
     }
 
@@ -138,15 +140,13 @@ MaybeError Adapter::InitializeSupportedFeaturesImpl() {
     // OpenGL ES:
     // https://www.khronos.org/registry/OpenGL-Refpages/es3/html/glDrawElementsIndirect.xhtml
     if (mFunctions.IsAtLeastGL(4, 2)) {
-        mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+        EnableFeature(Feature::IndirectFirstInstance);
     }
 
     // ShaderF16
     if (mFunctions.IsGLExtensionSupported("GL_AMD_gpu_shader_half_float")) {
-        mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+        EnableFeature(Feature::ShaderF16);
     }
-
-    return {};
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -154,20 +154,76 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(
-    const DeviceDescriptor* descriptor,
-    const TripleStateTogglesSet& userProvidedToggles) {
+TogglesState Adapter::MakeDeviceTogglesImpl(const RequiredTogglesSet& requiredDeviceToggles) const {
+    TogglesState deviceToggles = TogglesState::CreateFromRequiredAndInheritedToggles(
+        requiredDeviceToggles, GetAdapterTogglesState());
+
+    const OpenGLFunctions& gl = mFunctions;
+
+    bool supportsBaseVertex = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(3, 2);
+
+    bool supportsBaseInstance = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(4, 2);
+
+    // TODO(crbug.com/dawn/582): Use OES_draw_buffers_indexed where available.
+    bool supportsIndexedDrawBuffers = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(3, 0);
+
+    bool supportsSnormRead =
+        gl.IsAtLeastGL(4, 4) || gl.IsGLExtensionSupported("GL_EXT_render_snorm");
+
+    bool supportsDepthRead = gl.IsAtLeastGL(3, 0) || gl.IsGLExtensionSupported("GL_NV_read_depth");
+
+    bool supportsStencilRead =
+        gl.IsAtLeastGL(3, 0) || gl.IsGLExtensionSupported("GL_NV_read_stencil");
+
+    bool supportsDepthStencilRead =
+        gl.IsAtLeastGL(3, 0) || gl.IsGLExtensionSupported("GL_NV_read_depth_stencil");
+
+    // Desktop GL supports BGRA textures via swizzling in the driver; ES requires an extension.
+    bool supportsBGRARead =
+        gl.GetVersion().IsDesktop() || gl.IsGLExtensionSupported("GL_EXT_read_format_bgra");
+
+    bool supportsSampleVariables = gl.IsAtLeastGL(4, 0) || gl.IsAtLeastGLES(3, 2) ||
+                                   gl.IsGLExtensionSupported("GL_OES_sample_variables");
+
+    // TODO(crbug.com/dawn/343): We can support the extension variants, but need to load the EXT
+    // procs without the extension suffix.
+    // We'll also need emulation of shader builtins gl_BaseVertex and gl_BaseInstance.
+
+    // supportsBaseVertex |=
+    //     (gl.IsAtLeastGLES(2, 0) &&
+    //      (gl.IsGLExtensionSupported("OES_draw_elements_base_vertex") ||
+    //       gl.IsGLExtensionSupported("EXT_draw_elements_base_vertex"))) ||
+    //     (gl.IsAtLeastGL(3, 1) && gl.IsGLExtensionSupported("ARB_draw_elements_base_vertex"));
+
+    // supportsBaseInstance |=
+    //     (gl.IsAtLeastGLES(3, 1) && gl.IsGLExtensionSupported("EXT_base_instance")) ||
+    //     (gl.IsAtLeastGL(3, 1) && gl.IsGLExtensionSupported("ARB_base_instance"));
+
+    // TODO(crbug.com/dawn/343): Investigate emulation.
+    deviceToggles.Default(Toggle::DisableBaseVertex, !supportsBaseVertex);
+    deviceToggles.Default(Toggle::DisableBaseInstance, !supportsBaseInstance);
+    deviceToggles.Default(Toggle::DisableIndexedDrawBuffers, !supportsIndexedDrawBuffers);
+    deviceToggles.Default(Toggle::DisableSnormRead, !supportsSnormRead);
+    deviceToggles.Default(Toggle::DisableDepthRead, !supportsDepthRead);
+    deviceToggles.Default(Toggle::DisableStencilRead, !supportsStencilRead);
+    deviceToggles.Default(Toggle::DisableDepthStencilRead, !supportsDepthStencilRead);
+    deviceToggles.Default(Toggle::DisableBGRARead, !supportsBGRARead);
+    deviceToggles.Default(Toggle::DisableSampleVariables, !supportsSampleVariables);
+    deviceToggles.Default(Toggle::FlushBeforeClientWaitSync, gl.GetVersion().IsES());
+    // For OpenGL ES, we must use a placeholder fragment shader for vertex-only render pipeline.
+    deviceToggles.Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
+                          gl.GetVersion().IsES());
+
+    return deviceToggles;
+}
+
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesState& deviceToggles) {
     EGLenum api =
         GetBackendType() == wgpu::BackendType::OpenGL ? EGL_OPENGL_API : EGL_OPENGL_ES_API;
     std::unique_ptr<Device::Context> context;
     DAWN_TRY_ASSIGN(context, ContextEGL::Create(mEGLFunctions, api));
-    return Device::Create(this, descriptor, mFunctions, std::move(context), userProvidedToggles);
-}
-
-MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(
-    wgpu::FeatureName feature,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    return {};
+    return Device::Create(this, descriptor, mFunctions, std::move(context), deviceToggles);
 }
 
 }  // namespace dawn::native::opengl
