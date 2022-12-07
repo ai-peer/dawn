@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <memory>
 #include <vector>
 
 #include "dawn/tests/MockCallback.h"
@@ -24,77 +25,25 @@ namespace {
 using testing::HasSubstr;
 }  // anonymous namespace
 
+// UnsafeAPIValidationTest create the instance with toggle DisallowUnsafeApis explicitly enabled,
+// and assert that creating adapter and device will succeed.
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
-        wgpu::DeviceDescriptor descriptor;
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* toggle = "disallow_unsafe_apis";
-        togglesDesc.forceEnabledToggles = &toggle;
-        togglesDesc.forceEnabledTogglesCount = 1;
-        return dawnAdapter.CreateDevice(&descriptor);
+    std::unique_ptr<dawn::native::Instance> CreateTestInstance() override {
+        // Create an instance with toggle DisallowUnsafeApis explicitly enabled, which would be
+        // inherited to adapter and device toggles and disallow experimental features.
+        const char* disallowUnsafeApisToggle = "disallow_unsafe_apis";
+        WGPUDawnTogglesDescriptor instanceToggles = {};
+        instanceToggles.chain.sType = WGPUSType::WGPUSType_DawnTogglesDescriptor;
+        instanceToggles.enabledTogglesCount = 1;
+        instanceToggles.enabledToggles = &disallowUnsafeApisToggle;
+
+        WGPUInstanceDescriptor instanceDesc = {};
+        instanceDesc.nextInChain = &instanceToggles.chain;
+
+        return std::make_unique<dawn::native::Instance>(&instanceDesc);
     }
 };
-
-class UnsafeQueryAPIValidationTest : public ValidationTest {
-  protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
-        wgpu::DeviceDescriptor descriptor;
-        wgpu::FeatureName requiredFeatures[2] = {wgpu::FeatureName::PipelineStatisticsQuery,
-                                                 wgpu::FeatureName::TimestampQuery};
-        descriptor.requiredFeatures = requiredFeatures;
-        descriptor.requiredFeaturesCount = 2;
-
-        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
-        descriptor.nextInChain = &togglesDesc;
-        const char* toggle = "disallow_unsafe_apis";
-        togglesDesc.forceEnabledToggles = &toggle;
-        togglesDesc.forceEnabledTogglesCount = 1;
-
-        return dawnAdapter.CreateDevice(&descriptor);
-    }
-};
-
-// Check that pipeline statistics query are disallowed.
-TEST_F(UnsafeQueryAPIValidationTest, PipelineStatisticsDisallowed) {
-    wgpu::QuerySetDescriptor descriptor;
-    descriptor.count = 1;
-
-    // Control case: occlusion query creation is allowed.
-    {
-        descriptor.type = wgpu::QueryType::Occlusion;
-        device.CreateQuerySet(&descriptor);
-    }
-
-    // Error case: pipeline statistics query creation is disallowed.
-    {
-        descriptor.type = wgpu::QueryType::PipelineStatistics;
-        std::vector<wgpu::PipelineStatisticName> pipelineStatistics = {
-            wgpu::PipelineStatisticName::VertexShaderInvocations};
-        descriptor.pipelineStatistics = pipelineStatistics.data();
-        descriptor.pipelineStatisticsCount = pipelineStatistics.size();
-        ASSERT_DEVICE_ERROR(device.CreateQuerySet(&descriptor));
-    }
-}
-
-// Check timestamp queries are disallowed.
-TEST_F(UnsafeQueryAPIValidationTest, TimestampQueryDisallowed) {
-    wgpu::QuerySetDescriptor descriptor;
-    descriptor.count = 1;
-
-    // Control case: occlusion query creation is allowed.
-    {
-        descriptor.type = wgpu::QueryType::Occlusion;
-        device.CreateQuerySet(&descriptor);
-    }
-
-    // Error case: timestamp query creation is disallowed.
-    {
-        descriptor.type = wgpu::QueryType::Timestamp;
-        ASSERT_DEVICE_ERROR(device.CreateQuerySet(&descriptor));
-    }
-}
 
 // Check chromium_disable_uniformity_analysis is an unsafe API.
 TEST_F(UnsafeAPIValidationTest, chromium_disable_uniformity_analysis) {
