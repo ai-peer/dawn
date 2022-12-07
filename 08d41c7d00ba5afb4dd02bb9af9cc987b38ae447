@@ -201,6 +201,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b471c05_ff8062f8",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-07T22:49:01Z",
+      "side": 1,
+      "message": "SGTM then",
+      "parentUuid": "08520c86_acfb5731",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bdc4e2c_d422c011",
