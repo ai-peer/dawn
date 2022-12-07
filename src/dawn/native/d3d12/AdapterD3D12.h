@@ -38,9 +38,11 @@ class Adapter : public AdapterBase {
     ComPtr<ID3D12Device> GetDevice() const;
 
   private:
-    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(
-        const DeviceDescriptor* descriptor,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+    void SetupDeviceTogglesStateImpl(TogglesState* deviceToggles) const override;
+
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                    const TogglesState& deviceToggles) override;
+
     MaybeError ResetInternalDeviceForTestingImpl() override;
 
     bool AreTimestampQueriesSupported() const;
@@ -49,9 +51,9 @@ class Adapter : public AdapterBase {
     MaybeError InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
 
-    MaybeError ValidateFeatureSupportedWithTogglesImpl(
+    MaybeError ValidateFeatureSupportedWithDeviceTogglesImpl(
         wgpu::FeatureName feature,
-        const TripleStateTogglesSet& userProvidedToggles) override;
+        const TogglesState& deviceTogglesState) override;
 
     MaybeError InitializeDebugLayerFilters();
     void CleanUpDebugLayerFilters();

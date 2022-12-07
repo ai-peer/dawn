@@ -68,15 +68,16 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(
-    const DeviceDescriptor* descriptor,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    return Device::Create(this, descriptor, userProvidedToggles);
+void Adapter::SetupDeviceTogglesStateImpl(TogglesState* deviceToggles) const {}
+
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesState& deviceToggles) {
+    return Device::Create(this, descriptor, deviceToggles);
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(
+MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
     wgpu::FeatureName feature,
-    const TripleStateTogglesSet& userProvidedToggles) {
+    const TogglesState& deviceToggles) {
     return {};
 }
 
@@ -116,8 +117,8 @@ struct CopyFromStagingToBufferOperation : PendingOperation {
 // static
 ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
                                           const DeviceDescriptor* descriptor,
-                                          const TripleStateTogglesSet& userProvidedToggles) {
-    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, userProvidedToggles));
+                                          const TogglesState& deviceToggles) {
+    Ref<Device> device = AcquireRef(new Device(adapter, descriptor, deviceToggles));
     DAWN_TRY(device->Initialize(descriptor));
     return device;
 }
