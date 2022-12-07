@@ -26,11 +26,10 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-    : mInstance(instance), mBackend(backend) {
-    mSupportedFeatures.EnableFeature(Feature::DawnNative);
-    mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
-}
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         wgpu::BackendType backend,
+                         const TogglesState& adapterToggles)
+    : mInstance(instance), mBackend(backend), mAdapterTogglesState(adapterToggles) {}
 
 AdapterBase::~AdapterBase() = default;
 
@@ -38,11 +37,8 @@ MaybeError AdapterBase::Initialize() {
     DAWN_TRY_CONTEXT(InitializeImpl(), "initializing adapter (backend=%s)", mBackend);
     InitializeVendorArchitectureImpl();
 
-    DAWN_TRY_CONTEXT(
-        InitializeSupportedFeaturesImpl(),
-        "gathering supported features for \"%s\" - \"%s\" (vendorId=%#06x deviceId=%#06x "
-        "backend=%s type=%s)",
-        mName, mDriverDescription, mVendorId, mDeviceId, mBackend, mAdapterType);
+    mSupportedFeatures = GetSupportedFeaturesUnderToggles(mAdapterTogglesState);
+
     DAWN_TRY_CONTEXT(
         InitializeSupportedLimitsImpl(&mLimits),
         "gathering supported limits for \"%s\" - \"%s\" (vendorId=%#06x deviceId=%#06x "
@@ -195,6 +191,13 @@ bool AdapterBase::SupportsAllRequiredFeatures(
     return true;
 }
 
+FeaturesSet AdapterBase::GetSupportedFeaturesUnderToggles(const TogglesState& toggles) const {
+    FeaturesSet features = GetSupportedFeaturesUnderTogglesImpl(toggles);
+    EnableFeature(features, Feature::DawnNative);
+    EnableFeature(features, Feature::DawnInternalUsages);
+    return features;
+}
+
 bool AdapterBase::GetLimits(SupportedLimits* limits) const {
     ASSERT(limits != nullptr);
     if (limits->nextInChain != nullptr) {
@@ -208,22 +211,38 @@ bool AdapterBase::GetLimits(SupportedLimits* limits) const {
     return true;
 }
 
-MaybeError AdapterBase::ValidateFeatureSupportedWithToggles(
-    wgpu::FeatureName feature,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    DAWN_TRY(ValidateFeatureName(feature));
-    DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(feature),
-                    "Requested feature %s is not supported.", feature);
+const TogglesState& AdapterBase::GetAdapterTogglesState() const {
+    return mAdapterTogglesState;
+}
 
-    const FeatureInfo* featureInfo = GetInstance()->GetFeatureInfo(feature);
-    // Experimental features are guarded by toggle DisallowUnsafeAPIs.
-    if (featureInfo->featureState == FeatureInfo::FeatureState::Experimental) {
-        DAWN_INVALID_IF(!userProvidedToggles.IsDisabled(Toggle::DisallowUnsafeAPIs),
-                        "Feature %s is guarded by toggle disallow_unsafe_apis.", featureInfo->name);
+void AdapterBase::SetAdapterTogglesForTesting(const TogglesState& adapterToggles) {
+    mAdapterTogglesState = adapterToggles;
+}
+
+void AdapterBase::EnableFeature(FeaturesSet& featuresSet, Feature feature) const {
+    bool isFeatureExperimental =
+        GetInstance()->GetFeatureInfo(FeatureEnumToAPIFeature(feature))->featureState ==
+        FeatureInfo::FeatureState::Experimental;
+    if (!isFeatureExperimental || mAdapterTogglesState.IsDisabled(Toggle::DisallowUnsafeAPIs)) {
+        featuresSet.EnableFeature(feature);
     }
+}
 
-    // Do backend-specific validation.
-    return ValidateFeatureSupportedWithTogglesImpl(feature, userProvidedToggles);
+void AdapterBase::SetSupportedFeaturesForTesting(
+    const std::vector<wgpu::FeatureName>& requiredFeatures) {
+    mSupportedFeatures = {};
+    for (wgpu::FeatureName f : requiredFeatures) {
+        mSupportedFeatures.EnableFeature(f);
+    }
+}
+
+TogglesState AdapterBase::MakeDeviceToggles(const RequiredTogglesSet& requiredDeviceToggles) const {
+    TogglesState deviceToggles = MakeDeviceTogglesImpl(requiredDeviceToggles);
+
+    deviceToggles.Default(Toggle::LazyClearResourceOnFirstUse, true);
+    deviceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+
+    return deviceToggles;
 }
 
 ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
@@ -233,15 +252,20 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     // Check overriden toggles before creating device, as some device features may be guarded by
     // toggles, and requiring such features without using corresponding toggles should fails the
     // device creating.
-    const DawnTogglesDeviceDescriptor* togglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &togglesDesc);
-    TripleStateTogglesSet userProvidedToggles =
-        TripleStateTogglesSet::CreateFromTogglesDeviceDescriptor(togglesDesc);
+    const DawnTogglesDescriptor* deviceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &deviceTogglesDesc);
+    RequiredTogglesSet userProvidedToggles =
+        RequiredTogglesSet::CreateFromTogglesDescriptor(deviceTogglesDesc);
+
+    TogglesState deviceToggles = MakeDeviceToggles(userProvidedToggles);
 
     // Validate all required features are supported by the adapter and suitable under given toggles.
+    FeaturesSet allowedDeviceFeatures = GetSupportedFeaturesUnderToggles(deviceToggles);
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {
         wgpu::FeatureName feature = descriptor->requiredFeatures[i];
-        DAWN_TRY(ValidateFeatureSupportedWithToggles(feature, userProvidedToggles));
+        DAWN_TRY(ValidateFeatureName(feature));
+        DAWN_INVALID_IF(!allowedDeviceFeatures.IsEnabled(feature),
+                        "Requested feature %s is not supported.", feature);
     }
 
     if (descriptor->requiredLimits != nullptr) {
@@ -252,7 +276,7 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
         DAWN_INVALID_IF(descriptor->requiredLimits->nextInChain != nullptr,
                         "nextInChain is not nullptr.");
     }
-    return CreateDeviceImpl(descriptor, userProvidedToggles);
+    return CreateDeviceImpl(descriptor, deviceToggles);
 }
 
 void AdapterBase::SetUseTieredLimits(bool useTieredLimits) {

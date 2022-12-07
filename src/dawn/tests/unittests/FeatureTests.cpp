@@ -16,6 +16,7 @@
 
 #include "dawn/native/Features.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/null/DeviceNull.h"
 #include "gtest/gtest.h"
 
@@ -24,7 +25,7 @@ class FeatureTests : public testing::Test {
     FeatureTests()
         : testing::Test(),
           mInstanceBase(dawn::native::InstanceBase::Create()),
-          mAdapterBase(mInstanceBase.Get()) {}
+          mAdapterBase(mInstanceBase.Get(), dawn::native::TogglesState{}) {}
 
     std::vector<wgpu::FeatureName> GetAllFeatureNames() {
         std::vector<wgpu::FeatureName> allFeatureNames(kTotalFeaturesCount);
@@ -52,7 +53,7 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
         std::vector<wgpu::FeatureName> featureNamesWithoutOne = kAllFeatureNames;
         featureNamesWithoutOne.erase(featureNamesWithoutOne.begin() + i);
 
-        mAdapterBase.SetSupportedFeatures(featureNamesWithoutOne);
+        mAdapterBase.SetSupportedFeaturesForTesting(featureNamesWithoutOne);
         dawn::native::Adapter adapterWithoutFeature(&mAdapterBase);
 
         wgpu::DeviceDescriptor deviceDescriptor;
@@ -80,10 +81,10 @@ TEST_F(FeatureTests, GetEnabledFeatures) {
         // Some features may require DisallowUnsafeApis toggle disabled, otherwise CreateDevice may
         // failed.
         const char* const disableToggles[] = {"disallow_unsafe_apis"};
-        wgpu::DawnTogglesDeviceDescriptor toggleDesc;
-        toggleDesc.forceDisabledToggles = disableToggles;
-        toggleDesc.forceDisabledTogglesCount = 1;
-        deviceDescriptor.nextInChain = &toggleDesc;
+        wgpu::DawnTogglesDescriptor deviceToggleDesc;
+        deviceToggleDesc.disabledToggles = disableToggles;
+        deviceToggleDesc.disabledTogglesCount = 1;
+        deviceDescriptor.nextInChain = &deviceToggleDesc;
 
         dawn::native::DeviceBase* deviceBase = dawn::native::FromAPI(
             adapter.CreateDevice(reinterpret_cast<const WGPUDeviceDescriptor*>(&deviceDescriptor)));
