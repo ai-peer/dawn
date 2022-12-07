@@ -26,7 +26,10 @@ class Backend;
 
 class Adapter : public AdapterBase {
   public:
-    Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter);
+    Adapter(Backend* backend,
+            ComPtr<IDXGIAdapter3> hardwareAdapter,
+            const TogglesState& adapterToggles,
+            const RequiredTogglesSet& requiredToggles);
     ~Adapter() override;
 
     // AdapterBase Implementation
@@ -43,17 +46,13 @@ class Adapter : public AdapterBase {
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(const DeviceDescriptor* descriptor,
                                                     const TogglesState& deviceToggles) override;
 
-    MaybeError ResetInternalDeviceForTestingImpl() override;
+    ResultOrError<bool> ResetInternalDeviceForTestingImpl() override;
 
     bool AreTimestampQueriesSupported() const;
 
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
     MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
-
-    MaybeError ValidateFeatureSupportedWithDeviceTogglesImpl(
-        wgpu::FeatureName feature,
-        const TogglesState& deviceTogglesState) override;
 
     MaybeError InitializeDebugLayerFilters();
     void CleanUpDebugLayerFilters();
