@@ -27,8 +27,10 @@
 
 namespace dawn::native::d3d12 {
 
-Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
-    : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12),
+Adapter::Adapter(Backend* backend,
+                 ComPtr<IDXGIAdapter3> hardwareAdapter,
+                 const TogglesState& adapterToggles)
+    : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12, adapterToggles),
       mHardwareAdapter(hardwareAdapter),
       mBackend(backend) {}
 
@@ -122,30 +124,37 @@ bool Adapter::AreTimestampQueriesSupported() const {
     return true;
 }
 
-MaybeError Adapter::InitializeSupportedFeaturesImpl() {
-    if (AreTimestampQueriesSupported()) {
-        mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
-        mSupportedFeatures.EnableFeature(Feature::TimestampQueryInsidePasses);
-    }
-    mSupportedFeatures.EnableFeature(Feature::TextureCompressionBC);
-    mSupportedFeatures.EnableFeature(Feature::PipelineStatisticsQuery);
-    mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
-    mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
-    mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
-    mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
-    mSupportedFeatures.EnableFeature(Feature::DepthClipControl);
+FeaturesSet Adapter::GetSupportedFeaturesUnderTogglesImpl(const TogglesState& toggles) const {
+    FeaturesSet features;
 
-    // Both Dp4a and ShaderF16 features require DXC version being 1.4 or higher
-    if (GetBackend()->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)) {
+    // Stable features
+    EnableFeature(features, Feature::TextureCompressionBC);
+    EnableFeature(features, Feature::Depth32FloatStencil8);
+    EnableFeature(features, Feature::IndirectFirstInstance);
+    EnableFeature(features, Feature::RG11B10UfloatRenderable);
+
+    // Experimental features
+    if (AreTimestampQueriesSupported()) {
+        EnableFeature(features, Feature::TimestampQuery);
+        EnableFeature(features, Feature::TimestampQueryInsidePasses);
+    }
+
+    EnableFeature(features, Feature::PipelineStatisticsQuery);
+    EnableFeature(features, Feature::MultiPlanarFormats);
+    EnableFeature(features, Feature::DepthClipControl);
+
+    // Both Dp4a and ShaderF16 features require using DXC version 1.4 or higher
+    if (GetAdapterTogglesState().IsEnabled(Toggle::UseDXC) &&
+        GetBackend()->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)) {
         if (mDeviceInfo.supportsDP4a) {
-            mSupportedFeatures.EnableFeature(Feature::ChromiumExperimentalDp4a);
+            EnableFeature(features, Feature::ChromiumExperimentalDp4a);
         }
         if (mDeviceInfo.supportsShaderF16) {
-            mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+            EnableFeature(features, Feature::ShaderF16);
         }
     }
 
-    return {};
+    return features;
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
@@ -310,21 +319,6 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(
-    wgpu::FeatureName feature,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    // shader-f16 feature and chromium-experimental-dp4a feature require DXC 1.4 or higher for
-    // D3D12.
-    if (feature == wgpu::FeatureName::ShaderF16 ||
-        feature == wgpu::FeatureName::ChromiumExperimentalDp4a) {
-        DAWN_INVALID_IF(!(userProvidedToggles.IsEnabled(Toggle::UseDXC) &&
-                          mBackend->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)),
-                        "Feature %s requires DXC for D3D12.",
-                        GetInstance()->GetFeatureInfo(feature)->name);
-    }
-    return {};
-}
-
 MaybeError Adapter::InitializeDebugLayerFilters() {
     if (!GetInstance()->IsBackendValidationEnabled()) {
         return {};
@@ -436,10 +430,107 @@ void Adapter::CleanUpDebugLayerFilters() {
     infoQueue->PopStorageFilter();
 }
 
-ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(
-    const DeviceDescriptor* descriptor,
-    const TripleStateTogglesSet& userProvidedToggles) {
-    return Device::Create(this, descriptor, userProvidedToggles);
+TogglesState Adapter::MakeDeviceTogglesImpl(const RequiredTogglesSet& requiredDeviceToggles) const {
+    TogglesState deviceToggles = TogglesState::CreateFromRequiredAndInheritedToggles(
+        requiredDeviceToggles, GetAdapterTogglesState());
+
+    const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
+    deviceToggles.Default(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
+    deviceToggles.Default(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
+    deviceToggles.Default(Toggle::UseD3D12ResidencyManagement, true);
+    deviceToggles.Default(Toggle::D3D12AlwaysUseTypelessFormatsForCastableTexture,
+                          !GetDeviceInfo().supportsCastingFullyTypedFormat);
+    deviceToggles.Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
+
+    // The restriction on the source box specifying a portion of the depth stencil texture in
+    // CopyTextureRegion() is only available on the D3D12 platforms which doesn't support
+    // programmable sample positions.
+    deviceToggles.Default(
+        Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
+        GetDeviceInfo().programmableSamplePositionsTier == 0);
+
+    // Default to use FXC. If DXC is not available, this toggle would have been force disabled in
+    // adapter toggles set and get inherited in device toggles set.
+    ASSERT(GetBackend()->IsDXCAvailable() ||
+           (deviceToggles.IsForced(Toggle::UseDXC) && deviceToggles.IsDisabled(Toggle::UseDXC)));
+    deviceToggles.Default(Toggle::UseDXC, false);
+
+    // Disable optimizations when using FXC
+    // See https://crbug.com/dawn/1203
+    deviceToggles.Default(Toggle::FxcOptimizations, false);
+
+    // By default use the maximum shader-visible heap size allowed.
+    deviceToggles.Default(Toggle::UseD3D12SmallShaderVisibleHeapForTesting, false);
+
+    uint32_t deviceId = GetDeviceId();
+    uint32_t vendorId = GetVendorId();
+
+    // Currently this workaround is only needed on Intel Gen9, Gen9.5 and Gen11 GPUs.
+    // See http://crbug.com/1161355 for more information.
+    if (gpu_info::IsIntelGen9(vendorId, deviceId) || gpu_info::IsIntelGen11(vendorId, deviceId)) {
+        const gpu_info::DriverVersion kFixedDriverVersion = {31, 0, 101, 2114};
+        if (gpu_info::CompareWindowsDriverVersion(vendorId, GetDriverVersion(),
+                                                  kFixedDriverVersion) < 0) {
+            deviceToggles.Default(
+                Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
+                true);
+        }
+    }
+
+    // Currently this workaround is only needed on Intel Gen9, Gen9.5 and Gen12 GPUs.
+    // See http://crbug.com/dawn/1487 for more information.
+    if (gpu_info::IsIntelGen9(vendorId, deviceId) || gpu_info::IsIntelGen12LP(vendorId, deviceId) ||
+        gpu_info::IsIntelGen12HP(vendorId, deviceId)) {
+        deviceToggles.Default(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation, true);
+    }
+
+    // Currently this workaround is only needed on Intel Gen12 GPUs.
+    // See http://crbug.com/dawn/1487 for more information.
+    if (gpu_info::IsIntelGen12LP(vendorId, deviceId) ||
+        gpu_info::IsIntelGen12HP(vendorId, deviceId)) {
+        deviceToggles.Default(Toggle::D3D12DontSetClearValueOnDepthTextureCreation, true);
+    }
+
+    // Currently this workaround is needed on any D3D12 backend for some particular situations.
+    // But we may need to limit it if D3D12 runtime fixes the bug on its new release. See
+    // https://crbug.com/dawn/1289 for more information.
+    // TODO(dawn:1289): Unset this toggle when we skip the split on the buffer-texture copy
+    // on the platforms where UnrestrictedBufferTextureCopyPitchSupported is true.
+    deviceToggles.Default(Toggle::D3D12SplitBufferTextureCopyForRowsPerImagePaddings, true);
+
+    // This workaround is only needed on Intel Gen12LP with driver prior to 30.0.101.1692.
+    // See http://crbug.com/dawn/949 for more information.
+    if (gpu_info::IsIntelGen12LP(vendorId, deviceId)) {
+        const gpu_info::DriverVersion kFixedDriverVersion = {30, 0, 101, 1692};
+        if (gpu_info::CompareWindowsDriverVersion(vendorId, GetDriverVersion(),
+                                                  kFixedDriverVersion) == -1) {
+            deviceToggles.Default(Toggle::D3D12AllocateExtraMemoryFor2DArrayColorTexture, true);
+        }
+    }
+
+    // Currently this workaround is only needed on Intel Gen9.5 and Gen11 GPUs.
+    // See http://crbug.com/1237175 for more information.
+    if ((gpu_info::IsIntelGen9(vendorId, deviceId) && !gpu_info::IsSkylake(deviceId)) ||
+        gpu_info::IsIntelGen11(vendorId, deviceId)) {
+        deviceToggles.Default(Toggle::D3D12Allocate2DTexturewithCopyDstAsCommittedResource, true);
+        // Now we don't need to force clearing depth stencil textures with CopyDst as all the depth
+        // stencil textures (can only be 2D textures) will be created with CreateCommittedResource()
+        // instead of CreatePlacedResource().
+        deviceToggles.Default(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation, false);
+    }
+
+    // Currently this toggle is only needed on Intel Gen9 and Gen9.5 GPUs.
+    // See http://crbug.com/dawn/1579 for more information.
+    if (gpu_info::IsIntelGen9(vendorId, deviceId)) {
+        deviceToggles.ForceSet(Toggle::NoWorkaroundDstAlphaBlendDoesNotWork, true);
+    }
+
+    return deviceToggles;
+}
+
+ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
+                                                         const TogglesState& deviceToggles) {
+    return Device::Create(this, descriptor, deviceToggles);
 }
 
 // Resets the backend device and creates a new one. If any D3D12 objects belonging to the
