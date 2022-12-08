@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "239f4667_449b0c6a",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-08T19:02:24Z",
+      "side": 1,
+      "message": "To be fair, this isnt\u0027 really `causing trouble` so much as using a feature as designed. Maybe just `check the using isn\u0027t using a shadowed short-name`",
+      "revId": "4c6c8062ce16f3434a794605ca41c72ea8269cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e0924d_420531fb",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-08T19:02:24Z",
+      "side": 1,
+      "message": "What does `tut tut` mean?",
+      "revId": "4c6c8062ce16f3434a794605ca41c72ea8269cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
