@@ -342,7 +342,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"no_workaround_indirect_base_vertex_not_applied",
       "MacOS Intel < Gen9 has a bug where indirect base vertex is not applied for "
       "drawIndexedIndirect. Draws are done as if it is always zero.",
-      "https://crbug.com/dawn/966"}}
+      "https://crbug.com/dawn/966"}},
+    {Toggle::CopyTexturesToBuffersRowByRow,
+     {"copy_textures_to_buffers_row_row",
+      "Metal on Intel GPU pre MacOS 13.1 has driver bugs when copying textures to buffers."
+      "https://crbug.com/dawn/1430"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

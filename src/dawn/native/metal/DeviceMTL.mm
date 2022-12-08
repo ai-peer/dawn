@@ -242,6 +242,13 @@ void Device::InitTogglesFromDriver() {
         SetToggle(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline, usePlaceholderFragmentShader);
     }
 
+    if (gpu_info::IsIntel(vendorId)) {
+        if (@available(macOS 13.1, *)) {
+        } else {
+            SetToggle(Toggle::CopyTexturesToBuffersRowByRow, true);
+        }
+    }
+
     // On some Intel GPUs using big integer values as clear values in render pass doesn't work
     // correctly. Currently we have to add workaround for this issue by enabling the toggle
     // "apply_clear_big_integer_color_value_with_draw". See https://crbug.com/dawn/1109 and
