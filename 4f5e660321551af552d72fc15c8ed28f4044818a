@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cb67ab2_ff4cd963",
+        "filename": "src/tint/type/type.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T12:06:21Z",
+      "side": 1,
+      "message": "These are now, of course, redundant. We should do a cleanup pass at the end.",
+      "range": {
+        "startLine": 175,
+        "startChar": 19,
+        "endLine": 175,
+        "endChar": 25
+      },
+      "revId": "4f5e660321551af552d72fc15c8ed28f4044818a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
