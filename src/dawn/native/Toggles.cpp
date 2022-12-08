@@ -332,6 +332,10 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "This toggle is off by default. It is expected to turn on or get removed when WebGPU V1 "
       "ships and stays stable.",
       "https://crbug.com/dawn/1563"}},
+    {Toggle::CopyTexturesToBuffersRowByRow,
+     {"copy_textures_to_buffers_row_row",
+      "Metal on Intel GPU pre MacOS 13.1 has driver bugs when copying textures to buffers."
+      "https://crbug.com/dawn/1430"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
