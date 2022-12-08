@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a99c54_bacfc4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T19:29:26Z",
+      "side": 1,
+      "message": "These tests are failing when enabling the validation layers in https://chromium-review.googlesource.com/c/chromium/src/+/4088530",
+      "revId": "80d70633b220a985ba8826b202ceec90c7a1a968",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
