@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8d6fa58_1b5bd0f9",
+        "filename": "src/tint/program.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T12:02:27Z",
+      "side": 1,
+      "message": "Could now be called `type::Manager` to avoid repetition.",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "734c7f2cfa7e0475534e690eaae4a948c0d2dfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
