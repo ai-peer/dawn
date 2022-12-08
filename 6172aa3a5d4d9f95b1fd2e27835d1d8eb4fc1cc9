@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5461dc4_34b85cd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T23:33:36Z",
+      "side": 1,
+      "message": "dawn part LGTM",
+      "revId": "6172aa3a5d4d9f95b1fd2e27835d1d8eb4fc1cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b317c1c1_b8905ea7",
