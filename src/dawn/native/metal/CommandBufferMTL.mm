@@ -655,8 +655,10 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
                                const Origin3D& origin,
                                Aspect aspect,
                                const Extent3D& copySize) {
-    TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
-        texture, mipLevel, origin, copySize, bufferSize, offset, bytesPerRow, rowsPerImage, aspect);
+    bool forceCopyRowByRow = false;
+    TextureBufferCopySplit splitCopies =
+        ComputeTextureBufferCopySplit(texture, mipLevel, origin, copySize, bufferSize, offset,
+                                      bytesPerRow, rowsPerImage, aspect, forceCopyRowByRow);
 
     MTLBlitOption blitOption = ComputeMTLBlitOption(texture->GetFormat(), aspect);
 
@@ -876,9 +878,11 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 texture->EnsureSubresourceContentInitialized(
                     commandContext, GetSubresourcesAffectedByCopy(src, copySize));
 
+                bool forceCopyRowByRow =
+                    GetDevice()->IsToggleEnabled(Toggle::CopyTexturesToBuffersRowByRow);
                 TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                     texture, src.mipLevel, src.origin, copySize, buffer->GetSize(), dst.offset,
-                    dst.bytesPerRow, dst.rowsPerImage, src.aspect);
+                    dst.bytesPerRow, dst.rowsPerImage, src.aspect, forceCopyRowByRow);
 
                 for (const auto& copyInfo : splitCopies) {
                     MTLBlitOption blitOption =
