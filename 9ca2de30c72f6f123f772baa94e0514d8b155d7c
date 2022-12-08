@@ -16,6 +16,93 @@
       "message": "Hey Austin, I don\u0027t know if you think this is an acceptable solution or not\n\nhttps://dawn-review.googlesource.com/c/dawn/+/113426\n\nI get it\u0027s now doing allocations it wasn\u0027t before so if you\u0027d prefer I take some different path in CommandBufferMTL.mm that avoids the allocations rather than putting the solution in here I can do that.\n\nAlso I\u0027m not 100% yet this is the correct limit. I asked some people at apple. If I don\u0027t hear back I can only guess I should write a metal example that tests say every texture format, 1D, 2D, 3D at every power of 2 and see when metal complains.",
       "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f60209e_d0123c5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T21:18:09Z",
+      "side": 1,
+      "message": "sounds good to ask contacts at apple instead of guessing what the value is\n\nanother thought: it seems like the failures are only with the small formats: r8, rg8, and r16\n\nso maybe the debug layers are computing the size assuming a larger format like rgba8unorm",
+      "parentUuid": "d242aa69_d627b658",
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a46fd26_5df0db16",
+        "filename": "src/dawn/native/metal/UtilsMetal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T21:18:09Z",
+      "side": 1,
+      "message": "can use StackVector in src/dawn/common/StackContainer.h",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355f798e_90f118cd",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T21:18:09Z",
+      "side": 1,
+      "message": "u-nit: now that there\u0027s two workarounds, minor preference to call the variable like \"copy_row_by_row\" and you can comment \"// handle workaround case 2\"\n\nditto about giving the other bool a descriptive name",
+      "range": {
+        "startLine": 231,
+        "startChar": 9,
+        "endLine": 231,
+        "endChar": 24
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "444a4db8_894e543a",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T21:18:09Z",
+      "side": 1,
+      "message": "hmm - does it work if we pass the values instead?\nright now it seems fine, but worried that future code might inspect the CopyInfo and be surprised to find zeros.",
+      "range": {
+        "startLine": 238,
+        "startChar": 20,
+        "endLine": 239,
+        "endChar": 41
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
