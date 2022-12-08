@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0c838c_d685f109",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T19:26:49Z",
+      "side": 1,
+      "message": "It\u0027s allowed, but a pretty unlikely thing to be doing unless you were intentionally trying to do something odd. Shadowing a short-name with a variable or function seems far more likely. Anyway, reworded.",
+      "parentUuid": "239f4667_449b0c6a",
+      "revId": "4c6c8062ce16f3434a794605ca41c72ea8269cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7e0924d_420531fb",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-08T19:02:24Z",
       "side": 1,
       "message": "What does `tut tut` mean?",
+      "revId": "4c6c8062ce16f3434a794605ca41c72ea8269cdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b22eb3b_d2c215c2",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T19:26:49Z",
+      "side": 1,
+      "message": "failed humour.",
+      "parentUuid": "d7e0924d_420531fb",
       "revId": "4c6c8062ce16f3434a794605ca41c72ea8269cdf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
