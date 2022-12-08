@@ -157,6 +157,24 @@
       "parentUuid": "3c81c3d8_bfc15a12",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "559b3161_f04371c6",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-08T12:08:16Z",
+      "side": 1,
+      "message": "Ah sorry, I meant UNREACHABLE() https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Assert.h;drc\u003d7e74c218738e637d4e9fdaff9dd5c38ca92ed1c3;l\u003d72\n\nDo you need someone else to look at the dawn_wire part or are you planning to handle it? We\u0027re gearing towards V1 so I want to make sure that we don\u0027t have things in the critical path that are blocked.",
+      "parentUuid": "122dd539_74f6c2df",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
