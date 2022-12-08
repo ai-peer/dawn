@@ -16,6 +16,23 @@
       "message": "PTAL\n\nverified locally on a windows machine this works",
       "revId": "e844c28c9db45799e8cd5461b67b174033756cc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36f1d60_d12a2b8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T20:57:07Z",
+      "side": 1,
+      "message": "Thank you for this.\nHeh, looks like you need to wait for my fix to land. At least we know it works!",
+      "revId": "e844c28c9db45799e8cd5461b67b174033756cc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
