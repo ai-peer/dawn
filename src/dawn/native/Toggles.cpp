@@ -332,6 +332,10 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "This toggle is off by default. It is expected to turn on or get removed when WebGPU V1 "
       "ships and stays stable.",
       "https://crbug.com/dawn/1563"}},
+    {Toggle::CopyTexturesToBuffersRowByRow,
+     {"copy_textures_to_buffers_row_row",
+      "Metal on Intel GPU pre MacOS 13.1 has driver bugs when copying textures to buffers."
+      "https://crbug.com/dawn/1430"}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "
@@ -342,7 +346,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"no_workaround_indirect_base_vertex_not_applied",
       "MacOS Intel < Gen9 has a bug where indirect base vertex is not applied for "
       "drawIndexedIndirect. Draws are done as if it is always zero.",
-      "https://crbug.com/dawn/966"}}
+      "https://crbug.com/dawn/966"}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
