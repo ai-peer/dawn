@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff763d7b_19e0002e",
+        "filename": "src/tint/resolver/builtin_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T12:05:13Z",
+      "side": 1,
+      "message": "Looks like I need to run my unused-header-stripper script again.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 42
+      },
+      "revId": "e35e865242816a7c962c30098eed25e0ac0d4c0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
