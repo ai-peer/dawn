@@ -86,6 +86,23 @@
       "parentUuid": "ea7b9d9f_7236fade",
       "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b496e788_cf8b32ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-08T04:46:03Z",
+      "side": 1,
+      "message": "Kokoro failure is unrelated.",
+      "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
