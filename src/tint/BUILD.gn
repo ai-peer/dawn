@@ -434,7 +434,6 @@ libtint_source_set("libtint_core_all_src") {
     "sem/info.h",
     "sem/loop_statement.h",
     "sem/materialize.h",
-    "sem/matrix.h",
     "sem/module.h",
     "sem/node.h",
     "sem/parameter_usage.h",
@@ -445,7 +444,6 @@ libtint_source_set("libtint_core_all_src") {
     "sem/type_conversion.h",
     "sem/type_initializer.h",
     "sem/type_mappings.h",
-    "sem/vector.h",
     "sem/while_statement.h",
     "source.cc",
     "source.h",
@@ -568,6 +566,7 @@ libtint_source_set("libtint_core_all_src") {
     "type/f16.h",
     "type/f32.h",
     "type/i32.h",
+    "type/matrix.h",
     "type/multisampled_texture.h",
     "type/node.h",
     "type/pointer.h",
@@ -579,6 +578,7 @@ libtint_source_set("libtint_core_all_src") {
     "type/type.h",
     "type/type_manager.h",
     "type/u32.h",
+    "type/vector.h",
     "type/void.h",
     "utils/bitcast.h",
     "utils/bitset.h",
@@ -671,8 +671,6 @@ libtint_source_set("libtint_sem_src") {
     "sem/loop_statement.h",
     "sem/materialize.cc",
     "sem/materialize.h",
-    "sem/matrix.cc",
-    "sem/matrix.h",
     "sem/member_accessor_expression.cc",
     "sem/module.cc",
     "sem/module.h",
@@ -692,8 +690,6 @@ libtint_source_set("libtint_sem_src") {
     "sem/type_initializer.h",
     "sem/type_mappings.h",
     "sem/variable.cc",
-    "sem/vector.cc",
-    "sem/vector.h",
     "sem/while_statement.cc",
     "sem/while_statement.h",
   ]
@@ -725,6 +721,8 @@ libtint_source_set("libtint_type_src") {
     "type/f32.h",
     "type/i32.cc",
     "type/i32.h",
+    "type/matrix.cc",
+    "type/matrix.h",
     "type/multisampled_texture.cc",
     "type/multisampled_texture.h",
     "type/node.cc",
@@ -747,6 +745,8 @@ libtint_source_set("libtint_type_src") {
     "type/type_manager.h",
     "type/u32.cc",
     "type/u32.h",
+    "type/vector.cc",
+    "type/vector.h",
     "type/void.cc",
     "type/void.h",
   ]
@@ -1206,9 +1206,7 @@ if (tint_build_unittests) {
       "sem/atomic_test.cc",
       "sem/builtin_test.cc",
       "sem/expression_test.cc",
-      "sem/matrix_test.cc",
       "sem/struct_test.cc",
-      "sem/vector_test.cc",
     ]
   }
 
@@ -1221,6 +1219,7 @@ if (tint_build_unittests) {
       "type/f16_test.cc",
       "type/f32_test.cc",
       "type/i32_test.cc",
+      "type/matrix_test.cc",
       "type/multisampled_texture_test.cc",
       "type/pointer_test.cc",
       "type/reference_test.cc",
@@ -1231,6 +1230,7 @@ if (tint_build_unittests) {
       "type/type_manager_test.cc",
       "type/type_test.cc",
       "type/u32_test.cc",
+      "type/vector_test.cc",
     ]
   }
 
