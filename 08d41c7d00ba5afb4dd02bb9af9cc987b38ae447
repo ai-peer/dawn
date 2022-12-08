@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4059549e_5bf90181",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-08T00:29:36Z",
+      "side": 1,
+      "message": "The WebIDL always takes `double` and only protects us against infinity and NaN. Other than that the `double` value is passed down unmodified and we convert it here.",
+      "parentUuid": "f896e8eb_8ee5e161",
+      "revId": "08d41c7d00ba5afb4dd02bb9af9cc987b38ae447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc5de1cc_f2704233",
