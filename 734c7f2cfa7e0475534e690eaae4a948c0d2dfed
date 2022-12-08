@@ -22,6 +22,30 @@
       },
       "revId": "734c7f2cfa7e0475534e690eaae4a948c0d2dfed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b123ab_04bc0ef8",
+        "filename": "src/tint/program.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-08T14:12:29Z",
+      "side": 1,
+      "message": "Yup, planning on doing as a followup once the moves are done.",
+      "parentUuid": "f8d6fa58_1b5bd0f9",
+      "range": {
+        "startLine": 76,
+        "startChar": 10,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "734c7f2cfa7e0475534e690eaae4a948c0d2dfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
