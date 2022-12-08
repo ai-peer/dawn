@@ -196,12 +196,15 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     const Format textureFormat = texture->GetFormat();
     const TexelBlockInfo& blockInfo = textureFormat.GetAspectInfo(aspect).block;
 
-    // When copying textures from/to an unpacked buffer, the Metal validation layer doesn't
-    // compute the correct range when checking if the buffer is big enough to contain the
-    // data for the whole copy. Instead of looking at the position of the last texel in the
-    // buffer, it computes the volume of the 3D box with bytesPerRow * (rowsPerImage /
-    // format.blockHeight) * copySize.depthOrArrayLayers. For example considering the pixel
-    // buffer below where in memory, each row data (D) of the texture is followed by some
+    // When copying textures from/to an unpacked buffer, the Metal validation layer has 2
+    // issues.
+    //
+    // 1. The metal validation layer doesn't compute the correct range when checking if the
+    // buffer is big enough to contain the data for the whole copy. Instead of looking at
+    // the position of the last texel in the buffer, it computes the volume of the 3D box
+    // with bytesPerRow * (rowsPerImage / format.blockHeight) * copySize.depthOrArrayLayers.
+    // For example considering the pixel buffer below where in memory, each row data (D) of
+    // the texture is followed by some
     // padding data (P):
     //     |DDDDDDD|PP|
     //     |DDDDDDD|PP|
@@ -213,6 +216,9 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
 
     // We work around this limitation by detecting when Metal would complain and copy the
     // last image and row separately using tight sourceBytesPerRow or sourceBytesPerImage.
+
+    // 2. The metal validation layer complains for certain texture formats and dimensions
+    // if `destinationBytesPerRow` is > 2048. In that case copy each row a piece at a time.
     uint32_t bytesPerImage = bytesPerRow * rowsPerImage;
 
     // Metal validation layer requires that if the texture's pixel format is a compressed
@@ -222,16 +228,28 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     const Extent3D clampedCopyExtent =
         texture->ClampToMipLevelVirtualSize(mipLevel, origin, copyExtent);
 
+    bool needWorkaround2 =
+        bytesPerRow > 2048u && texture->GetDimension() == wgpu::TextureDimension::e3D;
+    if (needWorkaround2) {
+        for (uint32_t slice = 0; slice < copyExtent.depthOrArrayLayers; ++slice) {
+            for (uint32_t row = 0; row < copyExtent.height; ++row) {
+                copy.copies.push_back(TextureBufferCopySplit::CopyInfo(
+                    bufferOffset + slice * rowsPerImage * bytesPerRow + row * bytesPerRow,
+                    0,  // bytesPerRow
+                    0,  // bytesPerImage,
+                    {origin.x, origin.y + row, origin.z + slice}, {clampedCopyExtent.width, 1, 1}));
+            }
+        }
+        return copy;
+    }
+
     // Check whether buffer size is big enough.
-    bool needWorkaround = bufferSize - bufferOffset < bytesPerImage * copyExtent.depthOrArrayLayers;
-    if (!needWorkaround) {
-        copy.count = 1;
-        copy.copies[0].bufferOffset = bufferOffset;
-        copy.copies[0].bytesPerRow = bytesPerRow;
-        copy.copies[0].bytesPerImage = bytesPerImage;
-        copy.copies[0].textureOrigin = origin;
-        copy.copies[0].copyExtent = {clampedCopyExtent.width, clampedCopyExtent.height,
-                                     copyExtent.depthOrArrayLayers};
+    bool needWorkaround1 =
+        bufferSize - bufferOffset < bytesPerImage * copyExtent.depthOrArrayLayers;
+    if (!needWorkaround1) {
+        copy.copies.push_back(TextureBufferCopySplit::CopyInfo(
+            bufferOffset, bytesPerRow, bytesPerImage, origin,
+            {clampedCopyExtent.width, clampedCopyExtent.height, copyExtent.depthOrArrayLayers}));
         return copy;
     }
 
@@ -239,15 +257,10 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
 
     // Doing all the copy except the last image.
     if (copyExtent.depthOrArrayLayers > 1) {
-        copy.copies[copy.count].bufferOffset = currentOffset;
-        copy.copies[copy.count].bytesPerRow = bytesPerRow;
-        copy.copies[copy.count].bytesPerImage = bytesPerImage;
-        copy.copies[copy.count].textureOrigin = origin;
-        copy.copies[copy.count].copyExtent = {clampedCopyExtent.width, clampedCopyExtent.height,
-                                              copyExtent.depthOrArrayLayers - 1};
-
-        ++copy.count;
-
+        copy.copies.push_back(
+            TextureBufferCopySplit::CopyInfo(currentOffset, bytesPerRow, bytesPerImage, origin,
+                                             {clampedCopyExtent.width, clampedCopyExtent.height,
+                                              copyExtent.depthOrArrayLayers - 1}));
         // Update offset to copy to the last image.
         currentOffset += (copyExtent.depthOrArrayLayers - 1) * bytesPerImage;
     }
@@ -255,18 +268,12 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     // Doing all the copy in last image except the last row.
     uint32_t copyBlockRowCount = copyExtent.height / blockInfo.height;
     if (copyBlockRowCount > 1) {
-        copy.copies[copy.count].bufferOffset = currentOffset;
-        copy.copies[copy.count].bytesPerRow = bytesPerRow;
-        copy.copies[copy.count].bytesPerImage = bytesPerRow * (copyBlockRowCount - 1);
-        copy.copies[copy.count].textureOrigin = {origin.x, origin.y,
-                                                 origin.z + copyExtent.depthOrArrayLayers - 1};
-
         ASSERT(copyExtent.height - blockInfo.height <
                texture->GetMipLevelSingleSubresourceVirtualSize(mipLevel).height);
-        copy.copies[copy.count].copyExtent = {clampedCopyExtent.width,
-                                              copyExtent.height - blockInfo.height, 1};
-
-        ++copy.count;
+        copy.copies.push_back(TextureBufferCopySplit::CopyInfo(
+            currentOffset, bytesPerRow, bytesPerRow * (copyBlockRowCount - 1),
+            {origin.x, origin.y, origin.z + copyExtent.depthOrArrayLayers - 1},
+            {clampedCopyExtent.width, copyExtent.height - blockInfo.height, 1}));
 
         // Update offset to copy to the last row.
         currentOffset += (copyBlockRowCount - 1) * bytesPerRow;
@@ -279,14 +286,11 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
         blockInfo.height + clampedCopyExtent.height - copyExtent.height;
     ASSERT(lastRowCopyExtentHeight <= blockInfo.height);
 
-    copy.copies[copy.count].bufferOffset = currentOffset;
-    copy.copies[copy.count].bytesPerRow = lastRowDataSize;
-    copy.copies[copy.count].bytesPerImage = lastRowDataSize;
-    copy.copies[copy.count].textureOrigin = {origin.x,
-                                             origin.y + copyExtent.height - blockInfo.height,
-                                             origin.z + copyExtent.depthOrArrayLayers - 1};
-    copy.copies[copy.count].copyExtent = {clampedCopyExtent.width, lastRowCopyExtentHeight, 1};
-    ++copy.count;
+    copy.copies.push_back(
+        TextureBufferCopySplit::CopyInfo(currentOffset, lastRowDataSize, lastRowDataSize,
+                                         {origin.x, origin.y + copyExtent.height - blockInfo.height,
+                                          origin.z + copyExtent.depthOrArrayLayers - 1},
+                                         {clampedCopyExtent.width, lastRowCopyExtentHeight, 1}));
 
     return copy;
 }
