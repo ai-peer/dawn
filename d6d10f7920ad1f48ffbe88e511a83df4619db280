@@ -103,6 +103,24 @@
       "message": "Kokoro failure is unrelated.",
       "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5befb6ba_aaa414d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-08T04:46:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e05acf49_bbae5f06",
+      "revId": "d6d10f7920ad1f48ffbe88e511a83df4619db280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
