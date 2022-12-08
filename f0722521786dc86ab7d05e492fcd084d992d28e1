@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f708da13_d462897b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-08T18:22:42Z",
+      "side": 1,
+      "message": "probably in:\nthird_party/dawn/src/dawn/tests/unittests/validation/BufferValidationTests.cpp\nthird_party/dawn/src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp\n\nMost could be in BufferValidationTests which run both with and without the wire (argument --use-wire)\n\nWireBufferMappingTests would be for when you want to control exactly when the mapping callbacks get called with mocks. That way you could for example map, call the map callback immediately, and then check inside the callback that the state is as you expect",
+      "parentUuid": "81d18f60_8a41505a",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1b3fd5b_f5a4cc81",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 2
