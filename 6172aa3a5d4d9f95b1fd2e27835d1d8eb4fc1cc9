@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b317c1c1_b8905ea7",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-08T17:40:29Z",
+      "side": 1,
+      "message": "All of this can be condensed down to a `mat2x3\u003cf32\u003e`, which can combine the offset, scaling and rotation into a single affine transform.",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 59
+      },
+      "revId": "6172aa3a5d4d9f95b1fd2e27835d1d8eb4fc1cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
