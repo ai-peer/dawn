@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81d18f60_8a41505a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-08T06:34:31Z",
+      "side": 1,
+      "message": "Any advices for getter test?",
+      "parentUuid": "a388894b_da7ee29b",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1b3fd5b_f5a4cc81",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 2
@@ -66,6 +84,24 @@
       "writtenOn": "2022-11-28T10:20:57Z",
       "side": 1,
       "message": "nit: We could use a switch to make sure all cases are handled.",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0873fc_de48bf85",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-08T06:34:31Z",
+      "side": 1,
+      "message": "Sounds good to me. Updated, thanks.",
+      "parentUuid": "b1b3fd5b_f5a4cc81",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "That could work though TBH we might as well wait for the wire part to be implemented first. Also we would use UNIMPLEMENTED here instead of a log.",
       "parentUuid": "49d0ad26_30470207",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "122dd539_74f6c2df",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-08T06:34:31Z",
+      "side": 1,
+      "message": "\u003e Also we would use UNIMPLEMENTED here instead of a log.\n\nI wanted to use UNIMPLEMENTED but I couldn\u0027t find it under src/dawn/wire although I found UNIMPLEMENTED unser src/dawn/node and DAWN_UNIMPLEMENTED_ERROR under src/dawn/native.\n\nI thought of newly defining UNIMPLEMENTED under src/dawn/wire but it may not be needed because probably the implementation for wire will be coming sooner or later.\n\nWhat do you think?",
+      "parentUuid": "3c81c3d8_bfc15a12",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
