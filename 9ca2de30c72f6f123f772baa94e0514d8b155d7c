@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d242aa69_d627b658",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-08T20:44:58Z",
+      "side": 1,
+      "message": "Hey Austin, I don\u0027t know if you think this is an acceptable solution or not\n\nhttps://dawn-review.googlesource.com/c/dawn/+/113426\n\nI get it\u0027s now doing allocations it wasn\u0027t before so if you\u0027d prefer I take some different path in CommandBufferMTL.mm that avoids the allocations rather than putting the solution in here I can do that.\n\nAlso I\u0027m not 100% yet this is the correct limit. I asked some people at apple. If I don\u0027t hear back I can only guess I should write a metal example that tests say every texture format, 1D, 2D, 3D at every power of 2 and see when metal complains.",
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
