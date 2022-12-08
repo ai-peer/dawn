@@ -408,8 +408,6 @@ libtint_source_set("libtint_core_all_src") {
     "resolver/resolver.h",
     "resolver/sem_helper.cc",
     "resolver/sem_helper.h",
-    "resolver/type_alias.cc",
-    "resolver/type_alias.h",
     "resolver/uniformity.cc",
     "resolver/uniformity.h",
     "resolver/validator.cc",
@@ -578,6 +576,7 @@ libtint_source_set("libtint_core_all_src") {
     "transform/zero_init_workgroup_memory.h",
     "type/array_count.h",
     "type/node.h",
+    "type/short_name.h",
     "type/type.h",
     "utils/bitcast.h",
     "utils/bitset.h",
@@ -745,6 +744,8 @@ libtint_source_set("libtint_type_src") {
     "type/array_count.h",
     "type/node.cc",
     "type/node.h",
+    "type/short_name.cc",
+    "type/short_name.h",
     "type/type.cc",
     "type/type.h",
   ]
@@ -1229,7 +1230,10 @@ if (tint_build_unittests) {
   }
 
   tint_unittests_source_set("tint_unittests_type_src") {
-    sources = [ "type/type_test.cc" ]
+    sources = [
+      "type/short_name_test.cc",
+      "type/type_test.cc",
+    ]
   }
 
   tint_unittests_source_set("tint_unittests_text_src") {

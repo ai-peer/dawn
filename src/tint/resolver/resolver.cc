@@ -51,7 +51,6 @@
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
-#include "src/tint/resolver/type_alias.h"
 #include "src/tint/resolver/uniformity.h"
 #include "src/tint/sem/abstract_float.h"
 #include "src/tint/sem/abstract_int.h"
@@ -82,6 +81,7 @@
 #include "src/tint/sem/type_initializer.h"
 #include "src/tint/sem/variable.h"
 #include "src/tint/sem/while_statement.h"
+#include "src/tint/type/short_name.h"
 #include "src/tint/utils/defer.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/reverse.h"
@@ -2349,32 +2349,32 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
 type::Type* Resolver::BuiltinTypeAlias(Symbol sym) const {
     auto name = builder_->Symbols().NameFor(sym);
     auto& b = *builder_;
-    switch (ParseTypeAlias(name)) {
-        case TypeAlias::kVec2F:
+    switch (type::ParseShortName(name)) {
+        case type::ShortName::kVec2F:
             return b.create<sem::Vector>(b.create<sem::F32>(), 2u);
-        case TypeAlias::kVec3F:
+        case type::ShortName::kVec3F:
             return b.create<sem::Vector>(b.create<sem::F32>(), 3u);
-        case TypeAlias::kVec4F:
+        case type::ShortName::kVec4F:
             return b.create<sem::Vector>(b.create<sem::F32>(), 4u);
-        case TypeAlias::kVec2H:
+        case type::ShortName::kVec2H:
             return b.create<sem::Vector>(b.create<sem::F16>(), 2u);
-        case TypeAlias::kVec3H:
+        case type::ShortName::kVec3H:
             return b.create<sem::Vector>(b.create<sem::F16>(), 3u);
-        case TypeAlias::kVec4H:
+        case type::ShortName::kVec4H:
             return b.create<sem::Vector>(b.create<sem::F16>(), 4u);
-        case TypeAlias::kVec2I:
+        case type::ShortName::kVec2I:
             return b.create<sem::Vector>(b.create<sem::I32>(), 2u);
-        case TypeAlias::kVec3I:
+        case type::ShortName::kVec3I:
             return b.create<sem::Vector>(b.create<sem::I32>(), 3u);
-        case TypeAlias::kVec4I:
+        case type::ShortName::kVec4I:
             return b.create<sem::Vector>(b.create<sem::I32>(), 4u);
-        case TypeAlias::kVec2U:
+        case type::ShortName::kVec2U:
             return b.create<sem::Vector>(b.create<sem::U32>(), 2u);
-        case TypeAlias::kVec3U:
+        case type::ShortName::kVec3U:
             return b.create<sem::Vector>(b.create<sem::U32>(), 3u);
-        case TypeAlias::kVec4U:
+        case type::ShortName::kVec4U:
             return b.create<sem::Vector>(b.create<sem::U32>(), 4u);
-        case TypeAlias::kUndefined:
+        case type::ShortName::kUndefined:
             break;
     }
     return nullptr;
