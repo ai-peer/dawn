@@ -658,3 +658,7 @@ endif()
 if (TINT_BUILD_REMOTE_COMPILE)
   add_subdirectory(tools/src/cmd/remote-compile)
 endif()
+
+if (DAWN_EMIT_COVERAGE)
+  add_subdirectory(tools/src/cmd/turbo-cov)
+endif()
