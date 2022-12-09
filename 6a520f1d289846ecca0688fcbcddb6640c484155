@@ -33,6 +33,24 @@
       "message": "please can we have some tests for passing texture and samplers as function and builtin arguments?\nI presumed we were not going to emit a load for passing these as a function argument, but I don\u0027t see any carve-outs.",
       "revId": "6a520f1d289846ecca0688fcbcddb6640c484155",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce7494d_6e769cfa",
+        "filename": "src/tint/resolver/load_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-09T19:28:31Z",
+      "side": 1,
+      "message": "As discussed earlier, for now we\u0027ll carry on emitting the loads for textures and samplers as that is what the backends currently do (inc. SPIR-V). I\u0027ve added a Dawn E2E test for this so we can see if/when it becomes an issue.\n\nIf we do need to pass by pointer for SPIR-V, I think we should do it with a transform, so that the workaround needed for both the caller and the callsite are in the same place.\n\nLMK if that\u0027s all OK.",
+      "parentUuid": "808e9775_dd53ee1d",
+      "revId": "6a520f1d289846ecca0688fcbcddb6640c484155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
