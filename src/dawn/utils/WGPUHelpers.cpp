@@ -129,6 +129,40 @@ ComboRenderPassDescriptor::ComboRenderPassDescriptor(
     }
 }
 
+ComboRenderPassDescriptor::ComboRenderPassDescriptor(
+    const std::vector<wgpu::TextureView>& colorAttachmentInfo,
+    wgpu::TextureView depthStencil) {
+    for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+        cColorAttachments[i].loadOp = wgpu::LoadOp::Clear;
+        cColorAttachments[i].storeOp = wgpu::StoreOp::Store;
+        cColorAttachments[i].clearValue = {0.0f, 0.0f, 0.0f, 0.0f};
+    }
+
+    cDepthStencilAttachmentInfo.depthClearValue = 1.0f;
+    cDepthStencilAttachmentInfo.stencilClearValue = 0;
+    cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Clear;
+    cDepthStencilAttachmentInfo.depthStoreOp = wgpu::StoreOp::Store;
+    cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Clear;
+    cDepthStencilAttachmentInfo.stencilStoreOp = wgpu::StoreOp::Store;
+
+    colorAttachmentCount = static_cast<uint32_t>(colorAttachmentInfo.size());
+    uint32_t colorAttachmentIndex = 0;
+    for (const wgpu::TextureView& colorAttachment : colorAttachmentInfo) {
+        if (colorAttachment.Get() != nullptr) {
+            cColorAttachments[colorAttachmentIndex].view = colorAttachment;
+        }
+        ++colorAttachmentIndex;
+    }
+    colorAttachments = cColorAttachments.data();
+
+    if (depthStencil.Get() != nullptr) {
+        cDepthStencilAttachmentInfo.view = depthStencil;
+        depthStencilAttachment = &cDepthStencilAttachmentInfo;
+    } else {
+        depthStencilAttachment = nullptr;
+    }
+}
+
 ComboRenderPassDescriptor::~ComboRenderPassDescriptor() = default;
 
 ComboRenderPassDescriptor::ComboRenderPassDescriptor(const ComboRenderPassDescriptor& other) {

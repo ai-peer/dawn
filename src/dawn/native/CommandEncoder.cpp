@@ -458,6 +458,7 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
         descriptor->colorAttachmentCount, maxColorAttachments);
 
     bool isAllColorAttachmentNull = true;
+    std::vector<const Format*> colorAttachmentFormats;
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
         DAWN_TRY_CONTEXT(
             ValidateRenderPassColorAttachment(device, descriptor->colorAttachments[i], width,
@@ -465,8 +466,11 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
             "validating colorAttachments[%u].", i);
         if (descriptor->colorAttachments[i].view) {
             isAllColorAttachmentNull = false;
+            colorAttachmentFormats.push_back(&descriptor->colorAttachments[i].view->GetFormat());
         }
     }
+    DAWN_TRY_CONTEXT(ValidateColorAttachmentBytesPerSample(device, colorAttachmentFormats),
+                     "validating render pass descriptor.");
 
     if (descriptor->depthStencilAttachment != nullptr) {
         DAWN_TRY_CONTEXT(ValidateRenderPassDepthStencilAttachment(
