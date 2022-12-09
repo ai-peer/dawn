@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <cmath>
 #include <sstream>
+#include <string>
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/native/ChainUtils_autogen.h"
@@ -351,6 +352,7 @@ MaybeError ValidateFragmentState(DeviceBase* device,
 
     const EntryPointMetadata& fragmentMetadata =
         descriptor->module->GetEntryPoint(descriptor->entryPoint);
+    ColorAttachmentFormats colorAttachmentFormats;
     for (ColorAttachmentIndex i(uint8_t(0));
          i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->targetCount)); ++i) {
         const ColorTargetState* target = &descriptor->targets[static_cast<uint8_t>(i)];
@@ -359,12 +361,14 @@ MaybeError ValidateFragmentState(DeviceBase* device,
                 ValidateColorTargetState(device, target, fragmentMetadata.fragmentOutputsWritten[i],
                                          fragmentMetadata.fragmentOutputVariables[i]),
                 "validating targets[%u].", static_cast<uint8_t>(i));
+            colorAttachmentFormats->push_back(&device->GetValidInternalFormat(target->format));
         } else {
             DAWN_INVALID_IF(target->blend,
                             "Color target[%u] blend state is set when the format is undefined.",
                             static_cast<uint8_t>(i));
         }
     }
+    DAWN_TRY(ValidateColorAttachmentBytesPerSample(device, colorAttachmentFormats));
 
     DAWN_INVALID_IF(fragmentMetadata.usesSampleMaskOutput && alphaToCoverageEnabled,
                     "alphaToCoverageEnabled is true when the sample_mask builtin is a "
@@ -429,6 +433,16 @@ MaybeError ValidateInterStageMatching(DeviceBase* device,
 
     return {};
 }
+
+std::string TextureFormatsToString(const ColorAttachmentFormats& formats) {
+    std::ostringstream ss;
+    ss << "[ ";
+    for (const Format* format : formats) {
+        ss << absl::StrFormat("%s", format->format) << " ";
+    }
+    ss << "]";
+    return ss.str();
+}
 }  // anonymous namespace
 
 // Helper functions
@@ -447,6 +461,24 @@ size_t IndexFormatSize(wgpu::IndexFormat format) {
 bool IsStripPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology) {
     return primitiveTopology == wgpu::PrimitiveTopology::LineStrip ||
            primitiveTopology == wgpu::PrimitiveTopology::TriangleStrip;
+}
+
+MaybeError ValidateColorAttachmentBytesPerSample(DeviceBase* device,
+                                                 const ColorAttachmentFormats& formats) {
+    uint32_t totalByteSize = 0;
+    for (const Format* format : formats) {
+        totalByteSize = Align(totalByteSize, format->renderTargetComponentAlignment);
+        totalByteSize += format->renderTargetPixelByteCost;
+    }
+    uint32_t maxColorAttachmentBytesPerSample =
+        device->GetLimits().v1.maxColorAttachmentBytesPerSample;
+    // TODO(dawn:1522) Promote to DAWN_INVALID_IF after deprecation period.
+    DAWN_DEPRECATED_IF(
+        device, totalByteSize > maxColorAttachmentBytesPerSample,
+        "Total color attachment bytes per sample (%u) exceeds maximum (%u) with formats (%s).",
+        totalByteSize, maxColorAttachmentBytesPerSample, TextureFormatsToString(formats));
+
+    return {};
 }
 
 MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,

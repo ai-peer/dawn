@@ -19,6 +19,7 @@
 #include <bitset>
 #include <vector>
 
+#include "dawn/common/StackContainer.h"
 #include "dawn/common/TypedInteger.h"
 #include "dawn/native/AttachmentState.h"
 #include "dawn/native/Forward.h"
@@ -30,6 +31,10 @@
 namespace dawn::native {
 
 class DeviceBase;
+
+using ColorAttachmentFormats = StackVector<const Format*, kMaxColorAttachments>;
+MaybeError ValidateColorAttachmentBytesPerSample(DeviceBase* device,
+                                                 const ColorAttachmentFormats& formats);
 
 MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                             const RenderPipelineDescriptor* descriptor);
