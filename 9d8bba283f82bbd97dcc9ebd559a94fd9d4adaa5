@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582aee7a_3bcf36d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-09T06:00:06Z",
+      "side": 1,
+      "message": "Ah... the CTS failures are probably also caused by the validation. I will probably have to fix those separately and roll them before it works.",
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
