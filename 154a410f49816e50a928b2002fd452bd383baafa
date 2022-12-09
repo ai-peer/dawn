@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5950fb80_b00b8f82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-09T20:37:13Z",
+      "side": 1,
+      "message": "LGTM. I think presubmit error is because there are no more go tests in that subdirectory.\n\nCan delete third_party/dawn/src/dawn/node/PRESUBMIT.py then",
+      "revId": "154a410f49816e50a928b2002fd452bd383baafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
