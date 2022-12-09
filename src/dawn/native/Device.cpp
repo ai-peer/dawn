@@ -1334,8 +1334,8 @@ size_t DeviceBase::GetDeprecationWarningCountForTesting() {
 }
 
 void DeviceBase::EmitDeprecationWarning(const std::string& message) {
-    mDeprecationWarnings->count++;
     if (mDeprecationWarnings->emitted.insert(message).second) {
+        mDeprecationWarnings->count++;
         dawn::WarningLog() << message;
     }
 }
@@ -1585,7 +1585,8 @@ ResultOrError<Ref<RenderBundleEncoder>> DeviceBase::CreateRenderBundleEncoder(
     const RenderBundleEncoderDescriptor* descriptor) {
     DAWN_TRY(ValidateIsAlive());
     if (IsValidationEnabled()) {
-        DAWN_TRY(ValidateRenderBundleEncoderDescriptor(this, descriptor));
+        DAWN_TRY_CONTEXT(ValidateRenderBundleEncoderDescriptor(this, descriptor),
+                         "validating render bundle encoder descriptor.");
     }
     return RenderBundleEncoder::Create(this, descriptor);
 }

@@ -523,7 +523,8 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearWithBigInt32ValuesOnMultipleColorAttach
     wgpu::RenderPassDescriptor renderPassDescriptor = {};
     renderPassDescriptor.colorAttachmentCount = kMaxColorAttachments;
     renderPassDescriptor.colorAttachments = colorAttachmentsInfo.data();
-    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+    wgpu::RenderPassEncoder renderPass;
+    EXPECT_DEPRECATION_WARNING(renderPass = encoder.BeginRenderPass(&renderPassDescriptor));
     renderPass.End();
 
     std::array<wgpu::Buffer, kMaxColorAttachments> outputBuffers;
@@ -628,7 +629,8 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearWithBigUInt32ValuesOnMultipleColorAttac
     wgpu::RenderPassDescriptor renderPassDescriptor = {};
     renderPassDescriptor.colorAttachmentCount = kMaxColorAttachments;
     renderPassDescriptor.colorAttachments = colorAttachmentsInfo.data();
-    wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
+    wgpu::RenderPassEncoder renderPass;
+    EXPECT_DEPRECATION_WARNING(renderPass = encoder.BeginRenderPass(&renderPassDescriptor));
     renderPass.End();
 
     std::array<wgpu::Buffer, kMaxColorAttachments> outputBuffers;
