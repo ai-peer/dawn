@@ -15,6 +15,7 @@
 #include "dawn/native/RenderBundleEncoder.h"
 
 #include <utility>
+#include <vector>
 
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
@@ -68,14 +69,19 @@ MaybeError ValidateRenderBundleEncoderDescriptor(const DeviceBase* device,
                     descriptor->colorFormatsCount, maxColorAttachments);
 
     bool allColorFormatsUndefined = true;
+    std::vector<const Format*> colorAttachmentFormats;
     for (uint32_t i = 0; i < descriptor->colorFormatsCount; ++i) {
         wgpu::TextureFormat format = descriptor->colorFormats[i];
         if (format != wgpu::TextureFormat::Undefined) {
             DAWN_TRY_CONTEXT(ValidateColorAttachmentFormat(device, format),
                              "validating colorFormats[%u]", i);
+            DAWN_TRY_ASSIGN(colorAttachmentFormats.emplace_back(),
+                            device->GetInternalFormat(format));
             allColorFormatsUndefined = false;
         }
     }
+    DAWN_TRY_CONTEXT(ValidateColorAttachmentBytesPerSample(device, colorAttachmentFormats),
+                     "validating render bundle encoder descriptor.");
 
     if (descriptor->depthStencilFormat != wgpu::TextureFormat::Undefined) {
         DAWN_TRY_CONTEXT(ValidateDepthStencilAttachmentFormat(
