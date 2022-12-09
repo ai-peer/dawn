@@ -31,6 +31,9 @@ namespace dawn::native {
 
 class DeviceBase;
 
+MaybeError ValidateColorAttachmentBytesPerSample(const DeviceBase* device,
+                                                 const std::vector<const Format*>& formats);
+
 MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                             const RenderPipelineDescriptor* descriptor);
 

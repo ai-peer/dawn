@@ -1380,6 +1380,100 @@ TEST_F(RenderPipelineValidationTest, BindingsFromCorrectEntryPoint) {
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
+// Tests validation for per-pixel accounting for render targets. The tests currently assume that the
+// default maxColorAttachmentBytesPerSample limit of 32 is used.
+TEST_F(RenderPipelineValidationTest, ColorAttachmentBytesPerSample) {
+    // Creates a fragment shader with maximum number of color attachments to enable testing.
+    auto createShader = [&](const std::vector<wgpu::TextureFormat>& formats) -> wgpu::ShaderModule {
+        // Default type to use when formats.size() < kMaxColorAttachments.
+        static constexpr std::string_view kDefaultWgslType = "vec4<f32>";
+
+        std::ostringstream bindings;
+        std::ostringstream outputs;
+        for (size_t i = 0; i < kMaxColorAttachments; i++) {
+            if (i < formats.size()) {
+                std::ostringstream type;
+                type << "vec4<" << utils::GetWGSLColorTextureComponentType(formats.at(i)) << ">";
+                bindings << "@location(" << i << ") o" << i << " : " << type.str() << ", ";
+                outputs << type.str() << "(1), ";
+            } else {
+                bindings << "@location(" << i << ") o" << i << " : " << kDefaultWgslType << ", ";
+                outputs << kDefaultWgslType << "(1), ";
+            }
+        }
+
+        std::ostringstream fsShader;
+        fsShader << "struct Outputs { " << bindings.str() << "}\n";
+        fsShader << "@fragment fn main() -> Outputs {\n";
+        fsShader << "    return Outputs(" << outputs.str() << ");\n";
+        fsShader << "}";
+        return utils::CreateShaderModule(device, fsShader.str().c_str());
+    };
+
+    struct TestCase {
+        std::vector<wgpu::TextureFormat> formats;
+        bool success;
+    };
+    static std::vector<TestCase> kTestCases = {
+        // Simple 1 format cases.
+
+        // R8Unorm take 1 byte and are aligned to 1 byte so we can have 8 (max).
+        {{wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R8Unorm,
+          wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R8Unorm,
+          wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R8Unorm},
+         true},
+        // RGBA8Uint takes 4 bytes and are aligned to 1 byte so we can have 8 (max).
+        {{wgpu::TextureFormat::RGBA8Uint, wgpu::TextureFormat::RGBA8Uint,
+          wgpu::TextureFormat::RGBA8Uint, wgpu::TextureFormat::RGBA8Uint,
+          wgpu::TextureFormat::RGBA8Uint, wgpu::TextureFormat::RGBA8Uint,
+          wgpu::TextureFormat::RGBA8Uint, wgpu::TextureFormat::RGBA8Uint},
+         true},
+        // RGBA8Unorm takes 8 bytes (special case) and are aligned to 1 byte so only 4 allowed.
+        {{wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA8Unorm,
+          wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA8Unorm},
+         true},
+        {{wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA8Unorm,
+          wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA8Unorm,
+          wgpu::TextureFormat::RGBA8Unorm},
+         false},
+        // RGBA32Float takes 16 bytes and are aligned to 4 bytes so only 2 are allowed.
+        {{wgpu::TextureFormat::RGBA32Float, wgpu::TextureFormat::RGBA32Float}, true},
+        {{wgpu::TextureFormat::RGBA32Float, wgpu::TextureFormat::RGBA32Float,
+          wgpu::TextureFormat::RGBA32Float},
+         false},
+
+        // Different format alignment cases.
+
+        // Alignment causes the first 1 byte R8Unorm to become 4 bytes. So even though 1+4+8+16+1 <
+        // 32, the 4 byte alignment requirement of R32Float makes the first R8Unorm become 4 and
+        // 4+4+8+16+1 > 32. Re-ordering this so the R8Unorm's are at the end, however is allowed:
+        // 4+8+16+1+1 < 32.
+        {{wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::R32Float,
+          wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureFormat::RGBA32Float,
+          wgpu::TextureFormat::R8Unorm},
+         false},
+        {{wgpu::TextureFormat::R32Float, wgpu::TextureFormat::RGBA8Unorm,
+          wgpu::TextureFormat::RGBA32Float, wgpu::TextureFormat::R8Unorm,
+          wgpu::TextureFormat::R8Unorm},
+         true},
+    };
+
+    for (const TestCase& testCase : kTestCases) {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = createShader(testCase.formats);
+        descriptor.cFragment.targetCount = testCase.formats.size();
+        for (size_t i = 0; i < testCase.formats.size(); i++) {
+            descriptor.cTargets[i].format = testCase.formats.at(i);
+        }
+        if (testCase.success) {
+            device.CreateRenderPipeline(&descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        }
+    }
+}
+
 class DepthClipControlValidationTest : public RenderPipelineValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
