@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de4a1ce4_5c45cb5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-09T05:00:12Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "4fdbe0b58e0edc55fb6836a8a8dba4e7d0561883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8fbb92_1506b514",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-09T05:00:12Z",
+      "side": 1,
+      "message": "nit: as a",
+      "range": {
+        "startLine": 172,
+        "startChar": 19,
+        "endLine": 172,
+        "endChar": 26
+      },
+      "revId": "4fdbe0b58e0edc55fb6836a8a8dba4e7d0561883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
