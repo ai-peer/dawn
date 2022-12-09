@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c0904ea_0167cd61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T13:18:05Z",
+      "side": 1,
+      "message": "Looks great! Thank you for taking this over. We\u0027ll have to find another reviewer, as we\u0027ve both touched this code.",
+      "revId": "6a520f1d289846ecca0688fcbcddb6640c484155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "808e9775_dd53ee1d",
+        "filename": "src/tint/resolver/load_test.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T13:18:05Z",
+      "side": 1,
+      "message": "please can we have some tests for passing texture and samplers as function and builtin arguments?\nI presumed we were not going to emit a load for passing these as a function argument, but I don\u0027t see any carve-outs.",
+      "revId": "6a520f1d289846ecca0688fcbcddb6640c484155",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
