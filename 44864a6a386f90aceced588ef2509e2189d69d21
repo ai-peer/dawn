@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "979f031c_e582947d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T13:06:23Z",
+      "side": 1,
+      "message": "LGTM, but you\u0027ll have to find another reviewer as we\u0027ve both touched this",
+      "revId": "44864a6a386f90aceced588ef2509e2189d69d21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
