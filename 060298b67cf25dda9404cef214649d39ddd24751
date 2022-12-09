@@ -16,6 +16,24 @@
       "message": "Thank you for trying to fix our BUILD.gn\n\n```\nERROR at //third_party/dawn/src/tint/ast/enable.cc:18:11: Include not allowed.\n#include \"src/tint/sem/variable.h\"\n          ^----------------------\nIt is not in any dependency of\n  //third_party/dawn/src/tint:libtint_core_all_src\nThe include file is in the target(s):\n  //third_party/dawn/src/tint:libtint_sem_src\nwhich should somehow be reachable.\n___________________\nERROR at //third_party/dawn/src/tint/inspector/inspector.cc:32:11: Include not allowed.\n#include \"src/tint/sem/function.h\"\n          ^----------------------\nIt is not in any dependency of\n  //third_party/dawn/src/tint:libtint_core_all_src\nThe include file is in the target(s):\n  //third_party/dawn/src/tint:libtint_sem_src\n```\n\n`ast/enable.cc` should not be `#include`ing `sem`. This include looks unnecessary.\n`inspector` can have a dependency on `sem`, so it looks like we just need to add a dependency in `BUILD.gn` for this.\n\nI don\u0027t expect you to have to fix our build rules, so if you\u0027d like me to take over, I\u0027d be happy to.",
       "revId": "060298b67cf25dda9404cef214649d39ddd24751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cb526e_adff07ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2022-12-09T14:15:32Z",
+      "side": 1,
+      "message": "Take it away - I noticed these missing files when updating Skia\u0027s BUILD.bazel rules for Dawn.",
+      "parentUuid": "9d6f5189_0a1b9f04",
+      "revId": "060298b67cf25dda9404cef214649d39ddd24751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
