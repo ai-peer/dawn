@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2e623a_653691c2",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2872,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T23:43:49Z",
+      "side": 1,
+      "message": "unused variable?",
+      "range": {
+        "startLine": 2872,
+        "startChar": 16,
+        "endLine": 2872,
+        "endChar": 27
+      },
+      "revId": "8d9d2278d4a573486e15d9550679ff4a7ff890d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f291fabf_cd56fb9a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T23:43:49Z",
+      "side": 1,
+      "message": "need to check this result? Can probably trigger overflow with `mix(-large, large, 2)`",
+      "range": {
+        "startLine": 2891,
+        "startChar": 12,
+        "endLine": 2891,
+        "endChar": 21
+      },
+      "revId": "8d9d2278d4a573486e15d9550679ff4a7ff890d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
