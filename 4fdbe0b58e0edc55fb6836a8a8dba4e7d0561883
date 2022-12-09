@@ -39,6 +39,30 @@
       },
       "revId": "4fdbe0b58e0edc55fb6836a8a8dba4e7d0561883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fee2455_c1c50851",
+        "filename": "docs/tint/spirv-reader-overview.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-09T15:40:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f8fbb92_1506b514",
+      "range": {
+        "startLine": 172,
+        "startChar": 19,
+        "endLine": 172,
+        "endChar": 26
+      },
+      "revId": "4fdbe0b58e0edc55fb6836a8a8dba4e7d0561883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
