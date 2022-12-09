@@ -39,6 +39,23 @@
       },
       "revId": "882957d7665cb2fec8191f7208351b42808672cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac88f24_f6a36122",
+        "filename": "tools/src/cmd/turbo-cov/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-09T19:53:26Z",
+      "side": 1,
+      "message": "uu-nit: throughout this function, generally I prefer not using `auto` for simple types when possible",
+      "revId": "882957d7665cb2fec8191f7208351b42808672cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
