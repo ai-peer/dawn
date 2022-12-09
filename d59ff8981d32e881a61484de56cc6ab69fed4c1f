@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b07eea_020cbd42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "Really nicely done. Fantastic job!",
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdae6bcf_2719512a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1818,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "Seems like a good idea! Follow up change?",
+      "range": {
+        "startLine": 1817,
+        "startChar": 0,
+        "endLine": 1818,
+        "endChar": 52
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54ab8536_ac6dc180",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "Comment would be nice.",
+      "range": {
+        "startLine": 1372,
+        "startChar": 5,
+        "endLine": 1372,
+        "endChar": 16
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c868abf_40d9f371",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1391,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "And here.",
+      "range": {
+        "startLine": 1391,
+        "startChar": 5,
+        "endLine": 1391,
+        "endChar": 15
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdd498c8_353e448f",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1594,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "übernit: `Expr` not needed here",
+      "range": {
+        "startLine": 1594,
+        "startChar": 40,
+        "endLine": 1594,
+        "endChar": 44
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea67daf2_cb2df212",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "this is a bit of a head-scratcher. double negative?",
+      "range": {
+        "startLine": 1877,
+        "startChar": 3,
+        "endLine": 1877,
+        "endChar": 16
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a72477_977b37ea",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1819,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "nit: `failed and`",
+      "range": {
+        "startLine": 1819,
+        "startChar": 37,
+        "endLine": 1819,
+        "endChar": 46
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c94a40a0_e215e886",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2023,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "You can avoid the set lookup if the stage isn\u0027t `kConstant`. You do this below.\n\nI find linear control flow slightly easier to understand, so I\u0027d recommend:\n\n```\nif (stage \u003d\u003d sem::EvaluationStage::kConstant \u0026\u0026 skip_const_eval_.Contains(expr)) {\n    stage \u003d sem::EvaluationStage::kNotEvaluated;\n}\n\nif (stage \u003d\u003d sem::EvaluationStage::kConstant) {\n   ...  \n```",
+      "range": {
+        "startLine": 2023,
+        "startChar": 10,
+        "endLine": 2023,
+        "endChar": 14
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "029a8e1c_dc2a9e35",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2347,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-09T15:29:20Z",
+      "side": 1,
+      "message": "Nice. Recommend restructuring as above to avoid the nesting.",
+      "range": {
+        "startLine": 2345,
+        "startChar": 8,
+        "endLine": 2347,
+        "endChar": 10
+      },
+      "revId": "d59ff8981d32e881a61484de56cc6ab69fed4c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
