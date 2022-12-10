@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c126846_1e6077cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-10T02:32:08Z",
+      "side": 1,
+      "message": "Okay, so the limit is that `destinationBytesPerRow` needs to \u003c\u003d the maximum texture size bytes per row. On all metal the max texture dimensions are 2048 for 3D textures and 16834 for non-3D textures execpt Apple2 (iPhone6) where the non-3D limit is 8192. I\u0027m assuming we\u0027re not supporting Apple2 GPUs.",
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

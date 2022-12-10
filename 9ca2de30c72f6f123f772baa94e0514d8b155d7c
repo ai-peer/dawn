@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3b3770c_a61fb027",
+        "filename": "src/dawn/native/metal/UtilsMetal.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-10T02:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a46fd26_5df0db16",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 15
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355f798e_90f118cd",
@@ -82,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e85e81_a45108b8",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-10T02:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "355f798e_90f118cd",
+      "range": {
+        "startLine": 231,
+        "startChar": 9,
+        "endLine": 231,
+        "endChar": 24
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "444a4db8_894e543a",
@@ -95,6 +143,30 @@
       "writtenOn": "2022-12-08T21:18:09Z",
       "side": 1,
       "message": "hmm - does it work if we pass the values instead?\nright now it seems fine, but worried that future code might inspect the CopyInfo and be surprised to find zeros.",
+      "range": {
+        "startLine": 238,
+        "startChar": 20,
+        "endLine": 239,
+        "endChar": 41
+      },
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed31ea61_a3bfaf63",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-10T02:32:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "444a4db8_894e543a",
       "range": {
         "startLine": 238,
         "startChar": 20,
