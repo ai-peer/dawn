@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edb53388_69764e9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-11T04:24:20Z",
+      "side": 1,
+      "message": "`BufferValidationTest.MapAsync_PendingMap` fails with wire.\n\n\n```\n$ out\\Default\\dawn_unittests.exe --use-wire --gtest_filter\u003d\"BufferValidationTest.MapAsync_PendingMap\"\nNote: Google Test filter \u003d BufferValidationTest.MapAsync_PendingMap\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] Running 1 test from 1 test suite.\n[----------] Global test environment set-up.\n[----------] 1 test from BufferValidationTest\n[ RUN      ] BufferValidationTest.MapAsync_PendingMap\nWarning: windows_read_data_files_in_registry: Registry lookup failed to get layer manifest files.\nWarning: Layer VK_LAYER_bandicam_helper uses API version 1.2 which is older than the application specified API version of 1.3. May cause issues.\nINFO: EGL ERROR: eglMakeCurrent: \u0027dpy\u0027 not a valid EGLDisplay handle\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(66): error: Failed\nExpected device error in:\n buffer.MapAsync(mode, offset, size, ToMockBufferMapAsyncCallback, nullptr)\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(66): error: Failed\nExpected device error in:\n buffer.MapAsync(mode, offset, size, ToMockBufferMapAsyncCallback, nullptr)\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(66): error: Failed\nExpected device error in:\n buffer.MapAsync(mode, offset, size, ToMockBufferMapAsyncCallback, nullptr)\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(66): error: Failed\nExpected device error in:\n buffer.MapAsync(mode, offset, size, ToMockBufferMapAsyncCallback, nullptr)\n[  FAILED  ] BufferValidationTest.MapAsync_PendingMap (185 ms)\n[----------] 1 test from BufferValidationTest (187 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 1 test from 1 test suite ran. (191 ms total)\n[  PASSED  ] 0 tests.\n[  FAILED  ] 1 test, listed below:\n[  FAILED  ] BufferValidationTest.MapAsync_PendingMap\n\n 1 FAILED TEST\n ```\n \n `AssertMapAsyncError` doesn\u0027t recognize an error immediately caused in Wire client?\n https://source.chromium.org/chromium/_/dawn/dawn.git/+/24c8440eb65ba88abd17a63dd55895f0a60fbfb8:src/dawn/tests/unittests/validation/BufferValidationTests.cpp;l\u003d65-66;drc\u003de536775b409a322230e22c67c536e46243f6c40c;bpv\u003d1;bpt\u003d0",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
