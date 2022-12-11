@@ -265,6 +265,24 @@
       "parentUuid": "8a793e76_d0921773",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f0fee5_57790bd1",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-11T04:25:57Z",
+      "side": 1,
+      "message": "Made a CL for early mapAsync rejection in wire.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/113607\n\nI hope we can first merge it and then update this CL to properly implement GetMapState() in wire.",
+      "parentUuid": "4ca51df5_d8ec235e",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
