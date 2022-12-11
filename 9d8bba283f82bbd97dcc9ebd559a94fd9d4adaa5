@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f64c6e9c_b8cfb05d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7a3de2e_d029db03",
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68a3cd6d_3e9b9dac",
@@ -48,6 +66,30 @@
       "writtenOn": "2022-12-09T19:46:48Z",
       "side": 1,
       "message": "unit:\n\n\"validating render pass descriptor\" context should probably be on the ConsumedError at the callsite of `ValidateRenderPassDescriptor`\n\nThis one could be \"validating color attachment bytes per sample\" to match the spec section \"Validating GPUFragmentState’s color attachment bytes per sample\"",
+      "range": {
+        "startLine": 473,
+        "startChar": 21,
+        "endLine": 473,
+        "endChar": 57
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "642d0095_223683a6",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68a3cd6d_3e9b9dac",
       "range": {
         "startLine": 473,
         "startChar": 21,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32739c70_9c1a9901",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0862b5ab_a31fd5e4",
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1b7ac35_dabea306",
@@ -88,6 +148,30 @@
       "writtenOn": "2022-12-09T19:46:48Z",
       "side": 1,
       "message": "nit: can be StackVector with static size kMaxColorAttachments since it\u0027s relatively small",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 31
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed2f6a22_2e0ab170",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1b7ac35_dabea306",
       "range": {
         "startLine": 72,
         "startChar": 0,
@@ -121,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9572582e_a1358e3b",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fb14067_e69073cb",
+      "range": {
+        "startLine": 78,
+        "startChar": 12,
+        "endLine": 79,
+        "endChar": 63
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1edb117_2fb06a8f",
@@ -134,6 +242,30 @@
       "writtenOn": "2022-12-09T19:46:48Z",
       "side": 1,
       "message": "ditto on context messages",
+      "range": {
+        "startLine": 84,
+        "startChar": 21,
+        "endLine": 84,
+        "endChar": 67
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90963247_b69ef1b4",
+        "filename": "src/dawn/native/RenderBundleEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1edb117_2fb06a8f",
       "range": {
         "startLine": 84,
         "startChar": 21,
@@ -167,6 +299,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63ba1a65_b054b19e",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "922b8838_a54b943e",
+      "range": {
+        "startLine": 355,
+        "startChar": 4,
+        "endLine": 355,
+        "endChar": 15
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "598526dc_d5946281",
@@ -180,6 +336,30 @@
       "writtenOn": "2022-12-09T19:46:48Z",
       "side": 1,
       "message": "Already covered by `ValidateColorTargetState` and `ValidateColorAttachmentFormat` ?",
+      "range": {
+        "startLine": 472,
+        "startChar": 24,
+        "endLine": 472,
+        "endChar": 68
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "783b73cd_08d69dc3",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Yea, removed since it does seem to be covered in all three cases. (Initially wasn\u0027t sure and thought it would be fine to double check?)",
+      "parentUuid": "598526dc_d5946281",
       "range": {
         "startLine": 472,
         "startChar": 24,
@@ -259,6 +439,78 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f13897a_a8c58e76",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d6e2163_3b19766f",
+      "range": {
+        "startLine": 479,
+        "startChar": 21,
+        "endLine": 479,
+        "endChar": 26
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1178a5_2b6461bb",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92f898ba_80af7113",
+      "range": {
+        "startLine": 479,
+        "startChar": 81,
+        "endLine": 479,
+        "endChar": 84
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f353998_7255de4d",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0ba6394_a69ab5c8",
+      "range": {
+        "startLine": 479,
+        "startChar": 92,
+        "endLine": 479,
+        "endChar": 93
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "999cb617_8aa02419",
@@ -282,6 +534,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a172211_7a33ceff",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1387,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "999cb617_8aa02419",
+      "range": {
+        "startLine": 1387,
+        "startChar": 9,
+        "endLine": 1387,
+        "endChar": 21
+      },
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "415e9166_46ce1bfe",
@@ -295,6 +571,24 @@
       "writtenOn": "2022-12-09T19:46:48Z",
       "side": 1,
       "message": "big duplication with initializer_list version. Just delete the initializer_list one? or, rewrite to use begin/end iterators and share the implementation",
+      "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04a36381_1f97f2cb",
+        "filename": "src/dawn/utils/WGPUHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-11T22:03:46Z",
+      "side": 1,
+      "message": "Ah... I actually initially tried to deduplicate I but didn\u0027t think of just deleting the initializer list version! Thanks!\n\n(I tried to template it and the iterator approach, but ran into a bunch of ambiguous ctor issues because of the move/copy ctor initially lol... And gave up after a bit.)",
+      "parentUuid": "415e9166_46ce1bfe",
       "revId": "9d8bba283f82bbd97dcc9ebd559a94fd9d4adaa5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
