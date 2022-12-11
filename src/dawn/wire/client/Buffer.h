@@ -98,6 +98,7 @@ class Buffer final : public ObjectBase {
     std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
     std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
     MapState mMapState = MapState::Unmapped;
+    bool mPendingMap = false;
     bool mDestructWriteHandleOnUnmap = false;
 
     void* mMappedData = nullptr;
