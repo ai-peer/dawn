@@ -185,6 +185,12 @@ void Buffer::MapAsync(WGPUMapModeFlags mode,
         return callback(WGPUBufferMapAsyncStatus_DeviceLost, userdata);
     }
 
+    if (mPendingMap) {
+        return callback(WGPUBufferMapAsyncStatus_Error, userdata);
+    }
+
+    mPendingMap = true;
+
     // Handle the defaulting of size required by WebGPU.
     if ((size == WGPU_WHOLE_MAP_SIZE) && (offset <= mSize)) {
         size = mSize - offset;
@@ -231,6 +237,13 @@ bool Buffer::OnMapAsyncCallback(uint64_t requestSerial,
         }
         return false;
     };
+
+    // This if statement checks whether the request is already unmapped or destroyed.
+    // request.clientStatus is set to error in Unmap or Destroy.
+    if (request.clientStatus == WGPUBufferMapAsyncStatus_Success) {
+        ASSERT(mPendingMap == true);
+        mPendingMap = false;
+    }
 
     // Take into account the client-side status of the request if the server says it is a
     // success.
@@ -353,6 +366,7 @@ void Buffer::Unmap() {
     mMapState = MapState::Unmapped;
     mMapOffset = 0;
     mMapSize = 0;
+    mPendingMap = false;
 
     // Tag all mapping requests still in flight as unmapped before callback.
     mRequests.ForAll([](MapRequestData* request) {
@@ -430,6 +444,7 @@ void Buffer::FreeMappedData() {
     mReadHandle = nullptr;
     mWriteHandle = nullptr;
     mMappedData = nullptr;
+    mPendingMap = false;
 }
 
 }  // namespace dawn::wire::client

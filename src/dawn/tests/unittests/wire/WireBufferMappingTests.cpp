@@ -748,6 +748,16 @@ TEST_F(WireBufferMappingTests, MapAfterDisconnect) {
     wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, ToMockBufferMapCallback, this);
 }
 
+// Test that mappinga again while pending map immediately cause an error
+TEST_F(WireBufferMappingTests, PendingMapImmediateError) {
+    SetupBuffer(WGPUMapMode_Read);
+
+    wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, nullptr, this);
+
+    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_Error, this)).Times(1);
+    wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, ToMockBufferMapCallback, this);
+}
+
 // Hack to pass in test context into user callback
 struct TestData {
     WireBufferMappingTests* pTest;
@@ -806,9 +816,11 @@ TEST_F(WireBufferMappingWriteTests, MapInsideCallbackBeforeDestruction) {
 
     FlushClient();
 
+    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_Error, this))
+        .Times(testData.numRequests);
     EXPECT_CALL(*mockBufferMapCallback,
                 Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, this))
-        .Times(1 + testData.numRequests);
+        .Times(1);
     wgpuBufferRelease(buffer);
 }
 
