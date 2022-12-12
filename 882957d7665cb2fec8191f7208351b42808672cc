@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a30f700_03b2fede",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-12T21:01:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1585dce8_8821962e",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 129
+      },
+      "revId": "882957d7665cb2fec8191f7208351b42808672cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fac88f24_f6a36122",
@@ -96,6 +120,24 @@
       "side": 1,
       "message": "Ack, but this is a bit of a mismatch between Dawn and Tint style. Tint makes exhaustive use of `auto`, even for simple types (although less so). I could change these, but there\u0027s a vast quantity of code in this repo that we might want to convert to a common style guide.",
       "parentUuid": "fac88f24_f6a36122",
+      "revId": "882957d7665cb2fec8191f7208351b42808672cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d68a60a_8da8073f",
+        "filename": "tools/src/cmd/turbo-cov/main.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-12T21:01:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0479c910_f9bcb824",
       "revId": "882957d7665cb2fec8191f7208351b42808672cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
