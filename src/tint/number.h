@@ -593,6 +593,21 @@ inline std::optional<AInt> CheckedMadd(AInt a, AInt b, AInt c) {
     TINT_END_DISABLE_WARNING(MAYBE_UNINITIALIZED);
 }
 
+/// @returns the value of `base` raised to the power `exp`
+/// float value
+template <typename FloatingPointT, typename = traits::EnableIf<IsFloatingPoint<FloatingPointT>>>
+inline std::optional<FloatingPointT> CheckedPow(FloatingPointT base, FloatingPointT exp) {
+    static_assert(IsNumber<FloatingPointT>);
+    if ((base < 0) || (base == 0 && exp <= 0)) {
+        return {};
+    }
+    auto result = FloatingPointT{std::pow(base.value, exp.value)};
+    if (!std::isfinite(result.value)) {
+        return {};
+    }
+    return result;
+}
+
 }  // namespace tint
 
 namespace tint::number_suffixes {
