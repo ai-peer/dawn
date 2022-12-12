@@ -357,12 +357,16 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::AllocateMemory(
         optimizedClearValue = &zero;
     }
 
-    // If we are allocating memory for a 2D array texture on D3D12 backend, we need to allocate
-    // extra layers on some Intel Gen12 devices, see crbug.com/dawn/949 for details.
+    // If we are allocating memory for a 2D array texture with a color format on D3D12 backend,
+    // we need to allocate extra layers on some Intel Gen12 devices, see crbug.com/dawn/949
+    // for details.
     D3D12_RESOURCE_DESC revisedDescriptor = resourceDescriptor;
     if (mDevice->IsToggleEnabled(Toggle::D3D12AllocateExtraMemoryFor2DArrayTexture) &&
         resourceDescriptor.Dimension == D3D12_RESOURCE_DIMENSION_TEXTURE2D &&
-        resourceDescriptor.DepthOrArraySize > 1) {
+        resourceDescriptor.DepthOrArraySize > 1 && formatBytesPerBlock > 0) {
+        // Multisample textures have one layer at most. Only non-multisample textures need the
+        // workaround.
+        ASSERT(revisedDescriptor.SampleDesc.Count <= 1);
         revisedDescriptor.DepthOrArraySize += ComputeExtraArraySizeForIntelGen12(
             resourceDescriptor.Width, resourceDescriptor.Height,
             resourceDescriptor.DepthOrArraySize, resourceDescriptor.MipLevels,
