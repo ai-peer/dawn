@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ca1fbc_a4aa1b66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T10:57:09Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "0908ed1266181ea62c12254d1895c3addcfca464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1789ea2_b807fbd3",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T10:57:09Z",
+      "side": 1,
+      "message": "Mmmh these tables start to be quite hard to read. Not for now, but maybe in the future we could have tables formatted a bit like the CTS or https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/formatutils.cpp;drc\u003dfc1c8cd1031571d637203e763f793d65ba28609e;l\u003d1087 for the base support in WebGPU.\n\nThen the info for the format is copied over, with optional features mutating the data afterwards.",
+      "revId": "0908ed1266181ea62c12254d1895c3addcfca464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "324ace5e_810492e1",
+        "filename": "src/dawn/native/RenderPipeline.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T10:57:09Z",
+      "side": 1,
+      "message": "u-nit: WDYT of having these helpers in CommandValidation.cpp/h? That\u0027s an existing place where we add validation that\u0027s shared between multiple things.",
+      "revId": "0908ed1266181ea62c12254d1895c3addcfca464",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
