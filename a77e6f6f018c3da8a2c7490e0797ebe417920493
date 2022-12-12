@@ -39,6 +39,30 @@
       },
       "revId": "a77e6f6f018c3da8a2c7490e0797ebe417920493",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43481443_689deb6d",
+        "filename": "src/tint/resolver/const_eval_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1800,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-12T14:34:33Z",
+      "side": 1,
+      "message": "It is, basically it\u0027s from: `e1 * (1 - e3) + e2 * e3)`\nSo this is the computation of both sides of the addition. If you want, I can put this equation as a comment above these error tests. The fact is, the way to trigger errors depends largely on the way this is implemented.",
+      "parentUuid": "5a498cbc_adf0defd",
+      "range": {
+        "startLine": 1800,
+        "startChar": 47,
+        "endLine": 1800,
+        "endChar": 52
+      },
+      "revId": "a77e6f6f018c3da8a2c7490e0797ebe417920493",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
