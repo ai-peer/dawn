@@ -34,6 +34,58 @@
       "parentUuid": "edb53388_69764e9e",
       "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b78eee2b_73542f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T12:40:33Z",
+      "side": 1,
+      "message": "Yeah I think your understanding is correct, and we should change dawn::native to reject the callback without a validation error consumed if we are already pending a map. Then adapt the tests etc. Nice find!\n\nBut still could you raise an issue about this in the group? In the steps about map pending, maybe we could also choose to reject the promise and generate a validation error. If the group decides to change the behavior, we can adapt it as a follow up CL.",
+      "parentUuid": "89803fe5_164d65b6",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824759ea_6cb16def",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T12:40:33Z",
+      "side": 1,
+      "message": "I think the spec also requires pendingMap to be false if the request was an error. Would it be possible to add a test that catches that?",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44ee0e3b_33f032b4",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-12T12:40:33Z",
+      "side": 1,
+      "message": "Mozilla asked for this change so that they wouldn\u0027t have to track multiple requests at the same time. So it should be possible to inline the single request in dawn::wire::client and remove mRequests.",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
