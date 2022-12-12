@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b557417_48e32d69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-12T21:05:09Z",
+      "side": 1,
+      "message": "I mostly skimmed this as I\u0027m assuming it was reviewed in swiftshader",
+      "revId": "8b90f085e30bc8e4160176fb68e163099eb595a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5208d2ab_84f7d44b",
+        "filename": "tools/src/cov/coverage_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-12T21:05:09Z",
+      "side": 1,
+      "message": "I\u0027m impressed by this ascii-art",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 10
+      },
+      "revId": "8b90f085e30bc8e4160176fb68e163099eb595a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
