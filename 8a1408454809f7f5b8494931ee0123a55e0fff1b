@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "943b2704_20a23f8a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-12T23:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc5e6200_44c0324f",
+      "range": {
+        "startLine": 34,
+        "startChar": 14,
+        "endLine": 34,
+        "endChar": 16
+      },
+      "revId": "8a1408454809f7f5b8494931ee0123a55e0fff1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "018661a2_3a6b0270",
@@ -71,6 +95,30 @@
       "writtenOn": "2022-12-12T21:00:38Z",
       "side": 1,
       "message": "nit: would prefer to return std::optional\u003cu32\u003e and name the function like `FindFirstBufferSizeTooSmall` or something to have more semantic meaning.\n\nWe could also return `unverifiedBufferSizes.end()` if all of them are valid - then, the callsite can check like you would an iterator. i.e. pattern like `auto it \u003d std::find(...); if (it \u003d\u003d container.end() { ... }`",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 7
+      },
+      "revId": "8a1408454809f7f5b8494931ee0123a55e0fff1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb76caf_b96e47f7",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-12T23:07:50Z",
+      "side": 1,
+      "message": "Went the std::optional route.",
+      "parentUuid": "018661a2_3a6b0270",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -118,6 +166,30 @@
       "side": 1,
       "message": "Only uniform buffers I believe",
       "parentUuid": "d072b3a7_539ff57e",
+      "range": {
+        "startLine": 367,
+        "startChar": 41,
+        "endLine": 367,
+        "endChar": 47
+      },
+      "revId": "8a1408454809f7f5b8494931ee0123a55e0fff1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9597f258_bcf22498",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-12T23:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "990edf36_b65efaf4",
       "range": {
         "startLine": 367,
         "startChar": 41,
