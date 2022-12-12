@@ -39,6 +39,30 @@
       },
       "revId": "8b90f085e30bc8e4160176fb68e163099eb595a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8202f773_3600bfb3",
+        "filename": "tools/src/cov/coverage_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-12T21:47:47Z",
+      "side": 1,
+      "message": "Thanks. 😊",
+      "parentUuid": "5208d2ab_84f7d44b",
+      "range": {
+        "startLine": 81,
+        "startChar": 1,
+        "endLine": 88,
+        "endChar": 10
+      },
+      "revId": "8b90f085e30bc8e4160176fb68e163099eb595a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
