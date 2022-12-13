@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "9a0d03183d61160c985fa5cdce03a6b27aa093a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7129279_e4c21fda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T21:08:14Z",
+      "side": 1,
+      "message": "Letting Antonio give the final call on this one. I have no strong opinions here.",
+      "revId": "9a0d03183d61160c985fa5cdce03a6b27aa093a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
