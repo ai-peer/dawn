@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31116137_9221c9b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-13T19:33:05Z",
+      "side": 1,
+      "message": "PTAL. Thanks.\n\nLooks like Windows bots are not stable...",
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a61a5ed_1f5ee490",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-13T19:33:05Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 261,
+        "startChar": 12,
+        "endLine": 261,
+        "endChar": 26
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b4a7f64_ba9f6d3c",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-13T19:33:05Z",
+      "side": 1,
+      "message": "The workaround below is not needed if the texture format is not color format. The new tests for depth/stencil formats verified this. I have more tests at my local side, which indicate the same result. \n\nSo `formatBytesPerBlock` here should be greater than 0 in order to run into te workaround. `formatBytesPerBlock` is 0 if the format is a non-color format (see https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/d3d12/TextureD3D12.cpp#610), and the workaround (which is not needed in this situation) go to UNREACHABLE() at [1] without the condition.",
+      "range": {
+        "startLine": 366,
+        "startChar": 51,
+        "endLine": 366,
+        "endChar": 74
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
