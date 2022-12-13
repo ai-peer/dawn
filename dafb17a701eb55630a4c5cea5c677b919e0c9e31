@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "dafb17a701eb55630a4c5cea5c677b919e0c9e31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4724715e_435b34f3",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T21:05:04Z",
+      "side": 1,
+      "message": "Remove, and just use `ConstEval::Result`",
+      "range": {
+        "startLine": 249,
+        "startChar": 0,
+        "endLine": 251,
+        "endChar": 60
+      },
+      "revId": "dafb17a701eb55630a4c5cea5c677b919e0c9e31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
