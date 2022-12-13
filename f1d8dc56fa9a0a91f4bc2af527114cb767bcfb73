@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb3da67e_170e16db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T21:03:36Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "f1d8dc56fa9a0a91f4bc2af527114cb767bcfb73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cc740e1_cf9837f9",
+        "filename": "src/dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T21:03:36Z",
+      "side": 1,
+      "message": "nit: expData.size()?",
+      "range": {
+        "startLine": 489,
+        "startChar": 44,
+        "endLine": 489,
+        "endChar": 45
+      },
+      "revId": "f1d8dc56fa9a0a91f4bc2af527114cb767bcfb73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad5c8fa2_a32f10b4",
+        "filename": "src/dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T21:03:36Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 500,
+        "startChar": 45,
+        "endLine": 500,
+        "endChar": 46
+      },
+      "revId": "f1d8dc56fa9a0a91f4bc2af527114cb767bcfb73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
