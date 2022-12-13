@@ -87,6 +87,30 @@
       },
       "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18608b0a_1e99310a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-13T21:25:37Z",
+      "side": 1,
+      "message": "ProgramBuilder has a `create` for sem::Node, a `create` for constant::Constant and a `create` for type::Type nodes already.",
+      "parentUuid": "21c5188f_9ddcdb88",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
