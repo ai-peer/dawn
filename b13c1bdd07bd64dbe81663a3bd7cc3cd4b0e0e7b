@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8e1082a_d96107fa",
+        "filename": "tools/src/cov/optimization.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T12:39:25Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e952d300_c8a4206c",
+        "filename": "tools/src/cov/view-coverage.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T12:39:25Z",
+      "side": 1,
+      "message": "nit:stray code?",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d08b6b9_3718cd4c",
+        "filename": "tools/src/cov/view-coverage.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T12:39:25Z",
+      "side": 1,
+      "message": "Why are line/cols and spans not counting from the same origin?",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198c8f70_c6a870f8",
+        "filename": "tools/src/cov/view-coverage.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T12:39:25Z",
+      "side": 1,
+      "message": "Instead of promising chaining I think it should be possible to use async/await here.",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a7d03cb_9f9949b0",
+        "filename": "tools/src/cov/view-coverage.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T12:39:25Z",
+      "side": 1,
+      "message": "TBH I stopped reading the file at this point. Do you need a detailed review of it?",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
