@@ -22,6 +22,30 @@
       },
       "revId": "3422ea14d09c82b187813d6b8764c8162f4e101d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8b30dcc_c6968022",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-13T20:43:06Z",
+      "side": 1,
+      "message": "Yes, absolutely right. Changed it to 1.25.",
+      "parentUuid": "4a6a44a6_2539b180",
+      "range": {
+        "startLine": 497,
+        "startChar": 43,
+        "endLine": 497,
+        "endChar": 47
+      },
+      "revId": "3422ea14d09c82b187813d6b8764c8162f4e101d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
