@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed28a04a_49f6627f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-13T19:25:03Z",
+      "side": 1,
+      "message": "Kokoro failure was a flake, manually adding +1.",
+      "revId": "069ab2cfc7517d1f2fa2a07b9913aeacaf9448a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
