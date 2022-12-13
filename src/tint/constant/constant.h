@@ -18,7 +18,16 @@
 #include <variant>
 
 #include "src/tint/number.h"
+#include "src/tint/type/array.h"
+#include "src/tint/type/matrix.h"
+#include "src/tint/type/struct.h"
 #include "src/tint/type/type.h"
+#include "src/tint/type/vector.h"
+
+// Forward declarations
+namespace tint {
+class ProgramBuilder;
+}  // namespace tint
 
 namespace tint::constant {
 
@@ -70,6 +79,70 @@ class Constant {
                 }
             },
             Value());
+    }
+
+    /// Convert attempts to convert the constant value to the given type. On error, Convert()
+    /// creates a new diagnostic message and returns a Failure.
+    virtual utils::Result<const Constant*> Convert(ProgramBuilder& builder,
+                                                   const type::Type* target_ty,
+                                                   const Source& source) const = 0;
+
+    /// Equal returns true if this constant is the same type and value as `b`.
+    /// @param b the constant to compare too
+    /// @returns true if this constant is equal to @p b.
+    bool Equal(const constant::Constant* b) const {
+        if (Hash() != b->Hash()) {
+            return false;
+        }
+        if (Type() != b->Type()) {
+            return false;
+        }
+        return Switch(
+            Type(),  //
+            [&](const type::Vector* vec) {
+                for (size_t i = 0; i < vec->Width(); i++) {
+                    if (!Index(i)->Equal(b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](const type::Matrix* mat) {
+                for (size_t i = 0; i < mat->columns(); i++) {
+                    if (!Index(i)->Equal(b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](const type::Array* arr) {
+                if (auto count = arr->ConstantCount()) {
+                    for (size_t i = 0; i < count; i++) {
+                        if (!Index(i)->Equal(b->Index(i))) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+                return false;
+            },
+            [&](const type::Struct* str) {
+                auto count = str->Members().Length();
+                for (size_t i = 0; i < count; i++) {
+                    if (!Index(i)->Equal(b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](Default) {
+                auto va = Value();
+                auto vb = b->Value();
+                TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(va));
+                TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(vb));
+                return va == vb;
+            });
     }
 };
 

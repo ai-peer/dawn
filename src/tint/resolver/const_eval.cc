@@ -22,7 +22,10 @@
 #include <type_traits>
 #include <utility>
 
+#include "src/tint/constant/composite.h"
 #include "src/tint/constant/constant.h"
+#include "src/tint/constant/scalar.h"
+#include "src/tint/constant/splat.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/type_initializer.h"
@@ -167,24 +170,6 @@ auto ZeroTypeDispatch(const type::Type* type, F&& f) {
         [&](const type::Bool*) { return f(static_cast<bool>(0)); });
 }
 
-/// @returns `value` if `T` is not a Number, otherwise ValueOf returns the inner value of the
-/// Number.
-template <typename T>
-inline auto ValueOf(T value) {
-    if constexpr (std::is_same_v<UnwrapNumber<T>, T>) {
-        return value;
-    } else {
-        return value.value;
-    }
-}
-
-/// @returns true if `value` is a positive zero.
-template <typename T>
-inline bool IsPositiveZero(T value) {
-    using N = UnwrapNumber<T>;
-    return Number<N>(value) == Number<N>(0);  // Considers sign bit
-}
-
 template <typename NumberT>
 std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
     std::stringstream ss;
@@ -246,223 +231,12 @@ std::make_unsigned_t<T> CountTrailingBits(T e, T bit_value_to_count) {
     return count;
 }
 
-/// ImplConstant inherits from constant::Constant to add an private implementation method for
-/// conversion.
-struct ImplConstant : public constant::Constant {
-    /// Convert attempts to convert the constant value to the given type. On error, Convert()
-    /// creates a new diagnostic message and returns a Failure.
-    virtual utils::Result<const ImplConstant*> Convert(ProgramBuilder& builder,
-                                                       const type::Type* target_ty,
-                                                       const Source& source) const = 0;
-};
+/// A result templated with a constant::Constant.
+using ImplResult = utils::Result<const constant::Constant*>;
 
-/// A result templated with a ImplConstant.
-using ImplResult = utils::Result<const ImplConstant*>;
-
-// Forward declaration
-const ImplConstant* CreateComposite(ProgramBuilder& builder,
-                                    const type::Type* type,
-                                    utils::VectorRef<const constant::Constant*> elements);
-
-/// Element holds a single scalar or abstract-numeric value.
-/// Element implements the Constant interface.
+/// CreateScalar constructs and returns an constant::Scalar<T>.
 template <typename T>
-struct Element : ImplConstant {
-    static_assert(!std::is_same_v<UnwrapNumber<T>, T> || std::is_same_v<T, bool>,
-                  "T must be a Number or bool");
-
-    Element(const type::Type* t, T v) : type(t), value(v) {
-        if constexpr (IsFloatingPoint<T>) {
-            TINT_ASSERT(Resolver, std::isfinite(v.value));
-        }
-    }
-    ~Element() override = default;
-    const type::Type* Type() const override { return type; }
-    std::variant<std::monostate, AInt, AFloat> Value() const override {
-        if constexpr (IsFloatingPoint<UnwrapNumber<T>>) {
-            return static_cast<AFloat>(value);
-        } else {
-            return static_cast<AInt>(value);
-        }
-    }
-    const constant::Constant* Index(size_t) const override { return nullptr; }
-    bool AllZero() const override { return IsPositiveZero(value); }
-    bool AnyZero() const override { return IsPositiveZero(value); }
-    bool AllEqual() const override { return true; }
-    size_t Hash() const override { return utils::Hash(type, ValueOf(value)); }
-
-    ImplResult Convert(ProgramBuilder& builder,
-                       const type::Type* target_ty,
-                       const Source& source) const override {
-        TINT_BEGIN_DISABLE_WARNING(UNREACHABLE_CODE);
-        if (target_ty == type) {
-            // If the types are identical, then no conversion is needed.
-            return this;
-        }
-        return ZeroTypeDispatch(target_ty, [&](auto zero_to) -> ImplResult {
-            // `value` is the source value.
-            // `FROM` is the source type.
-            // `TO` is the target type.
-            using TO = std::decay_t<decltype(zero_to)>;
-            using FROM = T;
-            if constexpr (std::is_same_v<TO, bool>) {
-                // [x -> bool]
-                return builder.create<Element<TO>>(target_ty, !IsPositiveZero(value));
-            } else if constexpr (std::is_same_v<FROM, bool>) {
-                // [bool -> x]
-                return builder.create<Element<TO>>(target_ty, TO(value ? 1 : 0));
-            } else if (auto conv = CheckedConvert<TO>(value)) {
-                // Conversion success
-                return builder.create<Element<TO>>(target_ty, conv.Get());
-                // --- Below this point are the failure cases ---
-            } else if constexpr (IsAbstract<FROM>) {
-                // [abstract-numeric -> x] - materialization failure
-                builder.Diagnostics().add_error(
-                    tint::diag::System::Resolver,
-                    OverflowErrorMessage(value, builder.FriendlyName(target_ty)), source);
-                return utils::Failure;
-            } else if constexpr (IsFloatingPoint<TO>) {
-                // [x -> floating-point] - number not exactly representable
-                // https://www.w3.org/TR/WGSL/#floating-point-conversion
-                builder.Diagnostics().add_error(
-                    tint::diag::System::Resolver,
-                    OverflowErrorMessage(value, builder.FriendlyName(target_ty)), source);
-                return utils::Failure;
-            } else if constexpr (IsFloatingPoint<FROM>) {
-                // [floating-point -> integer] - number not exactly representable
-                // https://www.w3.org/TR/WGSL/#floating-point-conversion
-                switch (conv.Failure()) {
-                    case ConversionFailure::kExceedsNegativeLimit:
-                        return builder.create<Element<TO>>(target_ty, TO::Lowest());
-                    case ConversionFailure::kExceedsPositiveLimit:
-                        return builder.create<Element<TO>>(target_ty, TO::Highest());
-                }
-            } else if constexpr (IsIntegral<FROM>) {
-                // [integer -> integer] - number not exactly representable
-                // Static cast
-                return builder.create<Element<TO>>(target_ty, static_cast<TO>(value));
-            }
-            return nullptr;  // Expression is not constant.
-        });
-        TINT_END_DISABLE_WARNING(UNREACHABLE_CODE);
-    }
-
-    type::Type const* const type;
-    const T value;
-};
-
-/// Splat holds a single Constant value, duplicated as all children.
-/// Splat is used for zero-initializers, 'splat' initializers, or initializers where each element is
-/// identical. Splat may be of a vector, matrix or array type.
-/// Splat implements the Constant interface.
-struct Splat : ImplConstant {
-    Splat(const type::Type* t, const constant::Constant* e, size_t n) : type(t), el(e), count(n) {}
-    ~Splat() override = default;
-    const type::Type* Type() const override { return type; }
-    std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
-    const constant::Constant* Index(size_t i) const override { return i < count ? el : nullptr; }
-    bool AllZero() const override { return el->AllZero(); }
-    bool AnyZero() const override { return el->AnyZero(); }
-    bool AllEqual() const override { return true; }
-    size_t Hash() const override { return utils::Hash(type, el->Hash(), count); }
-
-    ImplResult Convert(ProgramBuilder& builder,
-                       const type::Type* target_ty,
-                       const Source& source) const override {
-        // Convert the single splatted element type.
-        // Note: This file is the only place where `constant::Constant`s are created, so this
-        // static_cast is safe.
-        auto conv_el = static_cast<const ImplConstant*>(el)->Convert(
-            builder, type::Type::ElementOf(target_ty), source);
-        if (!conv_el) {
-            return utils::Failure;
-        }
-        if (!conv_el.Get()) {
-            return nullptr;
-        }
-        return builder.create<Splat>(target_ty, conv_el.Get(), count);
-    }
-
-    type::Type const* const type;
-    const constant::Constant* el;
-    const size_t count;
-};
-
-/// Composite holds a number of mixed child Constant values.
-/// Composite may be of a vector, matrix or array type.
-/// If each element is the same type and value, then a Splat would be a more efficient constant
-/// implementation. Use CreateComposite() to create the appropriate Constant type.
-/// Composite implements the Constant interface.
-struct Composite : ImplConstant {
-    Composite(const type::Type* t,
-              utils::VectorRef<const constant::Constant*> els,
-              bool all_0,
-              bool any_0)
-        : type(t), elements(std::move(els)), all_zero(all_0), any_zero(any_0), hash(CalcHash()) {}
-    ~Composite() override = default;
-    const type::Type* Type() const override { return type; }
-    std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
-    const constant::Constant* Index(size_t i) const override {
-        return i < elements.Length() ? elements[i] : nullptr;
-    }
-    bool AllZero() const override { return all_zero; }
-    bool AnyZero() const override { return any_zero; }
-    bool AllEqual() const override { return false; /* otherwise this should be a Splat */ }
-    size_t Hash() const override { return hash; }
-
-    ImplResult Convert(ProgramBuilder& builder,
-                       const type::Type* target_ty,
-                       const Source& source) const override {
-        // Convert each of the composite element types.
-        utils::Vector<const constant::Constant*, 4> conv_els;
-        conv_els.Reserve(elements.Length());
-        std::function<const type::Type*(size_t idx)> target_el_ty;
-        if (auto* str = target_ty->As<type::Struct>()) {
-            if (str->Members().Length() != elements.Length()) {
-                TINT_ICE(Resolver, builder.Diagnostics())
-                    << "const-eval conversion of structure has mismatched element counts";
-                return utils::Failure;
-            }
-            target_el_ty = [str](size_t idx) { return str->Members()[idx]->Type(); };
-        } else {
-            auto* el_ty = type::Type::ElementOf(target_ty);
-            target_el_ty = [el_ty](size_t) { return el_ty; };
-        }
-
-        for (auto* el : elements) {
-            // Note: This file is the only place where `constant::Constant`s are created, so the
-            // static_cast is safe.
-            auto conv_el = static_cast<const ImplConstant*>(el)->Convert(
-                builder, target_el_ty(conv_els.Length()), source);
-            if (!conv_el) {
-                return utils::Failure;
-            }
-            if (!conv_el.Get()) {
-                return nullptr;
-            }
-            conv_els.Push(conv_el.Get());
-        }
-        return CreateComposite(builder, target_ty, std::move(conv_els));
-    }
-
-    size_t CalcHash() {
-        auto h = utils::Hash(type, all_zero, any_zero);
-        for (auto* el : elements) {
-            h = utils::HashCombine(h, el->Hash());
-        }
-        return h;
-    }
-
-    type::Type const* const type;
-    const utils::Vector<const constant::Constant*, 8> elements;
-    const bool all_zero;
-    const bool any_zero;
-    const size_t hash;
-};
-
-/// CreateElement constructs and returns an Element<T>.
-template <typename T>
-ImplResult CreateElement(ProgramBuilder& builder, const Source& source, const type::Type* t, T v) {
+ImplResult CreateScalar(ProgramBuilder& builder, const Source& source, const type::Type* t, T v) {
     TINT_ASSERT(Resolver, t->is_scalar());
 
     if constexpr (IsFloatingPoint<T>) {
@@ -472,31 +246,31 @@ ImplResult CreateElement(ProgramBuilder& builder, const Source& source, const ty
             return utils::Failure;
         }
     }
-    return builder.create<Element<T>>(t, v);
+    return builder.create<constant::Scalar<T>>(t, v);
 }
 
 /// ZeroValue returns a Constant for the zero-value of the type `type`.
-const ImplConstant* ZeroValue(ProgramBuilder& builder, const type::Type* type) {
+const constant::Constant* ZeroValue(ProgramBuilder& builder, const type::Type* type) {
     return Switch(
         type,  //
-        [&](const type::Vector* v) -> const ImplConstant* {
+        [&](const type::Vector* v) -> const constant::Constant* {
             auto* zero_el = ZeroValue(builder, v->type());
-            return builder.create<Splat>(type, zero_el, v->Width());
+            return builder.create<constant::Splat>(type, zero_el, v->Width());
         },
-        [&](const type::Matrix* m) -> const ImplConstant* {
+        [&](const type::Matrix* m) -> const constant::Constant* {
             auto* zero_el = ZeroValue(builder, m->ColumnType());
-            return builder.create<Splat>(type, zero_el, m->columns());
+            return builder.create<constant::Splat>(type, zero_el, m->columns());
         },
-        [&](const type::Array* a) -> const ImplConstant* {
+        [&](const type::Array* a) -> const constant::Constant* {
             if (auto n = a->ConstantCount()) {
                 if (auto* zero_el = ZeroValue(builder, a->ElemType())) {
-                    return builder.create<Splat>(type, zero_el, n.value());
+                    return builder.create<constant::Splat>(type, zero_el, n.value());
                 }
             }
             return nullptr;
         },
-        [&](const type::Struct* s) -> const ImplConstant* {
-            utils::Hashmap<const type::Type*, const ImplConstant*, 8> zero_by_type;
+        [&](const type::Struct* s) -> const constant::Constant* {
+            utils::Hashmap<const type::Type*, const constant::Constant*, 8> zero_by_type;
             utils::Vector<const constant::Constant*, 4> zeros;
             zeros.Reserve(s->Members().Length());
             for (auto* member : s->Members()) {
@@ -509,97 +283,21 @@ const ImplConstant* ZeroValue(ProgramBuilder& builder, const type::Type* type) {
             }
             if (zero_by_type.Count() == 1) {
                 // All members were of the same type, so the zero value is the same for all members.
-                return builder.create<Splat>(type, zeros[0], s->Members().Length());
+                return builder.create<constant::Splat>(type, zeros[0], s->Members().Length());
             }
-            return CreateComposite(builder, s, std::move(zeros));
+            return builder.createCompositeOrSplat(s, std::move(zeros));
         },
-        [&](Default) -> const ImplConstant* {
-            return ZeroTypeDispatch(type, [&](auto zero) -> const ImplConstant* {
-                auto el = CreateElement(builder, Source{}, type, zero);
+        [&](Default) -> const constant::Constant* {
+            return ZeroTypeDispatch(type, [&](auto zero) -> const constant::Constant* {
+                auto el = CreateScalar(builder, Source{}, type, zero);
                 TINT_ASSERT(Resolver, el);
                 return el.Get();
             });
         });
 }
 
-/// Equal returns true if the constants `a` and `b` are of the same type and value.
-bool Equal(const constant::Constant* a, const constant::Constant* b) {
-    if (a->Hash() != b->Hash()) {
-        return false;
-    }
-    if (a->Type() != b->Type()) {
-        return false;
-    }
-    return Switch(
-        a->Type(),  //
-        [&](const type::Vector* vec) {
-            for (size_t i = 0; i < vec->Width(); i++) {
-                if (!Equal(a->Index(i), b->Index(i))) {
-                    return false;
-                }
-            }
-            return true;
-        },
-        [&](const type::Matrix* mat) {
-            for (size_t i = 0; i < mat->columns(); i++) {
-                if (!Equal(a->Index(i), b->Index(i))) {
-                    return false;
-                }
-            }
-            return true;
-        },
-        [&](const type::Array* arr) {
-            if (auto count = arr->ConstantCount()) {
-                for (size_t i = 0; i < count; i++) {
-                    if (!Equal(a->Index(i), b->Index(i))) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            return false;
-        },
-        [&](Default) { return a->Value() == b->Value(); });
-}
-
-/// CreateComposite is used to construct a constant of a vector, matrix or array type.
-/// CreateComposite examines the element values and will return either a Composite or a Splat,
-/// depending on the element types and values.
-const ImplConstant* CreateComposite(ProgramBuilder& builder,
-                                    const type::Type* type,
-                                    utils::VectorRef<const constant::Constant*> elements) {
-    if (elements.IsEmpty()) {
-        return nullptr;
-    }
-    bool any_zero = false;
-    bool all_zero = true;
-    bool all_equal = true;
-    auto* first = elements.Front();
-    for (auto* el : elements) {
-        if (!el) {
-            return nullptr;
-        }
-        if (!any_zero && el->AnyZero()) {
-            any_zero = true;
-        }
-        if (all_zero && !el->AllZero()) {
-            all_zero = false;
-        }
-        if (all_equal && el != first) {
-            if (!Equal(el, first)) {
-                all_equal = false;
-            }
-        }
-    }
-    if (all_equal) {
-        return builder.create<Splat>(type, elements[0], elements.Length());
-    } else {
-        return builder.create<Composite>(type, std::move(elements), all_zero, any_zero);
-    }
-}
-
 namespace detail {
+
 /// Implementation of TransformElements
 template <typename F, typename... CONSTANTS>
 ImplResult TransformElements(ProgramBuilder& builder,
@@ -629,8 +327,9 @@ ImplResult TransformElements(ProgramBuilder& builder,
             return el.Failure();
         }
     }
-    return CreateComposite(builder, composite_ty, std::move(els));
+    return builder.createCompositeOrSplat(composite_ty, std::move(els));
 }
+
 }  // namespace detail
 
 /// TransformElements constructs a new constant of type `composite_ty` by applying the
@@ -683,7 +382,7 @@ ImplResult TransformBinaryElements(ProgramBuilder& builder,
             return el.Failure();
         }
     }
-    return CreateComposite(builder, composite_ty, std::move(els));
+    return builder.createCompositeOrSplat(composite_ty, std::move(els));
 }
 }  // namespace
 
@@ -1087,7 +786,7 @@ utils::Result<NumberT> ConstEval::Sqrt(const Source& source, NumberT v) {
 auto ConstEval::SqrtFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto v) -> ImplResult {
         if (auto r = Sqrt(source, v)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1101,7 +800,7 @@ utils::Result<NumberT> ConstEval::Clamp(const Source&, NumberT e, NumberT low, N
 auto ConstEval::ClampFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto e, auto low, auto high) -> ImplResult {
         if (auto r = Clamp(source, e, low, high)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1110,7 +809,7 @@ auto ConstEval::ClampFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::AddFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Add(source, a1, a2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1119,7 +818,7 @@ auto ConstEval::AddFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::SubFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Sub(source, a1, a2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1128,7 +827,7 @@ auto ConstEval::SubFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::MulFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Mul(source, a1, a2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1137,7 +836,7 @@ auto ConstEval::MulFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::DivFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Div(source, a1, a2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1146,7 +845,7 @@ auto ConstEval::DivFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::ModFunc(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2) -> ImplResult {
         if (auto r = Mod(source, a1, a2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1155,7 +854,7 @@ auto ConstEval::ModFunc(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::Dot2Func(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2, auto b1, auto b2) -> ImplResult {
         if (auto r = Dot2(source, a1, a2, b1, b2)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1164,7 +863,7 @@ auto ConstEval::Dot2Func(const Source& source, const type::Type* elem_ty) {
 auto ConstEval::Dot3Func(const Source& source, const type::Type* elem_ty) {
     return [=](auto a1, auto a2, auto a3, auto b1, auto b2, auto b3) -> ImplResult {
         if (auto r = Dot3(source, a1, a2, a3, b1, b2, b3)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1174,7 +873,7 @@ auto ConstEval::Dot4Func(const Source& source, const type::Type* elem_ty) {
     return
         [=](auto a1, auto a2, auto a3, auto a4, auto b1, auto b2, auto b3, auto b4) -> ImplResult {
             if (auto r = Dot4(source, a1, a2, a3, a4, b1, b2, b3, b4)) {
-                return CreateElement(builder, source, elem_ty, r.Get());
+                return CreateScalar(builder, source, elem_ty, r.Get());
             }
             return utils::Failure;
         };
@@ -1215,7 +914,7 @@ ConstEval::Result ConstEval::Length(const Source& source,
     if (vec_ty == nullptr) {
         auto create = [&](auto e) {
             using NumberT = decltype(e);
-            return CreateElement(builder, source, ty, NumberT{std::abs(e)});
+            return CreateScalar(builder, source, ty, NumberT{std::abs(e)});
         };
         return Dispatch_fa_f32_f16(create, c0);
     }
@@ -1251,7 +950,7 @@ ConstEval::Result ConstEval::Sub(const Source& source,
 auto ConstEval::Det2Func(const Source& source, const type::Type* elem_ty) {
     return [=](auto a, auto b, auto c, auto d) -> ImplResult {
         if (auto r = Det2(source, a, b, c, d)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1261,7 +960,7 @@ auto ConstEval::Det3Func(const Source& source, const type::Type* elem_ty) {
     return
         [=](auto a, auto b, auto c, auto d, auto e, auto f, auto g, auto h, auto i) -> ImplResult {
             if (auto r = Det3(source, a, b, c, d, e, f, g, h, i)) {
-                return CreateElement(builder, source, elem_ty, r.Get());
+                return CreateScalar(builder, source, elem_ty, r.Get());
             }
             return utils::Failure;
         };
@@ -1271,7 +970,7 @@ auto ConstEval::Det4Func(const Source& source, const type::Type* elem_ty) {
     return [=](auto a, auto b, auto c, auto d, auto e, auto f, auto g, auto h, auto i, auto j,
                auto k, auto l, auto m, auto n, auto o, auto p) -> ImplResult {
         if (auto r = Det4(source, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p)) {
-            return CreateElement(builder, source, elem_ty, r.Get());
+            return CreateScalar(builder, source, elem_ty, r.Get());
         }
         return utils::Failure;
     };
@@ -1282,27 +981,27 @@ ConstEval::Result ConstEval::Literal(const type::Type* ty, const ast::LiteralExp
     return Switch(
         literal,
         [&](const ast::BoolLiteralExpression* lit) {
-            return CreateElement(builder, source, ty, lit->value);
+            return CreateScalar(builder, source, ty, lit->value);
         },
         [&](const ast::IntLiteralExpression* lit) -> ImplResult {
             switch (lit->suffix) {
                 case ast::IntLiteralExpression::Suffix::kNone:
-                    return CreateElement(builder, source, ty, AInt(lit->value));
+                    return CreateScalar(builder, source, ty, AInt(lit->value));
                 case ast::IntLiteralExpression::Suffix::kI:
-                    return CreateElement(builder, source, ty, i32(lit->value));
+                    return CreateScalar(builder, source, ty, i32(lit->value));
                 case ast::IntLiteralExpression::Suffix::kU:
-                    return CreateElement(builder, source, ty, u32(lit->value));
+                    return CreateScalar(builder, source, ty, u32(lit->value));
             }
             return nullptr;
         },
         [&](const ast::FloatLiteralExpression* lit) -> ImplResult {
             switch (lit->suffix) {
                 case ast::FloatLiteralExpression::Suffix::kNone:
-                    return CreateElement(builder, source, ty, AFloat(lit->value));
+                    return CreateScalar(builder, source, ty, AFloat(lit->value));
                 case ast::FloatLiteralExpression::Suffix::kF:
-                    return CreateElement(builder, source, ty, f32(lit->value));
+                    return CreateScalar(builder, source, ty, f32(lit->value));
                 case ast::FloatLiteralExpression::Suffix::kH:
-                    return CreateElement(builder, source, ty, f16(lit->value));
+                    return CreateScalar(builder, source, ty, f16(lit->value));
             }
             return nullptr;
         });
@@ -1325,7 +1024,7 @@ ConstEval::Result ConstEval::ArrayOrStructInit(const type::Type* ty,
     for (auto* arg : args) {
         els.Push(arg->ConstantValue());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builer.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::Conv(const type::Type* ty,
@@ -1360,7 +1059,8 @@ ConstEval::Result ConstEval::VecSplat(const type::Type* ty,
                                       utils::VectorRef<const constant::Constant*> args,
                                       const Source&) {
     if (auto* arg = args[0]) {
-        return builder.create<Splat>(ty, arg, static_cast<const type::Vector*>(ty)->Width());
+        return builder.create<constant::Splat>(ty, arg,
+                                               static_cast<const type::Vector*>(ty)->Width());
     }
     return nullptr;
 }
@@ -1368,7 +1068,7 @@ ConstEval::Result ConstEval::VecSplat(const type::Type* ty,
 ConstEval::Result ConstEval::VecInitS(const type::Type* ty,
                                       utils::VectorRef<const constant::Constant*> args,
                                       const Source&) {
-    return CreateComposite(builder, ty, args);
+    return builder.createCompositeOrSplat(ty, args);
 }
 
 ConstEval::Result ConstEval::VecInitM(const type::Type* ty,
@@ -1394,7 +1094,7 @@ ConstEval::Result ConstEval::VecInitM(const type::Type* ty,
             els.Push(val);
         }
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::MatInitS(const type::Type* ty,
@@ -1409,15 +1109,15 @@ ConstEval::Result ConstEval::MatInitS(const type::Type* ty,
             auto i = r + c * m->rows();
             column.Push(args[i]);
         }
-        els.Push(CreateComposite(builder, m->ColumnType(), std::move(column)));
+        els.Push(builder.createCompositeOrSplat(m->ColumnType(), std::move(column)));
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::MatInitV(const type::Type* ty,
                                       utils::VectorRef<const constant::Constant*> args,
                                       const Source&) {
-    return CreateComposite(builder, ty, args);
+    return builder.createCompositeOrSplat(ty, args);
 }
 
 ConstEval::Result ConstEval::Index(const sem::Expression* obj_expr,
@@ -1470,7 +1170,7 @@ ConstEval::Result ConstEval::Swizzle(const type::Type* ty,
     }
     auto values = utils::Transform<4>(
         indices, [&](uint32_t i) { return vec_val->Index(static_cast<size_t>(i)); });
-    return CreateComposite(builder, ty, std::move(values));
+    return builder.createCompositeOrSplat(ty, std::move(values));
 }
 
 ConstEval::Result ConstEval::Bitcast(const type::Type*, const sem::Expression*) {
@@ -1483,7 +1183,7 @@ ConstEval::Result ConstEval::OpComplement(const type::Type* ty,
                                           const Source& source) {
     auto transform = [&](const constant::Constant* c) {
         auto create = [&](auto i) {
-            return CreateElement(builder, source, c->Type(), decltype(i)(~i.value));
+            return CreateScalar(builder, source, c->Type(), decltype(i)(~i.value));
         };
         return Dispatch_ia_iu32(create, c);
     };
@@ -1505,9 +1205,9 @@ ConstEval::Result ConstEval::OpUnaryMinus(const type::Type* ty,
                 if (v != std::numeric_limits<T>::min()) {
                     v = -v;
                 }
-                return CreateElement(builder, source, c->Type(), decltype(i)(v));
+                return CreateScalar(builder, source, c->Type(), decltype(i)(v));
             } else {
-                return CreateElement(builder, source, c->Type(), decltype(i)(-i.value));
+                return CreateScalar(builder, source, c->Type(), decltype(i)(-i.value));
             }
         };
         return Dispatch_fia_fi32_f16(create, c);
@@ -1520,7 +1220,7 @@ ConstEval::Result ConstEval::OpNot(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c) {
         auto create = [&](auto i) {
-            return CreateElement(builder, source, c->Type(), decltype(i)(!i));
+            return CreateScalar(builder, source, c->Type(), decltype(i)(!i));
         };
         return Dispatch_bool(create, c);
     };
@@ -1597,7 +1297,7 @@ ConstEval::Result ConstEval::OpMultiplyMatVec(const type::Type* ty,
         }
         result.Push(r.Get());
     }
-    return CreateComposite(builder, ty, result);
+    return builder.createCompositeOrSplat(ty, result);
 }
 ConstEval::Result ConstEval::OpMultiplyVecMat(const type::Type* ty,
                                               utils::VectorRef<const constant::Constant*> args,
@@ -1647,7 +1347,7 @@ ConstEval::Result ConstEval::OpMultiplyVecMat(const type::Type* ty,
         }
         result.Push(r.Get());
     }
-    return CreateComposite(builder, ty, result);
+    return builder.createCompositeOrSplat(ty, result);
 }
 
 ConstEval::Result ConstEval::OpMultiplyMatMat(const type::Type* ty,
@@ -1710,9 +1410,9 @@ ConstEval::Result ConstEval::OpMultiplyMatMat(const type::Type* ty,
 
         // Add column vector to matrix
         auto* col_vec_ty = ty->As<type::Matrix>()->ColumnType();
-        result_mat.Push(CreateComposite(builder, col_vec_ty, col_vec));
+        result_mat.Push(builder.createCompositeOrSplat(col_vec_ty, col_vec));
     }
-    return CreateComposite(builder, ty, result_mat);
+    return builder.createCompositeOrSplat(ty, result_mat);
 }
 
 ConstEval::Result ConstEval::OpDivide(const type::Type* ty,
@@ -1740,7 +1440,7 @@ ConstEval::Result ConstEval::OpEqual(const type::Type* ty,
                                      const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i == j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i == j);
         };
         return Dispatch_fia_fiu32_f16_bool(create, c0, c1);
     };
@@ -1753,7 +1453,7 @@ ConstEval::Result ConstEval::OpNotEqual(const type::Type* ty,
                                         const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i != j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i != j);
         };
         return Dispatch_fia_fiu32_f16_bool(create, c0, c1);
     };
@@ -1766,7 +1466,7 @@ ConstEval::Result ConstEval::OpLessThan(const type::Type* ty,
                                         const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i < j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i < j);
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -1779,7 +1479,7 @@ ConstEval::Result ConstEval::OpGreaterThan(const type::Type* ty,
                                            const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i > j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i > j);
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -1792,7 +1492,7 @@ ConstEval::Result ConstEval::OpLessThanEqual(const type::Type* ty,
                                              const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i <= j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i <= j);
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -1805,7 +1505,7 @@ ConstEval::Result ConstEval::OpGreaterThanEqual(const type::Type* ty,
                                                 const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), i >= j);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), i >= j);
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -1818,7 +1518,7 @@ ConstEval::Result ConstEval::OpLogicalAnd(const type::Type* ty,
                                           const Source& source) {
     // Note: Due to short-circuiting, this function is only called if lhs is true, so we could
     // technically only return the value of the rhs.
-    return CreateElement(builder, source, ty, args[0]->As<bool>() && args[1]->As<bool>());
+    return CreateScalar(builder, source, ty, args[0]->As<bool>() && args[1]->As<bool>());
 }
 
 ConstEval::Result ConstEval::OpLogicalOr(const type::Type* ty,
@@ -1826,7 +1526,7 @@ ConstEval::Result ConstEval::OpLogicalOr(const type::Type* ty,
                                          const Source& source) {
     // Note: Due to short-circuiting, this function is only called if lhs is false, so we could
     // technically only return the value of the rhs.
-    return CreateElement(builder, source, ty, args[1]->As<bool>());
+    return CreateScalar(builder, source, ty, args[1]->As<bool>());
 }
 
 ConstEval::Result ConstEval::OpAnd(const type::Type* ty,
@@ -1841,7 +1541,7 @@ ConstEval::Result ConstEval::OpAnd(const type::Type* ty,
             } else {  // integral
                 result = i & j;
             }
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), result);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), result);
         };
         return Dispatch_ia_iu32_bool(create, c0, c1);
     };
@@ -1861,7 +1561,7 @@ ConstEval::Result ConstEval::OpOr(const type::Type* ty,
             } else {  // integral
                 result = i | j;
             }
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), result);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), result);
         };
         return Dispatch_ia_iu32_bool(create, c0, c1);
     };
@@ -1874,8 +1574,8 @@ ConstEval::Result ConstEval::OpXor(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty),
-                                 decltype(i){i ^ j});
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty),
+                                decltype(i){i ^ j});
         };
         return Dispatch_ia_iu32(create, c0, c1);
     };
@@ -1955,8 +1655,7 @@ ConstEval::Result ConstEval::OpShiftLeft(const type::Type* ty,
 
             // Avoid UB by left shifting as unsigned value
             auto result = static_cast<T>(static_cast<UT>(e1) << e2);
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty),
-                                 NumberT{result});
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), NumberT{result});
         };
         return Dispatch_ia_iu32(create, c0, c1);
     };
@@ -2020,8 +1719,7 @@ ConstEval::Result ConstEval::OpShiftRight(const type::Type* ty,
                     result = e1 >> e2;
                 }
             }
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty),
-                                 NumberT{result});
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), NumberT{result});
         };
         return Dispatch_ia_iu32(create, c0, c1);
     };
@@ -2053,7 +1751,7 @@ ConstEval::Result ConstEval::abs(const type::Type* ty,
             } else {
                 result = NumberT{std::abs(e)};
             }
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_fia_fiu32_f16(create, c0);
     };
@@ -2071,7 +1769,7 @@ ConstEval::Result ConstEval::acos(const type::Type* ty,
                          source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::acos(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::acos(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2088,7 +1786,7 @@ ConstEval::Result ConstEval::acosh(const type::Type* ty,
                 AddError("acosh must be called with a value >= 1.0", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::acosh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::acosh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2099,13 +1797,13 @@ ConstEval::Result ConstEval::acosh(const type::Type* ty,
 ConstEval::Result ConstEval::all(const type::Type* ty,
                                  utils::VectorRef<const constant::Constant*> args,
                                  const Source& source) {
-    return CreateElement(builder, source, ty, !args[0]->AnyZero());
+    return CreateScalar(builder, source, ty, !args[0]->AnyZero());
 }
 
 ConstEval::Result ConstEval::any(const type::Type* ty,
                                  utils::VectorRef<const constant::Constant*> args,
                                  const Source& source) {
-    return CreateElement(builder, source, ty, !args[0]->AllZero());
+    return CreateScalar(builder, source, ty, !args[0]->AllZero());
 }
 
 ConstEval::Result ConstEval::asin(const type::Type* ty,
@@ -2119,7 +1817,7 @@ ConstEval::Result ConstEval::asin(const type::Type* ty,
                          source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::asin(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::asin(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2131,7 +1829,7 @@ ConstEval::Result ConstEval::asinh(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) {
-            return CreateElement(builder, source, c0->Type(), decltype(i)(std::asinh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), decltype(i)(std::asinh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2144,7 +1842,7 @@ ConstEval::Result ConstEval::atan(const type::Type* ty,
                                   const Source& source) {
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) {
-            return CreateElement(builder, source, c0->Type(), decltype(i)(std::atan(i.value)));
+            return CreateScalar(builder, source, c0->Type(), decltype(i)(std::atan(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2162,7 +1860,7 @@ ConstEval::Result ConstEval::atanh(const type::Type* ty,
                          source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::atanh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::atanh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2175,8 +1873,8 @@ ConstEval::Result ConstEval::atan2(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto i, auto j) {
-            return CreateElement(builder, source, c0->Type(),
-                                 decltype(i)(std::atan2(i.value, j.value)));
+            return CreateScalar(builder, source, c0->Type(),
+                                decltype(i)(std::atan2(i.value, j.value)));
         };
         return Dispatch_fa_f32_f16(create, c0, c1);
     };
@@ -2188,7 +1886,7 @@ ConstEval::Result ConstEval::ceil(const type::Type* ty,
                                   const Source& source) {
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto e) {
-            return CreateElement(builder, source, c0->Type(), decltype(e)(std::ceil(e)));
+            return CreateScalar(builder, source, c0->Type(), decltype(e)(std::ceil(e)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2211,7 +1909,7 @@ ConstEval::Result ConstEval::cos(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::cos(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::cos(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2224,7 +1922,7 @@ ConstEval::Result ConstEval::cosh(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::cosh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::cosh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2239,7 +1937,7 @@ ConstEval::Result ConstEval::countLeadingZeros(const type::Type* ty,
             using NumberT = decltype(e);
             using T = UnwrapNumber<NumberT>;
             auto count = CountLeadingBits(T{e}, T{0});
-            return CreateElement(builder, source, c0->Type(), NumberT(count));
+            return CreateScalar(builder, source, c0->Type(), NumberT(count));
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2263,7 +1961,7 @@ ConstEval::Result ConstEval::countOneBits(const type::Type* ty,
                 }
             }
 
-            return CreateElement(builder, source, c0->Type(), NumberT(count));
+            return CreateScalar(builder, source, c0->Type(), NumberT(count));
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2278,7 +1976,7 @@ ConstEval::Result ConstEval::countTrailingZeros(const type::Type* ty,
             using NumberT = decltype(e);
             using T = UnwrapNumber<NumberT>;
             auto count = CountTrailingBits(T{e}, T{0});
-            return CreateElement(builder, source, c0->Type(), NumberT(count));
+            return CreateScalar(builder, source, c0->Type(), NumberT(count));
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2324,8 +2022,8 @@ ConstEval::Result ConstEval::cross(const type::Type* ty,
         return utils::Failure;
     }
 
-    return CreateComposite(builder, ty,
-                           utils::Vector<const constant::Constant*, 3>{x.Get(), y.Get(), z.Get()});
+    return builder.createCompositeOrSplat(
+        ty, utils::Vector<const constant::Constant*, 3>{x.Get(), y.Get(), z.Get()});
 }
 
 ConstEval::Result ConstEval::degrees(const type::Type* ty,
@@ -2347,7 +2045,7 @@ ConstEval::Result ConstEval::degrees(const type::Type* ty,
                 AddNote("when calculating degrees", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), result.Get());
+            return CreateScalar(builder, source, c0->Type(), result.Get());
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2431,7 +2129,7 @@ ConstEval::Result ConstEval::exp(const type::Type* ty,
                 AddError(OverflowExpErrorMessage("e", e0), source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), val);
+            return CreateScalar(builder, source, c0->Type(), val);
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2449,7 +2147,7 @@ ConstEval::Result ConstEval::exp2(const type::Type* ty,
                 AddError(OverflowExpErrorMessage("2", e0), source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), val);
+            return CreateScalar(builder, source, c0->Type(), val);
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2504,7 +2202,7 @@ ConstEval::Result ConstEval::extractBits(const type::Type* ty,
 
                 result = NumberT{r};
             }
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2567,7 +2265,7 @@ ConstEval::Result ConstEval::firstLeadingBit(const type::Type* ty,
                 }
             }
 
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2593,7 +2291,7 @@ ConstEval::Result ConstEval::firstTrailingBit(const type::Type* ty,
                 result = NumberT(pos);
             }
 
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_iu32(create, c0);
     };
@@ -2605,7 +2303,7 @@ ConstEval::Result ConstEval::floor(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto e) {
-            return CreateElement(builder, source, c0->Type(), decltype(e)(std::floor(e)));
+            return CreateScalar(builder, source, c0->Type(), decltype(e)(std::floor(e)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2632,7 +2330,7 @@ ConstEval::Result ConstEval::fma(const type::Type* ty,
             if (!val) {
                 return err_msg();
             }
-            return CreateElement(builder, source, c1->Type(), val.Get());
+            return CreateScalar(builder, source, c1->Type(), val.Get());
         };
         return Dispatch_fa_f32_f16(create, c1, c2, c3);
     };
@@ -2656,21 +2354,21 @@ ConstEval::Result ConstEval::frexp(const type::Type* ty,
             s->Type(),
             [&](const type::F32*) {
                 return FractExp{
-                    CreateElement(builder, source, builder.create<type::F32>(), f32(fract)),
-                    CreateElement(builder, source, builder.create<type::I32>(), i32(exp)),
+                    CreateScalar(builder, source, builder.create<type::F32>(), f32(fract)),
+                    CreateScalar(builder, source, builder.create<type::I32>(), i32(exp)),
                 };
             },
             [&](const type::F16*) {
                 return FractExp{
-                    CreateElement(builder, source, builder.create<type::F16>(), f16(fract)),
-                    CreateElement(builder, source, builder.create<type::I32>(), i32(exp)),
+                    CreateScalar(builder, source, builder.create<type::F16>(), f16(fract)),
+                    CreateScalar(builder, source, builder.create<type::I32>(), i32(exp)),
                 };
             },
             [&](const type::AbstractFloat*) {
                 return FractExp{
-                    CreateElement(builder, source, builder.create<type::AbstractFloat>(),
-                                  AFloat(fract)),
-                    CreateElement(builder, source, builder.create<type::AbstractInt>(), AInt(exp)),
+                    CreateScalar(builder, source, builder.create<type::AbstractFloat>(),
+                                 AFloat(fract)),
+                    CreateScalar(builder, source, builder.create<type::AbstractInt>(), AInt(exp)),
                 };
             },
             [&](Default) {
@@ -2694,21 +2392,20 @@ ConstEval::Result ConstEval::frexp(const type::Type* ty,
         }
         auto fract_ty = builder.create<type::Vector>(fract_els[0]->Type(), vec->Width());
         auto exp_ty = builder.create<type::Vector>(exp_els[0]->Type(), vec->Width());
-        return CreateComposite(builder, ty,
-                               utils::Vector<const constant::Constant*, 2>{
-                                   CreateComposite(builder, fract_ty, std::move(fract_els)),
-                                   CreateComposite(builder, exp_ty, std::move(exp_els)),
-                               });
+        return builder.createCompositeOrSplat(
+            ty, utils::Vector<const constant::Constant*, 2>{
+                    builder.createCompositeOrSplat(fract_ty, std::move(fract_els)),
+                    builder.createCompositeOrSplat(exp_ty, std::move(exp_els)),
+                });
     } else {
         auto fe = scalar(arg);
         if (!fe.fract || !fe.exp) {
             return utils::Failure;
         }
-        return CreateComposite(builder, ty,
-                               utils::Vector<const constant::Constant*, 2>{
-                                   fe.fract.Get(),
-                                   fe.exp.Get(),
-                               });
+        return builder.createCompositeOrSplat(ty, utils::Vector<const constant::Constant*, 2>{
+                                                      fe.fract.Get(),
+                                                      fe.exp.Get(),
+                                                  });
     }
 }
 
@@ -2757,7 +2454,7 @@ ConstEval::Result ConstEval::insertBits(const type::Type* ty,
                 result = NumberT{r};
             }
 
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_iu32(create, c0, c1);
     };
@@ -2790,7 +2487,7 @@ ConstEval::Result ConstEval::inverseSqrt(const type::Type* ty,
                 return err();
             }
 
-            return CreateElement(builder, source, c0->Type(), div.Get());
+            return CreateScalar(builder, source, c0->Type(), div.Get());
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2818,7 +2515,7 @@ ConstEval::Result ConstEval::log(const type::Type* ty,
                 AddError("log must be called with a value > 0", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::log(v)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::log(v)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2835,7 +2532,7 @@ ConstEval::Result ConstEval::log2(const type::Type* ty,
                 AddError("log2 must be called with a value > 0", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), NumberT(std::log2(v)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::log2(v)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -2847,7 +2544,7 @@ ConstEval::Result ConstEval::max(const type::Type* ty,
                                  const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto e0, auto e1) {
-            return CreateElement(builder, source, c0->Type(), decltype(e0)(std::max(e0, e1)));
+            return CreateScalar(builder, source, c0->Type(), decltype(e0)(std::max(e0, e1)));
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -2859,7 +2556,7 @@ ConstEval::Result ConstEval::min(const type::Type* ty,
                                  const Source& source) {
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto e0, auto e1) {
-            return CreateElement(builder, source, c0->Type(), decltype(e0)(std::min(e0, e1)));
+            return CreateScalar(builder, source, c0->Type(), decltype(e0)(std::min(e0, e1)));
         };
         return Dispatch_fia_fiu32_f16(create, c0, c1);
     };
@@ -2898,7 +2595,7 @@ ConstEval::Result ConstEval::mix(const type::Type* ty,
             if (!r) {
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), r.Get());
+            return CreateScalar(builder, source, c0->Type(), r.Get());
         };
         return Dispatch_fa_f32_f16(create, c0, c1);
     };
@@ -2914,14 +2611,14 @@ ConstEval::Result ConstEval::modf(const type::Type* ty,
                                   const Source& source) {
     auto transform_fract = [&](const constant::Constant* c) {
         auto create = [&](auto e) {
-            return CreateElement(builder, source, c->Type(),
-                                 decltype(e)(e.value - std::trunc(e.value)));
+            return CreateScalar(builder, source, c->Type(),
+                                decltype(e)(e.value - std::trunc(e.value)));
         };
         return Dispatch_fa_f32_f16(create, c);
     };
     auto transform_whole = [&](const constant::Constant* c) {
         auto create = [&](auto e) {
-            return CreateElement(builder, source, c->Type(), decltype(e)(std::trunc(e.value)));
+            return CreateScalar(builder, source, c->Type(), decltype(e)(std::trunc(e.value)));
         };
         return Dispatch_fa_f32_f16(create, c);
     };
@@ -2940,7 +2637,7 @@ ConstEval::Result ConstEval::modf(const type::Type* ty,
         return utils::Failure;
     }
 
-    return CreateComposite(builder, ty, std::move(fields));
+    return builder.createCompositeOrSplat(ty, std::move(fields));
 }
 
 ConstEval::Result ConstEval::normalize(const type::Type* ty,
@@ -2985,7 +2682,7 @@ ConstEval::Result ConstEval::pack2x16float(const type::Type* ty,
     }
 
     u32 ret = u32((e0.Get() & 0x0000'ffff) | (e1.Get() << 16));
-    return CreateElement(builder, source, ty, ret);
+    return CreateScalar(builder, source, ty, ret);
 }
 
 ConstEval::Result ConstEval::pack2x16snorm(const type::Type* ty,
@@ -3002,7 +2699,7 @@ ConstEval::Result ConstEval::pack2x16snorm(const type::Type* ty,
     auto e1 = calc(e->Index(1)->As<f32>());
 
     u32 ret = u32((e0 & 0x0000'ffff) | (e1 << 16));
-    return CreateElement(builder, source, ty, ret);
+    return CreateScalar(builder, source, ty, ret);
 }
 
 ConstEval::Result ConstEval::pack2x16unorm(const type::Type* ty,
@@ -3018,7 +2715,7 @@ ConstEval::Result ConstEval::pack2x16unorm(const type::Type* ty,
     auto e1 = calc(e->Index(1)->As<f32>());
 
     u32 ret = u32((e0 & 0x0000'ffff) | (e1 << 16));
-    return CreateElement(builder, source, ty, ret);
+    return CreateScalar(builder, source, ty, ret);
 }
 
 ConstEval::Result ConstEval::pack4x8snorm(const type::Type* ty,
@@ -3038,7 +2735,7 @@ ConstEval::Result ConstEval::pack4x8snorm(const type::Type* ty,
 
     uint32_t mask = 0x0000'00ff;
     u32 ret = u32((e0 & mask) | ((e1 & mask) << 8) | ((e2 & mask) << 16) | ((e3 & mask) << 24));
-    return CreateElement(builder, source, ty, ret);
+    return CreateScalar(builder, source, ty, ret);
 }
 
 ConstEval::Result ConstEval::pack4x8unorm(const type::Type* ty,
@@ -3057,7 +2754,7 @@ ConstEval::Result ConstEval::pack4x8unorm(const type::Type* ty,
 
     uint32_t mask = 0x0000'00ff;
     u32 ret = u32((e0 & mask) | ((e1 & mask) << 8) | ((e2 & mask) << 16) | ((e3 & mask) << 24));
-    return CreateElement(builder, source, ty, ret);
+    return CreateScalar(builder, source, ty, ret);
 }
 
 ConstEval::Result ConstEval::radians(const type::Type* ty,
@@ -3079,7 +2776,7 @@ ConstEval::Result ConstEval::radians(const type::Type* ty,
                 AddNote("when calculating radians", source);
                 return utils::Failure;
             }
-            return CreateElement(builder, source, c0->Type(), result.Get());
+            return CreateScalar(builder, source, c0->Type(), result.Get());
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3106,7 +2803,7 @@ ConstEval::Result ConstEval::reflect(const type::Type* ty,
         // 2 * dot(e2, e1)
         auto mul2 = [&](auto v) -> ImplResult {
             using NumberT = decltype(v);
-            return CreateElement(builder, source, el_ty, NumberT{NumberT{2} * v});
+            return CreateScalar(builder, source, el_ty, NumberT{NumberT{2} * v});
         };
         auto dot_e2_e1_2 = Dispatch_fa_f32_f16(mul2, dot_e2_e1.Get());
         if (!dot_e2_e1_2) {
@@ -3158,7 +2855,7 @@ ConstEval::Result ConstEval::refract(const type::Type* ty,
         if (!r) {
             return utils::Failure;
         }
-        return CreateElement(builder, source, el_ty, r.Get());
+        return CreateScalar(builder, source, el_ty, r.Get());
     };
 
     auto compute_e2_scale = [&](auto e3, auto dot_e2_e1, auto k) -> ConstEval::Result {
@@ -3175,7 +2872,7 @@ ConstEval::Result ConstEval::refract(const type::Type* ty,
         if (!r) {
             return utils::Failure;
         }
-        return CreateElement(builder, source, el_ty, r.Get());
+        return CreateScalar(builder, source, el_ty, r.Get());
     };
 
     auto calculate = [&]() -> ConstEval::Result {
@@ -3247,7 +2944,7 @@ ConstEval::Result ConstEval::reverseBits(const type::Type* ty,
                 }
             }
 
-            return CreateElement(builder, source, c0->Type(), NumberT{r});
+            return CreateScalar(builder, source, c0->Type(), NumberT{r});
         };
         return Dispatch_iu32(create, c0);
     };
@@ -3283,7 +2980,7 @@ ConstEval::Result ConstEval::round(const type::Type* ty,
             } else {
                 result = NumberT(std::round(e.value));
             }
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3296,8 +2993,8 @@ ConstEval::Result ConstEval::saturate(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto e) {
             using NumberT = decltype(e);
-            return CreateElement(builder, source, c0->Type(),
-                                 NumberT(std::min(std::max(e, NumberT(0.0)), NumberT(1.0))));
+            return CreateScalar(builder, source, c0->Type(),
+                                NumberT(std::min(std::max(e, NumberT(0.0)), NumberT(1.0))));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3310,7 +3007,7 @@ ConstEval::Result ConstEval::select_bool(const type::Type* ty,
     auto cond = args[2]->As<bool>();
     auto transform = [&](const constant::Constant* c0, const constant::Constant* c1) {
         auto create = [&](auto f, auto t) -> ImplResult {
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), cond ? t : f);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), cond ? t : f);
         };
         return Dispatch_fia_fiu32_f16_bool(create, c0, c1);
     };
@@ -3325,7 +3022,7 @@ ConstEval::Result ConstEval::select_boolvec(const type::Type* ty,
         auto create = [&](auto f, auto t) -> ImplResult {
             // Get corresponding bool value at the current vector value index
             auto cond = args[2]->Index(index)->As<bool>();
-            return CreateElement(builder, source, type::Type::DeepestElementOf(ty), cond ? t : f);
+            return CreateScalar(builder, source, type::Type::DeepestElementOf(ty), cond ? t : f);
         };
         return Dispatch_fia_fiu32_f16_bool(create, c0, c1);
     };
@@ -3348,7 +3045,7 @@ ConstEval::Result ConstEval::sign(const type::Type* ty,
             } else {
                 result = zero;
             }
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_fia_fi32_f16(create, c0);
     };
@@ -3361,7 +3058,7 @@ ConstEval::Result ConstEval::sin(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::sin(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::sin(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3374,7 +3071,7 @@ ConstEval::Result ConstEval::sinh(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::sinh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::sinh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3425,7 +3122,7 @@ ConstEval::Result ConstEval::smoothstep(const type::Type* ty,
             if (!result) {
                 return err();
             }
-            return CreateElement(builder, source, c0->Type(), result.Get());
+            return CreateScalar(builder, source, c0->Type(), result.Get());
         };
         return Dispatch_fa_f32_f16(create, c0, c1, c2);
     };
@@ -3439,7 +3136,7 @@ ConstEval::Result ConstEval::step(const type::Type* ty,
         auto create = [&](auto edge, auto x) -> ImplResult {
             using NumberT = decltype(edge);
             NumberT result = x.value < edge.value ? NumberT(0.0) : NumberT(1.0);
-            return CreateElement(builder, source, c0->Type(), result);
+            return CreateScalar(builder, source, c0->Type(), result);
         };
         return Dispatch_fa_f32_f16(create, c0, c1);
     };
@@ -3462,7 +3159,7 @@ ConstEval::Result ConstEval::tan(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::tan(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::tan(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3475,7 +3172,7 @@ ConstEval::Result ConstEval::tanh(const type::Type* ty,
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) -> ImplResult {
             using NumberT = decltype(i);
-            return CreateElement(builder, source, c0->Type(), NumberT(std::tanh(i.value)));
+            return CreateScalar(builder, source, c0->Type(), NumberT(std::tanh(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3497,9 +3194,9 @@ ConstEval::Result ConstEval::transpose(const type::Type* ty,
         for (size_t c = 0; c < mat_ty->columns(); ++c) {
             new_col_vec.Push(me(r, c));
         }
-        result_mat.Push(CreateComposite(builder, result_mat_ty->ColumnType(), new_col_vec));
+        result_mat.Push(builder.createCompositeOrSplat(result_mat_ty->ColumnType(), new_col_vec));
     }
-    return CreateComposite(builder, ty, result_mat);
+    return builder.createCompositeOrSplat(ty, result_mat);
 }
 
 ConstEval::Result ConstEval::trunc(const type::Type* ty,
@@ -3507,7 +3204,7 @@ ConstEval::Result ConstEval::trunc(const type::Type* ty,
                                    const Source& source) {
     auto transform = [&](const constant::Constant* c0) {
         auto create = [&](auto i) {
-            return CreateElement(builder, source, c0->Type(), decltype(i)(std::trunc(i.value)));
+            return CreateScalar(builder, source, c0->Type(), decltype(i)(std::trunc(i.value)));
         };
         return Dispatch_fa_f32_f16(create, c0);
     };
@@ -3529,13 +3226,13 @@ ConstEval::Result ConstEval::unpack2x16float(const type::Type* ty,
             AddError(OverflowErrorMessage(in, "f32"), source);
             return utils::Failure;
         }
-        auto el = CreateElement(builder, source, inner_ty, val.Get());
+        auto el = CreateScalar(builder, source, inner_ty, val.Get());
         if (!el) {
             return el;
         }
         els.Push(el.Get());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::unpack2x16snorm(const type::Type* ty,
@@ -3549,13 +3246,13 @@ ConstEval::Result ConstEval::unpack2x16snorm(const type::Type* ty,
     for (size_t i = 0; i < 2; ++i) {
         auto val = f32(
             std::max(static_cast<float>(int16_t((e >> (16 * i)) & 0x0000'ffff)) / 32767.f, -1.f));
-        auto el = CreateElement(builder, source, inner_ty, val);
+        auto el = CreateScalar(builder, source, inner_ty, val);
         if (!el) {
             return el;
         }
         els.Push(el.Get());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::unpack2x16unorm(const type::Type* ty,
@@ -3568,13 +3265,13 @@ ConstEval::Result ConstEval::unpack2x16unorm(const type::Type* ty,
     els.Reserve(2);
     for (size_t i = 0; i < 2; ++i) {
         auto val = f32(static_cast<float>(uint16_t((e >> (16 * i)) & 0x0000'ffff)) / 65535.f);
-        auto el = CreateElement(builder, source, inner_ty, val);
+        auto el = CreateScalar(builder, source, inner_ty, val);
         if (!el) {
             return el;
         }
         els.Push(el.Get());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::unpack4x8snorm(const type::Type* ty,
@@ -3588,13 +3285,13 @@ ConstEval::Result ConstEval::unpack4x8snorm(const type::Type* ty,
     for (size_t i = 0; i < 4; ++i) {
         auto val =
             f32(std::max(static_cast<float>(int8_t((e >> (8 * i)) & 0x0000'00ff)) / 127.f, -1.f));
-        auto el = CreateElement(builder, source, inner_ty, val);
+        auto el = CreateScalar(builder, source, inner_ty, val);
         if (!el) {
             return el;
         }
         els.Push(el.Get());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::unpack4x8unorm(const type::Type* ty,
@@ -3607,13 +3304,13 @@ ConstEval::Result ConstEval::unpack4x8unorm(const type::Type* ty,
     els.Reserve(4);
     for (size_t i = 0; i < 4; ++i) {
         auto val = f32(static_cast<float>(uint8_t((e >> (8 * i)) & 0x0000'00ff)) / 255.f);
-        auto el = CreateElement(builder, source, inner_ty, val);
+        auto el = CreateScalar(builder, source, inner_ty, val);
         if (!el) {
             return el;
         }
         els.Push(el.Get());
     }
-    return CreateComposite(builder, ty, std::move(els));
+    return builder.createCompositeOrSplat(ty, std::move(els));
 }
 
 ConstEval::Result ConstEval::quantizeToF16(const type::Type* ty,
@@ -3626,7 +3323,7 @@ ConstEval::Result ConstEval::quantizeToF16(const type::Type* ty,
             AddError(OverflowErrorMessage(value, "f16"), source);
             return utils::Failure;
         }
-        return CreateElement(builder, source, c->Type(), conv.Get());
+        return CreateScalar(builder, source, c->Type(), conv.Get());
     };
     return TransformElements(builder, ty, transform, args[0]);
 }
@@ -3637,7 +3334,7 @@ ConstEval::Result ConstEval::Convert(const type::Type* target_ty,
     if (value->Type() == target_ty) {
         return value;
     }
-    return static_cast<const ImplConstant*>(value)->Convert(builder, target_ty, source);
+    return value->Convert(builder, target_ty, source);
 }
 
 void ConstEval::AddError(const std::string& msg, const Source& source) const {
