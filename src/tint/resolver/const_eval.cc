@@ -236,12 +236,12 @@ std::make_unsigned_t<T> CountTrailingBits(T e, T bit_value_to_count) {
 using ImplResult = utils::Result<const constant::Constant*>;
 
 // Forward declaration
-const Composite* CreateComposite(ProgramBuilder& builder,
-                                 const type::Type* type,
-                                 utils::VectorRef<const constant::Constant*> elements);
+const constant::Composite* CreateComposite(ProgramBuilder& builder,
+                                           const type::Type* type,
+                                           utils::VectorRef<const constant::Constant*> elements);
 
 template <typename T>
-ImplResult ScalarConvert(const Scalar<T>* scalar,
+ImplResult ScalarConvert(const constant::Scalar<T>* scalar,
                          ProgramBuilder& builder,
                          const type::Type* target_ty,
                          const Source& source) {
@@ -258,13 +258,13 @@ ImplResult ScalarConvert(const Scalar<T>* scalar,
         using FROM = T;
         if constexpr (std::is_same_v<TO, bool>) {
             // [x -> bool]
-            return builder.create<Scalar<TO>>(target_ty, !scalar->IsPositiveZero());
+            return builder.create<constant::Scalar<TO>>(target_ty, !scalar->IsPositiveZero());
         } else if constexpr (std::is_same_v<FROM, bool>) {
             // [bool -> x]
-            return builder.create<Scalar<TO>>(target_ty, TO(scalar->value ? 1 : 0));
+            return builder.create<constant::Scalar<TO>>(target_ty, TO(scalar->value ? 1 : 0));
         } else if (auto conv = CheckedConvert<TO>(scalar->value)) {
             // Conversion success
-            return builder.create<Scalar<TO>>(target_ty, conv.Get());
+            return builder.create<constant::Scalar<TO>>(target_ty, conv.Get());
             // --- Below this point are the failure cases ---
         } else if constexpr (IsAbstract<FROM>) {
             // [abstract-numeric -> x] - materialization failure
@@ -284,14 +284,14 @@ ImplResult ScalarConvert(const Scalar<T>* scalar,
             // https://www.w3.org/TR/WGSL/#floating-point-conversion
             switch (conv.Failure()) {
                 case ConversionFailure::kExceedsNegativeLimit:
-                    return builder.create<Scalar<TO>>(target_ty, TO::Lowest());
+                    return builder.create<constant::Scalar<TO>>(target_ty, TO::Lowest());
                 case ConversionFailure::kExceedsPositiveLimit:
-                    return builder.create<Scalar<TO>>(target_ty, TO::Highest());
+                    return builder.create<constant::Scalar<TO>>(target_ty, TO::Highest());
             }
         } else if constexpr (IsIntegral<FROM>) {
             // [integer -> integer] - number not exactly representable
             // Static cast
-            return builder.create<Scalar<TO>>(target_ty, static_cast<TO>(scalar->value));
+            return builder.create<constant::Scalar<TO>>(target_ty, static_cast<TO>(scalar->value));
         }
         return nullptr;  // Expression is not constant.
     });
@@ -304,7 +304,7 @@ ImplResult ConvertInternal(const constant::Constant* c,
                            const type::Type* target_ty,
                            const Source& source);
 
-ImplResult SplatConvert(const Splat* splat,
+ImplResult SplatConvert(const constant::Splat* splat,
                         ProgramBuilder& builder,
                         const type::Type* target_ty,
                         const Source& source) {
@@ -317,10 +317,10 @@ ImplResult SplatConvert(const Splat* splat,
     if (!conv_el.Get()) {
         return nullptr;
     }
-    return builder.create<Splat>(target_ty, conv_el.Get(), splat->count);
+    return builder.create<constant::Splat>(target_ty, conv_el.Get(), splat->count);
 }
 
-ImplResult CompositeConvert(const Composite* composite,
+ImplResult CompositeConvert(const constant::Composite* composite,
                             ProgramBuilder& builder,
                             const type::Type* target_ty,
                             const Source& source) {
@@ -360,30 +360,34 @@ ImplResult ConvertInternal(const constant::Constant* c,
                            const Source& source) {
     return Switch(
         c,
-        [&](const Scalar<tint::AFloat>* val) {
+        [&](const constant::Scalar<tint::AFloat>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<tint::AInt>* val) {
+        [&](const constant::Scalar<tint::AInt>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<tint::u32>* val) {
+        [&](const constant::Scalar<tint::u32>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<tint::i32>* val) {
+        [&](const constant::Scalar<tint::i32>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<tint::f32>* val) {
+        [&](const constant::Scalar<tint::f32>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<tint::f16>* val) {
+        [&](const constant::Scalar<tint::f16>* val) {
             return ScalarConvert(val, builder, target_ty, source);
         },
-        [&](const Scalar<bool>* val) { return ScalarConvert(val, builder, target_ty, source); },
-        [&](const Splat* val) { return SplatConvert(val, builder, target_ty, source); },
-        [&](const Composite* val) { return CompositeConvert(val, builder, target_ty, source); });
+        [&](const constant::Scalar<bool>* val) {
+            return ScalarConvert(val, builder, target_ty, source);
+        },
+        [&](const constant::Splat* val) { return SplatConvert(val, builder, target_ty, source); },
+        [&](const constant::Composite* val) {
+            return CompositeConvert(val, builder, target_ty, source);
+        });
 }
 
-/// CreateScalar constructs and returns an Scalar<T>.
+/// CreateScalar constructs and returns an constant::Scalar<T>.
 template <typename T>
 ImplResult CreateScalar(ProgramBuilder& builder, const Source& source, const type::Type* t, T v) {
     static_assert(IsNumber<T> || std::is_same_v<T, bool>, "T must be a Number or bool");
@@ -396,7 +400,7 @@ ImplResult CreateScalar(ProgramBuilder& builder, const Source& source, const typ
             return utils::Failure;
         }
     }
-    return builder.create<Scalar<T>>(t, v);
+    return builder.create<constant::Scalar<T>>(t, v);
 }
 
 /// ZeroValue returns a Constant for the zero-value of the type `type`.
@@ -405,16 +409,16 @@ const constant::Constant* ZeroValue(ProgramBuilder& builder, const type::Type* t
         type,  //
         [&](const type::Vector* v) -> const constant::Constant* {
             auto* zero_el = ZeroValue(builder, v->type());
-            return builder.create<Splat>(type, zero_el, v->Width());
+            return builder.create<constant::Splat>(type, zero_el, v->Width());
         },
         [&](const type::Matrix* m) -> const constant::Constant* {
             auto* zero_el = ZeroValue(builder, m->ColumnType());
-            return builder.create<Splat>(type, zero_el, m->columns());
+            return builder.create<constant::Splat>(type, zero_el, m->columns());
         },
         [&](const type::Array* a) -> const constant::Constant* {
             if (auto n = a->ConstantCount()) {
                 if (auto* zero_el = ZeroValue(builder, a->ElemType())) {
-                    return builder.create<Splat>(type, zero_el, n.value());
+                    return builder.create<constant::Splat>(type, zero_el, n.value());
                 }
             }
             return nullptr;
@@ -433,7 +437,7 @@ const constant::Constant* ZeroValue(ProgramBuilder& builder, const type::Type* t
             }
             if (zero_by_type.Count() == 1) {
                 // All members were of the same type, so the zero value is the same for all members.
-                return builder.create<Splat>(type, zeros[0], s->Members().Length());
+                return builder.create<constant::Splat>(type, zeros[0], s->Members().Length());
             }
             return CreateComposite(builder, s, std::move(zeros));
         },
@@ -503,11 +507,11 @@ bool Equal(const constant::Constant* a, const constant::Constant* b) {
 }
 
 /// CreateComposite is used to construct a constant of a vector, matrix or array type.
-/// CreateComposite examines the element values and will return either a Composite or a Splat,
-/// depending on the element types and values.
-const Composite* CreateComposite(ProgramBuilder& builder,
-                                 const type::Type* type,
-                                 utils::VectorRef<const constant::Constant*> elements) {
+/// CreateComposite examines the element values and will return either a constant::Composite or a
+/// Splat, depending on the element types and values.
+const constant::Composite* CreateComposite(ProgramBuilder& builder,
+                                           const type::Type* type,
+                                           utils::VectorRef<const constant::Constant*> elements) {
     if (elements.IsEmpty()) {
         return nullptr;
     }
@@ -532,9 +536,9 @@ const Composite* CreateComposite(ProgramBuilder& builder,
         }
     }
     if (all_equal) {
-        return builder.create<Splat>(type, elements[0], elements.Length());
+        return builder.create<constant::Splat>(type, elements[0], elements.Length());
     } else {
-        return builder.create<Composite>(type, std::move(elements), all_zero, any_zero);
+        return builder.create<constant::Composite>(type, std::move(elements), all_zero, any_zero);
     }
 }
 
@@ -1299,7 +1303,8 @@ ConstEval::Result ConstEval::VecSplat(const type::Type* ty,
                                       utils::VectorRef<const constant::Constant*> args,
                                       const Source&) {
     if (auto* arg = args[0]) {
-        return builder.create<Splat>(ty, arg, static_cast<const type::Vector*>(ty)->Width());
+        return builder.create<constant::Splat>(ty, arg,
+                                               static_cast<const type::Vector*>(ty)->Width());
     }
     return nullptr;
 }
