@@ -71,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a232bb_f5d04d4d",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-13T14:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8eb7f91a_137a93bc",
+      "range": {
+        "startLine": 594,
+        "startChar": 57,
+        "endLine": 594,
+        "endChar": 58
+      },
+      "revId": "4ddcde6674f29e9321a9e9188b1a271d6b6968d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69cb89d3_5aed0a2d",
@@ -94,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "318bad57_1fe24f8b",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-13T14:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69cb89d3_5aed0a2d",
+      "range": {
+        "startLine": 595,
+        "startChar": 4,
+        "endLine": 595,
+        "endChar": 15
+      },
+      "revId": "4ddcde6674f29e9321a9e9188b1a271d6b6968d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efcaafe2_4abe7794",
@@ -107,6 +155,30 @@
       "writtenOn": "2022-12-13T10:15:01Z",
       "side": 1,
       "message": "Check `result` has a value?",
+      "range": {
+        "startLine": 408,
+        "startChar": 11,
+        "endLine": 408,
+        "endChar": 12
+      },
+      "revId": "4ddcde6674f29e9321a9e9188b1a271d6b6968d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48fa08fc_91353e17",
+        "filename": "src/tint/number_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-13T14:59:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efcaafe2_4abe7794",
       "range": {
         "startLine": 408,
         "startChar": 11,
