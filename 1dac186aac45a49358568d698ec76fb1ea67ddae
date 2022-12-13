@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0060aae_0bac0c8a",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-13T18:17:29Z",
+      "side": 1,
+      "message": "µNit: I think you meant to say either \"The metal driver\" or simply \"Metal\" here.",
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e381d75f_e5a63bf8",
         "filename": "src/dawn/native/metal/UtilsMetal.mm",
         "patchSetId": 2

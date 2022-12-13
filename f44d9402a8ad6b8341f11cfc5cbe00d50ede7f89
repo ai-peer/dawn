@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca05229_32551f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-13T18:17:29Z",
+      "side": 1,
+      "message": "LGTM, and the build issue should be resolved now.",
+      "revId": "f44d9402a8ad6b8341f11cfc5cbe00d50ede7f89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
