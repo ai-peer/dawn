@@ -16,6 +16,52 @@
       "message": "PTAL.",
       "revId": "a73d8b45dd5eb57f0c9c496d18f426e01c07be72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d9137da_3c2a5d3d",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T21:00:23Z",
+      "side": 1,
+      "message": "Please use `PascalCase`",
+      "range": {
+        "startLine": 358,
+        "startChar": 11,
+        "endLine": 358,
+        "endChar": 25
+      },
+      "revId": "a73d8b45dd5eb57f0c9c496d18f426e01c07be72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be5f65de_44f68382",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T21:00:23Z",
+      "side": 1,
+      "message": "Instead of forward declaring the three convert functions above, you could forward declare this, and move the impl below the others.",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 374,
+        "endChar": 51
+      },
+      "revId": "a73d8b45dd5eb57f0c9c496d18f426e01c07be72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
