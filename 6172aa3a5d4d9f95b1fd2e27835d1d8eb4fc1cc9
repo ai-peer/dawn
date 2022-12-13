@@ -39,6 +39,30 @@
       },
       "revId": "6172aa3a5d4d9f95b1fd2e27835d1d8eb4fc1cc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c39c8c09_71b22bb6",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-13T00:51:44Z",
+      "side": 1,
+      "message": "Done. Please verify.",
+      "parentUuid": "b317c1c1_b8905ea7",
+      "range": {
+        "startLine": 265,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 59
+      },
+      "revId": "6172aa3a5d4d9f95b1fd2e27835d1d8eb4fc1cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
