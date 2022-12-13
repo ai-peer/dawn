@@ -39,6 +39,30 @@
       },
       "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1010b73_190f7906",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-13T21:20:16Z",
+      "side": 1,
+      "message": "I want to move CreateComposite out of here and into ProgramBuilder. CreateComposite returns either a splat or a composite depending on what the contents of the things passed in are.\n\nWithout having this inheritance, when I tried to change CreateComposite things got sad.\n\nIn terms of memory efficiency, why do we create a Composite with a size of 8, our general case would max out of 4 would it not?",
+      "parentUuid": "55710158_952e4d44",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
