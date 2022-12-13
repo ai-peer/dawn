@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6a44a6_2539b180",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T20:16:26Z",
+      "side": 1,
+      "message": "Would have been more interesting if there were a non-zero integer part to this.",
+      "range": {
+        "startLine": 497,
+        "startChar": 43,
+        "endLine": 497,
+        "endChar": 47
+      },
+      "revId": "3422ea14d09c82b187813d6b8764c8162f4e101d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
