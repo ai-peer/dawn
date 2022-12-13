@@ -16,6 +16,69 @@
       "message": "Okay, so the limit is that `destinationBytesPerRow` needs to \u003c\u003d the maximum texture size bytes per row. On all metal the max texture dimensions are 2048 for 3D textures and 16834 for non-3D textures execpt Apple2 (iPhone6) where the non-3D limit is 8192. I\u0027m assuming we\u0027re not supporting Apple2 GPUs.",
       "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d34a9bd1_78605759",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:05:56Z",
+      "side": 1,
+      "message": "LGTM\n\nthe bot you want to run is \"mac-dawn-rel\". I\u0027ve added it.\n\nIn general, the bots you would normally run on Chromium CQ don\u0027t do what you want here since they run the pinned version of Dawn from DEPS, not your CL.",
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e381d75f_e5a63bf8",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:05:56Z",
+      "side": 1,
+      "message": "typo: maximum",
+      "range": {
+        "startLine": 221,
+        "startChar": 14,
+        "endLine": 221,
+        "endChar": 21
+      },
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a03f7d17_7caf44db",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:05:56Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 221,
+        "startChar": 41,
+        "endLine": 221,
+        "endChar": 44
+      },
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
