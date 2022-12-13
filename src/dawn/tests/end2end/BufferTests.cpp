@@ -423,12 +423,13 @@ TEST_P(BufferMappingTests, OffsetNotUpdatedOnError) {
 
     // Call MapAsync another time, it is an error because the buffer is already being mapped so
     // mMapOffset is not updated.
-    ASSERT_DEVICE_ERROR(buffer.MapAsync(
+    buffer.MapAsync(
         wgpu::MapMode::Read, 0, 4,
         [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            ASSERT_EQ(WGPUBufferMapAsyncStatus_Error, status);
             *static_cast<bool*>(userdata) = true;
         },
-        &done2));
+        &done2);
 
     while (!done1 || !done2) {
         WaitABit();
