@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6945c3fc_da88a777",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T08:35:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0252c08060cff44e8547402eaeb9fef24b7c5255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2be53c34_bfa9e453",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 830,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T08:35:34Z",
+      "side": 1,
+      "message": "This seems unrelated but fine?",
+      "revId": "0252c08060cff44e8547402eaeb9fef24b7c5255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
