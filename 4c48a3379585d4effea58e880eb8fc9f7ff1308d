@@ -33,6 +33,29 @@
       "message": "Format this to make it more readable.",
       "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3a48162_397f4061",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T10:24:55Z",
+      "side": 1,
+      "message": "Its not clear to me why this needs to be any more complex than `vec3(coord, 1) * params.coordTransformationMatrix`.\nWhy do we need the `abs()` ?",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 166
+      },
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
