@@ -87,7 +87,9 @@
 #include "src/tint/ast/void.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
+#include "src/tint/constant/composite.h"
 #include "src/tint/constant/constant.h"
+#include "src/tint/constant/splat.h"
 #include "src/tint/number.h"
 #include "src/tint/program.h"
 #include "src/tint/program_id.h"
@@ -470,9 +472,52 @@ class ProgramBuilder {
     /// @param args the arguments to pass to the constructor
     /// @returns the node pointer
     template <typename T, typename... ARGS>
-    traits::EnableIf<traits::IsTypeOrDerived<T, constant::Constant>, T>* create(ARGS&&... args) {
+    traits::EnableIf<traits::IsTypeOrDerived<T, constant::Constant> &&
+                         !traits::IsTypeOrDerived<T, constant::Composite>,
+                     T>*
+    create(ARGS&&... args) {
         AssertNotMoved();
         return constant_nodes_.Create<T>(std::forward<ARGS>(args)...);
+    }
+
+    /// Constructs a constant of a vector, matrix or array type.
+    ///
+    /// Examines the element values and will return either a constant::Composite or a
+    /// constant::Splat, depending on the element types and values.
+    /// @returns the node pointer
+    template <typename T>
+    traits::EnableIf<traits::IsTypeOrDerived<T, constant::Composite>, T>* create(
+        const type::Type* type,
+        utils::VectorRef<const constant::Constant*> elements) {
+        AssertNotMoved();
+        if (elements.IsEmpty()) {
+            return nullptr;
+        }
+        bool any_zero = false;
+        bool all_zero = true;
+        bool all_equal = true;
+        auto* first = elements.Front();
+        for (auto* el : elements) {
+            if (!el) {
+                return nullptr;
+            }
+            if (!any_zero && el->AnyZero()) {
+                any_zero = true;
+            }
+            if (all_zero && !el->AllZero()) {
+                all_zero = false;
+            }
+            if (all_equal && el != first) {
+                if (!Equal(el, first)) {
+                    all_equal = false;
+                }
+            }
+        }
+        if (all_equal) {
+            return constant_nodes_.Create<constant::Splat>(type, elements[0], elements.Length());
+        }
+        return constant_nodes_.Create<constant::Composite>(type, std::move(elements), all_zero,
+                                                           any_zero);
     }
 
     /// Creates a new type::Type owned by the ProgramBuilder.
@@ -3299,6 +3344,62 @@ class ProgramBuilder {
     void AssertNotMoved() const;
 
   private:
+    /// Equal returns true if the constants `a` and `b` are of the same type and value.
+    bool Equal(const constant::Constant* a, const constant::Constant* b) {
+        if (a->Hash() != b->Hash()) {
+            return false;
+        }
+        if (a->Type() != b->Type()) {
+            return false;
+        }
+        return Switch(
+            a->Type(),  //
+            [&](const type::Vector* vec) {
+                for (size_t i = 0; i < vec->Width(); i++) {
+                    if (!Equal(a->Index(i), b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](const type::Matrix* mat) {
+                for (size_t i = 0; i < mat->columns(); i++) {
+                    if (!Equal(a->Index(i), b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](const type::Array* arr) {
+                if (auto count = arr->ConstantCount()) {
+                    for (size_t i = 0; i < count; i++) {
+                        if (!Equal(a->Index(i), b->Index(i))) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+                return false;
+            },
+            [&](const type::Struct* str) {
+                auto count = str->Members().Length();
+                for (size_t i = 0; i < count; i++) {
+                    if (!Equal(a->Index(i), b->Index(i))) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            [&](Default) {
+                auto va = a->Value();
+                auto vb = b->Value();
+                TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(va));
+                TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(vb));
+                return va == vb;
+            });
+    }
+
     ProgramID id_;
     ast::NodeID last_ast_node_id_ = ast::NodeID{static_cast<decltype(ast::NodeID::value)>(0) - 1};
     type::Manager types_;
