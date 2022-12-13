@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1914664_2bb789e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:55:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4edce9999fb42a95ba60a18276aa3a1c70a1a1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b46577_be017b1e",
+        "filename": "src/dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:55:38Z",
+      "side": 1,
+      "message": "isn\u0027t this always the same? maybe it doesn\u0027t need to be passed at all",
+      "range": {
+        "startLine": 489,
+        "startChar": 56,
+        "endLine": 489,
+        "endChar": 73
+      },
+      "revId": "4edce9999fb42a95ba60a18276aa3a1c70a1a1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd9fdae6_f61e402a",
+        "filename": "src/dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:55:38Z",
+      "side": 1,
+      "message": "maybe we don\u0027t need this base constructor and can instead do the memcpy manually for each of the other ones\nwould be nice because you can static_assert that the source is large enough for the memcpy. Right now this looks like it could overflow if expSize \u003c sizeof(mExpData)",
+      "range": {
+        "startLine": 490,
+        "startChar": 38,
+        "endLine": 490,
+        "endChar": 54
+      },
+      "revId": "4edce9999fb42a95ba60a18276aa3a1c70a1a1ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
