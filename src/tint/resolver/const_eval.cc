@@ -232,11 +232,6 @@ std::make_unsigned_t<T> CountTrailingBits(T e, T bit_value_to_count) {
     return count;
 }
 
-// Forward declaration
-const constant::Composite* CreateComposite(ProgramBuilder& builder,
-                                           const type::Type* type,
-                                           utils::VectorRef<const constant::Constant*> elements);
-
 template <typename T>
 ConstEval::Result ScalarConvert(const constant::Scalar<T>* scalar,
                                 ProgramBuilder& builder,
@@ -448,98 +443,6 @@ const constant::Constant* ZeroValue(ProgramBuilder& builder, const type::Type* t
                 return el.Get();
             });
         });
-}
-
-/// Equal returns true if the constants `a` and `b` are of the same type and value.
-bool Equal(const constant::Constant* a, const constant::Constant* b) {
-    if (a->Hash() != b->Hash()) {
-        return false;
-    }
-    if (a->Type() != b->Type()) {
-        return false;
-    }
-    return Switch(
-        a->Type(),  //
-        [&](const type::Vector* vec) {
-            for (size_t i = 0; i < vec->Width(); i++) {
-                if (!Equal(a->Index(i), b->Index(i))) {
-                    return false;
-                }
-            }
-            return true;
-        },
-        [&](const type::Matrix* mat) {
-            for (size_t i = 0; i < mat->columns(); i++) {
-                if (!Equal(a->Index(i), b->Index(i))) {
-                    return false;
-                }
-            }
-            return true;
-        },
-        [&](const type::Array* arr) {
-            if (auto count = arr->ConstantCount()) {
-                for (size_t i = 0; i < count; i++) {
-                    if (!Equal(a->Index(i), b->Index(i))) {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            return false;
-        },
-        [&](const type::Struct* str) {
-            auto count = str->Members().Length();
-            for (size_t i = 0; i < count; i++) {
-                if (!Equal(a->Index(i), b->Index(i))) {
-                    return false;
-                }
-            }
-            return true;
-        },
-        [&](Default) {
-            auto va = a->Value();
-            auto vb = b->Value();
-            TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(va));
-            TINT_ASSERT(Resolver, !std::holds_alternative<std::monostate>(vb));
-            return va == vb;
-        });
-}
-
-/// CreateComposite is used to construct a constant of a vector, matrix or array type.
-/// CreateComposite examines the element values and will return either a constant::Composite or a
-/// Splat, depending on the element types and values.
-const constant::Composite* CreateComposite(ProgramBuilder& builder,
-                                           const type::Type* type,
-                                           utils::VectorRef<const constant::Constant*> elements) {
-    if (elements.IsEmpty()) {
-        return nullptr;
-    }
-    bool any_zero = false;
-    bool all_zero = true;
-    bool all_equal = true;
-    auto* first = elements.Front();
-    for (auto* el : elements) {
-        if (!el) {
-            return nullptr;
-        }
-        if (!any_zero && el->AnyZero()) {
-            any_zero = true;
-        }
-        if (all_zero && !el->AllZero()) {
-            all_zero = false;
-        }
-        if (all_equal && el != first) {
-            if (!Equal(el, first)) {
-                all_equal = false;
-            }
-        }
-    }
-    if (all_equal) {
-        return builder.create<constant::Splat>(type, elements[0], elements.Length());
-    } else {
-        return builder.create<constant::Composite>(type, std::move(elements), all_zero, any_zero);
-    }
 }
 
 namespace detail {
