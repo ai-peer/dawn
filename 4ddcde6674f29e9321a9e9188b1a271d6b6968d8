@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "685aa38a_3b5c2077",
+        "filename": "src/tint/number.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-13T01:35:49Z",
+      "side": 1,
+      "message": "I moved this up and scoped all the Checked* functions that return std::optional because gcc-10 Release started borking on more than one of these after I added `CheckedPow` in this change.",
+      "range": {
+        "startLine": 415,
+        "startChar": 0,
+        "endLine": 416,
+        "endChar": 48
+      },
+      "revId": "4ddcde6674f29e9321a9e9188b1a271d6b6968d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
