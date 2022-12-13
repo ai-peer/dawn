@@ -34,6 +34,24 @@
       "parentUuid": "0dc5c7f6_dedbbfcd",
       "revId": "100d4bf3396826c5de50d0aedeb29641c23a7cc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffd1a3b2_2774bf48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-12-13T05:26:09Z",
+      "side": 1,
+      "message": "That\u0027s the case! Thanks Ben.",
+      "parentUuid": "7c540c9f_12f4829c",
+      "revId": "100d4bf3396826c5de50d0aedeb29641c23a7cc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
