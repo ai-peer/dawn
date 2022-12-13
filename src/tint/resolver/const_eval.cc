@@ -259,9 +259,10 @@ class ImplConstant : public Castable<ImplConstant, constant::Constant> {
 using ImplResult = utils::Result<const ImplConstant*>;
 
 // Forward declaration
-const ImplConstant* CreateComposite(ProgramBuilder& builder,
-                                    const type::Type* type,
-                                    utils::VectorRef<const constant::Constant*> elements);
+class Composite;
+const Composite* CreateComposite(ProgramBuilder& builder,
+                                 const type::Type* type,
+                                 utils::VectorRef<const constant::Constant*> elements);
 
 /// Scalar holds a single scalar or abstract-numeric value.
 /// Scalar implements the Constant interface.
@@ -277,7 +278,9 @@ class Scalar : public Castable<Scalar<T>, ImplConstant> {
         }
     }
     ~Scalar() override = default;
+
     const type::Type* Type() const override { return type; }
+
     std::variant<std::monostate, AInt, AFloat> Value() const override {
         if constexpr (IsFloatingPoint<UnwrapNumber<T>>) {
             return static_cast<AFloat>(value);
@@ -286,6 +289,7 @@ class Scalar : public Castable<Scalar<T>, ImplConstant> {
         }
     }
     const constant::Constant* Index(size_t) const override { return nullptr; }
+
     bool AllZero() const override { return IsPositiveZero(value); }
     bool AnyZero() const override { return IsPositiveZero(value); }
     bool AllEqual() const override { return true; }
@@ -293,27 +297,6 @@ class Scalar : public Castable<Scalar<T>, ImplConstant> {
 
     type::Type const* const type;
     const T value;
-};
-
-/// Splat holds a single Constant value, duplicated as all children.
-/// Splat is used for zero-initializers, 'splat' initializers, or initializers where each element is
-/// identical. Splat may be of a vector, matrix or array type.
-/// Splat implements the Constant interface.
-class Splat : public Castable<Splat, ImplConstant> {
-  public:
-    Splat(const type::Type* t, const constant::Constant* e, size_t n) : type(t), el(e), count(n) {}
-    ~Splat() override = default;
-    const type::Type* Type() const override { return type; }
-    std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
-    const constant::Constant* Index(size_t i) const override { return i < count ? el : nullptr; }
-    bool AllZero() const override { return el->AllZero(); }
-    bool AnyZero() const override { return el->AnyZero(); }
-    bool AllEqual() const override { return true; }
-    size_t Hash() const override { return utils::Hash(type, el->Hash(), count); }
-
-    type::Type const* const type;
-    const constant::Constant* el;
-    const size_t count;
 };
 
 /// Composite holds a number of mixed child Constant values.
@@ -329,14 +312,17 @@ class Composite : public Castable<Composite, ImplConstant> {
               bool any_0)
         : type(t), elements(std::move(els)), all_zero(all_0), any_zero(any_0), hash(CalcHash()) {}
     ~Composite() override = default;
+
     const type::Type* Type() const override { return type; }
+
     std::variant<std::monostate, AInt, AFloat> Value() const override { return {}; }
     const constant::Constant* Index(size_t i) const override {
         return i < elements.Length() ? elements[i] : nullptr;
     }
+
     bool AllZero() const override { return all_zero; }
     bool AnyZero() const override { return any_zero; }
-    bool AllEqual() const override { return false; /* otherwise this should be a Splat */ }
+    bool AllEqual() const override { return false; }
     size_t Hash() const override { return hash; }
 
     size_t CalcHash() {
@@ -352,6 +338,24 @@ class Composite : public Castable<Composite, ImplConstant> {
     const bool all_zero;
     const bool any_zero;
     const size_t hash;
+};
+
+/// Splat holds a single Constant value, duplicated as all children.
+/// Splat is used for zero-initializers, 'splat' initializers, or initializers where each element is
+/// identical. Splat may be of a vector, matrix or array type.
+/// Splat implements the Constant interface.
+class Splat : public Castable<Splat, Composite> {
+  public:
+    Splat(const type::Type* t, const constant::Constant* e, size_t n)
+        : Base(t, utils::Vector{e}, e->AllZero(), e->AnyZero()), count(n) {}
+    ~Splat() override = default;
+
+    const constant::Constant* Index(size_t i) const override {
+        return i < count ? elements[0] : nullptr;
+    }
+    bool AllEqual() const override { return true; }
+
+    const size_t count;
 };
 
 template <typename T>
@@ -460,7 +464,8 @@ ImplResult splat_convert(const Splat* splat,
                          const type::Type* target_ty,
                          const Source& source) {
     // Convert the single splatted element type.
-    auto conv_el = convert_internal(splat->el, builder, type::Type::ElementOf(target_ty), source);
+    auto conv_el =
+        convert_internal(splat->Index(0), builder, type::Type::ElementOf(target_ty), source);
     if (!conv_el) {
         return utils::Failure;
     }
@@ -515,8 +520,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::resolver::Scalar<tint::u32>);
 TINT_INSTANTIATE_TYPEINFO(tint::resolver::Scalar<tint::f16>);
 TINT_INSTANTIATE_TYPEINFO(tint::resolver::Scalar<tint::f32>);
 TINT_INSTANTIATE_TYPEINFO(tint::resolver::Scalar<bool>);
-TINT_INSTANTIATE_TYPEINFO(tint::resolver::Splat);
 TINT_INSTANTIATE_TYPEINFO(tint::resolver::Composite);
+TINT_INSTANTIATE_TYPEINFO(tint::resolver::Splat);
 
 namespace tint::resolver {
 namespace {
@@ -643,9 +648,9 @@ bool Equal(const constant::Constant* a, const constant::Constant* b) {
 /// CreateComposite is used to construct a constant of a vector, matrix or array type.
 /// CreateComposite examines the element values and will return either a Composite or a Splat,
 /// depending on the element types and values.
-const ImplConstant* CreateComposite(ProgramBuilder& builder,
-                                    const type::Type* type,
-                                    utils::VectorRef<const constant::Constant*> elements) {
+const Composite* CreateComposite(ProgramBuilder& builder,
+                                 const type::Type* type,
+                                 utils::VectorRef<const constant::Constant*> elements) {
     if (elements.IsEmpty()) {
         return nullptr;
     }
