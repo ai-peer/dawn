@@ -84,6 +84,24 @@
       "message": "TBH I stopped reading the file at this point. Do you need a detailed review of it?",
       "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8c233e_5ae77f73",
+        "filename": "tools/src/cov/view-coverage.html",
+        "patchSetId": 4
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T13:24:59Z",
+      "side": 1,
+      "message": "This file was actually moved",
+      "parentUuid": "6a7d03cb_9f9949b0",
+      "revId": "b13c1bdd07bd64dbe81663a3bd7cc3cd4b0e0e7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
