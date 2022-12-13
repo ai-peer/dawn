@@ -22,6 +22,30 @@
       },
       "revId": "9e902c17d4b4348bb16a388f57dda5c43956bf6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138d3f6b_8f4a698a",
+        "filename": "tools/src/cov/optimization.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T14:54:21Z",
+      "side": 1,
+      "message": "Thanks 😊",
+      "parentUuid": "c8a27a05_07fd7644",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 29
+      },
+      "revId": "9e902c17d4b4348bb16a388f57dda5c43956bf6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
