@@ -380,7 +380,11 @@ class Adapter : public AdapterBase {
             mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
         }
 
-        mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+        if (!gpu_info::IsIntelGen7(mVendorId, mDeviceId) &&
+            !gpu_info::IsIntelGen8(mVendorId, mDeviceId) &&
+            !gpu_info::IsIntelGen9(mVendorId, mDeviceId)) {
+            mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
+        }
         mSupportedFeatures.EnableFeature(Feature::ShaderF16);
         mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
 
