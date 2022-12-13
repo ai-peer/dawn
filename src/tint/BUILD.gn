@@ -366,7 +366,10 @@ libtint_source_set("libtint_core_all_src") {
     "castable.h",
     "clone_context.cc",
     "clone_context.h",
+    "constant/composite.h",
     "constant/constant.h",
+    "constant/scalar.h",
+    "constant/splat.h",
     "debug.cc",
     "debug.h",
     "demangler.cc",
@@ -758,8 +761,14 @@ libtint_source_set("libtint_type_src") {
 
 libtint_source_set("libtint_constant_src") {
   sources = [
+    "constant/composite.cc",
+    "constant/composite.h",
     "constant/constant.cc",
     "constant/constant.h",
+    "constant/scalar.cc",
+    "constant/scalar.h",
+    "constant/splat.cc",
+    "constant/splat.h",
   ]
   public_deps = [ ":libtint_core_all_src" ]
 }
