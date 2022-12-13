@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24d99481_f0178cf2",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-13T22:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2aae425_83e52112",
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1031f58_4d86fbf4",
@@ -31,6 +49,24 @@
       "writtenOn": "2022-12-13T00:51:44Z",
       "side": 1,
       "message": "Format this to make it more readable.",
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a2589ea_abc9cfcc",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-13T22:30:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1031f58_4d86fbf4",
       "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -144,6 +180,30 @@
       "side": 1,
       "message": "I don\u0027t feel that a bit of maths in Dawn is a good justification for emitting inefficient *per-fragment* sampling code.\n\nI don\u0027t mind if we want to land this as-is and follow up with optimizations.",
       "parentUuid": "f3d04242_7445f789",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 166
+      },
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d76203b_ad809e78",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-13T22:30:18Z",
+      "side": 1,
+      "message": "Corentin is correct - the abs is from needing to multiply the \"+0.5\" by the scaling factor, however since the way we stored the scale factor meant it could be negative - we needed the abs.\n\nIt doesn\u0027t really matter though, because I realized the secondary matrix multiplication could just be pre-calculated and moved into offset during the matrix creation. This brings us down to a single matrix multiply.",
+      "parentUuid": "8ecfd999_a6a704dc",
       "range": {
         "startLine": 271,
         "startChar": 23,
