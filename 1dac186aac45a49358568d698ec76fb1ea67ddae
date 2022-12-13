@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "642cd9d0_37a60a31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-13T18:06:41Z",
+      "side": 1,
+      "message": "and... the build it broken. It\u0027s getting fixed in https://dawn-review.googlesource.com/c/dawn/+/114020",
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e381d75f_e5a63bf8",
