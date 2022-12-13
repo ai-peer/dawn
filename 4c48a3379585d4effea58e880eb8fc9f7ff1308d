@@ -56,6 +56,30 @@
       },
       "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7063ce_97d49dad",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-13T10:54:31Z",
+      "side": 1,
+      "message": "I think it is because if you do ScaleOffsetMatrix * RotationMatrix * texcoord, then you are rotating around (0, 0) which isn\u0027t the center of the texcoord space. Ideally we\u0027d want to have a matrix that does in this order:\n\n 1. Map coords to [-1, 1]^2\n 2. Does the rotation and flipY around the origin.\n 3. Remaps [-1, 1]^2 to the visible rect.\n\n1+2+3 is annoying to compute without a full matrix library, so we could do 1 in the shader. Then:\n\n```\nStep2Transform step2; // a 2x2 matrix\nswitch (rotation) {\n  case rotate0:\n     step2 \u003d {1, 0, 0, 1};\n     ...\n}\n\nif (flipY) {\n  step2[1][0] \u003d -step2[1][0];\n  step2[1][1] \u003d -step2[1][1];\n}\n\n// Compute scaleXY and offsetXY to go from [-1, 1] to the vislbe rect.\ncoordTransformMatrix \u003d {\n  {step2[0][0] * scaleX, step2[1][0] * scaleY, offsetX},\n  {step2[0][1] * scaleX, step2[1][1] * scaleY, offsetY},\n}\n\n\nAnd in the shader:\n\ncenteredCoords \u003d coords * 2.0 - vec2(1.0);\nmodifiedCoords \u003d params.coordTrandormationMatrix * centeredCoords;\n```",
+      "parentUuid": "c3a48162_397f4061",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 166
+      },
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
