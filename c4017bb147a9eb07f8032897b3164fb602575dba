@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55710158_952e4d44",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T21:03:08Z",
+      "side": 1,
+      "message": "Having `Splat` derive from `Composite` is not very memory efficient, and the whole point of `Splat` is to be memory efficient.\n\nWhat are the real gains to doing this?",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
