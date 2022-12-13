@@ -128,6 +128,30 @@
       },
       "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ecfd999_a6a704dc",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-13T13:35:34Z",
+      "side": 1,
+      "message": "I don\u0027t feel that a bit of maths in Dawn is a good justification for emitting inefficient *per-fragment* sampling code.\n\nI don\u0027t mind if we want to land this as-is and follow up with optimizations.",
+      "parentUuid": "f3d04242_7445f789",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 166
+      },
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
