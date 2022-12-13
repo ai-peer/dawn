@@ -35,6 +35,12 @@ class MockConstant : public constant::Constant {
     bool AllEqual() const override { return {}; }
     size_t Hash() const override { return 0; }
 
+    utils::Result<const Constant*> Convert(ProgramBuilder&,
+                                           const type::Type*,
+                                           const Source&) const override {
+        return utils::Failure;
+    }
+
   private:
     const type::Type* type;
 };
