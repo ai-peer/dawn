@@ -111,6 +111,30 @@
       },
       "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34ff6e7_a6b16d53",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-13T21:59:10Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/114202 is what I\u0027m hoping todo although, it makes the compiler very sad with template errors at the moment.",
+      "parentUuid": "18608b0a_1e99310a",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
