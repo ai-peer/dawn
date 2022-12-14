@@ -16,6 +16,57 @@
       "message": "CTS needs update and I\u0027m also working on it.\n\nhttps://github.com/gpuweb/cts/issues/2009\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1613",
       "revId": "0764ec6a742c9fd58cba884699181e381192894b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d27ba796_852eecff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-14T15:47:50Z",
+      "side": 1,
+      "message": "LGTM. You can add suppressions to webgpu-cts/expectations.txt in this CL so as to not be blocked on CTS update.",
+      "revId": "0764ec6a742c9fd58cba884699181e381192894b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e37cc1_27fed74e",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-14T15:47:50Z",
+      "side": 1,
+      "message": "nit: the comment could maybe detail things a bit more. \"Check for an existing pending map first because it just rejects the callback and doesn\u0027t produce a validation error\".",
+      "revId": "0764ec6a742c9fd58cba884699181e381192894b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e33398a_949cea78",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-14T15:47:50Z",
+      "side": 1,
+      "message": "\"it is an error\" usually means a validation error is produced. Maybe detail a bit more here?",
+      "revId": "0764ec6a742c9fd58cba884699181e381192894b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
