@@ -105,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1077341c_6b7fa33c",
+        "filename": "src/dawn/native/d3d12/ResourceAllocatorManagerD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-14T07:18:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1c63f51_8aceba21",
+      "range": {
+        "startLine": 366,
+        "startChar": 51,
+        "endLine": 366,
+        "endChar": 74
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5be75fa_dce93076",
@@ -130,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a1a1182_97f55c2b",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-14T07:18:39Z",
+      "side": 1,
+      "message": "I cannot find something like `new ExpectConstant\u003cT\u003e(0)`, and it seems to me that there is no parent `Expectation` class for that at DawnTest.h...",
+      "parentUuid": "c5be75fa_dce93076",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 16
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c580cd02_fd429858",
         "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
         "patchSetId": 2
@@ -141,6 +189,30 @@
       "writtenOn": "2022-12-13T21:02:01Z",
       "side": 1,
       "message": "does this need to be in the `if sampleCount \u003d\u003d 1` block?\n\nI think it could be dedented to be more readable\ncould be:\n\n```\nstd::vector\u003cuint32_t\u003e testedLayers \u003d sampleCount \u003d\u003d 1 ? {0} : {0, 1};\nif (depthOrArrayLayerCount \u003e 2) {\n   ...\n}\n```",
+      "range": {
+        "startLine": 344,
+        "startChar": 12,
+        "endLine": 352,
+        "endChar": 13
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4c54661_35602803",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-14T07:18:39Z",
+      "side": 1,
+      "message": "There is a C++ compile issue: initializer {0, 1} cannot be at the right side of `:` for `? :`. But it indeed can be simpler.",
+      "parentUuid": "c580cd02_fd429858",
       "range": {
         "startLine": 344,
         "startChar": 12,
