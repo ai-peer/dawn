@@ -20,6 +20,7 @@ data/webgpu/shader/execution/case-cache/exp.json
 data/webgpu/shader/execution/case-cache/exp2.json
 data/webgpu/shader/execution/case-cache/faceForward.json
 data/webgpu/shader/execution/case-cache/floor.json
+data/webgpu/shader/execution/case-cache/fma.json
 data/webgpu/shader/execution/case-cache/fract.json
 data/webgpu/shader/execution/case-cache/inverseSqrt.json
 data/webgpu/shader/execution/case-cache/ldexp.json
