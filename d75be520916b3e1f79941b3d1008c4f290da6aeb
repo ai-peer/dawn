@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc9fefbd_1fbcd382",
+        "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-14T15:44:52Z",
+      "side": 1,
+      "message": "I think Austin was suggesting to add a new `class ExpectConstant\u003cT\u003e` similarly to `ExpectBetweenColors` for example.",
+      "parentUuid": "2a1a1182_97f55c2b",
+      "range": {
+        "startLine": 89,
+        "startChar": 6,
+        "endLine": 89,
+        "endChar": 16
+      },
+      "revId": "d75be520916b3e1f79941b3d1008c4f290da6aeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c580cd02_fd429858",
         "filename": "src/dawn/tests/end2end/TextureCorruptionTests.cpp",
         "patchSetId": 2
