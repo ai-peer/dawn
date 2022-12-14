@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "591f4807_e382cb92",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-14T20:13:30Z",
+      "side": 1,
+      "message": "Called `I` in the spec. I\u0027d prefer it if we matched the spec names for this.",
+      "range": {
+        "startLine": 531,
+        "startChar": 31,
+        "endLine": 531,
+        "endChar": 32
+      },
+      "revId": "5737a570ddc2c76cd7f3f3bd5d2e869b9f03b1b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
