@@ -22,6 +22,30 @@
       },
       "revId": "7dfcae3ac7399a2ec357953d291306ee4902e758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a2c445_39269385",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-14T15:10:41Z",
+      "side": 1,
+      "message": "The template isn\u0027t the issue. I removed the template an this still fails with the same issue:\n\n```\n/usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:2971:13: error: no matching member function for call to \u0027Expr\u0027\n            Expr(std::forward\u003cExpressionInit\u003e(condition)),\n            ^~~~\n/usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3355:16: note: in instantiation of function template specialization \u0027tint::ProgramBuilder::Switch\u003cconst tint::type::Type *, (lambda at /usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3357:13), (lambda at /usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3365:13), (lambda at /usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3373:13), (lambda at /usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3385:13), (lambda at /usr/local/google/home/dsinclair/Development/dawn/src/tint/program_builder.h:3394:13), const tint::type::Type *\u003e\u0027 requested here\n        return Switch(\n               ^\n```\n\nFor some reason, having this `create` method here causes `Expr` to go wonky?",
+      "parentUuid": "ac94a890_3315891b",
+      "range": {
+        "startLine": 488,
+        "startChar": 4,
+        "endLine": 489,
+        "endChar": 73
+      },
+      "revId": "7dfcae3ac7399a2ec357953d291306ee4902e758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
