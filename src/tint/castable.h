@@ -285,6 +285,9 @@ inline bool Is(FROM* obj) {
     if (obj == nullptr) {
         return false;
     }
+    if (!Maybe(TypeInfo::Of<TO>().hashcode, obj->FullHashCode())) {
+        return false;
+    }
     return TypeInfo::Is<TO, FROM, FLAGS>(&obj->TypeInfo());
 }
 
@@ -305,6 +308,9 @@ inline bool Is(OBJ* obj, Pred&& pred) {
 template <typename... TYPES, typename OBJ>
 inline bool IsAnyOf(OBJ* obj) {
     if (!obj) {
+        return false;
+    }
+    if (!MaybeAnyOf(TypeInfo::CombinedHashCodeOf<TYPES...>(), obj->FullHashCode())) {
         return false;
     }
     return obj->TypeInfo().template IsAnyOf<TYPES...>();
@@ -346,6 +352,9 @@ class CastableBase {
     /// @param other the CastableBase to copy
     /// @returns the new CastableBase
     CastableBase& operator=(const CastableBase& other) = default;
+
+    /// @returns the full hashcode of the object
+    inline tint::HashCode FullHashCode() const { return full_hashcode_; }
 
     /// @returns the TypeInfo of the object
     inline const tint::TypeInfo& TypeInfo() const { return *type_info_; }
@@ -390,6 +399,9 @@ class CastableBase {
   protected:
     CastableBase() = default;
 
+    /// The full hashcode of the object type.
+    tint::HashCode full_hashcode_ = 0;
+
     /// The type information for the object
     const tint::TypeInfo* type_info_ = nullptr;
 };
@@ -428,7 +440,9 @@ class Castable : public BASE {
     /// @param args the arguments to forward to the base class.
     template <typename... ARGS>
     inline explicit Castable(ARGS&&... args) : TrueBase(std::forward<ARGS>(args)...) {
-        this->type_info_ = &TypeInfo::Of<CLASS>();
+        auto& type_info = TypeInfo::Of<CLASS>();
+        this->full_hashcode_ = type_info.full_hashcode;
+        this->type_info_ = &type_info;
     }
 
     /// @returns true if this object is of, or derives from the class `TO`
@@ -579,7 +593,7 @@ constexpr int IndexOfDefaultCase() {
 /// @returns true if a case handler was found, otherwise false.
 template <typename T, typename RETURN_TYPE, typename... CASES>
 inline bool NonDefaultCases([[maybe_unused]] T* object,
-                            const TypeInfo* type,
+                            HashCode object_full_hashcode,
                             [[maybe_unused]] RETURN_TYPE* result,
                             std::tuple<CASES...>&& cases) {
     using Cases = std::tuple<CASES...>;
@@ -598,7 +612,7 @@ inline bool NonDefaultCases([[maybe_unused]] T* object,
         // Attempt to dynamically cast the object to the handler type. If that succeeds, call the
         // case handler with the cast object.
         using CaseType = SwitchCaseType<CaseFunc>;
-        if (type->Is<CaseType>()) {
+        if (object->template Is<CaseType>()) {
             auto* ptr = static_cast<CaseType*>(object);
             if constexpr (kHasReturnType) {
                 new (result) RETURN_TYPE(static_cast<RETURN_TYPE>(std::get<0>(cases)(ptr)));
@@ -613,11 +627,12 @@ inline bool NonDefaultCases([[maybe_unused]] T* object,
         // Check the hashcode bits to see if there's any possibility of a case matching in these
         // cases. If there isn't, we can skip all these cases.
         if (MaybeAnyOf(TypeInfo::CombinedHashCodeOf<SwitchCaseType<CASES>...>(),
-                       type->full_hashcode)) {
+                       object_full_hashcode)) {
             // Split the cases into two, and recurse.
             constexpr size_t kMid = kNumCases / 2;
-            return NonDefaultCases(object, type, result, traits::Slice<0, kMid>(cases)) ||
-                   NonDefaultCases(object, type, result,
+            return NonDefaultCases(object, object_full_hashcode, result,
+                                   traits::Slice<0, kMid>(cases)) ||
+                   NonDefaultCases(object, object_full_hashcode, result,
                                    traits::Slice<kMid, kNumCases - kMid>(cases));
         } else {
             return false;
@@ -649,10 +664,9 @@ inline void SwitchCases(T* object, RETURN_TYPE* result, std::tuple<CASES...>&& c
     static constexpr bool kAllOK = kDefaultIsOK && kReturnIsOK;
     if constexpr (kAllOK) {
         if (object) {
-            auto* type = &object->TypeInfo();
             if constexpr (kHasDefaultCase) {
                 // Evaluate non-default cases.
-                if (!detail::NonDefaultCases<T>(object, type, result,
+                if (!detail::NonDefaultCases<T>(object, object->FullHashCode(), result,
                                                 traits::Slice<0, kDefaultIndex>(cases))) {
                     // Nothing matched. Evaluate default case.
                     if constexpr (kHasReturnType) {
@@ -663,7 +677,8 @@ inline void SwitchCases(T* object, RETURN_TYPE* result, std::tuple<CASES...>&& c
                     }
                 }
             } else {
-                if (!detail::NonDefaultCases<T>(object, type, result, std::move(cases))) {
+                if (!detail::NonDefaultCases<T>(object, object->FullHashCode(), result,
+                                                std::move(cases))) {
                     // Nothing matched. No default case.
                     if constexpr (kHasReturnType) {
                         new (result) RETURN_TYPE();
