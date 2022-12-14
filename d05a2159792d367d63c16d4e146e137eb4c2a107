@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2dc417d_d0a88f9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-14T19:16:54Z",
+      "side": 1,
+      "message": "Everything has been addressed. Will merge when the CQ+1 finishes.",
+      "revId": "d05a2159792d367d63c16d4e146e137eb4c2a107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

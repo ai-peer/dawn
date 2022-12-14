@@ -236,6 +236,30 @@
       },
       "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a1c520e_04ca655a",
+        "filename": "src/tint/transform/multiplanar_external_texture_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2022-12-14T19:16:54Z",
+      "side": 1,
+      "message": "Added comment in ExternalTexture.cpp",
+      "parentUuid": "03bd0d74_734246c8",
+      "range": {
+        "startLine": 271,
+        "startChar": 23,
+        "endLine": 271,
+        "endChar": 166
+      },
+      "revId": "4c48a3379585d4effea58e880eb8fc9f7ff1308d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
