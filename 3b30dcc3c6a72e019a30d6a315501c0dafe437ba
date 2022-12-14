@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0889018c_c1d03c64",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-14T15:35:30Z",
+      "side": 1,
+      "message": "u-nit: Maybe set the other 0.0 (the 7th element) and use // to force clang-format to split lines?",
+      "revId": "3b30dcc3c6a72e019a30d6a315501c0dafe437ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
