@@ -434,6 +434,8 @@ list(APPEND TINT_LIB_SRCS
   transform/std140.h
   transform/substitute_override.cc
   transform/substitute_override.h
+  transform/texture_1d_to_2d.cc
+  transform/texture_1d_to_2d.h
   transform/transform.cc
   transform/transform.h
   transform/truncate_interstage_variables.cc
