@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4609a700_ec5c380d",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2022-12-14T09:13:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0060aae_0bac0c8a",
+      "revId": "1dac186aac45a49358568d698ec76fb1ea67ddae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e381d75f_e5a63bf8",
