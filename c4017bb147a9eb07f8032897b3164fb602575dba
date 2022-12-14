@@ -135,6 +135,30 @@
       },
       "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603e6923_e0f44c1a",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-14T10:26:40Z",
+      "side": 1,
+      "message": "\u003e https://dawn-review.googlesource.com/c/dawn/+/114202 is what I\u0027m hoping todo although, it makes the compiler very sad with template errors at the moment.\n\nI don\u0027t see why this requires `Splat` to inherit from `Composite`. I think you\u0027ve got yourself in a bit of a muddle with the templates in that CL. That method doesn\u0027t need a template at all.\n\nI still believe that changing the inheritance of `Splat` here is unnecessary, and is less efficient than what we already have.",
+      "parentUuid": "f34ff6e7_a6b16d53",
+      "range": {
+        "startLine": 336,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 22
+      },
+      "revId": "c4017bb147a9eb07f8032897b3164fb602575dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
