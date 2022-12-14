@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98badbd9_bf0e29de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-14T04:24:27Z",
+      "side": 1,
+      "message": "Thanks for the comment.\n\n\u003e But still could you raise an issue about this in the group? \n\nSure, filed an issue\n\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1613",
+      "parentUuid": "b78eee2b_73542f90",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "824759ea_6cb16def",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 1
