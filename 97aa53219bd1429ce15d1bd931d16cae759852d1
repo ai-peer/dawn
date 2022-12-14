@@ -158,6 +158,24 @@
       "parentUuid": "44ee0e3b_33f032b4",
       "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d66599_73ed0d32",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-14T05:34:55Z",
+      "side": 1,
+      "message": "I rechecked the spec. `Unmap` and `Destroy` immediately reject if `[[pending_map]]` is non-null. So I think it\u0027s ok to rewrite the Client to remove `mRequests`. I will try.",
+      "parentUuid": "cf2a6d36_9e21331b",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
