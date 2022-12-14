@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c18815f3_6560bf75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-14T20:27:36Z",
+      "side": 1,
+      "message": "Adding kokoro+1, the kokoro error was in generating dawn_native headers which is unrelated to this CL.",
+      "revId": "181d06f75f625be2e37efd5e53ce610d2676e38f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
