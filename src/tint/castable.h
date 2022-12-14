@@ -285,7 +285,7 @@ inline bool Is(FROM* obj) {
     if (obj == nullptr) {
         return false;
     }
-    if (!Maybe(TypeInfo::Of<TO>().hashcode, obj->FullHashCode())) {
+    if (!Maybe(TypeInfo::HashCodeOf<std::remove_cv_t<TO>>(), obj->FullHashCode())) {
         return false;
     }
     return TypeInfo::Is<TO, FROM, FLAGS>(&obj->TypeInfo());
@@ -357,7 +357,7 @@ class CastableBase {
     inline tint::HashCode FullHashCode() const { return full_hashcode_; }
 
     /// @returns the TypeInfo of the object
-    inline const tint::TypeInfo& TypeInfo() const { return *type_info_; }
+    virtual const tint::TypeInfo& TypeInfo() const = 0;
 
     /// @returns true if this object is of, or derives from the class `TO`
     template <typename TO>
@@ -401,9 +401,6 @@ class CastableBase {
 
     /// The full hashcode of the object type.
     tint::HashCode full_hashcode_ = 0;
-
-    /// The type information for the object
-    const tint::TypeInfo* type_info_ = nullptr;
 };
 
 /// Castable is a helper to derive `CLASS` from `BASE`, automatically implementing the Is() and As()
@@ -440,10 +437,11 @@ class Castable : public BASE {
     /// @param args the arguments to forward to the base class.
     template <typename... ARGS>
     inline explicit Castable(ARGS&&... args) : TrueBase(std::forward<ARGS>(args)...) {
-        auto& type_info = TypeInfo::Of<CLASS>();
-        this->full_hashcode_ = type_info.full_hashcode;
-        this->type_info_ = &type_info;
+        this->full_hashcode_ = TypeInfo::FullHashCodeOf<CLASS>();
     }
+
+    /// @returns the TypeInfo of the object
+    const tint::TypeInfo& TypeInfo() const override { return TypeInfo::Of<CLASS>(); }
 
     /// @returns true if this object is of, or derives from the class `TO`
     /// @see CastFlags
