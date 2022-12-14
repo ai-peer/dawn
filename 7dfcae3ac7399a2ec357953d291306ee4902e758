@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac94a890_3315891b",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-14T10:25:03Z",
+      "side": 1,
+      "message": "You don\u0027t need the template at all here - none of the input parameters are templated. The return type can just be `const constant::Constant*`.",
+      "range": {
+        "startLine": 488,
+        "startChar": 4,
+        "endLine": 489,
+        "endChar": 73
+      },
+      "revId": "7dfcae3ac7399a2ec357953d291306ee4902e758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
