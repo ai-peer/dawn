@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d8db5a_4c912165",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-14T10:27:34Z",
+      "side": 1,
+      "message": "I\u0027ll hold off reviewing this and child CLs until https://dawn-review.googlesource.com/c/dawn/+/114121 is resolved.",
+      "revId": "4c3719efc4c4aa4d04afacf8dc217cf21c2d9a9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
