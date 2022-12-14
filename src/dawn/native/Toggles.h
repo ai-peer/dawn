@@ -84,6 +84,9 @@ enum class Toggle {
     D3D12Allocate2DTexturewithCopyDstAsCommittedResource,
     DisallowDeprecatedAPIs,
 
+    // Unresolved issues.
+    NoWorkaroundSampleMaskWithMultipleColorTargets,
+
     EnumCount,
     InvalidEnum = EnumCount,
 };
