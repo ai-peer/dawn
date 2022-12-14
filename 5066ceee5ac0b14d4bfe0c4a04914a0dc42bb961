@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46389a6a_9095ff51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-14T16:24:48Z",
+      "side": 1,
+      "message": "PTAL.\n\nI also updated a few places where we cast to `float` or `uint32_t` to use the `u32`, `f32` or `f16` types as appropriate.",
+      "revId": "5066ceee5ac0b14d4bfe0c4a04914a0dc42bb961",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
