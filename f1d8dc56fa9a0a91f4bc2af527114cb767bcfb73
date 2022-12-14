@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7604fa12_dbad9241",
+        "filename": "src/dawn/tests/end2end/RenderPassLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-14T00:14:31Z",
+      "side": 1,
+      "message": "weird - it works if it\u0027s not a reference, and passed by value instead. can we do that?",
+      "parentUuid": "444c046f_f817a9cf",
+      "range": {
+        "startLine": 489,
+        "startChar": 44,
+        "endLine": 489,
+        "endChar": 45
+      },
+      "revId": "f1d8dc56fa9a0a91f4bc2af527114cb767bcfb73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad5c8fa2_a32f10b4",
