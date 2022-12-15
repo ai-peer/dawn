@@ -2456,6 +2456,55 @@ TEST_P(CopyTests_T2T, Texture3DMipUnaligned) {
     }
 }
 
+// This is a test used to debug crbug.com/dawn/1107 which discovered that the driver may
+// drop the mantissa of subnormal floats and change NaN to alternative NaN encodings.
+TEST_P(CopyTests_T2T, R32FloatEncodings) {
+    // Metal Intel transforms the copied values, likely because it performs the copy using a blit.
+    DAWN_TEST_UNSUPPORTED_IF(IsMetal() && IsIntel());
+    // positive subnormal value, negative subnormal value, -0, largest subnormal, smallest
+    // subnormal, quietNaN, signaling NaN
+    uint32_t values[7] = {
+        0x0077EEE4,  // positive subnormal
+        0x8077EEE4,  // negative subnormal
+        0x80000000,  // negative zero
+        0x007FFFFF,  // largest subnormal
+        0x00000001,  // smallest subnormal
+        0x7F890FDB,  // quiet NaN (with stuff in mantissa)
+        0x7FC90FDB,  // signaling NaN (with stuff in mantissa)
+    };
+    wgpu::TextureDescriptor desc;
+    desc.size = {sizeof(values) / sizeof(values[0]), 1, 1};
+    desc.format = wgpu::TextureFormat::R32Float;
+    desc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc;
+
+    wgpu::BufferDescriptor bufferDesc;
+    bufferDesc.size = sizeof(values);
+    bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
+
+    wgpu::Texture src = device.CreateTexture(&desc);
+    wgpu::Texture dst = device.CreateTexture(&desc);
+    wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
+
+    {
+        wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(src);
+        wgpu::TextureDataLayout textureDataLayout =
+            utils::CreateTextureDataLayout(0, sizeof(values));
+        queue.WriteTexture(&copyDst, values, sizeof(values), &textureDataLayout, &desc.size);
+    }
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ImageCopyTexture copySrc = utils::CreateImageCopyTexture(src);
+        wgpu::ImageCopyTexture copyDst = utils::CreateImageCopyTexture(dst);
+        wgpu::ImageCopyBuffer bufferDst = utils::CreateImageCopyBuffer(buffer, 0, 256);
+        encoder.CopyTextureToTexture(&copySrc, &copyDst, &desc.size);
+        encoder.CopyTextureToBuffer(&copyDst, &bufferDst, &desc.size);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    EXPECT_BUFFER_U32_RANGE_EQ(values, buffer, 0, desc.size.width);
+}
+
 DAWN_INSTANTIATE_TEST_P(CopyTests_T2T,
                         {D3D12Backend(),
                          D3D12Backend({"use_temp_buffer_in_small_format_texture_to_texture_copy_"
