@@ -21,7 +21,7 @@ package fuzzing;
 
 message Command {
     oneof command {
-        {% for command in cmd_records["command"] %}
+        {% for command in cmd_records["proto_all_commands"] %}
             {{command.name.CamelCase()}} {{command.name.camelCase()}} = {{ loop.index }};
         {% endfor %}
     }
