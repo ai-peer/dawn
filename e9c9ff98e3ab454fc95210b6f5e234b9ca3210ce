@@ -87,6 +87,30 @@
       },
       "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da473d86_e9a9beab",
+        "filename": "src/tint/constant/value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-15T17:14:43Z",
+      "side": 1,
+      "message": "Took a quick look. The issue is, this is in the `Value` base class, so we can\u0027t include `Scalar` here, we can only forward declare.\n\nBut, this is also templated, so we have to have the implementation in the header file. So, we don\u0027t have access to the scalar to call methods on it. The current way depends on the virtual call to get to the scalar.",
+      "parentUuid": "b7cd5949_3e55165e",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
