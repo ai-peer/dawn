@@ -15,13 +15,117 @@
 syntax = "proto2";
 package fuzzing;
 
-{% for command in cmd_records["command"] %}
-    message {{command.name.CamelCase()}} {}
+
+{% for type in by_category["enum"] %}
+    enum {{as_cppType(type.name)}} {
+        {% for value in type.values %}
+            {{ as_cppType(type.name) }}{{as_cppEnum(value.name)}} = {{ value.value }};
+        {% endfor %}
+    };
 {% endfor %}
+
+
+{% for type in by_category["bitmask"] %}
+    enum {{as_cppType(type.name)}} {
+        {% for value in type.values %}
+            {{ as_cppType(type.name) }}{{as_cppEnum(value.name)}} = {{ value.value }};
+        {% endfor %}
+    };
+{% endfor %}
+
+
+{% macro write_simple_proto_member(member, count) -%}
+    {% if member.type in by_category["object"] or member.type.name.CamelCase() == "ObjectId" %}
+        required uint32 {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+    {% elif member.type in by_category["bitmask"] %}
+        repeated {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+    {% else %}
+        required {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+    {% endif %}
+    {% set count.value = count.value + 1 %}
+{%- endmacro %}
+
+
+{% macro write_string_proto_member(member, count) -%}
+    required string {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+    {% set count.value = count.value + 1 %}
+{%- endmacro %}
+
+{% macro write_float_array_proto_member(member, count) -%}
+    repeated float {{ as_varName(member.name) }} = {{ count.value }};
+    {% set count.value = count.value + 1 %}
+{%- endmacro %}
+
+
+{% macro write_complex_proto_member(member, count) -%}
+    required {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+    {% set count.value = count.value + 1 %}
+{%- endmacro %}
+
+
+{% macro write_varlength_proto_member(member, count) -%}
+    {% if member.type in by_category["object"] or member.type.name.get() == "object id" %}
+        repeated uint32 {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+        {% set count.value = count.value + 1 %}
+    {% elif member.type.name.get() == "uint8_t" %}
+    {% else %}
+        repeated {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ count.value }};
+        {% set count.value = count.value + 1 %}
+    {% endif %}
+{%- endmacro %}
+
+
+{% macro write_void_proto_member(member, count) -%}
+    required bytes {{ as_varName(member.name) }} = {{ count.value }};
+    {% set count.value = count.value + 1 %}
+{%- endmacro %}
+
+
+{% macro write_proto_members_helper(record, name, members) %}
+    {% set count = namespace(value=1) %}
+    {% for member in members %}
+        {% if member.type.name.CamelCase() == "ObjectHandle" %}
+        {% elif member.skip_serialize == True %}
+        {% elif member.annotation == 'value' %}
+            {{ write_simple_proto_member(member, count) }}
+        {% elif member.annotation == 'const*'  and member.length == 'strlen' and member.type.name.camelCase() == "char" %}
+            {{ write_string_proto_member(member, count) }}
+        {% elif member.annotation == 'const*' and member.length == 'constant' and member.type.name.get() == "float" %}
+            {{ write_float_array_proto_member(member, count) }}
+        {% elif member.annotation == 'const*' and member.length == 'constant' %}
+            {{ write_complex_proto_member(member, count) }}
+        {% elif member.annotation == 'const*' and member.length != 'strlen' and member.length != "constant" %}
+            {{ write_varlength_proto_member(member, count) }}
+        {% elif member.type.name.get() == "void" %}
+            {{ write_void_proto_member(member, count) }}
+        {% else %}
+            // Failure. {{ member.name.CamelCase() }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+
+{% for structure in by_category["structure"] %}
+    message {{structure.name.CamelCase()}} {
+        {{ write_proto_members_helper(structure, structure.name, structure.members) }}
+    }
+{% endfor %}
+
+
+{% for command in cmd_records["proto_all_commands"] %}
+    {% if command not in cmd_records["proto_generated_commands"] %}
+        message {{command.name.CamelCase()}} {}
+    {% else %}
+        message {{command.name.CamelCase()}} {
+            {{ write_proto_members_helper(command, command.name, command.members) }}
+        }
+    {% endif %}
+{% endfor %}
+
 
 message Command {
     oneof command {
-        {% for command in cmd_records["command"] %}
+        {% for command in cmd_records["proto_all_commands"] %}
             {{command.name.CamelCase()}} {{command.name.camelCase()}} = {{ loop.index }};
         {% endfor %}
     }
