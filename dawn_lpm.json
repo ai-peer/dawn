@@ -17,7 +17,42 @@
 
     "_doc": "See docs/dawn/codegen.md",
 
-    "custom_cmds_proto": [],
+    "blocklisted_cmds_cpp": [
+        "device create render pipeline",
+        "device create render pipeline async",
+        "device create shader module",
+        "device create render pipeline",
+        "device create render pipeline async",
+        "device create shader module",
+        "surface descriptor from windows core window",
+        "surface descriptor from windows swap chain panel",
+        "surface descriptor from canvas h t m l selector",
+        "bind group layout set label",
+        "bind group set label",
+        "buffer set label",
+        "command buffer set label",
+        "command encoder set label",
+        "compute pass encoder set label",
+        "compute pipeline set label",
+        "device set label",
+        "external texture set label",
+        "pipeline layout set label",
+        "query set set label",
+        "queue set label",
+        "render bundle encoder set label",
+        "render pass encoder set label",
+        "render pipeline set label",
+        "sampler set label",
+        "shader module set label",
+        "texture set label",
+        "texture view set label",
+        "destroy object"
+    ],
+
+    "custom_cmds_proto": [
+        "device create shader module",
+        "destroy object"
+    ],
 
     "blocklisted_cmds_proto": [
         "surface descriptor from windows core window",
@@ -43,8 +78,6 @@
         "texture set label",
         "texture view set label",
         "device create render pipeline",
-        "device create render pipeline async",
-        "device create shader module",
-        "destroy object"
+        "device create render pipeline async"
     ]
 }
