@@ -196,6 +196,7 @@ class QueryInternalShaderTests : public DawnTest {
 TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
     // TODO(crbug.com/dawn/741): Test output is wrong with D3D12 + WARP.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP());
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
 
     constexpr std::array<float, 5> kPeriodsToTest = {
         1,
