@@ -15,13 +15,120 @@
 syntax = "proto2";
 package fuzzing;
 
-{% for command in cmd_records["command"] %}
-    message {{command.name.CamelCase()}} {}
+
+{% for type in by_category["enum"] %}
+    enum {{as_cppType(type.name)}} {
+        {% for value in type.values %}
+            {{ as_cppType(type.name) }}{{as_cppEnum(value.name)}} = {{ value.value }};
+        {% endfor %}
+    };
 {% endfor %}
+
+
+{% for type in by_category["bitmask"] %}
+    enum {{as_cppType(type.name)}} {
+        {% for value in type.values %}
+            {{ as_cppType(type.name) }}{{as_cppEnum(value.name)}} = {{ value.value }};
+        {% endfor %}
+    };
+{% endfor %}
+
+
+{% macro write_simple_proto_member(member, proto_index) -%}
+    {% if member.type in by_category["object"] or member.type.name.CamelCase() == "ObjectId" %}
+        required uint32 {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+    {% elif member.type in by_category["bitmask"] %}
+        repeated {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+    {% else %}
+        required {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+    {% endif %}
+    {% do proto_index.append(1) %}
+{%- endmacro %}
+
+
+{% macro write_string_proto_member(member, proto_index) -%}
+    {% if member.name.camelCase() == "label" %}
+    {% else %}
+        required string {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+        {% do proto_index.append(1) %}
+    {% endif %}
+{%- endmacro %}
+
+{% macro write_float_array_proto_member(member, proto_index) -%}
+    repeated float {{ as_varName(member.name) }} = {{ proto_index|length }};
+    {% do proto_index.append(1) %}
+{%- endmacro %}
+
+
+{% macro write_complex_proto_member(member, proto_index) -%}
+    required {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+    {% do proto_index.append(1) %}
+{%- endmacro %}
+
+
+{% macro write_varlength_proto_member(member, proto_index) -%}
+    {% if member.type in by_category["object"] or member.type.name.get() == "object id" %}
+        repeated uint32 {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+        {% do proto_index.append(1) %}
+    {% elif member.type.name.get() == "uint8_t" %}
+    {% else %}
+        repeated {{ as_protobufTypeLPM(member) }} {{ as_protobufNameLPM(member.name) }} = {{ proto_index|length }};
+        {% do proto_index.append(1) %}
+    {% endif %}
+{%- endmacro %}
+
+
+{% macro write_void_proto_member(member, proto_index) -%}
+    required bytes {{ as_varName(member.name) }} = {{ proto_index|length }};
+    {% do proto_index.append(1) %}
+{%- endmacro %}
+
+
+{% macro write_proto_members_helper(record, name, members) %}
+    {% set proto_index = [1] %}
+    {% for member in members %}
+        {% if member.type.name.CamelCase() == "ObjectHandle"
+           or member.skip_serialize == True %}
+        {% elif member.annotation == 'value' %}
+            {{ write_simple_proto_member(member, proto_index) }}
+        {% elif member.annotation == 'const*'  and member.length == 'strlen' and member.type.name.camelCase() == "char" %}
+            {{ write_string_proto_member(member, proto_index) }}
+        {% elif member.annotation == 'const*' and member.length == 'constant' and member.type.name.get() == "float" %}
+            {{ write_float_array_proto_member(member, proto_index) }}
+        {% elif member.annotation == 'const*' and member.length == 'constant' %}
+            {{ write_complex_proto_member(member, proto_index) }}
+        {% elif member.annotation == 'const*' and member.length != 'strlen' and member.length != "constant" %}
+            {{ write_varlength_proto_member(member, proto_index) }}
+        {% elif member.type.name.get() == "void" %}
+            {{ write_void_proto_member(member, proto_index) }}
+        {% else %}
+            // Failure. {{ command.name.CamelCase() }} {{ member.name.CamelCase() }}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
+
+
+{% for structure in by_category["structure"] %}
+    message {{structure.name.CamelCase()}} {
+        {{ write_proto_members_helper(structure, structure.name, structure.members) }}
+    }
+{% endfor %}
+
+
+{% for command in cmd_records["proto_all_commands"] %}
+    {% if command not in cmd_records["proto_generated_commands"] %}
+        message {{command.name.CamelCase()}} {}
+    {% else %}
+        message {{command.name.CamelCase()}} {
+            {{ write_proto_members_helper(command, command.name, command.members) }}
+        }
+    {% endif %}
+{% endfor %}
+
 
 message Command {
     oneof command {
-        {% for command in cmd_records["command"] %}
+        {% for command in cmd_records["proto_all_commands"] %}
             {{command.name.CamelCase()}} {{command.name.camelCase()}} = {{ loop.index }};
         {% endfor %}
     }
