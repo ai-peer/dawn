@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91bde726_ef5ae2d2",
+        "filename": "src/tint/constant/value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-15T16:20:40Z",
+      "side": 1,
+      "message": "I\u0027m not actually sure we need this virtual method any more. Only `Scalar` implements it, and now we use `Castable`, we can just cast to `Scalar` and grab the value.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
