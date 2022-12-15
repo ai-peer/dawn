@@ -15,6 +15,7 @@
 syntax = "proto2";
 package fuzzing;
 
+import "third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm_custom.proto";
 
 {% for type in by_category["enum"] %}
     // enum
@@ -106,7 +107,7 @@ package fuzzing;
     }
 {% endfor %}
 
-{% for command in cmd_records["proto_all_commands"] %}
+{% for command in cmd_records["proto_generated_commands"] %}
     // command
     {% if command not in cmd_records["proto_generated_commands"] %}
         message {{command.name.CamelCase()}} {}
