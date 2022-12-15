@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "967d94a7_d0e09ad4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-15T19:21:23Z",
+      "side": 1,
+      "message": "FYI we\u0027ve seen at least one other case where the validation will say \"Must be less than 12345\" but actually the number 12345 was computed from specific parameters of the operation, not a fixed limit. It\u0027s really confusing. Definitely worth asking Apple contacts to look at the actual validation layer code to understand what it\u0027s doing.",
+      "parentUuid": "1f60209e_d0123c5e",
+      "revId": "9ca2de30c72f6f123f772baa94e0514d8b155d7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a46fd26_5df0db16",
