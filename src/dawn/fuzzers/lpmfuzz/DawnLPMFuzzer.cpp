@@ -20,7 +20,7 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
-#include "dawn/fuzzers/lpmfuzz/DawnLPMConstants.h"
+#include "dawn/fuzzers/lpmfuzz/DawnLPMConstants_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.pb.h"
@@ -68,7 +68,9 @@ WGPUSwapChain ErrorDeviceCreateSwapChain(WGPUDevice device,
 
 }  // namespace
 
-int DawnLPMFuzzer::Initialize(int* argc, char*** argv) {
+namespace DawnLPMFuzzer {
+
+int Initialize(int* argc, char*** argv) {
     // TODO(crbug.com/1038952): The Instance must be static because destructing the vkInstance with
     // Swiftshader crashes libFuzzer. When this is fixed, move this into Run so that error injection
     // for adapter discovery can be fuzzed.
@@ -78,7 +80,7 @@ int DawnLPMFuzzer::Initialize(int* argc, char*** argv) {
     return 0;
 }
 
-int DawnLPMFuzzer::Run(const fuzzing::Program& program,
+int Run(const fuzzing::Program& program,
                        bool (*AdapterSupported)(const dawn::native::Adapter&)) {
     sAdapterSupported = AdapterSupported;
 
@@ -115,7 +117,7 @@ int DawnLPMFuzzer::Run(const fuzzing::Program& program,
     serverDesc.serializer = &devNull;
 
     std::unique_ptr<dawn::wire::WireServer> wireServer(new dawn_wire::WireServer(serverDesc));
-    wireServer->InjectInstance(sInstance->Get(), INSTANCE_OBJECT_ID, 0);
+    wireServer->InjectInstance(sInstance->Get(), instance_object_id, 0);
 
     static utils::TerribleCommandBuffer* mCommandBuffer = new utils::TerribleCommandBuffer();
     static dawn::wire::ChunkedCommandSerializer mSerializer =
@@ -131,3 +133,5 @@ int DawnLPMFuzzer::Run(const fuzzing::Program& program,
     wireServer = nullptr;
     return 0;
 }
+
+} // namespace DawnLPMFuzzer
