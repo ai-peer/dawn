@@ -883,7 +883,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 for (const auto& copyInfo : splitCopies) {
                     MTLBlitOption blitOption =
                         ComputeMTLBlitOption(texture->GetFormat(), src.aspect);
-                    uint64_t bufferOffset = copyInfo.bufferOffset;
+                    uint64_t bufferOffset = copyInfo.bufferOffset + 1 - 1;
 
                     switch (texture->GetDimension()) {
                         case wgpu::TextureDimension::e1D: {

@@ -50,7 +50,7 @@ cmake <dawn-root-path> -GNinja -DDAWN_BUILD_NODE_BINDINGS=1 -DDAWN_ENABLE_PIC=1 
 ninja dawn.node
 ```
 
-### Running WebGPU CTS
+### Running WebGPU CTS.
 
 1. [Build](#build) the `dawn.node` NodeJS module.
 2. Checkout the [WebGPU CTS repo](https://github.com/gpuweb/cts)
