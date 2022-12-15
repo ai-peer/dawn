@@ -30,7 +30,7 @@ void GetSerializedData(const fuzzing::Program& program, dawn::wire::ChunkedComma
     for (const fuzzing::Command& command : program.commands()) {
         switch (command.command_case()) {
 
-            {% for command in cmd_records["command"] %}
+            {% for command in cmd_records["cpp_commands"] %}
             case fuzzing::Command::k{{command.name.CamelCase()}}: {
                 {% set var = 'cmd' %}
                 {{ command.name.CamelCase() }}Cmd {{ var }};
