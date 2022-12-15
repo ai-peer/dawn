@@ -39,6 +39,30 @@
       },
       "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ccc1b3_476f0e57",
+        "filename": "src/tint/constant/value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2022-12-15T16:23:27Z",
+      "side": 1,
+      "message": "Yea, I have a feeling it can be removed, but plan to look in a followup as this is already pretty big.",
+      "parentUuid": "91bde726_ef5ae2d2",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "e9c9ff98e3ab454fc95210b6f5e234b9ca3210ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
