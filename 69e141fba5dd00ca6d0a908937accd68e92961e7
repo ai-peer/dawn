@@ -34,6 +34,23 @@
       "parentUuid": "1cd1114c_773ac367",
       "revId": "69e141fba5dd00ca6d0a908937accd68e92961e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cbc7cec_58f0689c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2022-12-15T00:04:00Z",
+      "side": 1,
+      "message": "It\u0027s weird that I cannot merge this patch. Do you know why? Could you please help me to merge it?\n\nKokoro bot is -1. But I remember that I can merge a patch if I got +2 from you for a patch no matter Kokoro bot passed or not. And I have no access to the failure log of Kokoro bot.",
+      "revId": "69e141fba5dd00ca6d0a908937accd68e92961e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
