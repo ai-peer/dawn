@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72a480b8_d8be3453",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-15T07:42:11Z",
+      "side": 1,
+      "message": "Updated, thanks.",
+      "parentUuid": "c8e37cc1_27fed74e",
+      "revId": "0764ec6a742c9fd58cba884699181e381192894b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e33398a_949cea78",
@@ -82,6 +100,24 @@
       "writtenOn": "2022-12-14T15:47:50Z",
       "side": 1,
       "message": "\"it is an error\" usually means a validation error is produced. Maybe detail a bit more here?",
+      "revId": "0764ec6a742c9fd58cba884699181e381192894b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c591f30a_a5bc27e3",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-15T07:42:11Z",
+      "side": 1,
+      "message": "Updated, thanks.",
+      "parentUuid": "3e33398a_949cea78",
       "revId": "0764ec6a742c9fd58cba884699181e381192894b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
