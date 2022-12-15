@@ -20,7 +20,7 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/dawn_proc.h"
-#include "dawn/fuzzers/lpmfuzz/DawnLPMConstants.h"
+#include "dawn/fuzzers/lpmfuzz/DawnLPMConstants_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/dawn_lpm_autogen.pb.h"
