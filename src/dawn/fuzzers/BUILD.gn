@@ -160,6 +160,8 @@ if (build_with_chromium && !is_android && !is_fuchsia && !is_chromeos_ash) {
       "lpmfuzz/DawnLPMFuzzerAndVulkanBackend.cpp",
       "lpmfuzz/DawnLPMObjectStore.cpp",
       "lpmfuzz/DawnLPMObjectStore.h",
+      "lpmfuzz/DawnLPMSerializerCustom.cpp",
+      "lpmfuzz/DawnLPMSerializerCustom.h",
     ]
 
     deps = [
