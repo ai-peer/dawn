@@ -50,6 +50,8 @@
     ],
 
     "custom_cmds_proto": [
+        "device create render pipeline",
+        "device create render pipeline async",
         "device create shader module",
         "destroy object"
     ],
@@ -76,9 +78,7 @@
         "sampler set label",
         "shader module set label",
         "texture set label",
-        "texture view set label",
-        "device create render pipeline",
-        "device create render pipeline async"
+        "texture view set label"
     ],
 
     "proto_type_conversions": {
