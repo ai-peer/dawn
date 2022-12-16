@@ -660,6 +660,27 @@ struct BuiltinPolyfill::State {
         return name;
     }
 
+    /// Builds the polyfill function for the `workgroupUniformLoad` builtin.
+    /// @param type the type being loaded
+    /// @return the polyfill function name
+    Symbol workgroupUniformLoad(const type::Type* type) {
+        auto name = b.Symbols().New("tint_workgroupUniformLoad");
+        // TODO: avoid duplicates
+        b.Enable(ast::Extension::kChromiumExperimentalFullPtrParameters);
+        b.Func(name,
+               utils::Vector{
+                   b.Param("p", b.ty.pointer(T(type), ast::AddressSpace::kWorkgroup)),
+               },
+               T(type),
+               utils::Vector{
+                   b.CallStmt(b.Call("workgroupBarrier")),
+                   b.Decl(b.Let("result", b.Deref("p"))),
+                   b.CallStmt(b.Call("workgroupBarrier")),
+                   b.Return("result"),
+               });
+        return name;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // Inline polyfills
     ////////////////////////////////////////////////////////////////////////////
@@ -910,6 +931,13 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.quantizeToF16(vec); });
                         }
+                    }
+                    break;
+
+                case sem::BuiltinType::kWorkgroupUniformLoad:
+                    if (polyfill.workgroup_uniform_load) {
+                        fn = builtin_polyfills.GetOrCreate(
+                            builtin, [&] { return s.workgroupUniformLoad(builtin->ReturnType()); });
                     }
                     break;
 

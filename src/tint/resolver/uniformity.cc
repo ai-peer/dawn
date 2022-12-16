@@ -23,6 +23,7 @@
 #include "src/tint/resolver/dependency_graph.h"
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/block_statement.h"
+#include "src/tint/sem/builtin.h"
 #include "src/tint/sem/for_loop_statement.h"
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/if_statement.h"
@@ -1454,6 +1455,8 @@ class UniformityGraph {
                 // some texture sampling builtins, and atomics.
                 if (builtin->IsBarrier()) {
                     callsite_tag = CallSiteRequiredToBeUniform;
+                } else if (builtin->Type() == sem::BuiltinType::kWorkgroupUniformLoad) {
+                    callsite_tag = CallSiteRequiredToBeUniform;
                 } else if (builtin->IsDerivative() ||
                            builtin->Type() == sem::BuiltinType::kTextureSample ||
                            builtin->Type() == sem::BuiltinType::kTextureSampleBias ||
@@ -1562,9 +1565,15 @@ class UniformityGraph {
                     current_function_->variables.Set(root_ident, ptr_result);
                 }
             } else {
-                // All builtin function parameters are RequiredToBeUniformForReturnValue, as are
-                // parameters for type initializers and type conversions.
-                result->AddEdge(args[i]);
+                auto* builtin = sem->Target()->As<sem::Builtin>();
+                if (builtin && builtin->Type() == sem::BuiltinType::kWorkgroupUniformLoad) {
+                    // The workgroupUniformLoad builtin requires its parameter to be uniform.
+                    current_function_->required_to_be_uniform->AddEdge(args[i]);
+                } else {
+                    // All other builtin function parameters are RequiredToBeUniformForReturnValue,
+                    // as are parameters for type initializers and type conversions.
+                    result->AddEdge(args[i]);
+                }
             }
         }
 
@@ -1799,9 +1808,13 @@ class UniformityGraph {
 
         if (cause->type == Node::kFunctionCallArgumentValue) {
             // The requirement was on a function parameter.
-            auto param_name = NameFor(target->Parameters()[cause->arg_index]->Declaration());
+            auto* ast_param = target->Parameters()[cause->arg_index]->Declaration();
+            std::string param_name;
+            if (ast_param) {
+                param_name = " '" + NameFor(ast_param) + "'";
+            }
             report(call->args[cause->arg_index]->source,
-                   "parameter '" + param_name + "' of '" + func_name + "' must be uniform");
+                   "parameter" + param_name + " of '" + func_name + "' must be uniform");
 
             // If this is a call to a user-defined function, add a note to show the reason that the
             // parameter is required to be uniform.
