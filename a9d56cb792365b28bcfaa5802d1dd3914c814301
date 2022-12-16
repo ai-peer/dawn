@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "820de66d_5ec567cf",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T15:53:04Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "4b9a3424_c26ca0a8",
+      "revId": "a9d56cb792365b28bcfaa5802d1dd3914c814301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0724f3fd_1614f655",
