@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b70269_59aa698e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T20:30:28Z",
+      "side": 1,
+      "message": "LGTM too. looks like you\u0027re need to suppress the failing CTS tests with expectations.txt",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
