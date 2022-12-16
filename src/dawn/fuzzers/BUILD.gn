@@ -154,9 +154,12 @@ if (build_with_chromium && !is_android && !is_fuchsia && !is_chromeos_ash) {
   dawn_fuzzer_test("dawn_lpm_fuzzer_and_vulkan_backend") {
     sources = get_target_outputs(":dawn_lpmfuzz_cpp")
     sources += [
+      "lpmfuzz/DawnLPMConstants.h",
       "lpmfuzz/DawnLPMFuzzer.cpp",
       "lpmfuzz/DawnLPMFuzzer.h",
       "lpmfuzz/DawnLPMFuzzerAndVulkanBackend.cpp",
+      "lpmfuzz/DawnLPMObjectStore.cpp",
+      "lpmfuzz/DawnLPMObjectStore.h",
     ]
 
     deps = [
