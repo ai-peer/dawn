@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced85267_683528f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-16T08:06:04Z",
+      "side": 1,
+      "message": "The CL has been merged. I will switch this CL to ready for review.",
+      "parentUuid": "b4d99d08_61cccbca",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "824759ea_6cb16def",
@@ -121,6 +139,24 @@
       "side": 1,
       "message": "It doesn\u0027t check whether the request succeeds or not. It checks whether the request is unmapped or destroyed. Unmap or Destroy set request.clientStatus to error.\n\nAdded comment not to confuse.",
       "parentUuid": "824759ea_6cb16def",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "603cb8e0_6a661b7e",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-16T08:06:04Z",
+      "side": 1,
+      "message": "This code has been removed by updating the code.",
+      "parentUuid": "0dd9ad05_d79e3170",
       "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -174,6 +210,24 @@
       "side": 1,
       "message": "I rechecked the spec. `Unmap` and `Destroy` immediately reject if `[[pending_map]]` is non-null. So I think it\u0027s ok to rewrite the Client to remove `mRequests`. I will try.",
       "parentUuid": "cf2a6d36_9e21331b",
+      "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3b7d0d2_8c57cabd",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-16T08:06:04Z",
+      "side": 1,
+      "message": "Updated. Please review.",
+      "parentUuid": "c1d66599_73ed0d32",
       "revId": "97aa53219bd1429ce15d1bd931d16cae759852d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
