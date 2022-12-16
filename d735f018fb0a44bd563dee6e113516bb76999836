@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b55dee75_734d9ce7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Makes sense! I rewrote this to use Dawn\u0027s existing codegen pipeline.",
+      "parentUuid": "0258cd6e_045c0077",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78a07e83_cc4e63bb",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2591e7_c8dd680f",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "78a07e83_cc4e63bb",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fac8899a_ea17ff9a",
@@ -48,6 +84,30 @@
       "writtenOn": "2022-11-11T20:46:49Z",
       "side": 1,
       "message": "why not 0? that\u0027s what we use usually for the \"nullptr\" object",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 8,
+        "endChar": 27
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a4491c3_3f3db5e9",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_gen.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fac8899a_ea17ff9a",
       "range": {
         "startLine": 8,
         "startChar": 0,
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50b4c0a2_4967147c",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_gen.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "I ended up moving this into its own file and it\u0027s something we\u0027re going to be editing as we get coverage data from the fuzzer. For example, we\u0027ve noticed that when setting ADAPTER_LIMIT to 2, DEVICE_LIMIT to 2, and BIND_GROUP/BIND_GROUP_LAYOUT_LIMITs to 640 we get a lot more coverage. This used to be generated, but these will all be hardcoded over time (and maybe even set by the fuzzer using LPM data in the future).",
+      "parentUuid": "0d5871c7_02bd8de5",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be508fab_1234de04",
         "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
         "patchSetId": 5
@@ -88,6 +166,30 @@
       "writtenOn": "2022-11-11T20:46:49Z",
       "side": 1,
       "message": "seems unused - remove it for now? I don\u0027t think this fuzzer looks like it supports error injection (but you could add that if you\u0027d like!)",
+      "range": {
+        "startLine": 83,
+        "startChar": 28,
+        "endLine": 83,
+        "endChar": 50
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "196f3e0b_0da7c9a4",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be508fab_1234de04",
       "range": {
         "startLine": 83,
         "startChar": 28,
@@ -111,6 +213,30 @@
       "writtenOn": "2022-11-11T20:46:49Z",
       "side": 1,
       "message": "are these used in this header? maybe it\u0027s only needed in the c++ file",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 19,
+        "endChar": 21
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bbf358d_f34b6140",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2bdc5c1c_6b3944f8",
       "range": {
         "startLine": 18,
         "startChar": 1,
@@ -157,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "619612e6_591bcb7c",
+        "filename": "src/dawn/fuzzers/lpmfuzz/FuzzObjectStore.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "I think this would be pretty difficult because they serve slightly different purposes. The fuzz object store takes a randomly generated objectid and always returns a valid object. The current strategy we are using in DawnLPMObjectStore.cpp (which I split out into CL [4/n]) is the strategy used in MojoLPM and other LPM based fuzzers in Chrome [1].\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:net/disk_cache/disk_cache_fuzzer.cc;drc\u003d6459548ee396bbe1104978b01e19fcb1bb68d0e5;l\u003d310",
+      "parentUuid": "72f3574f_50e7e215",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e1b00a7b_46860993",
         "filename": "src/dawn/fuzzers/lpmfuzz/data_corpus/devicecreatebuffer",
         "patchSetId": 5
@@ -168,6 +312,24 @@
       "writtenOn": "2022-11-21T13:43:50Z",
       "side": 1,
       "message": "Do these risk to need to be updated when Dawn updates structures such as when adding limits? How is this checked automatically?",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8593d253_0fbfa57a",
+        "filename": "src/dawn/fuzzers/lpmfuzz/data_corpus/devicecreatebuffer",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "For any \"required\" dawn structure members the corpus would need to be regenerated, but I believe libFuzzer would figure this out pretty quickly and regenerate a corpus while discarding the old corpus files that don\u0027t generate coverage anymore. For example, the computepipeline and this devicecreatebuffer examples in this CL were both generated reached within eight hours on one CPU core.",
+      "parentUuid": "e1b00a7b_46860993",
       "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -195,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b722a6ba_d5e2f303",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "56a776e9_b68fbe59",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 38
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eff7454_4a6b0dde",
@@ -208,6 +394,30 @@
       "writtenOn": "2022-11-11T20:46:49Z",
       "side": 1,
       "message": "what does \"fallthrough\" mean here? it\u0027s not a switch statement -  does it mean this is a nested message type?",
+      "range": {
+        "startLine": 1010,
+        "startChar": 46,
+        "endLine": 1010,
+        "endChar": 57
+      },
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0b4c41_e12b6bdf",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 5
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6eff7454_4a6b0dde",
       "range": {
         "startLine": 1010,
         "startChar": 46,

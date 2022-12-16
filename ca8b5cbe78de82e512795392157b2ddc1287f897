@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "833a7918_18bb465b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "I ended up splitting this out into multiple CLs after rewriting the generators to use Dawn\u0027s existing generator pipeline.",
+      "revId": "ca8b5cbe78de82e512795392157b2ddc1287f897",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

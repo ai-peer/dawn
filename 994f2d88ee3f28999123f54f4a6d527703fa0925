@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97edf4ca_ef2b9ae6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Makes sense! I re-wrote the generators to work with Dawn\u0027s existing generator pipeline and uploaded them in a chain of CLs attached to this one and removed the generated code as it is now written to `gen/`",
+      "parentUuid": "12364dc0_60532d2d",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "040b5542_11a1b29e",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 2
@@ -49,6 +67,24 @@
       "writtenOn": "2022-11-09T23:49:17Z",
       "side": 1,
       "message": "Does it make sense to include the Dawn lpmfuzzer to this build group?",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82de402b_3df12bef",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "040b5542_11a1b29e",
       "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +102,24 @@
       "writtenOn": "2022-11-09T23:49:17Z",
       "side": 1,
       "message": "Nit: Maybe add a comment giving a nod that this class comes from  DawnWireServerFuzzer.cpp.\n\nOr better yet, elevate the class into its own header b/c I also created another copy of this class for another CL, so it seems there\u0027s benefit in general exposure.",
+      "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ac337d_f3b72238",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T04:03:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "707f0772_b5dbe223",
       "revId": "994f2d88ee3f28999123f54f4a6d527703fa0925",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
