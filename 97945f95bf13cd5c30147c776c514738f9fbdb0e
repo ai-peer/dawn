@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20476d67_a8fc3cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2022-12-16T16:09:33Z",
+      "side": 1,
+      "message": "Ben: PTAL. Thanks!",
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
