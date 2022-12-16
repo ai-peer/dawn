@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn/fuzzers/lpmfuzz/DawnLPMConstants.h"
+#include "dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMSerializer_autogen.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.h"
 #include "dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h"
@@ -328,6 +329,7 @@ void GetSerializedData(const fuzzing::Program& program, dawn::wire::ChunkedComma
             }
             {% endfor %}
             default: {
+                GetCustomSerializedData(command, serializer, gObjectStores, provider);
                 break;
             }
         }
