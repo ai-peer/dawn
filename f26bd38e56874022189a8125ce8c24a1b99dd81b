@@ -68,6 +68,24 @@
       "message": "OK, I\u0027ll add them after I see they have some green builds.",
       "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3555b79_6ecaef23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T22:19:44Z",
+      "side": 1,
+      "message": "ok sounds good - hopefully we can do this soon; or, the next CTS roll may remove the lines you\u0027ve added here.\n\nI forgot to mention: you can make it so they don\u0027t get removed if you put them in a KEEP block:\n\nexample:\n```\n################################################################################\n# web_platform crashes on SwiftShader\n# Skipped instead of just Crash because of the number of failures\n# KEEP\n################################################################################\n...expectations\n```",
+      "parentUuid": "737f8d52_845b60d5",
+      "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
