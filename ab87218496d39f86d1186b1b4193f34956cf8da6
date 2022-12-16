@@ -16,6 +16,24 @@
       "message": "idk - any point in landing a test for this?",
       "revId": "ab87218496d39f86d1186b1b4193f34956cf8da6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24eeadc4_89df2a97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-16T06:34:05Z",
+      "side": 1,
+      "message": "Not sure. It\u0027s kind of an interesting smoketest but I don\u0027t think we would do anything about it.\n\nMaybe we could land it as ensuring NaNs only change to other NaNs, subnormals only flush to 0, etc? That could be a CTS test. Though not sure even that is super useful.",
+      "parentUuid": "3e4d3854_e9388560",
+      "revId": "ab87218496d39f86d1186b1b4193f34956cf8da6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
