@@ -79,5 +79,159 @@
         "texture view set label",
         "device create render pipeline",
         "device create render pipeline async"
-    ]
+    ],
+
+    "proto_type_conversions": {
+        "uint64_t": "uint64",
+        "bool": "bool",
+        "uint32_t": "uint32",
+        "double": "double",
+        "float": "float",
+        "int32_t": "int32",
+        "int64_t": "int64",
+        "uint16_t": "uint32"
+    },
+
+    "lpm_info": {
+        "adapter request device": {
+            "returns": "device",
+            "types": {
+                "adapter id": "adapter"
+            }
+        },
+        "buffer descriptor": {
+            "clamps": ["size"]
+        },
+        "buffer map async": {
+            "types": {
+                "buffer id": "buffer"
+            }
+        },
+        "buffer update mapped data": {
+            "types": {
+                "buffer id": "buffer"
+            }
+        },
+        "command encoder begin compute pass": {
+            "returns": "compute pass encoder"
+        },
+        "command encoder begin render pass": {
+            "returns": "render pass encoder"
+        },
+        "command encoder finish": {
+            "returns": "command buffer"
+        },
+        "compute pipeline get bind group layout": {
+            "returns": "bind group layout"
+        },
+        "device create bind group": {
+            "returns": "bind group"
+        },
+        "device create bind group layout": {
+            "returns": "bind group layout"
+        },
+        "device create buffer": {
+            "returns": "buffer",
+            "types": {
+                "device id": "device"
+            }
+        },
+        "device create command encoder": {
+            "returns": "command encoder"
+        },
+        "device create compute pipeline": {
+            "returns": "compute pipeline"
+        },
+        "device create compute pipeline async": {
+            "returns": "compute pipeline",
+            "types": {
+                "device id": "device"
+            }
+        },
+        "device create error buffer": {
+            "returns": "buffer"
+        },
+        "device create error external texture": {
+            "returns": "external texture"
+        },
+        "device create error texture": {
+            "returns": "texture"
+        },
+        "device create external texture": {
+            "returns": "external texture"
+        },
+        "device create pipeline layout": {
+            "returns": "pipeline layout"
+        },
+        "device create query set": {
+            "returns": "query set"
+        },
+        "device create render bundle encoder": {
+            "returns": "render bundle encoder"
+        },
+        "device create sampler": {
+            "returns": "sampler"
+        },
+        "device create swap chain": {
+            "returns": "swap chain"
+        },
+        "device create texture": {
+            "returns": "texture"
+        },
+        "device get adapter": {
+            "returns": "adapter"
+        },
+        "device get queue": {
+            "returns": "queue"
+        },
+        "device pop error scope": {
+            "types": {
+                "device id": "device"
+            }
+        },
+        "instance create surface": {
+            "returns": "surface"
+        },
+        "instance request adapter": {
+            "returns": "adapter",
+            "overrides": {
+                "instance id": "INSTANCE_OBJECT_ID"
+            }
+        },
+        "render bundle encoder finish": {
+            "returns": "render bundle"
+        },
+        "render pipeline get bind group layout": {
+            "returns": "bind group layout"
+        },
+        "swap chain get current texture view": {
+            "returns": "texture view"
+        },
+        "texture create view": {
+            "returns": "texture view"
+        },
+        "queue on submitted work done": {
+            "types": {
+                "queue id": "queue"
+            }
+        },
+        "queue write buffer": {
+            "types": {
+                "queue id": "queue",
+                "buffer id": "buffer"
+            },
+            "clamps": ["size"]
+        },
+        "queue write texture": {
+            "types": {
+                "queue id": "queue",
+                "texture id": "texture"
+            }
+        },
+        "shader module get compilation info": {
+            "types": {
+                "shader module id": "shader module"
+            }
+        }
+    }
 }
