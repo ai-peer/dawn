@@ -51,6 +51,41 @@
       "message": "When VUID-vkUpdateDescriptorSets-None-03047 is suppressed, it starts complaining about VUID-vkDestroyBuffer-buffer-00922.\nhttps://chromium-swarm.appspot.com/task?id\u003d5f3548edb6f77f10\nI think the reason is https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-ValidationLayers.git/+/ee0d62011f7825876521de08df28839c294655b7.\n\nI think it\u0027s safer to skip 2 tests than to suppress 2 VUIDs.",
       "revId": "08cf5b620bfd23b889664056e17b6e2cec67d8fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61de050e_d1b34b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T20:23:06Z",
+      "side": 1,
+      "message": "OK",
+      "parentUuid": "4cf4674a_10d39cbe",
+      "revId": "08cf5b620bfd23b889664056e17b6e2cec67d8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ab520f_98e88369",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T20:23:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "08cf5b620bfd23b889664056e17b6e2cec67d8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
