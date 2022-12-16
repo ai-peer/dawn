@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82534b0_744af661",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-16T05:13:47Z",
+      "side": 1,
+      "message": "I rewrote this fuzzer to use Dawn\u0027s existing generator pipeline and split it up into a few CLs as the fuzzing logic grew a bit.",
+      "revId": "d9dbf805dcda7ec0d30561f4251790ffe7878631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
