@@ -34,6 +34,23 @@
       "parentUuid": "d2ae25d2_6fbc0f23",
       "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52b480b9_48f31308",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T22:09:04Z",
+      "side": 1,
+      "message": "LGTM after the bot addition",
+      "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
