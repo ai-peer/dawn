@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ae25d2_6fbc0f23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2022-12-16T21:43:37Z",
+      "side": 1,
+      "message": "PTAL, suppressing failures seen in:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-win-x64-intel-exp/3/overview\nhttps://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-win-x86-intel-exp/3/overview\n\nWill these be kept on the next CTS roll?\nMaybe we can add the experimental builders to the rolls, to keep the expectations up to date?",
+      "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
