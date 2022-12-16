@@ -16,6 +16,69 @@
       "message": "Finally getting back to this! Took me a while to work out how I wanted to approach it.",
       "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7314cb_ebd71278",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T21:10:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "089dbbed_d5d739bc",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T21:10:27Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 1031,
+        "startChar": 78,
+        "endLine": 1031,
+        "endChar": 93
+      },
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2d9f66f_37085348",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T21:10:27Z",
+      "side": 1,
+      "message": "I think this should be inside the TryEncode. otherwise, if the developer does something wrong such that they hit validation errors inside APIEnd(), then they will never successfully `mEncodingContext-\u003eExitRenderPass`. And then, this callback will run and it\u0027ll spew a lot of copy validation errors (since the pass is still open) which make no sense to the developer",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 5
+      },
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

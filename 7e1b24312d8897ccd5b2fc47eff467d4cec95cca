@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc923a2_6635abbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T21:10:27Z",
+      "side": 1,
+      "message": "SGTM. I\u0027ve realized we need to be careful anyway - the lazy clearing code in Metal sometimes uses `EncodeMetalRenderPass`. So, if we moved all the workarounds to the frontend, then we might drop some workarounds which used to support lazy clear.\n\nFor this workaround, I\u0027ve checked its not the case since we don\u0027t use the resolve operation to clear textures.",
+      "parentUuid": "8e98aa4d_d525422d",
+      "revId": "7e1b24312d8897ccd5b2fc47eff467d4cec95cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2c4ddb0_8f25c239",
