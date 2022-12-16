@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e98aa4d_d525422d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-16T19:54:43Z",
+      "side": 1,
+      "message": "While the latest patchset makes it easier to implement recursive workarounds like the Metal backend has, I\u0027m going to suggest that porting the remaining workarounds be a follow up CL, simply because they\u0027re complex enough to warrant their own reviews.\n\nFortunately this workaround just so happened to be the first one applied in the Metal backend previously, so the order of operations is preserved!",
+      "parentUuid": "4c8cbc9c_89a9c363",
+      "revId": "7e1b24312d8897ccd5b2fc47eff467d4cec95cca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2c4ddb0_8f25c239",
