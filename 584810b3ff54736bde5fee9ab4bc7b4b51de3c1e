@@ -33,6 +33,24 @@
       "message": "It appears win-dawn-rel e2e_validation seems to be having issues on Nvidia for some reason. https://ci.chromium.org/p/chromium/builders/try/win-dawn-rel. \n\nLmk if I\u0027m mistaken, but it appears to be happening for more than just me.",
       "revId": "584810b3ff54736bde5fee9ab4bc7b4b51de3c1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06f56aa1_31062981",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T02:12:57Z",
+      "side": 1,
+      "message": "you are correct - it is crbug.com/dawn/1615",
+      "parentUuid": "0acfa7eb_032587e1",
+      "revId": "584810b3ff54736bde5fee9ab4bc7b4b51de3c1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
