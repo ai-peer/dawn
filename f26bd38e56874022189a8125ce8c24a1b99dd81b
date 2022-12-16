@@ -109,6 +109,30 @@
       },
       "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcdf4ee3_97d9484b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-16T22:34:30Z",
+      "side": 1,
+      "message": "stops after a blank line",
+      "parentUuid": "58c7e1fe_fe16759b",
+      "range": {
+        "startLine": 470,
+        "startChar": 0,
+        "endLine": 486,
+        "endChar": 0
+      },
+      "revId": "f26bd38e56874022189a8125ce8c24a1b99dd81b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
