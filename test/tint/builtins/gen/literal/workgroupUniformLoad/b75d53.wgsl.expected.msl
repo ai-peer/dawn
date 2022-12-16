@@ -1,0 +1,28 @@
+#include <metal_stdlib>
+
+using namespace metal;
+bool tint_workgroupUniformLoad(threadgroup bool* const p) {
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  bool const result = *(p);
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  return result;
+}
+
+void workgroupUniformLoad_b75d53(threadgroup bool* const tint_symbol) {
+  bool res = tint_workgroupUniformLoad(tint_symbol);
+}
+
+void compute_main_inner(uint local_invocation_index, threadgroup bool* const tint_symbol_1) {
+  {
+    *(tint_symbol_1) = false;
+  }
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  workgroupUniformLoad_b75d53(tint_symbol_1);
+}
+
+kernel void compute_main(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  threadgroup bool tint_symbol_2;
+  compute_main_inner(local_invocation_index, &(tint_symbol_2));
+  return;
+}
+
