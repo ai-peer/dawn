@@ -283,6 +283,24 @@
       "parentUuid": "4ca51df5_d8ec235e",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66bb4125_4998ca80",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-17T05:36:02Z",
+      "side": 1,
+      "message": "The CL has been merged and I also implemented GetMapState() in wire.",
+      "parentUuid": "51f0fee5_57790bd1",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
