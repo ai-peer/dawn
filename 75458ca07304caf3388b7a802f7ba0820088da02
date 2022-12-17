@@ -69,6 +69,24 @@
       "parentUuid": "4f49a405_b4cb24fe",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc29207_bc14c46c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-17T04:10:10Z",
+      "side": 1,
+      "message": "By the way, the change in Dawn wire affected the CTS results. That means Chromium uses Dawn wire, not directly native, doesn\u0027t it? I didn\u0027t know that.",
+      "parentUuid": "c2e47c33_e78a9c2a",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
