@@ -51,6 +51,24 @@
       "parentUuid": "09b70269_59aa698e",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2e47c33_e78a9c2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-17T03:24:10Z",
+      "side": 1,
+      "message": "And I think the new callback timing matches the spec\n\nhttps://gpuweb.github.io/gpuweb/#dom-gpubuffer-unmap",
+      "parentUuid": "4f49a405_b4cb24fe",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
