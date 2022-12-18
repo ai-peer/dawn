@@ -33,6 +33,24 @@
       "message": "nit: Could we have a switch to be sure that we\u0027re not missing any state, and that we remember to add a case for future new states?",
       "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65ddf36_ac22e1f0",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-18T19:44:11Z",
+      "side": 1,
+      "message": "Thanks for the advice, updated. I remember you gave me the same advice in another CL. Sorry for my bad memory.\n\n\u003e for future new state\n\nSomething like MapState::Pending, isn\u0027t it? I added a comment.\n\nI first tried to add MapState::Pending but I gave up because the WebGPU spec describes that [[internal]].state \u003d\u003d available validation check is done in the device timeline. So I decided to introduce a new bool flag mPendingMap because mapped state shouldn\u0027t be overridden with pending map state.",
+      "parentUuid": "e56f2164_5e96c4a2",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
