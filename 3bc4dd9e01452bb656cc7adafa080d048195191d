@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b14df13a_8514db16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-18T11:46:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56f2164_5e96c4a2",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-18T11:46:08Z",
+      "side": 1,
+      "message": "nit: Could we have a switch to be sure that we\u0027re not missing any state, and that we remember to add a case for future new states?",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -319,6 +319,24 @@
       "parentUuid": "51f0fee5_57790bd1",
       "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f7ce3b_dbb62b50",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-18T11:46:08Z",
+      "side": 1,
+      "message": "Nice!",
+      "parentUuid": "66bb4125_4998ca80",
+      "revId": "f0722521786dc86ab7d05e492fcd084d992d28e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
