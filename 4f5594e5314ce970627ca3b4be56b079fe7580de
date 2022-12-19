@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7c6eae1_735ed3d7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-19T16:39:16Z",
+      "side": 1,
+      "message": "indeed - I\u0027ve been thinking something similar - like chaining an extra command stream onto a command. Could probably be used for the indirect draw validation that we have as well.",
+      "parentUuid": "9e6d2392_b50d3c38",
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2d9f66f_37085348",
         "filename": "src/dawn/native/RenderPassEncoder.cpp",
         "patchSetId": 5
