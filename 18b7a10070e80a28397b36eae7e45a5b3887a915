@@ -63,6 +63,30 @@
       },
       "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5b1cc1_6bd14e4c",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T16:15:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t that imply that we must use `uint64_t` as the storage type for `full_hashcode`? And use that type to pass it up constructors?",
+      "parentUuid": "68d99b25_e2aaa5f8",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
