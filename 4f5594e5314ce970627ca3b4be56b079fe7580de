@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "814fbe79_f5e1089b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T11:23:17Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "089dbbed_d5d739bc",
@@ -54,6 +71,23 @@
         "endLine": 1031,
         "endChar": 93
       },
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80ae59db_f4355476",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T11:23:17Z",
+      "side": 1,
+      "message": "It\u0027d be nice to find a way to create the textures only on submit because here the render pass encoder holds onto a lot of memory, but I don\u0027t think that we have the facilities to do this yet. Can we have a TODO to track this potential improvement?\n\nI\u0027m thinking that in the future we could add to the command stream a special command that says \"I will produce a bunch of commands for you to consume\", and then this workaround places one at the start of the render pass (but not BeginRenderPass) and one at the end. This way the additional commands and resources are created only on demand.",
       "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
