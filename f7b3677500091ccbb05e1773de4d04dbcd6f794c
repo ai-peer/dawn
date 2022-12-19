@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef9f4cfe_0db7a6af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-19T04:36:44Z",
+      "side": 1,
+      "message": "Can someone rerun Kokoro? Kokoro fails but the change in this CL seems to be unrelated. And what is the trigger for running Kokoro?",
+      "revId": "f7b3677500091ccbb05e1773de4d04dbcd6f794c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
