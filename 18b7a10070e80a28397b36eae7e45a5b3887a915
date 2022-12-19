@@ -111,6 +111,30 @@
       },
       "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f80e2ded_e43a9039",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T16:35:38Z",
+      "side": 1,
+      "message": "\u003e No. We use size_t for UniqueNode::Hash(). They\u0027re not the same.\n\nUnderstood. But in that case, for x86 the function returns a 32-bit value. If that\u0027s okay, then shouldn\u0027t we just use `size_t` for `full_hashcode`? If it\u0027s not okay, then `UniqueNode::Hash()` should return `uint64_t`.",
+      "parentUuid": "4dbb22f1_bed89767",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
