@@ -60,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3af39e99_e9f4d1f2",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:38:53Z",
+      "side": 1,
+      "message": "Can we also start updating that doc with this CL stack?",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a96e591_a932b1d7",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 26
