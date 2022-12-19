@@ -785,14 +785,11 @@ ComputePassEncoder* CommandEncoder::APIBeginComputePass(const ComputePassDescrip
 Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
     DeviceBase* device = GetDevice();
 
-    // If descriptor is invalid, make pass invalid and stop immediately
-    if (device->ConsumedError(ValidateComputePassDescriptor(device, descriptor))) {
-        return ComputePassEncoder::MakeError(device, this, &mEncodingContext);
-    }
-
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(ValidateComputePassDescriptor(device, descriptor));
+
             BeginComputePassCmd* cmd =
                 allocator->Allocate<BeginComputePassCmd>(Command::BeginComputePass);
 
@@ -856,16 +853,12 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
 
-    // If descriptor is invalid, make pass invalid and stop immediately
-    if (device->ConsumedError(ValidateRenderPassDescriptor(device, descriptor, &width, &height,
-                                                           &sampleCount, mUsageValidationMode),
-                              "validating render pass descriptor.")) {
-        return RenderPassEncoder::MakeError(device, this, &mEncodingContext);
-    }
-
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount,
+                                                  mUsageValidationMode));
+
             ASSERT(width > 0 && height > 0 && sampleCount > 0);
 
             mEncodingContext.WillBeginRenderPass();
