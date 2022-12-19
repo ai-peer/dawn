@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c54f0329_60cebc22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T15:32:26Z",
+      "side": 1,
+      "message": "One question about casting to `size_t`, but LGTM.",
+      "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0b33ab_9a5d8b17",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T15:32:26Z",
+      "side": 1,
+      "message": "There are a bunch of places where you cast to `size_t`, but I\u0027m not sure why this is necessary?",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
