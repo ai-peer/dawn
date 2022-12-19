@@ -69,6 +69,24 @@
       "parentUuid": "d65ddf36_ac22e1f0",
       "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93a33282_99dcbd52",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-19T16:41:14Z",
+      "side": 1,
+      "message": "OK, I have removed the TODO, thanks.\n\n\u003e in general TODOs shouldn\u0027t be associated with a person, but with an issue,\n\nI saw a lot of TODOs with a person name in Chromium code. So, Chromium and Dawn have different policies, don\u0027t they?",
+      "parentUuid": "e8b87154_2fea0fbd",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
