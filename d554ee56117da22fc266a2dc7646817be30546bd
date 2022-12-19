@@ -191,6 +191,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08604475_55277824",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:04:57Z",
+      "side": 1,
+      "message": "Given this is only tested with Chromium if fuzzing is enabled, we have a HIGH likelihood to break the code when we do updates to Dawn because this code will not compile neither in local builds or on CQ.\n\nIMHO we\u0027ll need to add some compilation of it on CQ before we turn it on by default. So in the meantime can it be all gated behind a GN variable that defaults to false?",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "500455fc_fda2c4c7",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 26
