@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecc8e8b7_bf29202a",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "nit: it is HTML in the dawn.json",
+      "range": {
+        "startLine": 25,
+        "startChar": 40,
+        "endLine": 25,
+        "endChar": 47
+      },
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd850b51_7142c67a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "Maybe we could describe why proto params start from wire params.",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5488cf_4bf61943",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "Do we see more toplevel dictionaries being added? Otherwise maybe this level could be inlined such that \"command\" becomes just a toplevel \"proto_commands\" something like that.",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "060dbc62_c472150f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "mem?? What is this a shorthand for?",
+      "range": {
+        "startLine": 602,
+        "startChar": 23,
+        "endLine": 602,
+        "endChar": 26
+      },
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3dc4e0f_0e0e40ff",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "Can you describe what this means to do? If names[0] is descriptor then we seem to drop the rest of the name which is weird.",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40487565_de3814c9",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "So this is a counter? Maybe we could add a makeCounter and incrementCounter part of the params passed instead of growing a list full of ones ^^",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee0ba17_d4143e6d",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "Why is the label skipped?",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8578300_85e2b047",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised that the definitions of write_proto_member are not recursive, and that float is considered \"complex\". Why is it here?",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42e38612_ce3f31e6",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:52:36Z",
+      "side": 1,
+      "message": "Overall this list of cases and the functions they dispatch too seem like they work but aren\u0027t super logical because annotations are what should cause repeated vs. not and they are not entirely switched over and dispatch to helper function that only handle a subset of types. Did you take a look at how WireCmd handles these?",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
