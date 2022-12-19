@@ -39,6 +39,30 @@
       },
       "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d99b25_e2aaa5f8",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2022-12-19T16:12:19Z",
+      "side": 1,
+      "message": "`full_hashcode` is `uint64_t`. You get a warning treated as error on x86 builds without the static cast.",
+      "parentUuid": "2d0b33ab_9a5d8b17",
+      "range": {
+        "startLine": 23,
+        "startChar": 11,
+        "endLine": 23,
+        "endChar": 30
+      },
+      "revId": "18b7a10070e80a28397b36eae7e45a5b3887a915",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
