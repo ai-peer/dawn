@@ -87,6 +87,24 @@
       "parentUuid": "e8b87154_2fea0fbd",
       "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13233d19_d316e686",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-19T17:13:35Z",
+      "side": 1,
+      "message": "Yes, a bit different. But also Chromium code can be a lot older and isn\u0027t always updated to the current guidelines.",
+      "parentUuid": "93a33282_99dcbd52",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
