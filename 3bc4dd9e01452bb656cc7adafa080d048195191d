@@ -51,6 +51,24 @@
       "parentUuid": "e56f2164_5e96c4a2",
       "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b87154_2fea0fbd",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T09:09:04Z",
+      "side": 1,
+      "message": "No worries at all, we\u0027re only human 😊\n\n\u003e Something like MapState::Pending, isn\u0027t it? I added a comment.\n\nNot necessarily for that state, but maybe also future states for persistently mapped buffers or other craziness we decide to add to the spec. So IMHO we could remove the TODO (and in general TODOs shouldn\u0027t be associated with a person, but with an issue, because the code is a shared artefact)",
+      "parentUuid": "d65ddf36_ac22e1f0",
+      "revId": "3bc4dd9e01452bb656cc7adafa080d048195191d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
