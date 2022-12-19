@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e6d2392_b50d3c38",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T11:24:12Z",
+      "side": 1,
+      "message": "Actually thinking of it, it might be a way to reduce some of the problems with multithreading because it would allow avoiding all(?) creation of resources during command encoding.",
+      "parentUuid": "80ae59db_f4355476",
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2d9f66f_37085348",
         "filename": "src/dawn/native/RenderPassEncoder.cpp",
         "patchSetId": 5
