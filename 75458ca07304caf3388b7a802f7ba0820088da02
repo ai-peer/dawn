@@ -87,6 +87,24 @@
       "parentUuid": "c2e47c33_e78a9c2a",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f147f53b_705fffcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-19T17:16:12Z",
+      "side": 1,
+      "message": "Yes, that\u0027s right. Chromium uses Dawn wire to remote the commands from the Renderer process to the GPU process, where they get executed using Dawn native.",
+      "parentUuid": "6fc29207_bc14c46c",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
