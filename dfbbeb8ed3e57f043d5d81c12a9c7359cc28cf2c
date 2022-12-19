@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ec0ff4_509d654c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2022-12-19T19:19:46Z",
+      "side": 1,
+      "message": "Oh interesting... Lol so I forgot to actually destroy the view when even though it\u0027s destroy method was being called before? Thanks for catching this.",
+      "revId": "dfbbeb8ed3e57f043d5d81c12a9c7359cc28cf2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
