@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2abcc4b7_7f0b0988",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 1,
+      "message": "Changed these to avoid failed bitcasts of -1 to f32.",
+      "range": {
+        "startLine": 906,
+        "startChar": 1,
+        "endLine": 911,
+        "endChar": 69
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1433dfc1_f3ded2ca",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 1,
+      "message": "Moved validation before const eval so that we can assume valid inputs in const eval code.",
+      "range": {
+        "startLine": 1960,
+        "startChar": 4,
+        "endLine": 1960,
+        "endChar": 40
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "319c5df1_374cb67a",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 1,
+      "message": "Will be tackling this next.",
+      "range": {
+        "startLine": 1967,
+        "startChar": 4,
+        "endLine": 1967,
+        "endChar": 97
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6a5af8_c878ce25",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 1,
+      "message": "I had accidentally passed in args of different types in writing unit tests, and the runtime error was a fun one to understand. This makes it fail at compile time instead.",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 59
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dfe4b3a_634540f0",
+        "filename": "test/tint/unittest/reader/spirv/SpvParserTest_ShiftLeftLogical_Arg2Signed_SpvBinaryBitGeneralTest_EmitExpression_0.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 1,
+      "message": "When spir-v reader parses this, it was emitting `bitcast\u003c40i\u003e`, but now this fails because it\u0027s too large a shift value.",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

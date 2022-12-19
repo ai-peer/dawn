@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3387d0a4_233b4f1b",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-apfloat-mix-nan/0-opt.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-19T21:48:49Z",
+      "side": 0,
+      "message": "I deleted all the graphicsfuzz tests that purposely created nan as an input value via `bitcast\u003cf32\u003e(-1)` like here. These now fail compile time, but are also indeterminate at runtime.",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 39
+      },
+      "revId": "915e55a0d8ff2bdcdd624f0ee1b0e3689dc72a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
