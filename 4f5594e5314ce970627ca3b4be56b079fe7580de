@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb854f47_b7f07005",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-19T17:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "089dbbed_d5d739bc",
+      "range": {
+        "startLine": 1031,
+        "startChar": 78,
+        "endLine": 1031,
+        "endChar": 93
+      },
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80ae59db_f4355476",
@@ -128,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7acd6814_3006a25d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1071,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-19T17:41:12Z",
+      "side": 1,
+      "message": "TODO added, points to https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1618",
+      "parentUuid": "d7c6eae1_735ed3d7",
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2d9f66f_37085348",
@@ -141,6 +183,30 @@
       "writtenOn": "2022-12-16T21:10:27Z",
       "side": 1,
       "message": "I think this should be inside the TryEncode. otherwise, if the developer does something wrong such that they hit validation errors inside APIEnd(), then they will never successfully `mEncodingContext-\u003eExitRenderPass`. And then, this callback will run and it\u0027ll spew a lot of copy validation errors (since the pass is still open) which make no sense to the developer",
+      "range": {
+        "startLine": 164,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 5
+      },
+      "revId": "4f5594e5314ce970627ca3b4be56b079fe7580de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33b3eff2_feae3f9f",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2022-12-19T17:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2d9f66f_37085348",
       "range": {
         "startLine": 164,
         "startChar": 4,
