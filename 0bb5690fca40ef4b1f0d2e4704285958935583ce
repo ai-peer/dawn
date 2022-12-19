@@ -1,0 +1,323 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1a339d_2be2716b",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: duplicated with [1] ?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "476d1965_e5e0f2c3",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "TBH this could probably be added to the wire data. It\u0027s generally useful (and could be used to reduce the manual code in the wire by making WireCmd use this type instead of the ID and deserialize for us?)",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09051807_304bb336",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "This information we should already have in dawn.json no?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a630bfd2_eb0c3988",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "It seems that the only two things that are LPM specific are clamp and overrides. We could have very flat custom tables for these. The idea is to move out complexity from the code generator in Python to the templates, or to hardcoded files (if it keeps reasonably the same amount of complexity)\n\n```\n  clamps: {\n    \"buffer descriptor/size\": 16k,\n    \"queue write buffer/size\": 16k\n  }\n  \n  // This one could almost just be purely handwritten?\n  overrides: {\n    \"instance request adapter/instance id\": 1,\n  }\n```",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222998d6_87719ca6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "What does LPM mean actually?",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 7
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d60e1f9_0b71f714",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "With the changes suggested above, I think the need for these three functions and RecordMember.lpm_info disappears since the template can directly check `full_path in lpn_info.overrides` for example.",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d49aeb29_a148e413",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "The same function is defined twice, seems like an issue introduced while splitting the files?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f0dc02_fe3b055b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: these two could be factored as a function call twice once for the commands and once for the structures since both are \"records\".",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b028bd8_75f28ffa",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3d851dc_42b598c7",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: + \u0027__\u0027 ? Or is there a reason we add twice? ditto below",
+      "range": {
+        "startLine": 744,
+        "startChar": 23,
+        "endLine": 744,
+        "endChar": 30
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "433b87d6_4738aaef",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "duplicated as well? Ditto for as_protobufNameLPM",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ba7430_1966185d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: Can\u0027t these symbols just be added in the templates?",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 801,
+        "endChar": 23
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8cba0c2_4e43d2bf",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: these two lambdas seem unnecessary since they forward args directly to the function and nothing else.",
+      "range": {
+        "startLine": 1305,
+        "startChar": 6,
+        "endLine": 1307,
+        "endChar": 61
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0fc7389_7e48b0ce",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "Erhmm this is a lot of code and kinda hard to undestand the overall structure. Could we have a block comment that explains the high level flow of macros and what each type does?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ec6601_ac681fda",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "nit: This number should be generated most likely as well.",
+      "range": {
+        "startLine": 310,
+        "startChar": 56,
+        "endLine": 310,
+        "endChar": 58
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0a1bc06_d2405979",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "ditto could be generated for when we need to add more objects? Also all of these could be constexpr integers I think.",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be1f8c72_5602d556",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T14:23:25Z",
+      "side": 1,
+      "message": "Uuuuh it would be best if we didn\u0027t depend on client files so things stay as decoupled as possible (WireCmd we don\u0027t have a choice though). So maybe this file could have its own type for ObjectHandle? Or at least use dawn/wire/ObjectHandle.h instead of the client file.",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
