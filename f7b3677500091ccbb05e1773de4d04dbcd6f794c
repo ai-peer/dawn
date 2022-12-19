@@ -16,6 +16,24 @@
       "message": "Can someone rerun Kokoro? Kokoro fails but the change in this CL seems to be unrelated. And what is the trigger for running Kokoro?",
       "revId": "f7b3677500091ccbb05e1773de4d04dbcd6f794c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5204596_f4c7b450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T09:16:28Z",
+      "side": 1,
+      "message": "Done. There was a racy behavior in the build, put up https://dawn-review.googlesource.com/c/dawn/+/114521 to fix it.",
+      "parentUuid": "ef9f4cfe_0db7a6af",
+      "revId": "f7b3677500091ccbb05e1773de4d04dbcd6f794c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
