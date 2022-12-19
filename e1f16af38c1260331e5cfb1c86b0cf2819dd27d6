@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7558a049_c01eecbd",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:55:28Z",
+      "side": 1,
+      "message": "Maybe this could implicitly also contain the entries in blocklisted_cmds_proto so that there is less duplication.",
+      "revId": "e1f16af38c1260331e5cfb1c86b0cf2819dd27d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00992d3d_ca7043bc",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm_custom.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-12-19T13:55:28Z",
+      "side": 1,
+      "message": "nit: Can\u0027t this be generated? Otherwise we\u0027ll have to modify it each time we add a new object type.",
+      "revId": "e1f16af38c1260331e5cfb1c86b0cf2819dd27d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
