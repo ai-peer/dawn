@@ -16,6 +16,57 @@
       "message": "Can the expectations.txt lines be removed with this CL or are the CTS tests still differing from the implementation?",
       "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57eaf4ee_3ff7770f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-20T02:21:12Z",
+      "side": 1,
+      "message": "Sorry again for causing churn/revert.",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37b324e3_ae20a9a7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-20T02:21:12Z",
+      "side": 1,
+      "message": "We still need a validation error if the parent encoder is in the wrong state (i.e. it\u0027s closed already). Do we implement that? (Also do we test it? iirc someone wrote CTS for it already)",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c617bd2_4a2f7ca6",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-20T02:21:12Z",
+      "side": 1,
+      "message": "same",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
