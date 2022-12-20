@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c4a7ff_251ebed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-20T02:14:09Z",
+      "side": 1,
+      "message": "Can the expectations.txt lines be removed with this CL or are the CTS tests still differing from the implementation?",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
