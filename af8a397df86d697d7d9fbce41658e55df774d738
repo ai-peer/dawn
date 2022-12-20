@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5bf94c3_7573fc9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-20T18:03:36Z",
+      "side": 1,
+      "message": "Ah thanks for reminding that",
+      "parentUuid": "62c4a7ff_251ebed1",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37b324e3_ae20a9a7",
@@ -83,6 +101,24 @@
       "side": 1,
       "message": "I believe Yunchao will have a CL for this soonish",
       "parentUuid": "37b324e3_ae20a9a7",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afa8295_90663f73",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2022-12-20T18:03:36Z",
+      "side": 1,
+      "message": "Related to the CTS, I think you are talking about `webgpu:api,validation,encoding,encoder_state`. I just added beginComputePass/RenderPass at https://github.com/gpuweb/cts/pull/2093\n\nThe implementation part as Austin said will be added by Yunchao",
+      "parentUuid": "e92bbe41_30d2a698",
       "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
