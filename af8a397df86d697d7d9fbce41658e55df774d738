@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f07f56b6_e193cce7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-20T17:32:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37b324e3_ae20a9a7",
@@ -48,6 +65,24 @@
       "writtenOn": "2022-12-20T02:21:12Z",
       "side": 1,
       "message": "We still need a validation error if the parent encoder is in the wrong state (i.e. it\u0027s closed already). Do we implement that? (Also do we test it? iirc someone wrote CTS for it already)",
+      "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92bbe41_30d2a698",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-20T17:32:19Z",
+      "side": 1,
+      "message": "I believe Yunchao will have a CL for this soonish",
+      "parentUuid": "37b324e3_ae20a9a7",
       "revId": "af8a397df86d697d7d9fbce41658e55df774d738",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
