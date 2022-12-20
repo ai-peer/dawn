@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9836688f_acb359e0",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1971,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-20T15:42:47Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that the error points at the for here, rather than the initializer expression, but I guess that\u0027s for another day.",
+      "range": {
+        "startLine": 1971,
+        "startChar": 2,
+        "endLine": 1971,
+        "endChar": 5
+      },
+      "revId": "9141f098e7d4a6452361d7d3662e43cc21dbbd3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
