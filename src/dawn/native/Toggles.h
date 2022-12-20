@@ -83,6 +83,7 @@ enum class Toggle {
     VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass,
     D3D12Allocate2DTexturewithCopyDstAsCommittedResource,
     DisallowDeprecatedAPIs,
+    CopyTexturesToBuffersRowByRow,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,

@@ -268,8 +268,13 @@ void Device::InitTogglesFromDriver() {
             gpu_info::IsIntelGen8(vendorId, deviceId)) {
             ForceSetToggle(Toggle::NoWorkaroundIndirectBaseVertexNotApplied, true);
         }
+        //if (![NSProcessInfo.processInfo
+        //        isOperatingSystemAtLeastVersion:NSOperatingSystemVersion{13, 1, 0}]) {
+        //    ForceSetToggle(Toggle::CopyTexturesToBuffersRowByRow, true);
+        //}
     }
 #endif
+//    ForceSetToggle(Toggle::CopyTexturesToBuffersRowByRow, true);
 }
 
 ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
