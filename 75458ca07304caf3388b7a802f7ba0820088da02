@@ -105,6 +105,24 @@
       "parentUuid": "6fc29207_bc14c46c",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a825f575_5a98d5c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2022-12-20T03:02:17Z",
+      "side": 1,
+      "message": "Your suggested test rewrite looks good. Note we also should test something like this:\n\n// the buffer is invalid\n1. const promise \u003d t.expectGPUError(\u0027validation\u0027, buffer.mapAsync(params), true);\n2. buffer.unmap();\n3. t.shouldReject(\u0027AbortError\u0027, promise);",
+      "parentUuid": "f147f53b_705fffcb",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
