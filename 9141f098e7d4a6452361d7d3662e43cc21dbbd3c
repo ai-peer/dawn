@@ -22,6 +22,30 @@
       },
       "revId": "9141f098e7d4a6452361d7d3662e43cc21dbbd3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9496cfee_44504170",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1971,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-20T15:43:50Z",
+      "side": 1,
+      "message": "Ah nevermind, this is about \"control flow\". My bad.",
+      "parentUuid": "9836688f_acb359e0",
+      "range": {
+        "startLine": 1971,
+        "startChar": 2,
+        "endLine": 1971,
+        "endChar": 5
+      },
+      "revId": "9141f098e7d4a6452361d7d3662e43cc21dbbd3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
