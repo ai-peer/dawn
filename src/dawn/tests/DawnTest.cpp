@@ -1241,8 +1241,8 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
     wgpu::TextureFormat format,
     uint32_t width,
     uint32_t height,
-    uint32_t arrayLayer,
     uint32_t mipLevel,
+    uint32_t arrayLayer,
     std::vector<float> expectedDepth,
     uint8_t* expectedStencil) {
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();

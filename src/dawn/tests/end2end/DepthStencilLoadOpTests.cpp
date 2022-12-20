@@ -151,15 +151,15 @@ class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTest
 
             case Check::DepthTest: {
                 std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
-                ExpectAttachmentDepthTestData(texture, GetParam().mFormat, mipSize, mipSize, 0,
-                                              mipLevel, expectedDepth)
+                ExpectAttachmentDepthTestData(texture, GetParam().mFormat, mipSize, mipSize,
+                                              mipLevel, 0, expectedDepth)
                     << "depth test mip " << mipLevel;
                 break;
             }
 
             case Check::StencilTest: {
-                ExpectAttachmentStencilTestData(texture, GetParam().mFormat, mipSize, mipSize, 0,
-                                                mipLevel, kStencilValues[mipLevel])
+                ExpectAttachmentStencilTestData(texture, GetParam().mFormat, mipSize, mipSize,
+                                                mipLevel, 0, kStencilValues[mipLevel])
                     << "stencil test mip " << mipLevel;
                 break;
             }
@@ -399,7 +399,7 @@ TEST_P(DepthTextureClearTwiceTest, ClearDepthAspectTwice) {
             uint32_t sizeAtLevel = kSize >> level;
             std::vector<float> expectedValue(sizeAtLevel * sizeAtLevel, 0.f);
             ExpectAttachmentDepthTestData(depthTexture, GetParam().mFormat, sizeAtLevel,
-                                          sizeAtLevel, 0, level, expectedValue);
+                                          sizeAtLevel, level, 0, expectedValue);
         }
     }
 }

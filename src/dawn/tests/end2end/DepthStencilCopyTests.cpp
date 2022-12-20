@@ -78,6 +78,7 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
     bool IsValidDepthCopyTextureFormat() {
         switch (GetParam().mTextureFormat) {
             case wgpu::TextureFormat::Depth16Unorm:
+            case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32Float:
             case wgpu::TextureFormat::Depth32FloatStencil8:
                 return true;
@@ -89,9 +90,10 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
     wgpu::Texture CreateTexture(uint32_t width,
                                 uint32_t height,
                                 wgpu::TextureUsage usage,
-                                uint32_t mipLevelCount = 1) {
+                                uint32_t mipLevelCount = 1,
+                                uint32_t arrayLayerCount = 1) {
         wgpu::TextureDescriptor texDescriptor = {};
-        texDescriptor.size = {width, height, 1};
+        texDescriptor.size = {width, height, arrayLayerCount};
         texDescriptor.format = GetParam().mTextureFormat;
         texDescriptor.usage = usage;
         texDescriptor.mipLevelCount = mipLevelCount;
@@ -101,9 +103,10 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
     wgpu::Texture CreateDepthStencilTexture(uint32_t width,
                                             uint32_t height,
                                             wgpu::TextureUsage usage,
-                                            uint32_t mipLevelCount = 1) {
+                                            uint32_t mipLevelCount = 1,
+                                            uint32_t arrayLayerCount = 1) {
         wgpu::TextureDescriptor texDescriptor = {};
-        texDescriptor.size = {width, height, 1};
+        texDescriptor.size = {width, height, arrayLayerCount};
         texDescriptor.format = GetParam().mTextureFormat;
         texDescriptor.usage = usage;
         texDescriptor.mipLevelCount = mipLevelCount;
@@ -130,7 +133,8 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                                              float regionDepth,
                                              uint8_t clearStencil,
                                              uint8_t regionStencil,
-                                             uint32_t mipLevel = 0) {
+                                             uint32_t mipLevel = 0,
+                                             uint32_t arrayLayer = 0) {
         wgpu::TextureFormat format = GetParam().mTextureFormat;
         // Create the render pass used for the initialization.
         utils::ComboRenderPipelineDescriptor renderPipelineDesc;
@@ -162,6 +166,8 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         wgpu::TextureViewDescriptor viewDesc = {};
         viewDesc.baseMipLevel = mipLevel;
         viewDesc.mipLevelCount = 1;
+        viewDesc.baseArrayLayer = arrayLayer;
+        viewDesc.arrayLayerCount = 1;
 
         utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
         renderPassDesc.UnsetDepthStencilLoadStoreOpsForFormat(format);
@@ -187,24 +193,25 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
                                                                 uint32_t width,
                                                                 uint32_t height,
                                                                 wgpu::TextureUsage usage,
-                                                                uint32_t mipLevel = 0) {
+                                                                uint32_t mipLevel = 0,
+                                                                uint32_t arrayLayer = 0) {
         wgpu::Texture src = CreateDepthStencilTexture(
             width, height, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,
-            mipLevel + 1);
+            mipLevel + 1, arrayLayer + 1);
 
         wgpu::Texture dst = CreateDepthStencilTexture(
-            width, height, usage | wgpu::TextureUsage::CopyDst, mipLevel + 1);
+            width, height, usage | wgpu::TextureUsage::CopyDst, mipLevel + 1, arrayLayer + 1);
 
         InitializeDepthStencilTextureRegion(src, clearDepth, regionDepth, clearStencil,
-                                            regionStencil, mipLevel);
+                                            regionStencil, mipLevel, arrayLayer);
 
         // Perform a T2T copy of all aspects
         {
             wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
             wgpu::ImageCopyTexture srcView =
-                utils::CreateImageCopyTexture(src, mipLevel, {0, 0, 0});
+                utils::CreateImageCopyTexture(src, mipLevel, {0, 0, arrayLayer});
             wgpu::ImageCopyTexture dstView =
-                utils::CreateImageCopyTexture(dst, mipLevel, {0, 0, 0});
+                utils::CreateImageCopyTexture(dst, mipLevel, {0, 0, arrayLayer});
             wgpu::Extent3D copySize = {width >> mipLevel, height >> mipLevel, 1};
             commandEncoder.CopyTextureToTexture(&srcView, &dstView, &copySize);
 
@@ -371,6 +378,23 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyNonZeroMipDepth) {
         0.1f, 0.3f, 1u, 3u, 8, 8, wgpu::TextureUsage::RenderAttachment, 1);
 
     // Check the depth
+    ExpectAttachmentDepthTestData(texture, GetParam().mTextureFormat, 4, 4, 1, 0,
+                                  {
+                                      0.1, 0.1, 0.1, 0.1,  //
+                                      0.1, 0.1, 0.1, 0.1,  //
+                                      0.3, 0.3, 0.1, 0.1,  //
+                                      0.3, 0.3, 0.1, 0.1,  //
+                                  });
+}
+
+// Test copying both aspects in a T2T copy, then copying only depth at a nonzero layer.
+TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyNonZeroLayer) {
+    DAWN_TEST_UNSUPPORTED_IF(!IsValidDepthCopyTextureFormat());
+
+    wgpu::Texture texture = CreateInitializeDepthStencilTextureAndCopyT2T(
+        0.1f, 0.3f, 1u, 3u, 4, 4, wgpu::TextureUsage::RenderAttachment, 0, 1);
+
+    // Check the depth
     ExpectAttachmentDepthTestData(texture, GetParam().mTextureFormat, 4, 4, 0, 1,
                                   {
                                       0.1, 0.1, 0.1, 0.1,  //
@@ -462,7 +486,8 @@ class DepthCopyTests : public DepthStencilCopyTests {
                              float initDepth,
                              uint32_t textureWidth,
                              uint32_t textureHeight,
-                             uint32_t testLevel) {
+                             uint32_t testLevel = 0,
+                             uint32_t testLayer = 0) {
         // TODO(crbug.com/dawn/1237): Depth16Unorm test failed on OpenGL and OpenGLES which says
         // Invalid format and type combination in glReadPixels
         DAWN_TEST_UNSUPPORTED_IF(GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm &&
@@ -473,11 +498,13 @@ class DepthCopyTests : public DepthStencilCopyTests {
         DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
 
         uint32_t mipLevelCount = testLevel + 1;
-        wgpu::Texture texture = CreateTexture(
-            textureWidth, textureHeight,
-            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, mipLevelCount);
+        uint32_t arrayLayerCount = testLayer + 1;
+        wgpu::Texture texture =
+            CreateTexture(textureWidth, textureHeight,
+                          wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,
+                          mipLevelCount, arrayLayerCount);
 
-        InitializeDepthStencilTextureRegion(texture, 0.f, initDepth, 0, 0, testLevel);
+        InitializeDepthStencilTextureRegion(texture, 0.f, initDepth, 0, 0, testLevel, testLayer);
 
         uint32_t copyWidth = textureWidth >> testLevel;
         uint32_t copyHeight = textureHeight >> testLevel;
@@ -494,7 +521,7 @@ class DepthCopyTests : public DepthStencilCopyTests {
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
-            texture, testLevel, {0, 0, 0}, wgpu::TextureAspect::DepthOnly);
+            texture, testLevel, {0, 0, testLayer}, wgpu::TextureAspect::DepthOnly);
         wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
             destinationBuffer, bufferCopyOffset, kBytesPerRow, copyHeight);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
@@ -561,6 +588,17 @@ TEST_P(DepthCopyTests, FromNonZeroMipDepthAspect) {
     constexpr uint32_t kHeight = 9;
     constexpr uint32_t kTestLevel = 1;
     DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, kTestLevel);
+}
+
+// Test copying the non-zero layer, depth-only aspect into a buffer.
+TEST_P(DepthCopyTests, FromNonZeroLayerDepthAspect) {
+    constexpr float kInitDepth = 0.2f;
+    constexpr uint32_t kBufferCopyOffset = 0;
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 4;
+    constexpr uint32_t kTestLevel = 0;
+    constexpr uint32_t kTestLayer = 1;
+    DoCopyFromDepthTest(kBufferCopyOffset, kInitDepth, kWidth, kHeight, kTestLevel, kTestLayer);
 }
 
 class DepthCopyFromBufferTests : public DepthStencilCopyTests {
@@ -668,7 +706,8 @@ class StencilCopyTests : public DepthStencilCopyTests {
     void DoCopyFromStencilTest(uint32_t bufferCopyOffset,
                                uint32_t textureWidth,
                                uint32_t textureHeight,
-                               uint32_t testLevel) {
+                               uint32_t testLevel = 0,
+                               uint32_t testLayer = 0) {
         // TODO(crbug.com/dawn/1497): glReadPixels: GL error: HIGH: Invalid format and type
         // combination.
         DAWN_SUPPRESS_TEST_IF(IsANGLE());
@@ -678,11 +717,14 @@ class StencilCopyTests : public DepthStencilCopyTests {
         DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
         uint32_t mipLevelCount = testLevel + 1;
+        uint32_t arrayLayerCount = testLayer + 1;
         wgpu::Texture depthStencilTexture = CreateDepthStencilTexture(
             textureWidth, textureHeight,
-            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, mipLevelCount);
+            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc, mipLevelCount,
+            arrayLayerCount);
 
-        InitializeDepthStencilTextureRegion(depthStencilTexture, 0.f, 0.3f, 0u, 1u, testLevel);
+        InitializeDepthStencilTextureRegion(depthStencilTexture, 0.f, 0.3f, 0u, 1u, testLevel,
+                                            testLayer);
 
         std::vector<uint8_t> expectedData = {
             0u, 0u, 0u, 0u,  //
@@ -707,7 +749,7 @@ class StencilCopyTests : public DepthStencilCopyTests {
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
-            depthStencilTexture, testLevel, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
+            depthStencilTexture, testLevel, {0, 0, testLayer}, wgpu::TextureAspect::StencilOnly);
         wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
             destinationBuffer, bufferCopyOffset, kBytesPerRow, copyHeight);
         encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
@@ -883,6 +925,16 @@ TEST_P(StencilCopyTests, FromNonZeroMipStencilAspect) {
     constexpr uint32_t kTestLevel = 1;
     constexpr uint32_t kBufferCopyOffset = 0;
     DoCopyFromStencilTest(kBufferCopyOffset, kWidth, kHeight, kTestLevel);
+}
+
+// Test copying the non-zero layer, stencil-only aspect into a buffer.
+TEST_P(StencilCopyTests, FromNonZeroLayerStencilAspect) {
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 4;
+    constexpr uint32_t kTestLevel = 0;
+    constexpr uint32_t kTestLayer = 1;
+    constexpr uint32_t kBufferCopyOffset = 0;
+    DoCopyFromStencilTest(kBufferCopyOffset, kWidth, kHeight, kTestLevel, kTestLayer);
 }
 
 // Test copying to the stencil-aspect of a texture

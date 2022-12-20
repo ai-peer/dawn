@@ -518,8 +518,8 @@ class DawnTestBase {
                                                              wgpu::TextureFormat format,
                                                              uint32_t width,
                                                              uint32_t height,
-                                                             uint32_t arrayLayer,
                                                              uint32_t mipLevel,
+                                                             uint32_t arrayLayer,
                                                              std::vector<float> expectedDepth,
                                                              uint8_t* expectedStencil);
 
@@ -527,22 +527,22 @@ class DawnTestBase {
                                                       wgpu::TextureFormat format,
                                                       uint32_t width,
                                                       uint32_t height,
-                                                      uint32_t arrayLayer,
                                                       uint32_t mipLevel,
+                                                      uint32_t arrayLayer,
                                                       std::vector<float> expectedDepth) {
-        return ExpectAttachmentDepthStencilTestData(texture, format, width, height, arrayLayer,
-                                                    mipLevel, std::move(expectedDepth), nullptr);
+        return ExpectAttachmentDepthStencilTestData(texture, format, width, height, mipLevel,
+                                                    arrayLayer, std::move(expectedDepth), nullptr);
     }
 
     std::ostringstream& ExpectAttachmentStencilTestData(wgpu::Texture texture,
                                                         wgpu::TextureFormat format,
                                                         uint32_t width,
                                                         uint32_t height,
-                                                        uint32_t arrayLayer,
                                                         uint32_t mipLevel,
+                                                        uint32_t arrayLayer,
                                                         uint8_t expectedStencil) {
-        return ExpectAttachmentDepthStencilTestData(texture, format, width, height, arrayLayer,
-                                                    mipLevel, {}, &expectedStencil);
+        return ExpectAttachmentDepthStencilTestData(texture, format, width, height, mipLevel,
+                                                    arrayLayer, {}, &expectedStencil);
     }
 
     void WaitABit(wgpu::Device = nullptr);
