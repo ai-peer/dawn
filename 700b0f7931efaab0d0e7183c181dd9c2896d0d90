@@ -1,6 +1,80 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dce8721_dcce45c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e385694_ef867a3b",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Nit: Comment should be changed to i32 too?",
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b746ab5c_058c5d44",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ditto.",
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "378259a7_c50d0aaa",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Nit: strings should be changed to i32 too?",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 47
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2abcc4b7_7f0b0988",
@@ -14,6 +88,30 @@
       "writtenOn": "2022-12-19T21:48:49Z",
       "side": 1,
       "message": "Changed these to avoid failed bitcasts of -1 to f32.",
+      "range": {
+        "startLine": 906,
+        "startChar": 1,
+        "endLine": 911,
+        "endChar": 69
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e25c8d8_959893c1",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2abcc4b7_7f0b0988",
       "range": {
         "startLine": 906,
         "startChar": 1,
@@ -47,6 +145,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8c2cc8_b087ce0d",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1960,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1433dfc1_f3ded2ca",
+      "range": {
+        "startLine": 1960,
+        "startChar": 4,
+        "endLine": 1960,
+        "endChar": 40
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "319c5df1_374cb67a",
@@ -60,6 +182,30 @@
       "writtenOn": "2022-12-19T21:48:49Z",
       "side": 1,
       "message": "Will be tackling this next.",
+      "range": {
+        "startLine": 1967,
+        "startChar": 4,
+        "endLine": 1967,
+        "endChar": 97
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53c0d51a_27f8a9d1",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1967,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "319c5df1_374cb67a",
       "range": {
         "startLine": 1967,
         "startChar": 4,
@@ -93,6 +239,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "287dd41b_2177c58e",
+        "filename": "src/tint/resolver/resolver_test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0c6a5af8_c878ce25",
+      "range": {
+        "startLine": 818,
+        "startChar": 0,
+        "endLine": 819,
+        "endChar": 59
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2dfe4b3a_634540f0",
@@ -106,6 +276,30 @@
       "writtenOn": "2022-12-19T21:48:49Z",
       "side": 1,
       "message": "When spir-v reader parses this, it was emitting `bitcast\u003c40i\u003e`, but now this fails because it\u0027s too large a shift value.",
+      "range": {
+        "startLine": 37,
+        "startChar": 37,
+        "endLine": 37,
+        "endChar": 43
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6b336a8_fae0c982",
+        "filename": "test/tint/unittest/reader/spirv/SpvParserTest_ShiftLeftLogical_Arg2Signed_SpvBinaryBitGeneralTest_EmitExpression_0.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2dfe4b3a_634540f0",
       "range": {
         "startLine": 37,
         "startChar": 37,

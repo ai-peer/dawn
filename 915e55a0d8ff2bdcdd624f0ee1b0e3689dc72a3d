@@ -22,6 +22,30 @@
       },
       "revId": "915e55a0d8ff2bdcdd624f0ee1b0e3689dc72a3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d947f739_10b706a8",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-apfloat-mix-nan/0-opt.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-20T15:09:05Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "3387d0a4_233b4f1b",
+      "range": {
+        "startLine": 67,
+        "startChar": 9,
+        "endLine": 67,
+        "endChar": 39
+      },
+      "revId": "915e55a0d8ff2bdcdd624f0ee1b0e3689dc72a3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
