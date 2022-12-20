@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65762c67_fb85217d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "LGTM with tiny nits.\nI learned a lot.  :-)\n\nThank you!",
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938368fc_f67944aa",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "These strings are concatenated unconditionally, but only used in a debugging-like flow.\nSuggest making CreateNode take an std::initializer_list{std::string_view} and then only assemble the actual std::string if in that debugging flow.\nThat way the string allocations only occur if in that debug flow.\n\nE.g. CreateNode({\"ptrparam_\",param_name,\"_input_contents\"});",
+      "range": {
+        "startLine": 191,
+        "startChar": 31,
+        "endLine": 191,
+        "endChar": 76
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfda8db_6214e9e8",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "This is the desugaring of the pointer params to local vars, right?\nProbably worth a comment to that effect, and referencing the spec.",
+      "range": {
+        "startLine": 195,
+        "startChar": 15,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d643f5a8_0be693e9",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "super duper small nit:  This doesn\u0027t allocate anything, so I\u0027d call it \"get\" rather than \"make\".\n\nBut no worries!",
+      "range": {
+        "startLine": 379,
+        "startChar": 13,
+        "endLine": 379,
+        "endChar": 17
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d1ca5e_d393d530",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "And in future with VariablePointers, the return type might be a pointer, and this can easily be extended to split the value-uniform vs. contents-uniform.\n\nFYI.",
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ead24563_d0edf320",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "nit: Slightly puzzled why this is check every *other* param.\nBut it doesn\u0027t skip i \u003d\u003d j.\nMight merit explanation.",
+      "range": {
+        "startLine": 446,
+        "startChar": 27,
+        "endLine": 446,
+        "endChar": 32
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f792b286_8ae9683b",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-20T20:20:14Z",
+      "side": 1,
+      "message": "nit: This is the third time I\u0027ve seen this pattern. Can it be encapsulated with a good name? like VarContentsNonuniform  or something?\nOr AddEdgeForVarContentsUniformity",
+      "range": {
+        "startLine": 1408,
+        "startChar": 15,
+        "endLine": 1409,
+        "endChar": 63
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
