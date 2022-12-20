@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbf901c_0c45f1eb",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-20T15:27:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e385694_ef867a3b",
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b746ab5c_058c5d44",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d035dc67_b54ec7fb",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-20T15:27:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b746ab5c_058c5d44",
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "378259a7_c50d0aaa",
@@ -65,6 +101,30 @@
       "writtenOn": "2022-12-20T15:09:05Z",
       "side": 1,
       "message": "Nit: strings should be changed to i32 too?",
+      "range": {
+        "startLine": 828,
+        "startChar": 0,
+        "endLine": 831,
+        "endChar": 47
+      },
+      "revId": "700b0f7931efaab0d0e7183c181dd9c2896d0d90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2823b429_3a11a543",
+        "filename": "src/tint/resolver/materialize_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-20T15:27:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "378259a7_c50d0aaa",
       "range": {
         "startLine": 828,
         "startChar": 0,
