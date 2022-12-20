@@ -123,6 +123,24 @@
       "parentUuid": "f147f53b_705fffcb",
       "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f67a6b2a_a12009bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2022-12-20T05:36:55Z",
+      "side": 1,
+      "message": "Yes, good catch. I will add a test.",
+      "parentUuid": "a825f575_5a98d5c2",
+      "revId": "75458ca07304caf3388b7a802f7ba0820088da02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
