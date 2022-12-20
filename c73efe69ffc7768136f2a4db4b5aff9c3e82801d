@@ -33,6 +33,24 @@
       "message": "We need additional work in Chromium to expose in JavaScript, don\u0027t we? I will work on it next when Dawn will be updated in Chromium.",
       "revId": "c73efe69ffc7768136f2a4db4b5aff9c3e82801d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981fd941_01e5a7ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-20T00:13:33Z",
+      "side": 1,
+      "message": "yup, for reference, the other buffer state reflection was implemented by cwallez@ in https://chromium-review.googlesource.com/c/chromium/src/+/3687793",
+      "parentUuid": "7ed89389_82485ab5",
+      "revId": "c73efe69ffc7768136f2a4db4b5aff9c3e82801d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
