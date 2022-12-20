@@ -655,8 +655,10 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
                                const Origin3D& origin,
                                Aspect aspect,
                                const Extent3D& copySize) {
-    TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
-        texture, mipLevel, origin, copySize, bufferSize, offset, bytesPerRow, rowsPerImage, aspect);
+    bool forceCopyRowByRow = false;
+    TextureBufferCopySplit splitCopies =
+        ComputeTextureBufferCopySplit(texture, mipLevel, origin, copySize, bufferSize, offset,
+                                      bytesPerRow, rowsPerImage, aspect, forceCopyRowByRow);
 
     MTLBlitOption blitOption = ComputeMTLBlitOption(texture->GetFormat(), aspect);
 
@@ -870,20 +872,43 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 Texture* texture = ToBackend(src.texture.Get());
                 Buffer* buffer = ToBackend(dst.buffer.Get());
 
+//std::ostringstream s;
+//s << absl::StrFormat("\n------\n[%s]::", texture->GetFormat().format) << ", size:(" << texture->GetSize().width << ", " << texture->GetSize().height << ", " << texture->GetSize().depthOrArrayLayers << "), mip: " << src.mipLevel << "\n";
+//s << "copyTextureToBuffer (" << src.origin.x << ", " << src.origin.y << ", " << src.origin.z << ")"
+//          << ", (" << copySize.width << ", " << copySize.height << ", "<< copySize.depthOrArrayLayers << ")\n"
+//          << "    offset: " << dst.offset << "\n"
+//          << "    bytesPerRow: " << dst.bytesPerRow << "\n"
+//          << "    rowsPerImage: " << dst.rowsPerImage << "\n"
+//          << "    bufferSize: " << buffer->GetSize() << "\n\n";
+//std::cerr << s.str();
+
                 buffer->EnsureDataInitializedAsDestination(commandContext, copy);
 
                 texture->SynchronizeTextureBeforeUse(commandContext);
                 texture->EnsureSubresourceContentInitialized(
                     commandContext, GetSubresourcesAffectedByCopy(src, copySize));
 
+                bool forceCopyRowByRow =
+                    GetDevice()->IsToggleEnabled(Toggle::CopyTexturesToBuffersRowByRow);
                 TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                     texture, src.mipLevel, src.origin, copySize, buffer->GetSize(), dst.offset,
-                    dst.bytesPerRow, dst.rowsPerImage, src.aspect);
+                    dst.bytesPerRow, dst.rowsPerImage, src.aspect, forceCopyRowByRow);
 
                 for (const auto& copyInfo : splitCopies) {
                     MTLBlitOption blitOption =
                         ComputeMTLBlitOption(texture->GetFormat(), src.aspect);
                     uint64_t bufferOffset = copyInfo.bufferOffset;
+
+//std::ostringstream s;
+//s << absl::StrFormat("    [%s]:", texture->GetFormat().format) << ", size:(" << texture->GetSize().width << ", " << texture->GetSize().height << ", " << texture->GetSize().depthOrArrayLayers << "), mip: " << src.mipLevel << "\n";
+//s << "    copy (" << copyInfo.textureOrigin.x << ", " << copyInfo.textureOrigin.y << ", " << copyInfo.textureOrigin.z << ")"
+//          << ", (" << copyInfo.copyExtent.width << ", " << copyInfo.copyExtent.height << ", "<< copyInfo.copyExtent.depthOrArrayLayers << ")\n"
+//          << "        bufferOffset: " << bufferOffset << "\n"
+//          << "        bytesPerRow: " << copyInfo.bytesPerRow << "\n"
+//          << "        bytesPerImage: " << copyInfo.bytesPerImage << "\n"
+//          << "        bufferSize: " << buffer->GetSize() << "\n";
+//std::cerr << s.str();
+
 
                     switch (texture->GetDimension()) {
                         case wgpu::TextureDimension::e1D: {
