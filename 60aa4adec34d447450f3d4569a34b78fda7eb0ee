@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73ed5c7_88da04b3",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T19:10:43Z",
+      "side": 1,
+      "message": "Great suggestion. I\u0027m going to do this as a follow-up for all calls to `CreateNode` to avoid extra churn in this patch.",
+      "parentUuid": "938368fc_f67944aa",
+      "range": {
+        "startLine": 191,
+        "startChar": 31,
+        "endLine": 191,
+        "endChar": 76
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cfda8db_6214e9e8",
@@ -66,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97256701_402f1118",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T19:10:43Z",
+      "side": 1,
+      "message": "No, we don\u0027t actually do the desugaring as described in the spec - at least not explicitly.\n\n`local_var_decls` is a set of variables declared in the function (or its params) that are in scope at any given point in the analysis, and is really just used by loops and if/else statements to know which things need extra nodes to capture their state on enter/exit from those constructs.",
+      "parentUuid": "3cfda8db_6214e9e8",
+      "range": {
+        "startLine": 195,
+        "startChar": 15,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d643f5a8_0be693e9",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 4
@@ -77,6 +125,30 @@
       "writtenOn": "2022-12-20T20:20:14Z",
       "side": 1,
       "message": "super duper small nit:  This doesn\u0027t allocate anything, so I\u0027d call it \"get\" rather than \"make\".\n\nBut no worries!",
+      "range": {
+        "startLine": 379,
+        "startChar": 13,
+        "endLine": 379,
+        "endChar": 17
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0c5b9d_cec99e84",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T19:10:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d643f5a8_0be693e9",
       "range": {
         "startLine": 379,
         "startChar": 13,
@@ -127,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3194724_e88532b9",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T19:10:43Z",
+      "side": 1,
+      "message": "Good spot. The \"other\" was inaccurate, as we also need to capture the way a pointer parameter affects its own output value (e.g. it could be unmodified by the function). Clarified the comment.",
+      "parentUuid": "ead24563_d0edf320",
+      "range": {
+        "startLine": 446,
+        "startChar": 27,
+        "endLine": 446,
+        "endChar": 32
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f792b286_8ae9683b",
@@ -140,6 +236,30 @@
       "writtenOn": "2022-12-20T20:20:14Z",
       "side": 1,
       "message": "nit: This is the third time I\u0027ve seen this pattern. Can it be encapsulated with a good name? like VarContentsNonuniform  or something?\nOr AddEdgeForVarContentsUniformity",
+      "range": {
+        "startLine": 1408,
+        "startChar": 15,
+        "endLine": 1409,
+        "endChar": 63
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45a7033a_895c7ed3",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T19:10:43Z",
+      "side": 1,
+      "message": "I agree that this the duplication here is awkward. I have plans to follow up with some general cleanups, which include having a clearer distinction between the nodes that represent the value of a pointer/reference and their contents. Then, we can create \"contents\" nodes for global variables (which have an edge to MayBeNonUniform if they are mutable), and we won\u0027t need to special case them in these places at all.\n\nSo I\u0027ll leave this as is for now.",
+      "parentUuid": "f792b286_8ae9683b",
       "range": {
         "startLine": 1408,
         "startChar": 15,
