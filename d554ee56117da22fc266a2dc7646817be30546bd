@@ -208,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1923b2b0_ae0aa90e",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2022-12-21T20:29:44Z",
+      "side": 1,
+      "message": "Completely agree here and I\u0027ll make this change. Can we chat offline about how we can mitigate some of the risk of this breaking due to updates to dawn.json? I tried copying the logic in [1] but I am not very happy with the current structure in the Jinja2 C++ file. I think I could improve a lot in this area. \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/dawn/wire/WireCmd.cpp;l\u003d102;drc\u003d2e1b35908774ad82ba7c036da8e04383c73c117d",
+      "parentUuid": "08604475_55277824",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "500455fc_fda2c4c7",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 26
