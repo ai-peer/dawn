@@ -16,6 +16,23 @@
       "message": "Suggested in a previous review.",
       "revId": "e4c5365ac1d26944bfdee79b06a773ca7957be01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4828c2ca_d57fe7d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-21T21:27:59Z",
+      "side": 1,
+      "message": "Nice.\n(I was channeling my inner Ben w.r.t. shooting for efficiency)",
+      "revId": "e4c5365ac1d26944bfdee79b06a773ca7957be01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
