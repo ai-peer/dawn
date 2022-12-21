@@ -16,6 +16,42 @@
       "message": "Arguably could go further here and test some nested arrays, but probably not essential.",
       "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fe6e55_209ca949",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-21T21:26:58Z",
+      "side": 1,
+      "message": "Yeah, I didn\u0027t because the `builder::Value` stuff doesn\u0027t support making composite types like that yet.",
+      "parentUuid": "d30bd1ab_e85777ae",
+      "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47e676b6_066ff2c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-21T21:26:58Z",
+      "side": 1,
+      "message": "No, that\u0027s a valid point. I can\u0027t currently make use of the `builder::Value` stuff to create nested arrays, but I\u0027ll write a test fixture that at least tests nested arrays of f32.",
+      "parentUuid": "d30bd1ab_e85777ae",
+      "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
