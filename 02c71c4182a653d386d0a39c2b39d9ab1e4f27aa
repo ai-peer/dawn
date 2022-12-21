@@ -52,6 +52,24 @@
       "parentUuid": "d30bd1ab_e85777ae",
       "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed35c796_a2546411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-21T21:56:18Z",
+      "side": 1,
+      "message": "Added test for array of array of f32.",
+      "parentUuid": "b8fe6e55_209ca949",
+      "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
