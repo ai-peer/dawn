@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30bd1ab_e85777ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T21:15:30Z",
+      "side": 1,
+      "message": "Arguably could go further here and test some nested arrays, but probably not essential.",
+      "revId": "02c71c4182a653d386d0a39c2b39d9ab1e4f27aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
