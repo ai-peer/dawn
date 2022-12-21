@@ -136,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13065956_2bb73259",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T21:37:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e060bfc9_3d01a8f4",
+      "range": {
+        "startLine": 195,
+        "startChar": 15,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d643f5a8_0be693e9",
