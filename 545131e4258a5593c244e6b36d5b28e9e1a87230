@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb095ca_96186e6f",
+        "filename": "src/tint/resolver/const_eval_construction_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2022-12-21T18:24:46Z",
+      "side": 1,
+      "message": "No `bool`?",
+      "revId": "545131e4258a5593c244e6b36d5b28e9e1a87230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
