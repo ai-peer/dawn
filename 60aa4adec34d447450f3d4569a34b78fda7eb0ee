@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e060bfc9_3d01a8f4",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-21T21:32:30Z",
+      "side": 1,
+      "message": "Right.  I went back and read the comment at local_var_decls.\n\nnit: Would be worth copying the meat of what you just said into the comment at the decl of local_var_decls.\n\nBut certainly can be done in followup.",
+      "parentUuid": "97256701_402f1118",
+      "range": {
+        "startLine": 195,
+        "startChar": 15,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d643f5a8_0be693e9",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 4
@@ -223,6 +247,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4da9d772_6a9ecff2",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-21T21:32:30Z",
+      "side": 1,
+      "message": "Yup.  a param can affect itself.",
+      "parentUuid": "c3194724_e88532b9",
+      "range": {
+        "startLine": 446,
+        "startChar": 27,
+        "endLine": 446,
+        "endChar": 32
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f792b286_8ae9683b",
@@ -260,6 +308,30 @@
       "side": 1,
       "message": "I agree that this the duplication here is awkward. I have plans to follow up with some general cleanups, which include having a clearer distinction between the nodes that represent the value of a pointer/reference and their contents. Then, we can create \"contents\" nodes for global variables (which have an edge to MayBeNonUniform if they are mutable), and we won\u0027t need to special case them in these places at all.\n\nSo I\u0027ll leave this as is for now.",
       "parentUuid": "f792b286_8ae9683b",
+      "range": {
+        "startLine": 1408,
+        "startChar": 15,
+        "endLine": 1409,
+        "endChar": 63
+      },
+      "revId": "60aa4adec34d447450f3d4569a34b78fda7eb0ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d8d2ca_d44cfc1e",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-21T21:32:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "45a7033a_895c7ed3",
       "range": {
         "startLine": 1408,
         "startChar": 15,
