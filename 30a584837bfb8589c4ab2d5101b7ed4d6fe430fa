@@ -16,6 +16,24 @@
       "message": "Nit: Remove commented code.",
       "revId": "30a584837bfb8589c4ab2d5101b7ed4d6fe430fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98dbac93_d5dfc6fb",
+        "filename": "src/tint/resolver/const_eval_indexing_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-21T19:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384c1fb0_2dd809ef",
+      "revId": "30a584837bfb8589c4ab2d5101b7ed4d6fe430fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
