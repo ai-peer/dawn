@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf69bf5_a208efa0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-21T23:45:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "08ad18595df83966b08e60cdf39518a2852c8b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b070e0_92847c25",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-21T23:45:18Z",
+      "side": 1,
+      "message": "typo: calculation",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 59
+      },
+      "revId": "08ad18595df83966b08e60cdf39518a2852c8b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9978cc08_5d55ce54",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2022-12-21T23:45:18Z",
+      "side": 1,
+      "message": "comment what it is supposed to be?",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 210,
+        "endChar": 54
+      },
+      "revId": "08ad18595df83966b08e60cdf39518a2852c8b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
