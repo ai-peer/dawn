@@ -1623,6 +1623,55 @@ TEST_F(ResolverConstEvalTest, Array_i32_Elements) {
     EXPECT_EQ(sem->ConstantValue()->Index(3)->ValueAs<i32>(), 40_i);
 }
 
+namespace ArrayInit {
+struct Case {
+    Value input;
+};
+Case C(Value input) {
+    return Case{std::move(input)};
+}
+
+using ResolverConstEvalArrayInitTest = ResolverTestWithParam<Case>;
+TEST_P(ResolverConstEvalArrayInitTest, Test) {
+    auto& param = GetParam();
+    auto* expr = param.input.Expr(*this);
+    auto* a = Const("a", expr);
+    WrapInFunction(a);
+
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+
+    auto* sem = Sem().Get(expr);
+    ASSERT_NE(sem, nullptr);
+    auto* arr = sem->Type()->As<type::Array>();
+    ASSERT_NE(arr, nullptr);
+
+    EXPECT_TYPE(sem->ConstantValue()->Type(), sem->Type());
+    // Constant values should match input values
+    CheckConstant(sem->ConstantValue(), param.input);
+}
+template <typename T>
+std::vector<Case> ArrayInitCases() {
+    return {
+        C(Array(0_a)),            //
+        C(Array(0_a)),            //
+        C(Array(0_a, 1_a)),       //
+        C(Array(0_a, 1_a, 2_a)),  //
+        C(Array(2_a, 1_a, 0_a)),  //
+        C(Array(2_a, 0_a, 1_a)),  //
+    };
+}
+INSTANTIATE_TEST_SUITE_P(  //
+    ArrayInit,
+    ResolverConstEvalArrayInitTest,
+    testing::ValuesIn(Concat(ArrayInitCases<AInt>(),    //
+                             ArrayInitCases<AFloat>(),  //
+                             ArrayInitCases<i32>(),     //
+                             ArrayInitCases<u32>(),     //
+                             ArrayInitCases<f32>(),     //
+                             ArrayInitCases<f16>(),     //
+                             ArrayInitCases<bool>())));
+}  // namespace ArrayInit
+
 TEST_F(ResolverConstEvalTest, Array_f32_Elements) {
     auto* expr = Construct(ty.array<f32, 4>(), 10_f, 20_f, 30_f, 40_f);
     WrapInFunction(expr);
