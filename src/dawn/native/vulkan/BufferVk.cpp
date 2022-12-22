@@ -217,7 +217,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // BufferBase::MapAtCreation().
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
-        ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
+        ClearBuffer(device->GetPendingRecordingContext());
     }
 
     // Initialize the padding bytes to zero.
@@ -228,7 +228,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
             uint64_t clearOffset = GetAllocatedSize() - clearSize;
 
             CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-            ClearBuffer(recordingContext, 0, clearOffset, clearSize);
+            ClearBuffer(recordingContext, clearOffset, clearSize);
         }
     }
 
@@ -311,12 +311,23 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
     EnsureDataInitialized(recordingContext);
 
+#if defined(DAWN_ENABLE_ASSERTS)
+    // Barrier transition is appended to the related queue submissions, so the buffer should be able
+    // to be mapped directly.
+    VkBufferMemoryBarrier barrier;
+    VkPipelineStageFlags srcStages = 0;
+    VkPipelineStageFlags dstStages = 0;
+
     if (mode & wgpu::MapMode::Read) {
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
+        ASSERT(!TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage::MapRead, &barrier,
+                                                     &srcStages, &dstStages));
     } else {
         ASSERT(mode & wgpu::MapMode::Write);
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
+        ASSERT(!TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage::MapWrite, &barrier,
+                                                     &srcStages, &dstStages));
     }
+#endif  // DAWN_ENABLE_ASSERTS
+
     return {};
 }
 
@@ -388,25 +399,28 @@ void Buffer::SetLabelImpl() {
 void Buffer::InitializeToZero(CommandRecordingContext* recordingContext) {
     ASSERT(NeedsInitialization());
 
-    ClearBuffer(recordingContext, 0u);
+    ClearBuffer(recordingContext);
     GetDevice()->IncrementLazyClearCountForTesting();
     SetIsDataInitialized();
 }
 
 void Buffer::ClearBuffer(CommandRecordingContext* recordingContext,
-                         uint32_t clearValue,
                          uint64_t offset,
                          uint64_t size) {
     ASSERT(recordingContext != nullptr);
     size = size > 0 ? size : GetAllocatedSize();
     ASSERT(size > 0);
 
-    TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
+    if (uint8_t* memory = mMemoryAllocation.GetMappedPointer()) {
+        memset(memory + offset, 0, size);
+    } else {
+        TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
-    Device* device = ToBackend(GetDevice());
-    // VK_WHOLE_SIZE doesn't work on old Windows Intel Vulkan drivers, so we don't use it.
-    // Note: Allocated size must be a multiple of 4.
-    ASSERT(size % 4 == 0);
-    device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size, clearValue);
+        Device* device = ToBackend(GetDevice());
+        // VK_WHOLE_SIZE doesn't work on old Windows Intel Vulkan drivers, so we don't use it.
+        // Note: Allocated size must be a multiple of 4.
+        ASSERT(size % 4 == 0);
+        device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size, 0u);
+    }
 }
 }  // namespace dawn::native::vulkan
