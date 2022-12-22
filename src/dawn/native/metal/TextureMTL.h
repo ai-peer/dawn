@@ -25,6 +25,7 @@
 #include "dawn/common/NSRef.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/MetalBackend.h"
+#include "dawn/native/PerAspect.h"
 
 namespace dawn::native::metal {
 
@@ -51,9 +52,12 @@ class Texture final : public TextureBase {
 
     Texture(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
 
-    id<MTLTexture> GetMTLTexture() const;
+    Aspect GetDisjointAspects() const;
+    MTLTextureUsage GetMTLUsage() const;
+
+    id<MTLTexture> GetMTLTexture(Aspect aspect) const;
     IOSurfaceRef GetIOSurface();
-    NSPRef<id<MTLTexture>> CreateFormatView(wgpu::TextureFormat format);
+    NSPRef<id<MTLTexture>> CreateViewForCopy(const Format& format, Aspect aspect);
 
     void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                              const SubresourceRange& range);
@@ -80,7 +84,7 @@ class Texture final : public TextureBase {
                             const SubresourceRange& range,
                             TextureBase::ClearValue clearValue);
 
-    NSPRef<id<MTLTexture>> mMtlTexture;
+    PerAspect<NSPRef<id<MTLTexture>>> mMtlTextures;
 
     MTLTextureUsage mMtlUsage;
     CFRef<IOSurfaceRef> mIOSurface = nullptr;
@@ -99,7 +103,7 @@ class TextureView final : public TextureViewBase {
         uint32_t baseMipLevel;
         uint32_t baseArrayLayer;
     };
-    AttachmentInfo GetAttachmentInfo() const;
+    AttachmentInfo GetAttachmentInfo(Aspect aspect) const;
 
   private:
     using TextureViewBase::TextureViewBase;

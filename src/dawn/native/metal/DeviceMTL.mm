@@ -258,6 +258,14 @@ void Device::InitTogglesFromDriver() {
         SetToggle(Toggle::MetalUseMockBlitEncoderForWriteTimestamp, true);
     }
 
+    if (gpu_info::IsIntel(vendorId)) {
+        SetToggle(Toggle::MetalUseDisjointTextureBindingDepthStencilTextures, true);
+    }
+    if (@available(macOS 10.12, iOS 10.0, *)) {
+    } else {
+        SetToggle(Toggle::MetalUseDisjointTextureBindingDepthStencilTextures, true);
+    }
+
 #if DAWN_PLATFORM_IS(MACOS)
     if (gpu_info::IsIntel(vendorId)) {
         if ([NSProcessInfo.processInfo

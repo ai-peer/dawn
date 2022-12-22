@@ -34,7 +34,7 @@ enum class Aspect : uint8_t {
     Plane1 = 0x10,
 
     // An aspect for that represents the combination of both the depth and stencil aspects. It
-    // can be ignored outside of the Vulkan backend.
+    // is an implementation detail for the Vulkan and Metal backends.
     CombinedDepthStencil = 0x20,
 };
 

@@ -29,7 +29,7 @@ namespace dawn::native::metal {
 
 namespace {
 
-MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
+MTLTextureUsage MetalTextureUsage(wgpu::TextureUsage usage) {
     MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
     if (usage & (wgpu::TextureUsage::StorageBinding)) {
@@ -38,16 +38,6 @@ MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage
 
     if (usage & (wgpu::TextureUsage::TextureBinding)) {
         result |= MTLTextureUsageShaderRead;
-
-        // For sampling stencil aspect of combined depth/stencil.
-        // See TextureView::Initialize.
-        // Depth views for depth/stencil textures in Metal simply use the original
-        // texture's format, but stencil views require format reinterpretation.
-        if (@available(macOS 10.12, iOS 10.0, *)) {
-            if (IsSubset(Aspect::Depth | Aspect::Stencil, format.aspects)) {
-                result |= MTLTextureUsagePixelFormatView;
-            }
-        }
     }
 
     if (usage & wgpu::TextureUsage::RenderAttachment) {
@@ -78,7 +68,7 @@ MTLTextureType MetalTextureViewType(wgpu::TextureViewDimension dimension,
     }
 }
 
-bool RequiresCreatingNewTextureView(const TextureBase* texture,
+bool RequiresCreatingNewTextureView(const Texture* texture,
                                     const TextureViewDescriptor* textureViewDescriptor) {
     constexpr wgpu::TextureUsage kShaderUsageNeedsView =
         wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
@@ -117,8 +107,7 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
 
     // If the texture is created with MTLTextureUsagePixelFormatView, we need
     // a new view to perform format reinterpretation.
-    if ((MetalTextureUsage(texture->GetFormat(), texture->GetInternalUsage()) &
-         MTLTextureUsagePixelFormatView) != 0) {
+    if ((texture->GetMTLUsage() & MTLTextureUsagePixelFormatView) != 0) {
         return true;
     }
 
@@ -640,10 +629,7 @@ NSRef<MTLTextureDescriptor> Texture::CreateMetalTextureDescriptor() const {
 
     mtlDesc.width = GetWidth();
     mtlDesc.sampleCount = GetSampleCount();
-    // Metal only allows format reinterpretation to happen on swizzle pattern or conversion
-    // between linear space and sRGB. For example, creating bgra8Unorm texture view on
-    // rgba8Unorm texture or creating rgba8Unorm_srgb texture view on rgab8Unorm texture.
-    mtlDesc.usage = MetalTextureUsage(GetFormat(), GetInternalUsage());
+    mtlDesc.usage = MetalTextureUsage(GetInternalUsage());
     mtlDesc.pixelFormat = MetalPixelFormat(GetFormat().format);
     mtlDesc.mipmapLevelCount = GetNumMipLevels();
     mtlDesc.storageMode = MTLStorageModePrivate;
@@ -718,11 +704,51 @@ MaybeError Texture::InitializeAsInternalTexture(const TextureDescriptor* descrip
     Device* device = ToBackend(GetDevice());
 
     NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
-    mMtlUsage = [*mtlDesc usage];
-    mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]);
+    const Format& format = device->GetValidInternalFormat(descriptor->format);
+    const bool isDepthStencil = IsSubset(Aspect::Depth | Aspect::Stencil, format.aspects);
+    const bool hasTextureBindingUsage = descriptor->usage & wgpu::TextureUsage::TextureBinding;
+    const bool disjointDepthStencil =
+        isDepthStencil && hasTextureBindingUsage &&
+        device->IsToggleEnabled(Toggle::MetalUseDisjointTextureBindingDepthStencilTextures);
 
-    if (mMtlTexture == nil) {
-        return DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate texture.");
+    if (isDepthStencil && hasTextureBindingUsage && !disjointDepthStencil) {
+        // For sampling stencil aspect of combined depth/stencil.
+        // See TextureView::Initialize.
+        // Depth views for depth/stencil textures in Metal simply use the original
+        // texture's format, but stencil views require format reinterpretation.
+        (*mtlDesc).usage |= MTLTextureUsagePixelFormatView;
+    }
+    mMtlUsage = (*mtlDesc).usage;
+
+    if (isDepthStencil) {
+        if (disjointDepthStencil) {
+            (*mtlDesc).pixelFormat = MetalPixelFormat(format.GetAspectInfo(Aspect::Depth).format);
+            auto depthTexture =
+                AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]);
+
+            (*mtlDesc).pixelFormat = MetalPixelFormat(format.GetAspectInfo(Aspect::Stencil).format);
+            auto stencilTexture =
+                AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]);
+
+            mMtlTextures = PerAspect<NSPRef<id<MTLTexture>>>({
+                {Aspect::Depth, std::move(depthTexture)},
+                {Aspect::Stencil, std::move(stencilTexture)},
+            });
+        } else {
+            mMtlTextures = PerAspect(
+                Aspect::CombinedDepthStencil,
+                AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]));
+        }
+    } else {
+        ASSERT(HasOneBit(format.aspects));
+        mMtlTextures = PerAspect(format.aspects, AcquireNSPRef([device->GetMTLDevice()
+                                                     newTextureWithDescriptor:mtlDesc.Get()]));
+    }
+
+    for (Aspect aspect : IterateEnumMask(mMtlTextures.GetAspects())) {
+        if (mMtlTextures[aspect] == nil) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate texture.");
+        }
     }
 
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
@@ -737,7 +763,9 @@ void Texture::InitializeAsWrapping(const TextureDescriptor* descriptor,
                                    NSPRef<id<MTLTexture>> wrapped) {
     NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
     mMtlUsage = [*mtlDesc usage];
-    mMtlTexture = std::move(wrapped);
+
+    ASSERT(!GetDevice()->GetValidInternalFormat(descriptor->format).HasDepthOrStencil());
+    mMtlTextures = PerAspect(Aspect::Color, std::move(wrapped));
 }
 
 MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descriptor,
@@ -760,9 +788,12 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
         [*mtlDesc setStorageMode:kIOSurfaceStorageMode];
 
         mMtlUsage = [*mtlDesc usage];
-        mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
-                                                                           iosurface:ioSurface
-                                                                               plane:0]);
+
+        ASSERT(!GetDevice()->GetValidInternalFormat(textureDescriptor->format).HasDepthOrStencil());
+        mMtlTextures = PerAspect(Aspect::Color, AcquireNSPRef([device->GetMTLDevice()
+                                                    newTextureWithDescriptor:mtlDesc.Get()
+                                                                   iosurface:ioSurface
+                                                                       plane:0]));
     }
     SetIsSubresourceContentInitialized(descriptor->isInitialized, GetAllSubresources());
     return {};
@@ -800,27 +831,41 @@ Texture::~Texture() {}
 
 void Texture::DestroyImpl() {
     TextureBase::DestroyImpl();
-    mMtlTexture = nullptr;
+    mMtlTextures = {};
     mIOSurface = nullptr;
 }
 
-id<MTLTexture> Texture::GetMTLTexture() const {
-    return mMtlTexture.Get();
+Aspect Texture::GetDisjointAspects() const {
+    return mMtlTextures.GetAspects();
+}
+
+MTLTextureUsage Texture::GetMTLUsage() const {
+    return mMtlUsage;
+}
+
+id<MTLTexture> Texture::GetMTLTexture(Aspect aspect) const {
+    if (mMtlTextures.GetAspects() == Aspect::CombinedDepthStencil) {
+        ASSERT(IsSubset(aspect, Aspect::Depth | Aspect::Stencil) ||
+               aspect == Aspect::CombinedDepthStencil);
+        aspect = Aspect::CombinedDepthStencil;
+    }
+    return mMtlTextures[aspect].Get();
 }
 
 IOSurfaceRef Texture::GetIOSurface() {
     return mIOSurface.Get();
 }
 
-NSPRef<id<MTLTexture>> Texture::CreateFormatView(wgpu::TextureFormat format) {
-    if (GetFormat().format == format) {
-        return mMtlTexture;
+NSPRef<id<MTLTexture>> Texture::CreateViewForCopy(const Format& format, Aspect aspect) {
+    if (GetFormat().GetIndex() == format.GetIndex()) {
+        return mMtlTextures[aspect].Get();
     }
 
-    ASSERT(AllowFormatReinterpretationWithoutFlag(MetalPixelFormat(GetFormat().format),
-                                                  MetalPixelFormat(format)));
-    return AcquireNSPRef(
-        [mMtlTexture.Get() newTextureViewWithPixelFormat:MetalPixelFormat(format)]);
+    MTLPixelFormat srcFormat = MetalPixelFormat(GetFormat().GetAspectInfo(aspect).format);
+    MTLPixelFormat targetFormat = MetalPixelFormat(format.GetAspectInfo(aspect).format);
+    ASSERT(AllowFormatReinterpretationWithoutFlag(srcFormat, targetFormat));
+
+    return AcquireNSPRef([*mMtlTextures[aspect] newTextureViewWithPixelFormat:targetFormat]);
 }
 
 MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
@@ -869,7 +914,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
                         switch (aspect) {
                             case Aspect::Depth:
-                                descriptor.depthAttachment.texture = GetMTLTexture();
+                                descriptor.depthAttachment.texture = GetMTLTexture(Aspect::Depth);
                                 descriptor.depthAttachment.level = level;
                                 descriptor.depthAttachment.slice = arrayLayer;
                                 descriptor.depthAttachment.loadAction = MTLLoadActionClear;
@@ -877,7 +922,8 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                 descriptor.depthAttachment.clearDepth = dClearColor;
                                 break;
                             case Aspect::Stencil:
-                                descriptor.stencilAttachment.texture = GetMTLTexture();
+                                descriptor.stencilAttachment.texture =
+                                    GetMTLTexture(Aspect::Stencil);
                                 descriptor.stencilAttachment.level = level;
                                 descriptor.stencilAttachment.slice = arrayLayer;
                                 descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
@@ -923,7 +969,8 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                             descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
                         }
 
-                        [*descriptor colorAttachments][attachment].texture = GetMTLTexture();
+                        [*descriptor colorAttachments][attachment].texture =
+                            GetMTLTexture(Aspect::Color);
                         [*descriptor colorAttachments][attachment].loadAction = MTLLoadActionClear;
                         [*descriptor colorAttachments][attachment].storeAction =
                             MTLStoreActionStore;
@@ -1003,7 +1050,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         sourceBytesPerImage:largestMipBytesPerImage
                                  sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
                                                         virtualSize.depthOrArrayLayers)
-                                  toTexture:GetMTLTexture()
+                                  toTexture:GetMTLTexture(aspect)
                            destinationSlice:arrayLayer
                            destinationLevel:level
                           destinationOrigin:MTLOriginMake(0, 0, 0)
@@ -1049,7 +1096,17 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         return {};
     }
 
-    id<MTLTexture> mtlTexture = texture->GetMTLTexture();
+    if (!HasOneBit(GetAspects())) {
+        // If the view has multiple aspects, it is invalid to use as a
+        // texture binding. It can be used as depth stencil attachment,
+        // but the Metal backend always uses the parent texture, not the view.
+        // See TextureView::GetAttachmentInfo.
+        // Because we will always use the parent texture, there is no need to
+        // create a new view.
+        return {};
+    }
+
+    id<MTLTexture> mtlTexture = texture->GetMTLTexture(GetAspects());
 
     if (!RequiresCreatingNewTextureView(texture, descriptor)) {
         mMtlTextureView = mtlTexture;
@@ -1058,7 +1115,7 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         MTLTextureDescriptor* mtlDesc = mtlDescRef.Get();
 
         mtlDesc.sampleCount = texture->GetSampleCount();
-        mtlDesc.usage = MetalTextureUsage(texture->GetFormat(), texture->GetInternalUsage());
+        mtlDesc.usage = MetalTextureUsage(texture->GetInternalUsage());
         mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
         mtlDesc.mipmapLevelCount = texture->GetNumMipLevels();
         mtlDesc.storageMode = kIOSurfaceStorageMode;
@@ -1084,27 +1141,34 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         }
     } else {
         MTLPixelFormat viewFormat = MetalPixelFormat(descriptor->format);
-        MTLPixelFormat textureFormat = MetalPixelFormat(GetTexture()->GetFormat().format);
-        if (descriptor->aspect == wgpu::TextureAspect::StencilOnly &&
-            textureFormat != MTLPixelFormatStencil8) {
-            if (@available(macOS 10.12, iOS 10.0, *)) {
-                if (textureFormat == MTLPixelFormatDepth32Float_Stencil8) {
-                    viewFormat = MTLPixelFormatX32_Stencil8;
-                } else {
+        const Format& textureFormat = texture->GetFormat();
+        MTLPixelFormat mtlTextureFormat = MetalPixelFormat(textureFormat.format);
+
+        if (texture->GetDisjointAspects() == Aspect::CombinedDepthStencil) {
+            switch (descriptor->aspect) {
+                case wgpu::TextureAspect::DepthOnly:
+                    // Depth-only views for depth/stencil textures in Metal simply use the original
+                    // texture's format.
+                    viewFormat = mtlTextureFormat;
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    if (@available(macOS 10.12, iOS 10.0, *)) {
+                        if (mtlTextureFormat == MTLPixelFormatDepth32Float_Stencil8) {
+                            viewFormat = MTLPixelFormatX32_Stencil8;
+                        } else {
+                            UNREACHABLE();
+                        }
+                    } else {
+                        // Disjoint depth stencil is always used when X32_Stencil8 is not available.
+                        UNREACHABLE();
+                    }
+                    break;
+                case wgpu::TextureAspect::Plane0Only:
+                case wgpu::TextureAspect::Plane1Only:
+                case wgpu::TextureAspect::All:
                     UNREACHABLE();
-                }
-            } else {
-                // TODO(enga): Add a workaround to back combined depth/stencil textures
-                // with Sampled usage using two separate textures.
-                // Or, consider always using the workaround for D32S8.
-                GetDevice()->ConsumedError(
-                    DAWN_DEVICE_LOST_ERROR("Cannot create stencil-only texture view of "
-                                           "combined depth/stencil format."));
+                    break;
             }
-        } else if (GetTexture()->GetFormat().HasDepth() && GetTexture()->GetFormat().HasStencil()) {
-            // Depth-only views for depth/stencil textures in Metal simply use the original
-            // texture's format.
-            viewFormat = textureFormat;
         }
 
         MTLTextureType textureViewType =
@@ -1133,8 +1197,9 @@ id<MTLTexture> TextureView::GetMTLTexture() const {
     return mMtlTextureView.Get();
 }
 
-TextureView::AttachmentInfo TextureView::GetAttachmentInfo() const {
+TextureView::AttachmentInfo TextureView::GetAttachmentInfo(Aspect aspect) const {
     ASSERT(GetTexture()->GetInternalUsage() & wgpu::TextureUsage::RenderAttachment);
+    ASSERT(GetAspects() & aspect);
     // Use our own view if the formats do not match.
     // If the formats do not match, format reinterpretation will be required.
     // Note: Depth/stencil formats don't support reinterpretation.
@@ -1148,7 +1213,7 @@ TextureView::AttachmentInfo TextureView::GetAttachmentInfo() const {
         return {mMtlTextureView, 0, 0};
     }
     AttachmentInfo info;
-    info.texture = ToBackend(GetTexture())->GetMTLTexture();
+    info.texture = ToBackend(GetTexture())->GetMTLTexture(aspect);
     info.baseMipLevel = GetBaseMipLevel();
     info.baseArrayLayer = GetBaseArrayLayer();
     return info;
