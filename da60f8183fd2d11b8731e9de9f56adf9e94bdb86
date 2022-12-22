@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e99c9ef_08d21ecb",
+        "filename": "src/tint/resolver/const_eval_indexing_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-22T16:52:01Z",
+      "side": 1,
+      "message": "I added a static_assert in this CL that fails if Vec() is called with less than 2 or more than 4 args, so these failed compilation. The actual type of the \"expected\" `builder::Value` here doesn\u0027t actually matter. The unit test just compares the resulting `Constant::Value`s to the `builder::Value::args` we specify here.",
+      "range": {
+        "startLine": 109,
+        "startChar": 38,
+        "endLine": 109,
+        "endChar": 41
+      },
+      "revId": "da60f8183fd2d11b8731e9de9f56adf9e94bdb86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
