@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c3d8257c_90c32ffa",
+        "filename": "src/tint/resolver/const_eval_member_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-22T22:03:58Z",
+      "side": 1,
+      "message": "nit:slightly risky to always enable this extension.\nIt means we have a coverage hole: we\u0027re not testing that the functionality exists *without* the f16 extension.",
+      "revId": "496d0a2cfd828120581e58be773802be02090324",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8bddfd3_66ed9e20",
         "filename": "src/tint/resolver/const_eval_member_access_test.cc",
         "patchSetId": 1
@@ -14,6 +31,30 @@
       "writtenOn": "2022-12-22T16:26:26Z",
       "side": 1,
       "message": "This is what prompted the parent CL, btw. I didn\u0027t like having to write this as:\n\n```\nWrapInFunction(utils::VectorRef\u003cconst ast::Statement*\u003e{std::move(stmts)});\n```",
+      "range": {
+        "startLine": 130,
+        "startChar": 4,
+        "endLine": 130,
+        "endChar": 37
+      },
+      "revId": "496d0a2cfd828120581e58be773802be02090324",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ce761b_c1f7b488",
+        "filename": "src/tint/resolver/const_eval_member_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2022-12-22T22:03:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f8bddfd3_66ed9e20",
       "range": {
         "startLine": 130,
         "startChar": 4,
