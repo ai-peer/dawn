@@ -311,12 +311,23 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
     EnsureDataInitialized(recordingContext);
 
+#if defined(DAWN_ENABLE_ASSERTS)
+    // Barrier transition is appended to the related queue submissions, so the buffer should be able
+    // to be mapped directly.
+    VkBufferMemoryBarrier barrier;
+    VkPipelineStageFlags srcStages = 0;
+    VkPipelineStageFlags dstStages = 0;
+
     if (mode & wgpu::MapMode::Read) {
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
+        ASSERT(!TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage::MapRead, &barrier,
+                                                     &srcStages, &dstStages));
     } else {
         ASSERT(mode & wgpu::MapMode::Write);
-        TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
+        ASSERT(!TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage::MapWrite, &barrier,
+                                                     &srcStages, &dstStages));
     }
+#endif  // DAWN_ENABLE_ASSERTS
+
     return {};
 }
 
