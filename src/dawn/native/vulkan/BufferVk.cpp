@@ -412,12 +412,17 @@ void Buffer::ClearBuffer(CommandRecordingContext* recordingContext,
     size = size > 0 ? size : GetAllocatedSize();
     ASSERT(size > 0);
 
-    TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
+    if (uint8_t* memory = mMemoryAllocation.GetMappedPointer()) {
+        memset(memory + offset, 0, size);
+    } else {
+        TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
-    Device* device = ToBackend(GetDevice());
-    // VK_WHOLE_SIZE doesn't work on old Windows Intel Vulkan drivers, so we don't use it.
-    // Note: Allocated size must be a multiple of 4.
-    ASSERT(size % 4 == 0);
-    device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size, clearValue);
+        Device* device = ToBackend(GetDevice());
+        // VK_WHOLE_SIZE doesn't work on old Windows Intel Vulkan drivers, so we don't use it.
+        // Note: Allocated size must be a multiple of 4.
+        ASSERT(size % 4 == 0);
+        device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size,
+                                 clearValue);
+    }
 }
 }  // namespace dawn::native::vulkan
