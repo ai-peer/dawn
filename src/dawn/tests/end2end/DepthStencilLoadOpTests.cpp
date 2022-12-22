@@ -404,13 +404,14 @@ TEST_P(DepthTextureClearTwiceTest, ClearDepthAspectTwice) {
     }
 }
 
-DAWN_INSTANTIATE_TEST_P(DepthTextureClearTwiceTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        {wgpu::TextureFormat::Depth16Unorm, wgpu::TextureFormat::Depth24Plus,
-                         wgpu::TextureFormat::Depth32Float,
-                         wgpu::TextureFormat::Depth32FloatStencil8,
-                         wgpu::TextureFormat::Depth24PlusStencil8},
-                        {true, false});
+DAWN_INSTANTIATE_TEST_P(
+    DepthTextureClearTwiceTest,
+    {D3D12Backend(), MetalBackend(),
+     MetalBackend({"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy"}),
+     OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    {wgpu::TextureFormat::Depth16Unorm, wgpu::TextureFormat::Depth24Plus,
+     wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Depth32FloatStencil8,
+     wgpu::TextureFormat::Depth24PlusStencil8},
+    {true, false});
 
 }  // namespace

@@ -198,14 +198,15 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
                 break;
         }
 
-        auto colorAttachment = ToBackend(attachmentInfo.view)->GetAttachmentInfo();
+        auto colorAttachment = ToBackend(attachmentInfo.view)->GetAttachmentInfo(Aspect::Color);
         descriptor.colorAttachments[i].texture = colorAttachment.texture.Get();
         descriptor.colorAttachments[i].level = colorAttachment.baseMipLevel;
         descriptor.colorAttachments[i].slice = colorAttachment.baseArrayLayer;
 
         bool hasResolveTarget = attachmentInfo.resolveTarget != nullptr;
         if (hasResolveTarget) {
-            auto resolveAttachment = ToBackend(attachmentInfo.resolveTarget)->GetAttachmentInfo();
+            auto resolveAttachment =
+                ToBackend(attachmentInfo.resolveTarget)->GetAttachmentInfo(Aspect::Color);
             descriptor.colorAttachments[i].resolveTexture = resolveAttachment.texture.Get();
             descriptor.colorAttachments[i].resolveLevel = resolveAttachment.baseMipLevel;
             descriptor.colorAttachments[i].resolveSlice = resolveAttachment.baseArrayLayer;
@@ -239,14 +240,13 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
 
     if (renderPass->attachmentState->HasDepthStencilAttachment()) {
         auto& attachmentInfo = renderPass->depthStencilAttachment;
-
-        auto depthStencilAttachment = ToBackend(attachmentInfo.view)->GetAttachmentInfo();
         const Format& format = attachmentInfo.view->GetFormat();
 
         if (format.HasDepth()) {
-            descriptor.depthAttachment.texture = depthStencilAttachment.texture.Get();
-            descriptor.depthAttachment.level = depthStencilAttachment.baseMipLevel;
-            descriptor.depthAttachment.slice = depthStencilAttachment.baseArrayLayer;
+            auto depthAttachment = ToBackend(attachmentInfo.view)->GetAttachmentInfo(Aspect::Depth);
+            descriptor.depthAttachment.texture = depthAttachment.texture.Get();
+            descriptor.depthAttachment.level = depthAttachment.baseMipLevel;
+            descriptor.depthAttachment.slice = depthAttachment.baseArrayLayer;
 
             switch (attachmentInfo.depthStoreOp) {
                 case wgpu::StoreOp::Store:
@@ -279,9 +279,11 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
         }
 
         if (format.HasStencil()) {
-            descriptor.stencilAttachment.texture = depthStencilAttachment.texture.Get();
-            descriptor.stencilAttachment.level = depthStencilAttachment.baseMipLevel;
-            descriptor.stencilAttachment.slice = depthStencilAttachment.baseArrayLayer;
+            auto stencilAttachment =
+                ToBackend(attachmentInfo.view)->GetAttachmentInfo(Aspect::Stencil);
+            descriptor.stencilAttachment.texture = stencilAttachment.texture.Get();
+            descriptor.stencilAttachment.level = stencilAttachment.baseMipLevel;
+            descriptor.stencilAttachment.slice = stencilAttachment.baseArrayLayer;
 
             switch (attachmentInfo.stencilStoreOp) {
                 case wgpu::StoreOp::Store:
@@ -658,7 +660,7 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
     TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
         texture, mipLevel, origin, copySize, bufferSize, offset, bytesPerRow, rowsPerImage, aspect);
 
-    MTLBlitOption blitOption = ComputeMTLBlitOption(texture->GetFormat(), aspect);
+    MTLBlitOption blitOption = texture->ComputeMTLBlitOption(aspect);
 
     for (const auto& copyInfo : splitCopies) {
         uint64_t bufferOffset = copyInfo.bufferOffset;
@@ -670,7 +672,7 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
                       sourceBytesPerRow:copyInfo.bytesPerRow
                     sourceBytesPerImage:copyInfo.bytesPerImage
                              sourceSize:MTLSizeMake(copyInfo.copyExtent.width, 1, 1)
-                              toTexture:texture->GetMTLTexture()
+                              toTexture:texture->GetMTLTexture(aspect)
                        destinationSlice:0
                        destinationLevel:mipLevel
                       destinationOrigin:MTLOriginMake(copyInfo.textureOrigin.x, 0, 0)
@@ -690,7 +692,7 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
                                                sourceBytesPerRow:copyInfo.bytesPerRow
                                              sourceBytesPerImage:copyInfo.bytesPerImage
                                                       sourceSize:copyExtent
-                                                       toTexture:texture->GetMTLTexture()
+                                                       toTexture:texture->GetMTLTexture(aspect)
                                                 destinationSlice:z
                                                 destinationLevel:mipLevel
                                                destinationOrigin:textureOrigin
@@ -708,7 +710,7 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
                              sourceSize:MTLSizeMake(copyInfo.copyExtent.width,
                                                     copyInfo.copyExtent.height,
                                                     copyInfo.copyExtent.depthOrArrayLayers)
-                              toTexture:texture->GetMTLTexture()
+                              toTexture:texture->GetMTLTexture(aspect)
                        destinationSlice:0
                        destinationLevel:mipLevel
                       destinationOrigin:MTLOriginMake(copyInfo.textureOrigin.x,
@@ -881,14 +883,13 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                     dst.bytesPerRow, dst.rowsPerImage, src.aspect);
 
                 for (const auto& copyInfo : splitCopies) {
-                    MTLBlitOption blitOption =
-                        ComputeMTLBlitOption(texture->GetFormat(), src.aspect);
+                    MTLBlitOption blitOption = texture->ComputeMTLBlitOption(src.aspect);
                     uint64_t bufferOffset = copyInfo.bufferOffset;
 
                     switch (texture->GetDimension()) {
                         case wgpu::TextureDimension::e1D: {
                             [commandContext->EnsureBlit()
-                                         copyFromTexture:texture->GetMTLTexture()
+                                         copyFromTexture:texture->GetMTLTexture(src.aspect)
                                              sourceSlice:0
                                              sourceLevel:src.mipLevel
                                             sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x, 0,
@@ -914,7 +915,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                                  copyInfo.textureOrigin.z + copyInfo.copyExtent.depthOrArrayLayers;
                                  ++z) {
                                 [commandContext->EnsureBlit()
-                                             copyFromTexture:texture->GetMTLTexture()
+                                             copyFromTexture:texture->GetMTLTexture(src.aspect)
                                                  sourceSlice:z
                                                  sourceLevel:src.mipLevel
                                                 sourceOrigin:textureOrigin
@@ -930,7 +931,7 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                         }
                         case wgpu::TextureDimension::e3D: {
                             [commandContext->EnsureBlit()
-                                         copyFromTexture:texture->GetMTLTexture()
+                                         copyFromTexture:texture->GetMTLTexture(src.aspect)
                                              sourceSlice:0
                                              sourceLevel:src.mipLevel
                                             sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x,
@@ -992,28 +993,31 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                     destinationZPtr = &destinationOriginZ;
                 }
 
-                // TODO(crbug.com/dawn/782): Do a single T2T copy if both are 1D or 3D.
-                for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
-                    *sourceZPtr = copy->source.origin.z + z;
-                    *destinationZPtr = copy->destination.origin.z + z;
-
+                ASSERT(srcTexture->GetDisjointAspects() == dstTexture->GetDisjointAspects());
+                for (Aspect aspect : IterateEnumMask(srcTexture->GetDisjointAspects())) {
                     // Hold the ref until out of scope
-                    NSPRef<id<MTLTexture>> dstTextureView =
-                        dstTexture->CreateFormatView(srcTexture->GetFormat().format);
+                    NSPRef<id<MTLTexture>> srcTextureView =
+                        srcTexture->CreateViewForCopy(dstTexture->GetFormat(), aspect);
 
-                    [commandContext->EnsureBlit()
-                          copyFromTexture:srcTexture->GetMTLTexture()
-                              sourceSlice:sourceLayer
-                              sourceLevel:copy->source.mipLevel
-                             sourceOrigin:MTLOriginMake(copy->source.origin.x,
-                                                        copy->source.origin.y, sourceOriginZ)
-                               sourceSize:sizeOneSlice
-                                toTexture:dstTextureView.Get()
-                         destinationSlice:destinationLayer
-                         destinationLevel:copy->destination.mipLevel
-                        destinationOrigin:MTLOriginMake(copy->destination.origin.x,
-                                                        copy->destination.origin.y,
-                                                        destinationOriginZ)];
+                    // TODO(crbug.com/dawn/782): Do a single T2T copy if both are 1D or 3D.
+                    for (uint32_t z = 0; z < copy->copySize.depthOrArrayLayers; ++z) {
+                        *sourceZPtr = copy->source.origin.z + z;
+                        *destinationZPtr = copy->destination.origin.z + z;
+
+                        [commandContext->EnsureBlit()
+                              copyFromTexture:srcTextureView.Get()
+                                  sourceSlice:sourceLayer
+                                  sourceLevel:copy->source.mipLevel
+                                 sourceOrigin:MTLOriginMake(copy->source.origin.x,
+                                                            copy->source.origin.y, sourceOriginZ)
+                                   sourceSize:sizeOneSlice
+                                    toTexture:dstTexture->GetMTLTexture(aspect)
+                             destinationSlice:destinationLayer
+                             destinationLevel:copy->destination.mipLevel
+                            destinationOrigin:MTLOriginMake(copy->destination.origin.x,
+                                                            copy->destination.origin.y,
+                                                            destinationOriginZ)];
+                    }
                 }
                 break;
             }

@@ -333,6 +333,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "This toggle is off by default. It is expected to turn on or get removed when WebGPU V1 "
       "ships and stays stable.",
       "https://crbug.com/dawn/1563"}},
+    {Toggle::MetalUseDisjointDepthStencilTexturesForTextureBindingOrCopy,
+     {"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy",
+      "Use disjoint depth stencil textures on Metal if they have TextureBinding or Copy usage. "
+      "This toggle works around issues where Metal is cannot properly select individual aspects of "
+      "a depth stencil texture.",
+      "https://crbug.com/dawn/838"}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "

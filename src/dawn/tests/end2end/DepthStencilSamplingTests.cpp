@@ -21,8 +21,25 @@
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace {
-using TextureFormat = wgpu::TextureFormat;
-DAWN_TEST_PARAM_STRUCT(DepthStencilSamplingTestParams, TextureFormat);
+using Format = wgpu::TextureFormat;
+using Mip = uint32_t;
+using Layer = uint32_t;
+enum class Subresource {
+    InView,
+    InShader,
+};
+std::ostream& operator<<(std::ostream& o, const Subresource& m) {
+    switch (m) {
+        case Subresource::InView:
+            o << "InView";
+            break;
+        case Subresource::InShader:
+            o << "InShader";
+            break;
+    }
+    return o;
+}
+DAWN_TEST_PARAM_STRUCT(DepthStencilSamplingTestParams, Format, Mip, Layer, Subresource);
 
 constexpr wgpu::CompareFunction kCompareFunctions[] = {
     wgpu::CompareFunction::Never,        wgpu::CompareFunction::Less,
@@ -62,7 +79,7 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
     }
 
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        switch (GetParam().mTextureFormat) {
+        switch (GetParam().mFormat) {
             case wgpu::TextureFormat::Depth32FloatStencil8:
                 if (SupportsFeatures({wgpu::FeatureName::Depth32FloatStencil8})) {
                     mIsFormatSupported = true;
@@ -89,12 +106,17 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
             })";
         shaderSource << "\n";
 
+        uint32_t mip = GetParam().mSubresource == Subresource::InShader ? GetParam().mMip : 0;
+        uint32_t layer = GetParam().mSubresource == Subresource::InShader ? GetParam().mLayer : 0;
+
+        shaderSource << "const mip : u32 = " << mip << ";\n";
+        shaderSource << "const layer : u32 = " << layer << ";\n";
         uint32_t index = 0;
         for (TestAspectAndSamplerType aspectAndSamplerType : aspectAndSamplerTypes) {
             switch (aspectAndSamplerType) {
                 case TestAspectAndSamplerType::DepthAsDepth:
                     shaderSource << "@group(0) @binding(" << 2 * index << ") var tex" << index
-                                 << " : texture_depth_2d;\n";
+                                 << " : texture_depth_2d_array;\n";
 
                     shaderSource << "@group(0) @binding(" << 2 * index + 1
                                  << ") var<storage, read_write> result" << index
@@ -102,11 +124,11 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
                     ASSERT(components.size() == 1 && components[0] == 0);
                     shaderBody << "\nresult" << index << ".value = textureLoad(tex" << index
-                               << ", vec2<i32>(0, 0), 0);";
+                               << ", vec2<i32>(0, 0), layer, mip);";
                     break;
                 case TestAspectAndSamplerType::DepthAsFloat:
                     shaderSource << "@group(0) @binding(" << 2 * index << ") var tex" << index
-                                 << " : texture_2d<f32>;\n";
+                                 << " : texture_2d_array<f32>;\n";
 
                     shaderSource << "@group(0) @binding(" << 2 * index + 1
                                  << ") var<storage, read_write> result" << index
@@ -114,18 +136,18 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
 
                     ASSERT(components.size() == 1 && components[0] == 0);
                     shaderBody << "\nresult" << index << ".value = textureLoad(tex" << index
-                               << ", vec2<i32>(0, 0), 0)[0];";
+                               << ", vec2<i32>(0, 0), layer, mip)[0];";
                     break;
                 case TestAspectAndSamplerType::StencilAsUint:
                     shaderSource << "@group(0) @binding(" << 2 * index << ") var tex" << index
-                                 << " : texture_2d<u32>;\n";
+                                 << " : texture_2d_array<u32>;\n";
 
                     shaderSource << "@group(0) @binding(" << 2 * index + 1
                                  << ") var<storage, read_write> result" << index
                                  << " : StencilResult;\n";
 
                     shaderBody << "var texel = textureLoad(tex" << index
-                               << ", vec2<i32>(0, 0), 0);";
+                               << ", vec2<i32>(0, 0), layer, mip);";
 
                     for (uint32_t i = 0; i < components.size(); ++i) {
                         shaderBody << "\nresult" << index << ".values[" << i << "] = texel["
@@ -204,17 +226,22 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                 return vec4<f32>(0.0, 0.0, 0.0, 1.0);
             })");
 
-        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        uint32_t layer = GetParam().mSubresource == Subresource::InShader ? GetParam().mLayer : 0;
+
+        std::stringstream shaderSource;
+        shaderSource << "const layer : u32 = " << layer << ";\n";
+        shaderSource << R"(
             @group(0) @binding(0) var samp : sampler_comparison;
-            @group(0) @binding(1) var tex : texture_depth_2d;
+            @group(0) @binding(1) var tex : texture_depth_2d_array;
             struct Uniforms {
                 compareRef : f32
             }
             @group(0) @binding(2) var<uniform> uniforms : Uniforms;
 
             @fragment fn main() -> @location(0) f32 {
-                return textureSampleCompare(tex, samp, vec2<f32>(0.5, 0.5), uniforms.compareRef);
-            })");
+                return textureSampleCompareLevel(tex, samp, vec2<f32>(0.5, 0.5), layer, uniforms.compareRef);
+            })";
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, shaderSource.str().c_str());
 
         utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
@@ -226,9 +253,13 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
     }
 
     wgpu::ComputePipeline CreateComparisonComputePipeline() {
-        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        uint32_t layer = GetParam().mSubresource == Subresource::InShader ? GetParam().mLayer : 0;
+
+        std::stringstream shaderSource;
+        shaderSource << "const layer : u32 = " << layer << ";\n";
+        shaderSource << R"(
             @group(0) @binding(0) var samp : sampler_comparison;
-            @group(0) @binding(1) var tex : texture_depth_2d;
+            @group(0) @binding(1) var tex : texture_depth_2d_array;
             struct Uniforms {
                 compareRef : f32
             }
@@ -240,8 +271,9 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
             @group(0) @binding(3) var<storage, read_write> samplerResult : SamplerResult;
 
             @compute @workgroup_size(1) fn main() {
-                samplerResult.value = textureSampleCompare(tex, samp, vec2<f32>(0.5, 0.5), uniforms.compareRef);
-            })");
+                samplerResult.value = textureSampleCompareLevel(tex, samp, vec2<f32>(0.5, 0.5), layer, uniforms.compareRef);
+            })";
+        wgpu::ShaderModule csModule = utils::CreateShaderModule(device, shaderSource.str().c_str());
 
         wgpu::ComputePipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.compute.module = csModule;
@@ -254,8 +286,10 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
         wgpu::TextureDescriptor inputTextureDesc;
         inputTextureDesc.usage =
             wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
-        inputTextureDesc.size = {1, 1, 1};
+        inputTextureDesc.size = {1u << GetParam().mMip, 1u << GetParam().mMip,
+                                 GetParam().mLayer + 1};
         inputTextureDesc.format = format;
+        inputTextureDesc.mipLevelCount = GetParam().mMip + 1;
         return device.CreateTexture(&inputTextureDesc);
     }
 
@@ -279,7 +313,10 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                           wgpu::Texture texture,
                           wgpu::TextureFormat format,
                           float depthValue) {
-        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
+        wgpu::TextureViewDescriptor viewDesc = {};
+        viewDesc.baseMipLevel = GetParam().mMip;
+        viewDesc.baseArrayLayer = GetParam().mLayer;
+        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView(&viewDesc));
         passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(format);
         passDescriptor.cDepthStencilAttachmentInfo.depthClearValue = depthValue;
 
@@ -291,7 +328,10 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                             wgpu::Texture texture,
                             wgpu::TextureFormat format,
                             uint8_t stencilValue) {
-        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView());
+        wgpu::TextureViewDescriptor viewDesc = {};
+        viewDesc.baseMipLevel = GetParam().mMip;
+        viewDesc.baseArrayLayer = GetParam().mLayer;
+        utils::ComboRenderPassDescriptor passDescriptor({}, texture.CreateView(&viewDesc));
         passDescriptor.UnsetDepthStencilLoadStoreOpsForFormat(format);
         passDescriptor.cDepthStencilAttachmentInfo.stencilClearValue = stencilValue;
 
@@ -308,6 +348,11 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                             CheckBufferFn CheckBuffer) {
         wgpu::Texture inputTexture = CreateInputTexture(format);
         wgpu::TextureViewDescriptor inputViewDesc = {};
+        inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+        if (GetParam().mSubresource == Subresource::InView) {
+            inputViewDesc.baseMipLevel = GetParam().mMip;
+            inputViewDesc.baseArrayLayer = GetParam().mLayer;
+        }
         switch (aspectAndSamplerType) {
             case TestAspectAndSamplerType::DepthAsDepth:
             case TestAspectAndSamplerType::DepthAsFloat:
@@ -365,6 +410,11 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
                             CheckBufferFn CheckBuffer) {
         wgpu::Texture inputTexture = CreateInputTexture(format);
         wgpu::TextureViewDescriptor inputViewDesc = {};
+        inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+        if (GetParam().mSubresource == Subresource::InView) {
+            inputViewDesc.baseMipLevel = GetParam().mMip;
+            inputViewDesc.baseArrayLayer = GetParam().mLayer;
+        }
         switch (aspectAndSamplerType) {
             case TestAspectAndSamplerType::DepthAsDepth:
             case TestAspectAndSamplerType::DepthAsFloat:
@@ -531,6 +581,11 @@ class DepthStencilSamplingTest : public DawnTestWithParams<DepthStencilSamplingT
         wgpu::Texture inputTexture = CreateInputTexture(format);
         wgpu::TextureViewDescriptor inputViewDesc = {};
         inputViewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+        inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+        if (GetParam().mSubresource == Subresource::InView) {
+            inputViewDesc.baseMipLevel = GetParam().mMip;
+            inputViewDesc.baseArrayLayer = GetParam().mLayer;
+        }
 
         wgpu::BindGroup bindGroup =
             utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
@@ -732,7 +787,7 @@ TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
     // This test fails on ANGLE (both SwiftShader and D3D11).
     DAWN_SUPPRESS_TEST_IF(IsANGLE());
 
-    wgpu::TextureFormat format = GetParam().mTextureFormat;
+    wgpu::TextureFormat format = GetParam().mFormat;
 
     DoSamplingExtraStencilComponentsRenderTest(TestAspectAndSamplerType::StencilAsUint, format,
                                                {uint8_t(42), uint8_t(37)});
@@ -743,7 +798,7 @@ TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
 
 // Test sampling both depth and stencil with a render/compute pipeline works.
 TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
-    wgpu::TextureFormat format = GetParam().mTextureFormat;
+    wgpu::TextureFormat format = GetParam().mFormat;
 
     wgpu::SamplerDescriptor samplerDesc;
     wgpu::Sampler sampler = device.CreateSampler(&samplerDesc);
@@ -861,7 +916,7 @@ class DepthSamplingTest : public DepthStencilSamplingTest {};
 
 // Test that sampling a depth texture with a render/compute pipeline works
 TEST_P(DepthSamplingTest, SampleDepthOnly) {
-    wgpu::TextureFormat format = GetParam().mTextureFormat;
+    wgpu::TextureFormat format = GetParam().mFormat;
     float tolerance = format == wgpu::TextureFormat::Depth16Unorm ? 0.001f : 0.0f;
 
     // Test 0, between [0, 1], and 1.
@@ -888,9 +943,13 @@ TEST_P(DepthSamplingTest, CompareFunctionsRender) {
     // TODO(dawn:1549) Fails on Qualcomm-based Android devices.
     DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
 
-    wgpu::TextureFormat format = GetParam().mTextureFormat;
+    wgpu::TextureFormat format = GetParam().mFormat;
     // Test does not account for precision issues when comparison testing Depth16Unorm.
     DAWN_TEST_UNSUPPORTED_IF(format == wgpu::TextureFormat::Depth16Unorm);
+
+    // textureSampleCompareLevel always samples texels from mip level 0.
+    DAWN_TEST_UNSUPPORTED_IF(GetParam().mMip > 0 &&
+                             GetParam().mSubresource == Subresource::InShader);
 
     wgpu::RenderPipeline pipeline = CreateComparisonRenderPipeline();
 
@@ -910,7 +969,7 @@ TEST_P(StencilSamplingTest, SampleStencilOnly) {
     // This test fails on SwANGLE (although it passes on other ANGLE backends).
     DAWN_TEST_UNSUPPORTED_IF(IsANGLE());
 
-    wgpu::TextureFormat format = GetParam().mTextureFormat;
+    wgpu::TextureFormat format = GetParam().mFormat;
 
     DoSamplingTest(TestAspectAndSamplerType::StencilAsUint,
                    CreateSamplingRenderPipeline({TestAspectAndSamplerType::StencilAsUint}, 0),
@@ -921,20 +980,33 @@ TEST_P(StencilSamplingTest, SampleStencilOnly) {
                    format, kStencilValues);
 }
 
-DAWN_INSTANTIATE_TEST_P(DepthStencilSamplingTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
-                                                         utils::kDepthAndStencilFormats.end()));
+DAWN_INSTANTIATE_TEST_P(
+    DepthStencilSamplingTest,
+    {D3D12Backend(), MetalBackend(),
+     MetalBackend({"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy"}),
+     OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
+                                     utils::kDepthAndStencilFormats.end()),
+    std::vector<Mip>{0, 2},
+    std::vector<Layer>{0, 3},
+    std::vector<Subresource>{Subresource::InView, Subresource::InShader});
 
-DAWN_INSTANTIATE_TEST_P(DepthSamplingTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kDepthFormats.begin(),
-                                                         utils::kDepthFormats.end()));
+DAWN_INSTANTIATE_TEST_P(
+    DepthSamplingTest,
+    {D3D12Backend(), MetalBackend(),
+     MetalBackend({"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy"}),
+     OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    std::vector<wgpu::TextureFormat>(utils::kDepthFormats.begin(), utils::kDepthFormats.end()),
+    std::vector<Mip>{0, 2},
+    std::vector<Layer>{0, 3},
+    std::vector<Subresource>{Subresource::InView, Subresource::InShader});
 
-DAWN_INSTANTIATE_TEST_P(StencilSamplingTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
-                        std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(),
-                                                         utils::kStencilFormats.end()));
+DAWN_INSTANTIATE_TEST_P(
+    StencilSamplingTest,
+    {D3D12Backend(), MetalBackend(),
+     MetalBackend({"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy"}),
+     OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(), utils::kStencilFormats.end()),
+    std::vector<Mip>{0, 2},
+    std::vector<Layer>{0, 3},
+    std::vector<Subresource>{Subresource::InView, Subresource::InShader});

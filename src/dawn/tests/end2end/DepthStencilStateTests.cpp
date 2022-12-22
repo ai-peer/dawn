@@ -833,10 +833,12 @@ TEST_P(DepthStencilStateTest, StencilReferenceInitialized) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend({"vulkan_use_d32s8"}, {}),
-                      VulkanBackend({}, {"vulkan_use_d32s8"}));
+DAWN_INSTANTIATE_TEST(
+    DepthStencilStateTest,
+    D3D12Backend(),
+    MetalBackend(),
+    MetalBackend({"metal_use_disjoint_depth_stencil_textures_for_texture_binding_or_copy"}),
+    OpenGLBackend(),
+    OpenGLESBackend(),
+    VulkanBackend({"vulkan_use_d32s8"}, {}),
+    VulkanBackend({}, {"vulkan_use_d32s8"}));
