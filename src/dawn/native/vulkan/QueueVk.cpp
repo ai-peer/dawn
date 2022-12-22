@@ -14,6 +14,8 @@
 
 #include "dawn/native/vulkan/QueueVk.h"
 
+#include <set>
+
 #include "dawn/common/Math.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandValidation.h"
@@ -50,8 +52,21 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    std::set<const Buffer*> transferBuffers;
+    constexpr auto kMapUsage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::MapRead;
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            if (buffer->GetUsage() & kMapUsage) {
+                transferBuffers.insert(ToBackend(buffer));
+            }
+        }
+    }
+    // Prepare transfer buffers for MapAsync().
+    for (const Buffer* buffer : transferBuffers) {
+        const_cast<Buffer*>(buffer)->TransitionUsageNow(recordingContext,
+                                                        buffer->GetUsage() & kMapUsage);
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 

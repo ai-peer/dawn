@@ -59,7 +59,7 @@ class Buffer final : public BufferBase {
     MaybeError Initialize(bool mappedAtCreation);
     void InitializeToZero(CommandRecordingContext* recordingContext);
     void ClearBuffer(CommandRecordingContext* recordingContext,
-                     uint32_t clearValue,
+                     uint8_t clearValue,
                      uint64_t offset = 0,
                      uint64_t size = 0);
 
