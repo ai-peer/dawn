@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a0c586a_e8195034",
+        "filename": "src/tint/resolver/const_eval_member_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2022-12-23T17:03:37Z",
+      "side": 1,
+      "message": "This is true, and it\u0027s not the first place we do this. We could address this in a future CL where we conditionally enable it when testing for F16 only.",
+      "parentUuid": "c3d8257c_90c32ffa",
+      "revId": "496d0a2cfd828120581e58be773802be02090324",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8bddfd3_66ed9e20",
         "filename": "src/tint/resolver/const_eval_member_access_test.cc",
         "patchSetId": 1
