@@ -34,6 +34,31 @@ WGPUCompilationMessageType tintSeverityToMessageType(tint::diag::Severity severi
     }
 }
 
+uint64_t GetMultiByteUTF8StringLengthInWideChar(const char* charBytes, uint64_t length) {
+    // Add a '\0' at the end
+    std::vector<char> chars(length + 1);
+    memcpy(chars.data(), charBytes, length);
+
+    // Record the current locale so that we can use "en_US.utf8" for mbstowcs_s(). In Tint the
+    // compilation message is encoded in UTF-8.
+    const char* currentLocale = setlocale(LC_ALL, nullptr);
+    setlocale(LC_ALL, "en_US.utf8");
+
+    size_t lengthInWideChar;
+    if (mbstowcs_s(&lengthInWideChar, nullptr, 0, chars.data(), chars.size()) != 0) {
+        // Recover the locale
+        setlocale(LC_ALL, currentLocale);
+        return length;
+    }
+
+    // Recover the locale
+    setlocale(LC_ALL, currentLocale);
+
+    // Don't count in the redundant '\0'
+    --lengthInWideChar;
+    return lengthInWideChar;
+}
+
 }  // anonymous namespace
 
 OwnedCompilationMessages::OwnedCompilationMessages() {
@@ -78,7 +103,8 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         // range starts at 1 while the array of lines start at 0 (hence the -1).
         const char* fileStart = content.data.data();
         const char* lineStart = content.lines[lineNum - 1].data();
-        offset = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        uint64_t offsetInBytes = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        offset = GetMultiByteUTF8StringLengthInWideChar(fileStart, offsetInBytes);
 
         // If the range has a valid start but the end is not specified, clamp it to the start.
         uint64_t endLineNum = diagnostic.source.range.end.line;
@@ -89,7 +115,10 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         }
 
         const char* endLineStart = content.lines[endLineNum - 1].data();
-        uint64_t endOffset = static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
+        uint64_t endLineOffsetInBytes =
+            static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
+        uint64_t endOffset =
+            GetMultiByteUTF8StringLengthInWideChar(fileStart, endLineOffsetInBytes);
 
         // The length of the message is the difference between the starting offset and the
         // ending offset. Negative ranges aren't allowed
