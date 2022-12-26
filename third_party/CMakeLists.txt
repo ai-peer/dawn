@@ -89,6 +89,11 @@ target_sources(dawn_vulkan_headers INTERFACE
 )
 target_include_directories(dawn_vulkan_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/khronos")
 
+# Header-only library for icu_utf.h
+add_library(dawn_icu_utf_headers INTERFACE)
+target_sources(dawn_icu_utf_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/icu/icu_utf.h")
+target_include_directories(dawn_icu_utf_headers INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/icu")
+
 if (NOT TARGET vk_swiftshader AND ${DAWN_ENABLE_SWIFTSHADER})
     set(SWIFTSHADER_BUILD_TESTS OFF CACHE BOOL "" FORCE)
     set(SWIFTSHADER_BUILD_BENCHMARKS OFF CACHE BOOL "" FORCE)

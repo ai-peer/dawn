@@ -17,6 +17,8 @@
 #include "dawn/common/Assert.h"
 #include "dawn/native/dawn_platform.h"
 
+#include "third_party/icu/icu_utf.h"
+
 #include "tint/tint.h"
 
 namespace dawn::native {
@@ -32,6 +34,41 @@ WGPUCompilationMessageType tintSeverityToMessageType(tint::diag::Severity severi
         default:
             return WGPUCompilationMessageType_Error;
     }
+}
+
+// UTF-8 to UTF-16 (Referenced from chromium/base/strings/utf_string_conversions.cc:UTF8ToUTF16())
+bool IsValidCodepoint(base_icu::UChar32 code_point) {
+    // Excludes code points that are not Unicode scalar values, i.e.
+    // surrogate code points ([0xD800, 0xDFFF]). Additionally, excludes
+    // code points larger than 0x10FFFF (the highest codepoint allowed).
+    // Non-characters and unassigned code points are allowed.
+    // https://unicode.org/glossary/#unicode_scalar_value
+    return (code_point >= 0 && code_point < 0xD800) ||
+           (code_point >= 0xE000 && code_point <= 0x10FFFF);
+}
+
+void UnicodeAppendUnsafe(char16_t* out, size_t* size, base_icu::UChar32 code_point) {
+    CBU16_APPEND_UNSAFE(out, *size, code_point);
+}
+
+uint64_t GetMultiByteUTF8StringLengthInUTF16(const char* charBytes, uint64_t length) {
+    std::u16string utf16String;
+    utf16String.reserve(length);
+
+    uint64_t utf16Length = 0;
+
+    for (size_t i = 0; i < length;) {
+        base_icu::UChar32 codePoint;
+        CBU8_NEXT(reinterpret_cast<const uint8_t*>(charBytes), i, length, codePoint);
+
+        if (!IsValidCodepoint(codePoint)) {
+            return length;
+        }
+
+        UnicodeAppendUnsafe(utf16String.data(), &utf16Length, codePoint);
+    }
+
+    return utf16Length;
 }
 
 }  // anonymous namespace
@@ -78,7 +115,8 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         // range starts at 1 while the array of lines start at 0 (hence the -1).
         const char* fileStart = content.data.data();
         const char* lineStart = content.lines[lineNum - 1].data();
-        offset = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        uint64_t offsetInBytes = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        offset = GetMultiByteUTF8StringLengthInUTF16(fileStart, offsetInBytes);
 
         // If the range has a valid start but the end is not specified, clamp it to the start.
         uint64_t endLineNum = diagnostic.source.range.end.line;
@@ -89,12 +127,14 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         }
 
         const char* endLineStart = content.lines[endLineNum - 1].data();
-        uint64_t endOffset = static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
+        uint64_t endLineOffsetInBytes =
+            static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
 
         // The length of the message is the difference between the starting offset and the
-        // ending offset. Negative ranges aren't allowed
-        ASSERT(endOffset >= offset);
-        length = endOffset - offset;
+        // ending offset. Negative ranges aren't allowed.
+        ASSERT(endLineOffsetInBytes >= offsetInBytes);
+        length = GetMultiByteUTF8StringLengthInUTF16(fileStart + offsetInBytes,
+                                                     endLineOffsetInBytes - offsetInBytes);
     }
 
     if (diagnostic.code) {
