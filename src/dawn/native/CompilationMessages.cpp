@@ -14,6 +14,9 @@
 
 #include "dawn/native/CompilationMessages.h"
 
+#include <locale.h>
+#include <stdlib.h>
+
 #include "dawn/common/Assert.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -32,6 +35,18 @@ WGPUCompilationMessageType tintSeverityToMessageType(tint::diag::Severity severi
         default:
             return WGPUCompilationMessageType_Error;
     }
+}
+
+uint64_t GetMultiByteUTF8StringLengthInWideChar(const char* charBytes, uint64_t length) {
+    // Add a '\0' at the end
+    std::vector<char> chars(length + 1);
+    memcpy(chars.data(), charBytes, length);
+
+    _locale_t locale = _create_locale(LC_ALL, "en_US.utf8");
+    size_t lengthInWideChar = _mbstowcs_l(nullptr, chars.data(), chars.size(), locale);
+    _free_locale(locale);
+
+    return lengthInWideChar;
 }
 
 }  // anonymous namespace
@@ -78,7 +93,8 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         // range starts at 1 while the array of lines start at 0 (hence the -1).
         const char* fileStart = content.data.data();
         const char* lineStart = content.lines[lineNum - 1].data();
-        offset = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        uint64_t offsetInBytes = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        offset = GetMultiByteUTF8StringLengthInWideChar(fileStart, offsetInBytes);
 
         // If the range has a valid start but the end is not specified, clamp it to the start.
         uint64_t endLineNum = diagnostic.source.range.end.line;
@@ -89,7 +105,10 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         }
 
         const char* endLineStart = content.lines[endLineNum - 1].data();
-        uint64_t endOffset = static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
+        uint64_t endLineOffsetInBytes =
+            static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
+        uint64_t endOffset =
+            GetMultiByteUTF8StringLengthInWideChar(fileStart, endLineOffsetInBytes);
 
         // The length of the message is the difference between the starting offset and the
         // ending offset. Negative ranges aren't allowed
