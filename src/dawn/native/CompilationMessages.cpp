@@ -15,6 +15,7 @@
 #include "dawn/native/CompilationMessages.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Platform.h"
 #include "dawn/native/dawn_platform.h"
 
 #include "tint/tint.h"
@@ -32,6 +33,42 @@ WGPUCompilationMessageType tintSeverityToMessageType(tint::diag::Severity severi
         default:
             return WGPUCompilationMessageType_Error;
     }
+}
+
+uint64_t GetNumberOfUTF16CodeUnitsFromMultiByteUTF8String(const char* charBytes, uint64_t length) {
+    std::string_view utf8String(charBytes, length);
+    if (tint::text::utf8::IsASCII(utf8String)) {
+        return length;
+    }
+
+    uint64_t numberOfUTF16CodeUnits = 0;
+    uint64_t utf8ByteIndex = 0;
+    while (utf8ByteIndex < length) {
+        const uint8_t* nextUTF8 = reinterpret_cast<const uint8_t*>(charBytes + utf8ByteIndex);
+        auto [codePoint, utf8CharacterByteLength] =
+            tint::text::utf8::Decode(nextUTF8, length - utf8ByteIndex);
+        // Directly return as something wrong has happened during the UTF-8 decoding.
+        if (utf8CharacterByteLength == 0) {
+            return length;
+        }
+        utf8ByteIndex += utf8CharacterByteLength;
+
+        // Count the number of code units in UTF-16. See https://en.wikipedia.org/wiki/UTF-16 for
+        // more details.
+        if (codePoint.value <= 0xD7FF || (codePoint.value >= 0xE000 && codePoint.value <= 0xFFFF)) {
+            // Code points from U+0000 to U+D7FF and U+E000 to U+FFFF are encoded as single 16-bit
+            // code units.
+            ++numberOfUTF16CodeUnits;
+        } else if (codePoint.value >= 0x10000) {
+            // Code points from U+010000 to U+10FFFF are encoded as two 16-bit code units.
+            numberOfUTF16CodeUnits += 2;
+        } else {
+            // UTF-16 cannot encode the code points from U+D800 to U+DFFF.
+            return length;
+        }
+    }
+
+    return numberOfUTF16CodeUnits;
 }
 
 }  // anonymous namespace
@@ -78,7 +115,8 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         // range starts at 1 while the array of lines start at 0 (hence the -1).
         const char* fileStart = content.data.data();
         const char* lineStart = content.lines[lineNum - 1].data();
-        offset = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        uint64_t offsetInBytes = static_cast<uint64_t>(lineStart - fileStart) + lineCol - 1;
+        offset = GetNumberOfUTF16CodeUnitsFromMultiByteUTF8String(fileStart, offsetInBytes);
 
         // If the range has a valid start but the end is not specified, clamp it to the start.
         uint64_t endLineNum = diagnostic.source.range.end.line;
@@ -89,12 +127,13 @@ void OwnedCompilationMessages::AddMessage(const tint::diag::Diagnostic& diagnost
         }
 
         const char* endLineStart = content.lines[endLineNum - 1].data();
-        uint64_t endOffset = static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
-
+        uint64_t endLineOffsetInBytes =
+            static_cast<uint64_t>(endLineStart - fileStart) + endLineCol - 1;
         // The length of the message is the difference between the starting offset and the
-        // ending offset. Negative ranges aren't allowed
-        ASSERT(endOffset >= offset);
-        length = endOffset - offset;
+        // ending offset. Negative ranges aren't allowed.
+        ASSERT(endLineOffsetInBytes >= offsetInBytes);
+        length = GetNumberOfUTF16CodeUnitsFromMultiByteUTF8String(
+            fileStart + offsetInBytes, endLineOffsetInBytes - offsetInBytes);
     }
 
     if (diagnostic.code) {
