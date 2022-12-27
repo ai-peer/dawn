@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64475e1_ab46d740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2022-12-27T06:35:19Z",
+      "side": 1,
+      "message": "Hi Corentin, Austin and Ben,\n\nI found the failure of webgpu:api,operation,shader_module,compilation_info:offset_and_length:valid\u003dfalse;name\u003d\"unicode\" is because we don\u0027t count in the offset of compilation message with Unicode. Now with this patch the test can pass on Windows, but still fail on macOS and Linux.\n\nI think we need to have some infrastructures to handle unicode in dawn_native, but I am not familiar with it. Do you have any idea?",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
