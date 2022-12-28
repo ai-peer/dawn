@@ -2620,13 +2620,18 @@ sem::Expression* Resolver::Literal(const ast::LiteralExpression* literal) {
     }
 
     const constant::Value* val = nullptr;
-    if (auto r = const_eval_.Literal(ty, literal)) {
-        val = r.Get();
-    } else {
-        return nullptr;
+    auto stage = sem::EvaluationStage::kConstant;
+    if (skip_const_eval_.Contains(literal)) {
+        stage = sem::EvaluationStage::kNotEvaluated;
     }
-    return builder_->create<sem::Expression>(literal, ty, sem::EvaluationStage::kConstant,
-                                             current_statement_, std::move(val),
+    if (stage == sem::EvaluationStage::kConstant) {
+        if (auto r = const_eval_.Literal(ty, literal)) {
+            val = r.Get();
+        } else {
+            return nullptr;
+        }
+    }
+    return builder_->create<sem::Expression>(literal, ty, stage, current_statement_, std::move(val),
                                              /* has_side_effects */ false);
 }
 
@@ -2869,7 +2874,6 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
     const auto* rhs = sem_.Get(expr->rhs);
     auto* lhs_ty = lhs->Type()->UnwrapRef();
     auto* rhs_ty = rhs->Type()->UnwrapRef();
-
     auto stage = sem::EarliestStage(lhs->Stage(), rhs->Stage());
     auto op = intrinsic_table_->Lookup(expr->op, lhs_ty, rhs_ty, stage, expr->source, false);
     if (!op.result) {
@@ -2899,13 +2903,17 @@ sem::Expression* Resolver::Binary(const ast::BinaryExpression* expr) {
     }
 
     const constant::Value* value = nullptr;
-    if (stage == sem::EvaluationStage::kConstant) {
+    if (stage == sem::EvaluationStage::kNotEvaluated) {
+        if (lhs->Stage() == sem::EvaluationStage::kConstant) {
+            // If rhs evaluation was skipped for short-circuiting, use lhs constant result
+            TINT_ASSERT(Resolver, skip_const_eval_.Contains(expr->rhs));
+            stage = sem::EvaluationStage::kConstant;
+            value = lhs->ConstantValue();
+        }
+    } else if (stage == sem::EvaluationStage::kConstant) {
         if (op.const_eval_fn) {
             if (skip_const_eval_.Contains(expr)) {
                 stage = sem::EvaluationStage::kNotEvaluated;
-            } else if (skip_const_eval_.Contains(expr->rhs)) {
-                // Only the rhs should be short-circuited, use the lhs value
-                value = lhs->ConstantValue();
             } else {
                 auto const_args = utils::Vector{lhs->ConstantValue(), rhs->ConstantValue()};
                 // Implicit conversion (e.g. AInt -> AFloat)
