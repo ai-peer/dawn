@@ -16,6 +16,40 @@
       "message": "Hi Corentin, Austin and Ben,\n\nI found the failure of webgpu:api,operation,shader_module,compilation_info:offset_and_length:valid\u003dfalse;name\u003d\"unicode\" is because we don\u0027t count in the offset of compilation message with Unicode. Now with this patch the test can pass on Windows, but still fail on macOS and Linux.\n\nI think we need to have some infrastructures to handle unicode in dawn_native, but I am not familiar with it. Do you have any idea?",
       "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1527fe_eadf72eb",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-02T16:10:46Z",
+      "side": 1,
+      "message": "Is there a way to do this using the C++ library and without modifying the currently set locale? (IIRC it might not be without triggering some addition of global constructors, which is also disallowed).\n\nAlternatively, assuming the text is valid UTF-8, isn\u0027t there a simple way to convert the offsets (I thought it was easy to convert between the two as it\u0027s just a matter of what is representable).\n\nFinally, the code seems to do a lot of redundant computations since it translates the whole prefix of the file multiple times. I wonder if at least we could precompute the start of line UTF16 offsets instead of doing the computation for the whole prefix each time (though that could be a TODO as well).",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67dcd783_886d334c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-02T16:10:46Z",
+      "side": 1,
+      "message": "IMHO the C API offset should still be a UTF8 offset since that\u0027s the format the C API takes. We could add a utf16Offset to the compilation message struct and surface both informations, but since UTF16 is more niche in native (just used for JS bindings) then it should get the longer name.",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
