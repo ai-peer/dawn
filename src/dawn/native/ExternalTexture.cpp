@@ -209,10 +209,16 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     const float* dstFn = descriptor->dstTransferFunctionParameters;
     std::copy(dstFn, dstFn + 7, params.gammaEncodingParams.begin());
 
-    // These scale factors perform part of the cropping operation. These default to 1, so we can use
-    // them directly for performing rotation in the matrix later.
-    float xScale = descriptor->visibleRect.width;
-    float yScale = descriptor->visibleRect.height;
+    // Calculate scale factors from the specified visibleSize.
+    ASSERT(descriptor->visibleSize.width > 0);
+    ASSERT(descriptor->visibleSize.height > 0);
+
+    uint32_t frameWidth = descriptor->plane0->GetTexture()->GetWidth();
+    uint32_t frameHeight = descriptor->plane0->GetTexture()->GetHeight();
+    float xScale =
+        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(frameWidth);
+    float yScale =
+        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(frameHeight);
 
     // In the shader, we must convert UV coordinates from the {0, 1} space to the {-0.5, 0.5} space
     // to do rotation. Ideally, we want to combine the rotate, flip-Y operations in a single matrix
@@ -231,8 +237,12 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
     //    newCoords = vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix;
     //
     // TODO(dawn:1614): Incorporate the "- 0.5f" into the matrix.
-    float xOffset = descriptor->visibleRect.x + 0.5f * xScale;
-    float yOffset = descriptor->visibleRect.y + 0.5f * yScale;
+    float xOffset =
+        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(frameWidth) +
+        0.5f * xScale;
+    float yOffset =
+        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(frameHeight) +
+        0.5f * yScale;
 
     // Flip-Y can be done by simply negating the scaling factor in the y-plane. The position of the
     // y-plane scaling factor in the matrix can be different depending on the rotation.
