@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff867227_a4f36966",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-03T08:40:23Z",
+      "side": 1,
+      "message": "It works well but the ICU dependency seems unnecessary for the little work we have to do with UTF8?",
+      "parentUuid": "96bdab03_b2a59bd5",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67dcd783_886d334c",
         "filename": "src/dawn/native/CompilationMessages.cpp",
         "patchSetId": 6

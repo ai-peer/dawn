@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1009e0b_a594f948",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-03T08:40:23Z",
+      "side": 1,
+      "message": "Looking at the wikipedia pages for UTF8 and UTF16 it seems we should be able to do this ourselves without the need to use ICU:\n\n - Consume a single code UTF8 code point based on the prefix of the first byte (checking for length etc).\n - If it is higher than U+010000 add 2 to the UTF16 offset, otherwise 1.",
+      "revId": "87d453cfdb5ead66bb9fdd8ceecbfaa2d84ddc70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03f601de_4e2acc48",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-03T08:40:23Z",
+      "side": 1,
+      "message": "Why do we create the string just to delete it afterwards?",
+      "revId": "87d453cfdb5ead66bb9fdd8ceecbfaa2d84ddc70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
