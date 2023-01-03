@@ -16,6 +16,24 @@
       "message": "We should be reconstructing types here, so there\u0027s no dangling pointers into the source program. Baby steps though.",
       "revId": "f2e9d4c2b0ae5f44407b5ac90abc0895c75ff52e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7027c8f_3acceb3e",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-03T20:24:07Z",
+      "side": 1,
+      "message": "Yea, I need to clone types and symbol table into the IR module.",
+      "parentUuid": "36185084_d6684e32",
+      "revId": "f2e9d4c2b0ae5f44407b5ac90abc0895c75ff52e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
