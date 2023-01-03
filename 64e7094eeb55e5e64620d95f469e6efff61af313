@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97ce54d7_831ea952",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-03T16:30:43Z",
+      "side": 1,
+      "message": "Done.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/116100",
+      "parentUuid": "1380e429_836dcc36",
+      "range": {
+        "startLine": 492,
+        "startChar": 24,
+        "endLine": 495,
+        "endChar": 44
+      },
+      "revId": "64e7094eeb55e5e64620d95f469e6efff61af313",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a738fff0_dfbc42f1",
         "filename": "src/tint/program_builder.h",
         "patchSetId": 8
@@ -71,6 +95,30 @@
       "writtenOn": "2022-12-15T21:50:23Z",
       "side": 1,
       "message": "This is going to be emitted with each call to this `create`. As the logic is not dependent on any template types, it could be moved to a helper in the .cc file to remove exe bloat.",
+      "range": {
+        "startLine": 497,
+        "startChar": 0,
+        "endLine": 521,
+        "endChar": 9
+      },
+      "revId": "64e7094eeb55e5e64620d95f469e6efff61af313",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb553484_2e9c098f",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-03T16:30:43Z",
+      "side": 1,
+      "message": "Done.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/116100",
+      "parentUuid": "a738fff0_dfbc42f1",
       "range": {
         "startLine": 497,
         "startChar": 0,
