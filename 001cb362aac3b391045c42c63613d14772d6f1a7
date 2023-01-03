@@ -33,6 +33,24 @@
       "message": "Note, I didn\u0027t add a RemoveUsage at this stage as it requires adding a the abilty to remove from a `UniqueVector` and `Vector` both of which don\u0027t exist at this point.",
       "revId": "001cb362aac3b391045c42c63613d14772d6f1a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2c4221d_0a4392a0",
+        "filename": "src/tint/ir/value.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-03T21:12:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7c964d7d_b9374ad9",
+      "revId": "001cb362aac3b391045c42c63613d14772d6f1a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

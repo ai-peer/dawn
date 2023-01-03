@@ -16,6 +16,24 @@
       "message": "These tests all exist in binary_test. This wasn\u0027t in the Cmakelists file and is out of date, so removing.",
       "revId": "4cef4362b0654b52e3c1a6ee5a3133456cf0107d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d65f91_2fecde87",
+        "filename": "src/tint/ir/instruction_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-03T21:12:55Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "3348e9d2_f87b18bd",
+      "revId": "4cef4362b0654b52e3c1a6ee5a3133456cf0107d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
