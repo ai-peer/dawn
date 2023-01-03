@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b0e257_638b0731",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2937,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-03T22:06:01Z",
+      "side": 1,
+      "message": "Can this ever happen? All binary operators are constant-evaluatable right?",
+      "range": {
+        "startLine": 2935,
+        "startChar": 0,
+        "endLine": 2937,
+        "endChar": 51
+      },
+      "revId": "80b956c7a914bace45b5b81b6a9dafa79f05fcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
