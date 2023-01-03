@@ -268,7 +268,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -348,7 +348,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -622,7 +622,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -717,7 +717,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -844,7 +844,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -933,7 +933,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1031,7 +1031,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1119,7 +1119,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1218,7 +1218,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1327,7 +1327,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1423,7 +1423,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1524,7 +1524,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1667,7 +1667,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
@@ -1766,7 +1766,7 @@ fn gammaCorrection(v : vec3<f32>, params : GammaTransferParams) -> vec3<f32> {
 }
 
 fn textureSampleExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, smp : sampler, coord : vec2<f32>, params : ExternalTextureParams) -> vec4<f32> {
-  let modifiedCoords = (vec3<f32>((coord - 0.5f), 1.0f) * params.coordTransformationMatrix);
+  let modifiedCoords = (vec3<f32>(coord, 1) * params.coordTransformationMatrix);
   let plane0_dims = vec2<f32>(textureDimensions(plane0, 0));
   let plane0_half_texel = (vec2<f32>(0.5) / plane0_dims);
   let plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1 - plane0_half_texel));
