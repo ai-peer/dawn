@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "7ac6950210d9ed5417e1e528051c606c7f61b9f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "877e23a1_667f2295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-03T16:10:14Z",
+      "side": 1,
+      "message": "Would prefer to wait for the bot switch before landing this.",
+      "revId": "7ac6950210d9ed5417e1e528051c606c7f61b9f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
