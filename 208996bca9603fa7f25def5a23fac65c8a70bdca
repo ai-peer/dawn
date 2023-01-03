@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3849b51_0054b373",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-03T10:07:24Z",
+      "side": 1,
+      "message": "If this does require ICU - shouldn\u0027t we be pulling in ICU with DEPS?\nExample: https://source.chromium.org/chromium/chromium/src/+/main:DEPS;l\u003d1367?q\u003dicu%20file:DEPS\u0026sq\u003d\u0026ss\u003dchromium",
+      "parentUuid": "ff867227_a4f36966",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67dcd783_886d334c",
         "filename": "src/dawn/native/CompilationMessages.cpp",
         "patchSetId": 6
