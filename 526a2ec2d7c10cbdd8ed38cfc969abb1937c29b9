@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09867417_39bb9600",
+        "filename": "tools/src/tint/intrinsic/gen/permutate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-03T17:55:17Z",
+      "side": 1,
+      "message": "This rejects `bool` for the workgroup case below. `bool` is fine in workgroup storage, its just not host-sharable (so can\u0027t be used in a runtime-sized array).\n\nBut that\u0027s probably fine. We can just manually add tests for `bool` for `workgroupUniformLoad.`.",
+      "revId": "526a2ec2d7c10cbdd8ed38cfc969abb1937c29b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
