@@ -46,7 +46,7 @@ class Temp : public Castable<Temp, Value> {
     Id AsId() const { return id_; }
 
     /// @returns the type of the temporary
-    const type::Type* Type() const override { return nullptr; }
+    const type::Type* Type() const override { return type_; }
 
     /// Write the temp to the given stream
     /// @param out the stream to write to
