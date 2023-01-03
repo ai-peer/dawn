@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34eeb237_f0159044",
+        "filename": "third_party/icu/README.chromium",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-03T03:02:43Z",
+      "side": 1,
+      "message": "This is weird to me. Shall we directly use the functions in  https://source.chromium.org/chromium/chromium/src/+/main:third_party/icu/ instead of icu_utf.h here?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 62
+      },
+      "revId": "b6fbad3e7cbc44e0382a4a6b070726bef5ef95c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
