@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be163bb7_3208ef2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-03T20:15:59Z",
+      "side": 1,
+      "message": "As you\u0027re OOO, and this fixes an ClusterFuzz issue, I\u0027ve forked this change as:\nhttps://dawn-review.googlesource.com/c/dawn/+/116020",
+      "revId": "20961267a7376d853d51d6779a023ddd52cc4443",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd06bd6_469cf665",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1509,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-03T20:15:59Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem right. The RHS type is `abstract-int`.",
+      "range": {
+        "startLine": 1509,
+        "startChar": 74,
+        "endLine": 1509,
+        "endChar": 77
+      },
+      "revId": "20961267a7376d853d51d6779a023ddd52cc4443",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4bd806_2a1977ef",
+        "filename": "src/tint/sem/evaluation_stage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-03T20:15:59Z",
+      "side": 1,
+      "message": "I see why you\u0027ve done this, but it doesn\u0027t feel right to have this \"later\" than runtime.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "20961267a7376d853d51d6779a023ddd52cc4443",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
