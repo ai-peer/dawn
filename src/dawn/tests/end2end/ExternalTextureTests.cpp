@@ -667,7 +667,8 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
                         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment);
 
     struct CropExpectation {
-        wgpu::ExternalTextureVisibleRect visibleRect;
+        wgpu::Origin2D visibileOrigin;
+        wgpu::Extent2D visibleSize;
         wgpu::ExternalTextureRotation rotation;
         utils::RGBA8 upperLeftColor;
         utils::RGBA8 upperRightColor;
@@ -676,55 +677,64 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
     };
 
     std::array<CropExpectation, 9> expectations = {{
-        {{0.0, 0.0, 1.0, 1.0},
+        {{0, 0},
+         {4, 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack},
-        {{0.25, 0.25, 0.25, 0.25},
+        {{1, 1},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen},
-        {{0.5, 0.25, 0.25, 0.25},
+        {{2, 1},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite},
-        {{0.25, 0.5, 0.25, 0.25},
+        {{1, 2},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed},
-        {{0.5, 0.5, 0.25, 0.25},
+        {{2, 2},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kGreen,
          utils::RGBA8::kWhite,
          utils::RGBA8::kRed,
          utils::RGBA8::kBlue},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate90Degrees,
          utils::RGBA8::kRed,
          utils::RGBA8::kGreen,
          utils::RGBA8::kBlue,
          utils::RGBA8::kWhite},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate180Degrees,
          utils::RGBA8::kBlue,
          utils::RGBA8::kRed,
          utils::RGBA8::kWhite,
          utils::RGBA8::kGreen},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate270Degrees,
          utils::RGBA8::kWhite,
          utils::RGBA8::kBlue,
@@ -743,8 +753,9 @@ TEST_P(ExternalTextureTests, CropSinglePlane) {
         // Create an ExternalTextureDescriptor from the texture view
         wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
         externalDesc.plane0 = sourceTexture.CreateView();
-        externalDesc.visibleRect = exp.visibleRect;
         externalDesc.rotation = exp.rotation;
+        externalDesc.visibleOrigin = exp.visibileOrigin;
+        externalDesc.visibleSize = exp.visibleSize;
 
         // Import the external texture
         wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
@@ -848,7 +859,8 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
                         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment);
 
     struct CropExpectation {
-        wgpu::ExternalTextureVisibleRect visibleRect;
+        wgpu::Origin2D visibileOrigin;
+        wgpu::Extent2D visibleSize;
         wgpu::ExternalTextureRotation rotation;
         utils::RGBA8 upperLeftColor;
         utils::RGBA8 upperRightColor;
@@ -857,55 +869,64 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
     };
 
     std::array<CropExpectation, 9> expectations = {{
-        {{0.0, 0.0, 1.0, 1.0},
+        {{0, 0},
+         {4, 4},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack,
          utils::RGBA8::kBlack},
-        {{0.25, 0.25, 0.25, 0.25},
+        {{1, 1},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen,
          utils::RGBA8::kGreen},
-        {{0.5, 0.25, 0.25, 0.25},
+        {{2, 1},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite,
          utils::RGBA8::kWhite},
-        {{0.25, 0.5, 0.25, 0.25},
+        {{1, 2},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed,
          utils::RGBA8::kRed},
-        {{0.5, 0.5, 0.25, 0.25},
+        {{2, 2},
+         {1, 1},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue,
          utils::RGBA8::kBlue},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate0Degrees,
          utils::RGBA8::kGreen,
          utils::RGBA8::kWhite,
          utils::RGBA8::kRed,
          utils::RGBA8::kBlue},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate90Degrees,
          utils::RGBA8::kRed,
          utils::RGBA8::kGreen,
          utils::RGBA8::kBlue,
          utils::RGBA8::kWhite},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate180Degrees,
          utils::RGBA8::kBlue,
          utils::RGBA8::kRed,
          utils::RGBA8::kWhite,
          utils::RGBA8::kGreen},
-        {{0.25, 0.25, 0.5, 0.5},
+        {{1, 1},
+         {2, 2},
          wgpu::ExternalTextureRotation::Rotate270Degrees,
          utils::RGBA8::kWhite,
          utils::RGBA8::kBlue,
@@ -926,7 +947,8 @@ TEST_P(ExternalTextureTests, CropMultiplanar) {
         externalDesc.plane0 = sourceTexturePlane0.CreateView();
         externalDesc.plane1 = sourceTexturePlane1.CreateView();
         externalDesc.rotation = exp.rotation;
-        externalDesc.visibleRect = exp.visibleRect;
+        externalDesc.visibleOrigin = exp.visibileOrigin;
+        externalDesc.visibleSize = exp.visibleSize;
 
         // Import the external texture
         wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
