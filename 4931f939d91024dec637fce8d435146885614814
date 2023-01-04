@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1c190f2_64841e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T15:53:27Z",
+      "side": 1,
+      "message": "PTAL again at the changes since your last review! (PS7 or PS9 depending.)",
+      "revId": "4931f939d91024dec637fce8d435146885614814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
