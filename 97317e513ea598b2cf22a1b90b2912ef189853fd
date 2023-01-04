@@ -68,6 +68,24 @@
       "message": "Ohh, our performance monitor bot doesn\u0027t like this change. Let me investigate why.",
       "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acbf23c2_835cb927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-04T13:23:54Z",
+      "side": 1,
+      "message": "Curious. The precompiled headers appears to break `TINT_INSTANTIATE_TYPEINFO`, when compiling using clang 14, on linux:\n\n```\n/home/ben/src/dawn/src/tint/ast/binding_attribute.cc:21:1: error: explicit specialization of \u0027info\u0027 after instantiation\nTINT_INSTANTIATE_TYPEINFO(tint::ast::BindingAttribute);\n^\n/home/ben/src/dawn/src/tint/castable.h:72:59: note: expanded from macro \u0027TINT_INSTANTIATE_TYPEINFO\u0027\n    const tint::TypeInfo tint::detail::TypeInfoOf\u003cCLASS\u003e::info{ \\\n                                                          ^\n/home/ben/src/dawn/src/tint/castable.h:178:57: note: implicit instantiation first required here\n        return detail::TypeInfoOf\u003cstd::remove_cv_t\u003cT\u003e\u003e::info;\n                                                        ^\n1 error generated.\n```",
+      "parentUuid": "7b122211_e731eeb9",
+      "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
