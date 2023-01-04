@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd6b0e7_254938c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-04T14:53:52Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "cb0f2512b42c01eeebc89c063cf2544bb3cdaf1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1923d257_fb537048",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-04T14:53:52Z",
+      "side": 1,
+      "message": "Should this be part of `sem_.ResolvedSymbol` itself? It seems like the short names should always be considered resolved?",
+      "revId": "cb0f2512b42c01eeebc89c063cf2544bb3cdaf1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
