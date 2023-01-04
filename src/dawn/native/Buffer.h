@@ -119,7 +119,7 @@ class BufferBase : public ApiObjectBase {
                                 WGPUBufferMapAsyncStatus* status) const;
     MaybeError ValidateUnmap() const;
     bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
-    void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
+    void UnmapInternal(BufferState currentState, WGPUBufferMapAsyncStatus callbackStatus);
 
     uint64_t mSize = 0;
     wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
