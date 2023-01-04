@@ -16,6 +16,40 @@
       "message": "LGTM.",
       "revId": "ae5df305ba79d967a071a436d11a338769bd501f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7ee2eb1_6b4a1f25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:16:58Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ae5df305ba79d967a071a436d11a338769bd501f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d355f08_dc4da244",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:16:58Z",
+      "side": 1,
+      "message": "Not that this part will need to change after https://dawn-review.googlesource.com/c/dawn/+/116124 (or that CL will need to change after this one)",
+      "revId": "ae5df305ba79d967a071a436d11a338769bd501f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
