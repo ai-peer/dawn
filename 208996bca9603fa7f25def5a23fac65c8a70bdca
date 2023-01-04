@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c83ba9a6_a2a7c2fb",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T10:11:02Z",
+      "side": 1,
+      "message": "At some point in the future we\u0027ll need to properly define the Tint public API.\nWe can always move this out to the \u0027common\u0027 module shared by Dawn and Tint.\n\nSo SGTM.\n\n+1 to testing this stuff. It\u0027s easy to overlook edge cases.",
+      "parentUuid": "e832df19_e99def71",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67dcd783_886d334c",
         "filename": "src/dawn/native/CompilationMessages.cpp",
         "patchSetId": 6

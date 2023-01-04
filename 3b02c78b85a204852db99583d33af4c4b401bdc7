@@ -16,6 +16,75 @@
       "message": "Thank you for the rework, looks much better without ICU!",
       "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc4040cb_63e12f0f",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T10:11:02Z",
+      "side": 1,
+      "message": "Could do with a comment saying what units `length` is in. Alternatively, use a `std::string_view` ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 90,
+        "endLine": 37,
+        "endChar": 96
+      },
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d9e702f_1b482b1c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T10:11:02Z",
+      "side": 1,
+      "message": "nit: Quite an excessively verbose function name. Suggest: `CountUTF16CodeUnitsFromUTF8String`",
+      "range": {
+        "startLine": 37,
+        "startChar": 9,
+        "endLine": 37,
+        "endChar": 57
+      },
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "483ba79b_055ebe07",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T10:11:02Z",
+      "side": 1,
+      "message": "Seems risky returning `length` as an error value - the value is at most `length / 2`. Feels like this might have the potential for a buffer overrun.\n\nI recommend using Dawn\u0027s `Result` for indicating success / error.",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
