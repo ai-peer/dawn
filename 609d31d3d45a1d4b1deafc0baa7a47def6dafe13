@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0786be0b_1a0bd924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003461
+      },
+      "writtenOn": "2023-01-04T09:47:42Z",
+      "side": 1,
+      "message": "Hi there, first time contributor here, I hope I followed all steps properly!\n\nThis is a very small change to fix `clang-cl` builds. As mentioned in the commit:\n\n1. Warnings were not being properly disabled because MSVC was being detected by the code guard for `TINT_DISABLE_WARNING_*` (because `_MSC_VER` is defined in this case too)\n2. There is a `double` comparison in the lexer that `clang` complains about, but in this case it\u0027s perfectly valid doing so. I\u0027ve added a new `TINT_DISABLE_WARNING_FLOAT_EQUAL` to deal with this case, I hope that was the right move.\n\n(BTW, this is also the first time I use Gerrit, so no idea what to do with all the \"points\" on this UI about code-review, auto-submit and commit-queue, sorry about that)",
+      "revId": "609d31d3d45a1d4b1deafc0baa7a47def6dafe13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
