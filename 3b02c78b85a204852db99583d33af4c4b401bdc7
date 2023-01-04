@@ -85,6 +85,30 @@
       },
       "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cbfd12e_5023a584",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:18:12Z",
+      "side": 1,
+      "message": "We could return 0 or the max uint64_t: Tint doesn\u0027t have access to Dawn\u0027s Result type unfortunately.",
+      "parentUuid": "483ba79b_055ebe07",
+      "range": {
+        "startLine": 66,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 26
+      },
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
