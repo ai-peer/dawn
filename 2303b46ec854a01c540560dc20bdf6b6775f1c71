@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cadfce5e_9002e9bf",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-04T10:00:55Z",
+      "side": 1,
+      "message": "I want to add a test case that tests map async call in the resolved map async callback that expects validation error due to already mapped buffer.\n\n```\n    {\n        wgpu::Buffer buf \u003d CreateMapReadBuffer(4);\n\n        EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Success, _))\n            .WillOnce(InvokeWithoutArgs([\u0026]() {\n                EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Error, _));\n                // Should cause validation error because of already mapped buffer\n                ASSERT_DEVICE_ERROR(\n                    buf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr));\n            }));\n\n        buf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);\n        WaitForAllOperations(device);\n    }\n```\n\nThis test passes on native but fails on Dawn with this error log\n\n```\nINFO: EGL ERROR: eglMakeCurrent: \u0027dpy\u0027 not a valid EGLDisplay handle\n..\\..\\src\\dawn\\tests\\unittests\\validation\\ValidationTest.cpp(207): error: Value of: mWireHelper-\u003eFlushServer()\n  Actual: false\nExpected: true\n[  FAILED  ] BufferValidationTest.MapAsync_MapAsyncInMapAsyncCallback (192 ms)\n[----------] 1 test from BufferValidationTest (194 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 1 test from 1 test suite ran. (200 ms total)\n[  PASSED  ] 0 tests.\n[  FAILED  ] 1 test, listed below:\n[  FAILED  ] BufferValidationTest.MapAsync_MapAsyncInMapAsyncCallback\n```\n\nAny advice to resolve the problem?",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
