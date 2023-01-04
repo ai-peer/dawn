@@ -33,6 +33,24 @@
       "message": "Should this be part of `sem_.ResolvedSymbol` itself? It seems like the short names should always be considered resolved?",
       "revId": "cb0f2512b42c01eeebc89c063cf2544bb3cdaf1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8235d7df_caee78aa",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2720,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T16:03:49Z",
+      "side": 1,
+      "message": "Unfortunately not, as the dependency graph does not build any types (that\u0027s part of the resolve phase), it simply tries to producing symbol mappings.",
+      "parentUuid": "1923d257_fb537048",
+      "revId": "cb0f2512b42c01eeebc89c063cf2544bb3cdaf1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
