@@ -16,6 +16,29 @@
       "message": "PTAL again at the changes since your last review! (PS7 or PS9 depending.)",
       "revId": "4931f939d91024dec637fce8d435146885614814",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78b210a_c3868f32",
+        "filename": "src/dawn/tests/end2end/FragDepthTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-04T17:40:32Z",
+      "side": 1,
+      "message": "probably this whole comment is copy-pasted from somewhere else.\n\nthere\u0027s no SetViewport call here?\nalso the depth is 5.0 in the vertex shader and 0.5 in the frag shader, not 1.0.\n\nviewport shouldn\u0027t matter since the rasterization should clip",
+      "range": {
+        "startLine": 212,
+        "startChar": 27,
+        "endLine": 212,
+        "endChar": 42
+      },
+      "revId": "4931f939d91024dec637fce8d435146885614814",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
