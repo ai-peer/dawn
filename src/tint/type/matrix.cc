@@ -66,4 +66,9 @@ uint32_t Matrix::ColumnStride() const {
     return column_type_->Align();
 }
 
+Type* Matrix::Clone(CloneContext& ctx) const {
+    auto* col_ty = column_type_->Clone(ctx);
+    return ctx.dst.mgr->Get<Matrix>(col_ty->As<Vector>(), columns_);
+}
+
 }  // namespace tint::type

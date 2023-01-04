@@ -33,4 +33,8 @@ std::string AbstractInt::FriendlyName(const SymbolTable&) const {
     return "abstract-int";
 }
 
+Type* AbstractInt::Clone(CloneContext& ctx) const {
+    return ctx.dst.mgr->Get<AbstractInt>();
+}
+
 }  // namespace tint::type
