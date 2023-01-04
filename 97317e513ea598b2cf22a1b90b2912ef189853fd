@@ -16,6 +16,23 @@
       "message": "Hello again.\n\nThis is a small change to enable precompiled headers for the `tint` and `dawn_native` projects.\n\nWith this small change, I get a 1.5x compilation speed improvement in my case for dawn_native (from ~20 to ~12sec), and a 2.5x one for tint (from ~50 to ~20sec).\n\nThere are more gains to be had (at least very small ones with a similar change for Vulkan and D3D12 common headers, for example, but might be others) but I wanted to keep things simple, as at this point it\u0027s not really noticeable (although it really depends on the computer).",
       "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "349c555f_380cfab9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T12:37:43Z",
+      "side": 1,
+      "message": "Thank you, again!",
+      "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
