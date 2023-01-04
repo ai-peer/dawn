@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9156ade_40c51f3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-04T18:13:13Z",
+      "side": 1,
+      "message": "Much like https://dawn-review.googlesource.com/c/dawn/+/116284 but for the write test which has the same issue.",
+      "revId": "b94df62b6717a5fe356176c04a14c6dd67222933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
