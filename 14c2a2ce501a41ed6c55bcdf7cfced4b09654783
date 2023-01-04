@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "14c2a2ce501a41ed6c55bcdf7cfced4b09654783",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba67003_2141eb4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-04T16:39:51Z",
+      "side": 1,
+      "message": "After this, both these tags would be added:\n\u0027intel-0x9bc5\u0027, \u0027intel-gen-9\u0027\n\nSo, on the next roll \u0027intel-0x9bc5\u0027 would be added to you Intel expectations, I think.\nI like the idea of having \u0027intel-0x9bc5\u0027, since it is more restrictive.\nYou might want to get rid of \u0027intel-gen-9\u0027.\nI hope we can keep or fleet homogenous going forward, but I can\u0027t guarantee we won\u0027t have emergency capacity shortages which would be adressed by adding a new GPU id.",
+      "revId": "14c2a2ce501a41ed6c55bcdf7cfced4b09654783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
