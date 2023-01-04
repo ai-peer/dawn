@@ -22,6 +22,30 @@
       },
       "revId": "80b956c7a914bace45b5b81b6a9dafa79f05fcde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc4753c_ea5f625f",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2937,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T11:22:37Z",
+      "side": 1,
+      "message": "Possibly not - but it keeps parity with other intrinsics, and avoids coupling logic here with `intrinsics.def`.",
+      "parentUuid": "61b0e257_638b0731",
+      "range": {
+        "startLine": 2935,
+        "startChar": 0,
+        "endLine": 2937,
+        "endChar": 51
+      },
+      "revId": "80b956c7a914bace45b5b81b6a9dafa79f05fcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
