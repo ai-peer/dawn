@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45214d26_9bd93e71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-04T17:34:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc4040cb_63e12f0f",
@@ -59,6 +76,29 @@
         "startChar": 9,
         "endLine": 37,
         "endChar": 57
+      },
+      "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8660f6a1_78e949e6",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-04T17:34:37Z",
+      "side": 1,
+      "message": "nit: if we used string_view, I think this could be something like:\n\n```\nstd::string_view remaining \u003d input;\nwhile (!remaining.empty()) {\n  auto [codePoint, utf8CharacterByteLength] \u003d\n    tint::text::utf8::Decode(remaining.data(), remaining.length());\n  if (utf8CharacterByteLength \u003d\u003d 0) {\n    // return error\n  }\n  remaining \u003d remaining.substr(utf8CharacterByteLength);\n}\n```\n\nwhich IMO looks slightly nicer than manually bumping the offset. Could be even better if we added an overload of tint::text::utf8::Decode to also take std::string_view",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 0
       },
       "revId": "3b02c78b85a204852db99583d33af4c4b401bdc7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
