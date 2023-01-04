@@ -208,6 +208,9 @@ target_sources(dawn_native PRIVATE
     "utils/WGPUHelpers.cpp"
     "utils/WGPUHelpers.h"
 )
+
+target_precompile_headers(dawn_native PRIVATE Error.h)
+
 target_link_libraries(dawn_native
     PUBLIC dawncpp_headers
     PRIVATE dawn_common

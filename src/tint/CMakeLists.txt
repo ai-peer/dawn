@@ -763,6 +763,8 @@ if (${TINT_SYMBOL_STORE_DEBUG_NAME})
 endif()
 set_target_properties(libtint PROPERTIES OUTPUT_NAME "tint")
 
+target_precompile_headers(libtint PRIVATE program_builder.h ast/expression.h)
+
 if (${TINT_BUILD_FUZZERS})
   # Tint library with fuzzer instrumentation
   add_library(libtint-fuzz ${TINT_LIB_SRCS})
