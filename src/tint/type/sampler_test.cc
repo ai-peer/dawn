@@ -63,5 +63,18 @@ TEST_F(SamplerTest, FriendlyNameComparisonSampler) {
     EXPECT_EQ(s.FriendlyName(Symbols()), "sampler_comparison");
 }
 
+TEST_F(SamplerTest, Clone) {
+    auto* a = create<Sampler>(ast::SamplerKind::kSampler);
+
+    type::Manager mgr;
+    type::CloneContext ctx{{nullptr}, {nullptr, &mgr}};
+
+    auto* b = a->Clone(ctx);
+    ASSERT_TRUE(b->Is<Sampler>());
+
+    auto* mt = b->As<Sampler>();
+    EXPECT_EQ(mt->kind(), ast::SamplerKind::kSampler);
+}
+
 }  // namespace
 }  // namespace tint::type

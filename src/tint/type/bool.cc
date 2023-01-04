@@ -46,4 +46,8 @@ uint32_t Bool::Align() const {
     return 4;
 }
 
+Type* Bool::Clone(CloneContext& ctx) const {
+    return ctx.dst.mgr->Get<Bool>();
+}
+
 }  // namespace tint::type
