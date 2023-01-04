@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61d3f0f3_62756d0c",
+        "filename": "src/tint/diagnostic/printer_unix.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-04T14:55:46Z",
+      "side": 1,
+      "message": "`PrinterPosix` ?",
+      "revId": "564ab47a49f9adcc27d16bdca42f0d8ed8d7593e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
