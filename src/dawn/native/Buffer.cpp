@@ -192,16 +192,17 @@ BufferBase::~BufferBase() {
 }
 
 void BufferBase::DestroyImpl() {
-    if (mState == BufferState::Mapped || mState == BufferState::PendingMap) {
-        UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
-    } else if (mState == BufferState::MappedAtCreation) {
+    BufferState state = mState;
+    mState = BufferState::Destroyed;
+    if (state == BufferState::Mapped || state == BufferState::PendingMap) {
+        UnmapInternal(state, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+    } else if (state == BufferState::MappedAtCreation) {
         if (mStagingBuffer != nullptr) {
             mStagingBuffer.reset();
         } else if (mSize != 0) {
-            UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+            UnmapInternal(state, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         }
     }
-    mState = BufferState::Destroyed;
 }
 
 // static
@@ -336,15 +337,15 @@ void BufferBase::CallMapCallback(MapRequestID mapID, WGPUBufferMapAsyncStatus st
         // Tag the callback as fired before firing it, otherwise it could fire a second time if
         // for example buffer.Unmap() is called inside the application-provided callback.
         WGPUBufferMapCallback callback = mMapCallback;
+        void* userdata = mMapUserdata;
         mMapCallback = nullptr;
+        mMapUserdata = 0;
 
         if (GetDevice()->IsLost()) {
-            callback(WGPUBufferMapAsyncStatus_DeviceLost, mMapUserdata);
+            callback(WGPUBufferMapAsyncStatus_DeviceLost, userdata);
         } else {
-            callback(status, mMapUserdata);
+            callback(status, userdata);
         }
-
-        mMapUserdata = 0;
     }
 }
 
@@ -458,24 +459,24 @@ void BufferBase::Unmap() {
     if (mState == BufferState::Destroyed) {
         return;
     }
-    UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);
+    BufferState state = mState;
+    mState = BufferState::Unmapped;
+    UnmapInternal(state, WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);
 }
 
-void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
-    if (mState == BufferState::PendingMap) {
+void BufferBase::UnmapInternal(BufferState currentState, WGPUBufferMapAsyncStatus callbackStatus) {
+    if (currentState == BufferState::PendingMap) {
+        UnmapImpl();
         CallMapCallback(mLastMapID, callbackStatus);
+    } else if (currentState == BufferState::Mapped) {
         UnmapImpl();
-    } else if (mState == BufferState::Mapped) {
-        UnmapImpl();
-    } else if (mState == BufferState::MappedAtCreation) {
+    } else if (currentState == BufferState::MappedAtCreation) {
         if (mStagingBuffer != nullptr) {
             GetDevice()->ConsumedError(CopyFromStagingBuffer());
         } else if (mSize != 0) {
             UnmapImpl();
         }
     }
-
-    mState = BufferState::Unmapped;
 }
 
 MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
