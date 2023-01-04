@@ -50,6 +50,24 @@
       "message": "We need an entry here for GCC builds",
       "revId": "609d31d3d45a1d4b1deafc0baa7a47def6dafe13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5e58273_6b29c7b5",
+        "filename": "src/tint/utils/compiler_macros.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003461
+      },
+      "writtenOn": "2023-01-04T10:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34514e60_bba4c549",
+      "revId": "609d31d3d45a1d4b1deafc0baa7a47def6dafe13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
