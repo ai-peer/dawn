@@ -313,6 +313,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "This toggle is enabled by default on Metal backend where GPU counters cannot be stored to"
       "sampleBufferAttachments on empty blit encoder.",
       "https://crbug.com/dawn/1473"}},
+    {Toggle::MetalUseTempBufferInDepthTextureToTextureCopyWithNonZeroMipLevel,
+     {"metal_use_temp_buffer_in_depth_Texture_to_texture_copy_with_non_zero_mip_level",
+      "Split depth texture-to-texture copy into two copies: copy from source texture into a "
+      "temporary buffer, and copy from the temporary buffer into the destination texture.",
+      "https://crbug.com/dawn/1083"}},
     {Toggle::VulkanSplitCommandBufferOnDepthStencilComputeSampleAfterRenderPass,
      {"vulkan_split_command_buffer_on_depth_stencil_compute_sample_after_render_pass",
       "Splits any command buffer that samples a depth/stencil texture in a compute pass after that "

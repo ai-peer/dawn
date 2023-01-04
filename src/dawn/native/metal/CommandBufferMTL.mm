@@ -16,6 +16,7 @@
 
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/CommandEncoder.h"
+#include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ExternalTexture.h"
@@ -721,6 +722,85 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
     }
 }
 
+void RecordCopyTextureToBuffer(CommandRecordingContext* commandContext,
+                               Texture* texture,
+                               uint32_t mipLevel,
+                               const Origin3D& origin,
+                               Aspect aspect,
+                               id<MTLBuffer> mtlBuffer,
+                               uint64_t bufferSize,
+                               uint64_t offset,
+                               uint32_t bytesPerRow,
+                               uint32_t rowsPerImage,
+                               const Extent3D& copySize) {
+    TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
+        texture, mipLevel, origin, copySize, bufferSize, offset, bytesPerRow, rowsPerImage, aspect);
+
+    MTLBlitOption blitOption = ComputeMTLBlitOption(texture->GetFormat(), aspect);
+
+    for (const auto& copyInfo : splitCopies) {
+        uint64_t bufferOffset = copyInfo.bufferOffset;
+
+        switch (texture->GetDimension()) {
+            case wgpu::TextureDimension::e1D: {
+                [commandContext->EnsureBlit()
+                             copyFromTexture:texture->GetMTLTexture()
+                                 sourceSlice:0
+                                 sourceLevel:mipLevel
+                                sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x, 0, 0)
+                                  sourceSize:MTLSizeMake(copyInfo.copyExtent.width, 1, 1)
+                                    toBuffer:mtlBuffer
+                           destinationOffset:bufferOffset
+                      destinationBytesPerRow:copyInfo.bytesPerRow
+                    destinationBytesPerImage:copyInfo.bytesPerImage
+                                     options:blitOption];
+                break;
+            }
+
+            case wgpu::TextureDimension::e2D: {
+                const MTLOrigin textureOrigin =
+                    MTLOriginMake(copyInfo.textureOrigin.x, copyInfo.textureOrigin.y, 0);
+                const MTLSize copyExtent =
+                    MTLSizeMake(copyInfo.copyExtent.width, copyInfo.copyExtent.height, 1);
+
+                for (uint32_t z = copyInfo.textureOrigin.z;
+                     z < copyInfo.textureOrigin.z + copyInfo.copyExtent.depthOrArrayLayers; ++z) {
+                    [commandContext->EnsureBlit() copyFromTexture:texture->GetMTLTexture()
+                                                      sourceSlice:z
+                                                      sourceLevel:mipLevel
+                                                     sourceOrigin:textureOrigin
+                                                       sourceSize:copyExtent
+                                                         toBuffer:mtlBuffer
+                                                destinationOffset:bufferOffset
+                                           destinationBytesPerRow:copyInfo.bytesPerRow
+                                         destinationBytesPerImage:copyInfo.bytesPerImage
+                                                          options:blitOption];
+                    bufferOffset += copyInfo.bytesPerImage;
+                }
+                break;
+            }
+            case wgpu::TextureDimension::e3D: {
+                [commandContext->EnsureBlit()
+                             copyFromTexture:texture->GetMTLTexture()
+                                 sourceSlice:0
+                                 sourceLevel:mipLevel
+                                sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x,
+                                                           copyInfo.textureOrigin.y,
+                                                           copyInfo.textureOrigin.z)
+                                  sourceSize:MTLSizeMake(copyInfo.copyExtent.width,
+                                                         copyInfo.copyExtent.height,
+                                                         copyInfo.copyExtent.depthOrArrayLayers)
+                                    toBuffer:mtlBuffer
+                           destinationOffset:bufferOffset
+                      destinationBytesPerRow:copyInfo.bytesPerRow
+                    destinationBytesPerImage:copyInfo.bytesPerImage
+                                     options:blitOption];
+                break;
+            }
+        }
+    }
+}
+
 // static
 Ref<CommandBuffer> CommandBuffer::Create(CommandEncoder* encoder,
                                          const CommandBufferDescriptor* descriptor) {
@@ -876,79 +956,9 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 texture->EnsureSubresourceContentInitialized(
                     commandContext, GetSubresourcesAffectedByCopy(src, copySize));
 
-                TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
-                    texture, src.mipLevel, src.origin, copySize, buffer->GetSize(), dst.offset,
-                    dst.bytesPerRow, dst.rowsPerImage, src.aspect);
-
-                for (const auto& copyInfo : splitCopies) {
-                    MTLBlitOption blitOption =
-                        ComputeMTLBlitOption(texture->GetFormat(), src.aspect);
-                    uint64_t bufferOffset = copyInfo.bufferOffset;
-
-                    switch (texture->GetDimension()) {
-                        case wgpu::TextureDimension::e1D: {
-                            [commandContext->EnsureBlit()
-                                         copyFromTexture:texture->GetMTLTexture()
-                                             sourceSlice:0
-                                             sourceLevel:src.mipLevel
-                                            sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x, 0,
-                                                                       0)
-                                              sourceSize:MTLSizeMake(copyInfo.copyExtent.width, 1,
-                                                                     1)
-                                                toBuffer:buffer->GetMTLBuffer()
-                                       destinationOffset:bufferOffset
-                                  destinationBytesPerRow:copyInfo.bytesPerRow
-                                destinationBytesPerImage:copyInfo.bytesPerImage
-                                                 options:blitOption];
-                            break;
-                        }
-
-                        case wgpu::TextureDimension::e2D: {
-                            const MTLOrigin textureOrigin = MTLOriginMake(
-                                copyInfo.textureOrigin.x, copyInfo.textureOrigin.y, 0);
-                            const MTLSize copyExtent = MTLSizeMake(copyInfo.copyExtent.width,
-                                                                   copyInfo.copyExtent.height, 1);
-
-                            for (uint32_t z = copyInfo.textureOrigin.z;
-                                 z <
-                                 copyInfo.textureOrigin.z + copyInfo.copyExtent.depthOrArrayLayers;
-                                 ++z) {
-                                [commandContext->EnsureBlit()
-                                             copyFromTexture:texture->GetMTLTexture()
-                                                 sourceSlice:z
-                                                 sourceLevel:src.mipLevel
-                                                sourceOrigin:textureOrigin
-                                                  sourceSize:copyExtent
-                                                    toBuffer:buffer->GetMTLBuffer()
-                                           destinationOffset:bufferOffset
-                                      destinationBytesPerRow:copyInfo.bytesPerRow
-                                    destinationBytesPerImage:copyInfo.bytesPerImage
-                                                     options:blitOption];
-                                bufferOffset += copyInfo.bytesPerImage;
-                            }
-                            break;
-                        }
-                        case wgpu::TextureDimension::e3D: {
-                            [commandContext->EnsureBlit()
-                                         copyFromTexture:texture->GetMTLTexture()
-                                             sourceSlice:0
-                                             sourceLevel:src.mipLevel
-                                            sourceOrigin:MTLOriginMake(copyInfo.textureOrigin.x,
-                                                                       copyInfo.textureOrigin.y,
-                                                                       copyInfo.textureOrigin.z)
-                                              sourceSize:MTLSizeMake(
-                                                             copyInfo.copyExtent.width,
-                                                             copyInfo.copyExtent.height,
-                                                             copyInfo.copyExtent.depthOrArrayLayers)
-                                                toBuffer:buffer->GetMTLBuffer()
-                                       destinationOffset:bufferOffset
-                                  destinationBytesPerRow:copyInfo.bytesPerRow
-                                destinationBytesPerImage:copyInfo.bytesPerImage
-                                                 options:blitOption];
-                            break;
-                        }
-                    }
-                }
+                RecordCopyTextureToBuffer(commandContext, texture, src.mipLevel, src.origin,
+                                          src.aspect, buffer->GetMTLBuffer(), buffer->GetSize(),
+                                          dst.offset, dst.bytesPerRow, dst.rowsPerImage, copySize);
                 break;
             }
 
@@ -968,6 +978,47 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                     commandContext, GetSubresourcesAffectedByCopy(copy->source, copy->copySize));
                 EnsureDestinationTextureInitialized(commandContext, dstTexture, copy->destination,
                                                     copy->copySize);
+
+                Device* device = ToBackend(GetDevice());
+                if (device->IsToggleEnabled(
+                        Toggle::MetalUseTempBufferInDepthTextureToTextureCopyWithNonZeroMipLevel) &&
+                    ((srcTexture->GetFormat().HasDepth() &&
+                      (copy->source.mipLevel > 0 || copy->source.origin.z > 0)) ||
+                     (dstTexture->GetFormat().HasDepth() &&
+                      (copy->destination.mipLevel > 0 || copy->destination.origin.z > 0)))) {
+                    const TexelBlockInfo& blockInfo =
+                        srcTexture->GetFormat().GetAspectInfo(copy->source.aspect).block;
+                    ASSERT(&blockInfo ==
+                           &dstTexture->GetFormat().GetAspectInfo(copy->destination.aspect).block);
+
+                    const uint32_t bytesPerRow =
+                        Align(blockInfo.byteSize * copy->copySize.width,
+                              ToBackend(GetDevice())->GetOptimalBytesPerRowAlignment());
+                    const uint32_t rowsPerImage = copy->copySize.height;
+
+                    const uint64_t bufferOffset = 0;
+                    uint64_t bufferSize;
+                    DAWN_TRY_ASSIGN(bufferSize,
+                                    ComputeRequiredBytesInCopy(blockInfo, copy->copySize,
+                                                               bytesPerRow, rowsPerImage));
+
+                    NSPRef<id<MTLBuffer>> tempBuffer = AcquireNSPRef([device->GetMTLDevice()
+                        newBufferWithLength:bufferSize
+                                    options:MTLResourceStorageModePrivate]);
+                    if (tempBuffer == nil) {
+                        return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate temporary buffer.");
+                    }
+
+                    RecordCopyTextureToBuffer(commandContext, srcTexture, copy->source.mipLevel,
+                                              copy->source.origin, copy->source.aspect,
+                                              tempBuffer.Get(), bufferSize, bufferOffset,
+                                              bytesPerRow, rowsPerImage, copy->copySize);
+
+                    RecordCopyBufferToTexture(commandContext, tempBuffer.Get(), bufferSize,
+                                              bufferOffset, bytesPerRow, rowsPerImage, srcTexture,
+                                              copy->source.mipLevel, copy->source.origin,
+                                              copy->source.aspect, copy->copySize);
+                }
 
                 const MTLSize sizeOneSlice =
                     MTLSizeMake(copy->copySize.width, copy->copySize.height, 1);
