@@ -22,6 +22,30 @@
       },
       "revId": "b6fbad3e7cbc44e0382a4a6b070726bef5ef95c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744e0110_38cf7f53",
+        "filename": "third_party/icu/README.chromium",
+        "patchSetId": 8
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-04T08:10:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "34eeb237_f0159044",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 62
+      },
+      "revId": "b6fbad3e7cbc44e0382a4a6b070726bef5ef95c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

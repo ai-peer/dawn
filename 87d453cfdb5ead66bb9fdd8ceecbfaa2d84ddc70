@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "01b52f07_0d3ed48c",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-04T08:10:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1009e0b_a594f948",
+      "revId": "87d453cfdb5ead66bb9fdd8ceecbfaa2d84ddc70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03f601de_4e2acc48",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-03T08:40:23Z",
       "side": 1,
       "message": "Why do we create the string just to delete it afterwards?",
+      "revId": "87d453cfdb5ead66bb9fdd8ceecbfaa2d84ddc70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8eb873_27064997",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-04T08:10:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "03f601de_4e2acc48",
       "revId": "87d453cfdb5ead66bb9fdd8ceecbfaa2d84ddc70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
