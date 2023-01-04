@@ -3,6 +3,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8f8d9fd_00b14bc1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "This isn\u0027t super clear for Dawn, WDYT of:\n\nAllow reentrant buffer mapping operations in the mapping callback.\n\nWebGPU clears [pending_map] before resolving or rejecting promises, which means that the callback for .then or .catch is allowed to unmap remap or do anything with the buffer assuming previous mapping operations are entirely done the buffer.\n\nMimic this in Dawn by finishing all operations related to mapping before calling callbacks they might trigger.",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a7daf5_96bbc28b",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "[2] Should we call UnmapImpl() before otherwise we risk remapping in the callback and messing up the state. Would a test catch this?\n\nWould be naturally fixed by [1]",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1414fae_1742761d",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "[1] I\u0027m thinking we should have a better way to enforce that the callback is called only at the very end of methods that might trigger callbacks. WDYT of defining something like the code below?\n\nBasically we store the callback to be called in an intermediate struct that bubbles up the call stack and is called by the top most function at the very end. Without it it\u0027s hard to make sure that all code paths ensure that nothing happens after the callback. (for example [2]).\n\n```\nstruct [[no_discard]] PendingMappingCallback {\n   callback \u003d null;\n   userdata \u003d null;\n   status \u003d ...;\n\n   Call() {\n     if (callback !\u003d null) {\n       callback(...);\n       callback \u003d nullptr;\n     }\n   }\n   ~PendingMappingCallback() {\n      ASSERT(callback \u003d\u003d nullptr);\n   }\n}\n\n// Also something about lastMapId and isLost since this function replaces CallMapCallback.\nPendingMappingCallback BufferBase::WillCallMappingCallback(status) {\n   PendingMappingCallback result \u003d {callback, userdata, status};\n   callback \u003d nullptr;\n   userdata \u003d nullptr;\n   return result;\n}\n\n// Then things like Unmap become:\n\nvoid BufferBase::Unmap() {\n    if (mState \u003d\u003d BufferState::Destroyed) {\n        return;\n    }\n    PendingMappingCallback toCall \u003d \n        UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);\n    toCall.Call();\n}\n\n\nPendingMappingCallback BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {\n    PendingMappingCallback toCall;\n    if (mState \u003d\u003d BufferState::PendingMap) {\n        toCall \u003d WillCallMappingCallback(callbackStatus);\n        UnmapImpl();\n    } else if (mState \u003d\u003d BufferState::Mapped) {\n        UnmapImpl();\n    } else if (mState \u003d\u003d BufferState::MappedAtCreation) {\n        if (mStagingBuffer !\u003d nullptr) {\n            GetDevice()-\u003eConsumedError(CopyFromStagingBuffer());\n        } else if (mSize !\u003d 0) {\n            UnmapImpl();\n        }\n    }\n\n    mState \u003d BufferState::Unmapped;\n    return toCall;\n}\n```\n\nWDYT Austin as well?",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cadfce5e_9002e9bf",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
@@ -14,6 +65,58 @@
       "writtenOn": "2023-01-04T10:00:55Z",
       "side": 1,
       "message": "I want to add a test case that tests map async call in the resolved map async callback that expects validation error due to already mapped buffer.\n\n```\n    {\n        wgpu::Buffer buf \u003d CreateMapReadBuffer(4);\n\n        EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Success, _))\n            .WillOnce(InvokeWithoutArgs([\u0026]() {\n                EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Error, _));\n                // Should cause validation error because of already mapped buffer\n                ASSERT_DEVICE_ERROR(\n                    buf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr));\n            }));\n\n        buf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);\n        WaitForAllOperations(device);\n    }\n```\n\nThis test passes on native but fails on Dawn with this error log\n\n```\nINFO: EGL ERROR: eglMakeCurrent: \u0027dpy\u0027 not a valid EGLDisplay handle\n..\\..\\src\\dawn\\tests\\unittests\\validation\\ValidationTest.cpp(207): error: Value of: mWireHelper-\u003eFlushServer()\n  Actual: false\nExpected: true\n[  FAILED  ] BufferValidationTest.MapAsync_MapAsyncInMapAsyncCallback (192 ms)\n[----------] 1 test from BufferValidationTest (194 ms total)\n\n[----------] Global test environment tear-down\n[\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d] 1 test from 1 test suite ran. (200 ms total)\n[  PASSED  ] 0 tests.\n[  FAILED  ] 1 test, listed below:\n[  FAILED  ] BufferValidationTest.MapAsync_MapAsyncInMapAsyncCallback\n```\n\nAny advice to resolve the problem?",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7570a98_df410450",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "I\u0027m really not sure: the wire server is seeing malformed commands for some reason. I\u0027d try adding a bunch of DAWN_DEBUG() in ServerBuffer.cpp to see where it is unhappy.",
+      "parentUuid": "cadfce5e_9002e9bf",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "858a8548_3bb376f8",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "Can we have small comment before each block describing what subcase is being tested?",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f13485_84e6474b",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T13:34:22Z",
+      "side": 1,
+      "message": "I think we need to WaitForAllOperations twice maybe otherwise the call at [3] might not make it to the server since it is only after the wire is flushed that [3] is called and we need another wire flush to make the MapAsync to the server. Ditto below",
       "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
