@@ -57,5 +57,18 @@ TEST_F(DepthMultisampledTextureTest, FriendlyName) {
     EXPECT_EQ(d.FriendlyName(Symbols()), "texture_depth_multisampled_2d");
 }
 
+TEST_F(DepthMultisampledTextureTest, Clone) {
+    auto* a = create<DepthMultisampledTexture>(ast::TextureDimension::k2d);
+
+    type::Manager mgr;
+    type::CloneContext ctx{{nullptr}, {nullptr, &mgr}};
+
+    auto* b = a->Clone(ctx);
+    ASSERT_TRUE(b->Is<DepthMultisampledTexture>());
+
+    auto* dt = b->As<DepthMultisampledTexture>();
+    EXPECT_EQ(dt->dim(), ast::TextureDimension::k2d);
+}
+
 }  // namespace
 }  // namespace tint::type
