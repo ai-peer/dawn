@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e8e083_a3da1d8a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-04T09:27:03Z",
+      "side": 1,
+      "message": "To reviewers: Do you think the name \"currentState\" is confusing because the state is already updated? Would \"oldState\" or \"previousState\" be clearer?",
+      "revId": "36d567aa3bd5667447f681fe186dd712946b80f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
