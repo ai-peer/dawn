@@ -32,4 +32,8 @@ std::string AbstractFloat::FriendlyName(const SymbolTable&) const {
     return "abstract-float";
 }
 
+Type* AbstractFloat::Clone(CloneContext& ctx) const {
+    return ctx.dst.mgr->Get<AbstractFloat>();
+}
+
 }  // namespace tint::type
