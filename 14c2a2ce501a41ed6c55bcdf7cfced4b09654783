@@ -33,6 +33,23 @@
       "message": "After this, both these tags would be added:\n\u0027intel-0x9bc5\u0027, \u0027intel-gen-9\u0027\n\nSo, on the next roll \u0027intel-0x9bc5\u0027 would be added to you Intel expectations, I think.\nI like the idea of having \u0027intel-0x9bc5\u0027, since it is more restrictive.\nYou might want to get rid of \u0027intel-gen-9\u0027.\nI hope we can keep or fleet homogenous going forward, but I can\u0027t guarantee we won\u0027t have emergency capacity shortages which would be adressed by adding a new GPU id.",
       "revId": "14c2a2ce501a41ed6c55bcdf7cfced4b09654783",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a08e6d_fc4ea11d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-04T17:21:54Z",
+      "side": 1,
+      "message": "I\u0027ll try a roll as soon as this lands. Thanks!",
+      "revId": "14c2a2ce501a41ed6c55bcdf7cfced4b09654783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
