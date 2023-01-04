@@ -699,7 +699,14 @@ void Device::InitTogglesFromDriver() {
 
     // Currently this workaround is only needed on Intel Gen9, Gen9.5 and Gen12 GPUs.
     // See http://crbug.com/dawn/1487 for more information.
-    if (gpu_info::IsIntelGen9(vendorId, deviceId) || gpu_info::IsIntelGen12LP(vendorId, deviceId) ||
+    if (gpu_info::IsIntelGen9(vendorId, deviceId)) {
+        const gpu_info::DriverVersion kFixedDriverVersion = {31, 0, 101, 2115};
+        if (gpu_info::CompareWindowsDriverVersion(vendorId, GetAdapter()->GetDriverVersion(),
+                                                  kFixedDriverVersion) < 0) {
+            SetToggle(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation, true);
+        }
+    }
+    if (gpu_info::IsIntelGen12LP(vendorId, deviceId) ||
         gpu_info::IsIntelGen12HP(vendorId, deviceId)) {
         SetToggle(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation, true);
     }
