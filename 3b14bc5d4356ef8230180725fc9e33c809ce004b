@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57b4d9b3_179f00a1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:08:05Z",
+      "side": 1,
+      "message": "nit: Removes 😊",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 10
+      },
+      "revId": "3b14bc5d4356ef8230180725fc9e33c809ce004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e93a789_9afccd5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:08:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3b14bc5d4356ef8230180725fc9e33c809ce004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cc9154d_72bd3b07",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:08:05Z",
+      "side": 1,
+      "message": "Did the change land?",
+      "revId": "3b14bc5d4356ef8230180725fc9e33c809ce004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e7b797_048dc62b",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 771,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:08:05Z",
+      "side": 1,
+      "message": "nit: visibleOrigin",
+      "range": {
+        "startLine": 771,
+        "startChar": 41,
+        "endLine": 771,
+        "endChar": 55
+      },
+      "revId": "3b14bc5d4356ef8230180725fc9e33c809ce004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abafb237_1d855399",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T12:08:05Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 876,
+        "startChar": 23,
+        "endLine": 876,
+        "endChar": 37
+      },
+      "revId": "3b14bc5d4356ef8230180725fc9e33c809ce004b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
