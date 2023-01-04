@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e832df19_e99def71",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T09:57:34Z",
+      "side": 1,
+      "message": "Using the helper in Tint sounds good from the Dawn standpoint. Ben is that ok on the Tint side?\n\nCould we have unittests for this function that try to cover corner cases, OOB behavior etc? In dawn_unittests I think we\u0027re allowed to use dawn::native functions directly.",
+      "parentUuid": "417f8755_c09e4cc6",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "67dcd783_886d334c",
         "filename": "src/dawn/native/CompilationMessages.cpp",
         "patchSetId": 6
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "67dcd783_886d334c",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e0e6ec_15b9806f",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-04T09:57:34Z",
+      "side": 1,
+      "message": "I think this hasn\u0027t been addressed. Any reason why? (I believe it would require adding utf16Offset and utf16Length in dawn.json + tests)",
+      "parentUuid": "61618fb0_3eeab7fe",
       "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
