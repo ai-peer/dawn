@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3bc7c3f_097f7f78",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-04T12:44:04Z",
+      "side": 1,
+      "message": "Maybe we should rename the file to `printer_unix.cc` too?",
+      "revId": "2e722ea71bc5375cc2dbeb2de39ac1f14c38ae49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
