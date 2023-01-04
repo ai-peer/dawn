@@ -104,6 +104,39 @@ class BufferBase : public ApiObjectBase {
     uint64_t mAllocatedSize = 0;
 
   private:
+    // A helper structure to enforce that the mapAsync callback is called only at the very end of
+    // methods that might trigger callbacks.
+    struct [[nodiscard]] PendingMappingCallback {
+        WGPUBufferMapCallback callback;
+        void* userdata;
+        WGPUBufferMapAsyncStatus status;
+
+        PendingMappingCallback() : callback(nullptr), userdata(nullptr) {}
+
+        // Non-copyable but movable for the assertion in the destructor to ensure
+        // not to forget to call the callback
+        PendingMappingCallback(const PendingMappingCallback&) = delete;
+        PendingMappingCallback& operator=(const PendingMappingCallback& other) = delete;
+        PendingMappingCallback& operator=(PendingMappingCallback&& other) = default;
+
+        void Call() {
+            if (callback != nullptr) {
+                callback(status, userdata);
+                callback = nullptr;
+                userdata = nullptr;
+            }
+        }
+
+        // Ensure to call the callback.
+        ~PendingMappingCallback() {
+            ASSERT(callback == nullptr);
+            ASSERT(userdata == nullptr);
+        }
+    };
+    std::unique_ptr<PendingMappingCallback> WillCallMappingCallback(
+        MapRequestID mapID,
+        WGPUBufferMapAsyncStatus status);
+
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
     virtual void UnmapImpl() = 0;
@@ -111,7 +144,6 @@ class BufferBase : public ApiObjectBase {
 
     virtual bool IsCPUWritableAtCreation() const = 0;
     MaybeError CopyFromStagingBuffer();
-    void CallMapCallback(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
 
     MaybeError ValidateMapAsync(wgpu::MapMode mode,
                                 size_t offset,
@@ -119,7 +151,7 @@ class BufferBase : public ApiObjectBase {
                                 WGPUBufferMapAsyncStatus* status) const;
     MaybeError ValidateUnmap() const;
     bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
-    void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
+    std::unique_ptr<PendingMappingCallback> UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
 
     uint64_t mSize = 0;
     wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
@@ -129,7 +161,7 @@ class BufferBase : public ApiObjectBase {
     std::unique_ptr<StagingBufferBase> mStagingBuffer;
 
     WGPUBufferMapCallback mMapCallback = nullptr;
-    void* mMapUserdata = 0;
+    void* mMapUserdata = nullptr;
     MapRequestID mLastMapID = MapRequestID(0);
     wgpu::MapMode mMapMode = wgpu::MapMode::None;
     size_t mMapOffset = 0;
