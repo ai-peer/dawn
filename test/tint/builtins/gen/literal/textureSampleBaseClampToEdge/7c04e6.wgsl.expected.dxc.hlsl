@@ -36,19 +36,13 @@ float4 textureSampleExternal(Texture2D<float4> plane0, Texture2D<float4> plane1,
   const float2 modifiedCoords = mul(float3(coord, 1.0f), params.coordTransformationMatrix);
   int3 tint_tmp;
   plane0.GetDimensions(0, tint_tmp.x, tint_tmp.y, tint_tmp.z);
-  const float2 plane0_dims = float2(tint_tmp.xy);
-  const float2 plane0_half_texel = ((0.5f).xx / plane0_dims);
-  const float2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
-  int3 tint_tmp_1;
-  plane1.GetDimensions(0, tint_tmp_1.x, tint_tmp_1.y, tint_tmp_1.z);
-  const float2 plane1_dims = float2(tint_tmp_1.xy);
-  const float2 plane1_half_texel = ((0.5f).xx / plane1_dims);
-  const float2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
+  const float2 halfTexel = ((0.5f).xx / float2(tint_tmp.xy));
+  const float2 clampedCoords = clamp(modifiedCoords, halfTexel, (1.0f - halfTexel));
   float3 color = float3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = plane0.SampleLevel(smp, plane0_clamped, 0.0f).rgb;
+    color = plane0.SampleLevel(smp, clampedCoords, 0.0f).rgb;
   } else {
-    color = mul(params.yuvToRgbConversionMatrix, float4(plane0.SampleLevel(smp, plane0_clamped, 0.0f).r, plane1.SampleLevel(smp, plane1_clamped, 0.0f).rg, 1.0f));
+    color = mul(params.yuvToRgbConversionMatrix, float4(plane0.SampleLevel(smp, clampedCoords, 0.0f).r, plane1.SampleLevel(smp, clampedCoords, 0.0f).rg, 1.0f));
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);

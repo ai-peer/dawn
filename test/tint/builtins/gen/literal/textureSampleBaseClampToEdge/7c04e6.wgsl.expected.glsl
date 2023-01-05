@@ -45,19 +45,15 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
 }
 
 
-vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
+vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
   vec2 modifiedCoords = (params.coordTransformationMatrix * vec3(coord, 1.0f));
-  vec2 plane0_dims = vec2(uvec2(textureSize(plane0_1, 0)));
-  vec2 plane0_half_texel = (vec2(0.5f) / plane0_dims);
-  vec2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
-  vec2 plane1_dims = vec2(uvec2(textureSize(plane1_1, 0)));
-  vec2 plane1_half_texel = (vec2(0.5f) / plane1_dims);
-  vec2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
+  vec2 halfTexel = (vec2(0.5f) / vec2(uvec2(textureSize(plane0_1, 0))));
+  vec2 clampedCoords = clamp(modifiedCoords, halfTexel, (1.0f - halfTexel));
   vec3 color = vec3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = textureLod(plane0_smp, plane0_clamped, 0.0f).rgb;
+    color = textureLod(plane0_smp, clampedCoords, 0.0f).rgb;
   } else {
-    color = (vec4(textureLod(plane0_smp, plane0_clamped, 0.0f).r, textureLod(plane1_smp, plane1_clamped, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    color = (vec4(textureLod(plane0_smp, clampedCoords, 0.0f).r, textureLod(plane1_smp, clampedCoords, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -68,7 +64,6 @@ vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, h
 }
 
 uniform highp sampler2D arg_0_1;
-uniform highp sampler2D ext_tex_plane_1_1;
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
@@ -76,7 +71,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
 }
 
 void textureSampleBaseClampToEdge_7c04e6() {
-  vec4 res = textureSampleExternal(arg_0_1, ext_tex_plane_1_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
+  vec4 res = textureSampleExternal(arg_0_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
 }
 
 vec4 vertex_main() {
@@ -140,19 +135,15 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
 }
 
 
-vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
+vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
   vec2 modifiedCoords = (params.coordTransformationMatrix * vec3(coord, 1.0f));
-  vec2 plane0_dims = vec2(uvec2(textureSize(plane0_1, 0)));
-  vec2 plane0_half_texel = (vec2(0.5f) / plane0_dims);
-  vec2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
-  vec2 plane1_dims = vec2(uvec2(textureSize(plane1_1, 0)));
-  vec2 plane1_half_texel = (vec2(0.5f) / plane1_dims);
-  vec2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
+  vec2 halfTexel = (vec2(0.5f) / vec2(uvec2(textureSize(plane0_1, 0))));
+  vec2 clampedCoords = clamp(modifiedCoords, halfTexel, (1.0f - halfTexel));
   vec3 color = vec3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = textureLod(plane0_smp, plane0_clamped, 0.0f).rgb;
+    color = textureLod(plane0_smp, clampedCoords, 0.0f).rgb;
   } else {
-    color = (vec4(textureLod(plane0_smp, plane0_clamped, 0.0f).r, textureLod(plane1_smp, plane1_clamped, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    color = (vec4(textureLod(plane0_smp, clampedCoords, 0.0f).r, textureLod(plane1_smp, clampedCoords, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -163,7 +154,6 @@ vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, h
 }
 
 uniform highp sampler2D arg_0_1;
-uniform highp sampler2D ext_tex_plane_1_1;
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
@@ -171,7 +161,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
 }
 
 void textureSampleBaseClampToEdge_7c04e6() {
-  vec4 res = textureSampleExternal(arg_0_1, ext_tex_plane_1_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
+  vec4 res = textureSampleExternal(arg_0_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
 }
 
 void fragment_main() {
@@ -229,19 +219,15 @@ vec3 gammaCorrection(vec3 v, GammaTransferParams params) {
 }
 
 
-vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
+vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane0_smp, highp sampler2D plane1_smp, vec2 coord, ExternalTextureParams params) {
   vec2 modifiedCoords = (params.coordTransformationMatrix * vec3(coord, 1.0f));
-  vec2 plane0_dims = vec2(uvec2(textureSize(plane0_1, 0)));
-  vec2 plane0_half_texel = (vec2(0.5f) / plane0_dims);
-  vec2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
-  vec2 plane1_dims = vec2(uvec2(textureSize(plane1_1, 0)));
-  vec2 plane1_half_texel = (vec2(0.5f) / plane1_dims);
-  vec2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
+  vec2 halfTexel = (vec2(0.5f) / vec2(uvec2(textureSize(plane0_1, 0))));
+  vec2 clampedCoords = clamp(modifiedCoords, halfTexel, (1.0f - halfTexel));
   vec3 color = vec3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = textureLod(plane0_smp, plane0_clamped, 0.0f).rgb;
+    color = textureLod(plane0_smp, clampedCoords, 0.0f).rgb;
   } else {
-    color = (vec4(textureLod(plane0_smp, plane0_clamped, 0.0f).r, textureLod(plane1_smp, plane1_clamped, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    color = (vec4(textureLod(plane0_smp, clampedCoords, 0.0f).r, textureLod(plane1_smp, clampedCoords, 0.0f).rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -252,7 +238,6 @@ vec4 textureSampleExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, h
 }
 
 uniform highp sampler2D arg_0_1;
-uniform highp sampler2D ext_tex_plane_1_1;
 uniform highp sampler2D arg_0_arg_1;
 uniform highp sampler2D ext_tex_plane_1_arg_1;
 ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 val) {
@@ -260,7 +245,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
 }
 
 void textureSampleBaseClampToEdge_7c04e6() {
-  vec4 res = textureSampleExternal(arg_0_1, ext_tex_plane_1_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
+  vec4 res = textureSampleExternal(arg_0_1, arg_0_arg_1, ext_tex_plane_1_arg_1, vec2(1.0f), conv_ExternalTextureParams(ext_tex_params.inner));
 }
 
 void compute_main() {

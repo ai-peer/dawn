@@ -321,29 +321,20 @@ struct MultiplanarExternalTexture::State {
                                             b.vec3<f32>("coord", 1_a)))));
 
                 stmts.Push(b.Decl(b.Let(
-                    "plane0_dims",
-                    b.Construct(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane0", 0_a)))));
+                    "halfTexel", b.Div(b.vec2<f32>(0.5_a),
+                                       b.Construct(b.ty.vec2<f32>(),
+                                                   b.Call("textureDimensions", "plane0", 0_a))))));
                 stmts.Push(
-                    b.Decl(b.Let("plane0_half_texel", b.Div(b.vec2<f32>(0.5_a), "plane0_dims"))));
-                stmts.Push(b.Decl(
-                    b.Let("plane0_clamped", b.Call("clamp", "modifiedCoords", "plane0_half_texel",
-                                                   b.Sub(1_a, "plane0_half_texel")))));
-                stmts.Push(b.Decl(b.Let(
-                    "plane1_dims",
-                    b.Construct(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane1", 0_a)))));
-                stmts.Push(
-                    b.Decl(b.Let("plane1_half_texel", b.Div(b.vec2<f32>(0.5_a), "plane1_dims"))));
-                stmts.Push(b.Decl(
-                    b.Let("plane1_clamped", b.Call("clamp", "modifiedCoords", "plane1_half_texel",
-                                                   b.Sub(1_a, "plane1_half_texel")))));
+                    b.Decl(b.Let("clampedCoords", b.Call("clamp", "modifiedCoords", "halfTexel",
+                                                         b.Sub(1_a, "halfTexel")))));
 
-                // textureSampleLevel(plane0, smp, plane0_clamped, 0.0);
+                // textureSampleLevel(plane0, smp, clampedCoords, 0.0);
                 single_plane_call =
-                    b.Call("textureSampleLevel", "plane0", "smp", "plane0_clamped", 0_a);
-                // textureSampleLevel(plane0, smp, plane0_clamped, 0.0);
-                plane_0_call = b.Call("textureSampleLevel", "plane0", "smp", "plane0_clamped", 0_a);
-                // textureSampleLevel(plane1, smp, plane1_clamped, 0.0);
-                plane_1_call = b.Call("textureSampleLevel", "plane1", "smp", "plane1_clamped", 0_a);
+                    b.Call("textureSampleLevel", "plane0", "smp", "clampedCoords", 0_a);
+                // textureSampleLevel(plane0, smp, clampedCoords, 0.0);
+                plane_0_call = b.Call("textureSampleLevel", "plane0", "smp", "clampedCoords", 0_a);
+                // textureSampleLevel(plane1, smp, clampedCoords, 0.0);
+                plane_1_call = b.Call("textureSampleLevel", "plane1", "smp", "clampedCoords", 0_a);
                 break;
             case sem::BuiltinType::kTextureLoad:
                 // textureLoad(plane0, coord, 0);

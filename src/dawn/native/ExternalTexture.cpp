@@ -53,9 +53,12 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
     ASSERT(descriptor);
     ASSERT(descriptor->plane0);
 
-    DAWN_TRY(device->ValidateObject(descriptor->plane0));
+    const TextureViewBase* plane0 = descriptor->plane0;
+    const TextureViewBase* plane1 = descriptor->plane1;
 
-    wgpu::TextureFormat plane0Format = descriptor->plane0->GetFormat().format;
+    DAWN_TRY(device->ValidateObject(plane0));
+
+    wgpu::TextureFormat plane0Format = plane0->GetFormat().format;
 
     DAWN_INVALID_IF(!descriptor->gamutConversionMatrix,
                     "The gamut conversion matrix must be non-null.");
@@ -66,54 +69,67 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
     DAWN_INVALID_IF(!descriptor->dstTransferFunctionParameters,
                     "The destination transfer function parameters must be non-null.");
 
-    if (descriptor->plane1) {
+    if (plane1) {
         DAWN_INVALID_IF(
             !descriptor->yuvToRgbConversionMatrix,
             "When more than one plane is set, the YUV-to-RGB conversion matrix must be non-null.");
 
-        DAWN_TRY(device->ValidateObject(descriptor->plane1));
-        wgpu::TextureFormat plane1Format = descriptor->plane1->GetFormat().format;
+        DAWN_TRY(device->ValidateObject(plane1));
+        wgpu::TextureFormat plane1Format = plane1->GetFormat().format;
 
         DAWN_INVALID_IF(plane0Format != wgpu::TextureFormat::R8Unorm,
-                        "The bi-planar external texture plane (%s) format (%s) is not %s.",
-                        descriptor->plane0, plane0Format, wgpu::TextureFormat::R8Unorm);
+                        "The bi-planar external texture plane (%s) format (%s) is not %s.", plane0,
+                        plane0Format, wgpu::TextureFormat::R8Unorm);
         DAWN_INVALID_IF(plane1Format != wgpu::TextureFormat::RG8Unorm,
-                        "The bi-planar external texture plane (%s) format (%s) is not %s.",
-                        descriptor->plane1, plane1Format, wgpu::TextureFormat::RG8Unorm);
+                        "The bi-planar external texture plane (%s) format (%s) is not %s.", plane1,
+                        plane1Format, wgpu::TextureFormat::RG8Unorm);
 
-        DAWN_TRY(ValidateExternalTexturePlane(descriptor->plane0));
-        DAWN_TRY(ValidateExternalTexturePlane(descriptor->plane1));
+        DAWN_TRY(ValidateExternalTexturePlane(plane0));
+        DAWN_TRY(ValidateExternalTexturePlane(plane1));
+
+        DAWN_INVALID_IF(plane0->GetTexture()->GetWidth() != plane1->GetTexture()->GetWidth(),
+                        "The bi-planar external texture plane (%s) width %u does not match "
+                        "external texture plane (%s) width %u.",
+                        plane0, plane0->GetTexture()->GetWidth(), plane1,
+                        plane1->GetTexture()->GetWidth());
+        DAWN_INVALID_IF(plane0->GetTexture()->GetHeight() != plane1->GetTexture()->GetHeight(),
+                        "The bi-planar external texture plane (%s) height %u does not match "
+                        "external texture plane (%s) height %u.",
+                        plane0, plane0->GetTexture()->GetHeight(), plane1,
+                        plane1->GetTexture()->GetHeight());
+
     } else {
         switch (plane0Format) {
             case wgpu::TextureFormat::RGBA8Unorm:
             case wgpu::TextureFormat::BGRA8Unorm:
             case wgpu::TextureFormat::RGBA16Float:
-                DAWN_TRY(ValidateExternalTexturePlane(descriptor->plane0));
+                DAWN_TRY(ValidateExternalTexturePlane(plane0));
                 break;
             default:
                 return DAWN_VALIDATION_ERROR(
                     "The external texture plane (%s) format (%s) is not a supported format "
                     "(%s, %s, %s).",
-                    descriptor->plane0, plane0Format, wgpu::TextureFormat::RGBA8Unorm,
+                    plane0, plane0Format, wgpu::TextureFormat::RGBA8Unorm,
                     wgpu::TextureFormat::BGRA8Unorm, wgpu::TextureFormat::RGBA16Float);
         }
     }
 
-    DAWN_INVALID_IF(descriptor->visibleSize.width == 0 || descriptor->visibleSize.height == 0,
-                    "VisibleSize %s have 0 on width or height.", &descriptor->visibleSize);
+    Origin2D visibleOrigin = descriptor->visibleOrigin;
+    Extent2D visibleSize = descriptor->visibleSize;
 
-    const Extent3D textureSize = descriptor->plane0->GetTexture()->GetSize();
-    DAWN_INVALID_IF(descriptor->visibleSize.width > textureSize.width ||
-                        descriptor->visibleSize.height > textureSize.height,
-                    "VisibleSize %s is exceed the texture size, defined by Plane0 size (%u, %u).",
-                    &descriptor->visibleSize, textureSize.width, textureSize.height);
+    DAWN_INVALID_IF(visibleSize.width == 0 || visibleSize.height == 0,
+                    "VisibleSize %s have 0 on width or height.", &visibleSize);
+
+    const Extent3D textureSize = plane0->GetTexture()->GetSize();
     DAWN_INVALID_IF(
-        descriptor->visibleOrigin.x > textureSize.width - descriptor->visibleSize.width ||
-            descriptor->visibleOrigin.y > textureSize.height - descriptor->visibleSize.height,
-        "VisibleRect[Origin: %s, Size: %s] is exceed the texture size, defined by "
-        "Plane0 size (%u, %u).",
-        &descriptor->visibleOrigin, &descriptor->visibleSize, textureSize.width,
-        textureSize.height);
+        visibleSize.width > textureSize.width || visibleSize.height > textureSize.height,
+        "VisibleSize %s is exceed the texture size, defined by Plane0 size (%u, %u).", &visibleSize,
+        textureSize.width, textureSize.height);
+    DAWN_INVALID_IF(visibleOrigin.x > textureSize.width - visibleSize.width ||
+                        visibleOrigin.y > textureSize.height - visibleSize.height,
+                    "VisibleRect[Origin: %s, Size: %s] is exceed the texture size, defined by "
+                    "Plane0 size (%u, %u).",
+                    &visibleOrigin, &visibleSize, textureSize.width, textureSize.height);
 
     return {};
 }
