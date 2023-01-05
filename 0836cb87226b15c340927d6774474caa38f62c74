@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "079f3722_69c1abb7",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:20:27Z",
+      "side": 1,
+      "message": "Please can we have a test that checks we get a validation error if the address space is incorrect?",
+      "range": {
+        "startLine": 655,
+        "startChar": 55,
+        "endLine": 655,
+        "endChar": 84
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef095800_a26fe7c8",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:20:27Z",
+      "side": 1,
+      "message": "`Source` appears to be tagged on the wrong thing, or the runtime logic is wrong.",
+      "range": {
+        "startLine": 661,
+        "startChar": 11,
+        "endLine": 661,
+        "endChar": 16
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b94385e_113a006a",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:20:27Z",
+      "side": 1,
+      "message": "nit: `Contains`",
+      "range": {
+        "startLine": 1619,
+        "startChar": 57,
+        "endLine": 1619,
+        "endChar": 60
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
