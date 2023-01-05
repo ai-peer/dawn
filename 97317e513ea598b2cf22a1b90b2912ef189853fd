@@ -140,6 +140,24 @@
       "parentUuid": "44e04974_434663fd",
       "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b81a1cd_59822a95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T18:07:03Z",
+      "side": 1,
+      "message": "`Abandon` is fine. If there\u0027s a simple fix for the macro, I\u0027d be open to seeing whether we can accept it.\n\nEither way, thank you for trying!",
+      "parentUuid": "47532cf5_7a8c9be6",
+      "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
