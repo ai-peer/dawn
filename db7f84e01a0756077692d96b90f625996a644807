@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7e7f80_89e236c8",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:12:11Z",
+      "side": 1,
+      "message": "Why? Because this is `sem::` ? Can\u0027t we just keep the `type::NamedOverrideArrayCount::Clone()` virtual un-overrided?",
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83457f69_d4125e45",
+        "filename": "src/tint/type/matrix.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:12:11Z",
+      "side": 1,
+      "message": "This dynamic cast is unnecessary if you change the return type of `Clone()` to be a pointer of the class (`Vector*` in this case), instead of `Type*`. This is permitted in C++, as it supports [covariant return types](https://en.wikipedia.org/wiki/Covariant_return_type).",
+      "range": {
+        "startLine": 71,
+        "startChar": 42,
+        "endLine": 71,
+        "endChar": 56
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ecf72f1_f4bc329d",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T10:12:11Z",
+      "side": 1,
+      "message": "If you used covariant return types, then this wouldn\u0027t need testing.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
