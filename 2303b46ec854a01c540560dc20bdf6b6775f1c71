@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29aed02e_45087d6a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-05T02:57:21Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Yes, the commit message should have been more descriptive. Updated, thanks.",
+      "parentUuid": "d8f8d9fd_00b14bc1",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6a7daf5_96bbc28b",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 2
