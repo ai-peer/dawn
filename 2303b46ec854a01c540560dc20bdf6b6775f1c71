@@ -158,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf78d416_37131668",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-05T07:39:55Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "858a8548_3bb376f8",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8f13485_84e6474b",
@@ -171,6 +189,24 @@
       "writtenOn": "2023-01-04T13:34:22Z",
       "side": 1,
       "message": "I think we need to WaitForAllOperations twice maybe otherwise the call at [3] might not make it to the server since it is only after the wire is flushed that [3] is called and we need another wire flush to make the MapAsync to the server. Ditto below",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b978014a_4fc1defc",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-05T07:39:55Z",
+      "side": 1,
+      "message": "Done, thanks.",
+      "parentUuid": "f8f13485_84e6474b",
       "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
