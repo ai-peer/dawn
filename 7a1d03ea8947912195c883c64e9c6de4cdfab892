@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4ec5437_5261d822",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-05T14:16:39Z",
+      "side": 1,
+      "message": "Not sure what does this return for std::array.\nMaybe yPlaneData.size() * sizeof(yPlaneData[0]) is better?",
+      "range": {
+        "startLine": 80,
+        "startChar": 61,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
