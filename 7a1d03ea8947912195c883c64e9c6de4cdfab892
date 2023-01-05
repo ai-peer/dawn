@@ -39,6 +39,30 @@
       },
       "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "117bc9e6_42409bd3",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-05T17:15:03Z",
+      "side": 1,
+      "message": "alternatively, use a C array. the standard guarantees the sizeof that, but not std::array",
+      "parentUuid": "c4ec5437_5261d822",
+      "range": {
+        "startLine": 80,
+        "startChar": 61,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
