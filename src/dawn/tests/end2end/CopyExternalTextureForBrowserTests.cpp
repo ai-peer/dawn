@@ -77,7 +77,7 @@ class CopyExternalTextureForBrowserTests : public Parent {
         wgpu::TextureDataLayout externalTexturePlane0DataLayout = {};
         externalTexturePlane0DataLayout.bytesPerRow = 4;
 
-        this->queue.WriteTexture(&plane0, yPlaneData.data(), yPlaneData.size() * sizeof(float),
+        this->queue.WriteTexture(&plane0, yPlaneData.data(), sizeof(yPlaneData),
                                  &externalTexturePlane0DataLayout, &externalTexturePlane0Desc.size);
 
         // uv plane
@@ -99,7 +99,7 @@ class CopyExternalTextureForBrowserTests : public Parent {
         wgpu::TextureDataLayout externalTexturePlane1DataLayout = {};
         externalTexturePlane1DataLayout.bytesPerRow = 4;
 
-        this->queue.WriteTexture(&plane1, uvPlaneData.data(), uvPlaneData.size() * sizeof(float),
+        this->queue.WriteTexture(&plane1, uvPlaneData.data(), sizeof(uvPlaneData),
                                  &externalTexturePlane1DataLayout, &externalTexturePlane1Desc.size);
 
         // Create an ExternalTextureDescriptor from the texture views
