@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f601a5b2_c882d72b",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T15:08:26Z",
+      "side": 1,
+      "message": "It\u0027s `\u003d0` in the type class, which I prefer as I want to make sure it doesn\u0027t get missed when implementing.\n\nWe fail here becase otherwise we\u0027d return a `nullptr` and that\u0027s just going to cause havoc down the line. Cloning would require cloning the `GlobalVariable` in this case and the `Expression` in the following which the machinery for that doesn\u0027t exist in the `type` clone context at the moment.",
+      "parentUuid": "9c7e7f80_89e236c8",
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83457f69_d4125e45",
         "filename": "src/tint/type/matrix.cc",
         "patchSetId": 4
@@ -31,6 +49,30 @@
       "writtenOn": "2023-01-05T10:12:11Z",
       "side": 1,
       "message": "This dynamic cast is unnecessary if you change the return type of `Clone()` to be a pointer of the class (`Vector*` in this case), instead of `Type*`. This is permitted in C++, as it supports [covariant return types](https://en.wikipedia.org/wiki/Covariant_return_type).",
+      "range": {
+        "startLine": 71,
+        "startChar": 42,
+        "endLine": 71,
+        "endChar": 56
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aad08029_6aa90bf3",
+        "filename": "src/tint/type/matrix.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T15:08:26Z",
+      "side": 1,
+      "message": "Nice, done.",
+      "parentUuid": "83457f69_d4125e45",
       "range": {
         "startLine": 71,
         "startChar": 42,
@@ -54,6 +96,30 @@
       "writtenOn": "2023-01-05T10:12:11Z",
       "side": 1,
       "message": "If you used covariant return types, then this wouldn\u0027t need testing.",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8ff108_75d627ac",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T15:08:26Z",
+      "side": 1,
+      "message": "I changed to covariant, but prefer to leave the tests. This makes them robust in the face of the return type changing for whatever reason.",
+      "parentUuid": "1ecf72f1_f4bc329d",
       "range": {
         "startLine": 75,
         "startChar": 4,
