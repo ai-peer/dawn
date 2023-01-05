@@ -69,5 +69,18 @@ TEST_F(DepthTextureTest, FriendlyName) {
     EXPECT_EQ(d.FriendlyName(Symbols()), "texture_depth_cube");
 }
 
+TEST_F(DepthTextureTest, Clone) {
+    auto* a = create<DepthTexture>(ast::TextureDimension::k2d);
+
+    type::Manager mgr;
+    type::CloneContext ctx{{nullptr}, {nullptr, &mgr}};
+
+    auto* b = a->Clone(ctx);
+    ASSERT_TRUE(b->Is<DepthTexture>());
+
+    auto* dt = b->As<DepthTexture>();
+    EXPECT_EQ(dt->dim(), ast::TextureDimension::k2d);
+}
+
 }  // namespace
 }  // namespace tint::type
