@@ -194,6 +194,30 @@
       },
       "revId": "db7f84e01a0756077692d96b90f625996a644807",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0c2b914_417dcf93",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T17:54:35Z",
+      "side": 1,
+      "message": "The downside is that it\u0027s confusing - it looks like it\u0027s testing something that needs testing.\nWe don\u0027t check that pointers of type `T*` are of type `T` anywhere else - because we don\u0027t test no-op RTTI works for each and every class.\n\nI don\u0027t feel massively strongly, but I\u0027ll probably end up stripping it out some point in the future.",
+      "parentUuid": "74f2aaf6_cb65894b",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
