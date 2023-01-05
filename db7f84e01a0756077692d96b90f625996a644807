@@ -170,6 +170,30 @@
       },
       "revId": "db7f84e01a0756077692d96b90f625996a644807",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f2aaf6_cb65894b",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T16:08:29Z",
+      "side": 1,
+      "message": "Well, up until this patchset .... it did as it returned the base class.  So, keeping the check in the tests just seems a bit safer and doesn\u0027t seem to have downside?",
+      "parentUuid": "705944f5_35df5007",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
