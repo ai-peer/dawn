@@ -212,6 +212,24 @@
       "parentUuid": "67e0e6ec_15b9806f",
       "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce7dd84a_9eea0f64",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-05T09:44:36Z",
+      "side": 1,
+      "message": "Yep!",
+      "parentUuid": "1686abec_d72ddcf0",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
