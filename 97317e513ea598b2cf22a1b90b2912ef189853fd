@@ -122,6 +122,24 @@
       "parentUuid": "549eba5c_75ce12b5",
       "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47532cf5_7a8c9be6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003461
+      },
+      "writtenOn": "2023-01-05T13:20:01Z",
+      "side": 1,
+      "message": "So I\u0027ve been testing with a VM and I finally get the error, but after a few tests I can\u0027t find a way to fix it without changing the code itself (which I want to avoid for a change like this).\n\nIt\u0027s a shame, because it really helps with dev speed, but I\u0027ll just keep the change locally, might revisit it in the future if I get more acquittanced with the codebase.\n\nIs it ok to just press \"Abandon\" on this PR (or \"Change\")? Do I need to do some cleanup for it?",
+      "parentUuid": "44e04974_434663fd",
+      "revId": "97317e513ea598b2cf22a1b90b2912ef189853fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
