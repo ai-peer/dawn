@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d2e1aa5_c463d489",
+        "filename": "src/tint/sem/array_count.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T16:00:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f601a5b2_c882d72b",
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83457f69_d4125e45",
@@ -120,6 +138,30 @@
       "side": 1,
       "message": "I changed to covariant, but prefer to leave the tests. This makes them robust in the face of the return type changing for whatever reason.",
       "parentUuid": "1ecf72f1_f4bc329d",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705944f5_35df5007",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-05T16:00:49Z",
+      "side": 1,
+      "message": "Humm... why would the `Clone()` ever return a different type to the class?",
+      "parentUuid": "cd8ff108_75d627ac",
       "range": {
         "startLine": 75,
         "startChar": 4,
