@@ -22,41 +22,65 @@
 #include <signal.h>
 #include <fstream>
 #include <string>
+#elif defined(__APPLE__)
+#include <stdbool.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
+#include <unistd.h>
 #endif
 
+bool tint::debugger::Attached() {
 #ifdef _MSC_VER
-#define TINT_DEBUGGER_BREAK_DEFINED
-void tint::debugger::Break() {
-    if (::IsDebuggerPresent()) {
-        ::DebugBreak();
-    }
-}
-
+    return ::IsDebuggerPresent();
 #elif defined(__linux__)
-
-#define TINT_DEBUGGER_BREAK_DEFINED
-void tint::debugger::Break() {
     // A process is being traced (debugged) if "/proc/self/status" contains a
     // line with "TracerPid: <non-zero-digit>...".
-    bool is_traced = false;
     std::ifstream fin("/proc/self/status");
     std::string line;
     while (!is_traced && std::getline(fin, line)) {
         const char kPrefix[] = "TracerPid:\t";
         static constexpr int kPrefixLen = sizeof(kPrefix) - 1;
         if (line.length() > kPrefixLen && line.compare(0, kPrefixLen, kPrefix) == 0) {
-            is_traced = line[kPrefixLen] != '0';
+            if (line[kPrefixLen] != '0') {
+                return true;
+            }
         }
     }
-
-    if (is_traced) {
-        raise(SIGTRAP);
-    }
+    return false;
+#elif defined(__APPLE__)
+    int mib[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PID, getpid()};
+    kinfo_proc info = {};
+    size_t size = sizeof(info);
+    sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, nullptr, 0);
+    return ((info.kp_proc.p_flag & P_TRACED) != 0);
+#else
+    return false;
+#endif
 }
-#endif  // platform
+
+void tint::debugger::Break() {
+#ifdef _MSC_VER
+    if (::IsDebuggerPresent()) {
+        ::DebugBreak();
+    }
+#elif defined(__linux__)
+    if (Attached()) {
+        if (is_traced) {
+            raise(SIGTRAP);
+        }
+    }
+#elif defined(__APPLE__)
+// TODO
+#else
+// unsupported platform
+#endif
+}
+
+#else  // TINT_ENABLE_BREAK_IN_DEBUGGER
+
+void tint::debugger::Break() {}
+bool tint::debugger::Attached() {
+    return false;
+}
 
 #endif  // TINT_ENABLE_BREAK_IN_DEBUGGER
-
-#ifndef TINT_DEBUGGER_BREAK_DEFINED
-void tint::debugger::Break() {}
-#endif

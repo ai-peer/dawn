@@ -22,6 +22,9 @@ namespace tint::debugger {
 /// debugger to break at the call site.
 void Break();
 
+/// @returns true if a debugger is attached to the process
+bool Attached();
+
 }  // namespace tint::debugger
 
 #endif  // SRC_TINT_UTILS_DEBUGGER_H_
