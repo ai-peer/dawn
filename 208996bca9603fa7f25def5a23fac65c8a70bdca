@@ -194,6 +194,24 @@
       "parentUuid": "61618fb0_3eeab7fe",
       "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1686abec_d72ddcf0",
+        "filename": "src/dawn/native/CompilationMessages.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-05T02:17:32Z",
+      "side": 1,
+      "message": "Sorry I misunderstood this comment before. Do you mean I should do the below changes in dawn.json and use utf16LinePos, utf16Offset and utf16Length in Blink (https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_shader_module.cc;l\u003d97)?\n\n    \"compilation message\": {\n        \"category\": \"structure\",\n        \"extensible\": \"in\",\n        \"members\": [\n            {\"name\": \"message\", \"type\": \"char\", \"annotation\": \"const*\", \"length\": \"strlen\", \"optional\": true},\n            {\"name\": \"type\", \"type\": \"compilation message type\"},\n            {\"name\": \"line num\", \"type\": \"uint64_t\"},\n            {\"name\": \"line pos\", \"type\": \"uint64_t\"},\n            {\"name\": \"offset\", \"type\": \"uint64_t\"},\n            {\"name\": \"length\", \"type\": \"uint64_t\"},\n            {\"name\": \"utf16 line pos\", \"type\": \"uint64_t\"},\n            {\"name\": \"utf16 offset\", \"type\": \"uint64_t\"},\n            {\"name\": \"utf16 length\", \"type\": \"uint64_t\"}\n        ]\n    }",
+      "parentUuid": "67e0e6ec_15b9806f",
+      "revId": "208996bca9603fa7f25def5a23fac65c8a70bdca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
