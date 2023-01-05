@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d62462_129fc000",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-05T11:40:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "079f3722_69c1abb7",
+      "range": {
+        "startLine": 655,
+        "startChar": 55,
+        "endLine": 655,
+        "endChar": 84
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef095800_a26fe7c8",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4222777_5c7663fa",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-05T11:40:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef095800_a26fe7c8",
+      "range": {
+        "startLine": 661,
+        "startChar": 11,
+        "endLine": 661,
+        "endChar": 16
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b94385e_113a006a",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-05T10:20:27Z",
       "side": 1,
       "message": "nit: `Contains`",
+      "range": {
+        "startLine": 1619,
+        "startChar": 57,
+        "endLine": 1619,
+        "endChar": 60
+      },
+      "revId": "0836cb87226b15c340927d6774474caa38f62c74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59458bfa_6e6e8b34",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-05T11:40:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b94385e_113a006a",
       "range": {
         "startLine": 1619,
         "startChar": 57,
