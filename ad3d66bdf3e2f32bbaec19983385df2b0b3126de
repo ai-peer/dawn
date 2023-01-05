@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa525a9_239d7872",
+        "filename": "src/tint/type/array_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfeb6074_c576428b",
+      "range": {
+        "startLine": 178,
+        "startChar": 16,
+        "endLine": 178,
+        "endChar": 31
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e1bdca2f_3babb22a",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-05T16:00:49Z",
       "side": 1,
       "message": "Unnecessary: already an `Array*`",
+      "range": {
+        "startLine": 201,
+        "startChar": 16,
+        "endLine": 201,
+        "endChar": 31
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdfb8d0_8d30df90",
+        "filename": "src/tint/type/array_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1bdca2f_3babb22a",
       "range": {
         "startLine": 201,
         "startChar": 16,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d5ecb8_56908513",
+        "filename": "src/tint/type/atomic_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cf580e2_f750580b",
+      "range": {
+        "startLine": 62,
+        "startChar": 16,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db16137d_3b578e80",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-01-05T16:00:49Z",
       "side": 1,
       "message": "Cannot be anything else.",
+      "range": {
+        "startLine": 53,
+        "startChar": 19,
+        "endLine": 53,
+        "endChar": 29
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d6a3c66_e34181e5",
+        "filename": "src/tint/type/bool_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db16137d_3b578e80",
       "range": {
         "startLine": 53,
         "startChar": 19,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded92318_7510b6dd",
+        "filename": "src/tint/type/depth_multisampled_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02f2db62_90af6871",
+      "range": {
+        "startLine": 67,
+        "startChar": 19,
+        "endLine": 67,
+        "endChar": 49
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c7904de_5cc7c3a9",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-01-05T16:00:49Z",
       "side": 1,
       "message": "Unnecessary: already an `DepthMultisampledTexture*`\n\netc, etc. Same for all following tests.",
+      "range": {
+        "startLine": 69,
+        "startChar": 18,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "ad3d66bdf3e2f32bbaec19983385df2b0b3126de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65de8065_be3edb3d",
+        "filename": "src/tint/type/depth_multisampled_texture_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c7904de_5cc7c3a9",
       "range": {
         "startLine": 69,
         "startChar": 18,

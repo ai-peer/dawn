@@ -218,6 +218,30 @@
       },
       "revId": "db7f84e01a0756077692d96b90f625996a644807",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f4578e_74dbeff7",
+        "filename": "src/tint/type/matrix_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-05T18:34:48Z",
+      "side": 1,
+      "message": "Ack. Removed.",
+      "parentUuid": "c0c2b914_417dcf93",
+      "range": {
+        "startLine": 75,
+        "startChar": 4,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "db7f84e01a0756077692d96b90f625996a644807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
