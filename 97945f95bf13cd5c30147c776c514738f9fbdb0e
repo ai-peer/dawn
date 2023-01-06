@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2b4b869_45cfe78b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Thanks for your review!",
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3e4f7ac_33991472",
@@ -60,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7209f2a5_1cc64ac9",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "I tried to use Switch, but TBH the code was more confusing, and more verbose. Promise I\u0027ll revisit it if I add another case here.",
+      "parentUuid": "f3e4f7ac_33991472",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b8c77da_829c78ed",
         "filename": "src/tint/transform/texture_1d_to_2d.cc",
         "patchSetId": 5
@@ -71,6 +112,30 @@
       "writtenOn": "2022-12-16T19:55:36Z",
       "side": 1,
       "message": "You can use `sem::CallTargetSignature::Parameter(sem::ParameterUsage::kTexture)` here.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 99
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9857a9_fa5860a8",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b8c77da_829c78ed",
       "range": {
         "startLine": 75,
         "startChar": 0,
@@ -106,6 +171,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bbe1e4e8_ec0b428b",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Hmm. I actually had to add this in. Without it, As\u003ctype::Texture\u003e() returns a nullptr, and the subsequent line crashes (e.g., on Texture1DTo2DTest.Global1DDeclAndSample).",
+      "parentUuid": "38d8bc1f_74ef180f",
+      "range": {
+        "startLine": 81,
+        "startChar": 39,
+        "endLine": 81,
+        "endChar": 52
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1d53781_537def83",
         "filename": "src/tint/transform/texture_1d_to_2d.cc",
         "patchSetId": 5
@@ -117,6 +206,30 @@
       "writtenOn": "2022-12-16T19:55:36Z",
       "side": 1,
       "message": "übernit: Early new lines. All of this probably could fit on two lines.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 72
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48b28587_6ed104bd",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1d53781_537def83",
       "range": {
         "startLine": 87,
         "startChar": 0,
@@ -150,6 +263,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc0a31ce_129a0372",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a71a433a_1f41f2d6",
+      "range": {
+        "startLine": 93,
+        "startChar": 33,
+        "endLine": 93,
+        "endChar": 93
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0babee0_39e4b591",
@@ -163,6 +300,30 @@
       "writtenOn": "2022-12-16T19:55:36Z",
       "side": 1,
       "message": "ohhh, fun. `0.5` is actually centre of the texel. You might be able to get away with `0`, but it rather depends on the wrapping mode of the texture. `0.5` is probably safer.",
+      "range": {
+        "startLine": 111,
+        "startChar": 90,
+        "endLine": 111,
+        "endChar": 94
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b1b2699_12fb5b9b",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Technically you\u0027re right, but it probably doesn\u0027t matter. There\u0027s only a single row of pixels, and I don\u0027t think there\u0027s any combination of address and filter modes that could return anything but that single value. Changed it anyway; LMK what you think (maybe there\u0027s an easier way to handle the integer and float cases together).",
+      "parentUuid": "b0babee0_39e4b591",
       "range": {
         "startLine": 111,
         "startChar": 90,
@@ -196,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3abdaa61_25ca0465",
+        "filename": "src/tint/transform/texture_1d_to_2d_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Done and done",
+      "parentUuid": "f6786596_e43f0941",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a46b9518_8678c67c",
@@ -209,6 +394,24 @@
       "writtenOn": "2022-12-16T19:55:36Z",
       "side": 1,
       "message": "Please can we have some tests for some of the other texture builtins. The full list of texture builtins are:\n\n* textureGather\n* textureGatherCompare\n* textureLoad\n* textureNumLayers\n* textureNumLevels\n* textureNumSamples\n* textureSample\n* textureSampleBias\n* textureSampleCompare\n* textureSampleCompareLevel\n* textureSampleGrad\n* textureSampleLevel\n* textureSampleBaseClampToEdge\n* textureStore\n\nI\u0027m sure some of these do not apply for 1d textures, so ignore those. I just want to make sure that the assumption of a `texture` and `coord` parameter is solid for all the builtins we currently have.",
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d12967f_7f3e017b",
+        "filename": "src/tint/transform/texture_1d_to_2d_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T00:59:27Z",
+      "side": 1,
+      "message": "Done. The only one that is valid for Texture1D that didn\u0027t have coverage was textureNumLevels. Thanks for keeping me honest.",
+      "parentUuid": "a46b9518_8678c67c",
       "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
