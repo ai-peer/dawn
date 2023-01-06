@@ -151,15 +151,6 @@ crbug.com/dawn/1345 webgpu:api,validation,shader_module,entry_point:compute:isAs
 crbug.com/dawn/0000 [ linux ] webgpu:web_platform,external_texture,* [ Failure ]
 
 ################################################################################
-# Skip external_texture,video:* tests due to incorrect expectation values.
-# See cts issue https://github.com/gpuweb/cts/issues/2042
-# KEEP
-################################################################################
-crbug.com/dawn/1082 [ win ] webgpu:web_platform,external_texture,video:* [ Skip ]
-crbug.com/dawn/1082 [ mac ] webgpu:web_platform,external_texture,video:* [ Skip ]
-################################################################################
-
-################################################################################
 # texel_data failures
 ################################################################################
 crbug.com/dawn/0000 webgpu:util,texture,texel_data:ufloat_texel_data_in_shader:* [ Failure ]
