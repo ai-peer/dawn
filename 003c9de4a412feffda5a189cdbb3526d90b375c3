@@ -39,6 +39,30 @@
       },
       "revId": "003c9de4a412feffda5a189cdbb3526d90b375c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f80fe6f_a6d254c3",
+        "filename": "src/tint/ir/test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-06T16:01:24Z",
+      "side": 1,
+      "message": "It is, I just forgot the important `_impl` after `builder`.",
+      "parentUuid": "9a9a00ee_af26f1af",
+      "range": {
+        "startLine": 83,
+        "startChar": 11,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "003c9de4a412feffda5a189cdbb3526d90b375c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
