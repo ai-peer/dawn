@@ -16,6 +16,29 @@
       "message": "PTAL.\n\nThoughts, it leaves a bit of sharp edge in the test helper if you call `Build` in that the builder impl points to an invalid program (which, we aren\u0027t using, other then the pointer addresses for lookup).",
       "revId": "003c9de4a412feffda5a189cdbb3526d90b375c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9a00ee_af26f1af",
+        "filename": "src/tint/ir/test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-06T15:25:55Z",
+      "side": 1,
+      "message": "Is this still true?",
+      "range": {
+        "startLine": 83,
+        "startChar": 11,
+        "endLine": 83,
+        "endChar": 52
+      },
+      "revId": "003c9de4a412feffda5a189cdbb3526d90b375c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
