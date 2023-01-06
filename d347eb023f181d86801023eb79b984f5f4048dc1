@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23c7046d_9c2ead02",
+        "filename": "src/tint/text/unicode.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-06T11:20:47Z",
+      "side": 1,
+      "message": "übernit: `string_view` is so small it\u0027s probably preferable to pass by value.",
+      "range": {
+        "startLine": 76,
+        "startChar": 36,
+        "endLine": 76,
+        "endChar": 60
+      },
+      "revId": "d347eb023f181d86801023eb79b984f5f4048dc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
