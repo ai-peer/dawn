@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3131727d_1eab57c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-01-06T17:48:49Z",
+      "side": 1,
+      "message": "This re-enables the tests on Windows so we\u0027ll have at least some coverage. I\u0027m still seeing failures on Mac OS due to minor color differences - I\u0027m investigating the issue but I\u0027m doubting I\u0027ll be able to resolve the issue quickly. My suspicion is that this is caused by small differences in how Mac OS and Windows handle color - the best fix may be to allow a small variance in the results in the CTS test.",
+      "revId": "4bc92fe2704e2fb2298cb0fd6277eb8be3656675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
