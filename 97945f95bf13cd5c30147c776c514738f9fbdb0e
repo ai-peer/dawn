@@ -123,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4ac2361_7fdc37ea",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T18:54:54Z",
+      "side": 1,
+      "message": "Thanks, that video was very helpful. I gave it another shot. LMK if this could be better.",
+      "parentUuid": "176c51c0_d7784dde",
+      "range": {
+        "startLine": 49,
+        "startChar": 12,
+        "endLine": 49,
+        "endChar": 63
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b8c77da_829c78ed",
@@ -231,6 +255,30 @@
       "side": 1,
       "message": "Are you sure? [No builtin overload has a `ref\u003cT\u003e` parameter](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/intrinsics.def).\n\nIf you were looking at the type of an **argument**, then I\u0027d understand why it would be necessary.\n\nI locally tested this without the `UnwrapRef()` and all unit and end-to-end tests pass.",
       "parentUuid": "bbe1e4e8_ec0b428b",
+      "range": {
+        "startLine": 81,
+        "startChar": 39,
+        "endLine": 81,
+        "endChar": 52
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b68a3d51_8a72d636",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T18:54:54Z",
+      "side": 1,
+      "message": "Weird. I swear I even verified this before I added my reply. But now it\u0027s fine. Sorry!\n\nRemoved.",
+      "parentUuid": "fb70c6f6_dee6f6a6",
       "range": {
         "startLine": 81,
         "startChar": 39,
@@ -443,6 +491,30 @@
       "side": 1,
       "message": "Sorry, I should have been more clear here. For the `ShouldRun` tests, these should be `EXPECT_FALSE` - if there\u0027s nothing for the transform to do, then the transform should not run. This means we don\u0027t have to clone the whole program for a no-op transform, which is an enormous performance win.\n\nThis will require adding some early-out testing in the transform.",
       "parentUuid": "3abdaa61_25ca0465",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 32
+      },
+      "revId": "97945f95bf13cd5c30147c776c514738f9fbdb0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc142b0_db3e0c08",
+        "filename": "src/tint/transform/texture_1d_to_2d_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-06T18:54:54Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "e2e83998_09fdfc8e",
       "range": {
         "startLine": 31,
         "startChar": 0,
