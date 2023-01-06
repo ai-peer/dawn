@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be3791e_abecf018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-06T00:12:03Z",
+      "side": 1,
+      "message": "It\u0027s failing on Dawn Android arm DEPS Release (Pixel 4) \nThere\u0027s an arm there, I\u0027m not 100% sure if we should skip IsQualcomn() or IsArm()",
+      "revId": "f01ca047b11ddf36695c299df423134a27c14b2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
