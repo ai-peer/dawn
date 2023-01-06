@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67f4db59_308c242c",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-06T05:40:33Z",
+      "side": 1,
+      "message": "I like Corentin\u0027s idea about making this safer. We want to call the callback when the call stack unwinds.\n\nIt is a bit verbose though and unfortunate you need to call explicitly.\nMaybe we could instead always perform Call in the destructor? Would need to make it non-copyable. maybe the name can be \"DeferredCallback\" instead of pending",
+      "parentUuid": "d423d156_1369670c",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cadfce5e_9002e9bf",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
