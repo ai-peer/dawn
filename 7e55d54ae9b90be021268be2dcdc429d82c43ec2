@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "191d90bd_ca3abb2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-06T02:23:34Z",
+      "side": 1,
+      "message": "Kokoro flaked, overriding vote.",
+      "revId": "7e55d54ae9b90be021268be2dcdc429d82c43ec2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
