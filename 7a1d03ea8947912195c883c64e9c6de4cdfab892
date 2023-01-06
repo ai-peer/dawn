@@ -63,6 +63,30 @@
       },
       "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da411816_fa3883bf",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-06T11:01:01Z",
+      "side": 1,
+      "message": "I checked that the standard doesn\u0027t define sizeof(array). Went with Yuly\u0027s suggestion to keep the std::array.",
+      "parentUuid": "117bc9e6_42409bd3",
+      "range": {
+        "startLine": 80,
+        "startChar": 61,
+        "endLine": 80,
+        "endChar": 67
+      },
+      "revId": "7a1d03ea8947912195c883c64e9c6de4cdfab892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
