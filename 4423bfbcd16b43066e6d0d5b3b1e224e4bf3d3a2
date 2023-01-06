@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c85a2a9_3270211c",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-06T10:05:59Z",
+      "side": 1,
+      "message": "nit: `storage_tex`",
+      "range": {
+        "startLine": 60,
+        "startChar": 29,
+        "endLine": 60,
+        "endChar": 39
+      },
+      "revId": "4423bfbcd16b43066e6d0d5b3b1e224e4bf3d3a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "175acc5c_4a55b269",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-06T10:05:59Z",
+      "side": 1,
+      "message": "nit: `type_2d`",
+      "range": {
+        "startLine": 62,
+        "startChar": 26,
+        "endLine": 62,
+        "endChar": 32
+      },
+      "revId": "4423bfbcd16b43066e6d0d5b3b1e224e4bf3d3a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
