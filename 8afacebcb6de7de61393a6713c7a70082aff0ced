@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d9dd75_dbe9bead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-06T18:54:33Z",
+      "side": 1,
+      "message": "PTAL, I need this to merge https://chromium-review.googlesource.com/c/chromium/src/+/4142619 into M108",
+      "revId": "8afacebcb6de7de61393a6713c7a70082aff0ced",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
