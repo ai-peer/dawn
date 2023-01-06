@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19f01d80_1489a5dd",
+        "filename": "src/tint/constant/scalar_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-06T15:21:48Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2141d7f9_f3ac7a90",
+      "range": {
+        "startLine": 33,
+        "startChar": 40,
+        "endLine": 33,
+        "endChar": 50
+      },
+      "revId": "c45bda70e3201531da9617f55e141d6015fcb157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46c937a8_ac47f700",
