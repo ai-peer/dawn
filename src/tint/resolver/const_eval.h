@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include <string>
 
+#include "src/tint/number.h"
 #include "src/tint/type/type.h"
 #include "src/tint/utils/result.h"
 #include "src/tint/utils/vector.h"
@@ -68,7 +69,8 @@ class ConstEval {
 
     /// Constructor
     /// @param b the program builder
-    explicit ConstEval(ProgramBuilder& b);
+    /// @param soft_errors when `true`, do not produce `utils::Failure` for overflow or range errors
+    explicit ConstEval(ProgramBuilder& b, bool soft_errors = false);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Constant value evaluation methods, to be called directly from Resolver
@@ -86,10 +88,11 @@ class ConstEval {
     ///         be calculated
     Result Bitcast(const type::Type* ty, const constant::Value* value, const Source& source);
 
+    /// @param ty the target type
     /// @param obj the object being indexed
     /// @param idx the index expression
     /// @return the result of the index, or null if the value cannot be calculated
-    Result Index(const sem::Expression* obj, const sem::Expression* idx);
+    Result Index(const type::Type* ty, const sem::Expression* obj, const sem::Expression* idx);
 
     /// @param ty the result type
     /// @param lit the literal AST node
@@ -1403,6 +1406,7 @@ class ConstEval {
                const constant::Value* v2);
 
     ProgramBuilder& builder;
+    bool soft_errors_;
 };
 
 }  // namespace tint::resolver
