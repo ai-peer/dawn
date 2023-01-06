@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ea8d72_26735a32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-06T13:38:01Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "d347eb023f181d86801023eb79b984f5f4048dc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35d51c7_844cd08b",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-06T13:38:01Z",
+      "side": 1,
+      "message": "nit: This could be its own file in src/dawn/tests/unittests since it isn\u0027t exactly shader module validation.",
+      "revId": "d347eb023f181d86801023eb79b984f5f4048dc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23c7046d_9c2ead02",
