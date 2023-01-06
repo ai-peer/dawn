@@ -99,25 +99,24 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
 #error "Unsupported platform"
 #endif
 
-    auto targetBackendType = defaultBackendType;
+    // Check for backend override from env var / flag
     std::string forceBackend;
-
-    // Check for override from env var
-    if (std::string envVar = GetEnvVar("DAWNNODE_BACKEND"); !envVar.empty()) {
+    if (auto f = flags_.Get("backend")) {
+        forceBackend = *f;
+    } else if (std::string envVar = GetEnvVar("DAWNNODE_BACKEND"); !envVar.empty()) {
         forceBackend = envVar;
     }
 
-    // Check for override from flag
-    if (auto f = flags_.Get("dawn-backend")) {
-        forceBackend = *f;
+    // Check for specific adapter name
+    std::string adapterName;
+    if (auto f = flags_.Get("adapter")) {
+        adapterName = *f;
     }
 
     std::transform(forceBackend.begin(), forceBackend.end(), forceBackend.begin(),
                    [](char c) { return std::tolower(c); });
 
-    // Default to first adapter if a backend is not specified
-    size_t adapterIndex = 0;
-
+    auto targetBackendType = defaultBackendType;
     if (!forceBackend.empty()) {
         if (forceBackend == "null") {
             targetBackendType = wgpu::BackendType::Null;
@@ -141,27 +140,40 @@ interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::re
         }
     }
 
-    bool found = false;
-    for (size_t i = 0; i < adapters.size(); ++i) {
+    dawn::native::Adapter* adapter = nullptr;
+    for (auto& a : adapters) {
         wgpu::AdapterProperties props;
-        adapters[i].GetProperties(&props);
-        if (props.backendType == targetBackendType) {
-            adapterIndex = i;
-            found = true;
-            break;
+        a.GetProperties(&props);
+        if (props.backendType != targetBackendType) {
+            continue;
         }
+        if (!adapterName.empty() && props.name &&
+            std::string(props.name).find(adapterName) == std::string::npos) {
+            continue;
+        }
+        adapter = &a;
+        break;
     }
-    if (!found) {
+
+    if (!adapter) {
         if (!forceBackend.empty()) {
             promise.Reject("backend '" + forceBackend + "' not found");
+        } else if (!adapterName.empty()) {
+            promise.Reject("adapter with name '" + adapterName + "' not found");
         } else {
             promise.Reject("no suitable backends found");
         }
         return promise;
     }
 
-    auto adapter = GPUAdapter::Create<GPUAdapter>(env, adapters[adapterIndex], flags_);
-    promise.Resolve(std::optional<interop::Interface<interop::GPUAdapter>>(adapter));
+    if (flags_.Get("verbose")) {
+        wgpu::AdapterProperties props;
+        adapter->GetProperties(&props);
+        printf("using GPU adapter: %s\n", props.name);
+    }
+
+    auto gpuAdapter = GPUAdapter::Create<GPUAdapter>(env, *adapter, flags_);
+    promise.Resolve(std::optional<interop::Interface<interop::GPUAdapter>>(gpuAdapter));
     return promise;
 }
 
