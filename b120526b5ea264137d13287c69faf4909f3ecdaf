@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dead6f1e_a2c9fabe",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-07T19:13:46Z",
+      "side": 1,
+      "message": "By reading this, I\u0027m not quite sure what basic block arguments are.",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f16714d_4ff30781",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-07T19:13:46Z",
+      "side": 1,
+      "message": "Possibly unrelated to this change?",
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c201b71b_30e804f8",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-07T19:13:46Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 494,
+        "startChar": 44,
+        "endLine": 494,
+        "endChar": 53
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f119e1_050cf044",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-07T19:13:46Z",
+      "side": 1,
+      "message": "Unrelated to this change?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
