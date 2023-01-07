@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e6e982f_259ad770",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-07T19:25:06Z",
+      "side": 1,
+      "message": "I\u0027ve removed for now. Basic block arguments is an alternative to PHI nodes when we have single static assignment. When you come out of divergent control flow, and one branch modified a value, you pass the value into the next basic block, instead of using phi nodes.",
+      "parentUuid": "dead6f1e_a2c9fabe",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 46
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f16714d_4ff30781",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-01-07T19:13:46Z",
       "side": 1,
       "message": "Possibly unrelated to this change?",
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2582e9e4_54bed351",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-07T19:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f16714d_4ff30781",
       "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1430e3_cd2284c0",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-07T19:25:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c201b71b_30e804f8",
+      "range": {
+        "startLine": 494,
+        "startChar": 44,
+        "endLine": 494,
+        "endChar": 53
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2f119e1_050cf044",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-01-07T19:13:46Z",
       "side": 1,
       "message": "Unrelated to this change?",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 5
+      },
+      "revId": "b120526b5ea264137d13287c69faf4909f3ecdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "966dc173_727316b2",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-07T19:25:06Z",
+      "side": 1,
+      "message": "It was related in that I needed it to build with my newer clang, heh. Pull out into a parent CL.",
+      "parentUuid": "e2f119e1_050cf044",
       "range": {
         "startLine": 67,
         "startChar": 0,
