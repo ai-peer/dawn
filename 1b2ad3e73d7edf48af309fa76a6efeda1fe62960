@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ebcc7a_22388684",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-08T04:19:29Z",
+      "side": 1,
+      "message": "PTAL. One day I\u0027ll these warnings sorted out ....",
+      "revId": "1b2ad3e73d7edf48af309fa76a6efeda1fe62960",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
