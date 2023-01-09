@@ -326,12 +326,6 @@ crbug.com/dawn/1389 [ intel monterey ] webgpu:api,operation,resource_init,textur
 crbug.com/dawn/1599 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Failure ]
 
 ################################################################################
-# webgpu:api,operation,render_pass,storeOp:render_pass_store_op,color_attachment_only:* fail on win10 Intel
-# KEEP
-################################################################################
-crbug.com/dawn/1628 [ intel-gen-9 win10 ] webgpu:api,operation,render_pass,storeOp:render_pass_store_op,color_attachment_only:* [ Failure ]
-
-################################################################################
 # untriaged failures
 # KEEP
 ################################################################################
