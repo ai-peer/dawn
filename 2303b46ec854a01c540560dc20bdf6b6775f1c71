@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e8f1b11_85a4093f",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-09T10:07:16Z",
+      "side": 1,
+      "message": "I don\u0027t really have an opinion on this and once the one version is done, it would be easy to switch to the other one. Can you implement either of the two while we discuss that? We can make a follow-up CL afterwards easily if needed.",
+      "parentUuid": "baa97ec1_d01de334",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cadfce5e_9002e9bf",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
