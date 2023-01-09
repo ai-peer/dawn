@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50861a52_2ba013c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-09T02:25:32Z",
+      "side": 1,
+      "message": "The flaky failure DrawIndirectTest.Uint32/Vulkan_GeForce_GTX_1660 (on Windows Nvidia bots) is not related to this CL.\n\nPTAL, thanks!",
+      "revId": "17ced01616f68a5bece1dc2540ef970889083bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
