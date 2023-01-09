@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a70aab67_139e56f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-09T18:36:22Z",
+      "side": 1,
+      "message": "Should be good now, sorry for previous mistake - needed to edit the cherry-pick.",
+      "revId": "11da398737b50737be1f8d3ce0071cea603233f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
