@@ -16,6 +16,23 @@
       "message": "PTAL, flaky on M110 after I\u0027ve switched it to the new machines.\nhttps://luci-milo.appspot.com/ui/p/chromium-m110/builders/ci/Dawn%20Win10%20x86%20DEPS%20Release%20(Intel%20HD%20630)/125/overview\nhttps://luci-milo.appspot.com/ui/p/chromium-m110/builders/ci/Dawn%20Win10%20x64%20DEPS%20Release%20(Intel%20HD%20630)/129/overview",
       "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5110008_1e55aa98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-09T18:03:39Z",
+      "side": 1,
+      "message": "Is there a commit message line I can add to bypass Kokoro?\nAlternatively, maybe you can click on \"Submit\" to bypass CQ (I don\u0027t have this button probably since I\u0027m not a committer).",
+      "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
