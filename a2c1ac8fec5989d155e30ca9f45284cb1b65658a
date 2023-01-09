@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "a2c1ac8fec5989d155e30ca9f45284cb1b65658a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf004f3b_4008897a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-09T17:56:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a2c1ac8fec5989d155e30ca9f45284cb1b65658a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f596089_bbd4eaf1",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1232,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-09T17:56:53Z",
+      "side": 1,
+      "message": "tags: [\"dawn\"]",
+      "revId": "a2c1ac8fec5989d155e30ca9f45284cb1b65658a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af0c5f6c_a6b7eb7a",
+        "filename": "src/dawn/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1012,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-09T17:56:53Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be ValidateTextureDescriptor?",
+      "revId": "a2c1ac8fec5989d155e30ca9f45284cb1b65658a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
