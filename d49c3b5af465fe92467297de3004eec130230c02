@@ -16,6 +16,29 @@
       "message": "PTAL. Happy to add a unit test instead if you prefer.",
       "revId": "d49c3b5af465fe92467297de3004eec130230c02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "898f5c59_3405dc31",
+        "filename": "src/tint/transform/texture_1d_to_2d.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-09T20:09:57Z",
+      "side": 1,
+      "message": "Please can we have a unit test too?",
+      "range": {
+        "startLine": 129,
+        "startChar": 12,
+        "endLine": 129,
+        "endChar": 79
+      },
+      "revId": "d49c3b5af465fe92467297de3004eec130230c02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
