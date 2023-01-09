@@ -33,6 +33,24 @@
       "message": "Is there a commit message line I can add to bypass Kokoro?\nAlternatively, maybe you can click on \"Submit\" to bypass CQ (I don\u0027t have this button probably since I\u0027m not a committer).",
       "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe1c1b2_2db96ec1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-09T18:26:47Z",
+      "side": 1,
+      "message": "there should be a way to delete kokoro -1 but it\u0027s not in my UI. is it in yours? I can force +1 but we need to remove the -1.\nbclayton@ may know",
+      "parentUuid": "c5110008_1e55aa98",
+      "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
