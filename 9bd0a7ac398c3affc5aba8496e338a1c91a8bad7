@@ -16,6 +16,23 @@
       "message": "Thanks!",
       "revId": "9bd0a7ac398c3affc5aba8496e338a1c91a8bad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9628d090_64223043",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-09T18:57:57Z",
+      "side": 1,
+      "message": "Actually, M108 seems to be OK without this, so I\u0027ll abandon.\nhttps://ci.chromium.org/ui/p/chromium-m108/builders/try/dawn-win10-x64-deps-rel/9/overview\nhttps://ci.chromium.org/ui/p/chromium-m108/builders/try/dawn-win10-x86-deps-rel/9/overview",
+      "revId": "9bd0a7ac398c3affc5aba8496e338a1c91a8bad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
