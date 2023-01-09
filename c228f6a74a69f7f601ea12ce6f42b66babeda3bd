@@ -51,6 +51,24 @@
       "parentUuid": "c5110008_1e55aa98",
       "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "569dd1b8_d0ecfb7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-09T18:38:25Z",
+      "side": 1,
+      "message": "No, I can\u0027t remove the -1 in my UI. Can only remove your +1 😞",
+      "parentUuid": "bfe1c1b2_2db96ec1",
+      "revId": "c228f6a74a69f7f601ea12ce6f42b66babeda3bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
