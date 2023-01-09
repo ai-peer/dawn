@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e404a7_b9c76bb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-01-09T17:51:11Z",
+      "side": 1,
+      "message": "PTAL. Happy to add a unit test instead if you prefer.",
+      "revId": "d49c3b5af465fe92467297de3004eec130230c02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
