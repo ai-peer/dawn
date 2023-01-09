@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5819e2b_88ce3b0e",
+        "filename": "src/tint/utils/debugger.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-01-09T15:49:24Z",
+      "side": 1,
+      "message": "Could be `Attached()` instead",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 29
+      },
+      "revId": "bb589dbd265b419f27f8e3d545fc4cd79b5d8930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "346e8987_64ba5330",
+        "filename": "src/tint/utils/debugger.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-01-09T15:49:24Z",
+      "side": 1,
+      "message": "This code doesn\u0027t compile on Linux with TINT_ENABLE_BREAK_IN_DEBUGGER enabled. I see you removed the declaration of `is_traced` that was in the `Break()` function before. I think we should just be able to add back the declaration to `Attached()` and remove the condition here so it becomes just:\n\n```\nif (Attached()) {\n    raise(SIGTRAP);\n}\n```",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 24
+      },
+      "revId": "bb589dbd265b419f27f8e3d545fc4cd79b5d8930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
