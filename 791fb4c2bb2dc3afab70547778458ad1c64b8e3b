@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42885965_7ebc5082",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-01-09T18:41:00Z",
+      "side": 1,
+      "message": "Maybe \"No-Presubmit: true\" can bypass Kokoro?",
+      "revId": "791fb4c2bb2dc3afab70547778458ad1c64b8e3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
