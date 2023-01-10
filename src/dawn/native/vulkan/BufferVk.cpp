@@ -254,6 +254,7 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 1u, &barrier, 0, nullptr);
+        mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     }
 }
 
@@ -408,5 +409,6 @@ void Buffer::ClearBuffer(CommandRecordingContext* recordingContext,
     // Note: Allocated size must be a multiple of 4.
     ASSERT(size % 4 == 0);
     device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size, clearValue);
+    mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
 }
 }  // namespace dawn::native::vulkan
