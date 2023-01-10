@@ -44,9 +44,7 @@ void BreakPoint() {
 
 #elif DAWN_COMPILER_IS(MSVC)
 extern void __cdecl __debugbreak(void);
-void BreakPoint() {
-    __debugbreak();
-}
+void BreakPoint() {}
 
 #else
 #error "Unsupported compiler"
@@ -59,8 +57,8 @@ void HandleAssertionFailure(const char* file,
     dawn::ErrorLog() << "Assertion failure at " << file << ":" << line << " (" << function
                      << "): " << condition;
 #if defined(DAWN_ABORT_ON_ASSERT)
-    abort();
+//    abort();
 #else
-    BreakPoint();
+//    BreakPoint();
 #endif
 }

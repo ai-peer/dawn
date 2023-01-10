@@ -148,6 +148,8 @@ void AllocateTexture(const OpenGLFunctions& gl,
     // be GL_TRUE, so the storage of the texture must be allocated with glTexStorage*D.
     // https://www.khronos.org/registry/OpenGL-Refpages/gl4/html/glTextureView.xhtml
     switch (target) {
+        case GL_TEXTURE_1D:
+            break;
         case GL_TEXTURE_2D_ARRAY:
         case GL_TEXTURE_3D:
             gl.TexStorage3D(target, levels, internalFormat, size.width, size.height,
