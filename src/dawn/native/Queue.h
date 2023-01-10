@@ -77,7 +77,8 @@ class QueueBase : public ApiObjectBase {
                            uint64_t bufferOffset,
                            const void* data,
                            size_t size);
-    void TrackTask(std::unique_ptr<TrackTaskCallback> task);
+    void TrackTask(std::unique_ptr<TrackTaskCallback> task,
+                   ExecutionSerial serial = kMaxExecutionSerial);
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
