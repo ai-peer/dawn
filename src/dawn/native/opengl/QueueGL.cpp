@@ -14,6 +14,8 @@
 
 #include "dawn/native/opengl/QueueGL.h"
 
+#include <set>
+
 #include "dawn/native/opengl/BufferGL.h"
 #include "dawn/native/opengl/CommandBufferGL.h"
 #include "dawn/native/opengl/DeviceGL.h"
@@ -29,12 +31,28 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     Device* device = ToBackend(GetDevice());
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferGL::Execute");
+    std::set<const Buffer*> mappableBuffers;
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->Execute());
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            constexpr wgpu::BufferUsage kTransferBufferUsage =
+                wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+            if (buffer->GetUsage() & kTransferBufferUsage) {
+                mappableBuffers.insert(ToBackend(buffer));
+            }
+        }
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferGL::Execute");
 
     device->SubmitFenceSync();
+
+    // Set the last usage serial for mappable buffers, so MapAsync() can use this serial for the
+    // callback.
+    for (const Buffer* buffer : mappableBuffers) {
+        const_cast<Buffer*>(buffer)->SetLastUsageSerial(device->GetLastSubmittedCommandSerial());
+    }
+
     return {};
 }
 
