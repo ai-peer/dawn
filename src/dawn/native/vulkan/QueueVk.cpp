@@ -50,12 +50,21 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    std::set<const Buffer*> buffers;
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            buffers.insert(ToBackend(buffer));
+        }
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 
     DAWN_TRY(device->SubmitPendingCommands());
+
+    for (const Buffer* buffer : buffers) {
+        const_cast<Buffer*>(buffer)->SetLastUsageSerial(device->GetLastSubmittedCommandSerial());
+    }
 
     return {};
 }

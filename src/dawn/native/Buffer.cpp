@@ -596,6 +596,10 @@ void BufferBase::SetIsDataInitialized() {
     mIsDataInitialized = true;
 }
 
+void BufferBase::SetLastUsageSerial(ExecutionSerial serial) {
+    mLastUsageSerial = serial;
+}
+
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
     return offset == 0 && size == GetSize();
 }
