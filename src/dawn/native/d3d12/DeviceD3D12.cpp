@@ -329,6 +329,7 @@ MaybeError Device::ClearBufferToZero(CommandRecordingContext* commandContext,
         commandContext->GetCommandList()->CopyBufferRegion(
             dstBuffer->GetD3D12Resource(), offset, mZeroBuffer->GetD3D12Resource(), 0, copySize);
 
+        dstBuffer->SetLastUsageSerial(GetPendingCommandSerial());
         offset += copySize;
         size -= copySize;
     }
@@ -527,6 +528,8 @@ void Device::CopyFromStagingToBufferHelper(CommandRecordingContext* commandConte
     commandContext->GetCommandList()->CopyBufferRegion(dstBuffer->GetD3D12Resource(),
                                                        destinationOffset, srcBuffer->GetResource(),
                                                        sourceOffset, size);
+
+    destination->SetLastUsageSerial(GetPendingCommandSerial());
 }
 
 MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
