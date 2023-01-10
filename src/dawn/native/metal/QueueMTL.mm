@@ -14,6 +14,8 @@
 
 #include "dawn/native/metal/QueueMTL.h"
 
+#include <set>
+
 #include "dawn/common/Math.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandValidation.h"
@@ -37,13 +39,32 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
 
     CommandRecordingContext* commandContext = device->GetPendingCommandContext();
 
+    std::set<const Buffer*> mappableBuffers;
+
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferMTL::FillCommands");
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->FillCommands(commandContext));
+
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            constexpr wgpu::BufferUsage kTransferBufferUsage =
+                wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+            if (buffer->GetUsage() & kTransferBufferUsage) {
+                mappableBuffers.insert(ToBackend(buffer));
+            }
+        }
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferMTL::FillCommands");
 
-    return device->SubmitPendingCommandBuffer();
+    DAWN_TRY(device->SubmitPendingCommandBuffer());
+
+    // Set the last usage serial for mappable buffers, so MapAsync() can use this serial for the
+    // callback.
+    for (const Buffer* buffer : mappableBuffers) {
+        const_cast<Buffer*>(buffer)->SetLastUsageSerial(device->GetLastSubmittedCommandSerial());
+    }
+
+    return {};
 }
 
 }  // namespace dawn::native::metal
