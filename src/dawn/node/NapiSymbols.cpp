@@ -25,11 +25,11 @@
 #error "NapiSymbols.cpp is not used on Windows"
 #endif
 
-#define NAPI_SYMBOL(NAME)                                                              \
-    __attribute__((weak)) void NAME() {                                                \
-        UNREACHABLE(                                                                   \
-            "#NAME is a weak stub, and should have been runtime replaced by the node " \
-            "implementation");                                                         \
+#define NAPI_SYMBOL(NAME)                                                    \
+    __attribute__((weak)) void NAME() {                                      \
+        UNREACHABLE(#NAME                                                    \
+                    " is a weak stub, and should have been runtime replaced" \
+                    " by the node implementation");                          \
     }
 
 extern "C" {
