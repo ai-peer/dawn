@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "be46f2d0361ca49fdd291941923015b1c48c86ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c05f6161_4f4bfc21",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-10T18:07:52Z",
+      "side": 1,
+      "message": "LGTM, but you need to fix some unit tests",
+      "revId": "be46f2d0361ca49fdd291941923015b1c48c86ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
