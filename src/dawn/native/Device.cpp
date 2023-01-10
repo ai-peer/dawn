@@ -1931,6 +1931,7 @@ MaybeError DeviceBase::CopyFromStagingToBuffer(StagingBufferBase* source,
                                                uint64_t size) {
     DAWN_TRY(
         CopyFromStagingToBufferImpl(source, sourceOffset, destination, destinationOffset, size));
+    destination->SetLastUsageSerial(GetPendingCommandSerial());
     if (GetDynamicUploader()->ShouldFlush()) {
         ForceEventualFlushOfCommands();
     }
