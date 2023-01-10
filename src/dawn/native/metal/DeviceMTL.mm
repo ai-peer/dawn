@@ -490,6 +490,7 @@ MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
                  toBuffer:buffer
         destinationOffset:destinationOffset
                      size:size];
+    destination->SetLastUsageSerial(GetPendingCommandSerial());
     return {};
 }
 
