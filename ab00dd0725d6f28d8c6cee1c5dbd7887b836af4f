@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30868b67_b717f0e2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-10T12:08:46Z",
+      "side": 0,
+      "message": "where did these guys go?",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 205
+      },
+      "revId": "ab00dd0725d6f28d8c6cee1c5dbd7887b836af4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
