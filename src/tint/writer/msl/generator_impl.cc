@@ -2095,6 +2095,9 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
 }
 
 bool GeneratorImpl::EmitIdentifier(std::ostream& out, const ast::IdentifierExpression* expr) {
+    if (program_->Symbols().NameFor(expr->symbol) == "bug_1700") {
+        out << "-- this should not compile --";
+    }
     out << program_->Symbols().NameFor(expr->symbol);
     return true;
 }
