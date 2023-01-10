@@ -16,6 +16,24 @@
       "message": "This one seems to have lost the associated bug number?",
       "revId": "ef0c384dc5464c242e0214442a5564629e8d792a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa3a68a_0c559fc7",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-10T20:42:41Z",
+      "side": 1,
+      "message": "It\u0027s because they weren\u0027t moved out of the `# New failures. Please triage:` chunk. That chunk gets nuked and rebuilt from scratch. Moved them so it won\u0027t happen again.",
+      "parentUuid": "b80e2d94_89baec67",
+      "revId": "ef0c384dc5464c242e0214442a5564629e8d792a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
