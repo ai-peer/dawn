@@ -255,6 +255,7 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 1u, &barrier, 0, nullptr);
     }
+    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
 }
 
 bool Buffer::TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
