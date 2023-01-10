@@ -527,6 +527,7 @@ void Device::CopyFromStagingToBufferHelper(CommandRecordingContext* commandConte
     commandContext->GetCommandList()->CopyBufferRegion(dstBuffer->GetD3D12Resource(),
                                                        destinationOffset, srcBuffer->GetResource(),
                                                        sourceOffset, size);
+    destination->SetLastUsageSerial(GetPendingCommandSerial());
 }
 
 MaybeError Device::CopyFromStagingToTextureImpl(const StagingBufferBase* source,
