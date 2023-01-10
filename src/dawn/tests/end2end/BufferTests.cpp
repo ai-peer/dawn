@@ -541,6 +541,153 @@ DAWN_INSTANTIATE_TEST(BufferMappingTests,
                       OpenGLESBackend(),
                       VulkanBackend());
 
+class BufferMappingCallbackTests : public BufferMappingTests {
+  protected:
+    void SubmitEmptyCommandBuffer() {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    void SubmitCommandBuffer(wgpu::Buffer buffer) {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.ClearBuffer(buffer);
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    void Wait(std::vector<bool>& done) {
+        do {
+            device.Tick();
+        } while (std::any_of(done.begin(), done.end(), [](bool done) { return !done; }));
+    }
+};
+
+TEST_P(BufferMappingCallbackTests, EmptySubmissionAndThenMap) {
+    DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
+
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
+    buffer.Unmap();
+
+    std::vector<bool> done = {false, false};
+
+    // 1. submission without using buffer.
+    SubmitEmptyCommandBuffer();
+    queue.OnSubmittedWorkDone(
+        0,
+        [](WGPUQueueWorkDoneStatus status, void* userdata) {
+            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[0] = true;
+            // Step 2 callback should be called first, this is the second.
+            const std::vector<bool> kExpected = {true, true};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    // 2.
+    buffer.MapAsync(
+        wgpu::MapMode::Write, 0, 4,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[1] = true;
+            // The buffer is not used by step 1, so this callback is called first.
+            const std::vector<bool> kExpected = {false, true};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    Wait(done);
+}
+
+TEST_P(BufferMappingCallbackTests, UseTheBufferAndThenMap) {
+    DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
+
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
+    buffer.Unmap();
+
+    std::vector<bool> done = {false, false};
+
+    // 1. Submit a command buffer which uses the buffer
+    SubmitCommandBuffer(buffer);
+    queue.OnSubmittedWorkDone(
+        0,
+        [](WGPUQueueWorkDoneStatus status, void* userdata) {
+            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[0] = true;
+            // This callback should be called first
+            const std::vector<bool> kExpected = {true, false};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    // 2.
+    buffer.MapAsync(
+        wgpu::MapMode::Write, 0, 4,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[1] = true;
+            // The buffer is used by step 1, so this callback is called second.
+            const std::vector<bool> kExpected = {true, true};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    Wait(done);
+
+    buffer.Unmap();
+}
+
+TEST_P(BufferMappingCallbackTests, EmptySubmissionWriteAndThenMap) {
+    DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
+
+    wgpu::Buffer buffer = CreateMapReadBuffer(4);
+    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, wgpu::kWholeMapSize);
+    buffer.Unmap();
+
+    std::vector<bool> done = {false, false};
+
+    // 1. submission without using buffer.
+    SubmitEmptyCommandBuffer();
+    queue.OnSubmittedWorkDone(
+        0,
+        [](WGPUQueueWorkDoneStatus status, void* userdata) {
+            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[0] = true;
+            // Step 2 callback should be called first, this is the second.
+            const std::vector<bool> kExpected = {true, false};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    int32_t data = 0;
+    queue.WriteBuffer(buffer, 0, &data, sizeof(data));
+
+    // 2.
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, 4,
+        [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            auto& done = *static_cast<std::vector<bool>*>(userdata);
+            done[1] = true;
+            // The buffer is not used by step 1, so this callback is called first.
+            const std::vector<bool> kExpected = {true, true};
+            EXPECT_EQ(done, kExpected);
+        },
+        &done);
+
+    Wait(done);
+
+    buffer.Unmap();
+}
+
+// MapAsync() will record pipeline barrier in pending command buffer with Vulkan.
+// TODO(penghuang): enable this test for Vulkan.
+DAWN_INSTANTIATE_TEST(BufferMappingCallbackTests, D3D12Backend(), MetalBackend());
+
 class BufferMappedAtCreationTests : public DawnTest {
   protected:
     static void MapCallback(WGPUBufferMapAsyncStatus status, void* userdata) {
