@@ -71,6 +71,7 @@ class BufferBase : public ApiObjectBase {
     bool NeedsInitialization() const;
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
+    void SetLastUsageSerial(ExecutionSerial serial);
 
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
     void Unmap();
@@ -102,6 +103,8 @@ class BufferBase : public ApiObjectBase {
     MaybeError MapAtCreationInternal();
 
     uint64_t mAllocatedSize = 0;
+
+    ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
 
   private:
     virtual MaybeError MapAtCreationImpl() = 0;
