@@ -428,7 +428,7 @@ void RecordResolveQuerySetCmd(VkCommandBuffer commands,
                                            resolveQueryCount, destination->GetHandle(),
                                            resolveDestinationOffset, sizeof(uint64_t),
                                            VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
-
+        destination->SetLastUsageSerial(device->GetPendingCommandSerial());
         // Set current iterator to next false
         currentIt = nextFalseIt;
     }
@@ -499,7 +499,7 @@ MaybeError CommandBuffer::RecordCopyImageWithTemporaryBuffer(
     device->fn.CmdCopyBufferToImage(commands, tempBuffer->GetHandle(), dstImage,
                                     VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
                                     &tempBufferToDstRegion);
-
+    tempBuffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
     recordingContext->tempBuffers.emplace_back(tempBuffer);
 
     return {};
@@ -555,6 +555,10 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                 VkBuffer srcHandle = srcBuffer->GetHandle();
                 VkBuffer dstHandle = dstBuffer->GetHandle();
                 device->fn.CmdCopyBuffer(commands, srcHandle, dstHandle, 1, &region);
+
+                srcBuffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+                dstBuffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+
                 break;
             }
 
@@ -595,6 +599,9 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                 // copy command.
                 device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
                                                 VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
+
+                src.buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+
                 break;
             }
 
@@ -628,6 +635,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                 // The Dawn CopySrc usage is always mapped to GENERAL
                 device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
                                                 dstBuffer, 1, &region);
+                dst.buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 
@@ -723,6 +731,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                     dstBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
                     device->fn.CmdFillBuffer(recordingContext->commandBuffer,
                                              dstBuffer->GetHandle(), cmd->offset, cmd->size, 0u);
+                    dstBuffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 }
 
                 break;
@@ -773,6 +782,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                     device->fn.CmdFillBuffer(commands, destination->GetHandle(),
                                              cmd->destinationOffset,
                                              cmd->queryCount * sizeof(uint64_t), 0u);
+                    destination->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 }
 
                 destination->TransitionUsageNow(recordingContext, wgpu::BufferUsage::QueryResolve);
@@ -872,6 +882,7 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* recordingConte
                 device->fn.CmdCopyBuffer(commands,
                                          ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(),
                                          dstBuffer->GetHandle(), 1, &copy);
+                dstBuffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 
@@ -955,6 +966,8 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
 
                 device->fn.CmdDispatchIndirect(commands, indirectBuffer,
                                                static_cast<VkDeviceSize>(dispatch->indirectOffset));
+                dispatch->indirectBuffer->SetLastUsageSerial(
+                    GetDevice()->GetPendingCommandSerial());
                 currentDispatch++;
                 break;
             }
@@ -1152,6 +1165,7 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                 device->fn.CmdDrawIndirect(commands, buffer->GetHandle(),
                                            static_cast<VkDeviceSize>(draw->indirectOffset), 1, 0);
+                buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 
@@ -1164,6 +1178,7 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 device->fn.CmdDrawIndexedIndirect(commands, buffer->GetHandle(),
                                                   static_cast<VkDeviceSize>(draw->indirectOffset),
                                                   1, 0);
+                buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 
@@ -1236,6 +1251,7 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
 
                 device->fn.CmdBindIndexBuffer(commands, indexBuffer, cmd->offset,
                                               VulkanIndexType(cmd->format));
+                cmd->buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 
@@ -1261,6 +1277,7 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
 
                 device->fn.CmdBindVertexBuffers(commands, static_cast<uint8_t>(cmd->slot), 1,
                                                 &*buffer, &offset);
+                cmd->buffer->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
                 break;
             }
 

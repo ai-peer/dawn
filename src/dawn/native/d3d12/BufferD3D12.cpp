@@ -213,6 +213,7 @@ void Buffer::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
 
     if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, newUsage)) {
         commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     }
 }
 
@@ -478,6 +479,7 @@ MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext,
         UnmapImpl();
     } else if (clearValue == 0u) {
         DAWN_TRY(device->ClearBufferToZero(commandContext, this, offset, size));
+        mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     } else {
         // TODO(crbug.com/dawn/852): use ClearUnorderedAccessView*() when the buffer usage
         // includes STORAGE.
@@ -490,6 +492,7 @@ MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext,
 
         device->CopyFromStagingToBufferHelper(commandContext, uploadHandle.stagingBuffer,
                                               uploadHandle.startOffset, this, offset, size);
+        mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     }
 
     return {};

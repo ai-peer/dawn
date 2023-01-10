@@ -859,6 +859,7 @@ MaybeError Device::CopyFromStagingToBufferImpl(StagingBufferBase* source,
 
     this->fn.CmdCopyBuffer(recordingContext->commandBuffer, ToBackend(source)->GetBufferHandle(),
                            ToBackend(destination)->GetHandle(), 1, &copy);
+    destination->SetLastUsageSerial(GetPendingCommandSerial());
 
     return {};
 }

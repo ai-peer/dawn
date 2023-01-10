@@ -237,6 +237,7 @@ void Buffer::ClearBuffer(CommandRecordingContext* commandContext,
     [commandContext->EnsureBlit() fillBuffer:mMtlBuffer.Get()
                                        range:NSMakeRange(offset, size)
                                        value:clearValue];
+    mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
 }
 
 }  // namespace dawn::native::metal
