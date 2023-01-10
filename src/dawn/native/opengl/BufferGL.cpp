@@ -118,6 +118,7 @@ void Buffer::InitializeToZero() {
     const std::vector<uint8_t> clearValues(size, 0u);
     gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
     gl.BufferSubData(GL_ARRAY_BUFFER, 0, size, clearValues.data());
+    mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     device->IncrementLazyClearCountForTesting();
 
     SetIsDataInitialized();
