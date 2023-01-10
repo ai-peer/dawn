@@ -60,6 +60,7 @@ Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
 
 Buffer::Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear)
     : Buffer(device, descriptor) {
+    mLastUsageSerial = kMaxExecutionSerial;
     if (!shouldLazyClear) {
         SetIsDataInitialized();
     }

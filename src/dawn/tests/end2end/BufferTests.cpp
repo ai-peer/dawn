@@ -25,16 +25,24 @@ class BufferMappingTests : public DawnTest {
                          wgpu::MapMode mode,
                          size_t offset,
                          size_t size) {
-        bool done = false;
+        bool mapDone = false;
         buffer.MapAsync(
             mode, offset, size,
             [](WGPUBufferMapAsyncStatus status, void* userdata) {
                 ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
                 *static_cast<bool*>(userdata) = true;
             },
-            &done);
+            &mapDone);
+        bool submittedWorkDone = false;
+        queue.OnSubmittedWorkDone(
+            1,
+            [](WGPUQueueWorkDoneStatus status, void* userdata) {
+                ASSERT_EQ(WGPUQueueWorkDoneStatus_Success, status);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &submittedWorkDone);
 
-        while (!done) {
+        while (!(mapDone && submittedWorkDone)) {
             WaitABit();
         }
     }
