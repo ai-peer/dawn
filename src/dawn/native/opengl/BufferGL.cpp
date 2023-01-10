@@ -121,6 +121,7 @@ void Buffer::InitializeToZero() {
     device->IncrementLazyClearCountForTesting();
 
     SetIsDataInitialized();
+    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
 }
 
 bool Buffer::IsCPUWritableAtCreation() const {
