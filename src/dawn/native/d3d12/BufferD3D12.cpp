@@ -203,6 +203,8 @@ bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* commandCon
     Heap* heap = ToBackend(mResourceAllocation.GetResourceHeap());
     commandContext->TrackHeapUsage(heap, GetDevice()->GetPendingCommandSerial());
 
+    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+
     // Return the resource barrier.
     return TransitionUsageAndGetResourceBarrier(commandContext, barrier, newUsage);
 }
