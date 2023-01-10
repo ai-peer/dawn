@@ -213,6 +213,7 @@ void Buffer::TrackUsageAndTransitionNow(CommandRecordingContext* commandContext,
 
     if (TrackUsageAndGetResourceBarrier(commandContext, &barrier, newUsage)) {
         commandContext->GetCommandList()->ResourceBarrier(1, &barrier);
+        mLastUsageSerial = GetDevice()->GetPendingCommandSerial();
     }
 }
 
