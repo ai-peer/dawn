@@ -224,15 +224,25 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
                  uint64_t(GetDevice()->GetPendingCommandSerial()));
 }
 
-void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task) {
-    GetDevice()->ForceEventualFlushOfCommands();
-    // we can move the task to the callback task manager, as it's ready to be called if there are no
-    // scheduled commands.
-    if (!GetDevice()->HasScheduledCommands()) {
-        task->SetFinishedSerial(GetDevice()->GetCompletedCommandSerial());
+void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
+    // If the task depends on a serial which is not submitted yet, force a flush.
+    if (serial > GetDevice()->GetLastSubmittedCommandSerial()) {
+        GetDevice()->ForceEventualFlushOfCommands();
+    }
+
+    if (serial == kMaxExecutionSerial) {
+        serial = GetDevice()->GetScheduledWorkDoneSerial();
+    }
+
+    ASSERT(serial <= GetDevice()->GetScheduledWorkDoneSerial());
+
+    // If the serial indicated command has been completed, the task will be moved to callback task
+    // manager.
+    if (serial <= GetDevice()->GetCompletedCommandSerial()) {
+        task->SetFinishedSerial(serial);
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     } else {
-        mTasksInFlight.Enqueue(std::move(task), GetDevice()->GetScheduledWorkDoneSerial());
+        mTasksInFlight.Enqueue(std::move(task), serial);
     }
 }
 
@@ -302,8 +312,11 @@ MaybeError QueueBase::WriteBufferImpl(BufferBase* buffer,
 
     memcpy(uploadHandle.mappedBuffer, data, size);
 
-    return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
-                                           buffer, bufferOffset, size);
+    DAWN_TRY(device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                             buffer, bufferOffset, size));
+
+    buffer->SetLastUsageSerial(device->GetPendingCommandSerial());
+    return {};
 }
 
 void QueueBase::APIWriteTexture(const ImageCopyTexture* destination,
