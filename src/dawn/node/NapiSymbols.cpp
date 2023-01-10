@@ -28,7 +28,7 @@
 #define NAPI_SYMBOL(NAME)                                                              \
     __attribute__((weak)) void NAME() {                                                \
         UNREACHABLE(                                                                   \
-            "#NAME is a weak stub, and should have been runtime replaced by the node " \
+            #NAME " is a weak stub, and should have been runtime replaced by the node "\
             "implementation");                                                         \
     }
 
