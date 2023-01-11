@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9637813b_7fa5c5a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-11T18:39:35Z",
+      "side": 1,
+      "message": "It seems safer to have this 0-init thought, isn\u0027t it?",
+      "revId": "e997bfcf19298bbd840d110cf173503d100da5dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
