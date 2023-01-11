@@ -249,7 +249,8 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
     VkPipelineStageFlags srcStages = 0;
     VkPipelineStageFlags dstStages = 0;
 
-    if (TrackUsageAndGetResourceBarrier(usage, &barrier, &srcStages, &dstStages)) {
+    if (TrackUsageAndGetResourceBarrier(recordingContext, usage, &barrier, &srcStages,
+                                        &dstStages)) {
         ASSERT(srcStages != 0 && dstStages != 0);
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
@@ -257,11 +258,17 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
     }
 }
 
-bool Buffer::TrackUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
+bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* recordingContext,
+                                             wgpu::BufferUsage usage,
                                              VkBufferMemoryBarrier* barrier,
                                              VkPipelineStageFlags* srcStages,
                                              VkPipelineStageFlags* dstStages) {
-    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+    SetLastUsageSerial();
+
+    bool isMappable = GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite);
+    if (isMappable && usage != wgpu::BufferUsage::MapRead && usage != wgpu::BufferUsage::MapWrite) {
+        recordingContext->mappableBuffersForEagerTransition.insert(this);
+    }
 
     bool lastIncludesTarget = IsSubset(usage, mLastUsage);
     constexpr wgpu::BufferUsage kReuseNoBarrierBufferUsages =

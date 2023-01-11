@@ -36,7 +36,8 @@ class Buffer final : public BufferBase {
     // `commands`.
     // TODO(crbug.com/dawn/851): coalesce barriers and do them early when possible.
     void TransitionUsageNow(CommandRecordingContext* recordingContext, wgpu::BufferUsage usage);
-    bool TrackUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
+    bool TrackUsageAndGetResourceBarrier(CommandRecordingContext* recordingContext,
+                                         wgpu::BufferUsage usage,
                                          VkBufferMemoryBarrier* barrier,
                                          VkPipelineStageFlags* srcStages,
                                          VkPipelineStageFlags* dstStages);
