@@ -318,6 +318,12 @@ MaybeError Device::SubmitPendingCommands() {
         return {};
     }
 
+    for (auto* buffer : mRecordingContext.mappableBuffersForEagerTransition) {
+        buffer->TransitionUsageNow(
+            &mRecordingContext,
+            buffer->GetUsage() & (wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite));
+    }
+
     ScopedSignalSemaphore scopedSignalSemaphore(this, VK_NULL_HANDLE);
     if (mRecordingContext.externalTexturesForEagerTransition.size() > 0) {
         // Create an external semaphore for all external textures that have been used in the pending

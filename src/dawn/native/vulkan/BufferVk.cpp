@@ -251,6 +251,17 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
 
     if (TrackUsageAndGetResourceBarrier(usage, &barrier, &srcStages, &dstStages)) {
         ASSERT(srcStages != 0 && dstStages != 0);
+        SetLastUsageSerial();
+        constexpr wgpu::BufferUsage kMapUsages =
+            wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+        // For mappable buffers, if the requested usage is not MapRead or MapWrite, add them into
+        // mappableBuffersForEagerTransition, so those buffers will be transitioned back to MapRead
+        // or MapWrite when pending commands are submitted.
+        bool isMappable = (GetUsage() & kMapUsages) != 0;
+        if (isMappable && (usage & kMapUsages) == 0) {
+            recordingContext->mappableBuffersForEagerTransition.insert(this);
+        }
+
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
                                     nullptr, 1u, &barrier, 0, nullptr);
@@ -261,8 +272,6 @@ bool Buffer::TrackUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
                                              VkBufferMemoryBarrier* barrier,
                                              VkPipelineStageFlags* srcStages,
                                              VkPipelineStageFlags* dstStages) {
-    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
-
     bool lastIncludesTarget = IsSubset(usage, mLastUsage);
     constexpr wgpu::BufferUsage kReuseNoBarrierBufferUsages =
         kReadOnlyBufferUsages | wgpu::BufferUsage::MapWrite;

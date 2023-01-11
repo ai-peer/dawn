@@ -169,6 +169,7 @@ void TransitionAndClearForSyncScope(Device* device,
         VkBufferMemoryBarrier bufferBarrier;
         if (buffer->TrackUsageAndGetResourceBarrier(scope.bufferUsages[i], &bufferBarrier,
                                                     &srcStages, &dstStages)) {
+            buffer->SetLastUsageSerial();
             bufferBarriers.push_back(bufferBarrier);
         }
     }
