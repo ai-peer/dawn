@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "732b7457_30d78ebe",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-01-11T18:43:37Z",
+      "side": 1,
+      "message": "This is surprising. std::array is an aggregate type, so it should not value-initialize implicitly. Are you seeing the value-initialization only on MSVC?\n\nFYI: https://stackoverflow.com/a/31181936",
+      "range": {
+        "startLine": 594,
+        "startChar": 8,
+        "endLine": 594,
+        "endChar": 30
+      },
+      "revId": "71f23ea4f038492d649548487356e4bf41c6db8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
