@@ -33,6 +33,7 @@
 #include "dawn/native/metal/UtilsMetal.h"
 
 #include <tint/tint.h>
+#include <cassert>
 
 namespace dawn::native::metal {
 
@@ -929,6 +930,18 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                             break;
                         }
                         case wgpu::TextureDimension::e3D: {
+                            const Format textureFormat = texture->GetFormat();
+                            if (textureFormat.format == wgpu::TextureFormat::R8Unorm) {
+                                const TexelBlockInfo& blockInfo =
+                                    textureFormat.GetAspectInfo(src.aspect).block;
+                                uint32_t maxTextureDimension = 2048u;
+                                uint32_t bytesPerPixel = blockInfo.byteSize;
+                                uint32_t maxBytesPerRow = maxTextureDimension * bytesPerPixel;
+
+                                ASSERT(maxBytesPerRow == 2048u);
+                                ASSERT(copyInfo.bytesPerRow <= maxBytesPerRow);
+                            }
+
                             [commandContext->EnsureBlit()
                                          copyFromTexture:texture->GetMTLTexture()
                                              sourceSlice:0
