@@ -384,7 +384,7 @@ ID3D12CommandSignature* PipelineLayout::GetDispatchIndirectCommandSignatureWithN
     argumentDescs[1].Type = D3D12_INDIRECT_ARGUMENT_TYPE_DISPATCH;
 
     D3D12_COMMAND_SIGNATURE_DESC programDesc = {};
-    programDesc.ByteStride = 6 * sizeof(uint32_t);
+    programDesc.ByteStride = kDispatchIndirectSize;
     programDesc.NumArgumentDescs = 2;
     programDesc.pArgumentDescs = argumentDescs;
 
