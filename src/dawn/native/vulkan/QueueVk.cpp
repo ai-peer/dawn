@@ -46,14 +46,40 @@ void Queue::Initialize() {
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     Device* device = ToBackend(GetDevice());
 
+<<<<<<< PATCH SET (3763aa Append pipeline barrier for mappable buffers for submissions)
+    DAWN_TRY(device->Tick());
+    constexpr wgpu::BufferUsage kTransferBufferUsage =
+        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+
+=======
+>>>>>>> BASE      (25f59a Add the last usage serial in Buffer)
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
+<<<<<<< PATCH SET (3763aa Append pipeline barrier for mappable buffers for submissions)
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            if (buffer->GetUsage() & kTransferBufferUsage) {
+                mappableBuffers.insert(ToBackend(buffer));
+            }
+        }
+=======
+>>>>>>> BASE      (25f59a Add the last usage serial in Buffer)
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 
+<<<<<<< PATCH SET (3763aa Append pipeline barrier for mappable buffers for submissions)
+    for (const Buffer* buffer : mappableBuffers) {
+        // Prepare transfer buffers for the next MapAsync() call here, so MapAsync() call doesn't
+        // need an extra queue submission.
+        const_cast<Buffer*>(buffer)->TransitionUsageNow(recordingContext,
+                                                        buffer->GetUsage() & kTransferBufferUsage);
+        const_cast<Buffer*>(buffer)->SetLastUsageSerial(device->GetPendingCommandSerial());
+    }
+=======
     DAWN_TRY(device->SubmitPendingCommands());
+>>>>>>> BASE      (25f59a Add the last usage serial in Buffer)
 
     // Call Tick() to get a chance to resolve callbacks.
     DAWN_TRY(device->Tick());
