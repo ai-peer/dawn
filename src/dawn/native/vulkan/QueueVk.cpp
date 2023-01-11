@@ -14,6 +14,8 @@
 
 #include "dawn/native/vulkan/QueueVk.h"
 
+#include <vector>
+
 #include "dawn/common/Math.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandValidation.h"
@@ -46,13 +48,31 @@ void Queue::Initialize() {
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     Device* device = ToBackend(GetDevice());
 
+    constexpr wgpu::BufferUsage kMapUsages =
+        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+
+    std::vector<Buffer*> mappableBuffers;
+
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
     for (uint32_t i = 0; i < commandCount; ++i) {
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
+        const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
+
+        for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
+            if (buffer->GetUsage() & kMapUsages) {
+                mappableBuffers.push_back(const_cast<Buffer*>(ToBackend(buffer)));
+            }
+        }
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 
+    for (Buffer* buffer : mappableBuffers) {
+        // Prepare transfer buffers for the next MapAsync() call here, so MapAsync() call doesn't
+        // need an extra queue submission.
+        buffer->TransitionUsageNow(recordingContext, buffer->GetUsage() & kMapUsages);
+        buffer->SetLastUsageSerial(device->GetPendingCommandSerial());
+    }
     DAWN_TRY(device->SubmitPendingCommands());
 
     // Call Tick() to get a chance to resolve callbacks.
