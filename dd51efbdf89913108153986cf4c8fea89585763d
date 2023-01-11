@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2f2783c_db9c3407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-11T04:43:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6755965a_6cb485f2",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-11T04:43:25Z",
+      "side": 1,
+      "message": "I think we could also add a test where the map state does from Unmapped -\u003e Pending, then we Destroy() the buffer before getting the callback - and should then see that the state is Unmapped.",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17d3a1cc_9e102e0c",
@@ -14,6 +48,24 @@
       "writtenOn": "2023-01-11T02:14:47Z",
       "side": 1,
       "message": "Another workaround would be call Unmap()?\n\nAny historical reasons why we don\u0027t call Unmap() from Destroy() in Wire?",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88c705f5_c6114ff2",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-11T04:43:25Z",
+      "side": 1,
+      "message": "It looks like Unmap() does a bunch of other stuff like serialize any written data and send it to the server. We don\u0027t need to do that if the buffer is being destroyed.",
+      "parentUuid": "17d3a1cc_9e102e0c",
       "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
