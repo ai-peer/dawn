@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "971fd09d17d92bb1e366f39385e7f2633582154e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e012ea7_de69804b",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1480,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-11T19:52:09Z",
+      "side": 1,
+      "message": "unit. so*",
+      "range": {
+        "startLine": 1480,
+        "startChar": 53,
+        "endLine": 1480,
+        "endChar": 55
+      },
+      "revId": "971fd09d17d92bb1e366f39385e7f2633582154e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
