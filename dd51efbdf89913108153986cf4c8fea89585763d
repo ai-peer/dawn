@@ -104,6 +104,24 @@
       "parentUuid": "88c705f5_c6114ff2",
       "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c62faa5_20a97d9a",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-11T09:02:23Z",
+      "side": 1,
+      "message": "Yes dawn_native is on the server side (though technically you could chain multiple dawn wires and it should work). The fix looks good.",
+      "parentUuid": "a988fda5_dfb7b4b3",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
