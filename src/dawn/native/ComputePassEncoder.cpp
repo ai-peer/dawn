@@ -49,7 +49,6 @@ ResultOrError<ComputePipelineBase*> GetOrCreateIndirectDispatchValidationPipelin
                     maxComputeWorkgroupsPerDimension: u32,
                     clientOffsetInU32: u32,
                     enableValidation: u32,
-                    duplicateNumWorkgroups: u32,
                 }
 
                 struct IndirectParams {
@@ -57,7 +56,7 @@ ResultOrError<ComputePipelineBase*> GetOrCreateIndirectDispatchValidationPipelin
                 }
 
                 struct ValidatedParams {
-                    data: array<u32>
+                    data: array<u32, 3>
                 }
 
                 @group(0) @binding(0) var<uniform> uniformParams: UniformParams;
@@ -66,17 +65,13 @@ ResultOrError<ComputePipelineBase*> GetOrCreateIndirectDispatchValidationPipelin
 
                 @compute @workgroup_size(1, 1, 1)
                 fn main() {
-                    for (var i = 0u; i < 3u; i = i + 1u) {
+                    for (var i = 0u; i < 3u; i++) {
                         var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];
                         if (uniformParams.enableValidation > 0u &&
                             numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
                             numWorkgroups = 0u;
                         }
                         validatedParams.data[i] = numWorkgroups;
-
-                        if (uniformParams.duplicateNumWorkgroups > 0u) {
-                             validatedParams.data[i + 3u] = numWorkgroups;
-                        }
                     }
                 }
             )"));
@@ -262,14 +257,12 @@ ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuff
     const uint64_t clientIndirectBindingSize =
         kDispatchIndirectSize + clientOffsetFromAlignedBoundary;
 
-    // Neither 'enableValidation' nor 'duplicateNumWorkgroups' can be declared as 'bool' as
-    // currently in WGSL type 'bool' cannot be used in address space 'uniform' as 'it is
-    // non-host-shareable'.
+    // 'enableValidation' can not be declared as 'bool' as 'bool' cannot be used in address space
+    // 'uniform' as 'it is non-host-shareable'.
     struct UniformParams {
         uint32_t maxComputeWorkgroupsPerDimension;
         uint32_t clientOffsetInU32;
         uint32_t enableValidation;
-        uint32_t duplicateNumWorkgroups;
     };
 
     // Create a uniform buffer to hold parameters for the shader.
@@ -280,7 +273,6 @@ ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuff
             device->GetLimits().v1.maxComputeWorkgroupsPerDimension;
         params.clientOffsetInU32 = clientOffsetFromAlignedBoundary / sizeof(uint32_t);
         params.enableValidation = static_cast<uint32_t>(IsValidationEnabled());
-        params.duplicateNumWorkgroups = static_cast<uint32_t>(shouldDuplicateNumWorkgroups);
 
         DAWN_TRY_ASSIGN(uniformBuffer,
                         utils::CreateBufferFromData(device, wgpu::BufferUsage::Uniform, {params}));
@@ -288,9 +280,7 @@ ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuff
 
     // Reserve space in the scratch buffer to hold the validated indirect params.
     ScratchBuffer& scratchBuffer = store->scratchIndirectStorage;
-    const uint64_t scratchBufferSize =
-        shouldDuplicateNumWorkgroups ? 2 * kDispatchIndirectSize : kDispatchIndirectSize;
-    DAWN_TRY(scratchBuffer.EnsureCapacity(scratchBufferSize));
+    DAWN_TRY(scratchBuffer.EnsureCapacity(kDispatchIndirectSize));
     Ref<BufferBase> validatedIndirectBuffer = scratchBuffer.GetBuffer();
 
     Ref<BindGroupBase> validationBindGroup;
@@ -301,7 +291,7 @@ ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuff
                                              {0, uniformBuffer},
                                              {1, indirectBuffer, clientIndirectBindingOffset,
                                               clientIndirectBindingSize},
-                                             {2, validatedIndirectBuffer, 0, scratchBufferSize},
+                                             {2, validatedIndirectBuffer, 0, kDispatchIndirectSize},
                                          },
                                          UsageValidationMode::Internal));
 
