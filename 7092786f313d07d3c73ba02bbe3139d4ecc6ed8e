@@ -33,6 +33,23 @@
       "message": "🟦 note: longest test took 5.3169505s (average 4.9075505s)",
       "revId": "7092786f313d07d3c73ba02bbe3139d4ecc6ed8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "913ddfce_500210e0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-11T16:16:29Z",
+      "side": 0,
+      "message": "w00t",
+      "revId": "7092786f313d07d3c73ba02bbe3139d4ecc6ed8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
