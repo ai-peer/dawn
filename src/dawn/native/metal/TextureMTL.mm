@@ -1011,6 +1011,10 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                            destinationLevel:level
                           destinationOrigin:MTLOriginMake(0, 0, 0)
                                     options:blitOption];
+
+                    if (aspect == Aspect::Stencil) {
+                        commandContext->DidBlitBufferToStencil();
+                    }
                 }
             }
         }

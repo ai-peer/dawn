@@ -47,6 +47,8 @@ class CommandRecordingContext : NonMovable {
     id<MTLBlitCommandEncoder> BeginBlit(MTLBlitPassDescriptor* descriptor)
         API_AVAILABLE(macos(11.0), ios(14.0));
     id<MTLBlitCommandEncoder> EnsureBlit();
+    void DidBlitBufferToStencil();
+    bool HasBlitBufferToStencil() const;
     void EndBlit();
 
     // Create a sequential compute pass by default.
@@ -68,6 +70,7 @@ class CommandRecordingContext : NonMovable {
     bool mInEncoder = false;
     bool mNeedsSubmit = false;
     bool mUsed = false;
+    bool mHasBlitBufferToStencil = false;
 };
 
 }  // namespace dawn::native::metal

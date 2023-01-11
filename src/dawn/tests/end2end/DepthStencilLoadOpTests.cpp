@@ -232,7 +232,8 @@ auto GenerateParam() {
 
     auto params2 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
         {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
-         OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+         MetalBackend({"metal_idle_between_copy_to_stencil_and_pass"}), OpenGLBackend(),
+         OpenGLESBackend(), VulkanBackend()},
         {wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureFormat::Depth32FloatStencil8},
         {Check::CopyStencil, Check::StencilTest, Check::DepthTest, Check::SampleDepth});
 
@@ -287,6 +288,9 @@ DAWN_INSTANTIATE_TEST_P(StencilClearValueOverflowTest,
                         {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}),
                          MetalBackend(),
                          MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8"}),
+                         MetalBackend({"metal_idle_between_copy_to_stencil_and_pass"}),
+                         MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8",
+                                       "metal_idle_between_copy_to_stencil_and_pass"}),
                          OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
                         {wgpu::TextureFormat::Depth24PlusStencil8,
                          wgpu::TextureFormat::Depth32FloatStencil8, wgpu::TextureFormat::Stencil8},

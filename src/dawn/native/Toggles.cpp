@@ -331,6 +331,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Use a combined depth stencil format instead of stencil8. The stencil8 format alone does not "
       "work correctly.",
       "https://crbug.com/dawn/1389"}},
+    {Toggle::MetalIdleBetweenCopyToStencilAndPass,
+     {"metal_idle_between_copy_to_stencil_and_pass",
+      "Wait for idle between copy to stencil and pass. This works around an issue "
+      "stencil writes via copy don't become visible to a subsequent pass.",
+      "https://crbug.com/dawn/1389"}},
     {Toggle::DisallowDeprecatedAPIs,
      {"disallow_deprecated_apis",
       "Disallow all deprecated paths by changing the deprecation warnings to validation error for "

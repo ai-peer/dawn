@@ -68,6 +68,7 @@ NSPRef<id<MTLCommandBuffer>> CommandRecordingContext::AcquireCommands() {
     ASSERT(!mInEncoder);
     mNeedsSubmit = false;
     mUsed = false;
+    mHasBlitBufferToStencil = false;
     return std::move(mCommands);
 }
 
@@ -99,6 +100,16 @@ id<MTLBlitCommandEncoder> CommandRecordingContext::EnsureBlit() {
     return mBlit.Get();
 }
 
+void CommandRecordingContext::DidBlitBufferToStencil() {
+    ASSERT(mCommands != nullptr);
+    ASSERT(mBlit != nullptr);
+    mHasBlitBufferToStencil = true;
+}
+
+bool CommandRecordingContext::HasBlitBufferToStencil() const {
+    return mHasBlitBufferToStencil;
+}
+
 void CommandRecordingContext::EndBlit() {
     ASSERT(mCommands != nullptr);
 
@@ -123,7 +134,6 @@ id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute() {
 
 id<MTLComputeCommandEncoder> CommandRecordingContext::BeginCompute(
     MTLComputePassDescriptor* descriptor) API_AVAILABLE(macos(11.0), ios(14.0)) {
-    ASSERT(descriptor);
     ASSERT(mCommands != nullptr);
     ASSERT(mCompute == nullptr);
     ASSERT(!mInEncoder);

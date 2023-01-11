@@ -922,8 +922,9 @@ TEST_P(StencilSamplingTest, SampleStencilOnly) {
 }
 
 DAWN_INSTANTIATE_TEST_P(DepthStencilSamplingTest,
-                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
-                         VulkanBackend()},
+                        {D3D12Backend(), MetalBackend(),
+                         MetalBackend({"metal_idle_between_copy_to_stencil_and_pass"}),
+                         OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
                         std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
                                                          utils::kDepthAndStencilFormats.end()));
 
@@ -936,6 +937,9 @@ DAWN_INSTANTIATE_TEST_P(DepthSamplingTest,
 DAWN_INSTANTIATE_TEST_P(StencilSamplingTest,
                         {D3D12Backend(), MetalBackend(),
                          MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8"}),
+                         MetalBackend({"metal_idle_between_copy_to_stencil_and_pass"}),
+                         MetalBackend({"metal_use_combined_depth_stencil_format_for_stencil8",
+                                       "metal_idle_between_copy_to_stencil_and_pass"}),
                          OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
                         std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(),
                                                          utils::kStencilFormats.end()));

@@ -642,6 +642,16 @@ class VertexBufferTracker {
     StorageBufferLengthTracker* mLengthTracker;
 };
 
+MaybeError SplitCommandContextAndWaitForIdle(id<MTLCommandQueue> queue,
+                                             CommandRecordingContext* commandContext) {
+    {
+        auto commands = commandContext->AcquireCommands();
+        [*commands commit];
+        [*commands waitUntilCompleted];
+    }
+    return commandContext->PrepareNextCommandBuffer(queue);
+}
+
 }  // anonymous namespace
 
 void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
@@ -719,6 +729,10 @@ void RecordCopyBufferToTexture(CommandRecordingContext* commandContext,
             }
         }
     }
+
+    if (aspect == Aspect::Stencil) {
+        commandContext->DidBlitBufferToStencil();
+    }
 }
 
 // static
@@ -733,6 +747,8 @@ CommandBuffer::CommandBuffer(CommandEncoder* enc, const CommandBufferDescriptor*
 CommandBuffer::~CommandBuffer() = default;
 
 MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) {
+    Device* device = ToBackend(GetDevice());
+
     size_t nextComputePassNumber = 0;
     size_t nextRenderPassNumber = 0;
 
@@ -772,6 +788,12 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 }
                 commandContext->EndBlit();
 
+                if (device->IsToggleEnabled(Toggle::MetalIdleBetweenCopyToStencilAndPass) &&
+                    commandContext->HasBlitBufferToStencil()) {
+                    DAWN_TRY(
+                        SplitCommandContextAndWaitForIdle(device->GetMTLQueue(), commandContext));
+                }
+
                 DAWN_TRY(EncodeComputePass(commandContext, cmd));
 
                 nextComputePassNumber++;
@@ -798,6 +820,12 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
                 LazyClearSyncScope(GetResourceUsages().renderPasses[nextRenderPassNumber],
                                    commandContext);
                 commandContext->EndBlit();
+
+                if (device->IsToggleEnabled(Toggle::MetalIdleBetweenCopyToStencilAndPass) &&
+                    commandContext->HasBlitBufferToStencil()) {
+                    DAWN_TRY(
+                        SplitCommandContextAndWaitForIdle(device->GetMTLQueue(), commandContext));
+                }
 
                 LazyClearRenderPassAttachments(cmd);
                 NSRef<MTLRenderPassDescriptor> descriptor = CreateMTLRenderPassDescriptor(
