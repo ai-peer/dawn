@@ -26,6 +26,14 @@ class VideoViewsValidation : public ValidationTest {
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DawnMultiPlanarFormats};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
+        // Disable DisallowUnsafeApis toggle to test the experimental DawnMultiPlanarFormats
+        // feature.
+        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
+        descriptor.nextInChain = &togglesDesc;
+        const char* toggle = "disallow_unsafe_apis";
+        togglesDesc.forceDisabledToggles = &toggle;
+        togglesDesc.forceDisabledTogglesCount = 1;
+
         return dawnAdapter.CreateDevice(&descriptor);
     }
 
