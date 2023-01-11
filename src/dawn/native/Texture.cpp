@@ -380,11 +380,16 @@ MaybeError ValidateTextureDescriptor(const DeviceBase* device,
 
     // TODO(crbug.com/dawn/838): Implement a workaround for this issue.
     // Readbacks from the non-zero mip of a stencil texture may contain garbage data.
-    DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) && format->HasStencil() &&
-                        descriptor->mipLevelCount > 1 &&
-                        device->GetAdapter()->GetBackendType() == wgpu::BackendType::Metal,
-                    "https://crbug.com/dawn/838: Stencil textures with more than one mip level are "
-                    "disabled on Metal.");
+    const AdapterBase* adapter = device->GetAdapter();
+    DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) &&
+                        format->HasDepthOrStencil() && descriptor->mipLevelCount > 1 &&
+                        adapter->GetBackendType() == wgpu::BackendType::Metal &&
+                        (gpu_info::IsIntelGen7(adapter->GetVendorId(), adapter->GetDeviceId()) ||
+                         gpu_info::IsIntelGen8(adapter->GetVendorId(), adapter->GetDeviceId())),
+                    "Depth stencil textures with more than one mip level are "
+                    "disabled on Metal Intel < Gen9. See https://crbug.com/dawn/838, "
+                    "https://crbug.com/dawn/704, and https://crbug.com/dawn/791. Disable Toggle "
+                    "disallow_unsafe_apis to bypass this restriction.");
 
     return {};
 }
