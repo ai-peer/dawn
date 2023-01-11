@@ -1485,10 +1485,22 @@ TEST_P(DeprecationTests, RenderPipelineColorAttachmentBytesPerSample) {
 class DepthClipControlValidationTest : public RenderPipelineValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        // Disabled disallowing unsafe APIs so we can test DepthClipControl feature.
+        const char* forceDisabledToggle[] = {"disallow_unsafe_apis"};
+
         wgpu::DeviceDescriptor descriptor;
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DepthClipControl};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
+
+        wgpu::DawnTogglesDeviceDescriptor togglesDesc;
+        descriptor.nextInChain = &togglesDesc;
+
+        togglesDesc.forceEnabledToggles = nullptr;
+        togglesDesc.forceEnabledTogglesCount = 0;
+        togglesDesc.forceDisabledToggles = forceDisabledToggle;
+        togglesDesc.forceDisabledTogglesCount = 1;
+
         return dawnAdapter.CreateDevice(&descriptor);
     }
 };
