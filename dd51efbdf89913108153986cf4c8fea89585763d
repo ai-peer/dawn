@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "676601e6_eb4fd676",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-11T07:19:45Z",
+      "side": 1,
+      "message": "That sounds good to me, updated. Thanks for the idea for improving the testing coverage.",
+      "parentUuid": "6755965a_6cb485f2",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17d3a1cc_9e102e0c",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 2
