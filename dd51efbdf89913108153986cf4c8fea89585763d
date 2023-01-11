@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d3a1cc_9e102e0c",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-11T02:14:47Z",
+      "side": 1,
+      "message": "Another workaround would be call Unmap()?\n\nAny historical reasons why we don\u0027t call Unmap() from Destroy() in Wire?",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
