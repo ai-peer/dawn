@@ -168,7 +168,7 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
                     UNREACHABLE();
                 }
             } else {
-                mBackendValidationLevel = dawn::native::BackendValidationLevel::Partial;
+                mBackendValidationLevel = dawn::native::BackendValidationLevel::Full;
             }
             continue;
         }
