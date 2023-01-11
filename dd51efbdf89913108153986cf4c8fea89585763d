@@ -68,6 +68,24 @@
       "parentUuid": "17d3a1cc_9e102e0c",
       "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a988fda5_dfb7b4b3",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-11T06:34:03Z",
+      "side": 1,
+      "message": "OK, and I speculate Dawn native runs on (or as?) the server? If it\u0027s currect, Dawn native internally calls Unmap() in Destroy() so I don\u0027t think Destroy() Dawn Wire Client should internally call Unmap() that sends unmap command to the server. Then the current code in this CL sounds ok to me.",
+      "parentUuid": "88c705f5_c6114ff2",
+      "revId": "dd51efbdf89913108153986cf4c8fea89585763d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
