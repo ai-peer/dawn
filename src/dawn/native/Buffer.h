@@ -72,6 +72,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void SetLastUsageSerial(ExecutionSerial serial);
+    ExecutionSerial GetLastUsageSerial() const;
 
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
     void Unmap();

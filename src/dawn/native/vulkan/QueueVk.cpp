@@ -50,6 +50,8 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     Device* device = ToBackend(GetDevice());
 
     DAWN_TRY(device->Tick());
+    constexpr wgpu::BufferUsage kTransferBufferUsage =
+        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
@@ -58,8 +60,6 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
         DAWN_TRY(ToBackend(commands[i])->RecordCommands(recordingContext));
         const CommandBufferResourceUsage& resourceUsages = commands[i]->GetResourceUsages();
         for (const BufferBase* buffer : resourceUsages.topLevelBuffers) {
-            constexpr wgpu::BufferUsage kTransferBufferUsage =
-                wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
             if (buffer->GetUsage() & kTransferBufferUsage) {
                 mappableBuffers.insert(ToBackend(buffer));
             }
@@ -67,10 +67,14 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 
-    // Set the last usage serial for mappable buffers, so MapAsync() can use this serial for the
-    // callback.
     for (const Buffer* buffer : mappableBuffers) {
-        const_cast<Buffer*>(buffer)->SetLastUsageSerial(device->GetPendingCommandSerial());
+        // Prepare transfer buffers for the next MapAsync() call here, so MapAsync() call doesn't
+        // need an extra queue submission.
+        const_cast<Buffer*>(buffer)->TransitionUsageNow(recordingContext,
+                                                        buffer->GetUsage() & kTransferBufferUsage);
+        // TransitionUsageNow() should update the last usage serial.
+        ASSERT(buffer->GetLastUsageSerial() == device->GetPendingCommandSerial());
+
     }
 
     return device->SubmitPendingCommands();
