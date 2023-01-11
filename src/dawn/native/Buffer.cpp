@@ -600,6 +600,10 @@ void BufferBase::SetLastUsageSerial(ExecutionSerial serial) {
     mLastUsageSerial = serial;
 }
 
+ExecutionSerial BufferBase::GetLastUsageSerial() const {
+    return mLastUsageSerial;
+}
+
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
     return offset == 0 && size == GetSize();
 }
