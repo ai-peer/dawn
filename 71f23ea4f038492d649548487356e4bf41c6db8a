@@ -22,6 +22,30 @@
       },
       "revId": "71f23ea4f038492d649548487356e4bf41c6db8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad671df_35e9444b",
+        "filename": "src/tint/utils/vector.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-11T18:53:57Z",
+      "side": 1,
+      "message": "Clang. Disassembly emits a big fat memset(0)",
+      "parentUuid": "732b7457_30d78ebe",
+      "range": {
+        "startLine": 594,
+        "startChar": 8,
+        "endLine": 594,
+        "endChar": 30
+      },
+      "revId": "71f23ea4f038492d649548487356e4bf41c6db8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -16,6 +16,24 @@
       "message": "It seems safer to have this 0-init thought, isn\u0027t it?",
       "revId": "e997bfcf19298bbd840d110cf173503d100da5dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "945b6de5_aeda38d6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-11T18:53:57Z",
+      "side": 1,
+      "message": "No, it should have no observable behaviour. We inplace new the object when you grow the vector. Constructors must make no assumptions about the memory it is constructing into.",
+      "parentUuid": "9637813b_7fa5c5a4",
+      "revId": "e997bfcf19298bbd840d110cf173503d100da5dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
