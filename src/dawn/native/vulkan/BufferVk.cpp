@@ -18,6 +18,7 @@
 #include <cstring>
 #include <limits>
 #include <utility>
+#include <vector>
 
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/vulkan/DeviceVk.h"
@@ -30,6 +31,8 @@
 namespace dawn::native::vulkan {
 
 namespace {
+
+constexpr wgpu::BufferUsage kMapUsages = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
 
 VkBufferUsageFlags VulkanBufferUsage(wgpu::BufferUsage usage) {
     VkBufferUsageFlags flags = 0;
@@ -249,7 +252,8 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
     VkPipelineStageFlags srcStages = 0;
     VkPipelineStageFlags dstStages = 0;
 
-    if (TrackUsageAndGetResourceBarrier(usage, &barrier, &srcStages, &dstStages)) {
+    if (TrackUsageAndGetResourceBarrier(recordingContext, usage, &barrier, &srcStages,
+                                        &dstStages)) {
         ASSERT(srcStages != 0 && dstStages != 0);
         ToBackend(GetDevice())
             ->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
@@ -257,18 +261,41 @@ void Buffer::TransitionUsageNow(CommandRecordingContext* recordingContext,
     }
 }
 
-bool Buffer::TrackUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
+bool Buffer::TrackUsageAndGetResourceBarrier(CommandRecordingContext* recordingContext,
+                                             wgpu::BufferUsage usage,
                                              VkBufferMemoryBarrier* barrier,
                                              VkPipelineStageFlags* srcStages,
                                              VkPipelineStageFlags* dstStages) {
-    SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+    if (usage & kMapUsages) {
+        // The pipeline barrier isn't needed, the buffer can be mapped immediately.
+        if (mLastUsage == usage) {
+            return false;
+        }
+        // Special-case for the initial transition: the pipeline barrier isn't needed.
+        if (mLastUsage == wgpu::BufferUsage::None) {
+            mLastUsage = usage;
+            return false;
+        }
+        // For other cases, a pipeline barrier is needed, so mark the buffer is used within the
+        // pending commands.
+        MarkUsedInPendingCommands();
+    } else {
+        // Request non CPU usage, so assume the buffer will be used in pending commands.
+        MarkUsedInPendingCommands();
+
+        // If the buffer is mappable and the requested usage is not map usage, we need add it into
+        // mappableBuffersForEagerTransition, so the buffer can be transitioned backed to map
+        // usages at end of the submit.
+        if (GetUsage() & kMapUsages) {
+            recordingContext->mappableBuffersForEagerTransition.insert(this);
+        }
+    }
 
     bool lastIncludesTarget = IsSubset(usage, mLastUsage);
-    constexpr wgpu::BufferUsage kReuseNoBarrierBufferUsages =
-        kReadOnlyBufferUsages | wgpu::BufferUsage::MapWrite;
-    bool lastCanBeReusedWithoutBarrier = IsSubset(mLastUsage, kReuseNoBarrierBufferUsages);
+    bool lastReadOnly = IsSubset(mLastUsage, kReadOnlyBufferUsages);
 
-    if (lastIncludesTarget && lastCanBeReusedWithoutBarrier) {
+    // // We can skip transitions to already current read-only usages.
+    if (lastIncludesTarget && lastReadOnly) {
         return false;
     }
 
@@ -382,6 +409,38 @@ bool Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* recordi
 
     InitializeToZero(recordingContext);
     return true;
+}
+
+// static
+void Buffer::TransitionMappableBuffersEagerly(Device* device, const std::set<Buffer*>& buffers) {
+    ASSERT(!buffers.empty());
+
+    VkPipelineStageFlags srcStages = 0;
+    VkPipelineStageFlags dstStages = 0;
+
+    std::vector<VkBufferMemoryBarrier> barriers;
+    barriers.reserve(buffers.size());
+
+    for (Buffer* buffer : buffers) {
+        wgpu::BufferUsage mapUsage = buffer->GetUsage() & kMapUsages;
+        ASSERT(mapUsage == wgpu::BufferUsage::MapRead || mapUsage == wgpu::BufferUsage::MapWrite);
+        VkBufferMemoryBarrier barrier;
+        // TrackUsageAndGetResourceBarrier() should not modify recordingContext, so pass nullptr
+        // here.
+        if (buffer->TrackUsageAndGetResourceBarrier(/*recordingContext=*/nullptr, mapUsage,
+                                                    &barrier, &srcStages, &dstStages)) {
+            barriers.push_back(barrier);
+        }
+    }
+
+    if (barriers.empty()) {
+        return;
+    }
+
+    ASSERT(srcStages != 0 && dstStages != 0);
+    CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+    device->fn.CmdPipelineBarrier(recordingContext->commandBuffer, srcStages, dstStages, 0, 0,
+                                  nullptr, barriers.size(), barriers.data(), 0, nullptr);
 }
 
 void Buffer::SetLabelImpl() {
