@@ -73,7 +73,7 @@ class BufferBase : public ApiObjectBase {
     bool NeedsInitialization() const;
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
-    void SetLastUsageSerial(ExecutionSerial serial);
+    void SetLastUsageSerial();
 
     virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
