@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13f6a738_c9413afd",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-12T12:36:26Z",
+      "side": 1,
+      "message": "What do you think of going as is for now (if the current code looks ok)? And what do you think of that we will think of making another CL for introducing a new mechanism to ensure the map async callback is called at last later?  (And separate CLs would be easier to revert if we need to do later.)\n\nMy impression is, the map async callback flow isn\u0027t so complex yet and am not really sure if we need to introduce such a new mechanism right now. I have overlooked [2] but it has been caught in the review. It may be manually maintainable right now.\n\nPlease note that it isn\u0027t my strong opinion so I don\u0027t block to introduce a new mechanism.",
+      "parentUuid": "2e8f1b11_85a4093f",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cadfce5e_9002e9bf",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
