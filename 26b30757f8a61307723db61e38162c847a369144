@@ -69,6 +69,24 @@
       "parentUuid": "bf817335_7fccee22",
       "revId": "26b30757f8a61307723db61e38162c847a369144",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068fb27e_f00d182c",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4187,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-12T21:02:13Z",
+      "side": 1,
+      "message": "Move it fully into the else?\n\n```\n} else {\n  if (TINT_UNLIKEY(!pipeline_stage_uses.count(...))) {\n     TINT_ICE(..);\n  }\n  post +\u003d \" : SV_Target ...\"\n}\n```\n\n(I reversed the condition and made it an unlikely as it seemed let it read easier)\n\nMakes it a bit more obvious that the unlikely is part of the last clause instead of just a random hint on one of the items?",
+      "parentUuid": "9694fcb1_37405804",
+      "revId": "26b30757f8a61307723db61e38162c847a369144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
