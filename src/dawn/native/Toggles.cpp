@@ -326,6 +326,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "resources. This toggle is enabled by default on D3D12 backends using Intel Gen9.5 and Gen11 "
       "GPUs due to a driver issue on Intel D3D12 driver.",
       "https://crbug.com/1237175"}},
+    {Toggle::MetalUseTempTextureInStencilTextureToBufferCopy,
+     {"metal_use_temp_texture_in_stencil_texture_to_buffer_copy",
+      "Use an intermediate temporary texture when copying the stencil aspect of a texture to a "
+      "buffer. Works around an issue where stencil writes from a render pass are not reflected in "
+      "the destination buffer.",
+      ""}},
     {Toggle::DisallowDeprecatedAPIs,
      {"disallow_deprecated_apis",
       "Disallow all deprecated paths by changing the deprecation warnings to validation error for "
