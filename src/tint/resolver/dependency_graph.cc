@@ -23,7 +23,6 @@
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/atomic.h"
 #include "src/tint/ast/block_statement.h"
-#include "src/tint/ast/bool.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/call_statement.h"
@@ -33,10 +32,7 @@
 #include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/external_texture.h"
-#include "src/tint/ast/f16.h"
-#include "src/tint/ast/f32.h"
 #include "src/tint/ast/for_loop_statement.h"
-#include "src/tint/ast/i32.h"
 #include "src/tint/ast/id_attribute.h"
 #include "src/tint/ast/if_statement.h"
 #include "src/tint/ast/increment_decrement_statement.h"
@@ -60,7 +56,6 @@
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/traverse_expressions.h"
 #include "src/tint/ast/type_name.h"
-#include "src/tint/ast/u32.h"
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/vector.h"
 #include "src/tint/ast/void.h"
@@ -398,8 +393,7 @@ class DependencyScanner {
                 TraverseType(tex->type);
             },
             [&](Default) {
-                if (!ty->IsAnyOf<ast::Void, ast::Bool, ast::I32, ast::U32, ast::F16, ast::F32,
-                                 ast::DepthTexture, ast::DepthMultisampledTexture,
+                if (!ty->IsAnyOf<ast::Void, ast::DepthTexture, ast::DepthMultisampledTexture,
                                  ast::StorageTexture, ast::ExternalTexture, ast::Sampler>()) {
                     UnhandledNode(diagnostics_, ty);
                 }
