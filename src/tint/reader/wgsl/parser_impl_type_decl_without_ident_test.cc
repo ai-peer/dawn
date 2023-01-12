@@ -43,56 +43,46 @@ TEST_F(ParserImplTest, TypeDeclWithoutIdent_Identifier) {
 TEST_F(ParserImplTest, TypeDeclWithoutIdent_Bool) {
     auto p = parser("bool");
     auto t = p->type_specifier_without_ident();
-    EXPECT_TRUE(t.matched);
+    EXPECT_FALSE(t.matched);
     EXPECT_FALSE(t.errored);
-    ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(t.value->As<ast::TypeName>()->name->symbol), "bool");
-    EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 5u}}));
+    ASSERT_EQ(t.value, nullptr);
+    EXPECT_FALSE(p->has_error()) << p->error();
 }
 
 TEST_F(ParserImplTest, TypeDeclWithoutIdent_F16) {
     auto p = parser("f16");
     auto t = p->type_specifier_without_ident();
-    EXPECT_TRUE(t.matched);
+    EXPECT_FALSE(t.matched);
     EXPECT_FALSE(t.errored);
-    ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(t.value->As<ast::TypeName>()->name->symbol), "f16");
-    EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
+    ASSERT_EQ(t.value, nullptr);
+    EXPECT_FALSE(p->has_error()) << p->error();
 }
 
 TEST_F(ParserImplTest, TypeDeclWithoutIdent_F32) {
     auto p = parser("f32");
     auto t = p->type_specifier_without_ident();
-    EXPECT_TRUE(t.matched);
+    EXPECT_FALSE(t.matched);
     EXPECT_FALSE(t.errored);
-    ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(t.value->As<ast::TypeName>()->name->symbol), "f32");
-    EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
+    ASSERT_EQ(t.value, nullptr);
+    EXPECT_FALSE(p->has_error()) << p->error();
 }
 
 TEST_F(ParserImplTest, TypeDeclWithoutIdent_I32) {
     auto p = parser("i32");
     auto t = p->type_specifier_without_ident();
-    EXPECT_TRUE(t.matched);
+    EXPECT_FALSE(t.matched);
     EXPECT_FALSE(t.errored);
-    ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(t.value->As<ast::TypeName>()->name->symbol), "i32");
-    EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
+    ASSERT_EQ(t.value, nullptr);
+    EXPECT_FALSE(p->has_error()) << p->error();
 }
 
 TEST_F(ParserImplTest, TypeDeclWithoutIdent_U32) {
     auto p = parser("u32");
     auto t = p->type_specifier_without_ident();
-    EXPECT_TRUE(t.matched);
+    EXPECT_FALSE(t.matched);
     EXPECT_FALSE(t.errored);
-    ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(t.value->As<ast::TypeName>()->name->symbol), "u32");
-    EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
+    ASSERT_EQ(t.value, nullptr);
+    EXPECT_FALSE(p->has_error()) << p->error();
 }
 
 struct VecData {

@@ -116,7 +116,7 @@ TEST_F(ParserImplTest, PrimaryExpression_TypeDecl_InvalidValue) {
     EXPECT_TRUE(e.errored);
     EXPECT_EQ(e.value, nullptr);
     ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:5: expected ')' for type initializer");
+    EXPECT_EQ(p->error(), "1:5: expected ')' for function call");
 }
 
 TEST_F(ParserImplTest, PrimaryExpression_TypeDecl_StructInitializer_Empty) {
@@ -238,9 +238,8 @@ TEST_F(ParserImplTest, PrimaryExpression_Cast) {
     ASSERT_TRUE(e->Is<ast::CallExpression>());
     auto* call = e->As<ast::CallExpression>();
 
-    auto* type_name = As<ast::TypeName>(call->target.type);
-    ASSERT_NE(type_name, nullptr);
-    EXPECT_EQ(p->builder().Symbols().NameFor(type_name->name->symbol), "f32");
+    ASSERT_NE(call->target.name, nullptr);
+    EXPECT_EQ(p->builder().Symbols().NameFor(call->target.name->symbol), "f32");
 
     ASSERT_EQ(call->args.Length(), 1u);
     ASSERT_TRUE(call->args[0]->Is<ast::IntLiteralExpression>());

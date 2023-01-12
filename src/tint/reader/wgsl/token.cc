@@ -145,8 +145,6 @@ std::string_view Token::TypeToName(Type type) {
             return "atomic";
         case Token::Type::kBitcast:
             return "bitcast";
-        case Token::Type::kBool:
-            return "bool";
         case Token::Type::kBreak:
             return "break";
         case Token::Type::kCase:
@@ -169,10 +167,6 @@ std::string_view Token::TypeToName(Type type) {
             return "else";
         case Token::Type::kEnable:
             return "enable";
-        case Token::Type::kF16:
-            return "f16";
-        case Token::Type::kF32:
-            return "f32";
         case Token::Type::kFallthrough:
             return "fallthrough";
         case Token::Type::kFalse:
@@ -181,8 +175,6 @@ std::string_view Token::TypeToName(Type type) {
             return "fn";
         case Token::Type::kFor:
             return "for";
-        case Token::Type::kI32:
-            return "i32";
         case Token::Type::kIf:
             return "if";
         case Token::Type::kLet:
@@ -261,8 +253,6 @@ std::string_view Token::TypeToName(Type type) {
             return "true";
         case Token::Type::kType:
             return "type";
-        case Token::Type::kU32:
-            return "u32";
         case Token::Type::kVar:
             return "var";
         case Token::Type::kVec2:

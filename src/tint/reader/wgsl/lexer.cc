@@ -1127,9 +1127,6 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     if (str == "bitcast") {
         return {Token::Type::kBitcast, source, "bitcast"};
     }
-    if (str == "bool") {
-        return {Token::Type::kBool, source, "bool"};
-    }
     if (str == "break") {
         return {Token::Type::kBreak, source, "break"};
     }
@@ -1163,12 +1160,6 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     if (str == "enable") {
         return {Token::Type::kEnable, source, "enable"};
     }
-    if (str == "f16") {
-        return {Token::Type::kF16, source, "f16"};
-    }
-    if (str == "f32") {
-        return {Token::Type::kF32, source, "f32"};
-    }
     if (str == "fallthrough") {
         return {Token::Type::kFallthrough, source, "fallthrough"};
     }
@@ -1180,9 +1171,6 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     }
     if (str == "for") {
         return {Token::Type::kFor, source, "for"};
-    }
-    if (str == "i32") {
-        return {Token::Type::kI32, source, "i32"};
     }
     if (str == "if") {
         return {Token::Type::kIf, source, "if"};
@@ -1300,9 +1288,6 @@ Token Lexer::check_keyword(const Source& source, std::string_view str) {
     }
     if (str == "type") {
         return {Token::Type::kType, source, "type"};
-    }
-    if (str == "u32") {
-        return {Token::Type::kU32, source, "u32"};
     }
     if (str == "var") {
         return {Token::Type::kVar, source, "var"};
