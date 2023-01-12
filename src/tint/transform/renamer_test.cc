@@ -1501,6 +1501,21 @@ INSTANTIATE_TEST_SUITE_P(
         kUnicodeIdentifier));
 
 const char* ExpandShortName(std::string_view name) {
+    if (name == "bool") {
+        return "bool";
+    }
+    if (name == "f16") {
+        return "f16";
+    }
+    if (name == "f32") {
+        return "f32";
+    }
+    if (name == "i32") {
+        return "i32";
+    }
+    if (name == "u32") {
+        return "u32";
+    }
     if (name == "mat2x2f") {
         return "mat2x2<f32>";
     }
@@ -1595,16 +1610,18 @@ const char* ExpandShortName(std::string_view name) {
     return "<invalid>";
 }
 
+std::string ExpandTemplates(std::string_view name, std::string_view source) {
+    auto out = utils::ReplaceAll(std::string(source), "$name", name);
+    out = utils::ReplaceAll(out, "$type", ExpandShortName(name));
+    out =
+        utils::ReplaceAll(out, "$unaliased_type", std::string_view(name) == "i32" ? "u32" : "i32");
+    return out;
+}
+
 using RenamerTypeShortNamesTest = TransformTestWithParam<const char*>;
 
 TEST_P(RenamerTypeShortNamesTest, PreserveTypeUsage) {
-    auto expand = [&](const char* source) {
-        auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandShortName(GetParam()));
-        return out;
-    };
-
-    auto src = expand(R"(
+    auto src = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 fn x(v : $name) -> $name {
@@ -1619,7 +1636,7 @@ struct y {
 }
 )");
 
-    auto expect = expand(R"(
+    auto expect = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 fn tint_symbol(tint_symbol_1 : $name) -> $name {
@@ -1638,14 +1655,9 @@ struct tint_symbol_5 {
 
     EXPECT_EQ(expect, str(got));
 }
-TEST_P(RenamerTypeShortNamesTest, PreserveTypeInitializer) {
-    auto expand = [&](const char* source) {
-        auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandShortName(GetParam()));
-        return out;
-    };
 
-    auto src = expand(R"(
+TEST_P(RenamerTypeShortNamesTest, PreserveTypeInitializer) {
+    auto src = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 @fragment
@@ -1654,7 +1666,7 @@ fn f() {
 }
 )");
 
-    auto expect = expand(R"(
+    auto expect = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 @fragment
@@ -1669,13 +1681,7 @@ fn tint_symbol() {
 }
 
 TEST_P(RenamerTypeShortNamesTest, PreserveTypeConversion) {
-    auto expand = [&](const char* source) {
-        auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandShortName(GetParam()));
-        return out;
-    };
-
-    auto src = expand(R"(
+    auto src = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 @fragment
@@ -1684,7 +1690,7 @@ fn f() {
 }
 )");
 
-    auto expect = expand(R"(
+    auto expect = ExpandTemplates(GetParam(), R"(
 enable f16;
 
 @fragment
@@ -1699,27 +1705,21 @@ fn tint_symbol() {
 }
 
 TEST_P(RenamerTypeShortNamesTest, RenameShadowedByAlias) {
-    auto expand = [&](const char* source) {
-        auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandShortName(GetParam()));
-        return out;
-    };
-
-    auto src = expand(R"(
-type $name = i32;
+    auto src = ExpandTemplates(GetParam(), R"(
+type $name = $unaliased_type;
 
 @fragment
 fn f() {
-  var v : i32 = $name();
+  var v : $unaliased_type = $name();
 }
 )");
 
-    auto expect = expand(R"(
-alias tint_symbol = i32;
+    auto expect = ExpandTemplates(GetParam(), R"(
+alias tint_symbol = $unaliased_type;
 
 @fragment
 fn tint_symbol_1() {
-  var tint_symbol_2 : i32 = tint_symbol();
+  var tint_symbol_2 : $unaliased_type = tint_symbol();
 }
 )");
 
@@ -1729,15 +1729,9 @@ fn tint_symbol_1() {
 }
 
 TEST_P(RenamerTypeShortNamesTest, RenameShadowedByStruct) {
-    auto expand = [&](const char* source) {
-        auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandShortName(GetParam()));
-        return out;
-    };
-
-    auto src = expand(R"(
+    auto src = ExpandTemplates(GetParam(), R"(
 struct $name {
-  i : i32,
+  i : $unaliased_type,
 }
 
 @fragment
@@ -1747,9 +1741,9 @@ fn f() {
 }
 )");
 
-    auto expect = expand(R"(
+    auto expect = ExpandTemplates(GetParam(), R"(
 struct tint_symbol {
-  tint_symbol_1 : i32,
+  tint_symbol_1 : $unaliased_type,
 }
 
 @fragment
