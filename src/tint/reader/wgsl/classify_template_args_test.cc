@@ -234,7 +234,7 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                  {
                                      T::kVec3,               // vec3
                                      T::kTemplateArgsLeft,   // <
-                                     T::kI32,                // i32
+                                     T::kIdentifier,         // i32
                                      T::kTemplateArgsRight,  // >
                                      T::kEOF,
                                  },
@@ -244,7 +244,7 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                  {
                                      T::kVec3,               // vec3
                                      T::kTemplateArgsLeft,   // <
-                                     T::kI32,                // i32
+                                     T::kIdentifier,         // i32
                                      T::kTemplateArgsRight,  // >
                                      T::kParenLeft,          // (
                                      T::kParenRight,         // )
@@ -258,7 +258,7 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                      T::kTemplateArgsLeft,   // <
                                      T::kVec3,               // vec3
                                      T::kTemplateArgsLeft,   // <
-                                     T::kI32,                // i32
+                                     T::kIdentifier,         // i32
                                      T::kTemplateArgsRight,  // >
                                      T::kComma,              // ,
                                      T::kIntLiteral,         // 5

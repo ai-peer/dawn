@@ -425,18 +425,11 @@ Maybe<Void> ParserImpl::enable_directive() {
         }
 
         auto extension = ast::Extension::kUndefined;
-        if (t.Is(Token::Type::kF16)) {
-            // `f16` is a valid extension name and also a keyword
-            synchronized_ = true;
-            next();
-            extension = ast::Extension::kF16;
-        } else {
-            auto ext = expect_enum("extension", ast::ParseExtension, ast::kExtensionStrings);
-            if (ext.errored) {
-                return Failure::kErrored;
-            }
-            extension = ext.value;
+        auto ext = expect_enum("extension", ast::ParseExtension, ast::kExtensionStrings);
+        if (ext.errored) {
+            return Failure::kErrored;
         }
+        extension = ext.value;
 
         if (!expect("enable directive", Token::Type::kSemicolon)) {
             return Failure::kErrored;
@@ -1130,12 +1123,7 @@ Maybe<ParserImpl::MatrixDimensions> ParserImpl::mat_prefix() {
 }
 
 // type_specifier_without_ident:
-//   : BOOL
-//   | F16
-//   | F32
-//   | I32
-//   | U32
-//   | ARRAY LESS_THAN type_specifier ( COMMA element_count_expression )? GREATER_THAN
+//   : ARRAY LESS_THAN type_specifier ( COMMA element_count_expression )? GREATER_THAN
 //   | ATOMIC LESS_THAN type_specifier GREATER_THAN
 //   | PTR LESS_THAN address_space COMMA type_specifier ( COMMA access_mode )? GREATER_THAN
 //   | mat_prefix LESS_THAN type_specifier GREATER_THAN
@@ -1143,26 +1131,6 @@ Maybe<ParserImpl::MatrixDimensions> ParserImpl::mat_prefix() {
 //   | texture_and_sampler_types
 Maybe<const ast::Type*> ParserImpl::type_specifier_without_ident() {
     auto& t = peek();
-
-    if (match(Token::Type::kBool)) {
-        return builder_.ty.bool_(t.source());
-    }
-
-    if (match(Token::Type::kF16)) {
-        return builder_.ty.f16(t.source());
-    }
-
-    if (match(Token::Type::kF32)) {
-        return builder_.ty.f32(t.source());
-    }
-
-    if (match(Token::Type::kI32)) {
-        return builder_.ty.i32(t.source());
-    }
-
-    if (match(Token::Type::kU32)) {
-        return builder_.ty.u32(t.source());
-    }
 
     if (t.Is(Token::Type::kArray) &&
         (peek_is(Token::Type::kTemplateArgsLeft, 1) || peek_is(Token::Type::kLessThan, 1))) {
