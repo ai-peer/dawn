@@ -14,9 +14,6 @@
 
 #include "src/tint/ast/storage_texture.h"
 
-#include "src/tint/ast/f32.h"
-#include "src/tint/ast/i32.h"
-#include "src/tint/ast/u32.h"
 #include "src/tint/program_builder.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::StorageTexture);
@@ -49,14 +46,14 @@ const StorageTexture* StorageTexture::Clone(CloneContext* ctx) const {
     return ctx->dst->create<StorageTexture>(src, dim, format, ty, access);
 }
 
-Type* StorageTexture::SubtypeFor(TexelFormat format, ProgramBuilder& builder) {
+const Type* StorageTexture::SubtypeFor(TexelFormat format, ProgramBuilder& builder) {
     switch (format) {
         case TexelFormat::kR32Uint:
         case TexelFormat::kRgba8Uint:
         case TexelFormat::kRg32Uint:
         case TexelFormat::kRgba16Uint:
         case TexelFormat::kRgba32Uint: {
-            return builder.create<U32>();
+            return builder.ty.u32();
         }
 
         case TexelFormat::kR32Sint:
@@ -64,7 +61,7 @@ Type* StorageTexture::SubtypeFor(TexelFormat format, ProgramBuilder& builder) {
         case TexelFormat::kRg32Sint:
         case TexelFormat::kRgba16Sint:
         case TexelFormat::kRgba32Sint: {
-            return builder.create<I32>();
+            return builder.ty.i32();
         }
 
         case TexelFormat::kRgba8Unorm:
@@ -73,7 +70,7 @@ Type* StorageTexture::SubtypeFor(TexelFormat format, ProgramBuilder& builder) {
         case TexelFormat::kRg32Float:
         case TexelFormat::kRgba16Float:
         case TexelFormat::kRgba32Float: {
-            return builder.create<F32>();
+            return builder.ty.f32();
         }
 
         case TexelFormat::kUndefined:

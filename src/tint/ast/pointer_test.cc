@@ -14,7 +14,6 @@
 
 #include "src/tint/ast/pointer.h"
 
-#include "src/tint/ast/i32.h"
 #include "src/tint/ast/test_helper.h"
 
 namespace tint::ast {
@@ -23,22 +22,20 @@ namespace {
 using AstPointerTest = TestHelper;
 
 TEST_F(AstPointerTest, Creation) {
-    auto* i32 = create<I32>();
-    auto* p = create<Pointer>(i32, ast::AddressSpace::kStorage, Access::kRead);
-    EXPECT_EQ(p->type, i32);
+    auto* p = create<Pointer>(ty.i32(), ast::AddressSpace::kStorage, Access::kRead);
+    ASSERT_TRUE(p->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(p->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(p->address_space, ast::AddressSpace::kStorage);
     EXPECT_EQ(p->access, Access::kRead);
 }
 
 TEST_F(AstPointerTest, FriendlyName) {
-    auto* i32 = create<I32>();
-    auto* p = create<Pointer>(i32, ast::AddressSpace::kWorkgroup, Access::kUndefined);
+    auto* p = create<Pointer>(ty.i32(), ast::AddressSpace::kWorkgroup, Access::kUndefined);
     EXPECT_EQ(p->FriendlyName(Symbols()), "ptr<workgroup, i32>");
 }
 
 TEST_F(AstPointerTest, FriendlyNameWithAccess) {
-    auto* i32 = create<I32>();
-    auto* p = create<Pointer>(i32, ast::AddressSpace::kStorage, Access::kReadWrite);
+    auto* p = create<Pointer>(ty.i32(), ast::AddressSpace::kStorage, Access::kReadWrite);
     EXPECT_EQ(p->FriendlyName(Symbols()), "ptr<storage, i32, read_write>");
 }
 
