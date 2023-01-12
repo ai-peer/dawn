@@ -304,7 +304,7 @@ bool GeneratorImpl::Generate() {
                 bool is_block = ast::HasAttribute<transform::AddBlockAttribute::BlockAttribute>(
                     str->attributes);
                 if (!has_rt_arr && !is_block) {
-                    if (!EmitStructType(current_buffer_, sem)) {
+                    if (TINT_UNLIKELY(!EmitStructType(current_buffer_, sem))) {
                         return false;
                     }
                 }
@@ -372,12 +372,12 @@ bool GeneratorImpl::RecordExtension(const ast::Enable* ext) {
 }
 
 bool GeneratorImpl::EmitIndexAccessor(std::ostream& out, const ast::IndexAccessorExpression* expr) {
-    if (!EmitExpression(out, expr->object)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->object))) {
         return false;
     }
     out << "[";
 
-    if (!EmitExpression(out, expr->index)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->index))) {
         return false;
     }
     out << "]";
@@ -412,12 +412,13 @@ bool GeneratorImpl::EmitBitcast(std::ostream& out, const ast::BitcastExpression*
                dst_type->is_float_scalar_or_vector()) {
         out << "uintBitsToFloat";
     } else {
-        if (!EmitType(out, dst_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+        if (TINT_UNLIKELY(
+                !EmitType(out, dst_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
             return false;
         }
     }
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->expr)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->expr))) {
         return false;
     }
     return true;
@@ -425,11 +426,11 @@ bool GeneratorImpl::EmitBitcast(std::ostream& out, const ast::BitcastExpression*
 
 bool GeneratorImpl::EmitAssign(const ast::AssignmentStatement* stmt) {
     auto out = line();
-    if (!EmitExpression(out, stmt->lhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, stmt->lhs))) {
         return false;
     }
     out << " = ";
-    if (!EmitExpression(out, stmt->rhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, stmt->rhs))) {
         return false;
     }
     out << ";";
@@ -460,11 +461,11 @@ bool GeneratorImpl::EmitVectorRelational(std::ostream& out, const ast::BinaryExp
             break;
     }
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->lhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->lhs))) {
         return false;
     }
     out << ", ";
-    if (!EmitExpression(out, expr->rhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->rhs))) {
         return false;
     }
     return true;
@@ -475,18 +476,20 @@ bool GeneratorImpl::EmitBitwiseBoolOp(std::ostream& out, const ast::BinaryExpres
     auto* uint_type = BoolTypeToUint(bool_type);
 
     // Cast result to bool scalar or vector type.
-    if (!EmitType(out, bool_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+    if (TINT_UNLIKELY(
+            !EmitType(out, bool_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
         return false;
     }
     ScopedParen outerCastParen(out);
     // Cast LHS to uint scalar or vector type.
-    if (!EmitType(out, uint_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+    if (TINT_UNLIKELY(
+            !EmitType(out, uint_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
         return false;
     }
     {
         ScopedParen innerCastParen(out);
         // Emit LHS.
-        if (!EmitExpression(out, expr->lhs)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr->lhs))) {
             return false;
         }
     }
@@ -500,13 +503,14 @@ bool GeneratorImpl::EmitBitwiseBoolOp(std::ostream& out, const ast::BinaryExpres
         return false;
     }
     // Cast RHS to uint scalar or vector type.
-    if (!EmitType(out, uint_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+    if (TINT_UNLIKELY(
+            !EmitType(out, uint_type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
         return false;
     }
     {
         ScopedParen innerCastParen(out);
         // Emit RHS.
-        if (!EmitExpression(out, expr->rhs)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr->rhs))) {
             return false;
         }
     }
@@ -518,43 +522,43 @@ bool GeneratorImpl::EmitFloatModulo(std::ostream& out, const ast::BinaryExpressi
     auto* ret_ty = TypeOf(expr)->UnwrapRef();
     auto* lhs_ty = TypeOf(expr->lhs)->UnwrapRef();
     auto* rhs_ty = TypeOf(expr->rhs)->UnwrapRef();
-    fn = utils::GetOrCreate(float_modulo_funcs_, BinaryOperandType{{lhs_ty, rhs_ty}},
-                            [&]() -> std::string {
-                                TextBuffer b;
-                                TINT_DEFER(helpers_.Append(b));
+    fn = utils::GetOrCreate(
+        float_modulo_funcs_, BinaryOperandType{{lhs_ty, rhs_ty}}, [&]() -> std::string {
+            TextBuffer b;
+            TINT_DEFER(helpers_.Append(b));
 
-                                auto fn_name = UniqueIdentifier("tint_float_modulo");
-                                std::vector<std::string> parameter_names;
-                                {
-                                    auto decl = line(&b);
-                                    if (!EmitTypeAndName(decl, ret_ty, ast::AddressSpace::kNone,
-                                                         ast::Access::kUndefined, fn_name)) {
-                                        return "";
-                                    }
-                                    {
-                                        ScopedParen sp(decl);
-                                        const auto* ty = TypeOf(expr->lhs)->UnwrapRef();
-                                        if (!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
-                                                             ast::Access::kUndefined, "lhs")) {
-                                            return "";
-                                        }
-                                        decl << ", ";
-                                        ty = TypeOf(expr->rhs)->UnwrapRef();
-                                        if (!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
-                                                             ast::Access::kUndefined, "rhs")) {
-                                            return "";
-                                        }
-                                    }
-                                    decl << " {";
-                                }
-                                {
-                                    ScopedIndent si(&b);
-                                    line(&b) << "return (lhs - rhs * trunc(lhs / rhs));";
-                                }
-                                line(&b) << "}";
-                                line(&b);
-                                return fn_name;
-                            });
+            auto fn_name = UniqueIdentifier("tint_float_modulo");
+            std::vector<std::string> parameter_names;
+            {
+                auto decl = line(&b);
+                if (TINT_UNLIKELY(!EmitTypeAndName(decl, ret_ty, ast::AddressSpace::kNone,
+                                                   ast::Access::kUndefined, fn_name))) {
+                    return "";
+                }
+                {
+                    ScopedParen sp(decl);
+                    const auto* ty = TypeOf(expr->lhs)->UnwrapRef();
+                    if (TINT_UNLIKELY(!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
+                                                       ast::Access::kUndefined, "lhs"))) {
+                        return "";
+                    }
+                    decl << ", ";
+                    ty = TypeOf(expr->rhs)->UnwrapRef();
+                    if (TINT_UNLIKELY(!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
+                                                       ast::Access::kUndefined, "rhs"))) {
+                        return "";
+                    }
+                }
+                decl << " {";
+            }
+            {
+                ScopedIndent si(&b);
+                line(&b) << "return (lhs - rhs * trunc(lhs / rhs));";
+            }
+            line(&b) << "}";
+            line(&b);
+            return fn_name;
+        });
 
     if (fn.empty()) {
         return false;
@@ -564,11 +568,11 @@ bool GeneratorImpl::EmitFloatModulo(std::ostream& out, const ast::BinaryExpressi
     out << fn;
     {
         ScopedParen sp(out);
-        if (!EmitExpression(out, expr->lhs)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr->lhs))) {
             return false;
         }
         out << ", ";
-        if (!EmitExpression(out, expr->rhs)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr->rhs))) {
             return false;
         }
     }
@@ -585,7 +589,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
         {
             auto pre = line();
             pre << "bool " << name << " = ";
-            if (!EmitExpression(pre, expr->lhs)) {
+            if (TINT_UNLIKELY(!EmitExpression(pre, expr->lhs))) {
                 return false;
             }
             pre << ";";
@@ -601,7 +605,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
             ScopedIndent si(this);
             auto pre = line();
             pre << name << " = ";
-            if (!EmitExpression(pre, expr->rhs)) {
+            if (TINT_UNLIKELY(!EmitExpression(pre, expr->rhs))) {
                 return false;
             }
             pre << ";";
@@ -624,7 +628,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
     }
 
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->lhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->lhs))) {
         return false;
     }
     out << " ";
@@ -695,7 +699,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
     }
     out << " ";
 
-    if (!EmitExpression(out, expr->rhs)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->rhs))) {
         return false;
     }
 
@@ -704,7 +708,7 @@ bool GeneratorImpl::EmitBinary(std::ostream& out, const ast::BinaryExpression* e
 
 bool GeneratorImpl::EmitStatements(utils::VectorRef<const ast::Statement*> stmts) {
     for (auto* s : stmts) {
-        if (!EmitStatement(s)) {
+        if (TINT_UNLIKELY(!EmitStatement(s))) {
             return false;
         }
     }
@@ -718,7 +722,7 @@ bool GeneratorImpl::EmitStatementsWithIndent(utils::VectorRef<const ast::Stateme
 
 bool GeneratorImpl::EmitBlock(const ast::BlockStatement* stmt) {
     line() << "{";
-    if (!EmitStatementsWithIndent(stmt->statements)) {
+    if (TINT_UNLIKELY(!EmitStatementsWithIndent(stmt->statements))) {
         return false;
     }
     line() << "}";
@@ -733,7 +737,7 @@ bool GeneratorImpl::EmitBreak(const ast::BreakStatement*) {
 bool GeneratorImpl::EmitBreakIf(const ast::BreakIfStatement* b) {
     auto out = line();
     out << "if (";
-    if (!EmitExpression(out, b->condition)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, b->condition))) {
         return false;
     }
     out << ") { break; }";
@@ -773,7 +777,7 @@ bool GeneratorImpl::EmitFunctionCall(std::ostream& out, const sem::Call* call) {
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
+        if (TINT_UNLIKELY(!EmitExpression(out, arg->Declaration()))) {
             return false;
         }
     }
@@ -855,7 +859,7 @@ bool GeneratorImpl::EmitBuiltinCall(std::ostream& out,
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
+        if (TINT_UNLIKELY(!EmitExpression(out, arg->Declaration()))) {
             return false;
         }
     }
@@ -866,12 +870,13 @@ bool GeneratorImpl::EmitBuiltinCall(std::ostream& out,
 bool GeneratorImpl::EmitTypeConversion(std::ostream& out,
                                        const sem::Call* call,
                                        const sem::TypeConversion* conv) {
-    if (!EmitType(out, conv->Target(), ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+    if (TINT_UNLIKELY(!EmitType(out, conv->Target(), ast::AddressSpace::kNone,
+                                ast::Access::kReadWrite, ""))) {
         return false;
     }
     ScopedParen sp(out);
 
-    if (!EmitExpression(out, call->Arguments()[0]->Declaration())) {
+    if (TINT_UNLIKELY(!EmitExpression(out, call->Arguments()[0]->Declaration()))) {
         return false;
     }
 
@@ -889,7 +894,8 @@ bool GeneratorImpl::EmitTypeInitializer(std::ostream& out,
         return EmitZeroValue(out, type);
     }
 
-    if (!EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+    if (TINT_UNLIKELY(
+            !EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
         return false;
     }
     ScopedParen sp(out);
@@ -901,7 +907,7 @@ bool GeneratorImpl::EmitTypeInitializer(std::ostream& out,
         }
         first = false;
 
-        if (!EmitExpression(out, arg->Declaration())) {
+        if (TINT_UNLIKELY(!EmitExpression(out, arg->Declaration()))) {
             return false;
         }
     }
@@ -921,7 +927,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
                 if (i > 0) {
                     out << ", ";
                 }
-                if (!EmitExpression(out, arg)) {
+                if (TINT_UNLIKELY(!EmitExpression(out, arg))) {
                     return false;
                 }
             }
@@ -936,7 +942,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
             out << "atomicOr";
             {
                 ScopedParen sp(out);
-                if (!EmitExpression(out, expr->args[0])) {
+                if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
                     return false;
                 }
                 out << ", 0";
@@ -947,7 +953,8 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
             return true;
         }
         case sem::BuiltinType::kAtomicCompareExchangeWeak: {
-            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+            if (TINT_UNLIKELY(
+                    !EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>()))) {
                 return false;
             }
 
@@ -959,8 +966,9 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
 
             {
                 auto pre = line();
-                if (!EmitTypeAndName(pre, builtin->ReturnType(), ast::AddressSpace::kNone,
-                                     ast::Access::kUndefined, result)) {
+                if (TINT_UNLIKELY(!EmitTypeAndName(pre, builtin->ReturnType(),
+                                                   ast::AddressSpace::kNone,
+                                                   ast::Access::kUndefined, result))) {
                     return false;
                 }
                 pre << ";";
@@ -970,15 +978,15 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
                 pre << result << ".old_value = atomicCompSwap";
                 {
                     ScopedParen sp(pre);
-                    if (!EmitExpression(pre, dest)) {
+                    if (TINT_UNLIKELY(!EmitExpression(pre, dest))) {
                         return false;
                     }
                     pre << ", ";
-                    if (!EmitExpression(pre, compare_value)) {
+                    if (TINT_UNLIKELY(!EmitExpression(pre, compare_value))) {
                         return false;
                     }
                     pre << ", ";
-                    if (!EmitExpression(pre, value)) {
+                    if (TINT_UNLIKELY(!EmitExpression(pre, value))) {
                         return false;
                     }
                 }
@@ -987,7 +995,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
             {
                 auto pre = line();
                 pre << result << ".exchanged = " << result << ".old_value == ";
-                if (!EmitExpression(pre, compare_value)) {
+                if (TINT_UNLIKELY(!EmitExpression(pre, compare_value))) {
                     return false;
                 }
                 pre << ";";
@@ -1032,7 +1040,7 @@ bool GeneratorImpl::EmitWorkgroupAtomicCall(std::ostream& out,
 
 bool GeneratorImpl::EmitArrayLength(std::ostream& out, const ast::CallExpression* expr) {
     out << "uint(";
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << ".length())";
@@ -1041,15 +1049,15 @@ bool GeneratorImpl::EmitArrayLength(std::ostream& out, const ast::CallExpression
 
 bool GeneratorImpl::EmitExtractBits(std::ostream& out, const ast::CallExpression* expr) {
     out << "bitfieldExtract(";
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << ", int(";
-    if (!EmitExpression(out, expr->args[1])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[1]))) {
         return false;
     }
     out << "), int(";
-    if (!EmitExpression(out, expr->args[2])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[2]))) {
         return false;
     }
     out << "))";
@@ -1058,19 +1066,19 @@ bool GeneratorImpl::EmitExtractBits(std::ostream& out, const ast::CallExpression
 
 bool GeneratorImpl::EmitInsertBits(std::ostream& out, const ast::CallExpression* expr) {
     out << "bitfieldInsert(";
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << ", ";
-    if (!EmitExpression(out, expr->args[1])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[1]))) {
         return false;
     }
     out << ", int(";
-    if (!EmitExpression(out, expr->args[2])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[2]))) {
         return false;
     }
     out << "), int(";
-    if (!EmitExpression(out, expr->args[3])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[3]))) {
         return false;
     }
     out << "))";
@@ -1079,15 +1087,15 @@ bool GeneratorImpl::EmitInsertBits(std::ostream& out, const ast::CallExpression*
 
 bool GeneratorImpl::EmitEmulatedFMA(std::ostream& out, const ast::CallExpression* expr) {
     out << "((";
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << ") * (";
-    if (!EmitExpression(out, expr->args[1])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[1]))) {
         return false;
     }
     out << ") + (";
-    if (!EmitExpression(out, expr->args[2])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[2]))) {
         return false;
     }
     out << "))";
@@ -1097,13 +1105,13 @@ bool GeneratorImpl::EmitEmulatedFMA(std::ostream& out, const ast::CallExpression
 bool GeneratorImpl::EmitCountOneBitsCall(std::ostream& out, const ast::CallExpression* expr) {
     // GLSL's bitCount returns an integer type, so cast it to the appropriate
     // unsigned type.
-    if (!EmitType(out, TypeOf(expr)->UnwrapRef(), ast::AddressSpace::kNone, ast::Access::kReadWrite,
-                  "")) {
+    if (TINT_UNLIKELY(!EmitType(out, TypeOf(expr)->UnwrapRef(), ast::AddressSpace::kNone,
+                                ast::Access::kReadWrite, ""))) {
         return false;
     }
     out << "(bitCount(";
 
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << "))";
@@ -1118,34 +1126,34 @@ bool GeneratorImpl::EmitSelectCall(std::ostream& out, const ast::CallExpression*
     // but it does support mix() with same.
     if (TypeOf(expr_cond)->UnwrapRef()->is_bool_vector()) {
         out << "mix(";
-        if (!EmitExpression(out, expr_false)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr_false))) {
             return false;
         }
         out << ", ";
-        if (!EmitExpression(out, expr_true)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr_true))) {
             return false;
         }
         out << ", ";
-        if (!EmitExpression(out, expr_cond)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, expr_cond))) {
             return false;
         }
         out << ")";
         return true;
     }
     ScopedParen paren(out);
-    if (!EmitExpression(out, expr_cond)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr_cond))) {
         return false;
     }
 
     out << " ? ";
 
-    if (!EmitExpression(out, expr_true)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr_true))) {
         return false;
     }
 
     out << " : ";
 
-    if (!EmitExpression(out, expr_false)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr_false))) {
         return false;
     }
 
@@ -1169,24 +1177,26 @@ bool GeneratorImpl::EmitDotCall(std::ostream& out,
             std::string v;
             {
                 std::stringstream s;
-                if (!EmitType(s, vec_ty->type(), ast::AddressSpace::kNone, ast::Access::kRead,
-                              "")) {
+                if (TINT_UNLIKELY(!EmitType(s, vec_ty->type(), ast::AddressSpace::kNone,
+                                            ast::Access::kRead, ""))) {
                     return "";
                 }
                 v = s.str();
             }
             {  // (u)int tint_int_dot([i|u]vecN a, [i|u]vecN b) {
                 auto l = line(&b);
-                if (!EmitType(l, vec_ty->type(), ast::AddressSpace::kNone, ast::Access::kRead,
-                              "")) {
+                if (TINT_UNLIKELY(!EmitType(l, vec_ty->type(), ast::AddressSpace::kNone,
+                                            ast::Access::kRead, ""))) {
                     return "";
                 }
                 l << " " << fn_name << "(";
-                if (!EmitType(l, vec_ty, ast::AddressSpace::kNone, ast::Access::kRead, "")) {
+                if (TINT_UNLIKELY(
+                        !EmitType(l, vec_ty, ast::AddressSpace::kNone, ast::Access::kRead, ""))) {
                     return "";
                 }
                 l << " a, ";
-                if (!EmitType(l, vec_ty, ast::AddressSpace::kNone, ast::Access::kRead, "")) {
+                if (TINT_UNLIKELY(
+                        !EmitType(l, vec_ty, ast::AddressSpace::kNone, ast::Access::kRead, ""))) {
                     return "";
                 }
                 l << " b) {";
@@ -1213,11 +1223,11 @@ bool GeneratorImpl::EmitDotCall(std::ostream& out,
     out << fn;
     ScopedParen sp(out);
 
-    if (!EmitExpression(out, expr->args[0])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[0]))) {
         return false;
     }
     out << ", ";
-    if (!EmitExpression(out, expr->args[1])) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->args[1]))) {
         return false;
     }
     return true;
@@ -1231,14 +1241,15 @@ bool GeneratorImpl::EmitModfCall(std::ostream& out,
         out, expr, builtin, [&](TextBuffer* b, const std::vector<std::string>& params) {
             // Emit the builtin return type unique to this overload. This does not
             // exist in the AST, so it will not be generated in Generate().
-            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+            if (TINT_UNLIKELY(
+                    !EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>()))) {
                 return false;
             }
 
             {
                 auto l = line(b);
-                if (!EmitType(l, builtin->ReturnType(), ast::AddressSpace::kNone,
-                              ast::Access::kUndefined, "")) {
+                if (TINT_UNLIKELY(!EmitType(l, builtin->ReturnType(), ast::AddressSpace::kNone,
+                                            ast::Access::kUndefined, ""))) {
                     return false;
                 }
                 l << " result;";
@@ -1257,14 +1268,15 @@ bool GeneratorImpl::EmitFrexpCall(std::ostream& out,
         out, expr, builtin, [&](TextBuffer* b, const std::vector<std::string>& params) {
             // Emit the builtin return type unique to this overload. This does not
             // exist in the AST, so it will not be generated in Generate().
-            if (!EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>())) {
+            if (TINT_UNLIKELY(
+                    !EmitStructType(&helpers_, builtin->ReturnType()->As<sem::Struct>()))) {
                 return false;
             }
 
             {
                 auto l = line(b);
-                if (!EmitType(l, builtin->ReturnType(), ast::AddressSpace::kNone,
-                              ast::Access::kUndefined, "")) {
+                if (TINT_UNLIKELY(!EmitType(l, builtin->ReturnType(), ast::AddressSpace::kNone,
+                                            ast::Access::kUndefined, ""))) {
                     return false;
                 }
                 l << " result;";
@@ -1424,7 +1436,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
             } else {
                 out << "textureSize(";
             }
-            if (!EmitExpression(out, texture)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, texture))) {
                 return false;
             }
 
@@ -1465,7 +1477,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
             }
             // textureSize() on sampler2dArray returns the array size in the
             // final component, so return it
-            if (!EmitExpression(out, texture)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, texture))) {
                 return false;
             }
             // The LOD parameter is mandatory on textureSize() for non-multisampled
@@ -1493,7 +1505,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
             ScopedParen sp(out);
 
             out << "textureQueryLevels(";
-            if (!EmitExpression(out, texture)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, texture))) {
                 return false;
             }
             out << ")";
@@ -1507,7 +1519,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
             ScopedParen sp(out);
 
             out << "textureSamples(";
-            if (!EmitExpression(out, texture)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, texture))) {
                 return false;
             }
             out << ")";
@@ -1567,7 +1579,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
 
     out << "(";
 
-    if (!EmitExpression(out, texture)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, texture))) {
         return false;
     }
 
@@ -1612,7 +1624,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
                 // WGSL's textureSampleLevel() "level" param is i32 for depth textures,
                 // whereas GLSL's textureLod() "lod" param is always float, so cast it.
                 out << "float(";
-                if (!EmitExpression(out, e)) {
+                if (TINT_UNLIKELY(!EmitExpression(out, e))) {
                     return false;
                 }
                 out << ")";
@@ -1624,7 +1636,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
 
     if (auto* e = arg(Usage::kValue)) {
         out << ", ";
-        if (!EmitExpression(out, e)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, e))) {
             return false;
         }
     }
@@ -1638,7 +1650,7 @@ bool GeneratorImpl::EmitTextureCall(std::ostream& out,
     if (is_depth && !append_depth_ref_to_coords) {
         if (auto* e = arg(Usage::kDepthRef)) {
             out << ", ";
-            if (!EmitExpression(out, e)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, e))) {
                 return false;
             }
         } else if (builtin->Type() == sem::BuiltinType::kTextureSample) {
@@ -1811,7 +1823,7 @@ bool GeneratorImpl::EmitCase(const ast::CaseStatement* stmt) {
             out << "default";
         } else {
             out << "case ";
-            if (!EmitConstant(out, selector->Value())) {
+            if (TINT_UNLIKELY(!EmitConstant(out, selector->Value()))) {
                 return false;
             }
         }
@@ -1823,7 +1835,7 @@ bool GeneratorImpl::EmitCase(const ast::CaseStatement* stmt) {
 
     {
         ScopedIndent si(this);
-        if (!EmitStatements(stmt->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatements(stmt->body->statements))) {
             return false;
         }
         if (!last_is_break(stmt->body)) {
@@ -1883,24 +1895,24 @@ bool GeneratorImpl::EmitIf(const ast::IfStatement* stmt) {
     {
         auto out = line();
         out << "if (";
-        if (!EmitExpression(out, stmt->condition)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, stmt->condition))) {
             return false;
         }
         out << ") {";
     }
 
-    if (!EmitStatementsWithIndent(stmt->body->statements)) {
+    if (TINT_UNLIKELY(!EmitStatementsWithIndent(stmt->body->statements))) {
         return false;
     }
 
     if (stmt->else_statement) {
         line() << "} else {";
         if (auto* block = stmt->else_statement->As<ast::BlockStatement>()) {
-            if (!EmitStatementsWithIndent(block->statements)) {
+            if (TINT_UNLIKELY(!EmitStatementsWithIndent(block->statements))) {
                 return false;
             }
         } else {
-            if (!EmitStatementsWithIndent(utils::Vector{stmt->else_statement})) {
+            if (TINT_UNLIKELY(!EmitStatementsWithIndent(utils::Vector{stmt->else_statement}))) {
                 return false;
             }
         }
@@ -1921,8 +1933,8 @@ bool GeneratorImpl::EmitFunction(const ast::Function* func) {
     {
         auto out = line();
         auto name = builder_.Symbols().NameFor(func->symbol);
-        if (!EmitType(out, sem->ReturnType(), ast::AddressSpace::kNone, ast::Access::kReadWrite,
-                      "")) {
+        if (TINT_UNLIKELY(!EmitType(out, sem->ReturnType(), ast::AddressSpace::kNone,
+                                    ast::Access::kReadWrite, ""))) {
             return false;
         }
 
@@ -1953,15 +1965,16 @@ bool GeneratorImpl::EmitFunction(const ast::Function* func) {
             // AddressSpace::kStorage or AddressSpace::kUniform. This is required to
             // correctly translate the parameter to a [RW]ByteAddressBuffer for
             // storage buffers and a uint4[N] for uniform buffers.
-            if (!EmitTypeAndName(out, type, v->AddressSpace(), v->Access(),
-                                 builder_.Symbols().NameFor(v->Declaration()->symbol))) {
+            if (TINT_UNLIKELY(
+                    !EmitTypeAndName(out, type, v->AddressSpace(), v->Access(),
+                                     builder_.Symbols().NameFor(v->Declaration()->symbol)))) {
                 return false;
             }
         }
         out << ") {";
     }
 
-    if (!EmitStatementsWithIndent(func->body->statements)) {
+    if (TINT_UNLIKELY(!EmitStatementsWithIndent(func->body->statements))) {
         return false;
     }
 
@@ -2071,7 +2084,7 @@ bool GeneratorImpl::EmitHandleVariable(const ast::Var* var, const sem::Variable*
     if (auto* storage = type->As<type::StorageTexture>()) {
         out << "layout(" << convert_texel_format_to_glsl(storage->texel_format()) << ") ";
     }
-    if (!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(), name)) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(), name))) {
         return false;
     }
 
@@ -2085,17 +2098,17 @@ bool GeneratorImpl::EmitPrivateVariable(const sem::Variable* var) {
 
     auto name = builder_.Symbols().NameFor(decl->symbol);
     auto* type = var->Type()->UnwrapRef();
-    if (!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name)) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name))) {
         return false;
     }
 
     out << " = ";
     if (auto* initializer = decl->initializer) {
-        if (!EmitExpression(out, initializer)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, initializer))) {
             return false;
         }
     } else {
-        if (!EmitZeroValue(out, var->Type()->UnwrapRef())) {
+        if (TINT_UNLIKELY(!EmitZeroValue(out, var->Type()->UnwrapRef()))) {
             return false;
         }
     }
@@ -2112,13 +2125,13 @@ bool GeneratorImpl::EmitWorkgroupVariable(const sem::Variable* var) {
 
     auto name = builder_.Symbols().NameFor(decl->symbol);
     auto* type = var->Type()->UnwrapRef();
-    if (!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name)) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name))) {
         return false;
     }
 
     if (auto* initializer = decl->initializer) {
         out << " = ";
-        if (!EmitExpression(out, initializer)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, initializer))) {
             return false;
         }
     }
@@ -2145,13 +2158,13 @@ bool GeneratorImpl::EmitIOVariable(const sem::GlobalVariable* var) {
 
     auto name = builder_.Symbols().NameFor(decl->symbol);
     auto* type = var->Type()->UnwrapRef();
-    if (!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name)) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, var->AddressSpace(), var->Access(), name))) {
         return false;
     }
 
     if (auto* initializer = decl->initializer) {
         out << " = ";
-        if (!EmitExpression(out, initializer)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, initializer))) {
             return false;
         }
     }
@@ -2260,8 +2273,8 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
             }
             first = false;
 
-            if (!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(),
-                                 builder_.Symbols().NameFor(var->symbol))) {
+            if (TINT_UNLIKELY(!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(),
+                                               builder_.Symbols().NameFor(var->symbol)))) {
                 return false;
             }
         }
@@ -2276,13 +2289,13 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
             line() << "gl_PointSize = 1.0;";
         }
 
-        if (!EmitStatements(func->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatements(func->body->statements))) {
             return false;
         }
 
         if (!Is<ast::ReturnStatement>(func->body->Last())) {
             ast::ReturnStatement ret(ProgramID{}, ast::NodeID{}, Source{});
-            if (!EmitStatement(&ret)) {
+            if (TINT_UNLIKELY(!EmitStatement(&ret))) {
                 return false;
             }
         }
@@ -2317,7 +2330,8 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
             return true;
         },
         [&](const type::Vector* v) {
-            if (!EmitType(out, v, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
+            if (TINT_UNLIKELY(
+                    !EmitType(out, v, ast::AddressSpace::kNone, ast::Access::kUndefined, ""))) {
                 return false;
             }
 
@@ -2331,14 +2345,15 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
                 if (i > 0) {
                     out << ", ";
                 }
-                if (!EmitConstant(out, constant->Index(i))) {
+                if (TINT_UNLIKELY(!EmitConstant(out, constant->Index(i)))) {
                     return false;
                 }
             }
             return true;
         },
         [&](const type::Matrix* m) {
-            if (!EmitType(out, m, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
+            if (TINT_UNLIKELY(
+                    !EmitType(out, m, ast::AddressSpace::kNone, ast::Access::kUndefined, ""))) {
                 return false;
             }
 
@@ -2348,14 +2363,15 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
                 if (column_idx > 0) {
                     out << ", ";
                 }
-                if (!EmitConstant(out, constant->Index(column_idx))) {
+                if (TINT_UNLIKELY(!EmitConstant(out, constant->Index(column_idx)))) {
                     return false;
                 }
             }
             return true;
         },
         [&](const type::Array* a) {
-            if (!EmitType(out, a, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
+            if (TINT_UNLIKELY(
+                    !EmitType(out, a, ast::AddressSpace::kNone, ast::Access::kUndefined, ""))) {
                 return false;
             }
 
@@ -2372,7 +2388,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
                 if (i > 0) {
                     out << ", ";
                 }
-                if (!EmitConstant(out, constant->Index(i))) {
+                if (TINT_UNLIKELY(!EmitConstant(out, constant->Index(i)))) {
                     return false;
                 }
             }
@@ -2380,7 +2396,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
             return true;
         },
         [&](const sem::Struct* s) {
-            if (!EmitStructType(&helpers_, s)) {
+            if (TINT_UNLIKELY(!EmitStructType(&helpers_, s))) {
                 return false;
             }
 
@@ -2392,7 +2408,7 @@ bool GeneratorImpl::EmitConstant(std::ostream& out, const constant::Value* const
                 if (i > 0) {
                     out << ", ";
                 }
-                if (!EmitConstant(out, constant->Index(i))) {
+                if (TINT_UNLIKELY(!EmitConstant(out, constant->Index(i)))) {
                     return false;
                 }
             }
@@ -2447,7 +2463,8 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
     } else if (type->Is<type::U32>()) {
         out << "0u";
     } else if (auto* vec = type->As<type::Vector>()) {
-        if (!EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+        if (TINT_UNLIKELY(
+                !EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
             return false;
         }
         ScopedParen sp(out);
@@ -2455,12 +2472,13 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
             if (i != 0) {
                 out << ", ";
             }
-            if (!EmitZeroValue(out, vec->type())) {
+            if (TINT_UNLIKELY(!EmitZeroValue(out, vec->type()))) {
                 return false;
             }
         }
     } else if (auto* mat = type->As<type::Matrix>()) {
-        if (!EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, "")) {
+        if (TINT_UNLIKELY(
+                !EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kReadWrite, ""))) {
             return false;
         }
         ScopedParen sp(out);
@@ -2468,12 +2486,13 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
             if (i != 0) {
                 out << ", ";
             }
-            if (!EmitZeroValue(out, mat->type())) {
+            if (TINT_UNLIKELY(!EmitZeroValue(out, mat->type()))) {
                 return false;
             }
         }
     } else if (auto* str = type->As<sem::Struct>()) {
-        if (!EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
+        if (TINT_UNLIKELY(
+                !EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined, ""))) {
             return false;
         }
         bool first = true;
@@ -2487,7 +2506,8 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
             EmitZeroValue(out, member->Type());
         }
     } else if (auto* arr = type->As<type::Array>()) {
-        if (!EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined, "")) {
+        if (TINT_UNLIKELY(
+                !EmitType(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined, ""))) {
             return false;
         }
         ScopedParen sp(out);
@@ -2515,7 +2535,7 @@ bool GeneratorImpl::EmitZeroValue(std::ostream& out, const type::Type* type) {
 bool GeneratorImpl::EmitLoop(const ast::LoopStatement* stmt) {
     auto emit_continuing = [this, stmt]() {
         if (stmt->continuing && !stmt->continuing->Empty()) {
-            if (!EmitBlock(stmt->continuing)) {
+            if (TINT_UNLIKELY(!EmitBlock(stmt->continuing))) {
                 return false;
             }
         }
@@ -2526,7 +2546,7 @@ bool GeneratorImpl::EmitLoop(const ast::LoopStatement* stmt) {
     line() << "while (true) {";
     {
         ScopedIndent si(this);
-        if (!EmitStatements(stmt->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatements(stmt->body->statements))) {
             return false;
         }
         if (!emit_continuing_()) {
@@ -2551,7 +2571,7 @@ bool GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
     TextBuffer init_buf;
     if (auto* init = stmt->initializer) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &init_buf);
-        if (!EmitStatement(init)) {
+        if (TINT_UNLIKELY(!EmitStatement(init))) {
             return false;
         }
     }
@@ -2560,7 +2580,7 @@ bool GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
     std::stringstream cond_buf;
     if (auto* cond = stmt->condition) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
-        if (!EmitExpression(cond_buf, cond)) {
+        if (TINT_UNLIKELY(!EmitExpression(cond_buf, cond))) {
             return false;
         }
     }
@@ -2568,7 +2588,7 @@ bool GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
     TextBuffer cont_buf;
     if (auto* cont = stmt->continuing) {
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cont_buf);
-        if (!EmitStatement(cont)) {
+        if (TINT_UNLIKELY(!EmitStatement(cont))) {
             return false;
         }
     }
@@ -2605,7 +2625,7 @@ bool GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
             line() << "if (!(" << cond_buf.str() << ")) { break; }";
         }
 
-        if (!EmitStatements(stmt->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatements(stmt->body->statements))) {
             return false;
         }
 
@@ -2637,7 +2657,7 @@ bool GeneratorImpl::EmitForLoop(const ast::ForLoopStatement* stmt) {
         {
             auto emit_continuing = [] { return true; };
             TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-            if (!EmitStatementsWithIndent(stmt->body->statements)) {
+            if (TINT_UNLIKELY(!EmitStatementsWithIndent(stmt->body->statements))) {
                 return false;
             }
         }
@@ -2653,7 +2673,7 @@ bool GeneratorImpl::EmitWhile(const ast::WhileStatement* stmt) {
     {
         auto* cond = stmt->condition;
         TINT_SCOPED_ASSIGNMENT(current_buffer_, &cond_pre);
-        if (!EmitExpression(cond_buf, cond)) {
+        if (TINT_UNLIKELY(!EmitExpression(cond_buf, cond))) {
             return false;
         }
     }
@@ -2675,7 +2695,7 @@ bool GeneratorImpl::EmitWhile(const ast::WhileStatement* stmt) {
         current_buffer_->Append(cond_pre);
         line() << "if (!(" << cond_buf.str() << ")) { break; }";
 
-        if (!EmitStatements(stmt->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatements(stmt->body->statements))) {
             return false;
         }
     } else {
@@ -2689,7 +2709,7 @@ bool GeneratorImpl::EmitWhile(const ast::WhileStatement* stmt) {
             }
             out << " {";
         }
-        if (!EmitStatementsWithIndent(stmt->body->statements)) {
+        if (TINT_UNLIKELY(!EmitStatementsWithIndent(stmt->body->statements))) {
             return false;
         }
         line() << "}";
@@ -2700,7 +2720,7 @@ bool GeneratorImpl::EmitWhile(const ast::WhileStatement* stmt) {
 
 bool GeneratorImpl::EmitMemberAccessor(std::ostream& out,
                                        const ast::MemberAccessorExpression* expr) {
-    if (!EmitExpression(out, expr->structure)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->structure))) {
         return false;
     }
     out << ".";
@@ -2729,7 +2749,7 @@ bool GeneratorImpl::EmitReturn(const ast::ReturnStatement* stmt) {
     if (stmt->value) {
         auto out = line();
         out << "return ";
-        if (!EmitExpression(out, stmt->value)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, stmt->value))) {
             return false;
         }
         out << ";";
@@ -2748,7 +2768,7 @@ bool GeneratorImpl::EmitStatement(const ast::Statement* stmt) {
         [&](const ast::BreakIfStatement* b) { return EmitBreakIf(b); },
         [&](const ast::CallStatement* c) {
             auto out = line();
-            if (!EmitCall(out, c->expr)) {
+            if (TINT_UNLIKELY(!EmitCall(out, c->expr))) {
                 return false;
             }
             out << ";";
@@ -2790,7 +2810,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
     {  // switch(expr) {
         auto out = line();
         out << "switch(";
-        if (!EmitExpression(out, stmt->condition)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, stmt->condition))) {
             return false;
         }
         out << ") {";
@@ -2799,7 +2819,7 @@ bool GeneratorImpl::EmitSwitch(const ast::SwitchStatement* stmt) {
     {
         ScopedIndent si(this);
         for (auto* s : stmt->body) {
-            if (!EmitCase(s)) {
+            if (TINT_UNLIKELY(!EmitCase(s))) {
                 return false;
             }
         }
@@ -2855,7 +2875,7 @@ bool GeneratorImpl::EmitType(std::ostream& out,
 
             base_type = arr->ElemType();
         }
-        if (!EmitType(out, base_type, address_space, access, "")) {
+        if (TINT_UNLIKELY(!EmitType(out, base_type, address_space, access, ""))) {
             return false;
         }
         if (!name.empty()) {
@@ -2972,13 +2992,13 @@ bool GeneratorImpl::EmitType(std::ostream& out,
             out << "bvec" << width;
         } else {
             out << "vector<";
-            if (!EmitType(out, vec->type(), address_space, access, "")) {
+            if (TINT_UNLIKELY(!EmitType(out, vec->type(), address_space, access, ""))) {
                 return false;
             }
             out << ", " << width << ">";
         }
     } else if (auto* atomic = type->As<type::Atomic>()) {
-        if (!EmitType(out, atomic->Type(), address_space, access, name)) {
+        if (TINT_UNLIKELY(!EmitType(out, atomic->Type(), address_space, access, name))) {
             return false;
         }
     } else if (type->Is<type::Void>()) {
@@ -2997,7 +3017,7 @@ bool GeneratorImpl::EmitTypeAndName(std::ostream& out,
                                     ast::Access access,
                                     const std::string& name) {
     bool printed_name = false;
-    if (!EmitType(out, type, address_space, access, name, &printed_name)) {
+    if (TINT_UNLIKELY(!EmitType(out, type, address_space, access, name, &printed_name))) {
         return false;
     }
     if (!name.empty() && !printed_name) {
@@ -3030,7 +3050,8 @@ bool GeneratorImpl::EmitStructMembers(TextBuffer* b, const sem::Struct* str) {
 
         auto out = line(b);
 
-        if (!EmitTypeAndName(out, ty, ast::AddressSpace::kNone, ast::Access::kReadWrite, name)) {
+        if (TINT_UNLIKELY(!EmitTypeAndName(out, ty, ast::AddressSpace::kNone,
+                                           ast::Access::kReadWrite, name))) {
             return false;
         }
         out << ";";
@@ -3059,7 +3080,7 @@ bool GeneratorImpl::EmitUnaryOp(std::ostream& out, const ast::UnaryOpExpression*
     }
 
     ScopedParen sp(out);
-    if (!EmitExpression(out, expr->expr)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, expr->expr))) {
         return false;
     }
 
@@ -3071,19 +3092,19 @@ bool GeneratorImpl::EmitVar(const ast::Var* var) {
     auto* type = sem->Type()->UnwrapRef();
 
     auto out = line();
-    if (!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(),
-                         builder_.Symbols().NameFor(var->symbol))) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(),
+                                       builder_.Symbols().NameFor(var->symbol)))) {
         return false;
     }
 
     out << " = ";
 
     if (var->initializer) {
-        if (!EmitExpression(out, var->initializer)) {
+        if (TINT_UNLIKELY(!EmitExpression(out, var->initializer))) {
             return false;
         }
     } else {
-        if (!EmitZeroValue(out, type)) {
+        if (TINT_UNLIKELY(!EmitZeroValue(out, type))) {
             return false;
         }
     }
@@ -3098,14 +3119,14 @@ bool GeneratorImpl::EmitLet(const ast::Let* let) {
 
     auto out = line();
     // TODO(senorblanco): handle const
-    if (!EmitTypeAndName(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined,
-                         builder_.Symbols().NameFor(let->symbol))) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined,
+                                       builder_.Symbols().NameFor(let->symbol)))) {
         return false;
     }
 
     out << " = ";
 
-    if (!EmitExpression(out, let->initializer)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, let->initializer))) {
         return false;
     }
 
@@ -3120,12 +3141,12 @@ bool GeneratorImpl::EmitProgramConstVariable(const ast::Variable* var) {
 
     auto out = line();
     out << "const ";
-    if (!EmitTypeAndName(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined,
-                         builder_.Symbols().NameFor(var->symbol))) {
+    if (TINT_UNLIKELY(!EmitTypeAndName(out, type, ast::AddressSpace::kNone, ast::Access::kUndefined,
+                                       builder_.Symbols().NameFor(var->symbol)))) {
         return false;
     }
     out << " = ";
-    if (!EmitExpression(out, var->initializer)) {
+    if (TINT_UNLIKELY(!EmitExpression(out, var->initializer))) {
         return false;
     }
     out << ";";
@@ -3147,8 +3168,9 @@ bool GeneratorImpl::CallBuiltinHelper(std::ostream& out,
         std::vector<std::string> parameter_names;
         {
             auto decl = line(&b);
-            if (!EmitTypeAndName(decl, builtin->ReturnType(), ast::AddressSpace::kNone,
-                                 ast::Access::kUndefined, fn_name)) {
+            if (TINT_UNLIKELY(!EmitTypeAndName(decl, builtin->ReturnType(),
+                                               ast::AddressSpace::kNone, ast::Access::kUndefined,
+                                               fn_name))) {
                 return "";
             }
             {
@@ -3163,8 +3185,8 @@ bool GeneratorImpl::CallBuiltinHelper(std::ostream& out,
                         decl << "inout ";
                         ty = ptr->StoreType();
                     }
-                    if (!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
-                                         ast::Access::kUndefined, param_name)) {
+                    if (TINT_UNLIKELY(!EmitTypeAndName(decl, ty, ast::AddressSpace::kNone,
+                                                       ast::Access::kUndefined, param_name))) {
                         return "";
                     }
                     parameter_names.emplace_back(std::move(param_name));
@@ -3197,7 +3219,7 @@ bool GeneratorImpl::CallBuiltinHelper(std::ostream& out,
                 out << ", ";
             }
             first = false;
-            if (!EmitExpression(out, arg)) {
+            if (TINT_UNLIKELY(!EmitExpression(out, arg))) {
                 return false;
             }
         }
