@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a35967_77d48023",
+        "filename": "src/tint/transform/vertex_pulling.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 826,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-12T18:37:24Z",
+      "side": 1,
+      "message": "In the above conversion you made it a `TINT_UNLIKEY`. Can we do the same here so they\u0027re consistent?",
+      "revId": "26b30757f8a61307723db61e38162c847a369144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf817335_7fccee22",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4187,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-12T18:37:24Z",
+      "side": 1,
+      "message": "These ones with the `LIKELY/UNLIKELY` inside a chain seem error prone in the future. If we add a new entry after this one it doesn\u0027t have the meaning it did anymore. It feels like for chained if/else the opportunity for future mistakes is pretty high.",
+      "revId": "26b30757f8a61307723db61e38162c847a369144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
