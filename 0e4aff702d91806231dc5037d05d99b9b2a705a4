@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb5e8a82_d017860b",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T22:28:03Z",
+      "side": 1,
+      "message": "Maybe call out here that the clang toolchain needs to also contain a `llvm-profdata` binary. Not all distributions have this, so you may need to use a custom LLVM download. Perhaps also include the `use.sh` script so people can setup a toolchain easily with something like `~/bin/llvm-15/use.sh`",
+      "revId": "0e4aff702d91806231dc5037d05d99b9b2a705a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
