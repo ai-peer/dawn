@@ -51,7 +51,8 @@ TEST_F(ParserImplTest, TypeDecl_Bool) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::Bool>());
+    ASSERT_TRUE(t.value->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(t.value->As<ast::TypeName>()->name), "bool");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 5u}}));
 }
 
@@ -62,7 +63,8 @@ TEST_F(ParserImplTest, TypeDecl_F16) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::F16>());
+    ASSERT_TRUE(t.value->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(t.value->As<ast::TypeName>()->name), "f16");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
 }
 
@@ -73,7 +75,8 @@ TEST_F(ParserImplTest, TypeDecl_F32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::F32>());
+    ASSERT_TRUE(t.value->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(t.value->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
 }
 
@@ -84,7 +87,8 @@ TEST_F(ParserImplTest, TypeDecl_I32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::I32>());
+    ASSERT_TRUE(t.value->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(t.value->As<ast::TypeName>()->name), "i32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
 }
 
@@ -95,7 +99,8 @@ TEST_F(ParserImplTest, TypeDecl_U32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
-    ASSERT_TRUE(t.value->Is<ast::U32>());
+    ASSERT_TRUE(t.value->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(t.value->As<ast::TypeName>()->name), "u32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 4u}}));
 }
 
@@ -175,7 +180,8 @@ TEST_F(ParserImplTest, TypeDecl_Ptr) {
     ASSERT_TRUE(t.value->Is<ast::Pointer>());
 
     auto* ptr = t.value->As<ast::Pointer>();
-    ASSERT_TRUE(ptr->type->Is<ast::F32>());
+    ASSERT_TRUE(ptr->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(ptr->type->As<ast::TypeName>()->name), "f32");
     ASSERT_EQ(ptr->address_space, ast::AddressSpace::kFunction);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 19u}}));
 }
@@ -190,7 +196,8 @@ TEST_F(ParserImplTest, TypeDecl_Ptr_WithAccess) {
     ASSERT_TRUE(t.value->Is<ast::Pointer>());
 
     auto* ptr = t.value->As<ast::Pointer>();
-    ASSERT_TRUE(ptr->type->Is<ast::F32>());
+    ASSERT_TRUE(ptr->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(ptr->type->As<ast::TypeName>()->name), "f32");
     ASSERT_EQ(ptr->address_space, ast::AddressSpace::kFunction);
     ASSERT_EQ(ptr->access, ast::Access::kRead);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 25u}}));
@@ -211,7 +218,8 @@ TEST_F(ParserImplTest, TypeDecl_Ptr_ToVec) {
 
     auto* vec = ptr->type->As<ast::Vector>();
     ASSERT_EQ(vec->width, 2u);
-    ASSERT_TRUE(vec->type->Is<ast::F32>());
+    ASSERT_TRUE(vec->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(vec->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 25}}));
 }
 
@@ -341,7 +349,8 @@ TEST_F(ParserImplTest, TypeDecl_Atomic) {
     ASSERT_TRUE(t.value->Is<ast::Atomic>());
 
     auto* atomic = t.value->As<ast::Atomic>();
-    ASSERT_TRUE(atomic->type->Is<ast::F32>());
+    ASSERT_TRUE(atomic->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(atomic->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 12u}}));
 }
 
@@ -359,7 +368,8 @@ TEST_F(ParserImplTest, TypeDecl_Atomic_ToVec) {
 
     auto* vec = atomic->type->As<ast::Vector>();
     ASSERT_EQ(vec->width, 2u);
-    ASSERT_TRUE(vec->type->Is<ast::F32>());
+    ASSERT_TRUE(vec->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(vec->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 18u}}));
 }
 
@@ -404,7 +414,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_AbstractIntLiteralSize) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_FALSE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::F32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(a->attributes.Length(), 0u);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 14u}}));
 
@@ -425,7 +436,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_SintLiteralSize) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_FALSE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::F32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(a->attributes.Length(), 0u);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 15u}}));
 
@@ -446,7 +458,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_UintLiteralSize) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_FALSE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::F32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(a->attributes.Length(), 0u);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 15u}}));
 
@@ -466,7 +479,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_ConstantSize) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_FALSE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::F32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(a->attributes.Length(), 0u);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 17u}}));
 
@@ -486,7 +500,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_ExpressionSize) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_FALSE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::F32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "f32");
     EXPECT_EQ(a->attributes.Length(), 0u);
 
     ASSERT_TRUE(a->count->Is<ast::BinaryExpression>());
@@ -513,7 +528,8 @@ TEST_F(ParserImplTest, TypeDecl_Array_Runtime) {
 
     auto* a = t.value->As<ast::Array>();
     ASSERT_TRUE(a->IsRuntimeArray());
-    ASSERT_TRUE(a->type->Is<ast::U32>());
+    ASSERT_TRUE(a->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::TypeName>()->name), "u32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 11u}}));
 }
 
@@ -530,7 +546,9 @@ TEST_F(ParserImplTest, TypeDecl_Array_Runtime_Vec) {
     ASSERT_TRUE(a->IsRuntimeArray());
     ASSERT_TRUE(a->type->Is<ast::Vector>());
     EXPECT_EQ(a->type->As<ast::Vector>()->width, 4u);
-    EXPECT_TRUE(a->type->As<ast::Vector>()->type->Is<ast::U32>());
+    ASSERT_TRUE(a->type->As<ast::Vector>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(a->type->As<ast::Vector>()->type->As<ast::TypeName>()->name),
+              "u32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 17u}}));
 }
 
@@ -682,7 +700,11 @@ TEST_F(ParserImplTest, TypeDecl_Texture) {
     ASSERT_NE(t.value, nullptr);
     ASSERT_TRUE(t.value->Is<ast::Texture>());
     ASSERT_TRUE(t.value->Is<ast::SampledTexture>());
-    ASSERT_TRUE(t.value->As<ast::SampledTexture>()->type->Is<ast::F32>());
+    ASSERT_TRUE(t.value->As<ast::SampledTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(
+        Symbols().NameFor(t.value->As<ast::SampledTexture>()->type->As<ast::TypeName>()->name),
+        "f32");
+
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 18u}}));
 }
 

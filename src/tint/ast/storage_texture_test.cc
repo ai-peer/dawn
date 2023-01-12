@@ -58,7 +58,8 @@ TEST_F(AstStorageTextureTest, F32) {
 
     ASSERT_TRUE(s->Is<Texture>());
     ASSERT_TRUE(s->Is<StorageTexture>());
-    EXPECT_TRUE(s->As<StorageTexture>()->type->Is<F32>());
+    ASSERT_TRUE(s->As<StorageTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(s->As<StorageTexture>()->type->As<ast::TypeName>()->name), "f32");
 }
 
 TEST_F(AstStorageTextureTest, U32) {
@@ -68,7 +69,8 @@ TEST_F(AstStorageTextureTest, U32) {
 
     ASSERT_TRUE(s->Is<Texture>());
     ASSERT_TRUE(s->Is<StorageTexture>());
-    EXPECT_TRUE(s->As<StorageTexture>()->type->Is<U32>());
+    ASSERT_TRUE(s->As<StorageTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(s->As<StorageTexture>()->type->As<ast::TypeName>()->name), "u32");
 }
 
 TEST_F(AstStorageTextureTest, I32) {
@@ -78,7 +80,8 @@ TEST_F(AstStorageTextureTest, I32) {
 
     ASSERT_TRUE(s->Is<Texture>());
     ASSERT_TRUE(s->Is<StorageTexture>());
-    EXPECT_TRUE(s->As<StorageTexture>()->type->Is<I32>());
+    ASSERT_TRUE(s->As<StorageTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(s->As<StorageTexture>()->type->As<ast::TypeName>()->name), "i32");
 }
 
 }  // namespace

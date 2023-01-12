@@ -238,9 +238,10 @@ TEST_F(ParserImplTest, PrimaryExpression_Cast) {
     ASSERT_TRUE(e->Is<ast::CallExpression>());
     auto* call = e->As<ast::CallExpression>();
 
-    ASSERT_TRUE(call->target.type->Is<ast::F32>());
-    ASSERT_EQ(call->args.Length(), 1u);
+    ASSERT_TRUE(call->target.type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(call->target.type->As<ast::TypeName>()->name), "f32");
 
+    ASSERT_EQ(call->args.Length(), 1u);
     ASSERT_TRUE(call->args[0]->Is<ast::IntLiteralExpression>());
 }
 
@@ -255,7 +256,10 @@ TEST_F(ParserImplTest, PrimaryExpression_Bitcast) {
     ASSERT_TRUE(e->Is<ast::BitcastExpression>());
 
     auto* c = e->As<ast::BitcastExpression>();
-    ASSERT_TRUE(c->type->Is<ast::F32>());
+
+    ASSERT_TRUE(c->type->Is<ast::TypeName>());
+    EXPECT_EQ(Symbols().NameFor(c->type->As<ast::TypeName>()->name), "f32");
+
     ASSERT_TRUE(c->expr->Is<ast::IntLiteralExpression>());
 }
 
