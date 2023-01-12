@@ -111,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "550c9aeb_de926f53",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T22:29:58Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "24b08c8d_11587fd0",
+      "range": {
+        "startLine": 1838,
+        "startChar": 68,
+        "endLine": 1838,
+        "endChar": 84
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "efef7560_f208c10f",
