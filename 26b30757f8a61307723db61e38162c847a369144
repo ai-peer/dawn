@@ -87,6 +87,24 @@
       "parentUuid": "9694fcb1_37405804",
       "revId": "26b30757f8a61307723db61e38162c847a369144",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab54a64_26f95f4d",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4187,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T21:20:39Z",
+      "side": 1,
+      "message": "Yeah, not massively keen on the control flow restructuring there.",
+      "parentUuid": "068fb27e_f00d182c",
+      "revId": "26b30757f8a61307723db61e38162c847a369144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
