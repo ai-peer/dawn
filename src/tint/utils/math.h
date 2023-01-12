@@ -26,7 +26,7 @@ namespace tint::utils {
 /// @return `value` rounded to the next multiple of `alignment`
 /// @note `alignment` must be positive. An alignment of zero will cause a DBZ.
 template <typename T>
-inline T RoundUp(T alignment, T value) {
+inline constexpr T RoundUp(T alignment, T value) {
     return ((value + alignment - 1) / alignment) * alignment;
 }
 
@@ -34,8 +34,54 @@ inline T RoundUp(T alignment, T value) {
 /// @returns true if `value` is a power-of-two
 /// @note `value` must be positive if `T` is signed
 template <typename T>
-inline bool IsPowerOfTwo(T value) {
+inline constexpr bool IsPowerOfTwo(T value) {
     return (value & (value - 1)) == 0;
+}
+
+/// @param value the input value
+/// @returns the base-2 logarithm of @p value
+inline constexpr uint32_t Log2(uint64_t value) {
+#if defined(__clang__) || defined(__GNUC__)
+    return 63 - static_cast<uint32_t>(__builtin_clzll(value));
+#elif defined(_MSC_VER) && !defined(__clang__) && __cplusplus >= 202002L  // MSVC and C++20+
+    // note: std::is_constant_evaluated() added in C++20
+    //       required here as _BitScanReverse64 is not constexpr
+    if constexpr (!std::is_constant_evaluated()) {
+        if constexpr (sizeof(unsigned long) == 8) {  // 64-bit
+            // NOLINTNEXTLINE(runtime/int)
+            unsigned long first_bit_index = 0;
+            _BitScanReverse64(&first_bit_index, value);
+            return first_bit_index;
+        } else {  // 32-bit
+            // NOLINTNEXTLINE(runtime/int)
+            unsigned long first_bit_index = 0;
+            if (_BitScanReverse(&first_bit_index, value >> 32)) {
+                return first_bit_index + 32;
+            }
+            _BitScanReverse(&first_bit_index, value & 0xffffffff);
+            return first_bit_index;
+        }
+    }
+#endif
+    // Non intrinsic path. Supports constexpr evaluation.
+    value--;
+    value |= value >> 1;
+    value |= value >> 2;
+    value |= value >> 4;
+    value |= value >> 8;
+    value |= value >> 16;
+    value |= value >> 32;
+    value++;
+    return value;
+}
+
+/// @param value the input value
+/// @returns the next power of two number greater or equal to @p value
+inline constexpr uint64_t NextPowerOfTwo(uint64_t n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return static_cast<uint64_t>(1) << (Log2(n - 1) + 1);
 }
 
 /// @param value the input value
