@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a95f88_41485837",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T10:32:58Z",
+      "side": 1,
+      "message": "Looks great. Just some nits. All ignorable.",
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90068909_65308f17",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T10:32:58Z",
+      "side": 1,
+      "message": "utterly ignorable nit: We don\u0027t usually use `get` prefixes, and if you dropped it, you could just call `var_type(var)` inline on the next line.",
+      "range": {
+        "startLine": 1723,
+        "startChar": 32,
+        "endLine": 1723,
+        "endChar": 55
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e80366_0d3742d4",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1799,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T10:32:58Z",
+      "side": 1,
+      "message": "Once David\u0027s PR lands, we\u0027ll probably want to rename `Note` to `Info`.",
+      "range": {
+        "startLine": 1799,
+        "startChar": 42,
+        "endLine": 1799,
+        "endChar": 56
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82e49c56_4c6e1d73",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T10:32:58Z",
+      "side": 1,
+      "message": "nit: `contents` is a bit weird, but I struggle to think of a phrase that\u0027s as succinct. The best I can think of is `possibly non-uniform value pointed to by pointer` ? It\u0027s verbose, but more explicit.",
+      "range": {
+        "startLine": 1838,
+        "startChar": 68,
+        "endLine": 1838,
+        "endChar": 84
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efef7560_f208c10f",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T10:32:58Z",
+      "side": 1,
+      "message": "This is fantastic. Great job!",
+      "range": {
+        "startLine": 409,
+        "startChar": 4,
+        "endLine": 431,
+        "endChar": 0
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
