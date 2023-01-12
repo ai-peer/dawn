@@ -116,7 +116,7 @@ TEST_F(ParserImplTest, PrimaryExpression_TypeDecl_InvalidValue) {
     EXPECT_TRUE(e.errored);
     EXPECT_EQ(e.value, nullptr);
     ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:5: expected ')' for type initializer");
+    EXPECT_EQ(p->error(), "1:5: expected ')' for function call");
 }
 
 TEST_F(ParserImplTest, PrimaryExpression_TypeDecl_StructInitializer_Empty) {
@@ -238,9 +238,10 @@ TEST_F(ParserImplTest, PrimaryExpression_Cast) {
     ASSERT_TRUE(e->Is<ast::CallExpression>());
     auto* call = e->As<ast::CallExpression>();
 
-    ASSERT_TRUE(call->target.type->Is<ast::F32>());
-    ASSERT_EQ(call->args.Length(), 1u);
+    ASSERT_NE(call->target.name, nullptr);
+    EXPECT_EQ(p->builder().Symbols().NameFor(call->target.name->symbol), "f32");
 
+    ASSERT_EQ(call->args.Length(), 1u);
     ASSERT_TRUE(call->args[0]->Is<ast::IntLiteralExpression>());
 }
 
@@ -255,7 +256,10 @@ TEST_F(ParserImplTest, PrimaryExpression_Bitcast) {
     ASSERT_TRUE(e->Is<ast::BitcastExpression>());
 
     auto* c = e->As<ast::BitcastExpression>();
-    ASSERT_TRUE(c->type->Is<ast::F32>());
+
+    ASSERT_TRUE(c->type->Is<ast::TypeName>());
+    EXPECT_EQ(p->builder().Symbols().NameFor(c->type->As<ast::TypeName>()->name), "f32");
+
     ASSERT_TRUE(c->expr->Is<ast::IntLiteralExpression>());
 }
 

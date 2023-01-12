@@ -73,9 +73,11 @@ TEST_F(ParserImplTest, TextureSamplerTypes_SampledTexture_F32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Texture>());
     ASSERT_TRUE(t->Is<ast::SampledTexture>());
-    ASSERT_TRUE(t->As<ast::SampledTexture>()->type->Is<ast::F32>());
+    ASSERT_TRUE(t->As<ast::SampledTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(p->builder().Symbols().NameFor(
+                  t->As<ast::SampledTexture>()->type->As<ast::TypeName>()->name),
+              "f32");
     EXPECT_EQ(t->As<ast::Texture>()->dim, ast::TextureDimension::k1d);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 16u}}));
 }
@@ -87,9 +89,11 @@ TEST_F(ParserImplTest, TextureSamplerTypes_SampledTexture_I32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Texture>());
     ASSERT_TRUE(t->Is<ast::SampledTexture>());
-    ASSERT_TRUE(t->As<ast::SampledTexture>()->type->Is<ast::I32>());
+    ASSERT_TRUE(t->As<ast::SampledTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(p->builder().Symbols().NameFor(
+                  t->As<ast::SampledTexture>()->type->As<ast::TypeName>()->name),
+              "i32");
     EXPECT_EQ(t->As<ast::Texture>()->dim, ast::TextureDimension::k2d);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 16u}}));
 }
@@ -101,9 +105,10 @@ TEST_F(ParserImplTest, TextureSamplerTypes_SampledTexture_U32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Texture>());
     ASSERT_TRUE(t->Is<ast::SampledTexture>());
-    ASSERT_TRUE(t->As<ast::SampledTexture>()->type->Is<ast::U32>());
+    EXPECT_EQ(p->builder().Symbols().NameFor(
+                  t->As<ast::SampledTexture>()->type->As<ast::TypeName>()->name),
+              "u32");
     EXPECT_EQ(t->As<ast::Texture>()->dim, ast::TextureDimension::k3d);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 16u}}));
 }
@@ -145,9 +150,11 @@ TEST_F(ParserImplTest, TextureSamplerTypes_MultisampledTexture_I32) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Texture>());
     ASSERT_TRUE(t->Is<ast::MultisampledTexture>());
-    ASSERT_TRUE(t->As<ast::MultisampledTexture>()->type->Is<ast::I32>());
+    ASSERT_TRUE(t->As<ast::MultisampledTexture>()->type->Is<ast::TypeName>());
+    EXPECT_EQ(p->builder().Symbols().NameFor(
+                  t->As<ast::MultisampledTexture>()->type->As<ast::TypeName>()->name),
+              "i32");
     EXPECT_EQ(t->As<ast::Texture>()->dim, ast::TextureDimension::k2d);
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 29u}}));
 }
