@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df8beff_e183276b",
+        "filename": "src/tint/transform/simplify_pointers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-12T04:06:16Z",
+      "side": 1,
+      "message": "Just so I understand, this transform is only to replace something we took the addressof a local, then assigned the value through indirection, it re-writes to just access the original local?\n\nSo, we don\u0027t have to do anything if there is never an addressof operation?",
+      "revId": "08f925f585588d3c6017f27bd4e000262fc34c2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
