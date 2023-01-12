@@ -53,32 +53,41 @@ ninja dawn.node
 ### Running WebGPU CTS
 
 1. [Build](#build) the `dawn.node` NodeJS module.
-2. Checkout the [WebGPU CTS repo](https://github.com/gpuweb/cts)
-  - Run `npm install` from inside the CTS directory to install its dependencies
+2. Checkout the [WebGPU CTS repo](https://github.com/gpuweb/cts) or use the one in `third_party/webgpu-cts`.
+3. Run `npm install` from inside the CTS directory to install its dependencies.
+
+Now you can run CTS:
 
 ```sh
-./src/tools/run run-cts --dawn-node=<path-to-dawn.node> [WebGPU CTS query]
+./tools/run run-cts --dawn-node=<path-to-dawn.node> [WebGPU CTS query]
+```
+
+Or if you checked out your own CTS repo:
+
+```sh
+./tools/run run-cts --dawn-node=<path-to-dawn.node> --cts=<path-to-cts> [WebGPU CTS query]
 ```
 
 If this fails with the error message `TypeError: expander is not a function or its return value is not iterable`, try appending `--build=false` to the start of the `run-cts` command line flags.
 
-To test against SwiftShader instead of the default Vulkan device, prefix `./src/tools/run run-cts` with `VK_ICD_FILENAMES=<swiftshader-cmake-build>/Linux/vk_swiftshader_icd.json`. For example:
+To test against SwiftShader instead of the default Vulkan device, prefix `./tools/run run-cts` with `VK_ICD_FILENAMES=<swiftshader-cmake-build>/Linux/vk_swiftshader_icd.json`. For example:
 
 ```sh
-VK_ICD_FILENAMES=<swiftshader-cmake-build>/Linux/vk_swiftshader_icd.json ./src/tools/run run-cts --dawn-node=<path-to-dawn.node> [WebGPU CTS query]
+VK_ICD_FILENAMES=<swiftshader-cmake-build>/Linux/vk_swiftshader_icd.json ./tools/run run-cts --dawn-node=<path-to-dawn.node> [WebGPU CTS query]
 ```
 
 The `--flag` parameter must be passed in multiple times, once for each flag begin set. Here are some common arguments:
-* `backend=<null|webgpu|d3d11|d3d12|metal|vulkan|opengl|opengles>`
-* `adapter=<name-of-adapter>` - specifies the adapter to use. May be a substring of the full adapter name. Pass an invalid adapter name and `--verbose` to see all possible adapters.
-* `dlldir=<path>` - used to add an extra DLL search path on Windows, primarily to load the right d3dcompiler_47.dll
-* `enable-dawn-features=<features>` - enable [Dawn toggles](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp), e.g. `dump_shaders`
-* `disable-dawn-features=<features>` - disable [Dawn toggles](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp)
+
+- `backend=<null|webgpu|d3d11|d3d12|metal|vulkan|opengl|opengles>`
+- `adapter=<name-of-adapter>` - specifies the adapter to use. May be a substring of the full adapter name. Pass an invalid adapter name and `--verbose` to see all possible adapters.
+- `dlldir=<path>` - used to add an extra DLL search path on Windows, primarily to load the right d3dcompiler_47.dll
+- `enable-dawn-features=<features>` - enable [Dawn toggles](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp), e.g. `dump_shaders`
+- `disable-dawn-features=<features>` - disable [Dawn toggles](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp)
 
 For example, on Windows, to use the d3dcompiler_47.dll from a Chromium checkout, and to dump shader output, we could run the following using Git Bash:
 
 ```sh
-./src/tools/run run-cts --verbose --dawn-node=/c/src/dawn/build/Debug/dawn.node --cts=/c/src/webgpu-cts --flag=dlldir="C:\src\chromium\src\out\Release" --flag=enable-dawn-features=dump_shaders 'webgpu:shader,execution,builtin,abs:integer_builtin_functions,abs_unsigned:storageClass="storage";storageMode="read_write";containerType="vector";isAtomic=false;baseType="u32";type="vec2%3Cu32%3E"'
+./tools/run run-cts --verbose --dawn-node=/c/src/dawn/build/Debug/dawn.node --cts=/c/src/webgpu-cts --flag=dlldir="C:\src\chromium\src\out\Release" --flag=enable-dawn-features=dump_shaders 'webgpu:shader,execution,builtin,abs:integer_builtin_functions,abs_unsigned:storageClass="storage";storageMode="read_write";containerType="vector";isAtomic=false;baseType="u32";type="vec2%3Cu32%3E"'
 ```
 
 Note that we pass `--verbose` above so that all test output, including the dumped shader, is written to stdout.
@@ -95,14 +104,18 @@ Dawn needs to be built with clang and the `DAWN_EMIT_COVERAGE` CMake flag.
 
 Optionally, the `LLVM_SOURCE_DIR` CMake flag can also be specified to point the the `./llvm` directory of [an LLVM checkout](https://github.com/llvm/llvm-project), which will build [`turbo-cov`](../../../tools/src/cmd/turbo-cov/README.md) and dramatically speed up the processing of coverage data.
 
+If not using `turbo-cov`, `llvm-cov` will be used. This can be built from LLVM source, or downloaded as part of an [LLVM release](https://releases.llvm.org/download.html). Make sure that it's available in your PATH (i.e. `which llvm-cov` should return a valid path).
+
 ### Usage
 
-Run `./src/tools/run run-cts` like before, but include the `--coverage` flag.
+Run `./tools/run run-cts` like before, but include the `--coverage` flag.
 After running the tests, your browser will open with a coverage viewer.
 
 Click a source file in the left hand panel, then click a green span in the file source to see the tests that exercised that code.
 
 You can also highlight multiple lines to view all the tests that covered any of that highlighted source.
+
+NOTE: if the left hand panel is empty, ensure that `dawn.node` was built with the same version of Clang that matches the version of LLVM being used to retrieve coverage info.
 
 ## Debugging TypeScript with VSCode
 
@@ -110,23 +123,25 @@ Open or create the `.vscode/launch.json` file, and add:
 
 ```json
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Debug with node",
-            "type": "node",
-            "request": "launch",
-            "outFiles": [ "./**/*.js" ],
-            "args": [
-                "-e", "require('./src/common/tools/setup-ts-in-node.js');require('./src/common/runtime/cmdline.ts');",
-                "--", "placeholder-arg",
-                "--gpu-provider",
-                "[path-to-dawn.node]", // REPLACE: [path-to-dawn.node]
-                "[test-query]", // REPLACE: [test-query]
-            ],
-            "cwd": "[cts-root]" // REPLACE: [cts-root]
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug with node",
+      "type": "node",
+      "request": "launch",
+      "outFiles": ["./**/*.js"],
+      "args": [
+        "-e",
+        "require('./src/common/tools/setup-ts-in-node.js');require('./src/common/runtime/cmdline.ts');",
+        "--",
+        "placeholder-arg",
+        "--gpu-provider",
+        "[path-to-dawn.node]", // REPLACE: [path-to-dawn.node]
+        "[test-query]" // REPLACE: [test-query]
+      ],
+      "cwd": "[cts-root]" // REPLACE: [cts-root]
+    }
+  ]
 }
 ```
 
