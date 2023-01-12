@@ -23,6 +23,7 @@
 
 #include "src/tint/debug.h"
 #include "src/tint/utils/hash.h"
+#include "src/tint/utils/math.h"
 #include "src/tint/utils/vector.h"
 
 namespace tint::utils {
@@ -173,8 +174,11 @@ class HashmapBase {
     /// at least 50% more slots than the number of map entries.
     static constexpr size_t kRehashFactor = 150;
 
-    /// @returns the target slot vector size to hold `n` map entries.
-    static constexpr size_t NumSlots(size_t count) { return (count * kRehashFactor) / 100; }
+    /// @returns the target slot vector size to hold `n` map entries, which is always a power of
+    /// two.
+    static constexpr size_t NumSlots(size_t count) {
+        return NextPowerOfTwo((count * kRehashFactor) / 100);
+    }
 
     /// The fixed-size slot vector length, based on N and kRehashFactor.
     static constexpr size_t kNumFixedSlots = NumSlots(N);
@@ -572,10 +576,11 @@ class HashmapBase {
     bool ShouldRehash(size_t count) const { return NumSlots(count) > slots_.Length(); }
 
     /// @param index an input value
-    /// @returns the input value modulo the number of slots.
-    size_t Wrap(size_t index) const { return index % slots_.Length(); }
+    /// @returns the input value modulo the number of slots (which is always a power of two).
+    size_t Wrap(size_t index) const { return index & (slots_.Length() - 1); }
 
-    /// The vector of slots. The vector length is equal to its capacity.
+    /// The vector of slots.
+    // The vector length is equal to its capacity, which is always a power of two.
     Vector<Slot, kNumFixedSlots> slots_;
 
     /// The number of entries in the map.
