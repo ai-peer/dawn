@@ -151,8 +151,6 @@ class Token {
         kAtomic,
         /// A 'bitcast'
         kBitcast,
-        /// A 'bool'
-        kBool,
         /// A 'break'
         kBreak,
         /// A 'case'
@@ -171,10 +169,6 @@ class Token {
         kElse,
         /// A 'enable'
         kEnable,
-        /// A 'f16'
-        kF16,
-        /// A 'f32'
-        kF32,
         /// A 'fallthrough'
         kFallthrough,
         /// A 'false'
@@ -183,8 +177,6 @@ class Token {
         kFn,
         // A 'for'
         kFor,
-        /// A 'i32'
-        kI32,
         /// A 'if'
         kIf,
         /// A 'let'
@@ -263,8 +255,6 @@ class Token {
         kTrue,
         /// A 'type'
         kType,
-        /// A 'u32'
-        kU32,
         /// A 'var'
         kVar,
         /// A 'vec2'
