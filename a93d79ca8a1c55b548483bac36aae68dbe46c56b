@@ -16,6 +16,24 @@
       "message": "Fair enough. Do we know what the perf benefit from the likely/unlikely in the long if chains is vs the stand alone ifs?",
       "revId": "a93d79ca8a1c55b548483bac36aae68dbe46c56b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3772c8aa_ff9065b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T21:32:20Z",
+      "side": 1,
+      "message": "Are you suggesting just dropping the if-chain `TINT_LIKELY()`s?\n\nI don\u0027t know, as I haven\u0027t separated them. This is a best effort to guide the compiler into not assuming ICEs will happen. I tried my best to hint for each and every one. I\u0027d rather do all than just some.",
+      "parentUuid": "f276ee05_a067a66e",
+      "revId": "a93d79ca8a1c55b548483bac36aae68dbe46c56b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
