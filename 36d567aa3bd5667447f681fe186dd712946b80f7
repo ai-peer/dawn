@@ -34,6 +34,24 @@
       "parentUuid": "31e8e083_a3da1d8a",
       "revId": "36d567aa3bd5667447f681fe186dd712946b80f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37ccfcd7_8f18b06a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-12T09:38:23Z",
+      "side": 1,
+      "message": "Renamed to targetState for now, thanks.",
+      "parentUuid": "b5e477fb_9036fcc5",
+      "revId": "36d567aa3bd5667447f681fe186dd712946b80f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
