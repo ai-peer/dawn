@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb247296_6ed8a715",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-12T14:44:02Z",
+      "side": 0,
+      "message": "I suspect this one might need to go back, but happy to give it a try.",
+      "range": {
+        "startLine": 371,
+        "startChar": 2,
+        "endLine": 371,
+        "endChar": 6
+      },
+      "revId": "75191a8471cedfc613081c33bb2b692815f35497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
