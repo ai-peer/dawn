@@ -16,6 +16,23 @@
       "message": "LGTM! I also checked that Ali signed the CLA.",
       "revId": "25d716836d7aecdbd251b9a7e870646a48c5108f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e8ea590_7e78944f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-12T16:10:48Z",
+      "side": 1,
+      "message": "thanks for the contribution!",
+      "revId": "25d716836d7aecdbd251b9a7e870646a48c5108f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
