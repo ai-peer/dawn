@@ -199,7 +199,7 @@ bool Validator::IsFixedFootprint(const type::Type* type) const {
         },
         [&](const sem::Struct* str) {
             for (auto* member : str->Members()) {
-                if (!IsFixedFootprint(member->Type())) {
+                if (TINT_UNLIKELY(!IsFixedFootprint(member->Type()))) {
                     return false;
                 }
             }
@@ -220,7 +220,7 @@ bool Validator::IsHostShareable(const type::Type* type) const {
         [&](const type::Array* arr) { return IsHostShareable(arr->ElemType()); },
         [&](const sem::Struct* str) {
             for (auto* member : str->Members()) {
-                if (!IsHostShareable(member->Type())) {
+                if (TINT_UNLIKELY(!IsHostShareable(member->Type()))) {
                     return false;
                 }
             }
@@ -263,7 +263,7 @@ const ast::Statement* Validator::ClosestContinuing(bool stop_at_loop,
 bool Validator::Atomic(const ast::Atomic* a, const type::Atomic* s) const {
     // https://gpuweb.github.io/gpuweb/wgsl/#atomic-types
     // T must be either u32 or i32.
-    if (!s->Type()->IsAnyOf<type::U32, type::I32>()) {
+    if (TINT_UNLIKELY((!s->Type()->IsAnyOf<type::U32, type::I32>()))) {
         AddError("atomic only supports i32 or u32 types", a->type ? a->type->source : a->source);
         return false;
     }
@@ -271,7 +271,7 @@ bool Validator::Atomic(const ast::Atomic* a, const type::Atomic* s) const {
 }
 
 bool Validator::Pointer(const ast::Pointer* a, const type::Pointer* s) const {
-    if (s->AddressSpace() == ast::AddressSpace::kUndefined) {
+    if (TINT_UNLIKELY(s->AddressSpace() == ast::AddressSpace::kUndefined)) {
         AddError("ptr missing address space", a->source);
         return false;
     }
@@ -281,7 +281,7 @@ bool Validator::Pointer(const ast::Pointer* a, const type::Pointer* s) const {
         // When writing a variable declaration or a pointer type in WGSL source:
         // * For the storage address space, the access mode is optional, and defaults to read.
         // * For other address spaces, the access mode must not be written.
-        if (a->address_space != ast::AddressSpace::kStorage) {
+        if (TINT_UNLIKELY(a->address_space != ast::AddressSpace::kStorage)) {
             AddError("only pointers in <storage> address space may declare an access mode",
                      a->source);
             return false;
@@ -304,12 +304,12 @@ bool Validator::StorageTexture(const ast::StorageTexture* t) const {
             return false;
     }
 
-    if (!IsValidStorageTextureDimension(t->dim)) {
+    if (TINT_UNLIKELY(!IsValidStorageTextureDimension(t->dim))) {
         AddError("cube dimensions for storage textures are not supported", t->source);
         return false;
     }
 
-    if (!IsValidStorageTextureTexelFormat(t->format)) {
+    if (TINT_UNLIKELY(!IsValidStorageTextureTexelFormat(t->format))) {
         AddError(
             "image format must be one of the texel formats specified for storage "
             "textues in https://gpuweb.github.io/gpuweb/wgsl/#texel-formats",
@@ -320,7 +320,7 @@ bool Validator::StorageTexture(const ast::StorageTexture* t) const {
 }
 
 bool Validator::SampledTexture(const type::SampledTexture* t, const Source& source) const {
-    if (!t->type()->UnwrapRef()->IsAnyOf<type::F32, type::I32, type::U32>()) {
+    if (TINT_UNLIKELY((!t->type()->UnwrapRef()->IsAnyOf<type::F32, type::I32, type::U32>()))) {
         AddError("texture_2d<type>: type must be f32, i32 or u32", source);
         return false;
     }
@@ -330,12 +330,12 @@ bool Validator::SampledTexture(const type::SampledTexture* t, const Source& sour
 
 bool Validator::MultisampledTexture(const type::MultisampledTexture* t,
                                     const Source& source) const {
-    if (t->dim() != ast::TextureDimension::k2d) {
+    if (TINT_UNLIKELY(t->dim() != ast::TextureDimension::k2d)) {
         AddError("only 2d multisampled textures are supported", source);
         return false;
     }
 
-    if (!t->type()->UnwrapRef()->IsAnyOf<type::F32, type::I32, type::U32>()) {
+    if (TINT_UNLIKELY((!t->type()->UnwrapRef()->IsAnyOf<type::F32, type::I32, type::U32>()))) {
         AddError("texture_multisampled_2d<type>: type must be f32, i32 or u32", source);
         return false;
     }
@@ -346,7 +346,7 @@ bool Validator::MultisampledTexture(const type::MultisampledTexture* t,
 bool Validator::Materialize(const type::Type* to,
                             const type::Type* from,
                             const Source& source) const {
-    if (type::Type::ConversionRank(from, to) == type::Type::kNoConversion) {
+    if (TINT_UNLIKELY(type::Type::ConversionRank(from, to) == type::Type::kNoConversion)) {
         AddError("cannot convert value of type '" + sem_.TypeNameOf(from) + "' to type '" +
                      sem_.TypeNameOf(to) + "'",
                  source);
@@ -363,7 +363,7 @@ bool Validator::VariableInitializer(const ast::Variable* v,
     auto* value_type = initializer_ty->UnwrapRef();  // Implicit load of RHS
 
     // Value type has to match storage type
-    if (storage_ty != value_type) {
+    if (TINT_UNLIKELY(storage_ty != value_type)) {
         std::stringstream s;
         s << "cannot initialize " << v->Kind() << " of type '" << sem_.TypeNameOf(storage_ty)
           << "' with value of type '" << sem_.TypeNameOf(initializer_ty) << "'";
@@ -435,8 +435,8 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
 
     // Among three host-shareable address spaces, f16 is supported in "uniform" and
     // "storage" address space, but not "push_constant" address space yet.
-    if (Is<type::F16>(type::Type::DeepestElementOf(store_ty)) &&
-        address_space == ast::AddressSpace::kPushConstant) {
+    if (TINT_UNLIKELY(Is<type::F16>(type::Type::DeepestElementOf(store_ty)) &&
+                      address_space == ast::AddressSpace::kPushConstant)) {
         AddError("using f16 types in 'push_constant' address space is not implemented yet", source);
         return false;
     }
@@ -447,14 +447,15 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
             uint32_t required_align = required_alignment_of(m->Type());
 
             // Recurse into the member type.
-            if (!AddressSpaceLayout(m->Type(), address_space, m->Declaration()->type->source)) {
+            if (TINT_UNLIKELY(!AddressSpaceLayout(m->Type(), address_space,
+                                                  m->Declaration()->type->source))) {
                 AddNote("see layout of struct:\n" + str->Layout(symbols_), str->Source());
                 note_usage();
                 return false;
             }
 
             // Validate that member is at a valid byte offset
-            if (m->Offset() % required_align != 0) {
+            if (TINT_UNLIKELY(m->Offset() % required_align != 0)) {
                 AddError("the offset of a struct member of type '" +
                              m->Type()->UnwrapRef()->FriendlyName(symbols_) +
                              "' in address space '" + utils::ToString(address_space) +
@@ -480,7 +481,7 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
             auto* const prev_member = (i == 0) ? nullptr : str->Members()[i - 1];
             if (prev_member && is_uniform_struct(prev_member->Type())) {
                 const uint32_t prev_to_curr_offset = m->Offset() - prev_member->Offset();
-                if (prev_to_curr_offset % 16 != 0) {
+                if (TINT_UNLIKELY(prev_to_curr_offset % 16 != 0)) {
                     AddError(
                         "uniform storage requires that the number of bytes between the "
                         "start of the previous member of type struct and the current "
@@ -509,14 +510,14 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
         // TODO(crbug.com/tint/1388): Ideally we'd pass the source for nested element type here, but
         // we can't easily get that from the semantic node. We should consider recursing through the
         // AST type nodes instead.
-        if (!AddressSpaceLayout(arr->ElemType(), address_space, source)) {
+        if (TINT_UNLIKELY(!AddressSpaceLayout(arr->ElemType(), address_space, source))) {
             return false;
         }
 
         if (address_space == ast::AddressSpace::kUniform) {
             // We already validated that this array member is itself aligned to 16 bytes above, so
             // we only need to validate that stride is a multiple of 16 bytes.
-            if (arr->Stride() % 16 != 0) {
+            if (TINT_UNLIKELY(arr->Stride() % 16 != 0)) {
                 // Since WGSL has no stride attribute, try to provide a useful hint for how the
                 // shader author can resolve the issue.
                 std::string hint;
@@ -547,7 +548,7 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
 
 bool Validator::LocalVariable(const sem::Variable* local) const {
     auto* decl = local->Declaration();
-    if (IsArrayWithOverrideCount(local->Type())) {
+    if (TINT_UNLIKELY(IsArrayWithOverrideCount(local->Type()))) {
         RaiseArrayWithOverrideCountError(decl->type ? decl->type->source
                                                     : decl->initializer->source);
         return false;
@@ -557,7 +558,7 @@ bool Validator::LocalVariable(const sem::Variable* local) const {
         [&](const ast::Var* var) {
             if (IsValidationEnabled(var->attributes,
                                     ast::DisabledValidation::kIgnoreAddressSpace)) {
-                if (!local->Type()->UnwrapRef()->IsConstructible()) {
+                if (TINT_UNLIKELY(!local->Type()->UnwrapRef()->IsConstructible())) {
                     AddError("function-scope 'var' must have a constructible type",
                              var->type ? var->type->source : var->source);
                     return false;
@@ -579,8 +580,8 @@ bool Validator::GlobalVariable(
     const sem::GlobalVariable* global,
     const utils::Hashmap<OverrideId, const sem::Variable*, 8>& override_ids) const {
     auto* decl = global->Declaration();
-    if (global->AddressSpace() != ast::AddressSpace::kWorkgroup &&
-        IsArrayWithOverrideCount(global->Type())) {
+    if (TINT_UNLIKELY(global->AddressSpace() != ast::AddressSpace::kWorkgroup &&
+                      IsArrayWithOverrideCount(global->Type()))) {
         RaiseArrayWithOverrideCountError(decl->type ? decl->type->source
                                                     : decl->initializer->source);
         return false;
@@ -589,13 +590,13 @@ bool Validator::GlobalVariable(
         decl,  //
         [&](const ast::Var*) {
             if (auto* init = global->Initializer();
-                init && init->Stage() > sem::EvaluationStage::kOverride) {
+                TINT_UNLIKELY(init && init->Stage() > sem::EvaluationStage::kOverride)) {
                 AddError("module-scope 'var' initializer must be a constant or override-expression",
                          init->Declaration()->source);
                 return false;
             }
 
-            if (global->AddressSpace() == ast::AddressSpace::kNone) {
+            if (TINT_UNLIKELY(global->AddressSpace() == ast::AddressSpace::kNone)) {
                 AddError("module-scope 'var' declaration must have a address space", decl->source);
                 return false;
             }
@@ -606,9 +607,9 @@ bool Validator::GlobalVariable(
                                   ast::InvariantAttribute, ast::LocationAttribute>();
                 bool has_io_address_space = global->AddressSpace() == ast::AddressSpace::kIn ||
                                             global->AddressSpace() == ast::AddressSpace::kOut;
-                if (!attr->IsAnyOf<ast::BindingAttribute, ast::GroupAttribute,
-                                   ast::InternalAttribute>() &&
-                    (!is_shader_io_attribute || !has_io_address_space)) {
+                if (TINT_UNLIKELY((!attr->IsAnyOf<ast::BindingAttribute, ast::GroupAttribute,
+                                                  ast::InternalAttribute>() &&
+                                   (!is_shader_io_attribute || !has_io_address_space)))) {
                     AddError("attribute '" + attr->Name() + "' is not valid for module-scope 'var'",
                              attr->source);
                     return false;
@@ -619,7 +620,7 @@ bool Validator::GlobalVariable(
         },
         [&](const ast::Override*) { return Override(global, override_ids); },
         [&](const ast::Const*) {
-            if (!decl->attributes.IsEmpty()) {
+            if (TINT_UNLIKELY(!decl->attributes.IsEmpty())) {
                 AddError("attribute is not valid for module-scope 'const' declaration",
                          decl->attributes[0]->source);
                 return false;
@@ -633,11 +634,11 @@ bool Validator::GlobalVariable(
             return false;
         });
 
-    if (!ok) {
+    if (TINT_UNLIKELY(!ok)) {
         return false;
     }
 
-    if (global->AddressSpace() == ast::AddressSpace::kFunction) {
+    if (TINT_UNLIKELY(global->AddressSpace() == ast::AddressSpace::kFunction)) {
         AddError("module-scope 'var' must not use address space 'function'", decl->source);
         return false;
     }
@@ -648,7 +649,7 @@ bool Validator::GlobalVariable(
         case ast::AddressSpace::kHandle: {
             // https://gpuweb.github.io/gpuweb/wgsl/#resource-interface
             // Each resource variable must be declared with both group and binding attributes.
-            if (!decl->HasBindingPoint()) {
+            if (TINT_UNLIKELY(!decl->HasBindingPoint())) {
                 AddError("resource variables require @group and @binding attributes", decl->source);
                 return false;
             }
@@ -657,7 +658,7 @@ bool Validator::GlobalVariable(
         default: {
             auto* binding_attr = ast::GetAttribute<ast::BindingAttribute>(decl->attributes);
             auto* group_attr = ast::GetAttribute<ast::GroupAttribute>(decl->attributes);
-            if (binding_attr || group_attr) {
+            if (TINT_UNLIKELY(binding_attr || group_attr)) {
                 // https://gpuweb.github.io/gpuweb/wgsl/#attribute-binding
                 // Must only be applied to a resource variable
                 AddError("non-resource variables must not have @group or @binding attributes",
@@ -674,13 +675,13 @@ bool Validator::Var(const sem::Variable* v) const {
     auto* var = v->Declaration()->As<ast::Var>();
     auto* store_ty = v->Type()->UnwrapRef();
 
-    if (!IsStorable(store_ty)) {
+    if (TINT_UNLIKELY(!IsStorable(store_ty))) {
         AddError(sem_.TypeNameOf(store_ty) + " cannot be used as the type of a var", var->source);
         return false;
     }
 
     if (store_ty->is_handle()) {
-        if (var->declared_address_space != ast::AddressSpace::kNone) {
+        if (TINT_UNLIKELY(var->declared_address_space != ast::AddressSpace::kNone)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#module-scope-variables
             // If the store type is a texture type or a sampler type, then the variable declaration
             // must not have a address space attribute. The address space will always be handle.
@@ -696,21 +697,23 @@ bool Validator::Var(const sem::Variable* v) const {
         // When writing a variable declaration or a pointer type in WGSL source:
         // * For the storage address space, the access mode is optional, and defaults to read.
         // * For other address spaces, the access mode must not be written.
-        if (var->declared_address_space != ast::AddressSpace::kStorage) {
+        if (TINT_UNLIKELY(var->declared_address_space != ast::AddressSpace::kStorage)) {
             AddError("only variables in <storage> address space may declare an access mode",
                      var->source);
             return false;
         }
     }
 
-    if (!CheckTypeAccessAddressSpace(v->Type()->UnwrapRef(), v->Access(), v->AddressSpace(),
-                                     var->attributes, var->source)) {
+    if (TINT_UNLIKELY(!CheckTypeAccessAddressSpace(v->Type()->UnwrapRef(), v->Access(),
+                                                   v->AddressSpace(), var->attributes,
+                                                   var->source))) {
         return false;
     }
 
-    if (IsValidationEnabled(var->attributes, ast::DisabledValidation::kIgnoreAddressSpace) &&
-        (var->declared_address_space == ast::AddressSpace::kIn ||
-         var->declared_address_space == ast::AddressSpace::kOut)) {
+    if (TINT_UNLIKELY(
+            IsValidationEnabled(var->attributes, ast::DisabledValidation::kIgnoreAddressSpace) &&
+            (var->declared_address_space == ast::AddressSpace::kIn ||
+             var->declared_address_space == ast::AddressSpace::kOut))) {
         AddError("invalid use of input/output address space", var->source);
         return false;
     }
@@ -721,7 +724,7 @@ bool Validator::Let(const sem::Variable* v) const {
     auto* decl = v->Declaration();
     auto* storage_ty = v->Type()->UnwrapRef();
 
-    if (!(storage_ty->IsConstructible() || storage_ty->Is<type::Pointer>())) {
+    if (TINT_UNLIKELY(!(storage_ty->IsConstructible() || storage_ty->Is<type::Pointer>()))) {
         AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'let'",
                  decl->source);
         return false;
@@ -735,16 +738,17 @@ bool Validator::Override(
     auto* decl = v->Declaration();
     auto* storage_ty = v->Type()->UnwrapRef();
 
-    if (auto* init = v->Initializer(); init && init->Stage() > sem::EvaluationStage::kOverride) {
+    if (auto* init = v->Initializer();
+        TINT_UNLIKELY(init && init->Stage() > sem::EvaluationStage::kOverride)) {
         AddError("'override' initializer must be an override-expression",
                  init->Declaration()->source);
         return false;
     }
 
     for (auto* attr : decl->attributes) {
-        if (attr->Is<ast::IdAttribute>()) {
+        if (TINT_LIKELY(attr->Is<ast::IdAttribute>())) {
             auto id = v->OverrideId();
-            if (auto var = override_ids.Find(id); var && *var != v) {
+            if (auto var = override_ids.Find(id); TINT_UNLIKELY(var && *var != v)) {
                 AddError("@id values must be unique", attr->source);
                 AddNote(
                     "a override with an ID of " + std::to_string(id.value) +
@@ -758,13 +762,13 @@ bool Validator::Override(
         }
     }
 
-    if (!storage_ty->is_scalar()) {
+    if (TINT_UNLIKELY(!storage_ty->is_scalar())) {
         AddError(sem_.TypeNameOf(storage_ty) + " cannot be used as the type of a 'override'",
                  decl->source);
         return false;
     }
 
-    if (storage_ty->Is<type::F16>()) {
+    if (TINT_UNLIKELY(storage_ty->Is<type::F16>())) {
         AddError("'override' of type f16 is not implemented yet", decl->source);
         return false;
     }
@@ -784,15 +788,16 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
     }
 
     for (auto* attr : decl->attributes) {
-        if (!func->IsEntryPoint() && !attr->Is<ast::InternalAttribute>()) {
+        if (TINT_UNLIKELY(!func->IsEntryPoint() && !attr->Is<ast::InternalAttribute>())) {
             AddError("attribute is not valid for non-entry point function parameters",
                      attr->source);
             return false;
         }
-        if (!attr->IsAnyOf<ast::BuiltinAttribute, ast::InvariantAttribute, ast::LocationAttribute,
-                           ast::InterpolateAttribute, ast::InternalAttribute>() &&
-            (IsValidationEnabled(decl->attributes,
-                                 ast::DisabledValidation::kEntryPointParameter))) {
+        if (TINT_UNLIKELY((!attr->IsAnyOf<ast::BuiltinAttribute, ast::InvariantAttribute,
+                                          ast::LocationAttribute, ast::InterpolateAttribute,
+                                          ast::InternalAttribute>() &&
+                           (IsValidationEnabled(decl->attributes,
+                                                ast::DisabledValidation::kEntryPointParameter))))) {
             AddError("attribute is not valid for function parameters", attr->source);
             return false;
         }
@@ -817,7 +822,7 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
                 default:
                     break;
             }
-            if (!ok) {
+            if (TINT_UNLIKELY(!ok)) {
                 std::stringstream ss;
                 ss << "function parameter of pointer type cannot be in '" << sc
                    << "' address space";
@@ -828,11 +833,12 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
     }
 
     if (IsPlain(var->Type())) {
-        if (!var->Type()->IsConstructible()) {
+        if (TINT_UNLIKELY(!var->Type()->IsConstructible())) {
             AddError("type of function parameter must be constructible", decl->type->source);
             return false;
         }
-    } else if (!var->Type()->IsAnyOf<type::Texture, type::Sampler, type::Pointer>()) {
+    } else if (TINT_UNLIKELY(
+                   (!var->Type()->IsAnyOf<type::Texture, type::Sampler, type::Pointer>()))) {
         AddError("type of function parameter cannot be " + sem_.TypeNameOf(var->Type()),
                  decl->source);
         return false;
@@ -857,7 +863,8 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                   (is_output && stage == ast::PipelineStage::kVertex))) {
                 is_stage_mismatch = true;
             }
-            if (!(type->is_float_vector() && type->As<type::Vector>()->Width() == 4)) {
+            if (TINT_UNLIKELY(
+                    !(type->is_float_vector() && type->As<type::Vector>()->Width() == 4))) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'vec4<f32>'",
                          attr->source);
                 return false;
@@ -871,7 +878,8 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kCompute && is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!(type->is_unsigned_integer_vector() && type->As<type::Vector>()->Width() == 3)) {
+            if (TINT_UNLIKELY(!(type->is_unsigned_integer_vector() &&
+                                type->As<type::Vector>()->Width() == 3))) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'vec3<u32>'",
                          attr->source);
                 return false;
@@ -882,7 +890,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kFragment && !is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::F32>()) {
+            if (TINT_UNLIKELY(!type->Is<type::F32>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'f32'", attr->source);
                 return false;
             }
@@ -892,7 +900,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kFragment && is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::Bool>()) {
+            if (TINT_UNLIKELY(!type->Is<type::Bool>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'bool'", attr->source);
                 return false;
             }
@@ -902,7 +910,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kCompute && is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::U32>()) {
+            if (TINT_UNLIKELY(!type->Is<type::U32>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'u32'", attr->source);
                 return false;
             }
@@ -913,7 +921,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kVertex && is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::U32>()) {
+            if (TINT_UNLIKELY(!type->Is<type::U32>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'u32'", attr->source);
                 return false;
             }
@@ -922,7 +930,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
             if (stage != ast::PipelineStage::kNone && !(stage == ast::PipelineStage::kFragment)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::U32>()) {
+            if (TINT_UNLIKELY(!type->Is<type::U32>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'u32'", attr->source);
                 return false;
             }
@@ -932,7 +940,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 !(stage == ast::PipelineStage::kFragment && is_input)) {
                 is_stage_mismatch = true;
             }
-            if (!type->Is<type::U32>()) {
+            if (TINT_UNLIKELY(!type->Is<type::U32>())) {
                 AddError("store type of " + attr_to_str(attr) + " must be 'u32'", attr->source);
                 return false;
             }
@@ -941,7 +949,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
             break;
     }
 
-    if (is_stage_mismatch) {
+    if (TINT_UNLIKELY(is_stage_mismatch)) {
         AddError(attr_to_str(attr) + " cannot be used in " +
                      (is_input ? "input of " : "output of ") + stage_name.str() + " pipeline stage",
                  attr->source);
@@ -955,14 +963,15 @@ bool Validator::InterpolateAttribute(const ast::InterpolateAttribute* attr,
                                      const type::Type* storage_ty) const {
     auto* type = storage_ty->UnwrapRef();
 
-    if (type->is_integer_scalar_or_vector() && attr->type != ast::InterpolationType::kFlat) {
+    if (TINT_UNLIKELY(type->is_integer_scalar_or_vector() &&
+                      attr->type != ast::InterpolationType::kFlat)) {
         AddError("interpolation type must be 'flat' for integral user-defined IO types",
                  attr->source);
         return false;
     }
 
-    if (attr->type == ast::InterpolationType::kFlat &&
-        attr->sampling != ast::InterpolationSampling::kUndefined) {
+    if (TINT_UNLIKELY(attr->type == ast::InterpolationType::kFlat &&
+                      attr->sampling != ast::InterpolationSampling::kUndefined)) {
         AddError("flat interpolation attribute must not have a sampling parameter", attr->source);
         return false;
     }
@@ -975,24 +984,24 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
 
     for (auto* attr : decl->attributes) {
         if (attr->Is<ast::WorkgroupAttribute>()) {
-            if (decl->PipelineStage() != ast::PipelineStage::kCompute) {
+            if (TINT_UNLIKELY(decl->PipelineStage() != ast::PipelineStage::kCompute)) {
                 AddError("the workgroup_size attribute is only valid for compute stages",
                          attr->source);
                 return false;
             }
-        } else if (!attr->IsAnyOf<ast::StageAttribute, ast::InternalAttribute>()) {
+        } else if (TINT_UNLIKELY((!attr->IsAnyOf<ast::StageAttribute, ast::InternalAttribute>()))) {
             AddError("attribute is not valid for functions", attr->source);
             return false;
         }
     }
 
-    if (decl->params.Length() > 255) {
+    if (TINT_UNLIKELY(decl->params.Length() > 255)) {
         AddError("functions may declare at most 255 parameters", decl->source);
         return false;
     }
 
     if (!func->ReturnType()->Is<type::Void>()) {
-        if (!func->ReturnType()->IsConstructible()) {
+        if (TINT_UNLIKELY(!func->ReturnType()->IsConstructible())) {
             AddError("function return type must be a constructible type",
                      decl->return_type->source);
             return false;
@@ -1003,7 +1012,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
             if (auto* last = decl->body->Last()) {
                 behaviors = sem_.Get(last)->Behaviors();
             }
-            if (behaviors.Contains(sem::Behavior::kNext)) {
+            if (TINT_UNLIKELY(behaviors.Contains(sem::Behavior::kNext))) {
                 AddError("missing return at end of function", decl->source);
                 return false;
             }
@@ -1014,18 +1023,19 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
         }
 
         for (auto* attr : decl->return_type_attributes) {
-            if (!decl->IsEntryPoint()) {
+            if (TINT_UNLIKELY(!decl->IsEntryPoint())) {
                 AddError("attribute is not valid for non-entry point function return types",
                          attr->source);
                 return false;
             }
-            if (!attr->IsAnyOf<ast::BuiltinAttribute, ast::InternalAttribute,
-                               ast::LocationAttribute, ast::InterpolateAttribute,
-                               ast::InvariantAttribute>() &&
-                (IsValidationEnabled(decl->attributes,
-                                     ast::DisabledValidation::kEntryPointParameter) &&
-                 IsValidationEnabled(decl->attributes,
-                                     ast::DisabledValidation::kFunctionParameter))) {
+            if (TINT_UNLIKELY(
+                    (!attr->IsAnyOf<ast::BuiltinAttribute, ast::InternalAttribute,
+                                    ast::LocationAttribute, ast::InterpolateAttribute,
+                                    ast::InvariantAttribute>() &&
+                     (IsValidationEnabled(decl->attributes,
+                                          ast::DisabledValidation::kEntryPointParameter) &&
+                      IsValidationEnabled(decl->attributes,
+                                          ast::DisabledValidation::kFunctionParameter))))) {
                 AddError("attribute is not valid for entry point return types", attr->source);
                 return false;
             }
@@ -1033,7 +1043,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
     }
 
     if (decl->IsEntryPoint()) {
-        if (!EntryPoint(func, stage)) {
+        if (TINT_UNLIKELY(!EntryPoint(func, stage))) {
             return false;
         }
     }
@@ -1080,7 +1090,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             auto is_invalid_compute_shader_attribute = false;
 
             if (auto* builtin = attr->As<ast::BuiltinAttribute>()) {
-                if (pipeline_io_attribute) {
+                if (TINT_UNLIKELY(pipeline_io_attribute)) {
                     AddError("multiple entry point IO attributes", attr->source);
                     AddNote("previously consumed " + attr_to_str(pipeline_io_attribute, location),
                             pipeline_io_attribute->source);
@@ -1088,7 +1098,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 }
                 pipeline_io_attribute = attr;
 
-                if (builtins.Contains(builtin->builtin)) {
+                if (TINT_UNLIKELY(builtins.Contains(builtin->builtin))) {
                     AddError(attr_to_str(builtin) +
                                  " attribute appears multiple times as pipeline " +
                                  (param_or_ret == ParamOrRetType::kParameter ? "input" : "output"),
@@ -1096,13 +1106,14 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                     return false;
                 }
 
-                if (!BuiltinAttribute(builtin, ty, stage,
-                                      /* is_input */ param_or_ret == ParamOrRetType::kParameter)) {
+                if (TINT_UNLIKELY(!BuiltinAttribute(
+                        builtin, ty, stage,
+                        /* is_input */ param_or_ret == ParamOrRetType::kParameter))) {
                     return false;
                 }
                 builtins.Add(builtin->builtin);
             } else if (auto* loc_attr = attr->As<ast::LocationAttribute>()) {
-                if (pipeline_io_attribute) {
+                if (TINT_UNLIKELY(pipeline_io_attribute)) {
                     AddError("multiple entry point IO attributes", attr->source);
                     AddNote("previously consumed " + attr_to_str(pipeline_io_attribute),
                             pipeline_io_attribute->source);
@@ -1117,14 +1128,14 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                     return false;
                 }
 
-                if (!LocationAttribute(loc_attr, location.value(), ty, locations, stage, source,
-                                       is_input)) {
+                if (TINT_UNLIKELY(!LocationAttribute(loc_attr, location.value(), ty, locations,
+                                                     stage, source, is_input))) {
                     return false;
                 }
             } else if (auto* interpolate = attr->As<ast::InterpolateAttribute>()) {
                 if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
                     is_invalid_compute_shader_attribute = true;
-                } else if (!InterpolateAttribute(interpolate, ty)) {
+                } else if (TINT_UNLIKELY(!InterpolateAttribute(interpolate, ty))) {
                     return false;
                 }
                 interpolate_attribute = interpolate;
@@ -1134,7 +1145,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 }
                 invariant_attribute = invariant;
             }
-            if (is_invalid_compute_shader_attribute) {
+            if (TINT_UNLIKELY(is_invalid_compute_shader_attribute)) {
                 std::string input_or_output =
                     param_or_ret == ParamOrRetType::kParameter ? "inputs" : "output";
                 AddError("attribute is not valid for compute shader " + input_or_output,
@@ -1144,12 +1155,12 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         }
 
         if (IsValidationEnabled(attrs, ast::DisabledValidation::kEntryPointParameter)) {
-            if (is_struct_member && ty->Is<sem::Struct>()) {
+            if (TINT_UNLIKELY(is_struct_member && ty->Is<sem::Struct>())) {
                 AddError("nested structures cannot be used for entry point IO", source);
                 return false;
             }
 
-            if (!ty->Is<sem::Struct>() && !pipeline_io_attribute) {
+            if (TINT_UNLIKELY(!ty->Is<sem::Struct>() && !pipeline_io_attribute)) {
                 std::string err = "missing entry point IO attribute";
                 if (!is_struct_member) {
                     err += (param_or_ret == ParamOrRetType::kParameter ? " on parameter"
@@ -1161,16 +1172,16 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
             if (pipeline_io_attribute && pipeline_io_attribute->Is<ast::LocationAttribute>()) {
                 if (ty->is_integer_scalar_or_vector() && !interpolate_attribute) {
-                    if (decl->PipelineStage() == ast::PipelineStage::kVertex &&
-                        param_or_ret == ParamOrRetType::kReturnType) {
+                    if (TINT_UNLIKELY(decl->PipelineStage() == ast::PipelineStage::kVertex &&
+                                      param_or_ret == ParamOrRetType::kReturnType)) {
                         AddError(
                             "integral user-defined vertex outputs must have a flat "
                             "interpolation attribute",
                             source);
                         return false;
                     }
-                    if (decl->PipelineStage() == ast::PipelineStage::kFragment &&
-                        param_or_ret == ParamOrRetType::kParameter) {
+                    if (TINT_UNLIKELY(decl->PipelineStage() == ast::PipelineStage::kFragment &&
+                                      param_or_ret == ParamOrRetType::kParameter)) {
                         AddError(
                             "integral user-defined fragment inputs must have a flat "
                             "interpolation attribute",
@@ -1181,8 +1192,8 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             }
 
             if (interpolate_attribute) {
-                if (!pipeline_io_attribute ||
-                    !pipeline_io_attribute->Is<ast::LocationAttribute>()) {
+                if (TINT_UNLIKELY(!pipeline_io_attribute ||
+                                  !pipeline_io_attribute->Is<ast::LocationAttribute>())) {
                     AddError("interpolate attribute must only be used with @location",
                              interpolate_attribute->source);
                     return false;
@@ -1196,7 +1207,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                         has_position = (builtin->builtin == ast::BuiltinValue::kPosition);
                     }
                 }
-                if (!has_position) {
+                if (TINT_UNLIKELY(!has_position)) {
                     AddError(
                         "invariant attribute must only be applied to a position "
                         "builtin",
@@ -1213,17 +1224,18 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                                const type::Type* ty, Source source,
                                                ParamOrRetType param_or_ret,
                                                std::optional<uint32_t> location) {
-        if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
-                                                   /*is_struct_member*/ false, location)) {
+        if (TINT_UNLIKELY(!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
+                                                                 /*is_struct_member*/ false,
+                                                                 location))) {
             return false;
         }
 
         if (auto* str = ty->As<sem::Struct>()) {
             for (auto* member : str->Members()) {
-                if (!validate_entry_point_attributes_inner(
+                if (TINT_UNLIKELY(!validate_entry_point_attributes_inner(
                         member->Declaration()->attributes, member->Type(), member->Source(),
                         param_or_ret,
-                        /*is_struct_member*/ true, member->Location())) {
+                        /*is_struct_member*/ true, member->Location()))) {
                     AddNote("while analyzing entry point '" + symbols_.NameFor(decl->symbol) + "'",
                             decl->source);
                     return false;
@@ -1236,9 +1248,9 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
     for (auto* param : func->Parameters()) {
         auto* param_decl = param->Declaration();
-        if (!validate_entry_point_attributes(param_decl->attributes, param->Type(),
-                                             param_decl->source, ParamOrRetType::kParameter,
-                                             param->Location())) {
+        if (TINT_UNLIKELY(!validate_entry_point_attributes(
+                param_decl->attributes, param->Type(), param_decl->source,
+                ParamOrRetType::kParameter, param->Location()))) {
             return false;
         }
     }
@@ -1249,9 +1261,9 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     locations.Clear();
 
     if (!func->ReturnType()->Is<type::Void>()) {
-        if (!validate_entry_point_attributes(decl->return_type_attributes, func->ReturnType(),
-                                             decl->source, ParamOrRetType::kReturnType,
-                                             func->ReturnLocation())) {
+        if (TINT_UNLIKELY(!validate_entry_point_attributes(
+                decl->return_type_attributes, func->ReturnType(), decl->source,
+                ParamOrRetType::kReturnType, func->ReturnLocation()))) {
             return false;
         }
     }
@@ -1269,7 +1281,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 }
             }
         }
-        if (!found) {
+        if (TINT_UNLIKELY(!found)) {
             AddError("a vertex shader must include the 'position' builtin in its return type",
                      decl->source);
             return false;
@@ -1277,7 +1289,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     }
 
     if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
-        if (!ast::HasAttribute<ast::WorkgroupAttribute>(decl->attributes)) {
+        if (TINT_UNLIKELY(!ast::HasAttribute<ast::WorkgroupAttribute>(decl->attributes))) {
             AddError("a compute shader must include 'workgroup_size' in its attributes",
                      decl->source);
             return false;
@@ -1293,11 +1305,11 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         }
         auto bp = global->BindingPoint();
         if (auto added = binding_points.Add(bp, var_decl);
-            !added &&
-            IsValidationEnabled(decl->attributes,
-                                ast::DisabledValidation::kBindingPointCollision) &&
-            IsValidationEnabled((*added.value)->attributes,
-                                ast::DisabledValidation::kBindingPointCollision)) {
+            TINT_UNLIKELY(!added &&
+                          IsValidationEnabled(decl->attributes,
+                                              ast::DisabledValidation::kBindingPointCollision) &&
+                          IsValidationEnabled((*added.value)->attributes,
+                                              ast::DisabledValidation::kBindingPointCollision))) {
             // https://gpuweb.github.io/gpuweb/wgsl/#resource-interface
             // Bindings must not alias within a shader stage: two different variables in the
             // resource interface of a given shader must not have the same group and binding values,
@@ -1322,7 +1334,7 @@ bool Validator::EvaluationStage(const sem::Expression* expr,
     if (expr->Stage() == sem::EvaluationStage::kNotEvaluated) {
         return true;
     }
-    if (expr->Stage() > latest_stage) {
+    if (TINT_UNLIKELY(expr->Stage() > latest_stage)) {
         auto stage_name = [](sem::EvaluationStage stage) -> std::string {
             switch (stage) {
                 case sem::EvaluationStage::kRuntime:
@@ -1367,11 +1379,11 @@ bool Validator::Statements(utils::VectorRef<const ast::Statement*> stmts) const 
 
 bool Validator::Bitcast(const ast::BitcastExpression* cast, const type::Type* to) const {
     auto* from = sem_.TypeOf(cast->expr)->UnwrapRef();
-    if (!from->is_numeric_scalar_or_vector()) {
+    if (TINT_UNLIKELY(!from->is_numeric_scalar_or_vector())) {
         AddError("'" + sem_.TypeNameOf(from) + "' cannot be bitcast", cast->expr->source);
         return false;
     }
-    if (!to->is_numeric_scalar_or_vector()) {
+    if (TINT_UNLIKELY(!to->is_numeric_scalar_or_vector())) {
         AddError("cannot bitcast to '" + sem_.TypeNameOf(to) + "'", cast->type->source);
         return false;
     }
@@ -1383,7 +1395,7 @@ bool Validator::Bitcast(const ast::BitcastExpression* cast, const type::Type* to
         return 1u;
     };
 
-    if (width(from) != width(to)) {
+    if (TINT_UNLIKELY(width(from) != width(to))) {
         AddError(
             "cannot bitcast from '" + sem_.TypeNameOf(from) + "' to '" + sem_.TypeNameOf(to) + "'",
             cast->source);
@@ -1395,11 +1407,11 @@ bool Validator::Bitcast(const ast::BitcastExpression* cast, const type::Type* to
 
 bool Validator::BreakStatement(const sem::Statement* stmt,
                                sem::Statement* current_statement) const {
-    if (!stmt->FindFirstParent<sem::LoopBlockStatement, sem::CaseStatement>()) {
+    if (TINT_UNLIKELY((!stmt->FindFirstParent<sem::LoopBlockStatement, sem::CaseStatement>()))) {
         AddError("break statement must be in a loop or switch case", stmt->Declaration()->source);
         return false;
     }
-    if (ClosestContinuing(/*stop_at_loop*/ true, current_statement) != nullptr) {
+    if (TINT_UNLIKELY(ClosestContinuing(/*stop_at_loop*/ true, current_statement) != nullptr)) {
         AddError(
             "`break` must not be used to exit from a continuing block. Use `break-if` instead.",
             stmt->Declaration()->source);
@@ -1410,7 +1422,8 @@ bool Validator::BreakStatement(const sem::Statement* stmt,
 
 bool Validator::ContinueStatement(const sem::Statement* stmt,
                                   sem::Statement* current_statement) const {
-    if (auto* continuing = ClosestContinuing(/*stop_at_loop*/ true, current_statement)) {
+    if (auto* continuing = ClosestContinuing(/*stop_at_loop*/ true, current_statement);
+        TINT_UNLIKELY(continuing)) {
         AddError("continuing blocks must not contain a continue statement",
                  stmt->Declaration()->source);
         if (continuing != stmt->Declaration() && continuing != stmt->Parent()->Declaration()) {
@@ -1419,7 +1432,7 @@ bool Validator::ContinueStatement(const sem::Statement* stmt,
         return false;
     }
 
-    if (!stmt->FindFirstParent<sem::LoopBlockStatement>()) {
+    if (TINT_UNLIKELY(!stmt->FindFirstParent<sem::LoopBlockStatement>())) {
         AddError("continue statement must be in a loop", stmt->Declaration()->source);
         return false;
     }
@@ -1450,7 +1463,7 @@ bool Validator::Call(const sem::Call* call, sem::Statement* current_statement) c
 }
 
 bool Validator::LoopStatement(const sem::LoopStatement* stmt) const {
-    if (stmt->Behaviors().Empty()) {
+    if (TINT_UNLIKELY(stmt->Behaviors().Empty())) {
         AddError("loop does not exit", stmt->Declaration()->source.Begin());
         return false;
     }
@@ -1458,13 +1471,13 @@ bool Validator::LoopStatement(const sem::LoopStatement* stmt) const {
 }
 
 bool Validator::ForLoopStatement(const sem::ForLoopStatement* stmt) const {
-    if (stmt->Behaviors().Empty()) {
+    if (TINT_UNLIKELY(stmt->Behaviors().Empty())) {
         AddError("for-loop does not exit", stmt->Declaration()->source.Begin());
         return false;
     }
     if (auto* cond = stmt->Condition()) {
         auto* cond_ty = cond->Type()->UnwrapRef();
-        if (!cond_ty->Is<type::Bool>()) {
+        if (TINT_UNLIKELY(!cond_ty->Is<type::Bool>())) {
             AddError("for-loop condition must be bool, got " + sem_.TypeNameOf(cond_ty),
                      stmt->Condition()->Declaration()->source);
             return false;
@@ -1474,13 +1487,13 @@ bool Validator::ForLoopStatement(const sem::ForLoopStatement* stmt) const {
 }
 
 bool Validator::WhileStatement(const sem::WhileStatement* stmt) const {
-    if (stmt->Behaviors().Empty()) {
+    if (TINT_UNLIKELY(stmt->Behaviors().Empty())) {
         AddError("while does not exit", stmt->Declaration()->source.Begin());
         return false;
     }
     if (auto* cond = stmt->Condition()) {
         auto* cond_ty = cond->Type()->UnwrapRef();
-        if (!cond_ty->Is<type::Bool>()) {
+        if (TINT_UNLIKELY(!cond_ty->Is<type::Bool>())) {
             AddError("while condition must be bool, got " + sem_.TypeNameOf(cond_ty),
                      stmt->Condition()->Declaration()->source);
             return false;
@@ -1492,7 +1505,7 @@ bool Validator::WhileStatement(const sem::WhileStatement* stmt) const {
 bool Validator::BreakIfStatement(const sem::BreakIfStatement* stmt,
                                  sem::Statement* current_statement) const {
     auto* cond_ty = stmt->Condition()->Type()->UnwrapRef();
-    if (!cond_ty->Is<type::Bool>()) {
+    if (TINT_UNLIKELY(!cond_ty->Is<type::Bool>())) {
         AddError("break-if statement condition must be bool, got " + sem_.TypeNameOf(cond_ty),
                  stmt->Condition()->Declaration()->source);
         return false;
@@ -1503,7 +1516,8 @@ bool Validator::BreakIfStatement(const sem::BreakIfStatement* stmt,
             break;
         }
         if (auto* continuing = s->As<sem::LoopContinuingBlockStatement>()) {
-            if (continuing->Declaration()->statements.Back() != stmt->Declaration()) {
+            if (TINT_UNLIKELY(continuing->Declaration()->statements.Back() !=
+                              stmt->Declaration())) {
                 AddError("break-if must be the last statement in a continuing block",
                          stmt->Declaration()->source);
                 AddNote("see continuing block here", s->Declaration()->source);
@@ -1519,7 +1533,7 @@ bool Validator::BreakIfStatement(const sem::BreakIfStatement* stmt,
 
 bool Validator::IfStatement(const sem::IfStatement* stmt) const {
     auto* cond_ty = stmt->Condition()->Type()->UnwrapRef();
-    if (!cond_ty->Is<type::Bool>()) {
+    if (TINT_UNLIKELY(!cond_ty->Is<type::Bool>())) {
         AddError("if statement condition must be bool, got " + sem_.TypeNameOf(cond_ty),
                  stmt->Condition()->Declaration()->source);
         return false;
@@ -1540,7 +1554,7 @@ bool Validator::BuiltinCall(const sem::Call* call) const {
                 }
             }
         }
-        if (!is_call_statement) {
+        if (TINT_UNLIKELY(!is_call_statement)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-call-expr
             // If the called function does not return a value, a function call
             // statement should be used instead.
@@ -1556,7 +1570,7 @@ bool Validator::BuiltinCall(const sem::Call* call) const {
 
 bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
     auto* builtin = call->Target()->As<sem::Builtin>();
-    if (!builtin) {
+    if (TINT_UNLIKELY(!builtin)) {
         return false;
     }
 
@@ -1575,7 +1589,7 @@ bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
             if (auto* vector = values->Type()->As<type::Vector>()) {
                 for (size_t i = 0; i < vector->Width(); i++) {
                     auto value = values->Index(i)->ValueAs<AInt>();
-                    if (value < min || value > max) {
+                    if (TINT_UNLIKELY(value < min || value > max)) {
                         AddError("each component of the " + name + " argument must be at least " +
                                      std::to_string(min) + " and at most " + std::to_string(max) +
                                      ". " + name + " component " + std::to_string(i) + " is " +
@@ -1586,7 +1600,7 @@ bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
                 }
             } else {
                 auto value = values->ValueAs<AInt>();
-                if (value < min || value > max) {
+                if (TINT_UNLIKELY(value < min || value > max)) {
                     AddError("the " + name + " argument must be at least " + std::to_string(min) +
                                  " and at most " + std::to_string(max) + ". " + name + " is " +
                                  std::to_string(value),
@@ -1607,7 +1621,7 @@ bool Validator::TextureBuiltinFunction(const sem::Call* call) const {
 
 bool Validator::WorkgroupUniformLoad(const sem::Call* call) const {
     auto* builtin = call->Target()->As<sem::Builtin>();
-    if (!builtin) {
+    if (TINT_UNLIKELY(!builtin)) {
         return false;
     }
 
@@ -1617,7 +1631,7 @@ bool Validator::WorkgroupUniformLoad(const sem::Call* call) const {
     TINT_ASSERT(Resolver, ptr != nullptr);
     auto* ty = ptr->StoreType();
 
-    if (ty->Is<type::Atomic>() || atomic_composite_info_.Contains(ty)) {
+    if (TINT_UNLIKELY(ty->Is<type::Atomic>() || atomic_composite_info_.Contains(ty))) {
         AddError(
             "workgroupUniformLoad must not be called with an argument that contains an atomic type",
             arg->Declaration()->source);
@@ -1638,7 +1652,7 @@ bool Validator::RequiredExtensionForBuiltinFunction(const sem::Call* call) const
         return true;
     }
 
-    if (!enabled_extensions_.Contains(extension)) {
+    if (TINT_UNLIKELY(!enabled_extensions_.Contains(extension))) {
         AddError("cannot call built-in function '" + std::string(builtin->str()) +
                      "' without extension " + utils::ToString(extension),
                  call->Declaration()->source);
@@ -1650,7 +1664,7 @@ bool Validator::RequiredExtensionForBuiltinFunction(const sem::Call* call) const
 
 bool Validator::CheckF16Enabled(const Source& source) const {
     // Validate if f16 type is allowed.
-    if (!enabled_extensions_.Contains(ast::Extension::kF16)) {
+    if (TINT_UNLIKELY(!enabled_extensions_.Contains(ast::Extension::kF16))) {
         AddError("f16 type used without 'f16' extension enabled", source);
         return false;
     }
@@ -1663,19 +1677,19 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
     auto sym = decl->target.name->symbol;
     auto name = symbols_.NameFor(sym);
 
-    if (!current_statement) {  // Function call at module-scope.
+    if (TINT_UNLIKELY(!current_statement)) {  // Function call at module-scope.
         AddError("functions cannot be called at module-scope", decl->source);
         return false;
     }
 
-    if (target->Declaration()->IsEntryPoint()) {
+    if (TINT_UNLIKELY(target->Declaration()->IsEntryPoint())) {
         // https://www.w3.org/TR/WGSL/#function-restriction
         // An entry point must never be the target of a function call.
         AddError("entry point functions cannot be the target of a function call", decl->source);
         return false;
     }
 
-    if (decl->args.Length() != target->Parameters().Length()) {
+    if (TINT_UNLIKELY(decl->args.Length() != target->Parameters().Length())) {
         bool more = decl->args.Length() > target->Parameters().Length();
         AddError("too " + (more ? std::string("many") : std::string("few")) +
                      " arguments in call to '" + name + "', expected " +
@@ -1691,7 +1705,7 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
         auto* param_type = param->Type();
         auto* arg_type = sem_.TypeOf(arg_expr)->UnwrapRef();
 
-        if (param_type != arg_type) {
+        if (TINT_UNLIKELY(param_type != arg_type)) {
             AddError("type mismatch for argument " + std::to_string(i + 1) + " in call to '" +
                          name + "', expected '" + sem_.TypeNameOf(param_type) + "', got '" +
                          sem_.TypeNameOf(arg_type) + "'",
@@ -1717,9 +1731,10 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
             } else {
                 root_store_type = root_ref_ty->StoreType();
             }
-            if (root_store_type != arg_store_type &&
-                IsValidationEnabled(param->Declaration()->attributes,
-                                    ast::DisabledValidation::kIgnoreInvalidPointerArgument)) {
+            if (TINT_UNLIKELY(
+                    root_store_type != arg_store_type &&
+                    IsValidationEnabled(param->Declaration()->attributes,
+                                        ast::DisabledValidation::kIgnoreInvalidPointerArgument))) {
                 AddError(
                     "arguments of pointer type must not point to a subset of the originating "
                     "variable",
@@ -1736,7 +1751,7 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
                 is_call_statement = true;
             }
         }
-        if (!is_call_statement) {
+        if (TINT_UNLIKELY(!is_call_statement)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-call-expr
             // If the called function does not return a value, a function call
             // statement should be used instead.
@@ -1750,13 +1765,13 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
 
 bool Validator::StructureInitializer(const ast::CallExpression* ctor,
                                      const sem::Struct* struct_type) const {
-    if (!struct_type->IsConstructible()) {
+    if (TINT_UNLIKELY(!struct_type->IsConstructible())) {
         AddError("struct initializer has non-constructible type", ctor->source);
         return false;
     }
 
     if (ctor->args.Length() > 0) {
-        if (ctor->args.Length() != struct_type->Members().Length()) {
+        if (TINT_UNLIKELY(ctor->args.Length() != struct_type->Members().Length())) {
             std::string fm = ctor->args.Length() < struct_type->Members().Length() ? "few" : "many";
             AddError("struct initializer has too " + fm + " inputs: expected " +
                          std::to_string(struct_type->Members().Length()) + ", found " +
@@ -1767,7 +1782,7 @@ bool Validator::StructureInitializer(const ast::CallExpression* ctor,
         for (auto* member : struct_type->Members()) {
             auto* value = ctor->args[member->Index()];
             auto* value_ty = sem_.TypeOf(value);
-            if (member->Type() != value_ty->UnwrapRef()) {
+            if (TINT_UNLIKELY(member->Type() != value_ty->UnwrapRef())) {
                 AddError(
                     "type in struct initializer does not match struct member type: expected '" +
                         sem_.TypeNameOf(member->Type()) + "', found '" + sem_.TypeNameOf(value_ty) +
@@ -1786,7 +1801,8 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
     auto* elem_ty = array_type->ElemType();
     for (auto* value : values) {
         auto* value_ty = sem_.TypeOf(value)->UnwrapRef();
-        if (type::Type::ConversionRank(value_ty, elem_ty) == type::Type::kNoConversion) {
+        if (TINT_UNLIKELY(type::Type::ConversionRank(value_ty, elem_ty) ==
+                          type::Type::kNoConversion)) {
             AddError("'" + sem_.TypeNameOf(value_ty) +
                          "' cannot be used to construct an array of '" + sem_.TypeNameOf(elem_ty) +
                          "'",
@@ -1796,17 +1812,18 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
     }
 
     auto* c = array_type->Count();
-    if (c->Is<type::RuntimeArrayCount>()) {
+    if (TINT_UNLIKELY(c->Is<type::RuntimeArrayCount>())) {
         AddError("cannot construct a runtime-sized array", ctor->source);
         return false;
     }
 
-    if (c->IsAnyOf<sem::NamedOverrideArrayCount, sem::UnnamedOverrideArrayCount>()) {
+    if (TINT_UNLIKELY(
+            (c->IsAnyOf<sem::NamedOverrideArrayCount, sem::UnnamedOverrideArrayCount>()))) {
         AddError("cannot construct an array that has an override-expression count", ctor->source);
         return false;
     }
 
-    if (!elem_ty->IsConstructible()) {
+    if (TINT_UNLIKELY(!elem_ty->IsConstructible())) {
         AddError("array initializer has non-constructible element type", ctor->source);
         return false;
     }
@@ -1817,7 +1834,7 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
     }
 
     const auto count = c->As<type::ConstantArrayCount>()->value;
-    if (!values.IsEmpty() && (values.Length() != count)) {
+    if (TINT_UNLIKELY(!values.IsEmpty() && (values.Length() != count))) {
         std::string fm = values.Length() < count ? "few" : "many";
         AddError("array initializer has too " + fm + " elements: expected " +
                      std::to_string(count) + ", found " + std::to_string(values.Length()),
@@ -1828,7 +1845,7 @@ bool Validator::ArrayInitializer(const ast::CallExpression* ctor,
 }
 
 bool Validator::Vector(const type::Vector* ty, const Source& source) const {
-    if (!ty->type()->is_scalar()) {
+    if (TINT_UNLIKELY(!ty->type()->is_scalar())) {
         AddError("vector element type must be 'bool', 'f32', 'f16', 'i32' or 'u32'", source);
         return false;
     }
@@ -1836,7 +1853,7 @@ bool Validator::Vector(const type::Vector* ty, const Source& source) const {
 }
 
 bool Validator::Matrix(const type::Matrix* ty, const Source& source) const {
-    if (!ty->is_float_matrix()) {
+    if (TINT_UNLIKELY(!ty->is_float_matrix())) {
         AddError("matrix element type must be 'f32' or 'f16'", source);
         return false;
     }
@@ -1861,7 +1878,7 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
         auto stage = entry_point->Declaration()->PipelineStage();
         if (stage != ast::PipelineStage::kCompute) {
             for (auto* var : func->DirectlyReferencedGlobals()) {
-                if (var->AddressSpace() == ast::AddressSpace::kWorkgroup) {
+                if (TINT_UNLIKELY(var->AddressSpace() == ast::AddressSpace::kWorkgroup)) {
                     std::stringstream stage_name;
                     stage_name << stage;
                     for (auto* user : var->Users()) {
@@ -1884,7 +1901,7 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
     auto check_builtin_calls = [&](const sem::Function* func, const sem::Function* entry_point) {
         auto stage = entry_point->Declaration()->PipelineStage();
         for (auto* builtin : func->DirectlyCalledBuiltins()) {
-            if (!builtin->SupportedStages().Contains(stage)) {
+            if (TINT_UNLIKELY(!builtin->SupportedStages().Contains(stage))) {
                 auto* call = func->FindDirectCallTo(builtin);
                 std::stringstream err;
                 err << "built-in cannot be used by " << stage << " pipeline stage";
@@ -1898,7 +1915,7 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
     };
 
     auto check_no_discards = [&](const sem::Function* func, const sem::Function* entry_point) {
-        if (auto* discard = func->DiscardStatement()) {
+        if (auto* discard = func->DiscardStatement(); TINT_UNLIKELY(discard)) {
             auto stage = entry_point->Declaration()->PipelineStage();
             std::stringstream err;
             err << "discard statement cannot be used in " << stage << " pipeline stage";
@@ -1910,14 +1927,14 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
     };
 
     auto check_func = [&](const sem::Function* func, const sem::Function* entry_point) {
-        if (!check_workgroup_storage(func, entry_point)) {
+        if (TINT_UNLIKELY(!check_workgroup_storage(func, entry_point))) {
             return false;
         }
-        if (!check_builtin_calls(func, entry_point)) {
+        if (TINT_UNLIKELY(!check_builtin_calls(func, entry_point))) {
             return false;
         }
         if (entry_point->Declaration()->PipelineStage() != ast::PipelineStage::kFragment) {
-            if (!check_no_discards(func, entry_point)) {
+            if (TINT_UNLIKELY(!check_no_discards(func, entry_point))) {
                 return false;
             }
         }
@@ -1925,11 +1942,11 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
     };
 
     for (auto* entry_point : entry_points) {
-        if (!check_func(entry_point, entry_point)) {
+        if (TINT_UNLIKELY(!check_func(entry_point, entry_point))) {
             return false;
         }
         for (auto* func : entry_point->TransitivelyCalledFunctions()) {
-            if (!check_func(func, entry_point)) {
+            if (TINT_UNLIKELY(!check_func(func, entry_point))) {
                 return false;
             }
         }
@@ -1952,7 +1969,7 @@ bool Validator::PushConstants(utils::VectorRef<sem::Function*> entry_points) con
                     continue;
                 }
 
-                if (push_constant_var == nullptr) {
+                if (TINT_LIKELY(push_constant_var == nullptr)) {
                     push_constant_var = var;
                     push_constant_func = func;
                     continue;
@@ -1992,11 +2009,11 @@ bool Validator::PushConstants(utils::VectorRef<sem::Function*> entry_points) con
             return true;
         };
 
-        if (!check_push_constant(entry_point, entry_point)) {
+        if (TINT_UNLIKELY(!check_push_constant(entry_point, entry_point))) {
             return false;
         }
         for (auto* func : entry_point->TransitivelyCalledFunctions()) {
-            if (!check_push_constant(func, entry_point)) {
+            if (TINT_UNLIKELY(!check_push_constant(func, entry_point))) {
                 return false;
             }
         }
@@ -2008,18 +2025,18 @@ bool Validator::PushConstants(utils::VectorRef<sem::Function*> entry_points) con
 bool Validator::Array(const type::Array* arr, const Source& el_source) const {
     auto* el_ty = arr->ElemType();
 
-    if (!IsPlain(el_ty)) {
+    if (TINT_UNLIKELY(!IsPlain(el_ty))) {
         AddError(sem_.TypeNameOf(el_ty) + " cannot be used as an element type of an array",
                  el_source);
         return false;
     }
 
-    if (!IsFixedFootprint(el_ty)) {
+    if (TINT_UNLIKELY(!IsFixedFootprint(el_ty))) {
         AddError("an array element type cannot contain a runtime-sized array", el_source);
         return false;
     }
 
-    if (IsArrayWithOverrideCount(el_ty)) {
+    if (TINT_UNLIKELY(IsArrayWithOverrideCount(el_ty))) {
         RaiseArrayWithOverrideCountError(el_source);
         return false;
     }
@@ -2032,7 +2049,7 @@ bool Validator::ArrayStrideAttribute(const ast::StrideAttribute* attr,
                                      uint32_t el_align) const {
     auto stride = attr->stride;
     bool is_valid_stride = (stride >= el_size) && (stride >= el_align) && (stride % el_align == 0);
-    if (!is_valid_stride) {
+    if (TINT_UNLIKELY(!is_valid_stride)) {
         // https://gpuweb.github.io/gpuweb/wgsl/#array-layout-rules
         // Arrays decorated with the stride attribute must have a stride that is
         // at least the size of the element type, and be a multiple of the
@@ -2051,7 +2068,7 @@ bool Validator::Alias(const ast::Alias*) const {
 }
 
 bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) const {
-    if (str->Members().IsEmpty()) {
+    if (TINT_UNLIKELY(str->Members().IsEmpty())) {
         AddError("structures must have at least one member", str->Source());
         return false;
     }
@@ -2060,18 +2077,18 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
     for (auto* member : str->Members()) {
         if (auto* r = member->Type()->As<type::Array>()) {
             if (r->Count()->Is<type::RuntimeArrayCount>()) {
-                if (member != str->Members().Back()) {
+                if (TINT_UNLIKELY(member != str->Members().Back())) {
                     AddError("runtime arrays may only appear as the last member of a struct",
                              member->Source());
                     return false;
                 }
             }
 
-            if (IsArrayWithOverrideCount(member->Type())) {
+            if (TINT_UNLIKELY(IsArrayWithOverrideCount(member->Type()))) {
                 RaiseArrayWithOverrideCountError(member->Declaration()->type->source);
                 return false;
             }
-        } else if (!IsFixedFootprint(member->Type())) {
+        } else if (TINT_UNLIKELY(!IsFixedFootprint(member->Type()))) {
             AddError(
                 "a struct that contains a runtime array cannot be nested inside another struct",
                 member->Source());
@@ -2092,15 +2109,16 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 [&](const ast::LocationAttribute* location) {
                     has_location = true;
                     TINT_ASSERT(Resolver, member->Location().has_value());
-                    if (!LocationAttribute(location, member->Location().value(), member->Type(),
-                                           locations, stage, member->Source())) {
+                    if (TINT_UNLIKELY(!LocationAttribute(location, member->Location().value(),
+                                                         member->Type(), locations, stage,
+                                                         member->Source()))) {
                         return false;
                     }
                     return true;
                 },
                 [&](const ast::BuiltinAttribute* builtin) {
-                    if (!BuiltinAttribute(builtin, member->Type(), stage,
-                                          /* is_input */ false)) {
+                    if (TINT_UNLIKELY(!BuiltinAttribute(builtin, member->Type(), stage,
+                                                        /* is_input */ false))) {
                         return false;
                     }
                     if (builtin->builtin == ast::BuiltinValue::kPosition) {
@@ -2110,13 +2128,13 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                 },
                 [&](const ast::InterpolateAttribute* interpolate) {
                     interpolate_attribute = interpolate;
-                    if (!InterpolateAttribute(interpolate, member->Type())) {
+                    if (TINT_UNLIKELY(!InterpolateAttribute(interpolate, member->Type()))) {
                         return false;
                     }
                     return true;
                 },
                 [&](const ast::StructMemberSizeAttribute*) {
-                    if (!member->Type()->HasCreationFixedFootprint()) {
+                    if (TINT_UNLIKELY(!member->Type()->HasCreationFixedFootprint())) {
                         AddError(
                             "@size can only be applied to members where the member's type size "
                             "can be fully determined at shader creation time",
@@ -2133,9 +2151,10 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                                        ast::LocationAttribute,            //
                                        ast::StructMemberOffsetAttribute,  //
                                        ast::StructMemberAlignAttribute>()) {
-                        if (attr->Is<ast::StrideAttribute>() &&
-                            IsValidationDisabled(member->Declaration()->attributes,
-                                                 ast::DisabledValidation::kIgnoreStrideAttribute)) {
+                        if (TINT_LIKELY(attr->Is<ast::StrideAttribute>() &&
+                                        IsValidationDisabled(
+                                            member->Declaration()->attributes,
+                                            ast::DisabledValidation::kIgnoreStrideAttribute))) {
                             return true;
                         }
                         AddError("attribute is not valid for structure members", attr->source);
@@ -2143,18 +2162,18 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                     }
                     return true;
                 });
-            if (!ok) {
+            if (TINT_UNLIKELY(!ok)) {
                 return false;
             }
         }
 
-        if (invariant_attribute && !has_position) {
+        if (TINT_UNLIKELY(invariant_attribute && !has_position)) {
             AddError("invariant attribute must only be applied to a position builtin",
                      invariant_attribute->source);
             return false;
         }
 
-        if (interpolate_attribute && !has_location) {
+        if (TINT_UNLIKELY(interpolate_attribute && !has_location)) {
             AddError("interpolate attribute must only be used with @location",
                      interpolate_attribute->source);
             return false;
@@ -2162,7 +2181,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
     }
 
     for (auto* attr : str->Declaration()->attributes) {
-        if (!(attr->IsAnyOf<ast::InternalAttribute>())) {
+        if (TINT_UNLIKELY(!attr->IsAnyOf<ast::InternalAttribute>())) {
             AddError("attribute is not valid for struct declarations", attr->source);
             return false;
         }
@@ -2179,12 +2198,12 @@ bool Validator::LocationAttribute(const ast::LocationAttribute* loc_attr,
                                   const Source& source,
                                   const bool is_input) const {
     std::string inputs_or_output = is_input ? "inputs" : "output";
-    if (stage == ast::PipelineStage::kCompute) {
+    if (TINT_UNLIKELY(stage == ast::PipelineStage::kCompute)) {
         AddError("attribute is not valid for compute shader " + inputs_or_output, loc_attr->source);
         return false;
     }
 
-    if (!type->is_numeric_scalar_or_vector()) {
+    if (TINT_UNLIKELY(!type->is_numeric_scalar_or_vector())) {
         std::string invalid_type = sem_.TypeNameOf(type);
         AddError("cannot apply 'location' attribute to declaration of type '" + invalid_type + "'",
                  source);
@@ -2195,7 +2214,7 @@ bool Validator::LocationAttribute(const ast::LocationAttribute* loc_attr,
         return false;
     }
 
-    if (!locations.Add(location)) {
+    if (TINT_UNLIKELY(!locations.Add(location))) {
         AddError(attr_to_str(loc_attr, location) + " attribute appears multiple times",
                  loc_attr->source);
         return false;
@@ -2208,7 +2227,7 @@ bool Validator::Return(const ast::ReturnStatement* ret,
                        const type::Type* func_type,
                        const type::Type* ret_type,
                        sem::Statement* current_statement) const {
-    if (func_type->UnwrapRef() != ret_type) {
+    if (TINT_UNLIKELY(func_type->UnwrapRef() != ret_type)) {
         AddError("return statement type must match its function return type, returned '" +
                      sem_.TypeNameOf(ret_type) + "', expected '" + sem_.TypeNameOf(func_type) + "'",
                  ret->source);
@@ -2216,7 +2235,8 @@ bool Validator::Return(const ast::ReturnStatement* ret,
     }
 
     auto* sem = sem_.Get(ret);
-    if (auto* continuing = ClosestContinuing(/*stop_at_loop*/ false, current_statement)) {
+    if (auto* continuing = ClosestContinuing(/*stop_at_loop*/ false, current_statement);
+        TINT_UNLIKELY(continuing)) {
         AddError("continuing blocks must not contain a return statement", ret->source);
         if (continuing != sem->Declaration() && continuing != sem->Parent()->Declaration()) {
             AddNote("see continuing block here", continuing->source);
@@ -2229,7 +2249,7 @@ bool Validator::Return(const ast::ReturnStatement* ret,
 
 bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
     auto* cond_ty = sem_.TypeOf(s->condition);
-    if (!cond_ty->is_integer_scalar()) {
+    if (TINT_UNLIKELY(!cond_ty->is_integer_scalar())) {
         AddError("switch statement selector expression must be of a scalar integer type",
                  s->condition->source);
         return false;
@@ -2242,7 +2262,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
         auto* case_sem = sem_.Get<sem::CaseStatement>(case_stmt);
         for (auto* selector : case_sem->Selectors()) {
             if (selector->IsDefault()) {
-                if (default_selector != nullptr) {
+                if (TINT_UNLIKELY(default_selector)) {
                     // More than one default clause
                     AddError("switch statement must have exactly one default clause",
                              selector->Declaration()->source);
@@ -2255,7 +2275,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
             }
 
             auto* decl_ty = selector->Value()->Type();
-            if (cond_ty != decl_ty) {
+            if (TINT_UNLIKELY(cond_ty != decl_ty)) {
                 AddError(
                     "the case selector values must have the same type as the selector expression.",
                     selector->Declaration()->source);
@@ -2263,7 +2283,8 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
             }
 
             auto value = selector->Value()->ValueAs<u32>();
-            if (auto added = selectors.Add(value, selector->Declaration()->source); !added) {
+            if (auto added = selectors.Add(value, selector->Declaration()->source);
+                TINT_UNLIKELY(!added)) {
                 AddError("duplicate switch case '" +
                              (decl_ty->IsAnyOf<type::I32, type::AbstractNumeric>()
                                   ? std::to_string(i32(value))
@@ -2276,7 +2297,7 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
         }
     }
 
-    if (default_selector == nullptr) {
+    if (TINT_UNLIKELY(!default_selector)) {
         // No default clause
         AddError("switch statement must have a default clause", s->source);
         return false;
@@ -2291,7 +2312,7 @@ bool Validator::Assignment(const ast::Statement* a, const type::Type* rhs_ty) co
     if (auto* assign = a->As<ast::AssignmentStatement>()) {
         lhs = assign->lhs;
         rhs = assign->rhs;
-    } else if (auto* compound = a->As<ast::CompoundAssignmentStatement>()) {
+    } else if (auto* compound = a->As<ast::CompoundAssignmentStatement>(); TINT_LIKELY(compound)) {
         lhs = compound->lhs;
         rhs = compound->rhs;
     } else {
@@ -2302,8 +2323,9 @@ bool Validator::Assignment(const ast::Statement* a, const type::Type* rhs_ty) co
     if (lhs->Is<ast::PhonyExpression>()) {
         // https://www.w3.org/TR/WGSL/#phony-assignment-section
         auto* ty = rhs_ty->UnwrapRef();
-        if (!ty->IsConstructible() &&
-            !ty->IsAnyOf<type::Pointer, type::Texture, type::Sampler, type::AbstractNumeric>()) {
+        if (TINT_UNLIKELY(
+                (!ty->IsConstructible() && !ty->IsAnyOf<type::Pointer, type::Texture, type::Sampler,
+                                                        type::AbstractNumeric>()))) {
             AddError("cannot assign '" + sem_.TypeNameOf(rhs_ty) +
                          "' to '_'. '_' can only be assigned a constructible, pointer, texture or "
                          "sampler type",
@@ -2323,7 +2345,7 @@ bool Validator::Assignment(const ast::Statement* a, const type::Type* rhs_ty) co
             [&](const ast::Parameter*) { return "cannot assign to function parameter"; },
             [&](const ast::Let*) { return "cannot assign to 'let'"; },
             [&](const ast::Override*) { return "cannot assign to 'override'"; });
-        if (err) {
+        if (TINT_UNLIKELY(err)) {
             AddError(err, lhs->source);
             AddNote("'" + symbols_.NameFor(v->symbol) + "' is declared here:", v->source);
             return false;
@@ -2331,7 +2353,7 @@ bool Validator::Assignment(const ast::Statement* a, const type::Type* rhs_ty) co
     }
 
     auto* lhs_ref = lhs_ty->As<type::Reference>();
-    if (!lhs_ref) {
+    if (TINT_UNLIKELY(!lhs_ref)) {
         // LHS is not a reference, so it has no storage.
         AddError("cannot assign to value of type '" + sem_.TypeNameOf(lhs_ty) + "'", lhs->source);
         return false;
@@ -2341,17 +2363,17 @@ bool Validator::Assignment(const ast::Statement* a, const type::Type* rhs_ty) co
     auto* value_type = rhs_ty->UnwrapRef();  // Implicit load of RHS
 
     // Value type has to match storage type
-    if (storage_ty != value_type) {
+    if (TINT_UNLIKELY(storage_ty != value_type)) {
         AddError(
             "cannot assign '" + sem_.TypeNameOf(rhs_ty) + "' to '" + sem_.TypeNameOf(lhs_ty) + "'",
             a->source);
         return false;
     }
-    if (!storage_ty->IsConstructible()) {
+    if (TINT_UNLIKELY(!storage_ty->IsConstructible())) {
         AddError("storage type of assignment must be constructible", a->source);
         return false;
     }
-    if (lhs_ref->Access() == ast::Access::kRead) {
+    if (TINT_UNLIKELY(lhs_ref->Access() == ast::Access::kRead)) {
         AddError("cannot store into a read-only type '" + sem_.RawTypeNameOf(lhs_ty) + "'",
                  a->source);
         return false;
@@ -2371,7 +2393,7 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
             [&](const ast::Parameter*) { return "cannot modify function parameter"; },
             [&](const ast::Let*) { return "cannot modify 'let'"; },
             [&](const ast::Override*) { return "cannot modify 'override'"; });
-        if (err) {
+        if (TINT_UNLIKELY(err)) {
             AddError(err, lhs->source);
             AddNote("'" + symbols_.NameFor(v->symbol) + "' is declared here:", v->source);
             return false;
@@ -2380,19 +2402,19 @@ bool Validator::IncrementDecrementStatement(const ast::IncrementDecrementStateme
 
     auto const* lhs_ty = sem_.TypeOf(lhs);
     auto* lhs_ref = lhs_ty->As<type::Reference>();
-    if (!lhs_ref) {
+    if (TINT_UNLIKELY(!lhs_ref)) {
         // LHS is not a reference, so it has no storage.
         AddError("cannot modify value of type '" + sem_.TypeNameOf(lhs_ty) + "'", lhs->source);
         return false;
     }
 
-    if (!lhs_ref->StoreType()->is_integer_scalar()) {
+    if (TINT_UNLIKELY(!lhs_ref->StoreType()->is_integer_scalar())) {
         const std::string kind = inc->increment ? "increment" : "decrement";
         AddError(kind + " statement can only be applied to an integer scalar", lhs->source);
         return false;
     }
 
-    if (lhs_ref->Access() == ast::Access::kRead) {
+    if (TINT_UNLIKELY(lhs_ref->Access() == ast::Access::kRead)) {
         AddError("cannot modify read-only type '" + sem_.RawTypeNameOf(lhs_ty) + "'", inc->source);
         return false;
     }
@@ -2403,7 +2425,7 @@ bool Validator::NoDuplicateAttributes(utils::VectorRef<const ast::Attribute*> at
     utils::Hashmap<const TypeInfo*, Source, 8> seen;
     for (auto* d : attributes) {
         auto added = seen.Add(&d->TypeInfo(), d->source);
-        if (!added && !d->Is<ast::InternalAttribute>()) {
+        if (TINT_UNLIKELY(!added && !d->Is<ast::InternalAttribute>())) {
             AddError("duplicate " + d->Name() + " attribute", d->source);
             AddNote("first attribute declared here", *added.value);
             return false;
@@ -2456,13 +2478,14 @@ bool Validator::CheckTypeAccessAddressSpace(
     ast::AddressSpace address_space,
     utils::VectorRef<const tint::ast::Attribute*> attributes,
     const Source& source) const {
-    if (!AddressSpaceLayout(store_ty, address_space, source)) {
+    if (TINT_UNLIKELY(!AddressSpaceLayout(store_ty, address_space, source))) {
         return false;
     }
 
-    if (address_space == ast::AddressSpace::kPushConstant &&
-        !enabled_extensions_.Contains(ast::Extension::kChromiumExperimentalPushConstant) &&
-        IsValidationEnabled(attributes, ast::DisabledValidation::kIgnoreAddressSpace)) {
+    if (TINT_UNLIKELY(
+            address_space == ast::AddressSpace::kPushConstant &&
+            !enabled_extensions_.Contains(ast::Extension::kChromiumExperimentalPushConstant) &&
+            IsValidationEnabled(attributes, ast::DisabledValidation::kIgnoreAddressSpace))) {
         AddError(
             "use of variable address space 'push_constant' requires enabling extension "
             "'chromium_experimental_push_constant'",
@@ -2470,7 +2493,8 @@ bool Validator::CheckTypeAccessAddressSpace(
         return false;
     }
 
-    if (address_space == ast::AddressSpace::kStorage && access == ast::Access::kWrite) {
+    if (TINT_UNLIKELY(address_space == ast::AddressSpace::kStorage &&
+                      access == ast::Access::kWrite)) {
         // The access mode for the storage address space can only be 'read' or
         // 'read_write'.
         AddError("access mode 'write' is not valid for the 'storage' address space", source);
@@ -2491,7 +2515,7 @@ bool Validator::CheckTypeAccessAddressSpace(
 
     auto check_sub_atomics = [&] {
         if (auto atomic_use = atomic_composite_info_.Get(store_ty)) {
-            if (auto* err = atomic_error()) {
+            if (auto* err = atomic_error(); TINT_UNLIKELY(err)) {
                 AddError(err, source);
                 AddNote("atomic sub-type of '" + sem_.TypeNameOf(store_ty) + "' is declared here",
                         **atomic_use);
@@ -2504,7 +2528,7 @@ bool Validator::CheckTypeAccessAddressSpace(
     return Switch(
         store_ty,  //
         [&](const type::Atomic*) {
-            if (auto* err = atomic_error()) {
+            if (auto* err = atomic_error(); TINT_UNLIKELY(err)) {
                 AddError(err, source);
                 return false;
             }
