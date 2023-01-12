@@ -26,7 +26,7 @@ namespace tint::utils {
 /// @return `value` rounded to the next multiple of `alignment`
 /// @note `alignment` must be positive. An alignment of zero will cause a DBZ.
 template <typename T>
-inline T RoundUp(T alignment, T value) {
+inline constexpr T RoundUp(T alignment, T value) {
     return ((value + alignment - 1) / alignment) * alignment;
 }
 
@@ -34,8 +34,50 @@ inline T RoundUp(T alignment, T value) {
 /// @returns true if `value` is a power-of-two
 /// @note `value` must be positive if `T` is signed
 template <typename T>
-inline bool IsPowerOfTwo(T value) {
+inline constexpr bool IsPowerOfTwo(T value) {
     return (value & (value - 1)) == 0;
+}
+
+/// @param value the input value
+/// @returns the base-2 logarithm of @p value
+inline constexpr uint32_t Log2(uint64_t value) {
+#if defined(_MSC_VER) && !defined(__clang__)  // MSVC
+    if constexpr (sizeof(unsigned long) == 8) {
+        // NOLINTNEXTLINE(runtime/int)
+        unsigned long first_bit_index = 0;
+        _BitScanReverse64(&first_bit_index, value);
+        return first_bit_index;
+    } else {
+        // NOLINTNEXTLINE(runtime/int)
+        unsigned long first_bit_index = 0;
+        if (_BitScanReverse(&first_bit_index, value >> 32)) {
+            return first_bit_index + 32;
+        }
+        _BitScanReverse(&first_bit_index, value & 0xffffffff);
+        return first_bit_index;
+    }
+#elif defined(__clang__) || defined(__GNUC__)
+    return 63 - static_cast<uint32_t>(__builtin_clzll(value));
+#else
+    value--;
+    value |= v >> 1;
+    value |= v >> 2;
+    value |= v >> 4;
+    value |= v >> 8;
+    value |= v >> 16;
+    value |= v >> 32;
+    value++;
+    return value;
+#endif
+}
+
+/// @param value the input value
+/// @returns the next power of two number greater or equal to @p value
+inline constexpr uint64_t NextPowerOfTwo(uint64_t n) {
+    if (n <= 1) {
+        return 1;
+    }
+    return static_cast<uint64_t>(1) << (Log2(n - 1) + 1);
 }
 
 /// @param value the input value
