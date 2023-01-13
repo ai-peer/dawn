@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a8e0ff2_98f546be",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-01-13T15:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd55835d_82d8267f",
+      "range": {
+        "startLine": 111,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 3
+      },
+      "revId": "b47c32b37716abe8119027685f3baaf8820373ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6378d52_b3cce76f",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-01-13T15:13:23Z",
       "side": 1,
       "message": "`. ~/bin/llvm-15/use.sh`",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 12
+      },
+      "revId": "b47c32b37716abe8119027685f3baaf8820373ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10be7854_a1fe044c",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-01-13T15:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6378d52_b3cce76f",
       "range": {
         "startLine": 121,
         "startChar": 0,
