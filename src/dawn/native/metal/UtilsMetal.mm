@@ -251,6 +251,8 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     const Extent3D clampedCopyExtent =
         texture->ClampToMipLevelVirtualSize(mipLevel, origin, copyExtent);
 
+    const Extent3D virtualSize = texture->GetMipLevelSingleSubresourceVirtualSize(mipLevel);
+
     // Note: all current GPUs have a 3D texture size limit of 2048 and otherwise 16348
     // for non-3D textures except for Apple2 GPUs (iPhone6) which has a non-3D texture
     // limit of 8192. Dawn doesn't support Apple2 GPUs
@@ -264,7 +266,7 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     uint32_t maxBytesPerRow = maxTextureDimension * bytesPerPixel;
 
     bool needCopyRowByRow = bytesPerRow > maxBytesPerRow;
-    if (needCopyRowByRow) {
+    if (needCopyRowByRow || /* DISABLES CODE */ (true)) {
         // handle workaround case 2
         // Since we're copying a row at a time bytesPerRow shouldn't matter but just to
         // try to have it make sense, pass correct or max valid value
@@ -275,11 +277,15 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
         const uint32_t blockRows = copyExtent.height / blockInfo.height;
         for (uint32_t slice = 0; slice < copyExtent.depthOrArrayLayers; ++slice) {
             for (uint32_t blockRow = 0; blockRow < blockRows; ++blockRow) {
+                uint32_t y = origin.y + blockRow * blockInfo.height;
+                uint32_t height = blockInfo.height;
+                if (y + height > virtualSize.height) {
+                    height = virtualSize.height - y;
+                }
                 copy.push_back(TextureBufferCopySplit::CopyInfo(
                     bufferOffset + slice * rowsPerImage * bytesPerRow + blockRow * bytesPerRow,
-                    localBytesPerRow, localBytesPerImage,
-                    {origin.x, origin.y + blockRow * blockInfo.height, origin.z + slice},
-                    {clampedCopyExtent.width, blockInfo.height, 1}));
+                    localBytesPerRow, localBytesPerImage, {origin.x, y, origin.z + slice},
+                    {clampedCopyExtent.width, height, 1}));
             }
         }
         return copy;
