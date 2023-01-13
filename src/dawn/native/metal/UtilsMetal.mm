@@ -264,7 +264,7 @@ TextureBufferCopySplit ComputeTextureBufferCopySplit(const Texture* texture,
     uint32_t maxBytesPerRow = maxTextureDimension * bytesPerPixel;
 
     bool needCopyRowByRow = bytesPerRow > maxBytesPerRow;
-    if (needCopyRowByRow) {
+    if (needCopyRowByRow || /* DISABLES CODE */ (true)) {
         // handle workaround case 2
         // Since we're copying a row at a time bytesPerRow shouldn't matter but just to
         // try to have it make sense, pass correct or max valid value
