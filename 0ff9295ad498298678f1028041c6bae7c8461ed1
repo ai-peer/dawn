@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "0ff9295ad498298678f1028041c6bae7c8461ed1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8828cf01_b89afcd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-13T10:41:15Z",
+      "side": 1,
+      "message": "Kokoro failure was infra flake",
+      "revId": "0ff9295ad498298678f1028041c6bae7c8461ed1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
