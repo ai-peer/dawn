@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5439d1a_4580fcd9",
+        "filename": "src/dawn/common/SerialMap.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 0,
+      "message": "can we move this and SerialQueue changes to a separate CL since it\u0027s less risky relative to the mapping changes?",
+      "revId": "e11278f1c791998f009d9947846f799f5893708f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

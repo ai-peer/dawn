@@ -16,6 +16,138 @@
       "message": "Austin, kindly ping. thanks",
       "revId": "5935722881de47d26c668a785f8d28b52692ca42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f5eabc_4789281d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "Would it be possible to reduce the number of per-backend changes by:\n\n - performing `SetLastUsageSerial` in the frontend, perhaps based on `CommandBufferResourceUsage::topLevelBuffers` and `SyncScopeResourceUsage::buffers`. You can iterate them all, similar to what\u0027s done in `QueueBase::ValidateSubmit`.\n  I\u0027m thinking we set the serial regardless of mappable usage. It should be useful regardless of whether they are mappable. For example: freeing memory more eagerly.\n  To avoid double iteration when validation is enabled, we can maybe have two versions. Like:\n  ```\n  if (validationEnabled) {\n    IterateResourcesForSubmit\u003c/* do validation */true\u003e(...);\n  } else {\n    IterateResourcesForSubmit\u003c/* no validation */ false\u003e(...);\n  }\n  ```\n - setting the last usage serial in frontend `DeviceBase::CopyFromStagingToBuffer`, instead of the backend implementations of it.\n - still need per-backend stuff for ClearBuffer. Or, maybe it can be done in the frontend after creation as well, based on the Toggle to nonzero initialize resources on creation.\n\nAll the mapping and serial stuff is fairly subtle. We need to add some tests about when callbacks are expected to resolve now. See BufferMappingTests in BufferTests.cpp. For example, we should be able to test that if you:\n 1. do a queue submit that doesn\u0027t use the buffer + onSubmittedWorkDone\n 2. use the buffer in a queue submit\n 3. do another queue submit that doesn\u0027t use the buffer + onSubmittedWorkDone\n 4. map the buffer\n 5. See that the onSubmittedWorkDone callback from (1) resolves, then the map callback from (4), then the onSubmittedWorkDone callback from (3).\nWe should also include tests for writeBuffer as well.\n\nUsually in Dawn we have two reviewers for more complex CLs. Adding Corentin.",
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8aea335_2e7a8f8b",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "Will this always be non-decreasing? perhaps we can assert that condition, or use a max operation",
+      "range": {
+        "startLine": 600,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 30
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b117b2c_d76f9a4e",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "Instead of this condition, and the defaulting - it would be more clear to have two overloads of TrackTask. Then we don\u0027t need to treat `kMaxExecutionSerial` as a magic number.\n\nPerhaps the no-arg version could be called `TrackTaskAfterEventualFlush` since it first ensures the flush, then tracks the task for that scheduled flush",
+      "range": {
+        "startLine": 233,
+        "startChar": 2,
+        "endLine": 235,
+        "endChar": 5
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bd5ea08_62eb1bcc",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "u-nit: should be CompletedCommandSerial",
+      "range": {
+        "startLine": 242,
+        "startChar": 32,
+        "endLine": 242,
+        "endChar": 38
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337c2666_b6c04b97",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "couldn\u0027t we use Buffer* instead of const Buffer* to avoid the const cast?",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6c7d16_25707364",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-13T16:42:03Z",
+      "side": 1,
+      "message": "why this?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 43
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
