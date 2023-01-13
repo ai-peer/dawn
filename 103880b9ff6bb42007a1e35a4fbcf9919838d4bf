@@ -33,6 +33,57 @@
       "message": "Seems Kokoro failed due to infra issue ?\nhttps://source.cloud.google.com/results/invocations/304e4e92-d7af-4551-a5c0-d3757fbf2e6e/targets/dawn%2Flinux%2Fcmake-clang-debug-ubsan%2Fpresubmit/log\nhttps://source.cloud.google.com/results/invocations/81f4e01e-6575-4109-9e37-7e4ea439d2dd/targets/dawn%2Flinux%2Fcmake-clang-release-asan%2Fpresubmit/log",
       "revId": "103880b9ff6bb42007a1e35a4fbcf9919838d4bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e049c408_762af2b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-13T09:50:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "103880b9ff6bb42007a1e35a4fbcf9919838d4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a1cabfc_6bd83c82",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-13T09:50:01Z",
+      "side": 1,
+      "message": "The terminology here is weird: Textures are just 2D arrays of data and their origin is always texel (0, 0). The don\u0027t have bottom-left, top-left or anything, they don\u0027t exist in the physical world.\n\nI think what we should say is:\n\n\u003e The NDC to framebuffer space transform maps inverts the Y coordinate such that NDC [-1, 1] (resp [-1, -1]) maps to framebuffer space [0, 0] (resp [0, height-1]). So we need to undo this flip when converting positions to texcoords.\n\nWe could also have the shader just say:\n\n  output.texcoords \u003d texcoord[VertexIndex] * uniforms.scale + uniforms.offset;\n\nand the comment put at [1] instead (and the condition flipped) so that we have less shader operations. But that\u0027s three vertex shader invocations so maybe it doesn\u0027t matter.",
+      "revId": "103880b9ff6bb42007a1e35a4fbcf9919838d4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad939115_fc16e31b",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-13T09:50:01Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "103880b9ff6bb42007a1e35a4fbcf9919838d4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
