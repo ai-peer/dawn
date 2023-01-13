@@ -97,25 +97,15 @@ static const char sCopyForBrowserShader[] = R"(
                 var output : VertexOutputs;
                 output.position = vec4<f32>((texcoord[VertexIndex] * 2.0 - vec2<f32>(1.0, 1.0)), 0.0, 1.0);
 
-                // Y component of scale is calculated by the copySizeHeight / textureHeight. Only
-                // flipY case can get negative number.
-                var flipY = uniforms.scale.y < 0.0;
 
-                // Texture coordinate takes top-left as origin point. We need to map the
-                // texture to triangle carefully.
-                if (flipY) {
-                    // We need to get the mirror positions(mirrored based on y = 0.5) on flip cases.
-                    // Adopt transform to src texture and then mapping it to triangle coord which
-                    // do a +1 shift on Y dimension will help us got that mirror position perfectly.
-                    output.texcoords = (texcoord[VertexIndex] * uniforms.scale + uniforms.offset) *
-                        vec2<f32>(1.0, -1.0) + vec2<f32>(0.0, 1.0);
-                } else {
-                    // For the normal case, we need to get the exact position.
-                    // So mapping texture to triangle firstly then adopt the transform.
-                    output.texcoords = (texcoord[VertexIndex] *
+                // Texture coordinate takes top-left as origin point and downside is positive direction in Y axis.
+                // But NDC uses up as positive in Y axis. Need to flip when mapping from dst tex corod to
+                // src tex coord.
+                // https://www.w3.org/TR/webgpu/#coordinate-systems
+                // This shader supports flipY in the copy sub rect through uniforms.scale and uniforms.offset.
+                output.texcoords = (texcoord[VertexIndex] *
                         vec2<f32>(1.0, -1.0) + vec2<f32>(0.0, 1.0)) *
                         uniforms.scale + uniforms.offset;
-                }
 
                 return output;
             }
