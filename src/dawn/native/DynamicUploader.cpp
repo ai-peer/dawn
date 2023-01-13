@@ -34,7 +34,7 @@ void DynamicUploader::ReleaseStagingBuffer(Ref<BufferBase> stagingBuffer) {
 ResultOrError<UploadHandle> DynamicUploader::AllocateInternal(uint64_t allocationSize,
                                                               ExecutionSerial serial) {
     // Disable further sub-allocation should the request be too large.
-    if (allocationSize > kRingBufferSize) {
+    if (allocationSize > kRingBufferSize || allocationSize > 0 /* always true, disable suballoc */) {
         BufferDescriptor bufferDesc = {};
         bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
         bufferDesc.size = Align(allocationSize, 4);
