@@ -17,7 +17,6 @@
 #include <utility>
 
 #include "dawn/common/Math.h"
-#include "dawn/native/Buffer.h"
 #include "dawn/native/Device.h"
 
 namespace dawn::native {
@@ -27,27 +26,20 @@ DynamicUploader::DynamicUploader(DeviceBase* device) : mDevice(device) {
         std::unique_ptr<RingBuffer>(new RingBuffer{nullptr, RingBufferAllocator(kRingBufferSize)}));
 }
 
-void DynamicUploader::ReleaseStagingBuffer(Ref<BufferBase> stagingBuffer) {
+void DynamicUploader::ReleaseStagingBuffer(std::unique_ptr<StagingBufferBase> stagingBuffer) {
     mReleasedStagingBuffers.Enqueue(std::move(stagingBuffer), mDevice->GetPendingCommandSerial());
 }
 
 ResultOrError<UploadHandle> DynamicUploader::AllocateInternal(uint64_t allocationSize,
                                                               ExecutionSerial serial) {
     // Disable further sub-allocation should the request be too large.
-    if (allocationSize > kRingBufferSize) {
-        BufferDescriptor bufferDesc = {};
-        bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
-        bufferDesc.size = Align(allocationSize, 4);
-        bufferDesc.mappedAtCreation = true;
-        bufferDesc.label = "Dawn_DynamicUploaderStaging";
-
-        IgnoreLazyClearCountScope scope(mDevice);
-        Ref<BufferBase> stagingBuffer;
-        DAWN_TRY_ASSIGN(stagingBuffer, mDevice->CreateBuffer(&bufferDesc));
+    if (allocationSize > kRingBufferSize || allocationSize > 0 /* always true, disable suballoc */) {
+        std::unique_ptr<StagingBufferBase> stagingBuffer;
+        DAWN_TRY_ASSIGN(stagingBuffer, mDevice->CreateStagingBuffer(allocationSize));
 
         UploadHandle uploadHandle;
         uploadHandle.mappedBuffer = static_cast<uint8_t*>(stagingBuffer->GetMappedPointer());
-        uploadHandle.stagingBuffer = stagingBuffer.Get();
+        uploadHandle.stagingBuffer = stagingBuffer.get();
 
         ReleaseStagingBuffer(std::move(stagingBuffer));
         return uploadHandle;
@@ -88,22 +80,16 @@ ResultOrError<UploadHandle> DynamicUploader::AllocateInternal(uint64_t allocatio
     // Allocate the staging buffer backing the ringbuffer.
     // Note: the first ringbuffer will be lazily created.
     if (targetRingBuffer->mStagingBuffer == nullptr) {
-        BufferDescriptor bufferDesc = {};
-        bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
-        bufferDesc.size = Align(targetRingBuffer->mAllocator.GetSize(), 4);
-        bufferDesc.mappedAtCreation = true;
-        bufferDesc.label = "Dawn_DynamicUploaderStaging";
-
-        IgnoreLazyClearCountScope scope(mDevice);
-        Ref<BufferBase> stagingBuffer;
-        DAWN_TRY_ASSIGN(stagingBuffer, mDevice->CreateBuffer(&bufferDesc));
+        std::unique_ptr<StagingBufferBase> stagingBuffer;
+        DAWN_TRY_ASSIGN(stagingBuffer,
+                        mDevice->CreateStagingBuffer(targetRingBuffer->mAllocator.GetSize()));
         targetRingBuffer->mStagingBuffer = std::move(stagingBuffer);
     }
 
     ASSERT(targetRingBuffer->mStagingBuffer != nullptr);
 
     UploadHandle uploadHandle;
-    uploadHandle.stagingBuffer = targetRingBuffer->mStagingBuffer.Get();
+    uploadHandle.stagingBuffer = targetRingBuffer->mStagingBuffer.get();
     uploadHandle.mappedBuffer =
         static_cast<uint8_t*>(uploadHandle.stagingBuffer->GetMappedPointer()) + startOffset;
     uploadHandle.startOffset = startOffset;
