@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6915e97f_2b5ba890",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 39
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-01-13T12:15:57Z",
+      "side": 1,
+      "message": "I thought the Kokoro failure may be an infra issue after reading the log",
+      "revId": "51d472e3b4e281cec293d7d84fe12d6d9ce3aff8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
