@@ -33,7 +33,7 @@ void DynamicUploader::ReleaseStagingBuffer(std::unique_ptr<StagingBufferBase> st
 ResultOrError<UploadHandle> DynamicUploader::AllocateInternal(uint64_t allocationSize,
                                                               ExecutionSerial serial) {
     // Disable further sub-allocation should the request be too large.
-    if (allocationSize > kRingBufferSize) {
+    if (allocationSize > kRingBufferSize || allocationSize > 0 /* always true, disable suballoc */) {
         std::unique_ptr<StagingBufferBase> stagingBuffer;
         DAWN_TRY_ASSIGN(stagingBuffer, mDevice->CreateStagingBuffer(allocationSize));
 
