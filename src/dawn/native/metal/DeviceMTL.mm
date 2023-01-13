@@ -575,11 +575,11 @@ void Device::DestroyImpl() {
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
-    return 1;
+    return 4;
 }
 
 uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
-    return 1;
+    return 4;
 }
 
 float Device::GetTimestampPeriodInNS() const {
