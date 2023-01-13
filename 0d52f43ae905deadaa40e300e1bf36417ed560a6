@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2c5db3da_ad62b1d1",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1723,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-13T02:00:20Z",
+      "side": 1,
+      "message": "Done. Had to replace some more string concats with stringstream, which is probably better anyway.",
+      "parentUuid": "90068909_65308f17",
+      "range": {
+        "startLine": 1723,
+        "startChar": 32,
+        "endLine": 1723,
+        "endChar": 55
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d2e80366_0d3742d4",
         "filename": "src/tint/resolver/uniformity.cc",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-12T10:32:58Z",
       "side": 1,
       "message": "Once David\u0027s PR lands, we\u0027ll probably want to rename `Note` to `Info`.",
+      "range": {
+        "startLine": 1799,
+        "startChar": 42,
+        "endLine": 1799,
+        "endChar": 56
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e155a6b2_e7b2f34d",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1799,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-13T02:00:20Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "d2e80366_0d3742d4",
       "range": {
         "startLine": 1799,
         "startChar": 42,
@@ -125,6 +173,30 @@
       "side": 1,
       "message": "SGTM",
       "parentUuid": "24b08c8d_11587fd0",
+      "range": {
+        "startLine": 1838,
+        "startChar": 68,
+        "endLine": 1838,
+        "endChar": 84
+      },
+      "revId": "0d52f43ae905deadaa40e300e1bf36417ed560a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5919c69_cc9a3005",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1838,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-13T02:00:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "550c9aeb_de926f53",
       "range": {
         "startLine": 1838,
         "startChar": 68,
