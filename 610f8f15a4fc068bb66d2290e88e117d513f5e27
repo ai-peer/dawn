@@ -16,6 +16,24 @@
       "message": "I\u0027m sorry but this change is massive and does many different things, from trivial like const correctness of some function, to mechanical changes piping things around to more subtle interactions between the different types of toggles. It\u0027s really complicated to review and ensure it is correct.\n\nCan we split this and land it in stage so that we can ensure that each stage makes sense individually?\n\nFor example:\n\n - Disallow unsafe APIs in more places\n - Const correctness\n - Deprecating DawnTogglesDeviceDescriptor in favor of DawnToggleDescriptors\n - Moving toggle forcing to adapters.\n - Introducing the three levels of toggles and the inheritance.\n\netc.",
       "revId": "610f8f15a4fc068bb66d2290e88e117d513f5e27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ad9a45_396e1360",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-01-13T14:35:55Z",
+      "side": 1,
+      "message": "Sure, I will try to split this.",
+      "parentUuid": "ba5033cd_4202ab3b",
+      "revId": "610f8f15a4fc068bb66d2290e88e117d513f5e27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
