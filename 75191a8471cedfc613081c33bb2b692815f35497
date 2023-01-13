@@ -16,6 +16,40 @@
       "message": "PTAL! need to suppress on ANGLE",
       "revId": "75191a8471cedfc613081c33bb2b692815f35497",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f1dc4ef_b86c699d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-13T10:57:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "75191a8471cedfc613081c33bb2b692815f35497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd2e2c39_462c8759",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-13T10:57:19Z",
+      "side": 1,
+      "message": "This makes me realize that we never did https://github.com/gpuweb/gpuweb/issues/1887",
+      "revId": "75191a8471cedfc613081c33bb2b692815f35497",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
