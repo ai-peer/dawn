@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bc72a70_04097039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-14T00:27:13Z",
+      "side": 1,
+      "message": "LGTM\n\nno deprecation is OK since hitting the error should be rare, and anyone who is doing this now can fix their code and it will be backward compatible",
+      "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88fb708d_fbeb9d7a",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-14T00:27:13Z",
+      "side": 1,
+      "message": "unit: \"... state is not present when ...\"\n\nsince JS developers dont have a \"nullptr\" concept",
+      "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39559157_912ebfb1",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-14T00:27:13Z",
+      "side": 1,
+      "message": "unit: \"Depth stencil state format (%s) has no...\"",
+      "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
