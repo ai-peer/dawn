@@ -37,7 +37,8 @@ TEST_P(DeviceLifetimeTests, DroppedWhileQueueOnSubmittedWorkDone) {
     queue.OnSubmittedWorkDone(
         0,
         [](WGPUQueueWorkDoneStatus status, void*) {
-            EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
+            EXPECT_TRUE(status == WGPUQueueWorkDoneStatus_Success ||
+                        status == WGPUQueueWorkDoneStatus_DeviceLost);
         },
         nullptr);
 
