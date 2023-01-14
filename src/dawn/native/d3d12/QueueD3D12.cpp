@@ -43,8 +43,6 @@ void Queue::Initialize() {
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     Device* device = ToBackend(GetDevice());
 
-    DAWN_TRY(device->Tick());
-
     CommandRecordingContext* commandContext;
     DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());
 
@@ -56,9 +54,9 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     TRACE_EVENT_END1(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D12::RecordCommands",
                      "serial", uint64_t(GetDevice()->GetPendingCommandSerial()));
 
-    DAWN_TRY(device->ExecutePendingCommandContext());
+    // Tick() will submit pending commands.
+    DAWN_TRY(device->Tick());
 
-    DAWN_TRY(device->NextSerial());
     return {};
 }
 

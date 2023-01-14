@@ -46,8 +46,6 @@ void Queue::Initialize() {
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     Device* device = ToBackend(GetDevice());
 
-    DAWN_TRY(device->Tick());
-
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
     for (uint32_t i = 0; i < commandCount; ++i) {
@@ -55,7 +53,8 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferVk::RecordCommands");
 
-    DAWN_TRY(device->SubmitPendingCommands());
+    // Tick() will submit pending commands.
+    DAWN_TRY(device->Tick());
 
     return {};
 }

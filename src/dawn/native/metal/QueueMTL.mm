@@ -33,8 +33,6 @@ Queue::~Queue() = default;
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
     Device* device = ToBackend(GetDevice());
 
-    DAWN_TRY(device->Tick());
-
     CommandRecordingContext* commandContext = device->GetPendingCommandContext();
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferMTL::FillCommands");
@@ -43,7 +41,10 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferMTL::FillCommands");
 
-    return device->SubmitPendingCommandBuffer();
+    // Tick() will submit pending commands.
+    DAWN_TRY(device->Tick());
+
+    return {};
 }
 
 }  // namespace dawn::native::metal
