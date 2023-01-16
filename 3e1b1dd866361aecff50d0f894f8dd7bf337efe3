@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9b82748_a38b39ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-16T13:28:50Z",
+      "side": 1,
+      "message": "LGTM with the removal of the unnecessary allocation. Thanks for the iteration!",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd00222_a5f701f7",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-16T13:28:50Z",
+      "side": 1,
+      "message": "This would become\n\n  PendingMappingCallback toCall;\n  \n  if (stuff) {\n    toCall \u003d WillCallMappingCallback(...);\n  }\n  \n  return std::move(toCall);",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae95d14_b77cdc21",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-16T13:28:50Z",
+      "side": 1,
+      "message": "nit: This can use this helper: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/NonCopyable.h;drc\u003d479dc6b7ebc7675e72d0c16441f17fc985ffbded;l\u003d33\n\nBut it seems it should use NonCopyable and implement the move semantics itself such that callback is cleared when moved from. This way there is no need to make an allocation to hold the object. Note that you\u0027ll need to implement both the move constructor and the move assignment to be correct.",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bc00145_631d8118",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-16T13:28:50Z",
+      "side": 1,
+      "message": "nit: Can we have implementations in the .cpp file? Same for the constructors / destructors. It\u0027s something we usually do so that headers are smaller and compile time don\u0027t balloon (they are already largeish :( )",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
