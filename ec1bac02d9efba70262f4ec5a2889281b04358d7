@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a98ff887_93b0a7be",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:37:27Z",
+      "side": 1,
+      "message": "Question: why we need to call Tick() here? Why not always let client to call it?",
+      "range": {
+        "startLine": 59,
+        "startChar": 13,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "ec1bac02d9efba70262f4ec5a2889281b04358d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
