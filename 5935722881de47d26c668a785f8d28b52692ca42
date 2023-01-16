@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bafeb4c1_6e0ec766",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "Done. But the change doesn\u0027t eagerly release resources yet, so I don\u0027t update the last usage serial for all buffers.",
+      "parentUuid": "c1f5eabc_4789281d",
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8aea335_2e7a8f8b",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-01-13T16:42:03Z",
       "side": 1,
       "message": "Will this always be non-decreasing? perhaps we can assert that condition, or use a max operation",
+      "range": {
+        "startLine": 600,
+        "startChar": 0,
+        "endLine": 600,
+        "endChar": 30
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f94989a_585848ea",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 600,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8aea335_2e7a8f8b",
       "range": {
         "startLine": 600,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f813d5_9cbcc056",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b117b2c_d76f9a4e",
+      "range": {
+        "startLine": 233,
+        "startChar": 2,
+        "endLine": 235,
+        "endChar": 5
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd5ea08_62eb1bcc",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-01-13T16:42:03Z",
       "side": 1,
       "message": "u-nit: should be CompletedCommandSerial",
+      "range": {
+        "startLine": 242,
+        "startChar": 32,
+        "endLine": 242,
+        "endChar": 38
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a36d10_6052b4a6",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd5ea08_62eb1bcc",
       "range": {
         "startLine": 242,
         "startChar": 32,
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c6e2a5_82801259",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "This change is moved to frontend.",
+      "parentUuid": "337c2666_b6c04b97",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 36
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb6c7d16_25707364",
@@ -140,6 +254,30 @@
       "writtenOn": "2023-01-13T16:42:03Z",
       "side": 1,
       "message": "why this?",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 43
+      },
+      "revId": "5935722881de47d26c668a785f8d28b52692ca42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1865e5dc_8745b4ff",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-16T12:38:53Z",
+      "side": 1,
+      "message": "Removed it.",
+      "parentUuid": "cb6c7d16_25707364",
       "range": {
         "startLine": 63,
         "startChar": 0,
