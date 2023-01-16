@@ -32,10 +32,10 @@ enum class MapType : uint32_t;
 
 MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor);
 
-static constexpr wgpu::BufferUsage kReadOnlyBufferUsages =
-    wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Index |
-    wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Uniform | kReadOnlyStorageBuffer |
-    wgpu::BufferUsage::Indirect;
+static constexpr wgpu::BufferUsage kReuseNoBarrierBufferUsages =
+    wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc |
+    wgpu::BufferUsage::Index | wgpu::BufferUsage::Vertex | wgpu::BufferUsage::Uniform |
+    kReadOnlyStorageBuffer | wgpu::BufferUsage::Indirect;
 
 static constexpr wgpu::BufferUsage kMappableBufferUsages =
     wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
