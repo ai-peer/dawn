@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9584b72_a6c88e01",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-16T20:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c633cded_f040c25f",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c0929ad_1fd2f295",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af83d551_f0ddb822",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-16T20:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c0929ad_1fd2f295",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0e0a79b_cfd8e946",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-16T19:26:12Z",
       "side": 1,
       "message": "Why does it do the `if err !\u003d nil {` check twice? Doesn\u0027t this just append the error twice?",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d22c97_5c4103c3",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-16T20:50:37Z",
+      "side": 1,
+      "message": "I have no good answer for you. Re-written.",
+      "parentUuid": "a0e0a79b_cfd8e946",
       "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
