@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65d47ae7_d1140a07",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 711,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-16T20:56:00Z",
+      "side": 1,
+      "message": "Is this safe in the case that `postErr \u003d\u003d nil`",
+      "revId": "9689f6e65d0ef04d29c7ca5550f6779e48fd8902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
