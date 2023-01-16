@@ -263,10 +263,11 @@ bool Buffer::TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
                                                   VkPipelineStageFlags* srcStages,
                                                   VkPipelineStageFlags* dstStages) {
     bool lastIncludesTarget = IsSubset(usage, mLastUsage);
-    bool lastReadOnly = IsSubset(mLastUsage, kReadOnlyBufferUsages);
+    constexpr wgpu::BufferUsage kReuseNoBarrierBufferUsages =
+        kReadOnlyBufferUsages | wgpu::BufferUsage::MapWrite;
+    bool lastCanBeReusedWithoutBarrier = IsSubset(mLastUsage, kReuseNoBarrierBufferUsages);
 
-    // We can skip transitions to already current read-only usages.
-    if (lastIncludesTarget && lastReadOnly) {
+    if (lastIncludesTarget && lastCanBeReusedWithoutBarrier) {
         return false;
     }
 
