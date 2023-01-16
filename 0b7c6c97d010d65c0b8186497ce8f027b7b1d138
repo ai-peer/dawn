@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c633cded_f040c25f",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-16T19:26:12Z",
+      "side": 1,
+      "message": "This comment seems out of date since the `query` is no longer provided? Maybe if it was just `the runners queries` instead of `given` ?",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c0929ad_1fd2f295",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-16T19:26:12Z",
+      "side": 1,
+      "message": "Ditto, there are no `given` queries to the function.",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0e0a79b_cfd8e946",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-16T19:26:12Z",
+      "side": 1,
+      "message": "Why does it do the `if err !\u003d nil {` check twice? Doesn\u0027t this just append the error twice?",
+      "revId": "0b7c6c97d010d65c0b8186497ce8f027b7b1d138",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
