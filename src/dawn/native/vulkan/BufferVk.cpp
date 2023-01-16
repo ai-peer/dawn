@@ -261,6 +261,10 @@ bool Buffer::TransitionUsageAndGetResourceBarrier(wgpu::BufferUsage usage,
                                                   VkBufferMemoryBarrier* barrier,
                                                   VkPipelineStageFlags* srcStages,
                                                   VkPipelineStageFlags* dstStages) {
+    if (usage == wgpu::BufferUsage::MapWrite && usage == mLastUsage) {
+        return false;
+    }
+
     bool lastIncludesTarget = IsSubset(usage, mLastUsage);
     bool lastReadOnly = IsSubset(mLastUsage, kReadOnlyBufferUsages);
 
