@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3151c203_427c65a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-16T21:11:20Z",
+      "side": 1,
+      "message": "Locally run go tests, which should be the only thing that Kokoro would fail on.",
+      "revId": "9689f6e65d0ef04d29c7ca5550f6779e48fd8902",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65d47ae7_d1140a07",
