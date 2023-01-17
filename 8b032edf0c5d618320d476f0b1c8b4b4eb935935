@@ -50,6 +50,40 @@
       "message": "🟦 note: all 124 tests now pass",
       "revId": "8b032edf0c5d618320d476f0b1c8b4b4eb935935",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d6e520_1622dbbf",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-17T09:26:40Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.3450005s (average 4.90080025s)",
+      "revId": "8b032edf0c5d618320d476f0b1c8b4b4eb935935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "313407c2_307a28f1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-17T09:26:40Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.1968s (average 4.78252525s)",
+      "revId": "8b032edf0c5d618320d476f0b1c8b4b4eb935935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
