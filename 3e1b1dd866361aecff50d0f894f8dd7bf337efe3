@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8709acb6_159d2687",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T12:52:34Z",
+      "side": 1,
+      "message": "I presumed that returning a structure value is copy, not move, so I used smart pointer but it seems I was wrong, thanks!",
+      "parentUuid": "fdd00222_a5f701f7",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fae95d14_b77cdc21",
@@ -106,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5c03b3_3f3f9b22",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T12:52:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fae95d14_b77cdc21",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bc00145_631d8118",
@@ -136,6 +172,24 @@
       "writtenOn": "2023-01-17T07:04:15Z",
       "side": 1,
       "message": "OK, I will try.\n\nBy the way, I have a question. What is the best practice to define and implement a class/structure that is used only in a certain class? (Sorry, I\u0027m still new to C++.)\n\nI used inner structure but I don\u0027t think it really needs to be or it is elegant. Using namespace?",
+      "parentUuid": "1bc00145_631d8118",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dd989ee_2166ac00",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T12:52:34Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "1bc00145_631d8118",
       "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
