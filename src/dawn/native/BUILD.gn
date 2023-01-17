@@ -533,7 +533,8 @@ source_set("sources") {
     ]
   }
 
-  if (dawn_enable_opengl || dawn_enable_vulkan) {
+  if ((dawn_enable_opengl || dawn_enable_vulkan) &&
+      dawn_enable_spirv_validation) {
     sources += [
       "SpirvValidation.cpp",
       "SpirvValidation.h",
@@ -734,6 +735,9 @@ source_set("sources") {
           [ "${dawn_swiftshader_dir}/src/Vulkan:swiftshader_libvulkan" ]
       defines += [ "DAWN_ENABLE_SWIFTSHADER" ]
     }
+    if (dawn_enable_spirv_validation) {
+      defines += [ "DAWN_ENABLE_SPIRV_VALIDATION" ]
+    }
   }
 
   if (use_angle) {
@@ -741,6 +745,10 @@ source_set("sources") {
       "${dawn_angle_dir}:libEGL",
       "${dawn_angle_dir}:libGLESv2",
     ]
+  }
+
+  if (dawn_enable_spirv_shader_modules) {
+    defines += [ "DAWN_ENABLE_SPIRV_SHADER_MODULES" ]
   }
 }
 

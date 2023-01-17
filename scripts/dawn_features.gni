@@ -82,6 +82,10 @@ declare_args() {
   # Enables error injection for faking failures to native API calls
   dawn_enable_error_injection =
       is_debug || (build_with_chromium && use_fuzzing_engine)
+
+  # Enables SPIR-V to to be provided as source for a shader module. Not enabled
+  # when used in a browser.
+  dawn_enable_spirv_shader_modules = !build_with_chromium
 }
 
 # GN does not allow reading a variable defined in the same declare_args().
@@ -96,6 +100,10 @@ declare_args() {
   # assume to have one present at the system level.
   dawn_enable_vulkan_loader =
       dawn_enable_vulkan && (is_mac || (is_linux && !is_android))
+
+  # Disable SPIR-V validation on Android because it adds a significant amount
+  # to the binary size, and Tint's output should be well-formed.
+  dawn_enable_spirv_validation = dawn_enable_vulkan && !is_android
 }
 
 # UWP only supports CoreWindow for windowing

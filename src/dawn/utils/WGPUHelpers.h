@@ -27,7 +27,9 @@ namespace utils {
 
 enum Expectation { Success, Failure };
 
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
 wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source);
+#endif
 wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source);
 
 wgpu::Buffer CreateBufferFromData(const wgpu::Device& device,
