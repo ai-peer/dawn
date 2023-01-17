@@ -34,6 +34,24 @@
       "parentUuid": "6e1bb513_8a8c6f1c",
       "revId": "1e622cd08bd3e2ea13aebe01d4a57b96edc0fd2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ed006a_c7eb2ae3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-17T20:59:26Z",
+      "side": 1,
+      "message": "I don\u0027t understand fully. why do the tests fail for zero-sized copies?\nit should be OK if mTopLevelBuffers contains more than what is actually used for real",
+      "parentUuid": "b52d7ded_85b2b14a",
+      "revId": "1e622cd08bd3e2ea13aebe01d4a57b96edc0fd2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
