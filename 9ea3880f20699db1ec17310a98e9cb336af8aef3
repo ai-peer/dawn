@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed30f5b_242f94c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T11:44:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9ea3880f20699db1ec17310a98e9cb336af8aef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b36a48_63fff7b8",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T11:44:35Z",
+      "side": 1,
+      "message": "nit: Device",
+      "range": {
+        "startLine": 113,
+        "startChar": 15,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "9ea3880f20699db1ec17310a98e9cb336af8aef3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
