@@ -579,9 +579,6 @@ class BufferMappingCallbackTests : public BufferMappingTests {
 
 TEST_P(BufferMappingCallbackTests, EmptySubmissionAndThenMap) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
-    buffer.Unmap();
-
     std::vector<bool> done = {false, false};
 
     // 1. submission without using buffer.
@@ -616,9 +613,6 @@ TEST_P(BufferMappingCallbackTests, EmptySubmissionAndThenMap) {
 
 TEST_P(BufferMappingCallbackTests, UseTheBufferAndThenMap) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(4);
-    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
-    buffer.Unmap();
-
     std::vector<bool> done = {false, false};
 
     // 1. Submit a command buffer which uses the buffer
@@ -655,8 +649,13 @@ TEST_P(BufferMappingCallbackTests, UseTheBufferAndThenMap) {
 
 TEST_P(BufferMappingCallbackTests, EmptySubmissionWriteAndThenMap) {
     wgpu::Buffer buffer = CreateMapReadBuffer(4);
-    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, wgpu::kWholeMapSize);
-    buffer.Unmap();
+
+    // Dawn uses GPU to clear the buffer with D3D12, so we needs to use MapAsyncAndWait() to make
+    // sure the buffer clearing is done.
+    if (IsD3D12()) {
+        MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, wgpu::kWholeMapSize);
+        buffer.Unmap();
+    }
 
     std::vector<bool> done = {false, false};
 
