@@ -1142,6 +1142,11 @@ void CommandEncoder::APICopyBufferToBuffer(BufferBase* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            if (size == 0) {
+                // Skip no-op copies.
+                return {};
+            }
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source));
                 DAWN_TRY(GetDevice()->ValidateObject(destination));
@@ -1184,6 +1189,12 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            if (copySize->width == 0 || copySize->height == 0 ||
+                copySize->depthOrArrayLayers == 0) {
+                // Skip no-op copies.
+                return {};
+            }
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
@@ -1244,6 +1255,12 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            if (copySize->width == 0 || copySize->height == 0 ||
+                copySize->depthOrArrayLayers == 0) {
+                // Skip no-op copies.
+                return {};
+            }
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *source, *copySize));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc,
