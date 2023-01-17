@@ -311,6 +311,7 @@ ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file,
 #endif
 }
 
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
 ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv,
                                         OwnedCompilationMessages* outMessages) {
 #if TINT_BUILD_SPV_READER
@@ -329,6 +330,7 @@ ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv,
 
 #endif
 }
+#endif
 
 std::vector<uint64_t> GetBindGroupMinBufferSizes(const BindingGroupInfoMap& shaderBindings,
                                                  const BindGroupLayoutBase* layout) {
@@ -914,6 +916,7 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     const ShaderModuleWGSLDescriptor* wgslDesc = nullptr;
     FindInChain(chainedDescriptor, &wgslDesc);
 
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
     // We have a temporary toggle to force the SPIRV ingestion to go through a WGSL
     // intermediate step. It is done by switching the spirvDesc for a wgslDesc below.
     ShaderModuleWGSLDescriptor newWgslDesc;
@@ -937,16 +940,22 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
         device->EmitLog(
             WGPULoggingType_Info,
             "Toggle::ForceWGSLStep skipped because TINT_BUILD_WGSL_WRITER is not defined\n");
-#endif
+#endif  // TINT_BUILD_WGSL_WRITER
     }
 
+#endif  // DAWN_ENABLE_SPIRV_SHADER_MODULES
+
     if (spirvDesc) {
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
         DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowSpirv), "SPIR-V is disallowed.");
 
         std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
         tint::Program program;
         DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
         parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
+#else
+        return DAWN_VALIDATION_ERROR("SPIR-V is not supported.");
+#endif
     } else if (wgslDesc) {
         auto tintSource = std::make_unique<TintSource>("", wgslDesc->source);
 
@@ -1059,16 +1068,27 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
                                    ApiObjectBase::UntrackedByDeviceTag tag)
     : ApiObjectBase(device, descriptor->label), mType(Type::Undefined) {
     ASSERT(descriptor->nextInChain != nullptr);
-    const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &spirvDesc);
+
     const ShaderModuleWGSLDescriptor* wgslDesc = nullptr;
     FindInChain(descriptor->nextInChain, &wgslDesc);
+
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
+    const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &spirvDesc);
+
     ASSERT(spirvDesc || wgslDesc);
 
     if (spirvDesc) {
         mType = Type::Spirv;
         mOriginalSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
-    } else if (wgslDesc) {
+
+        return;
+    }
+#else
+    ASSERT(wgslDesc);
+#endif
+
+    if (wgslDesc) {
         mType = Type::Wgsl;
         mWgsl = std::string(wgslDesc->source);
     }
@@ -1117,14 +1137,20 @@ const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& ent
 size_t ShaderModuleBase::ComputeContentHash() {
     ObjectContentHasher recorder;
     recorder.Record(mType);
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
     recorder.Record(mOriginalSpirv);
+#endif
     recorder.Record(mWgsl);
     return recorder.GetContentHash();
 }
 
 bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
                                                 const ShaderModuleBase* b) const {
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
     return a->mType == b->mType && a->mOriginalSpirv == b->mOriginalSpirv && a->mWgsl == b->mWgsl;
+#else
+    return a->mType == b->mType && a->mWgsl == b->mWgsl;
+#endif
 }
 
 const tint::Program* ShaderModuleBase::GetTintProgram() const {
