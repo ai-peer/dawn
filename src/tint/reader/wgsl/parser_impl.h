@@ -902,6 +902,9 @@ class ParserImpl {
         return builder_.create<T>(std::forward<ARGS>(args)...);
     }
 
+    enum TemplateOrLessThan { kTemplate, kLessThan };
+    TemplateOrLessThan disambiguate_less_than(size_t& lookahead);
+
     Source::File const* const file_;
     std::vector<Token> tokens_;
     size_t next_token_idx_ = 0;
