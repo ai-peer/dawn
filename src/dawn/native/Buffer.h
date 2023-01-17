@@ -72,6 +72,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
 
+    virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
     void Unmap();
 
@@ -107,7 +108,6 @@ class BufferBase : public ApiObjectBase {
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
     virtual void UnmapImpl() = 0;
-    virtual void* GetMappedPointerImpl() = 0;
 
     virtual bool IsCPUWritableAtCreation() const = 0;
     MaybeError CopyFromStagingBuffer();
@@ -126,7 +126,7 @@ class BufferBase : public ApiObjectBase {
     BufferState mState;
     bool mIsDataInitialized = false;
 
-    std::unique_ptr<StagingBufferBase> mStagingBuffer;
+    Ref<BufferBase> mStagingBuffer;
 
     WGPUBufferMapCallback mMapCallback = nullptr;
     void* mMapUserdata = 0;
