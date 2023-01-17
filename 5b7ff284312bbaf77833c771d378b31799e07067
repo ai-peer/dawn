@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0dbcd82_28bfdc9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "nit: MapAsync",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b9faa3c_d8c2689b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "The approach works, but overall it would be nice to have less manual places where we update the serial: here it would be very easy to forget to add a place when adding new methods or moving code around. I\u0027m not sure how to do that for Metal and OpenGL though.",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6c7e1d4_224d284c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "This should be automatic in D3D12 and Vulkan, maybe move this to Metal?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d747613_3cb244d6",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "Why do we force the flush? Isn\u0027t ticking eventually going to cause the commands to be scheduled so the mapping finishes in finite time? It\u0027d be weird that a Buffer.MapAsync does an implicit flush.",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecedd812_e6fa028d",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "Ditto, this is already done in D3D12 and Vulkan. Maybe this could be done at the CopyFromStagingToBuffer interface in Metal / OpenGL?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c25c0271_0e966146",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "SHouldn\u0027t this be gated on validation too?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b46310_133dae2b",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed on D3D12 and Vulkan since the buffers always have Transition called on them somehow.",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fbb1474_016cdd03",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 27
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "I wonder if there could be a way to do this automatically in Metal the same way the change is in a single place in D3D12 and Vulkan.\n\nAlso what about the GL backend?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

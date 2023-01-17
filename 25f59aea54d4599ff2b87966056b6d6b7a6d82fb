@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf611fd0_78e1a219",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "nit: at this point we might as well always insert top level textures and querysets as well, so things are consistent.",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c973f36_4de8926f",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "Same as the Vulkan backend, there should be a single place where we need to update the serial.",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f6ff85_b3181d80",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "Transitions are always requested on each use of the buffer. So couldn\u0027t we put the call to `SetLastUsageSerial` at [1] such that we still take into account that the buffer is used if we happen to not need the barrier? It would also remove the need to set the serial explicitly since we call TransitionUsageNow at [2]",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5914f2f0_bd9fac37",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52dfce16_d32000ed",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T15:53:26Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
