@@ -2585,6 +2585,13 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
         auto* ident =
             create<ast::IdentifierExpression>(t.source(), builder_.Symbols().Register(t.to_str()));
 
+        if (peek_is(Token::Type::kLessThan)) {
+            size_t lookahead = 0;
+            if (disambiguate_less_than(lookahead) == kTemplate) {
+                return Failure::kErrored;
+            }
+        }
+
         if (peek_is(Token::Type::kParenLeft)) {
             auto params = expect_argument_expression_list("function call");
             if (params.errored) {
@@ -2946,6 +2953,79 @@ Maybe<const ast::Expression*> ParserImpl::relational_expression() {
     return expect_relational_expression_post_unary_expression(lhs.value);
 }
 
+ParserImpl::TemplateOrLessThan ParserImpl::disambiguate_less_than(size_t& lookahead) {
+    size_t start = lookahead;
+    lookahead++;  // Skip '<'
+    for (;; lookahead++) {
+        auto skip_nested = [&](Token::Type end_tok) {
+            size_t count = 0;
+            auto start_tok = peek(lookahead).type();
+            for (;; lookahead++) {
+                auto t = peek(lookahead).type();
+                if (t == start_tok) {
+                    count++;
+                } else if (t == end_tok) {
+                    count--;
+                    if (count == 0) {
+                        return true;
+                    }
+                } else if (t == Token::Type::kSemicolon || t == Token::Type::kError ||
+                           t == Token::Type::kEOF) {
+                    return false;
+                }
+            }
+        };
+
+        switch (peek(lookahead).type()) {
+            // '<'
+            case Token::Type::kIdentifier: {
+                if (peek(lookahead).type() == Token::Type::kLessThan) {
+                    // Skip identifier
+                    lookahead++;
+                    // And disambiguate the inner '<'. This progress 'lookahead'.
+                    disambiguate_less_than(lookahead);
+                }
+                break;
+            }
+
+            // Less than, or closing template list
+            // '>'
+            case Token::Type::kGreaterThan: {
+                auto& t = peek(lookahead + 1);
+                if (t.type() == Token::Type::kPeriod || t.type() == Token::Type::kParenLeft) {
+                    Source source = peek(start).source();
+                    source.range.end = peek(lookahead).source().range.end;
+                    builder_.Diagnostics().add_error(diag::System::Reader, "TEMPLATE ARGS", source);
+                    return kTemplate;
+                }
+                break;
+            }
+
+            case Token::Type::kParenLeft:  // '('
+                if (!skip_nested(Token::Type::kParenRight)) {
+                    return kLessThan;
+                }
+                break;
+
+            case Token::Type::kBracketLeft:  // '['
+                if (!skip_nested(Token::Type::kBracketRight)) {
+                    return kLessThan;
+                }
+                break;
+
+            case Token::Type::kParenRight:
+            case Token::Type::kBracketRight:
+            case Token::Type::kSemicolon:
+            case Token::Type::kEOF:
+            case Token::Type::kError:
+                return kLessThan;
+
+            default:
+                continue;
+        }
+    }
+}
+
 // relational_expression.post.unary_expression
 //   : shift_expression.post.unary_expression
 //   | shift_expression.post.unary_expression EQUAL_EQUAL shift_expression
@@ -3206,6 +3286,13 @@ Maybe<const ast::Expression*> ParserImpl::core_lhs_expression() {
     auto& t = peek();
     if (t.IsIdentifier()) {
         next();
+
+        if (peek_is(Token::Type::kLessThan)) {
+            size_t lookahead = 0;
+            if (disambiguate_less_than(lookahead) == kTemplate) {
+                return Failure::kErrored;
+            }
+        }
 
         return create<ast::IdentifierExpression>(t.source(),
                                                  builder_.Symbols().Register(t.to_str()));
