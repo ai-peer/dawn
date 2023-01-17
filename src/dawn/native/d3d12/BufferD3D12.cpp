@@ -359,9 +359,13 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // it in Tick() by execute the commandList and signal a fence for it even it is empty.
     // Skip the unnecessary GetPendingCommandContext() call saves an extra fence.
     if (NeedsInitialization()) {
-        CommandRecordingContext* commandContext;
-        DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
-        DAWN_TRY(EnsureDataInitialized(commandContext));
+        if (IsCPUWritableAtCreation()) {
+            EnsureDataInitializedForMapAsync();
+        } else {
+            CommandRecordingContext* commandContext;
+            DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
+            DAWN_TRY(EnsureDataInitialized(commandContext));
+        }
     }
 
     return MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async");
@@ -461,6 +465,15 @@ MaybeError Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
     GetDevice()->IncrementLazyClearCountForTesting();
 
     return {};
+}
+
+void Buffer::EnsureDataInitializedForMapAsync() {
+    ASSERT(NeedsInitialization());
+    ASSERT(IsCPUWritableAtCreation());
+
+    void* memory = GetMappedPointerImpl();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
 }
 
 MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext,

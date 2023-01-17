@@ -159,9 +159,7 @@ MaybeError Buffer::MapAtCreationImpl() {
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
-    EnsureDataInitialized(commandContext);
-
+    EnsureDataInitializedForMapAsync();
     return {};
 }
 
@@ -215,6 +213,20 @@ bool Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* command
     }
 
     InitializeToZero(commandContext);
+    return true;
+}
+
+bool Buffer::EnsureDataInitializedForMapAsync() {
+    if (!NeedsInitialization()) {
+        return false;
+    }
+
+    ASSERT(IsCPUWritableAtCreation());
+
+    void* memory = GetMappedPointerImpl();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
+
     return true;
 }
 

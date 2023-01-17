@@ -314,7 +314,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
-    EnsureDataInitialized(recordingContext);
+    EnsureDataInitializedForMapAsync();
 
     if (mode & wgpu::MapMode::Read) {
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
@@ -383,6 +383,21 @@ bool Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* recordi
     }
 
     InitializeToZero(recordingContext);
+    return true;
+}
+
+bool Buffer::EnsureDataInitializedForMapAsync() {
+    if (!NeedsInitialization()) {
+        return false;
+    }
+
+    ASSERT(IsCPUWritableAtCreation());
+    ASSERT(mLastUsage == wgpu::BufferUsage::None);
+
+    void* memory = GetMappedPointerImpl();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
+
     return true;
 }
 
