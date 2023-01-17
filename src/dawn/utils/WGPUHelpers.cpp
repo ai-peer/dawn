@@ -38,6 +38,7 @@ std::array<float, 7> kGammaEncodeSrgb = {1 / 2.4, 1.137119, 0.0, 12.92, 0.003130
 }  // namespace
 
 namespace utils {
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
 wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
     // Use SPIRV-Tools's C API to assemble the SPIR-V assembly text to binary. Because the types
     // aren't RAII, we don't return directly on success and instead always go through the code
@@ -73,6 +74,7 @@ wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const c
 
     return result;
 }
+#endif
 
 wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source) {
     wgpu::ShaderModuleWGSLDescriptor wgslDesc;
