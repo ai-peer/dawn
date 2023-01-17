@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a55ecce_38dd0d3b",
+        "filename": "src/dawn/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-17T18:44:35Z",
+      "side": 1,
+      "message": "I think this block is common across the new tests. Maybe we can make a helper?",
+      "range": {
+        "startLine": 769,
+        "startChar": 8,
+        "endLine": 792,
+        "endChar": 77
+      },
+      "revId": "b8db66d9b88b735bfc478fb9dfb394573ad2e0d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
