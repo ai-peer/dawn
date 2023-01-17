@@ -204,6 +204,24 @@
       "parentUuid": "822ec3d1_ffed1103",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0646a559_937eb43a",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-17T20:33:50Z",
+      "side": 1,
+      "message": "which backends?",
+      "parentUuid": "c841c312_45da899e",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
