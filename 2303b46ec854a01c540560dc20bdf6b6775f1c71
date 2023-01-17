@@ -377,6 +377,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e423f199_e49b21ea",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T14:56:15Z",
+      "side": 1,
+      "message": "Alright, I looked at this and it seems that there is reeantrancy in the FlushWire call:\n\n - The ValidationTest calls FlushWire in WaitForAllOperations\n   - FlushWire calls the mapping callback\n     - The MappingCallback calls FlushWire in ASSERT_DEVICE_ERROR.\n       - Bad stuff happens because that FlushWire happens while the first one is still executing, garbling the state.\n\nCan you separate this test in individual tests, so that the one that fails can be added with a DISABLED_ prefix? This causes GTest to skip it but still print that it was skipped so we remember that it\u0027s there.\n\nWhat we should do is that \"immediate callback\" called in the wire should instead be done at the end of all the HandleCommands call so that there is no reentrancy. But that\u0027s a bunch of work and not really needed now.",
+      "parentUuid": "d97ce744_4be74c51",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "858a8548_3bb376f8",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
