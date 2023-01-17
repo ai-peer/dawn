@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b18accc9_5cf9da84",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T07:10:46Z",
+      "side": 1,
+      "message": "Sorry, I couldn\u0027t get well. Does it mean I don\u0027t need to use smart pointer?",
+      "parentUuid": "fdd00222_a5f701f7",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fae95d14_b77cdc21",
         "filename": "src/dawn/native/Buffer.h",
         "patchSetId": 9
