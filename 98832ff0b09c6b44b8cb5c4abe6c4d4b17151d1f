@@ -240,6 +240,24 @@
       "parentUuid": "0646a559_937eb43a",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82cabdab_b03da72e",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-17T21:01:26Z",
+      "side": 1,
+      "message": "I found the old trybot results. https://ci.chromium.org/ui/p/chromium/builders/try/linux-dawn-rel/19329/overview It is nvidia GPU.",
+      "parentUuid": "e0a6e431_f7c0a5af",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
