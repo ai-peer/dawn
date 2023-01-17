@@ -673,7 +673,7 @@ TEST_F(PromoteInitializersToLetTest, ArrayInForLoopInitCondCont) {
 fn f() {
   let runtime_value = 0;
   for(var f = array<f32, 1u>(0.0)[runtime_value];
-      f < array<f32, 1u>(1.0)[runtime_value];
+      f < (array<f32, 1u>(1.0)[runtime_value]);
       f = f + array<f32, 1u>(2.0)[runtime_value]) {
     var marker = 1;
   }
@@ -1245,7 +1245,7 @@ fn X() {
 
 fn Y() {
   var i = 10;
-  for(var f = 0; f < array<i32, 1u>(i)[0]; f = f + 1) {
+  for(var f = 0; f < (array<i32, 1u>(i)[0]); f = f + 1) {
       var i = 20;
   }
 }
