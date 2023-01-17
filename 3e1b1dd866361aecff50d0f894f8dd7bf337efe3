@@ -67,6 +67,24 @@
       "message": "nit: Can we have implementations in the .cpp file? Same for the constructors / destructors. It\u0027s something we usually do so that headers are smaller and compile time don\u0027t balloon (they are already largeish :( )",
       "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe50b55_eb9eaf2e",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T07:04:15Z",
+      "side": 1,
+      "message": "OK, I will try.\n\nBy the way, I have a question. What is the best practice to define and implement a class/structure that is used only in a certain class? (Sorry, I\u0027m still new to C++.)\n\nI used inner structure but I don\u0027t think it really needs to be or it is elegant. Using namespace?",
+      "parentUuid": "1bc00145_631d8118",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
