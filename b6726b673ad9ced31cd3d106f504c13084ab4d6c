@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a5c2b0a_317c21e5",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 698,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-17T16:13:23Z",
+      "side": 0,
+      "message": "This didn\u0027t work with the Vulkan backend prior to this change? Does it mean the Vulkan backend is temporarily broken in some cases in between your changes? That would be unfortunate and maybe we can reorder CLs so it isn\u0027t.",
+      "revId": "b6726b673ad9ced31cd3d106f504c13084ab4d6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
