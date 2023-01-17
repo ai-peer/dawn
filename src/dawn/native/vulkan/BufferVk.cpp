@@ -217,7 +217,11 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // BufferBase::MapAtCreation().
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
-        ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
+        if (IsCPUWritableAtCreation()) {
+            memset(GetMappedPointer(), 1, GetSize());
+        } else {
+            ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
+        }
     }
 
     // Initialize the padding bytes to zero.
@@ -226,9 +230,13 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
         if (paddingBytes > 0) {
             uint32_t clearSize = Align(paddingBytes, 4);
             uint64_t clearOffset = GetAllocatedSize() - clearSize;
+            if (IsCPUWritableAtCreation()) {
+                memset(static_cast<char*>(GetMappedPointer()) + clearOffset, 1, clearSize);
 
-            CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
-            ClearBuffer(recordingContext, 0, clearOffset, clearSize);
+            } else {
+                CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+                ClearBuffer(recordingContext, 0, clearOffset, clearSize);
+            }
         }
     }
 
@@ -321,7 +329,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
 
     // TODO(crbug.com/dawn/852): initialize mapped buffer in CPU side.
-    EnsureDataInitialized(recordingContext);
+    EnsureDataInitializedForMapAsync();
 
     if (mode & wgpu::MapMode::Read) {
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapRead);
@@ -390,6 +398,22 @@ bool Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* recordi
     }
 
     InitializeToZero(recordingContext);
+    return true;
+}
+
+bool Buffer::EnsureDataInitializedForMapAsync() {
+    if (!NeedsInitialization()) {
+        return false;
+    }
+
+    ASSERT(IsCPUWritableAtCreation());
+    ASSERT(mLastUsage == wgpu::BufferUsage::None);
+
+    void* memory = GetMappedPointer();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
+    GetDevice()->IncrementLazyClearCountForTesting();
+
     return true;
 }
 

@@ -163,24 +163,32 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // BufferBase::MapAtCreation().
     if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
-        CommandRecordingContext* commandRecordingContext;
-        DAWN_TRY_ASSIGN(commandRecordingContext,
-                        ToBackend(GetDevice())->GetPendingCommandContext());
+        if (IsCPUWritableAtCreation()) {
+            memset(GetMappedPointer(), 1, GetSize());
+        } else {
+            CommandRecordingContext* commandRecordingContext;
+            DAWN_TRY_ASSIGN(commandRecordingContext,
+                            ToBackend(GetDevice())->GetPendingCommandContext());
 
-        DAWN_TRY(ClearBuffer(commandRecordingContext, uint8_t(1u)));
+            DAWN_TRY(ClearBuffer(commandRecordingContext, uint8_t(1u)));
+        }
     }
 
     // Initialize the padding bytes to zero.
     if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) && !mappedAtCreation) {
         uint32_t paddingBytes = GetAllocatedSize() - GetSize();
         if (paddingBytes > 0) {
-            CommandRecordingContext* commandRecordingContext;
-            DAWN_TRY_ASSIGN(commandRecordingContext,
-                            ToBackend(GetDevice())->GetPendingCommandContext());
-
             uint32_t clearSize = paddingBytes;
             uint64_t clearOffset = GetSize();
-            DAWN_TRY(ClearBuffer(commandRecordingContext, 0, clearOffset, clearSize));
+            if (IsCPUWritableAtCreation()) {
+                memset(static_cast<char*>(GetMappedPointer()) + clearOffset, 0, clearSize);
+            } else {
+                CommandRecordingContext* commandRecordingContext;
+                DAWN_TRY_ASSIGN(commandRecordingContext,
+                                ToBackend(GetDevice())->GetPendingCommandContext());
+
+                DAWN_TRY(ClearBuffer(commandRecordingContext, 0, clearOffset, clearSize));
+            }
         }
     }
 
@@ -349,13 +357,19 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // GetPendingCommandContext() call might create a new commandList. Dawn will handle
     // it in Tick() by execute the commandList and signal a fence for it even it is empty.
     // Skip the unnecessary GetPendingCommandContext() call saves an extra fence.
-    if (NeedsInitialization()) {
+    if (NeedsInitialization() && !IsCPUWritableAtCreation()) {
         CommandRecordingContext* commandContext;
         DAWN_TRY_ASSIGN(commandContext, ToBackend(GetDevice())->GetPendingCommandContext());
         DAWN_TRY(EnsureDataInitialized(commandContext));
     }
 
-    return MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async");
+    DAWN_TRY(MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async"));
+
+    if (NeedsInitialization() && IsCPUWritableAtCreation()) {
+        EnsureDataInitializedForMapAsync();
+    }
+
+    return {};
 }
 
 void Buffer::UnmapImpl() {
@@ -452,6 +466,16 @@ MaybeError Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
     GetDevice()->IncrementLazyClearCountForTesting();
 
     return {};
+}
+
+void Buffer::EnsureDataInitializedForMapAsync() {
+    ASSERT(NeedsInitialization());
+    ASSERT(IsCPUWritableAtCreation());
+
+    void* memory = GetMappedPointer();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
+    GetDevice()->IncrementLazyClearCountForTesting();
 }
 
 MaybeError Buffer::ClearBuffer(CommandRecordingContext* commandContext,

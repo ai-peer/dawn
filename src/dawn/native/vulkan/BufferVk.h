@@ -48,6 +48,7 @@ class Buffer final : public BufferBase {
                                             uint64_t size);
     bool EnsureDataInitializedAsDestination(CommandRecordingContext* recordingContext,
                                             const CopyTextureToBufferCmd* copy);
+    bool EnsureDataInitializedForMapAsync();
 
     // Dawn API
     void SetLabelImpl() override;
