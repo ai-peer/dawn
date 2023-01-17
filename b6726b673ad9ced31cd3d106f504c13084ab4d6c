@@ -16,6 +16,24 @@
       "message": "nit: lastCanBeReusedWithoutBarrier and add MapWrite to the kReuseNoBarrierBufferUsages?",
       "revId": "b6726b673ad9ced31cd3d106f504c13084ab4d6c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fa882a2_01d5d41b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-17T20:24:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af220936_f46d8a2f",
+      "revId": "b6726b673ad9ced31cd3d106f504c13084ab4d6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
