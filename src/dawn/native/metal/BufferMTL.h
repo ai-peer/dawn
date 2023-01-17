@@ -41,6 +41,7 @@ class Buffer final : public BufferBase {
                                             uint64_t size);
     bool EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
                                             const CopyTextureToBufferCmd* copy);
+    bool EnsureDataInitializedForMapAsync();
 
     static uint64_t QueryMaxBufferLength(id<MTLDevice> mtlDevice);
 
