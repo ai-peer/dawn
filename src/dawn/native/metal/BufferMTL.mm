@@ -123,9 +123,13 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     // BufferBase::MapAtCreation().
     if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
-        CommandRecordingContext* commandContext =
-            ToBackend(GetDevice())->GetPendingCommandContext();
-        ClearBuffer(commandContext, uint8_t(1u));
+        if (IsCPUWritableAtCreation()) {
+            memset(GetMappedPointerImpl(), 1, GetSize());
+        } else {
+            CommandRecordingContext* commandContext =
+                ToBackend(GetDevice())->GetPendingCommandContext();
+            ClearBuffer(commandContext, uint8_t(1u));
+        }
     }
 
     // Initialize the padding bytes to zero.
@@ -134,10 +138,13 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
         if (paddingBytes > 0) {
             uint32_t clearSize = Align(paddingBytes, 4);
             uint64_t clearOffset = GetAllocatedSize() - clearSize;
-
-            CommandRecordingContext* commandContext =
-                ToBackend(GetDevice())->GetPendingCommandContext();
-            ClearBuffer(commandContext, 0, clearOffset, clearSize);
+            if (IsCPUWritableAtCreation()) {
+                memset(static_cast<char*>(GetMappedPointerImpl()) + clearOffset, 0, clearSize);
+            } else {
+                CommandRecordingContext* commandContext =
+                    ToBackend(GetDevice())->GetPendingCommandContext();
+                ClearBuffer(commandContext, 0, clearOffset, clearSize);
+            }
         }
     }
     return {};
@@ -159,9 +166,7 @@ MaybeError Buffer::MapAtCreationImpl() {
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
-    EnsureDataInitialized(commandContext);
-
+    EnsureDataInitializedForMapAsync();
     return {};
 }
 
@@ -215,6 +220,21 @@ bool Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* command
     }
 
     InitializeToZero(commandContext);
+    return true;
+}
+
+bool Buffer::EnsureDataInitializedForMapAsync() {
+    if (!NeedsInitialization()) {
+        return false;
+    }
+
+    ASSERT(IsCPUWritableAtCreation());
+
+    void* memory = GetMappedPointerImpl();
+    memset(memory, 0, GetSize());
+    SetIsDataInitialized();
+    GetDevice()->IncrementLazyClearCountForTesting();
+
     return true;
 }
 
