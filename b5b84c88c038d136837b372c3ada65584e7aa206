@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e488a04f_67ee30a1",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-17T18:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88fb708d_fbeb9d7a",
+      "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39559157_912ebfb1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-01-14T00:27:13Z",
       "side": 1,
       "message": "unit: \"Depth stencil state format (%s) has no...\"",
+      "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff30c7b2_4f4d9838",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-17T18:33:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "39559157_912ebfb1",
       "revId": "b5b84c88c038d136837b372c3ada65584e7aa206",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
