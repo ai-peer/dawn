@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4bb8fff_51d85ff9",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T11:00:00Z",
+      "side": 1,
+      "message": "Thanks, updated.",
+      "parentUuid": "fae95d14_b77cdc21",
+      "revId": "3e1b1dd866361aecff50d0f894f8dd7bf337efe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bc00145_631d8118",
