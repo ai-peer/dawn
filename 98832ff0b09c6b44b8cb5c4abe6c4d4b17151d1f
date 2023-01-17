@@ -222,6 +222,24 @@
       "parentUuid": "c841c312_45da899e",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a6e431_f7c0a5af",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-17T20:59:00Z",
+      "side": 1,
+      "message": "Not backend, but with some GPUs. I remember Intel or maybe Nvidia. I cannot check the trybot results for old patchset.",
+      "parentUuid": "0646a559_937eb43a",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
