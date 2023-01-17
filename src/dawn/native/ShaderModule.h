@@ -299,8 +299,11 @@ class ShaderModuleBase : public ApiObjectBase, public CachedObject {
     // The original data in the descriptor for caching.
     enum class Type { Undefined, Spirv, Wgsl };
     Type mType;
-    std::vector<uint32_t> mOriginalSpirv;
     std::string mWgsl;
+
+#ifdef DAWN_ENABLE_SPIRV_SHADER_MODULES
+    std::vector<uint32_t> mOriginalSpirv;
+#endif
 
     EntryPointMetadataTable mEntryPoints;
     WGSLExtensionSet mEnabledWGSLExtensions;
