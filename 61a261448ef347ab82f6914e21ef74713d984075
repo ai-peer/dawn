@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c2218b6_d7cf48a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-01-17T10:33:04Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\nThis is one part that split from original https://dawn-review.googlesource.com/c/dawn/+/113340.\n\nWith future CL, any experimental feature will not return supported if adapter doesn\u0027t disable toggle DisallowUnsafeApis. Currently, however, they can be queried as supported since adapter has not had toggles, but requesting device with experimental feature will failed without DisallowUnsafeApis device toggle disabled.",
+      "revId": "61a261448ef347ab82f6914e21ef74713d984075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
