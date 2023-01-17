@@ -77,6 +77,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c78cfe4_42b0f3dd",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-17T16:20:24Z",
+      "side": 1,
+      "message": "GL backend doesn\u0027t call Tick() here.",
+      "parentUuid": "ee055142_c70697fa",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2ff0ad74_7220084d",
         "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
         "patchSetId": 11
@@ -88,6 +106,24 @@
       "writtenOn": "2023-01-17T15:59:49Z",
       "side": 1,
       "message": "Why did we have to do this change?",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6806b07_641cac99",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-17T16:20:24Z",
+      "side": 1,
+      "message": "`DevcieBase::Destroy()`[1] will cause OnSubbmitedWorkDone callback resolved as device lost. I am not sure why it doesn\u0027t happen without my CL. Probably it is because timing change.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d397;drc\u003d71630a0e336a703e21de9ebeb98a5abf84e8c96c;bpv\u003d1;bpt\u003d1?q\u003dDeviceBase::Destroy\u0026ss\u003dchromium",
+      "parentUuid": "2ff0ad74_7220084d",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
