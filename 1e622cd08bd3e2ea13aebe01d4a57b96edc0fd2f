@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e1bb513_8a8c6f1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-17T20:40:10Z",
+      "side": 1,
+      "message": "generally, the no-ops happen in the backend.\n\nthat\u0027s because the validation still needs to happen even for no-op copies.\nYou could gate it behind IsValidationEnabled(), but how important is it? \n\nI\u0027m guessing you want this to skip adding things to mTopLevelBuffers and friends, but is that actually happening from Skia? seems like a degenerate case that Skia shouldn\u0027t be doing anyway.",
+      "revId": "1e622cd08bd3e2ea13aebe01d4a57b96edc0fd2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
