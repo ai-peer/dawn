@@ -102,6 +102,66 @@ struct Buf {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, kSteps);
 }
 
+// Test that clamp vec4 NAN is being properly calculated.
+TEST_P(ShaderTests, ComputeClampVec4NAN) {
+    uint32_t const kSteps = 8;
+    std::vector<float> expected{0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, NAN};
+    uint64_t expectedSize = static_cast<uint64_t>(expected.size() * sizeof(float));
+    wgpu::Buffer buffer = CreateBuffer(kSteps);
+    wgpu::Buffer inBuffer = utils::CreateBufferFromData(device, expected.data(), expectedSize,
+                                                        wgpu::BufferUsage::Storage);
+
+    std::string shader = R"(
+struct Buf {
+  data: array<vec4<f32>, 2>,
+};
+
+@group(0) @binding(0) var<storage, read> inBuf : Buf;
+@group(0) @binding(1) var<storage, read_write> outBuf : Buf;
+
+fn isnan(val: f32) -> bool {
+    let floatToUint: u32 = bitcast<u32>(val);
+    return (floatToUint & 0x7fffffffu) > 0x7f800000u;
+}
+
+@compute @workgroup_size(1)
+fn main(@builtin(global_invocation_id) globalId : vec3<u32>) {
+    for (var j = 0; j < 2; j ++) {
+        var clampedValue : vec4<f32>;
+        let result = inBuf.data[j];
+        for (var i = 0; i < 4; i = i + 1) {
+            if (isnan(result[i])) {
+                clampedValue[i] = result[i];
+            } else {
+                clampedValue[i] = clamp(result[i], 0.0, 10.0);
+            }
+        }
+        outBuf.data[j] = vec4<f32>(clampedValue);
+    }
+})";
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main");
+
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, inBuffer}, {1, buffer}});
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.DispatchWorkgroups(1);
+        pass.End();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), buffer, 0, kSteps);
+}
+
 TEST_P(ShaderTests, BadWGSL) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
