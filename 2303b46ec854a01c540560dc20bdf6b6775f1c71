@@ -359,6 +359,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d97ce744_4be74c51",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-17T13:31:12Z",
+      "side": 1,
+      "message": "What I found for now is the second mapAsync call seems to end with a validation error as expected, but mWireHelper-\u003eFlushServer() in ValidationTest seems to return unexpected value (that means the second mapAsync command failed?).",
+      "parentUuid": "60ba66bb_b3b0bc33",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "858a8548_3bb376f8",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 2
