@@ -125,6 +125,8 @@ list(APPEND TINT_LIB_SRCS
   ast/depth_multisampled_texture.h
   ast/depth_texture.cc
   ast/depth_texture.h
+  ast/diagnostic_control.cc
+  ast/diagnostic_control.h
   ast/disable_validation_attribute.cc
   ast/disable_validation_attribute.h
   ast/discard_statement.cc
@@ -567,6 +569,7 @@ list(APPEND TINT_LIB_SRCS
 )
 
 tint_generated(ast/builtin_value BENCH TEST)
+tint_generated(ast/diagnostic_control BENCH TEST)
 tint_generated(ast/extension BENCH TEST)
 tint_generated(ast/interpolate_attribute BENCH TEST)
 tint_generated(resolver/init_conv_intrinsic)
@@ -827,6 +830,7 @@ if(TINT_BUILD_TESTS)
     ast/continue_statement_test.cc
     ast/depth_multisampled_texture_test.cc
     ast/depth_texture_test.cc
+    ast/diagnostic_control_test.cc
     ast/discard_statement_test.cc
     ast/enable_test.cc
     ast/external_texture_test.cc
