@@ -258,6 +258,24 @@
       "parentUuid": "e0a6e431_f7c0a5af",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9dfead_ae2dad3f",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T00:43:00Z",
+      "side": 1,
+      "message": "We discussed offline. DeviceBase::Destroy() should be fixed to always call OnSubmittedWorkDone with success status. But we will do it in a separate CL.",
+      "parentUuid": "82cabdab_b03da72e",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
