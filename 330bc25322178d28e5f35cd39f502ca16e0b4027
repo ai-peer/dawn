@@ -16,6 +16,24 @@
       "message": "We probably want to keep this one :)",
       "revId": "330bc25322178d28e5f35cd39f502ca16e0b4027",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af36d3d_aec53a04",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T16:57:11Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ab7abbfa_bad1cec3",
+      "revId": "330bc25322178d28e5f35cd39f502ca16e0b4027",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
