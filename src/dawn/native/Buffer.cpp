@@ -306,7 +306,7 @@ MaybeError BufferBase::MapAtCreationInternal() {
             stagingBufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
             stagingBufferDesc.size = Align(GetAllocatedSize(), 4);
             stagingBufferDesc.mappedAtCreation = true;
-            bufferDesc.label = "Dawn_MappedAtCreationStagingBuffer";
+            stagingBufferDesc.label = "Dawn_MappedAtCreationStagingBuffer";
 
             IgnoreLazyClearCountScope scope(GetDevice());
             DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateBuffer(&stagingBufferDesc));
