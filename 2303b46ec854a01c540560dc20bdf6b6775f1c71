@@ -393,6 +393,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a9b80d_b2c21ab4",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-01-18T07:18:35Z",
+      "side": 1,
+      "message": "Thanks for the investigation, updated the test.",
+      "parentUuid": "e423f199_e49b21ea",
+      "revId": "2303b46ec854a01c540560dc20bdf6b6775f1c71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "858a8548_3bb376f8",
