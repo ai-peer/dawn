@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e429f32e_7eeebccb",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T23:06:24Z",
+      "side": 1,
+      "message": "hm.. maybe instead of using !build_with_chromium from Dawn\u0027s source tree, it would work if we disable spirv reader from the Chromium side by setting it to false in [chromium/src]//build_overrides/tint.gni\n\nwould be ideal if we can exclusively rely on `tint_build_spv_reader` instead of adding another build arg to turn it off",
+      "parentUuid": "870ed5c0_a29964cb",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 25
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f5a6815_c9e5b23e",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 5

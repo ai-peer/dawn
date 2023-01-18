@@ -16,6 +16,29 @@
       "message": "Thanks! Feedback addressed",
       "revId": "17f388836003421f50c436191b760400dde6bf26",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044bcd84_6db753a6",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T23:06:24Z",
+      "side": 1,
+      "message": "nit: update comment to only talk about WGSL",
+      "range": {
+        "startLine": 913,
+        "startChar": 0,
+        "endLine": 913,
+        "endChar": 68
+      },
+      "revId": "17f388836003421f50c436191b760400dde6bf26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
