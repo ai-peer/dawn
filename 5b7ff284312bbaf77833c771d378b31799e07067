@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d25d2d7b_40f5ab38",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 27
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0dbcd82_28bfdc9c",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 7
+      },
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4b9faa3c_d8c2689b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 27
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1011c1_4e206cb6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 1934,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6c7e1d4_224d284c",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d747613_3cb244d6",
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "488cedb0_c05ed68e",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "MapAsync already always does it without this CL. With this change and following CLs in the CL chain. The `serial` should be always less than `GetDevice()-\u003eGetLastSubmittedCommandSerial()`, so the flush() will not happen.",
+      "parentUuid": "5d747613_3cb244d6",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecedd812_e6fa028d",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 27
@@ -88,6 +148,24 @@
       "writtenOn": "2023-01-17T15:53:26Z",
       "side": 1,
       "message": "Ditto, this is already done in D3D12 and Vulkan. Maybe this could be done at the CopyFromStagingToBuffer interface in Metal / OpenGL?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78547a42_fa56c57b",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecedd812_e6fa028d",
       "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b9f8dc1_e5fb16b4",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "It is gated at line 457\n```\n        if (!validation) {\n            continue;\n        }\n\n```",
+      "parentUuid": "c25c0271_0e966146",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4b46310_133dae2b",
         "filename": "src/dawn/native/Queue.cpp",
         "patchSetId": 27
@@ -122,6 +218,24 @@
       "writtenOn": "2023-01-17T15:53:26Z",
       "side": 1,
       "message": "This shouldn\u0027t be needed on D3D12 and Vulkan since the buffers always have Transition called on them somehow.",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa60af12_da6c4da5",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4b46310_133dae2b",
       "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +253,24 @@
       "writtenOn": "2023-01-17T15:53:26Z",
       "side": 1,
       "message": "I wonder if there could be a way to do this automatically in Metal the same way the change is in a single place in D3D12 and Vulkan.\n\nAlso what about the GL backend?",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3db53d9_6ed03977",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 27
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "I don\u0027t see a better way for it, or modify CommandBufferMtl.mm?\n\nRight now, I just ignore the GL backend, because GL backend is different. Seems there is an issues related to MapAsync().  MapAsyncImpl() clears buffer with below function, but MapAsync() doesn\u0027t wait for completion of glBufferSubData(). I plan to address GL backend in follow up CLs.\n\n```\nvoid Buffer::InitializeToZero() {\n    ASSERT(NeedsInitialization());\n\n    const uint64_t size \u003d GetAllocatedSize();\n    Device* device \u003d ToBackend(GetDevice());\n    const OpenGLFunctions\u0026 gl \u003d device-\u003eGetGL();\n\n    const std::vector\u003cuint8_t\u003e clearValues(size, 0u);\n    gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);\n    gl.BufferSubData(GL_ARRAY_BUFFER, 0, size, clearValues.data());\n    device-\u003eIncrementLazyClearCountForTesting();\n\n    SetIsDataInitialized();\n}\n\n```",
+      "parentUuid": "1fbb1474_016cdd03",
       "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

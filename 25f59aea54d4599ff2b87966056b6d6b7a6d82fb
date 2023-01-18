@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd00d622_8d244741",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf611fd0_78e1a219",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c973f36_4de8926f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-17T15:53:26Z",
       "side": 1,
       "message": "Same as the Vulkan backend, there should be a single place where we need to update the serial.",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c585f761_1cb4ac33",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c973f36_4de8926f",
       "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "500e94c5_4c7860f1",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2f6ff85_b3181d80",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5914f2f0_bd9fac37",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "383899df_b74ff64e",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5914f2f0_bd9fac37",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52dfce16_d32000ed",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-01-17T15:53:26Z",
       "side": 1,
       "message": "[2]",
+      "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a4cbb1_6ac5dead",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T15:43:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52dfce16_d32000ed",
       "revId": "25f59aea54d4599ff2b87966056b6d6b7a6d82fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
