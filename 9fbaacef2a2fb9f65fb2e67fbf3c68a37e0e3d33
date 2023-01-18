@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ddd9955_911730fa",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T18:21:24Z",
+      "side": 1,
+      "message": "Ah because you were able to call textureStore, then it means it\u0027s not shadowed?? Ok.",
+      "parentUuid": "7b3d1dfe_3a205260",
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f98d59b_c64f9738",
