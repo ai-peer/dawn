@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5767524b_4082b50d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T09:25:17Z",
+      "side": 1,
+      "message": "LGTM! I\u0027m not sure why we had them different in the past. Maybe StagingBuffers came before buffer mapping?\n\nIs this CL associated with a larger piece of work, any tracking issue?",
+      "revId": "711d9ed3d09da96c75180733d1741c018f5027c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae8748b_089a7ef5",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T09:25:17Z",
+      "side": 1,
+      "message": "nit: can we comment about the reentrancy here and why we don\u0027t have an infinite linked list of buffers?",
+      "revId": "711d9ed3d09da96c75180733d1741c018f5027c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c76b050_3bc77b48",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T09:25:17Z",
+      "side": 1,
+      "message": "Maybe we could this logic in a helper method on the device? device-\u003eCreateBufferForInternalUse(); not sure it helps that much though because the lazy clear is happening because it is mapped.",
+      "revId": "711d9ed3d09da96c75180733d1741c018f5027c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
