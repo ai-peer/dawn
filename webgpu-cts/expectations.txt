@@ -171,10 +171,10 @@ crbug.com/dawn/1125 [ monterey ] webgpu:api,operation,rendering,depth_clip_clamp
 ################################################################################
 # atan2 shader execution failures
 ################################################################################
-crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize="_undef_" [ Failure ]
-crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=2 [ Failure ]
-crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=3 [ Failure ]
-crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=4 [ Failure ]
+# crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize="_undef_" [ Failure ]
+# crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=2 [ Failure ]
+# crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=3 [ Failure ]
+# crbug.com/tint/1524 [ monterey ] webgpu:shader,execution,expression,call,builtin,atan2:f32:inputSource="const";vectorize=4 [ Failure ]
 
 ################################################################################
 # shader execution failures
