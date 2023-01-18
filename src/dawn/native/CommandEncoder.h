@@ -96,6 +96,25 @@ class CommandEncoder final : public ApiObjectBase {
     ResultOrError<Ref<CommandBufferBase>> Finish(
         const CommandBufferDescriptor* descriptor = nullptr);
 
+    friend class InternalUsageScope;
+    class [[nodiscard]] InternalUsageScope : public NonMovable {
+      public:
+        ~InternalUsageScope();
+
+      private:
+        // Disable heap allocation
+        void* operator new(size_t) = delete;
+
+        // Only CommandEncoder can make this class.
+        friend class CommandEncoder;
+        InternalUsageScope(CommandEncoder* encoder);
+
+        CommandEncoder* mEncoder;
+        UsageValidationMode mUsageValidationMode;
+    };
+
+    InternalUsageScope MakeInternalUsageScope();
+
   private:
     CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
     CommandEncoder(DeviceBase* device, ObjectBase::ErrorTag tag);
