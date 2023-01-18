@@ -276,6 +276,24 @@
       "parentUuid": "82cabdab_b03da72e",
       "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2baa6598_eeea6fbb",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T02:22:36Z",
+      "side": 1,
+      "message": "I think this is fine for now since it seems the semantics in the spec are not well specified yet and may be changing. But, could you leave a TODO(dawn:1640) about addressing this? Please also describe why the two statuses are possible. As I see it...\n\nThe difference is happening because 1. NVIDIA GPU must be fast / have some optimization. 2. the queue submit is empty.\nSo, after calling SubmitPendingCommands(), and then Tick() - Tick discovers that the commands are already complete.\n\nThen, you call onSubmittedWorkDone which finds that device-\u003eHasScheduledCommands is false since the queue is idle - and the callback is stored in the callback task manager immediately. Currently, Dawn rejects all these callbacks on device.destroy()",
+      "parentUuid": "0c9dfead_ae2dad3f",
+      "revId": "98832ff0b09c6b44b8cb5c4abe6c4d4b17151d1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
