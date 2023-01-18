@@ -57,6 +57,13 @@ struct InternalPipelineStore {
     Ref<ComputePipelineBase> renderValidationPipeline;
     Ref<ShaderModuleBase> renderValidationShader;
     Ref<ComputePipelineBase> dispatchIndirectValidationPipeline;
+
+    struct BlitBufferToStencilPipelines {
+        Ref<RenderPipelineBase> clearPipeline;
+        std::array<Ref<RenderPipelineBase>, 8> setStencilPipelines;
+    };
+    std::unordered_map<wgpu::TextureFormat, BlitBufferToStencilPipelines>
+        blitBufferToStencilPipelines;
 };
 
 }  // namespace dawn::native
