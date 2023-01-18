@@ -205,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cfe3768_413aff60",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T23:43:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b9f8dc1_e5fb16b4",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4b46310_133dae2b",
@@ -271,6 +289,24 @@
       "side": 1,
       "message": "I don\u0027t see a better way for it, or modify CommandBufferMtl.mm?\n\nRight now, I just ignore the GL backend, because GL backend is different. Seems there is an issues related to MapAsync().  MapAsyncImpl() clears buffer with below function, but MapAsync() doesn\u0027t wait for completion of glBufferSubData(). I plan to address GL backend in follow up CLs.\n\n```\nvoid Buffer::InitializeToZero() {\n    ASSERT(NeedsInitialization());\n\n    const uint64_t size \u003d GetAllocatedSize();\n    Device* device \u003d ToBackend(GetDevice());\n    const OpenGLFunctions\u0026 gl \u003d device-\u003eGetGL();\n\n    const std::vector\u003cuint8_t\u003e clearValues(size, 0u);\n    gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);\n    gl.BufferSubData(GL_ARRAY_BUFFER, 0, size, clearValues.data());\n    device-\u003eIncrementLazyClearCountForTesting();\n\n    SetIsDataInitialized();\n}\n\n```",
       "parentUuid": "1fbb1474_016cdd03",
+      "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef2a5f25_fcbe13b3",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 27
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-18T23:43:04Z",
+      "side": 1,
+      "message": "Add `Buffer::TrackUsage()` for metal. The last usage serial will be updated in it.\nDone",
+      "parentUuid": "d3db53d9_6ed03977",
       "revId": "5b7ff284312bbaf77833c771d378b31799e07067",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
