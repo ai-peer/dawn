@@ -16,6 +16,63 @@
       "message": "Implemented for storage textures. Are sampled textures handled purely API side?",
       "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59974cd2_92e37757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T17:50:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2177ccf8_e51671d2",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T17:50:10Z",
+      "side": 1,
+      "message": "Doesn\u0027t this risk redirecting to a user function called \"textureStore\"? Do we assume the renamer ran first?",
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f98d59b_c64f9738",
+        "filename": "src/tint/transform/builtin_polyfill.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T17:50:10Z",
+      "side": 1,
+      "message": "nit: rgba8unorm",
+      "range": {
+        "startLine": 50,
+        "startChar": 77,
+        "endLine": 50,
+        "endChar": 88
+      },
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
