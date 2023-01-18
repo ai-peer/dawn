@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b3d1dfe_3a205260",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-18T18:19:37Z",
+      "side": 1,
+      "message": "We\u0027re replacing a `textureStore` with another `textureStore`, so shadowing isn\u0027t an issue.",
+      "parentUuid": "2177ccf8_e51671d2",
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f98d59b_c64f9738",
@@ -82,6 +100,30 @@
       "writtenOn": "2023-01-18T17:50:10Z",
       "side": 1,
       "message": "nit: rgba8unorm",
+      "range": {
+        "startLine": 50,
+        "startChar": 77,
+        "endLine": 50,
+        "endChar": 88
+      },
+      "revId": "9fbaacef2a2fb9f65fb2e67fbf3c68a37e0e3d33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e2e854_5769bca5",
+        "filename": "src/tint/transform/builtin_polyfill.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-18T18:19:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f98d59b_c64f9738",
       "range": {
         "startLine": 50,
         "startChar": 77,
