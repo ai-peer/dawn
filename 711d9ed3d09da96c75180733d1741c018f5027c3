@@ -104,6 +104,24 @@
       "parentUuid": "2c76b050_3bc77b48",
       "revId": "711d9ed3d09da96c75180733d1741c018f5027c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299d24e2_5c487f98",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-18T17:04:08Z",
+      "side": 1,
+      "message": "Yeah agreed.",
+      "parentUuid": "96ed171c_0d0b454c",
+      "revId": "711d9ed3d09da96c75180733d1741c018f5027c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
