@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e00c2f4_467a1731",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T21:13:39Z",
+      "side": 1,
+      "message": "PTAL! An earlier version of this CL tried to also turn off building unnecessary tint readers/writers for the given platform, but that\u0027s turning out to be more complicated. In the interest of keeping this patch more focused I\u0027ve reduced it to just disabling SPIR-V shader ingestion and validation.",
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
