@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d8593e_e719b64f",
+        "filename": "src/dawn/native/DynamicUploader.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-18T22:56:29Z",
+      "side": 1,
+      "message": "In D3D12 and Vulkan original backend impls, it seems like we had this `SetDebugName(... \"Dawn_StagingBuffer\")` call. I assume this is probably setting a label (and maybe some more in the backend?). Maybe we should set the `label` param appropriately in this desc? I imagine something similar to \"Dawn_StagingBuffer\"?",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 43
+      },
+      "revId": "f7fbd8c0f75e7887ee3bbacd73b1b3fe302115de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
