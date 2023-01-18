@@ -1161,6 +1161,11 @@ void CommandEncoder::APICopyBufferToBuffer(BufferBase* source,
                                  "validating destination %s usage.", destination);
             }
 
+            // Skip no-op copies.
+            if (size == 0) {
+                return {};
+            }
+
             mTopLevelBuffers.insert(source);
             mTopLevelBuffers.insert(destination);
 
@@ -1210,6 +1215,12 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
                     destination->texture->GetFormat().HasDepthOrStencil()));
                 DAWN_TRY(ValidateLinearTextureData(source->layout, source->buffer->GetSize(),
                                                    blockInfo, *copySize));
+            }
+
+            // Skip no-op copies.
+            if (copySize->width == 0 || copySize->height == 0 ||
+                copySize->depthOrArrayLayers == 0) {
+                return {};
             }
 
             mTopLevelBuffers.insert(source->buffer);
@@ -1269,6 +1280,12 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
                     source->texture->GetFormat().HasDepthOrStencil()));
                 DAWN_TRY(ValidateLinearTextureData(
                     destination->layout, destination->buffer->GetSize(), blockInfo, *copySize));
+            }
+
+            // Skip no-op copies.
+            if (copySize->width == 0 || copySize->height == 0 ||
+                copySize->depthOrArrayLayers == 0) {
+                return {};
             }
 
             mTopLevelTextures.insert(source->texture);
@@ -1344,6 +1361,12 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
                     DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst,
                                               mUsageValidationMode));
                 }
+            }
+
+            // Skip no-op copies.
+            if (copySize->width == 0 || copySize->height == 0 ||
+                copySize->depthOrArrayLayers == 0) {
+                return {};
             }
 
             mTopLevelTextures.insert(source->texture);
