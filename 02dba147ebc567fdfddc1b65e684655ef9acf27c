@@ -16,6 +16,167 @@
       "message": "PTAL! An earlier version of this CL tried to also turn off building unnecessary tint readers/writers for the given platform, but that\u0027s turning out to be more complicated. In the interest of keeping this patch more focused I\u0027ve reduced it to just disabling SPIR-V shader ingestion and validation.",
       "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6b6c26_de946f18",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "is it possible to not link these at all based on the build args?",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 43
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b4c48c_e06e0c69",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "could we merge DAWN_ENABLE_SPIRV_SHADER_MODULES into TINT_BUILD_SPV_READER ?",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 25
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5a6815_c9e5b23e",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 908,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 0
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e508b5fe_4a7b22b3",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "probably a better way for this is to change ValidateSingleSType at [1].\n\nThat way you get a message like \"Unsupported sType ShaderModuleSPIRVDescriptor. Exepcted...\"",
+      "range": {
+        "startLine": 948,
+        "startChar": 0,
+        "endLine": 958,
+        "endChar": 6
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14cb9a8a_4da9217f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "nit: keep the same and validate out SPIRVDescriptor ?\nactually - I think you already have the validation",
+      "range": {
+        "startLine": 1074,
+        "startChar": 0,
+        "endLine": 1091,
+        "endChar": 19
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46944db7_c799dc08",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "nit: I think we could keep this the same to minimized the #ifdef-ing",
+      "range": {
+        "startLine": 1140,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 6
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2903016_f0663969",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T21:30:11Z",
+      "side": 1,
+      "message": "nit: probably can keep the same to minimized #ifdefs. It\u0027s a small amount of overhead to keep the empty vector around",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 41
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
