@@ -454,6 +454,20 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
             }
 
             // Validate that member is at a valid byte offset
+            if (ast::HasAttribute<ast::StructMemberAlignAttribute>(m->Declaration()->attributes) &&
+                m->Align() % required_align != 0) {
+                AddError("the alignment of a struct member of type '" +
+                             m->Type()->UnwrapRef()->FriendlyName(symbols_) +
+                             "' in address space '" + utils::ToString(address_space) +
+                             "' must be a multiple of " + std::to_string(required_align) +
+                             " bytes, but '" + member_name_of(m) +
+                             "' has an explicit alignment of " + std::to_string(m->Align()),
+                         m->Source());
+                note_usage();
+                return false;
+            }
+
+            // Validate that member is at a valid byte offset
             if (m->Offset() % required_align != 0) {
                 AddError("the offset of a struct member of type '" +
                              m->Type()->UnwrapRef()->FriendlyName(symbols_) +
