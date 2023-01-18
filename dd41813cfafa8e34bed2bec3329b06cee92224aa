@@ -16,6 +16,23 @@
       "message": "LGTM. Austin can you re-review?",
       "revId": "dd41813cfafa8e34bed2bec3329b06cee92224aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d182902d_be176122",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-18T16:13:41Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "dd41813cfafa8e34bed2bec3329b06cee92224aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
