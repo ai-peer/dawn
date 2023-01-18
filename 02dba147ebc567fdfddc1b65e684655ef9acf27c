@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ebfbaf0_de89ecd5",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Somewhat to my surprise trying to make those conditional starts causing a bunch of build failures, but only in debug builds. It\u0027s something that I\u0027m investigating.",
+      "parentUuid": "cd6b6c26_de946f18",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 43
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4b4c48c_e06e0c69",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 5
@@ -54,6 +78,30 @@
       "writtenOn": "2023-01-18T21:30:11Z",
       "side": 1,
       "message": "could we merge DAWN_ENABLE_SPIRV_SHADER_MODULES into TINT_BUILD_SPV_READER ?",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 25
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "870ed5c0_a29964cb",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Trickier than it sounds, because dawn and tint GN files are pretty separate and have a hard time referring to symbols defined in the other. (Turns out this was also causing a separate issue with excluding readers/writers we don\u0027t need.)\n\nI think it CAN be resolved, I\u0027m just not sure this CL is the right place to do it.",
+      "parentUuid": "a4b4c48c_e06e0c69",
       "range": {
         "startLine": 314,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f60e2ae_49f6b11b",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 911,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5f5a6815_c9e5b23e",
+      "range": {
+        "startLine": 908,
+        "startChar": 0,
+        "endLine": 911,
+        "endChar": 0
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e508b5fe_4a7b22b3",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-01-18T21:30:11Z",
       "side": 1,
       "message": "probably a better way for this is to change ValidateSingleSType at [1].\n\nThat way you get a message like \"Unsupported sType ShaderModuleSPIRVDescriptor. Exepcted...\"",
+      "range": {
+        "startLine": 948,
+        "startChar": 0,
+        "endLine": 958,
+        "endChar": 6
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47f3890_8f01fb09",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e508b5fe_4a7b22b3",
       "range": {
         "startLine": 948,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b288ed30_aa5b86d0",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14cb9a8a_4da9217f",
+      "range": {
+        "startLine": 1074,
+        "startChar": 0,
+        "endLine": 1091,
+        "endChar": 19
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46944db7_c799dc08",
@@ -156,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cee3347_8d6dcba7",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46944db7_c799dc08",
+      "range": {
+        "startLine": 1140,
+        "startChar": 0,
+        "endLine": 1153,
+        "endChar": 6
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2903016_f0663969",
@@ -169,6 +313,30 @@
       "writtenOn": "2023-01-18T21:30:11Z",
       "side": 1,
       "message": "nit: probably can keep the same to minimized #ifdefs. It\u0027s a small amount of overhead to keep the empty vector around",
+      "range": {
+        "startLine": 305,
+        "startChar": 0,
+        "endLine": 305,
+        "endChar": 41
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44230f65_23793373",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-18T22:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2903016_f0663969",
       "range": {
         "startLine": 305,
         "startChar": 0,
