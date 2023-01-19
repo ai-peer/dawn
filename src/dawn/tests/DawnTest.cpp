@@ -882,12 +882,12 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
     deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
 
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
+    wgpu::DawnTogglesDescriptor togglesDesc = {};
     deviceDescriptor.nextInChain = &togglesDesc;
-    togglesDesc.forceEnabledToggles = forceEnabledToggles.data();
-    togglesDesc.forceEnabledTogglesCount = forceEnabledToggles.size();
-    togglesDesc.forceDisabledToggles = forceDisabledToggles.data();
-    togglesDesc.forceDisabledTogglesCount = forceDisabledToggles.size();
+    togglesDesc.enabledToggles = forceEnabledToggles.data();
+    togglesDesc.enabledTogglesCount = forceEnabledToggles.size();
+    togglesDesc.disabledToggles = forceDisabledToggles.data();
+    togglesDesc.disabledTogglesCount = forceDisabledToggles.size();
 
     wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
     togglesDesc.nextInChain = &cacheDesc;
