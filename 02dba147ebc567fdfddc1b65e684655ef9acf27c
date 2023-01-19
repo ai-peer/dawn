@@ -136,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c92113_ac3b145a",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-19T00:50:44Z",
+      "side": 1,
+      "message": "Done, though it\u0027s worth noting that it required propagating the tint public config through a few more places in the code base to ensure that it was properly respected everywhere.",
+      "parentUuid": "e429f32e_7eeebccb",
+      "range": {
+        "startLine": 314,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 25
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f5a6815_c9e5b23e",
