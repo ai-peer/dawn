@@ -79,12 +79,12 @@ std::unique_ptr<dawn::platform::Platform> DawnNativeTest::CreateTestPlatform() {
 WGPUDevice DawnNativeTest::CreateTestDevice() {
     // Disabled disallowing unsafe APIs so we can test them.
     wgpu::DeviceDescriptor deviceDescriptor = {};
-    wgpu::DawnTogglesDeviceDescriptor togglesDesc = {};
+    wgpu::DawnTogglesDescriptor togglesDesc = {};
     deviceDescriptor.nextInChain = &togglesDesc;
 
     const char* toggle = "disallow_unsafe_apis";
-    togglesDesc.forceDisabledToggles = &toggle;
-    togglesDesc.forceDisabledTogglesCount = 1;
+    togglesDesc.disabledToggles = &toggle;
+    togglesDesc.disabledTogglesCount = 1;
 
     return adapter.CreateDevice(&deviceDescriptor);
 }
