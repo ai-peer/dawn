@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "79233a50_dc4f4e65",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T15:00:21Z",
+      "side": 1,
+      "message": "We could probably merge for now and see later if we need to split.",
+      "parentUuid": "ccd33057_8cc9cf95",
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e0a86cd9_32b31e2e",
