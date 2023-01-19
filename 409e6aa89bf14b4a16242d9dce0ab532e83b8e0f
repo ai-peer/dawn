@@ -39,6 +39,30 @@
       },
       "revId": "409e6aa89bf14b4a16242d9dce0ab532e83b8e0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1e47ad_d0b95cdf",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-19T17:31:34Z",
+      "side": 1,
+      "message": "Corentin commented about this on Patchset32. https://dawn-review.googlesource.com/c/dawn/+/116693/32..33/src/dawn/native/Queue.cpp#b564\nI think we should be able to add similar things for GL and other backends in follow-ups.\n\nDone",
+      "parentUuid": "f962be0e_09ea639e",
+      "range": {
+        "startLine": 567,
+        "startChar": 12,
+        "endLine": 569,
+        "endChar": 42
+      },
+      "revId": "409e6aa89bf14b4a16242d9dce0ab532e83b8e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

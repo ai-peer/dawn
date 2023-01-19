@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c756afed_c22fbfbb",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-19T17:31:34Z",
+      "side": 1,
+      "message": "commands[i]-\u003eGetResourceUsages() returns const value. I don\u0027t think we can change it to `BufferBase*` in this for statement.\n\nAnd I changed the function back, const_cast is not necessary anymore",
+      "parentUuid": "39c1c6b0_aa62109d",
+      "range": {
+        "startLine": 449,
+        "startChar": 13,
+        "endLine": 449,
+        "endChar": 31
+      },
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee915ea6_48b47484",
