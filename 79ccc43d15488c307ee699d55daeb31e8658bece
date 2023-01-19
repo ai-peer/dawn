@@ -16,6 +16,23 @@
       "message": "PTAL! Found that this was causing issues when I attempted to turn off spv_reader in a Chrome build.",
       "revId": "79ccc43d15488c307ee699d55daeb31e8658bece",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2877995e_77699a1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-01-19T21:58:47Z",
+      "side": 1,
+      "message": "This makes sense to me. I\u0027ll be curious to see if the CMake files are still happy as they set that same define, but, it\u0027s also weird that the build_spv_reader just guards the include for spirv-tools. That whole file shouldn\u0027t be built in that case ...",
+      "revId": "79ccc43d15488c307ee699d55daeb31e8658bece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
