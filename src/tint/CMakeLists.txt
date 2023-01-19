@@ -447,6 +447,8 @@ list(APPEND TINT_LIB_SRCS
   transform/transform.h
   transform/truncate_interstage_variables.cc
   transform/truncate_interstage_variables.h
+  transform/unshadow_core_definitions.cc
+  transform/unshadow_core_definitions.h
   transform/unshadow.cc
   transform/unshadow.h
   transform/utils/get_insertion_point.cc
@@ -1265,6 +1267,7 @@ if(TINT_BUILD_TESTS)
       transform/test_helper.h
       transform/texture_1d_to_2d_test.cc
       transform/truncate_interstage_variables_test.cc
+      transform/unshadow_core_definitions_test.cc
       transform/unshadow_test.cc
       transform/var_for_dynamic_index_test.cc
       transform/vectorize_matrix_conversions_test.cc
