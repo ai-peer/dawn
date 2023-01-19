@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ff106c_b5f5263a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T17:53:52Z",
+      "side": 1,
+      "message": "new end2end_test fixed the bug locally on mac intel. fingers crossed CTS passes too",
+      "revId": "966ddabc3dbfa150e1e9fb09df2a80e2801bdab2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
