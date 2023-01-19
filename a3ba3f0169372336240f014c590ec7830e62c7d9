@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39c1c6b0_aa62109d",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T16:24:35Z",
+      "side": 1,
+      "message": "if we keep this: BufferBase* instead of const BufferBase* to avoid the const_cast below",
+      "range": {
+        "startLine": 449,
+        "startChar": 13,
+        "endLine": 449,
+        "endChar": 31
+      },
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee915ea6_48b47484",
         "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
         "patchSetId": 29

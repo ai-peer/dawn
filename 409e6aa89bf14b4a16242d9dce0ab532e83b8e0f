@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff4cd724_002f02b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T16:24:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "409e6aa89bf14b4a16242d9dce0ab532e83b8e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f962be0e_09ea639e",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 569,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T16:24:35Z",
+      "side": 1,
+      "message": "could we add the same thing to GL?\n\nsorry for the churn, but I requested we do it in the frontend since I thought it might be less error prone than modifying every usage in the backends.\nbut since Vulkan/D3D have a single point for \"use the resource now\" and we\u0027ve now made Metal the same, it seems better to do that for GL as well.\n\nWe can do GL as a follow-up too, but overall it seems like we won\u0027t need these two variants of IterateResourcesForSubmit.\n\n\nFor GL, for now, we can instead change:\n `TrackTask(std::unique_ptr\u003cTrackTaskCallback\u003e task, ExecutionSerial serial)`\n\n\nto:\n```\nif (gl) {\n  force an eventual flush\n  serial \u003d ScheduledWorkDoneSerial()\n}\n```\nwith a TODO about fixing the behavior\n(so it does the same as if you called TrackTaskForEventualFlush)",
+      "range": {
+        "startLine": 567,
+        "startChar": 12,
+        "endLine": 569,
+        "endChar": 42
+      },
+      "revId": "409e6aa89bf14b4a16242d9dce0ab532e83b8e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
