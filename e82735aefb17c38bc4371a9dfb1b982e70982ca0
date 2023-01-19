@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a602a0d_64cf5889",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T23:58:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e82735aefb17c38bc4371a9dfb1b982e70982ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb1515f6_7050920c",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T23:58:42Z",
+      "side": 1,
+      "message": "probably more accurate to say \"at the end of every VkCommandBuffer\". The transition happens inside the VkSubmit, not after it",
+      "range": {
+        "startLine": 52,
+        "startChar": 7,
+        "endLine": 52,
+        "endChar": 15
+      },
+      "revId": "e82735aefb17c38bc4371a9dfb1b982e70982ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
