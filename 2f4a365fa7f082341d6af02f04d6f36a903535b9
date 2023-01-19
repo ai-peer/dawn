@@ -16,6 +16,29 @@
       "message": "redid this, PTAL again!",
       "revId": "2f4a365fa7f082341d6af02f04d6f36a903535b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd3ffb6a_72cb8bbe",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-19T23:58:09Z",
+      "side": 1,
+      "message": "I think this would be slightly easier to read/understand if we added something like `IsDepthFormat` and `IsStencilFormat` in conjunction with the currently existing `IsDepthOnlyFormat` and `IsStencilOnlyFormat` in utils/TextureUtils.\n\nThen we could just have:`DAWN_TEST_UNSUPPORTED_IF(!IsDepthFormat(GetParam().mFormat)`",
+      "range": {
+        "startLine": 118,
+        "startChar": 16,
+        "endLine": 118,
+        "endChar": 94
+      },
+      "revId": "2f4a365fa7f082341d6af02f04d6f36a903535b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
