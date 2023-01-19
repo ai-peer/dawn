@@ -336,6 +336,16 @@ crbug.com/dawn/1599 [ webgpu-adapter-swiftshader ] webgpu:web_platform,copyToTex
 crbug.com/dawn/1628 [ intel-gen-9 win10 ] webgpu:api,operation,render_pass,storeOp:render_pass_store_op,color_attachment_only:* [ Failure ]
 
 ################################################################################
+# Failures about the validation on the storage usage of bgra8unorm
+# KEEP
+################################################################################
+crbug.com/dawn/1641 webgpu:api,validation,createBindGroupLayout:storage_texture,formats:format="bgra8unorm" [ Failure ]
+crbug.com/dawn/1641 webgpu:api,validation,createTexture:texture_usage:dimension="1d";format="bgra8unorm" [ Failure ]
+crbug.com/dawn/1641 webgpu:api,validation,createTexture:texture_usage:dimension="2d";format="bgra8unorm" [ Failure ]
+crbug.com/dawn/1641 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="bgra8unorm" [ Failure ]
+crbug.com/dawn/1641 webgpu:api,validation,createTexture:texture_usage:dimension="_undef_";format="bgra8unorm" [ Failure ]
+
+################################################################################
 # untriaged failures
 ################################################################################
 crbug.com/dawn/0000 [ dawn-backend-validation win10 ] webgpu:api,operation,render_pass,resolve:* [ Failure ]
