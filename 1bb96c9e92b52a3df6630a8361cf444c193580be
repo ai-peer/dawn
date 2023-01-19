@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a8289e_a58dfe6b",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:24:25Z",
+      "side": 1,
+      "message": "`for (size_t i \u003d 0; i \u003c count - 1; i++)`",
+      "parentUuid": "ebdfa9e1_533fa7da",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcd3c57f_7f9a38fe",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec62f4d_a4416914",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:24:25Z",
+      "side": 1,
+      "message": "See above.",
+      "parentUuid": "bcd3c57f_7f9a38fe",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e8b9577_1993120f",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-19T20:31:43Z",
       "side": 1,
       "message": "Is this comment no longer relevant? Just need to have `\u003e\u003e\u003d` as a case similar to `\u003e\u003e` below. There is no split happening at this point.\n\nIs `\u003e\u003e\u003d` ever an issue given you can\u0027t have a template on the lhs?",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff3fb00a_d9c28634",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:24:25Z",
+      "side": 1,
+      "message": "I had `\u003e\u003e\u003d`, then realised (yet again) it\u0027s not needed - that\u0027s a statement not an expression. Will remove the comment.",
+      "parentUuid": "4e8b9577_1993120f",
       "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a91415a_3396c871",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:24:25Z",
+      "side": 1,
+      "message": "No it can\u0027t.",
+      "parentUuid": "b2f7ae7c_f0e4006b",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d94715a_1d6e6146",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-01-19T20:31:43Z",
       "side": 1,
       "message": "Is there ever a reason to check over a `\u003d` or can we bail as well?\n\nSame with `:` ?",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "441ed07d_afcdbefe",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:24:25Z",
+      "side": 1,
+      "message": "Currently, I don\u0027t think you can have a template on the LHS of an assignment, but I see no harm in adding it, so will do.\n\nLikewise for `:` - don\u0027t think there\u0027s any place right now where the LHS could be a template - although this would change with the ternary operator.\n\nThese are the \"any token that\u0027s not used in an expression\" - which I could try and exhaustively list. It\u0027s more likely I\u0027d screw that up though.",
+      "parentUuid": "2d94715a_1d6e6146",
       "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
