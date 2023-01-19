@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a026e215_40a4e105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T17:36:43Z",
+      "side": 1,
+      "message": "This actually needs more work. Local shadowing is more complex.",
+      "revId": "8f06d3d093d8122031ccf15c541e8ad01dde5a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
