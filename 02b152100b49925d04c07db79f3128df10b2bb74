@@ -192,6 +192,24 @@
       "parentUuid": "324ec9c3_eb1579fe",
       "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019c7206_871bb690",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:27:52Z",
+      "side": 1,
+      "message": "Yes, the validation reports a diagnostic error, and will return `false`.",
+      "parentUuid": "5523783b_7a1eb0a4",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
