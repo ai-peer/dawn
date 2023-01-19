@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7273141d_ef545e19",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T22:08:19Z",
+      "side": 1,
+      "message": "dawn/native accesses one of the header files in `writer` which forced this to be in the public deps.",
+      "revId": "bb7bce5b35947ca436d20c5598122ff66892046f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
