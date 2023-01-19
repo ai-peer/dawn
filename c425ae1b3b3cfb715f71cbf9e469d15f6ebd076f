@@ -16,6 +16,24 @@
       "message": "What about void? It isn\u0027t part of the spec, but should it be removed along with the others for consistency?",
       "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e56a6de_9eebfc0a",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 0,
+      "message": "`void` isn\u0027t part of the language. It\u0027s not a token.\nWe should remove it from the AST, as it has no textual representation - but this is not related to this change.",
+      "parentUuid": "1356933b_bf061ff7",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

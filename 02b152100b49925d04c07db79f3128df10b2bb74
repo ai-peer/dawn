@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea78dfb_80f5b4d5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fda9076c_528d8aab",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84a3c2e4_8e8443b0",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-19T16:49:15Z",
       "side": 1,
       "message": "Not currently a typename",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "451206a1_4fce3733",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84a3c2e4_8e8443b0",
       "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16dd7232_5a8094c5",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69b7935c_9314c9b0",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74eb8866_82e545a6",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5a6809_1c9870c5",
+        "filename": "src/tint/reader/wgsl/parser_impl_type_decl_without_ident_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 1,
+      "message": "I\u0027m assuming that `type_specifier_without_ident()` is eventually going to go bye-byes, in which case this whole file will likely be deleted?",
+      "parentUuid": "74eb8866_82e545a6",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8073c16_367739a3",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-01-19T16:49:15Z",
       "side": 1,
       "message": "In the case of `f16` being provided and `f16` is not enabled, will this silently return an error? Or does the validator set the diagnostic in `CheckF16Enabled`",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "324ec9c3_eb1579fe",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:33:23Z",
+      "side": 1,
+      "message": "It\u0027ll correctly error.",
+      "parentUuid": "d8073c16_367739a3",
       "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
