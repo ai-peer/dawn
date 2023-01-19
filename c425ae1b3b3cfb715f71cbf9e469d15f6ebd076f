@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1356933b_bf061ff7",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T16:49:15Z",
+      "side": 0,
+      "message": "What about void? It isn\u0027t part of the spec, but should it be removed along with the others for consistency?",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
