@@ -1,4 +1,4 @@
-struct vec4f {
+struct vec4f_1 {
   int i;
 };
 struct tint_symbol_1 {
@@ -9,7 +9,7 @@ struct tint_symbol_2 {
 };
 
 float4 main_inner(uint VertexIndex) {
-  const vec4f s = {1};
+  const vec4f_1 s = {1};
   const float f = float(s.i);
   const bool b = bool(f);
   return (b ? (1.0f).xxxx : (0.0f).xxxx);

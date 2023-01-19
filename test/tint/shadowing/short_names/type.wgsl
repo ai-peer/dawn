@@ -1,5 +1,3 @@
-// flags: --transform renamer
-
 // Evilness 😈. Don't go getting any ideas!
 struct vec4f { i : i32, }
 type vec2f = f32;

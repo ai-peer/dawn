@@ -5,22 +5,22 @@
 ; Schema: 0
                OpCapability Shader
                OpMemoryModel Logical GLSL450
-               OpEntryPoint Vertex %tint_symbol_4 "tint_symbol_4" %tint_symbol_5_1 %value %vertex_point_size
-               OpName %tint_symbol_5_1 "tint_symbol_5_1"
+               OpEntryPoint Vertex %main "main" %VertexIndex_1 %value %vertex_point_size
+               OpName %VertexIndex_1 "VertexIndex_1"
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %tint_symbol_4_inner "tint_symbol_4_inner"
-               OpName %tint_symbol_5 "tint_symbol_5"
-               OpName %tint_symbol "tint_symbol"
-               OpMemberName %tint_symbol 0 "tint_symbol_1"
-               OpName %tint_symbol_4 "tint_symbol_4"
-               OpDecorate %tint_symbol_5_1 BuiltIn VertexIndex
+               OpName %main_inner "main_inner"
+               OpName %VertexIndex "VertexIndex"
+               OpName %vec4f_1 "vec4f_1"
+               OpMemberName %vec4f_1 0 "i"
+               OpName %main "main"
+               OpDecorate %VertexIndex_1 BuiltIn VertexIndex
                OpDecorate %value BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpMemberDecorate %tint_symbol 0 Offset 0
+               OpMemberDecorate %vec4f_1 0 Offset 0
        %uint = OpTypeInt 32 0
 %_ptr_Input_uint = OpTypePointer Input %uint
-%tint_symbol_5_1 = OpVariable %_ptr_Input_uint Input
+%VertexIndex_1 = OpVariable %_ptr_Input_uint Input
       %float = OpTypeFloat 32
     %v4float = OpTypeVector %float 4
 %_ptr_Output_v4float = OpTypePointer Output %v4float
@@ -31,9 +31,9 @@
 %vertex_point_size = OpVariable %_ptr_Output_float Output %11
          %12 = OpTypeFunction %v4float %uint
         %int = OpTypeInt 32 1
-%tint_symbol = OpTypeStruct %int
+    %vec4f_1 = OpTypeStruct %int
       %int_1 = OpConstant %int 1
-         %19 = OpConstantComposite %tint_symbol %int_1
+         %19 = OpConstantComposite %vec4f_1 %int_1
        %bool = OpTypeBool
     %float_1 = OpConstant %float 1
          %26 = OpConstantComposite %v4float %float_1 %float_1 %float_1 %float_1
@@ -42,8 +42,8 @@
          %30 = OpConstantNull %v4bool
        %void = OpTypeVoid
          %32 = OpTypeFunction %void
-%tint_symbol_4_inner = OpFunction %v4float None %12
-%tint_symbol_5 = OpFunctionParameter %uint
+ %main_inner = OpFunction %v4float None %12
+%VertexIndex = OpFunctionParameter %uint
          %15 = OpLabel
          %28 = OpVariable %_ptr_Function_v4bool Function %30
          %21 = OpCompositeExtract %int %19 0
@@ -53,10 +53,10 @@
          %24 = OpSelect %v4float %31 %26 %8
                OpReturnValue %24
                OpFunctionEnd
-%tint_symbol_4 = OpFunction %void None %32
+       %main = OpFunction %void None %32
          %35 = OpLabel
-         %37 = OpLoad %uint %tint_symbol_5_1
-         %36 = OpFunctionCall %v4float %tint_symbol_4_inner %37
+         %37 = OpLoad %uint %VertexIndex_1
+         %36 = OpFunctionCall %v4float %main_inner %37
                OpStore %value %36
                OpStore %vertex_point_size %float_1
                OpReturn

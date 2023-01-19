@@ -1,0 +1,56 @@
+; SPIR-V
+; Version: 1.3
+; Generator: Google Tint Compiler; 0
+; Bound: 31
+; Schema: 0
+               OpCapability Shader
+         %22 = OpExtInstImport "GLSL.std.450"
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint GLCompute %unused_entry_point "unused_entry_point"
+               OpExecutionMode %unused_entry_point LocalSize 1 1 1
+               OpName %S_block "S_block"
+               OpMemberName %S_block 0 "inner"
+               OpName %S "S"
+               OpName %min_1 "min_1"
+               OpName %unused_entry_point "unused_entry_point"
+               OpName %f "f"
+               OpName %i "i"
+               OpDecorate %S_block Block
+               OpMemberDecorate %S_block 0 Offset 0
+               OpDecorate %_runtimearr_v4float ArrayStride 16
+               OpDecorate %S DescriptorSet 0
+               OpDecorate %S Binding 0
+      %float = OpTypeFloat 32
+    %v4float = OpTypeVector %float 4
+%_runtimearr_v4float = OpTypeRuntimeArray %v4float
+    %S_block = OpTypeStruct %_runtimearr_v4float
+%_ptr_StorageBuffer_S_block = OpTypePointer StorageBuffer %S_block
+          %S = OpVariable %_ptr_StorageBuffer_S_block StorageBuffer
+        %int = OpTypeInt 32 1
+     %int_42 = OpConstant %int 42
+%_ptr_Private_int = OpTypePointer Private %int
+      %min_1 = OpVariable %_ptr_Private_int Private %int_42
+       %void = OpTypeVoid
+         %11 = OpTypeFunction %void
+         %15 = OpTypeFunction %void %int
+       %uint = OpTypeInt 32 0
+     %uint_0 = OpConstant %uint 0
+     %uint_1 = OpConstant %uint 1
+%_ptr_StorageBuffer_v4float = OpTypePointer StorageBuffer %v4float
+    %float_1 = OpConstant %float 1
+         %30 = OpConstantComposite %v4float %float_1 %float_1 %float_1 %float_1
+%unused_entry_point = OpFunction %void None %11
+         %14 = OpLabel
+               OpReturn
+               OpFunctionEnd
+          %f = OpFunction %void None %15
+          %i = OpFunctionParameter %int
+         %18 = OpLabel
+         %23 = OpBitcast %uint %i
+         %24 = OpArrayLength %uint %S 0
+         %26 = OpISub %uint %24 %uint_1
+         %21 = OpExtInst %uint %22 UMin %23 %26
+         %28 = OpAccessChain %_ptr_StorageBuffer_v4float %S %uint_0 %21
+               OpStore %28 %30
+               OpReturn
+               OpFunctionEnd

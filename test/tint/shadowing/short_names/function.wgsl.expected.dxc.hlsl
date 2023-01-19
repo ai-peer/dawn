@@ -1,12 +1,12 @@
-int vec4f() {
+int vec4f_1() {
   return 0;
 }
 
-float vec2f(int i) {
+float vec2f_1(int i) {
   return float(i);
 }
 
-bool vec2i(float f) {
+bool vec2i_1(float f) {
   return bool(f);
 }
 
@@ -20,9 +20,9 @@ struct tint_symbol_2 {
 float4 main_inner(uint VertexIndex) {
   const float4 tint_symbol_3 = (0.0f).xxxx;
   const float4 tint_symbol_4 = (1.0f).xxxx;
-  const int tint_symbol_5 = vec4f();
-  const float tint_symbol_6 = vec2f(tint_symbol_5);
-  const bool tint_symbol_7 = vec2i(tint_symbol_6);
+  const int tint_symbol_5 = vec4f_1();
+  const float tint_symbol_6 = vec2f_1(tint_symbol_5);
+  const bool tint_symbol_7 = vec2i_1(tint_symbol_6);
   return (tint_symbol_7 ? tint_symbol_4 : tint_symbol_3);
 }
 
