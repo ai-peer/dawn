@@ -33,6 +33,24 @@
       "message": "Do you think we could do something like texture where \"interesting\" textures are appended to the command recording context and insert whatever they need inside SubmitPendingCommands? This would make both code paths consistent.",
       "revId": "38f326cc73e08a1413e32485b420c2b081142180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f108a5ff_ed3e6b60",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-19T23:40:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384a8688_fbd91777",
+      "revId": "38f326cc73e08a1413e32485b420c2b081142180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
