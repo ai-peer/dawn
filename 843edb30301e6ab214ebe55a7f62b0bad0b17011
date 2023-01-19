@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6aae52c_782776c6",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T15:54:56Z",
+      "side": 1,
+      "message": "Can you add a comment here as to why this is safe to not run on function scope variables?",
+      "revId": "843edb30301e6ab214ebe55a7f62b0bad0b17011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933f5b3a_a5058564",
+        "filename": "src/tint/transform/unshadow_core_definitions_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T15:54:56Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "revId": "843edb30301e6ab214ebe55a7f62b0bad0b17011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
