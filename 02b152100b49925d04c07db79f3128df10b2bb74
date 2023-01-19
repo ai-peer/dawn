@@ -174,6 +174,24 @@
       "parentUuid": "d8073c16_367739a3",
       "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5523783b_7a1eb0a4",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T19:52:14Z",
+      "side": 1,
+      "message": "It will error, but does does it set a diagnostic? (Not sure what you mean by correctly)",
+      "parentUuid": "324ec9c3_eb1579fe",
+      "revId": "02b152100b49925d04c07db79f3128df10b2bb74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
