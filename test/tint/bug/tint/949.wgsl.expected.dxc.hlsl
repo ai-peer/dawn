@@ -113,11 +113,11 @@ float3 perturbNormalBase_mf33_vf3_f1_(inout float3x3 cotangentFrame, inout float
   return normalize(mul(x_114, x_113));
 }
 
-float3 perturbNormal_mf33_vf3_f1_(inout float3x3 cotangentFrame_1, inout float3 textureSample, inout float scale_1) {
+float3 perturbNormal_mf33_vf3_f1_(inout float3x3 cotangentFrame_1, inout float3 textureSample_1, inout float scale_1) {
   float3x3 param = float3x3(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float3 param_1 = float3(0.0f, 0.0f, 0.0f);
   float param_2 = 0.0f;
-  const float3 x_119 = textureSample;
+  const float3 x_119 = textureSample_1;
   const float3x3 x_125 = cotangentFrame_1;
   param = x_125;
   param_1 = ((x_119 * 2.0f) - (1.0f).xxx);

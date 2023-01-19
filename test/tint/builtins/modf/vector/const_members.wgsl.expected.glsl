@@ -1,7 +1,7 @@
 #version 310 es
 
 void tint_symbol() {
-  vec2 tint_symbol_2 = vec2(0.25f, 0.75f);
+  vec2 fract_1 = vec2(0.25f, 0.75f);
   vec2 whole = vec2(1.0f, 3.0f);
 }
 

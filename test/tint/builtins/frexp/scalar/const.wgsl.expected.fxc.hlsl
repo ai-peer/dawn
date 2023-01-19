@@ -5,7 +5,7 @@ struct frexp_result_f32 {
 [numthreads(1, 1, 1)]
 void main() {
   const frexp_result_f32 res = {0.625f, 1};
-  const float fract = res.fract;
-  const int exp = res.exp;
+  const float fract_1 = res.fract;
+  const int exp_1 = res.exp;
   return;
 }

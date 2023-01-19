@@ -1,3 +1,3 @@
-fn f(vec3f : vec3f) {
-  let b = vec3f;
+fn f(vec3f_1 : vec3f) {
+  let b = vec3f_1;
 }

@@ -1,7 +1,7 @@
 #version 310 es
 
 void tint_symbol() {
-  float tint_symbol_2 = 0.25f;
+  float fract_1 = 0.25f;
   float whole = 1.0f;
 }
 

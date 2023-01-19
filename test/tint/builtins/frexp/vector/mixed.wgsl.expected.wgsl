@@ -5,6 +5,6 @@ fn main() {
   var res = frexp(const_in);
   res = frexp(runtime_in);
   res = frexp(const_in);
-  let fract : vec2<f32> = res.fract;
-  let exp : vec2<i32> = res.exp;
+  let fract_1 : vec2<f32> = res.fract;
+  let exp_1 : vec2<i32> = res.exp;
 }

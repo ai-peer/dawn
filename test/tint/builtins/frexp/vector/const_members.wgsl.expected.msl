@@ -2,8 +2,8 @@
 
 using namespace metal;
 kernel void tint_symbol() {
-  float2 const fract = float2(0.625f, 0.9375f);
-  int2 const exp = int2(1, 2);
+  float2 const fract_1 = float2(0.625f, 0.9375f);
+  int2 const exp_1 = int2(1, 2);
   return;
 }
 

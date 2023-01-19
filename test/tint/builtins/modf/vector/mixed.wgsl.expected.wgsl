@@ -5,6 +5,6 @@ fn main() {
   var res = modf(const_in);
   res = modf(runtime_in);
   res = modf(const_in);
-  let fract : vec2<f32> = res.fract;
+  let fract_1 : vec2<f32> = res.fract;
   let whole : vec2<f32> = res.whole;
 }

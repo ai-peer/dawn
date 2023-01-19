@@ -3,6 +3,6 @@ void unused_entry_point() {
   return;
 }
 
-void f(float3 vec3f) {
-  const float3 b = vec3f;
+void f(float3 vec3f_1) {
+  const float3 b = vec3f_1;
 }

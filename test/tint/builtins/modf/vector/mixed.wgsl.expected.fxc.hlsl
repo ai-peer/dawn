@@ -15,7 +15,7 @@ void main() {
   res = tint_modf(runtime_in);
   const modf_result_vec2_f32 c = {float2(0.25f, 0.75f), float2(1.0f, 3.0f)};
   res = c;
-  const float2 fract = res.fract;
+  const float2 fract_1 = res.fract;
   const float2 whole = res.whole;
   return;
 }

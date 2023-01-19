@@ -2,6 +2,6 @@
 fn main() {
   const in = 1.25;
   const res = frexp(in);
-  let fract : f32 = res.fract;
-  let exp : i32 = res.exp;
+  let fract_1 : f32 = res.fract;
+  let exp_1 : i32 = res.exp;
 }

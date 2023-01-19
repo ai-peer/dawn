@@ -15,8 +15,8 @@ frexp_result_vec2_f32 tint_frexp(vec2 param_0) {
 void tint_symbol() {
   vec2 tint_symbol_1 = vec2(1.25f, 3.75f);
   frexp_result_vec2_f32 res = tint_frexp(tint_symbol_1);
-  vec2 tint_symbol_2 = res.fract;
-  ivec2 tint_symbol_3 = res.exp;
+  vec2 fract_1 = res.fract;
+  ivec2 exp_1 = res.exp;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
