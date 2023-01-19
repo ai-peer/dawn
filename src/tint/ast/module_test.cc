@@ -130,5 +130,26 @@ TEST_F(ModuleTest, CloneOrder) {
     ASSERT_EQ(cloned.Symbols().NameFor(decls[4]->As<ast::Alias>()->name), "inserted_before_V");
 }
 
+TEST_F(ModuleTest, Directives) {
+    auto* enable_1 = Enable(ast::Extension::kF16);
+    auto* diagnostic_1 = DiagnosticDirective(DiagnosticSeverity::kWarning, Expr("foo"));
+    auto* enable_2 = Enable(ast::Extension::kChromiumExperimentalFullPtrParameters);
+    auto* diagnostic_2 = DiagnosticDirective(DiagnosticSeverity::kOff, Expr("bar"));
+
+    this->SetResolveOnBuild(false);
+    Program program(std::move(*this));
+    ASSERT_EQ(program.AST().GlobalDeclarations().Length(), 4u);
+    EXPECT_EQ(program.AST().GlobalDeclarations()[0], enable_1);
+    EXPECT_EQ(program.AST().GlobalDeclarations()[1], diagnostic_1);
+    EXPECT_EQ(program.AST().GlobalDeclarations()[2], enable_2);
+    EXPECT_EQ(program.AST().GlobalDeclarations()[3], diagnostic_2);
+    ASSERT_EQ(program.AST().Enables().Length(), 2u);
+    EXPECT_EQ(program.AST().Enables()[0], enable_1);
+    EXPECT_EQ(program.AST().Enables()[1], enable_2);
+    ASSERT_EQ(program.AST().DiagnosticControls().Length(), 2u);
+    EXPECT_EQ(program.AST().DiagnosticControls()[0], diagnostic_1);
+    EXPECT_EQ(program.AST().DiagnosticControls()[1], diagnostic_2);
+}
+
 }  // namespace
 }  // namespace tint::ast
