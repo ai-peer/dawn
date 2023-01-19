@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33e8666_98bf9618",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T17:25:11Z",
+      "side": 1,
+      "message": "I got half way though describing why it was safe, and uncovered a case where it is not safe. Changed to unshadowing all core declarations.",
+      "parentUuid": "f6aae52c_782776c6",
+      "revId": "843edb30301e6ab214ebe55a7f62b0bad0b17011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "933f5b3a_a5058564",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-19T15:54:56Z",
       "side": 1,
       "message": "nit: 2023",
+      "revId": "843edb30301e6ab214ebe55a7f62b0bad0b17011",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e68ea6c7_53f02252",
+        "filename": "src/tint/transform/unshadow_core_definitions_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T17:25:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "933f5b3a_a5058564",
       "revId": "843edb30301e6ab214ebe55a7f62b0bad0b17011",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
