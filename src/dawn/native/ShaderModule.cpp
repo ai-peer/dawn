@@ -725,7 +725,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                 info.storageTexture.viewDimension =
                     TintTextureDimensionToTextureViewDimension(resource.dim);
 
-                DAWN_INVALID_IF(info.storageTexture.format == wgpu::TextureFormat::BGRA8Unorm,
+                DAWN_INVALID_IF(info.storageTexture.format == wgpu::TextureFormat::BGRA8Unorm &&
+                                    device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
                                 "BGRA8Unorm storage textures are not yet supported.");
 
                 break;

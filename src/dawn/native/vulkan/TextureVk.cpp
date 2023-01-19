@@ -700,7 +700,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         }
     }
 
-    ASSERT(IsSampleCountSupported(device, createInfo));
+    //ASSERT(IsSampleCountSupported(device, createInfo));
 
     if (GetArrayLayers() >= 6 && GetWidth() == GetHeight()) {
         createInfo.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;

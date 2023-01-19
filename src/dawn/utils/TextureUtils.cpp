@@ -24,6 +24,7 @@ bool TextureFormatSupportsStorageTexture(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::RGBA8Snorm:
         case wgpu::TextureFormat::RGBA8Uint:
         case wgpu::TextureFormat::RGBA8Sint:
+        case wgpu::TextureFormat::BGRA8Unorm:
         case wgpu::TextureFormat::RG32Uint:
         case wgpu::TextureFormat::RG32Sint:
         case wgpu::TextureFormat::RG32Float:
@@ -656,6 +657,8 @@ const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat) {
             return "rgba8uint";
         case wgpu::TextureFormat::RGBA8Sint:
             return "rgba8sint";
+        case wgpu::TextureFormat::BGRA8Unorm:
+            return "bgra8unorm";
         case wgpu::TextureFormat::RGBA16Uint:
             return "rgba16uint";
         case wgpu::TextureFormat::RGBA16Sint:

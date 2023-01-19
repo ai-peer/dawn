@@ -148,6 +148,13 @@ class StorageTextureTests : public DawnTest {
                 break;
             }
 
+            case wgpu::TextureFormat::BGRA8Unorm: {
+                utils::RGBA8* valuePtr = static_cast<utils::RGBA8*>(pixelValuePtr);
+                *valuePtr =
+                    utils::RGBA8(pixelValue * 3, pixelValue * 2, pixelValue, pixelValue * 4);
+                break;
+            }
+
             case wgpu::TextureFormat::RGBA8Snorm:
             case wgpu::TextureFormat::RGBA8Sint: {
                 int8_t* valuePtr = static_cast<int8_t*>(pixelValuePtr);
@@ -677,6 +684,14 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
             continue;
         }
 
+        // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
+        // OpenGL backends right now.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        if (format == wgpu::TextureFormat::BGRA8Unorm &&
+            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
+            continue;
+        }
+
         // Prepare the write-only storage texture.
         wgpu::Texture writeonlyStorageTexture =
             CreateTexture(format, wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::CopySrc,
@@ -713,6 +728,14 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
         // Intel OpenGL and OpenGLES drivers.
         if (format == wgpu::TextureFormat::RGBA8Snorm && IsIntel() &&
             (IsOpenGL() || IsOpenGLES()) && IsLinux()) {
+            continue;
+        }
+
+        // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
+        // OpenGL backends right now.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        if (format == wgpu::TextureFormat::BGRA8Unorm &&
+            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
             continue;
         }
 
