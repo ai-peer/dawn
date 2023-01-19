@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b66930_47ba2bdb",
+        "filename": "src/tint/reader/wgsl/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T16:01:16Z",
+      "side": 1,
+      "message": "What does it mean if this fails?",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73ba4ba2_8c2de822",
+        "filename": "src/tint/reader/wgsl/parser.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T16:01:16Z",
+      "side": 1,
+      "message": "Should we just turn it on always and skip the flag?",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cd2024c_77699afa",
+        "filename": "src/tint/transform/test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T16:01:16Z",
+      "side": 1,
+      "message": "Why?",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
