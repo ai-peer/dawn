@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125ab200_358d4a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-19T21:39:41Z",
+      "side": 1,
+      "message": "PTAL! Found that this was causing issues when I attempted to turn off spv_reader in a Chrome build.",
+      "revId": "79ccc43d15488c307ee699d55daeb31e8658bece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
