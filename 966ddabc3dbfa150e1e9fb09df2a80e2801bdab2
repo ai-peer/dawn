@@ -16,6 +16,24 @@
       "message": "new end2end_test fixed the bug locally on mac intel. fingers crossed CTS passes too",
       "revId": "966ddabc3dbfa150e1e9fb09df2a80e2801bdab2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52fc69c_2df5f230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-19T18:01:07Z",
+      "side": 1,
+      "message": "darn. I realized I\u0027m going to need to fixup the lazy clear too. will try in another CL.",
+      "parentUuid": "f0ff106c_b5f5263a",
+      "revId": "966ddabc3dbfa150e1e9fb09df2a80e2801bdab2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
