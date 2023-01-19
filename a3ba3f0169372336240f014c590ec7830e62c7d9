@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee915ea6_48b47484",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T12:55:14Z",
+      "side": 1,
+      "message": "nit: Maybe in [a] since that\u0027s the bottom most handling of barriers? Otherwise we might miss to move it when we start using that function directly.",
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a86cd9_32b31e2e",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T12:55:14Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d13fbe4_efd214ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T12:55:14Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the iterations, the Metal backend makes more sense now!",
+      "revId": "15f9eb43591b1b5cb6a97e2138e24ee4dd3e3e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a389e9c6_a97d284b",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T12:55:14Z",
+      "side": 1,
+      "message": "Can be a follow-up, but we could have a method on the device for this similar to these: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;drc\u003d0963142273c7aa247d06e2b49a38cb37d2a96f67;l\u003d359",
+      "revId": "15f9eb43591b1b5cb6a97e2138e24ee4dd3e3e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0d23608_82e44005",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T12:55:14Z",
+      "side": 1,
+      "message": "nit: Maybe MaybeError result \u003d ... ASSERT(result.IsSuccess()); ?",
+      "revId": "15f9eb43591b1b5cb6a97e2138e24ee4dd3e3e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
