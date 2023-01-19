@@ -33,6 +33,40 @@
       "message": "LGTM!",
       "revId": "a8c57d41634ee61b1f102b39d8321625ee72c9da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66206467_82baff2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T08:52:55Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "a8c57d41634ee61b1f102b39d8321625ee72c9da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b52789c1_6080a6f8",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 924,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-19T08:52:55Z",
+      "side": 1,
+      "message": "nit: Maybe we can remove this Toggle at some point. It was used during the WGSL transition but no longer needed.",
+      "revId": "a8c57d41634ee61b1f102b39d8321625ee72c9da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
