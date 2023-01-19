@@ -1,11 +1,11 @@
 #version 310 es
 
-struct vec4f {
+struct vec4f_1 {
   int i;
 };
 
 vec4 tint_symbol(uint VertexIndex) {
-  vec4f s = vec4f(1);
+  vec4f_1 s = vec4f_1(1);
   float f = float(s.i);
   bool b = bool(f);
   return (b ? vec4(1.0f) : vec4(0.0f));

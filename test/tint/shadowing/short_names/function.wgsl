@@ -1,5 +1,3 @@
-// flags: --transform renamer
-
 // Evilness 😈. Don't go getting any ideas!
 fn vec4f() -> i32 { return 0; }
 fn vec2f(i : i32) -> f32 { return f32(i); }

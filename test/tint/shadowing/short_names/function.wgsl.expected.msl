@@ -1,15 +1,15 @@
 #include <metal_stdlib>
 
 using namespace metal;
-int vec4f() {
+int vec4f_1() {
   return 0;
 }
 
-float vec2f(int i) {
+float vec2f_1(int i) {
   return float(i);
 }
 
-bool vec2i(float f) {
+bool vec2i_1(float f) {
   return bool(f);
 }
 
@@ -20,9 +20,9 @@ struct tint_symbol_1 {
 float4 tint_symbol_inner(uint VertexIndex) {
   float4 const tint_symbol_2 = float4(0.0f);
   float4 const tint_symbol_3 = float4(1.0f);
-  int const tint_symbol_4 = vec4f();
-  float const tint_symbol_5 = vec2f(tint_symbol_4);
-  bool const tint_symbol_6 = vec2i(tint_symbol_5);
+  int const tint_symbol_4 = vec4f_1();
+  float const tint_symbol_5 = vec2f_1(tint_symbol_4);
+  bool const tint_symbol_6 = vec2i_1(tint_symbol_5);
   return select(tint_symbol_2, tint_symbol_3, tint_symbol_6);
 }
 

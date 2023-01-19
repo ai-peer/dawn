@@ -1,23 +1,23 @@
 #version 310 es
 
-int vec4f() {
+int vec4f_1() {
   return 0;
 }
 
-float vec2f(int i) {
+float vec2f_1(int i) {
   return float(i);
 }
 
-bool vec2i(float f) {
+bool vec2i_1(float f) {
   return bool(f);
 }
 
 vec4 tint_symbol(uint VertexIndex) {
   vec4 tint_symbol_1 = vec4(0.0f);
   vec4 tint_symbol_2 = vec4(1.0f);
-  int tint_symbol_3 = vec4f();
-  float tint_symbol_4 = vec2f(tint_symbol_3);
-  bool tint_symbol_5 = vec2i(tint_symbol_4);
+  int tint_symbol_3 = vec4f_1();
+  float tint_symbol_4 = vec2f_1(tint_symbol_3);
+  bool tint_symbol_5 = vec2i_1(tint_symbol_4);
   return (tint_symbol_5 ? tint_symbol_2 : tint_symbol_1);
 }
 
