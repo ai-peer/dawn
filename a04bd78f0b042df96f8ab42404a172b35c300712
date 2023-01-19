@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b690b5a1_2decf7f7",
+        "filename": "src/tint/transform/unshadow_core_definitions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:27:06Z",
+      "side": 1,
+      "message": "members are always scoped to the struct, so shadowing isn\u0027t an issue for them.",
+      "parentUuid": "83de305f_f9fffaa2",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36e8ad90_3ab7498c",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df4e2af_ca81bd2e",
+        "filename": "src/tint/transform/unshadow_core_definitions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:27:06Z",
+      "side": 1,
+      "message": "Handled on L103",
+      "parentUuid": "36e8ad90_3ab7498c",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb2130db_f4d28281",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-19T19:48:33Z",
       "side": 1,
       "message": "What happens if I have an `@override` with a name of `f32`? Does this happen before or after the inspector?",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8004d4a2_d966c396",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T23:27:06Z",
+      "side": 1,
+      "message": "Argh. Great find. That\u0027s really annoying.\nI\u0027m inclined to say we land this, and I fix it through an internal \"original-name\" attribute or something. Will file a bug.",
+      "parentUuid": "bb2130db_f4d28281",
       "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
