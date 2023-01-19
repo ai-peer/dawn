@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc6071b_9b79f824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-19T18:26:34Z",
+      "side": 1,
+      "message": "Updated to unshadow local variables and parameters too. So much for the nice simple transform!",
+      "revId": "830790afed54a5e1e0e5b3ae5b787e27b882857f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
