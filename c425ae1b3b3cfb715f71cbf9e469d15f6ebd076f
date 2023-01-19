@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d49c9a31_d9252896",
+        "filename": "src/tint/reader/wgsl/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:28:02Z",
+      "side": 1,
+      "message": "It\u0027s not failing, the transform just doesn\u0027t need to run.",
+      "parentUuid": "36b66930_47ba2bdb",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73ba4ba2_8c2de822",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e4ed3a_1c3afb69",
+        "filename": "src/tint/reader/wgsl/parser.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:28:02Z",
+      "side": 1,
+      "message": "It\u0027s useful to test transforms with \u0027raw\u0027 parsed input. Like, actually testing the `UnshadowCoreDefinitions` transform itself.",
+      "parentUuid": "73ba4ba2_8c2de822",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cd2024c_77699afa",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-01-19T16:01:16Z",
       "side": 1,
       "message": "Why?",
+      "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aacbfa0_a722eab1",
+        "filename": "src/tint/transform/test_helper.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-19T18:28:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cd2024c_77699afa",
       "revId": "c425ae1b3b3cfb715f71cbf9e469d15f6ebd076f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
