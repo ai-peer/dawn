@@ -92,6 +92,8 @@ wgpu::TextureFormat TintImageFormatToTextureFormat(
             return wgpu::TextureFormat::RGBA8Uint;
         case tint::inspector::ResourceBinding::TexelFormat::kRgba8Sint:
             return wgpu::TextureFormat::RGBA8Sint;
+        case tint::inspector::ResourceBinding::TexelFormat::kBgra8Unorm:
+            return wgpu::TextureFormat::BGRA8Unorm;
         case tint::inspector::ResourceBinding::TexelFormat::kRg32Uint:
             return wgpu::TextureFormat::RG32Uint;
         case tint::inspector::ResourceBinding::TexelFormat::kRg32Sint:
