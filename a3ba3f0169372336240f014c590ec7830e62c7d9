@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd33057_8cc9cf95",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-19T14:13:19Z",
+      "side": 1,
+      "message": "I put it here because the method name `TrackUsage*` is more suitable for it. And `TransitionUsageAndGetResourceBarrier` is a private method, it should not be called outside of this class. Or maybe merge those two methods into one method?",
+      "parentUuid": "ee915ea6_48b47484",
+      "revId": "a3ba3f0169372336240f014c590ec7830e62c7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e0a86cd9_32b31e2e",
