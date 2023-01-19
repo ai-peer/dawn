@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83de305f_f9fffaa2",
+        "filename": "src/tint/transform/unshadow_core_definitions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T19:48:33Z",
+      "side": 1,
+      "message": "What about shadowing struct member names?",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e8ad90_3ab7498c",
+        "filename": "src/tint/transform/unshadow_core_definitions.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T19:48:33Z",
+      "side": 1,
+      "message": "Shadowing function parameter names?",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2130db_f4d28281",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-19T19:48:33Z",
+      "side": 1,
+      "message": "What happens if I have an `@override` with a name of `f32`? Does this happen before or after the inspector?",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
