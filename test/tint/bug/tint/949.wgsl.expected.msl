@@ -132,11 +132,11 @@ float3 perturbNormalBase_mf33_vf3_f1_(thread float3x3* const cotangentFrame, thr
   return normalize((x_113 * x_114));
 }
 
-float3 perturbNormal_mf33_vf3_f1_(thread float3x3* const cotangentFrame_1, thread float3* const textureSample, thread float* const scale_1) {
+float3 perturbNormal_mf33_vf3_f1_(thread float3x3* const cotangentFrame_1, thread float3* const textureSample_1, thread float* const scale_1) {
   float3x3 param = float3x3(0.0f);
   float3 param_1 = 0.0f;
   float param_2 = 0.0f;
-  float3 const x_119 = *(textureSample);
+  float3 const x_119 = *(textureSample_1);
   float3x3 const x_125 = *(cotangentFrame_1);
   param = x_125;
   param_1 = ((x_119 * 2.0f) - float3(1.0f));

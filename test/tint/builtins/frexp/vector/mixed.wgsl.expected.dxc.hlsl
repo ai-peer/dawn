@@ -16,7 +16,7 @@ void main() {
   res = tint_frexp(runtime_in);
   const frexp_result_vec2_f32 c = {float2(0.625f, 0.9375f), int2(1, 2)};
   res = c;
-  const float2 fract = res.fract;
-  const int2 exp = res.exp;
+  const float2 fract_1 = res.fract;
+  const int2 exp_1 = res.exp;
   return;
 }

@@ -78,7 +78,7 @@
                OpName %scale "scale"
                OpName %perturbNormal_mf33_vf3_f1_ "perturbNormal_mf33_vf3_f1_"
                OpName %cotangentFrame_1 "cotangentFrame_1"
-               OpName %textureSample "textureSample"
+               OpName %textureSample_1 "textureSample_1"
                OpName %scale_1 "scale_1"
                OpName %param "param"
                OpName %param_1 "param_1"
@@ -473,13 +473,13 @@
                OpFunctionEnd
 %perturbNormal_mf33_vf3_f1_ = OpFunction %v3float None %213
 %cotangentFrame_1 = OpFunctionParameter %_ptr_Function_mat3v3float
-%textureSample = OpFunctionParameter %_ptr_Function_v3float
+%textureSample_1 = OpFunctionParameter %_ptr_Function_v3float
     %scale_1 = OpFunctionParameter %_ptr_Function_float
         %229 = OpLabel
       %param = OpVariable %_ptr_Function_mat3v3float Function %163
     %param_1 = OpVariable %_ptr_Function_v3float Function %22
     %param_2 = OpVariable %_ptr_Function_float Function %18
-        %234 = OpLoad %v3float %textureSample
+        %234 = OpLoad %v3float %textureSample_1
         %236 = OpLoad %mat3v3float %cotangentFrame_1
                OpStore %param %236
         %238 = OpVectorTimesScalar %v3float %234 %float_2

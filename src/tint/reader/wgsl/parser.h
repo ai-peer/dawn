@@ -19,13 +19,21 @@
 
 namespace tint::reader::wgsl {
 
+/// Options for Parse()
+struct Options {
+    /// If true, then module-scope definitions that shadow core types and builtins will be renamed.
+    /// @warning: The majority of Tint transforms and backends depend on this being enabled. Do not
+    /// disable this for production code.
+    bool unshadow_core_definitions = true;
+};
+
 /// Parses the WGSL source, returning the parsed program.
-/// If the source fails to parse then the returned
-/// `program.Diagnostics.contains_errors()` will be true, and the
-/// `program.Diagnostics()` will describe the error.
+/// If the source fails to parse then the returned `program.Diagnostics.contains_errors()` will be
+/// true, and the `program.Diagnostics()` will describe the error.
 /// @param file the source file
+/// @param options parser options
 /// @returns the parsed program
-Program Parse(Source::File const* file);
+Program Parse(Source::File const* file, const Options& options = {});
 
 }  // namespace tint::reader::wgsl
 

@@ -17,13 +17,22 @@
 #include <utility>
 
 #include "src/tint/reader/wgsl/parser_impl.h"
+#include "src/tint/transform/unshadow_core_definitions.h"
 
 namespace tint::reader::wgsl {
 
-Program Parse(Source::File const* file) {
+Program Parse(Source::File const* file, const Options& options /* = {} */) {
     ParserImpl parser(file);
     parser.Parse();
-    return Program(std::move(parser.builder()));
+    Program program(std::move(parser.builder()));
+    if (options.unshadow_core_definitions) {
+        transform::DataMap ignored;
+        if (auto unshadowed = transform::UnshadowCoreDefinitions().Apply(&program, {}, ignored)) {
+            return std::move(unshadowed.value());
+        }
+        // Transform does not need to run.
+    }
+    return program;
 }
 
 }  // namespace tint::reader::wgsl

@@ -142,11 +142,11 @@ vec3 perturbNormalBase_mf33_vf3_f1_(inout mat3 cotangentFrame, inout vec3 normal
   return normalize((x_113 * x_114));
 }
 
-vec3 perturbNormal_mf33_vf3_f1_(inout mat3 cotangentFrame_1, inout vec3 textureSample, inout float scale_1) {
+vec3 perturbNormal_mf33_vf3_f1_(inout mat3 cotangentFrame_1, inout vec3 textureSample_1, inout float scale_1) {
   mat3 param = mat3(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   vec3 param_1 = vec3(0.0f, 0.0f, 0.0f);
   float param_2 = 0.0f;
-  vec3 x_119 = textureSample;
+  vec3 x_119 = textureSample_1;
   mat3 x_125 = cotangentFrame_1;
   param = x_125;
   param_1 = ((x_119 * 2.0f) - vec3(1.0f));

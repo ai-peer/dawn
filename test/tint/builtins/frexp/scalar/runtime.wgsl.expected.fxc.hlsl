@@ -13,7 +13,7 @@ frexp_result_f32 tint_frexp(float param_0) {
 void main() {
   const float tint_symbol = 1.25f;
   const frexp_result_f32 res = tint_frexp(tint_symbol);
-  const float fract = res.fract;
-  const int exp = res.exp;
+  const float fract_1 = res.fract;
+  const int exp_1 = res.exp;
   return;
 }

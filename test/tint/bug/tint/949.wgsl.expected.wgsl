@@ -149,11 +149,11 @@ fn perturbNormalBase_mf33_vf3_f1_(cotangentFrame : ptr<function, mat3x3<f32>>, n
   return normalize((x_113 * x_114));
 }
 
-fn perturbNormal_mf33_vf3_f1_(cotangentFrame_1 : ptr<function, mat3x3<f32>>, textureSample : ptr<function, vec3<f32>>, scale_1 : ptr<function, f32>) -> vec3<f32> {
+fn perturbNormal_mf33_vf3_f1_(cotangentFrame_1 : ptr<function, mat3x3<f32>>, textureSample_1 : ptr<function, vec3<f32>>, scale_1 : ptr<function, f32>) -> vec3<f32> {
   var param : mat3x3<f32>;
   var param_1 : vec3<f32>;
   var param_2 : f32;
-  let x_119 : vec3<f32> = *(textureSample);
+  let x_119 : vec3<f32> = *(textureSample_1);
   let x_125 : mat3x3<f32> = *(cotangentFrame_1);
   param = x_125;
   param_1 = ((x_119 * 2.0) - vec3<f32>(1.0, 1.0, 1.0));

@@ -9,7 +9,7 @@
                OpExecutionMode %unused_entry_point LocalSize 1 1 1
                OpName %unused_entry_point "unused_entry_point"
                OpName %f "f"
-               OpName %vec3f "vec3f"
+               OpName %vec3f_1 "vec3f_1"
                OpName %b "b"
                OpName %c "c"
                OpName %d "d"
@@ -29,12 +29,12 @@
                OpFunctionEnd
           %f = OpFunction %void None %1
           %6 = OpLabel
-      %vec3f = OpVariable %_ptr_Function_int Function %11
+    %vec3f_1 = OpVariable %_ptr_Function_int Function %11
           %b = OpVariable %_ptr_Function_int Function %11
           %c = OpVariable %_ptr_Function_v3float Function %16
           %d = OpVariable %_ptr_Function_v3float Function %16
-               OpStore %vec3f %int_1
-         %12 = OpLoad %int %vec3f
+               OpStore %vec3f_1 %int_1
+         %12 = OpLoad %int %vec3f_1
                OpStore %b %12
                OpStore %c %16
                OpStore %d %16

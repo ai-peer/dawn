@@ -8,7 +8,7 @@ struct modf_result_f32 {
 
 void tint_symbol() {
   modf_result_f32 res = modf_result_f32(0.25f, 1.0f);
-  float tint_symbol_2 = res.fract;
+  float fract_1 = res.fract;
   float whole = res.whole;
 }
 

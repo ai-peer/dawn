@@ -83,8 +83,13 @@ class TransformTestBase : public BASE {
     /// @return the transformed output
     template <typename... TRANSFORMS>
     Output Run(std::string in, const DataMap& data = {}) {
+        // Don't unshadow core definitions for transform tests, to avoid over-complicating the unit
+        // tests.
+        reader::wgsl::Options parse_options;
+        parse_options.unshadow_core_definitions = false;
+
         auto file = std::make_unique<Source::File>("test", in);
-        auto program = reader::wgsl::Parse(file.get());
+        auto program = reader::wgsl::Parse(file.get(), parse_options);
 
         // Keep this pointer alive after Transform() returns
         files_.emplace_back(std::move(file));

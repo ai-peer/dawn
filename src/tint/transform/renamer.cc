@@ -1268,17 +1268,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
 
     auto is_type_short_name = [&](const Symbol& symbol) {
         auto name = src->Symbols().NameFor(symbol);
-        if (type::ParseShortName(name) != type::ShortName::kUndefined) {
-            // Identifier *looks* like a builtin short-name, but check the using actually
-            // shadowing a short-name with a type alias.
-            for (auto* decl : src->AST().TypeDecls()) {
-                if (decl->name == symbol) {
-                    return false;
-                }
-            }
-            return true;
-        }
-        return false;
+        return type::ParseShortName(name) != type::ShortName::kUndefined;
     };
 
     for (auto* node : src->ASTNodes().Objects()) {

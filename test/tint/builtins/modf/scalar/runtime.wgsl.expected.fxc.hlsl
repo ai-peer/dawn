@@ -12,7 +12,7 @@ modf_result_f32 tint_modf(float param_0) {
 void main() {
   const float tint_symbol = 1.25f;
   const modf_result_f32 res = tint_modf(tint_symbol);
-  const float fract = res.fract;
+  const float fract_1 = res.fract;
   const float whole = res.whole;
   return;
 }

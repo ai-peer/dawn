@@ -4,7 +4,7 @@ layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 void unused_entry_point() {
   return;
 }
-void f(vec3 vec3f) {
-  vec3 b = vec3f;
+void f(vec3 vec3f_1) {
+  vec3 b = vec3f_1;
 }
 
