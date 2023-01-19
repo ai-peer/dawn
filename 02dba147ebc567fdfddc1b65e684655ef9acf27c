@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b2416d8_be842b80",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-19T17:40:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bd5caa6_59200f8a",
+      "range": {
+        "startLine": 154,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 43
+      },
+      "revId": "02dba147ebc567fdfddc1b65e684655ef9acf27c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4b4c48c_e06e0c69",
