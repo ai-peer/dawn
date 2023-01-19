@@ -26,7 +26,7 @@
 
 namespace tint::sem {
 
-BuiltinType ParseBuiltinType(const std::string& name) {
+BuiltinType ParseBuiltinType(std::string_view name) {
     if (name == "abs") {
         return BuiltinType::kAbs;
     }
