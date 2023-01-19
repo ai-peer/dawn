@@ -27,11 +27,18 @@ enum class BuiltinType {
 {{- end }}
 };
 
+/// All builtin functions
+static constexpr BuiltinType kBuiltinTypes[] = {
+{{- range Sem.Builtins }}
+    BuiltinType::k{{PascalCase .Name}},
+{{- end }}
+};
+
 /// Matches the BuiltinType by name
 /// @param name the builtin name to parse
 /// @returns the parsed BuiltinType, or BuiltinType::kNone if `name` did not
 /// match any builtin.
-BuiltinType ParseBuiltinType(const std::string& name);
+BuiltinType ParseBuiltinType(std::string_view name);
 
 /// @returns the name of the builtin function type. The spelling, including
 /// case, matches the name in the WGSL spec.
