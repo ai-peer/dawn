@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "339d6222_19160516",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-20T00:47:38Z",
+      "side": 1,
+      "message": "Ah, mis-read as `\u003c\u003d count - 1`",
+      "parentUuid": "20a8289e_a58dfe6b",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcd3c57f_7f9a38fe",
@@ -189,6 +207,24 @@
       "side": 1,
       "message": "Currently, I don\u0027t think you can have a template on the LHS of an assignment, but I see no harm in adding it, so will do.\n\nLikewise for `:` - don\u0027t think there\u0027s any place right now where the LHS could be a template - although this would change with the ternary operator.\n\nThese are the \"any token that\u0027s not used in an expression\" - which I could try and exhaustively list. It\u0027s more likely I\u0027d screw that up though.",
       "parentUuid": "2d94715a_1d6e6146",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c4dfab7_2cadbdcb",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-20T00:47:38Z",
+      "side": 1,
+      "message": "If you\u0027re only looking for template expressions, I think that\u0027s true. If it was more general templates then you\u0027d have `let a: vec2\u003cf32\u003e\u003d ...`. But, since this is just template expressions it should be ok.\n\nI was wondering about `:` in the case where you were in a struct member and you couldn\u0027t tell at the `,` at the end of a line if you were done, if you extended into the next member you\u0027d end at the `:`. (I don\u0027t have an example, was just going through the grammar) (I guess this could also potentially be true for case selector which ends in a `:`, it takes expression as well)",
+      "parentUuid": "441ed07d_afcdbefe",
       "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
