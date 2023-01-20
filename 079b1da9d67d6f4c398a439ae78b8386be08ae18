@@ -73,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b019c5ff_9e138b61",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T13:35:28Z",
+      "side": 1,
+      "message": "What about calling it only if usage is not one of the mappable usage?",
+      "parentUuid": "a19a7e69_0c008281",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 254,
+        "endChar": 26
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e33c3dce_692fd0f2",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 21
