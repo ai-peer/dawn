@@ -399,6 +399,24 @@
       "parentUuid": "caf75c2f_80c3e4e5",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a284be27_eabac803",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T16:17:25Z",
+      "side": 1,
+      "message": "Ok sounds good to figure out as a follow up much later.",
+      "parentUuid": "1ba5d8ba_a17ba395",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
