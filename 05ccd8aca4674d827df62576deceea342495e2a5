@@ -51,6 +51,23 @@
       "parentUuid": "8613a6c0_6041257b",
       "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1f4e302_ba4efe3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-20T03:38:55Z",
+      "side": 1,
+      "message": "Oh I find I should fix the CTS first before sending this CL out for review.",
+      "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
