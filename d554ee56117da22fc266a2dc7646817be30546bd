@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b5b9d0c_76713b7b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c350318_c527bc45",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "180459a8_b4527cc3",
         "filename": "/COMMIT_MSG",
         "patchSetId": 26
@@ -37,6 +61,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "Do we have a tracking issue for this stack of CLs? It would be nice",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ef1ae4_ca7b7c4f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "Yup I\u0027ll add it",
+      "parentUuid": "180459a8_b4527cc3",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +130,30 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "why {}? It is where future stuff will be added?",
+      "range": {
+        "startLine": 1045,
+        "startChar": 54,
+        "endLine": 1045,
+        "endChar": 56
+      },
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b01d38_3c483937",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "Yeah custom helper functions in a follow-up CL will be added here.",
+      "parentUuid": "7a96e591_a932b1d7",
       "range": {
         "startLine": 1045,
         "startChar": 54,
@@ -155,6 +221,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "787b96f6_e31307e6",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 26
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47cbb903_c41a9907",
+      "range": {
+        "startLine": 26,
+        "startChar": 29,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "375e880c_8cca66b3",
@@ -168,6 +258,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "nit: this comment will be replicated many times and will say \"command\". Did you mean to put {{command}} or something else?",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fb37537_64f8c9cd",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 26
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "Ack: I was using these comments as an aid for debugging the generated output. I\u0027ll remove them.",
+      "parentUuid": "375e880c_8cca66b3",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -271,6 +379,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "How hard would it be to fix? I worry that if the protobuf generator changes paths then we\u0027ll have to do very complicated updates between Dawn and Chromium. But maybe that will never happen.",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba5d8ba_a17ba395",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-20T16:15:36Z",
+      "side": 1,
+      "message": "I\u0027ve been digging into this after holiday and it looks pretty difficult to fix and there is nobody actively maintaining the protobuf-mutator code in the Chrome source tree to ping. Would it be possible to leave this in for now? As you\u0027ve mentioned in a later CL we can leave this fuzzer disabled for most builds, we need it merged to get it continuously running on Clusterfuzz",
+      "parentUuid": "caf75c2f_80c3e4e5",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
