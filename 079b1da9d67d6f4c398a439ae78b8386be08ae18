@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c51b9f30_aeec0627",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "This is no longer a setter. Maybe rename to MarkUsedInPendingCommands() ?",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa1d939_806878c6",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "[1] Even if the buffer can be reused without barriers, we should still tag it as used, since it is used by an operation on the GPU.",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 254,
+        "endChar": 26
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e33c3dce_692fd0f2",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "u-u-u-nit: !(usage \u0026 kMapUsages), ditto above",
+      "range": {
+        "startLine": 261,
+        "startChar": 26,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4b8ede_d07d45f0",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be necessary with [1]",
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5fa43f_97beb060",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "nit: at the end of the submit actually.",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1208ef3_a413539b",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T11:07:18Z",
+      "side": 1,
+      "message": "Here the logic for the buffer eager transitions is split between BufferVk.cpp and here. To have all of the logic in the same place, this could just call buffer-\u003eTransitionEagerly(\u0026mRecordingContext) and the logic for transitioning mappable buffers put there.",
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
