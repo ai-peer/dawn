@@ -255,6 +255,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a3fcdd_ec045a1d",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd4b8ede_d07d45f0",
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea5fa43f_97beb060",
