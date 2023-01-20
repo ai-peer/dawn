@@ -98,6 +98,16 @@ namespace {
 constexpr int64_t kMaxArrayElementCount = 65536;
 constexpr uint32_t kMaxStatementDepth = 127;
 
+/// Helper class and macros to push a new diagnostic filter scope, and pop it when exiting the
+/// current scope.
+struct DiagnosticFilterScope {
+    DiagnosticFilterStack& stack;
+    DiagnosticFilterScope(DiagnosticFilterStack& s) : stack(s) { stack.Push(); }
+    ~DiagnosticFilterScope() { stack.Pop(); }
+};
+#define TINT_SCOPED_DIAGNOSTIC_FILTERS \
+    DiagnosticFilterScope diagnostic_filter_scope(validator_.DiagnosticFilters())
+
 }  // namespace
 
 Resolver::Resolver(ProgramBuilder* builder)
@@ -966,6 +976,20 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
     utils::Hashmap<Symbol, Source, 8> parameter_names;
     utils::Vector<sem::Parameter*, 8> parameters;
 
+    TINT_SCOPED_DIAGNOSTIC_FILTERS;
+    for (auto* attr : decl->attributes) {
+        Mark(attr);
+        if (auto* dc = attr->As<ast::DiagnosticAttribute>()) {
+            Mark(dc->control);
+            if (!DiagnosticControl(dc->control)) {
+                return nullptr;
+            }
+        }
+    }
+    if (!validator_.NoDuplicateAttributes(decl->attributes)) {
+        return nullptr;
+    }
+
     // Resolve all the parameters
     for (auto* param : decl->params) {
         Mark(param);
@@ -1032,9 +1056,6 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             return_location = value.Get();
         }
     }
-    if (!validator_.NoDuplicateAttributes(decl->attributes)) {
-        return nullptr;
-    }
 
     if (auto* str = return_type->As<sem::Struct>()) {
         if (!ApplyAddressSpaceUsageToType(ast::AddressSpace::kNone, str, decl->source)) {
@@ -1094,10 +1115,6 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             func->Behaviors().Remove(sem::Behavior::kReturn);
             func->Behaviors().Add(sem::Behavior::kNext);
         }
-    }
-
-    for (auto* attr : decl->attributes) {
-        Mark(attr);
     }
 
     if (!validator_.NoDuplicateAttributes(decl->return_type_attributes)) {
