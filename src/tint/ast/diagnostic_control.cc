@@ -60,4 +60,34 @@ std::ostream& operator<<(std::ostream& out, DiagnosticSeverity value) {
     return out << "<unknown>";
 }
 
+diag::Severity ToSeverity(DiagnosticSeverity sc) {
+    switch (sc) {
+        case DiagnosticSeverity::kError:
+            return diag::Severity::Error;
+        case DiagnosticSeverity::kWarning:
+            return diag::Severity::Warning;
+        case DiagnosticSeverity::kInfo:
+            return diag::Severity::Note;
+        default:
+            return diag::Severity::InternalCompilerError;
+    }
+}
+
+DiagnosticRule ParseDiagnosticRule(std::string_view str) {
+    if (str == "chromium_unreachable_code") {
+        return DiagnosticRule::kChromiumUnreachableCode;
+    }
+    return DiagnosticRule::kUnknown;
+}
+
+std::ostream& operator<<(std::ostream& out, DiagnosticRule value) {
+    switch (value) {
+        case DiagnosticRule::kUnknown:
+            return out << "<unknown>";
+        case DiagnosticRule::kChromiumUnreachableCode:
+            return out << "chromium_unreachable_code";
+    }
+    return out << "<undefined>";
+}
+
 }  // namespace tint::ast
