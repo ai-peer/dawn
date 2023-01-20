@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d79aaf2_7808005e",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T15:23:09Z",
+      "side": 1,
+      "message": "So you\u0027re saying that if the previous usage was not on the GPU (like it was either never used or it was last used on the CPU) then we don\u0027t need a barrier?\n\nThat can be checked with if (isMappable \u0026\u0026 (newUsage \u0026 kMappableUsage) \u0026\u0026 !(lastUsage \u0026 kGPUUsages))\n\nIn general we should really try to keep logic for things like this in a single place to avoid forgetting to update them in the future. Barrier tracking is a state soup so it\u0027s important that it be in a single place and not spread out around the whole codebase.\n\nThere will be a lot of branches in that function but I\u0027m sure we\u0027ll eventually be able to optimize it quite a bit by pre-computing things like \"is this buffer mappable\", \"can the usage be none\" etc.",
+      "parentUuid": "d86eb8e8_9d42c010",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 254,
+        "endChar": 26
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e33c3dce_692fd0f2",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 21
