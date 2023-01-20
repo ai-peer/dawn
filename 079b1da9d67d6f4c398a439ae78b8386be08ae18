@@ -49,6 +49,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a19a7e69_0c008281",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T11:29:57Z",
+      "side": 1,
+      "message": "This method could be called with MapRead and MapWrite. In that case, the buffer will be accessed by CPU, so always updating the last usage serial is wrong. I guess we may need to call SetLastUsageSerial() explicitly, where buffer is really used instead of putting SetLastUsageSerial() call in TransitionUsageNow() or TrackUsageAndGetResourceBarrier().",
+      "parentUuid": "6fa1d939_806878c6",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 254,
+        "endChar": 26
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e33c3dce_692fd0f2",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 21
