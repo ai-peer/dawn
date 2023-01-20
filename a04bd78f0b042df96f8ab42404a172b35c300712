@@ -139,6 +139,24 @@
       "parentUuid": "8004d4a2_d966c396",
       "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49239fb5_28e1128c",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-20T10:12:36Z",
+      "side": 1,
+      "message": "The Inspector also reflects the names of entry point parameters and the names of the struct members of those parameters so that Dawn can provide more useful validation errors when users get things wrong in the API.",
+      "parentUuid": "578f11aa_52624a4d",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
