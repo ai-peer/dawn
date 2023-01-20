@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b8714b_f2c9cdcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-20T00:48:12Z",
+      "side": 1,
+      "message": "lgtm w/ bug filed for `@override`",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83de305f_f9fffaa2",
