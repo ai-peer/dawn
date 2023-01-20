@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f761bd95_07b075f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-20T23:38:27Z",
+      "side": 1,
+      "message": "PTAL! This change allows building with tint_build_msl_writer and/or tint_build_hlsl_writer disabled, whereas previously that would trigger gn errors.\n\nIt also fixes one issue that comes up when disabling tint_build_wgsl_writer, but doesn\u0027t allow you to build with it disabled just yet as there\u0027s a couple of much stickier unittest dependencies that need to be untangled first.",
+      "revId": "5a9f80dd2d4ef17eaa7fd1de38a4ad0991c4dde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
