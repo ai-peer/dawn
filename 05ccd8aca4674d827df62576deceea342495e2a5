@@ -33,6 +33,24 @@
       "message": "confused about what part of this CL is Metal-only\n\nshouldn\u0027t there be some check on the other backends, for now, that using bgra8unorm as storage is not allowed? Or perhaps is that validation contained in Tint?",
       "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cf44269_b32e000a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-20T03:32:26Z",
+      "side": 1,
+      "message": "There is a flag in Tint that controls if we should replace bgra8unorm with rgba8unorm:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tint/transform/builtin_polyfill.h;l\u003d50\n\n- On Metal we don\u0027t need to enable it.\n- On Vulkan we must enable it by default, and on the API side we should bind a texture view with rgba8unorm on the bgra8unorm texture.\n- On D3D12 we should enable it on the platforms that cannot support creating UAV on bgra8unorm textures (when D3D12_FEATURE_DATA_FORMAT_SUPPORT.Support1 doesn\u0027t contain\nthe bit D3D12_FORMAT_SUPPORT1_TYPED_UNORDERED_ACCESS_VIEW after calling\nCheckFeatureSupport() on DXGI_FORMAT_B8G8R8A8_UNORM).",
+      "parentUuid": "8613a6c0_6041257b",
+      "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
