@@ -121,6 +121,24 @@
       "parentUuid": "bb2130db_f4d28281",
       "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578f11aa_52624a4d",
+        "filename": "src/tint/transform/unshadow_core_definitions.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-20T10:07:53Z",
+      "side": 1,
+      "message": "Presumably this issue also applies to the names of entry point functions.",
+      "parentUuid": "8004d4a2_d966c396",
+      "revId": "a04bd78f0b042df96f8ab42404a172b35c300712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
