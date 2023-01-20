@@ -16,6 +16,23 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
       "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35dd726_d5e1fe54",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T15:59:00Z",
+      "side": 1,
+      "message": "This makes me slightly uneasy because the buffer is cleared without any synchronization with previous work on the buffer. For now it is ok because the buffer can\u0027t have been used or it would have been cleared before. But what about a future when we reuse memory that\u0027s still used by in-flight commands to reduce the high water mark of memory. Or when we have a discard for buffers for some reason?\n\nWhat do you think of checking if the buffer is cleared in the frontend, right before the map callback when we get notified that the mapping is complete? Then we know all previous operations are done, we know the buffer is mappable for writing (even when it is a MapRead buffer, we could ASSERT) and it would put the code in a single place.\n\nAnd maybe for the future we could have a TODO to do the clearing on the GPU based on some heuristic, like size \u003e 10MB?",
+      "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
