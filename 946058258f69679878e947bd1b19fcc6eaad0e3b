@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d45b42b_4a4a4dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T14:15:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "946058258f69679878e947bd1b19fcc6eaad0e3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1d47044_2fc64653",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T14:15:23Z",
+      "side": 1,
+      "message": "nit: TODO(...) remove it as soon as Chromium is changed to use DawnTogglesDescriptor ?",
+      "revId": "946058258f69679878e947bd1b19fcc6eaad0e3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f3807d_a19e2eac",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T14:15:23Z",
+      "side": 1,
+      "message": "There is no test coverage for this. I think it is ok if we check manually that Chromium is still able to pass toggles, then update it as soon as the roll lands, then delete the code path.\n\nI think Chromium is the only other user of these toggles so this way we avoid writing a test and have everything updated immediately.",
+      "revId": "946058258f69679878e947bd1b19fcc6eaad0e3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
