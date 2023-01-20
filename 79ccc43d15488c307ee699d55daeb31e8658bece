@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7dba8ea_927c4f53",
+        "filename": "src/tint/reader/spirv/parser_impl.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-20T22:13:18Z",
+      "side": 1,
+      "message": "For some reason Chrome including every tint_unittests_source_set as a separate build target and building them as part of the `all` target. This seems like it\u0027s not desirable to me, but I\u0027m not an expert on all things GN. I\u0027m going to try and figure it out regardless.\n\nAside from that, if this include is required for the files to build at all then it seems pretty clear that it shouldn\u0027t be #ifdef-ed out.",
+      "parentUuid": "20150443_9219a2c9",
+      "revId": "79ccc43d15488c307ee699d55daeb31e8658bece",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "928f3eef_49fa6bf9",
         "filename": "src/tint/reader/spirv/parser_impl_test_helper.h",
         "patchSetId": 1
