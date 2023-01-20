@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a123c997_b2a9f430",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c51b9f30_aeec0627",
+      "range": {
+        "startLine": 76,
+        "startChar": 9,
+        "endLine": 76,
+        "endChar": 27
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fa1d939_806878c6",
@@ -143,6 +167,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2984f2be_b0b3aee5",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d79aaf2_7808005e",
+      "range": {
+        "startLine": 254,
+        "startChar": 8,
+        "endLine": 254,
+        "endChar": 26
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e33c3dce_692fd0f2",
@@ -156,6 +204,30 @@
       "writtenOn": "2023-01-20T11:07:18Z",
       "side": 1,
       "message": "u-u-u-nit: !(usage \u0026 kMapUsages), ditto above",
+      "range": {
+        "startLine": 261,
+        "startChar": 26,
+        "endLine": 261,
+        "endChar": 51
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aac16d67_6e07347f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e33c3dce_692fd0f2",
       "range": {
         "startLine": 261,
         "startChar": 26,
@@ -206,6 +278,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6003bec_f68c4411",
+        "filename": "src/dawn/native/vulkan/CommandRecordingContext.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea5fa43f_97beb060",
+      "range": {
+        "startLine": 52,
+        "startChar": 14,
+        "endLine": 52,
+        "endChar": 29
+      },
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1208ef3_a413539b",
@@ -219,6 +315,24 @@
       "writtenOn": "2023-01-20T11:07:18Z",
       "side": 1,
       "message": "Here the logic for the buffer eager transitions is split between BufferVk.cpp and here. To have all of the logic in the same place, this could just call buffer-\u003eTransitionEagerly(\u0026mRecordingContext) and the logic for transitioning mappable buffers put there.",
+      "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50c59a7_2df5c50b",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-20T17:34:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1208ef3_a413539b",
       "revId": "079b1da9d67d6f4c398a439ae78b8386be08ae18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
