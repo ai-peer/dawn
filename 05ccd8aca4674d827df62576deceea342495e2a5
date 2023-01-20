@@ -68,6 +68,24 @@
       "message": "Oh I find I should fix the CTS first before sending this CL out for review.",
       "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eeb83867_0cb09264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-20T10:58:36Z",
+      "side": 1,
+      "message": "I think what Austin means is that since this isn\u0027t implemented in other backends, we should gate the API somehow so JS is not able to start using a storage bgra8unorm texture when not supported yet. Maybe gate on the disallow_unsafe_apis toggle in Format.cpp and then we can remove that check once it is implemented on all backends?",
+      "parentUuid": "2cf44269_b32e000a",
+      "revId": "05ccd8aca4674d827df62576deceea342495e2a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
