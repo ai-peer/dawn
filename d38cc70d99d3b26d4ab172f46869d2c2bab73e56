@@ -33,6 +33,24 @@
       "message": "Yeah - this one is a little less certain. `var\u003cstorage, read_write\u003e` is definitely AST. I guess `tint::ast` can depend on `tint::type`, but not the other way around?",
       "revId": "d38cc70d99d3b26d4ab172f46869d2c2bab73e56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65dcb10e_36fcb642",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-21T19:21:55Z",
+      "side": 1,
+      "message": "Right, type is lower level then ast. I\u0027ve got it in my head to draw a picture of the layering, but haven\u0027t gotten there yet.",
+      "parentUuid": "3b8dd767_7e73e03f",
+      "revId": "d38cc70d99d3b26d4ab172f46869d2c2bab73e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
