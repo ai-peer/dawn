@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "d38cc70d99d3b26d4ab172f46869d2c2bab73e56",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b8dd767_7e73e03f",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T19:16:55Z",
+      "side": 1,
+      "message": "Yeah - this one is a little less certain. `var\u003cstorage, read_write\u003e` is definitely AST. I guess `tint::ast` can depend on `tint::type`, but not the other way around?",
+      "revId": "d38cc70d99d3b26d4ab172f46869d2c2bab73e56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
