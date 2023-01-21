@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4512ed8_f936b771",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-21T03:04:30Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 291,
+        "startChar": 8,
+        "endLine": 291,
+        "endChar": 9
+      },
+      "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c59156_e49ca154",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-21T03:04:30Z",
+      "side": 1,
+      "message": "nit: double \"// //\"",
+      "range": {
+        "startLine": 297,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 9
+      },
+      "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c039a1d_9209a392",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-21T03:04:30Z",
+      "side": 1,
+      "message": "should we move these early returns into the else block at [2]\nit seems like the early return for no-transition-needed in the map case is already handled above.\n\nI think it structure can be:\n```\nif (mapUsage) {\n  if (no barrier) {\n    return false;\n  }\n  MarkUsedInPendingCommands();\n} else {\n  MarkUsedInPendingCommands();\n  if (mappable) {\n    add to eager transition\n  }\n  if (no barrier) {\n    return false;\n  }\n}\n\nemit barriers\n```",
+      "range": {
+        "startLine": 298,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 5
+      },
+      "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ef62e72_c1b574ee",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-21T03:04:30Z",
+      "side": 1,
+      "message": "it\u0027s not expected in TrackUsageAndGetResourceBarrier that the recording context might be null. While the current code might be fine, it seems risky since some future change could easily start dereferencing a null pointer.\n\nWe may as well pass in the recording context into this function since you do device-\u003eGetPendingRecordingContext below anyway. Also, probably don\u0027t need the Device* arg.",
+      "range": {
+        "startLine": 430,
+        "startChar": 52,
+        "endLine": 430,
+        "endChar": 80
+      },
+      "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
