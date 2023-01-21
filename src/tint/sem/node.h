@@ -17,6 +17,8 @@
 
 #include "src/tint/castable.h"
 
+#include "src/tint/ast/diagnostic_control.h"
+
 namespace tint::sem {
 
 /// Node is the base class for all semantic nodes
@@ -30,6 +32,21 @@ class Node : public Castable<Node> {
 
     /// Destructor
     ~Node() override;
+
+    /// Modifies the severity of a specific diagnostic rule for this node and its children.
+    /// @param rule the diagnostic rule
+    /// @param severity the new diagnostic severity
+    void SetDiagnosticSeverity(ast::DiagnosticRule rule, ast::DiagnosticSeverity severity) {
+        diagnostic_severities_[rule] = severity;
+    }
+
+    /// @returns the diagnostic severity modifications applied to this node and its children
+    const ast::DiagnosticRuleSeverities& DiagnosticSeverities() const {
+        return diagnostic_severities_;
+    }
+
+  private:
+    ast::DiagnosticRuleSeverities diagnostic_severities_;
 };
 
 }  // namespace tint::sem
