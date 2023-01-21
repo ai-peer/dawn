@@ -414,6 +414,10 @@ class Resolver {
     /// @returns true on success, false on error
     bool Mark(const ast::Node* node);
 
+    /// Applies the diagnostic severities from the current scope to a semantic node.
+    /// @param node the semantic node to apply the diagnostic severities to
+    void ApplyDiagnosticSeverities(sem::Node* node);
+
     /// Adds the given error message to the diagnostics
     void AddError(const std::string& msg, const Source& source) const;
 
