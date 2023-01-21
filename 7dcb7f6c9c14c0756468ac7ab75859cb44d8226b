@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "856e37df_88315485",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:37:18Z",
+      "side": 1,
+      "message": "I can\u0027t remember the reason we have this outside of the loop below. Why are we not truthfully printing the declaration order of the program?",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "7dcb7f6c9c14c0756468ac7ab75859cb44d8226b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
