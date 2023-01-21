@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fc7f842_5f59313b",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:32:59Z",
+      "side": 1,
+      "message": "`std::string_view` is preferable here.",
+      "range": {
+        "startLine": 74,
+        "startChar": 25,
+        "endLine": 74,
+        "endChar": 44
+      },
+      "revId": "e721d8418927e779a78d471221bce13c84602dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cc1a417_3ec259eb",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:32:59Z",
+      "side": 1,
+      "message": "This is a bit odd for the utility. I see why you have it this way, but still.",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 21
+      },
+      "revId": "e721d8418927e779a78d471221bce13c84602dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
