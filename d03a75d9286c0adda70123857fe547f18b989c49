@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7468020c_89b25df7",
+        "filename": "src/tint/ast/diagnostic_attribute.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:27:43Z",
+      "side": 1,
+      "message": "This is a little bit odd. `DiagnosticControl` makes sense as a module-scope thing, and having an attribute hold that node seems off. I would just inline the two fields.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
