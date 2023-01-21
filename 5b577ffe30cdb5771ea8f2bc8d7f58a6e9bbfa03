@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4169295_60867101",
+        "filename": "src/tint/ast/diagnostic_control.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:25:51Z",
+      "side": 1,
+      "message": "This lot should probably be generated from `intrinsic.def`, in keeping with the other enums.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 2
+      },
+      "revId": "5b577ffe30cdb5771ea8f2bc8d7f58a6e9bbfa03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
