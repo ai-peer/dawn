@@ -74,6 +74,9 @@ diag::Severity ToSeverity(DiagnosticSeverity sc) {
 }
 
 DiagnosticRule ParseDiagnosticRule(std::string_view str) {
+    if (str == "derivative_uniformity") {
+        return DiagnosticRule::kDerivativeUniformity;
+    }
     if (str == "chromium_unreachable_code") {
         return DiagnosticRule::kChromiumUnreachableCode;
     }
@@ -84,6 +87,8 @@ std::ostream& operator<<(std::ostream& out, DiagnosticRule value) {
     switch (value) {
         case DiagnosticRule::kUnknown:
             return out << "<unknown>";
+        case DiagnosticRule::kDerivativeUniformity:
+            return out << "derivative_uniformity";
         case DiagnosticRule::kChromiumUnreachableCode:
             return out << "chromium_unreachable_code";
     }

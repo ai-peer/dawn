@@ -59,6 +59,8 @@ diag::Severity ToSeverity(DiagnosticSeverity sc);
 enum DiagnosticRule {
     // An unknown rule.
     kUnknown,
+    // Rules defined in the spec.
+    kDerivativeUniformity,
     // Chromium specific rules not defined in the spec.
     kChromiumUnreachableCode,
 };
@@ -74,6 +76,7 @@ std::ostream& operator<<(std::ostream& out, DiagnosticRule value);
 DiagnosticRule ParseDiagnosticRule(std::string_view str);
 
 constexpr const char* kDiagnosticRuleStrings[] = {
+    "derivative_uniformity",
     "chromium_unreachable_code",
 };
 
