@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ba24358_2049f88e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-21T00:39:04Z",
+      "side": 1,
+      "message": "Actually, I fiddled with it some more and you can now disable tint_build_wgsl_reader/writer too if needed. Looking for some feedback on the approach, though.\n\nIt\u0027s not a 100% disabling, because those portions of tint are required for quite a few other unittests, especially the transform and glsl tests. As such, my approach was to add the necessary libraries as explicit dependencies of those unittests. This means that if you specify tint_build_wgsl_writer \u003d false but still build the glsl unittests then technically the libtint_wgsl_writer_src target will still get build, it just won\u0027t be part of the main tint library. Does that feel like an acceptable tradeoff?\n\nThe alternatives are either disabling large swaths of \"unrelated\" tests when the wgsl reader/writer is disabled, or doign a deep refactor on the tests themselves to break the dependency, neither of which seems practical or useful.",
+      "revId": "cea0799494214a0ca8f40e586fdff1396374aaa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
