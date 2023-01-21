@@ -178,8 +178,6 @@ template("libtint_source_set") {
 
 libtint_source_set("libtint_core_all_src") {
   sources = [
-    "ast/access.cc",
-    "ast/access.h",
     "ast/alias.cc",
     "ast/alias.h",
     "ast/array.cc",
@@ -560,6 +558,7 @@ libtint_source_set("libtint_core_all_src") {
     "type/abstract_float.h",
     "type/abstract_int.h",
     "type/abstract_numeric.h",
+    "type/access.h",
     "type/address_space.h",
     "type/array.h",
     "type/array_count.h",
@@ -711,6 +710,8 @@ libtint_source_set("libtint_type_src") {
     "type/abstract_int.h",
     "type/abstract_numeric.cc",
     "type/abstract_numeric.h",
+    "type/access.cc",
+    "type/access.h",
     "type/address_space.cc",
     "type/address_space.h",
     "type/array.cc",
@@ -1087,7 +1088,6 @@ if (tint_build_unittests) {
 
   tint_unittests_source_set("tint_unittests_ast_src") {
     sources = [
-      "ast/access_test.cc",
       "ast/alias_test.cc",
       "ast/array_test.cc",
       "ast/assignment_statement_test.cc",
@@ -1266,6 +1266,7 @@ if (tint_build_unittests) {
 
   tint_unittests_source_set("tint_unittests_type_src") {
     sources = [
+      "type/access_test.cc",
       "type/address_space_test.cc",
       "type/array_test.cc",
       "type/atomic_test.cc",
