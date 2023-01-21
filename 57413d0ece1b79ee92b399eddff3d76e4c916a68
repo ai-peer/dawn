@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea1f6e5_54808353",
+        "filename": "src/tint/ast/module_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:29:12Z",
+      "side": 1,
+      "message": "nit: we should get in the habit of using gmock\u0027s `ContainerEq`. It\u0027s less fragile and the errors are easier to understand.",
+      "range": {
+        "startLine": 141,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 67
+      },
+      "revId": "57413d0ece1b79ee92b399eddff3d76e4c916a68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
