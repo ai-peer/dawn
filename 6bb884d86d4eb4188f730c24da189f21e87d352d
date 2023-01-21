@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c5c1b9_94f7676b",
+        "filename": "src/tint/ast/diagnostic_control.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:35:15Z",
+      "side": 1,
+      "message": "Again, would be preferable to have declared in `intrinsic.def`",
+      "range": {
+        "startLine": 57,
+        "startChar": 5,
+        "endLine": 57,
+        "endChar": 19
+      },
+      "revId": "6bb884d86d4eb4188f730c24da189f21e87d352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16d777c3_62a66530",
+        "filename": "src/tint/ast/diagnostic_control.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:35:15Z",
+      "side": 1,
+      "message": "`///` and below",
+      "range": {
+        "startLine": 58,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 6
+      },
+      "revId": "6bb884d86d4eb4188f730c24da189f21e87d352d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
