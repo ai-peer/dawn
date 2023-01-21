@@ -152,6 +152,17 @@ bool Resolver::Resolve() {
     ApplyDiagnosticSeverities(mod);
     builder_->Sem().SetModule(mod);
 
+    if (result) {
+        // Run the uniformity analysis, which requires a complete semantic module.
+        if (!enabled_extensions_.Contains(ast::Extension::kChromiumDisableUniformityAnalysis)) {
+            if (!AnalyzeUniformity(builder_, dependencies_)) {
+                if (kUniformityFailuresAsError) {
+                    return false;
+                }
+            }
+        }
+    }
+
     return result;
 }
 
@@ -190,14 +201,6 @@ bool Resolver::ResolveInternal() {
 
     if (!validator_.PushConstants(entry_points_)) {
         return false;
-    }
-
-    if (!enabled_extensions_.Contains(ast::Extension::kChromiumDisableUniformityAnalysis)) {
-        if (!AnalyzeUniformity(builder_, dependencies_)) {
-            if (kUniformityFailuresAsError) {
-                return false;
-            }
-        }
     }
 
     bool result = true;
