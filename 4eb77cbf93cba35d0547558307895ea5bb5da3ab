@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16897306_5b738427",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:41:34Z",
+      "side": 1,
+      "message": "You could just use:\n\n```\nvalidator_.DiagnosticFilters().Push();\nTINT_DEFER(validator_.DiagnosticFilters().Pop());\n```",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "4eb77cbf93cba35d0547558307895ea5bb5da3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a6c17e_249bacf7",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 983,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-21T16:41:34Z",
+      "side": 1,
+      "message": "Another sign that `DiagnosticAttribute` shouldn\u0027t hold a `DiagnosticControl`",
+      "range": {
+        "startLine": 983,
+        "startChar": 12,
+        "endLine": 983,
+        "endChar": 30
+      },
+      "revId": "4eb77cbf93cba35d0547558307895ea5bb5da3ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
