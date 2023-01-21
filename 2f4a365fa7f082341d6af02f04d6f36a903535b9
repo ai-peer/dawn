@@ -39,6 +39,30 @@
       },
       "revId": "2f4a365fa7f082341d6af02f04d6f36a903535b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9648480_c0b2d291",
+        "filename": "src/dawn/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-21T00:37:51Z",
+      "side": 1,
+      "message": "Done - only need to use the existing `IsStencilOnlyFormat`",
+      "parentUuid": "bd3ffb6a_72cb8bbe",
+      "range": {
+        "startLine": 118,
+        "startChar": 16,
+        "endLine": 118,
+        "endChar": 94
+      },
+      "revId": "2f4a365fa7f082341d6af02f04d6f36a903535b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
