@@ -15,6 +15,8 @@
 #ifndef SRC_TINT_AST_DIAGNOSTIC_CONTROL_H_
 #define SRC_TINT_AST_DIAGNOSTIC_CONTROL_H_
 
+#include <unordered_map>
+
 #include "src/tint/ast/node.h"
 
 // Forward declarations
@@ -74,6 +76,9 @@ DiagnosticRule ParseDiagnosticRule(std::string_view str);
 constexpr const char* kDiagnosticRuleStrings[] = {
     "chromium_unreachable_code",
 };
+
+/// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
+using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;
 
 /// A diagnostic control used for diagnostic directives and attributes.
 class DiagnosticControl : public Castable<DiagnosticControl, Node> {
