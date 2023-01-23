@@ -22,6 +22,30 @@
       },
       "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6381c15d_ac412651",
+        "filename": "src/tint/ast/diagnostic_attribute.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-23T09:55:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why this feels strange to you. This essentially mirrors the WGSL grammar, where the `diagnostic_control` grammar rule is shared by both the directive and the attribute. I think it also makes it easier to share code for parsing and validation (which I haven\u0027t yet implemented).",
+      "parentUuid": "7468020c_89b25df7",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
