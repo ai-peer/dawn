@@ -266,7 +266,7 @@ TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingGreaterThan) {
     EXPECT_TRUE(e.errored);
     EXPECT_EQ(e.value, nullptr);
     ASSERT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:12: expected '>' for bitcast expression");
+    EXPECT_EQ(p->error(), "1:8: missing closing '>' for bitcast expression");
 }
 
 TEST_F(ParserImplTest, PrimaryExpression_Bitcast_MissingType) {

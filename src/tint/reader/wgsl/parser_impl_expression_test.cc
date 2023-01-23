@@ -463,6 +463,9 @@ struct Case {
     bool should_parse;
 };
 
+static bool ParsedAsTemplateArgumentList(BinaryOperatorInfo lhs_op, BinaryOperatorInfo rhs_op) {
+    return lhs_op.bit == kOpLt && rhs_op.bit & (kOpGt | kOpGe | kOpShr);
+}
 static std::ostream& operator<<(std::ostream& o, const Case& c) {
     return o << "a " << c.lhs_op.symbol << " b " << c.rhs_op.symbol << " c ";
 }
@@ -471,7 +474,8 @@ static std::vector<Case> Cases() {
     std::vector<Case> out;
     for (auto& lhs_op : kBinaryOperators) {
         for (auto& rhs_op : kBinaryOperators) {
-            bool should_parse = lhs_op.can_follow_without_paren & rhs_op.bit;
+            bool should_parse = (lhs_op.can_follow_without_paren & rhs_op.bit) ||
+                                ParsedAsTemplateArgumentList(lhs_op, rhs_op);
             out.push_back({lhs_op, rhs_op, should_parse});
         }
     }
@@ -487,7 +491,9 @@ TEST_P(ParserImplMixedBinaryOpTest, Test) {
     auto e = p->expression();
     if (GetParam().should_parse) {
         ASSERT_TRUE(e.matched) << e.errored;
-        EXPECT_TRUE(e->Is<ast::BinaryExpression>());
+        if (!ParsedAsTemplateArgumentList(GetParam().lhs_op, GetParam().rhs_op)) {
+            EXPECT_TRUE(e->Is<ast::BinaryExpression>());
+        }
     } else {
         EXPECT_FALSE(e.matched);
         EXPECT_TRUE(e.errored);
