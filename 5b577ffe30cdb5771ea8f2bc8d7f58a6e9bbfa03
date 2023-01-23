@@ -22,6 +22,30 @@
       },
       "revId": "5b577ffe30cdb5771ea8f2bc8d7f58a6e9bbfa03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "541baae7_43be3682",
+        "filename": "src/tint/ast/diagnostic_control.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-23T12:04:03Z",
+      "side": 1,
+      "message": "Done.\n\nI didn\u0027t know we auto-generated those things! Not sure how I missed the giant comment in the other files that says so.",
+      "parentUuid": "d4169295_60867101",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 2
+      },
+      "revId": "5b577ffe30cdb5771ea8f2bc8d7f58a6e9bbfa03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
