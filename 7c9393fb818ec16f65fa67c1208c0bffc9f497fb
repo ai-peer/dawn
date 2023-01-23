@@ -16,6 +16,57 @@
       "message": "Reworked this. The algorithm now _always_ pattern matches template argument lists, even for type contexts.\n\nTo do this, I had to carve out an exception for `a\u003cb || c\u003ed` to avoid this common pattern.",
       "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4898fb0a_1ac3e2be",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T14:53:45Z",
+      "side": 1,
+      "message": "Can this be a span on the token vector instead of a pointer?",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc0536af_ddb0365e",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T14:53:45Z",
+      "side": 1,
+      "message": "Does this need to check for `expr_depth \u003d\u003d 0`? The token stream could be invalid and cause this to go negative by having a `(;)` in side it?\n\nActualy, doesn\u0027t a `for(;;)` cause this issue as well if it accidentally get pulled into the template?",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8adbeb_58bf5bbd",
+        "filename": "src/tint/reader/wgsl/classify_template_args_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T14:53:45Z",
+      "side": 1,
+      "message": "Why is the outer `a` not a template here? The `||` causes `(b\u003cc) || d` but why don\u0027t we get `a` as a template with that as the value?",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

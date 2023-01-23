@@ -285,6 +285,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecfe0990_5e6663ca",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T14:53:45Z",
+      "side": 1,
+      "message": "I\u0027m not seeing `\u003d` or `:` were you planning on adding them (your comment sounded like you were)",
+      "parentUuid": "87454dbe_9b5a4409",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de0893f2_2899fc94",
         "filename": "src/tint/reader/wgsl/classify_template_args_test.cc",
         "patchSetId": 4
