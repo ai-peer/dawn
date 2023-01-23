@@ -157,6 +157,24 @@
       "parentUuid": "0b8adbeb_58bf5bbd",
       "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f75117ff_ce1e6ad7",
+        "filename": "src/tint/reader/wgsl/classify_template_args_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-23T18:37:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "365bb542_25e456b0",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
