@@ -33,6 +33,24 @@
       "message": "Bots are unhappy. Will +2 when they\u0027re green",
       "revId": "c48a31059f468b6e13ec6271b456f888350af460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7f2e5c7_8afca6b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T21:40:06Z",
+      "side": 1,
+      "message": "Bots seem happier now, PTAL.",
+      "parentUuid": "dd12fea1_1164dcf5",
+      "revId": "c48a31059f468b6e13ec6271b456f888350af460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
