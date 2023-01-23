@@ -46,6 +46,30 @@
       },
       "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8982d993_fa983da0",
+        "filename": "src/tint/ast/diagnostic_attribute.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-23T18:59:56Z",
+      "side": 1,
+      "message": "Each node carries a fair amount of baggage with it. The v-table and source being the basic cost of an AST node, plus the slot in the sem mapping table, the `Mark()` bit, etc. The AST attempts to mirror the grammar (not exactly, but fairly truthfully). This adds a node nesting for no apparent gain.\n\nExample: How does `ast::DiagnosticControl::source` differ from `ast::DiagnosticAttribute::source` ?\n\nIt seems like if you want to remove duplication between the two nodes, then just use a plain struct, used by both nodes. However, given that it\u0027s two fields, I don\u0027t really see the benefit.",
+      "parentUuid": "6381c15d_ac412651",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
