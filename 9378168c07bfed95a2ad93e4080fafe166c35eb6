@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ad60449_c5ee4df0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "Some feedback on the algorithm.\n\nHaven\u0027t looked at the tests.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32230abe_e3a5028d",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "Interestingly we could conceivably split as \u0027\u003e\u003e\u0027 \u0027\u003d\u0027\nBut currently that would be non-sensical in the language since \u0027\u003e\u003e\u0027 is an infix expression operator and \u0027\u003d\u0027 can\u0027t appear at the start of an expression.\n\nMay be worth a comment to that effect.\n\nI spotted this because the current rule for context-aware tokenization is you take the *longest* token candidate in the lookahead. But we are asserting here, effectively, that \u0027\u003e\u003e\u0027 is not going to be a candidate in that sense.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad72ecd_6b198d58",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "Note to myself: This could be the index into the tokens vector.\nThen we could check an invariant like:\n   index lower in the stack has a lower value.",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fec3a344_9c192b7f",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "Fuzzer will find the overflow case.\nShould saturate and error out if we hit the max.\n\nAlso, expr_depth could be unsigned.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f73b10f_ad12431f",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "This is saturating decrement, if expr_depth is unsigned.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82d9d164_b64dccd9",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "Should reset when we see a compound assignment like   \u003e\u003e\u003d\n\nThis would be the \"else\" case at line 116.\n\nIt\u0027s probably true right now that the LHS of an assignment can\u0027t have a naked \u0027\u003c\u0027 token in it, i.e. at the top level.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f2d30e_7e3ed423",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T18:58:53Z",
+      "side": 1,
+      "message": "I\u0027d argue it\u0027s also the case for \u0027}\u0027\nBut currently we don\u0027t allow \u0027}\u0027 to appear in an expression.\nJust looking for symmetries here, and extracting principles.\n\nLike, if we allowed if-as-an-expression, then we\u0027d have to handle { and } symmetrically like a parenthesized expression.\n\nWorth a comment anyway.",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
