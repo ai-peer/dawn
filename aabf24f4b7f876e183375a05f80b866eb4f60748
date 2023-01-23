@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3230d8e4_7314c007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-23T23:14:50Z",
+      "side": 1,
+      "message": "Looks \"straightforward\": nothing unexpected.\nThis will help me draft the spec update. :-)",
+      "revId": "aabf24f4b7f876e183375a05f80b866eb4f60748",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
