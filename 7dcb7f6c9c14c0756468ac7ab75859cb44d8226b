@@ -22,6 +22,30 @@
       },
       "revId": "7dcb7f6c9c14c0756468ac7ab75859cb44d8226b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81665b57_580aedd5",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-23T14:38:59Z",
+      "side": 1,
+      "message": "We need to ensure that directives are first. Transforms don\u0027t always add `enable` directives first, as they might have already cloned some other decls before they realize that they need to enable F16.\n\nIf its important that the order matches when somebody is invoking Tint for straight WGSL-\u003eWGSL, I could squash these loops into a single loop over declarations looking for directives.",
+      "parentUuid": "856e37df_88315485",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "7dcb7f6c9c14c0756468ac7ab75859cb44d8226b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
