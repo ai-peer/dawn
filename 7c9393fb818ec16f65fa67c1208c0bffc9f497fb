@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21b82bf2_8c921c85",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-23T15:15:14Z",
+      "side": 1,
+      "message": "It could, but what does that give you?",
+      "parentUuid": "4898fb0a_1ac3e2be",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc0536af_ddb0365e",
         "filename": "src/tint/reader/wgsl/classify_template_args.cc",
         "patchSetId": 5
@@ -48,6 +66,24 @@
       "writtenOn": "2023-01-23T14:53:45Z",
       "side": 1,
       "message": "Does this need to check for `expr_depth \u003d\u003d 0`? The token stream could be invalid and cause this to go negative by having a `(;)` in side it?\n\nActualy, doesn\u0027t a `for(;;)` cause this issue as well if it accidentally get pulled into the template?",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea244721_fe920ecc",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-23T15:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc0536af_ddb0365e",
       "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-01-23T14:53:45Z",
       "side": 1,
       "message": "Why is the outer `a` not a template here? The `||` causes `(b\u003cc) || d` but why don\u0027t we get `a` as a template with that as the value?",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "365bb542_25e456b0",
+        "filename": "src/tint/reader/wgsl/classify_template_args_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-23T15:15:14Z",
+      "side": 1,
+      "message": "Because it cannot be disambiguated as a nested template. This particular pattern requires parentheses to be treated as a template.",
+      "parentUuid": "0b8adbeb_58bf5bbd",
       "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

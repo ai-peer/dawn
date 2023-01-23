@@ -301,6 +301,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f94214_3cce45ac",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-23T15:15:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecfe0990_5e6663ca",
+      "revId": "1bb96c9e92b52a3df6630a8361cf444c193580be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de0893f2_2899fc94",
