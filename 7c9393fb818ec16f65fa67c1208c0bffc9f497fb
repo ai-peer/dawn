@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50c5ec22_2ee09c0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-23T12:16:42Z",
+      "side": 1,
+      "message": "Reworked this. The algorithm now _always_ pattern matches template argument lists, even for type contexts.\n\nTo do this, I had to carve out an exception for `a\u003cb || c\u003ed` to avoid this common pattern.",
+      "revId": "7c9393fb818ec16f65fa67c1208c0bffc9f497fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
