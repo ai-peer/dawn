@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "594fae78_fd3673e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T18:35:37Z",
+      "side": 1,
+      "message": "lgtm w/ nit",
+      "revId": "41d78df9f063dcbabf890fe1e6576b53b9e54ce9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db12b417_bd23d1e3",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-23T18:35:37Z",
+      "side": 1,
+      "message": "nit: tokens[idx + 1] ? and below?",
+      "revId": "41d78df9f063dcbabf890fe1e6576b53b9e54ce9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
