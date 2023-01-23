@@ -116,7 +116,7 @@ fn f() { a = >; }
 
 TEST_F(ParserImplErrorTest, BitcastExprMissingLessThan) {
     EXPECT("fn f() { x = bitcast(y); }",
-           R"(test.wgsl:1:21 error: expected '<' for bitcast expression
+           R"(test.wgsl:1:21 error: expected '< (opening template argument list)' for bitcast expression
 fn f() { x = bitcast(y); }
                     ^
 )");
@@ -124,9 +124,9 @@ fn f() { x = bitcast(y); }
 
 TEST_F(ParserImplErrorTest, BitcastExprMissingGreaterThan) {
     EXPECT("fn f() { x = bitcast<u32(y); }",
-           R"(test.wgsl:1:25 error: expected '>' for bitcast expression
+           R"(test.wgsl:1:21 error: missing closing '>' for bitcast expression
 fn f() { x = bitcast<u32(y); }
-                        ^
+                    ^
 )");
 }
 
@@ -571,7 +571,7 @@ TEST_F(ParserImplErrorTest, GlobalDeclInvalidAttribute) {
 
 TEST_F(ParserImplErrorTest, GlobalDeclSampledTextureMissingLessThan) {
     EXPECT("var x : texture_1d;",
-           R"(test.wgsl:1:19 error: expected '<' for sampled texture type
+           R"(test.wgsl:1:19 error: expected '< (opening template argument list)' for sampled texture type
 var x : texture_1d;
                   ^
 )");
@@ -579,9 +579,9 @@ var x : texture_1d;
 
 TEST_F(ParserImplErrorTest, GlobalDeclSampledTextureMissingGreaterThan) {
     EXPECT("var x : texture_1d<f32;",
-           R"(test.wgsl:1:23 error: expected '>' for sampled texture type
+           R"(test.wgsl:1:19 error: missing closing '>' for sampled texture type
 var x : texture_1d<f32;
-                      ^
+                  ^
 )");
 }
 
@@ -595,7 +595,7 @@ var x : texture_1d<1>;
 
 TEST_F(ParserImplErrorTest, GlobalDeclMultisampledTextureMissingLessThan) {
     EXPECT("var x : texture_multisampled_2d;",
-           R"(test.wgsl:1:32 error: expected '<' for multisampled texture type
+           R"(test.wgsl:1:32 error: expected '< (opening template argument list)' for multisampled texture type
 var x : texture_multisampled_2d;
                                ^
 )");
@@ -603,9 +603,9 @@ var x : texture_multisampled_2d;
 
 TEST_F(ParserImplErrorTest, GlobalDeclMultisampledTextureMissingGreaterThan) {
     EXPECT("var x : texture_multisampled_2d<f32;",
-           R"(test.wgsl:1:36 error: expected '>' for multisampled texture type
+           R"(test.wgsl:1:32 error: missing closing '>' for multisampled texture type
 var x : texture_multisampled_2d<f32;
-                                   ^
+                               ^
 )");
 }
 
@@ -664,7 +664,7 @@ static_assert true static_assert true;
 
 TEST_F(ParserImplErrorTest, GlobalDeclStorageTextureMissingLessThan) {
     EXPECT("var x : texture_storage_2d;",
-           R"(test.wgsl:1:27 error: expected '<' for storage texture type
+           R"(test.wgsl:1:27 error: expected '< (opening template argument list)' for storage texture type
 var x : texture_storage_2d;
                           ^
 )");
@@ -672,9 +672,9 @@ var x : texture_storage_2d;
 
 TEST_F(ParserImplErrorTest, GlobalDeclStorageTextureMissingGreaterThan) {
     EXPECT("var x : texture_storage_2d<r32uint, read;",
-           R"(test.wgsl:1:41 error: expected '>' for storage texture type
+           R"(test.wgsl:1:27 error: missing closing '>' for storage texture type
 var x : texture_storage_2d<r32uint, read;
-                                        ^
+                          ^
 )");
 }
 
@@ -775,9 +775,9 @@ type meow = f32
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarArrayMissingGreaterThan) {
     EXPECT("var i : array<u32, 3;",
-           R"(test.wgsl:1:21 error: expected '>' for array declaration
+           R"(test.wgsl:1:14 error: missing closing '>' for array declaration
 var i : array<u32, 3;
-                    ^
+             ^
 )");
 }
 
@@ -956,9 +956,9 @@ var ^ : mat4x4;
 }
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarMatrixMissingGreaterThan) {
-    EXPECT("var i : mat4x4<u32;", R"(test.wgsl:1:19 error: expected '>' for matrix
+    EXPECT("var i : mat4x4<u32;", R"(test.wgsl:1:15 error: missing closing '>' for matrix
 var i : mat4x4<u32;
-                  ^
+              ^
 )");
 }
 
@@ -979,7 +979,7 @@ var i : i32
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarPtrMissingLessThan) {
     EXPECT("var i : ptr;",
-           R"(test.wgsl:1:12 error: expected '<' for ptr declaration
+           R"(test.wgsl:1:12 error: expected '< (opening template argument list)' for ptr declaration
 var i : ptr;
            ^
 )");
@@ -987,9 +987,9 @@ var i : ptr;
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarPtrMissingGreaterThan) {
     EXPECT("var i : ptr<private, u32;",
-           R"(test.wgsl:1:25 error: expected '>' for ptr declaration
+           R"(test.wgsl:1:12 error: missing closing '>' for ptr declaration
 var i : ptr<private, u32;
-                        ^
+           ^
 )");
 }
 
@@ -1020,7 +1020,7 @@ var i : ptr<private, 1>;
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarAtomicMissingLessThan) {
     EXPECT("var i : atomic;",
-           R"(test.wgsl:1:15 error: expected '<' for atomic declaration
+           R"(test.wgsl:1:15 error: expected '< (opening template argument list)' for atomic declaration
 var i : atomic;
               ^
 )");
@@ -1028,9 +1028,9 @@ var i : atomic;
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarAtomicMissingGreaterThan) {
     EXPECT("var i : atomic<u32 x;",
-           R"(test.wgsl:1:20 error: expected '>' for atomic declaration
+           R"(test.wgsl:1:15 error: missing closing '>' for atomic declaration
 var i : atomic<u32 x;
-                   ^
+              ^
 )");
 }
 
@@ -1052,9 +1052,9 @@ var<private i : i32
 }
 
 TEST_F(ParserImplErrorTest, GlobalDeclVarVectorMissingGreaterThan) {
-    EXPECT("var i : vec3<u32;", R"(test.wgsl:1:17 error: expected '>' for vector
+    EXPECT("var i : vec3<u32;", R"(test.wgsl:1:13 error: missing closing '>' for vector
 var i : vec3<u32;
-                ^
+            ^
 )");
 }
 
