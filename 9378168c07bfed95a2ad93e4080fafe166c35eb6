@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "605ef39e_60f96295",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-23T19:47:11Z",
+      "side": 1,
+      "message": "Just used a `uint64_t` instead.",
+      "parentUuid": "8e1b7f9d_9983f9f9",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f73b10f_ad12431f",
