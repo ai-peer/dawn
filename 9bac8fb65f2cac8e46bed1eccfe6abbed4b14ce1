@@ -16,6 +16,23 @@
       "message": "Friendly post-weekend review ping, just to make sure it doesn\u0027t get lost in your inboxes!",
       "revId": "9bac8fb65f2cac8e46bed1eccfe6abbed4b14ce1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ba00d7_6c309f59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-23T18:25:16Z",
+      "side": 1,
+      "message": "LGTM, but Dan for +2, as he\u0027s modifying the build rules at the moment.",
+      "revId": "9bac8fb65f2cac8e46bed1eccfe6abbed4b14ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
