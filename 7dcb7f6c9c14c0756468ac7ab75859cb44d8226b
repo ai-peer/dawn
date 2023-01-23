@@ -46,6 +46,30 @@
       },
       "revId": "7dcb7f6c9c14c0756468ac7ab75859cb44d8226b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0deedcf6_08e9000b",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-23T18:54:53Z",
+      "side": 1,
+      "message": "\u003e Transforms don\u0027t always add `enable` directives first, as they might have already cloned some other decls before they realize that they need to enable F16.\n\nEww. That\u0027s a nasty bodge, which I wasn\u0027t aware of. Oh well - I guess this isn\u0027t making it worse.",
+      "parentUuid": "81665b57_580aedd5",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 5
+      },
+      "revId": "7dcb7f6c9c14c0756468ac7ab75859cb44d8226b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
