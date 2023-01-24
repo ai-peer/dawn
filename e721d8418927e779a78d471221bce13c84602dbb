@@ -69,6 +69,30 @@
       },
       "revId": "e721d8418927e779a78d471221bce13c84602dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03382f6b_7a74aef9",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T14:28:00Z",
+      "side": 1,
+      "message": "Tweaked this, hopefully better.",
+      "parentUuid": "2cc1a417_3ec259eb",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 21
+      },
+      "revId": "e721d8418927e779a78d471221bce13c84602dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
