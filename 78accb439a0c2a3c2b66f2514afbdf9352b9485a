@@ -33,6 +33,29 @@
       "message": "Feel free to suggest a better name.",
       "revId": "78accb439a0c2a3c2b66f2514afbdf9352b9485a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b75c99bb_10bb06d9",
+        "filename": "src/tint/reader/spirv/parser.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T14:04:26Z",
+      "side": 1,
+      "message": "I\u0027d recommend using a `struct Options` - gives room for more defaulted flags.",
+      "range": {
+        "startLine": 31,
+        "startChar": 50,
+        "endLine": 31,
+        "endChar": 92
+      },
+      "revId": "78accb439a0c2a3c2b66f2514afbdf9352b9485a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
