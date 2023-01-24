@@ -51,6 +51,70 @@
       "parentUuid": "c35dd726_d5e1fe54",
       "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f9b86d_383a7076",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-24T18:59:25Z",
+      "side": 1,
+      "message": "I think there\u0027s a fair amount of risk since this adds quite a bit of complexity to the zero initialization code paths, with divergence in what the backends do. It seems the zero initialization could be reworked to better account for CPU memset. It\u0027s important that the zero initialization is simple because it is security critical. We can\u0027t have bugs to creep up in it.\n\nWhat does Graphite Dawn need in terms of map async latency?\nWe already have optimized the `mappedAtCreation` case to perform memset. If Graphite-Dawn creates all mappable buffers this way since it knows it will use it on the CPU immediately, then we don\u0027t need to optimize the `!mappedAtCreation` case yet.\nAfter creating with `mappedAtCreation` and unmapping, the buffer should continue to stay initialized. Future calls to MapAsync should not need to initialize it again.",
+      "parentUuid": "a9109569_e34fa079",
+      "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdda4b4a_dbe4fc9b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-24T18:59:25Z",
+      "side": 1,
+      "message": "nit: use GetAllocatedSize",
+      "range": {
+        "startLine": 413,
+        "startChar": 22,
+        "endLine": 413,
+        "endChar": 29
+      },
+      "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00bb0265_07997e2f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-24T18:59:25Z",
+      "side": 1,
+      "message": "nit: only do this if the size fits in size_t, or as Corentin said, based on some heuristic since it would likely be slower to memset gigabytes of memory than using the GPU instead.",
+      "range": {
+        "startLine": 413,
+        "startChar": 4,
+        "endLine": 413,
+        "endChar": 10
+      },
+      "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
