@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0104553c_c8bb5bff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T13:38:04Z",
+      "side": 1,
+      "message": "Adding David too as it involves the SPIR-V reader.",
+      "revId": "78accb439a0c2a3c2b66f2514afbdf9352b9485a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8f0f6cc_8404d686",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T13:38:04Z",
+      "side": 1,
+      "message": "Feel free to suggest a better name.",
+      "revId": "78accb439a0c2a3c2b66f2514afbdf9352b9485a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
