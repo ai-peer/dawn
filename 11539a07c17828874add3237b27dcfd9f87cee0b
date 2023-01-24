@@ -187,6 +187,30 @@
       },
       "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3785906_dd6df23f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-24T18:40:49Z",
+      "side": 1,
+      "message": "what if instead we call it like `Buffer::TransitionMappableBuffersEagerly(this, std::move(mRecordingContext.mappableBuffersForEagerTransition));`\n\nand change TransitionMappableBuffersEagerly to take the std::set by value instead of by ref. Then, we can assert after TransitionMappableBuffersEagerly that no new buffers were added.",
+      "parentUuid": "52e8f20a_6bf745aa",
+      "range": {
+        "startLine": 430,
+        "startChar": 52,
+        "endLine": 430,
+        "endChar": 80
+      },
+      "revId": "11539a07c17828874add3237b27dcfd9f87cee0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
