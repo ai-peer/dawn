@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef83ea5_75a181cd",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T14:27:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6e0d97f_8f0f4176",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 23
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5b05654_04d808c4",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2ae3c44_a8745dc3",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T14:27:34Z",
+      "side": 1,
+      "message": "If there are no builtin calls that had a given severity level, then there will be no edges from that `RequiredToBeUniform` node and the traversal will immediately stop.",
+      "parentUuid": "a5b05654_04d808c4",
+      "range": {
+        "startLine": 466,
+        "startChar": 12,
+        "endLine": 472,
+        "endChar": 13
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b0f44a3_68fb9ae9",
         "filename": "src/tint/resolver/uniformity_test.cc",
         "patchSetId": 5
@@ -60,6 +108,30 @@
       "writtenOn": "2023-01-24T14:02:09Z",
       "side": 1,
       "message": "Could you not just use `utils::ToString(severity)` ?",
+      "range": {
+        "startLine": 7880,
+        "startChar": 4,
+        "endLine": 7891,
+        "endChar": 5
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d01b2ca3_4df1959b",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 7891,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T14:27:34Z",
+      "side": 1,
+      "message": "The discrepancy between \"info\" and \"note\" means not right now, but if and when we change that then yes, we could. I\u0027ll add a comment.",
+      "parentUuid": "6b0f44a3_68fb9ae9",
       "range": {
         "startLine": 7880,
         "startChar": 4,
