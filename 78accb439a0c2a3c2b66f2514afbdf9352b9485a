@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a7dc7d5_ac8d253d",
+        "filename": "src/tint/cmd/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:39:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f8f0f6cc_8404d686",
+      "revId": "78accb439a0c2a3c2b66f2514afbdf9352b9485a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b75c99bb_10bb06d9",

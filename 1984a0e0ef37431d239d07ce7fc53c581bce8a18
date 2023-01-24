@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf97b70_fb4f1c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:39:49Z",
+      "side": 1,
+      "message": "I would also be ok with having the default be true.\nBut no big deal.",
+      "revId": "1984a0e0ef37431d239d07ce7fc53c581bce8a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
