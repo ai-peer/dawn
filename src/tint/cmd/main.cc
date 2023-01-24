@@ -103,7 +103,9 @@ struct Options {
 
     bool rename_all = false;
 
+#if TINT_BUILD_SPV_READER
     tint::reader::spirv::Options spirv_reader_options;
+#endif
 
     std::vector<std::string> transforms;
 
@@ -449,7 +451,12 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
         } else if (arg == "--parse-only") {
             opts->parse_only = true;
         } else if (arg == "--allow-non-uniform-derivatives") {
+#if TINT_BUILD_SPV_READER
             opts->spirv_reader_options.allow_non_uniform_derivatives = true;
+#else
+            std::cerr << "Tint not built with the SPIR-V reader enabled" << std::endl;
+            return false;
+#endif
         } else if (arg == "--disable-workgroup-init") {
             opts->disable_workgroup_init = true;
         } else if (arg == "--demangle") {
