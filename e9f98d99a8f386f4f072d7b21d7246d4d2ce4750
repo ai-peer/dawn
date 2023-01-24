@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f797da7d_9abc953c",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:09:42Z",
+      "side": 1,
+      "message": "The `LessThan` should be removed, yea? It can no longer happen as an array template.",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac01109_e0ef5ff8",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:09:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e084bbc_e2095bc4",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:09:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad28795_8345b769",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3736,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:09:42Z",
+      "side": 1,
+      "message": "This should be an `||` and, really the LessThan is impossible, no?",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b06f44f_6efae499",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:09:42Z",
+      "side": 1,
+      "message": "The `( opening template argument list)` reads weird. Maybe remove?",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
