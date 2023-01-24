@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db96c60c_f374293a",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:33:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2ebbe026_8f4ddc2d",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad72ecd_6b198d58",
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "\u003e This could be the index into the tokens vector.\n\nWe could, but it has greater runtime overhead for little gain.",
       "parentUuid": "9ad72ecd_6b198d58",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5694e331_4de0bea7",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:33:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8b63edd0_388e93e7",
       "range": {
         "startLine": 61,
         "startChar": 8,
@@ -223,6 +265,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c873303_29b6ff51",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:33:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a45455c6_31fe4474",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83f2d30e_7e3ed423",
@@ -254,6 +314,24 @@
       "side": 1,
       "message": "Ack, could add - but not sure where to draw the line on this. Invalid token streams could terminate the scan, but what do you gain?",
       "parentUuid": "83f2d30e_7e3ed423",
+      "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe12db74_04e64e55",
+        "filename": "src/tint/reader/wgsl/classify_template_args.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-24T15:33:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5ea4625d_d59840be",
       "revId": "9378168c07bfed95a2ad93e4080fafe166c35eb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
