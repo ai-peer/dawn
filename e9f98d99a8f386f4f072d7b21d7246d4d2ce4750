@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f0848a0_49c57b6e",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T15:16:26Z",
+      "side": 1,
+      "message": "Inside `expect_type_specifier_array` we detect `kLessThan` to warn that the closing `\u003e` was not found.",
+      "parentUuid": "f797da7d_9abc953c",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5ac01109_e0ef5ff8",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 5
@@ -31,6 +49,24 @@
       "writtenOn": "2023-01-24T15:09:42Z",
       "side": 1,
       "message": "ditto",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c99ab8e_d457e707",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1145,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T15:16:26Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "5ac01109_e0ef5ff8",
       "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d82d1a9b_f014ff31",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T15:16:26Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "7e084bbc_e2095bc4",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ad28795_8345b769",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 5
@@ -71,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f97eacb8_b7499e25",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3736,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T15:16:26Z",
+      "side": 1,
+      "message": "No. `tok` is the expected token, `t.type()` is the got token.",
+      "parentUuid": "3ad28795_8345b769",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b06f44f_6efae499",
         "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
         "patchSetId": 5
@@ -82,6 +154,24 @@
       "writtenOn": "2023-01-24T15:09:42Z",
       "side": 1,
       "message": "The `( opening template argument list)` reads weird. Maybe remove?",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27e9ffad_1b87176f",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T15:16:26Z",
+      "side": 1,
+      "message": "Yeah, I want to remove these. Will do as a followup.",
+      "parentUuid": "9b06f44f_6efae499",
       "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
