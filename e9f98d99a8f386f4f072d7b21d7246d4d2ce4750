@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4592f64_c47d493d",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:21:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d82d1a9b_f014ff31",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ad28795_8345b769",
@@ -141,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa68b21d_3704ab83",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 3736,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:21:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f97eacb8_b7499e25",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b06f44f_6efae499",
@@ -172,6 +208,24 @@
       "side": 1,
       "message": "Yeah, I want to remove these. Will do as a followup.",
       "parentUuid": "9b06f44f_6efae499",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "615ba29a_ade7cff6",
+        "filename": "src/tint/reader/wgsl/parser_impl_error_msg_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-01-24T15:21:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "27e9ffad_1b87176f",
       "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
