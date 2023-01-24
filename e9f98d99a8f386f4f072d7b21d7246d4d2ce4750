@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efc00a62_7c1775f8",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-01-24T15:50:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1f0848a0_49c57b6e",
+      "revId": "e9f98d99a8f386f4f072d7b21d7246d4d2ce4750",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ac01109_e0ef5ff8",
