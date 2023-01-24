@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5100436_144ff485",
+        "filename": "src/tint/sem/diagnostic_severity_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T21:36:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "436d306a_bad223a2",
+      "revId": "6336c97cbd2e15900a13a2c0352759888a78b716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0c34bc4_c46eb66c",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f872475f_8938f50c",
+        "filename": "src/tint/sem/info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T21:36:57Z",
+      "side": 1,
+      "message": "I\u0027ve done what I think(?) you suggested earlier. PTAL.",
+      "parentUuid": "c0c34bc4_c46eb66c",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "6336c97cbd2e15900a13a2c0352759888a78b716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "48715f0d_d3054a67",
         "filename": "src/tint/sem/node.h",
         "patchSetId": 1
@@ -54,6 +96,30 @@
       "writtenOn": "2023-01-23T11:03:00Z",
       "side": 1,
       "message": "The only things that can have severities are `sem::Function` and `sem::Statement`. You already deal with the distinction of semantic types in `Info::DiagnosticSeverity` - so why don\u0027t we put this info on both subclasses? We\u0027d then reduce the overhead across all nodes.",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "6336c97cbd2e15900a13a2c0352759888a78b716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f115bc5_5607df2b",
+        "filename": "src/tint/sem/node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T21:36:57Z",
+      "side": 1,
+      "message": "Copied these methods and the map into `sem::Module`, `sem::Function`, and `sem::Statement`, and made the functions that previous operated on `sem::Node` generic.",
+      "parentUuid": "48715f0d_d3054a67",
       "range": {
         "startLine": 35,
         "startChar": 0,
