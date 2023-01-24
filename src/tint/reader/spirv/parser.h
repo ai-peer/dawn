@@ -26,8 +26,9 @@ namespace tint::reader::spirv {
 /// `program.Diagnostics.contains_errors()` will be true, and the
 /// `program.Diagnostics()` will describe the error.
 /// @param input the source data
+/// @param allow_non_uniform_derivatives `true` to suppress errors about non-uniform derivative ops
 /// @returns the parsed program
-Program Parse(const std::vector<uint32_t>& input);
+Program Parse(const std::vector<uint32_t>& input, bool allow_non_uniform_derivatives = false);
 
 }  // namespace tint::reader::spirv
 
