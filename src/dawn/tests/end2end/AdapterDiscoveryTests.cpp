@@ -51,6 +51,20 @@ using testing::SaveArg;
 
 class AdapterDiscoveryTests : public ::testing::Test {};
 
+TEST(AdapterDiscoveryTests, MultipleDiscoveries) {
+    dawn::native::Instance instance;
+
+    instance.DiscoverDefaultAdapters();
+    instance.DiscoverDefaultAdapters();
+    instance.DiscoverDefaultAdapters();
+
+    const auto& adapters = instance.GetAdapters();
+    for (const auto& adapter : adapters) {
+        wgpu::AdapterProperties properties;
+        adapter.GetProperties(&properties);
+    }
+}
+
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
 // Test only discovering the SwiftShader adapter
 TEST(AdapterDiscoveryTests, OnlySwiftShader) {
