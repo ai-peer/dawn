@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6e0d97f_8f0f4176",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T14:02:09Z",
+      "side": 1,
+      "message": "I know these are all initialized in the constructor, but please add a `\u003d nullptr` to these. It\u0027s easy to change the initialization logic, and end up with floating pointers which are scary.",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 234,
+        "endChar": 23
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b05654_04d808c4",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T14:02:09Z",
+      "side": 1,
+      "message": "There might be potential optimizations where you could skip over these traversals if there were no diagnostics at the given level. Not immediately cleare how far the `traverse` goes if there\u0027s nothing to find.",
+      "range": {
+        "startLine": 466,
+        "startChar": 12,
+        "endLine": 472,
+        "endChar": 13
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0f44a3_68fb9ae9",
+        "filename": "src/tint/resolver/uniformity_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 7891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-24T14:02:09Z",
+      "side": 1,
+      "message": "Could you not just use `utils::ToString(severity)` ?",
+      "range": {
+        "startLine": 7880,
+        "startChar": 4,
+        "endLine": 7891,
+        "endChar": 5
+      },
+      "revId": "374449361b59327274f71ae16c8fb16d68a924af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
