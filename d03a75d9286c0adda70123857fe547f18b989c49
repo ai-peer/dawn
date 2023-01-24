@@ -70,6 +70,30 @@
       },
       "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "584086bb_61fb6537",
+        "filename": "src/tint/ast/diagnostic_attribute.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-24T17:34:02Z",
+      "side": 1,
+      "message": "As discussed offline, will refactor later to use a plain struct for `DiagnosticControl` and use it inside AST nodes for `DiagnosticDirective` and `DiagnosticAttribute.`",
+      "parentUuid": "8982d993_fa983da0",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 48
+      },
+      "revId": "d03a75d9286c0adda70123857fe547f18b989c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
