@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a985b77_12a08d37",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-25T12:48:21Z",
+      "side": 1,
+      "message": "You are right. This change is good to have, but it is not really necessary for chrome graphite, since graphite will disable buffer initialization for better performance probably. and we can use `mappedAtCreation` as well.",
+      "parentUuid": "e0f9b86d_383a7076",
+      "revId": "694bc772ec5dd47939077079ed4b8263c8f65f34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fdda4b4a_dbe4fc9b",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 12
