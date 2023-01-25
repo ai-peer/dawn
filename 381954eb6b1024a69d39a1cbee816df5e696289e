@@ -39,6 +39,30 @@
       },
       "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a004cc0f_784864e5",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-01-25T14:52:29Z",
+      "side": 1,
+      "message": "This method is a static method, `GetDevice()` will not work. I can get the device from a buffer in `buffers`, but it looks weird.",
+      "parentUuid": "6f93d318_fbd483a5",
+      "range": {
+        "startLine": 417,
+        "startChar": 46,
+        "endLine": 417,
+        "endChar": 60
+      },
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
