@@ -93,6 +93,30 @@
       },
       "revId": "e721d8418927e779a78d471221bce13c84602dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b6779d_b9ae969e",
+        "filename": "src/tint/utils/string.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-25T12:06:44Z",
+      "side": 1,
+      "message": "Much, thanks",
+      "parentUuid": "03382f6b_7a74aef9",
+      "range": {
+        "startLine": 92,
+        "startChar": 19,
+        "endLine": 92,
+        "endChar": 21
+      },
+      "revId": "e721d8418927e779a78d471221bce13c84602dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
