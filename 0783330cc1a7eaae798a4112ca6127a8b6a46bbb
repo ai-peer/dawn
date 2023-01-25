@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdf2ac6d_a08d576e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-25T23:40:14Z",
+      "side": 1,
+      "message": "For reference, there was an internal chat about this at the time it was written. Included here for reference.\n\n//----------------------//\n\nBrandon Jones, Aug 11, 10:35 AM\nQuestion on returning an invalid device from requestDevice(), as discussed in https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1234617\n\nGiven that DeviceBase has several pure virtual functions, would there be downsides that I\u0027m not aware of to creating a Null Device, forcing it to be lost, and then returning that in the case of an error?\n\nKai Ninomiya, Aug 11, 11:25 AM\nCan we either make them non pure virtual, or create an ErrorDevice subclass?\n\nlike we have TextureBase::MakeError\n\nidk if that will work for devices though\n\nnull is prooooobably fine but I don\u0027t know\n\nBrandon Jones, Aug 11, 12:17 PM\nI initially thought about making an ErrorDevice subclass, but after poking around a bit I felt like it was pretty much just going to end up being a near copy of the Null device.\n\nAustin Eng, Aug 11, 12:21 PM\nI think generally it should be fine - we would of course need to make sure we test it well. null device originally wasn\u0027t intended for anything except running validation tests\n\nCorentin Wallez, Aug 12, 1:23 AM\nWe\u0027ll still need a mode where NullDevice doesn\u0027t return validation errors for everything, because that\u0027s used for validation tests. There\u0027s also all the NullBuffer NullTexture and friends that aren\u0027t really needed because we can use Buffer::CreateError and similar for all objects. So IMHO there isn\u0027t that much duplication and we could add an ErroDevice. But a bool on DeviceNull would work as well, either way seems ok.",
+      "revId": "0783330cc1a7eaae798a4112ca6127a8b6a46bbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
