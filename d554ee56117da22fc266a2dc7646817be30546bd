@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c826ab8_53d574ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b5b9d0c_76713b7b",
+      "range": {
+        "startLine": 11,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 15
+      },
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "180459a8_b4527cc3",
@@ -255,6 +279,24 @@
       "side": 1,
       "message": "I had to break it up because we\u0027re generating two different sets of files and we need to call `get_target_outputs` to get the outputted files. I couldn\u0027t find a way to filter files from `get_target_outputs`.",
       "parentUuid": "0b01a9dc_48c41f59",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adb3244_cb8e2375",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:34:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c2d9053_11df4dcc",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
