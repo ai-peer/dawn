@@ -70,6 +70,30 @@
       },
       "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "867bf7c4_ab81337b",
+        "filename": "src/tint/resolver/diagnostic_control_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-25T16:28:10Z",
+      "side": 1,
+      "message": "A general solution to this could be to sort the diagnostics after they\u0027ve been accumulated.\n\nSort by file, line, column then severity. Although this may order `note` above the parent `error` diagnostic, which further suggests that the current flat list is the wrong design.",
+      "parentUuid": "a1681ef1_d11be229",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 74
+      },
+      "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
