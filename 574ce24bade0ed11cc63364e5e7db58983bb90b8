@@ -46,6 +46,30 @@
       },
       "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1681ef1_d11be229",
+        "filename": "src/tint/resolver/diagnostic_control_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-25T16:14:56Z",
+      "side": 1,
+      "message": "\u003e What\u0027s odd about it\n\n`error` hidden under a bunch of `warning` spew. Colorisation would help.",
+      "parentUuid": "5c9afc5c_ec94ef53",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 74
+      },
+      "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
