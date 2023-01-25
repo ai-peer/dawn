@@ -94,6 +94,30 @@
       },
       "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5cca676_3236b378",
+        "filename": "src/tint/resolver/diagnostic_control_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-25T21:18:29Z",
+      "side": 1,
+      "message": "I see. Yeah, this is a more general problem. The case shown in this test is particularly contrived as it only happens for a conflict between unknown diagnostic rules, which I expect to be pretty rare (the conflict likely would have been resolved when testing against the consumer that did understand those rules).\n\nUsers of the WebGPU API can control which severities they print first when printing  compilation messages. With offline Tint we do have colorization to help as you mention.\n\nSo I\u0027m inclined to do nothing for this CL, but we can open an issue about possibly sorting (and nesting `note` messages) for future us to deal with.",
+      "parentUuid": "867bf7c4_ab81337b",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 74
+      },
+      "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
