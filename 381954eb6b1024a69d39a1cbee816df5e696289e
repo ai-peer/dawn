@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8cf75e0_dc392ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T14:36:22Z",
+      "side": 1,
+      "message": "LGTM, one more comment",
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f93d318_fbd483a5",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T14:36:22Z",
+      "side": 1,
+      "message": "like the rest of the Transition methods, I still think this method should take in CommandRecordingContext* as an argument since it is recording a pipeline barrier into it.\n\nIt doesn\u0027t need Device* as an argument since the device isn\u0027t really modified by the function (only used to get the `VulkanFunction`), so we can do  `ToBackend(GetDevice())-\u003efn` instead",
+      "range": {
+        "startLine": 417,
+        "startChar": 46,
+        "endLine": 417,
+        "endChar": 60
+      },
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
