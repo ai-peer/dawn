@@ -83,6 +83,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4451f6_59a9dd2c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 26
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ef1ae4_ca7b7c4f",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c26c9d6_c2f67c6e",
@@ -96,6 +114,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "nit: Maybe this file could be in src/dawn/fuzzers to be better scoped (we want to move dawn.json eventually too).",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "538fe850_abce6174",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4c26c9d6_c2f67c6e",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -164,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8b46476_ad1cda4f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51b01d38_3c483937",
+      "range": {
+        "startLine": 1045,
+        "startChar": 54,
+        "endLine": 1045,
+        "endChar": 56
+      },
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b01a9dc_48c41f59",
@@ -183,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c2d9053_11df4dcc",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "I had to break it up because we\u0027re generating two different sets of files and we need to call `get_target_outputs` to get the outputted files. I couldn\u0027t find a way to filter files from `get_target_outputs`.",
+      "parentUuid": "0b01a9dc_48c41f59",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "422af91d_a5446fda",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 26
@@ -194,6 +272,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "This needs modification too to account for the lpm.json.",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a7249c_d3d1031c",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 26
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "422af91d_a5446fda",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -280,6 +376,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b44391_3bacda40",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 26
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2fb37537_64f8c9cd",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcd3035b_2fc9b74d",
@@ -334,6 +448,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7b1c13c_d227b7cd",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "I\u0027m curious what the concern is here? We have our own rotation for detecting broken fuzzer builds on clusterfuzz that chrome-security@ watches because changes to code/apis often break fuzzers. This fuzzer will be included even though it is in third_party/.",
+      "parentUuid": "1923b2b0_ae0aa90e",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "500455fc_fda2c4c7",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 26
@@ -362,6 +494,24 @@
       "writtenOn": "2022-12-19T13:37:36Z",
       "side": 1,
       "message": "Ah you probably used two targets so that get_target_outputs() works here?",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c09f6657_4e7a15f2",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Yeah",
+      "parentUuid": "a7fc90cf_425d0470",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -415,6 +565,24 @@
       "side": 1,
       "message": "Ok sounds good to figure out as a follow up much later.",
       "parentUuid": "1ba5d8ba_a17ba395",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10781c94_02433497",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T17:30:29Z",
+      "side": 1,
+      "message": "Filed crbug.com/1410213 so this doesn\u0027t get lost.",
+      "parentUuid": "a284be27_eabac803",
       "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
