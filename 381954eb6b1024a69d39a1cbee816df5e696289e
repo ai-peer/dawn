@@ -135,6 +135,30 @@
       },
       "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f962ccc_49af5527",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T15:15:43Z",
+      "side": 1,
+      "message": "sure, but passing in Device* opens up many more possibilities to what side effects the function may have. Right now, it looks as if it could even be making a whole new VkCommanndBuffer, recording the pipeline barrier to it, and submitting to the queue.\nPassing in more, but more precise params limits the context that the reader needs to consider when reasoning about what the code does.\n\nI also think the more precise params is better for the future when we handle multithreading. `const VulkanFunctions\u0026` is clearly const and immutable; it doesn\u0027t need a lock. CommandRecordingContext* will need to be guarded by a lock, but presumably that lock would have already been acquired at the start of the Submit.\nPassing in Device* is a concern because using it may acquire locks again - potential daadlock.",
+      "parentUuid": "e1f3ede0_d89ff248",
+      "range": {
+        "startLine": 417,
+        "startChar": 46,
+        "endLine": 417,
+        "endChar": 60
+      },
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
