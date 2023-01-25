@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "123f3025_c96da25d",
+        "filename": "src/tint/sem/info.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-25T00:44:07Z",
+      "side": 1,
+      "message": "Perfect, thank you",
+      "parentUuid": "f872475f_8938f50c",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "6336c97cbd2e15900a13a2c0352759888a78b716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48715f0d_d3054a67",
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "Copied these methods and the map into `sem::Module`, `sem::Function`, and `sem::Statement`, and made the functions that previous operated on `sem::Node` generic.",
       "parentUuid": "48715f0d_d3054a67",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 57
+      },
+      "revId": "6336c97cbd2e15900a13a2c0352759888a78b716",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e10682_dd1784d8",
+        "filename": "src/tint/sem/node.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-25T00:44:07Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "6f115bc5_5607df2b",
       "range": {
         "startLine": 35,
         "startChar": 0,
