@@ -16,6 +16,23 @@
       "message": "PTAL! It was impossible to NOT hit the removed assert on a Vulkan 1.0 device.",
       "revId": "e73957f3e7547e48ad138b5f220600ea584875d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86b716e7_32facb3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T23:19:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e73957f3e7547e48ad138b5f220600ea584875d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

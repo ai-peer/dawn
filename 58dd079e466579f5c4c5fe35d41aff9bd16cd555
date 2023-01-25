@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b60a5bf_0e38d578",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T23:19:43Z",
+      "side": 0,
+      "message": "did you intend to remove the assert?",
+      "revId": "58dd079e466579f5c4c5fe35d41aff9bd16cd555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
