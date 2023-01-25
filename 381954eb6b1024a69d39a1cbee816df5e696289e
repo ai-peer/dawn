@@ -87,6 +87,30 @@
       },
       "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5307a59e_7d27068d",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T14:54:38Z",
+      "side": 1,
+      "message": "right, thanks for the clarification.\nhow about we get VulkanFunctions at the calllsite and pass in a reference to it then?",
+      "parentUuid": "a004cc0f_784864e5",
+      "range": {
+        "startLine": 417,
+        "startChar": 46,
+        "endLine": 417,
+        "endChar": 60
+      },
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
