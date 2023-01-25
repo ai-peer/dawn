@@ -22,6 +22,30 @@
       },
       "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c9afc5c_ec94ef53",
+        "filename": "src/tint/resolver/diagnostic_control_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-25T16:04:18Z",
+      "side": 1,
+      "message": "What\u0027s odd about it / What would you prefer?\n\nI believe this is how we usually show these sorts of conflicts (e.g. duplicate attributes, duplicate `@location()` parameters). We show the second thing, and then point back to the thing that was previously declared/set.",
+      "parentUuid": "121ae606_69b7f5d1",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 74
+      },
+      "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
