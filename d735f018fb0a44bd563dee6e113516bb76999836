@@ -153,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0463eb7f_55b1ca03",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants_gen.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T19:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50b4c0a2_4967147c",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be508fab_1234de04",
@@ -366,6 +384,24 @@
       "side": 1,
       "message": "For any \"required\" dawn structure members the corpus would need to be regenerated, but I believe libFuzzer would figure this out pretty quickly and regenerate a corpus while discarding the old corpus files that don\u0027t generate coverage anymore. For example, the computepipeline and this devicecreatebuffer examples in this CL were both generated reached within eight hours on one CPU core.",
       "parentUuid": "e1b00a7b_46860993",
+      "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32df6b12_702c6d2b",
+        "filename": "src/dawn/fuzzers/lpmfuzz/data_corpus/devicecreatebuffer",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-01-25T19:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8593d253_0fbfa57a",
       "revId": "d735f018fb0a44bd563dee6e113516bb76999836",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
