@@ -183,6 +183,30 @@
       },
       "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd3e686_e8fc72aa",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-25T15:40:31Z",
+      "side": 1,
+      "message": "thanks! still LGTM",
+      "parentUuid": "6ea6f2bd_4d3f8a38",
+      "range": {
+        "startLine": 417,
+        "startChar": 46,
+        "endLine": 417,
+        "endChar": 60
+      },
+      "revId": "381954eb6b1024a69d39a1cbee816df5e696289e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
