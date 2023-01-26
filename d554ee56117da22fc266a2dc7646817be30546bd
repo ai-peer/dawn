@@ -562,6 +562,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f312c8b_21dfa77c",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "I suppose if your rotation will handle fixes, it\u0027s not such a concern. But still, it seems like it would be worth preventing breakages at all. Since when it breaks, we temporarily lose fuzz coverage, and someone is required to go debug what went wrong.\n\nSorry I\u0027ve been slow to review these CLs. We can add it as a compilation target by adding `dawn_lpm_fuzzer_and_vulkan_backend` as a \"smoke test\" in `testing/buildbot/test_suites.pyl`\n\nAfter this CL lands, we can rename `gpu_dawn_perf_smoke_isolated_scripts` to something like `gpu_dawn_smoke_isolated_scripts` and add `dawn_lpm_fuzzer_and_vulkan_backend` in addition to the existing `dawn_perf_tests`.\nYou can specify some arguments to make the fuzzer only run 1 iteration (or zero) or something.",
+      "parentUuid": "e7b1c13c_d227b7cd",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "500455fc_fda2c4c7",
         "filename": "src/dawn/fuzzers/BUILD.gn",
         "patchSetId": 26

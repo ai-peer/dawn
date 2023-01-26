@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b9e1b6_4ecf62c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fefee837_e397e852",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "nit: `SerializeProgram` would be a better name since we\u0027re serializing the `program` into `serializer`. \"Get\" feels like it should return something.",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b745aeb_703baaa0",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "why this instead of just using \"cmd\" in below instead of {{ var }} ?",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5daccb8_f7762a37",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "leave a TODO(chromium:1374747) to populate the rest of the command based on the program. Otherwise the intermediate code before the rest of your CLs land is surprising",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 81
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7193ae_97b9d89f",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 35
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "here and in other files, it\u0027s 2023 now",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ca31ee_ab00f359",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 35
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "nit: comment why android, fuchsia, chrome_ash are not supported for the fuzzer",
+      "range": {
+        "startLine": 113,
+        "startChar": 27,
+        "endLine": 113,
+        "endChar": 73
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81eabb05_37b55152",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "for the future, it would be very cool if this eventually send some commands, flush, wait some microseconds, send some more commands, and loop",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 28
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb813293_d4381156",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 35
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-26T17:55:54Z",
+      "side": 1,
+      "message": "year",
+      "range": {
+        "startLine": 3,
+        "startChar": 19,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
