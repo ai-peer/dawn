@@ -90,7 +90,7 @@ enum class Toggle {
     UseBlitForBufferToDepthTextureCopy,
     UseBlitForBufferToStencilTextureCopy,
     UseBlitForDepthTextureToTextureCopyToNonzeroSubresource,
-    DisallowDeprecatedAPIs,
+    AllowDeprecatedAPIs,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
