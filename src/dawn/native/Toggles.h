@@ -91,7 +91,7 @@ enum class Toggle {
     UseBlitForBufferToStencilTextureCopy,
     UseBlitForDepthTextureToTextureCopyToNonzeroSubresource,
     D3D12ReplaceAddWithMinusWhenDstFactorIsZeroAndSrcFactorIsDstAlpha,
-    DisallowDeprecatedAPIs,
+    AllowDeprecatedAPIs,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
