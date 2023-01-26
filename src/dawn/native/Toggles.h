@@ -85,7 +85,7 @@ enum class Toggle {
     MetalUseCombinedDepthStencilFormatForStencil8,
     MetalUseBothDepthAndStencilAttachmentsForCombinedDepthStencilFormats,
     UseTempTextureInStencilTextureToBufferCopy,
-    DisallowDeprecatedAPIs,
+    AllowDeprecatedAPIs,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
