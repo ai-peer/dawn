@@ -118,6 +118,30 @@
       },
       "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6455bcf9_149dd174",
+        "filename": "src/tint/resolver/diagnostic_control_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-26T10:41:54Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "c5cca676_3236b378",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 285,
+        "endChar": 74
+      },
+      "revId": "574ce24bade0ed11cc63364e5e7db58983bb90b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
