@@ -108,6 +108,7 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     properties->driverDescription = mDriverDescription.c_str();
     properties->adapterType = mAdapterType;
     properties->backendType = mBackend;
+    properties->compatibilityMode = mCompatibilityMode;
 }
 
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {

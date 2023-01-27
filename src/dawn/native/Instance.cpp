@@ -31,6 +31,10 @@
 #include "dawn/native/VulkanBackend.h"
 #endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
 
+#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#include "dawn/native/OpenGLBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+
 #if defined(DAWN_USE_X11)
 #include "dawn/native/XlibXcbFunctions.h"
 #endif  // defined(DAWN_USE_X11)
@@ -222,6 +226,7 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     std::optional<size_t> integratedGPUAdapterIndex;
     std::optional<size_t> cpuAdapterIndex;
     std::optional<size_t> unknownAdapterIndex;
+    std::optional<size_t> glesAdapterIndex;
 
     for (size_t i = 0; i < mAdapters.size(); ++i) {
         AdapterProperties properties;
@@ -250,6 +255,15 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
                 unknownAdapterIndex = i;
                 break;
         }
+        if (properties.backendType == wgpu::BackendType::OpenGLES) {
+            glesAdapterIndex = i;
+        }
+    }
+
+    // For now, force compat mode to use the GLES backend.
+    // TODO(senorblanco): this should use a compat wrapper around all Adapters instead.
+    if (options->compatibilityMode && glesAdapterIndex) {
+        return mAdapters[*glesAdapterIndex];
     }
 
     // For now, we always prefer the discrete GPU

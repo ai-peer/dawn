@@ -83,6 +83,8 @@ MaybeError Adapter::InitializeImpl() {
     mDriverDescription = std::string("OpenGL version ") +
                          reinterpret_cast<const char*>(mFunctions.GetString(GL_VERSION));
 
+    mCompatibilityMode = true;
+
     if (mName.find("SwiftShader") != std::string::npos) {
         mAdapterType = wgpu::AdapterType::CPU;
     }

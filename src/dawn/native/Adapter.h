@@ -76,6 +76,7 @@ class AdapterBase : public RefCounted {
     wgpu::AdapterType mAdapterType = wgpu::AdapterType::Unknown;
     gpu_info::DriverVersion mDriverVersion;
     std::string mDriverDescription;
+    bool mCompatibilityMode = false;
 
     // Features set that CAN be supported by devices of this adapter. Some features in this set may
     // be guarded by toggles, and creating a device with these features required may result in a
