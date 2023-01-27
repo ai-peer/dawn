@@ -16,6 +16,74 @@
       "message": "PTAL! - sorry this is a massive workaround CL",
       "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc13a73b_fc6b7a8a",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-27T21:36:41Z",
+      "side": 1,
+      "message": "u-nit: dstAttachment",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29212cfc_aa5c478b",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-27T21:36:41Z",
+      "side": 1,
+      "message": "Feels like some steampunk-style workaround...\nBut seems to work, and time complexity is O(1)... So great?!\n\nQuestion: is copyT2T works properly on Metal intel? I was thinking if so, then is it doable to copy buffer to r8uint first and then copyT2T from r8uint to stencil8? (stencil8 is valid image copy src/dst)",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0822be40_d68051c1",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-27T21:36:41Z",
+      "side": 1,
+      "message": "nit: BlitBufferToDepth, from a buffer to depth",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6200cc31_a405959c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-01-27T21:36:41Z",
+      "side": 1,
+      "message": "Do we need `return {};` here as well?",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
