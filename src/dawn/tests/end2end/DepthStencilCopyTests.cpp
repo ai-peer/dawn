@@ -918,6 +918,7 @@ TEST_P(StencilCopyTests, CopyNonzeroMipThenReadWithStencilTest) {
 
 DAWN_INSTANTIATE_TEST_P(DepthStencilCopyTests,
                         {D3D12Backend(), MetalBackend(),
+                         MetalBackend({"use_blit_for_depth_texture_to_texture_copy"}),
                          MetalBackend({"use_blit_for_buffer_to_depth_texture_copy",
                                        "use_blit_for_buffer_to_stencil_texture_copy"}),
                          OpenGLBackend(), OpenGLESBackend(),
@@ -931,7 +932,9 @@ DAWN_INSTANTIATE_TEST_P(DepthCopyTests,
                         {D3D12Backend(),
                          D3D12Backend({"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_"
                                        "copy_with_non_zero_buffer_offset"}),
-                         MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+                         MetalBackend(),
+                         MetalBackend({"use_blit_for_depth_texture_to_texture_copy"}),
+                         OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
                         std::vector<wgpu::TextureFormat>(kValidDepthCopyTextureFormats.begin(),
                                                          kValidDepthCopyTextureFormats.end()));
 

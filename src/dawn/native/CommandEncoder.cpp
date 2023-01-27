@@ -23,6 +23,7 @@
 #include "dawn/native/ApplyClearColorValueWithDrawHelper.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BlitBufferToDepthStencil.h"
+#include "dawn/native/BlitDepthToDepth.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/CommandBuffer.h"
@@ -1367,18 +1368,41 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
             mTopLevelTextures.insert(source->texture);
             mTopLevelTextures.insert(destination->texture);
 
-            CopyTextureToTextureCmd* copy =
-                allocator->Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
-            copy->source.texture = source->texture;
-            copy->source.origin = source->origin;
-            copy->source.mipLevel = source->mipLevel;
-            copy->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
-            copy->destination.texture = destination->texture;
-            copy->destination.origin = destination->origin;
-            copy->destination.mipLevel = destination->mipLevel;
-            copy->destination.aspect =
-                ConvertAspect(destination->texture->GetFormat(), destination->aspect);
-            copy->copySize = *copySize;
+            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            ASSERT(aspect == ConvertAspect(destination->texture->GetFormat(), destination->aspect));
+
+            const bool useBlit =
+                GetDevice()->IsToggleEnabled(Toggle::UseBlitForDepthTextureToTextureCopy);
+
+            TextureCopy src;
+            src.texture = source->texture;
+            src.origin = source->origin;
+            src.mipLevel = source->mipLevel;
+            src.aspect = aspect;
+
+            TextureCopy dst;
+            dst.texture = destination->texture;
+            dst.origin = destination->origin;
+            dst.mipLevel = destination->mipLevel;
+            dst.aspect = aspect;
+
+            // If we're not using a blit, or there are aspects other than depth,
+            // issue the copy. If there's stencil, we still need the copy command
+            // to copy the stencil portion.
+            if (!useBlit || aspect != Aspect::Depth) {
+                CopyTextureToTextureCmd* copy =
+                    allocator->Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
+                copy->source = src;
+                copy->destination = dst;
+                copy->copySize = *copySize;
+            }
+
+            // Use a blit to copy the depth aspect.
+            if (useBlit && (aspect & Aspect::Depth) != 0) {
+                DAWN_TRY_CONTEXT(BlitDepthToDepth(GetDevice(), this, src, dst, *copySize),
+                                 "copying depth aspect from %s to %s using blit workaround.",
+                                 source->texture, destination->texture);
+            }
 
             return {};
         },
