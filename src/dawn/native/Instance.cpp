@@ -254,6 +254,10 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
         AdapterProperties properties;
         mAdapters[i]->APIGetProperties(&properties);
 
+        if (options->compatibilityMode &&
+            mAdapters[i]->GetVersion() != WebGPUVersion::kCompatibilityMode) {
+            continue;
+        }
         if (options->forceFallbackAdapter) {
             if (!gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID)) {
                 continue;
@@ -319,7 +323,12 @@ void InstanceBase::DiscoverDefaultAdapters() {
         for (Ref<PhysicalDeviceBase>& physicalDevice : physicalDevices) {
             ASSERT(physicalDevice->GetBackendType() == backend->GetType());
             ASSERT(physicalDevice->GetInstance() == this);
-            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));
+            for (auto version : {WebGPUVersion::kCompatibilityMode, WebGPUVersion::k1_0}) {
+                if (physicalDevice->SupportsVersion(version)) {
+                    mAdapters.push_back(
+                        AcquireRef(new AdapterBase(std::move(physicalDevice), version)));
+                }
+            }
         }
     }
 
@@ -453,7 +462,12 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         for (Ref<PhysicalDeviceBase>& physicalDevice : newPhysicalDevices) {
             ASSERT(physicalDevice->GetBackendType() == backend->GetType());
             ASSERT(physicalDevice->GetInstance() == this);
-            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));
+            for (auto version : {WebGPUVersion::kCompatibilityMode, WebGPUVersion::k1_0}) {
+                if (physicalDevice->SupportsVersion(version)) {
+                    mAdapters.push_back(
+                        AcquireRef(new AdapterBase(std::move(physicalDevice), version)));
+                }
+            }
         }
     }
 

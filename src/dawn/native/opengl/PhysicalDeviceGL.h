@@ -33,6 +33,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override;
+    bool SupportsVersion(WebGPUVersion version) const override;
 
   private:
     MaybeError InitializeImpl() override;
