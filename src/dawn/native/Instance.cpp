@@ -34,6 +34,10 @@
 #include "dawn/native/VulkanBackend.h"
 #endif  // defined(DAWN_ENABLE_BACKEND_VULKAN)
 
+#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#include "dawn/native/OpenGLBackend.h"
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+
 #if defined(DAWN_USE_X11)
 #include "dawn/native/XlibXcbFunctions.h"
 #endif  // defined(DAWN_USE_X11)
@@ -249,11 +253,16 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
     std::optional<size_t> integratedGPUAdapterIndex;
     std::optional<size_t> cpuAdapterIndex;
     std::optional<size_t> unknownAdapterIndex;
+    std::optional<size_t> glesAdapterIndex;
 
     for (size_t i = 0; i < mAdapters.size(); ++i) {
         AdapterProperties properties;
         mAdapters[i]->APIGetProperties(&properties);
 
+        if (options->compatibilityMode &&
+            mAdapters[*glesAdapterIndex]->GetVersion() != WebGPUVersion::kCompatibilityMode) {
+            continue;
+        }
         if (options->forceFallbackAdapter) {
             if (!gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID)) {
                 continue;
@@ -276,6 +285,9 @@ ResultOrError<Ref<AdapterBase>> InstanceBase::RequestAdapterInternal(
             case wgpu::AdapterType::Unknown:
                 unknownAdapterIndex = i;
                 break;
+        }
+        if (properties.backendType == wgpu::BackendType::OpenGLES) {
+            glesAdapterIndex = i;
         }
     }
 
@@ -319,7 +331,12 @@ void InstanceBase::DiscoverDefaultAdapters() {
         for (Ref<PhysicalDeviceBase>& physicalDevice : physicalDevices) {
             ASSERT(physicalDevice->GetBackendType() == backend->GetType());
             ASSERT(physicalDevice->GetInstance() == this);
-            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));
+            for (auto version : {WebGPUVersion::kCompatibilityMode, WebGPUVersion::k1_0}) {
+                if (physicalDevice->SupportsVersion(version)) {
+                    mAdapters.push_back(
+                        AcquireRef(new AdapterBase(std::move(physicalDevice), version)));
+                }
+            }
         }
     }
 
@@ -453,7 +470,12 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         for (Ref<PhysicalDeviceBase>& physicalDevice : newPhysicalDevices) {
             ASSERT(physicalDevice->GetBackendType() == backend->GetType());
             ASSERT(physicalDevice->GetInstance() == this);
-            mAdapters.push_back(AcquireRef(new AdapterBase(std::move(physicalDevice))));
+            for (auto version : {WebGPUVersion::kCompatibilityMode, WebGPUVersion::k1_0}) {
+                if (physicalDevice->SupportsVersion(version)) {
+                    mAdapters.push_back(
+                        AcquireRef(new AdapterBase(std::move(physicalDevice), version)));
+                }
+            }
         }
     }
 
