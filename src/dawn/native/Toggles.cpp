@@ -354,6 +354,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "texture. Works around an issue where stencil writes by copy commands are not visible "
       "to a render or compute pass.",
       "https://crbug.com/dawn/1389"}},
+    {Toggle::UseBlitForTextureToTextureCopyToNonzeroDepthLayer,
+     {"use_blit_for_texture_to_texture_copy_to_nonzero_depth_layer",
+      "Use a blit to copy from a depth texture to the nonzero array layer of a depth texture. "
+      "Works around an issue where nonzero layers are not written.",
+      "https://crbug.com/dawn/1083"}},
     {Toggle::DisallowDeprecatedAPIs,
      {"disallow_deprecated_apis",
       "Disallow all deprecated paths by changing the deprecation warnings to validation error for "

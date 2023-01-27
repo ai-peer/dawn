@@ -263,6 +263,13 @@ void Device::InitTogglesFromDriver() {
                   true);
         SetToggle(Toggle::UseBlitForBufferToStencilTextureCopy, true);
         SetToggle(Toggle::UseBlitForBufferToDepthTextureCopy, true);
+        SetToggle(Toggle::UseBlitForTextureToTextureCopyToNonzeroDepthLayer, true);
+        // SetToggle(Toggle::UseBlitForTextureToTextureCopyToNonzeroDepthLayer, true);
+        // if (@available(macos 13.1, *)) {
+        //     // Issue was fixed in MacOS 13.1.
+        // } else {
+        //     // Otherwise, enable the workaround.
+        // }
 
         if ([NSProcessInfo.processInfo
                 isOperatingSystemAtLeastVersion:NSOperatingSystemVersion{12, 0, 0}]) {
