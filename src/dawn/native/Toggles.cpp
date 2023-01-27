@@ -348,6 +348,18 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "buffer. Works around an issue where stencil writes from a render pass are not reflected in "
       "the destination buffer.",
       "https://crbug.com/dawn/1389"}},
+    {Toggle::UseBlitForBufferToDepthTextureCopy,
+     {"use_blit_for_buffer_to_depth_texture_copy",
+      "Use a blit instead of a copy command to copy buffer data to the depth aspect of a "
+      "texture. Works around an issue where depth writes by copy commands are not visible "
+      "to a render or compute pass.",
+      "https://crbug.com/dawn/1389"}},
+    {Toggle::UseBlitForBufferToStencilTextureCopy,
+     {"use_blit_for_buffer_to_stencil_texture_copy",
+      "Use a blit instead of a copy command to copy buffer data to the stencil aspect of a "
+      "texture. Works around an issue where stencil writes by copy commands are not visible "
+      "to a render or compute pass.",
+      "https://crbug.com/dawn/1389"}},
     {Toggle::DisallowDeprecatedAPIs,
      {"disallow_deprecated_apis",
       "Disallow all deprecated paths by changing the deprecation warnings to validation error for "
