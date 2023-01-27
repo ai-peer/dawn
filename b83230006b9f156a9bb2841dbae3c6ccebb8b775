@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e81bb6_6779be00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-27T16:28:05Z",
+      "side": 1,
+      "message": "Kokoro failure is an infra issue, manually adding +1.",
+      "revId": "b83230006b9f156a9bb2841dbae3c6ccebb8b775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
