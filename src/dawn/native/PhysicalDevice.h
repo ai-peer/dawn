@@ -33,6 +33,8 @@ namespace dawn::native {
 
 class DeviceBase;
 
+enum FeatureLevel { kCompatibilityMode, kCore };
+
 class PhysicalDeviceBase : public RefCounted {
   public:
     PhysicalDeviceBase(InstanceBase* instance,
@@ -77,6 +79,8 @@ class PhysicalDeviceBase : public RefCounted {
     const TogglesState& GetTogglesState() const;
 
     virtual bool SupportsExternalImages() const = 0;
+
+    virtual bool SupportsFeatureLevel(FeatureLevel featureLevel) const;
 
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
