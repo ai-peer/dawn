@@ -19,23 +19,19 @@ that expand one or more Jinja2 templates, without outputs usable from
 GN and Ninja build-based systems. See generator_lib.gni as well.
 
 Clients should create a Generator sub-class, then call run_generator()
-with a proper derived class instance.
-
-Clients specify a list of FileRender operations, each one of them will
-output a file into a temporary output directory through Jinja2 expansion.
-All temporary output files are then grouped and written to into a single JSON
-file, that acts as a convenient single GN output target. Use extract_json.py
-to extract the output files from the JSON tarball in another GN action.
+with a proper derived class instance. They specify a list of FileRender
+operations, one for each file that are to be created through Jinja2
+expansion and output in the generated file directory.
 
 --depfile can be used to specify an output Ninja dependency file for the
-JSON tarball, to ensure it is regenerated any time one of its dependencies
-changes.
+all the output files, to ensure it is regenerated any time one of its
+dependencies changes.
 
 Finally, --expected-output-files can be used to check the list of generated
 output files.
 """
 
-import argparse, json, os, re, sys
+import argparse, os, re, sys
 from collections import namedtuple
 
 # A FileRender represents a single Jinja2 template render operation:
@@ -237,16 +233,10 @@ def run_generator(generator):
         type=str,
         help='Additional python path to set before loading Jinja2')
     parser.add_argument(
-        '--output-json-tarball',
-        default=None,
-        type=str,
-        help=('Name of the "JSON tarball" to create (tar is too annoying '
-              'to use in python).'))
-    parser.add_argument(
         '--depfile',
         default=None,
         type=str,
-        help='Name of the Ninja depfile to create for the JSON tarball')
+        help='Name of the Ninja depfile to output.')
     parser.add_argument(
         '--expected-outputs-file',
         default=None,
@@ -279,23 +269,18 @@ def run_generator(generator):
 
     renders = generator.get_file_renders(args)
 
-    # Output a list of all dependencies for CMake or the tarball for GN/Ninja.
-    if args.depfile != None or args.print_cmake_dependencies:
-        dependencies = generator.get_dependencies(args)
-        dependencies += [
-            args.template_dir + os.path.sep + render.template
-            for render in renders
-        ]
-        dependencies += _compute_python_dependencies(args.root_dir)
+    # Compute the list of dependencies for CMake or the Ninja depfile.
+    dependencies = generator.get_dependencies(args)
+    dependencies += [
+        args.template_dir + os.path.sep + render.template
+        for render in renders
+    ]
+    dependencies += _compute_python_dependencies(args.root_dir)
 
-        if args.depfile != None:
-            with open(args.depfile, 'w') as f:
-                f.write(args.output_json_tarball + ": " +
-                        " ".join(dependencies))
-
-        if args.print_cmake_dependencies:
-            sys.stdout.write(";".join(dependencies))
-            return 0
+    # Output a list of all dependencies for CMake..
+    if args.print_cmake_dependencies:
+        sys.stdout.write(";".join(dependencies))
+        return 0
 
     # The caller wants to assert that the outputs are what it expects.
     # Load the file and compare with our renders.
@@ -320,14 +305,11 @@ def run_generator(generator):
 
     outputs = _do_renders(renders, args.template_dir)
 
-    # Output the JSON tarball
-    if args.output_json_tarball != None:
-        json_root = {}
-        for output in outputs:
-            json_root[output.name] = output.content
-
-        with open(args.output_json_tarball, 'w') as f:
-            f.write(json.dumps(json_root))
+    # Output the Ninja depfile
+    if args.depfile != None:
+        output_paths = (os.path.join(args.output_dir, o.name) for o in outputs)
+        with open(args.depfile, 'w') as f:
+            f.write(" ".join(output_paths) + ": " + " ".join(dependencies))
 
     # Output the files directly.
     if args.output_dir != None:
@@ -335,7 +317,16 @@ def run_generator(generator):
             output_path = os.path.join(args.output_dir, output.name)
 
             directory = os.path.dirname(output_path)
-            os.makedirs(directory, exist_ok=True)
+            if not os.path.exists(directory):
+                os.makedirs(directory, exist_ok=True)
+
+            # Skip writing to the file if it already has the correct content.
+            try:
+                with open(output_path, 'r') as outfile:
+                    if outfile.read() == output.content:
+                        continue
+            except (OSError, EnvironmentError):
+                pass
 
             with open(output_path, 'w') as outfile:
                 outfile.write(output.content)
