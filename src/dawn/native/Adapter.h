@@ -18,6 +18,7 @@
 #include "dawn/native/DawnNative.h"
 
 #include "dawn/common/RefCounted.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
@@ -28,7 +29,8 @@ struct SupportedLimits;
 
 class AdapterBase : public RefCounted {
   public:
-    explicit AdapterBase(const Ref<PhysicalDeviceBase>& physicalDevice);
+    explicit AdapterBase(const Ref<PhysicalDeviceBase>& physicalDevice,
+                         FeatureLevel featureLevel = FeatureLevel::kCore);
     ~AdapterBase() override;
 
     // WebGPU API
@@ -48,8 +50,11 @@ class AdapterBase : public RefCounted {
     // Get the actual toggles state of the adapter.
     const TogglesState& GetTogglesState() const;
 
+    FeatureLevel GetFeatureLevel() const;
+
   private:
     Ref<PhysicalDeviceBase> mPhysicalDevice;
+    FeatureLevel mFeatureLevel;
 };
 
 }  // namespace dawn::native
