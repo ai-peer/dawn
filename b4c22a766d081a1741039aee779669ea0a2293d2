@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "356d32d3_6a04a3f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-27T12:19:00Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd5c32a9_f5999508",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-27T12:19:00Z",
+      "side": 1,
+      "message": "u-u-unit: newline after this block since `renders \u003d []` isn\u0027t related?",
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fefee837_e397e852",
@@ -89,6 +123,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a1592483_664eb05a",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-27T12:19:00Z",
+      "side": 1,
+      "message": "nit: I think this only needs WireCmd.h for ObjectIdProvider",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b40ea7fa_7240c85a",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-27T12:19:00Z",
+      "side": 1,
+      "message": "nit:  I assume you meant ObjectIdProvider ?",
+      "range": {
+        "startLine": 26,
+        "startChar": 29,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af7193ae_97b9d89f",
         "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
         "patchSetId": 35
@@ -128,6 +208,29 @@
         "startChar": 27,
         "endLine": 113,
         "endChar": 73
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56b336fe_fa2c3245",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-27T12:19:00Z",
+      "side": 1,
+      "message": "nit: Why does this instance need to be special cased in a separate file? Also maybe it could be a constexpr instead of a define?",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 26
       },
       "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
