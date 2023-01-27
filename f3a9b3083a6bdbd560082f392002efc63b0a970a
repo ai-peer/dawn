@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2376e84_62170fa9",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-27T21:45:08Z",
+      "side": 1,
+      "message": "Metal requires the pixel formats to be the same - so you can\u0027t copy from r8uint to stencil8",
+      "parentUuid": "29212cfc_aa5c478b",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0822be40_d68051c1",
@@ -82,6 +100,24 @@
       "writtenOn": "2023-01-27T21:36:41Z",
       "side": 1,
       "message": "Do we need `return {};` here as well?",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "755a5018_ab8c91e3",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-27T21:45:08Z",
+      "side": 1,
+      "message": "nice catch!",
+      "parentUuid": "6200cc31_a405959c",
       "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
