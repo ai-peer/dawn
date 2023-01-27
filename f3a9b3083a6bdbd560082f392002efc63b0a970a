@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ac0dc2_3a8b8e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-27T15:44:15Z",
+      "side": 1,
+      "message": "PTAL! - sorry this is a massive workaround CL",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
