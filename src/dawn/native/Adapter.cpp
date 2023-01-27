@@ -20,8 +20,8 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(const Ref<PhysicalDeviceBase>& physicalDevice)
-    : mPhysicalDevice(std::move(physicalDevice)) {}
+AdapterBase::AdapterBase(const Ref<PhysicalDeviceBase>& physicalDevice, WebGPUVersion version)
+    : mPhysicalDevice(std::move(physicalDevice)), mVersion(version) {}
 
 AdapterBase::~AdapterBase() = default;
 
@@ -39,6 +39,7 @@ bool AdapterBase::APIGetLimits(SupportedLimits* limits) const {
 
 void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     mPhysicalDevice->APIGetProperties(properties);
+    properties->compatibilityMode = mVersion == WebGPUVersion::kCompatibilityMode;
 }
 
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
