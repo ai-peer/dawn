@@ -292,6 +292,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         return true;
     }
 
+    bool SupportsFeatureLevel(FeatureLevel featureLevel) const override { return true; }
+
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(AdapterBase* adapter,
                                                     const DeviceDescriptor* descriptor,
