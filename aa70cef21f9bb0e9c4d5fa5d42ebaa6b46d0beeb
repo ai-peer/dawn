@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1215e3d_87ecb24e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2023-01-28T02:05:23Z",
+      "side": 1,
+      "message": "CQ this on behalf of Hao Li (He\u0027s on vacation) to unblock our internal Chrome Drop release.",
+      "revId": "aa70cef21f9bb0e9c4d5fa5d42ebaa6b46d0beeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
