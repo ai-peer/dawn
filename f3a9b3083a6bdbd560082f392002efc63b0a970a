@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "173785d2_d1c9201b",
+        "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-28T00:02:03Z",
+      "side": 1,
+      "message": "Hmm I think either way is fine. I assume `ds` was supposed to be referring to depthStencil.",
+      "parentUuid": "fc13a73b_fc6b7a8a",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29212cfc_aa5c478b",
         "filename": "src/dawn/native/BlitBufferToDepthStencil.cpp",
         "patchSetId": 2
@@ -118,6 +136,52 @@
       "side": 1,
       "message": "nice catch!",
       "parentUuid": "6200cc31_a405959c",
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1733664_b0df5d58",
+        "filename": "src/dawn/native/CommandEncoder.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-28T00:02:03Z",
+      "side": 1,
+      "message": "nit. comment line length",
+      "range": {
+        "startLine": 99,
+        "startChar": 4,
+        "endLine": 101,
+        "endChar": 32
+      },
+      "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec73d31d_62ba3e48",
+        "filename": "src/dawn/tests/end2end/RenderPassTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-28T00:02:03Z",
+      "side": 1,
+      "message": "Hmm.. Would be nice if the subresource params were parameterized instead of looped... But it\u0027t a bit more work so alternatively, we should at least stream some context for each expectation, otherwise I think if it errors, the errors will be a bit difficult to decipher.",
+      "range": {
+        "startLine": 339,
+        "startChar": 24,
+        "endLine": 340,
+        "endChar": 49
+      },
       "revId": "f3a9b3083a6bdbd560082f392002efc63b0a970a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
