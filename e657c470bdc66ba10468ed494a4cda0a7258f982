@@ -16,6 +16,24 @@
       "message": "Seems this function_tag should be outside the \"if\".\n\nThat\u0027s because the value read by sampling this texture, for example, may cause a different texture sample operation to be in nouniform control flow.\n\nHere\u0027s an example:\n\n```\n@group(0) @binding(0) var t: texture_2d\u003cf32\u003e;\n@group(0) @binding(1) var s: sampler;\n\n@fragment\nfn main(@builtin(position) p: vec4\u003cf32\u003e) -\u003e @location(0) vec4\u003cf32\u003e {\n  var texel: vec4\u003cf32\u003e;\n\n  @diagnostic(off,derivative_uniformity) {\n    if (p.x \u003c 0.5) {\n      texel \u003d textureSample(t,s,p.xy);\n    }\n  }\n\n  if (texel.x \u003c 0.5) {\n    _ \u003d textureSample(t,s,p.zw); // this should trigger an error\n  }\n\n  return texel;\n}\n```\n\nI filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d1815 for this",
       "revId": "e657c470bdc66ba10468ed494a4cda0a7258f982",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81c07268_f5b94db1",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 1515,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-01-28T00:37:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6f803dac_7ffa7951",
+      "revId": "e657c470bdc66ba10468ed494a4cda0a7258f982",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
