@@ -1978,6 +1978,58 @@ fn main(@builtin(local_invocation_index) idx : u32) {
     EXPECT_TRUE(CheckEqual<int32_t>(*output, {1, 1, 1, 1}));
 }
 
+TEST_F(ComputeEndToEndTest, OutOfBounds_DiagnosticFiltering) {
+    Init(R"(
+@diagnostic(off, tint_interp_invalid_load)
+fn filter_load(idx : u32) {
+  var input : array<u32, 3>;
+  var output : array<u32, 3>;
+  output[idx] = input[idx];
+}
+
+@diagnostic(off, tint_interp_invalid_store)
+fn filter_store(idx : u32) {
+  var input : array<u32, 3>;
+  var output : array<u32, 3>;
+  output[idx] = input[idx];
+}
+
+@compute @workgroup_size(4)
+fn main(@builtin(local_invocation_index) idx : u32) {
+  filter_load(idx);
+  filter_store(idx);
+}
+)");
+
+    EXPECT_TRUE(RunShader(UVec3(1, 1, 1), {}, true));
+    EXPECT_EQ(errors_,
+              R"(test.wgsl:6:15 warning: storing to an out-of-bounds memory view
+  output[idx] = input[idx];
+              ^
+
+test.wgsl:5:3 note: accessing 12 byte allocation in the function address space
+  var output : array<u32, 3>;
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test.wgsl:6:9 note: created a 4 byte memory view at an offset of 12 bytes
+  output[idx] = input[idx];
+        ^
+
+test.wgsl:13:22 warning: loading from an out-of-bounds memory view
+  output[idx] = input[idx];
+                     ^
+
+test.wgsl:11:3 note: accessing 12 byte allocation in the function address space
+  var input : array<u32, 3>;
+  ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+test.wgsl:13:22 note: created a 4 byte memory view at an offset of 12 bytes
+  output[idx] = input[idx];
+                     ^
+
+)");
+}
+
 TEST_F(ComputeEndToEndTest, ConstEvalError_LoadNonFinite_F32) {
     Init(R"(
 @group(0) @binding(0) var<storage, read_write> buffer : array<f32>;

@@ -159,6 +159,10 @@ Validator::Validator(
                             builtin::DiagnosticSeverity::kError);
     diagnostic_filters_.Set(builtin::DiagnosticRule::kChromiumUnreachableCode,
                             builtin::DiagnosticSeverity::kWarning);
+    diagnostic_filters_.Set(builtin::DiagnosticRule::kTintInterpInvalidLoad,
+                            builtin::DiagnosticSeverity::kWarning);
+    diagnostic_filters_.Set(builtin::DiagnosticRule::kTintInterpInvalidStore,
+                            builtin::DiagnosticSeverity::kWarning);
 }
 
 Validator::~Validator() = default;

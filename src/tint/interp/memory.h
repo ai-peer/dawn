@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "tint/builtin/address_space.h"
+#include "tint/builtin/diagnostic_rule.h"
 #include "tint/source.h"
 #include "tint/utils/block_allocator.h"
 
@@ -153,7 +154,8 @@ class MemoryView {
 
     /// Report an out-of-bounds access.
     /// @param msg the error message
-    void ReportOutOfBounds(std::string msg);
+    /// @param diag_rule the diagnostic rule that this error is associated with
+    void ReportOutOfBounds(std::string msg, builtin::DiagnosticRule diag_rule);
 
     // Allow the block allocator to construct MemoryView objects.
     friend class utils::BlockAllocator<MemoryView>;

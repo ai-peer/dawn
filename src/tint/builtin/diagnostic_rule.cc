@@ -37,6 +37,12 @@ DiagnosticRule ParseDiagnosticRule(std::string_view str) {
     if (str == "derivative_uniformity") {
         return DiagnosticRule::kDerivativeUniformity;
     }
+    if (str == "tint_interp_invalid_load") {
+        return DiagnosticRule::kTintInterpInvalidLoad;
+    }
+    if (str == "tint_interp_invalid_store") {
+        return DiagnosticRule::kTintInterpInvalidStore;
+    }
     return DiagnosticRule::kUndefined;
 }
 
@@ -48,6 +54,10 @@ std::ostream& operator<<(std::ostream& out, DiagnosticRule value) {
             return out << "chromium_unreachable_code";
         case DiagnosticRule::kDerivativeUniformity:
             return out << "derivative_uniformity";
+        case DiagnosticRule::kTintInterpInvalidLoad:
+            return out << "tint_interp_invalid_load";
+        case DiagnosticRule::kTintInterpInvalidStore:
+            return out << "tint_interp_invalid_store";
     }
     return out << "<unknown>";
 }

@@ -248,7 +248,7 @@ TEST_F(ResolverDiagnosticControlTest, UnrecognizedRuleName_Directive) {
     EXPECT_EQ(r()->error(),
               R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_cod'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity')");
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store')");
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnrecognizedRuleName_Attribute) {
@@ -259,7 +259,7 @@ TEST_F(ResolverDiagnosticControlTest, UnrecognizedRuleName_Attribute) {
     EXPECT_EQ(r()->error(),
               R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_cod'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity')");
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store')");
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameSameSeverity_Directive) {
@@ -290,10 +290,10 @@ TEST_F(ResolverDiagnosticControlTest, Conflict_SameUnknownNameDifferentSeverity_
     EXPECT_EQ(r()->error(),
               R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store'
 56:78 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store'
 56:78 error: conflicting diagnostic directive
 12:34 note: severity of 'chromium_unreachable_codes' set to 'off' here)");
 }
@@ -335,10 +335,10 @@ TEST_F(ResolverDiagnosticControlTest, Conflict_SameUnknownNameDifferentSeverity_
     EXPECT_EQ(r()->error(),
               R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store'
 56:78 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
-Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
+Possible values: 'chromium_unreachable_code', 'derivative_uniformity', 'tint_interp_invalid_load', 'tint_interp_invalid_store'
 56:78 error: conflicting diagnostic attribute
 12:34 note: severity of 'chromium_unreachable_codes' set to 'off' here)");
 }

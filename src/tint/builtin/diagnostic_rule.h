@@ -32,6 +32,8 @@ enum class DiagnosticRule {
     kUndefined,
     kChromiumUnreachableCode,
     kDerivativeUniformity,
+    kTintInterpInvalidLoad,
+    kTintInterpInvalidStore,
 };
 
 /// @param out the std::ostream to write to
@@ -47,6 +49,8 @@ DiagnosticRule ParseDiagnosticRule(std::string_view str);
 constexpr const char* kDiagnosticRuleStrings[] = {
     "chromium_unreachable_code",
     "derivative_uniformity",
+    "tint_interp_invalid_load",
+    "tint_interp_invalid_store",
 };
 
 }  // namespace tint::builtin

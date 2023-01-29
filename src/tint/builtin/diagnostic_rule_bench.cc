@@ -31,11 +31,16 @@ namespace {
 
 void DiagnosticRuleParser(::benchmark::State& state) {
     const char* kStrings[] = {
-        "chromium_unrachaccle_code",   "clromium_unreachab3_oe",    "chromium_unreachable_Vode",
-        "chromium_unreachable_code",   "chro1ium_unreachable_code", "chromium_unreJchableqqcde",
-        "chromium77unreallhable_code", "dqqrvatiHHe_uniforppity",   "deriatcv_nvformity",
-        "derivatbe_unGformity",        "derivative_uniformity",     "derivative_iinifvrmity",
-        "derivat8WWe_uniformity",      "drivaxxive_uniformity",
+        "chromium_unrachaccle_code",   "clromium_unreachab3_oe",      "chromium_unreachable_Vode",
+        "chromium_unreachable_code",   "chro1ium_unreachable_code",   "chromium_unreJchableqqcde",
+        "chromium77unreallhable_code", "dqqrvatiHHe_uniforppity",     "deriatcv_nvformity",
+        "derivatbe_unGformity",        "derivative_uniformity",       "derivative_iinifvrmity",
+        "derivat8WWe_uniformity",      "drivaxxive_uniformity",       "tint_ntXrpgginvalid_load",
+        "tintinuerp_iXalid_load",      "tint_interp_invalid_l3ad",    "tint_interp_invalid_load",
+        "tint_interp_invalidEload",    "int_interp_invalPPd_TToad",   "tint_nterp_ddnvaxxid_load",
+        "tint_interp_inva44id_store",  "tint_intSSrpVVinvalid_store", "22intinterp_invalRdRstore",
+        "tint_interp_invalid_store",   "ti9t_inerp_invalid_sFore",    "tint_interp_invalid_stoe",
+        "tiHt_inteOOp_iVRRlid_store",
     };
     for (auto _ : state) {
         for (auto* str : kStrings) {

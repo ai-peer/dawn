@@ -46,6 +46,8 @@ enum diagnostic_rule {
   derivative_uniformity
   // Chromium specific rules not defined in the spec.
   chromium_unreachable_code
+  tint_interp_invalid_load
+  tint_interp_invalid_store
 }
 
 // https://gpuweb.github.io/gpuweb/wgsl/#syntax-severity_control_name

@@ -171,7 +171,8 @@ MemoryView::MemoryView(ShaderExecutor* executor,
 
 const constant::Value* MemoryView::Load() {
     if (!is_valid_) {
-        ReportOutOfBounds("loading from an out-of-bounds memory view");
+        ReportOutOfBounds("loading from an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidLoad);
         return executor_->ConstEval().Zero(type_, {}, source_).Get();
     }
     auto* result = Load(type_, offset_);
@@ -284,7 +285,8 @@ const constant::Value* MemoryView::Load(const type::Type* type, uint64_t offset)
 
 void MemoryView::Store(const constant::Value* value) {
     if (!is_valid_) {
-        ReportOutOfBounds("storing to an out-of-bounds memory view");
+        ReportOutOfBounds("storing to an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidStore);
         return;
     }
     TINT_ASSERT(Interpreter, value->Type() == type_);
@@ -377,7 +379,8 @@ const constant::Value* MemoryView::AtomicLoad() {
     auto* atomic = type_->As<type::Atomic>();
     TINT_ASSERT(Interpreter, atomic);
     if (!is_valid_) {
-        ReportOutOfBounds("atomic operation on an out-of-bounds memory view");
+        ReportOutOfBounds("atomic operation on an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidLoad);
         return executor_->ConstEval().Zero(atomic->Type(), {}, source_).Get();
     }
     return AtomicDispatch(*executor_, atomic->Type(),
@@ -390,7 +393,8 @@ void MemoryView::AtomicStore(const constant::Value* value) {
     auto* atomic = type_->As<type::Atomic>();
     TINT_ASSERT(Interpreter, atomic);
     if (!is_valid_) {
-        ReportOutOfBounds("atomic operation on an out-of-bounds memory view");
+        ReportOutOfBounds("atomic operation on an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidStore);
         return;
     }
     AtomicDispatch(*executor_, atomic->Type(), [&](auto T) {
@@ -403,7 +407,8 @@ const constant::Value* MemoryView::AtomicRMW(AtomicOp op, const constant::Value*
     auto* atomic = type_->As<type::Atomic>();
     TINT_ASSERT(Interpreter, atomic);
     if (!is_valid_) {
-        ReportOutOfBounds("atomic operation on an out-of-bounds memory view");
+        ReportOutOfBounds("atomic operation on an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidStore);
         return executor_->ConstEval().Zero(atomic->Type(), {}, source_).Get();
     }
     return AtomicDispatch(*executor_, atomic->Type(), [&](auto T) {
@@ -417,7 +422,8 @@ const constant::Value* MemoryView::AtomicCompareExchange(const constant::Value* 
     auto* atomic = type_->As<type::Atomic>();
     TINT_ASSERT(Interpreter, atomic);
     if (!is_valid_) {
-        ReportOutOfBounds("atomic operation on an out-of-bounds memory view");
+        ReportOutOfBounds("atomic operation on an out-of-bounds memory view",
+                          builtin::DiagnosticRule::kTintInterpInvalidStore);
         return executor_->ConstEval().Zero(atomic->Type(), {}, source_).Get();
     }
     return AtomicDispatch(*executor_, atomic->Type(), [&](auto T) {
@@ -426,20 +432,31 @@ const constant::Value* MemoryView::AtomicCompareExchange(const constant::Value* 
     });
 }
 
-void MemoryView::ReportOutOfBounds(std::string msg) {
+void MemoryView::ReportOutOfBounds(std::string msg, builtin::DiagnosticRule diag_rule) {
     diag::List list;
 
     // Report the error on the expression that caused it.
     {
+        auto severity = builtin::DiagnosticSeverity::kWarning;
         tint::Source source{};
         if (auto* invocation = executor_->CurrentInvocation()) {
             if (auto* expr = invocation->CurrentExpression()) {
                 source = expr->source;
+                severity = executor_->Sem().DiagnosticSeverity(expr, diag_rule);
             } else if (auto* stmt = invocation->CurrentStatement()) {
                 source = stmt->source;
+                severity = executor_->Sem().DiagnosticSeverity(stmt, diag_rule);
             }
         }
-        list.add_warning(diag::System::Interpreter, msg, source);
+        if (severity == builtin::DiagnosticSeverity::kOff) {
+            return;
+        }
+        diag::Diagnostic d{};
+        d.severity = ToSeverity(severity);
+        d.system = diag::System::Interpreter;
+        d.source = source;
+        d.message = msg;
+        list.add(std::move(d));
     }
 
     // Find the first view that was invalid in this view's parent chain.

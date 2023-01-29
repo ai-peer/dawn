@@ -45,6 +45,8 @@ inline std::ostream& operator<<(std::ostream& out, Case c) {
 static constexpr Case kValidCases[] = {
     {"chromium_unreachable_code", DiagnosticRule::kChromiumUnreachableCode},
     {"derivative_uniformity", DiagnosticRule::kDerivativeUniformity},
+    {"tint_interp_invalid_load", DiagnosticRule::kTintInterpInvalidLoad},
+    {"tint_interp_invalid_store", DiagnosticRule::kTintInterpInvalidStore},
 };
 
 static constexpr Case kInvalidCases[] = {
@@ -54,6 +56,12 @@ static constexpr Case kInvalidCases[] = {
     {"derivative_uniform1ty", DiagnosticRule::kUndefined},
     {"derivativeJunifqrmity", DiagnosticRule::kUndefined},
     {"derivative_unifllrmit77", DiagnosticRule::kUndefined},
+    {"tintHHinterp_invppqqid_lod", DiagnosticRule::kUndefined},
+    {"tintcinteinvalid_lovd", DiagnosticRule::kUndefined},
+    {"tint_intGrpinvalidbload", DiagnosticRule::kUndefined},
+    {"tint_iniierp_invalid_svore", DiagnosticRule::kUndefined},
+    {"ti8t_interp_invaliWW_store", DiagnosticRule::kUndefined},
+    {"tint_Mntep_inxxalid_store", DiagnosticRule::kUndefined},
 };
 
 using DiagnosticRuleParseTest = testing::TestWithParam<Case>;
