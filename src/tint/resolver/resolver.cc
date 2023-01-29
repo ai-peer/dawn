@@ -3850,12 +3850,49 @@ bool Resolver::ApplyAddressSpaceUsageToType(type::AddressSpace address_space,
 }
 
 template <typename SEM, typename F>
-SEM* Resolver::StatementScope(const ast::Statement* ast, SEM* sem, F&& callback) {
-    builder_->Sem().Add(ast, sem);
+SEM* Resolver::StatementScope(const ast::Statement* ast, SEM* sem_stmt, F&& callback) {
+    builder_->Sem().Add(ast, sem_stmt);
 
-    auto* as_compound = As<sem::CompoundStatement, CastFlags::kDontErrorOnImpossibleCast>(sem);
+    auto* as_compound = As<sem::CompoundStatement, CastFlags::kDontErrorOnImpossibleCast>(sem_stmt);
 
-    TINT_SCOPED_ASSIGNMENT(current_statement_, sem);
+    // Helper to handle attributes that are supported on certain types of statement.
+    auto handle_attributes = [&](auto* stmt, const char* use) {
+        for (auto* attr : stmt->attributes) {
+            Mark(attr);
+            if (auto* dc = attr->template As<ast::DiagnosticAttribute>()) {
+                Mark(dc->control);
+                if (!DiagnosticControl(dc->control)) {
+                    return false;
+                }
+            } else {
+                std::ostringstream ss;
+                ss << "attribute is not valid for " << use;
+                AddError(ss.str(), attr->source);
+                return false;
+            }
+        }
+        if (!validator_.NoDuplicateAttributes(stmt->attributes)) {
+            return false;
+        }
+        ApplyDiagnosticSeverities(sem_stmt);
+        return true;
+    };
+
+    // Handle attributes, if necessary.
+    // Some statements can take diagnostic filtering attributes, so push a new diagnostic filter
+    // scope to capture them.
+    validator_.DiagnosticFilters().Push();
+    TINT_DEFER(validator_.DiagnosticFilters().Pop());
+    if (!Switch(
+            ast,  //
+            [&](const ast::BlockStatement* block) {
+                return handle_attributes(block, "block statements");
+            },
+            [&](Default) { return true; })) {
+        return nullptr;
+    }
+
+    TINT_SCOPED_ASSIGNMENT(current_statement_, sem_stmt);
     TINT_SCOPED_ASSIGNMENT(current_compound_statement_,
                            as_compound ? as_compound : current_compound_statement_);
     TINT_SCOPED_ASSIGNMENT(current_scoping_depth_, current_scoping_depth_ + 1);
@@ -3871,7 +3908,7 @@ SEM* Resolver::StatementScope(const ast::Statement* ast, SEM* sem, F&& callback)
         return nullptr;
     }
 
-    return sem;
+    return sem_stmt;
 }
 
 bool Resolver::Mark(const ast::Node* node) {
