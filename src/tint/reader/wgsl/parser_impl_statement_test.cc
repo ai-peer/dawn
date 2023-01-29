@@ -95,7 +95,7 @@ TEST_F(ParserImplTest, Statement_If_Invalid) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:10: expected '}'");
+    EXPECT_EQ(p->error(), "1:10: expected '}' for if statement");
 }
 
 TEST_F(ParserImplTest, Statement_Variable) {
@@ -269,7 +269,7 @@ TEST_F(ParserImplTest, Statement_Body_Invalid) {
     EXPECT_TRUE(e.errored);
     EXPECT_FALSE(e.matched);
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), "1:3: expected '}'");
+    EXPECT_EQ(p->error(), "1:3: expected '}' for block statement");
 }
 
 TEST_F(ParserImplTest, Statement_ConstAssert_WithParen) {
