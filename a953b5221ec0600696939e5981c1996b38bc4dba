@@ -146,6 +146,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "718c981d_dd1859c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-30T07:25:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cea793a6_4a24f699",
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "24acb588_c2646802",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -198,6 +216,30 @@
       "side": 1,
       "message": "Based on [1], in WGSL we don\u0027t have bgra8unorm WGSL qualifier, so\n- pipeline.getBindGroupLayout() cannot return a bind group layout with BGRA8Unorm format\n- in BindGroupLayout we cannot specify BGRA8Unorm as storage texture format\n- when validating BindGroup we have to make RGBA8Unorm bind group layout entry compatible with BGRA8Unorm texture",
       "parentUuid": "7d01347b_822f5b92",
+      "range": {
+        "startLine": 168,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 0
+      },
+      "revId": "a953b5221ec0600696939e5981c1996b38bc4dba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49e3e51_d86a592e",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-30T07:25:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0623917f_fee172a5",
       "range": {
         "startLine": 168,
         "startChar": 12,
