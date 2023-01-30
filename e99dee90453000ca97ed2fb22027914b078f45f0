@@ -16,6 +16,24 @@
       "message": "PTAL and please help submit if it passes CQ, it should fix Kokoro",
       "revId": "e99dee90453000ca97ed2fb22027914b078f45f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6846e67f_037e256d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T23:40:31Z",
+      "side": 1,
+      "message": "kokoro still broken :-/ \n\n```\nT:\\tmp\\dawn-temp\\dawn-build\u003ecmake \"T:\\tmp\\dawn-temp\\dawn-src\" -G \"Ninja\" -DCMAKE_C_COMPILER\u003d\"cl.exe\" -DCMAKE_CXX_COMPILER\u003d\"cl.exe\"                  -DTINT_BUILD_DOCS\u003dO                 -DTINT_BUILD_BENCHMARKS\u003d1           -DCMAKE_BUILD_TYPE\u003dRelease     -DTINT_BUILD_BENCHMARKS\u003d1           -DTINT_BUILD_SPV_READER\u003d1           -DTINT_BUILD_WGSL_READER\u003d1          -DTINT_BUILD_GLSL_WRITER\u003d1          -DTINT_BUILD_HLSL_WRITER\u003d1          -DTINT_BUILD_MSL_WRITER\u003d1           -DTINT_BUILD_SPV_WRITER\u003d1           -DTINT_BUILD_WGSL_WRITER\u003d1          -DTINT_RANDOMIZE_HASHES\u003d1   || goto :error \nCMake Error at CMakeLists.txt:24 (project):\n  Running\n\n   \u0027T:/tmp/dawn-temp/depot_tools/ninja\u0027 \u0027--version\u0027\n\n  failed with:\n\n   %1 is not a valid Win32 application\n```",
+      "parentUuid": "5ff922d6_11cc9c15",
+      "revId": "e99dee90453000ca97ed2fb22027914b078f45f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
