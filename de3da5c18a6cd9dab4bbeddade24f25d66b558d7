@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30493ffa_3817249e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-01-30T03:16:34Z",
+      "side": 1,
+      "message": "Please take a look, thanks. Kokoro meets a toolchain failure, but I don\u0027t know how to retrigger.",
+      "revId": "de3da5c18a6cd9dab4bbeddade24f25d66b558d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
