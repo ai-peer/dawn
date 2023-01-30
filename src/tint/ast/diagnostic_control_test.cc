@@ -22,27 +22,11 @@
 
 #include <string>
 
+#include "gtest/gtest.h"
 #include "src/tint/ast/diagnostic_control.h"
-#include "src/tint/ast/test_helper.h"
+#include "src/tint/utils/string.h"
 
 namespace tint::ast {
-namespace {
-
-using DiagnosticControlTest = TestHelper;
-
-TEST_F(DiagnosticControlTest, Creation) {
-    auto* name = Expr("foo");
-    Source source;
-    source.range.begin = Source::Location{20, 2};
-    source.range.end = Source::Location{20, 5};
-    auto* control = create<ast::DiagnosticControl>(source, DiagnosticSeverity::kWarning, name);
-    EXPECT_EQ(control->source.range.begin.line, 20u);
-    EXPECT_EQ(control->source.range.begin.column, 2u);
-    EXPECT_EQ(control->source.range.end.line, 20u);
-    EXPECT_EQ(control->source.range.end.column, 5u);
-    EXPECT_EQ(control->severity, DiagnosticSeverity::kWarning);
-    EXPECT_EQ(control->rule_name, name);
-}
 
 namespace diagnostic_severity_tests {
 
@@ -152,5 +136,4 @@ INSTANTIATE_TEST_SUITE_P(ValidCases, DiagnosticRulePrintTest, testing::ValuesIn(
 
 }  // namespace diagnostic_rule_tests
 
-}  // namespace
 }  // namespace tint::ast

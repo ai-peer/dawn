@@ -26,10 +26,8 @@ TEST_F(ParserImplTest, DiagnosticAttribute_Valid) {
     EXPECT_TRUE(a.matched);
     auto* d = a.value->As<ast::DiagnosticAttribute>();
     ASSERT_NE(d, nullptr);
-    EXPECT_EQ(d->control->severity, ast::DiagnosticSeverity::kOff);
-    auto* r = As<ast::IdentifierExpression>(d->control->rule_name);
-    ASSERT_NE(r, nullptr);
-    EXPECT_EQ(p->builder().Symbols().NameFor(r->symbol), "foo");
+    EXPECT_EQ(d->control.severity, ast::DiagnosticSeverity::kOff);
+    EXPECT_EQ(p->builder().Symbols().NameFor(d->control.rule_name), "foo");
 }
 
 }  // namespace

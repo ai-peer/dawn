@@ -14,19 +14,7 @@ See:
 
 #include <string>
 
-#include "src/tint/program_builder.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ast::DiagnosticControl);
-
 namespace tint::ast {
-
-DiagnosticControl::~DiagnosticControl() = default;
-
-const DiagnosticControl* DiagnosticControl::Clone(CloneContext* ctx) const {
-    auto src = ctx->Clone(source);
-    auto rule = ctx->Clone(rule_name);
-    return ctx->dst->create<DiagnosticControl>(src, severity, rule);
-}
 
 diag::Severity ToSeverity(DiagnosticSeverity sc) {
     switch (sc) {
