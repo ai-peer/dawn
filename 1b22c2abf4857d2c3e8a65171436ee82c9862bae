@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dac92ff_6c69e10c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-30T08:49:59Z",
+      "side": 1,
+      "message": "LGTM, feel free to bypass kokoro for now. I\u0027m looking into it.",
+      "revId": "1b22c2abf4857d2c3e8a65171436ee82c9862bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2a85f0c_cd449351",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-30T08:49:59Z",
+      "side": 1,
+      "message": "nit: Maybe add a TODO here as well.",
+      "revId": "1b22c2abf4857d2c3e8a65171436ee82c9862bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
