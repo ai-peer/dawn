@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f54b8ed_db1703ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T18:58:53Z",
+      "side": 1,
+      "message": "Tested in https://chromium-swarm.appspot.com/task?id\u003d601cda2b46a06c10\n\nshould fix dawn_end2end_tests failures on Mac AMD CI bots",
+      "revId": "94f1cac0a3e5d87cbc2b669eb158fdb7bd3b5bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
