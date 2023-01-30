@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97913ed8_3e1df8c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T16:39:03Z",
+      "side": 1,
+      "message": "need suppression/bug for NVIDIA GLES",
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46352730_3f51350a",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T16:39:03Z",
+      "side": 1,
+      "message": "sigh... will file bug - or find an existing one. May be crbug.com/dawn/838",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 22
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903264ee_767f2362",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T16:39:03Z",
+      "side": 1,
+      "message": "stale",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 0
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
