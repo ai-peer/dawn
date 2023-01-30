@@ -275,6 +275,23 @@ void Device::InitTogglesFromDriver() {
     if (gpu_info::IsAMD(vendorId) || gpu_info::IsIntel(vendorId)) {
         SetToggle(Toggle::MetalUseCombinedDepthStencilFormatForStencil8, true);
     }
+
+    // Need on AMD Radeon HD 8870M (gcn-1) MacOS 12.1;
+    //  not on AMD Radeon Pro 555 (gcn-4) MacOS 13.1
+    bool isLessThanAMDGN4OrMac13Dot1 = false;
+    if (gpu_info::IsAMDGCN1(vendorId, deviceId) || gpu_info::IsAMDGCN2(vendorId, deviceId) ||
+        gpu_info::IsAMDGCN3(vendorId, deviceId)) {
+        isLessThanAMDGN4OrMac13Dot1 = true;
+    } else if (gpu_info::IsAMD(vendorId)) {
+        if (@available(macos 13.1, *)) {
+        } else {
+            isLessThanAMDGN4OrMac13Dot1 = true;
+        }
+    }
+    if (isLessThanAMDGN4OrMac13Dot1) {
+        SetToggle(Toggle::MetalUseBothDepthAndStencilAttachmentsForCombinedDepthStencilFormats,
+                  true);
+    }
 #endif
 }
 
