@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ff922d6_11cc9c15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-30T22:45:24Z",
+      "side": 1,
+      "message": "PTAL and please help submit if it passes CQ, it should fix Kokoro",
+      "revId": "e99dee90453000ca97ed2fb22027914b078f45f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
