@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a08731_96d16a9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-30T08:53:21Z",
+      "side": 1,
+      "message": "LGTM, makes sense that video would be using trigonometric rotation instead of clockwise ones.",
+      "revId": "18d1d726b9d63e87f2a811ea384b12f25338a286",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
