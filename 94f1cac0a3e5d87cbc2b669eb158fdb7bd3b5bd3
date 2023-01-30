@@ -16,6 +16,29 @@
       "message": "Tested in https://chromium-swarm.appspot.com/task?id\u003d601cda2b46a06c10\n\nshould fix dawn_end2end_tests failures on Mac AMD CI bots",
       "revId": "94f1cac0a3e5d87cbc2b669eb158fdb7bd3b5bd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679daaa0_a8c89018",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T22:26:36Z",
+      "side": 1,
+      "message": "This comment seems to be a bit confusing w.r.t to the actual condition? Would be easier to understand if it\u0027s just more similar to the description of this CL.",
+      "range": {
+        "startLine": 279,
+        "startChar": 4,
+        "endLine": 280,
+        "endChar": 52
+      },
+      "revId": "94f1cac0a3e5d87cbc2b669eb158fdb7bd3b5bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
