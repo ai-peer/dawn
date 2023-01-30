@@ -686,9 +686,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
 
         // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
         // OpenGL backends right now.
-        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12.
         if (format == wgpu::TextureFormat::BGRA8Unorm &&
-            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
+            (IsD3D12() || IsOpenGLES() || IsOpenGL())) {
             continue;
         }
 
@@ -733,9 +733,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
 
         // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
         // OpenGL backends right now.
-        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12.
         if (format == wgpu::TextureFormat::BGRA8Unorm &&
-            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
+            (IsD3D12() || IsOpenGLES() || IsOpenGL())) {
             continue;
         }
 
