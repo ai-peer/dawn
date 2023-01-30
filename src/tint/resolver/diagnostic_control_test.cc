@@ -32,7 +32,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_DefaultSeverity) {
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_ErrorViaDirective) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kError, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts);
@@ -42,7 +42,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_ErrorViaDirective) {
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_WarningViaDirective) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kWarning, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kWarning, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts);
@@ -52,7 +52,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_WarningViaDirective) {
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_InfoViaDirective) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kInfo, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kInfo, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts);
@@ -62,7 +62,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_InfoViaDirective) {
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_OffViaDirective) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kOff, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts);
@@ -73,7 +73,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_OffViaDirective) {
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_ErrorViaAttribute) {
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kError, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts, utils::Vector{attr});
@@ -84,7 +84,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_ErrorViaAttribute) {
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_WarningViaAttribute) {
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kWarning, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kWarning, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts, utils::Vector{attr});
@@ -95,7 +95,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_WarningViaAttribute) {
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_InfoViaAttribute) {
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kInfo, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kInfo, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts, utils::Vector{attr});
@@ -106,7 +106,7 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_InfoViaAttribute) {
 
 TEST_F(ResolverDiagnosticControlTest, UnreachableCode_OffViaAttribute) {
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kOff, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts, utils::Vector{attr});
@@ -122,9 +122,9 @@ TEST_F(ResolverDiagnosticControlTest, UnreachableCode_ErrorViaDirective_Overridd
     //   return;
     //   return; // Should produce a warning
     // }
-    DiagnosticDirective(ast::DiagnosticSeverity::kError, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"));
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kWarning, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kWarning, Sym("chromium_unreachable_code"));
 
     auto stmts = utils::Vector{Return(), Return()};
     Func("foo", {}, ty.void_(), stmts, utils::Vector{attr});
@@ -150,7 +150,7 @@ TEST_F(ResolverDiagnosticControlTest, FunctionAttributeScope) {
     // }
     {
         auto* attr =
-            DiagnosticAttribute(ast::DiagnosticSeverity::kOff, Expr("chromium_unreachable_code"));
+            DiagnosticAttribute(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_code"));
         Func("foo", {}, ty.void_(),
              utils::Vector{
                  Return(),
@@ -167,7 +167,7 @@ TEST_F(ResolverDiagnosticControlTest, FunctionAttributeScope) {
     }
     {
         auto* attr =
-            DiagnosticAttribute(ast::DiagnosticSeverity::kInfo, Expr("chromium_unreachable_code"));
+            DiagnosticAttribute(ast::DiagnosticSeverity::kInfo, Sym("chromium_unreachable_code"));
         Func("zoo", {}, ty.void_(),
              utils::Vector{
                  Return(),
@@ -203,7 +203,7 @@ TEST_F(ResolverDiagnosticControlTest, BlockAttributeScope) {
     // }
 
     auto attr = [&](auto severity) {
-        return utils::Vector{DiagnosticAttribute(severity, Expr("chromium_unreachable_code"))};
+        return utils::Vector{DiagnosticAttribute(severity, Sym("chromium_unreachable_code"))};
     };
     Func("foo", {}, ty.void_(),
          utils::Vector{
@@ -242,8 +242,8 @@ TEST_F(ResolverDiagnosticControlTest, BlockAttributeScope) {
 }
 
 TEST_F(ResolverDiagnosticControlTest, UnrecognizedRuleName_Directive) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kError,
-                        Expr(Source{{12, 34}}, "chromium_unreachable_cod"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_cod"),
+                        Source{{12, 34}});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
     EXPECT_EQ(r()->error(),
               R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_cod'
@@ -253,7 +253,7 @@ Possible values: 'chromium_unreachable_code', 'derivative_uniformity')");
 
 TEST_F(ResolverDiagnosticControlTest, UnrecognizedRuleName_Attribute) {
     auto* attr = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
-                                     Expr(Source{{12, 34}}, "chromium_unreachable_cod"));
+                                     Sym("chromium_unreachable_cod"), Source{{12, 34}});
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
     EXPECT_EQ(r()->error(),
@@ -263,18 +263,18 @@ Possible values: 'chromium_unreachable_code', 'derivative_uniformity')");
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameSameSeverity_Directive) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kError,
-                        Expr(Source{{12, 34}}, "chromium_unreachable_code"));
-    DiagnosticDirective(ast::DiagnosticSeverity::kError,
-                        Expr(Source{{56, 78}}, "chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"),
+                        Source{{12, 34}});
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"),
+                        Source{{56, 78}});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameDifferentSeverity_Directive) {
-    DiagnosticDirective(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                        Expr("chromium_unreachable_code"));
-    DiagnosticDirective(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                        Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"),
+                        Source{{12, 34}});
+    DiagnosticDirective(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_code"),
+                        Source{{56, 78}});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
               R"(56:78 error: conflicting diagnostic directive
@@ -282,16 +282,16 @@ TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameDifferentSeverity_Directi
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameUnknownNameDifferentSeverity_Directive) {
-    DiagnosticDirective(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                        Expr("chromium_unreachable_codes"));
-    DiagnosticDirective(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                        Expr("chromium_unreachable_codes"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_codes"),
+                        Source{{12, 34}});
+    DiagnosticDirective(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_codes"),
+                        Source{{56, 78}});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
+              R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
 Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
-warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
+56:78 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
 Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
 56:78 error: conflicting diagnostic directive
@@ -299,27 +299,27 @@ Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_DifferentUnknownNameDifferentSeverity_Directive) {
-    DiagnosticDirective(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                        Expr("chromium_unreachable_codes"));
-    DiagnosticDirective(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                        Expr("chromium_unreachable_codex"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_codes"),
+                        Source{{12, 34}});
+    DiagnosticDirective(ast::DiagnosticSeverity::kOff, Sym("chromium_unreachable_codex"),
+                        Source{{56, 78}});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameSameSeverity_Attribute) {
     auto* attr1 = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
-                                      Expr(Source{{12, 34}}, "chromium_unreachable_code"));
+                                      Sym("chromium_unreachable_code"), Source{{12, 34}});
     auto* attr2 = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
-                                      Expr(Source{{56, 78}}, "chromium_unreachable_code"));
+                                      Sym("chromium_unreachable_code"), Source{{56, 78}});
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr1, attr2});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameDifferentSeverity_Attribute) {
-    auto* attr1 = DiagnosticAttribute(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                                      Expr("chromium_unreachable_code"));
-    auto* attr2 = DiagnosticAttribute(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                                      Expr("chromium_unreachable_code"));
+    auto* attr1 = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
+                                      Sym("chromium_unreachable_code"), Source{{12, 34}});
+    auto* attr2 = DiagnosticAttribute(ast::DiagnosticSeverity::kOff,
+                                      Sym("chromium_unreachable_code"), Source{{56, 78}});
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr1, attr2});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -328,17 +328,17 @@ TEST_F(ResolverDiagnosticControlTest, Conflict_SameNameDifferentSeverity_Attribu
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_SameUnknownNameDifferentSeverity_Attribute) {
-    auto* attr1 = DiagnosticAttribute(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                                      Expr("chromium_unreachable_codes"));
-    auto* attr2 = DiagnosticAttribute(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                                      Expr("chromium_unreachable_codes"));
+    auto* attr1 = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
+                                      Sym("chromium_unreachable_codes"), Source{{12, 34}});
+    auto* attr2 = DiagnosticAttribute(ast::DiagnosticSeverity::kOff,
+                                      Sym("chromium_unreachable_codes"), Source{{56, 78}});
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr1, attr2});
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              R"(warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
+              R"(12:34 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
 Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
-warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
+56:78 warning: unrecognized diagnostic rule 'chromium_unreachable_codes'
 Did you mean 'chromium_unreachable_code'?
 Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
 56:78 error: conflicting diagnostic attribute
@@ -346,10 +346,10 @@ Possible values: 'chromium_unreachable_code', 'derivative_uniformity'
 }
 
 TEST_F(ResolverDiagnosticControlTest, Conflict_DifferentUnknownNameDifferentSeverity_Attribute) {
-    auto* attr1 = DiagnosticAttribute(Source{{12, 34}}, ast::DiagnosticSeverity::kError,
-                                      Expr("chromium_unreachable_codes"));
-    auto* attr2 = DiagnosticAttribute(Source{{56, 78}}, ast::DiagnosticSeverity::kOff,
-                                      Expr("chromium_unreachable_codex"));
+    auto* attr1 = DiagnosticAttribute(ast::DiagnosticSeverity::kError,
+                                      Sym("chromium_unreachable_codes"), Source{{12, 34}});
+    auto* attr2 = DiagnosticAttribute(ast::DiagnosticSeverity::kOff,
+                                      Sym("chromium_unreachable_codex"), Source{{56, 78}});
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr1, attr2});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
