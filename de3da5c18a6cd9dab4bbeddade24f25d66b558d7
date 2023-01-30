@@ -33,6 +33,23 @@
       "message": "LGTM still, feel free to bypass Kokoro for now, I\u0027m looking into it.",
       "revId": "de3da5c18a6cd9dab4bbeddade24f25d66b558d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d05bc1_fce424d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-01-30T09:06:33Z",
+      "side": 1,
+      "message": "Thanks for reviewing, trying to commit with Kokoro bypassed",
+      "revId": "de3da5c18a6cd9dab4bbeddade24f25d66b558d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
