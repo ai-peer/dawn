@@ -1313,8 +1313,20 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                         });
                 }
             },
-            [&](const ast::DiagnosticControl* diagnostic) {
-                preserved_identifiers.Add(diagnostic->rule_name);
+            [&](const ast::DiagnosticAttribute* diagnostic) {
+                auto name = src->Symbols().NameFor(diagnostic->control.rule_name);
+                auto sym_out = b.Symbols().Register(name);
+                ctx.Replace(diagnostic,
+                            b.DiagnosticAttribute(ctx.Clone(diagnostic->source),
+                                                  diagnostic->control.severity, sym_out,
+                                                  ctx.Clone(diagnostic->control.rule_name_source)));
+            },
+            [&](const ast::DiagnosticDirective* diagnostic) {
+                auto name = src->Symbols().NameFor(diagnostic->control.rule_name);
+                auto sym_out = b.Symbols().Register(name);
+                ctx.Remove(ctx.src->AST().GlobalDeclarations(), diagnostic);
+                b.DiagnosticDirective(ctx.Clone(diagnostic->source), diagnostic->control.severity,
+                                      sym_out, ctx.Clone(diagnostic->control.rule_name_source));
             },
             [&](const ast::TypeName* type_name) {
                 if (is_type_short_name(type_name->name)) {

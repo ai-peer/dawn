@@ -20,7 +20,7 @@ namespace {
 using WgslGeneratorImplTest = TestHelper;
 
 TEST_F(WgslGeneratorImplTest, Emit_DiagnosticDirective) {
-    DiagnosticDirective(ast::DiagnosticSeverity::kError, Expr("chromium_unreachable_code"));
+    DiagnosticDirective(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"));
 
     GeneratorImpl& gen = Build();
 
@@ -32,7 +32,7 @@ TEST_F(WgslGeneratorImplTest, Emit_DiagnosticDirective) {
 
 TEST_F(WgslGeneratorImplTest, Emit_DiagnosticAttribute) {
     auto* attr =
-        DiagnosticAttribute(ast::DiagnosticSeverity::kError, Expr("chromium_unreachable_code"));
+        DiagnosticAttribute(ast::DiagnosticSeverity::kError, Sym("chromium_unreachable_code"));
     Func("foo", {}, ty.void_(), {}, utils::Vector{attr});
 
     GeneratorImpl& gen = Build();
