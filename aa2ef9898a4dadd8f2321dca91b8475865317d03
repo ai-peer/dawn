@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39853a0e_a49b3f7e",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T23:44:24Z",
+      "side": 1,
+      "message": "Unclear if worthwhile, but I notice that InternalPipelineStore already has some shaders, and I\u0027m pretty sure this is the exact same vertex shader as the one used in the other workaround. We could consider moving this part into there as well?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 1
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "053d745c_ebf82648",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T23:44:24Z",
+      "side": 1,
+      "message": "nit. texture views\n\nu-nit. character per line formatting.",
+      "range": {
+        "startLine": 119,
+        "startChar": 46,
+        "endLine": 119,
+        "endChar": 60
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46352730_3f51350a",
         "filename": "src/dawn/native/BlitDepthToDepth.cpp",
         "patchSetId": 4
@@ -36,6 +82,76 @@
         "startChar": 0,
         "endLine": 124,
         "endChar": 22
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "535e475e_0350df26",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T23:44:24Z",
+      "side": 1,
+      "message": "Wow... this seems inefficient... lol. Do you think we should have a toggle for this behavior? Wondering if it is orthogonal to the blit fix here. (Might even be similar to AlwaysResolveIntoZeroLevelAndLayer? Not sure though...)",
+      "parentUuid": "46352730_3f51350a",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 22
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6acd116_687ad34a",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T23:44:24Z",
+      "side": 1,
+      "message": "nit. Might be easier to read if we name this var something like `layer`? (I think we reuse it in at least one other place also?)",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef6c68cd_79cb1fbc",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-01-30T23:44:24Z",
+      "side": 1,
+      "message": "nit. Maybe just `UseBlitForTextureToTextureCopyToNonzeroSubresource` without the depth since the description seems to drop the depth part also, probably because it could be either depth or miplevel.",
+      "range": {
+        "startLine": 357,
+        "startChar": 13,
+        "endLine": 357,
+        "endChar": 68
       },
       "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
