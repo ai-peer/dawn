@@ -43,6 +43,7 @@
 #include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/diagnostic_attribute.h"
 #include "src/tint/ast/diagnostic_control.h"
+#include "src/tint/ast/diagnostic_directive.h"
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/enable.h"
@@ -3257,68 +3258,56 @@ class ProgramBuilder {
     /// @param source the source information
     /// @param severity the diagnostic severity control
     /// @param rule_name the diagnostic rule name
+    /// @param rule_name_source the optional source location for the diagnostic rule name
     /// @returns the diagnostic attribute pointer
-    const ast::DiagnosticAttribute* DiagnosticAttribute(
-        const Source& source,
-        ast::DiagnosticSeverity severity,
-        const ast::IdentifierExpression* rule_name) {
-        return create<ast::DiagnosticAttribute>(source,
-                                                DiagnosticControl(source, severity, rule_name));
+    const ast::DiagnosticAttribute* DiagnosticAttribute(const Source& source,
+                                                        ast::DiagnosticSeverity severity,
+                                                        Symbol rule_name,
+                                                        Source rule_name_source = {}) {
+        return create<ast::DiagnosticAttribute>(
+            source, ast::DiagnosticControl(severity, rule_name, rule_name_source));
     }
 
     /// Creates an ast::DiagnosticAttribute
     /// @param severity the diagnostic severity control
     /// @param rule_name the diagnostic rule name
+    /// @param rule_name_source the optional source location for the diagnostic rule name
     /// @returns the diagnostic attribute pointer
-    const ast::DiagnosticAttribute* DiagnosticAttribute(
-        ast::DiagnosticSeverity severity,
-        const ast::IdentifierExpression* rule_name) {
-        return create<ast::DiagnosticAttribute>(source_,
-                                                DiagnosticControl(source_, severity, rule_name));
+    const ast::DiagnosticAttribute* DiagnosticAttribute(ast::DiagnosticSeverity severity,
+                                                        Symbol rule_name,
+                                                        Source rule_name_source = {}) {
+        return create<ast::DiagnosticAttribute>(
+            source_, ast::DiagnosticControl(severity, rule_name, rule_name_source));
     }
 
-    /// Creates an ast::DiagnosticControl
+    /// Add a diagnostic directive to the module.
     /// @param source the source information
     /// @param severity the diagnostic severity control
     /// @param rule_name the diagnostic rule name
-    /// @returns the diagnostic control pointer
-    const ast::DiagnosticControl* DiagnosticControl(const Source& source,
-                                                    ast::DiagnosticSeverity severity,
-                                                    const ast::IdentifierExpression* rule_name) {
-        return create<ast::DiagnosticControl>(source, severity, rule_name);
+    /// @param rule_name_source the optional source location for the diagnostic rule name
+    /// @returns the diagnostic directive pointer
+    const ast::DiagnosticDirective* DiagnosticDirective(const Source& source,
+                                                        ast::DiagnosticSeverity severity,
+                                                        Symbol rule_name,
+                                                        Source rule_name_source = {}) {
+        auto* directive = create<ast::DiagnosticDirective>(
+            source, ast::DiagnosticControl(severity, rule_name, rule_name_source));
+        AST().AddDiagnosticDirective(directive);
+        return directive;
     }
 
-    /// Creates an ast::DiagnosticControl
+    /// Add a diagnostic directive to the module.
     /// @param severity the diagnostic severity control
     /// @param rule_name the diagnostic rule name
-    /// @returns the diagnostic control pointer
-    const ast::DiagnosticControl* DiagnosticControl(ast::DiagnosticSeverity severity,
-                                                    const ast::IdentifierExpression* rule_name) {
-        return create<ast::DiagnosticControl>(source_, severity, rule_name);
-    }
-
-    /// Add a global diagnostic control to the module.
-    /// @param source the source information
-    /// @param severity the diagnostic severity control
-    /// @param rule_name the diagnostic rule name
-    /// @returns the diagnostic control pointer
-    const ast::DiagnosticControl* DiagnosticDirective(const Source& source,
-                                                      ast::DiagnosticSeverity severity,
-                                                      const ast::IdentifierExpression* rule_name) {
-        auto* control = DiagnosticControl(source, severity, rule_name);
-        AST().AddDiagnosticControl(control);
-        return control;
-    }
-
-    /// Add a global diagnostic control to the module.
-    /// @param severity the diagnostic severity control
-    /// @param rule_name the diagnostic rule name
-    /// @returns the diagnostic control pointer
-    const ast::DiagnosticControl* DiagnosticDirective(ast::DiagnosticSeverity severity,
-                                                      const ast::IdentifierExpression* rule_name) {
-        auto* control = DiagnosticControl(source_, severity, rule_name);
-        AST().AddDiagnosticControl(control);
-        return control;
+    /// @param rule_name_source the optional source location for the diagnostic rule name
+    /// @returns the diagnostic directive pointer
+    const ast::DiagnosticDirective* DiagnosticDirective(ast::DiagnosticSeverity severity,
+                                                        Symbol rule_name,
+                                                        Source rule_name_source = {}) {
+        auto* directive = create<ast::DiagnosticDirective>(
+            source_, ast::DiagnosticControl(severity, rule_name, rule_name_source));
+        AST().AddDiagnosticDirective(directive);
+        return directive;
     }
 
     /// Sets the current builder source to `src`
