@@ -33,6 +33,29 @@
       "message": "nit: Maybe add a TODO here as well.",
       "revId": "1b22c2abf4857d2c3e8a65171436ee82c9862bae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c0b177_1f8e80f2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-01-30T16:58:35Z",
+      "side": 1,
+      "message": "it shouldn\u0027t be necessary to use KEEP if they will fail consistently.",
+      "range": {
+        "startLine": 340,
+        "startChar": 0,
+        "endLine": 340,
+        "endChar": 6
+      },
+      "revId": "1b22c2abf4857d2c3e8a65171436ee82c9862bae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
