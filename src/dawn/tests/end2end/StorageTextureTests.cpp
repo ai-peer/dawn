@@ -244,6 +244,7 @@ class StorageTextureTests : public DawnTest {
 
             // normalized signed/unsigned integer formats
             case wgpu::TextureFormat::RGBA8Unorm:
+            case wgpu::TextureFormat::BGRA8Unorm:
                 return "vec4f(f32(value) / 255.0, f32(value) / 255.0 * 2.0, "
                        "f32(value) / 255.0 * 3.0, f32(value) / 255.0 * 4.0)";
 
@@ -686,9 +687,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
 
         // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
         // OpenGL backends right now.
-        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12.
         if (format == wgpu::TextureFormat::BGRA8Unorm &&
-            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
+            (IsD3D12() || IsOpenGLES() || IsOpenGL())) {
             continue;
         }
 
@@ -733,9 +734,9 @@ TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
 
         // BGRA8Unorm has not been supported as storage textures on OpenGL ES backends with ANGLE or
         // OpenGL backends right now.
-        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12 and Vulkan.
+        // TODO(crbug.com/dawn/1641): Support BGRA8Unorm as storage textures on D3D12.
         if (format == wgpu::TextureFormat::BGRA8Unorm &&
-            (IsD3D12() || IsVulkan() || IsOpenGLES() || IsOpenGL())) {
+            (IsD3D12() || IsOpenGLES() || IsOpenGL())) {
             continue;
         }
 
