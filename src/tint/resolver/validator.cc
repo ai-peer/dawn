@@ -2433,7 +2433,7 @@ bool Validator::NoDuplicateAttributes(utils::VectorRef<const ast::Attribute*> at
     for (auto* d : attributes) {
         if (auto* diag = d->As<ast::DiagnosticAttribute>()) {
             // Allow duplicate diagnostic attributes, and check for conflicts later.
-            diagnostic_controls.Push(diag->control);
+            diagnostic_controls.Push(&diag->control);
         } else {
             auto added = seen.Add(&d->TypeInfo(), d->source);
             if (!added && !d->Is<ast::InternalAttribute>()) {
@@ -2452,18 +2452,18 @@ bool Validator::DiagnosticControls(utils::VectorRef<const ast::DiagnosticControl
     // They conflict if the rule name is the same and the severity is different.
     utils::Hashmap<Symbol, const ast::DiagnosticControl*, 8> diagnostics;
     for (auto* dc : controls) {
-        auto diag_added = diagnostics.Add(dc->rule_name->symbol, dc);
+        auto diag_added = diagnostics.Add(dc->rule_name, dc);
         if (!diag_added && (*diag_added.value)->severity != dc->severity) {
             {
                 std::ostringstream ss;
                 ss << "conflicting diagnostic " << use;
-                AddError(ss.str(), dc->source);
+                AddError(ss.str(), dc->rule_name_source);
             }
             {
                 std::ostringstream ss;
-                ss << "severity of '" << symbols_.NameFor(dc->rule_name->symbol) << "' set to '"
+                ss << "severity of '" << symbols_.NameFor(dc->rule_name) << "' set to '"
                    << dc->severity << "' here";
-                AddNote(ss.str(), (*diag_added.value)->source);
+                AddNote(ss.str(), (*diag_added.value)->rule_name_source);
             }
             return false;
         }
