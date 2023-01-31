@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin,\n\nOn linux-dawn-rel bot vkGetPhysicalDeviceImageFormatProperties() will return VK_ERROR_FORMAT_NOT_SUPPORTED when format is VK_FORMAT_B8G8R8A8_UNORM and usage contains VK_IMAGE_USAGE_STORAGE_BIT (UNREACHABLE() is got at [1]) which means we cannot create a vkimage with VK_FORMAT_B8G8R8A8_UNORM and usage VK_IMAGE_USAGE_STORAGE_BIT, so I think in WebGPU SPEC we still have to make \"BGRA8Unorm-storage\" as an optional extension.\n\nSorry that I failed to realize it until I tested this CL.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/TextureVk.cpp;l\u003d616",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad4f4d86_96a94dbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-01-31T00:47:55Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nOn linux-dawn-rel bot vkGetPhysicalDeviceImageFormatProperties() will return VK_ERROR_FORMAT_NOT_SUPPORTED when format is VK_FORMAT_B8G8R8A8_UNORM and usage contains VK_IMAGE_USAGE_STORAGE_BIT (UNREACHABLE() is got at [1]) which means we cannot create a vkimage with VK_FORMAT_B8G8R8A8_UNORM and usage VK_IMAGE_USAGE_STORAGE_BIT. I\u0027ve also reproduced it on another HD630 (device ID 0x591B, Kaby Lake GT2) with Mesa 19.0.2, so it seems old Intel Mesa driver doesn\u0027t support creating a VkImage with BGRA8Unorm format.\n\nI think in WebGPU SPEC we still have to make \"BGRA8Unorm-storage\" as an optional extension, which can only be enabled on the platforms that support creating an BGRA8Unorm texture with STORAGE usage.\n\nI feel really sorry that I failed to realize it until I tested this CL.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/TextureVk.cpp;l\u003d616",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
