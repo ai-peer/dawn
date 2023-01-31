@@ -560,6 +560,8 @@ MaybeError CommandBuffer::Execute() {
                               copy->copySize);
                 gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
                 ToBackend(dst.texture)->Touch();
+
+                buffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -666,6 +668,8 @@ MaybeError CommandBuffer::Execute() {
 
                 gl.BindBuffer(GL_PIXEL_PACK_BUFFER, 0);
                 gl.DeleteFramebuffers(1, &readFBO);
+
+                buffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -720,6 +724,7 @@ MaybeError CommandBuffer::Execute() {
                     gl.BufferSubData(GL_ARRAY_BUFFER, cmd->offset, cmd->size, clearValues.data());
                 }
 
+                dstBuffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -756,6 +761,8 @@ MaybeError CommandBuffer::Execute() {
 
                 gl.BindBuffer(GL_ARRAY_BUFFER, dstBuffer->GetHandle());
                 gl.BufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+
+                dstBuffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -799,6 +806,8 @@ MaybeError CommandBuffer::ExecuteComputePass() {
                 gl.BindBuffer(GL_DISPATCH_INDIRECT_BUFFER, indirectBuffer->GetHandle());
                 gl.DispatchComputeIndirect(static_cast<GLintptr>(indirectBufferOffset));
                 gl.MemoryBarrier(GL_ALL_BARRIER_BITS);
+
+                indirectBuffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -1056,6 +1065,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 gl.DrawArraysIndirect(
                     lastPipeline->GetGLPrimitiveTopology(),
                     reinterpret_cast<void*>(static_cast<intptr_t>(indirectBufferOffset)));
+                indirectBuffer->MarkUsedInPendingCommands();
                 break;
             }
 
@@ -1072,6 +1082,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 gl.DrawElementsIndirect(
                     lastPipeline->GetGLPrimitiveTopology(), indexBufferFormat,
                     reinterpret_cast<void*>(static_cast<intptr_t>(draw->indirectOffset)));
+                indirectBuffer->MarkUsedInPendingCommands();
                 break;
             }
 
