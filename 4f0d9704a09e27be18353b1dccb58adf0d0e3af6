@@ -16,6 +16,23 @@
       "message": "LGTM but I edited the commit message to fix the bug id so not CR+ing",
       "revId": "4f0d9704a09e27be18353b1dccb58adf0d0e3af6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "189b5560_60d9de6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-01-31T04:10:06Z",
+      "side": 1,
+      "message": "pretty certain kokoro problem is unrelated",
+      "revId": "4f0d9704a09e27be18353b1dccb58adf0d0e3af6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
