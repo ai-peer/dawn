@@ -51,7 +51,8 @@ class Device final : public DeviceBase {
 
     // Returns all the OpenGL entry points and ensures that the associated
     // Context is current.
-    const OpenGLFunctions& GetGL() const;
+    const OpenGLFunctions& GetGL();
+    const OpenGLFunctions& GetGLForQueryOnly() const;
 
     const GLFormat& GetGLFormat(const Format& format);
 
@@ -140,6 +141,8 @@ class Device final : public DeviceBase {
 
     GLFormatTable mFormatTable;
     std::unique_ptr<Context> mContext = nullptr;
+    // Has pending GL commands which are not associated with a fence.
+    bool mHasPendingCommands = false;
 };
 
 }  // namespace dawn::native::opengl

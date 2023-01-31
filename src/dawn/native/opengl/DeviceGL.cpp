@@ -243,7 +243,7 @@ const GLFormat& Device::GetGLFormat(const Format& format) {
 }
 
 GLenum Device::GetBGRAInternalFormat() const {
-    const OpenGLFunctions& gl = GetGL();
+    const OpenGLFunctions& gl = GetGLForQueryOnly();
     if (gl.IsGLExtensionSupported("GL_EXT_texture_format_BGRA8888") ||
         gl.IsGLExtensionSupported("GL_APPLE_texture_format_BGRA8888")) {
         return GL_BGRA8_EXT;
@@ -315,10 +315,17 @@ ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
 }
 
 void Device::SubmitFenceSync() {
+    if (!mHasPendingCommands) {
+        return;
+    }
+
     const OpenGLFunctions& gl = GetGL();
     GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
     IncrementLastSubmittedCommandSerial();
     mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
+
+    // Reset mHasPendingCommands after GetGL() which will set mHasPendingCommands to true.
+    mHasPendingCommands = false;
 }
 
 MaybeError Device::ValidateEGLImageCanBeWrapped(const TextureDescriptor* descriptor,
@@ -381,6 +388,7 @@ TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor
 }
 
 MaybeError Device::TickImpl() {
+    SubmitFenceSync();
     return {};
 }
 
@@ -461,7 +469,15 @@ float Device::GetTimestampPeriodInNS() const {
 
 void Device::ForceEventualFlushOfCommands() {}
 
-const OpenGLFunctions& Device::GetGL() const {
+const OpenGLFunctions& Device::GetGL() {
+    if (mContext) {
+        mContext->MakeCurrent();
+    }
+    mHasPendingCommands = true;
+    return mGL;
+}
+
+const OpenGLFunctions& Device::GetGLForQueryOnly() const {
     if (mContext) {
         mContext->MakeCurrent();
     }
