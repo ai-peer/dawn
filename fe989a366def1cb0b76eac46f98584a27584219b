@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f705156_1f3acc23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-01-31T00:58:59Z",
+      "side": 1,
+      "message": "Speculative fix for the crashes seen during the weekend that WebGPU was enabled on Android. Haven\u0027t been able to repro it myself, and thus can\u0027t state with 100% confidence that this is the only change required, but the spec indicating that this string may be NULL is a pretty strong signal that at least some drivers may be returning that and thus causing a crash.",
+      "revId": "fe989a366def1cb0b76eac46f98584a27584219b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
