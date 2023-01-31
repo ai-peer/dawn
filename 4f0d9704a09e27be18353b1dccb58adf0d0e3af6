@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b22b00fc_988b2f0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-01-31T02:48:32Z",
+      "side": 1,
+      "message": "LGTM but I edited the commit message to fix the bug id so not CR+ing",
+      "revId": "4f0d9704a09e27be18353b1dccb58adf0d0e3af6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
