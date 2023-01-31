@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c2e4d2_8452dea1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-31T18:54:37Z",
+      "side": 1,
+      "message": "Ah, issue https://bugs.chromium.org/p/tint/issues/detail?id\u003d1802 *is* the bug for the polyfill.",
+      "revId": "14a55fb04e804888897c6676e0f5334279c837c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e39f07a_a5933af2",
