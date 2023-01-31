@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e9d82cc_ec148d2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-31T09:51:26Z",
+      "side": 1,
+      "message": "LGTM too, these are quite some heroics you\u0027re going through to fix a busted driver \u003e_\u003e It\u0027s nice that WebGPU and WGSL are stable enough that we can be very reeantrant like this ans make backend-agnostic fixes. Over time I wonder if maybe we should move all reentrant workarounds like this into a subdirectory similar to Tint transforms.",
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16ba1272_973563b2",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-31T09:51:26Z",
+      "side": 1,
+      "message": "u-nit: we could start using more idiomatic WGSL in these internal shaders at some point, with vec4f, array(vec4f()) type determination etc.",
+      "range": {
+        "startLine": 36,
+        "startChar": 28,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39853a0e_a49b3f7e",
@@ -113,6 +153,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42600d42_5ecaf036",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-31T09:51:26Z",
+      "side": 1,
+      "message": "Ewwww that\u0027s disgusting, that Intel driver is completely busted...",
+      "parentUuid": "535e475e_0350df26",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 22
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6acd116_687ad34a",
         "filename": "src/dawn/native/BlitDepthToDepth.cpp",
         "patchSetId": 4
@@ -147,6 +211,30 @@
       "writtenOn": "2023-01-30T23:44:24Z",
       "side": 1,
       "message": "nit. Maybe just `UseBlitForTextureToTextureCopyToNonzeroSubresource` without the depth since the description seems to drop the depth part also, probably because it could be either depth or miplevel.",
+      "range": {
+        "startLine": 357,
+        "startChar": 13,
+        "endLine": 357,
+        "endChar": 68
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2ea202_f6b117a0",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-01-31T09:51:26Z",
+      "side": 1,
+      "message": "I think it\u0027s important to mention that this is for depth textures. So UseBlitForDepth ....?",
+      "parentUuid": "ef6c68cd_79cb1fbc",
       "range": {
         "startLine": 357,
         "startChar": 13,
