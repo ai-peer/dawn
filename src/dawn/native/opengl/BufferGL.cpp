@@ -57,6 +57,7 @@ Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
     } else {
         // Buffers start zeroed if you pass nullptr to glBufferData.
         gl.BufferData(GL_ARRAY_BUFFER, mAllocatedSize, nullptr, GL_STATIC_DRAW);
+        SetIsDataInitialized();
     }
 }
 
