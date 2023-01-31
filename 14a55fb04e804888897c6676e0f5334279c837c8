@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80d633fb_f9be9a74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-31T16:53:38Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d like David to double check this is the right way to normalize.",
+      "revId": "14a55fb04e804888897c6676e0f5334279c837c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
