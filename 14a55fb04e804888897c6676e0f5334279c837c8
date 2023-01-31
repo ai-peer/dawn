@@ -16,6 +16,23 @@
       "message": "LGTM, but I\u0027d like David to double check this is the right way to normalize.",
       "revId": "14a55fb04e804888897c6676e0f5334279c837c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e39f07a_a5933af2",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2132,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-01-31T18:52:41Z",
+      "side": 1,
+      "message": "From https://registry.khronos.org/vulkan/specs/1.0-extensions/html/vkspec.html#spirvenv-op-prec \n\nTowards the end:\n\n\u003e For the OpSRem and OpSMod instructions, if either operand is negative the result is undefined.\n\nAnd a note:\n\n\u003e \nWhile the OpSRem and OpSMod instructions are supported by the Vulkan environment, they require non-negative values and thus do not enable additional functionality beyond what OpUMod provides.\n\nSo we need to polyfill this.  This isn\u0027t enough of a fix.   Ok to land this if we have an open bug for v1 to do the polyfill.",
+      "revId": "14a55fb04e804888897c6676e0f5334279c837c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
