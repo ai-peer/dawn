@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "052e7968_60209d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-31T16:58:55Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "f5a091e76d3a0e516d6bbc494e6f994b6ed11486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6cba5d4_497cc541",
+        "filename": "src/tint/ast/block_statement_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-01-31T16:58:55Z",
+      "side": 1,
+      "message": "ubernit: could have a test that provides some attributes and checks they get propagated by the constructor",
+      "revId": "f5a091e76d3a0e516d6bbc494e6f994b6ed11486",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
