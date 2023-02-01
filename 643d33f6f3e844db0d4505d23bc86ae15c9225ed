@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd0a3e38_1758dd9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-01T15:26:07Z",
+      "side": 1,
+      "message": "Nit: tint:1820",
+      "revId": "643d33f6f3e844db0d4505d23bc86ae15c9225ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
