@@ -20,6 +20,7 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
+// #include "dawn/common/ityp_vector.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
@@ -78,6 +79,7 @@ class CommandBufferStateTracker {
 
     ityp::array<BindGroupIndex, BindGroupBase*, kMaxBindGroups> mBindgroups = {};
     ityp::array<BindGroupIndex, std::vector<uint32_t>, kMaxBindGroups> mDynamicOffsets = {};
+    // ityp::array<BindGroupIndex, ityp::vector<uint32_t>, kMaxBindGroups> mDynamicOffsets = {};
     ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsed;
     bool mIndexBufferSet = false;
     wgpu::IndexFormat mIndexFormat;

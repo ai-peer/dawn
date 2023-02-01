@@ -2693,6 +2693,8 @@ TEST_F(BindingsValidationTest, BindGroupsWithMoreBindingsThanPipelineLayout) {
                              : wgpu::BufferBindingType::Storage}});
         buffer[i] = CreateBuffer(mBufferSize, wgpu::BufferUsage::Storage);
         bg[i] = utils::MakeBindGroup(device, bgl[i], {{0, buffer[i]}});
+        // // Explicitly set offset and size to avoid writable storage buffer binding aliasing.
+        // bg[i] = utils::MakeBindGroup(device, bgl[i], {{0, buffer[i], i * 256, 8}});
     }
 
     // Set 3 bindings (and 3 pipeline layouts) in pipeline.
