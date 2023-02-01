@@ -49,6 +49,100 @@ std::optional<uint32_t> FindFirstUndersizedBuffer(
 
     return std::nullopt;
 }
+
+struct BufferBindingAliasingResult {
+    BindGroupIndex bindGroupIndex0;
+    BindingIndex bindingIndex0;
+    BindGroupIndex bindGroupIndex1;
+    BindingIndex bindingIndex1;
+
+    // Adjusted offset with dynamic offset
+    uint64_t offset0;
+    uint64_t size0;
+    uint64_t offset1;
+    uint64_t size1;
+};
+
+std::optional<BufferBindingAliasingResult> FindStorageBufferBindingAliasing(
+    const PipelineLayoutBase* pipelineLayout,
+    const ityp::array<BindGroupIndex, BindGroupBase*, kMaxBindGroups>& bindGroups,
+    const ityp::array<BindGroupIndex, std::vector<uint32_t>, kMaxBindGroups> dynamicOffsets) {
+    // Iterate through each bindGroupLayoutEntry their bindGroupentries to find if writable
+    // storage bindings aliasing exists.
+    // TODO(dawn:1642): Algorithm optimization from O(N^2) to O(N*logN)
+    for (BindGroupIndex i : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
+        BindGroupLayoutBase* currentBGL = bindGroups[i]->GetLayout();
+        for (BindingIndex bindingIndex{0}; bindingIndex < currentBGL->GetBufferCount();
+             ++bindingIndex) {
+            const BindingInfo& bindingInfo = currentBGL->GetBindingInfo(bindingIndex);
+
+            // Buffer bindings are sorted to have smallest of bindingIndex.
+            ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
+
+            BufferBinding bufferBinding = bindGroups[i]->GetBindingAsBufferBinding(bindingIndex);
+
+            if (!((bufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage) &&
+                  bindingInfo.buffer.type == wgpu::BufferBindingType::Storage)) {
+                continue;
+            }
+
+            for (BindGroupIndex j : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
+                if (i > j) {
+                    continue;
+                }
+
+                BindGroupLayoutBase* otherBGL = bindGroups[j]->GetLayout();
+
+                BindingIndex otherBindingIndexStart =
+                    i == j ? bindingIndex + static_cast<BindingIndex>(1)
+                           : static_cast<BindingIndex>(0);
+
+                for (BindingIndex otherBindingIndex{otherBindingIndexStart};
+                     otherBindingIndex < otherBGL->GetBufferCount(); ++otherBindingIndex) {
+                    const BindingInfo& otherBindingInfo =
+                        otherBGL->GetBindingInfo(otherBindingIndex);
+                    ASSERT(otherBindingInfo.bindingType == BindingInfoType::Buffer);
+                    BufferBinding otherBufferBinding =
+                        bindGroups[j]->GetBindingAsBufferBinding(otherBindingIndex);
+
+                    if (!((otherBufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage) &&
+                          otherBindingInfo.buffer.type == wgpu::BufferBindingType::Storage)) {
+                        continue;
+                    }
+
+                    if (bufferBinding.buffer != otherBufferBinding.buffer) {
+                        continue;
+                    }
+
+                    if (bufferBinding.size > 0 && otherBufferBinding.size > 0) {
+                        uint64_t offset = bufferBinding.offset;
+                        uint64_t otherOffset = otherBufferBinding.offset;
+
+                        // SetBindGroup validation already guarantees offsets and sizes don't
+                        // overflow
+                        if (bindingInfo.buffer.hasDynamicOffset) {
+                            offset += dynamicOffsets[i][static_cast<uint32_t>(bindingIndex)];
+                        }
+                        if (otherBindingInfo.buffer.hasDynamicOffset) {
+                            otherOffset +=
+                                dynamicOffsets[i][static_cast<uint32_t>(otherBindingIndex)];
+                        }
+                        if (offset <= otherOffset + otherBufferBinding.size - 1 &&
+                            otherOffset <= offset + bufferBinding.size - 1) {
+                            return BufferBindingAliasingResult{
+                                i,      bindingIndex,       j,           otherBindingIndex,
+                                offset, bufferBinding.size, otherOffset, otherBufferBinding.size,
+                            };
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return std::nullopt;
+}
+
 }  // namespace
 
 enum ValidationAspect {
@@ -249,6 +343,15 @@ void CommandBufferStateTracker::RecomputeLazyAspects(ValidationAspects aspects) 
         }
 
         if (matches) {
+            // Continue checking if there is writable storage buffer binding aliasing or not
+            std::optional<BufferBindingAliasingResult> result =
+                FindStorageBufferBindingAliasing(mLastPipelineLayout, mBindgroups, mDynamicOffsets);
+            if (result) {
+                matches = false;
+            }
+        }
+
+        if (matches) {
             mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
         }
     }
@@ -375,6 +478,22 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                     mBindgroups[i], static_cast<uint32_t>(i), bufferSize, mLastPipeline,
                     minBufferSize);
             }
+        }
+
+        std::optional<BufferBindingAliasingResult> result =
+            FindStorageBufferBindingAliasing(mLastPipelineLayout, mBindgroups, mDynamicOffsets);
+
+        if (result) {
+            return DAWN_VALIDATION_ERROR(
+                "Writable storage buffer binding found between bind group index %u, binding index "
+                "%u, "
+                "and bind group index %u, binding index %u, with overlapping ranges (offset: %u, "
+                "size: %u) and (offset: %u, size: %u).",
+                static_cast<uint32_t>(result->bindGroupIndex0),
+                static_cast<uint32_t>(result->bindingIndex0),
+                static_cast<uint32_t>(result->bindGroupIndex1),
+                static_cast<uint32_t>(result->bindingIndex1), result->offset0, result->size0,
+                result->offset1, result->size1);
         }
 
         // The chunk of code above should be similar to the one in |RecomputeLazyAspects|.
