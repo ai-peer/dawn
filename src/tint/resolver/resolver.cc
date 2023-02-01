@@ -318,8 +318,12 @@ type::Type* Resolver::Type(const ast::Type* ty) {
             return nullptr;
         },
         [&](const ast::ExternalTexture*) { return builder_->create<type::ExternalTexture>(); },
-        [&](const ast::TypeName* t) -> type::Type*{
+        [&](const ast::TypeName* t) -> type::Type* {
             Mark(t->name);
+
+            if (t->name->Is<ast::TemplatedIdentifier>()) {
+                TINT_UNREACHABLE(Resolver, builder_->Diagnostics()) << "TODO(crbug.com/tint/1810)";
+            }
 
             auto* resolved = sem_.ResolvedSymbol(t);
             if (resolved == nullptr) {
