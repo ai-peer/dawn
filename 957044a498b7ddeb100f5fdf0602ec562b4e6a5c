@@ -34,6 +34,23 @@
       "parentUuid": "81b6521a_cdb4a559",
       "revId": "957044a498b7ddeb100f5fdf0602ec562b4e6a5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c179874_1763ba03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T17:23:38Z",
+      "side": 1,
+      "message": "LGTM, chromium needs update",
+      "revId": "957044a498b7ddeb100f5fdf0602ec562b4e6a5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
