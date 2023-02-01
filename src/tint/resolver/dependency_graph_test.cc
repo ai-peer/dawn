@@ -1252,33 +1252,34 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
          },
          T,  // Return type
          utils::Vector{
-             Decl(Var(Sym(), T, V)),                    //
-             Decl(Let(Sym(), T, V)),                    //
-             CallStmt(Call(F, V)),                      //
-             Block(                                     //
-                 Assign(V, V)),                         //
-             If(V,                                      //
-                Block(Assign(V, V)),                    //
-                Else(If(V,                              //
-                        Block(Assign(V, V))))),         //
-             Ignore(Bitcast(T, V)),                     //
-             For(Decl(Var(Sym(), T, V)),                //
-                 Equal(V, V),                           //
-                 Assign(V, V),                          //
-                 Block(                                 //
-                     Assign(V, V))),                    //
-             While(Equal(V, V),                         //
-                   Block(                               //
-                       Assign(V, V))),                  //
-             Loop(Block(Assign(V, V)),                  //
-                  Block(Assign(V, V), BreakIf(V))),     //
-             Switch(V,                                  //
-                    Case(CaseSelector(1_i),             //
-                         Block(Assign(V, V))),          //
-                    DefaultCase(Block(Assign(V, V)))),  //
-             Return(V),                                 //
-             Break(),                                   //
-             Discard(),                                 //
+             Decl(Var(Sym(), ty.type_name(type_sym, V, V))),  //
+             Decl(Var(Sym(), T, V)),                          //
+             Decl(Let(Sym(), T, V)),                          //
+             CallStmt(Call(F, V)),                            //
+             Block(                                           //
+                 Assign(V, V)),                               //
+             If(V,                                            //
+                Block(Assign(V, V)),                          //
+                Else(If(V,                                    //
+                        Block(Assign(V, V))))),               //
+             Ignore(Bitcast(T, V)),                           //
+             For(Decl(Var(Sym(), T, V)),                      //
+                 Equal(V, V),                                 //
+                 Assign(V, V),                                //
+                 Block(                                       //
+                     Assign(V, V))),                          //
+             While(Equal(V, V),                               //
+                   Block(                                     //
+                       Assign(V, V))),                        //
+             Loop(Block(Assign(V, V)),                        //
+                  Block(Assign(V, V), BreakIf(V))),           //
+             Switch(V,                                        //
+                    Case(CaseSelector(1_i),                   //
+                         Block(Assign(V, V))),                //
+                    DefaultCase(Block(Assign(V, V)))),        //
+             Return(V),                                       //
+             Break(),                                         //
+             Discard(),                                       //
          },
          utils::Empty,                 // function attributes
          utils::Vector{Location(V)});  // return attributes

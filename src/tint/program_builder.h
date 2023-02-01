@@ -904,19 +904,23 @@ class ProgramBuilder {
 
         /// Creates a type name
         /// @param name the name
+        /// @param args optional template arguments
         /// @returns the type name
-        template <typename NAME>
-        const ast::TypeName* type_name(NAME&& name) const {
-            return builder->create<ast::TypeName>(builder->Sym(std::forward<NAME>(name)));
+        template <typename NAME, typename... ARGS, typename _ = DisableIfSource<NAME>>
+        const ast::TypeName* type_name(NAME&& name, ARGS&&... args) const {
+            return builder->create<ast::TypeName>(
+                builder->Expr(std::forward<NAME>(name), std::forward<ARGS>(args)...));
         }
 
         /// Creates a type name
         /// @param source the Source of the node
         /// @param name the name
+        /// @param args optional template arguments
         /// @returns the type name
-        template <typename NAME>
-        const ast::TypeName* type_name(const Source& source, NAME&& name) const {
-            return builder->create<ast::TypeName>(source, builder->Sym(std::forward<NAME>(name)));
+        template <typename NAME, typename... ARGS>
+        const ast::TypeName* type_name(const Source& source, NAME&& name, ARGS&&... args) const {
+            return builder->create<ast::TypeName>(
+                source, builder->Expr(std::forward<NAME>(name), std::forward<ARGS>(args)...));
         }
 
         /// Creates an alias type

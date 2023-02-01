@@ -594,10 +594,7 @@ bool GeneratorImpl::EmitType(std::ostream& out, const ast::Type* ty) {
             out << "void";
             return true;
         },
-        [&](const ast::TypeName* tn) {
-            out << program_->Symbols().NameFor(tn->name);
-            return true;
-        },
+        [&](const ast::TypeName* tn) { return EmitExpression(out, tn->name); },
         [&](Default) {
             diagnostics_.add_error(diag::System::Writer,
                                    "unknown type in EmitType: " + std::string(ty->TypeInfo().name));

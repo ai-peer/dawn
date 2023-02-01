@@ -882,6 +882,7 @@ if(TINT_BUILD_TESTS)
     ast/texture_test.cc
     ast/templated_identifier_expression_test.cc
     ast/traverse_expressions_test.cc
+    ast/type_name_test.cc
     ast/u32_test.cc
     ast/unary_op_expression_test.cc
     ast/variable_decl_statement_test.cc
