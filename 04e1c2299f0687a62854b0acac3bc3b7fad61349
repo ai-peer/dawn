@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "076e266b_7b84622e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-01T14:48:12Z",
+      "side": 1,
+      "message": "Instead of deleting, could we do this behind a build flag? Then we can turn it on/off if needed when we get to branch? Means it doesn\u0027t get covered by the bots though, which isn\u0027t great.",
+      "revId": "04e1c2299f0687a62854b0acac3bc3b7fad61349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
