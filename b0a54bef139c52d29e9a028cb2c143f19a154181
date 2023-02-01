@@ -68,6 +68,24 @@
       "parentUuid": "3f38cda3_da80d5ff",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229a07c4_5facd299",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T03:48:07Z",
+      "side": 1,
+      "message": "Yes, that sounds right to me. I don\u0027t think Kai ran a query about how many devices we lose by requiring this in core WebGPU, but it seems like it will be many given that our test bots don\u0027t even support it.",
+      "parentUuid": "a9848d3e_188454eb",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
