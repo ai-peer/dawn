@@ -60,6 +60,7 @@
 #include "src/tint/ast/struct_member_offset_attribute.h"
 #include "src/tint/ast/struct_member_size_attribute.h"
 #include "src/tint/ast/switch_statement.h"
+#include "src/tint/ast/templated_identifier_expression.h"
 #include "src/tint/ast/traverse_expressions.h"
 #include "src/tint/ast/type_name.h"
 #include "src/tint/ast/u32.h"
@@ -352,6 +353,12 @@ class DependencyScanner {
         ast::TraverseExpressions(root, diagnostics_, [&](const ast::Expression* expr) {
             Switch(
                 expr,
+                [&](const ast::TemplatedIdentifierExpression* ident) {
+                    AddDependency(ident, ident->symbol, "identifier", "references");
+                    for (auto* arg : ident->arguments) {
+                        TraverseExpression(arg);
+                    }
+                },
                 [&](const ast::IdentifierExpression* ident) {
                     AddDependency(ident, ident->symbol, "identifier", "references");
                 },
