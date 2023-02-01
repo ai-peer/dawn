@@ -86,6 +86,24 @@
       "parentUuid": "a9848d3e_188454eb",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "029fdbbf_4a34a733",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T06:38:49Z",
+      "side": 1,
+      "message": "http://vulkan.gpuinfo.org/listoptimaltilingformats.php shows brga8unorm storage is only 55.8%",
+      "parentUuid": "229a07c4_5facd299",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
