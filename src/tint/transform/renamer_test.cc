@@ -15,6 +15,8 @@
 #include "src/tint/transform/renamer.h"
 
 #include <memory>
+#include <unordered_set>
+#include <vector>
 
 #include "gmock/gmock.h"
 #include "src/tint/transform/test_helper.h"
@@ -1595,6 +1597,18 @@ const char* ExpandCoreType(std::string_view name) {
     return "<invalid>";
 }
 
+/// @return WGSL type names that aren't keywords
+std::vector<const char*> NonKeywordTypes() {
+    std::unordered_set<std::string> keywords{"i32", "u32", "f32", "f16", "bool"};
+    std::vector<const char*> out;
+    for (auto* type_name : type::kBuiltinStrings) {
+        if (!keywords.count(type_name)) {
+            out.push_back(type_name);
+        }
+    }
+    return out;
+}
+
 using RenamerTypeCoreTypesTest = TransformTestWithParam<const char*>;
 
 TEST_P(RenamerTypeCoreTypesTest, PreserveTypeUsage) {
@@ -1766,7 +1780,7 @@ fn tint_symbol_2() {
 
 INSTANTIATE_TEST_SUITE_P(RenamerTypeCoreTypesTest,
                          RenamerTypeCoreTypesTest,
-                         testing::ValuesIn(type::kBuiltinStrings));
+                         testing::ValuesIn(NonKeywordTypes()));
 
 }  // namespace
 }  // namespace tint::transform
