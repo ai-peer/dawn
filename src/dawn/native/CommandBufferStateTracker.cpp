@@ -49,6 +49,100 @@ std::optional<uint32_t> FindFirstUndersizedBuffer(
 
     return std::nullopt;
 }
+
+struct BufferBindingAliasingResult {
+    BindGroupIndex bindGroupIndex0;
+    BindingIndex bindingIndex0;
+    BindGroupIndex bindGroupIndex1;
+    BindingIndex bindingIndex1;
+
+    // Adjusted offset with dynamic offset
+    uint64_t offset0;
+    uint64_t size0;
+    uint64_t offset1;
+    uint64_t size1;
+};
+
+std::optional<BufferBindingAliasingResult> FindStorageBufferBindingAliasing(
+    const PipelineLayoutBase* pipelineLayout,
+    const ityp::array<BindGroupIndex, BindGroupBase*, kMaxBindGroups>& bindGroups,
+    const ityp::array<BindGroupIndex, std::vector<uint32_t>, kMaxBindGroups> dynamicOffsets) {
+    // Iterate through each bindGroupLayoutEntry their bindGroupentries to find if writable
+    // storage bindings aliasing exists.
+    // TODO(dawn:1642): Algorithm optimization from O(N^2) to O(N*logN)
+    for (BindGroupIndex i : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
+        BindGroupLayoutBase* currentBGL = bindGroups[i]->GetLayout();
+        for (BindingIndex bindingIndex{0}; bindingIndex < currentBGL->GetBufferCount();
+             ++bindingIndex) {
+            const BindingInfo& bindingInfo = currentBGL->GetBindingInfo(bindingIndex);
+
+            // Buffer bindings are sorted to have smallest of bindingIndex.
+            ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
+
+            BufferBinding bufferBinding = bindGroups[i]->GetBindingAsBufferBinding(bindingIndex);
+
+            if (!((bufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage) &&
+                  bindingInfo.buffer.type == wgpu::BufferBindingType::Storage)) {
+                continue;
+            }
+
+            for (BindGroupIndex j : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
+                if (i > j) {
+                    continue;
+                }
+
+                BindGroupLayoutBase* otherBGL = bindGroups[j]->GetLayout();
+
+                BindingIndex otherBindingIndexStart =
+                    i == j ? bindingIndex + static_cast<BindingIndex>(1)
+                           : static_cast<BindingIndex>(0);
+
+                for (BindingIndex otherBindingIndex{otherBindingIndexStart};
+                     otherBindingIndex < otherBGL->GetBufferCount(); ++otherBindingIndex) {
+                    const BindingInfo& otherBindingInfo =
+                        otherBGL->GetBindingInfo(otherBindingIndex);
+                    ASSERT(otherBindingInfo.bindingType == BindingInfoType::Buffer);
+                    BufferBinding otherBufferBinding =
+                        bindGroups[j]->GetBindingAsBufferBinding(otherBindingIndex);
+
+                    if (!((otherBufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage) &&
+                          otherBindingInfo.buffer.type == wgpu::BufferBindingType::Storage)) {
+                        continue;
+                    }
+
+                    if (bufferBinding.buffer != otherBufferBinding.buffer) {
+                        continue;
+                    }
+
+                    if (bufferBinding.size > 0 && otherBufferBinding.size > 0) {
+                        uint64_t offset = bufferBinding.offset;
+                        uint64_t otherOffset = otherBufferBinding.offset;
+
+                        // SetBindGroup validation already guarantees offsets and sizes don't
+                        // overflow
+                        if (bindingInfo.buffer.hasDynamicOffset) {
+                            offset += dynamicOffsets[i][static_cast<uint32_t>(bindingIndex)];
+                        }
+                        if (otherBindingInfo.buffer.hasDynamicOffset) {
+                            otherOffset +=
+                                dynamicOffsets[i][static_cast<uint32_t>(otherBindingIndex)];
+                        }
+                        if (offset <= otherOffset + otherBufferBinding.size - 1 &&
+                            otherOffset <= offset + bufferBinding.size - 1) {
+                            return BufferBindingAliasingResult{
+                                i,      bindingIndex,       j,           otherBindingIndex,
+                                offset, bufferBinding.size, otherOffset, otherBufferBinding.size,
+                            };
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return std::nullopt;
+}
+
 }  // namespace
 
 enum ValidationAspect {
@@ -249,6 +343,15 @@ void CommandBufferStateTracker::RecomputeLazyAspects(ValidationAspects aspects) 
         }
 
         if (matches) {
+            // Continue checking if there is writable storage buffer binding aliasing or not
+            std::optional<BufferBindingAliasingResult> result =
+                FindStorageBufferBindingAliasing(mLastPipelineLayout, mBindgroups, mDynamicOffsets);
+            if (result) {
+                matches = false;
+            }
+        }
+
+        if (matches) {
             mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
         }
     }
@@ -319,62 +422,20 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
     }
 
     if (DAWN_UNLIKELY(aspects[VALIDATION_ASPECT_BIND_GROUPS])) {
-        for (BindGroupIndex i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
-            ASSERT(HasPipeline());
+        std::optional<BufferBindingAliasingResult> result =
+            FindStorageBufferBindingAliasing(mLastPipelineLayout, mBindgroups, mDynamicOffsets);
 
-            DAWN_INVALID_IF(mBindgroups[i] == nullptr, "No bind group set at group index %u.",
-                            static_cast<uint32_t>(i));
-
-            BindGroupLayoutBase* requiredBGL = mLastPipelineLayout->GetBindGroupLayout(i);
-            BindGroupLayoutBase* currentBGL = mBindgroups[i]->GetLayout();
-
-            DAWN_INVALID_IF(
-                requiredBGL->GetPipelineCompatibilityToken() != PipelineCompatibilityToken(0) &&
-                    currentBGL->GetPipelineCompatibilityToken() !=
-                        requiredBGL->GetPipelineCompatibilityToken(),
-                "The current pipeline (%s) was created with a default layout, and is not "
-                "compatible with the %s set at group index %u which uses a %s that was not "
-                "created by the pipeline. Either use the bind group layout returned by calling "
-                "getBindGroupLayout(%u) on the pipeline when creating the bind group, or "
-                "provide an explicit pipeline layout when creating the pipeline.",
-                mLastPipeline, mBindgroups[i], static_cast<uint32_t>(i), currentBGL,
-                static_cast<uint32_t>(i));
-
-            DAWN_INVALID_IF(
-                requiredBGL->GetPipelineCompatibilityToken() == PipelineCompatibilityToken(0) &&
-                    currentBGL->GetPipelineCompatibilityToken() != PipelineCompatibilityToken(0),
-                "%s set at group index %u uses a %s which was created as part of the default "
-                "layout "
-                "for a different pipeline than the current one (%s), and as a result is not "
-                "compatible. Use an explicit bind group layout when creating bind groups and "
-                "an explicit pipeline layout when creating pipelines to share bind groups "
-                "between pipelines.",
-                mBindgroups[i], static_cast<uint32_t>(i), currentBGL, mLastPipeline);
-
-            DAWN_INVALID_IF(
-                mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout(),
-                "Bind group layout %s of pipeline layout %s does not match layout %s of bind "
-                "group %s set at group index %u.",
-                requiredBGL, mLastPipelineLayout, currentBGL, mBindgroups[i],
-                static_cast<uint32_t>(i));
-
-            // TODO(dawn:563): Report which buffer bindings are failing. This requires the ability
-            // to look up the binding index from the packed index.
-            std::optional<uint32_t> packedIndex = FindFirstUndersizedBuffer(
-                mBindgroups[i]->GetUnverifiedBufferSizes(), (*mMinBufferSizes)[i]);
-            if (packedIndex.has_value()) {
-                uint64_t bufferSize =
-                    mBindgroups[i]->GetUnverifiedBufferSizes()[packedIndex.value()];
-                uint64_t minBufferSize = (*mMinBufferSizes)[i][packedIndex.value()];
-                return DAWN_VALIDATION_ERROR(
-                    "Binding sizes are too small for %s set at group index %u. A bound buffer "
-                    "contained %u bytes, but the current pipeline (%s) requires a buffer which is "
-                    "at least %u bytes. (Note that uniform buffer bindings must be a multiple of "
-                    "16 bytes, and as a result may be larger than the associated data in the "
-                    "shader source.)",
-                    mBindgroups[i], static_cast<uint32_t>(i), bufferSize, mLastPipeline,
-                    minBufferSize);
-            }
+        if (result) {
+            return DAWN_VALIDATION_ERROR(
+                "Writable storage buffer binding found between bind group index %u, binding index "
+                "%u, "
+                "and bind group index %u, binding index %u, with overlapping ranges (offset: %u, "
+                "size: %u) and (offset: %u, size: %u).",
+                static_cast<uint32_t>(result->bindGroupIndex0),
+                static_cast<uint32_t>(result->bindingIndex0),
+                static_cast<uint32_t>(result->bindGroupIndex1),
+                static_cast<uint32_t>(result->bindingIndex1), result->offset0, result->size0,
+                result->offset1, result->size1);
         }
 
         // The chunk of code above should be similar to the one in |RecomputeLazyAspects|.
