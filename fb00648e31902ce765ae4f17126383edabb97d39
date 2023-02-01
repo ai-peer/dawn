@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "928c7fe5_bf96862b",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-01T12:36:28Z",
+      "side": 1,
+      "message": "Agree this change could do with further followups, but I\u0027ll take anything right now that makes Kokoro turn green.",
+      "parentUuid": "fe33fb54_0a62cec4",
+      "revId": "fb00648e31902ce765ae4f17126383edabb97d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac60356a_5e2ac597",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-01T09:21:16Z",
       "side": 1,
       "message": "[1]",
+      "revId": "fb00648e31902ce765ae4f17126383edabb97d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f21cc4_6eef8609",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-01T12:36:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ac60356a_5e2ac597",
       "revId": "fb00648e31902ce765ae4f17126383edabb97d39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
