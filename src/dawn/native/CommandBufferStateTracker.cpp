@@ -248,6 +248,111 @@ void CommandBufferStateTracker::RecomputeLazyAspects(ValidationAspects aspects) 
             }
         }
 
+        // if (matches) {
+        //     mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
+        // }
+
+        if (matches) {
+            // Continue looking if there is writable storage buffer binding aliasing
+
+            // TODO: dynamic offset
+
+            // Iterate through each bindGroupLayoutEntry their bindGroupentries to find if writable
+            // storage bindings aliasing exists.
+            // TODO(dawn:1642): Optimization: maybe use interval tree instead of using nested
+            // for-loop
+            for (BindGroupIndex i : IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+                BindGroupLayoutBase* currentBGL = mBindgroups[i]->GetLayout();
+                for (BindingIndex bindingIndex{0}; bindingIndex < currentBGL->GetBufferCount();
+                     ++bindingIndex) {
+                    // BufferBinding bufferBinding = mBindgroups[i]->GetBindingAsBufferBinding();
+                    const BindingInfo& bindingInfo = currentBGL->GetBindingInfo(bindingIndex);
+                    // bindingInfo.bindingType
+
+                    ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
+                    // if (bindingInfo.bindingType != BindingInfoType::Buffer) {
+                    //     continue;
+                    // }
+
+                    BufferBinding bufferBinding =
+                        mBindgroups[i]->GetBindingAsBufferBinding(bindingIndex);
+
+                    if (!((bufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage) &&
+                          bindingInfo.buffer.type == wgpu::BufferBindingType::Storage)) {
+                        continue;
+                    }
+
+                    for (BindGroupIndex j :
+                         IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+                        // DAWN_INVALID_IF(mBindgroups[j] == nullptr, "No bind group set at group
+                        // index %u.",
+                        //             static_cast<uint32_t>(j));
+
+                        if (i > j) {
+                            continue;
+                        }
+
+                        BindGroupLayoutBase* otherBGL = mBindgroups[j]->GetLayout();
+
+                        BindingIndex otherBindingIndexStart =
+                            i == j ? bindingIndex + static_cast<BindingIndex>(1)
+                                   : static_cast<BindingIndex>(0);
+
+                        for (BindingIndex otherBindingIndex{otherBindingIndexStart};
+                             otherBindingIndex < otherBGL->GetBufferCount(); ++otherBindingIndex) {
+                            const BindingInfo& otherBindingInfo =
+                                otherBGL->GetBindingInfo(otherBindingIndex);
+                            ASSERT(otherBindingInfo.bindingType == BindingInfoType::Buffer);
+                            BufferBinding otherBufferBinding =
+                                mBindgroups[j]->GetBindingAsBufferBinding(otherBindingIndex);
+
+                            if (!((otherBufferBinding.buffer->GetUsage() &
+                                   wgpu::BufferUsage::Storage) &&
+                                  otherBindingInfo.buffer.type ==
+                                      wgpu::BufferBindingType::Storage)) {
+                                continue;
+                            }
+
+                            if (bufferBinding.buffer != otherBufferBinding.buffer) {
+                                continue;
+                            }
+
+                            if (bufferBinding.size > 0 && otherBufferBinding.size > 0) {
+                                // // overflow?
+                                // DAWN_INVALID_IF(
+                                //     bufferBinding.offset > otherBufferBinding.offset +
+                                //     otherBufferBinding.size - 1
+                                //     || otherBufferBinding.offset > bufferBinding.offset +
+                                //     bufferBinding.size - 1, "Writable storage buffer aliasing");
+                                uint64_t offset = bufferBinding.offset;
+                                uint64_t otherOffset = otherBufferBinding.offset;
+                                if (bindingInfo.buffer.hasDynamicOffset) {
+                                    // overflow?
+                                    offset +=
+                                        mDynamicOffsets[i][static_cast<uint32_t>(bindingIndex)];
+                                }
+                                if (otherBindingInfo.buffer.hasDynamicOffset) {
+                                    // overflow?
+                                    otherOffset +=
+                                        mDynamicOffsets[i]
+                                                       [static_cast<uint32_t>(otherBindingIndex)];
+                                }
+                                if (offset <= otherOffset + otherBufferBinding.size - 1 &&
+                                    otherOffset <= offset + bufferBinding.size - 1) {
+                                    matches = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!matches) {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         if (matches) {
             mAspects.set(VALIDATION_ASPECT_BIND_GROUPS);
         }
@@ -374,6 +479,93 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                     "shader source.)",
                     mBindgroups[i], static_cast<uint32_t>(i), bufferSize, mLastPipeline,
                     minBufferSize);
+            }
+
+            // Emit error msg for what buffer binding is affected
+
+            // parse through first, and store buffer bindings?
+            // Buffer bindings are sorted and packed at the front
+            for (BindingIndex bindingIndex{0}; bindingIndex < currentBGL->GetBufferCount();
+                 ++bindingIndex) {
+                // BufferBinding bufferBinding = mBindgroups[i]->GetBindingAsBufferBinding();
+                const BindingInfo& bindingInfo = currentBGL->GetBindingInfo(bindingIndex);
+                // bindingInfo.bindingType
+
+                ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
+                // if (bindingInfo.bindingType != BindingInfoType::Buffer) {
+                //     continue;
+                // }
+
+                BufferBinding bufferBinding =
+                    mBindgroups[i]->GetBindingAsBufferBinding(bindingIndex);
+
+                if (!(bufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage)) {
+                    continue;
+                }
+
+                // Iterate through each bindGroupLayoutEntry their bindGroupentries to find if
+                // writable storage bindings aliasing exist.
+                // TODO(dawn:1642): Optimization: maybe use interval tree instead of using nested
+                // for-loop
+                for (BindGroupIndex j :
+                     IterateBitSet(mLastPipelineLayout->GetBindGroupLayoutsMask())) {
+                    if (i > j) {
+                        continue;
+                    }
+
+                    DAWN_INVALID_IF(mBindgroups[j] == nullptr,
+                                    "No bind group set at group index %u.",
+                                    static_cast<uint32_t>(j));
+
+                    BindGroupLayoutBase* otherBGL = mBindgroups[j]->GetLayout();
+
+                    BindingIndex otherBindingIndexStart =
+                        i == j ? bindingIndex + static_cast<BindingIndex>(1)
+                               : static_cast<BindingIndex>(0);
+
+                    for (BindingIndex otherBindingIndex{otherBindingIndexStart};
+                         otherBindingIndex < otherBGL->GetBufferCount(); ++otherBindingIndex) {
+                        const BindingInfo& otherBindingInfo =
+                            otherBGL->GetBindingInfo(otherBindingIndex);
+                        ASSERT(otherBindingInfo.bindingType == BindingInfoType::Buffer);
+                        BufferBinding otherBufferBinding =
+                            mBindgroups[j]->GetBindingAsBufferBinding(otherBindingIndex);
+
+                        if (!(otherBufferBinding.buffer->GetUsage() & wgpu::BufferUsage::Storage)) {
+                            continue;
+                        }
+
+                        if (bufferBinding.buffer != otherBufferBinding.buffer) {
+                            continue;
+                        }
+
+                        // if (bufferBinding.size > 0 && otherBufferBinding.size > 0) {
+                        //     // overflow?
+                        //     DAWN_INVALID_IF(bufferBinding.offset <= otherBufferBinding.offset +
+                        //                                                 otherBufferBinding.size -
+                        //                                                 1 &&
+                        //                         otherBufferBinding.offset <=
+                        //                             bufferBinding.offset + bufferBinding.size -
+                        //                             1,
+                        //                     "Writable storage buffer aliasing");
+                        // }
+
+                        uint64_t offset = bufferBinding.offset;
+                        uint64_t otherOffset = otherBufferBinding.offset;
+                        if (bindingInfo.buffer.hasDynamicOffset) {
+                            // overflow?
+                            offset += mDynamicOffsets[i][static_cast<uint32_t>(bindingIndex)];
+                        }
+                        if (otherBindingInfo.buffer.hasDynamicOffset) {
+                            // overflow?
+                            otherOffset +=
+                                mDynamicOffsets[i][static_cast<uint32_t>(otherBindingIndex)];
+                        }
+                        DAWN_INVALID_IF(offset <= otherOffset + otherBufferBinding.size - 1 &&
+                                            otherOffset <= offset + bufferBinding.size - 1,
+                                        "Writable storage buffer aliasing");
+                    }
+                }
             }
         }
 
