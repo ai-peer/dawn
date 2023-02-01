@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c292162_024f1270",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-01T17:36:22Z",
+      "side": 1,
+      "message": "Either the binary is not in this path, OR (more likely), the problem is the fact that SRC_DIR is a quoted string, from the log:\n```\nT:\\tmp\\dawn-temp\\dawn-src\u003eset PATH\u003d\"T:\\tmp\\dawn-temp\\dawn-src\"\\third_party\\ninja;\n```\n\nI think the simplest solution would be to add a NINJA_BIN_DIR variable and set it right under the other variables with the full path:\n\n```\nset ORIGINAL_SRC_DIR\u003d %~dp0\\..\\..\\..\nset TEMP_DIR\u003d%TEMP%\\dawn-temp\nset SRC_DIR\u003d\"%TEMP_DIR%\\dawn-src\"\nset BUILD_DIR\u003d\"%TEMP_DIR%\\dawn-build\"\nset NINJA_BIN_DIR\u003d\"%TEMP_DIR%\\dawn-src\\third_party\\ninja\"\n```",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
