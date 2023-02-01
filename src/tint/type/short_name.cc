@@ -28,6 +28,18 @@ namespace tint::type {
 /// @param str the string to parse
 /// @returns the parsed enum, or ShortName::kUndefined if the string could not be parsed.
 ShortName ParseShortName(std::string_view str) {
+    if (str == "bool") {
+        return ShortName::kBool;
+    }
+    if (str == "f16") {
+        return ShortName::kF16;
+    }
+    if (str == "f32") {
+        return ShortName::kF32;
+    }
+    if (str == "i32") {
+        return ShortName::kI32;
+    }
     if (str == "mat2x2f") {
         return ShortName::kMat2X2F;
     }
@@ -82,6 +94,9 @@ ShortName ParseShortName(std::string_view str) {
     if (str == "mat4x4h") {
         return ShortName::kMat4X4H;
     }
+    if (str == "u32") {
+        return ShortName::kU32;
+    }
     if (str == "vec2f") {
         return ShortName::kVec2F;
     }
@@ -125,6 +140,14 @@ std::ostream& operator<<(std::ostream& out, ShortName value) {
     switch (value) {
         case ShortName::kUndefined:
             return out << "undefined";
+        case ShortName::kBool:
+            return out << "bool";
+        case ShortName::kF16:
+            return out << "f16";
+        case ShortName::kF32:
+            return out << "f32";
+        case ShortName::kI32:
+            return out << "i32";
         case ShortName::kMat2X2F:
             return out << "mat2x2f";
         case ShortName::kMat2X2H:
@@ -161,6 +184,8 @@ std::ostream& operator<<(std::ostream& out, ShortName value) {
             return out << "mat4x4f";
         case ShortName::kMat4X4H:
             return out << "mat4x4h";
+        case ShortName::kU32:
+            return out << "u32";
         case ShortName::kVec2F:
             return out << "vec2f";
         case ShortName::kVec2H:
