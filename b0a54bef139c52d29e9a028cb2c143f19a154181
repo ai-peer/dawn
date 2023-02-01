@@ -50,6 +50,24 @@
       "message": "LGTM, though I\u0027m not sure where the failure on Linux Intel is coming from.",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9848d3e_188454eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-01T00:46:49Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nI see in Vulkan SPEC (https://registry.khronos.org/vulkan/specs/1.3-extensions/html/vkspec.html#capabilities-image):\n\"If format is not a supported image format, or if the combination of format, type, tiling, usage, and flags is not supported for images, then vkGetPhysicalDeviceImageFormatProperties returns VK_ERROR_FORMAT_NOT_SUPPORTED.\"\n\n\nSo it is legal for old Intel Mesa to say BGRA8Unorm with STORAGE usage is not supported. Given that I think we cannot say we can create a BGRA8Unorm texture with STORAGE usage on all WebGPU platforms, then we cannot put the support of STORAGE usage of BGRA8Unorm textures in the core WebGPU SPEC.\n\nWhat do you think?",
+      "parentUuid": "3f38cda3_da80d5ff",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
