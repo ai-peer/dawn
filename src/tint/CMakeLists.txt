@@ -225,6 +225,8 @@ list(APPEND TINT_LIB_SRCS
   ast/struct.h
   ast/switch_statement.cc
   ast/switch_statement.h
+  ast/templated_identifier_expression.cc
+  ast/templated_identifier_expression.h
   ast/texture.cc
   ast/texture.h
   ast/traverse_expressions.h

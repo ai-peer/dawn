@@ -80,6 +80,7 @@
 #include "src/tint/ast/struct_member_offset_attribute.h"
 #include "src/tint/ast/struct_member_size_attribute.h"
 #include "src/tint/ast/switch_statement.h"
+#include "src/tint/ast/templated_identifier_expression.h"
 #include "src/tint/ast/type_name.h"
 #include "src/tint/ast/u32.h"
 #include "src/tint/ast/unary_op_expression.h"
@@ -1160,54 +1161,78 @@ class ProgramBuilder {
 
     /// @param source the source information
     /// @param symbol the identifier symbol
-    /// @return an ast::IdentifierExpression with the given symbol
-    const ast::IdentifierExpression* Expr(const Source& source, Symbol symbol) {
-        return create<ast::IdentifierExpression>(source, symbol);
+    /// @param args optional templated identifier arguments
+    /// @return an ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given
+    /// symbol
+    template <typename... ARGS>
+    auto Expr(const Source& source, Symbol symbol, ARGS&&... args) {
+        if constexpr (sizeof...(args) > 0) {
+            return create<ast::TemplatedIdentifierExpression>(
+                source, symbol, ExprList(std::forward<ARGS>(args)...));
+        } else {
+            return create<ast::IdentifierExpression>(source, symbol);
+        }
     }
 
     /// @param symbol the identifier symbol
-    /// @return an ast::IdentifierExpression with the given symbol
-    const ast::IdentifierExpression* Expr(Symbol symbol) {
-        return create<ast::IdentifierExpression>(symbol);
+    /// @param args optional templated identifier arguments
+    /// @return ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given
+    /// symbol
+    template <typename... ARGS>
+    auto Expr(Symbol symbol, ARGS&&... args) {
+        if constexpr (sizeof...(args) > 0) {
+            return create<ast::TemplatedIdentifierExpression>(
+                symbol, ExprList(std::forward<ARGS>(args)...));
+        } else {
+            return create<ast::IdentifierExpression>(symbol);
+        }
+    }
+
+    /// @param source the source information
+    /// @param name the identifier name
+    /// @param args optional templated identifier arguments
+    /// @return ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given name
+    template <typename... ARGS>
+    auto Expr(const Source& source, const char* name, ARGS&&... args) {
+        return Expr(source, Symbols().Register(name), std::forward<ARGS>(args)...);
+    }
+
+    /// @param name the identifier name
+    /// @param args optional templated identifier arguments
+    /// @return ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given name
+    template <typename... ARGS>
+    auto Expr(const char* name, ARGS&&... args) {
+        return Expr(Symbols().Register(name), std::forward<ARGS>(args)...);
+    }
+
+    /// @param source the source information
+    /// @param name the identifier name
+    /// @param args optional templated identifier arguments
+    /// @return ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given name
+    template <typename... ARGS>
+    auto Expr(const Source& source, const std::string& name, ARGS&&... args) {
+        return Expr(source, Symbols().Register(name), std::forward<ARGS>(args)...);
+    }
+
+    /// @param name the identifier name
+    /// @param args optional templated identifier arguments
+    /// @return ast::IdentifierExpression or ast::TemplatedIdentifierExpression with the given name
+    template <typename... ARGS>
+    auto Expr(const std::string& name, ARGS&&... args) {
+        return Expr(Symbols().Register(name), std::forward<ARGS>(args)...);
     }
 
     /// @param source the source information
     /// @param variable the AST variable
     /// @return an ast::IdentifierExpression with the variable's symbol
     const ast::IdentifierExpression* Expr(const Source& source, const ast::Variable* variable) {
-        return create<ast::IdentifierExpression>(source, variable->symbol);
+        return Expr(source, variable->symbol);
     }
 
     /// @param variable the AST variable
     /// @return an ast::IdentifierExpression with the variable's symbol
     const ast::IdentifierExpression* Expr(const ast::Variable* variable) {
-        return create<ast::IdentifierExpression>(variable->symbol);
-    }
-
-    /// @param source the source information
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const Source& source, const char* name) {
-        return create<ast::IdentifierExpression>(source, Symbols().Register(name));
-    }
-
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const char* name) {
-        return create<ast::IdentifierExpression>(Symbols().Register(name));
-    }
-
-    /// @param source the source information
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const Source& source, const std::string& name) {
-        return create<ast::IdentifierExpression>(source, Symbols().Register(name));
-    }
-
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const std::string& name) {
-        return create<ast::IdentifierExpression>(Symbols().Register(name));
+        return Expr(variable->symbol);
     }
 
     /// @param source the source information
