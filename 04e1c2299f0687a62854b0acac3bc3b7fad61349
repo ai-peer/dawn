@@ -16,6 +16,24 @@
       "message": "Instead of deleting, could we do this behind a build flag? Then we can turn it on/off if needed when we get to branch? Means it doesn\u0027t get covered by the bots though, which isn\u0027t great.",
       "revId": "04e1c2299f0687a62854b0acac3bc3b7fad61349",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8898da_4ee2963c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-01T15:20:23Z",
+      "side": 1,
+      "message": "I was just going to hold off submitting this change until we get consensus to un-keyword the types.\nCode that isn\u0027t exercised is going to bit-rot just as quickly as unsubmitted code.",
+      "parentUuid": "076e266b_7b84622e",
+      "revId": "04e1c2299f0687a62854b0acac3bc3b7fad61349",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
