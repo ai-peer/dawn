@@ -728,3 +728,15 @@ dawn_test("dawn_perf_tests") {
     frameworks = [ "IOSurface.framework" ]
   }
 }
+
+test("metal_depth_stencil_tests") {
+  sources = [ "depth_stencil_tests.mm" ]
+  frameworks = [
+    "CoreFoundation.framework",
+    "Foundation.framework",
+    "Metal.framework",
+    "IOKit.framework",
+  ]
+  cflags_objcc = [ "-fobjc-arc" ]
+  cflags = [ "-std=c++17" ]
+}
