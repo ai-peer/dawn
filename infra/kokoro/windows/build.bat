@@ -46,6 +46,7 @@ set ORIGINAL_SRC_DIR= %~dp0\..\..\..
 set TEMP_DIR=%TEMP%\dawn-temp
 set SRC_DIR="%TEMP_DIR%\dawn-src"
 set BUILD_DIR="%TEMP_DIR%\dawn-build"
+set NINJA_BIN_DIR="%TEMP_DIR%\dawn-src\third_party\ninja"
 
 cd /d %ORIGINAL_SRC_DIR%
 if not exist ".git\" (
@@ -77,6 +78,11 @@ start "install" /wait "%TEMP_DIR%\winsdkinstall\Installers\Windows SDK for Windo
 set D3DCOMPILER_PATH=C:\Program Files (x86)\Windows Kits\10\bin\%WINSDK_VERSION%\x64
 @echo off
 
+call :status "Adding the Ninja from DEPS to the PATH before depot_tools"
+@echo on
+set PATH=%NINJA_BIN_DIR%;%PATH%
+@echo off
+
 call :status "Installing depot_tools"
 @echo on
 pushd %TEMP_DIR%
@@ -91,17 +97,6 @@ set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 call gclient || goto :error
 @echo off
 popd
-
-@REM Install Ninja after depot_tools to make sure it's in PATH before depot_tools
-call :status "Fetching and installing Ninja"
-@echo on
-@REM set WINSDK_DLL_INSTALLER=https://go.microsoft.com/fwlink/?linkid=2164145
-@REM set WINSDK_VERSION=10.0.20348.0
-set NINJA_ZIP=https://github.com/ninja-build/ninja/releases/download/v1.11.1/ninja-win.zip
-curl -k -L %NINJA_ZIP% --output "%TEMP_DIR%\ninja.zip" || goto :error
-powershell.exe -Command "Expand-Archive -LiteralPath '%TEMP_DIR%\ninja.zip' -DestinationPath '%TEMP_DIR%\ninja'" || goto :error
-set PATH=%TEMP_DIR%\ninja;%PATH%
-@echo off
 
 call :status "Cloning to clean source directory"
 @echo on
