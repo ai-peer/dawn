@@ -221,13 +221,6 @@ type::Type* Resolver::Type(const ast::Type* ty) {
     Mark(ty);
     auto* s = Switch(
         ty,  //
-        [&](const ast::Bool*) { return builder_->create<type::Bool>(); },
-        [&](const ast::I32*) { return builder_->create<type::I32>(); },
-        [&](const ast::U32*) { return builder_->create<type::U32>(); },
-        [&](const ast::F16* t) -> type::F16* {
-            return validator_.CheckF16Enabled(t->source) ? builder_->create<type::F16>() : nullptr;
-        },
-        [&](const ast::F32*) { return builder_->create<type::F32>(); },
         [&](const ast::Vector* t) -> type::Vector* {
             if (!t->type) {
                 AddError("missing vector element type", t->source.End());
@@ -2446,6 +2439,16 @@ type::Type* Resolver::BuiltinType(Symbol sym, const Source& source) const {
     auto vec_f16 = [&](uint32_t n) { return b.create<type::Vector>(b.create<type::F16>(), n); };
 
     switch (type::ParseBuiltin(name)) {
+        case type::Builtin::kBool:
+            return b.create<type::Bool>();
+        case type::Builtin::kI32:
+            return b.create<type::I32>();
+        case type::Builtin::kU32:
+            return b.create<type::U32>();
+        case type::Builtin::kF16:
+            return validator_.CheckF16Enabled(source) ? b.create<type::F16>() : nullptr;
+        case type::Builtin::kF32:
+            return b.create<type::F32>();
         case type::Builtin::kMat2X2F:
             return b.create<type::Matrix>(vec_f32(2u), 2u);
         case type::Builtin::kMat2X3F:
