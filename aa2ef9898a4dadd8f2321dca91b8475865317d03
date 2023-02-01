@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb92d02_5a36d8dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97913ed8_3e1df8c3",
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16ba1272_973563b2",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-01-31T09:51:26Z",
       "side": 1,
       "message": "u-nit: we could start using more idiomatic WGSL in these internal shaders at some point, with vec4f, array(vec4f()) type determination etc.",
+      "range": {
+        "startLine": 36,
+        "startChar": 28,
+        "endLine": 36,
+        "endChar": 33
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c861eb3_b6677e7f",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "let me address this and other shaders in a follow-up. my new-flavor WGSL skills are not very up to date",
+      "parentUuid": "16ba1272_973563b2",
       "range": {
         "startLine": 36,
         "startChar": 28,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f514b5dc_effa6b4b",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "I\u0027ll look into this in a follow up. then I have to concatenate strings at runtime or use multiple shader modules (since constexpr concatenation is not a thing).",
+      "parentUuid": "39853a0e_a49b3f7e",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 1
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "053d745c_ebf82648",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-01-30T23:44:24Z",
       "side": 1,
       "message": "nit. texture views\n\nu-nit. character per line formatting.",
+      "range": {
+        "startLine": 119,
+        "startChar": 46,
+        "endLine": 119,
+        "endChar": 60
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b19c42a_a7a7a836",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "053d745c_ebf82648",
       "range": {
         "startLine": 119,
         "startChar": 46,
@@ -175,6 +265,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1a7f2c0_0938040b",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "I\u0027ve opted to not add another toggle (yet) since this path only happens inside another toggle that\u0027s enabled only on Mac Intel right now. I can look into separating it into a different toggle if we need a more widespread texture view workaround, or if we need the blit depth workaround on some other platforms.",
+      "parentUuid": "42600d42_5ecaf036",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 22
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6acd116_687ad34a",
@@ -188,6 +302,30 @@
       "writtenOn": "2023-01-30T23:44:24Z",
       "side": 1,
       "message": "nit. Might be easier to read if we name this var something like `layer`? (I think we reuse it in at least one other place also?)",
+      "range": {
+        "startLine": 129,
+        "startChar": 11,
+        "endLine": 129,
+        "endChar": 28
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e3b333_8a6062b9",
+        "filename": "src/dawn/native/BlitDepthToDepth.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f6acd116_687ad34a",
       "range": {
         "startLine": 129,
         "startChar": 11,
@@ -245,6 +383,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3640a390_505a8340",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7d2ea202_f6b117a0",
+      "range": {
+        "startLine": 357,
+        "startChar": 13,
+        "endLine": 357,
+        "endChar": 68
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "903264ee_767f2362",
@@ -258,6 +420,30 @@
       "writtenOn": "2023-01-30T16:39:03Z",
       "side": 1,
       "message": "stale",
+      "range": {
+        "startLine": 267,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 0
+      },
+      "revId": "aa2ef9898a4dadd8f2321dca91b8475865317d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2336a9c_b5d538d3",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-01T22:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "903264ee_767f2362",
       "range": {
         "startLine": 267,
         "startChar": 8,
