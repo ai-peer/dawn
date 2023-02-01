@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe33fb54_0a62cec4",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-01T09:21:16Z",
+      "side": 1,
+      "message": "What do you think of adding %SRC_DIR%/third_party/ninja after the gclient sync in [1]? This would make sure we have the same ninja as the one used on LUCI.",
+      "revId": "fb00648e31902ce765ae4f17126383edabb97d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac60356a_5e2ac597",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-01T09:21:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "fb00648e31902ce765ae4f17126383edabb97d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
