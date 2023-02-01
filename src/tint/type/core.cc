@@ -28,6 +28,18 @@ namespace tint::type {
 /// @param str the string to parse
 /// @returns the parsed enum, or Core::kUndefined if the string could not be parsed.
 Core ParseCore(std::string_view str) {
+    if (str == "bool") {
+        return Core::kBool;
+    }
+    if (str == "f16") {
+        return Core::kF16;
+    }
+    if (str == "f32") {
+        return Core::kF32;
+    }
+    if (str == "i32") {
+        return Core::kI32;
+    }
     if (str == "mat2x2f") {
         return Core::kMat2X2F;
     }
@@ -82,6 +94,9 @@ Core ParseCore(std::string_view str) {
     if (str == "mat4x4h") {
         return Core::kMat4X4H;
     }
+    if (str == "u32") {
+        return Core::kU32;
+    }
     if (str == "vec2f") {
         return Core::kVec2F;
     }
@@ -125,6 +140,14 @@ std::ostream& operator<<(std::ostream& out, Core value) {
     switch (value) {
         case Core::kUndefined:
             return out << "undefined";
+        case Core::kBool:
+            return out << "bool";
+        case Core::kF16:
+            return out << "f16";
+        case Core::kF32:
+            return out << "f32";
+        case Core::kI32:
+            return out << "i32";
         case Core::kMat2X2F:
             return out << "mat2x2f";
         case Core::kMat2X2H:
@@ -161,6 +184,8 @@ std::ostream& operator<<(std::ostream& out, Core value) {
             return out << "mat4x4f";
         case Core::kMat4X4H:
             return out << "mat4x4h";
+        case Core::kU32:
+            return out << "u32";
         case Core::kVec2F:
             return out << "vec2f";
         case Core::kVec2H:
