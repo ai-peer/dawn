@@ -122,6 +122,24 @@
       "parentUuid": "029fdbbf_4a34a733",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "908f50bc_a49446b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-02-01T23:54:26Z",
+      "side": 1,
+      "message": "I think we got a bit confused about the complex series of things needed in Vulkan. I did actually do a query for storage support on BGRA but I didn\u0027t understand what that meant since we ended up concluding that Vulkan didn\u0027t allow storage on BGRA views at all:\nhttps://github.com/gpuweb/gpuweb/pull/3640#issuecomment-1339947738\n\nI thought we had a workaround that didn\u0027t require BGRA storage but I must have totally forgotten about storage _usages_, which the underlying (BGRA) texture would still need regardless of the view being RGBA.",
+      "parentUuid": "d3cffb89_addc5648",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
