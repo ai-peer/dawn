@@ -105,6 +105,11 @@ copy scripts\standalone.gclient .gclient || goto :error
 call gclient sync || goto :error
 @echo off
 
+call :status "Adding the Ninja from DEPS to the PATH"
+@echo on
+set PATH=%SRC_DIR%\third_party\ninja;%PATH%
+@echo off
+
 call :status "Configuring build system"
 @echo on
 mkdir %BUILD_DIR%
@@ -135,8 +140,7 @@ rem To use ninja with CMake requires VC env vars
 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 @echo on
 rem Note that we need to specify the C and C++ compiler only because Cygwin is in PATH and CMake finds GCC and picks that over MSVC
-rem We also need to specify the Ninja binary is ninja.bat because the Ninja picked up otherwise is depot_tools' shell script.
-cmake %SRC_DIR% -G "Ninja" -DCMAKE_MAKE_PROGRAM="ninja.bat" -DCMAKE_C_COMPILER="cl.exe" -DCMAKE_CXX_COMPILER="cl.exe" %COMMON_CMAKE_FLAGS% || goto :error
+cmake %SRC_DIR% -G "Ninja" -DCMAKE_C_COMPILER="cl.exe" -DCMAKE_CXX_COMPILER="cl.exe" %COMMON_CMAKE_FLAGS% || goto :error
 cmake --build . || goto :error
 call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat" /clean_env
 @echo off
