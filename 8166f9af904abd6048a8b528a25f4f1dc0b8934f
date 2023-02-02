@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca6505c8_c4e8a6ed",
+        "filename": "src/tint/ast/diagnostic_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T19:20:55Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, if the ASSERT above fires, haven\u0027t we terminated? LIke, it doesn\u0027t return, so how can we possibly have the `if` fail if we asserted on 39?",
+      "parentUuid": "e8482f27_e23649ec",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6aca5931_5839c40d",
         "filename": "src/tint/ast/diagnostic_control_test.cc",
         "patchSetId": 4
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Succinctness the the point of the `using`, so I\u0027d prefer not to, if that\u0027s okay.",
       "parentUuid": "3a28dfdc_92481d12",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1de3ec14_e7b67e15",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T19:20:55Z",
+      "side": 1,
+      "message": "It\u0027s fine to leave, but even succint, this took a bit of puzzling to figure out what it was referring too.",
+      "parentUuid": "31b501ae_679213ec",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
