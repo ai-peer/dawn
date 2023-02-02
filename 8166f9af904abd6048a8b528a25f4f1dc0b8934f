@@ -281,6 +281,24 @@
       "parentUuid": "1de3ec14_e7b67e15",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b981a161_dcb688ba",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T19:28:05Z",
+      "side": 1,
+      "message": "The comment doesn\u0027t help when `traits.h` comes last and I\"m trying to figure out what\u0027s happening at the call site, heh.",
+      "parentUuid": "e65c6f16_40c405c6",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
