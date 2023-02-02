@@ -359,6 +359,8 @@ list(APPEND TINT_LIB_SRCS
   sem/struct.h
   sem/switch_statement.cc
   sem/switch_statement.h
+  sem/type_expression.cc
+  sem/type_expression.h
   sem/type_initializer.cc
   sem/type_initializer.h
   sem/type_conversion.cc

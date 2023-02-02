@@ -207,10 +207,11 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAliasUsedAsFunction) {
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAliasUsedAsVariable) {
     Alias(Source{{12, 34}}, "mix", ty.i32());
-    WrapInFunction(Decl(Var("v", Expr(Source{{56, 78}}, "mix"))));
+    WrapInFunction(Decl(Var("v", Expr(Source{Source::Range{{12, 34}, {12, 36}}}, "mix"))));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(56:78 error: missing '(' for type initializer or cast)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: expression evaluated to type 'i32', but expected value
+12:36 note: are you missing '()' for type initializer?)");
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAliasUsedAsType) {
@@ -239,10 +240,12 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsStructUsedAsVariable) {
     Structure("mix", utils::Vector{
                          Member("m", ty.i32()),
                      });
-    WrapInFunction(Decl(Var("v", Expr(Source{{12, 34}}, "mix"))));
+    WrapInFunction(Decl(Var("v", Expr(Source{Source::Range{{12, 34}, {12, 37}}}, "mix"))));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), R"(12:34 error: missing '(' for type initializer or cast)");
+    EXPECT_EQ(r()->error(), R"(12:34 error: expression evaluated to type 'mix', but expected value
+12:37 note: are you missing '()' for type initializer?
+note: 'mix' declared here)");
 }
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsStructUsedAsType) {
