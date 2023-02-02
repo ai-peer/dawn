@@ -2414,7 +2414,8 @@
         "chain roots": ["shader module descriptor"],
         "members": [
             {"name": "code size", "type": "uint32_t"},
-            {"name": "code", "type": "uint32_t", "annotation": "const*", "length": "code size"}
+            {"name": "code", "type": "uint32_t", "annotation": "const*", "length": "code size"},
+            {"name": "allow non uniform derivatives", "type": "bool", "default": "false"}
         ]
     },
     "shader module WGSL descriptor": {
