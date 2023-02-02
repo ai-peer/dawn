@@ -22,6 +22,30 @@
       },
       "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e29f508_4e3ca963",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-02T14:52:40Z",
+      "side": 1,
+      "message": "Tried to remove the \"\" to see what happens, I don\u0027t really understand batch files.",
+      "parentUuid": "6c292162_024f1270",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
