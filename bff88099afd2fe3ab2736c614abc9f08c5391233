@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96326658_6c24197c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T15:02:48Z",
+      "side": 1,
+      "message": "lgtm w/ comment",
+      "revId": "bff88099afd2fe3ab2736c614abc9f08c5391233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7efe2256_63fe78b7",
+        "filename": "src/tint/ast/traverse_expressions_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T15:02:48Z",
+      "side": 1,
+      "message": "Can this todo be removed since the test below is enabled now?",
+      "revId": "bff88099afd2fe3ab2736c614abc9f08c5391233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36da6d7_7097c400",
+        "filename": "src/tint/ast/traverse_expressions_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T15:02:48Z",
+      "side": 1,
+      "message": "Isn\u0027t this test just identical to the one above now?",
+      "revId": "bff88099afd2fe3ab2736c614abc9f08c5391233",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
