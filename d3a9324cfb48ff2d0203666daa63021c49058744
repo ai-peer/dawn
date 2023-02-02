@@ -50,6 +50,24 @@
       "message": "Why is guard name no longer requird to be registered in the symbols?\n\n(And others below)",
       "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6717886c_01a9e8f4",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-02T15:00:19Z",
+      "side": 1,
+      "message": "`Expr()` does that for you.",
+      "parentUuid": "da13df78_13ee8da5",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
