@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a12699d5_ca3a9250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:33:41Z",
+      "side": 1,
+      "message": "😮\n\nThanks 😊",
+      "revId": "4535dcd6a071ddf3ed92911ac5a9ced3964aeb7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e20e8901_11c8ab17",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-02-02T19:32:34Z",
       "side": 1,
       "message": "especially this one ....",
+      "revId": "4535dcd6a071ddf3ed92911ac5a9ced3964aeb7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7210551_87d4c709",
+        "filename": "src/tint/program_builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:33:41Z",
+      "side": 1,
+      "message": "Agreed about this one. But, I couldn\u0027t justify jumping through hoops for a single helper.",
+      "parentUuid": "e20e8901_11c8ab17",
       "revId": "4535dcd6a071ddf3ed92911ac5a9ced3964aeb7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
