@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a6fe8e6_ce43fdba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-02T22:08:18Z",
+      "side": 1,
+      "message": "would be great to have a couple unittests that it call gets piped through correctly!",
+      "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d632332d_bfb7eca5",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-02T22:08:18Z",
+      "side": 1,
+      "message": "this member should probably be in a separate chained struct since WGPUShaderModuleSPIRVDescriptor is in the shared webgpu.h, and this doesn\u0027t seem like the kind of thing every implementation will share.\n\nyou\u0027ll need to change the existing ValidateSingleSType in `ValidateAndParseShaderModule` to manually validate the struct chain - and also check that WGPUShaderModuleTintOptionsDescriptor is only present with WGPUShaderModuleSPIRVDescriptor",
+      "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
