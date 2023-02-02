@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc17cb80_062ed8da",
+        "filename": "src/tint/ast/diagnostic_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "This just asserted it\u0027s not nullptr, so why check again?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aca5931_5839c40d",
+        "filename": "src/tint/ast/diagnostic_control_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "What is the `-spi.h` header add over `gtest/gtest.h` ?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37630872_9ecfa23d",
+        "filename": "src/tint/ast/member_accessor_expression.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "Already asserted `member` why the extra check?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523542bd_dc6bb666",
+        "filename": "src/tint/ast/templated_identifier.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "nit: 3, I think or biggest template has 3 entries",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84925890_d8495d20",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "nit: `as an ast::...`",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a28dfdc_92481d12",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T18:48:51Z",
+      "side": 1,
+      "message": "Can I buy more letters? `PtrElementType` ?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
