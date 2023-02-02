@@ -142,10 +142,10 @@ TEST_F(TraverseExpressionsTest, DescendCallExpression) {
 
 // TODO(crbug.com/tint/1257): Test ignores member accessor 'member' field.
 // Replace with the test below when fixed.
-TEST_F(TraverseExpressionsTest, DescendMemberIndexExpression) {
+TEST_F(TraverseExpressionsTest, DescendMemberAccessorExpression) {
     auto* e = Expr(1_i);
-    auto* m = MemberAccessor(e, Expr("a"));
-    auto* root = MemberAccessor(m, Expr("b"));
+    auto* m = MemberAccessor(e, "a");
+    auto* root = MemberAccessor(m, "b");
     {
         std::vector<const ast::Expression*> l2r;
         TraverseExpressions<TraverseOrder::LeftToRight>(root, Diagnostics(),
@@ -166,12 +166,10 @@ TEST_F(TraverseExpressionsTest, DescendMemberIndexExpression) {
     }
 }
 
-// TODO(crbug.com/tint/1257): The correct test for DescendMemberIndexExpression.
-TEST_F(TraverseExpressionsTest, DISABLED_DescendMemberIndexExpression) {
+TEST_F(TraverseExpressionsTest, DescendMemberIndexExpression) {
     auto* e = Expr(1_i);
-    std::vector<const ast::IdentifierExpression*> i = {Expr("a"), Expr("b")};
-    auto* m = MemberAccessor(e, i[0]);
-    auto* root = MemberAccessor(m, i[1]);
+    auto* m = MemberAccessor(e, "a");
+    auto* root = MemberAccessor(m, "b");
     {
         std::vector<const ast::Expression*> l2r;
         TraverseExpressions<TraverseOrder::LeftToRight>(root, Diagnostics(),
@@ -179,7 +177,7 @@ TEST_F(TraverseExpressionsTest, DISABLED_DescendMemberIndexExpression) {
                                                             l2r.push_back(expr);
                                                             return ast::TraverseAction::Descend;
                                                         });
-        EXPECT_THAT(l2r, ElementsAre(root, m, e, i[0], i[1]));
+        EXPECT_THAT(l2r, ElementsAre(root, m, e));
     }
     {
         std::vector<const ast::Expression*> r2l;
@@ -188,7 +186,7 @@ TEST_F(TraverseExpressionsTest, DISABLED_DescendMemberIndexExpression) {
                                                             r2l.push_back(expr);
                                                             return ast::TraverseAction::Descend;
                                                         });
-        EXPECT_THAT(r2l, ElementsAre(root, i[1], m, i[0], e));
+        EXPECT_THAT(r2l, ElementsAre(root, m, e));
     }
 }
 
