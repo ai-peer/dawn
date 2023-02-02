@@ -16,6 +16,24 @@
       "message": "nit: move the `break` inside the `{}`",
       "revId": "9f166135f2cc936fd570e2f2a1dcc6f4e4830e39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "535ea9d1_ea777d26",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-02T18:32:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ae5dd8f_feca3a0a",
+      "revId": "9f166135f2cc936fd570e2f2a1dcc6f4e4830e39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
