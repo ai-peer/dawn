@@ -2411,7 +2411,7 @@ Maybe<const ast::CallStatement*> ParserImpl::func_call_statement() {
         t.source(),
         create<ast::CallExpression>(
             t.source(),
-            create<ast::IdentifierExpression>(t.source(), builder_.Symbols().Register(t.to_str())),
+            create<ast::Identifier>(t.source(), builder_.Symbols().Register(t.to_str())),
             std::move(params.value)));
 }
 
@@ -2609,19 +2609,19 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
                 "in parentheses");
         }
 
-        auto* ident =
-            create<ast::IdentifierExpression>(t.source(), builder_.Symbols().Register(t.to_str()));
-
         if (peek_is(Token::Type::kParenLeft)) {
             auto params = expect_argument_expression_list("function call");
             if (params.errored) {
                 return Failure::kErrored;
             }
 
+            auto* ident =
+                create<ast::Identifier>(t.source(), builder_.Symbols().Register(t.to_str()));
             return create<ast::CallExpression>(t.source(), ident, std::move(params.value));
         }
 
-        return ident;
+        return create<ast::IdentifierExpression>(t.source(),
+                                                 builder_.Symbols().Register(t.to_str()));
     }
 
     if (t.Is(Token::Type::kParenLeft)) {
