@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dc260e2_f8bed8e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T14:56:51Z",
+      "side": 1,
+      "message": "I think this is also better logically, as it makes more sense as the hierarcy if the IdentifierExpression is an Identifier wrapper.",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19d33663_87771c3a",
+        "filename": "src/tint/ast/identifier_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T14:56:51Z",
+      "side": 1,
+      "message": "maybe `identifier the identifier for the expression` ?\n\n\"identifier the identifier\" just reads .... odd. I am identifier, destroyer of worlds.",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da13df78_13ee8da5",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 880,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T14:56:51Z",
+      "side": 1,
+      "message": "Why is guard name no longer requird to be registered in the symbols?\n\n(And others below)",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
