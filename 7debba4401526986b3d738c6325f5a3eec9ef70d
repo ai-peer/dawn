@@ -16,6 +16,24 @@
       "message": "Would be great to have some CTS that shows that this behaves consistently between platforms!",
       "revId": "7debba4401526986b3d738c6325f5a3eec9ef70d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "450b09c2_423fc4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-02T21:00:45Z",
+      "side": 1,
+      "message": "Agreed!",
+      "parentUuid": "bde089a7_8b9dc12e",
+      "revId": "7debba4401526986b3d738c6325f5a3eec9ef70d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
