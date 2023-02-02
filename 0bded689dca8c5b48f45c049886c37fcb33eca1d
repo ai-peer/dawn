@@ -46,6 +46,30 @@
       },
       "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaee3fb7_d6a6ac10",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-02T14:53:48Z",
+      "side": 1,
+      "message": "This may work, but it\u0027s not recommended. If there\u0027s ever a space in the path, most command will fail. We\u0027d have to double-quote all places that use these variables.",
+      "parentUuid": "3e29f508_4e3ca963",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
