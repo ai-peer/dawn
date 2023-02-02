@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc4ecd4a_48eb2c81",
+        "filename": "src/tint/ast/identifier_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T17:59:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19d33663_87771c3a",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eef8e72d_523c3ac6",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-02T15:18:45Z",
       "side": 1,
       "message": "Is the source ever different from that of the contained `Identifier` or can we get rid of this?",
+      "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11084dc_176b14aa",
+        "filename": "src/tint/ast/identifier_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T17:59:19Z",
+      "side": 1,
+      "message": "Unfortunately not easily, as the `ProgramBuilder` does `Source` injection.\nIf we remove this (like we removed for `ast::InternalAttribute`), then it becomes really awkward to create these.",
+      "parentUuid": "eef8e72d_523c3ac6",
       "revId": "d3a9324cfb48ff2d0203666daa63021c49058744",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
