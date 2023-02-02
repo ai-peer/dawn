@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8482f27_e23649ec",
+        "filename": "src/tint/ast/diagnostic_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "TINT_ASSERT does not return. There are tests for this assertion, and I don\u0027t want them to crash.",
+      "parentUuid": "dc17cb80_062ed8da",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aca5931_5839c40d",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-02T18:48:51Z",
       "side": 1,
       "message": "What is the `-spi.h` header add over `gtest/gtest.h` ?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25f400a4_9b9d660c",
+        "filename": "src/tint/ast/diagnostic_control_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "`EXPECT_FATAL_FAILURE` only exists in the `-spi.h` header.",
+      "parentUuid": "6aca5931_5839c40d",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "359244ed_453220bb",
+        "filename": "src/tint/ast/member_accessor_expression.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "Same reason as before.",
+      "parentUuid": "37630872_9ecfa23d",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "523542bd_dc6bb666",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-02T18:48:51Z",
       "side": 1,
       "message": "nit: 3, I think or biggest template has 3 entries",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e148f77_46eccb63",
+        "filename": "src/tint/ast/templated_identifier.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "523542bd_dc6bb666",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00897488_d15ea7f8",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84925890_d8495d20",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a28dfdc_92481d12",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-02-02T18:48:51Z",
       "side": 1,
       "message": "Can I buy more letters? `PtrElementType` ?",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31b501ae_679213ec",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "Succinctness the the point of the `using`, so I\u0027d prefer not to, if that\u0027s okay.",
+      "parentUuid": "3a28dfdc_92481d12",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

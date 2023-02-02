@@ -22,6 +22,30 @@
       },
       "revId": "d76348faa9f02efef61030cf9c58196d94a73cbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6548166_9ed6b9ad",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:15:07Z",
+      "side": 1,
+      "message": "Can\u0027t yet, as there\u0027s no `Resolver` handling for templated arguments.",
+      "parentUuid": "88cecf3a_1553a04d",
+      "range": {
+        "startLine": 356,
+        "startChar": 0,
+        "endLine": 361,
+        "endChar": 18
+      },
+      "revId": "d76348faa9f02efef61030cf9c58196d94a73cbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
