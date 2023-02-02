@@ -140,6 +140,24 @@
       "parentUuid": "d3cffb89_addc5648",
       "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e5195dd_bb96f591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-02T01:53:09Z",
+      "side": 1,
+      "message": "I\u0027ve filed gpuweb issue https://github.com/gpuweb/gpuweb/issues/3799. PTAL, thanks!\n\nI think we will also meet problems on buffer-texture copies when faking BGRA8Unorm with RGBA8Unorm so I don\u0027t like this idea.",
+      "parentUuid": "908f50bc_a49446b9",
+      "revId": "b0a54bef139c52d29e9a028cb2c143f19a154181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
