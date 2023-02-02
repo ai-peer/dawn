@@ -94,6 +94,30 @@
       },
       "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5e3d8a_b7c63acb",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 3
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-02T16:31:04Z",
+      "side": 1,
+      "message": "After offline discussion I reuploaded patchset 4 which should be the better fix for now.",
+      "parentUuid": "7a639980_e27e98d3",
+      "range": {
+        "startLine": 110,
+        "startChar": 9,
+        "endLine": 110,
+        "endChar": 18
+      },
+      "revId": "0bded689dca8c5b48f45c049886c37fcb33eca1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
