@@ -2615,13 +2615,10 @@ Maybe<const ast::Expression*> ParserImpl::primary_expression() {
                 return Failure::kErrored;
             }
 
-            auto* ident =
-                create<ast::Identifier>(t.source(), builder_.Symbols().Register(t.to_str()));
-            return create<ast::CallExpression>(t.source(), ident, std::move(params.value));
+            return builder_.Call(t.source(), t.to_str(), std::move(params.value));
         }
 
-        return create<ast::IdentifierExpression>(t.source(),
-                                                 builder_.Symbols().Register(t.to_str()));
+        return builder_.Expr(t.source(), t.to_str());
     }
 
     if (t.Is(Token::Type::kParenLeft)) {
@@ -2676,10 +2673,8 @@ Maybe<const ast::Expression*> ParserImpl::component_or_swizzle_specifier(
                 return Failure::kErrored;
             }
 
-            prefix = create<ast::MemberAccessorExpression>(
-                ident.source, prefix,
-                create<ast::IdentifierExpression>(ident.source,
-                                                  builder_.Symbols().Register(ident.value)));
+            prefix = builder_.MemberAccessor(ident.source, prefix,
+                                             builder_.Expr(ident.source, ident.value));
             continue;
         }
 
@@ -3234,8 +3229,7 @@ Maybe<const ast::Expression*> ParserImpl::core_lhs_expression() {
     if (t.IsIdentifier()) {
         next();
 
-        return create<ast::IdentifierExpression>(t.source(),
-                                                 builder_.Symbols().Register(t.to_str()));
+        return builder_.Expr(t.source(), t.to_str());
     }
 
     if (peek_is(Token::Type::kParenLeft)) {
@@ -3744,10 +3738,8 @@ Expect<const ast::DiagnosticControl*> ParserImpl::expect_diagnostic_control() {
         }
         match(Token::Type::kComma);
 
-        return create<ast::DiagnosticControl>(
-            source, severity_control.value,
-            create<ast::IdentifierExpression>(rule_name.source,
-                                              builder_.Symbols().Register(rule_name.value)));
+        return create<ast::DiagnosticControl>(source, severity_control.value,
+                                              builder_.Expr(rule_name.source, rule_name.value));
     });
 }
 
