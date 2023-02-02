@@ -16,6 +16,24 @@
       "message": "Just out of curiousity, why is the DisableIfSrc needed? There is only one param so can\u0027t it figure it out based on param count?",
       "revId": "c9c3114ce087db8a1cabfee3efe96973aad44e32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5df1cd_0c6f208c",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:07:20Z",
+      "side": 1,
+      "message": "You\u0027re right. I clearly applied this to the wrong function.\nGreat catch!",
+      "parentUuid": "9f658a74_7247736a",
+      "revId": "c9c3114ce087db8a1cabfee3efe96973aad44e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
