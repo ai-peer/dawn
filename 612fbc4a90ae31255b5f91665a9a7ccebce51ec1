@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0385444_971aa974",
+        "filename": "src/tint/ast/identifier_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-02T15:18:45Z",
+      "side": 0,
+      "message": "Since AST nodes are immutable and we assert that the contained `Identifier` is non-null, we /could/ add a `const Symbol\u0026 symbol` which is an alias for `identifier-\u003esymbol` to get rid of a bunch of the extra indirection. We could. Not sure that we should.",
+      "revId": "612fbc4a90ae31255b5f91665a9a7ccebce51ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
