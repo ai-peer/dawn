@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b92c3df_80603f2e",
+        "filename": "src/tint/ast/diagnostic_control.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:23:41Z",
+      "side": 1,
+      "message": "`TINT_ASSERT` does not abort. It triggers the ICE handler, which fails the test, but execution continues.",
+      "parentUuid": "ca6505c8_c4e8a6ed",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aca5931_5839c40d",
@@ -243,6 +261,24 @@
       "side": 1,
       "message": "It\u0027s fine to leave, but even succint, this took a bit of puzzling to figure out what it was referring too.",
       "parentUuid": "31b501ae_679213ec",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65c6f16_40c405c6",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-02T19:23:41Z",
+      "side": 1,
+      "message": "That\u0027s what the comment is for 😊",
+      "parentUuid": "1de3ec14_e7b67e15",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
