@@ -317,6 +317,24 @@
       "parentUuid": "b981a161_dcb688ba",
       "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30199bb6_6b25b829",
+        "filename": "src/tint/traits.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-02T19:35:46Z",
+      "side": 1,
+      "message": "Sure, I know the context is there to find it, but when I see `traits::IsTypeOrDerived\u003ctraits::PtrElTy\u003cARGS\u003e, ast::Expression\u003e || ...)` I like being able to understand in context and the parsing of `PtrElTy` just threw me a bit. (Doesn\u0027t help that my brain tries to parse it as `Pretty` with a bunch of wrong characters, heh)\n\nI\u0027m fine to land this as is, it\u0027s not a big deal, just felt like a couple extra characters could make it a bit clearer.",
+      "parentUuid": "86af8b48_d30edf9d",
+      "revId": "8166f9af904abd6048a8b528a25f4f1dc0b8934f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
