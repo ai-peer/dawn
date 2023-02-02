@@ -464,7 +464,8 @@ struct DirectVariableAccess::State {
                     [&](const ast::Let*) {
                         if (variable->Type()->Is<type::Pointer>()) {
                             // variable is a pointer-let.
-                            auto* init = sem.Get(variable->Declaration()->initializer);
+                            auto* init =
+                                sem.Get<sem::ValueExpression>(variable->Declaration()->initializer);
                             // Note: We do not use take_chain() here, as we need to preserve the
                             // AccessChain on the let's initializer, as the let needs its
                             // initializer updated, and the let may be used multiple times. Instead

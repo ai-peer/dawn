@@ -22,7 +22,10 @@ namespace tint {
 class CastableBase;
 }  // namespace tint
 namespace tint::ast {
+class AccessorExpression;
 class Array;
+class BinaryExpression;
+class CallExpression;
 class Expression;
 class ForLoopStatement;
 class Function;
@@ -37,8 +40,10 @@ class Type;
 class TypeDecl;
 class Variable;
 class WhileStatement;
+class UnaryOpExpression;
 }  // namespace tint::ast
 namespace tint::sem {
+class Expression;
 class ForLoopStatement;
 class Function;
 class GlobalVariable;
@@ -77,7 +82,11 @@ struct TypeMappings {
     SwitchStatement* operator()(ast::SwitchStatement*);
     type::Type* operator()(ast::Type*);
     type::Type* operator()(ast::TypeDecl*);
-    ValueExpression* operator()(ast::Expression*);
+    Expression* operator()(ast::Expression*);
+    ValueExpression* operator()(ast::AccessorExpression*);
+    ValueExpression* operator()(ast::CallExpression*);
+    ValueExpression* operator()(ast::BinaryExpression*);
+    ValueExpression* operator()(ast::UnaryOpExpression*);
     Variable* operator()(ast::Variable*);
     WhileStatement* operator()(ast::WhileStatement*);
     //! @endcond

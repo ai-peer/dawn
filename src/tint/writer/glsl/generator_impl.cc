@@ -1814,7 +1814,7 @@ bool GeneratorImpl::EmitDiscard(const ast::DiscardStatement*) {
 }
 
 bool GeneratorImpl::EmitExpression(std::ostream& out, const ast::Expression* expr) {
-    if (auto* sem = builder_.Sem().Get(expr)) {
+    if (auto* sem = builder_.Sem().Get<sem::ValueExpression>(expr)) {
         if (auto* constant = sem->ConstantValue()) {
             return EmitConstant(out, constant);
         }

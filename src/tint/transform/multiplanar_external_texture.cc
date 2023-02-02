@@ -197,8 +197,9 @@ struct MultiplanarExternalTexture::State {
             if (builtin && !builtin->Parameters().IsEmpty() &&
                 builtin->Parameters()[0]->Type()->Is<type::ExternalTexture>() &&
                 builtin->Type() != sem::BuiltinType::kTextureDimensions) {
-                if (auto* var_user =
-                        sem.Get(expr->args[0])->UnwrapLoad()->As<sem::VariableUser>()) {
+                if (auto* var_user = sem.Get<sem::ValueExpression>(expr->args[0])
+                                         ->UnwrapLoad()
+                                         ->As<sem::VariableUser>()) {
                     auto it = new_binding_symbols.find(var_user->Variable());
                     if (it == new_binding_symbols.end()) {
                         // If valid new binding locations were not provided earlier, we would have
@@ -223,7 +224,9 @@ struct MultiplanarExternalTexture::State {
                 // texture_external parameter. These need to be expanded out to multiple plane
                 // textures and the texture parameters structure.
                 for (auto* arg : expr->args) {
-                    if (auto* var_user = sem.Get(arg)->UnwrapLoad()->As<sem::VariableUser>()) {
+                    if (auto* var_user = sem.Get<sem::ValueExpression>(arg)
+                                             ->UnwrapLoad()
+                                             ->As<sem::VariableUser>()) {
                         // Check if a parameter is a texture_external by trying to find
                         // it in the transform state.
                         auto it = new_binding_symbols.find(var_user->Variable());
