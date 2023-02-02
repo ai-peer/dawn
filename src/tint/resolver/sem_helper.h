@@ -57,19 +57,29 @@ class SemHelper {
     /// @returns the sem node for @p ast
     template <typename AST = ast::Node>
     auto* GetVal(const AST* ast) const {
-        if constexpr (traits::IsTypeOrDerived<sem::SemanticNodeTypeFor<AST>,
-                                              sem::ValueExpression>) {
-            return Get(ast);
+        return AsValue(Get(ast));
+    }
+
+    /// @param expr the semantic node
+    /// @returns one of:
+    /// * nullptr if @p expr is nullptr
+    /// * @p expr if the static pointer type already derives from sem::ValueExpression
+    /// * @p expr cast to sem::ValueExpression if the cast is successful
+    /// * nullptr if @p expr is not a sem::ValueExpression. In this case an error diagnostic is
+    ///   raised.
+    template <typename EXPR>
+    auto* AsValue(EXPR* expr) const {
+        if constexpr (traits::IsTypeOrDerived<EXPR, sem::ValueExpression>) {
+            return expr;
         } else {
-            if (auto* sem = Get(ast); TINT_LIKELY(sem)) {
-                auto* val = sem->template As<sem::ValueExpression>();
-                if (TINT_LIKELY(val)) {
+            if (TINT_LIKELY(expr)) {
+                if (auto* val = expr->template As<sem::ValueExpression>(); TINT_LIKELY(val)) {
                     return val;
                 }
                 // TODO(crbug.com/tint/1810): Improve error
                 builder_->Diagnostics().add_error(diag::System::Resolver,
                                                   "required value expression, got something else",
-                                                  ast->source);
+                                                  expr->Declaration()->source);
             }
             return static_cast<sem::ValueExpression*>(nullptr);
         }
