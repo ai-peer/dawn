@@ -397,7 +397,7 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
         return nullptr;
     }
 
-    auto* rhs = Load(Materialize(Expression(v->initializer), ty));
+    auto* rhs = Load(Materialize(ValueExpression(v->initializer), ty));
     if (!rhs) {
         return nullptr;
     }
@@ -455,7 +455,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
 
         ExprEvalStageConstraint constraint{sem::EvaluationStage::kOverride, "override initializer"};
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
-        rhs = Materialize(Expression(v->initializer), ty);
+        rhs = Materialize(ValueExpression(v->initializer), ty);
         if (!rhs) {
             return nullptr;
         }
@@ -489,7 +489,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
         ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "@id"};
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-        auto* materialized = Materialize(Expression(id_attr->expr));
+        auto* materialized = Materialize(ValueExpression(id_attr->expr));
         if (!materialized) {
             return nullptr;
         }
@@ -542,7 +542,7 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
     {
         ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "const initializer"};
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
-        rhs = Expression(c->initializer);
+        rhs = ValueExpression(c->initializer);
         if (!rhs) {
             return nullptr;
         }
@@ -606,7 +606,7 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
         };
         TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-        rhs = Load(Materialize(Expression(var->initializer), storage_ty));
+        rhs = Load(Materialize(ValueExpression(var->initializer), storage_ty));
         if (!rhs) {
             return nullptr;
         }
@@ -670,7 +670,7 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
                 TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
                 auto* attr = ast::GetAttribute<ast::BindingAttribute>(var->attributes);
-                auto* materialized = Materialize(Expression(attr->expr));
+                auto* materialized = Materialize(ValueExpression(attr->expr));
                 if (!materialized) {
                     return nullptr;
                 }
@@ -694,7 +694,7 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
                 TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
                 auto* attr = ast::GetAttribute<ast::GroupAttribute>(var->attributes);
-                auto* materialized = Materialize(Expression(attr->expr));
+                auto* materialized = Materialize(ValueExpression(attr->expr));
                 if (!materialized) {
                     return nullptr;
                 }
@@ -778,7 +778,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
             TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
             auto* attr = ast::GetAttribute<ast::BindingAttribute>(param->attributes);
-            auto* materialized = Materialize(Expression(attr->expr));
+            auto* materialized = Materialize(ValueExpression(attr->expr));
             if (!materialized) {
                 return nullptr;
             }
@@ -789,7 +789,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
             TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
             auto* attr = ast::GetAttribute<ast::GroupAttribute>(param->attributes);
-            auto* materialized = Materialize(Expression(attr->expr));
+            auto* materialized = Materialize(ValueExpression(attr->expr));
             if (!materialized) {
                 return nullptr;
             }
@@ -817,7 +817,7 @@ utils::Result<uint32_t> Resolver::LocationAttribute(const ast::LocationAttribute
     ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "@location value"};
     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-    auto* materialized = Materialize(Expression(attr->expr));
+    auto* materialized = Materialize(ValueExpression(attr->expr));
     if (!materialized) {
         return utils::Failure;
     }
@@ -956,7 +956,7 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
 sem::Statement* Resolver::ConstAssert(const ast::ConstAssert* assertion) {
     ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "const assertion"};
     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
-    auto* expr = Expression(assertion->condition);
+    auto* expr = ValueExpression(assertion->condition);
     if (!expr) {
         return nullptr;
     }
@@ -1172,7 +1172,7 @@ bool Resolver::WorkgroupSize(const ast::Function* func) {
         if (!value) {
             break;
         }
-        const auto* expr = Expression(value);
+        const auto* expr = ValueExpression(value);
         if (!expr) {
             return false;
         }
@@ -1344,7 +1344,7 @@ sem::IfStatement* Resolver::IfStatement(const ast::IfStatement* stmt) {
     auto* sem =
         builder_->create<sem::IfStatement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* cond = Load(Expression(stmt->condition));
+        auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
             return false;
         }
@@ -1439,7 +1439,7 @@ sem::ForLoopStatement* Resolver::ForLoopStatement(const ast::ForLoopStatement* s
         }
 
         if (auto* cond_expr = stmt->condition) {
-            auto* cond = Load(Expression(cond_expr));
+            auto* cond = Load(ValueExpression(cond_expr));
             if (!cond) {
                 return false;
             }
@@ -1482,7 +1482,7 @@ sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
-        auto* cond = Load(Expression(stmt->condition));
+        auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
             return false;
         }
@@ -1509,7 +1509,7 @@ sem::WhileStatement* Resolver::WhileStatement(const ast::WhileStatement* stmt) {
     });
 }
 
-sem::ValueExpression* Resolver::Expression(const ast::Expression* root) {
+sem::Expression* Resolver::Expression(const ast::Expression* root) {
     utils::Vector<const ast::Expression*, 64> sorted;
     constexpr size_t kMaxExpressionDepth = 512U;
     bool failed = false;
@@ -1543,30 +1543,15 @@ sem::ValueExpression* Resolver::Expression(const ast::Expression* root) {
 
     for (auto* expr : utils::Reverse(sorted)) {
         auto* sem_expr = Switch(
-            expr,
-            [&](const ast::IndexAccessorExpression* array) -> sem::ValueExpression* {
-                return IndexAccessor(array);
-            },
-            [&](const ast::BinaryExpression* bin_op) -> sem::ValueExpression* {
-                return Binary(bin_op);
-            },
-            [&](const ast::BitcastExpression* bitcast) -> sem::ValueExpression* {
-                return Bitcast(bitcast);
-            },
-            [&](const ast::CallExpression* call) -> sem::ValueExpression* { return Call(call); },
-            [&](const ast::IdentifierExpression* ident) -> sem::ValueExpression* {
-                return Identifier(ident);
-            },
-            [&](const ast::LiteralExpression* literal) -> sem::ValueExpression* {
-                return Literal(literal);
-            },
-            [&](const ast::MemberAccessorExpression* member) -> sem::ValueExpression* {
-                return MemberAccessor(member);
-            },
-            [&](const ast::UnaryOpExpression* unary) -> sem::ValueExpression* {
-                return UnaryOp(unary);
-            },
-            [&](const ast::PhonyExpression*) -> sem::ValueExpression* {
+            expr, [&](const ast::IndexAccessorExpression* array) { return IndexAccessor(array); },
+            [&](const ast::BinaryExpression* bin_op) { return Binary(bin_op); },
+            [&](const ast::BitcastExpression* bitcast) { return Bitcast(bitcast); },
+            [&](const ast::CallExpression* call) { return Call(call); },
+            [&](const ast::IdentifierExpression* ident) { return Identifier(ident); },
+            [&](const ast::LiteralExpression* literal) { return Literal(literal); },
+            [&](const ast::MemberAccessorExpression* member) { return MemberAccessor(member); },
+            [&](const ast::UnaryOpExpression* unary) { return UnaryOp(unary); },
+            [&](const ast::PhonyExpression*) {
                 return builder_->create<sem::ValueExpression>(expr, builder_->create<type::Void>(),
                                                               sem::EvaluationStage::kRuntime,
                                                               current_statement_,
@@ -1582,10 +1567,14 @@ sem::ValueExpression* Resolver::Expression(const ast::Expression* root) {
             return nullptr;
         }
 
-        if (auto* constraint = expr_eval_stage_constraint_.constraint) {
-            if (!validator_.EvaluationStage(sem_expr, expr_eval_stage_constraint_.stage,
-                                            constraint)) {
-                return nullptr;
+        auto* val = sem_expr->As<sem::ValueExpression>();
+
+        if (val) {
+            if (auto* constraint = expr_eval_stage_constraint_.constraint) {
+                if (!validator_.EvaluationStage(val, expr_eval_stage_constraint_.stage,
+                                                constraint)) {
+                    return nullptr;
+                }
             }
         }
 
@@ -1596,9 +1585,9 @@ sem::ValueExpression* Resolver::Expression(const ast::Expression* root) {
 
         // If we just processed the lhs of a constexpr logical binary expression, mark the rhs for
         // short-circuiting.
-        if (sem_expr->ConstantValue()) {
+        if (val && val->ConstantValue()) {
             if (auto binary = logical_binary_lhs_to_parent_.Find(expr)) {
-                const bool lhs_is_true = sem_expr->ConstantValue()->ValueAs<bool>();
+                const bool lhs_is_true = val->ConstantValue()->ValueAs<bool>();
                 if (((*binary)->IsLogicalAnd() && !lhs_is_true) ||
                     ((*binary)->IsLogicalOr() && lhs_is_true)) {
                     // Mark entire expression tree to not const-evaluate
@@ -1617,6 +1606,10 @@ sem::ValueExpression* Resolver::Expression(const ast::Expression* root) {
 
     TINT_ICE(Resolver, diagnostics_) << "Expression() did not find root node";
     return nullptr;
+}
+
+sem::ValueExpression* Resolver::ValueExpression(const ast::Expression* expr) {
+    return sem_.AsValue(Expression(expr));
 }
 
 void Resolver::RegisterStore(const sem::ValueExpression* expr) {
@@ -1787,7 +1780,7 @@ const type::Type* Resolver::ConcreteType(const type::Type* ty,
 
 const sem::ValueExpression* Resolver::Load(const sem::ValueExpression* expr) {
     if (!expr) {
-        // Allow for Load(Expression(blah)), where failures pass through Load()
+        // Allow for Load(ValueExpression(blah)), where failures pass through Load()
         return nullptr;
     }
 
@@ -1815,7 +1808,7 @@ const sem::ValueExpression* Resolver::Load(const sem::ValueExpression* expr) {
 const sem::ValueExpression* Resolver::Materialize(const sem::ValueExpression* expr,
                                                   const type::Type* target_type /* = nullptr */) {
     if (!expr) {
-        // Allow for Materialize(Expression(blah)), where failures pass through Materialize()
+        // Allow for Materialize(ValueExpression(blah)), where failures pass through Materialize()
         return nullptr;
     }
 
@@ -2684,7 +2677,7 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
                                                   /* has_side_effects */ false);
 }
 
-sem::ValueExpression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
+sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     Mark(expr->identifier);
     auto symbol = expr->identifier->symbol;
     auto* sem_resolved = sem_.ResolvedSymbol<sem::Node>(expr);
@@ -3184,7 +3177,7 @@ type::Array* Resolver::Array(const ast::Array* arr) {
 
 const type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {
     // Evaluate the constant array count expression.
-    const auto* count_sem = Materialize(Expression(count_expr));
+    const auto* count_sem = Materialize(ValueExpression(count_expr));
     if (!count_sem) {
         return nullptr;
     }
@@ -3365,7 +3358,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                                                        "@offset value"};
                     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-                    auto* materialized = Materialize(Expression(o->expr));
+                    auto* materialized = Materialize(ValueExpression(o->expr));
                     if (!materialized) {
                         return false;
                     }
@@ -3387,7 +3380,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                     ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "@align"};
                     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-                    auto* materialized = Materialize(Expression(a->expr));
+                    auto* materialized = Materialize(ValueExpression(a->expr));
                     if (!materialized) {
                         return false;
                     }
@@ -3416,7 +3409,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                     ExprEvalStageConstraint constraint{sem::EvaluationStage::kConstant, "@size"};
                     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
-                    auto* materialized = Materialize(Expression(s->expr));
+                    auto* materialized = Materialize(ValueExpression(s->expr));
                     if (!materialized) {
                         return false;
                     }
@@ -3541,7 +3534,7 @@ sem::Statement* Resolver::ReturnStatement(const ast::ReturnStatement* stmt) {
 
         const type::Type* value_ty = nullptr;
         if (auto* value = stmt->value) {
-            const auto* expr = Load(Expression(value));
+            const auto* expr = Load(ValueExpression(value));
             if (!expr) {
                 return false;
             }
@@ -3571,7 +3564,7 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
     return StatementScope(stmt, sem, [&] {
         auto& behaviors = sem->Behaviors();
 
-        const auto* cond = Load(Expression(stmt->condition));
+        const auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
             return false;
         }
@@ -3588,7 +3581,7 @@ sem::SwitchStatement* Resolver::SwitchStatement(const ast::SwitchStatement* stmt
                 if (sel->IsDefault()) {
                     continue;
                 }
-                auto* sem_expr = Expression(sel->expr);
+                auto* sem_expr = ValueExpression(sel->expr);
                 if (!sem_expr) {
                     return false;
                 }
@@ -3661,14 +3654,14 @@ sem::Statement* Resolver::AssignmentStatement(const ast::AssignmentStatement* st
     auto* sem =
         builder_->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* lhs = Expression(stmt->lhs);
+        auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
             return false;
         }
 
         const bool is_phony_assignment = stmt->lhs->Is<ast::PhonyExpression>();
 
-        const auto* rhs = Expression(stmt->rhs);
+        const auto* rhs = ValueExpression(stmt->rhs);
         if (!rhs) {
             return false;
         }
@@ -3713,7 +3706,7 @@ sem::Statement* Resolver::BreakIfStatement(const ast::BreakIfStatement* stmt) {
     auto* sem = builder_->create<sem::BreakIfStatement>(stmt, current_compound_statement_,
                                                         current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* cond = Load(Expression(stmt->condition));
+        auto* cond = Load(ValueExpression(stmt->condition));
         if (!cond) {
             return false;
         }
@@ -3729,7 +3722,7 @@ sem::Statement* Resolver::CallStatement(const ast::CallStatement* stmt) {
     auto* sem =
         builder_->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        if (auto* expr = Expression(stmt->expr)) {
+        if (auto* expr = ValueExpression(stmt->expr)) {
             sem->Behaviors() = expr->Behaviors();
             return true;
         }
@@ -3742,12 +3735,12 @@ sem::Statement* Resolver::CompoundAssignmentStatement(
     auto* sem =
         builder_->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* lhs = Expression(stmt->lhs);
+        auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
             return false;
         }
 
-        auto* rhs = Load(Expression(stmt->rhs));
+        auto* rhs = Load(ValueExpression(stmt->rhs));
         if (!rhs) {
             return false;
         }
@@ -3800,7 +3793,7 @@ sem::Statement* Resolver::IncrementDecrementStatement(
     auto* sem =
         builder_->create<sem::Statement>(stmt, current_compound_statement_, current_function_);
     return StatementScope(stmt, sem, [&] {
-        auto* lhs = Expression(stmt->lhs);
+        auto* lhs = ValueExpression(stmt->lhs);
         if (!lhs) {
             return false;
         }
