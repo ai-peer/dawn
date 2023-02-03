@@ -40,11 +40,17 @@ Core ParseCore(std::string_view str) {
     if (str == "i32") {
         return Core::kI32;
     }
+    if (str == "mat2x2") {
+        return Core::kMat2X2;
+    }
     if (str == "mat2x2f") {
         return Core::kMat2X2F;
     }
     if (str == "mat2x2h") {
         return Core::kMat2X2H;
+    }
+    if (str == "mat2x3") {
+        return Core::kMat2X3;
     }
     if (str == "mat2x3f") {
         return Core::kMat2X3F;
@@ -52,11 +58,17 @@ Core ParseCore(std::string_view str) {
     if (str == "mat2x3h") {
         return Core::kMat2X3H;
     }
+    if (str == "mat2x4") {
+        return Core::kMat2X4;
+    }
     if (str == "mat2x4f") {
         return Core::kMat2X4F;
     }
     if (str == "mat2x4h") {
         return Core::kMat2X4H;
+    }
+    if (str == "mat3x2") {
+        return Core::kMat3X2;
     }
     if (str == "mat3x2f") {
         return Core::kMat3X2F;
@@ -64,11 +76,17 @@ Core ParseCore(std::string_view str) {
     if (str == "mat3x2h") {
         return Core::kMat3X2H;
     }
+    if (str == "mat3x3") {
+        return Core::kMat3X3;
+    }
     if (str == "mat3x3f") {
         return Core::kMat3X3F;
     }
     if (str == "mat3x3h") {
         return Core::kMat3X3H;
+    }
+    if (str == "mat3x4") {
+        return Core::kMat3X4;
     }
     if (str == "mat3x4f") {
         return Core::kMat3X4F;
@@ -76,17 +94,26 @@ Core ParseCore(std::string_view str) {
     if (str == "mat3x4h") {
         return Core::kMat3X4H;
     }
+    if (str == "mat4x2") {
+        return Core::kMat4X2;
+    }
     if (str == "mat4x2f") {
         return Core::kMat4X2F;
     }
     if (str == "mat4x2h") {
         return Core::kMat4X2H;
     }
+    if (str == "mat4x3") {
+        return Core::kMat4X3;
+    }
     if (str == "mat4x3f") {
         return Core::kMat4X3F;
     }
     if (str == "mat4x3h") {
         return Core::kMat4X3H;
+    }
+    if (str == "mat4x4") {
+        return Core::kMat4X4;
     }
     if (str == "mat4x4f") {
         return Core::kMat4X4F;
@@ -148,38 +175,56 @@ std::ostream& operator<<(std::ostream& out, Core value) {
             return out << "f32";
         case Core::kI32:
             return out << "i32";
+        case Core::kMat2X2:
+            return out << "mat2x2";
         case Core::kMat2X2F:
             return out << "mat2x2f";
         case Core::kMat2X2H:
             return out << "mat2x2h";
+        case Core::kMat2X3:
+            return out << "mat2x3";
         case Core::kMat2X3F:
             return out << "mat2x3f";
         case Core::kMat2X3H:
             return out << "mat2x3h";
+        case Core::kMat2X4:
+            return out << "mat2x4";
         case Core::kMat2X4F:
             return out << "mat2x4f";
         case Core::kMat2X4H:
             return out << "mat2x4h";
+        case Core::kMat3X2:
+            return out << "mat3x2";
         case Core::kMat3X2F:
             return out << "mat3x2f";
         case Core::kMat3X2H:
             return out << "mat3x2h";
+        case Core::kMat3X3:
+            return out << "mat3x3";
         case Core::kMat3X3F:
             return out << "mat3x3f";
         case Core::kMat3X3H:
             return out << "mat3x3h";
+        case Core::kMat3X4:
+            return out << "mat3x4";
         case Core::kMat3X4F:
             return out << "mat3x4f";
         case Core::kMat3X4H:
             return out << "mat3x4h";
+        case Core::kMat4X2:
+            return out << "mat4x2";
         case Core::kMat4X2F:
             return out << "mat4x2f";
         case Core::kMat4X2H:
             return out << "mat4x2h";
+        case Core::kMat4X3:
+            return out << "mat4x3";
         case Core::kMat4X3F:
             return out << "mat4x3f";
         case Core::kMat4X3H:
             return out << "mat4x3h";
+        case Core::kMat4X4:
+            return out << "mat4x4";
         case Core::kMat4X4F:
             return out << "mat4x4f";
         case Core::kMat4X4H:

@@ -261,7 +261,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Dynamic_I32) {
     auto* idx = Var("idx", ty.i32(), Construct(ty.i32()));
     auto* acc = IndexAccessor("a", Expr(Source{{12, 34}}, idx));
     auto* f = Var("f", ty.f32(), acc);
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(a),
              Decl(idx),
@@ -282,7 +282,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_F32) {
     // var f : f32 = a[2.0f];
     auto* a = Let("a", ty.array<f32, 3>(), array<f32, 3>());
     auto* f = Var("a_2", ty.f32(), IndexAccessor("a", Expr(Source{{12, 34}}, 2_f)));
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(a),
              Decl(f),
@@ -297,7 +297,7 @@ TEST_F(ResolverIndexAccessorTest, Array_Literal_I32) {
     auto* a = Let("a", ty.array<f32, 3>(), array<f32, 3>());
     auto* acc = IndexAccessor("a", 2_i);
     auto* f = Var("a_2", ty.f32(), acc);
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(a),
              Decl(f),

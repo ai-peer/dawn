@@ -30,8 +30,8 @@ class ResolverFunctionValidationTest : public TestHelper, public testing::Test {
 TEST_F(ResolverFunctionValidationTest, DuplicateParameterName) {
     // fn func_a(common_name : f32) { }
     // fn func_b(common_name : f32) { }
-    Func("func_a", utils::Vector{Param("common_name", ty.f32())}, ty.void_(), utils::Empty);
-    Func("func_b", utils::Vector{Param("common_name", ty.f32())}, ty.void_(), utils::Empty);
+    Func("func_a", utils::Vector{Param("common_name", ty.f32())}, ty.void_, utils::Empty);
+    Func("func_b", utils::Vector{Param("common_name", ty.f32())}, ty.void_, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -40,7 +40,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterMayShadowGlobal) {
     // var<private> common_name : f32;
     // fn func(common_name : f32) { }
     GlobalVar("common_name", ty.f32(), type::AddressSpace::kPrivate);
-    Func("func", utils::Vector{Param("common_name", ty.f32())}, ty.void_(), utils::Empty);
+    Func("func", utils::Vector{Param("common_name", ty.f32())}, ty.void_, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -49,7 +49,7 @@ TEST_F(ResolverFunctionValidationTest, LocalConflictsWithParameter) {
     // fn func(common_name : f32) {
     //   let common_name = 1i;
     // }
-    Func("func", utils::Vector{Param(Source{{12, 34}}, "common_name", ty.f32())}, ty.void_(),
+    Func("func", utils::Vector{Param(Source{{12, 34}}, "common_name", ty.f32())}, ty.void_,
          utils::Vector{
              Decl(Let(Source{{56, 78}}, "common_name", Expr(1_i))),
          });
@@ -65,7 +65,7 @@ TEST_F(ResolverFunctionValidationTest, NestedLocalMayShadowParameter) {
     //     let common_name = 1i;
     //   }
     // }
-    Func("func", utils::Vector{Param(Source{{12, 34}}, "common_name", ty.f32())}, ty.void_(),
+    Func("func", utils::Vector{Param(Source{{12, 34}}, "common_name", ty.f32())}, ty.void_,
          utils::Vector{
              Block(Decl(Let(Source{{56, 78}}, "common_name", Expr(1_i)))),
          });
@@ -77,7 +77,7 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionEndWithoutReturnStatement_Pas
     // fn func { var a:i32 = 2i; }
     auto* var = Var("a", ty.i32(), Expr(2_i));
 
-    Func(Source{{12, 34}}, "func", utils::Empty, ty.void_(),
+    Func(Source{{12, 34}}, "func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
          });
@@ -106,7 +106,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionNameSameAsFunctionScopeVariableNa
     // fn b() -> i32 { return 2; }
 
     auto* var = Var("b", ty.i32(), Expr(0_i));
-    Func("a", utils::Empty, ty.void_(),
+    Func("a", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
          });
@@ -130,7 +130,7 @@ TEST_F(ResolverFunctionValidationTest, UnreachableCode_return) {
     auto* ret = Return();
     auto* assign_a = Assign(Source{{12, 34}}, "a", 2_i);
 
-    Func("func", utils::Empty, ty.void_(), utils::Vector{decl_a, ret, assign_a});
+    Func("func", utils::Empty, ty.void_, utils::Vector{decl_a, ret, assign_a});
 
     ASSERT_TRUE(r()->Resolve());
 
@@ -151,7 +151,7 @@ TEST_F(ResolverFunctionValidationTest, UnreachableCode_return_InBlocks) {
     auto* ret = Return();
     auto* assign_a = Assign(Source{{12, 34}}, "a", 2_i);
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{decl_a, Block(Block(Block(ret))), assign_a});
 
     ASSERT_TRUE(r()->Resolve());
@@ -172,7 +172,7 @@ TEST_F(ResolverFunctionValidationTest, UnreachableCode_discard_nowarning) {
     auto* discard = Discard();
     auto* assign_a = Assign(Source{{12, 34}}, "a", 2_i);
 
-    Func("func", utils::Empty, ty.void_(), utils::Vector{decl_a, discard, assign_a});
+    Func("func", utils::Empty, ty.void_, utils::Vector{decl_a, discard, assign_a});
 
     ASSERT_TRUE(r()->Resolve());
     EXPECT_TRUE(Sem().Get(decl_a)->IsReachable());
@@ -201,22 +201,22 @@ TEST_F(ResolverFunctionValidationTest, DiscardCalledIndirectlyFromComputeEntryPo
     // fn f2 { f1(); }
     // @compute @workgroup_size(1) fn main { return f2(); }
 
-    Func(Source{{1, 2}}, "f0", utils::Empty, ty.void_(),
+    Func(Source{{1, 2}}, "f0", utils::Empty, ty.void_,
          utils::Vector{
              Discard(Source{{12, 34}}),
          });
 
-    Func(Source{{3, 4}}, "f1", utils::Empty, ty.void_(),
+    Func(Source{{3, 4}}, "f1", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f0")),
          });
 
-    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_(),
+    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f1")),
          });
 
-    Func(Source{{7, 8}}, "main", utils::Empty, ty.void_(),
+    Func(Source{{7, 8}}, "main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f2")),
          },
@@ -251,7 +251,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionEndWithoutReturnStatement_Fail) {
 TEST_F(ResolverFunctionValidationTest, VoidFunctionEndWithoutReturnStatementEmptyBody_Pass) {
     // fn func {}
 
-    Func(Source{{12, 34}}, "func", utils::Empty, ty.void_(), utils::Empty);
+    Func(Source{{12, 34}}, "func", utils::Empty, ty.void_, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -268,7 +268,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionEndWithoutReturnStatementEmptyBod
 TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementType_Pass) {
     // fn func { return; }
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -278,7 +278,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementType_
 
 TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAInt) {
     // fn func { return 2; }
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(Source{{12, 34}}, Expr(2_a)),
          });
@@ -291,7 +291,7 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAInt) {
 
 TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAFloat) {
     // fn func { return 2.0; }
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(Source{{12, 34}}, Expr(2.0_a)),
          });
@@ -304,7 +304,7 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsAFloat) {
 
 TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsI32) {
     // fn func { return 2i; }
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(Source{{12, 34}}, Expr(2_i)),
          });
@@ -318,11 +318,11 @@ TEST_F(ResolverFunctionValidationTest, VoidFunctionReturnsI32) {
 TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementType_void_fail) {
     // fn v { return; }
     // fn func { return v(); }
-    Func("v", utils::Empty, ty.void_(),
+    Func("v", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(Call(Source{{12, 34}}, "v")),
          });
@@ -397,13 +397,13 @@ TEST_F(ResolverFunctionValidationTest, FunctionTypeMustMatchReturnStatementTypeF
 TEST_F(ResolverFunctionValidationTest, CannotCallEntryPoint) {
     // @compute @workgroup_size(1) fn entrypoint() {}
     // fn func() { return entrypoint(); }
-    Func("entrypoint", utils::Empty, ty.void_(), utils::Empty,
+    Func("entrypoint", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
          });
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(Source{{12, 34}}, "entrypoint")),
          });
@@ -430,7 +430,7 @@ TEST_F(ResolverFunctionValidationTest, PipelineStage_MustBeUnique_Fail) {
     // @fragment
     // @vertex
     // fn main() { return; }
-    Func(Source{{12, 34}}, "main", utils::Empty, ty.void_(),
+    Func(Source{{12, 34}}, "main", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          },
@@ -446,7 +446,7 @@ TEST_F(ResolverFunctionValidationTest, PipelineStage_MustBeUnique_Fail) {
 }
 
 TEST_F(ResolverFunctionValidationTest, NoPipelineEntryPoints) {
-    Func("vtx_func", utils::Empty, ty.void_(),
+    Func("vtx_func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -462,7 +462,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionVarInitWithParam) {
     auto* bar = Param("bar", ty.f32());
     auto* baz = Var("baz", ty.f32(), Expr("bar"));
 
-    Func("foo", utils::Vector{bar}, ty.void_(),
+    Func("foo", utils::Vector{bar}, ty.void_,
          utils::Vector{
              Decl(baz),
          });
@@ -478,7 +478,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionConstInitWithParam) {
     auto* bar = Param("bar", ty.f32());
     auto* baz = Let("baz", ty.f32(), Expr("bar"));
 
-    Func("foo", utils::Vector{bar}, ty.void_(),
+    Func("foo", utils::Vector{bar}, ty.void_,
          utils::Vector{
              Decl(baz),
          });
@@ -487,7 +487,7 @@ TEST_F(ResolverFunctionValidationTest, FunctionConstInitWithParam) {
 }
 
 TEST_F(ResolverFunctionValidationTest, FunctionParamsConst) {
-    Func("foo", utils::Vector{Param(Sym("arg"), ty.i32())}, ty.void_(),
+    Func("foo", utils::Vector{Param(Sym("arg"), ty.i32())}, ty.void_,
          utils::Vector{
              Assign(Expr(Source{{12, 34}}, "arg"), Expr(1_i)),
              Return(),
@@ -505,7 +505,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_ConstU32) {
     // fn main() {}
     auto* x = GlobalConst("x", ty.u32(), Expr(4_u));
     auto* y = GlobalConst("y", ty.u32(), Expr(8_u));
-    auto* func = Func("main", utils::Empty, ty.void_(), utils::Empty,
+    auto* func = Func("main", utils::Empty, ty.void_, utils::Empty,
                       utils::Vector{
                           Stage(ast::PipelineStage::kCompute),
                           WorkgroupSize("x", "y", 16_u),
@@ -530,7 +530,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_ConstU32) {
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Cast) {
     // @compute @workgroup_size(i32(5))
     // fn main() {}
-    auto* func = Func("main", utils::Empty, ty.void_(), utils::Empty,
+    auto* func = Func("main", utils::Empty, ty.void_, utils::Empty,
                       utils::Vector{
                           Stage(ast::PipelineStage::kCompute),
                           WorkgroupSize(Construct(Source{{12, 34}}, ty.i32(), 5_a)),
@@ -548,7 +548,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_I32) {
     // @compute @workgroup_size(1i, 2i, 3i)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_i, 2_i, 3_i),
@@ -561,7 +561,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_U32) {
     // @compute @workgroup_size(1u, 2u, 3u)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_u, 2_u, 3_u),
@@ -574,7 +574,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_I32_AInt) {
     // @compute @workgroup_size(1, 2i, 3)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_a, 2_i, 3_a),
@@ -587,7 +587,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_GoodType_U32_AInt) {
     // @compute @workgroup_size(1u, 2, 3u)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_u, 2_a, 3_u),
@@ -600,7 +600,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Expr) {
     // @compute @workgroup_size(1 + 2)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, Add(1_u, 2_u)),
@@ -613,7 +613,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_MismatchType_U32) {
     // @compute @workgroup_size(1u, 2, 3_i)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_u, 2_a, 3_i),
@@ -628,7 +628,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_MismatchType_I32) {
     // @compute @workgroup_size(1_i, 2u, 3)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_i, 2_u, 3_a),
@@ -644,7 +644,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_TypeMismatch) {
     // @compute @workgroup_size(1i, x)
     // fn main() {}
     GlobalConst("x", ty.u32(), Expr(64_u));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, 1_i, "x"),
@@ -662,7 +662,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_TypeMismatch2) {
     // fn main() {}
     GlobalConst("x", ty.u32(), Expr(64_u));
     GlobalConst("y", ty.i32(), Expr(32_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, "x", "y"),
@@ -680,7 +680,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Mismatch_ConstU32) {
     // fn main() {}
     GlobalConst("x", ty.u32(), Expr(4_u));
     GlobalConst("y", ty.u32(), Expr(8_u));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Source{{12, 34}}, "x", "y", 16_i),
@@ -695,7 +695,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_BadType) {
     // @compute @workgroup_size(64.0)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, 64_f)),
@@ -712,7 +712,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_Negative) {
     // @compute @workgroup_size(-2i)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, -2_i)),
@@ -726,7 +726,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Literal_Zero) {
     // @compute @workgroup_size(0i)
     // fn main() {}
 
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, 0_i)),
@@ -741,7 +741,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_BadType) {
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.f32(), Expr(64_f));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, "x")),
@@ -759,7 +759,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_Negative) {
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.i32(), Expr(-2_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, "x")),
@@ -774,7 +774,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_Zero) {
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.i32(), Expr(0_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, "x")),
@@ -789,7 +789,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_NestedZeroValueInitia
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalConst("x", ty.i32(), Construct(ty.i32(), Construct(ty.i32(), Construct(ty.i32()))));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, "x")),
@@ -802,7 +802,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_Const_NestedZeroValueInitia
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_0x100_0x100) {
     // @compute @workgroup_size(0x10000, 0x100, 0x100)
     // fn main() {}
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(0x10000_a, 0x100_a, Expr(Source{{12, 34}}, 0x100_a)),
@@ -815,7 +815,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_0x100_
 TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_0x10000) {
     // @compute @workgroup_size(0x10000, 0x10000)
     // fn main() {}
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(0x10000_a, Expr(Source{{12, 34}}, 0x10000_a)),
@@ -830,7 +830,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_C_0x10
     // @compute @workgroup_size(0x10000, C, 0x10000)
     // fn main() {}
     GlobalConst("C", ty.u32(), Expr(1_a));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(0x10000_a, "C", Expr(Source{{12, 34}}, 0x10000_a)),
@@ -845,7 +845,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_C) {
     // @compute @workgroup_size(0x10000, C)
     // fn main() {}
     GlobalConst("C", ty.u32(), Expr(0x10000_a));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(0x10000_a, Expr(Source{{12, 34}}, "C")),
@@ -860,7 +860,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_OverflowsU32_0x10000_O_0x10
     // @compute @workgroup_size(0x10000, O, 0x10000)
     // fn main() {}
     Override("O", ty.u32(), Expr(0_a));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(0x10000_a, "O", Expr(Source{{12, 34}}, 0x10000_a)),
@@ -875,7 +875,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_NonConst) {
     // @compute @workgroup_size(x)
     // fn main() {}
     GlobalVar("x", ty.i32(), type::AddressSpace::kPrivate, Expr(64_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Expr(Source{{12, 34}}, "x")),
@@ -891,7 +891,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_InvalidExpr_x) {
     // @compute @workgroup_size(1 << 2 + 4)
     // fn main() {}
     GlobalVar("x", ty.i32(), type::AddressSpace::kPrivate, Expr(0_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Construct(Source{{12, 34}}, ty.i32(), "x")),
@@ -907,7 +907,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_InvalidExpr_y) {
     // @compute @workgroup_size(1, 1 << 2 + 4)
     // fn main() {}
     GlobalVar("x", ty.i32(), type::AddressSpace::kPrivate, Expr(0_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Construct(Source{{12, 34}}, ty.i32(), "x")),
@@ -923,7 +923,7 @@ TEST_F(ResolverFunctionValidationTest, WorkgroupSize_InvalidExpr_z) {
     // @compute @workgroup_size(1, 1, 1 << 2 + 4)
     // fn main() {}
     GlobalVar("x", ty.i32(), type::AddressSpace::kPrivate, Expr(0_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(Construct(Source{{12, 34}}, ty.i32(), "x")),
@@ -984,7 +984,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterStoreType_NonAtomicFree) {
                    });
     auto* ret_type = ty(Source{{12, 34}}, "S");
     auto* bar = Param("bar", ret_type);
-    Func("f", utils::Vector{bar}, ty.void_(), utils::Empty);
+    Func("f", utils::Vector{bar}, ty.void_, utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: type of function parameter must be constructible");
@@ -996,7 +996,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterSotreType_AtomicFree) {
                    });
     auto* ret_type = ty(Source{{12, 34}}, "S");
     auto* bar = Param(Source{{12, 34}}, "bar", ret_type);
-    Func("f", utils::Vector{bar}, ty.void_(), utils::Empty);
+    Func("f", utils::Vector{bar}, ty.void_, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -1006,7 +1006,7 @@ TEST_F(ResolverFunctionValidationTest, ParametersAtLimit) {
     for (int i = 0; i < 255; i++) {
         params.Push(Param("param_" + std::to_string(i), ty.i32()));
     }
-    Func(Source{{12, 34}}, "f", params, ty.void_(), utils::Empty);
+    Func(Source{{12, 34}}, "f", params, ty.void_, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -1016,7 +1016,7 @@ TEST_F(ResolverFunctionValidationTest, ParametersOverLimit) {
     for (int i = 0; i < 256; i++) {
         params.Push(Param("param_" + std::to_string(i), ty.i32()));
     }
-    Func(Source{{12, 34}}, "f", params, ty.void_(), utils::Empty);
+    Func(Source{{12, 34}}, "f", params, ty.void_, utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: functions may declare at most 255 parameters");
@@ -1026,7 +1026,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterVectorNoType) {
     // fn f(p : vec3) {}
 
     Func(Source{{12, 34}}, "f",
-         utils::Vector{Param("p", create<ast::Vector>(Source{{12, 34}}, nullptr, 3u))}, ty.void_(),
+         utils::Vector{Param("p", create<ast::Vector>(Source{{12, 34}}, nullptr, 3u))}, ty.void_,
          utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
@@ -1037,8 +1037,8 @@ TEST_F(ResolverFunctionValidationTest, ParameterMatrixNoType) {
     // fn f(p : vec3) {}
 
     Func(Source{{12, 34}}, "f",
-         utils::Vector{Param("p", create<ast::Matrix>(Source{{12, 34}}, nullptr, 3u, 3u))},
-         ty.void_(), utils::Empty);
+         utils::Vector{Param("p", ty.mat(Source{{12, 34}}, nullptr, 3u, 3u))},
+         ty.void_, utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: missing matrix element type");
@@ -1061,7 +1061,7 @@ TEST_P(ResolverFunctionParameterValidationTest, AddressSpaceNoExtension) {
     auto& param = GetParam();
     auto* ptr_type = ty.pointer(Source{{12, 34}}, ty.i32(), param.address_space);
     auto* arg = Param(Source{{12, 34}}, "p", ptr_type);
-    Func("f", utils::Vector{arg}, ty.void_(), utils::Empty);
+    Func("f", utils::Vector{arg}, ty.void_, utils::Empty);
 
     if (param.expectation == Expectation::kAlwaysPass) {
         ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -1078,7 +1078,7 @@ TEST_P(ResolverFunctionParameterValidationTest, AddressSpaceWithExtension) {
     auto* ptr_type = ty.pointer(Source{{12, 34}}, ty.i32(), param.address_space);
     auto* arg = Param(Source{{12, 34}}, "p", ptr_type);
     Enable(ast::Extension::kChromiumExperimentalFullPtrParameters);
-    Func("f", utils::Vector{arg}, ty.void_(), utils::Empty);
+    Func("f", utils::Vector{arg}, ty.void_, utils::Empty);
 
     if (param.expectation != Expectation::kAlwaysFail) {
         ASSERT_TRUE(r()->Resolve()) << r()->error();

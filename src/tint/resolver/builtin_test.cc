@@ -2011,7 +2011,7 @@ TEST_P(ResolverBuiltinDerivativeTest, Scalar) {
     GlobalVar("ident", ty.f32(), type::AddressSpace::kPrivate);
 
     auto* expr = Call(name, "ident");
-    Func("func", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("func", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -2025,7 +2025,7 @@ TEST_P(ResolverBuiltinDerivativeTest, Vector) {
     GlobalVar("ident", ty.vec4<f32>(), type::AddressSpace::kPrivate);
 
     auto* expr = Call(name, "ident");
-    Func("func", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("func", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -2438,7 +2438,7 @@ TEST_P(ResolverBuiltinTest_Texture, Call) {
 
     auto* call = Call(param.function, param.args(this));
     auto* stmt = CallStmt(call);
-    Func("func", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("func", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();

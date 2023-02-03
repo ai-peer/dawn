@@ -213,7 +213,7 @@ TEST_P(HlslBuiltinTest, Emit) {
 
     auto* call = GenerateCall(param.builtin, param.type, this);
     ASSERT_NE(nullptr, call) << "Unhandled builtin";
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(call),
          },
@@ -1309,7 +1309,7 @@ void test_function() {
 }
 
 TEST_F(HlslGeneratorImplTest_Builtin, StorageBarrier) {
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("storageBarrier")),
          },
@@ -1330,7 +1330,7 @@ void main() {
 }
 
 TEST_F(HlslGeneratorImplTest_Builtin, WorkgroupBarrier) {
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("workgroupBarrier")),
          },

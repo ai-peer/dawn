@@ -132,6 +132,8 @@ class Resolver {
     /// @returns the resolved semantic node for the expression `expr`, or nullptr on failure.
     sem::Expression* Expression(const ast::Expression* expr);
 
+    sem::Node* Identifier(const ast::Identifier*);
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Expression resolving methods
     //
@@ -282,7 +284,7 @@ class Resolver {
     /// to the AST node.
     /// @returns the semantic Array information, or nullptr if an error is raised.
     /// @param arr the Array to get semantic information for
-    type::Array* Array(const ast::Array* arr);
+    type::Array* Array(const ast::Identifier* arr);
 
     /// Resolves and validates the expression used as the count parameter of an array.
     /// @param count_expr the expression used as the second template parameter to an array<>.
@@ -435,9 +437,9 @@ class Resolver {
     /// @returns true if the symbol is the name of a builtin function.
     bool IsBuiltin(Symbol) const;
 
-    /// @returns the core type for the symbol @p symbol at @p source
+    /// @returns the core type for the identifier @p identifier
     /// @note: Will raise an ICE if @p symbol is not a core type.
-    type::Type* CoreType(Symbol symbol, const Source& source) const;
+    type::Type* CoreType(const ast::Identifier* identifier) const;
 
     // ArrayInitializerSig represents a unique array initializer signature.
     // It is a tuple of the array type, number of arguments provided and earliest evaluation stage.

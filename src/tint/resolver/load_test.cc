@@ -199,7 +199,7 @@ TEST_F(ResolverLoadTest, FunctionArg) {
     // fn f(x : f32) {}
     // var ref = 1f;
     // f(ref);
-    Func("f", utils::Vector{Param("x", ty.f32())}, ty.void_(), utils::Empty);
+    Func("f", utils::Vector{Param("x", ty.f32())}, ty.void_, utils::Empty);
     auto* ident = Expr("ref");
     WrapInFunction(Var("ref", Expr(1_f)),  //
                    CallStmt(Call("f", ident)));

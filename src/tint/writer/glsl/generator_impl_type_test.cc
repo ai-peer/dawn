@@ -317,7 +317,7 @@ TEST_P(GlslDepthTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -345,7 +345,7 @@ TEST_F(GlslDepthMultisampledTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -389,7 +389,7 @@ TEST_P(GlslSampledTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -524,7 +524,7 @@ TEST_P(GlslStorageTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },

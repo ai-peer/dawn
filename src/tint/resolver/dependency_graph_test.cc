@@ -434,7 +434,7 @@ const ast::Node* SymbolTestHelper::Add(SymbolDeclKind kind, Symbol symbol, Sourc
         case SymbolDeclKind::Struct:
             return b.Structure(source, symbol, utils::Vector{b.Member("m", b.ty.i32())});
         case SymbolDeclKind::Function:
-            return b.Func(source, symbol, utils::Empty, b.ty.void_(), utils::Empty);
+            return b.Func(source, symbol, utils::Empty, b.ty.void_, utils::Empty);
         case SymbolDeclKind::Parameter: {
             auto* node = b.Param(source, symbol, b.ty.i32());
             parameters.Push(node);
@@ -633,7 +633,7 @@ void SymbolTestHelper::Build() {
         nested_statements.Clear();
     }
     if (!parameters.IsEmpty() || !statements.IsEmpty() || !func_attrs.IsEmpty()) {
-        b.Func("func", parameters, b.ty.void_(), statements, func_attrs);
+        b.Func("func", parameters, b.ty.void_, statements, func_attrs);
         parameters.Clear();
         statements.Clear();
         func_attrs.Clear();
@@ -651,9 +651,9 @@ TEST_F(ResolverDependencyGraphUsedBeforeDeclTest, FuncCall) {
     // fn A() { B(); }
     // fn B() {}
 
-    Func("A", utils::Empty, ty.void_(),
+    Func("A", utils::Empty, ty.void_,
          utils::Vector{CallStmt(Call(Ident(Source{{12, 34}}, "B")))});
-    Func(Source{{56, 78}}, "B", utils::Empty, ty.void_(), utils::Vector{Return()});
+    Func(Source{{56, 78}}, "B", utils::Empty, ty.void_, utils::Vector{Return()});
 
     Build();
 }
@@ -664,7 +664,7 @@ TEST_F(ResolverDependencyGraphUsedBeforeDeclTest, TypeConstructed) {
     // }
     // type T = i32;
 
-    Func("F", utils::Empty, ty.void_(),
+    Func("F", utils::Empty, ty.void_,
          utils::Vector{Block(Ignore(Construct(ty(Source{{12, 34}}, "T"))))});
     Alias(Source{{56, 78}}, "T", ty.i32());
 
@@ -677,7 +677,7 @@ TEST_F(ResolverDependencyGraphUsedBeforeDeclTest, TypeUsedByLocal) {
     // }
     // type T = i32;
 
-    Func("F", utils::Empty, ty.void_(),
+    Func("F", utils::Empty, ty.void_,
          utils::Vector{Block(Decl(Var("v", ty(Source{{12, 34}}, "T"))))});
     Alias(Source{{56, 78}}, "T", ty.i32());
 
@@ -688,7 +688,7 @@ TEST_F(ResolverDependencyGraphUsedBeforeDeclTest, TypeUsedByParam) {
     // fn F(p : T) {}
     // type T = i32;
 
-    Func("F", utils::Vector{Param("p", ty(Source{{12, 34}}, "T"))}, ty.void_(), utils::Empty);
+    Func("F", utils::Vector{Param("p", ty(Source{{12, 34}}, "T"))}, ty.void_, utils::Empty);
     Alias(Source{{56, 78}}, "T", ty.i32());
 
     Build();
@@ -720,7 +720,7 @@ TEST_F(ResolverDependencyGraphUsedBeforeDeclTest, VarUsed) {
     // }
     // var G: f32 = 2.1;
 
-    Func("F", utils::Empty, ty.void_(),
+    Func("F", utils::Empty, ty.void_,
          utils::Vector{
              Block(Assign(Expr(Source{{12, 34}}, "G"), 3.14_f)),
          });
@@ -811,7 +811,7 @@ using ResolverDependencyGraphCyclicRefTest = ResolverDependencyGraphTest;
 TEST_F(ResolverDependencyGraphCyclicRefTest, DirectCall) {
     // fn main() { main(); }
 
-    Func(Source{{12, 34}}, "main", utils::Empty, ty.void_(),
+    Func(Source{{12, 34}}, "main", utils::Empty, ty.void_,
          utils::Vector{CallStmt(Call(Ident(Source{{56, 78}}, "main")))});
 
     Build(R"(12:34 error: cyclic dependency found: 'main' -> 'main'
@@ -825,17 +825,17 @@ TEST_F(ResolverDependencyGraphCyclicRefTest, IndirectCall) {
     // 4: fn c() { d(); }
     // 5: fn b() { c(); }
 
-    Func(Source{{1, 1}}, "a", utils::Empty, ty.void_(),
+    Func(Source{{1, 1}}, "a", utils::Empty, ty.void_,
          utils::Vector{CallStmt(Call(Ident(Source{{1, 10}}, "b")))});
-    Func(Source{{2, 1}}, "e", utils::Empty, ty.void_(), utils::Empty);
-    Func(Source{{3, 1}}, "d", utils::Empty, ty.void_(),
+    Func(Source{{2, 1}}, "e", utils::Empty, ty.void_, utils::Empty);
+    Func(Source{{3, 1}}, "d", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(Ident(Source{{3, 10}}, "e"))),
              CallStmt(Call(Ident(Source{{3, 10}}, "b"))),
          });
-    Func(Source{{4, 1}}, "c", utils::Empty, ty.void_(),
+    Func(Source{{4, 1}}, "c", utils::Empty, ty.void_,
          utils::Vector{CallStmt(Call(Ident(Source{{4, 10}}, "d")))});
-    Func(Source{{5, 1}}, "b", utils::Empty, ty.void_(),
+    Func(Source{{5, 1}}, "b", utils::Empty, ty.void_,
          utils::Vector{CallStmt(Call(Ident(Source{{5, 10}}, "c")))});
 
     Build(R"(5:1 error: cyclic dependency found: 'b' -> 'c' -> 'd' -> 'b'
@@ -1213,7 +1213,7 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
 
     const auto* value_decl = GlobalVar(value_sym, ty.i32(), type::AddressSpace::kPrivate);
     const auto* type_decl = Alias(type_sym, ty.i32());
-    const auto* func_decl = Func(func_sym, utils::Empty, ty.void_(), utils::Empty);
+    const auto* func_decl = Func(func_sym, utils::Empty, ty.void_, utils::Empty);
 
     struct SymbolUse {
         const ast::Node* decl = nullptr;
@@ -1303,7 +1303,7 @@ TEST_F(ResolverDependencyGraphTraversalTest, SymbolsReached) {
     GlobalVar(Sym(), ty.i32(), utils::Vector{Location(V)});
     Override(Sym(), ty.i32(), utils::Vector{Id(V)});
 
-    Func(Sym(), utils::Empty, ty.void_(), utils::Empty);
+    Func(Sym(), utils::Empty, ty.void_, utils::Empty);
 #undef V
 #undef T
 #undef F

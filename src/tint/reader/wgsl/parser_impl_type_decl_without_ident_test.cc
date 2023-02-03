@@ -14,7 +14,6 @@
 
 #include "src/tint/ast/alias.h"
 #include "src/tint/ast/array.h"
-#include "src/tint/ast/matrix.h"
 #include "src/tint/ast/sampler.h"
 #include "src/tint/reader/wgsl/parser_impl_test_helper.h"
 #include "src/tint/type/sampled_texture.h"
@@ -608,10 +607,21 @@ TEST_P(TypeDeclWithoutIdent_MatrixTest, Parse) {
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr) << p->error();
     ASSERT_FALSE(p->has_error());
-    EXPECT_TRUE(t.value->Is<ast::Matrix>());
-    auto* mat = t.value->As<ast::Matrix>();
-    EXPECT_EQ(mat->rows, params.rows);
-    EXPECT_EQ(mat->columns, params.columns);
+
+    std::string expected_name =
+        "mat" + std::to_string(GetParam().columns) + "x" + std::to_string(GetParam().rows);
+    auto* mat_type_name = t->As<ast::TypeName>();
+    ASSERT_NE(mat_type_name, nullptr);
+    EXPECT_EQ(Symbols().NameFor(mat_type_name->name->symbol), expected_name);
+
+    auto* ident = mat_type_name->name->As<ast::TemplatedIdentifier>();
+    ASSERT_NE(ident, nullptr);
+    ASSERT_EQ(ident->arguments.Length(), 1u);
+
+    auto* el_type_name = ident->arguments[0]->As<ast::IdentifierExpression>();
+    ASSERT_NE(el_type_name, nullptr);
+    EXPECT_EQ(Symbols().NameFor(el_type_name->identifier->symbol), "f32");
+
     EXPECT_EQ(t.value->source.range, params.range);
 }
 INSTANTIATE_TEST_SUITE_P(ParserImplTest,

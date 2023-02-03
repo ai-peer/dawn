@@ -39,9 +39,13 @@ struct CreateASTTypeForTest : public testing::Test, public Transform {
         return CreateASTTypeFor(ctx, sem_type);
     }
 
+    std::string NameFor(const Symbol& symbol) const {
+        return ast_type_builder.Symbols().NameFor(symbol);
+    }
+
     std::string TypeNameOf(const ast::Type* ty) const {
         if (auto* type_name = ty->As<ast::TypeName>()) {
-            return ast_type_builder.Symbols().NameFor(type_name->name->symbol);
+            return NameFor(type_name->name->symbol);
         }
         return "<not-a-typename>";
     }
@@ -62,10 +66,18 @@ TEST_F(CreateASTTypeForTest, Matrix) {
         auto* column_type = b.create<type::Vector>(b.create<type::F32>(), 2u);
         return b.create<type::Matrix>(column_type, 3u);
     });
-    ASSERT_TRUE(mat->Is<ast::Matrix>());
-    EXPECT_EQ(TypeNameOf(mat->As<ast::Matrix>()->type), "f32");
-    ASSERT_EQ(mat->As<ast::Matrix>()->columns, 3u);
-    ASSERT_EQ(mat->As<ast::Matrix>()->rows, 2u);
+
+    auto* mat_type_name = mat->As<ast::TypeName>();
+    ASSERT_NE(mat_type_name, nullptr);
+    EXPECT_EQ(NameFor(mat_type_name->name->symbol), "mat3x2");
+
+    auto* ident = mat_type_name->name->As<ast::TemplatedIdentifier>();
+    ASSERT_NE(ident, nullptr);
+    ASSERT_EQ(ident->arguments.Length(), 1u);
+
+    auto* el_type_name = ident->arguments[0]->As<ast::IdentifierExpression>();
+    ASSERT_NE(el_type_name, nullptr);
+    EXPECT_EQ(NameFor(el_type_name->identifier->symbol), "f32");
 }
 
 TEST_F(CreateASTTypeForTest, Vector) {

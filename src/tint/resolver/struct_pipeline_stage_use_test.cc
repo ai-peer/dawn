@@ -41,7 +41,7 @@ TEST_F(ResolverPipelineStageUseTest, UnusedStruct) {
 TEST_F(ResolverPipelineStageUseTest, StructUsedAsNonEntryPointParam) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32(), utils::Vector{Location(0_a)})});
 
-    Func("foo", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty, utils::Empty);
+    Func("foo", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
@@ -98,7 +98,7 @@ TEST_F(ResolverPipelineStageUseTest, StructUsedAsVertexShaderReturnType) {
 TEST_F(ResolverPipelineStageUseTest, StructUsedAsFragmentShaderParam) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32(), utils::Vector{Location(0_a)})});
 
-    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -128,7 +128,7 @@ TEST_F(ResolverPipelineStageUseTest, StructUsedAsComputeShaderParam) {
         "S", utils::Vector{Member(
                  "a", ty.u32(), utils::Vector{Builtin(ast::BuiltinValue::kLocalInvocationIndex)})});
 
-    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute), WorkgroupSize(1_i)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -147,7 +147,7 @@ TEST_F(ResolverPipelineStageUseTest, StructUsedMultipleStages) {
     Func("vert_main", utils::Empty, ty.Of(s), utils::Vector{Return(Construct(ty.Of(s)))},
          utils::Vector{Stage(ast::PipelineStage::kVertex)});
 
-    Func("frag_main", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty,
+    Func("frag_main", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -163,7 +163,7 @@ TEST_F(ResolverPipelineStageUseTest, StructUsedAsShaderParamViaAlias) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32(), utils::Vector{Location(0_a)})});
     auto* s_alias = Alias("S_alias", ty.Of(s));
 
-    Func("main", utils::Vector{Param("param", ty.Of(s_alias))}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{Param("param", ty.Of(s_alias))}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -177,7 +177,7 @@ TEST_F(ResolverPipelineStageUseTest, StructUsedAsShaderParamViaAlias) {
 TEST_F(ResolverPipelineStageUseTest, StructUsedAsShaderParamLocationSet) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32(), utils::Vector{Location(3_a)})});
 
-    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();

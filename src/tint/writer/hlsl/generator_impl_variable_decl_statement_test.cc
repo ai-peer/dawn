@@ -66,7 +66,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const) {
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_AInt) {
     auto* C = Const("C", Expr(1_a));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -84,7 +84,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_AInt
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_AFloat) {
     auto* C = Const("C", Expr(1._a));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -102,7 +102,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_AFlo
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_i32) {
     auto* C = Const("C", Expr(1_i));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -120,7 +120,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_i32)
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_u32) {
     auto* C = Const("C", Expr(1_u));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -138,7 +138,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_u32)
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_f32) {
     auto* C = Const("C", Expr(1_f));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -158,7 +158,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_f16)
     Enable(ast::Extension::kF16);
 
     auto* C = Const("C", Expr(1_h));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -176,7 +176,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_f16)
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3_AInt) {
     auto* C = Const("C", Construct(ty.vec3(nullptr), 1_a, 2_a, 3_a));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -194,7 +194,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3_AFloat) {
     auto* C = Const("C", Construct(ty.vec3(nullptr), 1._a, 2._a, 3._a));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -212,7 +212,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3_f32) {
     auto* C = Const("C", vec3<f32>(1_f, 2_f, 3_f));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -232,7 +232,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3
     Enable(ast::Extension::kF16);
 
     auto* C = Const("C", vec3<f16>(1_h, 2_h, 3_h));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -250,7 +250,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_vec3
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2x3_AFloat) {
     auto* C = Const("C", Construct(ty.mat(nullptr, 2, 3), 1._a, 2._a, 3._a, 4._a, 5._a, 6._a));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -268,7 +268,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2x3_f32) {
     auto* C = Const("C", mat2x3<f32>(1_f, 2_f, 3_f, 4_f, 5_f, 6_f));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -288,7 +288,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2
     Enable(ast::Extension::kF16);
 
     auto* C = Const("C", mat2x3<f16>(1_h, 2_h, 3_h, 4_h, 5_h, 6_h));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -306,7 +306,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_mat2
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_f32) {
     auto* C = Const("C", Construct(ty.array<f32, 3>(), 1_f, 2_f, 3_f));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),
@@ -327,7 +327,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_
                                    vec2<bool>(true, false),         //
                                    vec2<bool>(false, true),         //
                                    vec2<bool>(true, true)));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(C),
              Decl(Let("l", Expr(C))),

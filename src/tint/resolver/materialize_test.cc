@@ -336,7 +336,7 @@ TEST_P(MaterializeAbstractNumericToConcreteType, Test) {
             WrapInFunction(Assign(Phony(), abstract_expr));
             break;
         case Method::kFnArg:
-            Func("F", utils::Vector{Param("P", target_ty())}, ty.void_(), utils::Empty);
+            Func("F", utils::Vector{Param("P", target_ty())}, ty.void_, utils::Empty);
             WrapInFunction(CallStmt(Call("F", abstract_expr)));
             break;
         case Method::kBuiltinArg:
@@ -384,7 +384,7 @@ TEST_P(MaterializeAbstractNumericToConcreteType, Test) {
                        DefaultCase()));
             break;
         case Method::kWorkgroupSize:
-            Func("f", utils::Empty, ty.void_(), utils::Empty,
+            Func("f", utils::Empty, ty.void_, utils::Empty,
                  utils::Vector{WorkgroupSize(target_expr(), abstract_expr, Expr(123_a)),
                                Stage(ast::PipelineStage::kCompute)});
             break;
@@ -924,7 +924,7 @@ TEST_P(MaterializeAbstractNumericToDefaultType, Test) {
         }
         case Method::kWorkgroupSize: {
             Func(
-                "f", utils::Empty, ty.void_(), utils::Empty,
+                "f", utils::Empty, ty.void_, utils::Empty,
                 utils::Vector{WorkgroupSize(abstract_expr()), Stage(ast::PipelineStage::kCompute)});
             break;
         }

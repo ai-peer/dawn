@@ -161,7 +161,7 @@ TEST_F(ResolverIncrementDecrementValidationTest, Parameter) {
     //   a++;
     // }
     auto* a = Param(Source{{12, 34}}, "a", ty.i32());
-    Func("func", utils::Vector{a}, ty.void_(),
+    Func("func", utils::Vector{a}, ty.void_,
          utils::Vector{
              Increment(Expr(Source{{56, 78}}, "a")),
          });

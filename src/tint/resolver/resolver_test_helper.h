@@ -112,7 +112,9 @@ class TestHelper : public ProgramBuilder {
     /// @param type a type
     /// @returns the name for `type` that closely resembles how it would be
     /// declared in WGSL.
-    std::string FriendlyName(const ast::Type* type) { return type->FriendlyName(Symbols()); }
+    std::string FriendlyName(const ast::Identifier* type) {
+        return Symbols().NameFor(type->symbol);
+    }
 
     /// @param type a type
     /// @returns the name for `type` that closely resembles how it would be
@@ -467,7 +469,7 @@ struct DataType<vec<N, T>> {
     /// @param args args of size 1 or N with values of type T to initialize with
     /// @return a new AST vector value expression
     static inline const ast::Expression* Expr(ProgramBuilder& b, utils::VectorRef<Scalar> args) {
-        return b.Construct(AST(b), ExprArgs(b, std::move(args)));
+        return b.Call(AST(b), ExprArgs(b, std::move(args)));
     }
     /// @param b the ProgramBuilder
     /// @param args args of size 1 or N with values of type T to initialize with
@@ -504,7 +506,12 @@ struct DataType<mat<N, M, T>> {
     /// @param b the ProgramBuilder
     /// @return a new AST matrix type
     static inline const ast::Type* AST(ProgramBuilder& b) {
-        return b.ty.mat(DataType<T>::AST(b), N, M);
+        auto* el_ty = DataType<T>::AST(b);
+
+        // TODO(crbug.com/tint/1810): Remove the cast to ast::TypeName when finished.
+        auto* el_type_name = tint::As<ast::TypeName>(el_ty);
+
+        return b.ty.mat(el_type_name, N, M);
     }
     /// @param b the ProgramBuilder
     /// @return the semantic matrix type
@@ -516,7 +523,7 @@ struct DataType<mat<N, M, T>> {
     /// @param args args of size 1 or N*M with values of type T to initialize with
     /// @return a new AST matrix value expression
     static inline const ast::Expression* Expr(ProgramBuilder& b, utils::VectorRef<Scalar> args) {
-        return b.Construct(AST(b), ExprArgs(b, std::move(args)));
+        return b.Call(AST(b), ExprArgs(b, std::move(args)));
     }
     /// @param b the ProgramBuilder
     /// @param args args of size 1 or N*M with values of type T to initialize with
@@ -582,7 +589,7 @@ struct DataType<alias<T, ID>> {
         ProgramBuilder& b,
         utils::VectorRef<Scalar> args) {
         // Cast
-        return b.Construct(AST(b), DataType<T>::Expr(b, std::move(args)));
+        return b.Call(AST(b), DataType<T>::Expr(b, std::move(args)));
     }
 
     /// @param b the ProgramBuilder
@@ -593,7 +600,7 @@ struct DataType<alias<T, ID>> {
         ProgramBuilder& b,
         utils::VectorRef<Scalar> args) {
         // Construct
-        return b.Construct(AST(b), DataType<T>::ExprArgs(b, std::move(args)));
+        return b.Call(AST(b), DataType<T>::ExprArgs(b, std::move(args)));
     }
 
     /// @param b the ProgramBuilder
@@ -689,7 +696,7 @@ struct DataType<array<N, T>> {
     /// with
     /// @return a new AST array value expression
     static inline const ast::Expression* Expr(ProgramBuilder& b, utils::VectorRef<Scalar> args) {
-        return b.Construct(AST(b), ExprArgs(b, std::move(args)));
+        return b.Call(AST(b), ExprArgs(b, std::move(args)));
     }
     /// @param b the ProgramBuilder
     /// @param args args of size 1 or N with values of type T to initialize with

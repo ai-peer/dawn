@@ -23,7 +23,6 @@
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/disable_validation_attribute.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/unary_op.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
@@ -545,7 +544,7 @@ struct DecomposeMemoryAccess::State {
                     }
                     b.Func(name, params, CreateASTTypeFor(ctx, el_ty),
                            utils::Vector{
-                               b.Return(b.Construct(CreateASTTypeFor(ctx, el_ty), values)),
+                               b.Return(b.Call(CreateASTTypeFor(ctx, el_ty), values)),
                            });
                 }
                 return name;
@@ -582,7 +581,7 @@ struct DecomposeMemoryAccess::State {
 
                 if (auto* intrinsic = IntrinsicStoreFor(ctx.dst, address_space, el_ty)) {
                     auto* func = b.create<ast::Function>(
-                        name, params, b.ty.void_(), nullptr,
+                        name, params, b.ty.void_, nullptr,
                         utils::Vector{
                             intrinsic,
                             b.Disable(ast::DisabledValidation::kFunctionHasNoBody),
@@ -655,7 +654,7 @@ struct DecomposeMemoryAccess::State {
                             return stmts;
                         });
 
-                    b.Func(name, params, b.ty.void_(), body);
+                    b.Func(name, params, b.ty.void_, body);
                 }
 
                 return name;

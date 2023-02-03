@@ -5783,7 +5783,7 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         if (inst.type_id() != 0) {
             ret_type = parser_impl_.ConvertType(inst.type_id())->Build(builder_);
         } else {
-            ret_type = builder_.ty.void_();
+            ret_type = builder_.ty.void_;
         }
 
         // Emit stub, will be removed by transform::SpirvAtomic

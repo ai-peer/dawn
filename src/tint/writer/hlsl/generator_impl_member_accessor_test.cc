@@ -110,7 +110,7 @@ class HlslGeneratorImplTest_MemberAccessorBase : public BASE {
         utils::Vector attrs{
             b.Stage(ast::PipelineStage::kFragment),
         };
-        b.Func("main", utils::Empty, b.ty.void_(), std::move(statements), std::move(attrs));
+        b.Func("main", utils::Empty, b.ty.void_, std::move(statements), std::move(attrs));
     }
 };
 

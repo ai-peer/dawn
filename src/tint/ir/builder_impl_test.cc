@@ -26,7 +26,7 @@ using namespace tint::number_suffixes;  // NOLINT
 using IR_BuilderImplTest = TestHelper;
 
 TEST_F(IR_BuilderImplTest, Func) {
-    Func("f", utils::Empty, ty.void_(), utils::Empty);
+    Func("f", utils::Empty, ty.void_, utils::Empty);
     auto r = Build();
     ASSERT_TRUE(r) << Error();
     auto m = r.Move();
@@ -50,7 +50,7 @@ FunctionEnd
 }
 
 TEST_F(IR_BuilderImplTest, EntryPoint) {
-    Func("f", utils::Empty, ty.void_(), utils::Empty,
+    Func("f", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
     auto r = Build();
     ASSERT_TRUE(r) << Error();

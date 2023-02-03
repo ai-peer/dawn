@@ -31,7 +31,7 @@ TEST_F(MslSanitizerTest, Call_ArrayLength) {
     GlobalVar("b", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(1_a),
               Group(2_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(), Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -85,7 +85,7 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_OtherMembersInStruct) {
     GlobalVar("b", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(1_a),
               Group(2_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(), Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -141,7 +141,7 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ViaLets) {
     auto* p = Let("p", AddressOf("b"));
     auto* p2 = Let("p2", AddressOf(MemberAccessor(Deref(p), "a")));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(p),
              Decl(p2),
@@ -197,7 +197,7 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ArrayLengthFromUniform) {
     GlobalVar("c", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(2_a),
               Group(0_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(),
                       Add(Call("arrayLength", AddressOf(MemberAccessor("b", "a"))),
@@ -256,7 +256,7 @@ TEST_F(MslSanitizerTest, Call_ArrayLength_ArrayLengthFromUniformMissingBinding) 
     GlobalVar("c", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(2_a),
               Group(0_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(),
                       Add(Call("arrayLength", AddressOf(MemberAccessor("b", "a"))),

@@ -22,9 +22,7 @@
 #include "tint/override_id.h"
 
 #include "src/tint/ast/alias.h"
-#include "src/tint/ast/array.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/atomic.h"
 #include "src/tint/ast/binary_expression.h"
 #include "src/tint/ast/binding_attribute.h"
 #include "src/tint/ast/bitcast_expression.h"
@@ -38,8 +36,6 @@
 #include "src/tint/ast/const.h"
 #include "src/tint/ast/const_assert.h"
 #include "src/tint/ast/continue_statement.h"
-#include "src/tint/ast/depth_multisampled_texture.h"
-#include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/diagnostic_attribute.h"
 #include "src/tint/ast/diagnostic_control.h"
 #include "src/tint/ast/diagnostic_directive.h"
@@ -47,7 +43,6 @@
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/enable.h"
 #include "src/tint/ast/extension.h"
-#include "src/tint/ast/external_texture.h"
 #include "src/tint/ast/float_literal_expression.h"
 #include "src/tint/ast/for_loop_statement.h"
 #include "src/tint/ast/id_attribute.h"
@@ -60,31 +55,23 @@
 #include "src/tint/ast/invariant_attribute.h"
 #include "src/tint/ast/let.h"
 #include "src/tint/ast/loop_statement.h"
-#include "src/tint/ast/matrix.h"
 #include "src/tint/ast/member_accessor_expression.h"
 #include "src/tint/ast/module.h"
-#include "src/tint/ast/multisampled_texture.h"
 #include "src/tint/ast/override.h"
 #include "src/tint/ast/parameter.h"
 #include "src/tint/ast/phony_expression.h"
-#include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
-#include "src/tint/ast/sampled_texture.h"
-#include "src/tint/ast/sampler.h"
 #include "src/tint/ast/stage_attribute.h"
-#include "src/tint/ast/storage_texture.h"
 #include "src/tint/ast/stride_attribute.h"
 #include "src/tint/ast/struct_member_align_attribute.h"
 #include "src/tint/ast/struct_member_offset_attribute.h"
 #include "src/tint/ast/struct_member_size_attribute.h"
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/templated_identifier.h"
-#include "src/tint/ast/type_name.h"
+#include "src/tint/ast/type.h"
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/ast/var.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/vector.h"
-#include "src/tint/ast/void.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/constant/composite.h"
@@ -106,11 +93,13 @@
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/pointer.h"
 #include "src/tint/type/sampled_texture.h"
+#include "src/tint/type/sampler_kind.h"
 #include "src/tint/type/storage_texture.h"
 #include "src/tint/type/texture_dimension.h"
 #include "src/tint/type/u32.h"
 #include "src/tint/type/vector.h"
 #include "src/tint/type/void.h"
+#include "src/tint/utils/string.h"
 
 #ifdef CURRENTLY_IN_TINT_PUBLIC_HEADER
 #error "internal tint header being #included from tint.h"
@@ -175,8 +164,8 @@ class ProgramBuilder {
     /// constructing an ast::Var.
     struct VarOptions {
         template <typename... ARGS>
-        explicit VarOptions(ARGS&&... args) {
-            (Set(std::forward<ARGS>(args)), ...);
+        explicit VarOptions(ProgramBuilder& b, ARGS&&... args) {
+            (Set(b, std::forward<ARGS>(args)), ...);
         }
         ~VarOptions();
 
@@ -187,23 +176,26 @@ class ProgramBuilder {
         utils::Vector<const ast::Attribute*, 4> attributes;
 
       private:
-        void Set(const ast::Type* t) { type = t; }
-        void Set(type::AddressSpace addr_space) { address_space = addr_space; }
-        void Set(type::Access ac) { access = ac; }
-        void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
-        void Set(const ast::Attribute* a) { attributes.Push(a); }
+        void Set(ProgramBuilder& b, const ast::Identifier* t) { type = b.Type(t); }
+        void Set(ProgramBuilder&, const ast::Type* t) { type = t; }
+        void Set(ProgramBuilder&, type::AddressSpace addr_space) { address_space = addr_space; }
+        void Set(ProgramBuilder&, type::Access ac) { access = ac; }
+        void Set(ProgramBuilder&, const ast::Expression* c) { initializer = c; }
+        void Set(ProgramBuilder&, utils::VectorRef<const ast::Attribute*> l) {
+            attributes = std::move(l);
+        }
+        void Set(ProgramBuilder&, const ast::Attribute* a) { attributes.Push(a); }
     };
 
     /// LetOptions is a helper for accepting an arbitrary number of order independent options for
     /// constructing an ast::Let.
     struct LetOptions {
         template <typename... ARGS>
-        explicit LetOptions(ARGS&&... args) {
+        explicit LetOptions(ProgramBuilder& b, ARGS&&... args) {
             static constexpr bool has_init =
                 (traits::IsTypeOrDerived<traits::PtrElTy<ARGS>, ast::Expression> || ...);
             static_assert(has_init, "Let() must be constructed with an initializer expression");
-            (Set(std::forward<ARGS>(args)), ...);
+            (Set(b, std::forward<ARGS>(args)), ...);
         }
         ~LetOptions();
 
@@ -212,21 +204,24 @@ class ProgramBuilder {
         utils::Vector<const ast::Attribute*, 4> attributes;
 
       private:
-        void Set(const ast::Type* t) { type = t; }
-        void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
-        void Set(const ast::Attribute* a) { attributes.Push(a); }
+        void Set(ProgramBuilder& b, const ast::Identifier* t) { type = b.Type(t); }
+        void Set(ProgramBuilder&, const ast::Type* t) { type = t; }
+        void Set(ProgramBuilder&, const ast::Expression* c) { initializer = c; }
+        void Set(ProgramBuilder&, utils::VectorRef<const ast::Attribute*> l) {
+            attributes = std::move(l);
+        }
+        void Set(ProgramBuilder&, const ast::Attribute* a) { attributes.Push(a); }
     };
 
     /// ConstOptions is a helper for accepting an arbitrary number of order independent options for
     /// constructing an ast::Const.
     struct ConstOptions {
         template <typename... ARGS>
-        explicit ConstOptions(ARGS&&... args) {
+        ConstOptions(ProgramBuilder& b, ARGS&&... args) {
             static constexpr bool has_init =
                 (traits::IsTypeOrDerived<traits::PtrElTy<ARGS>, ast::Expression> || ...);
             static_assert(has_init, "Const() must be constructed with an initializer expression");
-            (Set(std::forward<ARGS>(args)), ...);
+            (Set(b, std::forward<ARGS>(args)), ...);
         }
         ~ConstOptions();
 
@@ -235,10 +230,13 @@ class ProgramBuilder {
         utils::Vector<const ast::Attribute*, 4> attributes;
 
       private:
-        void Set(const ast::Type* t) { type = t; }
-        void Set(const ast::Expression* c) { initializer = c; }
-        void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
-        void Set(const ast::Attribute* a) { attributes.Push(a); }
+        void Set(ProgramBuilder& b, const ast::Identifier* t) { type = b.Type(t); }
+        void Set(ProgramBuilder&, const ast::Type* t) { type = t; }
+        void Set(ProgramBuilder&, const ast::Expression* c) { initializer = c; }
+        void Set(ProgramBuilder&, utils::VectorRef<const ast::Attribute*> l) {
+            attributes = std::move(l);
+        }
+        void Set(ProgramBuilder&, const ast::Attribute* a) { attributes.Push(a); }
     };
 
     /// OverrideOptions is a helper for accepting an arbitrary number of order independent options
@@ -250,12 +248,12 @@ class ProgramBuilder {
         }
         ~OverrideOptions();
 
-        const ast::Type* type = nullptr;
+        const ast::Identifier* type = nullptr;
         const ast::Expression* initializer = nullptr;
         utils::Vector<const ast::Attribute*, 4> attributes;
 
       private:
-        void Set(const ast::Type* t) { type = t; }
+        void Set(const ast::Identifier* t) { type = t; }
         void Set(const ast::Expression* c) { initializer = c; }
         void Set(utils::VectorRef<const ast::Attribute*> l) { attributes = std::move(l); }
         void Set(const ast::Attribute* a) { attributes.Push(a); }
@@ -539,302 +537,360 @@ class ProgramBuilder {
         /// @param builder the program builder
         explicit TypesBuilder(ProgramBuilder* builder);
 
-        /// @return the tint AST type for the C type `T`.
+        /// @return the identifier for the C type `T`.
         template <typename T>
-        const ast::Type* Of() const {
+        const ast::Identifier* Of() const {
             return CToAST<T>::get(this);
         }
 
-        /// @returns a 'bool' typename
-        const ast::TypeName* bool_() const { return (*this)("bool"); }
+        /// An alias to a nullptr ast::Identifier.
+        static constexpr const ast::Identifier* void_ = nullptr;
+
+        /// @returns a 'bool' identifier
+        const ast::Identifier* bool_() const { return builder->Ident("bool"); }
 
         /// @param source the Source of the node
-        /// @returns a 'bool' typename
-        const ast::TypeName* bool_(const Source& source) const { return (*this)(source, "bool"); }
+        /// @returns a 'bool' identifier
+        const ast::Identifier* bool_(const Source& source) const {
+            return builder->Ident(source, "bool");
+        }
 
-        /// @returns a 'f16' typename
-        const ast::TypeName* f16() const { return (*this)("f16"); }
-
-        /// @param source the Source of the node
-        /// @returns a 'f16' typename
-        const ast::TypeName* f16(const Source& source) const { return (*this)(source, "f16"); }
-
-        /// @returns a 'f32' typename
-        const ast::TypeName* f32() const { return (*this)("f32"); }
+        /// @returns a 'f16' identifier
+        const ast::Identifier* f16() const { return builder->Ident("f16"); }
 
         /// @param source the Source of the node
-        /// @returns a 'f32' typename
-        const ast::TypeName* f32(const Source& source) const { return (*this)(source, "f32"); }
+        /// @returns a 'f16' identifier
+        const ast::Identifier* f16(const Source& source) const {
+            return builder->Ident(source, "f16");
+        }
 
-        /// @returns a 'i32' typename
-        const ast::TypeName* i32() const { return (*this)("i32"); }
-
-        /// @param source the Source of the node
-        /// @returns a 'i32' typename
-        const ast::TypeName* i32(const Source& source) const { return (*this)(source, "i32"); }
-
-        /// @returns a 'u32' typename
-        const ast::TypeName* u32() const { return (*this)("u32"); }
+        /// @returns a 'f32' identifier
+        const ast::Identifier* f32() const { return builder->Ident("f32"); }
 
         /// @param source the Source of the node
-        /// @returns a 'u32' typename
-        const ast::TypeName* u32(const Source& source) const { return (*this)(source, "u32"); }
+        /// @returns a 'f32' identifier
+        const ast::Identifier* f32(const Source& source) const {
+            return builder->Ident(source, "f32");
+        }
 
-        /// @returns a 'void' AST node
-        const ast::Void* void_() const { return builder->create<ast::Void>(); }
+        /// @returns a 'i32' identifier
+        const ast::Identifier* i32() const { return builder->Ident("i32"); }
 
         /// @param source the Source of the node
-        /// @returns a 'void' AST node
-        const ast::Void* void_(const Source& source) const {
-            return builder->create<ast::Void>(source);
+        /// @returns a 'i32' identifier
+        const ast::Identifier* i32(const Source& source) const {
+            return builder->Ident(source, "i32");
+        }
+
+        /// @returns a 'u32' identifier
+        const ast::Identifier* u32() const { return builder->Ident("u32"); }
+
+        /// @param source the Source of the node
+        /// @returns a 'u32' identifier
+        const ast::Identifier* u32(const Source& source) const {
+            return builder->Ident(source, "u32");
         }
 
         /// @param type vector subtype
         /// @param n vector width in elements
-        /// @return the tint AST type for a `n`-element vector of `type`.
-        const ast::Vector* vec(const ast::Type* type, uint32_t n) const {
-            return builder->create<ast::Vector>(type, n);
+        /// @return the identifier for a `n`-element vector of `type`.
+        const ast::TemplatedIdentifier* vec(const ast::Identifier* type, uint32_t n) const {
+            return vec(builder->source_, type, n);
         }
 
         /// @param source the Source of the node
         /// @param type vector subtype
         /// @param n vector width in elements
-        /// @return the tint AST type for a `n`-element vector of `type`.
-        const ast::Vector* vec(const Source& source, const ast::Type* type, uint32_t n) const {
-            return builder->create<ast::Vector>(source, type, n);
+        /// @return the identifier for a `n`-element vector of `type`.
+        const ast::TemplatedIdentifier* vec(const Source& source,
+                                            const ast::Identifier* type,
+                                            uint32_t n) const {
+            return builder->Ident(source, "vec", type, AInt(n));
         }
 
         /// @param type vector subtype
-        /// @return the tint AST type for a 2-element vector of `type`.
-        const ast::Vector* vec2(const ast::Type* type) const { return vec(type, 2u); }
+        /// @return the identifier for a 2-element vector of `type`.
+        const ast::TemplatedIdentifier* vec2(const ast::Identifier* type) const {
+            return vec(type, 2u);
+        }
 
         /// @param source the vector source
         /// @param type vector subtype
-        /// @return the tint AST type for a 2-element vector of `type`.
-        const ast::Vector* vec2(const Source& source, const ast::Type* type) const {
+        /// @return the identifier for a 2-element vector of `type`.
+        const ast::TemplatedIdentifier* vec2(const Source& source,
+                                             const ast::Identifier* type) const {
             return vec(source, type, 2u);
         }
 
         /// @param type vector subtype
-        /// @return the tint AST type for a 3-element vector of `type`.
-        const ast::Vector* vec3(const ast::Type* type) const { return vec(type, 3u); }
+        /// @return the identifier for a 3-element vector of `type`.
+        const ast::TemplatedIdentifier* vec3(const ast::Identifier* type) const {
+            return vec(type, 3u);
+        }
 
         /// @param source the vector source
         /// @param type vector subtype
-        /// @return the tint AST type for a 3-element vector of `type`.
-        const ast::Vector* vec3(const Source& source, const ast::Type* type) const {
+        /// @return the identifier for a 3-element vector of `type`.
+        const ast::TemplatedIdentifier* vec3(const Source& source,
+                                             const ast::Identifier* type) const {
             return vec(source, type, 3u);
         }
 
         /// @param type vector subtype
-        /// @return the tint AST type for a 4-element vector of `type`.
-        const ast::Vector* vec4(const ast::Type* type) const { return vec(type, 4u); }
+        /// @return the identifier for a 4-element vector of `type`.
+        const ast::TemplatedIdentifier* vec4(const ast::Identifier* type) const {
+            return vec(type, 4u);
+        }
 
         /// @param source the vector source
         /// @param type vector subtype
-        /// @return the tint AST type for a 4-element vector of `type`.
-        const ast::Vector* vec4(const Source& source, const ast::Type* type) const {
+        /// @return the identifier for a 4-element vector of `type`.
+        const ast::TemplatedIdentifier* vec4(const Source& source,
+                                             const ast::Identifier* type) const {
             return vec(source, type, 4u);
         }
 
         /// @param n vector width in elements
-        /// @return the tint AST type for a `n`-element vector of `type`.
+        /// @return the identifier for a `n`-element vector of `type`.
         template <typename T>
-        const ast::Vector* vec(uint32_t n) const {
+        const ast::TemplatedIdentifier* vec(uint32_t n) const {
             return vec(Of<T>(), n);
         }
 
-        /// @return the tint AST type for a 2-element vector of the C type `T`.
+        /// @return the identifier for a 2-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec2() const {
+        const ast::TemplatedIdentifier* vec2() const {
             return vec2(Of<T>());
         }
 
         /// @param source the Source of the node
-        /// @return the tint AST type for a 2-element vector of the C type `T`.
+        /// @return the identifier for a 2-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec2(const Source& source) const {
+        const ast::TemplatedIdentifier* vec2(const Source& source) const {
             return vec2(source, Of<T>());
         }
 
-        /// @return the tint AST type for a 3-element vector of the C type `T`.
+        /// @return the identifier for a 3-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec3() const {
+        const ast::TemplatedIdentifier* vec3() const {
             return vec3(Of<T>());
         }
 
         /// @param source the Source of the node
-        /// @return the tint AST type for a 3-element vector of the C type `T`.
+        /// @return the identifier for a 3-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec3(const Source& source) const {
+        const ast::TemplatedIdentifier* vec3(const Source& source) const {
             return vec3(source, Of<T>());
         }
 
-        /// @return the tint AST type for a 4-element vector of the C type `T`.
+        /// @return the identifier for a 4-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec4() const {
+        const ast::TemplatedIdentifier* vec4() const {
             return vec4(Of<T>());
         }
 
         /// @param source the Source of the node
-        /// @return the tint AST type for a 4-element vector of the C type `T`.
+        /// @return the identifier for a 4-element vector of the C type `T`.
         template <typename T>
-        const ast::Vector* vec4(const Source& source) const {
+        const ast::TemplatedIdentifier* vec4(const Source& source) const {
             return vec4(source, Of<T>());
         }
 
         /// @param type matrix subtype
         /// @param columns number of columns for the matrix
         /// @param rows number of rows for the matrix
-        /// @return the tint AST type for a matrix of `type`
-        const ast::Matrix* mat(const ast::Type* type, uint32_t columns, uint32_t rows) const {
-            return builder->create<ast::Matrix>(type, rows, columns);
+        /// @return the identifier for a matrix of `type`
+        const ast::TemplatedIdentifier* mat(const ast::Identifier* type,
+                                            uint32_t columns,
+                                            uint32_t rows) const {
+            return mat(builder->source_, type, columns, rows);
         }
 
         /// @param source the Source of the node
         /// @param type matrix subtype
         /// @param columns number of columns for the matrix
         /// @param rows number of rows for the matrix
-        /// @return the tint AST type for a matrix of `type`
-        const ast::Matrix* mat(const Source& source,
-                               const ast::Type* type,
-                               uint32_t columns,
-                               uint32_t rows) const {
-            return builder->create<ast::Matrix>(source, type, rows, columns);
+        /// @return the identifier for a matrix of `type`
+        const ast::TemplatedIdentifier* mat(const Source& source,
+                                            const ast::Identifier* type,
+                                            uint32_t columns,
+                                            uint32_t rows) const {
+            if (TINT_LIKELY(columns >= 2 && columns <= 4 && rows >= 2 && rows <= 4)) {
+                static constexpr const char* names[] = {
+                    "mat2x2", "mat2x3", "mat2x4",  //
+                    "mat3x2", "mat3x3", "mat3x4",  //
+                    "mat4x2", "mat4x3", "mat4x4",  //
+                };
+                auto i = (columns - 2) * 3 + (rows - 2);
+                return builder->Ident(source, names[i], type);
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid matrix dimensions " << columns << "x" << rows;
+            return nullptr;
         }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 2x3 matrix of `type`.
-        const ast::Matrix* mat2x2(const ast::Type* type) const { return mat(type, 2u, 2u); }
+        /// @return the identifier for a 2x3 matrix of `type`.
+        const ast::TemplatedIdentifier* mat2x2(const ast::Identifier* type) const {
+            return mat(type, 2u, 2u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 2x3 matrix of `type`.
-        const ast::Matrix* mat2x3(const ast::Type* type) const { return mat(type, 2u, 3u); }
+        /// @return the identifier for a 2x3 matrix of `type`.
+        const ast::TemplatedIdentifier* mat2x3(const ast::Identifier* type) const {
+            return mat(type, 2u, 3u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 2x4 matrix of `type`.
-        const ast::Matrix* mat2x4(const ast::Type* type) const { return mat(type, 2u, 4u); }
+        /// @return the identifier for a 2x4 matrix of `type`.
+        const ast::TemplatedIdentifier* mat2x4(const ast::Identifier* type) const {
+            return mat(type, 2u, 4u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 3x2 matrix of `type`.
-        const ast::Matrix* mat3x2(const ast::Type* type) const { return mat(type, 3u, 2u); }
+        /// @return the identifier for a 3x2 matrix of `type`.
+        const ast::TemplatedIdentifier* mat3x2(const ast::Identifier* type) const {
+            return mat(type, 3u, 2u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 3x3 matrix of `type`.
-        const ast::Matrix* mat3x3(const ast::Type* type) const { return mat(type, 3u, 3u); }
+        /// @return the identifier for a 3x3 matrix of `type`.
+        const ast::TemplatedIdentifier* mat3x3(const ast::Identifier* type) const {
+            return mat(type, 3u, 3u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 3x4 matrix of `type`.
-        const ast::Matrix* mat3x4(const ast::Type* type) const { return mat(type, 3u, 4u); }
+        /// @return the identifier for a 3x4 matrix of `type`.
+        const ast::TemplatedIdentifier* mat3x4(const ast::Identifier* type) const {
+            return mat(type, 3u, 4u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 4x2 matrix of `type`.
-        const ast::Matrix* mat4x2(const ast::Type* type) const { return mat(type, 4u, 2u); }
+        /// @return the identifier for a 4x2 matrix of `type`.
+        const ast::TemplatedIdentifier* mat4x2(const ast::Identifier* type) const {
+            return mat(type, 4u, 2u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 4x3 matrix of `type`.
-        const ast::Matrix* mat4x3(const ast::Type* type) const { return mat(type, 4u, 3u); }
+        /// @return the identifier for a 4x3 matrix of `type`.
+        const ast::TemplatedIdentifier* mat4x3(const ast::Identifier* type) const {
+            return mat(type, 4u, 3u);
+        }
 
         /// @param type matrix subtype
-        /// @return the tint AST type for a 4x4 matrix of `type`.
-        const ast::Matrix* mat4x4(const ast::Type* type) const { return mat(type, 4u, 4u); }
+        /// @return the identifier for a 4x4 matrix of `type`.
+        const ast::TemplatedIdentifier* mat4x4(const ast::Identifier* type) const {
+            return mat(type, 4u, 4u);
+        }
 
         /// @param columns number of columns for the matrix
         /// @param rows number of rows for the matrix
-        /// @return the tint AST type for a matrix of `type`
+        /// @return the identifier for a matrix of `type`
         template <typename T>
-        const ast::Matrix* mat(uint32_t columns, uint32_t rows) const {
+        const ast::TemplatedIdentifier* mat(uint32_t columns, uint32_t rows) const {
             return mat(Of<T>(), columns, rows);
         }
 
-        /// @return the tint AST type for a 2x3 matrix of the C type `T`.
+        /// @return the identifier for a 2x3 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat2x2() const {
+        const ast::TemplatedIdentifier* mat2x2() const {
             return mat2x2(Of<T>());
         }
 
-        /// @return the tint AST type for a 2x3 matrix of the C type `T`.
+        /// @return the identifier for a 2x3 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat2x3() const {
+        const ast::TemplatedIdentifier* mat2x3() const {
             return mat2x3(Of<T>());
         }
 
-        /// @return the tint AST type for a 2x4 matrix of the C type `T`.
+        /// @return the identifier for a 2x4 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat2x4() const {
+        const ast::TemplatedIdentifier* mat2x4() const {
             return mat2x4(Of<T>());
         }
 
-        /// @return the tint AST type for a 3x2 matrix of the C type `T`.
+        /// @return the identifier for a 3x2 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat3x2() const {
+        const ast::TemplatedIdentifier* mat3x2() const {
             return mat3x2(Of<T>());
         }
 
-        /// @return the tint AST type for a 3x3 matrix of the C type `T`.
+        /// @return the identifier for a 3x3 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat3x3() const {
+        const ast::TemplatedIdentifier* mat3x3() const {
             return mat3x3(Of<T>());
         }
 
-        /// @return the tint AST type for a 3x4 matrix of the C type `T`.
+        /// @return the identifier for a 3x4 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat3x4() const {
+        const ast::TemplatedIdentifier* mat3x4() const {
             return mat3x4(Of<T>());
         }
 
-        /// @return the tint AST type for a 4x2 matrix of the C type `T`.
+        /// @return the identifier for a 4x2 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat4x2() const {
+        const ast::TemplatedIdentifier* mat4x2() const {
             return mat4x2(Of<T>());
         }
 
-        /// @return the tint AST type for a 4x3 matrix of the C type `T`.
+        /// @return the identifier for a 4x3 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat4x3() const {
+        const ast::TemplatedIdentifier* mat4x3() const {
             return mat4x3(Of<T>());
         }
 
-        /// @return the tint AST type for a 4x4 matrix of the C type `T`.
+        /// @return the identifier for a 4x4 matrix of the C type `T`.
         template <typename T>
-        const ast::Matrix* mat4x4() const {
+        const ast::TemplatedIdentifier* mat4x4() const {
             return mat4x4(Of<T>());
         }
 
         /// @param subtype the array element type
         /// @param n the array size. nullptr represents a runtime-array
         /// @param attrs the optional attributes for the array
-        /// @return the tint AST type for a array of size `n` of type `T`
-        template <typename EXPR = ast::Expression*>
-        const ast::Array* array(
-            const ast::Type* subtype,
-            EXPR&& n = nullptr,
+        /// @return the identifier for an array of size `n` of type `T`
+        template <typename COUNT = std::nullptr_t>
+        const ast::TemplatedIdentifier* array(
+            const ast::Identifier* subtype,
+            COUNT&& n = nullptr,
             utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
-            return builder->create<ast::Array>(subtype, builder->Expr(std::forward<EXPR>(n)),
-                                               std::move(attrs));
+            return array(builder->source_, subtype, std::forward<COUNT>(n), std::move(attrs));
         }
 
         /// @param source the Source of the node
         /// @param subtype the array element type
         /// @param n the array size. nullptr represents a runtime-array
         /// @param attrs the optional attributes for the array
-        /// @return the tint AST type for a array of size `n` of type `T`
-        template <typename EXPR = ast::Expression*>
-        const ast::Array* array(
+        /// @return the identifier for an array of size `n` of type `T`
+        template <typename COUNT = std::nullptr_t>
+        const ast::TemplatedIdentifier* array(
             const Source& source,
-            const ast::Type* subtype,
-            EXPR&& n = nullptr,
+            const ast::Identifier* subtype,
+            COUNT&& n = nullptr,
             utils::VectorRef<const ast::Attribute*> attrs = utils::Empty) const {
-            return builder->create<ast::Array>(
-                source, subtype, builder->Expr(std::forward<EXPR>(n)), std::move(attrs));
+            if (!attrs.IsEmpty()) {
+                TINT_UNIMPLEMENTED(ProgramBuilder, builder->Diagnostics())
+                    << "TODO(crbug.com/tint/1810)";
+            }
+            if constexpr (std::is_same_v<traits::Decay<COUNT>, std::nullptr_t>) {
+                return builder->Ident(source, "array", subtype);
+            } else {
+                if (n) {
+                    return builder->Ident(source, "array", subtype);
+                } else {
+                    return builder->Ident(source, "array", subtype, std::forward<COUNT>(n));
+                }
+            }
         }
 
         /// @param subtype the array element type
         /// @param n the array size. nullptr represents a runtime-array
         /// @param stride the array stride. 0 represents implicit stride
-        /// @return the tint AST type for a array of size `n` of type `T`
+        /// @return the identifier for an array of size `n` of type `T`
         template <typename EXPR>
-        const ast::Array* array(const ast::Type* subtype, EXPR&& n, uint32_t stride) const {
+        const ast::TemplatedIdentifier* array(const ast::Identifier* subtype,
+                                              EXPR&& n,
+                                              uint32_t stride) const {
             utils::Vector<const ast::Attribute*, 2> attrs;
             if (stride) {
                 attrs.Push(builder->create<ast::StrideAttribute>(stride));
@@ -846,12 +902,12 @@ class ProgramBuilder {
         /// @param subtype the array element type
         /// @param n the array size. nullptr represents a runtime-array
         /// @param stride the array stride. 0 represents implicit stride
-        /// @return the tint AST type for a array of size `n` of type `T`
+        /// @return the identifier for an array of size `n` of type `T`
         template <typename EXPR>
-        const ast::Array* array(const Source& source,
-                                const ast::Type* subtype,
-                                EXPR&& n,
-                                uint32_t stride) const {
+        const ast::TemplatedIdentifier* array(const Source& source,
+                                              const ast::Identifier* subtype,
+                                              EXPR&& n,
+                                              uint32_t stride) const {
             utils::Vector<const ast::Attribute*, 2> attrs;
             if (stride) {
                 attrs.Push(builder->create<ast::StrideAttribute>(stride));
@@ -859,51 +915,30 @@ class ProgramBuilder {
             return array(source, subtype, std::forward<EXPR>(n), std::move(attrs));
         }
 
-        /// @return the tint AST type for a runtime-sized array of type `T`
+        /// @return the identifier for a runtime-sized array of type `T`
         template <typename T>
-        const ast::Array* array() const {
+        const ast::Identifier* array() const {
             return array(Of<T>(), nullptr);
         }
 
-        /// @return the tint AST type for an array of size `N` of type `T`
+        /// @return the identifier for an array of size `N` of type `T`
         template <typename T, int N>
-        const ast::Array* array() const {
-            return array(Of<T>(), builder->Expr(tint::u32(N)));
+        const ast::Identifier* array() const {
+            return array(Of<T>(), builder->Expr(builder->source_, tint::u32(N)));
         }
 
         /// @param stride the array stride
-        /// @return the tint AST type for a runtime-sized array of type `T`
+        /// @return the identifier for a runtime-sized array of type `T`
         template <typename T>
-        const ast::Array* array(uint32_t stride) const {
+        const ast::Identifier* array(uint32_t stride) const {
             return array(Of<T>(), nullptr, stride);
         }
 
         /// @param stride the array stride
-        /// @return the tint AST type for an array of size `N` of type `T`
+        /// @return the identifier for an array of size `N` of type `T`
         template <typename T, int N>
-        const ast::Array* array(uint32_t stride) const {
-            return array(Of<T>(), builder->Expr(tint::u32(N)), stride);
-        }
-
-        /// Creates a type name
-        /// @param name the name
-        /// @param args the optional template arguments
-        /// @returns the type name
-        template <typename NAME, typename... ARGS, typename _ = DisableIfSource<NAME>>
-        const ast::TypeName* operator()(NAME&& name, ARGS&&... args) const {
-            return builder->create<ast::TypeName>(
-                builder->Ident(std::forward<NAME>(name), std::forward<ARGS>(args)...));
-        }
-
-        /// Creates a type name
-        /// @param source the Source of the node
-        /// @param name the name
-        /// @param args the optional template arguments
-        /// @returns the type name
-        template <typename NAME, typename... ARGS>
-        const ast::TypeName* operator()(const Source& source, NAME&& name, ARGS&&... args) const {
-            return builder->create<ast::TypeName>(
-                source, builder->Ident(std::forward<NAME>(name), std::forward<ARGS>(args)...));
+        const ast::Identifier* array(uint32_t stride) const {
+            return array(Of<T>(), builder->Expr(builder->source_, tint::u32(N)), stride);
         }
 
         /// Creates an alias type
@@ -911,7 +946,7 @@ class ProgramBuilder {
         /// @param type the alias type
         /// @returns the alias pointer
         template <typename NAME>
-        const ast::Alias* alias(NAME&& name, const ast::Type* type) const {
+        const ast::Alias* alias(NAME&& name, const ast::Identifier* type) const {
             auto sym = builder->Sym(std::forward<NAME>(name));
             return builder->create<ast::Alias>(sym, type);
         }
@@ -922,7 +957,9 @@ class ProgramBuilder {
         /// @param type the alias type
         /// @returns the alias pointer
         template <typename NAME>
-        const ast::Alias* alias(const Source& source, NAME&& name, const ast::Type* type) const {
+        const ast::Alias* alias(const Source& source,
+                                NAME&& name,
+                                const ast::Identifier* type) const {
             auto sym = builder->Sym(std::forward<NAME>(name));
             return builder->create<ast::Alias>(source, sym, type);
         }
@@ -931,10 +968,10 @@ class ProgramBuilder {
         /// @param address_space the address space of the pointer
         /// @param access the optional access control of the pointer
         /// @return the pointer to `type` with the given type::AddressSpace
-        const ast::Pointer* pointer(const ast::Type* type,
-                                    type::AddressSpace address_space,
-                                    type::Access access = type::Access::kUndefined) const {
-            return builder->create<ast::Pointer>(type, address_space, access);
+        const ast::Identifier* pointer(const ast::Identifier* type,
+                                       type::AddressSpace address_space,
+                                       type::Access access = type::Access::kUndefined) const {
+            return pointer(builder->source_, type, address_space, access);
         }
 
         /// @param source the Source of the node
@@ -942,19 +979,23 @@ class ProgramBuilder {
         /// @param address_space the address space of the pointer
         /// @param access the optional access control of the pointer
         /// @return the pointer to `type` with the given type::AddressSpace
-        const ast::Pointer* pointer(const Source& source,
-                                    const ast::Type* type,
-                                    type::AddressSpace address_space,
-                                    type::Access access = type::Access::kUndefined) const {
-            return builder->create<ast::Pointer>(source, type, address_space, access);
+        const ast::Identifier* pointer(const Source& source,
+                                       const ast::Identifier* type,
+                                       type::AddressSpace address_space,
+                                       type::Access access = type::Access::kUndefined) const {
+            if (access != type::Access::kUndefined) {
+                return builder->Ident(source, "ptr", type, address_space, access);
+            } else {
+                return builder->Ident(source, "ptr", type, address_space);
+            }
         }
 
         /// @param address_space the address space of the pointer
         /// @param access the optional access control of the pointer
         /// @return the pointer to type `T` with the given type::AddressSpace.
         template <typename T>
-        const ast::Pointer* pointer(type::AddressSpace address_space,
-                                    type::Access access = type::Access::kUndefined) const {
+        const ast::Identifier* pointer(type::AddressSpace address_space,
+                                       type::Access access = type::Access::kUndefined) const {
             return pointer(Of<T>(), address_space, access);
         }
 
@@ -963,119 +1004,165 @@ class ProgramBuilder {
         /// @param access the optional access control of the pointer
         /// @return the pointer to type `T` with the given type::AddressSpace.
         template <typename T>
-        const ast::Pointer* pointer(const Source& source,
-                                    type::AddressSpace address_space,
-                                    type::Access access = type::Access::kUndefined) const {
+        const ast::Identifier* pointer(const Source& source,
+                                       type::AddressSpace address_space,
+                                       type::Access access = type::Access::kUndefined) const {
             return pointer(source, Of<T>(), address_space, access);
         }
 
         /// @param source the Source of the node
         /// @param type the type of the atomic
         /// @return the atomic to `type`
-        const ast::Atomic* atomic(const Source& source, const ast::Type* type) const {
-            return builder->create<ast::Atomic>(source, type);
+        const ast::Identifier* atomic(const Source& source, const ast::Identifier* type) const {
+            return builder->Ident(source, "atomic", type);
         }
 
         /// @param type the type of the atomic
         /// @return the atomic to `type`
-        const ast::Atomic* atomic(const ast::Type* type) const {
-            return builder->create<ast::Atomic>(type);
+        const ast::Identifier* atomic(const ast::Identifier* type) const {
+            return builder->Ident("atomic", type);
         }
 
         /// @return the atomic to type `T`
         template <typename T>
-        const ast::Atomic* atomic() const {
+        const ast::Identifier* atomic() const {
             return atomic(Of<T>());
         }
 
         /// @param kind the kind of sampler
         /// @returns the sampler
-        const ast::Sampler* sampler(type::SamplerKind kind) const {
-            return builder->create<ast::Sampler>(kind);
+        const ast::Identifier* sampler(type::SamplerKind kind) const {
+            return sampler(builder->source_, kind);
         }
 
         /// @param source the Source of the node
         /// @param kind the kind of sampler
         /// @returns the sampler
-        const ast::Sampler* sampler(const Source& source, type::SamplerKind kind) const {
-            return builder->create<ast::Sampler>(source, kind);
+        const ast::Identifier* sampler(const Source& source, type::SamplerKind kind) const {
+            switch (kind) {
+                case type::SamplerKind::kSampler:
+                    return builder->Ident(source, "sampler");
+                case type::SamplerKind::kComparisonSampler:
+                    return builder->Ident(source, "sampler_comparision");
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics()) << "invalid sampler kind " << kind;
+            return nullptr;
         }
 
         /// @param dims the dimensionality of the texture
         /// @returns the depth texture
-        const ast::DepthTexture* depth_texture(type::TextureDimension dims) const {
-            return builder->create<ast::DepthTexture>(dims);
+        const ast::Identifier* depth_texture(type::TextureDimension dims) const {
+            return depth_texture(builder->source_, dims);
         }
 
         /// @param source the Source of the node
         /// @param dims the dimensionality of the texture
         /// @returns the depth texture
-        const ast::DepthTexture* depth_texture(const Source& source,
-                                               type::TextureDimension dims) const {
-            return builder->create<ast::DepthTexture>(source, dims);
+        const ast::Identifier* depth_texture(const Source& source,
+                                             type::TextureDimension dims) const {
+            switch (dims) {
+                case type::TextureDimension::k2d:
+                    return builder->Ident(source, "texture_depth_2d");
+                case type::TextureDimension::k2dArray:
+                    return builder->Ident(source, "texture_depth_2d_array");
+                case type::TextureDimension::kCube:
+                    return builder->Ident(source, "texture_depth_cube");
+                case type::TextureDimension::kCubeArray:
+                    return builder->Ident(source, "texture_depth_cube_array");
+                default:
+                    break;
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid depth_texture dimensions: " << dims;
+            return nullptr;
         }
 
         /// @param dims the dimensionality of the texture
         /// @returns the multisampled depth texture
-        const ast::DepthMultisampledTexture* depth_multisampled_texture(
-            type::TextureDimension dims) const {
-            return builder->create<ast::DepthMultisampledTexture>(dims);
+        const ast::Identifier* depth_multisampled_texture(type::TextureDimension dims) const {
+            return depth_multisampled_texture(builder->source_, dims);
         }
 
         /// @param source the Source of the node
         /// @param dims the dimensionality of the texture
         /// @returns the multisampled depth texture
-        const ast::DepthMultisampledTexture* depth_multisampled_texture(
-            const Source& source,
-            type::TextureDimension dims) const {
-            return builder->create<ast::DepthMultisampledTexture>(source, dims);
+        const ast::Identifier* depth_multisampled_texture(const Source& source,
+                                                          type::TextureDimension dims) const {
+            if (dims == type::TextureDimension::k2d) {
+                return builder->Ident(source, "texture_depth_multisampled_2d");
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid depth_multisampled_texture dimensions: " << dims;
+            return nullptr;
         }
 
         /// @param dims the dimensionality of the texture
         /// @param subtype the texture subtype.
         /// @returns the sampled texture
-        const ast::SampledTexture* sampled_texture(type::TextureDimension dims,
-                                                   const ast::Type* subtype) const {
-            return builder->create<ast::SampledTexture>(dims, subtype);
+        const ast::Identifier* sampled_texture(type::TextureDimension dims,
+                                               const ast::Identifier* subtype) const {
+            return sampled_texture(builder->source_, dims, subtype);
         }
 
         /// @param source the Source of the node
         /// @param dims the dimensionality of the texture
         /// @param subtype the texture subtype.
         /// @returns the sampled texture
-        const ast::SampledTexture* sampled_texture(const Source& source,
-                                                   type::TextureDimension dims,
-                                                   const ast::Type* subtype) const {
-            return builder->create<ast::SampledTexture>(source, dims, subtype);
+        const ast::Identifier* sampled_texture(const Source& source,
+                                               type::TextureDimension dims,
+                                               const ast::Identifier* subtype) const {
+            switch (dims) {
+                case type::TextureDimension::k1d:
+                    return builder->Ident(source, "texture_1d", subtype);
+                case type::TextureDimension::k2d:
+                    return builder->Ident(source, "texture_2d", subtype);
+                case type::TextureDimension::k3d:
+                    return builder->Ident(source, "texture_3d", subtype);
+                case type::TextureDimension::k2dArray:
+                    return builder->Ident(source, "texture_2d_array", subtype);
+                case type::TextureDimension::kCube:
+                    return builder->Ident(source, "texture_cube", subtype);
+                case type::TextureDimension::kCubeArray:
+                    return builder->Ident(source, "texture_cube_array", subtype);
+                default:
+                    break;
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid sampled_texture dimensions: " << dims;
+            return nullptr;
         }
 
         /// @param dims the dimensionality of the texture
         /// @param subtype the texture subtype.
         /// @returns the multisampled texture
-        const ast::MultisampledTexture* multisampled_texture(type::TextureDimension dims,
-                                                             const ast::Type* subtype) const {
-            return builder->create<ast::MultisampledTexture>(dims, subtype);
+        const ast::Identifier* multisampled_texture(type::TextureDimension dims,
+                                                    const ast::Identifier* subtype) const {
+            return multisampled_texture(builder->source_, dims, subtype);
         }
 
         /// @param source the Source of the node
         /// @param dims the dimensionality of the texture
         /// @param subtype the texture subtype.
         /// @returns the multisampled texture
-        const ast::MultisampledTexture* multisampled_texture(const Source& source,
-                                                             type::TextureDimension dims,
-                                                             const ast::Type* subtype) const {
-            return builder->create<ast::MultisampledTexture>(source, dims, subtype);
+        const ast::Identifier* multisampled_texture(const Source& source,
+                                                    type::TextureDimension dims,
+                                                    const ast::Identifier* subtype) const {
+            if (dims == type::TextureDimension::k2d) {
+                return builder->Ident(source, "multisampled_texture_2d", subtype);
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid multisampled_texture dimensions: " << dims;
+            return nullptr;
         }
 
         /// @param dims the dimensionality of the texture
         /// @param format the texel format of the texture
         /// @param access the access control of the texture
         /// @returns the storage texture
-        const ast::StorageTexture* storage_texture(type::TextureDimension dims,
-                                                   type::TexelFormat format,
-                                                   type::Access access) const {
-            auto* subtype = ast::StorageTexture::SubtypeFor(format, *builder);
-            return builder->create<ast::StorageTexture>(dims, format, subtype, access);
+        const ast::Identifier* storage_texture(type::TextureDimension dims,
+                                               type::TexelFormat format,
+                                               type::Access access) const {
+            return storage_texture(builder->source_, dims, format, access);
         }
 
         /// @param source the Source of the node
@@ -1083,29 +1170,81 @@ class ProgramBuilder {
         /// @param format the texel format of the texture
         /// @param access the access control of the texture
         /// @returns the storage texture
-        const ast::StorageTexture* storage_texture(const Source& source,
-                                                   type::TextureDimension dims,
-                                                   type::TexelFormat format,
-                                                   type::Access access) const {
-            auto* subtype = ast::StorageTexture::SubtypeFor(format, *builder);
-            return builder->create<ast::StorageTexture>(source, dims, format, subtype, access);
+        const ast::Identifier* storage_texture(const Source& source,
+                                               type::TextureDimension dims,
+                                               type::TexelFormat format,
+                                               type::Access access) const {
+            switch (dims) {
+                case type::TextureDimension::k1d:
+                    return builder->Ident(source, "texture_storage_1d", format, access);
+                case type::TextureDimension::k2d:
+                    return builder->Ident(source, "texture_storage_2d", format, access);
+                case type::TextureDimension::k2dArray:
+                    return builder->Ident(source, "texture_storage_2d_array", format, access);
+                case type::TextureDimension::k3d:
+                    return builder->Ident(source, "texture_storage_3d", format, access);
+                default:
+                    break;
+            }
+            TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                << "invalid sampled_texture dimensions: " << dims;
+            return nullptr;
         }
 
+#if 0
+        const ast::Identifier* storage_texture_format(type::TexelFormat format) {
+            return storage_texture_format(builder->source_, format);
+        }
+
+        const ast::Identifier* storage_texture_format(const Source& source,
+                                                      type::TexelFormat format) {
+            switch (format) {
+                case type::TexelFormat::kR32Uint:
+                case type::TexelFormat::kRgba8Uint:
+                case type::TexelFormat::kRg32Uint:
+                case type::TexelFormat::kRgba16Uint:
+                case type::TexelFormat::kRgba32Uint:
+                    return u32(source);
+
+                case type::TexelFormat::kR32Sint:
+                case type::TexelFormat::kRgba8Sint:
+                case type::TexelFormat::kRg32Sint:
+                case type::TexelFormat::kRgba16Sint:
+                case type::TexelFormat::kRgba32Sint:
+                    return i32(source);
+
+                case type::TexelFormat::kBgra8Unorm:
+                case type::TexelFormat::kRgba8Unorm:
+                case type::TexelFormat::kRgba8Snorm:
+                case type::TexelFormat::kR32Float:
+                case type::TexelFormat::kRg32Float:
+                case type::TexelFormat::kRgba16Float:
+                case type::TexelFormat::kRgba32Float:
+                    return f32(source);
+
+                default:
+                    TINT_ICE(ProgramBuilder, builder->Diagnostics())
+                        << "invalid storage_texture_format format: " << format;
+                    return nullptr;
+            }
+        }
+#endif
+
         /// @returns the external texture
-        const ast::ExternalTexture* external_texture() const {
-            return builder->create<ast::ExternalTexture>();
+        const ast::Identifier* external_texture() const {
+            return builder->Ident("texture_external");
         }
 
         /// @param source the Source of the node
         /// @returns the external texture
-        const ast::ExternalTexture* external_texture(const Source& source) const {
-            return builder->create<ast::ExternalTexture>(source);
+        const ast::Identifier* external_texture(const Source& source) const {
+            return builder->Ident(source, "texture_external");
         }
 
         /// Constructs a TypeName for the type declaration.
         /// @param type the type
-        /// @return either type or a pointer to a new ast::TypeName
-        const ast::TypeName* Of(const ast::TypeDecl* type) const;
+        /// @return either type or a pointer to a new ast::Type
+        const ast::Type* Of(const ast::TypeDecl* type) const;
 
         /// The ProgramBuilder
         ProgramBuilder* const builder;
@@ -1115,7 +1254,7 @@ class ProgramBuilder {
         /// contains a single static `get()` method for obtaining the corresponding
         /// AST type for the C type `T`.
         /// `get()` has the signature:
-        ///    `static const ast::Type* get(Types* t)`
+        ///    `static const ast::Identifier* get(Types* t)`
         template <typename T>
         struct CToAST {};
     };
@@ -1127,41 +1266,69 @@ class ProgramBuilder {
     /// @return a new unnamed symbol
     Symbol Sym() { return Symbols().New(); }
 
-    /// @param name the symbol string
-    /// @return a Symbol with the given name
-    Symbol Sym(const std::string& name) { return Symbols().Register(name); }
-
+    /// Passthrough
     /// @param sym the symbol
     /// @return `sym`
     Symbol Sym(Symbol sym) { return sym; }
 
+    /// @param name the symbol string
+    /// @return a Symbol with the given name
+    Symbol Sym(const std::string& name) { return Symbols().Register(name); }
+
+    /// @param enumerator the enumerator
+    /// @return a Symbol with the given enum value
+    template <typename ENUM, typename = std::enable_if_t<std::is_enum_v<std::decay_t<ENUM>>>>
+    Symbol Sym(ENUM&& enumerator) {
+        return Sym(utils::ToString(enumerator));
+    }
+
     /// @param source the source information
     /// @param identifier the identifier symbol
-    /// @param args optional templated identifier arguments
     /// @return an ast::Identifier with the given symbol
-    template <typename IDENTIFIER, typename... ARGS>
-    const auto* Ident(const Source& source, IDENTIFIER&& identifier, ARGS&&... args) {
-        Symbol sym = Sym(std::forward<IDENTIFIER>(identifier));
-        if constexpr (sizeof...(args) > 0) {
-            return create<ast::TemplatedIdentifier>(source, sym,
-                                                    ExprList(std::forward<ARGS>(args)...));
+    template <typename IDENTIFIER>
+    const ast::Identifier* Ident(const Source& source, IDENTIFIER&& identifier) {
+        if constexpr (traits::IsTypeOrDerived<traits::PtrElTy<IDENTIFIER>, ast::Identifier>) {
+            return identifier;  // Passthrough
         } else {
-            return create<ast::Identifier>(source, sym);
+            return create<ast::Identifier>(source, Sym(std::forward<IDENTIFIER>(identifier)));
         }
     }
 
     /// @param identifier the identifier symbol
-    /// @param args optional templated identifier arguments
     /// @return an ast::Identifier with the given symbol
+    template <typename IDENTIFIER, typename = DisableIfSource<IDENTIFIER>>
+    const ast::Identifier* Ident(IDENTIFIER&& identifier) {
+        return Ident(source_, std::forward<IDENTIFIER>(identifier));
+    }
+
+    /// @param source the source information
+    /// @param identifier the identifier symbol
+    /// @param args templated identifier arguments
+    /// @return an ast::TemplatedIdentifier with the given symbol and template arguments
+    template <typename IDENTIFIER, typename... ARGS>
+    const ast::TemplatedIdentifier* Ident(const Source& source,
+                                          IDENTIFIER&& identifier,
+                                          ARGS&&... args) {
+        Symbol sym = Sym(std::forward<IDENTIFIER>(identifier));
+        return create<ast::TemplatedIdentifier>(source, sym, ExprList(std::forward<ARGS>(args)...));
+    }
+
+    /// @param identifier the identifier symbol
+    /// @param args templated identifier arguments
+    /// @return an ast::TemplatedIdentifier with the given symbol and template arguments
     template <typename IDENTIFIER, typename... ARGS, typename = DisableIfSource<IDENTIFIER>>
-    const auto* Ident(IDENTIFIER&& identifier, ARGS&&... args) {
-        if constexpr (traits::IsTypeOrDerived<traits::PtrElTy<IDENTIFIER>, ast::Identifier>) {
-            static_assert(sizeof...(args) == 0);
-            return identifier;  // Pass-through
-        } else {
-            return Ident(source_, std::forward<IDENTIFIER>(identifier),
-                         std::forward<ARGS>(args)...);
-        }
+    const ast::TemplatedIdentifier* Ident(IDENTIFIER&& identifier, ARGS&&... args) {
+        return Ident(source_, std::forward<IDENTIFIER>(identifier), std::forward<ARGS>(args)...);
+    }
+
+    /// @param type the type to passthrough
+    /// @return @p type
+    const ast::Type* Type(const ast::Type* type) { return type; }
+
+    /// @param ident the type identifier
+    /// @return an ast::Type with the given identifier
+    const ast::Type* Type(const ast::Identifier* ident) {
+        return create<ast::Type>(ident->source, ident);
     }
 
     /// @param expr the expression
@@ -1176,42 +1343,15 @@ class ProgramBuilder {
     const ast::IdentifierExpression* Expr(std::nullptr_t) { return nullptr; }
 
     /// @param source the source information
-    /// @param symbol the identifier symbol
-    /// @return an ast::IdentifierExpression with the given symbol
-    const ast::IdentifierExpression* Expr(const Source& source, Symbol symbol) {
-        return create<ast::IdentifierExpression>(source, Ident(source, symbol));
-    }
-
-    /// @param symbol the identifier symbol
-    /// @return an ast::IdentifierExpression with the given symbol
-    const ast::IdentifierExpression* Expr(Symbol symbol) {
-        return create<ast::IdentifierExpression>(Ident(symbol));
-    }
-
-    /// @param source the source information
     /// @param name the identifier name
     /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const Source& source, const char* name) {
+    template <typename NAME,
+              typename = std::enable_if_t<std::is_same_v<std::decay_t<NAME>, Symbol> ||  // Symbol
+                                          std::is_enum_v<std::decay_t<NAME>> ||          // Enum
+                                          traits::IsStringLike<NAME>>                    // String
+              >
+    const ast::IdentifierExpression* Expr(const Source& source, NAME&& name) {
         return create<ast::IdentifierExpression>(source, Ident(source, name));
-    }
-
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const char* name) {
-        return create<ast::IdentifierExpression>(Ident(name));
-    }
-
-    /// @param source the source information
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const Source& source, const std::string& name) {
-        return create<ast::IdentifierExpression>(source, Ident(source, name));
-    }
-
-    /// @param name the identifier name
-    /// @return an ast::IdentifierExpression with the given name
-    const ast::IdentifierExpression* Expr(const std::string& name) {
-        return create<ast::IdentifierExpression>(Ident(name));
     }
 
     /// @param source the source information
@@ -1221,20 +1361,14 @@ class ProgramBuilder {
         return create<ast::IdentifierExpression>(source, Ident(source, variable->symbol));
     }
 
-    /// @param variable the AST variable
-    /// @return an ast::IdentifierExpression with the variable's symbol
-    const ast::IdentifierExpression* Expr(const ast::Variable* variable) {
-        return create<ast::IdentifierExpression>(Ident(variable->symbol));
-    }
-
     /// @param ident the identifier
     /// @return an ast::IdentifierExpression with the given identifier
     template <typename IDENTIFIER, typename = traits::EnableIfIsType<IDENTIFIER, ast::Identifier>>
-    const ast::IdentifierExpression* Expr(const IDENTIFIER* ident) {
+    const ast::IdentifierExpression* Expr(const Source& source, const IDENTIFIER* ident) {
         static_assert(!traits::IsType<IDENTIFIER, ast::TemplatedIdentifier>,
                       "it is currently invalid for a templated identifier expression to be used as "
-                      "an identifier expression, as this should parse as an ast::TypeName");
-        return create<ast::IdentifierExpression>(ident);
+                      "an identifier expression, as this should parse as an ast::Type");
+        return create<ast::IdentifierExpression>(source, ident);
     }
 
     /// @param source the source information
@@ -1247,26 +1381,11 @@ class ProgramBuilder {
         return create<ast::BoolLiteralExpression>(source, value);
     }
 
-    /// @param value the boolean value
-    /// @return a Scalar constructor for the given value
-    template <typename BOOL>
-    std::enable_if_t<std::is_same_v<BOOL, bool>, const ast::BoolLiteralExpression*> Expr(
-        BOOL value) {
-        return create<ast::BoolLiteralExpression>(value);
-    }
-
     /// @param source the source information
     /// @param value the float value
     /// @return a 'f'-suffixed FloatLiteralExpression for the f32 value
     const ast::FloatLiteralExpression* Expr(const Source& source, f32 value) {
         return create<ast::FloatLiteralExpression>(source, static_cast<double>(value.value),
-                                                   ast::FloatLiteralExpression::Suffix::kF);
-    }
-
-    /// @param value the float value
-    /// @return a 'f'-suffixed FloatLiteralExpression for the f32 value
-    const ast::FloatLiteralExpression* Expr(f32 value) {
-        return create<ast::FloatLiteralExpression>(static_cast<double>(value.value),
                                                    ast::FloatLiteralExpression::Suffix::kF);
     }
 
@@ -1278,13 +1397,6 @@ class ProgramBuilder {
                                                    ast::FloatLiteralExpression::Suffix::kH);
     }
 
-    /// @param value the float value
-    /// @return a 'h'-suffixed FloatLiteralExpression for the f16 value
-    const ast::FloatLiteralExpression* Expr(f16 value) {
-        return create<ast::FloatLiteralExpression>(static_cast<double>(value.value),
-                                                   ast::FloatLiteralExpression::Suffix::kH);
-    }
-
     /// @param source the source information
     /// @param value the integer value
     /// @return an unsuffixed IntLiteralExpression for the AInt value
@@ -1293,24 +1405,11 @@ class ProgramBuilder {
                                                  ast::IntLiteralExpression::Suffix::kNone);
     }
 
-    /// @param value the integer value
-    /// @return an unsuffixed IntLiteralExpression for the AInt value
-    const ast::IntLiteralExpression* Expr(AInt value) {
-        return create<ast::IntLiteralExpression>(value, ast::IntLiteralExpression::Suffix::kNone);
-    }
-
     /// @param source the source information
     /// @param value the integer value
     /// @return an unsuffixed FloatLiteralExpression for the AFloat value
     const ast::FloatLiteralExpression* Expr(const Source& source, AFloat value) {
         return create<ast::FloatLiteralExpression>(source, value.value,
-                                                   ast::FloatLiteralExpression::Suffix::kNone);
-    }
-
-    /// @param value the integer value
-    /// @return an unsuffixed FloatLiteralExpression for the AFloat value
-    const ast::FloatLiteralExpression* Expr(AFloat value) {
-        return create<ast::FloatLiteralExpression>(value.value,
                                                    ast::FloatLiteralExpression::Suffix::kNone);
     }
 
@@ -1322,12 +1421,6 @@ class ProgramBuilder {
                                                  ast::IntLiteralExpression::Suffix::kI);
     }
 
-    /// @param value the integer value
-    /// @return a signed 'i'-suffixed IntLiteralExpression for the i32 value
-    const ast::IntLiteralExpression* Expr(i32 value) {
-        return create<ast::IntLiteralExpression>(value, ast::IntLiteralExpression::Suffix::kI);
-    }
-
     /// @param source the source information
     /// @param value the unsigned int value
     /// @return an unsigned 'u'-suffixed IntLiteralExpression for the u32 value
@@ -1336,10 +1429,11 @@ class ProgramBuilder {
                                                  ast::IntLiteralExpression::Suffix::kU);
     }
 
-    /// @param value the unsigned int value
+    /// @param value the value used to construct the expression
     /// @return an unsigned 'u'-suffixed IntLiteralExpression for the u32 value
-    const ast::IntLiteralExpression* Expr(u32 value) {
-        return create<ast::IntLiteralExpression>(value, ast::IntLiteralExpression::Suffix::kU);
+    template <typename VALUE>
+    const auto* Expr(VALUE&& value) {
+        return Expr(source_, std::forward<VALUE>(value));
     }
 
     /// Converts `arg` to an `ast::Expression` using `Expr()`, then appends it to
@@ -1389,35 +1483,6 @@ class ProgramBuilder {
         return list;
     }
 
-    /// @param args the arguments for the type constructor
-    /// @return an `ast::CallExpression` of type `ty`, with the values
-    /// of `args` converted to `ast::Expression`s using `Expr()`
-    template <typename T, typename... ARGS>
-    const ast::CallExpression* Construct(ARGS&&... args) {
-        return Construct(ty.Of<T>(), std::forward<ARGS>(args)...);
-    }
-
-    /// @param type the type to construct
-    /// @param args the arguments for the constructor
-    /// @return an `ast::CallExpression` of `type` constructed with the
-    /// values `args`.
-    template <typename... ARGS>
-    const ast::CallExpression* Construct(const ast::Type* type, ARGS&&... args) {
-        return Construct(source_, type, std::forward<ARGS>(args)...);
-    }
-
-    /// @param source the source information
-    /// @param type the type to construct
-    /// @param args the arguments for the constructor
-    /// @return an `ast::CallExpression` of `type` constructed with the
-    /// values `args`.
-    template <typename... ARGS>
-    const ast::CallExpression* Construct(const Source& source,
-                                         const ast::Type* type,
-                                         ARGS&&... args) {
-        return create<ast::CallExpression>(source, type, ExprList(std::forward<ARGS>(args)...));
-    }
-
     /// @param expr the expression for the bitcast
     /// @return an `ast::BitcastExpression` of type `ty`, with the values of
     /// `expr` converted to `ast::Expression`s using `Expr()`
@@ -1431,7 +1496,7 @@ class ProgramBuilder {
     /// @return an `ast::BitcastExpression` of `type` constructed with the values
     /// `expr`.
     template <typename EXPR>
-    const ast::BitcastExpression* Bitcast(const ast::Type* type, EXPR&& expr) {
+    const ast::BitcastExpression* Bitcast(const ast::Identifier* type, EXPR&& expr) {
         return create<ast::BitcastExpression>(type, Expr(std::forward<EXPR>(expr)));
     }
 
@@ -1442,7 +1507,7 @@ class ProgramBuilder {
     /// `expr`.
     template <typename EXPR>
     const ast::BitcastExpression* Bitcast(const Source& source,
-                                          const ast::Type* type,
+                                          const ast::Identifier* type,
                                           EXPR&& expr) {
         return create<ast::BitcastExpression>(source, type, Expr(std::forward<EXPR>(expr)));
     }
@@ -1453,8 +1518,8 @@ class ProgramBuilder {
     /// @return an `ast::CallExpression` of a `size`-element vector of
     /// type `type`, constructed with the values `args`.
     template <typename... ARGS>
-    const ast::CallExpression* vec(const ast::Type* type, uint32_t size, ARGS&&... args) {
-        return Construct(ty.vec(type, size), std::forward<ARGS>(args)...);
+    const ast::CallExpression* vec(const ast::Identifier* type, uint32_t size, ARGS&&... args) {
+        return Call(ty.vec(type, size), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the vector initializer
@@ -1462,7 +1527,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* vec2(ARGS&&... args) {
-        return Construct(ty.vec2<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.vec2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the vector source
@@ -1471,7 +1536,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* vec2(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.vec2<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.vec2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the vector initializer
@@ -1479,7 +1544,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* vec3(ARGS&&... args) {
-        return Construct(ty.vec3<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.vec3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the vector source
@@ -1488,7 +1553,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* vec3(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.vec3<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.vec3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the vector initializer
@@ -1496,7 +1561,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* vec4(ARGS&&... args) {
-        return Construct(ty.vec4<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.vec4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the vector source
@@ -1505,7 +1570,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* vec4(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.vec4<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.vec4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1513,7 +1578,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat2x2(ARGS&&... args) {
-        return Construct(ty.mat2x2<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat2x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1522,7 +1587,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat2x2(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat2x2<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat2x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1530,7 +1595,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat2x3(ARGS&&... args) {
-        return Construct(ty.mat2x3<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat2x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1539,7 +1604,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat2x3(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat2x3<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat2x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1547,7 +1612,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat2x4(ARGS&&... args) {
-        return Construct(ty.mat2x4<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat2x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1556,7 +1621,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat2x4(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat2x4<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat2x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1564,7 +1629,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat3x2(ARGS&&... args) {
-        return Construct(ty.mat3x2<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat3x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1573,7 +1638,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat3x2(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat3x2<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat3x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1581,7 +1646,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat3x3(ARGS&&... args) {
-        return Construct(ty.mat3x3<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat3x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1590,7 +1655,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat3x3(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat3x3<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat3x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1598,7 +1663,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat3x4(ARGS&&... args) {
-        return Construct(ty.mat3x4<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat3x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1607,7 +1672,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat3x4(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat3x4<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat3x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1615,7 +1680,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat4x2(ARGS&&... args) {
-        return Construct(ty.mat4x2<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat4x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1624,7 +1689,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat4x2(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat4x2<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat4x2<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1632,7 +1697,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat4x3(ARGS&&... args) {
-        return Construct(ty.mat4x3<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat4x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1641,7 +1706,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat4x3(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat4x3<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat4x3<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the matrix initializer
@@ -1649,7 +1714,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS, typename _ = DisableIfSource<ARGS...>>
     const ast::CallExpression* mat4x4(ARGS&&... args) {
-        return Construct(ty.mat4x4<T>(), std::forward<ARGS>(args)...);
+        return Call(ty.mat4x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the matrix source
@@ -1658,7 +1723,7 @@ class ProgramBuilder {
     /// `T`, constructed with the values `args`.
     template <typename T, typename... ARGS>
     const ast::CallExpression* mat4x4(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.mat4x4<T>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.mat4x4<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param args the arguments for the array initializer
@@ -1666,7 +1731,7 @@ class ProgramBuilder {
     /// `T` and size `N`, constructed with the values `args`.
     template <typename T, int N, typename... ARGS>
     const ast::CallExpression* array(ARGS&&... args) {
-        return Construct(ty.array<T, N>(), std::forward<ARGS>(args)...);
+        return Call(ty.array<T, N>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the array source
@@ -1675,7 +1740,7 @@ class ProgramBuilder {
     /// `T` and size `N`, constructed with the values `args`.
     template <typename T, int N, typename... ARGS>
     const ast::CallExpression* array(const Source& source, ARGS&&... args) {
-        return Construct(source, ty.array<T, N>(), std::forward<ARGS>(args)...);
+        return Call(source, ty.array<T, N>(), std::forward<ARGS>(args)...);
     }
 
     /// @param subtype the array element type
@@ -1684,8 +1749,8 @@ class ProgramBuilder {
     /// @return an `ast::CallExpression` of an array with element type
     /// `subtype`, constructed with the values `args`.
     template <typename EXPR, typename... ARGS>
-    const ast::CallExpression* array(const ast::Type* subtype, EXPR&& n, ARGS&&... args) {
-        return Construct(ty.array(subtype, std::forward<EXPR>(n)), std::forward<ARGS>(args)...);
+    const ast::CallExpression* array(const ast::Identifier* subtype, EXPR&& n, ARGS&&... args) {
+        return Call(ty.array(subtype, std::forward<EXPR>(n)), std::forward<ARGS>(args)...);
     }
 
     /// @param source the array source
@@ -1696,11 +1761,10 @@ class ProgramBuilder {
     /// `subtype`, constructed with the values `args`.
     template <typename EXPR, typename... ARGS>
     const ast::CallExpression* array(const Source& source,
-                                     const ast::Type* subtype,
+                                     const ast::Identifier* subtype,
                                      EXPR&& n,
                                      ARGS&&... args) {
-        return Construct(source, ty.array(subtype, std::forward<EXPR>(n)),
-                         std::forward<ARGS>(args)...);
+        return Call(source, ty.array(subtype, std::forward<EXPR>(n)), std::forward<ARGS>(args)...);
     }
 
     /// Adds the extension to the list of enable directives at the top of the module.
@@ -1735,7 +1799,7 @@ class ProgramBuilder {
     /// options
     template <typename NAME, typename... OPTIONS, typename = DisableIfSource<NAME>>
     const ast::Var* Var(NAME&& name, OPTIONS&&... options) {
-        VarOptions opts(std::forward<OPTIONS>(options)...);
+        VarOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Var>(Sym(std::forward<NAME>(name)), opts.type, opts.address_space,
                                 opts.access, opts.initializer, std::move(opts.attributes));
     }
@@ -1753,7 +1817,7 @@ class ProgramBuilder {
     /// @returns a `ast::Var` with the given name, address_space and type
     template <typename NAME, typename... OPTIONS>
     const ast::Var* Var(const Source& source, NAME&& name, OPTIONS&&... options) {
-        VarOptions opts(std::forward<OPTIONS>(options)...);
+        VarOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Var>(source, Sym(std::forward<NAME>(name)), opts.type,
                                 opts.address_space, opts.access, opts.initializer,
                                 std::move(opts.attributes));
@@ -1763,13 +1827,14 @@ class ProgramBuilder {
     /// @param options the extra options passed to the ast::Var initializer
     /// Can be any of the following, in any order:
     ///   * ast::Expression*    - specifies the variable's initializer expression (required)
+    ///   * ast::Identifier*    - specifies the variable type
     ///   * ast::Type*          - specifies the variable type
     ///   * ast::Attribute*     - specifies the variable's attributes (repeatable, or vector)
     /// Note that non-repeatable arguments of the same type will use the last argument's value.
     /// @returns an `ast::Const` with the given name, type and additional options
     template <typename NAME, typename... OPTIONS, typename = DisableIfSource<NAME>>
     const ast::Const* Const(NAME&& name, OPTIONS&&... options) {
-        ConstOptions opts(std::forward<OPTIONS>(options)...);
+        ConstOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Const>(Sym(std::forward<NAME>(name)), opts.type, opts.initializer,
                                   std::move(opts.attributes));
     }
@@ -1779,13 +1844,14 @@ class ProgramBuilder {
     /// @param options the extra options passed to the ast::Var initializer
     /// Can be any of the following, in any order:
     ///   * ast::Expression*    - specifies the variable's initializer expression (required)
+    ///   * ast::Identifier*    - specifies the variable type
     ///   * ast::Type*          - specifies the variable type
     ///   * ast::Attribute*     - specifies the variable's attributes (repeatable, or vector)
     /// Note that non-repeatable arguments of the same type will use the last argument's value.
     /// @returns an `ast::Const` with the given name, type and additional options
     template <typename NAME, typename... OPTIONS>
     const ast::Const* Const(const Source& source, NAME&& name, OPTIONS&&... options) {
-        ConstOptions opts(std::forward<OPTIONS>(options)...);
+        ConstOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Const>(source, Sym(std::forward<NAME>(name)), opts.type,
                                   opts.initializer, std::move(opts.attributes));
     }
@@ -1800,7 +1866,7 @@ class ProgramBuilder {
     /// @returns an `ast::Let` with the given name, type and additional options
     template <typename NAME, typename... OPTIONS, typename = DisableIfSource<NAME>>
     const ast::Let* Let(NAME&& name, OPTIONS&&... options) {
-        LetOptions opts(std::forward<OPTIONS>(options)...);
+        LetOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Let>(Sym(std::forward<NAME>(name)), opts.type, opts.initializer,
                                 std::move(opts.attributes));
     }
@@ -1816,7 +1882,7 @@ class ProgramBuilder {
     /// @returns an `ast::Let` with the given name, type and additional options
     template <typename NAME, typename... OPTIONS>
     const ast::Let* Let(const Source& source, NAME&& name, OPTIONS&&... options) {
-        LetOptions opts(std::forward<OPTIONS>(options)...);
+        LetOptions opts(*this, std::forward<OPTIONS>(options)...);
         return create<ast::Let>(source, Sym(std::forward<NAME>(name)), opts.type, opts.initializer,
                                 std::move(opts.attributes));
     }
@@ -1825,11 +1891,12 @@ class ProgramBuilder {
     /// @param type the parameter type
     /// @param attributes optional parameter attributes
     /// @returns an `ast::Parameter` with the given name and type
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::Parameter* Param(NAME&& name,
-                                const ast::Type* type,
+                                TYPE&& type,
                                 utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
-        return create<ast::Parameter>(Sym(std::forward<NAME>(name)), type, attributes);
+        return Param(source_, std::forward<NAME>(name), std::forward<TYPE>(type),
+                     std::move(attributes));
     }
 
     /// @param source the parameter source
@@ -1837,12 +1904,13 @@ class ProgramBuilder {
     /// @param type the parameter type
     /// @param attributes optional parameter attributes
     /// @returns an `ast::Parameter` with the given name and type
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::Parameter* Param(const Source& source,
                                 NAME&& name,
-                                const ast::Type* type,
+                                TYPE&& type,
                                 utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
-        return create<ast::Parameter>(source, Sym(std::forward<NAME>(name)), type, attributes);
+        return create<ast::Parameter>(source, Sym(std::forward<NAME>(name)),
+                                      Type(std::forward<TYPE>(type)), std::move(attributes));
     }
 
     /// @param name the variable name
@@ -2056,6 +2124,14 @@ class ProgramBuilder {
     const ast::UnaryOpExpression* Negation(EXPR&& expr) {
         return create<ast::UnaryOpExpression>(ast::UnaryOp::kNegation,
                                               Expr(std::forward<EXPR>(expr)));
+    }
+
+    /// @param args the arguments for the type constructor
+    /// @return an `ast::CallExpression` of type `ty`, with the values
+    /// of `args` converted to `ast::Expression`s using `Expr()`
+    template <typename T, typename... ARGS>
+    const ast::CallExpression* Call(ARGS&&... args) {
+        return Call(ty.Of<T>(), std::forward<ARGS>(args)...);
     }
 
     /// @param source the source information
@@ -2490,18 +2566,19 @@ class ProgramBuilder {
     /// @param body_attributes the optional function body attributes
     /// attributes
     /// @returns the function pointer
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::Function* Func(
         const Source& source,
         NAME&& name,
         utils::VectorRef<const ast::Parameter*> params,
-        const ast::Type* type,
+        TYPE&& type,
         utils::VectorRef<const ast::Statement*> body,
         utils::VectorRef<const ast::Attribute*> attributes = utils::Empty,
         utils::VectorRef<const ast::Attribute*> return_type_attributes = utils::Empty,
         utils::VectorRef<const ast::Attribute*> body_attributes = utils::Empty) {
         auto* func = create<ast::Function>(
-            source, Sym(std::forward<NAME>(name)), std::move(params), type,
+            source, Sym(std::forward<NAME>(name)), std::move(params),
+            Type(std::forward<TYPE>(type)),
             create<ast::BlockStatement>(std::move(body), std::move(body_attributes)),
             std::move(attributes), std::move(return_type_attributes));
         AST().AddFunction(func);
@@ -2518,17 +2595,17 @@ class ProgramBuilder {
     /// @param body_attributes the optional function body attributes
     /// attributes
     /// @returns the function pointer
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::Function* Func(
         NAME&& name,
         utils::VectorRef<const ast::Parameter*> params,
-        const ast::Type* type,
+        TYPE&& type,
         utils::VectorRef<const ast::Statement*> body,
         utils::VectorRef<const ast::Attribute*> attributes = utils::Empty,
         utils::VectorRef<const ast::Attribute*> return_type_attributes = utils::Empty,
         utils::VectorRef<const ast::Attribute*> body_attributes = utils::Empty) {
         auto* func = create<ast::Function>(
-            Sym(std::forward<NAME>(name)), std::move(params), type,
+            Sym(std::forward<NAME>(name)), std::move(params), Type(std::forward<TYPE>(type)),
             create<ast::BlockStatement>(std::move(body), std::move(body_attributes)),
             std::move(attributes), std::move(return_type_attributes));
         AST().AddFunction(func);
@@ -2619,7 +2696,7 @@ class ProgramBuilder {
     /// @param type the alias target type
     /// @returns the alias type
     template <typename NAME>
-    const ast::Alias* Alias(const Source& source, NAME&& name, const ast::Type* type) {
+    const ast::Alias* Alias(const Source& source, NAME&& name, const ast::Identifier* type) {
         auto* out = ty.alias(source, std::forward<NAME>(name), type);
         AST().AddTypeDecl(out);
         return out;
@@ -2630,7 +2707,7 @@ class ProgramBuilder {
     /// @param type the alias target type
     /// @returns the alias type
     template <typename NAME>
-    const ast::Alias* Alias(NAME&& name, const ast::Type* type) {
+    const ast::Alias* Alias(NAME&& name, const ast::Identifier* type) {
         auto* out = ty.alias(std::forward<NAME>(name), type);
         AST().AddTypeDecl(out);
         return out;
@@ -2669,14 +2746,14 @@ class ProgramBuilder {
     /// @param type the struct member type
     /// @param attributes the optional struct member attributes
     /// @returns the struct member pointer
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::StructMember* Member(
         const Source& source,
         NAME&& name,
-        const ast::Type* type,
+        TYPE&& type,
         utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
-        return create<ast::StructMember>(source, Sym(std::forward<NAME>(name)), type,
-                                         std::move(attributes));
+        return create<ast::StructMember>(source, Sym(std::forward<NAME>(name)),
+                                         Type(std::forward<TYPE>(type)), std::move(attributes));
     }
 
     /// Creates a ast::StructMember
@@ -2684,13 +2761,13 @@ class ProgramBuilder {
     /// @param type the struct member type
     /// @param attributes the optional struct member attributes
     /// @returns the struct member pointer
-    template <typename NAME>
+    template <typename NAME, typename TYPE>
     const ast::StructMember* Member(
         NAME&& name,
-        const ast::Type* type,
+        TYPE&& type,
         utils::VectorRef<const ast::Attribute*> attributes = utils::Empty) {
-        return create<ast::StructMember>(source_, Sym(std::forward<NAME>(name)), type,
-                                         std::move(attributes));
+        return create<ast::StructMember>(source_, Sym(std::forward<NAME>(name)),
+                                         Type(std::forward<TYPE>(type)), std::move(attributes));
     }
 
     /// Creates a ast::StructMember with the given byte offset
@@ -2698,9 +2775,10 @@ class ProgramBuilder {
     /// @param name the struct member name
     /// @param type the struct member type
     /// @returns the struct member pointer
-    template <typename NAME>
-    const ast::StructMember* Member(uint32_t offset, NAME&& name, const ast::Type* type) {
-        return create<ast::StructMember>(source_, Sym(std::forward<NAME>(name)), type,
+    template <typename NAME, typename TYPE>
+    const ast::StructMember* Member(uint32_t offset, NAME&& name, TYPE&& type) {
+        return create<ast::StructMember>(source_, Sym(std::forward<NAME>(name)),
+                                         Type(std::forward<TYPE>(type)),
                                          utils::Vector<const ast::Attribute*, 1>{
                                              MemberOffset(AInt(offset)),
                                          });
@@ -3375,6 +3453,14 @@ class ProgramBuilder {
     /// has no resolved type.
     const type::Type* TypeOf(const ast::Type* type) const;
 
+    /// Helper for returning the resolved semantic type of the AST identifier `type`.
+    /// @note As the Resolver is run when the Program is built, this will only be
+    /// useful for the Resolver itself and tests that use their own Resolver.
+    /// @param type the AST type
+    /// @return the resolved semantic type for the type, or nullptr if the type
+    /// has no resolved type.
+    const type::Type* TypeOf(const ast::Identifier* type) const;
+
     /// Helper for returning the resolved semantic type of the AST type
     /// declaration `type_decl`.
     /// @note As the Resolver is run when the Program is built, this will only be
@@ -3385,13 +3471,11 @@ class ProgramBuilder {
     const type::Type* TypeOf(const ast::TypeDecl* type_decl) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
-    std::string FriendlyName(const ast::Type* type) const;
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
+    std::string FriendlyName(const ast::Identifier* type) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
     std::string FriendlyName(const type::Type* type) const;
 
     /// Overload of FriendlyName, which removes an ambiguity when passing nullptr.
@@ -3472,35 +3556,31 @@ class ProgramBuilder {
 // Various template specializations for ProgramBuilder::TypesBuilder::CToAST.
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<AInt> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder*) { return nullptr; }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder*) { return nullptr; }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<AFloat> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder*) { return nullptr; }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder*) { return nullptr; }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<i32> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->i32(); }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder* t) { return t->i32(); }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<u32> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->u32(); }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder* t) { return t->u32(); }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<f32> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->f32(); }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder* t) { return t->f32(); }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<f16> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->f16(); }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder* t) { return t->f16(); }
 };
 template <>
 struct ProgramBuilder::TypesBuilder::CToAST<bool> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->bool_(); }
-};
-template <>
-struct ProgramBuilder::TypesBuilder::CToAST<void> {
-    static const ast::Type* get(const ProgramBuilder::TypesBuilder* t) { return t->void_(); }
+    static const ast::Identifier* get(const ProgramBuilder::TypesBuilder* t) { return t->bool_(); }
 };
 //! @endcond
 

@@ -112,14 +112,14 @@ TEST_P(ResolverBuiltinsStageTest, All_input) {
                  });
             break;
         case ast::PipelineStage::kFragment:
-            Func("main", utils::Vector{input}, ty.void_(), utils::Empty,
+            Func("main", utils::Vector{input}, ty.void_, utils::Empty,
                  utils::Vector{
                      Stage(ast::PipelineStage::kFragment),
                  },
                  {});
             break;
         case ast::PipelineStage::kCompute:
-            Func("main", utils::Vector{input}, ty.void_(), utils::Empty,
+            Func("main", utils::Vector{input}, ty.void_, utils::Empty,
                  utils::Vector{
                      Stage(ast::PipelineStage::kCompute),
                      WorkgroupSize(1_i),
@@ -221,7 +221,7 @@ TEST_F(ResolverBuiltinsValidationTest, StructBuiltinInsideEntryPoint_Ignored) {
                               }),
                    });
 
-    Func("fragShader", utils::Empty, ty.void_(), utils::Vector{Decl(Var("s", ty("S")))},
+    Func("fragShader", utils::Empty, ty.void_, utils::Vector{Decl(Var("s", ty("S")))},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -627,7 +627,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_Pass) {
                            Builtin(ast::BuiltinValue::kNumWorkgroups),
                        });
 
-    Func("main", utils::Vector{li_id, li_index, gi, wi, nwgs}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{li_id, li_index, gi, wi, nwgs}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -639,7 +639,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_WorkGroupIdNotVec3U32) {
                      utils::Vector{
                          Builtin(Source{{12, 34}}, ast::BuiltinValue::kWorkgroupId),
                      });
-    Func("main", utils::Vector{wi}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{wi}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -654,7 +654,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_NumWorkgroupsNotVec3U32) {
                        utils::Vector{
                            Builtin(Source{{12, 34}}, ast::BuiltinValue::kNumWorkgroups),
                        });
-    Func("main", utils::Vector{nwgs}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{nwgs}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -669,7 +669,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_GlobalInvocationNotVec3U32
                      utils::Vector{
                          Builtin(Source{{12, 34}}, ast::BuiltinValue::kGlobalInvocationId),
                      });
-    Func("main", utils::Vector{gi}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{gi}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -684,7 +684,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_LocalInvocationIndexNotU32
                            utils::Vector{
                                Builtin(Source{{12, 34}}, ast::BuiltinValue::kLocalInvocationIndex),
                            });
-    Func("main", utils::Vector{li_index}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{li_index}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -699,7 +699,7 @@ TEST_F(ResolverBuiltinsValidationTest, ComputeBuiltin_LocalInvocationNotVec3U32)
                         utils::Vector{
                             Builtin(Source{{12, 34}}, ast::BuiltinValue::kLocalInvocationId),
                         });
-    Func("main", utils::Vector{li_id}, ty.void_(), utils::Empty,
+    Func("main", utils::Vector{li_id}, ty.void_, utils::Empty,
          utils::Vector{Stage(ast::PipelineStage::kCompute),
                        WorkgroupSize(Expr(Source{Source::Location{12, 34}}, 2_i))});
 
@@ -1102,7 +1102,7 @@ TEST_P(FloatAllMatching, Scalar) {
         params.Push(Expr(f32(i + 1)));
     }
     auto* builtin = Call(name, params);
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(builtin),
          },
@@ -1123,7 +1123,7 @@ TEST_P(FloatAllMatching, Vec2) {
         params.Push(vec2<f32>(f32(i + 1), f32(i + 1)));
     }
     auto* builtin = Call(name, params);
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(builtin),
          },
@@ -1144,7 +1144,7 @@ TEST_P(FloatAllMatching, Vec3) {
         params.Push(vec3<f32>(f32(i + 1), f32(i + 1), f32(i + 1)));
     }
     auto* builtin = Call(name, params);
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(builtin),
          },
@@ -1165,7 +1165,7 @@ TEST_P(FloatAllMatching, Vec4) {
         params.Push(vec4<f32>(f32(i + 1), f32(i + 1), f32(i + 1), f32(i + 1)));
     }
     auto* builtin = Call(name, params);
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(builtin),
          },

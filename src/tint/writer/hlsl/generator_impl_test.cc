@@ -38,7 +38,7 @@ TEST_F(HlslGeneratorImplTest, UnsupportedExtension) {
 }
 
 TEST_F(HlslGeneratorImplTest, Generate) {
-    Func("my_func", {}, ty.void_(), {});
+    Func("my_func", {}, ty.void_, {});
 
     GeneratorImpl& gen = Build();
 

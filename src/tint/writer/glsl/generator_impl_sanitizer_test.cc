@@ -29,7 +29,7 @@ TEST_F(GlslSanitizerTest, Call_ArrayLength) {
     GlobalVar("b", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(1_a),
               Group(2_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(), Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -69,7 +69,7 @@ TEST_F(GlslSanitizerTest, Call_ArrayLength_OtherMembersInStruct) {
     GlobalVar("b", ty.Of(s), type::AddressSpace::kStorage, type::Access::kRead, Binding(1_a),
               Group(2_a));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("len", ty.u32(), Call("arrayLength", AddressOf(MemberAccessor("b", "a"))))),
          },
@@ -111,7 +111,7 @@ TEST_F(GlslSanitizerTest, Call_ArrayLength_ViaLets) {
     auto* p = Let("p", AddressOf("b"));
     auto* p2 = Let("p2", AddressOf(MemberAccessor(Deref(p), "a")));
 
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(p),
              Decl(p2),
@@ -149,7 +149,7 @@ void main() {
 TEST_F(GlslSanitizerTest, PromoteArrayInitializerToConstVar) {
     auto* array_init = array<i32, 4>(1_i, 2_i, 3_i, 4_i);
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("idx", Expr(3_i))),
              Decl(Var("pos", ty.i32(), IndexAccessor(array_init, "idx"))),
@@ -191,7 +191,7 @@ TEST_F(GlslSanitizerTest, PromoteStructInitializerToConstVar) {
     auto* struct_access = MemberAccessor(struct_init, "b");
     auto* pos = Var("pos", ty.vec3<f32>(), struct_access);
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(runtime_value),
              Decl(pos),
@@ -236,7 +236,7 @@ TEST_F(GlslSanitizerTest, InlinePtrLetsBasic) {
     auto* p = Let("p", ty.pointer<i32>(type::AddressSpace::kFunction), AddressOf(v));
     auto* x = Var("x", ty.i32(), Deref(p));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(v),
              Decl(p),
@@ -282,7 +282,7 @@ TEST_F(GlslSanitizerTest, InlinePtrLetsComplexChain) {
                    AddressOf(IndexAccessor(Deref(mp), 2_i)));
     auto* v = Var("v", ty.vec4<f32>(), Deref(vp));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(a),
              Decl(ap),

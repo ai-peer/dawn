@@ -29,7 +29,7 @@ TEST_F(GlslGeneratorImplTest, InvalidProgram) {
 }
 
 TEST_F(GlslGeneratorImplTest, Generate) {
-    Func("my_func", utils::Empty, ty.void_(), utils::Empty);
+    Func("my_func", utils::Empty, ty.void_, utils::Empty);
 
     GeneratorImpl& gen = Build();
 
@@ -43,7 +43,7 @@ void my_func() {
 }
 
 TEST_F(GlslGeneratorImplTest, GenerateDesktop) {
-    Func("my_func", utils::Empty, ty.void_(), utils::Empty);
+    Func("my_func", utils::Empty, ty.void_, utils::Empty);
 
     GeneratorImpl& gen = Build(Version(Version::Standard::kDesktop, 4, 4));
 

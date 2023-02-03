@@ -29,7 +29,7 @@ InspectorBuilder::~InspectorBuilder() = default;
 
 void InspectorBuilder::MakeEmptyBodyFunction(std::string name,
                                              utils::VectorRef<const ast::Attribute*> attributes) {
-    Func(name, utils::Empty, ty.void_(), utils::Vector{Return()}, attributes);
+    Func(name, utils::Empty, ty.void_, utils::Vector{Return()}, attributes);
 }
 
 void InspectorBuilder::MakeCallerBodyFunction(std::string caller,
@@ -42,7 +42,7 @@ void InspectorBuilder::MakeCallerBodyFunction(std::string caller,
     }
     body.Push(Return());
 
-    Func(caller, utils::Empty, ty.void_(), body, attributes);
+    Func(caller, utils::Empty, ty.void_, body, attributes);
 }
 
 const ast::Struct* InspectorBuilder::MakeInOutStruct(std::string name,
@@ -70,7 +70,7 @@ const ast::Function* InspectorBuilder::MakePlainGlobalReferenceBodyFunction(
     stmts.Push(Decl(Var("local_" + var, type)));
     stmts.Push(Assign("local_" + var, var));
     stmts.Push(Return());
-    return Func(func, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
+    return Func(func, utils::Empty, ty.void_, std::move(stmts), std::move(attributes));
 }
 
 bool InspectorBuilder::ContainsName(utils::VectorRef<StageVariable> vec, const std::string& name) {
@@ -167,7 +167,7 @@ void InspectorBuilder::MakeStructVariableReferenceBodyFunction(
 
     stmts.Push(Return());
 
-    Func(func_name, utils::Empty, ty.void_(), stmts);
+    Func(func_name, utils::Empty, ty.void_, stmts);
 }
 
 void InspectorBuilder::AddSampler(const std::string& name, uint32_t group, uint32_t binding) {
@@ -205,7 +205,7 @@ const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
         Assign(result_name, Call("textureSample", texture_name, sampler_name, coords_name)),
         Return(),
     };
-    return Func(func_name, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
+    return Func(func_name, utils::Empty, ty.void_, std::move(stmts), std::move(attributes));
 }
 
 const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
@@ -224,7 +224,7 @@ const ast::Function* InspectorBuilder::MakeSamplerReferenceBodyFunction(
                Call("textureSample", texture_name, sampler_name, coords_name, array_index)),
         Return(),
     };
-    return Func(func_name, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
+    return Func(func_name, utils::Empty, ty.void_, std::move(stmts), std::move(attributes));
 }
 
 const ast::Function* InspectorBuilder::MakeComparisonSamplerReferenceBodyFunction(
@@ -243,7 +243,7 @@ const ast::Function* InspectorBuilder::MakeComparisonSamplerReferenceBodyFunctio
                Call("textureSampleCompare", texture_name, sampler_name, coords_name, depth_name)),
         Return(),
     };
-    return Func(func_name, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
+    return Func(func_name, utils::Empty, ty.void_, std::move(stmts), std::move(attributes));
 }
 
 const ast::Type* InspectorBuilder::GetBaseType(ResourceBinding::SampledKind sampled_kind) {
@@ -300,7 +300,7 @@ const ast::Function* InspectorBuilder::MakeStorageTextureBodyFunction(
         Return(),
     };
 
-    return Func(func_name, utils::Empty, ty.void_(), std::move(stmts), std::move(attributes));
+    return Func(func_name, utils::Empty, ty.void_, std::move(stmts), std::move(attributes));
 }
 
 std::function<const ast::Type*()> InspectorBuilder::GetTypeFunction(ComponentType component,

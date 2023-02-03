@@ -552,7 +552,7 @@ TEST_F(InspectorGetEntryPointTest, MultipleEntryPointsInOutSharedStruct) {
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
-    Func("bar", utils::Vector{Param("param", ty.Of(interface))}, ty.void_(), utils::Empty,
+    Func("bar", utils::Vector{Param("param", ty.Of(interface))}, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -835,7 +835,7 @@ TEST_F(InspectorGetEntryPointTest, OverrideReferencedByAttributeIndirectly) {
 TEST_F(InspectorGetEntryPointTest, OverrideReferencedByArraySize) {
     Override("size", ty.u32());
     GlobalVar("v", type::AddressSpace::kWorkgroup, ty.array(ty.f32(), "size"));
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              Assign(Phony(), IndexAccessor("v", 0_a)),
          },
@@ -858,7 +858,7 @@ TEST_F(InspectorGetEntryPointTest, OverrideReferencedByArraySizeIndirectly) {
     Override("foo", ty.u32());
     Override("bar", ty.u32(), Mul(2_a, "foo"));
     GlobalVar("v", type::AddressSpace::kWorkgroup, ty.array(ty.f32(), Mul(2_a, Expr("bar"))));
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              Assign(Phony(), IndexAccessor("v", 0_a)),
          },
@@ -886,7 +886,7 @@ TEST_F(InspectorGetEntryPointTest, OverrideReferencedByArraySizeViaAlias) {
     Override("zoo", ty.u32());
     Alias("MyArrayUnused", ty.array(ty.f32(), Mul(2_a, Expr("zoo"))));
     GlobalVar("v", type::AddressSpace::kWorkgroup, ty("MyArray"));
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              Assign(Phony(), IndexAccessor("v", 0_a)),
          },
@@ -1051,7 +1051,7 @@ TEST_F(InspectorGetEntryPointTest, InputSampleMaskSimpleReferenced) {
                          utils::Vector{
                              Builtin(ast::BuiltinValue::kSampleMask),
                          });
-    Func("ep_func", utils::Vector{in_var}, ty.void_(),
+    Func("ep_func", utils::Vector{in_var}, ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1078,7 +1078,7 @@ TEST_F(InspectorGetEntryPointTest, InputSampleMaskStructReferenced) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1146,7 +1146,7 @@ TEST_F(InspectorGetEntryPointTest, InputPositionSimpleReferenced) {
          utils::Vector{
              Param("in_var", ty.vec4<f32>(), utils::Vector{Builtin(ast::BuiltinValue::kPosition)}),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1172,7 +1172,7 @@ TEST_F(InspectorGetEntryPointTest, InputPositionStructReferenced) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1193,7 +1193,7 @@ TEST_F(InspectorGetEntryPointTest, FrontFacingSimpleReferenced) {
          utils::Vector{
              Param("in_var", ty.bool_(), utils::Vector{Builtin(ast::BuiltinValue::kFrontFacing)}),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1219,7 +1219,7 @@ TEST_F(InspectorGetEntryPointTest, FrontFacingStructReferenced) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1240,7 +1240,7 @@ TEST_F(InspectorGetEntryPointTest, SampleIndexSimpleReferenced) {
          utils::Vector{
              Param("in_var", ty.u32(), utils::Vector{Builtin(ast::BuiltinValue::kSampleIndex)}),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1266,7 +1266,7 @@ TEST_F(InspectorGetEntryPointTest, SampleIndexStructReferenced) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1288,7 +1288,7 @@ TEST_F(InspectorGetEntryPointTest, NumWorkgroupsSimpleReferenced) {
              Param("in_var", ty.vec3<u32>(),
                    utils::Vector{Builtin(ast::BuiltinValue::kNumWorkgroups)}),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1312,7 +1312,7 @@ TEST_F(InspectorGetEntryPointTest, NumWorkgroupsStructReferenced) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1378,7 +1378,7 @@ TEST_F(InspectorGetEntryPointTest, ImplicitInterpolate) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1409,7 +1409,7 @@ TEST_P(InspectorGetEntryPointInterpolateTest, Test) {
          utils::Vector{
              Param("in_var", ty("in_struct"), utils::Empty),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          },
@@ -1653,7 +1653,7 @@ TEST_F(InspectorGetStorageSizeTest, Simple_NonStruct) {
     AddUniformBuffer("ub_var", ty.i32(), 0, 0);
     AddStorageBuffer("sb_var", ty.i32(), type::Access::kReadWrite, 1, 0);
     AddStorageBuffer("rosb_var", ty.i32(), type::Access::kRead, 1, 1);
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("ub", Expr("ub_var"))),
              Decl(Let("sb", Expr("sb_var"))),
@@ -1711,7 +1711,7 @@ TEST_F(InspectorGetStorageSizeTest, Simple_Struct) {
 
 TEST_F(InspectorGetStorageSizeTest, NonStructVec3) {
     AddUniformBuffer("ub_var", ty.vec3<f32>(), 0, 0);
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("ub", Expr("ub_var"))),
          },
@@ -1730,7 +1730,7 @@ TEST_F(InspectorGetStorageSizeTest, StructVec3) {
                                                                 ty.vec3<f32>(),
                                                             });
     AddUniformBuffer("ub_var", ty.Of(ub_struct_type), 0, 0);
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("ub", Expr("ub_var"))),
          },
@@ -1802,7 +1802,7 @@ TEST_F(InspectorGetResourceBindingsTest, Simple) {
 
     auto* depth_ms_texture_type = ty.depth_multisampled_texture(type::TextureDimension::k2d);
     AddResource("depth_ms_texture", depth_ms_texture_type, 3, 3);
-    Func("depth_ms_func", utils::Empty, ty.void_(),
+    Func("depth_ms_func", utils::Empty, ty.void_,
          utils::Vector{
              Ignore("depth_ms_texture"),
          });
@@ -2062,7 +2062,7 @@ TEST_F(InspectorGetUniformBufferResourceBindingsTest, MultipleUniformBuffers) {
         return create<ast::CallStatement>(Call(callee));
     };
 
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              FuncCall("ub_foo_func"),
              FuncCall("ub_bar_func"),
@@ -2243,7 +2243,7 @@ TEST_F(InspectorGetStorageBufferResourceBindingsTest, MultipleStorageBuffers) {
         return create<ast::CallStatement>(Call(callee));
     };
 
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              FuncCall("sb_foo_func"),
              FuncCall("sb_bar_func"),
@@ -2468,7 +2468,7 @@ TEST_F(InspectorGetReadOnlyStorageBufferResourceBindingsTest, MultipleStorageBuf
         return create<ast::CallStatement>(Call(callee));
     };
 
-    Func("ep_func", utils::Empty, ty.void_(),
+    Func("ep_func", utils::Empty, ty.void_,
          utils::Vector{
              FuncCall("sb_foo_func"),
              FuncCall("sb_bar_func"),
@@ -2895,7 +2895,7 @@ TEST_P(InspectorGetMultisampledTextureResourceBindingsTestWithParam, textureLoad
     AddGlobalVariable("foo_coords", coord_type);
     AddGlobalVariable("foo_sample_index", ty.i32());
 
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureLoad", "foo_texture", "foo_coords", "foo_sample_index")),
          },
@@ -3079,7 +3079,7 @@ TEST_P(InspectorGetDepthTextureResourceBindingsTestWithParam, textureDimensions)
     auto* depth_texture_type = ty.depth_texture(GetParam().type_dim);
     AddResource("dt", depth_texture_type, 0, 0);
 
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "dt")),
          },
@@ -3116,7 +3116,7 @@ TEST_F(InspectorGetDepthMultisampledTextureResourceBindingsTest, textureDimensio
     auto* depth_ms_texture_type = ty.depth_multisampled_texture(type::TextureDimension::k2d);
     AddResource("tex", depth_ms_texture_type, 0, 0);
 
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -3140,7 +3140,7 @@ TEST_F(InspectorGetExternalTextureResourceBindingsTest, Simple) {
     auto* external_texture_type = ty.external_texture();
     AddResource("et", external_texture_type, 0, 0);
 
-    Func("ep", utils::Empty, ty.void_(),
+    Func("ep", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "et")),
          },

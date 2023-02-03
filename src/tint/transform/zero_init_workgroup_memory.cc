@@ -297,14 +297,14 @@ struct ZeroInitWorkgroupMemory::State {
             if (!var) {
                 return false;
             }
-            auto* zero_init = b.Construct(CreateASTTypeFor(ctx, ty));
+            auto* zero_init = b.Call(CreateASTTypeFor(ctx, ty));
             statements.emplace_back(
                 Statement{b.Assign(var.expr, zero_init), var.num_iterations, var.array_indices});
             return true;
         }
 
         if (auto* atomic = ty->As<type::Atomic>()) {
-            auto* zero_init = b.Construct(CreateASTTypeFor(ctx, atomic->Type()));
+            auto* zero_init = b.Call(CreateASTTypeFor(ctx, atomic->Type()));
             auto expr = get_expr(1u);
             if (!expr) {
                 return false;

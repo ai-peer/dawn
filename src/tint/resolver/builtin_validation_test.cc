@@ -27,7 +27,7 @@ using ResolverBuiltinValidationTest = ResolverTest;
 
 TEST_F(ResolverBuiltinValidationTest, FunctionTypeMustMatchReturnStatementType_void_fail) {
     // fn func { return workgroupBarrier(); }
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Return(Call(Source{Source::Location{12, 34}}, "workgroupBarrier")),
          });
@@ -40,7 +40,7 @@ TEST_F(ResolverBuiltinValidationTest, InvalidPipelineStageDirect) {
     // @compute @workgroup_size(1) fn func { return dpdx(1.0); }
 
     auto* dpdx = Call(Source{{3, 4}}, "dpdx", 1_f);
-    Func(Source{{1, 2}}, "func", utils::Empty, ty.void_(),
+    Func(Source{{1, 2}}, "func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(dpdx),
          },
@@ -60,22 +60,22 @@ TEST_F(ResolverBuiltinValidationTest, InvalidPipelineStageIndirect) {
     // @compute @workgroup_size(1) fn main { return f2(); }
 
     auto* dpdx = Call(Source{{3, 4}}, "dpdx", 1_f);
-    Func(Source{{1, 2}}, "f0", utils::Empty, ty.void_(),
+    Func(Source{{1, 2}}, "f0", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(dpdx),
          });
 
-    Func(Source{{3, 4}}, "f1", utils::Empty, ty.void_(),
+    Func(Source{{3, 4}}, "f1", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f0")),
          });
 
-    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_(),
+    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f1")),
          });
 
-    Func(Source{{7, 8}}, "main", utils::Empty, ty.void_(),
+    Func(Source{{7, 8}}, "main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f2")),
          },
@@ -308,20 +308,20 @@ class Constexpr {
             case Kind::kScalar:
                 return b.Expr(src, i32(values[0]));
             case Kind::kVec2:
-                return b.Construct(src, b.ty.vec2<i32>(), i32(values[0]), i32(values[1]));
+                return b.Call(src, b.ty.vec2<i32>(), i32(values[0]), i32(values[1]));
             case Kind::kVec3:
-                return b.Construct(src, b.ty.vec3<i32>(), i32(values[0]), i32(values[1]),
+                return b.Call(src, b.ty.vec3<i32>(), i32(values[0]), i32(values[1]),
                                    i32(values[2]));
             case Kind::kVec3_Scalar_Vec2:
-                return b.Construct(src, b.ty.vec3<i32>(), i32(values[0]),
+                return b.Call(src, b.ty.vec3<i32>(), i32(values[0]),
                                    b.vec2<i32>(i32(values[1]), i32(values[2])));
             case Kind::kVec3_Vec2_Scalar:
-                return b.Construct(src, b.ty.vec3<i32>(),
+                return b.Call(src, b.ty.vec3<i32>(),
                                    b.vec2<i32>(i32(values[0]), i32(values[1])), i32(values[2]));
             case Kind::kEmptyVec2:
-                return b.Construct(src, b.ty.vec2<i32>());
+                return b.Call(src, b.ty.vec2<i32>());
             case Kind::kEmptyVec3:
-                return b.Construct(src, b.ty.vec3<i32>());
+                return b.Call(src, b.ty.vec3<i32>());
         }
         return nullptr;
     }
@@ -384,7 +384,7 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, Immediate) {
     arg_to_replace = expr(Source{{12, 34}}, *this);
 
     // Call the builtin with the constexpr argument replaced
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(overload.function, args)),
          },
@@ -437,7 +437,7 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalConst) {
     arg_to_replace = Expr(Source{{12, 34}}, "G");
 
     // Call the builtin with the constant-expression argument replaced
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(overload.function, args)),
          },
@@ -486,7 +486,7 @@ TEST_P(BuiltinTextureConstExprArgValidationTest, GlobalVar) {
     arg_to_replace = Expr(Source{{12, 34}}, "G");
 
     // Call the builtin with the constant-expression argument replaced
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(overload.function, args)),
          },

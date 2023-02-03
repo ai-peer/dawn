@@ -603,7 +603,7 @@ struct CanonicalizeEntryPointIO::State {
         auto* call_inner = CallInnerFunction();
 
         // Process the return type, and start building the wrapper function body.
-        std::function<const ast::Type*()> wrapper_ret_type = [&] { return ctx.dst->ty.void_(); };
+        std::function<const ast::Type*()> wrapper_ret_type = [&] { return ctx.dst->ty.void_; };
         if (func_sem->ReturnType()->Is<type::Void>()) {
             // The function call is just a statement with no result.
             wrapper_body.Push(ctx.dst->CallStmt(call_inner));

@@ -97,7 +97,7 @@ class GlslGeneratorImplTest_MemberAccessorBase : public BASE {
 
     void SetupFunction(utils::VectorRef<const ast::Statement*> statements) {
         ProgramBuilder& b = *this;
-        b.Func("main", utils::Empty, b.ty.void_(), statements,
+        b.Func("main", utils::Empty, b.ty.void_, statements,
                utils::Vector<const ast::Attribute*, 1>{
                    b.Stage(ast::PipelineStage::kFragment),
                });

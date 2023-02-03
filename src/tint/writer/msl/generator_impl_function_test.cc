@@ -24,7 +24,7 @@ namespace {
 using MslGeneratorImplTest = TestHelper;
 
 TEST_F(MslGeneratorImplTest, Emit_Function) {
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -50,7 +50,7 @@ TEST_F(MslGeneratorImplTest, Emit_Function_WithParams) {
              Param("a", ty.f32()),
              Param("b", ty.i32()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -71,7 +71,7 @@ TEST_F(MslGeneratorImplTest, Emit_Function_WithParams) {
 }
 
 TEST_F(MslGeneratorImplTest, Emit_Attribute_EntryPoint_NoReturn_Void) {
-    Func("main", utils::Empty, ty.void_(), {/* no explicit return */},
+    Func("main", utils::Empty, ty.void_, {/* no explicit return */},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -198,7 +198,7 @@ TEST_F(MslGeneratorImplTest, Emit_Attribute_EntryPoint_SharedStruct_DifferentSta
                                         Construct(ty.vec4<f32>())))},
          utils::Vector{Stage(ast::PipelineStage::kVertex)});
 
-    Func("frag_main", utils::Vector{Param("colors", ty.Of(interface_struct))}, ty.void_(),
+    Func("frag_main", utils::Vector{Param("colors", ty.Of(interface_struct))}, ty.void_,
          utils::Vector{
              WrapInStatement(Let("r", ty.f32(), MemberAccessor("colors", "col1"))),
              WrapInStatement(Let("g", ty.f32(), MemberAccessor("colors", "col2"))),
@@ -347,7 +347,7 @@ TEST_F(MslGeneratorImplTest, Emit_FunctionAttribute_EntryPoint_With_RW_StorageBu
 
     auto* var = Var("v", ty.f32(), MemberAccessor("coord", "b"));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -386,7 +386,7 @@ TEST_F(MslGeneratorImplTest, Emit_FunctionAttribute_EntryPoint_With_RO_StorageBu
 
     auto* var = Var("v", ty.f32(), MemberAccessor("coord", "b"));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -430,7 +430,7 @@ TEST_F(MslGeneratorImplTest, Emit_Attribute_Called_By_EntryPoint_With_Uniform) {
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -481,7 +481,7 @@ TEST_F(MslGeneratorImplTest, Emit_FunctionAttribute_Called_By_EntryPoint_With_RW
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -533,7 +533,7 @@ TEST_F(MslGeneratorImplTest, Emit_FunctionAttribute_Called_By_EntryPoint_With_RO
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -570,7 +570,7 @@ TEST_F(MslGeneratorImplTest, Emit_Function_WithArrayParams) {
          utils::Vector{
              Param("a", ty.array<f32, 5>()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -663,7 +663,7 @@ TEST_F(MslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_ModuleV
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("a", utils::Empty, ty.void_(),
+        Func("a", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),
@@ -677,7 +677,7 @@ TEST_F(MslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_ModuleV
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("b", utils::Empty, ty.void_(),
+        Func("b", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),

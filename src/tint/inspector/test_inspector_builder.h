@@ -156,7 +156,7 @@ class InspectorBuilder : public ProgramBuilder {
     /// @param name name for the type
     /// @param member_types a vector of member types
     /// @returns a function that returns the created structure.
-    std::function<const ast::TypeName*()> MakeStorageBufferTypes(
+    std::function<const ast::Identifier*()> MakeStorageBufferTypes(
         const std::string& name,
         utils::VectorRef<const ast::Type*> member_types);
 
@@ -331,14 +331,6 @@ class InspectorBuilder : public ProgramBuilder {
     /// Should only be called once per test.
     /// @returns a reference to the Inspector for the built Program.
     Inspector& Build();
-
-    /// @returns the type for a SamplerKind::kSampler
-    const ast::Sampler* sampler_type() { return ty.sampler(type::SamplerKind::kSampler); }
-
-    /// @returns the type for a SamplerKind::kComparison
-    const ast::Sampler* comparison_sampler_type() {
-        return ty.sampler(type::SamplerKind::kComparisonSampler);
-    }
 
   protected:
     /// Program built by this builder.

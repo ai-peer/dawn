@@ -114,7 +114,7 @@ Transform::ApplyResult CalculateArrayLength::Apply(const Program* src,
                             utils::Vector{disable_validation}),
                     b.Param("result", b.ty.pointer(b.ty.u32(), type::AddressSpace::kFunction)),
                 },
-                b.ty.void_(), nullptr,
+                b.ty.void_, nullptr,
                 utils::Vector{
                     b.ASTNodes().Create<BufferSizeIntrinsic>(b.ID(), b.AllocateNodeID()),
                 },

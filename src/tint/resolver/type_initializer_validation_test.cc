@@ -2906,7 +2906,7 @@ TEST_P(MatrixInitializerTest, InferElementTypeFromVectors) {
         args.Push(Construct(param.create_column_ast_type(*this)));
     }
 
-    auto* matrix_type = create<ast::Matrix>(nullptr, param.rows, param.columns);
+    auto* matrix_type = ty.mat(nullptr, param.columns, param.rows);
     auto* tc = Construct(Source{}, matrix_type, std::move(args));
     WrapInFunction(tc);
 
@@ -2923,7 +2923,7 @@ TEST_P(MatrixInitializerTest, InferElementTypeFromScalars) {
         args.Push(param.create_element_ast_value(*this, static_cast<double>(i)));
     }
 
-    auto* matrix_type = create<ast::Matrix>(nullptr, param.rows, param.columns);
+    auto* matrix_type = ty.mat(nullptr, param.columns, param.rows);
     WrapInFunction(Construct(Source{{12, 34}}, matrix_type, std::move(args)));
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -2953,7 +2953,7 @@ TEST_P(MatrixInitializerTest, CannotInferElementTypeFromVectors_Mismatch) {
         }
     }
 
-    auto* matrix_type = create<ast::Matrix>(nullptr, param.rows, param.columns);
+    auto* matrix_type = ty.mat(nullptr, param.columns, param.rows);
     WrapInFunction(Construct(Source{{12, 34}}, matrix_type, std::move(args)));
 
     EXPECT_FALSE(r()->Resolve());
@@ -2985,7 +2985,7 @@ TEST_P(MatrixInitializerTest, CannotInferElementTypeFromScalars_Mismatch) {
 
     err << ")";
 
-    auto* matrix_type = create<ast::Matrix>(nullptr, param.rows, param.columns);
+    auto* matrix_type = ty.mat(nullptr, param.columns, param.rows);
     WrapInFunction(Construct(Source{{12, 34}}, matrix_type, std::move(args)));
 
     EXPECT_FALSE(r()->Resolve());

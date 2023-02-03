@@ -52,7 +52,7 @@ TEST_F(BuilderTest, EntryPoint_Parameters) {
                        });
     auto* mul = Mul(Expr(MemberAccessor("coord", "x")), Expr("loc1"));
     auto* col = Var("col", ty.f32(), mul);
-    Func("frag_main", utils::Vector{coord, loc1}, ty.void_(), utils::Vector{WrapInStatement(col)},
+    Func("frag_main", utils::Vector{coord, loc1}, ty.void_, utils::Vector{WrapInStatement(col)},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -323,7 +323,7 @@ TEST_F(BuilderTest, SampleIndex_SampleRateShadingCapability) {
     Func("main",
          utils::Vector{Param("sample_index", ty.u32(),
                              utils::Vector{Builtin(ast::BuiltinValue::kSampleIndex)})},
-         ty.void_(), utils::Empty,
+         ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });

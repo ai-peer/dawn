@@ -91,7 +91,7 @@ TEST_F(SideEffectsTest, VariableUser) {
 TEST_F(SideEffectsTest, Call_Builtin_NoSE) {
     GlobalVar("a", ty.f32(), type::AddressSpace::kPrivate);
     auto* expr = Call("dpdx", "a");
-    Func("f", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("f", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -104,7 +104,7 @@ TEST_F(SideEffectsTest, Call_Builtin_NoSE) {
 TEST_F(SideEffectsTest, Call_Builtin_NoSE_WithSEArg) {
     MakeSideEffectFunc<f32>("se");
     auto* expr = Call("dpdx", Call("se"));
-    Func("f", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("f", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -220,7 +220,7 @@ TEST_P(SideEffectsBuiltinTest, Test) {
 
     stmts.Push(create<ast::CallStatement>(expr));
 
-    Func("func", utils::Empty, ty.void_(), stmts, attrs);
+    Func("func", utils::Empty, ty.void_, stmts, attrs);
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
     auto* sem = Sem().Get(expr);

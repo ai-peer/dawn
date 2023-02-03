@@ -91,7 +91,7 @@ TEST_F(ModuleTest, CloneOrder) {
     // Create a program with a function, alias decl and var decl.
     Program p = [] {
         ProgramBuilder b;
-        b.Func("F", {}, b.ty.void_(), {});
+        b.Func("F", {}, b.ty.void_, {});
         b.Alias("A", b.ty.u32());
         b.GlobalVar("V", b.ty.i32(), type::AddressSpace::kPrivate);
         return Program(std::move(b));

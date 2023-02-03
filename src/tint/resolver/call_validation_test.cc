@@ -31,7 +31,7 @@ TEST_F(ResolverCallValidationTest, TooFewArgs) {
              Param(Sym(), ty.i32()),
              Param(Sym(), ty.f32()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -48,7 +48,7 @@ TEST_F(ResolverCallValidationTest, TooManyArgs) {
              Param(Sym(), ty.i32()),
              Param(Sym(), ty.f32()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -65,7 +65,7 @@ TEST_F(ResolverCallValidationTest, MismatchedArgs) {
              Param(Sym(), ty.i32()),
              Param(Sym(), ty.f32()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -88,7 +88,7 @@ TEST_F(ResolverCallValidationTest, UnusedRetval) {
          },
          utils::Empty);
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Source{{12, 34}}, Call("func")),
              Return(),
@@ -104,8 +104,8 @@ TEST_F(ResolverCallValidationTest, PointerArgument_VariableIdentExpr) {
     //   foo(&z);
     // }
     auto* param = Param("p", ty.pointer<i32>(type::AddressSpace::kFunction));
-    Func("foo", utils::Vector{param}, ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("z", ty.i32(), Expr(1_i))),
              CallStmt(Call("foo", AddressOf(Source{{12, 34}}, Expr("z")))),
@@ -121,8 +121,8 @@ TEST_F(ResolverCallValidationTest, PointerArgument_LetIdentExpr) {
     //   foo(&z);
     // }
     auto* param = Param("p", ty.pointer<i32>(type::AddressSpace::kFunction));
-    Func("foo", utils::Vector{param}, ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("z", ty.i32(), Expr(1_i))),
              CallStmt(Call("foo", AddressOf(Expr(Source{{12, 34}}, "z")))),
@@ -143,8 +143,8 @@ TEST_F(ResolverCallValidationTest, PointerArgument_AddressOfFunctionMember) {
                                  Member("m", ty.i32()),
                              });
     auto* param = Param("p", ty.pointer<i32>(type::AddressSpace::kFunction));
-    Func("foo", utils::Vector{param}, ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.Of(S))),
              CallStmt(Call("foo", AddressOf(Source{{12, 34}}, MemberAccessor("v", "m")))),
@@ -170,8 +170,8 @@ TEST_F(ResolverCallValidationTest,
                                  Member("m", ty.i32()),
                              });
     auto* param = Param("p", ty.pointer<i32>(type::AddressSpace::kFunction));
-    Func("foo", utils::Vector{param}, ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.Of(S))),
              CallStmt(Call("foo", AddressOf(Source{{12, 34}}, MemberAccessor("v", "m")))),
@@ -190,8 +190,8 @@ TEST_F(ResolverCallValidationTest, PointerArgument_AddressOfLetMember) {
                                  Member("m", ty.i32()),
                              });
     auto* param = Param("p", ty.pointer<i32>(type::AddressSpace::kFunction));
-    Func("foo", utils::Vector{param}, ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("v", ty.Of(S), Construct(ty.Of(S)))),
              CallStmt(Call("foo", AddressOf(MemberAccessor(Source{{12, 34}}, "v", "m")))),
@@ -210,12 +210,12 @@ TEST_F(ResolverCallValidationTest, PointerArgument_FunctionParam) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
+         ty.void_, utils::Empty);
     Func("bar",
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              CallStmt(Call("foo", Expr("p"))),
          });
@@ -237,16 +237,16 @@ TEST_F(ResolverCallValidationTest, PointerArgument_FunctionParamWithMain) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
+         ty.void_, utils::Empty);
     Func("bar",
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              CallStmt(Call("foo", "p")),
          });
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.i32(), Expr(1_i))),
              CallStmt(Call("foo", AddressOf("v"))),
@@ -270,8 +270,8 @@ TEST_F(ResolverCallValidationTest, LetPointer) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.i32())),
              Decl(Let("p", ty.pointer(ty.i32(), type::AddressSpace::kFunction), AddressOf("v"))),
@@ -295,9 +295,9 @@ TEST_F(ResolverCallValidationTest, LetPointerPrivate) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kPrivate)),
          },
-         ty.void_(), utils::Empty);
+         ty.void_, utils::Empty);
     GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("p", ty.pointer(ty.i32(), type::AddressSpace::kPrivate), AddressOf("v"))),
              CallStmt(Call("foo", Expr(Source{{12, 34}}, "p"))),
@@ -320,8 +320,8 @@ TEST_F(ResolverCallValidationTest, LetPointer_NotWholeVar) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.array<i32, 4>())),
              Decl(Let("p", ty.pointer(ty.i32(), type::AddressSpace::kFunction),
@@ -351,8 +351,8 @@ TEST_F(ResolverCallValidationTest, LetPointer_NotWholeVar_WithFullPtrParametersE
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.array<i32, 4>())),
              Decl(Let("p", ty.pointer(ty.i32(), type::AddressSpace::kFunction),
@@ -379,8 +379,8 @@ TEST_F(ResolverCallValidationTest, ComplexPointerChain) {
          utils::Vector{
              Param("p", ty.pointer(ty.array<i32, 4>(), type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.array<i32, 4>())),
              Decl(Let("p1", AddressOf("v"))),
@@ -408,8 +408,8 @@ TEST_F(ResolverCallValidationTest, ComplexPointerChain_NotWholeVar) {
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.array<i32, 4>())),
              Decl(Let("p1", AddressOf("v"))),
@@ -442,8 +442,8 @@ TEST_F(ResolverCallValidationTest, ComplexPointerChain_NotWholeVar_WithFullPtrPa
          utils::Vector{
              Param("p", ty.pointer<i32>(type::AddressSpace::kFunction)),
          },
-         ty.void_(), utils::Empty);
-    Func("main", utils::Empty, ty.void_(),
+         ty.void_, utils::Empty);
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("v", ty.array<i32, 4>())),
              Decl(Let("p1", AddressOf("v"))),
@@ -463,7 +463,7 @@ TEST_F(ResolverCallValidationTest, CallVariable) {
     //   v();
     // }
     GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call(Source{{12, 34}}, "v")),
          });
@@ -479,8 +479,8 @@ TEST_F(ResolverCallValidationTest, CallVariableShadowsFunction) {
     //   var x : i32;
     //   x();
     // }
-    Func("x", utils::Empty, ty.void_(), utils::Empty);
-    Func("f", utils::Empty, ty.void_(),
+    Func("x", utils::Empty, ty.void_, utils::Empty);
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var(Source{{56, 78}}, "x", ty.i32())),
              CallStmt(Call(Source{{12, 34}}, "x")),

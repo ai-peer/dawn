@@ -124,7 +124,7 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableFunctionVariableNotUnique_Pass)
     // }
     // var a: f32 = 2.1;
 
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("a", ty.f32(), Expr(2_f))),
          });
@@ -176,13 +176,13 @@ TEST_F(ResolverTypeValidationTest, RedeclaredIdentifierDifferentFunctions_Pass) 
 
     auto* var1 = Var("a", ty.f32(), Expr(1_f));
 
-    Func("func0", utils::Empty, ty.void_(),
+    Func("func0", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Source{{12, 34}}, var0),
              Return(),
          });
 
-    Func("func1", utils::Empty, ty.void_(),
+    Func("func1", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Source{{13, 34}}, var1),
              Return(),
@@ -432,7 +432,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionVar_Explicit)
     //   var a : array<f32, size>;
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))),
          });
@@ -448,7 +448,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionLet_Explicit)
     //   var a : array<f32, size>;
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))),
          });
@@ -466,7 +466,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionVar_Implicit)
     // }
     Override("size", Expr(10_i));
     GlobalVar("w", ty.array(ty.f32(), "size"), type::AddressSpace::kWorkgroup);
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Var("a", Expr(Source{{12, 34}}, "w"))),
          });
@@ -484,7 +484,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_FunctionLet_Implicit)
     // }
     Override("size", Expr(10_i));
     GlobalVar("w", ty.array(ty.f32(), "size"), type::AddressSpace::kWorkgroup);
-    Func("f", utils::Empty, ty.void_(),
+    Func("f", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("a", Expr(Source{{12, 34}}, "w"))),
          });
@@ -516,7 +516,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NamedOverride_Param) {
     // fn f(a : array<f32, size>) {
     // }
     Override("size", Expr(10_i));
-    Func("f", utils::Vector{Param("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))}, ty.void_(),
+    Func("f", utils::Vector{Param("a", ty.array(Source{{12, 34}}, ty.f32(), "size"))}, ty.void_,
          utils::Empty);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: type of function parameter must be constructible");
@@ -591,7 +591,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInFunction_Fail) {
 
     auto* var = Var(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
          },
@@ -623,7 +623,7 @@ TEST_F(ResolverTypeValidationTest, Struct_Member_MatrixNoType) {
     //   a: mat3x3;
     // };
     Structure("S", utils::Vector{
-                       Member("a", create<ast::Matrix>(Source{{12, 34}}, nullptr, 3u, 3u)),
+                       Member("a", ty.mat(Source{{12, 34}}, nullptr, 3u, 3u)),
                    });
 
     EXPECT_FALSE(r()->Resolve());
@@ -777,12 +777,12 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayAsParameter_Fail) {
 
     auto* param = Param(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Vector{param}, ty.void_(),
+    Func("func", utils::Vector{param}, ty.void_,
          utils::Vector{
              Return(),
          });
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          },
@@ -802,7 +802,7 @@ TEST_F(ResolverTypeValidationTest, PtrToRuntimeArrayAsPointerParameter_Fail) {
     auto* param = Param("a", ty.pointer(Source{{56, 78}}, ty.array(Source{{12, 34}}, ty.i32()),
                                         type::AddressSpace::kWorkgroup));
 
-    Func("func", utils::Vector{param}, ty.void_(),
+    Func("func", utils::Vector{param}, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -818,7 +818,7 @@ TEST_F(ResolverTypeValidationTest, PtrToRuntimeArrayAsParameter_Fail) {
 
     auto* param = Param(Source{{56, 78}}, "a", ty.array(Source{{12, 34}}, ty.i32()));
 
-    Func("func", utils::Vector{param}, ty.void_(),
+    Func("func", utils::Vector{param}, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -896,7 +896,7 @@ note: 'a' declared here)");
 TEST_F(ResolverTypeValidationTest, FunctionAsType) {
     // fn f() {}
     // var<private> v : f;
-    Func("f", utils::Empty, ty.void_(), {});
+    Func("f", utils::Empty, ty.void_, {});
     GlobalVar("v", ty("f"), type::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
@@ -1270,8 +1270,12 @@ TEST_P(ValidMatrixTypes, Okay) {
 
     Enable(ast::Extension::kF16);
 
-    GlobalVar("a", ty.mat(params.elem_ty(*this), params.columns, params.rows),
-              type::AddressSpace::kPrivate);
+    auto* el_ty = params.elem_ty(*this);
+
+    // TODO(crbug.com/tint/1810): Remove the cast to ast::TypeName when finished.
+    auto* el_type_name = tint::As<ast::TypeName>(el_ty);
+
+    GlobalVar("a", ty.mat(el_type_name, params.columns, params.rows), type::AddressSpace::kPrivate);
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
@@ -1309,7 +1313,12 @@ TEST_P(InvalidMatrixElementTypes, InvalidElementType) {
 
     Enable(ast::Extension::kF16);
 
-    GlobalVar("a", ty.mat(Source{{12, 34}}, params.elem_ty(*this), params.columns, params.rows),
+    auto* el_ty = params.elem_ty(*this);
+
+    // TODO(crbug.com/tint/1810): Remove the cast to ast::TypeName when finished.
+    auto* el_type_name = tint::As<ast::TypeName>(el_ty);
+
+    GlobalVar("a", ty.mat(Source{{12, 34}}, el_type_name, params.columns, params.rows),
               type::AddressSpace::kPrivate);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: matrix element type must be 'f32' or 'f16'");

@@ -98,12 +98,12 @@ TEST_F(ResolverValidationTest, WorkgroupMemoryUsedInFragmentStage) {
     GlobalVar("dst", ty.vec4<f32>(), type::AddressSpace::kPrivate);
     auto* stmt = Assign(Expr("dst"), Expr(Source{{3, 4}}, "wg"));
 
-    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_(), utils::Vector{stmt});
-    Func(Source{{7, 8}}, "f1", utils::Empty, ty.void_(),
+    Func(Source{{5, 6}}, "f2", utils::Empty, ty.void_, utils::Vector{stmt});
+    Func(Source{{7, 8}}, "f1", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("f2")),
          });
-    Func(Source{{9, 10}}, "f0", utils::Empty, ty.void_(), utils::Vector{CallStmt(Call("f1"))},
+    Func(Source{{9, 10}}, "f0", utils::Empty, ty.void_, utils::Vector{CallStmt(Call("f1"))},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -159,7 +159,7 @@ TEST_F(ResolverValidationTest, Expr_ErrUnknownExprType) {
 }
 
 TEST_F(ResolverValidationTest, Expr_DontCall_Function) {
-    Func("func", utils::Empty, ty.void_(), utils::Empty, {});
+    Func("func", utils::Empty, ty.void_, utils::Empty, {});
     WrapInFunction(Expr(Source{{12, 34}}, "func"));
 
     EXPECT_FALSE(r()->Resolve());
@@ -236,7 +236,7 @@ TEST_F(ResolverValidationTest, UsingUndefinedVariableGlobalVariable_Pass) {
 
     GlobalVar("global_var", ty.f32(), type::AddressSpace::kPrivate, Expr(2.1_f));
 
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Assign(Expr(Source{{12, 34}}, "global_var"), 3.14_f),
              Return(),
@@ -310,7 +310,7 @@ TEST_F(ResolverValidationTest, UsingUndefinedVariableDifferentScope_Fail) {
 TEST_F(ResolverValidationTest, AddressSpace_FunctionVariableWorkgroupClass) {
     auto* var = Var("var", ty.i32(), type::AddressSpace::kWorkgroup);
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
          });
@@ -324,7 +324,7 @@ TEST_F(ResolverValidationTest, AddressSpace_FunctionVariableWorkgroupClass) {
 TEST_F(ResolverValidationTest, AddressSpace_FunctionVariableI32) {
     auto* var = Var("s", ty.i32(), type::AddressSpace::kPrivate);
 
-    Func("func", utils::Empty, ty.void_(),
+    Func("func", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
          });
@@ -769,7 +769,7 @@ TEST_F(ResolverTest, Stmt_Loop_DiscardInContinuing_Direct) {
     //   }
     // }
 
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{Loop(  // loop
              Block(),         //   loop block
              Block(           //   loop continuing block
@@ -922,7 +922,7 @@ TEST_F(ResolverTest, Stmt_ForLoop_DiscardInContinuing_Direct) {
     //   break;
     // }
 
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{For(nullptr, nullptr, Discard(Source{{12, 34}}),  //
                            Block(Break()))});
 

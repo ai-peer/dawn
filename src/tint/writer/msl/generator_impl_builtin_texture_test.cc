@@ -279,7 +279,7 @@ TEST_P(MslGeneratorBuiltinTextureTest, Call) {
     auto* call = Call(Ident(param.function), param.args(this));
     auto* stmt = CallStmt(call);
 
-    Func("main", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("main", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();

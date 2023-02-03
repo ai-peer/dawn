@@ -29,7 +29,7 @@ TEST_F(FunctionTest, Creation) {
     utils::Vector params{Param("var", ty.i32())};
     auto* var = params[0];
 
-    auto* f = Func("func", params, ty.void_(), utils::Empty);
+    auto* f = Func("func", params, ty.void_, utils::Empty);
     EXPECT_EQ(f->symbol, Symbols().Get("func"));
     ASSERT_EQ(f->params.Length(), 1u);
     EXPECT_TRUE(f->return_type->Is<ast::Void>());
@@ -39,7 +39,7 @@ TEST_F(FunctionTest, Creation) {
 TEST_F(FunctionTest, Creation_WithSource) {
     utils::Vector params{Param("var", ty.i32())};
 
-    auto* f = Func(Source{Source::Location{20, 2}}, "func", params, ty.void_(), utils::Empty);
+    auto* f = Func(Source{Source::Location{20, 2}}, "func", params, ty.void_, utils::Empty);
     auto src = f->source;
     EXPECT_EQ(src.range.begin.line, 20u);
     EXPECT_EQ(src.range.begin.column, 2u);
@@ -49,7 +49,7 @@ TEST_F(FunctionTest, Assert_InvalidName) {
     EXPECT_FATAL_FAILURE(
         {
             ProgramBuilder b;
-            b.Func("", utils::Empty, b.ty.void_(), utils::Empty);
+            b.Func("", utils::Empty, b.ty.void_, utils::Empty);
         },
         "internal compiler error");
 }
@@ -71,7 +71,7 @@ TEST_F(FunctionTest, Assert_Null_Param) {
             ParamList params;
             params.Push(b.Param("var", b.ty.i32()));
             params.Push(nullptr);
-            b.Func("f", params, b.ty.void_(), utils::Empty);
+            b.Func("f", params, b.ty.void_, utils::Empty);
         },
         "internal compiler error");
 }
@@ -81,7 +81,7 @@ TEST_F(FunctionTest, Assert_DifferentProgramID_Symbol) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.Func(b2.Sym("func"), utils::Empty, b1.ty.void_(), utils::Empty);
+            b1.Func(b2.Sym("func"), utils::Empty, b1.ty.void_, utils::Empty);
         },
         "internal compiler error");
 }
@@ -95,7 +95,7 @@ TEST_F(FunctionTest, Assert_DifferentProgramID_Param) {
                     utils::Vector{
                         b2.Param("var", b2.ty.i32()),
                     },
-                    b1.ty.void_(), utils::Empty);
+                    b1.ty.void_, utils::Empty);
         },
         "internal compiler error");
 }
@@ -105,7 +105,7 @@ TEST_F(FunctionTest, Assert_DifferentProgramID_Attr) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.Func("func", utils::Empty, b1.ty.void_(), utils::Empty,
+            b1.Func("func", utils::Empty, b1.ty.void_, utils::Empty,
                     utils::Vector{
                         b2.WorkgroupSize(2_i, 4_i, 6_i),
                     });
@@ -118,7 +118,7 @@ TEST_F(FunctionTest, Assert_DifferentProgramID_ReturnAttr) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.Func("func", utils::Empty, b1.ty.void_(), utils::Empty, utils::Empty,
+            b1.Func("func", utils::Empty, b1.ty.void_, utils::Empty, utils::Empty,
                     utils::Vector{
                         b2.WorkgroupSize(2_i, 4_i, 6_i),
                     });

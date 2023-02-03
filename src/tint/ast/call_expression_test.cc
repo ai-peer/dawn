@@ -95,7 +95,7 @@ TEST_F(CallExpressionTest, Assert_Null_Type) {
     EXPECT_FATAL_FAILURE(
         {
             ProgramBuilder b;
-            b.Construct(static_cast<Type*>(nullptr));
+            b.Call(static_cast<Type*>(nullptr));
         },
         "internal compiler error");
 }
