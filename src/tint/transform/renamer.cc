@@ -24,7 +24,7 @@
 #include "src/tint/sem/type_conversion.h"
 #include "src/tint/sem/type_initializer.h"
 #include "src/tint/text/unicode.h"
-#include "src/tint/type/short_name.h"
+#include "src/tint/type/core.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer);
 TINT_INSTANTIATE_TYPEINFO(tint::transform::Renamer::Data);
@@ -1266,7 +1266,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
 
     auto is_type_short_name = [&](const Symbol& symbol) {
         auto name = src->Symbols().NameFor(symbol);
-        if (type::ParseShortName(name) != type::ShortName::kUndefined) {
+        if (type::ParseCore(name) != type::Core::kUndefined) {
             // Identifier *looks* like a builtin short-name, but check the using actually
             // shadowing a short-name with a type alias.
             for (auto* decl : src->AST().TypeDecls()) {
