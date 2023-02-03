@@ -12,46 +12,47 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "dawn/native/vulkan/external_semaphore/SemaphoreServiceNull.h"
 #include "dawn/native/vulkan/DeviceVk.h"
-#include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
 
 namespace dawn::native::vulkan::external_semaphore {
 
-Service::Service(Device* device) : mDevice(device) {
+SemaphoreServiceNull::SemaphoreServiceNull(Device* device) : Service(device) {
     DAWN_UNUSED(mDevice);
     DAWN_UNUSED(mSupported);
 }
 
-Service::~Service() = default;
+SemaphoreServiceNull::~SemaphoreServiceNull() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                           VkPhysicalDevice physicalDevice,
-                           const VulkanFunctions& fn) {
+bool SemaphoreServiceNull::CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                                        VkPhysicalDevice physicalDevice,
+                                        const VulkanFunctions& fn) {
     return false;
 }
 
-bool Service::Supported() {
+bool SemaphoreServiceNull::Supported() {
     return false;
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
+ResultOrError<VkSemaphore> SemaphoreServiceNull::ImportSemaphore(ExternalSemaphoreHandle handle) {
     return DAWN_UNIMPLEMENTED_ERROR("Using null semaphore service to interop inside Vulkan");
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
+ResultOrError<VkSemaphore> SemaphoreServiceNull::CreateExportableSemaphore() {
     return DAWN_UNIMPLEMENTED_ERROR("Using null semaphore service to interop inside Vulkan");
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
+ResultOrError<ExternalSemaphoreHandle> SemaphoreServiceNull::ExportSemaphore(
+    VkSemaphore semaphore) {
     return DAWN_UNIMPLEMENTED_ERROR("Using null semaphore service to interop inside Vulkan");
 }
 
-ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {
+ExternalSemaphoreHandle SemaphoreServiceNull::DuplicateHandle(ExternalSemaphoreHandle handle) {
     return kNullExternalSemaphoreHandle;
 }
 
 // static
-void Service::CloseHandle(ExternalSemaphoreHandle handle) {}
+void SemaphoreServiceNull::CloseHandle(ExternalSemaphoreHandle handle) {}
 
 }  // namespace dawn::native::vulkan::external_semaphore

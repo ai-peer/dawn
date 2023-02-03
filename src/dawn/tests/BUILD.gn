@@ -618,16 +618,17 @@ source_set("white_box_tests_sources") {
     deps += [ "${dawn_vulkan_headers_dir}:vulkan_headers" ]
 
     if (is_chromeos) {
+      defines = [ "OS_CHROMEOS" ]
+    }
+
+    if (is_chromeos || is_linux) {
       sources += [
         "white_box/VulkanImageWrappingTests.cpp",
         "white_box/VulkanImageWrappingTests.h",
         "white_box/VulkanImageWrappingTests_DmaBuf.cpp",
-      ]
-    } else if (is_linux) {
-      sources += [
-        "white_box/VulkanImageWrappingTests.cpp",
-        "white_box/VulkanImageWrappingTests.h",
+        "white_box/VulkanImageWrappingTests_DmaBuf.h",
         "white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
+        "white_box/VulkanImageWrappingTests_OpaqueFD.h",
       ]
     }
 
