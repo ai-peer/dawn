@@ -74,16 +74,18 @@ void CheckIdentifier(const SymbolTable& symbols, const Identifier* got, std::str
     EXPECT_EQ(symbols.NameFor(got->symbol), expected);
 }
 
-/// A testing utility for checking that an Identifier and any optional templated arguments match the
-/// expected values.
+/// A testing utility for checking that an Identifier matches the expected name and template
+/// arguments.
 /// @param symbols the symbol table
-/// @param ident the root identifier, which may be a TemplatedIdentifier
+/// @param ident the identifier
 /// @param expected the expected identifier name and arguments
 template <typename... ARGS>
 void CheckIdentifier(const SymbolTable& symbols,
-                     const TemplatedIdentifier* got,
+                     const Identifier* ident,
                      const TemplatedIdentifierMatcher<ARGS...>& expected) {
-    EXPECT_EQ(symbols.NameFor(got->symbol), expected.name);
+    EXPECT_EQ(symbols.NameFor(ident->symbol), expected.name);
+    ASSERT_TRUE(ident->Is<ast::TemplatedIdentifier>());
+    auto* got = ident->As<ast::TemplatedIdentifier>();
     ASSERT_EQ(got->arguments.Length(), std::tuple_size_v<decltype(expected.args)>);
 
     size_t arg_idx = 0;
@@ -93,12 +95,13 @@ void CheckIdentifier(const SymbolTable& symbols,
         using T = std::decay_t<decltype(expected_arg)>;
         if constexpr (traits::IsStringLike<T>) {
             ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
-            CheckIdentifier(symbols, got_arg->As<IdentifierExpression>()->identifier, expected_arg);
+            ast::CheckIdentifier(symbols, got_arg->As<IdentifierExpression>()->identifier,
+                                 expected_arg);
         } else if constexpr (IsTemplatedIdentifierMatcher<T>::value) {
             ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
             auto* got_ident = got_arg->As<IdentifierExpression>()->identifier;
             ASSERT_TRUE(got_ident->Is<TemplatedIdentifier>());
-            CheckIdentifier(symbols, got_ident->As<TemplatedIdentifier>(), expected_arg);
+            ast::CheckIdentifier(symbols, got_ident->As<TemplatedIdentifier>(), expected_arg);
         } else if constexpr (std::is_same_v<T, bool>) {
             ASSERT_TRUE(got_arg->Is<BoolLiteralExpression>());
             EXPECT_EQ(got_arg->As<BoolLiteralExpression>()->value, expected_arg);

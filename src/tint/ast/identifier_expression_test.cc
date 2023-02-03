@@ -18,11 +18,22 @@
 namespace tint::ast {
 namespace {
 
+using namespace tint::number_suffixes;  // NOLINT
+
 using IdentifierExpressionTest = TestHelper;
 
 TEST_F(IdentifierExpressionTest, Creation) {
     auto* i = Expr("ident");
     EXPECT_EQ(i->identifier->symbol, Symbol(1, ID()));
+}
+
+TEST_F(IdentifierExpressionTest, CreationTemplated) {
+    auto* i = Expr(Ident("ident", true));
+    EXPECT_EQ(i->identifier->symbol, Symbol(1, ID()));
+    auto* tmpl_ident = i->identifier->As<ast::TemplatedIdentifier>();
+    ASSERT_NE(tmpl_ident, nullptr);
+    EXPECT_EQ(tmpl_ident->arguments.Length(), 1_u);
+    EXPECT_TRUE(tmpl_ident->arguments[0]->Is<ast::BoolLiteralExpression>());
 }
 
 TEST_F(IdentifierExpressionTest, Creation_WithSource) {
@@ -31,11 +42,6 @@ TEST_F(IdentifierExpressionTest, Creation_WithSource) {
 
     EXPECT_EQ(i->source.range, (Source::Range{{20, 2}}));
     EXPECT_EQ(i->identifier->source.range, (Source::Range{{20, 2}}));
-}
-
-TEST_F(IdentifierExpressionTest, IsIdentifier) {
-    auto* i = Expr("ident");
-    EXPECT_TRUE(i->Is<IdentifierExpression>());
 }
 
 TEST_F(IdentifierExpressionTest, Assert_InvalidSymbol) {
