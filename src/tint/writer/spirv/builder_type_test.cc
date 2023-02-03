@@ -27,7 +27,7 @@ namespace {
 using BuilderTest_Type = TestHelper;
 
 TEST_F(BuilderTest_Type, GenerateRuntimeArray) {
-    auto* ary = ty.array(ty.i32());
+    auto* ary = Type(Type(ty.array(ty.i32())));
     auto* str = Structure("S", utils::Vector{Member("x", ary)});
     GlobalVar("a", ty.Of(str), type::AddressSpace::kStorage, type::Access::kRead, Binding(0_a),
               Group(0_a));
@@ -44,7 +44,7 @@ TEST_F(BuilderTest_Type, GenerateRuntimeArray) {
 }
 
 TEST_F(BuilderTest_Type, ReturnsGeneratedRuntimeArray) {
-    auto* ary = ty.array(ty.i32());
+    auto* ary = Type(Type(ty.array(ty.i32())));
     auto* str = Structure("S", utils::Vector{Member("x", ary)});
     GlobalVar("a", ty.Of(str), type::AddressSpace::kStorage, type::Access::kRead, Binding(0_a),
               Group(0_a));
@@ -61,7 +61,7 @@ TEST_F(BuilderTest_Type, ReturnsGeneratedRuntimeArray) {
 }
 
 TEST_F(BuilderTest_Type, GenerateArray) {
-    auto* ary = ty.array<i32, 4>();
+    auto* ary = Type(ty.array<i32, 4>());
     GlobalVar("a", ary, type::AddressSpace::kPrivate);
 
     spirv::Builder& b = Build();
@@ -78,7 +78,7 @@ TEST_F(BuilderTest_Type, GenerateArray) {
 }
 
 TEST_F(BuilderTest_Type, GenerateArray_WithStride) {
-    auto* ary = ty.array<i32, 4>(utils::Vector{Stride(16)});
+    auto* ary = Type(ty.array<i32, 4>(utils::Vector{Stride(16)}));
     GlobalVar("a", ary, type::AddressSpace::kPrivate);
 
     spirv::Builder& b = Build();
@@ -98,7 +98,7 @@ TEST_F(BuilderTest_Type, GenerateArray_WithStride) {
 }
 
 TEST_F(BuilderTest_Type, ReturnsGeneratedArray) {
-    auto* ary = ty.array<i32, 4>();
+    auto* ary = Type(ty.array<i32, 4>());
     GlobalVar("a", ary, type::AddressSpace::kPrivate);
 
     spirv::Builder& b = Build();
@@ -860,8 +860,8 @@ TEST_F(BuilderTest_Type, SampledTexture_Generate_CubeArray) {
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_1d) {
-    auto* s = ty.storage_texture(type::TextureDimension::k1d, type::TexelFormat::kR32Float,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k1d, type::TexelFormat::kR32Float,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -875,8 +875,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_1d) {
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_2d) {
-    auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -890,8 +890,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_2d) {
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_2dArray) {
-    auto* s = ty.storage_texture(type::TextureDimension::k2dArray, type::TexelFormat::kR32Float,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k2dArray,
+                                      type::TexelFormat::kR32Float, type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -905,8 +905,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_2dArray) {
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_3d) {
-    auto* s = ty.storage_texture(type::TextureDimension::k3d, type::TexelFormat::kR32Float,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k3d, type::TexelFormat::kR32Float,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -920,8 +920,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_3d) {
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeFloat_Format_r32float) {
-    auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -935,8 +935,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeFloat_Format_r32floa
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeSint_Format_r32sint) {
-    auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Sint,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Sint,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
@@ -950,8 +950,8 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeSint_Format_r32sint)
 }
 
 TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeUint_Format_r32uint) {
-    auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Uint,
-                                 type::Access::kWrite);
+    auto* s = Type(ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Uint,
+                                      type::Access::kWrite));
 
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 

@@ -89,7 +89,7 @@ using uint = unsigned int;
 using MslGeneratorImplTest = TestHelper;
 
 TEST_F(MslGeneratorImplTest, EmitType_Array) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -101,7 +101,7 @@ TEST_F(MslGeneratorImplTest, EmitType_Array) {
 
 TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArray) {
     auto* a = ty.array<bool, 4>();
-    auto* b = ty.array(a, 5_u);
+    auto* b = Type(ty.array(a, 5_u));
     GlobalVar("G", b, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -114,7 +114,7 @@ TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArray) {
 TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArrayOfArray) {
     auto* a = ty.array<bool, 4>();
     auto* b = ty.array(a, 5_u);
-    auto* c = ty.array(b, 6_u);
+    auto* c = Type(ty.array(b, 6_u));
     GlobalVar("G", c, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -125,7 +125,7 @@ TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArrayOfArray) {
 }
 
 TEST_F(MslGeneratorImplTest, EmitType_Array_WithoutName) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -136,7 +136,7 @@ TEST_F(MslGeneratorImplTest, EmitType_Array_WithoutName) {
 }
 
 TEST_F(MslGeneratorImplTest, EmitType_RuntimeArray) {
-    auto* arr = ty.array<bool, 1>();
+    auto* arr = Type(ty.array<bool, 1>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -465,13 +465,13 @@ TEST_F(MslGeneratorImplTest, EmitType_Struct_Layout_ArrayDefaultStride) {
                                      });
 
     // array_x: size(28), align(4)
-    auto* array_x = ty.array<f32, 7>();
+    auto* array_x = Type(ty.array<f32, 7>());
 
     // array_y: size(4096), align(512)
-    auto* array_y = ty.array(ty.Of(inner), 4_u);
+    auto* array_y = Type(ty.array(ty.Of(inner), 4_u));
 
     // array_z: size(4), align(4)
-    auto* array_z = ty.array<f32>();
+    auto* array_z = Type(ty.array<f32>());
 
     auto* s = Structure("S", utils::Vector{
                                  Member("a", ty.i32()),
@@ -557,7 +557,7 @@ TEST_F(MslGeneratorImplTest, EmitType_Struct_Layout_ArrayDefaultStride) {
 
 TEST_F(MslGeneratorImplTest, EmitType_Struct_Layout_ArrayVec3DefaultStride) {
     // array: size(64), align(16)
-    auto* array = ty.array(ty.vec3<f32>(), 4_u);
+    auto* array = Type(ty.array(ty.vec3<f32>(), 4_u));
 
     auto* s = Structure("S", utils::Vector{
                                  Member("a", ty.i32()),
@@ -847,7 +847,8 @@ using MslStorageTexturesTest = TestParamHelper<MslStorageTextureData>;
 TEST_P(MslStorageTexturesTest, Emit) {
     auto params = GetParam();
 
-    auto* s = ty.storage_texture(params.dim, type::TexelFormat::kR32Float, type::Access::kWrite);
+    auto* s =
+        Type(ty.storage_texture(params.dim, type::TexelFormat::kR32Float, type::Access::kWrite));
     GlobalVar("test_var", s, Binding(0_a), Group(0_a));
 
     GeneratorImpl& gen = Build();

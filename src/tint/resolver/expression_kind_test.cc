@@ -155,7 +155,8 @@ TEST_P(ResolverExpressionKindTest, Test) {
 
     switch (GetParam().use) {
         case Use::kAccess:
-            GlobalVar("v", ty("texture_storage_2d", "rgba8unorm", sym), Group(0_u), Binding(0_u));
+            GlobalVar("v", Ident("texture_storage_2d", "rgba8unorm", sym), Group(0_u),
+                      Binding(0_u));
             break;
         case Use::kAddressSpace:
             return;  // TODO(crbug.com/tint/1810)
@@ -169,19 +170,19 @@ TEST_P(ResolverExpressionKindTest, Test) {
             GlobalVar("v", type::AddressSpace::kPrivate, Mul(1_a, Expr(kUseSource, sym)));
             break;
         case Use::kFunctionReturnType:
-            Func("f", utils::Empty, ty(kUseSource, sym), Return(Call(sym)));
+            Func("f", utils::Empty, Ident(kUseSource, sym), Return(Call(sym)));
             break;
         case Use::kMemberType:
-            Structure("s", utils::Vector{Member("m", ty(kUseSource, sym))});
+            Structure("s", utils::Vector{Member("m", Ident(kUseSource, sym))});
             break;
         case Use::kTexelFormat:
-            GlobalVar("v", ty("texture_storage_2d", sym, "write"), Group(0_u), Binding(0_u));
+            GlobalVar("v", Ident("texture_storage_2d", sym, "write"), Group(0_u), Binding(0_u));
             break;
         case Use::kValueExpression:
             GlobalVar("v", type::AddressSpace::kPrivate, Expr(kUseSource, sym));
             break;
         case Use::kVariableType:
-            GlobalVar("v", type::AddressSpace::kPrivate, ty(kUseSource, sym));
+            GlobalVar("v", type::AddressSpace::kPrivate, Ident(kUseSource, sym));
             break;
         case Use::kUnaryOp:
             GlobalVar("v", type::AddressSpace::kPrivate, Negation(Expr(kUseSource, sym)));

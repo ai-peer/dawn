@@ -169,7 +169,7 @@ struct SpirvAtomic::State {
                 [&](const sem::VariableUser* user) {
                     auto* v = user->Variable()->Declaration();
                     if (v->type && atomic_variables.emplace(user->Variable()).second) {
-                        ctx.Replace(v->type, AtomicTypeFor(user->Variable()->Type()));
+                        ctx.Replace(v->type, b.Type(AtomicTypeFor(user->Variable()->Type())));
                     }
                     if (auto* ctor = user->Variable()->Initializer()) {
                         atomic_expressions.Add(ctor);
@@ -193,13 +193,13 @@ struct SpirvAtomic::State {
         }
     }
 
-    const ast::Type* AtomicTypeFor(const type::Type* ty) {
+    const ast::Identifier* AtomicTypeFor(const type::Type* ty) {
         return Switch(
             ty,  //
             [&](const type::I32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
             [&](const type::U32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
-            [&](const sem::Struct* str) { return b.ty(Fork(str->Declaration()).name); },
-            [&](const type::Array* arr) -> const ast::Type* {
+            [&](const sem::Struct* str) { return b.Ident(Fork(str->Declaration()).name); },
+            [&](const type::Array* arr) -> const ast::Identifier* {
                 if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                     return b.ty.array(AtomicTypeFor(arr->ElemType()));
                 }

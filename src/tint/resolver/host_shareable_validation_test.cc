@@ -60,7 +60,7 @@ TEST_F(ResolverHostShareableValidationTest, BoolVectorMember) {
 TEST_F(ResolverHostShareableValidationTest, Aliases) {
     Alias("a1", ty.bool_());
     auto* s =
-        Structure("S", utils::Vector{Member(Source{{56, 78}}, "x", ty(Source{{12, 34}}, "a1"))});
+        Structure("S", utils::Vector{Member(Source{{56, 78}}, "x", Ident(Source{{12, 34}}, "a1"))});
     auto* a2 = Alias("a2", ty.Of(s));
     GlobalVar(Source{{90, 12}}, "g", ty.Of(a2), type::AddressSpace::kStorage, type::Access::kRead,
               Binding(0_a), Group(0_a));
