@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a71a8a2_e91f6384",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 35
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd5c32a9_f5999508",
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fefee837_e397e852",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-01-26T17:55:54Z",
       "side": 1,
       "message": "nit: `SerializeProgram` would be a better name since we\u0027re serializing the `program` into `serializer`. \"Get\" feels like it should return something.",
+      "range": {
+        "startLine": 27,
+        "startChar": 5,
+        "endLine": 27,
+        "endChar": 22
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09808845_c059ef09",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fefee837_e397e852",
       "range": {
         "startLine": 27,
         "startChar": 5,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06ca469_2ce2b70e",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b745aeb_703baaa0",
+      "range": {
+        "startLine": 35,
+        "startChar": 16,
+        "endLine": 35,
+        "endChar": 37
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5daccb8_f7762a37",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-01-26T17:55:54Z",
       "side": 1,
       "message": "leave a TODO(chromium:1374747) to populate the rest of the command based on the program. Otherwise the intermediate code before the rest of your CLs land is surprising",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 81
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2d897e_6cd61945",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5daccb8_f7762a37",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab07a60_44bd3133",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Ah I need ChunkedCommandSerializer for\n\n```\nvoid GetSerializedData(const fuzzing::Program\u0026 program,\n                       dawn::wire::ChunkedCommandSerializer serializer);\n```",
+      "parentUuid": "a1592483_664eb05a",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b40ea7fa_7240c85a",
@@ -167,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "616d5cb4_0408448c",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b40ea7fa_7240c85a",
+      "range": {
+        "startLine": 26,
+        "startChar": 29,
+        "endLine": 26,
+        "endChar": 52
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af7193ae_97b9d89f",
@@ -180,6 +318,30 @@
       "writtenOn": "2023-01-26T17:55:54Z",
       "side": 1,
       "message": "here and in other files, it\u0027s 2023 now",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea3e2f9_7d1cf045",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 35
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "af7193ae_97b9d89f",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -215,6 +377,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f589cd0c_cc726213",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 35
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "I put this in because I\u0027m using a SwiftShader backend exclusively for now, which is not used on android, fuchsia, or ash I believe.",
+      "parentUuid": "f0ca31ee_ab00f359",
+      "range": {
+        "startLine": 113,
+        "startChar": 27,
+        "endLine": 113,
+        "endChar": 73
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56b336fe_fa2c3245",
         "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
         "patchSetId": 35
@@ -226,6 +412,30 @@
       "writtenOn": "2023-01-27T12:19:00Z",
       "side": 1,
       "message": "nit: Why does this instance need to be special cased in a separate file? Also maybe it could be a constexpr instead of a define?",
+      "range": {
+        "startLine": 15,
+        "startChar": 8,
+        "endLine": 15,
+        "endChar": 26
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2debf8e_0c6ebe53",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "We need it in the generated C++ code for commands like requestAdapter(). In the byte-level DawnWireServerFuzzer.cpp we just hardcode it to `1` [1]\n\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/fuzzers/DawnWireServerFuzzer.cpp;l\u003d133;drc\u003d81b97656bcab6c3542dcd739e4edce791e11c181",
+      "parentUuid": "56b336fe_fa2c3245",
       "range": {
         "startLine": 15,
         "startChar": 8,
@@ -261,6 +471,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aae40d97_d7001db9",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzer.cpp",
+        "patchSetId": 35
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Completely agreed here! I think this might be one of the first things I introduce after we land these.",
+      "parentUuid": "81eabb05_37b55152",
+      "range": {
+        "startLine": 125,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 28
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb813293_d4381156",
         "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
         "patchSetId": 35
@@ -272,6 +506,30 @@
       "writtenOn": "2023-01-26T17:55:54Z",
       "side": 1,
       "message": "year",
+      "range": {
+        "startLine": 3,
+        "startChar": 19,
+        "endLine": 3,
+        "endChar": 23
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e292bb5e_5e1c6047",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 35
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb813293_d4381156",
       "range": {
         "startLine": 3,
         "startChar": 19,

@@ -578,6 +578,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f88c3ef_e6c38189",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 26
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-03T21:11:40Z",
+      "side": 1,
+      "message": "Makes sense, and sounds good! I\u0027ve added the gn arg for the time being and we can follow-up on this.",
+      "parentUuid": "1f312c8b_21dfa77c",
+      "revId": "d554ee56117da22fc266a2dc7646817be30546bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "500455fc_fda2c4c7",
