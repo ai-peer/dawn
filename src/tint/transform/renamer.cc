@@ -1292,20 +1292,18 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
             [&](const ast::DiagnosticDirective* diagnostic) {
                 preserved_identifiers.Add(diagnostic->control.rule_name);
             },
-            [&](const ast::TypeName* ty) { preserve_if_builtin_type(ty->name); },
+            [&](const ast::Type* ty) { preserve_if_builtin_type(ty->name); },
             [&](const ast::IdentifierExpression* expr) {
                 if (src->Sem().Get<sem::BuiltinEnumExpressionBase>(expr)) {
                     preserved_identifiers.Add(expr->identifier);
                 }
             },
             [&](const ast::CallExpression* call) {
-                if (auto* ident = call->target.name) {
-                    Switch(
-                        src->Sem().Get(call)->UnwrapMaterialize()->As<sem::Call>()->Target(),
-                        [&](const sem::Builtin*) { preserved_identifiers.Add(ident); },
-                        [&](const sem::TypeConversion*) { preserve_if_builtin_type(ident); },
-                        [&](const sem::TypeInitializer*) { preserve_if_builtin_type(ident); });
-                }
+                Switch(
+                    src->Sem().Get(call)->UnwrapMaterialize()->As<sem::Call>()->Target(),
+                    [&](const sem::Builtin*) { preserved_identifiers.Add(call->target); },
+                    [&](const sem::TypeConversion*) { preserve_if_builtin_type(call->target); },
+                    [&](const sem::TypeInitializer*) { preserve_if_builtin_type(call->target); });
             });
     }
 
@@ -1369,7 +1367,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
         if (auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>()) {
             auto args = ctx.Clone(tmpl_ident->arguments);
             return ctx.dst->create<ast::TemplatedIdentifier>(ctx.Clone(ident->source), replacement,
-                                                             std::move(args));
+                                                             std::move(args), utils::Empty);
         }
         return ctx.dst->create<ast::Identifier>(ctx.Clone(ident->source), replacement);
     });
