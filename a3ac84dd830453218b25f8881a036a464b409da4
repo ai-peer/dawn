@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c9b748_59780aaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Thanks for reviewing! Most comments are done, please take a look.",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f07825fb_694121c8",
@@ -37,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "dfc14256_529d3ad6",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f07825fb_694121c8",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1d4bffde_745ebf77",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 13
@@ -48,6 +83,23 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "The point is that this function disappears eventually right?",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40aeb1da_b4e2fbec",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "[2] Using `IsDisabled` to check `DisallowUnsafeAPIs` is explicitly disabled.",
       "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +129,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04e8c400_389a5023",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Changed `MakeDeviceTogglesImpl` into\n```\nvirtual void SetupDeviceTogglesStateImpl(TogglesState* deviceToggles) const \u003d 0;\n```",
+      "parentUuid": "37c7c93a_d098b11d",
+      "range": {
+        "startLine": 231,
+        "startChar": 33,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebaf5625_d46924ae",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 13
@@ -94,6 +170,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f7b527b8_563b8ceb",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "I think there is no such case since `bitset` is initialized to `false` and all (well formed) Set methods always set the `mTogglesSet` if setting `mEnabledToggles`.\nBut that is not the case for disabled toggles I suppose.",
+      "parentUuid": "ebaf5625_d46924ae",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26782f51_3564efef",
         "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
         "patchSetId": 13
@@ -105,6 +199,30 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "nit: these can be moved next to the corresponding blocks of code below.",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bc8bad_2298c3e5",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26782f51_3564efef",
       "range": {
         "startLine": 455,
         "startChar": 0,

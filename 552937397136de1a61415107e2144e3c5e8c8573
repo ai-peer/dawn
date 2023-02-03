@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "317d2f7a_2acdf3fd",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "306f3c0e_9bb2dc25",
+      "range": {
+        "startLine": 61,
+        "startChar": 27,
+        "endLine": 62,
+        "endChar": 33
+      },
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93699c60_64995396",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "nit: `using Foo \u003d std::bitset` is the modern way of doing this.",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5feceb_06ebecbb",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93699c60_64995396",
       "revId": "552937397136de1a61415107e2144e3c5e8c8573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a70b0adf_a113711b",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Change it into a simple wrapper of `TogglesBitSet`:\n```\nstruct TogglesSet : TogglesBitSet {\n    void Set(Toggle toggle, bool enabled);\n    bool Has(Toggle toggle) const;\n};\n```\nI found it convenient to use these helper function `Set` and `Has` instead of directly using the `std::bitset` api. And this wrapper can trivially cast to `TogglesBitSet`.",
+      "parentUuid": "a026a8b1_3b885b49",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f64548bb_8c9d1a81",
         "filename": "src/dawn/native/Toggles.h",
         "patchSetId": 12
@@ -71,6 +131,24 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "This class seems very redundant with TogglesState and is only used very temporarily in AdapterBase. Can AdapterBase directly use TogglesState so that RequiredToggleSet disappears?",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "349e7898_c25c569b",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f64548bb_8c9d1a81",
       "revId": "552937397136de1a61415107e2144e3c5e8c8573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "441a692b_8a284551",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "066660fe_cafbaf31",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b0b4e5b_e3938fb8",
@@ -109,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0db51283_264edca0",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b0b4e5b_e3938fb8",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3afccd36_d895997c",
@@ -122,6 +236,24 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "nit: unused",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42dfdf0f_96f77f7a",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3afccd36_d895997c",
       "revId": "552937397136de1a61415107e2144e3c5e8c8573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4161e613_0457c027",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "I am thinking of distinguishing between \"Set to false or default to false\" and \"Not set and no default state\". It is used in [2], to check that `DisallowUnsafeAPIs` is explicitly disabled.\nBut since `DisallowUnsafeAPIs` does default to false, I can remove it.",
+      "parentUuid": "8374c5a8_f5bd47c7",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7bf66cd_d0978076",
         "filename": "src/dawn/native/Toggles.h",
         "patchSetId": 12
@@ -156,6 +306,24 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "nit: unused.",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f29635c_d2486d71",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7bf66cd_d0978076",
       "revId": "552937397136de1a61415107e2144e3c5e8c8573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +345,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b579753f_f37b329c",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf8c0439_9fc2b345",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0689216f_52de134b",
@@ -190,6 +376,24 @@
       "writtenOn": "2023-02-03T12:11:09Z",
       "side": 1,
       "message": "nit: `mStage`, `mTogglesSet` `mEnabledToggles` `mForcedToggles` since the variables contains things. IsSomething feels like a function since it contains a verb in the present tense.",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8fa3a82_79a37762",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0689216f_52de134b",
       "revId": "552937397136de1a61415107e2144e3c5e8c8573",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

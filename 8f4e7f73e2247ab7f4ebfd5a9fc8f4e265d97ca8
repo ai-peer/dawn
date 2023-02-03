@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a73a12d_7cafe621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T16:49:42Z",
+      "side": 1,
+      "message": "Removed the `RequiredTogglesSet`. Now `TogglesState` is directly created from `DawnTogglesDescriptor`.\nSo the whole design changed to (for device toggles state, after instance and adapter toggles state implemented):\n```\n(Maybe combined stage) DawnTogglesDescriptor\n        |\n        | TogglesState::CreateFromTogglesDescriptor\n        |   Filter the device stage toggles from DawnTogglesDescriptor\n        ↓\n(Device stage) TogglesState (Only holding user-required device toggles)\n        |\n        | (TODO) Inherit from adapter toggles state\n        ↓\n(Device stage) TogglesState\n    (Holding user-required device toggles and inherited adapter toggles)\n        |\n        | Set default toggles for all backend\n        | Adapter::SetupDeviceTogglesStateImpl\n        |   Set backend-specific forced and default toggles\n        ↓\n(Device stage) TogglesState (Complete device toggles state)\n```",
+      "parentUuid": "5e5ccd30_94e01ae8",
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95676913_9d892be0",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 9
