@@ -930,7 +930,7 @@ MaybeError Texture::ExportExternalTexture(VkImageLayout desiredLayout,
 
 Texture::~Texture() {
     if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
-        external_semaphore::Service::CloseHandle(mExternalSemaphoreHandle);
+        external_semaphore::ServiceManager::CloseHandle(mExternalSemaphoreHandle);
     }
     mExternalSemaphoreHandle = kNullExternalSemaphoreHandle;
 }
@@ -1344,7 +1344,7 @@ void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* recor
 
 void Texture::UpdateExternalSemaphoreHandle(ExternalSemaphoreHandle handle) {
     if (mExternalSemaphoreHandle != kNullExternalSemaphoreHandle) {
-        external_semaphore::Service::CloseHandle(mExternalSemaphoreHandle);
+        external_semaphore::ServiceManager::CloseHandle(mExternalSemaphoreHandle);
     }
     mExternalSemaphoreHandle = handle;
 }
