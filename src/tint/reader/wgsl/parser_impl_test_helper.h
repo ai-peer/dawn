@@ -22,6 +22,7 @@
 
 #include "gtest/gtest.h"
 #include "src/tint/reader/wgsl/parser_impl.h"
+#include "src/tint/traits.h"
 
 namespace tint::reader::wgsl {
 

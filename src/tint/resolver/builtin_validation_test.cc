@@ -159,7 +159,7 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAliasUsedAsFunction) {
 
 TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsAliasUsedAsType) {
     auto* mix = Alias(Source{{12, 34}}, "mix", ty.i32());
-    auto* use = Call(ty("mix"));
+    auto* use = Call("mix");
     WrapInFunction(use);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -183,7 +183,7 @@ TEST_F(ResolverBuiltinValidationTest, BuiltinRedeclaredAsStructUsedAsType) {
     auto* mix = Structure("mix", utils::Vector{
                                      Member("m", ty.i32()),
                                  });
-    auto* use = Call(ty("mix"));
+    auto* use = Call("mix");
     WrapInFunction(use);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
@@ -629,8 +629,8 @@ TEST_F(ResolverBuiltinValidationTest, WorkgroupUniformLoad_AtomicInStruct) {
     //   workgroupUniformLoad(&v);
     // }
     Structure("Inner", utils::Vector{Member("a", ty.array(ty.atomic<i32>(), 4_a))});
-    Structure("S", utils::Vector{Member("i", ty("Inner"))});
-    GlobalVar(Source{{12, 34}}, "v", ty.array(ty("S"), 4_a), type::AddressSpace::kWorkgroup);
+    Structure("S", utils::Vector{Member("i", Ident("Inner"))});
+    GlobalVar(Source{{12, 34}}, "v", ty.array(Ident("S"), 4_a), type::AddressSpace::kWorkgroup);
     WrapInFunction(CallStmt(Call("workgroupUniformLoad", AddressOf("v"))));
 
     EXPECT_FALSE(r()->Resolve());
