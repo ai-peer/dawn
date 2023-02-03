@@ -177,7 +177,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program* src, const DataMap&,
                         //   }
                         //   let y = x + tmp;
                         auto result = b.Sym();
-                        const ast::Type* result_ty = nullptr;
+                        const ast::Identifier* result_ty = nullptr;
                         const ast::Statement* masked_call = nullptr;
                         if (builtin->Type() == sem::BuiltinType::kAtomicCompareExchangeWeak) {
                             // Special case for atomicCompareExchangeWeak as we cannot name its
@@ -187,7 +187,7 @@ Transform::ApplyResult DemoteToHelper::Apply(const Program* src, const DataMap&,
                             // Declare a struct to hold the result values.
                             auto* result_struct = sem_call->Type()->As<sem::Struct>();
                             auto* atomic_ty = result_struct->Members()[0]->Type();
-                            result_ty = b.ty(
+                            result_ty = b.Ident(
                                 utils::GetOrCreate(atomic_cmpxchg_result_types, atomic_ty, [&]() {
                                     auto name = b.Sym();
                                     b.Structure(
