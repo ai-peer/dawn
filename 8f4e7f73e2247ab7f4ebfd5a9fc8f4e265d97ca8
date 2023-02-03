@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5e5ccd30_94e01ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T06:15:12Z",
+      "side": 1,
+      "message": "An actual usage for `RequiredTogglesSet` as an entity, although is not existed now, is for distinguishing and picking adapter of same backend but created with different adapter toggles. After implemented adapter toggles, `Instance.mDevices` may held adapters of the same backend and other properties, but required with different adapter toggles set. The adapters can store the `RequiredTogglesSet` in it, and instance and other users can compare if a given `RequiredTogglesSet` match the one stored in the adapter, and then reuse it in e.g. requiring adapter.",
+      "parentUuid": "b160e2a6_b5875db4",
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95676913_9d892be0",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 9
