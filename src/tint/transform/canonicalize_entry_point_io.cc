@@ -130,7 +130,7 @@ struct CanonicalizeEntryPointIO::State {
         /// The name of the output value.
         std::string name;
         /// The type of the output value.
-        const ast::Type* type;
+        ast::Type type;
         /// The shader IO attributes.
         utils::Vector<const ast::Attribute*, 2> attributes;
         /// The value itself.
@@ -210,7 +210,7 @@ struct CanonicalizeEntryPointIO::State {
                                     const type::Type* type,
                                     std::optional<uint32_t> location,
                                     utils::Vector<const ast::Attribute*, 8> attributes) {
-        auto* ast_type = CreateASTTypeFor(ctx, type);
+        auto ast_type = CreateASTTypeFor(ctx, type);
         if (cfg.shader_style == ShaderStyle::kSpirv || cfg.shader_style == ShaderStyle::kGlsl) {
             // Vulkan requires that integer user-defined fragment inputs are always decorated with
             // `Flat`. See:
@@ -505,7 +505,8 @@ struct CanonicalizeEntryPointIO::State {
         ctx.InsertBefore(ctx.src->AST().GlobalDeclarations(), func_ast, out_struct);
 
         // Create the output struct object, assign its members, and return it.
-        auto* result_object = ctx.dst->Var(wrapper_result, ctx.dst->ty(out_struct->name->symbol));
+        auto* result_object =
+            ctx.dst->Var(wrapper_result, ctx.dst->Ident(out_struct->name->symbol));
         wrapper_body.Push(ctx.dst->Decl(result_object));
         for (auto* assignment : assignments) {
             wrapper_body.Push(assignment);
@@ -524,7 +525,7 @@ struct CanonicalizeEntryPointIO::State {
 
             // Create the global variable and assign it the output value.
             auto name = ctx.dst->Symbols().New(outval.name);
-            auto* type = outval.type;
+            ast::Type type = outval.type;
             const ast::Expression* lhs = ctx.dst->Expr(name);
             if (HasSampleMask(attributes)) {
                 // Vulkan requires the type of a SampleMask builtin to be an array.
@@ -606,7 +607,7 @@ struct CanonicalizeEntryPointIO::State {
         auto* call_inner = CallInnerFunction();
 
         // Process the return type, and start building the wrapper function body.
-        std::function<const ast::Type*()> wrapper_ret_type = [&] { return ctx.dst->ty.void_(); };
+        std::function<ast::Type()> wrapper_ret_type = [&] { return ctx.dst->ty.void_(); };
         if (func_sem->ReturnType()->Is<type::Void>()) {
             // The function call is just a statement with no result.
             wrapper_body.Push(ctx.dst->CallStmt(call_inner));
@@ -665,7 +666,7 @@ struct CanonicalizeEntryPointIO::State {
         }
 
         auto* wrapper_func = ctx.dst->create<ast::Function>(
-            ctx.dst->Ident(name), wrapper_ep_parameters, wrapper_ret_type(),
+            ctx.dst->Ident(name), wrapper_ep_parameters, ctx.dst->ty(wrapper_ret_type()),
             ctx.dst->Block(wrapper_body), ctx.Clone(func_ast->attributes), utils::Empty);
         ctx.InsertAfter(ctx.src->AST().GlobalDeclarations(), func_ast, wrapper_func);
     }
@@ -727,7 +728,7 @@ struct CanonicalizeEntryPointIO::State {
     /// WGSL expects
     const ast::Expression* FromGLSLBuiltin(ast::BuiltinValue builtin,
                                            const ast::Expression* value,
-                                           const ast::Type*& ast_type) {
+                                           ast::Type& ast_type) {
         switch (builtin) {
             case ast::BuiltinValue::kVertexIndex:
             case ast::BuiltinValue::kInstanceIndex:

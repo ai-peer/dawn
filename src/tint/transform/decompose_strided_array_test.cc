@@ -586,7 +586,7 @@ TEST_F(DecomposeStridedArrayTest, PrivateAliasedStridedArray) {
                 b.Group(0_a), b.Binding(0_a));
     b.Func("f", utils::Empty, b.ty.void_(),
            utils::Vector{
-               b.Decl(b.Let("a", b.ty("ARR"), b.MemberAccessor("s", "a"))),
+               b.Decl(b.Let("a", b.Ident("ARR"), b.MemberAccessor("s", "a"))),
                b.Decl(b.Let("b", b.ty.f32(), b.IndexAccessor(b.MemberAccessor("s", "a"), 1_i))),
                b.Assign(b.MemberAccessor("s", "a"), b.Call("ARR")),
                b.Assign(b.MemberAccessor("s", "a"), b.Call("ARR", 1_f, 2_f, 3_f, 4_f)),
@@ -662,7 +662,7 @@ TEST_F(DecomposeStridedArrayTest, PrivateNestedStridedArray) {
                 b.Group(0_a), b.Binding(0_a));
     b.Func("f", utils::Empty, b.ty.void_(),
            utils::Vector{
-               b.Decl(b.Let("a", b.ty("ARR_B"), b.MemberAccessor("s", "a"))),
+               b.Decl(b.Let("a", b.Ident("ARR_B"), b.MemberAccessor("s", "a"))),
                b.Decl(b.Let("b",
                             b.ty.array(b.ty("ARR_A"), 3_u,
                                        utils::Vector{
@@ -671,7 +671,7 @@ TEST_F(DecomposeStridedArrayTest, PrivateNestedStridedArray) {
                             b.IndexAccessor(                 //
                                 b.MemberAccessor("s", "a"),  //
                                 3_i))),
-               b.Decl(b.Let("c", b.ty("ARR_A"),
+               b.Decl(b.Let("c", b.Ident("ARR_A"),
                             b.IndexAccessor(                     //
                                 b.IndexAccessor(                 //
                                     b.MemberAccessor("s", "a"),  //
