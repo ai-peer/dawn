@@ -5307,7 +5307,7 @@ TEST_F(UniformityAnalysisTest, MaximumNumberOfPointerParameters) {
             foo_body.Push(b.Assign(b.Deref("p" + std::to_string(i)), "rhs"));
         }
     }
-    b.Func("foo", std::move(params), ty.void_(), foo_body);
+    b.Func("foo", std::move(params), ty.void_, foo_body);
 
     // var<private> non_uniform_global : i32;
     // fn main() {
@@ -5332,7 +5332,7 @@ TEST_F(UniformityAnalysisTest, MaximumNumberOfPointerParameters) {
     main_body.Push(b.Assign("v0", "non_uniform_global"));
     main_body.Push(b.CallStmt(b.create<ast::CallExpression>(b.Ident("foo"), args)));
     main_body.Push(b.If(b.Equal("v254", 0_i), b.Block(b.CallStmt(b.Call("workgroupBarrier")))));
-    b.Func("main", utils::Empty, ty.void_(), main_body);
+    b.Func("main", utils::Empty, ty.void_, main_body);
 
     RunTest(std::move(b), false);
     EXPECT_EQ(error_,
@@ -7856,7 +7856,7 @@ TEST_F(UniformityAnalysisTest, StressGraphTraversalDepth) {
         v_last = v;
     }
     foo_body.Push(b.If(b.Equal(v_last, 0_i), b.Block(b.CallStmt(b.Call("workgroupBarrier")))));
-    b.Func("foo", utils::Empty, ty.void_(), foo_body);
+    b.Func("foo", utils::Empty, ty.void_, foo_body);
 
     RunTest(std::move(b), false);
     EXPECT_EQ(error_,

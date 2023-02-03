@@ -574,7 +574,7 @@ struct DirectVariableAccess::State {
                      ->Type()
                      ->UnwrapRef()
                      ->IsAnyOf<type::U32, type::AbstractInt>()) {
-                expr = b.Construct(b.ty.u32(), expr);
+                expr = b.Call(b.ty.u32(), expr);
             }
         }
 
@@ -937,7 +937,7 @@ struct DirectVariableAccess::State {
                         dyn_idx_args.Push(BuildDynamicIndex(dyn_idx, /* cast_to_u32 */ true));
                     }
                     // Construct the dynamic index array, and push as an argument.
-                    new_args.Push(b.Construct(dyn_idx_arr_ty, std::move(dyn_idx_args)));
+                    new_args.Push(b.Call(dyn_idx_arr_ty, std::move(dyn_idx_args)));
                 }
             }
 
@@ -1064,7 +1064,7 @@ struct DirectVariableAccess::State {
 
     /// @returns the type alias used to hold the dynamic indices for @p shape, declaring a new alias
     /// if this is the first call for the given shape.
-    const ast::TypeName* DynamicIndexArrayType(const AccessShape& shape) {
+    const ast::Identifier* DynamicIndexArrayType(const AccessShape& shape) {
         auto name = dynamic_index_array_aliases.GetOrCreate(shape, [&] {
             // Count the number of dynamic indices
             uint32_t num_dyn_indices = shape.NumDynamicIndices();
@@ -1075,7 +1075,7 @@ struct DirectVariableAccess::State {
             b.Alias(symbol, b.ty.array(b.ty.u32(), u32(num_dyn_indices)));
             return symbol;
         });
-        return name.IsValid() ? b.ty(name) : nullptr;
+        return name.IsValid() ? b.Ident(name) : nullptr;
     }
 
     /// @returns a name describing the given shape

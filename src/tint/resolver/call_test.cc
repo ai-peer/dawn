@@ -104,8 +104,8 @@ TEST_F(ResolverCallTest, Valid) {
 
 TEST_F(ResolverCallTest, OutOfOrder) {
     auto* call_expr = Call("b");
-    Func("a", utils::Empty, ty.void_(), utils::Vector{CallStmt(call_expr)});
-    auto* b = Func("b", utils::Empty, ty.void_(), utils::Empty);
+    Func("a", utils::Empty, ty.void_, utils::Vector{CallStmt(call_expr)});
+    auto* b = Func("b", utils::Empty, ty.void_, utils::Empty);
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 

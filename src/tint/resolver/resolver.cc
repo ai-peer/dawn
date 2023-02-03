@@ -21,14 +21,12 @@
 #include <utility>
 
 #include "src/tint/ast/alias.h"
-#include "src/tint/ast/array.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/attribute.h"
 #include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/continue_statement.h"
-#include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/for_loop_statement.h"
@@ -37,18 +35,11 @@
 #include "src/tint/ast/internal_attribute.h"
 #include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/loop_statement.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
-#include "src/tint/ast/sampled_texture.h"
-#include "src/tint/ast/sampler.h"
-#include "src/tint/ast/storage_texture.h"
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/traverse_expressions.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/vector.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
@@ -67,6 +58,7 @@
 #include "src/tint/sem/struct.h"
 #include "src/tint/sem/switch_statement.h"
 #include "src/tint/sem/type_conversion.h"
+#include "src/tint/sem/type_expression.h"
 #include "src/tint/sem/type_initializer.h"
 #include "src/tint/sem/variable.h"
 #include "src/tint/sem/while_statement.h"
@@ -215,9 +207,18 @@ bool Resolver::ResolveInternal() {
 
 type::Type* Resolver::Type(const ast::Type* ty) {
     Mark(ty);
+
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Type()";
+    return nullptr;
+
+    //    auto* resolved = Identifier(ty->name);
+    //    if (!resolved) {
+    //        return nullptr;
+    //    }
+
+#if 0
     auto* s = Switch(
         ty,  //
-        [&](const ast::Void*) { return builder_->create<type::Void>(); },
         [&](const ast::Vector* t) -> type::Vector* {
             if (!t->type) {
                 AddError("missing vector element type", t->source.End());
@@ -227,22 +228,6 @@ type::Type* Resolver::Type(const ast::Type* ty) {
                 if (auto* vector = builder_->create<type::Vector>(el, t->width)) {
                     if (validator_.Vector(vector, t->source)) {
                         return vector;
-                    }
-                }
-            }
-            return nullptr;
-        },
-        [&](const ast::Matrix* t) -> type::Matrix* {
-            if (!t->type) {
-                AddError("missing matrix element type", t->source.End());
-                return nullptr;
-            }
-            if (auto* el = Type(t->type)) {
-                if (auto* column_type = builder_->create<type::Vector>(el, t->rows)) {
-                    if (auto* matrix = builder_->create<type::Matrix>(column_type, t->columns)) {
-                        if (validator_.Matrix(matrix, t->source)) {
-                            return matrix;
-                        }
                     }
                 }
             }
@@ -315,45 +300,6 @@ type::Type* Resolver::Type(const ast::Type* ty) {
             return nullptr;
         },
         [&](const ast::ExternalTexture*) { return builder_->create<type::ExternalTexture>(); },
-        [&](const ast::TypeName* t) -> type::Type* {
-            Mark(t->name);
-
-            if (t->name->Is<ast::TemplatedIdentifier>()) {
-                TINT_UNREACHABLE(Resolver, builder_->Diagnostics()) << "TODO(crbug.com/tint/1810)";
-            }
-
-            auto* resolved = sem_.ResolvedSymbol(t);
-            if (resolved == nullptr) {
-                if (IsBuiltin(t->name->symbol)) {
-                    auto name = builder_->Symbols().NameFor(t->name->symbol);
-                    AddError("cannot use builtin '" + name + "' as type", ty->source);
-                    return nullptr;
-                }
-                return BuiltinType(t->name->symbol, t->source);
-            }
-            return Switch(
-                resolved,  //
-                [&](type::Type* type) { return type; },
-                [&](sem::Variable* var) {
-                    auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
-                    AddError("cannot use variable '" + name + "' as type", ty->source);
-                    AddNote("'" + name + "' declared here", var->Declaration()->source);
-                    return nullptr;
-                },
-                [&](sem::Function* func) {
-                    auto name = builder_->Symbols().NameFor(func->Declaration()->symbol);
-                    AddError("cannot use function '" + name + "' as type", ty->source);
-                    AddNote("'" + name + "' declared here", func->Declaration()->source);
-                    return nullptr;
-                },
-                [&](Default) -> type::Type* {
-                    TINT_UNREACHABLE(Resolver, diagnostics_)
-                        << "Unhandled resolved type '"
-                        << (resolved ? resolved->TypeInfo().name : "<null>")
-                        << "' resolved from ast::Type '" << ty->TypeInfo().name << "'";
-                    return nullptr;
-                });
-        },
         [&](Default) {
             TINT_UNREACHABLE(Resolver, diagnostics_)
                 << "Unhandled type: '" << ty->TypeInfo().name << "'";
@@ -364,6 +310,47 @@ type::Type* Resolver::Type(const ast::Type* ty) {
         builder_->Sem().Add(ty, s);
     }
     return s;
+#endif
+}
+
+sem::Node* Resolver::Identifier(const ast::Identifier*) {
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Identifier()";
+    return nullptr;
+#if 0
+    Mark(ident);
+
+    if (ident->Is<ast::TemplatedIdentifier>()) {
+        TINT_UNREACHABLE(Resolver, builder_->Diagnostics()) << "TODO(crbug.com/tint/1810)";
+    }
+
+    auto* resolved = sem_.ResolvedSymbol(ident);
+    auto* sem = Switch(
+        resolved,                                   //
+        [&](type::Type* type) { return type; },     //
+        [&](sem::Variable* var) { return var; },    //
+        [&](sem::Function* func) { return func; },  //
+        [&](Default) -> type::Type* {
+            if (IsBuiltin(ident->symbol)) {
+                auto name = builder_->Symbols().NameFor(ident->symbol);
+                AddError("cannot use builtin '" + name + "' as type", ident->source);
+                return nullptr;
+            }
+
+            return CoreType(ident);
+
+            // TINT_UNREACHABLE(Resolver, diagnostics_)
+            //     << "Unhandled resolved type '" << (resolved ? resolved->TypeInfo().name :
+            //     "<null>")
+            //     << "' resolved from ast::Type '" << ty->TypeInfo().name << "'";
+            // return nullptr;
+        });
+
+    if (sem != nullptr) {
+        builder_->Sem().Add(ident, sem);
+    }
+
+     return sem;
+#endif
 }
 
 sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
@@ -2180,6 +2167,8 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // ast::CallExpression has a target which is either an ast::Type or an
     // ast::IdentifierExpression
     sem::Call* call = nullptr;
+
+#if 0
     if (expr->target.type) {
         // ast::CallExpression has an ast::Type as the target.
         // This call is either a type initializer or type conversion.
@@ -2196,23 +2185,6 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                     }
                 }
                 if (auto* c = ct_init_or_conv(VectorInitConvIntrinsic(v->width), template_arg)) {
-                    builder_->Sem().Add(expr->target.type, c->Target()->ReturnType());
-                    return c;
-                }
-                return nullptr;
-            },
-            [&](const ast::Matrix* m) -> sem::Call* {
-                Mark(m);
-                // matrix element type must be inferred if it was not specified.
-                type::Type* template_arg = nullptr;
-                if (m->type) {
-                    template_arg = Type(m->type);
-                    if (!template_arg) {
-                        return nullptr;
-                    }
-                }
-                if (auto* c = ct_init_or_conv(MatrixInitConvIntrinsic(m->columns, m->rows),
-                                              template_arg)) {
                     builder_->Sem().Add(expr->target.type, c->Target()->ReturnType());
                     return c;
                 }
@@ -2284,46 +2256,43 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             [&](Default) {
                 TINT_ICE(Resolver, diagnostics_)
                     << expr->source << " unhandled CallExpression target:\n"
-                    << "type: "
-                    << (expr->target.type ? expr->target.type->TypeInfo().name : "<null>");
+                    << "type: " << (expr->target ? expr->target->TypeInfo().name : "<null>");
                 return nullptr;
             });
     } else {
-        // ast::CallExpression has an ast::IdentifierExpression as the target.
-        // This call is either a function call, builtin call, type initializer or type
-        // conversion.
-        auto* ident = expr->target.name;
-        Mark(ident);
-        if (auto* resolved = sem_.ResolvedSymbol<type::Type>(ident)) {
-            // A type initializer or conversions.
-            // Note: Unlike the code path where we're resolving the call target from an
-            // ast::Type, all types must already have the element type explicitly specified,
-            // so there's no need to infer element types.
-            return ty_init_or_conv(resolved);
-        }
+#endif
 
-        auto* resolved = sem_.ResolvedSymbol<sem::Node>(ident);
-        call = Switch<sem::Call*>(
-            resolved,  //
-            [&](sem::Function* func) { return FunctionCall(expr, func, args, arg_behaviors); },
-            [&](sem::Variable* var) {
-                auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
-                AddError("cannot call variable '" + name + "'", ident->source);
-                AddNote("'" + name + "' declared here", var->Declaration()->source);
-                return nullptr;
-            },
-            [&](Default) -> sem::Call* {
-                auto name = builder_->Symbols().NameFor(ident->symbol);
-                if (auto builtin_type = sem::ParseBuiltinType(name);
-                    builtin_type != sem::BuiltinType::kNone) {
-                    return BuiltinCall(expr, builtin_type, args);
-                }
-                if (auto* alias = BuiltinType(ident->symbol, ident->source)) {
-                    return ty_init_or_conv(alias);
-                }
-                return nullptr;
-            });
+    auto* ident = expr->target;
+    Mark(ident);
+    if (auto* resolved = sem_.ResolvedSymbol<type::Type>(ident)) {
+        // A type initializer or conversions.
+        // Note: Unlike the code path where we're resolving the call target from an
+        // ast::Type, all types must already have the element type explicitly specified,
+        // so there's no need to infer element types.
+        return ty_init_or_conv(resolved);
     }
+
+    auto* resolved = sem_.ResolvedSymbol<sem::Node>(ident);
+    call = Switch<sem::Call*>(
+        resolved,  //
+        [&](sem::Function* func) { return FunctionCall(expr, func, args, arg_behaviors); },
+        [&](sem::Variable* var) {
+            auto name = builder_->Symbols().NameFor(var->Declaration()->symbol);
+            AddError("cannot call variable '" + name + "'", ident->source);
+            AddNote("'" + name + "' declared here", var->Declaration()->source);
+            return nullptr;
+        },
+        [&](Default) -> sem::Call* {
+            auto name = builder_->Symbols().NameFor(ident->symbol);
+            if (auto builtin_type = sem::ParseBuiltinType(name);
+                builtin_type != sem::BuiltinType::kNone) {
+                return BuiltinCall(expr, builtin_type, args);
+            }
+            if (auto* builtin = BuiltinType(ident)) {
+                return ty_init_or_conv(builtin);
+            }
+            return nullptr;
+        });
 
     if (!call) {
         return nullptr;
@@ -2422,97 +2391,137 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     return call;
 }
 
-type::Type* Resolver::BuiltinType(Symbol sym, const Source& source) const {
-    auto name = builder_->Symbols().NameFor(sym);
+type::Type* Resolver::BuiltinType(const ast::Identifier* ident) const {
+    auto name = builder_->Symbols().NameFor(ident->symbol);
     auto& b = *builder_;
-    auto vec_f32 = [&](uint32_t n) { return b.create<type::Vector>(b.create<type::F32>(), n); };
-    auto vec_f16 = [&](uint32_t n) { return b.create<type::Vector>(b.create<type::F16>(), n); };
+
+    auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
+
+    auto f32 = [&] { return b.create<type::F32>(); };
+    auto i32 = [&] { return b.create<type::I32>(); };
+    auto u32 = [&] { return b.create<type::U32>(); };
+    auto f16 = [&] {
+        return validator_.CheckF16Enabled(ident->source) ? b.create<type::F16>() : nullptr;
+    };
+    auto vec = [&](type::Type* el, uint32_t n) {
+        return el ? b.create<type::Vector>(el, n) : nullptr;
+    };
+    auto mat = [&](type::Type* el, uint32_t num_columns, uint32_t num_rows) {
+        return el ? b.create<type::Matrix>(vec(el, num_rows), num_columns) : nullptr;
+    };
+
+    auto template_type = [&](size_t index) -> type::Type* {
+        if (tmpl_ident) {
+            if (index >= tmpl_ident->arguments.Length()) {
+                AddError("too few template arguments for type '" + name + "'", ident->source);
+                return nullptr;
+            }
+            auto* ty_expr = sem_.Get<sem::TypeExpression>(tmpl_ident->arguments[index]);
+            if (!ty_expr) {
+                AddError("expected type", tmpl_ident->arguments[index]->source);
+                return nullptr;
+            }
+            return const_cast<type::Type*>(ty_expr->Type());
+        } else {
+            AddError("type '" + name + "' requires template arguments", ident->source);
+            return nullptr;
+        }
+    };
 
     switch (type::ParseBuiltin(name)) {
         case type::Builtin::kBool:
             return b.create<type::Bool>();
         case type::Builtin::kI32:
-            return b.create<type::I32>();
+            return i32();
         case type::Builtin::kU32:
-            return b.create<type::U32>();
+            return u32();
         case type::Builtin::kF16:
-            return validator_.CheckF16Enabled(source) ? b.create<type::F16>() : nullptr;
+            return f16();
         case type::Builtin::kF32:
             return b.create<type::F32>();
         case type::Builtin::kMat2X2F:
-            return b.create<type::Matrix>(vec_f32(2u), 2u);
+            return mat(f32(), 2u, 2u);
         case type::Builtin::kMat2X3F:
-            return b.create<type::Matrix>(vec_f32(3u), 2u);
+            return mat(f32(), 2u, 3u);
         case type::Builtin::kMat2X4F:
-            return b.create<type::Matrix>(vec_f32(4u), 2u);
+            return mat(f32(), 2u, 4u);
         case type::Builtin::kMat3X2F:
-            return b.create<type::Matrix>(vec_f32(2u), 3u);
+            return mat(f32(), 3u, 2u);
         case type::Builtin::kMat3X3F:
-            return b.create<type::Matrix>(vec_f32(3u), 3u);
+            return mat(f32(), 3u, 3u);
         case type::Builtin::kMat3X4F:
-            return b.create<type::Matrix>(vec_f32(4u), 3u);
+            return mat(f32(), 3u, 4u);
         case type::Builtin::kMat4X2F:
-            return b.create<type::Matrix>(vec_f32(2u), 4u);
+            return mat(f32(), 4u, 2u);
         case type::Builtin::kMat4X3F:
-            return b.create<type::Matrix>(vec_f32(3u), 4u);
+            return mat(f32(), 4u, 3u);
         case type::Builtin::kMat4X4F:
-            return b.create<type::Matrix>(vec_f32(4u), 4u);
+            return mat(f32(), 4u, 4u);
         case type::Builtin::kMat2X2H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(2u), 2u)
-                                                      : nullptr;
+            return mat(f16(), 2u, 2u);
         case type::Builtin::kMat2X3H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(3u), 2u)
-                                                      : nullptr;
+            return mat(f16(), 2u, 3u);
         case type::Builtin::kMat2X4H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(4u), 2u)
-                                                      : nullptr;
+            return mat(f16(), 2u, 4u);
         case type::Builtin::kMat3X2H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(2u), 3u)
-                                                      : nullptr;
+            return mat(f16(), 3u, 2u);
         case type::Builtin::kMat3X3H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(3u), 3u)
-                                                      : nullptr;
+            return mat(f16(), 3u, 3u);
         case type::Builtin::kMat3X4H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(4u), 3u)
-                                                      : nullptr;
+            return mat(f16(), 3u, 4u);
         case type::Builtin::kMat4X2H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(2u), 4u)
-                                                      : nullptr;
+            return mat(f16(), 4u, 2u);
         case type::Builtin::kMat4X3H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(3u), 4u)
-                                                      : nullptr;
+            return mat(f16(), 4u, 3u);
         case type::Builtin::kMat4X4H:
-            return validator_.CheckF16Enabled(source) ? b.create<type::Matrix>(vec_f16(4u), 4u)
-                                                      : nullptr;
+            return mat(f16(), 4u, 4u);
         case type::Builtin::kVec2F:
-            return vec_f32(2u);
+            return vec(f32(), 2u);
         case type::Builtin::kVec3F:
-            return vec_f32(3u);
+            return vec(f32(), 3u);
         case type::Builtin::kVec4F:
-            return vec_f32(4u);
+            return vec(f32(), 4u);
         case type::Builtin::kVec2H:
-            return validator_.CheckF16Enabled(source) ? vec_f16(2u) : nullptr;
+            return vec(f16(), 2u);
         case type::Builtin::kVec3H:
-            return validator_.CheckF16Enabled(source) ? vec_f16(3u) : nullptr;
+            return vec(f16(), 3u);
         case type::Builtin::kVec4H:
-            return validator_.CheckF16Enabled(source) ? vec_f16(4u) : nullptr;
+            return vec(f16(), 4u);
         case type::Builtin::kVec2I:
-            return b.create<type::Vector>(b.create<type::I32>(), 2u);
+            return vec(i32(), 2u);
         case type::Builtin::kVec3I:
-            return b.create<type::Vector>(b.create<type::I32>(), 3u);
+            return vec(i32(), 3u);
         case type::Builtin::kVec4I:
-            return b.create<type::Vector>(b.create<type::I32>(), 4u);
+            return vec(i32(), 4u);
         case type::Builtin::kVec2U:
-            return b.create<type::Vector>(b.create<type::U32>(), 2u);
+            return vec(u32(), 2u);
         case type::Builtin::kVec3U:
-            return b.create<type::Vector>(b.create<type::U32>(), 3u);
+            return vec(u32(), 3u);
         case type::Builtin::kVec4U:
-            return b.create<type::Vector>(b.create<type::U32>(), 4u);
+            return vec(u32(), 4u);
+        case type::Builtin::kMat2X2:
+            return mat(template_type(0), 2, 2);
+        case type::Builtin::kMat2X3:
+            return mat(template_type(0), 2, 3);
+        case type::Builtin::kMat2X4:
+            return mat(template_type(0), 2, 4);
+        case type::Builtin::kMat3X2:
+            return mat(template_type(0), 3, 2);
+        case type::Builtin::kMat3X3:
+            return mat(template_type(0), 3, 3);
+        case type::Builtin::kMat3X4:
+            return mat(template_type(0), 3, 4);
+        case type::Builtin::kMat4X2:
+            return mat(template_type(0), 4, 2);
+        case type::Builtin::kMat4X3:
+            return mat(template_type(0), 4, 3);
+        case type::Builtin::kMat4X4:
+            return mat(template_type(0), 4, 4);
         case type::Builtin::kUndefined:
             break;
     }
 
-    TINT_ICE(Resolver, diagnostics_) << source << " unhandled builtin type '" << name << "'";
+    TINT_ICE(Resolver, diagnostics_) << ident->source << " unhandled builtin type '" << name << "'";
     return nullptr;
 }
 
@@ -2546,7 +2555,7 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
                                   sem::Function* target,
                                   utils::Vector<const sem::ValueExpression*, N>& args,
                                   sem::Behaviors arg_behaviors) {
-    auto sym = expr->target.name->symbol;
+    auto sym = expr->target->symbol;
     auto name = builder_->Symbols().NameFor(sym);
 
     if (!MaybeMaterializeAndLoadArguments(args, target)) {
@@ -3119,7 +3128,11 @@ type::Type* Resolver::TypeDecl(const ast::TypeDecl* named_type) {
     return result;
 }
 
-type::Array* Resolver::Array(const ast::Array* arr) {
+type::Array* Resolver::Array(const ast::TemplatedIdentifier*) {
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Array()";
+    return nullptr;
+
+#if 0
     if (!arr->type) {
         AddError("missing array element type", arr->source.End());
         return nullptr;
@@ -3173,6 +3186,7 @@ type::Array* Resolver::Array(const ast::Array* arr) {
     }
 
     return out;
+#endif
 }
 
 const type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {

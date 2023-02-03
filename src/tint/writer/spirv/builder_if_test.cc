@@ -434,7 +434,7 @@ TEST_F(BuilderTest, If_WithReturn) {
     //   return;
     // }
 
-    auto* fn = Func("f", utils::Empty, ty.void_(),
+    auto* fn = Func("f", utils::Empty, ty.void_,
                     utils::Vector{
                         If(true, Block(Return())),
                     });
@@ -563,7 +563,7 @@ TEST_F(BuilderTest, If_WithLoad_Bug327) {
     // }
 
     auto* var = GlobalVar("a", ty.bool_(), type::AddressSpace::kPrivate);
-    auto* fn = Func("f", utils::Empty, ty.void_(),
+    auto* fn = Func("f", utils::Empty, ty.void_,
                     utils::Vector{
                         If("a", Block()),
                     });
@@ -598,7 +598,7 @@ TEST_F(BuilderTest, If_ElseIf_WithReturn) {
     // }
 
     auto* if_stmt = If(false, Block(), Else(If(true, Block(Return()))));
-    auto* fn = Func("f", utils::Empty, ty.void_(), utils::Vector{if_stmt});
+    auto* fn = Func("f", utils::Empty, ty.void_, utils::Vector{if_stmt});
 
     spirv::Builder& b = Build();
 
@@ -636,7 +636,7 @@ TEST_F(BuilderTest, Loop_If_ElseIf_WithBreak) {
     // }
 
     auto* if_stmt = If(false, Block(), Else(If(true, Block(Break()))));
-    auto* fn = Func("f", utils::Empty, ty.void_(),
+    auto* fn = Func("f", utils::Empty, ty.void_,
                     utils::Vector{
                         Loop(Block(if_stmt)),
                     });

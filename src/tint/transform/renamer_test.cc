@@ -1502,7 +1502,7 @@ INSTANTIATE_TEST_SUITE_P(
         // "while"  // WGSL reserved keyword
         kUnicodeIdentifier));
 
-const char* ExpandCoreType(std::string_view name) {
+const char* ExpandBuiltinType(std::string_view name) {
     if (name == "mat2x2f") {
         return "mat2x2<f32>";
     }
@@ -1614,7 +1614,7 @@ using RenamerTypeCoreTypesTest = TransformTestWithParam<const char*>;
 TEST_P(RenamerTypeCoreTypesTest, PreserveTypeUsage) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandCoreType(GetParam()));
+        out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
         return out;
     };
 
@@ -1655,7 +1655,7 @@ struct tint_symbol_5 {
 TEST_P(RenamerTypeCoreTypesTest, PreserveTypeInitializer) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandCoreType(GetParam()));
+        out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
         return out;
     };
 
@@ -1685,7 +1685,7 @@ fn tint_symbol() {
 TEST_P(RenamerTypeCoreTypesTest, PreserveTypeConversion) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandCoreType(GetParam()));
+        out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
         return out;
     };
 
@@ -1715,7 +1715,7 @@ fn tint_symbol() {
 TEST_P(RenamerTypeCoreTypesTest, RenameShadowedByAlias) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandCoreType(GetParam()));
+        out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
         return out;
     };
 
@@ -1745,7 +1745,7 @@ fn tint_symbol_1() {
 TEST_P(RenamerTypeCoreTypesTest, RenameShadowedByStruct) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
-        out = utils::ReplaceAll(out, "$type", ExpandCoreType(GetParam()));
+        out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
         return out;
     };
 

@@ -39,8 +39,8 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_Array) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[4]");
 }
@@ -52,8 +52,8 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArray) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[5][4]");
 }
@@ -65,8 +65,8 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArrayOfArray) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[6][5][4]");
 }
@@ -78,8 +78,8 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_Array_WithoutName) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, ""))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, ""))
         << gen.error();
     EXPECT_EQ(out.str(), "bool[4]");
 }
@@ -317,7 +317,7 @@ TEST_P(GlslDepthTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -345,7 +345,7 @@ TEST_F(GlslDepthMultisampledTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -373,7 +373,7 @@ using GlslSampledTexturesTest = TestParamHelper<GlslSampledTextureData>;
 TEST_P(GlslSampledTexturesTest, Emit) {
     auto params = GetParam();
 
-    const ast::Type* datatype = nullptr;
+    const ast::Identifier* datatype = nullptr;
     switch (params.datatype) {
         case TextureDataType::F32:
             datatype = ty.f32();
@@ -389,7 +389,7 @@ TEST_P(GlslSampledTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },
@@ -524,7 +524,7 @@ TEST_P(GlslStorageTexturesTest, Emit) {
 
     GlobalVar("tex", t, Binding(1_a), Group(2_a));
 
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              CallStmt(Call("textureDimensions", "tex")),
          },

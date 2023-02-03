@@ -56,10 +56,10 @@ class DiagnosticSeverityTest : public TestHelper {
         auto* if_1 = If(Expr(true), Block(utils::Vector{return_1}, attr(if_severity)));
         auto* block_1 = Block(utils::Vector{if_1}, attr(block_severity));
         auto* func_attr = DiagnosticAttribute(func_severity, "chromium_unreachable_code");
-        auto* foo = Func("foo", {}, ty.void_(), utils::Vector{block_1}, utils::Vector{func_attr});
+        auto* foo = Func("foo", {}, ty.void_, utils::Vector{block_1}, utils::Vector{func_attr});
 
         auto* return_2 = Return();
-        auto* bar = Func("bar", {}, ty.void_(), utils::Vector{return_2});
+        auto* bar = Func("bar", {}, ty.void_, utils::Vector{return_2});
 
         auto p = Build();
         EXPECT_TRUE(p.IsValid()) << p.Diagnostics().str();

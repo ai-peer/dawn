@@ -955,9 +955,8 @@ bool FunctionEmitter::Emit() {
             return false;
         }
 
-        builder_.AST().AddFunction(create<ast::Function>(
-            decl.source, builder_.Symbols().Register(decl.name), std::move(decl.params),
-            decl.return_type->Build(builder_), body, std::move(decl.attributes), utils::Empty));
+        builder_.Func(decl.source, decl.name, std::move(decl.params),
+                      decl.return_type->Build(builder_), body, std::move(decl.attributes));
     }
 
     if (ep_info_ && !ep_info_->inner_name.empty()) {
@@ -1104,8 +1103,7 @@ bool FunctionEmitter::EmitPipelineInput(std::string var_name,
             if (is_builtin && (tip_type != forced_param_type)) {
                 // The parameter will have the WGSL type, but we need bitcast to
                 // the variable store type.
-                param_value =
-                    create<ast::BitcastExpression>(tip_type->Build(builder_), param_value);
+                param_value = builder_.Bitcast(tip_type->Build(builder_), param_value);
             }
 
             statements->Push(builder_.Assign(store_dest, param_value));
@@ -1240,8 +1238,7 @@ bool FunctionEmitter::EmitPipelineOutput(std::string var_name,
             if (is_builtin && (tip_type != forced_member_type)) {
                 // The member will have the WGSL type, but we need bitcast to
                 // the variable store type.
-                load_source = create<ast::BitcastExpression>(forced_member_type->Build(builder_),
-                                                             load_source);
+                load_source = builder_.Bitcast(forced_member_type->Build(builder_), load_source);
             }
             return_exprs->Push(load_source);
 
@@ -1262,7 +1259,7 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
     FunctionDeclaration decl;
     decl.source = source;
     decl.name = ep_info_->name;
-    const ast::Type* return_type = nullptr;  // Populated below.
+    const ast::Identifier* return_type = nullptr;  // Populated below.
 
     // Pipeline inputs become parameters to the wrapper function, and
     // their values are saved into the corresponding private variables that
@@ -1393,11 +1390,10 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
 
             // Add the return-value statement.
             stmts.Push(create<ast::ReturnStatement>(
-                source, builder_.Construct(source, return_type, std::move(return_exprs))));
+                source, builder_.Call(source, return_type, std::move(return_exprs))));
         }
     }
 
-    auto* body = create<ast::BlockStatement>(source, stmts, utils::Empty);
     AttributeList fn_attrs;
     fn_attrs.Push(create<ast::StageAttribute>(source, ep_info_->stage));
 
@@ -1411,9 +1407,8 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
         }
     }
 
-    builder_.AST().AddFunction(create<ast::Function>(
-        source, builder_.Symbols().Register(ep_info_->name), std::move(decl.params), return_type,
-        body, std::move(fn_attrs), AttributeList{}));
+    builder_.Func(source, ep_info_->name, std::move(decl.params), return_type, std::move(stmts),
+                  std::move(fn_attrs));
 
     return true;
 }
@@ -3848,8 +3843,8 @@ TypedExpression FunctionEmitter::MaybeEmitCombinatorialValue(
     }
 
     if (op == spv::Op::OpBitcast) {
-        return {ast_type, create<ast::BitcastExpression>(Source{}, ast_type->Build(builder_),
-                                                         MakeOperand(inst, 0).expr)};
+        return {ast_type,
+                builder_.Bitcast(Source{}, ast_type->Build(builder_), MakeOperand(inst, 0).expr)};
     }
 
     if (op == spv::Op::OpShiftLeftLogical || op == spv::Op::OpShiftRightLogical ||
@@ -3912,8 +3907,7 @@ TypedExpression FunctionEmitter::MaybeEmitCombinatorialValue(
             }
             operands.Push(operand.expr);
         }
-        return {ast_type,
-                builder_.Construct(Source{}, ast_type->Build(builder_), std::move(operands))};
+        return {ast_type, builder_.Call(Source{}, ast_type->Build(builder_), std::move(operands))};
     }
 
     if (op == spv::Op::OpCompositeExtract) {
@@ -4731,8 +4725,7 @@ TypedExpression FunctionEmitter::MakeVectorShuffle(const spvtools::opt::Instruct
             return {};
         }
     }
-    return {result_type,
-            builder_.Construct(source, result_type->Build(builder_), std::move(values))};
+    return {result_type, builder_.Call(source, result_type->Build(builder_), std::move(values))};
 }
 
 bool FunctionEmitter::RegisterSpecialBuiltInVariables() {
@@ -5164,16 +5157,14 @@ TypedExpression FunctionEmitter::MakeNumericConversion(const spvtools::opt::Inst
 
     ExpressionList params;
     params.Push(arg_expr.expr);
-    TypedExpression result{
-        expr_type,
-        builder_.Construct(GetSourceForInst(inst), expr_type->Build(builder_), std::move(params))};
+    TypedExpression result{expr_type, builder_.Call(GetSourceForInst(inst),
+                                                    expr_type->Build(builder_), std::move(params))};
 
     if (requested_type == expr_type) {
         return result;
     }
     return {requested_type,
-            create<ast::BitcastExpression>(GetSourceForInst(inst), requested_type->Build(builder_),
-                                           result.expr)};
+            builder_.Bitcast(GetSourceForInst(inst), requested_type->Build(builder_), result.expr)};
 }
 
 bool FunctionEmitter::EmitFunctionCall(const spvtools::opt::Instruction& inst) {
@@ -5640,14 +5631,14 @@ bool FunctionEmitter::EmitImageAccess(const spvtools::opt::Instruction& inst) {
         // first component.
         if (texture_type->IsAnyOf<DepthTexture, DepthMultisampledTexture>()) {
             if (is_non_dref_sample || (op == spv::Op::OpImageFetch)) {
-                value = builder_.Construct(Source{},
-                                           result_type->Build(builder_),  // a vec4
-                                           utils::Vector{
-                                               value,
-                                               parser_impl_.MakeNullValue(result_component_type),
-                                               parser_impl_.MakeNullValue(result_component_type),
-                                               parser_impl_.MakeNullValue(result_component_type),
-                                           });
+                value = builder_.Call(Source{},
+                                      result_type->Build(builder_),  // a vec4
+                                      utils::Vector{
+                                          value,
+                                          parser_impl_.MakeNullValue(result_component_type),
+                                          parser_impl_.MakeNullValue(result_component_type),
+                                          parser_impl_.MakeNullValue(result_component_type),
+                                      });
             }
         }
 
@@ -5665,8 +5656,7 @@ bool FunctionEmitter::EmitImageAccess(const spvtools::opt::Instruction& inst) {
         if (expected_component_type != result_component_type) {
             // This occurs if one is signed integer and the other is unsigned integer,
             // or vice versa. Perform a bitcast.
-            value =
-                create<ast::BitcastExpression>(Source{}, result_type->Build(builder_), call_expr);
+            value = builder_.Bitcast(Source{}, result_type->Build(builder_), call_expr);
         }
         if (!expected_component_type->Is<F32>() && IsSampledImageAccess(op)) {
             // WGSL permits sampled image access only on float textures.
@@ -5717,7 +5707,7 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
                     create<ast::MemberAccessorExpression>(Source{}, dims_call, PrefixSwizzle(2));
             }
             exprs.Push(dims_call);
-            if (ast::IsTextureArray(dims)) {
+            if (type::IsTextureArray(dims)) {
                 auto num_layers =
                     builder_.Call(Source{}, "textureNumLayers", GetImageExpression(inst));
                 exprs.Push(num_layers);
@@ -5731,7 +5721,7 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
                 // vector initializer - otherwise, just emit the single expression to omit an
                 // unnecessary cast.
                 (exprs.Length() > 1)
-                    ? builder_.Construct(Source{}, unsigned_type->Build(builder_), std::move(exprs))
+                    ? builder_.Call(Source{}, unsigned_type->Build(builder_), std::move(exprs))
                     : exprs[0],
             };
 
@@ -5753,8 +5743,8 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
             // The WGSL bulitin returns u32.
             // If they aren't the same then convert the result.
             if (!result_type->Is<U32>()) {
-                ast_expr = builder_.Construct(Source{}, result_type->Build(builder_),
-                                              utils::Vector{ast_expr});
+                ast_expr =
+                    builder_.Call(Source{}, result_type->Build(builder_), utils::Vector{ast_expr});
             }
             TypedExpression expr{result_type, ast_expr};
             return EmitConstDefOrWriteToHoistedVar(inst, expr);
@@ -5779,11 +5769,11 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         }
 
         // Function return type
-        const ast::Type* ret_type = nullptr;
+        const ast::Identifier* ret_type = nullptr;
         if (inst.type_id() != 0) {
             ret_type = parser_impl_.ConvertType(inst.type_id())->Build(builder_);
         } else {
-            ret_type = builder_.ty.void_();
+            ret_type = builder_.ty.void_;
         }
 
         // Emit stub, will be removed by transform::SpirvAtomic
@@ -5791,13 +5781,13 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         auto* stub_deco = builder_.ASTNodes().Create<transform::SpirvAtomic::Stub>(
             builder_.ID(), builder_.AllocateNodeID(), builtin);
         auto* stub =
-            create<ast::Function>(Source{}, sym, std::move(params), ret_type,
+            create<ast::Function>(Source{}, sym, std::move(params), builder_.Type(ret_type),
                                   /* body */ nullptr,
-                                  AttributeList{
+                                  utils::Vector{
                                       stub_deco,
                                       builder_.Disable(ast::DisabledValidation::kFunctionHasNoBody),
                                   },
-                                  AttributeList{});
+                                  utils::Empty);
         builder_.AST().AddFunction(stub);
 
         // Emit call to stub, will be replaced with call to atomic builtin by transform::SpirvAtomic
@@ -5911,8 +5901,8 @@ FunctionEmitter::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageA
     }
     type::TextureDimension dim = texture_type->dims;
     // Number of regular coordinates.
-    uint32_t num_axes = static_cast<uint32_t>(ast::NumCoordinateAxes(dim));
-    bool is_arrayed = ast::IsTextureArray(dim);
+    uint32_t num_axes = static_cast<uint32_t>(type::NumCoordinateAxes(dim));
+    bool is_arrayed = type::IsTextureArray(dim);
     if ((num_axes == 0) || (num_axes > 3)) {
         Fail() << "unsupported image dimensionality for " << texture_type->TypeInfo().name
                << " prompted by " << inst.PrettyPrint();
@@ -6066,7 +6056,7 @@ const ast::Expression* FunctionEmitter::ConvertTexelForStorage(
         for (auto i = src_count; i < dest_count; i++) {
             exprs.Push(parser_impl_.MakeNullExpression(component_type).expr);
         }
-        texel.expr = builder_.Construct(Source{}, src_type->Build(builder_), std::move(exprs));
+        texel.expr = builder_.Call(Source{}, src_type->Build(builder_), std::move(exprs));
     }
 
     return texel.expr;
@@ -6076,7 +6066,7 @@ TypedExpression FunctionEmitter::ToI32(TypedExpression value) {
     if (!value || value.type->Is<I32>()) {
         return value;
     }
-    return {ty_.I32(), builder_.Construct(Source{}, builder_.ty.i32(), utils::Vector{value.expr})};
+    return {ty_.I32(), builder_.Call(Source{}, builder_.ty.i32(), utils::Vector{value.expr})};
 }
 
 TypedExpression FunctionEmitter::ToSignedIfUnsigned(TypedExpression value) {
@@ -6085,7 +6075,7 @@ TypedExpression FunctionEmitter::ToSignedIfUnsigned(TypedExpression value) {
     }
     if (auto* vec_type = value.type->As<Vector>()) {
         auto* new_type = ty_.Vector(ty_.I32(), vec_type->size);
-        return {new_type, builder_.Construct(new_type->Build(builder_), utils::Vector{value.expr})};
+        return {new_type, builder_.Call(new_type->Build(builder_), utils::Vector{value.expr})};
     }
     return ToI32(value);
 }
@@ -6157,10 +6147,10 @@ TypedExpression FunctionEmitter::MakeOuterProduct(const spvtools::opt::Instructi
             result_row.Push(elem);
         }
         result_columns.Push(
-            builder_.Construct(Source{}, col_ty->Build(builder_), std::move(result_row)));
+            builder_.Call(Source{}, col_ty->Build(builder_), std::move(result_row)));
     }
     return {result_ty,
-            builder_.Construct(Source{}, result_ty->Build(builder_), std::move(result_columns))};
+            builder_.Call(Source{}, result_ty->Build(builder_), std::move(result_columns))};
 }
 
 bool FunctionEmitter::MakeVectorInsertDynamic(const spvtools::opt::Instruction& inst) {

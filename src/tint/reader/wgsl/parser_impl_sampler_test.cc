@@ -32,8 +32,7 @@ TEST_F(ParserImplTest, SamplerType_Sampler) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Sampler>());
-    EXPECT_FALSE(t->As<ast::Sampler>()->IsComparison());
+    CheckIdentifier(p->builder().Symbols(), t.value, "sampler");
     EXPECT_FALSE(p->has_error());
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 8u}}));
 }
@@ -44,8 +43,7 @@ TEST_F(ParserImplTest, SamplerType_ComparisonSampler) {
     EXPECT_TRUE(t.matched);
     EXPECT_FALSE(t.errored);
     ASSERT_NE(t.value, nullptr);
-    ASSERT_TRUE(t->Is<ast::Sampler>());
-    EXPECT_TRUE(t->As<ast::Sampler>()->IsComparison());
+    CheckIdentifier(p->builder().Symbols(), t.value, "sampler_comparison");
     EXPECT_FALSE(p->has_error());
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 19u}}));
 }

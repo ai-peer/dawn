@@ -28,7 +28,7 @@ namespace {
 using HlslGeneratorImplTest_Function = TestHelper;
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Function) {
-    Func("my_func", utils::Empty, ty.void_(),
+    Func("my_func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -45,7 +45,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Function) {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Function_Name_Collision) {
-    Func("GeometryShader", utils::Empty, ty.void_(),
+    Func("GeometryShader", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -66,7 +66,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithParams) {
              Param("a", ty.f32()),
              Param("b", ty.i32()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -83,7 +83,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithParams) {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_NoReturn_Void) {
-    Func("main", utils::Empty, ty.void_(), utils::Empty /* no explicit return */,
+    Func("main", utils::Empty, ty.void_, utils::Empty /* no explicit return */,
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -216,12 +216,11 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_Di
 
     Func("vert_main", utils::Empty, ty.Of(interface_struct),
          utils::Vector{
-             Return(Construct(ty.Of(interface_struct), Construct(ty.vec4<f32>()), Expr(0.5_f),
-                              Expr(0.25_f))),
+             Return(Call(ty.Of(interface_struct), Call(ty.vec4<f32>()), Expr(0.5_f), Expr(0.25_f))),
          },
          utils::Vector{Stage(ast::PipelineStage::kVertex)});
 
-    Func("frag_main", utils::Vector{Param("inputs", ty.Of(interface_struct))}, ty.void_(),
+    Func("frag_main", utils::Vector{Param("inputs", ty.Of(interface_struct))}, ty.void_,
          utils::Vector{
              Decl(Let("r", ty.f32(), MemberAccessor("inputs", "col1"))),
              Decl(Let("g", ty.f32(), MemberAccessor("inputs", "col2"))),
@@ -297,8 +296,8 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_SharedStruct_He
 
     Func("foo", utils::Vector{Param("x", ty.f32())}, ty.Of(vertex_output_struct),
          utils::Vector{
-             Return(Construct(ty.Of(vertex_output_struct),
-                              Construct(ty.vec4<f32>(), "x", "x", "x", Expr(1_f)))),
+             Return(
+                 Call(ty.Of(vertex_output_struct), Call(ty.vec4<f32>(), "x", "x", "x", Expr(1_f)))),
          },
          utils::Empty);
 
@@ -374,7 +373,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_Uniform) {
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -408,7 +407,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_UniformStr
 
     auto* var = Var("v", ty.f32(), MemberAccessor(MemberAccessor("uniforms", "coord"), "x"));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -442,7 +441,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_RW_Storage
 
     auto* var = Var("v", ty.f32(), MemberAccessor("coord", "b"));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -475,7 +474,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_RO_Storage
 
     auto* var = Var("v", ty.f32(), MemberAccessor("coord", "b"));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -506,7 +505,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_WO_Storage
     GlobalVar("coord", ty.Of(s), type::AddressSpace::kStorage, type::Access::kReadWrite,
               Binding(0_a), Group(1_a));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Assign(MemberAccessor("coord", "b"), Expr(2_f)),
              Return(),
@@ -537,7 +536,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_With_StorageBuf
     GlobalVar("coord", ty.Of(s), type::AddressSpace::kStorage, type::Access::kReadWrite,
               Binding(0_a), Group(1_a));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Assign(MemberAccessor("coord", "b"), Expr(2_f)),
              Return(),
@@ -574,7 +573,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_Called_By_EntryPoint_With_
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -617,7 +616,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_Called_By_EntryPoint_With_
 
     auto* var = Var("v", ty.f32(), Call("sub_func", 1_f));
 
-    Func("frag_main", utils::Empty, ty.void_(),
+    Func("frag_main", utils::Empty, ty.void_,
          utils::Vector{
              Decl(var),
              Return(),
@@ -644,7 +643,7 @@ void frag_main() {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_WithNameCollision) {
-    Func("GeometryShader", utils::Empty, ty.void_(), utils::Empty,
+    Func("GeometryShader", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -659,7 +658,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_WithNameCollisi
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_Compute) {
-    Func("main", utils::Empty, ty.void_(),
+    Func("main", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          },
@@ -676,7 +675,7 @@ void main() {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_Compute_WithWorkgroup_Literal) {
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(2_i, 4_i, 6_i),
@@ -693,10 +692,10 @@ void main() {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Attribute_EntryPoint_Compute_WithWorkgroup_Const) {
-    GlobalConst("width", ty.i32(), Construct(ty.i32(), 2_i));
-    GlobalConst("height", ty.i32(), Construct(ty.i32(), 3_i));
-    GlobalConst("depth", ty.i32(), Construct(ty.i32(), 4_i));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    GlobalConst("width", ty.i32(), Call(ty.i32(), 2_i));
+    GlobalConst("height", ty.i32(), Call(ty.i32(), 3_i));
+    GlobalConst("depth", ty.i32(), Call(ty.i32(), 4_i));
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize("width", "height", "depth"),
@@ -714,10 +713,10 @@ void main() {
 
 TEST_F(HlslGeneratorImplTest_Function,
        Emit_Attribute_EntryPoint_Compute_WithWorkgroup_OverridableConst) {
-    Override("width", ty.i32(), Construct(ty.i32(), 2_i), Id(7_u));
-    Override("height", ty.i32(), Construct(ty.i32(), 3_i), Id(8_u));
-    Override("depth", ty.i32(), Construct(ty.i32(), 4_i), Id(9_u));
-    Func("main", utils::Empty, ty.void_(), utils::Empty,
+    Override("width", ty.i32(), Call(ty.i32(), 2_i), Id(7_u));
+    Override("height", ty.i32(), Call(ty.i32(), 3_i), Id(8_u));
+    Override("depth", ty.i32(), Call(ty.i32(), 4_i), Id(9_u));
+    Func("main", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize("width", "height", "depth"),
@@ -736,7 +735,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithArrayParams) {
          utils::Vector{
              Param("a", ty.array<f32, 5>()),
          },
-         ty.void_(),
+         ty.void_,
          utils::Vector{
              Return(),
          });
@@ -753,7 +752,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithArrayParams) {
 TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithArrayReturn) {
     Func("my_func", utils::Empty, ty.array<f32, 5>(),
          utils::Vector{
-             Return(Construct(ty.array<f32, 5>())),
+             Return(Call(ty.array<f32, 5>())),
          });
 
     GeneratorImpl& gen = Build();
@@ -767,7 +766,7 @@ my_func_ret my_func() {
 }
 
 TEST_F(HlslGeneratorImplTest_Function, Emit_Function_WithDiscardAndVoidReturn) {
-    Func("my_func", utils::Vector{Param("a", ty.i32())}, ty.void_(),
+    Func("my_func", utils::Vector{Param("a", ty.i32())}, ty.void_,
          utils::Vector{
              If(Equal("a", 0_i),  //
                 Block(create<ast::DiscardStatement>())),
@@ -837,7 +836,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Multiple_EntryPoint_With_Same_Module
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("a", utils::Empty, ty.void_(),
+        Func("a", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),
@@ -851,7 +850,7 @@ TEST_F(HlslGeneratorImplTest_Function, Emit_Multiple_EntryPoint_With_Same_Module
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("b", utils::Empty, ty.void_(),
+        Func("b", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),

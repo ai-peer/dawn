@@ -23,7 +23,7 @@ using BuilderTest = TestHelper;
 TEST_F(BuilderTest, Discard) {
     auto* stmt = Discard();
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("F", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     spirv::Builder& b = Build();
