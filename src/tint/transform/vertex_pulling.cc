@@ -395,7 +395,7 @@ struct VertexPulling::State {
                 // Convert the fetched scalar/vector if WGSL variable is of `f16` types
                 if (var_dt.base_type == BaseWGSLType::kF16) {
                     // The type of the same element number of base type of target WGSL variable
-                    const ast::Type* loaded_data_target_type;
+                    const ast::Identifier* loaded_data_target_type;
                     if (fmt_dt.width == 1) {
                         loaded_data_target_type = b.ty.f16();
                     } else {
@@ -443,8 +443,7 @@ struct VertexPulling::State {
                         }
                     }
 
-                    const ast::Type* target_ty = CreateASTTypeFor(ctx, var.type);
-                    value = b.Call(target_ty, values);
+                    value = b.Call(CreateASTTypeFor(ctx, var.type), values);
                 }
 
                 // Assign the value to the WGSL variable
@@ -735,7 +734,7 @@ struct VertexPulling::State {
                                    uint32_t offset,
                                    uint32_t buffer,
                                    uint32_t element_stride,
-                                   const ast::Type* base_type,
+                                   const ast::Identifier* base_type,
                                    VertexFormat base_format,
                                    uint32_t count) {
         utils::Vector<const ast::Expression*, 8> expr_list;
@@ -745,7 +744,7 @@ struct VertexPulling::State {
             expr_list.Push(LoadPrimitive(array_base, primitive_offset, buffer, base_format));
         }
 
-        return b.Call(b.create<ast::Vector>(base_type, count), std::move(expr_list));
+        return b.Call(b.ty.vec(base_type, count), std::move(expr_list));
     }
 
     /// Process a non-struct entry point parameter.
