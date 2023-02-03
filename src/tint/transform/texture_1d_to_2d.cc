@@ -84,7 +84,7 @@ struct Texture1DTo2D::State {
         }
 
         auto create_var = [&](const ast::Variable* v,
-                              const ast::Type* type) -> const ast::Variable* {
+                              const ast::Identifier* type) -> const ast::Variable* {
             if (v->As<ast::Parameter>()) {
                 return ctx.dst->Param(ctx.Clone(v->name->symbol), type, ctx.Clone(v->attributes));
             } else {
@@ -97,7 +97,7 @@ struct Texture1DTo2D::State {
                 sem.Get(v->type),
                 [&](const type::SampledTexture* tex) -> const ast::Variable* {
                     if (tex->dim() == type::TextureDimension::k1d) {
-                        auto* type = ctx.dst->create<ast::SampledTexture>(
+                        auto* type = ctx.dst->ty.sampled_texture(
                             type::TextureDimension::k2d, CreateASTTypeFor(ctx, tex->type()));
                         return create_var(v, type);
                     } else {
@@ -172,7 +172,7 @@ struct Texture1DTo2D::State {
                 }
                 index++;
             }
-            return ctx.dst->Call(ctx.Clone(c->target.name), args);
+            return ctx.dst->Call(ctx.Clone(c->target), args);
         });
 
         ctx.Clone();

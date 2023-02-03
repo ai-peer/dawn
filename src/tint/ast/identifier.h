@@ -17,6 +17,11 @@
 
 #include "src/tint/ast/node.h"
 
+// Forward declarations
+namespace tint::ast {
+class Attribute;
+}  // namespace tint::ast
+
 namespace tint::ast {
 
 /// An identifier
@@ -40,6 +45,9 @@ class Identifier : public Castable<Identifier, ast::Node> {
 
     /// The symbol for the identifier
     const Symbol symbol;
+
+    /// Attributes on the identifier
+    const utils::Vector<const Attribute*, 0> attributes;
 };
 
 }  // namespace tint::ast

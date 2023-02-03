@@ -133,7 +133,7 @@ void f() {
 }
 
 TEST_F(MslGeneratorImplTest, Emit_GlobalConst_vec3_AInt) {
-    auto* var = GlobalConst("G", Call(ty.vec3(nullptr), 1_a, 2_a, 3_a));
+    auto* var = GlobalConst("G", Call(ty.vec3<Infer>(), 1_a, 2_a, 3_a));
     Func("f", utils::Empty, ty.void_(), utils::Vector{Decl(Let("l", Expr(var)))});
 
     GeneratorImpl& gen = Build();
@@ -151,7 +151,7 @@ void f() {
 }
 
 TEST_F(MslGeneratorImplTest, Emit_GlobalConst_vec3_AFloat) {
-    auto* var = GlobalConst("G", Call(ty.vec3(nullptr), 1._a, 2._a, 3._a));
+    auto* var = GlobalConst("G", Call(ty.vec3<Infer>(), 1._a, 2._a, 3._a));
     Func("f", utils::Empty, ty.void_(), utils::Vector{Decl(Let("l", Expr(var)))});
 
     GeneratorImpl& gen = Build();
