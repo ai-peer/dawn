@@ -69,6 +69,24 @@
       "parentUuid": "d632332d_bfb7eca5",
       "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42a5eb7f_9fb39efe",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-03T00:28:12Z",
+      "side": 1,
+      "message": "Looks like the unittests are failing when running with Dawn Wire due to the new struct being unrecognized. Is there something else I needed to do to get that working?",
+      "parentUuid": "6c67b3bf_f6d3d425",
+      "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
