@@ -24,7 +24,6 @@
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/id_attribute.h"
 #include "src/tint/ast/interpolate_attribute.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/reader/spirv/function.h"
 #include "src/tint/type/depth_texture.h"
@@ -1167,9 +1166,9 @@ const Type* ParserImpl::ConvertType(uint32_t type_id,
             ++num_non_writable_members;
         }
         const auto member_name = namer_.GetMemberName(type_id, member_index);
-        auto* ast_struct_member = create<ast::StructMember>(
-            Source{}, builder_.Symbols().Register(member_name), ast_member_ty->Build(builder_),
-            std::move(ast_member_decorations));
+        auto* ast_struct_member =
+            builder_.Member(Source{}, member_name, ast_member_ty->Build(builder_),
+                            std::move(ast_member_decorations));
         ast_members.Push(ast_struct_member);
     }
 
@@ -1577,11 +1576,11 @@ const spvtools::opt::analysis::IntConstant* ParserImpl::GetArraySize(uint32_t va
     return size->AsIntConstant();
 }
 
-ast::Var* ParserImpl::MakeVar(uint32_t id,
-                              type::AddressSpace address_space,
-                              const Type* storage_type,
-                              const ast::Expression* initializer,
-                              AttributeList decorations) {
+const ast::Var* ParserImpl::MakeVar(uint32_t id,
+                                    type::AddressSpace address_space,
+                                    const Type* storage_type,
+                                    const ast::Expression* initializer,
+                                    AttributeList decorations) {
     if (storage_type == nullptr) {
         Fail() << "internal error: can't make ast::Variable for null type";
         return nullptr;
@@ -1610,35 +1609,37 @@ ast::Var* ParserImpl::MakeVar(uint32_t id,
     }
 
     auto sym = builder_.Symbols().Register(namer_.Name(id));
-    return create<ast::Var>(Source{}, sym, storage_type->Build(builder_), address_space, access,
-                            initializer, decorations);
+    return builder_.Var(Source{}, sym, storage_type->Build(builder_), address_space, access,
+                        initializer, decorations);
 }
 
-ast::Let* ParserImpl::MakeLet(uint32_t id, const Type* type, const ast::Expression* initializer) {
+const ast::Let* ParserImpl::MakeLet(uint32_t id,
+                                    const Type* type,
+                                    const ast::Expression* initializer) {
     auto sym = builder_.Symbols().Register(namer_.Name(id));
-    return create<ast::Let>(Source{}, sym, type->Build(builder_), initializer, utils::Empty);
+    return builder_.Let(Source{}, sym, type->Build(builder_), initializer, utils::Empty);
 }
 
-ast::Override* ParserImpl::MakeOverride(uint32_t id,
-                                        const Type* type,
-                                        const ast::Expression* initializer,
-                                        AttributeList decorations) {
+const ast::Override* ParserImpl::MakeOverride(uint32_t id,
+                                              const Type* type,
+                                              const ast::Expression* initializer,
+                                              AttributeList decorations) {
     if (!ConvertDecorationsForVariable(id, &type, &decorations, false)) {
         return nullptr;
     }
     auto sym = builder_.Symbols().Register(namer_.Name(id));
-    return create<ast::Override>(Source{}, sym, type->Build(builder_), initializer, decorations);
+    return builder_.Override(Source{}, sym, type->Build(builder_), initializer, decorations);
 }
 
-ast::Parameter* ParserImpl::MakeParameter(uint32_t id,
-                                          const Type* type,
-                                          AttributeList decorations) {
+const ast::Parameter* ParserImpl::MakeParameter(uint32_t id,
+                                                const Type* type,
+                                                AttributeList decorations) {
     if (!ConvertDecorationsForVariable(id, &type, &decorations, false)) {
         return nullptr;
     }
 
     auto sym = builder_.Symbols().Register(namer_.Name(id));
-    return create<ast::Parameter>(Source{}, sym, type->Build(builder_), decorations);
+    return builder_.Param(Source{}, sym, type->Build(builder_), decorations);
 }
 
 bool ParserImpl::ConvertDecorationsForVariable(uint32_t id,
@@ -2098,14 +2099,13 @@ TypedExpression ParserImpl::RectifyOperandSignedness(const spvtools::opt::Instru
     if (requires_unsigned) {
         if (auto* unsigned_ty = UnsignedTypeFor(type)) {
             // Conversion is required.
-            return {unsigned_ty, create<ast::BitcastExpression>(
-                                     Source{}, unsigned_ty->Build(builder_), expr.expr)};
+            return {unsigned_ty,
+                    builder_.Bitcast(Source{}, unsigned_ty->Build(builder_), expr.expr)};
         }
     } else if (requires_signed) {
         if (auto* signed_ty = SignedTypeFor(type)) {
             // Conversion is required.
-            return {signed_ty, create<ast::BitcastExpression>(Source{}, signed_ty->Build(builder_),
-                                                              expr.expr)};
+            return {signed_ty, builder_.Bitcast(Source{}, signed_ty->Build(builder_), expr.expr)};
         }
     }
     // We should not reach here.
@@ -2119,8 +2119,8 @@ TypedExpression ParserImpl::RectifySecondOperandSignedness(const spvtools::opt::
     if ((target_type != second_operand_expr.type->UnwrapRef()) &&
         AssumesSecondOperandSignednessMatchesFirstOperand(opcode(inst))) {
         // Conversion is required.
-        return {target_type, create<ast::BitcastExpression>(Source{}, target_type->Build(builder_),
-                                                            second_operand_expr.expr)};
+        return {target_type,
+                builder_.Bitcast(Source{}, target_type->Build(builder_), second_operand_expr.expr)};
     }
     // No conversion necessary.
     return std::move(second_operand_expr);
@@ -2178,15 +2178,13 @@ TypedExpression ParserImpl::RectifyForcedResultType(TypedExpression expr,
     if ((!forced_result_ty) || (forced_result_ty == expr.type)) {
         return expr;
     }
-    return {expr.type,
-            create<ast::BitcastExpression>(Source{}, expr.type->Build(builder_), expr.expr)};
+    return {expr.type, builder_.Bitcast(Source{}, expr.type->Build(builder_), expr.expr)};
 }
 
 TypedExpression ParserImpl::AsUnsigned(TypedExpression expr) {
     if (expr.type && expr.type->IsSignedScalarOrVector()) {
         auto* new_type = GetUnsignedIntMatchingShape(expr.type);
-        return {new_type,
-                create<ast::BitcastExpression>(Source{}, new_type->Build(builder_), expr.expr)};
+        return {new_type, builder_.Bitcast(Source{}, new_type->Build(builder_), expr.expr)};
     }
     return expr;
 }
@@ -2194,8 +2192,7 @@ TypedExpression ParserImpl::AsUnsigned(TypedExpression expr) {
 TypedExpression ParserImpl::AsSigned(TypedExpression expr) {
     if (expr.type && expr.type->IsUnsignedScalarOrVector()) {
         auto* new_type = GetSignedIntMatchingShape(expr.type);
-        return {new_type,
-                create<ast::BitcastExpression>(Source{}, new_type->Build(builder_), expr.expr)};
+        return {new_type, builder_.Bitcast(Source{}, new_type->Build(builder_), expr.expr)};
     }
     return expr;
 }

@@ -240,9 +240,7 @@ TEST_F(ParserImplTest, FunctionDecl_ReturnTypeAttributeList) {
     EXPECT_EQ(f->symbol, p->builder().Symbols().Get("main"));
     ASSERT_NE(f->return_type, nullptr);
 
-    ASSERT_TRUE(f->return_type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(f->return_type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    CheckIdentifier(p->builder().Symbols(), f->return_type->name, "i32");
 
     ASSERT_EQ(f->params.Length(), 0u);
 

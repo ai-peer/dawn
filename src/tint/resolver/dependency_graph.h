@@ -19,6 +19,7 @@
 
 #include "src/tint/ast/module.h"
 #include "src/tint/diagnostic/diagnostic.h"
+#include "src/tint/symbol_table.h"
 #include "src/tint/utils/hashmap.h"
 
 namespace tint::resolver {

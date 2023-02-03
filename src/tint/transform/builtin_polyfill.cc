@@ -174,7 +174,7 @@ struct BuiltinPolyfill::State {
         uint32_t width = WidthOf(ty);
 
         // Returns either u32 or vecN<u32>
-        auto U = [&]() -> const ast::Type* {
+        auto U = [&]() -> const ast::Identifier* {
             if (width == 1) {
                 return b.ty.u32();
             }
@@ -232,7 +232,7 @@ struct BuiltinPolyfill::State {
         uint32_t width = WidthOf(ty);
 
         // Returns either u32 or vecN<u32>
-        auto U = [&]() -> const ast::Type* {
+        auto U = [&]() -> const ast::Identifier* {
             if (width == 1) {
                 return b.ty.u32();
             }
@@ -349,7 +349,7 @@ struct BuiltinPolyfill::State {
         uint32_t width = WidthOf(ty);
 
         // Returns either u32 or vecN<u32>
-        auto U = [&]() -> const ast::Type* {
+        auto U = [&]() -> const ast::Identifier* {
             if (width == 1) {
                 return b.ty.u32();
             }
@@ -421,7 +421,7 @@ struct BuiltinPolyfill::State {
         uint32_t width = WidthOf(ty);
 
         // Returns either u32 or vecN<u32>
-        auto U = [&]() -> const ast::Type* {
+        auto U = [&]() -> const ast::Identifier* {
             if (width == 1) {
                 return b.ty.u32();
             }
@@ -789,7 +789,7 @@ struct BuiltinPolyfill::State {
     bool has_full_ptr_params;
 
     /// @returns the AST type for the given sem type
-    const ast::Type* T(const type::Type* ty) const { return CreateASTTypeFor(ctx, ty); }
+    const ast::Identifier* T(const type::Type* ty) const { return CreateASTTypeFor(ctx, ty); }
 
     /// @returns 1 if `ty` is not a vector, otherwise the vector width
     uint32_t WidthOf(const type::Type* ty) const {
@@ -1023,14 +1023,18 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                         break;
                 }
             },
-            [&](const ast::StorageTexture* tex) {
-                if (polyfill.bgra8unorm && tex->format == type::TexelFormat::kBgra8Unorm) {
-                    ctx.Replace(tex, [&ctx, tex] {
-                        return ctx.dst->ty.storage_texture(tex->dim, type::TexelFormat::kRgba8Unorm,
-                                                           tex->access);
-                    });
-                    made_changes = true;
-                }
+            [&](const ast::Identifier*) {
+                // TODO(crbug.com/tint/1810): Add ResolvedIdentifier
+                // if (auto* tex = ident->As<type::StorageTexture>()) {
+                //     if (polyfill.bgra8unorm &&
+                //         tex->texel_format() == type::TexelFormat::kBgra8Unorm) {
+                //         ctx.Replace(ident, [&ctx, tex] {
+                //             return ctx.dst->ty.storage_texture(
+                //                 tex->dim(), type::TexelFormat::kRgba8Unorm, tex->access());
+                //         });
+                //         made_changes = true;
+                //     }
+                // }
             });
     }
 

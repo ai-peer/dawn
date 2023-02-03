@@ -1051,9 +1051,9 @@ TEST_P(BlockStatementTest, CompoundStatement) {
 TEST_P(BlockStatementTest, FunctionBody) {
     Func("foo", utils::Empty, ty.void_(),
          utils::Vector{
-             Block(utils::Vector{Return()}),
+             Block(utils::Vector{Return()}, createAttributes({}, *this, GetParam().kind)),
          },
-         utils::Empty, utils::Empty, createAttributes({}, *this, GetParam().kind));
+         utils::Empty, utils::Empty);
     Check();
 }
 TEST_P(BlockStatementTest, IfStatementBody) {
