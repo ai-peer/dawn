@@ -1,4 +1,4 @@
-// Copyright 2020 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,21 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ast/alias.h"
-#include "src/tint/ast/test_helper.h"
-#include "src/tint/type/access.h"
+#include "src/tint/sem/function_expression.h"
 
-namespace tint::ast {
-namespace {
+TINT_INSTANTIATE_TYPEINFO(tint::sem::FunctionExpression);
 
-using AstAliasTest = TestHelper;
+namespace tint::sem {
 
-TEST_F(AstAliasTest, Create) {
-    auto u32 = ty.u32();
-    auto* a = Alias("a_type", u32);
-    CheckIdentifier(Symbols(), a->name, "a_type");
-    CheckIdentifier(Symbols(), a->type, "u32");
-}
+FunctionExpression::FunctionExpression(const ast::Expression* declaration,
+                                       const Statement* statement,
+                                       const sem::Function* function)
+    : Base(declaration, statement), function_(function) {}
 
-}  // namespace
-}  // namespace tint::ast
+FunctionExpression::~FunctionExpression() = default;
+
+}  // namespace tint::sem
