@@ -33,7 +33,7 @@ namespace tint {
 class ProgramBuilder;
 }  // namespace tint
 namespace tint::ast {
-class Type;
+class Identifier;
 }  // namespace tint::ast
 
 namespace tint::reader::spirv {
@@ -49,8 +49,8 @@ class Type : public Castable<Type> {
     ~Type() override;
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    virtual const ast::Type* Build(ProgramBuilder& b) const = 0;
+    /// @returns the constructed ast::Identifier node for the given type
+    virtual const ast::Identifier* Build(ProgramBuilder& b) const = 0;
 
     /// @returns the inner most store type if this is a pointer, `this` otherwise
     const Type* UnwrapPtr() const;
@@ -101,8 +101,8 @@ using TypeList = std::vector<const Type*>;
 /// `void` type
 struct Void final : public Castable<Void, Type> {
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -113,8 +113,8 @@ struct Void final : public Castable<Void, Type> {
 /// `bool` type
 struct Bool final : public Castable<Bool, Type> {
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -125,8 +125,8 @@ struct Bool final : public Castable<Bool, Type> {
 /// `u32` type
 struct U32 final : public Castable<U32, Type> {
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -137,8 +137,8 @@ struct U32 final : public Castable<U32, Type> {
 /// `f32` type
 struct F32 final : public Castable<F32, Type> {
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -149,8 +149,8 @@ struct F32 final : public Castable<F32, Type> {
 /// `i32` type
 struct I32 final : public Castable<I32, Type> {
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -171,8 +171,8 @@ struct Pointer final : public Castable<Pointer, Type> {
     Pointer(const Pointer& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -202,8 +202,8 @@ struct Reference final : public Castable<Reference, Type> {
     Reference(const Reference& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -230,8 +230,8 @@ struct Vector final : public Castable<Vector, Type> {
     Vector(const Vector& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -257,8 +257,8 @@ struct Matrix final : public Castable<Matrix, Type> {
     Matrix(const Matrix& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -287,8 +287,8 @@ struct Array final : public Castable<Array, Type> {
     Array(const Array& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -314,8 +314,8 @@ struct Sampler final : public Castable<Sampler, Type> {
     Sampler(const Sampler& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -353,8 +353,8 @@ struct DepthTexture final : public Castable<DepthTexture, Texture> {
     DepthTexture(const DepthTexture& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -373,8 +373,8 @@ struct DepthMultisampledTexture final : public Castable<DepthMultisampledTexture
     DepthMultisampledTexture(const DepthMultisampledTexture& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -394,8 +394,8 @@ struct MultisampledTexture final : public Castable<MultisampledTexture, Texture>
     MultisampledTexture(const MultisampledTexture& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -418,8 +418,8 @@ struct SampledTexture final : public Castable<SampledTexture, Texture> {
     SampledTexture(const SampledTexture& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -443,8 +443,8 @@ struct StorageTexture final : public Castable<StorageTexture, Texture> {
     StorageTexture(const StorageTexture& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
 #ifndef NDEBUG
     /// @returns a string representation of the type, for debug purposes only
@@ -492,8 +492,8 @@ struct Alias final : public Castable<Alias, Named> {
     Alias(const Alias& other);
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
     /// the aliased type
     Type const* const type;
@@ -514,8 +514,8 @@ struct Struct final : public Castable<Struct, Named> {
     ~Struct() override;
 
     /// @param b the ProgramBuilder used to construct the AST types
-    /// @returns the constructed ast::Type node for the given type
-    const ast::Type* Build(ProgramBuilder& b) const override;
+    /// @returns the constructed ast::Identifier node for the given type
+    const ast::Identifier* Build(ProgramBuilder& b) const override;
 
     /// the member types
     const TypeList members;

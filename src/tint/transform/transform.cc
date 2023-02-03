@@ -73,7 +73,7 @@ void Transform::RemoveStatement(CloneContext& ctx, const ast::Statement* stmt) {
         << "unable to remove statement from parent of type " << sem->TypeInfo().name;
 }
 
-const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type* ty) {
+const ast::Identifier* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type* ty) {
     if (ty->Is<type::Void>()) {
         return nullptr;
     }
@@ -94,11 +94,11 @@ const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type
     }
     if (auto* m = ty->As<type::Matrix>()) {
         auto* el = CreateASTTypeFor(ctx, m->type());
-        return ctx.dst->create<ast::Matrix>(el, m->rows(), m->columns());
+        return ctx.dst->ty.mat(el, m->columns(), m->rows());
     }
     if (auto* v = ty->As<type::Vector>()) {
         auto* el = CreateASTTypeFor(ctx, v->type());
-        return ctx.dst->create<ast::Vector>(el, v->Width());
+        return ctx.dst->ty.vec(el, v->Width());
     }
     if (auto* a = ty->As<type::Array>()) {
         auto* el = CreateASTTypeFor(ctx, a->ElemType());
@@ -122,7 +122,7 @@ const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type
                 if (auto* alias = type_decl->As<ast::Alias>()) {
                     if (ty == ctx.src->Sem().Get(alias)) {
                         // Alias found. Use the alias name to ensure types compare equal.
-                        return ctx.dst->ty(ctx.Clone(alias->name->symbol));
+                        return ctx.dst->Ident(ctx.Clone(alias->name->symbol));
                     }
                 }
             }
@@ -138,13 +138,13 @@ const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type
         return ctx.dst->ty.array(el, u32(count.value()), std::move(attrs));
     }
     if (auto* s = ty->As<sem::Struct>()) {
-        return ctx.dst->ty(ctx.Clone(s->Declaration()->name->symbol));
+        return ctx.dst->Ident(ctx.Clone(s->Declaration()->name->symbol));
     }
     if (auto* s = ty->As<type::Reference>()) {
         return CreateASTTypeFor(ctx, s->StoreType());
     }
     if (auto* a = ty->As<type::Atomic>()) {
-        return ctx.dst->create<ast::Atomic>(CreateASTTypeFor(ctx, a->Type()));
+        return ctx.dst->ty.atomic(CreateASTTypeFor(ctx, a->Type()));
     }
     if (auto* t = ty->As<type::DepthTexture>()) {
         return ctx.dst->ty.depth_texture(t->dim());
@@ -156,11 +156,10 @@ const ast::Type* Transform::CreateASTTypeFor(CloneContext& ctx, const type::Type
         return ctx.dst->ty.external_texture();
     }
     if (auto* t = ty->As<type::MultisampledTexture>()) {
-        return ctx.dst->create<ast::MultisampledTexture>(t->dim(),
-                                                         CreateASTTypeFor(ctx, t->type()));
+        return ctx.dst->ty.multisampled_texture(t->dim(), CreateASTTypeFor(ctx, t->type()));
     }
     if (auto* t = ty->As<type::SampledTexture>()) {
-        return ctx.dst->create<ast::SampledTexture>(t->dim(), CreateASTTypeFor(ctx, t->type()));
+        return ctx.dst->ty.sampled_texture(t->dim(), CreateASTTypeFor(ctx, t->type()));
     }
     if (auto* t = ty->As<type::StorageTexture>()) {
         return ctx.dst->ty.storage_texture(t->dim(), t->texel_format(), t->access());

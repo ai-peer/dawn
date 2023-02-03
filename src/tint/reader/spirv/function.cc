@@ -1259,7 +1259,7 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
     FunctionDeclaration decl;
     decl.source = source;
     decl.name = ep_info_->name;
-    const ast::Type* return_type = nullptr;  // Populated below.
+    const ast::Identifier* return_type = nullptr;  // Populated below.
 
     // Pipeline inputs become parameters to the wrapper function, and
     // their values are saved into the corresponding private variables that
@@ -5706,7 +5706,7 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
                     create<ast::MemberAccessorExpression>(Source{}, dims_call, PrefixSwizzle(2));
             }
             exprs.Push(dims_call);
-            if (ast::IsTextureArray(dims)) {
+            if (type::IsTextureArray(dims)) {
                 auto num_layers =
                     builder_.Call(Source{}, "textureNumLayers", GetImageExpression(inst));
                 exprs.Push(num_layers);
@@ -5768,7 +5768,7 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         }
 
         // Function return type
-        const ast::Type* ret_type = nullptr;
+        const ast::Identifier* ret_type = nullptr;
         if (inst.type_id() != 0) {
             ret_type = parser_impl_.ConvertType(inst.type_id())->Build(builder_);
         } else {
@@ -5897,8 +5897,8 @@ FunctionEmitter::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageA
     }
     type::TextureDimension dim = texture_type->dims;
     // Number of regular coordinates.
-    uint32_t num_axes = static_cast<uint32_t>(ast::NumCoordinateAxes(dim));
-    bool is_arrayed = ast::IsTextureArray(dim);
+    uint32_t num_axes = static_cast<uint32_t>(type::NumCoordinateAxes(dim));
+    bool is_arrayed = type::IsTextureArray(dim);
     if ((num_axes == 0) || (num_axes > 3)) {
         Fail() << "unsupported image dimensionality for " << texture_type->TypeInfo().name
                << " prompted by " << inst.PrettyPrint();

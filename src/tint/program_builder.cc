@@ -110,13 +110,20 @@ const type::Type* ProgramBuilder::TypeOf(const ast::Type* type) const {
     return Sem().Get(type);
 }
 
+const type::Type* ProgramBuilder::TypeOf(const ast::Identifier*) const {
+    diag::List diag;
+    TINT_UNIMPLEMENTED(ProgramBuilder, diag) << "TypeOf(const ast::Identifier* ident)";
+    return nullptr;
+    // return Sem().Get(ident);
+}
+
 const type::Type* ProgramBuilder::TypeOf(const ast::TypeDecl* type_decl) const {
     return Sem().Get(type_decl);
 }
 
-std::string ProgramBuilder::FriendlyName(const ast::Type* type) const {
+std::string ProgramBuilder::FriendlyName(const ast::Identifier* type) const {
     TINT_ASSERT_PROGRAM_IDS_EQUAL(ProgramBuilder, type, ID());
-    return type ? type->FriendlyName(Symbols()) : "<null>";
+    return type ? Symbols().NameFor(type->symbol) : "<null>";
 }
 
 std::string ProgramBuilder::FriendlyName(const type::Type* type) const {
@@ -125,10 +132,6 @@ std::string ProgramBuilder::FriendlyName(const type::Type* type) const {
 
 std::string ProgramBuilder::FriendlyName(std::nullptr_t) const {
     return "<null>";
-}
-
-const ast::TypeName* ProgramBuilder::TypesBuilder::Of(const ast::TypeDecl* decl) const {
-    return (*this)(decl->name->symbol);
 }
 
 ProgramBuilder::TypesBuilder::TypesBuilder(ProgramBuilder* pb) : builder(pb) {}
