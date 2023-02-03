@@ -436,9 +436,9 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
 
 bool Adapter::SupportsExternalImages() const {
     // Via dawn::native::vulkan::WrapVulkanImage
-    return external_memory::Service::CheckSupport(mDeviceInfo) &&
-           external_semaphore::Service::CheckSupport(mDeviceInfo, mPhysicalDevice,
-                                                     mVulkanInstance->GetFunctions());
+    return external_memory::ServiceManager::CheckSupport(mDeviceInfo) &&
+           external_semaphore::ServiceManager::CheckSupport(mDeviceInfo, mPhysicalDevice,
+                                                            mVulkanInstance->GetFunctions());
 }
 
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(
