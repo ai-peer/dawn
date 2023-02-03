@@ -106,7 +106,7 @@ Transform::ApplyResult CalculateArrayLength::Apply(const Program* src,
             auto name = b.Sym();
             auto* type = CreateASTTypeFor(ctx, buffer_type);
             auto* disable_validation = b.Disable(ast::DisabledValidation::kFunctionParameter);
-            b.AST().AddFunction(b.create<ast::Function>(
+            b.Func(
                 name,
                 utils::Vector{
                     b.Param("buffer",
@@ -117,8 +117,7 @@ Transform::ApplyResult CalculateArrayLength::Apply(const Program* src,
                 b.ty.void_(), nullptr,
                 utils::Vector{
                     b.ASTNodes().Create<BufferSizeIntrinsic>(b.ID(), b.AllocateNodeID()),
-                },
-                utils::Empty));
+                });
 
             return name;
         });
