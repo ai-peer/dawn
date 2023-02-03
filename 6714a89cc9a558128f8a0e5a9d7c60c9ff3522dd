@@ -87,6 +87,30 @@
       },
       "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7319ff43_581d79a5",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T20:33:55Z",
+      "side": 1,
+      "message": "I think that\u0027s already the case for the GN build but needs to be fixed for CMake",
+      "parentUuid": "69af3fd6_afdf2453",
+      "range": {
+        "startLine": 403,
+        "startChar": 13,
+        "endLine": 404,
+        "endChar": 76
+      },
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
