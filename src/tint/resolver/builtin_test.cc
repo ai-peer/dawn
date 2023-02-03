@@ -37,6 +37,7 @@
 #include "src/tint/type/sampled_texture.h"
 #include "src/tint/type/test_helper.h"
 #include "src/tint/type/texture_dimension.h"
+#include "src/tint/utils/string.h"
 
 using ::testing::ElementsAre;
 using ::testing::HasSubstr;
@@ -2011,7 +2012,7 @@ TEST_P(ResolverBuiltinDerivativeTest, Scalar) {
     GlobalVar("ident", ty.f32(), type::AddressSpace::kPrivate);
 
     auto* expr = Call(name, "ident");
-    Func("func", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("func", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -2025,7 +2026,7 @@ TEST_P(ResolverBuiltinDerivativeTest, Vector) {
     GlobalVar("ident", ty.vec4<f32>(), type::AddressSpace::kPrivate);
 
     auto* expr = Call(name, "ident");
-    Func("func", utils::Empty, ty.void_(), utils::Vector{Ignore(expr)},
+    Func("func", utils::Empty, ty.void_, utils::Vector{Ignore(expr)},
          utils::Vector{create<ast::StageAttribute>(ast::PipelineStage::kFragment)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -2096,25 +2097,29 @@ class ResolverBuiltinTest_TextureOperation : public ResolverTestWithParam<Textur
     /// @param dim dimensionality of the texture being sampled
     /// @param scalar the scalar type
     /// @returns a pointer to a type appropriate for the coord param
-    const ast::Type* GetCoordsType(type::TextureDimension dim, const ast::Type* scalar) {
+    const ast::Identifier* GetCoordsType(type::TextureDimension dim,
+                                         const ast::Identifier* scalar) {
         switch (dim) {
             case type::TextureDimension::k1d:
-                return scalar;
+                return Ident(scalar);
             case type::TextureDimension::k2d:
             case type::TextureDimension::k2dArray:
-                return ty.vec(scalar, 2);
+                return ty.vec2(scalar);
             case type::TextureDimension::k3d:
             case type::TextureDimension::kCube:
             case type::TextureDimension::kCubeArray:
-                return ty.vec(scalar, 3);
+                return ty.vec3(scalar);
             default:
                 [=]() { FAIL() << "Unsupported texture dimension: " << dim; }();
         }
         return nullptr;
     }
 
-    void add_call_param(std::string name, const ast::Type* type, ExpressionList* call_params) {
-        if (type->IsAnyOf<ast::Texture, ast::Sampler>()) {
+    void add_call_param(std::string name,
+                        const ast::Identifier* type,
+                        ExpressionList* call_params) {
+        std::string type_name = Symbols().NameFor(type->symbol);
+        if (utils::HasPrefix(type_name, "texture") || utils::HasPrefix(type_name, "sampler")) {
             GlobalVar(name, type, Binding(0_a), Group(0_a));
 
         } else {
@@ -2123,7 +2128,7 @@ class ResolverBuiltinTest_TextureOperation : public ResolverTestWithParam<Textur
 
         call_params->Push(Expr(name));
     }
-    const ast::Type* subtype(Texture type) {
+    const ast::Identifier* subtype(Texture type) {
         if (type == Texture::kF32) {
             return ty.f32();
         }
@@ -2438,7 +2443,7 @@ TEST_P(ResolverBuiltinTest_Texture, Call) {
 
     auto* call = Call(param.function, param.args(this));
     auto* stmt = CallStmt(call);
-    Func("func", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("func", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();

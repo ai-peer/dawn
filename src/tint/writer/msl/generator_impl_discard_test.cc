@@ -22,7 +22,7 @@ using MslGeneratorImplTest = TestHelper;
 TEST_F(MslGeneratorImplTest, Emit_Discard) {
     auto* stmt = create<ast::DiscardStatement>();
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("F", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();

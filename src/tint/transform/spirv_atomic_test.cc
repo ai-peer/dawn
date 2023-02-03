@@ -99,7 +99,7 @@ class SpirvAtomicTest : public TransformTest {
                    b.Param("p0", b.ty.u32()),
                    b.Param("p1", b.ty.u32()),
                },
-               b.ty.void_(), utils::Empty,
+               b.ty.void_, utils::Empty,
                utils::Vector{
                    b.ASTNodes().Create<SpirvAtomic::Stub>(b.ID(), b.AllocateNodeID(),
                                                           sem::BuiltinType::kAtomicStore),
@@ -109,7 +109,7 @@ class SpirvAtomicTest : public TransformTest {
                    b.Param("p0", b.ty.i32()),
                    b.Param("p1", b.ty.i32()),
                },
-               b.ty.void_(), utils::Empty,
+               b.ty.void_, utils::Empty,
                utils::Vector{
                    b.ASTNodes().Create<SpirvAtomic::Stub>(b.ID(), b.AllocateNodeID(),
                                                           sem::BuiltinType::kAtomicStore),

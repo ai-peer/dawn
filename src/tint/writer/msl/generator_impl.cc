@@ -30,7 +30,6 @@
 #include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/module.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/void.h"
 #include "src/tint/constant/value.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/function.h"
@@ -652,7 +651,7 @@ bool GeneratorImpl::EmitCall(std::ostream& out, const ast::CallExpression* expr)
 bool GeneratorImpl::EmitFunctionCall(std::ostream& out,
                                      const sem::Call* call,
                                      const sem::Function*) {
-    auto* ident = call->Declaration()->target.name;
+    auto* ident = call->Declaration()->target;
     out << program_->Symbols().NameFor(ident->symbol) << "(";
 
     bool first = true;
@@ -1995,12 +1994,17 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
         return bp.binding;
     };
 
+    auto* sem = program_->Sem().Get(func);
+
     {
         auto out = line();
 
         EmitStage(out, func->PipelineStage());
-        out << " " << func->return_type->FriendlyName(program_->Symbols());
-        out << " " << func_name << "(";
+        out << " ";
+        if (!EmitTypeAndName(out, sem->ReturnType(), func_name)) {
+            return false;
+        }
+        out << " (";
 
         // Emit entry point parameters.
         bool first = true;
@@ -2021,60 +2025,80 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
                 out << " " << param_name;
             }
 
-            if (type->Is<sem::Struct>()) {
-                out << " [[stage_in]]";
-            } else if (type->is_handle()) {
-                uint32_t binding = get_binding_index(param);
-                if (binding == kInvalidBindingIndex) {
-                    return false;
-                }
-                if (param->type->Is<ast::Sampler>()) {
-                    out << " [[sampler(" << binding << ")]]";
-                } else if (TINT_LIKELY(param->type->Is<ast::Texture>())) {
-                    out << " [[texture(" << binding << ")]]";
-                } else {
-                    TINT_ICE(Writer, diagnostics_) << "invalid handle type entry point parameter";
-                    return false;
-                }
-            } else if (auto* ptr = param->type->As<ast::Pointer>()) {
-                auto sc = ptr->address_space;
-                if (sc == type::AddressSpace::kWorkgroup) {
-                    auto& allocations = workgroup_allocations_[func_name];
-                    out << " [[threadgroup(" << allocations.size() << ")]]";
-                    allocations.push_back(program_->Sem().Get(ptr->type)->Size());
-                } else if (TINT_LIKELY(sc == type::AddressSpace::kStorage ||
-                                       sc == type::AddressSpace::kUniform)) {
+            bool ok = Switch(
+                type,  //
+                [&](const type::Struct* str) {
+                    out << " [[stage_in]]";
+                    return true;
+                },
+                [&](const type::Texture* tex) {
                     uint32_t binding = get_binding_index(param);
                     if (binding == kInvalidBindingIndex) {
                         return false;
                     }
-                    out << " [[buffer(" << binding << ")]]";
-                } else {
+                    out << " [[texture(" << binding << ")]]";
+                    return true;
+                },
+                [&](const type::Sampler* tex) {
+                    uint32_t binding = get_binding_index(param);
+                    if (binding == kInvalidBindingIndex) {
+                        return false;
+                    }
+                    out << " [[sampler(" << binding << ")]]";
+                    return true;
+                },
+                [&](const type::Pointer* ptr) {
+                    switch (ptr->AddressSpace()) {
+                        case type::AddressSpace::kWorkgroup: {
+                            auto& allocations = workgroup_allocations_[func_name];
+                            out << " [[threadgroup(" << allocations.size() << ")]]";
+                            allocations.push_back(ptr->StoreType()->Size());
+                            return true;
+                        }
+
+                        case type::AddressSpace::kStorage:
+                        case type::AddressSpace::kUniform: {
+                            uint32_t binding = get_binding_index(param);
+                            if (binding == kInvalidBindingIndex) {
+                                return false;
+                            }
+                            out << " [[buffer(" << binding << ")]]";
+                            return true;
+                        }
+
+                        default:
+                            break;
+                    }
                     TINT_ICE(Writer, diagnostics_)
                         << "invalid pointer address space for entry point parameter";
                     return false;
-                }
-            } else {
-                auto& attrs = param->attributes;
-                bool builtin_found = false;
-                for (auto* attr : attrs) {
-                    auto* builtin = attr->As<ast::BuiltinAttribute>();
-                    if (!builtin) {
-                        continue;
+                },
+                [&](Default) {
+                    auto& attrs = param->attributes;
+                    bool builtin_found = false;
+                    for (auto* attr : attrs) {
+                        auto* builtin = attr->As<ast::BuiltinAttribute>();
+                        if (!builtin) {
+                            continue;
+                        }
+
+                        builtin_found = true;
+
+                        auto name = builtin_to_attribute(builtin->builtin);
+                        if (name.empty()) {
+                            diagnostics_.add_error(diag::System::Writer, "unknown builtin");
+                            return false;
+                        }
+                        out << " [[" << name << "]]";
                     }
-
-                    builtin_found = true;
-
-                    auto name = builtin_to_attribute(builtin->builtin);
-                    if (name.empty()) {
-                        diagnostics_.add_error(diag::System::Writer, "unknown builtin");
+                    if (TINT_UNLIKELY(!builtin_found)) {
+                        TINT_ICE(Writer, diagnostics_) << "Unsupported entry point parameter";
                         return false;
                     }
-                    out << " [[" << name << "]]";
-                }
-                if (TINT_UNLIKELY(!builtin_found)) {
-                    TINT_ICE(Writer, diagnostics_) << "Unsupported entry point parameter";
-                }
+                    return true;
+                });
+            if (!ok) {
+                return false;
             }
         }
         out << ") {";

@@ -59,7 +59,7 @@ TEST_F(BuilderTest, Switch_WithCase) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.i32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Switch("a",                                               //
                                  Case(CaseSelector(1_i), Block(Assign("v", 1_i))),  //
@@ -116,7 +116,7 @@ TEST_F(BuilderTest, Switch_WithCase_Unsigned) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.u32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Switch("a",                                               //
                                  Case(CaseSelector(1_u), Block(Assign("v", 1_i))),  //
@@ -173,7 +173,7 @@ TEST_F(BuilderTest, Switch_WithDefault) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.i32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Switch("a",                                    //
                                  DefaultCase(Block(Assign("v", 1_i)))),  //
@@ -223,7 +223,7 @@ TEST_F(BuilderTest, Switch_WithCaseAndDefault) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.i32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Switch(Expr("a"),                                                 //
                                  Case(CaseSelector(1_i),                                    //
@@ -283,7 +283,7 @@ TEST_F(BuilderTest, Switch_WithCaseAndMixedDefault) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.i32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{Switch(Expr("a"),                      //
                                            Case(CaseSelector(1_i),         //
                                                 Block(Assign("v", 1_i))),  //
@@ -340,7 +340,7 @@ TEST_F(BuilderTest, Switch_WithNestedBreak) {
     auto* v = GlobalVar("v", ty.i32(), type::AddressSpace::kPrivate);
     auto* a = GlobalVar("a", ty.i32(), type::AddressSpace::kPrivate);
 
-    auto* func = Func("a_func", utils::Empty, ty.void_(),
+    auto* func = Func("a_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Switch("a",                     //
                                  Case(CaseSelector(1_i),  //

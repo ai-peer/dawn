@@ -26,7 +26,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Loop) {
     auto* continuing = Block();
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -41,13 +41,13 @@ TEST_F(WgslGeneratorImplTest, Emit_Loop) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_LoopWithContinuing) {
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* body = Block(Break());
     auto* continuing = Block(CallStmt(Call("a_statement")));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -66,13 +66,13 @@ TEST_F(WgslGeneratorImplTest, Emit_LoopWithContinuing) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_LoopWithContinuing_BreakIf) {
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* body = Block(create<ast::DiscardStatement>());
     auto* continuing = Block(CallStmt(Call("a_statement")), BreakIf(true));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();

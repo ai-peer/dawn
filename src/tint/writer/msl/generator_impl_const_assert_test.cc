@@ -35,7 +35,7 @@ using namespace metal;
 }
 
 TEST_F(MslGeneratorImplTest, Emit_FunctionConstAssert) {
-    Func("f", utils::Empty, ty.void_(), utils::Vector{ConstAssert(true)});
+    Func("f", utils::Empty, ty.void_, utils::Vector{ConstAssert(true)});
 
     GeneratorImpl& gen = Build();
 

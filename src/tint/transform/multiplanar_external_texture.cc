@@ -144,7 +144,7 @@ struct MultiplanarExternalTexture::State {
             b.GlobalVar(syms.plane_1, b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32()),
                         b.Group(AInt(bps.plane_1.group)), b.Binding(AInt(bps.plane_1.binding)));
             syms.params = b.Symbols().New("ext_tex_params");
-            b.GlobalVar(syms.params, b.ty("ExternalTextureParams"), type::AddressSpace::kUniform,
+            b.GlobalVar(syms.params, b.Ident("ExternalTextureParams"), type::AddressSpace::kUniform,
                         b.Group(AInt(bps.params.group)), b.Binding(AInt(bps.params.binding)));
 
             // Replace the original texture_external binding with a texture_2d<f32> binding.
@@ -183,7 +183,7 @@ struct MultiplanarExternalTexture::State {
                     ctx.Replace(param, b.Param(syms.plane_0, tex2d_f32()));
                     ctx.InsertAfter(fn->params, param, b.Param(syms.plane_1, tex2d_f32()));
                     ctx.InsertAfter(fn->params, param,
-                                    b.Param(syms.params, b.ty(params_struct_sym)));
+                                    b.Param(syms.params, b.Ident(params_struct_sym)));
                 }
             }
         }
@@ -260,10 +260,11 @@ struct MultiplanarExternalTexture::State {
             b.Member("numPlanes", b.ty.u32()),
             b.Member("doYuvToRgbConversionOnly", b.ty.u32()),
             b.Member("yuvToRgbConversionMatrix", b.ty.mat3x4<f32>()),
-            b.Member("gammaDecodeParams", b.ty("GammaTransferParams")),
-            b.Member("gammaEncodeParams", b.ty("GammaTransferParams")),
+            b.Member("gammaDecodeParams", b.Ident("GammaTransferParams")),
+            b.Member("gammaEncodeParams", b.Ident("GammaTransferParams")),
             b.Member("gamutConversionMatrix", b.ty.mat3x3<f32>()),
-            b.Member("coordTransformationMatrix", b.ty.mat3x2<f32>())};
+            b.Member("coordTransformationMatrix", b.ty.mat3x2<f32>()),
+        };
 
         params_struct_sym = b.Symbols().New("ExternalTextureParams");
 
@@ -279,7 +280,7 @@ struct MultiplanarExternalTexture::State {
             gamma_correction_sym,
             utils::Vector{
                 b.Param("v", b.ty.vec3<f32>()),
-                b.Param("params", b.ty(gamma_transfer_struct_sym)),
+                b.Param("params", b.Ident(gamma_transfer_struct_sym)),
             },
             b.ty.vec3<f32>(),
             utils::Vector{
@@ -320,17 +321,17 @@ struct MultiplanarExternalTexture::State {
                     "modifiedCoords", b.Mul(b.MemberAccessor("params", "coordTransformationMatrix"),
                                             b.vec3<f32>("coord", 1_a)))));
 
-                stmts.Push(b.Decl(b.Let(
-                    "plane0_dims",
-                    b.Construct(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane0", 0_a)))));
+                stmts.Push(b.Decl(
+                    b.Let("plane0_dims",
+                          b.Call(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane0", 0_a)))));
                 stmts.Push(
                     b.Decl(b.Let("plane0_half_texel", b.Div(b.vec2<f32>(0.5_a), "plane0_dims"))));
                 stmts.Push(b.Decl(
                     b.Let("plane0_clamped", b.Call("clamp", "modifiedCoords", "plane0_half_texel",
                                                    b.Sub(1_a, "plane0_half_texel")))));
-                stmts.Push(b.Decl(b.Let(
-                    "plane1_dims",
-                    b.Construct(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane1", 0_a)))));
+                stmts.Push(b.Decl(
+                    b.Let("plane1_dims",
+                          b.Call(b.ty.vec2<f32>(), b.Call("textureDimensions", "plane1", 0_a)))));
                 stmts.Push(
                     b.Decl(b.Let("plane1_half_texel", b.Div(b.vec2<f32>(0.5_a), "plane1_dims"))));
                 stmts.Push(b.Decl(
@@ -427,7 +428,7 @@ struct MultiplanarExternalTexture::State {
                                b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
                        b.Param("smp", b.ty.sampler(type::SamplerKind::kSampler)),
                        b.Param("coord", b.ty.vec2(b.ty.f32())),
-                       b.Param("params", b.ty(params_struct_sym)),
+                       b.Param("params", b.Ident(params_struct_sym)),
                    },
                    b.ty.vec4(b.ty.f32()),
                    buildTextureBuiltinBody(sem::BuiltinType::kTextureSampleBaseClampToEdge));
@@ -474,7 +475,7 @@ struct MultiplanarExternalTexture::State {
                        b.Param("plane1",
                                b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
                        b.Param("coord", CreateASTTypeFor(ctx, coord_ty)),
-                       b.Param("params", b.ty(params_struct_sym)),
+                       b.Param("params", b.Ident(params_struct_sym)),
                    },
                    b.ty.vec4(b.ty.f32()),  //
                    buildTextureBuiltinBody(sem::BuiltinType::kTextureLoad));

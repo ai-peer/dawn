@@ -3238,9 +3238,12 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
             out << ")]" << std::endl;
         }
 
-        out << func->return_type->FriendlyName(builder_.Symbols());
+        if (!EmitTypeAndName(out, func_sem->ReturnType(), type::AddressSpace::kUndefined,
+                             type::Access::kUndefined, builder_.Symbols().NameFor(func->symbol))) {
+            return false;
+        }
 
-        out << " " << builder_.Symbols().NameFor(func->symbol) << "(";
+        out << "(";
 
         bool first = true;
 

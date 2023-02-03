@@ -31,6 +31,39 @@ using TestHelper = TestHelperBase<testing::Test>;
 template <typename T>
 using TestParamHelper = TestHelperBase<testing::TestWithParam<T>>;
 
+template <typename... ARGS>
+void CheckIdentifier(const SymbolTable& symbols,
+                     const ast::Identifier* ident,
+                     std::string_view expected,
+                     ARGS&&... expected_args) {
+    static constexpr uint32_t num_expected_args = sizeof...(expected_args);
+
+    EXPECT_EQ(symbols.NameFor(ident->symbol), expected);
+
+    if constexpr (num_expected_args == 0) {
+        EXPECT_FALSE(ident->Is<ast::TemplatedIdentifier>());
+    } else {
+        ASSERT_TRUE(ident->Is<ast::TemplatedIdentifier>());
+        auto* t = ident->As<ast::TemplatedIdentifier>();
+        ASSERT_EQ(t->arguments.Length(), num_expected_args);
+
+        size_t arg_idx = 0;
+        auto check_arg = [&](auto&& expected) {
+            const auto* arg = t->arguments[arg_idx++];
+
+            using T = std::decay_t<decltype(expected)>;
+            if constexpr (traits::IsStringLike<T>) {
+                ASSERT_TRUE(arg->Is<ast::IdentifierExpression>());
+                CheckIdentifier(symbols, arg->As<ast::IdentifierExpression>()->identifier,
+                                expected);
+            } else {
+                FAIL() << "unhandled expected_args type";
+            }
+        };
+        (check_arg(std::forward<ARGS>(expected_args)), ...);
+    }
+}
+
 }  // namespace tint::ast
 
 #endif  // SRC_TINT_AST_TEST_HELPER_H_

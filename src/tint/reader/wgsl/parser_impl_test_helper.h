@@ -21,7 +21,9 @@
 #include <vector>
 
 #include "gtest/gtest.h"
+#include "src/tint/ast/test_helper.h"
 #include "src/tint/reader/wgsl/parser_impl.h"
+#include "src/tint/traits.h"
 
 namespace tint::reader::wgsl {
 
@@ -41,6 +43,14 @@ class ParserImplTest : public testing::Test {
         impl->InitializeLex();
         files_.emplace_back(std::move(file));
         return impl;
+    }
+
+    template <typename... ARGS>
+    void CheckIdentifier(const SymbolTable& symbols,
+                         const ast::Identifier* ident,
+                         std::string_view expected,
+                         ARGS&&... expected_args) {
+        ast::CheckIdentifier(symbols, ident, expected, std::forward<ARGS>(expected_args)...);
     }
 
   private:
