@@ -33,53 +33,53 @@ namespace {
 using GlslGeneratorImplTest_Type = TestHelper;
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_Array) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[4]");
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArray) {
-    auto* arr = ty.array(ty.array<bool, 4>(), 5_u);
+    auto* arr = Type(ty.array(ty.array<bool, 4>(), 5_u));
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[5][4]");
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArrayOfArray) {
-    auto* arr = ty.array(ty.array(ty.array<bool, 4>(), 5_u), 6_u);
+    auto* arr = Type(ty.array(ty.array(ty.array<bool, 4>(), 5_u), 6_u));
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, "ary"))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, "ary"))
         << gen.error();
     EXPECT_EQ(out.str(), "bool ary[6][5][4]");
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_Array_WithoutName) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), type::AddressSpace::kNone,
-                             type::Access::kReadWrite, ""))
+    ASSERT_TRUE(
+        gen.EmitType(out, TypeOf(arr), type::AddressSpace::kNone, type::Access::kReadWrite, ""))
         << gen.error();
     EXPECT_EQ(out.str(), "bool[4]");
 }
@@ -373,7 +373,7 @@ using GlslSampledTexturesTest = TestParamHelper<GlslSampledTextureData>;
 TEST_P(GlslSampledTexturesTest, Emit) {
     auto params = GetParam();
 
-    const ast::Type* datatype = nullptr;
+    const ast::Identifier* datatype = nullptr;
     switch (params.datatype) {
         case TextureDataType::F32:
             datatype = ty.f32();

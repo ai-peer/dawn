@@ -963,7 +963,7 @@ TEST_F(ResolverFunctionValidationTest, ReturnIsConstructible_StructOfAtomic) {
     Structure("S", utils::Vector{
                        Member("m", ty.atomic(ty.i32())),
                    });
-    auto* ret_type = ty(Source{{12, 34}}, "S");
+    auto* ret_type = Ident(Source{{12, 34}}, "S");
     Func("f", utils::Empty, ret_type, utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
@@ -982,7 +982,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterStoreType_NonAtomicFree) {
     Structure("S", utils::Vector{
                        Member("m", ty.atomic(ty.i32())),
                    });
-    auto* ret_type = ty(Source{{12, 34}}, "S");
+    auto* ret_type = Ident(Source{{12, 34}}, "S");
     auto* bar = Param("bar", ret_type);
     Func("f", utils::Vector{bar}, ty.void_(), utils::Empty);
 
@@ -994,7 +994,7 @@ TEST_F(ResolverFunctionValidationTest, ParameterSotreType_AtomicFree) {
     Structure("S", utils::Vector{
                        Member("m", ty.i32()),
                    });
-    auto* ret_type = ty(Source{{12, 34}}, "S");
+    auto* ret_type = Ident(Source{{12, 34}}, "S");
     auto* bar = Param(Source{{12, 34}}, "bar", ret_type);
     Func("f", utils::Vector{bar}, ty.void_(), utils::Empty);
 
@@ -1025,23 +1025,21 @@ TEST_F(ResolverFunctionValidationTest, ParametersOverLimit) {
 TEST_F(ResolverFunctionValidationTest, ParameterVectorNoType) {
     // fn f(p : vec3) {}
 
-    Func(Source{{12, 34}}, "f",
-         utils::Vector{Param("p", create<ast::Vector>(Source{{12, 34}}, nullptr, 3u))}, ty.void_(),
-         utils::Empty);
-
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: missing vector element type");
-}
-
-TEST_F(ResolverFunctionValidationTest, ParameterMatrixNoType) {
-    // fn f(p : vec3) {}
-
-    Func(Source{{12, 34}}, "f",
-         utils::Vector{Param("p", create<ast::Matrix>(Source{{12, 34}}, nullptr, 3u, 3u))},
+    Func(Source{{12, 34}}, "f", utils::Vector{Param("p", ty.vec3<Infer>(Source{{12, 34}}))},
          ty.void_(), utils::Empty);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: missing matrix element type");
+    EXPECT_EQ(r()->error(), "12:34 error: expected '<' for 'vec3'");
+}
+
+TEST_F(ResolverFunctionValidationTest, ParameterMatrixNoType) {
+    // fn f(p : mat3x3) {}
+
+    Func(Source{{12, 34}}, "f", utils::Vector{Param("p", ty.mat3x3<Infer>(Source{{12, 34}}))},
+         ty.void_(), utils::Empty);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: expected '<' for 'mat3x3'");
 }
 
 enum class Expectation {

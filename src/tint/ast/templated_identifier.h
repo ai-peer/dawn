@@ -33,11 +33,13 @@ class TemplatedIdentifier final : public Castable<TemplatedIdentifier, Identifie
     /// @param src the source of this node
     /// @param sym the symbol for the identifier
     /// @param args the template arguments
+    /// @param attrs the identifier attributes
     TemplatedIdentifier(ProgramID pid,
                         NodeID nid,
                         const Source& src,
                         const Symbol& sym,
-                        utils::VectorRef<const Expression*> args);
+                        utils::VectorRef<const Expression*> args,
+                        utils::VectorRef<const Attribute*> attrs);
     /// Move constructor
     TemplatedIdentifier(TemplatedIdentifier&&);
     ~TemplatedIdentifier() override;
@@ -49,6 +51,9 @@ class TemplatedIdentifier final : public Castable<TemplatedIdentifier, Identifie
 
     /// The templated arguments
     const utils::Vector<const Expression*, 3> arguments;
+
+    /// Attributes on the identifier
+    const utils::Vector<const Attribute*, 0> attributes;
 };
 
 }  // namespace tint::ast
