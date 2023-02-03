@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8efee582_a78eb1aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T20:02:25Z",
+      "side": 1,
+      "message": "isn\u0027t this supposed to",
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40c7a503_1a4c4501",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T20:02:25Z",
+      "side": 1,
+      "message": "I think ValidateSpirv also dumps the disassembly - we should probably make this only happen in one place.\n\nIIRC, we put it inside DAWN_ENABLE_SPIRV_VALIDATION so that we can not include spirv tools on Android do decrease binary size",
+      "range": {
+        "startLine": 403,
+        "startChar": 13,
+        "endLine": 404,
+        "endChar": 76
+      },
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
