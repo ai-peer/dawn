@@ -19,9 +19,7 @@
 #include <vector>
 
 #include "src/tint/ast/alias.h"
-#include "src/tint/ast/array.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/atomic.h"
 #include "src/tint/ast/block_statement.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
@@ -40,13 +38,8 @@
 #include "src/tint/ast/invariant_attribute.h"
 #include "src/tint/ast/location_attribute.h"
 #include "src/tint/ast/loop_statement.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/multisampled_texture.h"
-#include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
-#include "src/tint/ast/sampled_texture.h"
 #include "src/tint/ast/stage_attribute.h"
-#include "src/tint/ast/storage_texture.h"
 #include "src/tint/ast/stride_attribute.h"
 #include "src/tint/ast/struct.h"
 #include "src/tint/ast/struct_member_align_attribute.h"
@@ -55,9 +48,7 @@
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/templated_identifier.h"
 #include "src/tint/ast/traverse_expressions.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/vector.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/scope_stack.h"
@@ -349,13 +340,7 @@ class DependencyScanner {
                                   "references");
                 },
                 [&](const ast::CallExpression* call) {
-                    if (call->target.name) {
-                        AddDependency(call->target.name, call->target.name->symbol, "function",
-                                      "calls");
-                    }
-                    if (call->target.type) {
-                        TraverseType(call->target.type);
-                    }
+                    AddDependency(call->target, call->target->symbol, "function", "calls");
                 },
                 [&](const ast::BitcastExpression* cast) { TraverseType(cast->type); });
             return ast::TraverseAction::Descend;
@@ -368,37 +353,7 @@ class DependencyScanner {
         if (!ty) {
             return;
         }
-        Switch(
-            ty,  //
-            [&](const ast::Array* arr) {
-                TraverseType(arr->type);  //
-                TraverseExpression(arr->count);
-            },
-            [&](const ast::Atomic* atomic) {  //
-                TraverseType(atomic->type);
-            },
-            [&](const ast::Matrix* mat) {  //
-                TraverseType(mat->type);
-            },
-            [&](const ast::Pointer* ptr) {  //
-                TraverseType(ptr->type);
-            },
-            [&](const ast::TypeName* tn) {  //
-                AddDependency(tn->name, tn->name->symbol, "type", "references");
-            },
-            [&](const ast::Vector* vec) {  //
-                TraverseType(vec->type);
-            },
-            [&](const ast::SampledTexture* tex) {  //
-                TraverseType(tex->type);
-            },
-            [&](const ast::MultisampledTexture* tex) {  //
-                TraverseType(tex->type);
-            },
-            [&](const ast::StorageTexture* tex) {  //
-                TraverseType(tex->type);
-            },
-            [&](Default) { UnhandledNode(diagnostics_, ty); });
+        AddDependency(ty->name, ty->name->symbol, "type", "references");
     }
 
     /// Traverses the attribute list, performing symbol resolution and

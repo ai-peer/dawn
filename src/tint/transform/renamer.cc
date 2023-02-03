@@ -1264,7 +1264,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
     // Identifiers that need to keep their symbols preserved.
     utils::Hashset<const ast::Identifier*, 8> preserved_identifiers;
 
-    auto is_type_short_name = [&](const Symbol& symbol) {
+    auto is_builtin_type = [&](const Symbol& symbol) {
         auto name = src->Symbols().NameFor(symbol);
         if (type::ParseBuiltin(name) != type::Builtin::kUndefined) {
             // Identifier *looks* like a builtin type, but check that the builtin type isn't being
@@ -1295,21 +1295,19 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                 }
             },
             [&](const ast::CallExpression* call) {
-                if (auto* ident = call->target.name) {
-                    Switch(
-                        src->Sem().Get(call)->UnwrapMaterialize()->As<sem::Call>()->Target(),
-                        [&](const sem::Builtin*) { preserved_identifiers.Add(ident); },
-                        [&](const sem::TypeConversion*) {
-                            if (is_type_short_name(ident->symbol)) {
-                                preserved_identifiers.Add(ident);
-                            }
-                        },
-                        [&](const sem::TypeInitializer*) {
-                            if (is_type_short_name(ident->symbol)) {
-                                preserved_identifiers.Add(ident);
-                            }
-                        });
-                }
+                Switch(
+                    src->Sem().Get(call)->UnwrapMaterialize()->As<sem::Call>()->Target(),
+                    [&](const sem::Builtin*) { preserved_identifiers.Add(call->target); },
+                    [&](const sem::TypeConversion*) {
+                        if (is_builtin_type(call->target->symbol)) {
+                            preserved_identifiers.Add(call->target);
+                        }
+                    },
+                    [&](const sem::TypeInitializer*) {
+                        if (is_builtin_type(call->target->symbol)) {
+                            preserved_identifiers.Add(call->target);
+                        }
+                    });
             },
             [&](const ast::DiagnosticAttribute* diagnostic) {
                 preserved_identifiers.Add(diagnostic->control.rule_name);
@@ -1317,9 +1315,9 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
             [&](const ast::DiagnosticDirective* diagnostic) {
                 preserved_identifiers.Add(diagnostic->control.rule_name);
             },
-            [&](const ast::TypeName* type_name) {
-                if (is_type_short_name(type_name->name->symbol)) {
-                    preserved_identifiers.Add(type_name->name);
+            [&](const ast::Type* type) {
+                if (is_builtin_type(type->name->symbol)) {
+                    preserved_identifiers.Add(type->name);
                 }
             });
     }

@@ -14,21 +14,28 @@
 
 #include "src/tint/ast/type.h"
 
-#include "src/tint/ast/alias.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/pointer.h"
-#include "src/tint/ast/texture.h"
-#include "src/tint/ast/vector.h"
-#include "src/tint/symbol_table.h"
+#include "src/tint/ast/identifier.h"
+#include "src/tint/clone_context.h"
+#include "src/tint/program_builder.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::Type);
 
 namespace tint::ast {
 
-Type::Type(ProgramID pid, NodeID nid, const Source& src) : Base(pid, nid, src) {}
+Type::Type(ProgramID pid, NodeID nid, const Source& src, const Identifier* n)
+    : Base(pid, nid, src), name(n) {
+    TINT_ASSERT(AST, name);
+    TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, name, program_id);
+}
 
 Type::Type(Type&&) = default;
 
 Type::~Type() = default;
+
+const Type* Type::Clone(CloneContext* ctx) const {
+    auto src = ctx->Clone(source);
+    auto n = ctx->Clone(name);
+    return ctx->dst->create<Type>(src, n);
+}
 
 }  // namespace tint::ast
