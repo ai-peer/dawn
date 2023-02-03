@@ -29,6 +29,8 @@
     ],
 
     "custom_cmds_proto": [
+        "device create render pipeline",
+        "device create render pipeline async",
         "device create shader module",
         "destroy object",
         "device create render pipeline",
