@@ -56,6 +56,22 @@ class ResolverConstEvalSoftErrorTest : public ResolverConstEvalTest {
     }
 };
 
+TEST_F(ResolverConstEvalSoftErrorTest, CreateScalar_Infinity) {
+    auto result = const_eval.CreateScalar({}, create<type::F32>(),
+                                          f32(std::numeric_limits<float>::infinity()));
+    ASSERT_TRUE(result);
+    EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
+    EXPECT_EQ(error(), R"(warning: value inf cannot be represented as 'f32')");
+}
+
+TEST_F(ResolverConstEvalSoftErrorTest, CreateScalar_NaN) {
+    auto result = const_eval.CreateScalar({}, create<type::F32>(),
+                                          f32(std::numeric_limits<float>::quiet_NaN()));
+    ASSERT_TRUE(result);
+    EXPECT_EQ(result.Get()->ValueAs<AFloat>(), 0.f);
+    EXPECT_EQ(error(), R"(warning: value nan cannot be represented as 'f32')");
+}
+
 TEST_F(ResolverConstEvalSoftErrorTest, Add_AInt_Overflow) {
     auto* a = Scalar(AInt(std::numeric_limits<int64_t>::max()));
     auto* b = Scalar(AInt(1));
