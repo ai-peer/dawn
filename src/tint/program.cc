@@ -130,9 +130,9 @@ const type::Type* Program::TypeOf(const ast::TypeDecl* type_decl) const {
     return Sem().Get(type_decl);
 }
 
-std::string Program::FriendlyName(const ast::Type* type) const {
+std::string Program::FriendlyName(const ast::Identifier* type) const {
     TINT_ASSERT_PROGRAM_IDS_EQUAL(Program, type, ID());
-    return type ? type->FriendlyName(Symbols()) : "<null>";
+    return type ? Symbols().NameFor(type->symbol) : "<null>";
 }
 
 std::string Program::FriendlyName(const type::Type* type) const {

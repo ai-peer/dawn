@@ -1432,12 +1432,7 @@ class UniformityGraph {
     /// @param call the function call to process
     /// @returns a pair of (control flow node, value node)
     std::pair<Node*, Node*> ProcessCall(Node* cf, const ast::CallExpression* call) {
-        std::string name;
-        if (call->target.name) {
-            name = NameFor(call->target.name);
-        } else {
-            name = call->target.type->FriendlyName(builder_->Symbols());
-        }
+        std::string name = NameFor(call->target);
 
         // Process call arguments
         Node* cf_last_arg = cf;
@@ -1787,7 +1782,7 @@ class UniformityGraph {
                 diagnostics_.add_note(diag::System::Resolver, ss.str(), v->source);
             },
             [&](const ast::CallExpression* c) {
-                auto target_name = NameFor(c->target.name);
+                auto target_name = NameFor(c->target);
                 switch (non_uniform_source->type) {
                     case Node::kFunctionCallReturnValue: {
                         diagnostics_.add_note(
@@ -1867,7 +1862,7 @@ class UniformityGraph {
         auto* call = cause->ast->As<ast::CallExpression>();
         TINT_ASSERT(Resolver, call);
         auto* target = SemCall(call)->Target();
-        auto func_name = NameFor(call->target.name);
+        auto func_name = NameFor(call->target);
 
         if (cause->type == Node::kFunctionCallArgumentValue ||
             cause->type == Node::kFunctionCallArgumentContents) {
@@ -1897,7 +1892,7 @@ class UniformityGraph {
                 // Show a builtin was reachable from this call (which may be the call itself).
                 // This will be the trigger location for the failure.
                 std::ostringstream ss;
-                ss << "'" << NameFor(builtin_call->target.name)
+                ss << "'" << NameFor(builtin_call->target)
                    << "' must only be called from uniform control flow";
                 report(builtin_call->source, ss.str(), /* note */ false);
             }

@@ -159,10 +159,10 @@ TEST_P(ResolverExpressionKindTest, Test) {
             Func("f", utils::Empty, ty.void_(), CallStmt(Call(Ident(kUseSource, sym))));
             break;
         case Use::kFunctionReturnType:
-            Func("f", utils::Empty, ty(kUseSource, sym), Return(Call(sym)));
+            Func("f", utils::Empty, Ident(kUseSource, sym), Return(Call(sym)));
             break;
         case Use::kMemberType:
-            Structure("s", utils::Vector{Member("m", ty(kUseSource, sym))});
+            Structure("s", utils::Vector{Member("m", Ident(kUseSource, sym))});
             break;
         case Use::kTexelFormat:
             return;  // TODO(crbug.com/tint/1810)
@@ -170,7 +170,7 @@ TEST_P(ResolverExpressionKindTest, Test) {
             GlobalVar("v", type::AddressSpace::kPrivate, Expr(kUseSource, sym));
             break;
         case Use::kVariableType:
-            GlobalVar("v", type::AddressSpace::kPrivate, ty(kUseSource, sym));
+            GlobalVar("v", type::AddressSpace::kPrivate, Ident(kUseSource, sym));
             break;
     }
 

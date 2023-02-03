@@ -182,7 +182,8 @@ struct Robustness::State {
             }
             return 1u;
         };
-        auto scalar_or_vec_ty = [&](const ast::Type* scalar, uint32_t width) -> const ast::Type* {
+        auto scalar_or_vec_ty = [&](const ast::Identifier* scalar,
+                                    uint32_t width) -> const ast::Identifier* {
             if (width > 1) {
                 return b.ty.vec(scalar, width);
             }

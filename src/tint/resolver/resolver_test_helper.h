@@ -112,7 +112,9 @@ class TestHelper : public ProgramBuilder {
     /// @param type a type
     /// @returns the name for `type` that closely resembles how it would be
     /// declared in WGSL.
-    std::string FriendlyName(const ast::Type* type) { return type->FriendlyName(Symbols()); }
+    std::string FriendlyName(const ast::Identifier* type) {
+        return Symbols().NameFor(type->symbol);
+    }
 
     /// @param type a type
     /// @returns the name for `type` that closely resembles how it would be
@@ -199,7 +201,7 @@ T As(const Scalar& s) {
     return std::visit([](auto&& v) { return static_cast<T>(v); }, s);
 }
 
-using ast_type_func_ptr = const ast::Type* (*)(ProgramBuilder& b);
+using ast_type_func_ptr = const ast::Identifier* (*)(ProgramBuilder& b);
 using ast_expr_func_ptr = const ast::Expression* (*)(ProgramBuilder& b,
                                                      utils::VectorRef<Scalar> args);
 using ast_expr_from_double_func_ptr = const ast::Expression* (*)(ProgramBuilder& b, double v);
@@ -222,7 +224,7 @@ struct DataType<void> {
     using ElementType = void;
 
     /// @return nullptr
-    static inline const ast::Type* AST(ProgramBuilder&) { return nullptr; }
+    static inline const ast::Identifier* AST(ProgramBuilder&) { return nullptr; }
     /// @return nullptr
     static inline const type::Type* Sem(ProgramBuilder&) { return nullptr; }
 };
@@ -238,7 +240,7 @@ struct DataType<bool> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST bool type
-    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.bool_(); }
+    static inline const ast::Identifier* AST(ProgramBuilder& b) { return b.ty.bool_(); }
     /// @param b the ProgramBuilder
     /// @return the semantic bool type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::Bool>(); }
@@ -269,7 +271,7 @@ struct DataType<i32> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST i32 type
-    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.i32(); }
+    static inline const ast::Identifier* AST(ProgramBuilder& b) { return b.ty.i32(); }
     /// @param b the ProgramBuilder
     /// @return the semantic i32 type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::I32>(); }
@@ -300,7 +302,7 @@ struct DataType<u32> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST u32 type
-    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.u32(); }
+    static inline const ast::Identifier* AST(ProgramBuilder& b) { return b.ty.u32(); }
     /// @param b the ProgramBuilder
     /// @return the semantic u32 type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::U32>(); }
@@ -331,7 +333,7 @@ struct DataType<f32> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST f32 type
-    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.f32(); }
+    static inline const ast::Identifier* AST(ProgramBuilder& b) { return b.ty.f32(); }
     /// @param b the ProgramBuilder
     /// @return the semantic f32 type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::F32>(); }
@@ -362,7 +364,7 @@ struct DataType<f16> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST f16 type
-    static inline const ast::Type* AST(ProgramBuilder& b) { return b.ty.f16(); }
+    static inline const ast::Identifier* AST(ProgramBuilder& b) { return b.ty.f16(); }
     /// @param b the ProgramBuilder
     /// @return the semantic f16 type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::F16>(); }
@@ -392,7 +394,7 @@ struct DataType<AFloat> {
     static constexpr bool is_composite = false;
 
     /// @returns nullptr, as abstract floats are un-typeable
-    static inline const ast::Type* AST(ProgramBuilder&) { return nullptr; }
+    static inline const ast::Identifier* AST(ProgramBuilder&) { return nullptr; }
     /// @param b the ProgramBuilder
     /// @return the semantic abstract-float type
     static inline const type::Type* Sem(ProgramBuilder& b) {
@@ -424,7 +426,7 @@ struct DataType<AInt> {
     static constexpr bool is_composite = false;
 
     /// @returns nullptr, as abstract integers are un-typeable
-    static inline const ast::Type* AST(ProgramBuilder&) { return nullptr; }
+    static inline const ast::Identifier* AST(ProgramBuilder&) { return nullptr; }
     /// @param b the ProgramBuilder
     /// @return the semantic abstract-int type
     static inline const type::Type* Sem(ProgramBuilder& b) { return b.create<type::AbstractInt>(); }
@@ -455,7 +457,7 @@ struct DataType<vec<N, T>> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST vector type
-    static inline const ast::Type* AST(ProgramBuilder& b) {
+    static inline const ast::Identifier* AST(ProgramBuilder& b) {
         return b.ty.vec(DataType<T>::AST(b), N);
     }
     /// @param b the ProgramBuilder
@@ -503,7 +505,7 @@ struct DataType<mat<N, M, T>> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST matrix type
-    static inline const ast::Type* AST(ProgramBuilder& b) {
+    static inline const ast::Identifier* AST(ProgramBuilder& b) {
         return b.ty.mat(DataType<T>::AST(b), N, M);
     }
     /// @param b the ProgramBuilder
@@ -562,13 +564,13 @@ struct DataType<alias<T, ID>> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST alias type
-    static inline const ast::Type* AST(ProgramBuilder& b) {
+    static inline const ast::Identifier* AST(ProgramBuilder& b) {
         auto name = b.Symbols().Register("alias_" + std::to_string(ID));
         if (!b.AST().LookupType(name)) {
             auto* type = DataType<T>::AST(b);
             b.AST().AddTypeDecl(b.ty.alias(name, type));
         }
-        return b.ty(name);
+        return b.Ident(name);
     }
     /// @param b the ProgramBuilder
     /// @return the semantic aliased type
@@ -618,9 +620,9 @@ struct DataType<ptr<T>> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST alias type
-    static inline const ast::Type* AST(ProgramBuilder& b) {
-        return b.create<ast::Pointer>(DataType<T>::AST(b), type::AddressSpace::kPrivate,
-                                      type::Access::kUndefined);
+    static inline const ast::Identifier* AST(ProgramBuilder& b) {
+        return b.ty.pointer(DataType<T>::AST(b), type::AddressSpace::kPrivate,
+                            type::Access::kUndefined);
     }
     /// @param b the ProgramBuilder
     /// @return the semantic aliased type
@@ -660,7 +662,7 @@ struct DataType<array<N, T>> {
 
     /// @param b the ProgramBuilder
     /// @return a new AST array type
-    static inline const ast::Type* AST(ProgramBuilder& b) {
+    static inline const ast::Identifier* AST(ProgramBuilder& b) {
         if (auto* ast = DataType<T>::AST(b)) {
             return b.ty.array(ast, u32(N));
         }
