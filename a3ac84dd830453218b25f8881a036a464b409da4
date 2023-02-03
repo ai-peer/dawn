@@ -153,6 +153,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bbfffa8_baf6acdf",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T19:15:53Z",
+      "side": 1,
+      "message": "IMO, there\u0027s no point in calling it \"Impl\" if there is not an analogous non-Impl `SetupDeviceTogglesState`\n\nAlso, I think we could do a shorter name `SetupDeviceToggles` since the TogglesState is well-communicated by the argument type.",
+      "parentUuid": "04e8c400_389a5023",
+      "range": {
+        "startLine": 231,
+        "startChar": 33,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebaf5625_d46924ae",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 13
