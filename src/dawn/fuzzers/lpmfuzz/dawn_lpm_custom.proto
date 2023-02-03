@@ -50,3 +50,6 @@ message DestroyObject {
     required ObjectType objectType = 1;
     required uint32 objectId = 2;
 }
+
+message DeviceCreateRenderPipeline {}
+message DeviceCreateRenderPipelineAsync {}
