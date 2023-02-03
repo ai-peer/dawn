@@ -39,7 +39,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement) {
 }
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Let) {
-    auto* var = Let("a", ty.f32(), Call<f32>());
+    auto* var = Let("a", ty.f32(), Call(ty.f32()));
     auto* stmt = Decl(var);
     WrapInFunction(stmt);
 
@@ -52,7 +52,7 @@ TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Let) {
 }
 
 TEST_F(HlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const) {
-    auto* var = Const("a", ty.f32(), Call<f32>());
+    auto* var = Const("a", ty.f32(), Call(ty.f32()));
     auto* stmt = Decl(var);
     WrapInFunction(stmt);
 
