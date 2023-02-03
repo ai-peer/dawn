@@ -581,13 +581,13 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
     # All commands, including hand written commands that we can't generate
     # through codegen
     proto_all_commands = []
+    cpp_commands = []
 
     # Remove blocklisted commands from protobuf generation params
     blocklisted_cmds_proto = lpm_json.get('blocklisted_cmds_proto')
     custom_cmds_proto = lpm_json.get('custom_cmds_proto')
     for command in lpm_params['cmd_records']['command']:
         if command.name.get() in blocklisted_cmds_proto:
-            proto_all_commands.append(command)
             continue
         if command.name.get() in custom_cmds_proto:
             proto_all_commands.append(command)
@@ -595,9 +595,17 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
         proto_generated_commands.append(command)
         proto_all_commands.append(command)
 
+    # Remove blocklisted commands from cpp generation params
+    blocklisted_cmds_cpp = lpm_json.get('blocklisted_cmds_cpp')
+    for command in lpm_params['cmd_records']['command']:
+        if command.name.get() in blocklisted_cmds_cpp:
+            continue
+        cpp_commands.append(command)
+
     lpm_params['cmd_records'] = {
         'proto_generated_commands': proto_generated_commands,
         'proto_all_commands': proto_all_commands,
+        'cpp_commands': cpp_commands
     }
 
     return lpm_params
@@ -1125,10 +1133,13 @@ class MultiGeneratorFromDawnJSON(Generator):
                                           enabled_tags=['dawn', 'deprecated'],
                                           disabled_tags=['native'])
             api_and_wire_params = compute_wire_params(params_dawn_wire,
-                                                    wire_json)
+                                                      wire_json)
+
+            fuzzer_params = compute_lpm_params(api_and_wire_params, lpm_json)
 
             lpm_params = [
-                RENDER_PARAMS_BASE, params_dawn_wire, {}, api_and_wire_params
+                RENDER_PARAMS_BASE, params_dawn_wire, {}, api_and_wire_params,
+                fuzzer_params
             ]
 
             renders.append(
