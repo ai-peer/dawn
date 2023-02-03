@@ -30,35 +30,25 @@ namespace dawn::native::vulkan::external_semaphore {
 class Service {
   public:
     explicit Service(Device* device);
-    ~Service();
-
-    static bool CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                             VkPhysicalDevice physicalDevice,
-                             const VulkanFunctions& fn);
+    virtual ~Service();
 
     // True if the device reports it supports this feature
-    bool Supported();
+    virtual bool Supported() = 0;
 
     // Given an external handle, import it into a VkSemaphore
-    ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle);
+    virtual ResultOrError<VkSemaphore> ImportSemaphore(ExternalSemaphoreHandle handle) = 0;
 
     // Create a VkSemaphore that is exportable into an external handle later
-    ResultOrError<VkSemaphore> CreateExportableSemaphore();
+    virtual ResultOrError<VkSemaphore> CreateExportableSemaphore() = 0;
 
     // Export a VkSemaphore into an external handle
-    ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore);
+    virtual ResultOrError<ExternalSemaphoreHandle> ExportSemaphore(VkSemaphore semaphore) = 0;
 
     // Duplicate a new external handle from the given one.
-    ExternalSemaphoreHandle DuplicateHandle(ExternalSemaphoreHandle handle);
+    virtual ExternalSemaphoreHandle DuplicateHandle(ExternalSemaphoreHandle handle) = 0;
 
-    // Close an external handle.
-    static void CloseHandle(ExternalSemaphoreHandle handle);
-
-  private:
+  protected:
     Device* mDevice = nullptr;
-
-    // True if early checks pass that determine if the service is supported
-    bool mSupported = false;
 };
 
 }  // namespace dawn::native::vulkan::external_semaphore

@@ -31,8 +31,8 @@
 #include "dawn/native/vulkan/VulkanFunctions.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 
-#include "dawn/native/vulkan/external_memory/MemoryService.h"
-#include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+#include "dawn/native/vulkan/external_memory/MemoryServiceManager.h"
+#include "dawn/native/vulkan/external_semaphore/SemaphoreServiceManager.h"
 
 namespace dawn::native::vulkan {
 
@@ -63,7 +63,6 @@ class Device final : public DeviceBase {
     FencedDeleter* GetFencedDeleter() const;
     RenderPassCache* GetRenderPassCache() const;
     ResourceMemoryAllocator* GetResourceMemoryAllocator() const;
-    external_semaphore::Service* GetExternalSemaphoreService() const;
 
     CommandRecordingContext* GetPendingRecordingContext(
         Device::SubmitMode submitMode = Device::SubmitMode::Normal);
@@ -191,8 +190,8 @@ class Device final : public DeviceBase {
     std::unique_ptr<ResourceMemoryAllocator> mResourceMemoryAllocator;
     std::unique_ptr<RenderPassCache> mRenderPassCache;
 
-    std::unique_ptr<external_memory::Service> mExternalMemoryService;
-    std::unique_ptr<external_semaphore::Service> mExternalSemaphoreService;
+    std::unique_ptr<external_memory::ServiceManager> mExternalMemoryServiceManager;
+    std::unique_ptr<external_semaphore::ServiceManager> mExternalSemaphoreServiceManager;
 
     ResultOrError<VkFence> GetUnusedFence();
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
