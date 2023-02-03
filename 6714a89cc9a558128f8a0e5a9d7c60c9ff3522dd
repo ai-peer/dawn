@@ -39,6 +39,30 @@
       },
       "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f84e215_a1c21477",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-03T20:04:22Z",
+      "side": 1,
+      "message": "Ah, that\u0027s why it wasn\u0027t dumping anything! Because DAWN_ENABLE_SPIRV_VALIDATION is disabled by default. Shouldn\u0027t we make this flag enabled for non-Android builds?",
+      "parentUuid": "40c7a503_1a4c4501",
+      "range": {
+        "startLine": 403,
+        "startChar": 13,
+        "endLine": 404,
+        "endChar": 76
+      },
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
