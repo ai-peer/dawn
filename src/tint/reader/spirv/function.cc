@@ -955,9 +955,8 @@ bool FunctionEmitter::Emit() {
             return false;
         }
 
-        builder_.AST().AddFunction(create<ast::Function>(
-            decl.source, builder_.Symbols().Register(decl.name), std::move(decl.params),
-            decl.return_type->Build(builder_), body, std::move(decl.attributes), utils::Empty));
+        builder_.Func(decl.source, decl.name, std::move(decl.params),
+                      decl.return_type->Build(builder_), body, std::move(decl.attributes));
     }
 
     if (ep_info_ && !ep_info_->inner_name.empty()) {
@@ -1260,7 +1259,7 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
     FunctionDeclaration decl;
     decl.source = source;
     decl.name = ep_info_->name;
-    const ast::Type* return_type = nullptr;  // Populated below.
+    const ast::Identifier* return_type = nullptr;  // Populated below.
 
     // Pipeline inputs become parameters to the wrapper function, and
     // their values are saved into the corresponding private variables that
@@ -1395,7 +1394,6 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
         }
     }
 
-    auto* body = create<ast::BlockStatement>(source, stmts, utils::Empty);
     AttributeList fn_attrs;
     fn_attrs.Push(create<ast::StageAttribute>(source, ep_info_->stage));
 
@@ -1409,9 +1407,8 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
         }
     }
 
-    builder_.AST().AddFunction(create<ast::Function>(
-        source, builder_.Symbols().Register(ep_info_->name), std::move(decl.params), return_type,
-        body, std::move(fn_attrs), AttributeList{}));
+    builder_.Func(source, ep_info_->name, std::move(decl.params), return_type, std::move(stmts),
+                  std::move(fn_attrs));
 
     return true;
 }
@@ -5709,7 +5706,7 @@ bool FunctionEmitter::EmitImageQuery(const spvtools::opt::Instruction& inst) {
                     create<ast::MemberAccessorExpression>(Source{}, dims_call, PrefixSwizzle(2));
             }
             exprs.Push(dims_call);
-            if (ast::IsTextureArray(dims)) {
+            if (type::IsTextureArray(dims)) {
                 auto num_layers =
                     builder_.Call(Source{}, "textureNumLayers", GetImageExpression(inst));
                 exprs.Push(num_layers);
@@ -5771,7 +5768,7 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         }
 
         // Function return type
-        const ast::Type* ret_type = nullptr;
+        const ast::Identifier* ret_type = nullptr;
         if (inst.type_id() != 0) {
             ret_type = parser_impl_.ConvertType(inst.type_id())->Build(builder_);
         } else {
@@ -5783,13 +5780,13 @@ bool FunctionEmitter::EmitAtomicOp(const spvtools::opt::Instruction& inst) {
         auto* stub_deco = builder_.ASTNodes().Create<transform::SpirvAtomic::Stub>(
             builder_.ID(), builder_.AllocateNodeID(), builtin);
         auto* stub =
-            create<ast::Function>(Source{}, sym, std::move(params), ret_type,
+            create<ast::Function>(Source{}, sym, std::move(params), builder_.Type(ret_type),
                                   /* body */ nullptr,
-                                  AttributeList{
+                                  utils::Vector{
                                       stub_deco,
                                       builder_.Disable(ast::DisabledValidation::kFunctionHasNoBody),
                                   },
-                                  AttributeList{});
+                                  utils::Empty);
         builder_.AST().AddFunction(stub);
 
         // Emit call to stub, will be replaced with call to atomic builtin by transform::SpirvAtomic
@@ -5903,8 +5900,8 @@ FunctionEmitter::ExpressionList FunctionEmitter::MakeCoordinateOperandsForImageA
     }
     type::TextureDimension dim = texture_type->dims;
     // Number of regular coordinates.
-    uint32_t num_axes = static_cast<uint32_t>(ast::NumCoordinateAxes(dim));
-    bool is_arrayed = ast::IsTextureArray(dim);
+    uint32_t num_axes = static_cast<uint32_t>(type::NumCoordinateAxes(dim));
+    bool is_arrayed = type::IsTextureArray(dim);
     if ((num_axes == 0) || (num_axes > 3)) {
         Fail() << "unsupported image dimensionality for " << texture_type->TypeInfo().name
                << " prompted by " << inst.PrettyPrint();
