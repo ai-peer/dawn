@@ -63,6 +63,30 @@
       },
       "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69af3fd6_afdf2453",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-03T20:07:22Z",
+      "side": 1,
+      "message": "To be fair, this took me about 5 minutes. I was trying to dump shaders on Linux, and it wasn\u0027t doing anything. But yeah, I think this should be enabled for non-Android builds, so that dump_shaders works on all backends.",
+      "parentUuid": "7f84e215_a1c21477",
+      "range": {
+        "startLine": 403,
+        "startChar": 13,
+        "endLine": 404,
+        "endChar": 76
+      },
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
