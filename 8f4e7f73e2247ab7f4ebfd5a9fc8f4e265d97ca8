@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3200bcf_b6266afd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T05:19:31Z",
+      "side": 1,
+      "message": "hm, I\u0027m not understanding the \"why\" behind some of these changes. could you help clarify?\n\nfrom what I understand,\nTogglesState now encapsulates what was once TripleStateTogglesSet and Device holds TogglesState instead of two separate TogglesSets. That seems good. Eventually Instance and Adapter can hold TogglesState too as you stated in the commit message\n\nNow, the adapter is a factory for Toggles state and passes it to the device. What\u0027s the motivation for this over the existing way it does it in the device constructor?\n\nWe go from TogglesDescriptor -\u003e RequiredTogglesSet -\u003e TogglesState.\nWhat is RequiredTogglesSet for? It seems that construction of TogglesState just copies the bitsets - so it is effectively the same.",
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95676913_9d892be0",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T05:19:31Z",
+      "side": 1,
+      "message": "this is unused",
+      "range": {
+        "startLine": 528,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 50
+      },
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

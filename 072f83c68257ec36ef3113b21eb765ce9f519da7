@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b8cd15_26a31d28",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1780,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T05:19:31Z",
+      "side": 0,
+      "message": "is this set somewhere else now?",
+      "range": {
+        "startLine": 1780,
+        "startChar": 0,
+        "endLine": 1780,
+        "endChar": 48
+      },
+      "revId": "072f83c68257ec36ef3113b21eb765ce9f519da7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
