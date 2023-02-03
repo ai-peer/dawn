@@ -36,47 +36,45 @@ struct MemoryImportParams {
 class Service {
   public:
     explicit Service(Device* device);
-    ~Service();
-
-    static bool CheckSupport(const VulkanDeviceInfo& deviceInfo);
+    virtual ~Service();
 
     // True if the device reports it supports importing external memory.
-    bool SupportsImportMemory(VkFormat format,
-                              VkImageType type,
-                              VkImageTiling tiling,
-                              VkImageUsageFlags usage,
-                              VkImageCreateFlags flags);
+    virtual bool SupportsImportMemory(VkFormat format,
+                                      VkImageType type,
+                                      VkImageTiling tiling,
+                                      VkImageUsageFlags usage,
+                                      VkImageCreateFlags flags) = 0;
 
     // True if the device reports it supports creating VkImages from external memory.
-    bool SupportsCreateImage(const ExternalImageDescriptor* descriptor,
-                             VkFormat format,
-                             VkImageUsageFlags usage,
-                             bool* supportsDisjoint);
+    virtual bool SupportsCreateImage(const ExternalImageDescriptor* descriptor,
+                                     VkFormat format,
+                                     VkImageUsageFlags usage,
+                                     bool* supportsDisjoint) = 0;
 
     // Returns the parameters required for importing memory
-    ResultOrError<MemoryImportParams> GetMemoryImportParams(
+    virtual ResultOrError<MemoryImportParams> GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
-        VkImage image);
+        VkImage image) = 0;
 
     // Returns the index of the queue memory from this services should be exported with.
-    uint32_t GetQueueFamilyIndex();
+    virtual uint32_t GetQueueFamilyIndex() = 0;
 
     // Given an external handle pointing to memory, import it into a VkDeviceMemory
-    ResultOrError<VkDeviceMemory> ImportMemory(ExternalMemoryHandle handle,
-                                               const MemoryImportParams& importParams,
-                                               VkImage image);
+    virtual ResultOrError<VkDeviceMemory> ImportMemory(ExternalMemoryHandle handle,
+                                                       const MemoryImportParams& importParams,
+                                                       VkImage image) = 0;
 
     // Create a VkImage for the given handle type
-    ResultOrError<VkImage> CreateImage(const ExternalImageDescriptor* descriptor,
-                                       const VkImageCreateInfo& baseCreateInfo);
+    virtual ResultOrError<VkImage> CreateImage(const ExternalImageDescriptor* descriptor,
+                                               const VkImageCreateInfo& baseCreateInfo) = 0;
 
-  private:
+    // Return true if early checks pass that determine if the service is supported
+    virtual bool Supported() const = 0;
+
+  protected:
     bool RequiresDedicatedAllocation(const ExternalImageDescriptorVk* descriptor, VkImage image);
 
     Device* mDevice = nullptr;
-
-    // True if early checks pass that determine if the service is supported
-    bool mSupported = false;
 };
 
 }  // namespace dawn::native::vulkan::external_memory
