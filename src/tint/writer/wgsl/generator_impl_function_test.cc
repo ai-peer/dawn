@@ -25,7 +25,7 @@ namespace {
 using WgslGeneratorImplTest = TestHelper;
 
 TEST_F(WgslGeneratorImplTest, Emit_Function) {
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
+    auto* func = Func("my_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Return(),
                       });
@@ -47,7 +47,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithParams) {
                           Param("a", ty.f32()),
                           Param("b", ty.i32()),
                       },
-                      ty.void_(),
+                      ty.void_,
                       utils::Vector{
                           Return(),
                       });
@@ -64,7 +64,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithParams) {
 }
 
 TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize) {
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
+    auto* func = Func("my_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Return(),
                       },
@@ -87,7 +87,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize) {
 
 TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize_WithIdent) {
     GlobalConst("height", ty.i32(), Expr(2_i));
-    auto* func = Func("my_func", utils::Empty, ty.void_(),
+    auto* func = Func("my_func", utils::Empty, ty.void_,
                       utils::Vector{
                           Return(),
                       },
@@ -118,7 +118,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_EntryPoint_Parameters) {
                        utils::Vector{
                            Location(1_a),
                        });
-    auto* func = Func("frag_main", utils::Vector{coord, loc1}, ty.void_(), utils::Empty,
+    auto* func = Func("frag_main", utils::Vector{coord, loc1}, ty.void_, utils::Empty,
                       utils::Vector{
                           Stage(ast::PipelineStage::kFragment),
                       });
@@ -185,7 +185,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_Module
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("a", utils::Empty, ty.void_(),
+        Func("a", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),
@@ -199,7 +199,7 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_Module
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("b", utils::Empty, ty.void_(),
+        Func("b", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),

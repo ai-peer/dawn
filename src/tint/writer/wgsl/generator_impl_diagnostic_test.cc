@@ -32,7 +32,7 @@ TEST_F(WgslGeneratorImplTest, Emit_DiagnosticDirective) {
 
 TEST_F(WgslGeneratorImplTest, Emit_DiagnosticAttribute) {
     auto* attr = DiagnosticAttribute(ast::DiagnosticSeverity::kError, "chromium_unreachable_code");
-    Func("foo", {}, ty.void_(), {}, utils::Vector{attr});
+    Func("foo", {}, ty.void_, {}, utils::Vector{attr});
 
     GeneratorImpl& gen = Build();
 

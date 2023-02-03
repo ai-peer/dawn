@@ -64,7 +64,7 @@ TEST_F(MslGeneratorImplTest, EmitStatement_Call) {
              Param(Sym(), ty.f32()),
              Param(Sym(), ty.f32()),
          },
-         ty.void_(), utils::Empty, utils::Empty);
+         ty.void_, utils::Empty, utils::Empty);
     GlobalVar("param1", ty.f32(), type::AddressSpace::kPrivate);
     GlobalVar("param2", ty.f32(), type::AddressSpace::kPrivate);
 

@@ -41,7 +41,7 @@ TEST_F(MslGeneratorImplTest, UnsupportedExtension) {
 }
 
 TEST_F(MslGeneratorImplTest, Generate) {
-    Func("my_func", utils::Empty, ty.void_(), utils::Empty,
+    Func("my_func", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
@@ -102,7 +102,7 @@ TEST_F(MslGeneratorImplTest, HasInvariantAttribute_True) {
                                                 Invariant(),
                                             }),
                                  });
-    Func("vert_main", utils::Empty, ty.Of(out), utils::Vector{Return(Construct(ty.Of(out)))},
+    Func("vert_main", utils::Empty, ty.Of(out), utils::Vector{Return(Call(ty.Of(out)))},
          utils::Vector{
              Stage(ast::PipelineStage::kVertex),
          });
@@ -139,7 +139,7 @@ TEST_F(MslGeneratorImplTest, HasInvariantAttribute_False) {
                                                 Builtin(ast::BuiltinValue::kPosition),
                                             }),
                                  });
-    Func("vert_main", utils::Empty, ty.Of(out), utils::Vector{Return(Construct(ty.Of(out)))},
+    Func("vert_main", utils::Empty, ty.Of(out), utils::Vector{Return(Call(ty.Of(out)))},
          utils::Vector{
              Stage(ast::PipelineStage::kVertex),
          });
@@ -164,7 +164,7 @@ vertex Out vert_main() {
 
 TEST_F(MslGeneratorImplTest, WorkgroupMatrix) {
     GlobalVar("m", ty.mat2x2<f32>(), type::AddressSpace::kWorkgroup);
-    Func("comp_main", utils::Empty, ty.void_(), utils::Vector{Decl(Let("x", Expr("m")))},
+    Func("comp_main", utils::Empty, ty.void_, utils::Vector{Decl(Let("x", Expr("m")))},
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
@@ -204,7 +204,7 @@ kernel void comp_main(threadgroup tint_symbol_3* tint_symbol_2 [[threadgroup(0)]
 
 TEST_F(MslGeneratorImplTest, WorkgroupMatrixInArray) {
     GlobalVar("m", ty.array(ty.mat2x2<f32>(), 4_i), type::AddressSpace::kWorkgroup);
-    Func("comp_main", utils::Empty, ty.void_(), utils::Vector{Decl(Let("x", Expr("m")))},
+    Func("comp_main", utils::Empty, ty.void_, utils::Vector{Decl(Let("x", Expr("m")))},
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
@@ -262,10 +262,10 @@ TEST_F(MslGeneratorImplTest, WorkgroupMatrixInStruct) {
                         Member("m2", ty.mat4x4<f32>()),
                     });
     Structure("S2", utils::Vector{
-                        Member("s", ty("S1")),
+                        Member("s", "S1"),
                     });
-    GlobalVar("s", ty("S2"), type::AddressSpace::kWorkgroup);
-    Func("comp_main", utils::Empty, ty.void_(), utils::Vector{Decl(Let("x", Expr("s")))},
+    GlobalVar("s", Ident("S2"), type::AddressSpace::kWorkgroup);
+    Func("comp_main", utils::Empty, ty.void_, utils::Vector{Decl(Let("x", Expr("s")))},
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
@@ -323,7 +323,7 @@ TEST_F(MslGeneratorImplTest, WorkgroupMatrix_Multiples) {
     GlobalVar("m7", ty.mat4x2<f32>(), type::AddressSpace::kWorkgroup);
     GlobalVar("m8", ty.mat4x3<f32>(), type::AddressSpace::kWorkgroup);
     GlobalVar("m9", ty.mat4x4<f32>(), type::AddressSpace::kWorkgroup);
-    Func("main1", utils::Empty, ty.void_(),
+    Func("main1", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("a1", Expr("m1"))),
              Decl(Let("a2", Expr("m2"))),
@@ -333,7 +333,7 @@ TEST_F(MslGeneratorImplTest, WorkgroupMatrix_Multiples) {
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
          });
-    Func("main2", utils::Empty, ty.void_(),
+    Func("main2", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("a1", Expr("m4"))),
              Decl(Let("a2", Expr("m5"))),
@@ -343,7 +343,7 @@ TEST_F(MslGeneratorImplTest, WorkgroupMatrix_Multiples) {
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
          });
-    Func("main3", utils::Empty, ty.void_(),
+    Func("main3", utils::Empty, ty.void_,
          utils::Vector{
              Decl(Let("a1", Expr("m7"))),
              Decl(Let("a2", Expr("m8"))),
@@ -353,7 +353,7 @@ TEST_F(MslGeneratorImplTest, WorkgroupMatrix_Multiples) {
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),
          });
-    Func("main4_no_usages", utils::Empty, ty.void_(), utils::Empty,
+    Func("main4_no_usages", utils::Empty, ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kCompute),
              WorkgroupSize(1_i),

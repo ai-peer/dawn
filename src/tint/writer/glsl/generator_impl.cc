@@ -720,7 +720,7 @@ bool GeneratorImpl::EmitCall(std::ostream& out, const ast::CallExpression* expr)
 bool GeneratorImpl::EmitFunctionCall(std::ostream& out, const sem::Call* call) {
     const auto& args = call->Arguments();
     auto* decl = call->Declaration();
-    auto* ident = decl->target.name;
+    auto* ident = decl->target;
 
     auto name = builder_.Symbols().NameFor(ident->symbol);
     auto caller_sym = ident->symbol;
@@ -2260,8 +2260,12 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
     // Emit original entry point signature
     {
         auto out = line();
-        out << func->return_type->FriendlyName(builder_.Symbols()) << " "
-            << builder_.Symbols().NameFor(func->symbol) << "(";
+
+        if (!EmitTypeAndName(out, func_sem->ReturnType(), type::AddressSpace::kUndefined,
+                             type::Access::kUndefined, builder_.Symbols().NameFor(func->symbol))) {
+            return false;
+        }
+        out << "(";
 
         bool first = true;
 

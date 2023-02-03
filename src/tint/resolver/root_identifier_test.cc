@@ -129,7 +129,7 @@ TEST_F(ResolverRootIdentifierTest, FunctionLet) {
 TEST_F(ResolverRootIdentifierTest, Parameter) {
     auto* a = Param("a", ty.f32());
     auto* expr = Expr(a);
-    Func("foo", utils::Vector{a}, ty.void_(), utils::Vector{WrapInStatement(expr)});
+    Func("foo", utils::Vector{a}, ty.void_, utils::Vector{WrapInStatement(expr)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 
@@ -146,7 +146,7 @@ TEST_F(ResolverRootIdentifierTest, PointerParameter) {
     auto* expr_param = Expr(param);
     auto* let = Let("b", expr_param);
     auto* expr_let = Expr("b");
-    Func("foo", utils::Vector{param}, ty.void_(),
+    Func("foo", utils::Vector{param}, ty.void_,
          utils::Vector{WrapInStatement(let), WrapInStatement(expr_let)});
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();

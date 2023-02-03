@@ -77,7 +77,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadUniformMatrix) {
                           }),
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kUniform, b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Decl(b.Let("x", b.ty.mat2x2<f32>(), b.MemberAccessor("s", "m"))),
            },
@@ -135,7 +135,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadUniformColumn) {
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kUniform, b.Group(0_a), b.Binding(0_a));
     b.Func(
-        "f", utils::Empty, b.ty.void_(),
+        "f", utils::Empty, b.ty.void_,
         utils::Vector{
             b.Decl(b.Let("x", b.ty.vec2<f32>(), b.IndexAccessor(b.MemberAccessor("s", "m"), 1_i))),
         },
@@ -188,7 +188,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadUniformMatrix_DefaultStride) {
                           }),
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kUniform, b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Decl(b.Let("x", b.ty.mat2x2<f32>(), b.MemberAccessor("s", "m"))),
            },
@@ -243,7 +243,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadStorageMatrix) {
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kStorage, type::Access::kReadWrite,
                 b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Decl(b.Let("x", b.ty.mat2x2<f32>(), b.MemberAccessor("s", "m"))),
            },
@@ -302,7 +302,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadStorageColumn) {
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kStorage, type::Access::kReadWrite,
                 b.Group(0_a), b.Binding(0_a));
     b.Func(
-        "f", utils::Empty, b.ty.void_(),
+        "f", utils::Empty, b.ty.void_,
         utils::Vector{
             b.Decl(b.Let("x", b.ty.vec2<f32>(), b.IndexAccessor(b.MemberAccessor("s", "m"), 1_i))),
         },
@@ -356,7 +356,7 @@ TEST_F(DecomposeStridedMatrixTest, WriteStorageMatrix) {
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kStorage, type::Access::kReadWrite,
                 b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Assign(b.MemberAccessor("s", "m"),
                         b.mat2x2<f32>(b.vec2<f32>(1_f, 2_f), b.vec2<f32>(3_f, 4_f))),
@@ -415,7 +415,7 @@ TEST_F(DecomposeStridedMatrixTest, WriteStorageColumn) {
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kStorage, type::Access::kReadWrite,
                 b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Assign(b.IndexAccessor(b.MemberAccessor("s", "m"), 1_i), b.vec2<f32>(1_f, 2_f)),
            },
@@ -475,7 +475,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadWriteViaPointerLets) {
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kStorage, type::Access::kReadWrite,
                 b.Group(0_a), b.Binding(0_a));
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Decl(b.Let("a", b.AddressOf(b.MemberAccessor("s", "m")))),
                b.Decl(b.Let("b", b.AddressOf(b.Deref(b.AddressOf(b.Deref("a")))))),
@@ -546,7 +546,7 @@ TEST_F(DecomposeStridedMatrixTest, ReadPrivateMatrix) {
                           }),
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kPrivate);
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Decl(b.Let("x", b.ty.mat2x2<f32>(), b.MemberAccessor("s", "m"))),
            },
@@ -600,7 +600,7 @@ TEST_F(DecomposeStridedMatrixTest, WritePrivateMatrix) {
                           }),
              });
     b.GlobalVar("s", b.ty.Of(S), type::AddressSpace::kPrivate);
-    b.Func("f", utils::Empty, b.ty.void_(),
+    b.Func("f", utils::Empty, b.ty.void_,
            utils::Vector{
                b.Assign(b.MemberAccessor("s", "m"),
                         b.mat2x2<f32>(b.vec2<f32>(1_f, 2_f), b.vec2<f32>(3_f, 4_f))),

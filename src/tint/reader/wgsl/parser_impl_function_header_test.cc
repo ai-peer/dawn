@@ -28,7 +28,7 @@ TEST_F(ParserImplTest, FunctionHeader) {
     ASSERT_EQ(f->params.Length(), 2u);
     EXPECT_EQ(f->params[0]->symbol, p->builder().Symbols().Get("a"));
     EXPECT_EQ(f->params[1]->symbol, p->builder().Symbols().Get("b"));
-    EXPECT_TRUE(f->return_type->Is<ast::Void>());
+    EXPECT_EQ(f->return_type, nullptr);
 }
 
 TEST_F(ParserImplTest, FunctionHeader_TrailingComma) {
@@ -40,7 +40,7 @@ TEST_F(ParserImplTest, FunctionHeader_TrailingComma) {
     EXPECT_EQ(f->name, "main");
     ASSERT_EQ(f->params.Length(), 1u);
     EXPECT_EQ(f->params[0]->symbol, p->builder().Symbols().Get("a"));
-    EXPECT_TRUE(f->return_type->Is<ast::Void>());
+    EXPECT_EQ(f->return_type, nullptr);
 }
 
 TEST_F(ParserImplTest, FunctionHeader_AttributeReturnType) {
@@ -52,9 +52,7 @@ TEST_F(ParserImplTest, FunctionHeader_AttributeReturnType) {
 
     EXPECT_EQ(f->name, "main");
     EXPECT_EQ(f->params.Length(), 0u);
-    ASSERT_TRUE(f->return_type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(f->return_type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    CheckIdentifier(p->builder().Symbols(), f->return_type, "i32");
     ASSERT_EQ(f->return_type_attributes.Length(), 1u);
 
     auto* loc = f->return_type_attributes[0]->As<ast::LocationAttribute>();
@@ -73,9 +71,7 @@ TEST_F(ParserImplTest, FunctionHeader_InvariantReturnType) {
 
     EXPECT_EQ(f->name, "main");
     EXPECT_EQ(f->params.Length(), 0u);
-    ASSERT_TRUE(f->return_type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(f->return_type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    CheckIdentifier(p->builder().Symbols(), f->return_type, "i32");
     ASSERT_EQ(f->return_type_attributes.Length(), 1u);
     EXPECT_TRUE(f->return_type_attributes[0]->Is<ast::InvariantAttribute>());
 }

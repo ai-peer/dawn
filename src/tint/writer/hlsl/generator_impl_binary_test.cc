@@ -608,7 +608,7 @@ TEST_F(HlslGeneratorImplTest_Binary, Call_WithLogical) {
              Param(Sym(), ty.bool_()),
              Param(Sym(), ty.bool_()),
          },
-         ty.void_(), utils::Empty, utils::Empty);
+         ty.void_, utils::Empty, utils::Empty);
     GlobalVar("a", ty.bool_(), type::AddressSpace::kPrivate);
     GlobalVar("b", ty.bool_(), type::AddressSpace::kPrivate);
     GlobalVar("c", ty.bool_(), type::AddressSpace::kPrivate);

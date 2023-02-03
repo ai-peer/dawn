@@ -3718,7 +3718,7 @@ TEST_P(BuiltinTextureTest, Call) {
 
     auto* call = Call(param.function, param.args(this));
     auto* stmt = CallStmt(call);
-    Func("func", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("func", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -3747,7 +3747,7 @@ TEST_P(BuiltinTextureTest, ValidateSPIRV) {
     auto* call = Call(param.function, param.args(this));
 
     auto* stmt = CallStmt(call);
-    Func("main", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("main", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -3770,7 +3770,7 @@ TEST_P(BuiltinTextureTest, OutsideFunction_IsError) {
 
     auto* call = Call(param.function, param.args(this));
     auto* stmt = CallStmt(call);
-    Func("func", utils::Empty, ty.void_(), utils::Vector{stmt},
+    Func("func", utils::Empty, ty.void_, utils::Vector{stmt},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });

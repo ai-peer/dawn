@@ -52,7 +52,7 @@ TEST_F(BuilderTest, EntryPoint_Parameters) {
                        });
     auto* mul = Mul(Expr(MemberAccessor("coord", "x")), Expr("loc1"));
     auto* col = Var("col", ty.f32(), mul);
-    Func("frag_main", utils::Vector{coord, loc1}, ty.void_(), utils::Vector{WrapInStatement(col)},
+    Func("frag_main", utils::Vector{coord, loc1}, ty.void_, utils::Vector{WrapInStatement(col)},
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });
@@ -215,7 +215,7 @@ TEST_F(BuilderTest, EntryPoint_SharedStruct) {
             Member("pos", ty.vec4<f32>(), utils::Vector{Builtin(ast::BuiltinValue::kPosition)}),
         });
 
-    auto* vert_retval = Construct(ty.Of(interface), 42_f, Construct(ty.vec4<f32>()));
+    auto* vert_retval = Call(ty.Of(interface), 42_f, vec4<f32>());
     Func("vert_main", utils::Empty, ty.Of(interface), utils::Vector{Return(vert_retval)},
          utils::Vector{
              Stage(ast::PipelineStage::kVertex),
@@ -323,7 +323,7 @@ TEST_F(BuilderTest, SampleIndex_SampleRateShadingCapability) {
     Func("main",
          utils::Vector{Param("sample_index", ty.u32(),
                              utils::Vector{Builtin(ast::BuiltinValue::kSampleIndex)})},
-         ty.void_(), utils::Empty,
+         ty.void_, utils::Empty,
          utils::Vector{
              Stage(ast::PipelineStage::kFragment),
          });

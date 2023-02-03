@@ -27,9 +27,7 @@ TEST_F(ParserImplTest, TypeDecl_ParsesType) {
     ASSERT_NE(t.value, nullptr);
     ASSERT_TRUE(t->Is<ast::Alias>());
     auto* alias = t->As<ast::Alias>();
-    ASSERT_TRUE(alias->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(alias->type->As<ast::TypeName>()->name->symbol),
-              "i32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(alias->type->name->symbol), "i32");
     EXPECT_EQ(t.value->source.range, (Source::Range{{1u, 1u}, {1u, 13u}}));
 }
 
@@ -44,7 +42,7 @@ TEST_F(ParserImplTest, TypeDecl_Parses_Ident) {
     ASSERT_TRUE(t.value->Is<ast::Alias>());
     auto* alias = t.value->As<ast::Alias>();
     EXPECT_EQ(p->builder().Symbols().NameFor(alias->name), "a");
-    EXPECT_TRUE(alias->type->Is<ast::TypeName>());
+    CheckIdentifier(p->builder().Symbols(), alias->type->name, "B");
     EXPECT_EQ(alias->source.range, (Source::Range{{1u, 1u}, {1u, 11u}}));
 }
 
@@ -63,9 +61,7 @@ TEST_F(ParserImplTest, TypeDecl_Unicode_Parses_Ident) {
     ASSERT_TRUE(t.value->Is<ast::Alias>());
     auto* alias = t.value->As<ast::Alias>();
     EXPECT_EQ(p->builder().Symbols().NameFor(alias->name), ident);
-    ASSERT_TRUE(alias->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(alias->type->As<ast::TypeName>()->name->symbol),
-              "i32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(alias->type->name->symbol), "i32");
     EXPECT_EQ(alias->source.range, (Source::Range{{1u, 1u}, {1u, 37u}}));
 }
 
