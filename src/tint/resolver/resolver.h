@@ -435,9 +435,9 @@ class Resolver {
     /// @returns true if the symbol is the name of a builtin function.
     bool IsBuiltin(Symbol) const;
 
-    /// @returns the type short-name alias for the symbol @p symbol at @p source
-    /// @note: Will raise an ICE if @p symbol is not a short-name type.
-    type::Type* ShortName(Symbol symbol, const Source& source) const;
+    /// @returns the core type for the symbol @p symbol at @p source
+    /// @note: Will raise an ICE if @p symbol is not a core type.
+    type::Type* CoreType(Symbol symbol, const Source& source) const;
 
     // ArrayInitializerSig represents a unique array initializer signature.
     // It is a tuple of the array type, number of arguments provided and earliest evaluation stage.
