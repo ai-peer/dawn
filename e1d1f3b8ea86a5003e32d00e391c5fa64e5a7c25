@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393e40c0_cdb1d4e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-03T08:12:34Z",
+      "side": 1,
+      "message": "Hi Kai, I am also failing on the Intel bots when trying to create a BGRA8Unorm image with STORAGE usage, and the error message is the same as I mentioned in https://github.com/gpuweb/gpuweb/issues/3799#issuecomment-1415263872.",
+      "revId": "e1d1f3b8ea86a5003e32d00e391c5fa64e5a7c25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
