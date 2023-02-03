@@ -36,6 +36,45 @@
 
 namespace dawn::native::vulkan {
 
+namespace {
+ResultOrError<std::string> Disassemble(const std::vector<uint32_t>& data) {
+    std::string spvErrors;
+    spv_target_env targetEnv = SPV_ENV_UNIVERSAL_1_0;
+
+    auto msgConsumer = [&spvErrors](spv_message_level_t level, const char*,
+                                    const spv_position_t& position, const char* message) {
+        switch (level) {
+            case SPV_MSG_FATAL:
+            case SPV_MSG_INTERNAL_ERROR:
+            case SPV_MSG_ERROR:
+                spvErrors +=
+                    "error: line " + std::to_string(position.index) + ": " + message + "\n";
+                break;
+            case SPV_MSG_WARNING:
+                spvErrors +=
+                    "warning: line " + std::to_string(position.index) + ": " + message + "\n";
+                break;
+            case SPV_MSG_INFO:
+                spvErrors += "info: line " + std::to_string(position.index) + ": " + message + "\n";
+                break;
+            case SPV_MSG_DEBUG:
+                break;
+        }
+    };
+
+    spvtools::SpirvTools tools(targetEnv);
+    tools.SetMessageConsumer(msgConsumer);
+
+    std::string result;
+    if (!tools.Disassemble(
+            data, &result,
+            SPV_BINARY_TO_TEXT_OPTION_INDENT | SPV_BINARY_TO_TEXT_OPTION_FRIENDLY_NAMES)) {
+        return DAWN_INTERNAL_ERROR(spvErrors);
+    }
+    return result;
+}
+}  // namespace
+
 #define COMPILED_SPIRV_MEMBERS(X)   \
     X(std::vector<uint32_t>, spirv) \
     X(std::string, remappedEntryPoint)
@@ -364,6 +403,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     DAWN_TRY(ValidateSpirv(GetDevice(), compilation->spirv.data(), compilation->spirv.size(),
                            GetDevice()->IsToggleEnabled(Toggle::DumpShaders)));
 #endif
+
+    if (GetDevice()->IsToggleEnabled(Toggle::DumpShaders)) {
+        std::string disassembly;
+        DAWN_TRY_ASSIGN(disassembly, Disassemble(compilation->spirv));
+        std::ostringstream dumpedMsg;
+        dumpedMsg << "/* Dumped disassembled SPIR-V */" << std::endl << disassembly << std::endl;
+        GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+    }
 
     VkShaderModuleCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
