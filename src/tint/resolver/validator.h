@@ -185,13 +185,13 @@ class Validator {
     /// @param a the atomic ast node
     /// @param s the atomic sem node
     /// @returns true on success, false otherwise.
-    bool Atomic(const ast::Atomic* a, const type::Atomic* s) const;
+    bool Atomic(const ast::TemplatedIdentifier* a, const type::Atomic* s) const;
 
     /// Validates a pointer type
     /// @param a the pointer ast node
     /// @param s the pointer sem node
     /// @returns true on success, false otherwise.
-    bool Pointer(const ast::Pointer* a, const type::Pointer* s) const;
+    bool Pointer(const ast::TemplatedIdentifier* a, const type::Pointer* s) const;
 
     /// Validates an assignment
     /// @param a the assignment statement
@@ -373,7 +373,7 @@ class Validator {
     /// Validates a storage texture
     /// @param t the texture to validate
     /// @returns true on success, false otherwise
-    bool StorageTexture(const ast::StorageTexture* t) const;
+    bool StorageTexture(const ast::Identifier* t) const;
 
     /// Validates a sampled texture
     /// @param t the texture to validate

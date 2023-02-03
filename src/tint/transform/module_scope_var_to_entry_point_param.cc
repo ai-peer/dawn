@@ -463,7 +463,7 @@ struct ModuleScopeVarToEntryPointParam::State {
 
             // Pass the variables as pointers to any functions that need them.
             for (auto* call : calls_to_replace[func_ast]) {
-                auto* target = ctx.src->AST().Functions().Find(call->target.name->symbol);
+                auto* target = ctx.src->AST().Functions().Find(call->target->symbol);
                 auto* target_sem = ctx.src->Sem().Get(target);
 
                 // Add new arguments for any variables that are needed by the callee.
