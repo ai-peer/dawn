@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b160e2a6_b5875db4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T06:04:13Z",
+      "side": 1,
+      "message": "`RequiredTogglesSet` is used for interpreting the `DawnTogglesDescriptor` given by user. A key feature is that it has an assigned ToggleStage, and will filter out the toggles of other stage. When implementing instance and adapter toggles, we can use it to filter the `DawnTogglesDescriptor` and get the right required toggles set for different object from possibly a single and reused `DawnTogglesDescriptor` that holding all required instance, adapter and device toggles.\n\n`TogglesState` is create by validating the `RequiredTogglesSet` and do default assignment and force-set. `RequiredTogglesSet` will left unchanged, and might be used as part of cache key or comparison. \nAnd after implementing instance and adapter toggles, `TogglesState` will inherit from earlier stage\u0027s toggles state beside `RequiredTogglesSet` of current stage. For example, device toggles state will also inherit from adapter toggles state beside of considering `RequiredTogglesSet` of device toggle stage given by user, and so does adapter toggles state will inherit from instance toggles state.\n\nMaking adapter the factory of *Device* toggle state allows adapter to completely know the toggles state of the device that it is asked/going to create, and can do validation (mainly feature validation) before actually creating the device object. The factory function `MakeDeviceToggles` and `MakeDeviceTogglesImpl` will also handle the inheriting from adapter toggles state to device toggles state. Also in my opinion, making device toggles state in a single factory function is more clear than currently method, which first copy the required toggles when creating device and then modify the device toggles for default value and validation force-set in device initialization, usually separated in several different functions.\n\nSo the whole design would be (for device toggles state, after instance and adapter toggles state implemented):\n```\n          (Maybe combined) DawnTogglesDescriptor\n                              ↓ (filter)\n           (Device stage) RequiredTogglesSet\n (validating, default value)  ↓ ← (inheriting) (Adapter stage)TogglesState\n              (Device stage) TogglesState\n```",
+      "parentUuid": "b3200bcf_b6266afd",
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95676913_9d892be0",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 9
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-03T05:19:31Z",
       "side": 1,
       "message": "this is unused",
+      "range": {
+        "startLine": 528,
+        "startChar": 0,
+        "endLine": 528,
+        "endChar": 50
+      },
+      "revId": "8f4e7f73e2247ab7f4ebfd5a9fc8f4e265d97ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "502b4d42_8d06341a",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T06:04:13Z",
+      "side": 1,
+      "message": "Removed. Would be used when doing inheriting from adapter toggles and instance toggles, but not now.",
+      "parentUuid": "95676913_9d892be0",
       "range": {
         "startLine": 528,
         "startChar": 0,

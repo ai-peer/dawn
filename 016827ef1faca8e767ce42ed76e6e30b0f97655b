@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b4d8a9_babc56ae",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-03T06:04:13Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "016827ef1faca8e767ce42ed76e6e30b0f97655b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
