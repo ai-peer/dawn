@@ -135,8 +135,8 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     mRenderPassCache = std::make_unique<RenderPassCache>(this);
     mResourceMemoryAllocator = std::make_unique<ResourceMemoryAllocator>(this);
 
-    mExternalMemoryService = std::make_unique<external_memory::Service>(this);
-    mExternalSemaphoreService = std::make_unique<external_semaphore::Service>(this);
+    mExternalMemoryServiceManager = std::make_unique<external_memory::ServiceManager>(this);
+    mExternalSemaphoreServiceManager = std::make_unique<external_semaphore::ServiceManager>(this);
 
     DAWN_TRY(PrepareRecordingContext());
 
@@ -290,10 +290,6 @@ ResourceMemoryAllocator* Device::GetResourceMemoryAllocator() const {
     return mResourceMemoryAllocator.get();
 }
 
-external_semaphore::Service* Device::GetExternalSemaphoreService() const {
-    return mExternalSemaphoreService.get();
-}
-
 void Device::EnqueueDeferredDeallocation(DescriptorSetAllocator* allocator) {
     mDescriptorAllocatorsPendingDeallocation.Enqueue(allocator, GetPendingCommandSerial());
 }
@@ -325,11 +321,12 @@ MaybeError Device::SubmitPendingCommands() {
     }
 
     ScopedSignalSemaphore scopedSignalSemaphore(this, VK_NULL_HANDLE);
+    auto externalSemaphoreService = mExternalSemaphoreServiceManager->GetService();
     if (mRecordingContext.externalTexturesForEagerTransition.size() > 0) {
         // Create an external semaphore for all external textures that have been used in the pending
         // submit.
         DAWN_TRY_ASSIGN(*scopedSignalSemaphore.InitializeInto(),
-                        mExternalSemaphoreService->CreateExportableSemaphore());
+                        externalSemaphoreService->CreateExportableSemaphore());
     }
 
     // Transition eagerly all used external textures for export.
@@ -386,7 +383,7 @@ MaybeError Device::SubmitPendingCommands() {
         // Export the signal semaphore.
         ExternalSemaphoreHandle semaphoreHandle;
         DAWN_TRY_ASSIGN(semaphoreHandle,
-                        mExternalSemaphoreService->ExportSemaphore(scopedSignalSemaphore.Get()));
+                        externalSemaphoreService->ExportSemaphore(scopedSignalSemaphore.Get()));
 
         // Update all external textures, eagerly transitioned in the submit, with the exported
         // handle, and the duplicated handles.
@@ -394,7 +391,7 @@ MaybeError Device::SubmitPendingCommands() {
         for (auto* texture : mRecordingContext.externalTexturesForEagerTransition) {
             ExternalSemaphoreHandle handle =
                 (first ? semaphoreHandle
-                       : mExternalSemaphoreService->DuplicateHandle(semaphoreHandle));
+                       : externalSemaphoreService->DuplicateHandle(semaphoreHandle));
             first = false;
             texture->UpdateExternalSemaphoreHandle(handle);
         }
@@ -913,11 +910,14 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
         usage |= internalUsageDesc->internalUsage;
     }
 
+    auto externalMemoryService = mExternalMemoryServiceManager->GetService(descriptor->GetType());
+    auto externalSemaphoreService = mExternalSemaphoreServiceManager->GetService();
+
     // Check services support this combination of handle type / image info
-    DAWN_INVALID_IF(!mExternalSemaphoreService->Supported(),
+    DAWN_INVALID_IF(!externalSemaphoreService->Supported(),
                     "External semaphore usage not supported");
 
-    DAWN_INVALID_IF(!mExternalMemoryService->SupportsImportMemory(
+    DAWN_INVALID_IF(!externalMemoryService->SupportsImportMemory(
                         VulkanImageFormat(this, textureDescriptor->format), VK_IMAGE_TYPE_2D,
                         VK_IMAGE_TILING_OPTIMAL,
                         VulkanImageUsage(usage, GetValidInternalFormat(textureDescriptor->format)),
@@ -926,14 +926,14 @@ MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descript
 
     // Import the external image's memory
     external_memory::MemoryImportParams importParams;
-    DAWN_TRY_ASSIGN(importParams, mExternalMemoryService->GetMemoryImportParams(descriptor, image));
+    DAWN_TRY_ASSIGN(importParams, externalMemoryService->GetMemoryImportParams(descriptor, image));
     DAWN_TRY_ASSIGN(*outAllocation,
-                    mExternalMemoryService->ImportMemory(memoryHandle, importParams, image));
+                    externalMemoryService->ImportMemory(memoryHandle, importParams, image));
 
     // Import semaphores we have to wait on before using the texture
     for (const ExternalSemaphoreHandle& handle : waitHandles) {
         VkSemaphore semaphore = VK_NULL_HANDLE;
-        DAWN_TRY_ASSIGN(semaphore, mExternalSemaphoreService->ImportSemaphore(handle));
+        DAWN_TRY_ASSIGN(semaphore, externalSemaphoreService->ImportSemaphore(handle));
         outWaitSemaphores->push_back(semaphore);
     }
 
@@ -990,10 +990,12 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     // Cleanup in case of a failure, the image creation doesn't acquire the external objects
     // if a failure happems.
     Texture* result = nullptr;
+    auto externalMemoryService = mExternalMemoryServiceManager->GetService(descriptor->GetType());
+
     // TODO(crbug.com/1026480): Consolidate this into a single CreateFromExternal call.
-    if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
-                                                  mExternalMemoryService.get()),
-                      &result) ||
+    if (ConsumedError(
+            Texture::CreateFromExternal(this, descriptor, textureDescriptor, externalMemoryService),
+            &result) ||
         ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
                                           waitHandles, &allocation, &waitSemaphores)) ||
         ConsumedError(result->BindExternalMemory(descriptor, allocation, waitSemaphores))) {

@@ -18,6 +18,10 @@
 
 namespace dawn::native::vulkan::external_memory {
 
+Service::Service(Device* device) : mDevice(device) {}
+
+Service::~Service() = default;
+
 bool Service::RequiresDedicatedAllocation(const ExternalImageDescriptorVk* descriptor,
                                           VkImage image) {
     switch (descriptor->dedicatedAllocation) {
