@@ -720,7 +720,7 @@ bool GeneratorImpl::EmitCall(std::ostream& out, const ast::CallExpression* expr)
 bool GeneratorImpl::EmitFunctionCall(std::ostream& out, const sem::Call* call) {
     const auto& args = call->Arguments();
     auto* decl = call->Declaration();
-    auto* ident = decl->target.name;
+    auto* ident = decl->target;
 
     auto name = builder_.Symbols().NameFor(ident->symbol);
     auto caller_sym = ident->symbol;

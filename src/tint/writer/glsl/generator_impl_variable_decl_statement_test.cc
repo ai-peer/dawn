@@ -39,7 +39,7 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement) {
 }
 
 TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Let) {
-    auto* var = Let("a", ty.f32(), Call<f32>());
+    auto* var = Let("a", ty.f32(), Call(ty.f32()));
     auto* stmt = Decl(var);
     WrapInFunction(stmt);
 
@@ -52,7 +52,7 @@ TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Let) {
 }
 
 TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const) {
-    auto* var = Const("a", ty.f32(), Call<f32>());
+    auto* var = Const("a", ty.f32(), Call(ty.f32()));
     auto* stmt = Decl(var);
     WrapInFunction(stmt);
 
@@ -411,7 +411,7 @@ void f() {
 
 TEST_F(GlslGeneratorImplTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_struct_zero) {
     Structure("S", utils::Vector{Member("a", ty.i32()), Member("b", ty.f32())});
-    auto* C = Const("C", Call(ty.array(ty("S"), 2_i)));
+    auto* C = Const("C", Call(ty.array("S", 2_i)));
     Func("f", utils::Empty, ty.void_(),
          utils::Vector{
              Decl(C),

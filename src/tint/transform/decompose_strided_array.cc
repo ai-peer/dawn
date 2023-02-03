@@ -21,6 +21,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/member_accessor_expression.h"
+#include "src/tint/sem/type_expression.h"
 #include "src/tint/sem/type_initializer.h"
 #include "src/tint/sem/value_expression.h"
 #include "src/tint/transform/simplify_pointers.h"
@@ -35,9 +36,9 @@ namespace {
 using DecomposedArrays = std::unordered_map<const type::Array*, Symbol>;
 
 bool ShouldRun(const Program* program) {
-    for (auto* node : program->ASTNodes().Objects()) {
-        if (auto* ast = node->As<ast::Array>()) {
-            if (ast::GetAttribute<ast::StrideAttribute>(ast->attributes)) {
+    for (auto* ty : program->Types()) {
+        if (auto* array = ty->As<type::Array>()) {
+            if (!array->IsStrideImplicit()) {
                 return true;
             }
         }
@@ -73,12 +74,12 @@ Transform::ApplyResult DecomposeStridedArray::Apply(const Program* src,
     // stride for the array element type, then replace the array element type with
     // a structure, holding a single field with a @size attribute equal to the
     // array stride.
-    ctx.ReplaceAll([&](const ast::Array* ast) -> const ast::Array* {
-        if (auto* arr = sem.Get(ast)) {
+    ctx.ReplaceAll([&](const ast::TemplatedIdentifier* ident) -> const ast::TemplatedIdentifier* {
+        if (auto* arr = sem.Get<type::Array>(ident)) {
             if (!arr->IsStrideImplicit()) {
                 auto el_ty = utils::GetOrCreate(decomposed, arr, [&] {
                     auto name = b.Symbols().New("strided_arr");
-                    auto* member_ty = ctx.Clone(ast->type);
+                    auto* member_ty = CreateASTTypeFor(ctx, arr->ElemType());
                     auto* member = b.Member(kMemberName, member_ty,
                                             utils::Vector{
                                                 b.MemberSize(AInt(arr->Stride())),
@@ -86,13 +87,13 @@ Transform::ApplyResult DecomposeStridedArray::Apply(const Program* src,
                     b.Structure(name, utils::Vector{member});
                     return name;
                 });
-                auto* count = ctx.Clone(ast->count);
-                return b.ty.array(b.ty(el_ty), count);
+                auto* count = ctx.Clone(ident->arguments[1]);
+                return b.ty.array(b.Ident(el_ty), count);
             }
-            if (ast::GetAttribute<ast::StrideAttribute>(ast->attributes)) {
+            if (ast::GetAttribute<ast::StrideAttribute>(ident->attributes)) {
                 // Strip the @stride attribute
-                auto* ty = ctx.Clone(ast->type);
-                auto* count = ctx.Clone(ast->count);
+                auto* ty = CreateASTTypeFor(ctx, arr->ElemType());
+                auto* count = ctx.Clone(ident->arguments[1]);
                 return b.ty.array(ty, count);
             }
         }
@@ -133,12 +134,8 @@ Transform::ApplyResult DecomposeStridedArray::Apply(const Program* src,
                         // decomposed.
                         // If this is an aliased array, decomposed should already be
                         // populated with any strided aliases.
-                        ast::CallExpression::Target target;
-                        if (expr->target.type) {
-                            target.type = ctx.Clone(expr->target.type);
-                        } else {
-                            target.name = ctx.Clone(expr->target.name);
-                        }
+
+                        auto* target = ctx.Clone(expr->target);
 
                         utils::Vector<const ast::Expression*, 8> args;
                         if (auto it = decomposed.find(arr); it != decomposed.end()) {
@@ -150,8 +147,7 @@ Transform::ApplyResult DecomposeStridedArray::Apply(const Program* src,
                             args = ctx.Clone(expr->args);
                         }
 
-                        return target.type ? b.Call(target.type, std::move(args))
-                                           : b.Call(target.name, std::move(args));
+                        return b.Call(target, std::move(args));
                     }
                 }
             }

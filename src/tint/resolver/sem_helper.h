@@ -21,6 +21,7 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/resolver/dependency_graph.h"
 #include "src/tint/sem/builtin_enum_expression.h"
+#include "src/tint/sem/type_expression.h"
 #include "src/tint/utils/map.h"
 
 namespace tint::resolver {
@@ -58,18 +59,31 @@ class SemHelper {
     /// @returns the sem node for @p ast
     template <typename AST = ast::Node>
     auto* GetVal(const AST* ast) const {
-        return AsValue(Get(ast));
+        return AsValueExpression(Get(ast));
     }
 
     /// @param expr the semantic node
     /// @returns nullptr if @p expr is nullptr, or @p expr cast to sem::ValueExpression if the cast
     /// is successful, otherwise an error diagnostic is raised.
-    sem::ValueExpression* AsValue(sem::Expression* expr) const {
+    sem::ValueExpression* AsValueExpression(sem::Expression* expr) const {
         if (TINT_LIKELY(expr)) {
-            if (auto* val = expr->As<sem::ValueExpression>(); TINT_LIKELY(val)) {
-                return val;
+            if (auto* val_expr = expr->As<sem::ValueExpression>(); TINT_LIKELY(val_expr)) {
+                return val_expr;
             }
             ErrorExpectedValueExpr(expr);
+        }
+        return nullptr;
+    }
+
+    /// @param expr the semantic node
+    /// @returns nullptr if @p expr is nullptr, or @p expr cast to type::Type if the cast is
+    /// successful, otherwise an error diagnostic is raised.
+    sem::TypeExpression* AsTypeExpression(sem::Expression* expr) const {
+        if (TINT_LIKELY(expr)) {
+            if (auto* ty_expr = expr->As<sem::TypeExpression>(); TINT_LIKELY(ty_expr)) {
+                return ty_expr;
+            }
+            ErrorUnexpectedExprKind(expr, "type");
         }
         return nullptr;
     }
@@ -80,9 +94,9 @@ class SemHelper {
     /// diagnostic is raised.
     sem::BuiltinEnumExpression<type::TexelFormat>* AsTexelFormat(sem::Expression* expr) const {
         if (TINT_LIKELY(expr)) {
-            if (auto* val = expr->As<sem::BuiltinEnumExpression<type::TexelFormat>>();
-                TINT_LIKELY(val)) {
-                return val;
+            if (auto* enum_expr = expr->As<sem::BuiltinEnumExpression<type::TexelFormat>>();
+                TINT_LIKELY(enum_expr)) {
+                return enum_expr;
             }
             ErrorUnexpectedExprKind(expr, "texel format");
         }
@@ -95,9 +109,9 @@ class SemHelper {
     /// diagnostic is raised.
     sem::BuiltinEnumExpression<type::Access>* AsAccess(sem::Expression* expr) const {
         if (TINT_LIKELY(expr)) {
-            if (auto* val = expr->As<sem::BuiltinEnumExpression<type::Access>>();
-                TINT_LIKELY(val)) {
-                return val;
+            if (auto* enum_expr = expr->As<sem::BuiltinEnumExpression<type::Access>>();
+                TINT_LIKELY(enum_expr)) {
+                return enum_expr;
             }
             ErrorUnexpectedExprKind(expr, "access");
         }

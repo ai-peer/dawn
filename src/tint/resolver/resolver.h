@@ -126,6 +126,10 @@ class Resolver {
     /// not a sem::ValueExpression, then an error diagnostic is raised and nullptr is returned.
     sem::ValueExpression* ValueExpression(const ast::Expression* expr);
 
+    /// @returns the call of Expression() cast to a sem::TypeExpression. If the sem::Expression is
+    /// not a sem::TypeExpression, then an error diagnostic is raised and nullptr is returned.
+    sem::TypeExpression* TypeExpression(const ast::Expression* expr);
+
     /// Expression traverses the graph of expressions starting at `expr`, building a postordered
     /// list (leaf-first) of all the expression nodes. Each of the expressions are then resolved by
     /// dispatching to the appropriate expression handlers below.
@@ -276,13 +280,6 @@ class Resolver {
     /// @param named_type the named type to resolve
     /// @returns the resolved semantic type
     type::Type* TypeDecl(const ast::TypeDecl* named_type);
-
-    /// Builds and returns the semantic information for the AST array `arr`.
-    /// This method does not mark the ast::Array node, nor attach the generated semantic information
-    /// to the AST node.
-    /// @returns the semantic Array information, or nullptr if an error is raised.
-    /// @param arr the Array to get semantic information for
-    type::Array* Array(const ast::Array* arr);
 
     /// Resolves and validates the expression used as the count parameter of an array.
     /// @param count_expr the expression used as the second template parameter to an array<>.

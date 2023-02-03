@@ -193,13 +193,13 @@ struct SpirvAtomic::State {
         }
     }
 
-    const ast::Type* AtomicTypeFor(const type::Type* ty) {
+    const ast::Identifier* AtomicTypeFor(const type::Type* ty) {
         return Switch(
             ty,  //
             [&](const type::I32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
             [&](const type::U32*) { return b.ty.atomic(CreateASTTypeFor(ctx, ty)); },
-            [&](const sem::Struct* str) { return b.ty(Fork(str->Declaration()).name); },
-            [&](const type::Array* arr) -> const ast::Type* {
+            [&](const sem::Struct* str) { return b.Ident(Fork(str->Declaration()).name); },
+            [&](const type::Array* arr) -> const ast::Identifier* {
                 if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                     return b.ty.array(AtomicTypeFor(arr->ElemType()));
                 }

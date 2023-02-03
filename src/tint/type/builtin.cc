@@ -28,6 +28,9 @@ namespace tint::type {
 /// @param str the string to parse
 /// @returns the parsed enum, or Builtin::kUndefined if the string could not be parsed.
 Builtin ParseBuiltin(std::string_view str) {
+    if (str == "array") {
+        return Builtin::kArray;
+    }
     if (str == "bool") {
         return Builtin::kBool;
     }
@@ -40,11 +43,17 @@ Builtin ParseBuiltin(std::string_view str) {
     if (str == "i32") {
         return Builtin::kI32;
     }
+    if (str == "mat2x2") {
+        return Builtin::kMat2X2;
+    }
     if (str == "mat2x2f") {
         return Builtin::kMat2X2F;
     }
     if (str == "mat2x2h") {
         return Builtin::kMat2X2H;
+    }
+    if (str == "mat2x3") {
+        return Builtin::kMat2X3;
     }
     if (str == "mat2x3f") {
         return Builtin::kMat2X3F;
@@ -52,11 +61,17 @@ Builtin ParseBuiltin(std::string_view str) {
     if (str == "mat2x3h") {
         return Builtin::kMat2X3H;
     }
+    if (str == "mat2x4") {
+        return Builtin::kMat2X4;
+    }
     if (str == "mat2x4f") {
         return Builtin::kMat2X4F;
     }
     if (str == "mat2x4h") {
         return Builtin::kMat2X4H;
+    }
+    if (str == "mat3x2") {
+        return Builtin::kMat3X2;
     }
     if (str == "mat3x2f") {
         return Builtin::kMat3X2F;
@@ -64,11 +79,17 @@ Builtin ParseBuiltin(std::string_view str) {
     if (str == "mat3x2h") {
         return Builtin::kMat3X2H;
     }
+    if (str == "mat3x3") {
+        return Builtin::kMat3X3;
+    }
     if (str == "mat3x3f") {
         return Builtin::kMat3X3F;
     }
     if (str == "mat3x3h") {
         return Builtin::kMat3X3H;
+    }
+    if (str == "mat3x4") {
+        return Builtin::kMat3X4;
     }
     if (str == "mat3x4f") {
         return Builtin::kMat3X4F;
@@ -76,17 +97,26 @@ Builtin ParseBuiltin(std::string_view str) {
     if (str == "mat3x4h") {
         return Builtin::kMat3X4H;
     }
+    if (str == "mat4x2") {
+        return Builtin::kMat4X2;
+    }
     if (str == "mat4x2f") {
         return Builtin::kMat4X2F;
     }
     if (str == "mat4x2h") {
         return Builtin::kMat4X2H;
     }
+    if (str == "mat4x3") {
+        return Builtin::kMat4X3;
+    }
     if (str == "mat4x3f") {
         return Builtin::kMat4X3F;
     }
     if (str == "mat4x3h") {
         return Builtin::kMat4X3H;
+    }
+    if (str == "mat4x4") {
+        return Builtin::kMat4X4;
     }
     if (str == "mat4x4f") {
         return Builtin::kMat4X4F;
@@ -176,6 +206,8 @@ std::ostream& operator<<(std::ostream& out, Builtin value) {
     switch (value) {
         case Builtin::kUndefined:
             return out << "undefined";
+        case Builtin::kArray:
+            return out << "array";
         case Builtin::kBool:
             return out << "bool";
         case Builtin::kF16:
@@ -184,38 +216,56 @@ std::ostream& operator<<(std::ostream& out, Builtin value) {
             return out << "f32";
         case Builtin::kI32:
             return out << "i32";
+        case Builtin::kMat2X2:
+            return out << "mat2x2";
         case Builtin::kMat2X2F:
             return out << "mat2x2f";
         case Builtin::kMat2X2H:
             return out << "mat2x2h";
+        case Builtin::kMat2X3:
+            return out << "mat2x3";
         case Builtin::kMat2X3F:
             return out << "mat2x3f";
         case Builtin::kMat2X3H:
             return out << "mat2x3h";
+        case Builtin::kMat2X4:
+            return out << "mat2x4";
         case Builtin::kMat2X4F:
             return out << "mat2x4f";
         case Builtin::kMat2X4H:
             return out << "mat2x4h";
+        case Builtin::kMat3X2:
+            return out << "mat3x2";
         case Builtin::kMat3X2F:
             return out << "mat3x2f";
         case Builtin::kMat3X2H:
             return out << "mat3x2h";
+        case Builtin::kMat3X3:
+            return out << "mat3x3";
         case Builtin::kMat3X3F:
             return out << "mat3x3f";
         case Builtin::kMat3X3H:
             return out << "mat3x3h";
+        case Builtin::kMat3X4:
+            return out << "mat3x4";
         case Builtin::kMat3X4F:
             return out << "mat3x4f";
         case Builtin::kMat3X4H:
             return out << "mat3x4h";
+        case Builtin::kMat4X2:
+            return out << "mat4x2";
         case Builtin::kMat4X2F:
             return out << "mat4x2f";
         case Builtin::kMat4X2H:
             return out << "mat4x2h";
+        case Builtin::kMat4X3:
+            return out << "mat4x3";
         case Builtin::kMat4X3F:
             return out << "mat4x3f";
         case Builtin::kMat4X3H:
             return out << "mat4x3h";
+        case Builtin::kMat4X4:
+            return out << "mat4x4";
         case Builtin::kMat4X4F:
             return out << "mat4x4f";
         case Builtin::kMat4X4H:
