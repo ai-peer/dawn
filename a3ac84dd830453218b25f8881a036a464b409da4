@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfe3522e_02dd1e62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "This commit is still pretty big and is more complicated than it needs to be with dead code, redundant structures, etc.",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07825fb_694121c8",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "We could probably move this enum outside just so that we don\u0027t need to type ToggleInfo::ToggleState all the time",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d4bffde_745ebf77",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "The point is that this function disappears eventually right?",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37c7c93a_d098b11d",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "WDYT of:\n\n```\nclass AdapterBase {\n  protected:\n    void PrepareDeviceToggles(ToggleState* state) const \u003d 0;\n}\n```\n\nThis helps avoid the RequiredTogglesSet class, ensures it is a pure function, and is a bit more explicit in that it modifies toggles instead of creating a new one.",
+      "range": {
+        "startLine": 231,
+        "startChar": 33,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebaf5625_d46924ae",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "I there ever a case where a toggle is enabled but not set? It feels it should be possible to just check togglesIsEnabled",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26782f51_3564efef",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-03T12:11:09Z",
+      "side": 1,
+      "message": "nit: these can be moved next to the corresponding blocks of code below.",
+      "range": {
+        "startLine": 455,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 0
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
