@@ -21,7 +21,7 @@
 #include "dawn/native/vulkan/ResourceMemoryAllocatorVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
-#include "dawn/native/vulkan/external_memory/MemoryService.h"
+#include "dawn/native/vulkan/external_memory/MemoryServiceDmaBuf.h"
 
 namespace dawn::native::vulkan::external_memory {
 
@@ -115,31 +115,31 @@ bool SupportsDisjoint(const VulkanFunctions& fn,
 
 }  // namespace
 
-Service::Service(Device* device)
-    : mDevice(device), mSupported(CheckSupport(device->GetDeviceInfo())) {}
+MemoryServiceDmaBuffer::MemoryServiceDmaBuffer(Device* device)
+    : Service(device), mSupported(CheckSupport(device->GetDeviceInfo())) {}
 
-Service::~Service() = default;
+MemoryServiceDmaBuffer::~MemoryServiceDmaBuffer() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo) {
+bool MemoryServiceDmaBuffer::CheckSupport(const VulkanDeviceInfo& deviceInfo) {
     return deviceInfo.HasExt(DeviceExt::ExternalMemoryFD) &&
            deviceInfo.HasExt(DeviceExt::ImageDrmFormatModifier);
 }
 
-bool Service::SupportsImportMemory(VkFormat format,
-                                   VkImageType type,
-                                   VkImageTiling tiling,
-                                   VkImageUsageFlags usage,
-                                   VkImageCreateFlags flags) {
+bool MemoryServiceDmaBuffer::SupportsImportMemory(VkFormat format,
+                                                  VkImageType type,
+                                                  VkImageTiling tiling,
+                                                  VkImageUsageFlags usage,
+                                                  VkImageCreateFlags flags) {
     return mSupported && (!IsMultiPlanarVkFormat(format) ||
                           (format == VK_FORMAT_G8_B8R8_2PLANE_420_UNORM &&
                            mDevice->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)));
 }
 
-bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
-                                  VkFormat format,
-                                  VkImageUsageFlags usage,
-                                  bool* supportsDisjoint) {
+bool MemoryServiceDmaBuffer::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
+                                                 VkFormat format,
+                                                 VkImageUsageFlags usage,
+                                                 bool* supportsDisjoint) {
     *supportsDisjoint = false;
     // Early out before we try using extension functions
     if (!mSupported) {
@@ -224,7 +224,7 @@ bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
     return featureFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT;
 }
 
-ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+ResultOrError<MemoryImportParams> MemoryServiceDmaBuffer::GetMemoryImportParams(
     const ExternalImageDescriptor* descriptor,
     VkImage image) {
     DAWN_INVALID_IF(descriptor->GetType() != ExternalImageType::DmaBuf,
@@ -259,13 +259,14 @@ ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
     return params;
 }
 
-uint32_t Service::GetQueueFamilyIndex() {
+uint32_t MemoryServiceDmaBuffer::GetQueueFamilyIndex() {
     return VK_QUEUE_FAMILY_EXTERNAL_KHR;
 }
 
-ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                    const MemoryImportParams& importParams,
-                                                    VkImage image) {
+ResultOrError<VkDeviceMemory> MemoryServiceDmaBuffer::ImportMemory(
+    ExternalMemoryHandle handle,
+    const MemoryImportParams& importParams,
+    VkImage image) {
     DAWN_INVALID_IF(handle < 0, "Importing memory with an invalid handle.");
 
     VkMemoryAllocateInfo memoryAllocateInfo = {};
@@ -294,8 +295,9 @@ ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
     return allocatedMemory;
 }
 
-ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,
-                                            const VkImageCreateInfo& baseCreateInfo) {
+ResultOrError<VkImage> MemoryServiceDmaBuffer::CreateImage(
+    const ExternalImageDescriptor* descriptor,
+    const VkImageCreateInfo& baseCreateInfo) {
     DAWN_INVALID_IF(descriptor->GetType() != ExternalImageType::DmaBuf,
                     "ExternalImageDescriptor is not a dma-buf descriptor.");
 
@@ -347,6 +349,10 @@ ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descr
     DAWN_TRY(CheckVkSuccess(mDevice->fn.CreateImage(device, &createInfo, nullptr, &*image),
                             "CreateImage"));
     return image;
+}
+
+bool MemoryServiceDmaBuffer::Supported() const {
+    return mSupported;
 }
 
 }  // namespace dawn::native::vulkan::external_memory

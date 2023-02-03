@@ -19,7 +19,7 @@
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/VulkanError.h"
-#include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+#include "dawn/native/vulkan/external_semaphore/SemaphoreServiceFD.h"
 
 static constexpr VkExternalSemaphoreHandleTypeFlagBits kHandleType =
 #if defined(DAWN_USE_SYNC_FDS)
@@ -30,18 +30,18 @@ static constexpr VkExternalSemaphoreHandleTypeFlagBits kHandleType =
 
 namespace dawn::native::vulkan::external_semaphore {
 
-Service::Service(Device* device)
-    : mDevice(device),
+SemaphoreServiceFD::SemaphoreServiceFD(Device* device)
+    : Service(device),
       mSupported(CheckSupport(device->GetDeviceInfo(),
                               ToBackend(device->GetAdapter())->GetPhysicalDevice(),
                               device->fn)) {}
 
-Service::~Service() = default;
+SemaphoreServiceFD::~SemaphoreServiceFD() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                           VkPhysicalDevice physicalDevice,
-                           const VulkanFunctions& fn) {
+bool SemaphoreServiceFD::CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                                      VkPhysicalDevice physicalDevice,
+                                      const VulkanFunctions& fn) {
     if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreFD)) {
         return false;
     }
@@ -64,11 +64,11 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
     return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
 }
 
-bool Service::Supported() {
+bool SemaphoreServiceFD::Supported() {
     return mSupported;
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
+ResultOrError<VkSemaphore> SemaphoreServiceFD::ImportSemaphore(ExternalSemaphoreHandle handle) {
     DAWN_INVALID_IF(handle < 0, "Importing a semaphore with an invalid handle.");
 
     VkSemaphore semaphore = VK_NULL_HANDLE;
@@ -101,7 +101,7 @@ ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle hand
     return semaphore;
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
+ResultOrError<VkSemaphore> SemaphoreServiceFD::CreateExportableSemaphore() {
     VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
     exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
     exportSemaphoreInfo.pNext = nullptr;
@@ -120,7 +120,7 @@ ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
     return signalSemaphore;
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
+ResultOrError<ExternalSemaphoreHandle> SemaphoreServiceFD::ExportSemaphore(VkSemaphore semaphore) {
     VkSemaphoreGetFdInfoKHR semaphoreGetFdInfo;
     semaphoreGetFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
     semaphoreGetFdInfo.pNext = nullptr;
@@ -136,14 +136,14 @@ ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore sema
     return fd;
 }
 
-ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {
+ExternalSemaphoreHandle SemaphoreServiceFD::DuplicateHandle(ExternalSemaphoreHandle handle) {
     int fd = dup(handle);
     ASSERT(fd >= 0);
     return fd;
 }
 
 // static
-void Service::CloseHandle(ExternalSemaphoreHandle handle) {
+void SemaphoreServiceFD::CloseHandle(ExternalSemaphoreHandle handle) {
     int ret = close(handle);
     ASSERT(ret == 0);
 }
