@@ -64,7 +64,7 @@ TEST_F(WgslGeneratorImplTest, Emit_GlobalsInterleaved) {
                                    Member("a", ty.i32()),
                                });
 
-    Func("main", {}, ty.void_(),
+    Func("main", {}, ty.void_,
          utils::Vector{
              Decl(Var("s0", ty.Of(s0))),
              Decl(Var("s1", ty.Of(s1))),

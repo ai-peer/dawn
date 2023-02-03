@@ -27,7 +27,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_Loop) {
     auto* continuing = Block();
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -42,13 +42,13 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_Loop) {
 }
 
 TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopWithContinuing) {
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* body = Block(Break());
     auto* continuing = Block(CallStmt(Call("a_statement")));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -66,13 +66,13 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopWithContinuing) {
 }
 
 TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopWithContinuing_BreakIf) {
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* body = Block(Break());
     auto* continuing = Block(CallStmt(Call("a_statement")), BreakIf(true));
     auto* l = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{l},
+    Func("F", utils::Empty, ty.void_, utils::Vector{l},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -91,7 +91,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopWithContinuing_BreakIf) {
 }
 
 TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopNestedWithContinuing) {
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     GlobalVar("lhs", ty.f32(), type::AddressSpace::kPrivate);
     GlobalVar("rhs", ty.f32(), type::AddressSpace::kPrivate);
@@ -109,7 +109,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_LoopNestedWithContinuing) {
 
     auto* outer = Loop(body, continuing);
 
-    Func("F", utils::Empty, ty.void_(), utils::Vector{outer},
+    Func("F", utils::Empty, ty.void_, utils::Vector{outer},
          utils::Vector{Stage(ast::PipelineStage::kFragment)});
 
     GeneratorImpl& gen = Build();
@@ -245,7 +245,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_ForLoopWithSimpleCond) {
     //   return;
     // }
 
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* f = For(nullptr, true, nullptr, Block(CallStmt(Call("a_statement"))));
     WrapInFunction(f);
@@ -269,7 +269,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_ForLoopWithMultiStmtCond) {
     //   return;
     // }
 
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
     auto* t = Let("t", Expr(true));
     auto* multi_stmt = LogicalAnd(t, false);
     auto* f = For(nullptr, multi_stmt, nullptr, Block(CallStmt(Call("a_statement"))));
@@ -455,7 +455,7 @@ TEST_F(GlslGeneratorImplTest_Loop, Emit_WhileWithMultiStmtCond) {
     //   return;
     // }
 
-    Func("a_statement", {}, ty.void_(), {});
+    Func("a_statement", {}, ty.void_, {});
 
     auto* t = Let("t", Expr(true));
     auto* multi_stmt = LogicalAnd(t, false);

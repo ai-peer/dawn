@@ -44,8 +44,7 @@ TEST_F(ParserImplTest, GlobalConstDecl) {
 
     EXPECT_EQ(c->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(c->type, nullptr);
-    ASSERT_TRUE(c->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(c->type->As<ast::TypeName>()->name->symbol), "f32");
+    CheckIdentifier(p->builder().Symbols(), c->type->name, "f32");
 
     EXPECT_EQ(c->source.range.begin.line, 1u);
     EXPECT_EQ(c->source.range.begin.column, 7u);
@@ -121,9 +120,7 @@ TEST_F(ParserImplTest, GlobalOverrideDecl_WithId) {
 
     EXPECT_EQ(override->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(override->type, nullptr);
-    ASSERT_TRUE(override->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->name->symbol), "f32");
 
     EXPECT_EQ(override->source.range.begin.line, 1u);
     EXPECT_EQ(override->source.range.begin.column, 17u);
@@ -153,9 +150,7 @@ TEST_F(ParserImplTest, GlobalOverrideDecl_WithId_TrailingComma) {
 
     EXPECT_EQ(override->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(override->type, nullptr);
-    ASSERT_TRUE(override->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->name->symbol), "f32");
 
     EXPECT_EQ(override->source.range.begin.line, 1u);
     EXPECT_EQ(override->source.range.begin.column, 18u);
@@ -185,9 +180,7 @@ TEST_F(ParserImplTest, GlobalOverrideDecl_WithoutId) {
 
     EXPECT_EQ(override->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(override->type, nullptr);
-    ASSERT_TRUE(override->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->As<ast::TypeName>()->name->symbol),
-              "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(override->type->name->symbol), "f32");
 
     EXPECT_EQ(override->source.range.begin.line, 1u);
     EXPECT_EQ(override->source.range.begin.column, 10u);

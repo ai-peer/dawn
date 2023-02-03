@@ -86,7 +86,7 @@ const sem::Call* AppendVector(ProgramBuilder* b,
         packed_el_sem_ty = vector_ty;
     }
 
-    const ast::Type* packed_el_ast_ty = Switch(
+    const ast::Identifier* packed_el_ast_ty = Switch(
         packed_el_sem_ty,  //
         [&](const type::I32*) { return b->ty.i32(); },
         [&](const type::U32*) { return b->ty.u32(); },
@@ -100,7 +100,7 @@ const sem::Call* AppendVector(ProgramBuilder* b,
 
     auto* statement = vector_sem->Stmt();
 
-    auto* packed_ast_ty = b->create<ast::Vector>(packed_el_ast_ty, packed_size);
+    auto* packed_ast_ty = b->ty.vec(packed_el_ast_ty, packed_size);
     auto* packed_sem_ty = b->create<type::Vector>(packed_el_sem_ty, packed_size);
 
     // If the coordinates are already passed in a vector initializer, with only
@@ -133,7 +133,7 @@ const sem::Call* AppendVector(ProgramBuilder* b,
 
     if (packed_el_sem_ty != scalar_sem->Type()->UnwrapRef()) {
         // Cast scalar to the vector element type
-        auto* scalar_cast_ast = b->Construct(packed_el_ast_ty, scalar_ast);
+        auto* scalar_cast_ast = b->Call(packed_el_ast_ty, scalar_ast);
         auto* scalar_cast_target = b->create<sem::TypeConversion>(
             packed_el_sem_ty,
             b->create<sem::Parameter>(nullptr, 0u, scalar_sem->Type()->UnwrapRef(),
@@ -150,9 +150,9 @@ const sem::Call* AppendVector(ProgramBuilder* b,
     }
 
     auto* initializer_ast =
-        b->Construct(packed_ast_ty, utils::Transform(packed, [&](const sem::ValueExpression* expr) {
-                         return expr->Declaration();
-                     }));
+        b->Call(packed_ast_ty, utils::Transform(packed, [&](const sem::ValueExpression* expr) {
+                    return expr->Declaration();
+                }));
     auto* initializer_target = b->create<sem::TypeInitializer>(
         packed_sem_ty,
         utils::Transform(

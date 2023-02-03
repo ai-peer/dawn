@@ -61,8 +61,8 @@ TEST_F(ModuleTest, Assert_DifferentProgramID_Function) {
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.AST().AddFunction(b2.create<ast::Function>(b2.Symbols().Register("func"),
-                                                          utils::Empty, b2.ty.f32(), b2.Block(),
+            b1.AST().AddFunction(b2.create<ast::Function>(b2.Symbols().New("func"), utils::Empty,
+                                                          b2.Type(b2.ty.f32()), b2.Block(),
                                                           utils::Empty, utils::Empty));
         },
         "internal compiler error");
@@ -91,7 +91,7 @@ TEST_F(ModuleTest, CloneOrder) {
     // Create a program with a function, alias decl and var decl.
     Program p = [] {
         ProgramBuilder b;
-        b.Func("F", {}, b.ty.void_(), {});
+        b.Func("F", {}, b.ty.void_, {});
         b.Alias("A", b.ty.u32());
         b.GlobalVar("V", b.ty.i32(), type::AddressSpace::kPrivate);
         return Program(std::move(b));

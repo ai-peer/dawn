@@ -111,7 +111,7 @@ Transform::ApplyResult RemovePhonies::Apply(const Program* src, const DataMap&, 
                                 auto* ast_ty = CreateASTTypeFor(ctx, ty);
                                 params.Push(b.Param("p" + std::to_string(params.Length()), ast_ty));
                             }
-                            b.Func(name, params, b.ty.void_(), {});
+                            b.Func(name, params, b.ty.void_, {});
                             return name;
                         });
                         utils::Vector<const ast::Expression*, 8> args;

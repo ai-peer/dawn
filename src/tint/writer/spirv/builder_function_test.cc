@@ -24,7 +24,7 @@ namespace {
 using BuilderTest = TestHelper;
 
 TEST_F(BuilderTest, Function_Empty) {
-    Func("a_func", utils::Empty, ty.void_(), utils::Empty);
+    Func("a_func", utils::Empty, ty.void_, utils::Empty);
 
     spirv::Builder& b = Build();
 
@@ -41,7 +41,7 @@ OpFunctionEnd
 }
 
 TEST_F(BuilderTest, Function_Terminator_Return) {
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -88,7 +88,7 @@ OpFunctionEnd
 }
 
 TEST_F(BuilderTest, Function_Terminator_Discard) {
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              create<ast::DiscardStatement>(),
          });
@@ -135,7 +135,7 @@ OpFunctionEnd
 }
 
 TEST_F(BuilderTest, Function_WithBody) {
-    Func("a_func", utils::Empty, ty.void_(),
+    Func("a_func", utils::Empty, ty.void_,
          utils::Vector{
              Return(),
          });
@@ -155,7 +155,7 @@ OpFunctionEnd
 }
 
 TEST_F(BuilderTest, FunctionType) {
-    Func("a_func", utils::Empty, ty.void_(), utils::Empty, utils::Empty);
+    Func("a_func", utils::Empty, ty.void_, utils::Empty, utils::Empty);
 
     spirv::Builder& b = Build();
 
@@ -167,8 +167,8 @@ TEST_F(BuilderTest, FunctionType) {
 }
 
 TEST_F(BuilderTest, FunctionType_DeDuplicate) {
-    auto* func1 = Func("a_func", utils::Empty, ty.void_(), utils::Empty, utils::Empty);
-    auto* func2 = Func("b_func", utils::Empty, ty.void_(), utils::Empty, utils::Empty);
+    auto* func1 = Func("a_func", utils::Empty, ty.void_, utils::Empty, utils::Empty);
+    auto* func2 = Func("b_func", utils::Empty, ty.void_, utils::Empty, utils::Empty);
 
     spirv::Builder& b = Build();
 
@@ -204,7 +204,7 @@ TEST_F(BuilderTest, Emit_Multiple_EntryPoint_With_Same_ModuleVar) {
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("a", utils::Empty, ty.void_(),
+        Func("a", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),
@@ -215,7 +215,7 @@ TEST_F(BuilderTest, Emit_Multiple_EntryPoint_With_Same_ModuleVar) {
     {
         auto* var = Var("v", ty.f32(), MemberAccessor("data", "d"));
 
-        Func("b", utils::Empty, ty.void_(),
+        Func("b", utils::Empty, ty.void_,
              utils::Vector{
                  Decl(var),
                  Return(),

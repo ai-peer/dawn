@@ -35,7 +35,7 @@ TEST_F(BuilderTest, GlobalConstAssert) {
 }
 
 TEST_F(BuilderTest, FunctionConstAssert) {
-    Func("f", utils::Empty, ty.void_(), utils::Vector{ConstAssert(true)});
+    Func("f", utils::Empty, ty.void_, utils::Vector{ConstAssert(true)});
 
     spirv::Builder& b = Build();
 

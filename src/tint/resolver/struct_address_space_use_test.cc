@@ -40,7 +40,7 @@ TEST_F(ResolverAddressSpaceUseTest, UnreachableStruct) {
 TEST_F(ResolverAddressSpaceUseTest, StructReachableFromParameter) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32())});
 
-    Func("f", utils::Vector{Param("param", ty.Of(s))}, ty.void_(), utils::Empty, utils::Empty);
+    Func("f", utils::Vector{Param("param", ty.Of(s))}, ty.void_, utils::Empty, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 
@@ -52,7 +52,7 @@ TEST_F(ResolverAddressSpaceUseTest, StructReachableFromParameter) {
 TEST_F(ResolverAddressSpaceUseTest, StructReachableFromReturnType) {
     auto* s = Structure("S", utils::Vector{Member("a", ty.f32())});
 
-    Func("f", utils::Empty, ty.Of(s), utils::Vector{Return(Construct(ty.Of(s)))}, utils::Empty);
+    Func("f", utils::Empty, ty.Of(s), utils::Vector{Return(ty.Of(s))}, utils::Empty);
 
     ASSERT_TRUE(r()->Resolve()) << r()->error();
 

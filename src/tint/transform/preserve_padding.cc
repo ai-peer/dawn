@@ -124,7 +124,7 @@ struct PreservePadding::State {
                                          type::Access::kReadWrite)),
                     b.Param(kValueParamName, CreateASTTypeFor(ctx, ty)),
                 };
-                b.Func(helper_name, params, b.ty.void_(), body());
+                b.Func(helper_name, params, b.ty.void_, body());
                 return helper_name;
             });
             return b.CallStmt(b.Call(helper, b.AddressOf(lhs), rhs));

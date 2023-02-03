@@ -50,7 +50,7 @@ Transform::ApplyResult AddEmptyEntryPoint::Apply(const Program* src,
     ProgramBuilder b;
     CloneContext ctx{&b, src, /* auto_clone_symbols */ true};
 
-    b.Func(b.Symbols().New("unused_entry_point"), {}, b.ty.void_(), {},
+    b.Func(b.Symbols().New("unused_entry_point"), {}, b.ty.void_, {},
            utils::Vector{
                b.Stage(ast::PipelineStage::kCompute),
                b.WorkgroupSize(1_i),
