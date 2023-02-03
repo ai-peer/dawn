@@ -183,6 +183,7 @@ class RecordMember:
         self.handle_type = None
         self.default_value = default_value
         self.skip_serialize = skip_serialize
+        self.lpm_info = {}
 
     def set_handle_type(self, handle_type):
         assert self.type.dict_name == "ObjectHandle"
@@ -208,6 +209,7 @@ class Record:
         self.name = Name(name)
         self.members = []
         self.may_have_dawn_object = False
+        self.lpm_info = {}
 
     def update_metadata(self):
         def may_have_dawn_object(member):
@@ -291,6 +293,7 @@ class Command(Record):
         self.members = members or []
         self.derived_object = None
         self.derived_method = None
+        self.lpm_info = {}
 
 
 def linked_record_members(json_data, types):
@@ -371,6 +374,29 @@ def link_function(function, types):
     function.arguments = linked_record_members(function.json_data['args'],
                                                types)
 
+
+def lpm_link_extra_types(command, lpm_info):
+    name = command.name.get()
+    for member in command.members:
+        if member.name.get() in lpm_info[name]["types"]:
+            member.lpm_info["type"] = Name(
+                lpm_info[name]["types"][member.name.get()])
+
+
+def lpm_link_extra_clamps(record, lpm_info):
+    name = record.name.get()
+    for member in record.members:
+        member_name = member.name.get()
+        if member_name in lpm_info[name]["clamps"]:
+            member.lpm_info["clamp"] = True
+
+
+def lpm_link_extra_overrides(command, lpm_info):
+    name = command.name.get()
+    for member in command.members:
+        if member.name.get() in lpm_info[name]["overrides"]:
+            member.lpm_info["override"] = lpm_info[name]["overrides"][
+                member.name.get()]
 
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
@@ -575,12 +601,14 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
     # Start with all commands in dawn.json and dawn_wire.json
     lpm_params = api_and_wire_params.copy()
 
-    # Commands that are built through generation
+    # dawn_lpm.proto Commands that are built through generation
     proto_generated_commands = []
 
-    # All commands, including hand written commands that we can't generate
-    # through codegen
+    # All dawn_lpm.proto commands, including hand written commands that we
+    # can't generate through codegen
     proto_all_commands = []
+
+    # Commands that are generated in DawnLPMSerializer.cpp
     cpp_commands = []
 
     # Remove blocklisted commands from protobuf generation params
@@ -601,6 +629,49 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
         if command.name.get() in blocklisted_cmds_cpp:
             continue
         cpp_commands.append(command)
+
+    # Add extra metadata to commands
+    lpm_info = lpm_json.get("lpm_info")
+    for command in cpp_commands:
+        name = command.name.get()
+        if name in lpm_info:
+            if "returns" in lpm_info[name]:
+                command.lpm_info["returns"] = Name(lpm_info[name]["returns"])
+            if "types" in lpm_info[name]:
+                lpm_link_extra_types(command, lpm_info)
+            if "clamps" in lpm_info[name]:
+                lpm_link_extra_clamps(command, lpm_info)
+            if "overrides" in lpm_info[name]:
+                lpm_link_extra_overrides(command, lpm_info)
+
+    # Add extra metadata to structures
+    for structure in api_and_wire_params['by_category']['structure']:
+        name = structure.name.get()
+        if name in lpm_info:
+            if "clamps" in lpm_info[name]:
+                lpm_link_extra_clamps(structure, lpm_info)
+
+    # Remove variable sized length values from commands,
+    # these are set to the length of the protobuf array.
+    for command in api_and_wire_params['cmd_records']['command']:
+        lengths = []
+        for member in command.members:
+            lengths.append(member.length)
+
+        for member in command.members:
+            if member in lengths:
+                command.members.remove(member)
+
+    # Remove variable sized length values from structures,
+    # these are set to the length of the protobuf array.
+    for structure in api_and_wire_params['by_category']['structure']:
+        lengths = []
+        for member in structure.members:
+            lengths.append(member.length)
+
+        for member in structure.members:
+            if member in lengths:
+                structure.members.remove(member)
 
     lpm_params['cmd_records'] = {
         'proto_generated_commands': proto_generated_commands,
@@ -638,6 +709,67 @@ def as_protobufNameLPM(*names):
     if (names[0].concatcase() == "descriptor"):
         return "desc"
     return as_varName(*names)
+
+
+def as_varLocalLPM(variable, *members):
+    return variable + '_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+def as_varLocalArrayLPM(variable, *members):
+    return variable + 'N_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+def as_varSizeLPM(variable, member):
+    return variable + 'N_' + member.name.concatcase() + '_size'
+
+
+def as_varIdLPM(variable, member):
+    return variable + '_' + member.name.concatcase() + '_id'
+
+
+def as_protobufTypeLPM(mem):
+    if 'type' not in mem.json_data:
+        return 'failure'
+
+    typ = mem.json_data['type']
+    types = {
+        "uint64_t": "uint64",
+        "bool": "bool",
+        "uint32_t": "uint32",
+        "double": "double",
+        "float": "float",
+        "int32_t": "int32",
+        "int64_t": "int64",
+        "uint16_t": "uint32"
+    }
+
+    if typ in types:
+        return types[typ]
+
+    return mem.type.name.CamelCase()
+
+
+def as_protobufNameLPM(*names):
+    if (names[0].concatcase() == "descriptor"):
+        return "desc"
+    return as_varName(*names)
+
+
+def as_protobufMemberNameLPM(*names):
+    if (names[0].concatcase() == "descriptor"):
+        return "desc"
+    return names[0].concatcase().lower() + ''.join(
+        [name.concatcase().lower() for name in names[1:]])
+
+
+def as_indexedAccessLPM(access):
+    return "[" + access + "]"
+
+
+def as_memberAccessLPM(access):
+    return "." + access
 
 #############################################################
 # Generator
@@ -1120,7 +1252,7 @@ class MultiGeneratorFromDawnJSON(Generator):
                 RENDER_PARAMS_BASE, params_dawn_wire, {
                     'as_protobufTypeLPM': as_protobufTypeLPM,
                     'as_protobufNameLPM': as_protobufNameLPM
-                }, additional_params, fuzzer_params
+                }, api_and_wire_params, fuzzer_params
             ]
 
             renders.append(
@@ -1138,8 +1270,22 @@ class MultiGeneratorFromDawnJSON(Generator):
             fuzzer_params = compute_lpm_params(api_and_wire_params, lpm_json)
 
             lpm_params = [
-                RENDER_PARAMS_BASE, params_dawn_wire, {}, additional_params,
-                fuzzer_params
+                RENDER_PARAMS_BASE, params_dawn_wire, {
+                    'as_protobufMemberNameLPM':
+                    lambda names: as_protobufMemberNameLPM(names),
+                    'as_varIdLPM':
+                    lambda var, name: as_varIdLPM(var, name),
+                    'as_varLocalLPM':
+                    as_varLocalLPM,
+                    'as_varLocalArrayLPM':
+                    as_varLocalArrayLPM,
+                    'as_varSizeLPM':
+                    as_varSizeLPM,
+                    'as_indexedAccessLPM':
+                    as_indexedAccessLPM,
+                    'as_memberAccessLPM':
+                    as_memberAccessLPM
+                }, api_and_wire_params, fuzzer_params
             ]
 
             renders.append(
