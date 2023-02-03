@@ -27,11 +27,6 @@
 
 namespace dawn::native::vulkan {
 
-ExternalImageDescriptorVkForTesting::ExternalImageDescriptorVkForTesting()
-    : ExternalImageDescriptorVk(ExternalImageType::OpaqueFD) {}
-ExternalImageExportInfoVkForTesting::ExternalImageExportInfoVkForTesting()
-    : ExternalImageExportInfoVk(ExternalImageType::OpaqueFD) {}
-
 class ExternalSemaphoreOpaqueFD : public VulkanImageWrappingTestBackend::ExternalSemaphore {
   public:
     explicit ExternalSemaphoreOpaqueFD(int handle) : mHandle(handle) {}
@@ -97,7 +92,8 @@ class VulkanImageWrappingTestBackendOpaqueFD : public VulkanImageWrappingTestBac
     }
 
     bool SupportsTestParams(const TestParams& params) const override {
-        return !params.useDedicatedAllocation ||
+        return params.externalImageType == ExternalImageType::OpaqueFD &&
+                   !params.useDedicatedAllocation ||
                mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);
     }
 
@@ -284,11 +280,5 @@ class VulkanImageWrappingTestBackendOpaqueFD : public VulkanImageWrappingTestBac
     wgpu::Device mDevice;
     dawn::native::vulkan::Device* mDeviceVk;
 };
-
-// static
-std::unique_ptr<VulkanImageWrappingTestBackend> VulkanImageWrappingTestBackend::Create(
-    const wgpu::Device& device) {
-    return std::make_unique<VulkanImageWrappingTestBackendOpaqueFD>(device);
-}
 
 }  // namespace dawn::native::vulkan

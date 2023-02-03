@@ -27,11 +27,6 @@
 
 namespace dawn::native::vulkan {
 
-ExternalImageDescriptorVkForTesting::ExternalImageDescriptorVkForTesting()
-    : ExternalImageDescriptorVk(ExternalImageType::DmaBuf) {}
-ExternalImageExportInfoVkForTesting::ExternalImageExportInfoVkForTesting()
-    : ExternalImageExportInfoVk(ExternalImageType::DmaBuf) {}
-
 class ExternalSemaphoreDmaBuf : public VulkanImageWrappingTestBackend::ExternalSemaphore {
   public:
     explicit ExternalSemaphoreDmaBuf(int handle) : mHandle(handle) {}
@@ -83,9 +78,10 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
   public:
     explicit VulkanImageWrappingTestBackendDmaBuf(const wgpu::Device& device) {
         mDeviceVk = dawn::native::vulkan::ToBackend(dawn::native::FromAPI(device.Get()));
+        CreateGbmDevice();
     }
 
-    ~VulkanImageWrappingTestBackendDmaBuf() {
+    ~VulkanImageWrappingTestBackendDmaBuf() override {
         if (mGbmDevice != nullptr) {
             gbm_device_destroy(mGbmDevice);
             mGbmDevice = nullptr;
@@ -96,7 +92,8 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         // Even though this backend doesn't decide on creation whether the image should use
         // dedicated allocation, it still supports all options of NeedsDedicatedAllocation so we
         // test them.
-        return !params.useDedicatedAllocation ||
+        return params.externalImageType == ExternalImageType::DmaBuf &&
+                   !params.useDedicatedAllocation ||
                mDeviceVk->GetDeviceInfo().HasExt(DeviceExt::DedicatedAllocation);
     }
 
@@ -198,13 +195,5 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
     gbm_device* mGbmDevice = nullptr;
     dawn::native::vulkan::Device* mDeviceVk;
 };
-
-// static
-std::unique_ptr<VulkanImageWrappingTestBackend> VulkanImageWrappingTestBackend::Create(
-    const wgpu::Device& device) {
-    auto backend = std::make_unique<VulkanImageWrappingTestBackendDmaBuf>(device);
-    backend->CreateGbmDevice();
-    return backend;
-}
 
 }  // namespace dawn::native::vulkan

@@ -40,7 +40,10 @@ namespace {
 
 using UseDedicatedAllocation = bool;
 using DetectDedicatedAllocation = bool;
-DAWN_TEST_PARAM_STRUCT(ImageWrappingParams, UseDedicatedAllocation, DetectDedicatedAllocation);
+DAWN_TEST_PARAM_STRUCT(ImageWrappingParams,
+                       ExternalImageType,
+                       UseDedicatedAllocation,
+                       DetectDedicatedAllocation);
 
 class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParams> {
   protected:
@@ -49,6 +52,21 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
     }
 
   public:
+    struct ExternalImageDescriptorVkForTesting : public ExternalImageDescriptorVk {
+      public:
+        virtual ExternalImageDescriptorVkForTesting() {
+            ExternalImageDescriptorVk(GetParam().mExternalImageType);
+        }
+    };
+
+    struct ExternalImageExportInfoVkForTesting : public ExternalImageExportInfoVk {
+      public:
+        virtual ExternalImageExportInfoVkForTesting() {
+            ExternalImageExportInfoVk(GetParam().mExternalImageType);
+        }
+        std::vector<std::unique_ptr<VulkanImageWrappingTestBackend::ExternalSemaphore>> semaphores;
+    };
+
     void SetUp() override {
         DawnTestWithParams::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
@@ -58,9 +76,19 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
         DAWN_SUPPRESS_TEST_IF(IsLinux() && IsNvidia() && GetParam().mUseDedicatedAllocation &&
                               GetParam().mDetectDedicatedAllocation);
 
-        mBackend = VulkanImageWrappingTestBackend::Create(device);
+        switch (GetParam().mExternalImageType) {
+            case ExternalImageType::OpaqueFD:
+                mBackend = std::make_unique<VulkanImageWrappingTestBackendOpaqueFD>(device);
+                break;
+            case ExternalImageType::DmaBuf:
+                mBackend = std::make_unique<VulkanImageWrappingTestBackendDmaBuf>(device);
+                break;
+            default:
+                UNREACHABLE();
+        }
 
         VulkanImageWrappingTestBackend::TestParams params;
+        params.externalImageType = GetParam().mExternalImageType;
         params.useDedicatedAllocation = GetParam().mUseDedicatedAllocation;
         params.detectDedicatedAllocation = GetParam().mDetectDedicatedAllocation;
         DAWN_TEST_UNSUPPORTED_IF(!mBackend->SupportsTestParams(params));
@@ -880,11 +908,13 @@ TEST_P(VulkanImageWrappingUsageTests, SRGBReinterpretation) {
 
 DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingValidationTests,
                         {VulkanBackend()},
+                        {ExternalImageType::OpaqueFD, ExternalImageType::DmaBuf},
                         {true, false},  // UseDedicatedAllocation
                         {true, false}   // DetectDedicatedAllocation
 );
 DAWN_INSTANTIATE_TEST_P(VulkanImageWrappingUsageTests,
                         {VulkanBackend()},
+                        {ExternalImageType::OpaqueFD, ExternalImageType::DmaBuf},
                         {true, false},  // UseDedicatedAllocation
                         {true, false}   // DetectDedicatedAllocation
 );
