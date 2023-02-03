@@ -155,10 +155,14 @@ TEST_P(ResolverExpressionKindTest, Test) {
 
     switch (GetParam().use) {
         case Use::kAccess:
-            GlobalVar("v", ty("texture_storage_2d", "rgba8unorm", sym), Group(0_u), Binding(0_u));
+            GlobalVar("v", ty("texture_storage_2d", "rgba8unorm", Ident(kUseSource, sym)),
+                      Group(0_u), Binding(0_u));
             break;
         case Use::kAddressSpace:
-            return;  // TODO(crbug.com/tint/1810)
+            Enable(ast::Extension::kChromiumExperimentalFullPtrParameters);
+            Func("f", utils::Vector{Param("p", ty("ptr", Expr(kUseSource, sym), ty.f32()))},
+                 ty.void_(), utils::Empty);
+            break;
         case Use::kCallExpr:
             Func("f", utils::Empty, ty.void_(), Decl(Var("v", Call(Ident(kUseSource, sym)))));
             break;
@@ -175,7 +179,8 @@ TEST_P(ResolverExpressionKindTest, Test) {
             Structure("s", utils::Vector{Member("m", ty(kUseSource, sym))});
             break;
         case Use::kTexelFormat:
-            GlobalVar("v", ty("texture_storage_2d", sym, "write"), Group(0_u), Binding(0_u));
+            GlobalVar("v", ty("texture_storage_2d", ty(kUseSource, sym), "write"), Group(0_u),
+                      Binding(0_u));
             break;
         case Use::kValueExpression:
             GlobalVar("v", type::AddressSpace::kPrivate, Expr(kUseSource, sym));
@@ -202,19 +207,21 @@ INSTANTIATE_TEST_SUITE_P(
     ResolverExpressionKindTest,
     testing::ValuesIn(std::vector<Case>{
         {Def::kAccess, Use::kAccess, kPass},
-        {Def::kAccess, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+        {Def::kAccess, Use::kAddressSpace,
+         R"(5:6 error: cannot use access 'write' as address space)"},
         {Def::kAccess, Use::kBinaryOp, R"(5:6 error: cannot use access 'write' as value)"},
         {Def::kAccess, Use::kCallExpr, R"(5:6 error: cannot use access 'write' as call target)"},
         {Def::kAccess, Use::kCallStmt, R"(5:6 error: cannot use access 'write' as call target)"},
         {Def::kAccess, Use::kFunctionReturnType, R"(5:6 error: cannot use access 'write' as type)"},
         {Def::kAccess, Use::kMemberType, R"(5:6 error: cannot use access 'write' as type)"},
-        {Def::kAccess, Use::kTexelFormat, R"(error: cannot use access 'write' as texel format)"},
+        {Def::kAccess, Use::kTexelFormat,
+         R"(5:6 error: cannot use access 'write' as texel format)"},
         {Def::kAccess, Use::kValueExpression, R"(5:6 error: cannot use access 'write' as value)"},
         {Def::kAccess, Use::kVariableType, R"(5:6 error: cannot use access 'write' as type)"},
         {Def::kAccess, Use::kUnaryOp, R"(5:6 error: cannot use access 'write' as value)"},
 
         {Def::kAddressSpace, Use::kAccess,
-         R"(error: cannot use address space 'workgroup' as access)"},
+         R"(5:6 error: cannot use address space 'workgroup' as access)"},
         {Def::kAddressSpace, Use::kAddressSpace, kPass},
         {Def::kAddressSpace, Use::kBinaryOp,
          R"(5:6 error: cannot use address space 'workgroup' as value)"},
@@ -227,7 +234,7 @@ INSTANTIATE_TEST_SUITE_P(
         {Def::kAddressSpace, Use::kMemberType,
          R"(5:6 error: cannot use address space 'workgroup' as type)"},
         {Def::kAddressSpace, Use::kTexelFormat,
-         R"(error: cannot use address space 'workgroup' as texel format)"},
+         R"(5:6 error: cannot use address space 'workgroup' as texel format)"},
         {Def::kAddressSpace, Use::kValueExpression,
          R"(5:6 error: cannot use address space 'workgroup' as value)"},
         {Def::kAddressSpace, Use::kVariableType,
@@ -235,26 +242,29 @@ INSTANTIATE_TEST_SUITE_P(
         {Def::kAddressSpace, Use::kUnaryOp,
          R"(5:6 error: cannot use address space 'workgroup' as value)"},
 
-        {Def::kBuiltinFunction, Use::kAccess, R"(error: missing '(' for builtin function call)"},
-        {Def::kBuiltinFunction, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+        {Def::kBuiltinFunction, Use::kAccess,
+         R"(7:8 error: missing '(' for builtin function call)"},
+        {Def::kBuiltinFunction, Use::kAddressSpace,
+         R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kBinaryOp,
          R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kCallStmt, kPass},
         {Def::kBuiltinFunction, Use::kFunctionReturnType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kMemberType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kTexelFormat,
-         R"(error: missing '(' for builtin function call)"},
+         R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kValueExpression,
          R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kVariableType,
-         R"(5:6 error: cannot use builtin function 'workgroupBarrier' as type)"},
+         R"(7:8 error: missing '(' for builtin function call)"},
         {Def::kBuiltinFunction, Use::kUnaryOp,
          R"(7:8 error: missing '(' for builtin function call)"},
 
-        {Def::kBuiltinType, Use::kAccess, R"(error: cannot use type 'vec4<f32>' as access)"},
-        {Def::kBuiltinType, Use::kAddressSpace, kPass},
+        {Def::kBuiltinType, Use::kAccess, R"(5:6 error: cannot use type 'vec4<f32>' as access)"},
+        {Def::kBuiltinType, Use::kAddressSpace,
+         R"(5:6 error: cannot use type 'vec4<f32>' as address space)"},
         {Def::kBuiltinType, Use::kBinaryOp,
          R"(5:6 error: cannot use type 'vec4<f32>' as value
 7:8 note: are you missing '()' for type initializer?)"},
@@ -262,7 +272,7 @@ INSTANTIATE_TEST_SUITE_P(
         {Def::kBuiltinType, Use::kFunctionReturnType, kPass},
         {Def::kBuiltinType, Use::kMemberType, kPass},
         {Def::kBuiltinType, Use::kTexelFormat,
-         R"(error: cannot use type 'vec4<f32>' as texel format)"},
+         R"(5:6 error: cannot use type 'vec4<f32>' as texel format)"},
         {Def::kBuiltinType, Use::kValueExpression,
          R"(5:6 error: cannot use type 'vec4<f32>' as value
 7:8 note: are you missing '()' for type initializer?)"},
@@ -271,9 +281,13 @@ INSTANTIATE_TEST_SUITE_P(
          R"(5:6 error: cannot use type 'vec4<f32>' as value
 7:8 note: are you missing '()' for type initializer?)"},
 
-        {Def::kFunction, Use::kAccess, R"(error: missing '(' for function call)"},
-        {Def::kFunction, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
-        {Def::kFunction, Use::kBinaryOp, R"(7:8 error: missing '(' for function call)"},
+        {Def::kFunction, Use::kAccess, R"(5:6 error: cannot use function 'FUNCTION' as access
+1:2 note: function 'FUNCTION' declared here)"},
+        {Def::kFunction, Use::kAddressSpace,
+         R"(5:6 error: cannot use function 'FUNCTION' as address space
+1:2 note: function 'FUNCTION' declared here)"},
+        {Def::kFunction, Use::kBinaryOp, R"(5:6 error: cannot use function 'FUNCTION' as value
+1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kCallExpr, kPass},
         {Def::kFunction, Use::kCallStmt, kPass},
         {Def::kFunction, Use::kFunctionReturnType,
@@ -282,21 +296,27 @@ INSTANTIATE_TEST_SUITE_P(
         {Def::kFunction, Use::kMemberType,
          R"(5:6 error: cannot use function 'FUNCTION' as type
 1:2 note: function 'FUNCTION' declared here)"},
-        {Def::kFunction, Use::kTexelFormat, R"(error: missing '(' for function call)"},
-        {Def::kFunction, Use::kValueExpression, R"(7:8 error: missing '(' for function call)"},
+        {Def::kFunction, Use::kTexelFormat,
+         R"(5:6 error: cannot use function 'FUNCTION' as texel format
+1:2 note: function 'FUNCTION' declared here)"},
+        {Def::kFunction, Use::kValueExpression,
+         R"(5:6 error: cannot use function 'FUNCTION' as value
+1:2 note: function 'FUNCTION' declared here)"},
         {Def::kFunction, Use::kVariableType,
          R"(5:6 error: cannot use function 'FUNCTION' as type
 1:2 note: function 'FUNCTION' declared here)"},
-        {Def::kFunction, Use::kUnaryOp, R"(7:8 error: missing '(' for function call)"},
+        {Def::kFunction, Use::kUnaryOp, R"(5:6 error: cannot use function 'FUNCTION' as value
+1:2 note: function 'FUNCTION' declared here)"},
 
-        {Def::kStruct, Use::kAccess, R"(error: cannot use type 'STRUCT' as access)"},
-        {Def::kStruct, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+        {Def::kStruct, Use::kAccess, R"(5:6 error: cannot use type 'STRUCT' as access)"},
+        {Def::kStruct, Use::kAddressSpace,
+         R"(5:6 error: cannot use type 'STRUCT' as address space)"},
         {Def::kStruct, Use::kBinaryOp, R"(5:6 error: cannot use type 'STRUCT' as value
 7:8 note: are you missing '()' for type initializer?
 1:2 note: struct 'STRUCT' declared here)"},
         {Def::kStruct, Use::kFunctionReturnType, kPass},
         {Def::kStruct, Use::kMemberType, kPass},
-        {Def::kStruct, Use::kTexelFormat, R"(error: cannot use type 'STRUCT' as texel format)"},
+        {Def::kStruct, Use::kTexelFormat, R"(5:6 error: cannot use type 'STRUCT' as texel format)"},
         {Def::kStruct, Use::kValueExpression,
          R"(5:6 error: cannot use type 'STRUCT' as value
 7:8 note: are you missing '()' for type initializer?
@@ -308,8 +328,9 @@ INSTANTIATE_TEST_SUITE_P(
 1:2 note: struct 'STRUCT' declared here)"},
 
         {Def::kTexelFormat, Use::kAccess,
-         R"(error: cannot use texel format 'rgba8unorm' as access)"},
-        {Def::kTexelFormat, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+         R"(5:6 error: cannot use texel format 'rgba8unorm' as access)"},
+        {Def::kTexelFormat, Use::kAddressSpace,
+         R"(5:6 error: cannot use texel format 'rgba8unorm' as address space)"},
         {Def::kTexelFormat, Use::kBinaryOp,
          R"(5:6 error: cannot use texel format 'rgba8unorm' as value)"},
         {Def::kTexelFormat, Use::kCallExpr,
@@ -328,15 +349,16 @@ INSTANTIATE_TEST_SUITE_P(
         {Def::kTexelFormat, Use::kUnaryOp,
          R"(5:6 error: cannot use texel format 'rgba8unorm' as value)"},
 
-        {Def::kTypeAlias, Use::kAccess, R"(error: cannot use type 'i32' as access)"},
-        {Def::kTypeAlias, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+        {Def::kTypeAlias, Use::kAccess, R"(5:6 error: cannot use type 'i32' as access)"},
+        {Def::kTypeAlias, Use::kAddressSpace,
+         R"(5:6 error: cannot use type 'i32' as address space)"},
         {Def::kTypeAlias, Use::kBinaryOp,
          R"(5:6 error: cannot use type 'i32' as value
 7:8 note: are you missing '()' for type initializer?)"},
         {Def::kTypeAlias, Use::kCallExpr, kPass},
         {Def::kTypeAlias, Use::kFunctionReturnType, kPass},
         {Def::kTypeAlias, Use::kMemberType, kPass},
-        {Def::kTypeAlias, Use::kTexelFormat, R"(error: cannot use type 'i32' as texel format)"},
+        {Def::kTypeAlias, Use::kTexelFormat, R"(5:6 error: cannot use type 'i32' as texel format)"},
         {Def::kTypeAlias, Use::kValueExpression,
          R"(5:6 error: cannot use type 'i32' as value
 7:8 note: are you missing '()' for type initializer?)"},
@@ -345,8 +367,11 @@ INSTANTIATE_TEST_SUITE_P(
          R"(5:6 error: cannot use type 'i32' as value
 7:8 note: are you missing '()' for type initializer?)"},
 
-        {Def::kVariable, Use::kAccess, R"(error: cannot use 'VARIABLE' of type 'i32' as access)"},
-        {Def::kVariable, Use::kAddressSpace, R"(TODO(crbug.com/tint/1810))"},
+        {Def::kVariable, Use::kAccess, R"(5:6 error: cannot use const 'VARIABLE' as access
+1:2 note: const 'VARIABLE' declared here)"},
+        {Def::kVariable, Use::kAddressSpace,
+         R"(5:6 error: cannot use const 'VARIABLE' as address space
+1:2 note: const 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kBinaryOp, kPass},
         {Def::kVariable, Use::kCallStmt,
          R"(5:6 error: cannot use const 'VARIABLE' as call target
@@ -361,7 +386,8 @@ INSTANTIATE_TEST_SUITE_P(
          R"(5:6 error: cannot use const 'VARIABLE' as type
 1:2 note: const 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kTexelFormat,
-         R"(error: cannot use 'VARIABLE' of type 'i32' as texel format)"},
+         R"(5:6 error: cannot use const 'VARIABLE' as texel format
+1:2 note: const 'VARIABLE' declared here)"},
         {Def::kVariable, Use::kValueExpression, kPass},
         {Def::kVariable, Use::kVariableType,
          R"(5:6 error: cannot use const 'VARIABLE' as type

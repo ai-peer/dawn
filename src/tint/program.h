@@ -133,32 +133,36 @@ class Program {
     bool IsValid() const;
 
     /// Helper for returning the resolved semantic type of the expression `expr`.
+    /// @note As the Resolver is run when the Program is built, this will only be
+    /// useful for the Resolver itself and tests that use their own Resolver.
     /// @param expr the AST expression
     /// @return the resolved semantic type for the expression, or nullptr if the
     /// expression has no resolved type.
     const type::Type* TypeOf(const ast::Expression* expr) const;
 
-    /// Helper for returning the resolved semantic type of the AST type `type`.
-    /// @param type the AST type
-    /// @return the resolved semantic type for the type, or nullptr if the type
-    /// has no resolved type.
-    const type::Type* TypeOf(const ast::Type* type) const;
+    /// Helper for returning the resolved semantic type of the variable `var`.
+    /// @note As the Resolver is run when the Program is built, this will only be
+    /// useful for the Resolver itself and tests that use their own Resolver.
+    /// @param var the AST variable
+    /// @return the resolved semantic type for the variable, or nullptr if the
+    /// variable has no resolved type.
+    const type::Type* TypeOf(const ast::Variable* var) const;
 
     /// Helper for returning the resolved semantic type of the AST type
     /// declaration `type_decl`.
+    /// @note As the Resolver is run when the Program is built, this will only be
+    /// useful for the Resolver itself and tests that use their own Resolver.
     /// @param type_decl the AST type declaration
     /// @return the resolved semantic type for the type declaration, or nullptr if
     /// the type declaration has no resolved type.
     const type::Type* TypeOf(const ast::TypeDecl* type_decl) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
-    std::string FriendlyName(const ast::Type* type) const;
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
+    std::string FriendlyName(ast::Type type) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
     std::string FriendlyName(const type::Type* type) const;
 
     /// Overload of FriendlyName, which removes an ambiguity when passing nullptr.

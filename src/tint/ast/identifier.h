@@ -17,6 +17,11 @@
 
 #include "src/tint/ast/node.h"
 
+// Forward declarations
+namespace tint::ast {
+class Attribute;
+}  // namespace tint::ast
+
 namespace tint::ast {
 
 /// An identifier
