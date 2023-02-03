@@ -28,6 +28,7 @@
 // Forward declarations
 namespace tint::ast {
 class Identifier;
+class IdentifierExpression;
 class LocationAttribute;
 class Type;
 }  // namespace tint::ast
@@ -54,7 +55,7 @@ class Variable : public Castable<Variable, Node> {
              NodeID nid,
              const Source& src,
              const Identifier* name,
-             const ast::Type* type,
+             const IdentifierExpression* type,
              const Expression* initializer,
              utils::VectorRef<const Attribute*> attributes);
 
@@ -80,7 +81,7 @@ class Variable : public Castable<Variable, Node> {
     /// The declared variable type. This is null if the type is inferred, e.g.:
     ///   let f = 1.0;
     ///   var i = 1;
-    const ast::Type* const type;
+    const IdentifierExpression* const type;
 
     /// The initializer expression or nullptr if none set
     const Expression* const initializer;

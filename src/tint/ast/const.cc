@@ -26,7 +26,7 @@ Const::Const(ProgramID pid,
              NodeID nid,
              const Source& src,
              const Identifier* n,
-             const ast::Type* ty,
+             const IdentifierExpression* ty,
              const Expression* init,
              utils::VectorRef<const Attribute*> attrs)
     : Base(pid, nid, src, n, ty, init, std::move(attrs)) {

@@ -31,10 +31,11 @@ TEST_F(BuilderTest_Type, GenerateRuntimeArray) {
     auto* str = Structure("S", utils::Vector{Member("x", ary)});
     GlobalVar("a", ty.Of(str), type::AddressSpace::kStorage, type::Access::kRead, Binding(0_a),
               Group(0_a));
+    auto* type = str->members[0]->type;
 
     spirv::Builder& b = Build();
 
-    auto id = b.GenerateTypeIfNeeded(program->TypeOf(ary));
+    auto id = b.GenerateTypeIfNeeded(program->TypeOf(type));
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(1u, id);
 
@@ -48,11 +49,12 @@ TEST_F(BuilderTest_Type, ReturnsGeneratedRuntimeArray) {
     auto* str = Structure("S", utils::Vector{Member("x", ary)});
     GlobalVar("a", ty.Of(str), type::AddressSpace::kStorage, type::Access::kRead, Binding(0_a),
               Group(0_a));
+    auto* type = str->members[0]->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ary)), 1u);
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ary)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(type)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(type)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
 
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
@@ -62,11 +64,11 @@ TEST_F(BuilderTest_Type, ReturnsGeneratedRuntimeArray) {
 
 TEST_F(BuilderTest_Type, GenerateArray) {
     auto* ary = ty.array<i32, 4>();
-    GlobalVar("a", ary, type::AddressSpace::kPrivate);
+    auto* type = GlobalVar("a", ary, type::AddressSpace::kPrivate)->type;
 
     spirv::Builder& b = Build();
 
-    auto id = b.GenerateTypeIfNeeded(program->TypeOf(ary));
+    auto id = b.GenerateTypeIfNeeded(program->TypeOf(type));
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(1u, id);
 
@@ -79,11 +81,11 @@ TEST_F(BuilderTest_Type, GenerateArray) {
 
 TEST_F(BuilderTest_Type, GenerateArray_WithStride) {
     auto* ary = ty.array<i32, 4>(utils::Vector{Stride(16)});
-    GlobalVar("a", ary, type::AddressSpace::kPrivate);
+    auto* ty = GlobalVar("a", ary, type::AddressSpace::kPrivate)->type;
 
     spirv::Builder& b = Build();
 
-    auto id = b.GenerateTypeIfNeeded(program->TypeOf(ary));
+    auto id = b.GenerateTypeIfNeeded(program->TypeOf(ty));
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(1u, id);
 
@@ -99,12 +101,12 @@ TEST_F(BuilderTest_Type, GenerateArray_WithStride) {
 
 TEST_F(BuilderTest_Type, ReturnsGeneratedArray) {
     auto* ary = ty.array<i32, 4>();
-    GlobalVar("a", ary, type::AddressSpace::kPrivate);
+    auto* ty = GlobalVar("a", ary, type::AddressSpace::kPrivate)->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ary)), 1u);
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ary)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
 
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
@@ -863,11 +865,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_1d) {
     auto* s = ty.storage_texture(type::TextureDimension::k1d, type::TexelFormat::kR32Float,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeImage %2 1D 0 0 0 2 R32f
@@ -878,11 +880,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_2d) {
     auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeImage %2 2D 0 0 0 2 R32f
@@ -893,11 +895,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_2dArray) {
     auto* s = ty.storage_texture(type::TextureDimension::k2dArray, type::TexelFormat::kR32Float,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeImage %2 2D 0 1 0 2 R32f
@@ -908,11 +910,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_3d) {
     auto* s = ty.storage_texture(type::TextureDimension::k3d, type::TexelFormat::kR32Float,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeImage %2 3D 0 0 0 2 R32f
@@ -923,11 +925,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeFloat_Format_r32floa
     auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Float,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeFloat 32
 %1 = OpTypeImage %2 2D 0 0 0 2 R32f
@@ -938,11 +940,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeSint_Format_r32sint)
     auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Sint,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 1
 %1 = OpTypeImage %2 2D 0 0 0 2 R32i
@@ -953,11 +955,11 @@ TEST_F(BuilderTest_Type, StorageTexture_Generate_SampledTypeUint_Format_r32uint)
     auto* s = ty.storage_texture(type::TextureDimension::k2d, type::TexelFormat::kR32Uint,
                                  type::Access::kWrite);
 
-    GlobalVar("test_var", s, Binding(0_a), Group(0_a));
+    auto* ty = GlobalVar("test_var", s, Binding(0_a), Group(0_a))->type;
 
     spirv::Builder& b = Build();
 
-    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(s)), 1u);
+    EXPECT_EQ(b.GenerateTypeIfNeeded(program->TypeOf(ty)), 1u);
     ASSERT_FALSE(b.has_error()) << b.error();
     EXPECT_EQ(DumpInstructions(b.types()), R"(%2 = OpTypeInt 32 0
 %1 = OpTypeImage %2 2D 0 0 0 2 R32ui

@@ -156,7 +156,8 @@ class State {
 
             if (function->return_type) {
                 retval = b.Symbols().New("tint_return_value");
-                new_stmts[0].Push(b.Decl(b.Var(retval, ctx.Clone(function->return_type))));
+                new_stmts[0].Push(
+                    b.Decl(b.Var(retval, ctx.Clone(function->return_type->identifier))));
             }
         }
 

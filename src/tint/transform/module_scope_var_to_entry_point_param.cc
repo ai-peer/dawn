@@ -463,8 +463,8 @@ struct ModuleScopeVarToEntryPointParam::State {
 
             // Pass the variables as pointers to any functions that need them.
             for (auto* call : calls_to_replace[func_ast]) {
-                auto* target = ctx.src->AST().Functions().Find(call->target.name->symbol);
-                auto* target_sem = ctx.src->Sem().Get(target);
+                auto* call_sem = ctx.src->Sem().Get(call)->Unwrap()->As<sem::Call>();
+                auto* target_sem = call_sem->Target()->As<sem::Function>();
 
                 // Add new arguments for any variables that are needed by the callee.
                 // For entry points, pass non-handle types as pointers.

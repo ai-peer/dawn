@@ -23,7 +23,7 @@ namespace tint::ast {
 BitcastExpression::BitcastExpression(ProgramID pid,
                                      NodeID nid,
                                      const Source& src,
-                                     const Type* t,
+                                     const Expression* t,
                                      const Expression* e)
     : Base(pid, nid, src), type(t), expr(e) {
     TINT_ASSERT(AST, type);
