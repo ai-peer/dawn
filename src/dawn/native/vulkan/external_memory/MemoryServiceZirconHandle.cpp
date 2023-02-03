@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "dawn/native/vulkan/external_memory/MemoryServiceZirconHandle.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/vulkan/AdapterVk.h"
 #include "dawn/native/vulkan/BackendVk.h"
@@ -19,25 +20,24 @@
 #include "dawn/native/vulkan/TextureVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
-#include "dawn/native/vulkan/external_memory/MemoryService.h"
 
 namespace dawn::native::vulkan::external_memory {
 
-Service::Service(Device* device)
-    : mDevice(device), mSupported(CheckSupport(device->GetDeviceInfo())) {}
+MemoryServiceZirconHandle::MemoryServiceZirconHandle(Device* device)
+    : Service(device), mSupported(CheckSupport(device->GetDeviceInfo())) {}
 
-Service::~Service() = default;
+MemoryServiceZirconHandle::~MemoryServiceZirconHandle() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo) {
+bool MemoryServiceZirconHandle::CheckSupport(const VulkanDeviceInfo& deviceInfo) {
     return deviceInfo.HasExt(DeviceExt::ExternalMemoryZirconHandle);
 }
 
-bool Service::SupportsImportMemory(VkFormat format,
-                                   VkImageType type,
-                                   VkImageTiling tiling,
-                                   VkImageUsageFlags usage,
-                                   VkImageCreateFlags flags) {
+bool MemoryServiceZirconHandle::SupportsImportMemory(VkFormat format,
+                                                     VkImageType type,
+                                                     VkImageTiling tiling,
+                                                     VkImageUsageFlags usage,
+                                                     VkImageCreateFlags flags) {
     // Early out before we try using extension functions
     if (!mSupported) {
         return false;
@@ -78,15 +78,15 @@ bool Service::SupportsImportMemory(VkFormat format,
     return (memoryFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT_KHR) != 0;
 }
 
-bool Service::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
-                                  VkFormat format,
-                                  VkImageUsageFlags usage,
-                                  bool* supportsDisjoint) {
+bool MemoryServiceZirconHandle::SupportsCreateImage(const ExternalImageDescriptor* descriptor,
+                                                    VkFormat format,
+                                                    VkImageUsageFlags usage,
+                                                    bool* supportsDisjoint) {
     *supportsDisjoint = false;
     return mSupported;
 }
 
-ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+ResultOrError<MemoryImportParams> MemoryServiceZirconHandle::GetMemoryImportParams(
     const ExternalImageDescriptor* descriptor,
     VkImage image) {
     DAWN_INVALID_IF(descriptor->type != ExternalImageType::OpaqueFD,
@@ -102,13 +102,14 @@ ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
     return params;
 }
 
-uint32_t Service::GetQueueFamilyIndex() {
+uint32_t MemoryServiceZirconHandle::GetQueueFamilyIndex() {
     return VK_QUEUE_FAMILY_EXTERNAL_KHR;
 }
 
-ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                    const MemoryImportParams& importParams,
-                                                    VkImage image) {
+ResultOrError<VkDeviceMemory> MemoryServiceZirconHandle::ImportMemory(
+    ExternalMemoryHandle handle,
+    const MemoryImportParams& importParams,
+    VkImage image) {
     DAWN_INVALID_IF(handle == ZX_HANDLE_INVALID, "Importing memory with an invalid handle.");
 
     VkMemoryRequirements requirements;
@@ -145,8 +146,9 @@ ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
     return allocatedMemory;
 }
 
-ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,
-                                            const VkImageCreateInfo& baseCreateInfo) {
+ResultOrError<VkImage> MemoryServiceZirconHandle::CreateImage(
+    const ExternalImageDescriptor* descriptor,
+    const VkImageCreateInfo& baseCreateInfo) {
     VkImageCreateInfo createInfo = baseCreateInfo;
     createInfo.flags |= VK_IMAGE_CREATE_ALIAS_BIT_KHR;
     createInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
@@ -169,6 +171,10 @@ ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descr
         mDevice->fn.CreateImage(mDevice->GetVkDevice(), &createInfo, nullptr, &*image),
         "CreateImage"));
     return image;
+}
+
+bool MemoryServiceZirconHandle::Supported() const {
+    return mSupported;
 }
 
 }  // namespace dawn::native::vulkan::external_memory
