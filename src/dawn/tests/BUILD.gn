@@ -740,3 +740,15 @@ test("metal_depth_stencil_tests") {
   cflags_objcc = [ "-fobjc-arc" ]
   cflags = [ "-std=c++17" ]
 }
+
+test("array_t_test") {
+  sources = [ "array_t_test.mm" ]
+  frameworks = [
+    "CoreFoundation.framework",
+    "Foundation.framework",
+    "Metal.framework",
+    "IOKit.framework",
+  ]
+  cflags_objcc = [ "-fobjc-arc" ]
+  cflags = [ "-std=c++17" ]
+}
