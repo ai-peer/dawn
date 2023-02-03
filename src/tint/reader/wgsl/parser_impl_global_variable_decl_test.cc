@@ -31,8 +31,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithoutInitializer) {
 
     EXPECT_EQ(var->name->symbol, p->builder().Symbols().Get("a"));
 
-    ASSERT_TRUE(var->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->As<ast::TypeName>()->name->symbol), "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->name->symbol), "f32");
 
     EXPECT_EQ(var->declared_address_space, type::AddressSpace::kPrivate);
 
@@ -57,9 +56,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithInitializer) {
     ASSERT_NE(var, nullptr);
 
     EXPECT_EQ(var->name->symbol, p->builder().Symbols().Get("a"));
-
-    ASSERT_TRUE(var->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->As<ast::TypeName>()->name->symbol), "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->name->symbol), "f32");
 
     EXPECT_EQ(var->declared_address_space, type::AddressSpace::kPrivate);
 
@@ -87,8 +84,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithAttribute) {
     EXPECT_EQ(var->name->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(var->type, nullptr);
 
-    ASSERT_TRUE(var->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->As<ast::TypeName>()->name->symbol), "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->name->symbol), "f32");
 
     EXPECT_EQ(var->declared_address_space, type::AddressSpace::kUniform);
 
@@ -120,9 +116,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithAttribute_MulitpleGroups) {
 
     EXPECT_EQ(var->name->symbol, p->builder().Symbols().Get("a"));
     ASSERT_NE(var->type, nullptr);
-
-    ASSERT_TRUE(var->type->Is<ast::TypeName>());
-    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->As<ast::TypeName>()->name->symbol), "f32");
+    EXPECT_EQ(p->builder().Symbols().NameFor(var->type->name->symbol), "f32");
 
     EXPECT_EQ(var->declared_address_space, type::AddressSpace::kUniform);
 

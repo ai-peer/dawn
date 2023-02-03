@@ -127,7 +127,7 @@ std::ostream& operator<<(std::ostream& out, const TextureOverloadCase& data) {
     return out;
 }
 
-const ast::Type* TextureOverloadCase::BuildResultVectorComponentType(ProgramBuilder* b) const {
+const ast::Identifier* TextureOverloadCase::BuildResultVectorComponentType(ProgramBuilder* b) const {
     switch (texture_data_type) {
         case ast::builtin::test::TextureDataType::kF32:
             return b->ty.f32();

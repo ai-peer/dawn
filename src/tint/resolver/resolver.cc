@@ -21,7 +21,6 @@
 #include <utility>
 
 #include "src/tint/ast/alias.h"
-#include "src/tint/ast/array.h"
 #include "src/tint/ast/assignment_statement.h"
 #include "src/tint/ast/attribute.h"
 #include "src/tint/ast/bitcast_expression.h"
@@ -36,16 +35,11 @@
 #include "src/tint/ast/internal_attribute.h"
 #include "src/tint/ast/interpolate_attribute.h"
 #include "src/tint/ast/loop_statement.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
-#include "src/tint/ast/sampled_texture.h"
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/traverse_expressions.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/vector.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
@@ -223,130 +217,14 @@ type::Type* Resolver::Type(const ast::Type* ty) {
     }
 
     Mark(ty);
-    auto* s = Switch(
-        ty,  //
-        [&](const ast::Vector* t) -> type::Vector* {
-            if (!t->type) {
-                AddError("missing vector element type", t->source.End());
-                return nullptr;
-            }
-            if (auto* el = Type(t->type)) {
-                if (auto* vector = builder_->create<type::Vector>(el, t->width)) {
-                    if (validator_.Vector(vector, t->source)) {
-                        return vector;
-                    }
-                }
-            }
-            return nullptr;
-        },
-        [&](const ast::Matrix* t) -> type::Matrix* {
-            if (!t->type) {
-                AddError("missing matrix element type", t->source.End());
-                return nullptr;
-            }
-            if (auto* el = Type(t->type)) {
-                if (auto* column_type = builder_->create<type::Vector>(el, t->rows)) {
-                    if (auto* matrix = builder_->create<type::Matrix>(column_type, t->columns)) {
-                        if (validator_.Matrix(matrix, t->source)) {
-                            return matrix;
-                        }
-                    }
-                }
-            }
-            return nullptr;
-        },
-        [&](const ast::Array* t) { return Array(t); },
-        [&](const ast::Atomic* t) -> type::Atomic* {
-            if (auto* el = Type(t->type)) {
-                auto* a = builder_->create<type::Atomic>(el);
-                if (!validator_.Atomic(t, a)) {
-                    return nullptr;
-                }
-                return a;
-            }
-            return nullptr;
-        },
-        [&](const ast::Pointer* t) -> type::Pointer* {
-            if (auto* el = Type(t->type)) {
-                auto access = t->access;
-                if (access == type::Access::kUndefined) {
-                    access = DefaultAccessForAddressSpace(t->address_space);
-                }
-                auto ptr = builder_->create<type::Pointer>(el, t->address_space, access);
-                if (!ptr) {
-                    return nullptr;
-                }
-                if (!validator_.Pointer(t, ptr)) {
-                    return nullptr;
-                }
-                if (!ApplyAddressSpaceUsageToType(t->address_space, el, t->type->source)) {
-                    AddNote("while instantiating " + builder_->FriendlyName(ptr), t->source);
-                    return nullptr;
-                }
-                return ptr;
-            }
-            return nullptr;
-        },
-        [&](const ast::SampledTexture* t) -> type::SampledTexture* {
-            if (auto* el = Type(t->type)) {
-                auto* sem = builder_->create<type::SampledTexture>(t->dim, el);
-                if (!validator_.SampledTexture(sem, t->source)) {
-                    return nullptr;
-                }
-                return sem;
-            }
-            return nullptr;
-        },
-        [&](const ast::MultisampledTexture* t) -> type::MultisampledTexture* {
-            if (auto* el = Type(t->type)) {
-                auto* sem = builder_->create<type::MultisampledTexture>(t->dim, el);
-                if (!validator_.MultisampledTexture(sem, t->source)) {
-                    return nullptr;
-                }
-                return sem;
-            }
-            return nullptr;
-        },
-        [&](const ast::TypeName* t) -> type::Type* {
-            Mark(t->name);
 
-            auto resolved = dependencies_.resolved_identifiers.Get(t->name);
-            if (!resolved) {
-                TINT_ICE(Resolver, builder_->Diagnostics())
-                    << "identifier '" << builder_->Symbols().NameFor(t->name->symbol)
-                    << "' was not resolved";
-                return nullptr;
-            }
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Type()";
+    return nullptr;
+}
 
-            if (auto* ast_node = resolved->Node()) {
-                auto* type = sem_.Get<type::Type>(ast_node);
-                if (TINT_UNLIKELY(!type)) {
-                    ErrorMismatchedResolvedIdentifier(t->source, *resolved, "type");
-                    return nullptr;
-                }
-
-                if (auto* tmpl_ident = t->name->As<ast::TemplatedIdentifier>();
-                    TINT_UNLIKELY(tmpl_ident)) {
-                    AddError(
-                        "'" + builder_->Symbols().NameFor(t->name->symbol) + "' is not templated",
-                        Source{tmpl_ident->source.range.end});
-                    return nullptr;
-                }
-
-                return type;
-            }
-            if (auto b = resolved->BuiltinType(); b != type::Builtin::kUndefined) {
-                return BuiltinType(b, t->name);
-            }
-
-            ErrorMismatchedResolvedIdentifier(t->source, *resolved, "type");
-            return nullptr;
-        });
-
-    if (s) {
-        builder_->Sem().Add(ty, s);
-    }
-    return s;
+sem::Node* Resolver::Identifier(const ast::Identifier*) {
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Identifier()";
+    return nullptr;
 }
 
 sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
@@ -1996,340 +1874,9 @@ sem::ValueExpression* Resolver::Bitcast(const ast::BitcastExpression* expr) {
     return sem;
 }
 
-sem::Call* Resolver::Call(const ast::CallExpression* expr) {
-    // A CallExpression can resolve to one of:
-    // * A function call.
-    // * A builtin call.
-    // * A type initializer.
-    // * A type conversion.
-
-    // Resolve all of the arguments, their types and the set of behaviors.
-    utils::Vector<const sem::ValueExpression*, 8> args;
-    args.Reserve(expr->args.Length());
-    auto args_stage = sem::EvaluationStage::kConstant;
-    sem::Behaviors arg_behaviors;
-    for (size_t i = 0; i < expr->args.Length(); i++) {
-        auto* arg = sem_.GetVal(expr->args[i]);
-        if (!arg) {
-            return nullptr;
-        }
-        args.Push(arg);
-        args_stage = sem::EarliestStage(args_stage, arg->Stage());
-        arg_behaviors.Add(arg->Behaviors());
-    }
-    arg_behaviors.Remove(sem::Behavior::kNext);
-
-    // Did any arguments have side effects?
-    bool has_side_effects =
-        std::any_of(args.begin(), args.end(), [](auto* e) { return e->HasSideEffects(); });
-
-    // ct_init_or_conv is a helper for building either a sem::TypeInitializer or
-    // sem::TypeConversion call for a InitConvIntrinsic with an optional template argument type.
-    auto ct_init_or_conv = [&](InitConvIntrinsic ty, const type::Type* template_arg) -> sem::Call* {
-        auto arg_tys = utils::Transform(args, [](auto* arg) { return arg->Type(); });
-        auto ctor_or_conv =
-            intrinsic_table_->Lookup(ty, template_arg, arg_tys, args_stage, expr->source);
-        if (!ctor_or_conv.target) {
-            return nullptr;
-        }
-        if (!MaybeMaterializeAndLoadArguments(args, ctor_or_conv.target)) {
-            return nullptr;
-        }
-
-        const constant::Value* value = nullptr;
-        auto stage = sem::EarliestStage(ctor_or_conv.target->Stage(), args_stage);
-        if (stage == sem::EvaluationStage::kConstant && skip_const_eval_.Contains(expr)) {
-            stage = sem::EvaluationStage::kNotEvaluated;
-        }
-        if (stage == sem::EvaluationStage::kConstant) {
-            auto const_args = ConvertArguments(args, ctor_or_conv.target);
-            if (!const_args) {
-                return nullptr;
-            }
-            if (auto r = (const_eval_.*ctor_or_conv.const_eval_fn)(
-                    ctor_or_conv.target->ReturnType(), const_args.Get(), expr->source)) {
-                value = r.Get();
-            } else {
-                return nullptr;
-            }
-        }
-        return builder_->create<sem::Call>(expr, ctor_or_conv.target, stage, std::move(args),
-                                           current_statement_, value, has_side_effects);
-    };
-
-    // arr_or_str_init is a helper for building a sem::TypeInitializer for an array or structure
-    // initializer call target.
-    auto arr_or_str_init = [&](const type::Type* ty,
-                               const sem::CallTarget* call_target) -> sem::Call* {
-        if (!MaybeMaterializeAndLoadArguments(args, call_target)) {
-            return nullptr;
-        }
-
-        auto stage = args_stage;                 // The evaluation stage of the call
-        const constant::Value* value = nullptr;  // The constant value for the call
-        if (stage == sem::EvaluationStage::kConstant) {
-            if (auto r = const_eval_.ArrayOrStructInit(ty, args)) {
-                value = r.Get();
-            } else {
-                return nullptr;
-            }
-            if (!value) {
-                // Constant evaluation failed.
-                // Can happen for expressions that will fail validation (later).
-                // Use the kRuntime EvaluationStage, as kConstant will trigger an assertion in
-                // the sem::ValueExpression initializer, which checks that kConstant is paired
-                // with a constant value.
-                stage = sem::EvaluationStage::kRuntime;
-            }
-        }
-
-        return builder_->create<sem::Call>(expr, call_target, stage, std::move(args),
-                                           current_statement_, value, has_side_effects);
-    };
-
-    // ty_init_or_conv is a helper for building either a sem::TypeInitializer or
-    // sem::TypeConversion call for the given semantic type.
-    auto ty_init_or_conv = [&](const type::Type* ty) {
-        return Switch(
-            ty,  //
-            [&](const type::Vector* v) {
-                return ct_init_or_conv(VectorInitConvIntrinsic(v->Width()), v->type());
-            },
-            [&](const type::Matrix* m) {
-                return ct_init_or_conv(MatrixInitConvIntrinsic(m->columns(), m->rows()), m->type());
-            },
-            [&](const type::I32*) { return ct_init_or_conv(InitConvIntrinsic::kI32, nullptr); },
-            [&](const type::U32*) { return ct_init_or_conv(InitConvIntrinsic::kU32, nullptr); },
-            [&](const type::F16*) {
-                return validator_.CheckF16Enabled(expr->source)
-                           ? ct_init_or_conv(InitConvIntrinsic::kF16, nullptr)
-                           : nullptr;
-            },
-            [&](const type::F32*) { return ct_init_or_conv(InitConvIntrinsic::kF32, nullptr); },
-            [&](const type::Bool*) { return ct_init_or_conv(InitConvIntrinsic::kBool, nullptr); },
-            [&](const type::Array* arr) -> sem::Call* {
-                auto* call_target = array_inits_.GetOrCreate(
-                    ArrayInitializerSig{{arr, args.Length(), args_stage}},
-                    [&]() -> sem::TypeInitializer* {
-                        auto params = utils::Transform(args, [&](auto, size_t i) {
-                            return builder_->create<sem::Parameter>(
-                                nullptr,                    // declaration
-                                static_cast<uint32_t>(i),   // index
-                                arr->ElemType(),            // type
-                                type::AddressSpace::kNone,  // address_space
-                                type::Access::kUndefined);
-                        });
-                        return builder_->create<sem::TypeInitializer>(arr, std::move(params),
-                                                                      args_stage);
-                    });
-
-                auto* call = arr_or_str_init(arr, call_target);
-                if (!call) {
-                    return nullptr;
-                }
-
-                // Validation must occur after argument materialization in arr_or_str_init().
-                if (!validator_.ArrayInitializer(expr, arr)) {
-                    return nullptr;
-                }
-                return call;
-            },
-            [&](const sem::Struct* str) -> sem::Call* {
-                auto* call_target = struct_inits_.GetOrCreate(
-                    StructInitializerSig{{str, args.Length(), args_stage}},
-                    [&]() -> sem::TypeInitializer* {
-                        utils::Vector<const sem::Parameter*, 8> params;
-                        params.Resize(std::min(args.Length(), str->Members().Length()));
-                        for (size_t i = 0, n = params.Length(); i < n; i++) {
-                            params[i] = builder_->create<sem::Parameter>(
-                                nullptr,                    // declaration
-                                static_cast<uint32_t>(i),   // index
-                                str->Members()[i]->Type(),  // type
-                                type::AddressSpace::kNone,  // address_space
-                                type::Access::kUndefined);  // access
-                        }
-                        return builder_->create<sem::TypeInitializer>(str, std::move(params),
-                                                                      args_stage);
-                    });
-
-                auto* call = arr_or_str_init(str, call_target);
-                if (!call) {
-                    return nullptr;
-                }
-
-                // Validation must occur after argument materialization in arr_or_str_init().
-                if (!validator_.StructureInitializer(expr, str)) {
-                    return nullptr;
-                }
-                return call;
-            },
-            [&](Default) {
-                AddError("type is not constructible", expr->source);
-                return nullptr;
-            });
-    };
-
-    // ast::CallExpression has a target which is either an ast::Type or an
-    // ast::IdentifierExpression
-    sem::Call* call = nullptr;
-    if (expr->target.type) {
-        // ast::CallExpression has an ast::Type as the target.
-        // This call is either a type initializer or type conversion.
-        call = Switch(
-            expr->target.type,
-            [&](const ast::Vector* v) -> sem::Call* {
-                Mark(v);
-                // vector element type must be inferred if it was not specified.
-                type::Type* template_arg = nullptr;
-                if (v->type) {
-                    template_arg = Type(v->type);
-                    if (!template_arg) {
-                        return nullptr;
-                    }
-                }
-                if (auto* c = ct_init_or_conv(VectorInitConvIntrinsic(v->width), template_arg)) {
-                    builder_->Sem().Add(expr->target.type, c->Target()->ReturnType());
-                    return c;
-                }
-                return nullptr;
-            },
-            [&](const ast::Matrix* m) -> sem::Call* {
-                Mark(m);
-                // matrix element type must be inferred if it was not specified.
-                type::Type* template_arg = nullptr;
-                if (m->type) {
-                    template_arg = Type(m->type);
-                    if (!template_arg) {
-                        return nullptr;
-                    }
-                }
-                if (auto* c = ct_init_or_conv(MatrixInitConvIntrinsic(m->columns, m->rows),
-                                              template_arg)) {
-                    builder_->Sem().Add(expr->target.type, c->Target()->ReturnType());
-                    return c;
-                }
-                return nullptr;
-            },
-            [&](const ast::Array* a) -> sem::Call* {
-                Mark(a);
-                // array element type must be inferred if it was not specified.
-                const type::ArrayCount* el_count = nullptr;
-                const type::Type* el_ty = nullptr;
-                if (a->type) {
-                    el_ty = Type(a->type);
-                    if (!el_ty) {
-                        return nullptr;
-                    }
-                    if (!a->count) {
-                        AddError("cannot construct a runtime-sized array", expr->source);
-                        return nullptr;
-                    }
-                    el_count = ArrayCount(a->count);
-                    if (!el_count) {
-                        return nullptr;
-                    }
-                    // Note: validation later will detect any mismatches between explicit array
-                    // size and number of initializer expressions.
-                } else {
-                    el_count = builder_->create<type::ConstantArrayCount>(
-                        static_cast<uint32_t>(args.Length()));
-                    auto arg_tys =
-                        utils::Transform(args, [](auto* arg) { return arg->Type()->UnwrapRef(); });
-                    el_ty = type::Type::Common(arg_tys);
-                    if (!el_ty) {
-                        AddError(
-                            "cannot infer common array element type from initializer arguments",
-                            expr->source);
-                        utils::Hashset<const type::Type*, 8> types;
-                        for (size_t i = 0; i < args.Length(); i++) {
-                            if (types.Add(args[i]->Type())) {
-                                AddNote("argument " + std::to_string(i) + " is of type '" +
-                                            sem_.TypeNameOf(args[i]->Type()) + "'",
-                                        args[i]->Declaration()->source);
-                            }
-                        }
-                        return nullptr;
-                    }
-                }
-                uint32_t explicit_stride = 0;
-                if (!ArrayAttributes(a->attributes, el_ty, explicit_stride)) {
-                    return nullptr;
-                }
-
-                auto* arr = Array(a->type ? a->type->source : a->source,
-                                  a->count ? a->count->source : a->source,  //
-                                  el_ty, el_count, explicit_stride);
-                if (!arr) {
-                    return nullptr;
-                }
-                builder_->Sem().Add(a, arr);
-
-                return ty_init_or_conv(arr);
-            },
-            [&](const ast::Type* ast) -> sem::Call* {
-                // Handler for AST types that do not have an optional element type.
-                if (auto* ty = Type(ast)) {
-                    return ty_init_or_conv(ty);
-                }
-                return nullptr;
-            },
-            [&](Default) {
-                TINT_ICE(Resolver, diagnostics_)
-                    << expr->source << " unhandled CallExpression target:\n"
-                    << "type: "
-                    << (expr->target.type ? expr->target.type->TypeInfo().name : "<null>");
-                return nullptr;
-            });
-    } else {
-        // ast::CallExpression has an ast::IdentifierExpression as the target.
-        // This call is either a function call, builtin call, type initializer or type
-        // conversion.
-        auto* ident = expr->target.name;
-        Mark(ident);
-
-        auto resolved = dependencies_.resolved_identifiers.Get(ident);
-        if (!resolved) {
-            TINT_ICE(Resolver, builder_->Diagnostics())
-                << "identifier '" << builder_->Symbols().NameFor(ident->symbol)
-                << "' was not resolved";
-            return nullptr;
-        }
-
-        if (auto* ast_node = resolved->Node()) {
-            return Switch(
-                sem_.Get(ast_node),  //
-                [&](const type::Type* ty) {
-                    // A type initializer or conversions.
-                    // Note: Unlike the code path where we're resolving the call target from an
-                    // ast::Type, all types must already have the element type explicitly
-                    // specified, so there's no need to infer element types.
-                    return ty_init_or_conv(ty);
-                },
-                [&](sem::Function* func) { return FunctionCall(expr, func, args, arg_behaviors); },
-                [&](Default) {
-                    ErrorMismatchedResolvedIdentifier(ident->source, *resolved, "call target");
-                    return nullptr;
-                });
-        }
-
-        if (auto f = resolved->BuiltinFunction(); f != sem::BuiltinType::kNone) {
-            return BuiltinCall(expr, f, args);
-        }
-
-        if (auto b = resolved->BuiltinType(); b != type::Builtin::kUndefined) {
-            auto* ty = BuiltinType(b, expr->target.name);
-            return ty ? ty_init_or_conv(ty) : nullptr;
-        }
-
-        ErrorMismatchedResolvedIdentifier(ident->source, *resolved, "call target");
-        return nullptr;
-    }
-
-    if (!call) {
-        return nullptr;
-    }
-
-    return validator_.Call(call, current_statement_) ? call : nullptr;
+sem::Call* Resolver::Call(const ast::CallExpression*) {
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Call()";
+    return nullptr;
 }
 
 template <size_t N>
@@ -2544,6 +2091,24 @@ type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifie
             return vec(u32(), 3u);
         case type::Builtin::kVec4U:
             return vec(u32(), 4u);
+        case type::Builtin::kMat2X2:
+            return nullptr;  // mat(template_type(0), 2, 2);
+        case type::Builtin::kMat2X3:
+            return nullptr;  // mat(template_type(0), 2, 3);
+        case type::Builtin::kMat2X4:
+            return nullptr;  // mat(template_type(0), 2, 4);
+        case type::Builtin::kMat3X2:
+            return nullptr;  // mat(template_type(0), 3, 2);
+        case type::Builtin::kMat3X3:
+            return nullptr;  // mat(template_type(0), 3, 3);
+        case type::Builtin::kMat3X4:
+            return nullptr;  // mat(template_type(0), 3, 4);
+        case type::Builtin::kMat4X2:
+            return nullptr;  // mat(template_type(0), 4, 2);
+        case type::Builtin::kMat4X3:
+            return nullptr;  // mat(template_type(0), 4, 3);
+        case type::Builtin::kMat4X4:
+            return nullptr;  // mat(template_type(0), 4, 4);
         case type::Builtin::kSampler:
             return builder_->create<type::Sampler>(type::SamplerKind::kSampler);
         case type::Builtin::kSamplerComparison:
@@ -2642,7 +2207,7 @@ sem::Call* Resolver::FunctionCall(const ast::CallExpression* expr,
                                   sem::Function* target,
                                   utils::Vector<const sem::ValueExpression*, N>& args,
                                   sem::Behaviors arg_behaviors) {
-    auto sym = expr->target.name->symbol;
+    auto sym = expr->target->symbol;
     auto name = builder_->Symbols().NameFor(sym);
 
     if (!MaybeMaterializeAndLoadArguments(args, target)) {
@@ -3250,60 +2815,9 @@ type::Type* Resolver::TypeDecl(const ast::TypeDecl* named_type) {
     return result;
 }
 
-type::Array* Resolver::Array(const ast::Array* arr) {
-    if (!arr->type) {
-        AddError("missing array element type", arr->source.End());
-        return nullptr;
-    }
-
-    utils::UniqueVector<const sem::GlobalVariable*, 4> transitively_referenced_overrides;
-    TINT_SCOPED_ASSIGNMENT(resolved_overrides_, &transitively_referenced_overrides);
-
-    auto* el_ty = Type(arr->type);
-    if (!el_ty) {
-        return nullptr;
-    }
-
-    // Look for explicit stride via @stride(n) attribute
-    uint32_t explicit_stride = 0;
-    if (!ArrayAttributes(arr->attributes, el_ty, explicit_stride)) {
-        return nullptr;
-    }
-
-    const type::ArrayCount* el_count = nullptr;
-
-    // Evaluate the constant array count expression.
-    if (auto* count_expr = arr->count) {
-        el_count = ArrayCount(count_expr);
-        if (!el_count) {
-            return nullptr;
-        }
-    } else {
-        el_count = builder_->create<type::RuntimeArrayCount>();
-    }
-
-    auto* out = Array(arr->type->source,                              //
-                      arr->count ? arr->count->source : arr->source,  //
-                      el_ty, el_count, explicit_stride);
-    if (out == nullptr) {
-        return nullptr;
-    }
-
-    if (el_ty->Is<type::Atomic>()) {
-        atomic_composite_info_.Add(out, &arr->type->source);
-    } else {
-        if (auto found = atomic_composite_info_.Get(el_ty)) {
-            atomic_composite_info_.Add(out, *found);
-        }
-    }
-
-    // Track the pipeline-overridable constants that are transitively referenced by this array
-    // type.
-    for (auto* var : transitively_referenced_overrides) {
-        builder_->Sem().AddTransitivelyReferencedOverride(out, var);
-    }
-
-    return out;
+type::Array* Resolver::Array(const ast::TemplatedIdentifier*) {
+    TINT_UNIMPLEMENTED(Resolver, diagnostics_) << "Resolver::Array()";
+    return nullptr;
 }
 
 const type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {

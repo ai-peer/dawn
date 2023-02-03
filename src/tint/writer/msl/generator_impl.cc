@@ -651,7 +651,7 @@ bool GeneratorImpl::EmitCall(std::ostream& out, const ast::CallExpression* expr)
 bool GeneratorImpl::EmitFunctionCall(std::ostream& out,
                                      const sem::Call* call,
                                      const sem::Function*) {
-    auto* ident = call->Declaration()->target.name;
+    auto* ident = call->Declaration()->target;
     out << program_->Symbols().NameFor(ident->symbol) << "(";
 
     bool first = true;
@@ -2097,7 +2097,6 @@ bool GeneratorImpl::EmitEntryPointFunction(const ast::Function* func) {
                     }
                     return true;
                 });
-
             if (!ok) {
                 return false;
             }

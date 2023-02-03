@@ -152,13 +152,11 @@ class Program {
     const type::Type* TypeOf(const ast::TypeDecl* type_decl) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
-    std::string FriendlyName(const ast::Type* type) const;
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
+    std::string FriendlyName(const ast::Identifier* type) const;
 
     /// @param type a type
-    /// @returns the name for `type` that closely resembles how it would be
-    /// declared in WGSL.
+    /// @returns the name for `type` that closely resembles how it would be declared in WGSL.
     std::string FriendlyName(const type::Type* type) const;
 
     /// Overload of FriendlyName, which removes an ambiguity when passing nullptr.

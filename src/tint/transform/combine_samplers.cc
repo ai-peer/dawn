@@ -115,7 +115,7 @@ struct CombineSamplers::State {
         if (it != binding_info->binding_map.end()) {
             name = it->second;
         }
-        const ast::Type* type = CreateCombinedASTTypeFor(texture_var, sampler_var);
+        auto* type = CreateCombinedASTTypeFor(texture_var, sampler_var);
         Symbol symbol = ctx.dst->Symbols().New(name);
         return ctx.dst->GlobalVar(symbol, type, Attributes());
     }
@@ -124,7 +124,7 @@ struct CombineSamplers::State {
     /// @param kind the sampler kind to create for
     /// @returns the newly-created global variable
     const ast::Variable* CreatePlaceholder(type::SamplerKind kind) {
-        const ast::Type* type = ctx.dst->ty.sampler(kind);
+        auto* type = ctx.dst->ty.sampler(kind);
         const char* name = kind == type::SamplerKind::kComparisonSampler
                                ? "placeholder_comparison_sampler"
                                : "placeholder_sampler";
@@ -138,12 +138,12 @@ struct CombineSamplers::State {
     /// @param texture the texture variable of interest
     /// @param sampler the texture variable of interest
     /// @returns the newly-created type
-    const ast::Type* CreateCombinedASTTypeFor(const sem::Variable* texture,
-                                              const sem::Variable* sampler) {
+    const ast::Identifier* CreateCombinedASTTypeFor(const sem::Variable* texture,
+                                                    const sem::Variable* sampler) {
         const type::Type* texture_type = texture->Type()->UnwrapRef();
         const type::DepthTexture* depth = texture_type->As<type::DepthTexture>();
         if (depth && !sampler) {
-            return ctx.dst->create<ast::SampledTexture>(depth->dim(), ctx.dst->ty.f32());
+            return ctx.dst->ty.sampled_texture(depth->dim(), ctx.dst->ty.f32());
         } else {
             return CreateASTTypeFor(ctx, texture_type);
         }
@@ -276,8 +276,7 @@ struct CombineSamplers::State {
                             args.Push(ctx.Clone(arg));
                         }
                     }
-                    const ast::Expression* value =
-                        ctx.dst->Call(ctx.Clone(expr->target.name), args);
+                    const ast::Expression* value = ctx.dst->Call(ctx.Clone(expr->target), args);
                     if (builtin->Type() == sem::BuiltinType::kTextureLoad &&
                         texture_var->Type()->UnwrapRef()->Is<type::DepthTexture>() &&
                         !call->Stmt()->Declaration()->Is<ast::CallStatement>()) {
@@ -329,7 +328,7 @@ struct CombineSamplers::State {
                             args.Push(ctx.Clone(arg));
                         }
                     }
-                    return ctx.dst->Call(ctx.Clone(expr->target.name), args);
+                    return ctx.dst->Call(ctx.Clone(expr->target), args);
                 }
             }
             return nullptr;
