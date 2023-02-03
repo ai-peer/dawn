@@ -33,7 +33,7 @@ TEST_F(ParserImplTest, GlobalDecl_GlobalVariable) {
 
     auto* v = program.AST().GlobalVariables()[0];
     EXPECT_EQ(v->symbol, program.Symbols().Get("a"));
-    EXPECT_TRUE(Is<ast::Vector>(v->type));
+    CheckIdentifier(program.Symbols(), v->type->name, "vec2", "i32");
 }
 
 TEST_F(ParserImplTest, GlobalDecl_GlobalVariable_Inferred) {
@@ -127,9 +127,7 @@ alias B = A;)");
     ASSERT_TRUE(program.AST().TypeDecls()[1]->Is<ast::Alias>());
     auto* alias = program.AST().TypeDecls()[1]->As<ast::Alias>();
     EXPECT_EQ(alias->name, program.Symbols().Get("B"));
-    auto* tn = alias->type->As<ast::TypeName>();
-    EXPECT_NE(tn, nullptr);
-    EXPECT_EQ(tn->name->symbol, str->name);
+    CheckIdentifier(p->builder().Symbols(), alias->type->name, "A");
 }
 
 // TODO(crbug.com/tint/1812): DEPRECATED
@@ -163,9 +161,7 @@ type B = A;)");
     ASSERT_TRUE(program.AST().TypeDecls()[1]->Is<ast::Alias>());
     auto* alias = program.AST().TypeDecls()[1]->As<ast::Alias>();
     EXPECT_EQ(alias->name, program.Symbols().Get("B"));
-    auto* tn = alias->type->As<ast::TypeName>();
-    EXPECT_NE(tn, nullptr);
-    EXPECT_EQ(tn->name->symbol, str->name);
+    CheckIdentifier(p->builder().Symbols(), alias->type->name, "A");
 }
 
 TEST_F(ParserImplTest, GlobalDecl_TypeAlias_MissingSemicolon) {

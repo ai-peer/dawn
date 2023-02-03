@@ -286,7 +286,7 @@ TEST_P(InspectorGetEntryPointComponentAndCompositionTest, Test) {
     ComponentType component;
     CompositionType composition;
     std::tie(component, composition) = GetParam();
-    std::function<const ast::Type*()> tint_type = GetTypeFunction(component, composition);
+    std::function<const ast::Identifier*()> tint_type = GetTypeFunction(component, composition);
 
     if (component == ComponentType::kF16) {
         Enable(ast::Extension::kF16);
@@ -885,7 +885,7 @@ TEST_F(InspectorGetEntryPointTest, OverrideReferencedByArraySizeViaAlias) {
     Alias("MyArray", ty.array(ty.f32(), Mul(2_a, Expr("bar"))));
     Override("zoo", ty.u32());
     Alias("MyArrayUnused", ty.array(ty.f32(), Mul(2_a, Expr("zoo"))));
-    GlobalVar("v", type::AddressSpace::kWorkgroup, ty("MyArray"));
+    GlobalVar("v", type::AddressSpace::kWorkgroup, Ident("MyArray"));
     Func("ep", utils::Empty, ty.void_(),
          utils::Vector{
              Assign(Phony(), IndexAccessor("v", 0_a)),
@@ -1076,7 +1076,7 @@ TEST_F(InspectorGetEntryPointTest, InputSampleMaskStructReferenced) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1124,9 +1124,9 @@ TEST_F(InspectorGetEntryPointTest, OutputSampleMaskStructReferenced) {
                                        utils::Vector{Builtin(ast::BuiltinValue::kSampleMask)}),
                             });
 
-    Func("ep_func", utils::Empty, ty("out_struct"),
+    Func("ep_func", utils::Empty, Ident("out_struct"),
          utils::Vector{
-             Decl(Var("out_var", ty("out_struct"))),
+             Decl(Var("out_var", Ident("out_struct"))),
              Return("out_var"),
          },
          utils::Vector{
@@ -1170,7 +1170,7 @@ TEST_F(InspectorGetEntryPointTest, InputPositionStructReferenced) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1217,7 +1217,7 @@ TEST_F(InspectorGetEntryPointTest, FrontFacingStructReferenced) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1264,7 +1264,7 @@ TEST_F(InspectorGetEntryPointTest, SampleIndexStructReferenced) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1310,7 +1310,7 @@ TEST_F(InspectorGetEntryPointTest, NumWorkgroupsStructReferenced) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1352,9 +1352,9 @@ TEST_F(InspectorGetEntryPointTest, FragDepthStructReferenced) {
                                        utils::Vector{Builtin(ast::BuiltinValue::kFragDepth)}),
                             });
 
-    Func("ep_func", utils::Empty, ty("out_struct"),
+    Func("ep_func", utils::Empty, Ident("out_struct"),
          utils::Vector{
-             Decl(Var("out_var", ty("out_struct"))),
+             Decl(Var("out_var", Ident("out_struct"))),
              Return("out_var"),
          },
          utils::Vector{
@@ -1376,7 +1376,7 @@ TEST_F(InspectorGetEntryPointTest, ImplicitInterpolate) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -1407,7 +1407,7 @@ TEST_P(InspectorGetEntryPointInterpolateTest, Test) {
 
     Func("ep_func",
          utils::Vector{
-             Param("in_var", ty("in_struct"), utils::Empty),
+             Param("in_var", Ident("in_struct"), utils::Empty),
          },
          ty.void_(),
          utils::Vector{
@@ -2976,7 +2976,7 @@ TEST_P(InspectorGetStorageTextureResourceBindingsTestWithParam, Simple) {
     auto* st_type = MakeStorageTextureTypes(dim, format);
     AddStorageTexture("st_var", st_type, 0, 0);
 
-    const ast::Type* dim_type = nullptr;
+    const ast::Identifier* dim_type = nullptr;
     switch (dim) {
         case type::TextureDimension::k1d:
             dim_type = ty.u32();

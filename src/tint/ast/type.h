@@ -21,30 +21,32 @@
 #include "src/tint/clone_context.h"
 
 // Forward declarations
-namespace tint {
-class ProgramBuilder;
-class SymbolTable;
-}  // namespace tint
+namespace tint::ast {
+class Identifier;
+}  // namespace tint::ast
 
 namespace tint::ast {
 /// Base class for a type in the system
-class Type : public Castable<Type, Node> {
+class Type final : public Castable<Type, Node> {
   public:
-    /// Move constructor
-    Type(Type&&);
-    ~Type() override;
-
-    /// @param symbols the program's symbol table
-    /// @returns the name for this type that closely resembles how it would be
-    /// declared in WGSL.
-    virtual std::string FriendlyName(const SymbolTable& symbols) const = 0;
-
-  protected:
     /// Constructor
     /// @param pid the identifier of the program that owns this node
     /// @param nid the unique node identifier
     /// @param src the source of this node
-    Type(ProgramID pid, NodeID nid, const Source& src);
+    /// @param name the name of the type
+    Type(ProgramID pid, NodeID nid, const Source& src, const Identifier* name);
+
+    /// Move constructor
+    Type(Type&&);
+    ~Type() override;
+
+    /// Clones this type using the `CloneContext` `ctx`.
+    /// @param ctx the clone context
+    /// @return the newly cloned type
+    const Type* Clone(CloneContext* ctx) const override;
+
+    /// The name of the type
+    Identifier const* const name;
 };
 
 }  // namespace tint::ast
