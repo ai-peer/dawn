@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8123009b_988527d6",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T00:54:14Z",
+      "side": 1,
+      "message": "I believe we\u0027re missing the validation case where you pass no chained descriptors at all (I think), and the case where you pass spirv options and nothing else",
+      "revId": "328f0b7f4357586931f19351dae71cf969a60bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf20bb54_50782909",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T00:54:14Z",
+      "side": 1,
+      "message": "nit: just pass in spirvOptions?\njust a bool loses semantic information, and it seems likely we may have additional options that ParseSPIRV would want in the future",
+      "range": {
+        "startLine": 947,
+        "startChar": 32,
+        "endLine": 947,
+        "endChar": 95
+      },
+      "revId": "328f0b7f4357586931f19351dae71cf969a60bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

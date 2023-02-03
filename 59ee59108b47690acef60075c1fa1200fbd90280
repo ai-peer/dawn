@@ -87,6 +87,24 @@
       "parentUuid": "6c67b3bf_f6d3d425",
       "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d62cd4d_ab6e9e59",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-03T00:54:14Z",
+      "side": 1,
+      "message": "just remove the \"native\" tag from dawn.json for your new struct and stype",
+      "parentUuid": "42a5eb7f_9fb39efe",
+      "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
