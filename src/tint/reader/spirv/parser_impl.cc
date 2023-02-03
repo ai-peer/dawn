@@ -24,7 +24,6 @@
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/id_attribute.h"
 #include "src/tint/ast/interpolate_attribute.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/unary_op_expression.h"
 #include "src/tint/reader/spirv/function.h"
 #include "src/tint/type/depth_texture.h"
@@ -1216,7 +1215,7 @@ const Type* ParserImpl::ConvertType(uint32_t type_id,
         return nullptr;
     }
     auto* ast_elem_ty = ConvertType(pointee_type_id, PtrAs::Ptr);
-    if (ast_elem_ty == nullptr) {
+    if (ast_elem_ty == nullptr || ast_elem_ty->Is<Void>()) {
         Fail() << "SPIR-V pointer type with ID " << type_id << " has invalid pointee type "
                << pointee_type_id;
         return nullptr;

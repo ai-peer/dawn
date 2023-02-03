@@ -33,7 +33,7 @@ namespace {
 using GlslGeneratorImplTest_Type = TestHelper;
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_Array) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -46,7 +46,7 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_Array) {
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArray) {
-    auto* arr = ty.array(ty.array<bool, 4>(), 5_u);
+    auto* arr = Type(ty.array(ty.array<bool, 4>(), 5_u));
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -59,7 +59,7 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArray) {
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArrayOfArray) {
-    auto* arr = ty.array(ty.array(ty.array<bool, 4>(), 5_u), 6_u);
+    auto* arr = Type(ty.array(ty.array(ty.array<bool, 4>(), 5_u), 6_u));
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -72,7 +72,7 @@ TEST_F(GlslGeneratorImplTest_Type, EmitType_ArrayOfArrayOfArray) {
 }
 
 TEST_F(GlslGeneratorImplTest_Type, EmitType_Array_WithoutName) {
-    auto* arr = ty.array<bool, 4>();
+    auto* arr = Type(ty.array<bool, 4>());
     GlobalVar("G", arr, type::AddressSpace::kPrivate);
 
     GeneratorImpl& gen = Build();
@@ -373,7 +373,7 @@ using GlslSampledTexturesTest = TestParamHelper<GlslSampledTextureData>;
 TEST_P(GlslSampledTexturesTest, Emit) {
     auto params = GetParam();
 
-    const ast::Type* datatype = nullptr;
+    const ast::Identifier* datatype = nullptr;
     switch (params.datatype) {
         case TextureDataType::F32:
             datatype = ty.f32();

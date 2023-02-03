@@ -110,10 +110,10 @@ using EnableIf = typename std::enable_if<CONDITION, T>::type;
 template <typename T, typename BASE>
 using EnableIfIsType = EnableIf<IsTypeOrDerived<T, BASE>, T>;
 
-/// If `T` is not of type `BASE`, or does not derive from `BASE`, then
-/// EnableIfIsNotType resolves to type `T`, otherwise an invalid type.
-template <typename T, typename BASE>
-using EnableIfIsNotType = EnableIf<!IsTypeOrDerived<T, BASE>, T>;
+/// If `T` is not of any of the types in `BASE_TYPES`, or does not derive from any of the types in
+/// `BASE_TYPES`, then EnableIfIsNotType resolves to type `T`, otherwise an invalid type.
+template <typename T, typename... BASE_TYPES>
+using EnableIfIsNotType = EnableIf<!(IsTypeOrDerived<T, BASE_TYPES> || ...), T>;
 
 /// @returns the std::index_sequence with all the indices shifted by OFFSET.
 template <std::size_t OFFSET, std::size_t... INDICES>

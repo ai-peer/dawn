@@ -20,16 +20,16 @@ namespace tint::ast {
 namespace {
 
 using namespace tint::number_suffixes;  // NOLINT
-using TypeNameTest = TestHelper;
+using TypeTest = TestHelper;
 
-TEST_F(TypeNameTest, Creation_NonTemplated) {
-    auto* t = ty("ty");
+TEST_F(TypeTest, Creation_NonTemplated) {
+    auto* t = Type("ty");
     ASSERT_NE(t->name, nullptr);
     EXPECT_EQ(t->name->symbol, Symbols().Get("ty"));
 }
 
-TEST_F(TypeNameTest, Creation_Templated) {
-    auto* t = ty("ty", 1_a, 2._a, false);
+TEST_F(TypeTest, Creation_Templated) {
+    auto* t = Type("ty", 1_a, 2._a, false);
     auto* name = As<ast::TemplatedIdentifier>(t->name);
     ASSERT_NE(name, nullptr);
     EXPECT_EQ(name->symbol, Symbols().Get("ty"));
@@ -39,8 +39,8 @@ TEST_F(TypeNameTest, Creation_Templated) {
     EXPECT_TRUE(name->arguments[2]->Is<ast::BoolLiteralExpression>());
 }
 
-TEST_F(TypeNameTest, Creation_WithSource) {
-    auto* t = ty(Source{{20, 2}}, "ty");
+TEST_F(TypeTest, Creation_WithSource) {
+    auto* t = Type(Source{{20, 2}}, "ty");
     ASSERT_NE(t->name, nullptr);
     EXPECT_EQ(t->name->symbol, Symbols().Get("ty"));
 
@@ -49,21 +49,21 @@ TEST_F(TypeNameTest, Creation_WithSource) {
     EXPECT_EQ(src.range.begin.column, 2u);
 }
 
-TEST_F(TypeNameTest, Assert_InvalidSymbol) {
+TEST_F(TypeTest, Assert_InvalidSymbol) {
     EXPECT_FATAL_FAILURE(
         {
             ProgramBuilder b;
-            b.ty("");
+            b.Type("");
         },
         "internal compiler error");
 }
 
-TEST_F(TypeNameTest, Assert_DifferentProgramID_Symbol) {
+TEST_F(TypeTest, Assert_DifferentProgramID_Symbol) {
     EXPECT_FATAL_FAILURE(
         {
             ProgramBuilder b1;
             ProgramBuilder b2;
-            b1.ty(b2.Sym("b2"));
+            b1.Type(b2.Sym("b2"));
         },
         "internal compiler error");
 }
