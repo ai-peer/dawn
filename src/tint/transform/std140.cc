@@ -353,7 +353,7 @@ struct Std140::State {
                 if (var->declared_address_space == type::AddressSpace::kUniform) {
                     auto* v = sem.Get(var);
                     if (auto* std140_ty = Std140Type(v->Type()->UnwrapRef())) {
-                        ctx.Replace(global->type, std140_ty);
+                        ctx.Replace(global->type, b.Expr(std140_ty));
                         std140_uniforms.Add(v);
                     }
                 }
@@ -400,16 +400,16 @@ struct Std140::State {
     ///          If the semantic type is not split for std140-layout, then nullptr is returned.
     /// @note will construct new std140 structures to hold decomposed matrices, populating
     ///       #std140_mats.
-    const ast::Type* Std140Type(const type::Type* ty) {
+    const ast::Identifier* Std140Type(const type::Type* ty) {
         return Switch(
             ty,  //
-            [&](const sem::Struct* str) -> const ast::Type* {
+            [&](const sem::Struct* str) -> const ast::Identifier* {
                 if (auto std140 = std140_structs.Find(str)) {
-                    return b.ty(*std140);
+                    return b.Ident(*std140);
                 }
                 return nullptr;
             },
-            [&](const type::Matrix* mat) -> const ast::Type* {
+            [&](const type::Matrix* mat) -> const ast::Identifier* {
                 if (MatrixNeedsDecomposing(mat)) {
                     auto std140_mat = std140_mats.GetOrCreate(mat, [&] {
                         auto name = b.Symbols().New("mat" + std::to_string(mat->columns()) + "x" +
@@ -424,11 +424,11 @@ struct Std140::State {
                                              [&](auto* member) { return member->name->symbol; }),
                         };
                     });
-                    return b.ty(std140_mat.name);
+                    return b.Ident(std140_mat.name);
                 }
                 return nullptr;
             },
-            [&](const type::Array* arr) -> const ast::Type* {
+            [&](const type::Array* arr) -> const ast::Identifier* {
                 if (auto* std140 = Std140Type(arr->ElemType())) {
                     utils::Vector<const ast::Attribute*, 1> attrs;
                     if (!arr->IsStrideImplicit()) {
@@ -444,8 +444,7 @@ struct Std140::State {
                             << "unexpected non-constant array count";
                         count = 1;
                     }
-                    return b.create<ast::Array>(std140, b.Expr(u32(count.value())),
-                                                std::move(attrs));
+                    return b.ty.array(std140, b.Expr(u32(count.value())), std::move(attrs));
                 }
                 return nullptr;
             });

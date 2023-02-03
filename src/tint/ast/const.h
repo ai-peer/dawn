@@ -44,7 +44,7 @@ class Const final : public Castable<Const, Variable> {
           NodeID nid,
           const Source& source,
           const Identifier* name,
-          const ast::Type* type,
+          const IdentifierExpression* type,
           const Expression* initializer,
           utils::VectorRef<const Attribute*> attributes);
 

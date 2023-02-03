@@ -44,7 +44,7 @@ class Parameter final : public Castable<Parameter, Variable> {
               NodeID nid,
               const Source& source,
               const Identifier* name,
-              const ast::Type* type,
+              const IdentifierExpression* type,
               utils::VectorRef<const Attribute*> attributes);
 
     /// Move constructor

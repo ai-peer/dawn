@@ -1,4 +1,4 @@
-// Copyright 2020 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,23 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ast/type.h"
+#include "src/tint/sem/function_expression.h"
 
-#include "src/tint/ast/alias.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/pointer.h"
-#include "src/tint/ast/texture.h"
-#include "src/tint/ast/vector.h"
-#include "src/tint/symbol_table.h"
+TINT_INSTANTIATE_TYPEINFO(tint::sem::FunctionExpression);
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Type);
+namespace tint::sem {
 
-namespace tint::ast {
+FunctionExpression::FunctionExpression(const ast::Expression* declaration,
+                                       const Statement* statement,
+                                       const sem::Function* function)
+    : Base(declaration, statement), function_(function) {}
 
-Type::Type(ProgramID pid, NodeID nid, const Source& src) : Base(pid, nid, src) {}
+FunctionExpression::~FunctionExpression() = default;
 
-Type::Type(Type&&) = default;
-
-Type::~Type() = default;
-
-}  // namespace tint::ast
+}  // namespace tint::sem

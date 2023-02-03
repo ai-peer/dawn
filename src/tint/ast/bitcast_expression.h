@@ -17,11 +17,6 @@
 
 #include "src/tint/ast/expression.h"
 
-// Forward declarations
-namespace tint::ast {
-class Type;
-}  // namespace tint::ast
-
 namespace tint::ast {
 
 /// A bitcast expression
@@ -36,7 +31,7 @@ class BitcastExpression final : public Castable<BitcastExpression, Expression> {
     BitcastExpression(ProgramID pid,
                       NodeID nid,
                       const Source& source,
-                      const Type* type,
+                      const Expression* type,
                       const Expression* expr);
     /// Move constructor
     BitcastExpression(BitcastExpression&&);
@@ -49,7 +44,7 @@ class BitcastExpression final : public Castable<BitcastExpression, Expression> {
     const BitcastExpression* Clone(CloneContext* ctx) const override;
 
     /// the target cast type
-    const Type* const type;
+    const Expression* const type;
     /// the expression
     const Expression* const expr;
 };

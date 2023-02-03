@@ -21,7 +21,7 @@
 
 // Forward declarations
 namespace tint::ast {
-class Type;
+class Expression;
 }  // namespace tint::ast
 
 namespace tint::ast {
@@ -39,7 +39,7 @@ class Alias final : public Castable<Alias, TypeDecl> {
           NodeID nid,
           const Source& src,
           const Identifier* name,
-          const Type* subtype);
+          const Expression* subtype);
     /// Move constructor
     Alias(Alias&&);
     /// Destructor
@@ -51,7 +51,7 @@ class Alias final : public Castable<Alias, TypeDecl> {
     const Alias* Clone(CloneContext* ctx) const override;
 
     /// the alias type
-    const Type* const type;
+    const Expression* const type;
 };
 
 }  // namespace tint::ast

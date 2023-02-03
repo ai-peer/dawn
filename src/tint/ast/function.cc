@@ -27,7 +27,7 @@ Function::Function(ProgramID pid,
                    const Source& src,
                    const Identifier* n,
                    utils::VectorRef<const Parameter*> parameters,
-                   const Type* return_ty,
+                   const IdentifierExpression* return_ty,
                    const BlockStatement* b,
                    utils::VectorRef<const Attribute*> attrs,
                    utils::VectorRef<const Attribute*> return_type_attrs)

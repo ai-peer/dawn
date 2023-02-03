@@ -26,7 +26,7 @@ Parameter::Parameter(ProgramID pid,
                      NodeID nid,
                      const Source& src,
                      const Identifier* n,
-                     const ast::Type* ty,
+                     const IdentifierExpression* ty,
                      utils::VectorRef<const Attribute*> attrs)
     : Base(pid, nid, src, n, ty, nullptr, std::move(attrs)) {}
 

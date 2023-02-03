@@ -24,7 +24,7 @@ StructMember::StructMember(ProgramID pid,
                            NodeID nid,
                            const Source& src,
                            const Identifier* n,
-                           const ast::Type* ty,
+                           const Expression* ty,
                            utils::VectorRef<const Attribute*> attrs)
 
     : Base(pid, nid, src), name(n), type(ty), attributes(std::move(attrs)) {

@@ -102,7 +102,7 @@ TEST_F(ResolverTypeValidationTest, GlobalVariableWithAddressSpace_Pass) {
 
 TEST_F(ResolverTypeValidationTest, GlobalConstNoAddressSpace_Pass) {
     // const global_const: f32 = f32();
-    GlobalConst(Source{{12, 34}}, "global_const", ty.f32(), Call<f32>());
+    GlobalConst(Source{{12, 34}}, "global_const", ty.f32(), Call(ty.f32()));
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -362,7 +362,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_NestedStorageBufferLargeArray) {
     // var<storage> a : S;
     Structure("S", utils::Vector{Member(Source{{12, 34}}, "a",
                                         ty.array(Source{{12, 20}}, ty.f32(), 65536_a))});
-    GlobalVar("a", ty(Source{{12, 30}}, "S"), type::AddressSpace::kStorage,
+    GlobalVar("a", Ident(Source{{12, 30}}, "S"), type::AddressSpace::kStorage,
               utils::Vector{Binding(0_u), Group(0_u)});
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
@@ -374,7 +374,7 @@ TEST_F(ResolverTypeValidationTest, ArraySize_TooBig_ImplicitStride) {
     // var<private> a : array<S, 65535>;
     Structure("S", utils::Vector{Member(Source{{12, 34}}, "a", ty.f32(),
                                         utils::Vector{MemberOffset(800000_a)})});
-    GlobalVar("a", ty.array(ty(Source{{12, 30}}, "S"), Expr(Source{{12, 34}}, 65535_a)),
+    GlobalVar("a", ty.array(Ident(Source{{12, 30}}, "S"), Expr(Source{{12, 34}}, 65535_a)),
               type::AddressSpace::kPrivate);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -612,11 +612,11 @@ TEST_F(ResolverTypeValidationTest, Struct_Member_VectorNoType) {
     // };
 
     Structure("S", utils::Vector{
-                       Member("a", create<ast::Vector>(Source{{12, 34}}, nullptr, 3u)),
+                       Member("a", ty.vec3<Infer>(Source{{12, 34}})),
                    });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: missing vector element type");
+    EXPECT_EQ(r()->error(), "12:34 error: expected '<' for 'vec3'");
 }
 
 TEST_F(ResolverTypeValidationTest, Struct_Member_MatrixNoType) {
@@ -624,11 +624,11 @@ TEST_F(ResolverTypeValidationTest, Struct_Member_MatrixNoType) {
     //   a: mat3x3;
     // };
     Structure("S", utils::Vector{
-                       Member("a", create<ast::Matrix>(Source{{12, 34}}, nullptr, 3u, 3u)),
+                       Member("a", ty.mat3x3<Infer>(Source{{12, 34}})),
                    });
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: missing matrix element type");
+    EXPECT_EQ(r()->error(), "12:34 error: expected '<' for 'mat3x3'");
 }
 
 TEST_F(ResolverTypeValidationTest, Struct_TooBig) {
@@ -644,8 +644,9 @@ TEST_F(ResolverTypeValidationTest, Struct_TooBig) {
     Structure(
         Source{{12, 34}}, "Foo",
         utils::Vector{
-            Member("a", ty.array(ty(Source{{12, 30}}, "Bar"), Expr(Source{{12, 34}}, 65535_a))),
-            Member("b", ty.array(ty(Source{{12, 30}}, "Bar"), Expr(Source{{12, 34}}, 65535_a)))});
+            Member("a", ty.array(Ident(Source{{12, 30}}, "Bar"), Expr(Source{{12, 34}}, 65535_a))),
+            Member("b",
+                   ty.array(Ident(Source{{12, 30}}, "Bar"), Expr(Source{{12, 34}}, 65535_a)))});
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -706,7 +707,7 @@ TEST_F(ResolverTypeValidationTest, RuntimeArrayInStructInArray) {
     // var<private> a : array<Foo, 4>;
 
     Structure("Foo", utils::Vector{Member("rt", ty.array<f32>())});
-    GlobalVar("v", ty.array(ty(Source{{12, 34}}, "Foo"), 4_u), type::AddressSpace::kPrivate);
+    GlobalVar("v", ty.array(Ident(Source{{12, 34}}, "Foo"), 4_u), type::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve()) << r()->error();
     EXPECT_EQ(r()->error(),
@@ -941,15 +942,11 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest, CanonicalTest, testing::Val
 }  // namespace GetCanonicalTests
 
 namespace SampledTextureTests {
-struct DimensionParams {
-    type::TextureDimension dim;
-    bool is_valid;
-};
 
-using SampledTextureDimensionTest = ResolverTestWithParam<DimensionParams>;
+using SampledTextureDimensionTest = ResolverTestWithParam<type::TextureDimension>;
 TEST_P(SampledTextureDimensionTest, All) {
     auto& params = GetParam();
-    GlobalVar(Source{{12, 34}}, "a", ty.sampled_texture(params.dim, ty.i32()), Group(0_a),
+    GlobalVar(Source{{12, 34}}, "a", ty.sampled_texture(params, ty.i32()), Group(0_a),
               Binding(0_a));
 
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -957,35 +954,24 @@ TEST_P(SampledTextureDimensionTest, All) {
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                          SampledTextureDimensionTest,
                          testing::Values(  //
-                             DimensionParams{type::TextureDimension::k1d, true},
-                             DimensionParams{type::TextureDimension::k2d, true},
-                             DimensionParams{type::TextureDimension::k2dArray, true},
-                             DimensionParams{type::TextureDimension::k3d, true},
-                             DimensionParams{type::TextureDimension::kCube, true},
-                             DimensionParams{type::TextureDimension::kCubeArray, true}));
+                             type::TextureDimension::k1d,
+                             type::TextureDimension::k2d,
+                             type::TextureDimension::k2dArray,
+                             type::TextureDimension::k3d,
+                             type::TextureDimension::kCube,
+                             type::TextureDimension::kCubeArray));
 
-using MultisampledTextureDimensionTest = ResolverTestWithParam<DimensionParams>;
+using MultisampledTextureDimensionTest = ResolverTestWithParam<type::TextureDimension>;
 TEST_P(MultisampledTextureDimensionTest, All) {
     auto& params = GetParam();
-    GlobalVar("a", ty.multisampled_texture(Source{{12, 34}}, params.dim, ty.i32()), Group(0_a),
+    GlobalVar("a", ty.multisampled_texture(Source{{12, 34}}, params, ty.i32()), Group(0_a),
               Binding(0_a));
 
-    if (params.is_valid) {
-        EXPECT_TRUE(r()->Resolve()) << r()->error();
-    } else {
-        EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(r()->error(), "12:34 error: only 2d multisampled textures are supported");
-    }
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
                          MultisampledTextureDimensionTest,
-                         testing::Values(  //
-                             DimensionParams{type::TextureDimension::k1d, false},
-                             DimensionParams{type::TextureDimension::k2d, true},
-                             DimensionParams{type::TextureDimension::k2dArray, false},
-                             DimensionParams{type::TextureDimension::k3d, false},
-                             DimensionParams{type::TextureDimension::kCube, false},
-                             DimensionParams{type::TextureDimension::kCubeArray, false}));
+                         testing::Values(type::TextureDimension::k2d));
 
 struct TypeParams {
     builder::ast_type_func_ptr type_func;
@@ -1082,8 +1068,8 @@ TEST_P(StorageTextureDimensionTest, All) {
     // var a : texture_storage_*<r32uint, write>;
     auto& params = GetParam();
 
-    auto* st = ty(Source{{12, 34}}, params.name, utils::ToString(type::TexelFormat::kR32Uint),
-                  utils::ToString(type::Access::kWrite));
+    auto* st = Ident(Source{{12, 34}}, params.name, utils::ToString(type::TexelFormat::kR32Uint),
+                     utils::ToString(type::Access::kWrite));
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
@@ -1168,7 +1154,7 @@ TEST_F(StorageTextureAccessTest, MissingTemplates) {
     // @group(0) @binding(0)
     // var a : texture_storage_1d<r32uint>;
 
-    auto* st = ty(Source{{12, 34}}, "texture_storage_1d");
+    auto* st = Ident(Source{{12, 34}}, "texture_storage_1d");
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
@@ -1180,7 +1166,7 @@ TEST_F(StorageTextureAccessTest, MissingAccess_Fail) {
     // @group(0) @binding(0)
     // var a : texture_storage_1d<r32uint>;
 
-    auto* st = ty(Source{{12, 34}}, "texture_storage_1d", "r32uint");
+    auto* st = Ident(Source{{12, 34}}, "texture_storage_1d", "r32uint");
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
@@ -1250,8 +1236,9 @@ TEST_P(ValidMatrixTypes, Okay) {
 
     Enable(ast::Extension::kF16);
 
-    GlobalVar("a", ty.mat(params.elem_ty(*this), params.columns, params.rows),
-              type::AddressSpace::kPrivate);
+    auto* el_ty = params.elem_ty(*this);
+
+    GlobalVar("a", ty.mat(el_ty, params.columns, params.rows), type::AddressSpace::kPrivate);
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
@@ -1289,7 +1276,9 @@ TEST_P(InvalidMatrixElementTypes, InvalidElementType) {
 
     Enable(ast::Extension::kF16);
 
-    GlobalVar("a", ty.mat(Source{{12, 34}}, params.elem_ty(*this), params.columns, params.rows),
+    auto* el_ty = params.elem_ty(*this);
+
+    GlobalVar("a", ty.mat(Source{{12, 34}}, el_ty, params.columns, params.rows),
               type::AddressSpace::kPrivate);
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: matrix element type must be 'f32' or 'f16'");
@@ -1405,7 +1394,7 @@ TEST_P(BuiltinTypeAliasTest, CheckEquivalent) {
 
     Enable(ast::Extension::kF16);
 
-    WrapInFunction(Decl(Var("aliased", ty(params.alias))),
+    WrapInFunction(Decl(Var("aliased", Ident(params.alias))),
                    Decl(Var("explicit", params.type(*this))),  //
                    Assign("explicit", "aliased"));
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -1417,7 +1406,7 @@ TEST_P(BuiltinTypeAliasTest, Construct) {
 
     Enable(ast::Extension::kF16);
 
-    WrapInFunction(Decl(Var("v", params.type(*this), Call(ty(params.alias)))));
+    WrapInFunction(Decl(Var("v", params.type(*this), Call(params.alias))));
     EXPECT_TRUE(r()->Resolve()) << r()->error();
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
@@ -1464,7 +1453,7 @@ TEST_P(ResolverUntemplatedTypeUsedWithTemplateArgs, Builtin_UseWithTemplateArgs)
     // var<private> v : f32<true>;
 
     Enable(ast::Extension::kF16);
-    GlobalVar("v", type::AddressSpace::kPrivate, ty(Source{{12, 34}}, GetParam(), true));
+    GlobalVar("v", type::AddressSpace::kPrivate, Ident(Source{{12, 34}}, GetParam(), true));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: type '" + std::string(GetParam()) +
@@ -1477,8 +1466,8 @@ TEST_P(ResolverUntemplatedTypeUsedWithTemplateArgs, BuiltinAlias_UseWithTemplate
     // var<private> v : S<true>;
 
     Enable(ast::Extension::kF16);
-    Alias(Source{{56, 78}}, "A", ty(GetParam()));
-    GlobalVar("v", type::AddressSpace::kPrivate, ty(Source{{12, 34}}, "A", true));
+    Alias(Source{{56, 78}}, "A", Ident(GetParam()));
+    GlobalVar("v", type::AddressSpace::kPrivate, Ident(Source{{12, 34}}, "A", true));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -1531,7 +1520,7 @@ TEST_F(ResolverUntemplatedTypeUsedWithTemplateArgs, Struct_UseWithTemplateArgs) 
     // var<private> v : S<true>;
 
     Structure(Source{{56, 78}}, "S", utils::Vector{Member("i", ty.i32())});
-    GlobalVar("v", type::AddressSpace::kPrivate, ty(Source{{12, 34}}, "S", true));
+    GlobalVar("v", type::AddressSpace::kPrivate, Ident(Source{{12, 34}}, "S", true));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),

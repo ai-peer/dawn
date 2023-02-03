@@ -44,7 +44,7 @@ class Override final : public Castable<Override, Variable> {
              NodeID nid,
              const Source& source,
              const Identifier* name,
-             const ast::Type* type,
+             const IdentifierExpression* type,
              const Expression* initializer,
              utils::VectorRef<const Attribute*> attributes);
 
