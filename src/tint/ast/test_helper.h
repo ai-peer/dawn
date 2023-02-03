@@ -31,6 +31,53 @@ using TestHelper = TestHelperBase<testing::Test>;
 template <typename T>
 using TestParamHelper = TestHelperBase<testing::TestWithParam<T>>;
 
+/// A testing utility for checking that an ast::Identifier and any optional templated arguments
+/// match the expected values.
+/// @param symbols the symbol table
+/// @param ident the root identifier, which may be a ast::TemplatedIdentifier
+/// @param expected the expected identifier name
+/// @param expected_args the expected identifier templated arguments. Arguments may be of the
+/// following types:
+/// * `const char*`, `std::string`, `std::string_view`:
+///       Checks the template argument is an ast::IdentifierExpression with the given name
+/// * i32, u32, f32, f16, bool, AInt, AFloat:
+///       Checks the template argument is an ast::LiteralExpression with the given value
+/// * std::tuple<Ts...>
+///       Checks the template argument is an ast::IdentifierExpression with an
+///       ast::TemplatedIdentifier with the given arguments.
+template <typename... ARGS>
+void CheckIdentifier(const SymbolTable& symbols,
+                     const ast::Identifier* ident,
+                     std::string_view expected,
+                     ARGS&&... expected_args) {
+    static constexpr uint32_t num_expected_args = sizeof...(expected_args);
+
+    EXPECT_EQ(symbols.NameFor(ident->symbol), expected);
+
+    if constexpr (num_expected_args == 0) {
+        EXPECT_FALSE(ident->Is<ast::TemplatedIdentifier>());
+    } else {
+        ASSERT_TRUE(ident->Is<ast::TemplatedIdentifier>());
+        auto* t = ident->As<ast::TemplatedIdentifier>();
+        ASSERT_EQ(t->arguments.Length(), num_expected_args);
+
+        size_t arg_idx = 0;
+        auto check_arg = [&](auto&& expected_arg) {
+            const auto* arg = t->arguments[arg_idx++];
+
+            using T = std::decay_t<decltype(expected_arg)>;
+            if constexpr (traits::IsStringLike<T>) {
+                ASSERT_TRUE(arg->Is<ast::IdentifierExpression>());
+                CheckIdentifier(symbols, arg->As<ast::IdentifierExpression>()->identifier,
+                                expected_arg);
+            } else {
+                FAIL() << "unhandled expected_args type";
+            }
+        };
+        (check_arg(std::forward<ARGS>(expected_args)), ...);
+    }
+}
+
 }  // namespace tint::ast
 
 #endif  // SRC_TINT_AST_TEST_HELPER_H_
