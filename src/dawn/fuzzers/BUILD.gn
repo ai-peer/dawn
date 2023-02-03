@@ -133,6 +133,7 @@ if (is_dawn_lpm_fuzzer && build_with_chromium && !is_android && !is_fuchsia &&
   proto_library("dawn_lpm_proto") {
     proto_in_dir = "//"
     sources = get_target_outputs(":dawn_lpmfuzz_proto")
+    sources += [ "${dawn_root}/src/dawn/fuzzers/lpmfuzz/dawn_lpm_custom.proto" ]
 
     use_protobuf_full = true
     deps = [
