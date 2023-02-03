@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include <string>
 
+#include "src/tint/number.h"
 #include "src/tint/type/type.h"
 #include "src/tint/utils/result.h"
 #include "src/tint/utils/vector.h"
@@ -92,6 +93,14 @@ class ConstEval {
     /// @param idx the index expression
     /// @return the result of the index, or null if the value cannot be calculated
     Result Index(const type::Type* ty, const sem::Expression* obj, const sem::Expression* idx);
+
+    /// CreateScalar constructs and returns a constant::Scalar<T>.
+    /// @param source the source location
+    /// @param t the result type
+    /// @param v the scalar value
+    /// @return the constant value with the same type and value
+    template <typename T>
+    ConstEval::Result CreateScalar(const Source& source, const type::Type* t, T v);
 
     /// @param ty the result type
     /// @param lit the literal AST node
@@ -1089,6 +1098,9 @@ class ConstEval {
     /// Adds the given note message to the diagnostics
     void AddNote(const std::string& msg, const Source& source) const;
 
+    /// ZeroValue returns a Constant for the zero-value of the type `type`.
+    const constant::Value* ZeroValue(const type::Type* type);
+
     /// Adds two Number<T>s
     /// @param source the source location
     /// @param a the lhs number
@@ -1407,6 +1419,22 @@ class ConstEval {
     ProgramBuilder& builder;
     bool soft_errors_;
 };
+
+extern template ConstEval::Result ConstEval::CreateScalar(const Source& source,
+                                                          const type::Type* t,
+                                                          bool v);
+extern template ConstEval::Result ConstEval::CreateScalar(const Source& source,
+                                                          const type::Type* t,
+                                                          i32 v);
+extern template ConstEval::Result ConstEval::CreateScalar(const Source& source,
+                                                          const type::Type* t,
+                                                          u32 v);
+extern template ConstEval::Result ConstEval::CreateScalar(const Source& source,
+                                                          const type::Type* t,
+                                                          f32 v);
+extern template ConstEval::Result ConstEval::CreateScalar(const Source& source,
+                                                          const type::Type* t,
+                                                          f16 v);
 
 }  // namespace tint::resolver
 
