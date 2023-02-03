@@ -95,7 +95,7 @@ TEST_F(MslGeneratorImplTest, EmitType_Array) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), "ary")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(arr), "ary")) << gen.error();
     EXPECT_EQ(out.str(), "tint_array<bool, 4>");
 }
 
@@ -107,7 +107,7 @@ TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArray) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(b), "ary")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(b), "ary")) << gen.error();
     EXPECT_EQ(out.str(), "tint_array<tint_array<bool, 4>, 5>");
 }
 
@@ -120,7 +120,7 @@ TEST_F(MslGeneratorImplTest, EmitType_ArrayOfArrayOfArray) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(c), "ary")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(c), "ary")) << gen.error();
     EXPECT_EQ(out.str(), "tint_array<tint_array<tint_array<bool, 4>, 5>, 6>");
 }
 
@@ -131,7 +131,7 @@ TEST_F(MslGeneratorImplTest, EmitType_Array_WithoutName) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), "")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(arr), "")) << gen.error();
     EXPECT_EQ(out.str(), "tint_array<bool, 4>");
 }
 
@@ -142,7 +142,7 @@ TEST_F(MslGeneratorImplTest, EmitType_RuntimeArray) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(arr), "ary")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(arr), "ary")) << gen.error();
     EXPECT_EQ(out.str(), "tint_array<bool, 1>");
 }
 
@@ -853,7 +853,7 @@ TEST_P(MslStorageTexturesTest, Emit) {
     GeneratorImpl& gen = Build();
 
     std::stringstream out;
-    ASSERT_TRUE(gen.EmitType(out, program->TypeOf(s), "")) << gen.error();
+    ASSERT_TRUE(gen.EmitType(out, TypeOf(s), "")) << gen.error();
     EXPECT_EQ(out.str(), params.result);
 }
 INSTANTIATE_TEST_SUITE_P(

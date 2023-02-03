@@ -109,7 +109,7 @@ void CheckIdentifier(const SymbolTable& symbols,
             ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
             auto* got_ident = got_arg->As<IdentifierExpression>()->identifier;
             ASSERT_TRUE(got_ident->Is<TemplatedIdentifier>());
-            CheckIdentifier(symbols, got_ident->As<TemplatedIdentifier>(), expected_arg);
+            ast::CheckIdentifier(symbols, got_ident->As<TemplatedIdentifier>(), expected_arg);
         } else if constexpr (std::is_same_v<T, bool>) {
             ASSERT_TRUE(got_arg->Is<BoolLiteralExpression>());
             EXPECT_EQ(got_arg->As<BoolLiteralExpression>()->value, expected_arg);

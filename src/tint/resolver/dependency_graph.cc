@@ -19,9 +19,7 @@
 #include <vector>
 
 #include "src/tint/ast/alias.h"
-#include "src/tint/ast/array.h"
 #include "src/tint/ast/assignment_statement.h"
-#include "src/tint/ast/atomic.h"
 #include "src/tint/ast/block_statement.h"
 #include "src/tint/ast/break_if_statement.h"
 #include "src/tint/ast/break_statement.h"
@@ -41,12 +39,8 @@
 #include "src/tint/ast/invariant_attribute.h"
 #include "src/tint/ast/location_attribute.h"
 #include "src/tint/ast/loop_statement.h"
-#include "src/tint/ast/matrix.h"
-#include "src/tint/ast/multisampled_texture.h"
 #include "src/tint/ast/override.h"
-#include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
-#include "src/tint/ast/sampled_texture.h"
 #include "src/tint/ast/stage_attribute.h"
 #include "src/tint/ast/stride_attribute.h"
 #include "src/tint/ast/struct.h"
@@ -56,10 +50,8 @@
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/templated_identifier.h"
 #include "src/tint/ast/traverse_expressions.h"
-#include "src/tint/ast/type_name.h"
 #include "src/tint/ast/var.h"
 #include "src/tint/ast/variable_decl_statement.h"
-#include "src/tint/ast/vector.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/scope_stack.h"
@@ -357,18 +349,11 @@ class DependencyScanner {
                         }
                     },
                     [&](const ast::CallExpression* call) {
-                        if (call->target.name) {
-                            AddDependency(call->target.name, call->target.name->symbol, "function",
-                                          "calls");
-                            if (auto* tmpl_ident =
-                                    call->target.name->As<ast::TemplatedIdentifier>()) {
-                                for (auto* arg : tmpl_ident->arguments) {
-                                    pending.Push(arg);
-                                }
+                        AddDependency(call->target, call->target->symbol, "function", "calls");
+                        if (auto* tmpl_ident = call->target->As<ast::TemplatedIdentifier>()) {
+                            for (auto* arg : tmpl_ident->arguments) {
+                                pending.Push(arg);
                             }
-                        }
-                        if (call->target.type) {
-                            TraverseType(call->target.type);
                         }
                     },
                     [&](const ast::BitcastExpression* cast) { TraverseType(cast->type); });
@@ -383,39 +368,12 @@ class DependencyScanner {
         if (!ty) {
             return;
         }
-        Switch(
-            ty,  //
-            [&](const ast::Array* arr) {
-                TraverseType(arr->type);  //
-                TraverseExpression(arr->count);
-            },
-            [&](const ast::Atomic* atomic) {  //
-                TraverseType(atomic->type);
-            },
-            [&](const ast::Matrix* mat) {  //
-                TraverseType(mat->type);
-            },
-            [&](const ast::Pointer* ptr) {  //
-                TraverseType(ptr->type);
-            },
-            [&](const ast::TypeName* tn) {  //
-                AddDependency(tn->name, tn->name->symbol, "type", "references");
-                if (auto* tmpl_ident = tn->name->As<ast::TemplatedIdentifier>()) {
-                    for (auto* arg : tmpl_ident->arguments) {
-                        TraverseExpression(arg);
-                    }
-                }
-            },
-            [&](const ast::Vector* vec) {  //
-                TraverseType(vec->type);
-            },
-            [&](const ast::SampledTexture* tex) {  //
-                TraverseType(tex->type);
-            },
-            [&](const ast::MultisampledTexture* tex) {  //
-                TraverseType(tex->type);
-            },
-            [&](Default) { UnhandledNode(diagnostics_, ty); });
+        AddDependency(ty->name, ty->name->symbol, "type", "references");
+        if (auto* tmpl_ident = ty->name->As<ast::TemplatedIdentifier>()) {
+            for (auto* arg : tmpl_ident->arguments) {
+                TraverseExpression(arg);
+            }
+        }
     }
 
     /// Traverses the attribute list, performing symbol resolution and
@@ -517,8 +475,7 @@ class DependencyScanner {
         graph_.resolved_identifiers.Add(from, ResolvedIdentifier(resolved));
     }
 
-    /// Appends an error to the diagnostics that the given symbol cannot be
-    /// resolved.
+    /// Appends an error to the diagnostics that the given symbol cannot be resolved.
     void UnknownSymbol(Symbol name, Source source, const char* use) {
         AddError(diagnostics_, "unknown " + std::string(use) + ": '" + symbols_.NameFor(name) + "'",
                  source);

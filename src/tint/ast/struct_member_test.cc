@@ -24,8 +24,7 @@ using StructMemberTest = TestHelper;
 TEST_F(StructMemberTest, Creation) {
     auto* st = Member("a", ty.i32(), utils::Vector{MemberSize(4_a)});
     EXPECT_EQ(Symbols().NameFor(st->name->symbol), "a");
-    ASSERT_TRUE(st->type->Is<ast::TypeName>());
-    EXPECT_EQ(Symbols().NameFor(st->type->As<ast::TypeName>()->name->symbol), "i32");
+    ast::CheckIdentifier(Symbols(), st->type->name, "i32");
     EXPECT_EQ(st->attributes.Length(), 1u);
     EXPECT_TRUE(st->attributes[0]->Is<StructMemberSizeAttribute>());
     EXPECT_EQ(st->source.range.begin.line, 0u);
@@ -38,8 +37,7 @@ TEST_F(StructMemberTest, CreationWithSource) {
     auto* st = Member(Source{Source::Range{Source::Location{27, 4}, Source::Location{27, 8}}}, "a",
                       ty.i32());
     EXPECT_EQ(Symbols().NameFor(st->name->symbol), "a");
-    ASSERT_TRUE(st->type->Is<ast::TypeName>());
-    EXPECT_EQ(Symbols().NameFor(st->type->As<ast::TypeName>()->name->symbol), "i32");
+    ast::CheckIdentifier(Symbols(), st->type->name, "i32");
     EXPECT_EQ(st->attributes.Length(), 0u);
     EXPECT_EQ(st->source.range.begin.line, 27u);
     EXPECT_EQ(st->source.range.begin.column, 4u);
