@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d7c2b4_b5ad4dc0",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 932,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-03T01:56:02Z",
+      "side": 1,
+      "message": "The \"no chained descriptors at all\" case is handled at the top of this function (chainedDescriptor\u003d\u003dnullptr), and already has test coverage.\n\nI\u0027ve added a check and unittest for the case where you pass SPIR-V options and nothing else.",
+      "parentUuid": "8123009b_988527d6",
+      "revId": "328f0b7f4357586931f19351dae71cf969a60bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf20bb54_50782909",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-03T00:54:14Z",
       "side": 1,
       "message": "nit: just pass in spirvOptions?\njust a bool loses semantic information, and it seems likely we may have additional options that ParseSPIRV would want in the future",
+      "range": {
+        "startLine": 947,
+        "startChar": 32,
+        "endLine": 947,
+        "endChar": 95
+      },
+      "revId": "328f0b7f4357586931f19351dae71cf969a60bba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5498a2a1_16cd0585",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 947,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-03T01:56:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf20bb54_50782909",
       "range": {
         "startLine": 947,
         "startChar": 32,
