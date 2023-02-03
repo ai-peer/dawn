@@ -141,6 +141,24 @@
       "parentUuid": "badd1695_8a59c122",
       "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ce04c1_57c50774",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-03T10:18:58Z",
+      "side": 1,
+      "message": "Fixed - thanks for finding that!",
+      "parentUuid": "cc0cf3e5_464e1296",
+      "revId": "59ee59108b47690acef60075c1fa1200fbd90280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
