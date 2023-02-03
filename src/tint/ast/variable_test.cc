@@ -29,8 +29,7 @@ TEST_F(VariableTest, Creation) {
 
     EXPECT_EQ(Symbols().NameFor(v->name->symbol), "my_var");
     EXPECT_EQ(v->declared_address_space, type::AddressSpace::kFunction);
-    ASSERT_TRUE(v->type->Is<ast::TypeName>());
-    EXPECT_EQ(Symbols().NameFor(v->type->As<ast::TypeName>()->name->symbol), "i32");
+    EXPECT_EQ(Symbols().NameFor(v->type->name->symbol), "i32");
     EXPECT_EQ(v->source.range.begin.line, 0u);
     EXPECT_EQ(v->source.range.begin.column, 0u);
     EXPECT_EQ(v->source.range.end.line, 0u);
@@ -43,8 +42,7 @@ TEST_F(VariableTest, CreationWithSource) {
 
     EXPECT_EQ(Symbols().NameFor(v->name->symbol), "i");
     EXPECT_EQ(v->declared_address_space, type::AddressSpace::kPrivate);
-    ASSERT_TRUE(v->type->Is<ast::TypeName>());
-    EXPECT_EQ(Symbols().NameFor(v->type->As<ast::TypeName>()->name->symbol), "f32");
+    EXPECT_EQ(Symbols().NameFor(v->type->name->symbol), "f32");
     EXPECT_EQ(v->source.range.begin.line, 27u);
     EXPECT_EQ(v->source.range.begin.column, 4u);
     EXPECT_EQ(v->source.range.end.line, 27u);
@@ -57,8 +55,7 @@ TEST_F(VariableTest, CreationEmpty) {
 
     EXPECT_EQ(Symbols().NameFor(v->name->symbol), "a_var");
     EXPECT_EQ(v->declared_address_space, type::AddressSpace::kWorkgroup);
-    ASSERT_TRUE(v->type->Is<ast::TypeName>());
-    EXPECT_EQ(Symbols().NameFor(v->type->As<ast::TypeName>()->name->symbol), "i32");
+    EXPECT_EQ(Symbols().NameFor(v->type->name->symbol), "i32");
     EXPECT_EQ(v->source.range.begin.line, 27u);
     EXPECT_EQ(v->source.range.begin.column, 4u);
     EXPECT_EQ(v->source.range.end.line, 27u);
