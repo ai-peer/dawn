@@ -1,0 +1,52 @@
+// Copyright 2022 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto2";
+package fuzzing;
+
+enum ObjectType {
+    Adapter = 1;
+    BindGroup = 2;
+    BindGroupLayout = 3;
+    Buffer = 4;
+    CommandBuffer = 5;
+    CommandEncoder = 6;
+    ComputePassEncoder = 7;
+    ComputePipeline = 8;
+    Device = 9;
+    ExternalTexture = 10;
+    Instance = 11;
+    PipelineLayout = 12;
+    QuerySet = 13;
+    Queue = 14;
+    RenderBundle = 15;
+    RenderBundleEncoder = 16;
+    RenderPassEncoder = 17;
+    RenderPipeline = 18;
+    Sampler = 19;
+    ShaderModule = 20;
+    Surface = 21;
+    SwapChain = 22;
+    Texture = 23;
+    TextureView = 24;
+};
+
+message DeviceCreateShaderModule {
+    required uint32 self = 1;
+}
+
+message DestroyObject {
+    required ObjectType objectType = 1;
+    required uint32 objectId = 2;
+}
