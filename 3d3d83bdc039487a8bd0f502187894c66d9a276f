@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "444e141b_fbc601e1",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3770,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:04:41Z",
+      "side": 1,
+      "message": "or this",
+      "range": {
+        "startLine": 3754,
+        "startChar": 1,
+        "endLine": 3770,
+        "endChar": 58
+      },
+      "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b7b7bd1_c96698d2",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:04:41Z",
+      "side": 1,
+      "message": "It\u0027s not clear to me why you need this.",
+      "range": {
+        "startLine": 1423,
+        "startChar": 0,
+        "endLine": 1437,
+        "endChar": 65
+      },
+      "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
