@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3776515f_1b4b7778",
+        "filename": "src/tint/ast/accessor_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T00:01:55Z",
+      "side": 1,
+      "message": "Nit: and MemberAccessorExpression",
+      "revId": "0147333805892c2d2aad80050c87515654f71c78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
