@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d093fd0_54aa309c",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:47:34Z",
+      "side": 1,
+      "message": "Ah, okay. (that is weird in the spec, but oh-well).\n\n\u003e Maybe `soft_errors` is a misnomer. We could call it \"runtime semantics\" or something if that\u0027s better?\n\nYes, that sounds like a better description.",
+      "parentUuid": "d2b7cc6a_1224f50c",
+      "range": {
+        "startLine": 160,
+        "startChar": 45,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "322061d2_506dcd60",
         "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
         "patchSetId": 3
