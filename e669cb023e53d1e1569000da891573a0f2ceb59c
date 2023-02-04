@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9e77f8f_13bde97c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T21:22:41Z",
+      "side": 1,
+      "message": "Really nice work!",
+      "revId": "e669cb023e53d1e1569000da891573a0f2ceb59c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75d1ff11_a637d127",
+        "filename": "src/tint/cmd/helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T21:22:41Z",
+      "side": 1,
+      "message": "Maybe add a `Options` struct here, which can conditionally have this a field?",
+      "range": {
+        "startLine": 54,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 6
+      },
+      "revId": "e669cb023e53d1e1569000da891573a0f2ceb59c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
