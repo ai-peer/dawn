@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "094be58a_733d5722",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T16:16:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85910249_d2de8068",
+      "range": {
+        "startLine": 1408,
+        "startChar": 9,
+        "endLine": 1408,
+        "endChar": 21
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23b164af_b9d8bd48",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-04T16:02:26Z",
       "side": 1,
       "message": "very much nit, but I would have leaned towards `0` here, as this can be used as a consistent not-representable value.",
+      "range": {
+        "startLine": 160,
+        "startChar": 45,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2b7cc6a_1224f50c",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T16:16:48Z",
+      "side": 1,
+      "message": "I used `0` initially, but the point of this flag is so that the interpreter can use this stuff to implement runtime evaluation of these expressions. The WGSL spec says that `a / 0` evaluates to `a` when its a runtime expression. This is weird, but its what the spec says :shrug:. Same applies to the other places you\u0027ve noted below.\n\nMaybe `soft_errors` is a misnomer. We could call it \"runtime semantics\" or something if that\u0027s better?",
+      "parentUuid": "23b164af_b9d8bd48",
       "range": {
         "startLine": 160,
         "startChar": 45,
