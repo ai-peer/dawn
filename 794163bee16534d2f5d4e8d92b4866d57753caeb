@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "093cf5f3_cd1a0db3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-04T03:29:42Z",
+      "side": 1,
+      "message": "Thoughts, it allows you to dump out a bunch of info like below. It also means we could possibly remove the `dump-inspector-info` from `tint` as that info is also included here.\n\nThe output could use work, but this is what I could easily get from either the `inspector` or from the program type manager.\n\n\n```\n$ out/Debug/tint_info test/tint/samples/cube.wgsl    \n\nEntry Point \u003d vtx_main (Vertex Shader)\n  Input Variables:\n\t@location(0) input.cur_position\n\t@location(1) input.color\n  Output Variables:\n\t@location(0) \u003cretval\u003e.vtxFragColor\n  Bindings:\n\t[0][0]:\n\t\t resource_type \u003d UniformBuffer\n\t\t dim \u003d Unknown\n\t\t sampled_kind \u003d UInt\n\t\t image_format \u003d Unknown\n\n\n\nEntry Point \u003d frag_main (Fragment Shader)\n  Input Variables:\n\t@location(0) fragColor\n  Output Variables:\n\t@location(0) \u003cretval\u003e\n\nStructures\n/*            align(16) size(64) */ struct Uniforms {\n/* offset( 0) align(16) size(64) */   modelViewProjectionMatrix : mat4x4\u003cf32\u003e;\n/*                               */ };\n\n/*            align(16) size(32) */ struct VertexInput {\n/* offset( 0) align(16) size(16) */   cur_position : vec4\u003cf32\u003e;\n/* offset(16) align(16) size(16) */   color : vec4\u003cf32\u003e;\n/*                               */ };\n\n/*            align(16) size(32) */ struct VertexOutput {\n/* offset( 0) align(16) size(16) */   vtxFragColor : vec4\u003cf32\u003e;\n/* offset(16) align(16) size(16) */   Position : vec4\u003cf32\u003e;\n/*                               */ };\n\n```",
+      "revId": "794163bee16534d2f5d4e8d92b4866d57753caeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
