@@ -69,6 +69,30 @@
       },
       "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1028c1b0_e5d2532a",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T16:22:31Z",
+      "side": 1,
+      "message": "I made it private and dropped the explicit template instantiation.\n\nStill not sure this patch is an improvement, still happy to drop it.",
+      "parentUuid": "9ec3f359_713d23e0",
+      "range": {
+        "startLine": 1423,
+        "startChar": 0,
+        "endLine": 1437,
+        "endChar": 65
+      },
+      "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
