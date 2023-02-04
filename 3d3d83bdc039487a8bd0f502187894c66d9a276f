@@ -45,6 +45,30 @@
       },
       "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec3f359_713d23e0",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1437,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T16:07:50Z",
+      "side": 1,
+      "message": "Yeah, so I made `CreateScalar` public so that I could use it from the interpreter, and then the Linux build complained about the lack of explicit template instantiation in both the `.h` and the `.cc` (which was weird to me).\n\nBut now that `constant::Scalar` has been refactored out of `const_eval.cc`, the interpreter can just `create\u003cconstant::Scalar\u003e()` directly. So if we wanted patch, we can just make `CreateScalar` private and get rid of this explicit template instantiation stuff.\n\nI don\u0027t have a strong preference either way. Perfectly fine with just dropping this patch altogether.",
+      "parentUuid": "6b7b7bd1_c96698d2",
+      "range": {
+        "startLine": 1423,
+        "startChar": 0,
+        "endLine": 1437,
+        "endChar": 65
+      },
+      "revId": "3d3d83bdc039487a8bd0f502187894c66d9a276f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
