@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b0d0b5_8e803dba",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T12:35:18Z",
+      "side": 1,
+      "message": "Nit: GetVal",
+      "revId": "bf4032641c5228588639eba94c2050f15e4e85f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df901d62_d729ef9d",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-04T12:35:18Z",
+      "side": 1,
+      "message": "Maybe this should be `TINT_ASSERT(sem_ident)`? I know `ast::IdentifierExpression` will be able to map to `sem::TypeExpression` in the future, but it we\u0027re trying to process a type identifier in the uniformity analysis then something has gone very wrong.",
+      "range": {
+        "startLine": 1146,
+        "startChar": 0,
+        "endLine": 1148,
+        "endChar": 9
+      },
+      "revId": "bf4032641c5228588639eba94c2050f15e4e85f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
