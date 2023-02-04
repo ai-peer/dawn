@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85910249_d2de8068",
+        "filename": "src/tint/resolver/const_eval.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1408,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:02:26Z",
+      "side": 1,
+      "message": "Please give a default.",
+      "range": {
+        "startLine": 1408,
+        "startChar": 9,
+        "endLine": 1408,
+        "endChar": 21
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23b164af_b9d8bd48",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:02:26Z",
+      "side": 1,
+      "message": "very much nit, but I would have leaned towards `0` here, as this can be used as a consistent not-representable value.",
+      "range": {
+        "startLine": 160,
+        "startChar": 45,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322061d2_506dcd60",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:02:26Z",
+      "side": 1,
+      "message": "and here",
+      "range": {
+        "startLine": 232,
+        "startChar": 44,
+        "endLine": 232,
+        "endChar": 46
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2db8af1_c410db5d",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:02:26Z",
+      "side": 1,
+      "message": "and here",
+      "range": {
+        "startLine": 277,
+        "startChar": 61,
+        "endLine": 277,
+        "endChar": 77
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2d4a47_bb8d0672",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-04T16:02:26Z",
+      "side": 1,
+      "message": "and here",
+      "range": {
+        "startLine": 417,
+        "startChar": 44,
+        "endLine": 417,
+        "endChar": 54
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
