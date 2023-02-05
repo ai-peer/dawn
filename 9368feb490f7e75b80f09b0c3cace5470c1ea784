@@ -18,6 +18,103 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc2d253_581546fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "313ff87a_de14e96b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think you need to explicitly say ToggleState here, isn\u0027t `mToggles(ToggleStage::Device)` sufficient?",
+      "range": {
+        "startLine": 213,
+        "startChar": 48,
+        "endLine": 213,
+        "endChar": 60
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1032e19f_c6fad9b3",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "u-nit: We\u0027re in the device, and this is a toggle state so it could just be `mToggles` IMHO",
+      "range": {
+        "startLine": 570,
+        "startChar": 17,
+        "endLine": 570,
+        "endChar": 36
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e77818_184afdac",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "u-u-nit: We could early out instead to dedent the code and keep the amount of mental state to keep while reading the function low.\n\n```\nif (togglesDesc \u003d\u003d nullptr) {\n  return togglesState;\n}\n\n// Keep doing the rest\n```",
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749b6226_49749fbf",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "This means that IsDisabled() !\u003d !IsEnabled() which is VERY surprising. Removing IsDiabled() in favor of !IsEnabled() seems like it wouldn\u0027t break the logic at [2] since DisallowUnsafeAPIs explicitly defaults to true. (we should really reverse that name one day and have AllowUnsafeAPIs instead)",
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "877e1498_a1a618c3",
@@ -36,6 +133,53 @@
         "startChar": 0,
         "endLine": 105,
         "endChar": 33
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a0e2df_d7bcb882",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "+1 with other comments from Austin this could disappear again, or be an implementation detail (so it is never extended again)",
+      "parentUuid": "877e1498_a1a618c3",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 33
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ecc18aa_bc7b6878",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "nit: unset (so implicitly disabled)",
+      "range": {
+        "startLine": 111,
+        "startChar": 94,
+        "endLine": 111,
+        "endChar": 99
       },
       "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -83,6 +227,46 @@
         "endLine": 146,
         "endChar": 29
       },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2e9e221_41686edb",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "nit: The assert is definitely an implementation detail and could be left out.",
+      "range": {
+        "startLine": 159,
+        "startChar": 49,
+        "endLine": 159,
+        "endChar": 94
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddcc2cc_32b72d1e",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T17:38:05Z",
+      "side": 1,
+      "message": "Why experimental? They are not experimental, just not always available on systems (TimestampQuery should be stable for example).",
       "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
