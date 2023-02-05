@@ -16,6 +16,80 @@
       "message": "Hi Corentin and Austin, PTAL. Thanks",
       "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f77ba2_da070f33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T16:57:44Z",
+      "side": 1,
+      "message": "LGTM\n\n+CC Stephen in particular for the pending command mechanism",
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10e3696_aee86a5d",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T16:57:44Z",
+      "side": 1,
+      "message": "Can you create an issue for this and add a TODO(dawn:XXX)? We need to zero-initialize buffers in GL too and apparently got it wrong.",
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef581302_686b906a",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T16:57:44Z",
+      "side": 1,
+      "message": "The comment just above this block seems to imply that unsynchronized is not always availble. Can we remove this and add a TODO, or guard the flag on version of GL that support it?",
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ac14b4b_3e6571a5",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-05T16:57:44Z",
+      "side": 1,
+      "message": "optional nit: for consistency with other backends this could be a TrackUsage that\u0027s just a proxy for MaskUsedInPendingCommands.",
+      "range": {
+        "startLine": 524,
+        "startChar": 30,
+        "endLine": 524,
+        "endChar": 55
+      },
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
