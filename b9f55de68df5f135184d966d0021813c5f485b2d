@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62355f88_e7b09eed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-05T00:33:03Z",
+      "side": 1,
+      "message": "The Kokoro error seems like something is wrong:\n\n```\n+ /dawn/src/test/tint/test-all.sh /dawn/build/tint --verbose\ngo: go.mod file not found in current directory or any parent directory; see \u0027go help modules\u0027\n```\n\nbut I don\u0027t think it\u0027s this CL ... ?",
+      "revId": "b9f55de68df5f135184d966d0021813c5f485b2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
