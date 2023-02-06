@@ -51,6 +51,24 @@
       "message": "Sorry, accidentally tried to submit this CL. I see it failed, so no harm done.",
       "revId": "e22f2426ab4c8b2d382c99effa84a6fc2c2b10c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd8f46f_2cb51c43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-06T17:15:39Z",
+      "side": 1,
+      "message": "I did start by just doing this in the emulator, but it does mean we need to duplicate all the logic for things like scalar vs vector overloads to handle these checks on a per-component basis. There\u0027s around 30 of these checks spread across binary operators and builtin functions. I think we would lose a lot of the benefit of using ConstEval if we had to do this stuff in the emulator.",
+      "parentUuid": "66080b10_76b6ef87",
+      "revId": "e22f2426ab4c8b2d382c99effa84a6fc2c2b10c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
