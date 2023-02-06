@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b84027b6_af397ffd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-06T19:41:21Z",
+      "side": 1,
+      "message": "PTAL. Thanks! \n\nThe bots can turn green once the CTS change at https://github.com/gpuweb/cts/pull/2226 is rolled into Chromium (Thanks Kai for code review).",
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0af257be_87a3b4f4",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-06T19:41:21Z",
+      "side": 1,
+      "message": "Note that if the pass is a invalid one (for example, beginRenderPass() fail because render pass descriptor is invalid) and we call pass.end() twice, it will not report error immediately. Instead, finish() will report the validation error in pass descriptor. \n\nMaybe we can add a test for this corner case in CTS if you think this is reasonable.",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
