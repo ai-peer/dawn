@@ -16,6 +16,40 @@
       "message": "Thank you, LGTM",
       "revId": "050c9f18d0740d6fb53e81831c63bb4068e02001",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f407cc6_75c2e010",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-02-06T14:56:58Z",
+      "side": 1,
+      "message": "Thanks for taking this on, Peng!",
+      "revId": "050c9f18d0740d6fb53e81831c63bb4068e02001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5930dfa_506d91ad",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-02-06T14:56:58Z",
+      "side": 1,
+      "message": "Is this necessary? This function only seems to be called from Device::GetBGRAInternalFormat(), which in turn is only called from Device::Initialize(), which itself makes a call to GetGL() (and sets pending commands true anyway).",
+      "revId": "050c9f18d0740d6fb53e81831c63bb4068e02001",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
