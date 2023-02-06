@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b7ac0ab_aea7e811",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-06T23:37:18Z",
+      "side": 1,
+      "message": "seems unfortunate to add this bool arg when everywhere it\u0027s passed explicitly as false, except APIEnd where sometimes we pass true.\n\nCould we instead just save a bool on the encoder?\n\nAPIEnd could be something like:\n```\nif (mEnded) {\n  GetDevice()-\u003eConsumedError(...);\n  return {};\n}\nmEncodingContext-\u003eTryEncode(...);\n\nmEnded \u003d true;\n```",
+      "range": {
+        "startLine": 88,
+        "startChar": 66,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0af257be_87a3b4f4",
         "filename": "src/dawn/native/EncodingContext.h",
         "patchSetId": 5
@@ -31,6 +54,30 @@
       "writtenOn": "2023-02-06T19:41:21Z",
       "side": 1,
       "message": "Note that if the pass is a invalid one (for example, beginRenderPass() fail because render pass descriptor is invalid) and we call pass.end() twice, it will not report error immediately. Instead, finish() will report the validation error in pass descriptor. \n\nMaybe we can add a test for this corner case in CTS if you think this is reasonable.",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f3ebd4_a7655961",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-06T23:37:18Z",
+      "side": 1,
+      "message": "Is that true?\n\nreading the spec, if you do a bad [beginRenderPass](https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass), I think you will get a pass that is invalid. However, I think the state of that invalid pass will still be \"open\", since it is [initially set to open](https://gpuweb.github.io/gpuweb/#dom-gpucommandsmixin-state-slot). Then we calling [end](https://gpuweb.github.io/gpuweb/#dom-gpurenderpassencoder-end), we first check that the state of the encoder is open, before checking that it is not invalid.",
+      "parentUuid": "0af257be_87a3b4f4",
       "range": {
         "startLine": 99,
         "startChar": 16,
