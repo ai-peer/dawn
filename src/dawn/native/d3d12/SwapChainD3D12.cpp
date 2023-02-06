@@ -335,11 +335,12 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewImpl() {
     Device* device = ToBackend(GetDevice());
 
     // Synchronously wait until previous operations on the next swapchain buffer are finished.
-    // This is the logic that performs frame pacing.
-    // TODO(crbug.com/dawn/269): Consider whether this should  be lifted for Mailbox so that
-    // there is not frame pacing.
-    mCurrentBuffer = mDXGISwapChain->GetCurrentBackBufferIndex();
-    DAWN_TRY(device->WaitForSerial(mBufferLastUsedSerials[mCurrentBuffer]));
+    // It is only used in the Fifo mode as the Immediate/Mailbox modes shouldn't do any frame
+    // pacing and let the application do it themselves if needed.
+    if (GetPresentMode() == wgpu::PresentMode::Fifo) {
+        mCurrentBuffer = mDXGISwapChain->GetCurrentBackBufferIndex();
+        DAWN_TRY(device->WaitForSerial(mBufferLastUsedSerials[mCurrentBuffer]));
+    }
 
     // Create the API side objects for this use of the swapchain's buffer.
     TextureDescriptor descriptor = GetSwapChainBaseTextureDescriptor(this);
