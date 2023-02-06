@@ -111,6 +111,30 @@
       },
       "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52630c72_344600e3",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-06T15:04:44Z",
+      "side": 1,
+      "message": "Thanks, I redid the change to simply fix the CMake build.",
+      "parentUuid": "7319ff43_581d79a5",
+      "range": {
+        "startLine": 403,
+        "startChar": 13,
+        "endLine": 404,
+        "endChar": 76
+      },
+      "revId": "6714a89cc9a558128f8a0e5a9d7c60c9ff3522dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
