@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c05f90ce_3d313bbf",
+        "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-06T14:32:32Z",
+      "side": 1,
+      "message": "About the weirdness in the spec (a / 0 \u003d\u003d a), it turns out that this is how GPUs actually behave in the wild, apparently. This is why David/Alan went with this, as I understand it.",
+      "parentUuid": "cee0b7cb_af1408f9",
+      "range": {
+        "startLine": 160,
+        "startChar": 45,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bd7674221caf007fc726bfb947654c1282e3f39a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "322061d2_506dcd60",
         "filename": "src/tint/resolver/const_eval_soft_error_test.cc",
         "patchSetId": 3
