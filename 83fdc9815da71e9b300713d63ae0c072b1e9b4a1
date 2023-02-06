@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c44aeb_9406fc4a",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-06T09:03:13Z",
+      "side": 1,
+      "message": "Ah you\u0027re right, we don\u0027t \"SetIsCleared\" after the BufferData(null) so it\u0027s fine.",
+      "parentUuid": "c3759220_a00c53d3",
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef581302_686b906a",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Based on GLES and GL documents GL_MAP_UNSYNCHRONIZED_BIT is always supported with glMapBufferRange. GLES \u003e\u003d 3.0 or GL\u003e\u003d3.0\n\nhttps://registry.khronos.org/OpenGL-Refpages/es3.0/html/glMapBufferRange.xhtml\nhttps://registry.khronos.org/OpenGL-Refpages/gl4/html/glMapBufferRange.xhtml",
       "parentUuid": "ef581302_686b906a",
+      "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6412479_6ae416e9",
+        "filename": "src/dawn/native/opengl/BufferGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-06T09:03:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ab4e5f9_ebf0e11e",
       "revId": "83fdc9815da71e9b300713d63ae0c072b1e9b4a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
