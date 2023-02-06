@@ -16,6 +16,24 @@
       "message": "This requires us to pass this flag at every callsite, which was mildly annoying.\n\nI\u0027ve uploaded another patch that makes `CreateScalar` and `ZeroValue` members of the `ConstEval` class so that this isn\u0027t necessary, but that required explicit template instantiation so I\u0027m not sure its actually any better.",
       "revId": "62786a8a9676005008d05e50218edde7010960dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9479e3_4bc865d7",
+        "filename": "src/tint/resolver/const_eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-06T16:16:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "96c80d6b_56025d60",
+      "revId": "62786a8a9676005008d05e50218edde7010960dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

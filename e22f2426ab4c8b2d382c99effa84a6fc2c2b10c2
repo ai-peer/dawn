@@ -16,6 +16,24 @@
       "message": "This looks good, but I must admit that I\u0027m not a huge fan of seeing this added layer of complexity in the const eval implementation, mostly because it\u0027s not something that\u0027s in the spec. I know it would be messy, but I wonder if it would be possible to do this from the emulator code, instead. For instance, for builtins that should fail on specific inputs, like divide by 0, check that before calling the builtin, and handling the special cases this way. Maybe I\u0027m wrong, but I feel like the number of corner cases with special values should be relatively small?",
       "revId": "e22f2426ab4c8b2d382c99effa84a6fc2c2b10c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66080b10_76b6ef87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-06T16:16:30Z",
+      "side": 1,
+      "message": "FWIW - I\u0027m okay with the amount of changes here. It\u0027s smaller with the next change applied, and we have very good test coverage so I\u0027m confident that this does not break anything.",
+      "parentUuid": "be74464b_ca8de524",
+      "revId": "e22f2426ab4c8b2d382c99effa84a6fc2c2b10c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
