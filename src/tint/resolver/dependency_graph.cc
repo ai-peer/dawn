@@ -28,8 +28,6 @@
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/compound_assignment_statement.h"
 #include "src/tint/ast/continue_statement.h"
-#include "src/tint/ast/depth_multisampled_texture.h"
-#include "src/tint/ast/depth_texture.h"
 #include "src/tint/ast/diagnostic_attribute.h"
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/for_loop_statement.h"
@@ -401,9 +399,7 @@ class DependencyScanner {
                 TraverseType(tex->type);
             },
             [&](Default) {
-                if (!ty->IsAnyOf<ast::DepthTexture, ast::DepthMultisampledTexture>()) {
                     UnhandledNode(diagnostics_, ty);
-                }
             });
     }
 
