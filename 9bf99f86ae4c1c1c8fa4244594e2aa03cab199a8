@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97037c7e_2ebda363",
+        "filename": "src/tint/ast/function_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-07T14:39:28Z",
+      "side": 1,
+      "message": "Nit: Probably also good to have a test that uses a non-null return type too.",
+      "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
