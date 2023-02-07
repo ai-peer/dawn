@@ -33,6 +33,24 @@
       "message": "LGTM\n\ndo we have insight on the intel side about what the issue in the driver is?\nwant to know whether the workaround is sufficient as is, or we need to expand it futher to other usages as well",
       "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393b21dd_de8f4911",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-07T02:36:43Z",
+      "side": 1,
+      "message": "Intel drivers may do some special operations on the textures with certain formats or RenderAttachment usage, which may cause some issues when we reuse those pieces of memory for other purposes on old Intel GPUs.\n\nAs textures with STORAGE are OK because no such operations are applied on them, and now we have workarounds on CopyDst and RenderAttachment, I think it\u0027s enough for us right now. What do you think?",
+      "parentUuid": "823def4a_a6fc0cda",
+      "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
