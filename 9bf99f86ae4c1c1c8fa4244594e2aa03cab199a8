@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87bc664c_4248d0c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-07T14:44:47Z",
+      "side": 1,
+      "message": "Hm, I\u0027m not sure I see the benefit of removing this. Previously we always had a return type for a function, even if `void` can\u0027t be written, it makes the internal code clearer.",
+      "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97037c7e_2ebda363",
