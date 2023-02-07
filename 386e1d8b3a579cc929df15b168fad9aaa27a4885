@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5f6f414_e8960864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Per offline discussion will have another CL adding the perf test and find out how to add to the perfmon bot.",
+      "parentUuid": "23d5f4ea_ad6c59c1",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a54f3870_cf9528bd",
@@ -67,6 +85,30 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "cases where one of the buffer has a dynamic offset and the other does not?",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 13
+      },
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ac013d9_1b1dd496",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done. (And find a typo bug!)",
+      "parentUuid": "a54f3870_cf9528bd",
       "range": {
         "startLine": 371,
         "startChar": 0,
@@ -100,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58744f29_766f24f8",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "418ea5db_9d8430f7",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 56
+      },
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1380b36_79fac5b4",
@@ -113,6 +179,24 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "test that SetBindGroup with the same bind group, but new dynamic offsets causes the state to be dirtied",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "820d96bb_9399e429",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1380b36_79fac5b4",
       "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

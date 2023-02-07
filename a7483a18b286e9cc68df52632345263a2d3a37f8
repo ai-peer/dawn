@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d6299aac_d72db980",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "716c5541_157bf087",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 28
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a3e84d51_f65fb1aa",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 8
@@ -70,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa64f24_149ea2bd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f752745_59495a55",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 80
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa5dd12e_4df3800a",
@@ -83,6 +131,30 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "unit: reflow the string",
+      "range": {
+        "startLine": 489,
+        "startChar": 21,
+        "endLine": 490,
+        "endChar": 16
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c9feff_75e1ed21",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa5dd12e_4df3800a",
       "range": {
         "startLine": 489,
         "startChar": 21,
@@ -116,6 +188,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19fa8712_50bf1634",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cec82be2_e7eac729",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6e7a416_16e7c096",
@@ -129,6 +225,30 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "nit: no need to define this",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 54
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922a6a20_0f70f860",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6e7a416_16e7c096",
       "range": {
         "startLine": 116,
         "startChar": 0,
@@ -162,6 +282,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a4b51f_b8bfa6d1",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb15cbc_b0581d63",
+      "range": {
+        "startLine": 133,
+        "startChar": 0,
+        "endLine": 133,
+        "endChar": 31
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b22f557_bbed3d76",
@@ -175,6 +319,30 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "nit: typo",
+      "range": {
+        "startLine": 150,
+        "startChar": 31,
+        "endLine": 150,
+        "endChar": 38
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81a679d_91d5e64a",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b22f557_bbed3d76",
       "range": {
         "startLine": 150,
         "startChar": 31,
@@ -210,6 +378,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04358750_985229ac",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "```\nwgpu::BindGroupLayout MakeBindGroupLayout(\n    const wgpu::Device\u0026 device,\n    std::initializer_list\u003cBindingLayoutEntryInitializationHelper\u003e entriesInitializer);\n```\n\nI think reason for not using it here is that std::initializer_list can only take compile time fixed size array list, using the \"{}\" aggregation initializer.",
+      "parentUuid": "f2a54a4e_c62ceea2",
+      "range": {
+        "startLine": 180,
+        "startChar": 26,
+        "endLine": 180,
+        "endChar": 47
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "819b1e60_36d048df",
         "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
         "patchSetId": 8
@@ -233,6 +425,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76d8aebc_f0fa4b06",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "819b1e60_36d048df",
+      "range": {
+        "startLine": 201,
+        "startChar": 0,
+        "endLine": 201,
+        "endChar": 49
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dc797c8_978e1b69",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 8
@@ -244,6 +460,30 @@
       "writtenOn": "2023-02-07T18:34:20Z",
       "side": 1,
       "message": "nit: don\u0027t need KEEP if the failures are consistent",
+      "range": {
+        "startLine": 326,
+        "startChar": 0,
+        "endLine": 326,
+        "endChar": 6
+      },
+      "revId": "a7483a18b286e9cc68df52632345263a2d3a37f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab211079_30e45a9f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T23:05:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dc797c8_978e1b69",
       "range": {
         "startLine": 326,
         "startChar": 0,
