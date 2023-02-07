@@ -862,6 +862,7 @@ if(TINT_BUILD_TESTS)
     ast/switch_statement_test.cc
     ast/test_helper.h
     ast/templated_identifier_test.cc
+    ast/test_helper_test.cc
     ast/texture_test.cc
     ast/traverse_expressions_test.cc
     ast/type_name_test.cc

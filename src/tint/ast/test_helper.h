@@ -31,6 +31,114 @@ using TestHelper = TestHelperBase<testing::Test>;
 template <typename T>
 using TestParamHelper = TestHelperBase<testing::TestWithParam<T>>;
 
+template <typename... ARGS>
+struct TemplatedIdentifierMatcher {
+    std::string_view name;
+    std::tuple<ARGS...> args;
+};
+
+/// A helper function for building a TemplatedIdentifierMatcher
+/// @param name the name of the TemplatedIdentifier
+/// @param args the template arguments
+/// @return a TemplatedIdentifierMatcher
+template <typename... ARGS>
+auto Template(std::string_view name, ARGS&&... args) {
+    return TemplatedIdentifierMatcher{name, std::make_tuple(std::forward<ARGS>(args)...)};
+}
+
+/// Deduction guide for TemplatedIdentifierMatcher
+template <typename... ARGS>
+TemplatedIdentifierMatcher(std::string_view, std::tuple<ARGS...>&&)
+    -> TemplatedIdentifierMatcher<ARGS...>;
+
+/// A traits helper for determining whether the type T is a TemplatedIdentifierMatcher.
+template <typename T>
+struct IsTemplatedIdentifierMatcher {
+    static constexpr bool value = false;
+};
+
+/// A traits helper for determining whether the type T is a TemplatedIdentifierMatcher.
+template <typename... ARGS>
+struct IsTemplatedIdentifierMatcher<TemplatedIdentifierMatcher<ARGS...>> {
+    static constexpr bool value = true;
+};
+
+/// A testing utility for checking that an Identifier and any optional templated arguments match the
+/// expected values.
+/// @param symbols the symbol table
+/// @param got the identifier
+/// @param expected the expected identifier name
+template <typename... ARGS>
+void CheckIdentifier(const SymbolTable& symbols, const Identifier* got, std::string_view expected) {
+    EXPECT_FALSE(got->Is<ast::TemplatedIdentifier>());
+    EXPECT_EQ(symbols.NameFor(got->symbol), expected);
+}
+
+/// A testing utility for checking that an Identifier and any optional templated arguments match the
+/// expected values.
+/// @param symbols the symbol table
+/// @param ident the root identifier, which may be a TemplatedIdentifier
+/// @param expected the expected identifier name and arguments
+template <typename... ARGS>
+void CheckIdentifier(const SymbolTable& symbols,
+                     const TemplatedIdentifier* got,
+                     const TemplatedIdentifierMatcher<ARGS...>& expected) {
+    EXPECT_EQ(symbols.NameFor(got->symbol), expected.name);
+    ASSERT_EQ(got->arguments.Length(), std::tuple_size_v<decltype(expected.args)>);
+
+    size_t arg_idx = 0;
+    auto check_arg = [&](auto&& expected_arg) {
+        const auto* got_arg = got->arguments[arg_idx++];
+
+        using T = std::decay_t<decltype(expected_arg)>;
+        if constexpr (traits::IsStringLike<T>) {
+            ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
+            CheckIdentifier(symbols, got_arg->As<IdentifierExpression>()->identifier, expected_arg);
+        } else if constexpr (IsTemplatedIdentifierMatcher<T>::value) {
+            ASSERT_TRUE(got_arg->Is<IdentifierExpression>());
+            auto* got_ident = got_arg->As<IdentifierExpression>()->identifier;
+            ASSERT_TRUE(got_ident->Is<TemplatedIdentifier>());
+            CheckIdentifier(symbols, got_ident->As<TemplatedIdentifier>(), expected_arg);
+        } else if constexpr (std::is_same_v<T, bool>) {
+            ASSERT_TRUE(got_arg->Is<BoolLiteralExpression>());
+            EXPECT_EQ(got_arg->As<BoolLiteralExpression>()->value, expected_arg);
+        } else if constexpr (std::is_same_v<T, AInt>) {
+            ASSERT_TRUE(got_arg->Is<IntLiteralExpression>());
+            EXPECT_EQ(got_arg->As<IntLiteralExpression>()->suffix,
+                      IntLiteralExpression::Suffix::kNone);
+            EXPECT_EQ(AInt(got_arg->As<IntLiteralExpression>()->value), expected_arg);
+        } else if constexpr (std::is_same_v<T, i32>) {
+            ASSERT_TRUE(got_arg->Is<IntLiteralExpression>());
+            EXPECT_EQ(got_arg->As<IntLiteralExpression>()->suffix,
+                      IntLiteralExpression::Suffix::kI);
+            EXPECT_EQ(i32(got_arg->As<IntLiteralExpression>()->value), expected_arg);
+        } else if constexpr (std::is_same_v<T, u32>) {
+            ASSERT_TRUE(got_arg->Is<IntLiteralExpression>());
+            EXPECT_EQ(got_arg->As<IntLiteralExpression>()->suffix,
+                      IntLiteralExpression::Suffix::kU);
+            EXPECT_EQ(u32(got_arg->As<IntLiteralExpression>()->value), expected_arg);
+        } else if constexpr (std::is_same_v<T, AFloat>) {
+            ASSERT_TRUE(got_arg->Is<FloatLiteralExpression>());
+            EXPECT_EQ(got_arg->As<FloatLiteralExpression>()->suffix,
+                      FloatLiteralExpression::Suffix::kNone);
+            EXPECT_EQ(AFloat(got_arg->As<FloatLiteralExpression>()->value), expected_arg);
+        } else if constexpr (std::is_same_v<T, f32>) {
+            ASSERT_TRUE(got_arg->Is<FloatLiteralExpression>());
+            EXPECT_EQ(got_arg->As<FloatLiteralExpression>()->suffix,
+                      FloatLiteralExpression::Suffix::kF);
+            EXPECT_EQ(f32(got_arg->As<FloatLiteralExpression>()->value), expected_arg);
+        } else if constexpr (std::is_same_v<T, f16>) {
+            ASSERT_TRUE(got_arg->Is<FloatLiteralExpression>());
+            EXPECT_EQ(got_arg->As<FloatLiteralExpression>()->suffix,
+                      FloatLiteralExpression::Suffix::kH);
+            EXPECT_EQ(f16(got_arg->As<FloatLiteralExpression>()->value), expected_arg);
+        } else {
+            FAIL() << "unhandled expected_args type";
+        }
+    };
+    std::apply([&](auto&&... args) { ((check_arg(args)), ...); }, expected.args);
+}
+
 }  // namespace tint::ast
 
 #endif  // SRC_TINT_AST_TEST_HELPER_H_
