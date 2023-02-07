@@ -215,6 +215,14 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
         cmake --build . -- --jobs=$(nproc)
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DTINT_BUILD_SPV_READER=ON -DTINT_BUILD_SPV_WRITER=ON -DTINT_BUILD_WGSL_READER=ON -DTINT_BUILD_WGSL_WRITER=ON -DTINT_BUILD_MSL_WRITER=ON -DTINT_BUILD_HLSL_WRITER=ON -DTINT_BUILD_BENCHMARKS=ON
     hide_cmds
+
+    status "Testing the WGSL interpeter"
+    show_cmds
+        cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DTINT_BUILD_INTERPRETER=ON
+        cmake --build . -- --jobs=$(nproc)
+        ./tint-interp-tests
+        cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DTINT_BUILD_INTERPRETER=OFF
+    hide_cmds
 else
     status "Unsupported build system: $BUILD_SYSTEM"
     exit 1
