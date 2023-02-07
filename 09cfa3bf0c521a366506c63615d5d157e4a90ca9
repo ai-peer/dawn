@@ -105,6 +105,24 @@
       "parentUuid": "94fd9cb5_3af58e9e",
       "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31d4c37b_219c57cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-07T03:00:18Z",
+      "side": 1,
+      "message": "According to our local tests we don\u0027t meet any issue with STORAGE usage, and theoretically textures with STORAGE usage only won\u0027t be created with any special operations, so currently we suggest we can still allocate STORAGE textures with CreatePlacedResource().",
+      "parentUuid": "2b0a0410_8eeda2e1",
+      "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
