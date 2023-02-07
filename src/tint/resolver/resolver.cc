@@ -76,6 +76,7 @@
 #include "src/tint/type/builtin.h"
 #include "src/tint/type/depth_multisampled_texture.h"
 #include "src/tint/type/depth_texture.h"
+#include "src/tint/type/external_texture.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/pointer.h"
 #include "src/tint/type/reference.h"
@@ -315,7 +316,6 @@ type::Type* Resolver::Type(const ast::Type* ty) {
             }
             return nullptr;
         },
-        [&](const ast::ExternalTexture*) { return builder_->create<type::ExternalTexture>(); },
         [&](const ast::TypeName* t) -> type::Type* {
             Mark(t->name);
 
@@ -2539,6 +2539,8 @@ type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifie
             return builder_->create<type::Sampler>(type::SamplerKind::kSampler);
         case type::Builtin::kSamplerComparison:
             return builder_->create<type::Sampler>(type::SamplerKind::kComparisonSampler);
+        case type::Builtin::kTextureExternal:
+            return builder_->create<type::ExternalTexture>();
         case type::Builtin::kUndefined:
             break;
     }
