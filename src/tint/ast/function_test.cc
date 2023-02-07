@@ -32,7 +32,7 @@ TEST_F(FunctionTest, Creation) {
     auto* f = Func("func", params, ty.void_(), utils::Empty);
     EXPECT_EQ(f->symbol, Symbols().Get("func"));
     ASSERT_EQ(f->params.Length(), 1u);
-    EXPECT_TRUE(f->return_type->Is<ast::Void>());
+    EXPECT_EQ(f->return_type, nullptr);
     EXPECT_EQ(f->params[0], var);
 }
 
@@ -50,15 +50,6 @@ TEST_F(FunctionTest, Assert_InvalidName) {
         {
             ProgramBuilder b;
             b.Func("", utils::Empty, b.ty.void_(), utils::Empty);
-        },
-        "internal compiler error");
-}
-
-TEST_F(FunctionTest, Assert_Null_ReturnType) {
-    EXPECT_FATAL_FAILURE(
-        {
-            ProgramBuilder b;
-            b.Func("f", utils::Empty, nullptr, utils::Empty);
         },
         "internal compiler error");
 }
@@ -109,6 +100,16 @@ TEST_F(FunctionTest, Assert_DifferentProgramID_Attr) {
                     utils::Vector{
                         b2.WorkgroupSize(2_i, 4_i, 6_i),
                     });
+        },
+        "internal compiler error");
+}
+
+TEST_F(FunctionTest, Assert_DifferentProgramID_ReturnType) {
+    EXPECT_FATAL_FAILURE(
+        {
+            ProgramBuilder b1;
+            ProgramBuilder b2;
+            b1.Func("func", utils::Empty, b2.ty.i32(), utils::Empty);
         },
         "internal compiler error");
 }
