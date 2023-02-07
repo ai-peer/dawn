@@ -16,6 +16,24 @@
       "message": "\"Emulator\" might be a bit too vague. Happy to rename it to \"ShaderDebugger\" or \"WgslInterpreter\" or \"TintInterpreter\" or whatever people prefer.",
       "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83da9188_f8780f91",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-07T22:06:33Z",
+      "side": 1,
+      "message": "TintInterpreter maybe better, makes it explicit this is Tint based.",
+      "parentUuid": "f76303ca_73f37f9f",
+      "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
