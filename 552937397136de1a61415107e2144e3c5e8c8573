@@ -331,6 +331,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "358c4217_13911801",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-07T09:08:05Z",
+      "side": 1,
+      "message": "After changing the mentioned `DisallowUnsafeAPIs` checking to `IsEnabled()`, now that we don\u0027t use `IsDisabled()` at all and get it removed.\nWe may use `IsSet() \u0026\u0026 !IsEnabled()` to make a clear condition if necessary.",
+      "parentUuid": "e43b8952_9e2e8106",
+      "revId": "552937397136de1a61415107e2144e3c5e8c8573",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d7bf66cd_d0978076",
         "filename": "src/dawn/native/Toggles.h",
         "patchSetId": 12

@@ -104,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "292a9e69_01ea4b3b",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-07T09:08:05Z",
+      "side": 1,
+      "message": "Changed to `IsEnabled`.",
+      "parentUuid": "40aeb1da_b4e2fbec",
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37c7c93a_d098b11d",
@@ -165,6 +183,30 @@
       "side": 1,
       "message": "IMO, there\u0027s no point in calling it \"Impl\" if there is not an analogous non-Impl `SetupDeviceTogglesState`\n\nAlso, I think we could do a shorter name `SetupDeviceToggles` since the TogglesState is well-communicated by the argument type.",
       "parentUuid": "04e8c400_389a5023",
+      "range": {
+        "startLine": 231,
+        "startChar": 33,
+        "endLine": 231,
+        "endChar": 54
+      },
+      "revId": "a3ac84dd830453218b25f8881a036a464b409da4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a0dc66_292c8e04",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-07T09:08:05Z",
+      "side": 1,
+      "message": "Renamed to `SetupBackendDeviceToggles`.",
+      "parentUuid": "6bbfffa8_baf6acdf",
       "range": {
         "startLine": 231,
         "startChar": 33,
