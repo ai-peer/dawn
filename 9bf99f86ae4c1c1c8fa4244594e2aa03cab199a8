@@ -105,6 +105,24 @@
       "message": "Nit: Probably also good to have a test that uses a non-null return type too.",
       "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18aa3f71_03c2b6be",
+        "filename": "src/tint/ast/function_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-07T18:35:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97037c7e_2ebda363",
+      "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
