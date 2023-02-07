@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf3309d_e6cfa80c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-07T16:34:28Z",
+      "side": 1,
+      "message": "\u003e Wouldn\u0027t your IdentifierExpression just be an Identifier with `void` in it? The same as any other builtin type?\n\nNo, because `void` is not a WGSL type.",
+      "parentUuid": "9d8a3ac4_444ac6e6",
+      "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97037c7e_2ebda363",
