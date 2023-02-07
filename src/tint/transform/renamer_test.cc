@@ -1600,7 +1600,19 @@ const char* ExpandBuiltinType(std::string_view name) {
 /// @return WGSL type names that aren't keywords
 std::vector<const char*> NonKeywordTypes() {
     std::unordered_set<std::string> keywords{
-        "i32", "u32", "f32", "f16", "bool", "sampler", "sampler_comparison", "texture_external",
+        "bool",
+        "f16",
+        "f32",
+        "i32",
+        "sampler_comparison",
+        "sampler",
+        "texture_depth_2d_array",
+        "texture_depth_2d",
+        "texture_depth_cube_array",
+        "texture_depth_cube",
+        "texture_depth_multisampled_2d",
+        "texture_external",
+        "u32",
     };
     std::vector<const char*> out;
     for (auto* type_name : type::kBuiltinStrings) {
