@@ -98,6 +98,19 @@ MaybeError Adapter::InitializeImpl() {
         mDriverDescription = std::string("D3D12 driver version ") + mDriverVersion.ToString();
     }
 
+    if (GetInstance()->IsAdapterBlocklistEnabled()) {
+        ::SYSTEM_INFO systemInfo;
+        ::GetSystemInfo(&systemInfo);
+
+        DAWN_INVALID_IF(mDeviceInfo.shaderModel >= 60 &&
+                            systemInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL,
+                        "D3D12 x86 adapter is blocklisted. See https://crbug.com/tint/1753.");
+
+        DAWN_INVALID_IF(
+            gpu_info::IsNvidia(mVendorId) &&
+                systemInfo.wProcessorArchitecture == PROCESSOR_ARCHITECTURE_INTEL,
+            "D3D12 NVIDIA x86 adapter is blocklisted. See https://crbug.com/dawn/1196.");
+    }
     return {};
 }
 
