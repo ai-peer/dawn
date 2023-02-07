@@ -176,6 +176,8 @@ void TrackTaskCallback::SetFinishedSerial(ExecutionSerial serial) {
 QueueBase::QueueBase(DeviceBase* device, const QueueDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label) {}
 
+QueueBase::QueueBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {}
+
 QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ApiObjectBase(device, tag) {}
 
 QueueBase::~QueueBase() {

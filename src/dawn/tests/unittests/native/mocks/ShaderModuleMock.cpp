@@ -14,27 +14,54 @@
 
 #include "dawn/tests/unittests/native/mocks/ShaderModuleMock.h"
 
+#include "dawn/native/ChainUtils_autogen.h"
+
 namespace dawn::native {
 
-ShaderModuleMock::ShaderModuleMock(DeviceBase* device) : ShaderModuleBase(device) {
+using ::testing::NiceMock;
+
+ShaderModuleMock::ShaderModuleMock(DeviceMock* device, const ShaderModuleDescriptor* descriptor)
+    : ShaderModuleBase(device, descriptor) {
     ON_CALL(*this, DestroyImpl).WillByDefault([this]() { this->ShaderModuleBase::DestroyImpl(); });
+
+    // Deep copy over the descriptor(s). Note currently only copying the WGSL one.
+    mDescriptor = (*descriptor);
+    const ShaderModuleWGSLDescriptor* wgslDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &wgslDesc);
+    ASSERT(wgslDesc);
+    mWgslDescriptor = *wgslDesc;
+    mDescriptor.nextInChain = &mWgslDescriptor;
+
+    SetContentHash(ComputeContentHash());
 }
 
 ShaderModuleMock::~ShaderModuleMock() = default;
 
-ResultOrError<Ref<ShaderModuleMock>> ShaderModuleMock::Create(DeviceBase* device,
-                                                              const char* source) {
-    ShaderModuleMock* mock = new ShaderModuleMock(device);
+// static
+Ref<ShaderModuleMock> ShaderModuleMock::Create(DeviceMock* device,
+                                               const ShaderModuleDescriptor* descriptor) {
+    Ref<ShaderModuleMock> shaderModule =
+        AcquireRef(new NiceMock<ShaderModuleMock>(device, descriptor));
+    ShaderModuleParseResult parseResult;
+    DAWN_TRY_WITH_CLEANUP(
+        ValidateAndParseShaderModule(device, descriptor, &parseResult, nullptr), { ASSERT(false); },
+        nullptr);
+    DAWN_TRY_WITH_CLEANUP(
+        shaderModule->InitializeBase(&parseResult, nullptr), { ASSERT(false); }, nullptr);
+    return shaderModule;
+}
 
+// static
+Ref<ShaderModuleMock> ShaderModuleMock::Create(DeviceMock* device, const char* source) {
     ShaderModuleWGSLDescriptor wgslDesc;
     wgslDesc.source = source;
     ShaderModuleDescriptor desc;
     desc.nextInChain = &wgslDesc;
+    return Create(device, &desc);
+}
 
-    ShaderModuleParseResult parseResult;
-    DAWN_TRY(ValidateAndParseShaderModule(device, &desc, &parseResult, nullptr));
-    DAWN_TRY(mock->InitializeBase(&parseResult, nullptr));
-    return AcquireRef(mock);
+const ShaderModuleDescriptor* ShaderModuleMock::GetDescriptor() const {
+    return &mDescriptor;
 }
 
 }  // namespace dawn::native

@@ -85,6 +85,8 @@ class QueueBase : public ApiObjectBase {
   protected:
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+    // Constructor used only for mocking and testing.
+    explicit QueueBase(DeviceBase* device);
     void DestroyImpl() override;
 
   private:

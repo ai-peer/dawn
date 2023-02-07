@@ -18,16 +18,29 @@
 #include <memory>
 
 #include "dawn/native/Device.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/RenderPipeline.h"
+#include "dawn/platform/DawnPlatform.h"
+#include "dawn/tests/unittests/native/mocks/QueueMock.h"
 #include "gmock/gmock.h"
 
 namespace dawn::native {
+
+class BindGroupLayoutMock;
 
 class DeviceMock : public DeviceBase {
   public:
     // Exposes some protected functions for testing purposes.
     using DeviceBase::DestroyObjects;
     using DeviceBase::ForceSetToggleForTesting;
+
+    explicit DeviceMock(Ref<QueueBase> defaultQueue = nullptr);
+    ~DeviceMock() override;
+    dawn::platform::Platform* GetPlatform() const override;
+
+    // Mock specific functionality.
+    QueueMock* GetQueueMock();
+    BindGroupLayoutMock* GetEmptyBindGroupLayoutMock();
 
     MOCK_METHOD(ResultOrError<Ref<CommandBufferBase>>,
                 CreateCommandBuffer,
@@ -114,6 +127,9 @@ class DeviceMock : public DeviceBase {
     MOCK_METHOD(void, DestroyImpl, (), (override));
     MOCK_METHOD(MaybeError, WaitForIdleForDestruction, (), (override));
     MOCK_METHOD(bool, HasPendingCommands, (), (const, override));
+
+  private:
+    Ref<InstanceBase> mInstance;
 };
 
 }  // namespace dawn::native

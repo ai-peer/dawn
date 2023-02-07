@@ -125,6 +125,7 @@ struct LoggingCallbackTask : CallbackTask {
     std::string mMessage;
     void* mUserdata;
 };
+}  // anonymous namespace
 
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
     DeviceBase* device,
@@ -167,8 +168,6 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescrip
     return layoutRef;
 }
 
-}  // anonymous namespace
-
 // DeviceBase
 
 DeviceBase::DeviceBase(AdapterBase* adapter,
@@ -210,7 +209,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 }
 
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
-    mCaches = std::make_unique<DeviceBase::Caches>();
+    mFormatTable = BuildFormatTable(this);
 }
 
 DeviceBase::~DeviceBase() {
@@ -468,6 +467,7 @@ void DeviceBase::APIDestroy() {
 
 void DeviceBase::HandleError(InternalErrorType type,
                              const char* message,
+                             InternalErrorTypeMask allowedErrors,
                              WGPUDeviceLostReason lost_reason) {
     if (type == InternalErrorType::DeviceLost) {
         mState = State::Disconnected;
@@ -482,10 +482,11 @@ void DeviceBase::HandleError(InternalErrorType type,
         // A real device lost happened. Set the state to disconnected as the device cannot be
         // used. Also tags all commands as completed since the device stopped running.
         AssumeCommandsComplete();
-    } else if (type == InternalErrorType::Internal) {
-        // If we receive an internal error, assume the backend can't recover and proceed with
-        // device destruction. We first wait for all previous commands to be completed so that
-        // backend objects can be freed immediately, before handling the loss.
+    } else if (type == InternalErrorType::Internal || !(allowedErrors & type)) {
+        // If we receive an internal error, or an error which we did not explicitly allow, assume
+        // the backend can't recover and proceed with device destruction. We first wait for all
+        // previous commands to be completed so that backend objects can be freed immediately,
+        // before handling the loss.
 
         // Move away from the Alive state so that the application cannot use this device
         // anymore.
@@ -534,10 +535,10 @@ void DeviceBase::HandleError(InternalErrorType type,
     }
 }
 
-void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
+void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error, InternalErrorTypeMask errorMask) {
     ASSERT(error != nullptr);
     AppendDebugLayerMessages(error.get());
-    HandleError(error->GetType(), error->GetFormattedMessage().c_str());
+    HandleError(error->GetType(), error->GetFormattedMessage().c_str(), errorMask);
 }
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
@@ -652,7 +653,7 @@ void DeviceBase::APIForceLoss(wgpu::DeviceLostReason reason, const char* message
     if (mState != State::Alive) {
         return;
     }
-    HandleError(InternalErrorType::Internal, message, ToAPI(reason));
+    HandleError(InternalErrorType::Internal, message, kNoAllowedInternalError, ToAPI(reason));
 }
 
 DeviceBase::State DeviceBase::GetState() const {
@@ -777,7 +778,7 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
 void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
     ASSERT(obj->IsCachedReference());
     size_t removedCount = mCaches->bindGroupLayouts.erase(obj);
-    ASSERT(removedCount == 1);
+    ASSERT(removedCount <= 1);
 }
 
 // Private function used at initialization
@@ -1032,10 +1033,11 @@ BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
     }
     return result.Detach();
 }
-BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
+BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor,
+                                        InternalErrorTypeMask errorMask) {
     Ref<BufferBase> result = nullptr;
-    if (ConsumedError(CreateBuffer(descriptor), &result, "calling %s.CreateBuffer(%s).", this,
-                      descriptor)) {
+    if (ConsumedError(CreateBuffer(descriptor), &result, errorMask, "calling %s.CreateBuffer(%s).",
+                      this, descriptor)) {
         ASSERT(result == nullptr);
         return BufferBase::MakeError(this, descriptor);
     }
@@ -1171,10 +1173,11 @@ SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
     }
     return result.Detach();
 }
-TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
+TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor,
+                                          InternalErrorTypeMask errorMask) {
     Ref<TextureBase> result;
-    if (ConsumedError(CreateTexture(descriptor), &result, "calling %s.CreateTexture(%s).", this,
-                      descriptor)) {
+    if (ConsumedError(CreateTexture(descriptor), &result, errorMask,
+                      "calling %s.CreateTexture(%s).", this, descriptor)) {
         return TextureBase::MakeError(this, descriptor);
     }
     return result.Detach();
@@ -1381,7 +1384,7 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
         return;
     }
 
-    HandleError(FromWGPUErrorType(type), message);
+    HandleError(FromWGPUErrorType(type), message, kAllAllowedInternalError);
 }
 
 void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {
