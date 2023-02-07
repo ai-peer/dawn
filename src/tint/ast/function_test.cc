@@ -25,7 +25,7 @@ namespace {
 
 using FunctionTest = TestHelper;
 
-TEST_F(FunctionTest, Creation) {
+TEST_F(FunctionTest, Creation_SingleParam) {
     utils::Vector params{Param("var", ty.i32())};
     auto* var = params[0];
 
@@ -34,6 +34,36 @@ TEST_F(FunctionTest, Creation) {
     ASSERT_EQ(f->params.Length(), 1u);
     EXPECT_EQ(f->return_type, nullptr);
     EXPECT_EQ(f->params[0], var);
+    ASSERT_NE(f->body, nullptr);
+    ASSERT_EQ(f->body->statements.Length(), 0u);
+}
+
+TEST_F(FunctionTest, Creation_Body_Vector) {
+    auto* f = Func("func", utils::Empty, ty.void_(), utils::Vector{Discard(), Return()});
+    ASSERT_NE(f->body, nullptr);
+    ASSERT_EQ(f->body->statements.Length(), 2u);
+    EXPECT_TRUE(f->body->statements[0]->Is<ast::DiscardStatement>());
+    EXPECT_TRUE(f->body->statements[1]->Is<ast::ReturnStatement>());
+}
+
+TEST_F(FunctionTest, Creation_Body_Block) {
+    auto* f = Func("func", utils::Empty, ty.void_(), Block(Discard(), Return()));
+    ASSERT_NE(f->body, nullptr);
+    ASSERT_EQ(f->body->statements.Length(), 2u);
+    EXPECT_TRUE(f->body->statements[0]->Is<ast::DiscardStatement>());
+    EXPECT_TRUE(f->body->statements[1]->Is<ast::ReturnStatement>());
+}
+
+TEST_F(FunctionTest, Creation_Body_Stmt) {
+    auto* f = Func("func", utils::Empty, ty.void_(), Return());
+    ASSERT_NE(f->body, nullptr);
+    ASSERT_EQ(f->body->statements.Length(), 1u);
+    EXPECT_TRUE(f->body->statements[0]->Is<ast::ReturnStatement>());
+}
+
+TEST_F(FunctionTest, Creation_Body_Nullptr) {
+    auto* f = Func("func", utils::Empty, ty.void_(), nullptr);
+    EXPECT_EQ(f->body, nullptr);
 }
 
 TEST_F(FunctionTest, Creation_WithSource) {
