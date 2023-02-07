@@ -132,7 +132,8 @@ set COMMON_CMAKE_FLAGS=             ^
     -DTINT_BUILD_SPV_WRITER=1       ^
     -DTINT_BUILD_WGSL_WRITER=1      ^
     -DTINT_RANDOMIZE_HASHES=1       ^
-    -DDAWN_USE_BUILT_DXC=1
+    -DDAWN_USE_BUILT_DXC=1          ^
+    -DTINT_BUILD_INTERPRETER=1      ^
 
 @echo off
 
@@ -170,6 +171,12 @@ if "%BUILD_TYPE%" == "Debug" (
 )
 call git bash -- ./tools/run tests --tint %BUILD_DIR%/tint.exe --verbose --format %TEST_ALL_FORMATS% || goto :error
 set PATH=%OLD_PATH%
+@echo off
+
+call :status "Running tint-interp-tests"
+@echo on
+cd /d %BUILD_DIR%
+tint-interp-tests.exe || goto :error
 @echo off
 
 call :status "Done"
