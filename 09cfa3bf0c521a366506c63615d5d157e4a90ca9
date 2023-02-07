@@ -87,6 +87,24 @@
       "parentUuid": "7a1e577d_0fc4cba9",
       "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0a0410_8eeda2e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T02:47:17Z",
+      "side": 1,
+      "message": "I suppose that\u0027s true. If it\u0027s going to happen for all 2d textures then, should we simply call the toggle D3D12Allocate2DTextureAsCommittedResource?",
+      "parentUuid": "94fd9cb5_3af58e9e",
+      "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
