@@ -123,6 +123,24 @@
       "parentUuid": "2b0a0410_8eeda2e1",
       "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68238574_46ae15fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T04:44:20Z",
+      "side": 1,
+      "message": "I see - but internally, Dawn may still use the texture as CopyDst since we may need to lazy clear it. Are we sure that that situation is OK? is it because it is lazy cleared on first use, and something about it being the first copy to the resource means that it does not hit a driver bug?",
+      "parentUuid": "31d4c37b_219c57cb",
+      "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
