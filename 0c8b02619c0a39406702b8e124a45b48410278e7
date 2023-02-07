@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "003b2b90_f180ea8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-07T08:29:33Z",
+      "side": 1,
+      "message": "Current test cases cannot cover this CL (no chromeos bots). Still need to build with chromium and verified locally.\n\nSend out for arch review, thanks!",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
