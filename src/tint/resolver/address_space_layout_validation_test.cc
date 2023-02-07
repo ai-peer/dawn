@@ -396,7 +396,7 @@ TEST_F(ResolverAddressSpaceLayoutValidationTest, UniformBuffer_InvalidArrayStrid
     // @group(0) @binding(0)
     // var<uniform> a : Outer;
 
-    Alias("Inner", ty.array<f32,10>());
+    Alias("Inner", ty.array<f32, 10>());
 
     Structure(Source{{12, 34}}, "Outer",
               utils::Vector{
