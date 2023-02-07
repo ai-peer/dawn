@@ -360,6 +360,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d4fd7bb_9a6e4a77",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T10:37:22Z",
+      "side": 1,
+      "message": "So this can be removed now?",
+      "parentUuid": "bc1b61b6_6322f709",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 50
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e31484ba_e24bd5cb",
         "filename": "src/dawn/native/Toggles.h",
         "patchSetId": 14
@@ -442,6 +466,30 @@
       "side": 1,
       "message": "Changed to\n\u003e The enum value must not be Toggle::InvalidEnum, as Toggle::InvalidEnum doesn\u0027t has corresponding ToggleInfo.",
       "parentUuid": "b2e9e221_41686edb",
+      "range": {
+        "startLine": 159,
+        "startChar": 49,
+        "endLine": 159,
+        "endChar": 94
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f96ca83e_aeec9dba",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T10:37:22Z",
+      "side": 1,
+      "message": "At least to me that\u0027s fairly obvious but maybe not for everyone, ok.",
+      "parentUuid": "1e1a54b2_d6ed3cdb",
       "range": {
         "startLine": 159,
         "startChar": 49,
