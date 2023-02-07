@@ -141,6 +141,24 @@
       "parentUuid": "31d4c37b_219c57cb",
       "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3484e3e8_de64439d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-07T04:57:50Z",
+      "side": 1,
+      "message": "\u003e but internally, Dawn may still use the texture as CopyDst since we may need to lazy clear it. Are we sure that that situation is OK?\n\nI think it\u0027s OK because with this patch only storage-only textures and buffers are allocated on the D3D12 heaps, which means the storage-only textures won\u0027t be allocated on a piece of dirty memory where special operations happen, then theoretically we won\u0027t meet such driver bug.",
+      "parentUuid": "68238574_46ae15fe",
+      "revId": "09cfa3bf0c521a366506c63615d5d157e4a90ca9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
