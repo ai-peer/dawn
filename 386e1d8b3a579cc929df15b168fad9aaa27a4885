@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "900574ee_c4f14e32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-07T19:13:06Z",
+      "side": 1,
+      "message": "Forget to append a question here: do we have some benchmark we can look at to see if this validation impact performance too much.\n\nAbout the algorithm optimization: I found https://www.geeksforgeeks.org/check-if-any-two-intervals-overlap-among-a-given-set-of-intervals/ which seems a good candidate other than some full interval tree implementation. We only need to tell if any overlap exists, but don\u0027t need to find the range. The lazy aspect pattern allow us to find which two bindings actually overlap and emit the error in the later UNLIKELY path. WDYT? (will be in a follow-up CL for sure)",
+      "parentUuid": "326299de_1a4ef45b",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a54f3870_cf9528bd",
         "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
         "patchSetId": 9
