@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d5f4ea_ad6c59c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T19:17:58Z",
+      "side": 1,
+      "message": "there is dawn/tests/perf_tests/DrawCallPerf.cpp,\n\nhowever, it doesn\u0027t test storage.\n\nif we want a perf test, it\u0027s probably a better idea to make a custom one specifically for benchmarking this validation since it only needs to use the null backend (pure frontend).\n\nwe could even put it on the perfmon bot (ask bclayton how)",
+      "parentUuid": "900574ee_c4f14e32",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a54f3870_cf9528bd",
         "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
         "patchSetId": 9
