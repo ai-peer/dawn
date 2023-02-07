@@ -126,6 +126,7 @@ set COMMON_CMAKE_FLAGS=             ^
     -DTINT_BUILD_MSL_WRITER=1       ^
     -DTINT_BUILD_SPV_WRITER=1       ^
     -DTINT_BUILD_WGSL_WRITER=1      ^
+    -DTINT_BUILD_INTERPRETER=1      ^
     -DTINT_RANDOMIZE_HASHES=1
 
 @echo off
@@ -158,6 +159,12 @@ set OLD_PATH=%PATH%
 set PATH=C:\Program Files\Metal Developer Tools\macos\bin;%PATH%
 call git bash -- ./test/tint/test-all.sh %BUILD_DIR%/tint.exe --verbose || goto :error
 set PATH=%OLD_PATH%
+@echo off
+
+call :status "Running tint-interp-tests"
+@echo on
+cd /d %BUILD_DIR%
+tint-interp-tests.exe || goto :error
 @echo off
 
 call :status "Done"
