@@ -8,7 +8,8 @@ groupshared float4 b;
 groupshared float2x2 c;
 
 int tint_div(int lhs, int rhs) {
-  return (lhs / (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs));
+  const int rhs_or_one = (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs);
+  return (lhs / rhs_or_one);
 }
 
 void foo() {

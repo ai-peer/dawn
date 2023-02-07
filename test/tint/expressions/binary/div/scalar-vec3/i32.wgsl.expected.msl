@@ -3,7 +3,8 @@
 using namespace metal;
 int3 tint_div(int lhs, int3 rhs) {
   int3 const l = int3(lhs);
-  return (l / select(rhs, int3(1), ((rhs == int3(0)) | ((l == int3((-2147483647 - 1))) & (rhs == int3(-1))))));
+  int3 const rhs_or_one = select(rhs, int3(1), ((rhs == int3(0)) | ((l == int3((-2147483647 - 1))) & (rhs == int3(-1)))));
+  return (l / rhs_or_one);
 }
 
 kernel void f() {

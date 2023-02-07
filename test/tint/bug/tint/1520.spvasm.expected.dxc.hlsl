@@ -6,7 +6,8 @@ static bool sk_Clockwise = false;
 static float4 vcolor_S0 = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
 int4 tint_div(int4 lhs, int4 rhs) {
-  return (lhs / (((rhs == (0).xxxx) | ((lhs == (-2147483648).xxxx) & (rhs == (-1).xxxx))) ? (1).xxxx : rhs));
+  const int4 rhs_or_one = (((rhs == (0).xxxx) | ((lhs == (-2147483648).xxxx) & (rhs == (-1).xxxx))) ? (1).xxxx : rhs);
+  return (lhs / rhs_or_one);
 }
 
 bool test_int_S1_c0_b() {

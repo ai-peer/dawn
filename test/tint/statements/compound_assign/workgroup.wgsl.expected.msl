@@ -2,7 +2,8 @@
 
 using namespace metal;
 int tint_div(int lhs, int rhs) {
-  return (lhs / select(rhs, 1, bool((rhs == 0) | bool((lhs == (-2147483647 - 1)) & (rhs == -1)))));
+  int const rhs_or_one = select(rhs, 1, bool((rhs == 0) | bool((lhs == (-2147483647 - 1)) & (rhs == -1))));
+  return (lhs / rhs_or_one);
 }
 
 void foo(threadgroup int* const tint_symbol, threadgroup float4* const tint_symbol_1, threadgroup float2x2* const tint_symbol_2) {

@@ -24,7 +24,8 @@ struct UniformBuffer {
 };
 
 int4 tint_div(int4 lhs, int4 rhs) {
-  return (lhs / select(rhs, int4(1), ((rhs == int4(0)) | ((lhs == int4((-2147483647 - 1))) & (rhs == int4(-1))))));
+  int4 const rhs_or_one = select(rhs, int4(1), ((rhs == int4(0)) | ((lhs == int4((-2147483647 - 1))) & (rhs == int4(-1)))));
+  return (lhs / rhs_or_one);
 }
 
 bool test_int_S1_c0_b(const constant UniformBuffer* const tint_symbol_6) {

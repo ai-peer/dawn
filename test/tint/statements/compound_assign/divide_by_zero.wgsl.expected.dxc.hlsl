@@ -7,11 +7,17 @@ static int a = 0;
 static float b = 0.0f;
 
 int tint_div(int lhs, int rhs) {
-  return (lhs / (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs));
+  const int rhs_or_one = (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs);
+  return (lhs / rhs_or_one);
 }
 
 int tint_mod(int lhs, int rhs) {
-  return (lhs % (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs));
+  const int rhs_or_one = (((rhs == 0) | ((lhs == -2147483648) & (rhs == -1))) ? 1 : rhs);
+  if (any(((uint((lhs | rhs_or_one)) & 2147483648u) != 0u))) {
+    return (lhs - ((lhs / rhs_or_one) * rhs_or_one));
+  } else {
+    return (lhs % rhs_or_one);
+  }
 }
 
 void foo(int maybe_zero) {
