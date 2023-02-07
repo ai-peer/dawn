@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d8a3ac4_444ac6e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-07T16:33:31Z",
+      "side": 1,
+      "message": "Sure, but at all the usage sites you  now need to make sure you check for a possible nullptr. So, while void isn\u0027t written in the language, it\u0027s implicit.\n\nWouldn\u0027t your IdentifierExpression just be an Identifier with `void` in it? The same as any other builtin type?",
+      "parentUuid": "b4620d49_7576f3d0",
+      "revId": "9bf99f86ae4c1c1c8fa4244594e2aa03cab199a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97037c7e_2ebda363",
