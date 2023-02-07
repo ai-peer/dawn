@@ -16,6 +16,189 @@
       "message": "Current test cases cannot cover this CL (no chromeos bots). Still need to build with chromium and verified locally.\n\nSend out for arch review, thanks!",
       "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f736a5_430b2046",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "Thanks for the arch review. When landing this can we split it in parts, for example:\n\n - Semaphore service refactor with no changes to tests (so a single service is hardcoded per OS in DeviceVk.h maybe?)\n - ExternalMemory refactor similarly.\n - Test changes to make them general to multiple service types, but the backends still have a single service.\n - DeviceVk support for multiple services.\n - Any further fixes?\n \nIt would make it MUCH easier to review and land in parts for incremental progress.",
+      "parentUuid": "003b2b90_f180ea8e",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3351d3f3_9ff61be7",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "Please also update the CMakeLists.txt (and don\u0027t forget to remove the commas)",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10738728_f74fdd0a",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc9a3d6_05c35384",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "nit: these don\u0027t need to be nested in [1]",
+      "range": {
+        "startLine": 696,
+        "startChar": 1,
+        "endLine": 709,
+        "endChar": 7
+      },
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f48931d_b0911a36",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this also be detected dynamically instead of hardcoded at compile time (so the FD service would be instantiated twice)",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d63e7f5_14961002",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "IMHO the structure could be (but would also like Austin\u0027s opinion):\n\n - ServiceManager which is renamed to Service that multiplexes the interface and dispatches on the ExternalImageType by itself, so that users of this code don\u0027t need to know that there are multiple service (the implementation details are hidden).\n - Service renamed ServiceImplementation that just the interface.\n - FDService, DMABufService etc.\n\nExternalImageHandle should probably be changed to not just be a typedef to something but a structure that contains the ExternalImageType and the various types of supported handles (or a uint64_t that\u0027s dynamically cast to the correct type? Not sure).\n\nThis means that the rest of the code basically doesn\u0027t have to change at all to support multiple different types of handles at runtime. (and doesn\u0027t have to care at all about OS-specifics)\n\nDitto for semaphore.",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afc9ac3_fde52525",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "We could have an internal enum in the Vulkan backend that also makes the difference between SyncFD and not, and could use an std::array for enum -\u003e service.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 48
+      },
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aee23fb1_e1d32224",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceFD.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "nit: final",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaa196b5_0c161d92",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceManager.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "IMHO",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd840928_ba96e6d9",
+        "filename": "src/dawn/tests/white_box/VulkanImageWrappingTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-07T13:09:25Z",
+      "side": 1,
+      "message": "Maybe this could check by looking inside the dawn::native::vulkan::Device if that image type is supported and create the backend accordingly.",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
