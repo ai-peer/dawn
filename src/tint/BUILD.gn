@@ -1337,6 +1337,7 @@ if (tint_build_unittests) {
       "ast/struct_test.cc",
       "ast/switch_statement_test.cc",
       "ast/templated_identifier_test.cc",
+      "ast/test_helper_test.cc",
       "ast/test_helper.h",
       "ast/texture_test.cc",
       "ast/traverse_expressions_test.cc",
