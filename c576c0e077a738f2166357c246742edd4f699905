@@ -16,6 +16,24 @@
       "message": "we should perhaps get the harness to emit a tag for code coverage so it only takes effect there, but this is fine for now",
       "revId": "c576c0e077a738f2166357c246742edd4f699905",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5b9e48a_18e0b3d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-02-07T21:18:20Z",
+      "side": 1,
+      "message": "Filed crbug.com/1413845",
+      "parentUuid": "d1dd16c6_562b17da",
+      "revId": "c576c0e077a738f2166357c246742edd4f699905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
