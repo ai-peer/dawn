@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b1af09_47c2d51c",
+        "filename": "src/tint/resolver/attribute_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-07T16:22:33Z",
+      "side": 1,
+      "message": "Are the attributes in the right place here? The `Block` is being passed inside a `utils::Vector`, so wouldn\u0027t that make it a nested block inside the function body?",
+      "revId": "e63308f3c90ff78465b76c0cee40e7d728d1c5a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
