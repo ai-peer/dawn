@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "326299de_1a4ef45b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T18:34:20Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54f3870_cf9528bd",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T18:34:20Z",
+      "side": 1,
+      "message": "cases where one of the buffer has a dynamic offset and the other does not?",
+      "range": {
+        "startLine": 371,
+        "startChar": 0,
+        "endLine": 371,
+        "endChar": 13
+      },
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "418ea5db_9d8430f7",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 478,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T18:34:20Z",
+      "side": 1,
+      "message": "stray comment",
+      "range": {
+        "startLine": 478,
+        "startChar": 0,
+        "endLine": 478,
+        "endChar": 56
+      },
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1380b36_79fac5b4",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-07T18:34:20Z",
+      "side": 1,
+      "message": "test that SetBindGroup with the same bind group, but new dynamic offsets causes the state to be dirtied",
+      "revId": "386e1d8b3a579cc929df15b168fad9aaa27a4885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
