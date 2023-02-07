@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f88ec2_fd02cfe4",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-07T08:12:22Z",
+      "side": 1,
+      "message": "Done\n\nGood point. And I made this change in APIEnd() in render and compute pass and leave EncodingContext basically unchanged as Kai suggested.\n\nA tiny change is that `mEnded \u003d true` can be put before TryEncode() according to the spec.",
+      "parentUuid": "9953beca_2eb621a4",
+      "range": {
+        "startLine": 88,
+        "startChar": 66,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0af257be_87a3b4f4",
@@ -126,6 +150,30 @@
       "side": 1,
       "message": "The spec\u0027s a bit subtle, but I think Austin is correct.",
       "parentUuid": "61f3ebd4_a7655961",
+      "range": {
+        "startLine": 99,
+        "startChar": 16,
+        "endLine": 99,
+        "endChar": 89
+      },
+      "revId": "b76db1de26e5f804a182658c94d889a01ec71152",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0020f9f_39c5dfba",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-07T08:12:22Z",
+      "side": 1,
+      "message": "Done.\n\nThis actually make this change easier.",
+      "parentUuid": "8919f350_a75758cc",
       "range": {
         "startLine": 99,
         "startChar": 16,
