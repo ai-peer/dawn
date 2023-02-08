@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a05d736f_99323e04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-08T00:32:47Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. Will do this.",
+      "parentUuid": "90f736a5_430b2046",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3351d3f3_9ff61be7",
         "filename": "src/dawn/native/BUILD.gn",
         "patchSetId": 17
@@ -112,6 +130,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d015f94e_092c2a2a",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-08T00:32:47Z",
+      "side": 1,
+      "message": "One place to use \"DAWN_USE_SYNC_FD\" is https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/AdapterVk.cpp;drc\u003d6315289ee8acc5fdda2cec525fa9320d07aa0220;l\u003d253. Sync with Jie and he tries to use this guard 0-copy path. So I kept it in this CL. But yes, I agree that we should detected dynamically.",
+      "parentUuid": "5f48931d_b0911a36",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d63e7f5_14961002",
         "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
         "patchSetId": 17
@@ -123,6 +159,24 @@
       "writtenOn": "2023-02-07T13:09:25Z",
       "side": 1,
       "message": "IMHO the structure could be (but would also like Austin\u0027s opinion):\n\n - ServiceManager which is renamed to Service that multiplexes the interface and dispatches on the ExternalImageType by itself, so that users of this code don\u0027t need to know that there are multiple service (the implementation details are hidden).\n - Service renamed ServiceImplementation that just the interface.\n - FDService, DMABufService etc.\n\nExternalImageHandle should probably be changed to not just be a typedef to something but a structure that contains the ExternalImageType and the various types of supported handles (or a uint64_t that\u0027s dynamically cast to the correct type? Not sure).\n\nThis means that the rest of the code basically doesn\u0027t have to change at all to support multiple different types of handles at runtime. (and doesn\u0027t have to care at all about OS-specifics)\n\nDitto for semaphore.",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce8827be_bc3c479d",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-08T00:32:47Z",
+      "side": 1,
+      "message": "Service--\u003eDispatch to impl seems more reasonable, will iterate on that direction.\nThanks for pointing it out that ExternalImageHandle needs changes too(https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/ExternalHandle.h;l\u003d22;drc\u003d0c4306fc554c80506eb0f9b833a5d2a5fdd452d5;bpv\u003d0;bpt\u003d1). I think that changes should be in another CL series to make it more dynamically. Current implementation doesn\u0027t block linux because DmaBuf and OpaqueFD uses same types.",
+      "parentUuid": "9d63e7f5_14961002",
       "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
