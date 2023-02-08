@@ -173,17 +173,17 @@ void Server::SetForwardingDeviceCallbacks(ObjectData<WGPUDevice>* deviceObject) 
             info->server->OnLogging(info->self, type, message);
         },
         deviceObject->info.get());
-    mProcs.deviceSetDeviceLostCallback(
+    /*mProcs.deviceSetDeviceLostCallback(
         deviceObject->handle,
         [](WGPUDeviceLostReason reason, const char* message, void* userdata) {
             DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
             info->server->OnDeviceLost(info->self, reason, message);
         },
-        deviceObject->info.get());
+        deviceObject->info.get());*/
 }
 
 void Server::ClearDeviceCallbacks(WGPUDevice device) {
-    // Un-set the error and lost callbacks since we cannot forward them
+    // Un-set the error callbacks since we cannot forward them
     // after the server has been destroyed.
     mProcs.deviceSetUncapturedErrorCallback(device, nullptr, nullptr);
     mProcs.deviceSetLoggingCallback(device, nullptr, nullptr);

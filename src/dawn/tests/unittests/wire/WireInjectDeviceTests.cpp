@@ -39,7 +39,7 @@ TEST_F(WireInjectDeviceTests, CallAfterReserveInject) {
     EXPECT_CALL(api, DeviceReference(serverDevice));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice, reservation.id, reservation.generation));
 
@@ -74,7 +74,7 @@ TEST_F(WireInjectDeviceTests, InjectExistingID) {
     EXPECT_CALL(api, DeviceReference(serverDevice));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice, reservation.id, reservation.generation));
 
@@ -99,7 +99,7 @@ TEST_F(WireInjectDeviceTests, InjectedDeviceLifetime) {
     EXPECT_CALL(api, DeviceReference(serverDevice));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice, reservation.id, reservation.generation));
 
@@ -134,7 +134,7 @@ TEST_F(WireInjectDeviceTests, GetQueueAfterInject) {
     EXPECT_CALL(api, DeviceReference(serverDevice));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice, reservation.id, reservation.generation));
 
@@ -164,7 +164,7 @@ TEST_F(WireInjectDeviceTests, ReflectLiveDevices) {
     EXPECT_CALL(api, DeviceReference(serverDevice1));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice1, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice1, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice1, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice1, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice1, reservation1.id, reservation1.generation));
 
@@ -172,7 +172,7 @@ TEST_F(WireInjectDeviceTests, ReflectLiveDevices) {
     EXPECT_CALL(api, DeviceReference(serverDevice2));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice2, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice2, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice2, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice2, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice2, reservation2.id, reservation2.generation));
 
@@ -209,7 +209,7 @@ TEST_F(WireInjectDeviceTests, TrackChildObjectsWithTwoReservedDevices) {
     EXPECT_CALL(api, DeviceReference(serverDevice1));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice1, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice1, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice1, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice1, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice1, reservation1.id, reservation1.generation));
 
@@ -228,7 +228,7 @@ TEST_F(WireInjectDeviceTests, TrackChildObjectsWithTwoReservedDevices) {
     EXPECT_CALL(api, DeviceReference(serverDevice2));
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(serverDevice2, _, _));
     EXPECT_CALL(api, OnDeviceSetLoggingCallback(serverDevice2, _, _));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice2, _, _));
+    // EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(serverDevice2, _, _));
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice2, reservation2.id, reservation2.generation));
 

@@ -33,6 +33,19 @@ bool Server::DoAdapterRequestDevice(ObjectId adapterId,
         return false;
     }
 
+    // The passed descriptor should not have a device lost callback or user data, since those will
+    // be supplied here.
+    ASSERT(descriptor->deviceLostCallback == nullptr);
+    ASSERT(descriptor->deviceLostUserdata == nullptr);
+
+    WGPUDeviceDescriptor lostDescriptor = *descriptor;
+
+    auto deviceLostUserdata = MakeUserdata<DeviceLostUserdata>();
+    deviceLostUserdata->device = deviceHandle;
+
+    lostDescriptor.deviceLostUserdata = deviceLostUserdata.release();
+    lostDescriptor.deviceLostCallback = ForwardToServer<&Server::OnDeviceLostCallback>;
+
     resultData->generation = deviceHandle.generation;
 
     auto userdata = MakeUserdata<RequestDeviceUserdata>();
@@ -40,10 +53,16 @@ bool Server::DoAdapterRequestDevice(ObjectId adapterId,
     userdata->requestSerial = requestSerial;
     userdata->deviceObjectId = deviceHandle.id;
 
-    mProcs.adapterRequestDevice(adapter->handle, descriptor,
+    mProcs.adapterRequestDevice(adapter->handle, &lostDescriptor,
                                 ForwardToServer<&Server::OnRequestDeviceCallback>,
                                 userdata.release());
     return true;
+}
+
+void Server::OnDeviceLostCallback(DeviceLostUserdata* data,
+                                  WGPUDeviceLostReason reason,
+                                  const char* message) {
+    OnDeviceLost(data->device, reason, message);
 }
 
 void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,

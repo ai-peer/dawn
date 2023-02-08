@@ -143,6 +143,12 @@ struct RequestDeviceUserdata : CallbackUserdata {
     ObjectId deviceObjectId;
 };
 
+struct DeviceLostUserdata : CallbackUserdata {
+    using CallbackUserdata::CallbackUserdata;
+
+    ObjectHandle device;
+};
+
 class Server : public ServerBase {
   public:
     Server(const DawnProcTable& procs,
@@ -220,6 +226,9 @@ class Server : public ServerBase {
                                  WGPURequestDeviceStatus status,
                                  WGPUDevice device,
                                  const char* message);
+    void OnDeviceLostCallback(DeviceLostUserdata* data,
+                              WGPUDeviceLostReason reason,
+                              const char* message);
 
 #include "dawn/wire/server/ServerPrototypes_autogen.inc"
 
