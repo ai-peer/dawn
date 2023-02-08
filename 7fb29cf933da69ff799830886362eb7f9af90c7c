@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fac24cf_5f0d72bd",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-08T01:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a650af19_6340af33",
+      "range": {
+        "startLine": 155,
+        "startChar": 44,
+        "endLine": 155,
+        "endChar": 56
+      },
+      "revId": "7fb29cf933da69ff799830886362eb7f9af90c7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aa382e3_6c179618",
@@ -88,6 +112,24 @@
       "writtenOn": "2023-02-07T15:46:44Z",
       "side": 1,
       "message": "existing nit: we should update our errors to match the current spec language.\n\".. cannot be recorded while %s is locked. %s is currently open.\"",
+      "revId": "7fb29cf933da69ff799830886362eb7f9af90c7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3302ab38_d7c7e8de",
+        "filename": "src/dawn/native/EncodingContext.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-08T01:22:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3aa382e3_6c179618",
       "revId": "7fb29cf933da69ff799830886362eb7f9af90c7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
