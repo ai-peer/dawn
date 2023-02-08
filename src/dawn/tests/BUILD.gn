@@ -708,6 +708,7 @@ dawn_test("dawn_perf_tests") {
     "perf_tests/DawnPerfTest.h",
     "perf_tests/DawnPerfTestPlatform.cpp",
     "perf_tests/DawnPerfTestPlatform.h",
+    "perf_tests/BindingsValidationPerf.cpp",
     "perf_tests/DrawCallPerf.cpp",
     "perf_tests/ShaderRobustnessPerf.cpp",
     "perf_tests/SubresourceTrackingPerf.cpp",
