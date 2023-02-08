@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b08d796d_9b43dfcc",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T12:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59e252f3_a52cbb0a",
+      "range": {
+        "startLine": 836,
+        "startChar": 31,
+        "endLine": 836,
+        "endChar": 39
+      },
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c44d4fe1_4cdb1e78",
@@ -88,6 +112,24 @@
       "writtenOn": "2023-02-08T04:15:15Z",
       "side": 1,
       "message": "Maybe:\n\n```\n/// - const ast::Node*\n///     One of\n///     - const ast::TypeDecl*\n///     - const ast::Variable*\n///     - const ast::Function*\n/// - sem::BuiltinType\n/// - type::Builtin\n```\n\nAs I was wondering why the variant only had 3 entries and this lists 5.",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a49f89_e54db466",
+        "filename": "src/tint/resolver/dependency_graph.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T12:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c44d4fe1_4cdb1e78",
       "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +151,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d820d12_d5033353",
+        "filename": "src/tint/resolver/dependency_graph.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T12:46:19Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/tint/issues/detail?id\u003d1834",
+      "parentUuid": "7782555e_33c0b657",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0257b0b_88cbce26",
@@ -122,6 +182,24 @@
       "writtenOn": "2023-02-08T04:15:15Z",
       "side": 1,
       "message": "Should we file a bug to rename this `identifier` and the few others below to `name` to be consistent?",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98dce6b8_b9a6ec10",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T12:46:19Z",
+      "side": 1,
+      "message": "`IdentifierExpression::identifier` might be a type, enum or variable. I think the field name is appropriate.",
+      "parentUuid": "b0257b0b_88cbce26",
       "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
