@@ -122,7 +122,7 @@ class DawnPerfTestWithParams : public DawnTestWithParams<Params>, public DawnPer
 
         wgpu::AdapterProperties properties;
         this->GetAdapter().GetProperties(&properties);
-        DAWN_TEST_UNSUPPORTED_IF(properties.adapterType == wgpu::AdapterType::CPU);
+        // DAWN_TEST_UNSUPPORTED_IF(properties.adapterType == wgpu::AdapterType::CPU);
     }
     ~DawnPerfTestWithParams() override = default;
 };
