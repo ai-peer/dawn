@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "742fc85e_38c1b974",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-08T19:57:53Z",
+      "side": 1,
+      "message": "to add, maxStorageBuffersPerShaderStage is 8 and maxStorageTexturesPerShaderStage is 4 - so even if the validation loop is O(n^2), it really won\u0027t be so bad.\n\nThe reduce step should be linear O(numBindings)",
+      "parentUuid": "69065b5a_3a2e6082",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d043620e_5e70145a",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 11
