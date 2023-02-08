@@ -65,6 +65,11 @@ typedef uint32_t {{c_prefix}}Flags;
     typedef struct {{as_cType(type.name)}}Impl* {{as_cType(type.name)}};
 {% endfor %}
 
+// Structure forward declarations
+{% for type in by_category["structure"] %}
+    struct {{as_cType(type.name)}};
+{% endfor %}
+
 {% for type in by_category["enum"] + by_category["bitmask"] %}
     typedef enum {{as_cType(type.name)}} {
         {% for value in type.values %}
@@ -77,6 +82,26 @@ typedef uint32_t {{c_prefix}}Flags;
     {% endif %}
 
 {% endfor -%}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+{% for type in by_category["function pointer"] %}
+    typedef {{as_cType(type.return_type.name)}} (*{{as_cType(type.name)}})(
+        {%- if type.arguments == [] -%}
+            void
+        {%- else -%}
+            {%- for arg in type.arguments -%}
+                {% if not loop.first %}, {% endif %}{% if arg.type.category == "structure" %}struct {% endif %}{{as_annotated_cType(arg)}}
+            {%- endfor -%}
+        {%- endif -%}
+    );
+{% endfor %}
+
+#ifdef __cplusplus
+} // extern "C"
+#endif
 
 typedef struct {{c_prefix}}ChainedStruct {
     struct {{c_prefix}}ChainedStruct const * next;
@@ -117,18 +142,6 @@ typedef struct {{c_prefix}}ChainedStructOut {
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-{% for type in by_category["function pointer"] %}
-    typedef {{as_cType(type.return_type.name)}} (*{{as_cType(type.name)}})(
-        {%- if type.arguments == [] -%}
-            void
-        {%- else -%}
-            {%- for arg in type.arguments -%}
-                {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
-            {%- endfor -%}
-        {%- endif -%}
-    );
-{% endfor %}
 
 #if !defined({{c_prefix}}_SKIP_PROCS)
 

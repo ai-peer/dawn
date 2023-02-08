@@ -25,8 +25,8 @@
 
 class RenderPipelineValidationTest : public ValidationTest {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
-        wgpu::DeviceDescriptor descriptor;
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::ShaderF16};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;
@@ -1519,8 +1519,8 @@ TEST_P(DeprecationTests, RenderPipelineColorAttachmentBytesPerSample) {
 
 class DepthClipControlValidationTest : public RenderPipelineValidationTest {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
-        wgpu::DeviceDescriptor descriptor;
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
         wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DepthClipControl};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeaturesCount = 1;

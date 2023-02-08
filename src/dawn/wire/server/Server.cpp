@@ -183,7 +183,7 @@ void Server::SetForwardingDeviceCallbacks(ObjectData<WGPUDevice>* deviceObject) 
 }
 
 void Server::ClearDeviceCallbacks(WGPUDevice device) {
-    // Un-set the error and lost callbacks since we cannot forward them
+    // Un-set the error callbacks since we cannot forward them
     // after the server has been destroyed.
     mProcs.deviceSetUncapturedErrorCallback(device, nullptr, nullptr);
     mProcs.deviceSetLoggingCallback(device, nullptr, nullptr);
