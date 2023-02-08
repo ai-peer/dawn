@@ -51,6 +51,7 @@
 #include "src/tint/ast/workgroup_attribute.h"
 #include "src/tint/resolver/uniformity.h"
 #include "src/tint/sem/break_if_statement.h"
+#include "src/tint/sem/builtin_enum_expression.h"
 #include "src/tint/sem/call.h"
 #include "src/tint/sem/for_loop_statement.h"
 #include "src/tint/sem/function.h"
@@ -91,6 +92,10 @@
 #include "src/tint/utils/string.h"
 #include "src/tint/utils/transform.h"
 #include "src/tint/utils/vector.h"
+
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::Access>);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::AddressSpace>);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::TexelFormat>);
 
 namespace tint::resolver {
 namespace {
@@ -343,6 +348,12 @@ type::Type* Resolver::Type(const ast::Type* ty) {
                         AddError("cannot use function '" + name + "' as type", ty->source);
                         AddNote("'" + name + "' declared here", func->Declaration()->source);
                         return nullptr;
+                    },
+                    [&](Default) {
+                        TINT_ICE(Resolver, builder_->Diagnostics())
+                            << "unhandled resolved node: "
+                            << (resolved_node ? resolved_node->TypeInfo().name : "<null>");
+                        return nullptr;
                     });
             }
 
@@ -351,15 +362,7 @@ type::Type* Resolver::Type(const ast::Type* ty) {
                 return BuiltinType(builtin_ty, t->name);
             }
 
-            if (auto builtin_fn = resolved->BuiltinFunction();
-                builtin_fn != sem::BuiltinType::kNone) {
-                auto name = builder_->Symbols().NameFor(t->name->symbol);
-                AddError("cannot use builtin '" + name + "' as type", ty->source);
-                return nullptr;
-            }
-
-            TINT_UNREACHABLE(Resolver, diagnostics_)
-                << "unhandled resolved identifier: " << *resolved;
+            AddError("cannot use " + utils::ToString(*resolved) + " as type", ty->source);
             return nullptr;
         });
 
@@ -2336,7 +2339,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             return ty ? ty_init_or_conv(ty) : nullptr;
         }
 
-        TINT_UNREACHABLE(Resolver, diagnostics_) << "unhandled resolved identifier: " << *resolved;
+        AddError("cannot use " + utils::ToString(*resolved) + " as call target", ident->source);
         return nullptr;
     }
 
@@ -2817,6 +2820,21 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
     if (resolved->BuiltinFunction() != sem::BuiltinType::kNone) {
         AddError("missing '(' for builtin function call", expr->source.End());
         return nullptr;
+    }
+
+    if (auto access = resolved->Access(); access != type::Access::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<type::Access>>(expr, current_statement_,
+                                                                          access);
+    }
+
+    if (auto addr = resolved->AddressSpace(); addr != type::AddressSpace::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<type::AddressSpace>>(
+            expr, current_statement_, addr);
+    }
+
+    if (auto fmt = resolved->TexelFormat(); fmt != type::TexelFormat::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<type::TexelFormat>>(
+            expr, current_statement_, fmt);
     }
 
     TINT_UNREACHABLE(Resolver, diagnostics_) << "unhandled resolved identifier: " << *resolved;

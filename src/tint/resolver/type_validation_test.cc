@@ -912,7 +912,31 @@ TEST_F(ResolverTypeValidationTest, BuiltinAsType) {
     GlobalVar("v", ty("max"), type::AddressSpace::kPrivate);
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "error: cannot use builtin 'max' as type");
+    EXPECT_EQ(r()->error(), "error: cannot use builtin function 'max' as type");
+}
+
+TEST_F(ResolverTypeValidationTest, AddressSpaceAsType) {
+    // var<private> v : workgroup;
+    GlobalVar("v", ty("workgroup"), type::AddressSpace::kPrivate);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "error: cannot use address space 'workgroup' as type");
+}
+
+TEST_F(ResolverTypeValidationTest, AccessAsType) {
+    // var<private> v : read_write;
+    GlobalVar("v", ty("read_write"), type::AddressSpace::kPrivate);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "error: cannot use access 'read_write' as type");
+}
+
+TEST_F(ResolverTypeValidationTest, TexelFormatAsType) {
+    // var<private> v : rgba8unorm;
+    GlobalVar("v", ty("rgba8unorm"), type::AddressSpace::kPrivate);
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "error: cannot use texel format 'rgba8unorm' as type");
 }
 
 namespace GetCanonicalTests {
