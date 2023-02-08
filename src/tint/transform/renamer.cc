@@ -1264,11 +1264,14 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
     // Identifiers that need to keep their symbols preserved.
     utils::Hashset<const ast::Identifier*, 8> preserved_identifiers;
 
-    auto is_type_short_name = [&](const Symbol& symbol) {
+    auto is_builtin_identifier = [&](const Symbol& symbol) {
         auto name = src->Symbols().NameFor(symbol);
-        if (type::ParseBuiltin(name) != type::Builtin::kUndefined) {
-            // Identifier *looks* like a builtin type, but check that the builtin type isn't being
-            // shadowed with a user declared type.
+        if (type::ParseBuiltin(name) != type::Builtin::kUndefined ||
+            type::ParseAddressSpace(name) != type::AddressSpace::kUndefined ||
+            type::ParseTexelFormat(name) != type::TexelFormat::kUndefined ||
+            type::ParseAccess(name) != type::Access::kUndefined) {
+            // Identifier *looks* like a builtin identifier, but check that the identifier isn't
+            // being shadowed with a user declared type.
             for (auto* decl : src->AST().TypeDecls()) {
                 if (decl->name->symbol == symbol) {
                     return false;
@@ -1294,32 +1297,15 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                     }
                 }
             },
-            [&](const ast::CallExpression* call) {
-                if (auto* ident = call->target.name) {
-                    Switch(
-                        src->Sem().Get(call)->UnwrapMaterialize()->As<sem::Call>()->Target(),
-                        [&](const sem::Builtin*) { preserved_identifiers.Add(ident); },
-                        [&](const sem::TypeConversion*) {
-                            if (is_type_short_name(ident->symbol)) {
-                                preserved_identifiers.Add(ident);
-                            }
-                        },
-                        [&](const sem::TypeInitializer*) {
-                            if (is_type_short_name(ident->symbol)) {
-                                preserved_identifiers.Add(ident);
-                            }
-                        });
-                }
-            },
             [&](const ast::DiagnosticAttribute* diagnostic) {
                 preserved_identifiers.Add(diagnostic->control.rule_name);
             },
             [&](const ast::DiagnosticDirective* diagnostic) {
                 preserved_identifiers.Add(diagnostic->control.rule_name);
             },
-            [&](const ast::TypeName* type_name) {
-                if (is_type_short_name(type_name->name->symbol)) {
-                    preserved_identifiers.Add(type_name->name);
+            [&](const ast::Identifier* identifier) {
+                if (is_builtin_identifier(identifier->symbol)) {
+                    preserved_identifiers.Add(identifier);
                 }
             });
     }
@@ -1348,7 +1334,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                                             name_in) &&
                         name_in.compare(0, 3, "gl_")) {
                         // No match, just reuse the original name.
-                        return ctx.dst->Symbols().New(name_in);
+                        return ctx.dst->Symbols().Register(name_in);
                     }
                     break;
                 case Target::kHlslKeywords:
@@ -1357,7 +1343,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                                                 sizeof(kReservedKeywordsHLSL) / sizeof(const char*),
                                             name_in)) {
                         // No match, just reuse the original name.
-                        return ctx.dst->Symbols().New(name_in);
+                        return ctx.dst->Symbols().Register(name_in);
                     }
                     break;
                 case Target::kMslKeywords:
@@ -1366,7 +1352,7 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
                                                 sizeof(kReservedKeywordsMSL) / sizeof(const char*),
                                             name_in)) {
                         // No match, just reuse the original name.
-                        return ctx.dst->Symbols().New(name_in);
+                        return ctx.dst->Symbols().Register(name_in);
                     }
                     break;
             }
@@ -1382,6 +1368,11 @@ Transform::ApplyResult Renamer::Apply(const Program* src,
             auto sym_in = ident->symbol;
             auto str = src->Symbols().NameFor(sym_in);
             auto sym_out = b.Symbols().Register(str);
+            if (auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>()) {
+                auto args = ctx.Clone(tmpl_ident->arguments);
+                return ctx.dst->create<ast::TemplatedIdentifier>(ctx.Clone(ident->source), sym_out,
+                                                                 std::move(args));
+            }
             return ctx.dst->create<ast::Identifier>(ctx.Clone(ident->source), sym_out);
         }
         return nullptr;  // Clone ident. Uses the symbol remapping above.

@@ -1064,26 +1064,26 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
 
 namespace StorageTextureTests {
 struct DimensionParams {
-    type::TextureDimension dim;
+    const char* name;
     bool is_valid;
 };
 
 static constexpr DimensionParams Dimension_cases[] = {
-    DimensionParams{type::TextureDimension::k1d, true},
-    DimensionParams{type::TextureDimension::k2d, true},
-    DimensionParams{type::TextureDimension::k2dArray, true},
-    DimensionParams{type::TextureDimension::k3d, true},
-    DimensionParams{type::TextureDimension::kCube, false},
-    DimensionParams{type::TextureDimension::kCubeArray, false}};
+    DimensionParams{"texture_storage_1d", true},
+    DimensionParams{"texture_storage_2d", true},
+    DimensionParams{"texture_storage_2d_array", true},
+    DimensionParams{"texture_storage_3d", true},
+    DimensionParams{"texture_storage_cube", false},
+    DimensionParams{"texture_storage_cube_array", false}};
 
 using StorageTextureDimensionTest = ResolverTestWithParam<DimensionParams>;
 TEST_P(StorageTextureDimensionTest, All) {
     // @group(0) @binding(0)
-    // var a : texture_storage_*<ru32int, write>;
+    // var a : texture_storage_*<r32uint, write>;
     auto& params = GetParam();
 
-    auto* st = ty.storage_texture(Source{{12, 34}}, params.dim, type::TexelFormat::kR32Uint,
-                                  type::Access::kWrite);
+    auto* st = ty(Source{{12, 34}}, params.name, utils::ToString(type::TexelFormat::kR32Uint),
+                  utils::ToString(type::Access::kWrite));
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
@@ -1091,8 +1091,7 @@ TEST_P(StorageTextureDimensionTest, All) {
         EXPECT_TRUE(r()->Resolve()) << r()->error();
     } else {
         EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(r()->error(),
-                  "12:34 error: cube dimensions for storage textures are not supported");
+        EXPECT_EQ(r()->error(), "12:34 error: unknown type: '" + std::string(params.name) + "'");
     }
 }
 INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
@@ -1165,22 +1164,33 @@ INSTANTIATE_TEST_SUITE_P(ResolverTypeValidationTest,
 
 using StorageTextureAccessTest = ResolverTest;
 
-TEST_F(StorageTextureAccessTest, MissingAccess_Fail) {
+TEST_F(StorageTextureAccessTest, MissingTemplates) {
     // @group(0) @binding(0)
-    // var a : texture_storage_1d<ru32int>;
+    // var a : texture_storage_1d<r32uint>;
 
-    auto* st = ty.storage_texture(Source{{12, 34}}, type::TextureDimension::k1d,
-                                  type::TexelFormat::kR32Uint, type::Access::kUndefined);
+    auto* st = ty(Source{{12, 34}}, "texture_storage_1d");
 
     GlobalVar("a", st, Group(0_a), Binding(0_a));
 
     EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(), "12:34 error: storage texture missing access control");
+    EXPECT_EQ(r()->error(), "12:34 error: expected '<' for 'texture_storage_1d'");
+}
+
+TEST_F(StorageTextureAccessTest, MissingAccess_Fail) {
+    // @group(0) @binding(0)
+    // var a : texture_storage_1d<r32uint>;
+
+    auto* st = ty(Source{{12, 34}}, "texture_storage_1d", "r32uint");
+
+    GlobalVar("a", st, Group(0_a), Binding(0_a));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), R"(12:34 error: 'texture_storage_1d' requires 2 template arguments)");
 }
 
 TEST_F(StorageTextureAccessTest, RWAccess_Fail) {
     // @group(0) @binding(0)
-    // var a : texture_storage_1d<ru32int, read_write>;
+    // var a : texture_storage_1d<r32uint, read_write>;
 
     auto* st = ty.storage_texture(Source{{12, 34}}, type::TextureDimension::k1d,
                                   type::TexelFormat::kR32Uint, type::Access::kReadWrite);
@@ -1194,7 +1204,7 @@ TEST_F(StorageTextureAccessTest, RWAccess_Fail) {
 
 TEST_F(StorageTextureAccessTest, ReadOnlyAccess_Fail) {
     // @group(0) @binding(0)
-    // var a : texture_storage_1d<ru32int, read>;
+    // var a : texture_storage_1d<r32uint, read>;
 
     auto* st = ty.storage_texture(Source{{12, 34}}, type::TextureDimension::k1d,
                                   type::TexelFormat::kR32Uint, type::Access::kRead);
@@ -1208,7 +1218,7 @@ TEST_F(StorageTextureAccessTest, ReadOnlyAccess_Fail) {
 
 TEST_F(StorageTextureAccessTest, WriteOnlyAccess_Pass) {
     // @group(0) @binding(0)
-    // var a : texture_storage_1d<ru32int, write>;
+    // var a : texture_storage_1d<r32uint, write>;
 
     auto* st = ty.storage_texture(type::TextureDimension::k1d, type::TexelFormat::kR32Uint,
                                   type::Access::kWrite);
