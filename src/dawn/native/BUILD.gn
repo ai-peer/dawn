@@ -355,6 +355,8 @@ source_set("sources") {
     "VertexFormat.h",
     "VisitableMembers.h",
     "dawn_platform.h",
+    "error/DeviceError.cpp",
+    "error/DeviceError.h",
     "stream/BlobSource.cpp",
     "stream/BlobSource.h",
     "stream/ByteVectorSink.cpp",
