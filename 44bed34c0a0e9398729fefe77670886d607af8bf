@@ -202,6 +202,24 @@
       "parentUuid": "b0257b0b_88cbce26",
       "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fb64790_dc8ee40d",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T14:59:10Z",
+      "side": 1,
+      "message": "Does that mean that the `name` fields are then needing updated? `GlobalVarSampledTexElemType` is a `name` but could be any of those things so should be `identifier`?",
+      "parentUuid": "98dce6b8_b9a6ec10",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
