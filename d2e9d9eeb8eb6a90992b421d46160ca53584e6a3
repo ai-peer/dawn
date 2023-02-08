@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a20666_ae71d2a6",
+        "filename": "src/tint/ast/test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T23:31:32Z",
+      "side": 1,
+      "message": "It\u0027s fairly clear which one you are calling, as the caller will have `ast::Template(...)` in the signature for the templated overload. No need to repeat `Template` IMO.",
+      "parentUuid": "ae2a7fff_ee8c3a1d",
+      "revId": "d2e9d9eeb8eb6a90992b421d46160ca53584e6a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "999070ed_5179e080",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-08T21:45:14Z",
       "side": 1,
       "message": "Why not just `for(auto i \u003d 0; i \u003c got-\u003earguments.Length(); i++)` ? Why the lambda and std::apply?",
+      "revId": "d2e9d9eeb8eb6a90992b421d46160ca53584e6a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd537ca_bc65607f",
+        "filename": "src/tint/ast/test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T23:31:32Z",
+      "side": 1,
+      "message": "A dynamic loop is statically typed. with `std::visit()`, `check_arg` is called with each of the values in the tuple `expected`, each of which can be a different type.",
+      "parentUuid": "999070ed_5179e080",
       "revId": "d2e9d9eeb8eb6a90992b421d46160ca53584e6a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
