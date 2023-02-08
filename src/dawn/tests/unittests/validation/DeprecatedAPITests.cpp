@@ -20,9 +20,8 @@
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-WGPUDevice DeprecationTests::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
-    wgpu::DeviceDescriptor descriptor = {};
-
+WGPUDevice DeprecationTests::CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                              wgpu::DeviceDescriptor descriptor) {
     wgpu::DawnTogglesDescriptor deviceTogglesDesc = {};
     const char* enabledToggles[1] = {kDisallowDeprecatedAPIsToggleName};
     deviceTogglesDesc.enabledToggles = enabledToggles;
