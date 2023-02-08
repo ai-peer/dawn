@@ -16,6 +16,261 @@
       "message": "(adding myself so I don\u0027t forget)",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62d754ee_3e0e1519",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "I\u0027m surprised at how small the Dawn backend can be, that\u0027s kinda cool 😄",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9d67016_dce8d675",
+        "filename": "src/dawn/native/emulator/BackendEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a678ada0_66e13691",
+        "filename": "src/dawn/native/emulator/BindGroupEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: Dawn tends to have all implementations in .cpp files by default to minimize compile times.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff63b047_c70bc8d8",
+        "filename": "src/dawn/native/emulator/BufferEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "We could use new (std::no_throw) to lift this limit. It would require a tint::interp::Memory::Create(size) -\u003e std::unique_ptr\u003cMemory\u003e and replacing the vector in Memory with void* + size.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d2b50ea_b2c22340",
+        "filename": "src/dawn/native/emulator/BufferEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: Get() is a bit generic and looks very much like Ref\u003cBuffer\u003e.Get() maybe GetMemory()?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81283a0c_c06e884b",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: Can we use the ::Create pattern from other backends just for consistency given that this class is implemented in the backend? Same for other classes implemented in the backend.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6db99d34_86c6055b",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "I\u0027m surprised that this doesn\u0027t fail tests. It could be implemented by setting a new mCompletedSerial in emulator::Device to GetPendingCommandSerial() in Tick() and Queue::Submit().",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752a1e92_06f654ff",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: Things are executed immediately so this can be return {};",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4a47a2_57048ee0",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: We could split to ExecuteCommandBuffer and ExecuteComputePass to dedent things a bit and have state be more local to a pass.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c1adeb4_0e540c56",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aaae9bc_a2896390",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "It would be nice to keep the typed integer as long as we can. Could the arrays above use ityp::array?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dfb5fee_d6bff8b4",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "optional nit: This puts an empty std::vector? Weird but ok, I\u0027ve just never seen that before. currentDynamicOffsets[i].clear() maybe?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "466d138d_190b7901",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit weird that just creating the drd or the debugger registers them with the shader executor.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecbea19c_d86bc3bf",
+        "filename": "src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "Not sure about these, most tests use render pipelines :) If this is used to check the interpreter correctly runs compute pipelines, maybe there can be an explicit list of tests to run to start?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d24dcf0_b742e5f5",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "nit: we could have template\u003ctypename T\u003e Load(T* value, offset) {Load(value, offset, sizeof(T))} to avoid hardcoding 4 at [1]",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -34,6 +34,24 @@
       "parentUuid": "f76303ca_73f37f9f",
       "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619d6c2d_04f0f68b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T15:46:16Z",
+      "side": 1,
+      "message": "software? This enum is synchronized with the upstream webgpu.h and I think it makes sense to say there could be a software backend and Dawn\u0027s happen to run DRD and other stuff.",
+      "parentUuid": "f76303ca_73f37f9f",
+      "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
