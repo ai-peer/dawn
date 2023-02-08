@@ -21,6 +21,7 @@
 #include "gmock/gmock.h"
 #include "src/tint/transform/test_helper.h"
 #include "src/tint/type/builtin.h"
+#include "src/tint/type/texel_format.h"
 
 namespace tint::transform {
 namespace {
@@ -1502,7 +1503,7 @@ INSTANTIATE_TEST_SUITE_P(
         // "while"  // WGSL reserved keyword
         kUnicodeIdentifier));
 
-const char* ExpandBuiltinType(std::string_view name) {
+std::string ExpandBuiltinType(std::string_view name) {
     if (name == "mat2x2f") {
         return "mat2x2<f32>";
     }
@@ -1593,13 +1594,12 @@ const char* ExpandBuiltinType(std::string_view name) {
     if (name == "vec4u") {
         return "vec4<u32>";
     }
-    ADD_FAILURE() << "unhandled type: " << name;
-    return "<invalid>";
+    return std::string(name);
 }
 
-/// @return WGSL type names that aren't keywords
-std::vector<const char*> NonKeywordTypes() {
-    std::unordered_set<std::string> keywords{
+/// @return all the identifiers parsed as keywords
+std::unordered_set<std::string> Keywords() {
+    return {
         "bool",
         "f16",
         "f32",
@@ -1612,20 +1612,29 @@ std::vector<const char*> NonKeywordTypes() {
         "texture_depth_cube",
         "texture_depth_multisampled_2d",
         "texture_external",
+        "texture_storage_1d",
+        "texture_storage_2d",
+        "texture_storage_2d_array",
+        "texture_storage_3d",
         "u32",
     };
+}
+
+/// @return WGSL builtin types that aren't keywords
+std::vector<const char*> NonKeywordBuiltinTypes() {
+    auto keywords = Keywords();
     std::vector<const char*> out;
-    for (auto* type_name : type::kBuiltinStrings) {
-        if (!keywords.count(type_name)) {
-            out.push_back(type_name);
+    for (auto* ident : type::kBuiltinStrings) {
+        if (!keywords.count(ident)) {
+            out.push_back(ident);
         }
     }
     return out;
 }
 
-using RenamerTypeBuiltinTypesTest = TransformTestWithParam<const char*>;
+using RenamerBuiltinTypeTest = TransformTestWithParam<const char*>;
 
-TEST_P(RenamerTypeBuiltinTypesTest, PreserveTypeUsage) {
+TEST_P(RenamerBuiltinTypeTest, PreserveTypeUsage) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
         out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
@@ -1666,7 +1675,7 @@ struct tint_symbol_5 {
 
     EXPECT_EQ(expect, str(got));
 }
-TEST_P(RenamerTypeBuiltinTypesTest, PreserveTypeInitializer) {
+TEST_P(RenamerBuiltinTypeTest, PreserveTypeInitializer) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
         out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
@@ -1696,7 +1705,7 @@ fn tint_symbol() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_P(RenamerTypeBuiltinTypesTest, PreserveTypeConversion) {
+TEST_P(RenamerBuiltinTypeTest, PreserveTypeConversion) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
         out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
@@ -1726,7 +1735,7 @@ fn tint_symbol() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_P(RenamerTypeBuiltinTypesTest, RenameShadowedByAlias) {
+TEST_P(RenamerBuiltinTypeTest, RenameShadowedByAlias) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
         out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
@@ -1756,7 +1765,7 @@ fn tint_symbol_1() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_P(RenamerTypeBuiltinTypesTest, RenameShadowedByStruct) {
+TEST_P(RenamerBuiltinTypeTest, RenameShadowedByStruct) {
     auto expand = [&](const char* source) {
         auto out = utils::ReplaceAll(source, "$name", GetParam());
         out = utils::ReplaceAll(out, "$type", ExpandBuiltinType(GetParam()));
@@ -1792,9 +1801,68 @@ fn tint_symbol_2() {
     EXPECT_EQ(expect, str(got));
 }
 
-INSTANTIATE_TEST_SUITE_P(RenamerTypeBuiltinTypesTest,
-                         RenamerTypeBuiltinTypesTest,
-                         testing::ValuesIn(NonKeywordTypes()));
+INSTANTIATE_TEST_SUITE_P(RenamerBuiltinTypeTest,
+                         RenamerBuiltinTypeTest,
+                         testing::ValuesIn(NonKeywordBuiltinTypes()));
+
+/// @return WGSL builtin identifiers keywords
+std::vector<const char*> NonKeywordIdentifiers() {
+    auto keywords = Keywords();
+    std::vector<const char*> out;
+    for (auto* ident : type::kBuiltinStrings) {
+        if (!keywords.count(ident)) {
+            out.push_back(ident);
+        }
+    }
+    for (auto* ident : type::kAddressSpaceStrings) {
+        if (!keywords.count(ident)) {
+            out.push_back(ident);
+        }
+    }
+    for (auto* ident : type::kTexelFormatStrings) {
+        if (!keywords.count(ident)) {
+            out.push_back(ident);
+        }
+    }
+    for (auto* ident : type::kAccessStrings) {
+        if (!keywords.count(ident)) {
+            out.push_back(ident);
+        }
+    }
+    return out;
+}
+
+using RenamerBuiltinIdentifierTest = TransformTestWithParam<const char*>;
+
+TEST_P(RenamerBuiltinIdentifierTest, GlobalVarName) {
+    auto expand = [&](const char* source) {
+        return utils::ReplaceAll(source, "$name", GetParam());
+    };
+
+    auto src = expand(R"(
+var<private> $name = 42;
+
+fn f() {
+  var v = $name;
+}
+)");
+
+    auto expect = expand(R"(
+var<private> tint_symbol = 42;
+
+fn f() {
+  var v = tint_symbol;
+}
+)");
+
+    auto got = Run<Renamer>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+INSTANTIATE_TEST_SUITE_P(RenamerBuiltinIdentifierTest,
+                         RenamerBuiltinIdentifierTest,
+                         testing::ValuesIn(NonKeywordIdentifiers()));
 
 }  // namespace
 }  // namespace tint::transform

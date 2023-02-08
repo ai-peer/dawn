@@ -40,7 +40,6 @@
 #include "src/tint/ast/pointer.h"
 #include "src/tint/ast/return_statement.h"
 #include "src/tint/ast/sampled_texture.h"
-#include "src/tint/ast/storage_texture.h"
 #include "src/tint/ast/switch_statement.h"
 #include "src/tint/ast/traverse_expressions.h"
 #include "src/tint/ast/type_name.h"
@@ -308,21 +307,8 @@ type::Type* Resolver::Type(const ast::Type* ty) {
             }
             return nullptr;
         },
-        [&](const ast::StorageTexture* t) -> type::StorageTexture* {
-            if (auto* el = Type(t->type)) {
-                if (!validator_.StorageTexture(t)) {
-                    return nullptr;
-                }
-                return builder_->create<type::StorageTexture>(t->dim, t->format, t->access, el);
-            }
-            return nullptr;
-        },
         [&](const ast::TypeName* t) -> type::Type* {
             Mark(t->name);
-
-            if (t->name->Is<ast::TemplatedIdentifier>()) {
-                TINT_UNREACHABLE(Resolver, diagnostics_) << "TODO(crbug.com/tint/1810)";
-            }
 
             auto resolved = dependencies_.resolved_identifiers.Get(t->name);
             if (!resolved) {
@@ -338,6 +324,14 @@ type::Type* Resolver::Type(const ast::Type* ty) {
                     ErrorMismatchedResolvedIdentifier(t->source, *resolved, "type");
                     return nullptr;
                 }
+
+                if (auto* tmpl_ident = t->name->As<ast::TemplatedIdentifier>(); TINT_UNLIKELY(tmpl_ident)) {
+                    AddError(
+                        "'" + builder_->Symbols().NameFor(t->name->symbol) + "' is not templated",
+                        Source{tmpl_ident->source.range.end});
+                    return nullptr;
+                }
+
                 return type;
             }
             if (auto b = resolved->BuiltinType(); b != type::Builtin::kUndefined) {
@@ -2427,7 +2421,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     return call;
 }
 
-type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifier* ident) const {
+type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifier* ident) {
     auto& b = *builder_;
 
     auto f32 = [&] { return b.create<type::F32>(); };
@@ -2441,6 +2435,41 @@ type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifie
     };
     auto mat = [&](type::Type* el, uint32_t num_columns, uint32_t num_rows) {
         return el ? b.create<type::Matrix>(vec(el, num_rows), num_columns) : nullptr;
+    };
+    auto templated_identifier = [&](size_t num_args) -> const ast::TemplatedIdentifier* {
+        auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
+        if (TINT_UNLIKELY(!tmpl_ident)) {
+            AddError("expected '<' for '" + b.Symbols().NameFor(ident->symbol) + "'",
+                     Source{ident->source.range.end});
+            return nullptr;
+        }
+        if (TINT_UNLIKELY(tmpl_ident->arguments.Length() != num_args)) {
+            AddError("'" + b.Symbols().NameFor(ident->symbol) + "' requires " +
+                         std::to_string(num_args) + " template arguments",
+                     ident->source);
+            return nullptr;
+        }
+        return tmpl_ident;
+    };
+    auto storage_texture = [&](type::TextureDimension dim) -> type::StorageTexture* {
+        auto* tmpl_ident = templated_identifier(2);
+        if (TINT_UNLIKELY(!tmpl_ident)) {
+            return nullptr;
+        }
+        auto* format = sem_.AsTexelFormat(Expression(tmpl_ident->arguments[0]));
+        if (TINT_UNLIKELY(!format)) {
+            return nullptr;
+        }
+        auto* access = sem_.AsAccess(Expression(tmpl_ident->arguments[1]));
+        if (TINT_UNLIKELY(!access)) {
+            return nullptr;
+        }
+        auto* subtype = type::StorageTexture::SubtypeFor(format->Value(), builder_->Types());
+        auto* tex = b.create<type::StorageTexture>(dim, format->Value(), access->Value(), subtype);
+        if (!validator_.StorageTexture(tex, ident->source)) {
+            return nullptr;
+        }
+        return tex;
     };
 
     switch (builtin_ty) {
@@ -2530,6 +2559,14 @@ type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifie
             return builder_->create<type::DepthMultisampledTexture>(type::TextureDimension::k2d);
         case type::Builtin::kTextureExternal:
             return builder_->create<type::ExternalTexture>();
+        case type::Builtin::kTextureStorage1D:
+            return storage_texture(type::TextureDimension::k1d);
+        case type::Builtin::kTextureStorage2D:
+            return storage_texture(type::TextureDimension::k2d);
+        case type::Builtin::kTextureStorage2DArray:
+            return storage_texture(type::TextureDimension::k2dArray);
+        case type::Builtin::kTextureStorage3D:
+            return storage_texture(type::TextureDimension::k3d);
         case type::Builtin::kUndefined:
             break;
     }
@@ -2538,6 +2575,41 @@ type::Type* Resolver::BuiltinType(type::Builtin builtin_ty, const ast::Identifie
     TINT_ICE(Resolver, diagnostics_) << ident->source << " unhandled builtin type '" << name << "'";
     return nullptr;
 }
+
+// const type::Type* Resolver::StorageTextureSubtype(type::TexelFormat format) {
+//     switch (format) {
+//         case type::TexelFormat::kR32Uint:
+//         case type::TexelFormat::kRgba8Uint:
+//         case type::TexelFormat::kRg32Uint:
+//         case type::TexelFormat::kRgba16Uint:
+//         case type::TexelFormat::kRgba32Uint: {
+//             return builder_.create<type::U32>();;
+//         }
+//
+//         case type::TexelFormat::kR32Sint:
+//         case type::TexelFormat::kRgba8Sint:
+//         case type::TexelFormat::kRg32Sint:
+//         case type::TexelFormat::kRgba16Sint:
+//         case type::TexelFormat::kRgba32Sint: {
+//             return builder_.create<type::I32>();;
+//         }
+//
+//         case type::TexelFormat::kBgra8Unorm:
+//         case type::TexelFormat::kRgba8Unorm:
+//         case type::TexelFormat::kRgba8Snorm:
+//         case type::TexelFormat::kR32Float:
+//         case type::TexelFormat::kRg32Float:
+//         case type::TexelFormat::kRgba16Float:
+//         case type::TexelFormat::kRgba32Float: {
+//             return builder_.create<type::F32>();;
+//         }
+//
+//         case type::TexelFormat::kUndefined:
+//             break;
+//     }
+//
+//     return nullptr;
+// }
 
 void Resolver::CollectTextureSamplerPairs(
     const sem::Builtin* builtin,
