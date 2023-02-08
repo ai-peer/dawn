@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69065b5a_3a2e6082",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-08T18:43:17Z",
+      "side": 1,
+      "message": "that gave me an idea\n\nright now we have an algorithm that is O(bufferCount^2).\n\nwe could do slightly better to make it O(storageBufferCount^2)\n\n\nby first compacting the get just the list of storage buffer bindings, and iterating only over those.\n\n```\nstd::vector\u003cstd::pair\u003cBindGroupIndex, BindingIndex\u003e\u003e bindingsToCheck;\nfor (BindGroupIndex group : IterateBitSet(pipelineLayout-\u003eGetBindGroupLayoutsMask())) {\n  for (BindingIndex bindingIndex{0}; bindingIndex \u003c currentBGL-\u003eGetBufferCount();\n             ++bindingIndex) {\n    if (storage) {\n      bindingsToCheck.emplace_back(group, bindingIndex);\n    }\n  }\n}\n\nfor (i \u003d 0; i \u003c bindingsToCheck.size(); ++i) {\n  for (j \u003d i + 1; j \u003c bindingsToCheck.size(); ++j) {\n    // check i and j don\u0027t conflict\n  }\n}\n\n```\n\nthis also easily extends to storage textures\n\nand, I think it\u0027s simpler to understand looking at all pairs inside a single vector instead of the iteration over the mask twice.",
+      "parentUuid": "b6c2761e_38d1530a",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d043620e_5e70145a",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 11
