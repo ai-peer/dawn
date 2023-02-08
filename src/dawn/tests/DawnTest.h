@@ -596,6 +596,9 @@ class DawnTestBase {
     // the client first push the key into this queue, which is then consumed by the server.
     std::queue<std::string> mNextIsolationKeyQueue;
 
+    // Stores unique userdata values passed to deviceLostUserdata.
+    std::vector<size_t> mUserdataStore;
+
     // Internal device creation function for default device creation with some optional overrides.
     WGPUDevice CreateDeviceImpl(std::string isolationKey, const WGPUDeviceDescriptor* descriptor);
 
