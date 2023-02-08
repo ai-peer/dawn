@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "506e986f_fee4a525",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-08T18:02:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ef9ee3d2fda58cd5304748f5f0f9660b9dbe823",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f70f547c_43a57254",
         "filename": "dawn.json",
         "patchSetId": 1
