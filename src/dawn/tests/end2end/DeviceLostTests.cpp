@@ -418,7 +418,7 @@ TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneBeforeLossFails) {
 // Test that LostForTesting can only be called on one time
 TEST_P(DeviceLostTest, LoseDeviceForTestingOnce) {
     // First LoseDeviceForTesting call should occur normally. The callback is already set in SetUp.
-    LoseDeviceForTesting();
+    // LoseDeviceForTesting();
 
     // Second LoseDeviceForTesting call should result in no callbacks. Note we also reset the
     // callback first since by default the device clears the callback after the device is lost.

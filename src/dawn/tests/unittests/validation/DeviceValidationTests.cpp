@@ -47,8 +47,18 @@ class RequestDeviceValidationTest : public ValidationTest {
                                          void* userdata) {
         wgpu::Device device = wgpu::Device::Acquire(cDevice);
         EXPECT_EQ(status, WGPURequestDeviceStatus_Error);
-        EXPECT_EQ(device, nullptr);
+        // A device which is already lost should be returned.
+        EXPECT_NE(device, nullptr);
         EXPECT_STRNE(message, nullptr);
+
+        if (device != nullptr) {
+            // FIXME: Check to ensure that device lost is called.
+        }
+
+        if (userdata != nullptr) {
+            CallCheckDevice(static_cast<std::function<void(wgpu::Device)>*>(userdata),
+                            std::move(device));
+        }
     }
 
     template <typename F>

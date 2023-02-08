@@ -52,6 +52,7 @@
 #include "dawn/native/SwapChain.h"
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/native/error/DeviceError.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -225,6 +226,20 @@ DeviceBase::~DeviceBase() {
     if (mAdapter != nullptr) {
         mAdapter->GetInstance()->DecrementDeviceCountForTesting();
     }
+}
+
+Ref<DeviceBase> DeviceBase::MakeError(AdapterBase* adapter, const DeviceDescriptor* descriptor) {
+    Ref<error::Device> errorDevice = error::Device::Create(adapter, descriptor);
+
+    // error devices should never error during initialization.
+    MaybeError maybeError = errorDevice->Initialize();
+    DAWN_ASSERT(!maybeError.IsError());
+
+    // Lose the device immediately.
+    errorDevice->HandleError(InternalErrorType::DeviceLost, "Device creation failed");
+
+    // Return the lost device.
+    return errorDevice;
 }
 
 MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
@@ -573,14 +588,21 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
 }
 
 void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
+    if (IsLost()) {
+        // If the device has already been lost at the time the callback is set, which will most
+        // commonly happen when requestDevice fails, call the callback immediately.
+        if (callback) {
+            callback(WGPUDeviceLostReason_Undefined,
+                     "Device was lost prior to the callback being set.", userdata);
+        }
+        return;
+    }
+
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
     // callback tasks to guarantee we are never going to use the previous callback after
     // this call.
-    if (IsLost()) {
-        return;
-    }
     FlushCallbackTaskQueue();
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
@@ -770,9 +792,11 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         result = *iter;
     } else {
         DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-        result->SetIsCachedReference();
-        result->SetContentHash(blueprintHash);
-        mCaches->bindGroupLayouts.insert(result.Get());
+        if (!result->IsError()) {
+            result->SetIsCachedReference();
+            result->SetContentHash(blueprintHash);
+            mCaches->bindGroupLayouts.insert(result.Get());
+        }
     }
 
     return std::move(result);
