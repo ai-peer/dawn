@@ -37,36 +37,48 @@ type::Type* SemHelper::TypeOf(const ast::Expression* expr) const {
     return sem ? const_cast<type::Type*>(sem->Type()) : nullptr;
 }
 
-void SemHelper::ErrorExpectedValueExpr(const sem::Expression* expr) const {
+void SemHelper::ErrorUnexpectedExprKind(const sem::Expression* expr,
+                                        std::string_view wanted) const {
     Switch(
         expr,  //
         [&](const sem::TypeExpression* ty_expr) {
             auto name = ty_expr->Type()->FriendlyName(builder_->Symbols());
-            AddError("cannot use type '" + name + "' as value", ty_expr->Declaration()->source);
-            if (auto* ident = ty_expr->Declaration()->As<ast::IdentifierExpression>()) {
-                AddNote("are you missing '()' for type initializer?",
-                        Source{{ident->source.range.end}});
-            }
-            if (auto* str = ty_expr->Type()->As<type::Struct>()) {
-                AddNote("'" + name + "' declared here", str->Source());
-            }
+            AddError("cannot use type '" + name + "' as " + std::string(wanted),
+                     ty_expr->Declaration()->source);
         },
         [&](const sem::BuiltinEnumExpression<type::Access>* access) {
-            AddError("cannot use access '" + utils::ToString(access->Value()) + "' as value",
+            AddError("cannot use access '" + utils::ToString(access->Value()) + "' as " +
+                         std::string(wanted),
                      access->Declaration()->source);
         },
         [&](const sem::BuiltinEnumExpression<type::AddressSpace>* addr) {
-            AddError("cannot use address space '" + utils::ToString(addr->Value()) + "' as value",
+            AddError("cannot use address space '" + utils::ToString(addr->Value()) + "' as " +
+                         std::string(wanted),
                      addr->Declaration()->source);
         },
         [&](const sem::BuiltinEnumExpression<type::TexelFormat>* fmt) {
-            AddError("cannot use texel format '" + utils::ToString(fmt->Value()) + "' as value",
+            AddError("cannot use texel format '" + utils::ToString(fmt->Value()) + "' as " +
+                         std::string(wanted),
                      fmt->Declaration()->source);
         },
         [&](Default) {
             TINT_ICE(Resolver, builder_->Diagnostics())
                 << "unhandled sem::Expression type: " << (expr ? expr->TypeInfo().name : "<null>");
         });
+}
+
+void SemHelper::ErrorExpectedValueExpr(const sem::Expression* expr) const {
+    ErrorUnexpectedExprKind(expr, "value");
+    if (auto* ty_expr = expr->As<sem::TypeExpression>()) {
+        if (auto* ident = ty_expr->Declaration()->As<ast::IdentifierExpression>()) {
+            AddNote("are you missing '()' for type initializer?",
+                    Source{{ident->source.range.end}});
+        }
+        if (auto* str = ty_expr->Type()->As<type::Struct>()) {
+            AddNote("'" + str->FriendlyName(builder_->Symbols()) + "' declared here",
+                    str->Source());
+        }
+    }
 }
 
 void SemHelper::AddError(const std::string& msg, const Source& source) const {
