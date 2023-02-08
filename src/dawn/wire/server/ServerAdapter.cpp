@@ -56,51 +56,48 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     cmd.status = status;
     cmd.message = message;
 
-    if (status != WGPURequestDeviceStatus_Success) {
-        // Free the ObjectId which will make it unusable.
-        DeviceObjects().Free(data->deviceObjectId);
-        ASSERT(device == nullptr);
-        SerializeCommand(cmd);
-        return;
-    }
+    // Even when there's an error, an ErrorDevice should be returned.
+    ASSERT(device != nullptr);
 
-    std::vector<WGPUFeatureName> features;
-
-    size_t featuresCount = mProcs.deviceEnumerateFeatures(device, nullptr);
-    features.resize(featuresCount);
-    mProcs.deviceEnumerateFeatures(device, features.data());
-
-    // The client should only be able to request supported features, so all enumerated
-    // features that were enabled must also be supported by the wire.
-    // Note: We fail the callback here, instead of immediately upon receiving
-    // the request to preserve callback ordering.
-    for (WGPUFeatureName f : features) {
-        if (!IsFeatureSupported(f)) {
-            // Release the device.
-            mProcs.deviceRelease(device);
-            // Free the ObjectId which will make it unusable.
-            DeviceObjects().Free(data->deviceObjectId);
-
-            cmd.status = WGPURequestDeviceStatus_Error;
-            cmd.message = "Requested feature not supported.";
-            SerializeCommand(cmd);
-            return;
-        }
-    }
-
-    cmd.featuresCount = static_cast<uint32_t>(features.size());
-    cmd.features = features.data();
-
-    WGPUSupportedLimits limits = {};
-    mProcs.deviceGetLimits(device, &limits);
-    cmd.limits = &limits;
-
-    // Assign the handle and allocated status if the device is created successfully.
+    // Assign the handle and allocated status.
     auto* deviceObject = DeviceObjects().FillReservation(data->deviceObjectId, device);
     ASSERT(deviceObject != nullptr);
     deviceObject->info->server = this;
     deviceObject->info->self = ObjectHandle{data->deviceObjectId, deviceObject->generation};
     SetForwardingDeviceCallbacks(deviceObject);
+
+    std::vector<WGPUFeatureName> features;
+    if (status == WGPURequestDeviceStatus_Success) {
+        size_t featuresCount = mProcs.deviceEnumerateFeatures(device, nullptr);
+        features.resize(featuresCount);
+        mProcs.deviceEnumerateFeatures(device, features.data());
+
+        // The client should only be able to request supported features, so all enumerated
+        // features that were enabled must also be supported by the wire.
+        // Note: We fail the callback here, instead of immediately upon receiving
+        // the request to preserve callback ordering.
+        for (WGPUFeatureName f : features) {
+            if (!IsFeatureSupported(f)) {
+                // Destroy the device to call the lost callback.
+                mProcs.deviceDestroy(device);
+
+                // Change the status to Error.
+                cmd.status = WGPURequestDeviceStatus_Error;
+                cmd.message = "Requested feature not supported.";
+                break;
+            }
+        }
+
+        // Only set the features if all features were supported.
+        if (cmd.status == WGPURequestDeviceStatus_Success) {
+            cmd.featuresCount = static_cast<uint32_t>(features.size());
+            cmd.features = features.data();
+
+            WGPUSupportedLimits limits = {};
+            mProcs.deviceGetLimits(device, &limits);
+            cmd.limits = &limits;
+        }
+    }
 
     SerializeCommand(cmd);
 }
