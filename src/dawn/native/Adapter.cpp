@@ -172,9 +172,10 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
     auto result = CreateDevice(descriptor);
     if (result.IsError()) {
         std::unique_ptr<ErrorData> errorData = result.AcquireError();
+        Ref<DeviceBase> device = DeviceBase::MakeError(this, descriptor);
         // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-        callback(WGPURequestDeviceStatus_Error, nullptr, errorData->GetFormattedMessage().c_str(),
-                 userdata);
+        callback(WGPURequestDeviceStatus_Error, ToAPI(device.Detach()),
+                 errorData->GetFormattedMessage().c_str(), userdata);
         return;
     }
     Ref<DeviceBase> device = result.AcquireSuccess();
