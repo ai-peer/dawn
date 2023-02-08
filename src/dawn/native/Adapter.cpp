@@ -159,8 +159,27 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
                         "nextInChain is not nullptr.");
     }
 
-    return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+    auto result = mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+    // If the creation of the device fails for reasons not related to descriptor validation, return
+    // an error device instead which is already lost.
+    if (result.IsError()) {
+        // TODO(chromium:1234617): This is currently swallowing the device creation error. Should
+        // that be surfaced to the application?
+        result.AcquireError();
+        return DeviceBase::MakeError(this, descriptor);
+    }
+
+    return result.AcquireSuccess();
 }
+
+// TODO ON MONDAY:
+// - Separate feature/limit validation from device creation
+// - If validation fails, return null device, error status
+// - If device creation fails, return error device, unknown status
+// - Ensure every step above this can still handle null devices, but does not
+//   require them for error cases.
+// - Remove this comment.
+// - Get mocked by peers in CL review because you forgot to remove this comment.
 
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
                                    WGPURequestDeviceCallback callback,
@@ -173,13 +192,14 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
     if (result.IsError()) {
         std::unique_ptr<ErrorData> errorData = result.AcquireError();
         // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-        callback(WGPURequestDeviceStatus_Error, nullptr, errorData->GetFormattedMessage().c_str(),
-                 userdata);
+        callback(WGPURequestDeviceStatus_Error, nullptr,
+                 errorData->GetFormattedMessage().c_str(), userdata);
         return;
     }
     Ref<DeviceBase> device = result.AcquireSuccess();
+    ASSERT(device != nullptr);
     WGPURequestDeviceStatus status =
-        device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
+        device->IsLost() ? WGPURequestDeviceStatus_Error : WGPURequestDeviceStatus_Success;
     // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
     callback(status, ToAPI(device.Detach()), nullptr, userdata);
 }

@@ -415,13 +415,20 @@ TEST_F(DeviceCreationTest, RequestDeviceNullDescriptorSuccess) {
 
 // Test failing call to RequestDevice with invalid feature
 TEST_F(DeviceCreationTest, RequestDeviceFailure) {
+    // An error device should still be returned that is already lost.
     MockCallback<WGPURequestDeviceCallback> cb;
-    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, nullptr, NotNull(), this)).Times(1);
+    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, NotNull(), NotNull(), this)).Times(1);
+
+    // Ensure the lost callback is called.
+    MockCallback<WGPUDeviceLostCallback> lostCb;
+    EXPECT_CALL(lostCb, Call(WGPUDeviceLostReason_Undefined, NotNull(), NotNull())).Times(1);
 
     wgpu::DeviceDescriptor desc = {};
     wgpu::FeatureName invalidFeature = static_cast<wgpu::FeatureName>(WGPUFeatureName_Force32);
     desc.requiredFeatures = &invalidFeature;
     desc.requiredFeaturesCount = 1;
+    desc.deviceLostCallback = lostCb.Callback();
+    desc.deviceLostUserdata = lostCb.MakeUserdata(this);
 
     adapter.RequestDevice(&desc, cb.Callback(), cb.MakeUserdata(this));
 }
