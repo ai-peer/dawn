@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2e4cb5_5e4c837c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T17:48:41Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "0ef9ee3d2fda58cd5304748f5f0f9660b9dbe823",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f70f547c_43a57254",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 979,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-08T17:48:41Z",
+      "side": 1,
+      "message": "The plan is:\n\n 1. This CL\n 2. Make Chromium handle the new enums\n 3. Update Dawn to use the new enums.\n 4. Make Chromium stop handling the old enum.\n 5. Remove the old enum from Dawn.",
+      "revId": "0ef9ee3d2fda58cd5304748f5f0f9660b9dbe823",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
