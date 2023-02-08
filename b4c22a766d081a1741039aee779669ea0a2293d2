@@ -282,6 +282,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08544888_c36c6489",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.h",
+        "patchSetId": 35
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-02-08T19:18:21Z",
+      "side": 1,
+      "message": "Nice catch! I did mean to pass by reference here.",
+      "parentUuid": "3e62108b_d585c1a6",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 44
+      },
+      "revId": "b4c22a766d081a1741039aee779669ea0a2293d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b40ea7fa_7240c85a",
