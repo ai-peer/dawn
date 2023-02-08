@@ -821,6 +821,10 @@ wgpu::SupportedLimits DawnTestBase::GetSupportedLimits() {
     return supportedLimits;
 }
 
+void* DawnTestBase::getUniqueUserdata() {
+    return reinterpret_cast<void*>(++mNextUniqueUserdata);
+}
+
 bool DawnTestBase::SupportsFeatures(const std::vector<wgpu::FeatureName>& features) {
     ASSERT(mBackendAdapter);
     std::vector<wgpu::FeatureName> supportedFeatures;
@@ -883,6 +887,15 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
     deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
 
+    // Set up the mocks for device loss. The loss of the device is expected to happen at the end of
+    // the test so at it directly.
+    void* deviceUserdata = getUniqueUserdata();
+    deviceDescriptor.deviceLostCallback = mDeviceLostCallback.Callback();
+    deviceDescriptor.deviceLostUserdata = mDeviceLostCallback.MakeUserdata(deviceUserdata);
+    EXPECT_CALL(mDeviceLostCallback,
+                Call(WGPUDeviceLostReason_Destroyed, testing::_, deviceUserdata))
+        .Times(testing::AtMost(1));
+
     wgpu::DawnTogglesDescriptor deviceTogglesDesc = {};
     deviceDescriptor.nextInChain = &deviceTogglesDesc;
     deviceTogglesDesc.enabledToggles = forceEnabledToggles.data();
@@ -915,15 +928,9 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
     FlushWire();
     ASSERT(apiDevice);
 
-    // Set up the mocks for uncaptured errors and device loss. The loss of the device is expected
-    // to happen at the end of the test so at it directly.
+    // Set up the mocks for uncaptured errors.
     apiDevice.SetUncapturedErrorCallback(mDeviceErrorCallback.Callback(),
                                          mDeviceErrorCallback.MakeUserdata(apiDevice.Get()));
-    apiDevice.SetDeviceLostCallback(mDeviceLostCallback.Callback(),
-                                    mDeviceLostCallback.MakeUserdata(apiDevice.Get()));
-    EXPECT_CALL(mDeviceLostCallback,
-                Call(WGPUDeviceLostReason_Destroyed, testing::_, apiDevice.Get()))
-        .Times(testing::AtMost(1));
 
     apiDevice.SetLoggingCallback(
         [](WGPULoggingType type, char const* message, void*) {
@@ -1006,8 +1013,7 @@ void DawnTestBase::LoseDeviceForTesting(wgpu::Device device) {
         resolvedDevice = this->device;
     }
 
-    EXPECT_CALL(mDeviceLostCallback,
-                Call(WGPUDeviceLostReason_Undefined, testing::_, resolvedDevice.Get()))
+    EXPECT_CALL(mDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, testing::_, testing::_))
         .Times(1);
     resolvedDevice.ForceLoss(wgpu::DeviceLostReason::Undefined, "Device lost for testing");
 }

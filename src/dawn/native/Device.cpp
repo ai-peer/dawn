@@ -180,6 +180,9 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
 
+    mDeviceLostCallback = descriptor->deviceLostCallback;
+    mDeviceLostUserdata = descriptor->deviceLostUserdata;
+
     ApplyFeatures(descriptor);
 
     DawnCacheDeviceDescriptor defaultCacheDesc = {};
@@ -238,15 +241,17 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
         }
     };
 
-    mDeviceLostCallback = [](WGPUDeviceLostReason, char const*, void*) {
-        static bool calledOnce = false;
-        if (!calledOnce) {
-            calledOnce = true;
-            dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
-                                  "intended. If you really want to ignore device lost "
-                                  "and suppress this message, set the callback to null.";
-        }
-    };
+    if (!mDeviceLostCallback) {
+        mDeviceLostCallback = [](WGPUDeviceLostReason, char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
+                                      "intended. If you really want to ignore device lost "
+                                      "and suppress this message, set the callback to null.";
+            }
+        };
+    }
 #endif  // DAWN_ENABLE_ASSERTS
 
     mCaches = std::make_unique<DeviceBase::Caches>();
@@ -568,6 +573,8 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
 }
 
 void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
+    // TODO(chromium:1234617): Add a deprecation warning.
+
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
@@ -576,6 +583,7 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     if (IsLost()) {
         return;
     }
+
     FlushCallbackTaskQueue();
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
@@ -765,9 +773,11 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         result = *iter;
     } else {
         DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-        result->SetIsCachedReference();
-        result->SetContentHash(blueprintHash);
-        mCaches->bindGroupLayouts.insert(result.Get());
+        if (!result->IsError()) {
+            result->SetIsCachedReference();
+            result->SetContentHash(blueprintHash);
+            mCaches->bindGroupLayouts.insert(result.Get());
+        }
     }
 
     return std::move(result);
