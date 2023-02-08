@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae2a7fff_ee8c3a1d",
+        "filename": "src/tint/ast/test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T21:45:14Z",
+      "side": 1,
+      "message": "Why use the same name for both of them? Seems like the tests would be clearer if they were `CheckNamedIdentifier(...)` and `CheckTemplateIdentifier()` ?",
+      "revId": "d2e9d9eeb8eb6a90992b421d46160ca53584e6a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "999070ed_5179e080",
+        "filename": "src/tint/ast/test_helper.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T21:45:14Z",
+      "side": 1,
+      "message": "Why not just `for(auto i \u003d 0; i \u003c got-\u003earguments.Length(); i++)` ? Why the lambda and std::apply?",
+      "revId": "d2e9d9eeb8eb6a90992b421d46160ca53584e6a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
