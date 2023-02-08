@@ -183,6 +183,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "56582fbb_29e978a9",
+        "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-08T01:40:59Z",
+      "side": 1,
+      "message": "Using a single Service interface directly instead of GetService(type)-\u003eDoThing(args..) sounds good to me",
+      "parentUuid": "ce8827be_bc3c479d",
+      "revId": "0c8b02619c0a39406702b8e124a45b48410278e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5afc9ac3_fde52525",
         "filename": "src/dawn/native/vulkan/external_memory/MemoryServiceManager.h",
         "patchSetId": 17
