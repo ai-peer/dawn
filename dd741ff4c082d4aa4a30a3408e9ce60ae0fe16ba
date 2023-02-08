@@ -33,6 +33,24 @@
       "message": "This feels like it could be simplifed by storing variables. Something like:\n\n```\nauto* u \u003d nullptr;   //whatever type u32 returns, heh\nif (stride \u003e 0) {\n  u \u003d u32(size);\n}\nauto* attrs \u003d utils::Vector{};\nif (stride \u003e 0) {\n   attrs.Push(b.Stride(stride));\n}\nreturn b.ty.array(type-\u003eBuild(b), u, attrs);\n```",
       "revId": "dd741ff4c082d4aa4a30a3408e9ce60ae0fe16ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0e7f5ad_7b4422ea",
+        "filename": "src/tint/reader/spirv/parser_type.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-08T12:34:34Z",
+      "side": 1,
+      "message": "I personally find that harder to read than clearly having 4 control flow paths.",
+      "parentUuid": "22674242_035b5879",
+      "revId": "dd741ff4c082d4aa4a30a3408e9ce60ae0fe16ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
