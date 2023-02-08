@@ -49,6 +49,11 @@ class RequestDeviceValidationTest : public ValidationTest {
         EXPECT_EQ(status, WGPURequestDeviceStatus_Error);
         EXPECT_EQ(device, nullptr);
         EXPECT_STRNE(message, nullptr);
+
+        if (userdata != nullptr) {
+            CallCheckDevice(static_cast<std::function<void(wgpu::Device)>*>(userdata),
+                            std::move(device));
+        }
     }
 
     template <typename F>

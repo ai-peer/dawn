@@ -166,7 +166,6 @@ void ValidationTest::SetUp() {
     wgpu::DeviceDescriptor deviceDescriptor = {};
     deviceDescriptor.deviceLostCallback = ValidationTest::OnDeviceLost;
     deviceDescriptor.deviceLostUserdata = this;
-
     device = RequestDeviceSync(deviceDescriptor);
     backendDevice = mLastCreatedBackendDevice;
 
@@ -288,7 +287,7 @@ dawn::native::Adapter& ValidationTest::GetBackendAdapter() {
 }
 
 WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter,
-                                            wgpu::DeviceDescriptor deviceDescriptor) {
+                                            wgpu::DeviceDescriptor descriptor) {
     std::vector<const char*> enabledToggles;
     std::vector<const char*> disabledToggles;
 
@@ -301,14 +300,14 @@ WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter,
     }
 
     wgpu::DawnTogglesDescriptor deviceTogglesDesc;
-    deviceDescriptor.nextInChain = &deviceTogglesDesc;
+    descriptor.nextInChain = &deviceTogglesDesc;
 
     deviceTogglesDesc.enabledToggles = enabledToggles.data();
     deviceTogglesDesc.enabledTogglesCount = enabledToggles.size();
     deviceTogglesDesc.disabledToggles = disabledToggles.data();
     deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
 
-    return dawnAdapter.CreateDevice(&deviceDescriptor);
+    return dawnAdapter.CreateDevice(&descriptor);
 }
 
 // static

@@ -271,6 +271,8 @@ TEST_F(WireAdapterTests, RequestFeatureUnsupportedByWire) {
     MockCallback<WGPURequestDeviceCallback> cb;
     auto* userdata = cb.MakeUserdata(this);
 
+    wgpu::SupportedLimits fakeLimits = {};
+
     std::initializer_list<wgpu::FeatureName> fakeFeatures = {
         // Some value that is not a valid feature
         static_cast<wgpu::FeatureName>(-2),
@@ -286,6 +288,19 @@ TEST_F(WireAdapterTests, RequestFeatureUnsupportedByWire) {
     WGPUDevice apiDevice = api.GetNewDevice();
     EXPECT_CALL(api, OnAdapterRequestDevice(apiAdapter, NotNull(), NotNull(), NotNull()))
         .WillOnce(InvokeWithoutArgs([&]() {
+            // Set on device creation to forward callbacks to the client.
+            EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, NotNull(), NotNull()))
+                .Times(1);
+            EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, NotNull(), NotNull())).Times(1);
+            EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, NotNull(), NotNull()))
+                .Times(1);
+
+            EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                    *reinterpret_cast<wgpu::SupportedLimits*>(limits) = fakeLimits;
+                    return true;
+                })));
+
             EXPECT_CALL(api, DeviceEnumerateFeatures(apiDevice, nullptr))
                 .WillOnce(Return(fakeFeatures.size()));
 
@@ -299,7 +314,7 @@ TEST_F(WireAdapterTests, RequestFeatureUnsupportedByWire) {
 
             // The device was actually created, but the wire didn't support its features.
             // Expect it to be released.
-            EXPECT_CALL(api, DeviceRelease(apiDevice));
+            EXPECT_CALL(api, DeviceDestroy(apiDevice));
 
             // Fake successful creation. The client still receives a failure due to
             // unsupported features.
@@ -308,9 +323,19 @@ TEST_F(WireAdapterTests, RequestFeatureUnsupportedByWire) {
         }));
     FlushClient();
 
-    // Expect an error callback since the feature is not supported.
-    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, nullptr, NotNull(), this)).Times(1);
+    // Expect an error device since the feature is not supported.
+    wgpu::Device device;
+    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, NotNull(), NotNull(), this))
+        .WillOnce(WithArg<1>(
+            Invoke([&](WGPUDevice cDevice) { device = wgpu::Device::Acquire(cDevice); })));
     FlushServer();
+
+    device = nullptr;
+    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, DeviceRelease(apiDevice));
+    FlushClient();
 }
 
 // Test that RequestDevice errors forward to the client.
@@ -318,22 +343,46 @@ TEST_F(WireAdapterTests, RequestDeviceError) {
     MockCallback<WGPURequestDeviceCallback> cb;
     auto* userdata = cb.MakeUserdata(this);
 
+    wgpu::SupportedLimits fakeLimits = {};
+
     wgpu::DeviceDescriptor desc = {};
     adapter.RequestDevice(&desc, cb.Callback(), userdata);
 
     // Expect the server to receive the message. Then, mock an error.
+    WGPUDevice apiDevice = api.GetNewDevice();
     EXPECT_CALL(api, OnAdapterRequestDevice(apiAdapter, NotNull(), NotNull(), NotNull()))
         .WillOnce(InvokeWithoutArgs([&]() {
-            api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Error, nullptr,
-                                                 "Request device failed");
+            // Set on device creation to forward callbacks to the client.
+            EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, NotNull(), NotNull()))
+                .Times(1);
+            EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, NotNull(), NotNull())).Times(1);
+            EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, NotNull(), NotNull()))
+                .Times(1);
+
+            EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                    *reinterpret_cast<wgpu::SupportedLimits*>(limits) = fakeLimits;
+                    return true;
+                })));
+
+            api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Error,
+                                                 apiDevice, "Request device failed");
         }));
     FlushClient();
 
     // Expect the callback in the client.
-    EXPECT_CALL(cb,
-                Call(WGPURequestDeviceStatus_Error, nullptr, StrEq("Request device failed"), this))
-        .Times(1);
+    wgpu::Device device;
+    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, NotNull(), NotNull(), this))
+        .WillOnce(WithArg<1>(
+            Invoke([&](WGPUDevice cDevice) { device = wgpu::Device::Acquire(cDevice); })));
     FlushServer();
+
+    device = nullptr;
+    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, DeviceRelease(apiDevice));
+    FlushClient();
 }
 
 // Test that RequestDevice receives unknown status if the adapter is deleted
