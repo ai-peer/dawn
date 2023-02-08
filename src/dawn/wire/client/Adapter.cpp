@@ -114,7 +114,7 @@ bool Adapter::OnRequestDeviceCallback(uint64_t requestSerial,
 
     // If the return status is a failure we should give a null device to the callback and
     // free the allocation.
-    if (status != WGPURequestDeviceStatus_Success) {
+    if (status == WGPURequestDeviceStatus_Error) {
         client->Free(device);
         request.callback(status, nullptr, message, request.userdata);
         return true;

@@ -52,6 +52,7 @@
 #include "dawn/native/SwapChain.h"
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/native/error/DeviceError.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -219,6 +220,21 @@ DeviceBase::~DeviceBase() {
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;
+}
+
+Ref<DeviceBase> DeviceBase::MakeError(AdapterBase* adapter, const DeviceDescriptor* descriptor) {
+    Ref<error::Device> errorDevice = error::Device::Create(adapter, descriptor);
+
+    // error devices should never error during initialization.
+    MaybeError maybeError = errorDevice->Initialize();
+    DAWN_ASSERT(!maybeError.IsError());
+
+    // Lose the device immediately.
+    errorDevice->HandleError(DAWN_INTERNAL_ERROR("Device creation failed"),
+                             InternalErrorType::DeviceLost, WGPUDeviceLostReason_Undefined);
+
+    // Return the lost device.
+    return errorDevice;
 }
 
 MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
@@ -563,6 +579,8 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         mAsyncTaskManager->WaitAllPendingTasks();
         mCallbackTaskManager->HandleDeviceLoss();
 
+        FlushCallbackTaskQueue();
+
         // Still forward device loss errors to the error scopes so they all reject.
         mErrorScopeStack->HandleError(ToWGPUErrorType(type), messageStr.c_str());
     } else {
@@ -829,9 +847,13 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         result = *iter;
     } else {
         DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-        result->SetIsCachedReference();
-        result->SetContentHash(blueprintHash);
-        mCaches->bindGroupLayouts.insert(result.Get());
+        // This can return an error when called from CreateEmptyBindGroupLayout during
+        // initialization of an error device.
+        if (!result->IsError()) {
+            result->SetIsCachedReference();
+            result->SetContentHash(blueprintHash);
+            mCaches->bindGroupLayouts.insert(result.Get());
+        }
     }
 
     return std::move(result);

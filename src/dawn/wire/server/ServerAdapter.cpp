@@ -56,35 +56,40 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     cmd.status = status;
     cmd.message = message;
 
-    if (status != WGPURequestDeviceStatus_Success) {
+    // FIXME: Rework to include possibility of a null device.
+
+    if (device == nullptr) {
         // Free the ObjectId which will make it unusable.
         DeviceObjects().Free(data->deviceObjectId);
-        ASSERT(device == nullptr);
         SerializeCommand(cmd);
         return;
     }
 
     std::vector<WGPUFeatureName> features;
 
-    size_t featuresCount = mProcs.deviceEnumerateFeatures(device, nullptr);
-    features.resize(featuresCount);
-    mProcs.deviceEnumerateFeatures(device, features.data());
+    // Even if a device is returned, there may have been an error. In that case don't bother to
+    // enumerate the features, as error devices shouldn't be considered to have any features.
+    if (status == WGPURequestDeviceStatus_Success) {
+        size_t featuresCount = mProcs.deviceEnumerateFeatures(device, nullptr);
+        features.resize(featuresCount);
+        mProcs.deviceEnumerateFeatures(device, features.data());
 
-    // The client should only be able to request supported features, so all enumerated
-    // features that were enabled must also be supported by the wire.
-    // Note: We fail the callback here, instead of immediately upon receiving
-    // the request to preserve callback ordering.
-    for (WGPUFeatureName f : features) {
-        if (!IsFeatureSupported(f)) {
-            // Release the device.
-            mProcs.deviceRelease(device);
-            // Free the ObjectId which will make it unusable.
-            DeviceObjects().Free(data->deviceObjectId);
+        // The client should only be able to request supported features, so all enumerated
+        // features that were enabled must also be supported by the wire.
+        // Note: We fail the callback here, instead of immediately upon receiving
+        // the request to preserve callback ordering.
+        for (WGPUFeatureName f : features) {
+            if (!IsFeatureSupported(f)) {
+                // Release the device.
+                mProcs.deviceRelease(device);
+                // Free the ObjectId which will make it unusable.
+                DeviceObjects().Free(data->deviceObjectId);
 
-            cmd.status = WGPURequestDeviceStatus_Error;
-            cmd.message = "Requested feature not supported.";
-            SerializeCommand(cmd);
-            return;
+                cmd.status = WGPURequestDeviceStatus_Error;
+                cmd.message = "Requested feature not supported.";
+                SerializeCommand(cmd);
+                return;
+            }
         }
     }
 
@@ -95,7 +100,7 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     mProcs.deviceGetLimits(device, &limits);
     cmd.limits = &limits;
 
-    // Assign the handle and allocated status if the device is created successfully.
+    // Assign the handle and allocated status.
     auto* deviceObject = DeviceObjects().FillReservation(data->deviceObjectId, device);
     ASSERT(deviceObject != nullptr);
     deviceObject->info->server = this;

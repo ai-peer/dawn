@@ -159,7 +159,17 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
                         "nextInChain is not nullptr.");
     }
 
-    return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+    auto result = mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
+    // If the creation of the device fails for reasons not related to descriptor validation, return
+    // an error device instead which is already lost.
+    if (result.IsError()) {
+        // TODO(chromium:1234617): This is currently swallowing the device creation error. Should
+        // that be surfaced to the application?
+        result.AcquireError();
+        return DeviceBase::MakeError(this, descriptor);
+    }
+
+    return result.AcquireSuccess();
 }
 
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
@@ -178,8 +188,9 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
         return;
     }
     Ref<DeviceBase> device = result.AcquireSuccess();
+    ASSERT(device != nullptr);
     WGPURequestDeviceStatus status =
-        device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
+        device->IsLost() ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
     // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
     callback(status, ToAPI(device.Detach()), nullptr, userdata);
 }
