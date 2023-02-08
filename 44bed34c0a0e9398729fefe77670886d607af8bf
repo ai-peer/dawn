@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e252f3_a52cbb0a",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-08T00:34:36Z",
+      "side": 1,
+      "message": "note to self: fix this.",
+      "range": {
+        "startLine": 836,
+        "startChar": 31,
+        "endLine": 836,
+        "endChar": 39
+      },
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
