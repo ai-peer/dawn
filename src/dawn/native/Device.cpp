@@ -52,6 +52,7 @@
 #include "dawn/native/SwapChain.h"
 #include "dawn/native/Texture.h"
 #include "dawn/native/ValidationUtils_autogen.h"
+#include "dawn/native/error/DeviceError.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -225,6 +226,20 @@ DeviceBase::~DeviceBase() {
     if (mAdapter != nullptr) {
         mAdapter->GetInstance()->DecrementDeviceCountForTesting();
     }
+}
+
+DeviceBase* DeviceBase::MakeError(AdapterBase* adapter) {
+    Ref<error::Device> errorDevice = error::Device::Create(adapter);
+
+    // error devices should never error during initialization.
+    MaybeError maybeError = errorDevice->Initialize();
+    DAWN_ASSERT(!maybeError.IsError());
+
+    // Lose the device immediately.
+    errorDevice->HandleError(InternalErrorType::DeviceLost, "Device was created as a Error Device");
+
+    // Return the destroyed device.
+    return errorDevice.Detach();
 }
 
 MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
@@ -770,9 +785,11 @@ ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         result = *iter;
     } else {
         DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-        result->SetIsCachedReference();
-        result->SetContentHash(blueprintHash);
-        mCaches->bindGroupLayouts.insert(result.Get());
+        if (!result->IsError()) {
+            result->SetIsCachedReference();
+            result->SetContentHash(blueprintHash);
+            mCaches->bindGroupLayouts.insert(result.Get());
+        }
     }
 
     return std::move(result);

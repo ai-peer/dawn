@@ -214,7 +214,7 @@ TEST_F(DeviceCreationTest, RequestDeviceNullDescriptorSuccess) {
 // Test failing call to RequestDevice with invalid feature
 TEST_F(DeviceCreationTest, RequestDeviceFailure) {
     MockCallback<WGPURequestDeviceCallback> cb;
-    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, nullptr, NotNull(), this)).Times(1);
+    EXPECT_CALL(cb, Call(WGPURequestDeviceStatus_Error, NotNull(), NotNull(), this)).Times(1);
 
     wgpu::DeviceDescriptor desc = {};
     wgpu::FeatureName invalidFeature = static_cast<wgpu::FeatureName>(WGPUFeatureName_Force32);
