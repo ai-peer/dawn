@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0db60ee_a7c25892",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-08T23:08:06Z",
+      "side": 1,
+      "message": "this is my super simple blocklist which IMO is good enough for v1",
+      "revId": "cbdc80abc5ac66b38ebf0d733ff28dd2510d449f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
