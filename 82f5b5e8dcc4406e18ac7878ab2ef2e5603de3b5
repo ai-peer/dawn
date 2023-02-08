@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa5d3197_9e05feee",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "optional nit. Might be a little easier to read as something like:\n```\nstruct BufferBindingAliasingResult {\n    struct Entry {\n        BindGroupIndex bindGroupIndex;\n        BindingIndex BindingIndex;\n        \n        // Adjusted offset with dynamic offset\n        uint64_t offset;\n        uint64_t size;\n    };\n    Entry e1;\n    Entry e2;\n};\n```\n\nThen later below at [1], I think you could do something like:\n```\nreturn BufferBindingAliasingResult{\n    {i, bindingIndex, offset, bufferBinding.size},\n    {j, otherBindingIndex, otherOffset, otherBinding.size}\n};\n```",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 2
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fd2473_2a38ea21",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "nit. bindGroupEntries",
+      "range": {
+        "startLine": 70,
+        "startChar": 55,
+        "endLine": 70,
+        "endChar": 71
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c2761e_38d1530a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "Taking a look at our current buffer binding validations (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BindGroup.cpp;l\u003d83) I think that it might be sufficient to just check the `BufferBindingType`. Makes it a little easier to read since IIUC, this clause is just to early-out on non-storage buffers.",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d043620e_5e70145a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "Same comment here as above.",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ed8106_34e6dee0",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "Given that this is an ||, I think maybe we can move this to the outer loop and save some cycles. So just:\n\n```\nif (bufferBinding.size \u003d\u003d 0) { continue; }\n```",
+      "range": {
+        "startLine": 118,
+        "startChar": 20,
+        "endLine": 120,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83330a19_933fc96b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 135,
+        "startChar": 31,
+        "endLine": 135,
+        "endChar": 58
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8e28a32_4024eb53",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "nit. Assuming that in our test we (1) only have buffer bindings and (2) only have buffer bindings with same hasDynamicOffset across one bindGroup, the dynamic buffer binding is always compact.",
+      "range": {
+        "startLine": 232,
+        "startChar": 15,
+        "endLine": 232,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62739f6e_69511639",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-08T02:08:05Z",
+      "side": 1,
+      "message": "nit. same as above",
+      "range": {
+        "startLine": 272,
+        "startChar": 12,
+        "endLine": 274,
+        "endChar": 29
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
