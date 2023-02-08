@@ -1041,11 +1041,19 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
     // Set up the mocks for uncaptured errors.
     apiDevice.SetUncapturedErrorCallback(mDeviceErrorCallback.Callback(),
                                          mDeviceErrorCallback.MakeUserdata(apiDevice.Get()));
+<<<<<<< HEAD
 
     // The loss of the device is expected to happen at the end of the test so at it directly.
     EXPECT_CALL(mDeviceLostCallback,
                 Call(WGPUDeviceLostReason_Destroyed, testing::_, deviceUserdata))
         .Times(testing::AtMost(1));
+=======
+    /*apiDevice.SetDeviceLostCallback(mDeviceLostCallback.Callback(),
+                                    mDeviceLostCallback.MakeUserdata(apiDevice.Get()));
+    EXPECT_CALL(mDeviceLostCallback,
+                Call(WGPUDeviceLostReason_Destroyed, testing::_, apiDevice.Get()))
+        .Times(testing::AtMost(1));*/
+>>>>>>> fa962fb3b7 (Return error devices when requestDevice fails)
 
     apiDevice.SetLoggingCallback(
         [](WGPULoggingType type, char const* message, void*) {

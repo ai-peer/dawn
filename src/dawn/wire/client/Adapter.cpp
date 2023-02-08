@@ -71,7 +71,15 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
         return;
     }
 
+<<<<<<< HEAD
     Device* device = client->Make<Device>(descriptor);
+=======
+    Device* device = client->Make<Device>();
+    if (descriptor->deviceLostCallback) {
+        device->SetDeviceLostCallback(descriptor->deviceLostCallback,
+                                      descriptor->deviceLostUserdata);
+    }
+>>>>>>> fa962fb3b7 (Return error devices when requestDevice fails)
     uint64_t serial = mRequestDeviceRequests.Add({callback, device->GetWireId(), userdata});
 
     AdapterRequestDeviceCmd cmd;

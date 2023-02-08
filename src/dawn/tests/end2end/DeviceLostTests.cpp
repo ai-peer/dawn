@@ -418,10 +418,10 @@ TEST_P(DeviceLostTest, LoseDeviceForTestingOnce) {
 
     // Second LoseDeviceForTesting call should result in no callbacks. Note we also reset the
     // callback first since by default the device clears the callback after the device is lost.
-    device.SetDeviceLostCallback(mDeviceLostCallback.Callback(),
-                                 mDeviceLostCallback.MakeUserdata(device.Get()));
     EXPECT_CALL(mDeviceLostCallback, Call(WGPUDeviceLostReason_Undefined, testing::_, device.Get()))
         .Times(0);
+    device.SetDeviceLostCallback(mDeviceLostCallback.Callback(),
+                                 mDeviceLostCallback.MakeUserdata(device.Get()));
     device.ForceLoss(wgpu::DeviceLostReason::Undefined, "Device lost for testing");
     FlushWire();
     testing::Mock::VerifyAndClearExpectations(&mDeviceLostCallback);
