@@ -66,6 +66,8 @@ class DeviceBase : public RefCountedWithExternalCount {
                const TogglesState& deviceToggles);
     ~DeviceBase() override;
 
+    static Ref<DeviceBase> MakeError(AdapterBase* adapter, const DeviceDescriptor* descriptor);
+
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
     // occurs because of an error, we want to call the device loss callback with an undefined
     // reason, but the ForceLoss API allows for an injection of the reason, hence the default
