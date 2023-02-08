@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af29eff4_3f9b5168",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-08T04:18:13Z",
+      "side": 1,
+      "message": "Please take a look, thanks",
+      "revId": "bf46b1cbdd209ed1185eb43d3d2b66233c0a7a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8de600_738ccb37",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-08T04:18:13Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "bf46b1cbdd209ed1185eb43d3d2b66233c0a7a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

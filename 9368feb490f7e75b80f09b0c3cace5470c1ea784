@@ -264,6 +264,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f73a4c_49316a70",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-08T04:18:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11a0e2df_d7bcb882",
+      "range": {
+        "startLine": 101,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 33
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ecc18aa_bc7b6878",
@@ -372,6 +396,30 @@
       "side": 1,
       "message": "So this can be removed now?",
       "parentUuid": "bc1b61b6_6322f709",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 50
+      },
+      "revId": "9368feb490f7e75b80f09b0c3cace5470c1ea784",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a025aa8_baba3e82",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-08T04:18:13Z",
+      "side": 1,
+      "message": "Removed `TogglesState::GetEnabledTogglesSet()` (previously `GetEnabledBitSet`), but now declaring `friend stream::Stream\u003cTogglesState, void\u003e` within `TogglesState` [3] because `stream::Stream\u003cTogglesState\u003e::Write` now needs to access the private member `mEnabledToggles`.",
+      "parentUuid": "4d4fd7bb_9a6e4a77",
       "range": {
         "startLine": 138,
         "startChar": 0,
