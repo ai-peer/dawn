@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ada0f636_edf5933a",
+        "filename": "src/tint/ast/identifier_expression_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-08T14:56:36Z",
+      "side": 0,
+      "message": "Maybe this should become a positive test instead?",
+      "revId": "e322177be138119c590663a0ebfc74b886eb8ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
