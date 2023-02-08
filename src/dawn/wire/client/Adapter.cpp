@@ -109,12 +109,14 @@ bool Adapter::OnRequestDeviceCallback(uint64_t requestSerial,
         return false;
     }
 
+    // FIXME: Rework to include possibility of a null device.
+
     Client* client = GetClient();
     Device* device = client->Get<Device>(request.deviceObjectId);
 
     // If the return status is a failure we should give a null device to the callback and
     // free the allocation.
-    if (status != WGPURequestDeviceStatus_Success) {
+    if (status == WGPURequestDeviceStatus_Error) {
         client->Free(device);
         request.callback(status, nullptr, message, request.userdata);
         return true;
@@ -123,6 +125,7 @@ bool Adapter::OnRequestDeviceCallback(uint64_t requestSerial,
     device->SetLimits(limits);
     device->SetFeatures(features, featuresCount);
 
+    // Even if the return status is a failure we pass the error device back out.
     request.callback(status, ToAPI(device), message, request.userdata);
     return true;
 }
