@@ -26,8 +26,8 @@ using testing::HasSubstr;
 
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
-        wgpu::DeviceDescriptor descriptor;
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
         wgpu::DawnTogglesDescriptor deviceTogglesDesc;
         descriptor.nextInChain = &deviceTogglesDesc;
         const char* toggle = "disallow_unsafe_apis";
