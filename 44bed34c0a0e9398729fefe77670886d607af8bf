@@ -1,6 +1,57 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb22132_9083cb55",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "Both of these errors seem wrong (the original and the current).\n\n```\nalias mix \u003d i32;\nvar v \u003d mix;\n```\n\nSeems more like unknown identifier, or something?\n\nNothing to do in this CL I think, just seemed ... odd?",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f988e12d_8d1557cb",
+        "filename": "src/tint/resolver/builtin_validation_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "Similar\n\n```\nstruct mix {\n   m: i32;\n}\nvar v \u003d mix;\n```\n\nNot sure what it\u0027s supposed to be doing, but saying `type initializer or cast` is ... weird",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385d42fc_e3a82376",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "I wish this syntax didn\u0027t exist in c++, heh.",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59e252f3_a52cbb0a",
@@ -20,6 +71,57 @@
         "endLine": 836,
         "endChar": 39
       },
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c44d4fe1_4cdb1e78",
+        "filename": "src/tint/resolver/dependency_graph.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "Maybe:\n\n```\n/// - const ast::Node*\n///     One of\n///     - const ast::TypeDecl*\n///     - const ast::Variable*\n///     - const ast::Function*\n/// - sem::BuiltinType\n/// - type::Builtin\n```\n\nAs I was wondering why the variant only had 3 entries and this lists 5.",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7782555e_33c0b657",
+        "filename": "src/tint/resolver/dependency_graph.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "Can you file a bug to rename sem::BuiltinType to sem::BuiltinFunction? This and the next function are super confusing.",
+      "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0257b0b_88cbce26",
+        "filename": "src/tint/resolver/dependency_graph_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-08T04:15:15Z",
+      "side": 1,
+      "message": "Should we file a bug to rename this `identifier` and the few others below to `name` to be consistent?",
       "revId": "44bed34c0a0e9398729fefe77670886d607af8bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
