@@ -57,7 +57,8 @@ static constexpr char kDisallowDeprecatedAPIsToggleName[] = "disallow_deprecated
 // errors). Otherwise, deprecated APIs only generate a warning message.
 class DeprecationTests : public ValidationTest, public testing::WithParamInterface<bool> {
   protected:
-    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override;
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override;
 };
 
 #endif  // SRC_DAWN_TESTS_UNITTESTS_VALIDATION_DEPRECATEDAPITESTS_H_

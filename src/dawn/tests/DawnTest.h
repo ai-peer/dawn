@@ -566,6 +566,11 @@ class DawnTestBase {
 
     wgpu::SupportedLimits GetSupportedLimits();
 
+    void* getUniqueUserdata() {
+        mUserdataStore.emplace_back(0);
+        return static_cast<void*>(&mUserdataStore.back());
+    }
+
   private:
     utils::ScopedAutoreleasePool mObjCAutoreleasePool;
     AdapterTestParam mParam;
@@ -576,6 +581,9 @@ class DawnTestBase {
     // Isolation keys are not exposed to the wire client. Device creation in the tests from
     // the client first push the key into this queue, which is then consumed by the server.
     std::queue<std::string> mNextIsolationKeyQueue;
+
+    // Stores unique userdata values passed to deviceLostUserdata.
+    std::vector<size_t> mUserdataStore;
 
     // Internal device creation function for default device creation with some optional overrides.
     WGPUDevice CreateDeviceImpl(std::string isolationKey);

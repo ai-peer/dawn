@@ -133,7 +133,8 @@ class ValidationTest : public testing::Test {
 
   protected:
     dawn::native::Adapter& GetBackendAdapter();
-    virtual WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter);
+    virtual WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter,
+                                        wgpu::DeviceDescriptor descriptor);
 
     wgpu::Device RequestDeviceSync(const wgpu::DeviceDescriptor& deviceDesc);
 
@@ -150,8 +151,9 @@ class ValidationTest : public testing::Test {
     std::unique_ptr<utils::WireHelper> mWireHelper;
     WGPUDevice mLastCreatedBackendDevice;
 
-    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);
+    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
+
     std::string mDeviceErrorMessage;
     bool mExpectError = false;
     bool mError = false;
