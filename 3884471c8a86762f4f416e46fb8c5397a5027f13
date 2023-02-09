@@ -101,6 +101,74 @@
       "message": "🟦 note: all 266 tests now pass",
       "revId": "3884471c8a86762f4f416e46fb8c5397a5027f13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c154ba_40241f3b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-02-09T21:38:52Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 4.9115s (average 4.44335025s)",
+      "revId": "3884471c8a86762f4f416e46fb8c5397a5027f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead207f6_8efa9988",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-02-09T21:38:52Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.08205s (average 4.4869755s)",
+      "revId": "3884471c8a86762f4f416e46fb8c5397a5027f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44dd11e0_de174345",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-02-09T21:38:52Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 8.539325s (average 1.415093442s)",
+      "revId": "3884471c8a86762f4f416e46fb8c5397a5027f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785f6d3f_a1264ad4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-02-09T21:38:52Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,parse,align:align_required_alignment:*\u0027",
+      "revId": "3884471c8a86762f4f416e46fb8c5397a5027f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
