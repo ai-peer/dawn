@@ -16,6 +16,52 @@
       "message": "Thanks for the review, will land after the bindings validation perf test",
       "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b243e0af_46334e22",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-09T00:58:56Z",
+      "side": 1,
+      "message": "nit: I think it\u0027s better to do the loops like\n```\nfor i in range(0, length):\n  for j in range(i + 1, length):\n```\n\nit\u0027s still O(n^2) but it\u0027s half as many iterations. n(n+1)/2 vs n*n\n\nyou would need to change your overlap condition to check for two cases. I think right now, it only checks for:\n\n```\nrange 0: [     ]\nrange 1:    [       ]\n```\n\nbut we would also need to check the other direction:\n```\nrange 0:      [     ]\nrange 1: [       ]\n```\n\nwe should also make sure the tests cover both cases",
+      "range": {
+        "startLine": 103,
+        "startChar": 13,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52af6919_b4a5d3fd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-09T00:58:56Z",
+      "side": 1,
+      "message": "sorry - I just thought of another idea. If you have the perf test locally, you could try it out to verify if it\u0027s actually better\n\nright now, this inner part happens O(n^2) times which is a lot of lookups and indirections. Between this and the outer loop, we look up the same binding many times.\n\nIf, inside the reduction step, we ALSO did all these indirections AND applied dynamic offsets, then we would avoid all the extra lookups.\nIt can also pre-filter out bindings that are zero-sized.\n\nSo, `bindingsToCheck` would actually be std::vector\u003cBufferBinding\u003e.\nTakes more space than just the indices, but less work is done in the inner loop",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
