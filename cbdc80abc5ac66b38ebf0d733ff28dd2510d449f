@@ -16,6 +16,23 @@
       "message": "this is my super simple blocklist which IMO is good enough for v1",
       "revId": "cbdc80abc5ac66b38ebf0d733ff28dd2510d449f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f609ea_3629667a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T08:27:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cbdc80abc5ac66b38ebf0d733ff28dd2510d449f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
