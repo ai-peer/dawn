@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062b5802_7e65be61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T01:45:55Z",
+      "side": 1,
+      "message": "lgtm w/ suggestion",
+      "revId": "6a8d3db6e0cb829077870d05952a803276167c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99537a1e_1084b820",
+        "filename": "src/tint/resolver/expression_kind_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T01:45:55Z",
+      "side": 1,
+      "message": "What does this mean? Something will be added here when that bug is fixed?",
+      "revId": "6a8d3db6e0cb829077870d05952a803276167c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b9d120_80d42e41",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T01:45:55Z",
+      "side": 1,
+      "message": "These seem like they should be in builtin_enum_expression.cc as opposed to resolver.cc",
+      "revId": "6a8d3db6e0cb829077870d05952a803276167c49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
