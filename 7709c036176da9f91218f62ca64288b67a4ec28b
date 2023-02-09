@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b17553d5_fd036450",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T16:11:14Z",
+      "side": 1,
+      "message": "Why is this just not part of `ast::TraverseExpressions` ?",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b010dc3e_e078f030",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T16:11:14Z",
+      "side": 1,
+      "message": "This is _really_ hard to read where it wraps and it\u0027s a macro and it\u0027s part of the `if`. Can this one be broken into multiple lines?",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bcba0a_db014cc9",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2580,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T16:11:14Z",
+      "side": 1,
+      "message": "Remove?",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
