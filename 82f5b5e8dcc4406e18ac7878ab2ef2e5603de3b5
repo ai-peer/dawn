@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9946160c_1cfa33ca",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa5d3197_9e05feee",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 2
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3fd2473_2a38ea21",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-08T02:08:05Z",
       "side": 1,
       "message": "nit. bindGroupEntries",
+      "range": {
+        "startLine": 70,
+        "startChar": 55,
+        "endLine": 70,
+        "endChar": 71
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b0e8fe6_3d388478",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3fd2473_2a38ea21",
       "range": {
         "startLine": 70,
         "startChar": 55,
@@ -142,6 +190,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b047fba0_d2b0eec8",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a943a090_799caee1",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 88,
+        "endChar": 13
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d043620e_5e70145a",
@@ -155,6 +227,30 @@
       "writtenOn": "2023-02-08T02:08:05Z",
       "side": 1,
       "message": "Same comment here as above.",
+      "range": {
+        "startLine": 109,
+        "startChar": 20,
+        "endLine": 112,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58854a5_e9c3bb5f",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d043620e_5e70145a",
       "range": {
         "startLine": 109,
         "startChar": 20,
@@ -188,6 +284,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b06f1f_15ce62d0",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97ed8106_34e6dee0",
+      "range": {
+        "startLine": 118,
+        "startChar": 20,
+        "endLine": 120,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83330a19_933fc96b",
@@ -201,6 +321,30 @@
       "writtenOn": "2023-02-08T02:08:05Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 135,
+        "startChar": 31,
+        "endLine": 135,
+        "endChar": 58
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "566edc1b_d1be6a54",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83330a19_933fc96b",
       "range": {
         "startLine": 135,
         "startChar": 31,
@@ -234,6 +378,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa4f6924_7de3a13e",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8e28a32_4024eb53",
+      "range": {
+        "startLine": 232,
+        "startChar": 15,
+        "endLine": 232,
+        "endChar": 21
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62739f6e_69511639",
@@ -247,6 +415,30 @@
       "writtenOn": "2023-02-08T02:08:05Z",
       "side": 1,
       "message": "nit. same as above",
+      "range": {
+        "startLine": 272,
+        "startChar": 12,
+        "endLine": 274,
+        "endChar": 29
+      },
+      "revId": "82f5b5e8dcc4406e18ac7878ab2ef2e5603de3b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7d4770_e9dc2fb6",
+        "filename": "src/dawn/tests/unittests/validation/WritableBufferBindingAliasingValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T00:41:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62739f6e_69511639",
       "range": {
         "startLine": 272,
         "startChar": 12,
