@@ -3213,8 +3213,32 @@ TEST_F(ResolverTypeInitializerValidationTest, TypeInitializerAsStatement) {
     EXPECT_EQ(r()->error(), "12:34 error: type initializer evaluated but not used");
 }
 
+TEST_F(ResolverTypeInitializerValidationTest, StructInitializerAsStatement) {
+    Structure("S", utils::Vector{Member("m", ty.i32())});
+    WrapInFunction(CallStmt(Call(Source{{12, 34}}, "S", 1_a)));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: type initializer evaluated but not used");
+}
+
+TEST_F(ResolverTypeInitializerValidationTest, AliasInitializerAsStatement) {
+    Alias("A", ty.i32());
+    WrapInFunction(CallStmt(Call(Source{{12, 34}}, "A", 1_i)));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: type initializer evaluated but not used");
+}
+
 TEST_F(ResolverTypeInitializerValidationTest, TypeConversionAsStatement) {
     WrapInFunction(CallStmt(Call(Source{{12, 34}}, ty.f32(), 1_i)));
+
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: type conversion evaluated but not used");
+}
+
+TEST_F(ResolverTypeInitializerValidationTest, AliasConversionAsStatement) {
+    Alias("A", ty.i32());
+    WrapInFunction(CallStmt(Call(Source{{12, 34}}, "A", 1_f)));
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(), "12:34 error: type conversion evaluated but not used");
