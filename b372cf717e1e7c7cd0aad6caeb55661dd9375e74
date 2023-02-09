@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8bde64_d6a011d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-02-09T03:08:19Z",
+      "side": 1,
+      "message": "Kokoro failed due to infra issue\n\nhttps://source.cloud.google.com/results/invocations/08fb4ecc-06af-41de-89d1-4b1023f58f8b/log",
+      "revId": "b372cf717e1e7c7cd0aad6caeb55661dd9375e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
