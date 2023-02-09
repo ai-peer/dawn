@@ -19,29 +19,29 @@
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/VulkanError.h"
-#include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+#include "dawn/native/vulkan/external_semaphore/ServiceImplementationFD.h"
 
 static constexpr VkExternalSemaphoreHandleTypeFlagBits kHandleType =
-#if defined(DAWN_USE_SYNC_FDS)
+#if DAWN_PLATFORM_IS(ANDROID) || DAWN_PLATFORM_IS(CHROMEOS)
     VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT;
 #else
     VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR;
-#endif  // defined(DAWN_USE_SYNC_FDS)
+#endif
 
 namespace dawn::native::vulkan::external_semaphore {
 
-Service::Service(Device* device)
-    : mDevice(device),
+ServiceImplementationFD::ServiceImplementationFD(Device* device)
+    : ServiceImplementation(device),
       mSupported(CheckSupport(device->GetDeviceInfo(),
                               ToBackend(device->GetAdapter())->GetPhysicalDevice(),
                               device->fn)) {}
 
-Service::~Service() = default;
+ServiceImplementationFD::~ServiceImplementationFD() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                           VkPhysicalDevice physicalDevice,
-                           const VulkanFunctions& fn) {
+bool ServiceImplementationFD::CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                                           VkPhysicalDevice physicalDevice,
+                                           const VulkanFunctions& fn) {
     if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreFD)) {
         return false;
     }
@@ -64,11 +64,12 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
     return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
 }
 
-bool Service::Supported() {
+bool ServiceImplementationFD::Supported() {
     return mSupported;
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
+ResultOrError<VkSemaphore> ServiceImplementationFD::ImportSemaphore(
+    ExternalSemaphoreHandle handle) {
     DAWN_INVALID_IF(handle < 0, "Importing a semaphore with an invalid handle.");
 
     VkSemaphore semaphore = VK_NULL_HANDLE;
@@ -101,7 +102,7 @@ ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle hand
     return semaphore;
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
+ResultOrError<VkSemaphore> ServiceImplementationFD::CreateExportableSemaphore() {
     VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
     exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
     exportSemaphoreInfo.pNext = nullptr;
@@ -120,7 +121,8 @@ ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
     return signalSemaphore;
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
+ResultOrError<ExternalSemaphoreHandle> ServiceImplementationFD::ExportSemaphore(
+    VkSemaphore semaphore) {
     VkSemaphoreGetFdInfoKHR semaphoreGetFdInfo;
     semaphoreGetFdInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR;
     semaphoreGetFdInfo.pNext = nullptr;
@@ -136,14 +138,14 @@ ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore sema
     return fd;
 }
 
-ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {
+ExternalSemaphoreHandle ServiceImplementationFD::DuplicateHandle(ExternalSemaphoreHandle handle) {
     int fd = dup(handle);
     ASSERT(fd >= 0);
     return fd;
 }
 
 // static
-void Service::CloseHandle(ExternalSemaphoreHandle handle) {
+void ServiceImplementationFD::CloseHandle(ExternalSemaphoreHandle handle) {
     int ret = close(handle);
     ASSERT(ret == 0);
 }
