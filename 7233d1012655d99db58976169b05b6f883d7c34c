@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "356147a0_f0538aa0",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T15:43:19Z",
+      "side": 1,
+      "message": "This seems unrelated?",
+      "revId": "7233d1012655d99db58976169b05b6f883d7c34c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
