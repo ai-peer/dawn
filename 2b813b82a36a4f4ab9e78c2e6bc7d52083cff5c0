@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c969d262_ee623ed8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-02-09T21:12:00Z",
+      "side": 1,
+      "message": "PTAL. Needed to land https://dawn-review.googlesource.com/c/dawn/+/119340",
+      "revId": "2b813b82a36a4f4ab9e78c2e6bc7d52083cff5c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
