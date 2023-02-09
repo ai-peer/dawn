@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d8e7f8_d32b7a7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-09T08:41:58Z",
+      "side": 1,
+      "message": "Semaphore service part refactor CL, PTAL, thanks!",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
