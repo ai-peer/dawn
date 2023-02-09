@@ -69,6 +69,24 @@
       "parentUuid": "569a4644_3276d0b1",
       "revId": "a32d68c0b0b5b814ef6361105545adad7732139b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44493032_09749c80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-02-09T19:19:19Z",
+      "side": 1,
+      "message": "Should land automatically if https://ci.chromium.org/ui/p/chrome/builders/try/linux-chromeos-compile-chrome/62203/overview passes.",
+      "parentUuid": "261b8789_c9d95b66",
+      "revId": "a32d68c0b0b5b814ef6361105545adad7732139b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
