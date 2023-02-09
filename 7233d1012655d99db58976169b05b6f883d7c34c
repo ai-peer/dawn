@@ -16,6 +16,24 @@
       "message": "This seems unrelated?",
       "revId": "7233d1012655d99db58976169b05b6f883d7c34c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88c5dda_fa41339d",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 28
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-09T16:57:03Z",
+      "side": 1,
+      "message": "It\u0027s not. `texture_storage` takes a scalar type as the template parameter, and so we need to track that as a dependency. All the other textures were already tracked.\n\nIt\u0027s possible that using a scalar alias declared _after_ a `storage_texture` declaration was broken.",
+      "parentUuid": "356147a0_f0538aa0",
+      "revId": "7233d1012655d99db58976169b05b6f883d7c34c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
