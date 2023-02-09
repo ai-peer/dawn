@@ -16,6 +16,24 @@
       "message": "Looks like missed one:\n\n```\n/dawn/src/src/tint/writer/glsl/generator_bench.cc:33:69: error: no member named \u0027symbol\u0027 in \u0027tint::ast::Function\u0027\n            entry_points.emplace_back(program.Symbols().NameFor(fn-\u003esymbol));\n                                                                ~~  ^\n1 error generated.\n```",
       "revId": "eb8584c186653c1a978465f97a07e716bf703334",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc0886c_4e50da42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-09T00:03:44Z",
+      "side": 1,
+      "message": "Yup. I clearly haven\u0027t been testing the benchmarks. Will fix, thanks!",
+      "parentUuid": "ae48269e_edf0bc59",
+      "revId": "eb8584c186653c1a978465f97a07e716bf703334",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
