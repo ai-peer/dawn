@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f15e8c0_38e2a33e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T21:52:46Z",
+      "side": 1,
+      "message": "nit: `Fix validation of type constructor without assignment`",
+      "revId": "c7d2be0c5a1745bdef779796153dd3b4f116a88f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3bf1985_ce0c88cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T21:52:46Z",
+      "side": 1,
+      "message": "What was the actual fix in resolver.cc? The diff gets formatted very poorly by Gerrit so I can\u0027t tell what changed ....",
+      "revId": "c7d2be0c5a1745bdef779796153dd3b4f116a88f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
