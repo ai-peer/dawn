@@ -33,6 +33,188 @@
       "message": "Thanks jie@ for checking this CL manually on ChromeOS",
       "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e230a21b_5e0d9cd7",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75510433_e3024929",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "If you want this to work outside of common/ I think it should be at [1]. Also prefix with DAWN_ to avoid potentially using the global namespace in case the define gets propagated outside of Dawn (for example with Chromium target using internal Dawn targets)",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcdf117b_699ad655",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff4ed7f_085cd9fe",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "This isn\u0027t exactly runtime selection :) We could make CloseHandle and CheckSupport non-static.",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dad7a42_741cd9d8",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "nit: mServiceImpl, or just mImpl.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ad67e57_709e3c30",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "[1] nit: `mImpl !\u003d nullptr \u0026\u0026 mImpl-\u003eSupported()`? This removes the need for the null service.",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "061b6e82_c6ff1d21",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "nit: This can be a forward declaration instead.",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3f4d6d3_c1f86720",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "nit: The idea is that this becomes an std::array\u003cstd::unique_ptr\u003cServiceImplementation\u003e\u003e so we can support various kind of semaphores at the same time right? (this is less important for semaphores but necessary for external memory if I understand correctly, so we can decide to not do it now but at least this structure, with the addtion of an enum in ExternalSemaphoreHandle would pave the way for something like that.)",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eeca152_8b81adbe",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "nit: This header can be folded in the cpp and have just a:\n\n```\nstd::unique_ptr\u003cServiceImplementation\u003e CreateFDService(Device* device);\n```\n\nOr this forward declaration could be moved in Service.cpp itself, similarly to the backend connections in Instance.cpp. This allows having less duplication of all the declarations since all methods can be defined inline.",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "222a3d17_e653dedf",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationNull.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-09T11:15:31Z",
+      "side": 1,
+      "message": "This can probably be removed, see [1].",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
