@@ -78,6 +78,11 @@ config("internal_config") {
   }
   if (dawn_enable_vulkan) {
     defines += [ "DAWN_ENABLE_BACKEND_VULKAN" ]
+
+    # OS_CHROMEOS cannot be autodetected in runtime.
+    if (is_chromeos) {
+      defines += [ "DAWN_OS_CHROMEOS" ]
+    }
   }
 
   if (dawn_use_wayland) {
