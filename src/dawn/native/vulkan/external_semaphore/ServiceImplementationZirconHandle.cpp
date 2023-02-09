@@ -19,22 +19,22 @@
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/VulkanError.h"
-#include "dawn/native/vulkan/external_semaphore/SemaphoreService.h"
+#include "dawn/native/vulkan/external_semaphore/ServiceImplementationZirconHandle.h"
 
 namespace dawn::native::vulkan::external_semaphore {
 
-Service::Service(Device* device)
-    : mDevice(device),
+ServiceImplementationZirconHandle::ServiceImplementationZirconHandle(Device* device)
+    : ServiceImplementation(device),
       mSupported(CheckSupport(device->GetDeviceInfo(),
                               ToBackend(device->GetAdapter())->GetPhysicalDevice(),
                               device->fn)) {}
 
-Service::~Service() = default;
+ServiceImplementationZirconHandle::~ServiceImplementationZirconHandle() = default;
 
 // static
-bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
-                           VkPhysicalDevice physicalDevice,
-                           const VulkanFunctions& fn) {
+bool ServiceImplementationZirconHandle::CheckSupport(const VulkanDeviceInfo& deviceInfo,
+                                                     VkPhysicalDevice physicalDevice,
+                                                     const VulkanFunctions& fn) {
     if (!deviceInfo.HasExt(DeviceExt::ExternalSemaphoreZirconHandle)) {
         return false;
     }
@@ -57,11 +57,12 @@ bool Service::CheckSupport(const VulkanDeviceInfo& deviceInfo,
     return IsSubset(requiredFlags, semaphoreProperties.externalSemaphoreFeatures);
 }
 
-bool Service::Supported() {
+bool ServiceImplementationZirconHandle::Supported() {
     return mSupported;
 }
 
-ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle handle) {
+ResultOrError<VkSemaphore> ServiceImplementationZirconHandle::ImportSemaphore(
+    ExternalSemaphoreHandle handle) {
     DAWN_INVALID_IF(handle == ZX_HANDLE_INVALID, "Importing a semaphore with an invalid handle.");
 
     VkSemaphore semaphore = VK_NULL_HANDLE;
@@ -95,7 +96,7 @@ ResultOrError<VkSemaphore> Service::ImportSemaphore(ExternalSemaphoreHandle hand
     return semaphore;
 }
 
-ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
+ResultOrError<VkSemaphore> ServiceImplementationZirconHandle::CreateExportableSemaphore() {
     VkExportSemaphoreCreateInfoKHR exportSemaphoreInfo;
     exportSemaphoreInfo.sType = VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO_KHR;
     exportSemaphoreInfo.pNext = nullptr;
@@ -114,7 +115,8 @@ ResultOrError<VkSemaphore> Service::CreateExportableSemaphore() {
     return signalSemaphore;
 }
 
-ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore semaphore) {
+ResultOrError<ExternalSemaphoreHandle> ServiceImplementationZirconHandle::ExportSemaphore(
+    VkSemaphore semaphore) {
     VkSemaphoreGetZirconHandleInfoFUCHSIA semaphoreGetHandleInfo;
     semaphoreGetHandleInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA;
     semaphoreGetHandleInfo.pNext = nullptr;
@@ -130,7 +132,8 @@ ResultOrError<ExternalSemaphoreHandle> Service::ExportSemaphore(VkSemaphore sema
     return handle;
 }
 
-ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle) {
+ExternalSemaphoreHandle ServiceImplementationZirconHandle::DuplicateHandle(
+    ExternalSemaphoreHandle handle) {
     zx_handle_t out_handle = ZX_HANDLE_INVALID;
     zx_status_t status = zx_handle_duplicate(handle, ZX_RIGHT_SAME_RIGHTS, &out_handle);
     ASSERT(status == ZX_OK);
@@ -138,7 +141,7 @@ ExternalSemaphoreHandle Service::DuplicateHandle(ExternalSemaphoreHandle handle)
 }
 
 // static
-void Service::CloseHandle(ExternalSemaphoreHandle handle) {
+void ServiceImplementationZirconHandle::CloseHandle(ExternalSemaphoreHandle handle) {
     zx_status_t status = zx_handle_close(handle);
     ASSERT(status == ZX_OK);
 }
