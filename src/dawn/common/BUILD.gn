@@ -278,6 +278,11 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       sources += [ "SystemUtils_mac.mm" ]
     }
 
+    # OS_CHROMEOS cannot be autodetected in runtime.
+    if (is_chromeos) {
+      defines += [ "OS_CHROMEOS" ]
+    }
+
     # Note that while this doesn't make `internal_config` a public config of
     # Dawn libraries because `:common` is only used as a private deps of Dawn
     # targets, so `internal_config` doesn't leak out of Dawn.
