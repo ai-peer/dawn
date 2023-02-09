@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a52f13_ddf827b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T02:10:27Z",
+      "side": 1,
+      "message": "Do you mean Symbols instead of Sources?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84a15b22_a2fbc68f",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1317,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T02:10:27Z",
+      "side": 1,
+      "message": "This bit doesn\u0027t seem equivalent. Previously, if `preserve_unicode` was true we\u0027d rename based on code below, or if it was an ascii name. Now, we don\u0027t ever do the logic below for `preserve_unicode` but if the symbol is not ascii, we always rename if we aren\u0027t preserving unicode and never rename if we are.\n\nIs this fixing previously broken logic, or is it a purposeful change in logic?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762368fb_715c4dd6",
+        "filename": "src/tint/transform/renamer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1325,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T02:10:27Z",
+      "side": 1,
+      "message": "This also doesn\u0027t seem to match, but this new version makes more sense to me, we rename if the symbol conflicts with a GLSL keyword. The old version ... if it didn\u0027t conflict and also started with gl_ we didn\u0027t do anything?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c26defb_2404bda3",
+        "filename": "test/tint/shadowing/short_names/let.wgsl.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T02:10:27Z",
+      "side": 1,
+      "message": "I\u0027m surprised this one doesn\u0027t get renamed? I guess because it\u0027s not used in the source and it isn\u0027t a keyword in the output?\n\nWould it be possible to add one of these where it does have a `vec3f` in the source program?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
