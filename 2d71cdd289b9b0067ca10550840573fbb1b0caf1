@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e080940_e71fda41",
+        "filename": "src/tint/templates/enums.tmpl.inc",
+        "patchSetId": 10
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-09T00:38:20Z",
+      "side": 1,
+      "message": "Note: this change was required as the number of entries broke the `std::array` deduction guide for clang!",
+      "range": {
+        "startLine": 176,
+        "startChar": 4,
+        "endLine": 176,
+        "endChar": 30
+      },
+      "revId": "2d71cdd289b9b0067ca10550840573fbb1b0caf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
