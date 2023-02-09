@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56338daa_a610f307",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-09T18:41:05Z",
+      "side": 1,
+      "message": "Fix the for loop and add tests.\n\nRegards to the second part:\n\nFor our if condition `offset0 \u003c\u003d offset1 + bufferBinding1.size - 1 \u0026\u0026 offset1 \u003c\u003d offset0 + bufferBinding0.size - 1`\n\n```\nrange 0: [0   5]\nrange 1:    [2    8]\n```\n\noffset1 \u003d 2 \u003c\u003d 5 \u003d offset0 + size0 -\u003e there is overlap\n\n```\nrange 0:    [2    8]\nrange 1: [0   5]\n```\n\noffset0 \u003d 2 \u003c\u003d 5 \u003d offset1 + size1 -\u003e there is overlap\n\nYou can think of \"having overlap\" as the inverse of \"[min0, max0] has no overlap with [min1, max1]\", which can be more intuitively mapped to `!(min0 \u003e max1 || min1 \u003e max0)`. (From stackoverflow)",
+      "parentUuid": "b243e0af_46334e22",
+      "range": {
+        "startLine": 103,
+        "startChar": 13,
+        "endLine": 106,
+        "endChar": 13
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52af6919_b4a5d3fd",
