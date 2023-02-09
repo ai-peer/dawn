@@ -51,6 +51,23 @@
       "message": "What was the actual fix in resolver.cc? The diff gets formatted very poorly by Gerrit so I can\u0027t tell what changed ....",
       "revId": "c7d2be0c5a1745bdef779796153dd3b4f116a88f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e91420_23a1a2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-09T21:58:15Z",
+      "side": 1,
+      "message": "Chatted with Ben, there is no code change in the lambda bit, the lambda is stopping an early return that happened previously.\n\nlgtm w/ nit.",
+      "revId": "c7d2be0c5a1745bdef779796153dd3b4f116a88f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
