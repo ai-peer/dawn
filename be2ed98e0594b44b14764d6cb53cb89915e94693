@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab8f276_e98a390e",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 22
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000226
+      },
+      "writtenOn": "2023-02-09T00:21:41Z",
+      "side": 1,
+      "message": "This means that Chromium can never upgrade the SDK version that it requires. That is an inappropriate coupling. We need a better solution. Let\u0027s discuss on the bug.",
+      "revId": "be2ed98e0594b44b14764d6cb53cb89915e94693",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
