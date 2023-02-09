@@ -54,6 +54,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d5f4bff_03b2de0a",
+        "filename": "src/tint/transform/renamer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-09T11:41:26Z",
+      "side": 1,
+      "message": "Nit: `AddressSpace` should be `Access` here?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79856f35_05ef12e8",
+        "filename": "src/tint/transform/renamer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-09T11:41:26Z",
+      "side": 1,
+      "message": "Nit: `Access` should be `AddressSpace` here?",
+      "revId": "918c66c5094dd6cae9ab9f464b025457930937c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c26defb_2404bda3",
         "filename": "test/tint/shadowing/short_names/let.wgsl.expected.glsl",
         "patchSetId": 1
