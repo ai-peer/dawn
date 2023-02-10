@@ -50,6 +50,24 @@
       "message": "nit: Maybe we could also check for LazyResourceInit being required so that for example Skia doesn\u0027t trigger this code path that\u0027s more expensive than a discard.",
       "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c544cb_1176c326",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-10T20:45:26Z",
+      "side": 1,
+      "message": "excellent point - done",
+      "parentUuid": "aaf0a1ab_00160b16",
+      "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
