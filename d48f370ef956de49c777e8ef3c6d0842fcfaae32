@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd903fcd_2908bbd8",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-02-10T12:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d238dd44_28caec7d",
+      "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a96d823_308606f9",
