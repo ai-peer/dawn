@@ -684,7 +684,13 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
 
     VkImageFormatListCreateInfo imageFormatListInfo = {};
     std::vector<VkFormat> viewFormats;
-    if (GetViewFormats().any()) {
+    bool requiresCreateMutableFormatBit = GetViewFormats().any();
+    if (createInfo.format == VK_FORMAT_B8G8R8A8_UNORM &&
+        createInfo.usage & VK_IMAGE_USAGE_STORAGE_BIT) {
+        viewFormats.push_back(VK_FORMAT_R8G8B8A8_UNORM);
+        requiresCreateMutableFormatBit = true;
+    }
+    if (requiresCreateMutableFormatBit) {
         createInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
         if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
             createInfoChain.Add(&imageFormatListInfo,
@@ -1423,6 +1429,14 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateImageView"));
 
+    if (createInfo.format == VK_FORMAT_B8G8R8A8_UNORM &&
+        (GetTexture()->GetInternalUsage() & wgpu::TextureUsage::StorageBinding)) {
+        createInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
+        DAWN_TRY(CheckVkSuccess(device->fn.CreateImageView(device->GetVkDevice(), &createInfo,
+                                                           nullptr, &*mHandleForBGRA8UnormStorage),
+                                "CreateImageView for BGRA8Unorm storage"));
+    }
+
     SetLabelImpl();
 
     return {};
@@ -1437,10 +1451,19 @@ void TextureView::DestroyImpl() {
         device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
         mHandle = VK_NULL_HANDLE;
     }
+
+    if (mHandleForBGRA8UnormStorage != VK_NULL_HANDLE) {
+        device->GetFencedDeleter()->DeleteWhenUnused(mHandleForBGRA8UnormStorage);
+        mHandleForBGRA8UnormStorage = VK_NULL_HANDLE;
+    }
 }
 
 VkImageView TextureView::GetHandle() const {
     return mHandle;
+}
+
+VkImageView TextureView::GetHandleForBGRA8UnormStorage() const {
+    return mHandleForBGRA8UnormStorage;
 }
 
 void TextureView::SetLabelImpl() {
