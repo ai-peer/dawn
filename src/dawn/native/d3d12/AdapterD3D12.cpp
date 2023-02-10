@@ -145,6 +145,15 @@ void Adapter::InitializeSupportedFeaturesImpl() {
             mSupportedFeatures.EnableFeature(Feature::ShaderF16);
         }
     }
+
+    D3D12_FEATURE_DATA_FORMAT_SUPPORT bgra8UnormFormatInfo = {};
+    bgra8UnormFormatInfo.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
+    HRESULT hr = mD3d12Device->CheckFeatureSupport(
+        D3D12_FEATURE_FORMAT_SUPPORT, &bgra8UnormFormatInfo, sizeof(bgra8UnormFormatInfo));
+    if (DAWN_LIKELY(SUCCEEDED(hr)) &&
+        (bgra8UnormFormatInfo.Support1 & D3D12_FORMAT_SUPPORT1_TYPED_UNORDERED_ACCESS_VIEW)) {
+        mSupportedFeatures.EnableFeature(Feature::BGRA8UnormStorage);
+    }
 }
 
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
