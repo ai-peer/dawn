@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91323f33_57ae95a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-10T07:50:18Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org @enga@chromium.org I fixed two issues in patchset 7, PTAL again, thanks!",
+      "revId": "62630f35f8755fe146259b106f1b5d09e44f2bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
