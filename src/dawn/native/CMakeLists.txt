@@ -361,6 +361,8 @@ if (DAWN_ENABLE_EMULATOR)
         "emulator/RenderPipelineEmulator.cpp"
         "emulator/RenderPipelineEmulator.h"
         "emulator/ShaderModuleEmulator.h"
+        "emulator/TextureEmulator.cpp"
+        "emulator/TextureEmulator.h"
     )
     target_link_libraries(dawn_native PRIVATE tint-interp)
 endif()

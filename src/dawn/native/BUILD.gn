@@ -507,6 +507,8 @@ source_set("sources") {
       "emulator/RenderPipelineEmulator.cpp",
       "emulator/RenderPipelineEmulator.h",
       "emulator/ShaderModuleEmulator.h",
+      "emulator/TextureEmulator.cpp",
+      "emulator/TextureEmulator.h",
     ]
 
     deps += [ "${dawn_root}/src/tint/interp:libtint-interp" ]

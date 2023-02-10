@@ -19,6 +19,9 @@
 #include <string>
 #include <utility>
 
+#include "memory.h"
+#include "shader_executor.h"
+#include "texture.h"
 #include "tint/ast/assignment_statement.h"
 #include "tint/ast/break_if_statement.h"
 #include "tint/ast/call_expression.h"
@@ -37,6 +40,7 @@
 #include "tint/constant/scalar.h"
 #include "tint/interp/memory.h"
 #include "tint/interp/shader_executor.h"
+#include "tint/interp/texture.h"
 #include "tint/resolver/intrinsic_table.h"
 #include "tint/sem/call.h"
 #include "tint/sem/function.h"
@@ -184,6 +188,7 @@ Invocation::Invocation(ShaderExecutor& executor,
         auto* store_type = global->Type()->UnwrapRef();
         MemoryView* view = nullptr;
         switch (global->AddressSpace()) {
+            case builtin::AddressSpace::kHandle:
             case builtin::AddressSpace::kStorage:
             case builtin::AddressSpace::kUniform: {
                 if (!bindings.count(global)) {
@@ -358,7 +363,11 @@ void Invocation::Step() {
 
         // Apply the load rule if necessary.
         if (executor_.Sem().Get<sem::Load>(next.expr)) {
-            result = ExprResult::MakeValue(result.Reference()->Load());
+            if (result.Reference()->Type()->is_handle()) {
+                result = ExprResult::MakeHandle(result.Reference()->LoadHandle());
+            } else {
+                result = ExprResult::MakeValue(result.Reference()->Load());
+            }
         }
 
         current_block.expr_results[next.expr] = result;
@@ -482,6 +491,10 @@ std::string Invocation::GetValue(std::string identifier) const {
             ss << "ptr<" << view->AddressSpace() << ", "
                << view->Type()->FriendlyName(executor_.Symbols()) << ">";
             return ss.str();
+        }
+        case ExprResult::Kind::kHandle: {
+            // TODO: Print details about the handle.
+            return "<handle type>";
         }
         case ExprResult::Kind::kInvalid: {
             return "<expression produced invalid result>";
@@ -889,6 +902,8 @@ ExprResult Invocation::EvaluateBuiltin(const sem::Builtin* builtin,
         return ExprResult::MakeValue(result);
     } else if (builtin->IsAtomic()) {
         return EvaluateBuiltinAtomic(builtin, call);
+    } else if (builtin->IsTexture()) {
+        return EvaluateBuiltinTexture(builtin, call);
     } else if (builtin->Type() == sem::BuiltinType::kStorageBarrier ||
                builtin->Type() == sem::BuiltinType::kWorkgroupBarrier) {
         barrier_ = call;
@@ -964,6 +979,37 @@ ExprResult Invocation::EvaluateBuiltinAtomic(const sem::Builtin* builtin,
         default:
             executor_.ReportFatalError("unhandled atomic builtin call", call->source);
             return ExprResult();
+    }
+}
+
+ExprResult Invocation::EvaluateBuiltinTexture(const sem::Builtin* builtin,
+                                              const ast::CallExpression* call) {
+    auto* texture = GetResult(call->args[0]).Handle<TextureView>();
+
+    if (builtin->Type() == sem::BuiltinType::kTextureDimensions) {
+        if (builtin->ReturnType()->is_scalar()) {
+            return ExprResult::MakeValue(
+                // TODO: actual dimension, not 42
+                executor_.Builder().create<constant::Scalar<u32>>(builtin->ReturnType(),
+                                                                  u32(texture->Width())));
+        } else {
+            auto* vec = builtin->ReturnType()->As<type::Vector>();
+            utils::Vector<const constant::Value*, 4> elements;
+            for (uint32_t i = 0; i < vec->Width(); i++) {
+                elements.Push(
+                    // TODO: actual dimension, not 42
+                    executor_.Builder().create<constant::Scalar<u32>>(builtin->ReturnType(),
+                                                                      u32(texture->Width() + i)));
+            }
+            return ExprResult::MakeValue(
+                executor_.ConstEval().VecInitS(builtin->ReturnType(), elements, {}).Get());
+        }
+    } else if (builtin->Type() == sem::BuiltinType::kTextureStore) {
+        // TODO
+        return ExprResult();
+    } else {
+        executor_.ReportFatalError("unhandled texture builtin call", call->source);
+        return ExprResult();
     }
 }
 

@@ -25,6 +25,7 @@
 #include "dawn/native/emulator/QueueEmulator.h"
 #include "dawn/native/emulator/RenderPipelineEmulator.h"
 #include "dawn/native/emulator/ShaderModuleEmulator.h"
+#include "dawn/native/emulator/TextureEmulator.h"
 
 namespace dawn::native::emulator {
 
@@ -73,7 +74,10 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
                                                 const TextureDataLayout& src,
                                                 const TextureCopy& dst,
                                                 const Extent3D& copySizePixels) {
-    return DAWN_UNIMPLEMENTED_ERROR("emulator::Device::CopyFromStagingToTexture");
+    // ToBackend(dst->texture)->Get();
+        // ->Get()
+        //  CopyFrom(destinationOffset, ToBackend(source)->Get(), sourceOffset, size);
+    return {};
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {
@@ -130,13 +134,13 @@ ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* 
 }
 
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("emulator::Device::CreateTexture");
+    return Texture::Create(this, descriptor);
 }
 
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
     TextureBase* texture,
     const TextureViewDescriptor* descriptor) {
-    return DAWN_UNIMPLEMENTED_ERROR("emulator::Device::CreateTextureView");
+    return TextureView::Create(texture, descriptor);
 }
 
 ResultOrError<Ref<SamplerBase>> Device::CreateSamplerImpl(const SamplerDescriptor* descriptor) {

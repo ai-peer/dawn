@@ -73,7 +73,7 @@ namespace tint::interp {
 class ExprResult {
   public:
     /// The type of a ExprResult object.
-    enum class Kind { kInvalid, kValue, kReference, kPointer };
+    enum class Kind { kInvalid, kValue, kReference, kPointer, kHandle };
 
     /// Default constructor.
     ExprResult() { kind_ = Kind::kInvalid; }
@@ -111,6 +111,15 @@ class ExprResult {
         return result;
     }
 
+    /// Create an ExprResult that represents a handle.
+    static ExprResult MakeHandle(const void* handle) {
+        TINT_ASSERT(Interpreter, handle != nullptr);
+        ExprResult result;
+        result.kind_ = Kind::kHandle;
+        result.handle_ = handle;
+        return result;
+    }
+
     /// @returns the type of this ExprResult object
     Kind Kind() const { return kind_; }
 
@@ -132,11 +141,19 @@ class ExprResult {
         return memory_view_;
     }
 
+    /// @returns the handle associated with this object
+    template <typename T>
+    const T* Handle() {
+        TINT_ASSERT(Interpreter, kind_ == Kind::kHandle);
+        return static_cast<const T*>(handle_);
+    }
+
   private:
     enum Kind kind_;
     union {
         const constant::Value* value_ = nullptr;
         MemoryView* memory_view_;
+        const void* handle_;
     };
 };
 
@@ -343,6 +360,7 @@ class Invocation {
     // Helpers for evaluating builtin functions.
     ExprResult EvaluateBuiltin(const sem::Builtin* builtin, const ast::CallExpression* call);
     ExprResult EvaluateBuiltinAtomic(const sem::Builtin* builtin, const ast::CallExpression* call);
+    ExprResult EvaluateBuiltinTexture(const sem::Builtin* builtin, const ast::CallExpression* call);
 };
 
 }  // namespace tint::interp

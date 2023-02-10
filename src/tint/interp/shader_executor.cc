@@ -235,6 +235,33 @@ ShaderExecutor::Result ShaderExecutor::Run(UVec3 workgroup_count, BindingList&& 
                 bindings_[global] = view;
                 break;
             }
+            case builtin::AddressSpace::kHandle: {
+                if (!bindings.count(bp)) {
+                    return MakeError("Missing texture/sampler binding for @group(" +
+                                     std::to_string(bp.group) + ") @binding(" +
+                                     std::to_string(bp.binding) + ")");
+                }
+                auto& binding = bindings.at(bp);
+                // TODO: Handle samplers here as well.
+                if (!binding.texture) {
+                    return MakeError("Invalid binding resource for @group(" +
+                                     std::to_string(bp.group) + ") @binding(" +
+                                     std::to_string(bp.binding) + ")");
+                }
+
+                std::unique_ptr<Memory> handle = std::make_unique<Memory>(sizeof(void*));
+                // TODO: set handle
+
+                // Create the memory view and add it to the shader executor.
+                auto* view =
+                    handle->CreateView(this, global->AddressSpace(), global->Type()->UnwrapRef(), 0,
+                                       sizeof(void*), global->Declaration()->source);
+                bindings_[global] = view;
+
+                handle_allocations_.push_back(std::move(handle));
+
+                break;
+            }
             default:
                 return MakeError("unhandled binding resource address space",
                                  global->Declaration()->source);

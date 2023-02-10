@@ -283,6 +283,13 @@ const constant::Value* MemoryView::Load(const type::Type* type, uint64_t offset)
         });
 }
 
+const void* MemoryView::LoadHandle() {
+    TINT_ASSERT(Interpreter, is_valid_);
+    void* handle;
+    memory_->Load(&handle, 0, sizeof(void*));
+    return handle;
+}
+
 void MemoryView::Store(const constant::Value* value) {
     if (!is_valid_) {
         ReportOutOfBounds("storing to an out-of-bounds memory view",

@@ -79,6 +79,10 @@ class MemoryView {
     /// @returns the loaded value as a constant::Value
     const constant::Value* Load();
 
+    /// Load the handle value from this memory view.
+    /// @returns the loaded handle value
+    const void* LoadHandle();
+
     /// Store a value to this memory view.
     /// @param value the value to store
     void Store(const constant::Value* value);

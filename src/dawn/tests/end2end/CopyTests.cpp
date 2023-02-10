@@ -1354,6 +1354,7 @@ TEST_P(CopyTests_T2B, Texture3DMipUnaligned) {
 
 DAWN_INSTANTIATE_TEST(CopyTests_T2B,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),

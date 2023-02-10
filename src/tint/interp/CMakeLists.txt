@@ -23,6 +23,8 @@ set(TINT_INTERP_SRCS
   memory.h
   shader_executor.cc
   shader_executor.h
+  texture.cc
+  texture.h
   uvec3.h
   workgroup.cc
   workgroup.h
@@ -65,7 +67,8 @@ if(${TINT_BUILD_TESTS})
                  tests/interactive_debugger_tests.cc
                  tests/invocation_tests.cc
                  tests/memory_tests.cc
-                 tests/shader_executor_tests.cc)
+                 tests/shader_executor_tests.cc
+                 tests/texture_tests.cc)
   tint_default_compile_options(tint-interp-tests)
   target_include_directories(tint-interp-tests PUBLIC "${DAWN_SRC_DIR}")
   target_link_libraries(tint-interp-tests tint-interp gmock)

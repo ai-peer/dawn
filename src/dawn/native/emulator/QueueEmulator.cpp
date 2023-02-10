@@ -24,6 +24,7 @@
 #include "dawn/native/emulator/BindGroupEmulator.h"
 #include "dawn/native/emulator/BufferEmulator.h"
 #include "dawn/native/emulator/DeviceEmulator.h"
+#include "dawn/native/emulator/TextureEmulator.h"
 #include "tint/ast/module.h"
 #include "tint/interp/data_race_detector.h"
 #include "tint/interp/interactive_debugger.h"
@@ -80,6 +81,22 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
                     tint::interp::Memory& src = ToBackend(copy->source)->Get();
                     tint::interp::Memory& dst = ToBackend(copy->destination)->Get();
                     dst.CopyFrom(copy->destinationOffset, src, copy->sourceOffset, copy->size);
+                    break;
+                }
+                case Command::CopyTextureToBuffer: {
+                    // TODO
+                    CopyTextureToBufferCmd* copy = itr->NextCommand<CopyTextureToBufferCmd>();
+                    // tint::interp::Memory& src = ToBackend(copy->source.texture);
+                    tint::interp::Memory& dst = ToBackend(copy->destination.buffer)->Get();
+                    for (uint32_t j = 0; j < copy->copySize.height; j++) {
+                        uint32_t* row_start =
+                            reinterpret_cast<uint32_t*>(dst.Data() + copy->destination.offset +
+                                                        j * copy->destination.bytesPerRow);
+                        for (uint32_t i = 0; i < copy->copySize.width; i++) {
+                            row_start[i] = i + j * copy->copySize.width;
+                        }
+                    }
+                    // dst.CopyFrom(copy->destinationOffset, src, copy->sourceOffset, copy->size);
                     break;
                 }
                 case Command::EndComputePass: {
@@ -145,6 +162,13 @@ MaybeError Queue::Dispatch(Ref<PipelineBase> pipeline,
 
                     bindings[{itr.first, static_cast<uint32_t>(info.binding)}] =
                         tint::interp::Binding::MakeBufferBinding(&memory, offset, buffer.size);
+                    break;
+                }
+                case BindingInfoType::StorageTexture: {
+                    TextureViewBase* textureViewBase = group->GetBindingAsTextureView(index);
+                    tint::interp::TextureView& view = ToBackend(textureViewBase)->Get();
+                    bindings[{itr.first, static_cast<uint32_t>(info.binding)}] =
+                        tint::interp::Binding::MakeTextureBinding(&view);
                     break;
                 }
                 default:

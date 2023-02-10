@@ -23,6 +23,7 @@
 #include <vector>
 
 #include "tint/interp/memory.h"
+#include "tint/interp/texture.h"
 #include "tint/interp/uvec3.h"
 #include "tint/program_builder.h"
 #include "tint/resolver/const_eval.h"
@@ -60,6 +61,9 @@ struct Binding {
     /// The sie of the buffer in bytes.
     uint64_t buffer_size = 0;
 
+    // TODO: union?
+    TextureView* texture = nullptr;
+
     /// Constructor - make an invalid binding.
     Binding() = default;
 
@@ -73,6 +77,14 @@ struct Binding {
         b.buffer = buffer;
         b.buffer_offset = offset;
         b.buffer_size = size;
+        return b;
+    }
+
+    /// Create a texture binding.
+    /// @param texture the texture view
+    static Binding MakeTextureBinding(TextureView* texture) {
+        Binding b;
+        b.texture = texture;
         return b;
     }
 };
@@ -320,6 +332,7 @@ class ShaderExecutor {
     const ast::Function* entry_point_;
     UVec3 workgroup_count_;
     UVec3 workgroup_size_;
+    std::vector<std::unique_ptr<Memory>> handle_allocations_;
     std::unordered_map<const sem::GlobalVariable*, MemoryView*> bindings_;
     std::unordered_map<const sem::Variable*, const constant::Value*> named_overrides_;
 

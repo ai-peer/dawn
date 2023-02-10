@@ -31,6 +31,8 @@ if (tint_build_interpreter) {
       "memory.h",
       "shader_executor.cc",
       "shader_executor.h",
+      "texture.cc",
+      "texture.h",
       "uvec3.h",
       "workgroup.cc",
       "workgroup.h",
@@ -54,6 +56,7 @@ if (tint_build_interpreter) {
       "tests/invocation_tests.cc",
       "tests/memory_tests.cc",
       "tests/shader_executor_tests.cc",
+      "tests/texture_tests.cc",
       "tests/test_main.cc",
     ]
 
