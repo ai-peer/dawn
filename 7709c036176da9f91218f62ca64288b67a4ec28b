@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "358dedc7_929a628c",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-10T14:14:55Z",
+      "side": 1,
+      "message": "`TraverseExpressions` is intended to traverse just the continuous expression tree, not make hops through non expression things.\n\nWe have:\n\n```\nIdentifierExpression -\u003e TemplatedIdentifier -\u003e Expressions\n^^^^^^^^^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^    ^^^^^^^^^^^\n  Expression              Non-Expression       Expression \n```\n\nand\n\n```\nCallExpression -\u003e TemplatedIdentifier -\u003e Expressions\n^^^^^^^^^^^^^^    ^^^^^^^^^^^^^^^^^^^    ^^^^^^^^^^^\n  Expression        Non-Expression       Expression \n\n```\n\nWith that said, I might have to take a look to see if making an exception here would simplify code. It might.",
+      "parentUuid": "b17553d5_fd036450",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b010dc3e_e078f030",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79a248c1_481f6fbc",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-10T14:14:55Z",
+      "side": 1,
+      "message": "Shorted name to keep as one line.",
+      "parentUuid": "b010dc3e_e078f030",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5bcba0a_db014cc9",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-02-09T16:11:14Z",
       "side": 1,
       "message": "Remove?",
+      "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e89bec_413f4aa6",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2580,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-10T14:14:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5bcba0a_db014cc9",
       "revId": "7709c036176da9f91218f62ca64288b67a4ec28b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
