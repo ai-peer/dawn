@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7514354f_0f19d285",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-10T19:11:14Z",
+      "side": 1,
+      "message": "Nit: storage_texture",
+      "revId": "bf45562a10d7b9418b80569e4c7d22e7e173cbed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
