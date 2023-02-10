@@ -16,6 +16,80 @@
       "message": "PTAL, thanks!",
       "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f13d7e7_8a6b6277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:49:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57030858_c9973c46",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:49:33Z",
+      "side": 1,
+      "message": "nit: Since we are checking a single flakg, IsSubset is a bit overkill and flag \u0026 flags should work just as well.",
+      "range": {
+        "startLine": 256,
+        "startChar": 8,
+        "endLine": 256,
+        "endChar": 16
+      },
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe3a5f8d_64b2d633",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:49:33Z",
+      "side": 1,
+      "message": "Maybe add a small comment as to why we do this, it won\u0027t be immediately clear when we read the code in 2 years.",
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87d2077d_f9803911",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:49:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
