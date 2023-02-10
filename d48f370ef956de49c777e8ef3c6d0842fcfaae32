@@ -16,6 +16,57 @@
       "message": "Hi Corentin, PTAL. Thanks.",
       "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b9a955_63f00f40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:14:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d238dd44_28caec7d",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:14:30Z",
+      "side": 1,
+      "message": "nit: We might no need this, other places using dawn_from_googlestorage don\u0027t use the explicit depot_tools. See [1] for example.",
+      "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a96d823_308606f9",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:14:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
