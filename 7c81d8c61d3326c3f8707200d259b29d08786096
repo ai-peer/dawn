@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81ac2fd_8fc91a01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-10T04:38:56Z",
+      "side": 1,
+      "message": "PTAL (need to rebase on the other toggles cl)",
+      "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
