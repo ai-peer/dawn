@@ -212,6 +212,11 @@ deps = {
     'url': '{chromium_git}/external/github.com/protocolbuffers/protobuf.git@fde7cf7358ec7cd69e8db9be4f1fa6a5c431386a',
     'condition': 'dawn_standalone',
   },
+  'third_party/depot_tools': {
+    'url': '{chromium_git}/chromium/tools/depot_tools.git@10369890bb0452c44ab2bfc1240aeb61db3b345c',
+    'condition': 'dawn_standalone',
+  }
+
 }
 
 hooks = [
@@ -237,6 +242,19 @@ hooks = [
     'pattern': '.',
     'condition': 'dawn_standalone and checkout_mac',
     'action': ['python3', 'build/mac_toolchain.py'],
+  },
+  {
+    # Case-insensitivity for the Win SDK. Must run before win_toolchain below.
+    'name': 'ciopfs_linux',
+    'pattern': '.',
+    'condition': 'checkout_win and host_os == "linux"',
+    'action': [ 'python3',
+                'third_party/depot_tools/download_from_google_storage.py',
+                '--no_resume',
+                '--no_auth',
+                '--bucket', 'chromium-browser-clang/ciopfs',
+                '-s', 'build/ciopfs.sha1',
+    ]
   },
   {
     # Update the Windows toolchain if necessary. Must run before 'clang' below.
@@ -272,6 +290,18 @@ hooks = [
                 '--bucket', 'chromium-browser-clang/rc',
                 '-s', 'build/toolchain/win/rc/win/rc.exe.sha1',
     ],
+  },
+  {
+    'name': 'rc_linux',
+    'pattern': '.',
+    'condition': 'checkout_win and host_os == "linux"',
+    'action': [ 'python3',
+                'third_party/depot_tools/download_from_google_storage.py',
+                '--no_resume',
+                '--no_auth',
+                '--bucket', 'chromium-browser-clang/rc',
+                '-s', 'build/toolchain/win/rc/linux64/rc.sha1',
+    ]
   },
   # Pull clang-format binaries using checked-in hashes.
   {
