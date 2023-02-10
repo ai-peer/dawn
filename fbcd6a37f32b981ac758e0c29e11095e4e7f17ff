@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5121d260_becf455e",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-10T01:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "442d25c7_d7aa42ed",
+      "range": {
+        "startLine": 101,
+        "startChar": 43,
+        "endLine": 101,
+        "endChar": 54
+      },
+      "revId": "fbcd6a37f32b981ac758e0c29e11095e4e7f17ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ecfbed8_2e705fc7",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c73183_5a3fea52",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests_D3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-10T01:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ecfbed8_2e705fc7",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 19
+      },
+      "revId": "fbcd6a37f32b981ac758e0c29e11095e4e7f17ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8bb84d3b_18841aa0",
@@ -94,6 +142,24 @@
       "writtenOn": "2023-02-09T11:19:57Z",
       "side": 1,
       "message": "ditto",
+      "revId": "fbcd6a37f32b981ac758e0c29e11095e4e7f17ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a21687ce_50f48d0c",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests_Metal.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-10T01:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bb84d3b_18841aa0",
       "revId": "fbcd6a37f32b981ac758e0c29e11095e4e7f17ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
