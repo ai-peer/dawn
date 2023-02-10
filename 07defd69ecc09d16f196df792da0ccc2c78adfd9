@@ -35,6 +35,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c5bca38_d4145935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-10T17:46:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f958f7eb_c65af6a7",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-10T17:46:41Z",
+      "side": 1,
+      "message": "uuu-nit: variables are usually camelCase. `rg11b10Properties` ?",
+      "range": {
+        "startLine": 243,
+        "startChar": 23,
+        "endLine": 243,
+        "endChar": 40
+      },
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2220322d_aa9d6779",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-10T17:46:41Z",
+      "side": 1,
+      "message": "ditto on casing: `bgra8unormProperties`",
+      "range": {
+        "startLine": 253,
+        "startChar": 23,
+        "endLine": 253,
+        "endChar": 43
+      },
+      "revId": "07defd69ecc09d16f196df792da0ccc2c78adfd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57030858_c9973c46",
