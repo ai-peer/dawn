@@ -85,6 +85,24 @@
       "message": "[1]",
       "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94455fea_b3de9529",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T12:34:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5a96d823_308606f9",
+      "revId": "d48f370ef956de49c777e8ef3c6d0842fcfaae32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
