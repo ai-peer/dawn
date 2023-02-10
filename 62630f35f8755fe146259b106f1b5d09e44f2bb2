@@ -16,6 +16,23 @@
       "message": "@cwallez@chromium.org @enga@chromium.org I fixed two issues in patchset 7, PTAL again, thanks!",
       "revId": "62630f35f8755fe146259b106f1b5d09e44f2bb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2df87f9_86a79d0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:18:31Z",
+      "side": 1,
+      "message": "LGTM still",
+      "revId": "62630f35f8755fe146259b106f1b5d09e44f2bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
