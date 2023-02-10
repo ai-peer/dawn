@@ -16,6 +16,40 @@
       "message": "PTAL (need to rebase on the other toggles cl)",
       "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e124726_c4350169",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:17:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf0a1ab_00160b16",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 862,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:17:23Z",
+      "side": 1,
+      "message": "nit: Maybe we could also check for LazyResourceInit being required so that for example Skia doesn\u0027t trigger this code path that\u0027s more expensive than a discard.",
+      "revId": "7c81d8c61d3326c3f8707200d259b29d08786096",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
