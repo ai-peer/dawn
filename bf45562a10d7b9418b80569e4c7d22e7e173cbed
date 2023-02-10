@@ -16,6 +16,24 @@
       "message": "Nit: storage_texture",
       "revId": "bf45562a10d7b9418b80569e4c7d22e7e173cbed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56548a00_2948a945",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 1098,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-10T19:25:01Z",
+      "side": 1,
+      "message": "Will fix in the next change. Thanks.",
+      "parentUuid": "7514354f_0f19d285",
+      "revId": "bf45562a10d7b9418b80569e4c7d22e7e173cbed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
