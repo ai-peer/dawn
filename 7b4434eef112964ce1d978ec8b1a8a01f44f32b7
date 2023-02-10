@@ -16,6 +16,29 @@
       "message": "DawnTestWithParams::TearDown() missing here, the tests will always pass.",
       "revId": "7b4434eef112964ce1d978ec8b1a8a01f44f32b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43667664_e32045f1",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-10T06:40:46Z",
+      "side": 1,
+      "message": "The compute pipeline is needed here due to dawn:1473, we have tested the issue with no pipelines in end2end/QueryTests.cpp, not need to test it again here.",
+      "range": {
+        "startLine": 128,
+        "startChar": 22,
+        "endLine": 128,
+        "endChar": 41
+      },
+      "revId": "7b4434eef112964ce1d978ec8b1a8a01f44f32b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
