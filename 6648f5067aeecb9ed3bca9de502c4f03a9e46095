@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36faf2e7_1ff433e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:47:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c96a5bab_cd963437",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:47:12Z",
+      "side": 1,
+      "message": "nit: DAWN_LIKELY  isn\u0027t super important here because this is cold code. In general we should avoid peppering this macro unless profiling strongly suggests we need to do it.",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 19
+      },
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca55ae40_4045fb39",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-10T11:47:12Z",
+      "side": 1,
+      "message": "Question: do we need to add a second path to support BRA8Unorm through an RGBA8Unorm view or is does that give no additional reach?",
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
