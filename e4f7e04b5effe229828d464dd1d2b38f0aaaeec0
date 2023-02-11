@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8851654_6bf21f8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-02-11T07:02:32Z",
+      "side": 1,
+      "message": "As far as I can tell this never got fixed. PTAL.\n\nCould have done *.txt in these directories but decided to just list them out. (Didn\u0027t want to do *.txt globally because of CMakeLists.txt.)\n\nAlso could have listed these in the toplevel OWNERS file, I think, but this seemed slightly more maintainable.",
+      "revId": "e4f7e04b5effe229828d464dd1d2b38f0aaaeec0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
