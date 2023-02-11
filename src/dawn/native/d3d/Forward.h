@@ -23,12 +23,14 @@ class Adapter;
 class BindGroupLayout;
 class Device;
 class PipelineLayout;
+class ShaderModule;
 
 struct D3DBackendTraits {
     using AdapterType = Adapter;
     using BindGroupLayoutType = BindGroupLayout;
     using DeviceType = Device;
     using PipelineLayoutType = PipelineLayout;
+    using ShaderModuleType = ShaderModule;
 };
 
 template <typename T>

@@ -498,16 +498,31 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
         req.bytecode.compiler = Compiler::FXC;
         req.bytecode.d3dCompile = device->GetFunctions()->d3dCompile;
         req.bytecode.compilerVersion = D3D_COMPILER_VERSION;
-        switch (stage) {
-            case SingleShaderStage::Vertex:
-                req.bytecode.fxcShaderProfile = "vs_5_1";
-                break;
-            case SingleShaderStage::Fragment:
-                req.bytecode.fxcShaderProfile = "ps_5_1";
-                break;
-            case SingleShaderStage::Compute:
-                req.bytecode.fxcShaderProfile = "cs_5_1";
-                break;
+        if (device->GetDeviceInfo().shaderModel >= 51) {
+            switch (stage) {
+                case SingleShaderStage::Vertex:
+                    req.bytecode.fxcShaderProfile = "vs_5_1";
+                    break;
+                case SingleShaderStage::Fragment:
+                    req.bytecode.fxcShaderProfile = "ps_5_1";
+                    break;
+                case SingleShaderStage::Compute:
+                    req.bytecode.fxcShaderProfile = "cs_5_1";
+                    break;
+            }
+        } else {
+            ASSERT(device->GetDeviceInfo().shaderModel == 50);
+            switch (stage) {
+                case SingleShaderStage::Vertex:
+                    req.bytecode.fxcShaderProfile = "vs_5_0";
+                    break;
+                case SingleShaderStage::Fragment:
+                    req.bytecode.fxcShaderProfile = "ps_5_0";
+                    break;
+                case SingleShaderStage::Compute:
+                    req.bytecode.fxcShaderProfile = "cs_5_0";
+                    break;
+            }
         }
     }
 
