@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0304a80c_3ae05cb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003286
+      },
+      "writtenOn": "2023-02-11T00:12:18Z",
+      "side": 1,
+      "message": "Chromium does recursive DEPS for Dawn, so when I `gclient sync` in Chromium, it looks at third_party/dawn/DEPS and tries to run this new hooks here.\n\nThe paths used in the hooks do not match up, because Dawn has `use_relative_paths` set true, whereas Chromium does not. So the runhooks phase in my Chromium checkout fails:\n\n```\nError: Command \u0027download_from_google_storage --no_resume --no_auth --bucket chromium-browser-clang/ciopfs -s build/ciopfs.sha1\u0027 returned non-zero exit status 1 in /path/to/chrome/src/third_party/dawn\nFatal error: build/ciopfs.sha1 not found when attempting enumerate files to download.\n```",
+      "revId": "78583a14e642831d33cf1f6d66362e0d7ea591ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
