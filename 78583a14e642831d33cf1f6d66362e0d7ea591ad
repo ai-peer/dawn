@@ -34,6 +34,23 @@
       "parentUuid": "0304a80c_3ae05cb7",
       "revId": "78583a14e642831d33cf1f6d66362e0d7ea591ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84571a81_01a63bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2023-02-11T14:23:02Z",
+      "side": 1,
+      "message": "this breaks cross building chromium, see https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1415010\n\ncan we please quickly revert this to unbreak chromium?",
+      "revId": "78583a14e642831d33cf1f6d66362e0d7ea591ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
