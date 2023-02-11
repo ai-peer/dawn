@@ -184,7 +184,7 @@ class Stream<::detail::TypedIntegerImpl<Tag, Integer>> {
 template <typename T>
 class Stream<T, std::enable_if_t<std::is_pointer_v<T>>> {
   public:
-    static void Write(stream::Sink* sink, const T& t) {
+    inline static void Write(stream::Sink* sink, const T& t) {
         using Pointee = std::decay_t<std::remove_pointer_t<T>>;
         static_assert(!std::is_same_v<char, Pointee> && !std::is_same_v<wchar_t, Pointee> &&
                           !std::is_same_v<char16_t, Pointee> && !std::is_same_v<char32_t, Pointee>,

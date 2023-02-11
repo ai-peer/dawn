@@ -58,6 +58,12 @@ typedef struct {
     WGPUTextureUsage textureUsage;
 } DawnSwapChainImplementation;
 
+#if defined(DAWN_ENABLE_BACKEND_D3D11) && defined(__cplusplus)
+struct DawnWSIContextD3D11 {
+    WGPUDevice device = nullptr;
+};
+#endif
+
 #if defined(DAWN_ENABLE_BACKEND_D3D12) && defined(__cplusplus)
 struct DawnWSIContextD3D12 {
     WGPUDevice device = nullptr;
