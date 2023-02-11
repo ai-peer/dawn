@@ -251,6 +251,14 @@ if (WINDOWS_STORE)
     target_link_libraries(dawn_native PRIVATE debug dxgi.lib)
 endif()
 
+if (DAWN_ENABLE_D3D11)
+    target_sources(dawn_native PRIVATE
+        "d3d11/AdapterD3D11.cpp"
+        "d3d11/AdapterD3D11.h"
+        "d3d11/BackendD3D11.cpp"
+        "d3d11/BackendD3D11.h"
+endif()
+
 if (DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/D3D12Backend.h"

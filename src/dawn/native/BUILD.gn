@@ -395,6 +395,57 @@ source_set("sources") {
   # Somehow use dxcompiler.lib makes CoreApp unable to activate
   # WinPIX should be added as third party tools and linked statically
 
+  if (dawn_enable_d3d11) {
+    libs += [ "dxguid.lib" ]
+    sources += [
+      "d3d11/AdapterD3D11.cpp",
+      "d3d11/AdapterD3D11.h",
+      "d3d11/BackendD3D11.cpp",
+      "d3d11/BackendD3D11.h",
+      "d3d11/BindGroupD3D11.cpp",
+      "d3d11/BindGroupD3D11.h",
+      "d3d11/BindGroupLayoutD3D11.cpp",
+      "d3d11/BindGroupLayoutD3D11.h",
+      "d3d11/BufferD3D11.cpp",
+      "d3d11/BufferD3D11.h",
+      "d3d11/CommandBufferD3D11.cpp",
+      "d3d11/CommandBufferD3D11.h",
+      "d3d11/CommandRecordingContextD3D11.cpp",
+      "d3d11/CommandRecordingContextD3D11.h",
+      "d3d11/ComputePipelineD3D11.cpp",
+      "d3d11/ComputePipelineD3D11.h",
+      "d3d11/D3D11Backend.cpp",
+      "d3d11/D3D11Error.cpp",
+      "d3d11/D3D11Error.h",
+      "d3d11/D3D11Info.cpp",
+      "d3d11/D3D11Info.h",
+      "d3d11/DeviceD3D11.cpp",
+      "d3d11/DeviceD3D11.h",
+      "d3d11/NativeSwapChainImplD3D11.cpp",
+      "d3d11/NativeSwapChainImplD3D11.h",
+      "d3d11/PipelineLayoutD3D11.cpp",
+      "d3d11/PipelineLayoutD3D11.h",
+      "d3d11/PlatformFunctionsD3D11.cpp",
+      "d3d11/PlatformFunctionsD3D11.h",
+      "d3d11/QueueD3D11.cpp",
+      "d3d11/QueueD3D11.h",
+      "d3d11/RenderPipelineD3D11.cpp",
+      "d3d11/RenderPipelineD3D11.h",
+      "d3d11/SamplerD3D11.cpp",
+      "d3d11/SamplerD3D11.h",
+      "d3d11/ShaderModuleD3D11.cpp",
+      "d3d11/ShaderModuleD3D11.h",
+      "d3d11/SwapChainD3D11.cpp",
+      "d3d11/SwapChainD3D11.h",
+      "d3d11/TextureD3D11.cpp",
+      "d3d11/TextureD3D11.h",
+      "d3d11/UtilsD3D11.cpp",
+      "d3d11/UtilsD3D11.h",
+      "d3d12/BlobD3D12.cpp",
+      "d3d12/BlobD3D12.h",
+    ]
+  }
+
   if (dawn_enable_d3d12) {
     libs += [ "dxguid.lib" ]
     sources += [

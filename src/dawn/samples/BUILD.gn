@@ -20,6 +20,7 @@ group("samples") {
     ":CHelloTriangle",
     ":ComputeBoids",
     ":CppHelloTriangle",
+    ":D3D11Demo",
     ":ManualSwapChainTest",
   ]
 }
@@ -75,4 +76,12 @@ sample("Animometer") {
 
 sample("ManualSwapChainTest") {
   sources = [ "ManualSwapChainTest.cpp" ]
+}
+
+sample("D3D11Demo") {
+  sources = [ "D3D11Demo.cpp" ]
+  libs = [
+    "d3dcompiler.lib",
+    "d3d11.lib",
+  ]
 }
