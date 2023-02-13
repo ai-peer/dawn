@@ -33,6 +33,23 @@
       "message": "...no, i don\u0027t have permissions, or i need a cr+ at least. if anyone could stamp, that\u0027d be cool.",
       "revId": "16ea906d3b02ee54561f8e2127cf31ed43e28b7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066186ca_4d649105",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-13T10:14:58Z",
+      "side": 1,
+      "message": "Landing https://dawn-review.googlesource.com/c/dawn/+/119560 instead since both CLs would need to get through CQ anyway.",
+      "revId": "16ea906d3b02ee54561f8e2127cf31ed43e28b7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
