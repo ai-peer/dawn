@@ -187,6 +187,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac64f66c_523b0aff",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-13T12:29:41Z",
+      "side": 1,
+      "message": "Exactly!",
+      "parentUuid": "ac22e84c_2058d06e",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061b6e82_c6ff1d21",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
         "patchSetId": 4
@@ -233,6 +251,24 @@
       "side": 1,
       "message": "Yes, but semaphore is a bit different from MemoryService, I think it also needs to have a dawn_exportable_semaphore_type to generate exportable semaphore. I agree with the general direction and I\u0027ll land the comments with additional details.",
       "parentUuid": "c3f4d6d3_c1f86720",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75813173_49a8c3c2",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-13T12:29:41Z",
+      "side": 1,
+      "message": "Ah ok, maybe we can assume there is a single type per OS for now because of the exportable semaphore.",
+      "parentUuid": "17f97eb7_14f173d7",
       "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
