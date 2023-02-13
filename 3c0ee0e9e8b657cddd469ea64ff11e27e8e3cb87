@@ -33,6 +33,24 @@
       "message": "LGTM! Are there any suppressions in the Dawn end2end tests that can be lifted with this?",
       "revId": "3c0ee0e9e8b657cddd469ea64ff11e27e8e3cb87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf45e115_7a807eab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-13T16:18:15Z",
+      "side": 1,
+      "message": "nope, they\u0027ve all been removed already some time ago after the bots upgraded and we found it no longer fails\n\nalso, your LGTM didn\u0027t click the CR+ button",
+      "parentUuid": "e7f077db_871f16eb",
+      "revId": "3c0ee0e9e8b657cddd469ea64ff11e27e8e3cb87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
