@@ -111,6 +111,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a94b134_7fd60eb8",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-13T01:50:40Z",
+      "side": 1,
+      "message": "Agree with CloseHandle() which is been called in Texture or TextureVk. But suspect CheckSupport works. It has been used in WebGPUDecoderImpl::DiscoverAdapter(https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/webgpu_decoder_impl.cc;l\u003d1581;drc\u003d61bc5ca953c07dca60dd1e4de000da97e7bc4e3f;bpv\u003d1;bpt\u003d1). And in that time no Device has been created.",
+      "parentUuid": "2ff4ed7f_085cd9fe",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6dad7a42_741cd9d8",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
         "patchSetId": 4
@@ -151,6 +169,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac22e84c_2058d06e",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-13T01:50:40Z",
+      "side": 1,
+      "message": "TBH, I\u0027m not quite understand why we have SemaphoreServiceNull and MemoryServiceNull. My understanding is that they\u0027re some stubs to catch unexpected failures. So it seems we could removes them by restricting check conditions.",
+      "parentUuid": "6ad67e57_709e3c30",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "061b6e82_c6ff1d21",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
         "patchSetId": 4
@@ -179,6 +215,24 @@
       "writtenOn": "2023-02-09T11:15:31Z",
       "side": 1,
       "message": "nit: The idea is that this becomes an std::array\u003cstd::unique_ptr\u003cServiceImplementation\u003e\u003e so we can support various kind of semaphores at the same time right? (this is less important for semaphores but necessary for external memory if I understand correctly, so we can decide to not do it now but at least this structure, with the addtion of an enum in ExternalSemaphoreHandle would pave the way for something like that.)",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17f97eb7_14f173d7",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-13T01:50:40Z",
+      "side": 1,
+      "message": "Yes, but semaphore is a bit different from MemoryService, I think it also needs to have a dawn_exportable_semaphore_type to generate exportable semaphore. I agree with the general direction and I\u0027ll land the comments with additional details.",
+      "parentUuid": "c3f4d6d3_c1f86720",
       "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
