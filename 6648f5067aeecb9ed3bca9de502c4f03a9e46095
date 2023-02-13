@@ -132,6 +132,24 @@
       "parentUuid": "ca55ae40_4045fb39",
       "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b371c63d_5d3124be",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-13T10:17:29Z",
+      "side": 1,
+      "message": "Acknowledged, thank you for the detailed explanation!",
+      "parentUuid": "cf3f7ce3_10bc1d23",
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
