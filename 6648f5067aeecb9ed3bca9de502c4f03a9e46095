@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f2ba32b_72041f93",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-13T05:10:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c96a5bab_cd963437",
+      "range": {
+        "startLine": 153,
+        "startChar": 8,
+        "endLine": 153,
+        "endChar": 19
+      },
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca55ae40_4045fb39",
@@ -88,6 +112,24 @@
       "writtenOn": "2023-02-10T11:47:12Z",
       "side": 1,
       "message": "Question: do we need to add a second path to support BRA8Unorm through an RGBA8Unorm view or is does that give no additional reach?",
+      "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3f7ce3_10bc1d23",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-13T05:10:01Z",
+      "side": 1,
+      "message": "I find we cannot create an RGBA8Unorm UAV on BGRA8Unorm texture. Here is the error message from D3D12 debug layer:\n\nD3D12 ERROR: ID3D12Device::CreateUnorderedAccessView: The Format (0x1c, R8G8B8A8_UNORM) is invalid when creating a View; it is not a fully qualified format within the same family as the Format of the Resource (0x57, B8G8R8A8_UNORM). [ STATE_CREATION ERROR #342: CREATEUNORDEREDACCESSVIEW_INVALIDFORMAT]\n\n\nFurthermore, we need to specify `D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS` in `D3D12_RESOURCE_DESC` if we want to create UAV on the texture. Without this flag we will get below error message from D3D12 debug layer:\n\nID3D12Device::CreateUnorderedAccessView: A UnorderedAccessView cannot be created of a Resource that did not specify the D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS Flag. [ STATE_CREATION ERROR #340: CREATEUNORDEREDACCESSVIEW_INVALIDRESOURCE]\n\n\nHowever it is not allowed to do so if the format or the format family don\u0027t support UAV. Here is the error message from D3D12 debug layer:\n\nD3D12 ERROR: ID3D12Device::CreateCommittedResource: A texture that has D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS set in D3D12_RESOURCE_DESC::Flags must be created with a format that either can be used as unordered access, or cast to a format that could be used as unordered access. [ STATE_CREATION ERROR #599: CREATERESOURCE_INVALIDMISCFLAGS]",
+      "parentUuid": "ca55ae40_4045fb39",
       "revId": "6648f5067aeecb9ed3bca9de502c4f03a9e46095",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
