@@ -134,7 +134,7 @@ Device::Device(AdapterBase* adapter,
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*isLocked=*/false);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
