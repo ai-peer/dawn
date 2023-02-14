@@ -37,7 +37,7 @@ class CachedObject {
     };
 
     size_t GetContentHash() const;
-    void SetContentHash(size_t contentHash);
+    virtual void SetContentHash(size_t contentHash);
 
     // Returns the cache key for the object only, i.e. without device/adapter information.
     const CacheKey& GetCacheKey() const;
