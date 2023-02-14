@@ -27,7 +27,19 @@
 
 namespace dawn::native {
 
-enum class InternalErrorType : uint32_t { Validation, DeviceLost, Internal, OutOfMemory };
+enum class InternalErrorType : uint32_t {
+    Validation = 1,
+    DeviceLost = 2,
+    Internal = 4,
+    OutOfMemory = 8
+};
+using InternalErrorTypeMask = InternalErrorType;
+static constexpr InternalErrorTypeMask kNoAllowedInternalError =
+    static_cast<InternalErrorTypeMask>(0u);
+static constexpr InternalErrorTypeMask kDefaultAllowedInternalError =
+    static_cast<InternalErrorTypeMask>(InternalErrorType::Validation);
+static constexpr InternalErrorTypeMask kAllAllowedInternalError =
+    static_cast<InternalErrorTypeMask>(15u);
 
 // MaybeError and ResultOrError are meant to be used as return value for function that are not
 // expected to, but might fail. The handling of error is potentially much slower than successes.
@@ -202,8 +214,29 @@ using ResultOrError = Result<T, ErrorData>;
 void IgnoreErrors(MaybeError maybeError);
 
 wgpu::ErrorType ToWGPUErrorType(InternalErrorType type);
-InternalErrorType FromWGPUErrorType(wgpu::ErrorType type);
+constexpr InternalErrorType FromWGPUErrorType(wgpu::ErrorType type) {
+    switch (type) {
+        case wgpu::ErrorType::Validation:
+            return InternalErrorType::Validation;
+        case wgpu::ErrorType::OutOfMemory:
+            return InternalErrorType::OutOfMemory;
+        case wgpu::ErrorType::DeviceLost:
+            return InternalErrorType::DeviceLost;
+        default:
+            return InternalErrorType::Internal;
+    }
+}
 
 }  // namespace dawn::native
+
+// Enable dawn enum bitmask for error types.
+namespace dawn {
+
+template <>
+struct IsDawnBitmask<native::InternalErrorTypeMask> {
+    static constexpr bool enable = true;
+};
+
+}  // namespace dawn
 
 #endif  // SRC_DAWN_NATIVE_ERROR_H_
