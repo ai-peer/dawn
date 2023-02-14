@@ -471,12 +471,22 @@ void BindGroupBase::DestroyImpl() {
     }
 }
 
-void BindGroupBase::DeleteThis() {
+void BindGroupBase::DeleteThis(bool isMultiThreadUnsafe) {
+    // Hold a reference to the device's mutex to make sure it outlive the Device itself. This is
+    // because last ref of Device might be released inside RefCounted::DeleteThis() and that would
+    // have deleted the mutex before we unlock it.
+    Ref<DeviceMutexBase> mutex = GetDevice()->GetMutex();
+    DeviceBase::DeferLock deviceLock(*GetDevice());
+
+    if (isMultiThreadUnsafe) {
+        deviceLock.Lock();
+    }
+
     // Add another ref to the layout so that if this is the last ref, the layout
     // is destroyed after the bind group. The bind group is slab-allocated inside
     // memory owned by the layout (except for the null backend).
     Ref<BindGroupLayoutBase> layout = mLayout;
-    ApiObjectBase::DeleteThis();
+    ApiObjectBase::DeleteThis(/*isMultiThreadUnsafe=*/false);
 }
 
 BindGroupBase::BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag)

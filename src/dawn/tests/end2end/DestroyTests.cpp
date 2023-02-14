@@ -24,6 +24,9 @@ constexpr uint32_t kRTSize = 4;
 
 class DestroyTest : public DawnTest {
   protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        return { wgpu::FeatureName::ThreadSafeAPI };
+    }
     void SetUp() override {
         DawnTest::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
