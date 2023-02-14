@@ -640,6 +640,8 @@ MaybeError DeviceBase::ValidateObject(const ApiObjectBase* object) const {
     // TODO(dawn:563): Preserve labels for error objects.
     DAWN_INVALID_IF(object->IsError(), "%s is invalid.", object);
 
+    DAWN_INVALID_IF(object->GetRefCountPayload() == 0u, "external refcount to %s is zero.", object);
+
     return {};
 }
 
