@@ -43,9 +43,12 @@ struct MapRequestTask : TrackTaskCallback {
 
   private:
     void Finish() override {
-        ASSERT(mSerial != kMaxExecutionSerial);
-        TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
-                     uint64_t(mSerial));
+        {
+            DeviceBase::AutoLock deviceLock(*buffer->GetDevice());
+            ASSERT(mSerial != kMaxExecutionSerial);
+            TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
+                         uint64_t(mSerial));
+        }
         buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
     }
     void HandleDeviceLossImpl() override {
@@ -602,9 +605,12 @@ MaybeError BufferBase::ValidateUnmap() const {
 
 void BufferBase::CallbackOnMapRequestCompleted(MapRequestID mapID,
                                                WGPUBufferMapAsyncStatus status) {
-    if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
-        mState == BufferState::PendingMap) {
-        mState = BufferState::Mapped;
+    {
+        DeviceBase::AutoLock deviceLock(*GetDevice());
+        if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
+            mState == BufferState::PendingMap) {
+            mState = BufferState::Mapped;
+        }
     }
 
     ScheduleMappingCallback(mapID, status, /*immediately=*/true);
