@@ -21,12 +21,23 @@
 
 namespace dawn::native {
 
+class DeviceBase;
+
 struct CallbackTask {
   public:
     virtual ~CallbackTask() = default;
-    virtual void Finish() = 0;
-    virtual void HandleShutDown() = 0;
-    virtual void HandleDeviceLoss() = 0;
+
+    void Finish(DeviceBase& device);
+    void HandleShutDown(DeviceBase& device);
+    void HandleDeviceLoss(DeviceBase& device);
+
+  protected:
+    // These methods are not thread safe. Manual Device's locking needs to be done inside them if
+    // there are some operations that modify the Device's state. But don't lock before invoking user
+    // callbacks because that would cause re-entrant deadlock.
+    virtual void FinishImpl() = 0;
+    virtual void HandleShutDownImpl() = 0;
+    virtual void HandleDeviceLossImpl() = 0;
 };
 
 class CallbackTaskManager {

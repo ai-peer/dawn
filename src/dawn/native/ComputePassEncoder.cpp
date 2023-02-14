@@ -238,6 +238,8 @@ ResultOrError<std::pair<Ref<BufferBase>, uint64_t>>
 ComputePassEncoder::TransformIndirectDispatchBuffer(Ref<BufferBase> indirectBuffer,
                                                     uint64_t indirectOffset) {
     DeviceBase* device = GetDevice();
+    // This function creates new resources, need to lock the Device.
+    DeviceBase::AutoLock deviceLock(*device);
 
     const bool shouldDuplicateNumWorkgroups =
         device->ShouldDuplicateNumWorkgroupsForDispatchIndirect(

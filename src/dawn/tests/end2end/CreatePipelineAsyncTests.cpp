@@ -25,10 +25,25 @@ struct CreatePipelineAsyncTask {
     bool isCompleted = false;
     std::string message;
 };
+
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(CreatePipelineAsyncTestParams, UseThreadSafeAPI);
 }  // anonymous namespace
 
-class CreatePipelineAsyncTest : public DawnTest {
+class CreatePipelineAsyncTest : public DawnTestWithParams<CreatePipelineAsyncTestParams> {
   protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+            if (!UsesWire()) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
+    }
+
     void ValidateCreateComputePipelineAsync(CreatePipelineAsyncTask* currentTask) {
         wgpu::BufferDescriptor bufferDesc;
         bufferDesc.size = sizeof(uint32_t);
@@ -954,9 +969,7 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithBlendState) {
     EXPECT_PIXEL_RGBA8_EQ(expected1, renderTargets[1], 0, 0);
 }
 
-DAWN_INSTANTIATE_TEST(CreatePipelineAsyncTest,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(CreatePipelineAsyncTest,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {true, false});
