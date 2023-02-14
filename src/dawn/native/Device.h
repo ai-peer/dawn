@@ -69,12 +69,16 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
     // occurs because of an error, we want to call the device loss callback with an undefined
     // reason, but the ForceLoss API allows for an injection of the reason, hence the default
-    // argument.
+    // argument. The `allowedErrors` mask allows specifying what errors are allowed. Note that
+    // "allowed" is defined as surfacing to users as the respective error rather than causing an
+    // internal error and device loss instead. By default, we always allow validation errors.
     void HandleError(InternalErrorType type,
                      const char* message,
+                     InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError,
                      WGPUDeviceLostReason lost_reason = WGPUDeviceLostReason_Undefined);
 
-    bool ConsumedError(MaybeError maybeError) {
+    bool ConsumedError(MaybeError maybeError,
+                       InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             ConsumeError(maybeError.AcquireError());
             return true;
@@ -83,7 +87,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename T>
-    bool ConsumedError(ResultOrError<T> resultOrError, T* result) {
+    bool ConsumedError(ResultOrError<T> resultOrError,
+                       T* result,
+                       InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
         if (DAWN_UNLIKELY(resultOrError.IsError())) {
             ConsumeError(resultOrError.AcquireError());
             return true;
@@ -93,7 +99,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename... Args>
-    bool ConsumedError(MaybeError maybeError, const char* formatStr, const Args&... args) {
+    bool ConsumedError(MaybeError maybeError,
+                       InternalErrorTypeMask allowedErrors,
+                       const char* formatStr,
+                       const Args&... args) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
             if (error->GetType() == InternalErrorType::Validation) {
@@ -106,15 +115,22 @@ class DeviceBase : public RefCountedWithExternalCount {
                         absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
                 }
             }
-            ConsumeError(std::move(error));
+            ConsumeError(std::move(error), allowedErrors);
             return true;
         }
         return false;
     }
 
+    template <typename... Args>
+    bool ConsumedError(MaybeError maybeError, const char* formatStr, const Args&... args) {
+        return ConsumedError(std::move(maybeError), kDefaultAllowedInternalError, formatStr,
+                             args...);
+    }
+
     template <typename T, typename... Args>
     bool ConsumedError(ResultOrError<T> resultOrError,
                        T* result,
+                       InternalErrorTypeMask allowedErrors,
                        const char* formatStr,
                        const Args&... args) {
         if (DAWN_UNLIKELY(resultOrError.IsError())) {
@@ -257,7 +273,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Implementation of API object creation methods. DO NOT use them in a reentrant manner.
     BindGroupBase* APICreateBindGroup(const BindGroupDescriptor* descriptor);
     BindGroupLayoutBase* APICreateBindGroupLayout(const BindGroupLayoutDescriptor* descriptor);
-    BufferBase* APICreateBuffer(const BufferDescriptor* descriptor);
+    BufferBase* APICreateBuffer(const BufferDescriptor* descriptor,
+                                InternalErrorTypeMask errorMask);
     CommandEncoder* APICreateCommandEncoder(const CommandEncoderDescriptor* descriptor);
     ComputePipelineBase* APICreateComputePipeline(const ComputePipelineDescriptor* descriptor);
     PipelineLayoutBase* APICreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
@@ -275,7 +292,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     SamplerBase* APICreateSampler(const SamplerDescriptor* descriptor);
     ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
     SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
-    TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
+    TextureBase* APICreateTexture(const TextureDescriptor* descriptor,
+                                  InternalErrorTypeMask errorMask);
 
     InternalPipelineStore* GetInternalPipelineStore();
 
@@ -500,7 +518,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     void SetWGSLExtensionAllowList();
 
-    void ConsumeError(std::unique_ptr<ErrorData> error);
+    void ConsumeError(std::unique_ptr<ErrorData> error,
+                      InternalErrorTypeMask errorMask = kDefaultAllowedInternalError);
 
     // Each backend should implement to check their passed fences if there are any and return a
     // completed serial. Return 0 should indicate no fences to check.

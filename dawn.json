@@ -1018,7 +1018,8 @@
                 "returns": "buffer",
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
+                ],
+                "error types": ["validation", "out of memory"]
             },
             {
                 "name": "create error buffer",
@@ -1138,7 +1139,8 @@
                 "returns": "texture",
                 "args": [
                     {"name": "descriptor", "type": "texture descriptor", "annotation": "const*"}
-                ]
+                ],
+                "error types": ["validation", "out of memory"]
             },
             {
                 "name": "create error texture",
