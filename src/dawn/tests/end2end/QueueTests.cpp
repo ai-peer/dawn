@@ -196,7 +196,13 @@ DAWN_INSTANTIATE_TEST(QueueWriteBufferTests,
 // For MinimumDataSpec bytesPerRow and rowsPerImage, compute a default from the copy extent.
 constexpr uint32_t kStrideComputeDefault = 0xFFFF'FFFEul;
 
-class QueueWriteTextureTests : public DawnTest {
+namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(WriteTextureTestParams, UseThreadSafeAPI);
+}  // namespace
+
+class QueueWriteTextureTests : public DawnTestWithParams<WriteTextureTestParams> {
   protected:
     static constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -251,6 +257,16 @@ class QueueWriteTextureTests : public DawnTest {
         for (size_t i = 0; i < count; ++i) {
             data[i] = static_cast<uint8_t>(i % 253);
         }
+    }
+
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            if (SupportsFeatures({wgpu::FeatureName::ThreadSafeAPI})) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
     }
 
     void DoTest(const TextureSpec& textureSpec,
@@ -770,13 +786,12 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectAfterOtherQueueWriteTextureCall
                       wgpu::TextureAspect::StencilOnly);
 }
 
-DAWN_INSTANTIATE_TEST(QueueWriteTextureTests,
-                      D3D12Backend(),
-                      D3D12Backend({"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_"
-                                    "copy_with_non_zero_buffer_offset"}),
-                      MetalBackend(),
-                      MetalBackend({"use_blit_for_buffer_to_depth_texture_copy",
-                                    "use_blit_for_buffer_to_stencil_texture_copy"}),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(QueueWriteTextureTests,
+                        {D3D12Backend(),
+                         D3D12Backend({"d3d12_use_temp_buffer_in_depth_stencil_texture_and_buffer_"
+                                       "copy_with_non_zero_buffer_offset"}),
+                         MetalBackend(),
+                         MetalBackend({"use_blit_for_buffer_to_depth_texture_copy",
+                                       "use_blit_for_buffer_to_stencil_texture_copy"}),
+                         OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+                        {true, false});

@@ -45,6 +45,7 @@ enum class Feature {
     DawnInternalUsages,
     MultiPlanarFormats,
     DawnNative,
+    ThreadSafeAPI,
 
     EnumCount,
     InvalidEnum = EnumCount,
