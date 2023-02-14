@@ -91,9 +91,20 @@ bool ApiObjectBase::IsAlive() const {
     return IsInList();
 }
 
-void ApiObjectBase::DeleteThis() {
+void ApiObjectBase::DeleteThis(bool isMultiThreadUnsafe) {
+    // Hold a reference to the device's mutex to make sure it outlive the Device itself. This is
+    // because last ref of Device might be released inside RefCounted::DeleteThis() and that would
+    // have deleted the mutex before we unlock it.
+    Ref<DeviceMutexBase> mutex = GetDevice()->GetMutex();
+    DeviceBase::DeferLock deviceLock(*GetDevice());
+
+    if (isMultiThreadUnsafe) {
+        deviceLock.Lock();
+    }
+
     Destroy();
-    RefCounted::DeleteThis();
+
+    RefCounted::DeleteThis(/*isMultiThreadUnsafe=*/false);
 }
 
 ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
@@ -105,6 +116,7 @@ void ApiObjectBase::Destroy() {
     if (!IsAlive()) {
         return;
     }
+
     ApiObjectList* list = GetObjectTrackingList();
     ASSERT(list != nullptr);
     if (list->Untrack(this)) {

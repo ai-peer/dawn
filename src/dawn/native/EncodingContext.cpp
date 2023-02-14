@@ -87,6 +87,7 @@ void EncodingContext::HandleError(std::unique_ptr<ErrorData> error) {
             mError = std::move(error);
         }
     } else {
+        DeviceBase::AutoLock deviceLock(*mDevice);
         mDevice->HandleError(error->GetType(), error->GetFormattedMessage().c_str());
     }
 }

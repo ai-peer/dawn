@@ -97,6 +97,9 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "dawn_native.md",
       FeatureInfo::FeatureState::Stable}},
+    {Feature::ThreadSafeAPI,
+     {"dawn-native", "Public API is thread safe (except encoding).",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=1662", FeatureInfo::FeatureState::Stable}},
 }};
 
 Feature FromAPIFeature(wgpu::FeatureName feature) {
@@ -139,6 +142,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::RG11B10UfloatRenderable;
         case wgpu::FeatureName::BGRA8UnormStorage:
             return Feature::BGRA8UnormStorage;
+        case wgpu::FeatureName::ThreadSafeAPI:
+            return Feature::ThreadSafeAPI;
     }
     return Feature::InvalidEnum;
 }
@@ -177,6 +182,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::RG11B10UfloatRenderable;
         case Feature::BGRA8UnormStorage:
             return wgpu::FeatureName::BGRA8UnormStorage;
+        case Feature::ThreadSafeAPI:
+            return wgpu::FeatureName::ThreadSafeAPI;
 
         case Feature::EnumCount:
             break;
