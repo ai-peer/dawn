@@ -16,6 +16,91 @@
       "message": "lgtm, just nits but can fix them up later.",
       "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9b337c6_b6814f3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 43
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-14T02:53:09Z",
+      "side": 1,
+      "message": "Looks great overall, nice work! All nits and they can be addressed later.",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "361d479c_7f8d3986",
+        "filename": "src/tint/ast/alias.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-14T02:53:09Z",
+      "side": 1,
+      "message": "Nit: Why do you need `Expression`?",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d613bb43_4a40b1a9",
+        "filename": "src/tint/ast/templated_identifier.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-14T02:53:09Z",
+      "side": 1,
+      "message": "Q: Which templated identifiers consume attributes?",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f61a43_d8062b43",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 43
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-14T02:53:09Z",
+      "side": 1,
+      "message": "Nit: Perhaps we could add an operator overload for checking the validity of an ast::Type.",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85617465_852d474c",
+        "filename": "src/tint/transform/transform.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-14T02:53:09Z",
+      "side": 1,
+      "message": "Nit: The comments here that mention `ast::Identifier` seem a little off since the return type is `ast::Type` (and that contains an `IdentifierExpression`).",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
