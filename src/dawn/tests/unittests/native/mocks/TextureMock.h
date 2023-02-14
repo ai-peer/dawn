@@ -17,25 +17,37 @@
 
 #include "gmock/gmock.h"
 
-#include "dawn/native/Device.h"
 #include "dawn/native/Texture.h"
+#include "dawn/tests/unittests/native/mocks/DeviceMock.h"
 
 namespace dawn::native {
 
 class TextureMock : public TextureBase {
   public:
-    TextureMock(DeviceBase* device, TextureBase::TextureState state);
+    TextureMock(DeviceMock* device,
+                const TextureDescriptor* descriptor,
+                TextureBase::TextureState state = TextureBase::TextureState::OwnedInternal);
     ~TextureMock() override;
 
+    const TextureDescriptor* GetDescriptor() const;
+
     MOCK_METHOD(void, DestroyImpl, (), (override));
+
+  private:
+    const TextureDescriptor mDescriptor;
 };
 
 class TextureViewMock : public TextureViewBase {
   public:
-    explicit TextureViewMock(TextureBase* texture);
+    TextureViewMock(TextureBase* texture, const TextureViewDescriptor* descriptor);
     ~TextureViewMock() override;
 
+    const TextureViewDescriptor* GetDescriptor() const;
+
     MOCK_METHOD(void, DestroyImpl, (), (override));
+
+  private:
+    const TextureViewDescriptor mDescriptor;
 };
 
 }  // namespace dawn::native

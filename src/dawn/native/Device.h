@@ -129,17 +129,26 @@ class DeviceBase : public RefCountedWithExternalCount {
                         absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
                 }
             }
-            ConsumeError(std::move(error));
+            ConsumeError(std::move(error), allowedErrors);
             return true;
         }
         *result = resultOrError.AcquireSuccess();
         return false;
     }
 
+    template <typename T, typename... Args>
+    bool ConsumedError(ResultOrError<T> resultOrError,
+                       T* result,
+                       const char* formatStr,
+                       const Args&... args) {
+        return ConsumedError(std::move(resultOrError), result, kDefaultAllowedInternalError,
+                             formatStr, args...);
+    }
+
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
     AdapterBase* GetAdapter() const;
-    dawn::platform::Platform* GetPlatform() const;
+    virtual dawn::platform::Platform* GetPlatform() const;
 
     // Returns the Format corresponding to the wgpu::TextureFormat or an error if the format
     // isn't a valid wgpu::TextureFormat or isn't supported by this device.
@@ -583,6 +592,16 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::string mLabel;
     CacheKey mDeviceCacheKey;
 };
+
+ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
+    DeviceBase* device,
+    const ComputePipelineDescriptor& descriptor,
+    ComputePipelineDescriptor* outDescriptor);
+
+ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
+    DeviceBase* device,
+    const RenderPipelineDescriptor& descriptor,
+    RenderPipelineDescriptor* outDescriptor);
 
 class IgnoreLazyClearCountScope : public NonMovable {
   public:
