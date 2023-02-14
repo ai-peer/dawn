@@ -16,15 +16,28 @@
 
 namespace dawn::native {
 
-TextureMock::TextureMock(DeviceBase* device, TextureBase::TextureState state)
-    : TextureBase(device, state) {
+TextureMock::TextureMock(DeviceMock* device,
+                         const TextureDescriptor* descriptor,
+                         TextureBase::TextureState state)
+    : TextureBase(device, descriptor, state), mDescriptor(*descriptor) {
     ON_CALL(*this, DestroyImpl).WillByDefault([this]() { this->TextureBase::DestroyImpl(); });
 }
 
 TextureMock::~TextureMock() = default;
 
-TextureViewMock::TextureViewMock(TextureBase* texture) : TextureViewBase(texture) {}
+const TextureDescriptor* TextureMock::GetDescriptor() const {
+    return &mDescriptor;
+}
+
+TextureViewMock::TextureViewMock(TextureBase* texture, const TextureViewDescriptor* descriptor)
+    : TextureViewBase(texture, descriptor), mDescriptor(*descriptor) {
+    ON_CALL(*this, DestroyImpl).WillByDefault([this]() { this->TextureViewBase::DestroyImpl(); });
+}
 
 TextureViewMock::~TextureViewMock() = default;
+
+const TextureViewDescriptor* TextureViewMock::GetDescriptor() const {
+    return &mDescriptor;
+}
 
 }  // namespace dawn::native
