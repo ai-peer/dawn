@@ -191,7 +191,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*isLocked=*/false);
 
     // Close the handle here instead of in DestroyImpl. The handle is returned from
     // ExternalImageDXGI, so it needs to live as long as the Device ref does, even if the device

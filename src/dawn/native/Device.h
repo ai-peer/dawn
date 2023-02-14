@@ -15,9 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_DEVICE_H_
 #define SRC_DAWN_NATIVE_DEVICE_H_
 
+#include <atomic>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
+#include <thread>
 #include <unordered_set>
 #include <utility>
 #include <vector>
@@ -352,7 +355,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Check for passed fences and set the new completed serial
     MaybeError CheckPassedSerials();
 
-    MaybeError Tick();
+    MaybeError Tick(bool isMultiThreadUnsafe = false);
 
     // TODO(crbug.com/dawn/839): Organize the below backend-specific parameters into the struct
     // BackendMetadata that we can query from the device.
@@ -410,6 +413,14 @@ class DeviceBase : public RefCountedWithExternalCount {
     // method makes them to be submitted as soon as possbile in next ticks.
     virtual void ForceEventualFlushOfCommands() = 0;
 
+    const std::shared_ptr<std::mutex>& GetMutex() { return mMutex; }
+    struct AutoLock {
+        AutoLock(DeviceBase& device) : mLockGuard(*device.GetMutex().get()) {}
+
+      private:
+        std::lock_guard<std::mutex> mLockGuard;
+    };
+
     // In the 'Normal' mode, currently recorded commands in the backend normally will be actually
     // submitted in the next Tick. However in the 'Passive' mode, the submission will be postponed
     // as late as possible, for example, until the client has explictly issued a submission.
@@ -424,7 +435,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
-    void Destroy();
+    void Destroy(bool isLocked);
 
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
@@ -585,6 +596,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
+
+    std::shared_ptr<std::mutex> mMutex = std::make_shared<std::mutex>();
 };
 
 class IgnoreLazyClearCountScope : public NonMovable {
