@@ -77,6 +77,7 @@
     },
     "adapter": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "get limits",
@@ -574,6 +575,7 @@
     },
     "command encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "finish",
@@ -787,6 +789,7 @@
     },
     "compute pass encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "insert debug marker",
@@ -1512,6 +1515,7 @@
     },
     "instance": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "create surface",
@@ -1842,6 +1846,7 @@
 
     "render bundle encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "set pipeline",
@@ -2013,6 +2018,7 @@
     },
     "render pass encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "set pipeline",
@@ -2468,6 +2474,7 @@
     },
     "surface": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "get preferred format",

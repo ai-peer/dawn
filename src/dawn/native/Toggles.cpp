@@ -381,6 +381,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "This toggle is off by default. It is expected to turn on or get removed when WebGPU V1 "
       "ships and stays stable.",
       "https://crbug.com/dawn/1563", ToggleStage::Device}},
+    {Toggle::EnableDeviceMutex,
+     {"enable_device_mutex",
+      "Enable Device's mutex so that APIs are safe to be used on multiple threads."
+      "This toggle is off by default.",
+      "https://crbug.com/dawn/1662", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "

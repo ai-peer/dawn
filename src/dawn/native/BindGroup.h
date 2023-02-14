@@ -84,7 +84,7 @@ class BindGroupBase : public ApiObjectBase {
 
   private:
     BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-    void DeleteThis() override;
+    void DeleteThis(bool isMultiThreadUnsafe) override;
 
     Ref<BindGroupLayoutBase> mLayout;
     BindGroupLayoutBase::BindingDataPointers mBindingData;

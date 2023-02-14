@@ -92,6 +92,35 @@ struct DeviceBase::DeprecationWarnings {
 };
 
 namespace {
+class MutexEnabled : public DeviceMutexBase {
+public:
+    void Lock() override {
+        // We allow recursive mutex lock because currently a lot of code would trigger
+        // callbacks. And those callbacks might cause re-entrances.
+        // TODO(dawn:1672): Disallow recursive mutex. In future, we could use this to throw
+        // assertion when the mutex is recursively locked.
+        auto currentThread = std::this_thread::get_id();
+        if (mOwner.load(std::memory_order_acquire) != currentThread) {
+            mMutex.lock();
+            mOwner.store(currentThread, std::memory_order_release);
+        }
+
+        mRecurDepth ++;
+    }
+    void Unlock() override {
+        ASSERT(mOwner.load(std::memory_order_acquire) == std::this_thread::get_id());
+        mRecurDepth --;
+        if (mRecurDepth == 0) {
+            mOwner.store(std::thread::id(), std::memory_order_release);
+            mMutex.unlock();
+        }
+    }
+private:
+    std::mutex mMutex;
+    std::atomic<std::thread::id> mOwner;
+    size_t mRecurDepth = 0;
+};
+
 struct LoggingCallbackTask : CallbackTask {
   public:
     LoggingCallbackTask() = delete;
@@ -211,6 +240,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+    mMutex = AcquireRef(new DeviceMutexBase());
 }
 
 DeviceBase::~DeviceBase() {
@@ -282,10 +312,19 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    if (IsToggleEnabled(Toggle::EnableDeviceMutex)) {
+        mMutex = AcquireRef(new MutexEnabled());
+    } else {
+        mMutex = AcquireRef(new DeviceMutexBase());
+    }
+
     return {};
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    // This will be invoked by API side, so we need to lock.
+    AutoLock deviceLock(*this);
+
     // DeviceBase uses RefCountedWithExternalCount to break refcycles.
     //
     // DeviceBase holds multiple Refs to various API objects (pipelines, buffers, etc.) which are
