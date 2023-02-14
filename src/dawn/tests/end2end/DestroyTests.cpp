@@ -22,10 +22,28 @@ using ::testing::HasSubstr;
 
 constexpr uint32_t kRTSize = 4;
 
-class DestroyTest : public DawnTest {
+namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(DestroyTestParams, UseThreadSafeAPI);
+
+using ParentClass = DawnTestWithParams<DestroyTestParams>;
+}  // namespace
+
+class DestroyTest : public ParentClass {
   protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            if (SupportsFeatures({wgpu::FeatureName::ThreadSafeAPI})) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
+    }
+
     void SetUp() override {
-        DawnTest::SetUp();
+        ParentClass::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
         renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
@@ -212,9 +230,7 @@ TEST_P(DestroyTest, GetQueueAfterDeviceDestroy) {
         nullptr));
 }
 
-DAWN_INSTANTIATE_TEST(DestroyTest,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(DestroyTest,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {true, false});
