@@ -108,8 +108,6 @@ class TextureBase : public ApiObjectBase {
 
   protected:
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, TextureState state);
-    // Constructor used only for mocking and testing.
-    TextureBase(DeviceBase* device, TextureState state);
     ~TextureBase() override;
 
     void DestroyImpl() override;
@@ -160,8 +158,6 @@ class TextureViewBase : public ApiObjectBase {
     const SubresourceRange& GetSubresourceRange() const;
 
   protected:
-    // Constructor used only for mocking and testing.
-    explicit TextureViewBase(TextureBase* texture);
     void DestroyImpl() override;
 
   private:
