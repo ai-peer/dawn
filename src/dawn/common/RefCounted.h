@@ -46,18 +46,17 @@ class RefCounted {
     uint64_t GetRefCountPayload() const;
 
     void Reference();
-    void Release();
+    void Release(bool isMultiThreadUnsafe = false);
 
     void APIReference() { Reference(); }
-    void APIRelease() { Release(); }
+    void APIRelease() { Release(/*isMultiThreadUnsafe=*/true); }
 
   protected:
     virtual ~RefCounted();
 
     // A Derived class may override this if they require a custom deleter.
-    virtual void DeleteThis();
+    virtual void DeleteThis(bool isMultiThreadUnsafe);
 
-  private:
     RefCount mRefCount;
 };
 

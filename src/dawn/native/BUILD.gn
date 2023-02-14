@@ -220,6 +220,7 @@ source_set("sources") {
     "CacheResult.h",
     "CachedObject.cpp",
     "CachedObject.h",
+    "CallbackSink.h",
     "CallbackTaskManager.cpp",
     "CallbackTaskManager.h",
     "CommandAllocator.cpp",
