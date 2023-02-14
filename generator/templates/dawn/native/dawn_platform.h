@@ -108,7 +108,7 @@ namespace {{native_namespace}} {
             return static_cast<{{as_cType(type.name)}}>(rhs);
         }
 
-        inline {{namespace}}::{{as_cppType(type.name)}} FromAPI({{as_cType(type.name)}} rhs) {
+        constexpr inline {{namespace}}::{{as_cppType(type.name)}} FromAPI({{as_cType(type.name)}} rhs) {
             return static_cast<{{namespace}}::{{as_cppType(type.name)}}>(rhs);
         }
     {% endfor %}
