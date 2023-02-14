@@ -77,6 +77,7 @@
     },
     "adapter": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "get limits",
@@ -574,6 +575,7 @@
     },
     "command encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "finish",
@@ -787,6 +789,7 @@
     },
     "compute pass encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "insert debug marker",
@@ -1147,7 +1150,8 @@
                 ]
             },
             {
-                "name": "destroy"
+                "name": "destroy",
+                "autolock": false
             },
             {
                 "name": "get limits",
@@ -1197,10 +1201,12 @@
             },
             {
                 "name": "tick",
+                "autolock": false,
                 "tags": ["dawn"]
             },
             {
                 "name": "set uncaptured error callback",
+                "autolock": false,
                 "args": [
                     {"name": "callback", "type": "error callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -1208,6 +1214,7 @@
             },
             {
                 "name": "set logging callback",
+                "autolock": false,
                 "tags": ["dawn"],
                 "args": [
                     {"name": "callback", "type": "logging callback"},
@@ -1216,6 +1223,7 @@
             },
             {
                 "name": "set device lost callback",
+                "autolock": false,
                 "args": [
                     {"name": "callback", "type": "device lost callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -1510,6 +1518,7 @@
     },
     "instance": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "create surface",
@@ -1840,6 +1849,7 @@
 
     "render bundle encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "set pipeline",
@@ -2014,6 +2024,7 @@
     },
     "render pass encoder": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "set pipeline",
@@ -2469,6 +2480,7 @@
     },
     "surface": {
         "category": "object",
+        "autolock": false,
         "methods": [
             {
                 "name": "get preferred format",
