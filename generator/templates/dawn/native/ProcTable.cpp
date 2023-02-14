@@ -32,6 +32,7 @@
 
 namespace {{native_namespace}} {
 
+    // Native* methods
     {% for type in by_category["object"] %}
         {% for method in c_methods(type) %}
             {% set suffix = as_MethodSuffix(type.name, method.name) %}
@@ -72,6 +73,44 @@ namespace {{native_namespace}} {
                         return result;
                     {% endif %}
                 {% endif %}
+            }
+        {% endfor %}
+    {% endfor %}
+
+    // ThreadSafe* methods
+    {% for type in by_category["object"] %}
+        {% for method in c_methods(type) %}
+            {% set suffix = as_MethodSuffix(type.name, method.name) %}
+
+            {{as_cType(method.return_type.name)}} ThreadSafe{{suffix}}(
+                {{-as_cType(type.name)}} cSelf
+                {%- for arg in method.arguments -%}
+                    , {{as_annotated_cType(arg)}}
+                {%- endfor -%}
+            ) {
+                {% if not method.autolock %}
+                    // This method needs special handling internally.
+                {% else %}
+                    //* Perform conversion between C types and frontend types
+                    auto self = FromAPI(cSelf);
+                    {% if type.name.get() != "device" %}
+                        auto device = self->GetDevice();
+                    {% else %}
+                        auto device = self;
+                    {% endif %}
+                    DeviceBase::AutoLock autolock(*device);
+                {% endif %}
+
+                //* Call Native* method
+                {%- if method.return_type.name.canonical_case() != "void" %}
+                    return 
+                {%- endif %}
+                Native{{suffix}}(
+                    cSelf
+                    {%- for arg in method.arguments -%}
+                        , {{as_varName(arg.name)}}
+                    {%- endfor -%}
+                );
             }
         {% endfor %}
     {% endfor %}
@@ -164,6 +203,7 @@ namespace {{native_namespace}} {
         return result;
     }
 
+    // Native* table
     static {{Prefix}}ProcTable gProcTable = {
         {% for function in by_category["function"] %}
             Native{{as_cppType(function.name)}},
@@ -175,7 +215,23 @@ namespace {{native_namespace}} {
         {% endfor %}
     };
 
+    // ThreadSafe* table
+    static {{Prefix}}ProcTable gThreadSafeProcTable = {
+        {% for function in by_category["function"] %}
+            Native{{as_cppType(function.name)}},
+        {% endfor %}
+        {% for type in by_category["object"] %}
+            {% for method in c_methods(type) %}
+                ThreadSafe{{as_MethodSuffix(type.name, method.name)}},
+            {% endfor %}
+        {% endfor %}
+    };
+
     const {{Prefix}}ProcTable& GetProcsAutogen() {
         return gProcTable;
+    }
+
+    const {{Prefix}}ProcTable& GetThreadSafeProcsAutogen() {
+        return gThreadSafeProcTable;
     }
 }

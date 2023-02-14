@@ -471,12 +471,22 @@ void BindGroupBase::DestroyImpl() {
     }
 }
 
-void BindGroupBase::DeleteThis() {
+void BindGroupBase::DeleteThis(bool isMultiThreadUnsafe) {
+    // Take ownershio of the mutex from the Device. This is because last ref of Device might be
+    // released inside RefCounted::DeleteThis() and that would have deleted the mutex before we
+    // unlock it had we let Device keeps the ownership of the mutex.
+    std::shared_ptr<std::mutex> mutex = GetDevice()->GetMutex();
+    std::unique_lock<std::mutex> deviceLock(*mutex.get(), std::defer_lock);
+
+    if (isMultiThreadUnsafe) {
+        deviceLock.lock();
+    }
+
     // Add another ref to the layout so that if this is the last ref, the layout
     // is destroyed after the bind group. The bind group is slab-allocated inside
     // memory owned by the layout (except for the null backend).
     Ref<BindGroupLayoutBase> layout = mLayout;
-    ApiObjectBase::DeleteThis();
+    ApiObjectBase::DeleteThis(/*isMultiThreadUnsafe=*/false);
 }
 
 BindGroupBase::BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag)
