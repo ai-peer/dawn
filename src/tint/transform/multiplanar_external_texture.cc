@@ -350,8 +350,10 @@ struct MultiplanarExternalTexture::State {
                 single_plane_call = b.Call("textureLoad", "plane0", "coord", 0_a);
                 // textureLoad(plane0, coord, 0);
                 plane_0_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                // const coord1 = coord / vec2<i32>(2);
+                stmts.Push(b.Decl(b.Let("coord1", b.Div("coord", b.vec2<i32>(2_a)))));
                 // textureLoad(plane1, coord, 0);
-                plane_1_call = b.Call("textureLoad", "plane1", "coord", 0_a);
+                plane_1_call = b.Call("textureLoad", "plane1", "coord1", 0_a);
                 break;
             default:
                 TINT_ICE(Transform, b.Diagnostics()) << "unhandled builtin: " << call_type;
