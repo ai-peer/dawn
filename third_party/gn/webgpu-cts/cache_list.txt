@@ -50,6 +50,7 @@ data/webgpu/shader/execution/case-cache/sqrt.json
 data/webgpu/shader/execution/case-cache/step.json
 data/webgpu/shader/execution/case-cache/tan.json
 data/webgpu/shader/execution/case-cache/tanh.json
+data/webgpu/shader/execution/case-cache/transpose.json
 data/webgpu/shader/execution/case-cache/trunc.json
 data/webgpu/shader/execution/case-cache/unpack2x16float.json
 data/webgpu/shader/execution/case-cache/unpack2x16snorm.json
