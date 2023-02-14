@@ -48,17 +48,4 @@ wgpu::ErrorType ToWGPUErrorType(InternalErrorType type) {
     }
 }
 
-InternalErrorType FromWGPUErrorType(wgpu::ErrorType type) {
-    switch (type) {
-        case wgpu::ErrorType::Validation:
-            return InternalErrorType::Validation;
-        case wgpu::ErrorType::OutOfMemory:
-            return InternalErrorType::OutOfMemory;
-        case wgpu::ErrorType::DeviceLost:
-            return InternalErrorType::DeviceLost;
-        default:
-            return InternalErrorType::Internal;
-    }
-}
-
 }  // namespace dawn::native
