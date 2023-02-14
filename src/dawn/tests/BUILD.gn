@@ -315,6 +315,7 @@ dawn_test("dawn_unittests") {
     "unittests/native/CreatePipelineAsyncTaskTests.cpp",
     "unittests/native/DestroyObjectTests.cpp",
     "unittests/native/DeviceCreationTests.cpp",
+    "unittests/native/ErrorMaskingTests.cpp",
     "unittests/native/ObjectContentHasherTests.cpp",
     "unittests/native/StreamTests.cpp",
     "unittests/validation/BindGroupValidationTests.cpp",
