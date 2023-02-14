@@ -554,7 +554,7 @@ const std::vector<std::string>& DawnTestEnvironment::GetDisabledToggles() const 
 DawnTestBase::DawnTestBase(const AdapterTestParam& param) : mParam(param) {
     gCurrentTest = this;
 
-    DawnProcTable procs = dawn::native::GetProcs();
+    DawnProcTable procs = dawn::native::GetThreadSafeProcs();
     // Override procs to provide harness-specific behavior to always select the null adapter,
     // and to allow fixture-specific overriding of the test device with CreateDeviceImpl.
     procs.instanceRequestAdapter = [](WGPUInstance instance, const WGPURequestAdapterOptions*,

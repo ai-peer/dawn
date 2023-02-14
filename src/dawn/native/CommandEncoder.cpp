@@ -1031,14 +1031,19 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 descriptor.dimension = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
+                // We are creating new resources. Need to lock Device.
                 Ref<TextureBase> temporaryResolveTexture;
-                DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
-
-                TextureViewDescriptor viewDescriptor = {};
                 Ref<TextureViewBase> temporaryResolveView;
-                DAWN_TRY_ASSIGN(
-                    temporaryResolveView,
-                    device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                {
+                    DeviceBase::AutoLock deviceLock(*GetDevice());
+
+                    DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
+
+                    TextureViewDescriptor viewDescriptor = {};
+                    DAWN_TRY_ASSIGN(
+                        temporaryResolveView,
+                        device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                }
 
                 // Save the temporary and given render targets together for copying after
                 // the render pass ends.
@@ -1142,6 +1147,9 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            // This function might create new resources. Need to lock the Device.
+            DeviceBase::AutoLock deviceLock(*GetDevice());
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
@@ -1290,6 +1298,9 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
     mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
+            // This function might create new resources. Need to lock the Device.
+            DeviceBase::AutoLock deviceLock(*GetDevice());
+
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
                 DAWN_TRY(GetDevice()->ValidateObject(destination->texture));

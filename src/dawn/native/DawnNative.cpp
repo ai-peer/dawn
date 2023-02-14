@@ -61,9 +61,13 @@ struct ComboDeprecatedDawnDeviceDescriptor : DeviceDescriptor {
 }  // namespace
 
 const DawnProcTable& GetProcsAutogen();
+const DawnProcTable& GetThreadSafeProcsAutogen();
 
 const DawnProcTable& GetProcs() {
     return GetProcsAutogen();
+}
+const DawnProcTable& GetThreadSafeProcs() {
+    return GetThreadSafeProcsAutogen();
 }
 
 std::vector<const char*> GetTogglesUsed(WGPUDevice device) {
