@@ -69,23 +69,28 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Handles the error, causing a device loss if applicable. Almost always when a device loss
     // occurs because of an error, we want to call the device loss callback with an undefined
     // reason, but the ForceLoss API allows for an injection of the reason, hence the default
-    // argument.
-    void HandleError(InternalErrorType type,
-                     const char* message,
+    // argument. The `allowedErrors` mask allows specifying what errors are allowed. Note that
+    // "allowed" is defined as surfacing to users as the respective error rather than causing an
+    // internal error and device loss instead.
+    // TODO(dawn:1336) Remove default argument once usages have been updated everywhere explicitly.
+    void HandleError(std::unique_ptr<ErrorData> error,
+                     DawnErrorType allowedErrors = kDefaultAllowedErrors,
                      WGPUDeviceLostReason lost_reason = WGPUDeviceLostReason_Undefined);
 
-    bool ConsumedError(MaybeError maybeError) {
+    bool ConsumedError(MaybeError maybeError, DawnErrorType allowedErrors = kDefaultAllowedErrors) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
-            ConsumeError(maybeError.AcquireError());
+            ConsumeError(maybeError.AcquireError(), allowedErrors);
             return true;
         }
         return false;
     }
 
     template <typename T>
-    bool ConsumedError(ResultOrError<T> resultOrError, T* result) {
+    bool ConsumedError(ResultOrError<T> resultOrError,
+                       T* result,
+                       DawnErrorType allowedErrors = kDefaultAllowedErrors) {
         if (DAWN_UNLIKELY(resultOrError.IsError())) {
-            ConsumeError(resultOrError.AcquireError());
+            ConsumeError(resultOrError.AcquireError(), allowedErrors);
             return true;
         }
         *result = resultOrError.AcquireSuccess();
@@ -93,22 +98,42 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename... Args>
-    bool ConsumedError(MaybeError maybeError, const char* formatStr, const Args&... args) {
+    bool ConsumedError(MaybeError maybeError,
+                       DawnErrorType allowedErrors,
+                       const char* formatStr,
+                       const Args&... args) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
-            if (error->GetType() == InternalErrorType::Validation) {
-                std::string out;
-                absl::UntypedFormatSpec format(formatStr);
-                if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
-                    error->AppendContext(std::move(out));
-                } else {
-                    error->AppendContext(
-                        absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
-                }
+            if (error->GetType() == DawnErrorType::Validation) {
+                error->AppendContext(formatStr, args...);
             }
-            ConsumeError(std::move(error));
+            ConsumeError(std::move(error), allowedErrors);
             return true;
         }
+        return false;
+    }
+
+    template <typename... Args>
+    bool ConsumedError(MaybeError maybeError, const char* formatStr, Args&&... args) {
+        return ConsumedError(std::move(maybeError), kDefaultAllowedErrors, formatStr,
+                             std::forward<Args>(args)...);
+    }
+
+    template <typename T, typename... Args>
+    bool ConsumedError(ResultOrError<T> resultOrError,
+                       T* result,
+                       DawnErrorType allowedErrors,
+                       const char* formatStr,
+                       const Args&... args) {
+        if (DAWN_UNLIKELY(resultOrError.IsError())) {
+            std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
+            if (error->GetType() == DawnErrorType::Validation) {
+                error->AppendContext(formatStr, args...);
+            }
+            ConsumeError(std::move(error), allowedErrors);
+            return true;
+        }
+        *result = resultOrError.AcquireSuccess();
         return false;
     }
 
@@ -116,24 +141,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     bool ConsumedError(ResultOrError<T> resultOrError,
                        T* result,
                        const char* formatStr,
-                       const Args&... args) {
-        if (DAWN_UNLIKELY(resultOrError.IsError())) {
-            std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
-            if (error->GetType() == InternalErrorType::Validation) {
-                std::string out;
-                absl::UntypedFormatSpec format(formatStr);
-                if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
-                    error->AppendContext(std::move(out));
-                } else {
-                    error->AppendContext(
-                        absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
-                }
-            }
-            ConsumeError(std::move(error));
-            return true;
-        }
-        *result = resultOrError.AcquireSuccess();
-        return false;
+                       Args&&... args) {
+        return ConsumedError(std::move(resultOrError), result, kDefaultAllowedErrors, formatStr,
+                             std::forward<Args>(args)...);
     }
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
@@ -248,11 +258,12 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Implementation of API object creation methods. DO NOT use them in a reentrant manner.
     BindGroupBase* APICreateBindGroup(const BindGroupDescriptor* descriptor);
     BindGroupLayoutBase* APICreateBindGroupLayout(const BindGroupLayoutDescriptor* descriptor);
-    BufferBase* APICreateBuffer(const BufferDescriptor* descriptor);
+    BufferBase* APICreateBuffer(const BufferDescriptor* descriptor, DawnErrorType allowedErrors);
     CommandEncoder* APICreateCommandEncoder(const CommandEncoderDescriptor* descriptor);
     ComputePipelineBase* APICreateComputePipeline(const ComputePipelineDescriptor* descriptor);
     PipelineLayoutBase* APICreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
-    QuerySetBase* APICreateQuerySet(const QuerySetDescriptor* descriptor);
+    QuerySetBase* APICreateQuerySet(const QuerySetDescriptor* descriptor,
+                                    DawnErrorType allowedErrors);
     void APICreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                        WGPUCreateComputePipelineAsyncCallback callback,
                                        void* userdata);
@@ -266,12 +277,12 @@ class DeviceBase : public RefCountedWithExternalCount {
     SamplerBase* APICreateSampler(const SamplerDescriptor* descriptor);
     ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
     SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
-    TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
+    TextureBase* APICreateTexture(const TextureDescriptor* descriptor, DawnErrorType allowedErrors);
 
     InternalPipelineStore* GetInternalPipelineStore();
 
     // For Dawn Wire
-    BufferBase* APICreateErrorBuffer(const BufferDescriptor* desc);
+    BufferBase* APICreateErrorBuffer(const BufferDescriptor* desc, DawnErrorType allowedErrors);
     ExternalTextureBase* APICreateErrorExternalTexture();
     TextureBase* APICreateErrorTexture(const TextureDescriptor* desc);
 
@@ -489,7 +500,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     void SetWGSLExtensionAllowList();
 
-    void ConsumeError(std::unique_ptr<ErrorData> error);
+    void ConsumeError(std::unique_ptr<ErrorData> error,
+                      DawnErrorType allowedErrors = kDefaultAllowedErrors);
 
     // Each backend should implement to check their passed fences if there are any and return a
     // completed serial. Return 0 should indicate no fences to check.

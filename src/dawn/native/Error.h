@@ -19,7 +19,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/strings/str_format.h"
 #include "dawn/common/Result.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Toggles.h"
@@ -27,7 +26,13 @@
 
 namespace dawn::native {
 
-enum class InternalErrorType : uint32_t { Validation, DeviceLost, Internal, OutOfMemory };
+enum class DawnErrorType : uint32_t {
+    None = 0,
+    Validation = 1,
+    DeviceLost = 2,
+    Internal = 4,
+    OutOfMemory = 8
+};
 
 // MaybeError and ResultOrError are meant to be used as return value for function that are not
 // expected to, but might fail. The handling of error is potentially much slower than successes.
@@ -73,13 +78,13 @@ using ResultOrError = Result<T, ErrorData>;
     ::dawn::native::ErrorData::Create(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 
 #define DAWN_VALIDATION_ERROR(...) \
-    DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__))
+    DAWN_MAKE_ERROR(DawnErrorType::Validation, absl::StrFormat(__VA_ARGS__))
 
-#define DAWN_INVALID_IF(EXPR, ...)                                                           \
-    if (DAWN_UNLIKELY(EXPR)) {                                                               \
-        return DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__)); \
-    }                                                                                        \
-    for (;;)                                                                                 \
+#define DAWN_INVALID_IF(EXPR, ...)                                                       \
+    if (DAWN_UNLIKELY(EXPR)) {                                                           \
+        return DAWN_MAKE_ERROR(DawnErrorType::Validation, absl::StrFormat(__VA_ARGS__)); \
+    }                                                                                    \
+    for (;;)                                                                             \
     break
 
 // DAWN_MAKE_DEPRECATION_ERROR is used at deprecation paths. It returns a MaybeError.
@@ -100,22 +105,22 @@ using ResultOrError = Result<T, ErrorData>;
 
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
 // We can't even do a graceful shutdown because the Device is gone.
-#define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::DeviceLost, MESSAGE)
+#define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(DawnErrorType::DeviceLost, MESSAGE)
 
 // DAWN_INTERNAL_ERROR means Dawn hit an unexpected error in the backend and should try to
 // gracefully shut down.
-#define DAWN_INTERNAL_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Internal, MESSAGE)
+#define DAWN_INTERNAL_ERROR(MESSAGE) DAWN_MAKE_ERROR(DawnErrorType::Internal, MESSAGE)
 
 #define DAWN_FORMAT_INTERNAL_ERROR(...) \
-    DAWN_MAKE_ERROR(InternalErrorType::Internal, absl::StrFormat(__VA_ARGS__))
+    DAWN_MAKE_ERROR(DawnErrorType::Internal, absl::StrFormat(__VA_ARGS__))
 
 #define DAWN_UNIMPLEMENTED_ERROR(MESSAGE) \
-    DAWN_MAKE_ERROR(InternalErrorType::Internal, std::string("Unimplemented: ") + MESSAGE)
+    DAWN_MAKE_ERROR(DawnErrorType::Internal, std::string("Unimplemented: ") + MESSAGE)
 
 // DAWN_OUT_OF_MEMORY_ERROR means we ran out of memory. It may be used as a signal internally in
 // Dawn to free up unused resources. Or, it may bubble up to the application to signal an allocation
 // was too large or they should free some existing resources.
-#define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::OutOfMemory, MESSAGE)
+#define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) DAWN_MAKE_ERROR(DawnErrorType::OutOfMemory, MESSAGE)
 
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)
@@ -201,9 +206,31 @@ using ResultOrError = Result<T, ErrorData>;
 // Assert that errors are device loss so that we can continue with destruction
 void IgnoreErrors(MaybeError maybeError);
 
-wgpu::ErrorType ToWGPUErrorType(InternalErrorType type);
-InternalErrorType FromWGPUErrorType(wgpu::ErrorType type);
+wgpu::ErrorType ToWGPUErrorType(DawnErrorType type);
+DawnErrorType FromWGPUErrorType(wgpu::ErrorType type);
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString |
+                          absl::FormatConversionCharSet::kIntegral>
+AbslFormatConvert(DawnErrorType value, const absl::FormatConversionSpec& spec, absl::FormatSink* s);
 
 }  // namespace dawn::native
+
+// Enable dawn enum bitmask for error types.
+namespace dawn {
+
+template <>
+struct IsDawnBitmask<native::DawnErrorType> {
+    static constexpr bool enable = true;
+};
+
+namespace native {
+
+// By default, we do not allow Internal errors to be surfaced to users. Instead,
+// such errors will be promoted to a device lost error instead.
+static constexpr DawnErrorType kDefaultAllowedErrors =
+    DawnErrorType::Validation | DawnErrorType::DeviceLost;
+
+}  // namespace native
+}  // namespace dawn
 
 #endif  // SRC_DAWN_NATIVE_ERROR_H_

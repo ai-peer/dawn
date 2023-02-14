@@ -139,14 +139,16 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
     return {};
 }
 
-WGPUCreatePipelineAsyncStatus CreatePipelineAsyncStatusFromErrorType(InternalErrorType error) {
+WGPUCreatePipelineAsyncStatus CreatePipelineAsyncStatusFromErrorType(DawnErrorType error) {
     switch (error) {
-        case InternalErrorType::Validation:
+        case DawnErrorType::None:
+            return WGPUCreatePipelineAsyncStatus_Success;
+        case DawnErrorType::Validation:
             return WGPUCreatePipelineAsyncStatus_ValidationError;
-        case InternalErrorType::DeviceLost:
+        case DawnErrorType::DeviceLost:
             return WGPUCreatePipelineAsyncStatus_DeviceLost;
-        case InternalErrorType::Internal:
-        case InternalErrorType::OutOfMemory:
+        case DawnErrorType::Internal:
+        case DawnErrorType::OutOfMemory:
             return WGPUCreatePipelineAsyncStatus_InternalError;
     }
 }

@@ -1424,7 +1424,7 @@ void CommandEncoder::APIClearBuffer(BufferBase* buffer, uint64_t offset, uint64_
 
 void CommandEncoder::APIInjectValidationError(const char* message) {
     if (mEncodingContext.CheckCurrentEncoder(this)) {
-        mEncodingContext.HandleError(DAWN_MAKE_ERROR(InternalErrorType::Validation, message));
+        mEncodingContext.HandleError(DAWN_MAKE_ERROR(DawnErrorType::Validation, message));
     }
 }
 

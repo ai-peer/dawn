@@ -25,22 +25,22 @@ void IgnoreErrors(MaybeError maybeError) {
         // During shutdown and destruction, device lost errors can be ignored.
         // We can also ignore other unexpected internal errors on shut down and treat it as
         // device lost so that we can continue with destruction.
-        ASSERT(errorData->GetType() == InternalErrorType::DeviceLost ||
-               errorData->GetType() == InternalErrorType::Internal);
+        ASSERT(errorData->GetType() == DawnErrorType::DeviceLost ||
+               errorData->GetType() == DawnErrorType::Internal);
     }
 }
 
-wgpu::ErrorType ToWGPUErrorType(InternalErrorType type) {
+wgpu::ErrorType ToWGPUErrorType(DawnErrorType type) {
     switch (type) {
-        case InternalErrorType::Validation:
+        case DawnErrorType::Validation:
             return wgpu::ErrorType::Validation;
-        case InternalErrorType::OutOfMemory:
+        case DawnErrorType::OutOfMemory:
             return wgpu::ErrorType::OutOfMemory;
 
         // There is no equivalent of Internal errors in the WebGPU API. Internal errors cause
         // the device at the API level to be lost, so treat it like a DeviceLost error.
-        case InternalErrorType::Internal:
-        case InternalErrorType::DeviceLost:
+        case DawnErrorType::Internal:
+        case DawnErrorType::DeviceLost:
             return wgpu::ErrorType::DeviceLost;
 
         default:
@@ -48,17 +48,77 @@ wgpu::ErrorType ToWGPUErrorType(InternalErrorType type) {
     }
 }
 
-InternalErrorType FromWGPUErrorType(wgpu::ErrorType type) {
+DawnErrorType FromWGPUErrorType(wgpu::ErrorType type) {
     switch (type) {
         case wgpu::ErrorType::Validation:
-            return InternalErrorType::Validation;
+            return DawnErrorType::Validation;
         case wgpu::ErrorType::OutOfMemory:
-            return InternalErrorType::OutOfMemory;
+            return DawnErrorType::OutOfMemory;
         case wgpu::ErrorType::DeviceLost:
-            return InternalErrorType::DeviceLost;
+            return DawnErrorType::DeviceLost;
         default:
-            return InternalErrorType::Internal;
+            return DawnErrorType::Internal;
     }
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString |
+                          absl::FormatConversionCharSet::kIntegral>
+AbslFormatConvert(DawnErrorType value,
+                  const absl::FormatConversionSpec& spec,
+                  absl::FormatSink* s) {
+    if (spec.conversion_char() == absl::FormatConversionChar::s) {
+        if (!static_cast<bool>(value)) {
+            s->Append("None");
+            return {true};
+        }
+
+        bool moreThanOneBit = !HasZeroOrOneBits(value);
+        if (moreThanOneBit) {
+            s->Append("(");
+        }
+
+        bool first = true;
+        if (value & DawnErrorType::Validation) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Validation");
+            value &= ~DawnErrorType::Validation;
+        }
+        if (value & DawnErrorType::DeviceLost) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("DeviceLost");
+            value &= ~DawnErrorType::DeviceLost;
+        }
+        if (value & DawnErrorType::Internal) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("Internal");
+            value &= ~DawnErrorType::Internal;
+        }
+        if (value & DawnErrorType::OutOfMemory) {
+            if (!first) {
+                s->Append("|");
+            }
+            first = false;
+            s->Append("OutOfMemory");
+            value &= ~DawnErrorType::OutOfMemory;
+        }
+
+        if (moreThanOneBit) {
+            s->Append(")");
+        }
+    } else {
+        s->Append(absl::StrFormat(
+            "%u", static_cast<typename std::underlying_type<DawnErrorType>::type>(value)));
+    }
+    return {true};
 }
 
 }  // namespace dawn::native

@@ -22,7 +22,7 @@
 
 namespace dawn::native {
 
-std::unique_ptr<ErrorData> ErrorData::Create(InternalErrorType type,
+std::unique_ptr<ErrorData> ErrorData::Create(DawnErrorType type,
                                              std::string message,
                                              const char* file,
                                              const char* function,
@@ -32,7 +32,7 @@ std::unique_ptr<ErrorData> ErrorData::Create(InternalErrorType type,
     return error;
 }
 
-ErrorData::ErrorData(InternalErrorType type, std::string message)
+ErrorData::ErrorData(DawnErrorType type, std::string message)
     : mType(type), mMessage(std::move(message)) {}
 
 ErrorData::~ErrorData() = default;
@@ -58,7 +58,7 @@ void ErrorData::AppendBackendMessage(std::string message) {
     mBackendMessages.push_back(std::move(message));
 }
 
-InternalErrorType ErrorData::GetType() const {
+DawnErrorType ErrorData::GetType() const {
     return mType;
 }
 
@@ -94,7 +94,7 @@ std::string ErrorData::GetFormattedMessage() const {
 
     // For non-validation errors, or errors that lack a context include the
     // stack trace for debugging purposes.
-    if (mContexts.empty() || mType != InternalErrorType::Validation) {
+    if (mContexts.empty() || mType != DawnErrorType::Validation) {
         for (const auto& callsite : mBacktrace) {
             ss << "    at " << callsite.function << " (" << callsite.file << ":" << callsite.line
                << ")\n";

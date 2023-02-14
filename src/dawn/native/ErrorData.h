@@ -18,8 +18,10 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include "absl/strings/str_format.h"
 #include "dawn/common/Compiler.h"
 
 namespace wgpu {
@@ -31,16 +33,16 @@ using ErrorType = wgpu::ErrorType;
 }
 
 namespace dawn::native {
-enum class InternalErrorType : uint32_t;
+enum class DawnErrorType : uint32_t;
 
 class [[nodiscard]] ErrorData {
   public:
-    [[nodiscard]] static std::unique_ptr<ErrorData> Create(InternalErrorType type,
+    [[nodiscard]] static std::unique_ptr<ErrorData> Create(DawnErrorType type,
                                                            std::string message,
                                                            const char* file,
                                                            const char* function,
                                                            int line);
-    ErrorData(InternalErrorType type, std::string message);
+    ErrorData(DawnErrorType type, std::string message);
     ~ErrorData();
 
     struct BacktraceRecord {
@@ -50,10 +52,20 @@ class [[nodiscard]] ErrorData {
     };
     void AppendBacktrace(const char* file, const char* function, int line);
     void AppendContext(std::string context);
+    template <typename... Args>
+    void AppendContext(const char* formatStr, const Args&... args) {
+        std::string out;
+        absl::UntypedFormatSpec format(formatStr);
+        if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
+            AppendContext(std::move(out));
+        } else {
+            AppendContext(absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
+        }
+    }
     void AppendDebugGroup(std::string label);
     void AppendBackendMessage(std::string message);
 
-    InternalErrorType GetType() const;
+    DawnErrorType GetType() const;
     const std::string& GetMessage() const;
     const std::vector<BacktraceRecord>& GetBacktrace() const;
     const std::vector<std::string>& GetContexts() const;
@@ -63,7 +75,7 @@ class [[nodiscard]] ErrorData {
     std::string GetFormattedMessage() const;
 
   private:
-    InternalErrorType mType;
+    DawnErrorType mType;
     std::string mMessage;
     std::vector<BacktraceRecord> mBacktrace;
     std::vector<std::string> mContexts;

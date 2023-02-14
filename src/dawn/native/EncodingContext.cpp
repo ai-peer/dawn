@@ -80,14 +80,14 @@ void EncodingContext::HandleError(std::unique_ptr<ErrorData> error) {
 
     if (!IsFinished()) {
         // Encoding should only generate validation errors.
-        ASSERT(error->GetType() == InternalErrorType::Validation);
+        ASSERT(error->GetType() == DawnErrorType::Validation);
         // If the encoding context is not finished, errors are deferred until
         // Finish() is called.
         if (mError == nullptr) {
             mError = std::move(error);
         }
     } else {
-        mDevice->HandleError(error->GetType(), error->GetFormattedMessage().c_str());
+        mDevice->HandleError(std::move(error));
     }
 }
 

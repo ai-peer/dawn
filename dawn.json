@@ -1017,7 +1017,8 @@
                 "returns": "buffer",
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
+                ],
+                "additional error types": ["out of memory"]
             },
             {
                 "name": "create error buffer",
@@ -1025,7 +1026,8 @@
                 "tags": ["dawn"],
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
+                ],
+	        "additional error types": ["out of memory"]
             },
             {
                 "name": "create command encoder",
@@ -1075,7 +1077,8 @@
                 "returns": "query set",
                 "args": [
                     {"name": "descriptor", "type": "query set descriptor", "annotation": "const*"}
-                ]
+                ],
+                "additional error types": ["out of memory"]
             },
             {
                 "name": "create render pipeline async",
@@ -1137,7 +1140,8 @@
                 "returns": "texture",
                 "args": [
                     {"name": "descriptor", "type": "texture descriptor", "annotation": "const*"}
-                ]
+                ],
+                "additional error types": ["out of memory"]
             },
             {
                 "name": "create error texture",

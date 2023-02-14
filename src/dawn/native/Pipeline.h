@@ -40,7 +40,7 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
                                      const PipelineLayoutBase* layout,
                                      SingleShaderStage stage);
 
-WGPUCreatePipelineAsyncStatus CreatePipelineAsyncStatusFromErrorType(InternalErrorType error);
+WGPUCreatePipelineAsyncStatus CreatePipelineAsyncStatusFromErrorType(DawnErrorType error);
 
 struct ProgrammableStage {
     Ref<ShaderModuleBase> module;

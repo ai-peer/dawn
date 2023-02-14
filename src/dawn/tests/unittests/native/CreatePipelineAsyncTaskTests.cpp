@@ -47,8 +47,8 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationValidationErrorInCreateRender
         RenderPipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
 
     ON_CALL(*renderPipelineMock.Get(), Initialize)
-        .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(InternalErrorType::Validation, "Initialization Error"))));
+        .WillByDefault(testing::Return(
+            testing::ByMove(DAWN_MAKE_ERROR(DawnErrorType::Validation, "Initialization Error"))));
 
     CreateRenderPipelineAsyncTask asyncTask(
         renderPipelineMock,
@@ -76,7 +76,7 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationInternalErrorInCreateRenderPi
 
     ON_CALL(*renderPipelineMock.Get(), Initialize)
         .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(dawn::native::InternalErrorType::Internal, "Initialization Error"))));
+            DAWN_MAKE_ERROR(dawn::native::DawnErrorType::Internal, "Initialization Error"))));
 
     dawn::native::CreateRenderPipelineAsyncTask asyncTask(
         renderPipelineMock,
@@ -103,8 +103,8 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationValidationErrorInCreateComput
         ComputePipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
 
     ON_CALL(*computePipelineMock.Get(), Initialize)
-        .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(InternalErrorType::Validation, "Initialization Error"))));
+        .WillByDefault(testing::Return(
+            testing::ByMove(DAWN_MAKE_ERROR(DawnErrorType::Validation, "Initialization Error"))));
 
     CreateComputePipelineAsyncTask asyncTask(
         computePipelineMock,
@@ -132,7 +132,7 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationInternalErrorInCreateComputeP
 
     ON_CALL(*computePipelineMock.Get(), Initialize)
         .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(dawn::native::InternalErrorType::Internal, "Initialization Error"))));
+            DAWN_MAKE_ERROR(dawn::native::DawnErrorType::Internal, "Initialization Error"))));
 
     dawn::native::CreateComputePipelineAsyncTask asyncTask(
         computePipelineMock,

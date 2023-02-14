@@ -62,7 +62,7 @@ class EncodingContext {
     inline bool ConsumedError(MaybeError maybeError, const char* formatStr, const Args&... args) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
-            if (error->GetType() == InternalErrorType::Validation) {
+            if (error->GetType() == DawnErrorType::Validation) {
                 std::string out;
                 absl::UntypedFormatSpec format(formatStr);
                 if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
