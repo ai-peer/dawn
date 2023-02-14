@@ -309,7 +309,7 @@ struct MultiplanarExternalTexture::State {
     /// builtin function.
     /// @param call_type determines which function body to generate
     /// @returns a statement list that makes of the body of the chosen function
-    auto buildTextureBuiltinBody(sem::BuiltinType call_type) {
+    auto buildTextureBuiltinBody(sem::BuiltinType call_type, const type::Type* coord_ty) {
         utils::Vector<const ast::Statement*, 16> stmts;
         const ast::CallExpression* single_plane_call = nullptr;
         const ast::CallExpression* plane_0_call = nullptr;
@@ -350,8 +350,11 @@ struct MultiplanarExternalTexture::State {
                 single_plane_call = b.Call("textureLoad", "plane0", "coord", 0_a);
                 // textureLoad(plane0, coord, 0);
                 plane_0_call = b.Call("textureLoad", "plane0", "coord", 0_a);
+                // const coord1 = coord / vec2<i32>(2);
+                stmts.Push(b.Decl(
+                    b.Var("coord1", b.Div("coord", b.Call(CreateASTTypeFor(ctx, coord_ty), 2_a)))));
                 // textureLoad(plane1, coord, 0);
-                plane_1_call = b.Call("textureLoad", "plane1", "coord", 0_a);
+                plane_1_call = b.Call("textureLoad", "plane1", "coord1", 0_a);
                 break;
             default:
                 TINT_ICE(Transform, b.Diagnostics()) << "unhandled builtin: " << call_type;
@@ -419,18 +422,19 @@ struct MultiplanarExternalTexture::State {
             texture_sample_external_sym = b.Symbols().New("textureSampleExternal");
 
             // Emit the textureSampleExternal function.
-            b.Func(texture_sample_external_sym,
-                   utils::Vector{
-                       b.Param("plane0",
-                               b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("plane1",
-                               b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
-                       b.Param("smp", b.ty.sampler(type::SamplerKind::kSampler)),
-                       b.Param("coord", b.ty.vec2(b.ty.f32())),
-                       b.Param("params", b.ty(params_struct_sym)),
-                   },
-                   b.ty.vec4(b.ty.f32()),
-                   buildTextureBuiltinBody(sem::BuiltinType::kTextureSampleBaseClampToEdge));
+            b.Func(
+                texture_sample_external_sym,
+                utils::Vector{
+                    b.Param("plane0",
+                            b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
+                    b.Param("plane1",
+                            b.ty.sampled_texture(type::TextureDimension::k2d, b.ty.f32())),
+                    b.Param("smp", b.ty.sampler(type::SamplerKind::kSampler)),
+                    b.Param("coord", b.ty.vec2(b.ty.f32())),
+                    b.Param("params", b.ty(params_struct_sym)),
+                },
+                b.ty.vec4(b.ty.f32()),
+                buildTextureBuiltinBody(sem::BuiltinType::kTextureSampleBaseClampToEdge, nullptr));
         }
 
         return b.Call(texture_sample_external_sym, utils::Vector{
@@ -477,7 +481,7 @@ struct MultiplanarExternalTexture::State {
                        b.Param("params", b.ty(params_struct_sym)),
                    },
                    b.ty.vec4(b.ty.f32()),  //
-                   buildTextureBuiltinBody(sem::BuiltinType::kTextureLoad));
+                   buildTextureBuiltinBody(sem::BuiltinType::kTextureLoad, coord_ty));
 
             return name;
         });
