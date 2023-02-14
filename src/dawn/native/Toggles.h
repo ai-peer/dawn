@@ -88,6 +88,7 @@ enum class Toggle {
     UseBlitForBufferToStencilTextureCopy,
     UseBlitForDepthTextureToTextureCopyToNonzeroSubresource,
     DisallowDeprecatedAPIs,
+    EnableDeviceMutex,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,

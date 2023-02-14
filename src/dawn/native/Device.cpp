@@ -92,6 +92,14 @@ struct DeviceBase::DeprecationWarnings {
 };
 
 namespace {
+class MutexEnabled : public DeviceMutexBase {
+public:
+    void Lock() override { mMutex.lock(); }
+    void Unlock() override { mMutex.unlock(); }
+private:
+    std::mutex mMutex;
+};
+
 struct LoggingCallbackTask : CallbackTask {
   public:
     LoggingCallbackTask() = delete;
@@ -215,6 +223,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 
 DeviceBase::DeviceBase() : mState(State::Alive) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+    mMutex = AcquireRef(new DeviceMutexBase());
 }
 
 DeviceBase::~DeviceBase() {
@@ -286,10 +295,19 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    if (IsToggleEnabled(Toggle::EnableDeviceMutex)) {
+        mMutex = AcquireRef(new MutexEnabled());
+    } else {
+        mMutex = AcquireRef(new DeviceMutexBase());
+    }
+
     return {};
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    // This will be invoked by API side, so we need to lock.
+    AutoLock deviceLock(*this);
+
     // DeviceBase uses RefCountedWithExternalCount to break refcycles.
     //
     // DeviceBase holds multiple Refs to various API objects (pipelines, buffers, etc.) which are
@@ -307,7 +325,7 @@ void DeviceBase::WillDropLastExternalRef() {
     // device - either directly or indirectly. We would need to ensure those tasks don't create new
     // reference cycles, and we would need to continuously try draining the pending tasks to clear
     // out all remaining refs.
-    Destroy();
+    Destroy(/*isLocked=*/true);
 
     // Drop te device's reference to the queue. Because the application dropped the last external
     // references, they can no longer get the queue from APIGetQueue().
@@ -366,7 +384,7 @@ void DeviceBase::DestroyObjects() {
     }
 }
 
-void DeviceBase::Destroy() {
+void DeviceBase::Destroy(bool isLocked) {
     // Skip if we are already destroyed.
     if (mState == State::Destroyed) {
         return;
@@ -442,7 +460,20 @@ void DeviceBase::Destroy() {
         IgnoreErrors(TickImpl());
 
         // Trigger all in-flight TrackTask callbacks from 'mQueue'.
+        // We need to unlock Device's mutex because callbacks might calls public API again and
+        // that might casue deadlock.
+        if (isLocked) {
+            // Prevent other thread from deleting this object before we resume the locking.
+            Reference();
+            mMutex->Unlock();
+        }
+
         FlushCallbackTaskQueue();
+
+        if (isLocked) {
+            mMutex->Lock();
+            Release();
+        }
     }
 
     // At this point GPU operations are always finished, so we are in the disconnected state.
@@ -467,7 +498,8 @@ void DeviceBase::Destroy() {
 }
 
 void DeviceBase::APIDestroy() {
-    Destroy();
+    AutoLock deviceLock(*this);
+    Destroy(/*isLocked=*/true);
 }
 
 void DeviceBase::HandleError(InternalErrorType type,
@@ -1224,7 +1256,7 @@ bool DeviceBase::APITick() {
     // Tick may trigger callbacks which drop a ref to the device itself. Hold a Ref to ourselves
     // to avoid deleting |this| in the middle of this function call.
     Ref<DeviceBase> self(this);
-    if (IsLost() || ConsumedError(Tick())) {
+    if (IsLost() || ConsumedError(Tick(/*isMultiThreadUnsafe=*/true))) {
         return false;
     }
 
@@ -1234,22 +1266,31 @@ bool DeviceBase::APITick() {
     return !IsDeviceIdle();
 }
 
-MaybeError DeviceBase::Tick() {
-    DAWN_TRY(ValidateIsAlive());
+MaybeError DeviceBase::Tick(bool isMultiThreadUnsafe) {
+    {
+        DeferLock deviceLock(*this);
 
-    // To avoid overly ticking, we only want to tick when:
-    // 1. the last submitted serial has moved beyond the completed serial
-    // 2. or the backend still has pending commands to submit.
-    if (HasScheduledCommands()) {
-        DAWN_TRY(CheckPassedSerials());
-        DAWN_TRY(TickImpl());
+        if (isMultiThreadUnsafe) {
+            deviceLock.Lock();
+        }
+        DAWN_TRY(ValidateIsAlive());
 
-        // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can
-        // tick the dynamic uploader before the backend resource allocators. This would allow
-        // reclaiming resources one tick earlier.
-        mDynamicUploader->Deallocate(mCompletedSerial);
-        mQueue->Tick(mCompletedSerial);
+        // To avoid overly ticking, we only want to tick when:
+        // 1. the last submitted serial has moved beyond the completed serial
+        // 2. or the backend still has pending commands to submit.
+        if (HasScheduledCommands()) {
+            DAWN_TRY(CheckPassedSerials());
+            DAWN_TRY(TickImpl());
+
+            // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can
+            // tick the dynamic uploader before the backend resource allocators. This would allow
+            // reclaiming resources one tick earlier.
+            mDynamicUploader->Deallocate(mCompletedSerial);
+            mQueue->Tick(mCompletedSerial);
+        }
     }
+
+    // TaskQueue has its own mutex so no need to use Device's lock.
 
     // We have to check callback tasks in every Tick because it is not related to any global
     // serials.
