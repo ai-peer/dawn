@@ -93,6 +93,36 @@ struct DeviceBase::DeprecationWarnings {
 };
 
 namespace {
+class MutexEnabled : public DeviceMutexBase {
+  public:
+    void Lock() override {
+#if defined(DAWN_ENABLE_ASSERTS)
+        auto currentThread = std::this_thread::get_id();
+        ASSERT(mOwner.load(std::memory_order_acquire) != currentThread);
+#endif  // DAWN_ENABLE_ASSERTS
+
+        mMutex.lock();
+
+#if defined(DAWN_ENABLE_ASSERTS)
+        mOwner.store(currentThread, std::memory_order_release);
+#endif  // DAWN_ENABLE_ASSERTS
+    }
+    void Unlock() override {
+#if defined(DAWN_ENABLE_ASSERTS)
+        ASSERT(mOwner.load(std::memory_order_acquire) == std::this_thread::get_id());
+        mOwner.store(std::thread::id(), std::memory_order_release);
+#endif  // DAWN_ENABLE_ASSERTS
+
+        mMutex.unlock();
+    }
+
+  private:
+#if defined(DAWN_ENABLE_ASSERTS)
+    std::atomic<std::thread::id> mOwner;
+#endif  // DAWN_ENABLE_ASSERTS
+    std::mutex mMutex;
+};
+
 struct LoggingCallbackTask : CallbackTask {
   public:
     LoggingCallbackTask() = delete;
@@ -242,6 +272,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
     mFormatTable = BuildFormatTable(this);
+    mMutex = AcquireRef(new DeviceMutexBase());
 }
 
 DeviceBase::~DeviceBase() {
@@ -315,11 +346,20 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    if (HasFeature(Feature::ThreadSafeAPI)) {
+        mMutex = AcquireRef(new MutexEnabled());
+    } else {
+        mMutex = AcquireRef(new DeviceMutexBase());
+    }
+
     return {};
 }
 
 void DeviceBase::WillDropLastExternalRef() {
     CallbackSink callbackSink;
+
+    // This will be invoked by API side, so we need to lock.
+    AutoLock deviceLock(*this);
 
     // DeviceBase uses RefCountedWithExternalCount to break refcycles.
     //
@@ -1870,7 +1910,10 @@ void DeviceBase::AddComputePipelineAsyncCallbackTask(
             // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
             // thread-safe.
             ASSERT(mPipeline != nullptr);
-            mPipeline = mPipeline->GetDevice()->AddOrGetCachedComputePipeline(mPipeline);
+            {
+                DeviceBase::AutoLock deviceLock(*mPipeline->GetDevice());
+                mPipeline = mPipeline->GetDevice()->AddOrGetCachedComputePipeline(mPipeline);
+            }
 
             CreateComputePipelineAsyncCallbackTask::Finish();
         }
@@ -1895,6 +1938,7 @@ void DeviceBase::AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipe
             // CreateRenderPipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
             // thread-safe.
             if (mPipeline.Get() != nullptr) {
+                DeviceBase::AutoLock deviceLock(*mPipeline->GetDevice());
                 mPipeline = mPipeline->GetDevice()->AddOrGetCachedRenderPipeline(mPipeline);
             }
 
