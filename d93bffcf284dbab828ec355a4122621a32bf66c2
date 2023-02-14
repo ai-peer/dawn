@@ -275,6 +275,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c671cc6a_34c32347",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T02:43:11Z",
+      "side": 1,
+      "message": "Agree. I tried to explore std::array services + ExternalSemaphoreHandle with type solution yesterday and became worries about that. Different from ExternalMemory which only has 1 handle, watiFDs is a vector. For example, check supports will consume more time when we pass an array of ExternalSemaphoreHandles and we have (assume we have) an array of service implementation, which is a loop-in-loop check.\n\nStick on this assumption (And the assumption seems reasonable) balanced the perf and adoption. I\u0027ll left the comments so no surprise in future situation",
+      "parentUuid": "75813173_49a8c3c2",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2eeca152_8b81adbe",
         "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.h",
         "patchSetId": 4
