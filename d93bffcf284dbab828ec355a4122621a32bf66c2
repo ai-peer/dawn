@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfb2cd0f_8c7f0af2",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e230a21b_5e0d9cd7",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75510433_e3024929",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c331b421_cbd3deff",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75510433_e3024929",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcdf117b_699ad655",
@@ -82,6 +118,30 @@
       "writtenOn": "2023-02-09T11:15:31Z",
       "side": 1,
       "message": "nit: 2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42914896_c01546b0",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcdf117b_699ad655",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -129,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1164d5d_da8d18e4",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Resolve CloseHandle but keep CheckSupport as static",
+      "parentUuid": "4a94b134_7fd60eb8",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6dad7a42_741cd9d8",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
         "patchSetId": 4
@@ -140,6 +218,30 @@
       "writtenOn": "2023-02-09T11:15:31Z",
       "side": 1,
       "message": "nit: mServiceImpl, or just mImpl.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 16
+      },
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1479fcc3_11a3182a",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dad7a42_741cd9d8",
       "range": {
         "startLine": 55,
         "startChar": 4,
@@ -203,6 +305,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd6efa4_c65b3a7f",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac64f66c_523b0aff",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "061b6e82_c6ff1d21",
@@ -216,6 +336,24 @@
       "writtenOn": "2023-02-09T11:15:31Z",
       "side": 1,
       "message": "nit: This can be a forward declaration instead.",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb8a6f8_2fdd777d",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "061b6e82_c6ff1d21",
       "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -308,6 +446,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a37b8a9e_20ab49a5",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2eeca152_8b81adbe",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "222a3d17_e653dedf",
@@ -321,6 +477,24 @@
       "writtenOn": "2023-02-09T11:15:31Z",
       "side": 1,
       "message": "This can probably be removed, see [1].",
+      "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7256ebd_3ebb1bfb",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationNull.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-14T08:22:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "222a3d17_e653dedf",
       "revId": "d93bffcf284dbab828ec355a4122621a32bf66c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
