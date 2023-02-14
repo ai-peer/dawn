@@ -122,7 +122,7 @@ class BufferBase : public ApiObjectBase {
         PendingMappingCallback(PendingMappingCallback&& other);
         PendingMappingCallback& operator=(PendingMappingCallback&& other);
 
-        void Call();
+        void Call(DeviceBase& device);
     };
     PendingMappingCallback WillCallMappingCallback(MapRequestID mapID,
                                                    WGPUBufferMapAsyncStatus status);

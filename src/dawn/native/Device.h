@@ -15,14 +15,18 @@
 #ifndef SRC_DAWN_NATIVE_DEVICE_H_
 #define SRC_DAWN_NATIVE_DEVICE_H_
 
+#include <atomic>
+#include <functional>
 #include <memory>
-#include <mutex>
+#include <optional>
 #include <string>
+#include <thread>
 #include <unordered_set>
 #include <utility>
 #include <vector>
 
 #include "dawn/native/CacheKey.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Error.h"
@@ -53,12 +57,29 @@ class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
 class OwnedCompilationMessages;
-struct CallbackTask;
 struct InternalPipelineStore;
 struct ShaderModuleParseResult;
 
 using WGSLExtensionSet = std::unordered_set<std::string>;
 
+class DeviceMutexBase : public RefCounted {
+  public:
+    using RefCounted::RefCounted;
+
+    virtual void Lock() {}
+    virtual void Unlock() {}
+
+    void AssertIsLockedByCurrentThread() {
+#if defined(DAWN_ENABLE_ASSERTS)
+        ASSERT(IsLockedByCurrentThread());
+#endif
+    }
+
+  protected:
+#if defined(DAWN_ENABLE_ASSERTS)
+    virtual bool IsLockedByCurrentThread() { return true; }
+#endif
+};
 class DeviceBase : public RefCountedWithExternalCount {
   public:
     DeviceBase(AdapterBase* adapter,
@@ -385,6 +406,19 @@ class DeviceBase : public RefCountedWithExternalCount {
                                             WGPUCreateRenderPipelineAsyncCallback callback,
                                             void* userdata);
 
+    // Allow callback to be executed without re-entrant deadlocks.
+    void ExecuteWithUnlockedMutex(CallbackTask& task, void (CallbackTask::*method)()) {
+        AutoUnlock deviceUnlock(*this);
+
+        std::invoke(method, &task);
+    }
+    template <typename... Args>
+    void ExecuteWithUnlockedMutex(void (*callback)(Args...), Args... args) {
+        AutoUnlock deviceUnlock(*this);
+
+        callback(args...);
+    }
+
     PipelineCompatibilityToken GetNextPipelineCompatibilityToken();
 
     const CacheKey& GetCacheKey() const;
@@ -408,6 +442,33 @@ class DeviceBase : public RefCountedWithExternalCount {
     // method makes them to be submitted as soon as possbile in next ticks.
     virtual void ForceEventualFlushOfCommands() = 0;
 
+    const Ref<DeviceMutexBase>& GetMutex() { return mMutex; }
+    struct AutoLock {
+        explicit AutoLock(DeviceBase& device) : mMutex(device.GetMutex()) { mMutex->Lock(); }
+        ~AutoLock() { mMutex->Unlock(); }
+
+      private:
+        const Ref<DeviceMutexBase>& mMutex;
+    };
+
+    struct DeferLock {
+        explicit DeferLock(DeviceBase& device) : mMutex(device.GetMutex()) {}
+        explicit DeferLock(const Ref<DeviceMutexBase>& mutex) : mMutex(mutex) {}
+        ~DeferLock() {
+            if (mLocked) {
+                mMutex->Unlock();
+            }
+        }
+        void Lock() {
+            mMutex->Lock();
+            mLocked = true;
+        }
+
+      private:
+        const Ref<DeviceMutexBase>& mMutex;
+        bool mLocked = false;
+    };
+
     // In the 'Normal' mode, currently recorded commands in the backend normally will be actually
     // submitted in the next Tick. However in the 'Passive' mode, the submission will be postponed
     // as late as possible, for example, until the client has explictly issued a submission.
@@ -427,6 +488,24 @@ class DeviceBase : public RefCountedWithExternalCount {
     void IncrementLastSubmittedCommandSerial();
 
   private:
+    // Class to temporarily unlock the mutex and re-lock it when out of scope.
+    struct AutoUnlock {
+        explicit AutoUnlock(DeviceBase& device) : mDevice(device), mMutex(device.GetMutex()) {
+            // Avoid device being destroyed while we unlock the mutex.
+            mDevice.Reference();
+            mMutex->AssertIsLockedByCurrentThread();
+            mMutex->Unlock();
+        }
+        ~AutoUnlock() {
+            mMutex->Lock();
+            mDevice.Release();
+        }
+
+      private:
+        DeviceBase& mDevice;
+        const Ref<DeviceMutexBase>& mMutex;
+    };
+
     void WillDropLastExternalRef() override;
 
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
@@ -580,6 +659,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
+
+    Ref<DeviceMutexBase> mMutex;
 };
 
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
