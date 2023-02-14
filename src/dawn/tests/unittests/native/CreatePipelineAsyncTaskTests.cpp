@@ -12,27 +12,38 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/tests/DawnNativeTest.h"
+#include <gtest/gtest.h>
 
 #include "dawn/native/CreatePipelineAsyncTask.h"
+#include "dawn/utils/WGPUHelpers.h"
 #include "mocks/ComputePipelineMock.h"
+#include "mocks/DawnMockTest.h"
 #include "mocks/RenderPipelineMock.h"
 
-class CreatePipelineAsyncTaskTests : public DawnNativeTest {};
+namespace dawn::native {
+namespace {
+
+using ::testing::Test;
+
+class CreatePipelineAsyncTaskTests : public DawnMockTest {};
 
 // A regression test for a null pointer issue in CreateRenderPipelineAsyncTask::Run().
 // See crbug.com/dawn/1310 for more details.
 TEST_F(CreatePipelineAsyncTaskTests, InitializationErrorInCreateRenderPipelineAsync) {
-    dawn::native::DeviceBase* deviceBase =
-        reinterpret_cast<dawn::native::DeviceBase*>(device.Get());
-    Ref<dawn::native::RenderPipelineMock> renderPipelineMock =
-        AcquireRef(new dawn::native::RenderPipelineMock(deviceBase));
+    wgpu::RenderPipelineDescriptor desc = {};
+    desc.vertex.module = utils::CreateShaderModule(device, R"(
+        @vertex fn main() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        })");
+    desc.vertex.entryPoint = "main";
+    Ref<RenderPipelineMock> renderPipelineMock =
+        RenderPipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
 
     ON_CALL(*renderPipelineMock.Get(), Initialize)
         .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(dawn::native::InternalErrorType::Validation, "Initialization Error"))));
+            DAWN_MAKE_ERROR(InternalErrorType::Validation, "Initialization Error"))));
 
-    dawn::native::CreateRenderPipelineAsyncTask asyncTask(
+    CreateRenderPipelineAsyncTask asyncTask(
         renderPipelineMock,
         [](WGPUCreatePipelineAsyncStatus status, WGPURenderPipeline returnPipeline,
            const char* message, void* userdata) {
@@ -49,16 +60,19 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationErrorInCreateRenderPipelineAs
 // A regression test for a null pointer issue in CreateComputePipelineAsyncTask::Run().
 // See crbug.com/dawn/1310 for more details.
 TEST_F(CreatePipelineAsyncTaskTests, InitializationErrorInCreateComputePipelineAsync) {
-    dawn::native::DeviceBase* deviceBase =
-        reinterpret_cast<dawn::native::DeviceBase*>(device.Get());
-    Ref<dawn::native::ComputePipelineMock> computePipelineMock =
-        AcquireRef(new dawn::native::ComputePipelineMock(deviceBase));
+    wgpu::ComputePipelineDescriptor desc = {};
+    desc.compute.module = utils::CreateShaderModule(device, R"(
+        @compute @workgroup_size(1) fn main() {
+        })");
+    desc.compute.entryPoint = "main";
+    Ref<ComputePipelineMock> computePipelineMock =
+        ComputePipelineMock::Create(mDeviceMock, FromCppAPI(&desc));
 
     ON_CALL(*computePipelineMock.Get(), Initialize)
         .WillByDefault(testing::Return(testing::ByMove(
-            DAWN_MAKE_ERROR(dawn::native::InternalErrorType::Validation, "Initialization Error"))));
+            DAWN_MAKE_ERROR(InternalErrorType::Validation, "Initialization Error"))));
 
-    dawn::native::CreateComputePipelineAsyncTask asyncTask(
+    CreateComputePipelineAsyncTask asyncTask(
         computePipelineMock,
         [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
            const char* message, void* userdata) {
@@ -71,3 +85,6 @@ TEST_F(CreatePipelineAsyncTaskTests, InitializationErrorInCreateComputePipelineA
 
     EXPECT_CALL(*computePipelineMock.Get(), DestroyImpl).Times(1);
 }
+
+}  // namespace
+}  // namespace dawn::native

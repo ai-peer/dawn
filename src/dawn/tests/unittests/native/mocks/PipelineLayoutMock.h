@@ -17,15 +17,17 @@
 
 #include "gmock/gmock.h"
 
-#include "dawn/native/Device.h"
 #include "dawn/native/PipelineLayout.h"
+#include "dawn/tests/unittests/native/mocks/DeviceMock.h"
 
 namespace dawn::native {
 
 class PipelineLayoutMock : public PipelineLayoutBase {
   public:
-    explicit PipelineLayoutMock(DeviceBase* device);
+    PipelineLayoutMock(DeviceMock* device, const PipelineLayoutDescriptor* descriptor);
     ~PipelineLayoutMock() override;
+
+    void SetContentHash(size_t contentHash) override;
 
     MOCK_METHOD(void, DestroyImpl, (), (override));
 };

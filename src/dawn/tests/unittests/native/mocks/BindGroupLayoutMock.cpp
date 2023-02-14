@@ -16,12 +16,21 @@
 
 namespace dawn::native {
 
-BindGroupLayoutMock::BindGroupLayoutMock(DeviceBase* device) : BindGroupLayoutBase(device) {
+BindGroupLayoutMock::BindGroupLayoutMock(DeviceMock* device,
+                                         const BindGroupLayoutDescriptor* descriptor,
+                                         PipelineCompatibilityToken pipelineCompatibilityToken)
+    : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken) {
     ON_CALL(*this, DestroyImpl).WillByDefault([this]() {
         this->BindGroupLayoutBase::DestroyImpl();
     });
+
+    CachedObject::SetContentHash(ComputeContentHash());
 }
 
 BindGroupLayoutMock::~BindGroupLayoutMock() = default;
+
+void BindGroupLayoutMock::SetContentHash(size_t contentHash) {
+    ASSERT(contentHash == GetContentHash());
+}
 
 }  // namespace dawn::native
