@@ -16,6 +16,149 @@
       "message": "Pass build on chromeOS",
       "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a14c944_aeef3c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6ac3ee_1e93221e",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "u-nit: Why does this need to be nested inside Vulkan?\n\nAlso ChromeOS cannot be detected with regular compiler macros either, this is why we need to inject it from the build system.",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25ae6cb4_e95106ba",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "nit: else-if since there can be a single one?",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 1
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1bf30665_1b7889bd",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "nit: Here and in other places it could be an assert? The Vulkan backend should not call the semaphore service if it is not supported.",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70916559_44ff3ac3",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "This class has been deleted actually ^^",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde1086d_fdedee5d",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "nit: year",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30af40df_f4ac8d35",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-14T08:41:32Z",
+      "side": 1,
+      "message": "u-nit: it seems this choice could be done in the place where we choose between implementations: depending on the OS the SemaphoreService could pass `VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT` or `VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT` to CreateFDService",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
