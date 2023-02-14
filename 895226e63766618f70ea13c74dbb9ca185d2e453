@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfc464e0_59d07da5",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2200,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-14T14:21:35Z",
+      "side": 1,
+      "message": "Please can we have one more test that uses two different overloads of the operator?\nThis will test that two functions are created, with different names",
+      "revId": "895226e63766618f70ea13c74dbb9ca185d2e453",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
