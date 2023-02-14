@@ -15,8 +15,8 @@ struct tint_array {
 };
 
 struct Light {
-  float3 position;
-  float3 colour;
+  packed_float3 position;
+  packed_float3 colour;
 };
 
 struct Lights {

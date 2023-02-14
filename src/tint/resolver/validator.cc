@@ -467,7 +467,9 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
             }
 
             // Validate that member is at a valid byte offset
-            if (m->Offset() % required_align != 0) {
+            if (m->Offset() % required_align != 0 &&
+                !enabled_extensions_.Contains(
+                    builtin::Extension::kChromiumInternalRelaxedUniformLayout)) {
                 AddError("the offset of a struct member of type '" +
                              m->Type()->UnwrapRef()->FriendlyName(symbols_) +
                              "' in address space '" + utils::ToString(address_space) +
@@ -526,7 +528,9 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
             return false;
         }
 
-        if (address_space == builtin::AddressSpace::kUniform) {
+        if (address_space == builtin::AddressSpace::kUniform &&
+            !enabled_extensions_.Contains(
+                builtin::Extension::kChromiumInternalRelaxedUniformLayout)) {
             // We already validated that this array member is itself aligned to 16 bytes above, so
             // we only need to validate that stride is a multiple of 16 bytes.
             if (arr->Stride() % 16 != 0) {

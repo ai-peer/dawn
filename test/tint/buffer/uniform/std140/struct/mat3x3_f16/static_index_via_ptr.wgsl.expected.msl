@@ -14,9 +14,22 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_half3 elements;
+  /* 0x0006 */ tint_array<int8_t, 2> tint_pad;
+};
+
+half3x3 unpack_array(tint_array<tint_vec3_struct, 3> in) {
+  half3x3 result = half3x3(0.0h);
+  for(uint i = 0u; (i < 3u); i = (i + 1u)) {
+    result[i] = half3(in[i].elements);
+  }
+  return result;
+}
+
 struct Inner {
-  /* 0x0000 */ half3x3 m;
-  /* 0x0018 */ tint_array<int8_t, 40> tint_pad;
+  /* 0x0000 */ tint_array<tint_vec3_struct, 3> m;
+  /* 0x0018 */ tint_array<int8_t, 40> tint_pad_1;
 };
 
 struct Outer {
@@ -28,9 +41,9 @@ kernel void f(const constant tint_array<Outer, 4>* tint_symbol [[buffer(0)]]) {
   Outer const l_a_3 = (*(tint_symbol))[3];
   tint_array<Inner, 4> const l_a_3_a = (*(tint_symbol))[3].a;
   Inner const l_a_3_a_2 = (*(tint_symbol))[3].a[2];
-  half3x3 const l_a_3_a_2_m = (*(tint_symbol))[3].a[2].m;
-  half3 const l_a_3_a_2_m_1 = (*(tint_symbol))[3].a[2].m[1];
-  half const l_a_3_a_2_m_1_0 = (*(tint_symbol))[3].a[2].m[1][0];
+  half3x3 const l_a_3_a_2_m = unpack_array((*(tint_symbol))[3].a[2].m);
+  half3 const l_a_3_a_2_m_1 = half3((*(tint_symbol))[3].a[2].m[1].elements);
+  half const l_a_3_a_2_m_1_0 = (*(tint_symbol))[3].a[2].m[1].elements[0];
   return;
 }
 

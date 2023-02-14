@@ -14,8 +14,21 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_float3 elements;
+  /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
+float4x3 unpack_array(tint_array<tint_vec3_struct, 4> in) {
+  float4x3 result = float4x3(0.0f);
+  for(uint i = 0u; (i < 4u); i = (i + 1u)) {
+    result[i] = float3(in[i].elements);
+  }
+  return result;
+}
+
 struct Inner {
-  /* 0x0000 */ float4x3 m;
+  /* 0x0000 */ tint_array<tint_vec3_struct, 4> m;
 };
 
 struct Outer {
@@ -27,9 +40,9 @@ kernel void f(const constant tint_array<Outer, 4>* tint_symbol [[buffer(0)]]) {
   Outer const l_a_3 = (*(tint_symbol))[3];
   tint_array<Inner, 4> const l_a_3_a = (*(tint_symbol))[3].a;
   Inner const l_a_3_a_2 = (*(tint_symbol))[3].a[2];
-  float4x3 const l_a_3_a_2_m = (*(tint_symbol))[3].a[2].m;
-  float3 const l_a_3_a_2_m_1 = (*(tint_symbol))[3].a[2].m[1];
-  float const l_a_3_a_2_m_1_0 = (*(tint_symbol))[3].a[2].m[1][0];
+  float4x3 const l_a_3_a_2_m = unpack_array((*(tint_symbol))[3].a[2].m);
+  float3 const l_a_3_a_2_m_1 = float3((*(tint_symbol))[3].a[2].m[1].elements);
+  float const l_a_3_a_2_m_1_0 = (*(tint_symbol))[3].a[2].m[1].elements[0];
   return;
 }
 

@@ -61,9 +61,9 @@ struct AI32s {
 };
 
 float3 toVoxelPos(float3 position, const constant Uniforms* const tint_symbol_1) {
-  float3 bbMin = float3((*(tint_symbol_1)).bbMin[0], (*(tint_symbol_1)).bbMin[1], (*(tint_symbol_1)).bbMin[2]);
-  float3 bbMax = float3((*(tint_symbol_1)).bbMax[0], (*(tint_symbol_1)).bbMax[1], (*(tint_symbol_1)).bbMax[2]);
-  float3 bbSize = (bbMax - bbMin);
+  packed_float3 bbMin = packed_float3(float3((*(tint_symbol_1)).bbMin[0], (*(tint_symbol_1)).bbMin[1], (*(tint_symbol_1)).bbMin[2]));
+  packed_float3 bbMax = packed_float3(float3((*(tint_symbol_1)).bbMax[0], (*(tint_symbol_1)).bbMax[1], (*(tint_symbol_1)).bbMax[2]));
+  packed_float3 bbSize = packed_float3((float3(bbMax) - float3(bbMin)));
   float cubeSize = fmax(fmax(bbSize[0], bbSize[1]), bbSize[2]);
   float gridSize = float((*(tint_symbol_1)).gridSize);
   float gx = ((gridSize * (position[0] - (*(tint_symbol_1)).bbMin[0])) / cubeSize);
@@ -73,7 +73,7 @@ float3 toVoxelPos(float3 position, const constant Uniforms* const tint_symbol_1)
 }
 
 uint toIndex1D(uint gridSize, float3 voxelPos) {
-  uint3 icoord = uint3(voxelPos);
+  packed_uint3 icoord = packed_uint3(uint3(voxelPos));
   return ((icoord[0] + (gridSize * icoord[1])) + ((gridSize * gridSize) * icoord[2]));
 }
 
@@ -93,8 +93,8 @@ uint3 toIndex3D(uint gridSize, uint index) {
 }
 
 float3 loadPosition(uint vertexIndex, device F32s* const tint_symbol_2) {
-  float3 position = float3((*(tint_symbol_2)).values[((3u * vertexIndex) + 0u)], (*(tint_symbol_2)).values[((3u * vertexIndex) + 1u)], (*(tint_symbol_2)).values[((3u * vertexIndex) + 2u)]);
-  return position;
+  packed_float3 position = packed_float3(float3((*(tint_symbol_2)).values[((3u * vertexIndex) + 0u)], (*(tint_symbol_2)).values[((3u * vertexIndex) + 1u)], (*(tint_symbol_2)).values[((3u * vertexIndex) + 2u)]));
+  return float3(position);
 }
 
 void doIgnore(const constant Uniforms* const tint_symbol_3, device Dbg* const tint_symbol_4, device AU32s* const tint_symbol_5, device U32s* const tint_symbol_6, device F32s* const tint_symbol_7, device AI32s* const tint_symbol_8) {
@@ -115,12 +115,12 @@ void main_count_inner(uint3 GlobalInvocationID, const constant Uniforms* const t
   uint i0 = (*(tint_symbol_12)).values[((3u * triangleIndex) + 0u)];
   uint i1 = (*(tint_symbol_12)).values[((3u * triangleIndex) + 1u)];
   uint i2 = (*(tint_symbol_12)).values[((3u * triangleIndex) + 2u)];
-  float3 p0 = loadPosition(i0, tint_symbol_13);
-  float3 p1 = loadPosition(i1, tint_symbol_13);
-  float3 p2 = loadPosition(i2, tint_symbol_13);
-  float3 center = (((p0 + p1) + p2) / 3.0f);
-  float3 voxelPos = toVoxelPos(center, tint_symbol_9);
-  uint voxelIndex = toIndex1D((*(tint_symbol_9)).gridSize, voxelPos);
+  packed_float3 p0 = packed_float3(loadPosition(i0, tint_symbol_13));
+  packed_float3 p1 = packed_float3(loadPosition(i1, tint_symbol_13));
+  packed_float3 p2 = packed_float3(loadPosition(i2, tint_symbol_13));
+  packed_float3 center = packed_float3((((float3(p0) + float3(p1)) + float3(p2)) / 3.0f));
+  packed_float3 voxelPos = packed_float3(toVoxelPos(float3(center), tint_symbol_9));
+  uint voxelIndex = toIndex1D((*(tint_symbol_9)).gridSize, float3(voxelPos));
   uint acefg = atomic_fetch_add_explicit(&((*(tint_symbol_11)).values[voxelIndex]), 1u, memory_order_relaxed);
   if ((triangleIndex == 0u)) {
     (*(tint_symbol_10)).value0 = (*(tint_symbol_9)).gridSize;
@@ -165,12 +165,12 @@ void main_sort_triangles_inner(uint3 GlobalInvocationID, const constant Uniforms
   uint i0 = (*(tint_symbol_36)).values[((3u * triangleIndex) + 0u)];
   uint i1 = (*(tint_symbol_36)).values[((3u * triangleIndex) + 1u)];
   uint i2 = (*(tint_symbol_36)).values[((3u * triangleIndex) + 2u)];
-  float3 p0 = loadPosition(i0, tint_symbol_37);
-  float3 p1 = loadPosition(i1, tint_symbol_37);
-  float3 p2 = loadPosition(i2, tint_symbol_37);
-  float3 center = (((p0 + p1) + p2) / 3.0f);
-  float3 voxelPos = toVoxelPos(center, tint_symbol_33);
-  uint voxelIndex = toIndex1D((*(tint_symbol_33)).gridSize, voxelPos);
+  packed_float3 p0 = packed_float3(loadPosition(i0, tint_symbol_37));
+  packed_float3 p1 = packed_float3(loadPosition(i1, tint_symbol_37));
+  packed_float3 p2 = packed_float3(loadPosition(i2, tint_symbol_37));
+  packed_float3 center = packed_float3((((float3(p0) + float3(p1)) + float3(p2)) / 3.0f));
+  packed_float3 voxelPos = packed_float3(toVoxelPos(float3(center), tint_symbol_33));
+  uint voxelIndex = toIndex1D((*(tint_symbol_33)).gridSize, float3(voxelPos));
   int triangleOffset = atomic_fetch_add_explicit(&((*(tint_symbol_38)).values[voxelIndex]), 1, memory_order_relaxed);
 }
 
