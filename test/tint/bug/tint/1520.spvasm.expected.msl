@@ -14,13 +14,18 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_float3 elements;
+  /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
 struct UniformBuffer {
-  /* 0x0000 */ tint_array<int8_t, 16> tint_pad;
+  /* 0x0000 */ tint_array<int8_t, 16> tint_pad_1;
   /* 0x0010 */ float unknownInput_S1_c0;
-  /* 0x0014 */ tint_array<int8_t, 12> tint_pad_1;
+  /* 0x0014 */ tint_array<int8_t, 12> tint_pad_2;
   /* 0x0020 */ float4 ucolorRed_S1_c0;
   /* 0x0030 */ float4 ucolorGreen_S1_c0;
-  /* 0x0040 */ float3x3 umatrix_S1;
+  /* 0x0040 */ tint_array<tint_vec3_struct, 3> umatrix_S1;
 };
 
 int4 tint_div(int4 lhs, int4 rhs) {

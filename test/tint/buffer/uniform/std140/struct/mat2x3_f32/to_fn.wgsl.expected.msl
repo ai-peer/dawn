@@ -14,13 +14,26 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_float3 elements;
+  /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
+float2x3 unpack_array(tint_array<tint_vec3_struct, 2> in) {
+  float2x3 result = float2x3(0.0f);
+  for(uint i = 0u; (i < 2u); i = (i + 1u)) {
+    result[i] = float3(in[i].elements);
+  }
+  return result;
+}
+
 struct S {
   /* 0x0000 */ int before;
-  /* 0x0004 */ tint_array<int8_t, 12> tint_pad;
-  /* 0x0010 */ float2x3 m;
-  /* 0x0030 */ tint_array<int8_t, 16> tint_pad_1;
+  /* 0x0004 */ tint_array<int8_t, 12> tint_pad_1;
+  /* 0x0010 */ tint_array<tint_vec3_struct, 2> m;
+  /* 0x0030 */ tint_array<int8_t, 16> tint_pad_2;
   /* 0x0040 */ int after;
-  /* 0x0044 */ tint_array<int8_t, 60> tint_pad_2;
+  /* 0x0044 */ tint_array<int8_t, 60> tint_pad_3;
 };
 
 void a(tint_array<S, 4> a_1) {
@@ -41,9 +54,9 @@ void e(float f_1) {
 kernel void f(const constant tint_array<S, 4>* tint_symbol [[buffer(0)]]) {
   a(*(tint_symbol));
   b((*(tint_symbol))[2]);
-  c((*(tint_symbol))[2].m);
-  d(float3((*(tint_symbol))[0].m[1]).zxy);
-  e(float3((*(tint_symbol))[0].m[1]).zxy[0]);
+  c(unpack_array((*(tint_symbol))[2].m));
+  d(float3((*(tint_symbol))[0].m[1].elements).zxy);
+  e(float3((*(tint_symbol))[0].m[1].elements).zxy[0]);
   return;
 }
 

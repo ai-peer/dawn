@@ -28,7 +28,7 @@ struct S {
 
 void assign_and_preserve_padding_1(device Inner* const dest, Inner value) {
   (*(dest)).scalar_f32 = value.scalar_f32;
-  (*(dest)).vec3_f32 = float3(value.vec3_f32);
+  (*(dest)).vec3_f32 = value.vec3_f32;
   (*(dest)).mat2x4_f32 = value.mat2x4_f32;
 }
 

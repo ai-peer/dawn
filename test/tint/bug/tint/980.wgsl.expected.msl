@@ -2,9 +2,9 @@
 
 using namespace metal;
 float3 Bad(uint index, float3 rd) {
-  float3 normal = float3(0.0f);
+  packed_float3 normal = packed_float3(0.0f);
   normal[index] = -(sign(rd[index]));
-  return normalize(normal);
+  return normalize(float3(normal));
 }
 
 struct S {
@@ -14,7 +14,7 @@ struct S {
 
 void tint_symbol_inner(uint idx, device S* const tint_symbol_2) {
   float3 const tint_symbol_1 = Bad((*(tint_symbol_2)).i, float3((*(tint_symbol_2)).v));
-  (*(tint_symbol_2)).v = tint_symbol_1;
+  (*(tint_symbol_2)).v = packed_float3(tint_symbol_1);
 }
 
 kernel void tint_symbol(device S* tint_symbol_3 [[buffer(0)]], uint idx [[thread_index_in_threadgroup]]) {

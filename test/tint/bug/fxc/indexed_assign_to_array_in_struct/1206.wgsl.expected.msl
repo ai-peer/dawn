@@ -14,17 +14,22 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_float3 elements;
+  /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
 struct Simulation {
   /* 0x0000 */ uint i;
 };
 
 struct Particle {
-  /* 0x0000 */ tint_array<float3, 8> position;
+  /* 0x0000 */ tint_array<tint_vec3_struct, 8> position;
   /* 0x0080 */ float lifetime;
-  /* 0x0084 */ tint_array<int8_t, 12> tint_pad;
+  /* 0x0084 */ tint_array<int8_t, 12> tint_pad_1;
   /* 0x0090 */ float4 color;
   /* 0x00a0 */ packed_float3 velocity;
-  /* 0x00ac */ tint_array<int8_t, 4> tint_pad_1;
+  /* 0x00ac */ tint_array<int8_t, 4> tint_pad_2;
 };
 
 struct Particles {
@@ -33,7 +38,7 @@ struct Particles {
 
 kernel void tint_symbol(const device Particles* tint_symbol_1 [[buffer(1)]], const constant Simulation* tint_symbol_2 [[buffer(0)]]) {
   Particle particle = (*(tint_symbol_1)).p[0];
-  particle.position[(*(tint_symbol_2)).i] = particle.position[(*(tint_symbol_2)).i];
+  particle.position[(*(tint_symbol_2)).i].elements = particle.position[(*(tint_symbol_2)).i].elements;
   return;
 }
 
