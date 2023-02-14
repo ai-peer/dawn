@@ -1017,7 +1017,8 @@
                 "returns": "buffer",
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
+                ],
+                "error types": ["validation", "out of memory"]
             },
             {
                 "name": "create error buffer",
@@ -1025,7 +1026,8 @@
                 "tags": ["dawn"],
                 "args": [
                     {"name": "descriptor", "type": "buffer descriptor", "annotation": "const*"}
-                ]
+                ],
+	        "error types": ["validation", "out of memory"]
             },
             {
                 "name": "create command encoder",
@@ -1137,7 +1139,8 @@
                 "returns": "texture",
                 "args": [
                     {"name": "descriptor", "type": "texture descriptor", "annotation": "const*"}
-                ]
+                ],
+                "error types": ["validation", "out of memory"]
             },
             {
                 "name": "create error texture",

@@ -22,6 +22,7 @@
 #include "{{native_dir}}/{{Prefix}}Native.h"
 
 #include <algorithm>
+#include <array>
 #include <vector>
 
 {% for type in by_category["object"] %}
@@ -29,8 +30,20 @@
         #include "{{native_dir}}/{{type.name.CamelCase()}}.h"
     {% endif %}
 {% endfor %}
+#include "{{native_dir}}/Error.h"
 
 namespace {{native_namespace}} {
+
+// Helper to convert from WGPUError lists to Dawn internal error mask at compile time.
+template <size_t N>
+constexpr InternalErrorTypeMask WGPUErrorsToDawnErrorMask(
+    const std::array<WGPUErrorType, N> errorTypes) {
+    InternalErrorTypeMask mask = kNoAllowedInternalError;
+    for (size_t i = 0; i < N; i++) {
+        mask |= FromWGPUErrorType(FromAPI(errorTypes[i]));
+    }
+    return mask;
+}
 
     {% for type in by_category["object"] %}
         {% for method in c_methods(type) %}
@@ -42,8 +55,21 @@ namespace {{native_namespace}} {
                     , {{as_annotated_cType(arg)}}
                 {%- endfor -%}
             ) {
-                //* Perform conversion between C types and frontend types
+                // Perform conversion between C types and frontend types
                 auto self = FromAPI(cSelf);
+
+                {% if len(method.errors) > 0 %}
+                    // Compute error mask for the API.
+                    constexpr InternalErrorTypeMask errorMask =
+                        WGPUErrorsToDawnErrorMask(std::array<WGPUErrorType, {{len(method.errors)}}>({
+                    {% for arg in method.errors %}
+                                {{as_cType(Name("error type"))}}::{{as_cEnum(Name("error type"), Name(arg))}}
+                        {%- if not loop.last %},
+                        {% endif %}
+                    {% endfor %}
+
+                        }));
+                {% endif %}
 
                 {% for arg in method.arguments %}
                     {% set varName = as_varName(arg.name) %}
@@ -58,12 +84,15 @@ namespace {{native_namespace}} {
 
                 {% if method.return_type.name.canonical_case() != "void" %}
                     auto result =
-                {%- endif %}
-                self->API{{method.name.CamelCase()}}(
+                {% endif %}
+                    self->API{{method.name.CamelCase()}}(
                     {%- for arg in method.arguments -%}
                         {%- if not loop.first %}, {% endif -%}
                         {{as_varName(arg.name)}}_
                     {%- endfor -%}
+                    {%- if len(method.errors) > 0 -%}
+                        , errorMask
+                    {%- endif -%}
                 );
                 {% if method.return_type.name.canonical_case() != "void" %}
                     {% if method.return_type.category in ["object", "enum", "bitmask"] %}
