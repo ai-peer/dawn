@@ -818,6 +818,35 @@ TEST_F(WireBufferMappingTests, GetMapState) {
     }
 }
 
+static void ToMockBufferMapCallbackWithAssertErrorRequest(WGPUBufferMapAsyncStatus status,
+                                                          void* userdata) {
+    WGPUBuffer* buffer = reinterpret_cast<WGPUBuffer*>(userdata);
+
+    mockBufferMapCallback->Call(status, buffer);
+    ASSERT_DEATH(
+        {
+            // This map async should cause assertion error because of
+            // refcount == 0.
+            wgpuBufferMapAsync(*buffer, WGPUMapMode_Read, 0, sizeof(uint32_t),
+                               ToMockBufferMapCallback, nullptr);
+        },
+        "Error: Assertion failure at .* GetRefcount\\(\\) != 0");
+}
+
+// Test that request inside user callbacks after object destruction is called
+TEST_F(WireBufferMappingTests, MapInsideCallbackAfterDestruction) {
+    SetupBuffer(WGPUMapMode_Read);
+
+    wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize,
+                       ToMockBufferMapCallbackWithAssertErrorRequest, &buffer);
+
+    // By releasing the buffer the refcount reaches zero and pending map async
+    // should fail with destroyed before callback status.
+    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))
+        .Times(1);
+    wgpuBufferRelease(buffer);
+}
+
 // Hack to pass in test context into user callback
 struct TestData {
     WireBufferMappingTests* pTest;
@@ -860,29 +889,6 @@ TEST_F(WireBufferMappingTests, MapInsideCallbackBeforeDisconnect) {
     EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_DeviceLost, this))
         .Times(testData.numRequests + 1);
     GetWireClient()->Disconnect();
-}
-
-// Test that requests inside user callbacks before object destruction are called
-TEST_F(WireBufferMappingWriteTests, MapInsideCallbackBeforeDestruction) {
-    TestData testData = {this, &buffer, 10};
-    wgpuBufferMapAsync(buffer, WGPUMapMode_Write, 0, kBufferSize,
-                       ToMockBufferMapCallbackWithNewRequests, &testData);
-
-    EXPECT_CALL(api, OnBufferMapAsync(apiBuffer, WGPUMapMode_Write, 0, kBufferSize, _, _))
-        .WillOnce(InvokeWithoutArgs([&]() {
-            api.CallBufferMapAsyncCallback(apiBuffer, WGPUBufferMapAsyncStatus_Success);
-        }));
-    EXPECT_CALL(api, BufferGetMappedRange(apiBuffer, 0, kBufferSize)).Times(1);
-
-    FlushClient();
-
-    // Maybe this should be assert errors, see dawn:1624
-    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_Error, this))
-        .Times(testData.numRequests - 1);
-    EXPECT_CALL(*mockBufferMapCallback,
-                Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, this))
-        .Times(1);
-    wgpuBufferRelease(buffer);
 }
 
 }  // namespace dawn::wire
