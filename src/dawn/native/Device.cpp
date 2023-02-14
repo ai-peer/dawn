@@ -92,6 +92,34 @@ struct DeviceBase::DeprecationWarnings {
 };
 
 namespace {
+class MutexEnabled : public DeviceMutexBase {
+public:
+    void Lock() override {
+        // We allow recursive mutex lock because currently a lot of code would trigger
+        // callbacks. And those callbacks might cause re-entrances.
+        // TODO(dawn:1672): Disallow recursive mutex. In future, we could use this to throw
+        // assertion when the mutex is recursively locked.
+        auto currentThread = std::this_thread::get_id();
+        if (mOwner.load(std::memory_order_acquire) != currentThread) {
+            mMutex.lock();
+            mOwner.store(currentThread, std::memory_order_release);
+        }
+
+        mRecurDepth ++;
+    }
+    void Unlock() override {
+        mRecurDepth --;
+        if (mRecurDepth == 0) {
+            mOwner.store(std::thread::id(), std::memory_order_release);
+            mMutex.unlock();
+        }
+    }
+private:
+    std::mutex mMutex;
+    std::atomic<std::thread::id> mOwner;
+    size_t mRecurDepth = 0;
+};
+
 struct LoggingCallbackTask : CallbackTask {
   public:
     LoggingCallbackTask() = delete;
@@ -211,6 +239,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
     mCaches = std::make_unique<DeviceBase::Caches>();
+    mMutex = AcquireRef(new DeviceMutexBase());
 }
 
 DeviceBase::~DeviceBase() {
@@ -282,10 +311,19 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    if (IsToggleEnabled(Toggle::EnableDeviceMutex)) {
+        mMutex = AcquireRef(new MutexEnabled());
+    } else {
+        mMutex = AcquireRef(new DeviceMutexBase());
+    }
+
     return {};
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    // This will be invoked by API side, so we need to lock.
+    AutoLock deviceLock(*this);
+
     // DeviceBase uses RefCountedWithExternalCount to break refcycles.
     //
     // DeviceBase holds multiple Refs to various API objects (pipelines, buffers, etc.) which are
@@ -303,7 +341,7 @@ void DeviceBase::WillDropLastExternalRef() {
     // device - either directly or indirectly. We would need to ensure those tasks don't create new
     // reference cycles, and we would need to continuously try draining the pending tasks to clear
     // out all remaining refs.
-    Destroy();
+    Destroy(/*isLocked=*/true);
 
     // Drop te device's reference to the queue. Because the application dropped the last external
     // references, they can no longer get the queue from APIGetQueue().
@@ -362,7 +400,7 @@ void DeviceBase::DestroyObjects() {
     }
 }
 
-void DeviceBase::Destroy() {
+void DeviceBase::Destroy(bool isLocked) {
     // Skip if we are already destroyed.
     if (mState == State::Destroyed) {
         return;
@@ -463,7 +501,8 @@ void DeviceBase::Destroy() {
 }
 
 void DeviceBase::APIDestroy() {
-    Destroy();
+    AutoLock deviceLock(*this);
+    Destroy(/*isLocked=*/true);
 }
 
 void DeviceBase::HandleError(InternalErrorType type,
@@ -1222,7 +1261,7 @@ bool DeviceBase::APITick() {
     // Tick may trigger callbacks which drop a ref to the device itself. Hold a Ref to ourselves
     // to avoid deleting |this| in the middle of this function call.
     Ref<DeviceBase> self(this);
-    if (IsLost() || ConsumedError(Tick())) {
+    if (IsLost() || ConsumedError(Tick(/*isMultiThreadUnsafe=*/true))) {
         return false;
     }
 
@@ -1242,9 +1281,9 @@ MaybeError DeviceBase::Tick() {
         DAWN_TRY(CheckPassedSerials());
         DAWN_TRY(TickImpl());
 
-        // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can
-        // tick the dynamic uploader before the backend resource allocators. This would allow
-        // reclaiming resources one tick earlier.
+        // TODO(crbug.com/dawn/833): decouple TickImpl from updating the serial so that we can tick
+        // the dynamic uploader before the backend resource allocators. This would allow reclaiming
+        // resources one tick earlier.
         mDynamicUploader->Deallocate(mCompletedSerial);
         mQueue->Tick(mCompletedSerial);
     }
