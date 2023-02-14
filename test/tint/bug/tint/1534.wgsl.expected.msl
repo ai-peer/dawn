@@ -18,18 +18,26 @@ template<typename T>
 T tint_dot3(vec<T,3> a, vec<T,3> b) {
   return a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
 }
-struct g {
-  /* 0x0000 */ packed_uint3 a;
+struct tint_packed_vec3_u32_struct_member {
+  /* 0x0000 */ packed_uint3 elements;
+};
+
+struct g_tint_packed_vec3 {
+  /* 0x0000 */ tint_packed_vec3_u32_struct_member a;
   /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
+struct g {
+  uint3 a;
 };
 
 struct h {
   /* 0x0000 */ uint a;
 };
 
-kernel void tint_symbol(const constant g* tint_symbol_1 [[buffer(0)]], device h* tint_symbol_2 [[buffer(1)]]) {
-  uint const l = tint_dot3(uint3((*(tint_symbol_1)).a), uint3((*(tint_symbol_1)).a));
-  (*(tint_symbol_2)).a = (*(tint_symbol_1)).a[0];
+kernel void tint_symbol(const constant g_tint_packed_vec3* tint_symbol_1 [[buffer(0)]], device h* tint_symbol_2 [[buffer(1)]]) {
+  uint const l = tint_dot3(uint3((*(tint_symbol_1)).a.elements), uint3((*(tint_symbol_1)).a.elements));
+  (*(tint_symbol_2)).a = (*(tint_symbol_1)).a.elements[0];
   return;
 }
 
