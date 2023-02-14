@@ -16,7 +16,19 @@
 
 #include <utility>
 
+#include "dawn/native/Device.h"
+
 namespace dawn::native {
+
+void CallbackTask::Finish(DeviceBase& device) {
+    device.ExecuteWithUnlockedMutex(*this, &CallbackTask::FinishImpl);
+}
+void CallbackTask::HandleShutDown(DeviceBase& device) {
+    device.ExecuteWithUnlockedMutex(*this, &CallbackTask::HandleShutDownImpl);
+}
+void CallbackTask::HandleDeviceLoss(DeviceBase& device) {
+    device.ExecuteWithUnlockedMutex(*this, &CallbackTask::HandleDeviceLossImpl);
+}
 
 CallbackTaskManager::CallbackTaskManager() = default;
 

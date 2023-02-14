@@ -135,7 +135,10 @@ struct SubmittedWorkDone : TrackTaskCallback {
                       WGPUQueueWorkDoneCallback callback,
                       void* userdata)
         : TrackTaskCallback(platform), mCallback(callback), mUserdata(userdata) {}
-    void Finish() override {
+    ~SubmittedWorkDone() override = default;
+
+  private:
+    void FinishImpl() override {
         ASSERT(mCallback != nullptr);
         ASSERT(mSerial != kMaxExecutionSerial);
         TRACE_EVENT1(mPlatform, General, "Queue::SubmittedWorkDone::Finished", "serial",
@@ -143,15 +146,12 @@ struct SubmittedWorkDone : TrackTaskCallback {
         mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
         mCallback = nullptr;
     }
-    void HandleDeviceLoss() override {
+    void HandleDeviceLossImpl() override {
         ASSERT(mCallback != nullptr);
         mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
         mCallback = nullptr;
     }
-    void HandleShutDown() override { HandleDeviceLoss(); }
-    ~SubmittedWorkDone() override = default;
-
-  private:
+    void HandleShutDownImpl() override { HandleDeviceLossImpl(); }
     WGPUQueueWorkDoneCallback mCallback = nullptr;
     void* mUserdata;
 };
@@ -272,7 +272,7 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
 
 void QueueBase::HandleDeviceLoss() {
     for (auto& task : mTasksInFlight.IterateAll()) {
-        task->HandleDeviceLoss();
+        task->HandleDeviceLoss(*GetDevice());
     }
     mTasksInFlight.Clear();
 }

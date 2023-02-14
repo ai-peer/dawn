@@ -16,6 +16,7 @@
 #define SRC_DAWN_TESTS_DAWNTEST_H_
 
 #include <memory>
+#include <mutex>
 #include <queue>
 #include <string>
 #include <unordered_map>
@@ -645,6 +646,8 @@ class DawnTestBase {
     WGPUDevice mLastCreatedBackendDevice;
 
     std::unique_ptr<dawn::platform::Platform> mTestPlatform;
+
+    std::mutex mMutex;
 };
 
 #define DAWN_SKIP_TEST_IF_BASE(condition, type, reason)   \

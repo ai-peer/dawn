@@ -39,21 +39,25 @@ namespace {
 struct MapRequestTask : TrackTaskCallback {
     MapRequestTask(dawn::platform::Platform* platform, Ref<BufferBase> buffer, MapRequestID id)
         : TrackTaskCallback(platform), buffer(std::move(buffer)), id(id) {}
-    void Finish() override {
+    ~MapRequestTask() override = default;
+
+  private:
+    void FinishImpl() override {
+        DeviceBase::AutoLock deviceLock(*buffer->GetDevice());
         ASSERT(mSerial != kMaxExecutionSerial);
         TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
                      uint64_t(mSerial));
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
     }
-    void HandleDeviceLoss() override {
+    void HandleDeviceLossImpl() override {
+        DeviceBase::AutoLock deviceLock(*buffer->GetDevice());
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
     }
-    void HandleShutDown() override {
+    void HandleShutDownImpl() override {
+        DeviceBase::AutoLock deviceLock(*buffer->GetDevice());
         buffer->OnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
     }
-    ~MapRequestTask() override = default;
 
-  private:
     Ref<BufferBase> buffer;
     MapRequestID id;
 };
@@ -166,9 +170,9 @@ BufferBase::PendingMappingCallback& BufferBase::PendingMappingCallback::operator
     return *this;
 }
 
-void BufferBase::PendingMappingCallback::Call() {
+void BufferBase::PendingMappingCallback::Call(DeviceBase& device) {
     if (callback != nullptr) {
-        callback(status, userdata);
+        device.ExecuteWithUnlockedMutex(callback, status, userdata);
         callback = nullptr;
         userdata = nullptr;
     }
@@ -240,7 +244,7 @@ void BufferBase::DestroyImpl() {
     }
 
     mState = BufferState::Destroyed;
-    toCall.Call();
+    toCall.Call(*GetDevice());
 }
 
 // static
@@ -408,11 +412,12 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
                              size_t size,
                              WGPUBufferMapCallback callback,
                              void* userdata) {
+    auto device = GetDevice();
     // Check for an existing pending map first because it just
     // rejects the callback and doesn't produce a validation error.
     if (mState == BufferState::PendingMap) {
         if (callback) {
-            callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            device->ExecuteWithUnlockedMutex(callback, WGPUBufferMapAsyncStatus_Error, userdata);
         }
         return;
     }
@@ -429,7 +434,7 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
                                    "calling %s.MapAsync(%s, %u, %u, ...).", this, mode, offset,
                                    size)) {
         if (callback) {
-            callback(status, userdata);
+            device->ExecuteWithUnlockedMutex(callback, status, userdata);
         }
         return;
     }
@@ -444,7 +449,7 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     mState = BufferState::PendingMap;
 
     if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
-        WillCallMappingCallback(mLastMapID, WGPUBufferMapAsyncStatus_DeviceLost).Call();
+        WillCallMappingCallback(mLastMapID, WGPUBufferMapAsyncStatus_DeviceLost).Call(*device);
         return;
     }
     std::unique_ptr<MapRequestTask> request =
@@ -513,7 +518,7 @@ void BufferBase::Unmap() {
     if (mState == BufferState::Destroyed) {
         return;
     }
-    UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback).Call();
+    UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback).Call(*GetDevice());
 }
 
 BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
@@ -636,12 +641,13 @@ MaybeError BufferBase::ValidateUnmap() const {
 }
 
 void BufferBase::OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status) {
-    PendingMappingCallback toCall = WillCallMappingCallback(mapID, status);
+    PendingMappingCallback toCall;
+    toCall = WillCallMappingCallback(mapID, status);
     if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
         mState == BufferState::PendingMap) {
         mState = BufferState::Mapped;
     }
-    toCall.Call();
+    toCall.Call(*GetDevice());
 }
 
 bool BufferBase::NeedsInitialization() const {
