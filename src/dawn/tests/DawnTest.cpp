@@ -869,6 +869,7 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey) {
         ASSERT(info != nullptr);
         forceEnabledToggles.push_back(info->name);
     }
+    forceEnabledToggles.push_back("enable_device_mutex");
 
     for (const std::string& toggle : gTestEnv->GetDisabledToggles()) {
         const dawn::native::ToggleInfo* info =
