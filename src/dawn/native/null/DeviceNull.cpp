@@ -123,7 +123,7 @@ ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*isLocked=*/false);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
@@ -369,7 +369,7 @@ MaybeError Queue::SubmitImpl(uint32_t, CommandBufferBase* const*) {
 
     // The Vulkan, D3D12 and Metal implementation all tick the device here,
     // for testing purposes we should also tick in the null implementation.
-    DAWN_TRY(device->Tick());
+    DAWN_TRY(device->Tick(/*isMultiThreadUnsafe=*/false));
 
     return device->SubmitPendingOperations();
 }

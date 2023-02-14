@@ -89,12 +89,12 @@ void RefCounted::Reference() {
     mRefCount.Increment();
 }
 
-void RefCounted::Release() {
+void RefCounted::Release(bool isMultiThreadUnsafe) {
     if (mRefCount.Decrement()) {
-        DeleteThis();
+        DeleteThis(isMultiThreadUnsafe);
     }
 }
 
-void RefCounted::DeleteThis() {
+void RefCounted::DeleteThis(bool) {
     delete this;
 }

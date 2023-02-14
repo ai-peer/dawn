@@ -59,7 +59,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     DAWN_TRY(device->NextSerial());
 
     // Call Tick() to get a chance to resolve callbacks.
-    DAWN_TRY(device->Tick());
+    DAWN_TRY(device->Tick(/*isMultiThreadUnsafe=*/false));
 
     return {};
 }
