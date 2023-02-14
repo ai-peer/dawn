@@ -106,7 +106,7 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     // order. Note that some classes like BindGroup may override the DeleteThis function again,
     // and they should ensure that their overriding versions call this underlying version
     // somewhere.
-    void DeleteThis() override;
+    void DeleteThis(bool isMultiThreadUnsafe) override;
 
     // Returns the list where this object may be tracked for future destruction. This can be
     // overrided to create hierarchical object tracking ownership:
