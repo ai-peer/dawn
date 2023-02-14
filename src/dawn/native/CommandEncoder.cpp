@@ -1031,14 +1031,19 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 descriptor.dimension = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
+                // We are creating new resources. Need to lock Device.
                 Ref<TextureBase> temporaryResolveTexture;
-                DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
-
-                TextureViewDescriptor viewDescriptor = {};
                 Ref<TextureViewBase> temporaryResolveView;
-                DAWN_TRY_ASSIGN(
-                    temporaryResolveView,
-                    device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                {
+                    DeviceBase::AutoLock deviceLock(*GetDevice());
+
+                    DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
+
+                    TextureViewDescriptor viewDescriptor = {};
+                    DAWN_TRY_ASSIGN(
+                        temporaryResolveView,
+                        device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                }
 
                 // Save the temporary and given render targets together for copying after
                 // the render pass ends.

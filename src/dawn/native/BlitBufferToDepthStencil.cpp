@@ -485,6 +485,9 @@ MaybeError BlitBufferToDepth(DeviceBase* device,
                              const TextureDataLayout& src,
                              const TextureCopy& dst,
                              const Extent3D& copyExtent) {
+    // This function might create new resources. Need to lock the Device.
+    DeviceBase::AutoLock deviceLock(*device);
+
     const Format& format = dst.texture->GetFormat();
     ASSERT(format.format == wgpu::TextureFormat::Depth16Unorm);
 
@@ -549,6 +552,9 @@ MaybeError BlitBufferToStencil(DeviceBase* device,
                                const TextureDataLayout& src,
                                const TextureCopy& dst,
                                const Extent3D& copyExtent) {
+    // This function might create new resources. Need to lock the Device.
+    DeviceBase::AutoLock deviceLock(*device);
+
     TextureDescriptor dataTextureDesc = {};
     dataTextureDesc.format = wgpu::TextureFormat::R8Uint;
     dataTextureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;

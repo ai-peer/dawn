@@ -122,7 +122,7 @@ ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*isLocked=*/false);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {

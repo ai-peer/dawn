@@ -96,6 +96,10 @@ MaybeError BlitDepthToDepth(DeviceBase* device,
                             const TextureCopy& src,
                             const TextureCopy& dst,
                             const Extent3D& copyExtent) {
+    
+    // This function might create new resources. Need to lock the Device.
+    DeviceBase::AutoLock deviceLock(*device);
+
     // ASSERT that the texture have depth and are not multisampled.
     ASSERT(src.texture->GetFormat().HasDepth());
     ASSERT(dst.texture->GetFormat().HasDepth());

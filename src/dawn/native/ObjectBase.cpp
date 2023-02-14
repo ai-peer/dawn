@@ -91,9 +91,20 @@ bool ApiObjectBase::IsAlive() const {
     return IsInList();
 }
 
-void ApiObjectBase::DeleteThis() {
+void ApiObjectBase::DeleteThis(bool isMultiThreadUnsafe) {
+    // Take ownershio of the mutex from the Device. This is because last ref of Device might be
+    // released inside RefCounted::DeleteThis() and that would have deleted the mutex before we
+    // unlock it had we let Device keeps the ownership of the mutex.
+    std::shared_ptr<std::mutex> mutex = GetDevice()->GetMutex();
+    std::unique_lock<std::mutex> deviceLock(*mutex.get(), std::defer_lock);
+
+    if (isMultiThreadUnsafe) {
+        deviceLock.lock();
+    }
+
     Destroy();
-    RefCounted::DeleteThis();
+
+    RefCounted::DeleteThis(/*isMultiThreadUnsafe=*/false);
 }
 
 ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
@@ -105,6 +116,7 @@ void ApiObjectBase::Destroy() {
     if (!IsAlive()) {
         return;
     }
+
     ApiObjectList* list = GetObjectTrackingList();
     ASSERT(list != nullptr);
     if (list->Untrack(this)) {
