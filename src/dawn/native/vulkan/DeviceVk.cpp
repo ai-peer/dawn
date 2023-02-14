@@ -156,7 +156,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*isLocked=*/false);
 }
 
 ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(

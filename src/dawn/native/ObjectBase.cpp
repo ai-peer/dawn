@@ -91,9 +91,17 @@ bool ApiObjectBase::IsAlive() const {
     return IsInList();
 }
 
-void ApiObjectBase::DeleteThis() {
+void ApiObjectBase::DeleteThis(bool isMultiThreadUnsafe) {
+    auto device = GetDevice();
+    DeviceBase::DeferLock deviceLock(*device);
+
+    if (isMultiThreadUnsafe) {
+        deviceLock.Lock();
+    }
+
     Destroy();
-    RefCounted::DeleteThis();
+
+    RefCounted::DeleteThis(/*isMultiThreadUnsafe=*/false);
 }
 
 ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
@@ -105,6 +113,7 @@ void ApiObjectBase::Destroy() {
     if (!IsAlive()) {
         return;
     }
+
     ApiObjectList* list = GetObjectTrackingList();
     ASSERT(list != nullptr);
     if (list->Untrack(this)) {

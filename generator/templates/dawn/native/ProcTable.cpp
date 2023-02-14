@@ -18,6 +18,8 @@
 {% set namespace_name = Name(metadata.native_namespace) %}
 {% set native_namespace = namespace_name.namespace_case() %}
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
+{% set thread_safe_excluded_objects = ["adapter", "instance", "surface", "command encoder", "render pass encoder", "compute pass encoder"] %}
+{% set thread_safe_excluded_methods = [ "reference", "release", "tick", "set uncaptured error callback", "set logging callback", "set device lost callback" ] %}
 #include "{{native_dir}}/{{prefix}}_platform.h"
 #include "{{native_dir}}/{{Prefix}}Native.h"
 
@@ -32,6 +34,7 @@
 
 namespace {{native_namespace}} {
 
+    // Native* methods
     {% for type in by_category["object"] %}
         {% for method in c_methods(type) %}
             {% set suffix = as_MethodSuffix(type.name, method.name) %}
@@ -74,6 +77,51 @@ namespace {{native_namespace}} {
                 {% endif %}
             }
         {% endfor %}
+    {% endfor %}
+
+    // ThreadSafe* methods
+    {% for type in by_category["object"] %}
+        {% if type.name.get() not in thread_safe_excluded_objects %}
+            {% for method in c_methods(type) %}
+                {% set suffix = as_MethodSuffix(type.name, method.name) %}
+
+                {{as_cType(method.return_type.name)}} ThreadSafe{{suffix}}(
+                    {{-as_cType(type.name)}} cSelf
+                    {%- for arg in method.arguments -%}
+                        , {{as_annotated_cType(arg)}}
+                    {%- endfor -%}
+                ) {
+                    //* Perform conversion between C types and frontend types
+                    auto self = FromAPI(cSelf);
+                    DAWN_UNUSED(self);
+                    {% if type.name.get() != "device" %}
+                        auto device = self->GetDevice();
+                    {% else %}
+                        auto device = self;
+                    {% endif %}
+                    DAWN_UNUSED(device);
+
+                    {% if method.name.get() in thread_safe_excluded_methods %}
+                        // This method needs special handling internally.
+                    {% elif type.name.get() == 'device' and method.name.get() == 'destroy' %}
+                        // This method needs special handling internally.
+                    {% else %}
+                        DeviceBase::AutoLock autolock(*device);
+                    {% endif %}
+
+                    //* Call Native* method
+                    {%- if method.return_type.name.canonical_case() != "void" %}
+                        return 
+                    {%- endif %}
+                    Native{{suffix}}(
+                        cSelf
+                        {%- for arg in method.arguments -%}
+                            , {{as_varName(arg.name)}}
+                        {%- endfor -%}
+                    );
+                }
+            {% endfor %}
+        {% endif %}
     {% endfor %}
 
     {% for function in by_category["function"] if function.name.canonical_case() != "get proc address" %}
@@ -164,6 +212,7 @@ namespace {{native_namespace}} {
         return result;
     }
 
+    // Native* table
     static {{Prefix}}ProcTable gProcTable = {
         {% for function in by_category["function"] %}
             Native{{as_cppType(function.name)}},
@@ -175,7 +224,27 @@ namespace {{native_namespace}} {
         {% endfor %}
     };
 
+    // ThreadSafe* table
+    static {{Prefix}}ProcTable gThreadSafeProcTable = {
+        {% for function in by_category["function"] %}
+            Native{{as_cppType(function.name)}},
+        {% endfor %}
+        {% for type in by_category["object"] %}
+            {% for method in c_methods(type) %}
+                {% if type.name.get() in thread_safe_excluded_objects %}
+                    Native{{as_MethodSuffix(type.name, method.name)}},
+                {% else %}
+                    ThreadSafe{{as_MethodSuffix(type.name, method.name)}},
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    };
+
     const {{Prefix}}ProcTable& GetProcsAutogen() {
         return gProcTable;
+    }
+
+    const {{Prefix}}ProcTable& GetThreadSafeProcsAutogen() {
+        return gThreadSafeProcTable;
     }
 }

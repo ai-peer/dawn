@@ -15,9 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_DEVICE_H_
 #define SRC_DAWN_NATIVE_DEVICE_H_
 
+#include <atomic>
 #include <memory>
 #include <mutex>
+#include <optional>
 #include <string>
+#include <thread>
 #include <unordered_set>
 #include <utility>
 #include <vector>
@@ -352,7 +355,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Check for passed fences and set the new completed serial
     MaybeError CheckPassedSerials();
 
-    MaybeError Tick();
+    MaybeError Tick(bool isMultiThreadUnsafe = false);
 
     // TODO(crbug.com/dawn/839): Organize the below backend-specific parameters into the struct
     // BackendMetadata that we can query from the device.
@@ -410,6 +413,34 @@ class DeviceBase : public RefCountedWithExternalCount {
     // method makes them to be submitted as soon as possbile in next ticks.
     virtual void ForceEventualFlushOfCommands() = 0;
 
+    void Lock() { mLock.lock(); }
+    void Unlock() { mLock.unlock(); }
+    struct AutoLock {
+        AutoLock(DeviceBase& device) : mDevice(device) { mDevice.Lock(); }
+        ~AutoLock() { mDevice.Unlock(); }
+
+      private:
+        DeviceBase& mDevice;
+    };
+
+    struct DeferLock {
+        DeferLock(DeviceBase& device) : mDevice(device) {}
+        ~DeferLock() {
+            if (mLocked) {
+                mDevice.Unlock();
+            }
+        }
+
+        void Lock() {
+            mDevice.Lock();
+            mLocked = true;
+        }
+
+      private:
+        DeviceBase& mDevice;
+        bool mLocked = false;
+    };
+
     // In the 'Normal' mode, currently recorded commands in the backend normally will be actually
     // submitted in the next Tick. However in the 'Passive' mode, the submission will be postponed
     // as late as possible, for example, until the client has explictly issued a submission.
@@ -424,7 +455,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
-    void Destroy();
+    void Destroy(bool isLocked);
 
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
@@ -585,6 +616,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
+
+    std::mutex mLock;
 };
 
 class IgnoreLazyClearCountScope : public NonMovable {
