@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02ff3178_a7f0c694",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "nit: This would be easier to parse as:\n\n\u0027A helper used to enable overrloads if the first type in `TYPES` is identifier-like\u0027\n\nThe double negative in the original took some thinking.",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fdfe565_36ffe819",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "nit: this is technically wrong as it returns an emtpy `Type` which happens to contain a nullptr identifier.",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58359e7a_3d9be9e6",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "nit: 2x2",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e034b66a_6fdde8e0",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "Why do we need the const dropping cast?",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5baa0bd_347f98ee",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "nit !out",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89cbe528_2ea27218",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-14T02:05:56Z",
+      "side": 1,
+      "message": "nit: hard to read due to wrapping and macro (and others below)",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
