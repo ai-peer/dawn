@@ -1,8 +1,12 @@
 #include <metal_stdlib>
 
 using namespace metal;
-kernel void tint_symbol(device half3* tint_symbol_1 [[buffer(0)]], const device half3* tint_symbol_2 [[buffer(1)]]) {
-  *(tint_symbol_1) = *(tint_symbol_2);
+struct tint_packed_vec3_f16_struct_member {
+  /* 0x0000 */ packed_half3 elements;
+};
+
+kernel void tint_symbol(device tint_packed_vec3_f16_struct_member* tint_symbol_1 [[buffer(0)]], const device tint_packed_vec3_f16_struct_member* tint_symbol_2 [[buffer(1)]]) {
+  (*(tint_symbol_1)).elements = (*(tint_symbol_2)).elements;
   return;
 }
 
