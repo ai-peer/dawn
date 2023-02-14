@@ -29,6 +29,7 @@
         #include "{{native_dir}}/{{type.name.CamelCase()}}.h"
     {% endif %}
 {% endfor %}
+#include "{{native_dir}}/Error.h"
 
 namespace {{native_namespace}} {
 
@@ -42,8 +43,19 @@ namespace {{native_namespace}} {
                     , {{as_annotated_cType(arg)}}
                 {%- endfor -%}
             ) {
-                //* Perform conversion between C types and frontend types
+                // Perform conversion between C types and frontend types
                 auto self = FromAPI(cSelf);
+
+                {% if len(method.errors) > 0 %}
+                    // Compute error mask for the API.
+                    constexpr InternalErrorType errorMask =
+                    {% for arg in method.errors %}
+                            InternalErrorType::{{as_cppEnum(Name(arg))}}
+                        {%- if not loop.last %} |
+                        {% endif %}
+                    {% endfor -%}
+                    ;
+                {% endif %}
 
                 {% for arg in method.arguments %}
                     {% set varName = as_varName(arg.name) %}
@@ -58,12 +70,15 @@ namespace {{native_namespace}} {
 
                 {% if method.return_type.name.canonical_case() != "void" %}
                     auto result =
-                {%- endif %}
-                self->API{{method.name.CamelCase()}}(
+                {% endif %}
+                    self->API{{method.name.CamelCase()}}(
                     {%- for arg in method.arguments -%}
                         {%- if not loop.first %}, {% endif -%}
                         {{as_varName(arg.name)}}_
                     {%- endfor -%}
+                    {%- if len(method.errors) > 0 -%}
+                        , errorMask
+                    {%- endif -%}
                 );
                 {% if method.return_type.name.canonical_case() != "void" %}
                     {% if method.return_type.category in ["object", "enum", "bitmask"] %}
@@ -178,4 +193,4 @@ namespace {{native_namespace}} {
     const {{Prefix}}ProcTable& GetProcsAutogen() {
         return gProcTable;
     }
-}
+}  // namespace {{native_namespace}}

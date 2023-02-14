@@ -209,6 +209,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 }
 
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
+    GetDefaultLimits(&mLimits.v1);
     mFormatTable = BuildFormatTable(this);
 }
 
@@ -465,9 +466,10 @@ void DeviceBase::APIDestroy() {
     Destroy();
 }
 
-void DeviceBase::HandleError(InternalErrorType type,
-                             const char* message,
+void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
+                             InternalErrorType allowedErrors,
                              WGPUDeviceLostReason lost_reason) {
+    InternalErrorType type = error->GetType();
     if (type == InternalErrorType::DeviceLost) {
         mState = State::Disconnected;
 
@@ -481,10 +483,12 @@ void DeviceBase::HandleError(InternalErrorType type,
         // A real device lost happened. Set the state to disconnected as the device cannot be
         // used. Also tags all commands as completed since the device stopped running.
         AssumeCommandsComplete();
-    } else if (type == InternalErrorType::Internal) {
-        // If we receive an internal error, assume the backend can't recover and proceed with
-        // device destruction. We first wait for all previous commands to be completed so that
-        // backend objects can be freed immediately, before handling the loss.
+    } else if (!(allowedErrors & type)) {
+        // If we receive an error which we did not explicitly allow, assume the backend can't
+        // recover and proceed with device destruction. We first wait for all previous commands to
+        // be completed so that backend objects can be freed immediately, before handling the loss.
+        error->AppendContext("handling unexpected error type %s when allowed errors are %s.", type,
+                             allowedErrors);
 
         // Move away from the Alive state so that the application cannot use this device
         // anymore.
@@ -503,6 +507,8 @@ void DeviceBase::HandleError(InternalErrorType type,
         type = InternalErrorType::DeviceLost;
     }
 
+    const std::string messageStr = error->GetFormattedMessage();
+    const char* message = messageStr.c_str();
     if (type == InternalErrorType::DeviceLost) {
         // The device was lost, call the application callback.
         if (mDeviceLostCallback != nullptr) {
@@ -533,10 +539,10 @@ void DeviceBase::HandleError(InternalErrorType type,
     }
 }
 
-void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
+void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error, InternalErrorType allowedErrors) {
     ASSERT(error != nullptr);
     AppendDebugLayerMessages(error.get());
-    HandleError(error->GetType(), error->GetFormattedMessage().c_str());
+    HandleError(std::move(error), allowedErrors);
 }
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
@@ -651,7 +657,7 @@ void DeviceBase::APIForceLoss(wgpu::DeviceLostReason reason, const char* message
     if (mState != State::Alive) {
         return;
     }
-    HandleError(InternalErrorType::Internal, message, ToAPI(reason));
+    HandleError(DAWN_INTERNAL_ERROR(message), InternalErrorType::None, ToAPI(reason));
 }
 
 DeviceBase::State DeviceBase::GetState() const {
@@ -1031,10 +1037,11 @@ BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
     }
     return result.Detach();
 }
-BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
+BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor,
+                                        InternalErrorType allowedErrors) {
     Ref<BufferBase> result = nullptr;
-    if (ConsumedError(CreateBuffer(descriptor), &result, "calling %s.CreateBuffer(%s).", this,
-                      descriptor)) {
+    if (ConsumedError(CreateBuffer(descriptor), &result, allowedErrors,
+                      "calling %s.CreateBuffer(%s).", this, descriptor)) {
         ASSERT(result == nullptr);
         return BufferBase::MakeError(this, descriptor);
     }
@@ -1088,10 +1095,11 @@ PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
     }
     return result.Detach();
 }
-QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor) {
+QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor,
+                                            InternalErrorType allowedErrors) {
     Ref<QuerySetBase> result;
-    if (ConsumedError(CreateQuerySet(descriptor), &result, "calling %s.CreateQuerySet(%s).", this,
-                      descriptor)) {
+    if (ConsumedError(CreateQuerySet(descriptor), &result, allowedErrors,
+                      "calling %s.CreateQuerySet(%s).", this, descriptor)) {
         return QuerySetBase::MakeError(this, descriptor);
     }
     return result.Detach();
@@ -1172,10 +1180,11 @@ SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
     }
     return result.Detach();
 }
-TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
+TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor,
+                                          InternalErrorType allowedErrors) {
     Ref<TextureBase> result;
-    if (ConsumedError(CreateTexture(descriptor), &result, "calling %s.CreateTexture(%s).", this,
-                      descriptor)) {
+    if (ConsumedError(CreateTexture(descriptor), &result, allowedErrors,
+                      "calling %s.CreateTexture(%s).", this, descriptor)) {
         return TextureBase::MakeError(this, descriptor);
     }
     return result.Detach();
@@ -1183,7 +1192,8 @@ TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
 
 // For Dawn Wire
 
-BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc) {
+BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc,
+                                             InternalErrorType allowedErrors) {
     BufferDescriptor fakeDescriptor = *desc;
     fakeDescriptor.nextInChain = nullptr;
 
@@ -1191,12 +1201,14 @@ BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc) {
     // MapppedAtCreation == false.
     MaybeError maybeError = ValidateBufferDescriptor(this, &fakeDescriptor);
     if (maybeError.IsError()) {
-        ConsumedError(maybeError.AcquireError(), "calling %s.CreateBuffer(%s).", this, desc);
+        ConsumedError(maybeError.AcquireError(), allowedErrors, "calling %s.CreateBuffer(%s).",
+                      this, desc);
     } else {
         const DawnBufferDescriptorErrorInfoFromWireClient* clientErrorInfo = nullptr;
         FindInChain(desc->nextInChain, &clientErrorInfo);
         if (clientErrorInfo != nullptr && clientErrorInfo->outOfMemory) {
-            ConsumedError(DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate memory for buffer mapping"));
+            ConsumedError(DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate memory for buffer mapping"),
+                          allowedErrors);
         }
     }
 
@@ -1377,12 +1389,13 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
     // This method should only be used to make error scope reject. For DeviceLost there is the
     // LoseForTesting function that can be used instead.
     if (type != wgpu::ErrorType::Validation && type != wgpu::ErrorType::OutOfMemory) {
-        HandleError(InternalErrorType::Validation,
-                    "Invalid injected error, must be Validation or OutOfMemory");
+        HandleError(
+            DAWN_VALIDATION_ERROR("Invalid injected error, must be Validation or OutOfMemory"));
         return;
     }
 
-    HandleError(FromWGPUErrorType(type), message);
+    HandleError(DAWN_MAKE_ERROR(FromWGPUErrorType(type), message),
+                InternalErrorType::Validation | InternalErrorType::OutOfMemory);
 }
 
 void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {

@@ -490,7 +490,8 @@ OldSwapChain::OldSwapChain(Device* device, const SwapChainDescriptor* descriptor
 OldSwapChain::~OldSwapChain() {}
 
 TextureBase* OldSwapChain::GetNextTextureImpl(const TextureDescriptor* descriptor) {
-    return GetDevice()->APICreateTexture(descriptor);
+    return GetDevice()->APICreateTexture(descriptor,
+                                         kDefaultAllowedErrors | InternalErrorType::OutOfMemory);
 }
 
 MaybeError OldSwapChain::OnBeforePresent(TextureViewBase*) {
