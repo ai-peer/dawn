@@ -14,33 +14,59 @@ struct tint_array {
     T elements[N];
 };
 
-struct lightingInfo {
-  float3 diffuse;
-  float3 specular;
+struct tint_packed_vec3_f32_struct_member {
+  /* 0x0000 */ packed_float3 elements;
 };
 
-struct LeftOver {
+struct LeftOver_tint_packed_vec3 {
   /* 0x0000 */ float4x4 u_World;
   /* 0x0040 */ float4x4 u_ViewProjection;
   /* 0x0080 */ float u_bumpStrength;
   /* 0x0084 */ uint padding;
   /* 0x0088 */ tint_array<int8_t, 8> tint_pad;
-  /* 0x0090 */ packed_float3 u_cameraPosition;
+  /* 0x0090 */ tint_packed_vec3_f32_struct_member u_cameraPosition;
   /* 0x009c */ float u_parallaxScale;
   /* 0x00a0 */ float textureInfoName;
   /* 0x00a4 */ uint padding_1;
   /* 0x00a8 */ float2 tangentSpaceParameter0;
 };
 
-struct Light0 {
+struct Light0_tint_packed_vec3 {
   /* 0x0000 */ float4 vLightData;
   /* 0x0010 */ float4 vLightDiffuse;
   /* 0x0020 */ float4 vLightSpecular;
-  /* 0x0030 */ packed_float3 vLightGround;
+  /* 0x0030 */ tint_packed_vec3_f32_struct_member vLightGround;
   /* 0x003c */ uint padding_2;
   /* 0x0040 */ float4 shadowsInfo;
   /* 0x0050 */ float2 depthValues;
   /* 0x0058 */ tint_array<int8_t, 8> tint_pad_1;
+};
+
+struct lightingInfo {
+  float3 diffuse;
+  float3 specular;
+};
+
+struct LeftOver {
+  float4x4 u_World;
+  float4x4 u_ViewProjection;
+  float u_bumpStrength;
+  uint padding;
+  float3 u_cameraPosition;
+  float u_parallaxScale;
+  float textureInfoName;
+  uint padding_1;
+  float2 tangentSpaceParameter0;
+};
+
+struct Light0 {
+  float4 vLightData;
+  float4 vLightDiffuse;
+  float4 vLightSpecular;
+  float3 vLightGround;
+  uint padding_2;
+  float4 shadowsInfo;
+  float2 depthValues;
 };
 
 float3x3 cotangent_frame_vf3_vf3_vf2_vf2_(thread float3* const normal_1, thread float3* const p, thread float2* const uv, thread float2* const tangentSpaceParams) {
@@ -174,7 +200,7 @@ lightingInfo computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_(thread float
   return x_245;
 }
 
-void main_1(thread float2* const tint_symbol_7, texture2d<float, access::sample> tint_symbol_8, sampler tint_symbol_9, const constant LeftOver* const tint_symbol_10, thread float4* const tint_symbol_11, thread bool* const tint_symbol_12, thread float2* const tint_symbol_13, thread float4* const tint_symbol_14, texture2d<float, access::sample> tint_symbol_15, sampler tint_symbol_16, const constant Light0* const tint_symbol_17, thread float4* const tint_symbol_18) {
+void main_1(thread float2* const tint_symbol_7, texture2d<float, access::sample> tint_symbol_8, sampler tint_symbol_9, const constant LeftOver_tint_packed_vec3* const tint_symbol_10, thread float4* const tint_symbol_11, thread bool* const tint_symbol_12, thread float2* const tint_symbol_13, thread float4* const tint_symbol_14, texture2d<float, access::sample> tint_symbol_15, sampler tint_symbol_16, const constant Light0_tint_packed_vec3* const tint_symbol_17, thread float4* const tint_symbol_18) {
   thread float tint_symbol_5 = 0.0f;
   thread float3 tint_symbol_6 = 0.0f;
   float4 tempTextureRead = 0.0f;
@@ -238,7 +264,7 @@ void main_1(thread float2* const tint_symbol_7, texture2d<float, access::sample>
   float4 const x_264 = tempTextureRead;
   float const x_273 = (*(tint_symbol_10)).textureInfoName;
   rgb = (float3(x_264[0], x_264[1], x_264[2]) * x_273);
-  float3 const x_279 = float3((*(tint_symbol_10)).u_cameraPosition);
+  float3 const x_279 = float3((*(tint_symbol_10)).u_cameraPosition.elements);
   float4 const x_282 = *(tint_symbol_11);
   output5 = normalize((x_279 - float3(x_282[0], x_282[1], x_282[2])));
   output4 = float4(0.0f);
@@ -370,7 +396,7 @@ void main_1(thread float2* const tint_symbol_7, texture2d<float, access::sample>
   tempTextureRead1 = x_475;
   float4 const x_477 = tempTextureRead1;
   rgb1 = float3(x_477[0], x_477[1], x_477[2]);
-  float3 const x_481 = float3((*(tint_symbol_10)).u_cameraPosition);
+  float3 const x_481 = float3((*(tint_symbol_10)).u_cameraPosition.elements);
   float4 const x_482 = *(tint_symbol_11);
   viewDirectionW_1 = normalize((x_481 - float3(x_482[0], x_482[1], x_482[2])));
   shadow = 1.0f;
@@ -390,7 +416,7 @@ void main_1(thread float2* const tint_symbol_7, texture2d<float, access::sample>
   param_14 = float3(x_510[0], x_510[1], x_510[2]);
   float4 const x_514 = (*(tint_symbol_17)).vLightSpecular;
   param_15 = float3(x_514[0], x_514[1], x_514[2]);
-  float3 const x_518 = float3((*(tint_symbol_17)).vLightGround);
+  float3 const x_518 = float3((*(tint_symbol_17)).vLightGround.elements);
   param_16 = x_518;
   float const x_520 = glossiness_1;
   param_17 = x_520;
@@ -434,7 +460,7 @@ struct tint_symbol_3 {
   float4 glFragColor_1 [[color(0)]];
 };
 
-main_out tint_symbol_inner(float2 vMainuv_param, float4 v_output1_param, bool gl_FrontFacing_param, float2 v_uv_param, float4 v_output2_param, thread float2* const tint_symbol_19, thread float4* const tint_symbol_20, thread bool* const tint_symbol_21, thread float2* const tint_symbol_22, thread float4* const tint_symbol_23, texture2d<float, access::sample> tint_symbol_24, sampler tint_symbol_25, const constant LeftOver* const tint_symbol_26, texture2d<float, access::sample> tint_symbol_27, sampler tint_symbol_28, const constant Light0* const tint_symbol_29, thread float4* const tint_symbol_30) {
+main_out tint_symbol_inner(float2 vMainuv_param, float4 v_output1_param, bool gl_FrontFacing_param, float2 v_uv_param, float4 v_output2_param, thread float2* const tint_symbol_19, thread float4* const tint_symbol_20, thread bool* const tint_symbol_21, thread float2* const tint_symbol_22, thread float4* const tint_symbol_23, texture2d<float, access::sample> tint_symbol_24, sampler tint_symbol_25, const constant LeftOver_tint_packed_vec3* const tint_symbol_26, texture2d<float, access::sample> tint_symbol_27, sampler tint_symbol_28, const constant Light0_tint_packed_vec3* const tint_symbol_29, thread float4* const tint_symbol_30) {
   *(tint_symbol_19) = vMainuv_param;
   *(tint_symbol_20) = v_output1_param;
   *(tint_symbol_21) = gl_FrontFacing_param;
@@ -445,7 +471,7 @@ main_out tint_symbol_inner(float2 vMainuv_param, float4 v_output1_param, bool gl
   return tint_symbol_4;
 }
 
-fragment tint_symbol_3 tint_symbol(texture2d<float, access::sample> tint_symbol_36 [[texture(0)]], sampler tint_symbol_37 [[sampler(0)]], const constant LeftOver* tint_symbol_38 [[buffer(0)]], texture2d<float, access::sample> tint_symbol_39 [[texture(1)]], sampler tint_symbol_40 [[sampler(1)]], const constant Light0* tint_symbol_41 [[buffer(1)]], bool gl_FrontFacing_param [[front_facing]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+fragment tint_symbol_3 tint_symbol(texture2d<float, access::sample> tint_symbol_36 [[texture(0)]], sampler tint_symbol_37 [[sampler(0)]], const constant LeftOver_tint_packed_vec3* tint_symbol_38 [[buffer(0)]], texture2d<float, access::sample> tint_symbol_39 [[texture(1)]], sampler tint_symbol_40 [[sampler(1)]], const constant Light0_tint_packed_vec3* tint_symbol_41 [[buffer(1)]], bool gl_FrontFacing_param [[front_facing]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
   thread float2 tint_symbol_31 = 0.0f;
   thread float4 tint_symbol_32 = 0.0f;
   thread bool tint_symbol_33 = false;
