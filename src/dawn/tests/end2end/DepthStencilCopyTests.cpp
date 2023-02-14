@@ -26,8 +26,11 @@
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+
 using TextureFormat = wgpu::TextureFormat;
-DAWN_TEST_PARAM_STRUCT(DepthStencilCopyTestParams, TextureFormat);
+DAWN_TEST_PARAM_STRUCT(DepthStencilCopyTestParams, TextureFormat, UseThreadSafeAPI);
 
 constexpr std::array<wgpu::TextureFormat, 3> kValidDepthCopyTextureFormats = {
     wgpu::TextureFormat::Depth16Unorm,
@@ -46,6 +49,8 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
         DawnTestWithParams<DepthStencilCopyTestParams>::SetUp();
 
         DAWN_TEST_UNSUPPORTED_IF(!mIsFormatSupported);
+        // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+        DAWN_TEST_UNSUPPORTED_IF(GetParam().mUseThreadSafeAPI && UsesWire());
 
         // Draw a square in the bottom left quarter of the screen.
         mVertexModule = utils::CreateShaderModule(device, R"(
@@ -63,17 +68,27 @@ class DepthStencilCopyTests : public DawnTestWithParams<DepthStencilCopyTestPara
     }
 
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
         switch (GetParam().mTextureFormat) {
             case wgpu::TextureFormat::Depth32FloatStencil8:
                 if (SupportsFeatures({wgpu::FeatureName::Depth32FloatStencil8})) {
                     mIsFormatSupported = true;
-                    return {wgpu::FeatureName::Depth32FloatStencil8};
+                    features.push_back(wgpu::FeatureName::Depth32FloatStencil8);
                 }
-                return {};
+                break;
             default:
                 mIsFormatSupported = true;
-                return {};
+                break;
         }
+
+        if (GetParam().mUseThreadSafeAPI) {
+            // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+            if (!UsesWire()) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+
+        return features;
     }
 
     bool IsValidDepthCopyTextureFormat() {
@@ -1048,7 +1063,8 @@ DAWN_INSTANTIATE_TEST_P(
      // Test with the vulkan_use_s8 toggle forced on and off.
      VulkanBackend({"vulkan_use_s8"}, {}), VulkanBackend({}, {"vulkan_use_s8"})},
     std::vector<wgpu::TextureFormat>(utils::kDepthAndStencilFormats.begin(),
-                                     utils::kDepthAndStencilFormats.end()));
+                                     utils::kDepthAndStencilFormats.end()),
+    std::vector<bool>{true, false});
 
 DAWN_INSTANTIATE_TEST_P(
     DepthCopyTests,
@@ -1059,7 +1075,8 @@ DAWN_INSTANTIATE_TEST_P(
      MetalBackend({"use_blit_for_depth_texture_to_texture_copy_to_nonzero_subresource"}),
      OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
     std::vector<wgpu::TextureFormat>(kValidDepthCopyTextureFormats.begin(),
-                                     kValidDepthCopyTextureFormats.end()));
+                                     kValidDepthCopyTextureFormats.end()),
+    std::vector<bool>{true, false});
 
 DAWN_INSTANTIATE_TEST_P(DepthCopyFromBufferTests,
                         {D3D12Backend(),
@@ -1069,7 +1086,8 @@ DAWN_INSTANTIATE_TEST_P(DepthCopyFromBufferTests,
                          MetalBackend({"use_blit_for_buffer_to_depth_texture_copy"}),
                          OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
                         std::vector<wgpu::TextureFormat>(kValidDepthCopyFromBufferFormats.begin(),
-                                                         kValidDepthCopyFromBufferFormats.end()));
+                                                         kValidDepthCopyFromBufferFormats.end()),
+                        std::vector<bool>{true, false});
 
 DAWN_INSTANTIATE_TEST_P(
     StencilCopyTests,
@@ -1083,7 +1101,8 @@ DAWN_INSTANTIATE_TEST_P(
      OpenGLESBackend(),
      // Test with the vulkan_use_s8 toggle forced on and off.
      VulkanBackend({"vulkan_use_s8"}, {}), VulkanBackend({}, {"vulkan_use_s8"})},
-    std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(), utils::kStencilFormats.end()));
+    std::vector<wgpu::TextureFormat>(utils::kStencilFormats.begin(), utils::kStencilFormats.end()),
+    std::vector<bool>{true, false});
 
 DAWN_INSTANTIATE_TEST_P(
     DepthStencilCopyTests_RegressionDawn1083,
@@ -1092,4 +1111,5 @@ DAWN_INSTANTIATE_TEST_P(
      OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
     std::vector<wgpu::TextureFormat>{wgpu::TextureFormat::Depth16Unorm,
                                      wgpu::TextureFormat::Depth32FloatStencil8,
-                                     wgpu::TextureFormat::Depth24Plus});
+                                     wgpu::TextureFormat::Depth24Plus},
+    std::vector<bool>{true, false});
