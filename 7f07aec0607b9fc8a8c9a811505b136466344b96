@@ -16,6 +16,24 @@
       "message": "Note that I am fixing the errors in the CTS atm. This is a bit of a conflict with the remove deprecation stuff because of the `maxBufferSize` limit and it becoming a validation error versus an OOM error. I will fix the e2e test failure in this CL in a follow up patch.",
       "revId": "7f07aec0607b9fc8a8c9a811505b136466344b96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12d0620_6bfe5564",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-14T20:33:39Z",
+      "side": 1,
+      "message": "Actually, upon further inspection, the failures are probably unrelated to the deprecation stuff and are actually an issue with the error masking on the wire side. Removing reviewers to debug for now.",
+      "parentUuid": "cf295b06_6b4a35df",
+      "revId": "7f07aec0607b9fc8a8c9a811505b136466344b96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
