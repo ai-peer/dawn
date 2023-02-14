@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86425a2d_48821e35",
+        "filename": "src/tint/ast/alias.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "361d479c_7f8d3986",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d613bb43_4a40b1a9",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-02-14T02:53:09Z",
       "side": 1,
       "message": "Q: Which templated identifiers consume attributes?",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99501573_83860709",
+        "filename": "src/tint/ast/templated_identifier.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "`@stride(n) array` 😞 I want to burn that with fire, but I can\u0027t think of a nice solution right now.",
+      "parentUuid": "d613bb43_4a40b1a9",
       "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a4bbc15_0d139a1c",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 43
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "We actually have the implicit conversion to `ast::IdentifierExpression*` operator (added after I made this change). Done.",
+      "parentUuid": "73f61a43_d8062b43",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85617465_852d474c",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-02-14T02:53:09Z",
       "side": 1,
       "message": "Nit: The comments here that mention `ast::Identifier` seem a little off since the return type is `ast::Type` (and that contains an `IdentifierExpression`).",
+      "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cafddfae_92178c3e",
+        "filename": "src/tint/transform/transform.h",
+        "patchSetId": 43
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Cruft left over from early implementations. Done.",
+      "parentUuid": "85617465_852d474c",
       "revId": "cea5d0cf44b770603e7b0044c76e2effdca31b40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

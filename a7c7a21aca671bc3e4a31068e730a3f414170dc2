@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7a9cbcd_2296136d",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02ff3178_a7f0c694",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fdfe565_36ffe819",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-14T02:05:56Z",
       "side": 1,
       "message": "nit: this is technically wrong as it returns an emtpy `Type` which happens to contain a nullptr identifier.",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d93717_d72bfca1",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Doubly wrong, as it actually wraps a `ast::IdentifierExpression`.",
+      "parentUuid": "5fdfe565_36ffe819",
       "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59e7e63f_fead450d",
+        "filename": "src/tint/program_builder.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58359e7a_3d9be9e6",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e034b66a_6fdde8e0",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-14T02:05:56Z",
       "side": 1,
       "message": "Why do we need the const dropping cast?",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48eaa5cd_11e9aae1",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 1478,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Because the resolver actually adds stuff to the sem types in some places.\nI know it\u0027s smell, but it\u0027s tracked with crbug.com/tint/745",
+      "parentUuid": "e034b66a_6fdde8e0",
       "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e62a8c_63338c23",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 41
+      },
+      "lineNbr": 2401,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5baa0bd_347f98ee",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89cbe528_2ea27218",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-02-14T02:05:56Z",
       "side": 1,
       "message": "nit: hard to read due to wrapping and macro (and others below)",
+      "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "369bb624_e815d40b",
+        "filename": "src/tint/resolver/sem_helper.h",
+        "patchSetId": 41
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-14T05:48:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89cbe528_2ea27218",
       "revId": "a7c7a21aca671bc3e4a31068e730a3f414170dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
