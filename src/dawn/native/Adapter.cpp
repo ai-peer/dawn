@@ -31,6 +31,7 @@ AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
     : mInstance(instance), mBackend(backend) {
     mSupportedFeatures.EnableFeature(Feature::DawnNative);
     mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
+    mSupportedFeatures.EnableFeature(Feature::ThreadSafeAPI);
 }
 
 AdapterBase::~AdapterBase() = default;
