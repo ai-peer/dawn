@@ -61,7 +61,7 @@ void main_1(thread float2* const tint_symbol_8, const constant LeftOver* const t
   float2 ratio = 0.0f;
   float4 nc = 0.0f;
   float alpha = 0.0f;
-  float3 mixed = 0.0f;
+  packed_float3 mixed = 0.0f;
   color = float4(0.0f);
   float2 const x_86 = *(tint_symbol_8);
   tileUV = fract(x_86);
@@ -173,8 +173,8 @@ void main_1(thread float2* const tint_symbol_8, const constant LeftOver* const t
       float4 const x_290 = color;
       float4 const x_292 = nc;
       float const x_295 = nc[3];
-      mixed = mix(float3(x_290[0], x_290[1], x_290[2]), float3(x_292[0], x_292[1], x_292[2]), float3(x_295, x_295, x_295));
-      float3 const x_298 = mixed;
+      mixed = packed_float3(mix(float3(x_290[0], x_290[1], x_290[2]), float3(x_292[0], x_292[1], x_292[2]), float3(x_295, x_295, x_295)));
+      float3 const x_298 = float3(mixed);
       float const x_299 = alpha;
       color = float4(x_298[0], x_298[1], x_298[2], x_299);
     }
@@ -214,13 +214,13 @@ main_out tint_symbol_inner(float2 tUV_param, float2 tileID_1_param, float2 level
   thread float2 tint_symbol_22 = 0.0f;
   thread float2 tint_symbol_23 = 0.0f;
   thread float2 tint_symbol_24 = 0.0f;
-  thread float3 tint_symbol_25 = 0.0f;
+  thread packed_float3 tint_symbol_25 = 0.0f;
   thread float2 tint_symbol_26 = 0.0f;
   *(tint_symbol_21) = tUV_param;
   tint_symbol_22 = tileID_1_param;
   tint_symbol_23 = levelUnits_param;
   tint_symbol_24 = stageUnits_1_param;
-  tint_symbol_25 = vPosition_param;
+  tint_symbol_25 = packed_float3(vPosition_param);
   tint_symbol_26 = vUV_param;
   main_1(tint_symbol_21, tint_symbol_27, tint_symbol_28, tint_symbol_29, tint_symbol_30, tint_symbol_31, tint_symbol_32, tint_symbol_33, tint_symbol_34, tint_symbol_35, tint_symbol_36, tint_symbol_37);
   main_out const tint_symbol_4 = {.glFragColor_1=*(tint_symbol_37)};

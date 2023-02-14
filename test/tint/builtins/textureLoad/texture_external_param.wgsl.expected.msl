@@ -14,6 +14,19 @@ struct tint_array {
     T elements[N];
 };
 
+struct tint_vec3_struct {
+  /* 0x0000 */ packed_float3 elements;
+  /* 0x000c */ tint_array<int8_t, 4> tint_pad;
+};
+
+float3x3 unpack_array(tint_array<tint_vec3_struct, 3> in) {
+  float3x3 result = float3x3(0.0f);
+  for(uint i = 0u; (i < 3u); i = (i + 1u)) {
+    result[i] = float3(in[i].elements);
+  }
+  return result;
+}
+
 struct GammaTransferParams {
   /* 0x0000 */ float G;
   /* 0x0004 */ float A;
@@ -28,13 +41,13 @@ struct GammaTransferParams {
 struct ExternalTextureParams {
   /* 0x0000 */ uint numPlanes;
   /* 0x0004 */ uint doYuvToRgbConversionOnly;
-  /* 0x0008 */ tint_array<int8_t, 8> tint_pad;
+  /* 0x0008 */ tint_array<int8_t, 8> tint_pad_1;
   /* 0x0010 */ float3x4 yuvToRgbConversionMatrix;
   /* 0x0040 */ GammaTransferParams gammaDecodeParams;
   /* 0x0060 */ GammaTransferParams gammaEncodeParams;
-  /* 0x0080 */ float3x3 gamutConversionMatrix;
+  /* 0x0080 */ tint_array<tint_vec3_struct, 3> gamutConversionMatrix;
   /* 0x00b0 */ float3x2 coordTransformationMatrix;
-  /* 0x00c8 */ tint_array<int8_t, 8> tint_pad_1;
+  /* 0x00c8 */ tint_array<int8_t, 8> tint_pad_2;
 };
 
 float3 gammaCorrection(float3 v, GammaTransferParams params) {
@@ -46,18 +59,18 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 
 float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<float, access::sample> plane1, int2 coord, ExternalTextureParams params) {
   int2 const coord1 = (coord >> uint2(1u));
-  float3 color = 0.0f;
+  packed_float3 color = 0.0f;
   if ((params.numPlanes == 1u)) {
-    color = float4(plane0.read(uint2(coord), 0)).rgb;
+    color = packed_float3(plane0.read(uint2(coord), 0).rgb);
   } else {
-    color = (float4(plane0.read(uint2(coord), 0)[0], float4(plane1.read(uint2(coord1), 0)).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    color = packed_float3((float4(plane0.read(uint2(coord), 0)[0], plane1.read(uint2(coord1), 0).rg, 1.0f) * params.yuvToRgbConversionMatrix));
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
-    color = gammaCorrection(color, params.gammaDecodeParams);
-    color = (params.gamutConversionMatrix * color);
-    color = gammaCorrection(color, params.gammaEncodeParams);
+    color = packed_float3(gammaCorrection(float3(color), params.gammaDecodeParams));
+    color = packed_float3((unpack_array(params.gamutConversionMatrix) * float3(color)));
+    color = packed_float3(gammaCorrection(float3(color), params.gammaEncodeParams));
   }
-  return float4(color, 1.0f);
+  return float4(float3(color), 1.0f);
 }
 
 float4 textureLoad2d(texture2d<float, access::sample> tint_symbol, texture2d<float, access::sample> ext_tex_plane_1_1, ExternalTextureParams ext_tex_params_1, int2 coords) {
