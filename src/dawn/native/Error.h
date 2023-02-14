@@ -19,7 +19,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/strings/str_format.h"
 #include "dawn/common/Result.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Toggles.h"
@@ -27,7 +26,13 @@
 
 namespace dawn::native {
 
-enum class InternalErrorType : uint32_t { Validation, DeviceLost, Internal, OutOfMemory };
+enum class InternalErrorType : uint32_t {
+    None = 0,
+    Validation = 1,
+    DeviceLost = 2,
+    Internal = 4,
+    OutOfMemory = 8
+};
 
 // MaybeError and ResultOrError are meant to be used as return value for function that are not
 // expected to, but might fail. The handling of error is potentially much slower than successes.
@@ -202,8 +207,44 @@ using ResultOrError = Result<T, ErrorData>;
 void IgnoreErrors(MaybeError maybeError);
 
 wgpu::ErrorType ToWGPUErrorType(InternalErrorType type);
-InternalErrorType FromWGPUErrorType(wgpu::ErrorType type);
+constexpr InternalErrorType FromWGPUErrorType(wgpu::ErrorType type) {
+    switch (type) {
+        case wgpu::ErrorType::Validation:
+            return InternalErrorType::Validation;
+        case wgpu::ErrorType::OutOfMemory:
+            return InternalErrorType::OutOfMemory;
+        case wgpu::ErrorType::DeviceLost:
+            return InternalErrorType::DeviceLost;
+        default:
+            return InternalErrorType::Internal;
+    }
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString |
+                          absl::FormatConversionCharSet::kIntegral>
+AbslFormatConvert(InternalErrorType value,
+                  const absl::FormatConversionSpec& spec,
+                  absl::FormatSink* s);
 
 }  // namespace dawn::native
+
+// Enable dawn enum bitmask for error types.
+namespace dawn {
+
+template <>
+struct IsDawnBitmask<native::InternalErrorType> {
+    static constexpr bool enable = true;
+};
+
+namespace native {
+
+// By default, we do not allow InternalErrorType::Internal errors to be surfaced to users. Instead,
+// such errors will be promoted to a device lost error instead.
+static constexpr InternalErrorType kDefaultAllowedErrors =
+    InternalErrorType::Validation | InternalErrorType::DeviceLost;
+static constexpr InternalErrorType kAllAllowedErrors = static_cast<InternalErrorType>(15u);
+
+}  // namespace native
+}  // namespace dawn
 
 #endif  // SRC_DAWN_NATIVE_ERROR_H_

@@ -18,8 +18,10 @@
 #include <cstdint>
 #include <memory>
 #include <string>
+#include <utility>
 #include <vector>
 
+#include "absl/strings/str_format.h"
 #include "dawn/common/Compiler.h"
 
 namespace wgpu {
@@ -40,6 +42,11 @@ class [[nodiscard]] ErrorData {
                                                            const char* file,
                                                            const char* function,
                                                            int line);
+    [[nodiscard]] static std::unique_ptr<ErrorData> Create(InternalErrorType type,
+                                                           const char* message,
+                                                           const char* file,
+                                                           const char* function,
+                                                           int line);
     ErrorData(InternalErrorType type, std::string message);
     ~ErrorData();
 
@@ -50,6 +57,16 @@ class [[nodiscard]] ErrorData {
     };
     void AppendBacktrace(const char* file, const char* function, int line);
     void AppendContext(std::string context);
+    template <typename... Args>
+    void AppendContext(const char* formatStr, const Args&... args) {
+        std::string out;
+        absl::UntypedFormatSpec format(formatStr);
+        if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
+            AppendContext(std::move(out));
+        } else {
+            AppendContext(absl::StrFormat("[Failed to format error: \"%s\"]", formatStr));
+        }
+    }
     void AppendDebugGroup(std::string label);
     void AppendBackendMessage(std::string message);
 

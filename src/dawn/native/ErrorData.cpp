@@ -32,6 +32,16 @@ std::unique_ptr<ErrorData> ErrorData::Create(InternalErrorType type,
     return error;
 }
 
+std::unique_ptr<ErrorData> ErrorData::Create(InternalErrorType type,
+                                             const char* message,
+                                             const char* file,
+                                             const char* function,
+                                             int line) {
+    std::unique_ptr<ErrorData> error = std::make_unique<ErrorData>(type, std::string(message));
+    error->AppendBacktrace(file, function, line);
+    return error;
+}
+
 ErrorData::ErrorData(InternalErrorType type, std::string message)
     : mType(type), mMessage(std::move(message)) {}
 
