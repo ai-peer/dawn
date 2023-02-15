@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "859d6b4f_52150c95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-02-15T09:10:47Z",
+      "side": 1,
+      "message": "The suppressed e2e test can pass on my local machine (it is exactly Intel UHD Graphics 630 as the bug required), so I can not reproduce the issue. And it can pass the bots too. \n\nIt seems that the bug has already been fixed. Do I miss anything?",
+      "revId": "2d269b1cdb6f1eafb5ba4df1c1568e601889d8f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
