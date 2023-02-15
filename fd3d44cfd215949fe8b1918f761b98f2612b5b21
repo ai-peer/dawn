@@ -16,6 +16,24 @@
       "message": "Can you folks give me advice about how to write unittest (in `unittests/validation/BufferValidationTest`) for checking the behavior of that refcount reaches zero?\n\nI tried this\n\n```\nwgpu::Buffer buf \u003d CreateMapReadBuffer(4);\n\nEXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))\n    .WillOnce(InvokeWithoutArgs([\u0026]() {\n        EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Error, _));\n        ASSERT_DEVICE_ERROR(\n            buf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr));\n    }));\n\nbuf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);\nbuf.Release();\n\nWaitForAllOperations(device);\nWaitForAllOperations(device);`\n```\n\nbut I got this error\n\n```\nUnexpected mock function call - returning directly.\n    Function call: Call(0, NULL)\nGoogle Mock tried the following 1 expectation, but it didn\u0027t match:\n\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(613): EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))...\n  Expected arg #0: is equal to 4\n           Actual: 0\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(613): error: Actual function call count doesn\u0027t match EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n..\\..\\src\\dawn\\tests\\unittests\\validation\\ValidationTest.cpp(160): error: Expected equality of these values:\n  mDawnInstance-\u003eGetDeviceCountForTesting()\n    Which is: 1\n  0u\n    Which is: 0\n```\n\nDevice doesn\u0027t seem to be released. It doesn\u0027t seem like `.Release()` should be explicitly called.\n\nI also tried `buf \u003d nullptr` instead of `buf.Release()` but failed because the the refcount doesn\u0027t seem to be decremented.",
       "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae749d52_8102ec59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-02-15T04:40:50Z",
+      "side": 1,
+      "message": "`.Release()` doesn\u0027t decrement the refcount: https://crbug.com/dawn/1639\n`\u003d nullptr` should though.\n\nI think you want `GetRefCountForTesting()`, not `GetRefCountPayload()`?",
+      "parentUuid": "386bd4cc_6de22671",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
