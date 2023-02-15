@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65bb49ec_d827c35c",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "Right. DAWN_OS_CHROMEOS is OS related thing. Promote it.",
+      "parentUuid": "0c6ac3ee_1e93221e",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "25ae6cb4_e95106ba",
         "filename": "src/dawn/native/BUILD.gn",
         "patchSetId": 10
@@ -65,6 +83,30 @@
       "writtenOn": "2023-02-14T08:41:32Z",
       "side": 1,
       "message": "nit: else-if since there can be a single one?",
+      "range": {
+        "startLine": 692,
+        "startChar": 0,
+        "endLine": 694,
+        "endChar": 1
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23a6ee5a_4159988a",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25ae6cb4_e95106ba",
       "range": {
         "startLine": 692,
         "startChar": 0,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9ab94b8_7be2ccbf",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bf30665_1b7889bd",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "70916559_44ff3ac3",
@@ -111,6 +177,30 @@
       "writtenOn": "2023-02-14T08:41:32Z",
       "side": 1,
       "message": "This class has been deleted actually ^^",
+      "range": {
+        "startLine": 59,
+        "startChar": 11,
+        "endLine": 59,
+        "endChar": 35
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7e6a5f_385836f7",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreService.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70916559_44ff3ac3",
       "range": {
         "startLine": 59,
         "startChar": 11,
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "425e1ffc_ca6e38fb",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde1086d_fdedee5d",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30af40df_f4ac8d35",
@@ -157,6 +271,24 @@
       "writtenOn": "2023-02-14T08:41:32Z",
       "side": 1,
       "message": "u-nit: it seems this choice could be done in the place where we choose between implementations: depending on the OS the SemaphoreService could pass `VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT` or `VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_SYNC_FD_BIT` to CreateFDService",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "461499ad_dea378cb",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T02:50:27Z",
+      "side": 1,
+      "message": "It\u0027s annoying that this handle is also used in static checkSupport(). So passing it in CreateFDService() doesn\u0027t work. Since handleType doesn\u0027t have a invalid value, I don\u0027t really like to adding a parameter in checkSupport() and use it in other non-static functions.\nSo maybe we could keep this as is?",
+      "parentUuid": "30af40df_f4ac8d35",
       "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
