@@ -550,5 +550,3 @@ crbug.com/dawn/0000 [ monterey ] webgpu:web_platform,canvas,readbackFromWebGPUCa
 crbug.com/dawn/0000 [ win10 ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format="rgba16float";alphaMode="premultiplied";colorSpace="display-p3";snapshotType="toBlob" [ Failure ]
 crbug.com/dawn/0000 [ monterey ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format="rgba16float";alphaMode="premultiplied";colorSpace="display-p3";snapshotType="toDataURL" [ Failure ]
 crbug.com/dawn/0000 [ win10 ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format="rgba16float";alphaMode="premultiplied";colorSpace="display-p3";snapshotType="toDataURL" [ Failure ]
-crbug.com/dawn/0000 [ monterey ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:* [ Failure ]
-crbug.com/dawn/0000 [ win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:* [ Failure ]
