@@ -16,6 +16,92 @@
       "message": "PTAL",
       "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cdc57c5_e438457d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:51:13Z",
+      "side": 1,
+      "message": "I don\u0027t really review Tint code so I defer to Ben",
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94c68b4_3db084ad",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:51:13Z",
+      "side": 1,
+      "message": "I think this should be `let`",
+      "range": {
+        "startLine": 353,
+        "startChar": 19,
+        "endLine": 353,
+        "endChar": 24
+      },
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201b2678_75682ef5",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:51:13Z",
+      "side": 1,
+      "message": "Let ?",
+      "range": {
+        "startLine": 355,
+        "startChar": 22,
+        "endLine": 355,
+        "endChar": 25
+      },
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11f42b8_e88958cd",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:51:13Z",
+      "side": 1,
+      "message": "perhaps more efficient to do a right shift? `let coord1 \u003d coord \u003e\u003e 1u`;",
+      "range": {
+        "startLine": 355,
+        "startChar": 36,
+        "endLine": 355,
+        "endChar": 42
+      },
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
