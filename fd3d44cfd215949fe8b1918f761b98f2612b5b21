@@ -34,6 +34,24 @@
       "parentUuid": "386bd4cc_6de22671",
       "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e31cc9e0_f78ca827",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-15T05:45:54Z",
+      "side": 1,
+      "message": "I misunderstood one thing. From the CL comment\n\n\u003e If buffer is released and the external refcount reaches 0 while buffer map state is pending map, the map async callback is fired with destroyed-before-callback status from the buffer destructor.\n\nThis is true in wire but not true in native. \n\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/fbc04109a400659be44746650b94d9970d5e9324:src/dawn/wire/client/Buffer.cpp;l\u003d161;drc\u003d44e9db386675c8157c957935b3273e430c5a47a0;bpv\u003d1;bpt\u003d0\nhttps://source.chromium.org/chromium/_/dawn/dawn.git/+/fbc04109a400659be44746650b94d9970d5e9324:src/dawn/native/Buffer.cpp;l\u003d230;drc\u003dfd1e8a44f27a9f6ff2a126c6d47096f9209f1e4b;bpv\u003d1;bpt\u003d0\n\nThe native buffer just do assert that the state is unmapped or destroyed. Is not calling the map async callback if map state is pending map intentional?\n\n\u003e `\u003d nullptr` should though.\n\nThanks. I tried a simpler test to check whether the destructor is called by reaching the refcount zero.\n\n```\nwgpu::Buffer buf \u003d CreateMapReadBuffer(4);\n\nEXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _));\nbuf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);\nbuf \u003d nullptr;\n\nWaitForAllOperations(device);\n```\n\nThe log is\n\n```\nUnexpected mock function call - returning directly.\n    Function call: Call(0, NULL)\nGoogle Mock tried the following 1 expectation, but it didn\u0027t match:\n\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(613): EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))...\n  Expected arg #0: is equal to 4\n           Actual: 0\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n..\\..\\src\\dawn\\tests\\unittests\\validation\\BufferValidationTests.cpp(613): error: Actual function call count doesn\u0027t match EXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback, _))...\n         Expected: to be called once\n           Actual: never called - unsatisfied and active\n[  FAILED  ] BufferValidationTest.MapAsync_MapAsyncInMapAsyncDestructionCallback (185 ms)\n```\n\nI thought it would be an assertion error in the buffer destructor but the map async callback is fired with succeed status. Am I missing anything?",
+      "parentUuid": "ae749d52_8102ec59",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
