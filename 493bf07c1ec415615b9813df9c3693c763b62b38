@@ -309,6 +309,24 @@
       "parentUuid": "30af40df_f4ac8d35",
       "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9dcbe4d_1365220a",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-15T17:01:54Z",
+      "side": 1,
+      "message": "Ah ok, we can revisit later if we start doing the more complex factory patterns.",
+      "parentUuid": "461499ad_dea378cb",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
