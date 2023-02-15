@@ -1,0 +1,349 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9a5bb9_c843640a",
+        "filename": "src/dawn/native/CachedObject.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "instead of loosening the ASSERT, we should have a separate SetContentHashForTesting if you need to set it in the tests",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6557c8e_8aa4aab3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "why can\u0027t we have DeviceMock use the normal base constructor like the other objects?",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778b120d_a071cdc3",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "these could actually be `static` - I think",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 45
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020020df_2dade4f2",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "We don\u0027t need this complexity for an ASSERT\n\ncan do:\n\n`layoutRef \u003d ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(...).AcquireSuccess()`\n\nand\n\n`ValidateAndParseShaderModule(device, descriptor, \u0026parseResult, nullptr).AcquireSuccess();`",
+      "range": {
+        "startLine": 158,
+        "startChar": 45,
+        "endLine": 159,
+        "endChar": 39
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f429abc_9fd5a126",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "we could pass the toggle to the DeviceBase constructor if we used it",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 45
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c393daf_5e4b1738",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be \"Get**Empty**BGL?\"",
+      "range": {
+        "startLine": 89,
+        "startChar": 25,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15870172_592fcb86",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "this is existing code, but I\u0027m curious why we even care to retain these as members versus re-creating them when needed.\n\nseems more straightforward to just use ShaderModuleMock::Create when needed",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 36
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed4a0d6_56ebb454",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "I don\u0027t understand the \"Native\" naming - what is it for?",
+      "range": {
+        "startLine": 143,
+        "startChar": 36,
+        "endLine": 143,
+        "endChar": 42
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20f68b3a_26de58ec",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "ditto: what is the \"Api\" naming for?",
+      "range": {
+        "startLine": 270,
+        "startChar": 39,
+        "endLine": 270,
+        "endChar": 42
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "209f68bd_1e55847d",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "IMO it\u0027s kinda weird to make a mock for the sake of getting a pre-created descriptor that is saved. The descriptor is pretty small - why not just inline it here?",
+      "range": {
+        "startLine": 636,
+        "startChar": 50,
+        "endLine": 636,
+        "endChar": 81
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c06fb3ab_4fdcdbdd",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "is this getting another utils:: now?",
+      "range": {
+        "startLine": 985,
+        "startChar": 4,
+        "endLine": 985,
+        "endChar": 11
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "077c9376_7fa65bd6",
+        "filename": "src/dawn/tests/unittests/native/mocks/DawnMockTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "should be in the constructor",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad7a2e5a_d2a551a4",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "Why does ComputePipelineMock::Create need to validate the descriptor?\n\nthe validation already happens in DeviceBase before calling CreateUninitializedComputePipelineImpl\n\ncould we do deviceMock-\u003eCreateComputePipeline(...) in the tests instead?",
+      "range": {
+        "startLine": 95,
+        "startChar": 23,
+        "endLine": 95,
+        "endChar": 50
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aef59dc_3754c7a5",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "would it be possible to create DeviceMock with mAdapter instead adding another override?",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de0508c_9892920e",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T16:43:44Z",
+      "side": 1,
+      "message": "is this ever passed?",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
