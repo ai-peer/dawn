@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c68757c_e21039ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:14:48Z",
+      "side": 1,
+      "message": "looking at the usages in the next CL,\nmaybe instead we should have something like\n\nnamespace dawn::native {\n  const WGPUBufferDescriptor* ToAPI(const BufferDescriptor* rhs);\n  const wgpu::BufferDescriptor* ToCpp(const WGPUBufferDescriptor*);\n}\n\nand use it like `ToCpp(ToAPI(foo))` ?\nAlso, a bit more composable since we can use `ToCpp` or `ToC` for other stuff as well.\nWe could have ToCppAPI and ToCAPI wrappers for convenience though?\n\nPutting ToAPI in wgpu:: like wgpu::ToAPI makes it seem as if the definition is coming from the webgpu_cpp.h header, when in fact it is not. It should be in the dawn::native namespace",
+      "revId": "68000f5969e9809b630504580db7496d043c8022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da073de9_e7be9d4d",
+        "filename": "generator/templates/dawn/native/dawn_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T15:14:48Z",
+      "side": 1,
+      "message": "dedent?, or keep the original indentation to match the bottom of the file,\nand instead put \n```\nnamespace {{metadata.namespace}} {\n    {% for type in by_category[\"structure\"] %}\n        stuff\n    {% endfor %}\n} \n```\n\nabove this",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 46
+      },
+      "revId": "68000f5969e9809b630504580db7496d043c8022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
