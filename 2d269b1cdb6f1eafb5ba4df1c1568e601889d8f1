@@ -93,6 +93,23 @@
       "parentUuid": "2becd2ef_f8277731",
       "revId": "2d269b1cdb6f1eafb5ba4df1c1568e601889d8f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d153e7_978d54e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T19:24:23Z",
+      "side": 1,
+      "message": "actually I\u0027ll just CQ this.",
+      "revId": "2d269b1cdb6f1eafb5ba4df1c1568e601889d8f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
