@@ -52,6 +52,23 @@
       "parentUuid": "ae749d52_8102ec59",
       "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a294516_ad0875ec",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-15T17:08:35Z",
+      "side": 1,
+      "message": "Ok the documentation for the payload in the RefcountedBase is terrible :) The payload is an extra bit or two of information that\u0027s stored along with the refcount to avoid adding a `bool mIsError` to every Dawn object. Here what we need to do is test the value of the refcount. So it would be `object-\u003eGetRefCountForTesting()` except that we should likely rename it to `GetRefCountForTestingOrAssert` or `GetRefCount`.\n\nFor writing a test for this you can use a GTest death test: https://github.com/google/googletest/blob/main/docs/advanced.md#death-tests note however that it should be skipped when compiled without asserts",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
