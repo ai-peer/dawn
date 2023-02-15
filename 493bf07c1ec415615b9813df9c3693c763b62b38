@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe94a62_570cbea7",
+        "filename": "src/dawn/common/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-15T05:50:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65bb49ec_d827c35c",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25ae6cb4_e95106ba",
