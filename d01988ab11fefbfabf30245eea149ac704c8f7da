@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfbc9cba_a53eb083",
+        "filename": "src/dawn/tests/perf_tests/DawnPerfTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T17:44:07Z",
+      "side": 0,
+      "message": "I think we can change this so that it\u0027s not supported if it\u0027s (CPU AND not NullBackend)",
+      "revId": "d01988ab11fefbfabf30245eea149ac704c8f7da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
