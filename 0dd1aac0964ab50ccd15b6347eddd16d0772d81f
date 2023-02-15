@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efc7c03_6c6c1a51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-15T22:26:48Z",
+      "side": 1,
+      "message": "Rafael, please review! Since we haven\u0027t diagnosed or fixed the issues here yet, let\u0027s just blocklist it for V1.",
+      "revId": "0dd1aac0964ab50ccd15b6347eddd16d0772d81f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
