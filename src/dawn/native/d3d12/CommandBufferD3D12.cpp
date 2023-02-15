@@ -153,9 +153,13 @@ void RecordFirstIndexOffset(ID3D12GraphicsCommandList* commandList,
 bool ShouldCopyUsingTemporaryBuffer(DeviceBase* device,
                                     const TextureCopy& srcCopy,
                                     const TextureCopy& dstCopy) {
-    // Currently we only need the workaround for an Intel D3D12 driver issue.
-    if (device->IsToggleEnabled(
-            Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel)) {
+    bool needWorkaround =
+        (device->IsToggleEnabled(
+             Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel) ||
+         (device->IsToggleEnabled(
+              Toggle::D3D12UseTempBufferInTextureToTextureCopyBetweenDifferentDimensions) &&
+          srcCopy.texture->GetDimension() != dstCopy.texture->GetDimension()));
+    if (needWorkaround) {
         bool copyToLesserLevel = srcCopy.mipLevel > dstCopy.mipLevel;
         ASSERT(srcCopy.texture->GetFormat().CopyCompatibleWith(dstCopy.texture->GetFormat()));
 
