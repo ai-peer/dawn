@@ -124,6 +124,8 @@ void Server::OnCreateComputePipelineAsyncCallback(CreatePipelineAsyncUserData* d
     HandleCreatePipelineAsyncCallback<ObjectType::ComputePipeline>(&ComputePipelineObjects(),
                                                                    status, pipeline, data);
 
+    ASSERT(static_cast<uint32_t>(status) < 6);
+
     ReturnDeviceCreateComputePipelineAsyncCallbackCmd cmd;
     cmd.device = data->device;
     cmd.status = status;
@@ -167,6 +169,8 @@ void Server::OnCreateRenderPipelineAsyncCallback(CreatePipelineAsyncUserData* da
                                                  const char* message) {
     HandleCreatePipelineAsyncCallback<ObjectType::RenderPipeline>(&RenderPipelineObjects(), status,
                                                                   pipeline, data);
+
+    ASSERT(static_cast<uint32_t>(status) < 6);
 
     ReturnDeviceCreateRenderPipelineAsyncCallbackCmd cmd;
     cmd.device = data->device;
