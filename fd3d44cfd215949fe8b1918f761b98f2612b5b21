@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ac13cf9_ccc8a9a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-16T05:38:55Z",
+      "side": 1,
+      "message": "I wrote another test.\n\n```\n// native Buffer\nBufferBase::~BufferBase() {\n    ASSERT(false);\n}\n\n// Buffer validation test\nwgpu::Buffer buf \u003d CreateMapReadBuffer(4);\n\nEXPECT_CALL(*mockBufferMapAsyncCallback, Call(WGPUBufferMapAsyncStatus_Success, _))\n  .WillOnce(InvokeWithoutArgs([\u0026]() {\n      std::cout \u003c\u003c \"After callback is fired\\n\";\n  }));\n\nstd::cout \u003c\u003c \"Before map async call\\n\";\nbuf.MapAsync(wgpu::MapMode::Read, 0, 4, ToMockBufferMapAsyncCallback, nullptr);\n\nstd::cout \u003c\u003c \"Before setting nullptr\\n\";\nbuf \u003d nullptr;\n\nstd::cout \u003c\u003c \"Before wait\\n\";\nWaitForAllOperations(device);\nstd::cout \u003c\u003c \"After wait\\n\";\n```\n\nResult\n\n```\nBefore map async call\nBefore setting nullptr\nBefore wait\nAfter callback is fired\nError: Assertion failure at ..\\..\\src\\dawn\\native\\Buffer.cpp:231 (~BufferBase): false\n```\n\nIt seems that the destructor is called after map async callback is fired. MapAsync has a reference to buffer?",
+      "parentUuid": "b3746d56_d25005ee",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a294516_ad0875ec",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
