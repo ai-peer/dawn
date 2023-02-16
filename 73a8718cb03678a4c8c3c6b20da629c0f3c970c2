@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5da8964_9f00ef23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T14:34:31Z",
+      "side": 1,
+      "message": "Kokoro failed (in part) due to the end-to-end tests needing updating.\n\nYou can do that with:\n\n`./test/tint/test-all.sh \u003cpath-to-tint\u003e --generate-expected`",
+      "revId": "73a8718cb03678a4c8c3c6b20da629c0f3c970c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
