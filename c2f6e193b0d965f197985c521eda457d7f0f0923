@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "850bc434_95f71ef2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-16T01:46:28Z",
+      "side": 1,
+      "message": "Note there may be some changes depending on changes in the undelying CLs...",
+      "revId": "c2f6e193b0d965f197985c521eda457d7f0f0923",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
