@@ -327,6 +327,24 @@
       "parentUuid": "461499ad_dea378cb",
       "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53ef2b0f_6323d716",
+        "filename": "src/dawn/native/vulkan/external_semaphore/ServiceImplementationFD.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-16T01:27:23Z",
+      "side": 1,
+      "message": "Thanks and fully agree with that. Current checkSupport static function is a bit weired.",
+      "parentUuid": "b9dcbe4d_1365220a",
+      "revId": "493bf07c1ec415615b9813df9c3693c763b62b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
