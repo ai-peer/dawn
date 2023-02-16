@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37569368_f8fd6a6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-16T18:20:31Z",
+      "side": 1,
+      "message": "Yes, this is expected. The buffer lives through the callback, so you can do GetMappedRange inside the callback if the status is Success.\n\nPerhaps what you wanted to do is `buf.Destroy()` instead of `buf \u003d nullptr` ?",
+      "parentUuid": "3ac13cf9_ccc8a9a8",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a294516_ad0875ec",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
