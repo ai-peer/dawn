@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70416130_b2bb6247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T19:20:15Z",
+      "side": 1,
+      "message": "We can look at the error messages in followups.",
+      "revId": "2abf3aedc6e27a5afd3d6e9af5f5b8d560576add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb69ab6_9b4e20bf",
+        "filename": "src/tint/transform/renamer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1717,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T19:20:15Z",
+      "side": 1,
+      "message": "If it has prefix Sampler, how can it have prefix texture?",
+      "revId": "2abf3aedc6e27a5afd3d6e9af5f5b8d560576add",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
