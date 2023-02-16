@@ -548,9 +548,15 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
         deviceToggles->Default(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation, false);
     }
 
-    // Currently this toggle is only needed on Intel Gen9 and Gen9.5 GPUs.
+    // Currently these toggles are only needed on Intel Gen9 and Gen9.5 GPUs.
     // See http://crbug.com/dawn/1579 for more information.
     if (gpu_info::IsIntelGen9(vendorId, deviceId)) {
+        // We can add workaround for this issue when the color target format doesn't have
+        // alpha-channel.
+        deviceToggles->Default(
+            Toggle::D3D12ReplaceDestAlphaWithOneAsBlendOpForColorTargetFormatsWithoutAlpha, true);
+
+        // Unfortunately we failed to find a workaround for other cases.
         deviceToggles->ForceSet(Toggle::NoWorkaroundDstAlphaBlendDoesNotWork, true);
     }
 }

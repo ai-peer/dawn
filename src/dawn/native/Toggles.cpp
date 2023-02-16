@@ -368,6 +368,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Use a blit to copy from a depth texture to the nonzero subresource of a depth texture. "
       "Works around an issue where nonzero layers are not written.",
       "https://crbug.com/dawn/1083", ToggleStage::Device}},
+    {Toggle::D3D12ReplaceDestAlphaWithOneAsBlendOpForColorTargetFormatsWithoutAlpha,
+     {"d3d12_replace_dest_alpha_with_one_as_blend_op_for_color_target_formats_without_alpha",
+      "Replace D3D12_BLEND_DEST_ALPHA with D3D12_BLEND_ONE as D3D12_BLEND_DESC.blendOp when the "
+      "color target format doesn't contain alpha-channel. Works around an issue about blending on "
+      "Intel Gen9 and Gen9.5 GPUs.",
+      "https://crbug.com/dawn/1579", ToggleStage::Device}},
     {Toggle::DisallowDeprecatedAPIs,
      {"disallow_deprecated_apis",
       "Disallow all deprecated paths by changing the deprecation warnings to validation error for "

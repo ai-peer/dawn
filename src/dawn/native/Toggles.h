@@ -89,6 +89,7 @@ enum class Toggle {
     UseBlitForBufferToDepthTextureCopy,
     UseBlitForBufferToStencilTextureCopy,
     UseBlitForDepthTextureToTextureCopyToNonzeroSubresource,
+    D3D12ReplaceDestAlphaWithOneAsBlendOpForColorTargetFormatsWithoutAlpha,
     DisallowDeprecatedAPIs,
 
     // Unresolved issues.
