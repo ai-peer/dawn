@@ -16,6 +16,227 @@
       "message": "TODO: Need to update `Keywords()` in `src/tint/transform/renamer_test.cc`.",
       "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f41813_0dd39ca7",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "This should be reverted",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda7d4ee_dd7a0955",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "nit: remove space",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb17ce5e_12214bfe",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8885dce_1c2f87ac",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fe5b50_2dc1e1a4",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e4fb591_54cd4c23",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "103dfb61_304bea6c",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16187839_e7afc5d1",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 1422,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto (and below)",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75e04038_35d44dfd",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2054,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "Does `callable` still exist or should this be removed?",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2e555c8_aeb7960d",
+        "filename": "src/tint/reader/wgsl/parser_impl_type_decl_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "This one seems weird, as the `\u003e` is there, it\u0027s the `,` that\u0027s missing.",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2637dc29_98f5780e",
+        "filename": "src/tint/reader/wgsl/parser_impl_type_decl_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cbdbc82_5afb6ce4",
+        "filename": "src/tint/reader/wgsl/parser_impl_type_decl_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be145733_bcd12111",
+        "filename": "src/tint/reader/wgsl/parser_impl_while_stmt_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T05:20:56Z",
+      "side": 1,
+      "message": "This one is also weird, would make more sense as `unexpected \u0027)\u0027` or something",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
