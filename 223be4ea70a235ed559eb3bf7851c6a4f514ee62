@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8102253c_7659d2ad",
+        "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T00:57:39Z",
+      "side": 1,
+      "message": "Done. Revisited spec and recalled how default limits work.",
+      "parentUuid": "120c0f05_1e683477",
+      "range": {
+        "startLine": 258,
+        "startChar": 46,
+        "endLine": 258,
+        "endChar": 54
+      },
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00b605d1_da7bd673",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-15T17:44:07Z",
       "side": 1,
       "message": "typo: bindings",
+      "range": {
+        "startLine": 337,
+        "startChar": 29,
+        "endLine": 337,
+        "endChar": 37
+      },
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a3e845_dfedebd7",
+        "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T00:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00b605d1_da7bd673",
       "range": {
         "startLine": 337,
         "startChar": 29,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "460b5abd_9b2ad0e3",
+        "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T00:57:39Z",
+      "side": 1,
+      "message": "I just found we only need 2 bindGroup instances. The pipeline layouts, bindGroup layouts for the 2 pipelines are the same. (The way using bindingGroupsDescriptor to generate layouts and bindGroups at the same time is misleading to think they are different. But only a subset of the params are used when creating the bindGroupLayouts)\n\nSo we can have only 1 pipeline, but do the (setBindGroup, dispatch) with ping-ponging the 2 bindGroups to keep triggerring the validation. (verified in the debugger)\n\nChanged the logic.",
+      "parentUuid": "2f5713c5_28598e5e",
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c43777a_7e424f88",
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9286ce70_c120d71a",
+        "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 398,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T00:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c43777a_7e424f88",
+      "range": {
+        "startLine": 398,
+        "startChar": 8,
+        "endLine": 398,
+        "endChar": 88
+      },
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1213b94_f9b6f34b",
@@ -117,6 +207,30 @@
       "writtenOn": "2023-02-15T17:44:07Z",
       "side": 1,
       "message": "would we precompute this so it\u0027s cheaper to set here?",
+      "range": {
+        "startLine": 402,
+        "startChar": 12,
+        "endLine": 406,
+        "endChar": 13
+      },
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f900e214_70183287",
+        "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T00:57:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1213b94_f9b6f34b",
       "range": {
         "startLine": 402,
         "startChar": 12,
