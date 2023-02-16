@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c422247_2a968835",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T18:00:33Z",
+      "side": 1,
+      "message": "That\u0027s an existing, it\u0027s dumped from inspector info, so didn\u0027t want to change it.",
+      "parentUuid": "c9faec77_e5c45208",
+      "range": {
+        "startLine": 403,
+        "startChar": 12,
+        "endLine": 403,
+        "endChar": 19
+      },
+      "revId": "d20ab75ec8644f2176b22ddbef7551b4aa4d2800",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10f6314b_05383e41",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-16T17:53:45Z",
       "side": 1,
       "message": "rm",
+      "range": {
+        "startLine": 488,
+        "startChar": 20,
+        "endLine": 488,
+        "endChar": 21
+      },
+      "revId": "d20ab75ec8644f2176b22ddbef7551b4aa4d2800",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fd018cb_41c2073b",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-16T18:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10f6314b_05383e41",
       "range": {
         "startLine": 488,
         "startChar": 20,
