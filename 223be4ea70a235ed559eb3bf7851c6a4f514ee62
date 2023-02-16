@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b59e345a_e7adaeee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-16T01:54:27Z",
+      "side": 1,
+      "message": "great, I think the benchmark looks good, but yes we should probably just put it on the perfmon bots.\n\nFor your local run, I\u0027m looking at perf_test_runner.py.\nWe should change [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/scripts/perf_test_runner.py;l\u003d34;drc\u003d1548075f9b31cc1495edbbfbc1eba116ef480593;bpv\u003d1;bpt\u003d0) to be cpu_time locally. `wall_time` also waits for the GPU which will probably skew the times.\n\nalso, checking the units, I\u0027m pretty sure this is \"number of CPU ticks\" on windows, and seconds on Linux/Mac. Why they\u0027re different is probably my fault..\nDid you run on Windows?",
+      "parentUuid": "045a7dc9_83d83da9",
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "120c0f05_1e683477",
         "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
         "patchSetId": 6
