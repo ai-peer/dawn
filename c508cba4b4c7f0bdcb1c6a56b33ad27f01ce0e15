@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb48e35_65cc6654",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-16T22:58:27Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, shall we always replace DEST_ALPHA with DEST_ONE if the color target format doesn\u0027t have alpha channel? On Intel GPUs using DEST_ONE means the hardware won\u0027t fetch the destination pixel at all.",
+      "revId": "c508cba4b4c7f0bdcb1c6a56b33ad27f01ce0e15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "389f9a0a_a4792172",
