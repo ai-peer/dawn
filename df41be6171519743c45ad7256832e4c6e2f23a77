@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30aaeafb_aad405df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T02:13:39Z",
+      "side": 1,
+      "message": "LGTM. You will need to rebase and make a couple of fixes due to AST type changes. Sorry!",
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94c68b4_3db084ad",
@@ -70,6 +87,29 @@
         "startChar": 19,
         "endLine": 353,
         "endChar": 24
+      },
+      "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960196be_f5850846",
+        "filename": "src/tint/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T02:13:39Z",
+      "side": 1,
+      "message": "`vec2\u003ci32\u003e(2)` can just be `2`",
+      "range": {
+        "startLine": 353,
+        "startChar": 42,
+        "endLine": 353,
+        "endChar": 52
       },
       "revId": "df41be6171519743c45ad7256832e4c6e2f23a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
