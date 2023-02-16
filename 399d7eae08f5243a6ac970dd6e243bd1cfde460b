@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a4f9fd_a21f94df",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T02:18:16Z",
+      "side": 1,
+      "message": "TODO: Need to update `Keywords()` in `src/tint/transform/renamer_test.cc`.",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
