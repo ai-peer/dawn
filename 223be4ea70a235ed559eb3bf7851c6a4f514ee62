@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa9287ae_ce28b3d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T03:53:07Z",
+      "side": 1,
+      "message": "I ran the perf_test on mac. (I thought it was ns, if launching dawn_perf_tests directly instead of using the py script though)\n\n[ RUN      ] BindingsValidationPerf.Run/Null_Null_backend_BusyValidation\nInfo: *RESULT BindingsValidationPerf.wall_time: Run_Null_Null_backend_BusyValidation\u003d 59647.782303 ns\nInfo: *RESULT BindingsValidationPerf.cpu_time: Run_Null_Null_backend_BusyValidation\u003d 57120.256606 ns",
+      "parentUuid": "b59e345a_e7adaeee",
+      "revId": "223be4ea70a235ed559eb3bf7851c6a4f514ee62",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "120c0f05_1e683477",
         "filename": "src/dawn/tests/perf_tests/BindingsValidationPerf.cpp",
         "patchSetId": 6
