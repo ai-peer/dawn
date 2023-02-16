@@ -16,6 +16,23 @@
       "message": "PTAL! Overall there seems to be too many indirections for createPipelineAsync and at least one or two may be possible to remove, but I\u0027d rather do this post-V1.",
       "revId": "92858cdff16deaede38f0d3023bafe70224e9b81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb71c621_2f68a8c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-16T01:42:47Z",
+      "side": 1,
+      "message": "This CL basically adds `mStatus` in the `CreatePipelineAsyncCallBackTaskBase` which stores the error type from `CreatePipelineAsyncStatusFromErrorType` so that we  will know what error leads to the pipeline creation failure. (IIUC)",
+      "revId": "92858cdff16deaede38f0d3023bafe70224e9b81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
