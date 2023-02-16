@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9faec77_e5c45208",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T17:53:45Z",
+      "side": 1,
+      "message": "nit: Inconsistent capitalization `unknown`.",
+      "range": {
+        "startLine": 403,
+        "startChar": 12,
+        "endLine": 403,
+        "endChar": 19
+      },
+      "revId": "d20ab75ec8644f2176b22ddbef7551b4aa4d2800",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f6314b_05383e41",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-16T17:53:45Z",
+      "side": 1,
+      "message": "rm",
+      "range": {
+        "startLine": 488,
+        "startChar": 20,
+        "endLine": 488,
+        "endChar": 21
+      },
+      "revId": "d20ab75ec8644f2176b22ddbef7551b4aa4d2800",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
