@@ -21,7 +21,6 @@
 #include "src/tint/ast/bitcast_expression.h"
 #include "src/tint/ast/break_statement.h"
 #include "src/tint/ast/builtin_attribute.h"
-#include "src/tint/ast/builtin_value.h"
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/continue_statement.h"
 #include "src/tint/ast/discard_statement.h"
@@ -34,6 +33,7 @@
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/sem/builtin_type.h"
 #include "src/tint/transform/spirv_atomic.h"
+#include "src/tint/type/builtin_value.h"
 #include "src/tint/type/depth_texture.h"
 #include "src/tint/type/sampled_texture.h"
 #include "src/tint/type/texture_dimension.h"
@@ -760,7 +760,7 @@ struct LoopStatementBuilder final : public Castable<LoopStatementBuilder, Statem
 /// @returns true if the decorations include a SampleMask builtin
 bool HasBuiltinSampleMask(utils::VectorRef<const ast::Attribute*> decos) {
     if (auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(decos)) {
-        return builtin->builtin == ast::BuiltinValue::kSampleMask;
+        return builtin->builtin == type::BuiltinValue::kSampleMask;
     }
     return false;
 }
@@ -1331,7 +1331,7 @@ bool FunctionEmitter::EmitEntryPointAsWrapper() {
                 // a gl_Position variable.  Substitute the type.
                 const Type* param_type = ty_.Vector(ty_.F32(), 4);
                 AttributeList out_decos{
-                    create<ast::BuiltinAttribute>(source, ast::BuiltinValue::kPosition)};
+                    create<ast::BuiltinAttribute>(source, type::BuiltinValue::kPosition)};
 
                 const auto var_name = namer_.GetName(var_id);
                 return_members.Push(

@@ -188,7 +188,7 @@ TEST_F(ResolverFunctionValidationTest, DiscardCalledDirectlyFromVertexEntryPoint
              Return(Call(ty.vec4<f32>())),
          },
          utils::Vector{Stage(ast::PipelineStage::kVertex)},
-         utils::Vector{Builtin(ast::BuiltinValue::kPosition)});
+         utils::Vector{Builtin(type::BuiltinValue::kPosition)});
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
@@ -1081,7 +1081,7 @@ TEST_P(ResolverFunctionParameterValidationTest, AddressSpaceWithExtension) {
     auto& param = GetParam();
     auto ptr_type = ty("ptr", Ident(Source{{12, 34}}, param.address_space), ty.i32());
     auto* arg = Param(Source{{12, 34}}, "p", ptr_type);
-    Enable(ast::Extension::kChromiumExperimentalFullPtrParameters);
+    Enable(type::Extension::kChromiumExperimentalFullPtrParameters);
     Func("f", utils::Vector{arg}, ty.void_(), utils::Empty);
 
     if (param.expectation == Expectation::kAlwaysPass ||

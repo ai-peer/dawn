@@ -29,7 +29,7 @@ TEST_F(HlslGeneratorImplTest, InvalidProgram) {
 }
 
 TEST_F(HlslGeneratorImplTest, UnsupportedExtension) {
-    Enable(Source{{12, 34}}, ast::Extension::kUndefined);
+    Enable(Source{{12, 34}}, type::Extension::kUndefined);
 
     GeneratorImpl& gen = Build();
 
@@ -49,7 +49,7 @@ TEST_F(HlslGeneratorImplTest, Generate) {
 }
 
 struct HlslBuiltinData {
-    ast::BuiltinValue builtin;
+    type::BuiltinValue builtin;
     const char* attribute_name;
 };
 inline std::ostream& operator<<(std::ostream& out, HlslBuiltinData data) {
@@ -66,17 +66,17 @@ TEST_P(HlslBuiltinConversionTest, Emit) {
 INSTANTIATE_TEST_SUITE_P(
     HlslGeneratorImplTest,
     HlslBuiltinConversionTest,
-    testing::Values(HlslBuiltinData{ast::BuiltinValue::kPosition, "SV_Position"},
-                    HlslBuiltinData{ast::BuiltinValue::kVertexIndex, "SV_VertexID"},
-                    HlslBuiltinData{ast::BuiltinValue::kInstanceIndex, "SV_InstanceID"},
-                    HlslBuiltinData{ast::BuiltinValue::kFrontFacing, "SV_IsFrontFace"},
-                    HlslBuiltinData{ast::BuiltinValue::kFragDepth, "SV_Depth"},
-                    HlslBuiltinData{ast::BuiltinValue::kLocalInvocationId, "SV_GroupThreadID"},
-                    HlslBuiltinData{ast::BuiltinValue::kLocalInvocationIndex, "SV_GroupIndex"},
-                    HlslBuiltinData{ast::BuiltinValue::kGlobalInvocationId, "SV_DispatchThreadID"},
-                    HlslBuiltinData{ast::BuiltinValue::kWorkgroupId, "SV_GroupID"},
-                    HlslBuiltinData{ast::BuiltinValue::kSampleIndex, "SV_SampleIndex"},
-                    HlslBuiltinData{ast::BuiltinValue::kSampleMask, "SV_Coverage"}));
+    testing::Values(HlslBuiltinData{type::BuiltinValue::kPosition, "SV_Position"},
+                    HlslBuiltinData{type::BuiltinValue::kVertexIndex, "SV_VertexID"},
+                    HlslBuiltinData{type::BuiltinValue::kInstanceIndex, "SV_InstanceID"},
+                    HlslBuiltinData{type::BuiltinValue::kFrontFacing, "SV_IsFrontFace"},
+                    HlslBuiltinData{type::BuiltinValue::kFragDepth, "SV_Depth"},
+                    HlslBuiltinData{type::BuiltinValue::kLocalInvocationId, "SV_GroupThreadID"},
+                    HlslBuiltinData{type::BuiltinValue::kLocalInvocationIndex, "SV_GroupIndex"},
+                    HlslBuiltinData{type::BuiltinValue::kGlobalInvocationId, "SV_DispatchThreadID"},
+                    HlslBuiltinData{type::BuiltinValue::kWorkgroupId, "SV_GroupID"},
+                    HlslBuiltinData{type::BuiltinValue::kSampleIndex, "SV_SampleIndex"},
+                    HlslBuiltinData{type::BuiltinValue::kSampleMask, "SV_Coverage"}));
 
 }  // namespace
 }  // namespace tint::writer::hlsl

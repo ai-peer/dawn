@@ -24,21 +24,21 @@ namespace {
 class CheckSupportedExtensionsTest : public ::testing::Test, public ProgramBuilder {};
 
 TEST_F(CheckSupportedExtensionsTest, Supported) {
-    Enable(ast::Extension::kF16);
+    Enable(type::Extension::kF16);
 
     ASSERT_TRUE(CheckSupportedExtensions("writer", AST(), Diagnostics(),
                                          utils::Vector{
-                                             ast::Extension::kF16,
-                                             ast::Extension::kChromiumExperimentalDp4A,
+                                             type::Extension::kF16,
+                                             type::Extension::kChromiumExperimentalDp4A,
                                          }));
 }
 
 TEST_F(CheckSupportedExtensionsTest, Unsupported) {
-    Enable(Source{{12, 34}}, ast::Extension::kF16);
+    Enable(Source{{12, 34}}, type::Extension::kF16);
 
     ASSERT_FALSE(CheckSupportedExtensions("writer", AST(), Diagnostics(),
                                           utils::Vector{
-                                              ast::Extension::kChromiumExperimentalDp4A,
+                                              type::Extension::kChromiumExperimentalDp4A,
                                           }));
     EXPECT_EQ(Diagnostics().str(), "12:34 error: writer backend does not support extension 'f16'");
 }

@@ -422,14 +422,14 @@ Maybe<Void> ParserImpl::enable_directive() {
             return add_error(t.source(), "enable directives don't take parenthesis");
         }
 
-        auto extension = ast::Extension::kUndefined;
+        auto extension = type::Extension::kUndefined;
         if (t.Is(Token::Type::kF16)) {
             // `f16` is a valid extension name and also a keyword
             synchronized_ = true;
             next();
-            extension = ast::Extension::kF16;
+            extension = type::Extension::kF16;
         } else {
-            auto ext = expect_enum("extension", ast::ParseExtension, ast::kExtensionStrings);
+            auto ext = expect_enum("extension", type::ParseExtension, type::kExtensionStrings);
             if (ext.errored) {
                 return Failure::kErrored;
             }
@@ -1648,8 +1648,8 @@ Expect<ast::InterpolationType> ParserImpl::expect_interpolation_type_name() {
 //   | sample_mask
 //   | vertex_index
 //   | workgroup_id
-Expect<ast::BuiltinValue> ParserImpl::expect_builtin() {
-    return expect_enum("builtin", ast::ParseBuiltinValue, ast::kBuiltinValueStrings);
+Expect<type::BuiltinValue> ParserImpl::expect_builtin() {
+    return expect_enum("builtin", type::ParseBuiltinValue, type::kBuiltinValueStrings);
 }
 
 // compound_statement

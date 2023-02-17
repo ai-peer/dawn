@@ -149,7 +149,7 @@ void TraverseCallChain(diag::List& diagnostics,
 Validator::Validator(
     ProgramBuilder* builder,
     SemHelper& sem,
-    const ast::Extensions& enabled_extensions,
+    const type::Extensions& enabled_extensions,
     const utils::Hashmap<const type::Type*, const Source*, 8>& atomic_composite_info,
     utils::Hashset<TypeAndAddressSpace, 8>& valid_type_storage_layouts)
     : symbols_(builder->Symbols()),
@@ -829,7 +829,7 @@ bool Validator::Parameter(const ast::Function* func, const sem::Variable* var) c
                 case type::AddressSpace::kUniform:
                 case type::AddressSpace::kWorkgroup:
                     ok = enabled_extensions_.Contains(
-                        ast::Extension::kChromiumExperimentalFullPtrParameters);
+                        type::Extension::kChromiumExperimentalFullPtrParameters);
                     break;
                 default:
                     break;
@@ -868,7 +868,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
     bool is_stage_mismatch = false;
     bool is_output = !is_input;
     switch (attr->builtin) {
-        case ast::BuiltinValue::kPosition:
+        case type::BuiltinValue::kPosition:
             if (stage != ast::PipelineStage::kNone &&
                 !((is_input && stage == ast::PipelineStage::kFragment) ||
                   (is_output && stage == ast::PipelineStage::kVertex))) {
@@ -880,10 +880,10 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kGlobalInvocationId:
-        case ast::BuiltinValue::kLocalInvocationId:
-        case ast::BuiltinValue::kNumWorkgroups:
-        case ast::BuiltinValue::kWorkgroupId:
+        case type::BuiltinValue::kGlobalInvocationId:
+        case type::BuiltinValue::kLocalInvocationId:
+        case type::BuiltinValue::kNumWorkgroups:
+        case type::BuiltinValue::kWorkgroupId:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kCompute && is_input)) {
                 is_stage_mismatch = true;
@@ -894,7 +894,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kFragDepth:
+        case type::BuiltinValue::kFragDepth:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kFragment && !is_input)) {
                 is_stage_mismatch = true;
@@ -904,7 +904,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kFrontFacing:
+        case type::BuiltinValue::kFrontFacing:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kFragment && is_input)) {
                 is_stage_mismatch = true;
@@ -914,7 +914,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kLocalInvocationIndex:
+        case type::BuiltinValue::kLocalInvocationIndex:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kCompute && is_input)) {
                 is_stage_mismatch = true;
@@ -924,8 +924,8 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kVertexIndex:
-        case ast::BuiltinValue::kInstanceIndex:
+        case type::BuiltinValue::kVertexIndex:
+        case type::BuiltinValue::kInstanceIndex:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kVertex && is_input)) {
                 is_stage_mismatch = true;
@@ -935,7 +935,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kSampleMask:
+        case type::BuiltinValue::kSampleMask:
             if (stage != ast::PipelineStage::kNone && !(stage == ast::PipelineStage::kFragment)) {
                 is_stage_mismatch = true;
             }
@@ -944,7 +944,7 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
                 return false;
             }
             break;
-        case ast::BuiltinValue::kSampleIndex:
+        case type::BuiltinValue::kSampleIndex:
             if (stage != ast::PipelineStage::kNone &&
                 !(stage == ast::PipelineStage::kFragment && is_input)) {
                 is_stage_mismatch = true;
@@ -1076,7 +1076,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     // order to catch conflicts.
     // TODO(jrprice): This state could be stored in sem::Function instead, and then passed to
     // sem::Function since it would be useful there too.
-    utils::Hashset<ast::BuiltinValue, 4> builtins;
+    utils::Hashset<type::BuiltinValue, 4> builtins;
     utils::Hashset<uint32_t, 8> locations;
     enum class ParamOrRetType {
         kParameter,
@@ -1211,7 +1211,7 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 bool has_position = false;
                 if (pipeline_io_attribute) {
                     if (auto* builtin = pipeline_io_attribute->As<ast::BuiltinAttribute>()) {
-                        has_position = (builtin->builtin == ast::BuiltinValue::kPosition);
+                        has_position = (builtin->builtin == type::BuiltinValue::kPosition);
                     }
                 }
                 if (!has_position) {
@@ -1275,13 +1275,13 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     }
 
     if (decl->PipelineStage() == ast::PipelineStage::kVertex &&
-        !builtins.Contains(ast::BuiltinValue::kPosition)) {
+        !builtins.Contains(type::BuiltinValue::kPosition)) {
         // Check module-scope variables, as the SPIR-V sanitizer generates these.
         bool found = false;
         for (auto* global : func->TransitivelyReferencedGlobals()) {
             if (auto* builtin =
                     ast::GetAttribute<ast::BuiltinAttribute>(global->Declaration()->attributes)) {
-                if (builtin->builtin == ast::BuiltinValue::kPosition) {
+                if (builtin->builtin == type::BuiltinValue::kPosition) {
                     found = true;
                     break;
                 }
@@ -1653,7 +1653,7 @@ bool Validator::RequiredExtensionForBuiltinFunction(const sem::Call* call) const
     }
 
     const auto extension = builtin->RequiredExtension();
-    if (extension == ast::Extension::kUndefined) {
+    if (extension == type::Extension::kUndefined) {
         return true;
     }
 
@@ -1669,7 +1669,7 @@ bool Validator::RequiredExtensionForBuiltinFunction(const sem::Call* call) const
 
 bool Validator::CheckF16Enabled(const Source& source) const {
     // Validate if f16 type is allowed.
-    if (!enabled_extensions_.Contains(ast::Extension::kF16)) {
+    if (!enabled_extensions_.Contains(type::Extension::kF16)) {
         AddError("f16 type used without 'f16' extension enabled", source);
         return false;
     }
@@ -1719,7 +1719,8 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
         }
 
         if (param_type->Is<type::Pointer>() &&
-            !enabled_extensions_.Contains(ast::Extension::kChromiumExperimentalFullPtrParameters)) {
+            !enabled_extensions_.Contains(
+                type::Extension::kChromiumExperimentalFullPtrParameters)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-restriction
             // Each argument of pointer type to a user-defined function must have the same memory
             // view as its root identifier.
@@ -2123,7 +2124,7 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                                           /* is_input */ false)) {
                         return false;
                     }
-                    if (builtin->builtin == ast::BuiltinValue::kPosition) {
+                    if (builtin->builtin == type::BuiltinValue::kPosition) {
                         has_position = true;
                     }
                     return true;
@@ -2512,7 +2513,7 @@ bool Validator::CheckTypeAccessAddressSpace(
     }
 
     if (address_space == type::AddressSpace::kPushConstant &&
-        !enabled_extensions_.Contains(ast::Extension::kChromiumExperimentalPushConstant) &&
+        !enabled_extensions_.Contains(type::Extension::kChromiumExperimentalPushConstant) &&
         IsValidationEnabled(attributes, ast::DisabledValidation::kIgnoreAddressSpace)) {
         AddError(
             "use of variable address space 'push_constant' requires enabling extension "

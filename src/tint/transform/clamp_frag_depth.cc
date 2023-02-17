@@ -18,7 +18,6 @@
 
 #include "src/tint/ast/attribute.h"
 #include "src/tint/ast/builtin_attribute.h"
-#include "src/tint/ast/builtin_value.h"
 #include "src/tint/ast/function.h"
 #include "src/tint/ast/module.h"
 #include "src/tint/ast/struct.h"
@@ -26,6 +25,7 @@
 #include "src/tint/sem/function.h"
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/struct.h"
+#include "src/tint/type/builtin_value.h"
 #include "src/tint/utils/scoped_assignment.h"
 #include "src/tint/utils/vector.h"
 
@@ -38,7 +38,7 @@ namespace {
 bool ContainsFragDepth(utils::VectorRef<const ast::Attribute*> attributes) {
     for (auto* attribute : attributes) {
         if (auto* builtin_attribute = attribute->As<ast::BuiltinAttribute>()) {
-            if (builtin_attribute->builtin == ast::BuiltinValue::kFragDepth) {
+            if (builtin_attribute->builtin == type::BuiltinValue::kFragDepth) {
                 return true;
             }
         }
@@ -117,7 +117,7 @@ Transform::ApplyResult ClampFragDepth::Apply(const Program* src, const DataMap&,
     //   fn clamp_frag_depth(v : f32) -> f32 {
     //       return clamp(v, frag_depth_clamp_args.min, frag_depth_clamp_args.max);
     //   }
-    b.Enable(ast::Extension::kChromiumExperimentalPushConstant);
+    b.Enable(type::Extension::kChromiumExperimentalPushConstant);
 
     b.Structure(b.Symbols().New("FragDepthClampArgs"),
                 utils::Vector{b.Member("min", b.ty.f32()), b.Member("max", b.ty.f32())});

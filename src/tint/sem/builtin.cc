@@ -179,11 +179,11 @@ bool Builtin::HasSideEffects() const {
     return false;
 }
 
-ast::Extension Builtin::RequiredExtension() const {
+type::Extension Builtin::RequiredExtension() const {
     if (IsDP4a()) {
-        return ast::Extension::kChromiumExperimentalDp4A;
+        return type::Extension::kChromiumExperimentalDp4A;
     }
-    return ast::Extension::kUndefined;
+    return type::Extension::kUndefined;
 }
 
 }  // namespace tint::sem

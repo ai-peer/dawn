@@ -42,7 +42,6 @@
 #include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/discard_statement.h"
 #include "src/tint/ast/enable.h"
-#include "src/tint/ast/extension.h"
 #include "src/tint/ast/float_literal_expression.h"
 #include "src/tint/ast/for_loop_statement.h"
 #include "src/tint/ast/id_attribute.h"
@@ -85,6 +84,7 @@
 #include "src/tint/type/array.h"
 #include "src/tint/type/bool.h"
 #include "src/tint/type/depth_texture.h"
+#include "src/tint/type/extension.h"
 #include "src/tint/type/external_texture.h"
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
@@ -2036,7 +2036,7 @@ class ProgramBuilder {
     /// Adds the extension to the list of enable directives at the top of the module.
     /// @param ext the extension to enable
     /// @return an `ast::Enable` enabling the given extension.
-    const ast::Enable* Enable(ast::Extension ext) {
+    const ast::Enable* Enable(type::Extension ext) {
         auto* enable = create<ast::Enable>(ext);
         AST().AddEnable(enable);
         return enable;
@@ -2046,7 +2046,7 @@ class ProgramBuilder {
     /// @param source the enable source
     /// @param ext the extension to enable
     /// @return an `ast::Enable` enabling the given extension.
-    const ast::Enable* Enable(const Source& source, ast::Extension ext) {
+    const ast::Enable* Enable(const Source& source, type::Extension ext) {
         auto* enable = create<ast::Enable>(source, ext);
         AST().AddEnable(enable);
         return enable;
@@ -3436,14 +3436,14 @@ class ProgramBuilder {
     /// @param source the source information
     /// @param builtin the builtin value
     /// @returns the builtin attribute pointer
-    const ast::BuiltinAttribute* Builtin(const Source& source, ast::BuiltinValue builtin) {
+    const ast::BuiltinAttribute* Builtin(const Source& source, type::BuiltinValue builtin) {
         return create<ast::BuiltinAttribute>(source, builtin);
     }
 
     /// Creates an ast::BuiltinAttribute
     /// @param builtin the builtin value
     /// @returns the builtin attribute pointer
-    const ast::BuiltinAttribute* Builtin(ast::BuiltinValue builtin) {
+    const ast::BuiltinAttribute* Builtin(type::BuiltinValue builtin) {
         return create<ast::BuiltinAttribute>(source_, builtin);
     }
 
