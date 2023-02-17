@@ -19,8 +19,8 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/ast/extension.h"
 #include "src/tint/ast/node.h"
+#include "src/tint/type/extension.h"
 
 namespace tint::ast {
 
@@ -36,7 +36,7 @@ class Enable final : public Castable<Enable, Node> {
     /// @param nid the unique node identifier
     /// @param src the source of this node
     /// @param ext the extension
-    Enable(ProgramID pid, NodeID nid, const Source& src, Extension ext);
+    Enable(ProgramID pid, NodeID nid, const Source& src, type::Extension ext);
     /// Move constructor
     Enable(Enable&&);
 
@@ -49,7 +49,7 @@ class Enable final : public Castable<Enable, Node> {
     const Enable* Clone(CloneContext* ctx) const override;
 
     /// The extension name
-    const Extension extension;
+    const type::Extension extension;
 };
 
 }  // namespace tint::ast

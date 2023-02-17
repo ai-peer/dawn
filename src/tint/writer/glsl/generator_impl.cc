@@ -90,10 +90,10 @@ bool IsRelational(tint::ast::BinaryOp op) {
            op == tint::ast::BinaryOp::kGreaterThanEqual;
 }
 
-bool RequiresOESSampleVariables(tint::ast::BuiltinValue builtin) {
+bool RequiresOESSampleVariables(tint::type::BuiltinValue builtin) {
     switch (builtin) {
-        case tint::ast::BuiltinValue::kSampleIndex:
-        case tint::ast::BuiltinValue::kSampleMask:
+        case tint::type::BuiltinValue::kSampleIndex:
+        case tint::type::BuiltinValue::kSampleMask:
             return true;
         default:
             return false;
@@ -326,7 +326,7 @@ bool GeneratorImpl::Generate() {
 bool GeneratorImpl::RecordExtension(const ast::Enable* ext) {
     // Deal with extension node here, recording it within the generator for later emition.
 
-    if (ext->extension == ast::Extension::kF16) {
+    if (ext->extension == type::Extension::kF16) {
         requires_f16_extension_ = true;
     }
 

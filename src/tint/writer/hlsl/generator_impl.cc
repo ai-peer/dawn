@@ -297,11 +297,11 @@ GeneratorImpl::~GeneratorImpl() = default;
 bool GeneratorImpl::Generate() {
     if (!CheckSupportedExtensions("HLSL", program_->AST(), diagnostics_,
                                   utils::Vector{
-                                      ast::Extension::kChromiumDisableUniformityAnalysis,
-                                      ast::Extension::kChromiumExperimentalDp4A,
-                                      ast::Extension::kChromiumExperimentalFullPtrParameters,
-                                      ast::Extension::kChromiumExperimentalPushConstant,
-                                      ast::Extension::kF16,
+                                      type::Extension::kChromiumDisableUniformityAnalysis,
+                                      type::Extension::kChromiumExperimentalDp4A,
+                                      type::Extension::kChromiumExperimentalFullPtrParameters,
+                                      type::Extension::kChromiumExperimentalPushConstant,
+                                      type::Extension::kF16,
                                   })) {
         return false;
     }
@@ -3154,29 +3154,29 @@ bool GeneratorImpl::EmitWorkgroupVariable(const sem::Variable* var) {
     return true;
 }
 
-std::string GeneratorImpl::builtin_to_attribute(ast::BuiltinValue builtin) const {
+std::string GeneratorImpl::builtin_to_attribute(type::BuiltinValue builtin) const {
     switch (builtin) {
-        case ast::BuiltinValue::kPosition:
+        case type::BuiltinValue::kPosition:
             return "SV_Position";
-        case ast::BuiltinValue::kVertexIndex:
+        case type::BuiltinValue::kVertexIndex:
             return "SV_VertexID";
-        case ast::BuiltinValue::kInstanceIndex:
+        case type::BuiltinValue::kInstanceIndex:
             return "SV_InstanceID";
-        case ast::BuiltinValue::kFrontFacing:
+        case type::BuiltinValue::kFrontFacing:
             return "SV_IsFrontFace";
-        case ast::BuiltinValue::kFragDepth:
+        case type::BuiltinValue::kFragDepth:
             return "SV_Depth";
-        case ast::BuiltinValue::kLocalInvocationId:
+        case type::BuiltinValue::kLocalInvocationId:
             return "SV_GroupThreadID";
-        case ast::BuiltinValue::kLocalInvocationIndex:
+        case type::BuiltinValue::kLocalInvocationIndex:
             return "SV_GroupIndex";
-        case ast::BuiltinValue::kGlobalInvocationId:
+        case type::BuiltinValue::kGlobalInvocationId:
             return "SV_DispatchThreadID";
-        case ast::BuiltinValue::kWorkgroupId:
+        case type::BuiltinValue::kWorkgroupId:
             return "SV_GroupID";
-        case ast::BuiltinValue::kSampleIndex:
+        case type::BuiltinValue::kSampleIndex:
             return "SV_SampleIndex";
-        case ast::BuiltinValue::kSampleMask:
+        case type::BuiltinValue::kSampleMask:
             return "SV_Coverage";
         default:
             break;

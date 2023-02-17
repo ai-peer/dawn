@@ -1,6 +1,6 @@
 {{- /*
 --------------------------------------------------------------------------------
-Template file for use with tools/src/cmd/gen to generate extension.cc
+Template file for use with tools/src/cmd/gen to generate builtin_value_bench.cc
 
 See:
 * tools/src/cmd/gen for structures used by this template
@@ -9,14 +9,18 @@ See:
 */ -}}
 
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
-{{- $enum := (Sem.Enum "extension") -}}
+{{- $enum := (Sem.Enum "builtin_value") -}}
 
-#include "src/tint/ast/extension.h"
+#include "src/tint/type/builtin_value.h"
 
-namespace tint::ast {
+#include <array>
 
-{{ Eval "ParseEnum" $enum}}
+#include "benchmark/benchmark.h"
 
-{{ Eval "EnumOStream" $enum}}
+namespace tint::type {
+namespace {
 
-}  // namespace tint::ast
+{{ Eval "BenchmarkParseEnum" $enum }}
+
+}  // namespace
+}  // namespace tint::type

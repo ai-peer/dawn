@@ -265,11 +265,11 @@ Builder::~Builder() = default;
 bool Builder::Build() {
     if (!CheckSupportedExtensions("SPIR-V", builder_.AST(), builder_.Diagnostics(),
                                   utils::Vector{
-                                      ast::Extension::kChromiumDisableUniformityAnalysis,
-                                      ast::Extension::kChromiumExperimentalDp4A,
-                                      ast::Extension::kChromiumExperimentalFullPtrParameters,
-                                      ast::Extension::kChromiumExperimentalPushConstant,
-                                      ast::Extension::kF16,
+                                      type::Extension::kChromiumDisableUniformityAnalysis,
+                                      type::Extension::kChromiumExperimentalDp4A,
+                                      type::Extension::kChromiumExperimentalFullPtrParameters,
+                                      type::Extension::kChromiumExperimentalPushConstant,
+                                      type::Extension::kF16,
                                   })) {
         error_ = builder_.Diagnostics().str();
         return false;
@@ -394,14 +394,14 @@ void Builder::push_extension(const char* extension) {
     extensions_.push_back(Instruction{spv::Op::OpExtension, {Operand(extension)}});
 }
 
-bool Builder::GenerateExtension(ast::Extension extension) {
+bool Builder::GenerateExtension(type::Extension extension) {
     switch (extension) {
-        case ast::Extension::kChromiumExperimentalDp4A:
+        case type::Extension::kChromiumExperimentalDp4A:
             push_extension("SPV_KHR_integer_dot_product");
             push_capability(SpvCapabilityDotProductKHR);
             push_capability(SpvCapabilityDotProductInput4x8BitPackedKHR);
             break;
-        case ast::Extension::kF16:
+        case type::Extension::kF16:
             push_capability(SpvCapabilityFloat16);
             push_capability(SpvCapabilityUniformAndStorageBuffer16BitAccess);
             push_capability(SpvCapabilityStorageBuffer16BitAccess);
@@ -549,7 +549,7 @@ bool Builder::GenerateExecutionModes(const ast::Function* func, uint32_t id) {
     }
 
     for (auto builtin : func_sem->TransitivelyReferencedBuiltinVariables()) {
-        if (builtin.second->builtin == ast::BuiltinValue::kFragDepth) {
+        if (builtin.second->builtin == type::BuiltinValue::kFragDepth) {
             push_execution_mode(spv::Op::OpExecutionMode,
                                 {Operand(id), U32Operand(SpvExecutionModeDepthReplacing)});
         }
@@ -4004,9 +4004,9 @@ SpvStorageClass Builder::ConvertAddressSpace(type::AddressSpace klass) const {
     return SpvStorageClassMax;
 }
 
-SpvBuiltIn Builder::ConvertBuiltin(ast::BuiltinValue builtin, type::AddressSpace storage) {
+SpvBuiltIn Builder::ConvertBuiltin(type::BuiltinValue builtin, type::AddressSpace storage) {
     switch (builtin) {
-        case ast::BuiltinValue::kPosition:
+        case type::BuiltinValue::kPosition:
             if (storage == type::AddressSpace::kIn) {
                 return SpvBuiltInFragCoord;
             } else if (TINT_LIKELY(storage == type::AddressSpace::kOut)) {
@@ -4015,32 +4015,32 @@ SpvBuiltIn Builder::ConvertBuiltin(ast::BuiltinValue builtin, type::AddressSpace
                 TINT_ICE(Writer, builder_.Diagnostics()) << "invalid address space for builtin";
                 break;
             }
-        case ast::BuiltinValue::kVertexIndex:
+        case type::BuiltinValue::kVertexIndex:
             return SpvBuiltInVertexIndex;
-        case ast::BuiltinValue::kInstanceIndex:
+        case type::BuiltinValue::kInstanceIndex:
             return SpvBuiltInInstanceIndex;
-        case ast::BuiltinValue::kFrontFacing:
+        case type::BuiltinValue::kFrontFacing:
             return SpvBuiltInFrontFacing;
-        case ast::BuiltinValue::kFragDepth:
+        case type::BuiltinValue::kFragDepth:
             return SpvBuiltInFragDepth;
-        case ast::BuiltinValue::kLocalInvocationId:
+        case type::BuiltinValue::kLocalInvocationId:
             return SpvBuiltInLocalInvocationId;
-        case ast::BuiltinValue::kLocalInvocationIndex:
+        case type::BuiltinValue::kLocalInvocationIndex:
             return SpvBuiltInLocalInvocationIndex;
-        case ast::BuiltinValue::kGlobalInvocationId:
+        case type::BuiltinValue::kGlobalInvocationId:
             return SpvBuiltInGlobalInvocationId;
-        case ast::BuiltinValue::kPointSize:
+        case type::BuiltinValue::kPointSize:
             return SpvBuiltInPointSize;
-        case ast::BuiltinValue::kWorkgroupId:
+        case type::BuiltinValue::kWorkgroupId:
             return SpvBuiltInWorkgroupId;
-        case ast::BuiltinValue::kNumWorkgroups:
+        case type::BuiltinValue::kNumWorkgroups:
             return SpvBuiltInNumWorkgroups;
-        case ast::BuiltinValue::kSampleIndex:
+        case type::BuiltinValue::kSampleIndex:
             push_capability(SpvCapabilitySampleRateShading);
             return SpvBuiltInSampleId;
-        case ast::BuiltinValue::kSampleMask:
+        case type::BuiltinValue::kSampleMask:
             return SpvBuiltInSampleMask;
-        case ast::BuiltinValue::kUndefined:
+        case type::BuiltinValue::kUndefined:
             break;
     }
     return SpvBuiltInMax;

@@ -11,16 +11,16 @@ See:
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 {{- $enum := (Sem.Enum "extension") -}}
 
-#include "src/tint/ast/extension.h"
+#include "src/tint/type/extension.h"
 
 #include <array>
 
 #include "benchmark/benchmark.h"
 
-namespace tint::ast {
+namespace tint::type {
 namespace {
 
 {{ Eval "BenchmarkParseEnum" $enum }}
 
 }  // namespace
-}  // namespace tint::ast
+}  // namespace tint::type

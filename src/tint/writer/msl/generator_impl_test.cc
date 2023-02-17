@@ -32,7 +32,7 @@ TEST_F(MslGeneratorImplTest, InvalidProgram) {
 }
 
 TEST_F(MslGeneratorImplTest, UnsupportedExtension) {
-    Enable(Source{{12, 34}}, ast::Extension::kUndefined);
+    Enable(Source{{12, 34}}, type::Extension::kUndefined);
 
     GeneratorImpl& gen = Build();
 
@@ -61,7 +61,7 @@ kernel void my_func() {
 }
 
 struct MslBuiltinData {
-    ast::BuiltinValue builtin;
+    type::BuiltinValue builtin;
     const char* attribute_name;
 };
 inline std::ostream& operator<<(std::ostream& out, MslBuiltinData data) {
@@ -80,25 +80,25 @@ INSTANTIATE_TEST_SUITE_P(
     MslGeneratorImplTest,
     MslBuiltinConversionTest,
     testing::Values(
-        MslBuiltinData{ast::BuiltinValue::kPosition, "position"},
-        MslBuiltinData{ast::BuiltinValue::kVertexIndex, "vertex_id"},
-        MslBuiltinData{ast::BuiltinValue::kInstanceIndex, "instance_id"},
-        MslBuiltinData{ast::BuiltinValue::kFrontFacing, "front_facing"},
-        MslBuiltinData{ast::BuiltinValue::kFragDepth, "depth(any)"},
-        MslBuiltinData{ast::BuiltinValue::kLocalInvocationId, "thread_position_in_threadgroup"},
-        MslBuiltinData{ast::BuiltinValue::kLocalInvocationIndex, "thread_index_in_threadgroup"},
-        MslBuiltinData{ast::BuiltinValue::kGlobalInvocationId, "thread_position_in_grid"},
-        MslBuiltinData{ast::BuiltinValue::kWorkgroupId, "threadgroup_position_in_grid"},
-        MslBuiltinData{ast::BuiltinValue::kNumWorkgroups, "threadgroups_per_grid"},
-        MslBuiltinData{ast::BuiltinValue::kSampleIndex, "sample_id"},
-        MslBuiltinData{ast::BuiltinValue::kSampleMask, "sample_mask"},
-        MslBuiltinData{ast::BuiltinValue::kPointSize, "point_size"}));
+        MslBuiltinData{type::BuiltinValue::kPosition, "position"},
+        MslBuiltinData{type::BuiltinValue::kVertexIndex, "vertex_id"},
+        MslBuiltinData{type::BuiltinValue::kInstanceIndex, "instance_id"},
+        MslBuiltinData{type::BuiltinValue::kFrontFacing, "front_facing"},
+        MslBuiltinData{type::BuiltinValue::kFragDepth, "depth(any)"},
+        MslBuiltinData{type::BuiltinValue::kLocalInvocationId, "thread_position_in_threadgroup"},
+        MslBuiltinData{type::BuiltinValue::kLocalInvocationIndex, "thread_index_in_threadgroup"},
+        MslBuiltinData{type::BuiltinValue::kGlobalInvocationId, "thread_position_in_grid"},
+        MslBuiltinData{type::BuiltinValue::kWorkgroupId, "threadgroup_position_in_grid"},
+        MslBuiltinData{type::BuiltinValue::kNumWorkgroups, "threadgroups_per_grid"},
+        MslBuiltinData{type::BuiltinValue::kSampleIndex, "sample_id"},
+        MslBuiltinData{type::BuiltinValue::kSampleMask, "sample_mask"},
+        MslBuiltinData{type::BuiltinValue::kPointSize, "point_size"}));
 
 TEST_F(MslGeneratorImplTest, HasInvariantAttribute_True) {
     auto* out = Structure("Out", utils::Vector{
                                      Member("pos", ty.vec4<f32>(),
                                             utils::Vector{
-                                                Builtin(ast::BuiltinValue::kPosition),
+                                                Builtin(type::BuiltinValue::kPosition),
                                                 Invariant(),
                                             }),
                                  });
@@ -136,7 +136,7 @@ TEST_F(MslGeneratorImplTest, HasInvariantAttribute_False) {
     auto* out = Structure("Out", utils::Vector{
                                      Member("pos", ty.vec4<f32>(),
                                             utils::Vector{
-                                                Builtin(ast::BuiltinValue::kPosition),
+                                                Builtin(type::BuiltinValue::kPosition),
                                             }),
                                  });
     Func("vert_main", utils::Empty, ty.Of(out), utils::Vector{Return(Call(ty.Of(out)))},
