@@ -325,8 +325,8 @@ void RecordNumWorkgroupsForDispatch(ID3D12GraphicsCommandList* commandList,
 // Records the necessary barriers for a synchronization scope using the resource usage
 // data pre-computed in the frontend. Also performs lazy initialization if required.
 // Returns whether any UAV are used in the synchronization scope.
-bool TransitionAndClearForSyncScope(CommandRecordingContext* commandContext,
-                                    const SyncScopeResourceUsage& usages) {
+ResultOrError<bool> TransitionAndClearForSyncScope(CommandRecordingContext* commandContext,
+                                                   const SyncScopeResourceUsage& usages) {
     std::vector<D3D12_RESOURCE_BARRIER> barriers;
 
     ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
@@ -336,9 +336,8 @@ bool TransitionAndClearForSyncScope(CommandRecordingContext* commandContext,
     for (size_t i = 0; i < usages.buffers.size(); ++i) {
         Buffer* buffer = ToBackend(usages.buffers[i]);
 
-        // TODO(crbug.com/dawn/852): clear storage buffers with
-        // ClearUnorderedAccessView*().
-        buffer->GetDevice()->ConsumedError(buffer->EnsureDataInitialized(commandContext));
+        // TODO(crbug.com/dawn/852): clear storage buffers with ClearUnorderedAccessView*().
+        DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
         D3D12_RESOURCE_BARRIER barrier;
         if (buffer->TrackUsageAndGetResourceBarrier(commandContext, &barrier,
@@ -756,8 +755,11 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 BeginRenderPassCmd* beginRenderPassCmd =
                     mCommands.NextCommand<BeginRenderPassCmd>();
 
-                const bool passHasUAV = TransitionAndClearForSyncScope(
-                    commandContext, GetResourceUsages().renderPasses[nextRenderPassNumber]);
+                bool passHasUAV;
+                DAWN_TRY_ASSIGN(
+                    passHasUAV,
+                    TransitionAndClearForSyncScope(
+                        commandContext, GetResourceUsages().renderPasses[nextRenderPassNumber]));
                 bindingTracker.SetInComputePass(false);
 
                 LazyClearRenderPassAttachments(beginRenderPassCmd);
@@ -1148,8 +1150,8 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* commandCont
                     break;
                 }
 
-                TransitionAndClearForSyncScope(commandContext,
-                                               resourceUsages.dispatchUsages[currentDispatch]);
+                DAWN_TRY(TransitionAndClearForSyncScope(
+                    commandContext, resourceUsages.dispatchUsages[currentDispatch]));
                 DAWN_TRY(bindingTracker->Apply(commandContext));
 
                 RecordNumWorkgroupsForDispatch(commandList, lastPipeline, dispatch);
@@ -1161,8 +1163,8 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* commandCont
             case Command::DispatchIndirect: {
                 DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
-                TransitionAndClearForSyncScope(commandContext,
-                                               resourceUsages.dispatchUsages[currentDispatch]);
+                DAWN_TRY(TransitionAndClearForSyncScope(
+                    commandContext, resourceUsages.dispatchUsages[currentDispatch]));
                 DAWN_TRY(bindingTracker->Apply(commandContext));
 
                 ComPtr<ID3D12CommandSignature> signature =
