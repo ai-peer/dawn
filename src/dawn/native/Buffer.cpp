@@ -174,6 +174,16 @@ void BufferBase::PendingMappingCallback::Call() {
     }
 }
 
+// BufferBase::BufferStateTransitioner
+
+BufferBase::BufferStateTransitioner::BufferStateTransitioner(BufferBase* buffer,
+                                                             BufferState endState)
+    : buffer(buffer), endState(endState) {}
+
+BufferBase::BufferStateTransitioner::~BufferStateTransitioner() {
+    buffer->mState = endState;
+}
+
 // Buffer
 
 BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
@@ -503,22 +513,28 @@ MaybeError BufferBase::CopyFromStagingBuffer() {
 }
 
 void BufferBase::APIUnmap() {
-    if (GetDevice()->ConsumedError(ValidateUnmap(), "calling %s.Unmap().", this)) {
-        return;
-    }
-    Unmap();
+    CONSUME_IF_ERROR_WITH_CONTEXT(GetDevice(), ValidateUnmap(), kDefaultAllowedErrors,
+                                  "calling %s.Unmap().", this);
+    CONSUME_IF_ERROR_WITH_CONTEXT(GetDevice(), Unmap(), kDefaultAllowedErrors,
+                                  "calling %s.Unmap().", this);
 }
 
-void BufferBase::Unmap() {
+MaybeError BufferBase::Unmap() {
     if (mState == BufferState::Destroyed) {
-        return;
+        return {};
     }
+
     UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback).Call();
+    if (mState == BufferState::MappedAtCreation && mStagingBuffer != nullptr) {
+        DAWN_TRY(CopyFromStagingBuffer());
+    }
+    return {};
 }
 
 BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
     WGPUBufferMapAsyncStatus callbackStatus) {
     PendingMappingCallback toCall;
+    BufferStateTransitioner stateTransitioner(this, BufferState::Unmapped);
 
     if (mState == BufferState::PendingMap) {
         toCall = WillCallMappingCallback(mLastMapID, callbackStatus);
@@ -526,14 +542,13 @@ BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
     } else if (mState == BufferState::Mapped) {
         UnmapImpl();
     } else if (mState == BufferState::MappedAtCreation) {
-        if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
-        } else if (mSize != 0) {
+        // Mapped at creation unmapping with a staging buffer isn't handled here because this helper
+        // function may be called in destruction where we no longer care able copying the staging
+        // buffer to the actual buffer.
+        if (mStagingBuffer == nullptr && mSize != 0) {
             UnmapImpl();
         }
     }
-
-    mState = BufferState::Unmapped;
     return toCall;
 }
 
