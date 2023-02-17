@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8de7df_cb5d0c25",
+        "filename": "src/dawn/native/CachedObject.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Fair enough, but I ended up needing to override `SetContentHash` instead because there wasn\u0027t another good way to bypass this without adding extra branching in the base `CachedObject` code which wouldn\u0027t be ideal.",
+      "parentUuid": "fa9a5bb9_c843640a",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6557c8e_8aa4aab3",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "why can\u0027t we have DeviceMock use the normal base constructor like the other objects?",
+      "range": {
+        "startLine": 211,
+        "startChar": 0,
+        "endLine": 213,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23dcf06_f19daa58",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "As discussed offline, that requires a mock adapter and I can do that in a follow up. Added a TODO comment as well in the DeviceMock header with some notes to update places.",
+      "parentUuid": "f6557c8e_8aa4aab3",
       "range": {
         "startLine": 211,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "305fb2d5_2a269ae3",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "I think they are?",
+      "parentUuid": "778b120d_a071cdc3",
+      "range": {
+        "startLine": 587,
+        "startChar": 0,
+        "endLine": 595,
+        "endChar": 45
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020020df_2dade4f2",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "We don\u0027t need this complexity for an ASSERT\n\ncan do:\n\n`layoutRef \u003d ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(...).AcquireSuccess()`\n\nand\n\n`ValidateAndParseShaderModule(device, descriptor, \u0026parseResult, nullptr).AcquireSuccess();`",
+      "range": {
+        "startLine": 158,
+        "startChar": 45,
+        "endLine": 159,
+        "endChar": 39
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71271709_a6cb85b6",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Ah! Nice this is much nicer thanks!",
+      "parentUuid": "020020df_2dade4f2",
       "range": {
         "startLine": 158,
         "startChar": 45,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4320d1b_f7aeb3ea",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Will follow up with adapter mock change(s).",
+      "parentUuid": "3f429abc_9fd5a126",
+      "range": {
+        "startLine": 86,
+        "startChar": 21,
+        "endLine": 86,
+        "endChar": 45
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c393daf_5e4b1738",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "shouldn\u0027t this be \"Get**Empty**BGL?\"",
+      "range": {
+        "startLine": 89,
+        "startChar": 25,
+        "endLine": 89,
+        "endChar": 43
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d41ed3_9a7080f5",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c393daf_5e4b1738",
       "range": {
         "startLine": 89,
         "startChar": 25,
@@ -162,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "579f8f8b_ad235211",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15870172_592fcb86",
+      "range": {
+        "startLine": 135,
+        "startChar": 4,
+        "endLine": 140,
+        "endChar": 36
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aed4a0d6_56ebb454",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "I don\u0027t understand the \"Native\" naming - what is it for?",
+      "range": {
+        "startLine": 143,
+        "startChar": 36,
+        "endLine": 143,
+        "endChar": 42
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e96f1b4f_68f007c0",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "`Native` is calling ObjectBase::Destroy directly, `Api` is calling the Destroy function that is exposed on the actual webgpu api, i.e. only on buffers and textures.",
+      "parentUuid": "aed4a0d6_56ebb454",
       "range": {
         "startLine": 143,
         "startChar": 36,
@@ -208,6 +400,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfede377_e0f3e0a0",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "See comment above.",
+      "parentUuid": "20f68b3a_26de58ec",
+      "range": {
+        "startLine": 270,
+        "startChar": 39,
+        "endLine": 270,
+        "endChar": 42
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "209f68bd_1e55847d",
@@ -221,6 +437,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "IMO it\u0027s kinda weird to make a mock for the sake of getting a pre-created descriptor that is saved. The descriptor is pretty small - why not just inline it here?",
+      "range": {
+        "startLine": 636,
+        "startChar": 50,
+        "endLine": 636,
+        "endChar": 81
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20a3bfee_d84b29c7",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "209f68bd_1e55847d",
       "range": {
         "startLine": 636,
         "startChar": 50,
@@ -254,6 +494,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ccf3c4a_59cc28df",
+        "filename": "src/dawn/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Yea, I need the native one also for `BindingLayoutEntryInitializationHelper`.",
+      "parentUuid": "c06fb3ab_4fdcdbdd",
+      "range": {
+        "startLine": 985,
+        "startChar": 4,
+        "endLine": 985,
+        "endChar": 11
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "077c9376_7fa65bd6",
@@ -267,6 +531,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "should be in the constructor",
+      "range": {
+        "startLine": 28,
+        "startChar": 3,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ba693c_f7910b10",
+        "filename": "src/dawn/tests/unittests/native/mocks/DawnMockTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "077c9376_7fa65bd6",
       "range": {
         "startLine": 28,
         "startChar": 3,
@@ -300,6 +588,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb31c15f_2af7cdf6",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "So with pipelines the mocks are a bit trickier because (1) ideally, user can Create/Construct one outside of calling `device-\u003eCreatePipeline` so that we can explicitly set the expectations on the `Initialize` call (imagine we wanted the `Initialize` call to fail), (2) the base constructors (i.e. `RenderPipelineBase` and `ComputePipelineBase`) call `ComputeContentHash` which requires a layout to be specified (otherwise we can crash because of bad pointers), (3) it would make most sense for users to just be able to create the mock pipelines exactly as they would (with descriptors that may leave `layout \u003d\u003d nullptr` and infer it internally).\n\nSo addressing the question in the comment now with an example of why I did it like that... If we don\u0027t do the validation step in this factory, and we passed a descriptor that does not explicitly specify a pipeline layout, we won\u0027t create the layout (it\u0027s `nullptr`), and as a result the base constructor will segfault in the `ComputeContentHash` call.",
+      "parentUuid": "ad7a2e5a_d2a551a4",
+      "range": {
+        "startLine": 95,
+        "startChar": 23,
+        "endLine": 95,
+        "endChar": 50
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aef59dc_3754c7a5",
@@ -323,6 +635,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41286fbd_73d0dce1",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Deferred.",
+      "parentUuid": "2aef59dc_3754c7a5",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2de0508c_9892920e",
@@ -336,6 +672,30 @@
       "writtenOn": "2023-02-15T16:43:44Z",
       "side": 1,
       "message": "is this ever passed?",
+      "range": {
+        "startLine": 37,
+        "startChar": 24,
+        "endLine": 37,
+        "endChar": 61
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da33ed17_94b2768d",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:15Z",
+      "side": 1,
+      "message": "Ah, no good catch. I originally thought I would need to pass it in if I wanted to set expectations on it, but the `GetQueueMock` function fixed that.",
+      "parentUuid": "2de0508c_9892920e",
       "range": {
         "startLine": 37,
         "startChar": 24,
