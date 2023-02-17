@@ -475,7 +475,8 @@ bool GeneratorImpl::EmitVariable(std::ostream& out, const ast::Variable* v) {
             out << "var";
             auto address_space = var->declared_address_space;
             auto ac = var->declared_access;
-            if (address_space != type::AddressSpace::kNone || ac != builtin::Access::kUndefined) {
+            if (address_space != builtin::AddressSpace::kNone ||
+                ac != builtin::Access::kUndefined) {
                 out << "<" << address_space;
                 if (ac != builtin::Access::kUndefined) {
                     out << ", ";
