@@ -20,7 +20,7 @@
 namespace tint::reader::wgsl {
 namespace {
 
-using SeverityPair = std::pair<std::string, ast::DiagnosticSeverity>;
+using SeverityPair = std::pair<std::string, type::DiagnosticSeverity>;
 class DiagnosticControlParserTest : public ParserImplTestWithParam<SeverityPair> {};
 
 TEST_P(DiagnosticControlParserTest, DiagnosticControl_Valid) {
@@ -37,17 +37,18 @@ TEST_P(DiagnosticControlParserTest, DiagnosticControl_Valid) {
 }
 INSTANTIATE_TEST_SUITE_P(DiagnosticControlParserTest,
                          DiagnosticControlParserTest,
-                         testing::Values(SeverityPair{"error", ast::DiagnosticSeverity::kError},
-                                         SeverityPair{"warning", ast::DiagnosticSeverity::kWarning},
-                                         SeverityPair{"info", ast::DiagnosticSeverity::kInfo},
-                                         SeverityPair{"off", ast::DiagnosticSeverity::kOff}));
+                         testing::Values(SeverityPair{"error", type::DiagnosticSeverity::kError},
+                                         SeverityPair{"warning",
+                                                      type::DiagnosticSeverity::kWarning},
+                                         SeverityPair{"info", type::DiagnosticSeverity::kInfo},
+                                         SeverityPair{"off", type::DiagnosticSeverity::kOff}));
 
 TEST_F(ParserImplTest, DiagnosticControl_Valid_TrailingComma) {
     auto p = parser("(error, foo,)");
     auto e = p->expect_diagnostic_control();
     EXPECT_FALSE(e.errored);
     EXPECT_FALSE(p->has_error()) << p->error();
-    EXPECT_EQ(e->severity, ast::DiagnosticSeverity::kError);
+    EXPECT_EQ(e->severity, type::DiagnosticSeverity::kError);
 
     auto* r = e->rule_name;
     ASSERT_NE(r, nullptr);

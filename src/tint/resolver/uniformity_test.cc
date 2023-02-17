@@ -7871,16 +7871,16 @@ note: reading from module-scope private variable 'v0' may result in a non-unifor
 
 class UniformityAnalysisDiagnosticFilterTest
     : public UniformityAnalysisTestBase,
-      public ::testing::TestWithParam<ast::DiagnosticSeverity> {
+      public ::testing::TestWithParam<type::DiagnosticSeverity> {
   protected:
     // TODO(jrprice): Remove this in favour of utils::ToString() when we change "note" to "info".
-    const char* ToStr(ast::DiagnosticSeverity severity) {
+    const char* ToStr(type::DiagnosticSeverity severity) {
         switch (severity) {
-            case ast::DiagnosticSeverity::kError:
+            case type::DiagnosticSeverity::kError:
                 return "error";
-            case ast::DiagnosticSeverity::kWarning:
+            case type::DiagnosticSeverity::kWarning:
                 return "warning";
-            case ast::DiagnosticSeverity::kInfo:
+            case type::DiagnosticSeverity::kInfo:
                 return "note";
             default:
                 return "<undefined>";
@@ -7904,9 +7904,9 @@ fn foo() {
 }
 )";
 
-    RunTest(ss.str(), param != ast::DiagnosticSeverity::kError);
+    RunTest(ss.str(), param != type::DiagnosticSeverity::kError);
 
-    if (param == ast::DiagnosticSeverity::kOff) {
+    if (param == type::DiagnosticSeverity::kOff) {
         EXPECT_TRUE(error_.empty());
     } else {
         std::ostringstream err;
@@ -7932,8 +7932,8 @@ TEST_P(UniformityAnalysisDiagnosticFilterTest, AttributeOnFunction) {
 }
 )";
 
-    RunTest(ss.str(), param != ast::DiagnosticSeverity::kError);
-    if (param == ast::DiagnosticSeverity::kOff) {
+    RunTest(ss.str(), param != type::DiagnosticSeverity::kError);
+    if (param == type::DiagnosticSeverity::kOff) {
         EXPECT_TRUE(error_.empty());
     } else {
         std::ostringstream err;
@@ -7958,8 +7958,8 @@ fn foo() {
 }
 )";
 
-    RunTest(ss.str(), param != ast::DiagnosticSeverity::kError);
-    if (param == ast::DiagnosticSeverity::kOff) {
+    RunTest(ss.str(), param != type::DiagnosticSeverity::kError);
+    if (param == type::DiagnosticSeverity::kOff) {
         EXPECT_TRUE(error_.empty());
     } else {
         std::ostringstream err;
@@ -7970,10 +7970,10 @@ fn foo() {
 
 INSTANTIATE_TEST_SUITE_P(UniformityAnalysisTest,
                          UniformityAnalysisDiagnosticFilterTest,
-                         ::testing::Values(ast::DiagnosticSeverity::kError,
-                                           ast::DiagnosticSeverity::kWarning,
-                                           ast::DiagnosticSeverity::kInfo,
-                                           ast::DiagnosticSeverity::kOff));
+                         ::testing::Values(type::DiagnosticSeverity::kError,
+                                           type::DiagnosticSeverity::kWarning,
+                                           type::DiagnosticSeverity::kInfo,
+                                           type::DiagnosticSeverity::kOff));
 
 TEST_F(UniformityAnalysisDiagnosticFilterTest, AttributeOnFunction_CalledByAnotherFunction) {
     std::string src = R"(

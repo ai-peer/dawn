@@ -1,6 +1,6 @@
 {{- /*
 --------------------------------------------------------------------------------
-Template file for use with tools/src/cmd/gen to generate diagnostic_control_bench.cc
+Template file for use with tools/src/cmd/gen to generate diagnostic_control_test.cc
 
 See:
 * tools/src/cmd/gen for structures used by this template
@@ -10,18 +10,18 @@ See:
 
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 
-#include "src/tint/ast/diagnostic_control.h"
+#include <string>
 
-#include <array>
+#include "gtest/gtest-spi.h"
+#include "src/tint/type/diagnostic_severity.h"
+#include "src/tint/type/test_helper.h"
 
-#include "benchmark/benchmark.h"
-
-namespace tint::ast {
+namespace tint::type {
 namespace {
 
-{{ Eval "BenchmarkParseEnum" (Sem.Enum "diagnostic_severity")}}
+using DiagnosticSeverityTest = TestHelper;
 
-{{ Eval "BenchmarkParseEnum" (Sem.Enum "diagnostic_rule")}}
+{{ Eval "TestParsePrintEnum" (Sem.Enum "diagnostic_severity")}}
 
 }  // namespace
-}  // namespace tint::ast
+}  // namespace tint::type

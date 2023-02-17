@@ -3730,9 +3730,9 @@ bool ParserImpl::expect_attributes_consumed(utils::VectorRef<const ast::Attribut
 //   | 'warning'
 //   | 'info'
 //   | 'off'
-Expect<ast::DiagnosticSeverity> ParserImpl::expect_severity_control_name() {
-    return expect_enum("severity control", ast::ParseDiagnosticSeverity,
-                       ast::kDiagnosticSeverityStrings);
+Expect<type::DiagnosticSeverity> ParserImpl::expect_severity_control_name() {
+    return expect_enum("severity control", type::ParseDiagnosticSeverity,
+                       type::kDiagnosticSeverityStrings);
 }
 
 // diagnostic_control

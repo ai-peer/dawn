@@ -3634,7 +3634,7 @@ class ProgramBuilder {
     /// @returns the diagnostic attribute pointer
     template <typename NAME>
     const ast::DiagnosticAttribute* DiagnosticAttribute(const Source& source,
-                                                        ast::DiagnosticSeverity severity,
+                                                        type::DiagnosticSeverity severity,
                                                         NAME&& rule_name) {
         static_assert(!traits::IsType<traits::PtrElTy<NAME>, ast::TemplatedIdentifier>,
                       "it is invalid for a diagnostic rule name to be templated");
@@ -3647,7 +3647,7 @@ class ProgramBuilder {
     /// @param rule_name the diagnostic rule name
     /// @returns the diagnostic attribute pointer
     template <typename NAME>
-    const ast::DiagnosticAttribute* DiagnosticAttribute(ast::DiagnosticSeverity severity,
+    const ast::DiagnosticAttribute* DiagnosticAttribute(type::DiagnosticSeverity severity,
                                                         NAME&& rule_name) {
         return create<ast::DiagnosticAttribute>(
             source_, ast::DiagnosticControl(severity, Ident(std::forward<NAME>(rule_name))));
@@ -3660,7 +3660,7 @@ class ProgramBuilder {
     /// @returns the diagnostic directive pointer
     template <typename NAME>
     const ast::DiagnosticDirective* DiagnosticDirective(const Source& source,
-                                                        ast::DiagnosticSeverity severity,
+                                                        type::DiagnosticSeverity severity,
                                                         NAME&& rule_name) {
         auto* directive = create<ast::DiagnosticDirective>(
             source, ast::DiagnosticControl(severity, Ident(std::forward<NAME>(rule_name))));
@@ -3673,7 +3673,7 @@ class ProgramBuilder {
     /// @param rule_name the diagnostic rule name
     /// @returns the diagnostic directive pointer
     template <typename NAME>
-    const ast::DiagnosticDirective* DiagnosticDirective(ast::DiagnosticSeverity severity,
+    const ast::DiagnosticDirective* DiagnosticDirective(type::DiagnosticSeverity severity,
                                                         NAME&& rule_name) {
         auto* directive = create<ast::DiagnosticDirective>(
             source_, ast::DiagnosticControl(severity, Ident(std::forward<NAME>(rule_name))));

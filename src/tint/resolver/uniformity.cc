@@ -71,7 +71,7 @@ struct CallSiteTag {
         CallSiteRequiredToBeUniform,
         CallSiteNoRestriction,
     } tag;
-    ast::DiagnosticSeverity severity = ast::DiagnosticSeverity::kUndefined;
+    type::DiagnosticSeverity severity = type::DiagnosticSeverity::kUndefined;
 };
 
 /// FunctionTag describes a functions effects on uniformity.
@@ -87,7 +87,7 @@ struct ParameterTag {
         ParameterContentsRequiredToBeUniform,
         ParameterNoRestriction,
     } tag;
-    ast::DiagnosticSeverity severity = ast::DiagnosticSeverity::kUndefined;
+    type::DiagnosticSeverity severity = type::DiagnosticSeverity::kUndefined;
 };
 
 /// Node represents a node in the graph of control flow and value nodes within the analysis of a
@@ -257,13 +257,13 @@ struct FunctionInfo {
     };
 
     /// @returns the RequiredToBeUniform node that corresponds to `severity`
-    Node* RequiredToBeUniform(ast::DiagnosticSeverity severity) {
+    Node* RequiredToBeUniform(type::DiagnosticSeverity severity) {
         switch (severity) {
-            case ast::DiagnosticSeverity::kError:
+            case type::DiagnosticSeverity::kError:
                 return required_to_be_uniform_error;
-            case ast::DiagnosticSeverity::kWarning:
+            case type::DiagnosticSeverity::kWarning:
                 return required_to_be_uniform_warning;
-            case ast::DiagnosticSeverity::kInfo:
+            case type::DiagnosticSeverity::kInfo:
                 return required_to_be_uniform_info;
             default:
                 TINT_ASSERT(Resolver, false && "unhandled severity");
@@ -455,7 +455,7 @@ class UniformityGraph {
         // Look at which nodes are reachable from "RequiredToBeUniform".
         {
             utils::UniqueVector<Node*, 4> reachable;
-            auto traverse = [&](ast::DiagnosticSeverity severity) {
+            auto traverse = [&](type::DiagnosticSeverity severity) {
                 Traverse(current_function_->RequiredToBeUniform(severity), &reachable);
                 if (reachable.Contains(current_function_->may_be_non_uniform)) {
                     MakeError(*current_function_, current_function_->may_be_non_uniform, severity);
@@ -478,11 +478,11 @@ class UniformityGraph {
                 }
                 return true;
             };
-            if (!traverse(ast::DiagnosticSeverity::kError)) {
+            if (!traverse(type::DiagnosticSeverity::kError)) {
                 return false;
             } else {
-                if (traverse(ast::DiagnosticSeverity::kWarning)) {
-                    traverse(ast::DiagnosticSeverity::kInfo);
+                if (traverse(type::DiagnosticSeverity::kWarning)) {
+                    traverse(type::DiagnosticSeverity::kInfo);
                 }
             }
         }
@@ -1497,8 +1497,8 @@ class UniformityGraph {
         result->type = Node::kFunctionCallReturnValue;
         Node* cf_after = CreateNode({"CF_after_", name}, call);
 
-        auto default_severity = kUniformityFailuresAsError ? ast::DiagnosticSeverity::kError
-                                                           : ast::DiagnosticSeverity::kWarning;
+        auto default_severity = kUniformityFailuresAsError ? type::DiagnosticSeverity::kError
+                                                           : type::DiagnosticSeverity::kWarning;
 
         // Get tags for the callee.
         CallSiteTag callsite_tag = {CallSiteTag::CallSiteNoRestriction};
@@ -1520,8 +1520,8 @@ class UniformityGraph {
                            builtin->Type() == sem::BuiltinType::kTextureSampleCompare) {
                     // Get the severity of derivative uniformity violations in this context.
                     auto severity =
-                        sem_.DiagnosticSeverity(call, ast::DiagnosticRule::kDerivativeUniformity);
-                    if (severity != ast::DiagnosticSeverity::kOff) {
+                        sem_.DiagnosticSeverity(call, type::DiagnosticRule::kDerivativeUniformity);
+                    if (severity != type::DiagnosticSeverity::kOff) {
                         callsite_tag = {CallSiteTag::CallSiteRequiredToBeUniform, severity};
                     }
                     function_tag = ReturnValueMayBeNonUniform;
@@ -1686,8 +1686,9 @@ class UniformityGraph {
 
     /// Recursively descend through the function called by `call` and the functions that it calls in
     /// order to find a call to a builtin function that requires uniformity with the given severity.
-    const ast::CallExpression* FindBuiltinThatRequiresUniformity(const ast::CallExpression* call,
-                                                                 ast::DiagnosticSeverity severity) {
+    const ast::CallExpression* FindBuiltinThatRequiresUniformity(
+        const ast::CallExpression* call,
+        type::DiagnosticSeverity severity) {
         auto* target = SemCall(call)->Target();
         if (target->Is<sem::Builtin>()) {
             // This is a call to a builtin, so we must be done.
@@ -1848,7 +1849,7 @@ class UniformityGraph {
     /// @param function the function that the diagnostic is being produced for
     /// @param source_node the node that has caused a uniformity issue in `function`
     /// @param severity the severity of the diagnostic
-    void MakeError(FunctionInfo& function, Node* source_node, ast::DiagnosticSeverity severity) {
+    void MakeError(FunctionInfo& function, Node* source_node, type::DiagnosticSeverity severity) {
         // Helper to produce a diagnostic message, as a note or with the global failure severity.
         auto report = [&](Source source, std::string msg, bool note) {
             diag::Diagnostic error{};

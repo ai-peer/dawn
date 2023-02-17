@@ -28,6 +28,8 @@
 #include <unordered_map>
 
 #include "src/tint/diagnostic/diagnostic.h"
+#include "src/tint/type/diagnostic_rule.h"
+#include "src/tint/type/diagnostic_severity.h"
 
 // Forward declarations
 namespace tint::ast {
@@ -36,59 +38,11 @@ class Identifier;
 
 namespace tint::ast {
 
-/// The diagnostic severity control.
-enum class DiagnosticSeverity {
-    kUndefined,
-    kError,
-    kInfo,
-    kOff,
-    kWarning,
-};
-
-/// @param out the std::ostream to write to
-/// @param value the DiagnosticSeverity
-/// @returns `out` so calls can be chained
-std::ostream& operator<<(std::ostream& out, DiagnosticSeverity value);
-
-/// ParseDiagnosticSeverity parses a DiagnosticSeverity from a string.
-/// @param str the string to parse
-/// @returns the parsed enum, or DiagnosticSeverity::kUndefined if the string could not be parsed.
-DiagnosticSeverity ParseDiagnosticSeverity(std::string_view str);
-
-constexpr const char* kDiagnosticSeverityStrings[] = {
-    "error",
-    "info",
-    "off",
-    "warning",
-};
-
-/// The diagnostic rule.
-enum class DiagnosticRule {
-    kUndefined,
-    kChromiumUnreachableCode,
-    kDerivativeUniformity,
-};
-
-/// @param out the std::ostream to write to
-/// @param value the DiagnosticRule
-/// @returns `out` so calls can be chained
-std::ostream& operator<<(std::ostream& out, DiagnosticRule value);
-
-/// ParseDiagnosticRule parses a DiagnosticRule from a string.
-/// @param str the string to parse
-/// @returns the parsed enum, or DiagnosticRule::kUndefined if the string could not be parsed.
-DiagnosticRule ParseDiagnosticRule(std::string_view str);
-
-constexpr const char* kDiagnosticRuleStrings[] = {
-    "chromium_unreachable_code",
-    "derivative_uniformity",
-};
-
 /// Convert a DiagnosticSeverity to the corresponding diag::Severity.
-diag::Severity ToSeverity(DiagnosticSeverity sc);
+diag::Severity ToSeverity(type::DiagnosticSeverity sc);
 
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
-using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;
+using DiagnosticRuleSeverities = std::unordered_map<type::DiagnosticRule, type::DiagnosticSeverity>;
 
 /// A diagnostic control used for diagnostic directives and attributes.
 struct DiagnosticControl {
@@ -99,10 +53,10 @@ struct DiagnosticControl {
     /// Constructor
     /// @param sev the diagnostic severity
     /// @param rule the diagnostic rule name
-    DiagnosticControl(DiagnosticSeverity sev, const Identifier* rule);
+    DiagnosticControl(type::DiagnosticSeverity sev, const Identifier* rule);
 
     /// The diagnostic severity control.
-    DiagnosticSeverity severity;
+    type::DiagnosticSeverity severity;
 
     /// The diagnostic rule name.
     const Identifier* rule_name;

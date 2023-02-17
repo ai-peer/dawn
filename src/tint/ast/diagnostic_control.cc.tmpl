@@ -19,7 +19,7 @@ See:
 
 namespace tint::ast {
 
-DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* rule)
+DiagnosticControl::DiagnosticControl(type::DiagnosticSeverity sev, const Identifier* rule)
         : severity(sev), rule_name(rule) {
     TINT_ASSERT(AST, rule != nullptr);
     if (rule) {
@@ -28,25 +28,17 @@ DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* r
     }
 }
 
-diag::Severity ToSeverity(DiagnosticSeverity sc) {
+diag::Severity ToSeverity(type::DiagnosticSeverity sc) {
     switch (sc) {
-        case DiagnosticSeverity::kError:
+        case type::DiagnosticSeverity::kError:
             return diag::Severity::Error;
-        case DiagnosticSeverity::kWarning:
+        case type::DiagnosticSeverity::kWarning:
             return diag::Severity::Warning;
-        case DiagnosticSeverity::kInfo:
+        case type::DiagnosticSeverity::kInfo:
             return diag::Severity::Note;
         default:
             return diag::Severity::InternalCompilerError;
     }
 }
-
-{{ Eval "ParseEnum" (Sem.Enum "diagnostic_severity")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "diagnostic_severity")}}
-
-{{ Eval "ParseEnum" (Sem.Enum "diagnostic_rule")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "diagnostic_rule")}}
 
 }  // namespace tint::ast
