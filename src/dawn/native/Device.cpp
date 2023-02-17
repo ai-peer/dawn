@@ -1196,15 +1196,22 @@ BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc,
     // The validation errors on BufferDescriptor should be prior to any OOM errors when
     // MapppedAtCreation == false.
     MaybeError maybeError = ValidateBufferDescriptor(this, &fakeDescriptor);
+
+    // Set the size of the error buffer to 0 as this function is called only when an OOM happens at
+    // the client side.
+    fakeDescriptor.size = 0;
+
     if (maybeError.IsError()) {
-        ConsumedError(maybeError.AcquireError(), errorMask, "calling %s.CreateBuffer(%s).", this,
-                      desc);
+        CONSUME_ERROR_WITH_CONTEXT_AND_RETURN(this, maybeError.AcquireError(), errorMask,
+                                              BufferBase::MakeError(this, &fakeDescriptor),
+                                              "calling %s.CreateBuffer(%s).", this, desc);
     } else {
         const DawnBufferDescriptorErrorInfoFromWireClient* clientErrorInfo = nullptr;
         FindInChain(desc->nextInChain, &clientErrorInfo);
         if (clientErrorInfo != nullptr && clientErrorInfo->outOfMemory) {
-            ConsumedError(DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate memory for buffer mapping"),
-                          errorMask);
+            CONSUME_ERROR_AND_RETURN(
+                this, DAWN_OUT_OF_MEMORY_ERROR("Failed to allocate memory for buffer mapping"),
+                errorMask, BufferBase::MakeError(this, &fakeDescriptor));
         }
     }
 
@@ -1394,7 +1401,7 @@ void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
 }
 
 void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {
-    ConsumedError(ValidateTextureDescriptor(this, desc));
+    CONSUME_IF_ERROR(this, ValidateTextureDescriptor(this, desc), kDefaultAllowedInternalError);
 }
 
 QueueBase* DeviceBase::GetQueue() const {
@@ -1953,5 +1960,15 @@ IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
 IgnoreLazyClearCountScope::~IgnoreLazyClearCountScope() {
     mDevice->mLazyClearCountForTesting = mLazyClearCountForTesting;
 }
+
+namespace detail {
+
+void ConsumeError(DeviceBase* device,
+                  std::unique_ptr<ErrorData> error,
+                  InternalErrorTypeMask allowedErrors) {
+    device->ConsumeError(std::move(error), allowedErrors);
+}
+
+}  // namespace detail
 
 }  // namespace dawn::native

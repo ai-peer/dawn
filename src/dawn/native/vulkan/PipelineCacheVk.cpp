@@ -83,9 +83,11 @@ void PipelineCache::Initialize() {
 
     Device* device = ToBackend(GetDevice());
     mHandle = VK_NULL_HANDLE;
-    GetDevice()->ConsumedError(CheckVkSuccess(
-        device->fn.CreatePipelineCache(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
-        "CreatePipelineCache"));
+    CONSUME_IF_ERROR(GetDevice(),
+                     CheckVkSuccess(device->fn.CreatePipelineCache(device->GetVkDevice(),
+                                                                   &createInfo, nullptr, &*mHandle),
+                                    "CreatePipelineCache"),
+                     kNoAllowedInternalError);
 }
 
 }  // namespace dawn::native::vulkan

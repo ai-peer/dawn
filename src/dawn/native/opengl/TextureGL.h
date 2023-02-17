@@ -26,7 +26,7 @@ struct GLFormat;
 
 class Texture final : public TextureBase {
   public:
-    Texture(Device* device, const TextureDescriptor* descriptor);
+    static ResultOrError<Ref<Texture>> Create(Device* device, const TextureDescriptor* descriptor);
     Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle, TextureState state);
 
     GLuint GetHandle() const;
@@ -38,6 +38,7 @@ class Texture final : public TextureBase {
     void EnsureSubresourceContentInitialized(const SubresourceRange& range);
 
   private:
+    Texture(Device* device, const TextureDescriptor* descriptor);
     ~Texture() override;
 
     void DestroyImpl() override;
