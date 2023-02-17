@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25d90f3d_e28cb819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c68757c_e21039ae",
+      "revId": "68000f5969e9809b630504580db7496d043c8022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da073de9_e7be9d4d",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-02-15T15:14:48Z",
       "side": 1,
       "message": "dedent?, or keep the original indentation to match the bottom of the file,\nand instead put \n```\nnamespace {{metadata.namespace}} {\n    {% for type in by_category[\"structure\"] %}\n        stuff\n    {% endfor %}\n} \n```\n\nabove this",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 46
+      },
+      "revId": "68000f5969e9809b630504580db7496d043c8022",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10fde98_b586ea82",
+        "filename": "generator/templates/dawn/native/dawn_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T00:44:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da073de9_e7be9d4d",
       "range": {
         "startLine": 33,
         "startChar": 4,
