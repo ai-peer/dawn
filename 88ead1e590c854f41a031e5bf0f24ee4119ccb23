@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd5de00d_bab075b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-17T23:56:46Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "88ead1e590c854f41a031e5bf0f24ee4119ccb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "019cd8b1_abb4c696",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-17T23:56:46Z",
+      "side": 1,
+      "message": "nit: `_template_args_start expression (COMMA expression)? COMMA? _template_args_end` ?",
+      "revId": "88ead1e590c854f41a031e5bf0f24ee4119ccb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8ed65b8_c377ee71",
+        "filename": "src/tint/resolver/dependency_graph.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-17T23:56:46Z",
+      "side": 1,
+      "message": "Does `TraverseValueExpression` check for `nullptr`? Previously we had this in a not null check?",
+      "revId": "88ead1e590c854f41a031e5bf0f24ee4119ccb23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
