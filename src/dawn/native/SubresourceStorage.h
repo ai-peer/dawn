@@ -18,11 +18,13 @@
 #include <array>
 #include <limits>
 #include <memory>
+#include <type_traits>
 #include <vector>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/TypeTraits.h"
 #include "dawn/native/EnumMaskIterator.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/Subresource.h"
 
 namespace dawn::native {
@@ -120,7 +122,7 @@ class SubresourceStorage {
     // same for multiple subresources.
     const T& Get(Aspect aspect, uint32_t arrayLayer, uint32_t mipLevel) const;
 
-    // Given an iterateFunc that's a function or function-like objet that can be called with
+    // Given an iterateFunc that's a function or function-like object that can be called with
     // arguments of type (const SubresourceRange& range, const T& data) and returns void,
     // calls it with aggregate ranges if possible, such that each subresource is part of
     // exactly one of the ranges iterateFunc is called with (and obviously data is the value
@@ -129,8 +131,28 @@ class SubresourceStorage {
     //   subresources.Iterate([&](const SubresourceRange& range, const T& data) {
     //       // Do something with range and data.
     //   });
-    template <typename F>
+    template <typename F,
+              typename SFINAE = std::enable_if_t<
+                  std::is_same_v<std::invoke_result_t<F, const SubresourceRange&, const T&>, void>>>
     void Iterate(F&& iterateFunc) const;
+
+    // Given an iterateFunc that's a function or function-like object that can be called with
+    // arguments of type (const SubresourceRange& range, const T& data) and returns MaybeError,
+    // calls it with aggregate ranges if possible, such that each subresource is part of
+    // exactly one of the ranges iterateFunc is called with (and obviously data is the value
+    // stored for that subresource). Iterate returns on the first actual error. For example:
+    //
+    //   DAWN_TRY(subresources.Iterate(
+    //       [&](const SubresourceRange& range, const T& data) -> MaybeError {
+    //           // Do something with range and data.
+    //           // Return a MaybeError.
+    //       })
+    //   );
+    template <
+        typename F,
+        typename SFINAE = std::enable_if_t<
+            std::is_same_v<std::invoke_result_t<F, const SubresourceRange&, const T&>, MaybeError>>>
+    MaybeError Iterate(F&& iterateFunc) const;
 
     // Given an updateFunc that's a function or function-like objet that can be called with
     // arguments of type (const SubresourceRange& range, T* data) and returns void,
@@ -351,7 +373,7 @@ void SubresourceStorage<T>::Merge(const SubresourceStorage<U>& other, F&& mergeF
 }
 
 template <typename T>
-template <typename F>
+template <typename F, typename SFINAE>
 void SubresourceStorage<T>::Iterate(F&& iterateFunc) const {
     for (Aspect aspect : IterateEnumMask(mAspects)) {
         uint32_t aspectIndex = GetAspectIndex(aspect);
@@ -379,6 +401,38 @@ void SubresourceStorage<T>::Iterate(F&& iterateFunc) const {
             }
         }
     }
+}
+
+template <typename T>
+template <typename F, typename SFINAE>
+MaybeError SubresourceStorage<T>::Iterate(F&& iterateFunc) const {
+    for (Aspect aspect : IterateEnumMask(mAspects)) {
+        uint32_t aspectIndex = GetAspectIndex(aspect);
+
+        // Fastest path, call iterateFunc on the whole aspect at once.
+        if (mAspectCompressed[aspectIndex]) {
+            SubresourceRange range =
+                SubresourceRange::MakeFull(aspect, mArrayLayerCount, mMipLevelCount);
+            DAWN_TRY(iterateFunc(range, DataInline(aspectIndex)));
+            continue;
+        }
+
+        for (uint32_t layer = 0; layer < mArrayLayerCount; layer++) {
+            // Fast path, call iterateFunc on the whole array layer at once.
+            if (LayerCompressed(aspectIndex, layer)) {
+                SubresourceRange range = GetFullLayerRange(aspect, layer);
+                DAWN_TRY(iterateFunc(range, Data(aspectIndex, layer)));
+                continue;
+            }
+
+            // Slow path, call iterateFunc for each mip level.
+            for (uint32_t level = 0; level < mMipLevelCount; level++) {
+                SubresourceRange range = SubresourceRange::MakeSingle(aspect, layer, level);
+                DAWN_TRY(iterateFunc(range, Data(aspectIndex, layer, level)));
+            }
+        }
+    }
+    return {};
 }
 
 template <typename T>

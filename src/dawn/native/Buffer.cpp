@@ -503,17 +503,27 @@ MaybeError BufferBase::CopyFromStagingBuffer() {
 }
 
 void BufferBase::APIUnmap() {
-    if (GetDevice()->ConsumedError(ValidateUnmap(), "calling %s.Unmap().", this)) {
-        return;
-    }
-    Unmap();
+    CONSUME_IF_ERROR_WITH_CONTEXT(GetDevice(), ValidateUnmap(), kDefaultAllowedErrors,
+                                  "calling %s.Unmap().", this);
+    CONSUME_IF_ERROR_WITH_CONTEXT(GetDevice(), Unmap(), kDefaultAllowedErrors,
+                                  "calling %s.Unmap().", this);
 }
 
-void BufferBase::Unmap() {
+MaybeError BufferBase::Unmap() {
     if (mState == BufferState::Destroyed) {
-        return;
+        return {};
     }
+
+    // Read the current state of the buffer before unmapping internally. The state will be used
+    // afterwards to determine whether copying from an internal staging buffer is necessary. Note
+    // that this step is only necessary on an actual Unmap, whereas unmapping in Destroy does not
+    // need to do the actual copy.
+    BufferState state = mState;
     UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback).Call();
+    if (state == BufferState::MappedAtCreation && mStagingBuffer != nullptr) {
+        DAWN_TRY(CopyFromStagingBuffer());
+    }
+    return {};
 }
 
 BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
@@ -526,9 +536,10 @@ BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
     } else if (mState == BufferState::Mapped) {
         UnmapImpl();
     } else if (mState == BufferState::MappedAtCreation) {
-        if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
-        } else if (mSize != 0) {
+        // Mapped at creation unmapping with a staging buffer isn't handled here because this helper
+        // function may be called in destruction where we no longer care able copying the staging
+        // buffer to the actual buffer.
+        if (mStagingBuffer == nullptr && mSize != 0) {
             UnmapImpl();
         }
     }
