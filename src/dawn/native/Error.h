@@ -19,7 +19,6 @@
 #include <string>
 #include <utility>
 
-#include "absl/strings/str_format.h"
 #include "dawn/common/Result.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Toggles.h"

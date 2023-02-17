@@ -1349,8 +1349,9 @@ void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* recor
     if (!IsSubresourceContentInitialized(range)) {
         // If subresource has not been initialized, clear it to black as it could contain dirty
         // bits from recycled memory
-        GetDevice()->ConsumedError(
-            ClearTexture(recordingContext, range, TextureBase::ClearValue::Zero));
+        CONSUME_IF_ERROR(GetDevice(),
+                         ClearTexture(recordingContext, range, TextureBase::ClearValue::Zero),
+                         kNoAllowedInternalError);
     }
 }
 
