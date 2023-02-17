@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,30 +31,31 @@ set(TINT_TEST_SRCS)
 # Add a generated file set into the build.
 #
 # Params:
-#  TARGET - the target name to add (without extension)
-#  BENCH  - set if the target has a benchmark file
-#  TEST   - set if the target has a test file
+# TARGET - the target name to add (without extension)
+# BENCH  - set if the target has a benchmark file
+# TEST   - set if the target has a test file
 #
 function(tint_generated TARGET)
   cmake_parse_arguments(PARSE_ARGV 0 TINT_GEN "BENCH;TEST" "" "")
 
-   list(APPEND TINT_LIB_SRCS
-      ${TARGET}.cc
-      ${TARGET}.h
-    )
-    set(TINT_LIB_SRCS ${TINT_LIB_SRCS} PARENT_SCOPE)
+  list(APPEND TINT_LIB_SRCS
+    ${TARGET}.cc
+    ${TARGET}.h
+  )
+  set(TINT_LIB_SRCS ${TINT_LIB_SRCS} PARENT_SCOPE)
 
-    if(${TINT_GEN_BENCH})
-        list(APPEND TINT_BENCHMARK_SRCS ${TARGET}_bench.cc)
-        set(TINT_BENCHMARK_SRCS ${TINT_BENCHMARK_SRCS} PARENT_SCOPE)
-    endif()
-    if(${TINT_GEN_TEST})
-        list(APPEND TINT_TEST_SRCS ${TARGET}_test.cc)
-        set(TINT_TEST_SRCS ${TINT_TEST_SRCS} PARENT_SCOPE)
-    endif()
+  if(${TINT_GEN_BENCH})
+    list(APPEND TINT_BENCHMARK_SRCS ${TARGET}_bench.cc)
+    set(TINT_BENCHMARK_SRCS ${TINT_BENCHMARK_SRCS} PARENT_SCOPE)
+  endif()
+
+  if(${TINT_GEN_TEST})
+    list(APPEND TINT_TEST_SRCS ${TARGET}_test.cc)
+    set(TINT_TEST_SRCS ${TINT_TEST_SRCS} PARENT_SCOPE)
+  endif()
 endfunction()
 
-## Tint diagnostic utilities. Used by libtint and tint_utils_io.
+# # Tint diagnostic utilities. Used by libtint and tint_utils_io.
 add_library(tint_diagnostic_utils
   debug.cc
   debug.h
@@ -73,9 +74,9 @@ add_library(tint_diagnostic_utils
 )
 tint_default_compile_options(tint_diagnostic_utils)
 
-if (TINT_ENABLE_BREAK_IN_DEBUGGER)
+if(TINT_ENABLE_BREAK_IN_DEBUGGER)
   set_source_files_properties(utils/debugger.cc
-    PROPERTIES COMPILE_DEFINITIONS "TINT_ENABLE_BREAK_IN_DEBUGGER=1" )
+    PROPERTIES COMPILE_DEFINITIONS "TINT_ENABLE_BREAK_IN_DEBUGGER=1")
 endif()
 
 list(APPEND TINT_LIB_SRCS
@@ -712,7 +713,7 @@ if(MSVC)
   )
 endif()
 
-## Tint IO utilities. Used by tint_val.
+# # Tint IO utilities. Used by tint_val.
 add_library(tint_utils_io
   utils/io/command_${TINT_OS_CC_SUFFIX}.cc
   utils/io/command.h
@@ -722,7 +723,7 @@ add_library(tint_utils_io
 tint_default_compile_options(tint_utils_io)
 target_link_libraries(tint_utils_io tint_diagnostic_utils)
 
-## Tint validation utilities. Used by tests and the tint executable.
+# # Tint validation utilities. Used by tests and the tint executable.
 add_library(tint_val
   val/hlsl.cc
   val/msl.cc
@@ -734,6 +735,7 @@ add_library(tint_val
 # the metal shader compiler executable.
 if(APPLE)
   find_library(LIB_CORE_GRAPHICS CoreGraphics)
+
   if(LIB_CORE_GRAPHICS)
     target_sources(tint_val PRIVATE "val/msl_metal.mm")
     target_compile_definitions(tint_val PUBLIC "-DTINT_ENABLE_MSL_VALIDATION_USING_METAL_API=1")
@@ -745,25 +747,28 @@ endif()
 tint_default_compile_options(tint_val)
 target_link_libraries(tint_val tint_utils_io)
 
-## Tint library
+# # Tint library
 add_library(libtint ${TINT_LIB_SRCS})
 tint_default_compile_options(libtint)
 target_link_libraries(libtint tint_diagnostic_utils)
-if (${TINT_SYMBOL_STORE_DEBUG_NAME})
-    target_compile_definitions(libtint PUBLIC "TINT_SYMBOL_STORE_DEBUG_NAME=1")
+
+if(${TINT_SYMBOL_STORE_DEBUG_NAME})
+  target_compile_definitions(libtint PUBLIC "TINT_SYMBOL_STORE_DEBUG_NAME=1")
 endif()
+
 set_target_properties(libtint PROPERTIES OUTPUT_NAME "tint")
 
-if (${TINT_BUILD_FUZZERS})
+if(${TINT_BUILD_FUZZERS})
   # Tint library with fuzzer instrumentation
   add_library(libtint-fuzz ${TINT_LIB_SRCS})
   tint_default_compile_options(libtint-fuzz)
   target_link_libraries(libtint-fuzz tint_diagnostic_utils)
-  if (${COMPILER_IS_LIKE_GNU})
+
+  if(${COMPILER_IS_LIKE_GNU})
     target_compile_options(libtint-fuzz PRIVATE -fvisibility=hidden)
   endif()
 
-  if (NOT ${TINT_LIB_FUZZING_ENGINE_LINK_OPTIONS} STREQUAL "")
+  if(NOT ${TINT_LIB_FUZZING_ENGINE_LINK_OPTIONS} STREQUAL "")
     # This is set when the fuzzers are being built by OSS-Fuzz. In this case the
     # variable provides the necessary linker flags, and OSS-Fuzz will take care
     # of passing suitable compiler flags.
@@ -778,15 +783,15 @@ endif()
 
 if(${TINT_BUILD_SPV_READER} OR ${TINT_BUILD_SPV_WRITER})
   tint_spvtools_compile_options(libtint)
-  if (${TINT_BUILD_FUZZERS})
+
+  if(${TINT_BUILD_FUZZERS})
     tint_spvtools_compile_options(libtint-fuzz)
   endif()
 endif()
 
-
-################################################################################
+# ###############################################################################
 # Tests
-################################################################################
+# ###############################################################################
 if(TINT_BUILD_TESTS)
   list(APPEND TINT_TEST_SRCS
     ast/alias_test.cc
@@ -1092,7 +1097,6 @@ if(TINT_BUILD_TESTS)
       reader/wgsl/parser_impl_singular_expression_test.cc
       reader/wgsl/parser_impl_statement_test.cc
       reader/wgsl/parser_impl_statements_test.cc
-      reader/wgsl/parser_impl_address_space_test.cc
       reader/wgsl/parser_impl_struct_body_decl_test.cc
       reader/wgsl/parser_impl_struct_decl_test.cc
       reader/wgsl/parser_impl_struct_attribute_decl_test.cc
@@ -1287,7 +1291,7 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  if (${TINT_BUILD_GLSL_WRITER})
+  if(${TINT_BUILD_GLSL_WRITER})
     list(APPEND TINT_TEST_SRCS
       writer/glsl/generator_impl_array_accessor_test.cc
       writer/glsl/generator_impl_assign_test.cc
@@ -1324,7 +1328,7 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  if (${TINT_BUILD_HLSL_WRITER})
+  if(${TINT_BUILD_HLSL_WRITER})
     list(APPEND TINT_TEST_SRCS
       writer/hlsl/generator_impl_array_accessor_test.cc
       writer/hlsl/generator_impl_assign_test.cc
@@ -1360,7 +1364,7 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  if (${TINT_BUILD_IR})
+  if(${TINT_BUILD_IR})
     list(APPEND TINT_TEST_SRCS
       ir/binary_test.cc
       ir/bitcast_test.cc
@@ -1371,7 +1375,7 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  if (${TINT_BUILD_FUZZERS})
+  if(${TINT_BUILD_FUZZERS})
     list(APPEND TINT_TEST_SRCS
       fuzzers/mersenne_twister_engine.cc
       fuzzers/mersenne_twister_engine.h
@@ -1391,7 +1395,7 @@ if(TINT_BUILD_TESTS)
     # overflows when resolving deeply nested expression chains or statements.
     # Production builds neither use MSVC nor debug, so just bump the stack size
     # for this build combination.
-    if (IS_DEBUG_BUILD)
+    if(IS_DEBUG_BUILD)
       target_link_options(tint_unittests PRIVATE "/STACK:4194304") # 4MB, default is 1MB
     endif()
   else()
@@ -1401,9 +1405,9 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  ## Test executable
+  # # Test executable
   target_include_directories(
-      tint_unittests PRIVATE ${gmock_SOURCE_DIR}/include)
+    tint_unittests PRIVATE ${gmock_SOURCE_DIR}/include)
   target_link_libraries(tint_unittests libtint gmock tint_utils_io)
   tint_default_compile_options(tint_unittests)
 
@@ -1414,9 +1418,9 @@ if(TINT_BUILD_TESTS)
   add_test(NAME tint_unittests COMMAND tint_unittests)
 endif(TINT_BUILD_TESTS)
 
-################################################################################
+# ###############################################################################
 # Benchmarks
-################################################################################
+# ###############################################################################
 if(TINT_BUILD_BENCHMARKS)
   if(NOT TINT_BUILD_WGSL_READER)
     message(FATAL_ERROR "TINT_BUILD_BENCHMARKS requires TINT_BUILD_WGSL_READER")
@@ -1428,19 +1432,23 @@ if(TINT_BUILD_BENCHMARKS)
     "reader/wgsl/parser_bench.cc"
   )
 
-  if (${TINT_BUILD_GLSL_WRITER})
+  if(${TINT_BUILD_GLSL_WRITER})
     list(APPEND TINT_BENCHMARK_SRCS writer/glsl/generator_bench.cc)
   endif()
-  if (${TINT_BUILD_HLSL_WRITER})
+
+  if(${TINT_BUILD_HLSL_WRITER})
     list(APPEND TINT_BENCHMARK_SRCS writer/hlsl/generator_bench.cc)
   endif()
-  if (${TINT_BUILD_MSL_WRITER})
+
+  if(${TINT_BUILD_MSL_WRITER})
     list(APPEND TINT_BENCHMARK_SRCS writer/msl/generator_bench.cc)
   endif()
-  if (${TINT_BUILD_SPV_WRITER})
+
+  if(${TINT_BUILD_SPV_WRITER})
     list(APPEND TINT_BENCHMARK_SRCS writer/spirv/generator_bench.cc)
   endif()
-  if (${TINT_BUILD_WGSL_WRITER})
+
+  if(${TINT_BUILD_WGSL_WRITER})
     list(APPEND TINT_BENCHMARK_SRCS writer/wgsl/generator_bench.cc)
   endif()
 
