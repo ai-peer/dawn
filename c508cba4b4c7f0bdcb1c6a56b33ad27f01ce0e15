@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85409a4a_c162747a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-17T17:58:42Z",
+      "side": 1,
+      "message": "We don\u0027t really have a strong opinion on this. Either way is fine.",
+      "parentUuid": "6bb4040f_7db3a465",
+      "revId": "c508cba4b4c7f0bdcb1c6a56b33ad27f01ce0e15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "389f9a0a_a4792172",
