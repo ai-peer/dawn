@@ -489,6 +489,24 @@
       "parentUuid": "be145733_bcd12111",
       "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69df37b_236fa057",
+        "filename": "src/tint/reader/wgsl/parser_impl_while_stmt_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-17T00:34:12Z",
+      "side": 1,
+      "message": "Maybe, it\u0027s just strange because there _is_ a `{`, we just happen to be missing a `(`.",
+      "parentUuid": "26a869fa_724e7000",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
