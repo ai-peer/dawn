@@ -776,7 +776,7 @@ Maybe<ast::Type> ParserImpl::texture_and_sampler_types() {
     auto storage = storage_texture_type();
     if (storage.matched) {
         const char* use = "storage texture type";
-        using StorageTextureInfo = std::pair<tint::type::TexelFormat, tint::builtin::Access>;
+        using StorageTextureInfo = std::pair<tint::builtin::TexelFormat, tint::builtin::Access>;
         auto params = expect_template_arg_block(use, [&]() -> Expect<StorageTextureInfo> {
             auto format = expect_texel_format(use);
             if (format.errored) {
@@ -943,8 +943,9 @@ Maybe<ast::Type> ParserImpl::depth_texture_type() {
 //  | 'rgba32uint'
 //  | 'rgba32sint'
 //  | 'rgba32float'
-Expect<type::TexelFormat> ParserImpl::expect_texel_format(std::string_view use) {
-    return expect_enum("texel format", type::ParseTexelFormat, type::kTexelFormatStrings, use);
+Expect<builtin::TexelFormat> ParserImpl::expect_texel_format(std::string_view use) {
+    return expect_enum("texel format", builtin::ParseTexelFormat, builtin::kTexelFormatStrings,
+                       use);
 }
 
 Expect<ParserImpl::TypedIdentifier> ParserImpl::expect_ident_with_optional_type_specifier(

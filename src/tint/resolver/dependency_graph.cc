@@ -467,7 +467,7 @@ class DependencyScanner {
                 graph_.resolved_identifiers.Add(from, ResolvedIdentifier(addr));
                 return;
             }
-            if (auto fmt = type::ParseTexelFormat(s); fmt != type::TexelFormat::kUndefined) {
+            if (auto fmt = builtin::ParseTexelFormat(s); fmt != builtin::TexelFormat::kUndefined) {
                 graph_.resolved_identifiers.Add(from, ResolvedIdentifier(fmt));
                 return;
             }
@@ -851,7 +851,7 @@ std::string ResolvedIdentifier::String(const SymbolTable& symbols, diag::List& d
     if (auto addr = AddressSpace(); addr != builtin::AddressSpace::kUndefined) {
         return "address space '" + utils::ToString(addr) + "'";
     }
-    if (auto fmt = TexelFormat(); fmt != type::TexelFormat::kUndefined) {
+    if (auto fmt = TexelFormat(); fmt != builtin::TexelFormat::kUndefined) {
         return "texel format '" + utils::ToString(fmt) + "'";
     }
     TINT_UNREACHABLE(Resolver, diagnostics) << "unhandled ResolvedIdentifier";
