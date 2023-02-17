@@ -1954,4 +1954,13 @@ IgnoreLazyClearCountScope::~IgnoreLazyClearCountScope() {
     mDevice->mLazyClearCountForTesting = mLazyClearCountForTesting;
 }
 
+namespace detail {
+
+void ConsumeIfError(DeviceBase* device, MaybeError maybeError,
+                                     InternalErrorTypeMask allowedErrors) {
+  device->ConsumeError(maybeError, allowedErrors);
+}
+
+}  // namespace detail
+
 }  // namespace dawn::native

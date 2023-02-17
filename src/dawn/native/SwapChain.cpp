@@ -35,12 +35,13 @@ class ErrorSwapChain final : public SwapChainBase {
                       wgpu::TextureUsage allowedUsage,
                       uint32_t width,
                       uint32_t height) override {
-        GetDevice()->ConsumedError(DAWN_VALIDATION_ERROR("%s is an error swapchain.", this));
+        CONSUME_IF_ERROR(GetDevice(), DAWN_VALIDATION_ERROR("%s is an error swapchain.", this));
     }
 
     TextureViewBase* APIGetCurrentTextureView() override {
-        GetDevice()->ConsumedError(DAWN_VALIDATION_ERROR("%s is an error swapchain.", this));
+        if (GetDevice()->ConsumedError(DAWN_VALIDATION_ERROR("%s is an error swapchain.", this))) {
         return TextureViewBase::MakeError(GetDevice());
+}
     }
 
     void APIPresent() override {

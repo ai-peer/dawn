@@ -59,6 +59,15 @@ struct ShaderModuleParseResult;
 
 using WGSLExtensionSet = std::unordered_set<std::string>;
 
+namespace detail {
+
+// Proxy into Device's ConsumeError function. This helper should never be called directly and is
+// only used to implement the CONSUME_IF_ERROR macro.
+void ConsumeIfError(DeviceBase* device, MaybeError maybeError,
+                                     InternalErrorTypeMask allowedErrors);
+
+}
+
 class DeviceBase : public RefCountedWithExternalCount {
   public:
     DeviceBase(AdapterBase* adapter,
@@ -77,8 +86,14 @@ class DeviceBase : public RefCountedWithExternalCount {
                      InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError,
                      WGPUDeviceLostReason lost_reason = WGPUDeviceLostReason_Undefined);
 
-    bool ConsumedError(MaybeError maybeError,
-                       InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
+    // Variants of ConsumedError must use the returned boolean to handle failure cases since an
+    // error may cause a device loss and further execution may be undefined. This is especially
+    // true for the ResultOrError variants. If the potential error is the last call of the
+    // function and there is no cleanup necessary aside from consuming the error, use the
+    // CONSUME_IF_ERROR macros instead which forces an immediate return.
+    [[nodiscard]] bool ConsumedError(
+        MaybeError maybeError,
+        InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             ConsumeError(maybeError.AcquireError(), allowedErrors);
             return true;
@@ -87,9 +102,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename T>
-    bool ConsumedError(ResultOrError<T> resultOrError,
-                       T* result,
-                       InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
+    [[nodiscard]] bool ConsumedError(
+        ResultOrError<T> resultOrError,
+        T* result,
+        InternalErrorTypeMask allowedErrors = kDefaultAllowedInternalError) {
         if (DAWN_UNLIKELY(resultOrError.IsError())) {
             ConsumeError(resultOrError.AcquireError(), allowedErrors);
             return true;
@@ -99,10 +115,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename... Args>
-    bool ConsumedError(MaybeError maybeError,
-                       InternalErrorTypeMask allowedErrors,
-                       const char* formatStr,
-                       const Args&... args) {
+    [[nodiscard]] bool ConsumedError(MaybeError maybeError,
+                                     InternalErrorTypeMask allowedErrors,
+                                     const char* formatStr,
+                                     const Args&... args) {
         if (DAWN_UNLIKELY(maybeError.IsError())) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
             if (error->GetType() == InternalErrorType::Validation) {
@@ -122,17 +138,19 @@ class DeviceBase : public RefCountedWithExternalCount {
     }
 
     template <typename... Args>
-    bool ConsumedError(MaybeError maybeError, const char* formatStr, const Args&... args) {
+    [[nodiscard]] bool ConsumedError(MaybeError maybeError,
+                                     const char* formatStr,
+                                     const Args&... args) {
         return ConsumedError(std::move(maybeError), kDefaultAllowedInternalError, formatStr,
                              args...);
     }
 
     template <typename T, typename... Args>
-    bool ConsumedError(ResultOrError<T> resultOrError,
-                       T* result,
-                       InternalErrorTypeMask allowedErrors,
-                       const char* formatStr,
-                       const Args&... args) {
+    [[nodiscard]] bool ConsumedError(ResultOrError<T> resultOrError,
+                                     T* result,
+                                     InternalErrorTypeMask allowedErrors,
+                                     const char* formatStr,
+                                     const Args&... args) {
         if (DAWN_UNLIKELY(resultOrError.IsError())) {
             std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
             if (error->GetType() == InternalErrorType::Validation) {
@@ -152,14 +170,12 @@ class DeviceBase : public RefCountedWithExternalCount {
         return false;
     }
 
-    template <typename T, typename... Args>
-    bool ConsumedError(ResultOrError<T> resultOrError,
-                       T* result,
-                       const char* formatStr,
-                       const Args&... args) {
-        return ConsumedError(std::move(resultOrError), result, kDefaultAllowedInternalError,
-                             formatStr, args...);
-    }
+#define CONSUME_IF_ERROR(DEVICE, EXPR, EMASK) \
+    if (DEVICE.ConsumedError(EXPR, EMASK))    \
+    return
+#define CONSUME_IF_ERROR_WITH_CONTEXT(DEVICE, EXPR, EMASK, ...) \
+    if (DEVICE.ConsumedError(EXPR, EMASK, __VA_ARGS__))         \
+    return
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
@@ -518,6 +534,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     void ConsumeError(std::unique_ptr<ErrorData> error,
                       InternalErrorTypeMask errorMask = kDefaultAllowedInternalError);
+    friend void detail::ConsumeIfError(DeviceBase*, MaybeError, InternalErrorTypeMask);
 
     // Each backend should implement to check their passed fences if there are any and return a
     // completed serial. Return 0 should indicate no fences to check.
