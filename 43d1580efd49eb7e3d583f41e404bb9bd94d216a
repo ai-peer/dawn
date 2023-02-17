@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9904ef8b_f146d431",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T06:43:27Z",
+      "side": 1,
+      "message": "Okay, restored. Thanks for the comments, Ben!",
+      "parentUuid": "f74789e6_7fe33e81",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efff93d7_c1c4d956",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-17T06:08:19Z",
       "side": 1,
       "message": "This test is still timing out, and needs to be restored.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7910116_811a7c03",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.wgsl.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T06:43:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "efff93d7_c1c4d956",
       "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8165b780_6b3e497b",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/spv-stable-maze-flatten-copy-composite/1.spvasm.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T06:43:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9d89071b_fd930c9e",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8e45698_ec32d18b",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-17T06:08:19Z",
       "side": 1,
       "message": "Likewise for this test.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f6a3dd7_c08f4c34",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/spv-stable-maze-flatten-copy-composite/1.wgsl.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-17T06:43:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b8e45698_ec32d18b",
       "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
