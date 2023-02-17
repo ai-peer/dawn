@@ -390,6 +390,193 @@
       "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,parse,align:align_required_alignment:*\u0027",
       "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a286c70b_7ed1690d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.4851005s (average 4.72430025s)",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f0c675a_42ece8c9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.65670075s (average 4.775837875s)",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ae2af1b_68ba6186",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,i32_arithmetic:*\u0027 with tags [clang-coverage]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5270838a_2a5fa86c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:addition:*\u0027 with tags [clang-coverage]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e740a52c_36db1702",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:division:*\u0027 with tags [clang-coverage]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3723e793_7c487416",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:multiplication:*\u0027 with tags [clang-coverage]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c52eee_520383ec",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:subtraction:*\u0027 with tags [clang-coverage]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f7dc1ff_e7a68bc2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:*\u0027 with tags [clang-coverage, linux]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "419a91c5_a8ff7602",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:*\u0027 with tags [clang-coverage, mac]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ea84103_d181c71c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,binary,f32_arithmetic:remainder:inputSource\u003d\"const\";*\u0027 with tags [clang-coverage, win10]",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d80d56ae_bfaca874",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T07:44:21Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,parse,align:align_required_alignment:*\u0027",
+      "revId": "a7a90d077ffab0639864c85543f6c02189f90401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
