@@ -19,7 +19,7 @@ namespace {
 
 struct VariableStorageData {
     const char* input;
-    type::AddressSpace address_space;
+    builtin::AddressSpace address_space;
     builtin::Access access;
 };
 inline std::ostream& operator<<(std::ostream& out, VariableStorageData data) {
@@ -46,18 +46,22 @@ TEST_P(VariableQualifierTest, ParsesAddressSpace) {
 INSTANTIATE_TEST_SUITE_P(
     ParserImplTest,
     VariableQualifierTest,
-    testing::Values(
-        VariableStorageData{"uniform", type::AddressSpace::kUniform, builtin::Access::kUndefined},
-        VariableStorageData{"workgroup", type::AddressSpace::kWorkgroup,
-                            builtin::Access::kUndefined},
-        VariableStorageData{"storage", type::AddressSpace::kStorage, builtin::Access::kUndefined},
-        VariableStorageData{"private", type::AddressSpace::kPrivate, builtin::Access::kUndefined},
-        VariableStorageData{"function", type::AddressSpace::kFunction, builtin::Access::kUndefined},
-        VariableStorageData{"storage, read", type::AddressSpace::kStorage, builtin::Access::kRead},
-        VariableStorageData{"storage, write", type::AddressSpace::kStorage,
-                            builtin::Access::kWrite},
-        VariableStorageData{"storage, read_write", type::AddressSpace::kStorage,
-                            builtin::Access::kReadWrite}));
+    testing::Values(VariableStorageData{"uniform", builtin::AddressSpace::kUniform,
+                                        builtin::Access::kUndefined},
+                    VariableStorageData{"workgroup", builtin::AddressSpace::kWorkgroup,
+                                        builtin::Access::kUndefined},
+                    VariableStorageData{"storage", builtin::AddressSpace::kStorage,
+                                        builtin::Access::kUndefined},
+                    VariableStorageData{"private", builtin::AddressSpace::kPrivate,
+                                        builtin::Access::kUndefined},
+                    VariableStorageData{"function", builtin::AddressSpace::kFunction,
+                                        builtin::Access::kUndefined},
+                    VariableStorageData{"storage, read", builtin::AddressSpace::kStorage,
+                                        builtin::Access::kRead},
+                    VariableStorageData{"storage, write", builtin::AddressSpace::kStorage,
+                                        builtin::Access::kWrite},
+                    VariableStorageData{"storage, read_write", builtin::AddressSpace::kStorage,
+                                        builtin::Access::kReadWrite}));
 
 TEST_F(ParserImplTest, VariableQualifier_NoMatch) {
     auto p = parser("<not-a-storage-class>");

@@ -1222,21 +1222,21 @@ const Type* ParserImpl::ConvertType(uint32_t type_id,
     }
 
     auto ast_address_space = enum_converter_.ToAddressSpace(storage_class);
-    if (ast_address_space == type::AddressSpace::kUndefined) {
+    if (ast_address_space == builtin::AddressSpace::kUndefined) {
         Fail() << "SPIR-V pointer type with ID " << type_id << " has invalid storage class "
                << static_cast<uint32_t>(storage_class);
         return nullptr;
     }
-    if (ast_address_space == type::AddressSpace::kUniform &&
+    if (ast_address_space == builtin::AddressSpace::kUniform &&
         remap_buffer_block_type_.count(pointee_type_id)) {
-        ast_address_space = type::AddressSpace::kStorage;
+        ast_address_space = builtin::AddressSpace::kStorage;
         remap_buffer_block_type_.insert(type_id);
     }
 
     // Pipeline input and output variables map to private variables.
-    if (ast_address_space == type::AddressSpace::kIn ||
-        ast_address_space == type::AddressSpace::kOut) {
-        ast_address_space = type::AddressSpace::kPrivate;
+    if (ast_address_space == builtin::AddressSpace::kIn ||
+        ast_address_space == builtin::AddressSpace::kOut) {
+        ast_address_space = builtin::AddressSpace::kPrivate;
     }
     switch (ptr_as) {
         case PtrAs::Ref:
@@ -1459,14 +1459,14 @@ bool ParserImpl::EmitModuleScopeVariables() {
             continue;
         }
         switch (enum_converter_.ToAddressSpace(spirv_storage_class)) {
-            case type::AddressSpace::kNone:
-            case type::AddressSpace::kIn:
-            case type::AddressSpace::kOut:
-            case type::AddressSpace::kUniform:
-            case type::AddressSpace::kHandle:
-            case type::AddressSpace::kStorage:
-            case type::AddressSpace::kWorkgroup:
-            case type::AddressSpace::kPrivate:
+            case builtin::AddressSpace::kNone:
+            case builtin::AddressSpace::kIn:
+            case builtin::AddressSpace::kOut:
+            case builtin::AddressSpace::kUniform:
+            case builtin::AddressSpace::kHandle:
+            case builtin::AddressSpace::kStorage:
+            case builtin::AddressSpace::kWorkgroup:
+            case builtin::AddressSpace::kPrivate:
                 break;
             default:
                 return Fail() << "invalid SPIR-V storage class " << int(spirv_storage_class)
@@ -1476,7 +1476,7 @@ bool ParserImpl::EmitModuleScopeVariables() {
             return false;
         }
         const Type* ast_store_type = nullptr;
-        type::AddressSpace ast_address_space = type::AddressSpace::kNone;
+        builtin::AddressSpace ast_address_space = builtin::AddressSpace::kNone;
         if (spirv_storage_class == spv::StorageClass::UniformConstant) {
             // These are opaque handles: samplers or textures
             ast_store_type = GetHandleTypeForSpirvHandle(var);
@@ -1577,7 +1577,7 @@ const spvtools::opt::analysis::IntConstant* ParserImpl::GetArraySize(uint32_t va
 }
 
 const ast::Var* ParserImpl::MakeVar(uint32_t id,
-                                    type::AddressSpace address_space,
+                                    builtin::AddressSpace address_space,
                                     const Type* storage_type,
                                     const ast::Expression* initializer,
                                     AttributeList decorations) {
@@ -1587,7 +1587,7 @@ const ast::Var* ParserImpl::MakeVar(uint32_t id,
     }
 
     builtin::Access access = builtin::Access::kUndefined;
-    if (address_space == type::AddressSpace::kStorage) {
+    if (address_space == builtin::AddressSpace::kStorage) {
         bool read_only = false;
         if (auto* tn = storage_type->As<Named>()) {
             read_only = read_only_struct_types_.count(tn->name) > 0;
@@ -1599,12 +1599,12 @@ const ast::Var* ParserImpl::MakeVar(uint32_t id,
 
     // Handle variables (textures and samplers) are always in the handle
     // address space, so we don't mention the address space.
-    if (address_space == type::AddressSpace::kHandle) {
-        address_space = type::AddressSpace::kNone;
+    if (address_space == builtin::AddressSpace::kHandle) {
+        address_space = builtin::AddressSpace::kNone;
     }
 
     if (!ConvertDecorationsForVariable(id, &storage_type, &decorations,
-                                       address_space != type::AddressSpace::kPrivate)) {
+                                       address_space != builtin::AddressSpace::kPrivate)) {
         return nullptr;
     }
 

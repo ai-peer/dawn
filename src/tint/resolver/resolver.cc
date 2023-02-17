@@ -88,7 +88,7 @@
 #include "src/tint/utils/vector.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::builtin::Access>);
-TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::AddressSpace>);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::builtin::AddressSpace>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::TexelFormat>);
 
 namespace tint::resolver {
@@ -255,11 +255,11 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
         ty = rhs->Type()->UnwrapRef();  // Implicit load of RHS
     }
 
-    if (rhs && !validator_.VariableInitializer(v, type::AddressSpace::kNone, ty, rhs)) {
+    if (rhs && !validator_.VariableInitializer(v, builtin::AddressSpace::kNone, ty, rhs)) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(type::AddressSpace::kNone, const_cast<type::Type*>(ty),
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kNone, const_cast<type::Type*>(ty),
                                       v->source)) {
         AddNote("while instantiating 'let' " + builder_->Symbols().NameFor(v->name->symbol),
                 v->source);
@@ -269,12 +269,12 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
     sem::Variable* sem = nullptr;
     if (is_global) {
         sem = builder_->create<sem::GlobalVariable>(
-            v, ty, sem::EvaluationStage::kRuntime, type::AddressSpace::kNone,
+            v, ty, sem::EvaluationStage::kRuntime, builtin::AddressSpace::kNone,
             builtin::Access::kUndefined,
             /* constant_value */ nullptr, sem::BindingPoint{}, std::nullopt);
     } else {
         sem = builder_->create<sem::LocalVariable>(v, ty, sem::EvaluationStage::kRuntime,
-                                                   type::AddressSpace::kNone,
+                                                   builtin::AddressSpace::kNone,
                                                    builtin::Access::kUndefined, current_statement_,
                                                    /* constant_value */ nullptr);
     }
@@ -318,11 +318,11 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
         return nullptr;
     }
 
-    if (rhs && !validator_.VariableInitializer(v, type::AddressSpace::kNone, ty, rhs)) {
+    if (rhs && !validator_.VariableInitializer(v, builtin::AddressSpace::kNone, ty, rhs)) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(type::AddressSpace::kNone, const_cast<type::Type*>(ty),
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kNone, const_cast<type::Type*>(ty),
                                       v->source)) {
         AddNote("while instantiating 'override' " + builder_->Symbols().NameFor(v->name->symbol),
                 v->source);
@@ -330,7 +330,7 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
     }
 
     auto* sem = builder_->create<sem::GlobalVariable>(
-        v, ty, sem::EvaluationStage::kOverride, type::AddressSpace::kNone,
+        v, ty, sem::EvaluationStage::kOverride, builtin::AddressSpace::kNone,
         builtin::Access::kUndefined,
         /* constant_value */ nullptr, sem::BindingPoint{}, std::nullopt);
     sem->SetInitializer(rhs);
@@ -412,11 +412,11 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
         ty = rhs->Type();
     }
 
-    if (!validator_.VariableInitializer(c, type::AddressSpace::kNone, ty, rhs)) {
+    if (!validator_.VariableInitializer(c, builtin::AddressSpace::kNone, ty, rhs)) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(type::AddressSpace::kNone, const_cast<type::Type*>(ty),
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kNone, const_cast<type::Type*>(ty),
                                       c->source)) {
         AddNote("while instantiating 'const' " + builder_->Symbols().NameFor(c->name->symbol),
                 c->source);
@@ -426,10 +426,10 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
     const auto value = rhs->ConstantValue();
     auto* sem = is_global
                     ? static_cast<sem::Variable*>(builder_->create<sem::GlobalVariable>(
-                          c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
+                          c, ty, sem::EvaluationStage::kConstant, builtin::AddressSpace::kNone,
                           builtin::Access::kUndefined, value, sem::BindingPoint{}, std::nullopt))
                     : static_cast<sem::Variable*>(builder_->create<sem::LocalVariable>(
-                          c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
+                          c, ty, sem::EvaluationStage::kConstant, builtin::AddressSpace::kNone,
                           builtin::Access::kUndefined, current_statement_, value));
 
     sem->SetInitializer(rhs);
@@ -474,20 +474,20 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
     }
 
     auto address_space = var->declared_address_space;
-    if (address_space == type::AddressSpace::kNone) {
+    if (address_space == builtin::AddressSpace::kNone) {
         // No declared address space. Infer from usage / type.
         if (!is_global) {
-            address_space = type::AddressSpace::kFunction;
+            address_space = builtin::AddressSpace::kFunction;
         } else if (storage_ty->UnwrapRef()->is_handle()) {
             // https://gpuweb.github.io/gpuweb/wgsl/#module-scope-variables
             // If the store type is a texture type or a sampler type, then the
             // variable declaration must not have a address space attribute. The
             // address space will always be handle.
-            address_space = type::AddressSpace::kHandle;
+            address_space = builtin::AddressSpace::kHandle;
         }
     }
 
-    if (!is_global && address_space != type::AddressSpace::kFunction &&
+    if (!is_global && address_space != builtin::AddressSpace::kFunction &&
         validator_.IsValidationEnabled(var->attributes,
                                        ast::DisabledValidation::kIgnoreAddressSpace)) {
         AddError("function-scope 'var' declaration must use 'function' address space", var->source);
@@ -610,7 +610,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(type::AddressSpace::kNone, ty, param->type->source)) {
+    if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kNone, ty, param->type->source)) {
         add_note();
         return nullptr;
     }
@@ -661,7 +661,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
     }
 
     auto* sem = builder_->create<sem::Parameter>(
-        param, index, ty, type::AddressSpace::kNone, builtin::Access::kUndefined,
+        param, index, ty, builtin::AddressSpace::kNone, builtin::Access::kUndefined,
         sem::ParameterUsage::kNone, binding_point, location);
     builder_->Sem().Add(param, sem);
     return sem;
@@ -691,12 +691,12 @@ utils::Result<uint32_t> Resolver::LocationAttribute(const ast::LocationAttribute
     return static_cast<uint32_t>(value);
 }
 
-builtin::Access Resolver::DefaultAccessForAddressSpace(type::AddressSpace address_space) {
+builtin::Access Resolver::DefaultAccessForAddressSpace(builtin::AddressSpace address_space) {
     // https://gpuweb.github.io/gpuweb/wgsl/#storage-class
     switch (address_space) {
-        case type::AddressSpace::kStorage:
-        case type::AddressSpace::kUniform:
-        case type::AddressSpace::kHandle:
+        case builtin::AddressSpace::kStorage:
+        case builtin::AddressSpace::kUniform:
+        case builtin::AddressSpace::kHandle:
             return builtin::Access::kRead;
         default:
             break;
@@ -921,7 +921,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
     }
 
     if (auto* str = return_type->As<sem::Struct>()) {
-        if (!ApplyAddressSpaceUsageToType(type::AddressSpace::kNone, str, decl->source)) {
+        if (!ApplyAddressSpaceUsageToType(builtin::AddressSpace::kNone, str, decl->source)) {
             AddNote("while instantiating return type for " +
                         builder_->Symbols().NameFor(decl->name->symbol),
                     decl->source);
@@ -1485,7 +1485,7 @@ type::Type* Resolver::Type(const ast::Expression* ast) {
     return const_cast<type::Type*>(type_expr->Type());
 }
 
-sem::BuiltinEnumExpression<type::AddressSpace>* Resolver::AddressSpaceExpression(
+sem::BuiltinEnumExpression<builtin::AddressSpace>* Resolver::AddressSpaceExpression(
     const ast::Expression* expr) {
     return sem_.AsAddressSpace(Expression(expr));
 }
@@ -2012,10 +2012,10 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                     [&]() -> sem::TypeInitializer* {
                         auto params = utils::Transform(args, [&](auto, size_t i) {
                             return builder_->create<sem::Parameter>(
-                                nullptr,                    // declaration
-                                static_cast<uint32_t>(i),   // index
-                                arr->ElemType(),            // type
-                                type::AddressSpace::kNone,  // address_space
+                                nullptr,                       // declaration
+                                static_cast<uint32_t>(i),      // index
+                                arr->ElemType(),               // type
+                                builtin::AddressSpace::kNone,  // address_space
                                 builtin::Access::kUndefined);
                         });
                         return builder_->create<sem::TypeInitializer>(arr, std::move(params),
@@ -2044,7 +2044,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                                 nullptr,                       // declaration
                                 static_cast<uint32_t>(i),      // index
                                 str->Members()[i]->Type(),     // type
-                                type::AddressSpace::kNone,     // address_space
+                                builtin::AddressSpace::kNone,  // address_space
                                 builtin::Access::kUndefined);  // access
                         }
                         return builder_->create<sem::TypeInitializer>(str, std::move(params),
@@ -2970,8 +2970,8 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
             expr, current_statement_, access);
     }
 
-    if (auto addr = resolved->AddressSpace(); addr != type::AddressSpace::kUndefined) {
-        return builder_->create<sem::BuiltinEnumExpression<type::AddressSpace>>(
+    if (auto addr = resolved->AddressSpace(); addr != builtin::AddressSpace::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<builtin::AddressSpace>>(
             expr, current_statement_, addr);
     }
 
@@ -3968,7 +3968,7 @@ sem::Statement* Resolver::IncrementDecrementStatement(
     });
 }
 
-bool Resolver::ApplyAddressSpaceUsageToType(type::AddressSpace address_space,
+bool Resolver::ApplyAddressSpaceUsageToType(builtin::AddressSpace address_space,
                                             type::Type* ty,
                                             const Source& usage) {
     ty = const_cast<type::Type*>(ty->UnwrapRef());
@@ -3996,7 +3996,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(type::AddressSpace address_space,
     }
 
     if (auto* arr = ty->As<type::Array>()) {
-        if (address_space != type::AddressSpace::kStorage) {
+        if (address_space != builtin::AddressSpace::kStorage) {
             if (arr->Count()->Is<type::RuntimeArrayCount>()) {
                 AddError("runtime-sized arrays can only be used in the <storage> address space",
                          usage);
@@ -4015,7 +4015,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(type::AddressSpace address_space,
                                             usage);
     }
 
-    if (type::IsHostShareable(address_space) && !validator_.IsHostShareable(ty)) {
+    if (builtin::IsHostShareable(address_space) && !validator_.IsHostShareable(ty)) {
         std::stringstream err;
         err << "Type '" << sem_.TypeNameOf(ty) << "' cannot be used in address space '"
             << address_space << "' as it is non-host-shareable";

@@ -210,7 +210,7 @@ ParserImpl::VarDeclInfo::VarDeclInfo(const VarDeclInfo&) = default;
 
 ParserImpl::VarDeclInfo::VarDeclInfo(Source source_in,
                                      std::string name_in,
-                                     type::AddressSpace address_space_in,
+                                     builtin::AddressSpace address_space_in,
                                      builtin::Access access_in,
                                      ast::Type type_in)
     : source(std::move(source_in)),
@@ -1256,7 +1256,7 @@ Expect<ast::Type> ParserImpl::expect_type(std::string_view use) {
 Expect<ast::Type> ParserImpl::expect_type_specifier_pointer(const Source& s) {
     const char* use = "ptr declaration";
 
-    auto address_space = type::AddressSpace::kNone;
+    auto address_space = builtin::AddressSpace::kNone;
     auto access = builtin::Access::kUndefined;
 
     auto subtype = expect_template_arg_block(use, [&]() -> Expect<ast::Type> {
@@ -1377,8 +1377,9 @@ Expect<ast::Type> ParserImpl::expect_type_specifier_matrix(const Source& s,
 //   | 'storage'
 //
 // Note, we also parse `push_constant` from the experimental extension
-Expect<type::AddressSpace> ParserImpl::expect_address_space(std::string_view use) {
-    return expect_enum("address space", type::ParseAddressSpace, type::kAddressSpaceStrings, use);
+Expect<builtin::AddressSpace> ParserImpl::expect_address_space(std::string_view use) {
+    return expect_enum("address space", builtin::ParseAddressSpace, builtin::kAddressSpaceStrings,
+                       use);
 }
 
 // struct_decl

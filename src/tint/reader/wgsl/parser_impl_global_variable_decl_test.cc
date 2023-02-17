@@ -34,7 +34,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithoutInitializer) {
 
     ast::CheckIdentifier(p->builder().Symbols(), var->type, "f32");
 
-    EXPECT_EQ(var->declared_address_space, type::AddressSpace::kPrivate);
+    EXPECT_EQ(var->declared_address_space, builtin::AddressSpace::kPrivate);
 
     EXPECT_EQ(var->source.range.begin.line, 1u);
     EXPECT_EQ(var->source.range.begin.column, 14u);
@@ -59,7 +59,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithInitializer) {
     ast::CheckIdentifier(p->builder().Symbols(), var->name, "a");
     ast::CheckIdentifier(p->builder().Symbols(), var->type, "f32");
 
-    EXPECT_EQ(var->declared_address_space, type::AddressSpace::kPrivate);
+    EXPECT_EQ(var->declared_address_space, builtin::AddressSpace::kPrivate);
 
     EXPECT_EQ(var->source.range.begin.line, 1u);
     EXPECT_EQ(var->source.range.begin.column, 14u);
@@ -87,7 +87,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithAttribute) {
 
     ast::CheckIdentifier(p->builder().Symbols(), var->type, "f32");
 
-    EXPECT_EQ(var->declared_address_space, type::AddressSpace::kUniform);
+    EXPECT_EQ(var->declared_address_space, builtin::AddressSpace::kUniform);
 
     EXPECT_EQ(var->source.range.begin.line, 1u);
     EXPECT_EQ(var->source.range.begin.column, 36u);
@@ -119,7 +119,7 @@ TEST_F(ParserImplTest, GlobalVariableDecl_WithAttribute_MulitpleGroups) {
     ASSERT_NE(var->type, nullptr);
     ast::CheckIdentifier(p->builder().Symbols(), var->type, "f32");
 
-    EXPECT_EQ(var->declared_address_space, type::AddressSpace::kUniform);
+    EXPECT_EQ(var->declared_address_space, builtin::AddressSpace::kUniform);
 
     EXPECT_EQ(var->source.range.begin.line, 1u);
     EXPECT_EQ(var->source.range.begin.column, 36u);

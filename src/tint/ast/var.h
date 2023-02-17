@@ -56,7 +56,7 @@ class Var final : public Castable<Var, Variable> {
         const Source& source,
         const Identifier* name,
         Type type,
-        type::AddressSpace declared_address_space,
+        builtin::AddressSpace declared_address_space,
         builtin::Access declared_access,
         const Expression* initializer,
         utils::VectorRef<const Attribute*> attributes);
@@ -77,7 +77,7 @@ class Var final : public Castable<Var, Variable> {
     const Var* Clone(CloneContext* ctx) const override;
 
     /// The declared address space
-    const type::AddressSpace declared_address_space;
+    const builtin::AddressSpace declared_address_space;
 
     /// The declared access control
     const builtin::Access declared_access;

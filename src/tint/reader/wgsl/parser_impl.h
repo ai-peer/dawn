@@ -284,7 +284,7 @@ class ParserImpl {
         /// @param type_in variable type
         VarDeclInfo(Source source_in,
                     std::string name_in,
-                    type::AddressSpace address_space_in,
+                    builtin::AddressSpace address_space_in,
                     builtin::Access access_in,
                     ast::Type type_in);
         /// Destructor
@@ -295,7 +295,7 @@ class ParserImpl {
         /// Variable name
         std::string name;
         /// Variable address space
-        type::AddressSpace address_space = type::AddressSpace::kNone;
+        builtin::AddressSpace address_space = builtin::AddressSpace::kNone;
         /// Variable access control
         builtin::Access access = builtin::Access::kUndefined;
         /// Variable type
@@ -305,7 +305,7 @@ class ParserImpl {
     /// VariableQualifier contains the parsed information for a variable qualifier
     struct VariableQualifier {
         /// The variable's address space
-        type::AddressSpace address_space = type::AddressSpace::kNone;
+        builtin::AddressSpace address_space = builtin::AddressSpace::kNone;
         /// The variable's access control
         builtin::Access access = builtin::Access::kUndefined;
     };
@@ -464,8 +464,8 @@ class ParserImpl {
     Maybe<ast::Type> type_specifier();
     /// Parses an `address_space` grammar element, erroring on parse failure.
     /// @param use a description of what was being parsed if an error was raised.
-    /// @returns the address space or type::AddressSpace::kNone if none matched
-    Expect<type::AddressSpace> expect_address_space(std::string_view use);
+    /// @returns the address space or builtin::AddressSpace::kNone if none matched
+    Expect<builtin::AddressSpace> expect_address_space(std::string_view use);
     /// Parses a `struct_decl` grammar element.
     /// @returns the struct type or nullptr on error
     Maybe<const ast::Struct*> struct_decl();

@@ -19,7 +19,7 @@ namespace {
 
 struct AddressSpaceData {
     const char* input;
-    type::AddressSpace result;
+    builtin::AddressSpace result;
 };
 inline std::ostream& operator<<(std::ostream& out, AddressSpaceData data) {
     out << std::string(data.input);
@@ -43,11 +43,11 @@ TEST_P(ParserAddressSpaceTest, Parses) {
 INSTANTIATE_TEST_SUITE_P(
     ParserImplTest,
     ParserAddressSpaceTest,
-    testing::Values(AddressSpaceData{"uniform", type::AddressSpace::kUniform},
-                    AddressSpaceData{"workgroup", type::AddressSpace::kWorkgroup},
-                    AddressSpaceData{"storage", type::AddressSpace::kStorage},
-                    AddressSpaceData{"private", type::AddressSpace::kPrivate},
-                    AddressSpaceData{"function", type::AddressSpace::kFunction}));
+    testing::Values(AddressSpaceData{"uniform", builtin::AddressSpace::kUniform},
+                    AddressSpaceData{"workgroup", builtin::AddressSpace::kWorkgroup},
+                    AddressSpaceData{"storage", builtin::AddressSpace::kStorage},
+                    AddressSpaceData{"private", builtin::AddressSpace::kPrivate},
+                    AddressSpaceData{"function", builtin::AddressSpace::kFunction}));
 
 TEST_F(ParserImplTest, AddressSpace_NoMatch) {
     auto p = parser("not-a-address-space");
