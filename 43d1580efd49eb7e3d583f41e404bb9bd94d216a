@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74789e6_7fe33e81",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T06:08:19Z",
+      "side": 1,
+      "message": "This test is still timing out, and needs to be restored.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efff93d7_c1c4d956",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.wgsl.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T06:08:19Z",
+      "side": 1,
+      "message": "This test is still timing out, and needs to be restored.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d89071b_fd930c9e",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/spv-stable-maze-flatten-copy-composite/1.spvasm.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T06:08:19Z",
+      "side": 1,
+      "message": "While this test didn\u0027t appear to time out, I\u0027d probably restore this file as well, just in case it\u0027s borderline.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8e45698_ec32d18b",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/spv-stable-maze-flatten-copy-composite/1.wgsl.expected.fxc.hlsl",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T06:08:19Z",
+      "side": 1,
+      "message": "Likewise for this test.",
+      "revId": "43d1580efd49eb7e3d583f41e404bb9bd94d216a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
