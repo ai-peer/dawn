@@ -471,6 +471,24 @@
       "message": "This one is also weird, would make more sense as `unexpected \u0027)\u0027` or something",
       "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a869fa_724e7000",
+        "filename": "src/tint/reader/wgsl/parser_impl_while_stmt_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-17T00:26:42Z",
+      "side": 1,
+      "message": "I think this one is more consistent with the other diagnostics.",
+      "parentUuid": "be145733_bcd12111",
+      "revId": "399d7eae08f5243a6ac970dd6e243bd1cfde460b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
