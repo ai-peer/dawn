@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f21ea60_7ef54db6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-17T01:14:58Z",
+      "side": 1,
+      "message": "IIUC, this is an optimization - correct? since we always know how the blending will happen in the absence of alpha",
+      "parentUuid": "2fb48e35_65cc6654",
+      "revId": "c508cba4b4c7f0bdcb1c6a56b33ad27f01ce0e15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "389f9a0a_a4792172",
