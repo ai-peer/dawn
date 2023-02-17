@@ -1937,7 +1937,7 @@ std::vector<const char*> NonKeywordIdentifiers() {
             out.push_back(ident);
         }
     }
-    for (auto* ident : type::kAccessStrings) {
+    for (auto* ident : builtin::kAccessStrings) {
         if (!keywords.count(ident)) {
             out.push_back(ident);
         }

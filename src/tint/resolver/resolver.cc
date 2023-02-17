@@ -87,7 +87,7 @@
 #include "src/tint/utils/transform.h"
 #include "src/tint/utils/vector.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::Access>);
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::builtin::Access>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::AddressSpace>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::TexelFormat>);
 
@@ -270,12 +270,12 @@ sem::Variable* Resolver::Let(const ast::Let* v, bool is_global) {
     if (is_global) {
         sem = builder_->create<sem::GlobalVariable>(
             v, ty, sem::EvaluationStage::kRuntime, type::AddressSpace::kNone,
-            type::Access::kUndefined,
+            builtin::Access::kUndefined,
             /* constant_value */ nullptr, sem::BindingPoint{}, std::nullopt);
     } else {
         sem = builder_->create<sem::LocalVariable>(v, ty, sem::EvaluationStage::kRuntime,
                                                    type::AddressSpace::kNone,
-                                                   type::Access::kUndefined, current_statement_,
+                                                   builtin::Access::kUndefined, current_statement_,
                                                    /* constant_value */ nullptr);
     }
 
@@ -330,7 +330,8 @@ sem::Variable* Resolver::Override(const ast::Override* v) {
     }
 
     auto* sem = builder_->create<sem::GlobalVariable>(
-        v, ty, sem::EvaluationStage::kOverride, type::AddressSpace::kNone, type::Access::kUndefined,
+        v, ty, sem::EvaluationStage::kOverride, type::AddressSpace::kNone,
+        builtin::Access::kUndefined,
         /* constant_value */ nullptr, sem::BindingPoint{}, std::nullopt);
     sem->SetInitializer(rhs);
 
@@ -423,12 +424,13 @@ sem::Variable* Resolver::Const(const ast::Const* c, bool is_global) {
     }
 
     const auto value = rhs->ConstantValue();
-    auto* sem = is_global ? static_cast<sem::Variable*>(builder_->create<sem::GlobalVariable>(
-                                c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
-                                type::Access::kUndefined, value, sem::BindingPoint{}, std::nullopt))
-                          : static_cast<sem::Variable*>(builder_->create<sem::LocalVariable>(
-                                c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
-                                type::Access::kUndefined, current_statement_, value));
+    auto* sem = is_global
+                    ? static_cast<sem::Variable*>(builder_->create<sem::GlobalVariable>(
+                          c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
+                          builtin::Access::kUndefined, value, sem::BindingPoint{}, std::nullopt))
+                    : static_cast<sem::Variable*>(builder_->create<sem::LocalVariable>(
+                          c, ty, sem::EvaluationStage::kConstant, type::AddressSpace::kNone,
+                          builtin::Access::kUndefined, current_statement_, value));
 
     sem->SetInitializer(rhs);
     builder_->Sem().Add(c, sem);
@@ -493,7 +495,7 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
     }
 
     auto access = var->declared_access;
-    if (access == type::Access::kUndefined) {
+    if (access == builtin::Access::kUndefined) {
         access = DefaultAccessForAddressSpace(address_space);
     }
 
@@ -659,7 +661,7 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
     }
 
     auto* sem = builder_->create<sem::Parameter>(
-        param, index, ty, type::AddressSpace::kNone, type::Access::kUndefined,
+        param, index, ty, type::AddressSpace::kNone, builtin::Access::kUndefined,
         sem::ParameterUsage::kNone, binding_point, location);
     builder_->Sem().Add(param, sem);
     return sem;
@@ -689,17 +691,17 @@ utils::Result<uint32_t> Resolver::LocationAttribute(const ast::LocationAttribute
     return static_cast<uint32_t>(value);
 }
 
-type::Access Resolver::DefaultAccessForAddressSpace(type::AddressSpace address_space) {
+builtin::Access Resolver::DefaultAccessForAddressSpace(type::AddressSpace address_space) {
     // https://gpuweb.github.io/gpuweb/wgsl/#storage-class
     switch (address_space) {
         case type::AddressSpace::kStorage:
         case type::AddressSpace::kUniform:
         case type::AddressSpace::kHandle:
-            return type::Access::kRead;
+            return builtin::Access::kRead;
         default:
             break;
     }
-    return type::Access::kReadWrite;
+    return builtin::Access::kReadWrite;
 }
 
 bool Resolver::AllocateOverridableConstantIds() {
@@ -1493,7 +1495,8 @@ sem::BuiltinEnumExpression<type::TexelFormat>* Resolver::TexelFormatExpression(
     return sem_.AsTexelFormat(Expression(expr));
 }
 
-sem::BuiltinEnumExpression<type::Access>* Resolver::AccessExpression(const ast::Expression* expr) {
+sem::BuiltinEnumExpression<builtin::Access>* Resolver::AccessExpression(
+    const ast::Expression* expr) {
     return sem_.AsAccess(Expression(expr));
 }
 
@@ -2013,7 +2016,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                                 static_cast<uint32_t>(i),   // index
                                 arr->ElemType(),            // type
                                 type::AddressSpace::kNone,  // address_space
-                                type::Access::kUndefined);
+                                builtin::Access::kUndefined);
                         });
                         return builder_->create<sem::TypeInitializer>(arr, std::move(params),
                                                                       args_stage);
@@ -2038,11 +2041,11 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                         params.Resize(std::min(args.Length(), str->Members().Length()));
                         for (size_t i = 0, n = params.Length(); i < n; i++) {
                             params[i] = builder_->create<sem::Parameter>(
-                                nullptr,                    // declaration
-                                static_cast<uint32_t>(i),   // index
-                                str->Members()[i]->Type(),  // type
-                                type::AddressSpace::kNone,  // address_space
-                                type::Access::kUndefined);  // access
+                                nullptr,                       // declaration
+                                static_cast<uint32_t>(i),      // index
+                                str->Members()[i]->Type(),     // type
+                                type::AddressSpace::kNone,     // address_space
+                                builtin::Access::kUndefined);  // access
                         }
                         return builder_->create<sem::TypeInitializer>(str, std::move(params),
                                                                       args_stage);
@@ -2962,9 +2965,9 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
         return nullptr;
     }
 
-    if (auto access = resolved->Access(); access != type::Access::kUndefined) {
-        return builder_->create<sem::BuiltinEnumExpression<type::Access>>(expr, current_statement_,
-                                                                          access);
+    if (auto access = resolved->Access(); access != builtin::Access::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<builtin::Access>>(
+            expr, current_statement_, access);
     }
 
     if (auto addr = resolved->AddressSpace(); addr != type::AddressSpace::kUndefined) {
