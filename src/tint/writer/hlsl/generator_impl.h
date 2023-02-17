@@ -35,6 +35,8 @@
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/transform/decompose_memory_access.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/utils/hash.h"
 #include "src/tint/writer/array_length_from_uniform_options.h"
 #include "src/tint/writer/hlsl/generator.h"
@@ -501,8 +503,8 @@ class GeneratorImpl : public TextGenerator {
     /// @param type the interpolation type
     /// @param sampling the interpolation sampling
     /// @returns the string name of the attribute or blank on error
-    std::string interpolation_to_modifiers(ast::InterpolationType type,
-                                           ast::InterpolationSampling sampling) const;
+    std::string interpolation_to_modifiers(type::InterpolationType type,
+                                           type::InterpolationSampling sampling) const;
 
   private:
     enum class VarType { kIn, kOut };

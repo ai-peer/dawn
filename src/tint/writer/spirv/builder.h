@@ -36,6 +36,8 @@
 #include "src/tint/program_builder.h"
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/builtin.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/storage_texture.h"
 #include "src/tint/writer/spirv/function.h"
 #include "src/tint/writer/spirv/scalar_constant.h"
@@ -221,8 +223,8 @@ class Builder {
     /// @param type the interpolation type
     /// @param sampling the interpolation sampling
     void AddInterpolationDecorations(uint32_t id,
-                                     ast::InterpolationType type,
-                                     ast::InterpolationSampling sampling);
+                                     type::InterpolationType type,
+                                     type::InterpolationSampling sampling);
 
     /// Generates the enabling of an extension. Emits an error and returns false if the extension is
     /// not supported.

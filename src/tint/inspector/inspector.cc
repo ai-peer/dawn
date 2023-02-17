@@ -43,6 +43,8 @@
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
 #include "src/tint/type/i32.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/sampled_texture.h"
@@ -129,38 +131,38 @@ std::tuple<InterpolationType, InterpolationSampling> CalculateInterpolationData(
 
     auto ast_interpolation_type = interpolation_attribute->type;
     auto ast_sampling_type = interpolation_attribute->sampling;
-    if (ast_interpolation_type != ast::InterpolationType::kFlat &&
-        ast_sampling_type == ast::InterpolationSampling::kUndefined) {
-        ast_sampling_type = ast::InterpolationSampling::kCenter;
+    if (ast_interpolation_type != type::InterpolationType::kFlat &&
+        ast_sampling_type == type::InterpolationSampling::kUndefined) {
+        ast_sampling_type = type::InterpolationSampling::kCenter;
     }
 
     auto interpolation_type = InterpolationType::kUnknown;
     switch (ast_interpolation_type) {
-        case ast::InterpolationType::kPerspective:
+        case type::InterpolationType::kPerspective:
             interpolation_type = InterpolationType::kPerspective;
             break;
-        case ast::InterpolationType::kLinear:
+        case type::InterpolationType::kLinear:
             interpolation_type = InterpolationType::kLinear;
             break;
-        case ast::InterpolationType::kFlat:
+        case type::InterpolationType::kFlat:
             interpolation_type = InterpolationType::kFlat;
             break;
-        case ast::InterpolationType::kUndefined:
+        case type::InterpolationType::kUndefined:
             break;
     }
 
     auto sampling_type = InterpolationSampling::kUnknown;
     switch (ast_sampling_type) {
-        case ast::InterpolationSampling::kUndefined:
+        case type::InterpolationSampling::kUndefined:
             sampling_type = InterpolationSampling::kNone;
             break;
-        case ast::InterpolationSampling::kCenter:
+        case type::InterpolationSampling::kCenter:
             sampling_type = InterpolationSampling::kCenter;
             break;
-        case ast::InterpolationSampling::kCentroid:
+        case type::InterpolationSampling::kCentroid:
             sampling_type = InterpolationSampling::kCentroid;
             break;
-        case ast::InterpolationSampling::kSample:
+        case type::InterpolationSampling::kSample:
             sampling_type = InterpolationSampling::kSample;
             break;
     }

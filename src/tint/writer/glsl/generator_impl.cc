@@ -67,6 +67,8 @@
 #include "src/tint/type/atomic.h"
 #include "src/tint/type/depth_multisampled_texture.h"
 #include "src/tint/type/depth_texture.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/sampled_texture.h"
 #include "src/tint/type/storage_texture.h"
@@ -2184,21 +2186,21 @@ void GeneratorImpl::EmitInterpolationQualifiers(
     for (auto* attr : attributes) {
         if (auto* interpolate = attr->As<ast::InterpolateAttribute>()) {
             switch (interpolate->type) {
-                case ast::InterpolationType::kPerspective:
-                case ast::InterpolationType::kLinear:
-                case ast::InterpolationType::kUndefined:
+                case type::InterpolationType::kPerspective:
+                case type::InterpolationType::kLinear:
+                case type::InterpolationType::kUndefined:
                     break;
-                case ast::InterpolationType::kFlat:
+                case type::InterpolationType::kFlat:
                     out << "flat ";
                     break;
             }
             switch (interpolate->sampling) {
-                case ast::InterpolationSampling::kCentroid:
+                case type::InterpolationSampling::kCentroid:
                     out << "centroid ";
                     break;
-                case ast::InterpolationSampling::kSample:
-                case ast::InterpolationSampling::kCenter:
-                case ast::InterpolationSampling::kUndefined:
+                case type::InterpolationSampling::kSample:
+                case type::InterpolationSampling::kCenter:
+                case type::InterpolationSampling::kUndefined:
                     break;
             }
         }

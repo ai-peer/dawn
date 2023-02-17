@@ -66,6 +66,8 @@
 #include "src/tint/type/atomic.h"
 #include "src/tint/type/depth_multisampled_texture.h"
 #include "src/tint/type/depth_texture.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/sampled_texture.h"
 #include "src/tint/type/storage_texture.h"
@@ -3184,31 +3186,31 @@ std::string GeneratorImpl::builtin_to_attribute(type::BuiltinValue builtin) cons
     return "";
 }
 
-std::string GeneratorImpl::interpolation_to_modifiers(ast::InterpolationType type,
-                                                      ast::InterpolationSampling sampling) const {
+std::string GeneratorImpl::interpolation_to_modifiers(type::InterpolationType type,
+                                                      type::InterpolationSampling sampling) const {
     std::string modifiers;
     switch (type) {
-        case ast::InterpolationType::kPerspective:
+        case type::InterpolationType::kPerspective:
             modifiers += "linear ";
             break;
-        case ast::InterpolationType::kLinear:
+        case type::InterpolationType::kLinear:
             modifiers += "noperspective ";
             break;
-        case ast::InterpolationType::kFlat:
+        case type::InterpolationType::kFlat:
             modifiers += "nointerpolation ";
             break;
-        case ast::InterpolationType::kUndefined:
+        case type::InterpolationType::kUndefined:
             break;
     }
     switch (sampling) {
-        case ast::InterpolationSampling::kCentroid:
+        case type::InterpolationSampling::kCentroid:
             modifiers += "centroid ";
             break;
-        case ast::InterpolationSampling::kSample:
+        case type::InterpolationSampling::kSample:
             modifiers += "sample ";
             break;
-        case ast::InterpolationSampling::kCenter:
-        case ast::InterpolationSampling::kUndefined:
+        case type::InterpolationSampling::kCenter:
+        case type::InterpolationSampling::kUndefined:
             break;
     }
     return modifiers;

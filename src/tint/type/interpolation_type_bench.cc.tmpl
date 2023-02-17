@@ -1,0 +1,24 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/src/cmd/gen to generate interpolate_attribute_bench.cc
+
+See:
+* tools/src/cmd/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+{{- Import "src/tint/templates/enums.tmpl.inc" -}}
+
+#include <array>
+
+#include "benchmark/benchmark.h"
+#include "src/tint/type/interpolate_type.h"
+
+namespace tint::type {
+namespace {
+
+{{ Eval "BenchmarkParseEnum" (Sem.Enum "interpolation_type")}}
+
+}  // namespace
+}  // namespace tint::type
