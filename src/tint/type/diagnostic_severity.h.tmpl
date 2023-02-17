@@ -1,0 +1,26 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/src/cmd/gen to generate diagnostic_control.h
+
+See:
+* tools/src/cmd/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+{{- Import "src/tint/templates/enums.tmpl.inc" -}}
+
+#ifndef SRC_TINT_TYPE_DIAGNOSTIC_SEVERITY_H_
+#define SRC_TINT_TYPE_DIAGNOSTIC_SEVERITY_H_
+
+#include <ostream>
+
+namespace tint::type {
+
+/// The diagnostic severity control.
+{{ Eval "DeclareEnum" (Sem.Enum "diagnostic_severity") }}
+
+}  // namespace tint::type
+
+#endif  // SRC_TINT_TYPE_DIAGNOSTIC_SEVERITY_H_
+

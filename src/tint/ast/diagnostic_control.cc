@@ -29,7 +29,7 @@
 
 namespace tint::ast {
 
-DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* rule)
+DiagnosticControl::DiagnosticControl(type::DiagnosticSeverity sev, const Identifier* rule)
     : severity(sev), rule_name(rule) {
     TINT_ASSERT(AST, rule != nullptr);
     if (rule) {
@@ -38,77 +38,17 @@ DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* r
     }
 }
 
-diag::Severity ToSeverity(DiagnosticSeverity sc) {
+diag::Severity ToSeverity(type::DiagnosticSeverity sc) {
     switch (sc) {
-        case DiagnosticSeverity::kError:
+        case type::DiagnosticSeverity::kError:
             return diag::Severity::Error;
-        case DiagnosticSeverity::kWarning:
+        case type::DiagnosticSeverity::kWarning:
             return diag::Severity::Warning;
-        case DiagnosticSeverity::kInfo:
+        case type::DiagnosticSeverity::kInfo:
             return diag::Severity::Note;
         default:
             return diag::Severity::InternalCompilerError;
     }
-}
-
-/// ParseDiagnosticSeverity parses a DiagnosticSeverity from a string.
-/// @param str the string to parse
-/// @returns the parsed enum, or DiagnosticSeverity::kUndefined if the string could not be parsed.
-DiagnosticSeverity ParseDiagnosticSeverity(std::string_view str) {
-    if (str == "error") {
-        return DiagnosticSeverity::kError;
-    }
-    if (str == "info") {
-        return DiagnosticSeverity::kInfo;
-    }
-    if (str == "off") {
-        return DiagnosticSeverity::kOff;
-    }
-    if (str == "warning") {
-        return DiagnosticSeverity::kWarning;
-    }
-    return DiagnosticSeverity::kUndefined;
-}
-
-std::ostream& operator<<(std::ostream& out, DiagnosticSeverity value) {
-    switch (value) {
-        case DiagnosticSeverity::kUndefined:
-            return out << "undefined";
-        case DiagnosticSeverity::kError:
-            return out << "error";
-        case DiagnosticSeverity::kInfo:
-            return out << "info";
-        case DiagnosticSeverity::kOff:
-            return out << "off";
-        case DiagnosticSeverity::kWarning:
-            return out << "warning";
-    }
-    return out << "<unknown>";
-}
-
-/// ParseDiagnosticRule parses a DiagnosticRule from a string.
-/// @param str the string to parse
-/// @returns the parsed enum, or DiagnosticRule::kUndefined if the string could not be parsed.
-DiagnosticRule ParseDiagnosticRule(std::string_view str) {
-    if (str == "chromium_unreachable_code") {
-        return DiagnosticRule::kChromiumUnreachableCode;
-    }
-    if (str == "derivative_uniformity") {
-        return DiagnosticRule::kDerivativeUniformity;
-    }
-    return DiagnosticRule::kUndefined;
-}
-
-std::ostream& operator<<(std::ostream& out, DiagnosticRule value) {
-    switch (value) {
-        case DiagnosticRule::kUndefined:
-            return out << "undefined";
-        case DiagnosticRule::kChromiumUnreachableCode:
-            return out << "chromium_unreachable_code";
-        case DiagnosticRule::kDerivativeUniformity:
-            return out << "derivative_uniformity";
-    }
-    return out << "<unknown>";
 }
 
 }  // namespace tint::ast

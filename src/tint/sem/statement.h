@@ -113,7 +113,7 @@ class Statement : public Castable<Statement, Node> {
     /// Modifies the severity of a specific diagnostic rule for this statement.
     /// @param rule the diagnostic rule
     /// @param severity the new diagnostic severity
-    void SetDiagnosticSeverity(ast::DiagnosticRule rule, ast::DiagnosticSeverity severity) {
+    void SetDiagnosticSeverity(type::DiagnosticRule rule, type::DiagnosticSeverity severity) {
         diagnostic_severities_[rule] = severity;
     }
 

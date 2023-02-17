@@ -714,7 +714,7 @@ class ParserImpl {
     Expect<const ast::Attribute*> expect_attribute();
     /// Parses a severity_control_name grammar element.
     /// @return the parsed severity control name, or nullptr on error.
-    Expect<ast::DiagnosticSeverity> expect_severity_control_name();
+    Expect<type::DiagnosticSeverity> expect_severity_control_name();
     /// Parses a diagnostic_control grammar element.
     /// @return the parsed diagnostic control, or nullptr on error.
     Expect<ast::DiagnosticControl> expect_diagnostic_control();
