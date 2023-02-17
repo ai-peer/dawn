@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e3567e_9dc0072e",
+        "filename": "src/dawn/native/BindGroupLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T23:30:14Z",
+      "side": 1,
+      "message": "Oops, good catch, was probably a remnant from debugging...",
+      "parentUuid": "115ff534_912d974b",
+      "range": {
+        "startLine": 552,
+        "startChar": 4,
+        "endLine": 553,
+        "endChar": 18
+      },
+      "revId": "a49a6eb2ee690c6be77e0e994de1cc156afe462a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23d263ab_65a33663",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-17T22:38:22Z",
       "side": 1,
       "message": "static_cast, not reinterpret_cast\n\nbut - I don\u0027t see GetQueueMock ever used?",
+      "range": {
+        "startLine": 118,
+        "startChar": 11,
+        "endLine": 118,
+        "endChar": 27
+      },
+      "revId": "a49a6eb2ee690c6be77e0e994de1cc156afe462a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d03ff16_72960ffb",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T23:30:14Z",
+      "side": 1,
+      "message": "Ah.. it\u0027s used in the child CL. I can move it there if you want? But not sure if that\u0027s necessary?",
+      "parentUuid": "23d263ab_65a33663",
       "range": {
         "startLine": 118,
         "startChar": 11,

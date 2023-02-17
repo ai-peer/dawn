@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ceb5a1e_7a0dda58",
+        "filename": "src/dawn/native/CachedObject.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-17T23:30:14Z",
+      "side": 1,
+      "message": "Hmm ok, so right now, most of the simpler objects (i.e. bgl, sampler, pipelinelayout), do NOT call `SetContentHash` in their constructor (`*Pipelines` already call it in their ctors). It is only called in the device when we first try to hit the cache, miss, and create a new object. This poses an issue when we create a mock object NOT through the `device.Create*` functions because the objects `SetContentHash` is never called. (We may do this if we are just trying some functionality on the specific object, i.e. API functions with mocked `Impl`s for backend functionality).\n\nIn general, this isn\u0027t a problem because this will just mean that the mock object is not in Device cache and we can ignore it. However, this IS a problem if we compose objects, i.e. `PipelineLayout` inside `*Pipelines` because the hash of the `*Pipelines` require the hash of the `PipelineLayout` (which may or may not be set if we created the `PipelineLayoutMock` directly rather than through a mocked `EXPECT_CALL` on a device). This case causes a crash because we will try to call `GetContentHash` on the `PipelineLayout` and hit an `ASSERT`.\n\nTo circumvent this and make the mock objects a bit easier to use without this annoying side-effect that users MUST \"recreate\" new mock objects through the device every time, I wanted all the mock objects to just pre-compute the hash (performance isn\u0027t as important for these mock objects). If I do that though, then if the user DOES \"recreate\" the object by making it the return value of an `EXPECT_CALL`, then the internal Device code will try to call `SetContentHash` again and hit an `ASSERT`. Soooo... to allow for both use cases, I overrode the `SetContentHash` on the mock objects to NOT do the assert on mock objects.\n\nAlternatives I considered:\n- Relaxing the `ASSERT` on `CachedObject` (but as you noted in the previous comment maybe this isn\u0027t the best way?)\n- Adding some other state to `CachedObject` so that the `ASSERT`s don\u0027t trigger for mocks, but that adds more overhead on all non-mock objects just for testing which is probably undesirable.",
+      "parentUuid": "47a24756_2d6f3796",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6557c8e_8aa4aab3",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
