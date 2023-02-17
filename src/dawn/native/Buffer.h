@@ -77,7 +77,7 @@ class BufferBase : public ApiObjectBase {
 
     virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
-    void Unmap();
+    MaybeError Unmap();
 
     // Dawn API
     void APIMapAsync(wgpu::MapMode mode,
@@ -126,6 +126,15 @@ class BufferBase : public ApiObjectBase {
     };
     PendingMappingCallback WillCallMappingCallback(MapRequestID mapID,
                                                    WGPUBufferMapAsyncStatus status);
+
+    // A helper structure to transition a buffers state after a scope.
+    struct BufferStateTransitioner {
+        BufferBase* buffer;
+        BufferState endState;
+
+        BufferStateTransitioner(BufferBase* buffer, BufferState endState);
+        ~BufferStateTransitioner();
+    };
 
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
