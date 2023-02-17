@@ -174,6 +174,16 @@ void BufferBase::PendingMappingCallback::Call() {
     }
 }
 
+// BufferBase::BufferStateTransitioner
+
+BufferBase::BufferStateTransitioner::BufferStateTransitioner(BufferBase* buffer,
+                                                             BufferState endState)
+    : buffer(buffer), endState(endState) {}
+
+BufferBase::BufferStateTransitioner::~BufferStateTransitioner() {
+    buffer->mState = endState;
+}
+
 // Buffer
 
 BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
@@ -519,6 +529,7 @@ void BufferBase::Unmap() {
 BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
     WGPUBufferMapAsyncStatus callbackStatus) {
     PendingMappingCallback toCall;
+    BufferStateTransitioner stateTransitioner(this, BufferState::Unmapped);
 
     if (mState == BufferState::PendingMap) {
         toCall = WillCallMappingCallback(mLastMapID, callbackStatus);
@@ -527,13 +538,13 @@ BufferBase::PendingMappingCallback BufferBase::UnmapInternal(
         UnmapImpl();
     } else if (mState == BufferState::MappedAtCreation) {
         if (mStagingBuffer != nullptr) {
-            GetDevice()->ConsumedError(CopyFromStagingBuffer());
+            CONSUME_IF_ERROR_AND_RETURN(GetDevice(), CopyFromStagingBuffer(),
+                                        kNoAllowedInternalError, toCall);
         } else if (mSize != 0) {
             UnmapImpl();
         }
     }
 
-    mState = BufferState::Unmapped;
     return toCall;
 }
 

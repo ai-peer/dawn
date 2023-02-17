@@ -15,6 +15,7 @@
 #include "dawn/native/opengl/TextureGL.h"
 
 #include <limits>
+#include <utility>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
@@ -170,6 +171,15 @@ void AllocateTexture(const OpenGLFunctions& gl,
 
 // Texture
 
+static ResultOrError<Ref<Texture>> Texture::Create(Device* device,
+                                                   const TextureDescriptor* descriptor) {
+    Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
+    if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+        DAWN_TRY(texture->ClearTexture(GetAllSubresources(), TextureBase::ClearValue::NonZero));
+    }
+    return std::move(texture);
+}
+
 Texture::Texture(Device* device, const TextureDescriptor* descriptor)
     : Texture(device, descriptor, 0, TextureState::OwnedInternal) {
     const OpenGLFunctions& gl = device->GetGL();
@@ -186,11 +196,6 @@ Texture::Texture(Device* device, const TextureDescriptor* descriptor)
     // The texture is not complete if it uses mipmapping and not all levels up to
     // MAX_LEVEL have been defined.
     gl.TexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
-
-    if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-        GetDevice()->ConsumedError(
-            ClearTexture(GetAllSubresources(), TextureBase::ClearValue::NonZero));
-    }
 }
 
 void Texture::Touch() {
@@ -544,7 +549,8 @@ void Texture::EnsureSubresourceContentInitialized(const SubresourceRange& range)
         return;
     }
     if (!IsSubresourceContentInitialized(range)) {
-        GetDevice()->ConsumedError(ClearTexture(range, TextureBase::ClearValue::Zero));
+        CONSUME_IF_ERROR(ClearTexture(range, TextureBase::ClearValue::Zero),
+                         kNoAllowedInternalError);
     }
 }
 

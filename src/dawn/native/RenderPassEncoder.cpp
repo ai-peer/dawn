@@ -137,8 +137,8 @@ void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t 
 
 void RenderPassEncoder::APIEnd() {
     if (mEnded && IsValidationEnabled()) {
-        GetDevice()->ConsumedError(DAWN_VALIDATION_ERROR("%s was already ended.", this));
-        return;
+        CONSUME_ERROR(GetDevice(), DAWN_VALIDATION_ERROR("%s was already ended.", this),
+                      kDefaultAllowedInternalError);
     }
 
     mEnded = true;

@@ -1084,8 +1084,9 @@ void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* comma
     if (!IsSubresourceContentInitialized(range)) {
         // If subresource has not been initialized, clear it to black as it could
         // contain dirty bits from recycled memory
-        GetDevice()->ConsumedError(
-            ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
+        CONSUME_IF_ERROR(GetDevice(),
+                         ClearTexture(commandContext, range, TextureBase::ClearValue::Zero),
+                         kNoAllowedInternalError);
         SetIsSubresourceContentInitialized(true, range);
         GetDevice()->IncrementLazyClearCountForTesting();
     }
@@ -1165,9 +1166,8 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
                 // TODO(enga): Add a workaround to back combined depth/stencil textures
                 // with Sampled usage using two separate textures.
                 // Or, consider always using the workaround for D32S8.
-                device->ConsumedError(
-                    DAWN_DEVICE_LOST_ERROR("Cannot create stencil-only texture view of "
-                                           "combined depth/stencil format."));
+                return DAWN_DEVICE_LOST_ERROR("Cannot create stencil-only texture view of "
+                                              "combined depth/stencil format.");
             }
         } else if (GetTexture()->GetFormat().HasDepth() && GetTexture()->GetFormat().HasStencil()) {
             // Depth-only views for depth/stencil textures in Metal simply use the original

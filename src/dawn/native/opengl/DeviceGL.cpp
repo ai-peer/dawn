@@ -250,7 +250,7 @@ ResultOrError<Ref<NewSwapChainBase>> Device::CreateSwapChainImpl(
     return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
 }
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
-    return AcquireRef(new Texture(this, descriptor));
+    return Texture::Create(this, descriptor);
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
     TextureBase* texture,
@@ -319,11 +319,13 @@ TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor
     if (textureDescriptor->size.width != static_cast<uint32_t>(width) ||
         textureDescriptor->size.height != static_cast<uint32_t>(height) ||
         textureDescriptor->size.depthOrArrayLayers != 1) {
-        ConsumedError(DAWN_VALIDATION_ERROR(
-            "EGLImage size (width: %u, height: %u, depth: 1) doesn't match descriptor size %s.",
-            width, height, &textureDescriptor->size));
         gl.DeleteTextures(1, &tex);
-        return nullptr;
+        CONSUME_ERROR_AND_RETURN(
+            this,
+            DAWN_VALIDATION_ERROR(
+                "EGLImage size (width: %u, height: %u, depth: 1) doesn't match descriptor size %s.",
+                width, height, &textureDescriptor->size),
+            kDefaultAllowedInternalError, nullptr);
     }
 
     // TODO(dawn:803): Validate the OpenGL texture format from the EGLImage against the format
