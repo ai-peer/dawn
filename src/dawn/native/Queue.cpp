@@ -281,7 +281,7 @@ void QueueBase::APIWriteBuffer(BufferBase* buffer,
                                uint64_t bufferOffset,
                                const void* data,
                                size_t size) {
-    GetDevice()->ConsumedError(WriteBuffer(buffer, bufferOffset, data, size));
+    (void)GetDevice()->ConsumedError(WriteBuffer(buffer, bufferOffset, data, size));
 }
 
 MaybeError QueueBase::WriteBuffer(BufferBase* buffer,
@@ -322,7 +322,7 @@ void QueueBase::APIWriteTexture(const ImageCopyTexture* destination,
                                 size_t dataSize,
                                 const TextureDataLayout* dataLayout,
                                 const Extent3D* writeSize) {
-    GetDevice()->ConsumedError(
+    (void)GetDevice()->ConsumedError(
         WriteTextureInternal(destination, data, dataSize, *dataLayout, writeSize));
 }
 
@@ -389,7 +389,7 @@ void QueueBase::APICopyTextureForBrowser(const ImageCopyTexture* source,
                                          const ImageCopyTexture* destination,
                                          const Extent3D* copySize,
                                          const CopyTextureForBrowserOptions* options) {
-    GetDevice()->ConsumedError(
+    (void)GetDevice()->ConsumedError(
         CopyTextureForBrowserInternal(source, destination, copySize, options));
 }
 
@@ -397,7 +397,7 @@ void QueueBase::APICopyExternalTextureForBrowser(const ImageCopyExternalTexture*
                                                  const ImageCopyTexture* destination,
                                                  const Extent3D* copySize,
                                                  const CopyTextureForBrowserOptions* options) {
-    GetDevice()->ConsumedError(
+    (void)GetDevice()->ConsumedError(
         CopyExternalTextureForBrowserInternal(source, destination, copySize, options));
 }
 
