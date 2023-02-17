@@ -23,8 +23,8 @@ namespace tint::ast {
 InterpolateAttribute::InterpolateAttribute(ProgramID pid,
                                            NodeID nid,
                                            const Source& src,
-                                           InterpolationType ty,
-                                           InterpolationSampling smpl)
+                                           type::InterpolationType ty,
+                                           type::InterpolationSampling smpl)
     : Base(pid, nid, src), type(ty), sampling(smpl) {}
 
 InterpolateAttribute::~InterpolateAttribute() = default;
@@ -38,13 +38,5 @@ const InterpolateAttribute* InterpolateAttribute::Clone(CloneContext* ctx) const
     auto src = ctx->Clone(source);
     return ctx->dst->create<InterpolateAttribute>(src, type, sampling);
 }
-
-{{ Eval "ParseEnum" (Sem.Enum "interpolation_type")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "interpolation_type")}}
-
-{{ Eval "ParseEnum" (Sem.Enum "interpolation_sampling")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "interpolation_sampling")}}
 
 }  // namespace tint::ast

@@ -10,24 +10,17 @@ See:
 
 {{- Import "src/tint/templates/enums.tmpl.inc" -}}
 
-#include "src/tint/ast/interpolate_attribute.h"
+#include "src/tint/type/interpolation_type.h"
 
 #include <string>
 
-#include "src/tint/ast/test_helper.h"
+#include "src/tint/type/test_helper.h"
 #include "src/tint/utils/string.h"
 
-namespace tint::ast {
+namespace tint::type {
 namespace {
 
-using InterpolateAttributeTest = TestHelper;
-
-TEST_F(InterpolateAttributeTest, Creation) {
-    auto* d =
-        create<InterpolateAttribute>(type::InterpolationType::kLinear, type::InterpolationSampling::kCenter);
-    EXPECT_EQ(type::InterpolationType::kLinear, d->type);
-    EXPECT_EQ(type::InterpolationSampling::kCenter, d->sampling);
-}
+{{ Eval "TestParsePrintEnum" (Sem.Enum "interpolation_type")}}
 
 }  // namespace
-}  // namespace tint::ast
+}  // namespace tint::type

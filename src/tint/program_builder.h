@@ -89,6 +89,8 @@
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
 #include "src/tint/type/i32.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/pointer.h"
@@ -3454,8 +3456,8 @@ class ProgramBuilder {
     /// @returns the interpolate attribute pointer
     const ast::InterpolateAttribute* Interpolate(
         const Source& source,
-        ast::InterpolationType type,
-        ast::InterpolationSampling sampling = ast::InterpolationSampling::kUndefined) {
+        type::InterpolationType type,
+        type::InterpolationSampling sampling = type::InterpolationSampling::kUndefined) {
         return create<ast::InterpolateAttribute>(source, type, sampling);
     }
 
@@ -3464,8 +3466,8 @@ class ProgramBuilder {
     /// @param sampling the interpolation sampling
     /// @returns the interpolate attribute pointer
     const ast::InterpolateAttribute* Interpolate(
-        ast::InterpolationType type,
-        ast::InterpolationSampling sampling = ast::InterpolationSampling::kUndefined) {
+        type::InterpolationType type,
+        type::InterpolationSampling sampling = type::InterpolationSampling::kUndefined) {
         return create<ast::InterpolateAttribute>(source_, type, sampling);
     }
 
@@ -3473,12 +3475,12 @@ class ProgramBuilder {
     /// @param source the source information
     /// @returns the interpolate attribute pointer
     const ast::InterpolateAttribute* Flat(const Source& source) {
-        return Interpolate(source, ast::InterpolationType::kFlat);
+        return Interpolate(source, type::InterpolationType::kFlat);
     }
 
     /// Creates an ast::InterpolateAttribute using flat interpolation
     /// @returns the interpolate attribute pointer
-    const ast::InterpolateAttribute* Flat() { return Interpolate(ast::InterpolationType::kFlat); }
+    const ast::InterpolateAttribute* Flat() { return Interpolate(type::InterpolationType::kFlat); }
 
     /// Creates an ast::InvariantAttribute
     /// @param source the source information

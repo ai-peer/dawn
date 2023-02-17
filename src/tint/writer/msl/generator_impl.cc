@@ -65,6 +65,8 @@
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
 #include "src/tint/type/i32.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/matrix.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/pointer.h"
@@ -1939,33 +1941,33 @@ std::string GeneratorImpl::builtin_to_attribute(type::BuiltinValue builtin) cons
     return "";
 }
 
-std::string GeneratorImpl::interpolation_to_attribute(ast::InterpolationType type,
-                                                      ast::InterpolationSampling sampling) const {
+std::string GeneratorImpl::interpolation_to_attribute(type::InterpolationType type,
+                                                      type::InterpolationSampling sampling) const {
     std::string attr;
     switch (sampling) {
-        case ast::InterpolationSampling::kCenter:
+        case type::InterpolationSampling::kCenter:
             attr = "center_";
             break;
-        case ast::InterpolationSampling::kCentroid:
+        case type::InterpolationSampling::kCentroid:
             attr = "centroid_";
             break;
-        case ast::InterpolationSampling::kSample:
+        case type::InterpolationSampling::kSample:
             attr = "sample_";
             break;
-        case ast::InterpolationSampling::kUndefined:
+        case type::InterpolationSampling::kUndefined:
             break;
     }
     switch (type) {
-        case ast::InterpolationType::kPerspective:
+        case type::InterpolationType::kPerspective:
             attr += "perspective";
             break;
-        case ast::InterpolationType::kLinear:
+        case type::InterpolationType::kLinear:
             attr += "no_perspective";
             break;
-        case ast::InterpolationType::kFlat:
+        case type::InterpolationType::kFlat:
             attr += "flat";
             break;
-        case ast::InterpolationType::kUndefined:
+        case type::InterpolationType::kUndefined:
             break;
     }
     return attr;

@@ -39,6 +39,8 @@
 #include "src/tint/program.h"
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/struct.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/writer/array_length_from_uniform_options.h"
 #include "src/tint/writer/msl/generator.h"
 #include "src/tint/writer/text_generator.h"
@@ -366,8 +368,8 @@ class GeneratorImpl : public TextGenerator {
     /// @param type the interpolation type
     /// @param sampling the interpolation sampling
     /// @returns the string name of the attribute or blank on error
-    std::string interpolation_to_attribute(ast::InterpolationType type,
-                                           ast::InterpolationSampling sampling) const;
+    std::string interpolation_to_attribute(type::InterpolationType type,
+                                           type::InterpolationSampling sampling) const;
 
   private:
     // A pair of byte size and alignment `uint32_t`s.

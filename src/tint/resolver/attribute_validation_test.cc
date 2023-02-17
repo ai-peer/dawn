@@ -16,6 +16,8 @@
 #include "src/tint/resolver/resolver.h"
 #include "src/tint/resolver/resolver_test_helper.h"
 #include "src/tint/transform/add_block_attribute.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/texture_dimension.h"
 
 #include "gmock/gmock.h"
@@ -104,8 +106,8 @@ static utils::Vector<const ast::Attribute*, 2> createAttributes(const Source& so
         case AttributeKind::kId:
             return {builder.Id(source, 0_a)};
         case AttributeKind::kInterpolate:
-            return {builder.Interpolate(source, ast::InterpolationType::kLinear,
-                                        ast::InterpolationSampling::kCenter)};
+            return {builder.Interpolate(source, type::InterpolationType::kLinear,
+                                        type::InterpolationSampling::kCenter)};
         case AttributeKind::kInvariant:
             return {builder.Invariant(source)};
         case AttributeKind::kLocation:
@@ -1487,8 +1489,8 @@ namespace {
 using InterpolateTest = ResolverTest;
 
 struct Params {
-    ast::InterpolationType type;
-    ast::InterpolationSampling sampling;
+    type::InterpolationType type;
+    type::InterpolationSampling sampling;
     bool should_pass;
 };
 
@@ -1537,7 +1539,7 @@ TEST_P(InterpolateParameterTest, IntegerScalar) {
              Stage(ast::PipelineStage::kFragment),
          });
 
-    if (params.type != ast::InterpolationType::kFlat) {
+    if (params.type != type::InterpolationType::kFlat) {
         EXPECT_FALSE(r()->Resolve());
         EXPECT_EQ(r()->error(),
                   "12:34 error: interpolation type must be 'flat' for integral "
@@ -1568,7 +1570,7 @@ TEST_P(InterpolateParameterTest, IntegerVector) {
              Stage(ast::PipelineStage::kFragment),
          });
 
-    if (params.type != ast::InterpolationType::kFlat) {
+    if (params.type != type::InterpolationType::kFlat) {
         EXPECT_FALSE(r()->Resolve());
         EXPECT_EQ(r()->error(),
                   "12:34 error: interpolation type must be 'flat' for integral "
@@ -1587,19 +1589,20 @@ INSTANTIATE_TEST_SUITE_P(
     ResolverAttributeValidationTest,
     InterpolateParameterTest,
     testing::Values(
-        Params{ast::InterpolationType::kPerspective, ast::InterpolationSampling::kUndefined, true},
-        Params{ast::InterpolationType::kPerspective, ast::InterpolationSampling::kCenter, true},
-        Params{ast::InterpolationType::kPerspective, ast::InterpolationSampling::kCentroid, true},
-        Params{ast::InterpolationType::kPerspective, ast::InterpolationSampling::kSample, true},
-        Params{ast::InterpolationType::kLinear, ast::InterpolationSampling::kUndefined, true},
-        Params{ast::InterpolationType::kLinear, ast::InterpolationSampling::kCenter, true},
-        Params{ast::InterpolationType::kLinear, ast::InterpolationSampling::kCentroid, true},
-        Params{ast::InterpolationType::kLinear, ast::InterpolationSampling::kSample, true},
+        Params{type::InterpolationType::kPerspective, type::InterpolationSampling::kUndefined,
+               true},
+        Params{type::InterpolationType::kPerspective, type::InterpolationSampling::kCenter, true},
+        Params{type::InterpolationType::kPerspective, type::InterpolationSampling::kCentroid, true},
+        Params{type::InterpolationType::kPerspective, type::InterpolationSampling::kSample, true},
+        Params{type::InterpolationType::kLinear, type::InterpolationSampling::kUndefined, true},
+        Params{type::InterpolationType::kLinear, type::InterpolationSampling::kCenter, true},
+        Params{type::InterpolationType::kLinear, type::InterpolationSampling::kCentroid, true},
+        Params{type::InterpolationType::kLinear, type::InterpolationSampling::kSample, true},
         // flat interpolation must not have a sampling type
-        Params{ast::InterpolationType::kFlat, ast::InterpolationSampling::kUndefined, true},
-        Params{ast::InterpolationType::kFlat, ast::InterpolationSampling::kCenter, false},
-        Params{ast::InterpolationType::kFlat, ast::InterpolationSampling::kCentroid, false},
-        Params{ast::InterpolationType::kFlat, ast::InterpolationSampling::kSample, false}));
+        Params{type::InterpolationType::kFlat, type::InterpolationSampling::kUndefined, true},
+        Params{type::InterpolationType::kFlat, type::InterpolationSampling::kCenter, false},
+        Params{type::InterpolationType::kFlat, type::InterpolationSampling::kCentroid, false},
+        Params{type::InterpolationType::kFlat, type::InterpolationSampling::kSample, false}));
 
 TEST_F(InterpolateTest, FragmentInput_Integer_MissingFlatInterpolation) {
     Func("main",
@@ -1643,8 +1646,8 @@ TEST_F(InterpolateTest, MissingLocationAttribute_Parameter) {
              Param("a", ty.vec4<f32>(),
                    utils::Vector{
                        Builtin(type::BuiltinValue::kPosition),
-                       Interpolate(Source{{12, 34}}, ast::InterpolationType::kFlat,
-                                   ast::InterpolationSampling::kUndefined),
+                       Interpolate(Source{{12, 34}}, type::InterpolationType::kFlat,
+                                   type::InterpolationSampling::kUndefined),
                    }),
          },
          ty.void_(), utils::Empty,
@@ -1667,8 +1670,8 @@ TEST_F(InterpolateTest, MissingLocationAttribute_ReturnType) {
          },
          utils::Vector{
              Builtin(type::BuiltinValue::kPosition),
-             Interpolate(Source{{12, 34}}, ast::InterpolationType::kFlat,
-                         ast::InterpolationSampling::kUndefined),
+             Interpolate(Source{{12, 34}}, type::InterpolationType::kFlat,
+                         type::InterpolationSampling::kUndefined),
          });
 
     EXPECT_FALSE(r()->Resolve());
@@ -1680,8 +1683,8 @@ TEST_F(InterpolateTest, MissingLocationAttribute_Struct) {
     Structure("S",
               utils::Vector{
                   Member("a", ty.f32(),
-                         utils::Vector{Interpolate(Source{{12, 34}}, ast::InterpolationType::kFlat,
-                                                   ast::InterpolationSampling::kUndefined)}),
+                         utils::Vector{Interpolate(Source{{12, 34}}, type::InterpolationType::kFlat,
+                                                   type::InterpolationSampling::kUndefined)}),
               });
 
     EXPECT_FALSE(r()->Resolve());

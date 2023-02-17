@@ -41,6 +41,8 @@
 #include "src/tint/type/atomic.h"
 #include "src/tint/type/depth_multisampled_texture.h"
 #include "src/tint/type/depth_texture.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/multisampled_texture.h"
 #include "src/tint/type/reference.h"
 #include "src/tint/type/sampled_texture.h"
@@ -4047,29 +4049,29 @@ SpvBuiltIn Builder::ConvertBuiltin(type::BuiltinValue builtin, type::AddressSpac
 }
 
 void Builder::AddInterpolationDecorations(uint32_t id,
-                                          ast::InterpolationType type,
-                                          ast::InterpolationSampling sampling) {
+                                          type::InterpolationType type,
+                                          type::InterpolationSampling sampling) {
     switch (type) {
-        case ast::InterpolationType::kLinear:
+        case type::InterpolationType::kLinear:
             push_annot(spv::Op::OpDecorate, {Operand(id), U32Operand(SpvDecorationNoPerspective)});
             break;
-        case ast::InterpolationType::kFlat:
+        case type::InterpolationType::kFlat:
             push_annot(spv::Op::OpDecorate, {Operand(id), U32Operand(SpvDecorationFlat)});
             break;
-        case ast::InterpolationType::kPerspective:
-        case ast::InterpolationType::kUndefined:
+        case type::InterpolationType::kPerspective:
+        case type::InterpolationType::kUndefined:
             break;
     }
     switch (sampling) {
-        case ast::InterpolationSampling::kCentroid:
+        case type::InterpolationSampling::kCentroid:
             push_annot(spv::Op::OpDecorate, {Operand(id), U32Operand(SpvDecorationCentroid)});
             break;
-        case ast::InterpolationSampling::kSample:
+        case type::InterpolationSampling::kSample:
             push_capability(SpvCapabilitySampleRateShading);
             push_annot(spv::Op::OpDecorate, {Operand(id), U32Operand(SpvDecorationSample)});
             break;
-        case ast::InterpolationSampling::kCenter:
-        case ast::InterpolationSampling::kUndefined:
+        case type::InterpolationSampling::kCenter:
+        case type::InterpolationSampling::kUndefined:
             break;
     }
 }

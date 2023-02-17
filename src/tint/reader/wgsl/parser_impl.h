@@ -26,6 +26,8 @@
 #include "src/tint/reader/wgsl/parser_impl_detail.h"
 #include "src/tint/reader/wgsl/token.h"
 #include "src/tint/type/access.h"
+#include "src/tint/type/interpolation_sampling.h"
+#include "src/tint/type/interpolation_type.h"
 #include "src/tint/type/storage_texture.h"
 #include "src/tint/type/texture_dimension.h"
 
@@ -532,11 +534,11 @@ class ParserImpl {
     /// Parses an interpolation sample name identifier, erroring if the next token does not match a
     /// valid sample name.
     /// @returns the parsed sample name.
-    Expect<ast::InterpolationSampling> expect_interpolation_sample_name();
+    Expect<type::InterpolationSampling> expect_interpolation_sample_name();
     /// Parses an interpolation type name identifier, erroring if the next token does not match a
     /// value type name.
     /// @returns the parsed type name
-    Expect<ast::InterpolationType> expect_interpolation_type_name();
+    Expect<type::InterpolationType> expect_interpolation_type_name();
     /// Parses a builtin identifier, erroring if the next token does not match a
     /// valid builtin name.
     /// @returns the parsed builtin.
