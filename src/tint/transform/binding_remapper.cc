@@ -122,8 +122,8 @@ Transform::ApplyResult BindingRemapper::Apply(const Program* src,
             // Replace any access controls.
             auto ac_it = remappings->access_controls.find(from);
             if (ac_it != remappings->access_controls.end()) {
-                type::Access ac = ac_it->second;
-                if (ac == type::Access::kUndefined) {
+                builtin::Access ac = ac_it->second;
+                if (ac == builtin::Access::kUndefined) {
                     b.Diagnostics().add_error(
                         diag::System::Transform,
                         "invalid access mode (" + std::to_string(static_cast<uint32_t>(ac)) + ")");
