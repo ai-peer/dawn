@@ -213,7 +213,7 @@ class GeneratorImpl : public TextGenerator {
     /// @param out the output stream
     /// @param access the access to generate
     /// @returns true if the access is emitted
-    bool EmitAccess(std::ostream& out, const type::Access access);
+    bool EmitAccess(std::ostream& out, const builtin::Access access);
     /// Handles a unary op expression
     /// @param out the output stream
     /// @param expr the expression to emit
