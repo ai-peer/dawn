@@ -19,9 +19,9 @@
 #include <vector>
 
 #include "gmock/gmock.h"
+#include "src/tint/builtin/builtin.h"
 #include "src/tint/builtin/texel_format.h"
 #include "src/tint/transform/test_helper.h"
-#include "src/tint/type/builtin.h"
 
 namespace tint::transform {
 namespace {
@@ -1713,7 +1713,7 @@ std::unordered_set<std::string> Keywords() {
 std::vector<const char*> NonKeywordBuiltinTypes() {
     auto keywords = Keywords();
     std::vector<const char*> out;
-    for (auto* ident : type::kBuiltinStrings) {
+    for (auto* ident : builtin::kBuiltinStrings) {
         if (!keywords.count(ident)) {
             out.push_back(ident);
         }
@@ -1922,7 +1922,7 @@ INSTANTIATE_TEST_SUITE_P(RenamerBuiltinTypeTest,
 std::vector<const char*> NonKeywordIdentifiers() {
     auto keywords = Keywords();
     std::vector<const char*> out;
-    for (auto* ident : type::kBuiltinStrings) {
+    for (auto* ident : builtin::kBuiltinStrings) {
         if (!keywords.count(ident)) {
             out.push_back(ident);
         }
