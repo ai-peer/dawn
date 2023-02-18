@@ -33,6 +33,24 @@
       "message": "These are added, not moved. Did you forget to delete them from the old directory?",
       "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1bbceb5_dd3522d4",
+        "filename": "src/tint/builtin/diagnostic_rule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-18T00:50:34Z",
+      "side": 1,
+      "message": "It\u0027s because they\u0027re split out of diagnostic_control which still has stuff in the template.",
+      "parentUuid": "81b5c5fa_a681921f",
+      "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
