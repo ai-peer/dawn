@@ -16,10 +16,11 @@ See:
 
 #include "src/tint/ast/identifier.h"
 #include "src/tint/ast/templated_identifier.h"
+#include "src/tint/builtin/diagnostic_severity.h"
 
 namespace tint::ast {
 
-DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* rule)
+DiagnosticControl::DiagnosticControl(builtin::DiagnosticSeverity sev, const Identifier* rule)
         : severity(sev), rule_name(rule) {
     TINT_ASSERT(AST, rule != nullptr);
     if (rule) {
@@ -27,26 +28,5 @@ DiagnosticControl::DiagnosticControl(DiagnosticSeverity sev, const Identifier* r
         TINT_ASSERT(AST, !rule->Is<TemplatedIdentifier>());
     }
 }
-
-diag::Severity ToSeverity(DiagnosticSeverity sc) {
-    switch (sc) {
-        case DiagnosticSeverity::kError:
-            return diag::Severity::Error;
-        case DiagnosticSeverity::kWarning:
-            return diag::Severity::Warning;
-        case DiagnosticSeverity::kInfo:
-            return diag::Severity::Note;
-        default:
-            return diag::Severity::InternalCompilerError;
-    }
-}
-
-{{ Eval "ParseEnum" (Sem.Enum "diagnostic_severity")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "diagnostic_severity")}}
-
-{{ Eval "ParseEnum" (Sem.Enum "diagnostic_rule")}}
-
-{{ Eval "EnumOStream" (Sem.Enum "diagnostic_rule")}}
 
 }  // namespace tint::ast
