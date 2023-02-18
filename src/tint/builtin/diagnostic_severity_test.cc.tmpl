@@ -13,24 +13,17 @@ See:
 #include <string>
 
 #include "gtest/gtest-spi.h"
-#include "src/tint/ast/diagnostic_control.h"
-#include "src/tint/ast/test_helper.h"
 #include "src/tint/builtin/diagnostic_severity.h"
+#include "src/tint/utils/string.h"
 
-namespace tint::ast {
+namespace tint::builtin {
 namespace {
 
-using DiagnosticControlTest = TestHelper;
+namespace diagnostic_severity_tests {
 
-TEST_F(DiagnosticControlTest, Assert_RuleNotTemplated) {
-    EXPECT_FATAL_FAILURE(
-        {
-            ProgramBuilder b;
-            ast::DiagnosticControl control(builtin::DiagnosticSeverity::kWarning,
-                                           b.Ident("name", "a", "b", "c"));
-        },
-        "internal compiler error");
-}
+{{ Eval "TestParsePrintEnum" (Sem.Enum "diagnostic_severity")}}
+
+}  // namespace diagnostic_severity_tests
 
 }  // namespace
-}  // namespace tint::ast
+}  // namespace tint::builtin
