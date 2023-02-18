@@ -16,6 +16,23 @@
       "message": "PTAL! Tests are in https://github.com/gpuweb/cts/pull/2289",
       "revId": "b2decbc88b0e9c970174277fc273d38c0c48260a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23c0d52_8fc00991",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-18T01:26:36Z",
+      "side": 1,
+      "message": "that was easy",
+      "revId": "b2decbc88b0e9c970174277fc273d38c0c48260a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
