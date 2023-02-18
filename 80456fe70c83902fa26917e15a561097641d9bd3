@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48300f0_51c2a563",
+        "filename": "src/tint/ast/diagnostic_control.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-18T18:40:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "457d36df_66b25aa6",
+      "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b5c5fa_a681921f",
