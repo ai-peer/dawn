@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7f867b_1319ccd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-18T05:16:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "733d24edc38fa136fcff3d598e1dacb20e2aca2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa45a258_a9554744",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-18T05:16:50Z",
+      "side": 1,
+      "message": "Maybe note that this can be an optimization and a correctness fix? Otherwise it\u0027s not clear why we bother doing this.",
+      "revId": "733d24edc38fa136fcff3d598e1dacb20e2aca2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
