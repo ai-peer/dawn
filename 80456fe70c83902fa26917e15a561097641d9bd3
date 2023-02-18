@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "457d36df_66b25aa6",
+        "filename": "src/tint/ast/diagnostic_control.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-18T00:55:13Z",
+      "side": 1,
+      "message": "There isn\u0027t anything in here anymore that\u0027s template generated? Same with the other template files in this package?",
+      "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81b5c5fa_a681921f",
         "filename": "src/tint/builtin/diagnostic_rule.h",
         "patchSetId": 2
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "It\u0027s because they\u0027re split out of diagnostic_control which still has stuff in the template.",
       "parentUuid": "81b5c5fa_a681921f",
+      "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db628bb4_2593c4b0",
+        "filename": "src/tint/builtin/diagnostic_rule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-18T00:55:13Z",
+      "side": 1,
+      "message": "ack, thanks.",
+      "parentUuid": "e1bbceb5_dd3522d4",
       "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
