@@ -17,14 +17,10 @@ See:
 #include <string>
 
 #include "src/tint/ast/attribute.h"
+#include "src/tint/builtin/interpolation_sampling.h"
+#include "src/tint/builtin/interpolation_type.h"
 
 namespace tint::ast {
-
-/// The interpolation type.
-{{ Eval "DeclareEnum" (Sem.Enum "interpolation_type") }}
-
-/// The interpolation sampling.
-{{ Eval "DeclareEnum" (Sem.Enum "interpolation_sampling") }}
 
 /// An interpolate attribute
 class InterpolateAttribute final : public Castable<InterpolateAttribute, Attribute> {
@@ -38,8 +34,8 @@ class InterpolateAttribute final : public Castable<InterpolateAttribute, Attribu
     InterpolateAttribute(ProgramID pid,
                          NodeID nid,
                          const Source& src,
-                         InterpolationType type,
-                         InterpolationSampling sampling);
+                         builtin::InterpolationType type,
+                         builtin::InterpolationSampling sampling);
     ~InterpolateAttribute() override;
 
     /// @returns the WGSL name for the attribute
@@ -52,10 +48,10 @@ class InterpolateAttribute final : public Castable<InterpolateAttribute, Attribu
     const InterpolateAttribute* Clone(CloneContext* ctx) const override;
 
     /// The interpolation type
-    const InterpolationType type;
+    const builtin::InterpolationType type;
 
     /// The interpolation sampling
-    const InterpolationSampling sampling;
+    const builtin::InterpolationSampling sampling;
 };
 
 }  // namespace tint::ast
