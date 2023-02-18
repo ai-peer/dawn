@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b5c5fa_a681921f",
+        "filename": "src/tint/builtin/diagnostic_rule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-18T00:44:52Z",
+      "side": 1,
+      "message": "These are added, not moved. Did you forget to delete them from the old directory?",
+      "revId": "80456fe70c83902fa26917e15a561097641d9bd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
