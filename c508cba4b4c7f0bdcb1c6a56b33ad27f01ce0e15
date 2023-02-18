@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "310c1af3_1935f34f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-18T04:53:21Z",
+      "side": 1,
+      "message": "Thanks for your replies!\nNow in the latest patch set I am doing the replacement by default on D3D12 backends. Can I CQ+2 right now?",
+      "parentUuid": "85409a4a_c162747a",
+      "revId": "c508cba4b4c7f0bdcb1c6a56b33ad27f01ce0e15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "389f9a0a_a4792172",
@@ -136,6 +154,30 @@
       "writtenOn": "2023-02-16T19:42:15Z",
       "side": 1,
       "message": "nit: the device here can be const",
+      "range": {
+        "startLine": 237,
+        "startChar": 48,
+        "endLine": 237,
+        "endChar": 58
+      },
+      "revId": "c508cba4b4c7f0bdcb1c6a56b33ad27f01ce0e15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23e39ec8_a957ea42",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-18T04:53:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "389f9a0a_a4792172",
       "range": {
         "startLine": 237,
         "startChar": 48,
