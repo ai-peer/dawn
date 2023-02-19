@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8d62656_ce4a089c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-19T04:07:58Z",
+      "side": 1,
+      "message": "Thanks for the explanation.\n\nThen, the problem \"map async -\u003e buffer release -\u003e map asyn callback via destructor -\u003e map async call\" that I want to fix seems to be Wire specific?\n\nI made a new patch set. Please read the CL comment.\n\n(Or refcounts shouldn\u0027t reach zero while pending map in Wire, too?)",
+      "parentUuid": "37569368_f8fd6a6b",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a294516_ad0875ec",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
