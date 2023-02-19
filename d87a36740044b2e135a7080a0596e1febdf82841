@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c316c0a_a1dddef3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-19T21:47:37Z",
+      "side": 1,
+      "message": "PTAL. (Note, this will fail the rel bots because it\u0027s built on the alias CL which requires a CTS update. Probably there will be CTS failures with this as well.)",
+      "revId": "d87a36740044b2e135a7080a0596e1febdf82841",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
