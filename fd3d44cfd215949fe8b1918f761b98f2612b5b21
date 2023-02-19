@@ -159,6 +159,24 @@
       "parentUuid": "7a294516_ad0875ec",
       "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e39b759d_1f4b2200",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-19T04:16:03Z",
+      "side": 1,
+      "message": "\u003e note however that it should be skipped when compiled without asserts\n\nHow can I skip it when assets are disabled? And are they enabled on the testing servers?",
+      "parentUuid": "39792924_848d9a64",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
