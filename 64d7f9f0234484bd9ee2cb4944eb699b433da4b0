@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19e2c2a_e7592095",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-19T20:43:06Z",
+      "side": 1,
+      "message": "This was deprecated in M111. The bug marked as remove in M112, which is coming up.",
+      "revId": "64d7f9f0234484bd9ee2cb4944eb699b433da4b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
