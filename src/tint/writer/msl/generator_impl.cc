@@ -2891,8 +2891,19 @@ bool GeneratorImpl::EmitStructType(TextBuffer* b, const sem::Struct* str) {
                         return true;
                     },
                     [&](const ast::InterpolateAttribute* interpolate) {
-                        auto name =
-                            interpolation_to_attribute(interpolate->type, interpolate->sampling);
+                        auto& sem = program_->Sem();
+                        auto i_type =
+                            sem.Get<sem::BuiltinEnumExpression<builtin::InterpolationType>>(
+                                   interpolate->type)
+                                ->Value();
+                        auto i_smpl =
+                            interpolate->sampling
+                                ? sem.Get<sem::BuiltinEnumExpression<
+                                      builtin::InterpolationSampling>>(interpolate->sampling)
+                                      ->Value()
+                                : builtin::InterpolationSampling::kUndefined;
+
+                        auto name = interpolation_to_attribute(i_type, i_smpl);
                         if (name.empty()) {
                             diagnostics_.add_error(diag::System::Writer,
                                                    "unknown interpolation attribute");
