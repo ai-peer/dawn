@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "src/tint/ast/test_helper.h"
 #include "src/tint/reader/wgsl/parser_impl_test_helper.h"
 
 namespace tint::reader::wgsl {
@@ -38,7 +39,8 @@ TEST_F(ParserImplTest, AttributeList_Parses) {
     EXPECT_EQ(exp->value, 4u);
 
     ASSERT_TRUE(attr_1->Is<ast::BuiltinAttribute>());
-    EXPECT_EQ(attr_1->As<ast::BuiltinAttribute>()->builtin, builtin::BuiltinValue::kPosition);
+    ast::CheckIdentifier(p->builder().Symbols(), attr_1->As<ast::BuiltinAttribute>()->builtin,
+                         "position");
 }
 
 TEST_F(ParserImplTest, AttributeList_Invalid) {

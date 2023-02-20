@@ -21,6 +21,7 @@
 #include <vector>
 
 #include "src/tint/ast/disable_validation_attribute.h"
+#include "src/tint/builtin/builtin_value.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/function.h"
 #include "src/tint/transform/unshadow.h"
@@ -81,44 +82,10 @@ uint32_t BuiltinOrder(builtin::BuiltinValue builtin) {
     return 0;
 }
 
-/// Comparison function used to reorder struct members such that all members with
-/// location attributes appear first (ordered by location slot), followed by
-/// those with builtin attributes.
-/// @param a a struct member
-/// @param b another struct member
-/// @returns true if a comes before b
-bool StructMemberComparator(const MemberInfo& a, const MemberInfo& b) {
-    auto* a_loc = ast::GetAttribute<ast::LocationAttribute>(a.member->attributes);
-    auto* b_loc = ast::GetAttribute<ast::LocationAttribute>(b.member->attributes);
-    auto* a_blt = ast::GetAttribute<ast::BuiltinAttribute>(a.member->attributes);
-    auto* b_blt = ast::GetAttribute<ast::BuiltinAttribute>(b.member->attributes);
-    if (a_loc) {
-        if (!b_loc) {
-            // `a` has location attribute and `b` does not: `a` goes first.
-            return true;
-        }
-        // Both have location attributes: smallest goes first.
-        return a.location < b.location;
-    } else {
-        if (b_loc) {
-            // `b` has location attribute and `a` does not: `b` goes first.
-            return false;
-        }
-        // Both are builtins: order matters for FXC.
-        return BuiltinOrder(a_blt->builtin) < BuiltinOrder(b_blt->builtin);
-    }
-}
-
 // Returns true if `attr` is a shader IO attribute.
 bool IsShaderIOAttribute(const ast::Attribute* attr) {
     return attr->IsAnyOf<ast::BuiltinAttribute, ast::InterpolateAttribute, ast::InvariantAttribute,
                          ast::LocationAttribute>();
-}
-
-// Returns true if `attrs` contains a `sample_mask` builtin.
-bool HasSampleMask(utils::VectorRef<const ast::Attribute*> attrs) {
-    auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(attrs);
-    return builtin && builtin->builtin == builtin::BuiltinValue::kSampleMask;
 }
 
 }  // namespace
@@ -175,6 +142,15 @@ struct CanonicalizeEntryPointIO::State {
           const ast::Function* function)
         : ctx(context), cfg(config), func_ast(function), func_sem(ctx.src->Sem().Get(function)) {}
 
+    /// @param attrs the attributes to examine
+    /// @returns true if @p attrs contains a `sample_mask` builtin.
+    bool HasSampleMask(utils::VectorRef<const ast::Attribute*> attrs) {
+        if (auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(attrs)) {
+            return ctx.src->Sem().Get(builtin)->Value() == builtin::BuiltinValue::kSampleMask;
+        }
+        return false;
+    }
+
     /// Clones the shader IO attributes from `src`.
     /// @param src the attributes to clone
     /// @param do_interpolate whether to clone InterpolateAttribute
@@ -211,6 +187,13 @@ struct CanonicalizeEntryPointIO::State {
                                     std::optional<uint32_t> location,
                                     utils::Vector<const ast::Attribute*, 8> attributes) {
         auto ast_type = CreateASTTypeFor(ctx, type);
+        auto* builtin_attr = ast::GetAttribute<ast::BuiltinAttribute>(attributes);
+        auto builtin = builtin_attr ? ctx.src->Sem().Get(builtin_attr)->Value()
+                                    : builtin::BuiltinValue::kUndefined;
+
+        // Clone the attribues
+        attributes = ctx.Clone(attributes);
+
         if (cfg.shader_style == ShaderStyle::kSpirv || cfg.shader_style == ShaderStyle::kGlsl) {
             // Vulkan requires that integer user-defined fragment inputs are always decorated with
             // `Flat`. See:
@@ -231,9 +214,8 @@ struct CanonicalizeEntryPointIO::State {
 
             // In GLSL, if it's a builtin, override the name with the
             // corresponding gl_ builtin name
-            auto* builtin = ast::GetAttribute<ast::BuiltinAttribute>(attributes);
-            if (cfg.shader_style == ShaderStyle::kGlsl && builtin) {
-                name = GLSLBuiltinToString(builtin->builtin, func_ast->PipelineStage(),
+            if (cfg.shader_style == ShaderStyle::kGlsl && builtin_attr) {
+                name = GLSLBuiltinToString(builtin, func_ast->PipelineStage(),
                                            type::AddressSpace::kIn);
             }
             auto symbol = ctx.dst->Symbols().New(name);
@@ -241,10 +223,10 @@ struct CanonicalizeEntryPointIO::State {
             // Create the global variable and use its value for the shader input.
             const ast::Expression* value = ctx.dst->Expr(symbol);
 
-            if (builtin) {
+            if (builtin_attr) {
                 if (cfg.shader_style == ShaderStyle::kGlsl) {
-                    value = FromGLSLBuiltin(builtin->builtin, value, ast_type);
-                } else if (builtin->builtin == builtin::BuiltinValue::kSampleMask) {
+                    value = FromGLSLBuiltin(builtin, value, ast_type);
+                } else if (builtin == builtin::BuiltinValue::kSampleMask) {
                     // Vulkan requires the type of a SampleMask builtin to be an array.
                     // Declare it as array<u32, 1> and then load the first element.
                     ast_type = ctx.dst->ty.array(ast_type, 1_u);
@@ -253,8 +235,7 @@ struct CanonicalizeEntryPointIO::State {
             }
             ctx.dst->GlobalVar(symbol, ast_type, type::AddressSpace::kIn, std::move(attributes));
             return value;
-        } else if (cfg.shader_style == ShaderStyle::kMsl &&
-                   ast::HasAttribute<ast::BuiltinAttribute>(attributes)) {
+        } else if (cfg.shader_style == ShaderStyle::kMsl && builtin_attr) {
             // If this input is a builtin and we are targeting MSL, then add it to the
             // parameter list and pass it directly to the inner function.
             Symbol symbol = input_names.emplace(name).second ? ctx.dst->Symbols().Register(name)
@@ -298,10 +279,11 @@ struct CanonicalizeEntryPointIO::State {
         // In GLSL, if it's a builtin, override the name with the
         // corresponding gl_ builtin name
         if (cfg.shader_style == ShaderStyle::kGlsl) {
-            if (auto* b = ast::GetAttribute<ast::BuiltinAttribute>(attributes)) {
-                name = GLSLBuiltinToString(b->builtin, func_ast->PipelineStage(),
+            if (auto* attr = ast::GetAttribute<ast::BuiltinAttribute>(attributes)) {
+                auto builtin = ctx.src->Sem().Get(attr)->Value();
+                name = GLSLBuiltinToString(builtin, func_ast->PipelineStage(),
                                            type::AddressSpace::kOut);
-                value = ToGLSLBuiltin(b->builtin, value, type);
+                value = ToGLSLBuiltin(builtin, value, type);
             }
         }
 
@@ -329,7 +311,7 @@ struct CanonicalizeEntryPointIO::State {
             if (IsShaderIOAttribute(attr)) {
                 ctx.Remove(param->Declaration()->attributes, attr);
                 if ((do_interpolate || !attr->Is<ast::InterpolateAttribute>())) {
-                    attributes.Push(ctx.Clone(attr));
+                    attributes.Push(attr);
                 }
             }
         }
@@ -442,11 +424,40 @@ struct CanonicalizeEntryPointIO::State {
         return ctx.dst->MemberAccessor(ctx.dst->Expr(pos), c);
     }
 
+    /// Comparison function used to reorder struct members such that all members with
+    /// location attributes appear first (ordered by location slot), followed by
+    /// those with builtin attributes.
+    /// @param a a struct member
+    /// @param b another struct member
+    /// @returns true if a comes before b
+    bool StructMemberComparator(const MemberInfo& a, const MemberInfo& b) {
+        auto* a_loc = ast::GetAttribute<ast::LocationAttribute>(a.member->attributes);
+        auto* b_loc = ast::GetAttribute<ast::LocationAttribute>(b.member->attributes);
+        auto* a_blt = ast::GetAttribute<ast::BuiltinAttribute>(a.member->attributes);
+        auto* b_blt = ast::GetAttribute<ast::BuiltinAttribute>(b.member->attributes);
+        if (a_loc) {
+            if (!b_loc) {
+                // `a` has location attribute and `b` does not: `a` goes first.
+                return true;
+            }
+            // Both have location attributes: smallest goes first.
+            return a.location < b.location;
+        } else {
+            if (b_loc) {
+                // `b` has location attribute and `a` does not: `b` goes first.
+                return false;
+            }
+            // Both are builtins: order matters for FXC.
+            auto builtin_a = ctx.src->Sem().Get(a_blt)->Value();
+            auto builtin_b = ctx.src->Sem().Get(b_blt)->Value();
+            return BuiltinOrder(builtin_a) < BuiltinOrder(builtin_b);
+        }
+    }
     /// Create the wrapper function's struct parameter and type objects.
     void CreateInputStruct() {
         // Sort the struct members to satisfy HLSL interfacing matching rules.
         std::sort(wrapper_struct_param_members.begin(), wrapper_struct_param_members.end(),
-                  StructMemberComparator);
+                  [&](auto& a, auto& b) { return StructMemberComparator(a, b); });
 
         utils::Vector<const ast::StructMember*, 8> members;
         for (auto& mem : wrapper_struct_param_members) {
@@ -492,7 +503,7 @@ struct CanonicalizeEntryPointIO::State {
 
         // Sort the struct members to satisfy HLSL interfacing matching rules.
         std::sort(wrapper_struct_output_members.begin(), wrapper_struct_output_members.end(),
-                  StructMemberComparator);
+                  [&](auto& a, auto& b) { return StructMemberComparator(a, b); });
 
         utils::Vector<const ast::StructMember*, 8> members;
         for (auto& mem : wrapper_struct_output_members) {

@@ -87,6 +87,7 @@
 #include "src/tint/utils/transform.h"
 #include "src/tint/utils/vector.h"
 
+TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::builtin::BuiltinValue>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::Access>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::AddressSpace>);
 TINT_INSTANTIATE_TYPEINFO(tint::sem::BuiltinEnumExpression<tint::type::TexelFormat>);
@@ -611,7 +612,9 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param, uint32_t index)
     };
 
     for (auto* attr : param->attributes) {
-        Mark(attr);
+        if (!Attribute(attr)) {
+            return nullptr;
+        }
     }
     if (!validator_.NoDuplicateAttributes(param->attributes)) {
         return nullptr;
@@ -792,7 +795,9 @@ sem::GlobalVariable* Resolver::GlobalVariable(const ast::Variable* v) {
     }
 
     for (auto* attr : v->attributes) {
-        Mark(attr);
+        if (!Attribute(attr)) {
+            return nullptr;
+        }
     }
 
     if (!validator_.NoDuplicateAttributes(v->attributes)) {
@@ -854,11 +859,8 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
     validator_.DiagnosticFilters().Push();
     TINT_DEFER(validator_.DiagnosticFilters().Pop());
     for (auto* attr : decl->attributes) {
-        Mark(attr);
-        if (auto* dc = attr->As<ast::DiagnosticAttribute>()) {
-            if (!DiagnosticControl(dc->control)) {
-                return nullptr;
-            }
+        if (!Attribute(attr)) {
+            return nullptr;
         }
     }
     if (!validator_.NoDuplicateAttributes(decl->attributes)) {
@@ -921,7 +923,9 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
     // Determine if the return type has a location
     std::optional<uint32_t> return_location;
     for (auto* attr : decl->return_type_attributes) {
-        Mark(attr);
+        if (!Attribute(attr)) {
+            return nullptr;
+        }
 
         if (auto* loc_attr = attr->As<ast::LocationAttribute>()) {
             auto value = LocationAttribute(loc_attr);
@@ -1500,6 +1504,11 @@ type::Type* Resolver::Type(const ast::Expression* ast) {
 sem::BuiltinEnumExpression<type::AddressSpace>* Resolver::AddressSpaceExpression(
     const ast::Expression* expr) {
     return sem_.AsAddressSpace(Expression(expr));
+}
+
+sem::BuiltinEnumExpression<builtin::BuiltinValue>* Resolver::BuiltinValueExpression(
+    const ast::Expression* expr) {
+    return sem_.AsBuiltinValue(Expression(expr));
 }
 
 sem::BuiltinEnumExpression<type::TexelFormat>* Resolver::TexelFormatExpression(
@@ -2986,6 +2995,11 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
             expr, current_statement_, addr);
     }
 
+    if (auto builtin = resolved->BuiltinValue(); builtin != builtin::BuiltinValue::kUndefined) {
+        return builder_->create<sem::BuiltinEnumExpression<builtin::BuiltinValue>>(
+            expr, current_statement_, builtin);
+    }
+
     if (auto fmt = resolved->TexelFormat(); fmt != type::TexelFormat::kUndefined) {
         return builder_->create<sem::BuiltinEnumExpression<type::TexelFormat>>(
             expr, current_statement_, fmt);
@@ -3306,6 +3320,26 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
     return sem;
 }
 
+bool Resolver::Attribute(const ast::Attribute* attr) {
+    Mark(attr);
+    return Switch(
+        attr,  //
+        [&](const ast::BuiltinAttribute* b) { return BuiltinAttribute(b); },
+        [&](const ast::DiagnosticAttribute* dc) { return DiagnosticControl(dc->control); },
+        [&](Default) { return true; });
+}
+
+bool Resolver::BuiltinAttribute(const ast::BuiltinAttribute* attr) {
+    auto* builtin_expr = BuiltinValueExpression(attr->builtin);
+    if (!builtin_expr) {
+        return false;
+    }
+    // Apply the resolved tint::sem::BuiltinEnumExpression<tint::builtin::BuiltinValue> to the
+    // attribute.
+    builder_->Sem().Add(attr, builtin_expr);
+    return true;
+}
+
 bool Resolver::DiagnosticControl(const ast::DiagnosticControl& control) {
     Mark(control.rule_name);
 
@@ -3521,7 +3555,9 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         bool has_size_attr = false;
         std::optional<uint32_t> location;
         for (auto* attr : member->attributes) {
-            Mark(attr);
+            if (!Attribute(attr)) {
+                return nullptr;
+            }
             bool ok = Switch(
                 attr,  //
                 [&](const ast::StructMemberOffsetAttribute* o) {

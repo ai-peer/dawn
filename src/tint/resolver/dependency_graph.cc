@@ -54,6 +54,7 @@
 #include "src/tint/ast/variable_decl_statement.h"
 #include "src/tint/ast/while_statement.h"
 #include "src/tint/ast/workgroup_attribute.h"
+#include "src/tint/builtin/builtin_value.h"
 #include "src/tint/scope_stack.h"
 #include "src/tint/sem/builtin.h"
 #include "src/tint/symbol_table.h"
@@ -182,6 +183,8 @@ class DependencyScanner {
             [&](const ast::Function* func) {
                 Declare(func->name->symbol, func);
                 TraverseFunction(func);
+                TraverseAttributes(func->attributes);
+                TraverseAttributes(func->return_type_attributes);
             },
             [&](const ast::Variable* v) {
                 Declare(v->name->symbol, v);
@@ -424,6 +427,10 @@ class DependencyScanner {
                 TraverseValueExpression(binding->expr);
                 return true;
             },
+            [&](const ast::BuiltinAttribute* builtin) {
+                TraverseExpression(builtin->builtin, "builtin", "references");
+                return true;
+            },
             [&](const ast::GroupAttribute* group) {
                 TraverseValueExpression(group->expr);
                 return true;
@@ -477,6 +484,11 @@ class DependencyScanner {
             }
             if (auto builtin_ty = type::ParseBuiltin(s); builtin_ty != type::Builtin::kUndefined) {
                 graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_ty));
+                return;
+            }
+            if (auto builtin_val = builtin::ParseBuiltinValue(s);
+                builtin_val != builtin::BuiltinValue::kUndefined) {
+                graph_.resolved_identifiers.Add(from, ResolvedIdentifier(builtin_val));
                 return;
             }
             if (auto addr = type::ParseAddressSpace(s); addr != type::AddressSpace::kUndefined) {

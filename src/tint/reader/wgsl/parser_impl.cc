@@ -1129,23 +1129,6 @@ Expect<ast::InterpolationType> ParserImpl::expect_interpolation_type_name() {
                        ast::kInterpolationTypeStrings);
 }
 
-// builtin_value_name
-//   : frag_depth
-//   | front_facing
-//   | global_invocation_id
-//   | instance_index
-//   | local_invocation_id
-//   | local_invocation_index
-//   | num_workgroups
-//   | position
-//   | sample_index
-//   | sample_mask
-//   | vertex_index
-//   | workgroup_id
-Expect<builtin::BuiltinValue> ParserImpl::expect_builtin() {
-    return expect_enum("builtin", builtin::ParseBuiltinValue, builtin::kBuiltinValueStrings);
-}
-
 // compound_statement
 //   : attribute* BRACE_LEFT statement* BRACE_RIGHT
 Expect<ast::BlockStatement*> ParserImpl::expect_compound_statement(std::string_view use) {
@@ -3024,7 +3007,7 @@ Maybe<const ast::Attribute*> ParserImpl::attribute() {
 
     if (t == "builtin") {
         return expect_paren_block("builtin attribute", [&]() -> Result {
-            auto builtin = expect_builtin();
+            auto builtin = expect_expression("builtin name");
             if (builtin.errored) {
                 return Failure::kErrored;
             }

@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "src/tint/ast/module.h"
+#include "src/tint/builtin/builtin_value.h"
 #include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/sem/builtin_type.h"
 #include "src/tint/symbol_table.h"
@@ -34,6 +35,7 @@ namespace tint::resolver {
 /// - const ast::TypeDecl*  (as const ast::Node*)
 /// - const ast::Variable*  (as const ast::Node*)
 /// - const ast::Function*  (as const ast::Node*)
+/// - builtin::BuiltinValue
 /// - sem::BuiltinType
 /// - type::Access
 /// - type::AddressSpace
@@ -95,6 +97,15 @@ class ResolvedIdentifier {
         return type::Builtin::kUndefined;
     }
 
+    /// @return the builtin value if the ResolvedIdentifier holds builtin::BuiltinValue, otherwise
+    /// builtin::BuiltinValue::kUndefined
+    builtin::BuiltinValue BuiltinValue() const {
+        if (auto n = std::get_if<builtin::BuiltinValue>(&value_)) {
+            return *n;
+        }
+        return builtin::BuiltinValue::kUndefined;
+    }
+
     /// @return the texel format if the ResolvedIdentifier holds type::TexelFormat, otherwise
     /// type::TexelFormat::kUndefined
     type::TexelFormat TexelFormat() const {
@@ -129,6 +140,7 @@ class ResolvedIdentifier {
   private:
     std::variant<std::monostate,
                  const ast::Node*,
+                 builtin::BuiltinValue,
                  sem::BuiltinType,
                  type::Access,
                  type::AddressSpace,

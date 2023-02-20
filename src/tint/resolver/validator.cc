@@ -868,7 +868,8 @@ bool Validator::BuiltinAttribute(const ast::BuiltinAttribute* attr,
     stage_name << stage;
     bool is_stage_mismatch = false;
     bool is_output = !is_input;
-    switch (attr->builtin) {
+    auto builtin = sem_.Get(attr)->Value();
+    switch (builtin) {
         case builtin::BuiltinValue::kPosition:
             if (stage != ast::PipelineStage::kNone &&
                 !((is_input && stage == ast::PipelineStage::kFragment) ||
@@ -1098,7 +1099,9 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         for (auto* attr : attrs) {
             auto is_invalid_compute_shader_attribute = false;
 
-            if (auto* builtin = attr->As<ast::BuiltinAttribute>()) {
+            if (auto* builtin_attr = attr->As<ast::BuiltinAttribute>()) {
+                auto builtin = sem_.Get(builtin_attr)->Value();
+
                 if (pipeline_io_attribute) {
                     AddError("multiple entry point IO attributes", attr->source);
                     AddNote("previously consumed " + attr_to_str(pipeline_io_attribute, location),
@@ -1107,19 +1110,19 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                 }
                 pipeline_io_attribute = attr;
 
-                if (builtins.Contains(builtin->builtin)) {
-                    AddError(attr_to_str(builtin) +
+                if (builtins.Contains(builtin)) {
+                    AddError(attr_to_str(builtin_attr) +
                                  " attribute appears multiple times as pipeline " +
                                  (param_or_ret == ParamOrRetType::kParameter ? "input" : "output"),
                              decl->source);
                     return false;
                 }
 
-                if (!BuiltinAttribute(builtin, ty, stage,
+                if (!BuiltinAttribute(builtin_attr, ty, stage,
                                       /* is_input */ param_or_ret == ParamOrRetType::kParameter)) {
                     return false;
                 }
-                builtins.Add(builtin->builtin);
+                builtins.Add(builtin);
             } else if (auto* loc_attr = attr->As<ast::LocationAttribute>()) {
                 if (pipeline_io_attribute) {
                     AddError("multiple entry point IO attributes", attr->source);
@@ -1211,8 +1214,9 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
             if (invariant_attribute) {
                 bool has_position = false;
                 if (pipeline_io_attribute) {
-                    if (auto* builtin = pipeline_io_attribute->As<ast::BuiltinAttribute>()) {
-                        has_position = (builtin->builtin == builtin::BuiltinValue::kPosition);
+                    if (auto* builtin_attr = pipeline_io_attribute->As<ast::BuiltinAttribute>()) {
+                        auto builtin = sem_.Get(builtin_attr)->Value();
+                        has_position = (builtin == builtin::BuiltinValue::kPosition);
                     }
                 }
                 if (!has_position) {
@@ -1280,9 +1284,10 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
         // Check module-scope variables, as the SPIR-V sanitizer generates these.
         bool found = false;
         for (auto* global : func->TransitivelyReferencedGlobals()) {
-            if (auto* builtin =
+            if (auto* builtin_attr =
                     ast::GetAttribute<ast::BuiltinAttribute>(global->Declaration()->attributes)) {
-                if (builtin->builtin == builtin::BuiltinValue::kPosition) {
+                auto builtin = sem_.Get(builtin_attr)->Value();
+                if (builtin == builtin::BuiltinValue::kPosition) {
                     found = true;
                     break;
                 }
@@ -2120,12 +2125,13 @@ bool Validator::Structure(const sem::Struct* str, ast::PipelineStage stage) cons
                     }
                     return true;
                 },
-                [&](const ast::BuiltinAttribute* builtin) {
-                    if (!BuiltinAttribute(builtin, member->Type(), stage,
+                [&](const ast::BuiltinAttribute* builtin_attr) {
+                    if (!BuiltinAttribute(builtin_attr, member->Type(), stage,
                                           /* is_input */ false)) {
                         return false;
                     }
-                    if (builtin->builtin == builtin::BuiltinValue::kPosition) {
+                    auto builtin = sem_.Get(builtin_attr)->Value();
+                    if (builtin == builtin::BuiltinValue::kPosition) {
                         has_position = true;
                     }
                     return true;

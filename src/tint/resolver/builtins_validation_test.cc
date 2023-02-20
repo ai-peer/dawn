@@ -14,6 +14,7 @@
 
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/resolver/resolver_test_helper.h"
+#include "src/tint/builtin/builtin_value.h"
 
 using namespace tint::number_suffixes;  // NOLINT
 
