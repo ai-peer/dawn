@@ -75,9 +75,7 @@ std::unique_ptr<wgpu::ChainedStruct> SetupWindowAndGetSurfaceDescriptor(GLFWwind
         return std::move(desc);
     }
 #else
-    {
-        return nullptr;
-    }
+    { return nullptr; }
 #endif
 #else
     return nullptr;
