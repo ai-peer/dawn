@@ -137,6 +137,7 @@ ResultOrError<Ref<RenderPipelineBase>> GetOrCreateRG8ToDepth16UnormPipeline(Devi
     DepthStencilState dsState = {};
     dsState.format = wgpu::TextureFormat::Depth16Unorm;
     dsState.depthWriteEnabled = true;
+    dsState.depthCompare = wgpu::CompareFunction::Always;
 
     RenderPipelineDescriptor renderPipelineDesc = {};
     renderPipelineDesc.vertex.module = shaderModule.Get();
@@ -186,6 +187,7 @@ ResultOrError<InternalPipelineStore::BlitR8ToStencilPipelines> GetOrCreateR8ToSt
     DepthStencilState dsState = {};
     dsState.format = format;
     dsState.depthWriteEnabled = false;
+    dsState.depthCompare = wgpu::CompareFunction::Always;
     dsState.stencilFront.passOp = wgpu::StencilOperation::Replace;
 
     RenderPipelineDescriptor renderPipelineDesc = {};
