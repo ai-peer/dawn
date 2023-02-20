@@ -825,6 +825,7 @@ libtint_source_set("libtint_reader_src") {
 
 libtint_source_set("libtint_spv_reader_src") {
   sources = [
+    "reader/spirv/attributes.h",
     "reader/spirv/construct.cc",
     "reader/spirv/construct.h",
     "reader/spirv/entry_point_info.cc",
