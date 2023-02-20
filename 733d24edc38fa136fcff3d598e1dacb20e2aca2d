@@ -33,6 +33,24 @@
       "message": "Maybe note that this can be an optimization and a correctness fix? Otherwise it\u0027s not clear why we bother doing this.",
       "revId": "733d24edc38fa136fcff3d598e1dacb20e2aca2d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "614619be_81d0491e",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-20T00:02:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa45a258_a9554744",
+      "revId": "733d24edc38fa136fcff3d598e1dacb20e2aca2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
