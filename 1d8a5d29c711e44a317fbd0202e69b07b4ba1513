@@ -56,6 +56,30 @@
       },
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "065df1be_cbeb31f7",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-21T14:32:13Z",
+      "side": 1,
+      "message": "I had assumed we were going with `requires`. `requires a, b, c` Reads more fluently to me than `require a, b, c`",
+      "parentUuid": "8966c6b4_32e47e70",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
