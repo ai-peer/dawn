@@ -16,7 +16,42 @@
 
 #include <utility>
 
+#include "dawn/native/Device.h"
+
 namespace dawn::native {
+
+namespace {
+struct SingleMethodWrapperCallbackTask : CallbackTask {
+  public:
+    SingleMethodWrapperCallbackTask(std::unique_ptr<CallbackTask> original,
+                                    void (CallbackTask::*methodToCall)())
+        : mOriginalTask(std::move(original)), mMethodToCall(methodToCall) {}
+    SingleMethodWrapperCallbackTask() = delete;
+
+  private:
+    void Finish() final { std::invoke(mMethodToCall, mOriginalTask.get()); }
+    void HandleShutDownImpl() final { Finish(); }
+    void HandleDeviceLossImpl() final { Finish(); }
+
+    std::unique_ptr<CallbackTask> mOriginalTask;
+    void (CallbackTask::*mMethodToCall)();
+};
+}  // namespace
+
+// static
+void CallbackTask::HandleShutDownInNextTick(DeviceBase& device,
+                                            std::unique_ptr<CallbackTask> task) {
+    device.GetCallbackTaskManager()->AddCallbackTask(
+        std::make_unique<SingleMethodWrapperCallbackTask>(std::move(task),
+                                                          &CallbackTask::HandleShutDownImpl));
+}
+// static
+void CallbackTask::HandleDeviceLossInNextTick(DeviceBase& device,
+                                              std::unique_ptr<CallbackTask> task) {
+    device.GetCallbackTaskManager()->AddCallbackTask(
+        std::make_unique<SingleMethodWrapperCallbackTask>(std::move(task),
+                                                          &CallbackTask::HandleDeviceLossImpl));
+}
 
 CallbackTaskManager::CallbackTaskManager() = default;
 

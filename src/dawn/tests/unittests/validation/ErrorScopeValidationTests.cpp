@@ -55,6 +55,12 @@ class ErrorScopeValidationTest : public ValidationTest {
     void TearDown() override {
         ValidationTest::TearDown();
 
+        // Drain last callbacks.
+        if (device != nullptr) {
+            device.Tick();
+            FlushWire();
+        }
+
         // Delete mocks so that expectations are checked
         mockDevicePopErrorScopeCallback = nullptr;
         mockQueueWorkDoneCallback = nullptr;

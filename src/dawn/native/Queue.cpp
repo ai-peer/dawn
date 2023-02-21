@@ -135,6 +135,9 @@ struct SubmittedWorkDone : TrackTaskCallback {
                       WGPUQueueWorkDoneCallback callback,
                       void* userdata)
         : TrackTaskCallback(platform), mCallback(callback), mUserdata(userdata) {}
+    ~SubmittedWorkDone() override = default;
+
+  private:
     void Finish() override {
         ASSERT(mCallback != nullptr);
         ASSERT(mSerial != kMaxExecutionSerial);
@@ -143,15 +146,13 @@ struct SubmittedWorkDone : TrackTaskCallback {
         mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
         mCallback = nullptr;
     }
-    void HandleDeviceLoss() override {
+    void HandleDeviceLossImpl() override {
         ASSERT(mCallback != nullptr);
         mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
         mCallback = nullptr;
     }
-    void HandleShutDown() override { HandleDeviceLoss(); }
-    ~SubmittedWorkDone() override = default;
+    void HandleShutDownImpl() override { HandleDeviceLossImpl(); }
 
-  private:
     WGPUQueueWorkDoneCallback mCallback = nullptr;
     void* mUserdata;
 };
@@ -207,7 +208,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     // The error status depends on the type of error so we let the validation function choose it
     WGPUQueueWorkDoneStatus status;
     if (GetDevice()->ConsumedError(ValidateOnSubmittedWorkDone(signalValue, &status))) {
-        callback(status, userdata);
+        GetDevice()->RunInNextTick([callback, status, userdata] { callback(status, userdata); });
         return;
     }
 
@@ -271,8 +272,11 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
 }
 
 void QueueBase::HandleDeviceLoss() {
+    // Schedule the tasks' HandleDeviceLoss() to be fired in next Tick().
+    // Note: we don't fire the callback directly here because it could cause re-entrances ->
+    // deadlock.
     for (auto& task : mTasksInFlight.IterateAll()) {
-        task->HandleDeviceLoss();
+        CallbackTask::HandleDeviceLossInNextTick(*GetDevice(), std::move(task));
     }
     mTasksInFlight.Clear();
 }
