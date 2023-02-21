@@ -16,6 +16,23 @@
       "message": "My understanding is, required properties in Dawn are represented as members with no default values in dawn.json, is it correct?\n\nThe CTS needs update, too.\n\n@gman@chromium.org seems to be working on it. Gregg, do you plan to merge it soon?\n\nhttps://github.com/gpuweb/gpuweb/issues/3798#issuecomment-1433974377",
       "revId": "71e0469eced6a87f4384122376ab7c724d8ea3e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd4288d_8b5045f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-21T16:42:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "71e0469eced6a87f4384122376ab7c724d8ea3e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
