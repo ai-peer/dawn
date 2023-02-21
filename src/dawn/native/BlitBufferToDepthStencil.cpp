@@ -445,7 +445,8 @@ MaybeError BlitStagingBufferToDepth(DeviceBase* device,
                                     BufferBase* buffer,
                                     const TextureDataLayout& src,
                                     const TextureCopy& dst,
-                                    const Extent3D& copyExtent) {
+                                    const Extent3D& copyExtent,
+                                    CallbackSink& callbackSink) {
     const Format& format = dst.texture->GetFormat();
     ASSERT(format.format == wgpu::TextureFormat::Depth16Unorm);
 
@@ -462,7 +463,7 @@ MaybeError BlitStagingBufferToDepth(DeviceBase* device,
         rg8Dst.mipLevel = 0;
         rg8Dst.origin = {};
         rg8Dst.aspect = Aspect::Color;
-        DAWN_TRY(device->CopyFromStagingToTexture(buffer, src, rg8Dst, copyExtent));
+        DAWN_TRY(device->CopyFromStagingToTexture(buffer, src, rg8Dst, copyExtent, callbackSink));
     }
 
     Ref<CommandEncoderBase> commandEncoder;
@@ -475,7 +476,7 @@ MaybeError BlitStagingBufferToDepth(DeviceBase* device,
     DAWN_TRY_ASSIGN(commandBuffer, commandEncoder->Finish());
 
     CommandBufferBase* commands = commandBuffer.Get();
-    device->GetQueue()->APISubmit(1, &commands);
+    device->GetQueue()->APISubmit(1, &commands, callbackSink);
     return {};
 }
 
@@ -513,7 +514,8 @@ MaybeError BlitStagingBufferToStencil(DeviceBase* device,
                                       BufferBase* buffer,
                                       const TextureDataLayout& src,
                                       const TextureCopy& dst,
-                                      const Extent3D& copyExtent) {
+                                      const Extent3D& copyExtent,
+                                      CallbackSink& callbackSink) {
     TextureDescriptor dataTextureDesc = {};
     dataTextureDesc.format = wgpu::TextureFormat::R8Uint;
     dataTextureDesc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
@@ -527,7 +529,7 @@ MaybeError BlitStagingBufferToStencil(DeviceBase* device,
         r8Dst.mipLevel = 0;
         r8Dst.origin = {};
         r8Dst.aspect = Aspect::Color;
-        DAWN_TRY(device->CopyFromStagingToTexture(buffer, src, r8Dst, copyExtent));
+        DAWN_TRY(device->CopyFromStagingToTexture(buffer, src, r8Dst, copyExtent, callbackSink));
     }
 
     Ref<CommandEncoderBase> commandEncoder;
@@ -539,7 +541,7 @@ MaybeError BlitStagingBufferToStencil(DeviceBase* device,
     DAWN_TRY_ASSIGN(commandBuffer, commandEncoder->Finish());
 
     CommandBufferBase* commands = commandBuffer.Get();
-    device->GetQueue()->APISubmit(1, &commands);
+    device->GetQueue()->APISubmit(1, &commands, callbackSink);
     return {};
 }
 
