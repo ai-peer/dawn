@@ -1,0 +1,331 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bbe9915_c6cd0146",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "we\u0027re promoting them, not necessarily hiding",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9198ee00_482219f3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: the mask is an implementation detail of how it works. It\u0027s probably more accurate to say something about an \"allowed errors\" concept/mechanism",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf2035da_e98f59e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "also DeviceCreateQuerySet",
+      "range": {
+        "startLine": 11,
+        "startChar": 23,
+        "endLine": 11,
+        "endChar": 48
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb225e95_cc23c274",
+        "filename": "generator/templates/dawn/native/ProcTable.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "hm, maybe we can produce the mask directly instead of hopping from WGPUErrorType -\u003e InternalErrorType i.e. perform a `... |` fold over `InternalErrorType::{{as_cppEnum(Name(arg))}}`\n\nAlso because I think FromWGPUErrorType here is not exactly right. You can pass in \"unknown\" or \"no error\" in the .json and it would be interpreted to allow InternalErrorType::Internal",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f898175c_7d799c98",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "In this case, we should update the message to say something about the error type being unexpected.",
+      "range": {
+        "startLine": 486,
+        "startChar": 51,
+        "endLine": 486,
+        "endChar": 77
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af568cfc_6647e5d5",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: HandleError calls this `allowedErrors`. We should be consistent with the name throughout",
+      "range": {
+        "startLine": 542,
+        "startChar": 72,
+        "endLine": 542,
+        "endChar": 81
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fde63f1a_01f11964",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "no error allowed, but we\u0027re passing an Internal error?",
+      "range": {
+        "startLine": 657,
+        "startChar": 54,
+        "endLine": 657,
+        "endChar": 77
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638dffa4_93c3dfc3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1393,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: this seems to conflict with the above validation check ^^.\nalso the only place we have `kAllAllowedInternalError`. perhaps not needed then?",
+      "range": {
+        "startLine": 1393,
+        "startChar": 50,
+        "endLine": 1393,
+        "endChar": 74
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "042eeca6_8a5c06ca",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: good to add a TODO about removing this default argument so you must always be explicit about the errors you\u0027re handling. We don\u0027t want it to be too easy to blindly do ConsumedError without saying what type of errors you want.",
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a70ec0_491449ff",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "unit: Args\u0026\u0026 and std::forward\u003cArgs\u003e(args)...",
+      "range": {
+        "startLine": 125,
+        "startChar": 69,
+        "endLine": 125,
+        "endChar": 80
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c9c58df_39962a90",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "unit: Args\u0026\u0026 and std::forward\u003cArgs\u003e(args)...",
+      "range": {
+        "startLine": 159,
+        "startChar": 29,
+        "endLine": 159,
+        "endChar": 34
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f0d21b9_83fc3aeb",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: perhaps add a None type, and use it instead of kNoAllowedInternalError",
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb1d6e4c_54eac15c",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "I think for now, these would also include Internal and DeviceLost - since many things can throw DeviceLost/Internal error. (this becomes more relevant if we add a message like \"did not expect someErrorType...\")",
+      "range": {
+        "startLine": 40,
+        "startChar": 39,
+        "endLine": 40,
+        "endChar": 68
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51d8ded8_db4e6311",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "nit: perhaps simpler to say kDefault | OOM. I think most non-encoding things will use the default, and we need to add in OOM when allowed.",
+      "range": {
+        "startLine": 494,
+        "startChar": 20,
+        "endLine": 494,
+        "endChar": 82
+      },
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49f605a_9e27998d",
+        "filename": "src/dawn/tests/unittests/native/ErrorMaskingTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "ditto on name - maybe \"AllowedErrorsTests\"",
+      "revId": "f8ee6bbe72f9e5bdbccd2a884137e39f77ed335a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

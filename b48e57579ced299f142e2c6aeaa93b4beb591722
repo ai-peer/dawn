@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "166f72c9_9f691d89",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1094,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:30:16Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 1092,
+        "startChar": 0,
+        "endLine": 1094,
+        "endChar": 27
+      },
+      "revId": "b48e57579ced299f142e2c6aeaa93b4beb591722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
