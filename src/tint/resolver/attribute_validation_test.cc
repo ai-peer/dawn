@@ -60,6 +60,7 @@ enum class AttributeKind {
     kInterpolate,
     kInvariant,
     kLocation,
+    kMustUse,
     kOffset,
     kSize,
     kStage,
@@ -112,6 +113,8 @@ static utils::Vector<const ast::Attribute*, 2> createAttributes(const Source& so
             return {builder.Location(source, 1_a)};
         case AttributeKind::kOffset:
             return {builder.MemberOffset(source, 4_a)};
+        case AttributeKind::kMustUse:
+            return {builder.MustUse(source)};
         case AttributeKind::kSize:
             return {builder.MemberSize(source, 16_a)};
         case AttributeKind::kStage:
@@ -157,6 +160,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -194,6 +198,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -245,6 +250,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -283,6 +289,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          // kInterpolate tested separately (requires @location)
                                          TestParams{AttributeKind::kInvariant, true},
                                          TestParams{AttributeKind::kLocation, true},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -337,6 +344,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, true},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, true},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -388,6 +396,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -440,6 +449,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, true},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -490,6 +500,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          // kInterpolate tested separately (requires @location)
                                          TestParams{AttributeKind::kInvariant, true},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -594,6 +605,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -630,6 +642,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          // kInterpolate tested separately (requires @location)
                                          // kInvariant tested separately (requires position builtin)
                                          TestParams{AttributeKind::kLocation, true},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, true},
                                          TestParams{AttributeKind::kSize, true},
                                          TestParams{AttributeKind::kStage, false},
@@ -872,6 +885,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -912,6 +926,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -964,6 +979,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -1008,6 +1024,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -1114,6 +1131,7 @@ INSTANTIATE_TEST_SUITE_P(ResolverAttributeValidationTest,
                                          TestParams{AttributeKind::kInterpolate, false},
                                          TestParams{AttributeKind::kInvariant, false},
                                          TestParams{AttributeKind::kLocation, false},
+                                         TestParams{AttributeKind::kMustUse, false},
                                          TestParams{AttributeKind::kOffset, false},
                                          TestParams{AttributeKind::kSize, false},
                                          TestParams{AttributeKind::kStage, false},
@@ -1413,6 +1431,26 @@ TEST_F(InvariantAttributeTests, InvariantWithoutPosition) {
 }
 }  // namespace
 }  // namespace InvariantAttributeTests
+
+namespace MustUseAttributeTests {
+namespace {
+using MustUseAttributeTests = ResolverTest;
+TEST_F(MustUseAttributeTests, MustUse) {
+    Func("main", utils::Empty, ty.vec4<f32>(),
+         utils::Vector{
+             Return(Call(ty.vec4<f32>())),
+         },
+         utils::Vector{
+             MustUse(Source{{12, 34}}),
+         },
+         utils::Vector{
+             Location(0_a),
+         });
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+}  // namespace
+}  // namespace MustUseAttributeTests
 
 namespace WorkgroupAttributeTests {
 namespace {

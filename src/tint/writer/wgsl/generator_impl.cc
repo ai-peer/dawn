@@ -590,6 +590,10 @@ bool GeneratorImpl::EmitAttributes(std::ostream& out,
                 out << ")";
                 return true;
             },
+            [&](const ast::MustUseAttribute*) {
+                out << "must_use";
+                return true;
+            },
             [&](const ast::StructMemberOffsetAttribute* offset) {
                 out << "offset(";
                 if (!EmitExpression(out, offset->expr)) {
