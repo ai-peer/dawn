@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b357e51b_dc3af6e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T17:46:15Z",
+      "side": 1,
+      "message": "seems like the real fix is to make Wire and Native consistent, but this should be good enough for now I think.\nFiled crbug.com/dawn/1674 about it.",
+      "revId": "8ac10268e64ebf2e13305561b2c341aea2f32631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dfce88d_27547906",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T17:46:15Z",
+      "side": 1,
+      "message": "nit: can be const",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "8ac10268e64ebf2e13305561b2c341aea2f32631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

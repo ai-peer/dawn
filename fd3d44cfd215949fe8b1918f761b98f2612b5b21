@@ -177,6 +177,24 @@
       "parentUuid": "39792924_848d9a64",
       "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b0ea21_e8a3768b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T17:46:15Z",
+      "side": 1,
+      "message": "these tests run both with/without asserts. to disable, you can use #if defined(DAWN_ENABLE_ASSERTS) from dawn/common/Assert.h",
+      "parentUuid": "e39b759d_1f4b2200",
+      "revId": "fd3d44cfd215949fe8b1918f761b98f2612b5b21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
