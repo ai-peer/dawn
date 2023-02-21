@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a1d6ae_4f8856c0",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-21T17:32:32Z",
+      "side": 1,
+      "message": "Nit: this is weird\n\nIn fact lots of the formatting changes in this file look strange.",
+      "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7bf9119_b7490cad",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-21T17:32:32Z",
+      "side": 1,
+      "message": "I\u0027d suggest adding coverage to `attribute_validation_test.cc`, which tests that attributes are valid where they are supposed to be, and not valid where they are not supposed to be.",
+      "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
