@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b50266c_b300c9dd",
+        "filename": "src/dawn/native/CachedObject.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T18:13:34Z",
+      "side": 1,
+      "message": "ok, so if I\u0027m understanding, we want the following things:\n 1. objects always have their content hash set\n 2. you can create mocks without device.Create* so you can set expectations before Initialize().\n 3. return a mock from EXPECT_CALL(Create*Impl)....WillReturn(mockObj);\n \nAdditionally, I\u0027d like the following:\n 4. change as little in the frontend to make the mocks happy. Otherwise I think it\u0027s indicative of poor layering.\n \n(3) is already fulfilled by (2) and (1) IIUC. since you can make the mock object and it always has its hash set. Which means you can return it from the EXPECT_CALL and inserting it into the cache will be happy.\n\nI think we can achieve the others by:\n - having Mock constructors NEVER set the hash\n - Creating objects in the mock Create*Impl calls with new MockFoo.\n - Creating all objects in the tests either by device.CreateFoo or MockFoo::Create. MockFoo::Create performs SetContentHash(ComputeContentHash()); I believe this ensures we always have a hash set, and we don\u0027t set it twice.\n\nAre there are scenarios where we need to do something like?\n```\n  auto mock \u003d MockFoo::Create(..);\n  EXPECT_CALL(Create*Impl)...WillReturn(mock); /* instead of new MockFoo */\n```\nif so, we can use a SetContentHashForTesting which doesn\u0027t set mContentHashIsInitialized. But why are situations like this needed versus just using `new MockFoo` whenever returning something from an Impl call?",
+      "parentUuid": "5ceb5a1e_7a0dda58",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6557c8e_8aa4aab3",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
