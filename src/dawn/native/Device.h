@@ -49,6 +49,7 @@ class AttachmentState;
 class AttachmentStateBlueprint;
 class Blob;
 class BlobCache;
+class CallbackSink;
 class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
@@ -384,6 +385,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     void AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipeline,
                                             WGPUCreateRenderPipelineAsyncCallback callback,
                                             void* userdata);
+
+    // Schedule code to be executed in the next APITick() call.
+    void RunInNextAPITick(const std::function<void()>& code);
 
     PipelineCompatibilityToken GetNextPipelineCompatibilityToken();
 
