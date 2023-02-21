@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6bdf680c_9bd93fff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-21T16:43:31Z",
+      "side": 1,
+      "message": "nit: Maybe\n\n\u003e Make depthClearValue/WriteEnable/Compare required",
+      "revId": "71e0469eced6a87f4384122376ab7c724d8ea3e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "29760537_e7eb99c9",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
