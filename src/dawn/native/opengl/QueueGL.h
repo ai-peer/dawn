@@ -26,7 +26,9 @@ class Queue final : public QueueBase {
     Queue(Device* device, const QueueDescriptor* descriptor);
 
   private:
-    MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+    MaybeError SubmitImpl(uint32_t commandCount,
+                          CommandBufferBase* const* commands,
+                          CallbackSink& callbackSink) override;
     MaybeError WriteBufferImpl(BufferBase* buffer,
                                uint64_t bufferOffset,
                                const void* data,
@@ -34,7 +36,8 @@ class Queue final : public QueueBase {
     MaybeError WriteTextureImpl(const ImageCopyTexture& destination,
                                 const void* data,
                                 const TextureDataLayout& dataLayout,
-                                const Extent3D& writeSizePixel) override;
+                                const Extent3D& writeSizePixel,
+                                CallbackSink&) override;
 };
 
 }  // namespace dawn::native::opengl
