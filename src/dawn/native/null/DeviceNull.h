@@ -262,7 +262,9 @@ class Queue final : public QueueBase {
 
   private:
     ~Queue() override;
-    MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
+    MaybeError SubmitImpl(uint32_t commandCount,
+                          CommandBufferBase* const* commands,
+                          CallbackSink& callbackSink) override;
     MaybeError WriteBufferImpl(BufferBase* buffer,
                                uint64_t bufferOffset,
                                const void* data,
