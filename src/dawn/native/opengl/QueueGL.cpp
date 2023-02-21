@@ -25,7 +25,9 @@ namespace dawn::native::opengl {
 
 Queue::Queue(Device* device, const QueueDescriptor* descriptor) : QueueBase(device, descriptor) {}
 
-MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
+MaybeError Queue::SubmitImpl(uint32_t commandCount,
+                             CommandBufferBase* const* commands,
+                             CallbackSink& callbackSink) {
     Device* device = ToBackend(GetDevice());
 
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferGL::Execute");
@@ -55,7 +57,8 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
 MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
                                    const void* data,
                                    const TextureDataLayout& dataLayout,
-                                   const Extent3D& writeSizePixel) {
+                                   const Extent3D& writeSizePixel,
+                                   CallbackSink&) {
     DAWN_INVALID_IF(destination.aspect == wgpu::TextureAspect::StencilOnly,
                     "Writes to stencil textures unsupported on the OpenGL backend.");
 
