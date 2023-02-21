@@ -16,6 +16,24 @@
       "message": "This change seems like a unrelated refactoring?",
       "revId": "7162efbfa4fac4347910139252ee5c94cd6af952",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb78b582_dbbf96d7",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:18:00Z",
+      "side": 1,
+      "message": "`ContainsFragDepth()` needs the sem info now to know what the `@builtin` resolves to, so I made this transform follow the PIMPL pattern of the other transforms.",
+      "parentUuid": "44c914cf_4c876bb7",
+      "revId": "7162efbfa4fac4347910139252ee5c94cd6af952",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
