@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eaee14e_19899570",
+        "filename": "src/tint/transform/transform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-21T19:27:38Z",
+      "side": 1,
+      "message": "Hope this is OK. Couldn\u0027t think of a reason for this not to be public.",
+      "revId": "6e7e7c2eafc6a22cec6cc1c3ed1279d617b66f02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
