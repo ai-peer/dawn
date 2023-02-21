@@ -16,6 +16,46 @@
       "message": "PTAL. Spec text isn\u0027t up, so I\u0027m guessing at the grammar rules. We have `requires` reserved so went with that over `require`.",
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ea6003e_937b880d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-21T14:24:09Z",
+      "side": 1,
+      "message": "Looks good except I plan to make it \"require\" in the spec, not \"requires\"",
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8966c6b4_32e47e70",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-21T14:24:09Z",
+      "side": 1,
+      "message": "Let\u0027s make it \"require\" please.",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
