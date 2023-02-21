@@ -28,14 +28,21 @@ class QueueMock : public QueueBase {
     QueueMock(DeviceMock* device, const QueueDescriptor* descriptor);
     ~QueueMock() override;
 
-    MOCK_METHOD(MaybeError, SubmitImpl, (uint32_t, CommandBufferBase* const*), (override));
+    MOCK_METHOD(MaybeError,
+                SubmitImpl,
+                (uint32_t, CommandBufferBase* const*, CallbackSink&),
+                (override));
     MOCK_METHOD(MaybeError,
                 WriteBufferImpl,
                 (BufferBase*, uint64_t, const void*, size_t),
                 (override));
     MOCK_METHOD(MaybeError,
                 WriteTextureImpl,
-                (const ImageCopyTexture&, const void*, const TextureDataLayout&, const Extent3D&),
+                (const ImageCopyTexture&,
+                 const void*,
+                 const TextureDataLayout&,
+                 const Extent3D&,
+                 CallbackSink&),
                 (override));
     MOCK_METHOD(void, DestroyImpl, (), (override));
 };

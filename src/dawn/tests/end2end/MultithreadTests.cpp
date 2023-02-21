@@ -51,6 +51,9 @@ class LockStep {
 template <typename T>
 class GuardedObject {
   public:
+    GuardedObject() = default;
+    GuardedObject(const T& obj) : mObj(obj) {}
+
     GuardedObject& operator=(const T& obj) {
         std::lock_guard<std::mutex> lg(mMutex);
         mObj = obj;
@@ -140,7 +143,7 @@ TEST_P(MultithreadTests, Buffers_MapInParallel) {
     thread3.join();
 }
 
-class MultithreadDepthStencilCopyTests : public MultithreadTests {
+class MultithreadTextureCopyTests : public MultithreadTests {
   protected:
     void SetUp() override {
         MultithreadTests::SetUp();
@@ -191,14 +194,20 @@ class MultithreadDepthStencilCopyTests : public MultithreadTests {
     }
 
     template <typename Step>
-    void CopyTextureToTextureInLockStep(LockStep<Step>& lockStep,
-                                        const GuardedTexture& srcTexture,
-                                        Step stepSrcTextureReady,
-                                        const wgpu::Texture& dstTexture,
-                                        Step stepDstTextureWritten,
-                                        uint32_t dstMipLevel,
-                                        const wgpu::Extent3D& dstSize) {
-        auto encoder = device.CreateCommandEncoder();
+    void CopyTextureToTextureInLockStep(
+        LockStep<Step>& lockStep,
+        const GuardedTexture& srcTexture,
+        Step stepSrcTextureReady,
+        const wgpu::Texture& dstTexture,
+        Step stepDstTextureWritten,
+        uint32_t dstMipLevel,
+        const wgpu::Extent3D& dstSize,
+        const wgpu::CopyTextureForBrowserOptions* copyForBrowerOptions = nullptr) {
+        wgpu::CommandEncoder encoder;
+
+        if (copyForBrowerOptions == nullptr) {
+            encoder = device.CreateCommandEncoder();
+        }
 
         wgpu::ImageCopyTexture dstView = utils::CreateImageCopyTexture(
             dstTexture, dstMipLevel, {0, 0, 0}, wgpu::TextureAspect::All);
@@ -209,10 +218,14 @@ class MultithreadDepthStencilCopyTests : public MultithreadTests {
         wgpu::ImageCopyTexture srcView =
             utils::CreateImageCopyTexture(srcTexture.Get(), 0, {0, 0, 0}, wgpu::TextureAspect::All);
 
-        encoder.CopyTextureToTexture(&srcView, &dstView, &dstSize);
+        if (copyForBrowerOptions == nullptr) {
+            encoder.CopyTextureToTexture(&srcView, &dstView, &dstSize);
 
-        wgpu::CommandBuffer commands = encoder.Finish();
-        queue.Submit(1, &commands);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            queue.Submit(1, &commands);
+        } else {
+            queue.CopyTextureForBrowser(&srcView, &dstView, &dstSize, copyForBrowerOptions);
+        }
 
         lockStep.Signal(stepDstTextureWritten);
     }
@@ -244,10 +257,35 @@ class MultithreadDepthStencilCopyTests : public MultithreadTests {
 
         lockStep.Signal(stepDstTextureWritten);
     }
+
+    template <typename T>
+    void ExpectColorTestData(const wgpu::Texture& texture,
+                             wgpu::TextureFormat format,
+                             uint32_t width,
+                             uint32_t height,
+                             const std::vector<T>& testData) {
+        for (uint32_t idx = 0, r = 0; r < height; ++r) {
+            for (uint32_t c = 0; c < width; ++c, ++idx) {
+                switch (format) {
+                    case wgpu::TextureFormat::RGBA8Unorm:
+                        EXPECT_PIXEL_RGBA8_EQ(testData[idx], texture, c, r)
+                            << " Failed at " << r << " " << c;
+                        break;
+                    case wgpu::TextureFormat::R32Float:
+                        EXPECT_PIXEL_FLOAT_EQ(testData[idx], texture, c, r)
+                            << " Failed at " << r << " " << c;
+                        break;
+                    default:
+                        // unsupported
+                        abort();
+                }
+            }
+        }
+    }
 };
 
 // Use WriteTexture() on one thread, CopyTextureToTexture() on another thread.
-TEST_P(MultithreadDepthStencilCopyTests, Depth_WriteAndCopyOnDifferentThreads) {
+TEST_P(MultithreadTextureCopyTests, Depth_WriteAndCopyOnDifferentThreads) {
     enum class Step {
         Begin,
         WriteTexture,
@@ -305,7 +343,7 @@ TEST_P(MultithreadDepthStencilCopyTests, Depth_WriteAndCopyOnDifferentThreads) {
 }
 
 // Use WriteBuffer() on one thread, CopyBufferToTexture() on another thread.
-TEST_P(MultithreadDepthStencilCopyTests, Depth_WriteBufferAndCopyOnDifferentThreads) {
+TEST_P(MultithreadTextureCopyTests, Depth_WriteBufferAndCopyOnDifferentThreads) {
     enum class Step {
         Begin,
         WriteBuffer,
@@ -365,7 +403,7 @@ TEST_P(MultithreadDepthStencilCopyTests, Depth_WriteBufferAndCopyOnDifferentThre
 }
 
 // Use WriteTexture() on one thread, CopyTextureToTexture() on another thread.
-TEST_P(MultithreadDepthStencilCopyTests, Stencil_WriteAndCopyOnDifferentThreads) {
+TEST_P(MultithreadTextureCopyTests, Stencil_WriteAndCopyOnDifferentThreads) {
     // TODO(crbug.com/dawn/1497): glReadPixels: GL error: HIGH: Invalid format and type
     // combination.
     DAWN_SUPPRESS_TEST_IF(IsANGLE());
@@ -420,7 +458,7 @@ TEST_P(MultithreadDepthStencilCopyTests, Stencil_WriteAndCopyOnDifferentThreads)
 }
 
 // Use WriteBuffer() on one thread, CopyBufferToTexture() on another thread.
-TEST_P(MultithreadDepthStencilCopyTests, Stencil_WriteBufferAndCopyOnDifferentThreads) {
+TEST_P(MultithreadTextureCopyTests, Stencil_WriteBufferAndCopyOnDifferentThreads) {
     enum class Step {
         Begin,
         WriteBuffer,
@@ -469,6 +507,146 @@ TEST_P(MultithreadDepthStencilCopyTests, Stencil_WriteBufferAndCopyOnDifferentTh
     copyThread.join();
 }
 
+// Use WriteTexture() on one thread, CopyTextureForBrowser() on another thread.
+TEST_P(MultithreadTextureCopyTests, Color_WriteAndCopyForBrowserOnDifferentThreads) {
+    // TODO(crbug.com/dawn/1232): Program link error on OpenGLES backend
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+    DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
+
+    enum class Step {
+        Begin,
+        WriteTexture,
+        CopyTexture,
+    };
+
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 4;
+
+    const std::vector<utils::RGBA8> kExpectedData = {
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    };
+
+    const std::vector<utils::RGBA8> kExpectedFlippedData = {
+        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    };
+
+    const size_t kExpectedDataSize = kExpectedData.size() * sizeof(kExpectedData[0]);
+
+    LockStep<Step> lockStep(Step::Begin);
+
+    GuardedTexture srcTexture;
+    std::thread writeThread([&] {
+        srcTexture =
+            CreateAndWriteTexture(kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm,
+                                  wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding,
+                                  kExpectedData.data(), kExpectedDataSize);
+
+        lockStep.Signal(Step::WriteTexture);
+        lockStep.Wait(Step::CopyTexture);
+
+        // Verify the initial data
+        ExpectColorTestData(srcTexture.Get(), wgpu::TextureFormat::RGBA8Unorm, kWidth, kHeight,
+                            kExpectedData);
+    });
+
+    std::thread copyThread([&] {
+        auto destTexture =
+            CreateTexture(kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm,
+                          wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopyDst |
+                              wgpu::TextureUsage::CopySrc);
+
+        // Copy from srcTexture to destTexture.
+        const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
+        wgpu::CopyTextureForBrowserOptions options;
+        options.flipY = true;
+        CopyTextureToTextureInLockStep(lockStep, srcTexture, Step::WriteTexture, destTexture,
+                                       Step::CopyTexture, /*dstMipLevel=*/0, dstSize, &options);
+
+        // Verify the copied data
+        ExpectColorTestData(destTexture.Get(), wgpu::TextureFormat::RGBA8Unorm, kWidth, kHeight,
+                            kExpectedFlippedData);
+    });
+
+    writeThread.join();
+    copyThread.join();
+}
+
+// Test that error from CopyTextureForBrowser() won't cause deadlock.
+TEST_P(MultithreadTextureCopyTests, CopyForBrowserErrorNoDeadLock) {
+    enum class Step {
+        Begin,
+        WriteTexture,
+        CopyTextureError,
+        CopyTexture,
+    };
+
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 4;
+
+    const std::vector<utils::RGBA8> kExpectedData = {
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kBlack, utils::RGBA8::kBlack, utils::RGBA8::kGreen, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kRed,   utils::RGBA8::kRed,   utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+        utils::RGBA8::kRed,   utils::RGBA8::kBlue,  utils::RGBA8::kBlack, utils::RGBA8::kBlack,  //
+    };
+
+    const size_t kExpectedDataSize = kExpectedData.size() * sizeof(kExpectedData[0]);
+
+    LockStep<Step> lockStep(Step::Begin);
+
+    GuardedTexture srcTexture;
+    std::thread writeThread([&] {
+        srcTexture =
+            CreateAndWriteTexture(kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm,
+                                  wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding,
+                                  kExpectedData.data(), kExpectedDataSize);
+
+        lockStep.Signal(Step::WriteTexture);
+        lockStep.Wait(Step::CopyTexture);
+
+        // Verify the initial data
+        ExpectColorTestData(srcTexture.Get(), wgpu::TextureFormat::RGBA8Unorm, kWidth, kHeight,
+                            kExpectedData);
+    });
+
+    std::thread copyThread([&] {
+        GuardedTexture invalidSrcTexture = CreateTexture(
+            kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+        auto destTexture =
+            CreateTexture(kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm,
+                          wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopyDst |
+                              wgpu::TextureUsage::CopySrc);
+
+        // Copy from srcTexture to destTexture.
+        const wgpu::Extent3D dstSize = {kWidth, kHeight, 1};
+        wgpu::CopyTextureForBrowserOptions options = {};
+        ASSERT_DEVICE_ERROR([&] {
+            // The fist copy should be an error because of missing TextureBinding from src texture.
+            CopyTextureToTextureInLockStep(lockStep, invalidSrcTexture, Step::WriteTexture,
+                                           destTexture, Step::CopyTextureError,
+                                           /*dstMipLevel=*/0, dstSize, &options);
+
+            // Second copy is valid.
+            CopyTextureToTextureInLockStep(lockStep, srcTexture, Step::CopyTextureError,
+                                           destTexture, Step::CopyTexture,
+                                           /*dstMipLevel=*/0, dstSize, &options);
+        }());
+
+        // Verify the copied data
+        ExpectColorTestData(destTexture.Get(), wgpu::TextureFormat::RGBA8Unorm, kWidth, kHeight,
+                            kExpectedData);
+    });
+
+    writeThread.join();
+    copyThread.join();
+}
+
 DAWN_INSTANTIATE_TEST(MultithreadTests,
                       D3D12Backend(),
                       MetalBackend(),
@@ -477,7 +655,7 @@ DAWN_INSTANTIATE_TEST(MultithreadTests,
                       VulkanBackend());
 
 DAWN_INSTANTIATE_TEST(
-    MultithreadDepthStencilCopyTests,
+    MultithreadTextureCopyTests,
     D3D12Backend(),
     MetalBackend(),
     MetalBackend({"use_blit_for_buffer_to_depth_texture_copy",
