@@ -27,20 +27,20 @@ TEST_F(TemplatedIdentifierTest, Creation) {
     auto* i = Ident("ident", 1_a, Add("x", "y"), false, "x");
     EXPECT_EQ(i->symbol, Symbols().Get("ident"));
     ASSERT_EQ(i->arguments.Length(), 4u);
-    EXPECT_TRUE(i->arguments[0]->Is<ast::IntLiteralExpression>());
-    EXPECT_TRUE(i->arguments[1]->Is<ast::BinaryExpression>());
-    EXPECT_TRUE(i->arguments[2]->Is<ast::BoolLiteralExpression>());
-    EXPECT_TRUE(i->arguments[3]->Is<ast::IdentifierExpression>());
+    EXPECT_TRUE(i->arguments[0]->Is<IntLiteralExpression>());
+    EXPECT_TRUE(i->arguments[1]->Is<BinaryExpression>());
+    EXPECT_TRUE(i->arguments[2]->Is<BoolLiteralExpression>());
+    EXPECT_TRUE(i->arguments[3]->Is<IdentifierExpression>());
 }
 
 TEST_F(TemplatedIdentifierTest, Creation_WithSource) {
     auto* i = Ident(Source{{20, 2}}, "ident", 1_a, Add("x", "y"), false, "x");
     EXPECT_EQ(i->symbol, Symbols().Get("ident"));
     ASSERT_EQ(i->arguments.Length(), 4u);
-    EXPECT_TRUE(i->arguments[0]->Is<ast::IntLiteralExpression>());
-    EXPECT_TRUE(i->arguments[1]->Is<ast::BinaryExpression>());
-    EXPECT_TRUE(i->arguments[2]->Is<ast::BoolLiteralExpression>());
-    EXPECT_TRUE(i->arguments[3]->Is<ast::IdentifierExpression>());
+    EXPECT_TRUE(i->arguments[0]->Is<IntLiteralExpression>());
+    EXPECT_TRUE(i->arguments[1]->Is<BinaryExpression>());
+    EXPECT_TRUE(i->arguments[2]->Is<BoolLiteralExpression>());
+    EXPECT_TRUE(i->arguments[3]->Is<IdentifierExpression>());
 
     auto src = i->source;
     EXPECT_EQ(src.range.begin.line, 20u);
