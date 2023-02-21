@@ -128,6 +128,30 @@
       },
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb148cfe_5e5eafc9",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-21T19:32:23Z",
+      "side": 1,
+      "message": "The \"s\" on requires is not about referring to a plurality of things.\nIt makes it a different tense of verb, inconsistent with how we\u0027ve used \"enable\".\n\n\"enable f16;\" uses \"enable\" as an ordinary verb.\n\"require v2;\" uses \"require\" as an ordinary verb.\n\n\"enable\" and \"require\" are ordinary verbs. \nhttps://www.google.com/search?q\u003dis+require+a+verb\u0026oq\u003dis+require+a+verb\u0026aqs\u003dchrome.0.69i59j0i512j0i22i30i625j0i15i22i30i625j0i22i30i625j69i64l3.2549j1j1\u0026sourceid\u003dchrome\u0026ie\u003dUTF-8 \n\n\"enables\" and \"requires\" are verbs in **3rd person present tense**\nhttps://www.google.com/search?q\u003dis+requires+a+verb\u0026sxsrf\u003dAJOqlzVwfMBG53nufichMlswPoXewV8c0g%3A1677007648752\u0026ei\u003dIBv1Y6uIK6iZptQP3sWpoAs\u0026ved\u003d0ahUKEwirmL-prKf9AhWojIkEHd5iCrQQ4dUDCA8\u0026uact\u003d5\u0026oq\u003dis+requires+a+verb\u0026gs_lcp\u003dCgxnd3Mtd2l6LXNlcnAQAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwAzIKCAAQRxDWBBCwA0oECEEYAFAAWABg2iZoBHABeACAAQCIAQCSAQCYAQDIAQjAAQE\u0026sclient\u003dgws-wiz-serp",
+      "parentUuid": "0b368488_f485afc9",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
