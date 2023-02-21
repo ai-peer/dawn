@@ -47,8 +47,8 @@ class DeviceLostTest : public DawnTest {
     }
 
     void TearDown() override {
-        mockQueueWorkDoneCallback = nullptr;
         DawnTest::TearDown();
+        mockQueueWorkDoneCallback = nullptr;
     }
 
     static void MapFailCallback(WGPUBufferMapAsyncStatus status, void* userdata) {

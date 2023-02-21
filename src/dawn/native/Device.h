@@ -49,6 +49,7 @@ class AttachmentState;
 class AttachmentStateBlueprint;
 class Blob;
 class BlobCache;
+class CallbackSink;
 class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
