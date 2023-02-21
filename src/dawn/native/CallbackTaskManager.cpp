@@ -16,7 +16,44 @@
 
 #include <utility>
 
+#include "dawn/native/Device.h"
+
 namespace dawn::native {
+
+namespace {
+struct GenericFunctionTask : CallbackTask {
+  public:
+    explicit GenericFunctionTask(std::function<void()> func) : mFunction(std::move(func)) {}
+
+  private:
+    void FinishImpl() override { mFunction(); }
+    void HandleShutDownImpl() override { mFunction(); }
+    void HandleDeviceLossImpl() override { mFunction(); }
+
+    std::function<void()> mFunction;
+};
+}  // namespace
+
+void CallbackTask::Execute() {
+    switch (mState) {
+        case State::DeviceLoss:
+            HandleDeviceLossImpl();
+            break;
+        case State::ShutDown:
+            HandleShutDownImpl();
+            break;
+        default:
+            FinishImpl();
+    }
+}
+
+void CallbackTask::SetShutDown() {
+    mState = State::ShutDown;
+}
+
+void CallbackTask::SetDeviceLoss() {
+    mState = State::DeviceLoss;
+}
 
 CallbackTaskManager::CallbackTaskManager() = default;
 
@@ -38,6 +75,24 @@ std::vector<std::unique_ptr<CallbackTask>> CallbackTaskManager::AcquireCallbackT
 void CallbackTaskManager::AddCallbackTask(std::unique_ptr<CallbackTask> callbackTask) {
     std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
     mCallbackTaskQueue.push_back(std::move(callbackTask));
+}
+
+void CallbackTaskManager::AddCallbackTask(const std::function<void()> callback) {
+    AddCallbackTask(std::make_unique<GenericFunctionTask>(callback));
+}
+
+void CallbackTaskManager::HandleDeviceLoss() {
+    std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
+    for (auto& task : mCallbackTaskQueue) {
+        task->SetDeviceLoss();
+    }
+}
+
+void CallbackTaskManager::HandleShutDown() {
+    std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
+    for (auto& task : mCallbackTaskQueue) {
+        task->SetShutDown();
+    }
 }
 
 }  // namespace dawn::native
