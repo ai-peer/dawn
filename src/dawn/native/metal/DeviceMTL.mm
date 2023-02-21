@@ -137,7 +137,7 @@ Device::Device(AdapterBase* adapter,
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*callbackSink=*/nullptr);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {

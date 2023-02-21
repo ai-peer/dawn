@@ -77,10 +77,10 @@ class BufferValidationTest : public ValidationTest {
     }
 
     void TearDown() override {
+        ValidationTest::TearDown();
+
         // Delete mocks so that expectations are checked
         mockBufferMapAsyncCallback = nullptr;
-
-        ValidationTest::TearDown();
     }
 };
 

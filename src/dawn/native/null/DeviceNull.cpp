@@ -123,7 +123,7 @@ ResultOrError<Ref<Device>> Device::Create(Adapter* adapter,
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*callbackSink=*/nullptr);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
@@ -364,12 +364,12 @@ Queue::Queue(Device* device, const QueueDescriptor* descriptor) : QueueBase(devi
 
 Queue::~Queue() {}
 
-MaybeError Queue::SubmitImpl(uint32_t, CommandBufferBase* const*) {
+MaybeError Queue::SubmitImpl(uint32_t, CommandBufferBase* const*, CallbackSink& callbackSink) {
     Device* device = ToBackend(GetDevice());
 
     // The Vulkan, D3D12 and Metal implementation all tick the device here,
     // for testing purposes we should also tick in the null implementation.
-    DAWN_TRY(device->Tick());
+    DAWN_TRY(device->Tick(callbackSink));
 
     return device->SubmitPendingOperations();
 }

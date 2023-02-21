@@ -19,6 +19,7 @@
 #include "dawn/native/ObjectBase.h"
 
 namespace dawn::native {
+class CallbackSink;
 class DeviceBase;
 struct Extent3D;
 struct ImageCopyTexture;
@@ -40,13 +41,15 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                    const ImageCopyTexture* source,
                                    const ImageCopyTexture* destination,
                                    const Extent3D* copySize,
-                                   const CopyTextureForBrowserOptions* options);
+                                   const CopyTextureForBrowserOptions* options,
+                                   CallbackSink& callbackSink);
 
 MaybeError DoCopyExternalTextureForBrowser(DeviceBase* device,
                                            const ImageCopyExternalTexture* source,
                                            const ImageCopyTexture* destination,
                                            const Extent3D* copySize,
-                                           const CopyTextureForBrowserOptions* options);
+                                           const CopyTextureForBrowserOptions* options,
+                                           CallbackSink& callbackSink);
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_COPYTEXTUREFORBROWSERHELPER_H_
