@@ -19,6 +19,7 @@
 
 namespace dawn::native {
 
+class CallbackSink;
 struct TextureCopy;
 
 // BlitBufferToDepth works around issues where copying from a buffer
@@ -37,7 +38,8 @@ MaybeError BlitStagingBufferToDepth(DeviceBase* device,
                                     BufferBase* buffer,
                                     const TextureDataLayout& src,
                                     const TextureCopy& dst,
-                                    const Extent3D& copyExtent);
+                                    const Extent3D& copyExtent,
+                                    CallbackSink& callbackSink);
 
 MaybeError BlitBufferToDepth(DeviceBase* device,
                              CommandEncoder* commandEncoder,
@@ -62,7 +64,8 @@ MaybeError BlitStagingBufferToStencil(DeviceBase* device,
                                       BufferBase* buffer,
                                       const TextureDataLayout& src,
                                       const TextureCopy& dst,
-                                      const Extent3D& copyExtent);
+                                      const Extent3D& copyExtent,
+                                      CallbackSink& callbackSink);
 
 MaybeError BlitBufferToStencil(DeviceBase* device,
                                CommandEncoder* commandEncoder,

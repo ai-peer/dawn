@@ -189,8 +189,10 @@ class RecordMember:
         self.handle_type = handle_type
 
 
-Method = namedtuple(
-    'Method', ['name', 'return_type', 'arguments', 'autolock', 'json_data'])
+Method = namedtuple('Method', [
+    'name', 'return_type', 'arguments', 'autolock', 'trigger_callbacks',
+    'json_data'
+])
 
 
 class ObjectType(Type):
@@ -345,7 +347,8 @@ def link_object(obj, types):
         return Method(
             Name(json_data['name']), types[json_data.get('returns', 'void')],
             arguments, obj_scoped_autolock_enabled
-            and not json_data.get('no autolock', False), json_data)
+            and not json_data.get('no autolock', False),
+            json_data.get('triggers callback', False), json_data)
 
     obj.methods = [make_method(m) for m in obj.json_data.get('methods', [])]
     obj.methods.sort(key=lambda method: method.name.canonical_case())
@@ -704,8 +707,8 @@ def c_methods(params, typ):
     return typ.methods + [
         x for x in [
             Method(Name('reference'), params['types']['void'], [], False,
-                   {'tags': ['dawn', 'emscripten']}),
-            Method(Name('release'), params['types']['void'], [], False,
+                   False, {'tags': ['dawn', 'emscripten']}),
+            Method(Name('release'), params['types']['void'], [], False, False,
                    {'tags': ['dawn', 'emscripten']}),
         ] if item_is_enabled(params['enabled_tags'], x.json_data)
         and not item_is_disabled(params['disabled_tags'], x.json_data)
