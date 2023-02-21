@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c914cf_4c876bb7",
+        "filename": "src/tint/transform/clamp_frag_depth.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:23:47Z",
+      "side": 1,
+      "message": "This change seems like a unrelated refactoring?",
+      "revId": "7162efbfa4fac4347910139252ee5c94cd6af952",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
