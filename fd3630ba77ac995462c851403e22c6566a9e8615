@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94f8a8e9_b0714cb3",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-21T18:45:48Z",
+      "side": 1,
+      "message": "This is a classic format-on-save where the `{` wasn\u0027t matched, and everything got indented then wrapped.",
+      "parentUuid": "a9a1d6ae_4f8856c0",
+      "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b7bf9119_b7490cad",
         "filename": "src/tint/resolver/validator.cc",
         "patchSetId": 1
