@@ -392,7 +392,7 @@ TEST_F(GetBindGroupLayoutTests, BindingType) {
             @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -404,7 +404,7 @@ TEST_F(GetBindGroupLayoutTests, BindingType) {
             @group(0) @binding(0) var myTexture : texture_multisampled_2d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -473,7 +473,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_1d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -485,7 +485,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -497,7 +497,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_2d_array<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -509,7 +509,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_3d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -521,7 +521,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_cube<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -533,7 +533,7 @@ TEST_F(GetBindGroupLayoutTests, ViewDimension) {
             @group(0) @binding(0) var myTexture : texture_cube_array<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -561,7 +561,7 @@ TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
             @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -573,7 +573,7 @@ TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
             @group(0) @binding(0) var myTexture : texture_2d<i32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -585,7 +585,7 @@ TEST_F(GetBindGroupLayoutTests, TextureComponentType) {
             @group(0) @binding(0) var myTexture : texture_2d<u32>;
 
             @fragment fn main() {
-                textureDimensions(myTexture);
+                _ = textureDimensions(myTexture);
             })");
         EXPECT_TRUE(dawn::native::BindGroupLayoutBindingsEqualForTesting(
             device.CreateBindGroupLayout(&desc).Get(), pipeline.GetBindGroupLayout(0).Get()));
@@ -898,7 +898,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
             return vec4f();
         })");
 
@@ -906,7 +906,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
         @group(0) @binding(0) var myTexture : texture_multisampled_2d<f32>;
 
         @fragment fn main() {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
         })");
 
     utils::ComboRenderPipelineDescriptor descriptor;
@@ -923,7 +923,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
             return vec4f();
         })");
 
@@ -931,7 +931,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
         @group(0) @binding(0) var myTexture : texture_3d<f32>;
 
         @fragment fn main() {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
         })");
 
     utils::ComboRenderPipelineDescriptor descriptor;
@@ -948,7 +948,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
         @group(0) @binding(0) var myTexture : texture_2d<f32>;
 
         @vertex fn main() -> @builtin(position) vec4f {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
             return vec4f();
         })");
 
@@ -956,7 +956,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
         @group(0) @binding(0) var myTexture : texture_2d<i32>;
 
         @fragment fn main() {
-            textureDimensions(myTexture);
+            _ = textureDimensions(myTexture);
         })");
 
     utils::ComboRenderPipelineDescriptor descriptor;
