@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdada087_f1a0941f",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T18:51:16Z",
+      "side": 1,
+      "message": "I\u0027m not sure what vim did there, it reformated on save, but seems to have decided to use like 96 columns instead of 100. Fixed, there were 2 that are valid changes that I\u0027ve kept.\n\n(Ah, very close Ben, I accidentally added a `s` as the very first character in the file in the copyright block, which apparently causes everything to format 4 characters over, heh)",
+      "parentUuid": "a9a1d6ae_4f8856c0",
+      "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7bf9119_b7490cad",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-02-21T17:32:32Z",
       "side": 1,
       "message": "I\u0027d suggest adding coverage to `attribute_validation_test.cc`, which tests that attributes are valid where they are supposed to be, and not valid where they are not supposed to be.",
+      "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afe00c94_d4c6f6a1",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T18:51:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7bf9119_b7490cad",
       "revId": "fd3630ba77ac995462c851403e22c6566a9e8615",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
