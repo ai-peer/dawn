@@ -65,7 +65,7 @@ class Function final : public Castable<Function, Node> {
     ~Function() override;
 
     /// @returns the functions pipeline stage or None if not set
-    ast::PipelineStage PipelineStage() const;
+    PipelineStage PipelineStage() const;
 
     /// @returns true if this function is an entry point
     bool IsEntryPoint() const { return PipelineStage() != PipelineStage::kNone; }
