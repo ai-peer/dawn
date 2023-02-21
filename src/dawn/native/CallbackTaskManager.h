@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_CALLBACKTASKMANAGER_H_
 #define SRC_DAWN_NATIVE_CALLBACKTASKMANAGER_H_
 
+#include <functional>
 #include <memory>
 #include <mutex>
 #include <vector>
@@ -24,9 +25,24 @@ namespace dawn::native {
 struct CallbackTask {
   public:
     virtual ~CallbackTask() = default;
-    virtual void Finish() = 0;
-    virtual void HandleShutDown() = 0;
-    virtual void HandleDeviceLoss() = 0;
+
+    void Execute();
+    void SetShutDown();
+    void SetDeviceLoss();
+
+  protected:
+    virtual void FinishImpl() = 0;
+    virtual void HandleShutDownImpl() = 0;
+    virtual void HandleDeviceLossImpl() = 0;
+
+  private:
+    enum class State {
+        Normal,
+        ShutDown,
+        DeviceLoss,
+    };
+
+    State mState = State::Normal;
 };
 
 class CallbackTaskManager {
@@ -35,7 +51,10 @@ class CallbackTaskManager {
     ~CallbackTaskManager();
 
     void AddCallbackTask(std::unique_ptr<CallbackTask> callbackTask);
+    void AddCallbackTask(const std::function<void()> callback);
     bool IsEmpty();
+    void HandleDeviceLoss();
+    void HandleShutDown();
     std::vector<std::unique_ptr<CallbackTask>> AcquireCallbackTasks();
 
   private:
