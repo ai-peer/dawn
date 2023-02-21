@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2889f3b1_9227483b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "some drive-by comments",
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04ee437c_00bc970d",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "why don\u0027t we bubble this error?",
+      "range": {
+        "startLine": 541,
+        "startChar": 12,
+        "endLine": 541,
+        "endChar": 39
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81aa6fbc_143f0d99",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "should only be validation errors allowed",
+      "range": {
+        "startLine": 155,
+        "startChar": 22,
+        "endLine": 155,
+        "endChar": 50
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1352512_e7d0f710",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "validation only",
+      "range": {
+        "startLine": 1404,
+        "startChar": 66,
+        "endLine": 1404,
+        "endChar": 94
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6d08da_6838f6bc",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "hmm, IMO I think this adds more complexity than it\u0027s worth. I don\u0027t think it makes doing ConsumedError any harder to use wrong either since it has a macro which is just as concise?",
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cee478c_64d107df",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "why not DAWN_TRY?",
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffe6e8d9_1b6b92fd",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "existing nit: more accurate to do INTERNAL_ERROR since it\u0027s not a real device lost - it\u0027s just \"this is not supported so we lose the device, gracefully\"",
+      "range": {
+        "startLine": 1169,
+        "startChar": 23,
+        "endLine": 1169,
+        "endChar": 45
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c74617_54f2693b",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "why don\u0027t these DAWN_TRY?",
+      "range": {
+        "startLine": 553,
+        "startChar": 8,
+        "endLine": 553,
+        "endChar": 24
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd950030_f22f7b84",
+        "filename": "src/dawn/tests/unittests/validation/DeviceValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-21T23:56:50Z",
+      "side": 1,
+      "message": "nit: you could also EXPECT_TRUE",
+      "range": {
+        "startLine": 229,
+        "startChar": 24,
+        "endLine": 229,
+        "endChar": 30
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
