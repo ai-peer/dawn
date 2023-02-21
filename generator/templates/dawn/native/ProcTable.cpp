@@ -20,6 +20,7 @@
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
 #include "{{native_dir}}/{{prefix}}_platform.h"
 #include "{{native_dir}}/{{Prefix}}Native.h"
+#include "{{native_dir}}/CallbackSink.h"
 
 #include <algorithm>
 #include <vector>
@@ -56,6 +57,10 @@ namespace {{native_namespace}} {
                     {% endif %}
                 {%- endfor-%}
 
+                {% if method.trigger_callbacks %}
+                    CallbackSink callbackSink;
+                {% endif %}
+
                 {% if method.autolock %}
                     {% if type.name.get() != "device" %}
                         auto device = self->GetDevice();
@@ -75,6 +80,10 @@ namespace {{native_namespace}} {
                         {%- if not loop.first %}, {% endif -%}
                         {{as_varName(arg.name)}}_
                     {%- endfor -%}
+                    {%- if method.trigger_callbacks -%}
+                    {%- if len(method.arguments) > 0 %}, {% endif -%}
+                    callbackSink
+                    {%- endif -%}
                 );
                 {% if method.return_type.name.canonical_case() != "void" %}
                     {% if method.return_type.category in ["object", "enum", "bitmask"] %}

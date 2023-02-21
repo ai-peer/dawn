@@ -16,6 +16,7 @@
 #include <set>
 #include <vector>
 
+#include "dawn/native/CallbackSink.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
@@ -356,7 +357,8 @@ TEST_P(D3D12DescriptorHeapTests, GrowHeapsInMultipleSubmits) {
         ComPtr<ID3D12DescriptorHeap> heap = allocator->GetShaderVisibleHeap();
         EXPECT_TRUE(std::find(heaps.begin(), heaps.end(), heap) == heaps.end());
         heaps.insert(heap);
-        mD3DDevice->APITick();
+        CallbackSink callbackSink;
+        mD3DDevice->APITick(callbackSink);
     }
 
     // Verify the number of switches equals the size of heaps allocated (minus the initial).
