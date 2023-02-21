@@ -51,6 +51,7 @@ class AttachmentState;
 class AttachmentStateBlueprint;
 class Blob;
 class BlobCache;
+class CallbackSink;
 class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
@@ -291,12 +292,18 @@ class DeviceBase : public RefCountedWithExternalCount {
     bool APIHasFeature(wgpu::FeatureName feature) const;
     size_t APIEnumerateFeatures(wgpu::FeatureName* features) const;
     void APIInjectError(wgpu::ErrorType type, const char* message);
-    bool APITick();
+    bool APITick(CallbackSink& callbackSink);
     void APIValidateTextureDescriptor(const TextureDescriptor* desc);
 
-    void APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
-    void APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
-    void APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata);
+    void APISetDeviceLostCallback(wgpu::DeviceLostCallback callback,
+                                  void* userdata,
+                                  CallbackSink& callbackSink);
+    void APISetUncapturedErrorCallback(wgpu::ErrorCallback callback,
+                                       void* userdata,
+                                       CallbackSink& callbackSink);
+    void APISetLoggingCallback(wgpu::LoggingCallback callback,
+                               void* userdata,
+                               CallbackSink& callbackSink);
     void APIPushErrorScope(wgpu::ErrorFilter filter);
     bool APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata);
 
@@ -314,7 +321,8 @@ class DeviceBase : public RefCountedWithExternalCount {
     MaybeError CopyFromStagingToTexture(BufferBase* source,
                                         const TextureDataLayout& src,
                                         const TextureCopy& dst,
-                                        const Extent3D& copySizePixels);
+                                        const Extent3D& copySizePixels,
+                                        CallbackSink& callbackSink);
 
     DynamicUploader* GetDynamicUploader() const;
 
@@ -361,7 +369,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // Check for passed fences and set the new completed serial
     MaybeError CheckPassedSerials();
 
-    MaybeError Tick();
+    MaybeError Tick(CallbackSink& callbackSink);
 
     // TODO(crbug.com/dawn/839): Organize the below backend-specific parameters into the struct
     // BackendMetadata that we can query from the device.
@@ -394,12 +402,15 @@ class DeviceBase : public RefCountedWithExternalCount {
                                             WGPUCreateRenderPipelineAsyncCallback callback,
                                             void* userdata);
 
+    // Schedule code to be executed in the next Tick() call.
+    void ScheduleNextTickCode(const std::function<void()>& code);
+
     PipelineCompatibilityToken GetNextPipelineCompatibilityToken();
 
     const CacheKey& GetCacheKey() const;
     const std::string& GetLabel() const;
     void APISetLabel(const char* label);
-    void APIDestroy();
+    void APIDestroy(CallbackSink& callbackSink);
 
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
 
@@ -456,7 +467,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
-    void Destroy();
+    void Destroy(CallbackSink* callbackSink);
 
     // Incrememt mLastSubmittedSerial when we submit the next serial
     void IncrementLastSubmittedCommandSerial();
@@ -501,7 +512,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual void SetLabelImpl();
 
     virtual MaybeError TickImpl() = 0;
-    void FlushCallbackTaskQueue();
+    void FlushCallbackTaskQueue(CallbackSink& callbackSink);
 
     ResultOrError<Ref<BindGroupLayoutBase>> CreateEmptyBindGroupLayout();
 
@@ -612,6 +623,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
 
     std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
+    std::vector<std::function<void()>> mNextTickCodes;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;

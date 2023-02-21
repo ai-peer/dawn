@@ -395,7 +395,8 @@ MaybeError DoCopyForBrowser(DeviceBase* device,
                             const ImageCopyTexture* destination,
                             const Extent3D* copySize,
                             const CopyTextureForBrowserOptions* options,
-                            RenderPipelineBase* pipeline) {
+                            RenderPipelineBase* pipeline,
+                            CallbackSink& callbackSink) {
     // TODO(crbug.com/dawn/856): In D3D12 and Vulkan, compatible texture format can directly
     // copy to each other. This can be a potential fast path.
 
@@ -591,7 +592,7 @@ MaybeError DoCopyForBrowser(DeviceBase* device,
     CommandBufferBase* submitCommandBuffer = commandBuffer.Get();
 
     // Submit command buffer.
-    device->GetQueue()->APISubmit(1, &submitCommandBuffer);
+    device->GetQueue()->APISubmit(1, &submitCommandBuffer, callbackSink);
     return {};
 }
 
@@ -728,7 +729,8 @@ MaybeError DoCopyExternalTextureForBrowser(DeviceBase* device,
                                            const ImageCopyExternalTexture* source,
                                            const ImageCopyTexture* destination,
                                            const Extent3D* copySize,
-                                           const CopyTextureForBrowserOptions* options) {
+                                           const CopyTextureForBrowserOptions* options,
+                                           CallbackSink& callbackSink) {
     TextureInfo info;
     info.origin = source->origin;
     const Extent2D& visibleSize = source->externalTexture->GetVisibleSize();
@@ -738,14 +740,16 @@ MaybeError DoCopyExternalTextureForBrowser(DeviceBase* device,
     DAWN_TRY_ASSIGN(pipeline, GetOrCreateCopyExternalTextureForBrowserPipeline(
                                   device, destination->texture->GetFormat().format));
     return DoCopyForBrowser<ExternalTextureBase>(device, &info, source->externalTexture,
-                                                 destination, copySize, options, pipeline);
+                                                 destination, copySize, options, pipeline,
+                                                 callbackSink);
 }
 
 MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                    const ImageCopyTexture* source,
                                    const ImageCopyTexture* destination,
                                    const Extent3D* copySize,
-                                   const CopyTextureForBrowserOptions* options) {
+                                   const CopyTextureForBrowserOptions* options,
+                                   CallbackSink& callbackSink) {
     TextureInfo info;
     info.origin = source->origin;
     info.size = source->texture->GetSize();
@@ -764,6 +768,6 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                   device, destination->texture->GetFormat().format));
 
     return DoCopyForBrowser<TextureViewBase>(device, &info, srcTextureView.Get(), destination,
-                                             copySize, options, pipeline);
+                                             copySize, options, pipeline, callbackSink);
 }
 }  // namespace dawn::native

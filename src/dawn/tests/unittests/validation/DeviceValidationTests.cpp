@@ -14,6 +14,7 @@
 
 #include <utility>
 
+#include "dawn/native/CallbackSink.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/dawn_platform.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
@@ -225,7 +226,8 @@ TEST_F(DeviceTickValidationTest, DestroyDeviceBeforeInternalTick) {
 
     ExpectDeviceDestruction();
     device.Destroy();
+    dawn::native::CallbackSink callbackSink;
     dawn::native::DeviceBase* nativeDevice = dawn::native::FromAPI(device.Get());
-    ASSERT_DEVICE_ERROR(nativeDevice->ConsumedError(nativeDevice->Tick()),
+    ASSERT_DEVICE_ERROR(nativeDevice->ConsumedError(nativeDevice->Tick(callbackSink)),
                         HasSubstr("[Device] is lost."));
 }

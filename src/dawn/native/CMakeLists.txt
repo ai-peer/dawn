@@ -68,6 +68,7 @@ target_sources(dawn_native PRIVATE
     "CacheRequest.cpp"
     "CacheRequest.h"
     "CacheResult.h"
+    "CallbackSink.h"
     "CallbackTaskManager.cpp"
     "CallbackTaskManager.h"
     "CommandAllocator.cpp"
