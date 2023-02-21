@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c78ebe7_e8d0cb05",
+        "filename": "src/dawn/native/CachedObject.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-21T21:41:29Z",
+      "side": 1,
+      "message": "Your understanding is correct! So in my opinion, the scenario you mention is actually very common since in general we want to be able to set all mock expectations prior to executing the actual code paths.\n\nAn example is if we wanted to mock the `MapAtCreationImpl` call in a `BufferMock` to return an error. We would need to set the expectation before calling `CreateBufferImpl`, then run it through the normal frontend code. (Note we can\u0027t set it after because it would already have been called.) In this case we would need to call `new BufferMock` instead of `BufferMock::Create` for this. Ideally, I want it to be as easy as possible to use these mocks so having to use a different construction pattern for different use cases is not conducive to ease-of-use.\n\nThe option of using a `SetContentHashForTesting` that doesn\u0027t set `mContentHashIsInitialized` is pointless because the actual hash isn\u0027t the problem, its `mContentHashIsInitialized` that is asserted against anyways (i.e. in `GetContentHash`).\n\nI honestly believe that the current iteration is one of the most minimally intrusive ways to the frontend to achieve all the points and ease-of-use for the mocks. (Modulo any ASSERT relaxation(s)). \n\nAs for the ASSERT relaxations, I believe that either relaxing `SetContentHash` to allow resetting as long as it\u0027s the same value, or relaxing `GetContentHash` to just call `ComputeContentHash` if the has isn\u0027t initialized could work as well.\n\nAlso note that all these difficulties in testing are because we are trying to optimize 1 hash key generation call that only happens once per unique object hash per Dawn lifetime, i.e. when it is actually created and we need to compute the hash once for the blueprint and once on the actual created object. Even when we have a cache hit we already need to compute the hash anyways. In my opinion this optimization is so marginal for all the complexity that it adds to the overall frontend.",
+      "parentUuid": "0b50266c_b300c9dd",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "6a1b88535cb21d0300cada00917ad58f4a96c23d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f6557c8e_8aa4aab3",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 3
