@@ -80,6 +80,30 @@
       },
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a3fdd1_b0d46707",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-21T18:46:32Z",
+      "side": 1,
+      "message": "It should be \u0027require\u0027, just like in Perl: https://perldoc.perl.org/functions/require \n\nAlso, in Python we say \"import\", not \"imports\"",
+      "parentUuid": "065df1be_cbeb31f7",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
