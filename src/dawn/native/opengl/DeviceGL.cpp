@@ -125,7 +125,7 @@ Device::Device(AdapterBase* adapter,
       mContext(std::move(context)) {}
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*callbackSink=*/nullptr);
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {

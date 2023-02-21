@@ -1151,7 +1151,8 @@
                 ]
             },
             {
-                "name": "destroy"
+                "name": "destroy",
+                "triggers callback": true
             },
             {
                 "name": "get limits",
@@ -1201,10 +1202,12 @@
             },
             {
                 "name": "tick",
+                "triggers callback": true,
                 "tags": ["dawn"]
             },
             {
                 "name": "set uncaptured error callback",
+                "triggers callback": true,
                 "args": [
                     {"name": "callback", "type": "error callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -1212,6 +1215,7 @@
             },
             {
                 "name": "set logging callback",
+                "triggers callback": true,
                 "tags": ["dawn"],
                 "args": [
                     {"name": "callback", "type": "logging callback"},
@@ -1220,6 +1224,7 @@
             },
             {
                 "name": "set device lost callback",
+                "triggers callback": true,
                 "args": [
                     {"name": "callback", "type": "device lost callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -1744,6 +1749,7 @@
         "methods": [
             {
                 "name": "submit",
+                "triggers callback": true,
                 "args": [
                     {"name": "command count", "type": "uint32_t"},
                     {"name": "commands", "type": "command buffer", "annotation": "const*", "length": "command count"}
@@ -1777,6 +1783,7 @@
             },
             {
                 "name": "write texture",
+                "triggers callback": true,
                 "args": [
                     {"name": "destination", "type": "image copy texture", "annotation": "const*"},
                     {"name": "data", "type": "void", "annotation": "const*", "length": "data size"},
@@ -1788,6 +1795,7 @@
             {
                 "name": "copy texture for browser",
                 "extensible": "in",
+                "triggers callback": true,
                 "tags": ["dawn"],
                 "args": [
                     {"name": "source", "type": "image copy texture", "annotation": "const*"},
@@ -1799,6 +1807,7 @@
             {
                 "name": "copy external texture for browser",
                 "extensible": "in",
+                "triggers callback": true,
                 "tags": ["dawn"],
                 "args": [
                     {"name": "source", "type": "image copy external texture", "annotation": "const*"},
