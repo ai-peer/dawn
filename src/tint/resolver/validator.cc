@@ -395,8 +395,8 @@ bool Validator::VariableInitializer(const ast::Variable* v,
                 break;  // Allowed an initializer
             default:
                 // https://gpuweb.github.io/gpuweb/wgsl/#var-and-let
-                // Optionally has an initializer expression, if the variable is in the private or
-                // function address spaces.
+                // Optionally has an initializer expression, if the variable is in the private
+                // or function address spaces.
                 AddError("var of address space '" + utils::ToString(address_space) +
                              "' cannot have an initializer. var initializers are only supported "
                              "for the address spaces 'private' and 'function'",
@@ -492,8 +492,8 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
                 return false;
             }
 
-            // For uniform buffers, validate that the number of bytes between the previous member of
-            // type struct and the current is a multiple of 16 bytes.
+            // For uniform buffers, validate that the number of bytes between the previous
+            // member of type struct and the current is a multiple of 16 bytes.
             auto* const prev_member = (i == 0) ? nullptr : str->Members()[i - 1];
             if (prev_member && is_uniform_struct(prev_member->Type())) {
                 const uint32_t prev_to_curr_offset = m->Offset() - prev_member->Offset();
@@ -523,16 +523,16 @@ bool Validator::AddressSpaceLayout(const type::Type* store_ty,
     // For uniform buffer array members, validate that array elements are aligned to 16 bytes
     if (auto* arr = store_ty->As<type::Array>()) {
         // Recurse into the element type.
-        // TODO(crbug.com/tint/1388): Ideally we'd pass the source for nested element type here, but
-        // we can't easily get that from the semantic node. We should consider recursing through the
-        // AST type nodes instead.
+        // TODO(crbug.com/tint/1388): Ideally we'd pass the source for nested element type here,
+        // but we can't easily get that from the semantic node. We should consider recursing
+        // through the AST type nodes instead.
         if (!AddressSpaceLayout(arr->ElemType(), address_space, source)) {
             return false;
         }
 
         if (address_space == builtin::AddressSpace::kUniform) {
-            // We already validated that this array member is itself aligned to 16 bytes above, so
-            // we only need to validate that stride is a multiple of 16 bytes.
+            // We already validated that this array member is itself aligned to 16 bytes above,
+            // so we only need to validate that stride is a multiple of 16 bytes.
             if (arr->Stride() % 16 != 0) {
                 // Since WGSL has no stride attribute, try to provide a useful hint for how the
                 // shader author can resolve the issue.
@@ -614,7 +614,8 @@ bool Validator::GlobalVariable(
 
             if (!var->declared_address_space && !global->Type()->UnwrapRef()->is_handle()) {
                 AddError(
-                    "module-scope 'var' declarations that are not of texture or sampler types must "
+                    "module-scope 'var' declarations that are not of texture or sampler types "
+                    "must "
                     "provide an address space",
                     decl->source);
                 return false;
@@ -701,8 +702,8 @@ bool Validator::Var(const sem::Variable* v) const {
 
     if (store_ty->is_handle() && var->declared_address_space) {
         // https://gpuweb.github.io/gpuweb/wgsl/#module-scope-variables
-        // If the store type is a texture type or a sampler type, then the variable declaration must
-        // not have a address space attribute. The address space will always be handle.
+        // If the store type is a texture type or a sampler type, then the variable declaration
+        // must not have a address space attribute. The address space will always be handle.
         AddError("variables of type '" + sem_.TypeNameOf(store_ty) +
                      "' must not specifiy an address space",
                  var->source);
@@ -999,7 +1000,7 @@ bool Validator::Function(const sem::Function* func, ast::PipelineStage stage) co
                 return false;
             }
         } else if (!attr->IsAnyOf<ast::DiagnosticAttribute, ast::StageAttribute,
-                                  ast::InternalAttribute>()) {
+                                  ast::MustUseAttribute, ast::InternalAttribute>()) {
             AddError("attribute is not valid for functions", attr->source);
             return false;
         }
@@ -1319,14 +1320,15 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                 ast::DisabledValidation::kBindingPointCollision)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#resource-interface
             // Bindings must not alias within a shader stage: two different variables in the
-            // resource interface of a given shader must not have the same group and binding values,
-            // when considered as a pair of values.
+            // resource interface of a given shader must not have the same group and binding
+            // values, when considered as a pair of values.
             auto func_name = symbols_.NameFor(decl->name->symbol);
-            AddError(
-                "entry point '" + func_name +
-                    "' references multiple variables that use the same resource binding @group(" +
-                    std::to_string(bp.group) + "), @binding(" + std::to_string(bp.binding) + ")",
-                var_decl->source);
+            AddError("entry point '" + func_name +
+                         "' references multiple variables that use the same resource binding "
+                         "@group(" +
+                         std::to_string(bp.group) + "), @binding(" + std::to_string(bp.binding) +
+                         ")",
+                     var_decl->source);
             AddNote("first resource binding usage declared here", (*added.value)->source);
             return false;
         }
@@ -1562,8 +1564,8 @@ bool Validator::BuiltinCall(const sem::Call* call) const {
         }
         if (!is_call_statement) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-call-expr
-            // If the called function does not return a value, a function call statement should be
-            // used instead.
+            // If the called function does not return a value, a function call statement should
+            // be used instead.
             auto* builtin = call->Target()->As<sem::Builtin>();
             auto name = utils::ToString(builtin->Type());
             AddError("builtin '" + name + "' does not return a value", call->Declaration()->source);
@@ -1639,7 +1641,8 @@ bool Validator::WorkgroupUniformLoad(const sem::Call* call) const {
 
     if (ty->Is<type::Atomic>() || atomic_composite_info_.Contains(ty)) {
         AddError(
-            "workgroupUniformLoad must not be called with an argument that contains an atomic type",
+            "workgroupUniformLoad must not be called with an argument that contains an atomic "
+            "type",
             arg->Declaration()->source);
         return false;
     }
@@ -1723,10 +1726,10 @@ bool Validator::FunctionCall(const sem::Call* call, sem::Statement* current_stat
             !enabled_extensions_.Contains(
                 builtin::Extension::kChromiumExperimentalFullPtrParameters)) {
             // https://gpuweb.github.io/gpuweb/wgsl/#function-restriction
-            // Each argument of pointer type to a user-defined function must have the same memory
-            // view as its root identifier.
-            // We can validate this by just comparing the store type of the argument with that of
-            // its root identifier, as these will match iff the memory view is the same.
+            // Each argument of pointer type to a user-defined function must have the same
+            // memory view as its root identifier. We can validate this by just comparing the
+            // store type of the argument with that of its root identifier, as these will match
+            // iff the memory view is the same.
             auto* arg_store_type = arg_type->As<type::Pointer>()->StoreType();
             auto* root = call->Arguments()[i]->RootIdentifier();
             auto* root_ptr_ty = root->Type()->As<type::Pointer>();
@@ -1962,8 +1965,8 @@ bool Validator::PipelineStages(utils::VectorRef<sem::Function*> entry_points) co
 
 bool Validator::PushConstants(utils::VectorRef<sem::Function*> entry_points) const {
     for (auto* entry_point : entry_points) {
-        // State checked and modified by check_push_constant so that it remembers previously seen
-        // push_constant variables for an entry-point.
+        // State checked and modified by check_push_constant so that it remembers previously
+        // seen push_constant variables for an entry-point.
         const sem::Variable* push_constant_var = nullptr;
         const sem::Function* push_constant_func = nullptr;
 
@@ -2060,7 +2063,8 @@ bool Validator::ArrayStrideAttribute(const ast::StrideAttribute* attr,
         // at least the size of the element type, and be a multiple of the
         // element type's alignment value.
         AddError(
-            "arrays decorated with the stride attribute must have a stride that is at least the "
+            "arrays decorated with the stride attribute must have a stride that is at least "
+            "the "
             "size of the element type, and be a multiple of the element type's alignment value",
             attr->source);
         return false;
@@ -2279,7 +2283,8 @@ bool Validator::SwitchStatement(const ast::SwitchStatement* s) {
             auto* decl_ty = selector->Value()->Type();
             if (cond_ty != decl_ty) {
                 AddError(
-                    "the case selector values must have the same type as the selector expression.",
+                    "the case selector values must have the same type as the selector "
+                    "expression.",
                     selector->Declaration()->source);
                 return false;
             }
