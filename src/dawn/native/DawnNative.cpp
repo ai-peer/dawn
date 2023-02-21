@@ -19,6 +19,7 @@
 #include "dawn/common/Log.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/CallbackSink.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/Texture.h"
@@ -288,7 +289,8 @@ std::vector<const char*> GetProcMapNamesForTesting() {
 }
 
 DAWN_NATIVE_EXPORT bool DeviceTick(WGPUDevice device) {
-    return FromAPI(device)->APITick();
+    CallbackSink callbackSink;
+    return FromAPI(device)->APITick(callbackSink);
 }
 
 // ExternalImageDescriptor
