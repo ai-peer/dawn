@@ -145,7 +145,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 }
 
 Device::~Device() {
-    Destroy();
+    Destroy(/*callbackSink=*/nullptr);
 }
 
 ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(

@@ -21,6 +21,7 @@
 
 #include "dawn/common/Constants.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/CallbackSink.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -161,7 +162,9 @@ class ErrorQueue : public QueueBase {
     explicit ErrorQueue(DeviceBase* device) : QueueBase(device, ObjectBase::kError) {}
 
   private:
-    MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override {
+    MaybeError SubmitImpl(uint32_t commandCount,
+                          CommandBufferBase* const* commands,
+                          CallbackSink& callbackSink) override {
         UNREACHABLE();
     }
 };
@@ -193,8 +196,10 @@ ObjectType QueueBase::GetType() const {
     return ObjectType::Queue;
 }
 
-void QueueBase::APISubmit(uint32_t commandCount, CommandBufferBase* const* commands) {
-    SubmitInternal(commandCount, commands);
+void QueueBase::APISubmit(uint32_t commandCount,
+                          CommandBufferBase* const* commands,
+                          CallbackSink& callbackSink) {
+    SubmitInternal(commandCount, commands, callbackSink);
 
     for (uint32_t i = 0; i < commandCount; ++i) {
         commands[i]->Destroy();
@@ -207,7 +212,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     // The error status depends on the type of error so we let the validation function choose it
     WGPUQueueWorkDoneStatus status;
     if (GetDevice()->ConsumedError(ValidateOnSubmittedWorkDone(signalValue, &status))) {
-        callback(status, userdata);
+        GetDevice()->RunInNextTick([callback, status, userdata] { callback(status, userdata); });
         return;
     }
 
@@ -271,8 +276,13 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
 }
 
 void QueueBase::HandleDeviceLoss() {
+    // Schedule the tasks' HandleDeviceLoss() to be fired in next Tick().
+    // Note: we don't fire the callback directly here because it could cause re-entrances ->
+    // deadlock.
     for (auto& task : mTasksInFlight.IterateAll()) {
-        task->HandleDeviceLoss();
+        GetDevice()->RunInNextTick([taskRef = std::shared_ptr<TrackTaskCallback>(task.release())] {
+            taskRef->HandleDeviceLoss();
+        });
     }
     mTasksInFlight.Clear();
 }
@@ -321,16 +331,18 @@ void QueueBase::APIWriteTexture(const ImageCopyTexture* destination,
                                 const void* data,
                                 size_t dataSize,
                                 const TextureDataLayout* dataLayout,
-                                const Extent3D* writeSize) {
+                                const Extent3D* writeSize,
+                                CallbackSink& callbackSink) {
     GetDevice()->ConsumedError(
-        WriteTextureInternal(destination, data, dataSize, *dataLayout, writeSize));
+        WriteTextureInternal(destination, data, dataSize, *dataLayout, writeSize, callbackSink));
 }
 
 MaybeError QueueBase::WriteTextureInternal(const ImageCopyTexture* destination,
                                            const void* data,
                                            size_t dataSize,
                                            const TextureDataLayout& dataLayout,
-                                           const Extent3D* writeSize) {
+                                           const Extent3D* writeSize,
+                                           CallbackSink& callbackSink) {
     DAWN_TRY(ValidateWriteTexture(destination, dataSize, dataLayout, writeSize));
 
     if (writeSize->width == 0 || writeSize->height == 0 || writeSize->depthOrArrayLayers == 0) {
@@ -341,13 +353,14 @@ MaybeError QueueBase::WriteTextureInternal(const ImageCopyTexture* destination,
         destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
     TextureDataLayout layout = dataLayout;
     ApplyDefaultTextureDataLayoutOptions(&layout, blockInfo, *writeSize);
-    return WriteTextureImpl(*destination, data, layout, *writeSize);
+    return WriteTextureImpl(*destination, data, layout, *writeSize, callbackSink);
 }
 
 MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
                                        const void* data,
                                        const TextureDataLayout& dataLayout,
-                                       const Extent3D& writeSizePixel) {
+                                       const Extent3D& writeSizePixel,
+                                       CallbackSink& callbackSink) {
     const Format& format = destination.texture->GetFormat();
     const TexelBlockInfo& blockInfo = format.GetAspectInfo(destination.aspect).block;
 
@@ -382,29 +395,32 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     DeviceBase* device = GetDevice();
 
     return device->CopyFromStagingToTexture(uploadHandle.stagingBuffer, passDataLayout, textureCopy,
-                                            writeSizePixel);
+                                            writeSizePixel, callbackSink);
 }
 
 void QueueBase::APICopyTextureForBrowser(const ImageCopyTexture* source,
                                          const ImageCopyTexture* destination,
                                          const Extent3D* copySize,
-                                         const CopyTextureForBrowserOptions* options) {
+                                         const CopyTextureForBrowserOptions* options,
+                                         CallbackSink& callbackSink) {
     GetDevice()->ConsumedError(
-        CopyTextureForBrowserInternal(source, destination, copySize, options));
+        CopyTextureForBrowserInternal(source, destination, copySize, options, callbackSink));
 }
 
 void QueueBase::APICopyExternalTextureForBrowser(const ImageCopyExternalTexture* source,
                                                  const ImageCopyTexture* destination,
                                                  const Extent3D* copySize,
-                                                 const CopyTextureForBrowserOptions* options) {
-    GetDevice()->ConsumedError(
-        CopyExternalTextureForBrowserInternal(source, destination, copySize, options));
+                                                 const CopyTextureForBrowserOptions* options,
+                                                 CallbackSink& callbackSink) {
+    GetDevice()->ConsumedError(CopyExternalTextureForBrowserInternal(source, destination, copySize,
+                                                                     options, callbackSink));
 }
 
 MaybeError QueueBase::CopyTextureForBrowserInternal(const ImageCopyTexture* source,
                                                     const ImageCopyTexture* destination,
                                                     const Extent3D* copySize,
-                                                    const CopyTextureForBrowserOptions* options) {
+                                                    const CopyTextureForBrowserOptions* options,
+                                                    CallbackSink& callbackSink) {
     if (GetDevice()->IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(
             ValidateCopyTextureForBrowser(GetDevice(), source, destination, copySize, options),
@@ -412,14 +428,16 @@ MaybeError QueueBase::CopyTextureForBrowserInternal(const ImageCopyTexture* sour
             destination->texture);
     }
 
-    return DoCopyTextureForBrowser(GetDevice(), source, destination, copySize, options);
+    return DoCopyTextureForBrowser(GetDevice(), source, destination, copySize, options,
+                                   callbackSink);
 }
 
 MaybeError QueueBase::CopyExternalTextureForBrowserInternal(
     const ImageCopyExternalTexture* source,
     const ImageCopyTexture* destination,
     const Extent3D* copySize,
-    const CopyTextureForBrowserOptions* options) {
+    const CopyTextureForBrowserOptions* options,
+    CallbackSink& callbackSink) {
     if (GetDevice()->IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(ValidateCopyExternalTextureForBrowser(GetDevice(), source, destination,
                                                                copySize, options),
@@ -427,7 +445,8 @@ MaybeError QueueBase::CopyExternalTextureForBrowserInternal(
                          source->externalTexture, destination->texture);
     }
 
-    return DoCopyExternalTextureForBrowser(GetDevice(), source, destination, copySize, options);
+    return DoCopyExternalTextureForBrowser(GetDevice(), source, destination, copySize, options,
+                                           callbackSink);
 }
 
 MaybeError QueueBase::ValidateSubmit(uint32_t commandCount,
@@ -533,7 +552,9 @@ MaybeError QueueBase::ValidateWriteTexture(const ImageCopyTexture* destination,
     return {};
 }
 
-void QueueBase::SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands) {
+void QueueBase::SubmitInternal(uint32_t commandCount,
+                               CommandBufferBase* const* commands,
+                               CallbackSink& callbackSink) {
     DeviceBase* device = GetDevice();
     if (device->ConsumedError(device->ValidateIsAlive())) {
         // If device is lost, don't let any commands be submitted
@@ -548,7 +569,7 @@ void QueueBase::SubmitInternal(uint32_t commandCount, CommandBufferBase* const* 
     }
     ASSERT(!IsError());
 
-    if (device->ConsumedError(SubmitImpl(commandCount, commands))) {
+    if (device->ConsumedError(SubmitImpl(commandCount, commands, callbackSink))) {
         return;
     }
 }
