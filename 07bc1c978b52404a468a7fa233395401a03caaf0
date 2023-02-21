@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14cb13f_0b3870c3",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "nit: this would be easier to read as an actual if due to the weird wrapping\n\n```\nauto ast_sampling_type \u003d builtin::InterpolationSampling::kUndefined;\nif (interpolation_attribute-\u003esampling) {\n  ast_sampling_type \u003d sem.Get\u003csem::BuiltinEnumExpression\u003cbuiltin::InterpolationSampling\u003e\u003e(\n                     interpolation_attribute-\u003esampling)-\u003eValue();\n}\n```",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f2ea5a_6de5f86b",
+        "filename": "src/tint/sem/builtin_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "This is confusing as there is already a kBuiltinStrings in `builtin/builtin.h` which we use. Maybe `kBuiltinFunctionStrings` ?\n\nIs this actually used anywhere? It looks like the test which changed uses the other one?",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e5ef8e5_c045e951",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "nit: split as previous into an `if`",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f412a59_40c54f51",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4228,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78ff6358_0d54fc60",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2899,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37433b7f_f87bc915",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-21T02:39:52Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
