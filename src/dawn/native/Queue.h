@@ -30,6 +30,8 @@
 
 namespace dawn::native {
 
+class CallbackSink;
+
 // For the commands with async callback like 'MapAsync' and 'OnSubmittedWorkDone', we track the
 // execution serials of completion in the queue for them. This implements 'CallbackTask' so that the
 // aysnc callback can be fired by 'CallbackTaskManager' in a unified way. This also caches the
@@ -54,7 +56,9 @@ class QueueBase : public ApiObjectBase {
     ObjectType GetType() const override;
 
     // Dawn API
-    void APISubmit(uint32_t commandCount, CommandBufferBase* const* commands);
+    void APISubmit(uint32_t commandCount,
+                   CommandBufferBase* const* commands,
+                   CallbackSink& callbackSink);
     void APIOnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata);
@@ -63,15 +67,18 @@ class QueueBase : public ApiObjectBase {
                          const void* data,
                          size_t dataSize,
                          const TextureDataLayout* dataLayout,
-                         const Extent3D* writeSize);
+                         const Extent3D* writeSize,
+                         CallbackSink& callbackSink);
     void APICopyTextureForBrowser(const ImageCopyTexture* source,
                                   const ImageCopyTexture* destination,
                                   const Extent3D* copySize,
-                                  const CopyTextureForBrowserOptions* options);
+                                  const CopyTextureForBrowserOptions* options,
+                                  CallbackSink& callbackSink);
     void APICopyExternalTextureForBrowser(const ImageCopyExternalTexture* source,
                                           const ImageCopyTexture* destination,
                                           const Extent3D* copySize,
-                                          const CopyTextureForBrowserOptions* options);
+                                          const CopyTextureForBrowserOptions* options,
+                                          CallbackSink& callbackSink);
 
     MaybeError WriteBuffer(BufferBase* buffer,
                            uint64_t bufferOffset,
@@ -92,17 +99,22 @@ class QueueBase : public ApiObjectBase {
                                     const void* data,
                                     size_t dataSize,
                                     const TextureDataLayout& dataLayout,
-                                    const Extent3D* writeSize);
+                                    const Extent3D* writeSize,
+                                    CallbackSink& callbackSink);
     MaybeError CopyTextureForBrowserInternal(const ImageCopyTexture* source,
                                              const ImageCopyTexture* destination,
                                              const Extent3D* copySize,
-                                             const CopyTextureForBrowserOptions* options);
+                                             const CopyTextureForBrowserOptions* options,
+                                             CallbackSink& callbackSink);
     MaybeError CopyExternalTextureForBrowserInternal(const ImageCopyExternalTexture* source,
                                                      const ImageCopyTexture* destination,
                                                      const Extent3D* copySize,
-                                                     const CopyTextureForBrowserOptions* options);
+                                                     const CopyTextureForBrowserOptions* options,
+                                                     CallbackSink& callbackSink);
 
-    virtual MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) = 0;
+    virtual MaybeError SubmitImpl(uint32_t commandCount,
+                                  CommandBufferBase* const* commands,
+                                  CallbackSink& callbackSink) = 0;
     virtual MaybeError WriteBufferImpl(BufferBase* buffer,
                                        uint64_t bufferOffset,
                                        const void* data,
@@ -110,7 +122,8 @@ class QueueBase : public ApiObjectBase {
     virtual MaybeError WriteTextureImpl(const ImageCopyTexture& destination,
                                         const void* data,
                                         const TextureDataLayout& dataLayout,
-                                        const Extent3D& writeSize);
+                                        const Extent3D& writeSize,
+                                        CallbackSink& callbackSink);
 
     MaybeError ValidateSubmit(uint32_t commandCount, CommandBufferBase* const* commands) const;
     MaybeError ValidateOnSubmittedWorkDone(uint64_t signalValue,
@@ -120,7 +133,9 @@ class QueueBase : public ApiObjectBase {
                                     const TextureDataLayout& dataLayout,
                                     const Extent3D* writeSize) const;
 
-    void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
+    void SubmitInternal(uint32_t commandCount,
+                        CommandBufferBase* const* commands,
+                        CallbackSink& callbackSink);
 
     SerialMap<ExecutionSerial, std::unique_ptr<TrackTaskCallback>> mTasksInFlight;
 };
