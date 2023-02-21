@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e3b2b68_34148db7",
+        "filename": "src/tint/inspector/inspector.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f14cb13f_0b3870c3",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95f2ea5a_6de5f86b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-02-21T02:39:52Z",
       "side": 1,
       "message": "This is confusing as there is already a kBuiltinStrings in `builtin/builtin.h` which we use. Maybe `kBuiltinFunctionStrings` ?\n\nIs this actually used anywhere? It looks like the test which changed uses the other one?",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530a4b37_a8105b67",
+        "filename": "src/tint/sem/builtin_type.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Let\u0027s fix this as part of [crbug.com/tint/1834](https://bugs.chromium.org/p/tint/issues/detail?id\u003d1834).",
+      "parentUuid": "95f2ea5a_6de5f86b",
       "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2a625b_16667bcf",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2208,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e5ef8e5_c045e951",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f412a59_40c54f51",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-02-21T02:39:52Z",
       "side": 1,
       "message": "ditto",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6edaa22a_c408ab04",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 4228,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f412a59_40c54f51",
       "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ce71134_391c7c85",
+        "filename": "src/tint/writer/msl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2899,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78ff6358_0d54fc60",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37433b7f_f87bc915",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-02-21T02:39:52Z",
       "side": 1,
       "message": "ditto",
+      "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2adaece_8e1d2045",
+        "filename": "src/tint/writer/spirv/builder.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-21T14:26:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37433b7f_f87bc915",
       "revId": "07bc1c978b52404a468a7fa233395401a03caaf0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
