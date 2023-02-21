@@ -30,7 +30,9 @@ Queue::Queue(Device* device, const QueueDescriptor* descriptor) : QueueBase(devi
 
 Queue::~Queue() = default;
 
-MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
+MaybeError Queue::SubmitImpl(uint32_t commandCount,
+                             CommandBufferBase* const* commands,
+                             CallbackSink& callbackSink) {
     Device* device = ToBackend(GetDevice());
 
     CommandRecordingContext* commandContext = device->GetPendingCommandContext();
@@ -44,7 +46,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     DAWN_TRY(device->SubmitPendingCommandBuffer());
 
     // Call Tick() to get a chance to resolve callbacks.
-    DAWN_TRY(device->Tick());
+    DAWN_TRY(device->Tick(callbackSink));
 
     return {};
 }

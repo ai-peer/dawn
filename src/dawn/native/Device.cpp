@@ -29,6 +29,7 @@
 #include "dawn/native/BlitBufferToDepthStencil.h"
 #include "dawn/native/BlobCache.h"
 #include "dawn/native/Buffer.h"
+#include "dawn/native/CallbackSink.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/CommandEncoder.h"
@@ -95,65 +96,104 @@ namespace {
 class MutexEnabled : public DeviceMutexBase {
   public:
     void Lock() override {
-        // We allow recursive mutex lock because currently a lot of code would trigger
-        // callbacks. And those callbacks might cause re-entrances.
-        // TODO(dawn:1672): Disallow recursive mutex. In future, we could use this to throw
-        // assertion when the mutex is recursively locked.
+        mMutex.lock();
+#if defined(DAWN_ENABLE_ASSERTS)
         auto currentThread = std::this_thread::get_id();
-        if (mOwner.load(std::memory_order_acquire) != currentThread) {
-            mMutex.lock();
-            mOwner.store(currentThread, std::memory_order_release);
-        }
-
-        mRecurDepth++;
+        ASSERT(mOwner.load(std::memory_order_acquire) != currentThread);
+        mOwner.store(currentThread, std::memory_order_release);
+#endif
     }
     void Unlock() override {
+#if defined(DAWN_ENABLE_ASSERTS)
         ASSERT(mOwner.load(std::memory_order_acquire) == std::this_thread::get_id());
-        mRecurDepth--;
-        if (mRecurDepth == 0) {
-            mOwner.store(std::thread::id(), std::memory_order_release);
-            mMutex.unlock();
-        }
+        mOwner.store(std::thread::id(), std::memory_order_release);
+#endif
+        mMutex.unlock();
     }
 
   private:
     std::mutex mMutex;
+#if defined(DAWN_ENABLE_ASSERTS)
     std::atomic<std::thread::id> mOwner;
-    size_t mRecurDepth = 0;
+#endif
 };
 
-struct LoggingCallbackTask : CallbackTask {
+struct CallbackWithMessageTask : CallbackTask {
+  public:
+    CallbackWithMessageTask() = delete;
+    CallbackWithMessageTask(const char* message, void* userdata)
+        : mMessage(message), mUserdata(userdata) {
+        // Since the Finish() will be called in uncertain future in which time the message
+        // may already disposed, we must keep a local copy in the CallbackTask.
+    }
+    void HandleShutDown() override {
+        // Do the logging anyway
+        Finish();
+    }
+
+    void HandleDeviceLoss() override { Finish(); }
+
+  protected:
+    // As all deferred callback tasks will be triggered before modifying the registered
+    // callback or shutting down, we are ensured that callback function and userdata pointer
+    // stored in tasks is valid when triggered.
+    std::string mMessage;
+    void* mUserdata;
+};
+
+struct LoggingCallbackTask : CallbackWithMessageTask {
   public:
     LoggingCallbackTask() = delete;
     LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
                         WGPULoggingType loggingType,
                         const char* message,
                         void* userdata)
-        : mCallback(loggingCallback),
-          mLoggingType(loggingType),
-          mMessage(message),
-          mUserdata(userdata) {
-        // Since the Finish() will be called in uncertain future in which time the message
-        // may already disposed, we must keep a local copy in the CallbackTask.
-    }
+        : CallbackWithMessageTask(message, userdata),
+          mCallback(loggingCallback),
+          mLoggingType(loggingType) {}
 
     void Finish() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
 
-    void HandleShutDown() override {
-        // Do the logging anyway
-        mCallback(mLoggingType, mMessage.c_str(), mUserdata);
-    }
+  private:
+    wgpu::LoggingCallback mCallback;
+    WGPULoggingType mLoggingType;
+};
 
-    void HandleDeviceLoss() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
+struct DeviceLostCallbackTask : CallbackWithMessageTask {
+  public:
+    DeviceLostCallbackTask() = delete;
+    DeviceLostCallbackTask(wgpu::DeviceLostCallback callback,
+                           WGPUDeviceLostReason lostReason,
+                           const char* message,
+                           void* userdata)
+        : CallbackWithMessageTask(message, userdata),
+          mCallback(callback),
+          mLostReason(lostReason) {}
+
+    void Finish() override { mCallback(mLostReason, mMessage.c_str(), mUserdata); }
+
+  private:
+    wgpu::DeviceLostCallback mCallback;
+    WGPUDeviceLostReason mLostReason;
+};
+
+struct ErrorCallbackTask : CallbackWithMessageTask {
+  public:
+    ErrorCallbackTask() = delete;
+    ErrorCallbackTask(wgpu::ErrorCallback callback,
+                      WGPUErrorType errorType,
+                      const char* message,
+                      void* userdata)
+        : CallbackWithMessageTask(message, userdata), mCallback(callback), mErrorType(errorType) {}
+
+    void Finish() override { mCallback(mErrorType, mMessage.c_str(), mUserdata); }
 
   private:
     // As all deferred callback tasks will be triggered before modifying the registered
     // callback or shutting down, we are ensured that callback function and userdata pointer
     // stored in tasks is valid when triggered.
-    wgpu::LoggingCallback mCallback;
-    WGPULoggingType mLoggingType;
-    std::string mMessage;
-    void* mUserdata;
+    wgpu::ErrorCallback mCallback;
+    WGPUErrorType mErrorType;
 };
 
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
@@ -245,6 +285,8 @@ DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
 }
 
 DeviceBase::~DeviceBase() {
+    ASSERT(mNextTickCodes.empty());
+
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;
@@ -323,6 +365,7 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    CallbackSink callbackSink;
     // This will be invoked by API side, so we need to lock.
     AutoLock deviceLock(*this);
 
@@ -343,7 +386,7 @@ void DeviceBase::WillDropLastExternalRef() {
     // device - either directly or indirectly. We would need to ensure those tasks don't create new
     // reference cycles, and we would need to continuously try draining the pending tasks to clear
     // out all remaining refs.
-    Destroy();
+    Destroy(&callbackSink);
 
     // Drop te device's reference to the queue. Because the application dropped the last external
     // references, they can no longer get the queue from APIGetQueue().
@@ -402,7 +445,7 @@ void DeviceBase::DestroyObjects() {
     }
 }
 
-void DeviceBase::Destroy() {
+void DeviceBase::Destroy(CallbackSink* callbackSink) {
     // Skip if we are already destroyed.
     if (mState == State::Destroyed) {
         return;
@@ -420,9 +463,10 @@ void DeviceBase::Destroy() {
     // Skip handling device facilities if they haven't even been created (or failed doing so)
     if (mState != State::BeingCreated) {
         // The device is being destroyed so it will be lost, call the application callback.
-        if (mDeviceLostCallback != nullptr) {
-            mDeviceLostCallback(WGPUDeviceLostReason_Destroyed, "Device was destroyed.",
-                                mDeviceLostUserdata);
+        if (mDeviceLostCallback != nullptr && callbackSink != nullptr) {
+            callbackSink->Add([callback = mDeviceLostCallback, userdata = mDeviceLostUserdata] {
+                callback(WGPUDeviceLostReason_Destroyed, "Device was destroyed.", userdata);
+            });
             mDeviceLostCallback = nullptr;
         }
 
@@ -431,7 +475,12 @@ void DeviceBase::Destroy() {
         mAsyncTaskManager->WaitAllPendingTasks();
         auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
         for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->HandleShutDown();
+            if (callbackSink) {
+                callbackSink->Add([rawTask = callbackTask.release()] {
+                    std::unique_ptr<CallbackTask> task(rawTask);
+                    task->HandleShutDown();
+                });
+            }
         }
     }
 
@@ -478,7 +527,9 @@ void DeviceBase::Destroy() {
         IgnoreErrors(TickImpl());
 
         // Trigger all in-flight TrackTask callbacks from 'mQueue'.
-        FlushCallbackTaskQueue();
+        if (callbackSink) {
+            FlushCallbackTaskQueue(*callbackSink);
+        }
     }
 
     // At this point GPU operations are always finished, so we are in the disconnected state.
@@ -502,8 +553,8 @@ void DeviceBase::Destroy() {
     mState = State::Destroyed;
 }
 
-void DeviceBase::APIDestroy() {
-    Destroy();
+void DeviceBase::APIDestroy(CallbackSink& callbackSink) {
+    Destroy(&callbackSink);
 }
 
 void DeviceBase::HandleError(InternalErrorType type,
@@ -545,9 +596,12 @@ void DeviceBase::HandleError(InternalErrorType type,
     }
 
     if (type == InternalErrorType::DeviceLost) {
-        // The device was lost, call the application callback.
+        // The device was lost, schedule the application callback's executation.
+        // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
+        // possible deadlock.
         if (mDeviceLostCallback != nullptr) {
-            mDeviceLostCallback(lost_reason, message, mDeviceLostUserdata);
+            mCallbackTaskManager->AddCallbackTask(std::make_unique<DeviceLostCallbackTask>(
+                mDeviceLostCallback, lost_reason, message, mDeviceLostUserdata));
             mDeviceLostCallback = nullptr;
         }
 
@@ -557,7 +611,10 @@ void DeviceBase::HandleError(InternalErrorType type,
         mAsyncTaskManager->WaitAllPendingTasks();
         auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
         for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->HandleDeviceLoss();
+            ScheduleNextTickCode([rawTask = callbackTask.release()] {
+                std::unique_ptr<CallbackTask> task(rawTask);
+                task->HandleDeviceLoss();
+            });
         }
 
         // Still forward device loss errors to the error scopes so they all reject.
@@ -568,8 +625,9 @@ void DeviceBase::HandleError(InternalErrorType type,
         // handled by the lost callback.
         bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), message);
         if (!captured && mUncapturedErrorCallback != nullptr) {
-            mUncapturedErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), message,
-                                     mUncapturedErrorUserdata);
+            mCallbackTaskManager->AddCallbackTask(std::make_unique<ErrorCallbackTask>(
+                mUncapturedErrorCallback, static_cast<WGPUErrorType>(ToWGPUErrorType(type)),
+                message, mUncapturedErrorUserdata));
         }
     }
 }
@@ -580,7 +638,9 @@ void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
     HandleError(error->GetType(), error->GetFormattedMessage().c_str());
 }
 
-void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
+void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback,
+                                       void* userdata,
+                                       CallbackSink& callbackSink) {
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
@@ -589,12 +649,14 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
+    FlushCallbackTaskQueue(callbackSink);
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
 
-void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
+void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback,
+                                               void* userdata,
+                                               CallbackSink& callbackSink) {
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
@@ -603,12 +665,14 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
+    FlushCallbackTaskQueue(callbackSink);
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
 
-void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
+void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback,
+                                          void* userdata,
+                                          CallbackSink& callbackSink) {
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
@@ -617,7 +681,7 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     if (IsLost()) {
         return;
     }
-    FlushCallbackTaskQueue();
+    FlushCallbackTaskQueue(callbackSink);
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
@@ -646,7 +710,9 @@ bool DeviceBase::APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata) 
         return returnValue;
     }
     ErrorScope scope = mErrorScopeStack->Pop();
-    callback(static_cast<WGPUErrorType>(scope.GetErrorType()), scope.GetErrorMessage(), userdata);
+    mCallbackTaskManager->AddCallbackTask(std::make_unique<ErrorCallbackTask>(
+        callback, static_cast<WGPUErrorType>(scope.GetErrorType()), scope.GetErrorMessage(),
+        userdata));
     return returnValue;
 }
 
@@ -1258,11 +1324,15 @@ TextureBase* DeviceBase::APICreateErrorTexture(const TextureDescriptor* desc) {
 // Other Device API methods
 
 // Returns true if future ticking is needed.
-bool DeviceBase::APITick() {
+bool DeviceBase::APITick(CallbackSink& callbackSink) {
     // Tick may trigger callbacks which drop a ref to the device itself. Hold a Ref to ourselves
     // to avoid deleting |this| in the middle of this function call.
     Ref<DeviceBase> self(this);
-    if (IsLost() || ConsumedError(Tick())) {
+    if (ConsumedError(Tick(callbackSink))) {
+        return false;
+    }
+
+    if (IsLost()) {
         return false;
     }
 
@@ -1272,13 +1342,11 @@ bool DeviceBase::APITick() {
     return !IsDeviceIdle();
 }
 
-MaybeError DeviceBase::Tick() {
-    DAWN_TRY(ValidateIsAlive());
-
+MaybeError DeviceBase::Tick(CallbackSink& callbackSink) {
     // To avoid overly ticking, we only want to tick when:
     // 1. the last submitted serial has moved beyond the completed serial
     // 2. or the backend still has pending commands to submit.
-    if (HasScheduledCommands()) {
+    if (!IsLost() && HasScheduledCommands()) {
         DAWN_TRY(CheckPassedSerials());
         DAWN_TRY(TickImpl());
 
@@ -1291,7 +1359,7 @@ MaybeError DeviceBase::Tick() {
 
     // We have to check callback tasks in every Tick because it is not related to any global
     // serials.
-    FlushCallbackTaskQueue();
+    FlushCallbackTaskQueue(callbackSink);
 
     return {};
 }
@@ -1799,7 +1867,7 @@ void DeviceBase::ForceSetToggleForTesting(Toggle toggle, bool isEnabled) {
     mToggles.ForceSet(toggle, isEnabled);
 }
 
-void DeviceBase::FlushCallbackTaskQueue() {
+void DeviceBase::FlushCallbackTaskQueue(CallbackSink& callbackSink) {
     if (!mCallbackTaskManager->IsEmpty()) {
         // If a user calls Queue::Submit inside the callback, then the device will be ticked,
         // which in turns ticks the tracker, causing reentrance and dead lock here. To prevent
@@ -1807,9 +1875,17 @@ void DeviceBase::FlushCallbackTaskQueue() {
         // update mCallbackTaskManager, then call all the callbacks.
         auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
         for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->Finish();
+            callbackSink.Add([rawTask = callbackTask.release()] {
+                std::unique_ptr<CallbackTask> task(rawTask);
+                task->Finish();
+            });
         }
     }
+
+    for (auto& code : mNextTickCodes) {
+        callbackSink.Add(code);
+    }
+    mNextTickCodes.clear();
 }
 
 const CombinedLimits& DeviceBase::GetLimits() const {
@@ -1877,6 +1953,10 @@ void DeviceBase::AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipe
     mCallbackTaskManager->AddCallbackTask(
         std::make_unique<CreateRenderPipelineAsyncWaitableCallbackTask>(std::move(pipeline),
                                                                         callback, userdata));
+}
+
+void DeviceBase::ScheduleNextTickCode(const std::function<void()>& code) {
+    mNextTickCodes.emplace_back(code);
 }
 
 PipelineCompatibilityToken DeviceBase::GetNextPipelineCompatibilityToken() {
@@ -1958,16 +2038,18 @@ MaybeError DeviceBase::CopyFromStagingToBuffer(BufferBase* source,
 MaybeError DeviceBase::CopyFromStagingToTexture(BufferBase* source,
                                                 const TextureDataLayout& src,
                                                 const TextureCopy& dst,
-                                                const Extent3D& copySizePixels) {
+                                                const Extent3D& copySizePixels,
+                                                CallbackSink& callbackSink) {
     if (dst.aspect == Aspect::Depth &&
         IsToggleEnabled(Toggle::UseBlitForBufferToDepthTextureCopy)) {
-        DAWN_TRY_CONTEXT(BlitStagingBufferToDepth(this, source, src, dst, copySizePixels),
-                         "copying from staging buffer to depth aspect of %s using blit workaround.",
-                         dst.texture.Get());
+        DAWN_TRY_CONTEXT(
+            BlitStagingBufferToDepth(this, source, src, dst, copySizePixels, callbackSink),
+            "copying from staging buffer to depth aspect of %s using blit workaround.",
+            dst.texture.Get());
     } else if (dst.aspect == Aspect::Stencil &&
                IsToggleEnabled(Toggle::UseBlitForBufferToStencilTextureCopy)) {
         DAWN_TRY_CONTEXT(
-            BlitStagingBufferToStencil(this, source, src, dst, copySizePixels),
+            BlitStagingBufferToStencil(this, source, src, dst, copySizePixels, callbackSink),
             "copying from staging buffer to stencil aspect of %s using blit workaround.",
             dst.texture.Get());
     } else {

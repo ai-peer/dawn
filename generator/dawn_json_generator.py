@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json, os, sys
+import json
+import os
+import sys
 from collections import namedtuple
 
 from generator_lib import Generator, run_generator, FileRender
@@ -190,7 +192,7 @@ class RecordMember:
 
 
 Method = namedtuple('Method',
-                    ['name', 'return_type', 'arguments', 'autolock', 'json_data'])
+                    ['name', 'return_type', 'arguments', 'autolock', 'trigger_callbacks', 'json_data'])
 
 
 class ObjectType(Type):
@@ -346,7 +348,9 @@ def link_object(obj, types):
                       types[json_data.get('returns',
                                           'void')],
                       arguments,
-                      obj_scoped_autolock_enabled and json_data.get('autolock', True),
+                      obj_scoped_autolock_enabled and json_data.get(
+                          'autolock', True),
+                      json_data.get('triggers callback', False),
                       json_data)
 
     obj.methods = [make_method(m) for m in obj.json_data.get('methods', [])]
@@ -355,7 +359,8 @@ def link_object(obj, types):
 
 def link_structure(struct, types):
     struct.members = linked_record_members(struct.json_data['members'], types)
-    struct.chain_roots = [types[root] for root in struct.json_data.get('chain roots', [])]
+    struct.chain_roots = [types[root]
+                          for root in struct.json_data.get('chain roots', [])]
     assert all((root.category == 'structure' for root in struct.chain_roots))
 
 
@@ -421,7 +426,7 @@ def topo_sort_structure(structs):
 
 
 def parse_json(json, enabled_tags, disabled_tags=None):
-    is_enabled = lambda json_data: item_is_enabled(
+    def is_enabled(json_data): return item_is_enabled(
         enabled_tags, json_data) and not item_is_disabled(
             disabled_tags, json_data)
     category_to_parser = {
@@ -598,7 +603,8 @@ def as_cppType(name):
 
 
 def as_jsEnumValue(value):
-    if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
+    if 'jsrepr' in value.json_data:
+        return value.json_data['jsrepr']
     return "'" + value.name.js_enum_case() + "'"
 
 
@@ -649,14 +655,17 @@ def annotated(typ, arg):
 
 def item_is_enabled(enabled_tags, json_data):
     tags = json_data.get('tags')
-    if tags is None: return True
+    if tags is None:
+        return True
     return any(tag in enabled_tags for tag in tags)
 
 
 def item_is_disabled(disabled_tags, json_data):
-    if disabled_tags is None: return False
+    if disabled_tags is None:
+        return False
     tags = json_data.get('tags')
-    if tags is None: return False
+    if tags is None:
+        return False
 
     return any(tag in disabled_tags for tag in tags)
 
@@ -705,9 +714,9 @@ def as_formatType(typ):
 def c_methods(params, typ):
     return typ.methods + [
         x for x in [
-            Method(Name('reference'), params['types']['void'], [], False,
+            Method(Name('reference'), params['types']['void'], [], False, False,
                    {'tags': ['dawn', 'emscripten']}),
-            Method(Name('release'), params['types']['void'], [], False,
+            Method(Name('release'), params['types']['void'], [], False, False,
                    {'tags': ['dawn', 'emscripten']}),
         ] if item_is_enabled(params['enabled_tags'], x.json_data)
         and not item_is_disabled(params['disabled_tags'], x.json_data)
@@ -715,9 +724,9 @@ def c_methods(params, typ):
 
 
 def get_c_methods_sorted_by_name(api_params):
-    unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method) \
-            for typ in api_params['by_category']['object'] \
-            for method in c_methods(api_params, typ) ]
+    unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method)
+                for typ in api_params['by_category']['object']
+                for method in c_methods(api_params, typ)]
     return [(typ, method) for (_, typ, method) in sorted(unsorted)]
 
 
@@ -756,11 +765,11 @@ def make_base_render_params(metadata):
         return c_proc
 
     return {
-            'Name': lambda name: Name(name),
-            'as_annotated_cType': \
-                lambda arg: annotated(as_cTypeEnumSpecialCase(arg.type), arg),
-            'as_annotated_cppType': \
-                lambda arg: annotated(as_cppType(arg.type.name), arg),
+        'Name': lambda name: Name(name),
+        'as_annotated_cType':
+        lambda arg: annotated(as_cTypeEnumSpecialCase(arg.type), arg),
+            'as_annotated_cppType':
+        lambda arg: annotated(as_cppType(arg.type.name), arg),
             'as_cEnum': as_cEnum,
             'as_cppEnum': as_cppEnum,
             'as_cMethod': as_cMethod,
@@ -773,7 +782,7 @@ def make_base_render_params(metadata):
             'as_varName': as_varName,
             'decorate': decorate,
             'as_formatType': as_formatType
-        }
+    }
 
 
 class MultiGeneratorFromDawnJSON(Generator):
@@ -802,8 +811,7 @@ class MultiGeneratorFromDawnJSON(Generator):
             '--targets',
             required=True,
             type=str,
-            help=
-            'Comma-separated subset of targets to output. Available targets: '
+            help='Comma-separated subset of targets to output. Available targets: '
             + ', '.join(allowed_targets))
 
     def get_file_renders(self, args):
@@ -920,7 +928,8 @@ class MultiGeneratorFromDawnJSON(Generator):
                     # TODO: as_frontendType and co. take a Type, not a Name :(
                     'as_frontendType': lambda typ: as_frontendType(metadata, typ),
                     'as_annotated_frontendType': \
-                        lambda arg: annotated(as_frontendType(metadata, arg.type), arg),
+                    lambda arg: annotated(
+                        as_frontendType(metadata, arg.type), arg),
                 }
             ]
 
@@ -988,9 +997,10 @@ class MultiGeneratorFromDawnJSON(Generator):
 
             wire_params = [
                 RENDER_PARAMS_BASE, params_dawn_wire, {
-                    'as_wireType': lambda type : as_wireType(metadata, type),
-                    'as_annotated_wireType': \
-                        lambda arg: annotated(as_wireType(metadata, arg.type), arg),
+                    'as_wireType': lambda type: as_wireType(metadata, type),
+                    'as_annotated_wireType':
+                    lambda arg: annotated(
+                        as_wireType(metadata, arg.type), arg),
                 }, additional_params
             ]
             renders.append(
