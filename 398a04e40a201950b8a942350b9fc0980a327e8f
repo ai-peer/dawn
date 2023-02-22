@@ -51,6 +51,24 @@
       "parentUuid": "a1733fbe_22f857a7",
       "revId": "398a04e40a201950b8a942350b9fc0980a327e8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc4e1d93_52d7b9a3",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T18:56:23Z",
+      "side": 1,
+      "message": "It is useful, it just seems like it would be more useful to be independently controllable. I guess we can always add a `--no-disable-symbol-renaming` flag later to turn it off here if desired.",
+      "parentUuid": "5a806f1d_5d7e359c",
+      "revId": "398a04e40a201950b8a942350b9fc0980a327e8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
