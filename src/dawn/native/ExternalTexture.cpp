@@ -118,6 +118,25 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
     return {};
 }
 
+MaybeError ValidateRefresh(DeviceBase* device, ExternalTextureBase* externalTexture) {
+    DAWN_TRY(device->ValidateObject(externalTexture));
+    DAWN_INVALID_IF(externalTexture->GetState() == ExternalTextureState::Destroyed,
+                    "Refresh on destroyed external texture %s.", externalTexture);
+    return {};
+}
+
+MaybeError ValidateExpire(DeviceBase* device, ExternalTextureBase* externalTexture) {
+    DAWN_TRY(device->ValidateObject(externalTexture));
+    DAWN_INVALID_IF(externalTexture->GetState() != ExternalTextureState::Active,
+                    "Expire on an outdated external texture %s.", externalTexture);
+    return {};
+}
+
+MaybeError ValidateDestroy(DeviceBase* device, ExternalTextureBase* externalTexture) {
+    DAWN_TRY(device->ValidateObject(externalTexture));
+    return {};
+}
+
 // static
 ResultOrError<Ref<ExternalTextureBase>> ExternalTextureBase::Create(
     DeviceBase* device,
@@ -133,7 +152,7 @@ ExternalTextureBase::ExternalTextureBase(DeviceBase* device,
     : ApiObjectBase(device, descriptor->label),
       mVisibleOrigin(descriptor->visibleOrigin),
       mVisibleSize(descriptor->visibleSize),
-      mState(ExternalTextureState::Alive) {
+      mState(ExternalTextureState::Active) {
     GetObjectTrackingList()->Track(this);
 }
 
@@ -324,8 +343,8 @@ const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& ExternalTextureBase
 
 MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
-    DAWN_INVALID_IF(mState == ExternalTextureState::Destroyed,
-                    "Destroyed external texture %s is used in a submit.", this);
+    DAWN_INVALID_IF(mState != ExternalTextureState::Active,
+                    "External texture %s used in a submit is not active.", this);
 
     for (uint32_t i = 0; i < kMaxPlanesPerFormat; ++i) {
         if (mTextureViews[i] != nullptr) {
@@ -336,8 +355,22 @@ MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
     return {};
 }
 
+void ExternalTextureBase::APIRefresh() {
+    if (GetDevice()->ConsumedError(ValidateRefresh(GetDevice(), this))) {
+        return;
+    }
+    mState = ExternalTextureState::Active;
+}
+
+void ExternalTextureBase::APIExpire() {
+    if (GetDevice()->ConsumedError(ValidateExpire(GetDevice(), this))) {
+        return;
+    }
+    mState = ExternalTextureState::Expired;
+}
+
 void ExternalTextureBase::APIDestroy() {
-    if (GetDevice()->ConsumedError(GetDevice()->ValidateObject(this))) {
+    if (GetDevice()->ConsumedError(ValidateDestroy(GetDevice(), this))) {
         return;
     }
     Destroy();
@@ -358,6 +391,11 @@ BufferBase* ExternalTextureBase::GetParamsBuffer() const {
 
 ObjectType ExternalTextureBase::GetType() const {
     return ObjectType::ExternalTexture;
+}
+
+ExternalTextureState ExternalTextureBase::GetState() const {
+    ASSERT(!IsError());
+    return mState;
 }
 
 const Extent2D& ExternalTextureBase::GetVisibleSize() const {
