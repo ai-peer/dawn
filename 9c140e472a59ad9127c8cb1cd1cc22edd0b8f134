@@ -16,6 +16,46 @@
       "message": "Hi Corentin and Austin,\n\nWith this patch Chromium will be able to render the Unity case in dawn:1579 correctly.\n\nPTAL, thanks!",
       "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abbb78c_13ef512b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T16:58:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7a0eb3_9d4190d9",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T16:58:50Z",
+      "side": 1,
+      "message": "optional nit: Are these conditions actually needed for correctness? It seems we could just always say that +0 is replaced with -0.",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 64
+      },
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
