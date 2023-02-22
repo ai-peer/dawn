@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dc6da89_1d8158a1",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-22T20:11:11Z",
+      "side": 1,
+      "message": "did you find that making this a template significantly helped the performance?\n\nanother alternative would be to pass in `std::vector\u003cstd::pair\u003cBindGroupIndex, BindingIndex\u003e\u003e* bindingIndices` as an output arg. We don\u0027t write to it if it\u0027s nullptr. It would be runtime check but the branch predictor should..? get it right.\nIt\u0027s worth measuring as well.\nIf the runtime check doesn\u0027t cost anything, avoiding the template would be preferred",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 26
+      },
+      "revId": "3ebab85a60a637c9cf2e4dc757e1269c7033be96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f039fb_4d6ce8b5",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-22T20:11:11Z",
+      "side": 1,
+      "message": "maybe we can use StackVector class so that if there are few bindings, it is stack allocated and potentially better performance (worth measuring it)",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 15
+      },
+      "revId": "3ebab85a60a637c9cf2e4dc757e1269c7033be96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
