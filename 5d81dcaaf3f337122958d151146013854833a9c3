@@ -16,6 +16,125 @@
       "message": "PTAL, thanks!",
       "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d6faf1c_4f9c974e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b11de1a8_fc9c48eb",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "Please put the validation in a ValidateRefresh() call similar to the pattern used in every other Dawn object 😊",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44089890_2514b7e3",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "Ditto (even if it is a single piece of validation, for consistency).",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62948476_ecbe39d5",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "nit: Can we have a small comment describing why it is ok to call Expire with a destroyed texture?",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02f55123_51a4dc84",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "nit: this should be a separate test case just because now it isn\u0027t clear in the Destroy() case if it is the Destroy() that made the texture invalid or the Expire() (or both). Basically the external texture is mutated twice so the test controls a bit less what is happening.\n\nWhat you could do is make a helper to create external textures so it is a single line to do so and have the bindgroup, then make each case independent more easily.",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71ab5fbc_3100db3e",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "603f8325_37d6b6cd",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-22T17:38:13Z",
+      "side": 1,
+      "message": "Can we have two additional tests?\n\n - Expire() on a destroyed ET is valid.\n - Expire() makes the texture invalid to use in a submit, then Refresh() makes it valid again.",
+      "revId": "5d81dcaaf3f337122958d151146013854833a9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
