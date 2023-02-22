@@ -134,6 +134,30 @@
       },
       "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "796eae52_8f7d8973",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-22T19:21:06Z",
+      "side": 1,
+      "message": "Forgot to put here:\n\nbefore and after adding the validation, busy validation at every dispatch: the cpu_time truncated mean: 32147.55 -\u003e 38363.98, + ~19% (not a small amount)\n\nlazy validation (only validate at first dispatch): almost same before and after",
+      "parentUuid": "d5baa25b_8af70736",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
