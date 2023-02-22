@@ -91,9 +91,7 @@ class PipelineLayout final : public PipelineLayoutBase {
 
     ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mCbvUavSrvRootParameterInfo;
     ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mSamplerRootParameterInfo;
-    ityp::array<BindGroupIndex,
-                ityp::array<BindingIndex, uint32_t, kMaxDynamicBuffersPerPipelineLayout>,
-                kMaxBindGroups>
+    ityp::array<BindGroupIndex, ityp::vector<BindingIndex, uint32_t>, kMaxBindGroups>
         mDynamicRootParameterIndices;
     DynamicStorageBufferLengthInfo mDynamicStorageBufferLengthInfo;
     uint32_t mFirstIndexOffsetParameterIndex;

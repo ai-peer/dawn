@@ -159,7 +159,7 @@ MaybeError PipelineLayout::Initialize() {
 
             // Set root descriptors in root signatures.
             rootParameter.Descriptor = rootDescriptor;
-            mDynamicRootParameterIndices[group][dynamicBindingIndex] = rootParameters.size();
+            mDynamicRootParameterIndices[group].push_back(rootParameters.size());
 
             // Set parameter types according to bind group layout descriptor.
             rootParameter.ParameterType = RootParameterType(bindingInfo.buffer.type);
@@ -224,8 +224,6 @@ MaybeError PipelineLayout::Initialize() {
         ASSERT(mDynamicStorageBufferLengthInfo[group].bindingAndRegisterOffsets.size() ==
                bgl->GetBindingCountInfo().dynamicStorageBufferCount);
     }
-    ASSERT(dynamicStorageBufferLengthsShaderRegisterOffset <=
-           kMaxDynamicStorageBuffersPerPipelineLayout);
 
     if (dynamicStorageBufferLengthsShaderRegisterOffset > 0) {
         D3D12_ROOT_PARAMETER dynamicStorageBufferLengthConstants{};
@@ -322,7 +320,6 @@ PipelineLayout::GetDynamicStorageBufferLengthInfo() const {
 uint32_t PipelineLayout::GetDynamicRootParameterIndex(BindGroupIndex group,
                                                       BindingIndex bindingIndex) const {
     ASSERT(group < kMaxBindGroupsTyped);
-    ASSERT(bindingIndex < kMaxDynamicBuffersPerPipelineLayoutTyped);
     ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).buffer.hasDynamicOffset);
     ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).visibility !=
            wgpu::ShaderStage::None);
