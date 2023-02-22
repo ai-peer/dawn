@@ -133,12 +133,12 @@ ExternalTextureBase::ExternalTextureBase(DeviceBase* device,
     : ApiObjectBase(device, descriptor->label),
       mVisibleOrigin(descriptor->visibleOrigin),
       mVisibleSize(descriptor->visibleSize),
-      mState(ExternalTextureState::Alive) {
+      mState(ExternalTextureState::Active) {
     GetObjectTrackingList()->Track(this);
 }
 
 ExternalTextureBase::ExternalTextureBase(DeviceBase* device)
-    : ApiObjectBase(device, kLabelNotImplemented), mState(ExternalTextureState::Alive) {
+    : ApiObjectBase(device, kLabelNotImplemented), mState(ExternalTextureState::Active) {
     GetObjectTrackingList()->Track(this);
 }
 
@@ -329,8 +329,8 @@ const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& ExternalTextureBase
 
 MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
     ASSERT(!IsError());
-    DAWN_INVALID_IF(mState == ExternalTextureState::Destroyed,
-                    "Destroyed external texture %s is used in a submit.", this);
+    DAWN_INVALID_IF(mState != ExternalTextureState::Active,
+                    "External texture %s used in a submit is not active.", this);
 
     for (uint32_t i = 0; i < kMaxPlanesPerFormat; ++i) {
         if (mTextureViews[i] != nullptr) {
@@ -339,6 +339,31 @@ MaybeError ExternalTextureBase::ValidateCanUseInSubmitNow() const {
         }
     }
     return {};
+}
+
+void ExternalTextureBase::APIRefresh() {
+    if (GetDevice()->ConsumedError(GetDevice()->ValidateObject(this))) {
+        return;
+    }
+    if (mState == ExternalTextureState::Destroyed) {
+        GetDevice()->ConsumedError(
+            DAWN_VALIDATION_ERROR("Refresh on destroyed external texture %s.", this));
+        return;
+    }
+
+    mState = ExternalTextureState::Active;
+}
+
+void ExternalTextureBase::APIExpire() {
+    if (GetDevice()->ConsumedError(GetDevice()->ValidateObject(this))) {
+        return;
+    }
+
+    if (mState != ExternalTextureState::Active) {
+        return;
+    }
+
+    mState = ExternalTextureState::Expired;
 }
 
 void ExternalTextureBase::APIDestroy() {
