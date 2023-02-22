@@ -34,6 +34,24 @@
       "parentUuid": "405145ba_0ff3bc3d",
       "revId": "dd998c12c7de4e720701bee639a0f36f12a537ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27314d2_7627f483",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-22T23:09:55Z",
+      "side": 1,
+      "message": "Oops, sorry just saw this now since I was working on addressing the other comments. I think the nice thing about putting it in dawn.json is that it\u0027s easy to read through the json and understand the allowed errors (and cross-checking it with the spec), whereas the code is a bit more cluttered so it\u0027s harder to immediate see what errors are allowed.\n\nSince we have it already, I lean slightly towards keeping it in the json, and explicitly specifying the other API calls in a follow up CL. I would also like to rename the `InternalErrorType::Internal` at some point because I find the naming very confusing... Maybe instead of `InternalErrorType` we could use `DawnErrorType`?",
+      "parentUuid": "382f2d93_86c03035",
+      "revId": "dd998c12c7de4e720701bee639a0f36f12a537ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
