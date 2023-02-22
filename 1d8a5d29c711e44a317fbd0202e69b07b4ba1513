@@ -241,6 +241,75 @@
       },
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d8eac7a_12659988",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-22T17:00:55Z",
+      "side": 1,
+      "message": "continue_parsing()",
+      "range": {
+        "startLine": 455,
+        "startChar": 15,
+        "endLine": 455,
+        "endChar": 19
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66720188_1fc35c9a",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-22T17:00:55Z",
+      "side": 1,
+      "message": "Suggest:\n\n`feature \u0027blah\u0027 is not supported`",
+      "range": {
+        "startLine": 467,
+        "startChar": 47,
+        "endLine": 467,
+        "endChar": 73
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5050c8f_ea2dada5",
+        "filename": "src/tint/reader/wgsl/parser_impl_require_directive_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-22T17:00:55Z",
+      "side": 1,
+      "message": "It\u0027s an identifier or `feature name`, not an expression, right?",
+      "range": {
+        "startLine": 53,
+        "startChar": 47,
+        "endLine": 53,
+        "endChar": 57
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
