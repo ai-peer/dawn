@@ -36,7 +36,7 @@ TEST_F(ParserImplTest, AttributeDecl_MissingParenLeft) {
     EXPECT_TRUE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
     EXPECT_TRUE(attrs.value.IsEmpty());
-    EXPECT_EQ(p->error(), "1:11: expected '(' for location attribute");
+    EXPECT_EQ(p->error(), "1:2: expected '(' for location attribute");
 }
 
 TEST_F(ParserImplTest, AttributeDecl_MissingValue) {
@@ -46,7 +46,7 @@ TEST_F(ParserImplTest, AttributeDecl_MissingValue) {
     EXPECT_TRUE(attrs.errored);
     EXPECT_FALSE(attrs.matched);
     EXPECT_TRUE(attrs.value.IsEmpty());
-    EXPECT_EQ(p->error(), "1:11: expected location expression");
+    EXPECT_EQ(p->error(), "1:2: location expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, AttributeDecl_MissingParenRight) {

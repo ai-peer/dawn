@@ -85,7 +85,7 @@ TEST_F(ParserImplTest, Attribute_Id_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:4: expected '(' for id attribute");
+    EXPECT_EQ(p->error(), "1:1: expected '(' for id attribute");
 }
 
 TEST_F(ParserImplTest, Attribute_Id_MissingRightParen) {
@@ -105,7 +105,7 @@ TEST_F(ParserImplTest, Attribute_Id_MissingValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:4: expected id expression");
+    EXPECT_EQ(p->error(), "1:1: id expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, Attribute_Id_MissingInvalid) {
@@ -115,7 +115,7 @@ TEST_F(ParserImplTest, Attribute_Id_MissingInvalid) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:4: expected id expression");
+    EXPECT_EQ(p->error(), "1:4: expected expression for id");
 }
 
 TEST_F(ParserImplTest, Attribute_Location) {
@@ -184,7 +184,7 @@ TEST_F(ParserImplTest, Attribute_Location_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:10: expected '(' for location attribute");
+    EXPECT_EQ(p->error(), "1:1: expected '(' for location attribute");
 }
 
 TEST_F(ParserImplTest, Attribute_Location_MissingRightParen) {
@@ -204,7 +204,7 @@ TEST_F(ParserImplTest, Attribute_Location_MissingValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:10: expected location expression");
+    EXPECT_EQ(p->error(), "1:1: location expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, Attribute_Location_MissingInvalid) {
@@ -214,7 +214,7 @@ TEST_F(ParserImplTest, Attribute_Location_MissingInvalid) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:10: expected location expression");
+    EXPECT_EQ(p->error(), "1:10: expected expression for location");
 }
 
 class BuiltinTest : public ParserImplTestWithParam<builtin::BuiltinValue> {};
@@ -273,7 +273,7 @@ TEST_F(ParserImplTest, Attribute_Builtin_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:9: expected '(' for builtin attribute");
+    EXPECT_EQ(p->error(), "1:1: expected '(' for builtin attribute");
 }
 
 TEST_F(ParserImplTest, Attribute_Builtin_MissingRightParen) {
@@ -293,7 +293,7 @@ TEST_F(ParserImplTest, Attribute_Builtin_MissingValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), R"(1:9: expected expression for builtin name)");
+    EXPECT_EQ(p->error(), "1:1: builtin expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, Attribute_Interpolate_Flat) {
@@ -335,7 +335,7 @@ TEST_F(ParserImplTest, Attribute_Interpolate_Single_DoubleTrailingComma) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), R"(1:18: expected expression for interpolation sampling)");
+    EXPECT_EQ(p->error(), "1:18: expected expression for interpolate");
 }
 
 TEST_F(ParserImplTest, Attribute_Interpolate_Perspective_Center) {
@@ -409,7 +409,7 @@ TEST_F(ParserImplTest, Attribute_Interpolate_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:13: expected '(' for interpolate attribute");
+    EXPECT_EQ(p->error(), "1:1: interpolate expects at least 1 parameter");
 }
 
 TEST_F(ParserImplTest, Attribute_Interpolate_MissingRightParen) {
@@ -429,7 +429,7 @@ TEST_F(ParserImplTest, Attribute_Interpolate_MissingFirstValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), R"(1:13: expected expression for interpolation type)");
+    EXPECT_EQ(p->error(), "1:1: interpolate expects at least 1 parameter");
 }
 
 TEST_F(ParserImplTest, Attribute_Binding) {
@@ -500,7 +500,7 @@ TEST_F(ParserImplTest, Attribute_Binding_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:9: expected '(' for binding attribute");
+    EXPECT_EQ(p->error(), "1:1: expected '(' for binding attribute");
 }
 
 TEST_F(ParserImplTest, Attribute_Binding_MissingRightParen) {
@@ -520,7 +520,7 @@ TEST_F(ParserImplTest, Attribute_Binding_MissingValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:9: expected binding expression");
+    EXPECT_EQ(p->error(), "1:1: binding expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, Attribute_Binding_MissingInvalid) {
@@ -530,7 +530,7 @@ TEST_F(ParserImplTest, Attribute_Binding_MissingInvalid) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:9: expected binding expression");
+    EXPECT_EQ(p->error(), "1:9: expected expression for binding");
 }
 
 TEST_F(ParserImplTest, Attribute_group) {
@@ -601,7 +601,7 @@ TEST_F(ParserImplTest, Attribute_Group_MissingLeftParen) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:7: expected '(' for group attribute");
+    EXPECT_EQ(p->error(), "1:1: expected '(' for group attribute");
 }
 
 TEST_F(ParserImplTest, Attribute_Group_MissingRightParen) {
@@ -621,7 +621,7 @@ TEST_F(ParserImplTest, Attribute_Group_MissingValue) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:7: expected group expression");
+    EXPECT_EQ(p->error(), "1:1: group expects 1 parameter, got 0");
 }
 
 TEST_F(ParserImplTest, Attribute_Group_MissingInvalid) {
@@ -631,7 +631,7 @@ TEST_F(ParserImplTest, Attribute_Group_MissingInvalid) {
     EXPECT_TRUE(attr.errored);
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:7: expected group expression");
+    EXPECT_EQ(p->error(), "1:7: expected expression for group");
 }
 
 }  // namespace
