@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "405145ba_0ff3bc3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-22T14:39:46Z",
+      "side": 1,
+      "message": "So thinking about this more, and looking at this CL and the next CL, I\u0027m starting to think my suggestion of using a full error mask was not the best idea.\n\nSome observations:\n - Most callsites can have validation errors.\n - Even if a validation error is not supposed to be allowed, and we throw one - bad things don\u0027t happen. Yes, the spec doesn\u0027t actually allow the validation error, but it\u0027s also an implementation bug that we should fix.\n - DawnInternal (not spec \"internal\") error and device lost errors are pretty much allowed to happen anywhere. I made some comments in the next CL about \"why does this mask allow device lost when we are explicitly throwing a validation error?\".. but in reality it doesn\u0027t matter much. Device lost is *allowed* even if we know for sure it doesn\u0027t happen.\n\nSo really we only care about the spec\u0027s \"internal\" error and \"out-of-memory\" error.\nWe don\u0027t implement the former, yet, except for async pipeline compilation. Some additional observations:\n - performance is not tremendously important for the functions where out-of-memory can happen. The allocation itself will be more costly\n - places where we use the spec\u0027s \"internal\" error are also likely to be big operations - like pipeline compilation, or queue submit.\n - performance of consuming errors is not super important either since an error happened\n \nThat\u0027s leading me to think that we *should* then set bools in thread local storage for allowOOMError and allowInternalError because:\n - as mentioned above, the performance overhead of the TLS should be proportionally small\n - we avoid needing to pipe the error mask everywhere via args\n - probably lower complexity, overall?\n \nI remember we discussed previously about using TLS, but don\u0027t recall all the downsides we saw with it - maybe you remember. The one special thing we might need to do is make sure async pipeline compilation doesn\u0027t do ConsumedError from another thread since the TLS bits wouldn\u0027t be set.\n\nWhat do you think?",
+      "revId": "dd998c12c7de4e720701bee639a0f36f12a537ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
