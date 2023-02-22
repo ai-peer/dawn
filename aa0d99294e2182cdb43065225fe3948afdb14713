@@ -110,6 +110,30 @@
       },
       "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5baa25b_8af70736",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-22T00:36:18Z",
+      "side": 1,
+      "message": "cpu_time truncated mean: 44652.53 -\u003e 41546.34 (-7%); But additionally adding a .reserve(8) -\u003e 38873.35 (-13%). The binding validation perf test don\u0027t have buffer size \u003d 0 so the real world perf can be no worse.\n\nWe are losing groupIndex and bindingIndex info for error message. Fix by using a template with return type to store a additional groupIndex and bindingIndex vector at unlikely callsite. (need another look)",
+      "parentUuid": "52af6919_b4a5d3fd",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
