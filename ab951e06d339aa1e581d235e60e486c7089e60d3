@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5574808f_a14a9c60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-22T20:14:14Z",
+      "side": 1,
+      "message": "This message should be clearer now. I know that this does not address 2 of the things James brought up:\n\n1. The note about the struct layout doesn\u0027t help here. I didn\u0027t change this because it would require some code gymnastics. The code recurses down the type tree, and always displays this note as it may be helpful. I think that now that the error message is more clear, it shouldn\u0027t be as confusing.\n\n2. We ideally should be using the Source of the array element type, not the array, but after looking into this, and discussing with Ben, this would require more work than is probably warranted at this point. Because the type may be an alias (or alias to alias, etc.), we have to walk the type tree until we get to the element type. We have this same problem in other places where we report errors. At some point, we should generalize a solution for displaying an inner type Source.\n\nIn the end, this is a simple change that hopefully makes the error message less confusing. We now mention both the element type, and the fact that it\u0027s the _stride_ that needs to be a multiple of 16 bytes.",
+      "revId": "ab951e06d339aa1e581d235e60e486c7089e60d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
