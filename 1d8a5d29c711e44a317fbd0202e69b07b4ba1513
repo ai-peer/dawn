@@ -152,6 +152,30 @@
       },
       "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4799ed44_086f8610",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-22T00:04:40Z",
+      "side": 1,
+      "message": "Meh. I don\u0027t like it (neither does Dan or James), and I\u0027m going to repeatedly type the wrong thing, but you seem to have fairly strong opinions here. Okay then.",
+      "parentUuid": "fb148cfe_5e5eafc9",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
