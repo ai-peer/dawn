@@ -266,6 +266,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2859aa4_32f91c5f",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T19:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d8eac7a_12659988",
+      "range": {
+        "startLine": 455,
+        "startChar": 15,
+        "endLine": 455,
+        "endChar": 19
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66720188_1fc35c9a",
@@ -289,6 +313,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f494ef3d_0ea68a95",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T19:04:33Z",
+      "side": 1,
+      "message": "Done. Added a comment as to why they\u0027re all considered not supported as well.",
+      "parentUuid": "66720188_1fc35c9a",
+      "range": {
+        "startLine": 467,
+        "startChar": 47,
+        "endLine": 467,
+        "endChar": 73
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5050c8f_ea2dada5",
@@ -302,6 +350,30 @@
       "writtenOn": "2023-02-22T17:00:55Z",
       "side": 1,
       "message": "It\u0027s an identifier or `feature name`, not an expression, right?",
+      "range": {
+        "startLine": 53,
+        "startChar": 47,
+        "endLine": 53,
+        "endChar": 57
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ed5c5f_20fa792e",
+        "filename": "src/tint/reader/wgsl/parser_impl_require_directive_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T19:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5050c8f_ea2dada5",
       "range": {
         "startLine": 53,
         "startChar": 47,
