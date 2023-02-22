@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc43b31_565386b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-22T08:41:51Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nWith this patch Chromium will be able to render the Unity case in dawn:1579 correctly.\n\nPTAL, thanks!",
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
