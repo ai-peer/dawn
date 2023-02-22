@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f50b288a_86298fcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T14:01:32Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac42d89_098f25cf",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T14:01:32Z",
+      "side": 1,
+      "message": "nit:\n\n```\nif (!call-\u003eTarget()-\u003eMustUse()) {\n   return true;\n}\n```",
+      "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77ee064d_63ad26ff",
+        "filename": "test/tint/bug/chromium/1360925.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-22T14:01:32Z",
+      "side": 1,
+      "message": "Do we expect these to collapse away, or should the test be assigning to a non-phony?",
+      "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
