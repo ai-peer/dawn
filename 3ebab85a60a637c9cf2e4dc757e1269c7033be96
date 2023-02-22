@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2f40ef_90d63aa6",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-22T22:02:50Z",
+      "side": 1,
+      "message": "with template: 37449.03; with pointer: 37874.38 (+ 1.13%), with a variation ~1%, that doesn\u0027t seem too much?\n\nAnyway, talked offline, will keep the template approach.",
+      "parentUuid": "4dc6da89_1d8158a1",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 26
+      },
+      "revId": "3ebab85a60a637c9cf2e4dc757e1269c7033be96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f039fb_4d6ce8b5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-02-22T20:11:11Z",
       "side": 1,
       "message": "maybe we can use StackVector class so that if there are few bindings, it is stack allocated and potentially better performance (worth measuring it)",
+      "range": {
+        "startLine": 76,
+        "startChar": 4,
+        "endLine": 76,
+        "endChar": 15
+      },
+      "revId": "3ebab85a60a637c9cf2e4dc757e1269c7033be96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d2c2b8_3b0b9fc7",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-22T22:02:50Z",
+      "side": 1,
+      "message": "with std::vector: 37315.44\nwith StackVector: 36980.19 (- 0.9%)\n\n(variation ~1.2%)\n\nApplied. (in theory should be better. and save the explicit reserve call)",
+      "parentUuid": "73f039fb_4d6ce8b5",
       "range": {
         "startLine": 76,
         "startChar": 4,

@@ -182,6 +182,30 @@
       },
       "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4463443d_6a274b0e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-22T22:02:50Z",
+      "side": 1,
+      "message": "Will land. Should be fairly easy to revert/remove if perf impact is bad or spec discard the validation again.",
+      "parentUuid": "3613d793_6684d394",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 112,
+        "endChar": 44
+      },
+      "revId": "aa0d99294e2182cdb43065225fe3948afdb14713",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
