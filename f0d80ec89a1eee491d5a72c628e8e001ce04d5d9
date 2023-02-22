@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff5327d_faccaa37",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1487,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-22T14:57:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ac42d89_098f25cf",
+      "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77ee064d_63ad26ff",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-22T14:01:32Z",
       "side": 1,
       "message": "Do we expect these to collapse away, or should the test be assigning to a non-phony?",
+      "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09a7cf60_0554cf70",
+        "filename": "test/tint/bug/chromium/1360925.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-02-22T14:57:05Z",
+      "side": 1,
+      "message": "The bug was related to `arrayLength()` being used as call statement, which is now impossible. This is as good a replacement as any alternative.",
+      "parentUuid": "77ee064d_63ad26ff",
       "revId": "f0d80ec89a1eee491d5a72c628e8e001ce04d5d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
