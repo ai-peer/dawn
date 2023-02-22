@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "082e2ed3_abd96a3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-22T16:15:27Z",
+      "side": 1,
+      "message": "Ok.  I\u0027m swayed by the \"asserts a property\" vs. \"does a thing\" argument.",
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8966c6b4_32e47e70",
@@ -192,6 +209,30 @@
       "side": 1,
       "message": "James\u0027 counter to this is that `enable` actually turns something on, where as `requires` does not actively change anything. I\u0027m not sure if that affects your stance at all.",
       "parentUuid": "4799ed44_086f8610",
+      "range": {
+        "startLine": 1184,
+        "startChar": 16,
+        "endLine": 1184,
+        "endChar": 24
+      },
+      "revId": "1d8a5d29c711e44a317fbd0202e69b07b4ba1513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fac87d9_ed41977b",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-02-22T16:15:27Z",
+      "side": 1,
+      "message": "I looked up what Java does.\nFrom the language spec (which is surprisingly hard to find).\n\n```\n7.7.1 Dependencies\n\nThe requires directive specifies the name of a module on which the current\nmodule has a dependence.\n```\nThat is what we\u0027re going for.\nI\u0027m swayed by the \"asserts a fact\" vs. \"does a thing\" argument.\n\nOk, I agree with you now.",
+      "parentUuid": "612ada31_3bda82ed",
       "range": {
         "startLine": 1184,
         "startChar": 16,
