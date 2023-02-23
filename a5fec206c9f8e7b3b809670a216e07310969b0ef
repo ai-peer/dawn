@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66db3a9_f5406955",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T17:15:49Z",
+      "side": 0,
+      "message": "could we keep this test? it still seems useful.\n\nif we map re-entrantly, and then release the buffer before the callbacks complete, we should see all of them reject with WGPUBufferMapAsyncStatus_DestroyedBeforeCallback status\n\nyour new test is about issuing new map calls after the buffer is destroyed.",
+      "range": {
+        "startLine": 866,
+        "startChar": 36,
+        "endLine": 866,
+        "endChar": 70
+      },
+      "revId": "a5fec206c9f8e7b3b809670a216e07310969b0ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
