@@ -55,7 +55,7 @@ std::string ToString(F f) {
     // Try printing the float in fixed point, with a smallish limit on the precision
     std::stringstream fixed;
     fixed.flags(fixed.flags() | std::ios_base::showpoint | std::ios_base::fixed);
-    fixed.imbue(std::locale::classic());
+    // fixed.imbue(std::locale::classic());
     fixed.precision(9);
     fixed << f;
     std::string str = fixed.str();
@@ -77,7 +77,7 @@ std::string ToString(F f) {
 
     // Resort to scientific, with the minimum precision needed to preserve the whole float
     std::stringstream sci;
-    sci.imbue(std::locale::classic());
+    // sci.imbue(std::locale::classic());
     sci.precision(std::numeric_limits<F>::max_digits10);
     sci << f;
     return sci.str();
