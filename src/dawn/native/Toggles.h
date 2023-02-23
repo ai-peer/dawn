@@ -91,6 +91,7 @@ enum class Toggle {
     UseBlitForBufferToStencilTextureCopy,
     UseBlitForDepthTextureToTextureCopyToNonzeroSubresource,
     DisallowDeprecatedAPIs,
+    D3D12PolyfillReflectVec2F32,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
