@@ -112,7 +112,12 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
         libxi-dev \
         libxinerama-dev \
         libxrandr-dev
+
+    # HACK: Install sweedish language pack so we can test locale
+    sudo apt -y install \
+        language-pack-sv
 fi
+
 
 status "Configuring build system"
 if [ "$BUILD_SYSTEM" == "cmake" ]; then

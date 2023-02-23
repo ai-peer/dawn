@@ -899,6 +899,8 @@ bool GenerateGlsl(const tint::Program* program, const Options& options) {
 }  // namespace
 
 int main(int argc, const char** argv) {
+    std::locale::global(std::locale("sv_SE.UTF-8"));
+
     std::vector<std::string> args(argv, argv + argc);
     Options options;
 

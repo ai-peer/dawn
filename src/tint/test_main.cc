@@ -51,6 +51,8 @@ struct Flags {
 int main(int argc, char** argv) {
     testing::InitGoogleMock(&argc, argv);
 
+    std::locale::global(std::locale("sv_SE.UTF-8"));
+
     tint::Initialize();
 
     Flags flags;
