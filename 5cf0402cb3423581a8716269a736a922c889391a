@@ -33,6 +33,23 @@
       "message": "Ping @bclayton@google.com",
       "revId": "5cf0402cb3423581a8716269a736a922c889391a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0d284a6_de27249b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-02-23T11:42:03Z",
+      "side": 1,
+      "message": "Thanks, Ben!",
+      "revId": "5cf0402cb3423581a8716269a736a922c889391a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
