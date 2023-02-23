@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a6d24c3_11094654",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:06:41Z",
+      "side": 1,
+      "message": "Note: If we\u0027re not planning on landing this for `M112`, then we probably should split these changes out to separate CLs to keep the deltas small(er).",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cb773d9c_c143212d",
         "filename": "src/tint/resolver/intrinsic_table.cc",
         "patchSetId": 2
