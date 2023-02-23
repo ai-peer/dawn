@@ -356,7 +356,8 @@ class Resolver {
     /// @param el_ty the Array element type
     /// @param el_count the number of elements in the array.
     /// @param explicit_stride the explicit byte stride of the array. Zero means implicit stride.
-    type::Array* Array(const Source& el_source,
+    type::Array* Array(const Source& array_source,
+                       const Source& el_source,
                        const Source& count_source,
                        const type::Type* el_ty,
                        const type::ArrayCount* el_count,
@@ -566,6 +567,19 @@ class Resolver {
         logical_binary_lhs_to_parent_;
     utils::Hashset<const ast::Expression*, 8> skip_const_eval_;
     IdentifierResolveHint identifier_resolve_hint_;
+    utils::Hashmap<const type::Type*, size_t, 8> nest_depth_;
+    size_t NestDepth(const type::Type* ty) const {
+        return Switch(
+            ty,  //
+            [](const type::Vector*) { return size_t{1}; },
+            [](const type::Matrix*) { return size_t{2}; },
+            [&](Default) {
+                if (auto d = nest_depth_.Get(ty)) {
+                    return *d;
+                }
+                return size_t{0};
+            });
+    }
 };
 
 }  // namespace tint::resolver

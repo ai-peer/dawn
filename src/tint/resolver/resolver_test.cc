@@ -2417,5 +2417,145 @@ TEST_F(ResolverTest, MaxNumStructMembers_Invalid) {
     EXPECT_EQ(r()->error(), "12:34 error: struct 'S' has 16384 members, maximum is 16383");
 }
 
+size_t kMaxNestDepthOfCompositeType = 255;
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_Structs_Valid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.i32())});
+    size_t depth = 1;  // Depth of struct
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        s = Structure("S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_Structs_Invalid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.i32())});
+    size_t depth = 1;  // Depth of struct
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = i == iterations - 1 ? Source{{12, 34}} : Source{{0, i}};
+        s = Structure(source, "S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: struct 'S254' has nesting depth of 256, maximum is 255");
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_StructsWithVector_Valid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.vec3<i32>())});
+    size_t depth = 2;  // Despth of struct + vector
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        s = Structure("S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_StructsWithVector_Invalid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.vec3<i32>())});
+    size_t depth = 2;  // Despth of struct + vector
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = i == iterations - 1 ? Source{{12, 34}} : Source{{0, i}};
+        s = Structure(source, "S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: struct 'S253' has nesting depth of 256, maximum is 255");
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_StructsWithMatrix_Valid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.mat3x3<f32>())});
+    size_t depth = 3;  // Depth of struct + matrix
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        s = Structure("S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_StructsWithMatrix_Invalid) {
+    auto* s = Structure("S", utils::Vector{Member("m", ty.mat3x3<f32>())});
+    size_t depth = 3;  // Depth of struct + matrix
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = i == iterations - 1 ? Source{{12, 34}} : Source{{0, i}};
+        s = Structure(source, "S" + std::to_string(i), utils::Vector{Member("m", ty.Of(s))});
+    }
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: struct 'S252' has nesting depth of 256, maximum is 255");
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_Arrays_Valid) {
+    auto a = ty.array(ty.i32(), 10_u);
+    size_t depth = 1;  // Depth of array
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        a = ty.array(a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_Arrays_Invalid) {
+    auto a = ty.array(Source{{99, 88}}, ty.i32(), 10_u);
+    size_t depth = 1;  // Depth of array
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = (i == iterations - 1) ? Source{{12, 34}} : Source{{0, i}};
+        a = ty.array(source, a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: array has nesting depth of 256, maximum is 255");
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_ArraysOfVector_Valid) {
+    auto a = ty.array(ty.vec3<i32>(), 10_u);
+    size_t depth = 2;  // Depth of array + vector
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        a = ty.array(a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_ArraysOfVector_Invalid) {
+    auto a = ty.array(Source{{99, 88}}, ty.vec3<i32>(), 10_u);
+    size_t depth = 2;  // Depth of array + vector
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = (i == iterations - 1) ? Source{{12, 34}} : Source{{0, i}};
+        a = ty.array(source, a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: array has nesting depth of 256, maximum is 255");
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_ArraysOfMatrix_Valid) {
+    auto a = ty.array(ty.mat3x3<f32>(), 10_u);
+    size_t depth = 3;  // Depth of array + matrix
+    size_t iterations = kMaxNestDepthOfCompositeType - depth;
+    for (size_t i = 0; i < iterations; ++i) {
+        a = ty.array(a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_F(ResolverTest, MaxNestDepthOfCompositeType_ArraysOfMatrix_Invalid) {
+    auto a = ty.array(Source{{99, 88}}, ty.mat3x3<f32>(), 10_u);
+    size_t depth = 3;  // Depth of array + matrix
+    size_t iterations = kMaxNestDepthOfCompositeType - depth + 1;
+    for (size_t i = 0; i < iterations; ++i) {
+        auto source = (i == iterations - 1) ? Source{{12, 34}} : Source{{0, i}};
+        a = ty.array(source, a, 1_u);
+    }
+    Alias("a", a);
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(), "12:34 error: array has nesting depth of 256, maximum is 255");
+}
+
 }  // namespace
 }  // namespace tint::resolver
