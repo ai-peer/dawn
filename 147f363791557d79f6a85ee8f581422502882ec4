@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f93b482_a37948c7",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T23:53:27Z",
+      "side": 1,
+      "message": "Right, but regardless that would need to be passed in? The only difference with that is that we just remove the parts that allow the `allowedErrors` to be a full mask, and just make it an explicit enum.",
+      "parentUuid": "d222e831_9c2fe8f4",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b927eaa8_b21b0e5b",
         "filename": "src/dawn/native/null/DeviceNull.cpp",
         "patchSetId": 13
