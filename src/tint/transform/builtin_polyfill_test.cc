@@ -3045,6 +3045,136 @@ fn f() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// reflect for Vec2
+////////////////////////////////////////////////////////////////////////////////
+DataMap polyfillReflectVec2() {
+    BuiltinPolyfill::Builtins builtins;
+    builtins.reflect_vec2_f32 = true;
+    DataMap data;
+    data.Add<BuiltinPolyfill::Config>(builtins);
+    return data;
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec2_f32) {
+    auto* src = R"(
+fn f() {
+  let e1 = vec2<f32>(1.0f);
+  let e2 = vec2<f32>(1.0f);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_TRUE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec2_f16) {
+    auto* src = R"(
+enable f16;
+
+fn f() {
+  let e1 = vec2<f16>(1.0h);
+  let e2 = vec2<f16>(1.0h);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec3_f32) {
+    auto* src = R"(
+fn f() {
+  let e1 = vec3<f32>(1.0f);
+  let e2 = vec3<f32>(1.0f);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec3_f16) {
+    auto* src = R"(
+enable f16;
+
+fn f() {
+  let e1 = vec3<f16>(1.0h);
+  let e2 = vec3<f16>(1.0h);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec4_f32) {
+    auto* src = R"(
+fn f() {
+  let e1 = vec3<f32>(1.0f);
+  let e2 = vec3<f32>(1.0f);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, ShouldRunReflect_vec4_f16) {
+    auto* src = R"(
+enable f16;
+
+fn f() {
+  let e1 = vec3<f16>(1.0h);
+  let e2 = vec3<f16>(1.0h);
+  let x = reflect(e1, e2);
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src));
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, Reflect_ConstantExpression) {
+    auto* src = R"(
+fn f() {
+  let r : vec2<f32> = reflect(vec2<f32>(1.0), vec2<f32>(1.0));
+}
+)";
+
+    EXPECT_FALSE(ShouldRun<BuiltinPolyfill>(src, polyfillReflectVec2()));
+}
+
+TEST_F(BuiltinPolyfillTest, Reflect_vec2_f32) {
+    auto* src = R"(
+fn f() {
+  let v = 0.5f;
+  let r : vec2<f32> = reflect(vec2<f32>(v), vec2<f32>(v));
+}
+)";
+
+    auto* expect = R"(
+fn tint_reflect(e1 : vec2<f32>, e2 : vec2<f32>) -> vec2<f32> {
+  let factor = (-2.0 * dot(e1, e2));
+  return (e1 + (factor * e2));
+}
+
+fn f() {
+  let v = 0.5f;
+  let r : vec2<f32> = tint_reflect(vec2<f32>(v), vec2<f32>(v));
+}
+)";
+
+    auto got = Run<BuiltinPolyfill>(src, polyfillReflectVec2());
+
+    EXPECT_EQ(expect, str(got));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // saturate
 ////////////////////////////////////////////////////////////////////////////////
 DataMap polyfillSaturate() {
