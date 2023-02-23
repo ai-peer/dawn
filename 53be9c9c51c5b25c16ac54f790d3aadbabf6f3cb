@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be06c977_cf185726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T22:02:18Z",
+      "side": 1,
+      "message": "PTAL. Will see what the bots say. This is kind of icky, switching to something like the google/double-conversion methods would be cleaner.",
+      "revId": "53be9c9c51c5b25c16ac54f790d3aadbabf6f3cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
