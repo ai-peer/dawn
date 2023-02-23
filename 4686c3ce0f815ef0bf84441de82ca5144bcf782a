@@ -16,6 +16,29 @@
       "message": "Breaking this up into multiple changes",
       "revId": "4686c3ce0f815ef0bf84441de82ca5144bcf782a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f9eefe_453ade8b",
+        "filename": "src/tint/resolver/resolver_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2417,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T19:28:21Z",
+      "side": 1,
+      "message": "nice.",
+      "range": {
+        "startLine": 2417,
+        "startChar": 42,
+        "endLine": 2417,
+        "endChar": 88
+      },
+      "revId": "4686c3ce0f815ef0bf84441de82ca5144bcf782a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
