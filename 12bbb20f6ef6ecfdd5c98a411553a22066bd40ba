@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aa346b1_71eb7cfb",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "nit: I think a word is missing here.",
+      "range": {
+        "startLine": 73,
+        "startChar": 35,
+        "endLine": 73,
+        "endChar": 47
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb773d9c_c143212d",
+        "filename": "src/tint/resolver/intrinsic_table.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "`/* packed */ true`",
+      "range": {
+        "startLine": 475,
+        "startChar": 54,
+        "endLine": 475,
+        "endChar": 58
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92cf625_74a1c0df",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "Why is `vec3\u003cbool\u003e` special? This detail is missing from the function comment and `PackedVec3` docs.",
+      "range": {
+        "startLine": 74,
+        "startChar": 37,
+        "endLine": 74,
+        "endChar": 67
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba948fe4_052e559e",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "Could be a `utils::Hashmap\u003cconst type::Type*, bool, 4\u003e`, then you can cache the result on `false`, and you get to use `GetOrCreate`.",
+      "range": {
+        "startLine": 108,
+        "startChar": 12,
+        "endLine": 108,
+        "endChar": 22
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e08a3c_998eb7f4",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "nit: I _think_ you can drop the `utils::ToString` and just pass the enum",
+      "range": {
+        "startLine": 133,
+        "startChar": 20,
+        "endLine": 133,
+        "endChar": 35
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f9e155_876d62d0",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "What about `CompoundAssignmentStatement`s ? Do we assume they\u0027ve been decayed by this point?\nIf so, can we have this dependency documented?",
+      "range": {
+        "startLine": 440,
+        "startChar": 68,
+        "endLine": 440,
+        "endChar": 87
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b9c51b_da512b06",
+        "filename": "src/tint/transform/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "note to self: We should add the sorting predicate to `Vector()`\nThere\u0027s no good reason to call this without then sorting.",
+      "range": {
+        "startLine": 487,
+        "startChar": 42,
+        "endLine": 487,
+        "endChar": 50
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d01fdc5_02a7acd6",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "This is... amazing. Well done!",
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2baa22a_066520db",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "What\u0027s this line exercising in this test?",
+      "range": {
+        "startLine": 292,
+        "startChar": 0,
+        "endLine": 292,
+        "endChar": 50
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb5801c_90db9cb2",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "It\u0027s not immediately obvious to me why we need the transform to emit this wrapping structure.\n\nUpdate:",
+      "range": {
+        "startLine": 371,
+        "startChar": 7,
+        "endLine": 371,
+        "endChar": 23
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2225322_ddf170bb",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "It wasn\u0027t immediately clear to me why we need to emit this wrapping structure. Is it because the backend may need to insert a padding field after it?",
+      "range": {
+        "startLine": 1299,
+        "startChar": 7,
+        "endLine": 1299,
+        "endChar": 23
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea13b573_440f3691",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 5226,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "Why does the `var` stay packed, and the `let` get unpacked?",
+      "range": {
+        "startLine": 5225,
+        "startChar": 0,
+        "endLine": 5226,
+        "endChar": 60
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca60bd77_e279357a",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "again, I don\u0027t think this is required.",
+      "range": {
+        "startLine": 104,
+        "startChar": 31,
+        "endLine": 104,
+        "endChar": 46
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27ebefc9_6e31ec92",
+        "filename": "src/tint/type/vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "Idea: You could derive `PackedVector3` off `Vector`. The constructor of this would omit the `size` argument, and you could then safely assume that the width of the vector was always 3. This might also simplify some of the type dispatching.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 43
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2751159b_b501ce07",
+        "filename": "src/tint/writer/glsl/generator_impl_member_accessor_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T15:05:44Z",
+      "side": 1,
+      "message": "I\u0027m struggling a bit to understand this. We\u0027re assigning a whole `mat2x3\u003cf32\u003e`, which translates to an `array\u003c__packed_vec3\u003cf32\u003e\u003e`, right? Why are we only assigning the first column?",
+      "range": {
+        "startLine": 244,
+        "startChar": 79,
+        "endLine": 244,
+        "endChar": 82
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
