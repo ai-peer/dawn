@@ -39,6 +39,30 @@
       },
       "revId": "8ac10268e64ebf2e13305561b2c341aea2f32631",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "254dd367_d7544a86",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-23T06:09:53Z",
+      "side": 1,
+      "message": "Good catch, updated. Thanks.",
+      "parentUuid": "4dfce88d_27547906",
+      "range": {
+        "startLine": 55,
+        "startChar": 26,
+        "endLine": 55,
+        "endChar": 27
+      },
+      "revId": "8ac10268e64ebf2e13305561b2c341aea2f32631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
