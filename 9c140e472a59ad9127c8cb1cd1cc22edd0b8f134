@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5424a6d0_aaedd7b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T05:11:19Z",
+      "side": 1,
+      "message": "LGTM. Austin can you TAL as well?",
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b7a0eb3_9d4190d9",
@@ -120,6 +137,30 @@
       "side": 1,
       "message": "Oh as Intel drivers still have some correct optimizations on the blending operation \u0027add\u0027, I prefer to only replace \u0027add\u0027 when necessary instead of always replace \u0027add\u0027.",
       "parentUuid": "928152db_6ee56a46",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 64
+      },
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67db3047_4ebe1263",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T05:11:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a6c72a70_ac00a31e",
       "range": {
         "startLine": 263,
         "startChar": 0,
