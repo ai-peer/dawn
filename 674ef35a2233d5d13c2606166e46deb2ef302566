@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f4e00bf_ce479f1d",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T17:40:16Z",
+      "side": 1,
+      "message": "this is wrong because of the continue statement above.",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "907038b1_bb7a4413",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
