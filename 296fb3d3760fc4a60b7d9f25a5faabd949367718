@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1832e83c_bfca40a5",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T16:40:03Z",
+      "side": 1,
+      "message": "Will rename in the followup to reduce the conflicts.",
+      "parentUuid": "c68acf1d_166b418c",
+      "range": {
+        "startLine": 2940,
+        "startChar": 45,
+        "endLine": 2940,
+        "endChar": 50
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "321f2b71_5fdc9c41",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-23T16:29:40Z",
       "side": 1,
       "message": "nit: `parse_args` or a comment.",
+      "range": {
+        "startLine": 2941,
+        "startChar": 9,
+        "endLine": 2941,
+        "endChar": 14
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0346bb7_262f2261",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2941,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T16:40:03Z",
+      "side": 1,
+      "message": "This is removed in the followup, will leave for now.",
+      "parentUuid": "321f2b71_5fdc9c41",
       "range": {
         "startLine": 2941,
         "startChar": 9,
@@ -89,6 +137,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4351affa_998f889b",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2946,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T16:40:03Z",
+      "side": 1,
+      "message": "I don\u0027t think so, `@vertex()` has no arguments, but still has parenthesis.",
+      "parentUuid": "99d8ba54_213643bf",
+      "range": {
+        "startLine": 2946,
+        "startChar": 83,
+        "endLine": 2946,
+        "endChar": 94
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "64956274_8c7194b8",
         "filename": "src/tint/reader/wgsl/parser_impl.cc",
         "patchSetId": 3
@@ -100,6 +172,30 @@
       "writtenOn": "2023-02-23T16:29:40Z",
       "side": 1,
       "message": "`argument`",
+      "range": {
+        "startLine": 2976,
+        "startChar": 57,
+        "endLine": 2976,
+        "endChar": 66
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ec9d68_b5f872f9",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2976,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T16:40:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64956274_8c7194b8",
       "range": {
         "startLine": 2976,
         "startChar": 57,
@@ -123,6 +219,30 @@
       "writtenOn": "2023-02-23T16:29:40Z",
       "side": 1,
       "message": "nit: we say `, got N` here, but not above. Given how few parameters these attributes take, not sure this is necessary.",
+      "range": {
+        "startLine": 2983,
+        "startChar": 33,
+        "endLine": 2983,
+        "endChar": 74
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31237447_d01ccdf3",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T16:40:03Z",
+      "side": 1,
+      "message": "It\u0027s because all the minimums are zero, so above would always say `, got 0` which is kinda useless. This at least gives context as to how many are provided as it might be larger then the maximum, `expects at most 3, got 5` kind of thing.",
+      "parentUuid": "a3958cdb_5c498cd2",
       "range": {
         "startLine": 2983,
         "startChar": 33,
