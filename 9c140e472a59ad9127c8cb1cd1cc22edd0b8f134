@@ -56,6 +56,30 @@
       },
       "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be517547_05b83830",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-23T00:20:42Z",
+      "side": 1,
+      "message": "Yes. Actually these conditions are provided by the driver team. They pointed out in current Intel driver when blendOp and blendOpAlpha are both ADD, and srcBlend and srcBlendAlpha are both DEST_ALPHA, the compiler will do an incorrect optimization. Changing blendOp or blendOpAlpha to SUBTRACT can avoid this.",
+      "parentUuid": "2b7a0eb3_9d4190d9",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 64
+      },
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
