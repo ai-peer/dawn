@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd326c60_7e3bfedc",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T23:21:16Z",
+      "side": 1,
+      "message": "Overall I\u0027m surprised by the added complexity in this CL: the handling of OOM should only be allowed in APICreateBuffer/Texture/QuerySet and these methods should only be called by the ProcTable (it seems I missed one spot when introducing these methods). So why can\u0027t we simply change HandleError to take an AllowOOM::Yes/No and split ConsumedError into a version that doesn\u0027t allowOOm and ConsumedErrorAllowOOM? There doesn\u0027t seem that a lot of other entrypoints will need to handle OOM in the future, and there doesn\u0027t seem like there will be other error types that need to be made special in the future. So the mechanisms introduced seem too complex compared to what\u0027s needed?",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b927eaa8_b21b0e5b",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T23:21:16Z",
+      "side": 1,
+      "message": "nit: Could be GetDevice()-\u003eCreateTexture(...).Release();",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
