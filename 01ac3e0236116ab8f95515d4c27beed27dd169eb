@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1ae0d4_07e072d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-23T15:25:36Z",
+      "side": 1,
+      "message": "I updated MSVC 2022 to latest, and it now fails to compile side_effects.cc.",
+      "revId": "01ac3e0236116ab8f95515d4c27beed27dd169eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
