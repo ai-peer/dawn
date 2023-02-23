@@ -1,0 +1,343 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "058490a3_28a389a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "LGTM overall; corentin should review too",
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4467bb96_7e84f231",
+        "filename": "dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "I think by doing this, we actually no longer allow the device lost error.\nwhat we probably want is for these error types to be strictly additive - so maybe \"additional allowed errors\"? Then, everything would allow device lost and validation error. It doesn\u0027t seem that valuable to have a way to disallow device lost / validation because:\n - device lost when device lost is not allowed.. should cause a device lost\n - validation error when not allowed shouldn\u0027t happen spuriously - it\u0027s an implementation bug\n \n \nthen, we start to lose the value of having this as a mask since right now we don\u0027t have situations where we need to allow both \"internal\" error and \"out of memory\" error",
+      "range": {
+        "startLine": 1021,
+        "startChar": 0,
+        "endLine": 1021,
+        "endChar": 62
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a87eb3_adc46902",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "this case is weird since we\u0027ll have a message about no errors being allowed which is odd since we\u0027re explicitly asking for one.\n\nit doesn\u0027t seem important enough to make very nice since the function is for testing, but maybe we can leave a comment about it",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 86
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2a56c4_6f8f1d97",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "nit: we can put this back in the .cpp since it no longer needs to be constexpr",
+      "range": {
+        "startLine": 210,
+        "startChar": 28,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d95cb3e_763a9d33",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "unused",
+      "range": {
+        "startLine": 245,
+        "startChar": 35,
+        "endLine": 245,
+        "endChar": 52
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aba4d077_af4a011f",
+        "filename": "src/dawn/native/ErrorData.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "I don\u0027t think this is used. But also, the overload doesn\u0027t add anything extra since you std::string(message) instead which performs a copy. That\u0027s the same as passing const char* message into the other overload",
+      "range": {
+        "startLine": 35,
+        "startChar": 27,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e2f448_5db3c2d1",
+        "filename": "src/dawn/native/ErrorData.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "we only need this overload for the \"handling unexpected error...\" message. couldn\u0027t we use AppendContext(absl::StrFormat(...)) directly?\n\nThen, we don\u0027t have the absl::FormatUntyped stuff at all",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044fae7a_9a3dc130",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "nit: comment to describe the test",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c0eb1b_4dc0516e",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "nit: comment to describe the test",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5e333d0_4fb5a76a",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "should we have a TODO to make it do that? or is it supposed to be ok in this case?\n\nWGPUCreatePipelineAsyncStatus_DeviceLost is a thing so I think device lost should be able to happen",
+      "range": {
+        "startLine": 239,
+        "startChar": 41,
+        "endLine": 239,
+        "endChar": 77
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5de3bca6_3496698d",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "typo: exercise",
+      "range": {
+        "startLine": 239,
+        "startChar": 3,
+        "endLine": 239,
+        "endChar": 12
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5559593e_767eb47a",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "ditto, comment description",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b811bad_6a540633",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 293,
+        "startChar": 3,
+        "endLine": 293,
+        "endChar": 12
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564f2c78_132a4279",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "comment",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669d72b4_c5b010de",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "comment",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

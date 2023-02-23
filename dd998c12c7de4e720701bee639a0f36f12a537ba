@@ -52,6 +52,24 @@
       "parentUuid": "382f2d93_86c03035",
       "revId": "dd998c12c7de4e720701bee639a0f36f12a537ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "891fde60_e6f99f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:51:33Z",
+      "side": 1,
+      "message": "\u003e I would also like to rename the InternalErrorType::Internal\n\nyes please. DawnErrorType SGTM. and Internal -\u003e Internal mapping for actual \"internal\" errors, and idk DAWN_FATAL_ERROR -\u003e Device lost for other kinds of things",
+      "parentUuid": "a27314d2_7627f483",
+      "revId": "dd998c12c7de4e720701bee639a0f36f12a537ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
