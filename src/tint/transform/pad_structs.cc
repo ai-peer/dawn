@@ -18,6 +18,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "src/tint/ast/disable_validation_attribute.h"
 #include "src/tint/ast/parameter.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/call.h"
@@ -36,9 +37,14 @@ void CreatePadding(utils::Vector<const ast::StructMember*, 8>* new_members,
                    utils::Hashset<const ast::StructMember*, 8>* padding_members,
                    ProgramBuilder* b,
                    uint32_t bytes) {
-    for (uint32_t i = 0; i < bytes / 4u; ++i) {
+    const size_t count = bytes / 4u;
+    padding_members->Reserve(count);
+    new_members->Reserve(count);
+    for (uint32_t i = 0; i < count; ++i) {
         auto name = b->Symbols().New("pad");
-        auto* member = b->Member(name, b->ty.u32());
+        auto* member =
+            b->Member(name, b->ty.u32(),
+                      utils::Vector{b->Disable(ast::DisabledValidation::kIgnoreStructMember)});
         padding_members->Add(member);
         new_members->Push(member);
     }

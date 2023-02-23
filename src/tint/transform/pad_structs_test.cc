@@ -49,8 +49,11 @@ fn main() {
     auto* expect = R"(
 struct S {
   x : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_2 : u32,
 }
 
@@ -83,7 +86,9 @@ fn main() {
     auto* expect = R"(
 struct S {
   x : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
   y : i32,
 }
@@ -120,7 +125,9 @@ fn main() {
     auto* expect = R"(
 struct S {
   x : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
   y : i32,
 }
@@ -160,7 +167,9 @@ fn main() {
     auto* expect = R"(
 struct S {
   x : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
   y : i32,
 }
@@ -200,7 +209,9 @@ fn main() {
     auto* expect = R"(
 struct S {
   x : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
   y : i32,
 }
@@ -275,12 +286,18 @@ fn main() {
     auto* expect = R"(
 struct S {
   a : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_2 : u32,
   b : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad_3 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_4 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_5 : u32,
 }
 
@@ -322,12 +339,18 @@ fn main() {
     auto* expect = R"(
 struct S {
   a : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_2 : u32,
   b : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad_3 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_4 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_5 : u32,
 }
 
@@ -369,12 +392,18 @@ fn main() {
     auto* expect = R"(
 struct S {
   a : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_2 : u32,
   b : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad_3 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_4 : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_5 : u32,
 }
 
@@ -504,7 +533,9 @@ struct T {
 struct S {
   a : vec4<f32>,
   b : array<T, 1u>,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
 }
 
@@ -539,8 +570,10 @@ fn main() {
     auto* expect = R"(
 struct S {
   a : f32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
   b : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
 }
 
@@ -575,8 +608,10 @@ fn main() {
     auto* expect = R"(
 struct S {
   a : f32,
+  @internal(disable_validation__ignore_struct_member)
   pad : u32,
   b : i32,
+  @internal(disable_validation__ignore_struct_member)
   pad_1 : u32,
 }
 

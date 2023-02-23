@@ -45,6 +45,8 @@ enum class DisabledValidation {
     /// When applied to a function declaration, the validator will not complain if multiple
     /// pointer arguments alias when that function is called.
     kIgnorePointerAliasing,
+    /// When applied to a struct member, member is ignored when validating max number of members.
+    kIgnoreStructMember,
 };
 
 /// An internal attribute used to tell the validator to ignore specific

@@ -3593,9 +3593,16 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
     uint64_t struct_align = 1;
     utils::Hashmap<Symbol, const ast::StructMember*, 8> member_map;
 
+    size_t num_ignored_members = 0;
     for (auto* member : str->members) {
         Mark(member);
         Mark(member->name);
+
+        if (validator_.IsValidationDisabled(member->attributes,
+                                            ast::DisabledValidation::kIgnoreStructMember)) {
+            ++num_ignored_members;
+        }
+
         if (auto added = member_map.Add(member->name->symbol, member); !added) {
             AddError("redefinition of '" + builder_->Symbols().NameFor(member->name->symbol) + "'",
                      member->source);
@@ -3764,6 +3771,18 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
 
         struct_size = offset + size;
         struct_align = std::max(struct_align, align);
+    }
+
+    // Maximum number of members in a structure type
+    // https://gpuweb.github.io/gpuweb/wgsl/#limits
+    const size_t kMaxNumStructMembers = 16383;
+    const size_t num_valid_members = str->members.Length() - num_ignored_members;
+    if (num_valid_members > kMaxNumStructMembers) {
+        AddError("struct '" + builder_->Symbols().NameFor(str->name->symbol) + "' has " +
+                     std::to_string(num_valid_members) + " members, maximum is " +
+                     std::to_string(kMaxNumStructMembers),
+                 str->source);
+        return nullptr;
     }
 
     uint64_t size_no_padding = struct_size;

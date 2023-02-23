@@ -45,6 +45,8 @@ std::string DisableValidationAttribute::InternalName() const {
             return "disable_validation__ignore_invalid_pointer_argument";
         case DisabledValidation::kIgnorePointerAliasing:
             return "disable_validation__ignore_pointer_aliasing";
+        case DisabledValidation::kIgnoreStructMember:
+            return "disable_validation__ignore_struct_member";
     }
     return "<invalid>";
 }
