@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e888a22e_9ec8a851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-02-23T23:46:54Z",
+      "side": 1,
+      "message": "PTAL! I split this off of https://dawn-review.googlesource.com/c/dawn/+/119140 because the CL was getting huge and I wanted to make it easier to review.",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
