@@ -15,6 +15,7 @@
 #include "src/tint/reader/wgsl/lexer.h"
 
 #include <cctype>
+#include <charconv>
 #include <cmath>
 #include <cstring>
 #include <functional>
@@ -388,7 +389,10 @@ Token Lexer::try_float() {
     advance(end - start);
     end_source(source);
 
+    // Force to the classic locale for the float parsing and then reset when done.
+    auto old_loc = std::locale::global(std::locale::classic());
     double value = std::strtod(&at(start), nullptr);
+    std::locale::global(old_loc);
 
     if (has_f_suffix) {
         if (auto f = CheckedConvert<f32>(AFloat(value))) {
