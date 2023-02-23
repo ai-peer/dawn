@@ -80,6 +80,30 @@
       },
       "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "928152db_6ee56a46",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T00:36:54Z",
+      "side": 1,
+      "message": "My suggestion is that we shouldn\u0027t need to check SrcBlend and SrcBlendAlpha",
+      "parentUuid": "be517547_05b83830",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 64
+      },
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
