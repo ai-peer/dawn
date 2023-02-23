@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92f25ee6_3e238f83",
+        "filename": "dawn.json",
+        "patchSetId": 12
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Renamed it, and changed the generation code to | it with the default.",
+      "parentUuid": "4467bb96_7e84f231",
+      "range": {
+        "startLine": 1021,
+        "startChar": 0,
+        "endLine": 1021,
+        "endChar": 62
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b2a87eb3_adc46902",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "this case is weird since we\u0027ll have a message about no errors being allowed which is odd since we\u0027re explicitly asking for one.\n\nit doesn\u0027t seem important enough to make very nice since the function is for testing, but maybe we can leave a comment about it",
+      "range": {
+        "startLine": 660,
+        "startChar": 0,
+        "endLine": 660,
+        "endChar": 86
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2da0ca91_4070e64f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2a87eb3_adc46902",
       "range": {
         "startLine": 660,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "146abd90_cddeab29",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e2a56c4_6f8f1d97",
+      "range": {
+        "startLine": 210,
+        "startChar": 28,
+        "endLine": 210,
+        "endChar": 45
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d95cb3e_763a9d33",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "unused",
+      "range": {
+        "startLine": 245,
+        "startChar": 35,
+        "endLine": 245,
+        "endChar": 52
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dec64b50_4cd69cd2",
+        "filename": "src/dawn/native/Error.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d95cb3e_763a9d33",
       "range": {
         "startLine": 245,
         "startChar": 35,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683bae0e_e01f55e5",
+        "filename": "src/dawn/native/ErrorData.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Ah.. I forgot that std::string can implicitly be constructed from char*. Thanks! Removed.",
+      "parentUuid": "aba4d077_af4a011f",
+      "range": {
+        "startLine": 35,
+        "startChar": 27,
+        "endLine": 35,
+        "endChar": 44
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17e2f448_5db3c2d1",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "we only need this overload for the \"handling unexpected error...\" message. couldn\u0027t we use AppendContext(absl::StrFormat(...)) directly?\n\nThen, we don\u0027t have the absl::FormatUntyped stuff at all",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 5
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26f9f7c0_d90b2017",
+        "filename": "src/dawn/native/ErrorData.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Ah, the intention was to use it for DeviceBase::ConsumedError functions as well. Done. (I had that change in the child CL but I just moved it into there now to make it more obvious why I did it.)",
+      "parentUuid": "17e2f448_5db3c2d1",
       "range": {
         "startLine": 61,
         "startChar": 4,
@@ -179,6 +323,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3c018a3_9fcc3962",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "044fae7a_9a3dc130",
+      "range": {
+        "startLine": 198,
+        "startChar": 0,
+        "endLine": 198,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31c0eb1b_4dc0516e",
@@ -192,6 +360,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "nit: comment to describe the test",
+      "range": {
+        "startLine": 218,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69aa8131_b3914ee6",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c0eb1b_4dc0516e",
       "range": {
         "startLine": 218,
         "startChar": 0,
@@ -248,6 +440,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42030d03_9039fd70",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the correct thing to do is in this case atm. I want to leave it as is w/o a TODO because unless OOM errors do start happening in pipeline initialization, I don\u0027t think this should be a failure case yet? (Internal error is allowed for pipeline creation).\n\nIf we do change the behavior, the test will fail anyways so the TODO would be obvious.",
+      "parentUuid": "d5e333d0_4fb5a76a",
+      "range": {
+        "startLine": 239,
+        "startChar": 41,
+        "endLine": 239,
+        "endChar": 77
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33874e7_e7749bff",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5de3bca6_3496698d",
+      "range": {
+        "startLine": 239,
+        "startChar": 3,
+        "endLine": 239,
+        "endChar": 12
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5559593e_767eb47a",
@@ -261,6 +501,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "ditto, comment description",
+      "range": {
+        "startLine": 267,
+        "startChar": 0,
+        "endLine": 267,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e4a5153_5af9e52f",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5559593e_767eb47a",
       "range": {
         "startLine": 267,
         "startChar": 0,
@@ -294,6 +558,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80db38dd_995a742e",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b811bad_6a540633",
+      "range": {
+        "startLine": 293,
+        "startChar": 3,
+        "endLine": 293,
+        "endChar": 12
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564f2c78_132a4279",
@@ -317,6 +605,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708ff019_deea9995",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "564f2c78_132a4279",
+      "range": {
+        "startLine": 331,
+        "startChar": 0,
+        "endLine": 331,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "669d72b4_c5b010de",
@@ -330,6 +642,30 @@
       "writtenOn": "2023-02-23T01:51:33Z",
       "side": 1,
       "message": "comment",
+      "range": {
+        "startLine": 348,
+        "startChar": 0,
+        "endLine": 348,
+        "endChar": 6
+      },
+      "revId": "2e8747bc28e4bb146cc4847d6cd495a258b48981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18752e8b_a024ee2e",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T22:54:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "669d72b4_c5b010de",
       "range": {
         "startLine": 348,
         "startChar": 0,
