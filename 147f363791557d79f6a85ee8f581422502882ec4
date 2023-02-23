@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a9b63fe_6a87b799",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-23T23:43:11Z",
+      "side": 1,
+      "message": "So I believe that InternalError is another one that could need this kind of handling in Pipeline creation. This means that we would need 2 bools for the handling, and it sort of becomes a mess if we do it like that. By explicitly passing the error types then it\u0027s just a bit cleaner than a bunch of bools where ordering matters and is hard to check for correctness.",
+      "parentUuid": "cd326c60_7e3bfedc",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b927eaa8_b21b0e5b",
         "filename": "src/dawn/native/null/DeviceNull.cpp",
         "patchSetId": 13
