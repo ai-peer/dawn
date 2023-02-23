@@ -104,6 +104,30 @@
       },
       "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c72a70_ac00a31e",
+        "filename": "src/dawn/native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-02-23T02:02:47Z",
+      "side": 1,
+      "message": "Oh as Intel drivers still have some correct optimizations on the blending operation \u0027add\u0027, I prefer to only replace \u0027add\u0027 when necessary instead of always replace \u0027add\u0027.",
+      "parentUuid": "928152db_6ee56a46",
+      "range": {
+        "startLine": 263,
+        "startChar": 0,
+        "endLine": 264,
+        "endChar": 64
+      },
+      "revId": "9c140e472a59ad9127c8cb1cd1cc22edd0b8f134",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
