@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d222e831_9c2fe8f4",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T23:50:49Z",
+      "side": 1,
+      "message": "Right now though, we either permit OOM or Internal error, not both. so it could be  one enum to indicate it",
+      "parentUuid": "5a9b63fe_6a87b799",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b927eaa8_b21b0e5b",
         "filename": "src/dawn/native/null/DeviceNull.cpp",
         "patchSetId": 13
