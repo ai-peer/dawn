@@ -16,6 +16,121 @@
       "message": "PTAL.",
       "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68acf1d_166b418c",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2940,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T16:29:40Z",
+      "side": 1,
+      "message": "nit: `args`",
+      "range": {
+        "startLine": 2940,
+        "startChar": 45,
+        "endLine": 2940,
+        "endChar": 50
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "321f2b71_5fdc9c41",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2941,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T16:29:40Z",
+      "side": 1,
+      "message": "nit: `parse_args` or a comment.",
+      "range": {
+        "startLine": 2941,
+        "startChar": 9,
+        "endLine": 2941,
+        "endChar": 14
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99d8ba54_213643bf",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2946,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T16:29:40Z",
+      "side": 1,
+      "message": "`arguments` ?",
+      "range": {
+        "startLine": 2946,
+        "startChar": 83,
+        "endLine": 2946,
+        "endChar": 94
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64956274_8c7194b8",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2976,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T16:29:40Z",
+      "side": 1,
+      "message": "`argument`",
+      "range": {
+        "startLine": 2976,
+        "startChar": 57,
+        "endLine": 2976,
+        "endChar": 66
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3958cdb_5c498cd2",
+        "filename": "src/tint/reader/wgsl/parser_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2983,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-23T16:29:40Z",
+      "side": 1,
+      "message": "nit: we say `, got N` here, but not above. Given how few parameters these attributes take, not sure this is necessary.",
+      "range": {
+        "startLine": 2983,
+        "startChar": 33,
+        "endLine": 2983,
+        "endChar": 74
+      },
+      "revId": "296fb3d3760fc4a60b7d9f25a5faabd949367718",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
