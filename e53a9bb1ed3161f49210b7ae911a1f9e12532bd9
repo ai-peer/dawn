@@ -33,6 +33,24 @@
       "message": "Looks good, but do we have to do this for all stringstreams?",
       "revId": "e53a9bb1ed3161f49210b7ae911a1f9e12532bd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8b5014_2c6cc4e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-23T21:44:47Z",
+      "side": 1,
+      "message": "I think we have two routes, we either force the global locale at the tint entry points and reset on exit, or we do it on a case by case basis. Setting teh global local seems ... icky? ... so I\u0027m trying this route.\n\nBut, there are other issues, like `from_chars` which I was hoping to use isn\u0027t implemnted in libc++ for doubles, so that means we\u0027ll have to jump through hoops for `strtod` to work. So ... we\u0027ll see?",
+      "parentUuid": "63e5ba76_43ba7b7c",
+      "revId": "e53a9bb1ed3161f49210b7ae911a1f9e12532bd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
