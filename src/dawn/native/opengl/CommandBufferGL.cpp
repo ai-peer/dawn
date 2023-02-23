@@ -1028,7 +1028,13 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
-                if (draw->firstInstance > 0) {
+                if (gl.IsGLExtensionSupported("GL_ANGLE_base_vertex_base_instance")) {
+                    gl.DrawElementsInstancedBaseVertexBaseInstanceANGLE(
+                        lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, indexBufferFormat,
+                        reinterpret_cast<void*>(draw->firstIndex * indexFormatSize +
+                                                indexBufferBaseOffset),
+                        draw->instanceCount, draw->baseVertex, draw->firstInstance);
+                } else if (draw->firstInstance > 0) {
                     gl.DrawElementsInstancedBaseVertexBaseInstance(
                         lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, indexBufferFormat,
                         reinterpret_cast<void*>(draw->firstIndex * indexFormatSize +
