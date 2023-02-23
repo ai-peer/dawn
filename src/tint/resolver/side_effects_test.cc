@@ -129,7 +129,7 @@ TEST_F(SideEffectsTest, Call_Builtin_SE) {
     EXPECT_TRUE(sem->HasSideEffects());
 }
 
-namespace builtin {
+namespace builtin_tests {
 struct Case {
     const char* name;
     utils::Vector<const char*, 3> args;
