@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c266a12f_5a82814e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "733372f9_df6ec008",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 1,
+      "message": "optional nit: usually these are member function of the ExternalTextureBase*.",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e52f227_2c8e48d1",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 1,
+      "message": "nit: We just removed such validation from the other resource objects. https://dawn-review.googlesource.com/c/dawn/+/120980",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b01d27f8_01bb0ad3",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44c3934d_f97c57f6",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 1,
+      "message": "nit: Could still be private after other comments.",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

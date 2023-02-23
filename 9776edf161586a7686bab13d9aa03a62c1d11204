@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b58bf80_339de65f",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-23T17:12:24Z",
+      "side": 0,
+      "message": "I think this is no longer tested.",
+      "revId": "9776edf161586a7686bab13d9aa03a62c1d11204",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
