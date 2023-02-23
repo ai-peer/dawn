@@ -185,6 +185,7 @@ auto ZeroTypeDispatch(const type::Type* type, F&& f) {
 template <typename NumberT>
 std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
     std::stringstream ss;
+    ss.imbue(std::locale::classic());
     ss << std::setprecision(20);
     ss << "'" << lhs.value << " " << op << " " << rhs.value << "' cannot be represented as '"
        << FriendlyName<NumberT>() << "'";
@@ -194,6 +195,7 @@ std::string OverflowErrorMessage(NumberT lhs, const char* op, NumberT rhs) {
 template <typename VALUE_TY>
 std::string OverflowErrorMessage(VALUE_TY value, std::string_view target_ty) {
     std::stringstream ss;
+    ss.imbue(std::locale::classic());
     ss << std::setprecision(20);
     ss << "value " << value << " cannot be represented as "
        << "'" << target_ty << "'";
@@ -203,6 +205,7 @@ std::string OverflowErrorMessage(VALUE_TY value, std::string_view target_ty) {
 template <typename NumberT>
 std::string OverflowExpErrorMessage(std::string_view base, NumberT exp) {
     std::stringstream ss;
+    ss.imbue(std::locale::classic());
     ss << std::setprecision(20);
     ss << base << "^" << exp << " cannot be represented as "
        << "'" << FriendlyName<NumberT>() << "'";
