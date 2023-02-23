@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ee8bfef_5b525013",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-02-23T09:16:28Z",
+      "side": 1,
+      "message": "I thought just enable this workaround for depth32float-stencil format, if that I need to add a method in Device to get whether the format of T2T copy requires the workaround on each backend, this method is just temporary and need to be removed after the issue get fixed in driver, which does not look good, and easy to be forgotten. So I enable the workaround for all formats here.",
+      "revId": "bfbd0ef33e6b7077355f83fc6bce74a73ae55719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
