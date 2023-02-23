@@ -3573,6 +3573,20 @@ type::Type* Resolver::Alias(const ast::Alias* alias) {
 }
 
 sem::Struct* Resolver::Structure(const ast::Struct* str) {
+    if (validator_.IsValidationEnabled(str->attributes,
+                                       ast::DisabledValidation::kIgnoreStructMemberLimit)) {
+        // Maximum number of members in a structure type
+        // https://gpuweb.github.io/gpuweb/wgsl/#limits
+        const size_t kMaxNumStructMembers = 16383;
+        if (str->members.Length() > kMaxNumStructMembers) {
+            AddError("struct '" + builder_->Symbols().NameFor(str->name->symbol) + "' has " +
+                         std::to_string(str->members.Length()) + " members, maximum is " +
+                         std::to_string(kMaxNumStructMembers),
+                     str->source);
+            return nullptr;
+        }
+    }
+
     if (!validator_.NoDuplicateAttributes(str->attributes)) {
         return nullptr;
     }
@@ -3596,6 +3610,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
     for (auto* member : str->members) {
         Mark(member);
         Mark(member->name);
+
         if (auto added = member_map.Add(member->name->symbol, member); !added) {
             AddError("redefinition of '" + builder_->Symbols().NameFor(member->name->symbol) + "'",
                      member->source);
