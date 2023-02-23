@@ -15,7 +15,6 @@
 #include "src/tint/reader/wgsl/lexer.h"
 
 #include <cctype>
-#include <charconv>
 #include <cmath>
 #include <cstring>
 #include <functional>
@@ -389,15 +388,9 @@ Token Lexer::try_float() {
     advance(end - start);
     end_source(source);
 
-    double value = 0;
-    auto ret = std::from_chars(&at(start), &at(end), value);
-    bool converted = ret.ec == std::errc{};
+    double value = std::strtod(&at(start), nullptr);
 
     if (has_f_suffix) {
-        if (!converted) {
-            return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
-        }
-
         if (auto f = CheckedConvert<f32>(AFloat(value))) {
             return {Token::Type::kFloatLiteral_F, source, static_cast<double>(f.Get())};
         } else {
@@ -406,10 +399,6 @@ Token Lexer::try_float() {
     }
 
     if (has_h_suffix) {
-        if (!converted) {
-            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
-        }
-
         if (auto f = CheckedConvert<f16>(AFloat(value))) {
             return {Token::Type::kFloatLiteral_H, source, static_cast<double>(f.Get())};
         } else {
@@ -417,11 +406,13 @@ Token Lexer::try_float() {
         }
     }
 
-    if (!converted) {
+    TINT_BEGIN_DISABLE_WARNING(FLOAT_EQUAL);
+    if (value == HUGE_VAL || -value == HUGE_VAL) {
         return {Token::Type::kError, source, "value cannot be represented as 'abstract-float'"};
     } else {
         return {Token::Type::kFloatLiteral, source, value};
     }
+    TINT_END_DISABLE_WARNING(FLOAT_EQUAL);
 }
 
 Token Lexer::try_hex_float() {

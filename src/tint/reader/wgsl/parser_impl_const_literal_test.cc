@@ -150,7 +150,10 @@ INSTANTIATE_TEST_SUITE_P(ParserImplFloatLiteralTest_Float,
                              {"234.e2h", static_cast<double>(f16::Quantize(234.e2))},
 
                              // Tiny cases
+                             {"1e-5000", 0.0},
+                             {"1e-5000f", 0.0},
                              {"1e-50f", 0.0},
+                             {"1e-5000h", 0.0},
                              {"1e-50h", 0.0},
                              {"1e-8h", 0.0},  // The smallest positive subnormal f16 is 5.96e-8
 
@@ -599,7 +602,6 @@ INSTANTIATE_TEST_SUITE_P(
                          "1.798e308",
                          "1.7977e308",
                          "1.2e+5000",
-                         "1e-5000",
                      })));
 
 INSTANTIATE_TEST_SUITE_P(
@@ -612,7 +614,6 @@ INSTANTIATE_TEST_SUITE_P(
                          "3.5e38f",
                          "3.403e38f",
                          "1.2e+256f",
-                         "1e-5000f",
                      })));
 
 INSTANTIATE_TEST_SUITE_P(
@@ -626,7 +627,6 @@ INSTANTIATE_TEST_SUITE_P(
                          "6.56e4h",
                          "6.554e4h",
                          "1.2e+32h",
-                         "1e-5000h",
                      })));
 
 TEST_F(ParserImplTest, ConstLiteral_FloatHighest) {
