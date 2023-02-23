@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1e75bec_c9a777a6",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-23T01:55:33Z",
+      "side": 1,
+      "message": "oh yea, there\u0027s 30 slots; 8 are used by vertex buffers, so 22 remaining.\nI split them evenly between uniform/storage because I had to pick some split.\n\ndoes that makes sense?",
+      "parentUuid": "907038b1_bb7a4413",
+      "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "034b9990_d4c39d87",
         "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
         "patchSetId": 3
