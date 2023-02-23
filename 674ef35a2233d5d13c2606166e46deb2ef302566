@@ -76,6 +76,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89f59f7_c7ec8b60",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-23T18:37:40Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "c1e75bec_c9a777a6",
+      "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "034b9990_d4c39d87",
