@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0908e71_91882613",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "733372f9_df6ec008",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7552d519_80fb5df9",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-02-23T17:34:21Z",
       "side": 1,
       "message": "this error message is combining the information about what is happening, and what is wrong. I think what it should say is more simply \"%s is destroyed.\" or \"%s is not active.\"\n\nThen, you can add the context below at [1]. like\n`ConsumedError(..., \"calling %s.Refresh().\", this)`\n\nSee docs/dawn/errors.md as well",
+      "range": {
+        "startLine": 123,
+        "startChar": 4,
+        "endLine": 124,
+        "endChar": 82
+      },
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c364ebd5_5e8301a6",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7552d519_80fb5df9",
       "range": {
         "startLine": 123,
         "startChar": 4,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9cdb98_86c66bc9",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e52f227_2c8e48d1",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34856347_b7ab4535",
@@ -88,6 +148,30 @@
       "writtenOn": "2023-02-23T17:34:21Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 359,
+        "startChar": 21,
+        "endLine": 359,
+        "endChar": 34
+      },
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "627fd2fa_36c8c716",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34856347_b7ab4535",
       "range": {
         "startLine": 359,
         "startChar": 21,
@@ -133,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a40040f_3680fbf7",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf0cc28_43d4b40a",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44c3934d_f97c57f6",
@@ -146,6 +248,24 @@
       "writtenOn": "2023-02-23T17:12:24Z",
       "side": 1,
       "message": "nit: Could still be private after other comments.",
+      "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fbc7db9_e3f3ef7d",
+        "filename": "src/dawn/native/ExternalTexture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-02-24T00:47:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44c3934d_f97c57f6",
       "revId": "5c7a446d0dbf86b7917ad6b75d7ca18246e979b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
