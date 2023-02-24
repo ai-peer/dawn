@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11bed040_f283a450",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04ee437c_00bc970d",
+      "range": {
+        "startLine": 541,
+        "startChar": 12,
+        "endLine": 541,
+        "endChar": 39
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81aa6fbc_143f0d99",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-02-21T23:56:50Z",
       "side": 1,
       "message": "should only be validation errors allowed",
+      "range": {
+        "startLine": 155,
+        "startChar": 22,
+        "endLine": 155,
+        "endChar": 50
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "138af7af_551c1ad8",
+        "filename": "src/dawn/native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81aa6fbc_143f0d99",
       "range": {
         "startLine": 155,
         "startChar": 22,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "604e054e_b040a5b9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1404,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1352512_e7d0f710",
+      "range": {
+        "startLine": 1404,
+        "startChar": 66,
+        "endLine": 1404,
+        "endChar": 94
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c6d08da_6838f6bc",
@@ -100,6 +172,24 @@
       "writtenOn": "2023-02-21T23:56:50Z",
       "side": 1,
       "message": "hmm, IMO I think this adds more complexity than it\u0027s worth. I don\u0027t think it makes doing ConsumedError any harder to use wrong either since it has a macro which is just as concise?",
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a636bde_26bada35",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Hmm, the idea is that the macro FORCES the user to return from the call site. (I couldn\u0027t achieve this with a function since there\u0027s no way to enforce that callers don\u0027t continue to do stuff after a `ConsumeError` that could leave us in a device lost state.",
+      "parentUuid": "2c6d08da_6838f6bc",
       "revId": "973c014381f175d15ebefd729fa1e1489b717466",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c4af6c_eddd0d2b",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5cee478c_64d107df",
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffe6e8d9_1b6b92fd",
@@ -134,6 +242,30 @@
       "writtenOn": "2023-02-21T23:56:50Z",
       "side": 1,
       "message": "existing nit: more accurate to do INTERNAL_ERROR since it\u0027s not a real device lost - it\u0027s just \"this is not supported so we lose the device, gracefully\"",
+      "range": {
+        "startLine": 1169,
+        "startChar": 23,
+        "endLine": 1169,
+        "endChar": 45
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee0e646_b67acc1e",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 1169,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffe6e8d9_1b6b92fd",
       "range": {
         "startLine": 1169,
         "startChar": 23,
@@ -167,6 +299,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e41387f3_e0029415",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c74617_54f2693b",
+      "range": {
+        "startLine": 553,
+        "startChar": 8,
+        "endLine": 553,
+        "endChar": 24
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd950030_f22f7b84",
@@ -180,6 +336,30 @@
       "writtenOn": "2023-02-21T23:56:50Z",
       "side": 1,
       "message": "nit: you could also EXPECT_TRUE",
+      "range": {
+        "startLine": 229,
+        "startChar": 24,
+        "endLine": 229,
+        "endChar": 30
+      },
+      "revId": "973c014381f175d15ebefd729fa1e1489b717466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39781ba_7cc9c283",
+        "filename": "src/dawn/tests/unittests/validation/DeviceValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T08:08:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd950030_f22f7b84",
       "range": {
         "startLine": 229,
         "startChar": 24,
