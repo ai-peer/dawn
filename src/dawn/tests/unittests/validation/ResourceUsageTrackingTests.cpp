@@ -32,12 +32,13 @@ class ResourceUsageTrackingTest : public ValidationTest {
     }
 
     wgpu::Texture CreateTexture(wgpu::TextureUsage usage,
-                                wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm) {
+                                wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm,
+                                uint32_t mipLevelCount = 1) {
         wgpu::TextureDescriptor descriptor;
         descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.size = {1, 1, 1};
+        descriptor.size = {16, 16, 1};
         descriptor.sampleCount = 1;
-        descriptor.mipLevelCount = 1;
+        descriptor.mipLevelCount = mipLevelCount;
         descriptor.usage = usage;
         descriptor.format = format;
 
@@ -927,20 +928,25 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
     // Test render pass
     {
         // Create a texture
-        wgpu::Texture texture = CreateTexture(wgpu::TextureUsage::StorageBinding |
-                                              wgpu::TextureUsage::RenderAttachment);
-        wgpu::TextureView view = texture.CreateView();
+        // with 4 mipLevelCount to avoid storage binding aliasing.
+        wgpu::Texture texture =
+            CreateTexture(wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::RenderAttachment,
+                          wgpu::TextureFormat::RGBA8Unorm, 4);
+        wgpu::TextureViewDescriptor viewDesc0 = {};
+        viewDesc0.baseMipLevel = 0;
+        viewDesc0.mipLevelCount = 1;
+        wgpu::TextureView view0 = texture.CreateView(&viewDesc0);
 
         // Create a bind group to use the texture as writeonly storage binding
         wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}});
+        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view0}});
 
         // It is invalid to use the texture as both writeonly storage and render target in
         // the same pass
         {
-            utils::ComboRenderPassDescriptor renderPass({view});
+            utils::ComboRenderPassDescriptor renderPass({view0});
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
@@ -952,7 +958,12 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
         // It is valid to use multiple writeonly storage usages on the same texture in render
         // pass
         {
-            wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view}});
+            // Create a new texture view to avoid storage texture binding aliasing
+            wgpu::TextureViewDescriptor viewDesc1 = {};
+            viewDesc1.baseMipLevel = 1;
+            viewDesc1.mipLevelCount = 1;
+            wgpu::TextureView view1 = texture.CreateView(&viewDesc1);
+            wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view1}});
 
             wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
             PlaceholderRenderPass PlaceholderRenderPass(device);
@@ -967,15 +978,24 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
     // Test compute pass
     {
         // Create a texture
-        wgpu::Texture texture = CreateTexture(wgpu::TextureUsage::StorageBinding);
-        wgpu::TextureView view = texture.CreateView();
+        // with 4 mipLevelCount to avoid storage binding aliasing.
+        wgpu::Texture texture =
+            CreateTexture(wgpu::TextureUsage::StorageBinding, wgpu::TextureFormat::RGBA8Unorm, 4);
+        wgpu::TextureViewDescriptor viewDesc0 = {};
+        viewDesc0.baseMipLevel = 0;
+        viewDesc0.mipLevelCount = 1;
+        wgpu::TextureView view0 = texture.CreateView(&viewDesc0);
+        wgpu::TextureViewDescriptor viewDesc1 = {};
+        viewDesc1.baseMipLevel = 1;
+        viewDesc1.mipLevelCount = 1;
+        wgpu::TextureView view1 = texture.CreateView(&viewDesc1);
 
         // Create a bind group to use the texture as sampled and writeonly bindings
         wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
             device,
             {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat},
              {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view0}, {1, view1}});
 
         // Create a no-op compute pipeline
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
