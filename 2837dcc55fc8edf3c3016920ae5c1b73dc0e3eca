@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36f2ac9_83e99cb7",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T23:49:23Z",
+      "side": 1,
+      "message": "If the keys are the same, update() replaces the value with the new value, AFAICT. We need to append the new array to old array.",
+      "parentUuid": "ff328301_cb3d747a",
+      "range": {
+        "startLine": 272,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 44
+      },
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c97c4fc_016c4123",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d69949e9_68ac3b56",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T23:49:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c97c4fc_016c4123",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "540f2160_f75b9fc7",
@@ -88,6 +130,24 @@
       "writtenOn": "2023-02-24T19:50:44Z",
       "side": 1,
       "message": "uuunit: seems like unconventional syntax",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa77ff8_eb722d20",
+        "filename": "src/dawn/native/opengl/AdapterGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T23:49:23Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "540f2160_f75b9fc7",
       "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +183,24 @@
       "side": 1,
       "message": "reassigning sounds nice to me - that\u0027s how the vulkan function loading works too. So extensions and functions that were promoted to core get accessed in the same way.\n\nis DrawArraysInstancedBaseInstanceANGLE supposed to do exactly the same thing DrawArraysInstancedBaseInstance does?",
       "parentUuid": "a4497723_d060ea32",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "041a467a_48cf2845",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T23:49:23Z",
+      "side": 1,
+      "message": "Unfortunately, I realized that the ANGLE extension doesn\u0027t actually have the BaseVertex-only entry point. It only has BaseVertexBaseInstance. So it\u0027s not a drop-in replacement.\n\nI\u0027ve changed the extension check to simply check for the ANGLE fn ptr. Should be cheap.",
+      "parentUuid": "30e075e1_5b783593",
       "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
