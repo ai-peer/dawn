@@ -87,6 +87,24 @@
       "message": "nit: Could be GetDevice()-\u003eCreateTexture(...).Release();",
       "revId": "147f363791557d79f6a85ee8f581422502882ec4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afef09e0_b46653ea",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T00:28:22Z",
+      "side": 1,
+      "message": "Ah.. since we are returning a raw ptr here, I think using the API version is a bit safer, so leaving it as is for now.",
+      "parentUuid": "b927eaa8_b21b0e5b",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
