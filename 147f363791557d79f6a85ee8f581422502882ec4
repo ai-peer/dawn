@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "765f9efb_57a5219e",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T22:12:17Z",
+      "side": 1,
+      "message": "Ok I removed the generated code and hard-coded in the enums. I kept the enums \"maskable\" since IMO it doesn\u0027t add too much complexity given we have so many other enums that also act as masks already, and it makes implementing the `HandleError` function cleaner.\n\nOverall, removing the generator code only removed around like... 50 lines of code? I personally liked it better in the json file though because I find it a lot easier to understand what errors to expect from API calls by just looking at the json file versus having to go into the code. On top of that, some device functions, i.e. `CreateErrorBuffer`, actually have to specify the error type more than once which is both annoying and error prone.\n\nFor future thought, I also don\u0027t think \"less code\" is always better. I think the previous version was more explicit whereas now we are basically hiding the impl more and understanding it is actually harder.",
+      "parentUuid": "67f45654_44562d3e",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b927eaa8_b21b0e5b",
         "filename": "src/dawn/native/null/DeviceNull.cpp",
         "patchSetId": 13
