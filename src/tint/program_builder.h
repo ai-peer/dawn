@@ -15,6 +15,7 @@
 #ifndef SRC_TINT_PROGRAM_BUILDER_H_
 #define SRC_TINT_PROGRAM_BUILDER_H_
 
+#include <memory>
 #include <string>
 #include <unordered_set>
 #include <utility>
@@ -427,13 +428,13 @@ class ProgramBuilder {
     /// @returns a reference to the program's SymbolTable
     SymbolTable& Symbols() {
         AssertNotMoved();
-        return symbols_;
+        return *symbols_;
     }
 
     /// @returns a reference to the program's SymbolTable
     const SymbolTable& Symbols() const {
         AssertNotMoved();
-        return symbols_;
+        return *symbols_;
     }
 
     /// @returns a reference to the program's diagnostics
@@ -3838,7 +3839,7 @@ class ProgramBuilder {
     ConstantAllocator constant_nodes_;
     ast::Module* ast_;
     sem::Info sem_;
-    SymbolTable symbols_{id_};
+    std::unique_ptr<SymbolTable> symbols_;
     diag::List diagnostics_;
 
     /// The source to use when creating AST nodes without providing a Source as
