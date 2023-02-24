@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef5b707_8d9a03ab",
+        "filename": "src/tint/symbol_table.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-24T17:39:42Z",
+      "side": 1,
+      "message": "You\u0027d get even more wins if we added `utils::Hashmap::ReferenceT::Set()`.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 5
+      },
+      "revId": "1651be163e4e2d77a639fa0e74a028294c558c76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
