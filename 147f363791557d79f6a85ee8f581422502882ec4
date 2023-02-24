@@ -108,6 +108,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61ba5871_cc279bc9",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T22:58:11Z",
+      "side": 1,
+      "message": "it\u0027s a good point that the masking makes the HandleError check cleaner. thanks for being flexible - I recognize that a lot of this is quite subjective",
+      "parentUuid": "765f9efb_57a5219e",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b927eaa8_b21b0e5b",
