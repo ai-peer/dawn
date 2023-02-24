@@ -22,13 +22,11 @@
 #include "src/tint/builtin/builtin.h"
 #include "src/tint/program_builder.h"
 #include "src/tint/sem/array_count.h"
-#include "src/tint/sem/call.h"
 #include "src/tint/sem/index_accessor_expression.h"
 #include "src/tint/sem/load.h"
 #include "src/tint/sem/member_accessor_expression.h"
 #include "src/tint/sem/statement.h"
 #include "src/tint/sem/type_expression.h"
-#include "src/tint/sem/value_constructor.h"
 #include "src/tint/sem/variable.h"
 #include "src/tint/type/array.h"
 #include "src/tint/type/reference.h"
@@ -49,23 +47,36 @@ struct PackedVec3::State {
     /// @param program the source program
     explicit State(const Program* program) : src(program) {}
 
+    /// WrapperStructKey is the hashmap key to a packed vec3 wrapper struct.
+    struct WrapperStructKey {
+        const type::Type* type = nullptr;  // The vec3 type.
+        bool array_element = false;        // Is it used as an array element?
+        bool operator==(const WrapperStructKey& rhs) const {
+            return type == rhs.type && array_element == rhs.array_element;
+        }
+        struct Hasher {
+            inline std::size_t operator()(const WrapperStructKey& u) const {
+                return utils::Hash(u.type, u.array_element);
+            }
+        };
+    };
+
     /// The name of the struct member used when wrapping packed vec3 types.
     static constexpr const char* kStructMemberName = "elements";
 
+    /// TODO: update name and comment
     /// The names of the structures used to wrap packed vec3 types used in arrays.
-    utils::Hashmap<const type::Type*, Symbol, 4> array_element_struct_names;
+    utils::Hashmap<WrapperStructKey, Symbol, 4, WrapperStructKey::Hasher>
+        array_element_struct_names;
 
-    /// A cache of structures used for shader IO.
-    utils::Hashset<const type::Type*, 4> io_structs;
+    /// A cache of host-shareable structures that have been rewritten.
+    utils::Hashmap<const type::Type*, Symbol, 4> rewritten_structs;
 
     /// A map from type to the name of a helper function used to pack that type.
     utils::Hashmap<const type::Type*, Symbol, 4> pack_helpers;
 
     /// A map from type to the name of a helper function used to unpack that type.
     utils::Hashmap<const type::Type*, Symbol, 4> unpack_helpers;
-
-    /// A flag to track whether the chromium_internal_relaxed_uniform_layout extension was enabled.
-    bool has_relaxed_uniform_layout = false;
 
     /// @param ty the type to test
     /// @returns true if `ty` is a vec3, false otherwise
@@ -79,49 +90,21 @@ struct PackedVec3::State {
     }
 
     /// @param ty the type to test
-    /// @param include_structs `true` to check structures (defaults to `false`)
     /// @returns true if `ty` is or contains a vec3, false otherwise
-    bool ContainsVec3(const type::Type* ty, bool include_structs = false) {
+    bool ContainsVec3(const type::Type* ty) {
         return Switch(
             ty,  //
             [&](const type::Vector* vec) { return IsVec3(vec); },
-            [&](const type::Matrix* mat) {
-                return ContainsVec3(mat->ColumnType(), include_structs);
-            },
-            [&](const type::Array* arr) { return ContainsVec3(arr->ElemType(), include_structs); },
+            [&](const type::Matrix* mat) { return ContainsVec3(mat->ColumnType()); },
+            [&](const type::Array* arr) { return ContainsVec3(arr->ElemType()); },
             [&](const type::Struct* str) {
-                if (!include_structs) {
-                    return false;
-                }
                 for (auto* member : str->Members()) {
-                    if (ContainsVec3(member->Type(), include_structs)) {
+                    if (ContainsVec3(member->Type())) {
                         return true;
                     }
                 }
                 return false;
             });
-    }
-
-    /// @param ty the type to test
-    /// @returns true if `ty` is a struct used for shader IO, false otherwise
-    bool IsIOStruct(const type::Type* ty) {
-        if (io_structs.Contains(ty)) {
-            return true;
-        }
-        if (auto* str = ty->As<sem::Struct>()) {
-            // Check each member for IO attributes.
-            for (auto* member : str->Members()) {
-                auto& attributes = member->Declaration()->attributes;
-                for (auto* attr : attributes) {
-                    if (attr->IsAnyOf<ast::BuiltinAttribute, ast::InterpolateAttribute,
-                                      ast::InvariantAttribute, ast::LocationAttribute>()) {
-                        io_structs.Add(str);
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
     }
 
     /// Create a `__packed_vec3` type with the same element type as `ty`.
@@ -134,43 +117,48 @@ struct PackedVec3::State {
                     CreateASTTypeFor(ctx, vec->type()));
     }
 
+    /// TODO: Update comment and name
     /// Rewrite an array or matrix type using `__packed_vec3` if needed.
     /// Wraps the `__packed_vec3` in a struct to give it the 16-byte alignment it needs when
     /// contained inside an array. Matrices with three rows become arrays of columns.
     /// @param ty the type to rewrite
+    /// @param array_element `true` if this is being called for the element of an array
     /// @returns the new AST type, or nullptr if rewriting was not necessary
-    ast::Type RewriteArrayType(const type::Type* ty) {
+    ast::Type RewriteArrayType(const type::Type* ty, bool array_element = false) {
         return Switch(
             ty,
             [&](const type::Vector* vec) -> ast::Type {
                 if (IsVec3(vec)) {
-                    return b.ty(array_element_struct_names.GetOrCreate(vec->type(), [&]() {
+                    WrapperStructKey key{vec, array_element};
+                    return b.ty(array_element_struct_names.GetOrCreate(key, [&]() {
                         // Create a struct with a single `__packed_vec3` member.
-                        auto name = b.Symbols().New("tint_vec3_struct");
-                        b.Structure(b.Ident(name),
-                                    utils::Vector{b.Member(kStructMemberName, MakePackedVec3(vec))},
-                                    utils::Empty);
+                        auto name = b.Symbols().New(
+                            "tint_packed_vec3_" + vec->type()->FriendlyName(src->Symbols()) +
+                            (array_element ? "_array_element" : "_struct_member"));
+                        // TODO: add attribute to align it, if in array (or if not struct)
+                        // TODO: would need two different structs then - one aligned one not
+                        utils::Vector<const ast::Attribute*, 1> attributes;
+                        if (array_element) {
+                            attributes.Push(b.MemberAlign(AInt(vec->Align())));
+                        }
+                        auto* member =
+                            b.Member(kStructMemberName, MakePackedVec3(vec), std::move(attributes));
+                        b.Structure(b.Ident(name), utils::Vector{member}, utils::Empty);
                         return name;
                     }));
                 }
                 return {};
             },
             [&](const type::Matrix* mat) -> ast::Type {
-                auto new_col_type = RewriteArrayType(mat->ColumnType());
+                auto new_col_type = RewriteArrayType(mat->ColumnType(), /* array_element */ true);
                 if (new_col_type) {
                     // Rewrite the matrix as an array of `tint_vec3_struct`.
-                    if (mat->ColumnType()->type()->Is<type::F16>() && !has_relaxed_uniform_layout) {
-                        // If the column type is an f16, we need to disable alignment validation
-                        // checks which are stricter for arrays than matrices.
-                        b.Enable(builtin::Extension::kChromiumInternalRelaxedUniformLayout);
-                        has_relaxed_uniform_layout = true;
-                    }
                     return b.ty.array(new_col_type, u32(mat->columns()));
                 }
                 return {};
             },
             [&](const type::Array* arr) -> ast::Type {
-                auto new_type = RewriteArrayType(arr->ElemType());
+                auto new_type = RewriteArrayType(arr->ElemType(), /* array_element */ true);
                 if (new_type) {
                     // Rewrite the array with the modified element type.
                     utils::Vector<const ast::Attribute*, 1> attrs;
@@ -188,6 +176,47 @@ struct PackedVec3::State {
                     }
                 }
                 return {};
+            },
+            [&](const sem::Struct* str) -> ast::Type {
+                // TODO: need these checks here, or done outside?
+                if (ContainsVec3(str) && str->IsHostShareable()) {
+                    auto name = rewritten_structs.GetOrCreate(str, [&]() {
+                        utils::Vector<const ast::StructMember*, 4> members;
+                        for (auto* member : str->Members()) {
+                            // If the member type contains a vec3, rewrite it.
+                            auto new_type = RewriteArrayType(member->Type());
+                            if (new_type) {
+                                // Copy the member attributes.
+                                bool has_explicit_align = false;
+                                utils::Vector<const ast::Attribute*, 4> attributes;
+                                for (auto* attr : member->Declaration()->attributes) {
+                                    if (attr->Is<ast::StructMemberAlignAttribute>()) {
+                                        has_explicit_align = true;
+                                    }
+                                    attributes.Push(ctx.Clone(attr));
+                                }
+                                // If the alignment wasn't already specified, add an attribute to
+                                // make sure that we don't alter the alignment when using the packed
+                                // vector type.
+                                if (!has_explicit_align) {
+                                    attributes.Push(b.MemberAlign(AInt(member->Align())));
+                                }
+                                members.Push(b.Member(ctx.Clone(member->Name()), new_type,
+                                                      std::move(attributes)));
+                            } else {
+                                // No vec3s, just clone the member as is.
+                                members.Push(ctx.Clone(member->Declaration()));
+                            }
+                        }
+                        auto struct_name = b.Symbols().New(
+                            src->Symbols().NameFor(str->Declaration()->name->symbol) +
+                            "_tint_packed_vec3");
+                        b.Structure(struct_name, std::move(members));
+                        return struct_name;
+                    });
+                    return b.ty(name);
+                }
+                return {};
             });
     }
 
@@ -201,13 +230,15 @@ struct PackedVec3::State {
     Symbol MakePackUnpackHelper(
         const char* name_prefix,
         const type::Type* ty,
-        const std::function<const ast::Expression*(const ast::Expression*, const type::Type*)>&
-            pack_or_unpack_element,
+        const std::function<const ast::Expression*(const ast::Expression*,
+                                                   const type::Type*,
+                                                   bool array_element)>& pack_or_unpack_element,
         const std::function<ast::Type()>& in_type,
         const std::function<ast::Type()>& out_type) {
         // Determine the number of array elements and the element type.
         uint32_t num_elements = 0;
         const type::Type* element_type = nullptr;
+        // TODO: switch?
         if (auto* arr = ty->As<type::Array>()) {
             TINT_ASSERT(Transform, arr->ConstantCount());
             num_elements = arr->ConstantCount().value();
@@ -215,10 +246,38 @@ struct PackedVec3::State {
         } else if (auto* mat = ty->As<type::Matrix>()) {
             num_elements = mat->columns();
             element_type = mat->ColumnType();
+        } else if (auto* str = ty->As<sem::Struct>()) {
+            // Generate an expression for packing or unpacking an element of the array.
+            // auto* element = pack_or_unpack_element(b.IndexAccessor("in", "i"), element_type);
+
+            // TODO: update comment
+            // Generate the body of the function:
+            // fn helper(in : in_type) -> out_type {
+            //   var result : out_type;
+            //   for (var i = 0u; i < num_elements; i = i + 1) {
+            //     result[i] = pack_or_unpack_element(in[i]);
+            //   }
+            //   return result;
+            // }
+            utils::Vector<const ast::Statement*, 4> statements;
+            statements.Push(b.Decl(b.Var("result", out_type())));
+            for (auto* member : str->Members()) {
+                auto* element = pack_or_unpack_element(
+                    b.MemberAccessor("in", b.Ident(ctx.Clone(member->Name()))), member->Type(),
+                    /* array_element */ false);
+                statements.Push(b.Assign(
+                    b.MemberAccessor("result", b.Ident(ctx.Clone(member->Name()))), element));
+            }
+            statements.Push(b.Return("result"));
+            auto name = b.Symbols().New(name_prefix);
+            b.Func(name, utils::Vector{b.Param("in", in_type())}, out_type(),
+                   std::move(statements));
+            return name;
         }
 
         // Generate an expression for packing or unpacking an element of the array.
-        auto* element = pack_or_unpack_element(b.IndexAccessor("in", "i"), element_type);
+        auto* element = pack_or_unpack_element(b.IndexAccessor("in", "i"), element_type,
+                                               /* array_element */ true);
 
         // Generate the body of the function:
         // fn helper(in : in_type) -> out_type {
@@ -252,7 +311,7 @@ struct PackedVec3::State {
         auto helper = unpack_helpers.GetOrCreate(ty, [&]() {
             return MakePackUnpackHelper(
                 "unpack_array", ty,
-                [&](auto* element, const type::Type* element_type) -> const ast::Expression* {
+                [&](auto* element, const type::Type* element_type, bool) -> const ast::Expression* {
                     if (element_type->Is<type::Vector>()) {
                         // Unpack a vector element by extracting the member from the wrapper struct
                         // and then casting it to a regular vec3.
@@ -277,11 +336,12 @@ struct PackedVec3::State {
         auto helper = pack_helpers.GetOrCreate(ty, [&]() {
             return MakePackUnpackHelper(
                 "pack_array", ty,
-                [&](auto* element, const type::Type* element_type) -> const ast::Expression* {
+                [&](auto* element, const type::Type* element_type,
+                    bool array_element) -> const ast::Expression* {
                     if (element_type->Is<type::Vector>()) {
                         // Pack a vector element by casting it to a packed_vec3 and then
                         // constructing a wrapper struct.
-                        return b.Call(RewriteArrayType(element_type),
+                        return b.Call(RewriteArrayType(element_type, array_element),
                                       b.Call(MakePackedVec3(element_type), element));
                     } else {
                         return PackArray(element, element_type);
@@ -300,7 +360,7 @@ struct PackedVec3::State {
         for (auto* decl : src->AST().GlobalVariables()) {
             auto* var = sem.Get<sem::GlobalVariable>(decl);
             if (var && builtin::IsHostShareable(var->AddressSpace()) &&
-                ContainsVec3(var->Type()->UnwrapRef(), /* include_structs */ true)) {
+                ContainsVec3(var->Type()->UnwrapRef())) {
                 return true;
             }
         }
@@ -313,6 +373,15 @@ struct PackedVec3::State {
         if (!ShouldRun()) {
             return SkipTransform;
         }
+
+        // Changing the types of certain structure members can trigger stricter layout validation
+        // rules for the uniform address space. In particular, replacing 16-bit matrices with arrays
+        // violates the requirement that the array element stride is a multiple of 16 bytes, and
+        // replacing vec3s with a structure violates the requirement that there must be at least 16
+        // bytes from the start of a structure to the start of the next member.
+        // Disable these validation rules using an internal extension, as MSL does not have these
+        // restrictions.
+        b.Enable(builtin::Extension::kChromiumInternalRelaxedUniformLayout);
 
         // Track expressions that need to be packed or unpacked.
         utils::Hashset<const sem::ValueExpression*, 8> to_pack;
@@ -328,7 +397,10 @@ struct PackedVec3::State {
                 // The expression will already be packed, so skip the pending unpack.
                 to_unpack.Remove(expr);
                 if (IsVec3(expr->Type()) &&
-                    expr->UnwrapLoad()->Is<sem::IndexAccessorExpression>()) {
+                    expr->UnwrapLoad()
+                        ->IsAnyOf<sem::IndexAccessorExpression, sem::StructMemberAccess>()) {
+                    // TODO: and direct too, if we wrap that?
+                    // TODO: and update comment
                     // If the expression produces a vec3 from an array index expression, extract the
                     // packed vector from the wrapper struct.
                     ctx.Replace(
@@ -340,6 +412,11 @@ struct PackedVec3::State {
             }
         };
 
+        /// TODO: could potentially unify the struct member and array element logic by always
+        // creating a wrapper struct, but making the member aligned only for the array case (and
+        // making the outer member aligned in the struct case).
+
+        /// TODO: update comment to talk about multi-versioning structs
         // Replace vec3 types with `__packed_vec3` types by rewriting type specifiers and inserting
         // code to pack or unpack certain expression results.
         //
@@ -364,28 +441,10 @@ struct PackedVec3::State {
         for (auto* node : ctx.src->ASTNodes().Objects()) {
             Switch(
                 sem.Get(node),
-                [&](const sem::Struct* str) {
-                    // Skip structs used for shader IO as they cannot use packed vectors.
-                    if (IsIOStruct(str)) {
-                        return;
-                    }
-                    for (auto* member : str->Members()) {
-                        if (IsVec3(member->Type())) {
-                            // If the member type is a vec3, add the packed attribute.
-                            ctx.Replace(member->Declaration()->type.expr,
-                                        MakePackedVec3(member->Type()).expr);
-                        } else {
-                            // If the member type contains a vec3, rewrite it.
-                            auto new_type = RewriteArrayType(member->Type());
-                            if (new_type) {
-                                ctx.Replace(member->Declaration()->type.expr, new_type.expr);
-                            }
-                        }
-                    }
-                },
                 [&](const sem::TypeExpression* type) {
                     // Rewrite pointers to types that contain vec3s.
-                    if (auto* ptr = type->Type()->As<type::Pointer>()) {
+                    if (auto* ptr = type->Type()->As<type::Pointer>();
+                        ptr && builtin::IsHostShareable(ptr->AddressSpace())) {
                         auto* store_type = ptr->StoreType();
                         ast::Type new_store_type{};
                         if (IsVec3(store_type)) {
@@ -404,80 +463,63 @@ struct PackedVec3::State {
                     }
                 },
                 [&](const sem::Variable* var) {
-                    if (!var->Declaration()->Is<ast::Var>()) {
+                    if (!builtin::IsHostShareable(var->AddressSpace())) {
                         return;
                     }
 
-                    // Rewrite the var type, if it was explicitly specified.
+                    // Rewrite the var type, if it contains vec3s.
                     auto* store_type = var->Type()->UnwrapRef();
-                    if (var->Declaration()->type) {
-                        ast::Type new_store_type{};
-                        if (IsVec3(store_type)) {
-                            new_store_type = MakePackedVec3(store_type);
-                        } else {
-                            new_store_type = RewriteArrayType(store_type);
-                        }
-                        if (new_store_type) {
-                            ctx.Replace(var->Declaration()->type.expr, new_store_type.expr);
-                        }
+                    ast::Type new_store_type{};
+                    if (IsVec3(store_type)) {
+                        // TODO: consider unifying this as well
+                        new_store_type = MakePackedVec3(store_type);
+                    } else {
+                        new_store_type = RewriteArrayType(store_type);
                     }
-
-                    // Convert the initializer expression to a packed type if necessary.
-                    pack_if_needed(var->Initializer());
-                },
-                [&](const sem::Call* call) {
-                    // Look for struct constructors, and pack their argument expressions if needed.
-                    if (auto* init = call->Target()->As<sem::ValueConstructor>()) {
-                        if (auto* str = init->ReturnType()->As<sem::Struct>()) {
-                            for (auto* arg : call->Arguments()) {
-                                pack_if_needed(arg);
-                            }
-                        }
+                    if (new_store_type) {
+                        ctx.Replace(var->Declaration()->type.expr, new_store_type.expr);
                     }
                 },
                 [&](const sem::Statement* stmt) {
                     // Pack the RHS of assignment statements that are writing to packed types.
                     if (auto* assign = stmt->Declaration()->As<ast::AssignmentStatement>()) {
-                        if (auto* member = sem.GetVal(assign->lhs)->As<sem::StructMemberAccess>()) {
-                            // Skip assignments to shader IO struct members, which are never packed.
-                            if (IsIOStruct(member->Object()->Type()->UnwrapRef())) {
-                                return;
-                            }
+                        if (!builtin::IsHostShareable(sem.GetVal(assign->lhs)
+                                                          ->Type()
+                                                          ->As<type::Reference>()
+                                                          ->AddressSpace())) {
+                            // Skip assignments to address space that are not host-shareable.
+                            return;
                         }
+                        // TODO: just inline, only call now?
                         pack_if_needed(sem.GetVal(assign->rhs));
                     }
                 },
                 [&](const sem::Load* load) {
                     // Unpack loads of packed types.
-                    if (ContainsVec3(load->Type())) {
+                    if (ContainsVec3(load->Type()) &&
+                        builtin::IsHostShareable(load->ReferenceType()->AddressSpace())) {
                         to_unpack.Add(load);
                     }
                 },
                 [&](const sem::StructMemberAccess* accessor) {
-                    // Unpack packed values that are extracted from structs.
-                    // Skip accesses to shader IO struct members, which are never packed.
-                    if (IsIOStruct(accessor->Object()->Type())) {
-                        return;
-                    }
-                    if (ContainsVec3(accessor->Type())) {
-                        to_unpack.Add(accessor);
+                    // TODO: comment
+                    auto* ref = accessor->Object()->Type()->As<type::Reference>();
+                    if (ref && builtin::IsHostShareable(ref->AddressSpace()) &&
+                        IsVec3(accessor->Type()->UnwrapRef())) {
+                        ctx.Replace(node, b.MemberAccessor(ctx.Clone(accessor->Declaration()),
+                                                           kStructMemberName));
                     }
                 },
                 [&](const sem::IndexAccessorExpression* accessor) {
-                    if (to_unpack.Contains(accessor->Object())) {
-                        // If we are extracting a value that contains a vec3 from an object that is
-                        // itself being unpacked, move the unpack to the result. This occurs when
-                        // the root object is a structure (handled above).
-                        if (ContainsVec3(accessor->Type())) {
-                            to_unpack.Remove(accessor->Object());
-                            to_unpack.Add(accessor);
-                        }
-                    } else if (auto* ref = accessor->Type()->As<type::Reference>()) {
-                        // If we are extracting a reference to a vec3, extract the packed vector
-                        // from the wrapper struct.
-                        if (IsVec3(ref->StoreType())) {
-                            ctx.Replace(node, b.MemberAccessor(ctx.Clone(accessor->Declaration()),
-                                                               kStructMemberName));
+                    if (auto* ref = accessor->Type()->As<type::Reference>()) {
+                        if (builtin::IsHostShareable(ref->AddressSpace())) {
+                            // If we are extracting a reference to a vec3, extract the packed vector
+                            // from the wrapper struct.
+                            if (IsVec3(ref->StoreType())) {
+                                ctx.Replace(node,
+                                            b.MemberAccessor(ctx.Clone(accessor->Declaration()),
+                                                             kStructMemberName));
+                            }
                         }
                     }
                 });
@@ -496,32 +538,42 @@ struct PackedVec3::State {
         for (auto* expr : to_unpack_sorted) {
             TINT_ASSERT(Transform, ContainsVec3(expr->Type()));
             auto* packed = ctx.Clone(expr->Declaration());
+            const ast::Expression* unpacked = nullptr;
             if (IsVec3(expr->Type())) {
-                if (expr->UnwrapLoad()->Is<sem::IndexAccessorExpression>()) {
+                // TODO: wrap direct in struct too to unify this?
+                if (expr->UnwrapLoad()
+                        ->IsAnyOf<sem::IndexAccessorExpression, sem::StructMemberAccess>()) {
                     // If we are unpacking a vec3 that came from an array accessor, extract the
                     // vector from the wrapper struct.
                     packed = b.MemberAccessor(packed, kStructMemberName);
                 }
                 // Cast the packed vector to a regular vec3.
-                ctx.Replace(expr->Declaration(),
-                            b.Call(CreateASTTypeFor(ctx, expr->Type()), packed));
+                unpacked = b.Call(CreateASTTypeFor(ctx, expr->Type()), packed);
             } else {
                 // Use a helper function to unpack an array or matrix.
-                ctx.Replace(expr->Declaration(), UnpackArray(packed, expr->Type()));
+                unpacked = UnpackArray(packed, expr->Type());
             }
+            TINT_ASSERT(Transform, unpacked != nullptr);
+            ctx.Replace(expr->Declaration(), unpacked);
         }
 
         // Apply all of the pending pack operations that we have collected.
         for (auto* expr : to_pack_sorted) {
             TINT_ASSERT(Transform, ContainsVec3(expr->Type()));
             auto* unpacked = ctx.Clone(expr->Declaration());
+            const ast::Expression* packed = nullptr;
             if (IsVec3(expr->Type())) {
                 // Cast the regular vec3 to a packed vector type.
-                ctx.Replace(expr->Declaration(), b.Call(MakePackedVec3(expr->Type()), unpacked));
+                // // TODO: can we just use PackArray (renamed) for this all the time now?
+                // packed = b.Call(RewriteArrayType(expr->Type()),
+                //                 b.Call(MakePackedVec3(expr->Type()), unpacked));
+                packed = b.Call(MakePackedVec3(expr->Type()), unpacked);
             } else {
                 // Use a helper function to pack an array or matrix.
-                ctx.Replace(expr->Declaration(), PackArray(unpacked, expr->Type()));
+                packed = PackArray(unpacked, expr->Type());
             }
+            TINT_ASSERT(Transform, packed != nullptr);
+            ctx.Replace(expr->Declaration(), packed);
         }
 
         ctx.Clone();

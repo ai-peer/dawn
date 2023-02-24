@@ -13,12 +13,16 @@
 // limitations under the License.
 
 #include "src/tint/transform/packed_vec3.h"
+#include "src/tint/sem/struct.h"
 
 #include <string>
 #include <utility>
 #include <vector>
 
+#include "src/tint/ast/module.h"
+#include "src/tint/sem/variable.h"
 #include "src/tint/transform/test_helper.h"
+#include "src/tint/type/array.h"
 #include "src/tint/utils/string.h"
 
 namespace tint::transform {
@@ -204,6 +208,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage> v : __packed_vec3<f32>;
 
 fn f() {
@@ -227,6 +233,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage> v : __packed_vec3<f32>;
 
 fn f() {
@@ -250,6 +258,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage> v : __packed_vec3<f32>;
 
 fn f() {
@@ -273,6 +283,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 fn f() {
@@ -297,6 +309,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 @group(0) @binding(1) var<uniform> in : __packed_vec3<f32>;
@@ -322,6 +336,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 fn f() {
@@ -345,6 +361,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 fn f() {
@@ -368,11 +386,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -380,7 +401,7 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
   return result;
 }
 
-@group(0) @binding(0) var<storage> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   let x = unpack_array(arr);
@@ -403,11 +424,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   let x = vec3<f32>(arr[0].elements);
@@ -430,11 +454,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   let x = arr[0].elements.y;
@@ -457,11 +484,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   let x = arr[0].elements[1];
@@ -484,19 +514,22 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_vec3_struct, 2u> {
-  var result : array<tint_vec3_struct, 2u>;
+fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
+  var result : array<tint_packed_vec3_f32_array_element, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 2u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 2u>;
 
 fn f() {
   arr = pack_array(array(vec3(1.5, 2.5, 3.5), vec3(4.5, 5.5, 6.5)));
@@ -520,13 +553,16 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 2u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 2u>;
 
-@group(0) @binding(1) var<uniform> in : array<tint_vec3_struct, 2u>;
+@group(0) @binding(1) var<uniform> in : array<tint_packed_vec3_f32_array_element, 2u>;
 
 fn f() {
   arr = in;
@@ -549,11 +585,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   arr[0].elements = __packed_vec3<f32>(vec3(1.23));
@@ -579,13 +618,16 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(1) var<uniform> in_arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(1) var<uniform> in_arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 @group(0) @binding(2) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -611,11 +653,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   arr[0].elements.y = 1.23;
@@ -638,11 +683,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 fn f() {
   arr[0].elements[1] = 1.23;
@@ -665,11 +713,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -677,7 +728,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-@group(0) @binding(0) var<storage> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   let x = unpack_array(m);
@@ -700,11 +751,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   let x = vec3<f32>(m[1].elements);
@@ -727,11 +781,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   let x = vec3<f32>(m[1].elements).yz.x;
@@ -754,11 +811,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   let x = m[2].elements[1];
@@ -781,19 +841,22 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   m = pack_array(mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5));
@@ -817,13 +880,16 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(1) var<uniform> in : array<tint_vec3_struct, 3u>;
+@group(0) @binding(1) var<uniform> in : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   m = in;
@@ -846,11 +912,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   m[1].elements = __packed_vec3<f32>(vec3(1.23));
@@ -876,13 +945,16 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(1) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(1) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 @group(0) @binding(1) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -908,11 +980,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   m[1].elements.y = 1.23;
@@ -935,11 +1010,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   m[1].elements[2] = 1.23;
@@ -962,11 +1040,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -974,7 +1055,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array(in[i]);
@@ -982,7 +1063,7 @@ fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f
   return result;
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   let x = unpack_array_1(arr);
@@ -1005,11 +1086,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -1017,7 +1101,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   let x = unpack_array(arr[0]);
@@ -1040,11 +1124,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   let x = vec3<f32>(arr[0][1].elements);
@@ -1067,11 +1154,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   let x = arr[0][1].elements.y;
@@ -1094,11 +1184,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   let x = arr[0][1].elements[2];
@@ -1121,27 +1214,30 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_vec3_struct, 3u>, 2u> {
-  var result : array<array<tint_vec3_struct, 3u>, 2u>;
+fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 2u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
     result[i] = pack_array(in[i]);
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 2u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
 
 fn f() {
   arr = pack_array_1(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5)));
@@ -1165,13 +1261,16 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 2u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
 
-@group(0) @binding(1) var<uniform> in : array<array<tint_vec3_struct, 3u>, 2u>;
+@group(0) @binding(1) var<uniform> in : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
 
 fn f() {
   arr = in;
@@ -1194,19 +1293,22 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   arr[0] = pack_array(mat3x3(1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7, 8.8, 9.9));
@@ -1232,15 +1334,18 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(1) var<uniform> in_arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<uniform> in_arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(2) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   arr[0] = in_arr[0];
@@ -1264,11 +1369,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   arr[0][1].elements = __packed_vec3<f32>(vec3(1.23));
@@ -1296,15 +1404,18 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(1) var<uniform> in_arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<uniform> in_arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(2) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 @group(0) @binding(3) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -1331,11 +1442,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   arr[0][1].elements.y = 1.23;
@@ -1358,11 +1472,14 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
 fn f() {
   arr[0][1].elements[2] = 1.23;
@@ -1389,14 +1506,31 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+fn unpack_array(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = P;
+  let x = unpack_array(P);
 }
 )";
 
@@ -1420,14 +1554,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = vec3<f32>(P.v);
+  let x = vec3<f32>(P.v.elements);
 }
 )";
 
@@ -1451,14 +1596,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = vec3<f32>(P.v).yz.x;
+  let x = vec3<f32>(P.v.elements).yz.x;
 }
 )";
 
@@ -1482,14 +1638,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = P.v[1];
+  let x = P.v.elements[1];
 }
 )";
 
@@ -1513,14 +1680,31 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+fn pack_array(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P = S(__packed_vec3<f32>(vec3(1.23)));
+  P = pack_array(S(vec3(1.23)));
 }
 )";
 
@@ -1545,13 +1729,24 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
 
-@group(0) @binding(1) var<uniform> in : S;
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<uniform> in : S_tint_packed_vec3;
 
 fn f() {
   P = in;
@@ -1578,14 +1773,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P.v = __packed_vec3<f32>(vec3(1.23));
+  P.v.elements = __packed_vec3<f32>(vec3(1.23));
 }
 )";
 
@@ -1613,20 +1819,33 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v1 : __packed_vec3<f32>,
-  v2 : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v1 : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  v2 : tint_packed_vec3_f32_struct_member,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+struct S {
+  v1 : vec3<f32>,
+  v2 : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
 
 @group(0) @binding(2) var<uniform> in_vec : __packed_vec3<f32>;
 
 fn f() {
-  P.v1 = in_str.v1;
-  P.v2 = in_vec;
+  P.v1.elements = in_str.v1.elements;
+  P.v2.elements = in_vec;
 }
 )";
 
@@ -1650,14 +1869,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P.v.y = 1.23;
+  P.v.elements.y = 1.23;
 }
 )";
 
@@ -1681,14 +1911,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P.v[1] = 1.23;
+  P.v.elements[1] = 1.23;
 }
 )";
 
@@ -1712,18 +1953,40 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr = unpack_array(in.arr);
+  return result;
+}
+
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = P;
+  let x = unpack_array_1(P);
 }
 )";
 
@@ -1747,11 +2010,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -1760,10 +2031,10 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
 }
 
 struct S {
-  arr : array<tint_vec3_struct, 4u>,
+  arr : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = unpack_array(P.arr);
@@ -1790,15 +2061,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = vec3<f32>(P.arr[0].elements);
@@ -1825,15 +2104,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = P.arr[0].elements.y;
@@ -1860,15 +2147,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = P.arr[0].elements[1];
@@ -1896,26 +2191,40 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_vec3_struct, 2u> {
-  var result : array<tint_vec3_struct, 2u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 2u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
+  var result : array<tint_packed_vec3_f32_array_element, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 2u>,
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = pack_array(in.arr);
+  return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 2>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P = S(pack_array(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5))));
+  P = pack_array_1(S(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5))));
 }
 )";
 
@@ -1940,17 +2249,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 2u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 2u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 2>,
+}
 
-@group(0) @binding(1) var<uniform> in : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<uniform> in : S_tint_packed_vec3;
 
 fn f() {
   P = in;
@@ -1977,23 +2294,31 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_vec3_struct, 2u> {
-  var result : array<tint_vec3_struct, 2u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 2u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
+  var result : array<tint_packed_vec3_f32_array_element, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  arr : array<tint_vec3_struct, 2u>,
+  arr : array<vec3<f32>, 2>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr = pack_array(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5)));
@@ -2024,20 +2349,30 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr1 : array<tint_vec3_struct, 2u>,
-  arr2 : array<tint_vec3_struct, 2u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr1 : array<tint_packed_vec3_f32_array_element, 2u>,
+  @align(16)
+  arr2 : array<tint_packed_vec3_f32_array_element, 2u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr1 : array<vec3<f32>, 2>,
+  arr2 : array<vec3<f32>, 2>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_arr : array<tint_vec3_struct, 2u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
+
+@group(0) @binding(2) var<uniform> in_arr : array<tint_packed_vec3_f32_array_element, 2u>;
 
 fn f() {
   P.arr1 = in_str.arr1;
@@ -2065,15 +2400,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0].elements = __packed_vec3<f32>(vec3(1.23));
@@ -2105,19 +2448,27 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_arr : array<tint_vec3_struct, 4u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
+
+@group(0) @binding(2) var<uniform> in_arr : array<tint_packed_vec3_f32_array_element, 4u>;
 
 @group(0) @binding(3) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -2148,15 +2499,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0].elements.y = 1.23;
@@ -2183,15 +2542,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0].elements[1] = 1.23;
@@ -2218,18 +2585,40 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.m = unpack_array(in.m);
+  return result;
+}
+
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = P;
+  let x = unpack_array_1(P);
 }
 )";
 
@@ -2253,11 +2642,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -2266,10 +2663,10 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
 }
 
 struct S {
-  m : array<tint_vec3_struct, 3u>,
+  m : mat3x3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = unpack_array(P.m);
@@ -2296,15 +2693,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = vec3<f32>(P.m[1].elements);
@@ -2331,15 +2736,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = vec3<f32>(P.m[1].elements).yz.x;
@@ -2366,15 +2779,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = P.m[2].elements[1];
@@ -2402,26 +2823,40 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.m = pack_array(in.m);
+  return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P = S(pack_array(mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5)));
+  P = pack_array_1(S(mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5)));
 }
 )";
 
@@ -2446,17 +2881,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
 
-@group(0) @binding(1) var<uniform> in : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<uniform> in : S_tint_packed_vec3;
 
 fn f() {
   P = in;
@@ -2483,23 +2926,31 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  m : array<tint_vec3_struct, 3u>,
+  m : mat3x3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.m = pack_array(mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5));
@@ -2530,20 +2981,30 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m1 : array<tint_vec3_struct, 3u>,
-  m2 : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m1 : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  m2 : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m1 : mat3x3<f32>,
+  m2 : mat3x3<f32>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
+
+@group(0) @binding(2) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   P.m1 = in_str.m1;
@@ -2571,15 +3032,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.m[1].elements = __packed_vec3<f32>(vec3(1.23));
@@ -2611,19 +3080,27 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
+
+@group(0) @binding(2) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 @group(0) @binding(3) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -2654,15 +3131,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.m[1].elements.y = 1.23;
@@ -2689,15 +3174,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  m : array<tint_vec3_struct, 3u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.m[1].elements[2] = 1.23;
@@ -2724,18 +3217,48 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr = unpack_array_1(in.arr);
+  return result;
+}
+
+struct S {
+  arr : array<mat3x3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  let x = P;
+  let x = unpack_array_2(P);
 }
 )";
 
@@ -2759,11 +3282,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -2771,7 +3302,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array(in[i]);
@@ -2780,10 +3311,10 @@ fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = unpack_array_1(P.arr);
@@ -2810,11 +3341,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -2823,10 +3362,10 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr : array<mat3x3<f32>, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = unpack_array(P.arr[0]);
@@ -2853,15 +3392,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = vec3<f32>(P.arr[0][1].elements);
@@ -2888,15 +3435,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = P.arr[0][1].elements.y;
@@ -2923,15 +3478,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let x = P.arr[0][1].elements[2];
@@ -2959,34 +3522,48 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_vec3_struct, 3u>, 2u> {
-  var result : array<array<tint_vec3_struct, 3u>, 2u>;
+fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 2u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
     result[i] = pack_array(in[i]);
   }
   return result;
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 2u>,
+fn pack_array_2(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = pack_array_1(in.arr);
+  return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 2>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
-  P = S(pack_array_1(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5))));
+  P = pack_array_2(S(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5))));
 }
 )";
 
@@ -3011,17 +3588,25 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 2u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 2>,
+}
 
-@group(0) @binding(1) var<uniform> in : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<uniform> in : S_tint_packed_vec3;
 
 fn f() {
   P = in;
@@ -3048,20 +3633,28 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_vec3_struct, 3u>, 2u> {
-  var result : array<array<tint_vec3_struct, 3u>, 2u>;
+fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 2u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
   for(var i : u32; (i < 2u); i = (i + 1)) {
     result[i] = pack_array(in[i]);
   }
@@ -3069,10 +3662,10 @@ fn pack_array_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_vec3_struct, 3u
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 2u>,
+  arr : array<mat3x3<f32>, 2>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr = pack_array_1(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5)));
@@ -3103,20 +3696,30 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr1 : array<array<tint_vec3_struct, 3u>, 2u>,
-  arr2 : array<array<tint_vec3_struct, 3u>, 2u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr1 : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>,
+  @align(16)
+  arr2 : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr1 : array<mat3x3<f32>, 2>,
+  arr2 : array<mat3x3<f32>, 2>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_arr : array<array<tint_vec3_struct, 3u>, 2u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
+
+@group(0) @binding(2) var<uniform> in_arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
 
 fn f() {
   P.arr1 = in_str.arr1;
@@ -3144,23 +3747,31 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0] = pack_array(mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5));
@@ -3192,21 +3803,29 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
 
-@group(0) @binding(3) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<uniform> in_arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+
+@group(0) @binding(3) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 fn f() {
   P.arr[0] = in_str.arr[0];
@@ -3235,15 +3854,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0][1].elements = __packed_vec3<f32>(vec3(1.23));
@@ -3277,21 +3904,29 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4>,
+}
 
-@group(0) @binding(1) var<uniform> in_str : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-@group(0) @binding(2) var<uniform> in_arr : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<uniform> in_str : S_tint_packed_vec3;
 
-@group(0) @binding(3) var<uniform> in_mat : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<uniform> in_arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+
+@group(0) @binding(3) var<uniform> in_mat : array<tint_packed_vec3_f32_array_element, 3u>;
 
 @group(0) @binding(4) var<uniform> in_vec : __packed_vec3<f32>;
 
@@ -3323,15 +3958,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0][1].elements.y = 1.23;
@@ -3358,15 +4001,23 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> P : S;
+struct S {
+  arr : array<mat3x3<f32>, 4u>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   P.arr[0][1].elements[2] = 1.23;
@@ -3384,9 +4035,10 @@ TEST_F(PackedVec3Test, StructMember_ExistingMemberAttributes) {
 struct S {
   @align(32) @size(32) v : vec3<f32>,
   @align(64) @size(64) arr : array<vec3<f32>, 4>,
+  @align(128) @size(128) x : u32,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<uniform> P : S;
 
 fn f() {
   let x = P.v[0];
@@ -3394,21 +4046,152 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
+}
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(32) @size(32)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(64) @size(64)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(128) @size(128)
+  x : u32,
 }
 
 struct S {
   @align(32) @size(32)
-  v : __packed_vec3<f32>,
+  v : vec3<f32>,
   @align(64) @size(64)
-  arr : array<tint_vec3_struct, 4u>,
+  arr : array<vec3<f32>, 4>,
+  @align(128) @size(128)
+  x : u32,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<uniform> P : S_tint_packed_vec3;
+
+fn f() {
+  let x = P.v.elements[0];
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ExistingMemberAttributes_SizeMatchesUnpackedVec3) {
+    // Test that the type we replace a vec3 with is not larger than it should be.
+    auto* src = R"(
+struct S {
+  @size(12) v : vec3<f32>,
+  @size(64) arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<uniform> P : S;
 
 fn f() {
   let x = P.v[0];
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @size(12) @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @size(64) @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+struct S {
+  @size(12)
+  v : vec3<f32>,
+  @size(64)
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<uniform> P : S_tint_packed_vec3;
+
+fn f() {
+  let x = P.v.elements[0];
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ExistingMemberAttributes_AlignTooSmall) {
+    // Test that we add an @align() attribute when the new alignment of the packed vec3 struct would
+    // be too small.
+    auto* src = R"(
+struct S {
+  a : u32,
+  v : vec3<f32>,
+  b : u32,
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<uniform> P : S;
+
+fn f() {
+  let x = P.v[0];
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  a : u32,
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  b : u32,
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+struct S {
+  a : u32,
+  v : vec3<f32>,
+  b : u32,
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<uniform> P : S_tint_packed_vec3;
+
+fn f() {
+  let x = P.v.elements[0];
 }
 )";
 
@@ -3435,34 +4218,124 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_vec3_struct, 4u> {
-  var result : array<tint_vec3_struct, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
-  return result;
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  a : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  b : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
 }
 
 struct S {
-  a : __packed_vec3<f32>,
-  b : __packed_vec3<f32>,
-  arr : array<tint_vec3_struct, 4u>,
+  a : vec3<f32>,
+  b : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> s : S;
+@group(0) @binding(0) var<storage> s : S_tint_packed_vec3;
 
 fn f() {
   let value_arr : array<vec3<f32>, 4> = array<vec3<f32>, 4>();
-  let x = S(__packed_vec3<f32>(value_arr[0]), s.arr[0].elements, pack_array(value_arr));
+  let x = S(value_arr[0], vec3<f32>(s.arr[0].elements), value_arr);
 }
 )";
 
     DataMap data;
     auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, WrapperStructLayout_MixedUsage) {
+    // Test the layout of the generated wrapper struct(s) when vec3s are used in both structures and
+    // arrays.
+    auto* src = R"(
+struct S {
+  v : vec3<f32>,
+  a : u32,
+}
+
+@group(0) @binding(0) var<storage, read_write> str : S;
+@group(0) @binding(1) var<storage, read_write> arr : array<vec3<f32>, 4>;
+
+fn main() {
+  str.v = arr[0];
+  arr[1] = str.v;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  a : u32,
+}
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S {
+  v : vec3<f32>,
+  a : u32,
+}
+
+@group(0) @binding(0) var<storage, read_write> str : S_tint_packed_vec3;
+
+@group(0) @binding(1) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 4u>;
+
+fn main() {
+  str.v.elements = arr[0].elements;
+  arr[1].elements = str.v.elements;
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    auto& vars = got.program.AST().GlobalVariables();
+    ASSERT_EQ(vars.Length(), 2u);
+
+    {
+        // Check the layout of the struct type of "str".
+        // The first member should have an alignment of 16 bytes, a size of 12 bytes, and the second
+        // member should have an offset of 12 bytes.
+        auto* sem_str = got.program.Sem().Get(vars[0]);
+        auto* str_ty = sem_str->Type()->UnwrapRef()->As<sem::Struct>();
+        ASSERT_NE(str_ty, nullptr);
+        ASSERT_EQ(str_ty->Members().Length(), 2u);
+        EXPECT_EQ(str_ty->Members()[0]->Align(), 16u);
+        EXPECT_EQ(str_ty->Members()[0]->Size(), 12u);
+        EXPECT_EQ(str_ty->Members()[1]->Offset(), 12u);
+    }
+
+    {
+        // Check the layout of the array type of "arr".
+        // The element stride should be 16 bytes.
+        auto* sem_arr = got.program.Sem().Get(vars[1]);
+        auto* arr_ty = sem_arr->Type()->UnwrapRef()->As<type::Array>();
+        ASSERT_NE(arr_ty, nullptr);
+        EXPECT_EQ(arr_ty->Stride(), 16u);
+    }
 
     EXPECT_EQ(expect, str(got));
 }
@@ -3516,6 +4389,103 @@ fn main(s1 : S1) -> S2 {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(PackedVec3Test, ModfReturnStruct) {
+    // Test that we do not try to modify accessors on the anonymous structure returned by modf.
+    auto* src = R"(
+@group(0) @binding(0) var<storage, read_write> output : vec3<f32>;
+
+const values = array(modf(vec3(1.0, 2.0, 3.0)).fract);
+
+@compute @workgroup_size(1)
+fn main() {
+  output = values[0];
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+@group(0) @binding(0) var<storage, read_write> output : __packed_vec3<f32>;
+
+const values = array(modf(vec3(1.0, 2.0, 3.0)).fract);
+
+@compute @workgroup_size(1)
+fn main() {
+  output = __packed_vec3<f32>(values[0]);
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, ModfReturnStruct_PointerToMember) {
+    // Test that we can pass a pointer to the vec3 member of the modf return struct to a function
+    // parameter to which we also pass a pointer to a vec3 member on a host-shareable struct.
+    auto* src = R"(
+enable chromium_experimental_full_ptr_parameters;
+
+struct S {
+  v : vec3<f32>
+}
+
+@group(0) @binding(0) var<storage, read_write> output : S;
+
+fn foo(p : ptr<function, vec3<f32>>) {
+  (*p) = vec3(1, 2, 3);
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var f : S;
+  var modf_ret = modf(vec3(1.0, 2.0, 3.0));
+  foo(&f.v);
+  foo(&modf_ret.fract);
+  output.v = modf_ret.fract;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+enable chromium_experimental_full_ptr_parameters;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> output : S_tint_packed_vec3;
+
+fn foo(p : ptr<function, vec3<f32>>) {
+  *(p) = vec3(1, 2, 3);
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var f : S;
+  var modf_ret = modf(vec3(1.0, 2.0, 3.0));
+  foo(&(f.v));
+  foo(&(modf_ret.fract));
+  output.v.elements = __packed_vec3<f32>(modf_ret.fract);
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(PackedVec3Test, MultipleStructMembers) {
     auto* src = R"(
 struct S {
@@ -3546,11 +4516,33 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  v2_a : vec2<f32>,
+  @align(16)
+  v3_a : tint_packed_vec3_f32_struct_member,
+  v4_a : vec4<f32>,
+  v2_b : vec2<f32>,
+  @align(16)
+  v3_b : tint_packed_vec3_f32_struct_member,
+  v4_b : vec4<f32>,
+  v2_arr : array<vec2<f32>, 4>,
+  @align(16)
+  v3_arr : array<tint_packed_vec3_f32_array_element, 4u>,
+  v4_arr : array<vec4<f32>, 4>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -3560,24 +4552,24 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
 
 struct S {
   v2_a : vec2<f32>,
-  v3_a : __packed_vec3<f32>,
+  v3_a : vec3<f32>,
   v4_a : vec4<f32>,
   v2_b : vec2<f32>,
-  v3_b : __packed_vec3<f32>,
+  v3_b : vec3<f32>,
   v4_b : vec4<f32>,
   v2_arr : array<vec2<f32>, 4>,
-  v3_arr : array<tint_vec3_struct, 4u>,
+  v3_arr : array<vec3<f32>, 4>,
   v4_arr : array<vec4<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   let v2_a = P.v2_a;
-  let v3_a = vec3<f32>(P.v3_a);
+  let v3_a = vec3<f32>(P.v3_a.elements);
   let v4_a = P.v4_a;
   let v2_b = P.v2_b;
-  let v3_b = vec3<f32>(P.v3_b);
+  let v3_b = vec3<f32>(P.v3_b.elements);
   let v4_b = P.v4_b;
   let v2_arr : array<vec2<f32>, 4> = P.v2_arr;
   let v3_arr : array<vec3<f32>, 4> = unpack_array(P.v3_arr);
@@ -3642,26 +4634,44 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
-@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(2) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(3) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(3) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(4) var<storage, read_write> str : S;
+@group(0) @binding(4) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn f() {
   let p_v = &(v);
@@ -3676,7 +4686,7 @@ fn f() {
   let p_arr_m = &(arr_m[0][1].elements);
   let arr_m = vec3<f32>(*(p_arr_m));
   *(p_arr_m) = __packed_vec3<f32>(arr_m);
-  let p_str_v = &(str.v);
+  let p_str_v = &(str.v.elements);
   let str_v = vec3<f32>(*(p_str_v));
   *(p_str_v) = __packed_vec3<f32>(str_v);
   let p_str_arr_v = &(str.arr_v[0].elements);
@@ -3728,11 +4738,21 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -3740,24 +4760,24 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  m : array<tint_vec3_struct, 3u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  m : mat3x3<f32>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(1) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(2) var<storage, read_write> str : S;
+@group(0) @binding(2) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn f() {
   let p_m = &(m);
@@ -3802,11 +4822,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -3814,21 +4842,21 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
   return result;
 }
 
-fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_vec3_struct, 4u> {
-  var result : array<tint_vec3_struct, 4u>;
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  arr_v : array<tint_vec3_struct, 4u>,
+  arr_v : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(1) var<storage, read_write> str : S;
+@group(0) @binding(1) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn f() {
   let p_arr_v = &(arr_v);
@@ -3867,11 +4895,19 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -3879,7 +4915,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array(in[i]);
@@ -3887,16 +4923,16 @@ fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u>, 4u> {
-  var result : array<array<tint_vec3_struct, 3u>, 4u>;
+fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = pack_array(in[i]);
   }
@@ -3904,12 +4940,12 @@ fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u
 }
 
 struct S {
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(1) var<storage, read_write> str : S;
+@group(0) @binding(1) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn f() {
   let p_arr_m = &(arr_m);
@@ -3946,23 +4982,107 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> str : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_2(in.arr_m);
+  return result;
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_1(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_2(in : array<mat3x3<f32>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = pack_array(in[i]);
+  }
+  return result;
+}
+
+fn pack_array_3(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  result.m = pack_array(in.m);
+  result.arr_v = pack_array_1(in.arr_v);
+  result.arr_m = pack_array_2(in.arr_m);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn f() {
   let p_str = &(str);
-  let str = *(p_str);
-  *(p_str) = str;
+  let str = unpack_array_3(*(p_str));
+  *(p_str) = pack_array_3(str);
 }
 )";
 
@@ -4018,28 +5138,45 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
-@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(2) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(2) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(3) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(3) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(4) var<storage, read_write> str : S;
+@group(0) @binding(4) var<storage, read_write> str : S_tint_packed_vec3;
 
 fn load(p : ptr<storage, __packed_vec3<f32>, read_write>) -> vec3<f32> {
   return vec3<f32>(*(p));
@@ -4058,8 +5195,8 @@ fn f() {
   store(&(m[0].elements));
   load(&(arr_m[0][1].elements));
   store(&(arr_m[0][1].elements));
-  load(&(str.v));
-  store(&(str.v));
+  load(&(str.v.elements));
+  store(&(str.v.elements));
   load(&(str.arr_v[0].elements));
   store(&(str.arr_v[0].elements));
   load(&(str.m[0].elements));
@@ -4109,13 +5246,22 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -4123,30 +5269,30 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  m : array<tint_vec3_struct, 3u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  m : mat3x3<f32>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<storage, read_write> m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(1) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(1) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(2) var<storage, read_write> str : S;
+@group(0) @binding(2) var<storage, read_write> str : S_tint_packed_vec3;
 
-fn load(p : ptr<storage, array<tint_vec3_struct, 3u>, read_write>) -> mat3x3<f32> {
+fn load(p : ptr<storage, array<tint_packed_vec3_f32_array_element, 3u>, read_write>) -> mat3x3<f32> {
   return unpack_array(*(p));
 }
 
-fn store(p : ptr<storage, array<tint_vec3_struct, 3u>, read_write>) {
+fn store(p : ptr<storage, array<tint_packed_vec3_f32_array_element, 3u>, read_write>) {
   *(p) = pack_array(mat3x3(1, 2, 3, 4, 5, 6, 7, 8, 9));
 }
 
@@ -4196,13 +5342,20 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -4210,27 +5363,27 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
   return result;
 }
 
-fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_vec3_struct, 4u> {
-  var result : array<tint_vec3_struct, 4u>;
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
 struct S {
-  arr_v : array<tint_vec3_struct, 4u>,
+  arr_v : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(1) var<storage, read_write> str : S;
+@group(0) @binding(1) var<storage, read_write> str : S_tint_packed_vec3;
 
-fn load(p : ptr<storage, array<tint_vec3_struct, 4u>, read_write>) -> array<vec3<f32>, 4> {
+fn load(p : ptr<storage, array<tint_packed_vec3_f32_array_element, 4u>, read_write>) -> array<vec3<f32>, 4> {
   return unpack_array(*(p));
 }
 
-fn store(p : ptr<storage, array<tint_vec3_struct, 4u>, read_write>) {
+fn store(p : ptr<storage, array<tint_packed_vec3_f32_array_element, 4u>, read_write>) {
   *(p) = pack_array(array(vec3(1.0), vec3(2.0), vec3(3.0), vec3(4.0)));
 }
 
@@ -4276,13 +5429,20 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -4290,7 +5450,7 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array(in[i]);
@@ -4298,16 +5458,16 @@ fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u>, 4u> {
-  var result : array<array<tint_vec3_struct, 3u>, 4u>;
+fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = pack_array(in[i]);
   }
@@ -4315,18 +5475,18 @@ fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u
 }
 
 struct S {
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(0) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(1) var<storage, read_write> str : S;
+@group(0) @binding(1) var<storage, read_write> str : S_tint_packed_vec3;
 
-fn load(p : ptr<storage, array<array<tint_vec3_struct, 3u>, 4u>, read_write>) -> array<mat3x3<f32>, 4> {
+fn load(p : ptr<storage, array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, read_write>) -> array<mat3x3<f32>, 4> {
   return unpack_array_1(*(p));
 }
 
-fn store(p : ptr<storage, array<array<tint_vec3_struct, 3u>, 4u>, read_write>) {
+fn store(p : ptr<storage, array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, read_write>) {
   *(p) = pack_array_1(array(mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>()));
 }
 
@@ -4372,27 +5532,110 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_2(in.arr_m);
+  return result;
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_1(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_2(in : array<mat3x3<f32>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = pack_array(in[i]);
+  }
+  return result;
+}
+
+fn pack_array_3(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  result.m = pack_array(in.m);
+  result.arr_v = pack_array_1(in.arr_v);
+  result.arr_m = pack_array_2(in.arr_m);
+  return result;
+}
+
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> str : S;
+@group(0) @binding(0) var<storage, read_write> str : S_tint_packed_vec3;
 
-fn load(p : ptr<storage, S, read_write>) -> S {
-  return *(p);
+fn load(p : ptr<storage, S_tint_packed_vec3, read_write>) -> S {
+  return unpack_array_3(*(p));
 }
 
-fn store(p : ptr<storage, S, read_write>) {
-  *(p) = S();
+fn store(p : ptr<storage, S_tint_packed_vec3, read_write>) {
+  *(p) = pack_array_3(S());
 }
 
 fn f() {
@@ -4414,39 +5657,157 @@ struct S {
   arr : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S;
 
 fn f() {
   var f : S;
   let v = f.v;
   let arr = f.arr;
+  P = f;
 }
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
-  var result : array<vec3<f32>, 4u>;
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  arr : array<tint_vec3_struct, 4u>,
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  result.arr = pack_array(in.arr);
+  return result;
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S {
+  v : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
 fn f() {
   var f : S;
-  let v = vec3<f32>(f.v);
-  let arr = unpack_array(f.arr);
+  let v = f.v;
+  let arr = f.arr;
+  P = pack_array_1(f);
+}
+)";
+
+    DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, MixedAddressSpace_NestedStruct) {
+    auto* src = R"(
+struct S {
+  v : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
+}
+
+struct Outer {
+  inner : S,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : Outer;
+
+fn f() {
+  var f : Outer;
+  let v = f.inner.v;
+  let arr = f.inner.arr;
+  P = f;
+  P.inner = f.inner;
+  P.inner.v = f.inner.v;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
+}
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+struct Outer_tint_packed_vec3 {
+  @align(16)
+  inner : S_tint_packed_vec3,
+}
+
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  result.arr = pack_array(in.arr);
+  return result;
+}
+
+fn pack_array_2(in : Outer) -> Outer_tint_packed_vec3 {
+  var result : Outer_tint_packed_vec3;
+  result.inner = pack_array_1(in.inner);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
+}
+
+struct Outer {
+  inner : S,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : Outer_tint_packed_vec3;
+
+fn f() {
+  var f : Outer;
+  let v = f.inner.v;
+  let arr = f.inner.arr;
+  P = pack_array_2(f);
+  P.inner = pack_array_1(f.inner);
+  P.inner.v.elements = __packed_vec3<f32>(f.inner.v);
 }
 )";
 
@@ -4457,8 +5818,8 @@ fn f() {
 }
 
 TEST_F(PackedVec3Test, MixedAddressSpace_AnotherStructNotShared) {
-    // If the transform is not skipped, we need to rewrite types in /all/ structures, even those
-    // that are not shared.
+    // Test that we can pass a pointers to a members of both shared and non-shared structs to the
+    // same function.
     auto* src = R"(
 enable chromium_experimental_full_ptr_parameters;
 
@@ -4472,7 +5833,7 @@ struct NotShared {
   arr : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S;
 
 fn g(p : ptr<function, vec3<f32>>) -> vec3<f32> {
   return *p;
@@ -4485,39 +5846,69 @@ fn f() {
   g(&f1.arr[0]);
   g(&f2.v);
   g(&f2.arr[0]);
+  P = f1;
 }
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  result.arr = pack_array(in.arr);
+  return result;
+}
+
 struct S {
-  v : __packed_vec3<f32>,
-  arr : array<tint_vec3_struct, 4u>,
+  v : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
 }
 
 struct NotShared {
-  v : __packed_vec3<f32>,
-  arr : array<tint_vec3_struct, 4u>,
+  v : vec3<f32>,
+  arr : array<vec3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
 
-fn g(p : ptr<function, __packed_vec3<f32>>) -> vec3<f32> {
-  return vec3<f32>(*(p));
+fn g(p : ptr<function, vec3<f32>>) -> vec3<f32> {
+  return *(p);
 }
 
 fn f() {
   var f1 : S;
   var f2 : NotShared;
   g(&(f1.v));
-  g(&(f1.arr[0].elements));
+  g(&(f1.arr[0]));
   g(&(f2.v));
-  g(&(f2.arr[0].elements));
+  g(&(f2.arr[0]));
+  P = pack_array_1(f1);
 }
 )";
 
@@ -4553,30 +5944,81 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_2(in.arr_m);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  var f1 : S = P;
-  var f2 : __packed_vec3<f32> = P.v;
-  var f3 : array<tint_vec3_struct, 3u> = P.m;
-  var f4 : array<tint_vec3_struct, 4u> = P.arr_v;
-  var f5 : array<array<tint_vec3_struct, 3u>, 4u> = P.arr_m;
-  let v_1 = vec3<f32>(f1.v);
-  let v_2 = vec3<f32>(f2);
-  let v_3 = vec3<f32>(f3[0].elements);
-  let v_4 = vec3<f32>(f4[1].elements);
-  let v_5 = vec3<f32>(f5[2][2].elements);
+  var f1 : S = unpack_array_3(P);
+  var f2 : vec3<f32> = vec3<f32>(P.v.elements);
+  var f3 : mat3x3<f32> = unpack_array(P.m);
+  var f4 : array<vec3<f32>, 4> = unpack_array_1(P.arr_v);
+  var f5 : array<mat3x3<f32>, 4> = unpack_array_2(P.arr_m);
+  let v_1 = f1.v;
+  let v_2 = f2;
+  let v_3 = f3[0];
+  let v_4 = f4[1];
+  let v_5 = f5[2][2];
 }
 )";
 
@@ -4612,30 +6054,81 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_2(in.arr_m);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  var f1 = P;
-  var f2 = P.v;
-  var f3 = P.m;
-  var f4 = P.arr_v;
-  var f5 = P.arr_m;
-  let v_1 = vec3<f32>(f1.v);
-  let v_2 = vec3<f32>(f2);
-  let v_3 = vec3<f32>(f3[0].elements);
-  let v_4 = vec3<f32>(f4[1].elements);
-  let v_5 = vec3<f32>(f5[2][2].elements);
+  var f1 = unpack_array_3(P);
+  var f2 = vec3<f32>(P.v.elements);
+  var f3 = unpack_array(P.m);
+  var f4 = unpack_array_1(P.arr_v);
+  var f5 = unpack_array_2(P.arr_m);
+  let v_1 = f1.v;
+  let v_2 = f2;
+  let v_3 = f3[0];
+  let v_4 = f4[1];
+  let v_5 = f5[2][2];
 }
 )";
 
@@ -4671,54 +6164,48 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
-  return result;
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-fn pack_array_1(in : array<vec3<f32>, 4u>) -> array<tint_vec3_struct, 4u> {
-  var result : array<tint_vec3_struct, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
-  return result;
-}
-
-fn pack_array_2(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u>, 4u> {
-  var result : array<array<tint_vec3_struct, 3u>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = pack_array(in[i]);
-  }
-  return result;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   var f1 : S = S();
-  var f2 : __packed_vec3<f32> = __packed_vec3<f32>(vec3<f32>());
-  var f3 : array<tint_vec3_struct, 3u> = pack_array(mat3x3<f32>());
-  var f4 : array<tint_vec3_struct, 4u> = pack_array_1(array(vec3<f32>(), vec3<f32>(), vec3<f32>(), vec3<f32>()));
-  var f5 : array<array<tint_vec3_struct, 3u>, 4u> = pack_array_2(array(mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>()));
-  let v_1 = vec3<f32>(f1.v);
-  let v_2 = vec3<f32>(f2);
-  let v_3 = vec3<f32>(f3[0].elements);
-  let v_4 = vec3<f32>(f4[1].elements);
-  let v_5 = vec3<f32>(f5[2][2].elements);
+  var f2 : vec3<f32> = vec3<f32>();
+  var f3 : mat3x3<f32> = mat3x3<f32>();
+  var f4 : array<vec3<f32>, 4> = array(vec3<f32>(), vec3<f32>(), vec3<f32>(), vec3<f32>());
+  var f5 : array<mat3x3<f32>, 4> = array(mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>());
+  let v_1 = f1.v;
+  let v_2 = f2;
+  let v_3 = f3[0];
+  let v_4 = f4[1];
+  let v_5 = f5[2][2];
 }
 )";
 
@@ -4754,54 +6241,48 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
-  return result;
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-fn pack_array_1(in : array<vec3<f32>, 4u>) -> array<tint_vec3_struct, 4u> {
-  var result : array<tint_vec3_struct, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
-  return result;
-}
-
-fn pack_array_2(in : array<mat3x3<f32>, 4u>) -> array<array<tint_vec3_struct, 3u>, 4u> {
-  var result : array<array<tint_vec3_struct, 3u>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = pack_array(in[i]);
-  }
-  return result;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
 }
 
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
   var f1 = S();
-  var f2 = __packed_vec3<f32>(vec3<f32>());
-  var f3 = pack_array(mat3x3<f32>());
-  var f4 = pack_array_1(array(vec3<f32>(), vec3<f32>(), vec3<f32>(), vec3<f32>()));
-  var f5 = pack_array_2(array(mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>()));
-  let v_1 = vec3<f32>(f1.v);
-  let v_2 = vec3<f32>(f2);
-  let v_3 = vec3<f32>(f3[0].elements);
-  let v_4 = vec3<f32>(f4[1].elements);
-  let v_5 = vec3<f32>(f5[2][2].elements);
+  var f2 = vec3<f32>();
+  var f3 = mat3x3<f32>();
+  var f4 = array(vec3<f32>(), vec3<f32>(), vec3<f32>(), vec3<f32>());
+  var f5 = array(mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>(), mat3x3<f32>());
+  let v_1 = f1.v;
+  let v_2 = f2;
+  let v_3 = f3[0];
+  let v_4 = f4[1];
+  let v_5 = f5[2][2];
 }
 )";
 
@@ -4834,27 +6315,56 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 fn f() {
-  var f1 : S = P;
-  var f2 : __packed_vec3<f32> = P.v;
-  var f3 : array<tint_vec3_struct, 4u>;
-  var f4 : array<tint_vec3_struct, 3u> = P.m;
-  let pv_1 : ptr<function, __packed_vec3<f32>> = &(f1.v);
-  let pv_2 : ptr<function, __packed_vec3<f32>> = &(f2);
-  let pv_3 : ptr<function, __packed_vec3<f32>> = &(f3[0].elements);
-  let pv_4 : ptr<function, array<tint_vec3_struct, 3u>> = &(f1.m);
-  let pv_5 : ptr<function, array<tint_vec3_struct, 3u>> = &(f4);
+  var f1 : S = unpack_array_1(P);
+  var f2 : vec3<f32> = vec3<f32>(P.v.elements);
+  var f3 : array<vec3<f32>, 4>;
+  var f4 : mat3x3<f32> = unpack_array(P.m);
+  let pv_1 : ptr<function, vec3<f32>> = &(f1.v);
+  let pv_2 : ptr<function, vec3<f32>> = &(f2);
+  let pv_3 : ptr<function, vec3<f32>> = &(f3[0]);
+  let pv_4 : ptr<function, mat3x3<f32>> = &(f1.m);
+  let pv_5 : ptr<function, mat3x3<f32>> = &(f4);
 }
 )";
 
@@ -4888,31 +6398,45 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 var<private> p1 : S;
 
-var<private> p2 : __packed_vec3<f32>;
+var<private> p2 : vec3<f32>;
 
-var<private> p3 : array<tint_vec3_struct, 4u>;
+var<private> p3 : array<vec3<f32>, 4>;
 
-var<private> p4 : array<tint_vec3_struct, 3u>;
+var<private> p4 : mat3x3<f32>;
 
 fn f() {
-  let pv_1 : ptr<private, __packed_vec3<f32>> = &(p1.v);
-  let pv_2 : ptr<private, __packed_vec3<f32>> = &(p2);
-  let pv_3 : ptr<private, __packed_vec3<f32>> = &(p3[0].elements);
-  let pv_4 : ptr<private, array<tint_vec3_struct, 3u>> = &(p1.m);
-  let pv_5 : ptr<private, array<tint_vec3_struct, 3u>> = &(p4);
+  let pv_1 : ptr<private, vec3<f32>> = &(p1.v);
+  let pv_2 : ptr<private, vec3<f32>> = &(p2);
+  let pv_3 : ptr<private, vec3<f32>> = &(p3[0]);
+  let pv_4 : ptr<private, mat3x3<f32>> = &(p1.m);
+  let pv_5 : ptr<private, mat3x3<f32>> = &(p4);
 }
 )";
 
@@ -4946,31 +6470,45 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+struct S {
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
 var<workgroup> w1 : S;
 
-var<workgroup> w2 : __packed_vec3<f32>;
+var<workgroup> w2 : vec3<f32>;
 
-var<workgroup> w3 : array<tint_vec3_struct, 4u>;
+var<workgroup> w3 : array<vec3<f32>, 4>;
 
-var<workgroup> w4 : array<tint_vec3_struct, 3u>;
+var<workgroup> w4 : mat3x3<f32>;
 
 fn f() {
-  let pv_1 : ptr<workgroup, __packed_vec3<f32>> = &(w1.v);
-  let pv_2 : ptr<workgroup, __packed_vec3<f32>> = &(w2);
-  let pv_3 : ptr<workgroup, __packed_vec3<f32>> = &(w3[0].elements);
-  let pv_4 : ptr<workgroup, array<tint_vec3_struct, 3u>> = &(w1.m);
-  let pv_5 : ptr<workgroup, array<tint_vec3_struct, 3u>> = &(w4);
+  let pv_1 : ptr<workgroup, vec3<f32>> = &(w1.v);
+  let pv_2 : ptr<workgroup, vec3<f32>> = &(w2);
+  let pv_3 : ptr<workgroup, vec3<f32>> = &(w3[0]);
+  let pv_4 : ptr<workgroup, mat3x3<f32>> = &(w1.m);
+  let pv_5 : ptr<workgroup, mat3x3<f32>> = &(w4);
 }
 )";
 
@@ -5013,13 +6551,26 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -5027,29 +6578,36 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
+fn unpack_array_1(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.v = vec3<f32>(in.v.elements);
+  result.m = unpack_array(in.m);
+  return result;
+}
+
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
 }
 
-@group(0) @binding(0) var<storage> P : S;
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
 
-fn g_v(p : ptr<function, __packed_vec3<f32>>) -> vec3<f32> {
-  return vec3<f32>(*(p));
+fn g_v(p : ptr<function, vec3<f32>>) -> vec3<f32> {
+  return *(p);
 }
 
-fn g_m(p : ptr<function, array<tint_vec3_struct, 3u>>) -> mat3x3<f32> {
-  return unpack_array(*(p));
+fn g_m(p : ptr<function, mat3x3<f32>>) -> mat3x3<f32> {
+  return *(p);
 }
 
 fn f() {
-  var f1 : S = P;
-  var f2 : __packed_vec3<f32> = P.v;
-  var f3 : array<tint_vec3_struct, 4u>;
-  var f4 : array<tint_vec3_struct, 3u> = P.m;
+  var f1 : S = unpack_array_1(P);
+  var f2 : vec3<f32> = vec3<f32>(P.v.elements);
+  var f3 : array<vec3<f32>, 4>;
+  var f4 : mat3x3<f32> = unpack_array(P.m);
   g_v(&(f1.v));
   g_v(&(f2));
-  g_v(&(f3[0].elements));
+  g_v(&(f3[0]));
   g_m(&(f1.m));
   g_m(&(f4));
 }
@@ -5071,6 +6629,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 fn f() {
@@ -5094,6 +6654,8 @@ fn f() {
 )";
 
     auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> v : __packed_vec3<f32>;
 
 fn f() {
@@ -5125,18 +6687,29 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> s : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> s : S_tint_packed_vec3;
 
 fn g() -> S {
   return S();
 }
 
 fn f() {
-  s.v[0] = vec3<f32>(g().v)[1];
+  s.v.elements[0] = g().v[1];
 }
 )";
 
@@ -5164,18 +6737,35 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct S {
-  v : __packed_vec3<f32>,
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+}
+
+fn pack_array(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.v = tint_packed_vec3_f32_struct_member(__packed_vec3<f32>(in.v));
+  return result;
+}
+
+struct S {
+  v : vec3<f32>,
+}
+
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var v_var : __packed_vec3<f32> = S().v;
-  let v_let : vec3<f32> = vec3<f32>(S().v);
+  var v_var : vec3<f32> = S().v;
+  let v_let : vec3<f32> = S().v;
   v_var = S().v;
-  v_var = __packed_vec3<f32>((vec3<f32>(S().v) * 2.0));
-  buffer = S(S().v);
+  v_var = (S().v * 2.0);
+  buffer = pack_array(S(S().v));
 }
 )";
 
@@ -5203,30 +6793,44 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
-  var result : array<vec3<f32>, 4u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 4u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-struct S {
-  arr : array<tint_vec3_struct, 4u>,
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = pack_array(in.arr);
+  return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var arr_var : array<tint_vec3_struct, 4u> = S().arr;
-  let arr_let : array<vec3<f32>, 4> = unpack_array(S().arr);
+  var arr_var : array<vec3<f32>, 4> = S().arr;
+  let arr_let : array<vec3<f32>, 4> = S().arr;
   arr_var = S().arr;
-  arr_var[0].elements = __packed_vec3<f32>((vec3<f32>(S().arr[0].elements) * 2.0));
-  buffer = S(S().arr);
+  arr_var[0] = (S().arr[0] * 2.0);
+  buffer = pack_array_1(S(S().arr));
 }
 )";
 
@@ -5256,40 +6860,54 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
-  var result : array<vec3<f32>, 4u>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+}
+
+fn pack_array(in : array<vec3<f32>, 4u>) -> array<tint_packed_vec3_f32_array_element, 4u> {
+  var result : array<tint_packed_vec3_f32_array_element, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 4u>, 4u>) -> array<array<vec3<f32>, 4u>, 4u> {
-  var result : array<array<vec3<f32>, 4u>, 4u>;
+fn pack_array_1(in : array<array<vec3<f32>, 4u>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 4u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = unpack_array(in[i]);
+    result[i] = pack_array(in[i]);
   }
+  return result;
+}
+
+fn pack_array_2(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = pack_array_1(in.arr);
   return result;
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 4u>, 4u>,
+  arr : array<array<vec3<f32>, 4>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var arr_var : array<array<tint_vec3_struct, 4u>, 4u> = S().arr;
-  var inner_var : array<tint_vec3_struct, 4u> = S().arr[0];
-  let arr_let : array<array<vec3<f32>, 4>, 4> = unpack_array_1(S().arr);
+  var arr_var : array<array<vec3<f32>, 4>, 4> = S().arr;
+  var inner_var : array<vec3<f32>, 4> = S().arr[0];
+  let arr_let : array<array<vec3<f32>, 4>, 4> = S().arr;
   arr_var = S().arr;
   inner_var = S().arr[0];
-  arr_var[0][0].elements = __packed_vec3<f32>((vec3<f32>(S().arr[0][0].elements) * 2.0));
-  buffer = S(S().arr);
+  arr_var[0][0] = (S().arr[0][0] * 2.0);
+  buffer = pack_array_2(S(S().arr));
 }
 )";
 
@@ -5317,38 +6935,44 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
-  var result : mat3x3<f32>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
+fn pack_array_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.m = pack_array(in.m);
   return result;
 }
 
 struct S {
-  m : array<tint_vec3_struct, 3u>,
+  m : mat3x3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var m_var : array<tint_vec3_struct, 3u> = S().m;
-  let m_let : mat3x3<f32> = unpack_array(S().m);
+  var m_var : mat3x3<f32> = S().m;
+  let m_let : mat3x3<f32> = S().m;
   m_var = S().m;
-  m_var = pack_array((unpack_array(S().m) * 2.0));
-  buffer = S(S().m);
+  m_var = (S().m * 2.0);
+  buffer = pack_array_1(S(S().m));
 }
 )";
 
@@ -5376,46 +7000,52 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
-  var result : mat3x3<f32>;
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+}
+
+fn pack_array(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
-  var result : array<mat3x3<f32>, 4u>;
+fn pack_array_1(in : array<mat3x3<f32>, 4u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 4u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = unpack_array(in[i]);
+    result[i] = pack_array(in[i]);
   }
   return result;
 }
 
-fn pack_array(in : mat3x3<f32>) -> array<tint_vec3_struct, 3u> {
-  var result : array<tint_vec3_struct, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_vec3_struct(__packed_vec3<f32>(in[i]));
-  }
+fn pack_array_2(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = pack_array_1(in.arr);
   return result;
 }
 
 struct S {
-  arr : array<array<tint_vec3_struct, 3u>, 4u>,
+  arr : array<mat3x3<f32>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var arr_var : array<array<tint_vec3_struct, 3u>, 4u> = S().arr;
-  let arr_let : array<mat3x3<f32>, 4> = unpack_array_1(S().arr);
+  var arr_var : array<mat3x3<f32>, 4> = S().arr;
+  let arr_let : array<mat3x3<f32>, 4> = S().arr;
   arr_var = S().arr;
-  arr_var[0] = pack_array((unpack_array(S().arr[0]) * 2.0));
-  buffer = S(S().arr);
+  arr_var[0] = (S().arr[0] * 2.0);
+  buffer = pack_array_2(S(S().arr));
 }
 )";
 
@@ -5450,11 +7080,21 @@ fn f() {
 )";
 
     auto* expect = R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+  @align(16)
+  arr_m : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -5462,7 +7102,7 @@ fn unpack_array(in : array<tint_vec3_struct, 4u>) -> array<vec3<f32>, 4u> {
   return result;
 }
 
-fn unpack_array_1(in : array<array<tint_vec3_struct, 4u>, 4u>) -> array<array<vec3<f32>, 4u>, 4u> {
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>) -> array<array<vec3<f32>, 4u>, 4u> {
   var result : array<array<vec3<f32>, 4u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array(in[i]);
@@ -5470,7 +7110,7 @@ fn unpack_array_1(in : array<array<tint_vec3_struct, 4u>, 4u>) -> array<array<ve
   return result;
 }
 
-fn unpack_array_2(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+fn unpack_array_2(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -5478,7 +7118,7 @@ fn unpack_array_2(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
   return result;
 }
 
-fn unpack_array_3(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+fn unpack_array_3(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array_2(in[i]);
@@ -5486,7 +7126,7 @@ fn unpack_array_3(in : array<array<tint_vec3_struct, 3u>, 4u>) -> array<mat3x3<f
   return result;
 }
 
-fn unpack_array_4(in : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>) -> array<array<mat3x3<f32>, 4u>, 4u> {
+fn unpack_array_4(in : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>) -> array<array<mat3x3<f32>, 4u>, 4u> {
   var result : array<array<mat3x3<f32>, 4u>, 4u>;
   for(var i : u32; (i < 4u); i = (i + 1)) {
     result[i] = unpack_array_3(in[i]);
@@ -5494,16 +7134,31 @@ fn unpack_array_4(in : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>) -> arr
   return result;
 }
 
-struct S {
-  arr_v : array<array<tint_vec3_struct, 4u>, 4u>,
-  arr_m : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>,
+fn unpack_array_5(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_4(in.arr_m);
+  return result;
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_s : array<S, 4>;
+fn unpack_array_6(in : array<S_tint_packed_vec3, 4u>) -> array<S, 4u> {
+  var result : array<S, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_5(in[i]);
+  }
+  return result;
+}
+
+struct S {
+  arr_v : array<array<vec3<f32>, 4>, 4>,
+  arr_m : array<array<mat3x3<f32>, 4>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> arr_s : array<S_tint_packed_vec3, 4u>;
 
 fn f() {
-  let full_let : array<S, 4> = arr_s;
-  let struct_let : S = arr_s[0];
+  let full_let : array<S, 4> = unpack_array_6(arr_s);
+  let struct_let : S = unpack_array_5(arr_s[0]);
   let outer_arr_v_let : array<array<vec3<f32>, 4>, 4> = unpack_array_1(arr_s[0].arr_v);
   let inner_arr_v_let : array<vec3<f32>, 4> = unpack_array(arr_s[0].arr_v[1]);
   let v_let : vec3<f32> = vec3<f32>(arr_s[0].arr_v[1][2].elements);
@@ -5548,28 +7203,93 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr_v : array<array<tint_vec3_struct, 4u>, 4u>,
-  arr_m : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+  @align(16)
+  arr_m : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_s : array<S, 4>;
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>) -> array<array<vec3<f32>, 4u>, 4u> {
+  var result : array<array<vec3<f32>, 4u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_2(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_4(in : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>) -> array<array<mat3x3<f32>, 4u>, 4u> {
+  var result : array<array<mat3x3<f32>, 4u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_3(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_5(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_4(in.arr_m);
+  return result;
+}
+
+fn unpack_array_6(in : array<S_tint_packed_vec3, 4u>) -> array<S, 4u> {
+  var result : array<S, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_5(in[i]);
+  }
+  return result;
+}
+
+struct S {
+  arr_v : array<array<vec3<f32>, 4>, 4>,
+  arr_m : array<array<mat3x3<f32>, 4>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> arr_s : array<S_tint_packed_vec3, 4u>;
 
 fn f() {
-  var full_var : array<S, 4> = arr_s;
-  var struct_var : S = arr_s[0];
-  var outer_arr_v_var : array<array<tint_vec3_struct, 4u>, 4u> = arr_s[0].arr_v;
-  var inner_arr_v_var : array<tint_vec3_struct, 4u> = arr_s[0].arr_v[1];
-  var v_var : __packed_vec3<f32> = arr_s[0].arr_v[1][2].elements;
+  var full_var : array<S, 4> = unpack_array_6(arr_s);
+  var struct_var : S = unpack_array_5(arr_s[0]);
+  var outer_arr_v_var : array<array<vec3<f32>, 4>, 4> = unpack_array_1(arr_s[0].arr_v);
+  var inner_arr_v_var : array<vec3<f32>, 4> = unpack_array(arr_s[0].arr_v[1]);
+  var v_var : vec3<f32> = vec3<f32>(arr_s[0].arr_v[1][2].elements);
   var v_element_var : f32 = arr_s[0].arr_v[1][2].elements.y;
-  var outer_arr_m_var : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u> = arr_s[0].arr_m;
-  var inner_arr_m_var : array<array<tint_vec3_struct, 3u>, 4u> = arr_s[0].arr_m[1];
-  var m_var : array<tint_vec3_struct, 3u> = arr_s[0].arr_m[1][2];
-  var m_col_var : __packed_vec3<f32> = arr_s[0].arr_m[1][2][0].elements;
+  var outer_arr_m_var : array<array<mat3x3<f32>, 4>, 4> = unpack_array_4(arr_s[0].arr_m);
+  var inner_arr_m_var : array<mat3x3<f32>, 4> = unpack_array_3(arr_s[0].arr_m[1]);
+  var m_var : mat3x3<f32> = unpack_array_2(arr_s[0].arr_m[1][2]);
+  var m_col_var : vec3<f32> = vec3<f32>(arr_s[0].arr_m[1][2][0].elements);
   var m_element_var : f32 = arr_s[0].arr_m[1][2][0].elements.y;
 }
 )";
@@ -5618,39 +7338,104 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr_v : array<array<tint_vec3_struct, 4u>, 4u>,
-  arr_m : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+  @align(16)
+  arr_m : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_s : array<S, 4>;
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_1(in : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>) -> array<array<vec3<f32>, 4u>, 4u> {
+  var result : array<array<vec3<f32>, 4u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_2(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  for(var i : u32; (i < 3u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn unpack_array_3(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
+  var result : array<mat3x3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_2(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_4(in : array<array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>, 4u>) -> array<array<mat3x3<f32>, 4u>, 4u> {
+  var result : array<array<mat3x3<f32>, 4u>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_3(in[i]);
+  }
+  return result;
+}
+
+fn unpack_array_5(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr_v = unpack_array_1(in.arr_v);
+  result.arr_m = unpack_array_4(in.arr_m);
+  return result;
+}
+
+fn unpack_array_6(in : array<S_tint_packed_vec3, 4u>) -> array<S, 4u> {
+  var result : array<S, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = unpack_array_5(in[i]);
+  }
+  return result;
+}
+
+struct S {
+  arr_v : array<array<vec3<f32>, 4>, 4>,
+  arr_m : array<array<mat3x3<f32>, 4>, 4>,
+}
+
+@group(0) @binding(0) var<storage, read_write> arr_s : array<S_tint_packed_vec3, 4u>;
 
 fn f() {
   var full_var : array<S, 4>;
   var struct_var : S;
-  var outer_arr_v_var : array<array<tint_vec3_struct, 4u>, 4u>;
-  var inner_arr_v_var : array<tint_vec3_struct, 4u>;
-  var v_var : __packed_vec3<f32>;
+  var outer_arr_v_var : array<array<vec3<f32>, 4>, 4>;
+  var inner_arr_v_var : array<vec3<f32>, 4>;
+  var v_var : vec3<f32>;
   var v_element_var : f32;
-  var outer_arr_m_var : array<array<array<tint_vec3_struct, 3u>, 4u>, 4u>;
-  var inner_arr_m_var : array<array<tint_vec3_struct, 3u>, 4u>;
-  var m_var : array<tint_vec3_struct, 3u>;
-  var m_col_var : __packed_vec3<f32>;
+  var outer_arr_m_var : array<array<mat3x3<f32>, 4>, 4>;
+  var inner_arr_m_var : array<mat3x3<f32>, 4>;
+  var m_var : mat3x3<f32>;
+  var m_col_var : vec3<f32>;
   var m_element_var : f32;
-  full_var = arr_s;
-  struct_var = arr_s[0];
-  outer_arr_v_var = arr_s[0].arr_v;
-  inner_arr_v_var = arr_s[0].arr_v[1];
-  v_var = arr_s[0].arr_v[1][2].elements;
+  full_var = unpack_array_6(arr_s);
+  struct_var = unpack_array_5(arr_s[0]);
+  outer_arr_v_var = unpack_array_1(arr_s[0].arr_v);
+  inner_arr_v_var = unpack_array(arr_s[0].arr_v[1]);
+  v_var = vec3<f32>(arr_s[0].arr_v[1][2].elements);
   v_element_var = arr_s[0].arr_v[1][2].elements.y;
-  outer_arr_m_var = arr_s[0].arr_m;
-  inner_arr_m_var = arr_s[0].arr_m[1];
-  m_var = arr_s[0].arr_m[1][2];
-  m_col_var = arr_s[0].arr_m[1][2][0].elements;
+  outer_arr_m_var = unpack_array_4(arr_s[0].arr_m);
+  inner_arr_m_var = unpack_array_3(arr_s[0].arr_m[1]);
+  m_var = unpack_array_2(arr_s[0].arr_m[1][2]);
+  m_col_var = vec3<f32>(arr_s[0].arr_m[1][2][0].elements);
   m_element_var = arr_s[0].arr_m[1][2][0].elements.y;
 }
 )";
@@ -5677,17 +7462,25 @@ fn main() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct S {
-  arr : array<tint_vec3_struct>,
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_vec3_struct>;
+struct S {
+  arr : array<vec3<f32>>,
+}
 
-@group(0) @binding(1) var<storage, read_write> s : S;
+@group(0) @binding(0) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element>;
+
+@group(0) @binding(1) var<storage, read_write> s : S_tint_packed_vec3;
 
 fn main() {
   s.arr[0].elements = arr_v[0].elements;
@@ -5724,13 +7517,14 @@ enable chromium_internal_relaxed_uniform_layout;
 enable f16;
 enable chromium_experimental_full_ptr_parameters;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f16_array_element {
+  @align(8)
   elements : __packed_vec3<f16>,
 }
 
-@group(0) @binding(0) var<uniform> m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(0) var<uniform> m : array<tint_packed_vec3_f16_array_element, 3u>;
 
-fn g(p : ptr<uniform, array<tint_vec3_struct, 3u>>) -> vec3<f16> {
+fn g(p : ptr<uniform, array<tint_packed_vec3_f16_array_element, 3u>>) -> vec3<f16> {
   return (vec3<f16>((*(p))[0].elements) + vec3<f16>(1));
 }
 
@@ -5768,22 +7562,50 @@ fn f() {
 
     auto* expect =
         R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable f16;
 
-struct S {
-  f : __packed_vec3<f32>,
-  h : __packed_vec3<f16>,
-  i : __packed_vec3<i32>,
-  u : __packed_vec3<u32>,
+struct tint_packed_vec3_f32_struct_member {
+  elements : __packed_vec3<f32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> s : S;
+struct tint_packed_vec3_f16_struct_member {
+  elements : __packed_vec3<f16>,
+}
+
+struct tint_packed_vec3_i32_struct_member {
+  elements : __packed_vec3<i32>,
+}
+
+struct tint_packed_vec3_u32_struct_member {
+  elements : __packed_vec3<u32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  f : tint_packed_vec3_f32_struct_member,
+  @align(8)
+  h : tint_packed_vec3_f16_struct_member,
+  @align(16)
+  i : tint_packed_vec3_i32_struct_member,
+  @align(16)
+  u : tint_packed_vec3_u32_struct_member,
+}
+
+struct S {
+  f : vec3f,
+  h : vec3h,
+  i : vec3i,
+  u : vec3u,
+}
+
+@group(0) @binding(0) var<storage, read_write> s : S_tint_packed_vec3;
 
 fn f() {
-  let f = vec3<f32>(s.f);
-  let h = vec3<f16>(s.h);
-  let i = vec3<i32>(s.i);
-  let u = vec3<u32>(s.u);
+  let f = vec3<f32>(s.f.elements);
+  let h = vec3<f16>(s.h.elements);
+  let i = vec3<i32>(s.i.elements);
+  let u = vec3<u32>(s.u.elements);
 }
 )";
 
@@ -5812,31 +7634,36 @@ fn main() {
 
     auto* expect =
         R"(
+enable chromium_internal_relaxed_uniform_layout;
 enable f16;
 
-struct tint_vec3_struct {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-struct tint_vec3_struct_1 {
+struct tint_packed_vec3_f16_array_element {
+  @align(8)
   elements : __packed_vec3<f16>,
 }
 
-struct tint_vec3_struct_2 {
+struct tint_packed_vec3_i32_array_element {
+  @align(16)
   elements : __packed_vec3<i32>,
 }
 
-struct tint_vec3_struct_3 {
+struct tint_packed_vec3_u32_array_element {
+  @align(16)
   elements : __packed_vec3<u32>,
 }
 
-@group(0) @binding(0) var<storage, read_write> arr_f : array<tint_vec3_struct>;
+@group(0) @binding(0) var<storage, read_write> arr_f : array<tint_packed_vec3_f32_array_element>;
 
-@group(0) @binding(1) var<storage, read_write> arr_h : array<tint_vec3_struct_1>;
+@group(0) @binding(1) var<storage, read_write> arr_h : array<tint_packed_vec3_f16_array_element>;
 
-@group(0) @binding(2) var<storage, read_write> arr_i : array<tint_vec3_struct_2>;
+@group(0) @binding(2) var<storage, read_write> arr_i : array<tint_packed_vec3_i32_array_element>;
 
-@group(0) @binding(3) var<storage, read_write> arr_u : array<tint_vec3_struct_3>;
+@group(0) @binding(3) var<storage, read_write> arr_u : array<tint_packed_vec3_u32_array_element>;
 
 fn main() {
   let f = vec3<f32>(arr_f[0].elements);
@@ -5874,11 +7701,14 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -5888,23 +7718,23 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
 
 @group(0) @binding(0) var<storage, read_write> buffer_v : __packed_vec3<f32>;
 
-@group(0) @binding(1) var<storage, read_write> buffer_m : array<tint_vec3_struct, 3u>;
+@group(0) @binding(1) var<storage, read_write> buffer_m : array<tint_packed_vec3_f32_array_element, 3u>;
 
-@group(0) @binding(2) var<storage, read_write> buffer_arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(2) var<storage, read_write> buffer_arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(3) var<storage, read_write> buffer_arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(3) var<storage, read_write> buffer_arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(4) var<storage, read_write> buffer_nested_arr_v : array<array<tint_vec3_struct, 4u>, 4u>;
+@group(0) @binding(4) var<storage, read_write> buffer_nested_arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>;
 
 fn f() {
-  var v : __packed_vec3<f32> = __packed_vec3<f32>((vec3<f32>(buffer_v) * 2));
-  v = __packed_vec3<f32>(-(vec3<f32>(v)));
-  v = __packed_vec3<f32>((unpack_array(buffer_m) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer_m[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer_arr_v[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((unpack_array(buffer_arr_m[0]) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer_arr_m[0][1].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer_nested_arr_v[0][0].elements) + vec3<f32>(v)));
+  var v : vec3<f32> = (vec3<f32>(buffer_v) * 2);
+  v = -(v);
+  v = (unpack_array(buffer_m) * v);
+  v = (vec3<f32>(buffer_m[0].elements) + v);
+  v = (vec3<f32>(buffer_arr_v[0].elements) + v);
+  v = (unpack_array(buffer_arr_m[0]) * v);
+  v = (vec3<f32>(buffer_arr_m[0][1].elements) + v);
+  v = (vec3<f32>(buffer_nested_arr_v[0][0].elements) + v);
 }
 )";
 
@@ -5932,17 +7762,19 @@ fn f() {
 
     auto* expect =
         R"(
+enable chromium_internal_relaxed_uniform_layout;
+
 @group(0) @binding(0) var<storage, read_write> buffer_v : __packed_vec3<f32>;
 
 fn f() {
-  var v : __packed_vec3<f32> = buffer_v;
-  v = __packed_vec3<f32>(-(vec3f(1, 2, 3)));
-  v = __packed_vec3<f32>((mat3x3f() * vec3<f32>(v)));
-  v = __packed_vec3<f32>((mat3x3f()[0] + vec3<f32>(v)));
-  v = __packed_vec3<f32>((array<vec3f, 4>()[0] + vec3<f32>(v)));
-  v = __packed_vec3<f32>((array<mat3x3f, 4>()[0] * vec3<f32>(v)));
-  v = __packed_vec3<f32>((array<mat3x3f, 4>()[0][1] + vec3<f32>(v)));
-  v = __packed_vec3<f32>((array<array<vec3f, 4>, 4>()[0][0] + vec3<f32>(v)));
+  var v : vec3f = vec3<f32>(buffer_v);
+  v = -(vec3f(1, 2, 3));
+  v = (mat3x3f() * v);
+  v = (mat3x3f()[0] + v);
+  v = (array<vec3f, 4>()[0] + v);
+  v = (array<mat3x3f, 4>()[0] * v);
+  v = (array<mat3x3f, 4>()[0][1] + v);
+  v = (array<array<vec3f, 4>, 4>()[0][0] + v);
 }
 )";
 
@@ -5978,11 +7810,31 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+  @align(16)
+  nested_arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
   for(var i : u32; (i < 3u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
@@ -5991,24 +7843,24 @@ fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
 }
 
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
-  nested_arr_v : array<array<tint_vec3_struct, 4u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
+  nested_arr_v : array<array<vec3<f32>, 4>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var v : __packed_vec3<f32> = __packed_vec3<f32>((vec3<f32>(buffer.v) * 2));
-  v = __packed_vec3<f32>(-(vec3<f32>(v)));
-  v = __packed_vec3<f32>((unpack_array(buffer.m) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer.m[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer.arr_v[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((unpack_array(buffer.arr_m[0]) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer.arr_m[0][1].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(buffer.nested_arr_v[0][0].elements) + vec3<f32>(v)));
+  var v : vec3<f32> = (vec3<f32>(buffer.v.elements) * 2);
+  v = -(v);
+  v = (unpack_array(buffer.m) * v);
+  v = (vec3<f32>(buffer.m[0].elements) + v);
+  v = (vec3<f32>(buffer.arr_v[0].elements) + v);
+  v = (unpack_array(buffer.arr_m[0]) * v);
+  v = (vec3<f32>(buffer.arr_m[0][1].elements) + v);
+  v = (vec3<f32>(buffer.nested_arr_v[0][0].elements) + v);
 }
 )";
 
@@ -6044,37 +7896,49 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_struct_member {
   elements : __packed_vec3<f32>,
 }
 
-fn unpack_array(in : array<tint_vec3_struct, 3u>) -> mat3x3<f32> {
-  var result : mat3x3<f32>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
-  }
-  return result;
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : tint_packed_vec3_f32_struct_member,
+  @align(16)
+  m : array<tint_packed_vec3_f32_array_element, 3u>,
+  @align(16)
+  arr_v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+  @align(16)
+  nested_arr_v : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
 }
 
 struct S {
-  v : __packed_vec3<f32>,
-  m : array<tint_vec3_struct, 3u>,
-  arr_v : array<tint_vec3_struct, 4u>,
-  arr_m : array<array<tint_vec3_struct, 3u>, 4u>,
-  nested_arr_v : array<array<tint_vec3_struct, 4u>, 4u>,
+  v : vec3<f32>,
+  m : mat3x3<f32>,
+  arr_v : array<vec3<f32>, 4>,
+  arr_m : array<mat3x3<f32>, 4>,
+  nested_arr_v : array<array<vec3<f32>, 4>, 4>,
 }
 
-@group(0) @binding(0) var<storage, read_write> buffer : S;
+@group(0) @binding(0) var<storage, read_write> buffer : S_tint_packed_vec3;
 
 fn f() {
-  var v : __packed_vec3<f32> = S().v;
-  v = __packed_vec3<f32>(-(vec3<f32>(S().v)));
-  v = __packed_vec3<f32>((unpack_array(S().m) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(S().m[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(S().arr_v[0].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((unpack_array(S().arr_m[0]) * vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(S().arr_m[0][1].elements) + vec3<f32>(v)));
-  v = __packed_vec3<f32>((vec3<f32>(S().nested_arr_v[0][0].elements) + vec3<f32>(v)));
+  var v : vec3<f32> = S().v;
+  v = -(S().v);
+  v = (S().m * v);
+  v = (S().m[0] + v);
+  v = (S().arr_v[0] + v);
+  v = (S().arr_m[0] * v);
+  v = (S().arr_m[0][1] + v);
+  v = (S().nested_arr_v[0][0] + v);
 }
 )";
 
@@ -6116,8 +7980,28 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
   elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  v : array<tint_packed_vec3_f32_array_element, 4u>,
+  @align(16)
+  m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>,
+  @align(16)
+  n : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>,
+}
+
+fn unpack_array(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
+  var result : array<vec3<f32>, 4u>;
+  for(var i : u32; (i < 4u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
 }
 
 alias VecArray = array<vec3<f32>, 4>;
@@ -6127,24 +8011,24 @@ alias MatArray = array<mat3x3<f32>, 4>;
 alias NestedArray = array<VecArray, 4>;
 
 struct S {
-  v : array<tint_vec3_struct, 4u>,
-  m : array<array<tint_vec3_struct, 3u>, 4u>,
-  n : array<array<tint_vec3_struct, 4u>, 4u>,
+  v : VecArray,
+  m : MatArray,
+  n : NestedArray,
 }
 
-@group(0) @binding(0) var<storage, read_write> s : S;
+@group(0) @binding(0) var<storage, read_write> s : S_tint_packed_vec3;
 
-@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_vec3_struct, 4u>;
+@group(0) @binding(1) var<storage, read_write> arr_v : array<tint_packed_vec3_f32_array_element, 4u>;
 
-@group(0) @binding(2) var<storage, read_write> arr_m : array<array<tint_vec3_struct, 3u>, 4u>;
+@group(0) @binding(2) var<storage, read_write> arr_m : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
 
-@group(0) @binding(3) var<storage, read_write> arr_n : array<array<tint_vec3_struct, 4u>, 4u>;
+@group(0) @binding(3) var<storage, read_write> arr_n : array<array<tint_packed_vec3_f32_array_element, 4u>, 4u>;
 
-fn g(p : ptr<function, array<tint_vec3_struct, 4u>>) {
+fn g(p : ptr<function, VecArray>) {
 }
 
 fn f() {
-  var f_arr_v : array<tint_vec3_struct, 4u> = s.v;
+  var f_arr_v : VecArray = unpack_array(s.v);
   g(&(f_arr_v));
   arr_v = s.v;
   arr_m[0] = s.m[0];
@@ -6181,13 +8065,11 @@ fn f() {
 
     auto* expect =
         R"(
-struct tint_vec3_struct {
-  elements : __packed_vec3<f32>,
-}
+enable chromium_internal_relaxed_uniform_layout;
 
 struct S {
-  vf : __packed_vec3<f32>,
-  af : array<tint_vec3_struct, 4u>,
+  vf : vec3<f32>,
+  af : array<vec3<f32>, 4>,
   vb : vec3<bool>,
   ab : array<vec3<bool>, 4>,
 }
@@ -6196,8 +8078,8 @@ struct S {
 
 fn f() {
   var f : S;
-  f.vf = buffer;
-  buffer = f.af[0].elements;
+  f.vf = vec3<f32>(buffer);
+  buffer = __packed_vec3<f32>(f.af[0]);
 }
 )";
 

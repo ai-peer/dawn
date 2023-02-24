@@ -64,7 +64,7 @@ uint32_t Vector::Align() const {
         case 2:
             return subtype_->Size() * 2;
         case 3:
-            return subtype_->Size() * 4;
+            return subtype_->Size() * (packed_ ? 1 : 4);
         case 4:
             return subtype_->Size() * 4;
     }

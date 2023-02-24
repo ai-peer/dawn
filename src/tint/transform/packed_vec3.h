@@ -19,6 +19,7 @@
 
 namespace tint::transform {
 
+/// TODO: update comment w.r.t. multi-versioning structs
 /// A transform to be used by the MSL backend which will:
 /// * Replace `vec3<T>` types with an internal `__packed_vec3` type when they are used in structures
 ///   and in storage.

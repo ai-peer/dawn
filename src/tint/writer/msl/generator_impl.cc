@@ -222,7 +222,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     }
     manager.Add<transform::MultiplanarExternalTexture>();
 
-    manager.Add<transform::PreservePadding>();
+    // manager.Add<transform::PreservePadding>();
 
     manager.Add<transform::Unshadow>();
 
