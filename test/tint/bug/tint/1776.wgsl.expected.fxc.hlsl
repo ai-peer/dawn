@@ -5,13 +5,13 @@ struct S {
 
 ByteAddressBuffer sb : register(t0, space0);
 
-S tint_symbol(ByteAddressBuffer buffer, uint offset) {
-  const S tint_symbol_3 = {asfloat(buffer.Load4((offset + 0u))), asint(buffer.Load((offset + 16u)))};
+S tint_symbol(uint offset) {
+  const S tint_symbol_3 = {asfloat(sb.Load4((offset + 0u))), asint(sb.Load((offset + 16u)))};
   return tint_symbol_3;
 }
 
 [numthreads(1, 1, 1)]
 void main() {
-  const S x = tint_symbol(sb, 32u);
+  const S x = tint_symbol(32u);
   return;
 }

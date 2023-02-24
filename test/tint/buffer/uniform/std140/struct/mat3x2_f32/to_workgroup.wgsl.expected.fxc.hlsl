@@ -13,29 +13,29 @@ struct tint_symbol_1 {
   uint local_invocation_index : SV_GroupIndex;
 };
 
-float3x2 tint_symbol_5(uint4 buffer[32], uint offset) {
+float3x2 tint_symbol_5(uint offset) {
   const uint scalar_offset = ((offset + 0u)) / 4;
-  uint4 ubo_load = buffer[scalar_offset / 4];
+  uint4 ubo_load = u[scalar_offset / 4];
   const uint scalar_offset_1 = ((offset + 8u)) / 4;
-  uint4 ubo_load_1 = buffer[scalar_offset_1 / 4];
+  uint4 ubo_load_1 = u[scalar_offset_1 / 4];
   const uint scalar_offset_2 = ((offset + 16u)) / 4;
-  uint4 ubo_load_2 = buffer[scalar_offset_2 / 4];
+  uint4 ubo_load_2 = u[scalar_offset_2 / 4];
   return float3x2(asfloat(((scalar_offset & 2) ? ubo_load.zw : ubo_load.xy)), asfloat(((scalar_offset_1 & 2) ? ubo_load_1.zw : ubo_load_1.xy)), asfloat(((scalar_offset_2 & 2) ? ubo_load_2.zw : ubo_load_2.xy)));
 }
 
-S tint_symbol_3(uint4 buffer[32], uint offset) {
+S tint_symbol_3(uint offset) {
   const uint scalar_offset_3 = ((offset + 0u)) / 4;
   const uint scalar_offset_4 = ((offset + 64u)) / 4;
-  const S tint_symbol_8 = {asint(buffer[scalar_offset_3 / 4][scalar_offset_3 % 4]), tint_symbol_5(buffer, (offset + 8u)), asint(buffer[scalar_offset_4 / 4][scalar_offset_4 % 4])};
+  const S tint_symbol_8 = {asint(u[scalar_offset_3 / 4][scalar_offset_3 % 4]), tint_symbol_5((offset + 8u)), asint(u[scalar_offset_4 / 4][scalar_offset_4 % 4])};
   return tint_symbol_8;
 }
 
 typedef S tint_symbol_2_ret[4];
-tint_symbol_2_ret tint_symbol_2(uint4 buffer[32], uint offset) {
+tint_symbol_2_ret tint_symbol_2(uint offset) {
   S arr[4] = (S[4])0;
   {
     for(uint i_1 = 0u; (i_1 < 4u); i_1 = (i_1 + 1u)) {
-      arr[i_1] = tint_symbol_3(buffer, (offset + (i_1 * 128u)));
+      arr[i_1] = tint_symbol_3((offset + (i_1 * 128u)));
     }
   }
   return arr;
@@ -50,9 +50,9 @@ void f_inner(uint local_invocation_index) {
     }
   }
   GroupMemoryBarrierWithGroupSync();
-  w = tint_symbol_2(u, 0u);
-  w[1] = tint_symbol_3(u, 256u);
-  w[3].m = tint_symbol_5(u, 264u);
+  w = tint_symbol_2(0u);
+  w[1] = tint_symbol_3(256u);
+  w[3].m = tint_symbol_5(264u);
   w[1].m[0] = asfloat(u[1].xy).yx;
 }
 
