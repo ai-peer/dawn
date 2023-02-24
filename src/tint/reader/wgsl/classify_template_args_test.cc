@@ -477,6 +477,33 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                      T::kEOF,
                                  },
                              },
+                             {
+                                 "a<b<=c>",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kIdentifier,         // b
+                                     T::kLessThanEqual,      // <=
+                                     T::kIdentifier,         // c
+                                     T::kTemplateArgsRight,  // >
+                                     T::kEOF,
+                                 },
+                             },
+                             {
+                                 // Treesitter scanner was getting this wrong.
+                                 "a<(b<=c)>",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kParenLeft,          // (
+                                     T::kIdentifier,         // b
+                                     T::kLessThanEqual,      // <=
+                                     T::kIdentifier,         // c
+                                     T::kParenRight,         // )
+                                     T::kTemplateArgsRight,  // >
+                                     T::kEOF,
+                                 },
+                             },
                          }));
 
 }  // namespace
