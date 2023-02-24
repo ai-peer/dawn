@@ -14,6 +14,7 @@
 
 import("../../../scripts/dawn_overrides_with_defaults.gni")
 
+import("//build_overrides/angle.gni")
 import("//build_overrides/build.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
 import("${dawn_root}/scripts/dawn_component.gni")
@@ -112,6 +113,8 @@ if (dawn_enable_opengl) {
     args = [
       "--gl-xml",
       rebase_path("${dawn_root}/third_party/khronos/gl.xml", root_build_dir),
+      "--gl-angle-ext-xml",
+      rebase_path("${angle_root}/scripts/gl_angle_ext.xml", root_build_dir),
       "--supported-extensions",
       rebase_path("opengl/supported_extensions.json", root_build_dir),
     ]
