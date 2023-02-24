@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2668c0_9b564a18",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T22:36:10Z",
+      "side": 1,
+      "message": "I think it has the same problem either way because the conditions change if we call `CopyFromStagingBuffer` first since that moves `mStagingBuffer` thereby leaving it as nullptr.",
+      "parentUuid": "570928ce_adcc3d5c",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 5
+      },
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "749c423c_910c5797",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-02-24T19:11:02Z",
       "side": 1,
       "message": "I think these hide a bit too much magic inside.\n\n[[no_discard]] already makes it so you need to do something with the bool.\nSo the macro saves us from having the bool, and then doing absolutely nothing with it - seems unlikely?",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df42ad47_f22f1d26",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T22:36:10Z",
+      "side": 1,
+      "message": "It\u0027s not THAT unlikely. We have at least 10 instances of uses in this CL?\n\nAlternatively, would you prefer to just make the ConsumeError function public and then allow implementations to call it directly? Just be aware that doing that opens the door to possible implementations that cause a device loss and continue to do stuff potentially leaving us in weird states.",
+      "parentUuid": "749c423c_910c5797",
       "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08983ccb_30ea7777",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T22:36:10Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3250de45_b91fe49c",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 14
+      },
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86f79440_c395e0cd",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-02-24T19:11:02Z",
       "side": 1,
       "message": "To avoid duplicating the logic inside, I think we can declare it as:\n\n```\ntemplate \u003ctypename F,\n          typename R \u003d std::invoke_result_t\u003cF, const SubresourceRange\u0026, const T\u0026\u003e\u003e\nR Iterate(F\u0026\u0026 iterateFunc);\n```\n\nand define as:\n\n```\ntemplate \u003ctypename F, typename R\u003e\nR Iterate(F\u0026\u0026 iterateFunc) {\n  constexpr bool mayError \u003d std::is_same_v\u003cR, MaybeError\u003e;\n  for (...) {\n    if (...) {\n      if constexpr (mayError) {\n        DAWN_TRY(iterateFunc(...));\n      } else {\n        iterateFunc(...)\n      }\n    }\n  }\n\n  if constexpr (mayError) {\n    return {};\n  }\n}\n```",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7778e4_23f6e631",
+        "filename": "src/dawn/native/SubresourceStorage.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-24T22:36:10Z",
+      "side": 1,
+      "message": "Oh, nice! Never used constexpr if before, thanks for the tip.",
+      "parentUuid": "86f79440_c395e0cd",
       "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
