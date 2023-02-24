@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf6bd00_08b27caf",
+        "filename": "src/tint/transform/pad_structs.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-24T18:45:13Z",
+      "side": 1,
+      "message": "nit: std::move",
+      "range": {
+        "startLine": 114,
+        "startChar": 84,
+        "endLine": 114,
+        "endChar": 98
+      },
+      "revId": "afab47155cc8d451bcefb67a08405fe2ab8a8d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
