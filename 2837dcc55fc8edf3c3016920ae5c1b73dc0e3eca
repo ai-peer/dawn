@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2633cf6_2e0bec7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T18:57:02Z",
+      "side": 1,
+      "message": "Austin, Corentin: PTAL. Thanks!",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4497723_d060ea32",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-24T18:57:02Z",
+      "side": 1,
+      "message": "This might be a perf hit. An alternative would be create a new \"BaseVertexBaseInstanceANGLE\" toggle. Or to reassign the DrawArraysInstancedBaseInstance fn ptr to DrawArraysInstancedBaseInstanceANGLE in the extension loader. Then this code could go away.",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
