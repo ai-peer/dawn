@@ -65,4 +65,20 @@ bool IsDoubleValueRepresentable(double value) {
     }
 }
 
+// Returns if two inclusive integral ranges [x0, x1] and [y0, y1] have overlap.
+template <typename T>
+bool HasRangesOverlap(T x0, T x1, T y0, T y1) {
+    ASSERT(x0 <= x1 && y0 <= y1);
+    if constexpr (std::is_integral_v<T>) {
+        // Two ranges DON'T have overlap if and only if:
+        // 1. [x0, x1] [y0, y1], or
+        // 2. [y0, y1] [x0, x1]
+        // which is (x1 < y0 || y1 < x0)
+        // The inverse of which ends in the following statement.
+        return x0 <= y1 && y0 <= x1;
+    } else {
+        static_assert(sizeof(T) != sizeof(T), "Unsupported type");
+    }
+}
+
 #endif  // SRC_DAWN_COMMON_NUMERIC_H_
