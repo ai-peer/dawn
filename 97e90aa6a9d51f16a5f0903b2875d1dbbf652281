@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e4c481_8954819d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-24T15:27:20Z",
+      "side": 1,
+      "message": "Scrolling throught the new expectations, they are expected for the most part and should be fixed by https://chromium-review.googlesource.com/c/chromium/src/+/4277962",
+      "revId": "97e90aa6a9d51f16a5f0903b2875d1dbbf652281",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
