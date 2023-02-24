@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570928ce_adcc3d5c",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T19:11:02Z",
+      "side": 1,
+      "message": "hm, to simplify the state handling, could you call CopyFromStagingBuffer first?\nlike:\n```\nMaybeError err;\nif (condition) {\n  err \u003d CopyFromStagingBuffer();\n}\nUnmapInternal(...).Call();\nreturn err;\n```\n?",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 5
+      },
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749c423c_910c5797",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T19:11:02Z",
+      "side": 1,
+      "message": "I think these hide a bit too much magic inside.\n\n[[no_discard]] already makes it so you need to do something with the bool.\nSo the macro saves us from having the bool, and then doing absolutely nothing with it - seems unlikely?",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3250de45_b91fe49c",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T19:11:02Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 95,
+        "endChar": 14
+      },
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86f79440_c395e0cd",
+        "filename": "src/dawn/native/SubresourceStorage.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T19:11:02Z",
+      "side": 1,
+      "message": "To avoid duplicating the logic inside, I think we can declare it as:\n\n```\ntemplate \u003ctypename F,\n          typename R \u003d std::invoke_result_t\u003cF, const SubresourceRange\u0026, const T\u0026\u003e\u003e\nR Iterate(F\u0026\u0026 iterateFunc);\n```\n\nand define as:\n\n```\ntemplate \u003ctypename F, typename R\u003e\nR Iterate(F\u0026\u0026 iterateFunc) {\n  constexpr bool mayError \u003d std::is_same_v\u003cR, MaybeError\u003e;\n  for (...) {\n    if (...) {\n      if constexpr (mayError) {\n        DAWN_TRY(iterateFunc(...));\n      } else {\n        iterateFunc(...)\n      }\n    }\n  }\n\n  if constexpr (mayError) {\n    return {};\n  }\n}\n```",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
