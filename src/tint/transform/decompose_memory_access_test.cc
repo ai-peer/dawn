@@ -180,179 +180,179 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @internal(intrinsic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_symbol_1(offset : u32) -> i32
 
 @internal(intrinsic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_symbol_2(offset : u32) -> u32
 
 @internal(intrinsic_load_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f16
+fn tint_symbol_3(offset : u32) -> f16
 
 @internal(intrinsic_load_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f32>
+fn tint_symbol_4(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<i32>
+fn tint_symbol_5(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<u32>
+fn tint_symbol_6(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f16>
+fn tint_symbol_7(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f32>
+fn tint_symbol_8(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<i32>
+fn tint_symbol_9(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<u32>
+fn tint_symbol_10(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f16>
+fn tint_symbol_11(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f32>
+fn tint_symbol_12(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<i32>
+fn tint_symbol_13(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<u32>
+fn tint_symbol_14(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f16>
+fn tint_symbol_15(offset : u32) -> vec4<f16>
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)));
+fn tint_symbol_16(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)));
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)));
+fn tint_symbol_17(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)));
+fn tint_symbol_20(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)), tint_symbol_4(buffer, (offset + 24u)));
+fn tint_symbol_22(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)), tint_symbol_4((offset + 24u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 48u)));
+fn tint_symbol_23(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)), tint_symbol_8((offset + 48u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)), tint_symbol_12(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)), tint_symbol_12((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)));
+fn tint_symbol_25(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)));
+fn tint_symbol_26(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)));
+fn tint_symbol_29(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)), tint_symbol_7(buffer, (offset + 12u)));
+fn tint_symbol_31(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)), tint_symbol_7((offset + 12u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)), tint_symbol_11(buffer, (offset + 24u)));
+fn tint_symbol_32(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)), tint_symbol_11((offset + 24u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)), tint_symbol_15(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)), tint_symbol_15((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_34(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_8(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_8((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f16>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<vec3<f16>, 2u> {
   var arr_1 : array<vec3<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_11(buffer, (offset + (i_1 * 8u)));
+    arr_1[i_1] = tint_symbol_11((offset + (i_1 * 8u)));
   }
   return arr_1;
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var scalar_f32 : f32 = tint_symbol(&(sb), 0u);
-  var scalar_i32 : i32 = tint_symbol_1(&(sb), 4u);
-  var scalar_u32 : u32 = tint_symbol_2(&(sb), 8u);
-  var scalar_f16 : f16 = tint_symbol_3(&(sb), 12u);
-  var vec2_f32 : vec2<f32> = tint_symbol_4(&(sb), 16u);
-  var vec2_i32 : vec2<i32> = tint_symbol_5(&(sb), 24u);
-  var vec2_u32 : vec2<u32> = tint_symbol_6(&(sb), 32u);
-  var vec2_f16 : vec2<f16> = tint_symbol_7(&(sb), 40u);
-  var vec3_f32 : vec3<f32> = tint_symbol_8(&(sb), 48u);
-  var vec3_i32 : vec3<i32> = tint_symbol_9(&(sb), 64u);
-  var vec3_u32 : vec3<u32> = tint_symbol_10(&(sb), 80u);
-  var vec3_f16 : vec3<f16> = tint_symbol_11(&(sb), 96u);
-  var vec4_f32 : vec4<f32> = tint_symbol_12(&(sb), 112u);
-  var vec4_i32 : vec4<i32> = tint_symbol_13(&(sb), 128u);
-  var vec4_u32 : vec4<u32> = tint_symbol_14(&(sb), 144u);
-  var vec4_f16 : vec4<f16> = tint_symbol_15(&(sb), 160u);
-  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(&(sb), 168u);
-  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(&(sb), 192u);
-  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(&(sb), 224u);
-  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(&(sb), 256u);
-  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(&(sb), 288u);
-  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(&(sb), 336u);
-  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(&(sb), 384u);
-  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(&(sb), 416u);
-  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(&(sb), 480u);
-  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(&(sb), 544u);
-  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(&(sb), 552u);
-  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(&(sb), 568u);
-  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(&(sb), 584u);
-  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(&(sb), 600u);
-  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(&(sb), 624u);
-  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(&(sb), 648u);
-  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(&(sb), 664u);
-  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(&(sb), 696u);
-  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(&(sb), 736u);
-  var arr2_vec3_f16 : array<vec3<f16>, 2> = tint_symbol_35(&(sb), 768u);
+  var scalar_f32 : f32 = tint_symbol(0u);
+  var scalar_i32 : i32 = tint_symbol_1(4u);
+  var scalar_u32 : u32 = tint_symbol_2(8u);
+  var scalar_f16 : f16 = tint_symbol_3(12u);
+  var vec2_f32 : vec2<f32> = tint_symbol_4(16u);
+  var vec2_i32 : vec2<i32> = tint_symbol_5(24u);
+  var vec2_u32 : vec2<u32> = tint_symbol_6(32u);
+  var vec2_f16 : vec2<f16> = tint_symbol_7(40u);
+  var vec3_f32 : vec3<f32> = tint_symbol_8(48u);
+  var vec3_i32 : vec3<i32> = tint_symbol_9(64u);
+  var vec3_u32 : vec3<u32> = tint_symbol_10(80u);
+  var vec3_f16 : vec3<f16> = tint_symbol_11(96u);
+  var vec4_f32 : vec4<f32> = tint_symbol_12(112u);
+  var vec4_i32 : vec4<i32> = tint_symbol_13(128u);
+  var vec4_u32 : vec4<u32> = tint_symbol_14(144u);
+  var vec4_f16 : vec4<f16> = tint_symbol_15(160u);
+  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(168u);
+  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(192u);
+  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(224u);
+  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(256u);
+  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(288u);
+  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(336u);
+  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(384u);
+  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(416u);
+  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(480u);
+  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(544u);
+  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(552u);
+  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(568u);
+  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(584u);
+  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(600u);
+  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(624u);
+  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(648u);
+  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(664u);
+  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(696u);
+  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(736u);
+  var arr2_vec3_f16 : array<vec3<f16>, 2> = tint_symbol_35(768u);
 }
 )";
 
@@ -451,179 +451,179 @@ struct SB {
 enable f16;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @internal(intrinsic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_symbol_1(offset : u32) -> i32
 
 @internal(intrinsic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_symbol_2(offset : u32) -> u32
 
 @internal(intrinsic_load_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f16
+fn tint_symbol_3(offset : u32) -> f16
 
 @internal(intrinsic_load_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f32>
+fn tint_symbol_4(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<i32>
+fn tint_symbol_5(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<u32>
+fn tint_symbol_6(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f16>
+fn tint_symbol_7(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f32>
+fn tint_symbol_8(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<i32>
+fn tint_symbol_9(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<u32>
+fn tint_symbol_10(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f16>
+fn tint_symbol_11(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f32>
+fn tint_symbol_12(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<i32>
+fn tint_symbol_13(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<u32>
+fn tint_symbol_14(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f16>
+fn tint_symbol_15(offset : u32) -> vec4<f16>
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)));
+fn tint_symbol_16(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)));
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)));
+fn tint_symbol_17(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)));
+fn tint_symbol_20(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)), tint_symbol_4(buffer, (offset + 24u)));
+fn tint_symbol_22(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)), tint_symbol_4((offset + 24u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 48u)));
+fn tint_symbol_23(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)), tint_symbol_8((offset + 48u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)), tint_symbol_12(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)), tint_symbol_12((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)));
+fn tint_symbol_25(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)));
+fn tint_symbol_26(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)));
+fn tint_symbol_29(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)), tint_symbol_7(buffer, (offset + 12u)));
+fn tint_symbol_31(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)), tint_symbol_7((offset + 12u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)), tint_symbol_11(buffer, (offset + 24u)));
+fn tint_symbol_32(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)), tint_symbol_11((offset + 24u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)), tint_symbol_15(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)), tint_symbol_15((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_34(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_8(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_8((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f16>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<vec3<f16>, 2u> {
   var arr_1 : array<vec3<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_11(buffer, (offset + (i_1 * 8u)));
+    arr_1[i_1] = tint_symbol_11((offset + (i_1 * 8u)));
   }
   return arr_1;
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var scalar_f32 : f32 = tint_symbol(&(sb), 0u);
-  var scalar_i32 : i32 = tint_symbol_1(&(sb), 4u);
-  var scalar_u32 : u32 = tint_symbol_2(&(sb), 8u);
-  var scalar_f16 : f16 = tint_symbol_3(&(sb), 12u);
-  var vec2_f32 : vec2<f32> = tint_symbol_4(&(sb), 16u);
-  var vec2_i32 : vec2<i32> = tint_symbol_5(&(sb), 24u);
-  var vec2_u32 : vec2<u32> = tint_symbol_6(&(sb), 32u);
-  var vec2_f16 : vec2<f16> = tint_symbol_7(&(sb), 40u);
-  var vec3_f32 : vec3<f32> = tint_symbol_8(&(sb), 48u);
-  var vec3_i32 : vec3<i32> = tint_symbol_9(&(sb), 64u);
-  var vec3_u32 : vec3<u32> = tint_symbol_10(&(sb), 80u);
-  var vec3_f16 : vec3<f16> = tint_symbol_11(&(sb), 96u);
-  var vec4_f32 : vec4<f32> = tint_symbol_12(&(sb), 112u);
-  var vec4_i32 : vec4<i32> = tint_symbol_13(&(sb), 128u);
-  var vec4_u32 : vec4<u32> = tint_symbol_14(&(sb), 144u);
-  var vec4_f16 : vec4<f16> = tint_symbol_15(&(sb), 160u);
-  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(&(sb), 168u);
-  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(&(sb), 192u);
-  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(&(sb), 224u);
-  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(&(sb), 256u);
-  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(&(sb), 288u);
-  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(&(sb), 336u);
-  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(&(sb), 384u);
-  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(&(sb), 416u);
-  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(&(sb), 480u);
-  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(&(sb), 544u);
-  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(&(sb), 552u);
-  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(&(sb), 568u);
-  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(&(sb), 584u);
-  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(&(sb), 600u);
-  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(&(sb), 624u);
-  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(&(sb), 648u);
-  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(&(sb), 664u);
-  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(&(sb), 696u);
-  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(&(sb), 736u);
-  var arr2_vec3_f16 : array<vec3<f16>, 2> = tint_symbol_35(&(sb), 768u);
+  var scalar_f32 : f32 = tint_symbol(0u);
+  var scalar_i32 : i32 = tint_symbol_1(4u);
+  var scalar_u32 : u32 = tint_symbol_2(8u);
+  var scalar_f16 : f16 = tint_symbol_3(12u);
+  var vec2_f32 : vec2<f32> = tint_symbol_4(16u);
+  var vec2_i32 : vec2<i32> = tint_symbol_5(24u);
+  var vec2_u32 : vec2<u32> = tint_symbol_6(32u);
+  var vec2_f16 : vec2<f16> = tint_symbol_7(40u);
+  var vec3_f32 : vec3<f32> = tint_symbol_8(48u);
+  var vec3_i32 : vec3<i32> = tint_symbol_9(64u);
+  var vec3_u32 : vec3<u32> = tint_symbol_10(80u);
+  var vec3_f16 : vec3<f16> = tint_symbol_11(96u);
+  var vec4_f32 : vec4<f32> = tint_symbol_12(112u);
+  var vec4_i32 : vec4<i32> = tint_symbol_13(128u);
+  var vec4_u32 : vec4<u32> = tint_symbol_14(144u);
+  var vec4_f16 : vec4<f16> = tint_symbol_15(160u);
+  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(168u);
+  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(192u);
+  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(224u);
+  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(256u);
+  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(288u);
+  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(336u);
+  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(384u);
+  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(416u);
+  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(480u);
+  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(544u);
+  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(552u);
+  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(568u);
+  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(584u);
+  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(600u);
+  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(624u);
+  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(648u);
+  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(664u);
+  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(696u);
+  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(736u);
+  var arr2_vec3_f16 : array<vec3<f16>, 2> = tint_symbol_35(768u);
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -804,179 +804,179 @@ struct UB {
 @group(0) @binding(0) var<uniform> ub : UB;
 
 @internal(intrinsic_load_uniform_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @internal(intrinsic_load_uniform_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> i32
+fn tint_symbol_1(offset : u32) -> i32
 
 @internal(intrinsic_load_uniform_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> u32
+fn tint_symbol_2(offset : u32) -> u32
 
 @internal(intrinsic_load_uniform_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> f16
+fn tint_symbol_3(offset : u32) -> f16
 
 @internal(intrinsic_load_uniform_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<f32>
+fn tint_symbol_4(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_uniform_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<i32>
+fn tint_symbol_5(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_uniform_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<u32>
+fn tint_symbol_6(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_uniform_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<f16>
+fn tint_symbol_7(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_uniform_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<f32>
+fn tint_symbol_8(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_uniform_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<i32>
+fn tint_symbol_9(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_uniform_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<u32>
+fn tint_symbol_10(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_uniform_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<f16>
+fn tint_symbol_11(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_uniform_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<f32>
+fn tint_symbol_12(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_uniform_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<i32>
+fn tint_symbol_13(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_uniform_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<u32>
+fn tint_symbol_14(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_uniform_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<f16>
+fn tint_symbol_15(offset : u32) -> vec4<f16>
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)));
+fn tint_symbol_16(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)));
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)));
+fn tint_symbol_17(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)));
+fn tint_symbol_20(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)), tint_symbol_4(buffer, (offset + 24u)));
+fn tint_symbol_22(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)), tint_symbol_4((offset + 24u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 48u)));
+fn tint_symbol_23(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)), tint_symbol_8((offset + 48u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)), tint_symbol_12(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)), tint_symbol_12((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)));
+fn tint_symbol_25(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)));
+fn tint_symbol_26(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)));
+fn tint_symbol_29(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)), tint_symbol_7(buffer, (offset + 12u)));
+fn tint_symbol_31(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)), tint_symbol_7((offset + 12u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)), tint_symbol_11(buffer, (offset + 24u)));
+fn tint_symbol_32(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)), tint_symbol_11((offset + 24u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)), tint_symbol_15(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)), tint_symbol_15((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_34(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_8(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_8((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> array<mat4x2<f16>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<mat4x2<f16>, 2u> {
   var arr_1 : array<mat4x2<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_31(buffer, (offset + (i_1 * 16u)));
+    arr_1[i_1] = tint_symbol_31((offset + (i_1 * 16u)));
   }
   return arr_1;
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var scalar_f32 : f32 = tint_symbol(&(ub), 0u);
-  var scalar_i32 : i32 = tint_symbol_1(&(ub), 4u);
-  var scalar_u32 : u32 = tint_symbol_2(&(ub), 8u);
-  var scalar_f16 : f16 = tint_symbol_3(&(ub), 12u);
-  var vec2_f32 : vec2<f32> = tint_symbol_4(&(ub), 16u);
-  var vec2_i32 : vec2<i32> = tint_symbol_5(&(ub), 24u);
-  var vec2_u32 : vec2<u32> = tint_symbol_6(&(ub), 32u);
-  var vec2_f16 : vec2<f16> = tint_symbol_7(&(ub), 40u);
-  var vec3_f32 : vec3<f32> = tint_symbol_8(&(ub), 48u);
-  var vec3_i32 : vec3<i32> = tint_symbol_9(&(ub), 64u);
-  var vec3_u32 : vec3<u32> = tint_symbol_10(&(ub), 80u);
-  var vec3_f16 : vec3<f16> = tint_symbol_11(&(ub), 96u);
-  var vec4_f32 : vec4<f32> = tint_symbol_12(&(ub), 112u);
-  var vec4_i32 : vec4<i32> = tint_symbol_13(&(ub), 128u);
-  var vec4_u32 : vec4<u32> = tint_symbol_14(&(ub), 144u);
-  var vec4_f16 : vec4<f16> = tint_symbol_15(&(ub), 160u);
-  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(&(ub), 168u);
-  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(&(ub), 192u);
-  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(&(ub), 224u);
-  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(&(ub), 256u);
-  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(&(ub), 288u);
-  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(&(ub), 336u);
-  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(&(ub), 384u);
-  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(&(ub), 416u);
-  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(&(ub), 480u);
-  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(&(ub), 544u);
-  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(&(ub), 552u);
-  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(&(ub), 568u);
-  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(&(ub), 584u);
-  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(&(ub), 600u);
-  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(&(ub), 624u);
-  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(&(ub), 648u);
-  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(&(ub), 664u);
-  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(&(ub), 696u);
-  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(&(ub), 736u);
-  var arr2_mat4x2_f16 : array<mat4x2<f16>, 2> = tint_symbol_35(&(ub), 768u);
+  var scalar_f32 : f32 = tint_symbol(0u);
+  var scalar_i32 : i32 = tint_symbol_1(4u);
+  var scalar_u32 : u32 = tint_symbol_2(8u);
+  var scalar_f16 : f16 = tint_symbol_3(12u);
+  var vec2_f32 : vec2<f32> = tint_symbol_4(16u);
+  var vec2_i32 : vec2<i32> = tint_symbol_5(24u);
+  var vec2_u32 : vec2<u32> = tint_symbol_6(32u);
+  var vec2_f16 : vec2<f16> = tint_symbol_7(40u);
+  var vec3_f32 : vec3<f32> = tint_symbol_8(48u);
+  var vec3_i32 : vec3<i32> = tint_symbol_9(64u);
+  var vec3_u32 : vec3<u32> = tint_symbol_10(80u);
+  var vec3_f16 : vec3<f16> = tint_symbol_11(96u);
+  var vec4_f32 : vec4<f32> = tint_symbol_12(112u);
+  var vec4_i32 : vec4<i32> = tint_symbol_13(128u);
+  var vec4_u32 : vec4<u32> = tint_symbol_14(144u);
+  var vec4_f16 : vec4<f16> = tint_symbol_15(160u);
+  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(168u);
+  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(192u);
+  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(224u);
+  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(256u);
+  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(288u);
+  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(336u);
+  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(384u);
+  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(416u);
+  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(480u);
+  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(544u);
+  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(552u);
+  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(568u);
+  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(584u);
+  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(600u);
+  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(624u);
+  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(648u);
+  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(664u);
+  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(696u);
+  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(736u);
+  var arr2_mat4x2_f16 : array<mat4x2<f16>, 2> = tint_symbol_35(768u);
 }
 )";
 
@@ -1075,179 +1075,179 @@ struct UB {
 enable f16;
 
 @internal(intrinsic_load_uniform_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @internal(intrinsic_load_uniform_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> i32
+fn tint_symbol_1(offset : u32) -> i32
 
 @internal(intrinsic_load_uniform_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> u32
+fn tint_symbol_2(offset : u32) -> u32
 
 @internal(intrinsic_load_uniform_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> f16
+fn tint_symbol_3(offset : u32) -> f16
 
 @internal(intrinsic_load_uniform_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<f32>
+fn tint_symbol_4(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_uniform_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<i32>
+fn tint_symbol_5(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_uniform_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<u32>
+fn tint_symbol_6(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_uniform_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec2<f16>
+fn tint_symbol_7(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_uniform_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<f32>
+fn tint_symbol_8(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_uniform_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<i32>
+fn tint_symbol_9(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_uniform_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<u32>
+fn tint_symbol_10(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_uniform_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec3<f16>
+fn tint_symbol_11(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_uniform_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<f32>
+fn tint_symbol_12(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_uniform_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<i32>
+fn tint_symbol_13(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_uniform_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<u32>
+fn tint_symbol_14(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_uniform_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> vec4<f16>
+fn tint_symbol_15(offset : u32) -> vec4<f16>
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)));
+fn tint_symbol_16(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)));
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)));
+fn tint_symbol_17(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)));
+fn tint_symbol_20(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_4(buffer, (offset + 0u)), tint_symbol_4(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 16u)), tint_symbol_4(buffer, (offset + 24u)));
+fn tint_symbol_22(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_4((offset + 0u)), tint_symbol_4((offset + 8u)), tint_symbol_4((offset + 16u)), tint_symbol_4((offset + 24u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 16u)), tint_symbol_8(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 48u)));
+fn tint_symbol_23(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 16u)), tint_symbol_8((offset + 32u)), tint_symbol_8((offset + 48u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 32u)), tint_symbol_12(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 32u)), tint_symbol_12((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)));
+fn tint_symbol_25(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)));
+fn tint_symbol_26(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)));
+fn tint_symbol_29(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_7(buffer, (offset + 0u)), tint_symbol_7(buffer, (offset + 4u)), tint_symbol_7(buffer, (offset + 8u)), tint_symbol_7(buffer, (offset + 12u)));
+fn tint_symbol_31(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_7((offset + 0u)), tint_symbol_7((offset + 4u)), tint_symbol_7((offset + 8u)), tint_symbol_7((offset + 12u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_11(buffer, (offset + 0u)), tint_symbol_11(buffer, (offset + 8u)), tint_symbol_11(buffer, (offset + 16u)), tint_symbol_11(buffer, (offset + 24u)));
+fn tint_symbol_32(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_11((offset + 0u)), tint_symbol_11((offset + 8u)), tint_symbol_11((offset + 16u)), tint_symbol_11((offset + 24u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_15(buffer, (offset + 0u)), tint_symbol_15(buffer, (offset + 8u)), tint_symbol_15(buffer, (offset + 16u)), tint_symbol_15(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_15((offset + 0u)), tint_symbol_15((offset + 8u)), tint_symbol_15((offset + 16u)), tint_symbol_15((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_34(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_8(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_8((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<uniform, UB>, offset : u32) -> array<mat4x2<f16>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<mat4x2<f16>, 2u> {
   var arr_1 : array<mat4x2<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_31(buffer, (offset + (i_1 * 16u)));
+    arr_1[i_1] = tint_symbol_31((offset + (i_1 * 16u)));
   }
   return arr_1;
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var scalar_f32 : f32 = tint_symbol(&(ub), 0u);
-  var scalar_i32 : i32 = tint_symbol_1(&(ub), 4u);
-  var scalar_u32 : u32 = tint_symbol_2(&(ub), 8u);
-  var scalar_f16 : f16 = tint_symbol_3(&(ub), 12u);
-  var vec2_f32 : vec2<f32> = tint_symbol_4(&(ub), 16u);
-  var vec2_i32 : vec2<i32> = tint_symbol_5(&(ub), 24u);
-  var vec2_u32 : vec2<u32> = tint_symbol_6(&(ub), 32u);
-  var vec2_f16 : vec2<f16> = tint_symbol_7(&(ub), 40u);
-  var vec3_f32 : vec3<f32> = tint_symbol_8(&(ub), 48u);
-  var vec3_i32 : vec3<i32> = tint_symbol_9(&(ub), 64u);
-  var vec3_u32 : vec3<u32> = tint_symbol_10(&(ub), 80u);
-  var vec3_f16 : vec3<f16> = tint_symbol_11(&(ub), 96u);
-  var vec4_f32 : vec4<f32> = tint_symbol_12(&(ub), 112u);
-  var vec4_i32 : vec4<i32> = tint_symbol_13(&(ub), 128u);
-  var vec4_u32 : vec4<u32> = tint_symbol_14(&(ub), 144u);
-  var vec4_f16 : vec4<f16> = tint_symbol_15(&(ub), 160u);
-  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(&(ub), 168u);
-  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(&(ub), 192u);
-  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(&(ub), 224u);
-  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(&(ub), 256u);
-  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(&(ub), 288u);
-  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(&(ub), 336u);
-  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(&(ub), 384u);
-  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(&(ub), 416u);
-  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(&(ub), 480u);
-  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(&(ub), 544u);
-  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(&(ub), 552u);
-  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(&(ub), 568u);
-  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(&(ub), 584u);
-  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(&(ub), 600u);
-  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(&(ub), 624u);
-  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(&(ub), 648u);
-  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(&(ub), 664u);
-  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(&(ub), 696u);
-  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(&(ub), 736u);
-  var arr2_mat4x2_f16 : array<mat4x2<f16>, 2> = tint_symbol_35(&(ub), 768u);
+  var scalar_f32 : f32 = tint_symbol(0u);
+  var scalar_i32 : i32 = tint_symbol_1(4u);
+  var scalar_u32 : u32 = tint_symbol_2(8u);
+  var scalar_f16 : f16 = tint_symbol_3(12u);
+  var vec2_f32 : vec2<f32> = tint_symbol_4(16u);
+  var vec2_i32 : vec2<i32> = tint_symbol_5(24u);
+  var vec2_u32 : vec2<u32> = tint_symbol_6(32u);
+  var vec2_f16 : vec2<f16> = tint_symbol_7(40u);
+  var vec3_f32 : vec3<f32> = tint_symbol_8(48u);
+  var vec3_i32 : vec3<i32> = tint_symbol_9(64u);
+  var vec3_u32 : vec3<u32> = tint_symbol_10(80u);
+  var vec3_f16 : vec3<f16> = tint_symbol_11(96u);
+  var vec4_f32 : vec4<f32> = tint_symbol_12(112u);
+  var vec4_i32 : vec4<i32> = tint_symbol_13(128u);
+  var vec4_u32 : vec4<u32> = tint_symbol_14(144u);
+  var vec4_f16 : vec4<f16> = tint_symbol_15(160u);
+  var mat2x2_f32 : mat2x2<f32> = tint_symbol_16(168u);
+  var mat2x3_f32 : mat2x3<f32> = tint_symbol_17(192u);
+  var mat2x4_f32 : mat2x4<f32> = tint_symbol_18(224u);
+  var mat3x2_f32 : mat3x2<f32> = tint_symbol_19(256u);
+  var mat3x3_f32 : mat3x3<f32> = tint_symbol_20(288u);
+  var mat3x4_f32 : mat3x4<f32> = tint_symbol_21(336u);
+  var mat4x2_f32 : mat4x2<f32> = tint_symbol_22(384u);
+  var mat4x3_f32 : mat4x3<f32> = tint_symbol_23(416u);
+  var mat4x4_f32 : mat4x4<f32> = tint_symbol_24(480u);
+  var mat2x2_f16 : mat2x2<f16> = tint_symbol_25(544u);
+  var mat2x3_f16 : mat2x3<f16> = tint_symbol_26(552u);
+  var mat2x4_f16 : mat2x4<f16> = tint_symbol_27(568u);
+  var mat3x2_f16 : mat3x2<f16> = tint_symbol_28(584u);
+  var mat3x3_f16 : mat3x3<f16> = tint_symbol_29(600u);
+  var mat3x4_f16 : mat3x4<f16> = tint_symbol_30(624u);
+  var mat4x2_f16 : mat4x2<f16> = tint_symbol_31(648u);
+  var mat4x3_f16 : mat4x3<f16> = tint_symbol_32(664u);
+  var mat4x4_f16 : mat4x4<f16> = tint_symbol_33(696u);
+  var arr2_vec3_f32 : array<vec3<f32>, 2> = tint_symbol_34(736u);
+  var arr2_mat4x2_f16 : array<mat4x2<f16>, 2> = tint_symbol_35(768u);
 }
 
 @group(0) @binding(0) var<uniform> ub : UB;
@@ -1428,213 +1428,213 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_store_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f32)
+fn tint_symbol(offset : u32, value : f32)
 
 @internal(intrinsic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : i32)
+fn tint_symbol_1(offset : u32, value : i32)
 
 @internal(intrinsic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : u32)
+fn tint_symbol_2(offset : u32, value : u32)
 
 @internal(intrinsic_store_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f16)
+fn tint_symbol_3(offset : u32, value : f16)
 
 @internal(intrinsic_store_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f32>)
+fn tint_symbol_4(offset : u32, value : vec2<f32>)
 
 @internal(intrinsic_store_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<i32>)
+fn tint_symbol_5(offset : u32, value : vec2<i32>)
 
 @internal(intrinsic_store_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<u32>)
+fn tint_symbol_6(offset : u32, value : vec2<u32>)
 
 @internal(intrinsic_store_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f16>)
+fn tint_symbol_7(offset : u32, value : vec2<f16>)
 
 @internal(intrinsic_store_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f32>)
+fn tint_symbol_8(offset : u32, value : vec3<f32>)
 
 @internal(intrinsic_store_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<i32>)
+fn tint_symbol_9(offset : u32, value : vec3<i32>)
 
 @internal(intrinsic_store_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<u32>)
+fn tint_symbol_10(offset : u32, value : vec3<u32>)
 
 @internal(intrinsic_store_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f16>)
+fn tint_symbol_11(offset : u32, value : vec3<f16>)
 
 @internal(intrinsic_store_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f32>)
+fn tint_symbol_12(offset : u32, value : vec4<f32>)
 
 @internal(intrinsic_store_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<i32>)
+fn tint_symbol_13(offset : u32, value : vec4<i32>)
 
 @internal(intrinsic_store_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<u32>)
+fn tint_symbol_14(offset : u32, value : vec4<u32>)
 
 @internal(intrinsic_store_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f16>)
+fn tint_symbol_15(offset : u32, value : vec4<f16>)
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_16(offset : u32, value : mat2x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_17(offset : u32, value : mat2x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_18(offset : u32, value : mat2x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
-  tint_symbol_4(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_19(offset : u32, value : mat3x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
+  tint_symbol_4((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
-  tint_symbol_8(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_20(offset : u32, value : mat3x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
+  tint_symbol_8((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
-  tint_symbol_12(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_21(offset : u32, value : mat3x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
+  tint_symbol_12((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
-  tint_symbol_4(buffer, (offset + 16u), value[2u]);
-  tint_symbol_4(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_22(offset : u32, value : mat4x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
+  tint_symbol_4((offset + 16u), value[2u]);
+  tint_symbol_4((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
-  tint_symbol_8(buffer, (offset + 32u), value[2u]);
-  tint_symbol_8(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_23(offset : u32, value : mat4x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
+  tint_symbol_8((offset + 32u), value[2u]);
+  tint_symbol_8((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
-  tint_symbol_12(buffer, (offset + 32u), value[2u]);
-  tint_symbol_12(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_24(offset : u32, value : mat4x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
+  tint_symbol_12((offset + 32u), value[2u]);
+  tint_symbol_12((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
+fn tint_symbol_25(offset : u32, value : mat2x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_26(offset : u32, value : mat2x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_27(offset : u32, value : mat2x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
-  tint_symbol_7(buffer, (offset + 8u), value[2u]);
+fn tint_symbol_28(offset : u32, value : mat3x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
+  tint_symbol_7((offset + 8u), value[2u]);
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
-  tint_symbol_11(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_29(offset : u32, value : mat3x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
+  tint_symbol_11((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
-  tint_symbol_15(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_30(offset : u32, value : mat3x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
+  tint_symbol_15((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
-  tint_symbol_7(buffer, (offset + 8u), value[2u]);
-  tint_symbol_7(buffer, (offset + 12u), value[3u]);
+fn tint_symbol_31(offset : u32, value : mat4x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
+  tint_symbol_7((offset + 8u), value[2u]);
+  tint_symbol_7((offset + 12u), value[3u]);
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
-  tint_symbol_11(buffer, (offset + 16u), value[2u]);
-  tint_symbol_11(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_32(offset : u32, value : mat4x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
+  tint_symbol_11((offset + 16u), value[2u]);
+  tint_symbol_11((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
-  tint_symbol_15(buffer, (offset + 16u), value[2u]);
-  tint_symbol_15(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_33(offset : u32, value : mat4x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
+  tint_symbol_15((offset + 16u), value[2u]);
+  tint_symbol_15((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<vec3<f32>, 2u>) {
+fn tint_symbol_34(offset : u32, value : array<vec3<f32>, 2u>) {
   var array_1 = value;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    tint_symbol_8(buffer, (offset + (i * 16u)), array_1[i]);
+    tint_symbol_8((offset + (i * 16u)), array_1[i]);
   }
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<mat4x2<f16>, 2u>) {
+fn tint_symbol_35(offset : u32, value : array<mat4x2<f16>, 2u>) {
   var array_2 = value;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    tint_symbol_31(buffer, (offset + (i_1 * 16u)), array_2[i_1]);
+    tint_symbol_31((offset + (i_1 * 16u)), array_2[i_1]);
   }
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_symbol(&(sb), 0u, f32());
-  tint_symbol_1(&(sb), 4u, i32());
-  tint_symbol_2(&(sb), 8u, u32());
-  tint_symbol_3(&(sb), 12u, f16());
-  tint_symbol_4(&(sb), 16u, vec2<f32>());
-  tint_symbol_5(&(sb), 24u, vec2<i32>());
-  tint_symbol_6(&(sb), 32u, vec2<u32>());
-  tint_symbol_7(&(sb), 40u, vec2<f16>());
-  tint_symbol_8(&(sb), 48u, vec3<f32>());
-  tint_symbol_9(&(sb), 64u, vec3<i32>());
-  tint_symbol_10(&(sb), 80u, vec3<u32>());
-  tint_symbol_11(&(sb), 96u, vec3<f16>());
-  tint_symbol_12(&(sb), 112u, vec4<f32>());
-  tint_symbol_13(&(sb), 128u, vec4<i32>());
-  tint_symbol_14(&(sb), 144u, vec4<u32>());
-  tint_symbol_15(&(sb), 160u, vec4<f16>());
-  tint_symbol_16(&(sb), 168u, mat2x2<f32>());
-  tint_symbol_17(&(sb), 192u, mat2x3<f32>());
-  tint_symbol_18(&(sb), 224u, mat2x4<f32>());
-  tint_symbol_19(&(sb), 256u, mat3x2<f32>());
-  tint_symbol_20(&(sb), 288u, mat3x3<f32>());
-  tint_symbol_21(&(sb), 336u, mat3x4<f32>());
-  tint_symbol_22(&(sb), 384u, mat4x2<f32>());
-  tint_symbol_23(&(sb), 416u, mat4x3<f32>());
-  tint_symbol_24(&(sb), 480u, mat4x4<f32>());
-  tint_symbol_25(&(sb), 544u, mat2x2<f16>());
-  tint_symbol_26(&(sb), 552u, mat2x3<f16>());
-  tint_symbol_27(&(sb), 568u, mat2x4<f16>());
-  tint_symbol_28(&(sb), 584u, mat3x2<f16>());
-  tint_symbol_29(&(sb), 600u, mat3x3<f16>());
-  tint_symbol_30(&(sb), 624u, mat3x4<f16>());
-  tint_symbol_31(&(sb), 648u, mat4x2<f16>());
-  tint_symbol_32(&(sb), 664u, mat4x3<f16>());
-  tint_symbol_33(&(sb), 696u, mat4x4<f16>());
-  tint_symbol_34(&(sb), 736u, array<vec3<f32>, 2>());
-  tint_symbol_35(&(sb), 768u, array<mat4x2<f16>, 2>());
+  tint_symbol(0u, f32());
+  tint_symbol_1(4u, i32());
+  tint_symbol_2(8u, u32());
+  tint_symbol_3(12u, f16());
+  tint_symbol_4(16u, vec2<f32>());
+  tint_symbol_5(24u, vec2<i32>());
+  tint_symbol_6(32u, vec2<u32>());
+  tint_symbol_7(40u, vec2<f16>());
+  tint_symbol_8(48u, vec3<f32>());
+  tint_symbol_9(64u, vec3<i32>());
+  tint_symbol_10(80u, vec3<u32>());
+  tint_symbol_11(96u, vec3<f16>());
+  tint_symbol_12(112u, vec4<f32>());
+  tint_symbol_13(128u, vec4<i32>());
+  tint_symbol_14(144u, vec4<u32>());
+  tint_symbol_15(160u, vec4<f16>());
+  tint_symbol_16(168u, mat2x2<f32>());
+  tint_symbol_17(192u, mat2x3<f32>());
+  tint_symbol_18(224u, mat2x4<f32>());
+  tint_symbol_19(256u, mat3x2<f32>());
+  tint_symbol_20(288u, mat3x3<f32>());
+  tint_symbol_21(336u, mat3x4<f32>());
+  tint_symbol_22(384u, mat4x2<f32>());
+  tint_symbol_23(416u, mat4x3<f32>());
+  tint_symbol_24(480u, mat4x4<f32>());
+  tint_symbol_25(544u, mat2x2<f16>());
+  tint_symbol_26(552u, mat2x3<f16>());
+  tint_symbol_27(568u, mat2x4<f16>());
+  tint_symbol_28(584u, mat3x2<f16>());
+  tint_symbol_29(600u, mat3x3<f16>());
+  tint_symbol_30(624u, mat3x4<f16>());
+  tint_symbol_31(648u, mat4x2<f16>());
+  tint_symbol_32(664u, mat4x3<f16>());
+  tint_symbol_33(696u, mat4x4<f16>());
+  tint_symbol_34(736u, array<vec3<f32>, 2>());
+  tint_symbol_35(768u, array<mat4x2<f16>, 2>());
 }
 )";
 
@@ -1733,213 +1733,213 @@ struct SB {
 enable f16;
 
 @internal(intrinsic_store_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f32)
+fn tint_symbol(offset : u32, value : f32)
 
 @internal(intrinsic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : i32)
+fn tint_symbol_1(offset : u32, value : i32)
 
 @internal(intrinsic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : u32)
+fn tint_symbol_2(offset : u32, value : u32)
 
 @internal(intrinsic_store_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f16)
+fn tint_symbol_3(offset : u32, value : f16)
 
 @internal(intrinsic_store_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f32>)
+fn tint_symbol_4(offset : u32, value : vec2<f32>)
 
 @internal(intrinsic_store_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<i32>)
+fn tint_symbol_5(offset : u32, value : vec2<i32>)
 
 @internal(intrinsic_store_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<u32>)
+fn tint_symbol_6(offset : u32, value : vec2<u32>)
 
 @internal(intrinsic_store_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f16>)
+fn tint_symbol_7(offset : u32, value : vec2<f16>)
 
 @internal(intrinsic_store_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f32>)
+fn tint_symbol_8(offset : u32, value : vec3<f32>)
 
 @internal(intrinsic_store_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<i32>)
+fn tint_symbol_9(offset : u32, value : vec3<i32>)
 
 @internal(intrinsic_store_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<u32>)
+fn tint_symbol_10(offset : u32, value : vec3<u32>)
 
 @internal(intrinsic_store_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f16>)
+fn tint_symbol_11(offset : u32, value : vec3<f16>)
 
 @internal(intrinsic_store_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f32>)
+fn tint_symbol_12(offset : u32, value : vec4<f32>)
 
 @internal(intrinsic_store_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<i32>)
+fn tint_symbol_13(offset : u32, value : vec4<i32>)
 
 @internal(intrinsic_store_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<u32>)
+fn tint_symbol_14(offset : u32, value : vec4<u32>)
 
 @internal(intrinsic_store_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f16>)
+fn tint_symbol_15(offset : u32, value : vec4<f16>)
 
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_16(offset : u32, value : mat2x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_17(offset : u32, value : mat2x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_18(offset : u32, value : mat2x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
-  tint_symbol_4(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_19(offset : u32, value : mat3x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
+  tint_symbol_4((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
-  tint_symbol_8(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_20(offset : u32, value : mat3x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
+  tint_symbol_8((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
-  tint_symbol_12(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_21(offset : u32, value : mat3x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
+  tint_symbol_12((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f32>) {
-  tint_symbol_4(buffer, (offset + 0u), value[0u]);
-  tint_symbol_4(buffer, (offset + 8u), value[1u]);
-  tint_symbol_4(buffer, (offset + 16u), value[2u]);
-  tint_symbol_4(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_22(offset : u32, value : mat4x2<f32>) {
+  tint_symbol_4((offset + 0u), value[0u]);
+  tint_symbol_4((offset + 8u), value[1u]);
+  tint_symbol_4((offset + 16u), value[2u]);
+  tint_symbol_4((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f32>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 16u), value[1u]);
-  tint_symbol_8(buffer, (offset + 32u), value[2u]);
-  tint_symbol_8(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_23(offset : u32, value : mat4x3<f32>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 16u), value[1u]);
+  tint_symbol_8((offset + 32u), value[2u]);
+  tint_symbol_8((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f32>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 16u), value[1u]);
-  tint_symbol_12(buffer, (offset + 32u), value[2u]);
-  tint_symbol_12(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_24(offset : u32, value : mat4x4<f32>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 16u), value[1u]);
+  tint_symbol_12((offset + 32u), value[2u]);
+  tint_symbol_12((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
+fn tint_symbol_25(offset : u32, value : mat2x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_26(offset : u32, value : mat2x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_27(offset : u32, value : mat2x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
-  tint_symbol_7(buffer, (offset + 8u), value[2u]);
+fn tint_symbol_28(offset : u32, value : mat3x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
+  tint_symbol_7((offset + 8u), value[2u]);
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
-  tint_symbol_11(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_29(offset : u32, value : mat3x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
+  tint_symbol_11((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
-  tint_symbol_15(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_30(offset : u32, value : mat3x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
+  tint_symbol_15((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f16>) {
-  tint_symbol_7(buffer, (offset + 0u), value[0u]);
-  tint_symbol_7(buffer, (offset + 4u), value[1u]);
-  tint_symbol_7(buffer, (offset + 8u), value[2u]);
-  tint_symbol_7(buffer, (offset + 12u), value[3u]);
+fn tint_symbol_31(offset : u32, value : mat4x2<f16>) {
+  tint_symbol_7((offset + 0u), value[0u]);
+  tint_symbol_7((offset + 4u), value[1u]);
+  tint_symbol_7((offset + 8u), value[2u]);
+  tint_symbol_7((offset + 12u), value[3u]);
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f16>) {
-  tint_symbol_11(buffer, (offset + 0u), value[0u]);
-  tint_symbol_11(buffer, (offset + 8u), value[1u]);
-  tint_symbol_11(buffer, (offset + 16u), value[2u]);
-  tint_symbol_11(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_32(offset : u32, value : mat4x3<f16>) {
+  tint_symbol_11((offset + 0u), value[0u]);
+  tint_symbol_11((offset + 8u), value[1u]);
+  tint_symbol_11((offset + 16u), value[2u]);
+  tint_symbol_11((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f16>) {
-  tint_symbol_15(buffer, (offset + 0u), value[0u]);
-  tint_symbol_15(buffer, (offset + 8u), value[1u]);
-  tint_symbol_15(buffer, (offset + 16u), value[2u]);
-  tint_symbol_15(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_33(offset : u32, value : mat4x4<f16>) {
+  tint_symbol_15((offset + 0u), value[0u]);
+  tint_symbol_15((offset + 8u), value[1u]);
+  tint_symbol_15((offset + 16u), value[2u]);
+  tint_symbol_15((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<vec3<f32>, 2u>) {
+fn tint_symbol_34(offset : u32, value : array<vec3<f32>, 2u>) {
   var array_1 = value;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    tint_symbol_8(buffer, (offset + (i * 16u)), array_1[i]);
+    tint_symbol_8((offset + (i * 16u)), array_1[i]);
   }
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<mat4x2<f16>, 2u>) {
+fn tint_symbol_35(offset : u32, value : array<mat4x2<f16>, 2u>) {
   var array_2 = value;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    tint_symbol_31(buffer, (offset + (i_1 * 16u)), array_2[i_1]);
+    tint_symbol_31((offset + (i_1 * 16u)), array_2[i_1]);
   }
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_symbol(&(sb), 0u, f32());
-  tint_symbol_1(&(sb), 4u, i32());
-  tint_symbol_2(&(sb), 8u, u32());
-  tint_symbol_3(&(sb), 12u, f16());
-  tint_symbol_4(&(sb), 16u, vec2<f32>());
-  tint_symbol_5(&(sb), 24u, vec2<i32>());
-  tint_symbol_6(&(sb), 32u, vec2<u32>());
-  tint_symbol_7(&(sb), 40u, vec2<f16>());
-  tint_symbol_8(&(sb), 48u, vec3<f32>());
-  tint_symbol_9(&(sb), 64u, vec3<i32>());
-  tint_symbol_10(&(sb), 80u, vec3<u32>());
-  tint_symbol_11(&(sb), 96u, vec3<f16>());
-  tint_symbol_12(&(sb), 112u, vec4<f32>());
-  tint_symbol_13(&(sb), 128u, vec4<i32>());
-  tint_symbol_14(&(sb), 144u, vec4<u32>());
-  tint_symbol_15(&(sb), 160u, vec4<f16>());
-  tint_symbol_16(&(sb), 168u, mat2x2<f32>());
-  tint_symbol_17(&(sb), 192u, mat2x3<f32>());
-  tint_symbol_18(&(sb), 224u, mat2x4<f32>());
-  tint_symbol_19(&(sb), 256u, mat3x2<f32>());
-  tint_symbol_20(&(sb), 288u, mat3x3<f32>());
-  tint_symbol_21(&(sb), 336u, mat3x4<f32>());
-  tint_symbol_22(&(sb), 384u, mat4x2<f32>());
-  tint_symbol_23(&(sb), 416u, mat4x3<f32>());
-  tint_symbol_24(&(sb), 480u, mat4x4<f32>());
-  tint_symbol_25(&(sb), 544u, mat2x2<f16>());
-  tint_symbol_26(&(sb), 552u, mat2x3<f16>());
-  tint_symbol_27(&(sb), 568u, mat2x4<f16>());
-  tint_symbol_28(&(sb), 584u, mat3x2<f16>());
-  tint_symbol_29(&(sb), 600u, mat3x3<f16>());
-  tint_symbol_30(&(sb), 624u, mat3x4<f16>());
-  tint_symbol_31(&(sb), 648u, mat4x2<f16>());
-  tint_symbol_32(&(sb), 664u, mat4x3<f16>());
-  tint_symbol_33(&(sb), 696u, mat4x4<f16>());
-  tint_symbol_34(&(sb), 736u, array<vec3<f32>, 2>());
-  tint_symbol_35(&(sb), 768u, array<mat4x2<f16>, 2>());
+  tint_symbol(0u, f32());
+  tint_symbol_1(4u, i32());
+  tint_symbol_2(8u, u32());
+  tint_symbol_3(12u, f16());
+  tint_symbol_4(16u, vec2<f32>());
+  tint_symbol_5(24u, vec2<i32>());
+  tint_symbol_6(32u, vec2<u32>());
+  tint_symbol_7(40u, vec2<f16>());
+  tint_symbol_8(48u, vec3<f32>());
+  tint_symbol_9(64u, vec3<i32>());
+  tint_symbol_10(80u, vec3<u32>());
+  tint_symbol_11(96u, vec3<f16>());
+  tint_symbol_12(112u, vec4<f32>());
+  tint_symbol_13(128u, vec4<i32>());
+  tint_symbol_14(144u, vec4<u32>());
+  tint_symbol_15(160u, vec4<f16>());
+  tint_symbol_16(168u, mat2x2<f32>());
+  tint_symbol_17(192u, mat2x3<f32>());
+  tint_symbol_18(224u, mat2x4<f32>());
+  tint_symbol_19(256u, mat3x2<f32>());
+  tint_symbol_20(288u, mat3x3<f32>());
+  tint_symbol_21(336u, mat3x4<f32>());
+  tint_symbol_22(384u, mat4x2<f32>());
+  tint_symbol_23(416u, mat4x3<f32>());
+  tint_symbol_24(480u, mat4x4<f32>());
+  tint_symbol_25(544u, mat2x2<f16>());
+  tint_symbol_26(552u, mat2x3<f16>());
+  tint_symbol_27(568u, mat2x4<f16>());
+  tint_symbol_28(584u, mat3x2<f16>());
+  tint_symbol_29(600u, mat3x3<f16>());
+  tint_symbol_30(624u, mat3x4<f16>());
+  tint_symbol_31(648u, mat4x2<f16>());
+  tint_symbol_32(664u, mat4x3<f16>());
+  tint_symbol_33(696u, mat4x4<f16>());
+  tint_symbol_34(736u, array<vec3<f32>, 2>());
+  tint_symbol_35(768u, array<mat4x2<f16>, 2>());
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -2085,148 +2085,148 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol_1(offset : u32) -> f32
 
 @internal(intrinsic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_symbol_2(offset : u32) -> i32
 
 @internal(intrinsic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_symbol_3(offset : u32) -> u32
 
 @internal(intrinsic_load_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f16
+fn tint_symbol_4(offset : u32) -> f16
 
 @internal(intrinsic_load_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f32>
+fn tint_symbol_5(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<i32>
+fn tint_symbol_6(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<u32>
+fn tint_symbol_7(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f16>
+fn tint_symbol_8(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f32>
+fn tint_symbol_9(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<i32>
+fn tint_symbol_10(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<u32>
+fn tint_symbol_11(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f16>
+fn tint_symbol_12(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f32>
+fn tint_symbol_13(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<i32>
+fn tint_symbol_14(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<u32>
+fn tint_symbol_15(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f16>
+fn tint_symbol_16(offset : u32) -> vec4<f16>
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)));
+fn tint_symbol_17(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)), tint_symbol_5(buffer, (offset + 16u)));
+fn tint_symbol_20(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)), tint_symbol_5((offset + 16u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)), tint_symbol_9(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)), tint_symbol_9((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)), tint_symbol_13(buffer, (offset + 32u)));
+fn tint_symbol_22(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)), tint_symbol_13((offset + 32u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)), tint_symbol_5(buffer, (offset + 16u)), tint_symbol_5(buffer, (offset + 24u)));
+fn tint_symbol_23(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)), tint_symbol_5((offset + 16u)), tint_symbol_5((offset + 24u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)), tint_symbol_9(buffer, (offset + 32u)), tint_symbol_9(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)), tint_symbol_9((offset + 32u)), tint_symbol_9((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)), tint_symbol_13(buffer, (offset + 32u)), tint_symbol_13(buffer, (offset + 48u)));
+fn tint_symbol_25(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)), tint_symbol_13((offset + 32u)), tint_symbol_13((offset + 48u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)));
+fn tint_symbol_26(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)), tint_symbol_8(buffer, (offset + 8u)));
+fn tint_symbol_29(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)), tint_symbol_8((offset + 8u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)), tint_symbol_16(buffer, (offset + 16u)));
+fn tint_symbol_31(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)), tint_symbol_16((offset + 16u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)), tint_symbol_8(buffer, (offset + 8u)), tint_symbol_8(buffer, (offset + 12u)));
+fn tint_symbol_32(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)), tint_symbol_8((offset + 8u)), tint_symbol_8((offset + 12u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)), tint_symbol_16(buffer, (offset + 16u)), tint_symbol_16(buffer, (offset + 24u)));
+fn tint_symbol_34(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)), tint_symbol_16((offset + 16u)), tint_symbol_16((offset + 24u)));
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_9(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_9((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_36(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<mat4x2<f16>, 2u> {
+fn tint_symbol_36(offset : u32) -> array<mat4x2<f16>, 2u> {
   var arr_1 : array<mat4x2<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_32(buffer, (offset + (i_1 * 16u)));
+    arr_1[i_1] = tint_symbol_32((offset + (i_1 * 16u)));
   }
   return arr_1;
 }
 
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> SB {
-  return SB(tint_symbol_1(buffer, (offset + 0u)), tint_symbol_2(buffer, (offset + 4u)), tint_symbol_3(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 12u)), tint_symbol_5(buffer, (offset + 16u)), tint_symbol_6(buffer, (offset + 24u)), tint_symbol_7(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 40u)), tint_symbol_9(buffer, (offset + 48u)), tint_symbol_10(buffer, (offset + 64u)), tint_symbol_11(buffer, (offset + 80u)), tint_symbol_12(buffer, (offset + 96u)), tint_symbol_13(buffer, (offset + 112u)), tint_symbol_14(buffer, (offset + 128u)), tint_symbol_15(buffer, (offset + 144u)), tint_symbol_16(buffer, (offset + 160u)), tint_symbol_17(buffer, (offset + 168u)), tint_symbol_18(buffer, (offset + 192u)), tint_symbol_19(buffer, (offset + 224u)), tint_symbol_20(buffer, (offset + 256u)), tint_symbol_21(buffer, (offset + 288u)), tint_symbol_22(buffer, (offset + 336u)), tint_symbol_23(buffer, (offset + 384u)), tint_symbol_24(buffer, (offset + 416u)), tint_symbol_25(buffer, (offset + 480u)), tint_symbol_26(buffer, (offset + 544u)), tint_symbol_27(buffer, (offset + 552u)), tint_symbol_28(buffer, (offset + 568u)), tint_symbol_29(buffer, (offset + 584u)), tint_symbol_30(buffer, (offset + 600u)), tint_symbol_31(buffer, (offset + 624u)), tint_symbol_32(buffer, (offset + 648u)), tint_symbol_33(buffer, (offset + 664u)), tint_symbol_34(buffer, (offset + 696u)), tint_symbol_35(buffer, (offset + 736u)), tint_symbol_36(buffer, (offset + 768u)));
+fn tint_symbol(offset : u32) -> SB {
+  return SB(tint_symbol_1((offset + 0u)), tint_symbol_2((offset + 4u)), tint_symbol_3((offset + 8u)), tint_symbol_4((offset + 12u)), tint_symbol_5((offset + 16u)), tint_symbol_6((offset + 24u)), tint_symbol_7((offset + 32u)), tint_symbol_8((offset + 40u)), tint_symbol_9((offset + 48u)), tint_symbol_10((offset + 64u)), tint_symbol_11((offset + 80u)), tint_symbol_12((offset + 96u)), tint_symbol_13((offset + 112u)), tint_symbol_14((offset + 128u)), tint_symbol_15((offset + 144u)), tint_symbol_16((offset + 160u)), tint_symbol_17((offset + 168u)), tint_symbol_18((offset + 192u)), tint_symbol_19((offset + 224u)), tint_symbol_20((offset + 256u)), tint_symbol_21((offset + 288u)), tint_symbol_22((offset + 336u)), tint_symbol_23((offset + 384u)), tint_symbol_24((offset + 416u)), tint_symbol_25((offset + 480u)), tint_symbol_26((offset + 544u)), tint_symbol_27((offset + 552u)), tint_symbol_28((offset + 568u)), tint_symbol_29((offset + 584u)), tint_symbol_30((offset + 600u)), tint_symbol_31((offset + 624u)), tint_symbol_32((offset + 648u)), tint_symbol_33((offset + 664u)), tint_symbol_34((offset + 696u)), tint_symbol_35((offset + 736u)), tint_symbol_36((offset + 768u)));
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var x : SB = tint_symbol(&(sb), 0u);
+  var x : SB = tint_symbol(0u);
 }
 )";
 
@@ -2290,148 +2290,148 @@ struct SB {
 enable f16;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol_1(offset : u32) -> f32
 
 @internal(intrinsic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_symbol_2(offset : u32) -> i32
 
 @internal(intrinsic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_symbol_3(offset : u32) -> u32
 
 @internal(intrinsic_load_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f16
+fn tint_symbol_4(offset : u32) -> f16
 
 @internal(intrinsic_load_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f32>
+fn tint_symbol_5(offset : u32) -> vec2<f32>
 
 @internal(intrinsic_load_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<i32>
+fn tint_symbol_6(offset : u32) -> vec2<i32>
 
 @internal(intrinsic_load_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<u32>
+fn tint_symbol_7(offset : u32) -> vec2<u32>
 
 @internal(intrinsic_load_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec2<f16>
+fn tint_symbol_8(offset : u32) -> vec2<f16>
 
 @internal(intrinsic_load_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f32>
+fn tint_symbol_9(offset : u32) -> vec3<f32>
 
 @internal(intrinsic_load_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<i32>
+fn tint_symbol_10(offset : u32) -> vec3<i32>
 
 @internal(intrinsic_load_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<u32>
+fn tint_symbol_11(offset : u32) -> vec3<u32>
 
 @internal(intrinsic_load_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec3<f16>
+fn tint_symbol_12(offset : u32) -> vec3<f16>
 
 @internal(intrinsic_load_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f32>
+fn tint_symbol_13(offset : u32) -> vec4<f32>
 
 @internal(intrinsic_load_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<i32>
+fn tint_symbol_14(offset : u32) -> vec4<i32>
 
 @internal(intrinsic_load_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<u32>
+fn tint_symbol_15(offset : u32) -> vec4<u32>
 
 @internal(intrinsic_load_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> vec4<f16>
+fn tint_symbol_16(offset : u32) -> vec4<f16>
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f32> {
-  return mat2x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)));
+fn tint_symbol_17(offset : u32) -> mat2x2<f32> {
+  return mat2x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)));
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f32> {
-  return mat2x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)));
+fn tint_symbol_18(offset : u32) -> mat2x3<f32> {
+  return mat2x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)));
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f32> {
-  return mat2x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)));
+fn tint_symbol_19(offset : u32) -> mat2x4<f32> {
+  return mat2x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)));
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f32> {
-  return mat3x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)), tint_symbol_5(buffer, (offset + 16u)));
+fn tint_symbol_20(offset : u32) -> mat3x2<f32> {
+  return mat3x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)), tint_symbol_5((offset + 16u)));
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f32> {
-  return mat3x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)), tint_symbol_9(buffer, (offset + 32u)));
+fn tint_symbol_21(offset : u32) -> mat3x3<f32> {
+  return mat3x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)), tint_symbol_9((offset + 32u)));
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f32> {
-  return mat3x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)), tint_symbol_13(buffer, (offset + 32u)));
+fn tint_symbol_22(offset : u32) -> mat3x4<f32> {
+  return mat3x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)), tint_symbol_13((offset + 32u)));
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f32> {
-  return mat4x2<f32>(tint_symbol_5(buffer, (offset + 0u)), tint_symbol_5(buffer, (offset + 8u)), tint_symbol_5(buffer, (offset + 16u)), tint_symbol_5(buffer, (offset + 24u)));
+fn tint_symbol_23(offset : u32) -> mat4x2<f32> {
+  return mat4x2<f32>(tint_symbol_5((offset + 0u)), tint_symbol_5((offset + 8u)), tint_symbol_5((offset + 16u)), tint_symbol_5((offset + 24u)));
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f32> {
-  return mat4x3<f32>(tint_symbol_9(buffer, (offset + 0u)), tint_symbol_9(buffer, (offset + 16u)), tint_symbol_9(buffer, (offset + 32u)), tint_symbol_9(buffer, (offset + 48u)));
+fn tint_symbol_24(offset : u32) -> mat4x3<f32> {
+  return mat4x3<f32>(tint_symbol_9((offset + 0u)), tint_symbol_9((offset + 16u)), tint_symbol_9((offset + 32u)), tint_symbol_9((offset + 48u)));
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f32> {
-  return mat4x4<f32>(tint_symbol_13(buffer, (offset + 0u)), tint_symbol_13(buffer, (offset + 16u)), tint_symbol_13(buffer, (offset + 32u)), tint_symbol_13(buffer, (offset + 48u)));
+fn tint_symbol_25(offset : u32) -> mat4x4<f32> {
+  return mat4x4<f32>(tint_symbol_13((offset + 0u)), tint_symbol_13((offset + 16u)), tint_symbol_13((offset + 32u)), tint_symbol_13((offset + 48u)));
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x2<f16> {
-  return mat2x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)));
+fn tint_symbol_26(offset : u32) -> mat2x2<f16> {
+  return mat2x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)));
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x3<f16> {
-  return mat2x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)));
+fn tint_symbol_27(offset : u32) -> mat2x3<f16> {
+  return mat2x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)));
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat2x4<f16> {
-  return mat2x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)));
+fn tint_symbol_28(offset : u32) -> mat2x4<f16> {
+  return mat2x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)));
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x2<f16> {
-  return mat3x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)), tint_symbol_8(buffer, (offset + 8u)));
+fn tint_symbol_29(offset : u32) -> mat3x2<f16> {
+  return mat3x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)), tint_symbol_8((offset + 8u)));
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x3<f16> {
-  return mat3x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)), tint_symbol_12(buffer, (offset + 16u)));
+fn tint_symbol_30(offset : u32) -> mat3x3<f16> {
+  return mat3x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)), tint_symbol_12((offset + 16u)));
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat3x4<f16> {
-  return mat3x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)), tint_symbol_16(buffer, (offset + 16u)));
+fn tint_symbol_31(offset : u32) -> mat3x4<f16> {
+  return mat3x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)), tint_symbol_16((offset + 16u)));
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x2<f16> {
-  return mat4x2<f16>(tint_symbol_8(buffer, (offset + 0u)), tint_symbol_8(buffer, (offset + 4u)), tint_symbol_8(buffer, (offset + 8u)), tint_symbol_8(buffer, (offset + 12u)));
+fn tint_symbol_32(offset : u32) -> mat4x2<f16> {
+  return mat4x2<f16>(tint_symbol_8((offset + 0u)), tint_symbol_8((offset + 4u)), tint_symbol_8((offset + 8u)), tint_symbol_8((offset + 12u)));
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x3<f16> {
-  return mat4x3<f16>(tint_symbol_12(buffer, (offset + 0u)), tint_symbol_12(buffer, (offset + 8u)), tint_symbol_12(buffer, (offset + 16u)), tint_symbol_12(buffer, (offset + 24u)));
+fn tint_symbol_33(offset : u32) -> mat4x3<f16> {
+  return mat4x3<f16>(tint_symbol_12((offset + 0u)), tint_symbol_12((offset + 8u)), tint_symbol_12((offset + 16u)), tint_symbol_12((offset + 24u)));
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> mat4x4<f16> {
-  return mat4x4<f16>(tint_symbol_16(buffer, (offset + 0u)), tint_symbol_16(buffer, (offset + 8u)), tint_symbol_16(buffer, (offset + 16u)), tint_symbol_16(buffer, (offset + 24u)));
+fn tint_symbol_34(offset : u32) -> mat4x4<f16> {
+  return mat4x4<f16>(tint_symbol_16((offset + 0u)), tint_symbol_16((offset + 8u)), tint_symbol_16((offset + 16u)), tint_symbol_16((offset + 24u)));
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<vec3<f32>, 2u> {
+fn tint_symbol_35(offset : u32) -> array<vec3<f32>, 2u> {
   var arr : array<vec3<f32>, 2u>;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    arr[i] = tint_symbol_9(buffer, (offset + (i * 16u)));
+    arr[i] = tint_symbol_9((offset + (i * 16u)));
   }
   return arr;
 }
 
-fn tint_symbol_36(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> array<mat4x2<f16>, 2u> {
+fn tint_symbol_36(offset : u32) -> array<mat4x2<f16>, 2u> {
   var arr_1 : array<mat4x2<f16>, 2u>;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    arr_1[i_1] = tint_symbol_32(buffer, (offset + (i_1 * 16u)));
+    arr_1[i_1] = tint_symbol_32((offset + (i_1 * 16u)));
   }
   return arr_1;
 }
 
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> SB {
-  return SB(tint_symbol_1(buffer, (offset + 0u)), tint_symbol_2(buffer, (offset + 4u)), tint_symbol_3(buffer, (offset + 8u)), tint_symbol_4(buffer, (offset + 12u)), tint_symbol_5(buffer, (offset + 16u)), tint_symbol_6(buffer, (offset + 24u)), tint_symbol_7(buffer, (offset + 32u)), tint_symbol_8(buffer, (offset + 40u)), tint_symbol_9(buffer, (offset + 48u)), tint_symbol_10(buffer, (offset + 64u)), tint_symbol_11(buffer, (offset + 80u)), tint_symbol_12(buffer, (offset + 96u)), tint_symbol_13(buffer, (offset + 112u)), tint_symbol_14(buffer, (offset + 128u)), tint_symbol_15(buffer, (offset + 144u)), tint_symbol_16(buffer, (offset + 160u)), tint_symbol_17(buffer, (offset + 168u)), tint_symbol_18(buffer, (offset + 192u)), tint_symbol_19(buffer, (offset + 224u)), tint_symbol_20(buffer, (offset + 256u)), tint_symbol_21(buffer, (offset + 288u)), tint_symbol_22(buffer, (offset + 336u)), tint_symbol_23(buffer, (offset + 384u)), tint_symbol_24(buffer, (offset + 416u)), tint_symbol_25(buffer, (offset + 480u)), tint_symbol_26(buffer, (offset + 544u)), tint_symbol_27(buffer, (offset + 552u)), tint_symbol_28(buffer, (offset + 568u)), tint_symbol_29(buffer, (offset + 584u)), tint_symbol_30(buffer, (offset + 600u)), tint_symbol_31(buffer, (offset + 624u)), tint_symbol_32(buffer, (offset + 648u)), tint_symbol_33(buffer, (offset + 664u)), tint_symbol_34(buffer, (offset + 696u)), tint_symbol_35(buffer, (offset + 736u)), tint_symbol_36(buffer, (offset + 768u)));
+fn tint_symbol(offset : u32) -> SB {
+  return SB(tint_symbol_1((offset + 0u)), tint_symbol_2((offset + 4u)), tint_symbol_3((offset + 8u)), tint_symbol_4((offset + 12u)), tint_symbol_5((offset + 16u)), tint_symbol_6((offset + 24u)), tint_symbol_7((offset + 32u)), tint_symbol_8((offset + 40u)), tint_symbol_9((offset + 48u)), tint_symbol_10((offset + 64u)), tint_symbol_11((offset + 80u)), tint_symbol_12((offset + 96u)), tint_symbol_13((offset + 112u)), tint_symbol_14((offset + 128u)), tint_symbol_15((offset + 144u)), tint_symbol_16((offset + 160u)), tint_symbol_17((offset + 168u)), tint_symbol_18((offset + 192u)), tint_symbol_19((offset + 224u)), tint_symbol_20((offset + 256u)), tint_symbol_21((offset + 288u)), tint_symbol_22((offset + 336u)), tint_symbol_23((offset + 384u)), tint_symbol_24((offset + 416u)), tint_symbol_25((offset + 480u)), tint_symbol_26((offset + 544u)), tint_symbol_27((offset + 552u)), tint_symbol_28((offset + 568u)), tint_symbol_29((offset + 584u)), tint_symbol_30((offset + 600u)), tint_symbol_31((offset + 624u)), tint_symbol_32((offset + 648u)), tint_symbol_33((offset + 664u)), tint_symbol_34((offset + 696u)), tint_symbol_35((offset + 736u)), tint_symbol_36((offset + 768u)));
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  var x : SB = tint_symbol(&(sb), 0u);
+  var x : SB = tint_symbol(0u);
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -2577,217 +2577,217 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_store_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f32)
+fn tint_symbol_1(offset : u32, value : f32)
 
 @internal(intrinsic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : i32)
+fn tint_symbol_2(offset : u32, value : i32)
 
 @internal(intrinsic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : u32)
+fn tint_symbol_3(offset : u32, value : u32)
 
 @internal(intrinsic_store_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f16)
+fn tint_symbol_4(offset : u32, value : f16)
 
 @internal(intrinsic_store_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f32>)
+fn tint_symbol_5(offset : u32, value : vec2<f32>)
 
 @internal(intrinsic_store_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<i32>)
+fn tint_symbol_6(offset : u32, value : vec2<i32>)
 
 @internal(intrinsic_store_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<u32>)
+fn tint_symbol_7(offset : u32, value : vec2<u32>)
 
 @internal(intrinsic_store_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f16>)
+fn tint_symbol_8(offset : u32, value : vec2<f16>)
 
 @internal(intrinsic_store_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f32>)
+fn tint_symbol_9(offset : u32, value : vec3<f32>)
 
 @internal(intrinsic_store_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<i32>)
+fn tint_symbol_10(offset : u32, value : vec3<i32>)
 
 @internal(intrinsic_store_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<u32>)
+fn tint_symbol_11(offset : u32, value : vec3<u32>)
 
 @internal(intrinsic_store_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f16>)
+fn tint_symbol_12(offset : u32, value : vec3<f16>)
 
 @internal(intrinsic_store_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f32>)
+fn tint_symbol_13(offset : u32, value : vec4<f32>)
 
 @internal(intrinsic_store_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<i32>)
+fn tint_symbol_14(offset : u32, value : vec4<i32>)
 
 @internal(intrinsic_store_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<u32>)
+fn tint_symbol_15(offset : u32, value : vec4<u32>)
 
 @internal(intrinsic_store_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f16>)
+fn tint_symbol_16(offset : u32, value : vec4<f16>)
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_17(offset : u32, value : mat2x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_18(offset : u32, value : mat2x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_19(offset : u32, value : mat2x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
-  tint_symbol_5(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_20(offset : u32, value : mat3x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
+  tint_symbol_5((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
-  tint_symbol_9(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_21(offset : u32, value : mat3x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
+  tint_symbol_9((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
-  tint_symbol_13(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_22(offset : u32, value : mat3x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
+  tint_symbol_13((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
-  tint_symbol_5(buffer, (offset + 16u), value[2u]);
-  tint_symbol_5(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_23(offset : u32, value : mat4x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
+  tint_symbol_5((offset + 16u), value[2u]);
+  tint_symbol_5((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
-  tint_symbol_9(buffer, (offset + 32u), value[2u]);
-  tint_symbol_9(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_24(offset : u32, value : mat4x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
+  tint_symbol_9((offset + 32u), value[2u]);
+  tint_symbol_9((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
-  tint_symbol_13(buffer, (offset + 32u), value[2u]);
-  tint_symbol_13(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_25(offset : u32, value : mat4x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
+  tint_symbol_13((offset + 32u), value[2u]);
+  tint_symbol_13((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
+fn tint_symbol_26(offset : u32, value : mat2x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_27(offset : u32, value : mat2x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_28(offset : u32, value : mat2x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
-  tint_symbol_8(buffer, (offset + 8u), value[2u]);
+fn tint_symbol_29(offset : u32, value : mat3x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
+  tint_symbol_8((offset + 8u), value[2u]);
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
-  tint_symbol_12(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_30(offset : u32, value : mat3x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
+  tint_symbol_12((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
-  tint_symbol_16(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_31(offset : u32, value : mat3x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
+  tint_symbol_16((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
-  tint_symbol_8(buffer, (offset + 8u), value[2u]);
-  tint_symbol_8(buffer, (offset + 12u), value[3u]);
+fn tint_symbol_32(offset : u32, value : mat4x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
+  tint_symbol_8((offset + 8u), value[2u]);
+  tint_symbol_8((offset + 12u), value[3u]);
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
-  tint_symbol_12(buffer, (offset + 16u), value[2u]);
-  tint_symbol_12(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_33(offset : u32, value : mat4x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
+  tint_symbol_12((offset + 16u), value[2u]);
+  tint_symbol_12((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
-  tint_symbol_16(buffer, (offset + 16u), value[2u]);
-  tint_symbol_16(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_34(offset : u32, value : mat4x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
+  tint_symbol_16((offset + 16u), value[2u]);
+  tint_symbol_16((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<vec3<f32>, 2u>) {
+fn tint_symbol_35(offset : u32, value : array<vec3<f32>, 2u>) {
   var array_1 = value;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    tint_symbol_9(buffer, (offset + (i * 16u)), array_1[i]);
+    tint_symbol_9((offset + (i * 16u)), array_1[i]);
   }
 }
 
-fn tint_symbol_36(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<mat4x2<f16>, 2u>) {
+fn tint_symbol_36(offset : u32, value : array<mat4x2<f16>, 2u>) {
   var array_2 = value;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    tint_symbol_32(buffer, (offset + (i_1 * 16u)), array_2[i_1]);
+    tint_symbol_32((offset + (i_1 * 16u)), array_2[i_1]);
   }
 }
 
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : SB) {
-  tint_symbol_1(buffer, (offset + 0u), value.scalar_f32);
-  tint_symbol_2(buffer, (offset + 4u), value.scalar_i32);
-  tint_symbol_3(buffer, (offset + 8u), value.scalar_u32);
-  tint_symbol_4(buffer, (offset + 12u), value.scalar_f16);
-  tint_symbol_5(buffer, (offset + 16u), value.vec2_f32);
-  tint_symbol_6(buffer, (offset + 24u), value.vec2_i32);
-  tint_symbol_7(buffer, (offset + 32u), value.vec2_u32);
-  tint_symbol_8(buffer, (offset + 40u), value.vec2_f16);
-  tint_symbol_9(buffer, (offset + 48u), value.vec3_f32);
-  tint_symbol_10(buffer, (offset + 64u), value.vec3_i32);
-  tint_symbol_11(buffer, (offset + 80u), value.vec3_u32);
-  tint_symbol_12(buffer, (offset + 96u), value.vec3_f16);
-  tint_symbol_13(buffer, (offset + 112u), value.vec4_f32);
-  tint_symbol_14(buffer, (offset + 128u), value.vec4_i32);
-  tint_symbol_15(buffer, (offset + 144u), value.vec4_u32);
-  tint_symbol_16(buffer, (offset + 160u), value.vec4_f16);
-  tint_symbol_17(buffer, (offset + 168u), value.mat2x2_f32);
-  tint_symbol_18(buffer, (offset + 192u), value.mat2x3_f32);
-  tint_symbol_19(buffer, (offset + 224u), value.mat2x4_f32);
-  tint_symbol_20(buffer, (offset + 256u), value.mat3x2_f32);
-  tint_symbol_21(buffer, (offset + 288u), value.mat3x3_f32);
-  tint_symbol_22(buffer, (offset + 336u), value.mat3x4_f32);
-  tint_symbol_23(buffer, (offset + 384u), value.mat4x2_f32);
-  tint_symbol_24(buffer, (offset + 416u), value.mat4x3_f32);
-  tint_symbol_25(buffer, (offset + 480u), value.mat4x4_f32);
-  tint_symbol_26(buffer, (offset + 544u), value.mat2x2_f16);
-  tint_symbol_27(buffer, (offset + 552u), value.mat2x3_f16);
-  tint_symbol_28(buffer, (offset + 568u), value.mat2x4_f16);
-  tint_symbol_29(buffer, (offset + 584u), value.mat3x2_f16);
-  tint_symbol_30(buffer, (offset + 600u), value.mat3x3_f16);
-  tint_symbol_31(buffer, (offset + 624u), value.mat3x4_f16);
-  tint_symbol_32(buffer, (offset + 648u), value.mat4x2_f16);
-  tint_symbol_33(buffer, (offset + 664u), value.mat4x3_f16);
-  tint_symbol_34(buffer, (offset + 696u), value.mat4x4_f16);
-  tint_symbol_35(buffer, (offset + 736u), value.arr2_vec3_f32);
-  tint_symbol_36(buffer, (offset + 768u), value.arr2_mat4x2_f16);
+fn tint_symbol(offset : u32, value : SB) {
+  tint_symbol_1((offset + 0u), value.scalar_f32);
+  tint_symbol_2((offset + 4u), value.scalar_i32);
+  tint_symbol_3((offset + 8u), value.scalar_u32);
+  tint_symbol_4((offset + 12u), value.scalar_f16);
+  tint_symbol_5((offset + 16u), value.vec2_f32);
+  tint_symbol_6((offset + 24u), value.vec2_i32);
+  tint_symbol_7((offset + 32u), value.vec2_u32);
+  tint_symbol_8((offset + 40u), value.vec2_f16);
+  tint_symbol_9((offset + 48u), value.vec3_f32);
+  tint_symbol_10((offset + 64u), value.vec3_i32);
+  tint_symbol_11((offset + 80u), value.vec3_u32);
+  tint_symbol_12((offset + 96u), value.vec3_f16);
+  tint_symbol_13((offset + 112u), value.vec4_f32);
+  tint_symbol_14((offset + 128u), value.vec4_i32);
+  tint_symbol_15((offset + 144u), value.vec4_u32);
+  tint_symbol_16((offset + 160u), value.vec4_f16);
+  tint_symbol_17((offset + 168u), value.mat2x2_f32);
+  tint_symbol_18((offset + 192u), value.mat2x3_f32);
+  tint_symbol_19((offset + 224u), value.mat2x4_f32);
+  tint_symbol_20((offset + 256u), value.mat3x2_f32);
+  tint_symbol_21((offset + 288u), value.mat3x3_f32);
+  tint_symbol_22((offset + 336u), value.mat3x4_f32);
+  tint_symbol_23((offset + 384u), value.mat4x2_f32);
+  tint_symbol_24((offset + 416u), value.mat4x3_f32);
+  tint_symbol_25((offset + 480u), value.mat4x4_f32);
+  tint_symbol_26((offset + 544u), value.mat2x2_f16);
+  tint_symbol_27((offset + 552u), value.mat2x3_f16);
+  tint_symbol_28((offset + 568u), value.mat2x4_f16);
+  tint_symbol_29((offset + 584u), value.mat3x2_f16);
+  tint_symbol_30((offset + 600u), value.mat3x3_f16);
+  tint_symbol_31((offset + 624u), value.mat3x4_f16);
+  tint_symbol_32((offset + 648u), value.mat4x2_f16);
+  tint_symbol_33((offset + 664u), value.mat4x3_f16);
+  tint_symbol_34((offset + 696u), value.mat4x4_f16);
+  tint_symbol_35((offset + 736u), value.arr2_vec3_f32);
+  tint_symbol_36((offset + 768u), value.arr2_mat4x2_f16);
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_symbol(&(sb), 0u, SB());
+  tint_symbol(0u, SB());
 }
 )";
 
@@ -2851,217 +2851,217 @@ struct SB {
 enable f16;
 
 @internal(intrinsic_store_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f32)
+fn tint_symbol_1(offset : u32, value : f32)
 
 @internal(intrinsic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_2(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : i32)
+fn tint_symbol_2(offset : u32, value : i32)
 
 @internal(intrinsic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_3(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : u32)
+fn tint_symbol_3(offset : u32, value : u32)
 
 @internal(intrinsic_store_storage_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_4(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : f16)
+fn tint_symbol_4(offset : u32, value : f16)
 
 @internal(intrinsic_store_storage_vec2_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_5(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f32>)
+fn tint_symbol_5(offset : u32, value : vec2<f32>)
 
 @internal(intrinsic_store_storage_vec2_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_6(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<i32>)
+fn tint_symbol_6(offset : u32, value : vec2<i32>)
 
 @internal(intrinsic_store_storage_vec2_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_7(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<u32>)
+fn tint_symbol_7(offset : u32, value : vec2<u32>)
 
 @internal(intrinsic_store_storage_vec2_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_8(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec2<f16>)
+fn tint_symbol_8(offset : u32, value : vec2<f16>)
 
 @internal(intrinsic_store_storage_vec3_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_9(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f32>)
+fn tint_symbol_9(offset : u32, value : vec3<f32>)
 
 @internal(intrinsic_store_storage_vec3_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_10(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<i32>)
+fn tint_symbol_10(offset : u32, value : vec3<i32>)
 
 @internal(intrinsic_store_storage_vec3_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_11(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<u32>)
+fn tint_symbol_11(offset : u32, value : vec3<u32>)
 
 @internal(intrinsic_store_storage_vec3_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_12(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec3<f16>)
+fn tint_symbol_12(offset : u32, value : vec3<f16>)
 
 @internal(intrinsic_store_storage_vec4_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_13(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f32>)
+fn tint_symbol_13(offset : u32, value : vec4<f32>)
 
 @internal(intrinsic_store_storage_vec4_i32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_14(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<i32>)
+fn tint_symbol_14(offset : u32, value : vec4<i32>)
 
 @internal(intrinsic_store_storage_vec4_u32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_15(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<u32>)
+fn tint_symbol_15(offset : u32, value : vec4<u32>)
 
 @internal(intrinsic_store_storage_vec4_f16) @internal(disable_validation__function_has_no_body)
-fn tint_symbol_16(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : vec4<f16>)
+fn tint_symbol_16(offset : u32, value : vec4<f16>)
 
-fn tint_symbol_17(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_17(offset : u32, value : mat2x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_18(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_18(offset : u32, value : mat2x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_19(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
+fn tint_symbol_19(offset : u32, value : mat2x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
 }
 
-fn tint_symbol_20(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
-  tint_symbol_5(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_20(offset : u32, value : mat3x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
+  tint_symbol_5((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_21(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
-  tint_symbol_9(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_21(offset : u32, value : mat3x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
+  tint_symbol_9((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_22(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
-  tint_symbol_13(buffer, (offset + 32u), value[2u]);
+fn tint_symbol_22(offset : u32, value : mat3x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
+  tint_symbol_13((offset + 32u), value[2u]);
 }
 
-fn tint_symbol_23(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f32>) {
-  tint_symbol_5(buffer, (offset + 0u), value[0u]);
-  tint_symbol_5(buffer, (offset + 8u), value[1u]);
-  tint_symbol_5(buffer, (offset + 16u), value[2u]);
-  tint_symbol_5(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_23(offset : u32, value : mat4x2<f32>) {
+  tint_symbol_5((offset + 0u), value[0u]);
+  tint_symbol_5((offset + 8u), value[1u]);
+  tint_symbol_5((offset + 16u), value[2u]);
+  tint_symbol_5((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_24(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f32>) {
-  tint_symbol_9(buffer, (offset + 0u), value[0u]);
-  tint_symbol_9(buffer, (offset + 16u), value[1u]);
-  tint_symbol_9(buffer, (offset + 32u), value[2u]);
-  tint_symbol_9(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_24(offset : u32, value : mat4x3<f32>) {
+  tint_symbol_9((offset + 0u), value[0u]);
+  tint_symbol_9((offset + 16u), value[1u]);
+  tint_symbol_9((offset + 32u), value[2u]);
+  tint_symbol_9((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_25(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f32>) {
-  tint_symbol_13(buffer, (offset + 0u), value[0u]);
-  tint_symbol_13(buffer, (offset + 16u), value[1u]);
-  tint_symbol_13(buffer, (offset + 32u), value[2u]);
-  tint_symbol_13(buffer, (offset + 48u), value[3u]);
+fn tint_symbol_25(offset : u32, value : mat4x4<f32>) {
+  tint_symbol_13((offset + 0u), value[0u]);
+  tint_symbol_13((offset + 16u), value[1u]);
+  tint_symbol_13((offset + 32u), value[2u]);
+  tint_symbol_13((offset + 48u), value[3u]);
 }
 
-fn tint_symbol_26(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
+fn tint_symbol_26(offset : u32, value : mat2x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
 }
 
-fn tint_symbol_27(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_27(offset : u32, value : mat2x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_28(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat2x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
+fn tint_symbol_28(offset : u32, value : mat2x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
 }
 
-fn tint_symbol_29(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
-  tint_symbol_8(buffer, (offset + 8u), value[2u]);
+fn tint_symbol_29(offset : u32, value : mat3x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
+  tint_symbol_8((offset + 8u), value[2u]);
 }
 
-fn tint_symbol_30(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
-  tint_symbol_12(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_30(offset : u32, value : mat3x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
+  tint_symbol_12((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_31(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat3x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
-  tint_symbol_16(buffer, (offset + 16u), value[2u]);
+fn tint_symbol_31(offset : u32, value : mat3x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
+  tint_symbol_16((offset + 16u), value[2u]);
 }
 
-fn tint_symbol_32(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x2<f16>) {
-  tint_symbol_8(buffer, (offset + 0u), value[0u]);
-  tint_symbol_8(buffer, (offset + 4u), value[1u]);
-  tint_symbol_8(buffer, (offset + 8u), value[2u]);
-  tint_symbol_8(buffer, (offset + 12u), value[3u]);
+fn tint_symbol_32(offset : u32, value : mat4x2<f16>) {
+  tint_symbol_8((offset + 0u), value[0u]);
+  tint_symbol_8((offset + 4u), value[1u]);
+  tint_symbol_8((offset + 8u), value[2u]);
+  tint_symbol_8((offset + 12u), value[3u]);
 }
 
-fn tint_symbol_33(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x3<f16>) {
-  tint_symbol_12(buffer, (offset + 0u), value[0u]);
-  tint_symbol_12(buffer, (offset + 8u), value[1u]);
-  tint_symbol_12(buffer, (offset + 16u), value[2u]);
-  tint_symbol_12(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_33(offset : u32, value : mat4x3<f16>) {
+  tint_symbol_12((offset + 0u), value[0u]);
+  tint_symbol_12((offset + 8u), value[1u]);
+  tint_symbol_12((offset + 16u), value[2u]);
+  tint_symbol_12((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_34(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : mat4x4<f16>) {
-  tint_symbol_16(buffer, (offset + 0u), value[0u]);
-  tint_symbol_16(buffer, (offset + 8u), value[1u]);
-  tint_symbol_16(buffer, (offset + 16u), value[2u]);
-  tint_symbol_16(buffer, (offset + 24u), value[3u]);
+fn tint_symbol_34(offset : u32, value : mat4x4<f16>) {
+  tint_symbol_16((offset + 0u), value[0u]);
+  tint_symbol_16((offset + 8u), value[1u]);
+  tint_symbol_16((offset + 16u), value[2u]);
+  tint_symbol_16((offset + 24u), value[3u]);
 }
 
-fn tint_symbol_35(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<vec3<f32>, 2u>) {
+fn tint_symbol_35(offset : u32, value : array<vec3<f32>, 2u>) {
   var array_1 = value;
   for(var i = 0u; (i < 2u); i = (i + 1u)) {
-    tint_symbol_9(buffer, (offset + (i * 16u)), array_1[i]);
+    tint_symbol_9((offset + (i * 16u)), array_1[i]);
   }
 }
 
-fn tint_symbol_36(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : array<mat4x2<f16>, 2u>) {
+fn tint_symbol_36(offset : u32, value : array<mat4x2<f16>, 2u>) {
   var array_2 = value;
   for(var i_1 = 0u; (i_1 < 2u); i_1 = (i_1 + 1u)) {
-    tint_symbol_32(buffer, (offset + (i_1 * 16u)), array_2[i_1]);
+    tint_symbol_32((offset + (i_1 * 16u)), array_2[i_1]);
   }
 }
 
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, value : SB) {
-  tint_symbol_1(buffer, (offset + 0u), value.scalar_f32);
-  tint_symbol_2(buffer, (offset + 4u), value.scalar_i32);
-  tint_symbol_3(buffer, (offset + 8u), value.scalar_u32);
-  tint_symbol_4(buffer, (offset + 12u), value.scalar_f16);
-  tint_symbol_5(buffer, (offset + 16u), value.vec2_f32);
-  tint_symbol_6(buffer, (offset + 24u), value.vec2_i32);
-  tint_symbol_7(buffer, (offset + 32u), value.vec2_u32);
-  tint_symbol_8(buffer, (offset + 40u), value.vec2_f16);
-  tint_symbol_9(buffer, (offset + 48u), value.vec3_f32);
-  tint_symbol_10(buffer, (offset + 64u), value.vec3_i32);
-  tint_symbol_11(buffer, (offset + 80u), value.vec3_u32);
-  tint_symbol_12(buffer, (offset + 96u), value.vec3_f16);
-  tint_symbol_13(buffer, (offset + 112u), value.vec4_f32);
-  tint_symbol_14(buffer, (offset + 128u), value.vec4_i32);
-  tint_symbol_15(buffer, (offset + 144u), value.vec4_u32);
-  tint_symbol_16(buffer, (offset + 160u), value.vec4_f16);
-  tint_symbol_17(buffer, (offset + 168u), value.mat2x2_f32);
-  tint_symbol_18(buffer, (offset + 192u), value.mat2x3_f32);
-  tint_symbol_19(buffer, (offset + 224u), value.mat2x4_f32);
-  tint_symbol_20(buffer, (offset + 256u), value.mat3x2_f32);
-  tint_symbol_21(buffer, (offset + 288u), value.mat3x3_f32);
-  tint_symbol_22(buffer, (offset + 336u), value.mat3x4_f32);
-  tint_symbol_23(buffer, (offset + 384u), value.mat4x2_f32);
-  tint_symbol_24(buffer, (offset + 416u), value.mat4x3_f32);
-  tint_symbol_25(buffer, (offset + 480u), value.mat4x4_f32);
-  tint_symbol_26(buffer, (offset + 544u), value.mat2x2_f16);
-  tint_symbol_27(buffer, (offset + 552u), value.mat2x3_f16);
-  tint_symbol_28(buffer, (offset + 568u), value.mat2x4_f16);
-  tint_symbol_29(buffer, (offset + 584u), value.mat3x2_f16);
-  tint_symbol_30(buffer, (offset + 600u), value.mat3x3_f16);
-  tint_symbol_31(buffer, (offset + 624u), value.mat3x4_f16);
-  tint_symbol_32(buffer, (offset + 648u), value.mat4x2_f16);
-  tint_symbol_33(buffer, (offset + 664u), value.mat4x3_f16);
-  tint_symbol_34(buffer, (offset + 696u), value.mat4x4_f16);
-  tint_symbol_35(buffer, (offset + 736u), value.arr2_vec3_f32);
-  tint_symbol_36(buffer, (offset + 768u), value.arr2_mat4x2_f16);
+fn tint_symbol(offset : u32, value : SB) {
+  tint_symbol_1((offset + 0u), value.scalar_f32);
+  tint_symbol_2((offset + 4u), value.scalar_i32);
+  tint_symbol_3((offset + 8u), value.scalar_u32);
+  tint_symbol_4((offset + 12u), value.scalar_f16);
+  tint_symbol_5((offset + 16u), value.vec2_f32);
+  tint_symbol_6((offset + 24u), value.vec2_i32);
+  tint_symbol_7((offset + 32u), value.vec2_u32);
+  tint_symbol_8((offset + 40u), value.vec2_f16);
+  tint_symbol_9((offset + 48u), value.vec3_f32);
+  tint_symbol_10((offset + 64u), value.vec3_i32);
+  tint_symbol_11((offset + 80u), value.vec3_u32);
+  tint_symbol_12((offset + 96u), value.vec3_f16);
+  tint_symbol_13((offset + 112u), value.vec4_f32);
+  tint_symbol_14((offset + 128u), value.vec4_i32);
+  tint_symbol_15((offset + 144u), value.vec4_u32);
+  tint_symbol_16((offset + 160u), value.vec4_f16);
+  tint_symbol_17((offset + 168u), value.mat2x2_f32);
+  tint_symbol_18((offset + 192u), value.mat2x3_f32);
+  tint_symbol_19((offset + 224u), value.mat2x4_f32);
+  tint_symbol_20((offset + 256u), value.mat3x2_f32);
+  tint_symbol_21((offset + 288u), value.mat3x3_f32);
+  tint_symbol_22((offset + 336u), value.mat3x4_f32);
+  tint_symbol_23((offset + 384u), value.mat4x2_f32);
+  tint_symbol_24((offset + 416u), value.mat4x3_f32);
+  tint_symbol_25((offset + 480u), value.mat4x4_f32);
+  tint_symbol_26((offset + 544u), value.mat2x2_f16);
+  tint_symbol_27((offset + 552u), value.mat2x3_f16);
+  tint_symbol_28((offset + 568u), value.mat2x4_f16);
+  tint_symbol_29((offset + 584u), value.mat3x2_f16);
+  tint_symbol_30((offset + 600u), value.mat3x3_f16);
+  tint_symbol_31((offset + 624u), value.mat3x4_f16);
+  tint_symbol_32((offset + 648u), value.mat4x2_f16);
+  tint_symbol_33((offset + 664u), value.mat4x3_f16);
+  tint_symbol_34((offset + 696u), value.mat4x4_f16);
+  tint_symbol_35((offset + 736u), value.arr2_vec3_f32);
+  tint_symbol_36((offset + 768u), value.arr2_mat4x2_f16);
 }
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_symbol(&(sb), 0u, SB());
+  tint_symbol(0u, SB());
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -3172,11 +3172,11 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
-  var x : f32 = tint_symbol(&(sb), 712u);
+  var x : f32 = tint_symbol(712u);
 }
 )";
 
@@ -3222,11 +3222,11 @@ struct S1 {
 
     auto* expect = R"(
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
-  var x : f32 = tint_symbol(&(sb), 712u);
+  var x : f32 = tint_symbol(712u);
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -3308,14 +3308,14 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
   var i : i32 = 4;
   var j : u32 = 1u;
   var k : i32 = 2;
-  var x : f32 = tint_symbol(&(sb), (((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
+  var x : f32 = tint_symbol((((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
 }
 )";
 
@@ -3357,14 +3357,14 @@ struct S1 {
 
     auto* expect = R"(
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
   var i : i32 = 4;
   var j : u32 = 1u;
   var k : i32 = 2;
-  var x : f32 = tint_symbol(&(sb), (((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
+  var x : f32 = tint_symbol((((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -3462,14 +3462,14 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
   var i : i32 = 4;
   var j : u32 = 1u;
   var k : i32 = 2;
-  var x : f32 = tint_symbol(&(sb), (((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
+  var x : f32 = tint_symbol((((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
 }
 )";
 
@@ -3519,14 +3519,14 @@ struct S1 {
 
     auto* expect = R"(
 @internal(intrinsic_load_storage_f32) @internal(disable_validation__function_has_no_body)
-fn tint_symbol(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> f32
+fn tint_symbol(offset : u32) -> f32
 
 @compute @workgroup_size(1)
 fn main() {
   var i : i32 = 4;
   var j : u32 = 1u;
   var k : i32 = 2;
-  var x : f32 = tint_symbol(&(sb), (((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
+  var x : f32 = tint_symbol((((((128u + (128u * u32(i))) + 16u) + (32u * j)) + 16u) + (4u * u32(k))));
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
@@ -3611,34 +3611,34 @@ struct SB {
 @group(0) @binding(0) var<storage, read_write> sb : SB;
 
 @internal(intrinsic_atomic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicStore(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32)
+fn tint_atomicStore(offset : u32, param_1 : i32)
 
 @internal(intrinsic_atomic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicLoad(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_atomicLoad(offset : u32) -> i32
 
 @internal(intrinsic_atomic_add_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAdd(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicAdd(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_sub_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicSub(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicSub(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_max_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMax(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicMax(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_min_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMin(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicMin(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_and_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAnd(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicAnd(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_or_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicOr(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicOr(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_xor_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicXor(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicXor(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_exchange_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicExchange(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicExchange(offset : u32, param_1 : i32) -> i32
 
 struct atomic_compare_exchange_weak_ret_type {
   old_value : i32,
@@ -3646,37 +3646,37 @@ struct atomic_compare_exchange_weak_ret_type {
 }
 
 @internal(intrinsic_atomic_compare_exchange_weak_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicCompareExchangeWeak(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
+fn tint_atomicCompareExchangeWeak(offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
 
 @internal(intrinsic_atomic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicStore_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32)
+fn tint_atomicStore_1(offset : u32, param_1 : u32)
 
 @internal(intrinsic_atomic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicLoad_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_atomicLoad_1(offset : u32) -> u32
 
 @internal(intrinsic_atomic_add_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAdd_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicAdd_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_sub_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicSub_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicSub_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_max_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMax_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicMax_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_min_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMin_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicMin_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_and_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAnd_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicAnd_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_or_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicOr_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicOr_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_xor_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicXor_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicXor_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_exchange_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicExchange_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicExchange_1(offset : u32, param_1 : u32) -> u32
 
 struct atomic_compare_exchange_weak_ret_type_1 {
   old_value : u32,
@@ -3684,32 +3684,32 @@ struct atomic_compare_exchange_weak_ret_type_1 {
 }
 
 @internal(intrinsic_atomic_compare_exchange_weak_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicCompareExchangeWeak_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
+fn tint_atomicCompareExchangeWeak_1(offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_atomicStore(&(sb), 16u, 123);
-  tint_atomicLoad(&(sb), 16u);
-  tint_atomicAdd(&(sb), 16u, 123);
-  tint_atomicSub(&(sb), 16u, 123);
-  tint_atomicMax(&(sb), 16u, 123);
-  tint_atomicMin(&(sb), 16u, 123);
-  tint_atomicAnd(&(sb), 16u, 123);
-  tint_atomicOr(&(sb), 16u, 123);
-  tint_atomicXor(&(sb), 16u, 123);
-  tint_atomicExchange(&(sb), 16u, 123);
-  tint_atomicCompareExchangeWeak(&(sb), 16u, 123, 345);
-  tint_atomicStore_1(&(sb), 20u, 123u);
-  tint_atomicLoad_1(&(sb), 20u);
-  tint_atomicAdd_1(&(sb), 20u, 123u);
-  tint_atomicSub_1(&(sb), 20u, 123u);
-  tint_atomicMax_1(&(sb), 20u, 123u);
-  tint_atomicMin_1(&(sb), 20u, 123u);
-  tint_atomicAnd_1(&(sb), 20u, 123u);
-  tint_atomicOr_1(&(sb), 20u, 123u);
-  tint_atomicXor_1(&(sb), 20u, 123u);
-  tint_atomicExchange_1(&(sb), 20u, 123u);
-  tint_atomicCompareExchangeWeak_1(&(sb), 20u, 123u, 345u);
+  tint_atomicStore(16u, 123);
+  tint_atomicLoad(16u);
+  tint_atomicAdd(16u, 123);
+  tint_atomicSub(16u, 123);
+  tint_atomicMax(16u, 123);
+  tint_atomicMin(16u, 123);
+  tint_atomicAnd(16u, 123);
+  tint_atomicOr(16u, 123);
+  tint_atomicXor(16u, 123);
+  tint_atomicExchange(16u, 123);
+  tint_atomicCompareExchangeWeak(16u, 123, 345);
+  tint_atomicStore_1(20u, 123u);
+  tint_atomicLoad_1(20u);
+  tint_atomicAdd_1(20u, 123u);
+  tint_atomicSub_1(20u, 123u);
+  tint_atomicMax_1(20u, 123u);
+  tint_atomicMin_1(20u, 123u);
+  tint_atomicAnd_1(20u, 123u);
+  tint_atomicOr_1(20u, 123u);
+  tint_atomicXor_1(20u, 123u);
+  tint_atomicExchange_1(20u, 123u);
+  tint_atomicCompareExchangeWeak_1(20u, 123u, 345u);
 }
 )";
 
@@ -3758,34 +3758,34 @@ struct SB {
 
     auto* expect = R"(
 @internal(intrinsic_atomic_store_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicStore(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32)
+fn tint_atomicStore(offset : u32, param_1 : i32)
 
 @internal(intrinsic_atomic_load_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicLoad(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> i32
+fn tint_atomicLoad(offset : u32) -> i32
 
 @internal(intrinsic_atomic_add_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAdd(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicAdd(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_sub_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicSub(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicSub(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_max_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMax(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicMax(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_min_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMin(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicMin(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_and_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAnd(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicAnd(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_or_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicOr(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicOr(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_xor_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicXor(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicXor(offset : u32, param_1 : i32) -> i32
 
 @internal(intrinsic_atomic_exchange_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicExchange(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32) -> i32
+fn tint_atomicExchange(offset : u32, param_1 : i32) -> i32
 
 struct atomic_compare_exchange_weak_ret_type {
   old_value : i32,
@@ -3793,37 +3793,37 @@ struct atomic_compare_exchange_weak_ret_type {
 }
 
 @internal(intrinsic_atomic_compare_exchange_weak_storage_i32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicCompareExchangeWeak(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
+fn tint_atomicCompareExchangeWeak(offset : u32, param_1 : i32, param_2 : i32) -> atomic_compare_exchange_weak_ret_type
 
 @internal(intrinsic_atomic_store_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicStore_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32)
+fn tint_atomicStore_1(offset : u32, param_1 : u32)
 
 @internal(intrinsic_atomic_load_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicLoad_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32) -> u32
+fn tint_atomicLoad_1(offset : u32) -> u32
 
 @internal(intrinsic_atomic_add_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAdd_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicAdd_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_sub_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicSub_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicSub_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_max_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMax_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicMax_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_min_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicMin_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicMin_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_and_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicAnd_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicAnd_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_or_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicOr_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicOr_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_xor_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicXor_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicXor_1(offset : u32, param_1 : u32) -> u32
 
 @internal(intrinsic_atomic_exchange_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicExchange_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32) -> u32
+fn tint_atomicExchange_1(offset : u32, param_1 : u32) -> u32
 
 struct atomic_compare_exchange_weak_ret_type_1 {
   old_value : u32,
@@ -3831,32 +3831,32 @@ struct atomic_compare_exchange_weak_ret_type_1 {
 }
 
 @internal(intrinsic_atomic_compare_exchange_weak_storage_u32) @internal(disable_validation__function_has_no_body)
-fn tint_atomicCompareExchangeWeak_1(@internal(disable_validation__function_parameter) buffer : ptr<storage, SB, read_write>, offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
+fn tint_atomicCompareExchangeWeak_1(offset : u32, param_1 : u32, param_2 : u32) -> atomic_compare_exchange_weak_ret_type_1
 
 @compute @workgroup_size(1)
 fn main() {
-  tint_atomicStore(&(sb), 16u, 123);
-  tint_atomicLoad(&(sb), 16u);
-  tint_atomicAdd(&(sb), 16u, 123);
-  tint_atomicSub(&(sb), 16u, 123);
-  tint_atomicMax(&(sb), 16u, 123);
-  tint_atomicMin(&(sb), 16u, 123);
-  tint_atomicAnd(&(sb), 16u, 123);
-  tint_atomicOr(&(sb), 16u, 123);
-  tint_atomicXor(&(sb), 16u, 123);
-  tint_atomicExchange(&(sb), 16u, 123);
-  tint_atomicCompareExchangeWeak(&(sb), 16u, 123, 345);
-  tint_atomicStore_1(&(sb), 20u, 123u);
-  tint_atomicLoad_1(&(sb), 20u);
-  tint_atomicAdd_1(&(sb), 20u, 123u);
-  tint_atomicSub_1(&(sb), 20u, 123u);
-  tint_atomicMax_1(&(sb), 20u, 123u);
-  tint_atomicMin_1(&(sb), 20u, 123u);
-  tint_atomicAnd_1(&(sb), 20u, 123u);
-  tint_atomicOr_1(&(sb), 20u, 123u);
-  tint_atomicXor_1(&(sb), 20u, 123u);
-  tint_atomicExchange_1(&(sb), 20u, 123u);
-  tint_atomicCompareExchangeWeak_1(&(sb), 20u, 123u, 345u);
+  tint_atomicStore(16u, 123);
+  tint_atomicLoad(16u);
+  tint_atomicAdd(16u, 123);
+  tint_atomicSub(16u, 123);
+  tint_atomicMax(16u, 123);
+  tint_atomicMin(16u, 123);
+  tint_atomicAnd(16u, 123);
+  tint_atomicOr(16u, 123);
+  tint_atomicXor(16u, 123);
+  tint_atomicExchange(16u, 123);
+  tint_atomicCompareExchangeWeak(16u, 123, 345);
+  tint_atomicStore_1(20u, 123u);
+  tint_atomicLoad_1(20u);
+  tint_atomicAdd_1(20u, 123u);
+  tint_atomicSub_1(20u, 123u);
+  tint_atomicMax_1(20u, 123u);
+  tint_atomicMin_1(20u, 123u);
+  tint_atomicAnd_1(20u, 123u);
+  tint_atomicOr_1(20u, 123u);
+  tint_atomicXor_1(20u, 123u);
+  tint_atomicExchange_1(20u, 123u);
+  tint_atomicCompareExchangeWeak_1(20u, 123u, 345u);
 }
 
 @group(0) @binding(0) var<storage, read_write> sb : SB;
