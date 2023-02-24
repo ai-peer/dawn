@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67f45654_44562d3e",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-24T19:18:51Z",
+      "side": 1,
+      "message": "it\u0027s my bad that when I first thought about this as a mask passed from the generator, but after seeing it, I don\u0027t think it\u0027s best now - as I mentioned in some other comments. The current approach is not extremely complex, but overall, we could still accomplish the same thing with less code. \n\nI initially thought of it as a general \"there\u0027s a certain set of errors allowed, anything outside that set should be transformed\", but I\u0027m realizing now that the only time we want to do something other than default, there\u0027s just one bit that is different between the allowed set and the default set. So a single enum is simpler and expresses the same thing.\nThe mask works fine, but if someone looks through this code in the future, they need to do extra thinking to understand it.\n\nI also thought that we would need to \"drill\" through the semantics of what errors should be permitted to nested API* calls - like APIBeginRenderPass -\u003e APICreateTexture, etc. but it turns out that\u0027s not the case. Reentrant uses like that should be using CreateTexture and bubble errors out, not APICreateTexture.\nSo that means we don\u0027t actually need it to be an argument on API* and we can hardcode the enum passed to ConsumedError.",
+      "parentUuid": "9f93b482_a37948c7",
+      "revId": "147f363791557d79f6a85ee8f581422502882ec4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b927eaa8_b21b0e5b",
         "filename": "src/dawn/native/null/DeviceNull.cpp",
         "patchSetId": 13
