@@ -230,6 +230,31 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                  },
                              },
                              {
+                                 "a<b>=c",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kIdentifier,         // b
+                                     T::kTemplateArgsRight,  // >
+                                     T::kEqual,              // =
+                                     T::kIdentifier,         // c
+                                     T::kEOF,
+                                 },
+                             },
+                             {
+                                 "a<b>>=c",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kIdentifier,         // b
+                                     T::kTemplateArgsRight,  // >
+                                     T::kGreaterThanEqual,   // >=
+                                     T::kPlaceholder,        // <placeholder>
+                                     T::kIdentifier,         // c
+                                     T::kEOF,
+                                 },
+                             },
+                             {
                                  "vec3<i32>",
                                  {
                                      T::kIdentifier,         // vec3
@@ -473,6 +498,33 @@ INSTANTIATE_TEST_SUITE_P(Template,
                                      T::kIdentifier,         // d
                                      T::kParenRight,         // )
                                      T::kTemplateArgsRight,  // >
+                                     T::kTemplateArgsRight,  // >
+                                     T::kEOF,
+                                 },
+                             },
+                             {
+                                 "a<b<=c>",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kIdentifier,         // b
+                                     T::kLessThanEqual,      // <=
+                                     T::kIdentifier,         // c
+                                     T::kTemplateArgsRight,  // >
+                                     T::kEOF,
+                                 },
+                             },
+                             {
+                                 // Treesitter scanner was getting this wrong.
+                                 "a<(b<=c)>",
+                                 {
+                                     T::kIdentifier,         // a
+                                     T::kTemplateArgsLeft,   // <
+                                     T::kParenLeft,          // (
+                                     T::kIdentifier,         // b
+                                     T::kLessThanEqual,      // <=
+                                     T::kIdentifier,         // c
+                                     T::kParenRight,         // )
                                      T::kTemplateArgsRight,  // >
                                      T::kEOF,
                                  },
