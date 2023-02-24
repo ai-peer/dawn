@@ -968,14 +968,17 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
     {
         // Create a texture
         wgpu::Texture texture = CreateTexture(wgpu::TextureUsage::StorageBinding);
-        wgpu::TextureView view = texture.CreateView();
+        wgpu::TextureView view0 = texture.CreateView();
+        wgpu::TextureView view1 = texture.CreateView();
 
         // Create a bind group to use the texture as sampled and writeonly bindings
         wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
             device,
-            {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat},
-             {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
-        wgpu::BindGroup bg = utils::MakeBindGroup(device, bgl, {{0, view}, {1, view}});
+            {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
+        // Create 2 bind groups with same texture subresources and dispatch twice to avoid
+        // storage texture binding aliasing
+        wgpu::BindGroup bg0 = utils::MakeBindGroup(device, bgl, {{0, view0}});
+        wgpu::BindGroup bg1 = utils::MakeBindGroup(device, bgl, {{0, view1}});
 
         // Create a no-op compute pipeline
         wgpu::ComputePipeline cp = CreateNoOpComputePipeline({bgl});
@@ -985,7 +988,9 @@ TEST_F(ResourceUsageTrackingTest, TextureWithMultipleWriteUsage) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.SetPipeline(cp);
-        pass.SetBindGroup(0, bg);
+        pass.SetBindGroup(0, bg0);
+        pass.DispatchWorkgroups(1);
+        pass.SetBindGroup(0, bg1);
         pass.DispatchWorkgroups(1);
         pass.End();
         encoder.Finish();
