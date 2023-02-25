@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f082a8a7_c5b1e1eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:26:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6a43ca58d1883894ed5fb0f1a373051b7ecda645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "620c2ebf_aa3e9684",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-02-24T23:04:24Z",
       "side": 1,
       "message": "instead of renaming the toggle, we can change it to default to true in Adapter.cpp\nSimilar to how we handle DisallowUnsafeApis: `deviceToggles.Default(Toggle::DisallowUnsafeAPIs, true);`",
+      "range": {
+        "startLine": 383,
+        "startChar": 0,
+        "endLine": 388,
+        "endChar": 0
+      },
+      "revId": "6a43ca58d1883894ed5fb0f1a373051b7ecda645",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cf7557c_e3cfe932",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 388,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:26:18Z",
+      "side": 1,
+      "message": "Eventually don\u0027t we want to rename the toggle to avoid double negatives? Either way sounds good.",
+      "parentUuid": "620c2ebf_aa3e9684",
       "range": {
         "startLine": 383,
         "startChar": 0,
