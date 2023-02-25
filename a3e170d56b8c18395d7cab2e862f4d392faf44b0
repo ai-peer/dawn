@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d227d15_526320ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-25T01:20:01Z",
+      "side": 1,
+      "message": "Mostly done, with one missing bit (question) about validating aspect(all, depthOnly, stencilOnly) intersection.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d3a4cf0_8332c0a8",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-25T01:20:01Z",
+      "side": 1,
+      "message": "Question:\nIs it possible if we want to test validating two storage textures with different aspect, (all, depthOnly, stencilOnly)?\n\ntexture.createView() will require the texture view format be the resolved format based on texture format and aspect. Looking at https://gpuweb.github.io/gpuweb/#depth-formats\n\nIt can only be depthXXX and stencil8. Are these two formats somehow valid texel_format for `texture_storage_2d_array` in wgsl?",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
