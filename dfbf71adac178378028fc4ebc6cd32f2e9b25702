@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb84673a_623fd98d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "LGTM, the bitmask is a bit weird, but let\u0027s see if it becomes a problem in the future.",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb51ef7f_42ce5313",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "Seems maybe unrelated?",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10272bd3_06cf7bed",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "nit: in a follow-up we could probably keep only the std::string here, change ErrorScope to take a string_view, and do .c_str() only when calling the C callbacks.",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03ed500a_306485d7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "Isn\u0027t validation always allowed?",
+      "range": {
+        "startLine": 1400,
+        "startChar": 16,
+        "endLine": 1400,
+        "endChar": 47
+      },
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ea8534_7b214101",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "How would you feel about explicitly passing the list of non-loss errors? There\u0027s only a couple places where we need to be explicit, and this would avoid the need to remember that validation is already handled specially.",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5a07239_69adba99",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-25T17:56:11Z",
+      "side": 1,
+      "message": "u-u-nit: missing :: here?",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
