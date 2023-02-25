@@ -1228,24 +1228,19 @@ ConstEval::Result ConstEval::Literal(const type::Type* ty, const ast::LiteralExp
         });
 }
 
-ConstEval::Result ConstEval::ArrayOrStructCtor(const type::Type* ty,
-                                               utils::VectorRef<const sem::ValueExpression*> args) {
+ConstEval::Result ConstEval::ArrayOrStructInit(const type::Type* ty,
+                                               utils::VectorRef<const constant::Value*> args) {
     if (args.IsEmpty()) {
         return ZeroValue(ty);
     }
 
     if (args.Length() == 1 && args[0]->Type() == ty) {
-        // Identity constructor.
-        return args[0]->ConstantValue();
+        // Identity initializer.
+        return args[0];
     }
 
-    // Multiple arguments. Must be a value constructor.
-    utils::Vector<const constant::Value*, 4> els;
-    els.Reserve(args.Length());
-    for (auto* arg : args) {
-        els.Push(arg->ConstantValue());
-    }
-    return builder.create<constant::Composite>(ty, std::move(els));
+    // Multiple arguments. Must be a type initializer.
+    return builder.create<constant::Composite>(ty, std::move(args));
 }
 
 ConstEval::Result ConstEval::Conv(const type::Type* ty,
