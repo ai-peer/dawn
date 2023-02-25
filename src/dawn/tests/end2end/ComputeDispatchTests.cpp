@@ -262,6 +262,9 @@ TEST_P(ComputeDispatchTests, MaxWorkgroups) {
     // TODO(crbug.com/dawn/1165): Fails with WARP
     DAWN_SUPPRESS_TEST_IF(IsWARP());
 
+    // TODO(jrprice): This is too slow with the emulator right now.
+    DAWN_SUPPRESS_TEST_IF(IsEmulator());
+
     uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
 
     // Test that the maximum works in each dimension.
@@ -312,6 +315,7 @@ TEST_P(ComputeDispatchTests, ExceedsMaxWorkgroupsWithOffsetNoop) {
 
 DAWN_INSTANTIATE_TEST(ComputeDispatchTests,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),

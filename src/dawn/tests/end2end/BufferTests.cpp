@@ -536,6 +536,7 @@ TEST_P(BufferMappingTests, MapWrite_ZeroSizedTwice) {
 
 DAWN_INSTANTIATE_TEST(BufferMappingTests,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
@@ -945,6 +946,7 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRangeZeroSized) {
 DAWN_INSTANTIATE_TEST(BufferMappedAtCreationTests,
                       D3D12Backend(),
                       D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
@@ -1096,6 +1098,7 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
 
 DAWN_INSTANTIATE_TEST(BufferTests,
                       D3D12Backend(),
+                      EmulatorBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
