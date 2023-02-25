@@ -1,0 +1,242 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0776487_a291ee91",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.6745s (average 4.7128s)",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1753d24_6e6cd8a9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.8302s (average 4.8405005s)",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a7b0086_94589326",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.bt2020.vp9.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0e1727_edb057bd",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.bt601.vp9.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "684d21f5_7f3b8f0b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.bt709.vp9.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8f0881d_d5d73341",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.theora.ogv\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84fae8ff_ac5f908f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.webmvp8.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fe07f76_1d0551a9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.bt601.vp9.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ffbca7e_07f4b3db",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.theora.ogv\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6215f0b9_f56c03b2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,sample:sourceType\u003d\"VideoElement\";videoName\u003d\"red-green.webmvp8.webm\"\u0027 with tags [mac]",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16c2ea1_f966524c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,compute_pipeline:overrides,identifier:isAsync\u003dfalse;constants\u003d{\"s%C3%A9quen%C3%A7age\":0}\u0027",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b771c560_e7e519f8",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,compute_pipeline:overrides,identifier:isAsync\u003dtrue;constants\u003d{\"s%C3%A9quen%C3%A7age\":0}\u0027",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "975d41d4_ac226102",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,render_pipeline,overrides:identifier,vertex:isAsync\u003dfalse;vertexConstants\u003d{\"s%C3%A9quen%C3%A7age\":0}\u0027",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c675795_941952d1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-25T13:28:00Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,render_pipeline,overrides:identifier,vertex:isAsync\u003dtrue;vertexConstants\u003d{\"s%C3%A9quen%C3%A7age\":0}\u0027",
+      "revId": "0be37e0c508d41e2186616d642dc61a544389c3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
