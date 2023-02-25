@@ -555,6 +555,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62de61d5_ce5f1bf2",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-25T15:22:45Z",
+      "side": 1,
+      "message": "EDIT: `packed_vector\u003cT, 3\u003e` has 4-byte alignment.\n\nI\u0027ve changed the transform to only use the wrapper struct when the vec3 appears as an array element. When it is appears as a struct member or directly as the store type of a buffer, no wrapper struct is used.",
+      "parentUuid": "cbf84ac9_556774b4",
+      "range": {
+        "startLine": 1299,
+        "startChar": 7,
+        "endLine": 1299,
+        "endChar": 23
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea13b573_440f3691",
         "filename": "src/tint/transform/packed_vec3_test.cc",
         "patchSetId": 2
