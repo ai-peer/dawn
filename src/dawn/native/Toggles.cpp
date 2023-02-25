@@ -206,6 +206,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Dump shaders for debugging purposes. Dumped shaders will be log via EmitLog, thus printed "
       "in Chrome console or consumed by user-defined callback function.",
       "https://crbug.com/dawn/792", ToggleStage::Device}},
+    {Toggle::Interactive,
+     {"interactive", "Enable interactive mode when using the Emulator backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
+    {Toggle::EnableDRD,
+     {"enable_drd", "Enable data race detection when using the Emulator backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
     {Toggle::ForceWGSLStep,
      {"force_wgsl_step",
       "When ingesting SPIR-V shaders, force a first conversion to WGSL. This allows testing Tint's "
