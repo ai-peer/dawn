@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1797a2b1_8503c5e5",
+        "filename": "src/dawn/native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f4e00bf_ce479f1d",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 162,
+        "endChar": 81
+      },
+      "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "907038b1_bb7a4413",
@@ -142,6 +166,24 @@
       "side": 1,
       "message": "+1 for a bit more block comments to describe what\u0027s happening. LGTM otherwise.",
       "parentUuid": "034b9990_d4c39d87",
+      "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd011ef7_cfdd8b24",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:09:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45b3d60e_16179c5f",
       "revId": "674ef35a2233d5d13c2606166e46deb2ef302566",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
