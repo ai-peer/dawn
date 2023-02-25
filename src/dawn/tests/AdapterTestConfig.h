@@ -62,6 +62,9 @@ std::ostream& operator<<(std::ostream& os, const AdapterTestParam& param);
 BackendTestConfig D3D12Backend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
+BackendTestConfig EmulatorBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
+                                  std::initializer_list<const char*> forceDisabledWorkarounds = {});
+
 BackendTestConfig MetalBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
