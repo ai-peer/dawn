@@ -18,6 +18,184 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36e37953_6261ccc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "(didn\u0027t look at tests yet)",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "651eb066_50b800e2",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "old comments?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17855bf8_0416946d",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "note that these are just the base limits, and they\u0027ll be higher if requested to be higher. probably still OK to set the base amount to be stack allocated",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 72
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88e4493a_cd5194fd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "similar to BufferBinding, if we hoist these out into the flattened storageTextureViewsToCheck, will performance be better?\n\nat the very least, we can move mipLevel0, levelCount0, arrayLayer0, layerCount0 out to the outer loop",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 68
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29d7ba6e_4495eca4",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "nit: factor this check and the other ones into a `RangesOverlap` helper",
+      "range": {
+        "startLine": 236,
+        "startChar": 16,
+        "endLine": 237,
+        "endChar": 67
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21b9ca6_3d49b93a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "in this loop, i ranges from 0 to storageTextureViewsToCheck-\u003esize();\n\nin the previous loop, i also ranges from 0 to storageBufferBindingsToCheck-\u003esize();\n\nif there are both storage buffer bindings AND storage texture view bindings, won\u0027t this index be wrong?\nFor example, if the first storage texture view binding has a conflict, then we will be accessing bindingIndices[0]. bindingIndices[0] will be a buffer binding",
+      "range": {
+        "startLine": 245,
+        "startChar": 43,
+        "endLine": 245,
+        "endChar": 61
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace8bfb8_1f38fc65",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "existing nit: we can put DAWN_UNLIKELY on this",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 21
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c987f84a_7dc1d27a",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 66
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d3a4cf0_8332c0a8",
@@ -31,6 +209,24 @@
       "writtenOn": "2023-02-25T01:20:01Z",
       "side": 1,
       "message": "Question:\nIs it possible if we want to test validating two storage textures with different aspect, (all, depthOnly, stencilOnly)?\n\ntexture.createView() will require the texture view format be the resolved format based on texture format and aspect. Looking at https://gpuweb.github.io/gpuweb/#depth-formats\n\nIt can only be depthXXX and stencil8. Are these two formats somehow valid texel_format for `texture_storage_2d_array` in wgsl?",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5cb0732_c3f689a8",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-25T02:39:00Z",
+      "side": 1,
+      "message": "depth stencil storage textures are invalid\n(only color is valid)\n\n\"\"\"\nIf descriptor.usage includes the STORAGE_BINDING bit:\n   descriptor.format must be listed in § 26.1.1 Plain color formats table with \n   STORAGE_BINDING capability.\n\"\"\"",
+      "parentUuid": "0d3a4cf0_8332c0a8",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
