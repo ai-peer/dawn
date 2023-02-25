@@ -780,6 +780,7 @@ auto GenerateParams() {
         {
             D3D12Backend(),
             D3D12Backend({"use_dxc"}),
+            EmulatorBackend(),
             MetalBackend(),
             VulkanBackend(),
             OpenGLBackend(),
