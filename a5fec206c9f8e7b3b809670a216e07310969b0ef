@@ -22,6 +22,30 @@
       },
       "revId": "a5fec206c9f8e7b3b809670a216e07310969b0ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e60f6f7f_99e09569",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 866,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-26T05:44:44Z",
+      "side": 0,
+      "message": "Thanks for the comment. Yes, I think such a test sounds like useful. But I don\u0027t think the current this test behaves so. It releases buffer before the first map callback is fired. I have removed this test because it sounds like duplicated with the new test.\n\nI reverted the test and edited a bit to test it.",
+      "parentUuid": "c66db3a9_f5406955",
+      "range": {
+        "startLine": 866,
+        "startChar": 36,
+        "endLine": 866,
+        "endChar": 70
+      },
+      "revId": "a5fec206c9f8e7b3b809670a216e07310969b0ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
