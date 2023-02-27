@@ -95,8 +95,13 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
 
     DAWN_INVALID_IF(options->getProc == nullptr, "AdapterDiscoveryOptions::getProc must be set");
 
-    Ref<Adapter> adapter = AcquireRef(
-        new Adapter(GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType)));
+    // Currently adapter doesn't have toggles descriptor, so give a nullptr to make adapter toggles
+    // only inherit from instance toggles state.
+    // TODO(1495): After adding adapter toggles descriptor, pass it to MakeAdapterToggles.
+    TogglesState adapterToggles = MakeAdapterToggles(nullptr);
+
+    Ref<Adapter> adapter = AcquireRef(new Adapter(
+        GetInstance(), static_cast<wgpu::BackendType>(optionsBase->backendType), adapterToggles));
     DAWN_TRY(adapter->InitializeGLFunctions(options->getProc));
     DAWN_TRY(adapter->Initialize());
 

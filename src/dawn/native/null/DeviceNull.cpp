@@ -30,7 +30,12 @@ namespace dawn::native::null {
 
 // Implementation of pre-Device objects: the null adapter, null backend connection and Connect()
 
-Adapter::Adapter(InstanceBase* instance) : AdapterBase(instance, wgpu::BackendType::Null) {
+Adapter::Adapter(InstanceBase* instance)
+    : Adapter(instance,
+              TogglesState(ToggleStage::Adapter).InheritToggles(instance->GetTogglesState())) {}
+
+Adapter::Adapter(InstanceBase* instance, const TogglesState& adapterToggles)
+    : AdapterBase(instance, wgpu::BackendType::Null, adapterToggles) {
     mVendorId = 0;
     mDeviceId = 0;
     mName = "Null backend";
