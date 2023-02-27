@@ -474,6 +474,11 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     const AdapterDiscoveryOptions* options =
         static_cast<const AdapterDiscoveryOptions*>(optionsBase);
 
+    // Currently adapter doesn't have toggles descriptor, so give a nullptr to make adapter toggles
+    // only inherit from instance toggles state.
+    // TODO(1495): After adding adapter toggles descriptor, pass it to MakeAdapterToggles.
+    TogglesState adapterToggles = MakeAdapterToggles(nullptr);
+
     std::vector<Ref<AdapterBase>> adapters;
 
     InstanceBase* instance = GetInstance();
@@ -497,8 +502,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
         const std::vector<VkPhysicalDevice>& physicalDevices =
             mVulkanInstances[icd]->GetPhysicalDevices();
         for (uint32_t i = 0; i < physicalDevices.size(); ++i) {
-            Ref<Adapter> adapter =
-                AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(), physicalDevices[i]));
+            Ref<Adapter> adapter = AcquireRef(new Adapter(instance, mVulkanInstances[icd].Get(),
+                                                          physicalDevices[i], adapterToggles));
             if (instance->ConsumedError(adapter->Initialize())) {
                 continue;
             }

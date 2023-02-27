@@ -27,10 +27,11 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
-    : mInstance(instance), mBackend(backend) {
-    mSupportedFeatures.EnableFeature(Feature::DawnNative);
-    mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         wgpu::BackendType backend,
+                         const TogglesState& adapterToggles)
+    : mInstance(instance), mBackend(backend), mTogglesState(adapterToggles) {
+    ASSERT(adapterToggles.GetStage() == ToggleStage::Adapter);
 }
 
 AdapterBase::~AdapterBase() = default;
@@ -39,6 +40,8 @@ MaybeError AdapterBase::Initialize() {
     DAWN_TRY_CONTEXT(InitializeImpl(), "initializing adapter (backend=%s)", mBackend);
     InitializeVendorArchitectureImpl();
 
+    mSupportedFeatures.EnableFeature(Feature::DawnNative);
+    mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
     InitializeSupportedFeaturesImpl();
 
     DAWN_TRY_CONTEXT(
@@ -206,6 +209,10 @@ bool AdapterBase::GetLimits(SupportedLimits* limits) const {
     return true;
 }
 
+const TogglesState& AdapterBase::GetTogglesState() const {
+    return mTogglesState;
+}
+
 MaybeError AdapterBase::ValidateFeatureSupportedWithDeviceToggles(
     wgpu::FeatureName feature,
     const TogglesState& deviceTogglesState) {
@@ -229,8 +236,8 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     const DeviceDescriptor* descriptor) {
     ASSERT(descriptor != nullptr);
 
-    // Create device toggles state from required toggles descriptor.
-    // TODO(dawn:1495): After implementing adapter toggles, also inherite adapter toggles state.
+    // Create device toggles state from required toggles descriptor and inherited adapter toggles
+    // state.
     const DawnTogglesDescriptor* deviceTogglesDesc = nullptr;
     FindInChain(descriptor->nextInChain, &deviceTogglesDesc);
 
@@ -261,17 +268,36 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
         deviceTogglesDesc = &convertedDeviceTogglesDesc;
     }
 
-    // Create device toggles state from user-given toggles descriptor, and set up forced and default
-    // toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, device toggles state should also inherit
-    // from adapter toggles state.
+    // Create device toggles state.
     TogglesState deviceToggles =
         TogglesState::CreateFromTogglesDescriptor(deviceTogglesDesc, ToggleStage::Device);
+    deviceToggles.InheritToggles(mTogglesState);
     // Default toggles for all backend
     deviceToggles.Default(Toggle::LazyClearResourceOnFirstUse, true);
-    deviceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+    // Toggle::DisallowUnsafeAPIs should have been inherited, either enabled or disabled.
+    DAWN_ASSERT(deviceToggles.IsSet(Toggle::DisallowUnsafeAPIs));
+
     // Backend-specific forced and default device toggles
     SetupBackendDeviceToggles(&deviceToggles);
+
+    // TODO(dawn:1495): Remove this workaround and validate required feature base on adapter toggles
+    // state to stop handling DisallowUnsafeAPIs in device toggles descriptor.
+    // DisallowUnsafeApis is now instance stage toggle, but some existing programs may still require
+    // it when creating device. In order to make existing programs with these behaviors works, set
+    // the device DisallowUnsafeApis toggle by fake inheriting if required in device's
+    // TogglesDeviceDescriptor, and validate required features based on device's toggles state
+    // rather than adapter's, even though that may break the coherence between device toggles state
+    // and instance/adapter toggles state.
+    TogglesState workaroundInstanceToggles =
+        TogglesState::CreateFromTogglesDescriptor(deviceTogglesDesc, ToggleStage::Instance);
+    if (workaroundInstanceToggles.IsSet(Toggle::DisallowUnsafeAPIs)) {
+        dawn::WarningLog() << "DisallowUnsafeApis is now instance stage toggle and should be "
+                              "required using DawnTogglesDescriptor when creating instance. Using "
+                              "it in device toggles descriptor will be ignored in the future.";
+        deviceToggles.Inherit(Toggle::DisallowUnsafeAPIs,
+                              workaroundInstanceToggles.IsEnabled(Toggle::DisallowUnsafeAPIs),
+                              false);
+    }
 
     // Validate all required features are supported by the adapter and suitable under given toggles.
     // TODO(dawn:1495): After implementing adapter toggles, validate supported features using
