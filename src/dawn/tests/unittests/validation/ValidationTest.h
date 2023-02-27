@@ -132,6 +132,7 @@ class ValidationTest : public testing::Test {
     wgpu::SupportedLimits GetSupportedLimits() const;
 
   protected:
+    virtual std::unique_ptr<dawn::native::Instance> CreateTestInstance();
     dawn::native::Adapter& GetBackendAdapter();
     virtual WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter);
 
