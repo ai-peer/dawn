@@ -85,6 +85,24 @@
       "message": "LGTM too",
       "revId": "b39a3635cefdbda6d2472684d6954d6adf043ae5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82ee2b19_4bf9c51e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T18:39:22Z",
+      "side": 1,
+      "message": "It definitely could be autogened ;)",
+      "parentUuid": "56afe0b6_f08597a4",
+      "revId": "b39a3635cefdbda6d2472684d6954d6adf043ae5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
