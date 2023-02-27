@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3717fa8c_07d3a5b8",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:26:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6e0fd1a9_3c2938d1",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10272bd3_06cf7bed",
@@ -125,6 +143,30 @@
       "side": 1,
       "message": "It is, but before there was a comment that just having OOM here (or default or w.e) seemed out of sync with the validation error message above that states OOM or Validation. So to be explicit and consistent I just added both here.",
       "parentUuid": "03ed500a_306485d7",
+      "range": {
+        "startLine": 1400,
+        "startChar": 16,
+        "endLine": 1400,
+        "endChar": 47
+      },
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "771a8e9d_cff51b6b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:26:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "06fb09e2_54948f9f",
       "range": {
         "startLine": 1400,
         "startChar": 16,
