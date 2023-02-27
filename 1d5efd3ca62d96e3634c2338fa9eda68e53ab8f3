@@ -16,6 +16,24 @@
       "message": "high level question: I thought we were going to move callbacks to only happen on DeviceBase::APIDestroy(), DeviceBase::APITick(), DeviceBase::WillDropLastExternalRef\n\nI see queue methods also trigger callbacks. Is there a reason the queue could not enqueue them into DeviceBase\u0027s mCallbackTaskManager instead?",
       "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b73585de_e99affa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-02-27T19:43:28Z",
+      "side": 1,
+      "message": "Those queue\u0027s methods call Device::Tick() internally. In case of those CopyTexture* functions, they invoke Queue::APISubmit() internally which indirectly calls Device::Tick().\n\nUnless we want different semantic meaning between Device::APITick() and Device::Tick() such as Device::Tick() won\u0027t ever trigger pending callbacks?\n\nOr maybe the original intention for those Submit()/CopyTexture* methods is only using Tick() to update serial and not for triggering callbacks?",
+      "parentUuid": "c1c58899_83e173a5",
+      "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
