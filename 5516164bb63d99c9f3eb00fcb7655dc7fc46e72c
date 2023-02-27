@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc58c505_d62565e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-27T14:03:01Z",
+      "side": 1,
+      "message": "Why do we call this \"runtime\" semantincs? This is confusing, given that this is actually compile-time. I see that there\u0027s a `const_eval_runtime_semantics.cc` file you also updated as part of this change, which I assume came with the code for the interpreter?",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "895776ef_8f1f0245",
@@ -14,6 +37,23 @@
       "writtenOn": "2023-02-27T09:37:05Z",
       "side": 1,
       "message": "Antonio for +2",
+      "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8867d9ae_20f82735",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-02-27T14:03:01Z",
+      "side": 1,
+      "message": "This is correct. I was confused looking at this change at first, because I recently wrote CTS tests for u32/i32 modulo, and indeed I wrote them to expect 0 from x % 0. I must have been looking at the Division section of the table in the spec when I implemented this behaviour for const eval. (In my defense, the division and modulo sections in the table are large and exactly the same, except for a few characters).",
       "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
