@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e0fd1a9_3c2938d1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-27T22:19:54Z",
+      "side": 1,
+      "message": "It\u0027s needed in the testing. If we don\u0027t initialize the default limits in the ctor, the mock device doesn\u0027t have them and the limits are all wack.",
+      "parentUuid": "bb51ef7f_42ce5313",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10272bd3_06cf7bed",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-25T17:56:11Z",
       "side": 1,
       "message": "nit: in a follow-up we could probably keep only the std::string here, change ErrorScope to take a string_view, and do .c_str() only when calling the C callbacks.",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c91e63b_9aab586a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-27T22:19:54Z",
+      "side": 1,
+      "message": "Added TODO for it!",
+      "parentUuid": "10272bd3_06cf7bed",
       "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06fb09e2_54948f9f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-27T22:19:54Z",
+      "side": 1,
+      "message": "It is, but before there was a comment that just having OOM here (or default or w.e) seemed out of sync with the validation error message above that states OOM or Validation. So to be explicit and consistent I just added both here.",
+      "parentUuid": "03ed500a_306485d7",
+      "range": {
+        "startLine": 1400,
+        "startChar": 16,
+        "endLine": 1400,
+        "endChar": 47
+      },
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9ea8534_7b214101",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7f711f_bd96d80a",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-27T22:19:54Z",
+      "side": 1,
+      "message": "Hmm that\u0027s sort of what we had before, but the previous comments seemed to suggest we wanted to make validation and device loss default errors because they should always be surfaced as is. The only \"special\" cases are OOM and Internal for pipelines. Keeping as is for now.",
+      "parentUuid": "e9ea8534_7b214101",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5a07239_69adba99",
@@ -105,6 +183,24 @@
       "writtenOn": "2023-02-25T17:56:11Z",
       "side": 1,
       "message": "u-u-nit: missing :: here?",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57063ea9_ebb864cc",
+        "filename": "src/dawn/tests/unittests/native/AllowedErrorTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-27T22:19:54Z",
+      "side": 1,
+      "message": "Oh... hmm interesting, for some reason I was under the impression that `MockCallback` was under `dawn::native::testing` which is why I didn\u0027t have the extra :: here. But fixed now, thanks!",
+      "parentUuid": "d5a07239_69adba99",
       "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
