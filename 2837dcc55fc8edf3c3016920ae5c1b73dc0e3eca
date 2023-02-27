@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26e7bab9_c5f1da94",
+        "filename": "generator/opengl_loader_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T17:58:55Z",
+      "side": 1,
+      "message": "ah, I see",
+      "parentUuid": "d36f2ac9_83e99cb7",
+      "range": {
+        "startLine": 272,
+        "startChar": 8,
+        "endLine": 273,
+        "endChar": 44
+      },
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c97c4fc_016c4123",
@@ -201,6 +225,24 @@
       "side": 1,
       "message": "Unfortunately, I realized that the ANGLE extension doesn\u0027t actually have the BaseVertex-only entry point. It only has BaseVertexBaseInstance. So it\u0027s not a drop-in replacement.\n\nI\u0027ve changed the extension check to simply check for the ANGLE fn ptr. Should be cheap.",
       "parentUuid": "30e075e1_5b783593",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50c88949_f6836fb4",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T17:58:55Z",
+      "side": 1,
+      "message": "The core question is:\nis the proc non-null if and only if the extension is available? you could imagine some driver might have the proc, but actually using it isn\u0027t valid unless the extension is also available.\n\nSo, slight preference for checking the availability of the extension.\nTo address the concern about the performance of the check, we can do it like VulkanExtensions where we remap the string names to our own internal enums. Those enums can index into a bitset into the set of available extensions.\n\nI don\u0027t have a strong preference of whether we use enums or just have a string check for now, since compat isn\u0027t shipping just yet",
+      "parentUuid": "041a467a_48cf2845",
       "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
