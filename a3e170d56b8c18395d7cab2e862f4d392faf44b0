@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "530423eb_13b0c85b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "I\u0027m surprised that we need the type, aren\u0027t the two views enough to know what overlap? (both mip level ranges and array layer need to overlap actually to have a conflict).",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "651eb066_50b800e2",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 2
@@ -54,6 +71,23 @@
         "endLine": 83,
         "endChar": 0
       },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9883cb57_6d038fdf",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "No need for storage textures yet (we could assert that the aspect is always color for now, maybe we have storage depth texture in the future)",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -83,6 +117,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ca43acb_46029c5e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "nit: \"in default limits\"",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9093f85d_8a00e08b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "nit: This is also going to check samplers etc. We could loop over just the storage textures most likely by precomputing their start/end range in the BGL (could be a TODO or follow-up).",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438b3604_2cd51859",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "nit: Maybe we could switch on the access, so that we get reminded to add support for read/write in the future.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3be539c7_2cc9ea0c",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "Unrelated, I\u0027ve been wondering if by using intrusive data structure we could make this more efficient: BufferBase would be used for scratch storage space during the validation. Each validation try would have a Serial for that validation run, and the BufferBase would have a Serial+StackVec\u003crange, 1?\u003e that would contain the list of ranges for that validation run.\n\nBut it breaks in multithreaded environments.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "986c9cca_e3b0b0ed",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "nit: We could assert when adding the textures taht the aspect is color.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88e4493a_cd5194fd",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 2
@@ -100,6 +219,23 @@
         "endLine": 234,
         "endChar": 68
       },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10b1c3e5_d379466f",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "I think the condition should be RangesOverlap(mipLevels) \u0026\u0026 RangesOverlap(arrayLayers). Right now the code does an ||.\n\nAlso can we have a test for this?",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -152,6 +288,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d301bed7_39dfb435",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "nit: We could add a constexpr bool that\u0027s kValidationMode that selects between the mode with validation only and the mode that actually returns the conflicts. It would reduce code duplication a little bit and make things easier to read.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ace8bfb8_1f38fc65",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 2
@@ -163,6 +316,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "existing nit: we can put DAWN_UNLIKELY on this",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 21
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90fa04ab_5f32d3fd",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:50:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this cold code because it happens only if validation fails?\n\nSo existing nit: the other DAWN_UNLIKELY could be removed from this function?",
+      "parentUuid": "ace8bfb8_1f38fc65",
       "range": {
         "startLine": 625,
         "startChar": 0,
