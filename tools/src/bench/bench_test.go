@@ -149,11 +149,11 @@ func TestParseJson(t *testing.T) {
 
 	expect := bench.Run{
 		Benchmarks: []bench.Benchmark{
-			{Name: "MyBenchmark", Duration: time.Nanosecond * 1639227, AggregateType: ""},
-			{Name: "MyBenchmark", Duration: time.Nanosecond * 1714393, AggregateType: ""},
-			{Name: "MyBenchmark", Duration: time.Nanosecond * 1676810, AggregateType: "mean"},
-			{Name: "MyBenchmark", Duration: time.Nanosecond * 1676810, AggregateType: "median"},
-			{Name: "MyBenchmark", Duration: time.Nanosecond * 53150, AggregateType: "stddev"},
+			{Name: "MyBenchmark", Duration: time.Nanosecond * 1638741, AggregateType: ""},
+			{Name: "MyBenchmark", Duration: time.Nanosecond * 1712400, AggregateType: ""},
+			{Name: "MyBenchmark", Duration: time.Nanosecond * 1675570, AggregateType: "mean"},
+			{Name: "MyBenchmark", Duration: time.Nanosecond * 1675570, AggregateType: "median"},
+			{Name: "MyBenchmark", Duration: time.Nanosecond * 52084, AggregateType: "stddev"},
 		},
 		Context: &bench.Context{
 			Date:       expectedDate,
@@ -171,7 +171,7 @@ func TestParseJson(t *testing.T) {
 	}
 
 	expectEqual(t, "bench.Parse().Benchmarks", got.Benchmarks, expect.Benchmarks)
-	expectEqual(t, "bench.Parse().Context", got.Benchmarks, expect.Benchmarks)
+	expectEqual(t, "bench.Parse().Context", got.Context, expect.Context)
 }
 
 func TestCompare(t *testing.T) {
