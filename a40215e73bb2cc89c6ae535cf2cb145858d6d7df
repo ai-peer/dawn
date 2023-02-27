@@ -16,6 +16,23 @@
       "message": "Thanks. Antonio still for +2",
       "revId": "a40215e73bb2cc89c6ae535cf2cb145858d6d7df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7b67a0_b2349592",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T17:09:58Z",
+      "side": 1,
+      "message": "Kokoro failure was due to infra flake. Manually adding +1 and submitting.",
+      "revId": "a40215e73bb2cc89c6ae535cf2cb145858d6d7df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
