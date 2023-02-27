@@ -255,8 +255,8 @@ DAWN_NOINLINE bool IsGPUCounterSupported(id<MTLDevice> device,
 
 class Adapter : public AdapterBase {
   public:
-    Adapter(InstanceBase* instance, id<MTLDevice> device)
-        : AdapterBase(instance, wgpu::BackendType::Metal), mDevice(device) {
+    Adapter(InstanceBase* instance, id<MTLDevice> device, const TogglesState& requiredAdapterToggle)
+        : AdapterBase(instance, wgpu::BackendType::Metal, requiredAdapterToggle), mDevice(device) {
         mName = std::string([[*mDevice name] UTF8String]);
 
         PCIIDs ids;
@@ -788,12 +788,17 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     const AdapterDiscoveryOptionsBase* optionsBase) {
     ASSERT(optionsBase->backendType == WGPUBackendType_Metal);
 
+    // Currently adapter doesn't have toggles descriptor, so give a nullptr to make adapter toggles
+    // only inherit from instance toggles state.
+    // TODO(1495): After adding adapter toggles descriptor, pass it to MakeAdapterToggles.
+    TogglesState adapterToggles = MakeAdapterToggles(nullptr);
+
     std::vector<Ref<AdapterBase>> adapters;
 #if DAWN_PLATFORM_IS(MACOS)
     NSRef<NSArray<id<MTLDevice>>> devices = AcquireNSRef(MTLCopyAllDevices());
 
     for (id<MTLDevice> device in devices.Get()) {
-        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), device));
+        Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), device, adapterToggles));
         if (!GetInstance()->ConsumedError(adapter->Initialize())) {
             adapters.push_back(std::move(adapter));
         }
@@ -802,7 +807,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
 
     // iOS only has a single device so MTLCopyAllDevices doesn't exist there.
 #if defined(DAWN_PLATFORM_IOS)
-    Ref<Adapter> adapter = AcquireRef(new Adapter(GetInstance(), MTLCreateSystemDefaultDevice()));
+    Ref<Adapter> adapter =
+        AcquireRef(new Adapter(GetInstance(), MTLCreateSystemDefaultDevice(), adapterToggles));
     if (!GetInstance()->ConsumedError(adapter->Initialize())) {
         adapters.push_back(std::move(adapter));
     }
