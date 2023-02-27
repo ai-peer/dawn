@@ -156,7 +156,7 @@ bool Converter::Convert(BufferSource& out, interop::BufferSource in) {
         std::visit(
             [&](auto&& v) {
                 auto arr = v.ArrayBuffer();
-                out.data = arr.Data();
+                out.data = static_cast<uint8_t*>(arr.Data()) + v.ByteOffset();
                 out.size = arr.ByteLength();
                 out.bytesPerElement = v.ElementSize();
             },
