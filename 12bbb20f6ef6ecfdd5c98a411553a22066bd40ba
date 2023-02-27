@@ -95,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4b89240_03616846",
+        "filename": "src/tint/intrinsics.def",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T14:16:25Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "d7c0108b_043b9f2c",
+      "range": {
+        "startLine": 74,
+        "startChar": 2,
+        "endLine": 74,
+        "endChar": 42
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb773d9c_c143212d",
@@ -577,6 +601,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d9c0ca_d37075c8",
+        "filename": "src/tint/transform/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T14:16:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "62de61d5_ce5f1bf2",
+      "range": {
+        "startLine": 1299,
+        "startChar": 7,
+        "endLine": 1299,
+        "endChar": 23
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea13b573_440f3691",
@@ -718,6 +766,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d60531_bc3565ee",
+        "filename": "src/tint/type/vector.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T14:16:25Z",
+      "side": 1,
+      "message": "Ack. It\u0027s not important right now.",
+      "parentUuid": "936cf78a_69b5f7ba",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 43
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2751159b_b501ce07",
@@ -755,6 +827,30 @@
       "side": 1,
       "message": "The columns are all being assigned separately because of the `PreservePadding` transform. I\u0027ve added the other assignments to these checks to make that clearer, though the formatting is a bit weird now.",
       "parentUuid": "2751159b_b501ce07",
+      "range": {
+        "startLine": 244,
+        "startChar": 79,
+        "endLine": 244,
+        "endChar": 82
+      },
+      "revId": "12bbb20f6ef6ecfdd5c98a411553a22066bd40ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "433f8615_4aa72a65",
+        "filename": "src/tint/writer/glsl/generator_impl_member_accessor_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T14:16:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "89e17f4d_6f6e34c9",
       "range": {
         "startLine": 244,
         "startChar": 79,
