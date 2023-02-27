@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d9937335_73f6c991",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T19:53:44Z",
+      "side": 1,
+      "message": "This can be fixed in this CL with no other changes needed though.",
+      "parentUuid": "38329c56_e72b3c73",
+      "revId": "9658db14f6e5b3761bb0eceb1232bdd6d1d82447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "544fe9ed_ac653b69",
         "filename": "src/dawn/native/CMakeLists.txt",
         "patchSetId": 7
