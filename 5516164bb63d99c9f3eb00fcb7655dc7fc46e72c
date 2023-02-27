@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "413a07bd_172294c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T14:28:00Z",
+      "side": 1,
+      "message": "Ack.\n\nMy intent for this flag/mode was: \"evaluate expressions using the behavior that is defined for runtime execution\" (i.e. \"as if\" it was indeed executing on a GPU). I\u0027d be OK with just saying \"interpreter\" instead though, to make it clear what the intended use case is.",
+      "parentUuid": "c33fc091_d8415dfb",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "895776ef_8f1f0245",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
