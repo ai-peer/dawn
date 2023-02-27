@@ -33,6 +33,74 @@
       "message": "Ugh. And here I thought I added reviewers to this CL last week. Oops! PTAL.",
       "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "299d4db1_3f9b7d32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T18:50:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "841d6abd_ddfd52c4",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T18:50:13Z",
+      "side": 1,
+      "message": "nit: maybe we could add the deprecated tag to SetDeviceLostCallback",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89140f9_9975fa8a",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T18:50:13Z",
+      "side": 1,
+      "message": "nit: It could be a uintptr_t that we increment by one? Also the implementation could be in the .cpp",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0da00dd3_c6a2fc9f",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T18:50:13Z",
+      "side": 1,
+      "message": "Maybe this could be done on the server instead, where we always register a device lost callback. Then here we would:\n\n```\nDevice* device \u003d client-\u003eMake\u003cDevice\u003e(descriptor);\n\nDevice::Device(descriptor){\n  exract and store the callback.\n}\n```\n\nAnd on the server when creating the device, pass the OnDeviceLost directly in the descriptor on creation.\n\nWDYT?",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
