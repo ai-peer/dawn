@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38329c56_e72b3c73",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 7
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-27T19:50:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c5f8dfca_813fb456",
+      "revId": "9658db14f6e5b3761bb0eceb1232bdd6d1d82447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "544fe9ed_ac653b69",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-27T18:43:54Z",
       "side": 1,
       "message": "In a follow-up can you add a DAWN_ANGLE_DIR variable similar to `git grep DAWN_SWIFTSHADER_DIR` even if ANGLE doesn\u0027t have CMake build? This is just for consistency of third-party dir handling in CMake.",
+      "revId": "9658db14f6e5b3761bb0eceb1232bdd6d1d82447",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc979bb_3041cbc3",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-27T19:50:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "544fe9ed_ac653b69",
       "revId": "9658db14f6e5b3761bb0eceb1232bdd6d1d82447",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

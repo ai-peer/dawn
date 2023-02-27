@@ -263,6 +263,24 @@
       "parentUuid": "50c88949_f6836fb4",
       "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bedbfa0_b7de16f9",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-02-27T19:50:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24270817_b396a391",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
