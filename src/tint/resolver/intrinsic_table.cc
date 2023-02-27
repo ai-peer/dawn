@@ -39,6 +39,7 @@
 #include "src/tint/utils/hashmap.h"
 #include "src/tint/utils/math.h"
 #include "src/tint/utils/scoped_assignment.h"
+#include "src/tint/utils/string_stream.h"
 
 namespace tint::resolver {
 namespace {
@@ -1183,12 +1184,12 @@ class Impl : public IntrinsicTable {
                      sem::EvaluationStage earliest_eval_stage) const;
 
     // Prints the overload for emitting diagnostics
-    void PrintOverload(std::ostream& ss,
+    void PrintOverload(utils::StringStream& ss,
                        const OverloadInfo* overload,
                        const char* intrinsic_name) const;
 
     // Prints the list of candidates for emitting diagnostics
-    void PrintCandidates(std::ostream& ss,
+    void PrintCandidates(utils::StringStream& ss,
                          utils::VectorRef<Candidate> candidates,
                          const char* intrinsic_name) const;
 
@@ -1213,7 +1214,7 @@ std::string CallSignature(ProgramBuilder& builder,
                           const char* intrinsic_name,
                           utils::VectorRef<const type::Type*> args,
                           const type::Type* template_arg = nullptr) {
-    std::stringstream ss;
+    utils::StringStream ss;
     ss << intrinsic_name;
     if (template_arg) {
         ss << "<" << template_arg->FriendlyName(builder.Symbols()) << ">";
@@ -1252,7 +1253,7 @@ Impl::Builtin Impl::Lookup(sem::BuiltinType builtin_type,
 
     // Generates an error when no overloads match the provided arguments
     auto on_no_match = [&](utils::VectorRef<Candidate> candidates) {
-        std::stringstream ss;
+        utils::StringStream ss;
         ss << "no matching call to " << CallSignature(builder, intrinsic_name, args) << std::endl;
         if (!candidates.IsEmpty()) {
             ss << std::endl
@@ -1321,7 +1322,7 @@ IntrinsicTable::UnaryOperator Impl::Lookup(ast::UnaryOp op,
 
     // Generates an error when no overloads match the provided arguments
     auto on_no_match = [&, name = intrinsic_name](utils::VectorRef<Candidate> candidates) {
-        std::stringstream ss;
+        utils::StringStream ss;
         ss << "no matching overload for " << CallSignature(builder, name, args) << std::endl;
         if (!candidates.IsEmpty()) {
             ss << std::endl
@@ -1399,7 +1400,7 @@ IntrinsicTable::BinaryOperator Impl::Lookup(ast::BinaryOp op,
 
     // Generates an error when no overloads match the provided arguments
     auto on_no_match = [&, name = intrinsic_name](utils::VectorRef<Candidate> candidates) {
-        std::stringstream ss;
+        utils::StringStream ss;
         ss << "no matching overload for " << CallSignature(builder, name, args) << std::endl;
         if (!candidates.IsEmpty()) {
             ss << std::endl
@@ -1434,7 +1435,7 @@ IntrinsicTable::CtorOrConv Impl::Lookup(CtorConvIntrinsic type,
 
     // Generates an error when no overloads match the provided arguments
     auto on_no_match = [&](utils::VectorRef<Candidate> candidates) {
-        std::stringstream ss;
+        utils::StringStream ss;
         ss << "no matching constructor for " << CallSignature(builder, name, args, template_arg)
            << std::endl;
         Candidates ctor, conv;
@@ -1736,7 +1737,7 @@ MatchState Impl::Match(TemplateState& templates,
     return MatchState(builder, templates, matchers, overload, matcher_indices, earliest_eval_stage);
 }
 
-void Impl::PrintOverload(std::ostream& ss,
+void Impl::PrintOverload(utils::StringStream& ss,
                          const OverloadInfo* overload,
                          const char* intrinsic_name) const {
     TemplateState templates;
@@ -1808,7 +1809,7 @@ void Impl::PrintOverload(std::ostream& ss,
     }
 }
 
-void Impl::PrintCandidates(std::ostream& ss,
+void Impl::PrintCandidates(utils::StringStream& ss,
                            utils::VectorRef<Candidate> candidates,
                            const char* intrinsic_name) const {
     for (auto& candidate : candidates) {
@@ -1846,7 +1847,7 @@ void Impl::ErrAmbiguousOverload(const char* intrinsic_name,
                                 utils::VectorRef<const type::Type*> args,
                                 TemplateState templates,
                                 utils::VectorRef<Candidate> candidates) const {
-    std::stringstream ss;
+    utils::StringStream ss;
     ss << "ambiguous overload while attempting to match " << intrinsic_name;
     for (size_t i = 0; i < std::numeric_limits<size_t>::max(); i++) {
         if (auto* ty = templates.Type(i)) {
