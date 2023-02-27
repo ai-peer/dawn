@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d992aee_0cb471bf",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T09:46:42Z",
+      "side": 1,
+      "message": "Please can we have some unit tests for these changes?",
+      "revId": "bb30656817ba65226e9b9e42c0b59160293105cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
