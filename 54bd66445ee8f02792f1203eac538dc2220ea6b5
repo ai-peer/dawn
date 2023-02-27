@@ -326,6 +326,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2aff3c90_00325ec4",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "See `TINT_ICE` for code that does this sort of thing.",
+      "parentUuid": "d835b5dc_527dd9ad",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbc5555f_e65e01d2",
         "filename": "src/tint/interp/interactive_debugger.cc",
         "patchSetId": 7
@@ -564,6 +582,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "476d9cf5_c40e4fcd",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "Going to port and expand Antonio\u0027s expression evaluation order CTS tests. They should catch any bugs here.",
+      "parentUuid": "6f239f14_1a812f0a",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "159de182_cdc89e60",
         "filename": "src/tint/interp/invocation.cc",
         "patchSetId": 7
@@ -796,6 +832,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "`\u003d nullptr` ?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167c23bb_48212e38",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "+1. Please initialize fields.",
+      "parentUuid": "15c04747_cb416651",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

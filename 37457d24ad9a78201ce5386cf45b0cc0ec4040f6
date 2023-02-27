@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd1c068_6a7d1cd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "Fantastic work!",
+      "revId": "37457d24ad9a78201ce5386cf45b0cc0ec4040f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d850fff_8b57c472",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "`tint shader interpreter`?",
+      "range": {
+        "startLine": 163,
+        "startChar": 56,
+        "endLine": 163,
+        "endChar": 67
+      },
+      "revId": "37457d24ad9a78201ce5386cf45b0cc0ec4040f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63493edf_132ccb31",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 11
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "nit: I love auto, but the `auto` on a lambda makes me think that these are templated lambdas, when they aren\u0027t. I\u0027d suggest being explicit here.",
+      "revId": "37457d24ad9a78201ce5386cf45b0cc0ec4040f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1585236_d8be384e",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 11
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T20:42:49Z",
+      "side": 1,
+      "message": "nit: I think `--debug`, `-d` or something might be preferable.",
+      "revId": "37457d24ad9a78201ce5386cf45b0cc0ec4040f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
