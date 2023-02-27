@@ -16,6 +16,7 @@
 #include "src/tint/ast/call_statement.h"
 #include "src/tint/ast/stage_attribute.h"
 #include "src/tint/sem/call.h"
+#include "src/tint/utils/string_stream.h"
 #include "src/tint/writer/hlsl/test_helper.h"
 
 using ::testing::HasSubstr;
@@ -347,7 +348,7 @@ TEST_F(HlslGeneratorImplTest_Builtin, Builtin_Call) {
     GeneratorImpl& gen = Build();
 
     gen.increment_indent();
-    std::stringstream out;
+    utils::StringStream out;
     ASSERT_TRUE(gen.EmitExpression(out, call)) << gen.error();
     EXPECT_EQ(out.str(), "dot(param1, param2)");
 }
@@ -360,7 +361,7 @@ TEST_F(HlslGeneratorImplTest_Builtin, Select_Scalar) {
     GeneratorImpl& gen = Build();
 
     gen.increment_indent();
-    std::stringstream out;
+    utils::StringStream out;
     ASSERT_TRUE(gen.EmitExpression(out, call)) << gen.error();
     EXPECT_EQ(out.str(), "(true ? b : a)");
 }
@@ -373,7 +374,7 @@ TEST_F(HlslGeneratorImplTest_Builtin, Select_Vector) {
     GeneratorImpl& gen = Build();
 
     gen.increment_indent();
-    std::stringstream out;
+    utils::StringStream out;
     ASSERT_TRUE(gen.EmitExpression(out, call)) << gen.error();
     EXPECT_EQ(out.str(), "(bool2(true, false) ? b : a)");
 }
