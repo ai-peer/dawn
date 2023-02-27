@@ -245,6 +245,24 @@
       "parentUuid": "041a467a_48cf2845",
       "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24270817_b396a391",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T17:59:24Z",
+      "side": 1,
+      "message": "OH. nevermind - I see the parent CL now; so I think this should be OK",
+      "parentUuid": "50c88949_f6836fb4",
+      "revId": "2837dcc55fc8edf3c3016920ae5c1b73dc0e3eca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
