@@ -16,6 +16,24 @@
       "message": "Please can we have some unit tests for these changes?",
       "revId": "bb30656817ba65226e9b9e42c0b59160293105cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e88c8c5b_2c621f4f",
+        "filename": "src/tint/resolver/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T15:16:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d992aee_0cb471bf",
+      "revId": "bb30656817ba65226e9b9e42c0b59160293105cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
