@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c58899_83e173a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T18:59:26Z",
+      "side": 1,
+      "message": "high level question: I thought we were going to move callbacks to only happen on DeviceBase::APIDestroy(), DeviceBase::APITick(), DeviceBase::WillDropLastExternalRef\n\nI see queue methods also trigger callbacks. Is there a reason the queue could not enqueue them into DeviceBase\u0027s mCallbackTaskManager instead?",
+      "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
