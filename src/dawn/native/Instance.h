@@ -72,6 +72,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
         return false;
     }
 
+    const TogglesState& GetTogglesState() const;
+
     // Used to query the details of a toggle. Return nullptr if toggleName is not a valid name
     // of a toggle supported in Dawn.
     const ToggleInfo* GetToggleInfo(const char* toggleName);
@@ -149,6 +151,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     std::vector<std::unique_ptr<BackendConnection>> mBackends;
     std::vector<Ref<AdapterBase>> mAdapters;
+
+    TogglesState mToggles = TogglesState(ToggleStage::Instance);
 
     FeaturesInfo mFeaturesInfo;
     TogglesInfo mTogglesInfo;
