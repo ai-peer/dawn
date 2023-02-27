@@ -125,13 +125,19 @@ class TogglesState {
     // Create an empty toggles state of given stage
     explicit TogglesState(ToggleStage stage);
 
-    // Create a RequiredTogglesSet from a DawnTogglesDescriptor, only considering toggles of
+    // Create a TogglesState from a DawnTogglesDescriptor, only considering toggles of
     // required toggle stage.
     static TogglesState CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
                                                     ToggleStage requiredStage);
 
+    // Inherit from a given toggles state of earlier stage. Return *this to allow method chaining
+    // manner.
+    TogglesState& InheritToggles(const TogglesState& inheritedToggles);
+
     // Set a toggle of the same stage of toggles state stage if and only if it is not already set.
     void Default(Toggle toggle, bool enabled);
+    // Inherit a toggle of a stage earlier than toggles state stage.
+    void Inherit(Toggle toggle, bool enabled, bool forced);
     // Force set a toggle of same stage of toggles state stage. A force-set toggle will get
     // inherited to all later stage as forced.
     void ForceSet(Toggle toggle, bool enabled);
@@ -151,7 +157,7 @@ class TogglesState {
   private:
     // Indicating which stage of toggles state is this object holding for, instance, adapter, or
     // device.
-    const ToggleStage mStage;
+    ToggleStage mStage;
     TogglesSet mTogglesSet;
     TogglesSet mEnabledToggles;
     TogglesSet mForcedToggles;
