@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee57df59_6f27cfb8",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T14:22:53Z",
+      "side": 1,
+      "message": "Agreed that the slew of macros is a bit unfortunate and doesn\u0027t seem commensurate with the problem this is trying to fix. Sorry :X",
+      "parentUuid": "0750c252_4adc036a",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3250de45_b91fe49c",
         "filename": "src/dawn/native/Device.h",
         "patchSetId": 11
