@@ -176,7 +176,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"disallow_unsafe_apis",
       "Produces validation errors on API entry points or parameter combinations that aren't "
       "considered secure yet.",
-      "http://crbug.com/1138528", ToggleStage::Device}},
+      "http://crbug.com/1138528", ToggleStage::Instance}},
     {Toggle::FlushBeforeClientWaitSync,
      {"flush_before_client_wait_sync",
       "Call glFlush before glClientWaitSync to work around bugs in the latter",
@@ -456,6 +456,20 @@ TogglesState TogglesState::CreateFromTogglesDescriptor(const DawnTogglesDescript
     return togglesState;
 }
 
+TogglesState& TogglesState::InheritToggles(const TogglesState& inheritedToggles) {
+    ASSERT(inheritedToggles.GetStage() < mStage);
+
+    // Do inheritance. All toggles that are set or force-set in the inherited toggles states would
+    // be set or force-set in the result toggles state.
+    for (uint32_t i : inheritedToggles.mTogglesSet.Iterate()) {
+        const Toggle& toggle = static_cast<Toggle>(i);
+        Inherit(toggle, inheritedToggles.mEnabledToggles.Has(toggle),
+                inheritedToggles.mForcedToggles.Has(toggle));
+    }
+
+    return *this;
+}
+
 // Set a toggle to given state, if the toggle has not been already set. Do nothing otherwise.
 void TogglesState::Default(Toggle toggle, bool enabled) {
     ASSERT(toggle != Toggle::InvalidEnum);
@@ -465,6 +479,14 @@ void TogglesState::Default(Toggle toggle, bool enabled) {
     }
     mTogglesSet.Set(toggle, true);
     mEnabledToggles.Set(toggle, enabled);
+}
+
+void TogglesState::Inherit(Toggle toggle, bool enabled, bool forced) {
+    ASSERT(toggle != Toggle::InvalidEnum);
+    ASSERT(TogglesInfo::GetToggleInfo(toggle)->stage < mStage);
+    mTogglesSet.Set(toggle, true);
+    mEnabledToggles.Set(toggle, enabled);
+    mForcedToggles.Set(toggle, forced);
 }
 
 void TogglesState::ForceSet(Toggle toggle, bool enabled) {
@@ -479,6 +501,15 @@ void TogglesState::ForceSet(Toggle toggle, bool enabled) {
     mTogglesSet.Set(toggle, true);
     mEnabledToggles.Set(toggle, enabled);
     mForcedToggles.Set(toggle, true);
+}
+
+TogglesState& TogglesState::SetForTesting(Toggle toggle, bool enabled, bool forced) {
+    ASSERT(toggle != Toggle::InvalidEnum);
+    mTogglesSet.Set(toggle, true);
+    mEnabledToggles.Set(toggle, enabled);
+    mForcedToggles.Set(toggle, forced);
+
+    return *this;
 }
 
 bool TogglesState::IsSet(Toggle toggle) const {

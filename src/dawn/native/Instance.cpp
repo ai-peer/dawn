@@ -23,6 +23,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Surface.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 
@@ -110,18 +111,25 @@ InstanceBase* APICreateInstance(const InstanceDescriptor* descriptor) {
 
 // static
 Ref<InstanceBase> InstanceBase::Create(const InstanceDescriptor* descriptor) {
-    Ref<InstanceBase> instance = AcquireRef(new InstanceBase);
     static constexpr InstanceDescriptor kDefaultDesc = {};
     if (descriptor == nullptr) {
         descriptor = &kDefaultDesc;
     }
+
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+    TogglesState instanceToggles =
+        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
+    instanceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+
+    Ref<InstanceBase> instance = AcquireRef(new InstanceBase(instanceToggles));
     if (instance->ConsumedError(instance->Initialize(descriptor))) {
         return nullptr;
     }
     return instance;
 }
 
-InstanceBase::InstanceBase() = default;
+InstanceBase::InstanceBase(const TogglesState& instanceToggles) : mToggles(instanceToggles) {}
 
 InstanceBase::~InstanceBase() = default;
 
@@ -138,7 +146,9 @@ void InstanceBase::WillDropLastExternalRef() {
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor,
+                                                       wgpu::SType::DawnTogglesDescriptor}}));
+
     const DawnInstanceDescriptor* dawnDesc = nullptr;
     FindInChain(descriptor->nextInChain, &dawnDesc);
     if (dawnDesc != nullptr) {
@@ -304,6 +314,10 @@ bool InstanceBase::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) 
     }
 
     return true;
+}
+
+const TogglesState& InstanceBase::GetTogglesState() const {
+    return mToggles;
 }
 
 const ToggleInfo* InstanceBase::GetToggleInfo(const char* toggleName) {
