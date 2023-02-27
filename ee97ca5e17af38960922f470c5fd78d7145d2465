@@ -16,6 +16,24 @@
       "message": "Please can we check for OOBs accesses?",
       "revId": "ee97ca5e17af38960922f470c5fd78d7145d2465",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "476d270d_1e2d3d6f",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T19:28:01Z",
+      "side": 1,
+      "message": "Done. Also used the length of the array view, not the array buffer.",
+      "parentUuid": "f3b7ba30_3fd3756c",
+      "revId": "ee97ca5e17af38960922f470c5fd78d7145d2465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
