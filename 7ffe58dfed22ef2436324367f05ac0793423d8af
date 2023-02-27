@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b64711f3_8440c6f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T09:39:05Z",
+      "side": 1,
+      "message": "Antonio for +2",
+      "revId": "7ffe58dfed22ef2436324367f05ac0793423d8af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4132edd3_d511f314",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T09:39:05Z",
+      "side": 1,
+      "message": "Can use `utils::Transform` here. It handles matching the array static length, and the reserving.",
+      "range": {
+        "startLine": 2014,
+        "startChar": 0,
+        "endLine": 2018,
+        "endChar": 13
+      },
+      "revId": "7ffe58dfed22ef2436324367f05ac0793423d8af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e05c490_625f7750",
+        "filename": "src/tint/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T09:39:05Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 2019,
+        "startChar": 59,
+        "endLine": 2019,
+        "endChar": 62
+      },
+      "revId": "7ffe58dfed22ef2436324367f05ac0793423d8af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
