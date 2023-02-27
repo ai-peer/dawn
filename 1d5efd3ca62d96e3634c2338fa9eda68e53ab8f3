@@ -34,6 +34,24 @@
       "parentUuid": "c1c58899_83e173a5",
       "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004c94b1_5e43109e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T20:51:07Z",
+      "side": 1,
+      "message": "Got it - yea, I don\u0027t think we should be triggering callbacks inside Submit.\n\nI think we should split this work into a few CLs to make it more manageable.\nAlso, we might not need device.destroy() to trigger callbacks which simplifies things a bit. My thoughts:\n 1) changing the semantics of when callbacks get called. That means callbacks should only be called from APITick, not Tick. (in the future, we can move it to wgpuInstanceProcessEvents). This will include changing all the tests and stuff to correctly expect when the callbacks occur.\n\n 2) (new-ish idea) also try to change device.destroy() to also NOT call callbacks, but instead just tag them as \"destroyed\". This would mean storing the status in CallbackTask, but not calling the callback in methods like HandleShutDown.\n    This would change things such that calling device.Tick() after device.destroy() is valid and triggers callbacks. This is in the spirit of making it so that calling instanceProcessEvents after device.destroy() flushes the callbacks.\n\n 3) Flush callbacks in WillDropLastExternalRef?\n    We could do this, but I\u0027m not actually sure it is necessary if we do (2).\n\n 4) structure things to prevent deadlock on re-entrant usage in callbacks\n    If we move calling of callbacks to APITick(), I think we can could actually go with one of your earlier suggestions of unlocking the mutex before triggering all the callbacks - and locking it again after.\n    I don\u0027t want to do the manual unlock+relock in the existing code where callbacks are called many different places since IMO the unlock+lock is easy to manually do wrong. It\u0027s safer if callbacks only trigger in APITick.\nIt depends on where the mutex lives, if the mutex is a global in the proc table (not a device member), then we DO need CallbackSink to be passed in from the generated NativeProcs. However, if the mutex is a member of the device, then we don\u0027t need CallbackSink in the generator; we could do the callback handling all inside of APITick with the manual mutex unlock. Thinking about these two options, I think the latter is the better solution since in the medium term, we won\u0027t have a proc table mutex.",
+      "parentUuid": "b73585de_e99affa8",
+      "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
