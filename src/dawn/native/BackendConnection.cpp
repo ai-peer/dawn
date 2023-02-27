@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn/native/BackendConnection.h"
+#include "dawn/native/Instance.h"
 
 namespace dawn::native {
 
@@ -28,8 +29,20 @@ InstanceBase* BackendConnection::GetInstance() const {
 }
 
 ResultOrError<std::vector<Ref<AdapterBase>>> BackendConnection::DiscoverAdapters(
-    const AdapterDiscoveryOptionsBase* options) {
+    const AdapterDiscoveryOptionsBase* options,
+    const TogglesState& adapterToggles) {
     return DAWN_VALIDATION_ERROR("DiscoverAdapters not implemented for this backend.");
+}
+
+TogglesState BackendConnection::MakeAdapterToggles(
+    const DawnTogglesDescriptor* adapterTogglesDescriptor) const {
+    // Setup adapter toggles state
+    TogglesState adapterToggles =
+        TogglesState::CreateFromTogglesDescriptor(adapterTogglesDescriptor, ToggleStage::Adapter);
+    adapterToggles.InheritFrom(GetInstance()->GetTogglesState());
+    // TODO(dawn:1495): Setup backend-specific adapter toggles after adapter toggles is implemented.
+
+    return adapterToggles;
 }
 
 }  // namespace dawn::native

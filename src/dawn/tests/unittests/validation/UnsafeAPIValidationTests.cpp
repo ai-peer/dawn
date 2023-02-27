@@ -24,9 +24,13 @@ namespace {
 using testing::HasSubstr;
 }  // anonymous namespace
 
+// UnsafeAPIValidationTest create the instance with toggle DisallowUnsafeApis explicitly enabled,
+// and assert that creating adapter and device will succeed.
 class UnsafeAPIValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        // Enable the DisallowUnsafeAPIs toggles in device toggles descriptor to override the
+        // inheritance and create a device disallowing unsafe apis.
         wgpu::DeviceDescriptor descriptor;
         wgpu::DawnTogglesDescriptor deviceTogglesDesc;
         descriptor.nextInChain = &deviceTogglesDesc;
