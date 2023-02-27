@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "994f9088_63101202",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:34:21Z",
+      "side": 1,
+      "message": "Thinking about this, wouldn\u0027t it work to add that code to DeviceMock.cpp directly instead of filling limits twice in dawn::native?",
+      "parentUuid": "3717fa8c_07d3a5b8",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10272bd3_06cf7bed",
@@ -208,6 +226,24 @@
       "side": 1,
       "message": "Hmm that\u0027s sort of what we had before, but the previous comments seemed to suggest we wanted to make validation and device loss default errors because they should always be surfaced as is. The only \"special\" cases are OOM and Internal for pipelines. Keeping as is for now.",
       "parentUuid": "e9ea8534_7b214101",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1625350_76e39749",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-27T22:34:21Z",
+      "side": 1,
+      "message": "Sure, the idea it would be surfaced directly on the ConsumedError default argument. But either way is ok for now and it\u0027s easy to revisit with the current version.",
+      "parentUuid": "1f7f711f_bd96d80a",
       "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
