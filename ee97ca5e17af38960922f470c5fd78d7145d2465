@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b7ba30_3fd3756c",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-27T19:21:36Z",
+      "side": 1,
+      "message": "Please can we check for OOBs accesses?",
+      "revId": "ee97ca5e17af38960922f470c5fd78d7145d2465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
