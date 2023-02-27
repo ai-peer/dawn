@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7c854b_35dee47d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T14:12:59Z",
+      "side": 1,
+      "message": "This is fixing the behavior that `ConstEval` has when you tell it to use the semantics that WGSL defines for these operations on runtime expressions, which is indeed used by the WGSL interpreter. So it\u0027s not really \"compile-time\" (or \"shader-creation time\").\n\nHappy to take suggestions for a better name for this mode of operation!",
+      "parentUuid": "fc58c505_d62565e0",
+      "range": {
+        "startLine": 7,
+        "startChar": 21,
+        "endLine": 7,
+        "endChar": 38
+      },
+      "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "895776ef_8f1f0245",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-02-27T14:03:01Z",
       "side": 1,
       "message": "This is correct. I was confused looking at this change at first, because I recently wrote CTS tests for u32/i32 modulo, and indeed I wrote them to expect 0 from x % 0. I must have been looking at the Division section of the table in the spec when I implemented this behaviour for const eval. (In my defense, the division and modulo sections in the table are large and exactly the same, except for a few characters).",
+      "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5462c3cd_2464d49a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-27T14:12:59Z",
+      "side": 1,
+      "message": "Even more in your defense: I implemented the behavior for the runtime semantics stuff, not you!",
+      "parentUuid": "8867d9ae_20f82735",
       "revId": "5516164bb63d99c9f3eb00fcb7655dc7fc46e72c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
