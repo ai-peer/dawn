@@ -23,6 +23,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Surface.h"
+#include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
 
@@ -138,7 +139,9 @@ void InstanceBase::WillDropLastExternalRef() {
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::DawnInstanceDescriptor));
+    DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor,
+                                                       wgpu::SType::DawnTogglesDescriptor}}));
+
     const DawnInstanceDescriptor* dawnDesc = nullptr;
     FindInChain(descriptor->nextInChain, &dawnDesc);
     if (dawnDesc != nullptr) {
@@ -159,6 +162,13 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(mDefaultPlatform.get());
+
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+
+    mToggles =
+        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
+    mToggles.Default(Toggle::DisallowUnsafeAPIs, true);
 
     return {};
 }
@@ -304,6 +314,10 @@ bool InstanceBase::DiscoverAdapters(const AdapterDiscoveryOptionsBase* options) 
     }
 
     return true;
+}
+
+const TogglesState& InstanceBase::GetTogglesState() const {
+    return mToggles;
 }
 
 const ToggleInfo* InstanceBase::GetToggleInfo(const char* toggleName) {
