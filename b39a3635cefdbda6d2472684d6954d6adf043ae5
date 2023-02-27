@@ -16,6 +16,23 @@
       "message": "Corentin and/or Austin: PTAL. Thanks!",
       "revId": "b39a3635cefdbda6d2472684d6954d6adf043ae5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e11ab50_23a54c86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-27T18:07:23Z",
+      "side": 1,
+      "message": "I think this is OK for now; but eventually I think we\u0027ll *probably* need to answer questions like: \"am I allowed to use this enum?\" or \"is this combination of parameters supported?\", where we\u0027ll need to query the presence of extensions and not just the existence of their procs. So, we\u0027ll probably still need the enum bitsets like VulkanExtensions does. Fine with me to either use an enum bitset now, or cross that bridge later",
+      "revId": "b39a3635cefdbda6d2472684d6954d6adf043ae5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
