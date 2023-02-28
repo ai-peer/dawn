@@ -96,6 +96,7 @@ uint64_t DawnPerfTestPlatform::AddTraceEvent(char phase,
                                              const unsigned char* argTypes,
                                              const uint64_t* argValues,
                                              unsigned char flags) {
+    std::lock_guard<std::mutex> lg(mRecordingTraceEventsMutex);
     if (!mRecordTraceEvents) {
         return 0;
     }
@@ -118,6 +119,7 @@ uint64_t DawnPerfTestPlatform::AddTraceEvent(char phase,
 }
 
 void DawnPerfTestPlatform::EnableTraceEventRecording(bool enable) {
+    std::lock_guard<std::mutex> lg(mRecordingTraceEventsMutex);
     mRecordTraceEvents = enable;
 }
 
