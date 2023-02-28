@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a616d48_db1b3b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:02:43Z",
+      "side": 1,
+      "message": "nit: instead of (void), we have DAWN_UNUSED(...)",
+      "revId": "254901fb78b509928877275dba159921a794fd5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c2faf9d_7dd06ab7",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:02:43Z",
+      "side": 1,
+      "message": "this should return early (keep the `if(...) { return; }` )",
+      "range": {
+        "startLine": 506,
+        "startChar": 0,
+        "endLine": 506,
+        "endChar": 83
+      },
+      "revId": "254901fb78b509928877275dba159921a794fd5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1c62c0b_ba50a467",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 1231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:02:43Z",
+      "side": 1,
+      "message": "this assignment is duplicated now",
+      "range": {
+        "startLine": 1231,
+        "startChar": 4,
+        "endLine": 1231,
+        "endChar": 28
+      },
+      "revId": "254901fb78b509928877275dba159921a794fd5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afdf0ca5_39c6fe2e",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:02:43Z",
+      "side": 1,
+      "message": "do we need the bool? I think in the cases where we pass `false`, there shouldn\u0027t be any debug layer messages since the errors are synthetic",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 53
+      },
+      "revId": "254901fb78b509928877275dba159921a794fd5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38033f2f_57502b66",
+        "filename": "src/dawn/native/vulkan/PipelineCacheVk.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:02:43Z",
+      "side": 1,
+      "message": "this may not be OK to ignore. Spec says it can return:\n\nVK_ERROR_OUT_OF_HOST_MEMORY\nVK_ERROR_OUT_OF_DEVICE_MEMORY\n\nthose don\u0027t seem recoverable",
+      "revId": "254901fb78b509928877275dba159921a794fd5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
