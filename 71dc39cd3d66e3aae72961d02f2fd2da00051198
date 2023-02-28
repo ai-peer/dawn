@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc685dc4_1364a91a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T22:41:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "71dc39cd3d66e3aae72961d02f2fd2da00051198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cb8fcb7_f85c2dcc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T22:41:56Z",
+      "side": 1,
+      "message": "None is the default arg, so it\u0027s not needed here",
+      "revId": "71dc39cd3d66e3aae72961d02f2fd2da00051198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
