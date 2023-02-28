@@ -15,8 +15,6 @@
 #ifndef SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_BUFFERMOCK_H_
 #define SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_BUFFERMOCK_H_
 
-#include <memory>
-
 #include "gmock/gmock.h"
 
 #include "dawn/native/Buffer.h"
@@ -40,9 +38,6 @@ class BufferMock : public BufferBase {
     MOCK_METHOD(void*, GetMappedPointer, (), (override));
 
     MOCK_METHOD(bool, IsCPUWritableAtCreation, (), (const, override));
-
-  private:
-    std::unique_ptr<uint8_t[]> mBackingData;
 };
 
 }  // namespace dawn::native

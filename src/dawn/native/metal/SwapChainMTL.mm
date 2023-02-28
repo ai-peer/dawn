@@ -47,7 +47,7 @@ TextureBase* OldSwapChain::GetNextTextureImpl(const TextureDescriptor* descripto
     DawnSwapChainNextTexture next = {};
     DawnSwapChainError error = im.GetNextTexture(im.userData, &next);
     if (error) {
-        GetDevice()->HandleError(DAWN_INTERNAL_ERROR(error));
+        GetDevice()->HandleError(InternalErrorType::Internal, error);
         return nullptr;
     }
 
