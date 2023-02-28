@@ -13,11 +13,32 @@
 // limitations under the License.
 
 #include <utility>
+#include <vector>
 
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-class DeviceLifetimeTests : public DawnTest {};
+namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(DeviceLifetimeTestParams, UseThreadSafeAPI);
+
+using ParentClass = DawnTestWithParams<DeviceLifetimeTestParams>;
+}  // namespace
+
+class DeviceLifetimeTests : public ParentClass {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+            if (!UsesWire()) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
+    }
+};
 
 // Test that the device can be dropped before its queue.
 TEST_P(DeviceLifetimeTests, DroppedBeforeQueue) {
@@ -207,6 +228,47 @@ TEST_P(DeviceLifetimeTests, DroppedThenMapBuffer) {
         &done);
 
     while (!done) {
+        WaitABit();
+    }
+}
+
+// Test that the device can be dropped before a buffer created from it, then mapping the buffer
+// twice (one inside callback) will both fail.
+TEST_P(DeviceLifetimeTests, Dropped_ThenMapBuffer_ThenMapBufferInCallback) {
+    wgpu::BufferDescriptor desc = {};
+    desc.size = 4;
+    desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer buffer = device.CreateBuffer(&desc);
+
+    device = nullptr;
+
+    struct UserData {
+        wgpu::Buffer buffer;
+        bool done = false;
+    };
+
+    UserData userData;
+    userData.buffer = buffer;
+
+    // First mapping.
+    buffer.MapAsync(
+        wgpu::MapMode::Read, 0, wgpu::kWholeMapSize,
+        [](WGPUBufferMapAsyncStatus status, void* userdataPtr) {
+            EXPECT_EQ(status, WGPUBufferMapAsyncStatus_DeviceLost);
+            auto userdata = static_cast<UserData*>(userdataPtr);
+
+            // Second mapping.
+            userdata->buffer.MapAsync(
+                wgpu::MapMode::Read, 0, wgpu::kWholeMapSize,
+                [](WGPUBufferMapAsyncStatus status, void* userdataPtr) {
+                    EXPECT_EQ(status, WGPUBufferMapAsyncStatus_DeviceLost);
+                    *static_cast<bool*>(userdataPtr) = true;
+                },
+                &userdata->done);
+        },
+        &userData);
+
+    while (!userData.done) {
         WaitABit();
     }
 }
@@ -509,10 +571,7 @@ TEST_P(DeviceLifetimeTests, DropDevice2InProcessEvents) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(DeviceLifetimeTests,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      NullBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(DeviceLifetimeTests,
+                        {D3D12Backend(), MetalBackend(), NullBackend(), OpenGLBackend(),
+                         OpenGLESBackend(), VulkanBackend()},
+                        {true, false});
