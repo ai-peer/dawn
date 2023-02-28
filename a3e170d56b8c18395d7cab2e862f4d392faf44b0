@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "924076d2_fe22c319",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done. (Relased to [1])",
+      "parentUuid": "530423eb_13b0c85b",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "651eb066_50b800e2",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "old comments?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "144485e3_3e1ca166",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "651eb066_50b800e2",
       "range": {
         "startLine": 77,
         "startChar": 0,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08c6d452_ae64609e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9883cb57_6d038fdf",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17855bf8_0416946d",
@@ -105,6 +165,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "note that these are just the base limits, and they\u0027ll be higher if requested to be higher. probably still OK to set the base amount to be stack allocated",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 112,
+        "endChar": 72
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ed36071_13de14f1",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Bumped to 8, adding comment (by default)",
+      "parentUuid": "17855bf8_0416946d",
       "range": {
         "startLine": 112,
         "startChar": 0,
@@ -132,6 +216,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7001a4f_2266fa66",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ca43acb_46029c5e",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9093f85d_8a00e08b",
@@ -149,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf39d84_ab5e9bbb",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Added TODO",
+      "parentUuid": "9093f85d_8a00e08b",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "438b3604_2cd51859",
@@ -162,6 +282,24 @@
       "writtenOn": "2023-02-27T22:50:04Z",
       "side": 1,
       "message": "nit: Maybe we could switch on the access, so that we get reminded to add support for read/write in the future.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc2919c2_521e518c",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "438b3604_2cd51859",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -200,6 +338,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cca7ef8_a403f365",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "986c9cca_e3b0b0ed",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88e4493a_cd5194fd",
@@ -213,6 +369,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "similar to BufferBinding, if we hoist these out into the flattened storageTextureViewsToCheck, will performance be better?\n\nat the very least, we can move mipLevel0, levelCount0, arrayLayer0, layerCount0 out to the outer loop",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 68
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb6d5f8b_6699554b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Moved xxx0 to outer loop. The `GetBaseMipLevel` functions simply return some stored class variable so should be fine to be called here, just function calling cost (vs allocate array and struct cost).",
+      "parentUuid": "88e4493a_cd5194fd",
       "range": {
         "startLine": 231,
         "startChar": 12,
@@ -240,6 +420,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3983ba4a_5bbf2ef7",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done [1]",
+      "parentUuid": "10b1c3e5_d379466f",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29d7ba6e_4495eca4",
@@ -253,6 +451,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "nit: factor this check and the other ones into a `RangesOverlap` helper",
+      "range": {
+        "startLine": 236,
+        "startChar": 16,
+        "endLine": 237,
+        "endChar": 67
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d1dcb8_307cb984",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29d7ba6e_4495eca4",
       "range": {
         "startLine": 236,
         "startChar": 16,
@@ -286,6 +508,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe68fb6b_3026e518",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Thanks for catching this. Create two bindingIndices array for buffer bindings and texture bindings.",
+      "parentUuid": "a21b9ca6_3d49b93a",
+      "range": {
+        "startLine": 245,
+        "startChar": 43,
+        "endLine": 245,
+        "endChar": 61
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d301bed7_39dfb435",
@@ -299,6 +545,24 @@
       "writtenOn": "2023-02-27T22:50:04Z",
       "side": 1,
       "message": "nit: We could add a constexpr bool that\u0027s kValidationMode that selects between the mode with validation only and the mode that actually returns the conflicts. It would reduce code duplication a little bit and make things easier to read.",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e33effb_0351c9e1",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d301bed7_39dfb435",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -350,6 +614,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca54d30_e1c7975a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace8bfb8_1f38fc65",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 625,
+        "endChar": 21
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c987f84a_7dc1d27a",
@@ -363,6 +651,30 @@
       "writtenOn": "2023-02-25T02:39:00Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 66
+      },
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b76d79f5_0c12391d",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c987f84a_7dc1d27a",
       "range": {
         "startLine": 26,
         "startChar": 0,
@@ -404,6 +716,24 @@
       "side": 1,
       "message": "depth stencil storage textures are invalid\n(only color is valid)\n\n\"\"\"\nIf descriptor.usage includes the STORAGE_BINDING bit:\n   descriptor.format must be listed in § 26.1.1 Plain color formats table with \n   STORAGE_BINDING capability.\n\"\"\"",
       "parentUuid": "0d3a4cf0_8332c0a8",
+      "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0fb4452_c83821f3",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T00:46:27Z",
+      "side": 1,
+      "message": "Ack. Saved a lot of effort in tests",
+      "parentUuid": "d5cb0732_c3f689a8",
       "revId": "a3e170d56b8c18395d7cab2e862f4d392faf44b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
