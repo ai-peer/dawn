@@ -90,6 +90,8 @@
 //    needs to glue on the "next" and "previous" pointers using
 //    some internal node type.
 
+namespace dawn {
+
 // Forward declarations of the types in order for recursive referencing and friending.
 template <typename T>
 class LinkNode;
@@ -187,6 +189,10 @@ class LinkedList {
     // Prepends |e| to the front og the linked list.
     void Prepend(LinkNode<T>* e) { e->InsertAfter(&root_); }
 
+    // Remove |e| from the linked list. Returns true iff removed from a list.
+    // |e| must be in |this|, or not in any list.
+    bool Remove(LinkNode<T>* e) { return e->RemoveFromList(); }
+
     // Moves all elements (in order) of the list and appends them into |l| leaving the list empty.
     void MoveInto(LinkedList<T>* l) {
         if (empty()) {
@@ -246,5 +252,7 @@ template <typename T>
 LinkedListIterator<T> end(LinkedList<T>& l) {
     return LinkedListIterator<T>(l.tail()->next());
 }
+
+}  // namespace dawn
 
 #endif  // SRC_DAWN_COMMON_LINKEDLIST_H_

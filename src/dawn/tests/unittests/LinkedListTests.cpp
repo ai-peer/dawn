@@ -10,6 +10,9 @@
 #include "dawn/common/LinkedList.h"
 #include "gtest/gtest.h"
 
+using dawn::LinkedList;
+using dawn::LinkNode;
+
 class Node : public LinkNode<Node> {
   public:
     explicit Node(int id) : id_(id) {}
