@@ -96,6 +96,11 @@ void ApiObjectBase::DeleteThis() {
     RefCounted::DeleteThis();
 }
 
+void ApiObjectBase::LockAndDeleteThis() {
+    auto deviceLock(GetDevice()->GetScopedLock());
+    DeleteThis();
+}
+
 ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
     ASSERT(GetDevice() != nullptr);
     return GetDevice()->GetObjectTrackingList(GetType());
