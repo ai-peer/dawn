@@ -554,6 +554,7 @@ bool InstanceBase::APIProcessEvents() {
 
     bool hasMoreEvents = false;
     for (auto aliveDevice : aliveDevices) {
+        DeviceBase::AutoLock deviceLock(*aliveDevice.Get());
         hasMoreEvents = aliveDevice->APITick() || hasMoreEvents;
     }
 
