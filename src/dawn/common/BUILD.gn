@@ -140,6 +140,7 @@ config("internal_config") {
       "-Wunreachable-code-aggressive",
       "-Wunused-but-set-variable",
       "-Wunused-macros",
+      "-Wthread-safety",
     ]
 
     if (is_win) {

@@ -18,8 +18,8 @@
 #include <mutex>
 #include <string>
 
-#include "dawn/common/LinkedList.h"
 #include "dawn/common/RefCounted.h"
+#include "dawn/common/ThreadSafeLinkedList.h"
 #include "dawn/native/Forward.h"
 
 namespace dawn::native {
@@ -65,12 +65,11 @@ class ApiObjectList {
   private:
     // Boolean used to mark the list so that on subsequent calls to Untrack, we don't need to
     // reaquire the lock, and Track on new objects immediately destroys them.
-    bool mMarkedDestroyed = false;
-    std::mutex mMutex;
-    LinkedList<ApiObjectBase> mObjects;
+    std::atomic_bool mMarkedDestroyed = false;
+    ThreadSafeLinkedList<ApiObjectBase> mObjects;
 };
 
-class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
+class ApiObjectBase : public ObjectBase, public ThreadSafeLinkNode<ApiObjectBase> {
   public:
     struct LabelNotImplementedTag {};
     static constexpr LabelNotImplementedTag kLabelNotImplemented = {};
@@ -124,6 +123,9 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
 
     virtual void SetLabelImpl();
 
+    // `mAlive` starts as false and becomes true when the object is first tracked in an
+    // ApiObjectList after successful creation.
+    std::atomic_bool mAlive = {false};
     std::string mLabel;
 };
 
