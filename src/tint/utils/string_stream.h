@@ -19,6 +19,7 @@
 #include <limits>
 #include <sstream>
 #include <string>
+#include <utility>
 
 namespace tint::utils {
 
@@ -34,19 +35,17 @@ class StringStream {
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this
-    template <typename T,
-              typename std::enable_if<!std::is_floating_point<T>::value>::type* = nullptr>
-    StringStream& operator<<(const T& value) {
-        sstream_ << value;
+    template <typename T, typename = std::enable_if<!std::is_floating_point_v<std::decay<T>>>>
+    StringStream& operator<<(T&& value) {
+        sstream_ << std::forward<T>(value);
         return *this;
     }
 
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this
-    template <typename T,
-              typename std::enable_if<std::is_floating_point<T>::value>::type* = nullptr>
-    StringStream& operator<<(const T& value) {
+    template <typename T, typename = std::enable_if<std::is_floating_point_v<std::decay<T>>>>
+    StringStream& operator<<(T&& value) {
         // Try printing the float in fixed point, with a smallish limit on the precision
         std::stringstream fixed;
         fixed.flags(fixed.flags() | std::ios_base::showpoint | std::ios_base::fixed);
@@ -76,7 +75,7 @@ class StringStream {
         std::stringstream sci;
         sci.imbue(std::locale::classic());
         sci.precision(std::numeric_limits<T>::max_digits10);
-        sci << value;
+        sci << std::forward<T>(value);
         sstream_ << sci.str();
 
         return *this;
