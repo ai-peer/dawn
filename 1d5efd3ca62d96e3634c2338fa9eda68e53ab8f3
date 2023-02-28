@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cfbc5ba_9ccaca77",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T00:33:21Z",
+      "side": 1,
+      "message": "originally suggested it be an attribute because of the ordering of needing to call the callbacks after the mutex is unlocked. and the idea for the mutex was that it was a global in the proc table, not accessible by the device. so, we would also need to put the callback-calling code in the proc table. that problem goes away though if we either:\n - have a backdoor to get the mutex as you mentioned in the other comment thread\n - have the mutex be a member of the device, and get it from an object\u0027s parent device\n\nIMO I prefer the extra indirection of getting the mutex from the parent device so that in situations where we don\u0027t need one, we can get a no-op mutex (like WebGPU JS)",
+      "parentUuid": "6c0e413c_6450bb85",
+      "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1c58899_83e173a5",
