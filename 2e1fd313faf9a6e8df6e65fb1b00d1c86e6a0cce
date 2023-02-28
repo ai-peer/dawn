@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8406f5_49bca8a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T22:40:11Z",
+      "side": 1,
+      "message": "LGTM, can we have unittests in SubresourceStorageTests ?",
+      "revId": "2e1fd313faf9a6e8df6e65fb1b00d1c86e6a0cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af52d7d4_ec3df655",
+        "filename": "src/dawn/native/SubresourceStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T22:40:11Z",
+      "side": 1,
+      "message": "nit: could static assert that otherwise, R is void",
+      "revId": "2e1fd313faf9a6e8df6e65fb1b00d1c86e6a0cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
