@@ -19,7 +19,35 @@
 
 #include "dawn/tests/DawnTest.h"
 
-class BufferMappingTests : public DawnTest {
+namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(BufferTestParams, UseThreadSafeAPI);
+
+using ParentClass = DawnTestWithParams<BufferTestParams>;
+
+class BufferTestBase : public ParentClass {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+            if (!UsesWire()) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
+    }
+
+    void SetUp() override {
+        ParentClass::SetUp();
+        // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+        DAWN_TEST_UNSUPPORTED_IF(GetParam().mUseThreadSafeAPI && UsesWire());
+    }
+};
+}  // namespace
+
+class BufferMappingTests : public BufferTestBase {
   protected:
     void MapAsyncAndWait(const wgpu::Buffer& buffer,
                          wgpu::MapMode mode,
@@ -534,12 +562,10 @@ TEST_P(BufferMappingTests, MapWrite_ZeroSizedTwice) {
     MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
 }
 
-DAWN_INSTANTIATE_TEST(BufferMappingTests,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(BufferMappingTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {true, false});
 
 class BufferMappingCallbackTests : public BufferMappingTests {
   protected:
@@ -695,9 +721,11 @@ TEST_P(BufferMappingCallbackTests, EmptySubmissionWriteAndThenMap) {
     buffer.Unmap();
 }
 
-DAWN_INSTANTIATE_TEST(BufferMappingCallbackTests, D3D12Backend(), MetalBackend(), VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(BufferMappingCallbackTests,
+                        {D3D12Backend(), MetalBackend(), VulkanBackend()},
+                        {true, false});
 
-class BufferMappedAtCreationTests : public DawnTest {
+class BufferMappedAtCreationTests : public BufferTestBase {
   protected:
     static void MapCallback(WGPUBufferMapAsyncStatus status, void* userdata) {
         EXPECT_EQ(WGPUBufferMapAsyncStatus_Success, status);
@@ -942,15 +970,12 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRangeZeroSized) {
     buffer.Unmap();
 }
 
-DAWN_INSTANTIATE_TEST(BufferMappedAtCreationTests,
-                      D3D12Backend(),
-                      D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(BufferMappedAtCreationTests,
+                        {D3D12Backend(), D3D12Backend({}, {"use_d3d12_resource_heap_tier2"}),
+                         MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+                        {true, false});
 
-class BufferTests : public DawnTest {};
+class BufferTests : public BufferTestBase {};
 
 // Test that creating a zero-buffer is allowed.
 TEST_P(BufferTests, ZeroSizedBuffer) {
@@ -1094,14 +1119,12 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
     RunTest(descriptor);
 }
 
-DAWN_INSTANTIATE_TEST(BufferTests,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(BufferTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {true, false});
 
-class BufferNoSuballocationTests : public DawnTest {};
+class BufferNoSuballocationTests : public BufferTestBase {};
 
 // Regression test for crbug.com/1313172
 // This tests a buffer. It then performs writeBuffer and immediately destroys
@@ -1126,9 +1149,10 @@ TEST_P(BufferNoSuballocationTests, WriteBufferThenDestroy) {
     WaitForAllOperations();
 }
 
-DAWN_INSTANTIATE_TEST(BufferNoSuballocationTests,
-                      D3D12Backend({"disable_resource_suballocation"}),
-                      MetalBackend({"disable_resource_suballocation"}),
-                      OpenGLBackend({"disable_resource_suballocation"}),
-                      OpenGLESBackend({"disable_resource_suballocation"}),
-                      VulkanBackend({"disable_resource_suballocation"}));
+DAWN_INSTANTIATE_TEST_P(BufferNoSuballocationTests,
+                        {D3D12Backend({"disable_resource_suballocation"}),
+                         MetalBackend({"disable_resource_suballocation"}),
+                         OpenGLBackend({"disable_resource_suballocation"}),
+                         OpenGLESBackend({"disable_resource_suballocation"}),
+                         VulkanBackend({"disable_resource_suballocation"})},
+                        {true, false});
