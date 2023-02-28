@@ -83,7 +83,7 @@ void PipelineCache::Initialize() {
 
     Device* device = ToBackend(GetDevice());
     mHandle = VK_NULL_HANDLE;
-    GetDevice()->ConsumedError(CheckVkSuccess(
+    (void)GetDevice()->ConsumedError(CheckVkSuccess(
         device->fn.CreatePipelineCache(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreatePipelineCache"));
 }
