@@ -530,6 +530,7 @@ bool InstanceBase::APIProcessEvents() {
 
     bool hasMoreEvents = false;
     for (auto device : devices) {
+        DeviceBase::AutoLock deviceLock(*device);
         hasMoreEvents = device->APITick() || hasMoreEvents;
     }
 
