@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec02be3_4a102e64",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:17:41Z",
+      "side": 1,
+      "message": "this could be\n```\nusing WritableBindingAliasingResult \u003d std::variant\u003c\n   std::monostate, BufferAliasing, TextureAliasing\u003e\n```\n\nmonostate is like \"empty\"",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 2
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4972ce24_9951f71e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:17:41Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e18eea_439ff8a2",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:17:41Z",
+      "side": 1,
+      "message": "should be a reference, not a value! could have impacted the perf test results",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 77
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15070398_384e9de3",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T04:17:41Z",
+      "side": 1,
+      "message": "kMaxStorageTexturesPerShaderStage is 8 now",
+      "range": {
+        "startLine": 212,
+        "startChar": 54,
+        "endLine": 212,
+        "endChar": 56
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
