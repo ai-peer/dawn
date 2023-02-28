@@ -853,5 +853,37 @@ fn f() {
     EXPECT_EQ(expect, str(cloned));
 }
 
+TEST_F(HoistToDeclBeforeTest, UnmaterializedAbstractArray_ToVar) {
+    // fn f() {
+    //   _ = array(1);
+    // }
+    ProgramBuilder b;
+    auto* expr = b.Call(b.ty("array"), b.Expr(1_a));
+    b.Func("f", utils::Empty, b.ty.void_(),
+           utils::Vector{
+               b.Assign(b.Phony(), expr),
+           });
+
+    Program original(std::move(b));
+    ProgramBuilder cloned_b;
+    CloneContext ctx(&cloned_b, &original);
+
+    HoistToDeclBefore hoistToDeclBefore(ctx);
+    auto* sem_expr = ctx.src->Sem().Get(expr);
+    hoistToDeclBefore.Add(sem_expr, expr, HoistToDeclBefore::VariableKind::kVar);
+
+    ctx.Clone();
+    Program cloned(std::move(cloned_b));
+
+    auto* expect = R"(
+fn f() {
+  var tint_symbol = array(1);
+  _ = tint_symbol;
+}
+)";
+
+    EXPECT_EQ(expect, str(cloned));
+}
+
 }  // namespace
 }  // namespace tint::transform
