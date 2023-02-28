@@ -1047,14 +1047,19 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 descriptor.dimension = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
+                // We are creating new resources. Need to lock Device.
                 Ref<TextureBase> temporaryResolveTexture;
-                DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
-
-                TextureViewDescriptor viewDescriptor = {};
                 Ref<TextureViewBase> temporaryResolveView;
-                DAWN_TRY_ASSIGN(
-                    temporaryResolveView,
-                    device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                {
+                    DeviceBase::AutoLock deviceLock(*GetDevice());
+
+                    DAWN_TRY_ASSIGN(temporaryResolveTexture, device->CreateTexture(&descriptor));
+
+                    TextureViewDescriptor viewDescriptor = {};
+                    DAWN_TRY_ASSIGN(
+                        temporaryResolveView,
+                        device->CreateTextureView(temporaryResolveTexture.Get(), &viewDescriptor));
+                }
 
                 // Save the temporary and given render targets together for copying after
                 // the render pass ends.
@@ -1200,6 +1205,9 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
 
             if (dst.aspect == Aspect::Depth &&
                 GetDevice()->IsToggleEnabled(Toggle::UseBlitForBufferToDepthTextureCopy)) {
+                // The below function might create new resources. Need to lock the Device.
+                DeviceBase::AutoLock deviceLock(*GetDevice());
+
                 DAWN_TRY_CONTEXT(
                     BlitBufferToDepth(GetDevice(), this, source->buffer, srcLayout, dst, *copySize),
                     "copying from %s to depth aspect of %s using blit workaround.", source->buffer,
@@ -1207,6 +1215,9 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
                 return {};
             } else if (dst.aspect == Aspect::Stencil &&
                        GetDevice()->IsToggleEnabled(Toggle::UseBlitForBufferToStencilTextureCopy)) {
+                // The below function might create new resources. Need to lock the Device.
+                DeviceBase::AutoLock deviceLock(*GetDevice());
+
                 DAWN_TRY_CONTEXT(BlitBufferToStencil(GetDevice(), this, source->buffer, srcLayout,
                                                      dst, *copySize),
                                  "copying from %s to stencil aspect of %s using blit workaround.",
@@ -1375,6 +1386,9 @@ void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* sourc
 
             // Use a blit to copy the depth aspect.
             if (blitDepth) {
+                // This function might create new resources. Need to lock the Device.
+                DeviceBase::AutoLock deviceLock(*GetDevice());
+
                 DAWN_TRY_CONTEXT(BlitDepthToDepth(GetDevice(), this, src, dst, *copySize),
                                  "copying depth aspect from %s to %s using blit workaround.",
                                  source->texture, destination->texture);
@@ -1586,6 +1600,9 @@ void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryInd
 }
 
 CommandBufferBase* CommandEncoder::APIFinish(const CommandBufferDescriptor* descriptor) {
+    // This function will create new object, need to lock the Device.
+    DeviceBase::AutoLock deviceLock(*GetDevice());
+
     Ref<CommandBufferBase> commandBuffer;
     if (GetDevice()->ConsumedError(Finish(descriptor), &commandBuffer)) {
         return CommandBufferBase::MakeError(GetDevice());
