@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f8ad1a_6137b420",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-02-28T19:31:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "841d6abd_ddfd52c4",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e89140f9_9975fa8a",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af2e9689_32331111",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-02-28T19:31:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e89140f9_9975fa8a",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0da00dd3_c6a2fc9f",
@@ -99,6 +135,24 @@
       "writtenOn": "2023-02-27T18:50:13Z",
       "side": 1,
       "message": "Maybe this could be done on the server instead, where we always register a device lost callback. Then here we would:\n\n```\nDevice* device \u003d client-\u003eMake\u003cDevice\u003e(descriptor);\n\nDevice::Device(descriptor){\n  exract and store the callback.\n}\n```\n\nAnd on the server when creating the device, pass the OnDeviceLost directly in the descriptor on creation.\n\nWDYT?",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505e7ab1_1f21d25a",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-02-28T19:31:47Z",
+      "side": 1,
+      "message": "I\u0027m having more trouble than I anticipated with this. I\u0027m registering a device callback on the server at requestDevice time, but in order to prevent it from getting overwritten I\u0027m commenting out procs.deviceSetDeviceLostCallback in SetForwardingDeviceCallbacks, and this breaks things in ways I\u0027m not clear on.\n\nSpecifically getting a segfault in WireDisconnectTests.ServerLostThenDisconnect, which calls wgpuDeviceSetDeviceLostCallback and then procs.CallDeviceSetDeviceLostCallbackCallback (which is a hell of a function name.) But it looks like all procs.CallDeviceSetDeviceLostCallbackCallback does is call a callback set from procs.DeviceSetDeviceLostCallback, which I guess should be called from wgpuDeviceSetDeviceLostCallback, but isn\u0027t? So I\u0027m wondering if that code has been wrong all the time and was relying on the procs.deviceSetDeviceLostCallback I commented out? Or maybe I\u0027m just reading it wrong.",
+      "parentUuid": "0da00dd3_c6a2fc9f",
       "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
