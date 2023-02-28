@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b36f7cdd_632c946e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 21
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T06:49:35Z",
+      "side": 1,
+      "message": "\u003e we can have a special case for APITick() such as that telling the generator to skip autogenerating locking code for it and let us manually lock inside APITick() ourselves. Then we don\u0027t need to unlock and relock.\n\nThis, and having no CallbackSink sounds preferable to me now\n\n\u003e if we wrap it in a custom unlock_guard class similar to std::lock_guard/\n\nack. and, eventually we can add Clang thread safety analysis annotations",
+      "parentUuid": "c2d9d6b1_9b1f0146",
+      "revId": "1d5efd3ca62d96e3634c2338fa9eda68e53ab8f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1c58899_83e173a5",
