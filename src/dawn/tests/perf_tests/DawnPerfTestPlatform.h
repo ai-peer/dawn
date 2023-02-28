@@ -80,6 +80,7 @@ class DawnPerfTestPlatform : public dawn::platform::Platform {
                            unsigned char flags) override;
 
     bool mRecordTraceEvents = false;
+    std::mutex mRecordingTraceEventsMutex;
     std::unique_ptr<utils::Timer> mTimer;
 
     // Trace event record.
