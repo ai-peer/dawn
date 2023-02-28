@@ -52,6 +52,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5123dcf5_e5a0ea90",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae0328cb_b4b2bbc2",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7040afdc_8bf2eac2",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cabc9aac_02edaa0d",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5956f362_097ab2f6",
@@ -65,6 +101,30 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "nit: doesn\u0027t `false` work? Or removing the `if constexpr` and changing it for a `static_assert(std::is_integral_v\u003cT\u003e)`?",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f01de0ae_efde7639",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Replaced with `static_assert(std::is_integral_v\u003cT\u003e)` (`static_assert(false)` won\u0027t work in if constexpr branch)",
+      "parentUuid": "5956f362_097ab2f6",
       "range": {
         "startLine": 80,
         "startChar": 22,
@@ -98,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26dc263a_3b5b91ee",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done. (didn\u0027t use std::monostate as there seems to be default constructor for both struct)",
+      "parentUuid": "1ec02be3_4a102e64",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 2
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4972ce24_9951f71e",
@@ -111,6 +195,30 @@
       "writtenOn": "2023-02-28T04:17:41Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 66
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb863c94_267e401f",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4972ce24_9951f71e",
       "range": {
         "startLine": 88,
         "startChar": 0,
@@ -168,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4734d409_9e2c1fab",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "adding \u0026 to avoid the unintended copy give us ~8% cpu_time increase instead of ~15%",
+      "parentUuid": "b10a3b71_e544b76c",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 77
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21d203ca_ed730e5e",
@@ -181,6 +313,24 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "u-nit: ValidationMode seems like that part where we do the actual validation. maybe this could be `kProduceDetails`?",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdef5937_4681100b",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21d203ca_ed730e5e",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -208,6 +358,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e27f25_88e118f4",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15070398_384e9de3",
+      "range": {
+        "startLine": 212,
+        "startChar": 54,
+        "endLine": 212,
+        "endChar": 56
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdaeef83_c4eb33dc",
@@ -221,6 +395,24 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "This test checks that it is allowed to use the same subresource in multiple writable usage in the same render pass, so using multiple subresources here changes what we are testing. To avoid storage binding aliasing we could instead bind the texture twice in different bindgroups for different draws.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68e91277_f5219239",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdaeef83_c4eb33dc",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -242,6 +434,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fccc612_fabb7917",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86fdfdab_4d163c72",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe5c8ea2_f1d3561d",
@@ -255,6 +465,24 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "u-nit: maybe assert that the format in the entry is indeed RGBA8Unorm.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d82dc0b_a85843c5",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "We only have `wgpu::TextureView` in `utils::BindingInitializationHelper` and doesn\u0027t seem we can grad format from. Added a comment instead.",
+      "parentUuid": "fe5c8ea2_f1d3561d",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -276,6 +504,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca712bd_979b8e6d",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bb9ebd8_dce81b10",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "744ca704_1a6389bc",
@@ -293,6 +539,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9fbb4d0_20deccfe",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "744ca704_1a6389bc",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32cc6d74_0cdf7b90",
@@ -306,6 +570,24 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "nit: creating an empty pipeline layout is valid, so we don\u0027t really need that branch. Otherwise we switch between implicit and explicit layout and that\u0027s a bit surprising when calling a function?",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d02cb8_d1909ecf",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Changed to `ASSERT(!layouts.empty());`",
+      "parentUuid": "32cc6d74_0cdf7b90",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -333,6 +615,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "462c8e69_ad91070a",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Copied code. Use static_cast now.",
+      "parentUuid": "bada3207_e187de6f",
+      "range": {
+        "startLine": 201,
+        "startChar": 36,
+        "endLine": 201,
+        "endChar": 48
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "571f76f3_94b2b885",
@@ -350,6 +656,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dccff89b_8cc8f312",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "571f76f3_94b2b885",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d56bbf5_d8972d96",
@@ -363,6 +687,24 @@
       "writtenOn": "2023-02-28T15:11:56Z",
       "side": 1,
       "message": "Can we have a test where bg1 is used for a slot that\u0027s not used by the pipeline layout? It would check that we correctly only check bindgroups that are in the pipeline layout\u0027s BGL mask.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95797577_dca9faab",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-02-28T23:32:07Z",
+      "side": 1,
+      "message": "Do you mean having a pipeline with a pipeline layout of {bgl0}, but setBindGroup(0, bg0), and setBindGroup(1, bg1)?\nIf that\u0027s the case, seems I\u0027m missing the part to mask out bindgroups out of bindgroup layouts mask.",
+      "parentUuid": "1d56bbf5_d8972d96",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
