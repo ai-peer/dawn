@@ -52,6 +52,9 @@ Transform::ApplyResult PromoteInitializersToLet::Apply(const Program* src,
             // Follow const-chains
             auto* root_expr = expr;
             if (expr->Stage() == sem::EvaluationStage::kConstant) {
+                if (expr->Type()->HoldsAbstract()) {
+                    return false;
+                }
                 while (auto* user = root_expr->UnwrapMaterialize()->As<sem::VariableUser>()) {
                     root_expr = user->Variable()->Initializer();
                 }
