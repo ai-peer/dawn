@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d52b785_3f7c909b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-02-28T16:43:59Z",
+      "side": 1,
+      "message": "Made the default value of depthClearValue \"NAN\"\n\nRefer to https://chromium-review.googlesource.com/c/chromium/src/+/4270352/comment/42756d87_2eb6d9cb/\n\nI would add some tests.",
+      "revId": "e8d19657bd2fe61b5677b3a977bdd0075189ec73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
