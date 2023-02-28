@@ -18,6 +18,7 @@
 #include "src/tint/diagnostic/diagnostic.h"
 #include "src/tint/type/manager.h"
 #include "src/tint/utils/hash.h"
+#include "src/tint/utils/string_stream.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::type::Vector);
 
@@ -46,7 +47,7 @@ bool Vector::Equals(const UniqueNode& other) const {
 }
 
 std::string Vector::FriendlyName(const SymbolTable& symbols) const {
-    std::ostringstream out;
+    utils::StringStream out;
     out << "vec" << width_ << "<" << subtype_->FriendlyName(symbols) << ">";
     return out.str();
 }
