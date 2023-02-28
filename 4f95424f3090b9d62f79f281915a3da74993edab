@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "4f95424f3090b9d62f79f281915a3da74993edab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "427ce9be_207b4312",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-28T12:12:18Z",
+      "side": 1,
+      "message": "whoa. WTF? Isn\u0027t this supposed to revert to scientific when the number can\u0027t be reparsed exactly?",
+      "range": {
+        "startLine": 1081,
+        "startChar": 16,
+        "endLine": 1084,
+        "endChar": 75
+      },
+      "revId": "4f95424f3090b9d62f79f281915a3da74993edab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
