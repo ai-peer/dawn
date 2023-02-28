@@ -92,6 +92,58 @@ struct DeviceBase::DeprecationWarnings {
 };
 
 namespace {
+class MutexEnabled : public DeviceMutexBase {
+  public:
+    void Lock() override {
+#if defined(DAWN_ENABLE_ASSERTS)
+        auto currentThread = std::this_thread::get_id();
+        ASSERT(mOwner.load(std::memory_order_acquire) != currentThread);
+#endif  // DAWN_ENABLE_ASSERTS
+
+        mMutex.lock();
+
+#if defined(DAWN_ENABLE_ASSERTS)
+        mOwner.store(currentThread, std::memory_order_release);
+#endif  // DAWN_ENABLE_ASSERTS
+    }
+    void Unlock() override {
+#if defined(DAWN_ENABLE_ASSERTS)
+        AssertIsLockedByCurrentThread();
+        mOwner.store(std::thread::id(), std::memory_order_release);
+#endif  // DAWN_ENABLE_ASSERTS
+
+        mMutex.unlock();
+    }
+
+  private:
+#if defined(DAWN_ENABLE_ASSERTS)
+    bool IsLockedByCurrentThread() override {
+        return mOwner.load(std::memory_order_acquire) == std::this_thread::get_id();
+    }
+
+    std::atomic<std::thread::id> mOwner;
+#endif  // DAWN_ENABLE_ASSERTS
+    std::mutex mMutex;
+};
+
+// Class to temporarily unlock the mutex and re-lock it when out of scope.
+struct AutoUnlock {
+    explicit AutoUnlock(DeviceBase& device) : mDevice(device), mMutex(device.GetMutex()) {
+        // Avoid device being destroyed while we unlock the mutex.
+        mDevice.Reference();
+        mMutex->AssertIsLockedByCurrentThread();
+        mMutex->Unlock();
+    }
+    ~AutoUnlock() {
+        mMutex->Lock();
+        mDevice.Release();
+    }
+
+  private:
+    DeviceBase& mDevice;
+    const Ref<DeviceMutexBase>& mMutex;
+};
+
 struct LoggingCallbackTask : CallbackTask {
   public:
     LoggingCallbackTask() = delete;
@@ -210,6 +262,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
     GetDefaultLimits(&mLimits.v1);
     mFormatTable = BuildFormatTable(this);
+    mMutex = AcquireRef(new DeviceMutexBase());
 }
 
 DeviceBase::~DeviceBase() {
@@ -277,6 +330,13 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    if (HasFeature(Feature::ThreadSafeAPI)) {
+        mMutex = AcquireRef(new MutexEnabled());
+    } else {
+        mMutex = AcquireRef(new DeviceMutexBase());
+    }
+
+    // mAdapter is not set for mock test devices.
     // TODO(crbug.com/dawn/1702): using a mock adapter could avoid the null checking.
     if (mAdapter != nullptr) {
         mAdapter->GetInstance()->AddDevice(this);
@@ -286,6 +346,9 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
 }
 
 void DeviceBase::WillDropLastExternalRef() {
+    // This will be invoked by API side, so we need to lock.
+    AutoLock deviceLock(*this);
+
     // DeviceBase uses RefCountedWithExternalCount to break refcycles.
     //
     // DeviceBase holds multiple Refs to various API objects (pipelines, buffers, etc.) which are
@@ -307,7 +370,7 @@ void DeviceBase::WillDropLastExternalRef() {
 
     // Flush last remaining callback tasks.
     do {
-        mCallbackTaskManager->Flush();
+        FlushCallbackTaskQueue();
     } while (!mCallbackTaskManager->IsEmpty());
 
     // Drop te device's reference to the queue. Because the application dropped the last external
@@ -573,7 +636,7 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     if (IsLost()) {
         return;
     }
-    mCallbackTaskManager->Flush();
+    FlushCallbackTaskQueue();
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
@@ -587,7 +650,7 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     if (IsLost()) {
         return;
     }
-    mCallbackTaskManager->Flush();
+    FlushCallbackTaskQueue();
     mUncapturedErrorCallback = callback;
     mUncapturedErrorUserdata = userdata;
 }
@@ -601,7 +664,7 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     if (IsLost()) {
         return;
     }
-    mCallbackTaskManager->Flush();
+    FlushCallbackTaskQueue();
     mDeviceLostCallback = callback;
     mDeviceLostUserdata = userdata;
 }
@@ -1268,13 +1331,13 @@ bool DeviceBase::APITick() {
     // to avoid deleting |this| in the middle of this function call.
     Ref<DeviceBase> self(this);
     if (ConsumedError(Tick())) {
-        mCallbackTaskManager->Flush();
+        FlushCallbackTaskQueue();
         return false;
     }
 
     // We have to check callback tasks in every APITick because it is not related to any global
     // serials.
-    mCallbackTaskManager->Flush();
+    FlushCallbackTaskQueue();
 
     // We don't throw an error when device is lost. This allows pending callbacks to be
     // executed even after the Device is lost/destroyed.
@@ -1813,6 +1876,14 @@ void DeviceBase::ForceSetToggleForTesting(Toggle toggle, bool isEnabled) {
     mToggles.ForceSet(toggle, isEnabled);
 }
 
+void DeviceBase::FlushCallbackTaskQueue() {
+    // Callbacks might cause re-entrances. Mutex shouldn't be locked.
+    // Temporarily unlock it.
+    AutoUnlock deviceTempUnlock(*this);
+
+    mCallbackTaskManager->Flush();
+}
+
 const CombinedLimits& DeviceBase::GetLimits() const {
     return mLimits;
 }
@@ -1822,6 +1893,7 @@ AsyncTaskManager* DeviceBase::GetAsyncTaskManager() const {
 }
 
 CallbackTaskManager* DeviceBase::GetCallbackTaskManager() const {
+    mMutex->AssertIsLockedByCurrentThread();
     return mCallbackTaskManager.Get();
 }
 
@@ -1843,7 +1915,10 @@ void DeviceBase::AddComputePipelineAsyncCallbackTask(
             // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
             // thread-safe.
             ASSERT(mPipeline != nullptr);
-            mPipeline = mPipeline->GetDevice()->AddOrGetCachedComputePipeline(mPipeline);
+            {
+                DeviceBase::AutoLock deviceLock(*mPipeline->GetDevice());
+                mPipeline = mPipeline->GetDevice()->AddOrGetCachedComputePipeline(mPipeline);
+            }
 
             CreateComputePipelineAsyncCallbackTask::FinishImpl();
         }
@@ -1868,6 +1943,7 @@ void DeviceBase::AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipe
             // CreateRenderPipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
             // thread-safe.
             if (mPipeline.Get() != nullptr) {
+                DeviceBase::AutoLock deviceLock(*mPipeline->GetDevice());
                 mPipeline = mPipeline->GetDevice()->AddOrGetCachedRenderPipeline(mPipeline);
             }
 
