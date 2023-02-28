@@ -22,6 +22,30 @@
       },
       "revId": "ef48108587fc43256a69cc6d0d4a68caa1770d3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31368607_85640a06",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-28T18:15:14Z",
+      "side": 1,
+      "message": "Yes, I think that\u0027s the only trigger.\n\nI don\u0027t think it\u0027s super easy to detect this case in `HoistToDecl::Add` though. We\u0027re just handed an expression to hoist, and because we don\u0027t (yet!) have bidirectional tree traversal we can\u0027t easily see that the expression was about to be assigned to a phony.",
+      "parentUuid": "15790937_eb07e00c",
+      "range": {
+        "startLine": 858,
+        "startChar": 9,
+        "endLine": 858,
+        "endChar": 22
+      },
+      "revId": "ef48108587fc43256a69cc6d0d4a68caa1770d3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
