@@ -38,27 +38,41 @@ DeviceBase* ObjectBase::GetDevice() const {
 }
 
 void ApiObjectList::Track(ApiObjectBase* object) {
-    if (mMarkedDestroyed) {
+    if (mMarkedDestroyed.load(std::memory_order_relaxed)) {
         object->DestroyImpl();
         return;
     }
-    std::lock_guard<std::mutex> lock(mMutex);
+    object->mAlive.store(true, std::memory_order_release);
     mObjects.Prepend(object);
 }
 
 bool ApiObjectList::Untrack(ApiObjectBase* object) {
-    std::lock_guard<std::mutex> lock(mMutex);
-    return object->RemoveFromList();
+    return mObjects.Remove(object);
 }
 
 void ApiObjectList::Destroy() {
-    std::lock_guard<std::mutex> lock(mMutex);
-    mMarkedDestroyed = true;
-    while (!mObjects.empty()) {
-        auto* head = mObjects.head();
-        bool removed = head->RemoveFromList();
+    mMarkedDestroyed.store(true, std::memory_order_relaxed);
+
+    // Move all the objects into a local list for destruction.
+    // No new objects will be added here since `mMarkedDestroyed`
+    // has been set to true.
+    LinkedList<ApiObjectBase> objects;
+    mObjects.MoveInto(&objects);
+
+    // Remove all objects from the list and call DestroyImpl.
+    while (!objects.empty()) {
+        auto* head = objects.head();
+        bool removed = objects.Remove(head);
         ASSERT(removed);
+        head->value()->mAlive.store(false, std::memory_order_release);
         head->value()->DestroyImpl();
+
+        if (objects.empty()) {
+            // Move the objects again in case more were added
+            // inside this loop. This can happen if Destroy races
+            // with Track.
+            mObjects.MoveInto(&objects);
+        }
     }
 }
 
@@ -88,7 +102,7 @@ const std::string& ApiObjectBase::GetLabel() const {
 void ApiObjectBase::SetLabelImpl() {}
 
 bool ApiObjectBase::IsAlive() const {
-    return IsInList();
+    return mAlive.load(std::memory_order_acquire);
 }
 
 void ApiObjectBase::DeleteThis() {
@@ -102,7 +116,7 @@ ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
 }
 
 void ApiObjectBase::Destroy() {
-    if (!IsAlive()) {
+    if (!mAlive.exchange(false, std::memory_order_acq_rel)) {
         return;
     }
     ApiObjectList* list = GetObjectTrackingList();
