@@ -41,13 +41,21 @@ struct HoistToDeclBefore::State {
              VariableKind kind,
              const char* decl_name) {
         auto name = b.Symbols().New(decl_name);
+        auto* ty = ctx.src->Sem().GetVal(expr)->Type();
+        auto* init = ctx.CloneWithoutTransform(expr);
 
         switch (kind) {
             case VariableKind::kLet: {
-                auto builder = [this, expr, name] {
-                    return b.Decl(b.Let(
-                        name, Transform::CreateASTTypeFor(ctx, ctx.src->Sem().GetVal(expr)->Type()),
-                        ctx.CloneWithoutTransform(expr)));
+                auto builder = [this, init, name, ty] {
+                    const ast::Let* let = nullptr;
+                    if (!ty->HoldsAbstract()) {
+                        // Use explicit types for materialized expressions to avoid changing the
+                        // type when we hoist to a new decl.
+                        let = b.Let(name, Transform::CreateASTTypeFor(ctx, ty), init);
+                    } else {
+                        let = b.Let(name, init);
+                    }
+                    return b.Decl(let);
                 };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
@@ -56,10 +64,16 @@ struct HoistToDeclBefore::State {
             }
 
             case VariableKind::kVar: {
-                auto builder = [this, expr, name] {
-                    return b.Decl(b.Var(
-                        name, Transform::CreateASTTypeFor(ctx, ctx.src->Sem().GetVal(expr)->Type()),
-                        ctx.CloneWithoutTransform(expr)));
+                auto builder = [this, init, name, ty] {
+                    const ast::Var* var = nullptr;
+                    if (!ty->HoldsAbstract()) {
+                        // Use explicit types for materialized expressions to avoid changing the
+                        // type when we hoist to a new decl.
+                        var = b.Var(name, Transform::CreateASTTypeFor(ctx, ty), init);
+                    } else {
+                        var = b.Var(name, init);
+                    }
+                    return b.Decl(var);
                 };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
@@ -68,9 +82,7 @@ struct HoistToDeclBefore::State {
             }
 
             case VariableKind::kConst: {
-                auto builder = [this, expr, name] {
-                    return b.Decl(b.Const(name, ctx.CloneWithoutTransform(expr)));
-                };
+                auto builder = [this, init, name] { return b.Decl(b.Const(name, init)); };
                 if (!InsertBeforeImpl(before_expr->Stmt(), std::move(builder))) {
                     return false;
                 }
