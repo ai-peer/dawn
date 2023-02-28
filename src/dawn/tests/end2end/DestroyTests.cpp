@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <string>
+#include <vector>
 
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -22,11 +23,32 @@ using ::testing::HasSubstr;
 
 constexpr uint32_t kRTSize = 4;
 
-class DestroyTest : public DawnTest {
+namespace {
+// Test both with/without ThreadSafeAPI feature to verify there is no deadlock.
+using UseThreadSafeAPI = bool;
+DAWN_TEST_PARAM_STRUCT(DestroyTestParams, UseThreadSafeAPI);
+
+using ParentClass = DawnTestWithParams<DestroyTestParams>;
+}  // namespace
+
+class DestroyTest : public ParentClass {
   protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        if (GetParam().mUseThreadSafeAPI) {
+            // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+            if (!UsesWire()) {
+                features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+            }
+        }
+        return features;
+    }
+
     void SetUp() override {
-        DawnTest::SetUp();
+        ParentClass::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
+        // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+        DAWN_TEST_UNSUPPORTED_IF(GetParam().mUseThreadSafeAPI && UsesWire());
 
         renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
@@ -212,9 +234,7 @@ TEST_P(DestroyTest, GetQueueAfterDeviceDestroy) {
         nullptr));
 }
 
-DAWN_INSTANTIATE_TEST(DestroyTest,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(DestroyTest,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {true, false});
