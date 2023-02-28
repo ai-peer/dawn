@@ -16,6 +16,29 @@
       "message": "Made the default value of depthClearValue \"NAN\"\n\nRefer to https://chromium-review.googlesource.com/c/chromium/src/+/4270352/comment/42756d87_2eb6d9cb/\n\nI would add some tests.",
       "revId": "e8d19657bd2fe61b5677b3a977bdd0075189ec73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c2a1b74_fc960c19",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T18:17:02Z",
+      "side": 1,
+      "message": "nit: since there are now two possible ways to get this message, I\u0027d say something like: \"must be set and must not be a NaN value\"\n\nWe should also have a unittest in Dawn that using the C++ API with a default-initialized value here is a validation error",
+      "range": {
+        "startLine": 377,
+        "startChar": 54,
+        "endLine": 377,
+        "endChar": 79
+      },
+      "revId": "e8d19657bd2fe61b5677b3a977bdd0075189ec73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
