@@ -39,6 +39,30 @@
       },
       "revId": "4f95424f3090b9d62f79f281915a3da74993edab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47072257_ab9620bf",
+        "filename": "src/tint/resolver/const_eval_binary_op_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1084,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-02-28T13:16:57Z",
+      "side": 1,
+      "message": "Yea, although, maybe it\u0027s because this is exact in that case? It just has to be super big to be exact? (It\u0027s tests dealing with float lowest and highest which spit out the really big numbers).",
+      "parentUuid": "427ce9be_207b4312",
+      "range": {
+        "startLine": 1081,
+        "startChar": 16,
+        "endLine": 1084,
+        "endChar": 75
+      },
+      "revId": "4f95424f3090b9d62f79f281915a3da74993edab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
