@@ -140,6 +140,7 @@ config("internal_config") {
       "-Wunreachable-code-aggressive",
       "-Wunused-but-set-variable",
       "-Wunused-macros",
+      "-Wthread-safety",
     ]
 
     if (is_win) {
@@ -239,10 +240,12 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       "HashUtils.h",
       "IOKitRef.h",
       "LinkedList.h",
+      "Lock.h",
       "Log.cpp",
       "Log.h",
       "Math.cpp",
       "Math.h",
+      "Mutex.h",
       "NSRef.h",
       "NonCopyable.h",
       "Numeric.h",
@@ -263,6 +266,8 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android) {
       "SwapChainUtils.h",
       "SystemUtils.cpp",
       "SystemUtils.h",
+      "ThreadSafeLinkedList.h",
+      "ThreadSafety.h",
       "TypeTraits.h",
       "TypedInteger.h",
       "UnderlyingType.h",
