@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d501043_4f69c6f9",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-28T03:02:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2a6569b_30d4bbd7",
+      "range": {
+        "startLine": 521,
+        "startChar": 4,
+        "endLine": 525,
+        "endChar": 5
+      },
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "749c423c_910c5797",
@@ -139,6 +163,24 @@
       "side": 1,
       "message": "Agreed that the slew of macros is a bit unfortunate and doesn\u0027t seem commensurate with the problem this is trying to fix. Sorry :X",
       "parentUuid": "0750c252_4adc036a",
+      "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32d9612f_79ae2c81",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-02-28T03:02:37Z",
+      "side": 1,
+      "message": "Ok, slightly modified `HandleError` instead. Lmk what you think. Part of this is also trying to avoid calling `ConsumedError` when we are directly passing in an error, and instead calling `HandleError`.",
+      "parentUuid": "ee57df59_6f27cfb8",
       "revId": "5c80cfc2feee95dcfb2ccfe42332c8b1db048284",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
