@@ -51,18 +51,24 @@ class RefCounted {
     uint64_t GetRefCountPayload() const;
 
     void Reference();
-    void Release();
+    // Release() is called by internal code, so it's assumed that there is already a thread safety
+    // protection in place.
+    void Release() { Release(/*isMultiThreadUnsafe=*/false); }
 
     void APIReference() { Reference(); }
-    void APIRelease() { Release(); }
+    // Calling APIRelease() from API side is unsafe by default.
+    // It's assumed that we haven't place any thread safety protection yet before calling this
+    // method.
+    void APIRelease() { Release(/*isMultiThreadUnsafe=*/true); }
 
   protected:
     virtual ~RefCounted();
 
-    // A Derived class may override this if they require a custom deleter.
-    virtual void DeleteThis();
+    void Release(bool isMultiThreadUnsafe);
 
-  private:
+    // A Derived class may override this if they require a custom deleter.
+    virtual void DeleteThis(bool isMultiThreadUnsafe);
+
     RefCount mRefCount;
 };
 
