@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d35ec976_5d270f9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T22:59:54Z",
+      "side": 1,
+      "message": "err if I wasn\u0027t clear - like you can do Iterate with a lambda that returns MaybeError - and it actually stops the iteration after the first error, and the error returned from Iterate is exactly that error.",
+      "parentUuid": "0acd49e2_28003317",
+      "revId": "2e1fd313faf9a6e8df6e65fb1b00d1c86e6a0cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af52d7d4_ec3df655",
