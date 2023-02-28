@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1107b72a_a924265e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T00:50:01Z",
+      "side": 1,
+      "message": "fwiw there\u0027s also a TODO somewhere to remove this constructor entirely and use the same one as the device - but we need AdapterMock first",
+      "parentUuid": "994f9088_63101202",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10272bd3_06cf7bed",
@@ -195,6 +213,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d295bc46_95b7b5ca",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T00:50:01Z",
+      "side": 1,
+      "message": "that was when it was not \"additional errors\" but \"allowed errors\" and we were passing in kAllAllowedInternalError.\n\nSo it was confusing since above, we validated out Internal/DeviceLost and then passed \"all\" into the next function.\n\nNow that the arg is \"additional errors\", we could pass only OutOfMemory in.",
+      "parentUuid": "771a8e9d_cff51b6b",
+      "range": {
+        "startLine": 1400,
+        "startChar": 16,
+        "endLine": 1400,
+        "endChar": 47
+      },
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9ea8534_7b214101",
@@ -244,6 +286,24 @@
       "side": 1,
       "message": "Sure, the idea it would be surfaced directly on the ConsumedError default argument. But either way is ok for now and it\u0027s easy to revisit with the current version.",
       "parentUuid": "1f7f711f_bd96d80a",
+      "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88a242e4_b4a3869a",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T00:50:01Z",
+      "side": 1,
+      "message": "previous comments were about when the only cases were OOM/Internal and could be indicated by an enum, not a bitmask (so you couldn\u0027t pass the whole list explicitly)\nbut either way is fine",
+      "parentUuid": "e1625350_76e39749",
       "revId": "dfbf71adac178378028fc4ebc6cd32f2e9b25702",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
