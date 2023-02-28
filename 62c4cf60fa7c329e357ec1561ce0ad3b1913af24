@@ -1,6 +1,80 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "367221ba_b8edc2dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabc9aac_02edaa0d",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "u-nit: if (HasRangesOverlap) reads slightly weird, maybe if (RangesOverlap)? WDYT?\n\nAlso there is a n exciting similar function in CommandValidation.h IsRangeOverlapped. Maybe as a follow-up it could be made to reuse this function? (or replaced?)",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae0328cb_b4b2bbc2",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "Can we have a few unittests for this? Could be a follow-up.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5956f362_097ab2f6",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t `false` work? Or removing the `if constexpr` and changing it for a `static_assert(std::is_integral_v\u003cT\u003e)`?",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ec02be3_4a102e64",
@@ -72,6 +146,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21d203ca_ed730e5e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "u-nit: ValidationMode seems like that part where we do the actual validation. maybe this could be `kProduceDetails`?",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15070398_384e9de3",
         "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
         "patchSetId": 5
@@ -89,6 +180,165 @@
         "endLine": 212,
         "endChar": 56
       },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdaeef83_c4eb33dc",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "This test checks that it is allowed to use the same subresource in multiple writable usage in the same render pass, so using multiple subresources here changes what we are testing. To avoid storage binding aliasing we could instead bind the texture twice in different bindgroups for different draws.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86fdfdab_4d163c72",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 981,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5c8ea2_f1d3561d",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "u-nit: maybe assert that the format in the entry is indeed RGBA8Unorm.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bb9ebd8_dce81b10",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "nit: does `_ \u003d b10` work? I think it might so we don\u0027t need the textureDimensions",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "744ca704_1a6389bc",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "This generate \"\" so can\u0027t we have just a const char* vertex shader that\u0027s used? It would allow removing the condition and the stage member of GenerateReferenceString.",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32cc6d74_0cdf7b90",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "nit: creating an empty pipeline layout is valid, so we don\u0027t really need that branch. Otherwise we switch between implicit and explicit layout and that\u0027s a bit surprising when calling a function?",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bada3207_e187de6f",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "Why checked_cast?",
+      "range": {
+        "startLine": 201,
+        "startChar": 36,
+        "endLine": 201,
+        "endChar": 48
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "571f76f3_94b2b885",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d56bbf5_d8972d96",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T15:11:56Z",
+      "side": 1,
+      "message": "Can we have a test where bg1 is used for a slot that\u0027s not used by the pipeline layout? It would check that we correctly only check bindgroups that are in the pipeline layout\u0027s BGL mask.",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
