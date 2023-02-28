@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f39cfaed_9ec10045",
+        "filename": "src/tint/transform/promote_initializers_to_let_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-28T19:55:40Z",
+      "side": 1,
+      "message": "Please can we make this a `ShouldRun` test?",
+      "range": {
+        "startLine": 1347,
+        "startChar": 0,
+        "endLine": 1351,
+        "endChar": 32
+      },
+      "revId": "b28253f640b0a0f552e01d52314630585c03c55c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
