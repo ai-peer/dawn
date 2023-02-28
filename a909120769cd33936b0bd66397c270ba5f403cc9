@@ -155,6 +155,24 @@
       "parentUuid": "0da00dd3_c6a2fc9f",
       "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d5ecb5_886d3cd2",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-02-28T21:50:23Z",
+      "side": 1,
+      "message": "yea this bit is confusing\n\n`CallDeviceSetDeviceLostCallbackCallback` is a thing in the mocks which does \"call the callback I set before, for testing\". That callback used to be the one that was set in SetForwardingDeviceCallbacks, but now since we\u0027re not using that anymore, it\u0027s null or garbage and crashing.\n\nIn the wire wgpuDeviceSetDeviceLostCallback doesn\u0027t propagate to the server. It just swaps the client-side state of what callback to call when we get the device lost notification.\n\n(Generally, in these tests the wgpuFoo stuff is all \"wire client\" stuff, and the api.Foo stuff is stuff happening on the server).\n\nOk, so we want to trigger the callback, but there isn\u0027t a callback set anymore. We doubly have a problem since the server side device in these tests is not a real device - so we can\u0027t call ForceLossForTesting on it or something like that.\nOn top of that, in these tests, we don\u0027t create the device with RequestDevice, we use server-\u003eInjectDevice.\n\nMaybe you have other ideas, but right now I\u0027m thinking what we can do is do what SetForwardingDeviceCallbacks used to do, but only for InjectDevice? then we should be able to trigger it with CallDeviceSetDeviceLostCallbackCallback.\nAlternatively, we could add a method like `server-\u003eCallDeviceLostCallbackForTesting` ?",
+      "parentUuid": "505e7ab1_1f21d25a",
+      "revId": "a909120769cd33936b0bd66397c270ba5f403cc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
