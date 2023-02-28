@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15790937_eb07e00c",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-28T17:59:29Z",
+      "side": 1,
+      "message": "Given that we forbid constructors as statements, is assigning to a phony the only way this issue can trigger?\nIf so, maybe we should just detect assigning a `const` expression to a phony and  discard the statement.",
+      "range": {
+        "startLine": 858,
+        "startChar": 9,
+        "endLine": 858,
+        "endChar": 22
+      },
+      "revId": "ef48108587fc43256a69cc6d0d4a68caa1770d3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
