@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bd49f93_36193881",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T12:53:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e4d08f88638f13abbc19c2435502ec04f17ca123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893575dc_5df12d12",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T12:53:16Z",
+      "side": 1,
+      "message": "nit: there is DAWN_UNUSED",
+      "revId": "e4d08f88638f13abbc19c2435502ec04f17ca123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28da7622_3e87c308",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-02-28T12:53:16Z",
+      "side": 1,
+      "message": "nit: comment out of date?",
+      "revId": "e4d08f88638f13abbc19c2435502ec04f17ca123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
