@@ -59,21 +59,23 @@ class RefCountedWithWeakRef {
     }
 
     void Reference() { mWeakRef->StrongReferenceAddRef(); }
-    void Release() {
-        if (mWeakRef->StrongReferenceRelease()) {
-            DeleteThis();
-        }
-    }
+    void Release() { Release(/*isMultiThreadUnsafe=*/false); }
     Ref<WeakReference<Derived>> GetWeakReference() { return mWeakRef.Get(); }
 
     void APIReference() { Reference(); }
-    void APIRelease() { Release(); }
+    void APIRelease() { Release(/*isMultiThreadUnsafe=*/true); }
 
   protected:
     virtual ~RefCountedWithWeakRef() = default;
 
+    void Release(bool isMultiThreadUnsafe) {
+        if (mWeakRef->StrongReferenceRelease()) {
+            DeleteThis(isMultiThreadUnsafe);
+        }
+    }
+
     // A Derived class may override this if they require a custom deleter.
-    virtual void DeleteThis() { delete this; }
+    virtual void DeleteThis(bool isMultiThreadUnsafe) { delete this; }
 
   private:
     class WeakReferenceWithStrongControl : public WeakReference<Derived> {

@@ -42,6 +42,7 @@ MaybeError AdapterBase::Initialize() {
 
     mSupportedFeatures.EnableFeature(Feature::DawnNative);
     mSupportedFeatures.EnableFeature(Feature::DawnInternalUsages);
+    mSupportedFeatures.EnableFeature(Feature::ThreadSafeAPI);
     InitializeSupportedFeaturesImpl();
 
     DAWN_TRY_CONTEXT(
