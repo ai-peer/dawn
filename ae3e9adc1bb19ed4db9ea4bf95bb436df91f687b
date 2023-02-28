@@ -16,6 +16,24 @@
       "message": "Can this ever be the case? It seems that it would be an error caught by V8 on the creation of the typed array.",
       "revId": "ae3e9adc1bb19ed4db9ea4bf95bb436df91f687b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6316f1d_d83b0798",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-02-28T21:27:54Z",
+      "side": 1,
+      "message": ":shrug: I know nothing about JS stuff. Ben asked me to check for OOB here, so I did.",
+      "parentUuid": "b2e9888b_d4d15b07",
+      "revId": "ae3e9adc1bb19ed4db9ea4bf95bb436df91f687b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
