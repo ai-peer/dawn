@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "d9c632b8e118e7b7275caac2f495b7d53cd95ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e82f56e_d564fb55",
+        "filename": "src/tint/ir/builder_impl_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1839,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-02-28T11:58:00Z",
+      "side": 1,
+      "message": "This is exciting. I was initially concerned that this parses as two completely different values as `f32` and `f64`, but this _is_ the value in the `f32`. Printing as `2.3` is rounding up, and the whole point of the logic in `StringStream\u0026 operator\u003c\u003c(const T\u0026 value) {` is to avoid rounding to something that could overflow the datatype.\n\nLGTM.",
+      "range": {
+        "startLine": 1839,
+        "startChar": 11,
+        "endLine": 1839,
+        "endChar": 22
+      },
+      "revId": "d9c632b8e118e7b7275caac2f495b7d53cd95ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
