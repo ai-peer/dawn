@@ -83,7 +83,15 @@ TEST_F(HoistToDeclBeforeTest, ForLoopInit) {
     auto* expect = R"(
 fn f() {
   var tint_symbol : i32 = 1i;
-  for(var a = tint_symbol; true; ) {
+  {
+    var a = tint_symbol;
+    loop {
+      if (!(true)) {
+        break;
+      }
+      {
+      }
+    }
   }
 }
 )";
@@ -546,7 +554,15 @@ fn foo() {
 
 fn f() {
   foo();
-  for(var a = 1i; true; ) {
+  {
+    var a = 1i;
+    loop {
+      if (!(true)) {
+        break;
+      }
+      {
+      }
+    }
   }
 }
 )";
@@ -585,7 +601,15 @@ fn foo() {
 
 fn f() {
   foo();
-  for(var a = 1i; true; ) {
+  {
+    var a = 1i;
+    loop {
+      if (!(true)) {
+        break;
+      }
+      {
+      }
+    }
   }
 }
 )";

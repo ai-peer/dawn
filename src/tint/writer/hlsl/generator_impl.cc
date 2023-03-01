@@ -208,6 +208,15 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
+
+    manager.Add<transform::PromoteSideEffectsToDecl>();
+
+    if (!options.disable_robustness) {
+        // Robustness must come after PromoteSideEffectsToDecl
+        manager.Add<transform::Robustness>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<transform::CanonicalizeEntryPointIO>();
 
     if (options.interstage_locations.any()) {
@@ -234,14 +243,9 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     // assumes that num_workgroups builtins only appear as struct members and are
     // only accessed directly via member accessors.
     manager.Add<transform::NumWorkgroupsFromUniform>();
-    manager.Add<transform::PromoteSideEffectsToDecl>();
     manager.Add<transform::VectorizeScalarMatrixInitializers>();
     manager.Add<transform::SimplifyPointers>();
     manager.Add<transform::RemovePhonies>();
-
-    if (!options.disable_robustness) {
-        manager.Add<transform::Robustness>();
-    }
 
     // Build the config for the internal ArrayLengthFromUniform transform.
     auto& array_length_from_uniform = options.array_length_from_uniform;
