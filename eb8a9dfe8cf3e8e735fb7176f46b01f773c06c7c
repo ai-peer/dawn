@@ -16,6 +16,29 @@
       "message": "PTAL! This has been harder to make go through than I expected initially.",
       "revId": "eb8a9dfe8cf3e8e735fb7176f46b01f773c06c7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b52407b_9ba5e3d3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T23:57:33Z",
+      "side": 1,
+      "message": "just in case to try to guarantee the roll passes, you could also mark this KEEP.\n\nNot sure, but sometimes the roller decides to remove blocks if it thinks it can split the expectation - which would cause a bunch of failures...",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 280,
+        "endChar": 72
+      },
+      "revId": "eb8a9dfe8cf3e8e735fb7176f46b01f773c06c7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
