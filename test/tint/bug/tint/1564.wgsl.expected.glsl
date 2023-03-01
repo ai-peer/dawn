@@ -5,6 +5,6 @@ void unused_entry_point() {
   return;
 }
 void foo() {
-  float b = 9.9999461e-41f;
+  float b = 1e-40f;
 }
 
