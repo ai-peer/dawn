@@ -101,10 +101,9 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::VectorizeMatrixConversions>();
     manager.Add<transform::WhileToLoop>();  // ZeroInitWorkgroupMemory
     manager.Add<transform::MergeReturn>();
-    manager.Add<transform::CanonicalizeEntryPointIO>();
-    manager.Add<transform::AddEmptyEntryPoint>();
 
     if (!options.disable_robustness) {
+        // Robustness must come after PromoteSideEffectsToDecl
         manager.Add<transform::Robustness>();
     }
 
@@ -114,6 +113,10 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
         manager.Add<transform::MultiplanarExternalTexture>();
     }
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    manager.Add<transform::CanonicalizeEntryPointIO>();
+    manager.Add<transform::AddEmptyEntryPoint>();
 
     // AddBlockAttribute must come after MultiplanarExternalTexture
     manager.Add<transform::AddBlockAttribute>();
