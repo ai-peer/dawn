@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e4c879a_0c92b81e",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "Instead of having three ways to enqueue a callback: Finish, HandleShutDown, HandleDeviceLoss,\n\nwhat if instead, HandleShutDown and HandleDeviceLoss simply saved a state variable on the CallbackTask that indicates the status?\n\nThen, instead we can iterate the tasks on device lost/destroy but still leave them in the callback queue. On the next tick, they will be called correctly",
+      "range": {
+        "startLine": 42,
+        "startChar": 19,
+        "endLine": 42,
+        "endChar": 46
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d146fae4_dae1a784",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "again, this is another concept. we have AddCallbackTask, RunInNextAPITick, and DeferCallbackToNextTick.\n\ncouldn\u0027t all the usages directly call AddCallbackTask ?\n\nIIUC, the only difference this function has is that it saves the message as a string. I think we can do that with:\n\n```\ncallbackTaskManager-\u003eAddCallbackTask(\n  [\u003d, message \u003d std::string(\"Device was destroyed.\")]() {\n     mDeviceLostCallback(WGPUDeviceLostReason_Destroyed,\n                         message.c_str(), mDeviceLostUserdata);\n  });\n```",
+      "range": {
+        "startLine": 144,
+        "startChar": 5,
+        "endLine": 144,
+        "endChar": 28
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7bbff1_df9016ee",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "I think we should flush the callback queue regardless\n\nIf tick errors, then ConsumedError will lose the device.\nBut the user will never be able to get a notification that the device was lost since the callback is stuck in the queue.",
+      "range": {
+        "startLine": 1284,
+        "startChar": 0,
+        "endLine": 1284,
+        "endChar": 21
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b0438d7_0225942b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "we can dedent this code now by saying:\n```\nif (...) { return {}; }\n\n// other stuff\n```",
+      "range": {
+        "startLine": 1307,
+        "startChar": 0,
+        "endLine": 1307,
+        "endChar": 46
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf1d588_13046f6e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1904,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "device-\u003eRunInNextAPITick and device-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask\nare functionally very similar\n\nwe can simplify the number of concepts to keep track of if instead we provide a std::function overload for AddCallbackTask. That overload would use `GenericFunctionTask` as an implementation detail",
+      "range": {
+        "startLine": 1904,
+        "startChar": 17,
+        "endLine": 1904,
+        "endChar": 33
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1a8a519_0c04bfb0",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "could be slightly reordered so that we ForceLoss, then add the expectation, then Tick",
+      "range": {
+        "startLine": 1009,
+        "startChar": 4,
+        "endLine": 1013,
+        "endChar": 26
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf0acda_adb956fb",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "instead, change the name to DISABLED_DroppedThenMapBuffer",
+      "range": {
+        "startLine": 192,
+        "startChar": 28,
+        "endLine": 192,
+        "endChar": 48
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12db0c82_0f2cd13f",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "why is this needed?",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cee4e048_360da80e",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "why is the ordering change needed?",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a643ab_7b02014c",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:34:11Z",
+      "side": 1,
+      "message": "why not have a .Tick() after the various PopErrorScope calls in this test suite?",
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
