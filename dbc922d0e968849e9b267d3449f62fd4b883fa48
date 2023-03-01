@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea27467_60cc1fbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-01T06:07:41Z",
+      "side": 1,
+      "message": "Please take a look, thanks!\nThis CL make DisallowUnsafeAPIs as an instance toggle (and with get inherited to adapters and devices), with a workaround that make it still work to require DisallowUnsafeAPIs when creating device (will override the adapter inherited state).",
+      "revId": "dbc922d0e968849e9b267d3449f62fd4b883fa48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
