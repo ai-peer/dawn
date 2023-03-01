@@ -57,6 +57,7 @@
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/renamer.h"
+#include "src/tint/transform/robustness.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/single_entry_point.h"
 #include "src/tint/transform/std140.h"
@@ -196,11 +197,16 @@ SanitizedResult Sanitize(const Program* in,
 
     manager.Add<transform::RemovePhonies>();
 
+    if (!options.disable_robustness) {
+        manager.Add<transform::Robustness>();
+    }
+
     if (options.generate_external_texture_bindings) {
+        // Note: more efficient for MultiplanarExternalTexture to come after Robustness
         auto new_bindings_map = writer::GenerateExternalTextureBindings(in);
         data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
+        manager.Add<transform::MultiplanarExternalTexture>();
     }
-    manager.Add<transform::MultiplanarExternalTexture>();
 
     data.Add<transform::CombineSamplers::BindingInfo>(options.binding_map,
                                                       options.placeholder_binding_point);
