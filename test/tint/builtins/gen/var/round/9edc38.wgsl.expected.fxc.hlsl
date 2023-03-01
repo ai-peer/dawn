@@ -1,5 +1,5 @@
 void round_9edc38() {
-  float arg_0 = 3.400000095f;
+  float arg_0 = 3.40000009536743164062f;
   float res = round(arg_0);
 }
 

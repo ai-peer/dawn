@@ -107,9 +107,9 @@ inline std::ostream& operator<<(std::ostream& out, F16Data data) {
     return out;
 }
 
-using WgslGenerator_F32LiteralTest = TestParamHelper<F32Data>;
+using F32LiteralTest = TestParamHelper<F32Data>;
 
-TEST_P(WgslGenerator_F32LiteralTest, Emit) {
+TEST_P(F32LiteralTest, Emit) {
     auto* v = Expr(GetParam().value);
 
     SetResolveOnBuild(false);
@@ -120,20 +120,20 @@ TEST_P(WgslGenerator_F32LiteralTest, Emit) {
     EXPECT_EQ(out.str(), GetParam().expected);
 }
 
-INSTANTIATE_TEST_SUITE_P(Zero,
-                         WgslGenerator_F32LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Zero,
+                         F32LiteralTest,
                          ::testing::ValuesIn(std::vector<F32Data>{{0_f, "0.0f"},
                                                                   {MakeF32(0, 0, 0), "0.0f"},
                                                                   {MakeF32(1, 0, 0), "-0.0f"}}));
 
-INSTANTIATE_TEST_SUITE_P(Normal,
-                         WgslGenerator_F32LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Normal,
+                         F32LiteralTest,
                          ::testing::ValuesIn(std::vector<F32Data>{{1_f, "1.0f"},
                                                                   {-1_f, "-1.0f"},
                                                                   {101.375_f, "101.375f"}}));
 
-INSTANTIATE_TEST_SUITE_P(Subnormal,
-                         WgslGenerator_F32LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Subnormal,
+                         F32LiteralTest,
                          ::testing::ValuesIn(std::vector<F32Data>{
                              {MakeF32(0, 0, 1), "0x1p-149f"},  // Smallest
                              {MakeF32(1, 0, 1), "-0x1p-149f"},
@@ -147,15 +147,15 @@ INSTANTIATE_TEST_SUITE_P(Subnormal,
                              {MakeF32(1, 0, 0xaaaaa), "-0x1.55554p-130f"},    // Scattered bits
                          }));
 
-INSTANTIATE_TEST_SUITE_P(Infinity,
-                         WgslGenerator_F32LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Infinity,
+                         F32LiteralTest,
                          ::testing::ValuesIn(std::vector<F32Data>{
                              {MakeF32(0, 255, 0), "0x1p+128f"},
                              {MakeF32(1, 255, 0), "-0x1p+128f"}}));
 
-using WgslGenerator_F16LiteralTest = TestParamHelper<F16Data>;
+using F16LiteralTest = TestParamHelper<F16Data>;
 
-TEST_P(WgslGenerator_F16LiteralTest, Emit) {
+TEST_P(F16LiteralTest, Emit) {
     Enable(builtin::Extension::kF16);
 
     auto* v = Expr(GetParam().value);
@@ -168,31 +168,31 @@ TEST_P(WgslGenerator_F16LiteralTest, Emit) {
     EXPECT_EQ(out.str(), GetParam().expected);
 }
 
-INSTANTIATE_TEST_SUITE_P(Zero,
-                         WgslGenerator_F16LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Zero,
+                         F16LiteralTest,
                          ::testing::ValuesIn(std::vector<F16Data>{{0_h, "0.0h"},
                                                                   {MakeF16(0, 0, 0), "0.0h"},
                                                                   {MakeF16(1, 0, 0), "-0.0h"}}));
 
-INSTANTIATE_TEST_SUITE_P(Normal,
-                         WgslGenerator_F16LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Normal,
+                         F16LiteralTest,
                          ::testing::ValuesIn(std::vector<F16Data>{{1_h, "1.0h"},
                                                                   {-1_h, "-1.0h"},
                                                                   {101.375_h, "101.375h"}}));
 
-INSTANTIATE_TEST_SUITE_P(Subnormal,
-                         WgslGenerator_F16LiteralTest,
+INSTANTIATE_TEST_SUITE_P(WgslGenerator_Subnormal,
+                         F16LiteralTest,
                          ::testing::ValuesIn(std::vector<F16Data>{
-                             {MakeF16(0, 0, 1), "5.96046448e-08h"},  // Smallest
-                             {MakeF16(1, 0, 1), "-5.96046448e-08h"},
-                             {MakeF16(0, 0, 2), "1.1920929e-07h"},
-                             {MakeF16(1, 0, 2), "-1.1920929e-07h"},
-                             {MakeF16(0, 0, 0x3ffu), "6.09755516e-05h"},   // Largest
-                             {MakeF16(1, 0, 0x3ffu), "-6.09755516e-05h"},  // Largest
-                             {MakeF16(0, 0, 0x3afu), "5.620718e-05h"},     // Scattered bits
-                             {MakeF16(1, 0, 0x3afu), "-5.620718e-05h"},    // Scattered bits
-                             {MakeF16(0, 0, 0x2c7u), "4.23789024e-05h"},   // Scattered bits
-                             {MakeF16(1, 0, 0x2c7u), "-4.23789024e-05h"},  // Scattered bits
+                             {MakeF16(0, 0, 1), "0.00000005960464477539h"},  // Smallest
+                             {MakeF16(1, 0, 1), "-0.00000005960464477539h"},
+                             {MakeF16(0, 0, 2), "0.00000011920928955078h"},
+                             {MakeF16(1, 0, 2), "-0.00000011920928955078h"},
+                             {MakeF16(0, 0, 0x3ffu), "0.00006097555160522461h"},   // Largest
+                             {MakeF16(1, 0, 0x3ffu), "-0.00006097555160522461h"},  // Largest
+                             {MakeF16(0, 0, 0x3afu), "0.00005620718002319336h"},   // Scattered bits
+                             {MakeF16(1, 0, 0x3afu), "-0.00005620718002319336h"},  // Scattered bits
+                             {MakeF16(0, 0, 0x2c7u), "0.00004237890243530273h"},   // Scattered bits
+                             {MakeF16(1, 0, 0x2c7u), "-0.00004237890243530273h"},  // Scattered bits
                          }));
 
 }  // namespace

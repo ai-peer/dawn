@@ -1,5 +1,5 @@
 fn round_773a8f() {
-  const arg_0 = 3.4;
+  const arg_0 = 3.39999999999999991118;
   var res = round(arg_0);
 }
 
