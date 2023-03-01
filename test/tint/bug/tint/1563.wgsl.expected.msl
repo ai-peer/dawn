@@ -3,9 +3,19 @@
 using namespace metal;
 float foo() {
   int const oob = 99;
-  float const b = float4(0.0f)[min(uint(oob), 3u)];
+  int const index = oob;
+  bool const predicate = (uint(index) < 3u);
+  float predicated_load = 0.0f;
+  if (predicate) {
+    predicated_load = float4(0.0f)[index];
+  }
+  float const b = predicated_load;
   float4 v = 0.0f;
-  v[min(uint(oob), 3u)] = b;
+  int const index_1 = oob;
+  bool const predicate_1 = (uint(index_1) < 3u);
+  if (predicate_1) {
+    v[index_1] = b;
+  }
   return b;
 }
 

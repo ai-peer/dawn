@@ -1,10 +1,9 @@
 ; SPIR-V
 ; Version: 1.3
 ; Generator: Google Tint Compiler; 0
-; Bound: 29
+; Bound: 36
 ; Schema: 0
                OpCapability Shader
-         %17 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %tint_symbol_1 "tint_symbol_1" %tint_symbol_2_1
                OpExecutionMode %tint_symbol_1 LocalSize 1 1 1
@@ -14,6 +13,7 @@
                OpName %tint_symbol "tint_symbol"
                OpName %tint_symbol_1_inner "tint_symbol_1_inner"
                OpName %tint_symbol_2 "tint_symbol_2"
+               OpName %predicated_load "predicated_load"
                OpName %tint_symbol_1 "tint_symbol_1"
                OpDecorate %tint_symbol_2_1 BuiltIn LocalInvocationIndex
                OpDecorate %tint_symbol_block Block
@@ -33,23 +33,34 @@
           %8 = OpTypeFunction %void %uint
         %int = OpTypeInt 32 1
          %14 = OpConstantNull %int
-     %uint_0 = OpConstant %uint 0
      %uint_1 = OpConstant %uint 1
+       %bool = OpTypeBool
+%_ptr_Function_uint = OpTypePointer Function %uint
+         %23 = OpConstantNull %uint
+     %uint_0 = OpConstant %uint 0
 %_ptr_StorageBuffer_uint = OpTypePointer StorageBuffer %uint
-         %24 = OpTypeFunction %void
+         %31 = OpTypeFunction %void
 %tint_symbol_1_inner = OpFunction %void None %8
 %tint_symbol_2 = OpFunctionParameter %uint
          %12 = OpLabel
-         %18 = OpArrayLength %uint %tint_symbol 0
-         %20 = OpISub %uint %18 %uint_1
-         %16 = OpExtInst %uint %17 UMin %tint_symbol_2 %20
-         %22 = OpAccessChain %_ptr_StorageBuffer_uint %tint_symbol %uint_0 %16
-         %23 = OpLoad %uint %22
+%predicated_load = OpVariable %_ptr_Function_uint Function %23
+         %16 = OpArrayLength %uint %tint_symbol 0
+         %18 = OpISub %uint %16 %uint_1
+         %19 = OpULessThan %bool %tint_symbol_2 %18
+               OpSelectionMerge %24 None
+               OpBranchConditional %19 %25 %24
+         %25 = OpLabel
+         %28 = OpAccessChain %_ptr_StorageBuffer_uint %tint_symbol %uint_0 %tint_symbol_2
+         %29 = OpLoad %uint %28
+               OpStore %predicated_load %29
+               OpBranch %24
+         %24 = OpLabel
+         %30 = OpLoad %uint %predicated_load
                OpReturn
                OpFunctionEnd
-%tint_symbol_1 = OpFunction %void None %24
-         %26 = OpLabel
-         %28 = OpLoad %uint %tint_symbol_2_1
-         %27 = OpFunctionCall %void %tint_symbol_1_inner %28
+%tint_symbol_1 = OpFunction %void None %31
+         %33 = OpLabel
+         %35 = OpLoad %uint %tint_symbol_2_1
+         %34 = OpFunctionCall %void %tint_symbol_1_inner %35
                OpReturn
                OpFunctionEnd

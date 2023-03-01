@@ -52,9 +52,25 @@ fn textureLoadExternal(plane0 : texture_2d<f32>, plane1 : texture_2d<f32>, coord
 
 @compute @workgroup_size(1)
 fn main() {
-  var red : vec4<f32> = textureLoadExternal(t, ext_tex_plane_1, clamp(vec2<i32>(10, 10), vec2(0), vec2<i32>((vec2<u32>(textureDimensions(t)) - vec2(1)))), ext_tex_params);
-  textureStore(outImage, clamp(vec2<i32>(0, 0), vec2(0), vec2<i32>((vec2<u32>(textureDimensions(outImage)) - vec2(1)))), red);
-  var green : vec4<f32> = textureLoadExternal(t, ext_tex_plane_1, clamp(vec2<i32>(70, 118), vec2(0), vec2<i32>((vec2<u32>(textureDimensions(t)) - vec2(1)))), ext_tex_params);
-  textureStore(outImage, clamp(vec2<i32>(1, 0), vec2(0), vec2<i32>((vec2<u32>(textureDimensions(outImage)) - vec2(1)))), green);
+  let coords = vec2<i32>(10, 10);
+  var texture_load : vec4<f32>;
+  if (all((vec2<u32>(coords) < textureDimensions(t)))) {
+    texture_load = textureLoadExternal(t, ext_tex_plane_1, coords, ext_tex_params);
+  }
+  var red : vec4<f32> = texture_load;
+  let coords_1 = vec2<i32>(0, 0);
+  if (all((vec2<u32>(coords_1) < textureDimensions(outImage)))) {
+    textureStore(outImage, coords_1, red);
+  }
+  let coords_2 = vec2<i32>(70, 118);
+  var texture_load_1 : vec4<f32>;
+  if (all((vec2<u32>(coords_2) < textureDimensions(t)))) {
+    texture_load_1 = textureLoadExternal(t, ext_tex_plane_1, coords_2, ext_tex_params);
+  }
+  var green : vec4<f32> = texture_load_1;
+  let coords_3 = vec2<i32>(1, 0);
+  if (all((vec2<u32>(coords_3) < textureDimensions(outImage)))) {
+    textureStore(outImage, coords_3, green);
+  }
   return;
 }
