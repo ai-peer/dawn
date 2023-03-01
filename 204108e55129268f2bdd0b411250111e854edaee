@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfa584b0_d7049e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:57:21Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "204108e55129268f2bdd0b411250111e854edaee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85bb9cbc_11daf6e4",
+        "filename": "src/dawn/native/SubresourceStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:57:21Z",
+      "side": 1,
+      "message": "Cool! This could also be used here\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandValidation.cpp;drc\u003de70563ac03f52960cb921bbc2b5ec838ac96620d;l\u003d58",
+      "revId": "204108e55129268f2bdd0b411250111e854edaee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
