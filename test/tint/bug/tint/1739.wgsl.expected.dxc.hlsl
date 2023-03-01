@@ -1,7 +1,3 @@
-int2 tint_clamp(int2 e, int2 low, int2 high) {
-  return min(max(e, low), high);
-}
-
 struct GammaTransferParams {
   float G;
   float A;
@@ -40,24 +36,48 @@ float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, i
   const int2 coord1 = (coord >> (1u).xx);
   float3 color = float3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
+    const uint level = 0u;
     int3 tint_tmp;
     plane0.GetDimensions(0, tint_tmp.x, tint_tmp.y, tint_tmp.z);
-    const uint level = min(0u, (tint_tmp.z - 1u));
+    const uint level_clamped = min(level, (tint_tmp.z - 1u));
+    const int2 coords = coord;
+    float4 predicated_value = float4(0.0f, 0.0f, 0.0f, 0.0f);
     int3 tint_tmp_1;
-    plane0.GetDimensions(level, tint_tmp_1.x, tint_tmp_1.y, tint_tmp_1.z);
-    color = plane0.Load(int3(tint_clamp(coord, (0).xx, int2((tint_tmp_1.xy - (1u).xx))), int(level))).rgb;
-  } else {
+    plane0.GetDimensions(level_clamped, tint_tmp_1.x, tint_tmp_1.y, tint_tmp_1.z);
     int3 tint_tmp_2;
     plane0.GetDimensions(0, tint_tmp_2.x, tint_tmp_2.y, tint_tmp_2.z);
-    const uint level_1 = min(0u, (tint_tmp_2.z - 1u));
+    if ((all((uint2(coords) < tint_tmp_1.xy)) & (level < tint_tmp_2.z))) {
+      predicated_value = plane0.Load(int3(coords, int(level)));
+    }
+    color = predicated_value.rgb;
+  } else {
+    const uint level_1 = 0u;
     int3 tint_tmp_3;
-    plane1.GetDimensions(0, tint_tmp_3.x, tint_tmp_3.y, tint_tmp_3.z);
-    const uint level_2 = min(0u, (tint_tmp_3.z - 1u));
+    plane0.GetDimensions(0, tint_tmp_3.x, tint_tmp_3.y, tint_tmp_3.z);
+    const uint level_clamped_1 = min(level_1, (tint_tmp_3.z - 1u));
+    const int2 coords_1 = coord;
+    float4 predicated_value_1 = float4(0.0f, 0.0f, 0.0f, 0.0f);
     int3 tint_tmp_4;
-    plane0.GetDimensions(level_1, tint_tmp_4.x, tint_tmp_4.y, tint_tmp_4.z);
+    plane0.GetDimensions(level_clamped_1, tint_tmp_4.x, tint_tmp_4.y, tint_tmp_4.z);
     int3 tint_tmp_5;
-    plane1.GetDimensions(level_2, tint_tmp_5.x, tint_tmp_5.y, tint_tmp_5.z);
-    color = mul(params.yuvToRgbConversionMatrix, float4(plane0.Load(int3(tint_clamp(coord, (0).xx, int2((tint_tmp_4.xy - (1u).xx))), int(level_1))).r, plane1.Load(int3(tint_clamp(coord1, (0).xx, int2((tint_tmp_5.xy - (1u).xx))), int(level_2))).rg, 1.0f));
+    plane0.GetDimensions(0, tint_tmp_5.x, tint_tmp_5.y, tint_tmp_5.z);
+    if ((all((uint2(coords_1) < tint_tmp_4.xy)) & (level_1 < tint_tmp_5.z))) {
+      predicated_value_1 = plane0.Load(int3(coords_1, int(level_1)));
+    }
+    const uint level_2 = 0u;
+    int3 tint_tmp_6;
+    plane1.GetDimensions(0, tint_tmp_6.x, tint_tmp_6.y, tint_tmp_6.z);
+    const uint level_clamped_2 = min(level_2, (tint_tmp_6.z - 1u));
+    const int2 coords_2 = coord1;
+    float4 predicated_value_2 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    int3 tint_tmp_7;
+    plane1.GetDimensions(level_clamped_2, tint_tmp_7.x, tint_tmp_7.y, tint_tmp_7.z);
+    int3 tint_tmp_8;
+    plane1.GetDimensions(0, tint_tmp_8.x, tint_tmp_8.y, tint_tmp_8.z);
+    if ((all((uint2(coords_2) < tint_tmp_7.xy)) & (level_2 < tint_tmp_8.z))) {
+      predicated_value_2 = plane1.Load(int3(coords_2, int(level_2)));
+    }
+    color = mul(params.yuvToRgbConversionMatrix, float4(predicated_value_1.r, predicated_value_2.rg, 1.0f));
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -114,12 +134,18 @@ ExternalTextureParams ext_tex_params_load(uint offset) {
 [numthreads(1, 1, 1)]
 void main() {
   float4 red = textureLoadExternal(t, ext_tex_plane_1, (10).xx, ext_tex_params_load(0u));
-  int2 tint_tmp_6;
-  outImage.GetDimensions(tint_tmp_6.x, tint_tmp_6.y);
-  outImage[tint_clamp((0).xx, (0).xx, int2((tint_tmp_6 - (1u).xx)))] = red;
+  const int2 coords_3 = (0).xx;
+  int2 tint_tmp_9;
+  outImage.GetDimensions(tint_tmp_9.x, tint_tmp_9.y);
+  if (all((uint2(coords_3) < tint_tmp_9))) {
+    outImage[coords_3] = red;
+  }
   float4 green = textureLoadExternal(t, ext_tex_plane_1, int2(70, 118), ext_tex_params_load(0u));
-  int2 tint_tmp_7;
-  outImage.GetDimensions(tint_tmp_7.x, tint_tmp_7.y);
-  outImage[tint_clamp(int2(1, 0), (0).xx, int2((tint_tmp_7 - (1u).xx)))] = green;
+  const int2 coords_4 = int2(1, 0);
+  int2 tint_tmp_10;
+  outImage.GetDimensions(tint_tmp_10.x, tint_tmp_10.y);
+  if (all((uint2(coords_4) < tint_tmp_10))) {
+    outImage[coords_4] = green;
+  }
   return;
 }
