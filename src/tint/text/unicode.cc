@@ -330,7 +330,7 @@ bool CodePoint::IsXIDContinue() const {
                                               kXIDContinueRanges + kNumXIDContinueRanges, *this);
 }
 
-std::ostream& operator<<(std::ostream& out, CodePoint code_point) {
+utils::StringStream& operator<<(utils::StringStream& out, CodePoint code_point) {
     if (code_point < 0x7f) {
         // See https://en.cppreference.com/w/cpp/language/escape
         switch (code_point) {

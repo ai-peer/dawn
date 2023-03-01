@@ -1,7 +1,7 @@
 #version 310 es
 
 void acosh_3433e8() {
-  float res = 1.316957951f;
+  float res = 1.31695795059204101562f;
 }
 
 vec4 vertex_main() {
@@ -21,7 +21,7 @@ void main() {
 precision mediump float;
 
 void acosh_3433e8() {
-  float res = 1.316957951f;
+  float res = 1.31695795059204101562f;
 }
 
 void fragment_main() {
@@ -35,7 +35,7 @@ void main() {
 #version 310 es
 
 void acosh_3433e8() {
-  float res = 1.316957951f;
+  float res = 1.31695795059204101562f;
 }
 
 void compute_main() {

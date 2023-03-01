@@ -79,7 +79,7 @@ TEST_F(GlslGeneratorImplTest_Constructor, Type_Float) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(), HasSubstr("-0.000012f"));
+    EXPECT_THAT(gen.result(), HasSubstr("-0.00001200000042445026f"));
 }
 
 TEST_F(GlslGeneratorImplTest_Constructor, Type_F16) {
@@ -90,7 +90,7 @@ TEST_F(GlslGeneratorImplTest_Constructor, Type_F16) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(), HasSubstr("-0.00119972229hf"));
+    EXPECT_THAT(gen.result(), HasSubstr("-0.0011997222900390625hf"));
 }
 
 TEST_F(GlslGeneratorImplTest_Constructor, Type_Bool) {
@@ -240,7 +240,8 @@ TEST_F(GlslGeneratorImplTest_Constructor, Type_Mat_F32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
-    EXPECT_THAT(gen.result(), HasSubstr("mat2x3(vec3(1.0f, 2.0f, 3.0f), vec3(3.0f, 4.0f, 5.0f))"));
+    EXPECT_THAT(gen.result(), HasSubstr("mat2x3(vec3(1.0f, 2.0f, 3.0f), "
+                                        "vec3(3.0f, 4.0f, 5.0f))"));
 }
 
 TEST_F(GlslGeneratorImplTest_Constructor, Type_Mat_F16) {
@@ -279,8 +280,10 @@ TEST_F(GlslGeneratorImplTest_Constructor, Type_Mat_Complex_F32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
 
-    EXPECT_THAT(gen.result(), HasSubstr("mat4(vec4(2.0f, 3.0f, 4.0f, 8.0f), vec4(0.0f), "
-                                        "vec4(7.0f), vec4(42.0f, 21.0f, 6.0f, -5.0f))"));
+    EXPECT_THAT(gen.result(), HasSubstr("mat4(vec4(2.0f, 3.0f, 4.0f, "
+                                        "8.0f), vec4(0.0f), "
+                                        "vec4(7.0f), vec4(42.0f, 21.0f, "
+                                        "6.0f, -5.0f))"));
 }
 
 TEST_F(GlslGeneratorImplTest_Constructor, Type_Mat_Complex_F16) {

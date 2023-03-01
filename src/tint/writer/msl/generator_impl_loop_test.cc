@@ -155,7 +155,7 @@ TEST_F(MslGeneratorImplTest, Emit_LoopWithVarUsedInContinuing) {
 
     ASSERT_TRUE(gen.EmitStatement(outer)) << gen.error();
     EXPECT_EQ(gen.result(), R"(  while (true) {
-    float lhs = 2.400000095f;
+    float lhs = 2.40000009536743164062f;
     float other = 0.0f;
     break;
     {

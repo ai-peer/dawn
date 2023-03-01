@@ -79,7 +79,7 @@ TEST_F(WgslGeneratorImplTest_Constructor, Type_F32) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(), HasSubstr("f32(-0.000012f)"));
+    EXPECT_THAT(gen.result(), HasSubstr("f32(-0.00001200000042445026f)"));
 }
 
 TEST_F(WgslGeneratorImplTest_Constructor, Type_F16) {
@@ -90,7 +90,7 @@ TEST_F(WgslGeneratorImplTest_Constructor, Type_F16) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(), HasSubstr("f16(-1.19805336e-05h)"));
+    EXPECT_THAT(gen.result(), HasSubstr("f16(-0.00001198053359985352h)"));
 }
 
 TEST_F(WgslGeneratorImplTest_Constructor, Type_Bool) {
@@ -169,9 +169,9 @@ TEST_F(WgslGeneratorImplTest_Constructor, Type_Array) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(),
-                HasSubstr("array<vec3<f32>, 3u>(vec3<f32>(1.0f, 2.0f, 3.0f), "
-                          "vec3<f32>(4.0f, 5.0f, 6.0f), vec3<f32>(7.0f, 8.0f, 9.0f))"));
+    EXPECT_THAT(gen.result(), HasSubstr("array<vec3<f32>, 3u>(vec3<f32>(1.0f, 2.0f, 3.0f), "
+                                        "vec3<f32>(4.0f, 5.0f, 6.0f), vec3<f32>(7.0f, "
+                                        "8.0f, 9.0f))"));
 }
 
 TEST_F(WgslGeneratorImplTest_Constructor, Type_ImplicitArray) {
@@ -181,9 +181,9 @@ TEST_F(WgslGeneratorImplTest_Constructor, Type_ImplicitArray) {
     GeneratorImpl& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.error();
-    EXPECT_THAT(gen.result(),
-                HasSubstr("array(vec3<f32>(1.0f, 2.0f, 3.0f), "
-                          "vec3<f32>(4.0f, 5.0f, 6.0f), vec3<f32>(7.0f, 8.0f, 9.0f))"));
+    EXPECT_THAT(gen.result(), HasSubstr("array(vec3<f32>(1.0f, 2.0f, 3.0f), "
+                                        "vec3<f32>(4.0f, 5.0f, 6.0f), "
+                                        "vec3<f32>(7.0f, 8.0f, 9.0f))"));
 }
 
 }  // namespace

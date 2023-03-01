@@ -4,5 +4,5 @@ void unused_entry_point() {
 }
 
 void foo() {
-  const float b = 9.9999461e-41f;
+  const float b = 1e-40f;
 }
