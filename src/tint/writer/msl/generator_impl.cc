@@ -53,6 +53,7 @@
 #include "src/tint/transform/promote_initializers_to_let.h"
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_phonies.h"
+#include "src/tint/transform/robustness.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/unshadow.h"
 #include "src/tint/transform/vectorize_scalar_matrix_initializers.h"
@@ -217,12 +218,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         transform::CanonicalizeEntryPointIO::ShaderStyle::kMsl, options.fixed_sample_mask,
         options.emit_vertex_point_size);
 
-    if (options.generate_external_texture_bindings) {
-        auto new_bindings_map = GenerateExternalTextureBindings(in);
-        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
-    }
-    manager.Add<transform::MultiplanarExternalTexture>();
-
     manager.Add<transform::PreservePadding>();
 
     manager.Add<transform::Unshadow>();
@@ -232,13 +227,27 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
-    manager.Add<transform::CanonicalizeEntryPointIO>();
     manager.Add<transform::PromoteSideEffectsToDecl>();
+
+    if (!options.disable_robustness) {
+        manager.Add<transform::Robustness>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    manager.Add<transform::CanonicalizeEntryPointIO>();
+
     manager.Add<transform::PromoteInitializersToLet>();
 
     // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
     // TODO(crbug.com/tint/1752): This is only necessary for Metal versions older than 2.3.
     manager.Add<transform::DemoteToHelper>();
+
+    if (options.generate_external_texture_bindings) {
+        // Note: more efficient for MultiplanarExternalTexture to come after Robustness
+        auto new_bindings_map = GenerateExternalTextureBindings(in);
+        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
+        manager.Add<transform::MultiplanarExternalTexture>();
+    }
 
     manager.Add<transform::VectorizeScalarMatrixInitializers>();
     manager.Add<transform::RemovePhonies>();

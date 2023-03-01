@@ -57,6 +57,7 @@
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_continue_in_switch.h"
 #include "src/tint/transform/remove_phonies.h"
+#include "src/tint/transform/robustness.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/truncate_interstage_variables.h"
 #include "src/tint/transform/unshadow.h"
@@ -189,19 +190,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         manager.Add<transform::BuiltinPolyfill>();
     }
 
-    // Build the config for the internal ArrayLengthFromUniform transform.
-    auto& array_length_from_uniform = options.array_length_from_uniform;
-    transform::ArrayLengthFromUniform::Config array_length_from_uniform_cfg(
-        array_length_from_uniform.ubo_binding);
-    array_length_from_uniform_cfg.bindpoint_to_size_index =
-        array_length_from_uniform.bindpoint_to_size_index;
-
-    if (options.generate_external_texture_bindings) {
-        auto new_bindings_map = GenerateExternalTextureBindings(in);
-        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
-    }
-    manager.Add<transform::MultiplanarExternalTexture>();
-
     manager.Add<transform::Unshadow>();  // Must come before DirectVariableAccess
 
     manager.Add<transform::DirectVariableAccess>();
@@ -220,6 +208,14 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
+
+    manager.Add<transform::PromoteSideEffectsToDecl>();
+
+    if (!options.disable_robustness) {
+        manager.Add<transform::Robustness>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<transform::CanonicalizeEntryPointIO>();
 
     if (options.interstage_locations.any()) {
@@ -246,10 +242,23 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     // assumes that num_workgroups builtins only appear as struct members and are
     // only accessed directly via member accessors.
     manager.Add<transform::NumWorkgroupsFromUniform>();
-    manager.Add<transform::PromoteSideEffectsToDecl>();
     manager.Add<transform::VectorizeScalarMatrixInitializers>();
     manager.Add<transform::SimplifyPointers>();
     manager.Add<transform::RemovePhonies>();
+
+    // Build the config for the internal ArrayLengthFromUniform transform.
+    auto& array_length_from_uniform = options.array_length_from_uniform;
+    transform::ArrayLengthFromUniform::Config array_length_from_uniform_cfg(
+        array_length_from_uniform.ubo_binding);
+    array_length_from_uniform_cfg.bindpoint_to_size_index =
+        array_length_from_uniform.bindpoint_to_size_index;
+
+    if (options.generate_external_texture_bindings) {
+        // Note: more efficient for MultiplanarExternalTexture to come after Robustness
+        auto new_bindings_map = GenerateExternalTextureBindings(in);
+        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
+        manager.Add<transform::MultiplanarExternalTexture>();
+    }
 
     // DemoteToHelper must come after CanonicalizeEntryPointIO, PromoteSideEffectsToDecl, and
     // ExpandCompoundAssignment.
