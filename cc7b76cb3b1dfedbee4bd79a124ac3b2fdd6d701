@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "641b0133_ec5a9fce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "LGTM! Thanks a ton for the iterations",
+      "revId": "cc7b76cb3b1dfedbee4bd79a124ac3b2fdd6d701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f36da2db_41706bf5",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t work because it is not the opposite of the condition above. Floats would trigger the static assert?",
+      "range": {
+        "startLine": 64,
+        "startChar": 22,
+        "endLine": 64,
+        "endChar": 43
+      },
+      "revId": "cc7b76cb3b1dfedbee4bd79a124ac3b2fdd6d701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6609a51_a053e3e6",
+        "filename": "src/dawn/tests/unittests/NumericTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "Great, thank you!",
+      "revId": "cc7b76cb3b1dfedbee4bd79a124ac3b2fdd6d701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e820d257_069f9520",
+        "filename": "src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "u-u-nit: the same view can be used for both bindgroups I think.",
+      "revId": "cc7b76cb3b1dfedbee4bd79a124ac3b2fdd6d701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

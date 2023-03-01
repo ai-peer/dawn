@@ -135,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d682d6_5df560ed",
+        "filename": "src/dawn/common/Numeric.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f01de0ae_efde7639",
+      "range": {
+        "startLine": 80,
+        "startChar": 22,
+        "endLine": 80,
+        "endChar": 44
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ec02be3_4a102e64",
@@ -723,6 +747,24 @@
       "side": 1,
       "message": "Done. IIUC",
       "parentUuid": "95797577_dca9faab",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d038a68_5069c46a",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T03:45:21Z",
+      "side": 1,
+      "message": "Yep that was it, thanks!",
+      "parentUuid": "a0ceb249_a4ea9581",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
