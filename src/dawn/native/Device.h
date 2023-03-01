@@ -53,7 +53,6 @@ class CallbackTaskManager;
 class DynamicUploader;
 class ErrorScopeStack;
 class OwnedCompilationMessages;
-struct CallbackTask;
 struct InternalPipelineStore;
 struct ShaderModuleParseResult;
 

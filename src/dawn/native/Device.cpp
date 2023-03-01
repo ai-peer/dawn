@@ -91,42 +91,6 @@ struct DeviceBase::DeprecationWarnings {
     size_t count = 0;
 };
 
-namespace {
-struct LoggingCallbackTask : CallbackTask {
-  public:
-    LoggingCallbackTask() = delete;
-    LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
-                        WGPULoggingType loggingType,
-                        const char* message,
-                        void* userdata)
-        : mCallback(loggingCallback),
-          mLoggingType(loggingType),
-          mMessage(message),
-          mUserdata(userdata) {
-        // Since the Finish() will be called in uncertain future in which time the message
-        // may already disposed, we must keep a local copy in the CallbackTask.
-    }
-
-    void Finish() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
-
-    void HandleShutDown() override {
-        // Do the logging anyway
-        mCallback(mLoggingType, mMessage.c_str(), mUserdata);
-    }
-
-    void HandleDeviceLoss() override { mCallback(mLoggingType, mMessage.c_str(), mUserdata); }
-
-  private:
-    // As all deferred callback tasks will be triggered before modifying the registered
-    // callback or shutting down, we are ensured that callback function and userdata pointer
-    // stored in tasks is valid when triggered.
-    wgpu::LoggingCallback mCallback;
-    WGPULoggingType mLoggingType;
-    std::string mMessage;
-    void* mUserdata;
-};
-}  // anonymous namespace
-
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
     DeviceBase* device,
     const ComputePipelineDescriptor& descriptor,
@@ -389,10 +353,6 @@ void DeviceBase::Destroy() {
         // Call all the callbacks immediately as the device is about to shut down.
         // TODO(crbug.com/dawn/826): Cancel the tasks that are in flight if possible.
         mAsyncTaskManager->WaitAllPendingTasks();
-        auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
-        for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->HandleShutDown();
-        }
     }
 
     // Disconnect the device, depending on which state we are currently in.
@@ -523,10 +483,6 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
 
         // TODO(crbug.com/dawn/826): Cancel the tasks that are in flight if possible.
         mAsyncTaskManager->WaitAllPendingTasks();
-        auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
-        for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->HandleDeviceLoss();
-        }
 
         // Still forward device loss errors to the error scopes so they all reject.
         mErrorScopeStack->HandleError(ToWGPUErrorType(type), message);
@@ -1361,9 +1317,9 @@ void DeviceBase::EmitLog(const char* message) {
 void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
     if (mLoggingCallback != nullptr) {
         // Use the thread-safe CallbackTaskManager routine
-        std::unique_ptr<LoggingCallbackTask> callbackTask = std::make_unique<LoggingCallbackTask>(
-            mLoggingCallback, loggingType, message, mLoggingUserdata);
-        mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+        mCallbackTaskManager->AddCallbackTask(
+            [callback = mLoggingCallback, loggingType, userdata = mLoggingUserdata,
+             msg = std::string(message)]() { callback(loggingType, msg.c_str(), userdata); });
     }
 }
 
@@ -1538,12 +1494,15 @@ void DeviceBase::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> com
         WGPUCreatePipelineAsyncStatus status =
             CreatePipelineAsyncStatusFromErrorType(error->GetType());
         mCallbackTaskManager->AddCallbackTask(
-            std::make_unique<CreateComputePipelineAsyncCallbackTask>(status, error->GetMessage(),
-                                                                     callback, userdata));
+            [callback, message = error->GetFormattedMessage(), status, userdata]() {
+                callback(status, nullptr, message.c_str(), userdata);
+            });
     } else {
-        mCallbackTaskManager->AddCallbackTask(
-            std::make_unique<CreateComputePipelineAsyncCallbackTask>(
-                AddOrGetCachedComputePipeline(std::move(computePipeline)), callback, userdata));
+        computePipeline = AddOrGetCachedComputePipeline(std::move(computePipeline));
+        mCallbackTaskManager->AddCallbackTask([callback, computePipeline, userdata]() mutable {
+            callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(computePipeline.Detach()),
+                     nullptr, userdata);
+        });
     }
 }
 
@@ -1558,12 +1517,14 @@ void DeviceBase::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> rende
         WGPUCreatePipelineAsyncStatus status =
             CreatePipelineAsyncStatusFromErrorType(error->GetType());
         mCallbackTaskManager->AddCallbackTask(
-            std::make_unique<CreateRenderPipelineAsyncCallbackTask>(status, error->GetMessage(),
-                                                                    callback, userdata));
+            [callback, message = error->GetFormattedMessage(), status, userdata]() {
+                callback(status, nullptr, message.c_str(), userdata);
+            });
     } else {
-        mCallbackTaskManager->AddCallbackTask(
-            std::make_unique<CreateRenderPipelineAsyncCallbackTask>(
-                AddOrGetCachedRenderPipeline(std::move(renderPipeline)), callback, userdata));
+        mCallbackTaskManager->AddCallbackTask([callback, renderPipeline, userdata]() mutable {
+            callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(renderPipeline.Detach()), nullptr,
+                     userdata);
+        });
     }
 }
 
@@ -1780,8 +1741,8 @@ void DeviceBase::FlushCallbackTaskQueue() {
         // such reentrant call, we remove all the callback tasks from mCallbackTaskManager,
         // update mCallbackTaskManager, then call all the callbacks.
         auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
-        for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->Finish();
+        for (auto& callbackTask : callbackTasks) {
+            callbackTask();
         }
     }
 }
@@ -1806,51 +1767,29 @@ void DeviceBase::AddComputePipelineAsyncCallbackTask(
     Ref<ComputePipelineBase> pipeline,
     WGPUCreateComputePipelineAsyncCallback callback,
     void* userdata) {
-    // CreateComputePipelineAsyncWaitableCallbackTask is declared as an internal class as it
-    // needs to call the private member function DeviceBase::AddOrGetCachedComputePipeline().
-    struct CreateComputePipelineAsyncWaitableCallbackTask final
-        : CreateComputePipelineAsyncCallbackTask {
-        using CreateComputePipelineAsyncCallbackTask::CreateComputePipelineAsyncCallbackTask;
-        void Finish() final {
-            // TODO(dawn:529): call AddOrGetCachedComputePipeline() asynchronously in
-            // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
-            // thread-safe.
-            ASSERT(mPipeline != nullptr);
-            mPipeline = mPipeline->GetDevice()->AddOrGetCachedComputePipeline(mPipeline);
-
-            CreateComputePipelineAsyncCallbackTask::Finish();
-        }
-    };
-
-    mCallbackTaskManager->AddCallbackTask(
-        std::make_unique<CreateComputePipelineAsyncWaitableCallbackTask>(std::move(pipeline),
-                                                                         callback, userdata));
+    mCallbackTaskManager->AddCallbackTask([callback, pipeline, userdata]() mutable {
+        // TODO(dawn:529): call AddOrGetCachedComputePipeline() asynchronously in
+        // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
+        // thread-safe.
+        ASSERT(pipeline != nullptr);
+        pipeline = pipeline->GetDevice()->AddOrGetCachedComputePipeline(std::move(pipeline));
+        callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline.Detach()), nullptr,
+                 userdata);
+    });
 }
 
 void DeviceBase::AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipeline,
                                                     WGPUCreateRenderPipelineAsyncCallback callback,
                                                     void* userdata) {
-    // CreateRenderPipelineAsyncWaitableCallbackTask is declared as an internal class as it
-    // needs to call the private member function DeviceBase::AddOrGetCachedRenderPipeline().
-    struct CreateRenderPipelineAsyncWaitableCallbackTask final
-        : CreateRenderPipelineAsyncCallbackTask {
-        using CreateRenderPipelineAsyncCallbackTask::CreateRenderPipelineAsyncCallbackTask;
-
-        void Finish() final {
-            // TODO(dawn:529): call AddOrGetCachedRenderPipeline() asynchronously in
-            // CreateRenderPipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
-            // thread-safe.
-            if (mPipeline.Get() != nullptr) {
-                mPipeline = mPipeline->GetDevice()->AddOrGetCachedRenderPipeline(mPipeline);
-            }
-
-            CreateRenderPipelineAsyncCallbackTask::Finish();
-        }
-    };
-
-    mCallbackTaskManager->AddCallbackTask(
-        std::make_unique<CreateRenderPipelineAsyncWaitableCallbackTask>(std::move(pipeline),
-                                                                        callback, userdata));
+    mCallbackTaskManager->AddCallbackTask([callback, pipeline, userdata]() mutable {
+        // TODO(dawn:529): call AddOrGetCachedComputePipeline() asynchronously in
+        // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
+        // thread-safe.
+        ASSERT(pipeline != nullptr);
+        pipeline = pipeline->GetDevice()->AddOrGetCachedRenderPipeline(std::move(pipeline));
+        callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline.Detach()), nullptr,
+                 userdata);
+    });
 }
 
 PipelineCompatibilityToken DeviceBase::GetNextPipelineCompatibilityToken() {

@@ -131,25 +131,19 @@ ResultOrError<UploadHandle> UploadTextureDataAligningBytesPerRowAndOffset(
 }
 
 struct SubmittedWorkDone : TrackTaskCallback {
-    SubmittedWorkDone(dawn::platform::Platform* platform,
-                      WGPUQueueWorkDoneCallback callback,
-                      void* userdata)
-        : TrackTaskCallback(platform), mCallback(callback), mUserdata(userdata) {}
-    void Finish() override {
+    SubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata)
+        : mCallback(callback), mUserdata(userdata) {}
+    void Finish(dawn::platform::Platform* platform,
+                ExecutionSerial serial,
+                CallbackTaskManager* callbackTaskManager) &&
+        override {
         ASSERT(mCallback != nullptr);
-        ASSERT(mSerial != kMaxExecutionSerial);
-        TRACE_EVENT1(mPlatform, General, "Queue::SubmittedWorkDone::Finished", "serial",
-                     uint64_t(mSerial));
-        mCallback(WGPUQueueWorkDoneStatus_Success, mUserdata);
-        mCallback = nullptr;
+        TRACE_EVENT1(platform, General, "Queue::SubmittedWorkDone::Finished", "serial",
+                     uint64_t(serial));
+        callbackTaskManager->AddCallbackTask([callback = mCallback, userdata = mUserdata]() {
+            callback(WGPUQueueWorkDoneStatus_Success, userdata);
+        });
     }
-    void HandleDeviceLoss() override {
-        ASSERT(mCallback != nullptr);
-        mCallback(WGPUQueueWorkDoneStatus_DeviceLost, mUserdata);
-        mCallback = nullptr;
-    }
-    void HandleShutDown() override { HandleDeviceLoss(); }
-    ~SubmittedWorkDone() override = default;
 
   private:
     WGPUQueueWorkDoneCallback mCallback = nullptr;
@@ -166,10 +160,6 @@ class ErrorQueue : public QueueBase {
     }
 };
 }  // namespace
-
-void TrackTaskCallback::SetFinishedSerial(ExecutionSerial serial) {
-    mSerial = serial;
-}
 
 // QueueBase
 
@@ -212,7 +202,7 @@ void QueueBase::APIOnSubmittedWorkDone(uint64_t signalValue,
     }
 
     std::unique_ptr<SubmittedWorkDone> task =
-        std::make_unique<SubmittedWorkDone>(GetDevice()->GetPlatform(), callback, userdata);
+        std::make_unique<SubmittedWorkDone>(callback, userdata);
 
     // Technically we only need to wait for previously submitted work but OnSubmittedWorkDone is
     // also used to make sure ALL queue work is finished in tests, so we also wait for pending
@@ -235,8 +225,9 @@ void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSeri
     // If the serial indicated command has been completed, the task will be moved to callback task
     // manager.
     if (serial <= GetDevice()->GetCompletedCommandSerial()) {
-        task->SetFinishedSerial(GetDevice()->GetCompletedCommandSerial());
-        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+        std::move(*task).Finish(GetDevice()->GetPlatform(),
+                                GetDevice()->GetCompletedCommandSerial(),
+                                GetDevice()->GetCallbackTaskManager());
     } else {
         mTasksInFlight.Enqueue(std::move(task), serial);
     }
@@ -265,14 +256,15 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
     // Tasks' serials have passed. Move them to the callback task manager. They
     // are ready to be called.
     for (auto& task : tasks) {
-        task->SetFinishedSerial(finishedSerial);
-        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
+        std::move(*task).Finish(GetDevice()->GetPlatform(), finishedSerial,
+                                GetDevice()->GetCallbackTaskManager());
     }
 }
 
 void QueueBase::HandleDeviceLoss() {
     for (auto& task : mTasksInFlight.IterateAll()) {
-        task->HandleDeviceLoss();
+        std::move(*task).Finish(GetDevice()->GetPlatform(), kMaxExecutionSerial,
+                                GetDevice()->GetCallbackTaskManager());
     }
     mTasksInFlight.Clear();
 }

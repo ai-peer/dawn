@@ -27,15 +27,15 @@ bool CallbackTaskManager::IsEmpty() {
     return mCallbackTaskQueue.empty();
 }
 
-std::vector<std::unique_ptr<CallbackTask>> CallbackTaskManager::AcquireCallbackTasks() {
+std::vector<std::function<void()>> CallbackTaskManager::AcquireCallbackTasks() {
     std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
 
-    std::vector<std::unique_ptr<CallbackTask>> allTasks;
+    std::vector<std::function<void()>> allTasks;
     allTasks.swap(mCallbackTaskQueue);
     return allTasks;
 }
 
-void CallbackTaskManager::AddCallbackTask(std::unique_ptr<CallbackTask> callbackTask) {
+void CallbackTaskManager::AddCallbackTask(std::function<void()> callbackTask) {
     std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
     mCallbackTaskQueue.push_back(std::move(callbackTask));
 }

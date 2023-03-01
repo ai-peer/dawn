@@ -34,15 +34,11 @@ namespace dawn::native {
 // execution serials of completion in the queue for them. This implements 'CallbackTask' so that the
 // aysnc callback can be fired by 'CallbackTaskManager' in a unified way. This also caches the
 // finished serial, as the callback needs to use it in the trace event.
-struct TrackTaskCallback : CallbackTask {
-    explicit TrackTaskCallback(dawn::platform::Platform* platform) : mPlatform(platform) {}
-    void SetFinishedSerial(ExecutionSerial serial);
-    ~TrackTaskCallback() override = default;
-
-  protected:
-    dawn::platform::Platform* mPlatform = nullptr;
-    // The serial by which time the callback can be fired.
-    ExecutionSerial mSerial = kMaxExecutionSerial;
+struct TrackTaskCallback {
+    virtual ~TrackTaskCallback() = default;
+    virtual void Finish(dawn::platform::Platform* platform,
+                        ExecutionSerial serial,
+                        CallbackTaskManager* callbackTaskManager) && = 0;
 };
 
 class QueueBase : public ApiObjectBase {
