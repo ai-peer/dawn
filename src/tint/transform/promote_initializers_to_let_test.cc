@@ -273,8 +273,13 @@ fn f() {
 fn f() {
   var insert_after = 1;
   let tint_symbol : array<f32, 4u> = array<f32, 4u>(0.0, 1.0, 2.0, 3.0);
-  for(var i = tint_symbol[insert_after]; ; ) {
-    break;
+  {
+    var i = tint_symbol[insert_after];
+    loop {
+      {
+        break;
+      }
+    }
   }
 }
 )";
@@ -302,8 +307,13 @@ fn f() {
   let runtime_value = 1;
   var insert_after = 1;
   let tint_symbol : array<f32, 4u> = arr;
-  for(var i = tint_symbol[runtime_value]; ; ) {
-    break;
+  {
+    var i = tint_symbol[runtime_value];
+    loop {
+      {
+        break;
+      }
+    }
   }
 }
 )";
@@ -333,8 +343,13 @@ fn f() {
   let runtime_value = 1;
   var insert_after = 1;
   let tint_symbol : array<f32, 4u> = arr;
-  for(var i = tint_symbol[runtime_value]; ; ) {
-    break;
+  {
+    var i = tint_symbol[runtime_value];
+    loop {
+      {
+        break;
+      }
+    }
   }
 }
 )";
@@ -378,8 +393,13 @@ fn get_b_runtime(s : S) -> f32 {
 fn f() {
   var insert_after = 1;
   let tint_symbol : S = S(1, 2.0, vec3<f32>());
-  for(var x = get_b_runtime(tint_symbol); ; ) {
-    break;
+  {
+    var x = get_b_runtime(tint_symbol);
+    loop {
+      {
+        break;
+      }
+    }
   }
 }
 )";
@@ -413,8 +433,13 @@ struct S {
 fn f() {
   var insert_after = 1;
   let tint_symbol : S = S(1, 2.0, vec3<f32>());
-  for(var x = get_b_runtime(tint_symbol); ; ) {
-    break;
+  {
+    var x = get_b_runtime(tint_symbol);
+    loop {
+      {
+        break;
+      }
+    }
   }
 }
 
@@ -1302,8 +1327,20 @@ fn Y() {
 fn Z() {
   var i = 10;
   let tint_symbol_2 : array<i32, 1u> = array<i32, 1u>(i);
-  for(var f = tint_symbol_2[0]; (f < 10); f = (f + 1)) {
-    var i = 20;
+  {
+    var f = tint_symbol_2[0];
+    loop {
+      if (!((f < 10))) {
+        break;
+      }
+      {
+        var i = 20;
+      }
+
+      continuing {
+        f = (f + 1);
+      }
+    }
   }
 }
 )";
