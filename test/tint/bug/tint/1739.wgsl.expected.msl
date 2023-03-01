@@ -72,10 +72,6 @@ ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint
   return result;
 }
 
-int2 tint_clamp(int2 e, int2 low, int2 high) {
-  return min(max(e, low), high);
-}
-
 float3 gammaCorrection(float3 v, GammaTransferParams params) {
   bool3 const cond = (fabs(v) < float3(params.D));
   float3 const t_1 = (sign(v) * ((params.C * fabs(v)) + params.F));
@@ -87,12 +83,30 @@ float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<fl
   int2 const coord1 = (coord >> uint2(1u));
   float3 color = 0.0f;
   if ((params.numPlanes == 1u)) {
-    uint const level = min(0u, (plane0.get_num_mip_levels() - 1u));
-    color = plane0.read(uint2(tint_clamp(coord, int2(0), int2((uint2(plane0.get_width(level), plane0.get_height(level)) - uint2(1u))))), level).rgb;
+    uint const level = 0u;
+    uint const num_levels = plane0.get_num_mip_levels();
+    uint2 const coords = uint2(coord);
+    float4 predicated_value = 0.0f;
+    if (bool((level < num_levels) & all((coords < uint2(plane0.get_width(min(level, (num_levels - 1u))), plane0.get_height(min(level, (num_levels - 1u)))))))) {
+      predicated_value = plane0.read(uint2(coords), level);
+    }
+    color = predicated_value.rgb;
   } else {
-    uint const level_1 = min(0u, (plane0.get_num_mip_levels() - 1u));
-    uint const level_2 = min(0u, (plane1.get_num_mip_levels() - 1u));
-    color = (float4(plane0.read(uint2(tint_clamp(coord, int2(0), int2((uint2(plane0.get_width(level_1), plane0.get_height(level_1)) - uint2(1u))))), level_1)[0], plane1.read(uint2(tint_clamp(coord1, int2(0), int2((uint2(plane1.get_width(level_2), plane1.get_height(level_2)) - uint2(1u))))), level_2).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    uint const level_1 = 0u;
+    uint const num_levels_1 = plane0.get_num_mip_levels();
+    uint2 const coords_1 = uint2(coord);
+    float4 predicated_value_1 = 0.0f;
+    if (bool((level_1 < num_levels_1) & all((coords_1 < uint2(plane0.get_width(min(level_1, (num_levels_1 - 1u))), plane0.get_height(min(level_1, (num_levels_1 - 1u)))))))) {
+      predicated_value_1 = plane0.read(uint2(coords_1), level_1);
+    }
+    uint const level_2 = 0u;
+    uint const num_levels_2 = plane1.get_num_mip_levels();
+    uint2 const coords_2 = uint2(coord1);
+    float4 predicated_value_2 = 0.0f;
+    if (bool((level_2 < num_levels_2) & all((coords_2 < uint2(plane1.get_width(min(level_2, (num_levels_2 - 1u))), plane1.get_height(min(level_2, (num_levels_2 - 1u)))))))) {
+      predicated_value_2 = plane1.read(uint2(coords_2), level_2);
+    }
+    color = (float4(predicated_value_1[0], predicated_value_2.rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -104,9 +118,15 @@ float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<fl
 
 kernel void tint_symbol(texture2d<float, access::sample> tint_symbol_1 [[texture(0)]], texture2d<float, access::sample> tint_symbol_2 [[texture(1)]], const constant ExternalTextureParams_tint_packed_vec3* tint_symbol_3 [[buffer(0)]], texture2d<float, access::write> tint_symbol_4 [[texture(2)]]) {
   float4 red = textureLoadExternal(tint_symbol_1, tint_symbol_2, int2(10), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));
-  tint_symbol_4.write(red, uint2(tint_clamp(int2(0), int2(0), int2((uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height()) - uint2(1u))))));
+  uint2 const coords_3 = uint2(0u);
+  if (all((coords_3 < uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())))) {
+    tint_symbol_4.write(red, uint2(coords_3));
+  }
   float4 green = textureLoadExternal(tint_symbol_1, tint_symbol_2, int2(70, 118), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));
-  tint_symbol_4.write(green, uint2(tint_clamp(int2(1, 0), int2(0), int2((uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height()) - uint2(1u))))));
+  uint2 const coords_4 = uint2(1u, 0u);
+  if (all((coords_4 < uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())))) {
+    tint_symbol_4.write(green, uint2(coords_4));
+  }
   return;
 }
 
