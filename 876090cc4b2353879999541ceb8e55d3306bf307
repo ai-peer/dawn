@@ -33,6 +33,24 @@
       "message": "figured it out:\n\nthis is supposed to be 0. It\u0027s the index of the first mip level you want.\nKind of amazing the tests pass on so many of the bots\n\nI think we should add some ASSERTS to Update that checks that the range you pass to Update is actually a subset of the whole thing - could be a follow-up",
       "revId": "876090cc4b2353879999541ceb8e55d3306bf307",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a91b4df_eee7ea7a",
+        "filename": "src/dawn/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T18:35:16Z",
+      "side": 1,
+      "message": "Sorry, clarification\n\nthe mip level should be zero:\n`MakeSingle(Aspect::Color, layer, 0)`",
+      "parentUuid": "861f25e5_105a0d69",
+      "revId": "876090cc4b2353879999541ceb8e55d3306bf307",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
