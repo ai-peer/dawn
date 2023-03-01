@@ -11,7 +11,13 @@ void tint_symbol_1_inner(uint tint_symbol_2) {
   const int tint_symbol_3 = 0;
   const int tint_symbol_4 = 0;
   const int tint_symbol_5 = 0;
-  const uint tint_symbol_6 = tint_symbol.Load((4u * min(tint_symbol_2, (tint_symbol_11 - 1u))));
+  const uint index = tint_symbol_2;
+  const bool predicate = (uint(index) <= (tint_symbol_11 - 1u));
+  uint predicated_load = 0u;
+  if (predicate) {
+    predicated_load = tint_symbol.Load((4u * index));
+  }
+  const uint tint_symbol_6 = predicated_load;
 }
 
 [numthreads(1, 1, 1)]

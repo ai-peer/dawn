@@ -5,5 +5,11 @@ fn tint_symbol_1(@builtin(local_invocation_index) tint_symbol_2 : u32) {
   let tint_symbol_3 = 0;
   let tint_symbol_4 = 0;
   let tint_symbol_5 = 0;
-  let tint_symbol_6 = tint_symbol[min(tint_symbol_2, (arrayLength(&(tint_symbol)) - 1u))];
+  let index = tint_symbol_2;
+  let predicate = (u32(index) <= (arrayLength(&(tint_symbol)) - 1u));
+  var predicated_load : u32;
+  if (predicate) {
+    predicated_load = tint_symbol[index];
+  }
+  let tint_symbol_6 = predicated_load;
 }

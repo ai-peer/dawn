@@ -76,10 +76,26 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
 }
 
 void tint_symbol() {
-  vec4 red = textureLoadExternal(t_2, ext_tex_plane_1_1, clamp(ivec2(10), ivec2(0), ivec2((uvec2(uvec2(textureSize(t_2, 0))) - uvec2(1u)))), conv_ExternalTextureParams(ext_tex_params.inner));
-  imageStore(outImage, clamp(ivec2(0), ivec2(0), ivec2((uvec2(uvec2(imageSize(outImage))) - uvec2(1u)))), red);
-  vec4 green = textureLoadExternal(t_2, ext_tex_plane_1_1, clamp(ivec2(70, 118), ivec2(0), ivec2((uvec2(uvec2(textureSize(t_2, 0))) - uvec2(1u)))), conv_ExternalTextureParams(ext_tex_params.inner));
-  imageStore(outImage, clamp(ivec2(1, 0), ivec2(0), ivec2((uvec2(uvec2(imageSize(outImage))) - uvec2(1u)))), green);
+  ivec2 coords = ivec2(10);
+  vec4 texture_load = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+  if (all(lessThan(uvec2(coords), uvec2(textureSize(t_2, 0))))) {
+    texture_load = textureLoadExternal(t_2, ext_tex_plane_1_1, coords, conv_ExternalTextureParams(ext_tex_params.inner));
+  }
+  vec4 red = texture_load;
+  ivec2 coords_1 = ivec2(0);
+  if (all(lessThan(uvec2(coords_1), uvec2(imageSize(outImage))))) {
+    imageStore(outImage, coords_1, red);
+  }
+  ivec2 coords_2 = ivec2(70, 118);
+  vec4 texture_load_1 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+  if (all(lessThan(uvec2(coords_2), uvec2(textureSize(t_2, 0))))) {
+    texture_load_1 = textureLoadExternal(t_2, ext_tex_plane_1_1, coords_2, conv_ExternalTextureParams(ext_tex_params.inner));
+  }
+  vec4 green = texture_load_1;
+  ivec2 coords_3 = ivec2(1, 0);
+  if (all(lessThan(uvec2(coords_3), uvec2(imageSize(outImage))))) {
+    imageStore(outImage, coords_3, green);
+  }
   return;
 }
 

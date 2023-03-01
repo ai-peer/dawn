@@ -1,7 +1,3 @@
-int2 tint_clamp(int2 e, int2 low, int2 high) {
-  return min(max(e, low), high);
-}
-
 struct GammaTransferParams {
   float G;
   float A;
@@ -68,8 +64,8 @@ GammaTransferParams ext_tex_params_load_4(uint offset) {
   const uint scalar_offset_8 = ((offset + 20u)) / 4;
   const uint scalar_offset_9 = ((offset + 24u)) / 4;
   const uint scalar_offset_10 = ((offset + 28u)) / 4;
-  const GammaTransferParams tint_symbol_4 = {asfloat(ext_tex_params[scalar_offset_3 / 4][scalar_offset_3 % 4]), asfloat(ext_tex_params[scalar_offset_4 / 4][scalar_offset_4 % 4]), asfloat(ext_tex_params[scalar_offset_5 / 4][scalar_offset_5 % 4]), asfloat(ext_tex_params[scalar_offset_6 / 4][scalar_offset_6 % 4]), asfloat(ext_tex_params[scalar_offset_7 / 4][scalar_offset_7 % 4]), asfloat(ext_tex_params[scalar_offset_8 / 4][scalar_offset_8 % 4]), asfloat(ext_tex_params[scalar_offset_9 / 4][scalar_offset_9 % 4]), ext_tex_params[scalar_offset_10 / 4][scalar_offset_10 % 4]};
-  return tint_symbol_4;
+  const GammaTransferParams tint_symbol = {asfloat(ext_tex_params[scalar_offset_3 / 4][scalar_offset_3 % 4]), asfloat(ext_tex_params[scalar_offset_4 / 4][scalar_offset_4 % 4]), asfloat(ext_tex_params[scalar_offset_5 / 4][scalar_offset_5 % 4]), asfloat(ext_tex_params[scalar_offset_6 / 4][scalar_offset_6 % 4]), asfloat(ext_tex_params[scalar_offset_7 / 4][scalar_offset_7 % 4]), asfloat(ext_tex_params[scalar_offset_8 / 4][scalar_offset_8 % 4]), asfloat(ext_tex_params[scalar_offset_9 / 4][scalar_offset_9 % 4]), ext_tex_params[scalar_offset_10 / 4][scalar_offset_10 % 4]};
+  return tint_symbol;
 }
 
 float3x3 ext_tex_params_load_6(uint offset) {
@@ -92,27 +88,39 @@ float3x2 ext_tex_params_load_8(uint offset) {
 ExternalTextureParams ext_tex_params_load(uint offset) {
   const uint scalar_offset_17 = ((offset + 0u)) / 4;
   const uint scalar_offset_18 = ((offset + 4u)) / 4;
-  const ExternalTextureParams tint_symbol_5 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
-  return tint_symbol_5;
+  const ExternalTextureParams tint_symbol_1 = {ext_tex_params[scalar_offset_17 / 4][scalar_offset_17 % 4], ext_tex_params[scalar_offset_18 / 4][scalar_offset_18 % 4], ext_tex_params_load_2((offset + 16u)), ext_tex_params_load_4((offset + 64u)), ext_tex_params_load_4((offset + 96u)), ext_tex_params_load_6((offset + 128u)), ext_tex_params_load_8((offset + 176u))};
+  return tint_symbol_1;
 }
 
 [numthreads(1, 1, 1)]
 void main() {
+  const int2 coords = (10).xx;
+  float4 texture_load = float4(0.0f, 0.0f, 0.0f, 0.0f);
   int2 tint_tmp;
   t.GetDimensions(tint_tmp.x, tint_tmp.y);
-  const int2 tint_symbol = tint_clamp((10).xx, (0).xx, int2((uint2(tint_tmp) - (1u).xx)));
-  float4 red = textureLoadExternal(t, ext_tex_plane_1, tint_symbol, ext_tex_params_load(0u));
+  if (all((uint2(coords) < tint_tmp))) {
+    texture_load = textureLoadExternal(t, ext_tex_plane_1, coords, ext_tex_params_load(0u));
+  }
+  float4 red = texture_load;
+  const int2 coords_1 = (0).xx;
   int2 tint_tmp_1;
   outImage.GetDimensions(tint_tmp_1.x, tint_tmp_1.y);
-  const int2 tint_symbol_1 = tint_clamp((0).xx, (0).xx, int2((uint2(tint_tmp_1) - (1u).xx)));
-  outImage[tint_symbol_1] = red;
+  if (all((uint2(coords_1) < tint_tmp_1))) {
+    outImage[coords_1] = red;
+  }
+  const int2 coords_2 = int2(70, 118);
+  float4 texture_load_1 = float4(0.0f, 0.0f, 0.0f, 0.0f);
   int2 tint_tmp_2;
   t.GetDimensions(tint_tmp_2.x, tint_tmp_2.y);
-  const int2 tint_symbol_2 = tint_clamp(int2(70, 118), (0).xx, int2((uint2(tint_tmp_2) - (1u).xx)));
-  float4 green = textureLoadExternal(t, ext_tex_plane_1, tint_symbol_2, ext_tex_params_load(0u));
+  if (all((uint2(coords_2) < tint_tmp_2))) {
+    texture_load_1 = textureLoadExternal(t, ext_tex_plane_1, coords_2, ext_tex_params_load(0u));
+  }
+  float4 green = texture_load_1;
+  const int2 coords_3 = int2(1, 0);
   int2 tint_tmp_3;
   outImage.GetDimensions(tint_tmp_3.x, tint_tmp_3.y);
-  const int2 tint_symbol_3 = tint_clamp(int2(1, 0), (0).xx, int2((uint2(tint_tmp_3) - (1u).xx)));
-  outImage[tint_symbol_3] = green;
+  if (all((uint2(coords_3) < tint_tmp_3))) {
+    outImage[coords_3] = green;
+  }
   return;
 }
