@@ -1,0 +1,391 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467fbde4_8ba9e0b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Thanks for splitting this off! It made it manageable to review.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cf42c0_d83e465b",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Why would we keep this ASSERT around in the future? It seems that DisallowUnsafeAPIs would be renamed to AllowUnsafeAPIs at some point so the default of false would be what we use even when the toggle is not set.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68955631_df7844ce",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "This seems to be the only use of Inherit Outside of ToggleState, would ForceSet work here, so that Inherit can be inlined in InheritToggles?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10906254_0b82bc1f",
+        "filename": "src/dawn/native/BackendConnection.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8427036e_6e74e880",
+        "filename": "src/dawn/native/BackendConnection.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "unused?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3638ddcf_6cddada2",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Maybe add a TODO to rename this and a comment that we set the default toggle states here? It\u0027s kind of hidden in the middle of other stuff at the moment.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e192aff6_b8753ebe",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "u-u-nit: InheritFrom? We are already in a \"toggles\" conceptual namespace.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b1cf251_54320083",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "TODO: is this used anywhere else?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b148f5d4_bdbc4693",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "u-nit: dawn:1495 ditto in other places",
+      "range": {
+        "startLine": 294,
+        "startChar": 12,
+        "endLine": 294,
+        "endChar": 16
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d568ff4a_dd6ec862",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "It is a bit surprising that the Adapters would be computed explicitly this way in every backend. WDYT of making the inheritance done in the AdapterBase constructor? Then DiscoverAdapters would pass in the RequestAdapterOptions pointer and it is inside AdapterBase::AdapterBase that the inheriting happens. No passing of toggle state around, handling of future descriptor extensions is done automatically etc.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3ed25b_b007a99a",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be50e2cf_e4544e0f",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Ah that\u0027s mildly annoying. Can you file an issue about this? We can fix it eventually.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7327c5ca_3156ce80",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: typo Disallow instead of Diasllow",
+      "range": {
+        "startLine": 46,
+        "startChar": 18,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8f484f_d66aac45",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "It seems that we don\u0027t need to keep this toggle state around. There could be a method CreateTestAdapterToggles that builds the toggle state and returns it, then in the member initializer list:\n\n  mUnsafeAdapterBase(mInstanceBase.Get(), CreateTestUnsafeAdapterToggles())",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b9c669_1e59d628",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b9e05b_1846a50a",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: const for both the instance and toggles?",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d5a286d_325db544",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8a485c_7afbc77a",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: instanceTogglesState",
+      "range": {
+        "startLine": 139,
+        "startChar": 18,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afe6e6b0_d8f69df4",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "nit: the code for instance creation being interleaved for the safe and unsafe ones is a bit difficult to read. What about:\n\n// Create the safe instance\n\u003call the safe instance code\u003e\n\n// Get the safe adapter\n\u003c\u003e\n\n// Create the unsafe instance\n\u003call the unsafe instance code\u003e\n\n// Get the unsafe adapter\n\u003c\u003e",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745e3c2f_40a8cacc",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Uhm, I\u0027m fairly sure we\u0027ll eventually have to have two devices on the same adapter have different values for DisallowUnsafeAPIs: the same adapter would be used for both Skia inside the GPU process and for WebGPU: this could make resource sharing super efficient for example.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1651bcf8_c63f5b17",
+        "filename": "src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T14:45:43Z",
+      "side": 1,
+      "message": "Isn\u0027t it possible to override the disallow_unsafe_apis toggle just for the device that\u0027s created even if the instance has it set to false? It would avoid having to hook up at the instance level.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
