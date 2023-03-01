@@ -16,6 +16,24 @@
       "message": "Anyone know why I lost \"CQ Dry Run\" permission?",
       "revId": "ce87e25abeee253c4ed6697befce3a50d9c619c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4cc1526_8368cfaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-01T14:59:29Z",
+      "side": 1,
+      "message": "nvm, I accidentally logged in to @google.com account. It doesn\u0027t have CQ permission.",
+      "parentUuid": "1d439070_c917d444",
+      "revId": "ce87e25abeee253c4ed6697befce3a50d9c619c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
