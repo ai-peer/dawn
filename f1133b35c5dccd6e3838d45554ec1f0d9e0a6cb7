@@ -16,6 +16,23 @@
       "message": "Austin, could you PTAL?",
       "revId": "f1133b35c5dccd6e3838d45554ec1f0d9e0a6cb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bfe0306_a4e25bd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-03-01T18:59:35Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f1133b35c5dccd6e3838d45554ec1f0d9e0a6cb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
