@@ -83,9 +83,30 @@ float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<fl
   int2 const coord1 = (coord >> uint2(1u));
   float3 color = 0.0f;
   if ((params.numPlanes == 1u)) {
-    color = plane0.read(uint2(clamp(coord, int2(0), int2((uint2(uint2(plane0.get_width(clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u)))), plane0.get_height(clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u)))))) - uint2(1u))))), clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u)))).rgb;
+    uint const level = 0u;
+    uint const level_clamped = min(level, (plane0.get_num_mip_levels() - 1u));
+    int2 const coords = coord;
+    float4 texture_load = 0.0f;
+    if (bool(all((uint2(coords) < uint2(plane0.get_width(level_clamped), plane0.get_height(level_clamped)))) & (level < plane0.get_num_mip_levels()))) {
+      texture_load = plane0.read(uint2(coords), level);
+    }
+    color = texture_load.rgb;
   } else {
-    color = (float4(plane0.read(uint2(clamp(coord, int2(0), int2((uint2(uint2(plane0.get_width(clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u)))), plane0.get_height(clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u)))))) - uint2(1u))))), clamp(0, 0, int((uint(plane0.get_num_mip_levels()) - 1u))))[0], plane1.read(uint2(clamp(coord1, int2(0), int2((uint2(uint2(plane1.get_width(clamp(0, 0, int((uint(plane1.get_num_mip_levels()) - 1u)))), plane1.get_height(clamp(0, 0, int((uint(plane1.get_num_mip_levels()) - 1u)))))) - uint2(1u))))), clamp(0, 0, int((uint(plane1.get_num_mip_levels()) - 1u)))).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    uint const level_1 = 0u;
+    uint const level_clamped_1 = min(level_1, (plane0.get_num_mip_levels() - 1u));
+    int2 const coords_1 = coord;
+    float4 texture_load_1 = 0.0f;
+    if (bool(all((uint2(coords_1) < uint2(plane0.get_width(level_clamped_1), plane0.get_height(level_clamped_1)))) & (level_1 < plane0.get_num_mip_levels()))) {
+      texture_load_1 = plane0.read(uint2(coords_1), level_1);
+    }
+    uint const level_2 = 0u;
+    uint const level_clamped_2 = min(level_2, (plane1.get_num_mip_levels() - 1u));
+    int2 const coords_2 = coord1;
+    float4 texture_load_2 = 0.0f;
+    if (bool(all((uint2(coords_2) < uint2(plane1.get_width(level_clamped_2), plane1.get_height(level_clamped_2)))) & (level_2 < plane1.get_num_mip_levels()))) {
+      texture_load_2 = plane1.read(uint2(coords_2), level_2);
+    }
+    color = (float4(texture_load_1[0], texture_load_2.rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -97,9 +118,15 @@ float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<fl
 
 kernel void tint_symbol(texture2d<float, access::sample> tint_symbol_1 [[texture(0)]], texture2d<float, access::sample> tint_symbol_2 [[texture(1)]], const constant ExternalTextureParams_tint_packed_vec3* tint_symbol_3 [[buffer(0)]], texture2d<float, access::write> tint_symbol_4 [[texture(2)]]) {
   float4 red = textureLoadExternal(tint_symbol_1, tint_symbol_2, int2(10), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));
-  tint_symbol_4.write(red, uint2(clamp(int2(0), int2(0), int2((uint2(uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())) - uint2(1u))))));
+  int2 const coords_3 = int2(0);
+  if (all((uint2(coords_3) < uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())))) {
+    tint_symbol_4.write(red, uint2(coords_3));
+  }
   float4 green = textureLoadExternal(tint_symbol_1, tint_symbol_2, int2(70, 118), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));
-  tint_symbol_4.write(green, uint2(clamp(int2(1, 0), int2(0), int2((uint2(uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())) - uint2(1u))))));
+  int2 const coords_4 = int2(1, 0);
+  if (all((uint2(coords_4) < uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height())))) {
+    tint_symbol_4.write(green, uint2(coords_4));
+  }
   return;
 }
 
