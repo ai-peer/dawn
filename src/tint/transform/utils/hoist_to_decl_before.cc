@@ -99,6 +99,21 @@ struct HoistToDeclBefore::State {
         return InsertBeforeImpl(before_stmt, std::move(builder));
     }
 
+    /// @copydoc HoistToDeclBefore::Replace(const sem::Statement* what, const ast::Statement* with)
+    bool Replace(const sem::Statement* what, const ast::Statement* with) {
+        auto builder = [with] { return with; };
+        return Replace(what, std::move(builder));
+    }
+
+    /// @copydoc HoistToDeclBefore::Replace(const sem::Statement* what, const StmtBuilder& with)
+    bool Replace(const sem::Statement* what, const StmtBuilder& with) {
+        if (!InsertBeforeImpl(what, Decompose{})) {
+            return false;
+        }
+        ctx.Replace(what->Declaration(), with);
+        return true;
+    }
+
     /// @copydoc HoistToDeclBefore::Prepare()
     bool Prepare(const sem::ValueExpression* before_expr) {
         return InsertBefore(before_expr->Stmt(), nullptr);
@@ -353,6 +368,9 @@ struct HoistToDeclBefore::State {
                     ctx.InsertBefore(fl->Block()->Declaration()->statements, fl->Declaration(),
                                      std::forward<BUILDER>(builder));
                 }
+
+                // Index the map to convert this for-loop, even if `stmt` is nullptr.
+                ForLoop(fl);
                 return true;
             }
 
@@ -365,6 +383,9 @@ struct HoistToDeclBefore::State {
                 if constexpr (!std::is_same_v<BUILDER, Decompose>) {
                     decls.Push(std::forward<BUILDER>(builder));
                 }
+
+                // Index the map to convert this for-loop, even if `stmt` is nullptr.
+                ForLoop(fl);
                 return true;
             }
 
@@ -397,6 +418,14 @@ bool HoistToDeclBefore::InsertBefore(const sem::Statement* before_stmt,
 bool HoistToDeclBefore::InsertBefore(const sem::Statement* before_stmt,
                                      const StmtBuilder& builder) {
     return state_->InsertBefore(before_stmt, builder);
+}
+
+bool HoistToDeclBefore::Replace(const sem::Statement* what, const ast::Statement* with) {
+    return state_->Replace(what, with);
+}
+
+bool HoistToDeclBefore::Replace(const sem::Statement* what, const StmtBuilder& with) {
+    return state_->Replace(what, with);
 }
 
 bool HoistToDeclBefore::Prepare(const sem::ValueExpression* before_expr) {
