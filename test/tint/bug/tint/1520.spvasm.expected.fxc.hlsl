@@ -25,8 +25,8 @@ bool test_int_S1_c0_b() {
   ok = true;
   x_41 = false;
   if (true) {
-    const int4 tint_symbol_3 = tint_div((0).xxxx, int4(x_27, x_27, x_27, x_27));
-    x_40 = all((tint_symbol_3 == (0).xxxx));
+    const int4 tint_symbol = tint_div((0).xxxx, int4(x_27, x_27, x_27, x_27));
+    x_40 = all((tint_symbol == (0).xxxx));
     x_41 = x_40;
   }
   ok = x_41;
@@ -140,11 +140,11 @@ void main_1() {
 struct main_out {
   float4 sk_FragColor_1;
 };
-struct tint_symbol_1 {
+struct tint_symbol_2 {
   float4 vcolor_S0_param : TEXCOORD0;
   bool sk_Clockwise_param : SV_IsFrontFace;
 };
-struct tint_symbol_2 {
+struct tint_symbol_3 {
   float4 sk_FragColor_1 : SV_Target0;
 };
 
@@ -156,9 +156,9 @@ main_out main_inner(bool sk_Clockwise_param, float4 vcolor_S0_param) {
   return tint_symbol_4;
 }
 
-tint_symbol_2 main(tint_symbol_1 tint_symbol) {
-  const main_out inner_result = main_inner(tint_symbol.sk_Clockwise_param, tint_symbol.vcolor_S0_param);
-  tint_symbol_2 wrapper_result = (tint_symbol_2)0;
+tint_symbol_3 main(tint_symbol_2 tint_symbol_1) {
+  const main_out inner_result = main_inner(tint_symbol_1.sk_Clockwise_param, tint_symbol_1.vcolor_S0_param);
+  tint_symbol_3 wrapper_result = (tint_symbol_3)0;
   wrapper_result.sk_FragColor_1 = inner_result.sk_FragColor_1;
   return wrapper_result;
 }

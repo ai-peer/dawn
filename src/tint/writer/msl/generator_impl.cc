@@ -227,17 +227,21 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
-    manager.Add<transform::CanonicalizeEntryPointIO>();
     manager.Add<transform::PromoteSideEffectsToDecl>();
+
+    if (!options.disable_robustness) {
+        // Robustness must come after PromoteSideEffectsToDecl
+        manager.Add<transform::Robustness>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    manager.Add<transform::CanonicalizeEntryPointIO>();
+
     manager.Add<transform::PromoteInitializersToLet>();
 
     // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
     // TODO(crbug.com/tint/1752): This is only necessary for Metal versions older than 2.3.
     manager.Add<transform::DemoteToHelper>();
-
-    if (!options.disable_robustness) {
-        manager.Add<transform::Robustness>();
-    }
 
     if (options.generate_external_texture_bindings) {
         // Note: more efficient for MultiplanarExternalTexture to come after Robustness

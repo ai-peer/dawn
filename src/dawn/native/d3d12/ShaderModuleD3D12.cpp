@@ -379,7 +379,7 @@ ResultOrError<std::string> TranslateToHLSL(
     }
 
     tint::writer::hlsl::Options options;
-    options.robustness_enabled = r.isRobustnessEnabled;
+    options.disable_robustness = !r.isRobustnessEnabled;
     options.disable_workgroup_init = r.disableWorkgroupInit;
     if (r.usesNumWorkgroups) {
         options.root_constant_binding_point =
