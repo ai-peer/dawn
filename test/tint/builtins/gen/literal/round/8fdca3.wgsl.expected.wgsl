@@ -1,5 +1,5 @@
 fn round_8fdca3() {
-  var res = round(vec2(3.4));
+  var res = round(vec2(3.39999999999999991118));
 }
 
 @vertex
