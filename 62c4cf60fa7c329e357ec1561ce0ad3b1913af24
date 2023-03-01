@@ -372,6 +372,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f08f7404_ea34b94e",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-03-01T18:32:33Z",
+      "side": 1,
+      "message": "Well after adding the storage texture validation it bumps up back to ~15%. (8% for buffer, 8% for textures, seems reasonable)\nBut optimization should help to reduce more. Kai and minutes also suggest some kind of hash or bloom filter to reject some no overlap cases immediately. Will run benchmarks against them.",
+      "parentUuid": "40d72209_470aeb0d",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 77
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21d203ca_ed730e5e",
