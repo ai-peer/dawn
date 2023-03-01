@@ -11,8 +11,6 @@
                OpEntryPoint GLCompute %compute_main "compute_main"
                OpExecutionMode %fragment_main OriginUpperLeft
                OpExecutionMode %compute_main LocalSize 1 1 1
-               OpName %value "value"
-               OpName %vertex_point_size "vertex_point_size"
                OpName %ext_tex_plane_1 "ext_tex_plane_1"
                OpName %ext_tex_params_block_std140 "ext_tex_params_block_std140"
                OpMemberName %ext_tex_params_block_std140 0 "inner"
@@ -36,6 +34,8 @@
                OpMemberName %ExternalTextureParams_std140 7 "coordTransformationMatrix_1"
                OpMemberName %ExternalTextureParams_std140 8 "coordTransformationMatrix_2"
                OpName %ext_tex_params "ext_tex_params"
+               OpName %value "value"
+               OpName %vertex_point_size "vertex_point_size"
                OpName %arg_0 "arg_0"
                OpName %textureDimensions_cdc6c9 "textureDimensions_cdc6c9"
                OpName %res "res"
@@ -43,8 +43,6 @@
                OpName %vertex_main "vertex_main"
                OpName %fragment_main "fragment_main"
                OpName %compute_main "compute_main"
-               OpDecorate %value BuiltIn Position
-               OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %ext_tex_plane_1 DescriptorSet 1
                OpDecorate %ext_tex_plane_1 Binding 1
                OpDecorate %ext_tex_params_block_std140 Block
@@ -73,20 +71,16 @@
                OpDecorate %ext_tex_params NonWritable
                OpDecorate %ext_tex_params DescriptorSet 1
                OpDecorate %ext_tex_params Binding 2
+               OpDecorate %value BuiltIn Position
+               OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %arg_0 DescriptorSet 1
                OpDecorate %arg_0 Binding 0
       %float = OpTypeFloat 32
-    %v4float = OpTypeVector %float 4
-%_ptr_Output_v4float = OpTypePointer Output %v4float
-          %5 = OpConstantNull %v4float
-      %value = OpVariable %_ptr_Output_v4float Output %5
-%_ptr_Output_float = OpTypePointer Output %float
-          %8 = OpConstantNull %float
-%vertex_point_size = OpVariable %_ptr_Output_float Output %8
-         %11 = OpTypeImage %float 2D 0 0 0 1 Unknown
-%_ptr_UniformConstant_11 = OpTypePointer UniformConstant %11
-%ext_tex_plane_1 = OpVariable %_ptr_UniformConstant_11 UniformConstant
+          %3 = OpTypeImage %float 2D 0 0 0 1 Unknown
+%_ptr_UniformConstant_3 = OpTypePointer UniformConstant %3
+%ext_tex_plane_1 = OpVariable %_ptr_UniformConstant_3 UniformConstant
        %uint = OpTypeInt 32 0
+    %v4float = OpTypeVector %float 4
 %mat3v4float = OpTypeMatrix %v4float 3
 %GammaTransferParams = OpTypeStruct %float %float %float %float %float %float %float %uint
     %v3float = OpTypeVector %float 3
@@ -96,7 +90,13 @@
 %ext_tex_params_block_std140 = OpTypeStruct %ExternalTextureParams_std140
 %_ptr_Uniform_ext_tex_params_block_std140 = OpTypePointer Uniform %ext_tex_params_block_std140
 %ext_tex_params = OpVariable %_ptr_Uniform_ext_tex_params_block_std140 Uniform
-      %arg_0 = OpVariable %_ptr_UniformConstant_11 UniformConstant
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+         %18 = OpConstantNull %v4float
+      %value = OpVariable %_ptr_Output_v4float Output %18
+%_ptr_Output_float = OpTypePointer Output %float
+         %21 = OpConstantNull %float
+%vertex_point_size = OpVariable %_ptr_Output_float Output %21
+      %arg_0 = OpVariable %_ptr_UniformConstant_3 UniformConstant
        %void = OpTypeVoid
          %23 = OpTypeFunction %void
      %v2uint = OpTypeVector %uint 2
@@ -109,7 +109,7 @@
 %textureDimensions_cdc6c9 = OpFunction %void None %23
          %26 = OpLabel
         %res = OpVariable %_ptr_Function_v2uint Function %34
-         %29 = OpLoad %11 %arg_0
+         %29 = OpLoad %3 %arg_0
          %27 = OpImageQuerySizeLod %v2uint %29 %int_0
                OpStore %res %27
                OpReturn
@@ -117,7 +117,7 @@
 %vertex_main_inner = OpFunction %v4float None %35
          %37 = OpLabel
          %38 = OpFunctionCall %void %textureDimensions_cdc6c9
-               OpReturnValue %5
+               OpReturnValue %18
                OpFunctionEnd
 %vertex_main = OpFunction %void None %23
          %40 = OpLabel
