@@ -329,6 +329,7 @@ libtint_source_set("libtint_text_src") {
     "text/unicode.cc",
     "text/unicode.h",
   ]
+  deps = [ ":libtint_base_src" ]
 }
 
 libtint_source_set("libtint_transform_src") {
