@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d439070_c917d444",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003516
+      },
+      "writtenOn": "2023-03-01T14:57:10Z",
+      "side": 1,
+      "message": "Anyone know why I lost \"CQ Dry Run\" permission?",
+      "revId": "ce87e25abeee253c4ed6697befce3a50d9c619c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
