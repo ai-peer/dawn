@@ -285,6 +285,7 @@ crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxSam
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxUniformBuffersPerShaderStage:createPipelineAsync,* [ Failure ]
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxSamplersPerShaderStage:createPipelineAsync,* [ Failure ]
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage:createPipelineAsync,* [ Failure ]
+crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipelineAsync,* [ Failure ]
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createBindGroupLayout,* [ Failure ]
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipelineLayout,* [ Failure ]
 crbug.com/chromium/1417269 webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,* [ Failure ]
