@@ -579,10 +579,8 @@ DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests,
                       OpenGLESBackend(),
                       VulkanBackend());
 
-// Only instantiate on D3D12 / Metal where we are sure of the robustness implementation.
-// Tint injects clamping in the shader. OpenGL(ES) / Vulkan robustness is less constrained.
 DAWN_INSTANTIATE_TEST_P(ClampedOOBDynamicBufferOffsetTests,
-                        {D3D12Backend(), MetalBackend()},
+                        {/* Tint uses predicated robustness */},
                         {wgpu::BufferUsage::Uniform, wgpu::BufferUsage::Storage},
                         {false, true},
                         {false, true});
