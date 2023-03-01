@@ -57,6 +57,7 @@
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/renamer.h"
+#include "src/tint/transform/robustness.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/single_entry_point.h"
 #include "src/tint/transform/std140.h"
@@ -187,20 +188,30 @@ SanitizedResult Sanitize(const Program* in,
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
-    manager.Add<transform::CanonicalizeEntryPointIO>();
+
     manager.Add<transform::PromoteSideEffectsToDecl>();
+
+    if (!options.disable_robustness) {
+        manager.Add<transform::Robustness>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    manager.Add<transform::CanonicalizeEntryPointIO>();
+
+    // PadStructs must come after CanonicalizeEntryPointIO
     manager.Add<transform::PadStructs>();
+
+    if (options.generate_external_texture_bindings) {
+        // Note: more efficient for MultiplanarExternalTexture to come after Robustness
+        auto new_bindings_map = writer::GenerateExternalTextureBindings(in);
+        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
+        manager.Add<transform::MultiplanarExternalTexture>();
+    }
 
     // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
     manager.Add<transform::DemoteToHelper>();
 
     manager.Add<transform::RemovePhonies>();
-
-    if (options.generate_external_texture_bindings) {
-        auto new_bindings_map = writer::GenerateExternalTextureBindings(in);
-        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
-    }
-    manager.Add<transform::MultiplanarExternalTexture>();
 
     data.Add<transform::CombineSamplers::BindingInfo>(options.binding_map,
                                                       options.placeholder_binding_point);

@@ -32,6 +32,7 @@
 #include "src/tint/transform/promote_side_effects_to_decl.h"
 #include "src/tint/transform/remove_phonies.h"
 #include "src/tint/transform/remove_unreachable_statements.h"
+#include "src/tint/transform/robustness.h"
 #include "src/tint/transform/simplify_pointers.h"
 #include "src/tint/transform/std140.h"
 #include "src/tint/transform/unshadow.h"
@@ -75,12 +76,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         manager.Add<transform::BuiltinPolyfill>();
     }
 
-    if (options.generate_external_texture_bindings) {
-        auto new_bindings_map = GenerateExternalTextureBindings(in);
-        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
-    }
-    manager.Add<transform::MultiplanarExternalTexture>();
-
     manager.Add<transform::PreservePadding>();  // Must come before DirectVariableAccess
 
     manager.Add<transform::Unshadow>();  // Must come before DirectVariableAccess
@@ -106,8 +101,23 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::VectorizeMatrixConversions>();
     manager.Add<transform::WhileToLoop>();  // ZeroInitWorkgroupMemory
     manager.Add<transform::MergeReturn>();
+
+    if (!options.disable_robustness) {
+        manager.Add<transform::Robustness>();
+    }
+
+    if (options.generate_external_texture_bindings) {
+        // Note: more efficient for MultiplanarExternalTexture to come after Robustness
+        auto new_bindings_map = GenerateExternalTextureBindings(in);
+        data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
+        manager.Add<transform::MultiplanarExternalTexture>();
+    }
+
+    // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<transform::CanonicalizeEntryPointIO>();
     manager.Add<transform::AddEmptyEntryPoint>();
+
+    // AddBlockAttribute must come after MultiplanarExternalTexture
     manager.Add<transform::AddBlockAttribute>();
 
     // DemoteToHelper must come after CanonicalizeEntryPointIO, PromoteSideEffectsToDecl, and
