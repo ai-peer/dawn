@@ -71,7 +71,9 @@ Transform::ApplyResult SimplifySideEffectStatements::Apply(const Program* src,
                 continue;
             }
 
-            hoist_to_decl_before.Prepare(sem_expr);
+            if (!hoist_to_decl_before.Prepare(sem_expr)) {
+                return Program(std::move(b));
+            }
             made_changes = true;
         }
     }

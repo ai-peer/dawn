@@ -6,9 +6,19 @@ void unused_entry_point() {
 }
 float foo() {
   int oob = 99;
-  float b = vec4(0.0f)[min(uint(oob), 3u)];
+  int index = oob;
+  bool predicate = (uint(index) <= 3u);
+  float predicated_expr = 0.0f;
+  if (predicate) {
+    predicated_expr = vec4(0.0f)[index];
+  }
+  float b = predicated_expr;
   vec4 v = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-  v[min(uint(oob), 3u)] = b;
+  int index_1 = oob;
+  bool predicate_1 = (uint(index_1) <= 3u);
+  if (predicate_1) {
+    v[index_1] = b;
+  }
   return b;
 }
 

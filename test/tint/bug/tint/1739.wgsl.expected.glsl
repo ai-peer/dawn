@@ -59,9 +59,30 @@ vec4 textureLoadExternal(highp sampler2D plane0_1, highp sampler2D plane1_1, ive
   ivec2 coord1 = (coord >> uvec2(1u));
   vec3 color = vec3(0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
-    color = texelFetch(plane0_1, clamp(coord, ivec2(0), ivec2((uvec2(uvec2(textureSize(plane0_1, clamp(0, 0, int((uint(uint(textureQueryLevels(plane0_1))) - 1u)))))) - uvec2(1u)))), clamp(0, 0, int((uint(uint(textureQueryLevels(plane0_1))) - 1u)))).rgb;
+    uint level = 0u;
+    uint level_clamped = min(level, (uint(textureQueryLevels(plane0_1)) - 1u));
+    ivec2 coords = coord;
+    vec4 texture_load = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+    if (bool(uint(all(lessThan(uvec2(coords), uvec2(textureSize(plane0_1, int(level_clamped)))))) & uint((level < uint(textureQueryLevels(plane0_1)))))) {
+      texture_load = texelFetch(plane0_1, coords, int(level));
+    }
+    color = texture_load.rgb;
   } else {
-    color = (vec4(texelFetch(plane0_1, clamp(coord, ivec2(0), ivec2((uvec2(uvec2(textureSize(plane0_1, clamp(0, 0, int((uint(uint(textureQueryLevels(plane0_1))) - 1u)))))) - uvec2(1u)))), clamp(0, 0, int((uint(uint(textureQueryLevels(plane0_1))) - 1u)))).r, texelFetch(plane1_1, clamp(coord1, ivec2(0), ivec2((uvec2(uvec2(textureSize(plane1_1, clamp(0, 0, int((uint(uint(textureQueryLevels(plane1_1))) - 1u)))))) - uvec2(1u)))), clamp(0, 0, int((uint(uint(textureQueryLevels(plane1_1))) - 1u)))).rg, 1.0f) * params.yuvToRgbConversionMatrix);
+    uint level_1 = 0u;
+    uint level_clamped_1 = min(level_1, (uint(textureQueryLevels(plane0_1)) - 1u));
+    ivec2 coords_1 = coord;
+    vec4 texture_load_1 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+    if (bool(uint(all(lessThan(uvec2(coords_1), uvec2(textureSize(plane0_1, int(level_clamped_1)))))) & uint((level_1 < uint(textureQueryLevels(plane0_1)))))) {
+      texture_load_1 = texelFetch(plane0_1, coords_1, int(level_1));
+    }
+    uint level_2 = 0u;
+    uint level_clamped_2 = min(level_2, (uint(textureQueryLevels(plane1_1)) - 1u));
+    ivec2 coords_2 = coord1;
+    vec4 texture_load_2 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+    if (bool(uint(all(lessThan(uvec2(coords_2), uvec2(textureSize(plane1_1, int(level_clamped_2)))))) & uint((level_2 < uint(textureQueryLevels(plane1_1)))))) {
+      texture_load_2 = texelFetch(plane1_1, coords_2, int(level_2));
+    }
+    color = (vec4(texture_load_1.r, texture_load_2.rg, 1.0f) * params.yuvToRgbConversionMatrix);
   }
   if ((params.doYuvToRgbConversionOnly == 0u)) {
     color = gammaCorrection(color, params.gammaDecodeParams);
@@ -79,9 +100,15 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
 
 void tint_symbol() {
   vec4 red = textureLoadExternal(t_2, ext_tex_plane_1_1, ivec2(10), conv_ExternalTextureParams(ext_tex_params.inner));
-  imageStore(outImage, clamp(ivec2(0), ivec2(0), ivec2((uvec2(uvec2(imageSize(outImage))) - uvec2(1u)))), red);
+  ivec2 coords_3 = ivec2(0);
+  if (all(lessThan(uvec2(coords_3), uvec2(imageSize(outImage))))) {
+    imageStore(outImage, coords_3, red);
+  }
   vec4 green = textureLoadExternal(t_2, ext_tex_plane_1_1, ivec2(70, 118), conv_ExternalTextureParams(ext_tex_params.inner));
-  imageStore(outImage, clamp(ivec2(1, 0), ivec2(0), ivec2((uvec2(uvec2(imageSize(outImage))) - uvec2(1u)))), green);
+  ivec2 coords_4 = ivec2(1, 0);
+  if (all(lessThan(uvec2(coords_4), uvec2(imageSize(outImage))))) {
+    imageStore(outImage, coords_4, green);
+  }
   return;
 }
 
@@ -91,8 +118,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:60: 'textureQueryLevels' : no matching overloaded function found 
-ERROR: 0:60: '' : compilation terminated 
+ERROR: 0:61: 'textureQueryLevels' : no matching overloaded function found 
+ERROR: 0:61: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 
 
