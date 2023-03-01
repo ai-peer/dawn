@@ -206,6 +206,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de265854_dbda0516",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:41:45Z",
+      "side": 1,
+      "message": "we could use std::monostate instead of std::nullopt to represent that no aliasing was found - but this works too. I think that putting monostate inside the variant instead of optional could use (very) slightly less space.\n\nYou could imagine the layout:\n```\noptional {\n  variant {\n    enum Type {\n      BufferAliasingType,\n      TextureAliasingType,\n    } type;\n    union {\n      BufferAliasing,\n      TextureAliasing,\n    } contents;\n  };\n  bool exists;\n}\n\nvariant {\n  enum Type {\n    Monostate,\n    BufferAliasingType,\n    TextureAliasingType,\n  } type;\n  union {\n    BufferAliasing,\n    TextureAliasing,\n  } contents;\n}\n```",
+      "parentUuid": "26dc263a_3b5b91ee",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 2
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4972ce24_9951f71e",
@@ -314,6 +338,30 @@
       "side": 1,
       "message": "adding \u0026 to avoid the unintended copy give us ~8% cpu_time increase instead of ~15%",
       "parentUuid": "b10a3b71_e544b76c",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 77
+      },
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d72209_470aeb0d",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-01T07:41:45Z",
+      "side": 1,
+      "message": "amazing! so if we eventually have nlg(n) algorithm, we can probably get that down to 3% ish",
+      "parentUuid": "4734d409_9e2c1fab",
       "range": {
         "startLine": 93,
         "startChar": 4,
