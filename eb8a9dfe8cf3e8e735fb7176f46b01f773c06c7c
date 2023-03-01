@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a042a2f_d2a6b2fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-01T23:55:21Z",
+      "side": 1,
+      "message": "PTAL! This has been harder to make go through than I expected initially.",
+      "revId": "eb8a9dfe8cf3e8e735fb7176f46b01f773c06c7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
