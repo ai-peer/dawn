@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a70b92_058d4b13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-03-01T06:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d52b785_3f7c909b",
+      "revId": "e8d19657bd2fe61b5677b3a977bdd0075189ec73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c2a1b74_fc960c19",
@@ -72,6 +90,30 @@
       "side": 1,
       "message": "\u003e nit: since there are now two possible ways to get this message, I\u0027d say something like: \"must be set and must not be a NaN value\"\n\nI thought I tried to express the two possible ways but your suggestion looks clearer. Done, Thanks.\n\n\u003e We should also have a unittest in Dawn that using the C++ API with a default-initialized value here is a validation error\n\nYes, that\u0027s the plan. https://dawn-review.googlesource.com/c/dawn/+/120620/comments/3d52b785_3f7c909b I will add soon.",
       "parentUuid": "2c2a1b74_fc960c19",
+      "range": {
+        "startLine": 377,
+        "startChar": 54,
+        "endLine": 377,
+        "endChar": 79
+      },
+      "revId": "e8d19657bd2fe61b5677b3a977bdd0075189ec73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734ab2ad_d3d33901",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 377,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-03-01T06:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca29e16_e9263bff",
       "range": {
         "startLine": 377,
         "startChar": 54,
