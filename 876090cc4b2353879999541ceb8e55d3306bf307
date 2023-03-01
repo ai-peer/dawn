@@ -51,6 +51,24 @@
       "parentUuid": "861f25e5_105a0d69",
       "revId": "876090cc4b2353879999541ceb8e55d3306bf307",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed4c90e_abd2885c",
+        "filename": "src/dawn/tests/unittests/SubresourceStorageTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-01T19:58:00Z",
+      "side": 1,
+      "message": "Ah... thanks! I added asserts also.",
+      "parentUuid": "4a91b4df_eee7ea7a",
+      "revId": "876090cc4b2353879999541ceb8e55d3306bf307",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
