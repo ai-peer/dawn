@@ -707,6 +707,24 @@
       "parentUuid": "1d56bbf5_d8972d96",
       "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ceb249_a4ea9581",
+        "filename": "src/dawn/tests/unittests/validation/WritableTextureBindingAliasingValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-03-01T00:06:04Z",
+      "side": 1,
+      "message": "Done. IIUC",
+      "parentUuid": "95797577_dca9faab",
+      "revId": "62c4cf60fa7c329e357ec1561ce0ad3b1913af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
