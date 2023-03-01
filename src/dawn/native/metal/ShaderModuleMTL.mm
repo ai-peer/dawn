@@ -259,7 +259,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             }
 
             tint::writer::msl::Options options;
-            options.enabled_robustness = r.isRobustnessEnabled;
+            options.disable_robustness = !r.isRobustnessEnabled;
             options.buffer_size_ubo_index = kBufferLengthBufferSlot;
             options.fixed_sample_mask = r.sampleMask;
             options.disable_workgroup_init = r.disableWorkgroupInit;

@@ -188,18 +188,19 @@ SanitizedResult Sanitize(const Program* in,
         // ZeroInitWorkgroupMemory may inject new builtin parameters.
         manager.Add<transform::ZeroInitWorkgroupMemory>();
     }
-    manager.Add<transform::CanonicalizeEntryPointIO>();
+
     manager.Add<transform::PromoteSideEffectsToDecl>();
-    manager.Add<transform::PadStructs>();
-
-    // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
-    manager.Add<transform::DemoteToHelper>();
-
-    manager.Add<transform::RemovePhonies>();
 
     if (!options.disable_robustness) {
+        // Robustness must come after PromoteSideEffectsToDecl
         manager.Add<transform::Robustness>();
     }
+
+    // CanonicalizeEntryPointIO must come after Robustness
+    manager.Add<transform::CanonicalizeEntryPointIO>();
+
+    // PadStructs must come after CanonicalizeEntryPointIO
+    manager.Add<transform::PadStructs>();
 
     if (options.generate_external_texture_bindings) {
         // Note: more efficient for MultiplanarExternalTexture to come after Robustness
@@ -207,6 +208,11 @@ SanitizedResult Sanitize(const Program* in,
         data.Add<transform::MultiplanarExternalTexture::NewBindingPoints>(new_bindings_map);
         manager.Add<transform::MultiplanarExternalTexture>();
     }
+
+    // DemoteToHelper must come after PromoteSideEffectsToDecl and ExpandCompoundAssignment.
+    manager.Add<transform::DemoteToHelper>();
+
+    manager.Add<transform::RemovePhonies>();
 
     data.Add<transform::CombineSamplers::BindingInfo>(options.binding_map,
                                                       options.placeholder_binding_point);
