@@ -11,6 +11,8 @@
                OpEntryPoint GLCompute %compute_main "compute_main"
                OpExecutionMode %fragment_main OriginUpperLeft
                OpExecutionMode %compute_main LocalSize 1 1 1
+               OpName %value "value"
+               OpName %vertex_point_size "vertex_point_size"
                OpName %ext_tex_plane_1 "ext_tex_plane_1"
                OpName %ext_tex_params_block_std140 "ext_tex_params_block_std140"
                OpMemberName %ext_tex_params_block_std140 0 "inner"
@@ -34,8 +36,6 @@
                OpMemberName %ExternalTextureParams_std140 7 "coordTransformationMatrix_1"
                OpMemberName %ExternalTextureParams_std140 8 "coordTransformationMatrix_2"
                OpName %ext_tex_params "ext_tex_params"
-               OpName %value "value"
-               OpName %vertex_point_size "vertex_point_size"
                OpName %arg_0 "arg_0"
                OpName %gammaCorrection "gammaCorrection"
                OpName %v "v"
@@ -63,6 +63,8 @@
                OpName %vertex_main "vertex_main"
                OpName %fragment_main "fragment_main"
                OpName %compute_main "compute_main"
+               OpDecorate %value BuiltIn Position
+               OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %ext_tex_plane_1 DescriptorSet 1
                OpDecorate %ext_tex_plane_1 Binding 1
                OpDecorate %ext_tex_params_block_std140 Block
@@ -91,8 +93,6 @@
                OpDecorate %ext_tex_params NonWritable
                OpDecorate %ext_tex_params DescriptorSet 1
                OpDecorate %ext_tex_params Binding 2
-               OpDecorate %value BuiltIn Position
-               OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %arg_0 DescriptorSet 1
                OpDecorate %arg_0 Binding 0
                OpMemberDecorate %ExternalTextureParams 0 Offset 0
@@ -109,11 +109,17 @@
                OpMemberDecorate %ExternalTextureParams 6 ColMajor
                OpMemberDecorate %ExternalTextureParams 6 MatrixStride 8
       %float = OpTypeFloat 32
-          %3 = OpTypeImage %float 2D 0 0 0 1 Unknown
-%_ptr_UniformConstant_3 = OpTypePointer UniformConstant %3
-%ext_tex_plane_1 = OpVariable %_ptr_UniformConstant_3 UniformConstant
-       %uint = OpTypeInt 32 0
     %v4float = OpTypeVector %float 4
+%_ptr_Output_v4float = OpTypePointer Output %v4float
+          %5 = OpConstantNull %v4float
+      %value = OpVariable %_ptr_Output_v4float Output %5
+%_ptr_Output_float = OpTypePointer Output %float
+          %8 = OpConstantNull %float
+%vertex_point_size = OpVariable %_ptr_Output_float Output %8
+         %11 = OpTypeImage %float 2D 0 0 0 1 Unknown
+%_ptr_UniformConstant_11 = OpTypePointer UniformConstant %11
+%ext_tex_plane_1 = OpVariable %_ptr_UniformConstant_11 UniformConstant
+       %uint = OpTypeInt 32 0
 %mat3v4float = OpTypeMatrix %v4float 3
 %GammaTransferParams = OpTypeStruct %float %float %float %float %float %float %float %uint
     %v3float = OpTypeVector %float 3
@@ -123,13 +129,7 @@
 %ext_tex_params_block_std140 = OpTypeStruct %ExternalTextureParams_std140
 %_ptr_Uniform_ext_tex_params_block_std140 = OpTypePointer Uniform %ext_tex_params_block_std140
 %ext_tex_params = OpVariable %_ptr_Uniform_ext_tex_params_block_std140 Uniform
-%_ptr_Output_v4float = OpTypePointer Output %v4float
-         %18 = OpConstantNull %v4float
-      %value = OpVariable %_ptr_Output_v4float Output %18
-%_ptr_Output_float = OpTypePointer Output %float
-         %21 = OpConstantNull %float
-%vertex_point_size = OpVariable %_ptr_Output_float Output %21
-      %arg_0 = OpVariable %_ptr_UniformConstant_3 UniformConstant
+      %arg_0 = OpVariable %_ptr_UniformConstant_11 UniformConstant
          %23 = OpTypeFunction %v3float %v3float %GammaTransferParams
        %bool = OpTypeBool
      %v3bool = OpTypeVector %bool 3
@@ -138,7 +138,7 @@
      %v2uint = OpTypeVector %uint 2
 %mat3v2float = OpTypeMatrix %v2float 3
 %ExternalTextureParams = OpTypeStruct %uint %uint %mat3v4float %GammaTransferParams %GammaTransferParams %mat3v3float %mat3v2float
-         %63 = OpTypeFunction %v4float %3 %3 %v2uint %ExternalTextureParams
+         %63 = OpTypeFunction %v4float %11 %11 %v2uint %ExternalTextureParams
      %uint_1 = OpConstant %uint 1
          %74 = OpConstantComposite %v2uint %uint_1 %uint_1
         %int = OpTypeInt 32 1
@@ -191,8 +191,8 @@
                OpReturnValue %62
                OpFunctionEnd
 %textureLoadExternal = OpFunction %v4float None %63
-     %plane0 = OpFunctionParameter %3
-     %plane1 = OpFunctionParameter %3
+     %plane0 = OpFunctionParameter %11
+     %plane1 = OpFunctionParameter %11
       %coord = OpFunctionParameter %v2uint
    %params_0 = OpFunctionParameter %ExternalTextureParams
          %72 = OpLabel
@@ -265,10 +265,10 @@
 %textureLoad_1bfdfb = OpFunction %void None %130
         %133 = OpLabel
       %arg_1 = OpVariable %_ptr_Function_v2uint Function %136
-        %res = OpVariable %_ptr_Function_v4float Function %18
+        %res = OpVariable %_ptr_Function_v4float Function %5
                OpStore %arg_1 %74
-        %138 = OpLoad %3 %arg_0
-        %139 = OpLoad %3 %ext_tex_plane_1
+        %138 = OpLoad %11 %arg_0
+        %139 = OpLoad %11 %ext_tex_plane_1
         %140 = OpLoad %v2uint %arg_1
         %144 = OpAccessChain %_ptr_Uniform_ExternalTextureParams_std140 %ext_tex_params %uint_0
         %145 = OpLoad %ExternalTextureParams_std140 %144
@@ -280,7 +280,7 @@
 %vertex_main_inner = OpFunction %v4float None %148
         %150 = OpLabel
         %151 = OpFunctionCall %void %textureLoad_1bfdfb
-               OpReturnValue %18
+               OpReturnValue %5
                OpFunctionEnd
 %vertex_main = OpFunction %void None %130
         %153 = OpLabel

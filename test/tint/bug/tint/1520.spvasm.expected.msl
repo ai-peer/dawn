@@ -55,8 +55,8 @@ bool test_int_S1_c0_b(const constant UniformBuffer_tint_packed_vec3* const tint_
   ok = true;
   x_41 = false;
   if (true) {
-    int4 const tint_symbol_4 = tint_div(int4(0), int4(x_27, x_27, x_27, x_27));
-    x_40 = all((tint_symbol_4 == int4(0)));
+    int4 const tint_symbol_1 = tint_div(int4(0), int4(x_27, x_27, x_27, x_27));
+    x_40 = all((tint_symbol_1 == int4(0)));
     x_41 = x_40;
   }
   ok = x_41;
@@ -171,11 +171,11 @@ struct main_out {
   float4 sk_FragColor_1;
 };
 
-struct tint_symbol_2 {
+struct tint_symbol_3 {
   float4 vcolor_S0_param [[user(locn0)]];
 };
 
-struct tint_symbol_3 {
+struct tint_symbol_4 {
   float4 sk_FragColor_1 [[color(0)]];
 };
 
@@ -188,11 +188,11 @@ main_out tint_symbol_inner(bool sk_Clockwise_param, float4 vcolor_S0_param, thre
   return tint_symbol_5;
 }
 
-fragment tint_symbol_3 tint_symbol(const constant UniformBuffer_tint_packed_vec3* tint_symbol_15 [[buffer(0)]], bool sk_Clockwise_param [[front_facing]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+fragment tint_symbol_4 tint_symbol(const constant UniformBuffer_tint_packed_vec3* tint_symbol_15 [[buffer(0)]], bool sk_Clockwise_param [[front_facing]], tint_symbol_3 tint_symbol_2 [[stage_in]]) {
   thread float4 tint_symbol_14 = 0.0f;
   thread float4 tint_symbol_16 = 0.0f;
-  main_out const inner_result = tint_symbol_inner(sk_Clockwise_param, tint_symbol_1.vcolor_S0_param, &(tint_symbol_14), tint_symbol_15, &(tint_symbol_16));
-  tint_symbol_3 wrapper_result = {};
+  main_out const inner_result = tint_symbol_inner(sk_Clockwise_param, tint_symbol_2.vcolor_S0_param, &(tint_symbol_14), tint_symbol_15, &(tint_symbol_16));
+  tint_symbol_4 wrapper_result = {};
   wrapper_result.sk_FragColor_1 = inner_result.sk_FragColor_1;
   return wrapper_result;
 }
