@@ -8,7 +8,13 @@ void tint_symbol_1(uint tint_symbol_2) {
   int tint_symbol_3 = 0;
   int tint_symbol_4 = 0;
   int tint_symbol_5 = 0;
-  uint tint_symbol_6 = tint_symbol.inner[min(tint_symbol_2, (uint(tint_symbol.inner.length()) - 1u))];
+  uint index = tint_symbol_2;
+  bool predicate = (uint(index) <= (uint(tint_symbol.inner.length()) - 1u));
+  uint predicated_expr = 0u;
+  if (predicate) {
+    predicated_expr = tint_symbol.inner[index];
+  }
+  uint tint_symbol_6 = predicated_expr;
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
