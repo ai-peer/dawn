@@ -34,6 +34,24 @@
       "parentUuid": "51141bea_e70b629c",
       "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53cd8c44_edc86f41",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:32:54Z",
+      "side": 1,
+      "message": "Right, but if we got here, and you\u0027re copying the pointer, doesn\u0027t it already have to be valid? Is this just a validity check for the code we\u0027ve generated internally?",
+      "parentUuid": "c37501c0_bb958a74",
+      "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
