@@ -16,6 +16,23 @@
       "message": "Single e2e macOS Kokoro failure looks like a spurious process failure.\nTested e2e tests locally, and they\u0027re all green.",
       "revId": "07a94f842df33b739f76cfbd0f3c84201d54b468",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e99187e_f250421f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T17:45:17Z",
+      "side": 1,
+      "message": "Already had a CQ and Kokoro +1 on this. CQ bots are likely going to time out. Submitting manually.",
+      "revId": "07a94f842df33b739f76cfbd0f3c84201d54b468",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
