@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05f9bb7_d5b66ed7",
+        "filename": "test/tint/bug/tint/1725.wgsl.expected.wgsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T19:15:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f3633523_8b9cc3aa",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeb7279f_be66b9c0",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "it\u0027s because of crbug.com/tint/1855\nExternal textures is being applied as a public transform, and then robustness is applied on the polyfill",
       "parentUuid": "aeb7279f_be66b9c0",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bdc47da_2c2dddd2",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.msl",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T19:15:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6ae35a7d_0b2153be",
       "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d793f457_e7041e52",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.wgsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T19:15:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "22133b64_823f7091",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "453bd3fb_b280d949",
@@ -141,6 +195,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af533f0_e4d4c144",
+        "filename": "test/tint/builtins/gen/literal/textureLoad/1bfdfb.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T19:15:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "64f9f7b7_473a6359",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe6d1f5a_1dcc255e",
@@ -172,6 +244,24 @@
       "side": 1,
       "message": "Yeah, InlineSingleUseLets (or whatever it is called) is being run later",
       "parentUuid": "fe6d1f5a_1dcc255e",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee9c4ff6_547fe2e7",
+        "filename": "test/tint/statements/compound_assign/vector/modulo-scalar.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T19:15:02Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6f69c22d_cdb6dc70",
       "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
