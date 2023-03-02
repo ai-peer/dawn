@@ -399,6 +399,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c24ec926_589471aa",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "Can we add TODO(dawn:....) on these two?",
+      "parentUuid": "02ab4bf2_8e5811e6",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7327c5ca_3156ce80",
         "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
         "patchSetId": 10
@@ -721,6 +739,24 @@
       "side": 1,
       "message": "Done, change the inheritance logic so that user requirement (given in the toggles descriptor) can now override any inherited toggle as long as it is not forced at earlier stage.\nIn this way we can create both a safe device (by default inheritance) and an unsafe device (by toggle overriding) out from a safe adapter.",
       "parentUuid": "745e3c2f_40a8cacc",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4609a5_2923b96e",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6c8967e1_4808852b",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59fbed28_2e6e75e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "Still LGTM, Austin PTAL",
+      "revId": "b6e962fa507c021ed9b8de1d9b7aacc1fe909e35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4c3df9c_e3dd4119",
+        "filename": "src/dawn/native/BackendConnection.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "This seems to only be used at [1] and [2] now so maybe these two lines of code can be moved there? Or is it where the backends will have a chance to modify the toggles before the adapter is created? IMHO we can see in the later CLs where that code should live better.",
+      "revId": "b6e962fa507c021ed9b8de1d9b7aacc1fe909e35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "062a73ed_6f425c4b",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b6e962fa507c021ed9b8de1d9b7aacc1fe909e35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51cc800c_cedc1418",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "b6e962fa507c021ed9b8de1d9b7aacc1fe909e35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ff80d1_2905e708",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-02T13:49:04Z",
+      "side": 1,
+      "message": "FromAPI might work?",
+      "range": {
+        "startLine": 137,
+        "startChar": 27,
+        "endLine": 137,
+        "endChar": 72
+      },
+      "revId": "b6e962fa507c021ed9b8de1d9b7aacc1fe909e35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
