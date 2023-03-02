@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe09890e_9b4c877a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96cf42c0_d83e465b",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68955631_df7844ce",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "This seems to be the only use of Inherit Outside of ToggleState, would ForceSet work here, so that Inherit can be inlined in InheritToggles?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbe40a70_4941c154",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Now that `TogglesState::CreateFromTogglesDescriptor` takes not only the required toggles of current stage but also the eariler stage to initialize the toggles state and thus support overriding the inheritance, this workaround is no longer needed.",
+      "parentUuid": "68955631_df7844ce",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e492483_fd934ad3",
+        "filename": "src/dawn/native/BackendConnection.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "It is required for getting instance\u0027s toggle state using `GetInstance()-\u003eGetTogglesState()`",
+      "parentUuid": "10906254_0b82bc1f",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8427036e_6e74e880",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "unused?",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24da60ed_ef087a3a",
+        "filename": "src/dawn/native/BackendConnection.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8427036e_6e74e880",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a456308_3cfa4761",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e192aff6_b8753ebe",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b1cf251_54320083",
@@ -137,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fbaca9f_318f2c42",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "0b1cf251_54320083",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b148f5d4_bdbc4693",
@@ -150,6 +258,30 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "u-nit: dawn:1495 ditto in other places",
+      "range": {
+        "startLine": 294,
+        "startChar": 12,
+        "endLine": 294,
+        "endChar": 16
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55cf38eb_ffc386b2",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b148f5d4_bdbc4693",
       "range": {
         "startLine": 294,
         "startChar": 12,
@@ -179,6 +311,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5341a627_cdf2d6f2",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Making `TogglesState` a parameter of `Backend::DiscoverAdapters` and `Backend::DiscoverDefaultAdapters` for now.\nIf it doesn\u0027t work out I could further change it.",
+      "parentUuid": "d568ff4a_dd6ec862",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec3ed25b_b007a99a",
         "filename": "src/dawn/tests/DawnTest.cpp",
         "patchSetId": 10
@@ -190,6 +340,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "ditto",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62833a1c_c1a34770",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec3ed25b_b007a99a",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -207,6 +375,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "Ah that\u0027s mildly annoying. Can you file an issue about this? We can fix it eventually.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ab4bf2_8e5811e6",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "File a Dawn wire issue https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1684",
+      "parentUuid": "be50e2cf_e4544e0f",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -234,6 +420,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f4bf0f1_4433f09a",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7327c5ca_3156ce80",
+      "range": {
+        "startLine": 46,
+        "startChar": 18,
+        "endLine": 46,
+        "endChar": 36
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c8f484f_d66aac45",
@@ -251,6 +461,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "193e7476_3752ae0c",
+        "filename": "src/dawn/tests/unittests/FeatureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "It turns out that just using chain-style manner will work.",
+      "parentUuid": "0c8f484f_d66aac45",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6b9c669_1e59d628",
@@ -264,6 +492,30 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "nit: 2023",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd4cd8af_a03b081b",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6b9c669_1e59d628",
       "range": {
         "startLine": 1,
         "startChar": 13,
@@ -297,6 +549,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82d5b73_9f2a6045",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7b9e05b_1846a50a",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 12
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8d5a286d_325db544",
@@ -310,6 +586,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "ditto",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d379e01_b9c507a1",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d5a286d_325db544",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -337,6 +631,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cabdd91_92b70f47",
+        "filename": "src/dawn/tests/unittests/ToggleTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8a485c_7afbc77a",
+      "range": {
+        "startLine": 139,
+        "startChar": 18,
+        "endLine": 139,
+        "endChar": 37
+      },
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afe6e6b0_d8f69df4",
@@ -350,6 +668,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "nit: the code for instance creation being interleaved for the safe and unsafe ones is a bit difficult to read. What about:\n\n// Create the safe instance\n\u003call the safe instance code\u003e\n\n// Get the safe adapter\n\u003c\u003e\n\n// Create the unsafe instance\n\u003call the unsafe instance code\u003e\n\n// Get the unsafe adapter\n\u003c\u003e",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01c0d8d2_8a1a42c8",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afe6e6b0_d8f69df4",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -373,6 +709,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c8967e1_4808852b",
+        "filename": "src/dawn/tests/unittests/native/DeviceCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done, change the inheritance logic so that user requirement (given in the toggles descriptor) can now override any inherited toggle as long as it is not forced at earlier stage.\nIn this way we can create both a safe device (by default inheritance) and an unsafe device (by toggle overriding) out from a safe adapter.",
+      "parentUuid": "745e3c2f_40a8cacc",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1651bcf8_c63f5b17",
         "filename": "src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
         "patchSetId": 10
@@ -384,6 +738,24 @@
       "writtenOn": "2023-03-01T14:45:43Z",
       "side": 1,
       "message": "Isn\u0027t it possible to override the disallow_unsafe_apis toggle just for the device that\u0027s created even if the instance has it set to false? It would avoid having to hook up at the instance level.",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04beb8a4_5cb8dbe8",
+        "filename": "src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-02T09:12:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1651bcf8_c63f5b17",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
