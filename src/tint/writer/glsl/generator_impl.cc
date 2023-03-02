@@ -192,6 +192,7 @@ SanitizedResult Sanitize(const Program* in,
     manager.Add<transform::PromoteSideEffectsToDecl>();
 
     if (!options.disable_robustness) {
+        // Robustness must come after PromoteSideEffectsToDecl
         manager.Add<transform::Robustness>();
     }
 
