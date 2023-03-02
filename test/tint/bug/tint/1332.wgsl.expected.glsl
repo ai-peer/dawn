@@ -1,7 +1,7 @@
 #version 310 es
 
 void compute_main() {
-  float a = 1.230000019f;
+  float a = 1.23000001907348632812f;
   float b = max(a, 1.17549435e-38f);
 }
 
