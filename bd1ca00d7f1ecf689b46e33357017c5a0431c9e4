@@ -16,6 +16,23 @@
       "message": "Note had to add additional clamping in native/Adapter.cpp to help with initial test failures. Lmk if that is a problem.",
       "revId": "bd1ca00d7f1ecf689b46e33357017c5a0431c9e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77fa3404_0a3d469c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T20:12:03Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "bd1ca00d7f1ecf689b46e33357017c5a0431c9e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
