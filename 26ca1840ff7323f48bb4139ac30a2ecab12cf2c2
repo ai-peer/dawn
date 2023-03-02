@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6fffbdf_8dda4871",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-02T16:52:57Z",
+      "side": 1,
+      "message": "Yeah, that\u0027s just harder to do, especially to unify with `Replace()`.\nI\u0027ve given up on trying to make the output of this be as pretty as possible. Especially as it has been the cause of bugs, and we hopefully get to remove this with the IR.",
+      "parentUuid": "b0f3b54f_7d0b58a9",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9f5e650_d63e8493",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 2
