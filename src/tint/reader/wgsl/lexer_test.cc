@@ -397,7 +397,8 @@ TEST_P(FloatTest, Parse) {
     Lexer l(&file);
 
     auto list = l.Lex();
-    ASSERT_EQ(2u, list.size());
+    ASSERT_EQ(2u, list.size()) << "Token type: " << static_cast<int32_t>(list[0].type()) << " :"
+                               << list[0].to_str();
 
     {
         auto& t = list[0];
@@ -451,6 +452,9 @@ INSTANTIATE_TEST_SUITE_P(LexerTest,
                              FloatData{"5.7f", static_cast<double>(5.7f)},
                              FloatData{"5.f", static_cast<double>(5.f)},
                              FloatData{".7f", static_cast<double>(.7f)},
+
+                             FloatData{"4321.0f", static_cast<double>(4321.0)},
+
                              // Non-zero with decimal and 'h' suffix
                              FloatData{"5.7h", static_cast<double>(f16::Quantize(5.7f))},
                              FloatData{"5.h", static_cast<double>(f16::Quantize(5.f))},
