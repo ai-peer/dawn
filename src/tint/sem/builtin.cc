@@ -41,6 +41,13 @@ const char* Builtin::str() const {
     return sem::str(type_);
 }
 
+bool RequiresUniformControlFlow(BuiltinType i) {
+    return IsDerivativeBuiltin(i) ||                     //
+           i == sem::BuiltinType::kTextureSample ||      //
+           i == sem::BuiltinType::kTextureSampleBias ||  //
+           i == sem::BuiltinType::kTextureSampleCompare;
+}
+
 bool IsCoarseDerivativeBuiltin(BuiltinType i) {
     return i == BuiltinType::kDpdxCoarse || i == BuiltinType::kDpdyCoarse ||
            i == BuiltinType::kFwidthCoarse;
@@ -118,6 +125,10 @@ Builtin::Builtin(BuiltinType type,
       is_deprecated_(is_deprecated) {}
 
 Builtin::~Builtin() = default;
+
+bool Builtin::RequiresUniformControlFlow() const {
+    return sem::RequiresUniformControlFlow(type_);
+}
 
 bool Builtin::IsCoarseDerivative() const {
     return IsCoarseDerivativeBuiltin(type_);
