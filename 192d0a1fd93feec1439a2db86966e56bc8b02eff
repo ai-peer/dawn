@@ -52,6 +52,24 @@
       "parentUuid": "c37501c0_bb958a74",
       "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d7368b_48de20fd",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T16:42:28Z",
+      "side": 1,
+      "message": "The sem always has an inferred access.",
+      "parentUuid": "53cd8c44_edc86f41",
+      "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
