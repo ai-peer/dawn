@@ -1516,10 +1516,7 @@ class UniformityGraph {
                     callsite_tag = {CallSiteTag::CallSiteRequiredToBeUniform, default_severity};
                 } else if (builtin->Type() == sem::BuiltinType::kWorkgroupUniformLoad) {
                     callsite_tag = {CallSiteTag::CallSiteRequiredToBeUniform, default_severity};
-                } else if (builtin->IsDerivative() ||
-                           builtin->Type() == sem::BuiltinType::kTextureSample ||
-                           builtin->Type() == sem::BuiltinType::kTextureSampleBias ||
-                           builtin->Type() == sem::BuiltinType::kTextureSampleCompare) {
+                } else if (builtin->RequiresUniformControlFlow()) {
                     // Get the severity of derivative uniformity violations in this context.
                     auto severity = sem_.DiagnosticSeverity(
                         call, builtin::DiagnosticRule::kDerivativeUniformity);
