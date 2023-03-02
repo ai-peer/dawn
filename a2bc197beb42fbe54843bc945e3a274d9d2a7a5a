@@ -139,6 +139,24 @@
       "parentUuid": "f64a47dd_dc6b6d25",
       "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58163668_bb1c0ccb",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-02T17:25:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd170438_3c5ff2d5",
+      "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

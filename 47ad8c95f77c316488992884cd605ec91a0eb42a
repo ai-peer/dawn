@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d479d9c_5626041d",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.dxc.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-02T17:25:59Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "86c4df16_f781e722",
+      "revId": "47ad8c95f77c316488992884cd605ec91a0eb42a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95bc2006_e4241063",
@@ -67,6 +85,24 @@
       "side": 0,
       "message": "deleted as they didn\u0027t timeout on my machine, but is the cause of Kokoro failures. Will bring back.",
       "parentUuid": "95bc2006_e4241063",
+      "revId": "47ad8c95f77c316488992884cd605ec91a0eb42a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248d8128_3dbb54e9",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-02T17:25:59Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "5eacbfd7_b25f985e",
       "revId": "47ad8c95f77c316488992884cd605ec91a0eb42a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
