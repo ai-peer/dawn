@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0f3b54f_7d0b58a9",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:43:28Z",
+      "side": 1,
+      "message": "Yea, so from that description I\u0027d expect this change to be:\n\n```\nfn b() {\n  {\n    let ptr_index_save \u003d first();\n    for(let p1 \u003d \u0026(U[ptr_index_save]); true; ) {\n      a_U_X_X(10, U_X_X(u32(ptr_index_save), u32(second())), 20);\n    }\n  }\n}\n```\n\nTo fix the scoping issue, not also decompose the for loop and hoist another thing out of the initializer.",
+      "parentUuid": "0a68d73a_d5a54c31",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9f5e650_d63e8493",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 2
