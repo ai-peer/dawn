@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9435920b_cbe08594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-02T20:11:03Z",
+      "side": 1,
+      "message": "Note had to add additional clamping in native/Adapter.cpp to help with initial test failures. Lmk if that is a problem.",
+      "revId": "bd1ca00d7f1ecf689b46e33357017c5a0431c9e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

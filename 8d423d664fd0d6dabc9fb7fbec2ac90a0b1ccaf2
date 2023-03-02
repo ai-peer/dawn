@@ -33,6 +33,24 @@
       "message": "were you seeing exactly this issue? crbug.com/dawn/1683",
       "revId": "8d423d664fd0d6dabc9fb7fbec2ac90a0b1ccaf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a968ddb_10e56804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-02T20:11:03Z",
+      "side": 1,
+      "message": "Oh! Yes haha didn\u0027t realize that there was a bug for that. Will add to the CL name to mark it as fixed.",
+      "parentUuid": "51dbf30e_d62d00d1",
+      "revId": "8d423d664fd0d6dabc9fb7fbec2ac90a0b1ccaf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
