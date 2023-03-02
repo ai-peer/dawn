@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51141bea_e70b629c",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:19:01Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this just be a copy of `p-\u003eAccess` ? Why does it need to be conditional?",
+      "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
