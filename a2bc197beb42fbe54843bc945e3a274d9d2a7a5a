@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "510ae757_ed4fb6e3",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:28:30Z",
+      "side": 1,
+      "message": "nit: add a comment `// Robustness must come after PromoteSideEffectsToDecl`",
+      "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd853db_1d9372cd",
+        "filename": "src/tint/writer/hlsl/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:28:30Z",
+      "side": 1,
+      "message": "ditto, and other generators",
+      "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25422062_bd373c9d",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:28:30Z",
+      "side": 1,
+      "message": "Not sure how to parse this, is the `for` an extra word?",
+      "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87057d6c_26575f61",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.dxc.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:28:30Z",
+      "side": 0,
+      "message": "How come this required a custom clamp previously but no longer?",
+      "revId": "47ad8c95f77c316488992884cd605ec91a0eb42a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95bc2006_e4241063",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:28:30Z",
+      "side": 0,
+      "message": "Where did these files go?",
+      "revId": "47ad8c95f77c316488992884cd605ec91a0eb42a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
