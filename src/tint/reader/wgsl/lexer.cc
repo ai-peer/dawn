@@ -388,31 +388,42 @@ Token Lexer::try_float() {
     advance(end - start);
     end_source(source);
 
-    double value = std::strtod(&at(start), nullptr);
+    // Use a Utils StringStream to extract the double. This sets the locale to classic to fixup and
+    // potential locale issues.
+    double value;
+    utils::StringStream stream;
+
+    // With libc++ it doesn't like the `f` or `h` on the end of the number when parsing, so strip
+    // the suffix for parsing.
+    auto len = end - start;
+    if (has_f_suffix || has_h_suffix) {
+        len -= 1;
+    }
+
+    stream << std::string_view(&at(start), len);
+    stream >> value;
+
+    if (stream.HasErrors()) {
+        return {Token::Type::kError, source,
+                std::string("value ") + std::string(std::string_view(&at(start), end - start)) +
+                    " cannot be represented as 'abstract-float'"};
+    }
 
     if (has_f_suffix) {
         if (auto f = CheckedConvert<f32>(AFloat(value))) {
             return {Token::Type::kFloatLiteral_F, source, static_cast<double>(f.Get())};
-        } else {
-            return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
         }
+        return {Token::Type::kError, source, "value cannot be represented as 'f32'"};
     }
 
     if (has_h_suffix) {
         if (auto f = CheckedConvert<f16>(AFloat(value))) {
             return {Token::Type::kFloatLiteral_H, source, static_cast<double>(f.Get())};
-        } else {
-            return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
         }
+        return {Token::Type::kError, source, "value cannot be represented as 'f16'"};
     }
 
-    TINT_BEGIN_DISABLE_WARNING(FLOAT_EQUAL);
-    if (value == HUGE_VAL || -value == HUGE_VAL) {
-        return {Token::Type::kError, source, "value cannot be represented as 'abstract-float'"};
-    } else {
-        return {Token::Type::kFloatLiteral, source, value};
-    }
-    TINT_END_DISABLE_WARNING(FLOAT_EQUAL);
+    return {Token::Type::kFloatLiteral, source, value};
 }
 
 Token Lexer::try_hex_float() {
