@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf508075_093a38f4",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:11:27Z",
+      "side": 1,
+      "message": "Why did the `for` loops all convert to `loop` loops?",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f5e650_d63e8493",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:11:27Z",
+      "side": 1,
+      "message": "Ah, can we expand this a bit:\n\n```\n/// Because the for-loop initializer is being hoisted, we need to decompose the for-loop into a loop\n``` ?",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
