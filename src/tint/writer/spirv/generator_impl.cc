@@ -69,6 +69,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
 
     if (!options.disable_robustness) {
         // Robustness must come before BuiltinPolyfill
+        // Robustness must come after PromoteSideEffectsToDecl
         manager.Add<transform::Robustness>();
     }
 
@@ -79,7 +80,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         manager.Add<transform::MultiplanarExternalTexture>();
     }
 
-    {   // Builtin polyfills
+    {  // Builtin polyfills
         // BuiltinPolyfill must come before DirectVariableAccess, due to the use of pointer
         // parameter for workgroupUniformLoad()
         transform::BuiltinPolyfill::Builtins polyfills;

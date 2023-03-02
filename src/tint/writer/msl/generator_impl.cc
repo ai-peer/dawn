@@ -208,6 +208,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
 
     if (!options.disable_robustness) {
         // Robustness must come before BuiltinPolyfill
+        // Robustness must come after PromoteSideEffectsToDecl
         manager.Add<transform::Robustness>();
     }
 
