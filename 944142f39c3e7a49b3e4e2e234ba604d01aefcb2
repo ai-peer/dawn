@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1898dc91_d5351d50",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-02T23:36:12Z",
+      "side": 1,
+      "message": "u-nit. can we re-adjust these strings so that they are using the 100 char limit? (Same below)",
+      "range": {
+        "startLine": 601,
+        "startChar": 16,
+        "endLine": 606,
+        "endChar": 66
+      },
+      "revId": "944142f39c3e7a49b3e4e2e234ba604d01aefcb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
