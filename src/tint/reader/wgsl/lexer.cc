@@ -388,7 +388,16 @@ Token Lexer::try_float() {
     advance(end - start);
     end_source(source);
 
-    double value = std::strtod(&at(start), nullptr);
+    // Use a Utils StringStream to extract the double. This sets the locale to classic to fixup and
+    // potential locale issues.
+    double value;
+    utils::StringStream stream;
+    stream << std::string_view(&at(start), end - start);
+    stream >> value;
+
+    if (stream.HasErrors()) {
+        return {Token::Type::kError, source, "value cannot be represented as 'abstract-float'"};
+    }
 
     if (has_f_suffix) {
         if (auto f = CheckedConvert<f32>(AFloat(value))) {
@@ -406,13 +415,7 @@ Token Lexer::try_float() {
         }
     }
 
-    TINT_BEGIN_DISABLE_WARNING(FLOAT_EQUAL);
-    if (value == HUGE_VAL || -value == HUGE_VAL) {
-        return {Token::Type::kError, source, "value cannot be represented as 'abstract-float'"};
-    } else {
-        return {Token::Type::kFloatLiteral, source, value};
-    }
-    TINT_END_DISABLE_WARNING(FLOAT_EQUAL);
+    return {Token::Type::kFloatLiteral, source, value};
 }
 
 Token Lexer::try_hex_float() {

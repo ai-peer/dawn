@@ -19,7 +19,7 @@ namespace tint::utils {
 StringStream::StringStream() {
     sstream_.flags(sstream_.flags() | std::ios_base::showpoint | std::ios_base::fixed);
     sstream_.imbue(std::locale::classic());
-    sstream_.precision(9);
+    sstream_.precision(20);
 }
 
 StringStream::~StringStream() = default;
