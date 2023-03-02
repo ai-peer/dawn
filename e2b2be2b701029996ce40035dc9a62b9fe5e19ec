@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "838e48ff_53fdaf7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-03-02T16:22:24Z",
+      "side": 1,
+      "message": "Austin, PTAL.\nWill these expectations be auto-removed?\nI see that Monterey expectations don\u0027t have KEEP, do they stay because they keep failing on Intel?\nI thought it would look nicer if I kept Ventura expectations near to Monterey rather than moving them into their own KEEP block.",
+      "revId": "e2b2be2b701029996ce40035dc9a62b9fe5e19ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
