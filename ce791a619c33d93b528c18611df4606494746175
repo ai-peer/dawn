@@ -16,6 +16,24 @@
       "message": "How do we crash when the toggles are wrong? Worst case we should just ignore them I would imagine",
       "revId": "ce791a619c33d93b528c18611df4606494746175",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f805398b_2872e364",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T22:39:34Z",
+      "side": 1,
+      "message": "There\u0027s a bunch of logic that asserts that the returned pointer of `GetToggleInfo` is not null, then goes on to dereference said pointer.\nSeemed all-round easier and nicer to just validate that everything makes sense after parsing than skipping over nonsense, and not having a centralized place to alert the user that they did something wrong.",
+      "parentUuid": "670c1b24_d3bc11ba",
+      "revId": "ce791a619c33d93b528c18611df4606494746175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
