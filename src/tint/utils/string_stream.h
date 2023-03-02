@@ -43,6 +43,17 @@ class StringStream {
     /// @returns the original format flags
     std::ios_base::fmtflags flags(std::ios_base::fmtflags flags) { return sstream_.flags(flags); }
 
+    /// @returns true if the stream has errors
+    bool HasErrors() const { return sstream_.fail() || sstream_.bad(); }
+
+    /// @param value the value
+    /// @returns a reference to this
+    template <typename T>
+    StringStream& operator>>(T& value) {
+        sstream_ >> value;
+        return *this;
+    }
+
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this
@@ -94,11 +105,8 @@ class StringStream {
     template <typename T>
     StringStream& EmitFloat(const T& value) {
         // Try printing the float in fixed point, with a smallish limit on the precision
-        std::stringstream fixed;
-        fixed.flags(fixed.flags() | std::ios_base::showpoint | std::ios_base::fixed);
-        fixed.imbue(std::locale::classic());
-        fixed.precision(20);
-        fixed << value;
+        StringStream fixed;
+        fixed.sstream_ << value;
 
         std::string str = fixed.str();
 
