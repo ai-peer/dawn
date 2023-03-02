@@ -128,6 +128,30 @@
       },
       "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53da522_29a1a463",
+        "filename": "src/tint/writer/wgsl/generator_impl_literal_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T14:25:51Z",
+      "side": 1,
+      "message": "\u003e You\u0027d think, but if you look at the generated test names doing it this way gives:\n\nYup, I know it\u0027s weird how it orders the strings, but that doesn\u0027t change the fact that the _parameterization_ is the first argument, not the suite.\n\n\u003e But, this also ends up breaking down in other cases, because the second name is the suite name, and those have to be globally unique regardless of namespaces, in places where we do `Builtin` as the suite name, it won\u0027t compile and we\u0027d have to change those names to be slight variations.\n\nIsn\u0027t this a strong argument against doing what you\u0027re doing here?",
+      "parentUuid": "5a13609d_829662ac",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 40
+      },
+      "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
