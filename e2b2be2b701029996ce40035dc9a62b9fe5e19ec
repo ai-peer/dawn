@@ -52,6 +52,24 @@
       "parentUuid": "6f40a221_b23e2f7c",
       "revId": "e2b2be2b701029996ce40035dc9a62b9fe5e19ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffa3ccb_5f55c630",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T16:57:30Z",
+      "side": 1,
+      "message": "maybe we can have ventura automatically imply KEEP? then they won\u0027t get removed.\n\nI think this could be done by checking the `exIn.Tags` [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/tools/src/cts/expectations/update.go;l\u003d322), and passing keep\u003dtrue if it has \"ventura\" in it",
+      "parentUuid": "4761f5ef_375635f2",
+      "revId": "e2b2be2b701029996ce40035dc9a62b9fe5e19ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
