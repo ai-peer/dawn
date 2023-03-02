@@ -152,6 +152,30 @@
       },
       "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b857b8fb_22795b6e",
+        "filename": "src/tint/writer/wgsl/generator_impl_literal_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:50:19Z",
+      "side": 1,
+      "message": "Possibly, I was hoping to make the others work, but given the push back I\u0027ll revert the change in here. I\u0027ve been tripped a few times thinking I was running all the tests for a given component only to discover these later.",
+      "parentUuid": "c53da522_29a1a463",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 40
+      },
+      "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
