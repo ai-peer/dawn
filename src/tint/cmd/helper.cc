@@ -18,6 +18,8 @@
 #include <utility>
 #include <vector>
 
+#include "spirv-tools/libspirv.hpp"
+
 namespace tint::cmd {
 namespace {
 
