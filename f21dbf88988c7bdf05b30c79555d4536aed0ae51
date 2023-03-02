@@ -1,0 +1,214 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecd5e24_3b26e385",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "This is a bunch of good work.\n\nI have some question about side effects of sub expressions, w.r.t. side effects assumeed to have been hoisted.\n\nAlso, seems missing increment/decrement statements.\nAnd I\u0027m not clear on whether all texture builtins are covered. wr.t. array_index and level builtins?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "497d96f9_2e1631f1",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "The RHS can have side effects, and they should be preserved.\nDoes this pass assume they have been hoisted already?\n\nSimilarly, the address calculation for the LHS can also have side effects.\n\n    a[f()] \u003d b();\n    \nSo does this transform have to run *after* hoist side effects to decl?\n\nOr is this all handled by the logic at 132, where an expression with predication is already hoisted above the statement using it.  If so, probably needs a comment.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e33806_234eb77a",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "Same here, like assignment.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e01e982_84e4ab5a",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "What about IncrementDecrementStatement?  Seems missing.  Should be treated like compound assignment. The LHS can have an index.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ee38f4_20db33e9",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "ah, so all of the conditions are \"anded\" because all indices must be in bounds.\ngot it.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406d2eb0_0c80151b",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "I guess this always assumes coords_arg_idx \u003e\u003d 0?\n\nThis also is required to initialize predicate to non-null.  Otherwise initialize it to a true expression above.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afae18df_749bbfcd",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "what if the argument evaluations have side effects?\nDoes this transform assume side effects have been hoisted?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e02a2b3_d5031f31",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "Same here.  This assumes side effects of arg evaluation have been hoisted?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbb3c6db_48991ea0",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit confusing to see \u0027function_action\u0027 for types that would be, an integer type, for example.  I assume it would be a no-op in that case?\nMaybe a comment would be useful here.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849e36d1_073f249d",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "What about the level arg on things like textureDimension (which is a u32)\nor the array_index arg on many builtins?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "912fbadd_22225eb2",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "Are these the deprecated \u0027in\u0027 and \u0027out\u0027 address spaces?  Or is it something else?",
+      "range": {
+        "startLine": 38,
+        "startChar": 63,
+        "endLine": 38,
+        "endChar": 97
+      },
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b63e7b3f_8df630e9",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-02T23:57:51Z",
+      "side": 1,
+      "message": "nit: All these backends only list 2 passes that robustness must come after but the comment in robustness.h lists CanonicalizeEntryPointIO as well.\nDoes that have to be repeated here?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
