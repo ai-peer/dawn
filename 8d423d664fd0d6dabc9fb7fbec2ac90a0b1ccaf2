@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "8d423d664fd0d6dabc9fb7fbec2ac90a0b1ccaf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51dbf30e_d62d00d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T02:16:11Z",
+      "side": 1,
+      "message": "were you seeing exactly this issue? crbug.com/dawn/1683",
+      "revId": "8d423d664fd0d6dabc9fb7fbec2ac90a0b1ccaf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
