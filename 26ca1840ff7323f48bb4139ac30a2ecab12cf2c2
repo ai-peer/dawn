@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a68d73a_d5a54c31",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T16:39:23Z",
+      "side": 1,
+      "message": "See the CL description:\n\n\u003e When using HoistToDeclBefore on a for-loop initializer, the inserted\nstatement would be scoped outside the for-loop. This was incorrect.",
+      "parentUuid": "b5177e97_31ab059c",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9f5e650_d63e8493",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 2
