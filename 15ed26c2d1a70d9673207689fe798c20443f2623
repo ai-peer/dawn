@@ -16,6 +16,23 @@
       "message": "PTAL. This passes the lexer tests for me if I switch locales. Can you repeat the test you did last week with this and stack of patches applied and see if it fixes your locale specific issues?\n\nI didn\u0027t do `strtoll` as I couldn\u0027t figure out how to make parsing fail correctly. Using a `214\u0027123` in `de_CH` didn\u0027t seem to cause the grouping to kick in, so I\u0027m not sure how to test/fix it for decimal.",
       "revId": "15ed26c2d1a70d9673207689fe798c20443f2623",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c275ff_242341a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:15:49Z",
+      "side": 1,
+      "message": "Looks like this upsets the CTS tests in certain places and linux clang unittests. Will take a look.",
+      "revId": "15ed26c2d1a70d9673207689fe798c20443f2623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
