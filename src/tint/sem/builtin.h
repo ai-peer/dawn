@@ -26,6 +26,10 @@
 
 namespace tint::sem {
 
+/// @param i the builtin type
+/// @returns true if the builtin can only be called from uniform control flow.
+bool RequiresUniformControlFlow(BuiltinType i);
+
 /// Determines if the given `i` is a coarse derivative
 /// @param i the builtin type
 /// @returns true if the given derivative is coarse.
@@ -111,38 +115,41 @@ class Builtin final : public Castable<Builtin, CallTarget> {
     /// case, matches the name in the WGSL spec.
     const char* str() const;
 
-    /// @returns true if builtin is a coarse derivative builtin
+    /// @returns true if this builtin can only be called from uniform control flow
+    bool RequiresUniformControlFlow() const;
+
+    /// @returns true if this builtin is a coarse derivative builtin
     bool IsCoarseDerivative() const;
 
-    /// @returns true if builtin is a fine a derivative builtin
+    /// @returns true if this builtin is a fine a derivative builtin
     bool IsFineDerivative() const;
 
-    /// @returns true if builtin is a derivative builtin
+    /// @returns true if this builtin is a derivative builtin
     bool IsDerivative() const;
 
-    /// @returns true if builtin is a texture operation builtin
+    /// @returns true if this builtin is a texture operation builtin
     bool IsTexture() const;
 
-    /// @returns true if builtin is a image query builtin
+    /// @returns true if this builtin is a image query builtin
     bool IsImageQuery() const;
 
-    /// @returns true if builtin is a data packing builtin
+    /// @returns true if this builtin is a data packing builtin
     bool IsDataPacking() const;
 
-    /// @returns true if builtin is a data unpacking builtin
+    /// @returns true if this builtin is a data unpacking builtin
     bool IsDataUnpacking() const;
 
-    /// @returns true if builtin is a barrier builtin
+    /// @returns true if this builtin is a barrier builtin
     bool IsBarrier() const;
 
-    /// @returns true if builtin is a atomic builtin
+    /// @returns true if this builtin is a atomic builtin
     bool IsAtomic() const;
 
-    /// @returns true if builtin is a DP4a builtin (defined in the extension
+    /// @returns true if this builtin is a DP4a builtin (defined in the extension
     /// chromium_experimental_DP4a)
     bool IsDP4a() const;
 
-    /// @returns true if intrinsic may have side-effects (i.e. writes to at least
+    /// @returns true if this builtin may have side-effects (i.e. writes to at least
     /// one of its inputs)
     bool HasSideEffects() const;
 
