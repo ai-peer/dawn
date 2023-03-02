@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d13cc2_23750c6d",
+        "filename": "src/tint/text/unicode.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T13:38:34Z",
+      "side": 0,
+      "message": "What happened to this? I believe it was used in `EXPECT_EQ` style error messages.",
+      "revId": "f53010caf92b360759736c4166e502ba8598d61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
