@@ -104,6 +104,24 @@
       "parentUuid": "25422062_bd373c9d",
       "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd170438_3c5ff2d5",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:40:31Z",
+      "side": 1,
+      "message": "Ohhh, I read this as `a change is coming after the Robustness changes that will make MultiplanerExternalTexture more efficient`\n\nMaybe just at the `it is` to make it clearer?",
+      "parentUuid": "f64a47dd_dc6b6d25",
+      "revId": "a2bc197beb42fbe54843bc945e3a274d9d2a7a5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
