@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0ab963f_897607a4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T09:30:16Z",
+      "side": 1,
+      "message": "hm, it still doesn\u0027t feel worth the template complexity IMO. It adds a convenient way to schedule callbacks, but it doesn\u0027t at all **prevent** you from using callbackTaskManager-\u003eAddCallbackTask with a lambda that binds a raw pointer. So.. does it really solve the problem?\n\nSecondly, I think it\u0027s better to derisk binding raw C strings by simply removing them. I\u0027ve commented in the various parts of this CL where we could be using a std::string instead of `const char*` (it is already in string form). This is actually more efficient because string-\u003estring copy is faster than string-\u003ecstr-\u003estring, and it preserves \\0 (more correct). All the other usages pass a constant string. There the lambda would be cheaper since it wouldn\u0027t involve copying the constant string into a std::string.",
+      "parentUuid": "62e55688_152ea965",
+      "range": {
+        "startLine": 144,
+        "startChar": 5,
+        "endLine": 144,
+        "endChar": 28
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7bbff1_df9016ee",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 26
@@ -283,6 +307,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84c366af_73b5af43",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1013,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T09:30:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "85d2c46b_02062051",
+      "range": {
+        "startLine": 1009,
+        "startChar": 4,
+        "endLine": 1013,
+        "endChar": 26
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbf0acda_adb956fb",
@@ -379,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3ac3e80_326c5d57",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T09:30:16Z",
+      "side": 1,
+      "message": "I think it would be better to call tick - how do we know that the callback occurs due to the device being lost (LoseDeviceForTesting), or because WillDropLastExternalRef runs?",
+      "parentUuid": "538ebe56_c38ef5de",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cee4e048_360da80e",
         "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
         "patchSetId": 26
@@ -455,6 +527,24 @@
       "side": 1,
       "message": "I could do that. But I think it doesn\u0027t matter much? The mock object only verifies the expectations once it is destroyed, i.e. inside TearDown(). So whether we trigger callbacks by calling Tick() in the specific tests or inside TearDown(), we still couldn\u0027t verify the exact time the mock\u0027s methods got called. And the behaviors wouldn\u0027t change.\n\nBesides, isn\u0027t purpose of the SetUp()/TearDown() is for multiple tests to re-use similar code. In this case, we could re-use the device.Tick() call as a last step  without having to explicitly do that in every test code.",
       "parentUuid": "29a643ab_7b02014c",
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21717eb3_1e733551",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-02T09:30:16Z",
+      "side": 1,
+      "message": "my preference would be to have everything that should trigger the callback be next to the EXPECT_CALL - that way it\u0027s clear what the operations are that result in the expectation. With the Tick in TearDown, it\u0027s less obvious.\n\nLet\u0027s see what cwallez@ thinks",
+      "parentUuid": "fc705e8e_fecb9a3c",
       "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
