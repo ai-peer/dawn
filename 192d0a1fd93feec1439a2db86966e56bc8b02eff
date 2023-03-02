@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t this just be a copy of `p-\u003eAccess` ? Why does it need to be conditional?",
       "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c37501c0_bb958a74",
+        "filename": "src/tint/transform/transform.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-02T16:21:15Z",
+      "side": 1,
+      "message": "It\u0027s a validation error if any non-storage pointer also provides an access mode.\n`ty.pointer()` constructs the AST node based on what you give it - i.e. it doesn\u0027t go and throw away an argument due to some cleverness.",
+      "parentUuid": "51141bea_e70b629c",
+      "revId": "192d0a1fd93feec1439a2db86966e56bc8b02eff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
