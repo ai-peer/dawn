@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5177e97_31ab059c",
+        "filename": "src/tint/transform/direct_variable_access_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:37:09Z",
+      "side": 1,
+      "message": "But this was hoisting already and didn\u0027t require 2 statements in the initializer? So, is this just doing more then changing the scoping but also hoisting more? (If that\u0027s the case, can you just update the commit message to mention what extra change is happening above just scoping?)",
+      "parentUuid": "9af6ed0a_9a11c900",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d9f5e650_d63e8493",
         "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "Decomposition of `for` loops, `else if`s, etc are the whole purpose of this utility class.\nIn the next change we add a `Replace()` method, that would make your suggested comment technically incorrect. `Replace()` still decomposes the loop, because you might be replacing the initializer with a block statement. Basically - if you go messing with a `for` loop using this helper, it\u0027ll decompose to a loop.\n\nI don\u0027t disagree that this code is less clear than it could be, but I think that\u0027s more an issue with the whole class. It\u0027s evolved over time, and the name of the class and methods make little sense. I\u0027ve held off cleaning this up, because the IR should (hopefully) mean we can delete the class.",
       "parentUuid": "d9f5e650_d63e8493",
+      "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c523206c_c4e24542",
+        "filename": "src/tint/transform/utils/hoist_to_decl_before.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T16:37:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "00197ad1_5d176ac8",
       "revId": "26ca1840ff7323f48bb4139ac30a2ecab12cf2c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
