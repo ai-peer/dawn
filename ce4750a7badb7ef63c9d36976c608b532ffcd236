@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adad0d5a_06b1991d",
+        "filename": "test/tint/bug/tint/1725.wgsl.expected.wgsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "Robustness no longer happening?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeb7279f_be66b9c0",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.msl",
+        "patchSetId": 6
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "This seems lot more complicated now?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a9017e_cc5f69f0",
+        "filename": "test/tint/bug/tint/1739.wgsl.expected.wgsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "also clamping gone?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "453bd3fb_b280d949",
+        "filename": "test/tint/builtins/gen/literal/textureLoad/1bfdfb.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "New padding?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6d1f5a_1dcc255e",
+        "filename": "test/tint/statements/compound_assign/vector/modulo-scalar.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "Is it expected that things like this got unhoisted?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4426653_dacdb049",
+        "filename": "test/tint/var/initialization/workgroup/scalar.wgsl.expected.wgsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T18:12:59Z",
+      "side": 1,
+      "message": "We promote phony assignment to a let in the WGSL generator?",
+      "revId": "ce4750a7badb7ef63c9d36976c608b532ffcd236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
