@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82769dc_95c9963b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-03-02T20:38:06Z",
+      "side": 1,
+      "message": "I noticed that I seem to have accidentally reverted the CL title \"Make depthClearValue/WriteEnable/Compare required\" to \"Make properties required\" in the latest patchset, sorry.",
+      "revId": "9754bc42f4dfbc100529b54c8dc621f7fa2d32eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
