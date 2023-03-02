@@ -2,7 +2,7 @@
 
 using namespace metal;
 kernel void compute_main() {
-  float const a = 1.230000019f;
+  float const a = 1.23000001907348632812f;
   float b = fmax(a, 1.17549435e-38f);
   return;
 }
