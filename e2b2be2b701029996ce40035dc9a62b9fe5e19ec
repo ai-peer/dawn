@@ -70,6 +70,23 @@
       "parentUuid": "4761f5ef_375635f2",
       "revId": "e2b2be2b701029996ce40035dc9a62b9fe5e19ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c27ea80_f65bff51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-03-02T17:17:54Z",
+      "side": 1,
+      "message": "I don\u0027t know go. I\u0027m fine with maintaining these manually for a week or so while I stabilize the experimental bot.",
+      "revId": "e2b2be2b701029996ce40035dc9a62b9fe5e19ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
