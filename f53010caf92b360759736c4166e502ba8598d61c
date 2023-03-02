@@ -16,6 +16,24 @@
       "message": "What happened to this? I believe it was used in `EXPECT_EQ` style error messages.",
       "revId": "f53010caf92b360759736c4166e502ba8598d61c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5bd28aa_5456d4ca",
+        "filename": "src/tint/text/unicode.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:12:08Z",
+      "side": 0,
+      "message": "Yes, it still exists, I just had to move it. The `operator\u003c\u003c` methods were updated to take `StringStream`. But, this class can\u0027t depend on `libtint_base_src` because it\u0027s lower level and creates a cycle.\n\nIn order to break the cycle I moved this `operator\u003c\u003c` out. We could move this back to just `std::ostream` if we wanted.",
+      "parentUuid": "74d13cc2_23750c6d",
+      "revId": "f53010caf92b360759736c4166e502ba8598d61c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

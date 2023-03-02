@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fdb0571_549d93dd",
+        "filename": "src/tint/reader/spirv/function_cfg_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:12:08Z",
+      "side": 1,
+      "message": "It\u0027s because all the `operator\u003c\u003c` have been updated to use `StringStream` which means there is no overload to emit the blockinfo.",
+      "parentUuid": "a4c92323_4351c26c",
+      "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0cc8c78_e82b6a15",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d753138a_f80a62bb",
+        "filename": "src/tint/utils/string_stream.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:12:08Z",
+      "side": 1,
+      "message": "Layering violation. It could be in it\u0027s own file, but the unicode files can\u0027t refer to `StringStream` ... See comment above on the unicode file.",
+      "parentUuid": "e0cc8c78_e82b6a15",
+      "range": {
+        "startLine": 212,
+        "startChar": 0,
+        "endLine": 220,
+        "endChar": 26
+      },
+      "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12a3acb5_1547e7fa",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-03-02T13:38:34Z",
       "side": 1,
       "message": "Not sure about this change. The first argument is the optional name for the parameterized values, the second is the required fixture name. `WgslGenerator_` should be part of the fixture, no?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 40
+      },
+      "revId": "ae9123929f6e75083c4a7b4e2ea72feba811d6d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a13609d_829662ac",
+        "filename": "src/tint/writer/wgsl/generator_impl_literal_test.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-02T14:12:08Z",
+      "side": 1,
+      "message": "You\u0027d think, but if you look at the generated test names doing it this way gives:\n\n* `WgslGenerator_Zero/F32LiteralTest`\n\nDoing it the way it was before makes it:\n\n* `Zero/WgslGenerator_F32LiteralTest`\n\nWhich is kind of annoying when you just want to say run all Wgsl Generator tests and you have to `*` both sides of the filter.\n\nBut, this also ends up breaking down in other cases, because the second name is the suite name, and those have to be globally unique regardless of namespaces, in places where we do `Builtin` as the suite name, it won\u0027t compile and we\u0027d have to change those names to be slight variations.",
+      "parentUuid": "12a3acb5_1547e7fa",
       "range": {
         "startLine": 123,
         "startChar": 0,
