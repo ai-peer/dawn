@@ -16,6 +16,24 @@
       "message": "Missing expected results? Looks like GLSL needs `SKIP`s.",
       "revId": "5bd87b2f51cabd20bd85dcd8c561f8323d219a39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb0a7a5b_67e08811",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T21:51:30Z",
+      "side": 1,
+      "message": "(marking unresolved)",
+      "parentUuid": "33a0b0ce_a911e5fa",
+      "revId": "5bd87b2f51cabd20bd85dcd8c561f8323d219a39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
