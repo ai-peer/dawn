@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f5429b4_2aa042ba",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T23:01:44Z",
+      "side": 1,
+      "message": "For the record, a long discussion rooted out that textureSample* and textureGather* builtins don\u0027t need their coordinates, layer-level, or LOD arguments clamped.\nThe APIs/hardware do the necessary validation/ reduction/wrapping to bound the resulting coordinates.",
+      "revId": "d711138d600efe6440e6067a9bf511cd00dc8c03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
