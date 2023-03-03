@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "831a7b9f_7070977f",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T14:17:46Z",
+      "side": 1,
+      "message": "Why is this needed here? There\u0027s no SPIR-V writer stuff in this file AFAICT.",
+      "revId": "0d3b8a41d8ca697cd7e60ca613842d2d4077d618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
