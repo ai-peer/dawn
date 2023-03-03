@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c9514a5a_568f4b28",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T03:56:43Z",
+      "side": 1,
+      "message": "The queries don\u0027t, though?  (dimensions, numLayers, numLevels, numSamples)\n\nI guess the qualification is: any texture builtin that performs an access *on the texels* has a coordinate, and that is true.",
+      "parentUuid": "db69b50f_2c957316",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afae18df_749bbfcd",
         "filename": "src/tint/transform/robustness.cc",
         "patchSetId": 6
@@ -282,6 +300,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69f4653c_18ac6e83",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T03:56:43Z",
+      "side": 1,
+      "message": "Coder\u0027s choice here.  The risk is if that you have a \u0027no-op\u0027 action, then it would accidentally be applied to a memory view. I think a comment here would be sufficient.",
+      "parentUuid": "027acf69_9832ad3f",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "849e36d1_073f249d",
         "filename": "src/tint/transform/robustness.cc",
         "patchSetId": 6
@@ -334,6 +370,30 @@
       "side": 1,
       "message": "They still exist internally after the `CanonicalizeEntryPointIO` transform.",
       "parentUuid": "912fbadd_22225eb2",
+      "range": {
+        "startLine": 38,
+        "startChar": 63,
+        "endLine": 38,
+        "endChar": 97
+      },
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8739f6bc_27908447",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T03:56:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c034b798_21d89856",
       "range": {
         "startLine": 38,
         "startChar": 63,
