@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9be22dd_e6b21ef0",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc3558c7_ac5cdeae",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e33806_234eb77a",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "👍 Will fix.",
       "parentUuid": "4e01e982_84e4ab5a",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6434cd98_a7e649d8",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6081cf1c_086a3d94",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5a53d1_77b90079",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Sorry, I should have been more precise:\n\n`PredicateTextureBuiltin()` is only called if `IsTextureBuiltinThatRequiresRobustness()` returns true, which constrains to `textureLoad()` and `textureStore()`.",
+      "parentUuid": "c9514a5a_568f4b28",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afae18df_749bbfcd",
@@ -224,6 +278,24 @@
       "side": 1,
       "message": "Yes, it does.",
       "parentUuid": "afae18df_749bbfcd",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e289147_9789d823",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Fixed the header comment.",
+      "parentUuid": "e4a94386_b85bb398",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -316,6 +388,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "746df638_943e61dd",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Added `value_action`. Thank you for highlighting this, this was weird.",
+      "parentUuid": "69f4653c_18ac6e83",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "849e36d1_073f249d",
@@ -329,6 +419,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "What about the level arg on things like textureDimension (which is a u32)\nor the array_index arg on many builtins?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdd7168_d129bf1a",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "That\u0027s a fair point. Let\u0027s be defensive and do all of them.\nDone - although we have to fallback to clamping for those overloads that require uniform control flow.",
+      "parentUuid": "849e36d1_073f249d",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -435,6 +543,24 @@
       "side": 1,
       "message": "I\u0027m slowly figuring out the dependencies. Clearly I haven\u0027t been explicit with all of them. Will fix.",
       "parentUuid": "b63e7b3f_8df630e9",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77ad0dd3_ba106551",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-03T17:16:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "beb06ec2_86062e0c",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
