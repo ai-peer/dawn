@@ -364,6 +364,31 @@ MaybeError ValidateFragmentState(DeviceBase* device,
     const EntryPointMetadata& fragmentMetadata =
         descriptor->module->GetEntryPoint(descriptor->entryPoint);
 
+    // Iterates through the bindings on the fragment state to count the number of storage buffer and
+    // storage textures.
+    uint32_t maxFragmentCombinedOutputResources =
+        device->GetLimits().v1.maxFragmentCombinedOutputResources;
+    uint32_t fragmentCombinedOutputResources = descriptor->targetCount;
+    for (BindGroupIndex group(0); group < fragmentMetadata.bindings.size(); ++group) {
+        for (const auto& [_, shaderBinding] : fragmentMetadata.bindings[group]) {
+            switch (shaderBinding.bindingType) {
+                case BindingInfoType::Buffer:
+                    if (shaderBinding.buffer.type == wgpu::BufferBindingType::Storage) {
+                        fragmentCombinedOutputResources += 1;
+                    }
+                    break;
+                case BindingInfoType::StorageTexture:
+                    fragmentCombinedOutputResources += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    DAWN_INVALID_IF(fragmentCombinedOutputResources > maxFragmentCombinedOutputResources,
+                    "Number of fragment output resources (%u) exceeds the maximum (%u).",
+                    fragmentCombinedOutputResources, maxFragmentCombinedOutputResources);
+
     if (fragmentMetadata.usesFragDepth) {
         DAWN_INVALID_IF(
             depthStencil == nullptr,
