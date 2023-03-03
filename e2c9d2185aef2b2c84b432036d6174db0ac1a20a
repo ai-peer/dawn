@@ -33,6 +33,24 @@
       "message": "LGTM. OK to initialize more than once, right? b.c. you can make more than one Instance",
       "revId": "e2c9d2185aef2b2c84b432036d6174db0ac1a20a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88d5e8c0_04cbf783",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:25:32Z",
+      "side": 1,
+      "message": "Yes, currently it just assigns a single field. Once it gets more involved, we should consider a tint object.",
+      "parentUuid": "2f8ac60f_bbd3e0d9",
+      "revId": "e2c9d2185aef2b2c84b432036d6174db0ac1a20a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
