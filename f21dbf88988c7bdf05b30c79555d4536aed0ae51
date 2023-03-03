@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc3558c7_ac5cdeae",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "\u003e So does this transform have to run after hoist side effects to decl?\n\nErm, yes. I tided up the comments, and managed to negate the order for that transform. Great spot. Will fix.",
+      "parentUuid": "497d96f9_2e1631f1",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "73e33806_234eb77a",
         "filename": "src/tint/transform/robustness.cc",
         "patchSetId": 6
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "Same here, like assignment.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9ae4ea_9936f664",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "73e33806_234eb77a",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "What about IncrementDecrementStatement?  Seems missing.  Should be treated like compound assignment. The LHS can have an index.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6081cf1c_086a3d94",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "👍 Will fix.",
+      "parentUuid": "4e01e982_84e4ab5a",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db69b50f_2c957316",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "Yes. All texture builtins have a coordinate argument.",
+      "parentUuid": "406d2eb0_0c80151b",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "afae18df_749bbfcd",
         "filename": "src/tint/transform/robustness.cc",
         "patchSetId": 6
@@ -116,6 +188,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "what if the argument evaluations have side effects?\nDoes this transform assume side effects have been hoisted?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a94386_b85bb398",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "Yes, it does.",
+      "parentUuid": "afae18df_749bbfcd",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b042633_f08c1a58",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "9e02a2b3_d5031f31",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbb3c6db_48991ea0",
@@ -150,6 +258,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "nit: It\u0027s a bit confusing to see \u0027function_action\u0027 for types that would be, an integer type, for example.  I assume it would be a no-op in that case?\nMaybe a comment would be useful here.",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "027acf69_9832ad3f",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 503,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "I was a little unsure what the best action would be for a value type.\nFunction address space seamed \u0027closest\u0027, but perhaps the best thing would be to add a separate field for this.",
+      "parentUuid": "bbb3c6db_48991ea0",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -196,6 +322,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c034b798_21d89856",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "They still exist internally after the `CanonicalizeEntryPointIO` transform.",
+      "parentUuid": "912fbadd_22225eb2",
+      "range": {
+        "startLine": 38,
+        "startChar": 63,
+        "endLine": 38,
+        "endChar": 97
+      },
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b63e7b3f_8df630e9",
         "filename": "src/tint/writer/spirv/generator_impl.cc",
         "patchSetId": 6
@@ -207,6 +357,24 @@
       "writtenOn": "2023-03-02T23:57:51Z",
       "side": 1,
       "message": "nit: All these backends only list 2 passes that robustness must come after but the comment in robustness.h lists CanonicalizeEntryPointIO as well.\nDoes that have to be repeated here?",
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb06ec2_86062e0c",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-03T00:21:44Z",
+      "side": 1,
+      "message": "I\u0027m slowly figuring out the dependencies. Clearly I haven\u0027t been explicit with all of them. Will fix.",
+      "parentUuid": "b63e7b3f_8df630e9",
       "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
