@@ -102,6 +102,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b541e77d_7c35957a",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T18:05:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7b75b8ca_415e26fe",
+      "range": {
+        "startLine": 418,
+        "startChar": 32,
+        "endLine": 418,
+        "endChar": 35
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cd7b79b4_c8bdbed0",
         "filename": "src/tint/transform/robustness.cc",
         "patchSetId": 10
@@ -201,6 +225,30 @@
       "side": 1,
       "message": "See the `else` of the `if`.",
       "parentUuid": "16591591_79201fc7",
+      "range": {
+        "startLine": 542,
+        "startChar": 20,
+        "endLine": 542,
+        "endChar": 33
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44841ce2_357598d1",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T18:05:55Z",
+      "side": 1,
+      "message": "ack.  I only saw \"is_integer_scalar_or_vector\".",
+      "parentUuid": "7f8e35d2_4c959ae0",
       "range": {
         "startLine": 542,
         "startChar": 20,
