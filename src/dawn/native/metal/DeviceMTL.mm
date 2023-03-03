@@ -313,6 +313,7 @@ MaybeError Device::SubmitPendingCommandBuffer() {
 
     // Acquire the pending command buffer, which is retained. It must be released later.
     NSPRef<id<MTLCommandBuffer>> pendingCommands = mCommandContext.AcquireCommands();
+    // TRACE_EVENT_FLOW_BEGIN0(GetPlatform(), GPUWork, "SubmittedCommandBuffer", *pendingCommands);
 
     // Replace mLastSubmittedCommands with the mutex held so we avoid races between the
     // schedule handler and this code.
@@ -321,10 +322,19 @@ MaybeError Device::SubmitPendingCommandBuffer() {
         mLastSubmittedCommands = pendingCommands;
     }
 
+    // Update the completed serial once the completed handler is fired. Make a local copy of
+    // mLastSubmittedSerial so it is captured by value.
+    ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+
     // Make a local copy of the pointer to the commands because it's not clear how ObjC blocks
     // handle types with copy / move constructors being referenced in the block..
     id<MTLCommandBuffer> pendingCommandsPointer = pendingCommands.Get();
     [*pendingCommands addScheduledHandler:^(id<MTLCommandBuffer>) {
+        TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "CommandBufferScheduling",
+                             uint64_t(pendingSerial));
+        // TRACE_EVENT_FLOW_STEP0(GetPlatform(), GPUWork, "SubmittedCommandBuffer", *pendingCommands, "scheduled");
+        // TRACE_EVENT_FLOW_END0(GetPlatform(), GPUWork, "PendingCommandsScheduled", *pendingCommands);
+
         // This is DRF because we hold the mutex for mLastSubmittedCommands and pendingCommands
         // is a local value (and not the member itself).
         std::lock_guard<std::mutex> lock(mLastSubmittedCommandsMutex);
@@ -333,23 +343,42 @@ MaybeError Device::SubmitPendingCommandBuffer() {
         }
     }];
 
-    // Update the completed serial once the completed handler is fired. Make a local copy of
-    // mLastSubmittedSerial so it is captured by value.
-    ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+
     // this ObjC block runs on a different thread
     [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
-        TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
-                               uint64_t(pendingSerial));
+        TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "CommandBufferExecuting",
+                                    uint64_t(pendingSerial));
+        // TRACE_EVENT_FLOW_END0(GetPlatform(), GPUWork, "SubmittedCommandBuffer", *pendingCommands, "completed");
+        // TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
+        //                        uint64_t(pendingSerial));
         ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
         this->mCompletedSerial = uint64_t(pendingSerial);
     }];
 
-    TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
+    // TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
+    //                          uint64_t(pendingSerial));
+    TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "CommandBufferScheduling",
+                             uint64_t(pendingSerial));
+    TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "CommandBufferFencePassed",
+                             uint64_t(pendingSerial));
+    TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "CommandBufferExecuting",
                              uint64_t(pendingSerial));
     if (@available(macOS 10.14, *)) {
         id rawEvent = *mMtlSharedEvent;
         id<MTLSharedEvent> sharedEvent = static_cast<id<MTLSharedEvent>>(rawEvent);
+        // if (static_cast<uint64_t>(pendingSerial) > 2u) {
+        //     [*pendingCommands encodeWaitForEvent:sharedEvent value:static_cast<uint64_t>(pendingSerial) - 1u];
+        // }
         [*pendingCommands encodeSignalEvent:sharedEvent value:static_cast<uint64_t>(pendingSerial)];
+        auto listener = [[[MTLSharedEventListener alloc] init] autorelease];
+        [sharedEvent notifyListener:listener
+                            atValue:static_cast<uint64_t>(pendingSerial)
+                              block:^(id<MTLSharedEvent> sharedEvent, uint64_t value) {
+                                TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "CommandBufferFencePassed",
+                                    uint64_t(pendingSerial));
+                                //  TRACE_EVENT_WITH_FLOW0("gpu", "DawnEndAccess",
+                                //    TRACE_ID_LOCAL(reinterpret_cast<uintptr_t>((void*)sharedEvent) ^ (~value)), TRACE_EVENT_FLAG_FLOW_IN);
+                              }];
     }
     [*pendingCommands commit];
 
