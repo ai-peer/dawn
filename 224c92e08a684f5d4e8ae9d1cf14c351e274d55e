@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7046fd_d933ec3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "ddd",
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87ef17f8_a9ff6af8",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "This makes me really glad we don\u0027t have pointer-to-function in WGSL.",
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4330e04_f207a092",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "nit: might be vector case, which makes this comment misleading.",
+      "range": {
+        "startLine": 418,
+        "startChar": 32,
+        "endLine": 418,
+        "endChar": 35
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7b79b4_c8bdbed0",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "This is nicer to use, and more robust.",
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee3d4ab_028d312b",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "might be a signed integer.\nWould need to convert to u32 in that case.",
+      "range": {
+        "startLine": 517,
+        "startChar": 16,
+        "endLine": 517,
+        "endChar": 49
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16591591_79201fc7",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "the coordinates on textureLoad and textureStore can be unsigned.\nI think this code only handles the signed case.",
+      "range": {
+        "startLine": 542,
+        "startChar": 20,
+        "endLine": 542,
+        "endChar": 33
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6ba7b82_db728fdd",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 560,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T17:41:47Z",
+      "side": 1,
+      "message": "same here. array_index can be signed or unsigned.\nThis code only handles the signed case.",
+      "range": {
+        "startLine": 560,
+        "startChar": 16,
+        "endLine": 560,
+        "endChar": 29
+      },
+      "revId": "224c92e08a684f5d4e8ae9d1cf14c351e274d55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
