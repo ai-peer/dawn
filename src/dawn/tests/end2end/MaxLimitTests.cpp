@@ -558,6 +558,21 @@ TEST_P(MaxLimitTests, MaxBufferSizes) {
     GetAdapter().SetUseTieredLimits(false);
 }
 
+// Verifies that supported fragment combined output resource limits meet base requirements.
+TEST_P(MaxLimitTests, MaxFragmentCombinedOutputResources) {
+    // Base limits without tiering.
+    wgpu::Limits baseLimits = GetAdapterLimits().limits;
+    EXPECT_LE(baseLimits.maxColorAttachments, baseLimits.maxFragmentCombinedOutputResources);
+
+    // Base limits eith tiering.
+    GetAdapter().SetUseTieredLimits(true);
+    wgpu::Limits tieredLimits = GetAdapterLimits().limits;
+    EXPECT_LE(tieredLimits.maxColorAttachments, tieredLimits.maxFragmentCombinedOutputResources);
+
+    // Unset tiered limit usage to avoid affecting other tests.
+    GetAdapter().SetUseTieredLimits(false);
+}
+
 DAWN_INSTANTIATE_TEST(MaxLimitTests,
                       D3D12Backend(),
                       MetalBackend(),
