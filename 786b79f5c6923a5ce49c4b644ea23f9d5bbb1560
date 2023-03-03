@@ -175,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d57adb_d3d985a8",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-03T06:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3638ddcf_6cddada2",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e192aff6_b8753ebe",
@@ -327,6 +345,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "702e8569_e3ff442e",
+        "filename": "src/dawn/native/opengl/BackendGL.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-03T06:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5341a627_cdf2d6f2",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec3ed25b_b007a99a",
@@ -411,6 +447,24 @@
       "side": 1,
       "message": "Can we add TODO(dawn:....) on these two?",
       "parentUuid": "02ab4bf2_8e5811e6",
+      "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7373bba_f23825ff",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 998,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-03T06:10:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c24ec926_589471aa",
       "revId": "786b79f5c6923a5ce49c4b644ea23f9d5bbb1560",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
