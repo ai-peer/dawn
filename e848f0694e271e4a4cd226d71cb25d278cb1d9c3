@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed8c334_39de288d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-03T18:07:18Z",
+      "side": 1,
+      "message": "LGTM.  Stakes are high, so I want someone else to approve too.",
+      "revId": "e848f0694e271e4a4cd226d71cb25d278cb1d9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
