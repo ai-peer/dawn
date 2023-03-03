@@ -34,6 +34,24 @@
       "parentUuid": "831a7b9f_7070977f",
       "revId": "0d3b8a41d8ca697cd7e60ca613842d2d4077d618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a165c1_9edb1351",
+        "filename": "src/tint/cmd/helper.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T14:37:25Z",
+      "side": 1,
+      "message": "Oh I see, so the guard should have been on `TINT_BUILD_SPV_READER` instead.",
+      "parentUuid": "d36f8737_423a6fd9",
+      "revId": "0d3b8a41d8ca697cd7e60ca613842d2d4077d618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
