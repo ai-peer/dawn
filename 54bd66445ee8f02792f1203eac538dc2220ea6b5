@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb73406_eb2e7a3a",
+        "filename": "docs/tint/interp/README.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae7bca9_7fe79cb3",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "005414e2_2bfde6b9",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit; either a Value",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef49fab5_8ea7dd50",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "005414e2_2bfde6b9",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8adbd4f_eb231800",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "The queue is in the order that expressions need to be evaluated in. It\u0027s populated with a depth-first traversal.\n\nReworded slightly to try and make this clearer. PTAL.",
+      "parentUuid": "5b3c655f_cab32afb",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4a22aae_02aa6365",
         "filename": "docs/tint/interp/arch.md",
         "patchSetId": 7
@@ -82,6 +136,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: s/methods/method",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "999eecfc_ac516c11",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a22aae_02aa6365",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a8ff9c3_7df0a3f7",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce42e733_d7440195",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cb012b2_180242f0",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: s/pausing/pause/",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b009f02_74d7b856",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cb012b2_180242f0",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +247,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a0a27f4_9bb7caf1",
+        "filename": "src/dawn/native/emulator/BindGroupEmulator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I\u0027m personally not worried (this is just copied this from the Null backend). This isn\u0027t going to be used in Chrome builds.\n\nBut I can add a check somewhere if people want.",
+      "parentUuid": "cdde40f5_fef15b16",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "17520b6f_e3792730",
         "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
         "patchSetId": 7
@@ -156,6 +282,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ddde3d36_908f7f90",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Not sure. I couldn\u0027t see any other obvious way of iterating over the commands in a command buffer.\n\nI\u0027ll let someone from the Dawn team comment.",
+      "parentUuid": "17520b6f_e3792730",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d3ae10d_c33df320",
         "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
         "patchSetId": 7
@@ -167,6 +311,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: if returns, no need for else",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40090461_a59d18cd",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d3ae10d_c33df320",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +352,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c1d1c7e_e9e45729",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Not sure. I can give them arbitrary values if needed, but I can\u0027t think of this causing any real problems.",
+      "parentUuid": "24244192_c29e3b53",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6709c72d_fc5d3504",
         "filename": "src/tint/interp/data_race_detector.cc",
         "patchSetId": 7
@@ -201,6 +381,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "These names are a bit opaque. Is this ByteSize? ElementCount? Some other size? Maybe as a followup make these a bit more explicit (currently reading I can\u0027t tell if `access.size` and `parent-\u003eSize` are the same units)",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac30f6c2_3d0f0299",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I\u0027ve added `byte_` to the fields in the `MemoryAccess`, which is hopefully clearer.",
+      "parentUuid": "6709c72d_fc5d3504",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -224,6 +422,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4ef319d0_6e8aa0cb",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Debatable IMO (partly because I can\u0027t think of a good name).",
+      "parentUuid": "7077fea3_ec732cfc",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13b708da_361ebdda",
         "filename": "src/tint/interp/data_race_detector.cc",
         "patchSetId": 7
@@ -235,6 +451,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Does this need to store in the case of `acess.kind \u003d\u003d kWrite`? We already know there is an entry, that entry isn\u0027t store, so it must be write, so it must be there already?\n\nThe only thing we really care about after here is if `itr-\u003esecond.kind \u003d\u003d Read` and `access.kind \u003d\u003d Write`?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4517acc3_c61da899",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Do you mean if `access.kind \u003d\u003d kLoad`? If so you\u0027re right, we could skip the case where we have an existing `kLoad` and we\u0027re trying to add another `kLoad`. It doesn\u0027t matter which load we record when there are multiple of them. But I don\u0027t think it matters either way.",
+      "parentUuid": "13b708da_361ebdda",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -256,6 +490,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "702c6979_540a7779",
+        "filename": "src/tint/interp/data_race_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a43b025e_6d775151",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d06b2a2_413b5a71",
@@ -269,6 +521,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Any reason this isn\u0027t an enum class?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "487cca62_8f3f74cd",
+        "filename": "src/tint/interp/data_race_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d06b2a2_413b5a71",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -290,6 +560,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "586fca2d_35c2436b",
+        "filename": "src/tint/interp/data_race_detector.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "857b7827_7955fbf3",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bbe2250_32b43378",
@@ -303,6 +591,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: private vars usually go at the end of the class",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22448f71_5dd08478",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bbe2250_32b43378",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -342,6 +648,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e95c837_855acbba",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aff3c90_00325ec4",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbc5555f_e65e01d2",
@@ -355,6 +679,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "So, am I reading this correct that it will overwrite a statemetn with an expression? Maybe worth adding to the comment on line 85 as the comment made me assume it would only add if there was nothing for the line already",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a77b77_07080bc6",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Renamed to `possible_breakpoints` as per the other comment, which I think helps.",
+      "parentUuid": "cbc5555f_e65e01d2",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -376,6 +718,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90ca436_bb53bdd8",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "`insert` doesn\u0027t add if there is already something there. Switched this case to `insert_or_assign()` to make it sort of consistent.",
+      "parentUuid": "1f36e548_6d5b6594",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b9601fb_473fa058",
@@ -393,6 +753,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "857d65ba_86a87c98",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b9601fb_473fa058",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b54bdf8d_27f8596c",
@@ -406,6 +784,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit:\n\n```\nif (!current_invocation) {\n  return;\n}\n```",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2982571a_66ef8f60",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b54bdf8d_27f8596c",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -429,6 +825,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06009a01_51da38a8",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "`first` does go negative, but the `if` statement at the top of the loop skips over lines outside the file. This seems to work fine from my testing, unless I\u0027ve missed your point?",
+      "parentUuid": "e5affe15_b8748059",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23f07beb_2f943fc4",
         "filename": "src/tint/interp/interactive_debugger.cc",
         "patchSetId": 7
@@ -440,6 +854,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "what about returning an optional instead of bool + out param?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77fb9d30_7c9ac10a",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f07beb_2f943fc4",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -463,6 +895,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9b3998e_6c5d4f96",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Just tried this but `stoul` throws an exception if the argument isn\u0027t valid, and I can\u0027t figure out how to make it not just abort in this case. Suggestions welcome.",
+      "parentUuid": "48585cd3_3a201eac",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "778baa6d_2fe6425e",
         "filename": "src/tint/interp/interactive_debugger.cc",
         "patchSetId": 7
@@ -474,6 +924,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "ohhhh, `available_breakpoints_` I\u0027d thought were the breakpoints which had been set in the interpreter but I now realize, they are locations in which a breakpoint can be set.\n\nMaybe s/available_breakpoints_/possible_breakpoints_/ or something?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3f971d_8d367db6",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Renamed to `possible_breakpoints`.",
+      "parentUuid": "778baa6d_2fe6425e",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -495,6 +963,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59ac1146_0012f67b",
+        "filename": "src/tint/interp/interactive_debugger.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2b90e8f_75996a20",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37621345_2111a35a",
@@ -508,6 +994,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: this is the inverse of how we usually do this isnt\u0027 it? Methods first then members afterwards?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da6589f5_80528365",
+        "filename": "src/tint/interp/interactive_debugger.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37621345_2111a35a",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -529,6 +1033,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79d14c49_9c7cae1a",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b45be913_ce9c290f",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb2a5b4_ec408574",
@@ -546,6 +1068,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37cfddf5_6a873ed2",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb2a5b4_ec408574",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "674519f3_a60172b1",
@@ -559,6 +1099,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit: don\u0027t need else",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee2d52b_b7e8fdcc",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "674519f3_a60172b1",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -598,6 +1156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b82e530_20d91903",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Yes, spec says evaluate RHS first. C/C++ is the same.",
+      "parentUuid": "476d9cf5_c40e4fcd",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "159de182_cdc89e60",
@@ -611,6 +1187,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Amusingly, this one is opposite order. We should probably make them consistent.",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ef4627e_a25f1755",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1167,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "This one is right too. `a +\u003d b` expands to `a \u003d a + b`, so you need to evaluate `a` first.",
+      "parentUuid": "159de182_cdc89e60",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -632,6 +1226,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91598a1_82f4c78f",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "The `Reference()` was already done above in this case. I\u0027ve now done that for `Assignment` too just to make it consistent.",
+      "parentUuid": "bc0304b9_ef8b5cf9",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27e6cc85_eebcffb2",
@@ -645,6 +1257,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "What does `standalone mode` mean?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef6ca48_ec793a71",
+        "filename": "src/tint/interp/invocation.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1410,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Deleted that phrase. I hope to improve the way error handling is done in general.",
+      "parentUuid": "27e6cc85_eebcffb2",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -666,6 +1296,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81a0e9e2_e176b3e5",
+        "filename": "src/tint/interp/invocation.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8814174_26149eb0",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da0d7684_a6236888",
@@ -679,6 +1327,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit; enum class",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1764f4cc_9e16b930",
+        "filename": "src/tint/interp/invocation.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da0d7684_a6236888",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -702,6 +1368,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc903efa_6046d830",
+        "filename": "src/tint/interp/main.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Maybe? I\u0027m also wondering if it should just be deleted altogether. It was useful when I first started building the interpreter, but now not so much. Running any real shaders requires binding resources, which aren\u0027t easy to provide via a command-line tool.\n\nA command-line tool to load and replay a shader from a trace created with the WebGPU debugger would be much more useful. Or maybe a flow that uses Amber via Dawn Native.",
+      "parentUuid": "270fdbd3_8e131696",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7f27111_9b39c9dd",
         "filename": "src/tint/interp/main.cc",
         "patchSetId": 7
@@ -713,6 +1397,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "In `src/tint/cmd` there is a `helper.h` file where we could move the helper.cc `ReadFile` and reuse it here. It\u0027s only in the .cc file at teh moment because it didn\u0027t  need to be shared\n\n(Actually, it\u0027s quite possible you could just use `LoadProgramInfo` from helper.h and then you don\u0027t need `ReadFile` at all.",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c22b32fe_0924a59f",
+        "filename": "src/tint/interp/main.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Not changing this just yet. Considering removing the command-line tool altogether.",
+      "parentUuid": "e7f27111_9b39c9dd",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -736,6 +1438,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f97fdf44_f87d85cc",
+        "filename": "src/tint/interp/main.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Not changing this just yet. Considering removing the command-line tool altogether.",
+      "parentUuid": "5ca2b035_23577463",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7e0fc555_125f4c80",
         "filename": "src/tint/interp/memory.cc",
         "patchSetId": 7
@@ -747,6 +1467,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "How come this and store don\u0027t report of of bounds?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11e342c_60b1ab7a",
+        "filename": "src/tint/interp/memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "All accesses from a within a shader go through the `MemoryView` class, which does the bounds checking to report errors. These checks on the `Memory` object just implement the \"load zero, skip write\" behavior for OOB accesses (and are really just there to make sure OOB accesses don\u0027t crash when performed by other parts of the system).",
+      "parentUuid": "7e0fc555_125f4c80",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -768,6 +1506,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "720affdd_f21cd021",
+        "filename": "src/tint/interp/memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "You can\u0027t store a whole runtime-sized array, but you can still store to an element of one (which would be done via another `MemoryView` that represents a single element of the array, created when the shader performed the index accessor).",
+      "parentUuid": "13cf7e48_469f835b",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3826d8eb_be4a86ca",
@@ -781,6 +1537,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Should this set `is_valid` to false?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91fb0269_62633ad4",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "All fields are now default initialized, including `is_valid \u003d false`.",
+      "parentUuid": "3826d8eb_be4a86ca",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -802,6 +1576,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "078f4477_04183b41",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I\u0027m confident that \"to\" is correct (Googled it to be sure).",
+      "parentUuid": "e53a5b09_54aa26e1",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fc44556_91cd7925",
@@ -815,6 +1607,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Does the subview count as the same memory view for purposes of race detection? Maybe add a comment in the docs here?",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d49b4e_b68228f3",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "The data race detector uses the root memory views when checking for conflicts.\n\nThe `Memory` and `MemoryView` classes are oblivious to the existence of race detection and I\u0027d like to keep it that way, so I\u0027d lean towards not mentioning it in the docs here.",
+      "parentUuid": "8fc44556_91cd7925",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -854,6 +1664,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e017c8e_f1e40368",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "167c23bb_48212e38",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7590c1d5_8220d5fb",
@@ -867,6 +1695,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "Maybe s/Raises/Crashes ? Raises makes me think you\u0027re throwing an exception which we don\u0027t have ...",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e0f6bb_d2dcb78f",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Changed to \"Reports\", which I think is more accurate.",
+      "parentUuid": "7590c1d5_8220d5fb",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -888,6 +1734,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1655165_bd90f4f8",
+        "filename": "src/tint/interp/shader_executor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e053fa99_45375082",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d7415f1d_36e6ef24",
@@ -905,6 +1769,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e65afc8_df30d338",
+        "filename": "src/tint/interp/shader_executor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7415f1d_36e6ef24",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b39a95bc_893feccc",
@@ -918,6 +1800,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "This may not be safe if TINT_ASSERT ever gets compiled out. May want to break this apart.",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6de6147d_e817465e",
+        "filename": "src/tint/interp/shader_executor.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b39a95bc_893feccc",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -941,6 +1841,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d69c7267_a61e9af3",
+        "filename": "src/tint/interp/uvec3.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "This is used for passing around dispatch sizes and IDs outside of shader execution. Using a `constant::Composite` for that stuff just feels awkward?",
+      "parentUuid": "5b1e0434_eb03c076",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "184d3b0c_a05a81b3",
         "filename": "src/tint/interp/uvec3.h",
         "patchSetId": 7
@@ -952,6 +1870,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit i could be out of bounds",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb61e648_4a2b99de",
+        "filename": "src/tint/interp/uvec3.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I\u0027ve removed the index accessors in favour of just direct access to `x`/`y`/`z` members, which is simpler and avoids this issue.",
+      "parentUuid": "184d3b0c_a05a81b3",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -973,6 +1909,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1415eb9e_8ee7f9cf",
+        "filename": "src/tint/interp/uvec3.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "006e1bed_aeb49103",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63a9f565_41898b4d",
@@ -990,6 +1944,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76ea4359_f03a63c7",
+        "filename": "src/tint/interp/workgroup.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63a9f565_41898b4d",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecc2f29f_caf25f27",
@@ -1003,6 +1975,24 @@
       "writtenOn": "2023-02-07T22:06:33Z",
       "side": 1,
       "message": "nit:\n\n```\nif (current_invocation_ !\u003d nullptr) {\n   return;\n}\n```",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff88d1d1_f0bc1437",
+        "filename": "src/tint/interp/workgroup.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecc2f29f_caf25f27",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -52,6 +52,24 @@
       "parentUuid": "f76303ca_73f37f9f",
       "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51aa5e92_f955e52b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "\"software\" also feels too vague to me (what\u0027s the difference between the \"software\" backend and SwiftShader fallback?).",
+      "parentUuid": "619d6c2d_04f0f68b",
+      "revId": "a15be2655cd663dcc5fa6436b1e443f4c510ab8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

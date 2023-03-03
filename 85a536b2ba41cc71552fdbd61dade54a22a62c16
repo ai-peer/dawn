@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb904fa_156f98fc",
+        "filename": "src/dawn/native/emulator/BackendEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9d67016_dce8d675",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a678ada0_66e13691",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: Dawn tends to have all implementations in .cpp files by default to minimize compile times.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab205e0_5ae26fbf",
+        "filename": "src/dawn/native/emulator/BindGroupEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a678ada0_66e13691",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fef26db9_0939c4da",
+        "filename": "src/dawn/native/emulator/BufferEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "We could, but I don\u0027t know that we want to. The Interpreter is slow, and I\u0027m not sure that it\u0027s reasonable to try and run shaders that operate on buffers \u003e16GB using it.",
+      "parentUuid": "ff63b047_c70bc8d8",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d2b50ea_b2c22340",
         "filename": "src/dawn/native/emulator/BufferEmulator.h",
         "patchSetId": 8
@@ -99,6 +153,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: Get() is a bit generic and looks very much like Ref\u003cBuffer\u003e.Get() maybe GetMemory()?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff947cbc_dd9e184f",
+        "filename": "src/dawn/native/emulator/BufferEmulator.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d2b50ea_b2c22340",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -116,6 +188,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: Can we use the ::Create pattern from other backends just for consistency given that this class is implemented in the backend? Same for other classes implemented in the backend.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fff3495_324aafa4",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81283a0c_c06e884b",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dd3808b8_2cb312d7",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Yeah, I was hesitant to implement functions that are seemingly not hit by any tests. I guess because stuff is executed synchronously this is never called?\n\nI\u0027ll see if I can enable any E2E tests that cause this to be hit.",
+      "parentUuid": "6db99d34_86c6055b",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "752a1e92_06f654ff",
         "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
         "patchSetId": 8
@@ -150,6 +258,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: Things are executed immediately so this can be return {};",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85e34433_e7ce2877",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Likewise, hesitant to implement stuff that doesn\u0027t have test coverage.",
+      "parentUuid": "752a1e92_06f654ff",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ad18456_dfa91f9a",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I split to `ExecuteCommandBuffer` and added a `ComputePass` struct to hold the state.",
+      "parentUuid": "7c4a47a2_57048ee0",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c1adeb4_0e540c56",
@@ -188,6 +332,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df78bf3d_bdea5ec1",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c1adeb4_0e540c56",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0aaae9bc_a2896390",
@@ -201,6 +363,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "It would be nice to keep the typed integer as long as we can. Could the arrays above use ityp::array?",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c4d94cd_8aa5b250",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0aaae9bc_a2896390",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -224,6 +404,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95c95095_f1486087",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "I don\u0027t understand. `erase` removes the entry from the map. What you\u0027re proposing clears the contents of that entry but leaves it in the map. Not sure why that\u0027s better?",
+      "parentUuid": "2dfb5fee_d6bff8b4",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "466d138d_190b7901",
         "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
         "patchSetId": 8
@@ -235,6 +433,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: It\u0027s a bit weird that just creating the drd or the debugger registers them with the shader executor.",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202bca77_83687a34",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Maybe? Although I can\u0027t think of a situation where you\u0027d want to create them and then *not* immediately register them with a shader executor.",
+      "parentUuid": "466d138d_190b7901",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -258,6 +474,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50b230f5_6a01019b",
+        "filename": "src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing the obvious, but I can\u0027t think of an easy way of having such a list. I think these parameterized test suites need to be instantiated with the backend in order for them to be runnable with it at all, which enables all the tests by default.\n\nUnless you just mean remove the suppressions and have a big list of test patterns in a `--gtest_filter` flag when we want to test this on CQ?",
+      "parentUuid": "ecbea19c_d86bc3bf",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d24dcf0_b742e5f5",
         "filename": "src/tint/interp/memory.h",
         "patchSetId": 8
@@ -269,6 +503,24 @@
       "writtenOn": "2023-02-08T15:46:16Z",
       "side": 1,
       "message": "nit: we could have template\u003ctypename T\u003e Load(T* value, offset) {Load(value, offset, sizeof(T))} to avoid hardcoding 4 at [1]",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f740aae_e49e244c",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-03T00:26:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d24dcf0_b742e5f5",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
