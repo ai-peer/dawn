@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73dd08d0_ca2e027c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-03T10:04:14Z",
+      "side": 1,
+      "message": "LGTM, feel free to land after the tiny typo fix.",
+      "revId": "1182acd11acc8b5f0de227687fdf72a28ec813a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91c49c9a_4bf43294",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-03T10:04:14Z",
+      "side": 1,
+      "message": "nit: instance. Ditto in the same comment below.",
+      "range": {
+        "startLine": 299,
+        "startChar": 43,
+        "endLine": 299,
+        "endChar": 51
+      },
+      "revId": "1182acd11acc8b5f0de227687fdf72a28ec813a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
