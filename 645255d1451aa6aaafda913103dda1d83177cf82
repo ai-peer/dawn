@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd896f67_23c2fbd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-03T18:20:41Z",
+      "side": 1,
+      "message": "PTAL. It\u0027s getting harder to map WGSL back to the AST, this will hopefully make it simpler when working on the IR to understand the tree coming into the builder.",
+      "revId": "645255d1451aa6aaafda913103dda1d83177cf82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
