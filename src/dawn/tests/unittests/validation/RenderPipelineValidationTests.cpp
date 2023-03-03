@@ -1431,6 +1431,80 @@ TEST_F(RenderPipelineValidationTest, BindingsFromCorrectEntryPoint) {
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
+// Test that total fragment output resource validations must be less than limit.
+TEST_F(RenderPipelineValidationTest, MaxFragmentCombinedOutputResources) {
+    static constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::R8Unorm;
+    wgpu::ColorTargetState kColorTargetState = {};
+    kColorTargetState.format = kFormat;
+
+    // Creates a shader with the given number of output resources.
+    auto CreateShader = [&](uint32_t numBuffers, uint32_t numTextures) -> wgpu::ShaderModule {
+        // Header to declare storage buffer struct.
+        static constexpr std::string_view kHeader = "struct Buf { data : array<u32> }\n";
+        std::ostringstream bufferBindings;
+        std::ostringstream bufferOutputs;
+        for (uint32_t i = 0; i < numBuffers; i++) {
+            bufferBindings << "@group(0) @binding(" << i << ") var<storage, read_write> b" << i
+                           << ": Buf;\n";
+            bufferOutputs << "    b" << i << ".data[i] = i;\n";
+        }
+
+        std::ostringstream textureBindings;
+        std::ostringstream textureOutputs;
+        for (uint32_t i = 0; i < numTextures; i++) {
+            textureBindings << "@group(1) @binding(" << i << ") var t" << i
+                            << ": texture_storage_1d<rgba8uint, write>;\n";
+            textureOutputs << "    textureStore(t" << i << ", i, vec4u(i));\n";
+        }
+
+        std::ostringstream targetBindings;
+        std::ostringstream targetOutputs;
+        for (size_t i = 0; i < kMaxColorAttachments; i++) {
+            targetBindings << "@location(" << i << ") o" << i << " : vec4f, ";
+            targetOutputs << "vec4f(1), ";
+        }
+
+        std::ostringstream fsShader;
+        fsShader << kHeader;
+        fsShader << bufferBindings.str();
+        fsShader << textureBindings.str();
+        fsShader << "struct Outputs { " << targetBindings.str() << "}\n";
+        fsShader << "@fragment fn main(@builtin(sample_index) i : u32) -> Outputs {\n";
+        fsShader << bufferOutputs.str();
+        fsShader << textureOutputs.str();
+        fsShader << "    return Outputs(" << targetOutputs.str() << ");\n";
+        fsShader << "}";
+        return utils::CreateShaderModule(device, fsShader.str().c_str());
+    };
+
+    // Iterate all combinations of the number of resources possible given the other limits.
+    wgpu::Limits limits = GetSupportedLimits().limits;
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = utils::CreateShaderModule(device, R"(
+        @vertex fn main() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        })");
+    descriptor.vertex.entryPoint = "main";
+    descriptor.cTargets.fill(kColorTargetState);
+    for (uint32_t numBuffers = 0; numBuffers <= limits.maxStorageBuffersPerShaderStage;
+         numBuffers++) {
+        for (uint32_t numTextures = 0; numTextures <= limits.maxStorageTexturesPerShaderStage;
+             numTextures++) {
+            descriptor.cFragment.module = CreateShader(numBuffers, numTextures);
+            descriptor.cFragment.entryPoint = "main";
+            for (uint32_t numTargets = 1; numTargets <= limits.maxColorAttachments; numTargets++) {
+                descriptor.cFragment.targetCount = numTargets;
+                if (numBuffers + numTextures + numTargets <=
+                    limits.maxFragmentCombinedOutputResources) {
+                    device.CreateRenderPipeline(&descriptor);
+                } else {
+                    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+                }
+            }
+        }
+    }
+}
+
 // Tests validation for per-pixel accounting for render targets. The tests currently assume that the
 // default maxColorAttachmentBytesPerSample limit of 32 is used.
 TEST_P(DeprecationTests, RenderPipelineColorAttachmentBytesPerSample) {
@@ -1515,7 +1589,9 @@ TEST_P(DeprecationTests, RenderPipelineColorAttachmentBytesPerSample) {
             @vertex fn main() -> @builtin(position) vec4f {
                 return vec4f(0.0, 0.0, 0.0, 1.0);
             })");
+        descriptor.vertex.entryPoint = "main";
         descriptor.cFragment.module = CreateShader(testCase.formats);
+        descriptor.cFragment.entryPoint = "main";
         descriptor.cFragment.targetCount = testCase.formats.size();
         for (size_t i = 0; i < testCase.formats.size(); i++) {
             descriptor.cTargets[i].format = testCase.formats.at(i);
