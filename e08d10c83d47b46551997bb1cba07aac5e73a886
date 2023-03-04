@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63b6cccf_e6064578",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-04T04:53:59Z",
+      "side": 1,
+      "message": "Thoughts? This generates a lot of code, but gives a distinct node per builtin.\n\nThe one outstanding issue is, the template generated files are not formatted correctly, so when they get formatted the check that the templates generated files don\u0027t need to be regenerated fails. Not sure how to fix this at the moment. I didn\u0027t want to create a template file per builtin, so the current clang-format logic fails to format these.",
+      "revId": "e08d10c83d47b46551997bb1cba07aac5e73a886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
