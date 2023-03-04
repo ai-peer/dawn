@@ -53,8 +53,10 @@ func Run(tmpl string, w io.Writer, funcs Functions) error {
 		"Iterate":    iterate,
 		"Map":        newMap,
 		"PascalCase": pascalCase,
+        "SnakeCase":  snakeCase,
 		"Split":      strings.Split,
 		"Title":      strings.Title,
+        "ToUpper":    strings.ToUpper,
 		"TrimLeft":   strings.TrimLeft,
 		"TrimPrefix": strings.TrimPrefix,
 		"TrimRight":  strings.TrimRight,
@@ -195,3 +197,18 @@ func pascalCase(s string) string {
 	}
 	return b.String()
 }
+
+// snakeCase returns the PascalCase string s transformed into 'snake_case'
+// Rules:
+// * An '_' is inserted following a capitol or number
+func snakeCase(s string) string {
+	b := strings.Builder{}
+	for _, r := range s {
+		if unicode.IsUpper(r) {
+			b.WriteRune('_');
+		}
+		b.WriteRune(unicode.ToLower(r));
+	}
+	return b.String()
+}
+
