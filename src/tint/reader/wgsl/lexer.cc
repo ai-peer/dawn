@@ -15,6 +15,7 @@
 #include "src/tint/reader/wgsl/lexer.h"
 
 #include <cctype>
+#include <charconv>
 #include <cmath>
 #include <cstring>
 #include <functional>
@@ -804,41 +805,48 @@ Token Lexer::try_hex_float() {
     return {Token::Type::kFloatLiteral, source, result_f64};
 }
 
-Token Lexer::build_token_from_int_if_possible(Source source, size_t start, int32_t base) {
+// Note, this takes `start`, `end` and `count`. The reason is that `count` is not necessarily the
+// same as `end - start` in the case of a hex integer. The `0x` value is not included in `start` but
+// needs to be included in `count`.
+Token Lexer::build_token_from_int_if_possible(Source source,
+                                              size_t start,
+                                              size_t end,
+                                              size_t count,
+                                              int32_t base) {
     const char* start_ptr = &at(start);
-    char* end_ptr = nullptr;
+    const char* end_ptr = &at(end);
 
     errno = 0;
-    int64_t res = strtoll(start_ptr, &end_ptr, base);
-    const bool overflow = errno == ERANGE;
-
-    if (end_ptr) {
-        advance(static_cast<size_t>(end_ptr - start_ptr));
-    }
+    int64_t value;
+    auto res = std::from_chars(start_ptr, end_ptr, value, base);
+    const bool overflow = res.ec != std::errc();
+    advance(count);
 
     if (matches(pos(), 'u')) {
-        if (!overflow && CheckedConvert<u32>(AInt(res))) {
+        if (!overflow && CheckedConvert<u32>(AInt(value))) {
             advance(1);
             end_source(source);
-            return {Token::Type::kIntLiteral_U, source, res};
+            return {Token::Type::kIntLiteral_U, source, value};
         }
         return {Token::Type::kError, source, "value cannot be represented as 'u32'"};
     }
 
     if (matches(pos(), 'i')) {
-        if (!overflow && CheckedConvert<i32>(AInt(res))) {
+        if (!overflow && CheckedConvert<i32>(AInt(value))) {
             advance(1);
             end_source(source);
-            return {Token::Type::kIntLiteral_I, source, res};
+            return {Token::Type::kIntLiteral_I, source, value};
         }
         return {Token::Type::kError, source, "value cannot be represented as 'i32'"};
     }
 
-    end_source(source);
+    // Check this last in order to get the more specific sized error messages
     if (overflow) {
         return {Token::Type::kError, source, "value cannot be represented as 'abstract-int'"};
     }
-    return {Token::Type::kIntLiteral, source, res};
+
+    end_source(source);
+    return {Token::Type::kIntLiteral, source, value};
 }
 
 Token Lexer::try_hex_integer() {
@@ -858,7 +866,12 @@ Token Lexer::try_hex_integer() {
                 "integer or float hex literal has no significant digits"};
     }
 
-    return build_token_from_int_if_possible(source, start, 16);
+    auto end = curr;
+    while (end < length() && is_hex(at(end))) {
+        end++;
+    }
+
+    return build_token_from_int_if_possible(source, curr, end, end - start, 16);
 }
 
 Token Lexer::try_integer() {
@@ -879,7 +892,12 @@ Token Lexer::try_integer() {
         }
     }
 
-    return build_token_from_int_if_possible(source, start, 10);
+    auto end = start;
+    while (end < length() && is_digit(at(end))) {
+        end++;
+    }
+
+    return build_token_from_int_if_possible(source, start, end, end - start, 10);
 }
 
 Token Lexer::try_ident() {
