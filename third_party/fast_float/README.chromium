@@ -1,0 +1,11 @@
+Name: fast_float
+Short Name: fast_float
+URL: https://github.com/fastfloat/fast_float
+Version: 3.10.0
+Security Critical: no
+License: Apache-2.0 or MIT
+License File: LICENSE
+License Android Compatible: yes
+
+Description:
+Fast and exact implementation of the C++ from_chars functions for float and double types.

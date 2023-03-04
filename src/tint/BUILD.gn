@@ -14,6 +14,7 @@
 
 import("//build_overrides/build.gni")
 
+import("../../scripts/dawn_overrides_with_defaults.gni")
 import("../../tint_overrides_with_defaults.gni")
 
 if (tint_build_unittests) {
@@ -960,6 +961,7 @@ libtint_source_set("libtint_wgsl_reader_src") {
     ":libtint_reader_src",
     ":libtint_text_src",
     ":libtint_type_src",
+    "//${dawn_root}/third_party/fast_float",
   ]
 }
 

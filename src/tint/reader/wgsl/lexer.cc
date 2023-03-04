@@ -28,6 +28,11 @@
 #include "src/tint/debug.h"
 #include "src/tint/number.h"
 #include "src/tint/text/unicode.h"
+#include "src/tint/utils/compiler_macros.h"
+
+TINT_BEGIN_DISABLE_WARNING(OLD_STYLE_CAST);
+#include "third_party/fast_float/src/fast_float/fast_float.h"
+TINT_END_DISABLE_WARNING(OLD_STYLE_CAST);
 
 namespace tint::reader::wgsl {
 namespace {
@@ -389,7 +394,11 @@ Token Lexer::try_float() {
     advance(end - start);
     end_source(source);
 
-    double value = std::strtod(&at(start), nullptr);
+    double value;
+    auto ret = fast_float::from_chars(&at(start), &at(end), value);
+    if (ret.ec != std::errc()) {
+        return {Token::Type::kError, source, "failed to parse floating point number"};
+    }
 
     if (has_f_suffix) {
         if (auto f = CheckedConvert<f32>(AFloat(value))) {
