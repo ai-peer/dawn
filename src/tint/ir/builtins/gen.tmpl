@@ -1,0 +1,91 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/src/cmd/gen to generate the builtin files
+
+See:
+* tools/src/cmd/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+{{- /* For each permutation of each builtint... */ -}}
+{{- range Sem.Builtins -}}
+{{    if not (HasPrefix .Name "_") }}
+{{-     $name := SnakeCase .Name -}}
+{{- /*  Generate a ./<function>.h file using */ -}}
+{{-     $file := printf "./%v.h" $name -}}
+{{-     $content := Eval "BuiltinHeader" . -}}
+{{-     WriteFile $file $content -}}
+{{- /*  Generate a ./<function>.cc file using using the macro below */ -}}
+{{-     $file := printf "./%v.cc" $name -}}
+{{-     $content := Eval "BuiltinImpl" . -}}
+{{-     WriteFile $file $content -}}
+{{-   end  }}
+{{- end  }}
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "BuiltinHeader"                          -}}
+{{- /* Emits the header file for a builtin                                */ -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-   $builtin     := .Name -}}
+
+#ifndef SRC_TINT_IR_BUILTINS_{{ $builtin | SnakeCase | ToUpper }}_H_
+#define SRC_TINT_IR_BUILTINS_{{ $builtin | SnakeCase | ToUpper }}_H_
+
+#include "src/tint/ir/builtins/builtin.h"
+
+namespace tint::ir::builtins {
+
+/// A {{ $builtin }} instruction in the IR.
+class {{ $builtin | PascalCase }} : public Castable<{{ $builtin | PascalCase }}, Builtin> {
+  public:
+    /// Constructor
+    /// @param result the result value
+    /// @param args the builtin arguments
+    {{ $builtin | PascalCase }}(Value* result, utils::VectorRef<Value*> args);
+    {{ $builtin | PascalCase }}(const {{ $builtin | PascalCase }}& instr) = delete;
+    {{ $builtin | PascalCase }}({{ $builtin | PascalCase }}&& instr) = delete;
+    ~{{ $builtin | PascalCase }}() override;
+
+    {{ $builtin | PascalCase }}& operator=(const {{ $builtin | PascalCase }}& instr) = delete;
+    {{ $builtin | PascalCase }}& operator=({{ $builtin | PascalCase }}&& instr) = delete;
+
+    /// Write the instruction to the given stream
+    /// @param out the stream to write to
+    /// @param st the symbol table
+    /// @returns the stream
+    utils::StringStream& ToString(utils::StringStream& out, const SymbolTable& st) const override;
+};
+
+}  // namespace tint::ir::builtins
+
+#endif  // SRC_TINT_IR_BUILTINS_{{ $builtin | SnakeCase | ToUpper }}_H_
+{{ end }}
+
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-                          define "BuiltinImpl"                            -}}
+{{- /* Emits the header file for a builtin                                */ -}}
+{{- /* ------------------------------------------------------------------ */ -}}
+{{-   $builtin     := .Name -}}
+
+#include "src/tint/ir/builtins/{{ $builtin | SnakeCase }}.h"
+
+TINT_INSTANTIATE_TYPEINFO(tint::ir::builtins::{{ $builtin | PascalCase }});
+
+namespace tint::ir::builtins {
+
+{{ $builtin | PascalCase }}::{{ $builtin | PascalCase }}(Value* result, utils::VectorRef<Value*> args) : Base(result, args) {}
+
+{{ $builtin | PascalCase }}::~{{ $builtin | PascalCase }}() = default;
+
+utils::StringStream& {{ $builtin | PascalCase }}::ToString(utils::StringStream& out, const SymbolTable& st) const {
+    Result()->ToString(out, st);
+    out << " = {{ $builtin | SnakeCase }}(";
+    EmitArgs(out, st);
+    out << ")";
+    return out;
+}
+
+}  // namespace tint::ir::builtins
+{{ end }}
+
