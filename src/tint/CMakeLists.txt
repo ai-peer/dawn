@@ -722,8 +722,14 @@ if(${TINT_BUILD_IR})
     ir/temp.h
     ir/terminator.cc
     ir/terminator.h
+    ir/user_call.cc
+    ir/user_call.h
     ir/value.cc
     ir/value.h
+    ir/value_constructor.cc
+    ir/value_constructor.h
+    ir/value_conversion.cc
+    ir/value_conversion.h
   )
 endif()
 
