@@ -56,6 +56,7 @@
 #include "src/tint/program.h"
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/switch_statement.h"
 #include "src/tint/sem/value_constructor.h"
@@ -751,6 +752,19 @@ utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallStatement* stmt) {
 }
 
 utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallExpression* expr) {
+    // If this is a materialized semantic node, just use the constant value.
+    if (auto* mat = program_->Sem().Get(expr)) {
+        if (mat->ConstantValue()) {
+            auto* cv = mat->ConstantValue()->Clone(clone_ctx_);
+            if (!cv) {
+                add_error(expr->source, "Failed to get constant value for call " +
+                                            std::string(expr->TypeInfo().name));
+                return utils::Failure;
+            }
+            return builder.Constant(cv);
+        }
+    }
+
     utils::Vector<Value*, 0> args;
     args.Reserve(expr->args.Length());
 

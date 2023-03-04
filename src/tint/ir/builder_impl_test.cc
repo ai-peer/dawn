@@ -1906,5 +1906,22 @@ TEST_F(IR_BuilderImplTest, EmitExpression_ValueConverter) {
 )");
 }
 
+TEST_F(IR_BuilderImplTest, EmitExpression_MaterializedCall) {
+    auto* expr = Return(Call("trunc", 2.5_f));
+
+    Func("test_function", {}, ty.f32(), expr, utils::Empty);
+
+    auto r = Build();
+    ASSERT_TRUE(r) << Error();
+    auto m = r.Move();
+
+    EXPECT_EQ(Disassemble(m), R"(%bb0 = Function test_function
+  %bb1 = Block
+  Return (2.0)
+FunctionEnd
+
+)");
+}
+
 }  // namespace
 }  // namespace tint::ir
