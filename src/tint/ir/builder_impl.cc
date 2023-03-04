@@ -56,6 +56,7 @@
 #include "src/tint/program.h"
 #include "src/tint/sem/builtin.h"
 #include "src/tint/sem/call.h"
+#include "src/tint/sem/materialize.h"
 #include "src/tint/sem/module.h"
 #include "src/tint/sem/switch_statement.h"
 #include "src/tint/sem/value_constructor.h"
@@ -754,6 +755,19 @@ utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallStatement* stmt) {
 }
 
 utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallExpression* expr) {
+    // If this is a materialized semantic node, just use the constant value.
+    if (auto* mat = program_->Sem().Get<sem::Materialize>(expr)) {
+        auto* cv = mat->Expr()->ConstantValue()->Clone(clone_ctx_);
+        if (!cv) {
+            diagnostics_.add_error(
+                tint::diag::System::IR,
+                "Failed to get constant value for call " + std::string(expr->TypeInfo().name),
+                expr->source);
+            return utils::Failure;
+        }
+        return builder.Constant(cv);
+    }
+
     utils::Vector<Value*, 0> args;
     args.Reserve(expr->args.Length());
 
@@ -783,9 +797,465 @@ utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallExpression* expr) {
 
     // If this is a builtin function, emit the specific builtin value
     if (auto* builtin = sem->Target()->As<sem::Builtin>()) {
-        // TODO(dsinclair): .. something ...
-        diagnostics_.add_error(tint::diag::System::IR, "Missing builtin function support",
-                               expr->source);
+        switch (builtin->Type()) {
+            case sem::BuiltinType::kAbs: {
+                instr = builder.Abs(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAcos: {
+                instr = builder.Acos(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAcosh: {
+                instr = builder.Acosh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAll: {
+                instr = builder.All(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAny: {
+                instr = builder.Any(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kArrayLength: {
+                instr = builder.ArrayLength(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAsin: {
+                instr = builder.Asin(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAsinh: {
+                instr = builder.Asinh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtan: {
+                instr = builder.Atan(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtan2: {
+                instr = builder.Atan2(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtanh: {
+                instr = builder.Atanh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCeil: {
+                instr = builder.Ceil(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kClamp: {
+                instr = builder.Clamp(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCos: {
+                instr = builder.Cos(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCosh: {
+                instr = builder.Cosh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCountLeadingZeros: {
+                instr = builder.CountLeadingZeros(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCountOneBits: {
+                instr = builder.CountOneBits(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCountTrailingZeros: {
+                instr = builder.CountTrailingZeros(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kCross: {
+                instr = builder.Cross(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDegrees: {
+                instr = builder.Degrees(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDeterminant: {
+                instr = builder.Determinant(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDistance: {
+                instr = builder.Distance(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDot: {
+                instr = builder.Dot(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDot4I8Packed: {
+                instr = builder.Dot4I8Packed(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDot4U8Packed: {
+                instr = builder.Dot4U8Packed(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdx: {
+                instr = builder.Dpdx(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdxCoarse: {
+                instr = builder.DpdxCoarse(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdxFine: {
+                instr = builder.DpdxFine(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdy: {
+                instr = builder.Dpdy(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdyCoarse: {
+                instr = builder.DpdyCoarse(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kDpdyFine: {
+                instr = builder.DpdyFine(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kExp: {
+                instr = builder.Exp(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kExp2: {
+                instr = builder.Exp2(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kExtractBits: {
+                instr = builder.ExtractBits(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFaceForward: {
+                instr = builder.FaceForward(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFirstLeadingBit: {
+                instr = builder.FirstLeadingBit(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFirstTrailingBit: {
+                instr = builder.FirstTrailingBit(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFloor: {
+                instr = builder.Floor(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFma: {
+                instr = builder.Fma(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFract: {
+                instr = builder.Fract(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFrexp: {
+                instr = builder.Frexp(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFwidth: {
+                instr = builder.Fwidth(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFwidthCoarse: {
+                instr = builder.FwidthCoarse(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kFwidthFine: {
+                instr = builder.FwidthFine(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kInsertBits: {
+                instr = builder.InsertBits(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kInverseSqrt: {
+                instr = builder.InverseSqrt(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kLdexp: {
+                instr = builder.Ldexp(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kLength: {
+                instr = builder.Length(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kLog: {
+                instr = builder.Log(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kLog2: {
+                instr = builder.Log2(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kMax: {
+                instr = builder.Max(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kMin: {
+                instr = builder.Min(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kMix: {
+                instr = builder.Mix(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kModf: {
+                instr = builder.Modf(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kNormalize: {
+                instr = builder.Normalize(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPack2X16Float: {
+                instr = builder.Pack2X16Float(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPack2X16Snorm: {
+                instr = builder.Pack2X16Snorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPack2X16Unorm: {
+                instr = builder.Pack2X16Unorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPack4X8Snorm: {
+                instr = builder.Pack4X8Snorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPack4X8Unorm: {
+                instr = builder.Pack4X8Unorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kPow: {
+                instr = builder.Pow(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kQuantizeToF16: {
+                instr = builder.QuantizeToF16(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kRadians: {
+                instr = builder.Radians(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kReflect: {
+                instr = builder.Reflect(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kRefract: {
+                instr = builder.Refract(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kReverseBits: {
+                instr = builder.ReverseBits(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kRound: {
+                instr = builder.Round(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSaturate: {
+                instr = builder.Saturate(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSelect: {
+                instr = builder.Select(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSign: {
+                instr = builder.Sign(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSin: {
+                instr = builder.Sin(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSinh: {
+                instr = builder.Sinh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSmoothstep: {
+                instr = builder.Smoothstep(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kSqrt: {
+                instr = builder.Sqrt(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kStep: {
+                instr = builder.Step(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kStorageBarrier: {
+                instr = builder.StorageBarrier(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTan: {
+                instr = builder.Tan(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTanh: {
+                instr = builder.Tanh(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTranspose: {
+                instr = builder.Transpose(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTrunc: {
+                instr = builder.Trunc(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kUnpack2X16Float: {
+                instr = builder.Unpack2X16Float(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kUnpack2X16Snorm: {
+                instr = builder.Unpack2X16Snorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kUnpack2X16Unorm: {
+                instr = builder.Unpack2X16Unorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kUnpack4X8Snorm: {
+                instr = builder.Unpack4X8Snorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kUnpack4X8Unorm: {
+                instr = builder.Unpack4X8Unorm(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kWorkgroupBarrier: {
+                instr = builder.WorkgroupBarrier(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kWorkgroupUniformLoad: {
+                instr = builder.WorkgroupUniformLoad(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureDimensions: {
+                instr = builder.TextureDimensions(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureGather: {
+                instr = builder.TextureGather(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureGatherCompare: {
+                instr = builder.TextureGatherCompare(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureNumLayers: {
+                instr = builder.TextureNumLayers(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureNumLevels: {
+                instr = builder.TextureNumLevels(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureNumSamples: {
+                instr = builder.TextureNumSamples(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSample: {
+                instr = builder.TextureSample(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleBias: {
+                instr = builder.TextureSampleBias(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleCompare: {
+                instr = builder.TextureSampleCompare(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleCompareLevel: {
+                instr = builder.TextureSampleCompareLevel(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleGrad: {
+                instr = builder.TextureSampleGrad(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleLevel: {
+                instr = builder.TextureSampleLevel(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureSampleBaseClampToEdge: {
+                instr = builder.TextureSampleBaseClampToEdge(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureStore: {
+                instr = builder.TextureStore(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kTextureLoad: {
+                instr = builder.TextureLoad(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicLoad: {
+                instr = builder.AtomicLoad(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicStore: {
+                instr = builder.AtomicStore(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicAdd: {
+                instr = builder.AtomicAdd(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicSub: {
+                instr = builder.AtomicSub(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicMax: {
+                instr = builder.AtomicMax(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicMin: {
+                instr = builder.AtomicMin(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicAnd: {
+                instr = builder.AtomicAnd(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicOr: {
+                instr = builder.AtomicOr(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicXor: {
+                instr = builder.AtomicXor(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicExchange: {
+                instr = builder.AtomicExchange(ty, args);
+                break;
+            }
+            case sem::BuiltinType::kAtomicCompareExchangeWeak: {
+                instr = builder.AtomicCompareExchangeWeak(ty, args);
+                break;
+            }
+            default: {
+                diagnostics_.add_error(tint::diag::System::IR, "Missing builtin function support",
+                                       expr->source);
+                return utils::Failure;
+            }
+        }
     } else if (auto* cons = sem->Target()->As<sem::ValueConstructor>()) {
         instr = builder.ValueConstructor(ty, args);
     } else if (auto* conv = sem->Target()->As<sem::ValueConversion>()) {
