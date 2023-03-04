@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f957af5_145286e5",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Reverted.",
+      "parentUuid": "3557212c_17766ae6",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5fd85ca_06b04214",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-04T13:07:21Z",
       "side": 1,
       "message": "I know you added this specifically for the Robustness transform, but it\u0027s weird that this doesn\u0027t return `true` for the workgroup barrier builtins. Suggest either adding them or renaming it (`UseDerivatives()`? `RequiresDerivativeUniformity()`?)",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c06ec1_18d9ba4d",
+        "filename": "src/tint/sem/builtin.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Reverted.",
+      "parentUuid": "b5fd85ca_06b04214",
       "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc58631_1f651493",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5ad6660_f402520f",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d65aacd4_3e2f21b7",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a2418ee_35214b03",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d65aacd4_3e2f21b7",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9623f054_1dbbcdc3",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-03-04T13:07:21Z",
       "side": 1,
       "message": "Nit: Don\u0027t think you need these any more either.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ccd160_b2665f7f",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9623f054_1dbbcdc3",
       "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9d7b54b_3ed006f2",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65f73735_3224fb42",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a2814d6_7e78b5bb",
@@ -122,6 +236,24 @@
       "writtenOn": "2023-03-04T13:07:21Z",
       "side": 1,
       "message": "übernit (totally optional): I think `texture_action` would be more accurate. We\u0027re not actually dealing with accesses to the handle address space yet. When we have arrays of textures, /then/ we\u0027ll need to be clamping accesses to the handle address space, but that\u0027s different to clamping accesses to the /contents/ of a texture.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ed0607_66385d88",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2814d6_7e78b5bb",
       "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

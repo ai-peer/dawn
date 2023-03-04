@@ -39,6 +39,30 @@
       },
       "revId": "fe807d255e6e5b9e767a62c9d266fd7c73d385b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8dbf1a1_a56661db",
+        "filename": "src/tint/transform/robustness_test.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 3759,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-04T16:58:14Z",
+      "side": 1,
+      "message": "Great catch. I was assuming that the control barrier was a bit of an implementation detail, which a broadcast solution might not have, but I guess writes still need to be flushed according to spec - so you\u0027re right. Thanks!",
+      "parentUuid": "0285529e_f28f75bc",
+      "range": {
+        "startLine": 3757,
+        "startChar": 0,
+        "endLine": 3759,
+        "endChar": 3
+      },
+      "revId": "fe807d255e6e5b9e767a62c9d266fd7c73d385b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
