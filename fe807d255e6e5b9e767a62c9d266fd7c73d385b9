@@ -16,6 +16,29 @@
       "message": "Good to go",
       "revId": "fe807d255e6e5b9e767a62c9d266fd7c73d385b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0285529e_f28f75bc",
+        "filename": "src/tint/transform/robustness_test.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 3759,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "I don\u0027t think this is a valid transformation since `workgroupUniformLoad` executes a control barrier.\n\nConsider:\n```\nif (local_index \u003d\u003d 0) {\n  some_workgroup_var \u003d 42;\n}\n_ \u003d workgroupUniformLoad(\u0026a[oob_index]);\nlet foo \u003d some_workgroup_var;\n```\nIn this snippet, the read from `some_workgroup_var` at the end is race-free, because of the barrier. But when you predicate the whole `workgroupUniformLoad` call, we won\u0027t execute the barrier at all when the index is out of bounds, which makes the access to `some_workgroup_var` potentially race with the write.\n\nWe either need to predicate it after the polyfill has happened, or add an `else {workgroupBarrier();}` to this predication code.",
+      "range": {
+        "startLine": 3757,
+        "startChar": 0,
+        "endLine": 3759,
+        "endChar": 3
+      },
+      "revId": "fe807d255e6e5b9e767a62c9d266fd7c73d385b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3557212c_17766ae6",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 1519,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "Nit: This looks kinda strange now, since barriers require uniform control flow too (see other comment).",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5fd85ca_06b04214",
+        "filename": "src/tint/sem/builtin.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "I know you added this specifically for the Robustness transform, but it\u0027s weird that this doesn\u0027t return `true` for the workgroup barrier builtins. Suggest either adding them or renaming it (`UseDerivatives()`? `RequiresDerivativeUniformity()`?)",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5ad6660_f402520f",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "Nit: I see no `unordered_map` uses in this header.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65aacd4_3e2f21b7",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "Nit: I see no `builtin::AddressSpace` uses in this header either.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9623f054_1dbbcdc3",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t think you need these any more either.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65f73735_3224fb42",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "Nit: This comment could use an update as clamping isn\u0027t the only option now.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 23
+      },
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2814d6_7e78b5bb",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "übernit (totally optional): I think `texture_action` would be more accurate. We\u0027re not actually dealing with accesses to the handle address space yet. When we have arrays of textures, /then/ we\u0027ll need to be clamping accesses to the handle address space, but that\u0027s different to clamping accesses to the /contents/ of a texture.",
+      "revId": "3a8fe4373ad08ca52919513af6c0652f328b17e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

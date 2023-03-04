@@ -602,6 +602,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd7e205_86168c84",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-04T13:07:21Z",
+      "side": 1,
+      "message": "FWIW I think it\u0027d be really easy to make this transform just skip those address spaces, which would remove that dependency.",
+      "parentUuid": "8739f6bc_27908447",
+      "range": {
+        "startLine": 38,
+        "startChar": 63,
+        "endLine": 38,
+        "endChar": 97
+      },
+      "revId": "f21dbf88988c7bdf05b30c79555d4536aed0ae51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b63e7b3f_8df630e9",
