@@ -28,7 +28,10 @@
 #include "src/tint/ir/switch.h"
 #include "src/tint/ir/temp.h"
 #include "src/tint/ir/terminator.h"
+#include "src/tint/ir/user_call.h"
 #include "src/tint/ir/value.h"
+#include "src/tint/ir/value_constructor.h"
+#include "src/tint/ir/value_conversion.h"
 #include "src/tint/type/bool.h"
 #include "src/tint/type/f16.h"
 #include "src/tint/type/f32.h"
@@ -278,6 +281,28 @@ class Builder {
     /// @param val the value being bitcast
     /// @returns the instruction
     ir::Bitcast* Bitcast(const type::Type* type, Value* val);
+
+    /// Creates a user function call instruction
+    /// @param type the return type of the call
+    /// @param name the name of the function being called
+    /// @param args the call arguments
+    /// @returns the instruction
+    ir::UserCall* UserCall(const type::Type* type, Symbol name, utils::VectorRef<Value*> args);
+
+    /// Creates a value conversion instruction
+    /// @param to the type converted to
+    /// @param from the type converted from
+    /// @param args the arguments to be converted
+    /// @returns the instruction
+    ir::ValueConversion* ValueConversion(const type::Type* to,
+                                         const type::Type* from,
+                                         utils::VectorRef<Value*> args);
+
+    /// Creates a value constructor instruction
+    /// @param to the type being converted
+    /// @param args the arguments to be converted
+    /// @returns the instruction
+    ir::ValueConstructor* ValueConstructor(const type::Type* to, utils::VectorRef<Value*> args);
 
     /// @returns a unique temp id
     Temp::Id AllocateTempId();

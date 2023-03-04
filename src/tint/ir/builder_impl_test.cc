@@ -1858,5 +1858,53 @@ TEST_F(IR_BuilderImplTest, EmitExpression_Bitcast) {
 )");
 }
 
+TEST_F(IR_BuilderImplTest, EmitStatement_UserFunction) {
+    Func("my_func", utils::Vector{Param("p", ty.f32())}, ty.void_(), utils::Empty);
+
+    auto* stmt = CallStmt(Call("my_func", Mul(2_f, 3_f)));
+    WrapInFunction(stmt);
+
+    auto& b = CreateBuilder();
+    InjectFlowBlock();
+    auto r = b.EmitStatement(stmt);
+    ASSERT_TRUE(r) << b.error();
+
+    Disassembler d(b.builder.ir);
+    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
+    EXPECT_EQ(d.AsString(), R"(%1 (f32) = 2.0 * 3.0
+%2 (void) = call(my_func, %1 (f32))
+)");
+}
+
+TEST_F(IR_BuilderImplTest, EmitExpression_ValueConstructor) {
+    auto* expr = vec3(ty.f32(), 2_f, 3_f, 4_f);
+    WrapInFunction(expr);
+
+    auto& b = CreateBuilder();
+    InjectFlowBlock();
+    auto r = b.EmitExpression(expr);
+    ASSERT_TRUE(r) << b.error();
+
+    Disassembler d(b.builder.ir);
+    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
+    EXPECT_EQ(d.AsString(), R"(%1 (vec3<f32>) = value_constructor(vec3<f32>, 2.0, 3.0, 4.0)
+)");
+}
+
+TEST_F(IR_BuilderImplTest, EmitExpression_ValueConverter) {
+    auto* expr = Call(ty.f32(), 1_i);
+    WrapInFunction(expr);
+
+    auto& b = CreateBuilder();
+    InjectFlowBlock();
+    auto r = b.EmitExpression(expr);
+    ASSERT_TRUE(r) << b.error();
+
+    Disassembler d(b.builder.ir);
+    d.EmitBlockInstructions(b.current_flow_block->As<ir::Block>());
+    EXPECT_EQ(d.AsString(), R"(%1 (f32) = value_conversion(f32, i32, 1)
+)");
+}
+
 }  // namespace
 }  // namespace tint::ir
