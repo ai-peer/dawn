@@ -2170,7 +2170,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 });
         }
 
-        if (auto f = resolved->BuiltinFunction(); f != sem::BuiltinType::kNone) {
+        if (auto f = resolved->BuiltinFunction(); f != builtin::Function::kNone) {
             return BuiltinCall(expr, f, args);
         }
 
@@ -2242,7 +2242,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
 
 template <size_t N>
 sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
-                                 sem::BuiltinType builtin_type,
+                                 builtin::Function builtin_type,
                                  utils::Vector<const sem::ValueExpression*, N>& args) {
     auto arg_stage = sem::EvaluationStage::kConstant;
     for (auto* arg : args) {
@@ -2258,7 +2258,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         }
     }
 
-    if (builtin_type == sem::BuiltinType::kTintMaterialize) {
+    if (builtin_type == builtin::Function::kTintMaterialize) {
         args[0] = Materialize(args[0]);
         if (!args[0]) {
             return nullptr;
@@ -2310,14 +2310,14 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         return nullptr;
     }
 
-    if (IsTextureBuiltin(builtin_type)) {
+    if (sem::IsTextureBuiltin(builtin_type)) {
         if (!validator_.TextureBuiltinFunction(call)) {
             return nullptr;
         }
         CollectTextureSamplerPairs(builtin.sem, call->Arguments());
     }
 
-    if (builtin_type == sem::BuiltinType::kWorkgroupUniformLoad) {
+    if (builtin_type == builtin::Function::kWorkgroupUniformLoad) {
         if (!validator_.WorkgroupUniformLoad(call)) {
             return nullptr;
         }
@@ -3053,7 +3053,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
         return builder_->create<sem::TypeExpression>(expr, current_statement_, ty);
     }
 
-    if (resolved->BuiltinFunction() != sem::BuiltinType::kNone) {
+    if (resolved->BuiltinFunction() != builtin::Function::kNone) {
         AddError("missing '(' for builtin function call", expr->source.End());
         return nullptr;
     }

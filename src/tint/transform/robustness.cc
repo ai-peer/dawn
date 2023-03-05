@@ -147,8 +147,8 @@ struct Robustness::State {
     /// @param type builtin type
     /// @returns true if the given builtin is a texture function that requires
     /// argument clamping,
-    bool TextureBuiltinNeedsClamping(sem::BuiltinType type) {
-        return type == sem::BuiltinType::kTextureLoad || type == sem::BuiltinType::kTextureStore;
+    bool TextureBuiltinNeedsClamping(builtin::Function type) {
+        return type == builtin::Function::kTextureLoad || type == builtin::Function::kTextureStore;
     }
 
     /// Apply bounds clamping to the coordinates, array index and level arguments
