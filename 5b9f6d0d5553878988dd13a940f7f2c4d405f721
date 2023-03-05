@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4f8f5ce_ff9ba4fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-05T14:05:12Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2fd9b5f_8b34d4fd",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-05T14:05:12Z",
+      "side": 1,
+      "message": "Nit: Is this necessary?",
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9784e971_5a239de1",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-05T14:05:12Z",
+      "side": 1,
+      "message": "Nit: all all",
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
