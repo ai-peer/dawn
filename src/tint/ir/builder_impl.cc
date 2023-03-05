@@ -790,9 +790,8 @@ utils::Result<Value*> BuilderImpl::EmitCall(const ast::CallExpression* expr) {
     Instruction* instr = nullptr;
 
     // If this is a builtin function, emit the specific builtin value
-    if (sem->Target()->As<sem::Builtin>()) {
-        // TODO(dsinclair): .. something ...
-        add_error(expr->source, "Missing builtin function support");
+    if (auto* b = sem->Target()->As<sem::Builtin>()) {
+        instr = builder.Builtin(ty, b->Type(), args);
     } else if (sem->Target()->As<sem::ValueConstructor>()) {
         instr = builder.ValueConstructor(ty, args);
     } else if (auto* conv = sem->Target()->As<sem::ValueConversion>()) {
