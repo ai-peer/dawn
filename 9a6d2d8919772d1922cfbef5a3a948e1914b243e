@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf70cc05_75dcc5a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-05T00:41:55Z",
+      "side": 1,
+      "message": "PTAL. This is an alternative to https://dawn-review.googlesource.com/c/dawn/+/122601 which just uses a generic Builtin along with an enum.",
+      "revId": "9a6d2d8919772d1922cfbef5a3a948e1914b243e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
