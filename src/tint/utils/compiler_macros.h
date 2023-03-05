@@ -29,8 +29,9 @@
 #define TINT_DISABLE_WARNING_OLD_STYLE_CAST      /* currently no-op */
 #define TINT_DISABLE_WARNING_SIGN_CONVERSION     /* currently no-op */
 #define TINT_DISABLE_WARNING_UNREACHABLE_CODE __pragma(warning(disable : 4702))
-#define TINT_DISABLE_WARNING_WEAK_VTABLES /* currently no-op */
-#define TINT_DISABLE_WARNING_FLOAT_EQUAL  /* currently no-op */
+#define TINT_DISABLE_WARNING_WEAK_VTABLES    /* currently no-op */
+#define TINT_DISABLE_WARNING_FLOAT_EQUAL     /* currently no-op */
+#define TINT_DISABLE_WARNING_EXTRA_SEMI_STMT /* currently no-op */
 
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
@@ -57,6 +58,8 @@
 #define TINT_DISABLE_WARNING_UNREACHABLE_CODE /* currently no-op */
 #define TINT_DISABLE_WARNING_WEAK_VTABLES _Pragma("clang diagnostic ignored \"-Wweak-vtables\"")
 #define TINT_DISABLE_WARNING_FLOAT_EQUAL _Pragma("clang diagnostic ignored \"-Wfloat-equal\"")
+#define TINT_DISABLE_WARNING_EXTRA_SEMI_STMT                         \
+    _Pragma("clang diagnostic ignored \"-Wextra-semi-stmt\"")
 
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \
@@ -83,6 +86,7 @@
 #define TINT_DISABLE_WARNING_UNREACHABLE_CODE /* currently no-op */
 #define TINT_DISABLE_WARNING_WEAK_VTABLES     /* currently no-op */
 #define TINT_DISABLE_WARNING_FLOAT_EQUAL      /* currently no-op */
+#define TINT_DISABLE_WARNING_EXTRA_SEMI_STMT  /* currently no-op */
 
 // clang-format off
 #define TINT_BEGIN_DISABLE_WARNING(name)     \

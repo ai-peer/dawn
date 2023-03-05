@@ -188,6 +188,7 @@ set_if_not_defined(DAWN_TINT_DIR "${Dawn_SOURCE_DIR}" "Directory in which to fin
 set_if_not_defined(DAWN_VULKAN_DEPS_DIR "${DAWN_THIRD_PARTY_DIR}/vulkan-deps" "Directory in which to find vulkan-deps")
 set_if_not_defined(DAWN_VULKAN_HEADERS_DIR "${DAWN_VULKAN_DEPS_DIR}/vulkan-headers/src" "Directory in which to find Vulkan-Headers")
 set_if_not_defined(DAWN_VULKAN_TOOLS_DIR "${DAWN_VULKAN_DEPS_DIR}/vulkan-tools/src" "Directory in which to find Vulkan-Tools")
+set_if_not_defined(DAWN_FAST_FLOAT_DIR "${DAWN_THIRD_PARTY_DIR}/fast_float/src" "Directory in which to find fast_float")
 
 # Dependencies for DAWN_BUILD_NODE_BINDINGS
 set_if_not_defined(NODE_ADDON_API_DIR "${DAWN_THIRD_PARTY_DIR}/node-addon-api" "Directory in which to find node-addon-api")
@@ -512,6 +513,10 @@ function(tint_core_compile_options TARGET)
   if (${TINT_BUILD_SPV_READER} OR ${TINT_BUILD_SPV_WRITER})
     target_include_directories(${TARGET} PUBLIC
         "${DAWN_THIRD_PARTY_DIR}/spirv-headers/include")
+  endif()
+
+  if (${TINT_BUILD_WGSL_READER})
+      target_include_directories(${TARGET} PUBLIC "${DAWN_FAST_FLOAT_DIR}")
   endif()
 
   target_compile_definitions(${TARGET} PUBLIC -DTINT_BUILD_SPV_READER=$<BOOL:${TINT_BUILD_SPV_READER}>)
