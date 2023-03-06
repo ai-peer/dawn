@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2944108c_66e04593",
+        "filename": "src/dawn/native/emulator/BufferEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:34:52Z",
+      "side": 1,
+      "message": "fwiw, it\u0027s also unreachable I believe because you haven\u0027t surfaced a higher limit for maxBufferSize. So validation will prevent you from requesting over 256Mb",
+      "parentUuid": "fef26db9_0939c4da",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d2b50ea_b2c22340",
         "filename": "src/dawn/native/emulator/BufferEmulator.h",
         "patchSetId": 8

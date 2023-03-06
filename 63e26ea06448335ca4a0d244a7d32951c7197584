@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a2e055b_966a1a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:34:52Z",
+      "side": 1,
+      "message": "very late here, but dawn bits LGTM",
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6623d93_5fb54ef7",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:34:52Z",
+      "side": 1,
+      "message": "nit: return directly",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fb2dc00_90919568",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:34:52Z",
+      "side": 1,
+      "message": "nit: \u003d default",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
