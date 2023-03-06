@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4897d1c2_0dbea920",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T14:00:31Z",
+      "side": 1,
+      "message": "PTAL. This works, but has the outstanding question of the code I imported directly into `third_party/`. The chromium build works, as the rel bots are passing, but do we need to get it imported into chromium third_party as well, or is it fine living in dawn third_party?",
+      "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
