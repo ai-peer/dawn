@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77d21942_9d2b5c0a",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T14:19:35Z",
+      "side": 1,
+      "message": "It works as you might expect. If `Reserve()` \u003c the static size, then reserve is effectively a no-op.",
+      "parentUuid": "0d2af4d3_e185cbe1",
+      "range": {
+        "startLine": 757,
+        "startChar": 26,
+        "endLine": 757,
+        "endChar": 27
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b42edd82_228f8977",
         "filename": "src/tint/ir/builder_impl.cc",
         "patchSetId": 3
