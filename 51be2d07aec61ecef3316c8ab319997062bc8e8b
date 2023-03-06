@@ -16,6 +16,24 @@
       "message": "May need to add clamping for the limits, but I have a question about it in https://chat.google.com/room/AAAATWNUeXA/SkkPCYJ_S3A\n\nNow that we have this limit, we can remove the Vulkan backend hacks around [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/AdapterVk.cpp;l\u003d388;bpv\u003d1;bpt\u003d1?q\u003dAdapterVk)\n\nWe could also update the limit discovery code for Metal/D3D12 to report the sum of maxStorageBuffersPerShaderStage + maxStorageTexturesPerShaderStage + maxColorAttachments, but then, we should probably add a test for it that you can actually use all of those.\nCould leave a TODO for now. The test could be tricky if the backend says something like \"you can use 0xFFFFFFFF storage textures\"\n\nalso, two reviewers still the norm for most stuff :)",
       "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19937d2a_b90ad621",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-06T21:35:23Z",
+      "side": 1,
+      "message": "Addressed the question from the chat, and removed related tests. I will update the discovery code and Vulkan workaround + add new tests in a follow up CL to keep this one simple for now!",
+      "parentUuid": "8d501d51_c091a8f4",
+      "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
