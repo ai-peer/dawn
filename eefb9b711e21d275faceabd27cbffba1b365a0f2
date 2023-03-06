@@ -67,6 +67,24 @@
       "message": "Also why not use https://abseil.io/about/design/charconv which we already have as a third-party lib?",
       "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ccb29ef_aa01c508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T15:05:50Z",
+      "side": 1,
+      "message": "I didn\u0027t clue in that it was available. If it\u0027s already in Chromium I woudln\u0027t be surprised if `fast_float` got rejected due to it being available. (I\u0027d seen `double_conversion` hidden inside `base/third_party/`).\n\n@bclayton@google.com this will mean adding an Abseil dependency into Tint, which we\u0027ve avoided so far.",
+      "parentUuid": "98e307b3_5fd9e7fb",
+      "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
