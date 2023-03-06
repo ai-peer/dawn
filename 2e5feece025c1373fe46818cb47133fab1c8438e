@@ -63,6 +63,30 @@
       },
       "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d18ba03d_d7d931e6",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T15:06:21Z",
+      "side": 1,
+      "message": "Sure - I get that, but it\u0027s a solvable problem.",
+      "parentUuid": "9cea5418_73955407",
+      "range": {
+        "startLine": 821,
+        "startChar": 9,
+        "endLine": 821,
+        "endChar": 12
+      },
+      "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
