@@ -39,6 +39,30 @@
       },
       "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cea5418_73955407",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T15:03:37Z",
+      "side": 1,
+      "message": "Because `count` would still be wrong. The problem is `start` isn\u0027t the start of what Tint considers the string. `from_chars` does not accept the `0x` if the base is `16`. So, count includes the `0x` if it was present, where `end - start` wouldn\u0027t.",
+      "parentUuid": "759d9781_4126dbdc",
+      "range": {
+        "startLine": 821,
+        "startChar": 9,
+        "endLine": 821,
+        "endChar": 12
+      },
+      "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
