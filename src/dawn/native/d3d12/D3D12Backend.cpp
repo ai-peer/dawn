@@ -77,6 +77,7 @@ std::unique_ptr<ExternalImageDXGI> ExternalImageDXGI::Create(
     WGPUDevice device,
     const ExternalImageDescriptorDXGISharedHandle* descriptor) {
     Device* backendDevice = ToBackend(FromAPI(device));
+    auto deviceLock(backendDevice->GetScopedLock());
     std::unique_ptr<ExternalImageDXGIImpl> impl =
         backendDevice->CreateExternalImageDXGIImpl(descriptor);
     if (!impl) {
@@ -90,6 +91,8 @@ uint64_t SetExternalMemoryReservation(WGPUDevice device,
                                       uint64_t requestedReservationSize,
                                       MemorySegment memorySegment) {
     Device* backendDevice = ToBackend(FromAPI(device));
+
+    auto deviceLock(backendDevice->GetScopedLock());
 
     return backendDevice->GetResidencyManager()->SetExternalMemoryReservation(
         memorySegment, requestedReservationSize);
