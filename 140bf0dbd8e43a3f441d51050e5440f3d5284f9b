@@ -33,6 +33,24 @@
       "message": "Consider\n\n0. 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 1 e+0\n\nThis should underflow, but doesn\u0027t have a negative exponent.\nYou want to count the number of insignificant zeros past the decimal point, and subtract that from the implied or explicit exponent.",
       "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcde507d_2ea59859",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T23:28:17Z",
+      "side": 1,
+      "message": "Sigh, that means I\u0027m going to have to actually parse the exponent. Right now I just look for the negative. Since, if this was the set of zeros with a `+302` it would be valid, it\u0027s only because the value goes negative. So, I have to count the spots to the first significant, parse the exponent and then subtract the two.",
+      "parentUuid": "da923224_064082d7",
+      "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
