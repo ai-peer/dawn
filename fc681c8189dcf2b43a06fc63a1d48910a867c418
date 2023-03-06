@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d2af4d3_e185cbe1",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T13:56:20Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure how that number interacted with the reserve below? But, yes if it doesn\u0027t have any weird side effects with reserving, will add a default.",
+      "parentUuid": "057c69c3_50389ef4",
+      "range": {
+        "startLine": 757,
+        "startChar": 26,
+        "endLine": 757,
+        "endChar": 27
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b42edd82_228f8977",
         "filename": "src/tint/ir/builder_impl.cc",
         "patchSetId": 3
@@ -198,6 +222,30 @@
       "writtenOn": "2023-03-06T11:48:53Z",
       "side": 1,
       "message": "maybe just `construct` ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c470e517_b4c729bc",
+        "filename": "src/tint/ir/value_constructor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T13:56:20Z",
+      "side": 1,
+      "message": "If I do that, I\u0027d prefer to do `s/ValueConstuctor/Construct` so the output name is closer to the class name. (Same with Convert below)",
+      "parentUuid": "a93a3336_dcb37c24",
       "range": {
         "startLine": 30,
         "startChar": 15,
