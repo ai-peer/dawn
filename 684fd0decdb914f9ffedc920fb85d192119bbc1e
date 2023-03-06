@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "684fd0decdb914f9ffedc920fb85d192119bbc1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0954370_71d76964",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T20:45:57Z",
+      "side": 1,
+      "message": "LGTM. I\u0027d like a second pair of eyes on this though.",
+      "revId": "684fd0decdb914f9ffedc920fb85d192119bbc1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
