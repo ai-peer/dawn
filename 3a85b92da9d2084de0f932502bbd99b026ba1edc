@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39ecd201_8a5f7b94",
+        "filename": "src/tint/writer/syntax_tree/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:08:54Z",
+      "side": 1,
+      "message": "note: I\u0027d like the writers to move away from the `bool` return value model.\nPerformance here isn\u0027t important, as this isn\u0027t used in production, but in other writers, we\u0027re likely spending I high % of performance in testing the return value. The code is dramatically less readable too.\n\nI\u0027d like us to record a diagnostic, possibly emit an `\u003cerror\u003e` to the output stream, and continue until the end.",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9bb72de_0f8364ac",
+        "filename": "src/tint/writer/syntax_tree/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:08:54Z",
+      "side": 1,
+      "message": "Much like the AST, I personally think this should be as truthful as possible and not reorder anything.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
