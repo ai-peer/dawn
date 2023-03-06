@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69869a33_9f7d0773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T22:28:27Z",
+      "side": 1,
+      "message": "PTAL. This seemed odd as all Dawn usage should be using tint.h.",
+      "revId": "3d4173c9144e6729f73f4a0ada0d4c23f2b37312",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
