@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "171ad0ce_3ee10749",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:51:11Z",
+      "side": 1,
+      "message": "übernit: We tend to avoid capitalisation for diagnostics",
+      "range": {
+        "startLine": 760,
+        "startChar": 41,
+        "endLine": 760,
+        "endChar": 47
+      },
+      "revId": "8cad8d1ffdb08bfe082a5c97f8736b367f3f7c27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
