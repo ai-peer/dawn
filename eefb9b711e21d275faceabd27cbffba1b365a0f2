@@ -33,6 +33,23 @@
       "message": "LGTM - I\u0027d like to get a +2 from a Dawn owner.",
       "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d05af0_4de33ed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-06T14:55:29Z",
+      "side": 1,
+      "message": "LGTM but we need to ask for a third-party review for this :/ https://chromium.googlesource.com/chromium/src/+/main/docs/adding_to_third_party.md#get-a-review let\u0027s start this and the security review (this parses untrusted inputs) immediately.",
+      "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
