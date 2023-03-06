@@ -396,6 +396,8 @@ void Device::ForceEventualFlushOfCommands() {
 }
 
 MaybeError Device::ExecutePendingCommandContext() {
+    GetMutex()->AssertIsLockedByCurrentThread();
+
     return mPendingCommands.ExecuteCommandList(this);
 }
 
