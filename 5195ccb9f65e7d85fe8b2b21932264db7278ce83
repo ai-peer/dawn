@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2570d1_b0570ee2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-06T08:46:07Z",
+      "side": 1,
+      "message": "Maybe please take a look? Also fix an error of SType validation.",
+      "revId": "5195ccb9f65e7d85fe8b2b21932264db7278ce83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ad123cb_260d7a90",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-06T08:46:07Z",
+      "side": 1,
+      "message": "Also fix an error of earlier patchset here. `DawnInstanceDescriptor` and `DawnTogglesDescriptor` should be able to coexist in the same chain.",
+      "revId": "5195ccb9f65e7d85fe8b2b21932264db7278ce83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
