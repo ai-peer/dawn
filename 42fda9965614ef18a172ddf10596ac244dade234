@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e064c6f_febae50f",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T12:01:12Z",
+      "side": 1,
+      "message": "Generate?",
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866a454b_b96358b9",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T12:01:12Z",
+      "side": 1,
+      "message": "Little concerned about the maintenance here.\nMaybe generate a `builder_builtins.inl` which we can include here?",
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d3ba6a_ec2923af",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T12:01:12Z",
+      "side": 1,
+      "message": "Generate?",
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1fbf06e_379053db",
+        "filename": "tools/src/template/template.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T12:01:12Z",
+      "side": 1,
+      "message": "Please run `gofmt`.",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 38
+      },
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff17c4a7_a5a01d53",
+        "filename": "tools/src/template/template.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T12:01:12Z",
+      "side": 1,
+      "message": "I think you should prevent leading underscores in the case of a capitalised string:\n\n```\n\tfor i, r :\u003d range s {\n\t\tif i \u003e 0 \u0026\u0026 unicode.IsUpper(r) {\n\t\t\tb.WriteRune(\u0027_\u0027);\n\t\t}\n\t\tb.WriteRune(unicode.ToLower(r));\n\t}\n```",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 25
+      },
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
