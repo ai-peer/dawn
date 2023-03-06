@@ -318,6 +318,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ac88b8_6dc826f8",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:03:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1c499706_c71697c5",
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ee2180a_d4bd0528",
@@ -349,6 +367,24 @@
       "side": 1,
       "message": "same as above.",
       "parentUuid": "0ee2180a_d4bd0528",
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf41743_e41ca861",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:03:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "864c999c_b2ff7c47",
       "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -613,6 +649,30 @@
       "side": 1,
       "message": "Added a new method `HasPendingTasks` to check whether there are pending async or callback tasks. Here I will only return `HasPendingTasks()` instead of `!IsDeviceIdle()`.\n\n`IsDeviceIdle` does more than checking for pending tasks. It checks whether there are any scheduled commands or not. In case the device is already lost, there is no point checking if there are scheduled commands. Furthermore, it might cause crash because internal/backend\u0027s states related to commands might be deleted already.",
       "parentUuid": "b79d70c9_05c062f9",
+      "range": {
+        "startLine": 1276,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 20
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "836481e5_ebaace5c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:03:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "050f3993_20f8b854",
       "range": {
         "startLine": 1276,
         "startChar": 0,
