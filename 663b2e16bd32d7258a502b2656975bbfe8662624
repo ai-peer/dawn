@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ed512fd_fab0621c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-06T12:27:35Z",
+      "side": 1,
+      "message": "Thanks for the many iterations, it looks pretty good!",
+      "revId": "663b2e16bd32d7258a502b2656975bbfe8662624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c455fa98_5c21a16f",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-06T12:27:35Z",
+      "side": 1,
+      "message": "I don\u0027t think this can happen anymore given that the mapping callback is no longer called immediately. Maybe the command could be updated?",
+      "revId": "663b2e16bd32d7258a502b2656975bbfe8662624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e32c24a_d52b4f85",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 32
+      },
+      "lineNbr": 1267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-06T12:27:35Z",
+      "side": 1,
+      "message": "u-nit: No need to encode the code\u0027s history in the comments, \"We no longer\" -\u003e \"We don\u0027t\"",
+      "revId": "663b2e16bd32d7258a502b2656975bbfe8662624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
