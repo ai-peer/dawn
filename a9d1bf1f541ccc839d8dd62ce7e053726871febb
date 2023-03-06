@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfbe88f3_c754f3bf",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "OK. Done.\n\nbtw, I think this is just a matter of preference. To my understanding, \"schedule\" meant \"planning an event to happen at a specific time\", and \"now\" is also a valid \"time\".\n\nFurthermore, I preferred wrapping device-\u003eAddCallbackTask() in a method because in future we would have to change it to instance-\u003eAddEvent(). In that case we only need to change the wrapper method instead of find + replace a lot of places. Ofc, at that point, we might consider keeping device-\u003eAddCallbackTask() as a wrapper for instance-\u003eAddEvent(). However, there are chances that approach could be \"not obvious/direct\" enough for readers.",
+      "parentUuid": "2b4eb9d5_82abc2b4",
+      "range": {
+        "startLine": 365,
+        "startChar": 4,
+        "endLine": 371,
+        "endChar": 5
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "682f0d5f_e38f4990",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "call AddCallbackTask directly?",
+      "range": {
+        "startLine": 383,
+        "startChar": 12,
+        "endLine": 383,
+        "endChar": 35
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38eed2b3_df7f9541",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "682f0d5f_e38f4990",
       "range": {
         "startLine": 383,
         "startChar": 12,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d70ef02c_c9c6791d",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b80ed24e_e8699484",
+      "range": {
+        "startLine": 401,
+        "startChar": 12,
+        "endLine": 401,
+        "endChar": 35
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0737c164_dc28995a",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "`AddCallbackTask(*PrepareMappingCallback(...));` ?",
+      "range": {
+        "startLine": 416,
+        "startChar": 8,
+        "endLine": 416,
+        "endChar": 31
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a35be9e_d7e80542",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0737c164_dc28995a",
       "range": {
         "startLine": 416,
         "startChar": 8,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3638eb56_48452d66",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 500,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bc382b0_44ecf57c",
+      "range": {
+        "startLine": 500,
+        "startChar": 8,
+        "endLine": 500,
+        "endChar": 31
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e67c3e4_062a8406",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "```\nauto cb \u003d PrepareMappingCallback(...);\nif (cb) {\n  cb();\n}\n```\n?",
+      "range": {
+        "startLine": 618,
+        "startChar": 0,
+        "endLine": 618,
+        "endChar": 65
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b278f98_886aaf98",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e67c3e4_062a8406",
       "range": {
         "startLine": 618,
         "startChar": 0,
@@ -158,6 +302,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c499706_c71697c5",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Instead of assertion, I changed the logic to only updating the state in `OnDeviceLoss`/`OnShutDown` if current state is normal.\nWhat happen if both `deviceloss` and `shutdown` occur? Example:\n- user calls `MapAsync` with callback task `cb`.\n- device gets lost.\n- user calls `queue.Submit`\n  - `cb` is updated with `State\u003dDeviceLoss`.\n- device\u0027s last ref dropped.\n  - `cb` is updated with `State\u003dShutdown`.\n  - At this point, do we allow `cb` to call only `HandleDeviceLoss` or only `HandleShutdown`? Or we crash?\n\nBased on current main branch\u0027s code, when `deviceLoss` or `shutdown` occur, we remove all the tasks from the queue immediately and invoke `HandleDeviceLoss` or `HandleShutdown` respectively. So in order to keep the same logic, I disallow `OnDeviceLoss`, `OnShutdown` from overwriting previous non-normal state. So whatever state update comes first will decide the task\u0027s final `Execute()`\u0027s behavior.",
+      "parentUuid": "3a2c3a18_4be3ecad",
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ee2180a_d4bd0528",
         "filename": "src/dawn/native/CallbackTaskManager.cpp",
         "patchSetId": 29
@@ -169,6 +331,24 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "nit: assert the state was Normal",
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864c999c_b2ff7c47",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "same as above.",
+      "parentUuid": "0ee2180a_d4bd0528",
       "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +370,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc11a41_8c77a570",
+        "filename": "src/dawn/native/CallbackTaskManager.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done.\n\nbtw, my plan wasn\u0027t to prevent raw pointer argument (that would have prevented the usual `void* userdata` parameter). My original plan was to prevent passing `raw C string` argument.",
+      "parentUuid": "94155c87_c361c9f0",
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75d9b4f7_8675497a",
@@ -203,6 +401,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "we could not save this c_str and instead bind the std::string by copy into the lambdas",
+      "range": {
+        "startLine": 534,
+        "startChar": 0,
+        "endLine": 534,
+        "endChar": 45
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "972a9dac_8671db54",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75d9b4f7_8675497a",
       "range": {
         "startLine": 534,
         "startChar": 0,
@@ -236,6 +458,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa83fd05_6a9fbf8a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "923f4bc2_7d85ac7b",
+      "range": {
+        "startLine": 640,
+        "startChar": 20,
+        "endLine": 640,
+        "endChar": 43
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66b60bb6_b971fa97",
@@ -249,6 +495,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "bind message by string, don\u0027t do .c_str()",
+      "range": {
+        "startLine": 1116,
+        "startChar": 24,
+        "endLine": 1116,
+        "endChar": 43
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a22b4f_522bbbae",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66b60bb6_b971fa97",
       "range": {
         "startLine": 1116,
         "startChar": 24,
@@ -282,6 +552,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f018855_283085ab",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a94fe1a0_f1e39889",
+      "range": {
+        "startLine": 1161,
+        "startChar": 31,
+        "endLine": 1161,
+        "endChar": 49
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b79d70c9_05c062f9",
@@ -295,6 +589,30 @@
       "writtenOn": "2023-03-02T09:30:16Z",
       "side": 1,
       "message": "this means the caller thinks it should call Tick forever if the device is lost. Shouldn\u0027t we still use IsDeviceIdle?",
+      "range": {
+        "startLine": 1276,
+        "startChar": 0,
+        "endLine": 1276,
+        "endChar": 20
+      },
+      "revId": "a9d1bf1f541ccc839d8dd62ce7e053726871febb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "050f3993_20f8b854",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Added a new method `HasPendingTasks` to check whether there are pending async or callback tasks. Here I will only return `HasPendingTasks()` instead of `!IsDeviceIdle()`.\n\n`IsDeviceIdle` does more than checking for pending tasks. It checks whether there are any scheduled commands or not. In case the device is already lost, there is no point checking if there are scheduled commands. Furthermore, it might cause crash because internal/backend\u0027s states related to commands might be deleted already.",
+      "parentUuid": "b79d70c9_05c062f9",
       "range": {
         "startLine": 1276,
         "startChar": 0,

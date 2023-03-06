@@ -119,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46ca72be_259af09d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done changing `const char*` to `const std::string\u0026`.\n\nbtw, I wasn\u0027t trying to avoid passing raw pointer (void* userdata is valid), I was only trying to avoid passing raw C string. And a lot of callbacks in the Device.cpp file have the similar arguments (\u003carg1\u003e, message, userdata), hence I created a helper method to avoid all these lambda capture boilerplate code. `std::bind` won\u0027t help with raw C string \"out of scope\" problem either. However, literal strings have static storage lifetime so we could get away with it.\n\nThe reason for \"InNextAPITick\" methods\u0027 naming in previous version was also because `AddCallbackTask` wasn\u0027t \"obvious\" enough to me (as a reader) what those callbacks is gonna be used.",
+      "parentUuid": "c0ab963f_897607a4",
+      "range": {
+        "startLine": 144,
+        "startChar": 5,
+        "endLine": 144,
+        "endChar": 28
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e7bbff1_df9016ee",
@@ -449,6 +473,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9e509e_5b5a5464",
+        "filename": "src/dawn/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Reverted. Just realized this isn\u0027t needed anyway. Tick() is already called in the tests.",
+      "parentUuid": "a3ac3e80_326c5d57",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 44
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cee4e048_360da80e",
@@ -486,6 +534,30 @@
       "side": 1,
       "message": "Same as above.",
       "parentUuid": "cee4e048_360da80e",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 35
+      },
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c98349_b95e77e2",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Reverted. Just realized this isn\u0027t needed anyway. Tick() is already called in the tests.",
+      "parentUuid": "8c48a0af_0c3e0d28",
       "range": {
         "startLine": 80,
         "startChar": 0,
@@ -545,6 +617,24 @@
       "side": 1,
       "message": "my preference would be to have everything that should trigger the callback be next to the EXPECT_CALL - that way it\u0027s clear what the operations are that result in the expectation. With the Tick in TearDown, it\u0027s less obvious.\n\nLet\u0027s see what cwallez@ thinks",
       "parentUuid": "fc705e8e_fecb9a3c",
+      "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21424305_90cbb6ed",
+        "filename": "src/dawn/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-06T09:34:39Z",
+      "side": 1,
+      "message": "Done anyway. Tick() has been added to the specific tests.",
+      "parentUuid": "21717eb3_1e733551",
       "revId": "d8e2d87ce26e20a8f377fe1f941e44656f6c1862",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
