@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dc9889d_c7fd757c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-06T18:22:16Z",
+      "side": 1,
+      "message": "This changes looks fine and should land, but I think we should also consider loading the input from storage buffer too for the `var` test. A quick play with Shader Playground shows that FXC is also optimizing out the builtin calls and just storing a constant value.",
+      "revId": "77478e746b9326864a60314ded4eeba728682c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
