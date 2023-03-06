@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac5ee87_7fe458b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003361
+      },
+      "writtenOn": "2023-03-06T23:22:35Z",
+      "side": 1,
+      "message": "A step in our migration to git submodules.\nhttps://groups.google.com/a/chromium.org/g/chromium-dev/c/weYzs3_WWts\n\n.gitmodules content should match what\u0027s listed in DEPS dependencies (non-cipd)",
+      "revId": "70ed656a884fe03b5780170a7141fb3b16c512e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
