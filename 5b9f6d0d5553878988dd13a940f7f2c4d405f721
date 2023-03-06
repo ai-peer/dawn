@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e66afb3e_7f4bced6",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-06T19:07:15Z",
+      "side": 1,
+      "message": "Nope. Thanks.",
+      "parentUuid": "f2fd9b5f_8b34d4fd",
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9784e971_5a239de1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-05T14:05:12Z",
       "side": 1,
       "message": "Nit: all all",
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6ccdd0f_00d9b8c7",
+        "filename": "src/tint/transform/robustness.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-06T19:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9784e971_5a239de1",
       "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
