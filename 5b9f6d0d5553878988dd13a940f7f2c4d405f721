@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d7c8930_2e1358cc",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T19:13:56Z",
+      "side": 1,
+      "message": "Good to know. Let\u0027s keep as-is, and relax when we have lots more testing in place.",
+      "parentUuid": "bda9ed2a_021a88a8",
+      "range": {
+        "startLine": 552,
+        "startChar": 65,
+        "endLine": 552,
+        "endChar": 96
+      },
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9784e971_5a239de1",
