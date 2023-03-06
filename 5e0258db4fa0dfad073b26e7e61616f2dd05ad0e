@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d506ba90_6b4b8602",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T17:42:10Z",
+      "side": 1,
+      "message": "one more thought. https://dawn-review.googlesource.com/c/dawn/+/122021 is landing soon which will give us instance-level toggles. You can put the entire Emulator adapter behind a Toggle so that people don\u0027t accidentally start using it (thinking it is software fallback) and complain that it doesn\u0027t fully implement WebGPU.",
+      "parentUuid": "21ddae5f_0f946e86",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 37
+      },
+      "revId": "5e0258db4fa0dfad073b26e7e61616f2dd05ad0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bd24238_ca705043",
         "filename": "src/tint/interp/CMakeLists.txt",
         "patchSetId": 2
