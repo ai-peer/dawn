@@ -55,6 +55,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bda9ed2a_021a88a8",
+        "filename": "src/tint/transform/robustness.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 552,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-06T19:12:40Z",
+      "side": 1,
+      "message": "Interesting.\nTeo\u0027s investigation shows textureStore is already predicated in underlying APIs.\nhttps://github.com/gpuweb/gpuweb/issues/3893#issuecomment-1453847182",
+      "range": {
+        "startLine": 552,
+        "startChar": 65,
+        "endLine": 552,
+        "endChar": 96
+      },
+      "revId": "5b9f6d0d5553878988dd13a940f7f2c4d405f721",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9784e971_5a239de1",
         "filename": "src/tint/transform/robustness.h",
         "patchSetId": 19
