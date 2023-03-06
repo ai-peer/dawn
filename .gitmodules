@@ -1,0 +1,80 @@
+# Dependencies required to use GN/Clang in standalone
+[submodule "build"]
+	path = build
+	url = {chromium_git}/chromium/src/build
+[submodule "buildtools"]
+	path = buildtools
+	url = {chromium_git}/chromium/src/buildtools
+[submodule "buildtools/clang_format/script"]
+	path = buildtools/clang_format/script
+	url = {chromium_git}/external/github.com/llvm/llvm-project/clang/tools/clang-format.git
+[submodule "buildtools/third_party/libc++/trunk"]
+	path = buildtools/third_party/libc++/trunk
+	url = {chromium_git}/external/github.com/llvm/llvm-project/libcxx.git
+[submodule "buildtools/third_party/libc++abi/trunk"]
+	path = buildtools/third_party/libc++abi/trunk
+	url = {chromium_git}/external/github.com/llvm/llvm-project/libcxxabi.git
+[submodule "tools/clang"]
+	path = tools/clang
+	url = {chromium_git}/chromium/src/tools/clang
+# Testing, GTest and GMock
+[submodule "testing"]
+	path = testing
+	url = {chromium_git}/chromium/src/testing
+[submodule "third_party/googletest"]
+	path = third_party/googletest
+	url = {chromium_git}/external/github.com/google/googletest
+# This is a dependency of //testing
+[submodule "third_party/catapult"]
+	path = third_party/catapult
+	url = {chromium_git}/catapult.git
+# Jinja2 and MarkupSafe for the code generator
+[submodule "third_party/jinja2"]
+	path = third_party/jinja2
+	url = {chromium_git}/chromium/src/third_party/jinja2
+[submodule "third_party/markupsafe"]
+	path = third_party/markupsafe
+	url = {chromium_git}/chromium/src/third_party/markupsafe
+# GLFW for tests and samples
+[submodule "third_party/glfw"]
+	path = third_party/glfw
+	url = {chromium_git}/external/github.com/glfw/glfw
+[submodule "third_party/vulkan_memory_allocator"]
+	path = third_party/vulkan_memory_allocator
+	url = {chromium_git}/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator
+[submodule "third_party/angle"]
+	path = third_party/angle
+	url = {chromium_git}/angle/angle
+[submodule "third_party/swiftshader"]
+	path = third_party/swiftshader
+	url = {swiftshader_git}/SwiftShader
+[submodule "third_party/vulkan-deps"]
+	path = third_party/vulkan-deps
+	url = {chromium_git}/vulkan-deps
+[submodule "third_party/zlib"]
+	path = third_party/zlib
+	url = {chromium_git}/chromium/src/third_party/zlib
+[submodule "third_party/abseil-cpp"]
+	path = third_party/abseil-cpp
+	url = {chromium_git}/chromium/src/third_party/abseil-cpp
+# WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
+[submodule "third_party/webgpu-cts"]
+	path = third_party/webgpu-cts
+	url = {chromium_git}/external/github.com/gpuweb/cts
+# Dependencies required to build / run Dawn NodeJS bindings
+[submodule "third_party/node-api-headers"]
+	path = third_party/node-api-headers
+	url = {github_git}/nodejs/node-api-headers.git
+[submodule "third_party/node-addon-api"]
+	path = third_party/node-addon-api
+	url = {github_git}/nodejs/node-addon-api.git
+[submodule "third_party/gpuweb"]
+	path = third_party/gpuweb
+	url = {github_git}/gpuweb/gpuweb.git
+# Misc dependencies inherited from Tint
+[submodule "third_party/benchmark"]
+	path = third_party/benchmark
+	url = {chromium_git}/external/github.com/google/benchmark.git
+[submodule "third_party/protobuf"]
+	path = third_party/protobuf
+	url = {chromium_git}/external/github.com/protocolbuffers/protobuf.git
