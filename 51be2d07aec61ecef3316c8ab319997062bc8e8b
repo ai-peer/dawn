@@ -52,6 +52,24 @@
       "parentUuid": "19937d2a_b90ad621",
       "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de08ddf_51cc6f71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-06T23:45:11Z",
+      "side": 1,
+      "message": "Hmm, what validation tests on top of the ones in `RenderPipelineValidationTest.cpp` were you thinking of? Are there some other specific cases you wanted to test?",
+      "parentUuid": "c2291a82_ecb1b75b",
+      "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
