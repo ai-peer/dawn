@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ebda609_79100322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-06T23:04:04Z",
+      "side": 1,
+      "message": "There\u0027s a dumb case that doesn\u0027t work with this version of the code.\nNot clear to me if we should fix now or in a followup.",
+      "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da923224_064082d7",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-06T23:04:04Z",
+      "side": 1,
+      "message": "Consider\n\n0. 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000 0000000000\n0000000000 0000000000 1 e+0\n\nThis should underflow, but doesn\u0027t have a negative exponent.\nYou want to count the number of insignificant zeros past the decimal point, and subtract that from the implied or explicit exponent.",
+      "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
