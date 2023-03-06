@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db8cc98_2c8cf7d0",
+        "filename": "src/tint/writer/syntax_tree/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T13:53:44Z",
+      "side": 1,
+      "message": "Ack. We can change this in the future if we want, going to leave for now.",
+      "parentUuid": "39ecd201_8a5f7b94",
+      "range": {
+        "startLine": 52,
+        "startChar": 12,
+        "endLine": 52,
+        "endChar": 25
+      },
+      "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9bb72de_0f8364ac",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-03-06T11:08:54Z",
       "side": 1,
       "message": "Much like the AST, I personally think this should be as truthful as possible and not reorder anything.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dbef84a_c6389828",
+        "filename": "src/tint/writer/syntax_tree/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T13:53:44Z",
+      "side": 1,
+      "message": "K, I can move down to the `for` below, this was just a copied out of the WGSL writer so ended up doing what it did.",
+      "parentUuid": "a9bb72de_0f8364ac",
       "range": {
         "startLine": 48,
         "startChar": 0,
