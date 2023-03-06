@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f09718ba_992b6728",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T18:11:24Z",
+      "side": 1,
+      "message": "`count_increment` sounds like number to increment per character or something. `prefix_count` ?",
+      "range": {
+        "startLine": 810,
+        "startChar": 53,
+        "endLine": 810,
+        "endChar": 68
+      },
+      "revId": "8877993284f0e40cb91be45b962561aa744f4af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
