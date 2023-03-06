@@ -1,0 +1,234 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da71f78_61093ecf",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 189,
+        "startChar": 71,
+        "endLine": 189,
+        "endChar": 75
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd016534_6c717897",
+        "filename": "src/tint/ir/builder.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 194,
+        "startChar": 66,
+        "endLine": 194,
+        "endChar": 70
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057c69c3_50389ef4",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "Could give this something reasonable. `8`?",
+      "range": {
+        "startLine": 757,
+        "startChar": 26,
+        "endLine": 757,
+        "endChar": 27
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b42edd82_228f8977",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 787,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "nit: We have `TINT_UNIMPLEMENTED` for this purpose.",
+      "range": {
+        "startLine": 787,
+        "startChar": 8,
+        "endLine": 787,
+        "endChar": 30
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa72cfdf_dbecb8dd",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "`Switch` ?",
+      "range": {
+        "startLine": 789,
+        "startChar": 6,
+        "endLine": 789,
+        "endChar": 13
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9603da8f_9f26025f",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 793,
+        "startChar": 50,
+        "endLine": 793,
+        "endChar": 54
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a74b55a_591f32c7",
+        "filename": "src/tint/ir/builder_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "std::move",
+      "range": {
+        "startLine": 801,
+        "startChar": 43,
+        "endLine": 801,
+        "endChar": 47
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8561ad10_928294c3",
+        "filename": "src/tint/ir/value_constructor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "What if there are no args?",
+      "range": {
+        "startLine": 30,
+        "startChar": 76,
+        "endLine": 30,
+        "endChar": 80
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a93a3336_dcb37c24",
+        "filename": "src/tint/ir/value_constructor.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "maybe just `construct` ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 15,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a412def_7d0cf053",
+        "filename": "src/tint/ir/value_conversion.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T11:48:53Z",
+      "side": 1,
+      "message": "`convert` ?",
+      "range": {
+        "startLine": 32,
+        "startChar": 15,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "fc681c8189dcf2b43a06fc63a1d48910a867c418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
