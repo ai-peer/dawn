@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91a09e40_3f2a80b4",
+        "filename": "src/tint/ir/builder.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T13:58:44Z",
+      "side": 1,
+      "message": "The maintenance of this is what prompted https://dawn-review.googlesource.com/c/dawn/+/122607.\n\nI can change this to use maros and a builtins.inl, but am still on the fence if all the generated code is worth it over a simple enum.",
+      "parentUuid": "866a454b_b96358b9",
+      "revId": "42fda9965614ef18a172ddf10596ac244dade234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13d3ba6a_ec2923af",
         "filename": "src/tint/ir/builder_impl.cc",
         "patchSetId": 5
