@@ -34,6 +34,24 @@
       "parentUuid": "8d501d51_c091a8f4",
       "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2291a82_ecb1b75b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T21:42:10Z",
+      "side": 1,
+      "message": "LGTM - in this CL could we have the validation test of the new limit though? I believe the base limits in the null backend should be able to exceed maxFragmentCombinedOutputResources (8).",
+      "parentUuid": "19937d2a_b90ad621",
+      "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

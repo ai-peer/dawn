@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d20c49d_c45e5e01",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-06T21:42:10Z",
+      "side": 1,
+      "message": "typo: with",
+      "range": {
+        "startLine": 567,
+        "startChar": 19,
+        "endLine": 567,
+        "endChar": 23
+      },
+      "revId": "55b9554b57644261f0a9d9850d92cd56c9096a04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
