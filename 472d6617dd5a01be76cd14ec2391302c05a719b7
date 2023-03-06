@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c8e57f8_bbe1a54e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T23:15:41Z",
+      "side": 1,
+      "message": "PTAL.  The gn fix was to ignore the include as gn doesn\u0027t understand preprocessor macros. The fix is in ps2.",
+      "revId": "472d6617dd5a01be76cd14ec2391302c05a719b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
