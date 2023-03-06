@@ -93,6 +93,30 @@
       },
       "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e4ccb6_c28e51f4",
+        "filename": "src/tint/writer/syntax_tree/generator_impl.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T16:13:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dbef84a_c6389828",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 5
+      },
+      "revId": "3a85b92da9d2084de0f932502bbd99b026ba1edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
