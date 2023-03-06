@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "759d9781_4126dbdc",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-06T14:54:29Z",
+      "side": 1,
+      "message": "\u003e On success, returns a value of type from_chars_result such that ptr points at the first character not matching the pattern, or has the value equal to last if all characters match and ec is value-initialized.\n\nSo, it sounds like `std::from_chars` will stop at the first non-parsable character, and will update `res.ptr`. We should probably use this instead of `count` ?",
+      "range": {
+        "startLine": 821,
+        "startChar": 9,
+        "endLine": 821,
+        "endChar": 12
+      },
+      "revId": "2e5feece025c1373fe46818cb47133fab1c8438e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
