@@ -103,6 +103,24 @@
       "parentUuid": "9ccb29ef_aa01c508",
       "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1da5cb1_75a05e10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-06T20:37:28Z",
+      "side": 1,
+      "message": "Abseil version: https://dawn-review.googlesource.com/c/dawn/+/122780",
+      "parentUuid": "5c67c891_67f9b7b8",
+      "revId": "eefb9b711e21d275faceabd27cbffba1b365a0f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
