@@ -57,10 +57,23 @@ ExternalImageDXGIImpl::~ExternalImageDXGIImpl() {
 }
 
 bool ExternalImageDXGIImpl::IsValid() const {
+    Ref<DeviceMutexBase> mutex;
+    DeviceBase::DeferLock deviceLock(mutex);
+    if (mBackendDevice != nullptr) {
+        mutex = mBackendDevice->GetMutex();
+        deviceLock.Lock();
+    }
     return IsInList();
 }
 
 void ExternalImageDXGIImpl::Destroy() {
+    Ref<DeviceMutexBase> mutex;
+    DeviceBase::DeferLock deviceLock(mutex);
+    if (mBackendDevice != nullptr) {
+        mutex = mBackendDevice->GetMutex();
+        deviceLock.Lock();
+    }
+
     if (IsInList()) {
         RemoveFromList();
         mBackendDevice = nullptr;
@@ -73,6 +86,9 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
     const ExternalImageDXGIBeginAccessDescriptor* descriptor) {
     ASSERT(mBackendDevice != nullptr);
     ASSERT(descriptor != nullptr);
+
+    DeviceBase::AutoLock deviceLock(*mBackendDevice.Get());
+
     // Ensure the texture usage is allowed
     if (!IsSubset(descriptor->usage, static_cast<WGPUTextureUsageFlags>(mUsage))) {
         dawn::ErrorLog() << "Texture usage is not valid for external image";
@@ -130,6 +146,9 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 
 void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
                                       ExternalImageDXGIFenceDescriptor* signalFence) {
+    ASSERT(mBackendDevice != nullptr);
+    DeviceBase::AutoLock deviceLock(*mBackendDevice.Get());
+
     ASSERT(signalFence != nullptr);
 
     Texture* backendTexture = ToBackend(FromAPI(texture));
