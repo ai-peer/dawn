@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be65f5b_9fa9d1b6",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1482,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-07T22:40:11Z",
+      "side": 1,
+      "message": "nit: no longer true",
+      "range": {
+        "startLine": 1482,
+        "startChar": 15,
+        "endLine": 1482,
+        "endChar": 31
+      },
+      "revId": "b838ae681e6aaf9d0e86406962c8a1b18ff1dfeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -141,6 +141,30 @@
       },
       "revId": "f3298aedda40541b62492b30c569096484a4e2df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f8b0a2_f2820798",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-07T22:40:11Z",
+      "side": 1,
+      "message": "still doesn\u0027t have a test without depth stencil\n\nI also think the test could still be a bit tighter to explicitly test that max works and max+1 does not work.\n\nRight now, it\u0027s not super clear. All we know is that there are some combinations \u003c\u003d max that work and some combinations \u003e max that do not work. But it\u0027s not as tight as \u003d\u003d max is OK and \u003d\u003d max+1 is not OK.\n\nyou could imagine `DoTest(numBuffers, numTextures, colorAttachments, hasDepthStencil);` and then\n\n```\n// exactly maxFragmentCombinedOutputResources is OK\nDoTest(1, maxFragmentCombinedOutputResources - 3, {1, 3}, false);\n\n// exactly maxFragmentCombinedOutputResources with depth-stencil is OK\nDoTest(1, maxFragmentCombinedOutputResources - 3, {1, 3}, true);\n\n// maxFragmentCombinedOutputResources + 1 is an error\nASSERT_DEVICE_ERROR(DoTest(1, maxFragmentCombinedOutputResources - 2, {1, 3}, false));\n```",
+      "parentUuid": "273358ba_9d505fa5",
+      "range": {
+        "startLine": 1491,
+        "startChar": 4,
+        "endLine": 1494,
+        "endChar": 29
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
