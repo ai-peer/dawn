@@ -68,6 +68,24 @@
       "parentUuid": "da923224_064082d7",
       "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5f7e6b0_9c4fc122",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T15:08:54Z",
+      "side": 1,
+      "message": "This is a bug, but lets land the rest to fix float parsing in general and will followup looking at this case.",
+      "parentUuid": "dcde507d_2ea59859",
+      "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
