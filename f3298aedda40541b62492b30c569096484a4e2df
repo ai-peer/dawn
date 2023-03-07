@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e88f1245_5cef5151",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-07T18:03:46Z",
+      "side": 1,
+      "message": "I don\u0027t think so because the attachments are in order, so you can\u0027t have the array larger than maxColorAttachments. Here you could have color attachments 0 and 7 and storage texture and it would be allowed.",
+      "parentUuid": "5b8adfe4_a7af5a1c",
+      "range": {
+        "startLine": 371,
+        "startChar": 59,
+        "endLine": 371,
+        "endChar": 70
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42b4a660_b66280ee",
         "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 5
