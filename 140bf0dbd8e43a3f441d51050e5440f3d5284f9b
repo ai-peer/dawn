@@ -86,6 +86,24 @@
       "parentUuid": "dcde507d_2ea59859",
       "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff2d22b8_e332c295",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-07T15:17:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5f7e6b0_9c4fc122",
+      "revId": "140bf0dbd8e43a3f441d51050e5440f3d5284f9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
