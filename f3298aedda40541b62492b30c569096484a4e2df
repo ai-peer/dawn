@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6ce134c_cf96dabd",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-07T09:37:53Z",
+      "side": 1,
+      "message": "What if some color targets are unused? It seems they shouldn\u0027t count.\n\nhttps://gpuweb.github.io/gpuweb/#total-number-of-fragment-output-resources\n\n\u003e the number of non-null elements in descriptor.targets",
+      "range": {
+        "startLine": 371,
+        "startChar": 59,
+        "endLine": 371,
+        "endChar": 70
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42b4a660_b66280ee",
         "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 5
