@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07b8cce0_6db6cae7",
+        "filename": "docs/tint/interp/arch.md",
+        "patchSetId": 7
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8adbd4f_eb231800",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4a22aae_02aa6365",
@@ -259,6 +277,24 @@
       "side": 1,
       "message": "I\u0027m personally not worried (this is just copied this from the Null backend). This isn\u0027t going to be used in Chrome builds.\n\nBut I can add a check somewhere if people want.",
       "parentUuid": "cdde40f5_fef15b16",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e95355_3188cbd1",
+        "filename": "src/dawn/native/emulator/BindGroupEmulator.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a0a27f4_9bb7caf1",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -438,6 +474,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7336333_6bc8a71b",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4ef319d0_6e8aa0cb",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13b708da_361ebdda",
@@ -469,6 +523,24 @@
       "side": 1,
       "message": "Do you mean if `access.kind \u003d\u003d kLoad`? If so you\u0027re right, we could skip the case where we have an existing `kLoad` and we\u0027re trying to add another `kLoad`. It doesn\u0027t matter which load we record when there are multiple of them. But I don\u0027t think it matters either way.",
       "parentUuid": "13b708da_361ebdda",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ae06ae_7bfe1957",
+        "filename": "src/tint/interp/data_race_detector.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4517acc3_c61da899",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -841,6 +913,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b931695_e29e4bc9",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "06009a01_51da38a8",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23f07beb_2f943fc4",
@@ -907,6 +997,24 @@
       "side": 1,
       "message": "Just tried this but `stoul` throws an exception if the argument isn\u0027t valid, and I can\u0027t figure out how to make it not just abort in this case. Suggestions welcome.",
       "parentUuid": "48585cd3_3a201eac",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e05b79a_df4f1e2f",
+        "filename": "src/tint/interp/interactive_debugger.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "`std::from_chars` maybe better here, will give locale independent parsing at least.",
+      "parentUuid": "b9b3998e_6c5d4f96",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1386,6 +1494,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5619715b_05a5be60",
+        "filename": "src/tint/interp/main.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Either work for me, remove, or move to `src/tint/cmd` depending on what you think is best.",
+      "parentUuid": "cc903efa_6046d830",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7f27111_9b39c9dd",
         "filename": "src/tint/interp/main.cc",
         "patchSetId": 7
@@ -1485,6 +1611,24 @@
       "side": 1,
       "message": "All accesses from a within a shader go through the `MemoryView` class, which does the bounds checking to report errors. These checks on the `Memory` object just implement the \"load zero, skip write\" behavior for OOB accesses (and are really just there to make sure OOB accesses don\u0027t crash when performed by other parts of the system).",
       "parentUuid": "7e0fc555_125f4c80",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a41bafaa_00491787",
+        "filename": "src/tint/interp/memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e11e342c_60b1ab7a",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1625,6 +1769,24 @@
       "side": 1,
       "message": "The data race detector uses the root memory views when checking for conflicts.\n\nThe `Memory` and `MemoryView` classes are oblivious to the existence of race detection and I\u0027d like to keep it that way, so I\u0027d lean towards not mentioning it in the docs here.",
       "parentUuid": "8fc44556_91cd7925",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7344f14a_0006e020",
+        "filename": "src/tint/interp/memory.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a8d49b4e_b68228f3",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1853,6 +2015,24 @@
       "side": 1,
       "message": "This is used for passing around dispatch sizes and IDs outside of shader execution. Using a `constant::Composite` for that stuff just feels awkward?",
       "parentUuid": "5b1e0434_eb03c076",
+      "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "043f2d7d_c47e4173",
+        "filename": "src/tint/interp/uvec3.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T18:47:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d69c7267_a61e9af3",
       "revId": "54bd66445ee8f02792f1203eac538dc2220ea6b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
