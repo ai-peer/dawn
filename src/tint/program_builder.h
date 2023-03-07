@@ -539,7 +539,7 @@ class ProgramBuilder {
         return constant_nodes_.Create<T>(std::forward<ARGS>(args)...);
     }
 
-    /// Constructs a constant of a vector, matrix or array type.
+    /// Constructs a constant of a vector, matrix, array, or struct type.
     ///
     /// Examines the element values and will return either a constant::Composite or a
     /// constant::Splat, depending on the element types and values.

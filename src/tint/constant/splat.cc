@@ -13,12 +13,17 @@
 // limitations under the License.
 
 #include "src/tint/constant/splat.h"
+#include "src/tint/type/array.h"
+#include "src/tint/type/matrix.h"
+#include "src/tint/type/vector.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::constant::Splat);
 
 namespace tint::constant {
 
-Splat::Splat(const type::Type* t, const constant::Value* e, size_t n) : type(t), el(e), count(n) {}
+Splat::Splat(const type::Type* t, const constant::Value* e, size_t n) : type(t), el(e), count(n) {
+    TINT_ASSERT(Constant, (t->IsAnyOf<type::Vector, type::Matrix, type::Array>()));
+}
 
 Splat::~Splat() = default;
 

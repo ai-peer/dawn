@@ -175,7 +175,7 @@ const constant::Value* ProgramBuilder::createSplatOrComposite(
             }
         }
     }
-    if (all_equal) {
+    if (all_equal && !type->Is<type::Struct>()) {
         return create<constant::Splat>(type, elements[0], elements.Length());
     }
 

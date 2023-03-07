@@ -25,13 +25,13 @@
 namespace tint::constant {
 
 /// Composite holds a number of mixed child values.
-/// Composite may be of a vector, matrix or array type.
+/// Composite may be of a vector, matrix, array, or struct type.
 /// If each element is the same type and value, then a Splat would be a more efficient constant
 /// implementation. Use CreateComposite() to create the appropriate type.
 class Composite : public Castable<Composite, constant::Value> {
   public:
     /// Constructor
-    /// @param t the compsite type
+    /// @param t the composite type
     /// @param els the composite elements
     /// @param all_0 true if all elements are 0
     /// @param any_0 true if any element is 0

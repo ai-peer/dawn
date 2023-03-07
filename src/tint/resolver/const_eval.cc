@@ -554,10 +554,6 @@ const constant::Value* ConstEval::ZeroValue(const type::Type* type) {
                 }
                 zeros.Push(zero);
             }
-            if (zero_by_type.Count() == 1) {
-                // All members were of the same type, so the zero value is the same for all members.
-                return builder.create<constant::Splat>(type, zeros[0], s->Members().Length());
-            }
             return builder.create<constant::Composite>(s, std::move(zeros));
         },
         [&](Default) -> const constant::Value* {

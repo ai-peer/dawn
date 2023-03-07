@@ -26,14 +26,16 @@ using ConstantTest_Composite = TestHelper;
 
 TEST_F(ConstantTest_Composite, AllZero) {
     auto* f32 = create<type::F32>();
+    auto* vec2f = create<type::Vector>(f32, 2u);
+    auto* vec3f = create<type::Vector>(f32, 3u);
 
     auto* fPos0 = create<Scalar<tint::f32>>(f32, 0_f);
     auto* fNeg0 = create<Scalar<tint::f32>>(f32, -0_f);
     auto* fPos1 = create<Scalar<tint::f32>>(f32, 1_f);
 
-    auto* compositeAll = create<Composite>(f32, utils::Vector{fPos0, fPos0});
-    auto* compositeAny = create<Composite>(f32, utils::Vector{fNeg0, fPos1, fPos0});
-    auto* compositeNone = create<Composite>(f32, utils::Vector{fNeg0, fNeg0});
+    auto* compositeAll = create<Composite>(vec2f, utils::Vector{fPos0, fPos0});
+    auto* compositeAny = create<Composite>(vec3f, utils::Vector{fNeg0, fPos1, fPos0});
+    auto* compositeNone = create<Composite>(vec2f, utils::Vector{fNeg0, fNeg0});
 
     EXPECT_TRUE(compositeAll->AllZero());
     EXPECT_FALSE(compositeAny->AllZero());
@@ -42,14 +44,16 @@ TEST_F(ConstantTest_Composite, AllZero) {
 
 TEST_F(ConstantTest_Composite, AnyZero) {
     auto* f32 = create<type::F32>();
+    auto* vec2f = create<type::Vector>(f32, 2u);
+    auto* vec3f = create<type::Vector>(f32, 3u);
 
     auto* fPos0 = create<Scalar<tint::f32>>(f32, 0_f);
     auto* fNeg0 = create<Scalar<tint::f32>>(f32, -0_f);
     auto* fPos1 = create<Scalar<tint::f32>>(f32, 1_f);
 
-    auto* compositeAll = create<Composite>(f32, utils::Vector{fPos0, fPos0});
-    auto* compositeAny = create<Composite>(f32, utils::Vector{fNeg0, fPos1, fPos0});
-    auto* compositeNone = create<Composite>(f32, utils::Vector{fNeg0, fNeg0});
+    auto* compositeAll = create<Composite>(vec2f, utils::Vector{fPos0, fPos0});
+    auto* compositeAny = create<Composite>(vec3f, utils::Vector{fNeg0, fPos1, fPos0});
+    auto* compositeNone = create<Composite>(vec2f, utils::Vector{fNeg0, fNeg0});
 
     EXPECT_TRUE(compositeAll->AnyZero());
     EXPECT_TRUE(compositeAny->AnyZero());
@@ -58,13 +62,15 @@ TEST_F(ConstantTest_Composite, AnyZero) {
 
 TEST_F(ConstantTest_Composite, AllEqual) {
     auto* f32 = create<type::F32>();
+    auto* vec2f = create<type::Vector>(f32, 2u);
+    auto* vec3f = create<type::Vector>(f32, 3u);
 
     auto* fPos0 = create<Scalar<tint::f32>>(f32, 0_f);
     auto* fNeg0 = create<Scalar<tint::f32>>(f32, -0_f);
     auto* fPos1 = create<Scalar<tint::f32>>(f32, 1_f);
 
-    auto* compositeEq = create<Composite>(f32, utils::Vector{fPos0, fPos0});
-    auto* compositeNe = create<Composite>(f32, utils::Vector{fNeg0, fPos1, fPos0});
+    auto* compositeEq = create<Composite>(vec2f, utils::Vector{fPos0, fPos0});
+    auto* compositeNe = create<Composite>(vec3f, utils::Vector{fNeg0, fPos1, fPos0});
 
     EXPECT_TRUE(compositeEq->AllEqual());
     EXPECT_FALSE(compositeNe->AllZero());
