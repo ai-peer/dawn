@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "5bd91e8af00e2561e75fc7e95f3129a930c565ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b875bb_477034ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-07T20:31:45Z",
+      "side": 1,
+      "message": "I\u0027ve uploaded https://github.com/gpuweb/cts/pull/2383 to fix the CTS tests. There will be one breakage after that rolls, `bitcast` but I will update expectations after the CTS has roll and this is updated.",
+      "revId": "5bd91e8af00e2561e75fc7e95f3129a930c565ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
