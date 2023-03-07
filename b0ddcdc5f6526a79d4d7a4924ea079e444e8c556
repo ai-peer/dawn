@@ -37,6 +37,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "786f0d7a_be63fd88",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-03-07T02:08:05Z",
+      "side": 1,
+      "message": "I would comment these out. This may not be a clean revert if a CTS roll needs to happen in between, and it\u0027s easier to uncomment expectations.",
+      "parentUuid": "191af8a5_1646ebd1",
+      "revId": "b0ddcdc5f6526a79d4d7a4924ea079e444e8c556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acef47ec_dff00723",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-03-07T02:08:05Z",
+      "side": 1,
+      "message": "Add KEEP here (see examples in this file) to make sure these don\u0027t get removed if a roll is needed while this in place.",
+      "revId": "b0ddcdc5f6526a79d4d7a4924ea079e444e8c556",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "755322e4_ed95672f",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 1
