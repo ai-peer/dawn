@@ -51,14 +51,6 @@ void stream::Stream<tint::writer::BindingPoint>::Write(stream::Sink* sink,
 
 // static
 template <>
-void stream::Stream<tint::transform::MultiplanarExternalTexture::BindingPoints>::Write(
-    stream::Sink* sink,
-    const tint::transform::MultiplanarExternalTexture::BindingPoints& points) {
-    StreamInTintObject(points, sink);
-}
-
-// static
-template <>
 void stream::Stream<tint::transform::VertexPulling::Config>::Write(
     stream::Sink* sink,
     const tint::transform::VertexPulling::Config& cfg) {

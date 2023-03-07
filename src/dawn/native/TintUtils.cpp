@@ -147,20 +147,6 @@ ScopedTintICEHandler::~ScopedTintICEHandler() {
     tlDevice = nullptr;
 }
 
-tint::transform::MultiplanarExternalTexture::BindingsMap BuildExternalTextureTransformBindings(
-    const PipelineLayoutBase* layout) {
-    tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
-    for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
-        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            newBindingsMap[{static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane0)}] = {
-                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.plane1)},
-                {static_cast<uint32_t>(i), static_cast<uint32_t>(expansion.params)}};
-        }
-    }
-    return newBindingsMap;
-}
-
 tint::transform::VertexPulling::Config BuildVertexPullingTransformConfig(
     const RenderPipelineBase& renderPipeline,
     BindGroupIndex pullingBufferBindingSet) {
