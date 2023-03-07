@@ -70,6 +70,24 @@
       "parentUuid": "c2291a82_ecb1b75b",
       "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15c78b5_1d63e4fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-07T01:35:24Z",
+      "side": 1,
+      "message": "sorry I somehow didn\u0027t see it at all in the gerrit ui",
+      "parentUuid": "2de08ddf_51cc6f71",
+      "revId": "51be2d07aec61ecef3316c8ab319997062bc8e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
