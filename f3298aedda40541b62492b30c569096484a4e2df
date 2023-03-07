@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b8adfe4_a7af5a1c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-07T17:38:33Z",
+      "side": 1,
+      "message": "Oh, hmm, I actually copied this condition from the validation for `maxColorAttachments` above in line 360. Should I update that as well?",
+      "parentUuid": "c6ce134c_cf96dabd",
+      "range": {
+        "startLine": 371,
+        "startChar": 59,
+        "endLine": 371,
+        "endChar": 70
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42b4a660_b66280ee",
         "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
         "patchSetId": 5
