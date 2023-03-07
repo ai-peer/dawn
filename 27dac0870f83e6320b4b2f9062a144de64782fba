@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c086b2_9f2d1c92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-07T04:24:02Z",
+      "side": 1,
+      "message": "I had hoped the CTS would have rolled, but I guess not :/",
+      "revId": "27dac0870f83e6320b4b2f9062a144de64782fba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
