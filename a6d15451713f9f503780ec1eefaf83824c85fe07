@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89e90ae_ca4aad48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-07T10:51:28Z",
+      "side": 1,
+      "message": "I\u0027m not convinced that preventing structures from using `Splat` is the best fix here. `Splat` provides a decent memory optimization for zero-initialized types, and for large structures, this optimization may be considerable.\n\nI\u0027ve thrown together an alternative solution to the issue found by ClusterFuzz:\nhttps://dawn-review.googlesource.com/c/dawn/+/122900",
+      "revId": "a6d15451713f9f503780ec1eefaf83824c85fe07",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
