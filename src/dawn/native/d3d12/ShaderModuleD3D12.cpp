@@ -523,8 +523,8 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
         }
     }
 
-    using tint::transform::BindingPoint;
     using tint::transform::BindingRemapper;
+    using tint::writer::BindingPoint;
 
     BindingRemapper::BindingPoints remappedBindingPoints;
     BindingRemapper::AccessControls remappedAccessControls;

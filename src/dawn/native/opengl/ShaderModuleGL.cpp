@@ -148,7 +148,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(const OpenGLFunctions& gl,
 
     const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
 
-    using tint::transform::BindingPoint;
+    using tint::writer::BindingPoint;
     // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
     // mapping from the original group/binding pair to a binding-only
     // value. This mapping will be used by Tint to remap all global
