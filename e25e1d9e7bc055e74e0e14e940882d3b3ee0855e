@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aedd285_0bd16df1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-07T04:11:32Z",
+      "side": 1,
+      "message": "follow-up for https://dawn-review.googlesource.com/c/dawn/+/122820.\napologies for the laziness. This time I actually did a local build to better verify that the Dawn-\u003eChromium roll problem will be fixed",
+      "revId": "e25e1d9e7bc055e74e0e14e940882d3b3ee0855e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
