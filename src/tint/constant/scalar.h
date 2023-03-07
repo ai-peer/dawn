@@ -46,7 +46,6 @@ class Scalar : public Castable<Scalar<T>, constant::Value> {
 
     bool AllZero() const override { return IsPositiveZero(); }
     bool AnyZero() const override { return IsPositiveZero(); }
-    bool AllEqual() const override { return true; }
     size_t Hash() const override { return utils::Hash(type, ValueOf()); }
 
     /// Clones the constant into the provided context

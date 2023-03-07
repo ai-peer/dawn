@@ -49,7 +49,6 @@ class Composite : public Castable<Composite, constant::Value> {
 
     bool AllZero() const override { return all_zero; }
     bool AnyZero() const override { return any_zero; }
-    bool AllEqual() const override { return false; }
     size_t Hash() const override { return hash; }
 
     /// Clones the constant into the provided context

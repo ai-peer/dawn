@@ -58,23 +58,6 @@ TEST_F(ConstantTest_Splat, AnyZero) {
     EXPECT_FALSE(SpfPos1->AnyZero());
 }
 
-TEST_F(ConstantTest_Splat, AllEqual) {
-    auto* f32 = create<type::F32>();
-    auto* vec2f = create<type::Vector>(f32, 2u);
-
-    auto* fPos0 = create<Scalar<tint::f32>>(f32, 0_f);
-    auto* fNeg0 = create<Scalar<tint::f32>>(f32, -0_f);
-    auto* fPos1 = create<Scalar<tint::f32>>(f32, 1_f);
-
-    auto* SpfPos0 = create<Splat>(vec2f, fPos0, 2);
-    auto* SpfNeg0 = create<Splat>(vec2f, fNeg0, 2);
-    auto* SpfPos1 = create<Splat>(vec2f, fPos1, 2);
-
-    EXPECT_TRUE(SpfPos0->AllEqual());
-    EXPECT_TRUE(SpfNeg0->AllEqual());
-    EXPECT_TRUE(SpfPos1->AllEqual());
-}
-
 TEST_F(ConstantTest_Splat, Index) {
     auto* f32 = create<type::F32>();
     auto* vec2f = create<type::Vector>(f32, 2u);

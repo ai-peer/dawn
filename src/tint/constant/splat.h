@@ -47,8 +47,6 @@ class Splat : public Castable<Splat, constant::Value> {
     bool AllZero() const override { return el->AllZero(); }
     /// @returns true if the element is zero
     bool AnyZero() const override { return el->AnyZero(); }
-    /// @returns true
-    bool AllEqual() const override { return true; }
 
     /// @returns the hash for the splat
     size_t Hash() const override { return utils::Hash(type, el->Hash(), count); }
