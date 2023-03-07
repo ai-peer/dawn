@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c92d55a_bdbca38c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-07T22:21:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e88f1245_5cef5151",
+      "range": {
+        "startLine": 371,
+        "startChar": 59,
+        "endLine": 371,
+        "endChar": 70
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42b4a660_b66280ee",
@@ -85,6 +109,30 @@
       "writtenOn": "2023-03-07T01:35:24Z",
       "side": 1,
       "message": "for this validation test, it\u0027s probably not necessary to test all combinations of the number of resources. Sufficient to test\n - some combinations to get to max and max+1\n - with/without depth/stencil attachment to be certain it doesn\u0027t count\n - make sure we test with at least one of each of storage buffer / texture / color attachment",
+      "range": {
+        "startLine": 1491,
+        "startChar": 4,
+        "endLine": 1494,
+        "endChar": 29
+      },
+      "revId": "f3298aedda40541b62492b30c569096484a4e2df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "273358ba_9d505fa5",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-07T22:21:14Z",
+      "side": 1,
+      "message": "Done, updated to just test a subset of interesting cases.",
+      "parentUuid": "42b4a660_b66280ee",
       "range": {
         "startLine": 1491,
         "startChar": 4,
