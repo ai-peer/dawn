@@ -39,7 +39,7 @@ using OptionalVertexPullingTransformConfig = std::optional<tint::transform::Vert
     X(SingleShaderStage, stage)                                                             \
     X(const tint::Program*, inputProgram)                                                   \
     X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)                       \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, externalTextureBindings)    \
+    X(tint::writer::ExternalTextureOptions::BindingsMap, externalTextureBindings)           \
     X(OptionalVertexPullingTransformConfig, vertexPullingTransformConfig)                   \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                  \
@@ -202,12 +202,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                     tint::transform::Renamer::Target::kMslKeywords);
             }
 
-            if (!r.externalTextureBindings.empty()) {
-                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                    std::move(r.externalTextureBindings));
-            }
-
             if (r.vertexPullingTransformConfig) {
                 transformManager.Add<tint::transform::VertexPulling>();
                 transformInputs.Add<tint::transform::VertexPulling::Config>(
@@ -264,6 +258,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             options.fixed_sample_mask = r.sampleMask;
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.emit_vertex_point_size = r.emitVertexPointSize;
+            options.external_texture_options.bindings_map = r.externalTextureBindings;
+
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "tint::writer::msl::Generate");
             auto result = tint::writer::msl::Generate(&program, options);
             DAWN_INVALID_IF(!result.success, "An error occured while generating MSL: %s.",
