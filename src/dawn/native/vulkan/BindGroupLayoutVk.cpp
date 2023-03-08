@@ -120,7 +120,8 @@ MaybeError BindGroupLayout::Initialize() {
     StreamIn(&mCacheKey, createInfo);
 
     Device* device = ToBackend(GetDevice());
-    DAWN_TRY(CheckVkSuccess(device->fn.CreateDescriptorSetLayout(device->GetVkDevice(), &createInfo,
+    DAWN_TRY(CheckVkSuccess(device->GetPlatform(),
+                            device->fn.CreateDescriptorSetLayout(device->GetVkDevice(), &createInfo,
                                                                  nullptr, &*mHandle),
                             "CreateDescriptorSetLayout"));
 

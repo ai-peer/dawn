@@ -567,7 +567,8 @@ MaybeError RenderPipeline::Initialize() {
     // Try to see if we have anything in the blob cache.
     Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
     DAWN_TRY(
-        CheckVkSuccess(device->fn.CreateGraphicsPipelines(device->GetVkDevice(), cache->GetHandle(),
+        CheckVkSuccess(device->GetPlatform(),
+                       device->fn.CreateGraphicsPipelines(device->GetVkDevice(), cache->GetHandle(),
                                                           1, &createInfo, nullptr, &*mHandle),
                        "CreateGraphicsPipelines"));
     // TODO(dawn:549): Flush is currently in the same thread, but perhaps deferrable.

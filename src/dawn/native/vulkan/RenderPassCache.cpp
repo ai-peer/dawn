@@ -244,6 +244,7 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
     // Create the render pass from the zillion parameters
     VkRenderPass renderPass;
     DAWN_TRY(CheckVkSuccess(
+        mDevice->GetPlatform(),
         mDevice->fn.CreateRenderPass(mDevice->GetVkDevice(), &createInfo, nullptr, &*renderPass),
         "CreateRenderPass"));
     return renderPass;

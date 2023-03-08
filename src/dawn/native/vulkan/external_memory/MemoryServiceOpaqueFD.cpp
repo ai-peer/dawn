@@ -137,7 +137,8 @@ ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
     }
 
     VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-    DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
+    DAWN_TRY(CheckVkSuccess(mDevice->GetPlatform(),
+                            mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
                                                        nullptr, &*allocatedMemory),
                             "vkAllocateMemory"));
     return allocatedMemory;
@@ -163,6 +164,7 @@ ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descr
 
     VkImage image;
     DAWN_TRY(CheckVkSuccess(
+        mDevice->GetPlatform(),
         mDevice->fn.CreateImage(mDevice->GetVkDevice(), &createInfo, nullptr, &*image),
         "CreateImage"));
     return image;

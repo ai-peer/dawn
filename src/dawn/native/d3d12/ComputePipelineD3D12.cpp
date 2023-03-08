@@ -75,13 +75,14 @@ MaybeError ComputePipeline::Initialize() {
 
     auto* d3d12Device = device->GetD3D12Device();
     DAWN_TRY(CheckHRESULT(
+        device->GetPlatform(),
         d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState)),
         "D3D12 creating pipeline state"));
 
     if (!cacheHit) {
         // Cache misses, need to get pipeline cached blob and store.
         ComPtr<ID3DBlob> d3dBlob;
-        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(), GetPipelineState()->GetCachedBlob(&d3dBlob),
                               "D3D12 compute pipeline state get cached blob"));
         device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
     }

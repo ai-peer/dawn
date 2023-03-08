@@ -34,8 +34,9 @@ ResultOrError<Ref<Fence>> Fence::CreateFromHandle(ID3D12Device* device,
         return DAWN_DEVICE_LOST_ERROR("D3D12 fence dup handle");
     }
     ComPtr<ID3D12Fence> d3d12Fence;
+    // FIXME: get platform?
     DAWN_TRY_WITH_CLEANUP(
-        CheckHRESULT(device->OpenSharedHandle(ownedHandle, IID_PPV_ARGS(&d3d12Fence)),
+        CheckHRESULT(nullptr, device->OpenSharedHandle(ownedHandle, IID_PPV_ARGS(&d3d12Fence)),
                      "D3D12 fence open handle"),
         { ::CloseHandle(ownedHandle); });
     return AcquireRef(new Fence(std::move(d3d12Fence), fenceValue, ownedHandle));

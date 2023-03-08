@@ -36,13 +36,15 @@ void CommandRecordingContext::AddToSharedTextureList(Texture* texture) {
 }
 
 MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
-                                         CommandAllocatorManager* commandAllocationManager) {
+                                         CommandAllocatorManager* commandAllocationManager,
+                                         platform::Platform* platform) {
     ASSERT(!IsOpen());
     ID3D12CommandAllocator* commandAllocator;
     DAWN_TRY_ASSIGN(commandAllocator, commandAllocationManager->ReserveCommandAllocator());
     if (mD3d12CommandList != nullptr) {
-        MaybeError error = CheckHRESULT(mD3d12CommandList->Reset(commandAllocator, nullptr),
-                                        "D3D12 resetting command list");
+        MaybeError error =
+            CheckHRESULT(platform, mD3d12CommandList->Reset(commandAllocator, nullptr),
+                         "D3D12 resetting command list");
         if (error.IsError()) {
             mD3d12CommandList.Reset();
             DAWN_TRY(std::move(error));
@@ -50,6 +52,7 @@ MaybeError CommandRecordingContext::Open(ID3D12Device* d3d12Device,
     } else {
         ComPtr<ID3D12GraphicsCommandList> d3d12GraphicsCommandList;
         DAWN_TRY(CheckHRESULT(
+            platform,
             d3d12Device->CreateCommandList(0, D3D12_COMMAND_LIST_TYPE_DIRECT, commandAllocator,
                                            nullptr, IID_PPV_ARGS(&d3d12GraphicsCommandList)),
             "D3D12 creating direct command list"));
@@ -76,8 +79,8 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
             texture->TrackAllUsageAndTransitionNow(this, D3D12_RESOURCE_STATE_COMMON);
         }
 
-        MaybeError error =
-            CheckHRESULT(mD3d12CommandList->Close(), "D3D12 closing pending command list");
+        MaybeError error = CheckHRESULT(device->GetPlatform(), mD3d12CommandList->Close(),
+                                        "D3D12 closing pending command list");
         if (error.IsError()) {
             Release();
             DAWN_TRY(std::move(error));

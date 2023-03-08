@@ -288,7 +288,8 @@ ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
     }
 
     VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-    DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &memoryAllocateInfo,
+    DAWN_TRY(CheckVkSuccess(mDevice->GetPlatform(),
+                            mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &memoryAllocateInfo,
                                                        nullptr, &*allocatedMemory),
                             "vkAllocateMemory"));
     return allocatedMemory;
@@ -344,7 +345,8 @@ ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descr
 
     // Create a new VkImage with tiling equal to the DRM format modifier.
     VkImage image;
-    DAWN_TRY(CheckVkSuccess(mDevice->fn.CreateImage(device, &createInfo, nullptr, &*image),
+    DAWN_TRY(CheckVkSuccess(mDevice->GetPlatform(),
+                            mDevice->fn.CreateImage(device, &createInfo, nullptr, &*image),
                             "CreateImage"));
     return image;
 }

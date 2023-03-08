@@ -51,6 +51,7 @@ ResultOrError<std::unique_ptr<ResourceHeapBase>> HeapAllocator::AllocateResource
 
     ComPtr<ID3D12Heap> d3d12Heap;
     DAWN_TRY(CheckOutOfMemoryHRESULT(
+        mDevice->GetPlatform(),
         mDevice->GetD3D12Device()->CreateHeap(&heapDesc, IID_PPV_ARGS(&d3d12Heap)),
         "ID3D12Device::CreateHeap"));
 

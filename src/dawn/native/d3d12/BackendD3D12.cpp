@@ -32,7 +32,7 @@ ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(Backend* backend,
                                                               ComPtr<IDXGIAdapter> dxgiAdapter,
                                                               const TogglesState& adapterToggles) {
     ComPtr<IDXGIAdapter3> dxgiAdapter3;
-    DAWN_TRY(CheckHRESULT(dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
+    DAWN_TRY(CheckHRESULT(nullptr, dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
     Ref<Adapter> adapter =
         AcquireRef(new Adapter(backend, std::move(dxgiAdapter3), adapterToggles));
     DAWN_TRY(adapter->Initialize());

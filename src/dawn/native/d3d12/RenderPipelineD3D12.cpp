@@ -472,14 +472,15 @@ MaybeError RenderPipeline::Initialize() {
         descriptorD3D12.CachedPSO.CachedBlobSizeInBytes = blob.Size();
     }
 
-    DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateGraphicsPipelineState(
+    DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                          device->GetD3D12Device()->CreateGraphicsPipelineState(
                               &descriptorD3D12, IID_PPV_ARGS(&mPipelineState)),
                           "D3D12 create graphics pipeline state"));
 
     if (!cacheHit) {
         // Cache misses, need to get pipeline cached blob and store.
         ComPtr<ID3DBlob> d3dBlob;
-        DAWN_TRY(CheckHRESULT(GetPipelineState()->GetCachedBlob(&d3dBlob),
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(), GetPipelineState()->GetCachedBlob(&d3dBlob),
                               "D3D12 render pipeline state get cached blob"));
         device->StoreCachedBlob(GetCacheKey(), CreateBlob(std::move(d3dBlob)));
     }

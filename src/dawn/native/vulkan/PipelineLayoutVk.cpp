@@ -66,6 +66,7 @@ MaybeError PipelineLayout::Initialize() {
 
     Device* device = ToBackend(GetDevice());
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreatePipelineLayout(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreatePipelineLayout"));
 

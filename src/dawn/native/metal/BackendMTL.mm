@@ -188,7 +188,7 @@ DAWN_NOINLINE bool IsGPUCounterSupported(id<MTLDevice> device,
         // On some systems, [device counterSets] may be null and not an empty array.
         return false;
     }
-    // MTLDevice’s counterSets property declares which counter sets it supports. Check
+    // MTLDevice?s counterSets property declares which counter sets it supports. Check
     // whether it's available on the device before requesting a counter set.
     // Note: Don't do for..in loop to avoid potentially crashy interaction with
     // NSFastEnumeration.

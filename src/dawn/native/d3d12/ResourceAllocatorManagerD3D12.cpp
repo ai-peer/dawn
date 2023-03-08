@@ -508,6 +508,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreatePlacedReso
     // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-createplacedresource
     ComPtr<ID3D12Resource> placedResource;
     DAWN_TRY(CheckOutOfMemoryHRESULT(
+        mDevice->GetPlatform(),
         mDevice->GetD3D12Device()->CreatePlacedResource(
             heap->GetD3D12Heap(), allocation.GetOffset(), &resourceDescriptor, initialUsage,
             optimizedClearValue, IID_PPV_ARGS(&placedResource)),
@@ -559,6 +560,7 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
     // provided to CreateCommittedResource.
     ComPtr<ID3D12Resource> committedResource;
     DAWN_TRY(CheckOutOfMemoryHRESULT(
+        mDevice->GetPlatform(),
         mDevice->GetD3D12Device()->CreateCommittedResource(
             &heapProperties, D3D12_HEAP_FLAG_NONE, &resourceDescriptor, initialUsage,
             optimizedClearValue, IID_PPV_ARGS(&committedResource)),

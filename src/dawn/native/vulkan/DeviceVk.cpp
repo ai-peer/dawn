@@ -329,8 +329,8 @@ MaybeError Device::SubmitPendingCommands() {
                                                 waitRequirements.begin(), waitRequirements.end());
     }
 
-    DAWN_TRY(
-        CheckVkSuccess(fn.EndCommandBuffer(mRecordingContext.commandBuffer), "vkEndCommandBuffer"));
+    DAWN_TRY(CheckVkSuccess(GetPlatform(), fn.EndCommandBuffer(mRecordingContext.commandBuffer),
+                            "vkEndCommandBuffer"));
 
     std::vector<VkPipelineStageFlags> dstStageMasks(mRecordingContext.waitSemaphores.size(),
                                                     VK_PIPELINE_STAGE_ALL_COMMANDS_BIT);
@@ -349,7 +349,9 @@ MaybeError Device::SubmitPendingCommands() {
     VkFence fence = VK_NULL_HANDLE;
     DAWN_TRY_ASSIGN(fence, GetUnusedFence());
     DAWN_TRY_WITH_CLEANUP(
-        CheckVkSuccess(fn.QueueSubmit(mQueue, 1, &submitInfo, fence), "vkQueueSubmit"), {
+        CheckVkSuccess(GetPlatform(), fn.QueueSubmit(mQueue, 1, &submitInfo, fence),
+                       "vkQueueSubmit"),
+        {
             // If submitting to the queue fails, move the fence back into the unused fence
             // list, as if it were never acquired. Not doing so would leak the fence since
             // it would be neither in the unused list nor in the in-flight list.
@@ -582,7 +584,8 @@ ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalD
         createInfo.pEnabledFeatures = &usedKnobs.features;
     }
 
-    DAWN_TRY(CheckVkSuccess(fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
+    DAWN_TRY(CheckVkSuccess(GetPlatform(),
+                            fn.CreateDevice(physicalDevice, &createInfo, nullptr, &mVkDevice),
                             "vkCreateDevice"));
 
     return usedKnobs;
@@ -625,7 +628,8 @@ VulkanFunctions* Device::GetMutableFunctions() {
 ResultOrError<VkFence> Device::GetUnusedFence() {
     if (!mUnusedFences.empty()) {
         VkFence fence = mUnusedFences.back();
-        DAWN_TRY(CheckVkSuccess(fn.ResetFences(mVkDevice, 1, &*fence), "vkResetFences"));
+        DAWN_TRY(
+            CheckVkSuccess(GetPlatform(), fn.ResetFences(mVkDevice, 1, &*fence), "vkResetFences"));
 
         mUnusedFences.pop_back();
         return fence;
@@ -637,8 +641,8 @@ ResultOrError<VkFence> Device::GetUnusedFence() {
     createInfo.flags = 0;
 
     VkFence fence = VK_NULL_HANDLE;
-    DAWN_TRY(
-        CheckVkSuccess(fn.CreateFence(mVkDevice, &createInfo, nullptr, &*fence), "vkCreateFence"));
+    DAWN_TRY(CheckVkSuccess(GetPlatform(), fn.CreateFence(mVkDevice, &createInfo, nullptr, &*fence),
+                            "vkCreateFence"));
 
     return fence;
 }
@@ -656,7 +660,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
         if (result == VK_NOT_READY) {
             return fenceSerial;
         } else {
-            DAWN_TRY(CheckVkSuccess(::VkResult(result), "GetFenceStatus"));
+            DAWN_TRY(CheckVkSuccess(GetPlatform(), ::VkResult(result), "GetFenceStatus"));
         }
 
         // Update fenceSerial since fence is ready.
@@ -692,8 +696,8 @@ MaybeError Device::PrepareRecordingContext() {
 MaybeError Device::SplitRecordingContext(CommandRecordingContext* recordingContext) {
     ASSERT(recordingContext->used);
 
-    DAWN_TRY(
-        CheckVkSuccess(fn.EndCommandBuffer(recordingContext->commandBuffer), "vkEndCommandBuffer"));
+    DAWN_TRY(CheckVkSuccess(GetPlatform(), fn.EndCommandBuffer(recordingContext->commandBuffer),
+                            "vkEndCommandBuffer"));
 
     CommandPoolAndBuffer commands;
     DAWN_TRY_ASSIGN(commands, BeginVkCommandBuffer());
@@ -714,7 +718,8 @@ ResultOrError<CommandPoolAndBuffer> Device::BeginVkCommandBuffer() {
         commands = mUnusedCommands.back();
         mUnusedCommands.pop_back();
         DAWN_TRY_WITH_CLEANUP(
-            CheckVkSuccess(fn.ResetCommandPool(mVkDevice, commands.pool, 0), "vkResetCommandPool"),
+            CheckVkSuccess(GetPlatform(), fn.ResetCommandPool(mVkDevice, commands.pool, 0),
+                           "vkResetCommandPool"),
             { DestroyCommandPoolAndBuffer(fn, mVkDevice, commands); });
     } else {
         // Create a new command pool for our commands and allocate the command buffer.
@@ -724,9 +729,9 @@ ResultOrError<CommandPoolAndBuffer> Device::BeginVkCommandBuffer() {
         createInfo.flags = VK_COMMAND_POOL_CREATE_TRANSIENT_BIT;
         createInfo.queueFamilyIndex = mQueueFamily;
 
-        DAWN_TRY(
-            CheckVkSuccess(fn.CreateCommandPool(mVkDevice, &createInfo, nullptr, &*commands.pool),
-                           "vkCreateCommandPool"));
+        DAWN_TRY(CheckVkSuccess(
+            GetPlatform(), fn.CreateCommandPool(mVkDevice, &createInfo, nullptr, &*commands.pool),
+            "vkCreateCommandPool"));
 
         VkCommandBufferAllocateInfo allocateInfo;
         allocateInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -735,7 +740,8 @@ ResultOrError<CommandPoolAndBuffer> Device::BeginVkCommandBuffer() {
         allocateInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
         allocateInfo.commandBufferCount = 1;
 
-        DAWN_TRY_WITH_CLEANUP(CheckVkSuccess(fn.AllocateCommandBuffers(mVkDevice, &allocateInfo,
+        DAWN_TRY_WITH_CLEANUP(CheckVkSuccess(GetPlatform(),
+                                             fn.AllocateCommandBuffers(mVkDevice, &allocateInfo,
                                                                        &commands.commandBuffer),
                                              "vkAllocateCommandBuffers"),
                               { DestroyCommandPoolAndBuffer(fn, mVkDevice, commands); });
@@ -748,9 +754,10 @@ ResultOrError<CommandPoolAndBuffer> Device::BeginVkCommandBuffer() {
     beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
     beginInfo.pInheritanceInfo = nullptr;
 
-    DAWN_TRY_WITH_CLEANUP(CheckVkSuccess(fn.BeginCommandBuffer(commands.commandBuffer, &beginInfo),
-                                         "vkBeginCommandBuffer"),
-                          { DestroyCommandPoolAndBuffer(fn, mVkDevice, commands); });
+    DAWN_TRY_WITH_CLEANUP(
+        CheckVkSuccess(GetPlatform(), fn.BeginCommandBuffer(commands.commandBuffer, &beginInfo),
+                       "vkBeginCommandBuffer"),
+        { DestroyCommandPoolAndBuffer(fn, mVkDevice, commands); });
 
     return commands;
 }

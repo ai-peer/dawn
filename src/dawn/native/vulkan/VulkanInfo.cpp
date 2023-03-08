@@ -40,6 +40,7 @@ ResultOrError<InstanceExtSet> GatherInstanceExtensions(
 
     std::vector<VkExtensionProperties> extensions(count);
     DAWN_TRY(CheckVkSuccess(
+        nullptr,
         vkFunctions.EnumerateInstanceExtensionProperties(layerName, &count, extensions.data()),
         "vkEnumerateInstanceExtensionProperties"));
 
@@ -70,7 +71,7 @@ ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const VulkanFunctions& vkFuncti
     {
         info.apiVersion = VK_API_VERSION_1_0;
         if (vkFunctions.EnumerateInstanceVersion != nullptr) {
-            DAWN_TRY(CheckVkSuccess(vkFunctions.EnumerateInstanceVersion(&info.apiVersion),
+            DAWN_TRY(CheckVkSuccess(nullptr, vkFunctions.EnumerateInstanceVersion(&info.apiVersion),
                                     "vkEnumerateInstanceVersion"));
         }
     }
@@ -89,7 +90,7 @@ ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const VulkanFunctions& vkFuncti
 
         std::vector<VkLayerProperties> layersProperties(count);
         DAWN_TRY(CheckVkSuccess(
-            vkFunctions.EnumerateInstanceLayerProperties(&count, layersProperties.data()),
+            nullptr, vkFunctions.EnumerateInstanceLayerProperties(&count, layersProperties.data()),
             "vkEnumerateInstanceLayerProperties"));
 
         std::unordered_map<std::string, VulkanLayer> knownLayers = CreateVulkanLayerNameMap();
@@ -133,7 +134,7 @@ ResultOrError<std::vector<VkPhysicalDevice>> GatherPhysicalDevices(
 
     std::vector<VkPhysicalDevice> physicalDevices(count);
     DAWN_TRY(CheckVkSuccess(
-        vkFunctions.EnumeratePhysicalDevices(instance, &count, physicalDevices.data()),
+        nullptr, vkFunctions.EnumeratePhysicalDevices(instance, &count, physicalDevices.data()),
         "vkEnumeratePhysicalDevices"));
 
     return std::move(physicalDevices);
@@ -178,6 +179,7 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
 
         info.layers.resize(count);
         DAWN_TRY(CheckVkSuccess(
+            nullptr,
             vkFunctions.EnumerateDeviceLayerProperties(physicalDevice, &count, info.layers.data()),
             "vkEnumerateDeviceLayerProperties"));
     }
@@ -193,7 +195,8 @@ ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
 
         std::vector<VkExtensionProperties> extensionsProperties;
         extensionsProperties.resize(count);
-        DAWN_TRY(CheckVkSuccess(vkFunctions.EnumerateDeviceExtensionProperties(
+        DAWN_TRY(CheckVkSuccess(nullptr,
+                                vkFunctions.EnumerateDeviceExtensionProperties(
                                     physicalDevice, nullptr, &count, extensionsProperties.data()),
                                 "vkEnumerateDeviceExtensionProperties"));
 
@@ -289,7 +292,8 @@ ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSur
     const VulkanFunctions& vkFunctions = adapter.GetVulkanInstance()->GetFunctions();
 
     // Get the surface capabilities
-    DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
+    DAWN_TRY(CheckVkSuccess(nullptr,
+                            vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
                                 physicalDevice, surface, &info.capabilities),
                             "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"));
 
@@ -300,7 +304,8 @@ ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSur
 
         for (uint32_t i = 0; i < nQueueFamilies; ++i) {
             VkBool32 supported = VK_FALSE;
-            DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceSupportKHR(
+            DAWN_TRY(CheckVkSuccess(nullptr,
+                                    vkFunctions.GetPhysicalDeviceSurfaceSupportKHR(
                                         physicalDevice, i, surface, &supported),
                                     "vkGetPhysicalDeviceSurfaceSupportKHR"));
 
@@ -318,7 +323,8 @@ ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSur
         }
 
         info.formats.resize(count);
-        DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceFormatsKHR(
+        DAWN_TRY(CheckVkSuccess(nullptr,
+                                vkFunctions.GetPhysicalDeviceSurfaceFormatsKHR(
                                     physicalDevice, surface, &count, info.formats.data()),
                                 "vkGetPhysicalDeviceSurfaceFormatsKHR"));
     }
@@ -333,7 +339,8 @@ ResultOrError<VulkanSurfaceInfo> GatherSurfaceInfo(const Adapter& adapter, VkSur
         }
 
         info.presentModes.resize(count);
-        DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfacePresentModesKHR(
+        DAWN_TRY(CheckVkSuccess(nullptr,
+                                vkFunctions.GetPhysicalDeviceSurfacePresentModesKHR(
                                     physicalDevice, surface, &count, info.presentModes.data()),
                                 "vkGetPhysicalDeviceSurfacePresentModesKHR"));
     }

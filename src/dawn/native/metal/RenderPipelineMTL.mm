@@ -404,8 +404,9 @@ MaybeError RenderPipeline::Initialize() {
     mMtlRenderPipelineState =
         AcquireNSPRef([mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL error:&error]);
     if (error != nullptr) {
-        return DAWN_INTERNAL_ERROR(std::string("Error creating pipeline state ") +
-                                   [error.localizedDescription UTF8String]);
+        return DAWN_DUMPED_INTERNAL_ERROR(GetDevice()->GetPlatform(),
+                                          std::string("Error creating pipeline state ") +
+                                              [error.localizedDescription UTF8String]);
     }
     ASSERT(mMtlRenderPipelineState != nil);
 

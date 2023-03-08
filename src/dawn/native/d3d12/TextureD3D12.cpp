@@ -741,7 +741,8 @@ MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
     // Perform the wait only on the first call.
     Device* device = ToBackend(GetDevice());
     for (Ref<Fence>& fence : mWaitFences) {
-        DAWN_TRY(CheckHRESULT(device->GetCommandQueue()->Wait(fence->GetD3D12Fence(),
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                              device->GetCommandQueue()->Wait(fence->GetD3D12Fence(),
                                                               fence->GetFenceValue()),
                               "D3D12 fence wait"););
         // Keep D3D12 fence alive since we'll clear the waitFences list below.

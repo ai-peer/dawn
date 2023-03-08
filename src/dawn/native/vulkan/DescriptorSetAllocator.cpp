@@ -148,7 +148,8 @@ MaybeError DescriptorSetAllocator::AllocateDescriptorPool() {
     Device* device = ToBackend(GetDevice());
 
     VkDescriptorPool descriptorPool;
-    DAWN_TRY(CheckVkSuccess(device->fn.CreateDescriptorPool(device->GetVkDevice(), &createInfo,
+    DAWN_TRY(CheckVkSuccess(device->GetPlatform(),
+                            device->fn.CreateDescriptorPool(device->GetVkDevice(), &createInfo,
                                                             nullptr, &*descriptorPool),
                             "CreateDescriptorPool"));
 
@@ -163,7 +164,8 @@ MaybeError DescriptorSetAllocator::AllocateDescriptorPool() {
 
     std::vector<VkDescriptorSet> sets(mMaxSets);
     MaybeError result =
-        CheckVkSuccess(device->fn.AllocateDescriptorSets(device->GetVkDevice(), &allocateInfo,
+        CheckVkSuccess(device->GetPlatform(),
+                       device->fn.AllocateDescriptorSets(device->GetVkDevice(), &allocateInfo,
                                                          AsVkArray(sets.data())),
                        "AllocateDescriptorSets");
     if (result.IsError()) {

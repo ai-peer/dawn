@@ -88,7 +88,8 @@ MaybeError ComputePipeline::Initialize() {
     // Try to see if we have anything in the blob cache.
     Ref<PipelineCache> cache = ToBackend(GetDevice()->GetOrCreatePipelineCache(GetCacheKey()));
     DAWN_TRY(
-        CheckVkSuccess(device->fn.CreateComputePipelines(device->GetVkDevice(), cache->GetHandle(),
+        CheckVkSuccess(device->GetPlatform(),
+                       device->fn.CreateComputePipelines(device->GetVkDevice(), cache->GetHandle(),
                                                          1, &createInfo, nullptr, &*mHandle),
                        "CreateComputePipeline"));
     // TODO(dawn:549): Flush is currently in the same thread, but perhaps deferrable.

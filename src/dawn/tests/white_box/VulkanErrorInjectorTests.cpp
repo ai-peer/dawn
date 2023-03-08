@@ -57,6 +57,7 @@ TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {
     auto CreateTestBuffer = [&]() -> bool {
         VkBuffer buffer = VK_NULL_HANDLE;
         MaybeError err = CheckVkSuccess(
+            mDeviceVk->GetPlatform(),
             mDeviceVk->fn.CreateBuffer(mDeviceVk->GetVkDevice(), &createInfo, nullptr, &*buffer),
             "vkCreateBuffer");
         if (err.IsError()) {

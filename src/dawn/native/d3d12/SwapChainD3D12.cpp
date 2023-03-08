@@ -99,7 +99,7 @@ TextureBase* OldSwapChain::GetNextTextureImpl(const TextureDescriptor* descripto
     DawnSwapChainNextTexture next = {};
     DawnSwapChainError error = im.GetNextTexture(im.userData, &next);
     if (error) {
-        device->HandleError(DAWN_INTERNAL_ERROR(error));
+        device->HandleError(DAWN_DUMPED_INTERNAL_ERROR(GetDevice()->GetPlatform(), error));
         return nullptr;
     }
 
@@ -218,7 +218,8 @@ MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
     // on the previous swapchain and then lose references to its buffers.
     DAWN_TRY(previousD3D12SwapChain->DetachAndWaitForDeallocation());
     DAWN_TRY(
-        CheckHRESULT(mDXGISwapChain->ResizeBuffers(mConfig.bufferCount, GetWidth(), GetHeight(),
+        CheckHRESULT(GetDevice()->GetPlatform(),
+                     mDXGISwapChain->ResizeBuffers(mConfig.bufferCount, GetWidth(), GetHeight(),
                                                    mConfig.format, mConfig.swapChainFlags),
                      "IDXGISwapChain::ResizeBuffer"));
     return CollectSwapChainBuffers();
@@ -244,13 +245,15 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
     swapChainDesc.Flags = mConfig.swapChainFlags;
 
     ComPtr<IDXGIFactory2> factory2 = nullptr;
-    DAWN_TRY(CheckHRESULT(device->GetFactory()->QueryInterface(IID_PPV_ARGS(&factory2)),
+    DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                          device->GetFactory()->QueryInterface(IID_PPV_ARGS(&factory2)),
                           "Getting IDXGIFactory2"));
 
     ComPtr<IDXGISwapChain1> swapChain1;
     switch (GetSurface()->GetType()) {
         case Surface::Type::WindowsHWND: {
             DAWN_TRY(CheckHRESULT(
+                device->GetPlatform(),
                 factory2->CreateSwapChainForHwnd(device->GetCommandQueue().Get(),
                                                  static_cast<HWND>(GetSurface()->GetHWND()),
                                                  &swapChainDesc, nullptr, nullptr, &swapChain1),
@@ -259,6 +262,7 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
         }
         case Surface::Type::WindowsCoreWindow: {
             DAWN_TRY(CheckHRESULT(
+                device->GetPlatform(),
                 factory2->CreateSwapChainForCoreWindow(device->GetCommandQueue().Get(),
                                                        GetSurface()->GetCoreWindow(),
                                                        &swapChainDesc, nullptr, &swapChain1),
@@ -267,14 +271,17 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
         }
         case Surface::Type::WindowsSwapChainPanel: {
             DAWN_TRY(CheckHRESULT(
+                device->GetPlatform(),
                 factory2->CreateSwapChainForComposition(device->GetCommandQueue().Get(),
                                                         &swapChainDesc, nullptr, &swapChain1),
                 "Creating the IDXGISwapChain1"));
             ComPtr<ISwapChainPanelNative> swapChainPanelNative;
-            DAWN_TRY(CheckHRESULT(GetSurface()->GetSwapChainPanel()->QueryInterface(
+            DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                                  GetSurface()->GetSwapChainPanel()->QueryInterface(
                                       IID_PPV_ARGS(&swapChainPanelNative)),
                                   "Getting ISwapChainPanelNative"));
-            DAWN_TRY(CheckHRESULT(swapChainPanelNative->SetSwapChain(swapChain1.Get()),
+            DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                                  swapChainPanelNative->SetSwapChain(swapChain1.Get()),
                                   "Setting SwapChain"));
             break;
         }
@@ -282,7 +289,8 @@ MaybeError SwapChain::InitializeSwapChainFromScratch() {
             UNREACHABLE();
     }
 
-    DAWN_TRY(CheckHRESULT(swapChain1.As(&mDXGISwapChain), "Gettting IDXGISwapChain1"));
+    DAWN_TRY(CheckHRESULT(device->GetPlatform(), swapChain1.As(&mDXGISwapChain),
+                          "Gettting IDXGISwapChain1"));
 
     return CollectSwapChainBuffers();
 }
@@ -293,7 +301,8 @@ MaybeError SwapChain::CollectSwapChainBuffers() {
 
     mBuffers.resize(mConfig.bufferCount);
     for (uint32_t i = 0; i < mConfig.bufferCount; i++) {
-        DAWN_TRY(CheckHRESULT(mDXGISwapChain->GetBuffer(i, IID_PPV_ARGS(&mBuffers[i])),
+        DAWN_TRY(CheckHRESULT(GetDevice()->GetPlatform(),
+                              mDXGISwapChain->GetBuffer(i, IID_PPV_ARGS(&mBuffers[i])),
                               "Getting IDXGISwapChain buffer"));
     }
 
@@ -318,7 +327,7 @@ MaybeError SwapChain::PresentImpl() {
     // message to the application that it could stop rendering.
     HRESULT presentResult = mDXGISwapChain->Present(PresentModeToSwapInterval(GetPresentMode()), 0);
     if (presentResult != DXGI_STATUS_OCCLUDED) {
-        DAWN_TRY(CheckHRESULT(presentResult, "IDXGISwapChain::Present"));
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(), presentResult, "IDXGISwapChain::Present"));
     }
 
     // Record that "new" is the last time the buffer has been used.

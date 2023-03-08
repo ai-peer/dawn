@@ -58,11 +58,15 @@ void Flush11On12DeviceToAvoidLeaks(ComPtr<ID3D11On12Device> d3d11on12Device) {
 }
 
 D3D11on12ResourceCacheEntry::D3D11on12ResourceCacheEntry(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
-                                                         ComPtr<ID3D11On12Device> d3d11On12Device)
-    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)), mD3D11on12Device(std::move(d3d11On12Device)) {}
+                                                         ComPtr<ID3D11On12Device> d3d11On12Device,
+                                                         platform::Platform* platform)
+    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)),
+      mD3D11on12Device(std::move(d3d11On12Device)),
+      mPlatform(platform) {}
 
-D3D11on12ResourceCacheEntry::D3D11on12ResourceCacheEntry(ComPtr<ID3D11On12Device> d3d11On12Device)
-    : mD3D11on12Device(std::move(d3d11On12Device)) {}
+D3D11on12ResourceCacheEntry::D3D11on12ResourceCacheEntry(ComPtr<ID3D11On12Device> d3d11On12Device,
+                                                         platform::Platform* platform)
+    : mD3D11on12Device(std::move(d3d11On12Device)), mPlatform(platform) {}
 
 D3D11on12ResourceCacheEntry::~D3D11on12ResourceCacheEntry() {
     if (mDXGIKeyedMutex == nullptr) {
@@ -93,9 +97,9 @@ MaybeError D3D11on12ResourceCacheEntry::AcquireKeyedMutex() {
     ASSERT(mDXGIKeyedMutex != nullptr);
     ASSERT(mAcquireCount >= 0);
     if (mAcquireCount == 0) {
-        DAWN_TRY(
-            CheckHRESULT(mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireReleaseKey, INFINITE),
-                         "D3D12 acquiring shared mutex"));
+        DAWN_TRY(CheckHRESULT(
+            mPlatform, mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireReleaseKey, INFINITE),
+            "D3D12 acquiring shared mutex"));
     }
     mAcquireCount++;
     return {};
@@ -106,7 +110,8 @@ MaybeError D3D11on12ResourceCacheEntry::ReleaseKeyedMutex() {
     ASSERT(mAcquireCount > 0);
     mAcquireCount--;
     if (mAcquireCount == 0) {
-        DAWN_TRY(CheckHRESULT(mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireReleaseKey),
+        DAWN_TRY(CheckHRESULT(mPlatform,
+                              mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireReleaseKey),
                               "D3D12 releasing keyed mutex"));
     }
     return {};
@@ -142,7 +147,7 @@ Ref<D3D11on12ResourceCacheEntry> D3D11on12ResourceCache::GetOrCreateD3D11on12Res
         return nullptr;
     }
 
-    D3D11on12ResourceCacheEntry blueprint(d3d11on12Device);
+    D3D11on12ResourceCacheEntry blueprint(d3d11on12Device, backendDevice->GetPlatform());
     auto iter = mCache.find(&blueprint);
     if (iter != mCache.end()) {
         return *iter;
@@ -175,8 +180,8 @@ Ref<D3D11on12ResourceCacheEntry> D3D11on12ResourceCache::GetOrCreateD3D11on12Res
         mCache.clear();
     }
 
-    Ref<D3D11on12ResourceCacheEntry> entry =
-        AcquireRef(new D3D11on12ResourceCacheEntry(dxgiKeyedMutex, std::move(d3d11on12Device)));
+    Ref<D3D11on12ResourceCacheEntry> entry = AcquireRef(new D3D11on12ResourceCacheEntry(
+        dxgiKeyedMutex, std::move(d3d11on12Device), backendDevice->GetPlatform()));
     mCache.insert(entry);
 
     return entry;

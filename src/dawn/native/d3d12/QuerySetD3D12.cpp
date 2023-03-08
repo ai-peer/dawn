@@ -50,6 +50,7 @@ MaybeError QuerySet::Initialize() {
 
     ID3D12Device* d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
     DAWN_TRY(CheckOutOfMemoryHRESULT(
+        GetDevice()->GetPlatform(),
         d3d12Device->CreateQueryHeap(&queryHeapDesc, IID_PPV_ARGS(&mQueryHeap)),
         "ID3D12Device::CreateQueryHeap"));
 

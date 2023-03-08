@@ -77,6 +77,7 @@ MaybeError StagingDescriptorAllocator::AllocateCPUHeap() {
 
     ComPtr<ID3D12DescriptorHeap> heap;
     DAWN_TRY(CheckHRESULT(
+        mDevice->GetPlatform(),
         mDevice->GetD3D12Device()->CreateDescriptorHeap(&heapDescriptor, IID_PPV_ARGS(&heap)),
         "ID3D12Device::CreateDescriptorHeap"));
 

@@ -80,6 +80,7 @@ class ServiceImplementationFD : public ServiceImplementation {
         info.flags = 0;
 
         DAWN_TRY(CheckVkSuccess(
+            mDevice->GetPlatform(),
             mDevice->fn.CreateSemaphore(mDevice->GetVkDevice(), &info, nullptr, &*semaphore),
             "vkCreateSemaphore"));
 
@@ -92,6 +93,7 @@ class ServiceImplementationFD : public ServiceImplementation {
         importSemaphoreFdInfo.fd = handle;
 
         MaybeError status = CheckVkSuccess(
+            mDevice->GetPlatform(),
             mDevice->fn.ImportSemaphoreFdKHR(mDevice->GetVkDevice(), &importSemaphoreFdInfo),
             "vkImportSemaphoreFdKHR");
 
@@ -117,7 +119,8 @@ class ServiceImplementationFD : public ServiceImplementation {
 
         VkSemaphore signalSemaphore;
         DAWN_TRY(
-            CheckVkSuccess(mDevice->fn.CreateSemaphore(mDevice->GetVkDevice(), &semaphoreCreateInfo,
+            CheckVkSuccess(mDevice->GetPlatform(),
+                           mDevice->fn.CreateSemaphore(mDevice->GetVkDevice(), &semaphoreCreateInfo,
                                                        nullptr, &*signalSemaphore),
                            "vkCreateSemaphore"));
         return signalSemaphore;
@@ -133,6 +136,7 @@ class ServiceImplementationFD : public ServiceImplementation {
 
         int fd = -1;
         DAWN_TRY(CheckVkSuccess(
+            mDevice->GetPlatform(),
             mDevice->fn.GetSemaphoreFdKHR(mDevice->GetVkDevice(), &semaphoreGetFdInfo, &fd),
             "vkGetSemaphoreFdKHR"));
 
