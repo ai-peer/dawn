@@ -68,6 +68,23 @@
       "parentUuid": "536c4656_d5cbd2bc",
       "revId": "323a006fe0666c525be49d884df36bee9347d173",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8258bf1b_fe815ecf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-03-08T18:51:48Z",
+      "side": 1,
+      "message": "https://chromium-review.googlesource.com/c/chromium/src/+/4295309 landed, so the experimental bot should be operational, landing.",
+      "revId": "323a006fe0666c525be49d884df36bee9347d173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
