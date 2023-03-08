@@ -1,5 +1,9 @@
 #version 310 es
 
+uvec4 tint_ftou(vec4 v) {
+  return mix(uvec4(4294967295u), mix(uvec4(v), uvec4(0u), lessThan(v, vec4(0.0f))), lessThan(v, vec4(4294967040.0f)));
+}
+
 struct Uniforms {
   uint dstTextureFlipY;
   uint isFloat16;
@@ -32,7 +36,7 @@ void tint_symbol_1(uvec3 GlobalInvocationID) {
   vec4 dstColor = texelFetch(dst_1, ivec2(dstTexCoord), 0);
   bool success = true;
   uvec4 srcColorBits = uvec4(0u, 0u, 0u, 0u);
-  uvec4 dstColorBits = uvec4(dstColor);
+  uvec4 dstColorBits = tint_ftou(dstColor);
   {
     for(uint i = 0u; (i < uniforms.inner.channelCount); i = (i + 1u)) {
       uint tint_symbol_2 = ConvertToFp16FloatValue(srcColor[i]);

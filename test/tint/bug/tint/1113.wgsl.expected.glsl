@@ -1,5 +1,9 @@
 #version 310 es
 
+uvec3 tint_ftou(vec3 v) {
+  return mix(uvec3(4294967295u), mix(uvec3(v), uvec3(0u), lessThan(v, vec3(0.0f))), lessThan(v, vec3(4294967040.0f)));
+}
+
 struct Uniforms {
   uint numTriangles;
   uint gridSize;
@@ -63,7 +67,7 @@ vec3 toVoxelPos(vec3 position) {
 }
 
 uint toIndex1D(uint gridSize, vec3 voxelPos) {
-  uvec3 icoord = uvec3(voxelPos);
+  uvec3 icoord = tint_ftou(voxelPos);
   return ((icoord.x + (gridSize * icoord.y)) + ((gridSize * gridSize) * icoord.z));
 }
 
@@ -194,6 +198,10 @@ void main() {
 }
 #version 310 es
 
+uvec3 tint_ftou(vec3 v) {
+  return mix(uvec3(4294967295u), mix(uvec3(v), uvec3(0u), lessThan(v, vec3(0.0f))), lessThan(v, vec3(4294967040.0f)));
+}
+
 struct Uniforms {
   uint numTriangles;
   uint gridSize;
@@ -257,7 +265,7 @@ vec3 toVoxelPos(vec3 position) {
 }
 
 uint toIndex1D(uint gridSize, vec3 voxelPos) {
-  uvec3 icoord = uvec3(voxelPos);
+  uvec3 icoord = tint_ftou(voxelPos);
   return ((icoord.x + (gridSize * icoord.y)) + ((gridSize * gridSize) * icoord.z));
 }
 
