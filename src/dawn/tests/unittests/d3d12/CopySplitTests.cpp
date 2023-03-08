@@ -18,13 +18,13 @@
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/Format.h"
-#include "dawn/native/d3d12/TextureCopySplitter.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d12/TextureCopySplitter.h"
+#include "dawn/native/d3d/d3d12/d3d12_platform.h"
 #include "dawn/utils/TestUtils.h"
 #include "dawn/webgpu_cpp_print.h"
 #include "gtest/gtest.h"
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d::d3d12 {
 namespace {
 
 struct TextureSpec {
@@ -526,4 +526,4 @@ INSTANTIATE_TEST_SUITE_P(,
                          CopySplitTest,
                          testing::Values(wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D));
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d::d3d12

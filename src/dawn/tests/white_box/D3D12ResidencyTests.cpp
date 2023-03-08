@@ -15,10 +15,10 @@
 #include <vector>
 
 #include "dawn/native/D3D12Backend.h"
-#include "dawn/native/d3d12/BufferD3D12.h"
-#include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/ResidencyManagerD3D12.h"
-#include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "dawn/native/d3d/d3d12/BufferD3D12.h"
+#include "dawn/native/d3d/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d/d3d12/ResidencyManagerD3D12.h"
+#include "dawn/native/d3d/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -41,8 +41,8 @@ class D3D12ResidencyTestBase : public DawnTest {
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Restrict Dawn's budget to create an artificial budget.
-        dawn::native::d3d12::Device* d3dDevice =
-            dawn::native::d3d12::ToBackend(dawn::native::FromAPI((device.Get())));
+        dawn::native::d3d::d3d12::Device* d3dDevice =
+            dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI((device.Get())));
         d3dDevice->GetResidencyManager()->RestrictBudgetForTesting(kRestrictedBudgetSize);
 
         // Initialize a source buffer on the GPU to serve as a source to quickly copy data to other
@@ -93,19 +93,19 @@ class D3D12ResourceResidencyTests : public D3D12ResidencyTestBase {
   protected:
     bool CheckAllocationMethod(wgpu::Buffer buffer,
                                dawn::native::AllocationMethod allocationMethod) const {
-        dawn::native::d3d12::Buffer* d3dBuffer =
-            dawn::native::d3d12::ToBackend(dawn::native::FromAPI((buffer.Get())));
+        dawn::native::d3d::d3d12::Buffer* d3dBuffer =
+            dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI((buffer.Get())));
         return d3dBuffer->CheckAllocationMethodForTesting(allocationMethod);
     }
 
     bool CheckIfBufferIsResident(wgpu::Buffer buffer) const {
-        dawn::native::d3d12::Buffer* d3dBuffer =
-            dawn::native::d3d12::ToBackend(dawn::native::FromAPI((buffer.Get())));
+        dawn::native::d3d::d3d12::Buffer* d3dBuffer =
+            dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI((buffer.Get())));
         return d3dBuffer->CheckIsResidentForTesting();
     }
 
     bool IsUMA() const {
-        return dawn::native::d3d12::ToBackend(dawn::native::FromAPI(device.Get()))
+        return dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI(device.Get()))
             ->GetDeviceInfo()
             .isUMA;
     }
@@ -320,14 +320,14 @@ TEST_P(D3D12ResourceResidencyTests, OvercommitInASingleSubmit) {
 TEST_P(D3D12ResourceResidencyTests, SetExternalReservation) {
     // Set an external reservation of 20% the budget. We should succesfully reserve the amount we
     // request.
-    uint64_t amountReserved = dawn::native::d3d12::SetExternalMemoryReservation(
-        device.Get(), kRestrictedBudgetSize * .2, dawn::native::d3d12::MemorySegment::Local);
+    uint64_t amountReserved = dawn::native::d3d::d3d12::SetExternalMemoryReservation(
+        device.Get(), kRestrictedBudgetSize * .2, dawn::native::d3d::d3d12::MemorySegment::Local);
     EXPECT_EQ(amountReserved, kRestrictedBudgetSize * .2);
 
     // If we're on a non-UMA device, we should also check the NON_LOCAL memory segment.
     if (!IsUMA()) {
-        amountReserved = dawn::native::d3d12::SetExternalMemoryReservation(
-            device.Get(), kRestrictedBudgetSize * .2, dawn::native::d3d12::MemorySegment::NonLocal);
+        amountReserved = dawn::native::d3d::d3d12::SetExternalMemoryReservation(
+            device.Get(), kRestrictedBudgetSize * .2, dawn::native::d3d::d3d12::MemorySegment::NonLocal);
         EXPECT_EQ(amountReserved, kRestrictedBudgetSize * .2);
     }
 }
@@ -371,14 +371,14 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
 
     wgpu::Sampler sampler = device.CreateSampler();
 
-    dawn::native::d3d12::Device* d3dDevice =
-        dawn::native::d3d12::ToBackend(dawn::native::FromAPI(device.Get()));
+    dawn::native::d3d::d3d12::Device* d3dDevice =
+        dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI(device.Get()));
 
-    dawn::native::d3d12::ShaderVisibleDescriptorAllocator* allocator =
+    dawn::native::d3d::d3d12::ShaderVisibleDescriptorAllocator* allocator =
         d3dDevice->GetViewShaderVisibleDescriptorAllocator();
     const uint64_t heapSize = allocator->GetShaderVisibleHeapSizeForTesting();
 
-    const dawn::native::d3d12::HeapVersionID heapSerial =
+    const dawn::native::d3d::d3d12::HeapVersionID heapSerial =
         allocator->GetShaderVisibleHeapSerialForTesting();
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
@@ -405,7 +405,7 @@ TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
 
     // Check the heap serial to ensure the heap has switched.
     EXPECT_EQ(allocator->GetShaderVisibleHeapSerialForTesting(),
-              heapSerial + dawn::native::d3d12::HeapVersionID(1));
+              heapSerial + dawn::native::d3d::d3d12::HeapVersionID(1));
 
     // Check that currrently bound ShaderVisibleHeap is locked resident.
     EXPECT_TRUE(allocator->IsShaderVisibleHeapLockedResidentForTesting());
