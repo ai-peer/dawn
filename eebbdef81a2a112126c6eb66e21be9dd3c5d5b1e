@@ -22,6 +22,30 @@
       },
       "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e802f82f_c4f5209d",
+        "filename": "src/tint/transform/promote_side_effects_to_decl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-08T17:14:17Z",
+      "side": 0,
+      "message": "I believe you pushed RHS as you needed to ensure that a RHS reference was snapshotted before the LHS side effects could change the referenced value? Something like:\n\n```\nvar\u003cprivate\u003e v : i32;\n\nfn modify_v() {\n  v++;\n}\n\nfn f() {\n  lhs[modify_v()] \u003d v;\n}\n```\n\nI don\u0027t think this is an issue with evaluating LHS first. James will probably correct me.",
+      "parentUuid": "24d573f6_90b15ae6",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 9
+      },
+      "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
