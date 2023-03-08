@@ -83,6 +83,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b690c39_50ac79c1",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-08T17:35:47Z",
+      "side": 1,
+      "message": "In the other backends the command recording is handled by a CommandBufferBase subclass that is allowed access to CommandBufferBase::mCommands.\n\nYou could add a CommandBufferEmulator for this that has an AcquireCommandIterator or something similar.",
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dac12d1_d118fa66",
         "filename": "src/dawn/native/emulator/QueueEmulator.h",
         "patchSetId": 15
