@@ -29,7 +29,7 @@
 struct ID3D12Device;
 struct ID3D12Resource;
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d::d3d12 {
 
 class D3D11on12ResourceCache;
 class Device;
@@ -133,6 +133,11 @@ struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptio
     Microsoft::WRL::ComPtr<IDXGIAdapter> dxgiAdapter;
 };
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d::d3d12
+
+// TODO: Remove this alias once Chromium is updated to use the new namespace.
+namespace dawn::native {
+using namespace dawn::native::d3d::d3d12;
+}  // namespace dawn::native
 
 #endif  // INCLUDE_DAWN_NATIVE_D3D12BACKEND_H_

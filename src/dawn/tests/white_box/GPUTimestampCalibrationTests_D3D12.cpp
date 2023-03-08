@@ -14,13 +14,13 @@
 
 #include <memory>
 
-#include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d/d3d12/DeviceD3D12.h"
 #include "dawn/tests/white_box/GPUTimestampCalibrationTests.h"
 
 class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBackend {
   public:
     explicit GPUTimestampCalibrationTestsD3D12(const wgpu::Device& device) {
-        mBackendDevice = dawn::native::d3d12::ToBackend(dawn::native::FromAPI(device.Get()));
+        mBackendDevice = dawn::native::d3d::d3d12::ToBackend(dawn::native::FromAPI(device.Get()));
     }
 
     bool IsSupported() const override { return true; }
@@ -32,7 +32,7 @@ class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBack
     float GetTimestampPeriod() const override { return mBackendDevice->GetTimestampPeriodInNS(); }
 
   private:
-    dawn::native::d3d12::Device* mBackendDevice;
+    dawn::native::d3d::d3d12::Device* mBackendDevice;
 };
 
 // static

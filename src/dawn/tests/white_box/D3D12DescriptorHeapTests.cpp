@@ -18,15 +18,15 @@
 
 #include "dawn/native/Device.h"
 #include "dawn/native/Toggles.h"
-#include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
-#include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
-#include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
+#include "dawn/native/d3d/d3d12/BindGroupLayoutD3D12.h"
+#include "dawn/native/d3d/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "dawn/native/d3d/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d::d3d12 {
 
 constexpr uint32_t kRTSize = 4;
 
@@ -1047,4 +1047,4 @@ DAWN_INSTANTIATE_TEST(D3D12DescriptorHeapTests,
                       D3D12Backend(),
                       D3D12Backend({"use_d3d12_small_shader_visible_heap"}));
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d::d3d12

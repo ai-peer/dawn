@@ -32,14 +32,14 @@ class D3D12Binding : public BackendBinding {
     uint64_t GetSwapChainImplementation() override {
         if (mSwapchainImpl.userData == nullptr) {
             HWND win32Window = glfwGetWin32Window(mWindow);
-            mSwapchainImpl = dawn::native::d3d12::CreateNativeSwapChainImpl(mDevice, win32Window);
+            mSwapchainImpl = dawn::native::d3d::d3d12::CreateNativeSwapChainImpl(mDevice, win32Window);
         }
         return reinterpret_cast<uint64_t>(&mSwapchainImpl);
     }
 
     WGPUTextureFormat GetPreferredSwapChainTextureFormat() override {
         ASSERT(mSwapchainImpl.userData != nullptr);
-        return dawn::native::d3d12::GetNativeSwapChainPreferredFormat(&mSwapchainImpl);
+        return dawn::native::d3d::d3d12::GetNativeSwapChainPreferredFormat(&mSwapchainImpl);
     }
 
   private:

@@ -14,11 +14,11 @@
 
 #include <vector>
 
-#include "dawn/native/d3d12/BufferD3D12.h"
-#include "dawn/native/d3d12/TextureD3D12.h"
+#include "dawn/native/d3d/d3d12/BufferD3D12.h"
+#include "dawn/native/d3d/d3d12/TextureD3D12.h"
 #include "dawn/tests/DawnTest.h"
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d::d3d12 {
 
 class D3D12ResourceHeapTests : public DawnTest {
   protected:
@@ -105,4 +105,4 @@ TEST_P(D3D12ResourceHeapTests, AlignUBO) {
 
 DAWN_INSTANTIATE_TEST(D3D12ResourceHeapTests, D3D12Backend());
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d::d3d12

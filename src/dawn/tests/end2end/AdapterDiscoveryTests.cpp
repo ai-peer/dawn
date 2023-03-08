@@ -94,7 +94,7 @@ TEST(AdapterDiscoveryTests, OnlyVulkan) {
 TEST(AdapterDiscoveryTests, OnlyD3D12) {
     dawn::native::Instance instance;
 
-    dawn::native::d3d12::AdapterDiscoveryOptions options;
+    dawn::native::d3d::d3d12::AdapterDiscoveryOptions options;
     instance.DiscoverAdapters(&options);
 
     const auto& adapters = instance.GetAdapters();
@@ -122,7 +122,7 @@ TEST(AdapterDiscoveryTests, MatchingDXGIAdapter) {
 
         dawn::native::Instance instance;
 
-        dawn::native::d3d12::AdapterDiscoveryOptions options;
+        dawn::native::d3d::d3d12::AdapterDiscoveryOptions options;
         options.dxgiAdapter = std::move(dxgiAdapter);
         instance.DiscoverAdapters(&options);
 
