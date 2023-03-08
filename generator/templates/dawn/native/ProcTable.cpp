@@ -18,6 +18,7 @@
 {% set namespace_name = Name(metadata.native_namespace) %}
 {% set native_namespace = namespace_name.namespace_case() %}
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
+{% set autoflush_callbacks_methods = [ "on submitted work done", "map async", "unmap" ] %}
 #include "{{native_dir}}/{{prefix}}_platform.h"
 #include "{{native_dir}}/{{Prefix}}Native.h"
 
@@ -65,6 +66,17 @@ namespace {{native_namespace}} {
                         {{as_varName(arg.name)}}_
                     {%- endfor -%}
                 );
+
+                {% if method.name.get() in autoflush_callbacks_methods %}
+                    if (self->GetDevice()->IsLost()) {
+                        // Since this method might schedule callbacks to be triggered in next APITick(), if the device
+                        // is lost, the callbacks might have no chance to be triggered. It's because it's not
+                        // possible to call APITick() externally anymore. In that case, we flush the callbacks immediately at the
+                        // end of this method.
+                        self->GetDevice()->APITick();
+                    }
+                {% endif %}
+
                 {% if method.return_type.name.canonical_case() != "void" %}
                     {% if method.return_type.category in ["object", "enum", "bitmask"] %}
                         return ToAPI(result);
