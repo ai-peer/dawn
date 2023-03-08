@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb35be06_74e65217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-08T18:40:00Z",
+      "side": 1,
+      "message": "Hi Corentin \u0026 Austion, PTAL. Thanks",
+      "revId": "8624b2ba1c5c82aa8398522e2570f482a3723e63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
