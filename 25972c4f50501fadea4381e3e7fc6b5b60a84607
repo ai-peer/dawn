@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e34c662_f35dc9cc",
+        "filename": "src/tint/writer/glsl/generator_impl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1107,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-08T20:47:05Z",
+      "side": 1,
+      "message": "I need to remove this comment.",
+      "revId": "25972c4f50501fadea4381e3e7fc6b5b60a84607",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
