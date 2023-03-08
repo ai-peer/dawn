@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "193e155e_651f42e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-08T17:59:23Z",
+      "side": 1,
+      "message": "This makes me think you\u0027re polyfilling the division\n\n`Polyfill f32 conversion to i32 or u32` maybe ?",
+      "revId": "14e8d7bed0da0a3ab8830f67bc89a547278a5b71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79764ed3_1e9dc634",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-08T17:59:23Z",
+      "side": 1,
+      "message": "nit: `Polyfill f32 conversion to i32 or u32 polyfills`",
+      "revId": "14e8d7bed0da0a3ab8830f67bc89a547278a5b71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
