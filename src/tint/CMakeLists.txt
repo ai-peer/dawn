@@ -698,8 +698,14 @@ if(${TINT_BUILD_IR})
     ir/builder.h
     ir/builder_impl.cc
     ir/builder_impl.h
+    ir/call.cc
+    ir/call.h
     ir/constant.cc
     ir/constant.h
+    ir/construct.cc
+    ir/construct.h
+    ir/convert.cc
+    ir/convert.h
     ir/debug.cc
     ir/debug.h
     ir/disassembler.cc
@@ -722,6 +728,8 @@ if(${TINT_BUILD_IR})
     ir/temp.h
     ir/terminator.cc
     ir/terminator.h
+    ir/user_call.cc
+    ir/user_call.h
     ir/value.cc
     ir/value.h
   )
