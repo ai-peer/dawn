@@ -135,6 +135,7 @@ class ValidationTest : public testing::Test {
 
   protected:
     dawn::native::Adapter& GetBackendAdapter();
+    dawn::native::Instance& GetDawnInstance();
     virtual WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter);
 
     wgpu::Device RequestDeviceSync(const wgpu::DeviceDescriptor& deviceDesc);

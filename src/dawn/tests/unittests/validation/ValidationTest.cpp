@@ -280,6 +280,10 @@ dawn::native::Adapter& ValidationTest::GetBackendAdapter() {
     return mBackendAdapter;
 }
 
+dawn::native::Instance& ValidationTest::GetDawnInstance() {
+    return *mDawnInstance.get();
+}
+
 WGPUDevice ValidationTest::CreateTestDevice(dawn::native::Adapter dawnAdapter) {
     std::vector<const char*> enabledToggles;
     std::vector<const char*> disabledToggles;
