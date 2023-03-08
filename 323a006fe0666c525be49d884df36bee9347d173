@@ -16,6 +16,23 @@
       "message": "Austin, PTAL.\n\nPasses with these expectations in https://ci.chromium.org/ui/p/chromium/builders/try/dawn-try-mac-amd-exp/52/overview.\nI think it\u0027s nicer if I split the tests that fail only on the new config into this separate CL.\n\nAlso adding dawn-try-mac-amd-exp to CTS rolls here.",
       "revId": "323a006fe0666c525be49d884df36bee9347d173",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "544a4676_d9ae7992",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-08T17:00:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "323a006fe0666c525be49d884df36bee9347d173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
