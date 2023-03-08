@@ -35,6 +35,9 @@ Server::Server(const DawnProcTable& procs,
 }
 
 Server::~Server() {
+    for (WGPUInstance instance : InstanceObjects().GetAllHandles()) {
+        mProcs.instanceProcessEvents(instance);
+    }
     // Un-set the error and lost callbacks since we cannot forward them
     // after the server has been destroyed.
     for (WGPUDevice device : DeviceObjects().GetAllHandles()) {
