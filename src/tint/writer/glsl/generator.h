@@ -25,6 +25,7 @@
 #include "src/tint/builtin/access.h"
 #include "src/tint/sem/binding_point.h"
 #include "src/tint/sem/sampler_texture_pair.h"
+#include "src/tint/writer/external_texture_options.h"
 #include "src/tint/writer/glsl/version.h"
 #include "src/tint/writer/text.h"
 
@@ -75,6 +76,9 @@ struct Options {
 
     /// Set to 'true' to generates binding mappings for external textures
     bool generate_external_texture_bindings = false;
+
+    /// Options used in the binding mappings for external textures
+    ExternalTextureOptions external_texture_options = {};
 
     /// The GLSL version to emit
     Version version;
