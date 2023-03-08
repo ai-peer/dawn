@@ -969,25 +969,25 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                 }
                 Symbol fn;
                 switch (builtin->Type()) {
-                    case sem::BuiltinType::kAcosh:
+                    case builtin::Function::kAcosh:
                         if (polyfill.acosh != Level::kNone) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.acosh(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kAsinh:
+                    case builtin::Function::kAsinh:
                         if (polyfill.asinh) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.asinh(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kAtanh:
+                    case builtin::Function::kAtanh:
                         if (polyfill.atanh != Level::kNone) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.atanh(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kClamp:
+                    case builtin::Function::kClamp:
                         if (polyfill.clamp_int) {
                             auto& sig = builtin->Signature();
                             if (sig.parameters[0]->Type()->is_integer_scalar_or_vector()) {
@@ -996,45 +996,45 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             }
                         }
                         break;
-                    case sem::BuiltinType::kCountLeadingZeros:
+                    case builtin::Function::kCountLeadingZeros:
                         if (polyfill.count_leading_zeros) {
                             fn = builtin_polyfills.GetOrCreate(builtin, [&] {
                                 return s.countLeadingZeros(builtin->ReturnType());
                             });
                         }
                         break;
-                    case sem::BuiltinType::kCountTrailingZeros:
+                    case builtin::Function::kCountTrailingZeros:
                         if (polyfill.count_trailing_zeros) {
                             fn = builtin_polyfills.GetOrCreate(builtin, [&] {
                                 return s.countTrailingZeros(builtin->ReturnType());
                             });
                         }
                         break;
-                    case sem::BuiltinType::kExtractBits:
+                    case builtin::Function::kExtractBits:
                         if (polyfill.extract_bits != Level::kNone) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.extractBits(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kFirstLeadingBit:
+                    case builtin::Function::kFirstLeadingBit:
                         if (polyfill.first_leading_bit) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.firstLeadingBit(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kFirstTrailingBit:
+                    case builtin::Function::kFirstTrailingBit:
                         if (polyfill.first_trailing_bit) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.firstTrailingBit(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kInsertBits:
+                    case builtin::Function::kInsertBits:
                         if (polyfill.insert_bits != Level::kNone) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.insertBits(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kReflect:
+                    case builtin::Function::kReflect:
                         // Only polyfill for vec2<f32>. See https://crbug.com/tint/1798 for more
                         // details.
                         if (polyfill.reflect_vec2_f32) {
@@ -1046,13 +1046,13 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             }
                         }
                         break;
-                    case sem::BuiltinType::kSaturate:
+                    case builtin::Function::kSaturate:
                         if (polyfill.saturate) {
                             fn = builtin_polyfills.GetOrCreate(
                                 builtin, [&] { return s.saturate(builtin->ReturnType()); });
                         }
                         break;
-                    case sem::BuiltinType::kSign:
+                    case builtin::Function::kSign:
                         if (polyfill.sign_int) {
                             auto* ty = builtin->ReturnType();
                             if (ty->is_signed_integer_scalar_or_vector()) {
@@ -1061,7 +1061,7 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             }
                         }
                         break;
-                    case sem::BuiltinType::kTextureSampleBaseClampToEdge:
+                    case builtin::Function::kTextureSampleBaseClampToEdge:
                         if (polyfill.texture_sample_base_clamp_to_edge_2d_f32) {
                             auto& sig = builtin->Signature();
                             auto* tex = sig.Parameter(sem::ParameterUsage::kTexture);
@@ -1074,7 +1074,7 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             }
                         }
                         break;
-                    case sem::BuiltinType::kTextureStore:
+                    case builtin::Function::kTextureStore:
                         if (polyfill.bgra8unorm) {
                             auto& sig = builtin->Signature();
                             auto* tex = sig.Parameter(sem::ParameterUsage::kTexture);
@@ -1092,7 +1092,7 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                                             args.Push(arg);
                                         }
                                         return ctx.dst->Call(
-                                            utils::ToString(sem::BuiltinType::kTextureStore),
+                                            utils::ToString(builtin::Function::kTextureStore),
                                             std::move(args));
                                     });
                                     made_changes = true;
@@ -1100,7 +1100,7 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                             }
                         }
                         break;
-                    case sem::BuiltinType::kQuantizeToF16:
+                    case builtin::Function::kQuantizeToF16:
                         if (polyfill.quantize_to_vec_f16) {
                             if (auto* vec = builtin->ReturnType()->As<type::Vector>()) {
                                 fn = builtin_polyfills.GetOrCreate(
@@ -1109,7 +1109,7 @@ Transform::ApplyResult BuiltinPolyfill::Apply(const Program* src,
                         }
                         break;
 
-                    case sem::BuiltinType::kWorkgroupUniformLoad:
+                    case builtin::Function::kWorkgroupUniformLoad:
                         if (polyfill.workgroup_uniform_load) {
                             fn = builtin_polyfills.GetOrCreate(builtin, [&] {
                                 return s.workgroupUniformLoad(builtin->ReturnType());
