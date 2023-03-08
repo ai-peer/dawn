@@ -85,7 +85,7 @@ enum class Compiler { FXC, DXC };
     X(bool, usesNumWorkgroups)                                                              \
     X(uint32_t, numWorkgroupsShaderRegister)                                                \
     X(uint32_t, numWorkgroupsRegisterSpace)                                                 \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap)             \
+    X(tint::writer::ExternalTextureOptions::BindingsMap, newBindingsMap)                    \
     X(tint::writer::ArrayLengthFromUniformOptions, arrayLengthFromUniform)                  \
     X(tint::transform::BindingRemapper::BindingPoints, remappedBindingPoints)               \
     X(tint::transform::BindingRemapper::AccessControls, remappedAccessControls)             \
@@ -311,12 +311,6 @@ ResultOrError<std::string> TranslateToHLSL(
             tint::transform::Renamer::Target::kHlslKeywords);
     }
 
-    if (!r.newBindingsMap.empty()) {
-        transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-        transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-            std::move(r.newBindingsMap));
-    }
-
     if (r.stage == SingleShaderStage::Vertex) {
         transformManager.Add<tint::transform::FirstIndexOffset>();
         transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
@@ -381,6 +375,8 @@ ResultOrError<std::string> TranslateToHLSL(
     tint::writer::hlsl::Options options;
     options.disable_robustness = !r.isRobustnessEnabled;
     options.disable_workgroup_init = r.disableWorkgroupInit;
+    options.external_texture_options.bindings_map = r.newBindingsMap();
+
     if (r.usesNumWorkgroups) {
         options.root_constant_binding_point =
             tint::writer::BindingPoint{r.numWorkgroupsRegisterSpace, r.numWorkgroupsShaderRegister};
