@@ -551,6 +551,7 @@ class DawnTestBase {
     }
 
     void WaitABit(wgpu::Device = nullptr);
+    void ProcessEvents();
     void FlushWire();
     void WaitForAllOperations();
 
