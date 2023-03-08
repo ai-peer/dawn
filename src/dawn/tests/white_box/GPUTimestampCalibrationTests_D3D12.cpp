@@ -14,7 +14,7 @@
 
 #include <memory>
 
-#include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d/d3d12/DeviceD3D12.h"
 #include "dawn/tests/white_box/GPUTimestampCalibrationTests.h"
 
 class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBackend {
