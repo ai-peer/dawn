@@ -79,6 +79,9 @@ namespace {
         FATAL_ERROR(diags, msg_string);   \
     } while (false)
 
+#if TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
+// This function is only used for spirv input and output, and requires "spirv-tools/libspirv.hpp"
+// included.
 bool SPIRVToolsValidationCheck(const tint::Program& program, const std::vector<uint32_t>& spirv) {
     spvtools::SpirvTools tools(SPV_ENV_VULKAN_1_1);
     const tint::diag::List& diags = program.Diagnostics();
@@ -95,6 +98,7 @@ bool SPIRVToolsValidationCheck(const tint::Program& program, const std::vector<u
 
     return tools.Validate(spirv.data(), spirv.size(), spvtools::ValidatorOptions());
 }
+#endif  // TINT_BUILD_SPV_WRITER
 
 }  // namespace
 
