@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24d573f6_90b15ae6",
+        "filename": "src/tint/transform/promote_side_effects_to_decl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-08T15:07:44Z",
+      "side": 0,
+      "message": "This was the special-case code I was referring to yesterday wrt evaluating rhs before lhs. I _think_ the simplified version you\u0027re replacing this with is sufficient, that is:\n\n```\ntint::utils::Vector\u003cconst ast::Expression*, 8\u003e maybe_hoist;\nProcessExpression(s-\u003elhs, maybe_hoist);\nProcessExpression(s-\u003erhs, maybe_hoist);\n```\n\nThe only thing I\u0027m unclear on is why, exactly, I was adding `rhs` to `maybe_hoist` if `ProcessExpression` returned true. The details are fuzzy as it\u0027s been a while since I wrote this, but I think it\u0027s something like the top-level expression `rhs` is not automatically added to `maybe_hoist`, so I had to do so for the `ProcessExpression(lhs, maybe_hoist)` below. This is probably related to the `Flush` call in between.\n\nI\u0027m really not sure, but looking at the diffs in the unit tests, it _looks_ like we\u0027re doing the right thing. And the old and new flow control CTS tests should help clarify if this is valid.",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 9
+      },
+      "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

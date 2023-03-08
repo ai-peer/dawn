@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ec49139_5dd16dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-08T15:07:44Z",
+      "side": 1,
+      "message": "Looks good for `promote_side_effects_to_decl.cc`. Over to James for uniformity.",
+      "revId": "c7964e8a2a772393cc6ba9ffc70b8d2b64b39587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
