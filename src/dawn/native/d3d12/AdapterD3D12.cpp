@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/d3d12/AdapterD3D12.h"
+#include "dawn/native/d3d/d3d12/AdapterD3D12.h"
 
 #include <string>
 
@@ -20,11 +20,11 @@
 #include "dawn/common/Platform.h"
 #include "dawn/common/WindowsUtils.h"
 #include "dawn/native/Instance.h"
-#include "dawn/native/d3d12/BackendD3D12.h"
-#include "dawn/native/d3d12/D3D12Error.h"
-#include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/PlatformFunctions.h"
-#include "dawn/native/d3d12/UtilsD3D12.h"
+#include "dawn/native/d3d/d3d12/BackendD3D12.h"
+#include "dawn/native/d3d/d3d12/D3D12Error.h"
+#include "dawn/native/d3d/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d/d3d12/PlatformFunctions.h"
+#include "dawn/native/d3d/d3d12/UtilsD3D12.h"
 
 namespace dawn::native::d3d12 {
 
