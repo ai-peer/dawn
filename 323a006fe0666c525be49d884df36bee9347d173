@@ -50,6 +50,24 @@
       "message": "Ben, FYI these are the Mac AMD failures in addition to the existing mac ones. Looks like shader,execution things",
       "revId": "323a006fe0666c525be49d884df36bee9347d173",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "679d8eeb_1d0c5ce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-08T18:05:19Z",
+      "side": 1,
+      "message": "They all look like Metal is saying \"Internal compiler error\" - I think you mentioned the other day about this so maybe it\u0027s a known issue.",
+      "parentUuid": "536c4656_d5cbd2bc",
+      "revId": "323a006fe0666c525be49d884df36bee9347d173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
