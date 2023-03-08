@@ -542,6 +542,8 @@ list(APPEND TINT_LIB_SRCS
   writer/binding_point.h
   writer/check_supported_extensions.cc
   writer/check_supported_extensions.h
+  writer/external_texture_options.cc
+  writer/external_texture_options.h
   writer/flatten_bindings.cc
   writer/flatten_bindings.h
   writer/float_to_string.cc

@@ -20,6 +20,7 @@
 #include <vector>
 
 #include "src/tint/reflection.h"
+#include "src/tint/writer/external_texture_options.h"
 #include "src/tint/writer/writer.h"
 
 // Forward declarations
@@ -47,6 +48,9 @@ struct Options {
 
     /// Set to 'true' to generates binding mappings for external textures
     bool generate_external_texture_bindings = false;
+
+    /// Options used in the binding mappings for external textures
+    ExternalTextureOptions external_texture_options = {};
 
     /// Set to `true` to initialize workgroup memory with OpConstantNull when
     /// VK_KHR_zero_initialize_workgroup_memory is enabled.
