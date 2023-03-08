@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "323a006fe0666c525be49d884df36bee9347d173",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536c4656_d5cbd2bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-08T17:01:01Z",
+      "side": 1,
+      "message": "Ben, FYI these are the Mac AMD failures in addition to the existing mac ones. Looks like shader,execution things",
+      "revId": "323a006fe0666c525be49d884df36bee9347d173",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
