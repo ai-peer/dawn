@@ -58,7 +58,7 @@ const char* HRESULTAsString(HRESULT result) {
     }
 }
 
-MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
+MaybeError CheckHRESULTImpl(DeviceBase* device, HRESULT result, const char* context) {
     if (DAWN_LIKELY(SUCCEEDED(result))) {
         return {};
     }
@@ -71,16 +71,16 @@ MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
     if (result == DXGI_ERROR_DEVICE_REMOVED) {
         return DAWN_DEVICE_LOST_ERROR(messageStream.str());
     } else {
-        return DAWN_INTERNAL_ERROR(messageStream.str());
+        return DAWN_INTERNAL_ERROR(device, messageStream.str());
     }
 }
 
-MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context) {
+MaybeError CheckOutOfMemoryHRESULTImpl(DeviceBase* device, HRESULT result, const char* context) {
     if (result == E_OUTOFMEMORY || result == E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING) {
         return DAWN_OUT_OF_MEMORY_ERROR(context);
     }
 
-    return CheckHRESULTImpl(result, context);
+    return CheckHRESULTImpl(device, result, context);
 }
 
 }  // namespace dawn::native::d3d12

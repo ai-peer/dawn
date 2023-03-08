@@ -88,7 +88,8 @@ class ResourceMemoryAllocator::SingleTypeAllocator : public ResourceHeapAllocato
 
         // First check OOM that we want to surface to the application.
         DAWN_TRY(
-            CheckVkOOMThenSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
+            CheckVkOOMThenSuccess(mDevice->GetPlatform(),
+                                  mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
                                                              nullptr, &*allocatedMemory),
                                   "vkAllocateMemory"));
 
@@ -166,7 +167,8 @@ ResultOrError<ResourceMemoryAllocation> ResourceMemoryAllocator::Allocate(
     void* mappedPointer = nullptr;
     if (kind == MemoryKind::LinearMappable) {
         DAWN_TRY_WITH_CLEANUP(
-            CheckVkSuccess(mDevice->fn.MapMemory(mDevice->GetVkDevice(),
+            CheckVkSuccess(mDevice->GetPlatform(),
+                           mDevice->fn.MapMemory(mDevice->GetVkDevice(),
                                                  ToBackend(resourceHeap.get())->GetMemory(), 0,
                                                  size, 0, &mappedPointer),
                            "vkMapMemory"),

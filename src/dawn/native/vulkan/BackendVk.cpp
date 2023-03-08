@@ -412,7 +412,7 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
         createInfoChain.Add(&validationFeatures, VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT);
     }
 
-    DAWN_TRY(CheckVkSuccess(mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
+    DAWN_TRY(CheckVkSuccess(nullptr, mFunctions.CreateInstance(&createInfo, nullptr, &mInstance),
                             "vkCreateInstance"));
 
     return usedKnobs;
@@ -430,7 +430,8 @@ MaybeError VulkanInstance::RegisterDebugUtils() {
     createInfo.pfnUserCallback = OnDebugUtilsCallback;
     createInfo.pUserData = this;
 
-    return CheckVkSuccess(mFunctions.CreateDebugUtilsMessengerEXT(mInstance, &createInfo, nullptr,
+    return CheckVkSuccess(nullptr,
+                          mFunctions.CreateDebugUtilsMessengerEXT(mInstance, &createInfo, nullptr,
                                                                   &*mDebugUtilsMessenger),
                           "vkCreateDebugUtilsMessengerEXT");
 }

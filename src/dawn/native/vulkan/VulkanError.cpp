@@ -75,7 +75,9 @@ const char* VkResultAsString(::VkResult result) {
     }
 }
 
-MaybeError CheckVkSuccessImpl(VkResult result, const char* context) {
+MaybeError CheckVkSuccessImpl(dawn::platform::Platform* platform,
+                              VkResult result,
+                              const char* context) {
     if (DAWN_LIKELY(result == VK_SUCCESS)) {
         return {};
     }
@@ -84,12 +86,16 @@ MaybeError CheckVkSuccessImpl(VkResult result, const char* context) {
 
     if (result == VK_ERROR_DEVICE_LOST) {
         return DAWN_DEVICE_LOST_ERROR(message);
+    } else if (platform) {
+        return DAWN_DUMPED_INTERNAL_ERROR(platform, message);
     } else {
         return DAWN_INTERNAL_ERROR(message);
     }
 }
 
-MaybeError CheckVkOOMThenSuccessImpl(VkResult result, const char* context) {
+MaybeError CheckVkOOMThenSuccessImpl(dawn::platform::Platform* platform,
+                                     VkResult result,
+                                     const char* context) {
     if (DAWN_LIKELY(result == VK_SUCCESS)) {
         return {};
     }
@@ -102,7 +108,7 @@ MaybeError CheckVkOOMThenSuccessImpl(VkResult result, const char* context) {
     } else if (result == VK_ERROR_DEVICE_LOST) {
         return DAWN_DEVICE_LOST_ERROR(message);
     } else {
-        return DAWN_INTERNAL_ERROR(message);
+        return DAWN_DUMPED_INTERNAL_ERROR(platform, message);
     }
 }
 

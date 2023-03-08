@@ -61,4 +61,6 @@ std::unique_ptr<dawn::platform::WorkerTaskPool> Platform::CreateWorkerTaskPool()
     return std::make_unique<AsyncWorkerThreadPool>();
 }
 
+void Platform::DumpWithoutCrashing() {}
+
 }  // namespace dawn::platform

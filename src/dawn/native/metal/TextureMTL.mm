@@ -1147,7 +1147,9 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
                            iosurface:texture->GetIOSurface()
                                plane:plane]);
         if (mMtlTextureView == nil) {
-            return DAWN_INTERNAL_ERROR("Failed to create MTLTexture view for external texture.");
+            return DAWN_DUMPED_INTERNAL_ERROR(
+                GetDevice()->GetPlatform(),
+                "Failed to create MTLTexture view for external texture.");
         }
     } else {
         MTLPixelFormat viewFormat = MetalPixelFormat(device, descriptor->format);
@@ -1165,8 +1167,10 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
                 // TODO(enga): Add a workaround to back combined depth/stencil textures
                 // with Sampled usage using two separate textures.
                 // Or, consider always using the workaround for D32S8.
-                return DAWN_INTERNAL_ERROR("Cannot create stencil-only texture view of combined "
-                                           "depth/stencil format.");
+                return DAWN_DUMPED_INTERNAL_ERROR(
+                    GetDevice()->GetPlatform(),
+                    "Cannot create stencil-only texture view of combined "
+                    "depth/stencil format.");
             }
         } else if (GetTexture()->GetFormat().HasDepth() && GetTexture()->GetFormat().HasStencil()) {
             // Depth-only views for depth/stencil textures in Metal simply use the original
@@ -1184,7 +1188,8 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
                                                                            levels:mipLevelRange
                                                                            slices:arrayLayerRange]);
         if (mMtlTextureView == nil) {
-            return DAWN_INTERNAL_ERROR("Failed to create MTLTexture view.");
+            return DAWN_DUMPED_INTERNAL_ERROR(GetDevice()->GetPlatform(),
+                                              "Failed to create MTLTexture view.");
         }
     }
 
