@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7949ed89_b07fc07a",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-08T20:31:31Z",
+      "side": 1,
+      "message": "There\u0027s an asymmetry here, but it\u0027s caused by the fact that -2**31 is exactly representable.\n\nThis math checks out, in my opinion.",
+      "revId": "80071d89a411dec4755d5fd156ffd43550f9583e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a985fb1_3a91ddc0",
+        "filename": "src/tint/transform/builtin_polyfill_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-08T20:31:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "80071d89a411dec4755d5fd156ffd43550f9583e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
