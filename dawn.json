@@ -1529,8 +1529,7 @@
                 ]
             },
             {
-                "name": "process events",
-                "tags": ["upstream", "emscripten"]
+                "name": "process events"
             },
             {
                 "name": "request adapter",
