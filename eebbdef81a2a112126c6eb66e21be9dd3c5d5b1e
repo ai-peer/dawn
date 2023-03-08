@@ -46,6 +46,30 @@
       },
       "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf00806_a677990f",
+        "filename": "src/tint/transform/promote_side_effects_to_decl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-08T17:43:06Z",
+      "side": 0,
+      "message": "Yeah, I don\u0027t think there\u0027s any issues like that now.",
+      "parentUuid": "e802f82f_c4f5209d",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 9
+      },
+      "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
