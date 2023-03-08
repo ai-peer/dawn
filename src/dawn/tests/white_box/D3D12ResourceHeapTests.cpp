@@ -14,8 +14,8 @@
 
 #include <vector>
 
-#include "dawn/native/d3d12/BufferD3D12.h"
-#include "dawn/native/d3d12/TextureD3D12.h"
+#include "dawn/native/d3d/d3d12/BufferD3D12.h"
+#include "dawn/native/d3d/d3d12/TextureD3D12.h"
 #include "dawn/tests/DawnTest.h"
 
 namespace dawn::native::d3d12 {
