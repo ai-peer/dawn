@@ -23,6 +23,7 @@
 
 #include "src/tint/reflection.h"
 #include "src/tint/writer/array_length_from_uniform_options.h"
+#include "src/tint/writer/external_texture_options.h"
 #include "src/tint/writer/text.h"
 
 // Forward declarations
@@ -64,6 +65,9 @@ struct Options {
 
     /// Set to 'true' to generates binding mappings for external textures
     bool generate_external_texture_bindings = false;
+
+    /// Options used in the binding mappings for external textures
+    ExternalTextureOptions external_texture_options = {};
 
     /// Options used to specify a mapping of binding points to indices into a UBO
     /// from which to load buffer sizes.
