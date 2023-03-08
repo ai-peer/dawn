@@ -86,6 +86,7 @@ MaybeError QuerySet::Initialize() {
 
     Device* device = ToBackend(GetDevice());
     DAWN_TRY(CheckVkOOMThenSuccess(
+        device->GetPlatform(),
         device->fn.CreateQueryPool(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "vkCreateQueryPool"));
 

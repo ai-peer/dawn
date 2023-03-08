@@ -99,7 +99,8 @@ ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
     }
 
     if (driverShaderModel < D3D_SHADER_MODEL_5_1) {
-        return DAWN_INTERNAL_ERROR("Driver doesn't support Shader Model 5.1 or higher");
+        return DAWN_INTERNAL_ERROR(adapter.GetDevice(),
+                                   "Driver doesn't support Shader Model 5.1 or higher");
     }
 
     // D3D_SHADER_MODEL is encoded as 0xMm with M the major version and m the minor version

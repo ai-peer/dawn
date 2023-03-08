@@ -723,6 +723,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
     createInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreateImage(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateImage"));
 
@@ -734,6 +735,7 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
                                            requirements, MemoryKind::Opaque));
 
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.BindImageMemory(device->GetVkDevice(), mHandle,
                                    ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
                                    mMemoryAllocation.GetOffset()),
@@ -824,6 +826,7 @@ MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descript
                                        std::vector<VkSemaphore> waitSemaphores) {
     Device* device = ToBackend(GetDevice());
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.BindImageMemory(device->GetVkDevice(), mHandle, externalMemoryAllocation, 0),
         "BindImageMemory (external)"));
 
@@ -1435,6 +1438,7 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     createInfo.subresourceRange.aspectMask = VulkanAspectMask(subresources.aspects);
 
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateImageView"));
 
@@ -1443,7 +1447,8 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     if (createInfo.format == VK_FORMAT_B8G8R8A8_UNORM &&
         (GetTexture()->GetInternalUsage() & wgpu::TextureUsage::StorageBinding)) {
         createInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
-        DAWN_TRY(CheckVkSuccess(device->fn.CreateImageView(device->GetVkDevice(), &createInfo,
+        DAWN_TRY(CheckVkSuccess(device->GetPlatform(),
+                                device->fn.CreateImageView(device->GetVkDevice(), &createInfo,
                                                            nullptr, &*mHandleForBGRA8UnormStorage),
                                 "CreateImageView for BGRA8Unorm storage"));
     }

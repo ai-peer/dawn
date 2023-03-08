@@ -102,6 +102,7 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     }
 
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreateSampler"));
 

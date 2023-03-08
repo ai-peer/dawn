@@ -50,8 +50,9 @@ MaybeError ComputePipeline::Initialize() {
     mMtlComputePipelineState.Acquire(
         [mtlDevice newComputePipelineStateWithFunction:computeData.function.Get() error:&error]);
     if (error != nullptr) {
-        return DAWN_INTERNAL_ERROR("Error creating pipeline state " +
-                                   std::string([error.localizedDescription UTF8String]));
+        return DAWN_INTERNAL_ERROR(GetDevice(),
+                                   "Error creating pipeline state " +
+                                       std::string([error.localizedDescription UTF8String]));
     }
     ASSERT(mMtlComputePipelineState != nil);
 

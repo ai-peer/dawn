@@ -318,7 +318,8 @@ MaybeError RecordBeginRenderPass(CommandRecordingContext* recordingContext,
         createInfo.height = renderPass->height;
         createInfo.layers = 1;
 
-        DAWN_TRY(CheckVkSuccess(device->fn.CreateFramebuffer(device->GetVkDevice(), &createInfo,
+        DAWN_TRY(CheckVkSuccess(device->GetPlatform(),
+                                device->fn.CreateFramebuffer(device->GetVkDevice(), &createInfo,
                                                              nullptr, &*framebuffer),
                                 "CreateFramebuffer"));
 

@@ -53,7 +53,7 @@ MaybeError CommandRecordingContext::PrepareNextCommandBuffer(id<MTLCommandQueue>
     // alive.
     mCommands = AcquireNSPRef([[queue commandBuffer] retain]);
     if (mCommands == nil) {
-        return DAWN_INTERNAL_ERROR("Failed to allocate an MTLCommandBuffer");
+        return DAWN_INTERNAL_ERROR(GetDevice(), "Failed to allocate an MTLCommandBuffer");
     }
 
     return {};

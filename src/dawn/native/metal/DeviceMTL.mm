@@ -143,7 +143,7 @@ Device::~Device() {
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     mCommandQueue.Acquire([*mMtlDevice newCommandQueue]);
     if (mCommandQueue == nil) {
-        return DAWN_INTERNAL_ERROR("Failed to allocate MTLCommandQueue.");
+        return DAWN_INTERNAL_ERROR(this, "Failed to allocate MTLCommandQueue.");
     }
 
     if (@available(macOS 10.14, *)) {

@@ -195,6 +195,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
 
     Device* device = ToBackend(GetDevice());
     DAWN_TRY(CheckVkOOMThenSuccess(
+        device->GetPlatform(),
         device->fn.CreateBuffer(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "vkCreateBuffer"));
 
@@ -211,6 +212,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
 
     // Finally associate it with the buffer.
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.BindBufferMemory(device->GetVkDevice(), mHandle,
                                     ToBackend(mMemoryAllocation.GetResourceHeap())->GetMemory(),
                                     mMemoryAllocation.GetOffset()),

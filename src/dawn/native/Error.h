@@ -23,6 +23,7 @@
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/webgpu_absl_format.h"
+#include "dawn/platform/DawnPlatform.h"
 
 namespace dawn::native {
 
@@ -106,6 +107,11 @@ using ResultOrError = Result<T, ErrorData>;
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
 // We can't even do a graceful shutdown because the Device is gone.
 #define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::DeviceLost, MESSAGE)
+
+// DAWN_INTERNAL_ERROR means Dawn hit an unexpected error in the backend and should try to
+// gracefully shut down.
+#define DAWN_DUMPED_INTERNAL_ERROR(PLATFORM, MESSAGE) \
+    (PLATFORM->DumpWithoutCrashing(), DAWN_INTERNAL_ERROR(MESSAGE))
 
 // DAWN_INTERNAL_ERROR means Dawn hit an unexpected error in the backend and should try to
 // gracefully shut down.

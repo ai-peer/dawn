@@ -59,7 +59,7 @@ TextureBase* OldSwapChain::GetNextTextureImpl(const TextureDescriptor* descripto
     DawnSwapChainError error = im.GetNextTexture(im.userData, &next);
 
     if (error) {
-        GetDevice()->HandleError(DAWN_INTERNAL_ERROR(error));
+        GetDevice()->HandleError(DAWN_DUMPED_INTERNAL_ERROR(GetDevice()->GetPlatform(), error));
         return nullptr;
     }
 
@@ -108,6 +108,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    adapter->GetPlatform(),
                     fn.CreateMetalSurfaceEXT(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateMetalSurface"));
                 return vkSurface;
@@ -127,6 +128,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    device->GetPlatform(),
                     fn.CreateWin32SurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateWin32Surface"));
                 return vkSurface;
@@ -148,6 +150,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    device->GetPlatform(),
                     fn.CreateAndroidSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateAndroidSurfaceKHR"));
                 return vkSurface;
@@ -170,6 +173,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    device->GetPlatform(),
                     fn.CreateWaylandSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateWaylandSurface"));
                 return vkSurface;
@@ -190,6 +194,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    adapter->GetInstance()->GetPlatform(),
                     fn.CreateXlibSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateXlibSurface"));
                 return vkSurface;
@@ -213,6 +218,7 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Adapter* adapter, Surface* surfa
 
                 VkSurfaceKHR vkSurface = VK_NULL_HANDLE;
                 DAWN_TRY(CheckVkSuccess(
+                    adapter->GetInstance()->GetPlatform(),
                     fn.CreateXcbSurfaceKHR(instance, &createInfo, nullptr, &*vkSurface),
                     "CreateXcbSurfaceKHR"));
                 return vkSurface;
@@ -346,6 +352,7 @@ MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
     createInfo.oldSwapchain = previousVkSwapChain;
 
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreateSwapchainKHR(device->GetVkDevice(), &createInfo, nullptr, &*mSwapChain),
         "CreateSwapChain"));
 
@@ -353,12 +360,14 @@ MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
     // number we asked for.
     uint32_t count = 0;
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.GetSwapchainImagesKHR(device->GetVkDevice(), mSwapChain, &count, nullptr),
         "GetSwapChainImages1"));
 
     mSwapChainImages.resize(count);
     DAWN_TRY(
-        CheckVkSuccess(device->fn.GetSwapchainImagesKHR(device->GetVkDevice(), mSwapChain, &count,
+        CheckVkSuccess(device->GetPlatform(),
+                       device->fn.GetSwapchainImagesKHR(device->GetVkDevice(), mSwapChain, &count,
                                                         AsVkArray(mSwapChainImages.data())),
                        "GetSwapChainImages2"));
 
@@ -436,8 +445,10 @@ ResultOrError<SwapChain::Config> SwapChain::ChooseConfig(
         }
     }
     if (!formatIsSupported) {
-        return DAWN_INTERNAL_ERROR(absl::StrFormat(
-            "Vulkan SwapChain must support %s with sRGB colorspace.", config.wgpuFormat));
+        return DAWN_DUMPED_INTERNAL_ERROR(
+            GetDevice()->GetPlatform(),
+            absl::StrFormat("Vulkan SwapChain must support %s with sRGB colorspace.",
+                            config.wgpuFormat));
     }
 
     // Only the identity transform with opaque alpha is supported for now.
@@ -512,7 +523,8 @@ ResultOrError<SwapChain::Config> SwapChain::ChooseConfig(
         // TODO(crbug.com/dawn/269): If the swapchain image doesn't support TRANSFER_DST
         // then we'll need to have a second fallback that uses a blit shader :(
         if ((supportedUsages & VK_IMAGE_USAGE_TRANSFER_DST_BIT) == 0) {
-            return DAWN_INTERNAL_ERROR(
+            return DAWN_DUMPED_INTERNAL_ERROR(
+                GetDevice()->GetPlatform(),
                 "SwapChain cannot fallback to a blit because of a missing "
                 "VK_IMAGE_USAGE_TRANSFER_DST_BIT");
         }
@@ -607,7 +619,7 @@ MaybeError SwapChain::PresentImpl() {
         // TODO(crbug.com/dawn/269): Allow losing the surface at Dawn's API level?
         case VK_ERROR_SURFACE_LOST_KHR:
         default:
-            return CheckVkSuccess(::VkResult(result), "QueuePresent");
+            return CheckVkSuccess(device->GetPlatform(), ::VkResult(result), "QueuePresent");
     }
 }
 
@@ -627,6 +639,7 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewInternal(boo
 
     VkSemaphore semaphore = VK_NULL_HANDLE;
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreateSemaphore(device->GetVkDevice(), &createInfo, nullptr, &*semaphore),
         "CreateSemaphore"));
 
@@ -656,7 +669,8 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewInternal(boo
             // swapchains always return that they are out of date.
             if (isReentrant) {
                 // TODO(crbug.com/dawn/269): Allow losing the surface instead?
-                return DAWN_INTERNAL_ERROR(
+                return DAWN_DUMPED_INTERNAL_ERROR(
+                    GetDevice()->GetPlatform(),
                     "Wasn't able to recuperate the surface after a VK_ERROR_OUT_OF_DATE_KHR");
             }
 
@@ -668,7 +682,7 @@ ResultOrError<Ref<TextureViewBase>> SwapChain::GetCurrentTextureViewInternal(boo
         // TODO(crbug.com/dawn/269): Allow losing the surface at Dawn's API level?
         case VK_ERROR_SURFACE_LOST_KHR:
         default:
-            DAWN_TRY(CheckVkSuccess(::VkResult(result), "AcquireNextImage"));
+            DAWN_TRY(CheckVkSuccess(device->GetPlatform(), ::VkResult(result), "AcquireNextImage"));
     }
 
     TextureDescriptor textureDesc;
