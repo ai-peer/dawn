@@ -298,6 +298,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "868b2fe5_74a574e4",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-08T11:57:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "85e34433_e7ce2877",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c4a47a2_57048ee0",
@@ -438,6 +456,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6352b4_63985abb",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-08T11:57:55Z",
+      "side": 1,
+      "message": "Ah nevermind :)",
+      "parentUuid": "95c95095_f1486087",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "466d138d_190b7901",
@@ -475,6 +511,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4cd6ad2_fd34b292",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-08T11:57:55Z",
+      "side": 1,
+      "message": "The implicitness was ever so slightly confusing but either way is probably ok.",
+      "parentUuid": "202bca77_83687a34",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecbea19c_d86bc3bf",
         "filename": "src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
         "patchSetId": 8
@@ -504,6 +558,24 @@
       "side": 1,
       "message": "Maybe I\u0027m missing the obvious, but I can\u0027t think of an easy way of having such a list. I think these parameterized test suites need to be instantiated with the backend in order for them to be runnable with it at all, which enables all the tests by default.\n\nUnless you just mean remove the suppressions and have a big list of test patterns in a `--gtest_filter` flag when we want to test this on CQ?",
       "parentUuid": "ecbea19c_d86bc3bf",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c78dd94_286ee9fe",
+        "filename": "src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-08T11:57:55Z",
+      "side": 1,
+      "message": "I didn\u0027t realize that we\u0027d start running emulator tests on CI and not just with a script. Ok to add the emulator to the params. Do you expect to add the backend to most tests over time or just a select few?\n\nAlso nit: can you assign the TODO to a dawn:N or tint:N issue instead of your LDAP? The code is a shared artifact with shared responsibility and the issue could contain the context for the TODO if needed. (could be a catchall emulator issue for now)",
+      "parentUuid": "50b230f5_6a01019b",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
