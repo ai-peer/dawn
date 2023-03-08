@@ -300,6 +300,7 @@ list(APPEND TINT_LIB_SRCS
   sem/evaluation_stage.h
   sem/expression.cc
   sem/expression.h
+  sem/external_texture.h
   sem/for_loop_statement.cc
   sem/for_loop_statement.h
   sem/function_expression.cc
@@ -542,6 +543,8 @@ list(APPEND TINT_LIB_SRCS
   writer/binding_point.h
   writer/check_supported_extensions.cc
   writer/check_supported_extensions.h
+  writer/external_texture_options.cc
+  writer/external_texture_options.h
   writer/flatten_bindings.cc
   writer/flatten_bindings.h
   writer/float_to_string.cc
