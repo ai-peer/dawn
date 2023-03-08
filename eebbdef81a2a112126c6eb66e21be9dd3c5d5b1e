@@ -94,6 +94,30 @@
       },
       "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9df9b41_09c9f0dc",
+        "filename": "src/tint/transform/promote_side_effects_to_decl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-08T18:36:23Z",
+      "side": 0,
+      "message": "\u003e I believe you pushed RHS as you needed to ensure that a RHS reference was snapshotted before the LHS side effects could change the referenced value?\n\nThat sounds right. I think just the fact that we get to remove this confusing code is a strong argument for consistent left-to-right evaluation, and probably why it\u0027s like this in most languages we\u0027ve looked at.",
+      "parentUuid": "85aace56_51fd9825",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 9
+      },
+      "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
