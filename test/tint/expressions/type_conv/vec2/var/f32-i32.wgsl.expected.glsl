@@ -4,8 +4,12 @@ layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 void unused_entry_point() {
   return;
 }
+ivec2 tint_ftoi(vec2 v) {
+  return mix(ivec2(2147483647), mix(ivec2(v), ivec2(-2147483648), lessThan(v, vec2(-2147483648.0f))), lessThan(v, vec2(2147483520.0f)));
+}
+
 vec2 u = vec2(1.0f);
 void f() {
-  ivec2 v = ivec2(u);
+  ivec2 v = tint_ftoi(u);
 }
 
