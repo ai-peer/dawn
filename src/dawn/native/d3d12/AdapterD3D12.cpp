@@ -176,7 +176,8 @@ void Adapter::InitializeSupportedFeaturesImpl() {
 MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     D3D12_FEATURE_DATA_D3D12_OPTIONS featureData = {};
 
-    DAWN_TRY(CheckHRESULT(mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS,
+    DAWN_TRY(CheckHRESULT(nullptr,
+                          mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS,
                                                             &featureData, sizeof(featureData)),
                           "CheckFeatureSupport D3D12_FEATURE_D3D12_OPTIONS"));
 
@@ -186,7 +187,8 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     D3D12_FEATURE_DATA_FEATURE_LEVELS featureLevels;
     featureLevels.NumFeatureLevels = sizeof(levelsToQuery) / sizeof(D3D_FEATURE_LEVEL);
     featureLevels.pFeatureLevelsRequested = levelsToQuery;
-    DAWN_TRY(CheckHRESULT(mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_FEATURE_LEVELS,
+    DAWN_TRY(CheckHRESULT(nullptr,
+                          mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_FEATURE_LEVELS,
                                                             &featureLevels, sizeof(featureLevels)),
                           "CheckFeatureSupport D3D12_FEATURE_FEATURE_LEVELS"));
 
@@ -439,15 +441,15 @@ MaybeError Adapter::InitializeDebugLayerFilters() {
     filter.DenyList.pIDList = denyIds;
 
     ComPtr<ID3D12InfoQueue> infoQueue;
-    DAWN_TRY(CheckHRESULT(mD3d12Device.As(&infoQueue),
+    DAWN_TRY(CheckHRESULT(nullptr, mD3d12Device.As(&infoQueue),
                           "D3D12 QueryInterface ID3D12Device to ID3D12InfoQueue"));
 
     // To avoid flooding the console, a storage-filter is also used to
     // prevent messages from getting logged.
-    DAWN_TRY(
-        CheckHRESULT(infoQueue->PushStorageFilter(&filter), "ID3D12InfoQueue::PushStorageFilter"));
+    DAWN_TRY(CheckHRESULT(nullptr, infoQueue->PushStorageFilter(&filter),
+                          "ID3D12InfoQueue::PushStorageFilter"));
 
-    DAWN_TRY(CheckHRESULT(infoQueue->PushRetrievalFilter(&filter),
+    DAWN_TRY(CheckHRESULT(nullptr, infoQueue->PushRetrievalFilter(&filter),
                           "ID3D12InfoQueue::PushRetrievalFilter"));
 
     return {};

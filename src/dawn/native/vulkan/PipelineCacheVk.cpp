@@ -60,6 +60,7 @@ MaybeError PipelineCache::SerializeToBlobImpl(Blob* blob) {
     size_t bufferSize;
     Device* device = ToBackend(GetDevice());
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, nullptr),
         "GetPipelineCacheData"));
     if (bufferSize == 0) {
@@ -67,6 +68,7 @@ MaybeError PipelineCache::SerializeToBlobImpl(Blob* blob) {
     }
     *blob = CreateBlob(bufferSize);
     DAWN_TRY(CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.GetPipelineCacheData(device->GetVkDevice(), mHandle, &bufferSize, blob->Data()),
         "GetPipelineCacheData"));
     return {};
@@ -89,6 +91,7 @@ void PipelineCache::Initialize() {
     // This should be fine because the handle will be left as null and pipeline creation should
     // continue as if there was no cache.
     MaybeError maybeError = CheckVkSuccess(
+        device->GetPlatform(),
         device->fn.CreatePipelineCache(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
         "CreatePipelineCache");
     if (maybeError.IsError()) {

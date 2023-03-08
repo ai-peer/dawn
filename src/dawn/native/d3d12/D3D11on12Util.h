@@ -33,9 +33,11 @@ class Device;
 // Wraps 11 wrapped resources in a cache.
 class D3D11on12ResourceCacheEntry : public RefCounted {
   public:
-    explicit D3D11on12ResourceCacheEntry(ComPtr<ID3D11On12Device> d3d11on12Device);
+    D3D11on12ResourceCacheEntry(ComPtr<ID3D11On12Device> d3d11on12Device,
+                                platform::Platform* platform);
     D3D11on12ResourceCacheEntry(ComPtr<IDXGIKeyedMutex> d3d11on12Resource,
-                                ComPtr<ID3D11On12Device> d3d11on12Device);
+                                ComPtr<ID3D11On12Device> d3d11on12Device,
+                                platform::Platform* platform);
     ~D3D11on12ResourceCacheEntry() override;
 
     MaybeError AcquireKeyedMutex();
@@ -55,6 +57,7 @@ class D3D11on12ResourceCacheEntry : public RefCounted {
   private:
     ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
     ComPtr<ID3D11On12Device> mD3D11on12Device;
+    platform::Platform* mPlatform;
     int64_t mAcquireCount = 0;
 };
 

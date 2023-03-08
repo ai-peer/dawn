@@ -107,7 +107,8 @@ enum class Compiler { FXC, DXC };
     X(std::string_view, fxcShaderProfile)           \
     X(pD3DCompile, d3dCompile)                      \
     X(IDxcLibrary*, dxcLibrary)                     \
-    X(IDxcCompiler*, dxcCompiler)
+    X(IDxcCompiler*, dxcCompiler)                   \
+    X(CacheKey::UnsafeUnkeyedValue<platform::Platform*>, platform)
 
 DAWN_SERIALIZABLE(struct, HlslCompilationRequest, HLSL_COMPILATION_REQUEST_MEMBERS){};
 #undef HLSL_COMPILATION_REQUEST_MEMBERS
@@ -181,7 +182,9 @@ ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const D3DBytecodeCompilationReq
                                                  const std::string& entryPointName,
                                                  const std::string& hlslSource) {
     ComPtr<IDxcBlobEncoding> sourceBlob;
-    DAWN_TRY(CheckHRESULT(r.dxcLibrary->CreateBlobWithEncodingFromPinned(
+    platform::Platform* platform = r.platform.UnsafeGetValue();
+    DAWN_TRY(CheckHRESULT(platform,
+                          r.dxcLibrary->CreateBlobWithEncodingFromPinned(
                               hlslSource.c_str(), hlslSource.length(), CP_UTF8, &sourceBlob),
                           "DXC create blob"));
 
@@ -191,24 +194,25 @@ ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const D3DBytecodeCompilationReq
     std::vector<const wchar_t*> arguments = GetDXCArguments(r.compileFlags, r.hasShaderF16Feature);
 
     ComPtr<IDxcOperationResult> result;
-    DAWN_TRY(CheckHRESULT(r.dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
+    DAWN_TRY(CheckHRESULT(platform,
+                          r.dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
                                                  r.dxcShaderProfile.data(), arguments.data(),
                                                  arguments.size(), nullptr, 0, nullptr, &result),
                           "DXC compile"));
 
     HRESULT hr;
-    DAWN_TRY(CheckHRESULT(result->GetStatus(&hr), "DXC get status"));
+    DAWN_TRY(CheckHRESULT(r.platform.UnsafeGetValue(), result->GetStatus(&hr), "DXC get status"));
 
     if (FAILED(hr)) {
         ComPtr<IDxcBlobEncoding> errors;
-        DAWN_TRY(CheckHRESULT(result->GetErrorBuffer(&errors), "DXC get error buffer"));
+        DAWN_TRY(CheckHRESULT(platform, result->GetErrorBuffer(&errors), "DXC get error buffer"));
 
         return DAWN_VALIDATION_ERROR("DXC compile failed with: %s",
                                      static_cast<char*>(errors->GetBufferPointer()));
     }
 
     ComPtr<IDxcBlob> compiledShader;
-    DAWN_TRY(CheckHRESULT(result->GetResult(&compiledShader), "DXC get result"));
+    DAWN_TRY(CheckHRESULT(platform, result->GetResult(&compiledShader), "DXC get result"));
     return std::move(compiledShader);
 }
 

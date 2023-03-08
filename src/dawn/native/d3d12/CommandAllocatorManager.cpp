@@ -44,6 +44,7 @@ ResultOrError<ID3D12CommandAllocator*> CommandAllocatorManager::ReserveCommandAl
         ASSERT(firstFreeIndex == mAllocatorCount);
         mAllocatorCount++;
         DAWN_TRY(CheckHRESULT(
+            device->GetPlatform(),
             device->GetD3D12Device()->CreateCommandAllocator(
                 D3D12_COMMAND_LIST_TYPE_DIRECT, IID_PPV_ARGS(&mCommandAllocators[firstFreeIndex])),
             "D3D12 create command allocator"));
@@ -62,7 +63,8 @@ ResultOrError<ID3D12CommandAllocator*> CommandAllocatorManager::ReserveCommandAl
 MaybeError CommandAllocatorManager::Tick(ExecutionSerial lastCompletedSerial) {
     // Reset all command allocators that are no longer in flight
     for (auto it : mInFlightCommandAllocators.IterateUpTo(lastCompletedSerial)) {
-        DAWN_TRY(CheckHRESULT(it.commandAllocator->Reset(), "D3D12 reset command allocator"));
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(), it.commandAllocator->Reset(),
+                              "D3D12 reset command allocator"));
         mFreeAllocators.set(it.index);
     }
     mInFlightCommandAllocators.ClearUpTo(lastCompletedSerial);

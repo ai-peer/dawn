@@ -17,6 +17,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/D3D12Error.h"
@@ -33,13 +34,15 @@ ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
     // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ne-d3d12-d3d12_feature
     D3D12_FEATURE_DATA_ARCHITECTURE arch = {};
     DAWN_TRY(CheckHRESULT(
+        adapter.GetInstance()->GetPlatform(),
         adapter.GetDevice()->CheckFeatureSupport(D3D12_FEATURE_ARCHITECTURE, &arch, sizeof(arch)),
         "ID3D12Device::CheckFeatureSupport"));
 
     info.isUMA = arch.UMA;
 
     D3D12_FEATURE_DATA_D3D12_OPTIONS featureOptions = {};
-    DAWN_TRY(CheckHRESULT(adapter.GetDevice()->CheckFeatureSupport(
+    DAWN_TRY(CheckHRESULT(adapter.GetInstance()->GetPlatform(),
+                          adapter.GetDevice()->CheckFeatureSupport(
                               D3D12_FEATURE_D3D12_OPTIONS, &featureOptions, sizeof(featureOptions)),
                           "ID3D12Device::CheckFeatureSupport"));
     info.resourceHeapTier = featureOptions.ResourceHeapTier;

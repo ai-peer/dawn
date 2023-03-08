@@ -376,6 +376,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "vkCreateShaderModule");
         DAWN_TRY(CheckVkSuccess(
+            device->GetPlatform(),
             device->fn.CreateShaderModule(device->GetVkDevice(), &createInfo, nullptr, &*newHandle),
             "CreateShaderModule"));
     }
@@ -393,7 +394,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
     return std::move(moduleAndSpirv);
 #else
-    return DAWN_INTERNAL_ERROR("TINT_BUILD_SPV_WRITER is not defined.");
+    return DAWN_INTERNAL_ERROR(GetDevice(), "TINT_BUILD_SPV_WRITER is not defined.");
 #endif
 }
 

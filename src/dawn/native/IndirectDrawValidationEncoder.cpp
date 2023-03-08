@@ -310,7 +310,8 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             newBatch.outputParamsOffset = Align(outputParamsSize, minStorageBufferOffsetAlignment);
             outputParamsSize = newBatch.outputParamsOffset + newBatch.outputParamsSize;
             if (outputParamsSize > maxStorageBufferBindingSize) {
-                return DAWN_INTERNAL_ERROR("Too many drawIndexedIndirect calls to validate");
+                return DAWN_DUMPED_INTERNAL_ERROR(device->GetPlatform(),
+                                                  "Too many drawIndexedIndirect calls to validate");
             }
 
             Pass* currentPass = passes.empty() ? nullptr : &passes.back();

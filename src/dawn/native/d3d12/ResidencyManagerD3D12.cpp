@@ -225,6 +225,7 @@ ResultOrError<uint64_t> ResidencyManager::EnsureCanMakeResident(uint64_t sizeToM
 
     if (resourcesToEvict.size() > 0) {
         DAWN_TRY(CheckHRESULT(
+            mDevice->GetPlatform(),
             mDevice->GetD3D12Device()->Evict(resourcesToEvict.size(), resourcesToEvict.data()),
             "Evicting resident heaps to free memory"));
     }

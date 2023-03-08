@@ -72,7 +72,7 @@ ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(Backend* backend,
                                                               ComPtr<IDXGIAdapter> dxgiAdapter,
                                                               const TogglesState& adapterToggles) {
     ComPtr<IDXGIAdapter3> dxgiAdapter3;
-    DAWN_TRY(CheckHRESULT(dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
+    DAWN_TRY(CheckHRESULT(nullptr, dxgiAdapter.As(&dxgiAdapter3), "DXGIAdapter retrieval"));
     Ref<Adapter> adapter =
         AcquireRef(new Adapter(backend, std::move(dxgiAdapter3), adapterToggles));
     DAWN_TRY(adapter->Initialize());
@@ -148,7 +148,7 @@ ComPtr<IDXGIFactory4> Backend::GetFactory() const {
 MaybeError Backend::EnsureDxcLibrary() {
     if (mDxcLibrary == nullptr) {
         DAWN_TRY(CheckHRESULT(
-            mFunctions->dxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mDxcLibrary)),
+            nullptr, mFunctions->dxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mDxcLibrary)),
             "DXC create library"));
         ASSERT(mDxcLibrary != nullptr);
     }
@@ -158,7 +158,7 @@ MaybeError Backend::EnsureDxcLibrary() {
 MaybeError Backend::EnsureDxcCompiler() {
     if (mDxcCompiler == nullptr) {
         DAWN_TRY(CheckHRESULT(
-            mFunctions->dxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&mDxcCompiler)),
+            nullptr, mFunctions->dxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&mDxcCompiler)),
             "DXC create compiler"));
         ASSERT(mDxcCompiler != nullptr);
     }
@@ -168,6 +168,7 @@ MaybeError Backend::EnsureDxcCompiler() {
 MaybeError Backend::EnsureDxcValidator() {
     if (mDxcValidator == nullptr) {
         DAWN_TRY(CheckHRESULT(
+            nullptr,
             mFunctions->dxcCreateInstance(CLSID_DxcValidator, IID_PPV_ARGS(&mDxcValidator)),
             "DXC create validator"));
         ASSERT(mDxcValidator != nullptr);
@@ -199,18 +200,20 @@ void Backend::AcquireDxcVersionInformation() {
 
         ComPtr<IDxcVersionInfo> compilerVersionInfo;
 
-        DAWN_TRY(CheckHRESULT(mDxcCompiler.As(&compilerVersionInfo),
+        DAWN_TRY(CheckHRESULT(nullptr, mDxcCompiler.As(&compilerVersionInfo),
                               "D3D12 QueryInterface IDxcCompiler to IDxcVersionInfo"));
         uint32_t compilerMajor, compilerMinor;
-        DAWN_TRY(CheckHRESULT(compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
+        DAWN_TRY(CheckHRESULT(nullptr,
+                              compilerVersionInfo->GetVersion(&compilerMajor, &compilerMinor),
                               "IDxcVersionInfo::GetVersion"));
 
         ComPtr<IDxcVersionInfo> validatorVersionInfo;
 
-        DAWN_TRY(CheckHRESULT(mDxcValidator.As(&validatorVersionInfo),
+        DAWN_TRY(CheckHRESULT(nullptr, mDxcValidator.As(&validatorVersionInfo),
                               "D3D12 QueryInterface IDxcValidator to IDxcVersionInfo"));
         uint32_t validatorMajor, validatorMinor;
-        DAWN_TRY(CheckHRESULT(validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
+        DAWN_TRY(CheckHRESULT(nullptr,
+                              validatorVersionInfo->GetVersion(&validatorMajor, &validatorMinor),
                               "IDxcVersionInfo::GetVersion"));
 
         // Pack major and minor version number into a single version number.

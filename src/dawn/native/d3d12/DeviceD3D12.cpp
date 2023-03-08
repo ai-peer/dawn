@@ -79,9 +79,9 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
     queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-    DAWN_TRY(
-        CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
-                     "D3D12 create command queue"));
+    DAWN_TRY(CheckHRESULT(
+        GetPlatform(), mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+        "D3D12 create command queue"));
 
     if ((HasFeature(Feature::TimestampQuery) || HasFeature(Feature::TimestampQueryInsidePasses)) &&
         !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {
@@ -90,7 +90,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
         // always support timestamps except where there are bugs in Windows container and vGPU
         // implementations.
         uint64_t frequency;
-        DAWN_TRY(CheckHRESULT(mCommandQueue->GetTimestampFrequency(&frequency),
+        DAWN_TRY(CheckHRESULT(GetPlatform(), mCommandQueue->GetTimestampFrequency(&frequency),
                               "D3D12 get timestamp frequency"));
         // Calculate the period in nanoseconds by the frequency.
         mTimestampPeriod = static_cast<float>(1e9) / frequency;
@@ -100,14 +100,16 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     // value.
     mCommandQueue.As(&mD3d12SharingContract);
 
-    DAWN_TRY(CheckHRESULT(mD3d12Device->CreateFence(uint64_t(GetLastSubmittedCommandSerial()),
+    DAWN_TRY(CheckHRESULT(GetPlatform(),
+                          mD3d12Device->CreateFence(uint64_t(GetLastSubmittedCommandSerial()),
                                                     D3D12_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
                           "D3D12 create fence"));
 
     mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
     ASSERT(mFenceEvent != nullptr);
 
-    DAWN_TRY(CheckHRESULT(mD3d12Device->CreateSharedHandle(mFence.Get(), nullptr, GENERIC_ALL,
+    DAWN_TRY(CheckHRESULT(GetPlatform(),
+                          mD3d12Device->CreateSharedHandle(mFence.Get(), nullptr, GENERIC_ALL,
                                                            nullptr, &mFenceHandle),
                           "D3D12 create fence handle"));
     ASSERT(mFenceHandle != nullptr);
@@ -271,7 +273,8 @@ ResultOrError<CommandRecordingContext*> Device::GetPendingCommandContext(
     // Callers of GetPendingCommandList do so to record commands. Only reserve a command
     // allocator when it is needed so we don't submit empty command lists
     if (!mPendingCommands.IsOpen()) {
-        DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
+        DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get(),
+                                       GetPlatform()));
     }
     if (submitMode == Device::SubmitMode::Normal) {
         mPendingCommands.SetNeedsSubmit();
@@ -359,6 +362,7 @@ MaybeError Device::NextSerial() {
                  uint64_t(GetLastSubmittedCommandSerial()));
 
     return CheckHRESULT(
+        GetPlatform(),
         mCommandQueue->Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
         "D3D12 command queue signal fence");
 }
@@ -366,7 +370,8 @@ MaybeError Device::NextSerial() {
 MaybeError Device::WaitForSerial(ExecutionSerial serial) {
     DAWN_TRY(CheckPassedSerials());
     if (GetCompletedCommandSerial() < serial) {
-        DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
+        DAWN_TRY(CheckHRESULT(GetPlatform(),
+                              mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
                               "D3D12 set event on completion"));
         WaitForSingleObject(mFenceEvent, INFINITE);
         DAWN_TRY(CheckPassedSerials());
@@ -379,7 +384,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
         // Try to query the failure reason.
-        DAWN_TRY(CheckHRESULT(mD3d12Device->GetDeviceRemovedReason(),
+        DAWN_TRY(CheckHRESULT(GetPlatform(), mD3d12Device->GetDeviceRemovedReason(),
                               "ID3D12Device::GetDeviceRemovedReason"));
         // Otherwise, return a generic device lost error.
         return DAWN_DEVICE_LOST_ERROR("Device lost");
@@ -703,7 +708,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
     }
 
     ComPtr<ID3D12InfoQueue> infoQueue;
-    DAWN_TRY(CheckHRESULT(mD3d12Device.As(&infoQueue),
+    DAWN_TRY(CheckHRESULT(GetPlatform(), mD3d12Device.As(&infoQueue),
                           "D3D12 QueryInterface ID3D12Device to ID3D12InfoQueue"));
     uint64_t totalErrors = infoQueue->GetNumStoredMessagesAllowedByRetrievalFilter();
 
@@ -714,7 +719,8 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
         return {};
     }
 
-    auto error = DAWN_INTERNAL_ERROR("The D3D12 debug layer reported uncaught errors.");
+    auto error = DAWN_DUMPED_INTERNAL_ERROR(GetPlatform(),
+                                            "The D3D12 debug layer reported uncaught errors.");
 
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error.get());
 

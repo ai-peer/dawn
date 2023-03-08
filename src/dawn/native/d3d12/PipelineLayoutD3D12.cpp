@@ -264,9 +264,10 @@ MaybeError PipelineLayout::Initialize() {
             messageStream << std::endl;
         }
         messageStream << "D3D12 serialize root signature";
-        DAWN_TRY(CheckHRESULT(hr, messageStream.str().c_str()));
+        DAWN_TRY(CheckHRESULT(device->GetPlatform(), hr, messageStream.str().c_str()));
     }
-    DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateRootSignature(
+    DAWN_TRY(CheckHRESULT(device->GetPlatform(),
+                          device->GetD3D12Device()->CreateRootSignature(
                               0, mRootSignatureBlob->GetBufferPointer(),
                               mRootSignatureBlob->GetBufferSize(), IID_PPV_ARGS(&mRootSignature)),
                           "D3D12 create root signature"));

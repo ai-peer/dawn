@@ -98,6 +98,7 @@ class DAWN_PLATFORM_EXPORT Platform {
     virtual CachingInterface* GetCachingInterface();
 
     virtual std::unique_ptr<WorkerTaskPool> CreateWorkerTaskPool();
+    virtual void DumpWithoutCrashing();
 
   private:
     Platform(const Platform&) = delete;

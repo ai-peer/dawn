@@ -153,7 +153,8 @@ ShaderVisibleDescriptorAllocator::AllocateHeap(uint32_t descriptorCount) const {
     heapDescriptor.NumDescriptors = descriptorCount;
     heapDescriptor.Flags = GetD3D12HeapFlags(mHeapType);
     heapDescriptor.NodeMask = 0;
-    DAWN_TRY(CheckOutOfMemoryHRESULT(mDevice->GetD3D12Device()->CreateDescriptorHeap(
+    DAWN_TRY(CheckOutOfMemoryHRESULT(mDevice->GetPlatform(),
+                                     mDevice->GetD3D12Device()->CreateDescriptorHeap(
                                          &heapDescriptor, IID_PPV_ARGS(&d3d12DescriptorHeap)),
                                      "ID3D12Device::CreateDescriptorHeap"));
 
