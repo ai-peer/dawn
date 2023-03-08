@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "464f7ea7_00aab9ae",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-08T18:14:20Z",
+      "side": 1,
+      "message": "Cruft from approach I didn\u0027t end up going with. Removed.",
+      "parentUuid": "504d9b32_b26abc34",
+      "revId": "c7964e8a2a772393cc6ba9ffc70b8d2b64b39587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "017738a9_7c4e4be0",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-08T17:43:06Z",
       "side": 1,
       "message": "This is actually broken because we\u0027re processing the LHS twice. But it was already broken before this CL, so this shouldn\u0027t block this from landing. I\u0027ve opened crbug.com/tint/1869 to track this.",
+      "revId": "c7964e8a2a772393cc6ba9ffc70b8d2b64b39587",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "575b4812_10042435",
+        "filename": "src/tint/resolver/uniformity.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-08T18:14:20Z",
+      "side": 1,
+      "message": "Yeah, I noticed this, but wasn\u0027t sure whether processing the same thing twice would cause any issues. Thanks for filing the issue.",
+      "parentUuid": "017738a9_7c4e4be0",
       "revId": "c7964e8a2a772393cc6ba9ffc70b8d2b64b39587",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

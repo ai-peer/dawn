@@ -70,6 +70,30 @@
       },
       "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85aace56_51fd9825",
+        "filename": "src/tint/transform/promote_side_effects_to_decl.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-08T18:14:20Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "cbf00806_a677990f",
+      "range": {
+        "startLine": 355,
+        "startChar": 8,
+        "endLine": 368,
+        "endChar": 9
+      },
+      "revId": "eebbdef81a2a112126c6eb66e21be9dd3c5d5b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
