@@ -1530,7 +1530,7 @@
             },
             {
                 "name": "process events",
-                "tags": ["upstream", "emscripten"]
+                "tags": ["upstream", "emscripten", "dawn"]
             },
             {
                 "name": "request adapter",
