@@ -1446,6 +1446,7 @@ void DawnTestBase::WaitABit(wgpu::Device targetDevice) {
     if (targetDevice != nullptr) {
         targetDevice.Tick();
     }
+    mInstance.ProcessEvents();
     FlushWire();
 
     utils::USleep(100);
