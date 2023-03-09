@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bdacfe8_1a3becb4",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-09T17:15:33Z",
+      "side": 1,
+      "message": "I think from chrome `webgpu_decoder_impl.cc` side, only this `DawnNative.h` header is exposed. I don\u0027t know the exact reasons. It\u0027s the same thing why we have to added `DeviceTick` function in this header. Chrome uses `DeviceTick` instead of `wgpu::Device::Tick`\n\nSo if we want to change the webgpu\u0027s polling code in chrome to invoke `Instance::ProcessEvents` instead of `Device::Tick` we need to add the `ProcessEvents` function here.",
+      "parentUuid": "9de5e347_b7ecb551",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b94dd7c_9bafae0c",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 2
@@ -83,6 +101,24 @@
       "writtenOn": "2023-03-09T16:44:33Z",
       "side": 1,
       "message": "When does this happen? Is it because of mocking in tests?",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f950b068_1528c69c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-09T17:15:33Z",
+      "side": 1,
+      "message": "`DeviceBase::DeviceBase()` ctor version doesn\u0027t have adapter passed in. I think this is used by mocking.\nBut not sure whether we actually call `Initialize` on the mock device. Should this be changed to ASSERT instead?",
+      "parentUuid": "5b94dd7c_9bafae0c",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
