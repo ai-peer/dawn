@@ -1925,6 +1925,12 @@
                 ]
             },
             {
+                "name": "unset vertex buffer",
+                "args": [
+                    {"name": "slot", "type": "uint32_t"}
+                ]
+            },
+            {
                 "name": "set index buffer",
                 "args": [
                     {"name": "buffer", "type": "buffer"},
@@ -2132,6 +2138,12 @@
                     {"name": "buffer", "type": "buffer"},
                     {"name": "offset", "type": "uint64_t", "default": "0"},
                     {"name": "size", "type": "uint64_t", "default": "WGPU_WHOLE_SIZE"}
+                ]
+            },
+            {
+                "name": "unset vertex buffer",
+                "args": [
+                    {"name": "slot", "type": "uint32_t"}
                 ]
             },
             {
