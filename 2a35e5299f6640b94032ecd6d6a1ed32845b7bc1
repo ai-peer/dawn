@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9266c79a_f75e7d50",
+        "filename": "generator/templates/dawn/native/ProcTable.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-09T06:02:39Z",
+      "side": 1,
+      "message": "should this be expanded to be included in every method? Most of the time only the `if (device.IsLost())` condition is checked. It should be cheap.",
+      "revId": "2a35e5299f6640b94032ecd6d6a1ed32845b7bc1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
