@@ -121,6 +121,24 @@
       "parentUuid": "5b94dd7c_9bafae0c",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2757f62f_bfd1d2cf",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-09T17:32:49Z",
+      "side": 1,
+      "message": "Just checked. We do call `Initialize` on the mock device here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/native/mocks/DeviceMock.cpp;drc\u003dbec0ef46974cd9a6bc0f1f1ae34baa11913f77af;l\u003d115",
+      "parentUuid": "f950b068_1528c69c",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
