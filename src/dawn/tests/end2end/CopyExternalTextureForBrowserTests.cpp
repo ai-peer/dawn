@@ -50,6 +50,10 @@ std::array<std::array<utils::RGBA8, 4>, 4> kDefaultSourceRGBA = {
     std::array<utils::RGBA8, 4>(
         {utils::RGBA8::kGreen, utils::RGBA8::kGreen, utils::RGBA8::kBlue, utils::RGBA8::kBlue})};
 
+std::array<std::array<utils::RGBA8, 2>, 2> kScaledSourceRGBA = {
+    std::array<utils::RGBA8, 2>({utils::RGBA8::kBlack, utils::RGBA8::kRed}),
+    std::array<utils::RGBA8, 2>({utils::RGBA8::kGreen, utils::RGBA8::kBlue})};
+
 template <typename Parent>
 class CopyExternalTextureForBrowserTests : public Parent {
   protected:
@@ -125,18 +129,23 @@ class CopyExternalTextureForBrowserTests : public Parent {
 
     std::vector<utils::RGBA8> GetDefaultExpectedData(bool flipY,
                                                      wgpu::Origin3D srcOrigin,
-                                                     wgpu::Extent3D rect) {
+                                                     wgpu::Extent3D rect,
+                                                     bool naturalSizeEqualsToVisibleSize) {
         std::vector<utils::RGBA8> expected;
         for (uint32_t rowInRect = 0; rowInRect < rect.height; ++rowInRect) {
             for (uint32_t colInRect = 0; colInRect < rect.width; ++colInRect) {
-                uint32_t row = rowInRect + srcOrigin.y;
-                uint32_t col = colInRect + srcOrigin.x;
+                uint32_t row = (rowInRect + srcOrigin.y);
+                uint32_t col = (colInRect + srcOrigin.x);
 
                 if (flipY) {
                     row = (rect.height - rowInRect - 1) + srcOrigin.y;
                 }
 
-                expected.push_back(kDefaultSourceRGBA[row][col]);
+                if (naturalSizeEqualsToVisibleSize) {
+                    expected.push_back(kDefaultSourceRGBA[row][col]);
+                } else {
+                    expected.push_back(kScaledSourceRGBA[row][col]);
+                }
             }
         }
 
@@ -144,6 +153,7 @@ class CopyExternalTextureForBrowserTests : public Parent {
     }
 };
 
+using NaturalSizeEqualsToVisibleSize = bool;
 using FlipY = bool;
 using SrcOrigin = wgpu::Origin3D;
 using DstOrigin = wgpu::Origin3D;
@@ -153,19 +163,31 @@ std::ostream& operator<<(std::ostream& o, wgpu::Origin3D origin) {
     return o;
 }
 
-DAWN_TEST_PARAM_STRUCT(CopyTestParams, SrcOrigin, DstOrigin, FlipY);
+DAWN_TEST_PARAM_STRUCT(CopyTestParams, SrcOrigin, DstOrigin, FlipY, NaturalSizeEqualsToVisibleSize);
 
 class CopyExternalTextureForBrowserTests_Basic
     : public CopyExternalTextureForBrowserTests<DawnTestWithParams<CopyTestParams>> {
   protected:
     void DoBasicCopyTest(const wgpu::Origin3D& srcOrigin,
                          const wgpu::Origin3D& dstOrigin,
-                         const wgpu::Extent3D& copySize,
-                         const wgpu::CopyTextureForBrowserOptions options = {}) {
+                         wgpu::Extent3D& copySize,
+                         const wgpu::CopyTextureForBrowserOptions options = {},
+                         bool naturalSizeEqualsToVisibleSize = true) {
         wgpu::ExternalTexture externalTexture = CreateDefaultExternalTexture();
         wgpu::ImageCopyExternalTexture srcImageCopyExternalTexture;
         srcImageCopyExternalTexture.externalTexture = externalTexture;
         srcImageCopyExternalTexture.origin = srcOrigin;
+
+        // Set natural width to half of visible width and natural height to half of visible height
+        // if natural size is not equal to visible size.
+        if (!naturalSizeEqualsToVisibleSize) {
+            srcImageCopyExternalTexture.naturalSize = {kWidth / 2, kHeight / 2};
+            srcImageCopyExternalTexture.origin = {srcOrigin.x / 2, srcOrigin.y / 2};
+            copySize.width = copySize.width / 2;
+            copySize.height = copySize.height / 2;
+        } else {
+            srcImageCopyExternalTexture.naturalSize = {kWidth, kHeight};
+        }
 
         wgpu::Texture dstTexture =
             Create2DTexture(device, kWidth, kHeight, wgpu::TextureFormat::RGBA8Unorm,
@@ -176,8 +198,9 @@ class CopyExternalTextureForBrowserTests_Basic
 
         queue.CopyExternalTextureForBrowser(&srcImageCopyExternalTexture, &dstImageCopyTexture,
                                             &copySize, &options);
-        std::vector<utils::RGBA8> expected =
-            GetDefaultExpectedData(options.flipY, srcOrigin, copySize);
+
+        std::vector<utils::RGBA8> expected = GetDefaultExpectedData(
+            options.flipY, srcOrigin, copySize, naturalSizeEqualsToVisibleSize);
 
         EXPECT_TEXTURE_EQ(expected.data(), dstTexture, dstOrigin, copySize);
     }
@@ -193,7 +216,6 @@ TEST_P(CopyExternalTextureForBrowserTests_Basic, Copy) {
 
     wgpu::Origin3D srcOrigin = GetParam().mSrcOrigin;
     wgpu::Origin3D dstOrigin = GetParam().mDstOrigin;
-
     wgpu::Extent3D copySize = {kWidth, kHeight};
 
     if (srcOrigin.x != 0 || srcOrigin.y != 0 || dstOrigin.x != 0 || dstOrigin.y != 0) {
@@ -201,7 +223,8 @@ TEST_P(CopyExternalTextureForBrowserTests_Basic, Copy) {
         copySize.height = kHeight / 2;
     }
 
-    DoBasicCopyTest(srcOrigin, dstOrigin, copySize, options);
+    DoBasicCopyTest(srcOrigin, dstOrigin, copySize, options,
+                    GetParam().mNaturalSizeEqualsToVisibleSize);
 }
 
 DAWN_INSTANTIATE_TEST_P(CopyExternalTextureForBrowserTests_Basic,
@@ -209,4 +232,5 @@ DAWN_INSTANTIATE_TEST_P(CopyExternalTextureForBrowserTests_Basic,
                          VulkanBackend()},
                         std::vector<wgpu::Origin3D>({{0, 0}, {2, 0}, {0, 2}, {2, 2}}),
                         std::vector<wgpu::Origin3D>({{0, 0}, {2, 0}, {0, 2}, {2, 2}}),
-                        std::vector<bool>({false, true}));
+                        std::vector<bool>({false, true}),
+                        std::vector<bool>({true, false}));
