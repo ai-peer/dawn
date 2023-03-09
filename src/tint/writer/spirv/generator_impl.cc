@@ -19,6 +19,7 @@
 
 #include "src/tint/transform/add_block_attribute.h"
 #include "src/tint/transform/add_empty_entry_point.h"
+#include "src/tint/transform/binding_remapper.h"
 #include "src/tint/transform/builtin_polyfill.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/demote_to_helper.h"
@@ -48,6 +49,12 @@ namespace tint::writer::spirv {
 SanitizedResult Sanitize(const Program* in, const Options& options) {
     transform::Manager manager;
     transform::DataMap data;
+
+    manager.Add<transform::BindingRemapper>();
+    data.Add<transform::BindingRemapper::Remappings>(
+        options.binding_remapper_options.binding_points,
+        options.binding_remapper_options.access_controls,
+        options.binding_remapper_options.allow_collisions);
 
     manager.Add<transform::DisableUniformityAnalysis>();
 
