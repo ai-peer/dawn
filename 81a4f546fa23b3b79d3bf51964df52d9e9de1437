@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32dc1dc9_223ee444",
+        "filename": "src/tint/switch.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-09T13:29:45Z",
+      "side": 1,
+      "message": "Does this mean that `TINT_DEFER` is executed after the RHS of the `return` is executed but before the function actually happens?",
+      "revId": "81a4f546fa23b3b79d3bf51964df52d9e9de1437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
