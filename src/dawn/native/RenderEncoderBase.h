@@ -48,6 +48,7 @@ class RenderEncoderBase : public ProgrammableEncoder {
 
     void APISetPipeline(RenderPipelineBase* pipeline);
 
+    void APIUnsetVertexBuffer(uint32_t slot);
     void APISetVertexBuffer(uint32_t slot, BufferBase* buffer, uint64_t offset, uint64_t size);
     void APISetIndexBuffer(BufferBase* buffer,
                            wgpu::IndexFormat format,

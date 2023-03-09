@@ -354,6 +354,23 @@ void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
         "encoding %s.SetIndexBuffer(%s, %s, %u, %u).", this, buffer, format, offset, size);
 }
 
+void RenderEncoderBase::APIUnsetVertexBuffer(uint32_t slot) {
+    mEncodingContext->TryEncode(
+        this,
+        [&](CommandAllocator* allocator) -> MaybeError {
+            if (IsValidationEnabled()) {
+                DAWN_INVALID_IF(slot >= kMaxVertexBuffers,
+                                "Vertex buffer slot (%u) is larger the maximum (%u)", slot,
+                                kMaxVertexBuffers - 1);
+            }
+
+            mCommandBufferState.UnsetVertexBuffer(VertexBufferSlot(uint8_t(slot)));
+
+            return {};
+        },
+        "encoding %s.UnsetVertexBuffer(%u).", this, slot);
+}
+
 void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
                                            BufferBase* buffer,
                                            uint64_t offset,

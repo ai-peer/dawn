@@ -105,6 +105,60 @@ class VertexBufferValidationTest : public ValidationTest {
 };
 
 // Check that vertex buffers still count as bound if we switch the pipeline.
+TEST_F(VertexBufferValidationTest, UnsetVertexBuffer) {
+    PlaceholderRenderPass renderPass(device);
+    wgpu::ShaderModule vsModule = MakeVertexShader(1);
+
+    wgpu::RenderPipeline pipeline = MakeRenderPipeline(vsModule, 1);
+
+    wgpu::Buffer vertexBuffer = MakeVertexBuffer();
+
+    // Control case: set the vertex buffer needed by a pipeline in render pass is valid.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.Draw(3);
+        pass.End();
+        encoder.Finish();
+    }
+    // Error case: unset the vertex buffer needed by a pipeline in render pass is an error.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.UnsetVertexBuffer(0);
+        pass.Draw(3);
+        pass.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
+    renderBundleDesc.colorFormatsCount = 1;
+    renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
+    // Control case: set the vertex buffer needed by a pipeline in render bundle encoder is valid.
+    {
+        wgpu::RenderBundleEncoder encoder = device.CreateRenderBundleEncoder(&renderBundleDesc);
+        encoder.SetPipeline(pipeline);
+        encoder.SetVertexBuffer(0, vertexBuffer);
+        encoder.Draw(3);
+        encoder.Finish();
+    }
+    // Error case: unset the vertex buffer needed by a pipeline in render bundle encoder is an
+    // error.
+    {
+        wgpu::RenderBundleEncoder encoder = device.CreateRenderBundleEncoder(&renderBundleDesc);
+        encoder.SetPipeline(pipeline);
+        encoder.SetVertexBuffer(0, vertexBuffer);
+        encoder.UnsetVertexBuffer(0);
+        encoder.Draw(3);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
+// Check that vertex buffers still count as bound if we switch the pipeline.
 TEST_F(VertexBufferValidationTest, VertexBuffersInheritedBetweenPipelines) {
     PlaceholderRenderPass renderPass(device);
     wgpu::ShaderModule vsModule2 = MakeVertexShader(2);
@@ -139,6 +193,54 @@ TEST_F(VertexBufferValidationTest, VertexBuffersInheritedBetweenPipelines) {
         pass.End();
     }
     encoder.Finish();
+}
+
+// Check that inherited vertex buffers can be unset, and the unset operation does not impact
+// previous pipeline.
+TEST_F(VertexBufferValidationTest, UnsetInheritedVertexBuffers) {
+    PlaceholderRenderPass renderPass(device);
+    wgpu::ShaderModule vsModule2 = MakeVertexShader(2);
+    wgpu::ShaderModule vsModule1 = MakeVertexShader(1);
+
+    wgpu::RenderPipeline pipeline2 = MakeRenderPipeline(vsModule2, 2);
+    wgpu::RenderPipeline pipeline1 = MakeRenderPipeline(vsModule1, 1);
+
+    wgpu::Buffer vertexBuffer1 = MakeVertexBuffer();
+    wgpu::Buffer vertexBuffer2 = MakeVertexBuffer();
+
+    // Control case: inherited vertex buffers can be unset, and the unset operation does not impact
+    // previous pipeline.
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(pipeline2);
+        pass.SetVertexBuffer(0, vertexBuffer1);
+        pass.SetVertexBuffer(1, vertexBuffer2);
+        pass.Draw(3);
+        pass.SetPipeline(pipeline1);
+        pass.UnsetVertexBuffer(1);
+        pass.Draw(3);
+        pass.End();
+        encoder.Finish();
+    }
+
+    // Error case: inherited vertex buffers can be unset, incorrect unset operation can make the
+    // pipeline lack of vertex buffer.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(pipeline2);
+        pass.SetVertexBuffer(0, vertexBuffer1);
+        pass.SetVertexBuffer(1, vertexBuffer2);
+        pass.Draw(3);
+        pass.SetPipeline(pipeline1);
+        pass.UnsetVertexBuffer(1);
+        pass.UnsetVertexBuffer(0);
+        pass.Draw(3);
+        pass.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
 }
 
 // Check that vertex buffers that are set are reset between render passes.
@@ -215,6 +317,24 @@ TEST_F(VertexBufferValidationTest, VertexBufferSlotValidation) {
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 
+    // Control case: unset the last vertex buffer slot in render passes is ok.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.UnsetVertexBuffer(kMaxVertexBuffers - 1);
+        pass.End();
+        encoder.Finish();
+    }
+
+    // Error case: unset past the last vertex buffer slot in render pass fails.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.UnsetVertexBuffer(kMaxVertexBuffers);
+        pass.End();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
     utils::ComboRenderBundleEncoderDescriptor renderBundleDesc = {};
     renderBundleDesc.colorFormatsCount = 1;
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
@@ -230,6 +350,20 @@ TEST_F(VertexBufferValidationTest, VertexBufferSlotValidation) {
     {
         wgpu::RenderBundleEncoder encoder = device.CreateRenderBundleEncoder(&renderBundleDesc);
         encoder.SetVertexBuffer(kMaxVertexBuffers, buffer, 0);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Control case: unset the last vertex buffer slot in render bundles is ok.
+    {
+        wgpu::RenderBundleEncoder encoder = device.CreateRenderBundleEncoder(&renderBundleDesc);
+        encoder.UnsetVertexBuffer(kMaxVertexBuffers - 1);
+        encoder.Finish();
+    }
+
+    // Error case: unset past the last vertex buffer slot in render bundle fails.
+    {
+        wgpu::RenderBundleEncoder encoder = device.CreateRenderBundleEncoder(&renderBundleDesc);
+        encoder.UnsetVertexBuffer(kMaxVertexBuffers);
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
 }
