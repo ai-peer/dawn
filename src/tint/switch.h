@@ -15,12 +15,14 @@
 #ifndef SRC_TINT_SWITCH_H_
 #define SRC_TINT_SWITCH_H_
 
+#include <array>
 #include <tuple>
 #include <utility>
 
 #include "src/tint/castable.h"
 #include "src/tint/utils/bitcast.h"
 #include "src/tint/utils/defer.h"
+#include "src/tint/utils/math.h"
 
 namespace tint {
 
@@ -48,17 +50,16 @@ using SwitchCaseType = std::remove_pointer_t<traits::ParameterType<std::remove_r
 /// Evaluates to true if the function `FN` has the signature of a Default case in a Switch().
 /// @see Switch().
 template <typename FN>
-inline constexpr bool IsDefaultCase =
-    std::is_same_v<traits::ParameterType<std::remove_reference_t<FN>, 0>, Default>;
+inline constexpr bool IsDefaultCase = std::is_same_v<SwitchCaseType<FN>, Default>;
 
 /// Searches the list of Switch cases for a Default case, returning the index of the Default case.
 /// If the a Default case is not found in the tuple, then -1 is returned.
-template <typename TUPLE, std::size_t START_IDX = 0>
-constexpr int IndexOfDefaultCase() {
+template <typename CASE, typename TUPLE, std::size_t START_IDX = 0>
+constexpr int IndexOfCase() {
     if constexpr (START_IDX < std::tuple_size_v<TUPLE>) {
-        return IsDefaultCase<std::tuple_element_t<START_IDX, TUPLE>>
+        return std::is_same_v<CASE, SwitchCaseType<std::tuple_element_t<START_IDX, TUPLE>>>
                    ? static_cast<int>(START_IDX)
-                   : IndexOfDefaultCase<TUPLE, START_IDX + 1>();
+                   : IndexOfCase<CASE, TUPLE, START_IDX + 1>();
     } else {
         return -1;
     }
@@ -126,6 +127,72 @@ using SwitchReturnType = typename SwitchReturnTypeImpl<
     REQUESTED_TYPE,
     CASE_RETURN_TYPES...>::type;
 
+template <typename T>
+using DefaultToCastableBase = std::conditional_t<std::is_same_v<Default, T>, CastableBase, T>;
+
+template <typename FN>
+static constexpr HashCode HashCodeForCase =
+    TypeInfo::HashCodeOf<DefaultToCastableBase<std::remove_cv_t<detail::SwitchCaseType<FN>>>>();
+
+/// HashCodeTree holds a compile-time generated N-level tree of bitwise-or'd hashcodes for all the
+/// parameter types in CASES.
+template <typename... CASES>
+class HashCodeTree {
+    // Level 0: 0 1 2 3 4 5 6 7
+    // Level 1:  8   9   a   b
+    // Level 2:    c       d
+    // Level 3:        e
+  public:
+    /// Number of template arguments rounded to the next power of two
+    static constexpr size_t kNumCasesRounded = utils::NextPowerOfTwo(sizeof...(CASES));
+    /// Number of levels in the table
+    static constexpr size_t kNumLevels = utils::Log2(kNumCasesRounded) + 1;
+    /// Total number of entries in the tree
+    static constexpr size_t kCount = (1u << kNumLevels) - 1u;
+    /// Base index in #kValues for the level with the given index
+    static constexpr std::array<size_t, kNumLevels> kLevelOffsets = [] {
+        std::array<size_t, kNumLevels> out = {};
+        size_t offset = 0;
+        for (size_t i = 0; i < kNumLevels; i++) {
+            out[i] = offset;
+            offset += kNumCasesRounded >> i;
+        }
+        return out;
+    }();
+    /// The computed hash codes
+    static constexpr std::array<HashCode, kCount> kValues = [] {
+        std::array<HashCode, kCount> out = {};
+        {  // Populate first level's hashcodes
+            size_t i = 0;
+            ((out[i++] = HashCodeForCase<CASES>), ...);
+        }
+        for (size_t l = 1; l < kNumLevels; l++) {
+            size_t prev_level_base = kLevelOffsets[l - 1];
+            size_t curr_level_base = kLevelOffsets[l];
+            size_t n = kNumCasesRounded >> l;
+            for (size_t i = 0; i < n; i++) {
+                size_t a = prev_level_base + (i * 2);
+                size_t b = prev_level_base + (i * 2) + 1;
+                out[curr_level_base + i] = out[a] | out[b];
+            }
+        }
+        return out;
+    }();
+
+    /// @returns the per-level hashcode for the given case
+    template <typename CASE>
+    static constexpr std::array<HashCode, kNumLevels> HashcodesFor() {
+        std::array<HashCode, kNumLevels> out;
+        constexpr size_t case_idx = detail::IndexOfCase<CASE, std::tuple<CASES...>>();
+        for (size_t l = 0; l < kNumLevels; l++) {
+            size_t level = kNumLevels - l - 1;
+            size_t i = kLevelOffsets[level] + (case_idx >> level);
+            out[level] = kValues[i];
+        }
+        return out;
+    }
+};
+
 }  // namespace tint::detail
 
 namespace tint {
@@ -164,7 +231,7 @@ namespace tint {
 template <typename RETURN_TYPE = detail::Infer, typename T = CastableBase, typename... CASES>
 inline auto Switch(T* object, CASES&&... cases) {
     using ReturnType = detail::SwitchReturnType<RETURN_TYPE, traits::ReturnType<CASES>...>;
-    static constexpr int kDefaultIndex = detail::IndexOfDefaultCase<std::tuple<CASES...>>();
+    static constexpr int kDefaultIndex = detail::IndexOfCase<Default, std::tuple<CASES...>>();
     static constexpr bool kHasDefaultCase = kDefaultIndex >= 0;
     static constexpr bool kHasReturnType = !std::is_same_v<ReturnType, void>;
 
@@ -204,6 +271,8 @@ inline auto Switch(T* object, CASES&&... cases) {
 
     const TypeInfo& type_info = object->TypeInfo();
 
+    // using HashCodeTree = detail::HashCodeTree<CASES...>;
+
     // Examines the parameter type of the case function.
     // If the parameter is a pointer type that `object` is of, or derives from, then that case
     // function is called with `object` cast to that type, and `try_case` returns true.
@@ -223,6 +292,11 @@ inline auto Switch(T* object, CASES&&... cases) {
             }
             return true;
         } else {
+            // for (auto hashcode : HashCodeTree::template HashcodesFor<CaseType>()) {
+            //     if (!MaybeAnyOf(hashcode, type_info.full_hashcode)) {
+            //         return false;
+            //     }
+            // }
             if (type_info.Is<CaseType>()) {
                 auto* v = static_cast<CaseType*>(object);
                 if constexpr (kHasReturnType) {
