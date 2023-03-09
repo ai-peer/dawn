@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f79cf43_95ade57e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-09T20:29:17Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "91255abc_077cbc5f",
+      "revId": "b4f095ec29200675807d9fcc967fbfeace025440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50df0b5c_f796a095",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-09T16:57:57Z",
       "side": 0,
       "message": "Same thing here. Let\u0027s see what the bots say.",
+      "revId": "b4f095ec29200675807d9fcc967fbfeace025440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74c06b5_5370baeb",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-09T20:29:17Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "50df0b5c_f796a095",
       "revId": "b4f095ec29200675807d9fcc967fbfeace025440",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
