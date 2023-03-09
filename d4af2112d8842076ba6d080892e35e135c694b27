@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a25db0af_d0062d09",
+        "filename": "src/tint/constant/composite.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-09T21:56:22Z",
+      "side": 1,
+      "message": "Will fix this as a follow up change, as it was an issue not introduced by this CL.",
+      "parentUuid": "31883dd2_3f07306c",
+      "revId": "d4af2112d8842076ba6d080892e35e135c694b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6375b7e4_c1ca32db",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-03-07T17:26:35Z",
       "side": 1,
       "message": "Nit: and struct",
+      "revId": "d4af2112d8842076ba6d080892e35e135c694b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9c607b9_55a042cc",
+        "filename": "src/tint/constant/splat.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-09T21:56:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6375b7e4_c1ca32db",
       "revId": "d4af2112d8842076ba6d080892e35e135c694b27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
