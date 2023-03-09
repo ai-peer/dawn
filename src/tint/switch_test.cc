@@ -538,6 +538,106 @@ TEST(Castable, SwitchReturnNoDefaultInitializer) {
     }
 }
 
+// 0 1
+//  2
+//
+//
+using HCT_2 = detail::HashCodeTree<void(Mammal*), void(Amphibian*)>;
+static_assert(HCT_2::kNumCasesRounded == 2u);
+static_assert(HCT_2::kNumLevels == 2u);
+static_assert(HCT_2::kCount == 3u);
+static_assert(HCT_2::kLevelOffsets[0] == 0u);
+static_assert(HCT_2::kLevelOffsets[1] == 2u);
+static_assert(HCT_2::kLevelOffsets.size() == 2u);
+static_assert(HCT_2::kValues[0] == TypeInfo::HashCodeOf<Mammal>());
+static_assert(HCT_2::kValues[1] == TypeInfo::HashCodeOf<Amphibian>());
+static_assert(HCT_2::kValues[2] ==
+              (TypeInfo::HashCodeOf<Mammal>() | TypeInfo::HashCodeOf<Amphibian>()));
+static_assert(HCT_2::kValues.size() == 3u);
+
+// 0 1 2 X
+//  4   5
+//    6
+//
+using HCT_3 = detail::HashCodeTree<void(Frog*), void(Gecko*), void(Reptile*)>;
+static_assert(HCT_3::kNumCasesRounded == 4u);
+static_assert(HCT_3::kNumLevels == 3u);
+static_assert(HCT_3::kCount == 7u);
+static_assert(HCT_3::kLevelOffsets[0] == 0u);
+static_assert(HCT_3::kLevelOffsets[1] == 4u);
+static_assert(HCT_3::kLevelOffsets[2] == 6u);
+static_assert(HCT_3::kLevelOffsets.size() == 3u);
+static_assert(HCT_3::kValues[0] == TypeInfo::HashCodeOf<Frog>());
+static_assert(HCT_3::kValues[1] == TypeInfo::HashCodeOf<Gecko>());
+static_assert(HCT_3::kValues[2] == TypeInfo::HashCodeOf<Reptile>());
+static_assert(HCT_3::kValues[3] == 0);
+static_assert(HCT_3::kValues[4] == (TypeInfo::HashCodeOf<Frog>() | TypeInfo::HashCodeOf<Gecko>()));
+static_assert(HCT_3::kValues[5] == TypeInfo::HashCodeOf<Reptile>());
+static_assert(HCT_3::kValues[6] == (TypeInfo::HashCodeOf<Frog>() | TypeInfo::HashCodeOf<Gecko>() |
+                                    TypeInfo::HashCodeOf<Reptile>()));
+static_assert(HCT_3::kValues.size() == 7u);
+
+// 0 1 2 3
+//  4   5
+//    6
+//
+using HCT_4 = detail::HashCodeTree<void(Bear*), void(Frog*), void(Gecko*), void(Reptile*)>;
+static_assert(HCT_4::kNumCasesRounded == 4u);
+static_assert(HCT_4::kNumLevels == 3u);
+static_assert(HCT_4::kCount == 7u);
+static_assert(HCT_4::kLevelOffsets[0] == 0u);
+static_assert(HCT_4::kLevelOffsets[1] == 4u);
+static_assert(HCT_4::kLevelOffsets[2] == 6u);
+static_assert(HCT_4::kLevelOffsets.size() == 3u);
+static_assert(HCT_4::kValues[0] == TypeInfo::HashCodeOf<Bear>());
+static_assert(HCT_4::kValues[1] == TypeInfo::HashCodeOf<Frog>());
+static_assert(HCT_4::kValues[2] == TypeInfo::HashCodeOf<Gecko>());
+static_assert(HCT_4::kValues[3] == TypeInfo::HashCodeOf<Reptile>());
+static_assert(HCT_4::kValues[4] == (TypeInfo::HashCodeOf<Bear>() | TypeInfo::HashCodeOf<Frog>()));
+static_assert(HCT_4::kValues[5] ==
+              (TypeInfo::HashCodeOf<Gecko>() | TypeInfo::HashCodeOf<Reptile>()));
+static_assert(HCT_4::kValues[6] ==
+              (TypeInfo::HashCodeOf<Bear>() | TypeInfo::HashCodeOf<Frog>() |
+               TypeInfo::HashCodeOf<Gecko>() | TypeInfo::HashCodeOf<Reptile>()));
+static_assert(HCT_4::kValues.size() == 7u);
+
+// 0 1 2 3 4 X X X
+//  8   9   10   X
+//    12       13
+//        14
+using HCT_5 = detail::
+    HashCodeTree<void(Reptile*), void(Gecko*), void(Lizard*), void(Mammal*), void(Amphibian*)>;
+static_assert(HCT_5::kNumCasesRounded == 8u);
+static_assert(HCT_5::kNumLevels == 4u);
+static_assert(HCT_5::kCount == 15u);
+static_assert(HCT_5::kLevelOffsets[0] == 0u);
+static_assert(HCT_5::kLevelOffsets[1] == 8u);
+static_assert(HCT_5::kLevelOffsets[2] == 12u);
+static_assert(HCT_5::kLevelOffsets[3] == 14u);
+static_assert(HCT_5::kLevelOffsets.size() == 4u);
+static_assert(HCT_5::kValues[0] == TypeInfo::HashCodeOf<Reptile>());
+static_assert(HCT_5::kValues[1] == TypeInfo::HashCodeOf<Gecko>());
+static_assert(HCT_5::kValues[2] == TypeInfo::HashCodeOf<Lizard>());
+static_assert(HCT_5::kValues[3] == TypeInfo::HashCodeOf<Mammal>());
+static_assert(HCT_5::kValues[4] == TypeInfo::HashCodeOf<Amphibian>());
+static_assert(HCT_5::kValues[5] == 0);
+static_assert(HCT_5::kValues[6] == 0);
+static_assert(HCT_5::kValues[7] == 0);
+static_assert(HCT_5::kValues[8] ==
+              (TypeInfo::HashCodeOf<Reptile>() | TypeInfo::HashCodeOf<Gecko>()));
+static_assert(HCT_5::kValues[9] ==
+              (TypeInfo::HashCodeOf<Lizard>() | TypeInfo::HashCodeOf<Mammal>()));
+static_assert(HCT_5::kValues[10] == TypeInfo::HashCodeOf<Amphibian>());
+static_assert(HCT_5::kValues[12] ==
+              (TypeInfo::HashCodeOf<Reptile>() | TypeInfo::HashCodeOf<Gecko>() |
+               TypeInfo::HashCodeOf<Lizard>() | TypeInfo::HashCodeOf<Mammal>()));
+static_assert(HCT_5::kValues[13] == TypeInfo::HashCodeOf<Amphibian>());
+static_assert(HCT_5::kValues[14] ==
+              (TypeInfo::HashCodeOf<Reptile>() | TypeInfo::HashCodeOf<Gecko>() |
+               TypeInfo::HashCodeOf<Lizard>() | TypeInfo::HashCodeOf<Mammal>() |
+               TypeInfo::HashCodeOf<Amphibian>()));
+static_assert(HCT_5::kValues.size() == 15u);
+
 }  // namespace
 
 TINT_INSTANTIATE_TYPEINFO(Animal);
@@ -550,3 +650,13 @@ TINT_INSTANTIATE_TYPEINFO(Lizard);
 TINT_INSTANTIATE_TYPEINFO(Gecko);
 
 }  // namespace tint
+
+extern "C" const char* ASwitchCase(tint::Animal* animal);
+
+extern "C" const char* ASwitchCase(tint::Animal* animal) {
+    return tint::Switch(
+        animal,                                        //
+        [](tint::Mammal*) { return "mammal"; },        //
+        [](tint::Amphibian*) { return "amphibian"; },  //
+        [](tint::Default) { return "unknown"; });
+}
