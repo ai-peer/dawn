@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91255abc_077cbc5f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-09T16:57:57Z",
+      "side": 0,
+      "message": "Unfortunately the CTS roll didn\u0027t say that this line all passed. Might be because one test in the group flaked, or maybe something is actually broken in here.",
+      "revId": "b4f095ec29200675807d9fcc967fbfeace025440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50df0b5c_f796a095",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-09T16:57:57Z",
+      "side": 0,
+      "message": "Same thing here. Let\u0027s see what the bots say.",
+      "revId": "b4f095ec29200675807d9fcc967fbfeace025440",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
