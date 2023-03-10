@@ -163,12 +163,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     transform::Manager manager;
     transform::DataMap data;
 
-    manager.Add<transform::BindingRemapper>();
-    data.Add<transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        options.binding_remapper_options.access_controls,
-        options.binding_remapper_options.allow_collisions);
-
     manager.Add<transform::DisableUniformityAnalysis>();
 
     // ExpandCompoundAssignment must come before BuiltinPolyfill
@@ -201,6 +195,13 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
             options.external_texture_options.bindings_map);
         manager.Add<transform::MultiplanarExternalTexture>();
     }
+
+    // BindingRemapper must come after MultiplanarExternalTexture
+    manager.Add<transform::BindingRemapper>();
+    data.Add<transform::BindingRemapper::Remappings>(
+        options.binding_remapper_options.binding_points,
+        options.binding_remapper_options.access_controls,
+        options.binding_remapper_options.allow_collisions);
 
     {  // Builtin polyfills
         transform::BuiltinPolyfill::Builtins polyfills;
