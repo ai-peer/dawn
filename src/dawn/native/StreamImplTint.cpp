@@ -51,9 +51,17 @@ void stream::Stream<tint::writer::BindingPoint>::Write(stream::Sink* sink,
 
 // static
 template <>
-void stream::Stream<tint::transform::MultiplanarExternalTexture::BindingPoints>::Write(
+void stream::Stream<tint::writer::ExternalTextureOptions::BindingPoints>::Write(
     stream::Sink* sink,
-    const tint::transform::MultiplanarExternalTexture::BindingPoints& points) {
+    const tint::writer::ExternalTextureOptions::BindingPoints& point) {
+    StreamInTintObject(point, sink);
+}
+
+// static
+template <>
+void stream::Stream<tint::writer::ExternalTextureOptions>::Write(
+    stream::Sink* sink,
+    const tint::writer::ExternalTextureOptions& points) {
     StreamInTintObject(points, sink);
 }
 

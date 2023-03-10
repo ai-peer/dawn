@@ -167,7 +167,7 @@ ShaderModule::~ShaderModule() = default;
     X(SingleShaderStage, stage)                                                             \
     X(const tint::Program*, inputProgram)                                                   \
     X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap)             \
+    X(tint::writer::ExternalTextureOptions, externalTextureOptions)                         \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                  \
     X(std::string_view, entryPointName)                                                     \
@@ -229,13 +229,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
     // Transform external textures into the binding locations specified in the bgl
     // TODO(dawn:1082): Replace this block with BuildExternalTextureTransformBindings.
-    tint::transform::MultiplanarExternalTexture::BindingsMap newBindingsMap;
+    tint::writer::ExternalTextureOptions externalTextureOptions;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase* bgl = layout->GetBindGroupLayout(i);
 
         for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            newBindingsMap[{static_cast<uint32_t>(i),
-                            static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
+            externalTextureOptions
+                .bindings_map[{static_cast<uint32_t>(i),
+                               static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
                 {static_cast<uint32_t>(i),
                  static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
                 {static_cast<uint32_t>(i),
@@ -253,7 +254,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.stage = stage;
     req.inputProgram = GetTintProgram();
     req.bindingRemapper = std::move(bindingRemapper);
-    req.newBindingsMap = std::move(newBindingsMap);
+    req.externalTextureOptions = std::move(externalTextureOptions);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
     req.disableWorkgroupInit = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
@@ -291,12 +292,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                 transformManager.Add<tint::transform::SubstituteOverride>();
                 transformInputs.Add<tint::transform::SubstituteOverride::Config>(
                     std::move(r.substituteOverrideConfig).value());
-            }
-
-            if (!r.newBindingsMap.empty()) {
-                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                    r.newBindingsMap);
             }
 
             if (r.clampFragDepth) {
@@ -340,6 +335,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.use_zero_initialize_workgroup_memory_extension =
                 r.useZeroInitializeWorkgroupMemoryExtension;
             options.binding_remapper_options = r.bindingRemapper;
+            options.external_texture_options = r.externalTextureOptions;
 
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General,
                          "tint::writer::spirv::Generate()");
