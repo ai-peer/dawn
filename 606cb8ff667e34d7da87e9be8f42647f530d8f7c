@@ -16,6 +16,23 @@
       "message": "Corentin \u0026 Austin, any objection or suggestion of this folder structure change? I am going to refactory d3d11 code in my local change which depends on the folder structure. Thanks",
       "revId": "606cb8ff667e34d7da87e9be8f42647f530d8f7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ce3191a_a70e9b0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T16:34:25Z",
+      "side": 1,
+      "message": "this is just bikeshedding, IMO it would be nicer to have t directory and namespaces have less repetition.\nfor me d3d/d3d12 and d3d::d3d12 looks funny\n\nan alternative could be to use: \n - native/d3d\n - native/d3d11\n - native/d3d12\n - native::d3d\n - native::d3d11\n - native::d3d12\n \nwe can do `using namespace d3d` inside the d3d11/d3d12 namespaces to make everything available?",
+      "revId": "606cb8ff667e34d7da87e9be8f42647f530d8f7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
