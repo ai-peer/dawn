@@ -33,6 +33,24 @@
       "message": "this is just bikeshedding, IMO it would be nicer to have t directory and namespaces have less repetition.\nfor me d3d/d3d12 and d3d::d3d12 looks funny\n\nan alternative could be to use: \n - native/d3d\n - native/d3d11\n - native/d3d12\n - native::d3d\n - native::d3d11\n - native::d3d12\n \nwe can do `using namespace d3d` inside the d3d11/d3d12 namespaces to make everything available?",
       "revId": "606cb8ff667e34d7da87e9be8f42647f530d8f7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "927331a9_48867d82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-10T16:52:41Z",
+      "side": 1,
+      "message": "Agreed that this would work. The `using namespace d3d` might be slightly confusing sometimes, but let\u0027s try and then see if it becomes a problem. (otherwise we can just do `d3d::SomeCommonFuntion()` and that seems fine and readable)",
+      "parentUuid": "5ce3191a_a70e9b0e",
+      "revId": "606cb8ff667e34d7da87e9be8f42647f530d8f7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
