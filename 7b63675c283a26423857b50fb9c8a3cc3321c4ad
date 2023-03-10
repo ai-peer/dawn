@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9108b0d0_346e3546",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-03-10T15:47:22Z",
+      "side": 1,
+      "message": "Corentin: PTAL. Thanks!",
+      "revId": "7b63675c283a26423857b50fb9c8a3cc3321c4ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
