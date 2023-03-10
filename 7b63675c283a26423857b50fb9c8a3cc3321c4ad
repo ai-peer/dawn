@@ -50,6 +50,24 @@
       "message": "Can we update the Toggle description in Toggles.cpp?",
       "revId": "7b63675c283a26423857b50fb9c8a3cc3321c4ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80e3db0a_c283bc99",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-03-10T18:06:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16c6de6a_31a3a6c5",
+      "revId": "7b63675c283a26423857b50fb9c8a3cc3321c4ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
