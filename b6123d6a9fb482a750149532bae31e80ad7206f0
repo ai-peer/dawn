@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db5ad4c_fffc6e0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-10T09:51:23Z",
+      "side": 1,
+      "message": "Still LGTM! Loko PTAL since Austin is OOO today.",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9de5e347_b7ecb551",
@@ -84,6 +101,24 @@
       "side": 1,
       "message": "I think from chrome `webgpu_decoder_impl.cc` side, only this `DawnNative.h` header is exposed. I don\u0027t know the exact reasons. It\u0027s the same thing why we have to added `DeviceTick` function in this header. Chrome uses `DeviceTick` instead of `wgpu::Device::Tick`\n\nSo if we want to change the webgpu\u0027s polling code in chrome to invoke `Instance::ProcessEvents` instead of `Device::Tick` we need to add the `ProcessEvents` function here.",
       "parentUuid": "9de5e347_b7ecb551",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246b543d_bf85c25a",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-10T09:51:23Z",
+      "side": 1,
+      "message": "Ah! It\u0027s because the dawn::native:: version returns a boolean but not the wgpu:: version. Ok we can have the dual path for now and figure out if we can just have the wgpu:: one return a boolean later.",
+      "parentUuid": "4bdacfe8_1a3becb4",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +172,24 @@
       "side": 1,
       "message": "Just checked. We do call `Initialize` on the mock device here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/native/mocks/DeviceMock.cpp;drc\u003dbec0ef46974cd9a6bc0f1f1ae34baa11913f77af;l\u003d115",
       "parentUuid": "f950b068_1528c69c",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "166634d4_c8e7e0fa",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-10T09:51:23Z",
+      "side": 1,
+      "message": "Thanks for the explanation. It\u0027s unfortunate that code here would need to be defensive in case it is used in a mocking scenario. Can you open an issue about this to see if we can have an adapter in the DeviceMock in the future?",
+      "parentUuid": "2757f62f_bfd1d2cf",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
