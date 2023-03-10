@@ -103,4 +103,12 @@ void stream::Stream<tint::writer::ArrayLengthFromUniformOptions>::Write(
     StreamInTintObject(options, sink);
 }
 
+// static
+template <>
+void stream::Stream<tint::writer::BindingRemapperOptions>::Write(
+    stream::Sink* sink,
+    const tint::writer::BindingRemapperOptions& options) {
+    StreamInTintObject(options, sink);
+}
+
 }  // namespace dawn::native
