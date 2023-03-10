@@ -504,29 +504,37 @@ BlobCache* InstanceBase::GetBlobCache(bool enabled) {
     return &mPassthroughBlobCache;
 }
 
+std::vector<Ref<DeviceBase>> InstanceBase::AcquireDeviceRefs() const {
+    std::vector<Ref<DeviceBase>> devices;
+    {
+        std::lock_guard<std::mutex> lg(mDevicesListMutex);
+        for (size_t i = 0; i < mDevicesList.size();) {
+            auto deviceRef = mDevicesList[i]->GetStrongReference();
+            if (deviceRef != nullptr) {
+                devices.push_back(std::move(deviceRef));
+                ++i;
+            } else {
+                // device's weak ref is expired, remove it from the list.
+                std::swap(mDevicesList[i], mDevicesList.back());
+                mDevicesList.pop_back();
+            }
+        }
+    }
+
+    return devices;
+}
+
 uint64_t InstanceBase::GetDeviceCountForTesting() const {
-    std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    return mDevicesList.size();
+    return AcquireDeviceRefs().size();
 }
 
 void InstanceBase::AddDevice(DeviceBase* device) {
     std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.insert(device);
-}
-
-void InstanceBase::RemoveDevice(DeviceBase* device) {
-    std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.erase(device);
+    mDevicesList.push_back(device->GetWeakReference());
 }
 
 bool InstanceBase::APIProcessEvents() {
-    std::vector<Ref<DeviceBase>> devices;
-    {
-        std::lock_guard<std::mutex> lg(mDevicesListMutex);
-        for (auto device : mDevicesList) {
-            devices.push_back(device);
-        }
-    }
+    std::vector<Ref<DeviceBase>> devices = AcquireDeviceRefs();
 
     bool hasMoreEvents = false;
     for (auto device : devices) {

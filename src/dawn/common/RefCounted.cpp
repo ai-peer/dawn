@@ -74,6 +74,20 @@ bool RefCount::Decrement() {
     return false;
 }
 
+bool RefCount::TryIncrement() {
+    uint64_t previousRefCount = mRefCount.load(std::memory_order_relaxed);
+    // Only do the increase if the previous reference count was strictly >= 2, ignoring payload
+    // bits.
+    while (previousRefCount >= kRefCountIncrement) {
+        if (mRefCount.compare_exchange_weak(previousRefCount, previousRefCount + kRefCountIncrement,
+                                            std::memory_order_relaxed, std::memory_order_relaxed)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 RefCounted::RefCounted(uint64_t payload) : mRefCount(payload) {}
 RefCounted::~RefCounted() = default;
 
