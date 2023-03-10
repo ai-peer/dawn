@@ -85,7 +85,7 @@ enum class Compiler { FXC, DXC };
     X(bool, usesNumWorkgroups)                                                              \
     X(uint32_t, numWorkgroupsShaderRegister)                                                \
     X(uint32_t, numWorkgroupsRegisterSpace)                                                 \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap)             \
+    X(tint::writer::ExternalTextureOptions, exteranlTextureOptions)                         \
     X(tint::writer::ArrayLengthFromUniformOptions, arrayLengthFromUniform)                  \
     X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
@@ -310,12 +310,6 @@ ResultOrError<std::string> TranslateToHLSL(
             tint::transform::Renamer::Target::kHlslKeywords);
     }
 
-    if (!r.newBindingsMap.empty()) {
-        transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-        transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-            std::move(r.newBindingsMap));
-    }
-
     if (r.stage == SingleShaderStage::Vertex) {
         transformManager.Add<tint::transform::FirstIndexOffset>();
         transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
@@ -372,6 +366,7 @@ ResultOrError<std::string> TranslateToHLSL(
     options.disable_robustness = !r.isRobustnessEnabled;
     options.disable_workgroup_init = r.disableWorkgroupInit;
     options.binding_remapper_options = r.bindingRemapper;
+    options.external_texture_options = r.externalTextureOptions;
 
     if (r.usesNumWorkgroups) {
         options.root_constant_binding_point =
@@ -589,6 +584,9 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
     }
 
+    tint::writer::ExternalTextureOptions externalTextureOptions;
+    externalTextureOptions.bindings_map = BuildExternalTextureTransformBindings(layout);
+
     req.hlsl.inputProgram = GetTintProgram();
     req.hlsl.entryPointName = programmableStage.entryPoint.c_str();
     req.hlsl.stage = stage;
@@ -598,7 +596,7 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
     req.hlsl.numWorkgroupsShaderRegister = layout->GetNumWorkgroupsShaderRegister();
     req.hlsl.numWorkgroupsRegisterSpace = layout->GetNumWorkgroupsRegisterSpace();
     req.hlsl.bindingRemapper = std::move(bindingRemapper);
-    req.hlsl.newBindingsMap = BuildExternalTextureTransformBindings(layout);
+    req.hlsl.externalTextureOptions = externalTextureOptions;
     req.hlsl.arrayLengthFromUniform = std::move(arrayLengthFromUniform);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
 
