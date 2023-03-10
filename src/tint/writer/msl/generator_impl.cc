@@ -42,6 +42,7 @@
 #include "src/tint/sem/variable.h"
 #include "src/tint/switch.h"
 #include "src/tint/transform/array_length_from_uniform.h"
+#include "src/tint/transform/binding_remapper.h"
 #include "src/tint/transform/builtin_polyfill.h"
 #include "src/tint/transform/canonicalize_entry_point_io.h"
 #include "src/tint/transform/demote_to_helper.h"
@@ -168,6 +169,12 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     transform::Manager manager;
     transform::DataMap data;
 
+    manager.Add<transform::BindingRemapper>();
+    data.Add<transform::BindingRemapper::Remappings>(
+        options.binding_remapper_options.binding_points,
+        options.binding_remapper_options.access_controls,
+        options.binding_remapper_options.allow_collisions);
+
     manager.Add<transform::DisableUniformityAnalysis>();
 
     // ExpandCompoundAssignment must come before BuiltinPolyfill
@@ -265,6 +272,7 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     manager.Add<transform::ModuleScopeVarToEntryPointParam>();
     data.Add<transform::ArrayLengthFromUniform::Config>(std::move(array_length_from_uniform_cfg));
     data.Add<transform::CanonicalizeEntryPointIO::Config>(std::move(entry_point_io_cfg));
+
     auto out = manager.Run(in, data);
 
     SanitizedResult result;
