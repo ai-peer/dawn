@@ -33,6 +33,7 @@
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
+#include "dawn/native/RefCountedWithWeakRef.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/UsageValidationMode.h"
 
@@ -50,6 +51,7 @@ class AttachmentStateBlueprint;
 class Blob;
 class BlobCache;
 class CallbackTaskManager;
+class DeviceBase;
 class DynamicUploader;
 class ErrorScopeStack;
 class OwnedCompilationMessages;
@@ -59,7 +61,7 @@ struct ShaderModuleParseResult;
 
 using WGSLExtensionSet = std::unordered_set<std::string>;
 
-class DeviceBase : public RefCountedWithExternalCount {
+class DeviceBase : public RefCountedWithExternalCount<RefCountedWithWeakRef<DeviceBase>> {
   public:
     DeviceBase(AdapterBase* adapter,
                const DeviceDescriptor* descriptor,
