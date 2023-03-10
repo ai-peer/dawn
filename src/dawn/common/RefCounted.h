@@ -31,6 +31,11 @@ class RefCount {
     // Add a reference.
     void Increment();
 
+    // Perform reference's increase then return true.
+    // However if the ref count was already "zero", this will return false and no reference will be
+    // added.
+    bool TryIncrement();
+
     // Remove a reference. Returns true if this was the last reference.
     bool Decrement();
 
