@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be2557d9_300686cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-10T14:09:57Z",
+      "side": 1,
+      "message": "Corentin \u0026 Austin, any objection or suggestion of this folder structure change? I am going to refactory d3d11 code in my local change which depends on the folder structure. Thanks",
+      "revId": "606cb8ff667e34d7da87e9be8f42647f530d8f7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
