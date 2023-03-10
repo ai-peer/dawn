@@ -216,10 +216,6 @@ DeviceBase::~DeviceBase() {
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;
-    // mAdapter is not set for mock test devices.
-    if (mAdapter != nullptr) {
-        mAdapter->GetInstance()->RemoveDevice(this);
-    }
 }
 
 MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
@@ -281,6 +277,7 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
                         CreateShaderModule(&descriptor));
     }
 
+    // mAdapter is not set for mock test devices.
     if (mAdapter != nullptr) {
         mAdapter->GetInstance()->AddDevice(this);
     }
