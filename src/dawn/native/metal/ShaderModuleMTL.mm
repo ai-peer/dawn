@@ -39,7 +39,7 @@ using OptionalVertexPullingTransformConfig = std::optional<tint::transform::Vert
     X(SingleShaderStage, stage)                                                             \
     X(const tint::Program*, inputProgram)                                                   \
     X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, externalTextureBindings)    \
+    X(tint::writer::ExternalTextureOptions, externalTextureOptions)                         \
     X(OptionalVertexPullingTransformConfig, vertexPullingTransformConfig)                   \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                  \
@@ -137,7 +137,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
         }
     }
 
-    auto externalTextureBindings = BuildExternalTextureTransformBindings(layout);
+    tint::writer::ExternalTextureOptions externalTextureOptions;
+    externalTextureOptions.bindings_map = BuildExternalTextureTransformBindings(layout);
 
     std::optional<tint::transform::VertexPulling::Config> vertexPullingTransformConfig;
     if (stage == SingleShaderStage::Vertex &&
@@ -167,7 +168,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     req.stage = stage;
     req.inputProgram = programmableStage.module->GetTintProgram();
     req.bindingRemapper = std::move(bindingRemapper);
-    req.externalTextureBindings = std::move(externalTextureBindings);
+    req.externalTextureOptions = std::move(externalTextureOptions);
     req.vertexPullingTransformConfig = std::move(vertexPullingTransformConfig);
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
     req.entryPointName = programmableStage.entryPoint.c_str();
@@ -201,12 +202,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                 // We still need to rename MSL reserved keywords
                 transformInputs.Add<tint::transform::Renamer::Config>(
                     tint::transform::Renamer::Target::kMslKeywords);
-            }
-
-            if (!r.externalTextureBindings.empty()) {
-                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                    std::move(r.externalTextureBindings));
             }
 
             if (r.vertexPullingTransformConfig) {
@@ -261,6 +256,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.emit_vertex_point_size = r.emitVertexPointSize;
             options.binding_remapper_options = r.bindingRemapper;
+            options.external_texture_options = r.externalTextureOptions;
 
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "tint::writer::msl::Generate");
             auto result = tint::writer::msl::Generate(&program, options);
