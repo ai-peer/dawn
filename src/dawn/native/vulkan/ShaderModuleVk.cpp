@@ -166,7 +166,7 @@ ShaderModule::~ShaderModule() = default;
 #define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                                \
     X(SingleShaderStage, stage)                                                             \
     X(const tint::Program*, inputProgram)                                                   \
-    X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)                       \
+    X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \
     X(tint::transform::MultiplanarExternalTexture::BindingsMap, newBindingsMap)             \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                  \
@@ -204,9 +204,9 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     // Creation of module and spirv is deferred to this point when using tint generator
 
     // Remap BindingNumber to BindingIndex in WGSL shader
-    using BindingRemapper = tint::transform::BindingRemapper;
     using BindingPoint = tint::writer::BindingPoint;
-    BindingRemapper::BindingPoints bindingPoints;
+
+    tint::writer::BindingRemapperOptions bindingRemapper;
 
     const BindingInfoArray& moduleBindingInfo =
         GetEntryPoint(programmableStage.entryPoint.c_str()).bindings;
@@ -222,7 +222,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(bindingIndex)};
             if (srcBindingPoint != dstBindingPoint) {
-                bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
     }
@@ -252,7 +252,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     SpirvCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = GetTintProgram();
-    req.bindingPoints = std::move(bindingPoints);
+    req.bindingRemapper = std::move(bindingRemapper);
     req.newBindingsMap = std::move(newBindingsMap);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
@@ -293,12 +293,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                     std::move(r.substituteOverrideConfig).value());
             }
 
-            // Run the binding remapper after SingleEntryPoint to avoid collisions with
-            // unused entryPoints.
-            transformManager.append(std::make_unique<tint::transform::BindingRemapper>());
-            transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
-                                                             BindingRemapper::AccessControls{},
-                                                             /* mayCollide */ false);
             if (!r.newBindingsMap.empty()) {
                 transformManager.Add<tint::transform::MultiplanarExternalTexture>();
                 transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
@@ -345,6 +339,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.use_zero_initialize_workgroup_memory_extension =
                 r.useZeroInitializeWorkgroupMemoryExtension;
+            options.binding_remapper_options = r.bindingRemapper;
 
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General,
                          "tint::writer::spirv::Generate()");
