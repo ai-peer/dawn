@@ -38,8 +38,8 @@ using OptionalVertexPullingTransformConfig = std::optional<tint::transform::Vert
 #define MSL_COMPILATION_REQUEST_MEMBERS(X)                                                  \
     X(SingleShaderStage, stage)                                                             \
     X(const tint::Program*, inputProgram)                                                   \
-    X(tint::transform::BindingRemapper::BindingPoints, bindingPoints)                       \
-    X(tint::transform::MultiplanarExternalTexture::BindingsMap, externalTextureBindings)    \
+    X(tint::writer::BindingRemapperOptions, bindingRemapper)                                \
+    X(tint::writer::ExternalTextureOptions, externalTextureOptions)                         \
     X(OptionalVertexPullingTransformConfig, vertexPullingTransformConfig)                   \
     X(std::optional<tint::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                  \
@@ -110,9 +110,10 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     errorStream << "Tint MSL failure:" << std::endl;
 
     // Remap BindingNumber to BindingIndex in WGSL shader
-    using BindingRemapper = tint::transform::BindingRemapper;
     using BindingPoint = tint::writer::BindingPoint;
-    BindingRemapper::BindingPoints bindingPoints;
+
+    tint::writer::BindingRemapperOptions bindingRemapper;
+    bindingRemapper.allow_collisions = true;
 
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutBase::BindingMap& bindingMap =
@@ -131,12 +132,13 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                                          static_cast<uint32_t>(bindingNumber)};
             BindingPoint dstBindingPoint{0, shaderIndex};
             if (srcBindingPoint != dstBindingPoint) {
-                bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
     }
 
-    auto externalTextureBindings = BuildExternalTextureTransformBindings(layout);
+    tint::writer::ExternalTextureOptions externalTextureOptions;
+    externalTextureOptions.bindings_map = BuildExternalTextureTransformBindings(layout);
 
     std::optional<tint::transform::VertexPulling::Config> vertexPullingTransformConfig;
     if (stage == SingleShaderStage::Vertex &&
@@ -152,7 +154,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                                          static_cast<uint8_t>(slot)};
             BindingPoint dstBindingPoint{0, metalIndex};
             if (srcBindingPoint != dstBindingPoint) {
-                bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
     }
@@ -165,8 +167,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     MslCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = programmableStage.module->GetTintProgram();
-    req.bindingPoints = std::move(bindingPoints);
-    req.externalTextureBindings = std::move(externalTextureBindings);
+    req.bindingRemapper = std::move(bindingRemapper);
+    req.externalTextureOptions = std::move(externalTextureOptions);
     req.vertexPullingTransformConfig = std::move(vertexPullingTransformConfig);
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
     req.entryPointName = programmableStage.entryPoint.c_str();
@@ -202,12 +204,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                     tint::transform::Renamer::Target::kMslKeywords);
             }
 
-            if (!r.externalTextureBindings.empty()) {
-                transformManager.Add<tint::transform::MultiplanarExternalTexture>();
-                transformInputs.Add<tint::transform::MultiplanarExternalTexture::NewBindingPoints>(
-                    std::move(r.externalTextureBindings));
-            }
-
             if (r.vertexPullingTransformConfig) {
                 transformManager.Add<tint::transform::VertexPulling>();
                 transformInputs.Add<tint::transform::VertexPulling::Config>(
@@ -221,11 +217,6 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                 transformInputs.Add<tint::transform::SubstituteOverride::Config>(
                     std::move(r.substituteOverrideConfig).value());
             }
-
-            transformManager.Add<BindingRemapper>();
-            transformInputs.Add<BindingRemapper::Remappings>(std::move(r.bindingPoints),
-                                                             BindingRemapper::AccessControls{},
-                                                             /* mayCollide */ true);
 
             tint::Program program;
             tint::transform::DataMap transformOutputs;
@@ -264,6 +255,9 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             options.fixed_sample_mask = r.sampleMask;
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.emit_vertex_point_size = r.emitVertexPointSize;
+            options.binding_remapper_options = r.bindingRemapper;
+            options.external_texture_options = r.externalTextureOptions;
+
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "tint::writer::msl::Generate");
             auto result = tint::writer::msl::Generate(&program, options);
             DAWN_INVALID_IF(!result.success, "An error occured while generating MSL: %s.",
