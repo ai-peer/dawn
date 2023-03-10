@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8494d3c6_4b8f9128",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecc8e8b7_bf29202a",
+      "range": {
+        "startLine": 25,
+        "startChar": 40,
+        "endLine": 25,
+        "endChar": 47
+      },
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd850b51_7142c67a",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7308518_a6333090",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd850b51_7142c67a",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce5488cf_4bf61943",
@@ -54,6 +96,24 @@
       "writtenOn": "2022-12-19T13:52:36Z",
       "side": 1,
       "message": "Do we see more toplevel dictionaries being added? Otherwise maybe this level could be inlined such that \"command\" becomes just a toplevel \"proto_commands\" something like that.",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed57288_82698afd",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Ack: You are correct, I don\u0027t need to pass command here",
+      "parentUuid": "ce5488cf_4bf61943",
       "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -81,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "973e55c3_3e801a6e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 602,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "member: changed it to member",
+      "parentUuid": "060dbc62_c472150f",
+      "range": {
+        "startLine": 602,
+        "startChar": 23,
+        "endLine": 602,
+        "endChar": 26
+      },
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3dc4e0f_0e0e40ff",
@@ -94,6 +178,24 @@
       "writtenOn": "2022-12-19T13:52:36Z",
       "side": 1,
       "message": "Can you describe what this means to do? If names[0] is descriptor then we seem to drop the rest of the name which is weird.",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbde9280_ee3952f6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "I should add a comment here. `descriptor` is a reserved keyword in libprotobuf-mutator which causes compiler errors",
+      "parentUuid": "d3dc4e0f_0e0e40ff",
       "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a5ae2f_3a78d38f",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40487565_de3814c9",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dee0ba17_d4143e6d",
@@ -128,6 +248,24 @@
       "writtenOn": "2022-12-19T13:52:36Z",
       "side": 1,
       "message": "Why is the label skipped?",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89c212d_6a71be57",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Leaving it in after our 1:1 chat where I learned that \"label\" will be more than a debug marker in the near future 😊",
+      "parentUuid": "dee0ba17_d4143e6d",
       "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -151,6 +289,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db1970a0_55e4ce53",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "Complex was originally where I put all of the weird annotation/type/length combinations like float array. Broke them out into their own helpers to make them easier to understand",
+      "parentUuid": "c8578300_85e2b047",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42e38612_ce3f31e6",
         "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
         "patchSetId": 8
@@ -162,6 +318,24 @@
       "writtenOn": "2022-12-19T13:52:36Z",
       "side": 1,
       "message": "Overall this list of cases and the functions they dispatch too seem like they work but aren\u0027t super logical because annotations are what should cause repeated vs. not and they are not entirely switched over and dispatch to helper function that only handle a subset of types. Did you take a look at how WireCmd handles these?",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84fc88b1_b3110034",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-10T22:53:38Z",
+      "side": 1,
+      "message": "I tried to base this off of WireCmd as closely as possible to prevent issues in the future however there were some edge cases that were harder to handle in the fuzzer like:\n\n`member.annotation \u003d\u003d \u0027const*\u0027 and member.length \u003d\u003d \u0027constant\u0027 and member.type.name.get() \u003d\u003d \"float\"`\n\nand \"void *\" annotations which I had to handle uniquely here separately here.",
+      "parentUuid": "42e38612_ce3f31e6",
       "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
