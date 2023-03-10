@@ -23,13 +23,13 @@
 #include <unordered_map>
 #include <vector>
 
-#include "dawn/common/RefCounted.h"
 #include "dawn/common/ityp_bitset.h"
 #include "dawn/native/Adapter.h"
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/BlobCache.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/RefCountedWithExternalCount.h"
+#include "dawn/native/RefCountedWithWeakRef.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -49,7 +49,7 @@ InstanceBase* APICreateInstance(const InstanceDescriptor* descriptor);
 
 // This is called InstanceBase for consistency across the frontend, even if the backends don't
 // specialize this class.
-class InstanceBase final : public RefCountedWithExternalCount {
+class InstanceBase final : public RefCountedWithExternalCount<RefCounted> {
   public:
     static Ref<InstanceBase> Create(const InstanceDescriptor* descriptor = nullptr);
 
@@ -107,7 +107,6 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     uint64_t GetDeviceCountForTesting() const;
     void AddDevice(DeviceBase* device);
-    void RemoveDevice(DeviceBase* device);
 
     const std::vector<std::string>& GetRuntimeSearchPaths() const;
 
@@ -138,6 +137,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     void ConsumeError(std::unique_ptr<ErrorData> error);
 
+    std::vector<Ref<DeviceBase>> AcquireDeviceRefs() const;
+
     std::vector<std::string> mRuntimeSearchPaths;
 
     BackendsBitset mBackendsConnected;
@@ -165,7 +166,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     std::unique_ptr<XlibXcbFunctions> mXlibXcbFunctions;
 #endif  // defined(DAWN_USE_X11)
 
-    std::set<DeviceBase*> mDevicesList;
+    mutable std::vector<Ref<WeakReference<DeviceBase>>> mDevicesList;
     mutable std::mutex mDevicesListMutex;
 };
 
