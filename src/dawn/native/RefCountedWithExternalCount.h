@@ -15,8 +15,6 @@
 #ifndef SRC_DAWN_NATIVE_REFCOUNTEDWITHEXTERNALCOUNT_H_
 #define SRC_DAWN_NATIVE_REFCOUNTEDWITHEXTERNALCOUNT_H_
 
-#include "dawn/common/RefCounted.h"
-
 namespace dawn::native {
 
 // RecCountedWithExternalCount is a version of RefCounted which tracks a separate
@@ -25,14 +23,19 @@ namespace dawn::native {
 // ref is the external ref.
 // Then, when the external refcount drops to zero, WillDropLastExternalRef is called.
 // The derived class should override the behavior of WillDropLastExternalRef.
-class RefCountedWithExternalCount : private RefCounted {
+template <typename RefCountedBase>
+class RefCountedWithExternalCount : public RefCountedBase {
   public:
-    using RefCounted::RefCounted;
-    using RefCounted::Reference;
-    using RefCounted::Release;
-
-    void APIReference();
-    void APIRelease();
+    void APIReference() {
+        mExternalRefCount.Increment();
+        RefCountedBase::APIReference();
+    }
+    void APIRelease() {
+        if (mExternalRefCount.Decrement()) {
+            WillDropLastExternalRef();
+        }
+        RefCountedBase::APIRelease();
+    }
 
   private:
     virtual void WillDropLastExternalRef() = 0;
