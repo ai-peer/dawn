@@ -70,6 +70,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76b996fa_fc8e365b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T17:11:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf75c00_4283aa25",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T17:11:47Z",
+      "side": 1,
+      "message": "I think we can remove all the tags",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9de5e347_b7ecb551",
@@ -208,6 +242,57 @@
       "side": 1,
       "message": "Thanks for the explanation. It\u0027s unfortunate that code here would need to be defensive in case it is used in a mocking scenario. Can you open an issue about this to see if we can have an adapter in the DeviceMock in the future?",
       "parentUuid": "2757f62f_bfd1d2cf",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0df56f_546af971",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T17:11:47Z",
+      "side": 1,
+      "message": "it should be possible to write a test with deviceA and deviceB, where calling Tick on deviceA releases deviceB (inside some callback) - making the second tick cause a use after free.\n\nI think we can fix this by making the vector of devices local to this function hold a Ref",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd0f919_37b0b798",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T17:11:47Z",
+      "side": 1,
+      "message": "do we need the call to Tick still?",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cbb7bb5_f6a86444",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-10T17:11:47Z",
+      "side": 1,
+      "message": "is this to make sure no pending callbacks are in flight?\nshould we use the dawn::native:: version to call ProcessEvents until idle?",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
