@@ -15,8 +15,6 @@
 syntax = "proto2";
 package fuzzing;
 
-import "third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm_custom.proto";
-
 enum ObjectType {
     {% for type in by_category["object"] %}
         {{ type.name.CamelCase() }} = {{ loop.index }};
@@ -134,6 +132,10 @@ message DestroyObject {
     required ObjectType objectType = 1;
     required uint32 objectId = 2;
 }
+
+message DeviceCreateRenderPipeline {}
+
+message DeviceCreateRenderPipelineAsync {}
 
 message Command {
     oneof command {
