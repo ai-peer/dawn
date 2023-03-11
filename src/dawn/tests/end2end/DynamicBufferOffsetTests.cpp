@@ -229,6 +229,8 @@ class DynamicBufferOffsetTests : public DawnTest {
 TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
     // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsARM());
+    // TODO(tint:1871): Render pipelines are not supported in the interpreter.
+    DAWN_SUPPRESS_TEST_IF(IsInterpreter());
 
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
@@ -253,6 +255,8 @@ TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
 TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
     // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsARM());
+    // TODO(tint:1871): Render pipelines are not supported in the interpreter.
+    DAWN_SUPPRESS_TEST_IF(IsInterpreter());
 
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
@@ -325,6 +329,8 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsComputePipeline) {
 TEST_P(DynamicBufferOffsetTests, BasicInheritRenderPipeline) {
     // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsARM());
+    // TODO(tint:1871): Render pipelines are not supported in the interpreter.
+    DAWN_SUPPRESS_TEST_IF(IsInterpreter());
 
     wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
             @vertex
@@ -427,6 +433,9 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
     // TODO(dawn:2491): Remove when test is no longer flaky on Pixel 6.
     DAWN_SUPPRESS_TEST_IF(IsAndroid());
 
+    // TODO(tint:1871): Render pipelines are not supported in the interpreter.
+    DAWN_SUPPRESS_TEST_IF(IsInterpreter());
+
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     wgpu::RenderPipeline testPipeline = CreateRenderPipeline(true);
@@ -486,6 +495,8 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsComputePipeline) {
 TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline) {
     // TODO(crbug.com/dawn/2295): diagnose this failure on Pixel 6 OpenGLES
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsARM());
+    // TODO(tint:1871): Render pipelines are not supported in the interpreter.
+    DAWN_SUPPRESS_TEST_IF(IsInterpreter());
 
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
@@ -711,6 +722,7 @@ DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests,
                       D3D11Backend(),
                       D3D12Backend(),
                       D3D12Backend({}, {"d3d12_use_root_signature_version_1_1"}),
+                      InterpreterBackend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),

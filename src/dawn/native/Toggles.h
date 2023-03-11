@@ -146,6 +146,12 @@ enum class Toggle {
     D3D11UseUnmonitoredFence,
     IgnoreImportedAHardwareBufferVulkanImageSize,
 
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+    // Toggles for the WGSL interpreter backend.
+    WgslInterpreterInteractive,
+    WgslInterpreterEnableDRD,
+#endif
+
     EnumCount,
     InvalidEnum = EnumCount,
 };

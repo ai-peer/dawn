@@ -586,6 +586,19 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Don't validate the required VkImage size against the size of the AHardwareBuffer on import. "
       "Some drivers report the wrong size.",
       "https://crbug.com/333424893", ToggleStage::Device}},
+
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+    // Toggles for the WGSL interpreter backend.
+    {Toggle::WgslInterpreterInteractive,
+     {"wgsl_interpreter_interactive",
+      "Enable interactive mode when using the WGSL interpreter backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
+    {Toggle::WgslInterpreterEnableDRD,
+     {"wgsl_interpreter_enable_drd",
+      "Enable data race detection when using the WGSL interpreter backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
+#endif
+
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace

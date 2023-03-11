@@ -77,14 +77,15 @@ struct BackendInfo {
 };
 
 constexpr BackendInfo kBackends[] = {
-    {"null", nullptr, wgpu::BackendType::Null},         //
-    {"webgpu", nullptr, wgpu::BackendType::WebGPU},     //
-    {"d3d11", nullptr, wgpu::BackendType::D3D11},       //
-    {"d3d12", "d3d", wgpu::BackendType::D3D12},         //
-    {"metal", nullptr, wgpu::BackendType::Metal},       //
-    {"vulkan", "vk", wgpu::BackendType::Vulkan},        //
-    {"opengl", "gl", wgpu::BackendType::OpenGL},        //
-    {"opengles", "gles", wgpu::BackendType::OpenGLES},  //
+    {"null", nullptr, wgpu::BackendType::Null},                    //
+    {"webgpu", nullptr, wgpu::BackendType::WebGPU},                //
+    {"d3d11", nullptr, wgpu::BackendType::D3D11},                  //
+    {"d3d12", "d3d", wgpu::BackendType::D3D12},                    //
+    {"interpreter", nullptr, wgpu::BackendType::WgslInterpreter},  //
+    {"metal", nullptr, wgpu::BackendType::Metal},                  //
+    {"vulkan", "vk", wgpu::BackendType::Vulkan},                   //
+    {"opengl", "gl", wgpu::BackendType::OpenGL},                   //
+    {"opengles", "gles", wgpu::BackendType::OpenGLES},             //
 };
 
 std::optional<wgpu::BackendType> ParseBackend(std::string_view name) {
