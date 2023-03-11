@@ -33,6 +33,24 @@
       "message": "nit: Can\u0027t this be generated? Otherwise we\u0027ll have to modify it each time we add a new object type.",
       "revId": "e1f16af38c1260331e5cfb1c86b0cf2819dd27d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0475f1cb_d6823e78",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm_custom.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-11T22:59:22Z",
+      "side": 1,
+      "message": "Yeah I think this is a good call. After thinking about it for a while I think it\u0027s best to remove dawn_lpm_custom.proto and manage the custom commands in the generated file to reduce complexity. A generated proto file depending on an in-tree proto file depending on a generated proto file (with the generated ObjectType) seems like a road I don\u0027t want to go down.",
+      "parentUuid": "00992d3d_ca7043bc",
+      "revId": "e1f16af38c1260331e5cfb1c86b0cf2819dd27d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
