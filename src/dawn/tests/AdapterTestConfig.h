@@ -82,6 +82,10 @@ BackendTestConfig D3D11Backend(std::initializer_list<const char*> forceEnabledWo
 BackendTestConfig D3D12Backend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
+BackendTestConfig InterpreterBackend(
+    std::initializer_list<const char*> forceEnabledWorkarounds = {},
+    std::initializer_list<const char*> forceDisabledWorkarounds = {});
+
 BackendTestConfig MetalBackend(std::initializer_list<const char*> forceEnabledWorkarounds = {},
                                std::initializer_list<const char*> forceDisabledWorkarounds = {});
 
