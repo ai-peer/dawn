@@ -54,6 +54,7 @@ enum class System {
     Clone,
     Constant,
     Inspector,
+    Interpreter,
     Intrinsics,
     IR,
     Program,
