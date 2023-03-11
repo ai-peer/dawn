@@ -83,6 +83,11 @@ namespace d3d12 {
 BackendConnection* Connect(InstanceBase* instance);
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+namespace interpreter {
+BackendConnection* Connect(InstanceBase* instance);
+}
+#endif  // defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
 #if defined(DAWN_ENABLE_BACKEND_METAL)
 namespace metal {
 BackendConnection* Connect(InstanceBase* instance);
@@ -415,6 +420,12 @@ BackendConnection* InstanceBase::GetBackendConnection(wgpu::BackendType backendT
             Register(d3d12::Connect(this), wgpu::BackendType::D3D12);
             break;
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
+
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+        case wgpu::BackendType::WgslInterpreter:
+            Register(interpreter::Connect(this), wgpu::BackendType::WgslInterpreter);
+            break;
+#endif  // defined(DAWN_ENABLE_BACKEND_NULL)
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
         case wgpu::BackendType::Metal:

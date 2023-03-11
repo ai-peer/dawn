@@ -79,8 +79,11 @@ func (c *cmd) runTestCasesWithCmdline(ctx context.Context, testCases []common.Te
 // runTestCaseWithCmdline() runs a single CTS test case with the command line tool,
 // returning the test result.
 func (c *cmd) runTestCaseWithCmdline(ctx context.Context, testCase common.TestCase) common.Result {
-	ctx, cancel := context.WithTimeout(ctx, common.TestCaseTimeout)
-	defer cancel()
+	if !c.flags.debug {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, common.TestCaseTimeout)
+		defer cancel()
+	}
 
 	args := []string{
 		"-e", "require('./out-node/common/runtime/cmdline.js');",
@@ -118,8 +121,14 @@ func (c *cmd) runTestCaseWithCmdline(ctx context.Context, testCase common.TestCa
 	cmd.Dir = c.flags.CTS
 
 	var buf bytes.Buffer
-	cmd.Stdout = &buf
-	cmd.Stderr = &buf
+	if c.flags.debug {
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Stdin = os.Stdin
+	} else {
+		cmd.Stdout = &buf
+		cmd.Stderr = &buf
+	}
 
 	if c.flags.Verbose {
 		PrintCommand(cmd)

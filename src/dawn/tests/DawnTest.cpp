@@ -335,6 +335,8 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
                 mBackendTypeFilter = wgpu::BackendType::D3D11;
             } else if (strcmp("d3d12", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::D3D12;
+            } else if (strcmp("interpreter", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::WgslInterpreter;
             } else if (strcmp("metal", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::Metal;
             } else if (strcmp("null", param) == 0) {
@@ -346,9 +348,9 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             } else if (strcmp("vulkan", param) == 0) {
                 mBackendTypeFilter = wgpu::BackendType::Vulkan;
             } else {
-                ErrorLog()
-                    << "Invalid backend \"" << param
-                    << "\". Valid backends are: d3d12, metal, null, opengl, opengles, vulkan.";
+                ErrorLog() << "Invalid backend \"" << param
+                           << "\". Valid backends are: d3d12, interpreter, metal, null, opengl, "
+                              "opengles, vulkan.";
                 DAWN_UNREACHABLE();
             }
             mHasBackendTypeFilter = true;
@@ -495,6 +497,11 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
             if (mHasBackendTypeFilter) {
                 // It doesn't match the backend type, if present.
                 selected &= properties.backendType == mBackendTypeFilter;
+            } else {
+                // Only select the WGSL interpreter if it was explicitly requested via the filter.
+                if (properties.backendType == wgpu::BackendType::WgslInterpreter) {
+                    selected = false;
+                }
             }
             if (mHasVendorIdFilter) {
                 // It doesn't match the vendor id, if present.
@@ -813,6 +820,10 @@ bool DawnTestBase::IsD3D11() const {
 
 bool DawnTestBase::IsD3D12() const {
     return mParam.adapterProperties.backendType == wgpu::BackendType::D3D12;
+}
+
+bool DawnTestBase::IsInterpreter() const {
+    return mParam.adapterProperties.backendType == wgpu::BackendType::WgslInterpreter;
 }
 
 bool DawnTestBase::IsMetal() const {

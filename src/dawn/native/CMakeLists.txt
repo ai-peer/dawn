@@ -481,6 +481,33 @@ if (DAWN_ENABLE_D3D12)
     endif()
 endif()
 
+if (DAWN_ENABLE_WGSL_INTERPRETER)
+    target_sources(dawn_native PRIVATE
+        "interpreter/BackendInterpreter.cpp"
+        "interpreter/BackendInterpreter.h"
+        "interpreter/BindGroupInterpreter.cpp"
+        "interpreter/BindGroupInterpreter.h"
+        "interpreter/BufferInterpreter.cpp"
+        "interpreter/BufferInterpreter.h"
+        "interpreter/CommandBufferInterpreter.cpp"
+        "interpreter/CommandBufferInterpreter.h"
+        "interpreter/ComputePipelineInterpreter.cpp"
+        "interpreter/ComputePipelineInterpreter.h"
+        "interpreter/DeviceInterpreter.cpp"
+        "interpreter/DeviceInterpreter.h"
+        "interpreter/Forward.h"
+        "interpreter/PhysicalDeviceInterpreter.cpp"
+        "interpreter/PhysicalDeviceInterpreter.h"
+        "interpreter/QueueInterpreter.cpp"
+        "interpreter/QueueInterpreter.h"
+        "interpreter/RenderPipelineInterpreter.cpp"
+        "interpreter/RenderPipelineInterpreter.h"
+        "interpreter/ShaderModuleInterpreter.cpp"
+        "interpreter/ShaderModuleInterpreter.h"
+    )
+    target_link_libraries(dawn_native PRIVATE tint-interp)
+endif()
+
 if (DAWN_ENABLE_METAL)
     target_sources(dawn_native
       INTERFACE

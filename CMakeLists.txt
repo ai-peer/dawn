@@ -185,6 +185,7 @@ option_if_not_defined(DAWN_ENABLE_UBSAN "Enable undefined behaviour sanitizer" O
 
 option_if_not_defined(DAWN_ENABLE_D3D11 "Enable compilation of the D3D11 backend" ${ENABLE_D3D11})
 option_if_not_defined(DAWN_ENABLE_D3D12 "Enable compilation of the D3D12 backend" ${ENABLE_D3D12})
+option_if_not_defined(DAWN_ENABLE_WGSL_INTERPRETER "Enable compilation of the WGSL interpreter backend" OFF)
 option_if_not_defined(DAWN_ENABLE_METAL "Enable compilation of the Metal backend" ${ENABLE_METAL})
 option_if_not_defined(DAWN_ENABLE_NULL "Enable compilation of the Null backend" ON)
 option_if_not_defined(DAWN_ENABLE_DESKTOP_GL "Enable compilation of the OpenGL backend" ${ENABLE_DESKTOP_GL})
@@ -232,6 +233,8 @@ option_if_not_defined(TINT_BUILD_SPV_WRITER "Build the SPIR-V output writer" ${D
 option_if_not_defined(TINT_BUILD_WGSL_WRITER "Build the WGSL output writer" ON)
 
 option_if_not_defined(TINT_BUILD_SYNTAX_TREE_WRITER "Build the syntax tree writer" OFF)
+
+option_if_not_defined(TINT_BUILD_INTERPRETER "Build the Tint WGSL interpreter" OFF)
 
 option_if_not_defined(TINT_BUILD_FUZZERS "Build fuzzers" OFF)
 option_if_not_defined(TINT_BUILD_AST_FUZZER "Build AST fuzzer" OFF)
@@ -325,6 +328,7 @@ message(STATUS "Dawn build Vulkan backend: ${DAWN_ENABLE_VULKAN}")
 message(STATUS "Dawn build OpenGL backend: ${DAWN_ENABLE_DESKTOP_GL}")
 message(STATUS "Dawn build OpenGL ES backend: ${DAWN_ENABLE_OPENGLES}")
 message(STATUS "Dawn build Null backend: ${DAWN_ENABLE_NULL}")
+message(STATUS "Dawn build WGSL interpreter backend: ${DAWN_ENABLE_WGSL_INTERPRETER}")
 
 message(STATUS "Dawn build with asserts in all configurations: ${DAWN_ALWAYS_ASSERT}")
 message(STATUS "Dawn build Wayland support: ${DAWN_USE_WAYLAND}")
@@ -355,6 +359,7 @@ message(STATUS "Tint build MSL writer: ${TINT_BUILD_MSL_WRITER}")
 message(STATUS "Tint build SPIR-V writer: ${TINT_BUILD_SPV_WRITER}")
 message(STATUS "Tint build WGSL writer: ${TINT_BUILD_WGSL_WRITER}")
 message(STATUS "Tint build Syntax Tree writer: ${TINT_BUILD_SYNTAX_TREE_WRITER}")
+message(STATUS "Tint build interpreter: ${TINT_BUILD_INTERPRETER}")
 message(STATUS "Tint build fuzzers: ${TINT_BUILD_FUZZERS}")
 message(STATUS "Tint build AST fuzzer: ${TINT_BUILD_AST_FUZZER}")
 message(STATUS "Tint build regex fuzzer: ${TINT_BUILD_REGEX_FUZZER}")
@@ -458,6 +463,9 @@ if (DAWN_ENABLE_D3D11)
 endif()
 if (DAWN_ENABLE_D3D12)
     target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_D3D12")
+endif()
+if (DAWN_ENABLE_WGSL_INTERPRETER)
+    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_WGSL_INTERPRETER")
 endif()
 if (DAWN_ENABLE_METAL)
     target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_METAL")
@@ -591,4 +599,8 @@ if (DAWN_EMIT_COVERAGE)
     WORKING_DIRECTORY ${TINT_ROOT_SOURCE_DIR}
     COMMENT "Generating tint coverage data"
     VERBATIM)
+endif()
+
+if (TINT_BUILD_INTERPRETER)
+  add_subdirectory(src/tint/interp)
 endif()
