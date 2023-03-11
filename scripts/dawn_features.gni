@@ -57,6 +57,9 @@ declare_args() {
   # Enables the compilation of Dawn's D3D12 backend
   dawn_enable_d3d12 = is_win
 
+  # Enables the compilation of Dawn's Emulator backend
+  dawn_enable_emulator = false
+
   # Enables the compilation of Dawn's Metal backend
   dawn_enable_metal = is_mac
 

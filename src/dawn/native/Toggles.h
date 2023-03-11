@@ -99,6 +99,10 @@ enum class Toggle {
     NoWorkaroundIndirectBaseVertexNotApplied,
     NoWorkaroundDstAlphaAsSrcBlendFactorForBothColorAndAlphaDoesNotWork,
 
+    // Toggles for the WGSL shader debugger backend.
+    EmulatorInteractive,
+    EmulatorEnableDRD,
+
     EnumCount,
     InvalidEnum = EnumCount,
 };

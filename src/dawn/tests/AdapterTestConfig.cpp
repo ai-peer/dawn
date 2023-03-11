@@ -35,6 +35,12 @@ BackendTestConfig D3D12Backend(std::initializer_list<const char*> forceEnabledWo
                              forceDisabledWorkarounds);
 }
 
+BackendTestConfig EmulatorBackend(std::initializer_list<const char*> forceEnabledWorkarounds,
+                                  std::initializer_list<const char*> forceDisabledWorkarounds) {
+    return BackendTestConfig(wgpu::BackendType::Emulator, forceEnabledWorkarounds,
+                             forceDisabledWorkarounds);
+}
+
 BackendTestConfig MetalBackend(std::initializer_list<const char*> forceEnabledWorkarounds,
                                std::initializer_list<const char*> forceDisabledWorkarounds) {
     return BackendTestConfig(wgpu::BackendType::Metal, forceEnabledWorkarounds,
@@ -73,6 +79,8 @@ std::string TestAdapterProperties::ParamName() const {
     switch (backendType) {
         case wgpu::BackendType::D3D12:
             return "D3D12";
+        case wgpu::BackendType::Emulator:
+            return "Emulator";
         case wgpu::BackendType::Metal:
             return "Metal";
         case wgpu::BackendType::Null:
