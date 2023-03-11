@@ -553,6 +553,19 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Using D3D12_BLEND_DEST_ALPHA as source blend factor for both color and alpha blending "
       "doesn't work correctly on the D3D12 backend using Intel Gen9 or Gen9.5 GPUs.",
       "https://crbug.com/dawn/1579", ToggleStage::Device}},
+
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+    // Toggles for the WGSL interpreter backend.
+    {Toggle::WgslInterpreterInteractive,
+     {"wgsl_interpreter_interactive",
+      "Enable interactive mode when using the WGSL interpreter backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
+    {Toggle::WgslInterpreterEnableDRD,
+     {"wgsl_interpreter_enable_drd",
+      "Enable data race detection when using the WGSL interpreter backend.",
+      "https://crbug.com/dawn/XXX", ToggleStage::Device}},
+#endif
+
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
