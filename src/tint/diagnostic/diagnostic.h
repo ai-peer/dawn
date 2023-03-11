@@ -40,6 +40,7 @@ enum class System {
     Clone,
     Constant,
     Inspector,
+    Interpreter,
     IR,
     Program,
     ProgramBuilder,
