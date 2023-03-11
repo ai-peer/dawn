@@ -157,7 +157,7 @@ func run() error {
 	unrollConstEvalLoopsDefault := runtime.GOOS != "windows"
 
 	var dawnNode, cts, node, npx, resultsPath, expectationsPath, logFilename, backend, adapterName, coverageFile string
-	var verbose, isolated, build, validate, dumpShaders, unrollConstEvalLoops, genCoverage bool
+	var verbose, isolated, build, validate, debug, dumpShaders, unrollConstEvalLoops, genCoverage bool
 	var numRunners int
 	var flags dawnNodeFlags
 	flag.StringVar(&dawnNode, "dawn-node", "", "path to dawn.node module")
@@ -177,6 +177,7 @@ func run() error {
 	flag.StringVar(&backend, "backend", backendDefault, "backend to use: default|null|webgpu|d3d11|d3d12|metal|vulkan|opengl|opengles."+
 		" set to 'vulkan' if VK_ICD_FILENAMES environment variable is set, 'default' otherwise")
 	flag.StringVar(&adapterName, "adapter", "", "name (or substring) of the GPU adapter to use")
+	flag.BoolVar(&debug, "debug", false, "run the test with interactive debugging enabled")
 	flag.BoolVar(&dumpShaders, "dump-shaders", false, "dump WGSL shaders. Enables --verbose")
 	flag.BoolVar(&unrollConstEvalLoops, "unroll-const-eval-loops", unrollConstEvalLoopsDefault, "unroll loops in const-eval tests")
 	flag.BoolVar(&genCoverage, "coverage", false, "displays coverage data")
@@ -235,6 +236,13 @@ func run() error {
 		}
 	}
 
+	if debug {
+		flags = append(flags, "enable-dawn-features=wgsl_interpreter_interactive")
+		backend = "interpreter"
+		isolated = true
+		numRunners = 1
+	}
+
 	// Forward the backend and adapter to use, if specified.
 	if backend != "default" {
 		fmt.Fprintln(stdout, "Forcing backend to", backend)
@@ -265,6 +273,7 @@ func run() error {
 		cts:                  cts,
 		tmpDir:               filepath.Join(os.TempDir(), "dawn-cts"),
 		unrollConstEvalLoops: unrollConstEvalLoops,
+		debug:                debug,
 		flags:                flags,
 		results:              testcaseStatuses{},
 		evalScript: func(main string) string {
@@ -466,6 +475,7 @@ type runner struct {
 	cts                  string
 	tmpDir               string
 	unrollConstEvalLoops bool
+	debug                bool
 	flags                dawnNodeFlags
 	covEnv               *cov.Env
 	coverageFile         string
@@ -1129,8 +1139,11 @@ type result struct {
 // runTestcase() runs the CTS testcase with the given query, returning the test
 // result.
 func (r *runner) runTestcase(ctx context.Context, query string) result {
-	ctx, cancel := context.WithTimeout(ctx, testTimeout)
-	defer cancel()
+	if !r.debug {
+		var cancel context.CancelFunc
+		ctx, cancel = context.WithTimeout(ctx, testTimeout)
+		defer cancel()
+	}
 
 	args := []string{
 		"-e", r.evalScript("cmdline"), // Evaluate 'eval'.
@@ -1165,8 +1178,14 @@ func (r *runner) runTestcase(ctx context.Context, query string) result {
 	cmd.Dir = r.cts
 
 	var buf bytes.Buffer
-	cmd.Stdout = &buf
-	cmd.Stderr = &buf
+	if r.debug {
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
+		cmd.Stdin = os.Stdin
+	} else {
+		cmd.Stdout = &buf
+		cmd.Stderr = &buf
+	}
 
 	err := cmd.Run()
 

@@ -107,6 +107,12 @@ enum class Toggle {
     NoWorkaroundIndirectBaseVertexNotApplied,
     NoWorkaroundDstAlphaAsSrcBlendFactorForBothColorAndAlphaDoesNotWork,
 
+#if defined(DAWN_ENABLE_BACKEND_WGSL_INTERPRETER)
+    // Toggles for the WGSL interpreter backend.
+    WgslInterpreterInteractive,
+    WgslInterpreterEnableDRD,
+#endif
+
     EnumCount,
     InvalidEnum = EnumCount,
 };
