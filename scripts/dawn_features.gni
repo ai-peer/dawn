@@ -76,6 +76,9 @@ declare_args() {
   # Enables the compilation of Dawn's D3D12 backend
   dawn_enable_d3d12 = is_win
 
+  # Enables the compilation of Dawn's WGSL interpreter backend
+  dawn_enable_wgsl_interpreter = false
+
   # Enables the compilation of Dawn's Metal backend
   dawn_enable_metal = is_mac || is_ios
 

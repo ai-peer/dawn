@@ -102,6 +102,7 @@ type flags struct {
 	isolated             bool
 	build                bool
 	validate             bool
+	debug                bool
 	dumpShaders          bool
 	fxc                  bool
 	unrollConstEvalLoops bool
@@ -148,6 +149,7 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 	flag.StringVar(&c.flags.backend, "backend", backendDefault, "backend to use: default|null|webgpu|d3d11|d3d12|metal|vulkan|opengl|opengles."+
 		" set to 'vulkan' if VK_ICD_FILENAMES environment variable is set, 'default' otherwise")
 	flag.StringVar(&c.flags.adapterName, "adapter", "", "name (or substring) of the GPU adapter to use")
+	flag.BoolVar(&c.flags.debug, "debug", false, "run the test with interactive debugging enabled")
 	flag.BoolVar(&c.flags.dumpShaders, "dump-shaders", false, "dump WGSL shaders. Enables --verbose")
 	flag.BoolVar(&c.flags.fxc, "fxc", false, "Use FXC instead of DXC. Disables 'use_dxc' Dawn flag")
 	flag.BoolVar(&c.flags.unrollConstEvalLoops, "unroll-const-eval-loops", unrollConstEvalLoopsDefault, "unroll loops in const-eval tests")
@@ -245,6 +247,13 @@ func (c *cmd) processFlags() error {
 
 	// For Windows, set the DLL directory to bin so that Dawn loads dxcompiler.dll from there.
 	c.flags.dawn.Set("dlldir=" + c.flags.bin)
+
+	if c.flags.debug {
+		c.flags.dawn.Set("enable-dawn-features=wgsl_interpreter_interactive")
+		c.flags.backend = "interpreter"
+		c.flags.isolated = true
+		c.flags.NumRunners = 1
+	}
 
 	// Forward the backend and adapter to use, if specified.
 	if c.flags.backend != "default" {

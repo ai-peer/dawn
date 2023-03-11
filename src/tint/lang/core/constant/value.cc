@@ -104,6 +104,9 @@ bool Value::Equal(const constant::Value* b) const {
             if (auto n = arr->ConstantCount()) {
                 return elements_equal(*n);
             }
+            if (NumElements() == b->NumElements()) {
+                return elements_equal(NumElements());
+            }
             return false;
         },
         [&](Default) {
