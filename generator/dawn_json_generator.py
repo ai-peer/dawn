@@ -181,12 +181,17 @@ class RecordMember:
         self.optional = optional
         self.is_return_value = is_return_value
         self.handle_type = None
+        self.id_type = None
         self.default_value = default_value
         self.skip_serialize = skip_serialize
 
     def set_handle_type(self, handle_type):
         assert self.type.dict_name == "ObjectHandle"
         self.handle_type = handle_type
+
+    def set_id_type(self, id_type):
+        assert self.type.dict_name == "ObjectId"
+        self.id_type = id_type
 
 
 Method = namedtuple('Method',
@@ -308,6 +313,9 @@ def linked_record_members(json_data, types):
         handle_type = m.get('handle_type')
         if handle_type:
             member.set_handle_type(types[handle_type])
+        id_type = m.get('id_type')
+        if id_type:
+            member.set_id_type(types[id_type])
         members.append(member)
         members_by_name[member.name.canonical_case()] = member
 
@@ -370,7 +378,6 @@ def link_function(function, types):
     function.return_type = types[function.json_data.get('returns', 'void')]
     function.arguments = linked_record_members(function.json_data['args'],
                                                types)
-
 
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
@@ -575,12 +582,14 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
     # Start with all commands in dawn.json and dawn_wire.json
     lpm_params = api_and_wire_params.copy()
 
-    # Commands that are built through generation
+    # dawn_lpm.proto Commands that are built through generation
     proto_generated_commands = []
 
-    # All commands, including hand written commands that we can't generate
-    # through codegen
+    # All dawn_lpm.proto commands, including hand written commands that we
+    # can't generate through codegen
     proto_all_commands = []
+
+    # Commands that are generated in DawnLPMSerializer.cpp
     cpp_commands = []
 
     # Remove blocklisted commands from protobuf generation params
@@ -602,10 +611,33 @@ def compute_lpm_params(api_and_wire_params, lpm_json):
             continue
         cpp_commands.append(command)
 
+    # Remove variable sized length values from commands,
+    # these are set to the length of the protobuf array.
+    for command in api_and_wire_params['cmd_records']['command']:
+        lengths = []
+        for member in command.members:
+            lengths.append(member.length)
+
+        for member in command.members:
+            if member in lengths:
+                command.members.remove(member)
+
+    # Remove variable sized length values from structures,
+    # these are set to the length of the protobuf array.
+    for structure in api_and_wire_params['by_category']['structure']:
+        lengths = []
+        for member in structure.members:
+            lengths.append(member.length)
+
+        for member in structure.members:
+            if member in lengths:
+                structure.members.remove(member)
+
     lpm_params['cmd_records'] = {
         'proto_generated_commands': proto_generated_commands,
         'proto_all_commands': proto_all_commands,
-        'cpp_commands': cpp_commands
+        'cpp_commands': cpp_commands,
+        'lpm_info': lpm_json.get("lpm_info")
     }
 
     return lpm_params
@@ -633,11 +665,47 @@ def as_protobufTypeLPM(member):
     return member.type.name.CamelCase()
 
 
+# Helper that generates names for protobuf grammars from contents
+# of dawn*.json like files
 def as_protobufNameLPM(*names):
-    # `descriptor` is a reserved keyword in lpm
+    # `descriptor` is a reserved keyword in lib-protobuf-mutator
     if (names[0].concatcase() == "descriptor"):
         return "desc"
     return as_varName(*names)
+
+
+# Helper to generate member accesses within C++ of protobuf objects
+# cmd.membera().memberb()
+def as_protobufMemberNameLPM(*names):
+    # `descriptor` is a reserved keyword in lib-protobuf-mutator
+    if (names[0].concatcase() == "descriptor"):
+        return "desc"
+    return names[0].concatcase().lower() + ''.join(
+        [name.concatcase().lower() for name in names[1:]])
+
+
+# Generated C++ variable names: varname_membera_memberb
+# for cmd.membera().memberb()
+def as_varLocalLPM(variable, *members):
+    return '_'.join([variable] +
+                    [member.name.concatcase() for member in members])
+
+
+# Generated C++ arrays: varnameN_membera_memberb
+def as_varLocalArrayLPM(variable, *members):
+    return variable + 'N_' + '_'.join(
+        [member.name.concatcase() for member in members])
+
+
+# Generated C++ array sizes: varnameN_membera_size
+def as_varSizeLPM(variable, member):
+    return variable + 'N_' + member.name.concatcase() + '_size'
+
+
+# Generated C++ object_id: varname_membera_id
+def as_varIdLPM(variable, member):
+    return variable + '_' + member.name.concatcase() + '_id'
+
 
 #############################################################
 # Generator
@@ -1138,8 +1206,15 @@ class MultiGeneratorFromDawnJSON(Generator):
             fuzzer_params = compute_lpm_params(api_and_wire_params, lpm_json)
 
             lpm_params = [
-                RENDER_PARAMS_BASE, params_dawn_wire, {}, api_and_wire_params,
-                fuzzer_params
+                RENDER_PARAMS_BASE, params_dawn_wire, {
+                    'as_protobufMemberNameLPM': as_protobufMemberNameLPM,
+                    'as_varIdLPM': as_varIdLPM,
+                    'as_varLocalLPM': as_varLocalLPM,
+                    'as_varLocalArrayLPM': as_varLocalArrayLPM,
+                    'as_varSizeLPM': as_varSizeLPM,
+                    'as_indexedAccessLPM': lambda access: '[' + access + ']',
+                    'as_memberAccessLPM': lambda access: '.' + access
+                }, api_and_wire_params, fuzzer_params
             ]
 
             renders.append(
