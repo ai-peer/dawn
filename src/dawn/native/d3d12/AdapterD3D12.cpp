@@ -20,10 +20,10 @@
 #include "dawn/common/Platform.h"
 #include "dawn/common/WindowsUtils.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
-#include "dawn/native/d3d12/D3D12Error.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 
 namespace dawn::native::d3d12 {
@@ -64,7 +64,7 @@ MaybeError Adapter::InitializeImpl() {
     // D3D12 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
     // rendering.
-    const PlatformFunctions* functions = GetBackend()->GetFunctions();
+    const dawn::native::d3d::PlatformFunctions* functions = GetBackend()->GetFunctions();
     if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                             __uuidof(ID3D12Device), &mD3d12Device))) {
         return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");

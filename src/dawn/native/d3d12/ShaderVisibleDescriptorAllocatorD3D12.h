@@ -20,9 +20,9 @@
 
 #include "dawn/native/Error.h"
 #include "dawn/native/RingBufferAllocator.h"
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d12/IntegerTypes.h"
 #include "dawn/native/d3d12/PageableD3D12.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
 
 // |ShaderVisibleDescriptorAllocator| allocates a variable-sized block of descriptors from a GPU
 // descriptor heap pool.

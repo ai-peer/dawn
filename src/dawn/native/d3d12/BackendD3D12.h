@@ -22,11 +22,13 @@
 
 #include "dawn/native/BackendConnection.h"
 
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
+
+namespace dawn::native::d3d {
+class PlatformFunctions;
+}
 
 namespace dawn::native::d3d12 {
-
-class PlatformFunctions;
 
 // DxcVersionInfo holds both DXC compiler (dxcompiler.dll) version and DXC validator (dxil.dll)
 // version, which are not necessarily identical. Both are in uint64_t type, as the result of
@@ -73,7 +75,7 @@ class Backend : public BackendConnection {
     // information is valid. Must be called after ensuring `IsDXCAvailable()` return true.
     DxcVersionInfo GetDxcVersion() const;
 
-    const PlatformFunctions* GetFunctions() const;
+    const dawn::native::d3d::PlatformFunctions* GetFunctions() const;
 
     std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(
         const TogglesState& adapterToggles) override;
@@ -88,7 +90,7 @@ class Backend : public BackendConnection {
 
     // Keep mFunctions as the first member so that in the destructor it is freed last. Otherwise
     // the D3D12 DLLs are unloaded before we are done using them.
-    std::unique_ptr<PlatformFunctions> mFunctions;
+    std::unique_ptr<dawn::native::d3d::PlatformFunctions> mFunctions;
     ComPtr<IDXGIFactory4> mFactory;
     ComPtr<IDxcLibrary> mDxcLibrary;
     ComPtr<IDxcCompiler> mDxcCompiler;

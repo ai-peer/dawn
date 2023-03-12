@@ -16,8 +16,8 @@
 #define SRC_DAWN_NATIVE_D3D12_HEAPD3D12_H_
 
 #include "dawn/native/ResourceHeap.h"
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d12/PageableD3D12.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 

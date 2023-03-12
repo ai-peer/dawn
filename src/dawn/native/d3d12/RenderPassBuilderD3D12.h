@@ -21,7 +21,7 @@
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_span.h"
 #include "dawn/native/IntegerTypes.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native::d3d12 {

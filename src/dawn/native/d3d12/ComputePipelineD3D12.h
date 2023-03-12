@@ -17,7 +17,7 @@
 
 #include "dawn/native/ComputePipeline.h"
 
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d12 {
 

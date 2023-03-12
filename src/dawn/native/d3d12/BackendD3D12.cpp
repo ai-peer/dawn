@@ -19,18 +19,19 @@
 #include "dawn/common/Log.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
-#include "dawn/native/d3d12/D3D12Error.h"
-#include "dawn/native/d3d12/PlatformFunctions.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 
 namespace dawn::native::d3d12 {
 
 namespace {
 
-ResultOrError<ComPtr<IDXGIFactory4>> CreateFactory(const PlatformFunctions* functions,
-                                                   BackendValidationLevel validationLevel,
-                                                   bool beginCaptureOnStartup) {
+ResultOrError<ComPtr<IDXGIFactory4>> CreateFactory(
+    const dawn::native::d3d::PlatformFunctions* functions,
+    BackendValidationLevel validationLevel,
+    bool beginCaptureOnStartup) {
     ComPtr<IDXGIFactory4> factory;
 
     uint32_t dxgiFactoryFlags = 0;
@@ -85,7 +86,7 @@ ResultOrError<Ref<AdapterBase>> CreateAdapterFromIDXGIAdapter(Backend* backend,
 Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::BackendType::D3D12) {}
 
 MaybeError Backend::Initialize() {
-    mFunctions = std::make_unique<PlatformFunctions>();
+    mFunctions = std::make_unique<dawn::native::d3d::PlatformFunctions>();
     DAWN_TRY(mFunctions->LoadFunctions());
 
     // Check if DXC is available and cache DXC version information
@@ -269,7 +270,7 @@ bool Backend::IsDXCAvailableAndVersionAtLeast(uint64_t minimumCompilerMajorVersi
     return false;
 }
 
-const PlatformFunctions* Backend::GetFunctions() const {
+const dawn::native::d3d::PlatformFunctions* Backend::GetFunctions() const {
     return mFunctions.get();
 }
 
