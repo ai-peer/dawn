@@ -17,7 +17,7 @@
 
 #include <vector>
 
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 #include "dawn/dawn_wsi.h"
 #include "dawn/native/IntegerTypes.h"

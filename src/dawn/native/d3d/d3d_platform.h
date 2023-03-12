@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
-#define SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+#ifndef SRC_DAWN_NATIVE_D3D_D3D_PLATFORM_H_
+#define SRC_DAWN_NATIVE_D3D_D3D_PLATFORM_H_
 
 // Pre-emptively include windows.h but remove its macros so that they aren't set when declaring the
 // COM interfaces. Otherwise ID3D12InfoQueue::GetMessage would be either GetMessageA or GetMessageW
@@ -35,4 +35,4 @@
 
 using Microsoft::WRL::ComPtr;
 
-#endif  // SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+#endif  // SRC_DAWN_NATIVE_D3D_D3D_PLATFORM_H_

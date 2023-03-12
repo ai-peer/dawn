@@ -19,7 +19,7 @@
 #include "dawn/common/Math.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/d3d12/TextureCopySplitter.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/utils/TestUtils.h"
 #include "dawn/webgpu_cpp_print.h"
 #include "gtest/gtest.h"

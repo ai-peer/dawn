@@ -25,12 +25,15 @@
 #include "dawn/native/d3d12/Forward.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
 
+namespace dawn::native::d3d {
+class PlatformFunctions;
+}
+
 namespace dawn::native::d3d12 {
 
 class CommandAllocatorManager;
 struct ExternalImageDescriptorDXGISharedHandle;
 class ExternalImageDXGIImpl;
-class PlatformFunctions;
 class ResidencyManager;
 class ResourceAllocatorManager;
 class SamplerHeapCache;
@@ -71,7 +74,7 @@ class Device final : public DeviceBase {
     CommandAllocatorManager* GetCommandAllocatorManager() const;
     ResidencyManager* GetResidencyManager() const;
 
-    const PlatformFunctions* GetFunctions() const;
+    const dawn::native::d3d::PlatformFunctions* GetFunctions() const;
     ComPtr<IDXGIFactory4> GetFactory() const;
     ComPtr<IDxcLibrary> GetDxcLibrary() const;
     ComPtr<IDxcCompiler> GetDxcCompiler() const;
