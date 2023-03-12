@@ -28,5 +28,28 @@
         "surface descriptor from windows core window",
         "surface descriptor from windows swap chain panel",
         "surface descriptor from canvas html selector"
-    ]
+    ],
+
+    "lpm_info": {
+        "clamps": {
+            "buffer descriptor": {
+                "size": 65536
+            },
+            "queue write buffer": {
+                "size": 65536
+            }
+        },
+
+        "overrides": {
+            "instance request adapter": {
+                "instance id": 1
+            }
+        },
+
+        "limits": {
+            "adapter": 2,
+            "device": 2,
+            "default": 16
+        }
+    }
 }
