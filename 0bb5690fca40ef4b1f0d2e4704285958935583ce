@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "97ce89c9_380c7dee",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7a1a339d_2be2716b",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "476d1965_e5e0f2c3",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95efc2ee_613fcdc1",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Took a stab at this. Added an `id_type` to all dawn_wire.json ObjectId types except for the type in DestroyObject (which I don\u0027t need for my fuzzer), but it can be of type `any` I guess. Not sure what to put there or if we should just not have an `id_type` for that value as it\u0027s not quite as strictly typed.",
+      "parentUuid": "476d1965_e5e0f2c3",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09051807_304bb336",
@@ -48,6 +84,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "This information we should already have in dawn.json no?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e5de82_656e2c46",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09051807_304bb336",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9dc8c64_fe24864d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "lib-protobuf-mutator [1]\n\n[1] https://github.com/google/libprotobuf-mutator",
+      "parentUuid": "222998d6_87719ca6",
+      "range": {
+        "startLine": 378,
+        "startChar": 4,
+        "endLine": 378,
+        "endChar": 7
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d60e1f9_0b71f714",
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e22f870b_09055aa2",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 636,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d49aeb29_a148e413",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9f0dc02_fe3b055b",
@@ -143,6 +239,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "177675c9_de8295a1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a9f0dc02_fe3b055b",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b028bd8_75f28ffa",
@@ -156,6 +270,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "[1]",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13e93b94_fa002bb6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6b028bd8_75f28ffa",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -183,6 +315,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e98ab3ab_236aa5a1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 744,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a3d851dc_42b598c7",
+      "range": {
+        "startLine": 744,
+        "startChar": 23,
+        "endLine": 744,
+        "endChar": 30
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "433b87d6_4738aaef",
@@ -196,6 +352,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "duplicated as well? Ditto for as_protobufNameLPM",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6ca498_a6b4480b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "433b87d6_4738aaef",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -225,6 +399,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b505f451_923bf2c1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "I couldn\u0027t find an easy way to do this as I\u0027m assigning a variable to the result of these functions. I think defining these as lambdas below would be better though then giving them their own helper functions as they\u0027ll only be used within the C++ generation.",
+      "parentUuid": "59ba7430_1966185d",
+      "range": {
+        "startLine": 796,
+        "startChar": 0,
+        "endLine": 801,
+        "endChar": 23
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8cba0c2_4e43d2bf",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 6
@@ -236,6 +434,30 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "nit: these two lambdas seem unnecessary since they forward args directly to the function and nothing else.",
+      "range": {
+        "startLine": 1305,
+        "startChar": 6,
+        "endLine": 1307,
+        "endChar": 61
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccdc0617_74c85026",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d8cba0c2_4e43d2bf",
       "range": {
         "startLine": 1305,
         "startChar": 6,
@@ -286,6 +508,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed49b6d_6d03572a",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "22ec6601_ac681fda",
+      "range": {
+        "startLine": 310,
+        "startChar": 56,
+        "endLine": 310,
+        "endChar": 58
+      },
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0a1bc06_d2405979",
@@ -299,6 +545,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "ditto could be generated for when we need to add more objects? Also all of these could be constexpr integers I think.",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88423d50_037d1d19",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-12T21:39:38Z",
+      "side": 1,
+      "message": "Done. Generated in DawnLPMConstants_autogen.h.",
+      "parentUuid": "d0a1bc06_d2405979",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
