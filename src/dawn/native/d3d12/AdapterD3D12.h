@@ -17,8 +17,8 @@
 
 #include "dawn/native/Adapter.h"
 
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d12/D3D12Info.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 

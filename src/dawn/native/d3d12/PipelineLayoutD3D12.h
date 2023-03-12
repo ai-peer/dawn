@@ -22,7 +22,7 @@
 #include "dawn/common/ityp_vector.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/PipelineLayout.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d12 {
 

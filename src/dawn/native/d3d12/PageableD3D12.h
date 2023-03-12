@@ -18,7 +18,7 @@
 #include "dawn/common/LinkedList.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/IntegerTypes.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d12 {
 // This class is used to represent ID3D12Pageable allocations, and also serves as a node within

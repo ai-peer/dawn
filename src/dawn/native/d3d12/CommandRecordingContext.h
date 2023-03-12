@@ -19,8 +19,8 @@
 
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
+#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d12/BufferD3D12.h"
-#include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 class CommandAllocatorManager;

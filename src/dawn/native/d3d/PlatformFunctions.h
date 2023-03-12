@@ -12,19 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_PLATFORMFUNCTIONS_H_
-#define SRC_DAWN_NATIVE_D3D12_PLATFORMFUNCTIONS_H_
+#ifndef SRC_DAWN_NATIVE_D3D_PLATFORMFUNCTIONS_H_
+#define SRC_DAWN_NATIVE_D3D_PLATFORMFUNCTIONS_H_
 
 #include <d3dcompiler.h>
 
 #include <string>
 
-#include "dawn/native/d3d12/d3d12_platform.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 #include "dawn/common/DynamicLib.h"
 #include "dawn/native/Error.h"
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 
 // Loads the functions required from the platform dynamically so that we don't need to rely on
 // them being present in the system. For example linking against d3d12.lib would prevent
@@ -108,6 +108,6 @@ class PlatformFunctions {
     DynamicLib mPIXEventRuntimeLib;
 };
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D12_PLATFORMFUNCTIONS_H_
+#endif  // SRC_DAWN_NATIVE_D3D_PLATFORMFUNCTIONS_H_
