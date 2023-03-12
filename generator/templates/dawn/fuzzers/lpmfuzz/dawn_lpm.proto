@@ -179,6 +179,10 @@ message DestroyObject {
     required uint32 objectId = 2;
 }
 
+message DeviceCreateRenderPipeline {}
+
+message DeviceCreateRenderPipelineAsync {}
+
 message Command {
     oneof command {
         {% for command in cmd_records["proto_all_commands"] %}
