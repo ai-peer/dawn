@@ -17,12 +17,14 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
-#include "dawn/native/d3d12/D3D12Error.h"
-#include "dawn/native/d3d12/PlatformFunctions.h"
 
 namespace dawn::native::d3d12 {
+
+using dawn::native::d3d::PlatformFunctions;
 
 ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
     D3D12DeviceInfo info = {};

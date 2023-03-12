@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/d3d12/PlatformFunctions.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
 
 #include <comdef.h>
 
@@ -23,7 +23,7 @@
 
 #include "dawn/common/DynamicLib.h"
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 namespace {
 // Extract Version from "10.0.{Version}.0" if possible, otherwise return 0.
 uint32_t GetWindowsSDKVersionFromDirectoryName(const char* directoryName) {
@@ -264,4 +264,4 @@ void PlatformFunctions::LoadPIXRuntime() {
     }
 }
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d
