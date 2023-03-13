@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19b25f0_49234589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T08:52:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0dfbd315daeccfefdd61f8e7a98c4056cf971a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "074f91fd_4968123a",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T08:52:02Z",
+      "side": 1,
+      "message": "nit: If we start having a lot of these, we can factor out common files and dependencies in an intermediate target.",
+      "revId": "0dfbd315daeccfefdd61f8e7a98c4056cf971a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c50eb0f_4880256a",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMFuzzerAndMetalBackend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T08:52:02Z",
+      "side": 1,
+      "message": "Why the discrete GPU only? IIRC M1 is categorized as integrated.",
+      "revId": "0dfbd315daeccfefdd61f8e7a98c4056cf971a4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
