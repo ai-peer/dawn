@@ -1,0 +1,197 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba4fd4b2_9fe6baaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "Looks much better, thanks for the iteration!",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "462c99cf_0f565bbe",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "seems like this could be a bit simpler:\n\n```\n  proto_all_commands.append(command)\n  \n  blocklisted \u003d command.name.get() in blocklisted_cmds_proto\n  custom \u003d command.name.get() in custom_cmds_proto\n  if not custom and not blocklisted:\n      proto_generated_commands.append(command)\n```",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 42
+      },
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b342f86_84bea211",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "nit: raise an Exception? or we can use assert(...)",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0feade30_0f79bdc6",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "This seems like it could check is type.native like in [1] so we don\u0027t have to remember to update this list.",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "138cf326_1e07b90d",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa9c5e1_b613d5b0",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "I vaguely remember we already had a comment about this and may have chosen to defer, but shouldn\u0027t this have a header guard, be in a namespace potentially and use constexpr instead of a macro?",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5989990c_551c5800",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this handle cases where the type is repeated?",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3ffa404_77950267",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "nit: maybe we could assert that this is a const void*",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50578d70_51304b79",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "OMG namespaces!!! :D",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce49fdf0_2c1d3dde",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "Why do we skip the ObjectHandle? Can we have a comment?",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72547d9b_d671b9bf",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T09:11:40Z",
+      "side": 1,
+      "message": "We could use an assert or unreachable (which would be added to the template \"standard library\")",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
