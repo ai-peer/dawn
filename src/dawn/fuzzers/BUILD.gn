@@ -113,7 +113,7 @@ dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
   additional_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
 }
 
-if (is_dawn_lpm_fuzzer && build_with_chromium && dawn_use_swiftshader) {
+if (is_dawn_lpm_fuzzer && build_with_chromium) {
   import("//third_party/protobuf/proto_library.gni")
   import("${dawn_root}/generator/dawn_generator.gni")
 
@@ -175,6 +175,32 @@ if (is_dawn_lpm_fuzzer && build_with_chromium && dawn_use_swiftshader) {
       "lpmfuzz/DawnLPMFuzzer.cpp",
       "lpmfuzz/DawnLPMFuzzer.h",
       "lpmfuzz/DawnLPMFuzzerAndVulkanBackend.cpp",
+      "lpmfuzz/DawnLPMObjectStore.cpp",
+      "lpmfuzz/DawnLPMObjectStore.h",
+      "lpmfuzz/DawnLPMSerializerCustom.cpp",
+      "lpmfuzz/DawnLPMSerializerCustom.h",
+    ]
+
+    deps = [
+      ":copy_dawn_lpm_proto_outputs",
+      ":dawn_lpmfuzz_cpp",
+      "${dawn_root}/src/dawn:cpp",
+      "${dawn_root}/src/dawn:proc",
+      "${dawn_root}/src/dawn/common",
+      "${dawn_root}/src/dawn/native:static",
+      "${dawn_root}/src/dawn/utils",
+      "${dawn_root}/src/dawn/wire:static",
+      "//third_party/dawn/src/dawn/fuzzers:dawn_lpm_proto",
+      "//third_party/libprotobuf-mutator",
+    ]
+  }
+
+  dawn_fuzzer_test("dawn_lpm_fuzzer_and_metal_backend") {
+    sources = get_target_outputs(":dawn_lpmfuzz_cpp")
+    sources += [
+      "lpmfuzz/DawnLPMFuzzer.cpp",
+      "lpmfuzz/DawnLPMFuzzer.h",
+      "lpmfuzz/DawnLPMFuzzerAndMetalBackend.cpp",
       "lpmfuzz/DawnLPMObjectStore.cpp",
       "lpmfuzz/DawnLPMObjectStore.h",
       "lpmfuzz/DawnLPMSerializerCustom.cpp",
