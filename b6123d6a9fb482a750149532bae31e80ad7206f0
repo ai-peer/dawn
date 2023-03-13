@@ -104,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d8ed6d9_e4cd7194",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1533,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T20:56:43Z",
+      "side": 1,
+      "message": "Done. btw, what is the difference between \"native\" and \"dawn\" tag?",
+      "parentUuid": "4bf75c00_4283aa25",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9de5e347_b7ecb551",
@@ -264,6 +282,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bd7fe0_0b6b56c4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T20:56:43Z",
+      "side": 1,
+      "message": "Done. Added TODO (linked to crbug.com/dawn/1702).",
+      "parentUuid": "c4273859_fe905b39",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe0df56f_546af971",
@@ -277,6 +313,24 @@
       "writtenOn": "2023-03-10T17:11:47Z",
       "side": 1,
       "message": "it should be possible to write a test with deviceA and deviceB, where calling Tick on deviceA releases deviceB (inside some callback) - making the second tick cause a use after free.\n\nI think we can fix this by making the vector of devices local to this function hold a Ref",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c9f45fd_a4e45358",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T20:56:43Z",
+      "side": 1,
+      "message": "Done. btw using Ref might not be enough if multithreading comes into the picture. The device might be under destruction on another thread, adding a Ref on current thread is not safe if we only store the `DeviceBase*` raw pointer in `InstanceBase`. I have a fix for it in the follow up CL.",
+      "parentUuid": "fe0df56f_546af971",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -300,6 +354,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96082d85_052d6eb2",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T20:56:43Z",
+      "side": 1,
+      "message": "`targetDevice` is an argument passed into this function, it might not be created from the same `mInstance`. So I think we should keep it.",
+      "parentUuid": "8cd0f919_37b0b798",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cbb7bb5_f6a86444",
         "filename": "src/dawn/wire/server/Server.cpp",
         "patchSetId": 2
@@ -311,6 +383,24 @@
       "writtenOn": "2023-03-10T17:11:47Z",
       "side": 1,
       "message": "is this to make sure no pending callbacks are in flight?\nshould we use the dawn::native:: version to call ProcessEvents until idle?",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4b274b2_39c0cea9",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T20:56:43Z",
+      "side": 1,
+      "message": "What do you mean by \"use the dawn::native:: version to call ProcessEvents until idle\"?\n\nDoes it mean we should implement a `dawn::native` version of `ProcessEvents` where we keep calling `APIProcessEvents` until it returns false? Or we implement the \"looping until idle\" here but using `dawn::native` instead of `mProcs.instanceProcessEvents`?\n\nI don\u0027t see `dawn::native::DeviceTick` is implemented as a loop until idle btw.",
+      "parentUuid": "7cbb7bb5_f6a86444",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
