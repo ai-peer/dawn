@@ -372,6 +372,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c033e14_5f3a6904",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1447,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T21:52:03Z",
+      "side": 1,
+      "message": "hm, I don\u0027t think there are many (or any) cases where we have another instance. It\u0027s probably better to remove the argument entirely then - or if necessary change it to be wgpu::Instance so you can process events on the other instance",
+      "parentUuid": "96082d85_052d6eb2",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cbb7bb5_f6a86444",
         "filename": "src/dawn/wire/server/Server.cpp",
         "patchSetId": 2
@@ -454,6 +472,24 @@
       "writtenOn": "2023-03-13T21:47:36Z",
       "side": 1,
       "message": "Now I think about it again, there is still another way to fix the callback leak:\nWe can make `ObjectBase` a subclass of `RefCountedWithExternalCount` and inside its `WillDropLastExternalRef`, we trigger `device.Tick()`.\n\nThat way, when a buffer is destroyed, any callback related to it will be flushed automatically.",
+      "parentUuid": "a7f1ae84_c4b70e27",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2966fcbd_a6d3561d",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T21:52:03Z",
+      "side": 1,
+      "message": "Right now, the WGPUInstance can outlive the server. It\u0027s \"injected\" into the server using `InjectInstance`. And, there\u0027s no way to un-inject it. So it could be a bit weird that the server \"takes over\" the instance in this way and will ensure that it flushes everything.\nWe could say that it\u0027s the application\u0027s responsibility since after injecting the instance, they may still retain a reference to it.\n\nThe application needs to manually call processEvents anyway in normal operation (like Chrome w/ PerformPollingWork). The wire doesn\u0027t do it for you. So it could be weird that we handle flushing this shutdown case, but not other more typical situations.\nSo for consistency, I think it is better for now to not flush on behalf of the application.",
       "parentUuid": "a7f1ae84_c4b70e27",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
