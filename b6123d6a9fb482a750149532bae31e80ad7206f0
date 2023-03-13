@@ -439,6 +439,24 @@
       "parentUuid": "8239461a_3bfdf184",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b5e9e35_56877e52",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T21:47:36Z",
+      "side": 1,
+      "message": "Now I think about it again, there is still another way to fix the callback leak:\nWe can make `ObjectBase` a subclass of `RefCountedWithExternalCount` and inside its `WillDropLastExternalRef`, we trigger `device.Tick()`.\n\nThat way, when a buffer is destroyed, any callback related to it will be flushed automatically.",
+      "parentUuid": "a7f1ae84_c4b70e27",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
