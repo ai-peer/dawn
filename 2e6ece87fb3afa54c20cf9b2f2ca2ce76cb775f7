@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2868d46d_f51f252b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "462c99cf_0f565bbe",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 42
+      },
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b342f86_84bea211",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-03-13T09:11:40Z",
       "side": 1,
       "message": "nit: raise an Exception? or we can use assert(...)",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee9935f_a5edbf0e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b342f86_84bea211",
       "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c464b66d_1773c85a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure where we should hold this data. [1] appears to be the ctype, we\u0027re converting from ctype to protobuf type here. It seems like we would need something hereish [A]\n\n[A]",
+      "parentUuid": "0feade30_0f79bdc6",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "138cf326_1e07b90d",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 31
@@ -88,6 +148,24 @@
       "writtenOn": "2023-03-13T09:11:40Z",
       "side": 1,
       "message": "[1]",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa07df3a_9c257b4a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "138cf326_1e07b90d",
       "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7c6db17_73d1b1a8",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7aa9c5e1_b613d5b0",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5989990c_551c5800",
@@ -122,6 +218,24 @@
       "writtenOn": "2023-03-13T09:11:40Z",
       "side": 1,
       "message": "Shouldn\u0027t this handle cases where the type is repeated?",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daa9baef_891974f9",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "I refactored this a bit to hopefully make this clearere, and remove the \"complex\" and \"simple\" terminology like I did in patchset 4. This is a \"structure\" with a member.length constant so we wouldn\u0027t need repeated here.",
+      "parentUuid": "5989990c_551c5800",
       "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +291,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90bcdc4a_b8b55d23",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ce49fdf0_2c1d3dde",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72547d9b_d671b9bf",
@@ -190,6 +322,24 @@
       "writtenOn": "2023-03-13T09:11:40Z",
       "side": 1,
       "message": "We could use an assert or unreachable (which would be added to the template \"standard library\")",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56fd5bad_0e5fc6c5",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Took a stab at this, added \"unreachable_code\" in dawn and passed it to the template\u0027s standard_library. However, I think there might be a better way to do this but wasn\u0027t able to find any.",
+      "parentUuid": "72547d9b_d671b9bf",
       "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -356,6 +356,24 @@
       "parentUuid": "42e38612_ce3f31e6",
       "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a84596c_9985cae6",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:19:15Z",
+      "side": 1,
+      "message": "Refactored this file a bit to match DawnLPMSerializer.cpp a bit better by breaking it up into both pass by reference and pass by value.",
+      "parentUuid": "84fc88b1_b3110034",
+      "revId": "785407ec43fabf20caae137137d7f9efdac5f37c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
