@@ -421,6 +421,24 @@
       "parentUuid": "e4b274b2_39c0cea9",
       "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7f1ae84_c4b70e27",
+        "filename": "src/dawn/wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-13T21:38:15Z",
+      "side": 1,
+      "message": "Yeah, you are right. Then intention of the processEvents call here was to flush remaining callbacks. Doing the loop in the fuzzer would fix the leak as well.\nI was just following Corentin\u0027s original suggestion of calling `device.Tick` in the server before the device is destroyed. But that was not enough because `MapAsync` could still be called after the device is destroyed (externally/or in server\u0027s point of view). In practice, the device might still be alive due to internal ref being kept by the buffer. Using `ProcessEvents` is the only way to trigger the callback after that. And I thought inside Server\u0027s dtor could be an appropriate place to call `ProcessEvents`.\n\nShouldn\u0027t we do the loop here so that any leaks would be automatically cleared for the application? Or it\u0027s the responsibility of the application to keep draining last remaining callbacks before destroying the server?",
+      "parentUuid": "8239461a_3bfdf184",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
