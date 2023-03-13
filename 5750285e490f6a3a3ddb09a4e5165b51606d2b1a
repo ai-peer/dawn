@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65b617e1_1f33f34a",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-13T22:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f3fdd6a_358fead6",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 29
+      },
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8781b246_4f54e43d",
@@ -111,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0491a24a_87b115a0",
+        "filename": "src/dawn/native/d3d/d3d_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-13T22:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8fcc444_f5b33f8f",
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c379d78e_ba1e4821",
@@ -124,6 +166,30 @@
       "writtenOn": "2023-03-13T16:31:07Z",
       "side": 1,
       "message": "here and throughout, is the full `dawn::native::d3d::` necessary, or will `d3d::` suffice?",
+      "range": {
+        "startLine": 67,
+        "startChar": 10,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f901ef6a_55cf8f8d",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-13T22:54:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c379d78e_ba1e4821",
       "range": {
         "startLine": 67,
         "startChar": 10,
