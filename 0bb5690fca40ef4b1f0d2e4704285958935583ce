@@ -636,6 +636,24 @@
       "message": "Uuuuh it would be best if we didn\u0027t depend on client files so things stay as decoupled as possible (WireCmd we don\u0027t have a choice though). So maybe this file could have its own type for ObjectHandle? Or at least use dawn/wire/ObjectHandle.h instead of the client file.",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ac4d90_8e0bae98",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMObjectStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T02:16:40Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "be1f8c72_5602d556",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
