@@ -15,5 +15,14 @@
 namespace DawnLPMFuzzer {
 
 static constexpr int instance_object_id = 1;
+static constexpr int invalid_object_id = 0;
+
+{% for type in by_category["object"] %}
+    {% if type.name.canonical_case() in cmd_records["lpm_info"]["limits"] %}
+        static constexpr int {{ type.name.snake_case() }}_limit = {{ cmd_records["lpm_info"]["limits"][type.name.canonical_case()] }};
+    {% else %}
+        static constexpr int {{ type.name.snake_case() }}_limit = {{ cmd_records["lpm_info"]["limits"]["default"] }};
+    {% endif %}
+{% endfor %}
 
 } // namespace DawnLPMFuzzer
