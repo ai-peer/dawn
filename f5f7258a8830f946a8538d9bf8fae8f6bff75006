@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97cc50d1_f230ae37",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T19:02:12Z",
+      "side": 1,
+      "message": "Ben, I forked your CTS roll from last week, added this Skip, and split all the conflicts with it - I think the autoroller should actually converge after this",
+      "range": {
+        "startLine": 512,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 100
+      },
+      "revId": "f5f7258a8830f946a8538d9bf8fae8f6bff75006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
