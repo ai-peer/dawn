@@ -36,6 +36,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "730494b0_862988b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T19:13:23Z",
+      "side": 1,
+      "message": "Okay. Let\u0027s land, and I\u0027ll try another roll. Maybe some of them will clean up.",
+      "parentUuid": "f778e689_a9f99c41",
+      "revId": "f5f7258a8830f946a8538d9bf8fae8f6bff75006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e46c18_6fe491b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T19:13:23Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f5f7258a8830f946a8538d9bf8fae8f6bff75006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97cc50d1_f230ae37",
@@ -49,6 +84,30 @@
       "writtenOn": "2023-03-13T19:02:12Z",
       "side": 1,
       "message": "Ben, I forked your CTS roll from last week, added this Skip, and split all the conflicts with it - I think the autoroller should actually converge after this",
+      "range": {
+        "startLine": 512,
+        "startChar": 0,
+        "endLine": 516,
+        "endChar": 100
+      },
+      "revId": "f5f7258a8830f946a8538d9bf8fae8f6bff75006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b3c958d_087df3a0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T19:13:23Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "97cc50d1_f230ae37",
       "range": {
         "startLine": 512,
         "startChar": 0,
