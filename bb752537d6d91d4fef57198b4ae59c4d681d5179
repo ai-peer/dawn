@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "195eeb0a_fa65c5db",
+        "filename": "src/dawn/fuzzers/lpmfuzz/DawnLPMSerializerCustom.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T19:32:43Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org this one can\u0027t be generated unfortunately. Do you have any ideas here by chance? Maybe managing custom C++ stuff within DawnLPMSerializer.cpp is the way to go here as well.",
+      "revId": "bb752537d6d91d4fef57198b4ae59c4d681d5179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
