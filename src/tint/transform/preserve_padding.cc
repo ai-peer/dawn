@@ -67,9 +67,12 @@ struct PreservePadding::State {
                 },
                 [&](const ast::Enable* enable) {
                     // Check if the full pointer parameters extension is already enabled.
-                    if (enable->extension ==
-                        builtin::Extension::kChromiumExperimentalFullPtrParameters) {
-                        ext_enabled = true;
+                    for (auto* ext : enable->extensions) {
+                        if (ext->name ==
+                            builtin::Extension::kChromiumExperimentalFullPtrParameters) {
+                            ext_enabled = true;
+                            break;
+                        }
                     }
                 });
         }
