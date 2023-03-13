@@ -248,6 +248,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4273859_fe905b39",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-13T18:31:41Z",
+      "side": 1,
+      "message": "The plan was to do so in the future. We just haven\u0027t needed it yet so I deprioritized that for now. In theory, we may be able to use the mock device for all the validation testing instead of needing the null device in the future.",
+      "parentUuid": "166634d4_c8e7e0fa",
+      "revId": "b6123d6a9fb482a750149532bae31e80ad7206f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe0df56f_546af971",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 2
