@@ -118,6 +118,125 @@
       "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxUniformBuffersPerShaderStage:createPipelineAsync,*\u0027",
       "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a665c13_603f4149",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,evaluation_order:assignment:*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43d68e4_32490249",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟦 note: longest test took 5.2761005s (average 4.5461505s)",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65cd8c5f_787a6e83",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxBindGroups:createPipelineAsync,*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4091a82_9eaa2b1e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxBindingsPerBindGroup:createPipelineAsync,*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c430fdd_536c0be0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSamplersPerShaderStage:createPipelineAsync,*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c9c27b_b9efcc4d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxStorageTexturesPerShaderStage:createPipelineAsync,*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0645b295_c2847d59",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-13T16:39:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxUniformBuffersPerShaderStage:createPipelineAsync,*\u0027",
+      "revId": "286ac27fccb95a2dbd303895c13dca92e9c71a91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
