@@ -73,6 +73,24 @@
       "message": "nit: Maybe this should be kept in d3d12_platform.h that include d3d_platform.h. The D3D12 backend can use D3D11 but the D3D11 backend cannot use D3D12. This would prevent it at the header inclusion level.\n\nI wish we could do the same for dxcapi.h but that\u0027s use for Blobs (and less likely to be misused). And also d3d11 because not all the D3D12 backend needs it, but maybe it is too prevalent to be contained to just a couple places.",
       "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54bfd7d5_169dae22",
+        "filename": "src/dawn/native/d3d/d3d_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-13T15:03:29Z",
+      "side": 1,
+      "message": "I was thinking to use macros (ENABLE_D3D11 and ENABLE_D3D12) to guard some codes in d3d folder. It only prevents to not include some headers or doc if the associated backend is not enabled. But if both d3d11 and d3d12 are enabled, those both code will be included. It makes code slight simpler, and it can avoid build problems if the build environment not has some headers for one backend.\n\nBut if we want to restrict d3d only has common code for both backends, I will do that.",
+      "parentUuid": "8781b246_4f54e43d",
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
