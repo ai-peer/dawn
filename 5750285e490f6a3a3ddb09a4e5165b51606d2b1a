@@ -16,6 +16,63 @@
       "message": "Hi Corentin \u0026 Austin, PTAL. Thanks",
       "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8275191_fa7f82c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T12:49:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f3fdd6a_358fead6",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T12:49:58Z",
+      "side": 1,
+      "message": "nit: cmake fails if there are commas.",
+      "range": {
+        "startLine": 256,
+        "startChar": 0,
+        "endLine": 262,
+        "endChar": 29
+      },
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8781b246_4f54e43d",
+        "filename": "src/dawn/native/d3d/d3d_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-13T12:49:58Z",
+      "side": 1,
+      "message": "nit: Maybe this should be kept in d3d12_platform.h that include d3d_platform.h. The D3D12 backend can use D3D11 but the D3D11 backend cannot use D3D12. This would prevent it at the header inclusion level.\n\nI wish we could do the same for dxcapi.h but that\u0027s use for Blobs (and less likely to be misused). And also d3d11 because not all the D3D12 backend needs it, but maybe it is too prevalent to be contained to just a couple places.",
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
