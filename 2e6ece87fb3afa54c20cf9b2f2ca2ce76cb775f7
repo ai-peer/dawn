@@ -259,6 +259,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "950dbc40_260548d3",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 31
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T22:31:27Z",
+      "side": 1,
+      "message": "Removed the void * handling as it\u0027s only used on the client side. Shouldn\u0027t affect the fuzzing and isn\u0027t serialized. We currently don\u0027t read data back from the command buffer and I don\u0027t think passing data read back from the command buffer to a different command would yield any interesting new codepaths. So I removed this code!",
+      "parentUuid": "d3ffa404_77950267",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "50578d70_51304b79",
         "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
         "patchSetId": 31
