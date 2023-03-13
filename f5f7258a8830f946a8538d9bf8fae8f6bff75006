@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f778e689_a9f99c41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T19:07:56Z",
+      "side": 1,
+      "message": "indeed - need to look again after we switch the deprecations to errors toggle - I believe that\u0027s the cause of a large number of the limit failures.\nIDK about the shader ones",
+      "parentUuid": "ef330eb1_146cfd62",
+      "revId": "f5f7258a8830f946a8538d9bf8fae8f6bff75006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97cc50d1_f230ae37",
