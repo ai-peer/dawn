@@ -91,6 +91,47 @@
       "parentUuid": "8781b246_4f54e43d",
       "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8fcc444_f5b33f8f",
+        "filename": "src/dawn/native/d3d/d3d_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T16:31:07Z",
+      "side": 1,
+      "message": "IMO would prefer not to have the macros.\nI think what Corentin is suggesting is that d3d_platform.h has d3d11 and common stuff. and then d3d12_platform.h includes d3d_platform.h, and then d3d12 stuff as well.",
+      "parentUuid": "54bfd7d5_169dae22",
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c379d78e_ba1e4821",
+        "filename": "src/dawn/native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-13T16:31:07Z",
+      "side": 1,
+      "message": "here and throughout, is the full `dawn::native::d3d::` necessary, or will `d3d::` suffice?",
+      "range": {
+        "startLine": 67,
+        "startChar": 10,
+        "endLine": 67,
+        "endChar": 28
+      },
+      "revId": "5750285e490f6a3a3ddb09a4e5165b51606d2b1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
