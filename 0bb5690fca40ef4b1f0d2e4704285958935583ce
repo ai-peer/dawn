@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfa68337_78aa9b38",
+        "filename": "dawn_lpm.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T01:14:49Z",
+      "side": 1,
+      "message": "Ack, great idea! Restructured the code in this way, added `id_type` to dawn_wire.json and started using `handle_type` from dawn_wire.json which I didn\u0027t know about before your comments :)",
+      "parentUuid": "a630bfd2_eb0c3988",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "222998d6_87719ca6",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 6
@@ -183,6 +201,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "With the changes suggested above, I think the need for these three functions and RecordMember.lpm_info disappears since the template can directly check `full_path in lpn_info.overrides` for example.",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d91745_e286259a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T01:14:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d60e1f9_0b71f714",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -481,6 +517,24 @@
       "writtenOn": "2022-12-19T14:23:25Z",
       "side": 1,
       "message": "Erhmm this is a lot of code and kinda hard to undestand the overall structure. Could we have a block comment that explains the high level flow of macros and what each type does?",
+      "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a1f7aa3_eb584286",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-13T01:14:49Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e0fc7389_7e48b0ce",
       "revId": "0bb5690fca40ef4b1f0d2e4704285958935583ce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
