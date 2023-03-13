@@ -347,11 +347,13 @@ bool GeneratorImpl::Generate() {
     return true;
 }
 
-bool GeneratorImpl::RecordExtension(const ast::Enable* ext) {
+bool GeneratorImpl::RecordExtension(const ast::Enable* enable) {
     // Deal with extension node here, recording it within the generator for later emition.
 
-    if (ext->extension == builtin::Extension::kF16) {
-        requires_f16_extension_ = true;
+    for (auto* ext : enable->extensions) {
+        if (ext->name == builtin::Extension::kF16) {
+            requires_f16_extension_ = true;
+        }
     }
 
     return true;

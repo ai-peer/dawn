@@ -12,28 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/ast/enable.h"
+#include "src/tint/ast/extension.h"
 
 #include "src/tint/program_builder.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::ast::Enable);
+//! @cond Doxygen_Suppress
+// Doxygen gets confused with tint::ast::Extension and tint::builtin::Extension
+
+TINT_INSTANTIATE_TYPEINFO(tint::ast::Extension);
 
 namespace tint::ast {
 
-Enable::Enable(ProgramID pid,
-               NodeID nid,
-               const Source& src,
-               utils::VectorRef<const Extension*> exts)
-    : Base(pid, nid, src), extensions(std::move(exts)) {}
+Extension::Extension(ProgramID pid, NodeID nid, const Source& src, builtin::Extension ext)
+    : Base(pid, nid, src), name(ext) {}
 
-Enable::Enable(Enable&&) = default;
+Extension::Extension(Extension&&) = default;
 
-Enable::~Enable() = default;
+Extension::~Extension() = default;
 
-const Enable* Enable::Clone(CloneContext* ctx) const {
+const Extension* Extension::Clone(CloneContext* ctx) const {
     auto src = ctx->Clone(source);
-    auto exts = ctx->Clone(extensions);
-    return ctx->dst->create<Enable>(src, std::move(exts));
+    return ctx->dst->create<Extension>(src, name);
 }
 
 }  // namespace tint::ast
+
+//! @endcond

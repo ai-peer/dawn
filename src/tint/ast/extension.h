@@ -12,44 +12,41 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_AST_ENABLE_H_
-#define SRC_TINT_AST_ENABLE_H_
+#ifndef SRC_TINT_AST_EXTENSION_H_
+#define SRC_TINT_AST_EXTENSION_H_
 
-#include <string>
-#include <utility>
-#include <vector>
-
-#include "src/tint/ast/extension.h"
+#include "src/tint/ast/node.h"
+#include "src/tint/builtin/extension.h"
 
 namespace tint::ast {
 
-/// An "enable" directive. Example:
+/// An extension used in an "enable" directive. Example:
 /// ```
-///   // Enable an extension named "f16"
 ///   enable f16;
 /// ```
-class Enable final : public Castable<Enable, Node> {
+class Extension final : public Castable<Extension, Node> {
   public:
     /// Create a extension
     /// @param pid the identifier of the program that owns this node
     /// @param nid the unique node identifier
     /// @param src the source of this node
-    /// @param exts the extensions being enabled by this directive
-    Enable(ProgramID pid, NodeID nid, const Source& src, utils::VectorRef<const Extension*> exts);
+    /// @param ext the extension
+    Extension(ProgramID pid, NodeID nid, const Source& src, builtin::Extension ext);
     /// Move constructor
-    Enable(Enable&&);
+    Extension(Extension&&);
 
-    ~Enable() override;
+    ~Extension() override;
 
-    /// Clones this node and all transitive child nodes using the `CloneContext` `ctx`.
+    /// Clones this node and all transitive child nodes using the `CloneContext`
+    /// `ctx`.
     /// @param ctx the clone context
     /// @return the newly cloned node
-    const Enable* Clone(CloneContext* ctx) const override;
+    const Extension* Clone(CloneContext* ctx) const override;
 
-    /// The extensions being enabled by this directive
-    const utils::Vector<const Extension*, 4> extensions;
+    /// The extension name
+    const builtin::Extension name;
 };
 
 }  // namespace tint::ast
 
-#endif  // SRC_TINT_AST_ENABLE_H_
+#endif  // SRC_TINT_AST_EXTENSION_H_
