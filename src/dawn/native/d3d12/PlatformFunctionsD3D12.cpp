@@ -14,8 +14,6 @@
 
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 
-#include <string>
-
 namespace dawn::native::d3d12 {
 
 PlatformFunctions::PlatformFunctions() = default;

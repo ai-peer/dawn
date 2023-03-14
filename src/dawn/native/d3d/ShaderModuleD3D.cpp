@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/d3d12/ShaderModuleD3D12.h"
+#include "dawn/native/d3d/ShaderModuleD3D.h"
 
 #include <d3dcompiler.h>
 
@@ -34,12 +34,12 @@
 #include "dawn/native/TintUtils.h"
 #include "dawn/native/d3d/BlobD3D.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
-#include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/native/stream/BlobSource.h"
 #include "dawn/native/stream/ByteVectorSink.h"
@@ -61,7 +61,7 @@ void Stream<pD3DCompile>::Write(Sink*, pD3DCompile const&) {}
 
 }  // namespace dawn::native::stream
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 
 namespace {
 
@@ -186,7 +186,7 @@ ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const D3DBytecodeCompilationReq
                           "DXC create blob"));
 
     std::wstring entryPointW;
-    DAWN_TRY_ASSIGN(entryPointW, ConvertStringToWstring(entryPointName));
+    DAWN_TRY_ASSIGN(entryPointW, d3d12::ConvertStringToWstring(entryPointName));
 
     std::vector<const wchar_t*> arguments = GetDXCArguments(r.compileFlags, r.hasShaderF16Feature);
 
@@ -498,7 +498,7 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
         // available.
         ASSERT(ToBackend(device->GetAdapter())->GetBackend()->IsDXCAvailable());
         // We can get the DXC version information since IsDXCAvailable() is true.
-        d3d::DxcVersionInfo dxcVersionInfo =
+        DxcVersionInfo dxcVersionInfo =
             ToBackend(device->GetAdapter())->GetBackend()->GetDxcVersion();
 
         req.bytecode.compiler = Compiler::DXC;
@@ -665,8 +665,4 @@ ResultOrError<CompiledShader> ShaderModule::Compile(
     return result;
 }
 
-D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
-    return {shaderBlob.Data(), shaderBlob.Size()};
-}
-
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d
