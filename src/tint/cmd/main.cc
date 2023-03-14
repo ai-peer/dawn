@@ -660,6 +660,11 @@ bool GenerateMsl(const tint::Program* program, const Options& options) {
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(input_program);
+    gen_options.array_length_from_uniform.ubo_binding = tint::writer::BindingPoint{0, 30};
+    gen_options.array_length_from_uniform.bindpoint_to_size_index.emplace(
+        tint::writer::BindingPoint{0, 0}, 0);
+    gen_options.array_length_from_uniform.bindpoint_to_size_index.emplace(
+        tint::writer::BindingPoint{0, 1}, 1);
     auto result = tint::writer::msl::Generate(input_program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
@@ -723,6 +728,9 @@ bool GenerateHlsl(const tint::Program* program, const Options& options) {
     gen_options.external_texture_options.bindings_map =
         tint::cmd::GenerateExternalTextureBindings(program);
     gen_options.root_constant_binding_point = options.hlsl_root_constant_binding_point;
+    gen_options.array_length_from_uniform.ubo_binding = tint::writer::BindingPoint{0, 30};
+    gen_options.array_length_from_uniform.bindpoint_to_size_index.emplace(
+        tint::writer::BindingPoint{0, 0}, 0);
     auto result = tint::writer::hlsl::Generate(program, gen_options);
     if (!result.success) {
         tint::cmd::PrintWGSL(std::cerr, *program);
