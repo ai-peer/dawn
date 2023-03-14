@@ -34,6 +34,8 @@ class BackendConnection {
     wgpu::BackendType GetType() const;
     InstanceBase* GetInstance() const;
 
+    virtual void SetupBackendSpecificInstanceToggles(TogglesState* instanceToggles);
+
     // Returns all the adapters for the system that can be created by the backend, without extra
     // options (such as debug adapters, custom driver libraries, etc.)
     virtual std::vector<Ref<AdapterBase>> DiscoverDefaultAdapters(

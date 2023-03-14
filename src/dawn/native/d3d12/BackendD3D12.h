@@ -81,6 +81,8 @@ class Backend : public BackendConnection {
         const AdapterDiscoveryOptionsBase* optionsBase,
         const TogglesState& adapterToggles) override;
 
+    void SetupBackendSpecificInstanceToggles(TogglesState* instanceToggles) override;
+
   private:
     // Acquiring DXC version information and store the result in mDxcVersionInfo. This function
     // should be called only once, during startup in `Initialize`.

@@ -25,8 +25,8 @@ class FeatureTests : public testing::Test {
     FeatureTests()
         : testing::Test(),
           mInstanceBase(dawn::native::InstanceBase::Create()),
-          mAdapterBase(mInstanceBase.Get()),
-          mUnsafeAdapterBase(
+          mAdapter(mInstanceBase.Get()),
+          mUnsafeAdapter(
               mInstanceBase.Get(),
               dawn::native::TogglesState(dawn::native::ToggleStage::Adapter)
                   .SetForTesting(dawn::native::Toggle::DisallowUnsafeAPIs, false, false)) {}
@@ -47,9 +47,9 @@ class FeatureTests : public testing::Test {
     Ref<dawn::native::InstanceBase> mInstanceBase;
     // The adapter that inherit toggles states from the instance, also have DisallowUnsafeAPIs
     // enabled.
-    dawn::native::null::Adapter mAdapterBase;
+    dawn::native::null::Adapter mAdapter;
     // The adapter that override DisallowUnsafeAPIs to disabled in toggles state.
-    dawn::native::null::Adapter mUnsafeAdapterBase;
+    dawn::native::null::Adapter mUnsafeAdapter;
 };
 
 // Test the creation of a device will fail if the requested feature is not supported on the
@@ -64,8 +64,8 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
 
         // Test that the adapter with unsafe apis disallowed validate features as expected.
         {
-            mAdapterBase.SetSupportedFeatures(featureNamesWithoutOne);
-            dawn::native::Adapter adapterWithoutFeature(&mAdapterBase);
+            mAdapter.SetSupportedFeaturesForTesting(featureNamesWithoutOne);
+            dawn::native::Adapter adapterWithoutFeature(&mAdapter);
 
             wgpu::DeviceDescriptor deviceDescriptor;
             wgpu::FeatureName featureName = FeatureEnumToAPIFeature(notSupportedFeature);
@@ -79,8 +79,8 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
 
         // Test that the adapter with unsafe apis allowed validate features as expected.
         {
-            mUnsafeAdapterBase.SetSupportedFeatures(featureNamesWithoutOne);
-            dawn::native::Adapter adapterWithoutFeature(&mUnsafeAdapterBase);
+            mUnsafeAdapter.SetSupportedFeaturesForTesting(featureNamesWithoutOne);
+            dawn::native::Adapter adapterWithoutFeature(&mUnsafeAdapter);
 
             wgpu::DeviceDescriptor deviceDescriptor;
             wgpu::FeatureName featureName = FeatureEnumToAPIFeature(notSupportedFeature);
@@ -98,8 +98,8 @@ TEST_F(FeatureTests, AdapterWithRequiredFeatureDisabled) {
 // toggle disabled for experimental features), and Device.GetEnabledFeatures() can return the names
 // of the enabled features correctly.
 TEST_F(FeatureTests, RequireAndGetEnabledFeatures) {
-    dawn::native::Adapter adapter(&mAdapterBase);
-    dawn::native::Adapter unsafeAdapter(&mUnsafeAdapterBase);
+    dawn::native::Adapter adapter(&mAdapter);
+    dawn::native::Adapter unsafeAdapter(&mUnsafeAdapter);
     dawn::native::FeaturesInfo featuresInfo;
 
     for (size_t i = 0; i < kTotalFeaturesCount; ++i) {

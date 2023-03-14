@@ -28,6 +28,10 @@ InstanceBase* BackendConnection::GetInstance() const {
     return mInstance;
 }
 
+void BackendConnection::SetupBackendSpecificInstanceToggles(TogglesState* instanceToggles) {
+    // No backend-specific instance toggles by default. Override this function if needed.
+}
+
 ResultOrError<std::vector<Ref<AdapterBase>>> BackendConnection::DiscoverAdapters(
     const AdapterDiscoveryOptionsBase* options,
     const TogglesState& adapterToggles) {
