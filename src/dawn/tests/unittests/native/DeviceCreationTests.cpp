@@ -176,7 +176,7 @@ TEST_F(DeviceCreationTest, CreateDeviceRequiringExperimentalFeatures) {
         }
 
         // Test creating device with DisallowUnsafeApis disabled in device toggle descriptor will
-        // success on both adapter, as device toggles will override the inherited adapter toggles.
+        // not change the available features under the adapter toggles.
         {
             const char* const disableToggles[] = {"disallow_unsafe_apis"};
             wgpu::DawnTogglesDescriptor deviceTogglesDesc;
@@ -187,12 +187,7 @@ TEST_F(DeviceCreationTest, CreateDeviceRequiringExperimentalFeatures) {
             // Test on adapter with DisallowUnsafeApis enabled.
             {
                 wgpu::Device device = adapter.CreateDevice(&deviceDescriptor);
-                EXPECT_NE(device, nullptr);
-
-                ASSERT_EQ(1u, device.EnumerateFeatures(nullptr));
-                wgpu::FeatureName enabledFeature;
-                device.EnumerateFeatures(&enabledFeature);
-                EXPECT_EQ(enabledFeature, featureName);
+                EXPECT_EQ(device, nullptr);
             }
 
             // Test on adapter with DisallowUnsafeApis disabled.
@@ -208,7 +203,7 @@ TEST_F(DeviceCreationTest, CreateDeviceRequiringExperimentalFeatures) {
         }
 
         // Test creating device with DisallowUnsafeApis enabled in device toggle descriptor will
-        // fail on both adapter, as device toggles will override the inherited adapter toggles.
+        // not change the available features under the adapter toggles.
         {
             const char* const enableToggles[] = {"disallow_unsafe_apis"};
             wgpu::DawnTogglesDescriptor deviceToggleDesc;
@@ -225,7 +220,12 @@ TEST_F(DeviceCreationTest, CreateDeviceRequiringExperimentalFeatures) {
             // Test on adapter with DisallowUnsafeApis disabled.
             {
                 wgpu::Device device = unsafeAdapter.CreateDevice(&deviceDescriptor);
-                EXPECT_EQ(device, nullptr);
+                EXPECT_NE(device, nullptr);
+
+                ASSERT_EQ(1u, device.EnumerateFeatures(nullptr));
+                wgpu::FeatureName enabledFeature;
+                device.EnumerateFeatures(&enabledFeature);
+                EXPECT_EQ(enabledFeature, featureName);
             }
         }
     }

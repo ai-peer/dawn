@@ -112,11 +112,18 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
 }
 
 bool AdapterBase::APIHasFeature(wgpu::FeatureName feature) const {
-    return mSupportedFeatures.IsEnabled(feature);
+    // Check feature support with adapter's toggles.
+    auto validateResult = ValidateFeatureSupportedWithToggles(feature, mTogglesState);
+    if (validateResult.IsError()) {
+        validateResult.AcquireError();
+        return false;
+    }
+    return true;
 }
 
 size_t AdapterBase::APIEnumerateFeatures(wgpu::FeatureName* features) const {
-    return mSupportedFeatures.EnumerateFeatures(features);
+    // Only report features supported with adapter's toggles.
+    return GetSupportedFeatures().EnumerateFeatures(features);
 }
 
 DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
@@ -183,13 +190,18 @@ InstanceBase* AdapterBase::GetInstance() const {
 }
 
 FeaturesSet AdapterBase::GetSupportedFeatures() const {
-    return mSupportedFeatures;
+    return RequestSupportedFeaturesWithToggles(mTogglesState);
 }
 
 bool AdapterBase::SupportsAllRequiredFeatures(
     const ityp::span<size_t, const wgpu::FeatureName>& features) const {
     for (wgpu::FeatureName f : features) {
-        if (!mSupportedFeatures.IsEnabled(f)) {
+        // Validate feature with adapter toggles state.
+        // TODO(dawn:1495): Decide if we should validate required features under other toggles
+        // state, e.g. device toggles state.
+        auto validateResult = ValidateFeatureSupportedWithToggles(f, mTogglesState);
+        if (validateResult.IsError()) {
+            validateResult.AcquireError();
             return false;
         }
     }
@@ -213,17 +225,41 @@ const TogglesState& AdapterBase::GetTogglesState() const {
     return mTogglesState;
 }
 
+void AdapterBase::SetToggleForTesting(Toggle toggle, bool enabled, bool forced) {
+    mTogglesState.SetForTesting(toggle, enabled, forced);
+}
+
 void AdapterBase::EnableFeature(Feature feature) {
-    mSupportedFeatures.EnableFeature(feature);
+    mUnfilteredSupportedFeatures.EnableFeature(feature);
+}
+
+FeaturesSet AdapterBase::RequestSupportedFeaturesWithToggles(const TogglesState& toggles) const {
+    FeaturesSet filteredFeatures;
+
+    // Iterate over all supported features and only return those supported under given toggles
+    // state.
+    for (uint32_t i : IterateBitSet(mUnfilteredSupportedFeatures.featuresBitSet)) {
+        const Feature& feature = static_cast<Feature>(i);
+        auto validateResult =
+            ValidateFeatureSupportedWithToggles(FeatureEnumToAPIFeature(feature), toggles);
+        if (validateResult.IsError()) {
+            validateResult.AcquireError();
+        } else {
+            filteredFeatures.EnableFeature(feature);
+        }
+    }
+
+    return filteredFeatures;
 }
 
 MaybeError AdapterBase::ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
                                                             const TogglesState& toggles) const {
     DAWN_TRY(ValidateFeatureName(feature));
-    DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(feature),
+    DAWN_INVALID_IF(!mUnfilteredSupportedFeatures.IsEnabled(feature),
                     "Requested feature %s is not supported.", feature);
 
     const FeatureInfo* featureInfo = GetInstance()->GetFeatureInfo(feature);
+
     // Experimental features are guarded by toggle DisallowUnsafeAPIs.
     if (featureInfo->featureState == FeatureInfo::FeatureState::Experimental) {
         // DisallowUnsafeAPIs toggle is by default enabled if not explicitly disabled.
@@ -237,9 +273,9 @@ MaybeError AdapterBase::ValidateFeatureSupportedWithToggles(wgpu::FeatureName fe
 
 void AdapterBase::SetSupportedFeaturesForTesting(
     const std::vector<wgpu::FeatureName>& requiredFeatures) {
-    mSupportedFeatures = {};
+    mUnfilteredSupportedFeatures = {};
     for (wgpu::FeatureName f : requiredFeatures) {
-        mSupportedFeatures.EnableFeature(f);
+        mUnfilteredSupportedFeatures.EnableFeature(f);
     }
 }
 
@@ -290,13 +326,14 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
     SetupBackendDeviceToggles(&deviceToggles);
 
     // Validate all required features are supported by the adapter and suitable under given toggles.
-    // Note that certain toggles in device toggles state may be overriden by user and different from
-    // the adapter toggles state.
-    // TODO(dawn:1495): After implementing adapter toggles, decide whether we should validate
-    // supported features using adapter toggles or device toggles.
+    // Currently we use adapter's toggles for validating device required features.
+    // TODO(dawn:1495): Decide if we should use device's required toggles instead for more
+    // flexibility. Certain toggles in device toggles state may be overriden by user and different
+    // from the adapter toggles state, and these different toggles may changed the available
+    // features set.
     for (uint32_t i = 0; i < descriptor->requiredFeaturesCount; ++i) {
         wgpu::FeatureName feature = descriptor->requiredFeatures[i];
-        DAWN_TRY(ValidateFeatureSupportedWithToggles(feature, deviceToggles));
+        DAWN_TRY(ValidateFeatureSupportedWithToggles(feature, mTogglesState));
     }
 
     if (descriptor->requiredLimits != nullptr) {

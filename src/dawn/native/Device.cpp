@@ -1328,6 +1328,9 @@ ExternalTextureBase* DeviceBase::APICreateExternalTexture(
 
 void DeviceBase::ApplyFeatures(const DeviceDescriptor* deviceDescriptor) {
     ASSERT(deviceDescriptor);
+    // All required features should have been validated supported with adapter's toggles.
+    // TODO(dawn:1495): Decide if we validate device required features based on device toggles state
+    // instaead of adapter toggles state.
     ASSERT(GetAdapter()->SupportsAllRequiredFeatures(
         {deviceDescriptor->requiredFeatures, deviceDescriptor->requiredFeaturesCount}));
 

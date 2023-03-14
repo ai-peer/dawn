@@ -139,8 +139,8 @@ class TogglesState {
 
     // Set a toggle of the same stage of toggles state stage if and only if it is not already set.
     void Default(Toggle toggle, bool enabled);
-    // Force set a toggle of same stage of toggles state stage. A force-set toggle will get
-    // inherited to all later stage as forced.
+    // Force set a toggle of stage equals to or earlier than toggles state stage. A force-set toggle
+    // will get inherited to all later stage as forced.
     void ForceSet(Toggle toggle, bool enabled);
 
     // Set a toggle of any stage for testing propose. Return *this to allow method chaining
@@ -151,6 +151,8 @@ class TogglesState {
     bool IsSet(Toggle toggle) const;
     // Return true if and only if the toggle is set to true.
     bool IsEnabled(Toggle toggle) const;
+    // Return true if and only if the toggle is force set.
+    bool IsForced(Toggle toggle) const;
     ToggleStage GetStage() const;
     std::vector<const char*> GetEnabledToggleNames() const;
     std::vector<const char*> GetDisabledToggleNames() const;
@@ -162,7 +164,7 @@ class TogglesState {
   private:
     // Indicating which stage of toggles state is this object holding for, instance, adapter, or
     // device.
-    const ToggleStage mStage;
+    ToggleStage mStage;
     TogglesSet mTogglesSet;
     TogglesSet mEnabledToggles;
     TogglesSet mForcedToggles;
