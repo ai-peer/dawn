@@ -87,6 +87,9 @@ class Device final : public DeviceBase {
 
     void ForceEventualFlushOfCommands() override;
 
+    void BeginCaptureScope();
+    void EndCaptureScope();
+
   private:
     Device(AdapterBase* adapter,
            NSPRef<id<MTLDevice>> mtlDevice,
@@ -140,6 +143,9 @@ class Device final : public DeviceBase {
     NSPRef<id<MTLDevice>> mMtlDevice;
     NSPRef<id> mMtlSharedEvent = nil;  // MTLSharedEvent not available until macOS 10.14+.
     NSPRef<id<MTLCommandQueue>> mCommandQueue;
+
+    NSPRef<id<MTLCaptureScope>> mCaptureScope;
+    bool mInCaptureScope = false;
 
     CommandRecordingContext mCommandContext;
 

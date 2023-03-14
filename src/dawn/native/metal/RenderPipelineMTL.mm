@@ -397,6 +397,7 @@ MaybeError RenderPipeline::Initialize() {
     descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
     descriptorMTL.sampleCount = GetSampleCount();
     descriptorMTL.alphaToCoverageEnabled = IsAlphaToCoverageEnabled();
+    descriptorMTL.label = [NSString stringWithUTF8String:GetLabel().c_str()];
 
     NSError* error = nullptr;
     mMtlRenderPipelineState =

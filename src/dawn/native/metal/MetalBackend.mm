@@ -53,4 +53,12 @@ void WaitForCommandsToBeScheduled(WGPUDevice device) {
     ToBackend(FromAPI(device))->WaitForCommandsToBeScheduled();
 }
 
+void BeginCaptureScope(WGPUDevice device) {
+    ToBackend(FromAPI(device))->BeginCaptureScope();
+}
+
+void EndCaptureScope(WGPUDevice device) {
+    ToBackend(FromAPI(device))->EndCaptureScope();
+}
+
 }  // namespace dawn::native::metal

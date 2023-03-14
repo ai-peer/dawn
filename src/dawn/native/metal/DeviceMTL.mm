@@ -150,6 +150,18 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
         mMtlSharedEvent.Acquire([*mMtlDevice newSharedEvent]);
     }
 
+    if (@available(macOS 10.13, *)) {
+        mCaptureScope.Acquire([[MTLCaptureManager sharedCaptureManager]
+            newCaptureScopeWithCommandQueue:mCommandQueue.Get()]);
+        if (descriptor->label) {
+            (*mCaptureScope).label = [NSString stringWithCString:descriptor->label
+                                                        encoding:NSUTF8StringEncoding];
+        } else {
+            (*mCaptureScope).label = @"Dawn";
+        }
+
+    }
+
     DAWN_TRY(mCommandContext.PrepareNextCommandBuffer(*mCommandQueue));
 
     if (mIsTimestampQueryEnabled && !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {
@@ -443,6 +455,20 @@ void Device::WaitForCommandsToBeScheduled() {
         lastSubmittedCommands = mLastSubmittedCommands;
     }
     [*lastSubmittedCommands waitUntilScheduled];
+}
+
+void Device::BeginCaptureScope() {
+    if (!mInCaptureScope && *mCaptureScope) {
+        mInCaptureScope = true;
+        [*mCaptureScope beginScope];
+    }
+}
+
+void Device::EndCaptureScope() {
+    if (mInCaptureScope && *mCaptureScope) {
+        mInCaptureScope = false;
+        [*mCaptureScope endScope];
+    }
 }
 
 MaybeError Device::WaitForIdleForDestruction() {
