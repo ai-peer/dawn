@@ -16,6 +16,24 @@
       "message": "The array_length_from_uniform information is included in the cache key now. I\u0027m putting all the binding information into the map, this means when the test above changes the bindings on the pipeline, the key changes which it didn\u0027t previously.\n\nI believe this doesn\u0027t happen with HLSL because it has extra magic to determine what bindings to put into the map.\n\nIf this CL is accepted I\u0027ll file a bug, mark the TODO here and ask the Dawn folks to see if there is a better way to generate the data map for array_length_from_uniform.",
       "revId": "6a738e7d6e730b09368c6f1a71b9ea8fdb49a46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ece8092_30b7b808",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-14T14:07:50Z",
+      "side": 1,
+      "message": "Here all the tests are disabled, so it\u0027s not clear which test started failing. Which one is it? I\u0027d rather not disable all the tests for pipeline caching in Metal as that\u0027s quite important. Instead we should do targeted suppressions, or use if (IsMetal()) {some expectations} else {some other}",
+      "parentUuid": "d30a3763_59508121",
+      "revId": "6a738e7d6e730b09368c6f1a71b9ea8fdb49a46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
