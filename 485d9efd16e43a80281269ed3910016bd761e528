@@ -16,6 +16,24 @@
       "message": "So, it seems that while this fixed the Cache issue, it breaks the end2end tests. Looks like the binding information isn\u0027t included for everything that requires it?",
       "revId": "485d9efd16e43a80281269ed3910016bd761e528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d5bde4_f91c8d78",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T21:15:19Z",
+      "side": 1,
+      "message": "Er, CTS, not end2end.",
+      "parentUuid": "66557147_0f01e8c2",
+      "revId": "485d9efd16e43a80281269ed3910016bd761e528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
