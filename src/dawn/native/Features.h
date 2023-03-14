@@ -78,6 +78,7 @@ class FeaturesInfo {
     const FeatureInfo* GetFeatureInfo(wgpu::FeatureName feature) const;
     Feature FeatureNameToEnum(const char* featureName) const;
     wgpu::FeatureName FeatureNameToAPIEnum(const char* featureName) const;
+    wgpu::FeatureName NativeToAPIEnum(Feature feature) const;
 
   private:
     std::unordered_map<std::string, Feature> mFeatureNameToEnumMap;

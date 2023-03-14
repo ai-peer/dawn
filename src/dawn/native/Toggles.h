@@ -132,6 +132,9 @@ class TogglesState {
     static TogglesState CreateFromTogglesDescriptor(const DawnTogglesDescriptor* togglesDesc,
                                                     ToggleStage requiredStage);
 
+    // Copy all toggles from another TogglesState of the same stage, used as assignment.
+    void Copy(const TogglesState& sourceState);
+
     // Inherit from a given toggles state of earlier stage, only inherit the forced and the
     // unrequired toggles to allow overriding. Return *this to allow method chaining manner.
     TogglesState& InheritFrom(const TogglesState& inheritedToggles);
