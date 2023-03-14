@@ -258,6 +258,11 @@ const FeatureInfo* FeaturesInfo::GetFeatureInfo(wgpu::FeatureName feature) const
     return &kFeatureNameAndInfoList[static_cast<size_t>(f)].info;
 }
 
+wgpu::FeatureName FeaturesInfo::NativeToAPIEnum(Feature feature) const {
+    ASSERT(feature < Feature::InvalidEnum);
+    return ToAPIFeature(feature);
+}
+
 Feature FeaturesInfo::FeatureNameToEnum(const char* featureName) const {
     ASSERT(featureName);
 

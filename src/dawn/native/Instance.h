@@ -59,7 +59,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     const std::vector<Ref<AdapterBase>>& GetAdapters() const;
 
-    // Used to handle error that happen up to device creation.
+    // Used to handle MaybeError result, return true if an error occurs and otherwise return false.
     bool ConsumedError(MaybeError maybeError);
 
     template <typename T>
@@ -115,7 +115,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     Surface* APICreateSurface(const SurfaceDescriptor* descriptor);
 
   private:
-    explicit InstanceBase(const TogglesState& instanceToggles);
+    InstanceBase();
     ~InstanceBase() override;
 
     void WillDropLastExternalRef() override;

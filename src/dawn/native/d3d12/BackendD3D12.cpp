@@ -321,6 +321,14 @@ ResultOrError<std::vector<Ref<AdapterBase>>> Backend::DiscoverAdapters(
     return adapters;
 }
 
+void Backend::SetupBackendSpecificInstanceToggles(TogglesState* instanceToggles) {
+    // Validate UseDXC toggle and default it to false
+    if (!IsDXCAvailable()) {
+        instanceToggles->ForceSet(Toggle::UseDXC, false);
+    }
+    instanceToggles->Default(Toggle::UseDXC, false);
+}
+
 BackendConnection* Connect(InstanceBase* instance) {
     Backend* backend = new Backend(instance);
 
