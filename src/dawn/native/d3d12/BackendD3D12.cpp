@@ -74,6 +74,18 @@ ResultOrError<Ref<AdapterBase>> Backend::CreateAdapterFromIDXGIAdapter(
     return {std::move(adapter)};
 }
 
+void Backend::SetupBackendSpecificAdapterToggles(TogglesState* adapterToggles) {
+    // Validate UseDXC toggle
+    if (!IsDXCAvailable()) {
+        // Force disable UseDXC toggle if DXC is not available. Toggles requirements from user can
+        // not override the forced toggle.
+        adapterToggles->ForceSet(Toggle::UseDXC, false);
+    }
+    // Currently UseDXC is an instance toggle and set its default value in instance initialization
+    // instead of here.
+    // TODO(dawn:1495): After downgrading UseDXC as an adapter toggle, set its default value here.
+}
+
 BackendConnection* Connect(InstanceBase* instance) {
     Backend* backend = new Backend(instance);
 

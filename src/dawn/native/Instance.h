@@ -122,7 +122,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     bool APIProcessEvents();
 
   private:
-    explicit InstanceBase(const TogglesState& instanceToggles);
+    InstanceBase();
     ~InstanceBase() override;
 
     void WillDropLastExternalRef() override;

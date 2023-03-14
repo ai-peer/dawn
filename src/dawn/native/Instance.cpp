@@ -126,25 +126,15 @@ Ref<InstanceBase> InstanceBase::Create(const InstanceDescriptor* descriptor) {
         descriptor = &kDefaultDesc;
     }
 
-    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
-
-    // Set up the instance toggle state from toggles descriptor
-    TogglesState instanceToggles =
-        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
-    // By default enable the DisallowUnsafeAPIs instance toggle, it will be inherited to adapters
-    // and devices created by this instance if not overriden.
-    // TODO(dawn:1685): Rename DisallowUnsafeAPIs to AllowUnsafeAPIs, and change relating logic.
-    instanceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
-
-    Ref<InstanceBase> instance = AcquireRef(new InstanceBase(instanceToggles));
+    Ref<InstanceBase> instance = AcquireRef(new InstanceBase());
     if (instance->ConsumedError(instance->Initialize(descriptor))) {
         return nullptr;
     }
     return instance;
 }
 
-InstanceBase::InstanceBase(const TogglesState& instanceToggles) : mToggles(instanceToggles) {}
+// Create InstanceBase with empty toggles state, should be assigned during initialization.
+InstanceBase::InstanceBase() : mToggles(TogglesState(ToggleStage::Instance)) {}
 
 InstanceBase::~InstanceBase() = default;
 
@@ -186,6 +176,23 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(mDefaultPlatform.get());
+
+    // Set up the instance toggle state from toggles descriptor
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+    mToggles =
+        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
+
+    // By default enable the DisallowUnsafeAPIs instance toggle, it will be inherited to adapters
+    // and devices created by this instance if not overriden.
+    // TODO(dawn:1685): Rename DisallowUnsafeAPIs to AllowUnsafeAPIs, and change relating logic.
+    mToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+    // Note that currently UseDXC is an instance toggle, but is not used by instance, and just pass
+    // to adapter by toggle inheritation. It will be backend-specifically validated when creating
+    // adapter toggles.
+    // TODO(dawn:1495): Downgrade UseDXC as an adapter toggle and set the default when constructing
+    // adapter toggles state.
+    mToggles.Default(Toggle::UseDXC, false);
 
     return {};
 }
@@ -312,6 +319,8 @@ void InstanceBase::DiscoverDefaultAdapters() {
         // TODO(dawn:1495): Handle the adapter toggles descriptor after implemented.
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
+        // Do backend-specific toggles validation and set up default toggles state.
+        backend->SetupBackendSpecificAdapterToggles(&adapterToggles);
 
         std::vector<Ref<AdapterBase>> backendAdapters =
             backend->DiscoverDefaultAdapters(adapterToggles);
@@ -446,6 +455,8 @@ MaybeError InstanceBase::DiscoverAdaptersInternal(const AdapterDiscoveryOptionsB
         // TODO(dawn:1495): Handle the adapter toggles descriptor after implemented.
         TogglesState adapterToggles = TogglesState(ToggleStage::Adapter);
         adapterToggles.InheritFrom(mToggles);
+        // Do backend-specific toggles validation and set up default toggles state.
+        backend->SetupBackendSpecificAdapterToggles(&adapterToggles);
 
         std::vector<Ref<AdapterBase>> newAdapters;
         DAWN_TRY_ASSIGN(newAdapters, backend->DiscoverAdapters(options, adapterToggles));

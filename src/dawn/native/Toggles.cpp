@@ -165,7 +165,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"use_dxc",
       "Use DXC instead of FXC for compiling HLSL when both dxcompiler.dll and dxil.dll is "
       "available.",
-      "https://crbug.com/dawn/402", ToggleStage::Device}},
+      "https://crbug.com/dawn/402", ToggleStage::Instance}},
     {Toggle::DisableRobustness,
      {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480",
       ToggleStage::Device}},
@@ -519,7 +519,7 @@ void TogglesState::Default(Toggle toggle, bool enabled) {
 
 void TogglesState::ForceSet(Toggle toggle, bool enabled) {
     ASSERT(toggle != Toggle::InvalidEnum);
-    ASSERT(TogglesInfo::GetToggleInfo(toggle)->stage == mStage);
+    ASSERT(TogglesInfo::GetToggleInfo(toggle)->stage <= mStage);
     // Make sure that each toggle is force-set at most once.
     ASSERT(!mForcedToggles.Has(toggle));
     if (mTogglesSet.Has(toggle) && mEnabledToggles.Has(toggle) != enabled) {

@@ -126,6 +126,11 @@ std::vector<const char*> Adapter::GetSupportedFeatures() const {
     return supportedFeaturesSet.GetEnabledFeatureNames();
 }
 
+std::vector<const char*> Adapter::GetUnfilteredSupportedFeaturesForTesting() const {
+    FeaturesSet unfilteredSupportedFeaturesSet = mImpl->GetUnfilteredSupportedFeaturesForTesting();
+    return unfilteredSupportedFeaturesSet.GetEnabledFeatureNames();
+}
+
 bool Adapter::GetLimits(WGPUSupportedLimits* limits) const {
     return mImpl->GetLimits(FromAPI(limits));
 }

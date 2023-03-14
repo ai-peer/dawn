@@ -34,4 +34,8 @@ ResultOrError<std::vector<Ref<AdapterBase>>> BackendConnection::DiscoverAdapters
     return DAWN_VALIDATION_ERROR("DiscoverAdapters not implemented for this backend.");
 }
 
+void BackendConnection::SetupBackendSpecificAdapterToggles(TogglesState* adapterToggles) {
+    // No backend-specific adapter toggles by default. Override this function if needed.
+}
+
 }  // namespace dawn::native

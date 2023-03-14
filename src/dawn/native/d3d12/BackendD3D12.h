@@ -39,6 +39,8 @@ class Backend final : public d3d::Backend {
         ComPtr<IDXGIAdapter> dxgiAdapter,
         const TogglesState& adapterToggles) override;
 
+    void SetupBackendSpecificAdapterToggles(TogglesState* instanceToggles) override;
+
   private:
     using Base = d3d::Backend;
 };

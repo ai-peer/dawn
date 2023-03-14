@@ -44,6 +44,8 @@ class BackendConnection {
         const AdapterDiscoveryOptionsBase* options,
         const TogglesState& adapterToggles);
 
+    virtual void SetupBackendSpecificAdapterToggles(TogglesState* adapterToggles);
+
   private:
     InstanceBase* mInstance = nullptr;
     wgpu::BackendType mType;

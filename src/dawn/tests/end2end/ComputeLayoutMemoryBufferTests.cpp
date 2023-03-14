@@ -482,40 +482,42 @@ DAWN_TEST_PARAM_STRUCT(ComputeLayoutMemoryBufferTestParams, AddressSpace, Field)
 
 class ComputeLayoutMemoryBufferTests
     : public DawnTestWithParams<ComputeLayoutMemoryBufferTestParams> {
-    // void SetUp() override { DawnTestBase::SetUp(); }
-
   protected:
     // Require f16 feature if possible
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        mIsShaderF16SupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ShaderF16});
-        if (!mIsShaderF16SupportedOnAdapter) {
-            return {};
-        }
+        // Get the unfiltered supported features set from backend adater, which does not consider
+        // toggles resrtiction and thus will not be effected by UseDXC toggle.
+        std::vector<const char*> unfilteredSupportedFeatures =
+            GetAdapter().GetUnfilteredSupportedFeaturesForTesting();
 
+        // Check if the shader-f16 feature can be supported by adapter
+        bool isShaderF16SupportedOnAdapter = false;
+        for (auto* feature : unfilteredSupportedFeatures) {
+            if (strncmp(feature, "shader-f16", 10) == 0) {
+                isShaderF16SupportedOnAdapter = true;
+                break;
+            }
+        }
+        // If the feature is support, it still require UseDXC toggle enabled on D3D12 backend to use
+        // the feature.
+        bool useDxcEnabledOrNonD3D12 = false;
         if (!IsD3D12()) {
-            mUseDxcEnabledOrNonD3D12 = true;
+            useDxcEnabledOrNonD3D12 = true;
         } else {
             for (auto* enabledToggle : GetParam().forceEnabledWorkarounds) {
                 if (strncmp(enabledToggle, "use_dxc", 7) == 0) {
-                    mUseDxcEnabledOrNonD3D12 = true;
+                    useDxcEnabledOrNonD3D12 = true;
                     break;
                 }
             }
         }
 
-        if (mUseDxcEnabledOrNonD3D12) {
+        if (isShaderF16SupportedOnAdapter && useDxcEnabledOrNonD3D12) {
             return {wgpu::FeatureName::ShaderF16};
+        } else {
+            return {};
         }
-
-        return {};
     }
-
-    bool IsShaderF16SupportedOnAdapter() const { return mIsShaderF16SupportedOnAdapter; }
-    bool UseDxcEnabledOrNonD3D12() const { return mUseDxcEnabledOrNonD3D12; }
-
-  private:
-    bool mIsShaderF16SupportedOnAdapter = false;
-    bool mUseDxcEnabledOrNonD3D12 = false;
 };
 
 // Align returns the WGSL decoration for an explicit structure field alignment

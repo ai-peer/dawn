@@ -564,8 +564,8 @@ class DawnTestBase {
     wgpu::Device CreateDevice(std::string isolationKey = "");
 
     // Called in SetUp() to get the features required to be enabled in the tests. The tests must
-    // check if the required features are supported by the adapter in this function and guarantee
-    // the returned features are all supported by the adapter. The tests may provide different
+    // check if the required features are supported in this function and guarantee creating device
+    // requiring the returned features will succeed by the adapter. The tests may provide different
     // code path to handle the situation when not all features are supported.
     virtual std::vector<wgpu::FeatureName> GetRequiredFeatures();
 
