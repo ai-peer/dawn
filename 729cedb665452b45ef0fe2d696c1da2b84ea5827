@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d2e55a_b3fcb62f",
+        "filename": "src/tint/ast/extension.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-14T16:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9db650c4_4cfe1a5c",
+      "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba45ac5e_3590954c",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-03-14T15:49:22Z",
       "side": 1,
       "message": "nit: 2023",
+      "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15b9c761_93dcd582",
+        "filename": "src/tint/ast/extension.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-14T16:12:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba45ac5e_3590954c",
       "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -99,6 +135,24 @@
       "writtenOn": "2023-03-14T15:49:22Z",
       "side": 1,
       "message": "technically this could be removed and just always do:\n\n`out \u003c\u003c ext-\u003ename \u003c\u003c \",\";`",
+      "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f8ee525_105838f5",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-14T16:12:55Z",
+      "side": 1,
+      "message": "I prefer cleaner output.",
+      "parentUuid": "0b3f0b41_8c153866",
       "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
