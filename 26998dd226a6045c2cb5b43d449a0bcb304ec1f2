@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93cbc1c7_c5aa6774",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T17:59:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e7092dc_457f0f68",
+      "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08eb141f_05936f0d",
@@ -55,6 +73,30 @@
       "side": 1,
       "message": "The binding group layout is different, so doesn\u0027t that change what will be in the map? I\u0027m just adding all of them from the bind group layout.",
       "parentUuid": "08eb141f_05936f0d",
+      "range": {
+        "startLine": 562,
+        "startChar": 39,
+        "endLine": 562,
+        "endChar": 67
+      },
+      "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf1a9e44_5cbc74d8",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T17:59:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d55c1e3_84e6c7a4",
       "range": {
         "startLine": 562,
         "startChar": 39,
