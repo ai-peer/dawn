@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa1b6b51_2c8111e9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-14T22:14:54Z",
+      "side": 0,
+      "message": "trying to see if there\u0027s a simpler solution than adding full on weak refs\n\nCan we remove the device in WillDropLastExternalRef? After that, it won\u0027t be producing any more callbacks since we Destroy() and FlushCallbackTaskQueue() - so it should no longer be necessary to track it in the instance\n\nIf we remove it from the list there, then I think?? we don\u0027t have the same issue since a race of WillDropLastExternalRef and InstanceProcessEvents happens strictly before we check if the refcount drops to zero, then call DeleteThis.",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
