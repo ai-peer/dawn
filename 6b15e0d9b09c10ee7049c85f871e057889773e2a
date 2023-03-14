@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "908d13b1_df259649",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T15:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f628ad2_d13ae9b7",
+      "range": {
+        "startLine": 586,
+        "startChar": 42,
+        "endLine": 586,
+        "endChar": 79
+      },
+      "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95070bc7_429a2894",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-03-14T14:13:42Z",
       "side": 1,
       "message": "ditto and in other backends.",
+      "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca0e2474_62a59ef7",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T15:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95070bc7_429a2894",
       "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -89,6 +131,24 @@
       "side": 1,
       "message": "I can move it back. I thought this was what was causing other issues with the bindings remapper move but wasn\u0027t the issue.",
       "parentUuid": "f0a3fbf7_c2d7b6bf",
+      "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b3c274_eff27c81",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T15:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e084b178_f4be651e",
       "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
