@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08eb141f_05936f0d",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-14T16:02:23Z",
+      "side": 1,
+      "message": "So this is 1 instead of 2, but I don\u0027t understand why it would be the case, shouldn\u0027t the shader be consistent as long as the inputs to Tint are the same? They seem to be the same as well since the layout happens to be the same?",
+      "range": {
+        "startLine": 562,
+        "startChar": 39,
+        "endLine": 562,
+        "endChar": 67
+      },
+      "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
