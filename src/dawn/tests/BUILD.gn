@@ -27,6 +27,20 @@ group("tests") {
   ]
 }
 
+group("abseil") {
+  # When build_with_chromium=true we need to include "//third_party/abseil-cpp:absl" while
+  # it's beneficial to be more specific with standalone Dawn, especially when it comes to
+  # including it as a dependency in other projects (such as Skia).
+  if (build_with_chromium) {
+    public_deps = [ "$dawn_abseil_dir:absl" ]
+  } else {
+    public_deps = [
+      "${dawn_root}/third_party/gn/abseil-cpp:str_format",
+      "${dawn_root}/third_party/gn/abseil-cpp:strings",
+    ]
+  }
+}
+
 ###############################################################################
 # Gtest Gmock - Handle building inside and outside of Chromium.
 ###############################################################################
@@ -471,6 +485,7 @@ source_set("end2end_tests_sources") {
   testonly = true
 
   deps = [
+    ":abseil",
     ":platform_mocks_sources",
     ":test_infra_sources",
     "${dawn_root}/src/dawn:cpp",

@@ -19,6 +19,8 @@
 #include <vector>
 
 #include "dawn/common/Math.h"
+#include "dawn/native/Adapter.h"
+#include "dawn/native/dawn_platform.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/WGPUHelpers.h"
 
@@ -482,40 +484,67 @@ DAWN_TEST_PARAM_STRUCT(ComputeLayoutMemoryBufferTestParams, AddressSpace, Field)
 
 class ComputeLayoutMemoryBufferTests
     : public DawnTestWithParams<ComputeLayoutMemoryBufferTestParams> {
-    // void SetUp() override { DawnTestBase::SetUp(); }
-
-  protected:
-    // Require f16 feature if possible
-    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        mIsShaderF16SupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ShaderF16});
-        if (!mIsShaderF16SupportedOnAdapter) {
-            return {};
+    void TearDown() override {
+        // Set back the adapter UseDXC toggle state to original state recorded in
+        // GetRequiredFeatures.
+        dawn::native::AdapterBase* adapter = dawn::native::FromAPI(GetAdapter().Get());
+        if (!mOriginalUseDXCAdapterToggleForced) {
+            adapter->SetToggleForTesting(dawn::native::Toggle::UseDXC,
+                                         mOriginalUseDXCAdapterToggleEnabled, false);
         }
 
-        if (!IsD3D12()) {
-            mUseDxcEnabledOrNonD3D12 = true;
-        } else {
+        DawnTestBase::TearDown();
+    }
+
+  protected:
+    // Set the UseDXC toggle in adapter toggles state according to testcase parameter, and check if
+    // adapter support shader-f16 under its toggles state.
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        dawn::native::AdapterBase* adapter = dawn::native::FromAPI(GetAdapter().Get());
+
+        // Record the original UseDXC toggle state of adapter.
+        const auto& adapterToggles = adapter->GetTogglesState();
+        mOriginalUseDXCAdapterToggleEnabled =
+            adapterToggles.IsEnabled(dawn::native::Toggle::UseDXC);
+        mOriginalUseDXCAdapterToggleForced = adapterToggles.IsForced(dawn::native::Toggle::UseDXC);
+
+        // If UseDXC toggle is not forced, set it to the state required in test parameter.
+        if (!mOriginalUseDXCAdapterToggleForced) {
+            bool requiredUseDXCInTestParam = false;
             for (auto* enabledToggle : GetParam().forceEnabledWorkarounds) {
                 if (strncmp(enabledToggle, "use_dxc", 7) == 0) {
-                    mUseDxcEnabledOrNonD3D12 = true;
+                    requiredUseDXCInTestParam = true;
                     break;
                 }
             }
+
+            adapter->SetToggleForTesting(dawn::native::Toggle::UseDXC, requiredUseDXCInTestParam,
+                                         false);
         }
 
-        if (mUseDxcEnabledOrNonD3D12) {
+        // Get the supported features set from backend adater based on the adapter toggles state, in
+        // which UseDXC toggle is just set according to test param.
+        std::vector<const char*> supportedFeatures = GetAdapter().GetSupportedFeatures();
+
+        // Check if the shader-f16 feature can be supported by adapter
+        bool isShaderF16SupportedOnAdapter = false;
+        for (auto* feature : supportedFeatures) {
+            if (strncmp(feature, "shader-f16", 10) == 0) {
+                isShaderF16SupportedOnAdapter = true;
+                break;
+            }
+        }
+
+        if (isShaderF16SupportedOnAdapter) {
             return {wgpu::FeatureName::ShaderF16};
+        } else {
+            return {};
         }
-
-        return {};
     }
 
-    bool IsShaderF16SupportedOnAdapter() const { return mIsShaderF16SupportedOnAdapter; }
-    bool UseDxcEnabledOrNonD3D12() const { return mUseDxcEnabledOrNonD3D12; }
-
   private:
-    bool mIsShaderF16SupportedOnAdapter = false;
-    bool mUseDxcEnabledOrNonD3D12 = false;
+    bool mOriginalUseDXCAdapterToggleEnabled;
+    bool mOriginalUseDXCAdapterToggleForced;
 };
 
 // Align returns the WGSL decoration for an explicit structure field alignment

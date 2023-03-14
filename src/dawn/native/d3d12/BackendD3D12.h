@@ -40,6 +40,8 @@ class Backend final : public d3d::Backend {
         const AdapterDiscoveryOptionsBase* optionsBase,
         const TogglesState& adapterToggles) override;
 
+    void SetupBackendSpecificAdapterToggles(TogglesState* instanceToggles) override;
+
   private:
     using Base = d3d::Backend;
 };

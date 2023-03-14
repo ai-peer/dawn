@@ -44,19 +44,18 @@ class InstanceToggleTest : public testing::Test {
 
 // Test that instance toggles are set by requirement or default as expected.
 TEST_F(InstanceToggleTest, InstanceTogglesSet) {
+    // Test that instance has expected toggles enabled or disabled.
     auto validateInstanceToggles = [](const dawn::native::Instance* nativeInstance,
-                                      std::initializer_list<const char*> enableToggles,
-                                      std::initializer_list<const char*> disableToggles) {
+                                      std::initializer_list<const char*> expectEnabledToggles,
+                                      std::initializer_list<const char*> expectDisabledToggles) {
         const dawn::native::InstanceBase* instance = dawn::native::FromAPI(nativeInstance->Get());
         const dawn::native::TogglesState& instanceTogglesState = instance->GetTogglesState();
         std::vector<const char*> enabledToggles = instanceTogglesState.GetEnabledToggleNames();
         std::vector<const char*> disabledToggles = instanceTogglesState.GetDisabledToggleNames();
-        EXPECT_EQ(disabledToggles.size(), disableToggles.size());
-        EXPECT_EQ(enabledToggles.size(), enableToggles.size());
-        for (auto* enableToggle : enableToggles) {
+        for (auto* enableToggle : expectEnabledToggles) {
             EXPECT_THAT(enabledToggles, Contains(StrEq(enableToggle)));
         }
-        for (auto* disableToggle : disableToggles) {
+        for (auto* disableToggle : expectDisabledToggles) {
             EXPECT_THAT(disabledToggles, Contains(StrEq(disableToggle)));
         }
     };
