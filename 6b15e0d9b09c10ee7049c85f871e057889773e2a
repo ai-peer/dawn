@@ -73,6 +73,24 @@
       "message": "Any reason this was moved?",
       "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e084b178_f4be651e",
+        "filename": "src/tint/writer/spirv/generator_impl.cc",
+        "patchSetId": 13
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T14:35:52Z",
+      "side": 1,
+      "message": "I can move it back. I thought this was what was causing other issues with the bindings remapper move but wasn\u0027t the issue.",
+      "parentUuid": "f0a3fbf7_c2d7b6bf",
+      "revId": "6b15e0d9b09c10ee7049c85f871e057889773e2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
