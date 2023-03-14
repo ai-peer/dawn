@@ -52,6 +52,24 @@
       "parentUuid": "74d5bde4_f91c8d78",
       "revId": "485d9efd16e43a80281269ed3910016bd761e528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a024e9e_8107bcc5",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T23:59:15Z",
+      "side": 1,
+      "message": "I added a check for `kInternalStorageBufferBinding`. In `ComputePassEncoder.cpp` `GetOrCreateIndirectDispatchValidationPipeline` we add three buffers, a `BufferBindingType::Uniform`, `kInternalStorageBufferBinding` and `BufferBindingType::Storage`.\n\nWe need to then handle the `kInternalStorageBufferBinding` (which has value 0xffffffff) here to make sure we expand the `arrayLength` items.",
+      "parentUuid": "f1c8ffc9_fddc2159",
+      "revId": "485d9efd16e43a80281269ed3910016bd761e528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
