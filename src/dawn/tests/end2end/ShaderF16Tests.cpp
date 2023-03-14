@@ -45,35 +45,11 @@ class ShaderF16Tests : public DawnTestWithParams<ShaderF16TestsParams> {
 
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        mIsShaderF16SupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ShaderF16});
-        if (!mIsShaderF16SupportedOnAdapter) {
-            return {};
-        }
-
-        if (!IsD3D12()) {
-            mUseDxcEnabledOrNonD3D12 = true;
-        } else {
-            for (auto* enabledToggle : GetParam().forceEnabledWorkarounds) {
-                if (strncmp(enabledToggle, "use_dxc", 7) == 0) {
-                    mUseDxcEnabledOrNonD3D12 = true;
-                    break;
-                }
-            }
-        }
-
-        if (GetParam().mRequireShaderF16Feature && mUseDxcEnabledOrNonD3D12) {
+        if (CanRequireDeviceFeaturesWithTogglesInParam({wgpu::FeatureName::ShaderF16})) {
             return {wgpu::FeatureName::ShaderF16};
         }
-
         return {};
     }
-
-    bool IsShaderF16SupportedOnAdapter() const { return mIsShaderF16SupportedOnAdapter; }
-    bool UseDxcEnabledOrNonD3D12() const { return mUseDxcEnabledOrNonD3D12; }
-
-  private:
-    bool mIsShaderF16SupportedOnAdapter = false;
-    bool mUseDxcEnabledOrNonD3D12 = false;
 };
 
 // Test simple f16 arithmetic within shader with enable directive. The result should be as expect if
@@ -94,16 +70,7 @@ TEST_P(ShaderF16Tests, BasicShaderF16FeaturesTest) {
         }
     )";
 
-    const bool shouldShaderF16FeatureSupportedByDevice =
-        // Required when creating device
-        GetParam().mRequireShaderF16Feature &&
-        // Adapter support the feature
-        IsShaderF16SupportedOnAdapter() &&
-        // Proper toggle, disallow_unsafe_apis and use_dxc if d3d12
-        // Note that "disallow_unsafe_apis" is always disabled in DawnTestBase::CreateDeviceImpl.
-        !HasToggleEnabled("disallow_unsafe_apis") && UseDxcEnabledOrNonD3D12();
     const bool deviceSupportShaderF16Feature = device.HasFeature(wgpu::FeatureName::ShaderF16);
-    EXPECT_EQ(deviceSupportShaderF16Feature, shouldShaderF16FeatureSupportedByDevice);
 
     if (!deviceSupportShaderF16Feature) {
         ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, computeShader));

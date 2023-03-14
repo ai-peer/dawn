@@ -165,7 +165,7 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"use_dxc",
       "Use DXC instead of FXC for compiling HLSL when both dxcompiler.dll and dxil.dll is "
       "available.",
-      "https://crbug.com/dawn/402", ToggleStage::Device}},
+      "https://crbug.com/dawn/402", ToggleStage::Instance}},
     {Toggle::DisableRobustness,
      {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480",
       ToggleStage::Device}},
@@ -469,6 +469,13 @@ TogglesState TogglesState::CreateFromTogglesDescriptor(const DawnTogglesDescript
     }
 
     return togglesState;
+}
+
+void TogglesState::Copy(const TogglesState& sourceState) {
+    ASSERT(mStage == sourceState.mStage);
+    mTogglesSet = sourceState.mTogglesSet;
+    mEnabledToggles = sourceState.mEnabledToggles;
+    mForcedToggles = sourceState.mForcedToggles;
 }
 
 TogglesState& TogglesState::InheritFrom(const TogglesState& inheritedToggles) {
