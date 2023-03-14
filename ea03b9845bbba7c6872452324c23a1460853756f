@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a400ceaf_ece39c06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-14T13:01:12Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This CL refactor the adapter features logic with the idea that device toggles can override adapter toggles, adapter report supported features (`GetSupportedFeatures`) under the restriction of adapter toggles, while creates device and validate device features using required device toggles.\n\nSend for review now in order to shorten the review latency (otherwise it would be one more day), but it seems that some webgpu_cts_with_validation_tests cases relating to `copyToImage,ImageBitmap` has problem on Nvidia win10 trybot, I am not quite sure the reason. Sorry about that.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
