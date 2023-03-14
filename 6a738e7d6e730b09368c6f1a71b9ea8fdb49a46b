@@ -34,6 +34,24 @@
       "parentUuid": "d30a3763_59508121",
       "revId": "6a738e7d6e730b09368c6f1a71b9ea8fdb49a46b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa327cb4_df92f015",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T15:27:23Z",
+      "side": 1,
+      "message": "Done, added a GTEST_SKIP if metal into the BlobCacheLayout test.",
+      "parentUuid": "9ece8092_30b7b808",
+      "revId": "6a738e7d6e730b09368c6f1a71b9ea8fdb49a46b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
