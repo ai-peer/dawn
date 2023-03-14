@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83b2b243_ceb6d142",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-14T20:25:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ffa00b521818c876a603af8e978bab637526b370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c4f09a0_e42f96ce",
+        "filename": "src/dawn/platform/tracing/TraceEvent.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-14T20:25:11Z",
+      "side": 1,
+      "message": "uuunit: this variable is no longer static so it could probably be called something else, like \"cat\" or \"catenabled\"",
+      "range": {
+        "startLine": 676,
+        "startChar": 47,
+        "endLine": 676,
+        "endChar": 56
+      },
+      "revId": "ffa00b521818c876a603af8e978bab637526b370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
