@@ -85,7 +85,7 @@ struct ParamTogglesHelper {
             const dawn::native::ToggleInfo* info =
                 gTestEnv->GetInstance()->GetToggleInfo(requireEnabledWorkaround);
             ASSERT(info != nullptr);
-            if (info->stage == requiredStage) {
+            if (info->stage <= requiredStage) {
                 enabledToggles.push_back(requireEnabledWorkaround);
             }
         }
@@ -93,7 +93,7 @@ struct ParamTogglesHelper {
             const dawn::native::ToggleInfo* info =
                 gTestEnv->GetInstance()->GetToggleInfo(requireDisabledWorkaround);
             ASSERT(info != nullptr);
-            if (info->stage == requiredStage) {
+            if (info->stage <= requiredStage) {
                 disabledToggles.push_back(requireDisabledWorkaround);
             }
         }
@@ -102,7 +102,7 @@ struct ParamTogglesHelper {
             const dawn::native::ToggleInfo* info =
                 gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
             ASSERT(info != nullptr);
-            if (info->stage == requiredStage) {
+            if (info->stage <= requiredStage) {
                 enabledToggles.push_back(info->name);
             }
         }
@@ -111,7 +111,7 @@ struct ParamTogglesHelper {
             const dawn::native::ToggleInfo* info =
                 gTestEnv->GetInstance()->GetToggleInfo(toggle.c_str());
             ASSERT(info != nullptr);
-            if (info->stage == requiredStage) {
+            if (info->stage <= requiredStage) {
                 disabledToggles.push_back(info->name);
             }
         }
@@ -1008,6 +1008,24 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
         nullptr);
 
     return apiDevice;
+}
+
+bool DawnTestBase::CanRequireDeviceFeaturesWithTogglesInParam(
+    const std::vector<wgpu::FeatureName>& requiredFeatures) {
+    ASSERT(mAdapter);
+
+    wgpu::DeviceDescriptor deviceDescriptor = {};
+    // Set device descriptor with required features.
+    deviceDescriptor.requiredFeatures = requiredFeatures.data();
+    deviceDescriptor.requiredFeaturesCount = requiredFeatures.size();
+    // Use the toggles required in test parameter to try creating device.
+    ParamTogglesHelper deviceTogglesHelper(mParam, dawn::native::ToggleStage::Device);
+    deviceDescriptor.nextInChain = &deviceTogglesHelper.togglesDesc;
+
+    // Try creating device with required features and toggles in test parameter, and return true if
+    // success.
+    wgpu::Device device = wgpu::Device::Acquire(mBackendAdapter.CreateDevice(&deviceDescriptor));
+    return (device != nullptr);
 }
 
 void DawnTestBase::SetUp() {

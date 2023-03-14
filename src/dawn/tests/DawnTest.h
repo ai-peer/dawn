@@ -559,9 +559,16 @@ class DawnTestBase {
     // Exposed device creation helper for tests to use when needing more than 1 device.
     wgpu::Device CreateDevice(std::string isolationKey = "");
 
+    // Try creating device with given features requirement and device toggles in test parameters.
+    // Since device toggles may override adapter toggles in some cases, and available features may
+    // differ under different toggles set, this function just try creating the device and return
+    // true if succeed, false otherwise. This function must be called after the adapter is ready.
+    bool CanRequireDeviceFeaturesWithTogglesInParam(
+        const std::vector<wgpu::FeatureName>& requiredFeatures);
+
     // Called in SetUp() to get the features required to be enabled in the tests. The tests must
-    // check if the required features are supported by the adapter in this function and guarantee
-    // the returned features are all supported by the adapter. The tests may provide different
+    // check if the required features are supported in this function and guarantee creating device
+    // requiring the returned features can succeed by the adapter. The tests may provide different
     // code path to handle the situation when not all features are supported.
     virtual std::vector<wgpu::FeatureName> GetRequiredFeatures();
 

@@ -140,26 +140,26 @@ bool Adapter::AreTimestampQueriesSupported() const {
 }
 
 void Adapter::InitializeSupportedFeaturesImpl() {
-    mSupportedFeatures.EnableFeature(Feature::TextureCompressionBC);
-    mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
-    mSupportedFeatures.EnableFeature(Feature::Depth32FloatStencil8);
-    mSupportedFeatures.EnableFeature(Feature::IndirectFirstInstance);
-    mSupportedFeatures.EnableFeature(Feature::RG11B10UfloatRenderable);
-    mSupportedFeatures.EnableFeature(Feature::DepthClipControl);
+    SupportFeature(Feature::TextureCompressionBC);
+    SupportFeature(Feature::MultiPlanarFormats);
+    SupportFeature(Feature::Depth32FloatStencil8);
+    SupportFeature(Feature::IndirectFirstInstance);
+    SupportFeature(Feature::RG11B10UfloatRenderable);
+    SupportFeature(Feature::DepthClipControl);
 
     if (AreTimestampQueriesSupported()) {
-        mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
-        mSupportedFeatures.EnableFeature(Feature::TimestampQueryInsidePasses);
+        SupportFeature(Feature::TimestampQuery);
+        SupportFeature(Feature::TimestampQueryInsidePasses);
     }
-    mSupportedFeatures.EnableFeature(Feature::PipelineStatisticsQuery);
+    SupportFeature(Feature::PipelineStatisticsQuery);
 
     // Both Dp4a and ShaderF16 features require DXC version being 1.4 or higher
     if (GetBackend()->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)) {
         if (mDeviceInfo.supportsDP4a) {
-            mSupportedFeatures.EnableFeature(Feature::ChromiumExperimentalDp4a);
+            SupportFeature(Feature::ChromiumExperimentalDp4a);
         }
         if (mDeviceInfo.supportsShaderF16) {
-            mSupportedFeatures.EnableFeature(Feature::ShaderF16);
+            SupportFeature(Feature::ShaderF16);
         }
     }
 
@@ -169,7 +169,7 @@ void Adapter::InitializeSupportedFeaturesImpl() {
         D3D12_FEATURE_FORMAT_SUPPORT, &bgra8unormFormatInfo, sizeof(bgra8unormFormatInfo));
     if (SUCCEEDED(hr) &&
         (bgra8unormFormatInfo.Support1 & D3D12_FORMAT_SUPPORT1_TYPED_UNORDERED_ACCESS_VIEW)) {
-        mSupportedFeatures.EnableFeature(Feature::BGRA8UnormStorage);
+        SupportFeature(Feature::BGRA8UnormStorage);
     }
 }
 
@@ -347,16 +347,14 @@ MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
     return {};
 }
 
-MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
-    wgpu::FeatureName feature,
-    const TogglesState& deviceTogglesState) {
-    // shader-f16 feature and chromium-experimental-dp4a feature require DXC 1.4 or higher for
-    // D3D12.
+MaybeError Adapter::ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
+                                                            const TogglesState& toggles) const {
+    // shader-f16 feature and chromium-experimental-dp4a feature require using DXC 1.4 or higher for
+    // D3D12. Note that DXC version is checked in InitializeSupportedFeaturesImpl.
     if (feature == wgpu::FeatureName::ShaderF16 ||
         feature == wgpu::FeatureName::ChromiumExperimentalDp4a) {
-        DAWN_INVALID_IF(!(deviceTogglesState.IsEnabled(Toggle::UseDXC) &&
-                          mBackend->IsDXCAvailableAndVersionAtLeast(1, 4, 1, 4)),
-                        "Feature %s requires DXC for D3D12.",
+        DAWN_INVALID_IF(!toggles.IsEnabled(Toggle::UseDXC),
+                        "Feature %s requires using DXC for D3D12.",
                         GetInstance()->GetFeatureInfo(feature)->name);
     }
     return {};
@@ -489,13 +487,10 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
         Toggle::D3D12UseTempBufferInDepthStencilTextureAndBufferCopyWithNonZeroBufferOffset,
         GetDeviceInfo().programmableSamplePositionsTier == 0);
 
-    // Check DXC for use_dxc toggle, and default to use FXC
-    // TODO(dawn:1495): When implementing adapter toggles, promote UseDXC as adapter toggle, and do
-    // the validation when creating adapters.
+    // UseDXC toggle should have been already validated.
     if (!GetBackend()->IsDXCAvailable()) {
-        deviceToggles->ForceSet(Toggle::UseDXC, false);
+        ASSERT(!deviceToggles->IsEnabled(Toggle::UseDXC));
     }
-    deviceToggles->Default(Toggle::UseDXC, false);
 
     // Disable optimizations when using FXC
     // See https://crbug.com/dawn/1203
