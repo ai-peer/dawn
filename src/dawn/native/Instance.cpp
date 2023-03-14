@@ -117,25 +117,15 @@ Ref<InstanceBase> InstanceBase::Create(const InstanceDescriptor* descriptor) {
         descriptor = &kDefaultDesc;
     }
 
-    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
-
-    // Set up the instance toggle state from toggles descriptor
-    TogglesState instanceToggles =
-        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
-    // By default enable the DisallowUnsafeAPIs instance toggle, it will be inherited to adapters
-    // and devices created by this instance if not overriden.
-    // TODO(dawn:1685): Rename DisallowUnsafeAPIs to AllowUnsafeAPIs, and change relating logic.
-    instanceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
-
-    Ref<InstanceBase> instance = AcquireRef(new InstanceBase(instanceToggles));
+    Ref<InstanceBase> instance = AcquireRef(new InstanceBase());
     if (instance->ConsumedError(instance->Initialize(descriptor))) {
         return nullptr;
     }
     return instance;
 }
 
-InstanceBase::InstanceBase(const TogglesState& instanceToggles) : mToggles(instanceToggles) {}
+// Create InstanceBase with empty toggles state, should be assigned during initialization.
+InstanceBase::InstanceBase() : mToggles(TogglesState(ToggleStage::Instance)) {}
 
 InstanceBase::~InstanceBase() = default;
 
@@ -175,6 +165,30 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(mDefaultPlatform.get());
+
+    // Connect all available backends.
+    for (wgpu::BackendType b : IterateBitSet(GetEnabledBackends())) {
+        EnsureBackendConnection(b);
+    }
+
+    // Set up the instance toggle state from toggles descriptor
+    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+    TogglesState instanceToggles =
+        TogglesState::CreateFromTogglesDescriptor(instanceTogglesDesc, ToggleStage::Instance);
+
+    // By default enable the DisallowUnsafeAPIs instance toggle, it will be inherited to adapters
+    // and devices created by this instance if not overriden.
+    // TODO(dawn:1685): Rename DisallowUnsafeAPIs to AllowUnsafeAPIs, and change relating logic.
+    instanceToggles.Default(Toggle::DisallowUnsafeAPIs, true);
+
+    // Set up backend-specific instance toggles for all backends.
+    for (std::unique_ptr<BackendConnection>& backend : mBackends) {
+        backend->SetupBackendSpecificInstanceToggles(&instanceToggles);
+    }
+
+    // Assign the instance toggles state.
+    mToggles.Copy(instanceToggles);
 
     return {};
 }
