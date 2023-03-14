@@ -16,6 +16,24 @@
       "message": "there\u0027s now another mac bot that we have which is an AMD bot running MacOS Ventura\n\nhttps://ci.chromium.org/p/chromium/builders/ci/Dawn%20Mac%20x64%20Experimental%20Release%20(AMD)\n\nSo, we should replace \"monterey\" in all these blocks with \"mac\"\n\nI checked that that failure mode is the same. For example:\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Mac%20x64%20Experimental%20Release%20(AMD)/12116/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3Awebgpu%3Aapi%2Coperation%2Crendering%2Cdepth_clip_clamp%3Adepth_clamp_and_clip%3Aformat%3D%22depth16unorm%22%3BunclippedDepth%3D%22_undef_%22%3BwriteDepth%3Dtrue%3Bmultisampled%3Dfalse",
       "revId": "9de8416a013891cc4e96e2c324d19321ec2a15fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe9b387_68fa3fa9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1003201
+      },
+      "writtenOn": "2023-03-14T15:26:29Z",
+      "side": 1,
+      "message": "Updated, thanks.",
+      "parentUuid": "1edbc76e_b8b3d70c",
+      "revId": "9de8416a013891cc4e96e2c324d19321ec2a15fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
