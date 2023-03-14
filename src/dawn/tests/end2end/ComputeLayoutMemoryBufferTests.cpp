@@ -482,40 +482,16 @@ DAWN_TEST_PARAM_STRUCT(ComputeLayoutMemoryBufferTestParams, AddressSpace, Field)
 
 class ComputeLayoutMemoryBufferTests
     : public DawnTestWithParams<ComputeLayoutMemoryBufferTestParams> {
-    // void SetUp() override { DawnTestBase::SetUp(); }
-
   protected:
     // Require f16 feature if possible
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
-        mIsShaderF16SupportedOnAdapter = SupportsFeatures({wgpu::FeatureName::ShaderF16});
-        if (!mIsShaderF16SupportedOnAdapter) {
-            return {};
-        }
-
-        if (!IsD3D12()) {
-            mUseDxcEnabledOrNonD3D12 = true;
-        } else {
-            for (auto* enabledToggle : GetParam().forceEnabledWorkarounds) {
-                if (strncmp(enabledToggle, "use_dxc", 7) == 0) {
-                    mUseDxcEnabledOrNonD3D12 = true;
-                    break;
-                }
-            }
-        }
-
-        if (mUseDxcEnabledOrNonD3D12) {
+        // Just try creating device with f16 feature.
+        if (CanRequireDeviceFeaturesWithTogglesInParam({wgpu::FeatureName::ShaderF16})) {
             return {wgpu::FeatureName::ShaderF16};
         }
 
         return {};
     }
-
-    bool IsShaderF16SupportedOnAdapter() const { return mIsShaderF16SupportedOnAdapter; }
-    bool UseDxcEnabledOrNonD3D12() const { return mUseDxcEnabledOrNonD3D12; }
-
-  private:
-    bool mIsShaderF16SupportedOnAdapter = false;
-    bool mUseDxcEnabledOrNonD3D12 = false;
 };
 
 // Align returns the WGSL decoration for an explicit structure field alignment

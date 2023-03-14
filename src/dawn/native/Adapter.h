@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_ADAPTER_H_
 
 #include <string>
+#include <vector>
 
 #include "dawn/native/DawnNative.h"
 
@@ -60,8 +61,9 @@ class AdapterBase : public RefCounted {
     void ResetInternalDeviceForTesting();
 
     FeaturesSet GetSupportedFeatures() const;
-    bool SupportsAllRequiredFeatures(
-        const ityp::span<size_t, const wgpu::FeatureName>& features) const;
+    bool SupportsAllRequiredFeaturesWithToggles(
+        const ityp::span<size_t, const wgpu::FeatureName>& features,
+        const TogglesState& toggles) const;
 
     bool GetLimits(SupportedLimits* limits) const;
 
@@ -82,15 +84,18 @@ class AdapterBase : public RefCounted {
     gpu_info::DriverVersion mDriverVersion;
     std::string mDriverDescription;
 
-    // Features set that CAN be supported by devices of this adapter. Some features in this set may
-    // be guarded by toggles, and creating a device with these features required may result in a
-    // validation error if proper toggles are not enabled/disabled.
-    FeaturesSet mSupportedFeatures;
-    // Check if a feature os supported by this adapter AND suitable with given toggles.
-    // TODO(dawn:1495): After implementing adapter toggles, remove this and use adapter toggles
-    // instead of device toggles to validate supported features.
-    MaybeError ValidateFeatureSupportedWithDeviceToggles(wgpu::FeatureName feature,
-                                                         const TogglesState& deviceTogglesState);
+    // Mark a feature as supported within mUnfilteredSupportedFeatures, not considering any
+    // toggles-related restriction.
+    void SupportFeature(Feature feature);
+    // Request all features that are supported with a given toggles state. The result is a subset of
+    // mUnfilteredSupportedFeatures.
+    FeaturesSet RequestSupportedFeaturesWithToggles(const TogglesState& toggles) const;
+    // Check if a feature os supported by this adapter AND suitable with given toggles state, which
+    // could be adapter toggles state or device toggles state.
+    MaybeError ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
+                                                   const TogglesState& toggles) const;
+    // Used for the tests that intend to use an adapter without all features enabled.
+    void SetSupportedFeaturesForTesting(const std::vector<wgpu::FeatureName>& requiredFeatures);
 
   private:
     // Backend-specific force-setting and defaulting device toggles
@@ -109,9 +114,9 @@ class AdapterBase : public RefCounted {
 
     virtual void InitializeVendorArchitectureImpl();
 
-    virtual MaybeError ValidateFeatureSupportedWithDeviceTogglesImpl(
+    virtual MaybeError ValidateFeatureSupportedWithTogglesImpl(
         wgpu::FeatureName feature,
-        const TogglesState& deviceTogglesState) = 0;
+        const TogglesState& toggles) const = 0;
 
     ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* descriptor);
 
@@ -121,6 +126,14 @@ class AdapterBase : public RefCounted {
 
     // Adapter toggles state, currently only inherited from instance toggles state.
     TogglesState mTogglesState;
+
+    // Features set that CAN be supported by devices of this adapter, not considering toggles
+    // restriction. Some features in this set may be guarded by toggles, while features not in this
+    // set could not be used under any toggles set.
+    FeaturesSet mUnfilteredSupportedFeatures;
+    // Features set that supported by devices of this adapter, if adapter toggles state is used and
+    // no overridden happens.
+    FeaturesSet mSupportedFeaturesWithAdapterToggles;
 
     CombinedLimits mLimits;
     bool mUseTieredLimits = false;
