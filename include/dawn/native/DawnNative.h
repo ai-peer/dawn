@@ -98,7 +98,11 @@ class DAWN_NATIVE_EXPORT Adapter {
     void GetProperties(WGPUAdapterProperties* properties) const;
 
     std::vector<const char*> GetSupportedExtensions() const;
+    // Get supported features with adapter toggles.
     std::vector<const char*> GetSupportedFeatures() const;
+    // Get all supported features without toggles restriction.
+    std::vector<const char*> GetUnfilteredSupportedFeaturesForTesting() const;
+
     bool GetLimits(WGPUSupportedLimits* limits) const;
 
     void SetUseTieredLimits(bool useTieredLimits);
