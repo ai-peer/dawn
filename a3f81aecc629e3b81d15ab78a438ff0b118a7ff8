@@ -128,6 +128,24 @@
       "parentUuid": "66601cd8_a90e6f30",
       "revId": "a3f81aecc629e3b81d15ab78a438ff0b118a7ff8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bdb8bf6_907674be",
+        "filename": "src/tint/reader/wgsl/parser_impl_statement_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-14T19:32:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a4ac427c_a1a23c6d",
+      "revId": "a3f81aecc629e3b81d15ab78a438ff0b118a7ff8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
