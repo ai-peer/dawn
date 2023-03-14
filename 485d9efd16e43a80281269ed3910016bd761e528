@@ -34,6 +34,24 @@
       "parentUuid": "66557147_0f01e8c2",
       "revId": "485d9efd16e43a80281269ed3910016bd761e528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1c8ffc9_fddc2159",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T21:42:41Z",
+      "side": 1,
+      "message": "Looking at: \n\n`webgpu:api,operation,memory_sync,buffer,multiple_buffers:wr:boundary\u003d\"pass\";readOp\u003d\"input-indirect-dispatch\";readContext\u003d\"compute-pass-encoder\";writeOp\u003d\"storage\";writeContext\u003d\"compute-pass-encoder\"`\n\nI printed out the buffer type for the various bindings (the issue is the `@group(0) @binding(1)` is not having the arrayLength converted):\n\n`4294967295 dST: 0 1 src: 0 1`\n\nThe first number is the `bindingInfo.buffer.type` static cast to a `uint32_t`. So, this doesn\u0027t match storage which is `0x2` or read-only storage, which is `0x3`.\n\nAny idea of where the weird `buffer.type` comes from?",
+      "parentUuid": "74d5bde4_f91c8d78",
+      "revId": "485d9efd16e43a80281269ed3910016bd761e528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
