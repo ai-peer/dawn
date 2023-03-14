@@ -161,7 +161,7 @@ class TogglesState {
   private:
     // Indicating which stage of toggles state is this object holding for, instance, adapter, or
     // device.
-    const ToggleStage mStage;
+    ToggleStage mStage;
     TogglesSet mTogglesSet;
     TogglesSet mEnabledToggles;
     TogglesSet mForcedToggles;
