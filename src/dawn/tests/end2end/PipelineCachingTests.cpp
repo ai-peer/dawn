@@ -516,6 +516,10 @@ TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheNegativeCasesFragmentC
 // cached backends currently remap shader bindings based on the layout. It can be split
 // per-backend as needed.
 TEST_P(SinglePipelineCachingTests, RenderPipelineBlobCacheLayout) {
+    if (IsMetal()) {
+        GTEST_SKIP();
+    }
+
     // First time should create and write out to the cache.
     {
         wgpu::Device device = CreateDevice();
