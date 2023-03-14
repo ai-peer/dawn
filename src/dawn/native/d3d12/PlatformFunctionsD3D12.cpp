@@ -14,15 +14,6 @@
 
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 
-#include <comdef.h>
-
-#include <algorithm>
-#include <array>
-#include <sstream>
-#include <utility>
-
-#include "dawn/common/DynamicLib.h"
-
 namespace dawn::native::d3d12 {
 
 PlatformFunctions::PlatformFunctions() = default;
