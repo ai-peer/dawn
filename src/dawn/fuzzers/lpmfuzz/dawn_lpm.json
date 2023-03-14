@@ -39,8 +39,13 @@
 
         "limits": {
             "adapter": 2,
+            "binding": 512,
+            "bind group": 512,
+            "bind group layout": 512,
             "device": 2,
             "default": 16
-        }
+        },
+
+        "invalid object id": 2147483647
     }
 }

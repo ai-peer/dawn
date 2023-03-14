@@ -12,10 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <stdint.h>
+
 namespace DawnLPMFuzzer {
 
 static constexpr int instance_object_id = 1;
-static constexpr int invalid_object_id = 0;
+static constexpr uint32_t invalid_object_id = {{ cmd_records["lpm_info"]["invalid object id"] }};
 
 {% for type in by_category["object"] %}
     {% if type.name.canonical_case() in cmd_records["lpm_info"]["limits"] %}
