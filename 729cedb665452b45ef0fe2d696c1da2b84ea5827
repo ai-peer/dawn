@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95136667_cf0e6c07",
+        "filename": "src/tint/reader/wgsl/parser_impl_enable_directive_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-14T21:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88765eb6_57cc2e24",
+      "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddb1593f_1f718454",
@@ -118,6 +136,24 @@
       "writtenOn": "2023-03-14T15:49:22Z",
       "side": 1,
       "message": "nit: As a followup, maybe add a `HasExtension` method to `enable`? Would simplify this and the code in `src/tint/cmd/main.cc` checking for `fp16`",
+      "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7bad5e1_41d9b57b",
+        "filename": "src/tint/transform/builtin_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-03-14T21:52:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb1593f_1f718454",
       "revId": "729cedb665452b45ef0fe2d696c1da2b84ea5827",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
