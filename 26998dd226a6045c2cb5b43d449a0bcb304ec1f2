@@ -22,6 +22,30 @@
       },
       "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d55c1e3_84e6c7a4",
+        "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-14T16:06:24Z",
+      "side": 1,
+      "message": "The binding group layout is different, so doesn\u0027t that change what will be in the map? I\u0027m just adding all of them from the bind group layout.",
+      "parentUuid": "08eb141f_05936f0d",
+      "range": {
+        "startLine": 562,
+        "startChar": 39,
+        "endLine": 562,
+        "endChar": 67
+      },
+      "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
