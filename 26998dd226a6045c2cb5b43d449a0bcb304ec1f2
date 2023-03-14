@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e7092dc_457f0f68",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-14T16:31:22Z",
+      "side": 1,
+      "message": "The test is fixed with\n\n```\n-            // Use the ShaderIndex as the indices for the buffer size lookups in the array\n-            // length uniform transform.\n-            arrayLengthFromUniform.bindpoint_to_size_index.emplace(dstBindingPoint,\n-                                                                   dstBindingPoint.binding);\n+            // Use the ShaderIndex as the indices for the buffer size lookups in the array length\n+            // uniform transform. This is used to compute the size of variable length arrays in\n+            // storage buffers.\n+            if (bindingInfo.buffer.type \u003d\u003d wgpu::BufferBindingType::Storage ||\n+                bindingInfo.buffer.type \u003d\u003d wgpu::BufferBindingType::ReadOnlyStorage) {\n+                arrayLengthFromUniform.bindpoint_to_size_index.emplace(dstBindingPoint,\n+                                                                       dstBindingPoint.binding);\n+            }\n```",
+      "revId": "26998dd226a6045c2cb5b43d449a0bcb304ec1f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08eb141f_05936f0d",
         "filename": "src/dawn/tests/end2end/PipelineCachingTests.cpp",
         "patchSetId": 7
