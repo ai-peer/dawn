@@ -16,6 +16,23 @@
       "message": "+1 for the Tint side of things",
       "revId": "90d62cee8f1f568b69654a065a35ea79facd0938",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36a5b6f_f465a17b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:20:27Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "90d62cee8f1f568b69654a065a35ea79facd0938",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
