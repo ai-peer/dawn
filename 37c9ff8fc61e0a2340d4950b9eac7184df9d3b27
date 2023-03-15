@@ -33,6 +33,24 @@
       "message": "What\u0027s the reason for kokoro\u0027s failures here?",
       "revId": "37c9ff8fc61e0a2340d4950b9eac7184df9d3b27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "559bd6ec_2d3dcefe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-15T20:12:08Z",
+      "side": 1,
+      "message": "https://fusion2.corp.google.com/invocations/4bce138d-952f-4551-802e-3bbc89323a1f/targets/dawn%2Fwindows%2Fcmake-msvc2019-release%2Fpresubmit/log\n\nseems like a flake\n\ncmake-msvc2019-release/presubmit failed\ncmake-msvc2019-debug/presubmit passed\n\nlike it failed to download something\n\nT:\\src\\git\\dawn\u003ecurl -k -L \"https://github.com/microsoft/DirectXShaderCompiler/releases/download/v1.7.2207/dxc_2022_07_18.zip\" --output \"T:\\tmp\\dawn-temp\\dxc_release.zip\"   || goto :error \n  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\n                                 Dload  Upload   Total   Spent    Left  Speed\n  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0\n  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0\ncurl: (56) OpenSSL SSL_read: SSL_ERROR_SYSCALL, errno 104\n\nT:\\src\\git\\dawn\u003eecho BUILD FAILED! errorlevel: 56 \nBUILD FAILED 56\n\nT:\\src\\git\\dawn\u003eexit /b 56 \n\nT:\\src\u003eexit /b 56\n\noverriding Kokoro-1",
+      "parentUuid": "a934eb90_9fe66e79",
+      "revId": "37c9ff8fc61e0a2340d4950b9eac7184df9d3b27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
