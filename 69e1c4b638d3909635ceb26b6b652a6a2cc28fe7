@@ -70,6 +70,30 @@
       },
       "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5c9828_dd3cf520",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-15T09:57:38Z",
+      "side": 0,
+      "message": "I think there is another question about how `instance.ProcessEvents` should behave (in future). Do we still want `device.Tick` to trigger its own callbacks or only `instance.ProcessEvents` can do that for all devices? If it\u0027s the latter, what about use cases where users only want to poll for their own device\u0027s callbacks like the graphite example above?",
+      "parentUuid": "cfa2c129_d9aec226",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
