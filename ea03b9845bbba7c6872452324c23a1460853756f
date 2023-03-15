@@ -16,6 +16,154 @@
       "message": "Please take a look, thanks! This CL refactor the adapter features logic with the idea that device toggles can override adapter toggles, adapter report supported features (`GetSupportedFeatures`) under the restriction of adapter toggles, while creates device and validate device features using required device toggles.\n\nSend for review now in order to shorten the review latency (otherwise it would be one more day), but it seems that some webgpu_cts_with_validation_tests cases relating to `copyToImage,ImageBitmap` has problem on Nvidia win10 trybot, I am not quite sure the reason. Sorry about that.",
       "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6e28ea0_69d4e41b",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "I didn\u0027t finish reviewing the adapter files. But I think that with the other comments the code is likely to be possible to simplify a bunch.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59526a1e_fa14ef73",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "Couldn\u0027t this just be ToAPIFeature exposed as a function called NativeToAPIFeature()? It doesn\u0027t use any member and the ASSERT is redundant with the UNREACHABLE in the switch.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e888c5a_295a5dea",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "Since we now do this on initialization, then we can remove the other calls to EnsureBackendConnection. Though it was nice that the instance only lazily connected to backends because an application that only wants to use Vulkan would then only need to load the Vulkan shared library on startup and not D3D12 and GL as well.\n\nThis change could be avoided by making DXC and adapter toggle instead because then we don\u0027t need the backends to be connected so they can mess with the instance toggles.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e4357e_a6acae4e",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "Why isn\u0027t mToggles directly passed to SetupBackendSpecificInstanceToggles? It would remove the need for Copy()",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e3ea256_73ef9c81",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "For some reason it feels a bit weird that the backend modifies the toggles directly instead of the adapter because in the future we could imagine having multiple D3D12 backend connections (or a similar mechanism with Vulkan that would have two connections: one for Swiftshader and one for the regular driver). I guess we\u0027ll see how that holds out in the future.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18e3fe3c_3de436da",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "nit: will",
+      "range": {
+        "startLine": 564,
+        "startChar": 39,
+        "endLine": 564,
+        "endChar": 42
+      },
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c6c4dbd_17ae18cc",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "Why do we need all of this? Isn\u0027t the point of this CL that the feature will be marked as supported/not supported based on the DXC toggle passed at instance or adapter creation and so we can just check GetAdapter().IsFeatureSupported(f16)?\n\nDitto for the other test.\n\nThis would avoid the need to make the difference between restricted and unrestricted features in AdapterBase.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ebeb2b_a4390673",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:58:42Z",
+      "side": 1,
+      "message": "nit: restrictions",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 30
+      },
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
