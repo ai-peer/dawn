@@ -137,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdb100e0_6d4d4152",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-03-15T20:55:49Z",
+      "side": 1,
+      "message": "Maybe we could put this type info for converting from ctype to protobuf type in dawn_lpm.json?",
+      "parentUuid": "c464b66d_1773c85a",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "138cf326_1e07b90d",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 31
