@@ -41,9 +41,9 @@ class TemplatedIdentifier final : public Castable<TemplatedIdentifier, Identifie
                         const Symbol& sym,
                         utils::VectorRef<const Expression*> args,
                         utils::VectorRef<const Attribute*> attrs);
-    /// Move constructor
-    TemplatedIdentifier(TemplatedIdentifier&&);
-    ~TemplatedIdentifier() override;
+
+    /// Destructor
+     ~TemplatedIdentifier() override;
 
     /// Clones this node and all transitive child nodes using the `CloneContext` `ctx`.
     /// @param ctx the clone context

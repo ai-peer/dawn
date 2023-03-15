@@ -33,7 +33,6 @@ Let::Let(ProgramID pid,
     TINT_ASSERT(AST, init != nullptr);
 }
 
-Let::Let(Let&&) = default;
 
 Let::~Let() = default;
 
