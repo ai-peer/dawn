@@ -94,6 +94,30 @@
       },
       "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3c36175_86399bc0",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-15T17:05:52Z",
+      "side": 0,
+      "message": "Agree that we should preserve existing semantics in the short term so we don\u0027t need to refactor everything now.\nIMO, eventually we will only have the callback queue on the instance. Then we don\u0027t need to track the devices as at all.\nBut you\u0027re right that it could need more consideration if graphite only wants to poll for one device. It might not be so bad though since graphite will probably use its own instance which only has one device.\nIMO I also think it\u0027ll be better if Dawn can add a no-callback API and have the \"WGPUFuture\" concept, but that needs more thought and work.\n\nHere\u0027s an alternative idea for now:\n - add a callback queue to the instance that is only used after a device has been destroyed. If the device is not lost, we add to the device\u0027s callback queue. If it is lost, we add to the instance\u0027s callback queue.\n \nIn the future we can incrementally:\n - Add a warning that applications should call instanceProcessEvents instead of deviceTick\n - in DeviceBase::WillDropLastExternalRef, move device callbacks into the instance callback queue - instead of calling them.\n - incrementally change other callsites to push callbacks into the instance queue instead of the device queue.\n - delete the device callback queue",
+      "parentUuid": "ae5c9828_dd3cf520",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
