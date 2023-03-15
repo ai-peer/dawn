@@ -594,7 +594,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
 
-    std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
+    std::shared_ptr<CallbackTaskManager> mCallbackTaskManager;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
