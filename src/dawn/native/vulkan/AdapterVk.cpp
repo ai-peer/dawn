@@ -453,6 +453,10 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
     // In particular, enable rasterizer discard if the depth-stencil stage is a no-op, and skip
     // insertion of the placeholder fragment shader.
     deviceToggles->Default(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline, true);
+
+    if (IsIntelGen12()) {
+        deviceToggles->Default(Toggle::VulkanClearTextureOnCreation, true);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
@@ -473,6 +477,11 @@ bool Adapter::IsAndroidQualcomm() const {
 #else
     return false;
 #endif
+}
+
+bool Adapter::IsIntelGen12() const {
+    return gpu_info::IsIntelGen12LP(GetVendorId(), GetDeviceId()) ||
+           gpu_info::IsIntelGen12HP(GetVendorId(), GetDeviceId());
 }
 
 }  // namespace dawn::native::vulkan
