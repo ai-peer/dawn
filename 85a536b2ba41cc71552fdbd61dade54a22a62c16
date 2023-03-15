@@ -158,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b390f764_245e0462",
+        "filename": "src/dawn/native/emulator/BufferEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2944108c_66e04593",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d2b50ea_b2c22340",
@@ -259,6 +277,24 @@
       "side": 1,
       "message": "Yeah, I was hesitant to implement functions that are seemingly not hit by any tests. I guess because stuff is executed synchronously this is never called?\n\nI\u0027ll see if I can enable any E2E tests that cause this to be hit.",
       "parentUuid": "6db99d34_86c6055b",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "843cdf08_bacd5ba7",
+        "filename": "src/dawn/native/emulator/DeviceEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "I think `Device::Tick()` will never call this method because everything is just executed synchronously (for now). I think this should be left as a hard error so that we don\u0027t forget to implement it properly if that ever changes.",
+      "parentUuid": "dd3808b8_2cb312d7",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -527,6 +563,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9e4c17b_e23f59dc",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Ack. I suspect this initialization stuff will change if/when support for DAP is added anyway.",
+      "parentUuid": "e4cd6ad2_fd34b292",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecbea19c_d86bc3bf",
@@ -576,6 +630,24 @@
       "side": 1,
       "message": "I didn\u0027t realize that we\u0027d start running emulator tests on CI and not just with a script. Ok to add the emulator to the params. Do you expect to add the backend to most tests over time or just a select few?\n\nAlso nit: can you assign the TODO to a dawn:N or tint:N issue instead of your LDAP? The code is a shared artifact with shared responsibility and the issue could contain the context for the TODO if needed. (could be a catchall emulator issue for now)",
       "parentUuid": "50b230f5_6a01019b",
+      "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2adcb609_385cb49b",
+        "filename": "src/dawn/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Yes, I expect we will be able to enable all compute shader tests on this backend (once textures are supported), so it\u0027ll \"just\" be tests that use render pipelines that are skipped. I can do a pass to enable all the compute shader tests if/when I put a patch to enable this on CQ.\n\nChanged the `TODO` to reference `tint:1871`.",
+      "parentUuid": "2c78dd94_286ee9fe",
       "revId": "85a536b2ba41cc71552fdbd61dade54a22a62c16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

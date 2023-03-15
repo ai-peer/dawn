@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c21dcb6_eb318813",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6623d93_5fb54ef7",
+      "range": {
+        "startLine": 36,
+        "startChar": 4,
+        "endLine": 36,
+        "endChar": 22
+      },
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fb2dc00_90919568",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-03-06T17:34:52Z",
       "side": 1,
       "message": "nit: \u003d default",
+      "range": {
+        "startLine": 42,
+        "startChar": 16,
+        "endLine": 42,
+        "endChar": 18
+      },
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2761aad_92254ce1",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fb2dc00_90919568",
       "range": {
         "startLine": 42,
         "startChar": 16,
@@ -100,6 +148,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88bea592_502e32df",
+        "filename": "src/dawn/native/emulator/QueueEmulator.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "I added a `CommandBufferEmulator` subclass with a `GetCommandIterator()` method. Wasn\u0027t quite sure if/how to take complete ownership of the `CommandIterator` so this is just the same as `GetCommandIteratorForTesting()`, but LMK if there\u0027s a safer way to do this.",
+      "parentUuid": "7b690c39_50ac79c1",
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9dac12d1_d118fa66",
         "filename": "src/dawn/native/emulator/QueueEmulator.h",
         "patchSetId": 15
@@ -111,6 +177,30 @@
       "writtenOn": "2023-03-08T11:57:55Z",
       "side": 1,
       "message": "nit: these can be ityp::array instead of a map, see https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandBufferStateTracker.h;drc\u003d357bfa89d853a1d93a2eda87c9caeb56d134e2ab;l\u003d79",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 26
+      },
+      "revId": "63e26ea06448335ca4a0d244a7d32951c7197584",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bf5a89_ce00ec48",
+        "filename": "src/dawn/native/emulator/QueueEmulator.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9dac12d1_d118fa66",
       "range": {
         "startLine": 39,
         "startChar": 8,

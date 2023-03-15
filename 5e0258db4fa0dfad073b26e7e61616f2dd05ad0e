@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6296b52e_2282197a",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-15T12:22:53Z",
+      "side": 1,
+      "message": "I\u0027ve added the `emulator_` prefix.\n\nI haven\u0027t added the instance toggle yet. The backend is not built by default so is only available when using Dawn Native and when explicitly enabled in GN/CMake. Assuming we rename it to something less ambiguous (e.g. WgslInterpreter, WgslDebugger, etc), I think the likelihood of somebody mistaking it for an efficient software fallback is low?",
+      "parentUuid": "d506ba90_6b4b8602",
+      "range": {
+        "startLine": 207,
+        "startChar": 0,
+        "endLine": 212,
+        "endChar": 37
+      },
+      "revId": "5e0258db4fa0dfad073b26e7e61616f2dd05ad0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bd24238_ca705043",
         "filename": "src/tint/interp/CMakeLists.txt",
         "patchSetId": 2
