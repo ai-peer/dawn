@@ -70,6 +70,24 @@
       "parentUuid": "f1c8ffc9_fddc2159",
       "revId": "485d9efd16e43a80281269ed3910016bd761e528",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54e72b4d_9d1854fb",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T10:51:06Z",
+      "side": 1,
+      "message": "Makes sense, thanks for figuring this out. We should probably have a helper for this eventually: IsStorageBinding(wgpu::BufferBindingType). But we can do that later.",
+      "parentUuid": "9a024e9e_8107bcc5",
+      "revId": "485d9efd16e43a80281269ed3910016bd761e528",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
