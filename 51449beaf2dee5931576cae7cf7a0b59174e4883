@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47879d06_2c1af0a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-15T06:03:36Z",
+      "side": 1,
+      "message": "hm, I\u0027m not understanding the intent of this CL.\nwhy are we passing a different source size into the copy command?\nif the visible size is not the correct source size for the video, and we should use natural size instead, why isn\u0027t it passed on creation in WGPUExternalTextureDescriptor?",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
