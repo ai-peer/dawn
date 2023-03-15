@@ -5261,6 +5261,14 @@ TypedExpression FunctionEmitter::MakeBuiltinCall(const spvtools::opt::Instructio
         if (first_operand_type == nullptr) {
             first_operand_type = operand.type;
         }
+        // extractBits offset and count args are always u32
+        if ((builtin == builtin::Function::kExtractBits) && (iarg > 0)) {
+            operand = ToU32(operand);
+        }
+        // insertBits offset and count args are always u32
+        if ((builtin == builtin::Function::kInsertBits) && (iarg > 1)) {
+            operand = ToU32(operand);
+        }
         params.Push(operand.expr);
     }
     auto* call_expr = builder_.Call(ident, std::move(params));
@@ -6050,6 +6058,13 @@ TypedExpression FunctionEmitter::ToI32(TypedExpression value) {
         return value;
     }
     return {ty_.I32(), builder_.Call(builder_.ty.i32(), utils::Vector{value.expr})};
+}
+
+TypedExpression FunctionEmitter::ToU32(TypedExpression value) {
+    if (!value || value.type->Is<U32>()) {
+        return value;
+    }
+    return {ty_.U32(), builder_.Call(builder_.ty.u32(), utils::Vector{value.expr})};
 }
 
 TypedExpression FunctionEmitter::ToSignedIfUnsigned(TypedExpression value) {
