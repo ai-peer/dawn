@@ -38,8 +38,8 @@ class IfStatement final : public Castable<IfStatement, Statement> {
                 const Expression* condition,
                 const BlockStatement* body,
                 const Statement* else_stmt);
-    /// Move constructor
-    IfStatement(IfStatement&&);
+
+    /// Destructor
     ~IfStatement() override;
 
     /// Clones this node and all transitive child nodes using the `CloneContext`

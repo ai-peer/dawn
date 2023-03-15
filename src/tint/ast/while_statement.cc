@@ -33,8 +33,6 @@ WhileStatement::WhileStatement(ProgramID pid,
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, body, program_id);
 }
 
-WhileStatement::WhileStatement(WhileStatement&&) = default;
-
 WhileStatement::~WhileStatement() = default;
 
 const WhileStatement* WhileStatement::Clone(CloneContext* ctx) const {

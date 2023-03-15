@@ -36,8 +36,6 @@ ForLoopStatement::ForLoopStatement(ProgramID pid,
     TINT_ASSERT_PROGRAM_IDS_EQUAL_IF_VALID(AST, body, program_id);
 }
 
-ForLoopStatement::ForLoopStatement(ForLoopStatement&&) = default;
-
 ForLoopStatement::~ForLoopStatement() = default;
 
 const ForLoopStatement* ForLoopStatement::Clone(CloneContext* ctx) const {

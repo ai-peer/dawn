@@ -34,8 +34,8 @@ class SwitchStatement final : public Castable<SwitchStatement, Statement> {
                     const Source& src,
                     const Expression* condition,
                     utils::VectorRef<const CaseStatement*> body);
-    /// Move constructor
-    SwitchStatement(SwitchStatement&&);
+
+    /// Destructor
     ~SwitchStatement() override;
 
     /// Clones this node and all transitive child nodes using the `CloneContext`

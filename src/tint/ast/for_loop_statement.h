@@ -39,8 +39,8 @@ class ForLoopStatement final : public Castable<ForLoopStatement, Statement> {
                      const Expression* condition,
                      const Statement* continuing,
                      const BlockStatement* body);
-    /// Move constructor
-    ForLoopStatement(ForLoopStatement&&);
+
+    /// Destructor
     ~ForLoopStatement() override;
 
     /// Clones this node and all transitive child nodes using the `CloneContext`

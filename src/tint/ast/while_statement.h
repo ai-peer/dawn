@@ -35,8 +35,8 @@ class WhileStatement final : public Castable<WhileStatement, Statement> {
                    const Source& source,
                    const Expression* condition,
                    const BlockStatement* body);
-    /// Move constructor
-    WhileStatement(WhileStatement&&);
+
+    /// Destructor
     ~WhileStatement() override;
 
     /// Clones this node and all transitive child nodes using the `CloneContext`
