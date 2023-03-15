@@ -447,6 +447,10 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
     // By default try to initialize workgroup memory with OpConstantNull according to the Vulkan
     // extension VK_KHR_zero_initialize_workgroup_memory.
     deviceToggles->Default(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension, true);
+
+    if (IsIntelGen12()) {
+        deviceToggles->Default(Toggle::VulkanClearTextureOnCreation, true);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor,
@@ -467,6 +471,11 @@ bool Adapter::IsAndroidQualcomm() const {
 #else
     return false;
 #endif
+}
+
+bool Adapter::IsIntelGen12() const {
+    return gpu_info::IsIntelGen12LP(GetVendorId(), GetDeviceId()) ||
+           gpu_info::IsIntelGen12HP(GetVendorId(), GetDeviceId());
 }
 
 }  // namespace dawn::native::vulkan

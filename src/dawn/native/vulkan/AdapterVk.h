@@ -43,6 +43,7 @@ class Adapter : public AdapterBase {
     bool IsDepthStencilFormatSupported(VkFormat format) const;
 
     bool IsAndroidQualcomm() const;
+    bool IsIntelGen12() const;
 
   private:
     MaybeError InitializeImpl() override;
