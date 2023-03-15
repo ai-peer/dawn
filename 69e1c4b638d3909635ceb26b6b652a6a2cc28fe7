@@ -46,6 +46,30 @@
       },
       "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfa2c129_d9aec226",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-15T09:49:35Z",
+      "side": 0,
+      "message": "The weak ref approach doesn\u0027t change the existing system\u0027s behaviors, doesn\u0027t need any refactor from other code bases.",
+      "parentUuid": "4faba5e3_a1ea98ac",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
