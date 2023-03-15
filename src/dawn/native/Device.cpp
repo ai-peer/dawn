@@ -216,11 +216,6 @@ DeviceBase::~DeviceBase() {
     // We need to explicitly release the Queue before we complete the destructor so that the
     // Queue does not get destroyed after the Device.
     mQueue = nullptr;
-    // mAdapter is not set for mock test devices.
-    // TODO(crbug.com/dawn/1702): using a mock adapter could avoid the null checking.
-    if (mAdapter != nullptr) {
-        mAdapter->GetInstance()->RemoveDevice(this);
-    }
 }
 
 MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
@@ -253,7 +248,7 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
     mCaches = std::make_unique<DeviceBase::Caches>();
     mErrorScopeStack = std::make_unique<ErrorScopeStack>();
     mDynamicUploader = std::make_unique<DynamicUploader>(this);
-    mCallbackTaskManager = std::make_unique<CallbackTaskManager>();
+    mCallbackTaskManager = std::make_shared<CallbackTaskManager>();
     mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
     mInternalPipelineStore = std::make_unique<InternalPipelineStore>(this);
 
@@ -328,6 +323,11 @@ void DeviceBase::WillDropLastExternalRef() {
         dawn::WarningLog() << "Device lost after last external device reference dropped.\n"
                            << message;
     };
+
+    // TODO(crbug.com/dawn/1702): using a mock adapter could avoid the null checking.
+    if (mAdapter != nullptr) {
+        mAdapter->GetInstance()->OnDeviceLastExternalRefDropped(this);
+    }
 }
 
 void DeviceBase::DestroyObjects() {
@@ -1807,16 +1807,7 @@ void DeviceBase::ForceSetToggleForTesting(Toggle toggle, bool isEnabled) {
 }
 
 void DeviceBase::FlushCallbackTaskQueue() {
-    if (!mCallbackTaskManager->IsEmpty()) {
-        // If a user calls Queue::Submit inside the callback, then the device will be ticked,
-        // which in turns ticks the tracker, causing reentrance and dead lock here. To prevent
-        // such reentrant call, we remove all the callback tasks from mCallbackTaskManager,
-        // update mCallbackTaskManager, then call all the callbacks.
-        auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
-        for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
-            callbackTask->Execute();
-        }
-    }
+    mCallbackTaskManager->Flush();
 }
 
 const CombinedLimits& DeviceBase::GetLimits() const {
@@ -1827,8 +1818,8 @@ AsyncTaskManager* DeviceBase::GetAsyncTaskManager() const {
     return mAsyncTaskManager.get();
 }
 
-CallbackTaskManager* DeviceBase::GetCallbackTaskManager() const {
-    return mCallbackTaskManager.get();
+const std::shared_ptr<CallbackTaskManager>& DeviceBase::GetCallbackTaskManager() const {
+    return mCallbackTaskManager;
 }
 
 dawn::platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() const {

@@ -20,6 +20,7 @@
 #include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
+#include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ErrorData.h"
@@ -506,31 +507,60 @@ BlobCache* InstanceBase::GetBlobCache(bool enabled) {
 
 uint64_t InstanceBase::GetDeviceCountForTesting() const {
     std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    return mDevicesList.size();
+    return mAliveDevicesList.size();
 }
 
 void InstanceBase::AddDevice(DeviceBase* device) {
     std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.insert(device);
+    mAliveDevicesList.insert(device);
 }
 
-void InstanceBase::RemoveDevice(DeviceBase* device) {
+void InstanceBase::OnDeviceLastExternalRefDropped(DeviceBase* device) {
     std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.erase(device);
+    // It is not safe to store the device's raw pointer after this point.
+    mAliveDevicesList.erase(device);
+
+    // Once last external ref dropped, we treat the device as a "zombie" device. It can still
+    // receive additional callbacks from internal code. But the callbacks cannot be triggered by
+    // calling device->APITick() externally anymore. Only InstanceBase::APIProcessEvents() could do
+    // that. In order to do so, we have to store a weak reference to the "zombie" device's callback
+    // task queue here.
+    mZombieDevicesCallbackTaskQueues.push_back(device->GetCallbackTaskManager());
 }
 
 bool InstanceBase::APIProcessEvents() {
-    std::vector<Ref<DeviceBase>> devices;
+    std::vector<Ref<DeviceBase>> aliveDevices;
+    std::vector<std::shared_ptr<CallbackTaskManager>> zombieCallbackTaskQueues;
     {
         std::lock_guard<std::mutex> lg(mDevicesListMutex);
-        for (auto device : mDevicesList) {
-            devices.push_back(device);
+        for (auto device : mAliveDevicesList) {
+            aliveDevices.push_back(device);
+        }
+
+        for (size_t i = 0; i < mZombieDevicesCallbackTaskQueues.size();) {
+            auto zombieCbTaskQueue = mZombieDevicesCallbackTaskQueues[i].lock();
+            if (zombieCbTaskQueue) {
+                ++i;
+                zombieCallbackTaskQueues.emplace_back(std::move(zombieCbTaskQueue));
+            } else {
+                // If the weak_ptr is expired, it means the device was deleted for real, remove its
+                // callback task queue from the zombie list.
+                std::swap(mZombieDevicesCallbackTaskQueues[i],
+                          mZombieDevicesCallbackTaskQueues.back());
+                mZombieDevicesCallbackTaskQueues.pop_back();
+            }
         }
     }
 
     bool hasMoreEvents = false;
-    for (auto device : devices) {
-        hasMoreEvents = device->APITick() || hasMoreEvents;
+    for (auto aliveDevice : aliveDevices) {
+        hasMoreEvents = aliveDevice->APITick() || hasMoreEvents;
+    }
+
+    // For "zombie" devices, we only need to flush their callback tasks.
+    for (auto& callbackTaskQueue : zombieCallbackTaskQueues) {
+        callbackTaskQueue->Flush();
+        hasMoreEvents = hasMoreEvents || !callbackTaskQueue->IsEmpty();
     }
 
     return hasMoreEvents;

@@ -63,9 +63,11 @@ class CallbackTaskManager {
     bool IsEmpty();
     void HandleDeviceLoss();
     void HandleShutDown();
-    std::vector<std::unique_ptr<CallbackTask>> AcquireCallbackTasks();
+    void Flush();
 
   private:
+    std::vector<std::unique_ptr<CallbackTask>> AcquireCallbackTasks();
+
     std::mutex mCallbackTaskQueueMutex;
     std::vector<std::unique_ptr<CallbackTask>> mCallbackTaskQueue;
 };

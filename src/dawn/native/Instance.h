@@ -39,6 +39,7 @@ class Platform;
 
 namespace dawn::native {
 
+class CallbackTaskManager;
 class DeviceBase;
 class Surface;
 class XlibXcbFunctions;
@@ -107,7 +108,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     uint64_t GetDeviceCountForTesting() const;
     void AddDevice(DeviceBase* device);
-    void RemoveDevice(DeviceBase* device);
+    void OnDeviceLastExternalRefDropped(DeviceBase* device);
 
     const std::vector<std::string>& GetRuntimeSearchPaths() const;
 
@@ -165,7 +166,11 @@ class InstanceBase final : public RefCountedWithExternalCount {
     std::unique_ptr<XlibXcbFunctions> mXlibXcbFunctions;
 #endif  // defined(DAWN_USE_X11)
 
-    std::set<DeviceBase*> mDevicesList;
+    // "Alive" device is a device that still has external ref.
+    std::set<DeviceBase*> mAliveDevicesList;
+    // "Zombie" device is a device that already had last external ref dropped but hasn't been
+    // deleted yet.
+    std::vector<std::weak_ptr<CallbackTaskManager>> mZombieDevicesCallbackTaskQueues;
     mutable std::mutex mDevicesListMutex;
 };
 
