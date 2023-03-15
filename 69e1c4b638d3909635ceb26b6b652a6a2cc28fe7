@@ -142,6 +142,30 @@
       },
       "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c113c3a_77a43b1d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-15T18:43:14Z",
+      "side": 0,
+      "message": "OK, here is another simple attempt which implements the exact idea above https://dawn-review.googlesource.com/c/dawn/+/124281 (use instance\u0027s callback queue after the device is destroyed)",
+      "parentUuid": "743e112a_eb6552bf",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
