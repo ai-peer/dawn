@@ -331,18 +331,29 @@ Token Lexer::try_float() {
     auto source = begin_source();
     bool has_mantissa_digits = false;
 
+    size_t first_significant_digit = 0;
     while (end < length() && is_digit(at(end))) {
+        if (first_significant_digit == 0 && (at(end) - '0') != 0) {
+            first_significant_digit = end;
+        }
+
         has_mantissa_digits = true;
         end++;
     }
 
     bool has_point = false;
+    // Note, only valid if `has_point` is true
+    auto dot_position = end;
     if (end < length() && matches(end, '.')) {
         has_point = true;
         end++;
     }
 
     while (end < length() && is_digit(at(end))) {
+        if (first_significant_digit == 0 && (at(end) - '0') != 0) {
+            first_significant_digit = end;
+        }
+
         has_mantissa_digits = true;
         end++;
     }
@@ -353,6 +364,9 @@ Token Lexer::try_float() {
 
     // Parse the exponent if one exists
     bool has_exponent = false;
+    // Note, only valid if `has_exponent` is true
+    auto exponent_value_position = end;
+
     bool negative_exponent = false;
     if (end < length() && (matches(end, 'e') || matches(end, 'E'))) {
         end++;
@@ -360,6 +374,7 @@ Token Lexer::try_float() {
             negative_exponent = matches(end, '-');
             end++;
         }
+        exponent_value_position = end;
 
         while (end < length() && isdigit(at(end))) {
             has_exponent = true;
@@ -399,10 +414,32 @@ Token Lexer::try_float() {
     auto ret = absl::from_chars(&at(start), end_ptr, value);
     bool overflow = ret.ec != std::errc();
 
-    // The provided value did not fit in a double and has a negative exponent, so treat it as a 0.
-    if (negative_exponent && ret.ec == std::errc::result_out_of_range) {
-        overflow = false;
-        value = 0.0;
+    // Value didn't fit in a double, check for underflow as that is 0.0 in WGSL and not an error.
+    if (ret.ec == std::errc::result_out_of_range) {
+        // The exponent is negative, so treat as underflow
+        if (negative_exponent) {
+            overflow = false;
+            value = 0.0;
+        } else if (has_point && first_significant_digit > dot_position) {
+            // Calculate the number of zeros that come before the first significant digit after the
+            // decimal place.
+            auto zeros_before_digit = first_significant_digit - dot_position - 1;
+
+            // Parse the exponent from the float if provided
+            int32_t exp_value = 0;
+            if (has_exponent) {
+                std::from_chars(&at(exponent_value_position),
+                                end_ptr - (has_f_suffix || has_h_suffix ? 1 : 0), exp_value, 10);
+            }
+            // Note, exponent can't be negative here as it's handled in the case above.
+            exp_value -= zeros_before_digit;
+
+            // If the exponent has gone negative, then this is an underflow case
+            if (exp_value < 0) {
+                overflow = false;
+                value = 0.0;
+            }
+        }
     }
 
     TINT_ASSERT(Reader, end_ptr == ret.ptr);
