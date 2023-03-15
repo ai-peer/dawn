@@ -34,6 +34,57 @@
       "parentUuid": "47879d06_2c1af0a7",
       "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06564541_b334ea04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:29:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e63b926_d821c7a1",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:29:55Z",
+      "side": 1,
+      "message": "Maybe we could keep this always (if both size and height are zero) for non-video CopyEI2T? Not sure, WDYT? GPUExtent2D defaults to (1, 1) so defaulting would require people to explicitly fill out the zeroes, which isn\u0027t super helpful.",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8e11e9_2f19e33d",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T12:29:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we validate that the naturalSize is smaller than the source size?",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
