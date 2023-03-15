@@ -739,6 +739,26 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
                                    mMemoryAllocation.GetOffset()),
         "BindImageMemory"));
 
+    // crbug.com/1361662
+    // Intel Gen12 workaournd for the CTS:
+    //   webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
+    if (device->IsToggleEnabled(Toggle::VulkanClearR8TextureOnCreation)) {
+        auto format = GetFormat().format;
+        bool textureIsBuggy =
+            format == wgpu::TextureFormat::R8Unorm || format == wgpu::TextureFormat::R8Snorm ||
+            format == wgpu::TextureFormat::R8Uint || format == wgpu::TextureFormat::R8Sint ||
+            // These are flacky.
+            format == wgpu::TextureFormat::RG16Sint || format == wgpu::TextureFormat::RGBA16Sint ||
+            format == wgpu::TextureFormat::RGBA32Float;
+        textureIsBuggy &= GetNumMipLevels() > 1;
+        textureIsBuggy &= GetDimension() == wgpu::TextureDimension::e2D;
+        textureIsBuggy &= IsPowerOfTwo(GetWidth()) && IsPowerOfTwo(GetHeight());
+        if (textureIsBuggy) {
+            DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
+                                  GetAllSubresources(), TextureBase::ClearValue::Zero));
+        }
+    }
+
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
         DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
                               GetAllSubresources(), TextureBase::ClearValue::NonZero));
