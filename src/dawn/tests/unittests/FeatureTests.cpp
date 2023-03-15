@@ -145,4 +145,5 @@ TEST_F(FeatureTests, RequireAndGetEnabledFeatures) {
             deviceBase->APIRelease();
         }
     }
+    //
 }
