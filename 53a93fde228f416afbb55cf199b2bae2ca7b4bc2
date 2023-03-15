@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "517ce7e3_238ab5bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-15T18:44:32Z",
+      "side": 1,
+      "message": "Yet another approach to address `device can be destroyed while Instance.APIProcessEvent() is being executed`.",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
