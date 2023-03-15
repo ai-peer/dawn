@@ -22,6 +22,30 @@
       },
       "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4faba5e3_a1ea98ac",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-15T09:46:17Z",
+      "side": 0,
+      "message": "As discovered in the previous CL, people could still call something like `MapAsync` after device is dropped externally. Doing something like that will generate a `DeviceLost` error and schedule a callback to let the user know.\n\nIf we remove the device from the Instance when we drop last external ref, that\u0027s like going back to previous version, i.e. there was no way for the user to trigger the pending error related callback anymore. And the above callback will sit inside a queue managed by the (Destroyed) device forever.\n\nOfc there are other approaches to solve this:-\n- We could store the callbacks inside a queue managed by `Instance` instead. Calling `ProcessEvents` to flush this queue. However, this is like a big architecture change. I don\u0027t think it\u0027s anything simpler than the weak ref approach. This will also force any other projects (chrome, skia, examples?) that are using `device.Tick()` to change to `instance.ProcessEvents()`\nLet\u0027s say a graphite\u0027s thread is trying to map a buffer, it has to keep polling for the callback to trigger, isn\u0027t using `instance.ProcessEvents()` a bit waste? Because we only care about graphite\u0027s device on this thread, but we have to poll for other devices\u0027 callbacks as well (WebGPU\u0027s, chrome\u0027s, etc).\nFurthermore, it would carry risks because we might miss some `device.Tick()` usages in some projects/places. Hence I propose we do small step at a time 1st. Changing `instance.ProcessEvents` to just being a wrapper of `device.Tick()`, and then we can change it to have its own callbacks queue later.\n\n- Alternatively, after a device is destroyed, any callback added to its queue will be executed immediately instead of being delayed. I think this would complicate the logic unnecessarily. We are trying to isolate the callbacks\u0027 executions to single/few places like `device.Tick()`. But doing this approach means any function could trigger callbacks (if the device is already destroyed). And there is nothing stopping the user from calling the public API again in the callbacks \u003d\u003e re-entrance.",
+      "parentUuid": "aa1b6b51_2c8111e9",
+      "range": {
+        "startLine": 221,
+        "startChar": 5,
+        "endLine": 223,
+        "endChar": 5
+      },
+      "revId": "69e1c4b638d3909635ceb26b6b652a6a2cc28fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
