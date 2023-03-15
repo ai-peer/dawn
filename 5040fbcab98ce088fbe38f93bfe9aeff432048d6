@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8ffa8c_82932063",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-15T18:16:31Z",
+      "side": 1,
+      "message": "+dneto for review",
+      "revId": "5040fbcab98ce088fbe38f93bfe9aeff432048d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "547982ce_6e9d0760",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 5271,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-15T18:16:31Z",
+      "side": 1,
+      "message": "This is a bit of a fudge - this function is used for all the non-special cased builtins. Really this should be special-cased in `MaybeEmitCombinatorialValue`.",
+      "range": {
+        "startLine": 5264,
+        "startChar": 0,
+        "endLine": 5271,
+        "endChar": 9
+      },
+      "revId": "5040fbcab98ce088fbe38f93bfe9aeff432048d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ed11dc4_3fdd2bd0",
