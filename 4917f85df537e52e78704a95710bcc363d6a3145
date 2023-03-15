@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60cd4fb8_a8b7a1b3",
+        "filename": "src/tint/reader/spirv/function_bit_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-15T18:07:16Z",
+      "side": 0,
+      "message": "Not obvious in the diff here, but I modified all the existing tests for int/uint to actually have it return a int/uint, not a vector. The expected output was invalid WGSL.",
+      "range": {
+        "startLine": 869,
+        "startChar": 27,
+        "endLine": 869,
+        "endChar": 34
+      },
+      "revId": "4917f85df537e52e78704a95710bcc363d6a3145",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

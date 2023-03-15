@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ed11dc4_3fdd2bd0",
+        "filename": "src/tint/reader/spirv/function_bit_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-15T18:07:16Z",
+      "side": 1,
+      "message": "Gerrit\u0027s diff view is getting confused, sorry",
+      "revId": "5040fbcab98ce088fbe38f93bfe9aeff432048d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
