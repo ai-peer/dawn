@@ -104,6 +104,24 @@
       "message": "Gerrit\u0027s diff view is getting confused, sorry",
       "revId": "5040fbcab98ce088fbe38f93bfe9aeff432048d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5621b4_f7f6371a",
+        "filename": "src/tint/reader/spirv/function_bit_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-15T20:37:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8ed11dc4_3fdd2bd0",
+      "revId": "5040fbcab98ce088fbe38f93bfe9aeff432048d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
