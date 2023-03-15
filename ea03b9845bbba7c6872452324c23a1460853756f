@@ -105,6 +105,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5f82e090_90d2d06d",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-15T15:00:18Z",
+      "side": 1,
+      "message": "Yes, maybe this will be solved by downgrading UseDXC as an adapter toggle in future (as is the initial proposal)",
+      "parentUuid": "2e3ea256_73ef9c81",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18e3fe3c_3de436da",
         "filename": "src/dawn/tests/DawnTest.h",
         "patchSetId": 6
@@ -139,6 +157,24 @@
       "writtenOn": "2023-03-15T12:58:42Z",
       "side": 1,
       "message": "Why do we need all of this? Isn\u0027t the point of this CL that the feature will be marked as supported/not supported based on the DXC toggle passed at instance or adapter creation and so we can just check GetAdapter().IsFeatureSupported(f16)?\n\nDitto for the other test.\n\nThis would avoid the need to make the difference between restricted and unrestricted features in AdapterBase.",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b78265e_f1394ffe",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-15T15:00:18Z",
+      "side": 1,
+      "message": "My thought is that this is for allow requiring shader-f16 feature with UseDXC device toggle enabled even if UseDXC adapter toggle is disabled, or to say \"required device toggles may override the adapter toggles when creating device\". Meanwhile, I think we should have `GetAdapter().IsFeatureSupported` relied on adapter toggles, since it don\u0027t have so called \"required device toggles\" here, and in Chrome we may have device toggles requirement identical to adapter toggles.\n\nA concern is that, if I get it right, we now run end-to-end tests with a single instance holds in gTestEnv, so it will use a same instance toggles set for all test cases. On the other hand, we have to test both use_dxc disabled (major cases) and enabled (currently only minority), so maybe it is necessary to support such overriding? If we just mark shader-f16 feature as not supported when UseDXC is not enabled in adapter toggles, we will be unable to use the feature even UseDXC is required enable when creating device.",
+      "parentUuid": "9c6c4dbd_17ae18cc",
       "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
