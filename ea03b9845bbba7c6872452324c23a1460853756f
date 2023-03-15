@@ -123,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "516e5635_f79013a0",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-15T15:58:37Z",
+      "side": 1,
+      "message": "Can you link to the thread where we discussed this previously? I completely forgot the context, sorry :/",
+      "parentUuid": "5f82e090_90d2d06d",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18e3fe3c_3de436da",
         "filename": "src/dawn/tests/DawnTest.h",
         "patchSetId": 6
