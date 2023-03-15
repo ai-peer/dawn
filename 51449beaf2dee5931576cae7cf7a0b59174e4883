@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8728393_c0941604",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-15T16:24:23Z",
+      "side": 1,
+      "message": "for HTMLVideoElement, we do GetExternalSourceFromExternalImage to turn it into a VideoFrame which has a visibleSize. Could we instead use the naturalSize for video element here? Then, we resolve the difference that VideoFrame needs visibleSize and VideoElement needs naturalSize up in Blink.",
+      "parentUuid": "2f2e4539_79c30eb0",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e63b926_d821c7a1",
