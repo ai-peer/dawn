@@ -34,6 +34,24 @@
       "parentUuid": "98e5be7e_b8ac11ef",
       "revId": "7e799673f9b4ba77ddd90e3bd5f03e279b2df979",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67b258f_26931bdf",
+        "filename": "src/tint/ast/accessor_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-15T14:07:27Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "2b3bc934_e1b3c8cf",
+      "revId": "7e799673f9b4ba77ddd90e3bd5f03e279b2df979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
