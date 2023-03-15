@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e125a12_1789c0c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-15T19:02:06Z",
+      "side": 1,
+      "message": "David for +2",
+      "revId": "50738bff829245582645007d6d275def2cd06a8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3790ae31_5c24ee56",
+        "filename": "src/tint/reader/spirv/function.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 3826,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-15T19:02:06Z",
+      "side": 1,
+      "message": "I think the standard pattern is to pull these out of `GetBuiltin()` and add these below, but meh.",
+      "range": {
+        "startLine": 3821,
+        "startChar": 0,
+        "endLine": 3826,
+        "endChar": 20
+      },
+      "revId": "50738bff829245582645007d6d275def2cd06a8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
