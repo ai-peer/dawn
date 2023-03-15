@@ -16,6 +16,24 @@
       "message": "hm, I\u0027m not understanding the intent of this CL.\nwhy are we passing a different source size into the copy command?\nif the visible size is not the correct source size for the video, and we should use natural size instead, why isn\u0027t it passed on creation in WGPUExternalTextureDescriptor?",
       "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2e4539_79c30eb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-15T07:44:11Z",
+      "side": 1,
+      "message": "The reason is that for ExternalTexture (created from WGPUExternalTextureDescriptor), visible rect is the correct size. We sample/load texels from the ExternalTexture instead of copy from it. Visible rect describes origin video frame.\n\nBut for CopyEI2T, it is a bit different. CopyEI2T means a copy and it is important for user to know what is the source size(I proposed a PR in spec about this https://github.com/gpuweb/gpuweb/pull/3960). User in js cannot get visible rect from HTMLVideoElement. Instead, they can get intrinsic size (which is natural size in chromium implementation) from HTMLVideoElement.videoWidth/videoHeight.\n\nSo this CL is based on the fact that ExternalTexture requires video frame visible rect but copyEI2T requires video frame natural size. But yes, we could also do a simple change that adding WGPUExternalTextureDescriptor with the natural size for copyEI2T to use it.",
+      "parentUuid": "47879d06_2c1af0a7",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
