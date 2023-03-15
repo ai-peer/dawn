@@ -739,7 +739,26 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
                                    mMemoryAllocation.GetOffset()),
         "BindImageMemory"));
 
-    if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
+    // crbug.com/1361662
+    // Intel Gen12 workaournd for the CTS:
+    //   webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero
+    PCIVendorID vendorId = GetDevice()->GetAdapter()->GetVendorId();
+    PCIDeviceID deviceId = GetDevice()->GetAdapter()->GetDeviceId();
+    bool apply_intel_gen12_workaround = gpu_info::IsIntelGen12LP(vendorId, deviceId);
+    apply_intel_gen12_workaround |= gpu_info::IsIntelGen12HP(vendorId, deviceId);
+    auto format = GetFormat().format;
+    apply_intel_gen12_workaround &=
+        (format == wgpu::TextureFormat::R8Unorm || format == wgpu::TextureFormat::R8Snorm ||
+         format == wgpu::TextureFormat::R8Uint || format == wgpu::TextureFormat::R8Sint ||
+         // These are flacky.
+         format == wgpu::TextureFormat::RG16Sint || format == wgpu::TextureFormat::RGBA16Sint ||
+         format == wgpu::TextureFormat::RGBA32Float);
+    apply_intel_gen12_workaround &= (GetNumMipLevels() > 1);
+    apply_intel_gen12_workaround &= (GetDimension() == wgpu::TextureDimension::e2D);
+    apply_intel_gen12_workaround &= (IsPowerOfTwo(GetWidth()) && IsPowerOfTwo(GetHeight()));
+
+    if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) ||
+        apply_intel_gen12_workaround) {
         DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
                               GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
