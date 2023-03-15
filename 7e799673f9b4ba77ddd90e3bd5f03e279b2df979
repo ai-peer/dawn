@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e5be7e_b8ac11ef",
+        "filename": "src/tint/ast/accessor_expression.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-15T13:41:22Z",
+      "side": 0,
+      "message": "We have a destructor, so should these be `\u003ddelete` instead of just removed? (And probably the copy constructors the same way?)",
+      "revId": "7e799673f9b4ba77ddd90e3bd5f03e279b2df979",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
