@@ -945,6 +945,12 @@ class FunctionEmitter {
     /// @returns the value as an i32 value.
     TypedExpression ToI32(TypedExpression value);
 
+    /// Returns the given value as an u32. If it's already an u32 then simply returns @p value.
+    /// Otherwise, wrap the value in a TypeInitializer expression.
+    /// @param value the value to pass through or convert
+    /// @returns the value as an u32 value.
+    TypedExpression ToU32(TypedExpression value);
+
     /// Returns the given value as a signed integer type of the same shape if the value is unsigned
     /// scalar or vector, by wrapping the value with a TypeInitializer expression.  Returns the
     /// value itself if the value was already signed.
