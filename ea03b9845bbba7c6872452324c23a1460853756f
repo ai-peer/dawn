@@ -217,6 +217,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2288aff4_f56f82ac",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-15T16:38:17Z",
+      "side": 1,
+      "message": "Oh sorry I misread this comment.\n\nThis function `GetRequiredFeatures()` in `ShaderF16Tests` and others are called right *before* DawnTest creates device for testing, and used to determine the required features for that device created with toggles provided by testcases. More specific, some testcases want to enable UseDXC while others (major part of them) do not.\n\nOn the other hand, with current patch `GetAdapter().IsFeatureSupported` relied on adapter toggles, which are just inherited from instance toggles, and are same for all testcases (instance are stored in `gTestEnv` and get reused every time). Currently major test cases test the default behavior, i.e. use FXC instead of DXC, so we can not just enable the UseDXC toggle on the instance.\n\nIn this case, `GetAdapter().IsFeatureSupported(f16)` will always return `false`, since adapter toggles do not enabled UseDXC. But it is still possible to create a device with shader-f16 feature as long as UseDXC is enabled in device toggles descriptor and thus override the adapter toggles.\n\n`GetAdapter().GetUnfilteredSupportedFeaturesForTesting()` is designed to do this task, reporting all features including those requiring some toggles not enabled in adapter toggles state, but such toggles can be overridden in device toggles and once properly overridden we can use those features.",
+      "parentUuid": "6b78265e_f1394ffe",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7ebeb2b_a4390673",
         "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
         "patchSetId": 6
