@@ -1,0 +1,259 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e6d0147_193d5a65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Please take a look, thanks for your time!\nThis CL finally pas the try bot after I revert the `EnsureBackendConnection` things I once added in instance initialization in the former CLs.\nI try to add detailed comments here in Gerrit, hopefully they can serve as a document explaining the design.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0c1caa5_2db5e21a",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "If that is better, I can replace this cache with a call to `RequestSupportedFeaturesWithToggles`",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48745a64_a9c98f18",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Call `ValidateFeatureSupportedWithToggles` for each supported feature to check the restriction of given toggles.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170cab51_92fac26d",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "All changes made for Adapter feature management is based on the following idea:\n1. Whether a feature is supported is based on two factor:\n    a) the system/backend/driver etc. actually support the feature, and\n    b) the toggles allows using this feature (namely *\"the restriction of toggles\"*);\n  \u003e For example: a) `shader-f16` on Windows require DXC of some version existed, this is a fact that not related to toggles; b) `shader-f16` feature require `DisallowUnsafeAPIs` toggle disabled on all backend, and require `UseDXC` toggle on Windows for using DXC.\n\n2. Device toggles state can be different from aevice toggles state on those toggles that controls the support of features (i.e. `DisallowUnsafeAPIs` and `UseDXC`), due to the toggles overriding. We want this to happen so we can create a internal unsafe device from a safe adapter an so on.\n3. Adapter has to report the features it support based on adapter toggles state (that\u0027s the only toggles state it can see), while we want to validate the required features with required device toggles when creating device. The reasons including:\n    1. In this way we can create a unsafe device with more experimental features from a safe adapter for e.g. internal use or testing propose.\n    2. On the other hand Chrome (JS) user won\u0027t be able to create such a device with features that adapter not report supporting, since *we decided to use same toggles requirement for both Instance, Adapters and Devices in Chrome by default*. Internal usage can have specially constructed toggles requirement, but not user\u0027s.\n\nWith these ideas, I distinguished the concept of \"unfiltered supported features\" and \"filtered supported features with given toggles\" in adapters. The first is the features that can actually supported by system/backend/driver, and the second one is the subset of the first one that only contains features allowed by some toggles state, adapter toggles state or device toggles state in different places.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b0c7dd_5999f53c",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This function now check the required features based on given toggles, ensure that all features are not only supported by backend but also have no violate the restriction of given toggles.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a4a6b4_c5df45dd",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This function is used in End-to-End testing. The propose of this function is to answer **\"Can I require the shader-f16 feature for testing, if I enable UseDXC toggle when creating device, although it is disabled in the adapter because other test cases doesn\u0027t want it?\"**.\n\nIn end-to-end testing, Instance get reused for every testcases, so its toggles and adapters\u0027 toggles it create are also the same for each test cases. This works well for `DisallowUnsafeAPIs` because we usually want to disable it, but it cause trouble for `UseDXC`. Currently major test cases tests FXC instead of DXC and has `UseDXC` disabled, while we still want to test `UseDXC` for features like `shader-f16` on Windows in some test cases.\n\nTherefore, we can not enable `UseDXC` by default for instance and hence adapters, otherwise we can not test the FXC cases (all cases will just run for DXC). In this case, adapter will always report **not supporting shader-f16**, but actually it **can** support if we enable `UseDXC` in device toggles. This function solve this problem.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a815a645_20948e00",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This change is just for making `mUnfilteredSupportedFeatures` private. If we decide that is unnecessary, I can change it back. But I think the interface may be clear if we just expose the methods not the data?",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1b6b13_c5679c23",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This is the actual function that check if a feature is supported with a given toggles state, and it will call backends\u0027 `ValidateFeatureSupportedWithTogglesImpl` for any backend-specific validation.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc6fb134_35dec229",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This is just a cache. If required, I can remove it and just call the `RequestSupportedFeaturesWithToggles` every time needed.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d4b458_541a7073",
+        "filename": "src/dawn/native/BackendConnection.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "This method is now called when creating adapter\u0027s toggles state when discovering them.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c362b538_9acfc707",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "As is suggested, in the future we may want to have multiple connection of D3D and some of them use DXC while others not, or we may want some adapter use DXC while others not. So I plan to downgrade `UseDXC` into adapter toggle in future.\n\nBut currently using `UseDXC` as an instance toggle save me from some difficulty like multiple adapter (only different in toggles state) management in instance.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a801291c_87e21ade",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Change this because in this CL I force set instance stage toggle `UseDXC` when creating adapter toggles state.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cee8d0d_b973d14f",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Currently `UseDXC` is an instance toggle, but get validated and force set for adapter toggles. But maybe this is OK? and I plans to eventually downgrade it into adapter toggle.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8881cb85_d10473b8",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Take required toggles of earlier stage as well to do the toggles overriding.\n\nFor example, instance toggle `UseDXC` may be enabled in the parameter of this test cases, and we should also take it into the required device toggles.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3149407_cd0c98df",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "These code is to answer that **\"Can I require the shader-f16 feature for testing device with the toggles in test parameter (mainly `UseDXC`), even though adapter may report doesn\u0027t support it because it has a different adapter toggles state?\"**",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

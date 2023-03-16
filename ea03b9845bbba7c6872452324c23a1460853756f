@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c1122df_54c90a8c",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Sorry I found there is already a identical function exposed. Fixed.",
+      "parentUuid": "59526a1e_fa14ef73",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e888c5a_295a5dea",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e11d8184_ee69083d",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Remove the `EnsureBackendConnection` here. Now instance not do backend-specific toggles validation or default setting during initialization.",
+      "parentUuid": "4e888c5a_295a5dea",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78e4357e_a6acae4e",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-03-15T12:58:42Z",
       "side": 1,
       "message": "Why isn\u0027t mToggles directly passed to SetupBackendSpecificInstanceToggles? It would remove the need for Copy()",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9a5f1e9_123578b3",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Now `SetupBackendSpecificInstanceToggles` is changed to `SetupBackendSpecificAdapterToggles` which get called when discovering adapter on backends. Instance now don\u0027t do any backend-specific toggles validation or default setting during initialization.",
+      "parentUuid": "78e4357e_a6acae4e",
       "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -159,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3c4ba88_4a73f301",
+        "filename": "src/dawn/native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "In the latest CL I do this validation when creating adapter toggles state, instead of changing the instance\u0027s toggles state, so it won\u0027t effect other connections anymore.",
+      "parentUuid": "d66b0746_4c971846",
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18e3fe3c_3de436da",
         "filename": "src/dawn/tests/DawnTest.h",
         "patchSetId": 6
@@ -170,6 +242,30 @@
       "writtenOn": "2023-03-15T12:58:42Z",
       "side": 1,
       "message": "nit: will",
+      "range": {
+        "startLine": 564,
+        "startChar": 39,
+        "endLine": 564,
+        "endChar": 42
+      },
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ad00f6_7a97cafd",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18e3fe3c_3de436da",
       "range": {
         "startLine": 564,
         "startChar": 39,
@@ -246,6 +342,30 @@
       "writtenOn": "2023-03-15T12:58:42Z",
       "side": 1,
       "message": "nit: restrictions",
+      "range": {
+        "startLine": 49,
+        "startChar": 19,
+        "endLine": 49,
+        "endChar": 30
+      },
+      "revId": "ea03b9845bbba7c6872452324c23a1460853756f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d8e393_ba943f3d",
+        "filename": "src/dawn/tests/end2end/ShaderF16Tests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T11:23:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7ebeb2b_a4390673",
       "range": {
         "startLine": 49,
         "startChar": 19,
