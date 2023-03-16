@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd81fb2_40556830",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-03-16T19:09:32Z",
+      "side": 1,
+      "message": "Had put the wrong link for these in an earlier CL. Opportunistically fixing here.",
+      "range": {
+        "startLine": 485,
+        "startChar": 10,
+        "endLine": 485,
+        "endChar": 14
+      },
+      "revId": "f94169ecc68eef23c41342919d317b3fe1280f59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
