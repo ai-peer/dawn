@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "dawn/native/d3d12/ShaderModuleD3D12.h"
+#include "dawn/native/d3d/ShaderModuleD3D.h"
 
 #include <d3dcompiler.h>
 
@@ -32,15 +32,16 @@
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/TintUtils.h"
+#include "dawn/native/d3d/AdapterD3D.h"
+#include "dawn/native/d3d/BackendD3D.h"
+#include "dawn/native/d3d/BindGroupLayoutD3D.h"
 #include "dawn/native/d3d/BlobD3D.h"
 #include "dawn/native/d3d/D3DError.h"
-#include "dawn/native/d3d12/AdapterD3D12.h"
-#include "dawn/native/d3d12/BackendD3D12.h"
-#include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
-#include "dawn/native/d3d12/DeviceD3D12.h"
-#include "dawn/native/d3d12/PipelineLayoutD3D12.h"
-#include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
-#include "dawn/native/d3d12/UtilsD3D12.h"
+#include "dawn/native/d3d/DeviceD3D.h"
+#include "dawn/native/d3d/Forward.h"
+#include "dawn/native/d3d/PipelineLayoutD3D.h"
+#include "dawn/native/d3d/PlatformFunctions.h"
+#include "dawn/native/d3d/UtilsD3D.h"
 #include "dawn/native/stream/BlobSource.h"
 #include "dawn/native/stream/ByteVectorSink.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -61,7 +62,7 @@ void Stream<pD3DCompile>::Write(Sink*, pD3DCompile const&) {}
 
 }  // namespace dawn::native::stream
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 
 namespace {
 
@@ -658,4 +659,4 @@ D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
     return {shaderBlob.Data(), shaderBlob.Size()};
 }
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d

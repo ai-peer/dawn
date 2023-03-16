@@ -17,6 +17,7 @@
 
 #include "dawn/native/Device.h"
 
+#include "dawn/native/d3d/DeviceInfoD3D.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d {
@@ -30,6 +31,7 @@ class Device : public DeviceBase {
            const TogglesState& deviceToggles);
     ~Device() override;
 
+    const DeviceInfo& GetDeviceInfo() const;
     const PlatformFunctions* GetFunctions() const;
     ComPtr<IDXGIFactory4> GetFactory() const;
     ComPtr<IDxcLibrary> GetDxcLibrary() const;

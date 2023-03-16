@@ -75,6 +75,7 @@ MaybeError Adapter::InitializeImpl() {
     mName = WCharToUTF8(adapterDesc.Description);
 
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
+    Base::SetDeviceInfo(mDeviceInfo);
 
     if (adapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
         mAdapterType = wgpu::AdapterType::CPU;

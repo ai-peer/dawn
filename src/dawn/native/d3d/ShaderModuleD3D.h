@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn Authors
+// Copyright 2023 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
-#define SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
+#ifndef SRC_DAWN_NATIVE_D3D_SHADERMODULED3D_H_
+#define SRC_DAWN_NATIVE_D3D_SHADERMODULED3D_H_
 
 #include <string>
 
@@ -26,7 +26,7 @@ namespace dawn::native {
 struct ProgrammableStage;
 }  // namespace dawn::native
 
-namespace dawn::native::d3d12 {
+namespace dawn::native::d3d {
 
 class Device;
 class PipelineLayout;
@@ -66,6 +66,6 @@ class ShaderModule final : public ShaderModuleBase {
                           OwnedCompilationMessages* compilationMessages);
 };
 
-}  // namespace dawn::native::d3d12
+}  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D12_SHADERMODULED3D12_H_
+#endif  // SRC_DAWN_NATIVE_D3D_SHADERMODULED3D_H_
