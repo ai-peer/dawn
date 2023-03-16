@@ -50,6 +50,24 @@
       "message": "nit; no need, it is in the header.",
       "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8237e96_b7211c9f",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T16:07:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1b65fbb_d428ed18",
+      "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
