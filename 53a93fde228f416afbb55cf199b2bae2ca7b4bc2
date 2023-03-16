@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27c6ba59_03716dd9",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-16T22:58:32Z",
+      "side": 1,
+      "message": "when we replace this pointer, there could be another thread that is doing `GetCallbackTaskManager()-\u003eAddCallbackTask(...)`. That could either race or result in a use-after-free.\n\nwe could return the instance\u0027s manager from GetCallbackTaskManager()? and enforce everything goes though that? If we want to be very strict, you could hide direct access to it.\n\nsomething like?\n```\nclass Holder {\n public:\n  CallbackTaskManager* Get(DeviceBase* device) {\n    if (device-\u003eIsAlive()) {\n      return mManager.Get();\n    } else {\n      return device-\u003eGetAdapter()-\u003eGetInstance()-\u003eGetCallbackTaskManager();\n    }\n  }\n private:\n  Ref\u003cCallbackTaskManager\u003e mManager;\n};\n```",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
