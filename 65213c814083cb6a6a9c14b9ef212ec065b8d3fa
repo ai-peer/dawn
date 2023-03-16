@@ -35,6 +35,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d45afb6_467e9dfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "Seems there\u0027s a bug with literals that start in the first column?",
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef3ac45f_b9b9d98a",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "This is the *position* of the first significant digit.\nName could be better, or add a comment.",
+      "range": {
+        "startLine": 334,
+        "startChar": 11,
+        "endLine": 334,
+        "endChar": 34
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1658232a_63891a2a",
@@ -60,6 +100,168 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7d353c9_6631f60b",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "This test seems wrong.\nWhat if the literal starts in the first column of the line, and the literal starts with non-zero.  Then you\u0027ll have first_significant_digit set to 0 to record that fact, but then forget it the next time you see a non-zero digit.\n\nUpshot: I think you need a different sentinel value for first_significant_digit.  Make it the line length + 1, or UINT_MAX?\n\nOr make first_significant_digit a std::optional\u003csize_t\u003e to make it even more clear.",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 336,
+        "endChar": 65
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7631ccbd_e52dcb8d",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "Agree with Ben here.\nCode is clearer his way.",
+      "parentUuid": "1658232a_63891a2a",
+      "range": {
+        "startLine": 336,
+        "startChar": 44,
+        "endLine": 336,
+        "endChar": 64
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8899158a_2407cb7b",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "Seems both should be combined into a std::optional\u003csize_t\u003e",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 346,
+        "endChar": 28
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9906eb7_a238755e",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "sentinel value and the comparison have same problems as above",
+      "range": {
+        "startLine": 353,
+        "startChar": 39,
+        "endLine": 353,
+        "endChar": 64
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1216e19d_6a2d4e47",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "Similar here.  std::optional\u003csize_t\u003e",
+      "range": {
+        "startLine": 365,
+        "startChar": 5,
+        "endLine": 368,
+        "endChar": 39
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8faf80a4_d66ede8f",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "nit: If we ever allow silent separators between digits, then it would be better to count the zeros we see instead of doing arithmetic on positions.\n\nE.g. 000_000_000",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 81
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e7c4507_c71facf2",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "nit:   It\u0027s optimistic to think it will fit in i32.\nWhy not uint64_t?  (The code already has skipped over the leading sign, if present.)\n\nAh you want to subtract it below. Could rewrite as comparison \n\nWhat will the fuzzer do here?",
+      "range": {
+        "startLine": 429,
+        "startChar": 11,
+        "endLine": 429,
+        "endChar": 34
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "278d508a_5499bd5c",
         "filename": "src/tint/reader/wgsl/lexer.cc",
         "patchSetId": 2
@@ -76,6 +278,29 @@
         "startChar": 32,
         "endLine": 432,
         "endChar": 80
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "529f5ac9_5f141b84",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-16T17:09:20Z",
+      "side": 1,
+      "message": "nit:  if (exp_value \u003c zeros_before_digit) ...",
+      "range": {
+        "startLine": 438,
+        "startChar": 8,
+        "endLine": 438,
+        "endChar": 32
       },
       "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
