@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "8465d4ec127959d0c119c876916f99b7688dffe3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7a59105_57e9acbc",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-16T07:04:07Z",
+      "side": 1,
+      "message": "Likely I\u0027d better move this Gen12 stuff to AdapterVk with a new toggle, thanks to Jiawei\u0027s suggestion.",
+      "range": {
+        "startLine": 745,
+        "startChar": 1,
+        "endLine": 747,
+        "endChar": 85
+      },
+      "revId": "8465d4ec127959d0c119c876916f99b7688dffe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
