@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e8e2ce3_f16fe0c0",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T12:43:44Z",
+      "side": 1,
+      "message": "nit: IsFeatureSupported and if we can split this to a pre-CL it will help remove the amount of noise in this one.",
+      "parentUuid": "a815a645_20948e00",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa1b6b13_c5679c23",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
@@ -133,6 +151,23 @@
       "writtenOn": "2023-03-16T11:23:56Z",
       "side": 1,
       "message": "This is the actual function that check if a feature is supported with a given toggles state, and it will call backends\u0027 `ValidateFeatureSupportedWithTogglesImpl` for any backend-specific validation.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbd25e40_19a477bd",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T12:43:44Z",
+      "side": 1,
+      "message": "nit: Can we do this change in the pre-CL as well? It will make most of the backends change be in the pre-CL and cut the amount of files here. I don\u0027t expect the pre-CL to have more than one round of nit comments.",
       "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +236,23 @@
       "writtenOn": "2023-03-16T11:23:56Z",
       "side": 1,
       "message": "Change this because in this CL I force set instance stage toggle `UseDXC` when creating adapter toggles state.",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e65159e_d0430488",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T12:43:44Z",
+      "side": 1,
+      "message": "This is now const again?",
       "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
