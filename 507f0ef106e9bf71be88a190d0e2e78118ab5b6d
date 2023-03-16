@@ -16,6 +16,40 @@
       "message": "Please take a look, thanks.\nThis is a pre-CL for https://dawn-review.googlesource.com/c/dawn/+/123960.",
       "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5cb54a_865dd705",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T16:01:54Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b65fbb_d428ed18",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T16:01:54Z",
+      "side": 1,
+      "message": "nit; no need, it is in the header.",
+      "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
