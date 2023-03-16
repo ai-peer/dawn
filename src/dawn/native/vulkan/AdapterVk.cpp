@@ -416,6 +416,14 @@ void Adapter::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
         deviceToggles->Default(Toggle::AlwaysResolveIntoZeroLevelAndLayer, true);
     }
 
+    if (IsIntelMesaGen12()) {
+        // dawn:1688: Intel Mesa driver has a bug about reusing the VkDeviceMemory that was
+        // previously bound to a 2D VkImage. To work around that bug we have to disable the resource
+        // sub-allocation for 2D textures with CopyDst or RenderAttachment usage.
+        deviceToggles->Default(
+            Toggle::DisableSubAllocationFor2DTextureWithCopyDstOrRenderAttachment, true);
+    }
+
     // The environment can request to various options for depth-stencil formats that could be
     // unavailable. Override the decision if it is not applicable.
     bool supportsD32s8 = IsDepthStencilFormatSupported(VK_FORMAT_D32_SFLOAT_S8_UINT);
@@ -470,6 +478,14 @@ MaybeError Adapter::ValidateFeatureSupportedWithDeviceTogglesImpl(
 bool Adapter::IsAndroidQualcomm() const {
 #if DAWN_PLATFORM_IS(ANDROID)
     return gpu_info::IsQualcomm(GetVendorId());
+#else
+    return false;
+#endif
+}
+
+bool Adapter::IsIntelMesaGen12() const {
+#if (DAWN_PLATFORM_IS_LINUX || DAWN_PLATFORM_IS_CHROMEOS)
+    return gpu_info::IsIntelGen12LP(GetVendorId(), GetDeviceId());
 #else
     return false;
 #endif
