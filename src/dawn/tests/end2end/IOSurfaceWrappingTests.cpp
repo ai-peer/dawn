@@ -16,6 +16,10 @@
 #include <CoreVideo/CVPixelBuffer.h>
 #include <IOSurface/IOSurface.h>
 
+#include <memory>
+#include <thread>
+#include <vector>
+
 #include "dawn/tests/DawnTest.h"
 
 #include "dawn/native/MetalBackend.h"
@@ -588,5 +592,43 @@ TEST_P(IOSurfaceUsageTests, WriteThenConcurrentReadThenWrite) {
     EXPECT_TRUE(endWriteAccessDesc.isInitialized);
 }
 
+class IOSurfaceMultithreadTests : public IOSurfaceUsageTests {
+  protected:
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> features;
+        // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+        if (!UsesWire()) {
+            features.push_back(wgpu::FeatureName::ThreadSafeAPI);
+        }
+        return features;
+    }
+
+    void SetUp() override {
+        IOSurfaceUsageTests::SetUp();
+        // TODO(crbug.com/dawn/1678): DawnWire doesn't support thread safe API yet.
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    }
+};
+
+// Test that wrapping multiple IOSurface and use them on multiple threads work.
+TEST_P(IOSurfaceMultithreadTests, WrapAndUseOnMultipleThreads) {
+    std::vector<std::unique_ptr<std::thread>> threads(10);
+
+    for (auto& thread : threads) {
+        thread = std::make_unique<std::thread>([this] {
+            ScopedIOSurfaceRef ioSurface =
+                CreateSinglePlaneIOSurface(1, 1, kCVPixelFormatType_32BGRA, 4);
+
+            uint32_t data = 0x04010203;
+            DoClearTest(ioSurface.get(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data));
+        });
+    }
+
+    for (auto& thread : threads) {
+        thread->join();
+    }
+}
+
 DAWN_INSTANTIATE_TEST(IOSurfaceValidationTests, MetalBackend());
 DAWN_INSTANTIATE_TEST(IOSurfaceUsageTests, MetalBackend());
+DAWN_INSTANTIATE_TEST(IOSurfaceMultithreadTests, MetalBackend());
