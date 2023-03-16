@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bc61d02_0fc76862",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-16T00:42:18Z",
+      "side": 1,
+      "message": "\u003eCould we instead use the naturalSize for video element here? \nYes and that\u0027s the follow up blink side changes. We should set source.width and source.height there to natural size. That helps the source origin validation in blink side. But when we call CreateExternalTexture()(https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_queue.cc;l\u003d614;drc\u003d0e9a0b6e9bb6ec59521977eec805f5d0bca833e0;bpv\u003d0;bpt\u003d1), we don\u0027t use that source.width and source.height. Instead, we choose visible rect from media::VideoFrame in CreateExternalTexture() for both WebCodec::VideoFrame and HTMLVideoElement.\n\nTechnically, we could pass natural size to CreateExternalTexture() and create ExternalTexture with that natural size but I hesitate to do it because:\n- If we add extra attribute in WGPUExternalTextureDescriptor, pass natural size to ExternalTexture and doesn\u0027t generate internal shader with natural size, it is a bit trivial.\n- If using natural size instead of visible size to create ExternalTexture and generate internal shader, it means we might do two scale/crops. First is from frame coded_size to visible rect(That\u0027s what current ExternalTexture do, crop/downscale or no changes), second is from visible_rect to natural size(possible to upscale and downscale). Current internal shader for ExternalTexture doesn\u0027t support upscale, we need to add it.\n- I\u0027m hesitate to add the upscale ability for internal shader of ExternalTexture because it is a special thing for CopyEI2T(and copyEI2T has its own extra scale step to handle it https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CopyTextureForBrowserHelper.cpp;drc\u003d08027c662e35c50d1a08bd59c5ea405b0d337108;l\u003d412). For importExternalTexture() generated GPUExternalTexture, crop video frame to visible rect is enough (it provides the exactly content from origin video frame without extra scales). If user want a natural size result, they could issue a rendering pipeline to do the up-scale/down-scale themselves.",
+      "parentUuid": "f8728393_c0941604",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e63b926_d821c7a1",
