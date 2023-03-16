@@ -383,17 +383,18 @@ MaybeError TransitionAndClearForSyncScope(CommandRecordingContext* commandContex
 
 }  // anonymous namespace
 
+class DescriptorHeapState;
+
 class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
     using Base = BindGroupTrackerBase;
 
   public:
-    explicit BindGroupStateTracker(Device* device)
+    BindGroupStateTracker(Device* device, DescriptorHeapState* heapState, bool inCompute)
         : BindGroupTrackerBase(),
           mDevice(device),
+          mInCompute(inCompute),
           mViewAllocator(device->GetViewShaderVisibleDescriptorAllocator()),
           mSamplerAllocator(device->GetSamplerShaderVisibleDescriptorAllocator()) {}
-
-    void SetInComputePass(bool inCompute_) { mInCompute = inCompute_; }
 
     MaybeError Apply(CommandRecordingContext* commandContext) {
         BeforeApply();
@@ -454,20 +455,9 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
         return {};
     }
 
-    void SetID3D12DescriptorHeaps(ID3D12GraphicsCommandList* commandList) {
-        ASSERT(commandList != nullptr);
-        std::array<ID3D12DescriptorHeap*, 2> descriptorHeaps = {
-            mViewAllocator->GetShaderVisibleHeap(), mSamplerAllocator->GetShaderVisibleHeap()};
-        ASSERT(descriptorHeaps[0] != nullptr);
-        ASSERT(descriptorHeaps[1] != nullptr);
-        commandList->SetDescriptorHeaps(descriptorHeaps.size(), descriptorHeaps.data());
+    void ResetRootSamplerTables() { mBoundRootSamplerTables = {}; }
 
-        // Descriptor table state is undefined at the beginning of a command list and after
-        // descriptor heaps are changed on a command list. Invalidate the root sampler tables to
-        // reset the root descriptor table for samplers, otherwise the shader cannot access the
-        // descriptor heaps.
-        mBoundRootSamplerTables = {};
-    }
+    void SetID3D12DescriptorHeaps(ID3D12GraphicsCommandList* commandList);
 
   private:
     void UpdateRootSignatureIfNecessary(ID3D12GraphicsCommandList* commandList) {
@@ -480,7 +470,7 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
                     ToBackend(mPipelineLayout)->GetRootSignature());
             }
             // Invalidate the root sampler tables previously set in the root signature.
-            mBoundRootSamplerTables = {};
+            ResetRootSamplerTables();
         }
     }
 
@@ -607,6 +597,7 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
     }
 
     Device* mDevice;
+    DescriptorHeapState* mHeapState;
 
     bool mInCompute = false;
 
@@ -616,6 +607,43 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
     ShaderVisibleDescriptorAllocator* mViewAllocator;
     ShaderVisibleDescriptorAllocator* mSamplerAllocator;
 };
+
+class DescriptorHeapState {
+  public:
+    explicit DescriptorHeapState(Device* device)
+        : mDevice(device),
+          mComputeBindingTracker(device, this, true),
+          mGraphicsBindingTracker(device, this, false) {}
+
+    void SetID3D12DescriptorHeaps(ID3D12GraphicsCommandList* commandList) {
+        ASSERT(commandList != nullptr);
+        std::array<ID3D12DescriptorHeap*, 2> descriptorHeaps = {
+            mDevice->GetViewShaderVisibleDescriptorAllocator()->GetShaderVisibleHeap(),
+            mDevice->GetSamplerShaderVisibleDescriptorAllocator()->GetShaderVisibleHeap()};
+        ASSERT(descriptorHeaps[0] != nullptr);
+        ASSERT(descriptorHeaps[1] != nullptr);
+        commandList->SetDescriptorHeaps(descriptorHeaps.size(), descriptorHeaps.data());
+
+        // Descriptor table state is undefined at the beginning of a command list and after
+        // descriptor heaps are changed on a command list. Invalidate the root sampler tables to
+        // reset the root descriptor table for samplers, otherwise the shader cannot access the
+        // descriptor heaps.
+        mComputeBindingTracker.ResetRootSamplerTables();
+        mGraphicsBindingTracker.ResetRootSamplerTables();
+    }
+
+    BindGroupStateTracker* GetComputeBindingTracker() { return &mComputeBindingTracker; }
+    BindGroupStateTracker* GetGraphicsBindingTracker() { return &mGraphicsBindingTracker; }
+
+  private:
+    DeviceBase* mDevice;
+    BindGroupStateTracker mComputeBindingTracker;
+    BindGroupStateTracker mGraphicsBindingTracker;
+};
+
+void BindGroupStateTracker::SetID3D12DescriptorHeaps(ID3D12GraphicsCommandList* commandList) {
+    mHeapState->SetID3D12DescriptorHeaps(commandList);
+}
 
 namespace {
 class VertexBufferTracker {
@@ -726,13 +754,12 @@ CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescrip
 
 MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext) {
     Device* device = ToBackend(GetDevice());
-    BindGroupStateTracker bindingTracker(device);
 
-    ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
-
+    DescriptorHeapState descriptorHeapState(device);
     // Make sure we use the correct descriptors for this command list. Could be done once per
     // actual command list but here is ok because there should be few command buffers.
-    bindingTracker.SetID3D12DescriptorHeaps(commandList);
+    ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
+    descriptorHeapState.SetID3D12DescriptorHeaps(commandList);
 
     size_t nextComputePassNumber = 0;
     size_t nextRenderPassNumber = 0;
@@ -743,11 +770,9 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
             case Command::BeginComputePass: {
                 BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
 
-                bindingTracker.SetInComputePass(true);
-
-                DAWN_TRY(
-                    RecordComputePass(commandContext, &bindingTracker, cmd,
-                                      GetResourceUsages().computePasses[nextComputePassNumber]));
+                DAWN_TRY(RecordComputePass(
+                    commandContext, descriptorHeapState.GetComputeBindingTracker(), cmd,
+                    GetResourceUsages().computePasses[nextComputePassNumber]));
 
                 nextComputePassNumber++;
                 break;
@@ -761,11 +786,11 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 DAWN_TRY(TransitionAndClearForSyncScope(
                     commandContext, GetResourceUsages().renderPasses[nextRenderPassNumber],
                     &passHasUAV));
-                bindingTracker.SetInComputePass(false);
 
                 LazyClearRenderPassAttachments(beginRenderPassCmd);
-                DAWN_TRY(RecordRenderPass(commandContext, &bindingTracker, beginRenderPassCmd,
-                                          passHasUAV));
+                DAWN_TRY(RecordRenderPass(commandContext,
+                                          descriptorHeapState.GetGraphicsBindingTracker(),
+                                          beginRenderPassCmd, passHasUAV));
 
                 nextRenderPassNumber++;
                 break;
