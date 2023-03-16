@@ -66,7 +66,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-03-14 02:53:47PM
+# Last rolled: 2023-03-16 08:24:09PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -546,7 +546,6 @@ crbug.com/dawn/1877 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:shade
 crbug.com/dawn/1877 [ dawn-no-backend-validation intel-0x9bc5 ubuntu ] webgpu:shader,execution,expression,call,builtin,frexp:f32_vec4_fract:inputSource="storage_rw" [ Failure ]
 crbug.com/dawn/1877 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:shader,execution,expression,call,builtin,frexp:f32_vec4_fract:inputSource="uniform" [ Failure ]
 crbug.com/dawn/1877 [ dawn-no-backend-validation intel-0x9bc5 ubuntu ] webgpu:shader,execution,expression,call,builtin,frexp:f32_vec4_fract:inputSource="uniform" [ Failure ]
-
 
 ################################################################################
 # untriaged failures
