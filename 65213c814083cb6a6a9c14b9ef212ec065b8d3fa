@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db44870_0eceae28",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3ac45f_b9b9d98a",
+      "range": {
+        "startLine": 334,
+        "startChar": 11,
+        "endLine": 334,
+        "endChar": 34
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1658232a_63891a2a",
@@ -145,6 +169,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c6e85a2_c03785c8",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7d353c9_6631f60b",
+      "range": {
+        "startLine": 336,
+        "startChar": 12,
+        "endLine": 336,
+        "endChar": 65
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54928374_bdeae013",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7631ccbd_e52dcb8d",
+      "range": {
+        "startLine": 336,
+        "startChar": 44,
+        "endLine": 336,
+        "endChar": 64
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8899158a_2407cb7b",
@@ -158,6 +230,30 @@
       "writtenOn": "2023-03-16T17:09:20Z",
       "side": 1,
       "message": "Seems both should be combined into a std::optional\u003csize_t\u003e",
+      "range": {
+        "startLine": 344,
+        "startChar": 4,
+        "endLine": 346,
+        "endChar": 28
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8474d97_4b15f84d",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 346,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8899158a_2407cb7b",
       "range": {
         "startLine": 344,
         "startChar": 4,
@@ -191,6 +287,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "086e9795_75c955d5",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9906eb7_a238755e",
+      "range": {
+        "startLine": 353,
+        "startChar": 39,
+        "endLine": 353,
+        "endChar": 64
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1216e19d_6a2d4e47",
@@ -204,6 +324,30 @@
       "writtenOn": "2023-03-16T17:09:20Z",
       "side": 1,
       "message": "Similar here.  std::optional\u003csize_t\u003e",
+      "range": {
+        "startLine": 365,
+        "startChar": 5,
+        "endLine": 368,
+        "endChar": 39
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "727c5cec_f8370be2",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1216e19d_6a2d4e47",
       "range": {
         "startLine": 365,
         "startChar": 5,
@@ -237,6 +381,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c50e72d_f5b8c2bd",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8faf80a4_d66ede8f",
+      "range": {
+        "startLine": 426,
+        "startChar": 0,
+        "endLine": 426,
+        "endChar": 81
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e7c4507_c71facf2",
@@ -250,6 +418,30 @@
       "writtenOn": "2023-03-16T17:09:20Z",
       "side": 1,
       "message": "nit:   It\u0027s optimistic to think it will fit in i32.\nWhy not uint64_t?  (The code already has skipped over the leading sign, if present.)\n\nAh you want to subtract it below. Could rewrite as comparison \n\nWhat will the fuzzer do here?",
+      "range": {
+        "startLine": 429,
+        "startChar": 11,
+        "endLine": 429,
+        "endChar": 34
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43cddc69_0bce79a7",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Used `size_t` as then it matches `zeros_before_digit` and I can use the `exp_value \u003c zeros_before_digit` suggestion instead of subtracting.\n\nAlso updated to check the return of the conversion and if it fails we don\u0027t check if this should go to 0.0, we leave as an error.",
+      "parentUuid": "4e7c4507_c71facf2",
       "range": {
         "startLine": 429,
         "startChar": 11,
@@ -283,6 +475,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b3a57b_9b7fcb33",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "278d508a_5499bd5c",
+      "range": {
+        "startLine": 432,
+        "startChar": 32,
+        "endLine": 432,
+        "endChar": 80
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "529f5ac9_5f141b84",
@@ -296,6 +512,30 @@
       "writtenOn": "2023-03-16T17:09:20Z",
       "side": 1,
       "message": "nit:  if (exp_value \u003c zeros_before_digit) ...",
+      "range": {
+        "startLine": 438,
+        "startChar": 8,
+        "endLine": 438,
+        "endChar": 32
+      },
+      "revId": "65213c814083cb6a6a9c14b9ef212ec065b8d3fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c5ff678_4d22f0cc",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 438,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-16T20:46:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "529f5ac9_5f141b84",
       "range": {
         "startLine": 438,
         "startChar": 8,
