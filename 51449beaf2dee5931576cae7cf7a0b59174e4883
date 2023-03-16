@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0de2d968_9b6b0c73",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-16T00:47:27Z",
+      "side": 1,
+      "message": "\u003eGPUExtent2D defaults to (1, 1) so defaulting would require people to explicitly fill out the zeroes, which isn\u0027t super helpful.\n\nThat surprise me. Does dawn.json side default value not works(https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/dawn.json;drc\u003d69e1c4b638d3909635ceb26b6b652a6a2cc28fe7;l\u003d1376)?",
+      "parentUuid": "4e63b926_d821c7a1",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8e11e9_2f19e33d",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -119,6 +137,24 @@
       "writtenOn": "2023-03-15T12:29:55Z",
       "side": 1,
       "message": "Shouldn\u0027t we validate that the naturalSize is smaller than the source size?",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7bdb6a6_da8547bc",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-16T00:47:27Z",
+      "side": 1,
+      "message": "Actually, Dale@ said in slack confirms that natural size might be larger than the source size.\n\u003eIIRC, visible rect must be smaller than frame size, but natural size may be larger than frame size.",
+      "parentUuid": "2e8e11e9_2f19e33d",
       "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
