@@ -16,6 +16,46 @@
       "message": "Thanks, Corentin.",
       "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba40cbe_81d4e68a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-16T16:52:47Z",
+      "side": 1,
+      "message": "LGTM modulo Corentin\u0027s naming concerns",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e607122_01dbf706",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-16T16:52:47Z",
+      "side": 1,
+      "message": "typo: \"flaky\"",
+      "range": {
+        "startLine": 750,
+        "startChar": 25,
+        "endLine": 750,
+        "endChar": 31
+      },
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
