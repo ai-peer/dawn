@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214dcbb0_15a6828c",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:43:28Z",
+      "side": 1,
+      "message": "We could use this enum too instead of hardcoding OSes! https://github.com/KhronosGroup/Vulkan-Headers/blob/65ad768d8603671fc1085fe115019e72a595ced8/include/vulkan/vulkan_core.h#L5634",
+      "revId": "9d94ccdf4d456a89e12d1d8754d66d51dce77a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
