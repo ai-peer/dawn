@@ -17,21 +17,18 @@
 
 #include "dawn/native/Error.h"
 #include "dawn/native/PerStage.h"
+#include "dawn/native/d3d/DeviceInfoD3D.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 
 class Adapter;
 
-struct D3D12DeviceInfo {
+struct D3D12DeviceInfo : public d3d::DeviceInfo {
     bool isUMA;
     uint32_t resourceHeapTier;
     bool supportsRenderPass;
     bool supportsShaderF16;
-    // shaderModel indicates the maximum supported shader model, for example, the value 62
-    // indicates that current driver supports the maximum shader model is shader model 6.2.
-    uint32_t shaderModel;
-    PerStage<std::wstring> shaderProfiles;
     bool supportsSharedResourceCapabilityTier1;
     bool supportsDP4a;
     bool supportsCastingFullyTypedFormat;

@@ -17,6 +17,10 @@
 
 #include "dawn/native/ToBackend.h"
 
+namespace dawn::native::d3d {
+class ShaderModule;
+}  // namespace dawn::native::d3d
+
 namespace dawn::native::d3d12 {
 
 class Adapter;
@@ -33,7 +37,6 @@ class QuerySet;
 class Queue;
 class RenderPipeline;
 class Sampler;
-class ShaderModule;
 class SwapChain;
 class Texture;
 class TextureView;
@@ -53,7 +56,7 @@ struct D3D12BackendTraits {
     using RenderPipelineType = RenderPipeline;
     using ResourceHeapType = Heap;
     using SamplerType = Sampler;
-    using ShaderModuleType = ShaderModule;
+    using ShaderModuleType = d3d::ShaderModule;
     using SwapChainType = SwapChain;
     using TextureType = Texture;
     using TextureViewType = TextureView;

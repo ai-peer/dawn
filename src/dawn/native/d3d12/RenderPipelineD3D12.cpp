@@ -24,10 +24,10 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d/BlobD3D.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/ShaderModuleD3D.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
-#include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/TextureD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 
@@ -380,7 +380,7 @@ MaybeError RenderPipeline::Initialize() {
     shaders[SingleShaderStage::Vertex] = &descriptorD3D12.VS;
     shaders[SingleShaderStage::Fragment] = &descriptorD3D12.PS;
 
-    PerStage<CompiledShader> compiledShader;
+    PerStage<d3d::CompiledShader> compiledShader;
 
     std::bitset<kMaxInterStageShaderVariables>* usedInterstageVariables = nullptr;
     dawn::native::EntryPointMetadata fragmentEntryPoint;

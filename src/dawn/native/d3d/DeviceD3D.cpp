@@ -27,6 +27,10 @@ Device::Device(AdapterBase* adapter,
 
 Device::~Device() = default;
 
+const DeviceInfo& Device::GetDeviceInfo() const {
+    return ToBackend(GetAdapter())->GetDeviceInfo();
+}
+
 const PlatformFunctions* Device::GetFunctions() const {
     return ToBackend(GetAdapter())->GetBackend()->GetFunctions();
 }

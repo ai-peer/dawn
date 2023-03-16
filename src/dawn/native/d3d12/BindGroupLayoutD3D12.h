@@ -17,7 +17,7 @@
 
 #include <vector>
 
-#include "dawn/native/BindGroupLayout.h"
+#include "dawn/native/d3d/BindGroupLayoutD3D.h"
 
 #include "dawn/common/SlabAllocator.h"
 #include "dawn/common/ityp_stack_vec.h"
@@ -37,7 +37,7 @@ class StagingDescriptorAllocator;
 static constexpr uint32_t kRegisterSpacePlaceholder =
     D3D12_DRIVER_RESERVED_REGISTER_SPACE_VALUES_START;
 
-class BindGroupLayout final : public BindGroupLayoutBase {
+class BindGroupLayout final : public d3d::BindGroupLayout {
   public:
     static Ref<BindGroupLayout> Create(Device* device,
                                        const BindGroupLayoutDescriptor* descriptor,
@@ -53,7 +53,7 @@ class BindGroupLayout final : public BindGroupLayoutBase {
 
     // The D3D shader register that the Dawn binding index is mapped to by this bind group
     // layout.
-    uint32_t GetShaderRegister(BindingIndex bindingIndex) const;
+    uint32_t GetShaderRegister(BindingIndex bindingIndex) const override;
 
     // Counts of descriptors in the descriptor tables.
     uint32_t GetCbvUavSrvDescriptorCount() const;
@@ -63,6 +63,8 @@ class BindGroupLayout final : public BindGroupLayoutBase {
     const std::vector<D3D12_DESCRIPTOR_RANGE>& GetSamplerDescriptorRanges() const;
 
   private:
+    using Base = d3d::BindGroupLayout;
+
     BindGroupLayout(Device* device,
                     const BindGroupLayoutDescriptor* descriptor,
                     PipelineCompatibilityToken pipelineCompatibilityToken);
