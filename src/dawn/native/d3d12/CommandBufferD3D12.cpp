@@ -726,13 +726,8 @@ CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescrip
 
 MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext) {
     Device* device = ToBackend(GetDevice());
-    BindGroupStateTracker bindingTracker(device);
 
     ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
-
-    // Make sure we use the correct descriptors for this command list. Could be done once per
-    // actual command list but here is ok because there should be few command buffers.
-    bindingTracker.SetID3D12DescriptorHeaps(commandList);
 
     size_t nextComputePassNumber = 0;
     size_t nextRenderPassNumber = 0;
@@ -743,7 +738,14 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
             case Command::BeginComputePass: {
                 BeginComputePassCmd* cmd = mCommands.NextCommand<BeginComputePassCmd>();
 
+                // Create a binding tracker per-pass. We could have one compute tracker for the
+                // whole command list, but it is done here for simplicity.
+                BindGroupStateTracker bindingTracker(device);
                 bindingTracker.SetInComputePass(true);
+                // Make sure we use the correct descriptors for this command list. Could be done
+                // once per actual command list but it is done here for simplicity.
+                bindingTracker.SetID3D12DescriptorHeaps(commandList);
+                // TODO(crbug.com/dawn/ABC): Optimize to avoid setting redundant state.
 
                 DAWN_TRY(
                     RecordComputePass(commandContext, &bindingTracker, cmd,
@@ -761,7 +763,15 @@ MaybeError CommandBuffer::RecordCommands(CommandRecordingContext* commandContext
                 DAWN_TRY(TransitionAndClearForSyncScope(
                     commandContext, GetResourceUsages().renderPasses[nextRenderPassNumber],
                     &passHasUAV));
+
+                // Create a binding tracker per-pass. We could have one graphics tracker for the
+                // whole command list, but it is done here for simplicity.
+                BindGroupStateTracker bindingTracker(device);
                 bindingTracker.SetInComputePass(false);
+                // Make sure we use the correct descriptors for this command list. Could be done
+                // once per actual command list but it is done here for simplicity.
+                bindingTracker.SetID3D12DescriptorHeaps(commandList);
+                // TODO(crbug.com/dawn/ABC): Optimize to avoid setting redundant state.
 
                 LazyClearRenderPassAttachments(beginRenderPassCmd);
                 DAWN_TRY(RecordRenderPass(commandContext, &bindingTracker, beginRenderPassCmd,
