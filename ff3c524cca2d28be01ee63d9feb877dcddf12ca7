@@ -16,6 +16,23 @@
       "message": "Thanks for reviewing!",
       "revId": "ff3c524cca2d28be01ee63d9feb877dcddf12ca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51df69ed_9523e2c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T19:05:04Z",
+      "side": 1,
+      "message": "Thanks for reviewing, I am submitting the CL",
+      "revId": "ff3c524cca2d28be01ee63d9feb877dcddf12ca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
