@@ -33,6 +33,24 @@
       "message": "That\u0027s ok for now as a quick fix, but will require manual changes every time we modify the template. Let\u0027s find a solution post-V1.",
       "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b2fbe0_9149339f",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-16T14:24:17Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "28ae174b_f2904243",
+      "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
