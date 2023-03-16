@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2eb8a4d7_f7d88d80",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T09:12:38Z",
+      "side": 1,
+      "message": "We want to remove that defaulting apparently :/ So Chromium would need to always fill the naturalSize. But that\u0027s probably fine since it is just for external texture.",
+      "parentUuid": "0de2d968_9b6b0c73",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8e11e9_2f19e33d",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Actually, Dale@ said in slack confirms that natural size might be larger than the source size.\n\u003eIIRC, visible rect must be smaller than frame size, but natural size may be larger than frame size.",
       "parentUuid": "2e8e11e9_2f19e33d",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbab40b_f151050a",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T09:12:38Z",
+      "side": 1,
+      "message": "Wat?? Ok. Do we have a test that if the naturalSize is larger than the source size things work correctly? (what would even be the correct behavior? Right now we discard? But should we put black instead?)",
+      "parentUuid": "d7bdb6a6_da8547bc",
       "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
