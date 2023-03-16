@@ -51,6 +51,24 @@
       "parentUuid": "28ae174b_f2904243",
       "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "475bdb31_6c39ad5b",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-03-16T19:46:55Z",
+      "side": 1,
+      "message": "Long term, we should probably just reimplement the functionality of this ANGLE extension in Dawn. That would also make it available to non-ANGLE clients (e.g., Dawn native).",
+      "parentUuid": "d6b2fbe0_9149339f",
+      "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
