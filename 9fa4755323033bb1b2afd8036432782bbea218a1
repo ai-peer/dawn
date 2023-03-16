@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f03939b3_4e6552c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:50:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d034090_b04a848d",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:50:58Z",
+      "side": 1,
+      "message": "This toggle name is very generic. Can we have something more precise? vulkan_clear_r8_texture_on_creation something like that? Here it sounds like all textures will be cleared on creation.\n\nDo we have an explanation of what the issue is? That could also help give a name:\n\nworkaround_mesa_incorrect_r8_ccs_with_early_clear? (I don\u0027t actually know if that\u0027s the issue)",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a5dc3e8_be616769",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:50:58Z",
+      "side": 1,
+      "message": "nit: Maybe tag with an issue in a commit like done for Qualcomm.",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6e5c21_da017306",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 745,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:50:58Z",
+      "side": 1,
+      "message": "nit: All of these checks could be done inside a first if that checks if the workaround is enabled. It would avoid the cost of the checks in non-buggy HW+SW combination.",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13cd305_a408bce9",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T08:50:58Z",
+      "side": 1,
+      "message": "nit: textureIsBuggy (or ccsIncorrect? Or whatever). Also there are a lot of extra parenthesis for some reason?",
+      "range": {
+        "startLine": 752,
+        "startChar": 4,
+        "endLine": 752,
+        "endChar": 20
+      },
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
