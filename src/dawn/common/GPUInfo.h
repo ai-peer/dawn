@@ -52,6 +52,15 @@ int CompareWindowsDriverVersion(PCIVendorID vendorId,
                                 const DriverVersion& version1,
                                 const DriverVersion& version2);
 
+// Do comparison between two Mesa driver versions. Currently we only support the comparison between
+// Intel Mesa driver versions.
+// - Return a negative number if build number of version1 is smaller
+// - Return a positive number if build number of version1 is bigger
+// - Return 0 if version1 and version2 represent same driver version
+int CompareMesaDriverVersion(PCIVendorID vendorId,
+                             const DriverVersion& version1,
+                             const DriverVersion& version2);
+
 // Intel architectures
 bool IsSkylake(PCIDeviceID deviceId);
 
