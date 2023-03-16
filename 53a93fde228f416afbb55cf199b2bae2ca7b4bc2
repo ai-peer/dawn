@@ -16,6 +16,23 @@
       "message": "Yet another approach to address `device can be destroyed while Instance.APIProcessEvent() is being executed`.",
       "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab6cc58_582003c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-16T21:29:15Z",
+      "side": 1,
+      "message": "I think I like this version best since it avoids the need for weak semantics. A few comments: \n - we should add tests\n - use RefCounted and Ref\u003c\u003e instead of shared_ptr. Similar reasons as to why shared_ptr is banned in Chromium.",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
