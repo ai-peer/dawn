@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64509730_984f7f5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-16T15:57:47Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\nThis is a pre-CL for https://dawn-review.googlesource.com/c/dawn/+/123960.",
+      "revId": "507f0ef106e9bf71be88a190d0e2e78118ab5b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
