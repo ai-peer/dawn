@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32184cd8_069adda0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T12:28:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ae174b_f2904243",
+        "filename": "generator/templates/opengl/opengl_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-16T12:28:37Z",
+      "side": 1,
+      "message": "That\u0027s ok for now as a quick fix, but will require manual changes every time we modify the template. Let\u0027s find a solution post-V1.",
+      "revId": "2569970bcee048626db9f617dc65ac66f38ef3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
