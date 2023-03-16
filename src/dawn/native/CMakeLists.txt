@@ -265,6 +265,7 @@ if (DAWN_ENABLE_D3D12)
         "d3d/D3DError.h"
         "d3d/DeviceD3D.cpp"
         "d3d/DeviceD3D.h"
+        "d3d/DeviceInfoD3D.h"
         "d3d/Forward.h"
         "d3d/PipelineLayoutD3D.cpp"
         "d3d/PipelineLayoutD3D.h"

@@ -20,10 +20,10 @@
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/d3d/BlobD3D.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/ShaderModuleD3D.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
-#include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 
 namespace dawn::native::d3d12 {
@@ -51,13 +51,13 @@ MaybeError ComputePipeline::Initialize() {
     compileFlags |= D3DCOMPILE_PACK_MATRIX_ROW_MAJOR;
 
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
-    ShaderModule* module = ToBackend(computeStage.module.Get());
+    d3d::ShaderModule* module = ToBackend(computeStage.module.Get());
 
     D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
     d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
     // TODO(dawn:549): Compile shader everytime before we implement compiled shader cache
-    CompiledShader compiledShader;
+    d3d::CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(compiledShader, module->Compile(computeStage, SingleShaderStage::Compute,
                                                     ToBackend(GetLayout()), compileFlags));
     d3dDesc.CS = compiledShader.GetD3D12ShaderBytecode();

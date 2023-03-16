@@ -38,4 +38,12 @@ Backend* Adapter::GetBackend() const {
     return mBackend;
 }
 
+void Adapter::SetDeviceInfo(const DeviceInfo& deviceInfo) {
+    mDeviceInfo = deviceInfo;
+}
+
+const DeviceInfo& Adapter::GetDeviceInfo() const {
+    return mDeviceInfo;
+}
+
 }  // namespace dawn::native::d3d

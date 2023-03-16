@@ -12,30 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_FORWARD_H_
-#define SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#ifndef SRC_DAWN_NATIVE_D3D_DEVICEINFOD3D_H_
+#define SRC_DAWN_NATIVE_D3D_DEVICEINFOD3D_H_
 
-#include "dawn/native/ToBackend.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/PerStage.h"
 
 namespace dawn::native::d3d {
 
-class Adapter;
-class BindGroupLayout;
-class Device;
-class PipelineLayout;
-
-struct D3DBackendTraits {
-    using AdapterType = Adapter;
-    using BindGroupLayoutType = BindGroupLayout;
-    using DeviceType = Device;
-    using PipelineLayoutType = PipelineLayout;
+struct DeviceInfo {
+    // shaderModel indicates the maximum supported shader model, for example, the value 62
+    // indicates that current driver supports the maximum shader model is shader model 6.2.
+    uint32_t shaderModel;
+    PerStage<std::wstring> shaderProfiles;
 };
-
-template <typename T>
-auto ToBackend(T&& common) -> decltype(ToBackendBase<D3DBackendTraits>(common)) {
-    return ToBackendBase<D3DBackendTraits>(common);
-}
 
 }  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#endif  // SRC_DAWN_NATIVE_D3D_DEVICEINFO_H_

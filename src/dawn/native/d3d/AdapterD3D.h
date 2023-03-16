@@ -17,6 +17,7 @@
 
 #include "dawn/native/Adapter.h"
 
+#include "dawn/native/d3d/DeviceInfoD3D.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d {
@@ -33,10 +34,13 @@ class Adapter : public AdapterBase {
 
     IDXGIAdapter3* GetHardwareAdapter() const;
     Backend* GetBackend() const;
+    void SetDeviceInfo(const DeviceInfo& deviceInfo);
+    const DeviceInfo& GetDeviceInfo() const;
 
   private:
     ComPtr<IDXGIAdapter3> mHardwareAdapter;
     Backend* mBackend;
+    DeviceInfo mDeviceInfo;
 };
 
 }  // namespace dawn::native::d3d

@@ -24,6 +24,7 @@
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/ShaderModuleD3D.h"
 #include "dawn/native/d3d12/AdapterD3D12.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/BindGroupD3D12.h"
@@ -42,7 +43,6 @@
 #include "dawn/native/d3d12/ResourceAllocatorManagerD3D12.h"
 #include "dawn/native/d3d12/SamplerD3D12.h"
 #include "dawn/native/d3d12/SamplerHeapCacheD3D12.h"
-#include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/SwapChainD3D12.h"
@@ -438,7 +438,7 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     const ShaderModuleDescriptor* descriptor,
     ShaderModuleParseResult* parseResult,
     OwnedCompilationMessages* compilationMessages) {
-    return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
+    return d3d::ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
 ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
