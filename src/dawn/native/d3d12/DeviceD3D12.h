@@ -15,11 +15,12 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_DEVICED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_DEVICED3D12_H_
 
+#include "dawn/native/d3d/DeviceD3D.h"
+
 #include <memory>
 #include <vector>
 
 #include "dawn/common/SerialQueue.h"
-#include "dawn/native/Device.h"
 #include "dawn/native/d3d12/CommandRecordingContext.h"
 #include "dawn/native/d3d12/D3D12Info.h"
 #include "dawn/native/d3d12/Forward.h"
@@ -44,7 +45,7 @@ class StagingDescriptorAllocator;
     } while (0)
 
 // Definition of backend types
-class Device final : public DeviceBase {
+class Device final : public d3d::Device {
   public:
     static ResultOrError<Ref<Device>> Create(Adapter* adapter,
                                              const DeviceDescriptor* descriptor,
@@ -72,10 +73,6 @@ class Device final : public DeviceBase {
     ResidencyManager* GetResidencyManager() const;
 
     const PlatformFunctions* GetFunctions() const;
-    ComPtr<IDXGIFactory4> GetFactory() const;
-    ComPtr<IDxcLibrary> GetDxcLibrary() const;
-    ComPtr<IDxcCompiler> GetDxcCompiler() const;
-    ComPtr<IDxcValidator> GetDxcValidator() const;
 
     ResultOrError<CommandRecordingContext*> GetPendingCommandContext(
         Device::SubmitMode submitMode = Device::SubmitMode::Normal);
@@ -169,7 +166,11 @@ class Device final : public DeviceBase {
     void SetLabelImpl() override;
 
   private:
-    using DeviceBase::DeviceBase;
+    using Base = d3d::Device;
+
+    Device(AdapterBase* adapter,
+           const DeviceDescriptor* descriptor,
+           const TogglesState& deviceToggles);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
         const BindGroupDescriptor* descriptor) override;
@@ -213,8 +214,6 @@ class Device final : public DeviceBase {
 
     MaybeError CheckDebugLayerAndGenerateErrors();
     void AppendDebugLayerMessages(ErrorData* error) override;
-
-    MaybeError EnsureDXCIfRequired();
 
     MaybeError CreateZeroBuffer();
 
