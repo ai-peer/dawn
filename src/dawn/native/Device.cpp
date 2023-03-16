@@ -1893,7 +1893,6 @@ AsyncTaskManager* DeviceBase::GetAsyncTaskManager() const {
 }
 
 CallbackTaskManager* DeviceBase::GetCallbackTaskManager() const {
-    mMutex->AssertIsLockedByCurrentThread();
     return mCallbackTaskManager.Get();
 }
 
