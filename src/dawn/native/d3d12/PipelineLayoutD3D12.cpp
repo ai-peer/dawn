@@ -24,11 +24,8 @@
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 
-using Microsoft::WRL::ComPtr;
-
 namespace dawn::native::d3d12 {
 namespace {
-
 // Reserve register names for internal use. This registers map to bindings in the shader,
 // but are not directly related to allocation of the root signature.
 // In the root signature, it the index of the root parameter where these registers are
@@ -81,7 +78,14 @@ ResultOrError<Ref<PipelineLayout>> PipelineLayout::Create(
     return layout;
 }
 
+PipelineLayout::PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor)
+    : Base(device, descriptor) {}
+
+PipelineLayout::~PipelineLayout() = default;
+
 MaybeError PipelineLayout::Initialize() {
+    DAWN_TRY(Base::Initialize());
+
     Device* device = ToBackend(GetDevice());
     // Parameters are D3D12_ROOT_PARAMETER_TYPE which is either a root table, constant, or
     // descriptor.
@@ -185,47 +189,16 @@ MaybeError PipelineLayout::Initialize() {
     // NOTE: We should consider delaying root signature creation until we know how many values
     // we need
     renderOrComputeInternalConstants.Constants.Num32BitValues = 3;
-    renderOrComputeInternalConstants.Constants.RegisterSpace =
-        kRenderOrComputeInternalRegisterSpace;
-    renderOrComputeInternalConstants.Constants.ShaderRegister =
-        kRenderOrComputeInternalBaseRegister;
+    renderOrComputeInternalConstants.Constants.RegisterSpace = GetFirstIndexOffsetRegisterSpace();
+    renderOrComputeInternalConstants.Constants.ShaderRegister = GetFirstIndexOffsetShaderRegister();
     mFirstIndexOffsetParameterIndex = rootParameters.size();
     mNumWorkgroupsParameterIndex = rootParameters.size();
     // NOTE: We should consider moving this entry to earlier in the root signature since offsets
     // would need to be updated often
     rootParameters.emplace_back(renderOrComputeInternalConstants);
 
-    // Loops over all of the dynamic storage buffer bindings in the layout and build
-    // a mapping from the binding to the next offset into the root constant array where
-    // that dynamic storage buffer's binding size will be stored. The next register offset
-    // to use is tracked with |dynamicStorageBufferLengthsShaderRegisterOffset|.
-    // This data will be used by shader translation to emit a load from the root constant
-    // array to use as the binding's size in runtime array calculations.
-    // Each bind group's length data is stored contiguously in the root constant array,
-    // so the loop also computes the first register offset for each group where the
-    // data should start.
-    uint32_t dynamicStorageBufferLengthsShaderRegisterOffset = 0;
-    for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
-        const BindGroupLayoutBase* bgl = GetBindGroupLayout(group);
-
-        mDynamicStorageBufferLengthInfo[group].firstRegisterOffset =
-            dynamicStorageBufferLengthsShaderRegisterOffset;
-        mDynamicStorageBufferLengthInfo[group].bindingAndRegisterOffsets.reserve(
-            bgl->GetBindingCountInfo().dynamicStorageBufferCount);
-
-        for (BindingIndex bindingIndex(0); bindingIndex < bgl->GetDynamicBufferCount();
-             ++bindingIndex) {
-            if (bgl->IsStorageBufferBinding(bindingIndex)) {
-                mDynamicStorageBufferLengthInfo[group].bindingAndRegisterOffsets.push_back(
-                    {bgl->GetBindingInfo(bindingIndex).binding,
-                     dynamicStorageBufferLengthsShaderRegisterOffset++});
-            }
-        }
-
-        ASSERT(mDynamicStorageBufferLengthInfo[group].bindingAndRegisterOffsets.size() ==
-               bgl->GetBindingCountInfo().dynamicStorageBufferCount);
-    }
-
+    uint32_t dynamicStorageBufferLengthsShaderRegisterOffset =
+        Base::GetDynamicStorageBufferLengthsShaderRegisterOffset();
     if (dynamicStorageBufferLengthsShaderRegisterOffset > 0) {
         D3D12_ROOT_PARAMETER dynamicStorageBufferLengthConstants{};
         dynamicStorageBufferLengthConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
@@ -234,9 +207,9 @@ MaybeError PipelineLayout::Initialize() {
         dynamicStorageBufferLengthConstants.Constants.Num32BitValues =
             dynamicStorageBufferLengthsShaderRegisterOffset;
         dynamicStorageBufferLengthConstants.Constants.RegisterSpace =
-            kDynamicStorageBufferLengthsRegisterSpace;
+            GetDynamicStorageBufferLengthsRegisterSpace();
         dynamicStorageBufferLengthConstants.Constants.ShaderRegister =
-            kDynamicStorageBufferLengthsBaseRegister;
+            GetDynamicStorageBufferLengthsShaderRegister();
         mDynamicStorageBufferLengthsParameterIndex = rootParameters.size();
         rootParameters.emplace_back(dynamicStorageBufferLengthConstants);
     } else {
@@ -275,7 +248,7 @@ MaybeError PipelineLayout::Initialize() {
 }
 
 void PipelineLayout::DestroyImpl() {
-    PipelineLayoutBase::DestroyImpl();
+    Base::DestroyImpl();
 
     Device* device = ToBackend(GetDevice());
     device->ReferenceUntilUnused(mRootSignature);
@@ -311,11 +284,6 @@ ID3D12RootSignature* PipelineLayout::GetRootSignature() const {
 
 ID3DBlob* PipelineLayout::GetRootSignatureBlob() const {
     return mRootSignatureBlob.Get();
-}
-
-const PipelineLayout::DynamicStorageBufferLengthInfo&
-PipelineLayout::GetDynamicStorageBufferLengthInfo() const {
-    return mDynamicStorageBufferLengthInfo;
 }
 
 uint32_t PipelineLayout::GetDynamicRootParameterIndex(BindGroupIndex group,
