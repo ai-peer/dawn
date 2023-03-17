@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a0a40072_5dd347b2",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-17T01:19:12Z",
+      "side": 1,
+      "message": "Ah, got it. That maybe Ok because copyTextureForBrowser is used internally in blink (We can control the behaviour).",
+      "parentUuid": "2eb8a4d7_f7d88d80",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e8e11e9_2f19e33d",
         "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
