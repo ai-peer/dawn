@@ -16,6 +16,24 @@
       "message": "We could use this enum too instead of hardcoding OSes! https://github.com/KhronosGroup/Vulkan-Headers/blob/65ad768d8603671fc1085fe115019e72a595ced8/include/vulkan/vulkan_core.h#L5634",
       "revId": "9d94ccdf4d456a89e12d1d8754d66d51dce77a18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "218959d4_7f222521",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 492,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-03-17T08:13:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "214dcbb0_15a6828c",
+      "revId": "9d94ccdf4d456a89e12d1d8754d66d51dce77a18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
