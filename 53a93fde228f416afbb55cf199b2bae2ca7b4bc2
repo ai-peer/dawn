@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c1c5103_05dc76d7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-17T06:13:09Z",
+      "side": 1,
+      "message": "\u003e we could return the instance\u0027s manager from GetCallbackTaskManager()\n\nAlso I tried this approach before. And felt it was too error-prone IMO. It\u0027s easy to make mistake and use `mCallbackTaskManager` directly in DeviceBase\u0027s internal code itself (after it is destroyed).\n\nUsing a `Holder` class with `Get` method you need to make sure `device-\u003eIsAlive` is protected by a mutex otherwise there would be a race condition where device\u0027s alive flag is being changed and some thread didn\u0027t see that the device is being destroyed. While this could work, it\u0027s the same as protecting anything Device\u0027s related by a mutex as mentioned above, so I think there is no additional protection this `Holder` class adds compare to just changing the pointer directly in `WillDropLastExternalRef` while it is already protected by a mutex.",
+      "parentUuid": "4c32dc69_eda86ef5",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
