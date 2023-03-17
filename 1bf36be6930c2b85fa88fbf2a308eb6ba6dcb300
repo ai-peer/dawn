@@ -33,6 +33,86 @@
       "message": "Tint side LGTM",
       "revId": "1bf36be6930c2b85fa88fbf2a308eb6ba6dcb300",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d88be0_2469b2f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:43:43Z",
+      "side": 1,
+      "message": "Dawn LGTM with a couple comments.",
+      "revId": "1bf36be6930c2b85fa88fbf2a308eb6ba6dcb300",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa69f280_637a9b50",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:43:43Z",
+      "side": 1,
+      "message": "nit: Having ::detail in places is unfortunate. Maybe it could just be a separate function called IsDoubleValueRepresentableAsF16?",
+      "range": {
+        "startLine": 84,
+        "startChar": 60,
+        "endLine": 84,
+        "endChar": 68
+      },
+      "revId": "1bf36be6930c2b85fa88fbf2a308eb6ba6dcb300",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c33bc57b_b46398c9",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:43:43Z",
+      "side": 1,
+      "message": "nit: why did this change to f16?",
+      "range": {
+        "startLine": 101,
+        "startChar": 24,
+        "endLine": 101,
+        "endChar": 27
+      },
+      "revId": "1bf36be6930c2b85fa88fbf2a308eb6ba6dcb300",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a0d936_ef5b5a48",
+        "filename": "src/dawn/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:43:43Z",
+      "side": 1,
+      "message": "Can we test 65504 exactly and std::nextafter\u003cdouble\u003e(65504, 100000); and likewise for the min tests? This way we test exactly the limit.",
+      "revId": "1bf36be6930c2b85fa88fbf2a308eb6ba6dcb300",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
