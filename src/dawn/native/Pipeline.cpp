@@ -80,6 +80,12 @@ MaybeError ValidateProgrammableStage(DeviceBase* device,
                                 "representable in type (%s)",
                                 constants[i].key, constants[i].value, "f32");
                 break;
+            case EntryPointMetadata::Override::Type::Float16:
+                DAWN_INVALID_IF(!IsDoubleValueRepresentable<::detail::F16>(constants[i].value),
+                                "Pipeline overridable constant \"%s\" with value (%f) is not "
+                                "representable in type (%s)",
+                                constants[i].key, constants[i].value, "f16");
+                break;
             case EntryPointMetadata::Override::Type::Int32:
                 DAWN_INVALID_IF(!IsDoubleValueRepresentable<int32_t>(constants[i].value),
                                 "Pipeline overridable constant \"%s\" with value (%f) is not "

@@ -21,19 +21,46 @@
 
 class ComputePipelineOverridableConstantsValidationTest : public ValidationTest {
   protected:
+    WGPUDevice CreateTestDevice(dawn::native::Adapter dawnAdapter) override {
+        std::vector<const char*> enabledToggles;
+        std::vector<const char*> disabledToggles;
+
+        disabledToggles.push_back("disallow_unsafe_apis");
+
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        deviceTogglesDesc.enabledToggles = enabledToggles.data();
+        deviceTogglesDesc.enabledTogglesCount = enabledToggles.size();
+        deviceTogglesDesc.disabledToggles = disabledToggles.data();
+        deviceTogglesDesc.disabledTogglesCount = disabledToggles.size();
+
+        const wgpu::FeatureName requiredFeatures[] = {wgpu::FeatureName::ShaderF16};
+
+        wgpu::DeviceDescriptor deviceDescriptor;
+        deviceDescriptor.nextInChain = &deviceTogglesDesc;
+        deviceDescriptor.requiredFeatures = requiredFeatures;
+        deviceDescriptor.requiredFeaturesCount = 1;
+
+        return dawnAdapter.CreateDevice(&deviceDescriptor);
+    }
+
     void SetUpShadersWithDefaultValueConstants() {
         computeModule = utils::CreateShaderModule(device, R"(
-override c0: bool = true;      // type: bool
-override c1: bool = false;      // default override
-override c2: f32 = 0.0;         // type: float32
-override c3: f32 = 0.0;         // default override
-override c4: f32 = 4.0;         // default
-override c5: i32 = 0;           // type: int32
-override c6: i32 = 0;           // default override
-override c7: i32 = 7;           // default
-override c8: u32 = 0u;          // type: uint32
-override c9: u32 = 0u;          // default override
-@id(1000) override c10: u32 = 10u;  // default
+enable f16;
+
+override c0: bool = true;            // type: bool
+override c1: bool = false;           // default override
+override c2: f32 = 0.0;              // type: float32
+override c3: f32 = 0.0;              // default override
+override c4: f32 = 4.0;              // default
+override c5: i32 = 0;                // type: int32
+override c6: i32 = 0;                // default override
+override c7: i32 = 7;                // default
+override c8: u32 = 0u;               // type: uint32
+override c9: u32 = 0u;               // default override
+override c10: u32 = 10u;             // default
+override c11: f16 = 0.0h;            // type: float16
+override c12: f16 = 0.0h;            // default override
+@id(1000) override c13: f16 = 4.0h;  // default
 
 @compute @workgroup_size(1) fn main() {
     // make sure the overridable constants are not optimized out
@@ -48,22 +75,30 @@ override c9: u32 = 0u;          // default override
     _ = u32(c8);
     _ = u32(c9);
     _ = u32(c10);
+    _ = u32(c11);
+    _ = u32(c12);
+    _ = u32(c13);
 })");
     }
 
     void SetUpShadersWithUninitializedConstants() {
         computeModule = utils::CreateShaderModule(device, R"(
-override c0: bool;              // type: bool
-override c1: bool = false;      // default override
-override c2: f32;               // type: float32
-override c3: f32 = 0.0;         // default override
-override c4: f32 = 4.0;         // default
-override c5: i32;               // type: int32
-override c6: i32 = 0;           // default override
-override c7: i32 = 7;           // default
-override c8: u32;               // type: uint32
-override c9: u32 = 0u;          // default override
-@id(1000) override c10: u32 = 10u;  // default
+enable f16;
+
+override c0: bool;                   // type: bool
+override c1: bool = false;           // default override
+override c2: f32;                    // type: float32
+override c3: f32 = 0.0;              // default override
+override c4: f32 = 4.0;              // default
+override c5: i32;                    // type: int32
+override c6: i32 = 0;                // default override
+override c7: i32 = 7;                // default
+override c8: u32;                    // type: uint32
+override c9: u32 = 0u;               // default override
+override c10: u32 = 10u;             // default
+override c11: f16;                   // type: float16
+override c12: f16 = 0.0h;            // default override
+@id(1000) override c13: f16 = 4.0h;  // default
 
 @compute @workgroup_size(1) fn main() {
     // make sure the overridable constants are not optimized out
@@ -78,6 +113,9 @@ override c9: u32 = 0u;          // default override
     _ = u32(c8);
     _ = u32(c9);
     _ = u32(c10);
+    _ = u32(c11);
+    _ = u32(c12);
+    _ = u32(c13);
 })");
     }
 
@@ -93,6 +131,11 @@ override c9: u32 = 0u;          // default override
     wgpu::ShaderModule computeModule;
     wgpu::Buffer buffer;
 };
+
+// Basic constants lookup tests
+TEST_F(ComputePipelineOverridableConstantsValidationTest, CreateShaderWithOverride) {
+    SetUpShadersWithUninitializedConstants();
+}
 
 // Basic constants lookup tests
 TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierLookUp) {
@@ -122,7 +165,7 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierLoo
     }
     {
         // Error: c10 already has a constant numeric id specified
-        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c10", 0}};
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c13", 0}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
@@ -152,24 +195,23 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, UninitializedConstants
             {nullptr, "c2", 1},
             // c5 is missing
             {nullptr, "c8", 1},
+            {nullptr, "c11", 1},
         };
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
     {
         // Valid: all constants initialized
         std::vector<wgpu::ConstantEntry> constants{
-            {nullptr, "c0", false},
-            {nullptr, "c2", 1},
-            {nullptr, "c5", 1},
-            {nullptr, "c8", 1},
+            {nullptr, "c0", false}, {nullptr, "c2", 1},  {nullptr, "c5", 1},
+            {nullptr, "c8", 1},     {nullptr, "c11", 1},
         };
         TestCreatePipeline(constants);
     }
     {
         // Error: duplicate initializations
         std::vector<wgpu::ConstantEntry> constants{
-            {nullptr, "c0", false}, {nullptr, "c2", 1}, {nullptr, "c5", 1},
-            {nullptr, "c8", 1},     {nullptr, "c2", 2},
+            {nullptr, "c0", false}, {nullptr, "c2", 1},  {nullptr, "c5", 1},
+            {nullptr, "c8", 1},     {nullptr, "c11", 1}, {nullptr, "c2", 2},
         };
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
@@ -214,7 +256,7 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, ConstantsIdentifierUni
     }
     {
         // Error: constant with numeric id cannot be referenced with variable name
-        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c10", 0}};
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c13", 0}};
         ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }
@@ -290,5 +332,15 @@ TEST_F(ComputePipelineOverridableConstantsValidationTest, OutofRangeValue) {
         std::vector<wgpu::ConstantEntry> constants{
             {nullptr, "c0", static_cast<double>(std::numeric_limits<int32_t>::max()) + 1.0}};
         TestCreatePipeline(constants);
+    }
+    {
+        // Error: f16 out of range
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c11", 65504.001}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
+    }
+    {
+        // Error: f16 out of range (negative)
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c11", -65504.0001}};
+        ASSERT_DEVICE_ERROR(TestCreatePipeline(constants));
     }
 }

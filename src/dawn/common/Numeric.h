@@ -35,6 +35,11 @@ inline constexpr uint32_t u32_alignof() {
     return uint32_t(alignof(T));
 }
 
+struct F16 {
+    static constexpr double lowest = -65504.0;
+    static constexpr double max = 65504.0;
+};
+
 }  // namespace detail
 
 template <typename T>
@@ -59,6 +64,10 @@ bool IsDoubleValueRepresentable(double value) {
         // TODO(crbug.com/1396194): now follows what blink does but may need revisit.
         constexpr double kLowest = static_cast<double>(std::numeric_limits<T>::lowest());
         constexpr double kMax = static_cast<double>(std::numeric_limits<T>::max());
+        return kLowest <= value && value <= kMax;
+    } else if constexpr (std::is_same_v<T, detail::F16>) {
+        constexpr double kLowest = detail::F16::lowest;
+        constexpr double kMax = detail::F16::max;
         return kLowest <= value && value <= kMax;
     } else {
         static_assert(std::is_same_v<T, float> || std::is_integral_v<T>, "Unsupported type");
