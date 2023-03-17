@@ -52,6 +52,81 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "740a2986_842d41e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:36:19Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c164e0_88283131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:36:19Z",
+      "side": 1,
+      "message": "Maybe we can gate on a Mesa version? Jiawei is adding a utility function for that.",
+      "parentUuid": "9d89eaaf_8ef334dd",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5526490e_6839b3e0",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:36:19Z",
+      "side": 1,
+      "message": "We could check for the Mesa Intel driver as well.",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a185adc8_095a2dd4",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:36:19Z",
+      "side": 1,
+      "message": "nit: workaround but the workaround is not to fix the test but for a Mesa bug, can we describe it? Looking at the commit you linked I\u0027m not sure I understand what\u0027s going on.",
+      "range": {
+        "startLine": 743,
+        "startChar": 19,
+        "endLine": 743,
+        "endChar": 29
+      },
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e607122_01dbf706",
