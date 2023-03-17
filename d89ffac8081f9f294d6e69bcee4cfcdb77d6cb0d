@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "d89ffac8081f9f294d6e69bcee4cfcdb77d6cb0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69cb5122_604fd8b0",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 494,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T08:04:15Z",
+      "side": 1,
+      "message": "IMHO we could just rely on the signal above to tell us if we are on Mesa and return false otherwise. It would avoid per-OS logic.",
+      "revId": "d89ffac8081f9f294d6e69bcee4cfcdb77d6cb0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
