@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0849b5f2_4dd70a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-17T07:31:30Z",
+      "side": 1,
+      "message": "Done changing shared_ptr to Ref.",
+      "parentUuid": "77672608_60d3da20",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27c6ba59_03716dd9",
@@ -136,6 +154,30 @@
       "writtenOn": "2023-03-16T21:30:28Z",
       "side": 1,
       "message": "nit: we don\u0027t need this now, and we can replace all uses with `mCallbackTaskManager-\u003eFlush();` (they are all in DeviceBase)",
+      "range": {
+        "startLine": 1816,
+        "startChar": 5,
+        "endLine": 1816,
+        "endChar": 39
+      },
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea69596_50cbf428",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-17T07:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af405785_e6631075",
       "range": {
         "startLine": 1816,
         "startChar": 5,
