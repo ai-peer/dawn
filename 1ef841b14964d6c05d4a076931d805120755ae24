@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb4a5ed7_9033560a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 36
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bcb096b_937c534b",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMConstants.h",
+        "patchSetId": 36
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "nit: dawn uses camelCasing, and typically prefixes constexpr with \"k\".\nSo `kInstanceObjectId`",
+      "range": {
+        "startLine": 17,
+        "startChar": 21,
+        "endLine": 17,
+        "endChar": 40
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fdc1841_e529b80d",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "could this be handled by as_protobufTypeLPM? then it would be the same as the else branch below",
+      "range": {
+        "startLine": 38,
+        "startChar": 10,
+        "endLine": 38,
+        "endChar": 86
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "518475d1_a0261721",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "does this need to handle member.optional?",
+      "range": {
+        "startLine": 106,
+        "startChar": 9,
+        "endLine": 106,
+        "endChar": 43
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3e959f_ced571fc",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "assert that constant_length is 1. If someone adds a fixed-length array, this will probably break",
+      "range": {
+        "startLine": 107,
+        "startChar": 54,
+        "endLine": 107,
+        "endChar": 82
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bcd0b17_3eb53edc",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "nit: would make more sense for this to check for strlen, and remove the strlen check below",
+      "range": {
+        "startLine": 110,
+        "startChar": 12,
+        "endLine": 110,
+        "endChar": 45
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "315d36a9_07a5f9cb",
+        "filename": "generator/templates/dawn/fuzzers/lpmfuzz/dawn_lpm.proto",
+        "patchSetId": 36
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "this is a pointer, not a \"reference\" ?",
+      "range": {
+        "startLine": 133,
+        "startChar": 38,
+        "endLine": 133,
+        "endChar": 44
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c234a96_898bc87f",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 36
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "why are these blocklisted? creating render pipelines and shader modules seems important.\n\ndestroy object seems important too - unless we already have reference+release",
+      "range": {
+        "startLine": 26,
+        "startChar": 8,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "1ef841b14964d6c05d4a076931d805120755ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

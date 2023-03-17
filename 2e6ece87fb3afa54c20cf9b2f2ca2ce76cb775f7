@@ -155,6 +155,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e50b1341_bdadf8e1",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 31
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T21:04:05Z",
+      "side": 1,
+      "message": "that works - perhaps if name.native, load from dawn_lpm.json?",
+      "parentUuid": "bdb100e0_6d4d4152",
+      "revId": "2e6ece87fb3afa54c20cf9b2f2ca2ce76cb775f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "138cf326_1e07b90d",
         "filename": "generator/dawn_json_generator.py",
         "patchSetId": 31
