@@ -67,7 +67,7 @@ Ref<BindGroupLayout> BindGroupLayout::Create(
 BindGroupLayout::BindGroupLayout(Device* device,
                                  const BindGroupLayoutDescriptor* descriptor,
                                  PipelineCompatibilityToken pipelineCompatibilityToken)
-    : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken),
+    : Base(device, descriptor, pipelineCompatibilityToken),
       mDescriptorHeapOffsets(GetBindingCount()),
       mShaderRegisters(GetBindingCount()),
       mCbvUavSrvDescriptorCount(0),
