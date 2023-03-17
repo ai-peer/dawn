@@ -94,6 +94,30 @@
       },
       "revId": "b1b55b5424394297cc15b8849b10f067a4ba34b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dffc73ef_319ad5af",
+        "filename": "src/dawn/native/d3d/DeviceD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T16:40:43Z",
+      "side": 1,
+      "message": "OK - we should leave a TODO to consider factoring this",
+      "parentUuid": "98c1b687_6af467c7",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 1
+      },
+      "revId": "b1b55b5424394297cc15b8849b10f067a4ba34b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
