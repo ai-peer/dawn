@@ -16,6 +16,24 @@
       "message": "How much value do we get by factoring it this way given that d3d11 needs a flat binding model? a lot of the concepts might not be sharable.\n\nEverything is space 0 so the shared code doesn\u0027t really need to know about space for d3d11.\nPerBindGroupDynamicStorageBufferLengthInfo refers to the root constants, but that doesn\u0027t exist in d3d11 - to my knowledge",
       "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca65ea7_453f2ebd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-17T22:45:56Z",
+      "side": 1,
+      "message": "You are right. I changed those method to virtual methods in the d3d::PipelineLayout. So for D3D11 backend, they will just return space(0), and register which could be computed from the pipeline layout.",
+      "parentUuid": "00737272_1cbd77f0",
+      "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
