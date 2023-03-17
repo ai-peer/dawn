@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77672608_60d3da20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-17T05:56:49Z",
+      "side": 1,
+      "message": "What kind of tests do you suggest?\nWe already have a test that:\n- Drop the device\u0027s last external ref.\n- Call MapAsync.\n- Call Instance.ProcessEvents -\u003e the error callback is triggered.\n\nWe also have another test that:\n- Create 2 devices.\n- Instance.ProcessEvents:\n  - Drop 2nd device in 1st device callback.\n\nMultithreading tests are quite tricky to verify, not before we have thread safe API in the next CL. And the easiest way to verify it is having a TSAN bot.",
+      "parentUuid": "3ab6cc58_582003c3",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27c6ba59_03716dd9",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-03-16T22:58:32Z",
       "side": 1,
       "message": "when we replace this pointer, there could be another thread that is doing `GetCallbackTaskManager()-\u003eAddCallbackTask(...)`. That could either race or result in a use-after-free.\n\nwe could return the instance\u0027s manager from GetCallbackTaskManager()? and enforce everything goes though that? If we want to be very strict, you could hide direct access to it.\n\nsomething like?\n```\nclass Holder {\n public:\n  CallbackTaskManager* Get(DeviceBase* device) {\n    if (device-\u003eIsAlive()) {\n      return mManager.Get();\n    } else {\n      return device-\u003eGetAdapter()-\u003eGetInstance()-\u003eGetCallbackTaskManager();\n    }\n  }\n private:\n  Ref\u003cCallbackTaskManager\u003e mManager;\n};\n```",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c32dc69_eda86ef5",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-17T05:56:49Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be possible. In the next CL, `WillDropLastExternalRef` is protected by a mutex. Other API objects\u0027 API methods will also be protected by a mutex. Which means there won\u0027t be any race condition between API Objects\u0027 device related methods and Device\u0027s methods itself.\n\nIf we want to be sure, we can insert an ASSERT in GetCallbackTaskManager() to check whether a mutex is held or not.\n\nThe issue that this CL trying to fix is a race condition between Device\u0027s dtor and Instance::ProcessEvents.",
+      "parentUuid": "27c6ba59_03716dd9",
       "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
