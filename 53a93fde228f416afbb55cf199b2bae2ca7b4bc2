@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca9330a0_2ef57ed4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-17T23:14:54Z",
+      "side": 1,
+      "message": "it\u0027s a race between `WillDropLastExternalRef` and Dawn\u0027s internal threads adding to the callback queue. `CreateComputePipelineAsyncTask::Run` will run on a Dawn internal thread, and then call  device-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask.\n\nI guess we could make that acquire the device mutex as well, but IMO we\u0027re risking deadlock territory there. The eventual multithreading plan will be to have each independent service that needs to be thread-safe be individually synchronized. This could be a good place to start on that.\n\nInstead of acquiring the callback manager\u0027s lock inside one its methods, we could instead acquire a lock to even access the callback manager, and automatically acquire it on the `operator-\u003e() and operator*()`?\n\nIt would look something like `Synchronized\u003cRef\u003cCallbackTaskManager\u003e\u003e manager`\nand doing both:\n`*manager \u003d otherManager;`\nand \n`manager-\u003eAddCallbackTask(...)`\n\nwould grab a temporary lock for the duration of the operation.",
+      "parentUuid": "0c1c5103_05dc76d7",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
