@@ -211,6 +211,24 @@
       "parentUuid": "d7bdb6a6_da8547bc",
       "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cdae50_beb26ef9",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 704,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-17T01:15:26Z",
+      "side": 1,
+      "message": "\u003e Do we have a test that if the naturalSize is larger than the source size things work correctly?\nThat\u0027s the good point, I think I need to add it.\n\n\u003ewhat would even be the correct behavior? Right now we discard? But should we put black instead?\nNo, we don\u0027t discard. That\u0027s the interesting part for why we pass natural size here. In copyTextureForBrowser, we upload scale params here (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CopyTextureForBrowserHelper.cpp;drc\u003d08027c662e35c50d1a08bd59c5ea405b0d337108;l\u003d413). But that sacle is based on natural size and copy size. For example, assume we have natural size larger than video frame size, and copy size equal to natural size, we could still generate correct texcoord in current shader (which I think 0.0, 0,0 for the top-left and 1.0, 1.0 for the bottom-right) and use that texcoord to sample ExternalTexture maps to the video frame origin size. \n\nSo I think we\u0027re doing things like, calculating a scale factor with natural size and copy size but apply the scale factor result in ExternalTexture visible rect by sampling with generated coord.",
+      "parentUuid": "9bbab40b_f151050a",
+      "revId": "51449beaf2dee5931576cae7cf7a0b59174e4883",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
