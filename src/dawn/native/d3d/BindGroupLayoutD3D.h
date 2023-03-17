@@ -12,30 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_FORWARD_H_
-#define SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#ifndef SRC_DAWN_NATIVE_D3D_BINDGROUPLAYOUTD3D_H_
+#define SRC_DAWN_NATIVE_D3D_BINDGROUPLAYOUTD3D_H_
 
-#include "dawn/native/ToBackend.h"
+#include "dawn/native/BindGroupLayout.h"
 
 namespace dawn::native::d3d {
 
-class Adapter;
-class BindGroupLayout;
 class Device;
-class PipelineLayout;
 
-struct D3DBackendTraits {
-    using AdapterType = Adapter;
-    using BindGroupLayoutType = BindGroupLayout;
-    using DeviceType = Device;
-    using PipelineLayoutType = PipelineLayout;
+class BindGroupLayout : public BindGroupLayoutBase {
+  public:
+    BindGroupLayout(Device* device,
+                    const BindGroupLayoutDescriptor* descriptor,
+                    PipelineCompatibilityToken pipelineCompatibilityToken);
+    ~BindGroupLayout() override;
+
+    // The D3D shader register that the Dawn binding index is mapped to by this bind group
+    // layout.
+    virtual uint32_t GetShaderRegister(BindingIndex bindingIndex) const = 0;
 };
-
-template <typename T>
-auto ToBackend(T&& common) -> decltype(ToBackendBase<D3DBackendTraits>(common)) {
-    return ToBackendBase<D3DBackendTraits>(common);
-}
 
 }  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#endif  // SRC_DAWN_NATIVE_D3D_BINDGROUPLAYOUTD3D_H_
