@@ -21,14 +21,14 @@
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_vector.h"
 #include "dawn/native/BindingInfo.h"
-#include "dawn/native/PipelineLayout.h"
+#include "dawn/native/d3d/PipelineLayoutD3D.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 
 class Device;
 
-class PipelineLayout final : public PipelineLayoutBase {
+class PipelineLayout final : public d3d::PipelineLayout {
   public:
     static ResultOrError<Ref<PipelineLayout>> Create(Device* device,
                                                      const PipelineLayoutDescriptor* descriptor);
@@ -39,16 +39,10 @@ class PipelineLayout final : public PipelineLayoutBase {
     // Returns the index of the root parameter reserved for a dynamic buffer binding
     uint32_t GetDynamicRootParameterIndex(BindGroupIndex group, BindingIndex bindingIndex) const;
 
-    uint32_t GetFirstIndexOffsetRegisterSpace() const;
-    uint32_t GetFirstIndexOffsetShaderRegister() const;
     uint32_t GetFirstIndexOffsetParameterIndex() const;
 
-    uint32_t GetNumWorkgroupsRegisterSpace() const;
-    uint32_t GetNumWorkgroupsShaderRegister() const;
     uint32_t GetNumWorkgroupsParameterIndex() const;
 
-    uint32_t GetDynamicStorageBufferLengthsRegisterSpace() const;
-    uint32_t GetDynamicStorageBufferLengthsShaderRegister() const;
     uint32_t GetDynamicStorageBufferLengthsParameterIndex() const;
 
     ID3D12RootSignature* GetRootSignature() const;
@@ -61,32 +55,11 @@ class PipelineLayout final : public PipelineLayoutBase {
 
     ID3D12CommandSignature* GetDrawIndexedIndirectCommandSignatureWithInstanceVertexOffsets();
 
-    struct PerBindGroupDynamicStorageBufferLengthInfo {
-        // First register offset for a bind group's dynamic storage buffer lengths.
-        // This is the index into the array of root constants where this bind group's
-        // lengths start.
-        uint32_t firstRegisterOffset;
-
-        struct BindingAndRegisterOffset {
-            BindingNumber binding;
-            uint32_t registerOffset;
-        };
-        // Associative list of (BindingNumber,registerOffset) pairs, which is passed into
-        // the shader to map the BindingPoint(thisGroup, BindingNumber) to the registerOffset
-        // into the root constant array which holds the dynamic storage buffer lengths.
-        std::vector<BindingAndRegisterOffset> bindingAndRegisterOffsets;
-    };
-
-    // Flat map from bind group index to the list of (BindingNumber,Register) pairs.
-    // Each pair is used in shader translation to
-    using DynamicStorageBufferLengthInfo =
-        ityp::array<BindGroupIndex, PerBindGroupDynamicStorageBufferLengthInfo, kMaxBindGroups>;
-
-    const DynamicStorageBufferLengthInfo& GetDynamicStorageBufferLengthInfo() const;
-
   private:
-    ~PipelineLayout() override = default;
-    using PipelineLayoutBase::PipelineLayoutBase;
+    using Base = d3d::PipelineLayout;
+
+    PipelineLayout(Device* device, const PipelineLayoutDescriptor* descriptor);
+    ~PipelineLayout() override;
     MaybeError Initialize();
     void DestroyImpl() override;
 
@@ -94,7 +67,6 @@ class PipelineLayout final : public PipelineLayoutBase {
     ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mSamplerRootParameterInfo;
     ityp::array<BindGroupIndex, ityp::vector<BindingIndex, uint32_t>, kMaxBindGroups>
         mDynamicRootParameterIndices;
-    DynamicStorageBufferLengthInfo mDynamicStorageBufferLengthInfo;
     uint32_t mFirstIndexOffsetParameterIndex;
     uint32_t mNumWorkgroupsParameterIndex;
     uint32_t mDynamicStorageBufferLengthsParameterIndex;
