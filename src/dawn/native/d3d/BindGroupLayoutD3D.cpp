@@ -12,30 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_D3D_FORWARD_H_
-#define SRC_DAWN_NATIVE_D3D_FORWARD_H_
+#include "dawn/native/d3d/BindGroupLayoutD3D.h"
 
-#include "dawn/native/ToBackend.h"
+#include "dawn/native/d3d/DeviceD3D.h"
 
 namespace dawn::native::d3d {
 
-class Adapter;
-class BindGroupLayout;
-class Device;
-class PipelineLayout;
+BindGroupLayout::BindGroupLayout(Device* device,
+                                 const BindGroupLayoutDescriptor* descriptor,
+                                 PipelineCompatibilityToken pipelineCompatibilityToken)
+    : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken) {}
 
-struct D3DBackendTraits {
-    using AdapterType = Adapter;
-    using BindGroupLayoutType = BindGroupLayout;
-    using DeviceType = Device;
-    using PipelineLayoutType = PipelineLayout;
-};
-
-template <typename T>
-auto ToBackend(T&& common) -> decltype(ToBackendBase<D3DBackendTraits>(common)) {
-    return ToBackendBase<D3DBackendTraits>(common);
-}
+BindGroupLayout::~BindGroupLayout() = default;
 
 }  // namespace dawn::native::d3d
-
-#endif  // SRC_DAWN_NATIVE_D3D_FORWARD_H_
