@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7718bef4_9fd9377c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-03-17T11:31:21Z",
+      "side": 1,
+      "message": "LGTM but I\u0027d like someone else to also review, I\u0027m not at 100% today and could have missed stuff.",
+      "revId": "c8ce665f1bf6a846b457e8de984e8b14db2ee3cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
