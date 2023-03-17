@@ -66,7 +66,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-03-14 02:53:47PM
+# Last rolled: 2023-03-17 09:13:39AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -588,8 +588,6 @@ crbug.com/tint/1878 [ amd-0x67ef dawn-backend-validation ventura ] webgpu:shader
 crbug.com/tint/1878 [ amd-0x67ef dawn-no-backend-validation ventura ] webgpu:shader,execution,expression,call,builtin,min:f32:inputSource="uniform";vectorize=3 [ Failure ]
 crbug.com/tint/1878 [ amd-0x67ef dawn-backend-validation ventura ] webgpu:shader,execution,expression,call,builtin,min:f32:inputSource="uniform";vectorize=4 [ Failure ]
 crbug.com/tint/1878 [ amd-0x67ef dawn-no-backend-validation ventura ] webgpu:shader,execution,expression,call,builtin,min:f32:inputSource="uniform";vectorize=4 [ Failure ]
-
-
 
 ################################################################################
 # untriaged failures
