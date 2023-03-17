@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43d5f53c_1c8cd37c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-17T15:06:41Z",
+      "side": 1,
+      "message": "Thanks for rising to the (annoying) challenge!",
+      "revId": "41cef91a41ad5c912cabd103349bb09f4971401f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa0adf9_7ebe0a62",
+        "filename": "src/tint/reader/wgsl/lexer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 436,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-03-17T15:06:41Z",
+      "side": 1,
+      "message": "Nice. This seems to handle the overflow case.  Cool!",
+      "revId": "41cef91a41ad5c912cabd103349bb09f4971401f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
