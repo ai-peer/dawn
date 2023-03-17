@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d89eaaf_8ef334dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-17T01:07:51Z",
+      "side": 1,
+      "message": "Mesa just confirmed it had been fixed by this commit. Do we still need to add this workaround?\n\nea4de4ad3d13af714db4f7956ed4262eafd6460b is the first new commit\ncommit ea4de4ad3d13af714db4f7956ed4262eafd6460b\nAuthor: Nanley Chery \u003cnanley.g.chery@intel.com\u003e\nDate:   Wed Nov 30 15:02:14 2022 -0800\n\n    anv: Don\u0027t ambiguate for undefined layouts on TGL+\n\n    For Tiger Lake and onward, we generally don\u0027t need to ambiguate the CCS\n    before accessing it. This is safe for two reasons:\n\n    - Tiger Lake and onward treat all CCS values as legal.\n    - We enable compression on all writable image layouts. The CCS will\n      receive all writes and will therefore always be valid.\n\n    When dealing with modifiers, we continue to allow ambiguates in some\n    instances.\n\n    Before this patch, I found ~19.5k ambiguates in Wolfenstein:\n    Youngblood\u0027s Riverside benchmark (note that this includes manually\n    entering the benchmark and exiting the app). With this patch, the number\n    of ambiguates goes down to zero.\n\n    Improves performance of Fallout 4 at 1080p/High settings on Arc A380 by\n    around 22%.\n\n    Reviewed-by: Ivan Briano \u003civan.briano@intel.com\u003e\n    Reviewed-by: Kenneth Graunke \u003ckenneth@whitecape.org\u003e\n    Part-of: \u003chttps://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20118\u003e\n\n src/intel/vulkan/genX_cmd_buffer.c | 37 ++++++++++++++++++++++++++++++++++++-\n 1 file changed, 36 insertions(+), 1 deletion(-)",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e607122_01dbf706",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 6
@@ -48,6 +65,30 @@
       "writtenOn": "2023-03-16T16:52:47Z",
       "side": 1,
       "message": "typo: \"flaky\"",
+      "range": {
+        "startLine": 750,
+        "startChar": 25,
+        "endLine": 750,
+        "endChar": 31
+      },
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41c154b4_d98ebe0b",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-17T01:07:51Z",
+      "side": 1,
+      "message": "Thanks for the catching.",
+      "parentUuid": "5e607122_01dbf706",
       "range": {
         "startLine": 750,
         "startChar": 25,
