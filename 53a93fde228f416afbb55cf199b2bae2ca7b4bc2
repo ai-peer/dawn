@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0148232c_8a8821d7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-18T05:00:54Z",
+      "side": 1,
+      "message": "\u003e Instead of acquiring the callback manager\u0027s lock inside one its methods, we could instead acquire a lock to even access the callback manager\n\nbtw, I don\u0027t think we could remove the callback manager\u0027s internal lock entirely.\nFor separate device\u0027s callback manager, it is fine to have an external lock owned by the device (or the wrapper class `Synchronized` owned by the device) to protect the queue.\n\nBut once the device is destroyed, it has to use instance\u0027s callback manager which is shared between multiple devices. The external lock owned by the device is no longer enough. Unless we share the instance\u0027s queue\u0027s lock with every device from the beginning which somewhat increase callbacks\u0027 contentions between them. Or create \"another lock to protect the lock\".\n\nIf the plan is eventually forwarding all callbacks to instance, and only instance\u0027s processEvents can trigger the callbacks. These approaches seem too convoluted as a near term plan.",
+      "parentUuid": "3d24e5d8_a41f75c7",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
