@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3d24e5d8_a41f75c7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-18T04:08:40Z",
+      "side": 1,
+      "message": "\u003e it\u0027s a race between WillDropLastExternalRef and Dawn\u0027s internal threads adding to the callback queue. CreateComputePipelineAsyncTask::Run will run on a Dawn internal thread, and then call device-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask.\n\nThat makes sense. But I still think it\u0027s not possible to/shoudn\u0027t happen. Because inside `DeviceBase::Destroy()` we wait for all async tasks to complete before proceeding.\n\nAfterwards, any methods that would create async tasks, would have returned a `DeviceLost` error instead. The methods that create async tasks should be originated from public APIs which are synchronized with Device\u0027s methods?\n\nAre there any other cases that async tasks could still be run after the device is destroyed? If there is, I think that would be considered a bug instead of adding overhead just to defend against that. But maybe I miss something.\n\nMaybe I should add some tests to verify async tasks shouldn\u0027t be run after the device is destroyed?",
+      "parentUuid": "ca9330a0_2ef57ed4",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
