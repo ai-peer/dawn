@@ -35,7 +35,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  fn my_func() {
     return;
   }
@@ -57,7 +58,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithParams) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  fn my_func(a : f32, b : i32) {
     return;
   }
@@ -78,7 +80,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  @compute @workgroup_size(2i, 4i, 6i)
   fn my_func() {
     return;
@@ -99,7 +102,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_MustUse) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  @must_use
   fn my_func() -> i32 {
     return 1i;
@@ -122,7 +126,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_WithAttribute_WorkgroupSize_WithIden
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  @compute @workgroup_size(2i, height)
   fn my_func() {
     return;
@@ -149,7 +154,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_EntryPoint_Parameters) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  @fragment
   fn frag_main(@builtin(position) coord : vec4<f32>, @location(1) loc1 : f32) {
   }
@@ -172,7 +178,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_EntryPoint_ReturnValue) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitFunction(func));
+    gen.EmitFunction(func);
+    ASSERT_FALSE(gen.has_error());
     EXPECT_EQ(gen.result(), R"(  @fragment
   fn frag_main() -> @location(1) f32 {
     return 1.0f;
@@ -234,7 +241,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Function_Multiple_EntryPoint_With_Same_Module
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.Generate()) << gen.error();
+    gen.Generate();
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(struct Data {
   d : f32,
 }

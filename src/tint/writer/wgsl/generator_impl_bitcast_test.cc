@@ -29,7 +29,8 @@ TEST_F(WgslGeneratorImplTest, EmitExpression_Bitcast) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, bitcast)) << gen.error();
+    gen.EmitExpression(out, bitcast);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "bitcast<f32>(1i)");
 }
 

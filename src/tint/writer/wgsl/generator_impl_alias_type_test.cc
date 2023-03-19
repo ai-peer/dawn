@@ -23,8 +23,9 @@ TEST_F(WgslGeneratorImplTest, EmitAlias_F32) {
     auto* alias = Alias("a", ty.f32());
 
     GeneratorImpl& gen = Build();
+    gen.EmitTypeDecl(alias);
 
-    ASSERT_TRUE(gen.EmitTypeDecl(alias)) << gen.error();
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(alias a = f32;
 )");
 }
@@ -38,9 +39,11 @@ TEST_F(WgslGeneratorImplTest, EmitTypeDecl_Struct) {
     auto* alias = Alias("B", ty.Of(s));
 
     GeneratorImpl& gen = Build();
+    gen.EmitTypeDecl(s);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
 
-    ASSERT_TRUE(gen.EmitTypeDecl(s)) << gen.error();
-    ASSERT_TRUE(gen.EmitTypeDecl(alias)) << gen.error();
+    gen.EmitTypeDecl(alias);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(struct A {
   a : f32,
   b : i32,
@@ -59,7 +62,8 @@ TEST_F(WgslGeneratorImplTest, EmitAlias_ToStruct) {
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.EmitTypeDecl(alias)) << gen.error();
+    gen.EmitTypeDecl(alias);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(alias B = A;
 )");
 }

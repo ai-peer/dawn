@@ -30,7 +30,8 @@ TEST_F(WgslGeneratorImplTest, EmitExpression_MemberAccessor) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, expr)) << gen.error();
+    gen.EmitExpression(out, expr);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "str.mem");
 }
 
@@ -45,7 +46,8 @@ TEST_F(WgslGeneratorImplTest, EmitExpression_MemberAccessor_OfDref) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, expr)) << gen.error();
+    gen.EmitExpression(out, expr);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "(*(p)).mem");
 }
 

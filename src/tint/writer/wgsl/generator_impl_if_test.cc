@@ -31,7 +31,8 @@ TEST_F(WgslGeneratorImplTest, Emit_If) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(i)) << gen.error();
+    gen.EmitStatement(i);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  if (cond) {
     return;
   }
@@ -54,7 +55,8 @@ TEST_F(WgslGeneratorImplTest, Emit_IfWithElseIf) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(i)) << gen.error();
+    gen.EmitStatement(i);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  if (cond) {
     return;
   } else if (else_cond) {
@@ -77,7 +79,8 @@ TEST_F(WgslGeneratorImplTest, Emit_IfWithElse) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(i)) << gen.error();
+    gen.EmitStatement(i);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  if (cond) {
     return;
   } else {
@@ -105,7 +108,8 @@ TEST_F(WgslGeneratorImplTest, Emit_IfWithMultiple) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(i)) << gen.error();
+    gen.EmitStatement(i);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  if (cond) {
     return;
   } else if (else_cond) {

@@ -29,7 +29,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Return) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(r)) << gen.error();
+    gen.EmitStatement(r);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  return;\n");
 }
 
@@ -41,7 +42,8 @@ TEST_F(WgslGeneratorImplTest, Emit_ReturnWithValue) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(r)) << gen.error();
+    gen.EmitStatement(r);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  return 123i;\n");
 }
 

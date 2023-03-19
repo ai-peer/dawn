@@ -43,7 +43,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Switch) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(s)) << gen.error();
+    gen.EmitStatement(s);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  switch(cond) {
     case 5i: {
       break;
@@ -68,8 +69,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Switch_MixedDefault) {
     GeneratorImpl& gen = Build();
 
     gen.increment_indent();
-
-    ASSERT_TRUE(gen.EmitStatement(s)) << gen.error();
+    gen.EmitStatement(s);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(  switch(cond) {
     case 5i, default: {
       break;
