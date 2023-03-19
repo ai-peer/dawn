@@ -24,7 +24,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Enable) {
 
     GeneratorImpl& gen = Build();
 
-    ASSERT_TRUE(gen.EmitEnable(enable));
+    gen.EmitEnable(enable);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), R"(enable f16;
 )");
 }

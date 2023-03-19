@@ -29,7 +29,8 @@ TEST_F(WgslGeneratorImplTest, Emit_Discard) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.error();
+    gen.EmitStatement(stmt);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  discard;\n");
 }
 

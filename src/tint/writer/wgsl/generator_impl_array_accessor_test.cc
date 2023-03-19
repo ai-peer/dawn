@@ -30,7 +30,8 @@ TEST_F(WgslGeneratorImplTest, IndexAccessor) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, expr)) << gen.error();
+    gen.EmitExpression(out, expr);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "ary[5i]");
 }
 
@@ -44,7 +45,8 @@ TEST_F(WgslGeneratorImplTest, IndexAccessor_OfDref) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, expr)) << gen.error();
+    gen.EmitExpression(out, expr);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "(*(p))[5i]");
 }
 

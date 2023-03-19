@@ -28,7 +28,8 @@ TEST_F(WgslGeneratorImplTest, EmitIdentifierExpression_Single) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, i)) << gen.error();
+    gen.EmitExpression(out, i);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "glsl");
 }
 

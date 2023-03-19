@@ -28,7 +28,8 @@ TEST_F(WgslUnaryOpTest, AddressOf) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, op)) << gen.error();
+    gen.EmitExpression(out, op);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "&(expr)");
 }
 
@@ -40,7 +41,8 @@ TEST_F(WgslUnaryOpTest, Complement) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, op)) << gen.error();
+    gen.EmitExpression(out, op);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "~(expr)");
 }
 
@@ -53,7 +55,8 @@ TEST_F(WgslUnaryOpTest, Indirection) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, op)) << gen.error();
+    gen.EmitExpression(out, op);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "*(expr)");
 }
 
@@ -65,7 +68,8 @@ TEST_F(WgslUnaryOpTest, Not) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, op)) << gen.error();
+    gen.EmitExpression(out, op);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "!(expr)");
 }
 
@@ -77,7 +81,8 @@ TEST_F(WgslUnaryOpTest, Negation) {
     GeneratorImpl& gen = Build();
 
     utils::StringStream out;
-    ASSERT_TRUE(gen.EmitExpression(out, op)) << gen.error();
+    gen.EmitExpression(out, op);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(out.str(), "-(expr)");
 }
 

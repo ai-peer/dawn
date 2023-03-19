@@ -32,7 +32,8 @@ TEST_F(WgslGeneratorImplTest, Emit_VariableDeclStatement) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.error();
+    gen.EmitStatement(stmt);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  var a : f32;\n");
 }
 
@@ -46,7 +47,8 @@ TEST_F(WgslGeneratorImplTest, Emit_VariableDeclStatement_InferredType) {
 
     gen.increment_indent();
 
-    ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.error();
+    gen.EmitStatement(stmt);
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  var a = 123i;\n");
 }
 

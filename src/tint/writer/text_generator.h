@@ -102,6 +102,9 @@ class TextGenerator {
     /// @returns the list of diagnostics raised by the generator.
     const diag::List& Diagnostics() const { return diagnostics_; }
 
+    /// @returns true if the generator produced an error
+    bool has_error() const { return diagnostics_.contains_errors(); }
+
     /// @returns the error
     std::string error() const { return diagnostics_.str(); }
 

@@ -44,9 +44,7 @@ std::string ToString(const Program& program) {
 std::string ToString(const Program& program, utils::VectorRef<const ast::Statement*> stmts) {
     writer::wgsl::GeneratorImpl writer(&program);
     for (const auto* stmt : stmts) {
-        if (!writer.EmitStatement(stmt)) {
-            return "WGSL writer error: " + writer.error();
-        }
+        writer.EmitStatement(stmt);
     }
     return writer.result();
 }
@@ -57,15 +55,11 @@ std::string ToString(const Program& program, const ast::Node* node) {
         node,
         [&](const ast::Expression* expr) {
             utils::StringStream out;
-            if (!writer.EmitExpression(out, expr)) {
-                return "WGSL writer error: " + writer.error();
-            }
+            writer.EmitExpression(out, expr);
             return out.str();
         },
         [&](const ast::Statement* stmt) {
-            if (!writer.EmitStatement(stmt)) {
-                return "WGSL writer error: " + writer.error();
-            }
+            writer.EmitStatement(stmt);
             return writer.result();
         },
         [&](const ast::Identifier* ident) { return program.Symbols().NameFor(ident->symbol); },

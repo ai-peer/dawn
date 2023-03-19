@@ -28,8 +28,9 @@ TEST_F(MslGeneratorImplTest, Emit_Assign) {
     GeneratorImpl& gen = Build();
 
     gen.increment_indent();
+    gen.EmitStatement(assign);
 
-    ASSERT_TRUE(gen.EmitStatement(assign)) << gen.error();
+    ASSERT_FALSE(gen.has_error()) << gen.error();
     EXPECT_EQ(gen.result(), "  lhs = rhs;\n");
 }
 
