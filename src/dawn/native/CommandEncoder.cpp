@@ -890,8 +890,15 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
                 cmd->depthStencilAttachment.view = view;
 
-                cmd->depthStencilAttachment.clearDepth =
-                    descriptor->depthStencilAttachment->depthClearValue;
+                switch (descriptor->depthStencilAttachment->depthLoadOp) {
+                    case wgpu::LoadOp::Clear;
+                        cmd->depthStencilAttachment.clearDepth =
+                            descriptor->depthStencilAttachment->depthClearValue;
+                        case wgpu::LoadOp::Load:
+                        // Set depthClearValue to 0 if it is the load op is not clear.
+                        // The default value NaN may be invalid in the backend.
+                        cmd->depthStencilAttachment.clearDepth = 0.f;
+                }
                 cmd->depthStencilAttachment.clearStencil =
                     descriptor->depthStencilAttachment->stencilClearValue;
 
