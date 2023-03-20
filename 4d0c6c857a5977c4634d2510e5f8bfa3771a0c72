@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aa9f3ccc_b6f575d0",
+        "filename": "src/tint/writer/text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-20T11:51:26Z",
+      "side": 1,
+      "message": "I can see getting rid of `error` in a followup, but removing `has_error` makes it less clear what\u0027s being checked. the `gen.has_error()` is a lot more obvious then getting the diagnostic and doing work on it.",
+      "parentUuid": "9861a009_3b0b61d2",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "870dc3db_b9d9e67e",
         "filename": "src/tint/writer/wgsl/generator_impl.cc",
         "patchSetId": 2
@@ -54,6 +78,24 @@
       "writtenOn": "2023-03-20T09:37:55Z",
       "side": 1,
       "message": "Please can we add some helpers for emitting errors / ICEs that emits an actual `\u003cerror\u003e` string in the output?\nIt\u0027s not always obvious where the input error maps to the output error.\n\nIt also prevents people ignoring the diagnostics and actually attempting to use the emitted output.\n\nBonus points if you can have the diagnostics add a `note:` to point to the **output** error location (requires a second pass on the final rendered output, as output for some writers is non-sequential)\n\nCan be done as a followup.",
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "429a98b7_85cb0ee9",
+        "filename": "src/tint/writer/wgsl/generator_impl.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-20T11:51:26Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/tint/issues/detail?id\u003d1882",
+      "parentUuid": "870dc3db_b9d9e67e",
       "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +113,30 @@
       "writtenOn": "2023-03-20T09:37:55Z",
       "side": 1,
       "message": "`EXPECT_THAT(gen.Diagnostics(), IsEmpty());`",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ede437d_e583c4cd",
+        "filename": "src/tint/writer/wgsl/generator_impl_alias_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-03-20T11:51:26Z",
+      "side": 1,
+      "message": "That sees less clear then checking if the generator has an error.",
+      "parentUuid": "95a2284d_52f25c7a",
       "range": {
         "startLine": 28,
         "startChar": 4,
