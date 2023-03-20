@@ -52,6 +52,24 @@
       "parentUuid": "0ca65ea7_453f2ebd",
       "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fd1b9e_967c320e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-20T15:39:02Z",
+      "side": 1,
+      "message": "Tint expects Dawn to bind a uniform buffer at `arrayLengthFromUniform.ubo_binding` which stores an array of buffer sizes for the dynamically bound buffers.\n\n`arrayLengthFromUniform.bindpoint_to_size_index` is a mapping of the bind points (group, binding) to the index into that buffer where there size should be stored.\n\nDawn needs to prepare this uniform buffer and bind it to `ubo_binding`.\n\nThis ubo_binding can (probably?) be the same uniform buffer we store all the other constants in the d3d11 backend (num workgroups, first index/offset, etc.) since we don\u0027t have root constants (crbug.com/dawn/1716).\n\nThe absence of root constants in d3d11 makes me think that the common d3d::BindGroupLayout and d3d::PipelineLayout base classes are unnecessary or even misleading since the binding models are fairly different. Since it appears only a small portion is shared, it could be better to factor out the code to build the mapping of bind points to index-into-uniform-buffer as a helper function somewhere.",
+      "parentUuid": "36801477_facce0a2",
+      "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
