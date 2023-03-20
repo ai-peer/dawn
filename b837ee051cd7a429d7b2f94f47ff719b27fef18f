@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb71a01_08995277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-20T08:50:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05c164e0_88283131",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5526490e_6839b3e0",
@@ -104,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0bee65d_8e8423f6",
+        "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-20T08:50:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5526490e_6839b3e0",
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a185adc8_095a2dd4",
@@ -117,6 +153,30 @@
       "writtenOn": "2023-03-17T11:36:19Z",
       "side": 1,
       "message": "nit: workaround but the workaround is not to fix the test but for a Mesa bug, can we describe it? Looking at the commit you linked I\u0027m not sure I understand what\u0027s going on.",
+      "range": {
+        "startLine": 743,
+        "startChar": 19,
+        "endLine": 743,
+        "endChar": 29
+      },
+      "revId": "b837ee051cd7a429d7b2f94f47ff719b27fef18f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2982cd54_e5c2c6e3",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-20T08:50:15Z",
+      "side": 1,
+      "message": "Thanks for the catching.\nDone!",
+      "parentUuid": "a185adc8_095a2dd4",
       "range": {
         "startLine": 743,
         "startChar": 19,
