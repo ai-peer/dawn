@@ -16,6 +16,23 @@
       "message": "Fixes the tests. See \"unexpected passes\" https://ci.chromium.org/ui/p/chromium/builders/try/linux-dawn-rel/21049/test-results?sortby\u003d\u0026groupby\u003d\u0026q\u003dID%3Adepth_clip_clamp",
       "revId": "eabb42497bd56513ac3878b5fb6c8b886a54aaed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e477a60b_91cbca06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-03-20T21:20:12Z",
+      "side": 1,
+      "message": "LGTM with offline discussion",
+      "revId": "eabb42497bd56513ac3878b5fb6c8b886a54aaed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
