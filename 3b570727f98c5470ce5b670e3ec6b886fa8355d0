@@ -70,6 +70,24 @@
       "parentUuid": "36801477_facce0a2",
       "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77b2674e_379f2f9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-03-20T22:33:42Z",
+      "side": 1,
+      "message": "I would like to use the same ShaderModule class for D3D11 and D3D12 for now. So I plan to use one built in constant per buffer. So we have to have PipelineLayout base class to provide register space and shader register for them. For the first workable d3d11 backend, I would like to avoid big changes in tint for now. We can improve the tint and d3d11 backend to have all constants in one buffer after we have a workable d3d11 implementation.",
+      "parentUuid": "67fd1b9e_967c320e",
+      "revId": "3b570727f98c5470ce5b670e3ec6b886fa8355d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
