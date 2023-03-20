@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "285f5281_15a8756c",
+        "filename": "src/tint/writer/text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T12:50:54Z",
+      "side": 1,
+      "message": "\u003e but removing `has_error` makes it less clear what\u0027s being checked\n\nHow so? Adding multiple ways to access the same data is an exercise in obfuscation. The only argument for it is to reduce the amount of boilerplate, but I\u0027ve already shown that using `EXPECT_THAT` is actually *less code* than using this accessor and `\u003c\u003c`\u0027ing in the error message.",
+      "parentUuid": "aa9f3ccc_b6f575d0",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "870dc3db_b9d9e67e",
         "filename": "src/tint/writer/wgsl/generator_impl.cc",
         "patchSetId": 2
@@ -137,6 +161,30 @@
       "side": 1,
       "message": "That sees less clear then checking if the generator has an error.",
       "parentUuid": "95a2284d_52f25c7a",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce00641_9470f469",
+        "filename": "src/tint/writer/wgsl/generator_impl_alias_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T12:50:54Z",
+      "side": 1,
+      "message": "How so? It also catches warnings, the gmock output shows you exactly what was in the container, and the same pattern could be used to check for expected errors.\n\nWe have a tendency of hand-rolling container checks, and the `EXPECT_THAT` style checking produces clearer output, and is often much cleaner when writing tests. I\u0027d like us to move more towards using these, where possible.",
+      "parentUuid": "8ede437d_e583c4cd",
       "range": {
         "startLine": 28,
         "startChar": 4,
