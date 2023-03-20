@@ -115,6 +115,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e86a2d5d_9120b8b6",
+        "filename": "src/tint/writer/text_generator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T13:36:43Z",
+      "side": 1,
+      "message": "\u003e The diagnostic is an implmenetation detail of how the generator works.\n\nI\u0027m picking on this because this exact thing caused bugs before in the past, where the \u0027helpers\u0027 pointed at one thing, and errors were being placed into another thing.\n\nYou\u0027re arguing that this is an implementation detail, but it\u0027s currently a short-hand for `Diagnostics().contains_errors()`. Either:\n* your argument is based on some hypothetical that we might some day have some other, extra state for errors - in which case we\u0027re heading towards another dual-error state bug\n* or your argument is that it\u0027s convenient short-hand for something longer. I\u0027d like to see an example of where you want to know whether there\u0027s an error, without actually wanting to use the error string(s).",
+      "parentUuid": "a806487b_de1c2578",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 0
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "870dc3db_b9d9e67e",
         "filename": "src/tint/writer/wgsl/generator_impl.cc",
         "patchSetId": 2
@@ -233,6 +257,30 @@
       "side": 1,
       "message": "It\u0027s less clear, at least to me, because it obscures what is being tested. I want to know if the generator has an error, not that diagnostics are empty. That\u0027s an implementation details.",
       "parentUuid": "dce00641_9470f469",
+      "range": {
+        "startLine": 28,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 49
+      },
+      "revId": "4d0c6c857a5977c4634d2510e5f8bfa3771a0c72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506cb547_760de929",
+        "filename": "src/tint/writer/wgsl/generator_impl_alias_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T13:36:43Z",
+      "side": 1,
+      "message": "These tests are for implementation detail. We\u0027re calling implementation-detail methods.\n\nThe public interface for all of this is `Program + Options` -\u003e `Binary/String + Diagnostics`. That\u0027s the contract. The public API has no internal state.",
+      "parentUuid": "5985e447_81661b96",
       "range": {
         "startLine": 28,
         "startChar": 4,
