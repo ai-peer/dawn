@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2578a2b2_ef6e4f00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T19:20:14Z",
+      "side": 1,
+      "message": "+2, but please can we have a new end2end test for the associated bug?",
+      "revId": "4624eec012a71a28a6a6666d4b8b5d11f23a9551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10a254f1_556d6248",
+        "filename": "src/tint/writer/msl/generator_impl_variable_decl_statement_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-03-20T19:20:14Z",
+      "side": 1,
+      "message": "`R(\"` would be more readable.",
+      "range": {
+        "startLine": 531,
+        "startChar": 26,
+        "endLine": 531,
+        "endChar": 27
+      },
+      "revId": "4624eec012a71a28a6a6666d4b8b5d11f23a9551",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
