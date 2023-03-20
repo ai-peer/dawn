@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bda88e09_aad40470",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-20T15:29:48Z",
+      "side": 1,
+      "message": "got it - I missed that we also wait for completion of all async tasks in WillDropLastExternalRef. So for now, this should be fine and not race.\nIn the future, I still think we\u0027re going to add some kind of synchronization here since it\u0027s not safe to rely on the invariant that async tasks always work this way.\n \nyes, we should add tests, or double-check tests exist for async pipeline creation, then dropping the last device ref.",
+      "parentUuid": "0148232c_8a8821d7",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af405785_e6631075",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 1
