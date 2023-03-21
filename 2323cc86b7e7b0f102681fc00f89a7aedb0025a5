@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a8b7870_3facfd79",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-21T07:14:04Z",
+      "side": 1,
+      "message": "In short words: Adapters report supported feature based on adapter toggles state, but validate device required features based on required device toggles state.",
+      "parentUuid": "170cab51_92fac26d",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b0c7dd_5999f53c",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
