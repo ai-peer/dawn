@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49589bd3_59b9e1c0",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-21T02:04:58Z",
+      "side": 1,
+      "message": "Thanks.\nMaybe `VulkanNoIntelGen12CCSAmbiguate`? \n`VulkanClearTextureOnCreation` seems to literally describe what the toogle does in Dawn. However, I just found this workaround, but still cannot explain clearly why it can work around that driver bug. Likely this same workaround can also work for other driver bugs. In this sense, we\u0027d better not make it too specific to a driver bug. I am okay either way, just kind of unsure.",
+      "parentUuid": "feee16e7_ca9887ef",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a5dc3e8_be616769",
         "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
         "patchSetId": 5
