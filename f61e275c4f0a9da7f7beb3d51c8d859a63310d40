@@ -16,6 +16,24 @@
       "message": "we only use DAWN_ABORT_ON_ASSERT when fuzzing, so this would also disable the tests on our CI/CQ\n\nIn Chrome debug builds, just DAWN_ENABLE_ASSERTS still makes crashes.\n\nI guess google3 doesn\u0027t crash for Dawn\u0027s normal assert?\n\nalternative could be to build dawn_end2end_tests with DAWN_ABORT_ON_ASSERT in google3",
       "revId": "f61e275c4f0a9da7f7beb3d51c8d859a63310d40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bbc1411_273d05de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-03-21T21:27:30Z",
+      "side": 1,
+      "message": "Yeah, I\u0027ve completely misunderstood the problem. Thanks for the careful review! I have the right fix on the google3 side.",
+      "parentUuid": "47a55001_137c1f0f",
+      "revId": "f61e275c4f0a9da7f7beb3d51c8d859a63310d40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
