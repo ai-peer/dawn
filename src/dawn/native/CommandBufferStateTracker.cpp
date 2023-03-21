@@ -544,8 +544,8 @@ void CommandBufferStateTracker::SetIndexBuffer(wgpu::IndexFormat format, uint64_
     mIndexBufferSize = size;
 }
 
-void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot, uint64_t size) {
-    mVertexBufferSlotsUsed.set(slot);
+void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot, bool isUsed, uint64_t size) {
+    mVertexBufferSlotsUsed.set(slot, isUsed);
     mVertexBufferSizes[slot] = size;
 }
 

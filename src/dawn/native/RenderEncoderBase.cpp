@@ -362,31 +362,37 @@ void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(buffer));
-                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex));
-
                 DAWN_INVALID_IF(slot >= kMaxVertexBuffers,
                                 "Vertex buffer slot (%u) is larger the maximum (%u)", slot,
                                 kMaxVertexBuffers - 1);
 
-                DAWN_INVALID_IF(offset % 4 != 0, "Vertex buffer offset (%u) is not a multiple of 4",
-                                offset);
-
-                uint64_t bufferSize = buffer->GetSize();
-                DAWN_INVALID_IF(offset > bufferSize,
-                                "Vertex buffer offset (%u) is larger than the size (%u) of %s.",
-                                offset, bufferSize, buffer);
-
-                uint64_t remainingSize = bufferSize - offset;
-
-                if (size == wgpu::kWholeSize) {
-                    size = remainingSize;
+                if (buffer == nullptr) {
+                    DAWN_INVALID_IF(offset != 0, "Offset (%u) must be 0 if buffer is null", offset);
+                    DAWN_INVALID_IF(
+                        size != 0 && size != wgpu::kWholeSize,
+                        "Size (%u) must be either 0 or wgpu::kWholeSize if buffer is null", size);
                 } else {
-                    DAWN_INVALID_IF(size > remainingSize,
-                                    "Vertex buffer range (offset: %u, size: %u) doesn't fit in "
-                                    "the size (%u) "
-                                    "of %s.",
-                                    offset, size, bufferSize, buffer);
+                    DAWN_TRY(GetDevice()->ValidateObject(buffer));
+                    DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex));
+                    DAWN_INVALID_IF(offset % 4 != 0,
+                                    "Vertex buffer offset (%u) is not a multiple of 4", offset);
+
+                    uint64_t bufferSize = buffer->GetSize();
+                    DAWN_INVALID_IF(offset > bufferSize,
+                                    "Vertex buffer offset (%u) is larger than the size (%u) of %s.",
+                                    offset, bufferSize, buffer);
+
+                    uint64_t remainingSize = bufferSize - offset;
+
+                    if (size == wgpu::kWholeSize) {
+                        size = remainingSize;
+                    } else {
+                        DAWN_INVALID_IF(size > remainingSize,
+                                        "Vertex buffer range (offset: %u, size: %u) doesn't fit in "
+                                        "the size (%u) "
+                                        "of %s.",
+                                        offset, size, bufferSize, buffer);
+                    }
                 }
             } else {
                 if (size == wgpu::kWholeSize) {
@@ -395,17 +401,20 @@ void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
                 }
             }
 
-            mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), size);
+            if (buffer == nullptr) {
+                mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), false, 0);
+            } else {
+                mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), true, size);
 
-            SetVertexBufferCmd* cmd =
-                allocator->Allocate<SetVertexBufferCmd>(Command::SetVertexBuffer);
-            cmd->slot = VertexBufferSlot(static_cast<uint8_t>(slot));
-            cmd->buffer = buffer;
-            cmd->offset = offset;
-            cmd->size = size;
+                SetVertexBufferCmd* cmd =
+                    allocator->Allocate<SetVertexBufferCmd>(Command::SetVertexBuffer);
+                cmd->slot = VertexBufferSlot(static_cast<uint8_t>(slot));
+                cmd->buffer = buffer;
+                cmd->offset = offset;
+                cmd->size = size;
 
-            mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Vertex);
-
+                mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Vertex);
+            }
             return {};
         },
         "encoding %s.SetVertexBuffer(%u, %s, %u, %u).", this, slot, buffer, offset, size);
