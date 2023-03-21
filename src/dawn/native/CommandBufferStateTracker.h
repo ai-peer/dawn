@@ -53,7 +53,7 @@ class CommandBufferStateTracker {
                       uint32_t dynamicOffsetCount,
                       const uint32_t* dynamicOffsets);
     void SetIndexBuffer(wgpu::IndexFormat format, uint64_t size);
-    void SetVertexBuffer(VertexBufferSlot slot, uint64_t size);
+    void SetVertexBuffer(VertexBufferSlot slot, bool isUsed, uint64_t size);
 
     static constexpr size_t kNumAspects = 4;
     using ValidationAspects = std::bitset<kNumAspects>;
