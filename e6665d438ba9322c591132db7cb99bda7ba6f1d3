@@ -55,6 +55,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "753daa44_fe73ca82",
+        "filename": "src/dawn/native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-03-21T21:32:53Z",
+      "side": 1,
+      "message": "kWholeSize is also allowed (the spec considers the \"whole size\" of a null buffer to be 0).",
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5414cf66_ce9a0eb2",
         "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
         "patchSetId": 1
