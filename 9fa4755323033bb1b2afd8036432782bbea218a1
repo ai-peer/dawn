@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d6782d8_b5b331d9",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-21T05:16:05Z",
+      "side": 1,
+      "message": "it describes what it does, but it doesn\u0027t convey what kinds of textures it affects. I don\u0027t really know what CCS ambiguates means, but at least it indicates it\u0027s not all textures.\n\nVulkanClearGen12TextureWithCCSAmbiguateOnCreation?\n\n\"For Tiger Lake and onward, we generally don\u0027t need to ambiguate the CCS\" implies there is no ccs ambiguate on gen12, so the toggle doesn\u0027t take affect",
+      "parentUuid": "49589bd3_59b9e1c0",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a5dc3e8_be616769",
         "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
         "patchSetId": 5
