@@ -71,6 +71,7 @@ type rollerFlags struct {
 	force    bool // Create a new roll, even if CTS is up to date
 	rebuild  bool // Rebuild the expectations file from scratch
 	preserve bool // If false, abandon past roll changes
+	gen      bool // Only generate auxiliary files for the CTS locally
 }
 
 type cmd struct {
@@ -97,6 +98,7 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 	flag.BoolVar(&c.flags.force, "force", false, "create a new roll, even if CTS is up to date")
 	flag.BoolVar(&c.flags.rebuild, "rebuild", false, "rebuild the expectation file from scratch")
 	flag.BoolVar(&c.flags.preserve, "preserve", false, "do not abandon existing rolls")
+	flag.BoolVar(&c.flags.gen, "gen", false, "only generate auxiliary CTS files")
 
 	return nil, nil
 }
@@ -127,7 +129,8 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 		return err
 	}
 	defer os.RemoveAll(tmpDir)
-	ctsDir := filepath.Join(tmpDir, "cts")
+	// ctsDir := filepath.Join(tmpDir, "cts")
+	ctsDir := "third_party/webgpu-cts"
 
 	// Create the various service clients
 	git, err := git.New(c.flags.gitPath)
@@ -168,6 +171,23 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 		dawn:     dawn,
 		ctsDir:   ctsDir,
 	}
+	// Hack to generate files for now.
+	if c.flags.gen {
+		generatedFiles, err := r.generateFiles(ctx)
+		if err != nil {
+			return err
+		}
+		for path, content := range generatedFiles {
+			file, err := os.Create(path)
+			if err != nil {
+				return err
+			}
+			defer file.Close()
+			file.WriteString(content)
+		}
+		return nil
+	}
+
 	return r.roll(ctx)
 }
 
@@ -614,15 +634,15 @@ func (r *roller) checkout(project, dir, host, hash string) (*git.Repository, err
 // * webtest file sources
 func (r *roller) generateFiles(ctx context.Context) (map[string]string, error) {
 	// Run 'npm ci' to fetch modules and tsc
-	{
-		log.Printf("fetching npm modules with 'npm ci'...")
-		cmd := exec.CommandContext(ctx, r.flags.npmPath, "ci")
-		cmd.Dir = r.ctsDir
-		out, err := cmd.CombinedOutput()
-		if err != nil {
-			return nil, fmt.Errorf("failed to run 'npm ci': %w\n%v", err, string(out))
-		}
-	}
+	// {
+	// 	log.Printf("fetching npm modules with 'npm ci'...")
+	// 	cmd := exec.CommandContext(ctx, r.flags.npmPath, "ci")
+	// 	cmd.Dir = r.ctsDir
+	// 	out, err := cmd.CombinedOutput()
+	// 	if err != nil {
+	// 		return nil, fmt.Errorf("failed to run 'npm ci': %w\n%v", err, string(out))
+	// 	}
+	// }
 
 	log.Printf("generating files for changelist...")
 
@@ -719,7 +739,8 @@ func (r *roller) genTSDepList(ctx context.Context) (string, error) {
 	// Note: we're ignoring the error for this as tsc typically returns status 2.
 	out, _ := cmd.Output()
 
-	prefix := filepath.ToSlash(r.ctsDir) + "/"
+	absPath, _ := filepath.Abs(r.ctsDir)
+	prefix := filepath.ToSlash(absPath) + "/"
 
 	deps := []string{}
 	for _, line := range strings.Split(string(out), "\n") {
