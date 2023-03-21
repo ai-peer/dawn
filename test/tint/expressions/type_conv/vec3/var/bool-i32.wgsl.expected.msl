@@ -1,11 +1,8 @@
 #include <metal_stdlib>
 
 using namespace metal;
-struct tint_private_vars_struct {
-  bool3 u;
-};
-
-void f(thread tint_private_vars_struct* const tint_private_vars) {
-  int3 const v = int3((*(tint_private_vars)).u);
+void f() {
+  thread bool3 tint_symbol = bool3(true);
+  int3 const v = int3(tint_symbol);
 }
 

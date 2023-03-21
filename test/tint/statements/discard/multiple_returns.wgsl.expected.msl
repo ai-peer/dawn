@@ -1,27 +1,22 @@
 #include <metal_stdlib>
 
 using namespace metal;
-struct tint_private_vars_struct {
-  bool tint_discarded;
-};
-
-fragment void tint_symbol(device int* tint_symbol_1 [[buffer(0)]], device float* tint_symbol_2 [[buffer(1)]]) {
-  thread tint_private_vars_struct tint_private_vars = {};
-  tint_private_vars.tint_discarded = false;
+fragment void tint_symbol(device int* tint_symbol_1 [[buffer(0)]], device float* tint_symbol_3 [[buffer(1)]]) {
+  thread bool tint_symbol_2 = false;
   if ((*(tint_symbol_1) < 0)) {
-    tint_private_vars.tint_discarded = true;
+    tint_symbol_2 = true;
   }
-  if (!(tint_private_vars.tint_discarded)) {
-    *(tint_symbol_2) = dfdx(1.0f);
+  if (!(tint_symbol_2)) {
+    *(tint_symbol_3) = dfdx(1.0f);
   }
-  if ((*(tint_symbol_2) < 0.0f)) {
+  if ((*(tint_symbol_3) < 0.0f)) {
     int i = 0;
     while (true) {
-      if ((*(tint_symbol_2) > float(i))) {
-        if (!(tint_private_vars.tint_discarded)) {
-          *(tint_symbol_2) = float(i);
+      if ((*(tint_symbol_3) > float(i))) {
+        if (!(tint_symbol_2)) {
+          *(tint_symbol_3) = float(i);
         }
-        if (tint_private_vars.tint_discarded) {
+        if (tint_symbol_2) {
           discard_fragment();
         }
         return;
@@ -31,12 +26,12 @@ fragment void tint_symbol(device int* tint_symbol_1 [[buffer(0)]], device float*
         if ((i == 5)) { break; }
       }
     }
-    if (tint_private_vars.tint_discarded) {
+    if (tint_symbol_2) {
       discard_fragment();
     }
     return;
   }
-  if (tint_private_vars.tint_discarded) {
+  if (tint_symbol_2) {
     discard_fragment();
   }
   return;
