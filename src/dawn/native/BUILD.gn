@@ -695,6 +695,8 @@ source_set("sources") {
       "vulkan/VulkanInfo.h",
       "vulkan/external_memory/MemoryService.cpp",
       "vulkan/external_memory/MemoryService.h",
+      "vulkan/external_memory/ServiceImplementation.cpp",
+      "vulkan/external_memory/ServiceImplementation.h",
       "vulkan/external_semaphore/SemaphoreService.cpp",
       "vulkan/external_semaphore/SemaphoreService.h",
       "vulkan/external_semaphore/ServiceImplementation.cpp",
@@ -706,24 +708,33 @@ source_set("sources") {
         "vulkan/external_semaphore/ServiceImplementationFD.cpp",
         "vulkan/external_semaphore/ServiceImplementationFD.h",
       ]
+      if (is_android) {
+        sources += [
+          "vulkan/external_memory/ServiceImplementationAHardwareBuffer.cpp",
+          "vulkan/external_memory/ServiceImplementationAHardwareBuffer.h",
+        ]
+      } else if (is_chromeos) {
+        sources += [
+          "vulkan/external_memory/ServiceImplementationDmaBuf.cpp",
+          "vulkan/external_memory/ServiceImplementationDmaBuf.h",
+        ]
+      } else if (is_linux) {
+        sources += [
+          "vulkan/external_memory/ServiceImplementationDmaBuf.cpp",
+          "vulkan/external_memory/ServiceImplementationDmaBuf.h",
+          "vulkan/external_memory/ServiceImplementationOpaqueFD.cpp",
+          "vulkan/external_memory/ServiceImplementationOpaqueFD.h",
+        ]
+      }
     } else if (is_fuchsia) {
       sources += [
+        "vulkan/external_memory/ServiceImplementationZicronHandle.cpp",
+        "vulkan/external_memory/ServiceImplementationZicronHandle.h",
         "vulkan/external_semaphore/ServiceImplementationZirconHandle.cpp",
         "vulkan/external_semaphore/ServiceImplementationZirconHandle.h",
       ]
     }
 
-    if (is_chromeos) {
-      sources += [ "vulkan/external_memory/MemoryServiceDmaBuf.cpp" ]
-    } else if (is_linux) {
-      sources += [ "vulkan/external_memory/MemoryServiceOpaqueFD.cpp" ]
-    } else if (is_fuchsia) {
-      sources += [ "vulkan/external_memory/MemoryServiceZirconHandle.cpp" ]
-    } else if (is_android) {
-      sources += [ "vulkan/external_memory/MemoryServiceAHardwareBuffer.cpp" ]
-    } else {
-      sources += [ "vulkan/external_memory/MemoryServiceNull.cpp" ]
-    }
     if (build_with_chromium && is_fuchsia) {
       # Necessary to ensure that the Vulkan libraries will be in the
       # final Fuchsia package.
