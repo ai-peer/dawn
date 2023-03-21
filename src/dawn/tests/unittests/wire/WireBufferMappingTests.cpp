@@ -819,7 +819,7 @@ TEST_F(WireBufferMappingTests, GetMapState) {
     }
 }
 
-#if defined(DAWN_ENABLE_ASSERTS)
+#if defined(DAWN_ENABLE_ASSERTS) and defined(DAWN_ABORT_ON_ASSERT)
 static void ToMockBufferMapCallbackWithAssertErrorRequest(WGPUBufferMapAsyncStatus status,
                                                           void* userdata) {
     WGPUBuffer* buffer = reinterpret_cast<WGPUBuffer*>(userdata);
