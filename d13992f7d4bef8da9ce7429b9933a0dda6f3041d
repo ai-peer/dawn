@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0961fcf5_49c3c0f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-21T06:03:34Z",
+      "side": 1,
+      "message": "According to comments in https://github.com/gpuweb/gpuweb/pull/3960, I think we\u0027ll use natural size as source size for CopyEI2T.\nAddress some comments, pls take a look again, thanks!",
+      "revId": "d13992f7d4bef8da9ce7429b9933a0dda6f3041d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
