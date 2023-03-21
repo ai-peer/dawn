@@ -213,6 +213,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a63b2a68_9490d016",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-03-21T21:06:34Z",
+      "side": 1,
+      "message": "Done.\n\nThere are already existing tests for async pipeline creation, then dropping the last device ref (in `DeviceLifetimeTests`).\n\nHowever, since those async tasks might be too fast to verify that they won\u0027t extend to post device\u0027s dropping time, I have created new unittests that simulate long running async tasks and verify that dropping device should wait for them to finish.",
+      "parentUuid": "bda88e09_aad40470",
+      "revId": "53a93fde228f416afbb55cf199b2bae2ca7b4bc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af405785_e6631075",
