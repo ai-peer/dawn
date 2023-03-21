@@ -19,8 +19,8 @@
 
 #include "dawn/native/Blob.h"
 #include "dawn/native/Serializable.h"
-#include "dawn/native/d3d/d3d_platform.h"
 #include "dawn/native/d3d/D3DCompilationRequest.h"
+#include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d {
 
@@ -33,7 +33,7 @@ namespace dawn::native::d3d {
 // information used to emulate vertex/instance index starts. It also holds the `hlslSource` for the
 // shader compilation, which is only transiently available during Compile, and cleared before it
 // returns. It is not written to or loaded from the cache unless Toggle dump_shaders is true.
-DAWN_SERIALIZABLE(struct, CompiledShader, COMPILED_SHADER_MEMBERS) {
+DAWN_SERIALIZABLE(struct, CompiledShader, COMPILED_SHADER_MEMBERS){
     // D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
 };
 #undef COMPILED_SHADER_MEMBERS
