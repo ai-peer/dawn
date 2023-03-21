@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a740cb5_7eabc59f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-03-21T18:13:49Z",
+      "side": 1,
+      "message": "It seems that Kai\u0027s spec change at https://github.com/gpuweb/gpuweb/pull/3938 is in good shape. Here comes the change in Dawn to unbind vertex buffer, with a couple questions.\n\nPTAL. Thanks!",
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5414cf66_ce9a0eb2",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-03-21T18:13:49Z",
+      "side": 1,
+      "message": "Looks like we need to specify offset and size in Dawn\u0027s test. Otherwise, the auto-gen values will lead to validation error. Alternatively, we can ignore offset and size if vertexbuffer is null, but Kai\u0027s proposal at https://github.com/gpuweb/gpuweb/pull/3938 is not in this way.\n\nAt Blink and JS side, it is OK to not specify offset and size, because we can set them to correct values before call into Dawn\u0027s validation code.",
+      "range": {
+        "startLine": 133,
+        "startChar": 36,
+        "endLine": 133,
+        "endChar": 40
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e888d2fc_87acdda2",
+        "filename": "src/dawn/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2023-03-21T18:13:49Z",
+      "side": 1,
+      "message": "If a vertex buffer is not set and we are going to unset it. Whether this is valid? I think either way is OK and slightly prefer to no validation. Kai\u0027s proposal at https://github.com/gpuweb/gpuweb/pull/3938 doesn\u0027t require to validate it. So I suppose this kind unset will be ignored and it is valid.",
+      "range": {
+        "startLine": 374,
+        "startChar": 3,
+        "endLine": 374,
+        "endChar": 65
+      },
+      "revId": "e6665d438ba9322c591132db7cb99bda7ba6f1d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
