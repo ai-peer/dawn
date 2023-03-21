@@ -123,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15622442_d392a3fe",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-21T21:39:18Z",
+      "side": 1,
+      "message": "I apologize that I haven\u0027t followed this discussion very closely until now.\nI\u0027m thinking that what you\u0027ve described here has some weird semantics (feature not exposed, but a toggle can make it OK to use). You point out that this would be simpler if we had an adapter toggle instead. So in my perspective:\n - IIUC, adapter toggle is preferred but too much refactoring right now\n - which means in the end state, instance toggles (probably?) aren\u0027t needed that much. The same thing can be achieved with defaults for the adapter toggles, or by passing more stuff in the adapter toggles descriptor\n - but we still want a way to have use_dxc and shader-f16 useable in a consistent way\n \nIf eventually we have adapter toggles, I\u0027m thinking that we can have a simpler short-term solution just to make use_dxc and shader-f16 work nicely. I\u0027m worried that the current solution is a lot of code to add instance toggles and this unfiltered/filtered-but-actually-available distinction - which won\u0027t be needed if we have adapter toggles.\n\nAn alternative could be to add a simple way to temporarily set toggles on the adapter at the dawn::native level since we only need to have the toggles impact feature-checking and requestDevice (toggle inheritance and feature validation).\n\n - DawnTestBase::SupportsFeatures before checking features manually sets toggles:\n   ```\n   mBackendAdapter.SetToggles({ \"use_dxc\" });\n   dawn::native::GetProcs().adapterEnumerateFeatures(...);\n   mBackendAdapter.ClearToggles();\n   ```\n - DawnTestBase::CreateDeviceImpl before creating the device manually sets toggles:\n   ```\n   mBackendAdapter.SetToggles({ \"use_dxc\" });\n   WGPUDevice device \u003d mBackendAdapter.CreateDevice(...);\n   mBackendAdapter.ClearToggles();\n   ```\n - webgpu_decoder_impl.cc does similar stuff for WebGPU",
+      "parentUuid": "59a4a6b4_c5df45dd",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
