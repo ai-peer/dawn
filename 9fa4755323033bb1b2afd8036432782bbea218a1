@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "18fb7ef4_06f50e05",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-03-21T06:39:52Z",
+      "side": 1,
+      "message": "I am fine with `VulkanClearGen12TextureWithCCSAmbiguateOnCreation`, thanks!",
+      "parentUuid": "4d6782d8_b5b331d9",
+      "revId": "9fa4755323033bb1b2afd8036432782bbea218a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a5dc3e8_be616769",
         "filename": "src/dawn/native/vulkan/AdapterVk.cpp",
         "patchSetId": 5
