@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d73fa1_a0812434",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-21T07:09:06Z",
+      "side": 1,
+      "message": "Hi and sorry for interrupting, but are there any chance this CL can get landed before Chromium branch so that we can expose f16 (behind `DisallowUnsafeAPIs`) together with V1 shipment?",
+      "revId": "7ed2f68f334538dd65273ac2d5334d90c295ca5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
