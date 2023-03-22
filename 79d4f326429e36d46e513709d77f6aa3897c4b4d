@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "290113c7_74007807",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-22T23:55:30Z",
+      "side": 1,
+      "message": "Overall LGTM! Took me a while to convince myself that we couldn\u0027t just do a 0 fill when we create the query, but I assume this could be a problem if we wanted to reuse the same query buffer. Would be a bit concerning if this sort of things happen more than just in the degenerate case since we would be doing a bunch of buffer writes individually... I guess we could consider coalescing the indices if it becomes a problem.",
+      "revId": "79d4f326429e36d46e513709d77f6aa3897c4b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda826da_e7023a0a",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 1693,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-22T23:55:30Z",
+      "side": 1,
+      "message": "I think `std::set::erase` can handle just passing the key? (And it will remove it if it exists?)",
+      "range": {
+        "startLine": 1693,
+        "startChar": 28,
+        "endLine": 1693,
+        "endChar": 61
+      },
+      "revId": "79d4f326429e36d46e513709d77f6aa3897c4b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34eabfbe_449a3e9c",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1299,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-03-22T23:55:30Z",
+      "side": 1,
+      "message": "Do we need both of these? IIUC, this is giving us coverage on the toggle on platforms that we don\u0027t need the toggle on? Is that necessary?",
+      "range": {
+        "startLine": 1298,
+        "startChar": 22,
+        "endLine": 1299,
+        "endChar": 85
+      },
+      "revId": "79d4f326429e36d46e513709d77f6aa3897c4b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
