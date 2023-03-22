@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a643939e_cf91cfed",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-22T04:37:20Z",
+      "side": 1,
+      "message": "can we make two separate instances?",
+      "parentUuid": "38e2dfd3_bd4a5971",
+      "revId": "2323cc86b7e7b0f102681fc00f89a7aedb0025a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a815a645_20948e00",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 11
