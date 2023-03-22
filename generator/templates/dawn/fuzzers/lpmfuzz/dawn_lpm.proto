@@ -15,6 +15,11 @@
 syntax = "proto2";
 package fuzzing;
 
+enum ObjectType {
+    {% for type in by_category["object"] %}
+        {{ type.name.CamelCase() }} = {{ loop.index - 1}};
+    {% endfor %}
+};
 
 {% for type in by_category["enum"] %}
     enum {{as_cppType(type.name)}} {
@@ -129,16 +134,22 @@ package fuzzing;
 {% endfor %}
 
 
-{% for command in cmd_records["proto_all_commands"] %}
-    {% if command not in cmd_records["proto_generated_commands"] %}
-        message {{command.name.CamelCase()}} {}
-    {% else %}
-        message {{command.name.CamelCase()}} {
-            {{ lift_proto_members_helper(command, command.name, command.members) }}
-        }
-    {% endif %}
+
+{% for command in cmd_records["proto_generated_commands"] %}
+    message {{command.name.CamelCase()}} {
+        {{ lift_proto_members_helper(command, command.name, command.members) }}
+    }
 {% endfor %}
 
+// Custom commands
+message DeviceCreateShaderModule {
+    required uint32 self = 1;
+}
+
+message DestroyObject {
+    required ObjectType objectType = 1;
+    required uint32 objectId = 2;
+}
 
 message Command {
     oneof command {
