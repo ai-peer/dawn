@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fe9405_5812fb85",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-22T02:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4953f91_1c94e14e",
+      "range": {
+        "startLine": 156,
+        "startChar": 30,
+        "endLine": 156,
+        "endChar": 52
+      },
+      "revId": "de4c5644356c7bf76604cad9a8f0f39cda4d32de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15887bf6_3a6f0ef1",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-03-21T21:49:58Z",
       "side": 1,
       "message": "unit: \"FlipY\" here to document what the bool means",
+      "range": {
+        "startLine": 387,
+        "startChar": 16,
+        "endLine": 387,
+        "endChar": 20
+      },
+      "revId": "de4c5644356c7bf76604cad9a8f0f39cda4d32de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0548f22f_24e14634",
+        "filename": "src/dawn/tests/end2end/CopyExternalTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2023-03-22T02:40:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15887bf6_3a6f0ef1",
       "range": {
         "startLine": 387,
         "startChar": 16,
