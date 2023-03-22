@@ -184,6 +184,10 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
 
     SetLabelImpl();
 
+    if (const char* skipPresent = getenv("DAWN_SKIP_PRESENT")) {
+        mSkipPresent = atoi(skipPresent);
+    }
+
     return {};
 }
 
@@ -212,7 +216,11 @@ ComPtr<ID3D12CommandQueue> Device::GetCommandQueue() const {
 }
 
 ID3D12SharingContract* Device::GetSharingContract() const {
-    return mD3d12SharingContract.Get();
+    int curFrame = mFrame++;
+    if (curFrame == 0 || curFrame == 1 || mFrame >= mSkipPresent) {
+        return mD3d12SharingContract.Get();
+    }
+    return nullptr;
 }
 
 HANDLE Device::GetFenceHandle() const {

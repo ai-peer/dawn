@@ -280,6 +280,12 @@ class Device final : public d3d::Device {
     // The number of nanoseconds required for a timestamp query to be incremented by 1
     float mTimestampPeriod = 1.0f;
 
+    // The number of simulated Present() calls which should be skipped from the creation of the
+    // Device.
+    int mSkipPresent = 0;
+
+    mutable int mFrame = 0;
+
     // List of external image resources opened using this device.
     LinkedList<ExternalImageDXGIImpl> mExternalImageList;
 };
