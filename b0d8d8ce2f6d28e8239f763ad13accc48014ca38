@@ -16,6 +16,47 @@
       "message": "Talked to @sunnyps@chromium.org today and got some more interesting ideas from him on how to tackle this race conditioning issue. I have created a doc to gather more opinions. Just sent everyone the email.",
       "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4687e5a4_5a95bf7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-22T22:53:59Z",
+      "side": 1,
+      "message": "I don\u0027t think we should make this more complex than it needs to be - especially since eventually there will just be a single callback queue that lives on the instance.\n\nAdding Loko to review since cwallez is OOO. \nLoko, if you\u0027d like you can start reading context from https://dawn-review.googlesource.com/c/dawn/+/123620 - but there is a LOT of context. I also shared Quyen\u0027s doc with you. That might be easier than reading the CL comment threads.",
+      "parentUuid": "0c0055ba_76ea4918",
+      "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e1480df_b34b3e5d",
+        "filename": "src/dawn/tests/unittests/native/DeviceAsyncTaskTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-03-22T22:53:59Z",
+      "side": 1,
+      "message": "nit: given these are mocks, 5 seconds seems excessive. 1 second is probably ok",
+      "range": {
+        "startLine": 39,
+        "startChar": 62,
+        "endLine": 39,
+        "endChar": 66
+      },
+      "revId": "b0d8d8ce2f6d28e8239f763ad13accc48014ca38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
