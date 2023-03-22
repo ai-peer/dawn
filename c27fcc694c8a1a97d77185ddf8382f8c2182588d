@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ee785df_3f9f1a92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T15:08:51Z",
+      "side": 1,
+      "message": "Draft, please see the discussion in https://dawn-review.googlesource.com/c/dawn/+/123960/comment/59a4a6b4_c5df45dd/\n\nThis is a draft CL to demonstrate refactoring adapter\u0027s feature management with adding the restriction \"adapter validate required device features with adapter toggles state instead of required device toggles\", which goes against previous idea (https://dawn-review.googlesource.com/c/dawn/+/122021/comment/745e3c2f_40a8cacc/) that device toggles override the adapter toggles and can require features based on device toggles.",
+      "revId": "c27fcc694c8a1a97d77185ddf8382f8c2182588d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f46f0e_60316c48",
+        "filename": "include/dawn/native/DawnNative.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T15:08:51Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "c27fcc694c8a1a97d77185ddf8382f8c2182588d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f0d49fe_308b742f",
+        "filename": "src/dawn/tests/end2end/ComputeLayoutMemoryBufferTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-03-22T15:08:51Z",
+      "side": 1,
+      "message": "Mac build report error here and forbid including files from `dawn/native`... If we are going to do this, have to add functions that query adapter toggle state and set toggle for testing in DawnNative.h [1].",
+      "revId": "c27fcc694c8a1a97d77185ddf8382f8c2182588d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
